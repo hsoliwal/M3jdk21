@@ -97,7 +97,7 @@ final class M3FiveProviderFlagSelectionTest {
     }
 
     @Test void actualDirectSpringSdkFactoryKeepsLiveMapAndListAliasing() {
-        MultiValueMap<String, Integer> spring = M3FiveProviderDirectSdk.springMultiValueMap();
+        MultiValueMap<String, Integer> spring = M3LibraryCollections.<String, Integer>springMultiValueMap();
         assertInstanceOf(M3SpringArrayMultiValueMap.class, spring);
         spring.add("k", 1);
         spring.add("k", 2);

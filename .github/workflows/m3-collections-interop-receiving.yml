@@ -36,6 +36,16 @@ jobs:
           sparse-checkout: |
             m3/collections/interop
           persist-credentials: false
+      # Preserve exact preceding 44-source/158-method snapshot so that
+      # the three compiler-only source refinements cannot rewrite old receipts.
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: 31c8621d5fcad43708edada2ceb418af1f5e9e6c
+          path: prior-interop-product
+          sparse-checkout: |
+            m3/collections/interop
+          persist-credentials: false
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -50,7 +60,8 @@ jobs:
           test "$(git hash-object "$ENGINE")" = 05e02169c7429183107a99c60e1aad05b4d73b5f
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-tests.log
-          python3 m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py --product . --historical-product historical-product | tee proof/admitted-postimages.tsv
+          python3 -m unittest discover -s m3/collections/interop/qualification/three-compiler-successor-20261022 -p 'test_*.py' -v 2>&1 | tee proof/three-compiler-source-tests.log
+          python3 m3/collections/interop/qualification/three-compiler-successor-20261022/verify_current_three.py --product . --baseline prior-interop-product --historical historical-product | tee proof/admitted-postimages.tsv
       - name: Run all six actual recipe proofs before delivery
         shell: bash
         run: |
@@ -74,7 +85,7 @@ jobs:
           mvn -B -ntp -f m3/collections/interop/recipe/pom.xml \
             '-Dtest=M3CollectionsLibraryInteropTest#exactOutputsFixedPointAndOptionalMaterialization' \
             test 2>&1 | tee proof/recipe-delivery.log
-          python3 m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py --product . --historical-product historical-product > proof/current-successor-ledger.tsv
+          python3 m3/collections/interop/qualification/three-compiler-successor-20261022/verify_current_three.py --product . --baseline prior-interop-product --historical historical-product > proof/current-successor-ledger.tsv
           cat m3/collections/interop/recipe-receipt.tsv | tee proof/recipe-receipt.tsv
           git diff --exit-code -- m3/collections/interop/src m3/collections/interop/recipe-receipt.tsv
       - name: Compile unchanged M3 core and verify the dependency boundary
@@ -99,9 +110,10 @@ jobs:
           python3 -m unittest discover \
             -s m3/collections/interop/qualification/runtime-junit-census-20261022 \
             -p 'test_verify_surefire.py' -v 2>&1 | tee proof/junit-negative-controls.log
-          python3 m3/collections/interop/qualification/runtime-junit-census-20261022/verify_surefire.py \
+          python3 m3/collections/interop/qualification/three-compiler-successor-20261022/verify_current_three.py \
             --product . \
-            --receipts m3/collections/interop/qualification/runtime-junit-census-20261022/receipts \
+            --baseline prior-interop-product \
+            --historical historical-product \
             --reports m3/collections/interop/target/surefire-reports \
             | tee proof/junit-complete-source-method-census.log
           javap -classpath m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar \
