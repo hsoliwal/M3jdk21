@@ -66,6 +66,45 @@ public final class M3LongSortedViews {
         return source instanceof Unmodifiable ? source : new Unmodifiable(source);
     }
 
+
+    /**
+     * Emits at most {@code limit} elements of the existing live sorted or
+     * filtered/sorted owner, starting after {@code skip} visible occurrences.
+     * Does not call size(), toArray() or materialize off-viewport entries.
+     * Retains original signed sort order, live backing and predicate order.
+     * This is a bounded *read*, not an immutable snapshot: the backing
+     * iterator owns interference, exceptions and post-binding behavior.
+     *
+     * <p>The destination must have room for the entire requested budget;
+     * negative coordinates and capacity errors are rejected before reading
+     * or writing. A zero budget does not bind an iterator or evaluate a
+     * predicate. Source traversal is O(skip + page) visible elements,
+     * possibly visiting more excluded elements; one primitive cursor is
+     * allocated, never a per-element wrapper or retained payload array.</p>
+     *
+     * @return the number of longs emitted into the caller's existing lane
+     */
+    public static int copyPage(M3LongSortedSet source, int skip, int limit,
+            long[] destination, int destinationOffset) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(destination, "destination");
+        if (skip < 0 || limit < 0)
+            throw new IndexOutOfBoundsException("negative sorted page coordinate");
+        Objects.checkFromIndexSize(destinationOffset, limit, destination.length);
+        if (limit == 0) return 0;
+        M3LongIterator iterator = source.iterator();
+        int omitted = 0;
+        while (omitted < skip && iterator.hasNext()) {
+            iterator.nextLong();
+            omitted++;
+        }
+        int written = 0;
+        while (written < limit && iterator.hasNext()) {
+            destination[destinationOffset + written++] = iterator.nextLong();
+        }
+        return written;
+    }
+
     /**
      * A sorted live view binds its backing iterator on first traversal, not when
      * a stream/spliterator is obtained. Sorted metadata, splitting and size

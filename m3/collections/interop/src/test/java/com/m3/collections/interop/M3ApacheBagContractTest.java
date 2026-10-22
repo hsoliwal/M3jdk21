@@ -15,6 +15,22 @@ import org.junit.jupiter.api.Test;
 
 /** Real Commons 4.5.0 donor-API differential over M3 arrays/counts. */
 final class M3ApacheBagContractTest {
+    @Test void donorRetainAllOverRequestedMultiplicity() {
+        Bag<Integer> reference = new HashBag<>();
+        Bag<Integer> candidate = new M3ApacheBag<>();
+        reference.add(6, 2);
+        candidate.add(6, 2);
+        List<Integer> oversized = Arrays.asList(6, 6, 6);
+        assertEquals(reference.retainAll(oversized), candidate.retainAll(oversized));
+        assertEquals(0, reference.size(), "pinned Apache 4.5.0 over-request semantics");
+        assertEquals(reference.size(), candidate.size());
+        reference.add(6, 5);
+        candidate.add(6, 5);
+        assertEquals(reference.retainAll(oversized), candidate.retainAll(oversized));
+        assertEquals(3, reference.getCount(6));
+        assertEquals(reference.getCount(6), candidate.getCount(6));
+    }
+
     @Test void randomizedOfficialHashBagOracle() {
         Bag<Integer> expected=new HashBag<>();
         Bag<Integer> actual=new M3ApacheBag<>();

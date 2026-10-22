@@ -1,0 +1,5 @@
+path	original_repo	license	change
+m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java	hsoliwal/M3jdk21	Apache-2.0	in-place CPU frame selector (masks/ranks/source-ordinals)
+m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java	hsoliwal/M3jdk21	Apache-2.0	add JNI declaration (no old symbol changed)
+m3/collections/src/main/c/m3maskviewport.c	hsoliwal/M3jdk21	Apache-2.0	add C JNI symbol with validation-before-write
+m3/collections/src/test/java/com/m3/collections/M3ViewportFrameContract.java	FIRST_PARTY	Apache-2.0	primitive CPU/native randomized differential

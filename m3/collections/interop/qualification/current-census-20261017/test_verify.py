@@ -31,13 +31,13 @@ class SourceCensusTest(unittest.TestCase):
         census = root / 'current.tsv'
         census.write_text('\n'.join('\t'.join(x) for x in now)+'\n')
         return census, baseline
-    def test_five_historical_plus_thirty_one_additive(self):
+    def test_five_historical_plus_seventy_one_additive(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             current, old = self.make_fixture(root)
             allowed = verify.verify(root, current, old,
                 verify.sha256(current.read_bytes()), verify.git_blob(old.read_bytes()), False)
-            self.assertEqual(len(allowed), 36)
+            self.assertEqual(len(allowed), 76)
     def test_missing_drift_and_alias_refusal(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -79,6 +79,84 @@ class SourceCensusTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'changed unapproved historical'):
                 verify.verify(root, current, old, verify.sha256(current.read_bytes()),
                     verify.git_blob(old.read_bytes()), False)
+
+    def test_successor_ledger_requires_exact_prior_and_new_blob(self):
+        prior = [('source-a', 'ABSENT', '1' * 64, 'a' * 40)]
+        current = [('source-a', 'ABSENT', '2' * 64, 'b' * 40),
+                   ('source-b', 'ABSENT', '3' * 64, 'c' * 40)]
+        successor = [('source-a', '1' * 64, '2' * 64, 'b' * 40, 'a' * 40)]
+        verify.verify_successor_lineage(current, prior, successor, 1, 1)
+        with self.assertRaisesRegex(ValueError, 'successor ledger'):
+            verify.verify_successor_lineage(current, prior, [], 1, 1)
+        with self.assertRaisesRegex(ValueError, 'not admitted'):
+            tampered = [list(successor[0])]
+            tampered[0][4] = 'f' * 40
+            verify.verify_successor_lineage(current, prior, tampered, 1, 1)
+        with self.assertRaisesRegex(ValueError, 'predecessor cell'):
+            changed = [list(current[0]), list(current[1])]
+            changed[0][1] = 'f' * 64
+            verify.verify_successor_lineage(changed, prior, successor, 1, 1)
+
+
+    def test_current_epoch_exact_one_source_successor(self):
+        before = [('first.java', 'ABSENT', 'a' * 64, '1' * 40),
+                  ('second.java', 'ABSENT', 'b' * 64, '2' * 40)]
+        after = [('first.java', 'ABSENT', 'c' * 64, '3' * 40),
+                 ('second.java', 'ABSENT', 'b' * 64, '2' * 40)]
+        ledger = [('first.java', 'a' * 64, 'c' * 64, '3' * 40, '1' * 40)]
+        verify.verify_current_epoch(after, before, ledger, 1)
+        verify.verify_current_epoch([list(r) for r in after], before,
+                                    [list(r) for r in ledger], 1)
+        with self.assertRaisesRegex(ValueError, 'unadmitted source epoch change'):
+            verify.verify_current_epoch(after, before, [], 1)
+        with self.assertRaisesRegex(ValueError, 'successor hash or blob'):
+            wrong = [list(ledger[0])]
+            wrong[0][4] = 'f' * 40
+            verify.verify_current_epoch(after, before, wrong, 1)
+        with self.assertRaisesRegex(ValueError, 'added or lost'):
+            verify.verify_current_epoch(after[:1], before, ledger, 1)
+        with self.assertRaisesRegex(ValueError, 'predecessor field'):
+            wrong = [list(after[0]), list(after[1])]
+            wrong[0][1] = 'f' * 64
+            verify.verify_current_epoch(wrong, before, ledger, 1)
+        with self.assertRaisesRegex(ValueError, 'duplicate'):
+            verify.verify_current_epoch(after + [after[0]], before, ledger, 1)
+
+
+    def test_epoch_three_can_admit_only_three_exact_test_successors(self):
+        before = [('p'+str(i), 'ABSENT', str(i)*64, str(i)*40) for i in range(4)]
+        now = [list(row) for row in before]
+        ledger = []
+        for index in (0, 1, 2):
+            now[index][2] = 'e' * 64
+            now[index][3] = 'f' * 40
+            ledger.append([now[index][0], before[index][2], now[index][2],
+                           now[index][3], before[index][3]])
+        verify.verify_current_epoch(now, before, ledger, 3)
+        with self.assertRaisesRegex(ValueError, 'unadmitted source epoch'):
+            verify.verify_current_epoch(now, before, ledger[:2], 3)
+        with self.assertRaisesRegex(ValueError, 'successor hash or blob'):
+            tampered = [list(row) for row in ledger]
+            tampered[1][4] = 'a' * 40
+            verify.verify_current_epoch(now, before, tampered, 3)
+
+
+    def test_epoch_four_seven_exact_pinned_successors(self):
+        before = [('p'+str(i), 'ABSENT', str(i)*64, str(i)*40) for i in range(8)]
+        now = [list(row) for row in before]
+        ledger = []
+        for index in range(7):
+            now[index][2] = 'e' * 64
+            now[index][3] = 'f' * 40
+            ledger.append([now[index][0], before[index][2], now[index][2],
+                           now[index][3], before[index][3]])
+        verify.verify_current_epoch(now, before, ledger, 7)
+        with self.assertRaisesRegex(ValueError, 'unadmitted source epoch'):
+            verify.verify_current_epoch(now, before, ledger[:6], 7)
+        with self.assertRaisesRegex(ValueError, 'successor hash or blob'):
+            changed = [list(row) for row in ledger]
+            changed[4][4] = 'a' * 40
+            verify.verify_current_epoch(now, before, changed, 7)
 
 if __name__ == '__main__':
     unittest.main()

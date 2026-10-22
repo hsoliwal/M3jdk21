@@ -53,7 +53,8 @@ final class M3FiveLibraryArrayificationTest {
         byte[] flags=new byte[5];
         var root=M3FiveLibraryIndexViews.capture(keys,values,new int[]{0,2,1,3,4},flags);
         var sorted=root.sortedByKey(Comparator.naturalOrder());
-        var left=sorted.slice(0,3),right=sorted.slice(3,5);
+        var left=sorted.slice(0,3);
+        var right=sorted.slice(3,5);
         var merged=left.mergeSortedByKey(right,Comparator.naturalOrder());
         assertEquals(sorted.asJdkList(),merged.asJdkList());
         assertArrayEquals(new int[]{0,1,2,3,4},java.util.stream.IntStream.range(0,merged.size())
@@ -62,7 +63,8 @@ final class M3FiveLibraryArrayificationTest {
         assertThrows(IllegalArgumentException.class,()->left.mergeSortedByKey(
                 M3FiveLibraryIndexViews.capture(keys,values,new int[]{0},flags),Comparator.naturalOrder()));
         var duplicated=left.mergeSortedByKey(left,Comparator.naturalOrder());
-        assertEquals(List.of(0,0,1,1,2,2),duplicated.asJdkList());
+        // Stable comparator ties retain each left run before the corresponding right run.
+        assertEquals(List.of(0,1,0,1,2,2),duplicated.asJdkList());
     }
 
     @Test void randomizedArrayificationAgainstJdkReference() {

@@ -125,6 +125,59 @@ final class M3MaskViewportKernel {
         return needed;
     }
 
+
+    /**
+     * Project one CPU-owned visible page into aligned primitive row IDs, original
+     * occurrence ordinals and 32-bit state flags; never create row objects.
+     * Sorted/filtered encounter order, duplicate IDs and the sign bit survive.
+     * Toolkit themes, languages, geometry, GPU paint, input and lifecycle
+     * remain the consumer's responsibility; the consumer validates epochs.
+     * Disjoint outputs make this allocation-free after complete preflight.
+     */
+    static int projectFramePage(final int[] logicalOffsets, final int[] states,
+            final int first, final int length, final int requiredBits,
+            final int forbiddenBits, final int skipVisible, final int maxVisible,
+            final int[] rowTarget, final int rowTargetOffset,
+            final int[] slotTarget, final int slotTargetOffset,
+            final int[] stateTarget, final int stateTargetOffset) {
+        Objects.requireNonNull(logicalOffsets, "logicalOffsets");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(rowTarget, "rowTarget");
+        Objects.requireNonNull(slotTarget, "slotTarget");
+        Objects.requireNonNull(stateTarget, "stateTarget");
+        if (logicalOffsets.length != states.length)
+            throw new IllegalArgumentException("offset and state array lengths differ");
+        if (rowTarget == logicalOffsets || rowTarget == states
+                || slotTarget == logicalOffsets || slotTarget == states
+                || stateTarget == logicalOffsets || stateTarget == states
+                || rowTarget == slotTarget || rowTarget == stateTarget
+                || slotTarget == stateTarget)
+            throw new IllegalArgumentException("frame outputs must be disjoint");
+        checkSlice(states.length, first, length);
+        if (skipVisible < 0 || maxVisible < 0)
+            throw new IndexOutOfBoundsException("negative visible page bounds");
+        int available = preflight(logicalOffsets, states, first, length,
+                requiredBits, forbiddenBits);
+        int needed = skipVisible >= available ? 0
+                : Math.min(available - skipVisible, maxVisible);
+        checkSlice(rowTarget.length, rowTargetOffset, needed);
+        checkSlice(slotTarget.length, slotTargetOffset, needed);
+        checkSlice(stateTarget.length, stateTargetOffset, needed);
+        int remaining = skipVisible, written = 0;
+        for (int i = first, end = first + length; i < end && written < needed; i++) {
+            if (matches(states[i], requiredBits, forbiddenBits)) {
+                if (remaining > 0) remaining--;
+                else {
+                    rowTarget[rowTargetOffset + written] = logicalOffsets[i];
+                    slotTarget[slotTargetOffset + written] = i;
+                    stateTarget[stateTargetOffset + written] = states[i];
+                    written++;
+                }
+            }
+        }
+        return written;
+    }
+
     private static void copyPage(final int[] offsets, final int[] states,
             final int first, final int length, final int required,
             final int forbidden, final int skipVisible, final int needed,
