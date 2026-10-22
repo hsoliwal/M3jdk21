@@ -57,3 +57,37 @@ M3JDK21 master and prior 40-row Synexia receipts.
 Historical origin: M3JDK21 failed four-library workflow on October 22, 2026;
 canonical Synexia source successor PR #12999, which preserved the 36-file
 baseline and catalogued 40 additional Java files.
+
+## Three compiler-targeted source revisions (October 22, 2026)
+
+A later full Maven interop run progressed past the original 36+7+40 census,
+the existing recipe proofs and core collection compile. Its Java 21 test
+compiler then exposed three bounded, independent Java problems:
+
+- `M3ApacheCollectionsTest`: an intentional Apache Commons Collections 4.5
+  `Predicate` field triggers a deprecation warning under `-Werror`. Apply
+  only a field-scoped deprecation suppression, retaining the Apache predicate
+  and all its JUnit assertions.
+- `M3FiveLibraryKeyRangesTest`: missing `java.util.Map` import for
+  the existing `Map.of` test oracle. Admit that import and nothing else.
+- `M3FiveProviderFlagSelectionTest`: a test refers to the nonexistent
+  `M3FiveProviderDirectSdk` instead of the already-existing canonical
+  `M3LibraryCollections.springMultiValueMap()` factory, which returns
+  the original M3-backed `M3SpringArrayMultiValueMap`. Reuse that owner,
+  with no new adapter layer or JNI code.
+
+The exact three generated Java source changes are mastered only in Synexia
+under `com.synexia.m3.M3Jdk21InteropThreeCompilerAtoms20261022`.
+A separate source-sealed `changed-compiler-03.tsv` records **one**
+historically admitted source and **two** source-addition revisions with
+old/new SHA-256, Git blob, recipe and pending behavior status. No old 36,
+7, 40 or compound-var receipt row is rewritten or renamed.
+
+The current immutable original source epoch is still 36 entries. The
+historical old-to-current lineage now consists of eight pinned revisions,
+including one Apache predicate test; the 40 separately discovered source
+paths still exist, and two of them have additional exact source-pinned
+compiler revisions. Source identity or Java grammar success alone is not
+vendor behavior qualification. The full interop Maven, JDK, Guava,
+Eclipse Collections, Apache and Spring tests, plus applicable JNI gates,
+must pass before promotion.
