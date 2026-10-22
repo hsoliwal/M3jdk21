@@ -22,6 +22,34 @@ def git_blob(data: bytes) -> str:
     return hashlib.sha1(b'blob ' + str(len(data)).encode('ascii') + b'\0' + data).hexdigest()
 
 
+# The 40-source receipt is immutable. The next generation has exactly one
+# source-sealed, Java21-syntax-only test transition and no other valid changes.
+COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
+COMPOUND_TRANSITION = (
+    COMPOUND_TEST_PATH,
+    '43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d',
+    '42d78b4fae7525467f0a5d4f34baf45b511e3b55',
+    '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565',
+    'e220622405432368d2c46b32f9f1c197913e7c0a',
+    'PINNED_TEST_SYNTAX_ONLY'
+)
+
+
+def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
+    file = receipts / 'changed-01.tsv'
+    if file.is_symlink() or not file.is_file():
+        raise ValueError('missing or aliased one-test source transition receipt')
+    data = file.read_bytes()
+    if hashlib.sha256(data).hexdigest() != COMPOUND_TRANSITION_SHA256:
+        raise ValueError('changed one-test source receipt was tampered')
+    rows = [line.split('\t') for line in data.decode('utf-8').splitlines()
+            if line and not line.startswith('#')]
+    if len(rows) != 1 or tuple(rows[0]) != COMPOUND_TRANSITION:
+        raise ValueError('unauthorized one-test source transition')
+    return COMPOUND_TRANSITION
+
+
 def verify_additions(product: Path, receipts: Path,
                      older: set[str], tracked: set[str]) -> list[str]:
     product = product.resolve(strict=True)
@@ -53,6 +81,13 @@ def verify_additions(product: Path, receipts: Path,
         unadmitted = sorted(tracked - expected)
         raise ValueError('installed interop tracking drift: missing=' + repr(absent[:8])
                          + ', unadmitted=' + repr(unadmitted[:8]))
+    # Do not weaken the older forty source identities; the extra receipt names
+    # exactly one old/new byte-pinned syntax repair and all other rows stay frozen.
+    successor = exact_compound_transition(receipts) if (
+        (receipts / 'changed-01.tsv').exists()
+        or (receipts / 'changed-01.tsv').is_symlink()) else None
+    if successor is not None and successor[0] not in paths:
+        raise ValueError('one-test source transition target not admitted')
     production = tests = 0
     for relative, sha, blob, family, kind, license_id in rows:
         if (not relative.endswith('.java') or not (relative.startswith(MAIN)
@@ -70,6 +105,10 @@ def verify_additions(product: Path, receipts: Path,
         if file.is_symlink() or not file.is_file() or not file.resolve().is_relative_to(product):
             raise ValueError('missing or symlinked M3 source: ' + relative)
         data = file.read_bytes()
+        if successor is not None and relative == successor[0]:
+            if (sha, blob) != (successor[1], successor[2]):
+                raise ValueError('invalid one-test predecessor identity')
+            sha, blob = successor[3], successor[4]
         if (hashlib.sha256(data).hexdigest() != sha or git_blob(data) != blob
                 or b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]):
             raise ValueError('source SHA, Git blob or license header drift: ' + relative)
@@ -157,6 +196,9 @@ def verify_product_checkout(product: Path, receipts: Path,
                             historical_product: Path) -> tuple[int, int, int]:
     product = product.resolve(strict=True)
     receipts = receipts.resolve(strict=True)
+    # A new product receiver must carry the exact additive transformation
+    # receipt; the old six-test fixture runs verify_additions without it.
+    exact_compound_transition(receipts)
     older, revisions = verify_historical_revisions(product, receipts, historical_product)
     tracked = set(subprocess.check_output(['git', 'ls-files', '--',
         PREFIX + 'main', PREFIX + 'test'], cwd=product, text=True).splitlines())
