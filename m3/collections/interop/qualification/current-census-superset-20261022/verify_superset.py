@@ -22,8 +22,49 @@ def git_blob(data: bytes) -> str:
     return hashlib.sha1(b'blob ' + str(len(data)).encode('ascii') + b'\0' + data).hexdigest()
 
 
+# Narrow, source-sealed successor to ONE already admitted additive Java test.
+# The four immutable added-XX source-census shards must never be rewritten.
+APPROVED_ADDITIVE_TEST = (
+    'm3/collections/interop/src/test/java/com/m3/collections/interop/'
+    'M3FiveLibraryArrayificationTest.java')
+APPROVED_REPAIR_SHA256 = '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565'
+APPROVED_REPAIR_GIT_BLOB = 'e220622405432368d2c46b32f9f1c197913e7c0a'
+APPROVED_REPAIR_RECIPE = 'com.synexia.m3.M3Jdk21InteropArrayificationVar20261022'
+
+
+def read_admitted_additive_revision(receipts: Path, original_rows: list[list[str]],
+                                   required: bool = False) -> dict[str, tuple[str, str]]:
+    """The one Java21 syntax repair is not a wildcard SHA-census relaxation."""
+    receipt = receipts / 'changed-added-01.tsv'
+    if receipt.is_symlink():
+        raise ValueError('aliased additive source-revision receipt')
+    if not receipt.is_file():
+        if required:
+            raise ValueError('missing required Java21 source-revision receipt')
+        return {}
+    lines = [line for line in receipt.read_text(encoding='utf-8').splitlines()
+             if line and not line.startswith('#')]
+    if len(lines) != 1:
+        raise ValueError('expected exactly one admitted additive source revision')
+    columns = lines[0].split('\t')
+    if len(columns) != 7:
+        raise ValueError('invalid source-revision receipt dimensions')
+    path, old_sha, old_blob, new_sha, new_blob, recipe, status = columns
+    old = [row for row in original_rows if row[0] == path]
+    if (path != APPROVED_ADDITIVE_TEST or len(old) != 1
+            or old[0][1:3] != [old_sha, old_blob]
+            or old[0][4:] != ['TEST', 'Apache-2.0']
+            or new_sha != APPROVED_REPAIR_SHA256
+            or new_blob != APPROVED_REPAIR_GIT_BLOB
+            or recipe != APPROVED_REPAIR_RECIPE
+            or status != 'PENDING_JAVA21_VENDOR_CI'):
+        raise ValueError('unadmitted Java21 source revision metadata or hash')
+    return {path: (new_sha, new_blob)}
+
+
 def verify_additions(product: Path, receipts: Path,
-                     older: set[str], tracked: set[str]) -> list[str]:
+                     older: set[str], tracked: set[str],
+                     require_revision: bool = False) -> list[str]:
     product = product.resolve(strict=True)
     receipts = receipts.resolve(strict=True)
     if len(older) != 36 or any(not p.startswith((MAIN, TEST)) for p in older):
@@ -53,6 +94,7 @@ def verify_additions(product: Path, receipts: Path,
         unadmitted = sorted(tracked - expected)
         raise ValueError('installed interop tracking drift: missing=' + repr(absent[:8])
                          + ', unadmitted=' + repr(unadmitted[:8]))
+    revisions = read_admitted_additive_revision(receipts, rows, required=require_revision)
     production = tests = 0
     for relative, sha, blob, family, kind, license_id in rows:
         if (not relative.endswith('.java') or not (relative.startswith(MAIN)
@@ -70,7 +112,9 @@ def verify_additions(product: Path, receipts: Path,
         if file.is_symlink() or not file.is_file() or not file.resolve().is_relative_to(product):
             raise ValueError('missing or symlinked M3 source: ' + relative)
         data = file.read_bytes()
-        if (hashlib.sha256(data).hexdigest() != sha or git_blob(data) != blob
+        expected_sha, expected_blob = revisions.get(relative, (sha, blob))
+        if (hashlib.sha256(data).hexdigest() != expected_sha
+                or git_blob(data) != expected_blob
                 or b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]):
             raise ValueError('source SHA, Git blob or license header drift: ' + relative)
     if (production, tests) != (13, 27):
@@ -160,7 +204,7 @@ def verify_product_checkout(product: Path, receipts: Path,
     older, revisions = verify_historical_revisions(product, receipts, historical_product)
     tracked = set(subprocess.check_output(['git', 'ls-files', '--',
         PREFIX + 'main', PREFIX + 'test'], cwd=product, text=True).splitlines())
-    extras = verify_additions(product, receipts, older, tracked)
+    extras = verify_additions(product, receipts, older, tracked, require_revision=True)
     return len(older), revisions, len(extras)
 
 
