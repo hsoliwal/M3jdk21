@@ -122,11 +122,9 @@ public final class M3SignalDomainPolicySelfTest {
                         && judged.identityAuthority()
                                 == M3SignalDomainPolicy.IdentityAuthority.CALLER_DECLARED,
                 "similarity cannot certify domain equality or fake source authority");
-        M3SignalDomainPolicy falseCertificate = M3SignalDomainPolicy.declared(
+        requireThrows(IllegalArgumentException.class, () -> M3SignalDomainPolicy.declared(
                 signals, 7, DIGEST, new int[]{1, 0}, new int[]{0, 1},
-                new double[]{2, 1.5}, new double[]{2, 7});
-        requireThrows(IllegalStateException.class,
-                () -> falseCertificate.begin(0, 3, 7, DIGEST).refineMetric());
+                new double[]{2, 1.5}, new double[]{2, 7}));
         M3SignalDomainPolicy unknown = M3SignalDomainPolicy.declared(
                 signals, 7, DIGEST, new int[]{1, 0}, new int[]{0, 1},
                 new double[]{2, 1.5}, new double[]{Double.NaN, 7});
