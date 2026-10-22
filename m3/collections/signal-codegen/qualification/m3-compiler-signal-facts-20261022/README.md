@@ -19,3 +19,17 @@ Execution gates:
 - Installed modified-JDK, full JCK/jtreg, javac/JDT integration with persistent indexes, full method/call graph, HotSpot GC/CDS, multiple OS, memory and performance gates are still **NOT_RUN/HOLD** until real outputs exist.
 
 This is an actual receiving slice, not a claim that all 22 signal kinds are semantic proofs or that all Synexia families have been imported.
+
+## Recipe correction: preserve existing nested call tokens
+
+Review identified a source-contract counterexample: the new type-local AST counting
+logic originally skipped nested classes altogether, which would inadvertently
+change `structuralSignals()[5]` for an annotated class with nested method calls.
+The canonical Synexia recipe was corrected **before admission**: it now scans
+nested classes for the original six hashed call-token lanes, while separately
+counting only root-class syntax facts in the new primitive `M3CompilerFacts`
+columns using a depth counter. A hostile source fixture with nested
+`Math.abs` verifies original call tokens remain present and the new root
+invocation count excludes the nested method. The corrected template, product
+file and fixture hashes were re-sealed together. Hosted javac/JUnit/JNI
+acceptance remains NOT_RUN until workflows execute.
