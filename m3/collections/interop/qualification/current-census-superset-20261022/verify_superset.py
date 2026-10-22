@@ -50,8 +50,66 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
     return COMPOUND_TRANSITION
 
 
+
+# Subsequent source epochs are explicit: one historic 36-owner test and
+# two newly admitted 40-owner tests. Do not rewrite any earlier census.
+M3_JAVA21_REPAIR_RECIPE = 'com.synexia.m3.M3InteropThreeJava21Diagnostics20261022'
+HISTORICAL_TEST_UPDATES = {
+    'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java':
+        ('15a5a360695ca787138002380c6482dcda6cb9c62857e58707c214d7240f5fad',
+         '10830216e66629c86b020b22a9d0beb898e97b80', '6'),
+}
+ADDITIVE_TEST_UPDATES = {
+    'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java':
+        ('ef93d9a53e0b9935c6e796b55ce2c47e4d94a732c7ac9f07b5a635eb436cc467',
+         'bda93a103282d5b8a14a9ad600b054a6484d0d19', '3'),
+    'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java':
+        ('09318eadbdbb1cb97edb39bf973f2912e6f23f377e5f38a86a9dcf313f10b4ae',
+         '2fb1629adb06dde1d56c32a7f122ed1f4834af3c', '4'),
+}
+HISTORICAL_TEST_UPDATE_RECEIPT_BLOB = '42bd7754f17ea63ae07f4e7053f522be283f7af4'
+ADDITIVE_TEST_UPDATE_RECEIPT_BLOB = '5fac1e5f7da2a29f0442e7747c2e658d4f58ff41'
+
+
+def read_sealed_java21_revisions(receipts: Path, receipt_name: str,
+                                  allowed_blob: str, previous: dict,
+                                  approved: dict, required: bool = False
+                                  ) -> dict[str, tuple[str, str]]:
+    """Only exact source-path and old/new SHA/Git identities are accepted."""
+    receipt = receipts / receipt_name
+    if receipt.is_symlink():
+        raise ValueError('symlinked Java21 source-revision receipt')
+    if not receipt.is_file():
+        if required:
+            raise ValueError('missing required Java21 source-revision receipt')
+        return {}
+    data = receipt.read_bytes()
+    if git_blob(data) != allowed_blob:
+        raise ValueError('forged Java21 source-revision receipt')
+    rows = [line.split('\t') for line in data.decode('utf-8').splitlines()
+            if line and not line.startswith('#')]
+    paths = [row[0] for row in rows if len(row) == 8]
+    if (len(rows) != len(approved) or any(len(row) != 8 for row in rows)
+            or paths != sorted(approved)):
+        raise ValueError('wrong number, order or targets in Java21 source revisions')
+    result = {}
+    for path, old_sha, old_blob, new_sha, new_blob, recipe, methods, status in rows:
+        match = previous.get(path)
+        successor = approved.get(path)
+        if (match != (old_sha, old_blob) or successor is None
+                or successor != (new_sha, new_blob, methods)
+                or not path.startswith(TEST)
+                or not HEX64.fullmatch(new_sha) or not HEX40.fullmatch(new_blob)
+                or recipe != M3_JAVA21_REPAIR_RECIPE
+                or status != 'PENDING_JAVA21_VENDOR_CI'):
+            raise ValueError('unreviewed historic/additive Java21 source transition: ' + path)
+        result[path] = (new_sha, new_blob)
+    return result
+
+
 def verify_additions(product: Path, receipts: Path,
-                     older: set[str], tracked: set[str]) -> list[str]:
+                     older: set[str], tracked: set[str],
+                     require_two: bool = False) -> list[str]:
     product = product.resolve(strict=True)
     receipts = receipts.resolve(strict=True)
     if len(older) != 36 or any(not p.startswith((MAIN, TEST)) for p in older):
@@ -88,6 +146,12 @@ def verify_additions(product: Path, receipts: Path,
         or (receipts / 'changed-01.tsv').is_symlink()) else None
     if successor is not None and successor[0] not in paths:
         raise ValueError('one-test source transition target not admitted')
+    by_path = {row[0]: (row[1], row[2]) for row in rows}
+    two_revisions = read_sealed_java21_revisions(
+        receipts, 'changed-added-02.tsv', ADDITIVE_TEST_UPDATE_RECEIPT_BLOB,
+        by_path, ADDITIVE_TEST_UPDATES, required=require_two)
+    if successor is not None and successor[0] in two_revisions:
+        raise ValueError('same test admitted by multiple source revisions')
     production = tests = 0
     for relative, sha, blob, family, kind, license_id in rows:
         if (not relative.endswith('.java') or not (relative.startswith(MAIN)
@@ -109,6 +173,7 @@ def verify_additions(product: Path, receipts: Path,
             if (sha, blob) != (successor[1], successor[2]):
                 raise ValueError('invalid one-test predecessor identity')
             sha, blob = successor[3], successor[4]
+        sha, blob = two_revisions.get(relative, (sha, blob))
         if (hashlib.sha256(data).hexdigest() != sha or git_blob(data) != blob
                 or b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]):
             raise ValueError('source SHA, Git blob or license header drift: ' + relative)
@@ -178,6 +243,15 @@ def verify_historical_revisions(product: Path, receipts: Path,
                 or status != 'SOURCE_ONLY_PENDING_CONTRACT'):
             raise ValueError('unadmitted historical source revision: ' + path)
         revised[path] = (new_sha, new_blob)
+    # The original seven-image source ledger is immutable. Revisions of
+    # other historical files are appended as their own exact successor.
+    historic_extra = read_sealed_java21_revisions(
+        receipts, 'changed-historical-01.tsv',
+        HISTORICAL_TEST_UPDATE_RECEIPT_BLOB, legacy, HISTORICAL_TEST_UPDATES,
+        required=True)
+    if set(revised).intersection(historic_extra):
+        raise ValueError('historical Java source admitted by two revisions')
+    revised.update(historic_extra)
     for path, historic_identity in legacy.items():
         source = product / path
         if (source.is_symlink() or not source.is_file()
@@ -202,7 +276,7 @@ def verify_product_checkout(product: Path, receipts: Path,
     older, revisions = verify_historical_revisions(product, receipts, historical_product)
     tracked = set(subprocess.check_output(['git', 'ls-files', '--',
         PREFIX + 'main', PREFIX + 'test'], cwd=product, text=True).splitlines())
-    extras = verify_additions(product, receipts, older, tracked)
+    extras = verify_additions(product, receipts, older, tracked, require_two=True)
     return len(older), revisions, len(extras)
 
 
