@@ -21,6 +21,7 @@ public final class M3SignalEvidenceBridgeSelfTest {
         originalColumnOwnershipAndProvenance();
         rejectMissingOrLossyFacts();
         rejectUncertifiedOrAmbiguousProjection();
+        verifiedSourceImageIntegrity();
         System.out.println("PASS M3SignalEvidenceBridgeSelfTest checks=" + checks);
     }
 
@@ -158,6 +159,48 @@ public final class M3SignalEvidenceBridgeSelfTest {
                         true, true, 1.0, 0.0));
         reject(() -> plan.workspace().begin(0, 1).refineMetric(),
                 IllegalStateException.class);
+    }
+
+    /** SHA-256 is checked against actual compiler S/T/E bytes, not merely its text shape. */
+    private static void verifiedSourceImageIntegrity() {
+        String body = "# M3JDK21-SOURCE-SIGNALS/1\n"
+                + "# S=scalar counts (exact nonnegative integers); T=hashed token; E=attributed candidate edge\n"
+                + scalarRecord("demo.A", 1)
+                + scalarRecord("demo.B", 2);
+        String sealed = sealSource(body);
+        M3SourceSignalImage image = M3SourceSignalImage.parse(sealed);
+        check(image.rowCount() == 2, "compiler image contains two real source types");
+        var plan = M3SignalEvidenceBridge.compileVerified(image, 27, false,
+                lane("fields", 0, M3ProgressiveSignalEvidence.Family.FIELDS,
+                        true, true, 0.0, Double.NaN));
+        check(plan.version() == 27L, "actual compiler-source version preserved");
+        check(plan.dimension(0).sourceSymbol().contains(image.sourceSha256()),
+                "compiler-image digest reused after existing parser verified its trailer");
+        var comparison = plan.workspace().begin(0, 1);
+        comparison.refineUntilRankKnown();
+        check(comparison.rankOrder() == -1, "compiler-observed field counts retain order");
+        check(!comparison.exactOrderCertified(),
+                "verified image bytes do not self-certify complete domain object ordering");
+        String tampered = sealed.replace("S\tdemo.A\t1\t", "S\tdemo.A\t2\t");
+        reject(() -> M3SourceSignalImage.parse(tampered), IllegalArgumentException.class);
+    }
+
+    private static String scalarRecord(String owner, int fields) {
+        StringBuilder row = new StringBuilder("S\t").append(owner);
+        for (int index = 0; index < 15; index++) {
+            row.append('\t').append(index == 0 ? fields : 0);
+        }
+        return row.append('\n').toString();
+    }
+
+    private static String sealSource(String source) {
+        try {
+            byte[] digest = java.security.MessageDigest.getInstance("SHA-256")
+                    .digest(source.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            return source + "# sha256\t" + java.util.HexFormat.of().formatHex(digest) + "\n";
+        } catch (java.security.NoSuchAlgorithmException impossible) {
+            throw new AssertionError(impossible);
+        }
     }
 
     private static M3SignalColumns singleLong(long value) {
