@@ -7,9 +7,10 @@ Status: M3JDK21 receiving authority.
 `hsoliwal/com.synexia` is the donor-convergence, recipe-mastery and public-code-polish workspace.
 M3JDK21 is a receiving public target.
 
-A capability should be invented/adapted/proved once in Synexia, then delivered to M3JDK21 as an
-exact qualified atom plus its recipe and evidence. M3JDK21 should not create a second implementation
-when an already-qualified Synexia owner/recipe satisfies the target contract.
+A capability should be invented/adapted/proved once in Synexia, then delivered to M3JDK21 as
+exact qualified product code plus provenance references and evidence, **not executable recipe
+sources**. M3JDK21 must not create a second implementation or a second transformation framework
+when an already-qualified Synexia owner satisfies the target contract.
 
 ```text
 external donors / problem catalogues / upstream projects
@@ -28,9 +29,10 @@ external donors / problem catalogues / upstream projects
 
 ## Apache-2.0 fast lane
 
-First-party or independently authored Synexia source that is qualified as `Apache-2.0` is reusable
-by M3JDK21, including Java, JNI/C/C++, OpenRewrite recipes, tests, documentation, manifests and
-generated configuration.
+First-party or independently authored Synexia code qualified as `Apache-2.0` is reusable
+by M3JDK21 when it is a **qualified product result**: Java, JNI/C/C++, compatibility
+tests, documentation, proof receipts and generated configuration. Reusable OpenRewrite
+recipe sources, executors, manifests and authoring tests remain exclusively in Synexia.
 
 The receiving rule is **preserve the license, do not relabel it**:
 
@@ -67,8 +69,9 @@ Every target-ready transfer binds:
 - exact destination path and destination preimage;
 - target-side acceptance receipt.
 
-Recipes are transferable assets, not internal implementation detail. Recurring fixes should improve
-the Synexia recipe/mastery corpus first, then export new exact outputs to every public target.
+Canonical recipes are reusable Synexia assets, **not product deliverables**. Recurring
+fixes improve the Synexia recipe/mastery corpus first, then export qualified, exact
+transformation outputs and immutable provenance references to public targets.
 
 ## Pinned canonical recipe home
 
@@ -81,10 +84,10 @@ The exact Synexia canonical recipe-home authority consumed by this repository is
 - their Git blob identities; and
 - the retained Apache-2.0 fast-lane classification.
 
-Borrowed reusable recipe mirrors in M3JDK21 must bind the same Synexia revision. Semantic changes to
-those reusable recipes are authored/mastered in Synexia first and then re-imported as a qualified
-handoff. M3JDK21-local backport recipes remain target-owned only when they depend on exact OpenJDK
-tree/API/ABI/native/jtreg semantics.
+Historical reusable recipe mirrors in M3JDK21 are legacy migration debt and must not
+be extended. Semantic changes and all source-specific backport recipes, including exact
+OpenJDK API/ABI/native/jtreg transformations, are authored/mastered in Synexia alone.
+M3JDK21 receives the qualified generated product source and immutable handoff receipts.
 
 ## Machine policy
 
@@ -113,11 +116,12 @@ hsoliwal/M3jdk21
 receiver / adapter / JDK-specific backport / product verification
 ```
 
-M3JDK21 does not become a second canonical owner merely because a Synexia recipe or M3Index
-component is materialized into `m3/**` or `.m3/**`. Reusable recipe changes, semantic-hash
-mechanics, atom/pattern/IOP machinery and M3Index DB/JDK-bridge improvements belong in Synexia.
-The target repository retains only product compatibility, OpenJDK licensing, build/jtreg/runtime
-and final promotion authority.
+M3JDK21 never becomes the recipe owner merely because a legacy Synexia recipe
+was mirrored under `m3/**` or `.m3/**`. New source-changing recipe code, semantic-hash
+mechanics, atom/pattern/IOP machinery and experimental donor convergence belong in
+Synexia. M3JDK21 retains product Java/JNI/native source, API/ABI compatibility,
+JDK naming authority, OpenJDK licensing, product build/jtreg/runtime and final
+promotion authority.
 
 
 ## Canonical reusable recipe ownership invariant
@@ -126,20 +130,20 @@ Reusable Maven/OpenRewrite mechanics are canonically owned and mastered in `hsol
 M3JDK21 is a consumer, not an independent owner, for reusable atomization, patternization/IOP,
 documentation, scope, convergence, donor-review and mastery recipes.
 
-M3JDK21 may retain historical `com.m3.rewrite.*` implementations temporarily as compatibility
-mirrors while callers migrate, but those files are frozen: semantic changes must be made first in
-Synexia and then re-imported as an exact source-pinned Apache-2.0 mirror.
-
-M3JDK21 remains canonical only for target-specific recipes whose semantics depend on the exact
-OpenJDK tree, JDK API/ABI, native/runtime boundaries, jtreg, or a source-sealed backport preimage.
+Existing `com.m3.rewrite.*` mirrors are explicitly **legacy, frozen migration debt**,
+not precedent for new mirror crates. Reusable and target-specific transformations,
+including exact OpenJDK tree/API/ABI/native/runtime/jtreg backports, are mastered
+in Synexia and received as qualified product result files only.
 
 The initial moved family is the pure-int FILE convergence stack. Its canonical namespace is
 `com.synexia.rewrite.atom`; the exact Synexia source revision and Git blob identities are bound in
 `m3/compatibility/synexia-recipe-ownership.tsv`.
 
-A borrowed canonical recipe may execute in M3JDK21, but target promotion still requires M3JDK21's
-scope, license, compile, API/ABI, runtime/jtreg and fixed-point gates. Borrowing never transfers
-promotion authority back to Synexia.
+A canonical recipe executes under Synexia custody against source-sealed target
+inputs. M3JDK21 independently verifies the received output with scope, license,
+compile, API/ABI, runtime/jtreg and source-provenance gates. Product promotion
+authority does not move to Synexia; recipe source ownership does not move to
+M3JDK21.
 
 
 ## Nebula proving-ground transfer
