@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Apache Commons Bag 4.5.0 donor differential
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java'
+      - '.github/workflows/m3-apache-bag-retain450.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  donor-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Compile original M3 collection owner and focused Apache 4.5.0 contract test
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          mvn -B -ntp -f m3/collections/pom.xml -DskipTests install
+          mvn -B -ntp -f m3/collections/interop/pom.xml \
+            -Dtest=M3ApacheBagContractTest -Dsurefire.failIfNoSpecifiedTests=true test
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          files = list(Path("m3/collections/interop/target/surefire-reports").glob("TEST-*M3ApacheBagContractTest*.xml"))
+          assert files, "M3ApacheBagContractTest did not run"
+          total = {k: 0 for k in ("tests", "errors", "failures", "skipped")}
+          for path in files:
+              x = ET.parse(path).getroot()
+              for key in total:
+                  total[key] += int(x.attrib.get(key, "0"))
+          assert total["tests"] >= 4 and total["errors"] == 0 and total["failures"] == 0 and total["skipped"] == 0, total
+          print("APACHE_BAG_450_REAL_DIFFERENTIAL_PASS", total)
+          PY
