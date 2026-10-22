@@ -33,3 +33,17 @@ columns using a depth counter. A hostile source fixture with nested
 invocation count excludes the nested method. The corrected template, product
 file and fixture hashes were re-sealed together. Hosted javac/JUnit/JNI
 acceptance remains NOT_RUN until workflows execute.
+
+## Complete signal family ledger and available-proof boundary
+
+The companion `SIGNAL-TAXONOMY.tsv` is a machine-readable inventory spanning
+identity, lexical, structure, types, dependencies, behavioral, control flow,
+data flow, memory, lifetime, locality, performance, semantic, temporal,
+reliability, evolution, optimization, precomputation, distance and JNI.
+Only the compiler model/AST cells admitted by the new `M3CompilerFacts`
+validity mask are reported as available. Other owners (existing progressive
+evidence, M3String/regex, index/JNI) remain referenced, not duplicated.
+Unknown JIT/GC runtime behavior, alias/purity, historical churn and incoming
+whole-program edges must remain invalid until a separately verified producer
+supplies them. This explicitly prevents a source-time count from being mistaken
+for an exact method contract, a heap measurement or a canonical similarity metric.
