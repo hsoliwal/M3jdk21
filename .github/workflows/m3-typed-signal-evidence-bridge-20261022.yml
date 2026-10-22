@@ -39,6 +39,8 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
             m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
             m3/collections/src/main/java/com/m3/collections/M3ProgressiveSignalEvidence.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalEvidenceBridge.java \
             m3/collections/src/test/java/com/m3/collections/M3SignalEvidenceBridgeSelfTest.java \
             m3/collections/src/test/java/com/m3/collections/M3ProgressiveSignalEvidenceContract.java
