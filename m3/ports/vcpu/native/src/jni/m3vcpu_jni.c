@@ -369,7 +369,7 @@ static int m3j_range(JNIEnv *env, const char *op, jlong byte_offset, jlong offse
 
 /* Bounded temporary lanes, never a borrowed Java heap pointer. The JNI
  * critical-array prohibition on blocking backend calls is respected. */
-enum { M3J_TRANSFER_INTS = 256 };
+/* M3J_TRANSFER_INTS belongs to the single-call staging helper below. */
 
 /* Java int offset/count remain logical element units. Device offsets are bytes.
  * Validate BEFORE narrowing to size_t (notably on 32-bit phone runtimes). */
@@ -395,71 +395,86 @@ static int m3j_transfer_range(JNIEnv *env, const char *op,
     return 1;
 }
 
+
+/* Preserve ONE backend transfer per Java int[] call.
+ * For <=256 words use stack scratch; otherwise allocate exactly the requested
+ * native span, release it on every return, and never retain Java heap pointers.
+ * This spends O(n) temporary native bytes to retain the original backend
+ * call/failure boundary. Direct ByteBuffer upload keeps its separate path. */
+enum { M3J_TRANSFER_INTS = 256 };
+
+static jint *m3j_transfer_storage(JNIEnv *env, jint length,
+                                  jint local[M3J_TRANSFER_INTS], const char *op)
+{
+    jint *storage;
+    if (length <= M3J_TRANSFER_INTS) return local;
+    storage = (jint *)malloc((size_t)length * sizeof(jint));
+    if (storage == NULL) {
+        m3j_throw(env, M3VCPU_E_OUT_OF_MEMORY, op, "native array staging");
+    }
+    return storage;
+}
+
 static void m3j_upload_int_region(JNIEnv *env, m3j_session *owner, m3vcpu_buf *buf,
                                   jlong byte_offset, jintArray src,
                                   jint src_offset, jint length)
 {
-    jint staging[M3J_TRANSFER_INTS] = {0};
-    jint done = 0;
-    int32_t rc = M3VCPU_OK;
-    /* Preserve the backend's zero-length validation without pinning an array. */
-    /* Validate the entire device extent before publishing the first chunk.
-     * m3vcpu_buffer_write(..., 0) checks [offset, size] without mutation.
-     * Checked Java length/byte_offset conversion preceded this helper. */
-    rc = m3vcpu_buffer_write(owner->s, buf,
-                             (size_t)byte_offset + (size_t)length * sizeof(jint),
-                             staging, 0);
+    jint local[M3J_TRANSFER_INTS] = {0};
+    jint *staging;
+    int32_t rc;
+    size_t bytes = (size_t)length * sizeof(jint);
+    /* Zero-byte validation is provided by the existing HAL and does not reach
+     * a device backend. Fail invalid whole ranges BEFORE staging or mutation. */
+    rc = m3vcpu_buffer_write(owner->s, buf, (size_t)byte_offset + bytes, local, 0);
     if (rc != M3VCPU_OK) {
         m3j_throw(env, rc, "upload", m3vcpu_last_error(owner->s));
         return;
     }
-    while (done < length) {
+    if (length == 0) return;
+    staging = m3j_transfer_storage(env, length, local, "upload");
+    if (staging == NULL) return;
+    /* Input region acquisition may be chunked; backend output is NOT. */
+    for (jint done = 0; done < length;) {
         jint take = length - done;
         if (take > M3J_TRANSFER_INTS) take = M3J_TRANSFER_INTS;
-        (*env)->GetIntArrayRegion(env, src, src_offset + done, take, staging);
-        if ((*env)->ExceptionCheck(env)) return;
-        rc = m3vcpu_buffer_write(owner->s, buf,
-                                 (size_t)byte_offset + (size_t)done * sizeof(jint),
-                                 staging, (size_t)take * sizeof(jint));
-        if (rc != M3VCPU_OK) break;
+        (*env)->GetIntArrayRegion(env, src, src_offset + done, take, staging + done);
+        if ((*env)->ExceptionCheck(env)) {
+            if (staging != local) free(staging);
+            return;
+        }
         done += take;
     }
+    rc = m3vcpu_buffer_write(owner->s, buf, (size_t)byte_offset, staging, bytes);
     if (rc != M3VCPU_OK) {
         m3j_throw(env, rc, "upload", m3vcpu_last_error(owner->s));
     }
+    if (staging != local) free(staging);
 }
 
 static void m3j_download_int_region(JNIEnv *env, m3j_session *owner, m3vcpu_buf *buf,
                                     jlong byte_offset, jintArray dst,
                                     jint dst_offset, jint length)
 {
-    jint staging[M3J_TRANSFER_INTS] = {0};
-    jint done = 0;
-    int32_t rc = M3VCPU_OK;
-    /* Refuse an oversized requested transfer before modifying Java output. */
-    rc = m3vcpu_buffer_read(owner->s, buf,
-                            (size_t)byte_offset + (size_t)length * sizeof(jint),
-                            staging, 0);
+    jint local[M3J_TRANSFER_INTS] = {0};
+    jint *staging;
+    int32_t rc;
+    size_t bytes = (size_t)length * sizeof(jint);
+    rc = m3vcpu_buffer_read(owner->s, buf, (size_t)byte_offset + bytes, local, 0);
     if (rc != M3VCPU_OK) {
         m3j_throw(env, rc, "download", m3vcpu_last_error(owner->s));
         return;
     }
-    while (done < length) {
-        jint take = length - done;
-        if (take > M3J_TRANSFER_INTS) take = M3J_TRANSFER_INTS;
-        rc = m3vcpu_buffer_read(owner->s, buf,
-                                (size_t)byte_offset + (size_t)done * sizeof(jint),
-                                staging, (size_t)take * sizeof(jint));
-        if (rc != M3VCPU_OK) break;
-        (*env)->SetIntArrayRegion(env, dst, dst_offset + done, take, staging);
-        if ((*env)->ExceptionCheck(env)) return;
-        done += take;
-    }
-    if (rc != M3VCPU_OK) {
+    if (length == 0) return;
+    staging = m3j_transfer_storage(env, length, local, "download");
+    if (staging == NULL) return;
+    rc = m3vcpu_buffer_read(owner->s, buf, (size_t)byte_offset, staging, bytes);
+    if (rc == M3VCPU_OK) {
+        (*env)->SetIntArrayRegion(env, dst, dst_offset, length, staging);
+    } else {
         m3j_throw(env, rc, "download", m3vcpu_last_error(owner->s));
     }
+    if (staging != local) free(staging);
 }
-
 
 JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_upload(JNIEnv *env, jclass type,
         jlong buffer, jlong byte_offset, jobject src, jint src_offset, jint length)
