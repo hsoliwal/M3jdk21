@@ -311,6 +311,21 @@ public final class CollectionViews {
             // Collection membership is defined by the stored occurrence, not by a
             // caller-provided equal probe. Equivalence does not imply that a
             // predicate depending on other fields agrees for both instances.
+            if (backing instanceof Set<?>) {
+                // Equality against a stored value is not enough for identity-backed
+                // sets. Delegate candidate admission to the actual owning Set.
+                if (!backing.contains(candidate)) return false;
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    if (stored == candidate) return visible(stored);
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent);
+            }
             for (E stored : backing) {
                 if (Objects.equals(candidate, stored) && visible(stored)) {
                     return true;
@@ -356,6 +371,23 @@ public final class CollectionViews {
                     physical++;
                 }
                 return false;
+            }
+            if (backing instanceof Set<?>) {
+                // Select the actual stored member using this owner's membership
+                // policy, including reference identity where applicable.
+                if (!backing.contains(candidate)) return false;
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    if (stored == candidate) {
+                        return visible(stored) && backing.remove(stored);
+                    }
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent) && backing.remove(equivalent);
             }
             Iterator<E> cursor = backing.iterator();
             boolean skippedEqual = false;
