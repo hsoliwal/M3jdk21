@@ -1,0 +1,19 @@
+{
+  "execution_kind": "SDK_EXECUTION",
+  "engine_git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+  "sdk_version": "8.17.1",
+  "manifest_sha256": "815f0b6b84f285694b0b562ab6c0558a4badf887d02b2559728c7941dede83de",
+  "files": 7566,
+  "bytes": 61574030,
+  "first_changes": 7566,
+  "fixed_point_changes": 0,
+  "reversed_input_root_matches": true,
+  "partial_state_order_trials": 16,
+  "refusal_cases": 7,
+  "input_bytes_modes_unchanged": true,
+  "output_sha256": "1e0247aa6057b85b63a128a832713f149b4dd6f41ee5f1fb2e7a848021daa978",
+  "materialization_root": "/workspace/scratch/b4deff766505/work/m3-convergence-20261021/candidates/custody-sdk/delta/target/receiver/m3/vendor/synexia",
+  "output_readback": "PASS",
+  "payload_semantics_qualified": false,
+  "product_runtime_qualified": false
+}

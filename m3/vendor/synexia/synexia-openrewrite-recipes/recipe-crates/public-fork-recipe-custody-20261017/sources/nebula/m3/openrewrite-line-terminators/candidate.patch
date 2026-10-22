@@ -1,0 +1,69 @@
+--- a/org/openrewrite/internal/StringUtils.java
++++ b/org/openrewrite/internal/StringUtils.java
+@@ -262,7 +262,7 @@
+         boolean inMultilineComment = false;
+         while (i < chars.length) {
+             char c = chars[i];
+-            if (inSingleLineComment && c == '\n') {
++            if (inSingleLineComment && (c == '\n' || c == '\r')) {
+                 inSingleLineComment = false;
+                 continue;
+             }
+@@ -654,6 +654,7 @@
+      * types in any subpackage, or all inner types. e.g. <code>within(com.xerox..*)</code> picks out all join points where
+      * the code is in any declaration of a type whose name begins with "com.xerox.".
+      */
++    @SuppressWarnings("fallthrough") // Pinned donor intentionally escapes then appends the character.
+     public static String aspectjNameToPattern(String name) {
+         // Special case: a single * matches any type
+         if ("*".equals(name)) {
+@@ -746,7 +747,7 @@
+         for (; cursor < length; cursor++) {
+             char current = source.charAt(cursor);
+             if (inSingleLineComment) {
+-                inSingleLineComment = current != '\n';
++                inSingleLineComment = current != '\n' && current != '\r';
+                 continue;
+             } else if (length > cursor + 1) {
+                 char next = source.charAt(cursor + 1);
+--- a/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java
++++ b/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java
+@@ -982,6 +982,11 @@
+         for (int i = 0; i < node.length(); i++) {
+             char c = node.charAt(i);
+             if (c == '\n') {
++                // javac omits whitespace-only line content from DCText; retain it before consuming its newline.
++                while (cursor < source.length() && source.charAt(cursor) != '\n' && Character.isWhitespace(source.charAt(cursor))) {
++                    text.append(source.charAt(cursor));
++                    cursor++;
++                }
+                 if (text.length() > 0) {
+                     texts.add(new Javadoc.Text(randomId(), Markers.EMPTY, text.toString()));
+                     text = new StringBuilder();
+--- a/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java
++++ b/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java
+@@ -396,6 +396,7 @@
+     }
+ 
+     @Override
++    @SuppressWarnings("unchecked") // Pinned donor maps typed record parameters to statement containers.
+     public J visitClass(ClassTree node, Space fmt) {
+         Map<Integer, JCAnnotation> annotationPosTable = mapAnnotations(node.getModifiers().getAnnotations(),
+                 new HashMap<>(node.getModifiers().getAnnotations().size()));
+@@ -1929,6 +1930,7 @@
+     }
+ 
+     @Contract("null, _, _ -> null; !null, _, _ -> !null")
++    @SuppressWarnings("unchecked") // Pinned donor represents conversion residue as J.Erroneous.
+     private <J2 extends @Nullable J> @Nullable JRightPadded<J2> convert(@Nullable Tree t, Function<Tree, Space> suffix, Function<Tree, Markers> markers) {
+         if (t == null) {
+             return null;
+@@ -2246,7 +2248,7 @@
+         int delimIndex = cursor;
+         for (; delimIndex < source.length() - untilDelim.length() + 1; delimIndex++) {
+             if (inSingleLineComment) {
+-                if (source.charAt(delimIndex) == '\n') {
++                if (source.charAt(delimIndex) == '\n' || source.charAt(delimIndex) == '\r') {
+                     inSingleLineComment = false;
+                 }
+             } else {

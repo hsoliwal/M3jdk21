@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.CurrentMasterReproofHeader
+displayName: Converge exact Nebula reproof ledger assertion header
+description: >-
+  One candidate-only, EPL-2.0 Java LST leaf correcting the checked-in
+  current-master reproof TSV header assertion. Existing ledger bytes,
+  Nebula widget contracts and source owner remain unchanged.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3CurrentMasterReproofHeaderRecipe

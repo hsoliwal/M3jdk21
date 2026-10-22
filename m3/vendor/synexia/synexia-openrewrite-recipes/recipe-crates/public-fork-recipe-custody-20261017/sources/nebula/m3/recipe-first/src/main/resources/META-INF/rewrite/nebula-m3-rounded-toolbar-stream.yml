@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.RoundedToolbarStreamSegments
+displayName: Unfold reviewed RoundedToolbar stream segments
+description: >-
+  Exact source candidate sharing three ordered searches through one segment-named
+  ordinary method, retaining callback traversal checks and event-time reads.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3RoundedToolbarStreamRecipe

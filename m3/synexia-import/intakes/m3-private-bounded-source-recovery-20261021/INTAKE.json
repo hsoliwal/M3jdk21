@@ -1,0 +1,34 @@
+{
+  "schema": "M3_PRIVATE_BOUNDED_SOURCE_INTAKE_V1",
+  "status": "PINNED_SOURCE_CUSTODY_RETAINED_QUALIFICATION",
+  "canonical_source": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "4c3d11630e48acf6ca543dc98edd8df0b43edc7a",
+    "tree": "5e2149013e47ab30356489eed6e66472d4146366",
+    "parent": "d3f7dccd5e9c44ad122f9664a4990af05d50f2f3",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12900",
+    "pull_request_number": 12900,
+    "snapshot_head": "4c3d11630e48acf6ca543dc98edd8df0b43edc7a",
+    "snapshot_base": "719049b3bf1b8525d2f25c07aa3c317537e69c8b",
+    "binding_scope": "Immutable payload origin; subsequent recipe/proof-only commits may advance the PR head."
+  },
+  "target_repository": "hsoliwal/M3jdk21",
+  "compatible_receiver_revision": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+  "files": 5,
+  "bytes": 19097,
+  "donor_repository": "hsoliwal/synexia-m3scale-apache2",
+  "donor_revision": "7de477e53e067726f324e690133be57e9a32d270",
+  "receiving_manifest": "RECEIVING_MANIFEST.tsv",
+  "retained_qualification": {
+    "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-bounded-donor-recovery-20261021/QUALIFICATION.json",
+    "bytes": 5823,
+    "sha256": "b5d2235face382e62f5bf45f50f4c720159d33f2d0bb345be615e1505fa66345",
+    "git_blob": "aef2b3efc3291eccad1e08dd090b416048ce706f"
+  },
+  "qualification_scope": "QUALIFICATION.json is an unchanged historical receipt for fifteen canonical outputs, of which five are private source/rights files. SOURCE_ORIGINS.json retains its earlier candidate-only observation. This intake links those five files to the subsequent recorded SDK result and the actual source origin; it does not relabel those historical receipts as fresh tests.",
+  "runtime_activation": false,
+  "java_jni_behavior_qualification": "NOT_RUN_FOR_THIS_SOURCE_CLASS",
+  "phase_advance": false,
+  "all_repository_work_complete": false,
+  "rights": "Source has Apache-2.0 header; complete acquired rootLICENSE/NOTICE/COPYRIGHT.md/LICENSE.spdx remain attached. Referenced absent historical release-boundary document is disclosed in FOCUSED_OWNER_COVERAGE.json."
+}

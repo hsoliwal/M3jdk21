@@ -1,0 +1,18 @@
+{
+  "classification": "DIRECT_IMPORT proof harness only",
+  "license": "Apache-2.0 published POM reviewed",
+  "reason": "Existing qualified harness classpath includes annotations 26.1.0; minimal v1 carrier omitted it, strict javac refused missing Language.value annotation",
+  "target_source_change": false,
+  "artifacts": [
+    {
+      "coordinate_path": "org/jetbrains/annotations/26.1.0/annotations-26.1.0.jar",
+      "size": 31094,
+      "sha256": "ebc7aec252ed0c7d2d04c039d7f00e69f7b86b1f493c741d67b3ef31b986b054"
+    },
+    {
+      "coordinate_path": "org/jetbrains/annotations/26.1.0/annotations-26.1.0.pom",
+      "size": 1686,
+      "sha256": "f8dc50cf3aac4bcec740a90955f2800e41251e9c403630b75b752d3b6ef5bee2"
+    }
+  ]
+}

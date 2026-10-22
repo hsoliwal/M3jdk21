@@ -1,0 +1,429 @@
+{
+  "schema": "M3_TQ_ADAPTIVE_BOUNDED_QUALIFICATION_V1",
+  "candidate_version": 3,
+  "status": "BOUNDED_LEAF_PASS_FULL_RUNTIME_NOT_ADMITTED",
+  "recipe_name": "com.synexia.rewrite.M3Jdk21TqAdaptiveGallop20261021",
+  "recipe_class": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "canonical_source_revision": "fe582fe513989b561470b49efe7d5f56246d7e0a",
+  "frozen_target_revision": "dd05cb14da9836d87b61311f8345f0e4832f8fad",
+  "source_seal": "738d28e1d1f3b92434c5555e1600b4d2a55ff45e56f0bca379a763383996e9ac",
+  "targets": [
+    {
+      "target_path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "before_sha256_or_absent": "79e922eb3d0c3ae28db264bcaeab0a03f31643ad581c3e28bc2545140c043367",
+      "after_sha256": "a01f05617dec5639f6a80e93ae45b6e80eec8959efd73250e0b4335a12d61158",
+      "after_git_blob": "f4e7db87c41abd32472faaca699f9fd55c151ac6",
+      "bytes": 20928,
+      "sdk_output_path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/target/generated/src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "template_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-adaptive-gallop-20261021/M3TQ.java.txt"
+    },
+    {
+      "target_path": "test/jdk/java/lang/String/M3TQAdaptiveContainmentTest.java",
+      "before_sha256_or_absent": "ABSENT",
+      "after_sha256": "d54f568efde8b5d5f61c11c8aa0bed3e240f6ec0893649047757617b702dcd3b",
+      "after_git_blob": "5ef3a96d96e16e7b416f680fde351511880a7ae2",
+      "bytes": 7616,
+      "sdk_output_path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/target/generated/test/jdk/java/lang/String/M3TQAdaptiveContainmentTest.java",
+      "template_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-adaptive-gallop-20261021/M3TQAdaptiveContainmentTest.java.txt"
+    }
+  ],
+  "engine": {
+    "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "sha256": "595ab8c4314de4f84708b3ec081fbef375e534787e5684ee98131ee16ab397b8",
+    "git_blob": "98138cb6734ad86e3f77b8722fa5ff459842e841",
+    "bytes": 32041
+  },
+  "gates": {
+    "lint": {
+      "status": "PASS",
+      "receipt": {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/lint-003/receipt.json",
+        "sha256": "32b2bd6cd630870d382baf4af9dc56caefe370af8de322bf7a2fbdb5a4cae90e",
+        "git_blob": "563fb6561d977e752c2071c69d31cf3fd104a7d8",
+        "bytes": 362
+      },
+      "scope": "two sealed targets; sparse/earlier/later owner byte equality; no allocation expression in changed atom",
+      "executed_for_candidate": 3
+    },
+    "compile": {
+      "status": "PASS",
+      "receipt": {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/compile-003/receipt.json",
+        "sha256": "163ce71ce59369109c4546cf4214559e5934a37c647a1a4e28a98807f06687ca",
+        "git_blob": "56d72833777fcfbcce84c5cb766c14a61278a673",
+        "bytes": 13317
+      },
+      "scope": "full exact source bodies; Java21 strict warnings; test-only instrumented copies; public descriptor parity",
+      "executed_for_candidate": 3
+    },
+    "test": {
+      "status": "PASS",
+      "receipt": {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/test-003/receipt.json",
+        "sha256": "a7abf6157dd06b633e1494f8b82b2fa746ecb93d65bfd8446d0ee3d7104b0de5",
+        "git_blob": "d6dd9d42f505288240b3221b367356fd11d536b9",
+        "bytes": 3888
+      },
+      "scope": "baseline/candidate independent set truth; exact SDK output equality; UTF-16/fence/exception spectrum",
+      "executed_for_candidate": 3
+    },
+    "runtime": {
+      "status": "CARRIED_FORWARD_IDENTICAL_EXECUTABLE_BYTES",
+      "identity_receipt": {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/executable-identity-003.json",
+        "sha256": "609e93538800769235eaff1956c0748892832f56d6a85d19315cc2aed88eced5",
+        "git_blob": "86042aae585687dfd2a077332ef4bde2483cf01b",
+        "bytes": 7570
+      },
+      "original_receipt": {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/runtime-002/receipt.json",
+        "sha256": "ea7a59b542639a65278a127ec3fec858def8d448b47241493a19dcfb27acbacd",
+        "git_blob": "95b2f12d877a13a2f13a3b151c97df1b8d160cf0",
+        "bytes": 12717
+      },
+      "scope": "Original candidate2 runtime/work/timing observations apply to byte-identical recompiled classes; not rerun and not actual jtreg."
+    }
+  },
+  "actual_sdk": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "offline": true,
+    "executed_for_candidate": 3,
+    "log": {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/maven-offline-test-003.log",
+      "sha256": "4aa6ac8a9ef9521a749b8da1c4baa1600c8056ff91370593b568f08052c8a620",
+      "git_blob": "0c3ac5aa2a8ed8ff15322cf34a9292483be1a68a",
+      "bytes": 2077
+    },
+    "dependency_receipt": {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/sdk-v3-dependencies.json",
+      "sha256": "3e3cf23dcc39eec73dd43f19929c95b9140c24267edca178bc0be550943df9ea",
+      "git_blob": "aaacc32c18b82be97141cb64313b8c336f7940a8",
+      "bytes": 9220
+    }
+  },
+  "semantic_checks_per_run": {
+    "adaptive": 90997,
+    "existing_sparse": 31011,
+    "warm_payload_reads": 0
+  },
+  "runtime_configurations": [
+    "default mixed mode",
+    "-Xint",
+    "-XX:TieredStopAtLevel=1",
+    "-XX:-TieredCompilation"
+  ],
+  "work_counts": {
+    "dense-equal": {
+      "baseline_reads": 32768,
+      "candidate_reads": 32768,
+      "gallop_calls": 0
+    },
+    "dense-interleaved": {
+      "baseline_reads": 32767,
+      "candidate_reads": 32767,
+      "gallop_calls": 0
+    },
+    "dense-stride-eight": {
+      "baseline_reads": 32761,
+      "candidate_reads": 32761,
+      "gallop_calls": 0
+    },
+    "large-prefix": {
+      "baseline_reads": 32768,
+      "candidate_reads": 1061,
+      "gallop_calls": 1
+    },
+    "large-prefix-absent-high": {
+      "baseline_reads": 32768,
+      "candidate_reads": 1060,
+      "gallop_calls": 1
+    },
+    "clustered-gaps": {
+      "baseline_reads": 32768,
+      "candidate_reads": 2772,
+      "gallop_calls": 32
+    },
+    "sparse-first": {
+      "baseline_reads": 1,
+      "candidate_reads": 1,
+      "gallop_calls": 0
+    },
+    "sparse-last": {
+      "baseline_reads": 17,
+      "candidate_reads": 17,
+      "gallop_calls": 0
+    },
+    "sparse-missing": {
+      "baseline_reads": 17,
+      "candidate_reads": 17,
+      "gallop_calls": 0
+    },
+    "empty": {
+      "baseline_reads": 0,
+      "candidate_reads": 0,
+      "gallop_calls": 0
+    },
+    "impossible-cardinality": {
+      "baseline_reads": 0,
+      "candidate_reads": 0,
+      "gallop_calls": 0
+    },
+    "dense-disjoint": {
+      "baseline_reads": 1,
+      "candidate_reads": 1,
+      "gallop_calls": 0
+    }
+  },
+  "allocation_maximum_bytes_per_call": 0.0,
+  "unpaired_median_candidate_over_baseline": {
+    "dense-equal": 0.8592703913022316,
+    "dense-interleaved": 1.1188387273080567,
+    "large-prefix": 0.10939724821258973,
+    "sparse-last": 0.8253445876554015
+  },
+  "paired_median_candidate_over_baseline": {
+    "dense-equal": 1.0188844968471515,
+    "dense-interleaved": 0.8969646155698054,
+    "large-prefix": 0.08493361676734679,
+    "sparse-last": 0.8698708831420782
+  },
+  "timing_assessment": "Long-prefix benefit is consistent within these fixtures. Paired dense-interleaved ratios vary from 0.765 to 1.112; no statistical equivalence or universal performance claim. Unpaired regression and failed candidate1 remain preserved.",
+  "not_run": [
+    "source-built M3JDK21",
+    "actual jtreg",
+    "full String and regex family acceptance",
+    "production JNI/native integration",
+    "retained/native/process memory",
+    "GC/CDS acceptance",
+    "cross-platform acceptance",
+    "repository-wide offline qualification"
+  ],
+  "production_jni_abi_change": false,
+  "target_checkout_written_by_this_subtask": false,
+  "fresh_receiver_compatible_inputs": [
+    {
+      "source_file": "M3TQ.java",
+      "fixture_path": "fixtures/M3TQ.java.before",
+      "sha256": "79e922eb3d0c3ae28db264bcaeab0a03f31643ad581c3e28bc2545140c043367",
+      "git_blob": "757ac3acb2bb32d2dc54f839e3ba64b2c5d4778a",
+      "bytes": 19261,
+      "byte_equal": true
+    },
+    {
+      "source_file": "M3StringBacking.java",
+      "fixture_path": "fixtures/M3StringBacking.java",
+      "sha256": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+      "git_blob": "5daedbe16dfc9377783b52d932e548cc44f0b335",
+      "bytes": 2925,
+      "byte_equal": true
+    },
+    {
+      "source_file": "M3TQSparseContainmentTest.java",
+      "fixture_path": "proof/M3TQSparseContainmentTest.java",
+      "sha256": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790",
+      "git_blob": "5ab8efc87034af87166c6ba9164c5444b60876da",
+      "bytes": 4159,
+      "byte_equal": true
+    }
+  ],
+  "fresh_receiver_revision": "a62eacad46b51ce757ded74579f1ad2aabc4d638",
+  "evidence": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/CONTRACT.md",
+      "sha256": "508659c488992cc23a224fe5ce268373166c157d711137571bae93ae9f3e15da",
+      "git_blob": "0e56c793d09208c970cc97778e36746ba1729c16",
+      "bytes": 6882
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/CONTRACT-amendment-001.md",
+      "sha256": "48effd2e9c354e8f20dcbbfbf00aefd34b12ccf9779d1f845c888f4f704cf654",
+      "git_blob": "23756252c2b22bee73dfa57f50dbedd398b4aed3",
+      "bytes": 2205
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/CONTRACT-amendment-002.md",
+      "sha256": "ad0c3b42fba3bdbaadba2b65b512033e38d78b50341e681cab003798f447707f",
+      "git_blob": "ce222fc93d6575266415b39c08d7541603d4a9b5",
+      "bytes": 3634
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/RESULTS.md",
+      "sha256": "c4434e572d3019a0ce780cd8d2a4ba0aae76b28249625c0320a5aaeb300e6abb",
+      "git_blob": "059028f3299ccf3fa0ddcd542878636e76e1546f",
+      "bytes": 10401
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/RESULTS-amendment-002.md",
+      "sha256": "67960bb0f6d49c57002388a5833ab5e641431cf5411b2fc3f5d63ed467b2ab57",
+      "git_blob": "0fb1e7b24f48646e7c76836326702301bb813e9e",
+      "bytes": 4232
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/README.md",
+      "sha256": "e6a65fe1c00eeda6c370bd16fcaa1874dc5553e34ab8cbd21b67f0b957b740d4",
+      "git_blob": "23c6e22c5e698f714eca791ef2a1cf143bd185f9",
+      "bytes": 4031
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/reviewed-runtime.diff",
+      "sha256": "eba6c090fad8670c14baf2b3841045e8073adae856447b36aa941ee9d234e05f",
+      "git_blob": "32de092ddcc861b7644ab42b3a6ef0e5fe66ee6c",
+      "bytes": 3363
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-adaptive-gallop-20261021/manifest.tsv",
+      "sha256": "4aed5b338d93f0e8d3fe5267a6d1af75424b92c6958ee58330dadf5e1847f953",
+      "git_blob": "838dcb78cd14c63b6e97ca7c8f31e0dc63de4324",
+      "bytes": 399
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-adaptive-gallop-20261021.yml",
+      "sha256": "2f1e4a7d3cdd30ea4447652a1fb6806bc28586056e0447dd687ed88d567d41c4",
+      "git_blob": "33d8d21d39650902ad8a71acee855989e04bbf9a",
+      "bytes": 521
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/fixtures/M3TQ.java.before",
+      "sha256": "79e922eb3d0c3ae28db264bcaeab0a03f31643ad581c3e28bc2545140c043367",
+      "git_blob": "757ac3acb2bb32d2dc54f839e3ba64b2c5d4778a",
+      "bytes": 19261
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/fixtures/M3StringBacking.java",
+      "sha256": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+      "git_blob": "5daedbe16dfc9377783b52d932e548cc44f0b335",
+      "bytes": 2925
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/fixtures/LICENSE",
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "git_blob": "8b400c7ab81b7b18baff3f81d597f5e511883134",
+      "bytes": 19274
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/proof/M3TQSparseContainmentTest.java",
+      "sha256": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790",
+      "git_blob": "5ab8efc87034af87166c6ba9164c5444b60876da",
+      "bytes": 4159
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/sdk-v3-report.txt",
+      "sha256": "8157f799ae9ee8b829c66d164a9f101a5890c6b7d988f26041c04a90c76c0de3",
+      "git_blob": "db4915ddca6954ba768ced59cd31d7917f1f64fb",
+      "bytes": 338
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/sdk-v3-dependencies.json",
+      "sha256": "3e3cf23dcc39eec73dd43f19929c95b9140c24267edca178bc0be550943df9ea",
+      "git_blob": "aaacc32c18b82be97141cb64313b8c336f7940a8",
+      "bytes": 9220
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/maven-offline-test-003.log",
+      "sha256": "4aa6ac8a9ef9521a749b8da1c4baa1600c8056ff91370593b568f08052c8a620",
+      "git_blob": "0c3ac5aa2a8ed8ff15322cf34a9292483be1a68a",
+      "bytes": 2077
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/executable-identity-003.json",
+      "sha256": "609e93538800769235eaff1956c0748892832f56d6a85d19315cc2aed88eced5",
+      "git_blob": "86042aae585687dfd2a077332ef4bde2483cf01b",
+      "bytes": 7570
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/runtime-002/work-comparison.json",
+      "sha256": "b1722085cbff88268415a0a42b5e2fe718a93e63ec66259762193f2bb3f40e8c",
+      "git_blob": "a47c3fe8c94c9a96697f03a0cafa701bac165c8c",
+      "bytes": 1259
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/runtime-002/warm-diagnostic.json",
+      "sha256": "eb43498fc8e87a2d13c59c86768568ff929d368d86e00b94a88732615edb694a",
+      "git_blob": "ab81720b56a60ec41456f64ba985db4cb0755238",
+      "bytes": 878
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/performance-paired-001/receipt.json",
+      "sha256": "43200390ad0de8cf6ecaae38149906373c764d7a12265f1ffde8ca3bd384b91a",
+      "git_blob": "6ba185b2e0fee6573b512699047d4cd8855aa83f",
+      "bytes": 2618
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/performance-paired-001/execution-context.json",
+      "sha256": "7c923ff0b7a78bbdc7cddc00c0be9546fb9b70154f42383461c20bd14e842e61",
+      "git_blob": "94ae1fccf3542c668b2004480b70d2e2c395317b",
+      "bytes": 2131
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/receiver-freshness.json",
+      "sha256": "cef75714b27f0e337d8b7698a1a844994ff6c459ad66823588fded1253e581f4",
+      "git_blob": "de9111aa12ad6f41bfd068ada989f8d6d7cdab55",
+      "bytes": 1387
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/backing-license.json",
+      "sha256": "190fbde1004043f2fd68d9d98c31c9317fd85af88ca49d64d8d4bf68b3ab2858",
+      "git_blob": "cae8303b8d8d9e09cfed77f5478ebedb3c3eaf5b",
+      "bytes": 423
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/superseded-candidate-002/snapshot-index.json",
+      "sha256": "775c779c85a5d85435eaffe0901086de90f2d5b2d1f16ffb56dcc9590e1a7fc9",
+      "git_blob": "5bd33d9e1eb46b76c283b2cdac78cda81c9a1119",
+      "bytes": 10931
+    }
+  ],
+  "limitations": [
+    "Finite functional spectra and host-patched Java21 are not complete runtime admission.",
+    "Source-read work is measured on separate instrumented copies; CPU/allocation use exact uninstrumented owners.",
+    "Warm diagnostics are non-JMH shared-host measurements.",
+    "Parent owns current-head absent-addition check, mappings, target application and publication.",
+    "The new test header correction is statically justified by primary jtreg rules; no actual jtreg execution is claimed.",
+    "Inherited sparse-test header gap is outside this narrow correction and remains pending.",
+    "Original candidate2 mode/work/allocation/timing results are carried forward explicitly for identical executable class bytes, not relabelled as new runs."
+  ],
+  "successor_scope": "New adaptive test @modules :open to :+open only; runtime implementation and executable bodies unchanged.",
+  "previous_qualified_result": {
+    "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/final-result.json",
+    "sha256": "54857e061d606f94ad84623428417a14fd298ac3464da42db63302c40ab527ec",
+    "git_blob": "a129229e680eb1ccce986ae4269f3490dd976a44",
+    "bytes": 15124
+  },
+  "previous_result_status": "Retained bounded host result; jtreg header gap discovered by read-only review.",
+  "historical_preimage_overlay": {
+    "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/superseded-candidate-002/snapshot-index.json",
+    "sha256": "775c779c85a5d85435eaffe0901086de90f2d5b2d1f16ffb56dcc9590e1a7fc9",
+    "git_blob": "5bd33d9e1eb46b76c283b2cdac78cda81c9a1119",
+    "bytes": 10931
+  },
+  "runtime_configuration_evidence": {
+    "default_mixed_mode": "Executed again in test-003",
+    "interpreter_C1_non_tiered": "Original runtime-002 executions carried forward using exact 32-class identity; not rerun."
+  },
+  "measurement_provenance": {
+    "executed_candidate": 2,
+    "applies_to_candidate": 3,
+    "basis": "All 32 recompiled host owner/probe class files match pre-header-edit bytes.",
+    "identity_receipt": {
+      "path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/executable-identity-003.json",
+      "sha256": "609e93538800769235eaff1956c0748892832f56d6a85d19315cc2aed88eced5",
+      "git_blob": "86042aae585687dfd2a077332ef4bde2483cf01b",
+      "bytes": 7570
+    },
+    "new_timing_or_allocation_run": false
+  },
+  "known_integration_limitations": [
+    {
+      "path": "test/jdk/java/lang/String/M3TQSparseContainmentTest.java",
+      "issue": "Existing inherited @modules suffix is :open although the test directly imports M3TQ; this task leaves it unchanged. Separate jtreg header correction remains pending.",
+      "source_sha256": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790"
+    },
+    {
+      "scope": "New adaptive test",
+      "issue": "Header now requests export plus open according to primary jtreg semantics, but actual jtreg execution remains NOT_RUN."
+    }
+  ]
+}

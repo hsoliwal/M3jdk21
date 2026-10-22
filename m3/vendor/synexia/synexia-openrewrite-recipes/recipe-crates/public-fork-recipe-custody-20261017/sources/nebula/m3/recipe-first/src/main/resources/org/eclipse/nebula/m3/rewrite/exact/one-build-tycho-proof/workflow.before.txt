@@ -1,0 +1,114 @@
+# SPDX-License-Identifier: EPL-2.0
+name: M3 one-build OpenRewrite convergence
+
+on:
+  pull_request:
+    paths:
+      - 'pom.xml'
+      - 'm3/recipe-first/**'
+      - 'm3/ci/**'
+      - '.github/workflows/m3-one-build-openrewrite-convergence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  converge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          submodules: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+
+      - name: 2 - Verify FILE candidate-scope gate fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s m3/ci -p 'test_*.py' -v
+          if find m3/ci -type d -name __pycache__ -print -quit | grep -q .; then
+            echo 'M3 gate test produced untracked Python bytecode'
+            exit 1
+          fi
+
+      - name: 3 - Prove and install the recipe atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/recipe-first/pom.xml             -Psemantic-coverage,dag-manifest             clean verify install
+
+      - name: 4 - Verify DAG and scheduler evidence exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT=m3/recipe-first/target/nebula-m3-dag
+          test -s "$OUT/recipe-dag.tsv"
+          test -s "$OUT/recipe-dag.sha256"
+          test -s "$OUT/camel-route.yaml"
+          test -s "$OUT/airflow-dag.py"
+          test -s "$OUT/drools-agenda.drl"
+          test -s "$OUT/orchestrator-plans.sha256"
+          grep -F $'INVENTORY' "$OUT/recipe-dag.tsv"
+          grep -F $'ATOMIZATION' "$OUT/recipe-dag.tsv"
+          grep -F $'PATTERNIZATION' "$OUT/recipe-dag.tsv"
+          grep -F $'DOCUMENTATION' "$OUT/recipe-dag.tsv"
+          grep -F 'mutationAuthority' "$OUT/orchestrators.tsv"
+
+      - name: 5 - Root reactor OpenRewrite dry run
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp             -Pm3-nebula-file-convergence             rewrite:dryRunNoFork
+
+      - name: 6 - Apply candidate only in disposable checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp             -Pm3-nebula-file-convergence             rewrite:runNoFork
+          git diff --check
+          python3 m3/ci/verify-file-local-candidate.py \
+            --repo . \
+            --output m3/recipe-first/target/nebula-m3-dag/candidate-paths.txt
+          git diff --binary > m3/recipe-first/target/nebula-m3-dag/candidate.patch
+
+      - name: 7 - Second pass must be fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -path '*/target/rewrite/rewrite.patch' -delete || true
+          mvn -B -ntp             -Pm3-nebula-file-convergence             rewrite:dryRunNoFork
+          if find . -path '*/target/rewrite/rewrite.patch' -type f -size +0c -print -quit | grep -q .; then
+            echo 'M3 fixed-point failure: second OpenRewrite pass still proposes changes.'
+            find . -path '*/target/rewrite/rewrite.patch' -type f -size +0c -print
+            exit 1
+          fi
+
+      - name: 8 - Re-prove recipe tests after candidate application
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/recipe-first/pom.xml             -Psemantic-coverage             verify
+
+      - name: 9 - Preserve candidate and DAG evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: nebula-m3-one-build-convergence
+          if-no-files-found: error
+          path: |
+            m3/recipe-first/target/nebula-m3-dag/**

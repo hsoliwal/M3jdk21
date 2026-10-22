@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.MethodSignalEvidence
+displayName: Install Nebula M3 method-signal evidence
+description: >
+  Source-sealed M3 control-plane enhancement that adds method-coordinate structural,
+  fast-search and Java-before-JNI evidence without changing product source.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.convergence.NebulaM3MethodSignalEvidenceRecipe

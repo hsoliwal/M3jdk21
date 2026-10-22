@@ -1,0 +1,11 @@
+# Qualified local-body successor intake
+
+This intake receives 30 exact source/rights files (20 donor bodies (Java sources, tests, build metadata, documentation and provenance) and 10 own-origin rights files), 27 distinct Git blobs and 168,689 bytes. The canonical source origin is `2ac68d453ff16116b732a28675cda2359d413f01` in [Synexia PR #12900](https://github.com/hsoliwal/com.synexia/pull/12900). The receiving predecessor is `a98213b14873f25422348822c9ac4eb6c5b20bf8`, tree `05dd56816f685e5de89fd2b5e54dd30664a1b099`. The previous 8,784-file receiving packet is preserved.
+
+The source packet is `synexia-openrewrite-recipes/recipe-crates/m3-bounded-donor-recovery-20261021/local-body-successor-20261022`. It freshly executed the existing historical custody owner and unchanged harness: one actual JUnit method, 30 first changes, zero fixed-point changes, 16 partial/order trials and seven refusal cases. Independent validation checked all 30 generated Git blobs and 45 protected inputs. These results are new 2026-10-22 evidence; the lost earlier 30-file packet is not reused or claimed recovered.
+
+QUALIFICATION.json and SOURCE_ORIGINS.json are copied byte for byte from that source packet. Their pending-publication fields are historical qualification-time observations. INTAKE.json binds them to the actual published source commit. RECEIVING_MANIFEST.tsv maps every target file to its canonical path, exact Git/SHA-256 identity, size and mode.
+
+Content/mode drift trials can produce intermediate SDK candidates before an error. The harness discards the complete errored run and writes no rejected candidate; the SDK is not asserted transactional.
+
+The unchanged text owner `14c383724cd3e9dda80d9311e298cc4ed4cf46c7` generates these five metadata records through a separately qualified named recipe. Source custody does not activate another product class or add a Synexia runtime layer. Retain original headers; the core and tooling LICENSE, NOTICE, COPYRIGHT.md and LICENSE.spdx records; the SpecGrep LICENSE and NOTICE records; and the four earlier M3Scale rights companions. The retained dependency frontier and later-file work remain explicit. No donor semantic/performance pass, complete donor reactor, full JDK/jtreg/platform pass, full estate transfer or product phase advance is claimed.

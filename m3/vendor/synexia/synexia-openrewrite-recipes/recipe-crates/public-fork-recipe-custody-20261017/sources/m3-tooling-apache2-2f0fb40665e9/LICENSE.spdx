@@ -1,0 +1,14 @@
+SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+SPDX-License-Identifier: Apache-2.0
+
+Scope: first-party M3, M3Scale, M3Index, and Synexia work expressly admitted to
+this repository's bounded Apache-2.0 release surface, unless a file or path
+records another applicable license or copyright owner.
+
+“Synexia Project” identifies project stewardship; it does not itself assert a
+copyright assignment from contributors to a separate legal entity.
+
+Third-party and mixed-provenance material retain upstream SPDX identifiers,
+copyrights, licenses, NOTICE files, attribution, and modification obligations.
+
+See LICENSE, COPYRIGHT.md, AUTHORS.md, and NOTICE.

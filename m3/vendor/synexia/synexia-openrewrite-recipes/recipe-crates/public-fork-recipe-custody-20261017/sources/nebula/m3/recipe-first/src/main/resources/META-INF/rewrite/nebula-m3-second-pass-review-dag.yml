@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: EPL-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.SecondPassReviewDag
+displayName: Nebula M3 full second-pass review DAG
+description: >-
+  Read-only Nebula wrapper over the canonical Synexia second-pass review atoms:
+  structural code signals, bounded atom/pattern signal-chain evidence, serial
+  LeetCode/HackerRank/GeeksforGeeks problem/donor planning, and JNI contract
+  inventory. Candidate evidence only; no mutation, replacement, equivalence,
+  native-execution, or promotion authority.
+recipeList:
+  - com.synexia.rewrite.M3CodeSignalTriggerRecipe
+  - com.synexia.rewrite.M3AtomPatternSignalChain
+  - com.synexia.M3ProblemRecipePlanner
+  - com.synexia.rewrite.M3JniContractInventoryRecipe

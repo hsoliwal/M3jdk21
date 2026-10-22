@@ -1,0 +1,47 @@
+{
+  "schema": "SYNEXIA_VIEWPORT_RECIPE_PACKET_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "recipe_name": "com.synexia.nebula.SelectionOccurrence20261017",
+  "crate": "m3-nebula-selection-occurrence-20261017",
+  "target_repository": "hsoliwal/nebula",
+  "target_revision": "91c474935eb4a06e46716a0188b9082f0af0eda9",
+  "targets": [
+    {
+      "path": "widgets/grid/org.eclipse.nebula.widgets.grid.test/pom.xml",
+      "kind": "text",
+      "preimage_sha256": "6ee366932658047abd693f9e9462c2ade4de663b21d5de72e7cdc41be51ed109",
+      "postimage_sha256": "a84523a9ff07d88ab6b24369fae7552f09f5fd3e73c757e237c752907721deba",
+      "preimage_git_blob": "c09b05ac0737834c82fea8488f3a83832cf5c75c",
+      "postimage_git_blob": "14d9505b0b477793f15219f842045e27bfd1d8a1",
+      "resource": "target-000.text.txt"
+    },
+    {
+      "path": "widgets/grid/org.eclipse.nebula.widgets.grid.test/src/org/eclipse/nebula/widgets/grid/GridSelectionOccurrence_Test.java",
+      "kind": "java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "b51b3e10e7c1b77bd3a10ef1c423a34bb156d55e5e4971bc1575b53f35b9ca03",
+      "preimage_git_blob": "ABSENT",
+      "postimage_git_blob": "8bc889b4e5b353960d9d32ef2936b2ff1be82334",
+      "resource": "target-001.java.txt"
+    },
+    {
+      "path": "widgets/grid/org.eclipse.nebula.widgets.grid/src/org/eclipse/nebula/widgets/grid/GridSelectionList.java",
+      "kind": "java",
+      "preimage_sha256": "4c89f1aea123614def63067ae49092ba70706d1bab1944cf527e0d48cd726378",
+      "postimage_sha256": "6f953da39e7450fd3a30b39ecba21714bc686366ea8ad9ea1016f947b1d9cfa2",
+      "preimage_git_blob": "e3ecd71dcb7d52559f53fa56e1b1c3416069e9a0",
+      "postimage_git_blob": "eb42b7d19601507e8611edd44a0756a3e08bf880",
+      "resource": "target-002.java.txt"
+    }
+  ],
+  "runtime_gate_status": "SEPARATE_TARGET_EVIDENCE_REQUIRED",
+  "reused_sdk_harness": {
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+    "git_blob": "3ff7e6f49fd75a34d0991ced8d069b956da0ee49"
+  },
+  "reused_receiver": {
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/receive.py",
+    "git_blob": "7b441c78df78c5c0dcc2f8a3526d588981880037"
+  },
+  "canonical_engine_revision": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa"
+}

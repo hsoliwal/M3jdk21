@@ -1,0 +1,10 @@
+﻿Synexia SpecGrep Apache-2.0 release candidate assembled from F:\ws2\com.synexia\synexia-specgrep on soliwallaptop.
+
+Observed upstream signal at package time:
+- README declares Author: Synexia Group (Hitesh Soliwal <hsoliwal@gmail.com>).
+- README declares License: Apache-2.0.
+- Top-level LICENSE at module root: present.
+- Top-level NOTICE at module root: present.
+
+This package preserves upstream root notices when present and also ships
+the extracted UPSTREAM_LICENSE_SIGNAL.txt so the packaging basis remains reviewable.

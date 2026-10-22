@@ -1,0 +1,6 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3CommonsStreams
+displayName: Install source-sealed commons stream superset bridge
+recipeList:
+  - com.synexia.rewrite.M3CommonsStreamsRecipe

@@ -1,0 +1,6 @@
+{
+  "findings": [],
+  "overall_correctness": "patch is correct",
+  "overall_explanation": "The change implements bounded parser reuse with a full reset before every parse, creates an independent fresh parser for each schedule replay, and preserves the existing corpus, compilation, behavior, contract, payload, and fixed-point checks. The recipe ordering, exact preimage hashes, postimage resources, and mastery installer blob pins are synchronized, while unknown drift and unrelated paths remain refused or ignored as intended. No actionable defect is evident in the provided bundle.",
+  "overall_confidence": 0.93
+}

@@ -1,0 +1,6 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3GuavaStreams
+displayName: Install source-sealed guava stream superset bridge
+recipeList:
+  - com.synexia.rewrite.M3GuavaStreamsRecipe

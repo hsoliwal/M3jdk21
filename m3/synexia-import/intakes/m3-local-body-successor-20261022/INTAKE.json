@@ -1,0 +1,52 @@
+{
+  "schema": "M3_LOCAL_BODY_SUCCESSOR_INTAKE_V1",
+  "status": "PUBLISHED_SOURCE_CUSTODY_WITH_FRESH_SDK_QUALIFICATION",
+  "canonical_source": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "2ac68d453ff16116b732a28675cda2359d413f01",
+    "tree": "0b6ebbf9fc2a46be48bc8cf5691ae43b7b59748f",
+    "parent": "254ffddfd71d640b49b9b818b765a72147de5aa6",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12900",
+    "pull_request_number": 12900,
+    "snapshot_head": "2ac68d453ff16116b732a28675cda2359d413f01",
+    "scope": "Immutable source-custody origin; later recipe/proof-only commits may advance the PR head."
+  },
+  "canonical_packet": "synexia-openrewrite-recipes/recipe-crates/m3-bounded-donor-recovery-20261021/local-body-successor-20261022",
+  "receiver_repository": "hsoliwal/M3jdk21",
+  "receiver_commit": "a98213b14873f25422348822c9ac4eb6c5b20bf8",
+  "receiver_tree": "05dd56816f685e5de89fd2b5e54dd30664a1b099",
+  "new_custody_files": 30,
+  "new_custody_bytes": 168689,
+  "new_body_files": 20,
+  "own_origin_rights_files": 10,
+  "distinct_custody_blobs": 27,
+  "combined_source_custody_paths": 8791,
+  "combined_source_custody_bytes": 98074941,
+  "receiving_manifest": "RECEIVING_MANIFEST.tsv",
+  "qualification_record": {
+    "path": "QUALIFICATION.json",
+    "git_blob": "80da45013161f1502dd9356141a7ede865c8323d",
+    "sha256": "5bc7febe5c9d345f6509569c2fa7c60398c2c58a7d033da54737906974397463",
+    "bytes": 4250
+  },
+  "source_origins_record": {
+    "path": "SOURCE_ORIGINS.json",
+    "git_blob": "5022e802f39626042df9167bbba577d3117fbb71",
+    "sha256": "9e90a4fe9b5fe9639c37d453bc3c045e9973c93d71da511199855423f5437506",
+    "bytes": 42546
+  },
+  "historical_status_note": "QUALIFICATION.json and SOURCE_ORIGINS.json are unchanged qualification-time records. Their pending-publication fields describe the earlier observation; this intake supplies the actual source origin after publication.",
+  "preserved_prior_receiving_scope": {
+    "paths": 8784,
+    "commit": "a98213b14873f25422348822c9ac4eb6c5b20bf8",
+    "tree": "05dd56816f685e5de89fd2b5e54dd30664a1b099"
+  },
+  "rights": "Retain per-file headers and origin-specific rights/provenance records. Existing M3Scale rights references remain attached through the earlier five-file intake.",
+  "qualification_scope": "Exact source custody, fixed point, partial-order and refusal checks. This intake does not claim semantic correctness or performance of the recovered donor implementations.",
+  "sdk_refusal_boundary": "Content-drift and mode-drift trials each produce three SDK candidate changes including two relocations before the recorded error; the harness discards the entire errored run and writes no rejected candidate. The SDK itself is not asserted transactional.",
+  "dependency_frontier": "synexia-openrewrite-recipes/recipe-crates/m3-bounded-donor-recovery-20261021/local-body-successor-20261022/DEPENDENCY_FRONTIER.json",
+  "runtime_activation": false,
+  "new_java_jni_product_changes": 0,
+  "full_estate_transfer": false,
+  "phase_advance": false
+}

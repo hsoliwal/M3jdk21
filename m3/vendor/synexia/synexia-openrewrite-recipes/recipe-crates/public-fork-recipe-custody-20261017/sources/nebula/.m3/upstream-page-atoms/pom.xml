@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.recipes</groupId><artifactId>nebula-upstream-page-atoms</artifactId><version>1.0.0</version>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><nebula.root>${project.basedir}/../..</nebula.root><apply.mode>--check</apply.mode></properties>
+  <!-- Verification-tool dependencies only. Does not reparent or change Nebula's Tycho build. -->
+  <dependencies>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.eclipse.platform</groupId><artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId><version>3.128.0</version></dependency>
+    <dependency><groupId>org.eclipse.platform</groupId><artifactId>org.eclipse.equinox.common</artifactId><version>3.19.0</version></dependency>
+  </dependencies>
+  <build><sourceDirectory>${project.basedir}</sourceDirectory><plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><includes><include>RunUpstreamRecipe.java</include><include>PageContract.java</include></includes><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
+    <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version><executions><execution><id>execute-real-upstream-and-contracts</id><phase>verify</phase><goals><goal>exec</goal></goals><configuration><executable>${java.home}/bin/java</executable><arguments><argument>-XX:-OmitStackTraceInFastThrow</argument><argument>-classpath</argument><classpath/><argument>RunUpstreamRecipe</argument><argument>${nebula.root}</argument><argument>${project.basedir}</argument><argument>${apply.mode}</argument></arguments></configuration></execution></executions></plugin>
+  </plugins></build>
+  <profiles><profile><id>apply</id><properties><apply.mode>--apply</apply.mode></properties></profile></profiles>
+</project>

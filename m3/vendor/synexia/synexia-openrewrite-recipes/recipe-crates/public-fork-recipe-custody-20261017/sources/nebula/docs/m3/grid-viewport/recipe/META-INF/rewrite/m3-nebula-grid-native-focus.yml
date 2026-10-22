@@ -1,0 +1,15 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.NebulaGridNativeTreeFocus
+displayName: The native look draws no focus rectangle over a selected tree row
+description: >-
+  The native tree (Explorer theme) shows a focused selected row by its selection only: with keyboard cues shown or
+  hidden it draws no dotted focus rectangle over it (GridNativeLook_Test, scene tree-selected-focused, cues set
+  explicitly). The native look's focus renderer returns before drawing for such a row.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.GridNativeLook$Focus, org.eclipse.nebula.widgets.grid.GridNativeLook.Focus]
+      methodName: paint
+      anchor: "final Rectangle b = getBounds();"
+      position: BEFORE
+      statements: "\t\t\tif (isTree(grid) && grid.isSelected((GridItem) value)) {\n\t\t\t\t// the native tree shows a focused selected row by its selection, with no focus rectangle\n\t\t\t\treturn;\n\t\t\t}"

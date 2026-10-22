@@ -1,0 +1,187 @@
+// SPDX-License-Identifier: EPL-2.0
+package org.eclipse.nebula.m3.rewrite.convergence;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+/**
+ * Content-addressed, scheduler-neutral handoff bundle for mechanical reuse of the proven Nebula M3
+ * recipe atoms.
+ *
+ * <p>The bundle is evidence only. It binds the exact FILE recipe DAG, scheduler projections,
+ * canonical scope order, target repositories and ordered backport plan into one immutable root.
+ * Neither the bundle nor Camel/Airflow/Drools owns source mutation or promotion authority.</p>
+ */
+public final class NebulaM3BackportBundle {
+    public static final String SCHEMA = "NEBULA_M3_BACKPORT_BUNDLE_V1";
+
+    public record Target(
+            int ordinal,
+            String repository,
+            String lane,
+            NebulaM3RefactorScope maximumScope,
+            String prerequisiteStep,
+            boolean mutationAuthority,
+            boolean promotionAuthority) {
+        public Target {
+            if (ordinal < 0) throw new IllegalArgumentException("ordinal");
+            repository = text(repository, "repository");
+            lane = text(lane, "lane");
+            maximumScope = Objects.requireNonNull(maximumScope, "maximumScope");
+            prerequisiteStep = text(prerequisiteStep, "prerequisiteStep");
+            if (mutationAuthority || promotionAuthority) {
+                throw new IllegalArgumentException(
+                        "backport bundle target may not own mutation/promotion authority");
+            }
+        }
+    }
+
+    private static final List<Target> TARGETS =
+            List.of(
+                    new Target(
+                            0,
+                            "hsoliwal/com.synexia",
+                            "CANONICAL_RECIPE_ABSORPTION_AND_PROOF",
+                            NebulaM3RefactorScope.FILE,
+                            "nebula-portable-proof",
+                            false,
+                            false),
+                    new Target(
+                            1,
+                            "hsoliwal/M3jdk21",
+                            "JAVA21_JEP_PR_TOOLING_BACKPORT",
+                            NebulaM3RefactorScope.LIBRARY_API,
+                            "synexia-prove-canonical-dag",
+                            false,
+                            false));
+
+    private static final String ROOT = sha256(tsv());
+
+    private NebulaM3BackportBundle() {}
+
+    public static List<Target> targets() {
+        return TARGETS;
+    }
+
+    public static String root() {
+        return ROOT;
+    }
+
+    public static boolean mutationAuthority() {
+        return false;
+    }
+
+    public static boolean promotionAuthority() {
+        return false;
+    }
+
+    public static String tsv() {
+        StringBuilder out = new StringBuilder();
+        row(out, "key", "value");
+        row(out, "schema", SCHEMA);
+        row(out, "javaRelease", Integer.toString(NebulaM3TransferContract.JAVA_RELEASE));
+        row(out, "openRewriteVersion", NebulaM3TransferContract.OPENREWRITE_VERSION);
+        row(out, "recipeDagRoot", NebulaM3RecipeDagManifest.root());
+        row(out, "orchestratorPlansRoot", NebulaM3OrchestratorPlans.root());
+        row(out, "transferRoot", NebulaM3TransferContract.root());
+        row(out, "backportPlanRoot", NebulaM3BackportPlan.root());
+        row(out, "scopeOrder", NebulaM3TransferContract.refactorScopeOrder());
+        row(
+                out,
+                "orchestrators",
+                NebulaM3RecipeDagManifest.orchestrationTargets().stream()
+                        .sorted(java.util.Comparator.comparing(Enum::name))
+                        .map(Enum::name)
+                        .collect(Collectors.joining(",")));
+        row(out, "mutationAuthority", "false");
+        row(out, "promotionAuthority", "false");
+
+        out.append('\n');
+        out.append("ordinal\trepository\tlane\tmaximumScope\tprerequisiteStep")
+                .append("\tmutationAuthority\tpromotionAuthority\n");
+        for (Target target : TARGETS) {
+            out.append(target.ordinal())
+                    .append('\t')
+                    .append(target.repository())
+                    .append('\t')
+                    .append(target.lane())
+                    .append('\t')
+                    .append(target.maximumScope().name())
+                    .append('\t')
+                    .append(target.prerequisiteStep())
+                    .append("\tfalse\tfalse\n");
+        }
+
+        out.append('\n');
+        out.append("ordinal\tatomId\tphase\trecipeClass\tscope\tauthority\tdependsOn\n");
+        for (NebulaM3RecipeDagManifest.Node node : NebulaM3RecipeDagManifest.nodes()) {
+            out.append(node.ordinal())
+                    .append('\t')
+                    .append(node.id())
+                    .append('\t')
+                    .append(node.phase().name())
+                    .append('\t')
+                    .append(node.recipeClass())
+                    .append('\t')
+                    .append(node.scope())
+                    .append('\t')
+                    .append(node.authority())
+                    .append('\t')
+                    .append(String.join(",", node.dependsOn()))
+                    .append('\n');
+        }
+
+        out.append('\n');
+        out.append("ordinal\tbackportStep\tphase\trepository\tmaximumScope\tdependsOn\n");
+        for (NebulaM3BackportPlan.Step step : NebulaM3BackportPlan.steps()) {
+            out.append(step.ordinal())
+                    .append('\t')
+                    .append(step.id())
+                    .append('\t')
+                    .append(step.phase().name())
+                    .append('\t')
+                    .append(step.repository())
+                    .append('\t')
+                    .append(step.maximumScope().name())
+                    .append('\t')
+                    .append(String.join(",", step.dependsOn()))
+                    .append('\n');
+        }
+        return out.toString();
+    }
+
+    private static void row(StringBuilder out, String key, String value) {
+        out.append(text(key, "key"))
+                .append('\t')
+                .append(text(value, "value"))
+                .append('\n');
+    }
+
+    private static String text(String value, String field) {
+        String checked = Objects.requireNonNull(value, field).strip();
+        if (checked.isEmpty()
+                || checked.indexOf('\0') >= 0
+                || checked.indexOf('\t') >= 0
+                || checked.indexOf('\n') >= 0
+                || checked.indexOf('\r') >= 0) {
+            throw new IllegalArgumentException(field);
+        }
+        return checked;
+    }
+
+    private static String sha256(String value) {
+        try {
+            return HexFormat.of()
+                    .formatHex(
+                            MessageDigest.getInstance("SHA-256")
+                                    .digest(value.getBytes(StandardCharsets.UTF_8)));
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
+        }
+    }
+}

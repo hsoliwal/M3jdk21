@@ -1,0 +1,145 @@
+{
+  "schema": "M3_BOUNDED_DONOR_RECOVERY_QUALIFICATION_V1",
+  "status": "PASS_BOUNDED_HISTORY_AND_SOURCE_CUSTODY_SDK",
+  "canonical_parent": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
+  "files": 15,
+  "bytes": 82313,
+  "public_history": {
+    "files": 10,
+    "bytes": 63216,
+    "engine_git_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+    "engine_role": "Unchanged current408 canonical text owner",
+    "output_root": "public-history/generated/m3-state-masked-history-recovery-20261021",
+    "manifest": {
+      "bytes": 3191,
+      "sha256": "47446a749ffa7bb4c2f919dda6c5a1438e261b7fbdd90bcadf9b946b238f6995",
+      "git_blob": "88a9682dd9e186bbf4b668f30729dddd2523ebd1"
+    },
+    "original_manifest": "Retained unchanged; actual engine refusal is a passing regression case.",
+    "fixed_point": "PASS: zero changes on returned postimages",
+    "reversed_order_and_repeated_replay": "PASS",
+    "named_descriptor": "PASS",
+    "occupied_all_ten_and_duplicate_refusals": "PASS"
+  },
+  "private_source": {
+    "files": 5,
+    "bytes": 19097,
+    "engine_git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+    "engine_role": "Historical canonical owner from PR12335; absent from current408 global Java tree",
+    "helper_lineage": {
+      "manifest_matches_current_canonical_git_blob": true,
+      "recipe_current_canonical_git_blob": "2439c141937ba1e94ca3c9b0f68b4cc1c28348f7",
+      "recipe_current_identity_match": false,
+      "qualification_scope": "Genuine pinned public target helper; no a1a6fd0 helper identity evidence available"
+    },
+    "output_root": "private-source/target/generated",
+    "manifest": {
+      "bytes": 1733,
+      "sha256": "937f24e840c7fe4db8f2d0a7c9bcac28494e23d86a193bf828e7ef32e3dfd2d7",
+      "git_blob": "52a7f285fedfb0943b78f652ed65ff8dd294c171"
+    },
+    "first_changes": 5,
+    "fixed_point_changes": 0,
+    "reversed_order": "PASS",
+    "partial_state_order_trials": 16,
+    "refusal_cases": 7,
+    "sdk_receipt": {
+      "path": "private-source/evidence/sdk/SDK_RECEIPT.json",
+      "bytes": 796,
+      "sha256": "74740ebc58fef78103cc2559044d599f3bf6da625beb3054c40b71ff27e00f92",
+      "git_blob": "45f533c1ad3d44ed4c13bea7972a4945c0ab24b7"
+    }
+  },
+  "execution": {
+    "public-history": {
+      "receipt": {
+        "path": "evidence/public-history-MAVEN_001.json",
+        "bytes": 1247,
+        "sha256": "652a4c7738c45030e2541b8783e11599ae4e02c328d31a198e24423d0e8adb28",
+        "git_blob": "d8db9be6fd5c8f91d85fc2b431d1f8fc8c34d43a"
+      },
+      "junit_tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "java_version": "21.0.12.1",
+      "test_names": [
+        "driftOrOccupiedAdditionRefuses",
+        "duplicateOwnerRefuses",
+        "everyOccupiedHistoricalDestinationRefuses",
+        "exactEmissionAndFixedPoint",
+        "exactPartialPrePostMixtureConverges",
+        "inputOrderAndRepeatedSerialDeterminism",
+        "missingRequiredInputOrUnrelatedPath",
+        "namedDescriptorUsesExistingEngineAndExactResources",
+        "originalNestedResourceManifestRefuses"
+      ]
+    },
+    "private-source": {
+      "receipt": {
+        "path": "evidence/private-source-MAVEN_001.json",
+        "bytes": 1296,
+        "sha256": "e9e25ad04eae45967d788cf7b6c6feef1959a33b4e083d5c06d922a28f397c00",
+        "git_blob": "00d005c2757f004cfade0c24a1dc70cd161aae1f"
+      },
+      "junit_tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "java_version": "21.0.12.1",
+      "test_names": [
+        "qualifyExactBundleAndRefusalsThenMaterializeOnlySdkOutputs"
+      ]
+    }
+  },
+  "reports": {
+    "public-history": {
+      "path": "public-history/recipe-host/target/surefire-reports/TEST-com.synexia.rewrite.BoundedPublicHistoryRecipeTest.xml",
+      "bytes": 19515,
+      "sha256": "fad5808c3e2f4c8b6cb66289005b86c98d46689d37a2d0b8d6929a57d2013067",
+      "git_blob": "f00b0999a6ed5be0c13ff19a748a64eb50e5ec5b"
+    },
+    "private-source": {
+      "path": "private-source/target/surefire-reports/TEST-com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.xml",
+      "bytes": 16690,
+      "sha256": "b61848c367a296aebb97d791f2b60c1486ac3a2600d9695e76c6cc93e8dbfa1d",
+      "git_blob": "36913cce482cbb6fe7862e279ea9c58ca4cf46dd"
+    }
+  },
+  "compiler": "Actual Java21 strict -Xlint:all -Werror; unchanged engine sources.",
+  "toolchain": "Explicitly reduced pinned Java21 distribution with CDS disabled; not a complete JDK distribution.",
+  "install_manifest": {
+    "path": "INSTALL_MANIFEST.tsv",
+    "bytes": 8399,
+    "sha256": "3c2c1131e068e3492e5d74aad6d15fca2c94b2dfad5e560ebdd9fe3bb945c66d",
+    "git_blob": "ab3d1ed15762e054109e10fe8c9e4cc0352c9b9b"
+  },
+  "output_seals": {
+    "path": "evidence/OUTPUT_SEALS.json",
+    "bytes": 17386,
+    "sha256": "d416723725547fc06d5ee3b6d96352f9688bdfdead091df3c542dc6f3a2e9fe3",
+    "git_blob": "e88499cda6f2c9e2e6fc405843e4f0b4b53941ef"
+  },
+  "independent_readback": {
+    "path": "evidence/INDEPENDENT_READBACK.json",
+    "bytes": 2350,
+    "sha256": "fc683df84d206c31151dfdfcce2dccf23813bbf0926a2b85ed0b73fd01d14379",
+    "git_blob": "db043f7c0fe1856feb306dc5c48f8c175b6842ab"
+  },
+  "correction_memory": {
+    "recorded": "ca6ea2e67ed2bed073a1e344cdf9295c1df87d4d3346790f4c148ba1c6ab602e",
+    "validated": "12e7af704984276b971785edf6fbc3c5012f9a6c461561cbc35393f11b1bdfd4"
+  },
+  "protected_prior_files": 96,
+  "protected_prior_files_unchanged": true,
+  "canonical_receiving": "NOT_RUN",
+  "publication": "ROOT_OWNED_PENDING",
+  "global_provenance_or_release_admission": "NOT_RUN",
+  "full_reactor": "NOT_RUN",
+  "java_jni_product_qualification": "NOT_RUN",
+  "historical_dataset_algorithm_execution": "NOT_RUN",
+  "active_recipe_registration": "NOT_PERFORMED",
+  "phase_advance": false,
+  "all_repository_work_complete": false,
+  "external_writes": 0
+}

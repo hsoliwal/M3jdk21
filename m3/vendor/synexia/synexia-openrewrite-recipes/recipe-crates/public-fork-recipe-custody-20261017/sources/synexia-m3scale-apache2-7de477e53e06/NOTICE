@@ -1,0 +1,33 @@
+M3 / Synexia first-party work
+Copyright © 2026 Hitesh Soliwal and Contributors to the Synexia Project
+Licensed under the Apache License, Version 2.0, within the repository's bounded
+first-party release surface and subject to all path-specific provenance.
+
+M3, M3Scale, and M3Index copyrightable first-party source, specifications,
+documentation, diagrams, tests, recipes, manifests, and independently authored
+implementations are attributed to their respective M3/Synexia authors.
+Abstract ideas, algorithms, methods of operation, and general engineering
+concepts are not claimed as copyright property by this notice.
+
+Third-party and donor materials retain their original copyright, licenses,
+NOTICE files, attribution, and modification obligations. Nothing in this
+notice blanket-relicenses donor material.
+
+See COPYRIGHT.md and LICENSE.spdx for the detailed boundary.
+
+------------------------------------------------------------------------------
+
+﻿synexia-m3scale Apache-2.0 bounded release candidate.
+
+Release surface: F:\ws2\com.synexia\synexia-m3scale
+Host: soliwallaptop
+Date: 2026-03-10
+
+This NOTICE applies only to the bounded release surface in this module root.
+It does not blanket-relicense sibling modules, donor corpora, commercial references, or mixed-provenance workspaces.
+
+Summary: M3 scaling and cloner-aligned orchestration surface.
+Packaging signal: Buildable Maven surface observed; root Apache packaging files were added by M3 packaging on 2026-03-10.
+
+Governance boundary:
+- docs/m3/M3_APACHE2_RELEASE_BOUNDARY.md

@@ -1,0 +1,18 @@
+{
+  "source_sha256": "e884e42f015021e50146d3550ae9553b80995c201654d9bf080e7bc472c9992a",
+  "junit_report_sha256": "ecb2a5a89744078adabac490730daa4b1423bccd4af7e2b6713ad4693937a435",
+  "receipts": [
+    {
+      "stage": "compile",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "execute",
+      "exit_code": 0,
+      "log_sha256": "86726ef0344e9bc4f0b1a525eefa85539a4e01e3e23d6de4b850908b15d0179c"
+    }
+  ],
+  "runtime_admission": "PASS",
+  "limits": "Only executed owned task gate cases; no repository atom inventory or ancestor handle lifetime admission"
+}

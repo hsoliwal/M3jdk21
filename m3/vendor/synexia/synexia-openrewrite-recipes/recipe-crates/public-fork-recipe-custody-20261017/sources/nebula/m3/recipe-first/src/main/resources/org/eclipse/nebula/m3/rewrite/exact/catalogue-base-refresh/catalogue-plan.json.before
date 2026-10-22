@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "base_revision": "62ef3a8135e5d8b57fdd5f5c3c6c5f6c95871e07",
+  "allowed_paths": [
+    "widgets/**"
+  ],
+  "recipes": [
+    {
+      "name": "org.eclipse.nebula.m3.rewrite.NebulaM3Java21ConvergenceRecipe",
+      "artifacts": [
+        "org.eclipse.nebula.m3:nebula-m3-recipe-first:1.0.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "org.openrewrite.java.RemoveUnusedImports",
+      "artifacts": []
+    }
+  ]
+}

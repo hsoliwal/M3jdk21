@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.recipe</groupId>
+  <artifactId>openrewrite-line-terminators</artifactId>
+  <version>8.90.4-m3-javadoc-e898332e8f88</version>
+  <name>Pinned OpenRewrite Java line terminator proof</name>
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputTimestamp>2026-10-04T00:00:00Z</project.build.outputTimestamp>
+    <rewrite.version>8.90.4</rewrite.version>
+    <m3.nebula.root>${project.basedir}/src/test/resources/original-nebula</m3.nebula.root>
+    <m3.nebula.currentRoot>${project.basedir}/../..</m3.nebula.currentRoot>
+  </properties>
+  <dependencies>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version><scope>runtime</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.1</version><scope>test</scope></dependency>
+    <dependency><groupId>org.assertj</groupId><artifactId>assertj-core</artifactId><version>3.25.3</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-antrun-plugin</artifactId><version>3.1.0</version>
+        <executions><execution><id>pinned-source-preflight</id><phase>validate</phase><goals><goal>run</goal></goals>
+          <configuration><target><fail message="Pinned parser source or proof drift; refusing compilation">
+            <condition><not><and>
+              <checksum file="${project.basedir}/original/org/openrewrite/internal/StringUtils.java" algorithm="SHA-256" property="f4553eb99b38900f9df2174d5cda3dbce5f6d540ffdb16d0a298067bf40d980c"/>
+              <checksum file="${project.basedir}/original/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java" algorithm="SHA-256" property="97e714c2521ccc89acc57e7794f487c89e9a11948e6318facb167700492f0eea"/>
+              <checksum file="${project.basedir}/original/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java" algorithm="SHA-256" property="5f38b8f07c505e260dccd46dda76ffb21059828ea5a0da954795c8cc23f92962"/>
+              <checksum file="${project.basedir}/src/main/java/org/openrewrite/internal/StringUtils.java" algorithm="SHA-256" property="c45d0995b7354a1126024de0fd8f3aa1505f26edc6d9236c0401b4313607ddfb"/>
+              <checksum file="${project.basedir}/src/main/java/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java" algorithm="SHA-256" property="e898332e8f884566db04cd75535b3a19456f19af9ff500436fe8a9dd3b999c63"/>
+              <checksum file="${project.basedir}/src/main/java/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java" algorithm="SHA-256" property="5d68d38bdd7afad3680cc49736795671cf2165333d92b086b3d028404ff3a6ff"/>
+              <checksum file="${project.basedir}/src/test/java/com/synexia/recipe/JavaLineTerminatorsTest.java" algorithm="SHA-256" property="175a33a23d770a5481a69677054e757ea2e62cecab98c615268d159bfd17f998"/>
+              <checksum file="${project.basedir}/src/test/java/org/openrewrite/Issue.java" algorithm="SHA-256" property="018a1dea9f9c1275e1f2074846f8d0b4e587d2d1e8c83e6fa07581690599ca39"/>
+              <checksum file="${project.basedir}/src/test/java/org/openrewrite/internal/StringUtilsTest.java" algorithm="SHA-256" property="4b17e488facadac0d03503054c017fc6145c45af5c544d2e8057198dc94fda39"/>
+              <checksum file="${project.basedir}/src/test/resources/roundscale/Checkout.java.txt" algorithm="SHA-256" property="2b8574dbbde69addfe473d96a6767cdf635ac09b2ac8b8cfcba817b237ee4c32"/>
+              <checksum file="${project.basedir}/src/test/resources/roundscale/Git.java.txt" algorithm="SHA-256" property="09fa50c810f66c351000b350588d36716fd02d93657f626ce0fa1498f0a109a8"/>
+              <checksum file="${project.basedir}/src/test/java/com/synexia/recipe/JavadocThrowsBoundaryTest.java" algorithm="SHA-256" property="ff015300b5d196b17848f747babccb4d6d7ae09c3fcfacf65ee0bdee47225da6"/>
+              <checksum file="${project.basedir}/candidate.patch" algorithm="SHA-256" property="434295abc5384c31f072056340ffd61bf6e3886a1bc29c0259a27c49239f30b6"/>
+              <checksum file="${settings.localRepository}/org/openrewrite/rewrite-core/8.90.4/rewrite-core-8.90.4.jar" algorithm="SHA-256" property="12168e8045fb62c1b3f3ad3f3ef8895db84e2791d8c811aefda410e262266503"/>
+              <checksum file="${settings.localRepository}/org/openrewrite/rewrite-java/8.90.4/rewrite-java-8.90.4.jar" algorithm="SHA-256" property="c18f5b86a2401f64d82d036460e15937dfd87d41e3b9772757cadee89b89c5bb"/>
+              <checksum file="${settings.localRepository}/org/openrewrite/rewrite-java-21/8.90.4/rewrite-java-21-8.90.4.jar" algorithm="SHA-256" property="099c9ba2ce7248b34482e33885ce7cf7154c717748f1e909c26fa32a48feae9a"/>
+              <checksum file="${settings.localRepository}/org/openrewrite/rewrite-java-lombok/8.90.4/rewrite-java-lombok-8.90.4.jar" algorithm="SHA-256" property="db47834696d127a836b4ac51225bbe1a5b2dbab155c9f44f1b0c5cd582a6f741"/>
+              <checksum file="${settings.localRepository}/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar" algorithm="SHA-256" property="d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"/>
+            </and></not></condition>
+          </fail></target></configuration>
+        </execution></executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg><arg>-Werror</arg>
+            <!-- These exports match the pinned donor Java21 module build. -->
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <systemPropertyVariables>
+            <m3.nebula.root>${m3.nebula.root}</m3.nebula.root>
+            <m3.nebula.currentRoot>${m3.nebula.currentRoot}</m3.nebula.currentRoot>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

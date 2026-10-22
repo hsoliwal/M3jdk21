@@ -1,0 +1,42 @@
+{
+  "commit": "775b9c18282da63742b599e6406f331194b918e7",
+  "module": "recipe-first",
+  "cycle": "3",
+  "offline": true,
+  "command": [
+    "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.cmd",
+    "-B",
+    "-ntp",
+    "-o",
+    "-f",
+    "K:\\codex-work\\nebula-stream-segments-20261004\\worktree\\m3\\recipe-first\\pom.xml",
+    "-Dmaven.repo.local=K:\\codex-work\\nebula-stream-segments-20261004\\current-m2-head",
+    "-Dosgi.platform=win32.win32.x86_64",
+    "-Daether.connector.basic.threads=2",
+    "-Dmaven.artifact.threads=2",
+    "verify",
+    "-Psemantic-coverage,dag-manifest,transfer-contract"
+  ],
+  "status": "REFUSED_TIMEOUT",
+  "exit": 1,
+  "runtime_budget_seconds": 1800,
+  "seconds": 1803.83,
+  "reports": [
+    {
+      "path": "worktree\\m3\\recipe-first\\target\\surefire-reports\\TEST-org.eclipse.nebula.m3.NebulaM3A3ApplyTest.xml",
+      "suite": "org.eclipse.nebula.m3.NebulaM3A3ApplyTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "2bc5e4b58084ff8a0bf4171689eed6f124cb8f28874e8e57ea629a7fe522e7cf"
+    }
+  ],
+  "log": "CURRENT-RECIPE-FIRST-QUALIFICATION-R3.log",
+  "log_sha256": "4d07c3eeae1816b9fb0bc640382515b9480add20035ce20e90e7729e29b7ef91",
+  "strict_compiler": "-Xlint:all -Werror -proc:none; original Maven POM unchanged",
+  "combined_task_bytes": 471664768,
+  "free_bytes": 9107243008,
+  "java_temp": "java.io.tmpdir = K:\\codex-work\\nebula-stream-segments-20261004\\current-temp",
+  "scope": "exact current selected modules, finite tests and named integration profiles; whole Nebula Tycho/runtime proof not established"
+}

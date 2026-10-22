@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>com.synexia.review</groupId><artifactId>m3-text-opennlp</artifactId><version>20261014</version><packaging>pom</packaging>
+ <properties><m3.mode>verify</m3.mode></properties>
+ <build><plugins><plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
+  <executions><execution><id>qualify-source-sealed-text-recipe</id><phase>verify</phase><goals><goal>exec</goal></goals>
+   <configuration><executable>bash</executable><arguments><argument>${project.basedir}/receiver.sh</argument><argument>${project.basedir}/../..</argument><argument>${m3.mode}</argument></arguments></configuration>
+  </execution></executions>
+ </plugin></plugins></build>
+</project>

@@ -1,0 +1,279 @@
+{
+  "schema": "M3_HISTORICAL_708_SDK_QUALIFICATION_V1",
+  "timestamp_utc": "2026-10-21T12:38:43Z",
+  "status": "BOUNDED_SDK_CUSTODY_PASS",
+  "scope": "708 missing retained-source identities from the 811 non-JDK files in the selected older 8356-file public custody cohort; 15 donor repositories.",
+  "files": 708,
+  "bytes": 16419211,
+  "unique_git_blobs": 572,
+  "binary_files": 10,
+  "utf8_files": 698,
+  "executable_files": 0,
+  "manifest": {
+    "path": "candidates/custody-historical/CUSTODY_MANIFEST.tsv",
+    "bytes": 322308,
+    "sha256": "b2457be399405d69331193b1482a1be62eaab0fb89952e446a2cc83b921fbb16"
+  },
+  "source_seals": {
+    "path": "candidates/custody-historical/SOURCE_SEALS.json",
+    "bytes": 884765,
+    "sha256": "d218313ba56a3fa793424c161a9884317577e3b0e3a6096e3956d33e01484763"
+  },
+  "engine": {
+    "git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+    "source_sha256": "8c5502392d38a3b778a3f6498d5ced32f6c6693116d6d3b516a162ab50884154",
+    "unchanged": true,
+    "metadata_recipe_compiled_not_applied": true,
+    "real_target_helper_limitation": {
+      "manifest_matches_current_canonical_git_blob": true,
+      "recipe_current_canonical_git_blob": "2439c141937ba1e94ca3c9b0f68b4cc1c28348f7",
+      "recipe_current_identity_match": false,
+      "qualification_scope": "Genuine pinned public target helper; no a1a6fd0 helper identity evidence available"
+    }
+  },
+  "stages": {
+    "public_pinned_acquisition": "PASS",
+    "git_sha256_size_mode_and_original_byte_preservation": "PASS",
+    "strict_java21_compile": "PASS",
+    "actual_offline_SDK_run_001": "PASS",
+    "actual_offline_SDK_run_002": "PASS",
+    "independent_complete_physical_pathset_and_seals": "PASS",
+    "immutable_engine_helpers_harness_previous_qualification_indexes": "PASS",
+    "four_batch_manifest_path_disjointness": "PASS"
+  },
+  "sdk_observations": {
+    "version": "8.17.1",
+    "first_logical_changes_each": 708,
+    "fixed_point_changes_each": 0,
+    "reversed_input_root_matches": true,
+    "partial_state_order_trials_each": 16,
+    "refusal_cases_each": 7,
+    "junit_tests_each": 1,
+    "junit_failures_errors_skips_each": 0,
+    "both_SDK_receipts_sha256": "1d1deb3624cd3b5ef2acd495b872face42278b483fd14141bdbb554b38758ed6",
+    "both_output_seals_sha256": "a96a984d390993330253d5a2c1748dda061184272d0f702302b915706e253d89",
+    "error_bearing_batches_refused_by_harness": true,
+    "engine_transactionality_claim": false
+  },
+  "materialization": {
+    "kind": "PRESEEDED_SINGLE_PHYSICAL_COPY",
+    "output_root": "/workspace/scratch/b4deff766505/work/m3-convergence-20261021/candidates/custody-historical/receiver/m3/vendor/synexia",
+    "input_root": "/workspace/scratch/b4deff766505/work/m3-convergence-20261021/candidates/custody-historical/receiver/m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources",
+    "all_regular": true,
+    "files_are_preseeded_before_SDK": true,
+    "actual_SDK_computes_and_validates_logical_relocations": true,
+    "SDK_payload_filesystem_write_claim": false,
+    "repeat_inode_mtime_size_unchanged": true,
+    "separate_output_payload_copy": false,
+    "candidate_frozen_after_qualification": true,
+    "live_target_writes": 0
+  },
+  "combined_candidate_manifest_scope": {
+    "groups": [
+      {
+        "name": "public-432",
+        "manifest": "candidates/custody/CUSTODY_MANIFEST.tsv",
+        "sha256": "03f3ef8724c477018b2ab107ec037e7d0ea1ace9b807b4169c34ebad21dc953d",
+        "files": 432,
+        "bytes": 19519731
+      },
+      {
+        "name": "public-delta-7566",
+        "manifest": "candidates/custody-delta/CUSTODY_MANIFEST.tsv",
+        "sha256": "815f0b6b84f285694b0b562ab6c0558a4badf887d02b2559728c7941dede83de",
+        "files": 7566,
+        "bytes": 61574030
+      },
+      {
+        "name": "historical-708",
+        "manifest": "candidates/custody-historical/CUSTODY_MANIFEST.tsv",
+        "sha256": "b2457be399405d69331193b1482a1be62eaab0fb89952e446a2cc83b921fbb16",
+        "files": 708,
+        "bytes": 16419211
+      },
+      {
+        "name": "source-owners-50",
+        "manifest": "candidates/custody-source-owners/manifest.tsv",
+        "sha256": "4b7a08b6ffa1b1d114298bc70d374fed9336012501e540f24429a5dee7e9cb1d",
+        "files": 50,
+        "bytes": 374183
+      }
+    ],
+    "pairwise_disjoint": true,
+    "files": 8756,
+    "bytes": 97887155,
+    "receiving_status": "Root-owned; this index establishes candidate SDK qualification only"
+  },
+  "environment": {
+    "maven": "3.9.6",
+    "java": "21.0.12.1+1-LTS",
+    "offline_runs": true,
+    "executed_classpath_receipt": {
+      "path": "candidates/custody-sdk/historical/evidence/EXECUTED_CLASSPATH.json",
+      "bytes": 13190,
+      "sha256": "6e03ec233514932380f1b8ade6cd13acb19292302de3aa35f4c69440882f59c5"
+    },
+    "dependency_repository_wide_approval_gate": "HOLD; bounded cached host SDK only",
+    "reduced_JDK_distribution": true,
+    "full_target_JDK_build": "NOT_RUN",
+    "free_bytes_at_seal": 86515712,
+    "available_bytes_at_seal": 0
+  },
+  "limitations": [
+    "Historical source custody does not establish semantic applicability, active runtime ownership or product runtime qualification.",
+    "This does not qualify the 7545 JDK-origin files of the old cohort or all connected repositories.",
+    "The generic harness rejects error-bearing engine batches; partial relocation results can occur before rejection, so engine transactionality is not claimed.",
+    "Physical input and output share a preseeded regular-file layout. Both actual SDK runs validate transformations and fixed point; neither is represented as the writer of payload bytes.",
+    "The task JDK distribution is reduced after authorized storage recovery. Its runtime/compiler were used; a full OpenJDK build was not run.",
+    "The genuine pinned target helper Recipe differs from current canonical helper identity; exact helper provenance and limitation remain in SOURCE_RECEIPTS.json.",
+    "One classpath receipt-generation error occurred after successful payload readback and was corrected additively; no SDK failure or payload mutation resulted.",
+    "No target checkout or external write was performed by this batch."
+  ],
+  "receipts": [
+    {
+      "path": "candidates/custody-historical/CUSTODY_MANIFEST.tsv",
+      "bytes": 322308,
+      "sha256": "b2457be399405d69331193b1482a1be62eaab0fb89952e446a2cc83b921fbb16"
+    },
+    {
+      "path": "candidates/custody-historical/MATERIALIZATION_PLAN.json",
+      "bytes": 2001,
+      "sha256": "dc048f10ea71695f4831655080f622e5c62a0ef5fd349e221086962808f90c12"
+    },
+    {
+      "path": "candidates/custody-historical/MATERIALIZATION_RECEIPT.json",
+      "bytes": 1659,
+      "sha256": "3adadc905cc88faa7a64d76bed00aa89ec79962539f2c3a8679ce9515a4309d9"
+    },
+    {
+      "path": "candidates/custody-historical/PUBLIC_FETCH_RECEIPTS.json",
+      "bytes": 183017,
+      "sha256": "1037e53851a3a0603a447fef00f79640f04b5ba5d5e5c990c8513e8c7cb3e1f2"
+    },
+    {
+      "path": "candidates/custody-historical/SOURCE_SEALS.json",
+      "bytes": 884765,
+      "sha256": "d218313ba56a3fa793424c161a9884317577e3b0e3a6096e3956d33e01484763"
+    },
+    {
+      "path": "candidates/custody-historical/acquire-pinned-historical.py",
+      "bytes": 9319,
+      "sha256": "953fe12ad0ac3f8db19d5405fe46269c458e9bc586ceee980374b6f310909e74"
+    },
+    {
+      "path": "candidates/custody-sdk/SOURCE_RECEIPTS.json",
+      "bytes": 2481,
+      "sha256": "2b71c805c9e0a1288d50d4f1c83fa52229f9c60851075e253ba74b160ece3acc"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/BUILD_ENVELOPE_RECEIPT.json",
+      "bytes": 686,
+      "sha256": "eb6e4f084be0ef4e779e2fe9086925779fd93de2efb6b6ac40e22a9945f85573"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/CONTRACT.md",
+      "bytes": 2095,
+      "sha256": "dce6d66e72ed3b754d292a210e558bdd678270963a71bbb96a67f351765b207d"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/CLASSPATH_SEALING_FAILED_001.json",
+      "bytes": 741,
+      "sha256": "7cde6cd2f66cd1d23092f50a814f75072fbe31eeac66e0f6066484316aa188e0"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/EXECUTED_CLASSPATH.json",
+      "bytes": 13190,
+      "sha256": "6e03ec233514932380f1b8ade6cd13acb19292302de3aa35f4c69440882f59c5"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/INDEPENDENT_READBACK.json",
+      "bytes": 3781,
+      "sha256": "82d497e3b1fe429aec1f1bd9d6a43df294a0fe33e1abb8a08e16128a42f44509"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/sdk-run-001-invocation.json",
+      "bytes": 2218,
+      "sha256": "aa08947fff0310d7526e95ce9dc3c9959805ab7d3edfdfd758e381c5c1f41669"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/sdk-run-001.log",
+      "bytes": 2654,
+      "sha256": "e36bf40bf1bb3b4a808117f10840e6ca896345ad0fe8f5e7e2165377602d08e1"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/sdk-run-002-invocation.json",
+      "bytes": 2502,
+      "sha256": "cae354b16a04b8e9737a5d499ed5d22bf3f0eed6f2199901139446c798561e6a"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/sdk-run-002.log",
+      "bytes": 2479,
+      "sha256": "5b5fb99fa08b4d23ac0ce0a8c91bdbf6c7816088431ea6230132729d25625986"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/surefire-001/TEST-com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.xml",
+      "bytes": 16222,
+      "sha256": "a109280f746faacec119b01d8b11d24c43f5ea391b2121604ead79f17bd53b84"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/surefire-001/com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.txt",
+      "bytes": 350,
+      "sha256": "98fab596b841072251c9b53d0a1a6a3aadd197ffe3a6b37921fb2ab91452aa24"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/surefire-002/TEST-com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.xml",
+      "bytes": 16222,
+      "sha256": "52913ad2370e67f375950880830468aad344afe8b762c5b95e29756c907d7339"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/evidence/surefire-002/com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.txt",
+      "bytes": 350,
+      "sha256": "b56461c621d3450ffd4d2e6fd30f9e49686e04274b641d34d12941fbda583d42"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/pom.xml",
+      "bytes": 3807,
+      "sha256": "fdc038e1e4e6d67cf8b837e297cc8863b0688bf3e4d035f8fd6de96df169fc22"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/receipts-001/CASES.tsv",
+      "bytes": 1677,
+      "sha256": "bc0111239898d7ba66db47232528125e62e2f25769a0230390ff9f66e72a9ee1"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/receipts-001/OUTPUT_SEALS.tsv",
+      "bytes": 228450,
+      "sha256": "a96a984d390993330253d5a2c1748dda061184272d0f702302b915706e253d89"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/receipts-001/SDK_RECEIPT.json",
+      "bytes": 787,
+      "sha256": "1d1deb3624cd3b5ef2acd495b872face42278b483fd14141bdbb554b38758ed6"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/receipts-002/CASES.tsv",
+      "bytes": 1677,
+      "sha256": "bc0111239898d7ba66db47232528125e62e2f25769a0230390ff9f66e72a9ee1"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/receipts-002/OUTPUT_SEALS.tsv",
+      "bytes": 228450,
+      "sha256": "a96a984d390993330253d5a2c1748dda061184272d0f702302b915706e253d89"
+    },
+    {
+      "path": "candidates/custody-sdk/historical/receipts-002/SDK_RECEIPT.json",
+      "bytes": 787,
+      "sha256": "1d1deb3624cd3b5ef2acd495b872face42278b483fd14141bdbb554b38758ed6"
+    },
+    {
+      "path": "evidence/older-custody-reconciliation/COMPARISON_SUMMARY.json",
+      "bytes": 8455,
+      "sha256": "fbd7b1437840eec67beb1e9a39d50e45a1c503c0d813f503a3e79422a6db9f74"
+    },
+    {
+      "path": "evidence/older-custody-reconciliation/MISSING_RETENTION_ORIGINS.json",
+      "bytes": 572755,
+      "sha256": "8f9603d94d6a434c8c98ffc2b599482dca571aaf5509d8da97e33fca6754ae53"
+    }
+  ]
+}

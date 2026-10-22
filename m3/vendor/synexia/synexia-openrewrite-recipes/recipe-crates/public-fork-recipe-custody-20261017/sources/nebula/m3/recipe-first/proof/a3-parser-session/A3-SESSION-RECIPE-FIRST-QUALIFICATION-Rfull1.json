@@ -1,0 +1,43 @@
+{
+  "commit": "e78e926c6940ae8fdcb2741128657d0717dd3089",
+  "change_intent_sha256": "ecfa271ffcd35adc8db8b25e49efd5cfcdb58435a9f36cf618a7332f7fdec362",
+  "module": "recipe-first",
+  "cycle": "full1",
+  "offline": true,
+  "command": [
+    "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.cmd",
+    "-B",
+    "-ntp",
+    "-o",
+    "-f",
+    "K:\\codex-work\\nebula-stream-segments-20261004\\worktree\\m3\\recipe-first\\pom.xml",
+    "-Dmaven.repo.local=K:\\codex-work\\nebula-stream-segments-20261004\\current-m2-head",
+    "-Dosgi.platform=win32.win32.x86_64",
+    "-Daether.connector.basic.threads=2",
+    "-Dmaven.artifact.threads=2",
+    "verify",
+    "-Psemantic-coverage,dag-manifest,transfer-contract"
+  ],
+  "status": "REFUSED_STORAGE_RESERVE",
+  "exit": 1,
+  "runtime_budget_seconds": 1800,
+  "seconds": 754.56,
+  "reports": [
+    {
+      "path": "worktree\\m3\\recipe-first\\target\\surefire-reports\\TEST-org.eclipse.nebula.m3.NebulaM3A3ApplyTest.xml",
+      "suite": "org.eclipse.nebula.m3.NebulaM3A3ApplyTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "f1d7c9a7af572d92c7476533786ce13cc7e816940c6d896c557b28f541524955"
+    }
+  ],
+  "log": "A3-SESSION-RECIPE-FIRST-QUALIFICATION-Rfull1.log",
+  "log_sha256": "c39a09e3b40255e19e683f07625f707af1b2a6e7d93d2bb0bfc5363d00c0fd7b",
+  "strict_compiler": "-Xlint:all -Werror -proc:none; original Maven POM unchanged",
+  "combined_task_bytes": 480072636,
+  "free_bytes": 8584368128,
+  "java_temp": "java.io.tmpdir = K:\\codex-work\\nebula-stream-segments-20261004\\current-temp",
+  "scope": "exact current selected modules, finite tests and named integration profiles; whole Nebula Tycho/runtime proof not established"
+}

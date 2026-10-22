@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.synexia.cognix</groupId>
+    <artifactId>cognix-parent</artifactId>
+    <version>${revision}</version>
+    <relativePath>../cognix-parent/pom.xml</relativePath>
+  </parent>
+
+  <groupId>com.synexia.m3scale</groupId>
+  <artifactId>synexia-m3scale</artifactId>
+  <packaging>jar</packaging>
+
+  <name>Synexia :: M3-SCALE</name>
+  <description>M3-SCALE v3.0 — Mechanical | Memory-Safe | Multi-Pass | Horizontal Scale runtime.
+    Axiom enforcement, task packet contracts, inventory/catalog/dedup, deterministic sharding,
+    multi-pass refinement, verify gates, and output contract generation.</description>
+
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <lucene.version>10.5.1</lucene.version>
+    <pmd.version>7.27.0</pmd.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.synexia.m3scale</groupId>
+      <artifactId>m3-index-dag</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+
+    <!-- Synexia modules -->
+    <dependency>
+      <groupId>com.synexia.commons</groupId>
+      <artifactId>synexia-common</artifactId>
+    </dependency>
+
+    <!-- Lucene is candidate retrieval only; M3 retains equivalence authority. -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>${lucene.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-analysis-common</artifactId>
+      <version>${lucene.version}</version>
+    </dependency>
+
+    <!-- PMD CPD is a candidate donor only; M3 retains equivalence authority. -->
+    <dependency>
+      <groupId>net.sourceforge.pmd</groupId>
+      <artifactId>pmd-core</artifactId>
+      <version>${pmd.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.pmd</groupId>
+      <artifactId>pmd-java</artifactId>
+      <version>${pmd.version}</version>
+    </dependency>
+
+    <!-- Lombok (annotation processing) -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Eclipse progress-monitor bridge (optional outside Eclipse/RCP) -->
+    <dependency>
+      <groupId>org.eclipse.platform</groupId>
+      <artifactId>org.eclipse.equinox.common</artifactId>
+      <version>3.21.0</version>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Apache Camel API for the optional in-process guided DAG adapter -->
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-api</artifactId>
+      <version>4.22.0</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-yaml-dsl</artifactId>
+      <version>4.22.0</version>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Released Apache KIE public APIs for the optional embedded adapter -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-api</artifactId>
+      <version>10.2.0</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-dmn-api</artifactId>
+      <version>10.2.0</version>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Optional embedded KIE runtime implementations -->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-engine</artifactId>
+      <version>10.2.0</version>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-dmn-core</artifactId>
+      <version>10.2.0</version>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>jbpm-flow</artifactId>
+      <version>10.2.0</version>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Maven plugin API: this JAR also exposes the m3:refactor goal. -->
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>3.9.16</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-core</artifactId>
+      <version>3.9.16</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>3.16.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <!-- JSpecify - Null-safety annotations -->
+    <dependency>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Jackson for YAML/JSON task packets -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <release>21</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.30</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugin-tools</groupId>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>3.16.0</version>
+        <configuration>
+          <goalPrefix>m3</goalPrefix>
+          <skipErrorNoDescriptorsFound>false</skipErrorNoDescriptorsFound>
+        </configuration>
+        <executions>
+          <execution>
+            <id>m3-plugin-descriptor</id>
+            <goals>
+              <goal>descriptor</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <!-- M3-MAVEN-SUPERSET-20260918 BEGIN -->
+  <profiles xmlns="http://maven.apache.org/POM/4.0.0">
+    <profile xmlns="http://maven.apache.org/POM/4.0.0">
+      <id>m3-tooling-superset</id>
+      <!-- Managed availability only; no automatic execution or upgrades. -->
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin><groupId>de.jflex</groupId><artifactId>jflex-maven-plugin</artifactId><version>1.9.1</version></plugin>
+            <plugin><groupId>net.nicoulaj.maven.plugins</groupId><artifactId>checksum-maven-plugin</artifactId><version>1.11</version></plugin>
+            <plugin><groupId>org.apache.avro</groupId><artifactId>avro-maven-plugin</artifactId><version>1.12.0</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-acr-plugin</artifactId><version>3.2.0</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-archetype-plugin</artifactId><version>3.4.1</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-ejb-plugin</artifactId><version>3.3.0</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-rar-plugin</artifactId><version>3.1.0</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-scm-publish-plugin</artifactId><version>3.3.0</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-scripting-plugin</artifactId><version>3.1.0</version></plugin>
+            <plugin><groupId>org.asciidoctor</groupId><artifactId>asciidoctor-maven-plugin</artifactId><version>3.2.0</version></plugin>
+            <plugin><groupId>org.codehaus.mojo</groupId><artifactId>javacc-maven-plugin</artifactId><version>3.2.0</version></plugin>
+            <plugin><groupId>org.codehaus.mojo</groupId><artifactId>jaxb2-maven-plugin</artifactId><version>3.3.0</version></plugin>
+            <plugin><groupId>org.codehaus.mojo</groupId><artifactId>jaxws-maven-plugin</artifactId><version>2.6</version></plugin>
+            <plugin><groupId>org.codehaus.mojo</groupId><artifactId>license-maven-plugin</artifactId><version>2.7.0</version></plugin>
+            <plugin><groupId>org.codehaus.mojo</groupId><artifactId>templating-maven-plugin</artifactId><version>3.0.0</version></plugin>
+            <plugin><groupId>org.jsonschema2pojo</groupId><artifactId>jsonschema2pojo-maven-plugin</artifactId><version>1.2.2</version></plugin>
+            <plugin><groupId>org.openapitools</groupId><artifactId>openapi-generator-maven-plugin</artifactId><version>7.12.0</version></plugin>
+            <plugin><groupId>org.revapi</groupId><artifactId>revapi-maven-plugin</artifactId><version>0.15.1</version></plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+    <!-- SPDX-License-Identifier: Apache-2.0; opt-in, no change to the CPU build. -->
+    <profile>
+      <id>gpu-tornado</id>
+      <properties>
+        <tornadovm.version>6.1.0-jdk21</tornadovm.version>
+        <m3.gpu.test.jvm.args></m3.gpu.test.jvm.args>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.github.beehive-lab</groupId>
+          <artifactId>tornado-api</artifactId>
+          <version>${tornadovm.version}</version>
+          <optional>true</optional>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <inherited>false</inherited>
+            <executions>
+              <execution>
+                <id>generate-tornado-kernel</id>
+                <phase>generate-sources</phase>
+                <goals><goal>exec</goal></goals>
+                <configuration>
+                  <executable>${java.home}/bin/java</executable>
+                  <arguments>
+                    <argument>${project.basedir}/tools/java/GenerateTornadoKernel.java</argument>
+                    <argument>${project.basedir}/src/main/java/com/synexia/m3scale/compute/gpu/PrimitiveKernels.java</argument>
+                    <argument>${project.build.directory}/generated-sources/tornado/com/synexia/m3scale/compute/gpu/TornadoKernels.java</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>false</inherited>
+            <executions>
+              <execution>
+                <id>tornado-sources</id><phase>generate-sources</phase>
+                <goals><goal>add-source</goal><goal>add-resource</goal></goals>
+                <configuration>
+                  <sources>
+                    <source>${project.basedir}/src/tornado/java</source>
+                    <source>${project.build.directory}/generated-sources/tornado</source>
+                  </sources>
+                  <resources><resource><directory>${project.basedir}/src/tornado/resources</directory></resource></resources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>tornado-test-sources</id><phase>generate-test-sources</phase>
+                <goals><goal>add-test-source</goal></goals>
+                <configuration><sources><source>${project.basedir}/src/tornado-test/java</source></sources></configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration><release>21</release><enablePreview>true</enablePreview></configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration><argLine>--enable-preview ${m3.gpu.test.jvm.args}</argLine></configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>camel-gpu-bridge</id>
+      <dependencies>
+        <dependency>
+          <groupId>com.synexia.m3scale</groupId>
+          <artifactId>m3-camel-runtime</artifactId>
+          <version>0.1.0-SNAPSHOT</version>
+          <optional>true</optional>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>false</inherited>
+            <executions>
+              <execution>
+                <id>camel-gpu-bridge-sources</id>
+                <phase>generate-sources</phase>
+                <goals><goal>add-source</goal><goal>add-resource</goal></goals>
+                <configuration>
+                  <sources>
+                    <source>${project.basedir}/src/camel-gpu/java</source>
+                  </sources>
+                  <resources>
+                    <resource>
+                      <directory>${project.basedir}/src/camel-gpu/resources</directory>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- Optional experimental CRC32 fast-filter microkernel; strong SHA acceleration is gpu-tornado. -->
+    <profile>
+      <id>m3-tornado-crc</id>
+      <modules>
+        <module>m3-tornado-accelerator</module>
+      </modules>
+    </profile>
+  </profiles>
+  <!-- M3-MAVEN-SUPERSET-20260918 END -->
+</project>
+

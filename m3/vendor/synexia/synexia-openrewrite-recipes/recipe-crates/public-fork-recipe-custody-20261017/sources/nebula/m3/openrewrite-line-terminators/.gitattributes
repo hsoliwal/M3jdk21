@@ -1,0 +1,7 @@
+* -text
+candidate.patch -text -diff
+original/**/*.java -text -diff
+src/**/*.java -text
+evidence/*.log -text -diff
+third_party/* -text -diff
+src/test/resources/roundscale/*.txt -text -diff

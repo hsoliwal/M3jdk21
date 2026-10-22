@@ -1,0 +1,280 @@
+{
+  "schema": "M3_OLD_CUSTODY_OTHER_DONOR_RECONCILIATION_V1",
+  "timestamp_utc": "2026-10-21T07:57:29Z",
+  "status": "METADATA_RECONCILIATION_COMPLETE_NO_PAYLOAD_ACQUIRED",
+  "canonical_owner_revision": "a1a6fd0a440dbf26fab407f17f6d428cef150da6",
+  "target_revision": "dd05cb14da9836d87b61311f8345f0e4832f8fad",
+  "target_tracked_blob_entries": 124715,
+  "full_old_manifest_files_verified_against_origins": 8356,
+  "full_old_manifest_bytes": 271039486,
+  "old_census_counts_match_origins": true,
+  "current_jdk_map_rows_verified_against_original_snapshots": 7516,
+  "current_jdk_runtime_applicability_checked": false,
+  "other_donor_repositories": 15,
+  "other_donor_files": 811,
+  "other_donor_bytes": 17209459,
+  "status_counts": {
+    "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 708,
+    "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 103
+  },
+  "baseline_missing_files": 708,
+  "baseline_missing_bytes": 16419211,
+  "missing_after_verified_new_7998_packet_reuse_files": 708,
+  "missing_after_verified_new_7998_packet_reuse_bytes": 16419211,
+  "missing_distinct_git_blobs": 572,
+  "missing_distinct_blob_bytes": 13568781,
+  "missing_executable_files": 0,
+  "by_repository": [
+    {
+      "repository": "hsoliwal/ChromeLLM",
+      "files": 8,
+      "bytes": 22559,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 7,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 1
+      },
+      "missing_files": 7,
+      "missing_bytes": 17542,
+      "source_revisions": [
+        "9cdfe7665dc5555f9ea554ba1f1c60f82e806a09"
+      ]
+    },
+    {
+      "repository": "hsoliwal/codexpro",
+      "files": 7,
+      "bytes": 21626,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 6,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 1
+      },
+      "missing_files": 6,
+      "missing_bytes": 16609,
+      "source_revisions": [
+        "5b284a15d027840b670da3b89addc21d91a60d8b"
+      ]
+    },
+    {
+      "repository": "hsoliwal/eclipse.platform",
+      "files": 6,
+      "bytes": 20969,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 2,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 4
+      },
+      "missing_files": 2,
+      "missing_bytes": 2636,
+      "source_revisions": [
+        "69291c18babd233a94b742798b3d1078979bf78c"
+      ]
+    },
+    {
+      "repository": "hsoliwal/eclipse.platform.releng.aggregator",
+      "files": 8,
+      "bytes": 35757,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 6,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 2
+      },
+      "missing_files": 6,
+      "missing_bytes": 16542,
+      "source_revisions": [
+        "0f1cb47ce80d9cf91fbb3ec4cbeccfcd366691b9"
+      ]
+    },
+    {
+      "repository": "hsoliwal/eclipse.platform.swt",
+      "files": 153,
+      "bytes": 5080652,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 138,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 15
+      },
+      "missing_files": 138,
+      "missing_bytes": 4951752,
+      "source_revisions": [
+        "8a89f2e6f3644572417dcaddc50ece5e49bf247a"
+      ]
+    },
+    {
+      "repository": "hsoliwal/eclipse.platform.ui",
+      "files": 51,
+      "bytes": 367327,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 41,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 10
+      },
+      "missing_files": 41,
+      "missing_bytes": 279080,
+      "source_revisions": [
+        "16e944f83eec18d4cf609afd9ad9a937711211ce"
+      ]
+    },
+    {
+      "repository": "hsoliwal/gef-classic",
+      "files": 24,
+      "bytes": 69105,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 19,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 5
+      },
+      "missing_files": 19,
+      "missing_bytes": 52434,
+      "source_revisions": [
+        "07a269c108cc1cd57a49e3be581328b51dca5cb0"
+      ]
+    },
+    {
+      "repository": "hsoliwal/gitea",
+      "files": 4,
+      "bytes": 15530,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 3,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 1
+      },
+      "missing_files": 3,
+      "missing_bytes": 10513,
+      "source_revisions": [
+        "41f1cc449b188898cae95c6b8f4809b1bc3edef5"
+      ]
+    },
+    {
+      "repository": "hsoliwal/gradle",
+      "files": 87,
+      "bytes": 598771,
+      "statuses": {
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 18,
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 69
+      },
+      "missing_files": 69,
+      "missing_bytes": 456276,
+      "source_revisions": [
+        "419a77cf61af3924f60678510ed2440230047671"
+      ]
+    },
+    {
+      "repository": "hsoliwal/maven",
+      "files": 70,
+      "bytes": 564806,
+      "statuses": {
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 18,
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 52
+      },
+      "missing_files": 52,
+      "missing_bytes": 412972,
+      "source_revisions": [
+        "bd11c44cd98aef16a3d049db0ebd8477608ccf4d"
+      ]
+    },
+    {
+      "repository": "hsoliwal/nebula",
+      "files": 341,
+      "bytes": 10177809,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 330,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 11
+      },
+      "missing_files": 330,
+      "missing_bytes": 10047308,
+      "source_revisions": [
+        "c5f62dbabc643b40fbba56eada89cee3965d145c"
+      ]
+    },
+    {
+      "repository": "hsoliwal/opennlp",
+      "files": 20,
+      "bytes": 98140,
+      "statuses": {
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 3,
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 17
+      },
+      "missing_files": 17,
+      "missing_bytes": 86141,
+      "source_revisions": [
+        "368337311ad94b665fd178f8d3ced005a73b2370"
+      ]
+    },
+    {
+      "repository": "hsoliwal/providers",
+      "files": 3,
+      "bytes": 14433,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 2,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 1
+      },
+      "missing_files": 2,
+      "missing_bytes": 9416,
+      "source_revisions": [
+        "ffe46fefbafc86a7580e7ccbc7f257578c11d03a"
+      ]
+    },
+    {
+      "repository": "hsoliwal/rewrite",
+      "files": 5,
+      "bytes": 17097,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 1,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 4
+      },
+      "missing_files": 1,
+      "missing_bytes": 1605,
+      "source_revisions": [
+        "50a0fdb9941259678aa43f790b43e255b03db5df"
+      ]
+    },
+    {
+      "repository": "hsoliwal/synexia-tornadovm",
+      "files": 24,
+      "bytes": 104878,
+      "statuses": {
+        "MISSING_FROM_TARGET_AND_NEW_7998_PACKET": 15,
+        "TARGET_EXACT_BLOB_AND_MODE_PRESENT": 9
+      },
+      "missing_files": 15,
+      "missing_bytes": 58385,
+      "source_revisions": [
+        "4df8619f2bb7ac13c0c7e8d56456bada9ebd465a"
+      ]
+    }
+  ],
+  "receipt_files": [
+    {
+      "path": "ACQUISITION_RECEIPT.json",
+      "bytes": 1141,
+      "sha256": "91eae23166082efbdef6d17b5c6bde30bf0d53836b6998acf460843962db1578"
+    },
+    {
+      "path": "OTHER_DONOR_COMPARISON.tsv",
+      "bytes": 523630,
+      "sha256": "3ef6e77265b2c935a2afe6d49ee52a9b36fd764f68cee1c042735293761791da"
+    },
+    {
+      "path": "TARGET_MATCH_INDEX.json",
+      "bytes": 54629,
+      "sha256": "6ea696c64371d5cee457d0778508da45ee7872a2a8e1f5f33ab5bd88e0356c07"
+    },
+    {
+      "path": "MISSING_BASELINE_RETENTION_MANIFEST.tsv",
+      "bytes": 322308,
+      "sha256": "b2457be399405d69331193b1482a1be62eaab0fb89952e446a2cc83b921fbb16"
+    },
+    {
+      "path": "MISSING_RETENTION_MANIFEST.tsv",
+      "bytes": 322308,
+      "sha256": "b2457be399405d69331193b1482a1be62eaab0fb89952e446a2cc83b921fbb16"
+    },
+    {
+      "path": "MISSING_RETENTION_ORIGINS.json",
+      "bytes": 572755,
+      "sha256": "8f9603d94d6a434c8c98ffc2b599482dca571aaf5509d8da97e33fca6754ae53"
+    }
+  ],
+  "free_bytes_after": 61321216,
+  "root_reserved_bytes": 31457280,
+  "raw_missing_payload_fits_with_reserve_before_further_writes": true,
+  "limitations": [
+    "Exact Git blob and mode comparison only; same bytes elsewhere do not prove product applicability or preserve provenance without mapping.",
+    "7,545 JDK-origin files are map-validated here, not independently qualified against current target product state.",
+    "Per-source licenses and historical revisions must remain unchanged in any next custody batch.",
+    "No source byte payload was acquired; no SDK application or target write performed for this older batch."
+  ]
+}

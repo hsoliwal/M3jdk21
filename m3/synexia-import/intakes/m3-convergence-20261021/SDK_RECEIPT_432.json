@@ -1,0 +1,19 @@
+{
+  "execution_kind": "SDK_EXECUTION",
+  "engine_git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+  "sdk_version": "8.17.1",
+  "manifest_sha256": "03f3ef8724c477018b2ab107ec037e7d0ea1ace9b807b4169c34ebad21dc953d",
+  "files": 432,
+  "bytes": 19519731,
+  "first_changes": 432,
+  "fixed_point_changes": 0,
+  "reversed_input_root_matches": true,
+  "partial_state_order_trials": 16,
+  "refusal_cases": 7,
+  "input_bytes_modes_unchanged": true,
+  "output_sha256": "d9af3625ca7f22b3196409ac9a3be6a6e1a0b107e1f63b1fc6a7a8e849e2ebf2",
+  "materialization_root": "/workspace/scratch/b4deff766505/work/m3-convergence-20261021/candidates/custody-sdk/target/receiver/m3/vendor/synexia",
+  "output_readback": "PASS",
+  "payload_semantics_qualified": false,
+  "product_runtime_qualified": false
+}

@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.A3FileMaterializerInstaller
+displayName: Install Nebula M3 A3 explicit-file materializer
+description: >
+  Source-sealed additive installer for the no-root-write explicit FILE candidate runner
+  and its JUnit proof.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.convergence.NebulaM3A3FileMaterializerRecipe

@@ -1,0 +1,51 @@
+{
+  "schema": "M3_REFINEMENT_MAPPING_V1",
+  "refines_existing_target": "jdk.internal.mindex.M3TQ",
+  "existing_consumer": "java.lang.M3StringSearchPrecompute",
+  "target_parent": "dd05cb14da9836d87b61311f8345f0e4832f8fad",
+  "qualification_base_revision": "dd05cb14da9836d87b61311f8345f0e4832f8fad",
+  "compatible_receiver_revision": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+  "recipe": "com.synexia.rewrite.M3Jdk21TqAdaptiveGallop20261021",
+  "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "recipe_base_commit": "fe582fe513989b561470b49efe7d5f56246d7e0a",
+  "recipe_publication_commit": "4c3d11630e48acf6ca543dc98edd8df0b43edc7a",
+  "recipe_publication_status": "PUBLISHED_DRAFT_SOURCE_ORIGIN_READ_BACK",
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021",
+  "descriptor_git_blob": "33d8d21d39650902ad8a71acee855989e04bbf9a",
+  "manifest_sha256": "4aed5b338d93f0e8d3fe5267a6d1af75424b92c6958ee58330dadf5e1847f953",
+  "qualification_sha256": "5758e061e06dc1e8170cfb52c9aa7eb395f97bef2828513deff7f5e8e2afe84a",
+  "owner_preimage_sha256": "79e922eb3d0c3ae28db264bcaeab0a03f31643ad581c3e28bc2545140c043367",
+  "owner_postimage_sha256": "a01f05617dec5639f6a80e93ae45b6e80eec8959efd73250e0b4335a12d61158",
+  "changes": [
+    "Adaptive lower-bound gallop after sustained source-only runs in dense sorted trigram containment",
+    "Per-call threshold begins 7 and remains within 1..64",
+    "Independent containment oracle added"
+  ],
+  "preserves": [
+    "Sparse membership branch",
+    "Primitive composition and immutable key sharing",
+    "Necessary-condition result; exact matching remains required",
+    "Public descriptors and production JNI ABI"
+  ],
+  "new_payload_owner": false,
+  "new_string_tuple_dispatch": false,
+  "warm_payload_reads_measured": 0,
+  "warm_allocation_bytes_per_call_measured": 0.0,
+  "status": "BOUNDED_LEAF_PASS_FULL_RUNTIME_NOT_ADMITTED",
+  "phase_advance": false,
+  "license": "Retain current per-file notices; historical intake review is not waived",
+  "historical_compatible_receiver_revision": "a62eacad46b51ce757ded74579f1ad2aabc4d638",
+  "previous_publication_receiver_revision": "79d764d6b7164f75aeee23e5793ae9d7fe217e1c",
+  "recipe_publication_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12900",
+  "source_publication_snapshot": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "4c3d11630e48acf6ca543dc98edd8df0b43edc7a",
+    "tree": "5e2149013e47ab30356489eed6e66472d4146366",
+    "parent": "d3f7dccd5e9c44ad122f9664a4990af05d50f2f3",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12900",
+    "pull_request_number": 12900,
+    "snapshot_head": "4c3d11630e48acf6ca543dc98edd8df0b43edc7a",
+    "snapshot_base": "719049b3bf1b8525d2f25c07aa3c317537e69c8b",
+    "binding_scope": "Immutable payload origin; subsequent recipe/proof-only commits may advance the PR head."
+  }
+}

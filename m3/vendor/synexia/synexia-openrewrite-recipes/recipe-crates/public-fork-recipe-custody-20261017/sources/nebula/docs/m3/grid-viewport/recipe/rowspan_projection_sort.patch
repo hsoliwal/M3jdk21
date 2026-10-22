@@ -1,0 +1,90 @@
+diff --git a/widgets/grid/org.eclipse.nebula.widgets.grid/src/org/eclipse/nebula/widgets/grid/GridRowSpanIndex.java b/widgets/grid/org.eclipse.nebula.widgets.grid/src/org/eclipse/nebula/widgets/grid/GridRowSpanIndex.java
+index 1763d24a2c..77d25b0030 100644
+--- a/widgets/grid/org.eclipse.nebula.widgets.grid/src/org/eclipse/nebula/widgets/grid/GridRowSpanIndex.java
++++ b/widgets/grid/org.eclipse.nebula.widgets.grid/src/org/eclipse/nebula/widgets/grid/GridRowSpanIndex.java
+@@ -163,19 +163,9 @@ private void rebuildProjection(boolean[] visibleColumns) {
+ 			projectedCount++;
+ 		}
+ 
+-		// Sparse insertion sort avoids boxing and is cheap for the expected small frontier.
+-		for (int i = 1; i < projectedCount; i++) {
+-			int start = starts[i];
+-			long end = ends[i];
+-			int j = i - 1;
+-			while (j >= 0 && starts[j] > start) {
+-				starts[j + 1] = starts[j];
+-				ends[j + 1] = ends[j];
+-				j--;
+-			}
+-			starts[j + 1] = start;
+-			ends[j + 1] = end;
+-		}
++		// Small frontiers retain the stable insertion sort; dense span-owner frontiers
++		// use an in-place bounded heap so one rebuild cannot become quadratic.
++		sortProjection(starts, ends, projectedCount);
+ 
+ 		long max = Long.MIN_VALUE;
+ 		for (int i = 0; i < projectedCount; i++) {
+@@ -257,6 +247,62 @@ private void ensureProjectionCapacity(int required) {
+ 		prefixMaxEnds = nextPrefix;
+ 	}
+ 
++
++	/**
++	 * Orders the primitive span-owner lanes by logical row index. The small path retains
++	 * the original stable insertion order (including ties). Large frontiers use a binary
++	 * max-heap: O(n log n) comparisons, O(1) scratch, no entries, boxing or per-owner
++	 * allocation. Equal starts may change order, but the interval prefix maximum and
++	 * earliest covering start are identical for all permutations of such ties.
++	 */
++	static void sortProjection(int[] starts, long[] ends, int count) {
++		if (count < 0 || count > starts.length || count > ends.length) {
++			throw new IllegalArgumentException("span frontier count");
++		}
++		if (count < 2) return;
++		if (count <= 32) {
++			for (int i = 1; i < count; i++) {
++				int start = starts[i];
++				long end = ends[i];
++				int j = i - 1;
++				while (j >= 0 && starts[j] > start) {
++					starts[j + 1] = starts[j];
++					ends[j + 1] = ends[j];
++					j--;
++				}
++				starts[j + 1] = start;
++				ends[j + 1] = end;
++			}
++			return;
++		}
++		for (int i = (count >>> 1) - 1; i >= 0; i--) {
++			siftDown(starts, ends, i, count);
++		}
++		for (int last = count - 1; last > 0; last--) {
++			swap(starts, ends, 0, last);
++			siftDown(starts, ends, 0, last);
++		}
++	}
++
++	private static void siftDown(int[] starts, long[] ends, int root, int count) {
++		while (root < (count >>> 1)) {
++			int child = (root << 1) + 1;
++			if (child + 1 < count && starts[child] < starts[child + 1]) child++;
++			if (starts[root] >= starts[child]) return;
++			swap(starts, ends, root, child);
++			root = child;
++		}
++	}
++
++	private static void swap(int[] starts, long[] ends, int left, int right) {
++		int start = starts[left];
++		starts[left] = starts[right];
++		starts[right] = start;
++		long end = ends[left];
++		ends[left] = ends[right];
++		ends[right] = end;
++	}
++
+ 	private static int upperBound(int[] values, int length, int key) {
+ 		int low = 0;
+ 		int high = length;

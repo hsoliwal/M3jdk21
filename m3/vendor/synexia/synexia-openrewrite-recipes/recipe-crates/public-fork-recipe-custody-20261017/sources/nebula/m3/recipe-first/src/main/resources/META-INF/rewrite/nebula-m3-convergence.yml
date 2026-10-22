@@ -1,0 +1,25 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.ConvergeFileAtoms
+displayName: Converge admitted Nebula FILE-local atoms
+description: >-
+  Declaratively composes the tested Nebula-local Java 21 inventory, atomization,
+  patternization/IOP, semantic documentation and proven FILE convergence leaves.
+  Only contract-preserving FILE-local shapes admitted by the leaf recipes may change.
+tags:
+  - m3
+  - nebula
+  - java21
+  - file-local
+  - atomization
+  - patternization
+  - iop
+  - documentation
+  - behavior-contract-preserving
+causesAnotherCycle: true
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.atom.NebulaM3InventoryPureIntAtomCandidates
+  - org.eclipse.nebula.m3.rewrite.atom.NebulaM3AtomizePureIntReturnRecipe
+  - org.eclipse.nebula.m3.rewrite.atom.NebulaM3PatternizePureIntAtomRecipe
+  - org.eclipse.nebula.m3.rewrite.atom.NebulaM3DocumentPureIntAtomRecipe
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3SvgLoaderLengthConvergenceRecipe

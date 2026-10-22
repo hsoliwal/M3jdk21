@@ -1,0 +1,27 @@
+key	value
+schema	M3_COLLECTIONS_PROVENANCE_V1
+canonical_repo	https://github.com/hsoliwal/com.synexia
+canonical_base	140c263a90f9803b9c46103c63355a286e0515f0
+family	collections-package-import-rename-20261018
+namespace_owner	com.synexia.rewrite.M3CollectionsPackageRenameRecipe -> org.openrewrite.java.ChangePackage
+import_order_owner	M3CollectionsPackageRenameImportOrderRecipe -> org.openrewrite.java.OrderImports
+literal_owner	M3CollectionsPackageRenameMetadataRecipe; MetadataReplayCli reconstitutes admitted namespace LST before the same literal recipe
+resource_owner	M3CollectionsPackageRenameResourcesCli; XML LST and incumbent FindAndReplace
+module_owner	M3CollectionsPackageRenameModulesCli; JDK ModuleTree; distinct JDK_MODULE_AST_PARSE evidence
+snapshot_owners	Incumbent M3HashPinnedJavaSnapshotRecipe/M3HashPinnedPomSnapshotRecipe/M3HashPinnedTextSnapshotRecipe; bounded adapters only
+registration	CANONICAL_RECIPE_HOME.tsv:22 appended task rows with actual final Git blobs;REGISTRY_VERIFICATION.json
+apache_source_base	6404dfdfe553097bb934e044034abcec5a4dbdd0
+eclipse_source_base	fbaa8605dad1a84900fd38a1f6954de31b733f07
+guava_source_base	dfd9dca629d44faf71846b1f85acd38556f4854d
+guava_provider_source	provider-corrections/java21-8.90.4/PROVENANCE.json; original licenses retained
+guava_provider_jar_sha256	0c2fa9f1eb36263c81c98e76c31984f53b981f4527ea3438e199feeffdd45a2c
+error_prone_receiver	tool-corrections/error-prone-2.50.0; 2.50.0-m3-guava-namespace-20261018
+error_prone_jar_sha256	00bfd0a01639209649f20bf7bd957a34dab4981006203a72d88cdbd35b055f8b
+licenses	Per-source original licenses/NOTICE retained; Synexia task sources Apache-2.0; no blanket donor relicensing
+unchanged_base_files_to_skip	M3HashPinnedJavaSnapshotRecipe.java;M3HashPinnedPomSnapshotRecipe.java;M3HashPinnedTextSnapshotRecipe.java;M3EditScope.java;M3ScopeInference.java
+commons_draft_pr	https://github.com/hsoliwal/commons-collections/pull/7;7d7ed92138a46df531e48ba35809b2ca22130a58;treecf02c9e96ad29a260b6203cb0ec064dd8f48259c
+eclipse_draft_pr	https://github.com/hsoliwal/eclipse-collections/pull/6;6460aee4bd999bff2eb0a2d539df00280079ddb8;treeab10929f308eea71e6f4fbdfc7e6d85cc789bdc7
+error_prone_public_overlay	8 classes;20955 bytes; original,class,final,POM,COPYING hashes and drift refusals; official2.50.0 reconstruction with no private checkout
+test_runner_receiver	com.google.testparameterinjector:test-parameter-injector:1.22-m3-relocated-20261018; standard Maven Shade;114-test NullPointerTester regression passed
+exporter_lineage_receipt	tool-corrections/error-prone-2.50.0/EXPORTER_QUALIFICATION.json; exact exporter/provenance/source pins read back
+registry_remote_before	Git blob098ac62651dcd7636f6f6eaad964533c76dfa97e;SHA256e79f1a8c7b4000301f08a19f57b393838b01e72bd72f109aafa2f8ebbfa480fd

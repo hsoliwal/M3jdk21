@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.cmd",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=S:/codex-work/m3-nebula-20261004/nebula-offline-mirror/repository",
+    "-f",
+    ".m3/openrewrite-recipes/pom.xml",
+    "clean",
+    "verify"
+  ],
+  "cwd": "S:\\gef-classic-owned-qualification-20261006\\control-owner",
+  "exit_code": 0,
+  "elapsed_seconds": 7.242,
+  "log_sha256": "5d01ea3a07d36c3be6922da8eee37662a1bd9dbcdae625d81c79d13d7b04f200",
+  "original_strict_compiler_and_junit_flags": true,
+  "original_full_gef_reactor_claim": false
+}

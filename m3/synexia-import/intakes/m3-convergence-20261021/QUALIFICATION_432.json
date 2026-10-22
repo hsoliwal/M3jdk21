@@ -1,0 +1,107 @@
+{
+  "schema": "M3_BOUNDED_432_CUSTODY_QUALIFICATION_V1",
+  "utc": "2026-10-21T07:32:15.579480+00:00",
+  "status": "PASS",
+  "scope": "432 sealed source-custody relocations and isolated virtual-root receiver; no payload semantic or product-runtime qualification",
+  "canonical_owner": "hsoliwal/com.synexia",
+  "engine_git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+  "source_mutations": 0,
+  "count": 432,
+  "raw_bytes": 19519731,
+  "raw_binary_sdk_inputs": 432,
+  "zip_payloads": 1,
+  "first_changes": 432,
+  "fixed_point_changes": 0,
+  "reversed_order_root_equal": true,
+  "partial_state_order_trials_per_run": 16,
+  "refusal_cases_per_run": 7,
+  "offline_actual_sdk_runs": 2,
+  "junit_tests_per_run": 1,
+  "compile_gate": "Java21 Maven compiler3.13.0 with -Xlint:all -Werror",
+  "output_root_sha256": "d9af3625ca7f22b3196409ac9a3be6a6e1a0b107e1f63b1fc6a7a8e849e2ebf2",
+  "receiver_tree": "/workspace/scratch/b4deff766505/work/m3-convergence-20261021/candidates/custody-sdk/target/receiver",
+  "failure_history": [
+    {
+      "log": "evidence/maven-compile-001.log",
+      "stage": "dependency TLS resolution",
+      "classification": "PKIX path building failure before source compilation",
+      "resolution": "Use pre-existing OS Java truststore with TLS verification retained; next compile passed"
+    }
+  ],
+  "existing_engine_refusal_limitation": "Content/mode drift may return error-bearing partial SDK results. Harness rejects the entire run if any SDK error or exception occurred and materializes none of those results.",
+  "helper_provenance_limitation": "M3GpuToolJoinRecipe is genuine target mirror1c1b1b568d369f688f6953161636bf36b484bf5a, not current canonical2439c141937ba1e94ca3c9b0f68b4cc1c28348f7. Exact originala1a6fd0 helper identity not established. M3GpuToolJoinManifest matches current canonical38df5f97bbeec8a8a8cfc77091d56bda925c07f2.",
+  "remaining_gates": [
+    "Canonical private-owner publication and acceptance",
+    "Target integration review and live receiving-tree readback",
+    "Imported payload compilation/semantic qualification",
+    "Whole-repository source/offline mirror admission",
+    "Built M3JDK21/jtreg/JCK/native/JNI/runtime gates"
+  ],
+  "receipts": [
+    {
+      "path": "SOURCE_RECEIPTS.json",
+      "sha256": "2b71c805c9e0a1288d50d4f1c83fa52229f9c60851075e253ba74b160ece3acc",
+      "bytes": 2481
+    },
+    {
+      "path": "evidence/lint-001.json",
+      "sha256": "bfae82953b318ed94fd734fec9fbb833f7e7bb25902e202d56d147ead154cfbd",
+      "bytes": 720
+    },
+    {
+      "path": "evidence/maven-compile-001.log",
+      "sha256": "2dcc191914d4274eac6ab45c3a5bdb647905ab00b4d1037ee417fdefb6c5a82c",
+      "bytes": 1643
+    },
+    {
+      "path": "evidence/maven-compile-002.log",
+      "sha256": "a7504ef469427f27f20f6ff1c0b6e6ee06532f092c57c188db18a2b3b9f3d833",
+      "bytes": 1113
+    },
+    {
+      "path": "evidence/maven-test-compile-001.log",
+      "sha256": "71acc16b4203c098a755062d0020b840c4957fb40e5100388a8a13ea53c9f998",
+      "bytes": 1543
+    },
+    {
+      "path": "evidence/maven-sdk-test-001.log",
+      "sha256": "7e3313dc19c4d17cbfe455e9b803ab8fd02eff836e0243f8eea0e3c119b5858c",
+      "bytes": 2403
+    },
+    {
+      "path": "evidence/maven-sdk-receiver-offline-001.log",
+      "sha256": "9428fe912ecc0b7bdaacb9a481a71e2ebfba2af298f65c0382f42cd171b6d18c",
+      "bytes": 2403
+    },
+    {
+      "path": "evidence/independent-readback-001.json",
+      "sha256": "c7ae697203788ff45d400dd78a05bd5c6e024fb44c7cf123b1425d6fb2acbd66",
+      "bytes": 1264
+    },
+    {
+      "path": "evidence/executed-test-classpath-001.json",
+      "sha256": "f68dba1957729feb042855949100e0af6d106fdced6a6d22f87ceced1e506e56",
+      "bytes": 12406
+    },
+    {
+      "path": "target/custody-receipts/SDK_RECEIPT.json",
+      "sha256": "d99f7cb3d626ab55043aee131ccd343d858242738bb27f9aa2d234d29f75bba9",
+      "bytes": 770
+    },
+    {
+      "path": "target/receiver-receipts/SDK_RECEIPT.json",
+      "sha256": "d2766f194eaee66e28fc989c4e7819e25912add8c092b877e5a359617f1b1140",
+      "bytes": 787
+    },
+    {
+      "path": "target/custody-receipts/OUTPUT_SEALS.tsv",
+      "sha256": "d9af3625ca7f22b3196409ac9a3be6a6e1a0b107e1f63b1fc6a7a8e849e2ebf2",
+      "bytes": 120153
+    },
+    {
+      "path": "target/custody-receipts/CASES.tsv",
+      "sha256": "09af7d123c3926c66524aaea8d853427e33b647ddecc7ed02f5297115c1aa4d8",
+      "bytes": 1725
+    }
+  ]
+}

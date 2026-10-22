@@ -1,0 +1,74 @@
+{
+  "schema": "M3_SOURCE_RECOVERY_CANDIDATE_V1",
+  "status": "CANDIDATE_ONLY_NOT_SDK_EXECUTED",
+  "files": [
+    {
+      "intake_source_path": "recipe-intake/synexia-m3scale-apache2-7de477e53e06/COPYRIGHT.md",
+      "target_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/synexia-m3scale-apache2-7de477e53e06/COPYRIGHT.md",
+      "repository": "hsoliwal/synexia-m3scale-apache2",
+      "revision": "7de477e53e067726f324e690133be57e9a32d270",
+      "path": "COPYRIGHT.md",
+      "mode": "100644",
+      "git_blob": "a094100ef74eda711b8c63a1bd72bb921de363d5",
+      "sha256": "7b745bdb1a6a08fc15d828a51485b722e23d74b27c83a49abf24efffa865863c",
+      "bytes": 2583,
+      "local_path": "sources/hsoliwal__synexia-m3scale-apache2/7de477e53e067726f324e690133be57e9a32d270/COPYRIGHT.md",
+      "verification": "EXACT_PINNED_TREE_GIT_BLOB_SIZE_AND_MODE"
+    },
+    {
+      "intake_source_path": "recipe-intake/synexia-m3scale-apache2-7de477e53e06/LICENSE",
+      "target_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/synexia-m3scale-apache2-7de477e53e06/LICENSE",
+      "repository": "hsoliwal/synexia-m3scale-apache2",
+      "revision": "7de477e53e067726f324e690133be57e9a32d270",
+      "path": "LICENSE",
+      "mode": "100644",
+      "git_blob": "25d88501f04c363bdbd4a127935f7f4e6e713ccc",
+      "sha256": "71c2622d59f7b6f49987df65dd935ffe370326654e9b4f8f0118b25a72ed1891",
+      "bytes": 10341,
+      "local_path": "sources/hsoliwal__synexia-m3scale-apache2/7de477e53e067726f324e690133be57e9a32d270/LICENSE",
+      "verification": "EXACT_PINNED_TREE_GIT_BLOB_SIZE_AND_MODE"
+    },
+    {
+      "intake_source_path": "recipe-intake/synexia-m3scale-apache2-7de477e53e06/LICENSE.spdx",
+      "target_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/synexia-m3scale-apache2-7de477e53e06/LICENSE.spdx",
+      "repository": "hsoliwal/synexia-m3scale-apache2",
+      "revision": "7de477e53e067726f324e690133be57e9a32d270",
+      "path": "LICENSE.spdx",
+      "mode": "100644",
+      "git_blob": "216e47e603f4edd3e1227259660adcc18e0429f6",
+      "sha256": "2ddcbce68d99a83e3956e993590f95341429917f010ae6ee7af317cd58f98191",
+      "bytes": 690,
+      "local_path": "sources/hsoliwal__synexia-m3scale-apache2/7de477e53e067726f324e690133be57e9a32d270/LICENSE.spdx",
+      "verification": "EXACT_PINNED_TREE_GIT_BLOB_SIZE_AND_MODE"
+    },
+    {
+      "intake_source_path": "recipe-intake/synexia-m3scale-apache2-7de477e53e06/NOTICE",
+      "target_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/synexia-m3scale-apache2-7de477e53e06/NOTICE",
+      "repository": "hsoliwal/synexia-m3scale-apache2",
+      "revision": "7de477e53e067726f324e690133be57e9a32d270",
+      "path": "NOTICE",
+      "mode": "100644",
+      "git_blob": "b9aab6ff8ba594f45a373339e67699b515be133b",
+      "sha256": "d0c7bb4759d98faed5042796f1489fe39a96d401a9e408f96cb4ce662a3efe7c",
+      "bytes": 1543,
+      "local_path": "sources/hsoliwal__synexia-m3scale-apache2/7de477e53e067726f324e690133be57e9a32d270/NOTICE",
+      "verification": "EXACT_PINNED_TREE_GIT_BLOB_SIZE_AND_MODE"
+    },
+    {
+      "intake_source_path": "recipe-intake/synexia-m3scale-apache2-7de477e53e06/src/main/java/com/synexia/m3scale/primitive/BoundedLongSortedSet.java",
+      "target_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/synexia-m3scale-apache2-7de477e53e06/src/main/java/com/synexia/m3scale/primitive/BoundedLongSortedSet.java",
+      "repository": "hsoliwal/synexia-m3scale-apache2",
+      "revision": "7de477e53e067726f324e690133be57e9a32d270",
+      "path": "src/main/java/com/synexia/m3scale/primitive/BoundedLongSortedSet.java",
+      "mode": "100644",
+      "git_blob": "0e0477d525447ac0b4a315eaa62e2760de8c9843",
+      "sha256": "223d9057a2eb28efed8d220cc2329b9d63d6e8de51568d3619538fe0ffd190d9",
+      "bytes": 3940,
+      "local_path": "sources/hsoliwal__synexia-m3scale-apache2/7de477e53e067726f324e690133be57e9a32d270/src/main/java/com/synexia/m3scale/primitive/BoundedLongSortedSet.java",
+      "verification": "EXACT_PINNED_TREE_GIT_BLOB_SIZE_AND_MODE"
+    }
+  ],
+  "scope": "Historical origin-qualified first-party primitive source and rights files; not an active runtime class or standalone behavior qualification.",
+  "license": "Source has Apache-2.0 header; complete acquired rootLICENSE/NOTICE/COPYRIGHT.md/LICENSE.spdx remain attached. Referenced absent historical release-boundary document is disclosed in FOCUSED_OWNER_COVERAGE.json.",
+  "input_materialization": "Existing exact bodies remain at local_path. Root can stage the five files under an intake root using the source label before the unchanged generic custody SDK run."
+}

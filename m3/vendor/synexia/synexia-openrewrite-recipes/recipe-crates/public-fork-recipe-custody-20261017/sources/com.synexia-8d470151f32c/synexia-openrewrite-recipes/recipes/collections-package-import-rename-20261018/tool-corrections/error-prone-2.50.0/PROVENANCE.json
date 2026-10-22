@@ -1,0 +1,18 @@
+{
+  "upstream_repository": "google/error-prone",
+  "upstream_ref": "v2.50.0",
+  "receiver_version": "2.50.0-m3-guava-namespace-20261018",
+  "original_jar_sha256": "40a88d3ea732fac3a57ae0e2b27f1729ce76cc41857bcd63d5845e79eae5f72e",
+  "original_pom_sha256": "88230678dca735cc2dc10d6331bcaf7428d2bd108d621d4dc69178224297e1f6",
+  "upstream_source_git_blobs": {
+    "WellKnownMutability.java": "164ecebd27ce4ae6efec701f3094511626cb2f4a",
+    "HeldLockAnalyzer.java": "bb92c37309376d2368a60ad78a2f3bfe3b0f36d6"
+  },
+  "corrected_sources": {
+    "src/main/java/com/google/errorprone/bugpatterns/threadsafety/HeldLockAnalyzer.java": "647a180a7652b8e0130c940e19b6014207be3d16faa63253e95c4216d2b7befc",
+    "src/main/java/com/google/errorprone/bugpatterns/threadsafety/WellKnownMutability.java": "8fbf991868dd770f4d5575fcb0b8bc5d07968bf183bd25d2e592f8fed2370a40"
+  },
+  "scope": "Add renamed Guava aliases, retaining original immutable container constraints, known mutable identities, Monitor guard/leave and immediate Iterables lambda rules.",
+  "receiver_jar_sha256": "00bfd0a01639209649f20bf7bd957a34dab4981006203a72d88cdbd35b055f8b",
+  "receiver_pom_sha256": "c056a3826a745355290eb9aaec70c74cf5cc1474a423adf2a9c1e1114272b227"
+}
