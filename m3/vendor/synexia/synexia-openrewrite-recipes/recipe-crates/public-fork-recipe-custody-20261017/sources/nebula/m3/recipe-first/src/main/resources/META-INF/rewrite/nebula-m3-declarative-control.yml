@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.DeclarativeConvergenceControl
+displayName: Install Nebula declarative convergence control
+description: >-
+  Source-sealed control-plane migration to managed Environment activation and
+  official declarative-resource testing. No widget or public API authority.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3DeclarativeConvergenceControlRecipe

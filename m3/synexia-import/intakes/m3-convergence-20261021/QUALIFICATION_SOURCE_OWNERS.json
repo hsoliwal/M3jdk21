@@ -1,0 +1,230 @@
+{
+  "schema": "M3_SOURCE_OWNERS_SDK_QUALIFICATION_V1",
+  "recorded_at_utc": "2026-10-21T12:35:14.131543+00:00",
+  "status": "PASS_TWO_OFFLINE_SDK_RUNS_AND_INDEPENDENT_EXACT_READBACK",
+  "execution_kind": "SDK_EXECUTION",
+  "qualification_plan": {
+    "path": "candidates/custody-sdk/source-owners/QUALIFICATION_PLAN.json",
+    "bytes": 5830,
+    "sha256": "a071b5cca0883681f2208fea868b0102e41e486a6d0096fa30b97b3805dac1a1"
+  },
+  "source_materialization": {
+    "path": "candidates/custody-source-owners/MATERIALIZATION_RECEIPT.json",
+    "bytes": 3597,
+    "sha256": "fb0f5736e792415ddc98f7663191c5706f03a3ca8eb0dc6e5d418b4b8b91a7e1"
+  },
+  "source_seals": {
+    "path": "candidates/custody-source-owners/SOURCE_SEALS.json",
+    "bytes": 78770,
+    "sha256": "d06db730262bef986447fc59d6a41dd08e2fff3b65197a9ce76c83882e1fa1e0"
+  },
+  "manifest": {
+    "path": "candidates/custody-source-owners/manifest.tsv",
+    "bytes": 25837,
+    "sha256": "4b7a08b6ffa1b1d114298bc70d374fed9336012501e540f24429a5dee7e9cb1d"
+  },
+  "build_pom": {
+    "path": "candidates/custody-sdk/source-owners/pom.xml",
+    "bytes": 3660,
+    "sha256": "cdcf31c4d554b5ae04530251e693112919c3e71ba044101ade1bb48d6038ebc9"
+  },
+  "unchanged_engine_git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+  "unchanged_generic_test_sha256": "f59d61e5e3de09cd524fc6c25ad854d9cc5a6cb8f989414b70ff7d223c15f938",
+  "source_files": 50,
+  "source_bytes": 374183,
+  "source_pins": {
+    "8d470151f32c79e9aa14f4984ea6fafb30f3a999": 29,
+    "910151fc0ebb3c14220e69dccf1b69cffce591a1": 21
+  },
+  "toolchain": {
+    "maven": "3.9.6",
+    "jdk": "21.0.12.1",
+    "jdk_vendor": "Eclipse Adoptium",
+    "openrewrite": "8.17.1",
+    "offline": true,
+    "local_repository": "maven-repository",
+    "environment_receipt": {
+      "path": "toolchains/ENVIRONMENT_RECEIPT.json",
+      "bytes": 3766,
+      "sha256": "a9e159f484571b8661c9084a8ee0be4562f9d7268979a54c17ae11b5029585c0"
+    }
+  },
+  "pipeline": {
+    "patch": "Isolated build envelope only; canonical engine/helpers and generic test unchanged.",
+    "lint_compile": "First run compiled four main sources and one test under Java21, -Xlint:all and -Werror; same pinned dependencies/plugins as original delta POM.",
+    "tests": "Two actual offline runs, one JUnit test each; zero failures/errors/skips.",
+    "sdk_runtime": "Per run: 50 first changes, zero fixed-point changes, same reversed-input root, 16 partial-state/order trials over a three-file subset, seven refusal cases.",
+    "physical_readback": "Exactly 50 input and 50 actual SDK output files; all Git blobs/SHA256/sizes/modes verified, no extra or missing paths, no symlinks.",
+    "installed_product_runtime": "NOT_EXECUTED"
+  },
+  "output_root": "candidates/custody-source-owners/sdk-output",
+  "output_seals_sha256": "bf7b7b66ef155440298cc6c968b2baf53cae97392c87adc9ebde4993fbbf2958",
+  "runs": [
+    {
+      "run": 1,
+      "invocation": {
+        "path": "candidates/custody-sdk/source-owners/evidence/run-1/INVOCATION.json",
+        "bytes": 1617,
+        "sha256": "f9b3d235850247e3747083978c2d17b04b6280669f5c693f2d5ea9b5e6b0e6f8"
+      },
+      "result": {
+        "path": "candidates/custody-sdk/source-owners/evidence/run-1/RUN_RESULT.json",
+        "bytes": 911,
+        "sha256": "6e79a7dc75c628ff072933b46ba43207cc682c7181579a28c48859456ca19118"
+      },
+      "maven_log": {
+        "path": "candidates/custody-sdk/source-owners/evidence/run-1/maven.log",
+        "bytes": 2678,
+        "sha256": "7381121dfa6775d9d2a7f00609c0968c67a9fcbd3b8eb51265bd909865a29dba"
+      },
+      "surefire_reports": [
+        {
+          "path": "candidates/custody-sdk/source-owners/evidence/run-1/surefire-reports/TEST-com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.xml",
+          "bytes": 16129,
+          "sha256": "bd0a3c8e684f4e427f88e4e9baba02e809bdfe4348542fe2bf00c26bfbe2c409"
+        },
+        {
+          "path": "candidates/custody-sdk/source-owners/evidence/run-1/surefire-reports/com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.txt",
+          "bytes": 350,
+          "sha256": "c9ab52a1e7cafac809ae71ce86cb9f433c10b32c29aa9f8624f11458be89e3f1"
+        }
+      ],
+      "surefire": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "time_seconds": "0.54"
+      },
+      "sdk_receipt": {
+        "path": "candidates/custody-source-owners/sdk-receipts/run-1/SDK_RECEIPT.json",
+        "bytes": 770,
+        "sha256": "6965a92c12cca9697551b3dc769db43d235a0bc178d407d4429abf468a73f0bb"
+      },
+      "case_receipt": {
+        "path": "candidates/custody-source-owners/sdk-receipts/run-1/CASES.tsv",
+        "bytes": 1677,
+        "sha256": "bc0111239898d7ba66db47232528125e62e2f25769a0230390ff9f66e72a9ee1"
+      },
+      "output_seals": {
+        "path": "candidates/custody-source-owners/sdk-receipts/run-1/OUTPUT_SEALS.tsv",
+        "bytes": 17680,
+        "sha256": "bf7b7b66ef155440298cc6c968b2baf53cae97392c87adc9ebde4993fbbf2958"
+      },
+      "observed_sdk": {
+        "execution_kind": "SDK_EXECUTION",
+        "engine_git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+        "sdk_version": "8.17.1",
+        "manifest_sha256": "4b7a08b6ffa1b1d114298bc70d374fed9336012501e540f24429a5dee7e9cb1d",
+        "files": 50,
+        "bytes": 374183,
+        "first_changes": 50,
+        "fixed_point_changes": 0,
+        "reversed_input_root_matches": true,
+        "partial_state_order_trials": 16,
+        "refusal_cases": 7,
+        "input_bytes_modes_unchanged": true,
+        "output_sha256": "bf7b7b66ef155440298cc6c968b2baf53cae97392c87adc9ebde4993fbbf2958",
+        "materialization_root": "/workspace/scratch/b4deff766505/work/m3-convergence-20261021/candidates/custody-source-owners/sdk-output",
+        "output_readback": "PASS",
+        "payload_semantics_qualified": false,
+        "product_runtime_qualified": false
+      }
+    },
+    {
+      "run": 2,
+      "invocation": {
+        "path": "candidates/custody-sdk/source-owners/evidence/run-2/INVOCATION.json",
+        "bytes": 1782,
+        "sha256": "7bf00c550ef9228c243f9ec3776d702f0faba52abe21bd15d688d94336073695"
+      },
+      "result": {
+        "path": "candidates/custody-sdk/source-owners/evidence/run-2/RUN_RESULT.json",
+        "bytes": 911,
+        "sha256": "da5f77c144f85e752480e43a58f734fa60a93b77f0d532926527241b0b5cea5b"
+      },
+      "maven_log": {
+        "path": "candidates/custody-sdk/source-owners/evidence/run-2/maven.log",
+        "bytes": 2503,
+        "sha256": "d9034d9f38ae97174555aa212bf3563cc83316762cec4b1de9a33b7c6c5a4d13"
+      },
+      "surefire_reports": [
+        {
+          "path": "candidates/custody-sdk/source-owners/evidence/run-2/surefire-reports/TEST-com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.xml",
+          "bytes": 16130,
+          "sha256": "c9f095788cb58d554441ca83aa2e05b32a194d31e6de46121bfd5fc258dd9b97"
+        },
+        {
+          "path": "candidates/custody-sdk/source-owners/evidence/run-2/surefire-reports/com.synexia.rewrite.M3PublicRecipeCustodyDeltaTest.txt",
+          "bytes": 350,
+          "sha256": "9c581dbcf71f07a3aad35cbfff3e01c1cc23c068e1924a2615b7154ef37e442a"
+        }
+      ],
+      "surefire": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "time_seconds": "0.517"
+      },
+      "sdk_receipt": {
+        "path": "candidates/custody-source-owners/sdk-receipts/run-2/SDK_RECEIPT.json",
+        "bytes": 770,
+        "sha256": "6965a92c12cca9697551b3dc769db43d235a0bc178d407d4429abf468a73f0bb"
+      },
+      "case_receipt": {
+        "path": "candidates/custody-source-owners/sdk-receipts/run-2/CASES.tsv",
+        "bytes": 1677,
+        "sha256": "bc0111239898d7ba66db47232528125e62e2f25769a0230390ff9f66e72a9ee1"
+      },
+      "output_seals": {
+        "path": "candidates/custody-source-owners/sdk-receipts/run-2/OUTPUT_SEALS.tsv",
+        "bytes": 17680,
+        "sha256": "bf7b7b66ef155440298cc6c968b2baf53cae97392c87adc9ebde4993fbbf2958"
+      },
+      "observed_sdk": {
+        "execution_kind": "SDK_EXECUTION",
+        "engine_git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+        "sdk_version": "8.17.1",
+        "manifest_sha256": "4b7a08b6ffa1b1d114298bc70d374fed9336012501e540f24429a5dee7e9cb1d",
+        "files": 50,
+        "bytes": 374183,
+        "first_changes": 50,
+        "fixed_point_changes": 0,
+        "reversed_input_root_matches": true,
+        "partial_state_order_trials": 16,
+        "refusal_cases": 7,
+        "input_bytes_modes_unchanged": true,
+        "output_sha256": "bf7b7b66ef155440298cc6c968b2baf53cae97392c87adc9ebde4993fbbf2958",
+        "materialization_root": "/workspace/scratch/b4deff766505/work/m3-convergence-20261021/candidates/custody-source-owners/sdk-output",
+        "output_readback": "PASS",
+        "payload_semantics_qualified": false,
+        "product_runtime_qualified": false
+      }
+    }
+  ],
+  "independent_readback": {
+    "path": "candidates/custody-sdk/source-owners/evidence/INDEPENDENT_READBACK.json",
+    "bytes": 11024,
+    "sha256": "1db713384df86aa36a1d19b8fa68dceddd0147b9b57ed43bffa24615424fabd7"
+  },
+  "original_delta_proof_baseline": {
+    "path": "candidates/custody-sdk/source-owners/evidence/ORIGINAL_DELTA_PROOFS_BASELINE.json",
+    "bytes": 7157,
+    "sha256": "c422fdaf322a25c8744550e8dc09f44e3309c8bb51a9c762c336ca2b417103ba"
+  },
+  "unchanged_protected_files": 11,
+  "unchanged_original_delta_proof_files": 33,
+  "payload_semantics_qualified": false,
+  "product_runtime_qualified": false,
+  "target_writes": 0,
+  "external_writes": 0,
+  "storage_cleanup_performed": false,
+  "limits": [
+    "Historical byte-preserving custody, not payload semantic or installed-product runtime qualification.",
+    "This selected 50-file packet is not the complete 265-file PR12340 publication or standalone build closure.",
+    "All private full source/provenance remains in private task artifacts; root owns receiving/publication decisions.",
+    "Partial-state and refusal fixtures cover a bounded three-file subset; every full-manifest input/output is hash/size/mode/path verified.",
+    "The materialization receipt retains its historical pending status; this additive index records the subsequently completed SDK qualification."
+  ]
+}

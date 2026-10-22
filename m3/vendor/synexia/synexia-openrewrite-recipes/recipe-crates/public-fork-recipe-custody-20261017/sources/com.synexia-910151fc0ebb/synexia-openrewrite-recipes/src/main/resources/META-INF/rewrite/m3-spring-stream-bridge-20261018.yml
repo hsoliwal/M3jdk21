@@ -1,0 +1,6 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3SpringStreams
+displayName: Install source-sealed spring stream superset bridge
+recipeList:
+  - com.synexia.rewrite.M3SpringStreamsRecipe

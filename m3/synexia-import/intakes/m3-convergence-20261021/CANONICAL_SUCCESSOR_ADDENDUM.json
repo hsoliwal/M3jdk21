@@ -1,0 +1,307 @@
+{
+  "schema": "M3_CANONICAL_SUCCESSOR_HISTORY_ADDENDUM_V1",
+  "status": "NINE_EXACT_CANONICAL_POSTIMAGES_RESOLVED_SOURCE_OWNERS_RECOVERED_READ_ONLY",
+  "prior_summary": {
+    "path": "evidence/donor-inventory/reconciliation/dependency-closure/HISTORICAL_COMPARISON_SUMMARY.json",
+    "bytes": 10675,
+    "sha256": "e51ae8dd26fdba44dba52c2e2648638cbe1850e1077a26d5337adb94aee47711"
+  },
+  "append_only_rule": "Prior history summary, detailed base/corrections and all acquisition receipts remain unchanged. Apply these nine classification promotions after that summary.",
+  "canonical_current_pin": "910151fc0ebb3c14220e69dccf1b69cffce591a1",
+  "canonical_source_heads": [
+    {
+      "pr": 12340,
+      "state": "OPEN_UNMERGED",
+      "head": "8d470151f32c79e9aa14f4984ea6fafb30f3a999",
+      "owner": "synexia-openrewrite-recipes/recipes/collections-package-import-rename-20261018",
+      "current_default_disposition": "OWNER_PATH_RETURNS_404; 11 named Java owners absent from current main Java tree"
+    },
+    {
+      "pr": 12427,
+      "state": "OPEN_UNMERGED",
+      "head": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+      "owner": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "current_default_disposition": "61 current default datasets contain no Guava/Commons/Eclipse/Spring/Android dataset; PR head retains the inspected public-fork recipe datasets"
+    },
+    {
+      "pr": 12358,
+      "state": "MERGED",
+      "head": "7add2f41d41d6f2b4a24a6f932647f6a41dccd5a",
+      "merge_commit": "0485f5cf482df323bede6b2c691cb3b55d11c50d",
+      "owner": "synexia-openrewrite-recipes/recipes/m3-fork-stream-bridges-20261018",
+      "current_default_disposition": "Four class/descriptor/resource owners read and verified at canonical_current_pin"
+    }
+  ],
+  "history_delta": {
+    "resolved_prior_evolved_files": 9,
+    "final_file_status_counts": {
+      "EVOLVED_UNRECONCILED": 73,
+      "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 86,
+      "EXACT_RECORDED_POSTIMAGE": 7388,
+      "BASELINE_ONLY_INAPPLICABLE_AS_POSTIMAGE": 16,
+      "FROZEN_ORACLE_ONLY_EXACT": 3
+    },
+    "final_per_repository": {
+      "hsoliwal/commons-collections": {
+        "EVOLVED_UNRECONCILED": 3,
+        "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 5,
+        "EXACT_RECORDED_POSTIMAGE": 889,
+        "BASELINE_ONLY_INAPPLICABLE_AS_POSTIMAGE": 13,
+        "FROZEN_ORACLE_ONLY_EXACT": 3
+      },
+      "hsoliwal/eclipse-collections": {
+        "EXACT_RECORDED_POSTIMAGE": 3202,
+        "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 62,
+        "EVOLVED_UNRECONCILED": 1
+      },
+      "hsoliwal/guava": {
+        "EXACT_RECORDED_POSTIMAGE": 3291,
+        "EVOLVED_UNRECONCILED": 69,
+        "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 4,
+        "BASELINE_ONLY_INAPPLICABLE_AS_POSTIMAGE": 3
+      },
+      "hsoliwal/spring-framework": {
+        "EXACT_RECORDED_POSTIMAGE": 6,
+        "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 15
+      }
+    },
+    "promotions": [
+      {
+        "repository": "hsoliwal/guava",
+        "path": ".github/workflows/m3-guava-evicting-package-first-20261018.yml",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "guava-array-contract-ci",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "674f3f61300d7f794b637d5bd342accb02f79f76",
+        "postimage_sha256": "2e1f05327d83a1c8788afc48ee24bd57c2fc77f10c7580de85093f9bae1de5ae",
+        "canonical_template_git_blob": "392ede39277833b42b916ff74c5404bca88ac996"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/ObjectCountHashMap.java",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "guava-immutable-counts",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "a7f4b3c3a4635f54449e8980ba9ac5f76c1b84ea",
+        "postimage_sha256": "d56bd54224ebe51ed7a66875bb0c3063e8b3f95090bc3eaaeadfaa13473c38a1",
+        "canonical_template_git_blob": "25b08b0332ad2c1bf225dd9b8b2af7404222ab8f"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/RegularImmutableMultiset.java",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "guava-immutable-counts",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "a7f4b3c3a4635f54449e8980ba9ac5f76c1b84ea",
+        "postimage_sha256": "88f77d1fc8f42adcd34f6f9337c569ac3c4ca895b36b880f76136493272ad3af",
+        "canonical_template_git_blob": "fe03fd460a439dafb6370b2dfbef6a1f1201686b"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/RegularImmutableBiMap.java",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "guava-immutable-indexes",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "b547a0219032b69d7e9dc6301abb52688872580b",
+        "postimage_sha256": "d79e8b2f76257d31ac5df7e5f03ea943eae51d871fa81d8c8ef99d41f92801f4",
+        "canonical_template_git_blob": "74fb0925bb130c6aeedf30d9b6549488f748879c"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/RegularImmutableMap.java",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "guava-immutable-indexes",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "b547a0219032b69d7e9dc6301abb52688872580b",
+        "postimage_sha256": "ad833968993ee8b77321753eb5567eb4770f01149a144d4d6ed8a221763a243d",
+        "canonical_template_git_blob": "3ef099f6c70a0ef98aba9002643dcc9ef64fe8ef"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/TreeMultiset.java",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "guava-tree-arrays",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "65ac5cc5b2b146643fa71509f8326af84a092c0d",
+        "postimage_sha256": "b46b47aa92ba0c77437eab98ffbbe5721b41ab85bab46e9bcb639233353ac89e",
+        "canonical_template_git_blob": "71775ab0c59b2417845774683c74ae9e4765fc6e"
+      },
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": ".github/workflows/m3-apache-circular-package-first-20261018.yml",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "commons-arrays-final",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "c6f8979e09e68111b16490fb6b8c327b097588e0",
+        "postimage_sha256": "3d6490876a8188fc389802b39a9d5c7ae423d7acbe5847d799c7347055c62ed3",
+        "canonical_template_git_blob": "926adacb8fddcf69b2509d434ffa0f3ef9c2cb9b"
+      },
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": "src/main/java/com/m3/collections/apache/list/TreeList.java",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "commons-tree-arrays",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "94291b86a337c48b59faa278c86b600960f41b47",
+        "postimage_sha256": "2c1f47e3736f1366105258db91eb563780322956462460ffdb403d4f66a96f65",
+        "canonical_template_git_blob": "ea33cb5bc43e6939cecd30bacdc0e64bcab2d1a0"
+      },
+      {
+        "repository": "hsoliwal/eclipse-collections",
+        "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/mutable/FastList.java",
+        "old": "EVOLVED_UNRECONCILED",
+        "new": "EXACT_RECORDED_POSTIMAGE",
+        "dataset": "eclipse-array-style",
+        "canonical_ref": "d3338bf4746398e63abc4fd263ddea83a784b6ec",
+        "manifest_git_blob": "f06354abd7742b603ce1f16ab0fb3d695a393d1b",
+        "postimage_sha256": "b38ee0aee09d96511751b9e12cc541c3421316531fe82abfb2483e425ac2c146",
+        "canonical_template_git_blob": "a065e8ba20eebe1b9bc8c92e58c87eb04055d486"
+      }
+    ],
+    "interpretation": "Current acquired bytes match both explicit manifest after-SHA256 and canonical template Git blob. This establishes recorded output identity, not a new SDK/runtime run or global product admission."
+  },
+  "remaining_evolved": {
+    "count": 73,
+    "guava_android": {
+      "count": 69,
+      "public_receiving_commit": "8b40b586defd8c965a50a28de028e62e6bc555da",
+      "commit_message": "Restore omitted Android nested-type imports through Synexia recipe\n\nReceive 70 exact SDK targets: 92 donor-pinned imports in 69 test and benchmark sources plus the recovery contract. Preserve every non-import byte, all assertions, production sources and the existing native workflow. Actual SDK, sealing and receiver gates pass; full hosted Android validation remains required.",
+      "remaining_gate": "Public recovery contract and receiving commit identify 69 files/92 imports, but exact canonical recovery dataset and output manifest remain unlocated. Bounded branch searches are not an all-ref proof."
+    },
+    "other_files": [
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": "pom.xml",
+        "current_git_blob": "d82318baac89ce958094084617ab716afed9d890",
+        "current_sha256": "f2c67b3454f461d59beabef79e81bd71eae46c93509a2134d0a3be3e0f8f93ef",
+        "public_recent_path_history": [
+          {
+            "sha": "3ff38a7fe412dc2d7da37c164d3673c9c9c40e39",
+            "message": "fix(rat): scope generated M3 evidence exemptions without touching sources"
+          },
+          {
+            "sha": "7d7ed92138a46df531e48ba35809b2ca22130a58",
+            "message": "Rename Commons Collections packages and imports to com.m3.collections.apache\n\nApply the canonical hash-bound package recipe across production, tests and resources. Preserve collection bodies, notices and original serialization fixtures; qualify the actual relocated archive and immutable-original differential."
+          }
+        ],
+        "remaining_gate": "No exact canonical recipe postimage for the later RAT evidence-scope change located in inspected owners."
+      },
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": "src/main/java/com/m3/collections/apache/bloomfilter/SparseBloomFilter.java",
+        "current_git_blob": "33186cebdc11542a6afb885871129f5f15c9d1df",
+        "current_sha256": "baf49f44f0e1d63334963928ffb8ee875a36ceb8b7d1b60aa9258a045bc14bd9",
+        "public_recent_path_history": [
+          {
+            "sha": "33d9bbc9155cc6f9f9ef1b1ca8d8929ae9bcc674",
+            "message": "Arrayify SparseBloomFilter through qualified Synexia recipe\n\nReplace private boxed tree keys with primitive AVL and successor arrays. Preserve callback, deferred validation, copy and clear behavior. Receive seven source-sealed SDK targets; native suite 22,281 tests with no failures or errors."
+          },
+          {
+            "sha": "7d7ed92138a46df531e48ba35809b2ca22130a58",
+            "message": "Rename Commons Collections packages and imports to com.m3.collections.apache\n\nApply the canonical hash-bound package recipe across production, tests and resources. Preserve collection bodies, notices and original serialization fixtures; qualify the actual relocated archive and immutable-original differential."
+          }
+        ],
+        "remaining_gate": "Public contract names commons-sparse-arrays then commons-sparse-gates; neither dataset is present in the inspected current default or PR12427 dataset listings."
+      },
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": "src/main/java/com/m3/collections/apache/queue/CircularFifoQueue.java",
+        "current_git_blob": "4647485b0b0787981579f22693d2f6b65ffe42ab",
+        "current_sha256": "b81383af1c511608c257a51c62c8fccb3166e8593196c8c23c25aa3f62a83219",
+        "public_recent_path_history": [
+          {
+            "sha": "708b80fd9fa26121829ad918e0af9a6555c33fcb",
+            "message": "Merge branch 'master' into codex/array-operations-20261019-8d1d6779"
+          },
+          {
+            "sha": "8607908afd758d7a4946cda6bbac4085cff17375",
+            "message": "Qualify occupied-span clearing in CircularFifoQueue"
+          }
+        ],
+        "remaining_gate": "Current merged body matches neither the independent removal-span nor occupied-clear canonical template. A source-sealed composed successor remains required."
+      },
+      {
+        "repository": "hsoliwal/eclipse-collections",
+        "path": "eclipse-collections/src/test/java/com/m3/collections/eclipse/impl/M3EclipsePackageRelocationProof.java",
+        "current_git_blob": "04bf532e01a1f3c81661b01fdbf36ad696ae9cd5",
+        "current_sha256": "3f54d176b8c9446d54e64a621e7201be6e139e7d26e12891bcb884eb3007ac21",
+        "public_recent_path_history": [
+          {
+            "sha": "0d48359990e199a55fa0b1fd2d5c443108960a98",
+            "message": "style(m3): satisfy array trailing comma rule in proof fixture"
+          },
+          {
+            "sha": "ab12b11c10871c761e8dc22505baaf1f443d0808",
+            "message": "style(m3): mechanically format differential fixture without changing its checks"
+          }
+        ],
+        "remaining_gate": "Later public formatting successors identified; no matching canonical successor manifest located in inspected owners."
+      }
+    ]
+  },
+  "closed_source_gaps": {
+    "four_stream_bridges": {
+      "canonical_template_matches": 8,
+      "all_current_public_adapter_and_test_bodies_match": true,
+      "guava_namespace_gate_remains": "Current public and canonical bridge/test both retain com.google.common.collect imports while current selected fork provider is com.m3.collections.guava. Source identity does not resolve provider binding."
+    },
+    "error_prone": {
+      "complete_owner_files_acquired": 11,
+      "source_sha256_matches_public_overlay_contract": true,
+      "HeldLockAnalyzer.java": "647a180a7652b8e0130c940e19b6014207be3d16faa63253e95c4216d2b7befc",
+      "WellKnownMutability.java": "8fbf991868dd770f4d5575fcb0b8bc5d07968bf183bd25d2e592f8fed2370a40"
+    },
+    "selected_recipe_and_provider_source_packet": {
+      "files": 50,
+      "bytes": 374183,
+      "mode": "100644 for all 50, exact tree verified",
+      "target_exact_comparison": {
+        "EXACT_BLOB_ABSENT_AT_PINNED_TARGET": 49,
+        "EXACT_BLOB_ALREADY_PRESENT": 1
+      },
+      "target_comparison_revision": "dd05cb14da9836d87b61311f8345f0e4832f8fad",
+      "scope": "Selected source custody packet; not complete PR12340, standalone build closure or product runtime admission"
+    }
+  },
+  "evidence": [
+    {
+      "path": "evidence/donor-inventory/reconciliation/canonical-successor-followup/BYTE_VERIFICATION.json",
+      "bytes": 75035,
+      "sha256": "111bf27bece3cbf580674c57bd41f7d09b55a4f7993a5f4e13f4813918b67d99"
+    },
+    {
+      "path": "evidence/donor-inventory/reconciliation/canonical-successor-followup/SOURCE_OWNER_INTAKE_CLOSURE.json",
+      "bytes": 82101,
+      "sha256": "4e7140ff1646c3b5f55861ca155ce7c123be60000e1cc980fbd4532ea95eb709"
+    },
+    {
+      "path": "evidence/donor-inventory/reconciliation/canonical-successor-followup/READ_RECEIPTS_01.json",
+      "bytes": 1553958,
+      "sha256": "9fa1416b353415a147bc0a3fc20e8333a18333193d77f48bd3bb655042b9d142"
+    },
+    {
+      "path": "evidence/donor-inventory/reconciliation/canonical-successor-followup/READ_RECEIPTS_02.json",
+      "bytes": 210474,
+      "sha256": "25ad116bc5444679f0f7c20d223f0e8747983cb18504655c67039e421d54048e"
+    },
+    {
+      "path": "evidence/donor-inventory/reconciliation/canonical-successor-followup/READ_RECEIPTS_03.json",
+      "bytes": 5525677,
+      "sha256": "a97cf8bd37aa7bda982803b7d15741ee8ea0c6e3dd4d2c0aec67b5557fb67a54"
+    }
+  ],
+  "unchanged_gates": [
+    "Preserve mixed upstream licenses and canonical private source ownership.",
+    "Existing target runtime owners remain authoritative. New current target head does not extend the dd05 whole-target matrix.",
+    "Compile/SDK/native/product acceptance were not run in this audit.",
+    "Other private source modules, older 8356-source cohort, nondefault refs and all-repository coverage remain separate work."
+  ]
+}

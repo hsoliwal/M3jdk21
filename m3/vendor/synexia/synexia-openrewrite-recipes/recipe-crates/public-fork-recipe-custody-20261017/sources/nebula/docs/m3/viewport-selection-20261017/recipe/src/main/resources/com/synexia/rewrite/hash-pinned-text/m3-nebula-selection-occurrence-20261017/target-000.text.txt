@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.eclipse.nebula</groupId>
+		<artifactId>grid</artifactId>
+		<version>1.1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>org.eclipse.nebula.widgets.grid.test</artifactId>
+	<version>0.4.0-SNAPSHOT</version>
+	<packaging>eclipse-test-plugin</packaging>
+
+	<properties>
+		<nebula.grid.viewport.screenshots.screen>false</nebula.grid.viewport.screenshots.screen>
+		<nebula.swt.gc.sha256></nebula.swt.gc.sha256>
+	</properties>
+
+	<!--
+		The other *_Test classes in this bundle (Grid_Test, GridItem_Test,
+		GridColumn_Test, GridColumnGroup_Test) date back to ~2010 and have
+		been bit-rotting in the IDE-only .launch configuration ever since:
+		they target an old SWT/JFace, an old Mockito (1.8.4), and assert
+		behaviour that has changed multiple times upstream. Restoring them
+		is a worthy effort but orthogonal to the frozen-first-column work
+		this bundle was wired into Maven for. Until that stabilisation
+		happens, the freeze and visible-range tests are run by default so the
+		feature gets real CI protection without lighting up unrelated rot.
+	-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<systemProperties>
+						<nebula.grid.viewport.screenshots.screen>${nebula.grid.viewport.screenshots.screen}</nebula.grid.viewport.screenshots.screen>
+						<nebula.swt.gc.sha256>${nebula.swt.gc.sha256}</nebula.swt.gc.sha256>
+					</systemProperties>
+					<failIfNoTests>true</failIfNoTests>
+					<includes>
+						<include>**/GridFixedColumn_Test.java</include>
+						<include>**/GridVisibleRangeSupport_Test.java</include>
+						<include>**/GridViewportCoordinates_Test.java</include>
+						<include>**/GridGCProxy_Test.java</include>
+						<include>**/GridViewportDistillation_Test.java</include>
+						<include>**/GridBlitScroll_Test.java</include>
+						<include>**/GridBodyDefer_Test.java</include>
+						<include>**/GridCheckLanes_Test.java</include>
+						<include>**/GridColumnWindow_Test.java</include>
+						<include>**/GridIssue700_Test.java</include>
+						<include>**/GridModelJobs_Test.java</include>
+						<include>**/GridPinnedRows_Test.java</include>
+						<include>**/GridPrefetch_Test.java</include>
+						<include>**/GridResidency_Test.java</include>
+						<include>**/GridRowPermutation_Test.java</include>
+						<include>**/GridScrollbarSettle_Test.java</include>
+						<include>**/GridSetDataRedraw_Test.java</include>
+						<include>**/GridSelectionList_Test.java</include>
+						<include>**/GridSelectionOccurrence_Test.java</include>
+						<include>**/GridVirtualHeights_Test.java</include>
+						<include>**/model/HeapGrowth_Test.java</include>
+						<include>**/model/RowBitLanes_Test.java</include>
+						<include>**/model/RowGrouping_Test.java</include>
+						<include>**/model/RowPermutation_Test.java</include>
+						<include>**/model/RowSelection_Test.java</include>
+						<include>**/model/RowStateLanes_Test.java</include>
+						<include>**/model/SparseMirrorBoundary_Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>full-grid-contracts</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-surefire-plugin</artifactId>
+						<configuration>
+							<includes combine.self="override">
+								<include>**/*_Test.java</include>
+							</includes>
+							<failIfNoTests>true</failIfNoTests>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

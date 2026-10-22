@@ -1,0 +1,17 @@
+{
+  "owner_commit": "ef39f9d7f82c0d05c5c32b081d9a48b07579bccc",
+  "owner_tree": "d5a55a690f73ee8267cb82b4bc1f74235ca2a213",
+  "owner_root": "S:\\gef-classic-owned-qualification-20261006\\control-owner",
+  "official_recipe_proof_log_sha256": "2bd6cb97f8fad1f5547c3d21822ff32da9fc9716d7ac4ffe7c4078ee6ebc6bed",
+  "source_paths_checked": 2306,
+  "unchanged_source_paths": 2305,
+  "changed": [
+    ".m3/openrewrite-recipes/pom.xml"
+  ],
+  "before_sha256": "2aaef7ad35967e1101f82b2088ec2e6c97eece5195463138a63f9b4e04596f29",
+  "after_sha256": "dfd72deecb9e4d91be79e613e5c759ab56fdb457e181e230a522749edd75478d",
+  "insertion_bytes": 134,
+  "method": "only official engine observed postimage after native source guard and exact preimage",
+  "source_java_api_or_test_changes": false,
+  "main_live_owner_changes": false
+}

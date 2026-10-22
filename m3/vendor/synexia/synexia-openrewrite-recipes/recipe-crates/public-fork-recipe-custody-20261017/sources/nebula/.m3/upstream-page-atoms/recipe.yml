@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: EPL-2.0
+# Matching/replacement excerpts derive from the two EPL-2.0 Nebula owners.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.NebulaPageBoundaryAtoms
+displayName: Extract reviewed Nebula pagination atoms
+description: Extract page bounds and the shared comparable-pair predicate at exact reviewed paths. Run only through the source-sealed
+  host; this is a bounded textual transformation, not a general semantic extractor.
+recipeList:
+- org.openrewrite.text.FindAndReplace:
+    find: "\t\tint fromIndex = pageIndex;\n\t\tint toIndex = pageIndex + pageSize;\n\t\tif (toIndex > totalSize) {\n\t\t\t\
+      toIndex = totalSize;\n\t\t}\n\t\tif (fromIndex > totalSize) {\n\t\t\tfromIndex=totalSize - totalSize%pageSize;\n\t\t\
+      }\n\t\tList<?> content = list.subList(fromIndex, toIndex);\n\t\treturn new PageResult(content, totalSize);\n\t}\n\n\
+      }\n"
+    replace: "\t\tint toIndex = pageEnd(pageIndex, pageSize, totalSize);\n\t\tint fromIndex = pageStart(pageIndex, pageSize,\
+      \ totalSize);\n\t\tList<?> content = list.subList(fromIndex, toIndex);\n\t\treturn new PageResult(content, totalSize);\n\
+      \t}\n\n\t/** Preserve the existing int-addition and upper-bound behavior. */\n\tprivate static int pageEnd(int pageIndex,\
+      \ int pageSize, int totalSize) {\n\t\tint toIndex = pageIndex + pageSize;\n\t\tif (toIndex > totalSize) {\n\t\t\ttoIndex\
+      \ = totalSize;\n\t\t}\n\t\treturn toIndex;\n\t}\n\n\t/** Preserve the existing overflow-page and division-by-zero behavior.\
+      \ */\n\tprivate static int pageStart(int pageIndex, int pageSize, int totalSize) {\n\t\tint fromIndex = pageIndex;\n\
+      \t\tif (fromIndex > totalSize) {\n\t\t\tfromIndex = totalSize - totalSize % pageSize;\n\t\t}\n\t\treturn fromIndex;\n\
+      \t}\n\n}\n"
+    regex: false
+    caseSensitive: true
+    filePattern: widgets/pagination/org.eclipse.nebula.widgets.pagination/src/org/eclipse/nebula/widgets/pagination/collections/PageListHelper.java
+- org.openrewrite.text.FindAndReplace:
+    find: if ((o1 instanceof Comparable) && (o2 instanceof Comparable)) {
+    replace: if (isComparablePair(o1, o2)) {
+    regex: false
+    caseSensitive: true
+    filePattern: widgets/pagination/org.eclipse.nebula.widgets.pagination/src/org/eclipse/nebula/widgets/pagination/collections/BeanComparator.java
+- org.openrewrite.text.FindAndReplace:
+    find: "\t@SuppressWarnings(\"unchecked\")\n\tprivate int compare(Comparable c1, Comparable c2) {"
+    replace: "\t/** One shared predicate for the direct-value and bean-property paths. */\n\tprivate static boolean isComparablePair(Object\
+      \ first, Object second) {\n\t\treturn first instanceof Comparable && second instanceof Comparable;\n\t}\n\n\t@SuppressWarnings(\"\
+      unchecked\")\n\tprivate int compare(Comparable c1, Comparable c2) {"
+    regex: false
+    caseSensitive: true
+    filePattern: widgets/pagination/org.eclipse.nebula.widgets.pagination/src/org/eclipse/nebula/widgets/pagination/collections/BeanComparator.java

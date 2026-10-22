@@ -1,0 +1,38 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.Inventory
+displayName: Inventory Eclipse Nebula for M3 recipe-first work
+description: >
+  Read-only Java inventory of public surface, loops, native declarations and bounded
+  fast-search signals. The recipe emits evidence and never mutates widget sources.
+recipeList:
+  - org.eclipse.nebula.m3.NebulaM3InventoryRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.ConvergeFileAtoms
+displayName: Converge admitted Nebula FILE-local atoms
+description: >-
+  Inventory, atomize, patternize/IOP-type and document only mechanically admitted
+  private FILE-local leaves, then require fixed-point verification.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.NebulaM3Java21ConvergenceRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.A3Mastery
+displayName: Install Nebula A3 compiler mastery laboratory
+description: >-
+  Installs the generated Java-21 compiler/runtime Atomize/Patternize mastery lab under the existing
+  recipe-first module. No Nebula widget/product source or promotion authority is granted.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.convergence.NebulaM3A3ParserSessionRecipe
+  - org.eclipse.nebula.m3.rewrite.convergence.NebulaM3A3MasteryRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.UpstreamSyncIgnore
+displayName: Admit final Nebula upstream-sync ignore leaf
+description: Adds only the reviewed .polyglot* ignore entry from the final upstream sync.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3UpstreamSyncIgnoreRecipe

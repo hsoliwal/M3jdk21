@@ -1,0 +1,50 @@
+{
+  "scope": "public GEF owned .m3 bootstrap runtime only; no donor binary copied",
+  "official_checksum": {
+    "status": 200,
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar.sha1",
+    "sha1_body": "d9e58ac9c7779ba3bf8142aff6c830617a7fe60f"
+  },
+  "license": "MIT actual JAR META-INF/LICENSE.txt plus parent BOM",
+  "artifact_inventory": [
+    {
+      "coordinate_path": "org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar",
+      "size": 69908,
+      "sha256": "7b751d952061954d5abfed7181c1f645d336091b679891591d63329c622eb832"
+    },
+    {
+      "coordinate_path": "org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.pom",
+      "size": 2826,
+      "sha256": "150c40287f7cecdc21b9380caac98e928c4f33c023db6b348df1c5ac977026bf"
+    },
+    {
+      "coordinate_path": "org/slf4j/slf4j-parent/2.0.17/slf4j-parent-2.0.17.pom",
+      "size": 13366,
+      "sha256": "95cd71e852dfdb29126e58b7b939d57ec2b2e6024391852e0b545dee082bbf3b"
+    },
+    {
+      "coordinate_path": "org/slf4j/slf4j-bom/2.0.17/slf4j-bom-2.0.17.pom",
+      "size": 7308,
+      "sha256": "f78d27b642b4b886eb839fc102b5cd9fe7f30f37599ffe68185be4e1609031e9"
+    },
+    {
+      "coordinate_path": "org/openrewrite/rewrite-core/8.90.4/rewrite-core-8.90.4.jar",
+      "size": 1109573,
+      "sha256": "12168e8045fb62c1b3f3ad3f3ef8895db84e2791d8c811aefda410e262266503"
+    }
+  ],
+  "original_red": "M3BootstrapInventoryRecipeTest.readOnly: NoClassDefFoundError org/slf4j/LoggerFactory; 1 test, 1 error, 0 skipped",
+  "recipe_donor": {
+    "repo": "openrewrite/rewrite",
+    "commit": "398a6349648ca802aa050bdb6fe45a99395dce47",
+    "path": "rewrite-core/src/main/java/org/openrewrite/text/FindAndReplace.java",
+    "license": "Apache-2.0",
+    "sha256": "e2c76c5c1de416dcbb3bf5337cd3b6e45aff4dca30eb55c19c80f8bddf53caea"
+  },
+  "harness_donor": {
+    "path": "S:\\container-area-qualified-20261004\\official\\ContainerAreaOfficialRecipeProof.java",
+    "sha256": "f65672ead8bc3fb45ca79c79ab334207a72c642bfcd74dbe89ab71a06e26480b"
+  },
+  "classifier": "DIRECT_IMPORT SLF4J API; ADAPT existing official proof harness; exact official FindAndReplace engine",
+  "fit": "actual original test before/after; exact raw POM bytes and all other 2305 owner source paths; no test/API/flag changes"
+}

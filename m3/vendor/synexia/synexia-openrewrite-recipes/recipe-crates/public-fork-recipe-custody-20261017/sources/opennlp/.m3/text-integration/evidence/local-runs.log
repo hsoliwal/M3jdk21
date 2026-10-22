@@ -1,0 +1,6 @@
+PASS actual OpenNLP classifier: 7 keys x 2 injected whitespace outcomes x all UTF-16 units; fresh wrapper identity.
+PASS OpenNLP actual createContext; order/duplicates/ranges/exceptions; context hook uses a three-feature test double; actual classification decisions qualified separately.
+PASS checks=1052956; recipe replay/drift/cancellation; 21.0.12.1+1-1-deb13u1-Debian
+PASS thin receiver offline replay with exact source-packet SHA-256 checks.
+Scope: source-seal and isolated behavioral atoms, NOT full upstream test suites or M3JDK runtime.
+Maven lifecycle was not executed in the authoring container.

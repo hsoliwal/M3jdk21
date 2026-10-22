@@ -1,0 +1,67 @@
+{
+  "baseline": "e78e926c6940ae8fdcb2741128657d0717dd3089",
+  "before_gates": "original R2/R3 timeout preserved; no successful original full reactor",
+  "changed": [
+    {
+      "path": "m3/recipe-first/src/main/java/org/eclipse/nebula/m3/NebulaM3A3Lab.java",
+      "before_sha256": "22367b0de2c62fbea056dc245572d5663f1f827d1a5e9549fb54afc0fe6406af",
+      "after_sha256": "7a79e69ebc297d96dae4ca48c1960e5541f37e4036c5e60569a865a1553ba23f"
+    },
+    {
+      "path": "m3/recipe-first/src/test/java/org/eclipse/nebula/m3/NebulaM3A3LabTest.java",
+      "before_sha256": "02a00ab8c02d13d7c148e591e042a8b3de0be4609284373243b9e23794955968",
+      "after_sha256": "811aa8359febc385dd05b732e482a45e1c14469f7ff9fadace349b0143dc9c96"
+    },
+    {
+      "path": "m3/recipe-first/src/main/java/org/eclipse/nebula/m3/rewrite/convergence/NebulaM3A3MasteryRecipe.java",
+      "before_sha256": "1049e16d7efdd6a3bc67b55448d7a33006276a6bcf08057c3568e45798ef503a",
+      "after_sha256": "20f7a8998162a513b4ede20a4b88fed0054118b1be5bf8622bd58067d2e07256"
+    },
+    {
+      "path": "m3/recipe-first/rewrite.yml",
+      "before_sha256": "8e53069cddd8356d07dad896a79d428445080ceaf3c18cb31838bd2b7d4a5f40",
+      "after_sha256": "0d27a336e792ccfabaacfef41d8c8fb6821656681a8a70e3de18f6ea863ced77"
+    },
+    {
+      "path": "m3/recipe-first/src/main/resources/org/eclipse/nebula/m3/rewrite/convergence/a3-mastery/NebulaM3A3Lab.java.txt",
+      "before_sha256": "22367b0de2c62fbea056dc245572d5663f1f827d1a5e9549fb54afc0fe6406af",
+      "after_sha256": "7a79e69ebc297d96dae4ca48c1960e5541f37e4036c5e60569a865a1553ba23f"
+    },
+    {
+      "path": "m3/recipe-first/src/main/resources/org/eclipse/nebula/m3/rewrite/convergence/a3-mastery/NebulaM3A3LabTest.java.txt",
+      "before_sha256": "02a00ab8c02d13d7c148e591e042a8b3de0be4609284373243b9e23794955968",
+      "after_sha256": "811aa8359febc385dd05b732e482a45e1c14469f7ff9fadace349b0143dc9c96"
+    },
+    {
+      "path": "m3/recipe-first/src/main/java/org/eclipse/nebula/m3/rewrite/convergence/NebulaM3A3ParserSessionRecipe.java",
+      "before_sha256": null,
+      "after_sha256": "7ad79bd4c4ff010b19e73daa0289383a0fe6e179c1e876aee00e761d39801462"
+    },
+    {
+      "path": "m3/recipe-first/src/main/resources/org/eclipse/nebula/m3/rewrite/convergence/a3-parser-session/NebulaM3A3Lab.after.java.txt",
+      "before_sha256": null,
+      "after_sha256": "7a79e69ebc297d96dae4ca48c1960e5541f37e4036c5e60569a865a1553ba23f"
+    },
+    {
+      "path": "m3/recipe-first/src/main/resources/org/eclipse/nebula/m3/rewrite/convergence/a3-parser-session/NebulaM3A3Lab.before.java.txt",
+      "before_sha256": null,
+      "after_sha256": "22367b0de2c62fbea056dc245572d5663f1f827d1a5e9549fb54afc0fe6406af"
+    },
+    {
+      "path": "m3/recipe-first/src/main/resources/org/eclipse/nebula/m3/rewrite/convergence/a3-parser-session/NebulaM3A3LabTest.after.java.txt",
+      "before_sha256": null,
+      "after_sha256": "811aa8359febc385dd05b732e482a45e1c14469f7ff9fadace349b0143dc9c96"
+    },
+    {
+      "path": "m3/recipe-first/src/main/resources/org/eclipse/nebula/m3/rewrite/convergence/a3-parser-session/NebulaM3A3LabTest.before.java.txt",
+      "before_sha256": null,
+      "after_sha256": "02a00ab8c02d13d7c148e591e042a8b3de0be4609284373243b9e23794955968"
+    },
+    {
+      "path": "m3/recipe-first/src/test/java/org/eclipse/nebula/m3/rewrite/convergence/NebulaM3A3MasteryRecipeTest.java",
+      "before_sha256": "f7c507278606e8ed96e385afce162fa54179854364bf93fd3382714f858adf2b",
+      "after_sha256": "40d976091eaddc07502022086fb1321b4bcaeeabfcaf3bcc9ef5583ee42aee76"
+    }
+  ],
+  "preserved": "original POM, 48 fixtures, 6 schedules, four corpus executions, every compile/runtime/interface/payload check; fresh replay parser per schedule; fixture parser full reset before each parse"
+}

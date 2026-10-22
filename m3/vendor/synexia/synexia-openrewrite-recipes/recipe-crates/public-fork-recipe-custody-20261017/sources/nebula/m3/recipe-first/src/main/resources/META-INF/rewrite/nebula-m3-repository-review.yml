@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.RepositoryReview
+displayName: Review Nebula repository evidence before source mutation
+description: >-
+  Read-only inventory, serial LeetCode/HackerRank/GeeksforGeeks plus pinned GitHub donor review,
+  and Java-before-JNI evidence. This recipe changes no Nebula source.
+recipeList:
+  - org.eclipse.nebula.m3.NebulaM3RepositoryReviewRecipe

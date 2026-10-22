@@ -1,0 +1,107 @@
+diff --git a/widgets/ctree/org.eclipse.nebula.widgets.ctree/src/org/eclipse/nebula/widgets/ctree/CTree.java b/widgets/ctree/org.eclipse.nebula.widgets.ctree/src/org/eclipse/nebula/widgets/ctree/CTree.java
+--- a/widgets/ctree/org.eclipse.nebula.widgets.ctree/src/org/eclipse/nebula/widgets/ctree/CTree.java
++++ b/widgets/ctree/org.eclipse.nebula.widgets.ctree/src/org/eclipse/nebula/widgets/ctree/CTree.java
+@@ -1206,25 +1206,30 @@ protected void paintBody(Event e) {
+ 
+ 		Rectangle ebounds = e.getBounds();
+ 		Image image = new Image(e.display, ebounds);
+-		GC gc = new GC(image);
+-
+-		paintBackground(gc, ebounds);
+-        if (paintGridAsBackground) {
+-            paintGridLines(gc, ebounds);
+-        }
+-		paintItemBackgrounds(gc, ebounds);
+-		paintSelectionIndicators(gc, ebounds);
+-		paintColumns(gc, ebounds);
+-		paintItems(gc, ebounds);
+-        if (!paintGridAsBackground) {
+-            paintGridLines(gc, ebounds);
+-        }
+-		paintViewport(gc, ebounds);
+-		paintFocus(gc, ebounds);
++		try {
++			GC gc = new GC(image);
++			try {
++				paintBackground(gc, ebounds);
++				if (paintGridAsBackground) {
++					paintGridLines(gc, ebounds);
++				}
++				paintItemBackgrounds(gc, ebounds);
++				paintSelectionIndicators(gc, ebounds);
++				paintColumns(gc, ebounds);
++				paintItems(gc, ebounds);
++				if (!paintGridAsBackground) {
++					paintGridLines(gc, ebounds);
++				}
++				paintViewport(gc, ebounds);
++				paintFocus(gc, ebounds);
+ 
+-		e.gc.drawImage(image, ebounds.x, ebounds.y);
+-		gc.dispose();
+-		image.dispose();
++				e.gc.drawImage(image, ebounds.x, ebounds.y);
++			} finally {
++				gc.dispose();
++			}
++		} finally {
++			image.dispose();
++		}
+ 	}
+ 
+ 	protected void paintColumns(GC gc, Rectangle ebounds) {
+@@ -1343,28 +1348,36 @@ protected void paintItems(GC gc, Rectangle ebounds) {
+ 						4 - ebounds.y);
+ 			}
+ 		} else {
++			// No retained visible rows: do not allocate an empty scratch plane.
++			if (paintedItems.isEmpty()) return;
+ 			Image image = new Image(gc.getDevice(), ebounds);
+-			GC gc2 = new GC(image);
+-			for (Iterator iter = paintedItems.iterator(); iter.hasNext();) {
+-				CTreeItem item = (CTreeItem) iter.next();
+-				for(int i = 0; i < item.cells.length; i++) {
+-					CTreeCell cell = item.cells[i];
+-					cell.paint(gc, ebounds);
+-					Rectangle cb = cell.getClientArea();
+-					gc2.setBackground(getDisplay().getSystemColor(SWT.COLOR_CYAN));
+-					gc2.fillRectangle(ebounds);
+-					if(!cb.isEmpty() &&
+-							cell.paintClientArea(gc2, 
+-									new Rectangle(0,0,cb.width,cb.height))) {
+-						gc.drawImage(image,
+-							0,0,Math.min(ebounds.width, cb.width),Math.min(ebounds.height, cb.height),
+-							cb.x-ebounds.x,cb.y-ebounds.y,cb.width,cb.height
+-							);
++			try {
++				GC gc2 = new GC(image);
++				try {
++					for (Iterator iter = paintedItems.iterator(); iter.hasNext();) {
++						CTreeItem item = (CTreeItem) iter.next();
++						for(int i = 0; i < item.cells.length; i++) {
++							CTreeCell cell = item.cells[i];
++							cell.paint(gc, ebounds);
++							Rectangle cb = cell.getClientArea();
++							gc2.setBackground(getDisplay().getSystemColor(SWT.COLOR_CYAN));
++							gc2.fillRectangle(ebounds);
++							if(!cb.isEmpty() &&
++									cell.paintClientArea(gc2,
++											new Rectangle(0,0,cb.width,cb.height))) {
++								gc.drawImage(image,
++									0,0,Math.min(ebounds.width, cb.width),Math.min(ebounds.height, cb.height),
++									cb.x-ebounds.x,cb.y-ebounds.y,cb.width,cb.height
++									);
++							}
++						}
+ 					}
++				} finally {
++					gc2.dispose();
+ 				}
++			} finally {
++				image.dispose();
+ 			}
+-			gc2.dispose();
+-			image.dispose();
+ 		}
+ 	}
+ 

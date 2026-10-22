@@ -1,0 +1,52 @@
+{
+  "commit": "e78e926c6940ae8fdcb2741128657d0717dd3089",
+  "change_intent_sha256": "ecfa271ffcd35adc8db8b25e49efd5cfcdb58435a9f36cf618a7332f7fdec362",
+  "module": "recipe-first",
+  "cycle": "focused2",
+  "offline": true,
+  "command": [
+    "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.cmd",
+    "-B",
+    "-ntp",
+    "-o",
+    "-f",
+    "K:\\codex-work\\nebula-stream-segments-20261004\\worktree\\m3\\recipe-first\\pom.xml",
+    "-Dmaven.repo.local=K:\\codex-work\\nebula-stream-segments-20261004\\current-m2-head",
+    "-Dosgi.platform=win32.win32.x86_64",
+    "-Daether.connector.basic.threads=2",
+    "-Dmaven.artifact.threads=2",
+    "test",
+    "-Dtest=NebulaM3A3LabTest#sameNameParserResetMatchesFreshAttributionAndRecoversAfterMalformedInput,NebulaM3A3MasteryRecipeTest"
+  ],
+  "status": "TERMINAL",
+  "exit": 0,
+  "runtime_budget_seconds": 240,
+  "seconds": 18.06,
+  "reports": [
+    {
+      "path": "worktree\\m3\\recipe-first\\target\\surefire-reports\\TEST-org.eclipse.nebula.m3.NebulaM3A3LabTest.xml",
+      "suite": "org.eclipse.nebula.m3.NebulaM3A3LabTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "8bc167117322a8a6564396aaa7aadd7d29b72824ffec212c8bc5f6f8a99e8289"
+    },
+    {
+      "path": "worktree\\m3\\recipe-first\\target\\surefire-reports\\TEST-org.eclipse.nebula.m3.rewrite.convergence.NebulaM3A3MasteryRecipeTest.xml",
+      "suite": "org.eclipse.nebula.m3.rewrite.convergence.NebulaM3A3MasteryRecipeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "c8a2ec57a258f1c628b6ce9aed05035bfd8455423f18f196dffcc0f3aa63955d"
+    }
+  ],
+  "log": "A3-SESSION-RECIPE-FIRST-QUALIFICATION-Rfocused2.log",
+  "log_sha256": "f1a5830d0b1cb0ddfca97fd4d80bc2d1f95a32e0778275c675c4cbbb9e4234c7",
+  "strict_compiler": "-Xlint:all -Werror -proc:none; original Maven POM unchanged",
+  "combined_task_bytes": 472183801,
+  "free_bytes": 8834453504,
+  "java_temp": "java.io.tmpdir = K:\\codex-work\\nebula-stream-segments-20261004\\current-temp",
+  "scope": "exact current selected modules, finite tests and named integration profiles; whole Nebula Tycho/runtime proof not established"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "M3_OPENREWRITE_JAVA21_SOURCE_FIDELITY_CORRECTIONS_V2",
+  "original_provider": "org.openrewrite:rewrite-java-21:8.90.4",
+  "corrected_provider": "org.openrewrite:rewrite-java-21:8.90.4-m3-varargs-doc-anchors-20261018",
+  "sources": [
+    {
+      "path": "src/main/java/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java",
+      "original_git_blob": "b9aa77040641c8563c8c282bc5ee09cc91812471",
+      "original_source_sha256": "5f38b8f07c505e260dccd46dda76ffb21059828ea5a0da954795c8cc23f92962",
+      "corrected_source_sha256": "771ed8a29e90c79403a2eae4169b1c389e574b7581c3bc46d3ece8e0d0edd969"
+    },
+    {
+      "path": "src/main/java/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java",
+      "original_git_blob": "e83c6849b3b5e908d03411842dd882d20dff708c",
+      "original_source_sha256": "97e714c2521ccc89acc57e7794f487c89e9a11948e6318facb167700492f0eea",
+      "corrected_source_sha256": "12fb78bb4c1d54899047c05a56e04bfa45d6d8b00bd1c79e69df80f9ee102707"
+    }
+  ],
+  "original_jar_sha256": "099c9ba2ce7248b34482e33885ce7cf7154c717748f1e909c26fa32a48feae9a",
+  "corrected_jar_sha256": "0c2fa9f1eb36263c81c98e76c31984f53b981f4527ea3438e199feeffdd45a2c",
+  "changes": [
+    "arrayTypeTree retains annotations with a null bracket dimension when the next token is an ellipsis; visitVariables consumes the ellipsis. This prevents sourceBefore(\"[\") from scanning into the subsequent method body. No compact-constructor or donor-source changes.",
+    "visitLink consumes a double-hash anchor suffix present in the javac reference signature into existing leading Javadoc.Text label nodes, retaining the typed Java reference and original anchor/label bytes. No new parser or comment masking."
+  ],
+  "license": "Apache-2.0, original upstream copyright and license retained",
+  "third_party_mirror_modified": false,
+  "qualification": {
+    "strict_compile": "TASK_RECIPE_AND_FIXTURE_CLASSES_XLINT_ALL_WERROR",
+    "tests": 42,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "scope": "Three complete licensed Guava counterexamples, typed anchor namespace rename, six varargs/array variants, shared namespace/literal/resource/module/import-order suite including symlink and dollar-token refusals. Full source domain stages remain separate gates. Retained-LST literal replay, immutable original/stage admission, and output symlink/hardlink controls included.",
+    "upstream_provider_compile": "JDK21_SUCCESS_WITH_EXISTING_UNCHECKED_NOTES",
+    "log": "review-replay-final-8.90.log",
+    "log_sha256": "c2f91e6ff67dc8de8f8811e27baecbeff7d35ed3c4860cab3f9ee8c639205290"
+  },
+  "historical_qualification": "history/source-fidelity-qualification-32.json"
+}

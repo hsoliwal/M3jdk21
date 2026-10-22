@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0. Original CTree.java and its patch remain EPL-2.0. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.nebula.m3</groupId>
+  <artifactId>ctree-viewport-paint-lease-v1</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>CTree intrinsic paint resource recipe + source contract</name>
+  <description>Prove the exact pinned EPL-2.0 CTree before/after behavior atom using a reusable Maven Git-patch recipe; do not relicense or automatically change unrelated widgets.</description>
+  <build><plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.5.0</version>
+      <executions>
+        <execution>
+          <id>replay-ctree-source-sealed-behavior-atom</id>
+          <phase>validate</phase><goals><goal>exec</goal></goals>
+          <configuration>
+            <executable>java</executable>
+            <arguments>
+              <argument>--source</argument><argument>21</argument>
+              <argument>${project.basedir}/CTreePaintLeaseRecipe.java</argument>
+              <argument>--verify</argument>
+              <argument>${project.basedir}/../../../..</argument>
+            </arguments>
+          </configuration>
+        </execution>
+        <execution>
+          <id>check-ctree-painter-order-and-negative-controls</id>
+          <phase>verify</phase><goals><goal>exec</goal></goals>
+          <configuration>
+            <executable>java</executable>
+            <arguments>
+              <argument>--source</argument><argument>21</argument>
+              <argument>${project.basedir}/CTreePaintLeaseContractTest.java</argument>
+              <argument>${project.basedir}/../../../../widgets/ctree/org.eclipse.nebula.widgets.ctree/src/org/eclipse/nebula/widgets/ctree/CTree.java</argument>
+            </arguments>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins></build>
+</project>

@@ -1,0 +1,10 @@
+{
+  "owner_commit": "ef39f9d7f82c0d05c5c32b081d9a48b07579bccc",
+  "owner_tree": "d5a55a690f73ee8267cb82b4bc1f74235ca2a213",
+  "target": ".m3/openrewrite-recipes/pom.xml",
+  "before_sha256": "2aaef7ad35967e1101f82b2088ec2e6c97eece5195463138a63f9b4e04596f29",
+  "after_sha256": "dfd72deecb9e4d91be79e613e5c759ab56fdb457e181e230a522749edd75478d",
+  "insertion_bytes": 134,
+  "all_context_bytes_preserved": true,
+  "admission": "PENDING_REAL_EXECUTION"
+}

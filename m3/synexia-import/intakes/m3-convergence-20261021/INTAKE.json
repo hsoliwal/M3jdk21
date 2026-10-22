@@ -1,0 +1,254 @@
+{
+  "schema": "M3_CONVERGENCE_INTAKE_V1",
+  "task": "m3-convergence-20261021",
+  "status": "EXACT_SOURCE_CUSTODY_AND_BOUNDED_REGEX_QUALIFIED",
+  "all_repository_work_complete": false,
+  "canonical_owner": "hsoliwal/com.synexia",
+  "canonical_base_revision": "fe582fe513989b561470b49efe7d5f56246d7e0a",
+  "source_proposal_parent_revision": "d3f7dccd5e9c44ad122f9664a4990af05d50f2f3",
+  "canonical_publication": "PUBLISHED_DRAFT_SOURCE_ORIGIN_READ_BACK",
+  "target_owner": "hsoliwal/M3jdk21",
+  "target_frozen_revision": "dd05cb14da9836d87b61311f8345f0e4832f8fad",
+  "compatible_receiver_revision": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+  "freshness_scope": "The 23 metadata destinations are absent in the independently hashed ancestor trees at the selected receiver. Runtime compatibility is separately recorded for the eight selected production/test/document payloads. Historical whole-tree comparisons retain their original frozen revision.",
+  "donors": [
+    {
+      "repository": "hsoliwal/guava",
+      "revision": "5a0ba1218ca69fb94ad74f97bae93266028a8cbd",
+      "packet_files": 228,
+      "closure_files": 3367,
+      "bytes": 47126585
+    },
+    {
+      "repository": "hsoliwal/commons-collections",
+      "revision": "0268162dfc5eb4d7275a45f8ba625b0fa07cfc7a",
+      "packet_files": 89,
+      "closure_files": 913,
+      "bytes": 6948079
+    },
+    {
+      "repository": "hsoliwal/eclipse-collections",
+      "revision": "6464208558c30c646912ecb82672670cc0b86d1a",
+      "packet_files": 99,
+      "closure_files": 3265,
+      "bytes": 24382832
+    },
+    {
+      "repository": "hsoliwal/spring-framework",
+      "revision": "12ad113d8d4ee53c9f34b4befe708baf795dd1c5",
+      "packet_files": 16,
+      "closure_files": 21,
+      "bytes": 2636265
+    }
+  ],
+  "custody": {
+    "files": 8756,
+    "raw_bytes": 97887155,
+    "four_fork_binary_files": 197,
+    "executable_files": 6,
+    "canonical_prefix": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/",
+    "target_virtual_root": "m3/vendor/synexia/",
+    "engine": "com.synexia.rewrite.M3PublicRecipeCustodyRecipe",
+    "engine_revision": "a1a6fd0a440dbf26fab407f17f6d428cef150da6",
+    "engine_git_blob": "60efcb01329feb06fe5550c2ff026cca3772bece",
+    "actual_sdk_version": "8.17.1",
+    "successful_offline_runs_per_batch": 2,
+    "fixed_point_changes_per_batch": 0,
+    "payload_semantics_qualified": false,
+    "runtime_modules_activated": false,
+    "engine_error_handling": "The unchanged engine can return error-marked partial results. The proof harness refuses the whole error-bearing attempt before materialization.",
+    "helper_scope": "Genuine pinned M3GpuToolJoinRecipe mirror 1c1b1b568d369f688f6953161636bf36b484bf5a differs from the current canonical helper; exact provenance and bounds are in the qualification receipts.",
+    "batches": [
+      {
+        "files": 432,
+        "bytes": 19519731,
+        "manifest": {
+          "path": "candidates/custody/CUSTODY_MANIFEST.tsv",
+          "sha256": "03f3ef8724c477018b2ab107ec037e7d0ea1ace9b807b4169c34ebad21dc953d",
+          "git_blob": "6edf035a6c84d457dcb25b403902d1b03ab6f475",
+          "bytes": 158241
+        },
+        "qualification": {
+          "path": "candidates/custody-sdk/QUALIFICATION_432.json",
+          "sha256": "bfcd4b43ef82ce91fb7a75184514edb672cd580c4aebd4e79c8bd37b89e04056",
+          "git_blob": "3ca993e94becf7640cf10bfac61a8443839dc499",
+          "bytes": 4413
+        },
+        "output_seals_sha256": "d9af3625ca7f22b3196409ac9a3be6a6e1a0b107e1f63b1fc6a7a8e849e2ebf2"
+      },
+      {
+        "files": 7566,
+        "bytes": 61574030,
+        "manifest": {
+          "path": "candidates/custody-delta/CUSTODY_MANIFEST.tsv",
+          "sha256": "815f0b6b84f285694b0b562ab6c0558a4badf887d02b2559728c7941dede83de",
+          "git_blob": "c37fe4e47f77310792b6bb636bfbb9b97672b437",
+          "bytes": 3260161
+        },
+        "qualification": {
+          "path": "candidates/custody-sdk/delta/QUALIFICATION_DELTA.json",
+          "sha256": "6c03c1dd00e6be01ff776652acb8753ed33c3b5285ff41e2eefc1a8daab1c030",
+          "git_blob": "640b2c01793ed695cba0f8c82bc5fce18f211a96",
+          "bytes": 11499
+        },
+        "output_seals_sha256": "1e0247aa6057b85b63a128a832713f149b4dd6f41ee5f1fb2e7a848021daa978"
+      },
+      {
+        "label": "historical-other-donors",
+        "files": 708,
+        "bytes": 16419211,
+        "manifest": {
+          "path": "candidates/custody-historical/CUSTODY_MANIFEST.tsv",
+          "sha256": "b2457be399405d69331193b1482a1be62eaab0fb89952e446a2cc83b921fbb16",
+          "git_blob": "b23e709a59791b22c20a1af9281d7d728afcba6d",
+          "bytes": 322308
+        },
+        "qualification": {
+          "path": "candidates/custody-sdk/historical/QUALIFICATION_HISTORICAL.json",
+          "sha256": "c3af428538adb35969b7ead6d0e6c967c65825444fa723d3e1ccea978cff1524",
+          "git_blob": "b1f7c045bda8aee41905c02d8cfe5676db9dc524",
+          "bytes": 12090
+        },
+        "materialization": "Acquired exact bytes preseed the single-copy candidate storage; actual unchanged SDK computes and verifies logical relocations without writing a separate payload copy."
+      },
+      {
+        "label": "canonical-source-owners",
+        "files": 50,
+        "bytes": 374183,
+        "manifest": {
+          "path": "candidates/custody-source-owners/manifest.tsv",
+          "sha256": "4b7a08b6ffa1b1d114298bc70d374fed9336012501e540f24429a5dee7e9cb1d",
+          "git_blob": "b1170f8854d925d134693eab014ae0a3360e7224",
+          "bytes": 25837
+        },
+        "qualification": {
+          "path": "candidates/custody-sdk/source-owners/QUALIFICATION_SOURCE_OWNERS.json",
+          "sha256": "918820f6cbe836f309bfdf1fe67627fb1b1936335dcabdc55533b70742f04739",
+          "git_blob": "a6102490245f7cd062d8313b4a4f69d60042ac78",
+          "bytes": 10268
+        },
+        "materialization": "The unchanged SDK harness wrote exact returned postimages into a distinct output directory; independent readback verified all 50 regular output files."
+      }
+    ]
+  },
+  "history": {
+    "summary": {
+      "path": "evidence/donor-inventory/reconciliation/dependency-closure/HISTORICAL_COMPARISON_SUMMARY.json",
+      "sha256": "e51ae8dd26fdba44dba52c2e2648638cbe1850e1077a26d5337adb94aee47711",
+      "git_blob": "05d4c2d27b1940f30458243374506705288fa959",
+      "bytes": 10675
+    },
+    "successor_addendum": {
+      "path": "evidence/donor-inventory/reconciliation/canonical-successor-followup/CANONICAL_SUCCESSOR_ADDENDUM.json",
+      "sha256": "20044f159a92de844e471f718dce7fb7a647bf3eaf1ca8e33096ba48d19c0aaa",
+      "git_blob": "39d7260ad8ba08f7c18911a97431e91bd7b2695f",
+      "bytes": 16568
+    },
+    "corrected_file_status_counts": {
+      "EVOLVED_UNRECONCILED": 73,
+      "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 86,
+      "EXACT_RECORDED_POSTIMAGE": 7388,
+      "BASELINE_ONLY_INAPPLICABLE_AS_POSTIMAGE": 16,
+      "FROZEN_ORACLE_ONLY_EXACT": 3
+    },
+    "unmatched_original_oracle_only_drifts": 0,
+    "historical_other_donors": {
+      "files_reviewed": 811,
+      "exact_identities_already_in_target": 103,
+      "missing_identities_received": 708,
+      "comparison": {
+        "path": "evidence/older-custody-reconciliation/COMPARISON_SUMMARY.json",
+        "sha256": "fbd7b1437840eec67beb1e9a39d50e45a1c503c0d813f503a3e79422a6db9f74",
+        "git_blob": "bfd4daa05453bdc64b190194160555af22dc7b58",
+        "bytes": 8455
+      }
+    }
+  },
+  "regex": {
+    "recipe": "com.synexia.rewrite.M3Jdk21TqAdaptiveGallop20261021",
+    "status": "BOUNDED_LEAF_PASS_FULL_RUNTIME_NOT_ADMITTED",
+    "targets": [
+      {
+        "target_path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+        "before_sha256_or_absent": "79e922eb3d0c3ae28db264bcaeab0a03f31643ad581c3e28bc2545140c043367",
+        "after_sha256": "a01f05617dec5639f6a80e93ae45b6e80eec8959efd73250e0b4335a12d61158",
+        "after_git_blob": "f4e7db87c41abd32472faaca699f9fd55c151ac6"
+      },
+      {
+        "target_path": "test/jdk/java/lang/String/M3TQAdaptiveContainmentTest.java",
+        "before_sha256_or_absent": "ABSENT",
+        "after_sha256": "d54f568efde8b5d5f61c11c8aa0bed3e240f6ec0893649047757617b702dcd3b",
+        "after_git_blob": "5ef3a96d96e16e7b416f680fde351511880a7ae2"
+      }
+    ],
+    "qualification": {
+      "path": "candidates/regex/synexia-openrewrite-recipes/recipes/m3jdk21-tq-adaptive-gallop-20261021/evidence/final-result-003.json",
+      "sha256": "5758e061e06dc1e8170cfb52c9aa7eb395f97bef2828513deff7f5e8e2afe84a",
+      "git_blob": "4d776d1900776c6fdaf9b683648ebc989f10408c",
+      "bytes": 19553
+    }
+  },
+  "rights": "Original per-file headers, licenses and notices remain authoritative. Custody includes mixed Eclipse EPL/EDL terms and must not be relabeled Apache-2.0.",
+  "preserved_existing_owners": [
+    "M3ObjectStream remains the sole existing stream engine",
+    "Existing target Eclipse indexed-RB and Commons receiving owners remain unchanged",
+    "Existing String search BMH-to-KMP adaptation remains unchanged",
+    "Historical root name-mapping and full-borrow SOURCE_PIN_ONLY ledgers remain unchanged"
+  ],
+  "remaining_gates": [
+    {
+      "capability": "Guava stream bridge",
+      "gate": "Current bridge/test imports remain com.google.common.collect while current fork provider source is com.m3.collections.guava. Qualify provider binding/namespace repair; dependency resolution/native bridge tests were not run."
+    },
+    {
+      "capability": "Historical successors",
+      "gate": "Resolve the evolved source files against canonical exact successor recipes and receipts; do not replace current bytes with older snapshots just to satisfy a historic hash."
+    },
+    {
+      "capability": "Four provider modules",
+      "gate": "Source custody does not establish complete transitive artifact resolution or native Maven/Gradle, generator, compiler/checker, RAT/Checkstyle, JPMS/OSGi and runtime admission."
+    },
+    {
+      "capability": "Rights",
+      "gate": "Retain upstream per-file and packaged licensing/NOTICE; mixed Eclipse source must not be relabeled Apache-2.0."
+    },
+    {
+      "capability": "Repository and ref coverage",
+      "gate": "The census spans 181 connected repositories. These batches cover four pinned public-fork heads, selected historical files from 15 other donors, and 50 canonical source-owner files from two distinct heads. Other private and public repositories, nondefault branches, unmerged PR heads and historical snapshots remain unresolved; no all-work completion claim."
+    },
+    {
+      "capability": "Custom JDK runtime",
+      "gate": "Source-built M3JDK21, actual jtreg/JCK, complete String/regex family, production native/JNI, GC/CDS, cross-platform and retained/native/process-memory gates are NOT_RUN."
+    },
+    {
+      "capability": "Dependency/source mirror",
+      "gate": "Bounded Maven SDK runs used an exact task-local cached classpath offline. Repository-wide approved dependency source-mirror and complete offline build admission remain HOLD."
+    }
+  ],
+  "phase_advance": false,
+  "historical_source_proposal_parent_revision": "910151fc0ebb3c14220e69dccf1b69cffce591a1",
+  "historical_compatible_receiver_revision": "a62eacad46b51ce757ded74579f1ad2aabc4d638",
+  "previous_publication_receiver_revision": "79d764d6b7164f75aeee23e5793ae9d7fe217e1c",
+  "canonical_publication_commit": "4c3d11630e48acf6ca543dc98edd8df0b43edc7a",
+  "canonical_publication_tree": "5e2149013e47ab30356489eed6e66472d4146366",
+  "canonical_publication_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12900",
+  "source_publication_snapshot": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "4c3d11630e48acf6ca543dc98edd8df0b43edc7a",
+    "tree": "5e2149013e47ab30356489eed6e66472d4146366",
+    "parent": "d3f7dccd5e9c44ad122f9664a4990af05d50f2f3",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12900",
+    "pull_request_number": 12900,
+    "snapshot_head": "4c3d11630e48acf6ca543dc98edd8df0b43edc7a",
+    "snapshot_base": "719049b3bf1b8525d2f25c07aa3c317537e69c8b",
+    "binding_scope": "Immutable payload origin; subsequent recipe/proof-only commits may advance the PR head."
+  },
+  "additional_private_custody": {
+    "intake": "m3-private-bounded-source-recovery-20261021",
+    "files": 5,
+    "raw_bytes": 19097,
+    "combined_source_custody_paths": 8761,
+    "combined_source_custody_bytes": 97906252,
+    "scope": "Source and rights custody; not an additional active Java/JNI runtime implementation."
+  }
+}

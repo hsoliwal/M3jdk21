@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: EPL-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.TransferQualification
+displayName: M3 proof-bound Nebula transfer receipt
+description: >-
+  Replay only the reviewed Java 21 transfer CLI sidecar change from its exact
+  source preimage; existing target files, DAG roots and product widget contracts remain unchanged.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3TransferQualificationRecipe

@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: EPL-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.OneBuildTychoPostimageProof
+displayName: Verify original Nebula Tycho after one-build FILE convergence
+description: Exact source-sealed workflow and documentation proof; candidate-only.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3OneBuildTychoProofRecipe

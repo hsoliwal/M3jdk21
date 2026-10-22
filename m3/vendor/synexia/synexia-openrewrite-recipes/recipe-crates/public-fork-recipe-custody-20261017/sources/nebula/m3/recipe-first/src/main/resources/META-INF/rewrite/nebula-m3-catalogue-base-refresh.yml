@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.CatalogueBaseRefresh
+displayName: Refresh reviewed Nebula catalogue application base
+description: >-
+  Replays the exact source-custody base revision update for the checked-in catalogue plan.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3CatalogueBaseRefreshRecipe

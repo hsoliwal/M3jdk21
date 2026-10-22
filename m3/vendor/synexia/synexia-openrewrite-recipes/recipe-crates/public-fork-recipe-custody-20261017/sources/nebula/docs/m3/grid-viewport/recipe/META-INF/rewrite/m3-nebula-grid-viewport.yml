@@ -1,0 +1,162 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.NebulaGridViewport
+displayName: Nebula Grid answers its row geometry through the viewport
+description: >-
+  Catalogue VIEWPORT_WINDOWING. Grid answers its top row, row ranges, row at a point, row origin and next or
+  previous visible row from GridRowExtents (Fenwick visible-count and extent lanes) through GridViewport
+  instead of walking items. Each hook is one delegation; the logic lives in GridViewport. The viewport is the
+  default Grid mode; -Dswt.widget.mode.Grid=original (or the global swt.widget.mode) selects the original paths.
+recipeList:
+  - com.synexia.openrewrite.viewport.NebulaGridViewportGrid
+  - com.synexia.openrewrite.viewport.NebulaGridViewportGridItem
+  - com.synexia.openrewrite.viewport.NebulaGridViewportGridColumn
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.NebulaGridViewportGrid
+displayName: Nebula Grid viewport hooks
+description: The viewport field, two helpers and the Grid delegations.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      memberName: viewport
+      beforeMethod: checkStyle
+      memberSource: "\t/**\n\t * Row geometry mediation (see {@link GridViewport}); {@code null} when the Grid runs in the\n\t * original mode.\n\t */\n\tGridViewport viewport;"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      memberName: rowsIndexed
+      beforeMethod: usesSparseVirtualItems
+      memberSource: "\t/**\n\t * @return {@code true} when the viewport answers the row geometry: the item list holds every row\n\t *         (it is not the sparse list of a flat virtual Grid) and rows can be hidden or differ in\n\t *         height\n\t */\n\tboolean rowsIndexed() {\n\t\treturn viewport != null && !usesSparseVirtualItems() && (isTree || hasDifferingHeights);\n\t}"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      memberName: viewportRowRange
+      beforeMethod: getGridHeight
+      memberSource: "\t/**\n\t * @return the row range the viewport answered last\n\t */\n\tprivate RowRange viewportRowRange() {\n\t\tfinal RowRange range = new RowRange();\n\t\trange.startIndex = viewport.range[0];\n\t\trange.endIndex = viewport.range[1];\n\t\trange.rows = viewport.range[2];\n\t\trange.height = viewport.range[3];\n\t\treturn range;\n\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: Grid
+      parameterCount: 3
+      position: METHOD_END
+      statements: "\t\tif (GridViewport.ENABLED) {\n\t\t\tviewport = new GridViewport(this, items);\n\t\t\tviewport.applyLook();\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: getTopIndex
+      parameterCount: 0
+      anchor: "if (topIndex != -1)"
+      position: AFTER
+      statements: "\t\tif (rowsIndexed()) {\n\t\t\ttopIndex = viewport.getTopIndex(isTree);\n\t\t\treturn topIndex;\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: setTopIndex
+      parameterCount: 1
+      anchor: "if (!vScroll.getVisible())"
+      position: AFTER
+      statements: "\t\tif (viewport != null && !usesSparseVirtualItems()) {\n\t\t\tvScroll.setSelection(viewport.scrollSelectionOf(index, isTree));\n\t\t\ttopIndex = -1;\n\t\t\tbottomIndex = -1;\n\t\t\tfireViewportChanged();\n\t\t\tredraw();\n\t\t\treturn;\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: getRowRange
+      parameterCount: 2
+      parameterTypes: "int,int"
+      position: METHOD_START
+      statements: "\t\tif (rowsIndexed()) {\n\t\t\treturn viewport.rowRange(startIndex, endIndex) ? viewportRowRange() : null;\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: getRowRange
+      parameterCount: 4
+      position: METHOD_START
+      statements: "\t\tif (rowsIndexed()) {\n\t\t\treturn viewport.rowRange(startIndex, availableHeight, forceEndCompletelyInside, inverse)\n\t\t\t\t\t? viewportRowRange()\n\t\t\t\t\t: null;\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: getItem
+      parameterCount: 1
+      parameterTypes: "Point"
+      anchor: "int row = getTopIndex();"
+      position: AFTER
+      statements: "\t\tif (rowsIndexed()) {\n\t\t\titemToReturn = viewport.itemAt(row, p.y - y2, getClientArea().height - y2);\n\t\t\trow = items.size(); // the walk below has no row left to visit\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: getOrigin
+      parameterCount: 2
+      anchor: "while (currIndex != itemIndex)"
+      position: BEFORE
+      statements: "\t\t\tif (viewport != null && !usesSparseVirtualItems() && currIndex <= items.size()\n\t\t\t\t\t&& itemIndex <= items.size()) {\n\t\t\t\ty += viewport.offsetBetween(currIndex, itemIndex);\n\t\t\t\tcurrIndex = itemIndex;\n\t\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: paintRows
+      parameterCount: 13
+      anchor: "while (!item.isVisible() && row < items.size() - 1)"
+      position: BEFORE
+      statements: "\t\t\t\tif (viewport != null && !item.isVisible() && !usesSparseVirtualItems()) {\n\t\t\t\t\trow = viewport.nextVisibleRow(row);\n\t\t\t\t\titem = items.get(row);\n\t\t\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: getNextVisibleItem
+      parameterCount: 1
+      anchor: "int index = item.getRowIndex();"
+      position: AFTER
+      statements: "\t\tif (viewport != null && !usesSparseVirtualItems() && index >= -1 && index < items.size()) {\n\t\t\treturn viewport.nextVisibleItem(index + 1);\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: getPreviousVisibleItem
+      parameterCount: 1
+      anchor: "GridItem prevItem = items.get(index - 1);"
+      position: BEFORE
+      statements: "\t\tif (viewport != null && !usesSparseVirtualItems() && index >= 1 && index <= items.size()) {\n\t\t\treturn viewport.previousVisibleItem(index - 1);\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: newItem
+      parameterCount: 3
+      anchor: "currentVisibleItems++;"
+      position: BEFORE
+      statements: "\t\tif (viewport != null) {\n\t\t\tviewport.inserted(item, row);\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: removeItem
+      parameterCount: 1
+      anchor: "items.remove(item);"
+      position: AFTER
+      statements: "\t\tif (viewport != null) {\n\t\t\tviewport.rowsChanged();\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.Grid]
+      methodName: setItemHeight
+      parameterCount: 1
+      anchor: "itemHeight = height;"
+      position: AFTER
+      statements: "\t\tif (viewport != null) {\n\t\t\tviewport.rowsChanged();\n\t\t}"
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.NebulaGridViewportGridItem
+displayName: Nebula GridItem viewport hooks
+description: A visibility or height change updates one position of the row extent index.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.GridItem]
+      memberName: knownRow
+      beforeMethod: increaseRow
+      memberSource: "\t/**\n\t * @return the row index this item keeps, or -1 when it keeps none (no search)\n\t */\n\tint knownRow() {\n\t\tsynchronized (ROW_LOCK) {\n\t\t\treturn row;\n\t\t}\n\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.GridItem]
+      methodName: setVisible
+      parameterCount: 1
+      anchor: "this.visible = visible;"
+      position: AFTER
+      statements: "\t\tif (parent.viewport != null) {\n\t\t\tparent.viewport.rowChanged(this);\n\t\t}"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.GridItem]
+      methodName: setHeight
+      parameterCount: 1
+      anchor: "height = newHeight;"
+      position: AFTER
+      statements: "\t\tif (parent.viewport != null) {\n\t\t\tparent.viewport.rowChanged(this);\n\t\t}"
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.NebulaGridViewportGridColumn
+displayName: Nebula GridColumn viewport hooks
+description: A new column of a viewport Grid gets the native look renderers (GridNativeLook).
+recipeList:
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [org.eclipse.nebula.widgets.grid.GridColumn]
+      methodName: init
+      parameterCount: 3
+      anchor: "initHeaderRenderer();"
+      position: BEFORE
+      statements: "\t\tif (table.viewport != null) {\n\t\t\ttable.viewport.applyLook(this);\n\t\t}"

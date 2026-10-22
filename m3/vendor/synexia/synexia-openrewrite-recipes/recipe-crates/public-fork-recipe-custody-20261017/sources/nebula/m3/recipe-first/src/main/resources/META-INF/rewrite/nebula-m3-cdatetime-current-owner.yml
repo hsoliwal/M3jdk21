@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.eclipse.nebula.m3.CurrentCDateTimeOwner
+displayName: Apply current-owner CDateTime/E4 compatibility closure
+description: >-
+  Replays the exact current-master CDateTime CSS, E4 Jakarta, provider and owned Batik
+  changes from reviewed source hashes.
+recipeList:
+  - org.eclipse.nebula.m3.rewrite.exact.NebulaM3CurrentCDateTimeOwnerRecipe

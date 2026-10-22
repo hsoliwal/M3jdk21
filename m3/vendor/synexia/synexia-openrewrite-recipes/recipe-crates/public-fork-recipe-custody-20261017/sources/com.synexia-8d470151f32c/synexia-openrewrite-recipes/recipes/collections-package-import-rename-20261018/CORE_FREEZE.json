@@ -1,0 +1,85 @@
+{
+  "schema": "M3_COLLECTIONS_CANONICAL_CORE_FREEZE_V1",
+  "utc": "2026-10-18T10:38:45.919086+00:00",
+  "canonical_base": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "registry_sha256": "d56ae93d1c23278088626351403dd5bc6250a12f872be98344e96ccd70b896c1",
+  "registry_rows_added": 22,
+  "registry_prefix_unchanged": true,
+  "source_freeze": "PARENT_CONFIRMED_FINAL_THREE_FILES_AND_ALL_OTHER_TASK_SOURCE",
+  "default_provider_tests": [
+    42,
+    0,
+    0,
+    0
+  ],
+  "guava_provider_tests": [
+    42,
+    0,
+    0,
+    0
+  ],
+  "independent_review": "CLOSED;6 final8.17 fresh real-stage reproductions",
+  "guava_testlib": [
+    860810,
+    0,
+    0,
+    0
+  ],
+  "guava_main_and_android": "PENDING; no whole-suite pass claimed",
+  "publication": "CORE_READY_FOR_PARENT_DRAFT_PUBLICATION; later donor evidence may be additive",
+  "excluded_incumbents": [
+    "M3HashPinnedJavaSnapshotRecipe.java",
+    "M3HashPinnedPomSnapshotRecipe.java",
+    "M3HashPinnedTextSnapshotRecipe.java",
+    "M3EditScope.java",
+    "M3ScopeInference.java"
+  ],
+  "exporter_lineage_reseal": {
+    "status": "PASS_AUTHOR_EXECUTED_HASH_BOUND_CONTROLS_READ_BACK",
+    "frozen_by": "Guava canonical author; four changed/created paths confirmed final",
+    "previous_manifest_sha256": "8196c6630c374915c0102c38c20a477bc5755a367044cd7a87dd114e7b98b0a7",
+    "previous_core_freeze_sha256": "7e663432d4f16561d323c504ddf875558d2fa248bf9e23c58bc63cac0b2cf39b",
+    "changes": {
+      "synexia-openrewrite-recipes/recipes/collections-package-import-rename-20261018/tool-corrections/error-prone-2.50.0/README.md": {
+        "before_sha256": "b7f80fe2d2ae9336e340ec371a55a3a4fe918e0f86490b9ff534a8fc26f1f600",
+        "after_sha256": "04a36a3482eded18556178d62e3fa5f5f5ad7fe3c7b9e1bad73f5025bf5f2cc4"
+      },
+      "synexia-openrewrite-recipes/recipes/collections-package-import-rename-20261018/tool-corrections/error-prone-2.50.0/materialize_overlay.py": {
+        "before_sha256": "ab04f2392f53f4e4cf5d8b7b69633e0983cb50d19b0239a668e2065c7b4429cd",
+        "after_sha256": "d682daa8f02b7ff7ac211b8cee73760401c0a257d54ef3f2fdaa99c11fc2a04b"
+      },
+      "synexia-openrewrite-recipes/recipes/collections-package-import-rename-20261018/tool-corrections/error-prone-2.50.0/PROVENANCE.json": {
+        "before_sha256": "24c565795fc23777301feb206d436c6c506752cd38727f2fe47ec7b0383f05eb",
+        "after_sha256": "f62cd7df95c7c1d6dc893ce88028c6ebc67e00acfc604ef3188edaadf90a65c8"
+      },
+      "synexia-openrewrite-recipes/recipes/collections-package-import-rename-20261018/tool-corrections/error-prone-2.50.0/EXPORTER_QUALIFICATION.json": {
+        "before_sha256": "ABSENT",
+        "after_sha256": "ddecd7150d411d391394ff2374b67abf9713dc5e5781d2c8eaf5fbc4f3fcccbb"
+      }
+    },
+    "qualification": "tool-corrections/error-prone-2.50.0/EXPORTER_QUALIFICATION.json",
+    "controls": [
+      "valid byte-identical export",
+      "stale-source refusal before output",
+      "stale-upstream refusal before output",
+      "stale-receiver refusal before output",
+      "stale-pom refusal before output"
+    ],
+    "qualified_jar_rebuilt_or_changed": false,
+    "registered_java_owners_changed": false
+  },
+  "registry_remote_preimage_git_blob": "098ac62651dcd7636f6f6eaad964533c76dfa97e",
+  "registry_remote_preimage_sha256": "e79f1a8c7b4000301f08a19f57b393838b01e72bd72f109aafa2f8ebbfa480fd",
+  "registry_remote_preimage_bytes": 53453,
+  "remote_registry_preimage_reseal": {
+    "status": "PASS",
+    "previous_core_freeze_sha256": "a7643a3880a4587826aa08b768e63d7e56ae5a72146802566dc6404ad84a1e74",
+    "previous_manifest_sha256": "66deb301c497859f375b00a5841ac389998d2df6fc700562986439342b26913c",
+    "receipt": "REGISTRY_REMOTE_EXECUTION.tsv",
+    "crate": "collections-package-rename-canonical-registry-remote-20261018",
+    "isolated_receiver_matches_canonical_postimage": true,
+    "fixedpoint_and_drift_missing_duplicate_refusals": "PASS",
+    "postimage_unchanged": true,
+    "synthetic_local_preimage": "HISTORICAL_ONLY_NOT_REAL_DEVELOP_AUTHORITY"
+  }
+}

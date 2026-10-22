@@ -1,0 +1,206 @@
+{
+  "schema": "M3_PUBLIC_SOURCE_HISTORY_SUMMARY_V1",
+  "status": "ACQUIRED_BYTES_VERIFIED_HISTORY_CLASSIFIED_NOT_RUNTIME_ADMITTED",
+  "scope": "The four exact-pinned public source envelopes: 432 original m3/license inputs plus 7566 current outside-m3 source/dependency inputs. History classification here covers the 7566-file delta.",
+  "counts": {
+    "file_count": 7566,
+    "bytes_rehashed": 61574030,
+    "corrected_distinct_claim_count": 34942,
+    "file_status_counts": {
+      "EVOLVED_UNRECONCILED": 82,
+      "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 86,
+      "EXACT_RECORDED_POSTIMAGE": 7379,
+      "BASELINE_ONLY_INAPPLICABLE_AS_POSTIMAGE": 16,
+      "FROZEN_ORACLE_ONLY_EXACT": 3
+    },
+    "per_repository": {
+      "hsoliwal/commons-collections": {
+        "EVOLVED_UNRECONCILED": 5,
+        "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 5,
+        "EXACT_RECORDED_POSTIMAGE": 887,
+        "BASELINE_ONLY_INAPPLICABLE_AS_POSTIMAGE": 13,
+        "FROZEN_ORACLE_ONLY_EXACT": 3
+      },
+      "hsoliwal/eclipse-collections": {
+        "EXACT_RECORDED_POSTIMAGE": 3201,
+        "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 62,
+        "EVOLVED_UNRECONCILED": 2
+      },
+      "hsoliwal/guava": {
+        "EXACT_RECORDED_POSTIMAGE": 3285,
+        "EVOLVED_UNRECONCILED": 75,
+        "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 4,
+        "BASELINE_ONLY_INAPPLICABLE_AS_POSTIMAGE": 3
+      },
+      "hsoliwal/spring-framework": {
+        "EXACT_RECORDED_POSTIMAGE": 6,
+        "NO_APPLICABLE_HISTORICAL_EXPECTATION_FOUND": 15
+      }
+    },
+    "files_matching_one_postimage_but_not_all_versions": 217,
+    "frozen_original_oracle_difference_files": 1,
+    "frozen_original_oracle_difference_without_successor_match": 0,
+    "local_filesystem_mode_mismatches": 0
+  },
+  "current_source_pins": {
+    "hsoliwal/guava": "5a0ba1218ca69fb94ad74f97bae93266028a8cbd",
+    "hsoliwal/commons-collections": "0268162dfc5eb4d7275a45f8ba625b0fa07cfc7a",
+    "hsoliwal/eclipse-collections": "6464208558c30c646912ecb82672670cc0b86d1a",
+    "hsoliwal/spring-framework": "12ad113d8d4ee53c9f34b4befe708baf795dd1c5"
+  },
+  "global_target_comparison_revision": "dd05cb14da9836d87b61311f8345f0e4832f8fad",
+  "newer_target_head_scope": "Root reported a62eacad and unchanged M3TQ owner; no whole-target matrix revalidation against that newer head is implied.",
+  "evidence_refs": {
+    "immutable_delta_source_seals": {
+      "bytes": 7084409,
+      "sha256": "e374b83447e1ea401644b675f3111ab47a14d136bc3a6ee01cba05638d01a6ac"
+    },
+    "detailed_history_base": {
+      "path": "HISTORICAL_COMPARISON.json",
+      "sha256": "caf446fd9972eeafa8f1e94eea0b9ea30d6a2800b74a9b46a1d3986bc3136a79",
+      "bytes": 14755721,
+      "apply_corrections": true
+    },
+    "role_corrections": {
+      "path": "HISTORICAL_COMPARISON_CORRECTIONS.json",
+      "sha256": "118b971552b49b9ce5ed58ac00f41d5ea632d4f4459fff17351b52396f093d09",
+      "bytes": 208128
+    },
+    "acquisition_selection": {
+      "path": "outside-m3-acquisition-manifest.json",
+      "sha256": "0b1ba8a5e16472ed91bfc9cec2e497b23b0f9949fd1a998bf1046e7e28922851"
+    }
+  },
+  "history_interpretation": {
+    "exact": "At least one applicable recorded postimage/candidate hash matches; no universal runtime or performance claim follows.",
+    "evolved": "Current source is exact to its public Git head but does not match any inspected applicable postimage seal; retain current bytes and reconcile the specific successor privately.",
+    "baseline": "Original donor/predecessor snapshots are diagnostic and inapplicable as current postimage requirements.",
+    "multiple_versions": "A file can match a successor while differing from an older receipt; all versions remain evidence."
+  },
+  "evolved_groups": {
+    "guava_android_tests_and_benchmarks": {
+      "count": 69,
+      "documented_context": "m3/android-import-recovery-20261019/CONTRACT.md describes recovery of 92 imports in 69 Android files after earlier namespace output. Counts/context align, but this report does not fetch or verify the private exact recovery recipe postimage manifest.",
+      "qualification_status": "EVOLVED_UNRECONCILED"
+    },
+    "other_evolved_current_files": [
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": ".github/workflows/m3-apache-circular-package-first-20261018.yml",
+        "current_git_blob": "926adacb8fddcf69b2509d434ffa0f3ef9c2cb9b",
+        "current_sha256": "3d6490876a8188fc389802b39a9d5c7ae423d7acbe5847d799c7347055c62ed3"
+      },
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": "pom.xml",
+        "current_git_blob": "d82318baac89ce958094084617ab716afed9d890",
+        "current_sha256": "f2c67b3454f461d59beabef79e81bd71eae46c93509a2134d0a3be3e0f8f93ef"
+      },
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": "src/main/java/com/m3/collections/apache/bloomfilter/SparseBloomFilter.java",
+        "current_git_blob": "33186cebdc11542a6afb885871129f5f15c9d1df",
+        "current_sha256": "baf49f44f0e1d63334963928ffb8ee875a36ceb8b7d1b60aa9258a045bc14bd9"
+      },
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": "src/main/java/com/m3/collections/apache/list/TreeList.java",
+        "current_git_blob": "ea33cb5bc43e6939cecd30bacdc0e64bcab2d1a0",
+        "current_sha256": "2c1f47e3736f1366105258db91eb563780322956462460ffdb403d4f66a96f65"
+      },
+      {
+        "repository": "hsoliwal/commons-collections",
+        "path": "src/main/java/com/m3/collections/apache/queue/CircularFifoQueue.java",
+        "current_git_blob": "4647485b0b0787981579f22693d2f6b65ffe42ab",
+        "current_sha256": "b81383af1c511608c257a51c62c8fccb3166e8593196c8c23c25aa3f62a83219"
+      },
+      {
+        "repository": "hsoliwal/eclipse-collections",
+        "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/mutable/FastList.java",
+        "current_git_blob": "a065e8ba20eebe1b9bc8c92e58c87eb04055d486",
+        "current_sha256": "b38ee0aee09d96511751b9e12cc541c3421316531fe82abfb2483e425ac2c146"
+      },
+      {
+        "repository": "hsoliwal/eclipse-collections",
+        "path": "eclipse-collections/src/test/java/com/m3/collections/eclipse/impl/M3EclipsePackageRelocationProof.java",
+        "current_git_blob": "04bf532e01a1f3c81661b01fdbf36ad696ae9cd5",
+        "current_sha256": "3f54d176b8c9446d54e64a621e7201be6e139e7d26e12891bcb884eb3007ac21"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": ".github/workflows/m3-guava-evicting-package-first-20261018.yml",
+        "current_git_blob": "392ede39277833b42b916ff74c5404bca88ac996",
+        "current_sha256": "2e1f05327d83a1c8788afc48ee24bd57c2fc77f10c7580de85093f9bae1de5ae"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/ObjectCountHashMap.java",
+        "current_git_blob": "25b08b0332ad2c1bf225dd9b8b2af7404222ab8f",
+        "current_sha256": "d56bd54224ebe51ed7a66875bb0c3063e8b3f95090bc3eaaeadfaa13473c38a1"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/RegularImmutableBiMap.java",
+        "current_git_blob": "74fb0925bb130c6aeedf30d9b6549488f748879c",
+        "current_sha256": "d79e8b2f76257d31ac5df7e5f03ea943eae51d871fa81d8c8ef99d41f92801f4"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/RegularImmutableMap.java",
+        "current_git_blob": "3ef099f6c70a0ef98aba9002643dcc9ef64fe8ef",
+        "current_sha256": "ad833968993ee8b77321753eb5567eb4770f01149a144d4d6ed8a221763a243d"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/RegularImmutableMultiset.java",
+        "current_git_blob": "fe03fd460a439dafb6370b2dfbef6a1f1201686b",
+        "current_sha256": "88f77d1fc8f42adcd34f6f9337c569ac3c4ca895b36b880f76136493272ad3af"
+      },
+      {
+        "repository": "hsoliwal/guava",
+        "path": "guava/src/com/m3/collections/guava/collect/TreeMultiset.java",
+        "current_git_blob": "71775ab0c59b2417845774683c74ae9e4765fc6e",
+        "current_sha256": "b46b47aa92ba0c77437eab98ffbbe5721b41ab85bab46e9bcb639233353ac89e"
+      }
+    ]
+  },
+  "original_oracle_difference": [
+    {
+      "repository": "hsoliwal/commons-collections",
+      "path": "src/test/java/com/m3/collections/apache/queue/M3ApacheCircularFifoRelocationProof.java",
+      "status": "EXACT_RECORDED_POSTIMAGE",
+      "matches_explicit_successor_postimage": true,
+      "different_original_oracle_expectations": [
+        {
+          "evidence": "candidates/custody/inputs/commons-collections/m3/sparse-bloom-arrays-20261019/ORIGINAL_TEST_SHA256.tsv",
+          "expected_sha256": "d975c189a6a5e207311277626502821f1330b4f5de7aa6a4b3651a0f2ccd26f3"
+        }
+      ],
+      "current_git_blob": "5d703ff2b52811dad6dcf0f42992972f580ae24f"
+    }
+  ],
+  "public_runtime_blockers": [
+    {
+      "capability": "Guava stream bridge",
+      "gate": "Current bridge/test imports remain com.google.common.collect while current fork provider source is com.m3.collections.guava. Qualify provider binding/namespace repair; dependency resolution/native bridge tests were not run."
+    },
+    {
+      "capability": "Historical successors",
+      "gate": "Resolve the evolved source files against canonical exact successor recipes and receipts; do not replace current bytes with older snapshots just to satisfy a historic hash."
+    },
+    {
+      "capability": "Four provider modules",
+      "gate": "Source custody does not establish complete transitive artifact resolution or native Maven/Gradle, generator, compiler/checker, RAT/Checkstyle, JPMS/OSGi and runtime admission."
+    },
+    {
+      "capability": "Rights",
+      "gate": "Retain upstream per-file and packaged licensing/NOTICE; mixed Eclipse source must not be relabeled Apache-2.0."
+    }
+  ],
+  "coverage_limits": [
+    "This is current default-head source custody for four public forks; it is not all historical M3 work from every repository.",
+    "Other owner repositories, private split-source families, nondefault branches, unmerged PR heads and historical canonical recipe snapshots remain independent unresolved scopes.",
+    "The 181-repository owner census and earlier 29-public-fork/479-asset and 8356-source inventories are discovery/evidence scopes; they do not prove transfer of every source/ref.",
+    "Existing target runtime owners and already-qualified Eclipse indexed-RB receiving sources remain authoritative; new custody does not imply runtime replacement."
+  ]
+}
