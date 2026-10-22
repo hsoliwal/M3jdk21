@@ -29,6 +29,26 @@ def main() -> None:
         raise RuntimeError("six exact recipe rows required")
     if [row[0] for row in rows] != sorted({row[0] for row in rows}):
         raise RuntimeError("manifest paths must be strictly increasing")
+    # Historical postimages are never rewritten. Each evolved product
+    # source must have a reviewed named successor with both exact digests.
+    successor_file = Path(__file__).resolve().with_name("SUCCESSOR_RECEIVERS.tsv")
+    successors = {}
+    if successor_file.is_file():
+        lines = successor_file.read_text(encoding="utf-8").splitlines()
+        if (not lines or lines[0] !=
+                "path\tpredecessor_sha256\tsuccessor_sha256\tcanonical_recipe"):
+            raise RuntimeError("invalid successor manifest")
+        for line in lines[1:]:
+            columns = line.split("\t")
+            if len(columns) != 4:
+                raise RuntimeError("invalid successor row")
+            path, prior, successor, recipe = columns
+            if (path in successors or len(prior) != 64 or len(successor) != 64
+                    or recipe != "com.synexia.m3.IndexedLiveReentrancy20261021"):
+                raise RuntimeError("duplicate/malformed successor row")
+            successors[path] = (prior, successor)
+        if len(successors) != 2:
+            raise RuntimeError("both evolved Java receiver files must be pinned")
     for path, before, after, template in rows:
         if not path.startswith("m3/collections/src/") or not template.endswith(".java.txt"):
             raise RuntimeError(f"invalid receiver path: {path}")
@@ -36,13 +56,17 @@ def main() -> None:
         if not recipe_file.is_file() or digest(recipe_file.read_bytes()) != after:
             raise RuntimeError(f"recipe template drift: {template}")
         receiver = inside_repo(ROOT / path)
-        if not receiver.is_file() or digest(receiver.read_bytes()) != after:
-            raise RuntimeError(f"receiver != recipe postimage: {path}")
+        successor = successors.get(path)
+        if successor is not None and successor[0] != after:
+            raise RuntimeError(f"historical/successor digest mismatch: {path}")
+        expected = successor[1] if successor is not None else after
+        if not receiver.is_file() or digest(receiver.read_bytes()) != expected:
+            raise RuntimeError(f"receiver != exact latest source-sealed postimage: {path}")
         if before != "ABSENT":
             prior = inside_repo(PRE / (Path(path).name + ".txt"))
             if not prior.is_file() or digest(prior.read_bytes()) != before:
                 raise RuntimeError(f"source preimage drift: {path}")
-        print(f"PIN_PASS {path} before={before} after={after}")
+        print(f"PIN_PASS {path} before={before} historical_after={after} current={expected}")
     print(f"M3_INDEXED_LIVE_RECIPE_PIN_PASS files={len(rows)}")
 
 
