@@ -29,6 +29,14 @@ public final class M3FsBulk {
     public static final byte FAILED = 3;
     public static final byte SKIPPED = 4;
 
+    /** Selection flags address status values by {@code 1 << status}, not opcode. */
+    public static final int STATUS_FLAG_OK = 1 << OK;
+    public static final int STATUS_FLAG_NO_EFFECT = 1 << NO_EFFECT;
+    public static final int STATUS_FLAG_FAILED = 1 << FAILED;
+    public static final int STATUS_FLAG_SKIPPED = 1 << SKIPPED;
+    public static final int STATUS_FLAGS_ALL = STATUS_FLAG_OK | STATUS_FLAG_NO_EFFECT
+            | STATUS_FLAG_FAILED | STATUS_FLAG_SKIPPED;
+
     public static final int META_CHECKED = 1;
     public static final int META_EXISTS = 2;
     public static final int META_FILE = 4;
@@ -144,6 +152,95 @@ public final class M3FsBulk {
             long n = 0;
             for (byte status : statuses) if (status == OK) n++;
             return n;
+        }
+
+        /**
+         * Count rows satisfying a status flag-set and metadata-required/excluded masks.
+         * Status flags use {@code 1 << OK}, {@code 1 << FAILED}, etc.
+         * The original detached result columns remain authoritative.
+         */
+        public int selectedCount(int allowedStatuses, int requiredMetadata, int excludedMetadata) {
+            return selectedCount(0, size(), allowedStatuses, requiredMetadata, excludedMetadata);
+        }
+
+        /** Count in a half-open physical row window; no selection array is allocated. */
+        public int selectedCount(int first, int length, int allowedStatuses,
+                                 int requiredMetadata, int excludedMetadata) {
+            validateSelection(first, length, allowedStatuses);
+            if ((requiredMetadata & excludedMetadata) != 0 || allowedStatuses == 0) return 0;
+            int count = 0;
+            for (int i = first, end = first + length; i < end; i++) {
+                if (matches(i, allowedStatuses, requiredMetadata, excludedMetadata)) count++;
+            }
+            return count;
+        }
+
+        /**
+         * Detached selected physical ordinals in increasing original encounter order.
+         * Two passes allocate exactly one int[k], with no retained per-row Entry/Node.
+         * Unknown provider status bytes do not match any of the four known flags.
+         */
+        public int[] selectedOrdinals(int allowedStatuses, int requiredMetadata,
+                                      int excludedMetadata) {
+            return selectedOrdinals(0, size(), allowedStatuses, requiredMetadata, excludedMetadata);
+        }
+
+        /** Physical ordinals stay absolute even when scanning a sub-window. */
+        public int[] selectedOrdinals(int first, int length, int allowedStatuses,
+                                      int requiredMetadata, int excludedMetadata) {
+            int count = selectedCount(first, length, allowedStatuses,
+                    requiredMetadata, excludedMetadata);
+            int[] ordinals = new int[count];
+            int written = 0;
+            for (int i = first, end = first + length; i < end; i++) {
+                if (matches(i, allowedStatuses, requiredMetadata, excludedMetadata)) {
+                    ordinals[written++] = i;
+                }
+            }
+            return ordinals;
+        }
+
+        /**
+         * Return one packed bit per original row, including skipped and error rows.
+         * The result is sized for the whole parent batch. Unselected rows outside
+         * the supplied window stay zero, so it can be used by an indexed bulk caller.
+         * This is a detached snapshot, not a live filtered/sorted collection view.
+         */
+        public long[] selectedMaskWords(int allowedStatuses, int requiredMetadata,
+                                        int excludedMetadata) {
+            return selectedMaskWords(0, size(), allowedStatuses, requiredMetadata, excludedMetadata);
+        }
+
+        /** Windowed variant with absolute physical bit positions. */
+        public long[] selectedMaskWords(int first, int length, int allowedStatuses,
+                                        int requiredMetadata, int excludedMetadata) {
+            validateSelection(first, length, allowedStatuses);
+            long[] words = new long[(size() >>> 6) + ((size() & 63) == 0 ? 0 : 1)];
+            if ((requiredMetadata & excludedMetadata) != 0 || allowedStatuses == 0) return words;
+            for (int i = first, end = first + length; i < end; i++) {
+                if (matches(i, allowedStatuses, requiredMetadata, excludedMetadata)) {
+                    words[i >>> 6] |= 1L << (i & 63);
+                }
+            }
+            return words;
+        }
+
+        private void validateSelection(int first, int length, int allowedStatuses) {
+            Objects.checkFromIndexSize(first, length, size());
+            if ((allowedStatuses & ~STATUS_FLAGS_ALL) != 0) {
+                throw new IllegalArgumentException("unknown M3FS bulk status flag");
+            }
+        }
+
+        private boolean matches(int index, int allowedStatuses, int requiredMetadata,
+                                int excludedMetadata) {
+            int state = statuses[index];
+            if (state < OK || state > SKIPPED || (allowedStatuses & (1 << state)) == 0) {
+                return false;
+            }
+            int metadataBits = metadata[index];
+            return (metadataBits & requiredMetadata) == requiredMetadata
+                    && (metadataBits & excludedMetadata) == 0;
         }
     }
 
