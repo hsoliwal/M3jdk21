@@ -155,4 +155,69 @@ final class MFileRangeTransferTest {
         assertEquals(0, captures.get());
         assertEquals(1, source.closes);
     }
+
+    @Test void reusableScratchMatchesReferenceAcrossIndependentSources() throws Exception {
+        Random random = new Random(0x4D33534352415443L);
+        int[] capacities = {1, 3, 64, 8192, 65536, 1 << 20};
+        for (int capacity : capacities) {
+            byte[] scratch = new byte[capacity];
+            for (int trial = 0; trial < 120; trial++) {
+                int size = trial < 8
+                        ? new int[]{0, 1, 2, 63, 64, 8192, 8193, 16384}[trial]
+                        : random.nextInt(20_000);
+                byte[] bytes = new byte[size];
+                random.nextBytes(bytes);
+                Source source = new Source(bytes);
+                int windows = random.nextInt(12);
+                long[] offsets = new long[windows], lengths = new long[windows];
+                ByteArrayOutputStream expected = new ByteArrayOutputStream();
+                int cursor = 0;
+                for (int row = 0; row < windows; row++) {
+                    cursor += random.nextInt(size - cursor + 1);
+                    int selected = random.nextInt(size - cursor + 1);
+                    offsets[row] = cursor;
+                    lengths[row] = selected;
+                    expected.write(bytes, cursor, selected);
+                    cursor += selected;
+                }
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                AtomicLong progressed = new AtomicLong();
+                long written = MFileStreams.transferRanges(source, output,
+                        offsets, lengths, size, scratch,
+                        M3FsProgress.of(() -> false, progressed::addAndGet));
+                assertEquals(expected.size(), written);
+                assertArrayEquals(expected.toByteArray(), output.toByteArray());
+                assertEquals(windows == 0 ? 0 : cursor, progressed.get(),
+                        "consumed source gaps count as progress");
+                assertEquals(windows == 0 ? 0 : 1, source.opens);
+                assertEquals(source.opens, source.closes);
+                output.write(0x4d);
+                assertEquals(expected.size() + 1, output.size(),
+                        "caller retains the destination");
+            }
+        }
+    }
+
+    @Test void invalidBorrowedScratchAndGeometryRefuseBeforeProviderIO() throws Exception {
+        Source source = new Source(new byte[]{1, 2, 3, 4});
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        assertThrows(NullPointerException.class, () -> MFileStreams.transferRanges(
+                source, output, new long[]{0}, new long[]{1}, 4,
+                null, M3FsProgress.noop()));
+        assertThrows(IllegalArgumentException.class, () -> MFileStreams.transferRanges(
+                source, output, new long[]{0}, new long[]{1}, 4,
+                new byte[0], M3FsProgress.noop()));
+        assertThrows(IllegalArgumentException.class, () -> MFileStreams.transferRanges(
+                source, output, new long[]{0}, new long[]{1}, 4,
+                new byte[(1 << 20) + 1], M3FsProgress.noop()));
+        assertThrows(IllegalArgumentException.class, () -> MFileStreams.transferRanges(
+                source, output, new long[]{2, 1}, new long[]{0, 0}, 4,
+                new byte[3], M3FsProgress.noop()));
+        assertEquals(0, MFileStreams.transferRanges(source, output,
+                new long[0], new long[0], 4, new byte[3],
+                M3FsProgress.of(() -> true, ignored -> fail("unexpected byte progress"))));
+        assertEquals(0, source.opens);
+        assertEquals(0, output.size());
+    }
+
 }
