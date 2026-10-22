@@ -1,4 +1,6 @@
 record	owner	target	source_revision	origin	status
-M3_FIVE_LIBRARY_INTEROP_76	Synexia	M3JDK21	m3-five-library-superset-20261022	36 immutable + 40 source-sealed additions	PENDING_EXACT_HEAD_CI
+M3_FIVE_LIBRARY_INTEROP_76	Synexia	M3JDK21	m3-five-library-superset-20261022	36 immutable original (29 unchanged + 7 source-pinned successors) + 40 additions	PENDING_EXACT_HEAD_CI
 algorithm	M3JDK21	dynamic array/offset/mask	M3ArrayList,M3IndexMaskCompactor,M3IndexSort	No code imported from challenge platform	EXISTING_REUSE
 interfaces	M3JDK21	java.util/Guava/Apache/Eclipse/Spring contracts	product source owners	API/behavior independently gated	NOT_YET_QUALIFIED
+history	M3JDK21	36 source baseline	a720780b1a5ab41ea27182b9b7ad873efdf533b4	exact historical code/receipt authority	VERIFIED_BLOBS
+revision	Synexia	7 historical product source revisions	changed-07.tsv	old/new SHA-256 Git blob and latest commit IDs	SOURCE_ONLY_PENDING_CONTRACT
