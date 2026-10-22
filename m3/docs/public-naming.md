@@ -30,6 +30,27 @@ not shipped as a competing `M3HashMap`, `M3String`, or `FooV7` public type.
   Existing historical files remain readable for provenance until separately
   migrated through tested, source-pinned recipes.
 
+## Canonical recipe ownership
+
+**Only Synexia** (`hsoliwal/com.synexia`) develops, improves, tests,
+combines and executes Maven/OpenRewrite transformation recipes, donors,
+catalogues and private proof experiments. M3JDK21 and the other public
+product forks receive the **results of qualified executed recipes**:
+actual original-owner Java/JNI/HotSpot implementations, ordinary product
+tests, licensing, provenance and runnable acceptance evidence.
+
+No newly authored recipe crate, OpenRewrite `Recipe.java`, recipe
+tests or `META-INF/rewrite` descriptor may be received as a public
+product result. Pre-existing historical public recipe source remains
+readable for provenance but cannot be modified or further developed in
+the public fork. Source-changing successors belong in Synexia.
+
+This exclusion does not block existing original JDK classes, internal
+array/index/mask/JNI implementations, stable jtreg test names or
+read-only product verification scripts. Recipe execution must be
+source-sealed in Synexia and the output separately qualified inside
+the actual M3JDK21 SDK, without becoming an M3-on-JDK wrapper.
+
 ## Exact change gate
 
 `m3/compatibility/check_public_names.py` checks only newly added, copied,
