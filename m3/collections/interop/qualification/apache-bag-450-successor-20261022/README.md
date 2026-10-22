@@ -32,7 +32,7 @@ for the removed count, reproducing exactly the 4.5.0 versioned behavior.
 ## Source epochs and gate
 
 Previous M3JDK21 product epoch (the three-test compiler receiver):
-`378da3e595c0279faea28fb3a172e1f307c9db8d22a`.
+`378da3e595c0279faea6e2c3ea504364886f89bd`.
 
 The new `verify_apache_bag_successor.py` first invokes the **unchanged**
 previous `verify_compile_successor.py` on that source epoch, which itself
