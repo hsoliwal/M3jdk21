@@ -3,6 +3,7 @@
 // Modified 2026-10-21 by the Synexia m3-project-delta recipe: checked timestamp observations.
 package com.m3.file;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -102,6 +103,102 @@ public final class M3File {
             }
             return data;
         }
+    }
+
+    /**
+     * Hash already-known, ordered, non-overlapping byte spans through one NIO
+     * channel. This is intended for FileIndex record/chunk reuse after a caller
+     * has established which spans require work; it does not discover changes.
+     *
+     * <p>Offsets are half-open physical byte coordinates, never UTF-16 indexes.
+     * maxEnd bounds the largest source coordinate, including gaps. Provider
+     * metadata is checked before and after reading but does not establish an
+     * atomic snapshot or prove unchanged bytes in gaps. No complete file digest,
+     * compiler ABI result or persistent cache is inferred from range hashes.
+     *
+     * <p>Inputs are copied before any provider I/O so progress callbacks cannot
+     * change selected ranges. Result storage is three primitive long[] lanes:
+     * starts, lengths, and four SHA-256 digest words per physical range.
+     */
+    public RangeFingerprints fingerprintRanges(long[] offsets, long[] lengths,
+                                               long maxEnd) throws IOException {
+        return fingerprintRanges(offsets, lengths, maxEnd, M3StreamProgress.none());
+    }
+
+    /** Bounded selection with a borrowed progress monitor; one opened channel. */
+    public RangeFingerprints fingerprintRanges(long[] offsets, long[] lengths,
+                                               long maxEnd, M3StreamProgress progress)
+            throws IOException {
+        Objects.requireNonNull(offsets, "offsets");
+        Objects.requireNonNull(lengths, "lengths");
+        M3StreamProgress.require(progress);
+        if (maxEnd < 0 || offsets.length != lengths.length
+                || offsets.length > Integer.MAX_VALUE / 4) {
+            throw new IllegalArgumentException("invalid range column geometry");
+        }
+        long[] selected = offsets.clone();
+        long[] extents = lengths.clone();
+        long previousEnd = 0;
+        for (int row = 0; row < selected.length; row++) {
+            long start = selected[row], extent = extents[row];
+            if (start < previousEnd || extent < 0 || start > maxEnd
+                    || extent > maxEnd - start) {
+                throw new IllegalArgumentException("ranges must be ordered, disjoint and bounded");
+            }
+            previousEnd = start + extent;
+        }
+        long[] digestWords = new long[selected.length * 4];
+        progress.checkCancelled();
+        BasicFileAttributes before = Files.readAttributes(
+                path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
+        if (!before.isRegularFile()) throw new IOException("resource is not a regular file");
+        for (int row = 0; row < selected.length; row++) {
+            if (selected[row] > before.size()
+                    || extents[row] > before.size() - selected[row]) {
+                throw new EOFException("range exceeds the observed file size");
+            }
+        }
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new AssertionError("required SHA-256 provider unavailable", impossible);
+        }
+        byte[] bytes = new byte[8192];
+        ByteBuffer page = ByteBuffer.wrap(bytes);
+        if (selected.length != 0) {
+            try (SeekableByteChannel channel = openReadChannel()) {
+                for (int row = 0; row < selected.length; row++) {
+                    progress.checkCancelled();
+                    channel.position(selected[row]);
+                    long remaining = extents[row];
+                    digest.reset();
+                    while (remaining > 0) {
+                        progress.checkCancelled();
+                        page.clear().limit((int) Math.min(bytes.length, remaining));
+                        int read = readProgressing(channel, page);
+                        if (read < 0) throw new EOFException("range shortened during observation");
+                        digest.update(bytes, 0, read);
+                        remaining -= read;
+                        progress.worked(read);
+                    }
+                    ByteBuffer completed = ByteBuffer.wrap(digest.digest());
+                    int at = row * 4;
+                    digestWords[at] = completed.getLong();
+                    digestWords[at + 1] = completed.getLong();
+                    digestWords[at + 2] = completed.getLong();
+                    digestWords[at + 3] = completed.getLong();
+                }
+            }
+        }
+        BasicFileAttributes after = Files.readAttributes(
+                path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
+        if (!after.isRegularFile() || before.size() != after.size()
+                || !before.lastModifiedTime().equals(after.lastModifiedTime())
+                || !Objects.equals(before.fileKey(), after.fileKey())) {
+            throw new IOException("resource changed during range observation");
+        }
+        return new RangeFingerprints(selected, extents, digestWords, after.lastModifiedTime());
     }
 
     /**
@@ -284,6 +381,36 @@ public final class M3File {
         if (previous == null) return current == null ? 0 : ADDED;
         if (current == null) return REMOVED;
         return previous.equals(current) ? 0 : CONTENT_CHANGED;
+    }
+
+    /**
+     * Detached, immutable columnar range fingerprints. Returned Fingerprint
+     * records materialize on demand; this owner retains no per-range objects.
+     */
+    public static final class RangeFingerprints {
+        private final long[] offsets;
+        private final long[] lengths;
+        private final long[] hashWords;
+        private final FileTime lastModified;
+
+        private RangeFingerprints(long[] offsets, long[] lengths,
+                                  long[] hashWords, FileTime lastModified) {
+            this.offsets = offsets;
+            this.lengths = lengths;
+            this.hashWords = hashWords;
+            this.lastModified = lastModified;
+        }
+
+        public int size() { return offsets.length; }
+        public long offset(int row) { return offsets[Objects.checkIndex(row, size())]; }
+        public long length(int row) { return lengths[Objects.checkIndex(row, size())]; }
+        public FileTime lastModified() { return lastModified; }
+
+        public Fingerprint fingerprint(int row) {
+            int at = Objects.checkIndex(row, size()) * 4;
+            return new Fingerprint(lengths[row], hashWords[at], hashWords[at + 1],
+                    hashWords[at + 2], hashWords[at + 3]);
+        }
     }
 
     /**
