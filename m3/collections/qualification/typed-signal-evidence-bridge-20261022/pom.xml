@@ -40,6 +40,8 @@
           <includes>
             <include>com/m3/collections/M3SignalColumns.java</include>
             <include>com/m3/collections/M3ProgressiveSignalEvidence.java</include>
+            <include>com/m3/collections/M3SignalRelations.java</include>
+            <include>com/m3/collections/M3SourceSignalImage.java</include>
             <include>com/m3/collections/M3SignalEvidenceBridge.java</include>
           </includes>
           <testIncludes>
