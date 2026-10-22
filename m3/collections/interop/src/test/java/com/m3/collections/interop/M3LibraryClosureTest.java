@@ -134,7 +134,8 @@ final class M3LibraryClosureTest {
 
     @Test void springCreatedListsAndFactoryWiring() {
         var actual = M3LibraryCollections.<String, Integer>springMultiValueMap();
-        assertInstanceOf(M3SpringMultiValueMap.class, actual);
+        // The descriptor binds this factory to the original indexed-array owner.
+        assertInstanceOf(M3SpringArrayMultiValueMap.class, actual);
         actual.add("a", 1); actual.set("b", 2); actual.addAll("c", List.of(3, 4)); actual.addAll("empty", List.of());
         for (List<Integer> values : actual.values()) assertInstanceOf(M3LinkedList.class, values);
         assertTrue(actual.containsKey("empty")); assertEquals(4, actual.size());
