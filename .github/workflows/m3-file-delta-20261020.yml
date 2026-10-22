@@ -23,5 +23,3 @@ jobs:
           java-version: '21'
       - name: Compile and verify original M3File module plus all contract oracles
         run: python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$RUNNER_TEMP/m3-file-delta-suite"
-      - name: Execute reusable Java LST recipe fixed point and drift proof
-        run: mvn -B -ntp -f m3/file/recipe/build-impact-20261020/pom.xml test

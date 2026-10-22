@@ -6,12 +6,11 @@ on:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3ObservableList.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3ObservableIndexedViewsContract.java'
-      - 'm3/collections/recipe/observable-indexed-views-20261021/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-observable-indexed-views-20261021/**'
       - '.github/workflows/m3-observable-indexed-views-20261021.yml'
   push:
     branches:
-      - m3/observable-indexed-views-20261021
+      - master
+      - m3/restore-merged-atoms-ci-20261022
   workflow_dispatch:
 
 permissions:
@@ -43,5 +42,3 @@ jobs:
         run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable" -m com.m3.collections/com.m3.collections.M3ObservableListContract
       - name: Observable filtered/sorted primitive-index contract
         run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable" -m com.m3.collections/com.m3.collections.M3ObservableIndexedViewsContract
-      - name: Source-sealed Maven/OpenRewrite recipe and refusal
-        run: mvn -B -ntp -f m3/collections/recipe/observable-indexed-views-20261021/pom.xml test

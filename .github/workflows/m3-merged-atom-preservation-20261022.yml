@@ -36,3 +36,16 @@ jobs:
         run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
       - name: Reject disappearing merged product atoms
         run: python3 m3/history/verify-merged-atoms-preservation-20261022.py --root .
+      - name: Reject new transformation recipe sources in the downstream product
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          M3_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "$M3_BASE_SHA"
+          git diff --diff-filter=A --name-only "$M3_BASE_SHA" HEAD > "$RUNNER_TEMP/m3-new-paths.txt"
+          if grep -E '(^m3/recipes/|^m3/tooling/migration-recipes/|/recipe(s)?/)' "$RUNNER_TEMP/m3-new-paths.txt"; then
+            echo 'ERROR: executable transformation recipes belong in hsoliwal/com.synexia, not M3JDK21'
+            exit 1
+          fi

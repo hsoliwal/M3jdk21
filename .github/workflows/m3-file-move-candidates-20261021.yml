@@ -4,10 +4,10 @@ name: M3File move candidates and source recipes
 on:
   push:
     branches:
-      - m3/file-move-candidates-20261021
+      - master
+      - m3/restore-merged-atoms-ci-20261022
     paths:
       - 'm3/file/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-file-move-candidates-20261021/**'
       - '.github/workflows/m3-file-move-candidates-20261021.yml'
   pull_request:
     paths:
@@ -33,7 +33,3 @@ jobs:
           java-version: '21'
       - name: Verify M3File module and linked-image contracts
         run: python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$RUNNER_TEMP/m3-file-move-contract"
-      - name: Verify exact OpenRewrite postimages and refusal
-        run: mvn -B -ntp -f m3/file/recipe/move-candidates-20261021/pom.xml test
-      - name: Verify constructor recipe source custody and fixed point
-        run: mvn -B -ntp -f m3/file/recipe/resource-locks-constructor-20261022/pom.xml test

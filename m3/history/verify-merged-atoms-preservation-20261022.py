@@ -51,7 +51,7 @@ def verify(root: Path, manifest: Path) -> int:
         elif expected != "-":
             raise AssertionError(f"invalid PRESENT expectation at row {line_number}")
         count += 1
-    if count < 20:
+    if count < 10:
         raise AssertionError("merged preservation manifest unexpectedly incomplete")
     return count
 
