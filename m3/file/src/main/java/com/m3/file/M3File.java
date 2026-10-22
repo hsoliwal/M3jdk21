@@ -155,6 +155,27 @@ public final class M3File {
                 M3StreamProgress.require(progress), Objects.requireNonNull(observer, "observer"));
     }
 
+    /**
+     * Original M3File read with caller-owned reusable bounded scratch. The
+     * buffer is borrowed for the entire call, not retained. Its caller must
+     * prevent concurrent reuse and mutation by byte observers. It may be reused
+     * serially across every input in one Maven/IDE project inventory.
+     *
+     * <p>No new source handle is opened beyond the existing checked channel;
+     * the original hash, file-key/mtime/size, cancellation and EOF contracts
+     * are identical to {@link #observe(long, M3StreamProgress, ByteObserver)}.
+     * The scratch length is deliberately bounded at 1 MiB.</p>
+     */
+    public Observation observe(long maxBytes, byte[] scratch, M3StreamProgress progress,
+            ByteObserver observer) throws IOException {
+        Objects.requireNonNull(scratch, "scratch");
+        if (scratch.length < 1 || scratch.length > (1 << 20)) {
+            throw new IllegalArgumentException("scratch length must be 1..1048576");
+        }
+        return observe(maxBytes, scratch, false,
+                M3StreamProgress.require(progress), Objects.requireNonNull(observer, "observer"));
+    }
+
     /** Ledger-only admission: only absence at the first metadata read returns null. */
     Observation observeIfExists(byte[] scratch) throws IOException {
         return observe(Long.MAX_VALUE, scratch, true, M3StreamProgress.none(), null);
