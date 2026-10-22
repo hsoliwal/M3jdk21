@@ -1,0 +1,8 @@
+# path	before_git_blob	post_git_blob	donor_pr	canonical_recipe_pr	problem_category
+m3/file/src/main/java/com/m3/file/M3File.java	2e7a9df8d9a1f537bc3eb2cc0400a0a273fb24d1	bb2dfbde207fdb96c0b935809ba7b5c40e318145	1815	12967	SEEKABLE_PHYSICAL_BYTE_RANGES
+m3/file/src/test/java/com/m3/file/M3FileRangeContract.java	ABSENT	e802416b1cf02c69c7e4769f2ec4468234780763	1815	12967	FILE_RANGE_SHA_JAVA21_CONTRACT
+m3/file/verify.py	356a49680097a5dc055aac2c01f57b0809e6859c	80d44342eff136593cd29cc4eb09ffb43296fdbe	1815	13012	STRICT_HOST_LINKED_TEST_CENSUS
+m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	a7146dc0bfa17f3e640fc84434c708c48ae79f43	d5fd2188ec1feb751d0501051ec52f3cdd37692e	1793	12887	PARENT_OWNED_DIRECTORY_INDEX_MASK_VIEWS
+m3/fs/src/main/java/com/m3/fs/MFileStreams.java	18940e9cbe2e56908d0f113eda22caa830b0278e	9879efa1527d8a7d440e34774c1a1a3c6742b4ba	1815	12967	SEQUENTIAL_PROVIDER_BYTE_RANGE_TRANSFER
+m3/fs/src/test/java/com/m3/fs/M3DirectoryTableProjectionTest.java	ABSENT	6066877fda3b96d89ad53e8354bf4ceabd3b2632	1793	12887	DIRECTORY_MASK_SORT_PROJECTION_TEST
+m3/fs/src/test/java/com/m3/fs/MFileRangeTransferTest.java	ABSENT	0abb34f71e8590db656120556d3fa19407cbad0b	1815	12967	SEQUENTIAL_RANGE_ZIP_PROVIDER_TEST

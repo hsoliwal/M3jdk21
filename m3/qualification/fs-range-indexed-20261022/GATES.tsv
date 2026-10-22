@@ -1,0 +1,15 @@
+gate	state	evidence_or_required_action
+SHA256_SOURCE_PREIMAGE	PASS	Four original source preimages checked against canonical Synexia recipe
+ABSENT_NEW_TESTS	PASS	Three new original-owner source/test paths admitted after no existing target
+SOURCE_POSTIMAGE_GIT	PASS	All seven original Java/test/Python source blobs match canonical templates
+STRICT_M3FILE_CENSUS	PASS_NAME_ONLY	13 actual test stems and 13 original verifier keys, zero extra or missing
+JAVA21_RANGE_DONOR	HISTORICAL_ONLY	#1815 equivalent test 1200/22168; not current product original class
+DIRECTORY_INDEX_DONOR	HISTORICAL_ONLY	#1793 equivalent test 520/3134; not current native SQLite library
+PROVIDER_RANGE_TRANSFER_DONOR	HISTORICAL_ONLY	#1815 28-byte ZIP selected transfer isolated probe
+OPENREWRITE_RECIPE_EXECUTION	NOT_RUN	Maven SDK fixed-point and drift-refusal tests defined only
+FILE_MODULE_LINKED_IMAGE	NOT_RUN	m3/file/verify.py host and JLink actual full contract census
+M3FS_NATIVE_SQLITE	NOT_RUN	Original M3FS JNI/JUnit/C17/SQLite provider and index row wire
+M3JDK21_JTREG_JCK	NOT_RUN	Complete HotSpot source-built JDK21 image
+CROSS_PLATFORM	NOT_RUN	Windows macOS Android ZIP/JRT/network provider differences
+PERFORMANCE	NOT_MEASURED	CPU, heap, native allocations, file bytes and JNI crossing costs
+FIVE_LIBRARY_COLLECTION	NOT_RUN	JDK Guava Eclipse Commons Spring sorted/filter view matrix
