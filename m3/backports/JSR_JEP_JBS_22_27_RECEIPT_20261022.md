@@ -108,6 +108,26 @@ The sealed `Arrays.java` source SHA-256 chain is **`fb63f716ddcf750357d2c5747896
 
 These records prepare exact source/preimage and serial ordering inputs for the existing **private Synexia** canonical JDK backport recipe owners; they create no new public recipe, source modification or admission. The local executor still lacks an authenticated private `com.synexia` Git checkout and Java 21/Maven toolchain, so the recipe and product-proof gate is explicitly **BLOCKED**, not silently passed.
 
+## Java 21 Arrays donor behavioral contract failure — independent runtime proof, 2026-10-22
+
+**Disposition update:** the preceding exact source-blob chain is accurate custody, **but JDK-8309665 is HOLD_AS_IS / ADAPT_ONLY**, not eligible for verbatim `Arrays.java` replacement. A source digest and Java 21 compilation cannot establish Java 21 observable exception compatibility.
+
+A verified Eclipse Temurin **21.0.13+9** Linux x64 JDK (vendor tarball SHA-256 `d7f5d5cf865a2902b70ff549b97586a7d3f234e016f041ab447ea740c7d66d1c`) was installed **only** in an isolated `/tmp` test area. Exact Java 21 GA and JDK 22 GA `Arrays.java` Git snapshots were materialized byte-for-byte. The JDK 22 GA Java source, SHA-256 `0ba39f0b1a0be0c1e8040f778253ea41b5342f34b39786be64988f8b31d12c73`, compiled on that JDK 21 image using `javac -g --source 21 --target 21 -Xlint:all -Werror --patch-module java.base=...` (**PASS**, zero warnings). This is a standalone module-patch compile, **not** an M3JDK21 source build or canonical Synexia recipe execution.
+
+The standalone Java 21 differential oracle `ArraysDonorContractProbe.java` (unadmitted local fixture SHA-256 `c3227f5f4624c6e6cfc5839b394e692d6e9d6bb15ea4daa046bc715c32e40ac7`) launched the same deterministic 5,000-iteration ordinary-array hash/copy suite plus adversarial boundary/null/type cases twice: once with the original Java 21 image `java.util.Arrays`, once with the exact Java 22 GA `Arrays.class` supplied via `--patch-module java.base`. Both `-Xint` and normal JIT runs exited 0. The ordinary oracle digest **matched**: `b7ed7aff1bc115a3dd7da52bfac9e49f537aff7e0f36c4dff659875464ffde0c`.
+
+**However, both runs found 24 output differences in primitive `copyOfRange` exception class/message**: eight primitive-array overloads times three integer-overflow boundary pairs.
+
+| `from` → `to` | Original Java 21 result | Exact JDK 22 donor result |
+| --- | --- | --- |
+| `Integer.MAX_VALUE` → `Integer.MIN_VALUE` | `IllegalArgumentException` | `ArrayIndexOutOfBoundsException` |
+| `Integer.MIN_VALUE` → `Integer.MAX_VALUE` | `NegativeArraySizeException` | `IllegalArgumentException` |
+| `-1` → `Integer.MAX_VALUE` | `NegativeArraySizeException` | `IllegalArgumentException` |
+
+Root cause observed in the authoritative donor patch: JDK-8309665 removed a `checkLength(from,to)` helper testing **`to < from`** and introduced `newLength = to - from; if (newLength < 0)`. Subtraction overflows at these boundaries, changing which exception is raised; the public API may be textually unchanged but observable behavior is not. Two extra initial `NullPointerException` message differences from compilation without local-variable debug metadata vanished when recompiling the donor class with `-g`, leaving exactly **24 genuine overflow discrepancies**.
+
+**Required serial recipe correction:** preserve the Java 21 order/exception contract for the eight primitive overloads, keep the useful donor improvements only after adversarial behavior/JUnit parity, then prove source fixed point, branch/source SHA drift refusal and performance in **canonical private Synexia Maven/OpenRewrite**. Do not directly patch the public JDK target or merge the unadapted GA `Arrays.java`. JDK-8312164 hash-code changes can be separately evaluated as a later candidate; ordinary randomized hash parity is *not* comprehensive performance or source qualification. Runtime experiments used Temurin JDK 21, **not the integrated M3JDK21 product image**.
+
 ## Acceptance / next serial passes
 
 1. Reconcile generated 14,948-commit source inventory with existing JEP/JBS rows, preserving each distinct upstream commit and JBS relationship; reject gaps, duplicates and stale tags.
