@@ -27,9 +27,10 @@ static int matches(jint state, jint required, jint forbidden) {
 
 /* Never acquire or retain a pointer to either complete Java input array. */
 static int read_chunk(JNIEnv *env, jintArray offsets, jintArray flags,
-        jint first, jint length, jint *src, jint *states) {
+        jint first, jint length, int read_states, jint *src, jint *states) {
     (*env)->GetIntArrayRegion(env, offsets, first, length, src);
     if ((*env)->ExceptionCheck(env)) return 0;
+    if (!read_states) return 1;
     (*env)->GetIntArrayRegion(env, flags, first, length, states);
     return !(*env)->ExceptionCheck(env);
 }
@@ -55,6 +56,10 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
         raise(env, "java/lang/IndexOutOfBoundsException", "invalid array window");
         return 0;
     }
+    /* State-independent queries still validate every logical offset. */
+    const int all_states = required == 0 && forbidden == 0;
+    const int read_states = !all_states
+            && (((uint32_t) required & (uint32_t) forbidden) == 0U);
     const jint end = first + length;
     jint src[M3_VIEWPORT_CHUNK];
     jint states[M3_VIEWPORT_CHUNK];
@@ -65,13 +70,13 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
     for (jint begin = first; begin < end;) {
         jint take = end - begin;
         if (take > M3_VIEWPORT_CHUNK) take = M3_VIEWPORT_CHUNK;
-        if (!read_chunk(env, offsets, flags, begin, take, src, states)) return 0;
+        if (!read_chunk(env, offsets, flags, begin, take, read_states, src, states)) return 0;
         for (jint i = 0; i < take; ++i) {
             if (src[i] < 0) {
                 raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
                 return 0;
             }
-            if (matches(states[i], required, forbidden)) {
+            if (all_states || (read_states && matches(states[i], required, forbidden))) {
                 if (selected < M3_VIEWPORT_CHUNK) inlineSelection[selected] = src[i];
                 ++selected;
             }
@@ -114,12 +119,12 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
             begin += take;
             continue;
         }
-        if (!read_chunk(env, offsets, flags, begin, take, src, states)) {
+        if (!read_chunk(env, offsets, flags, begin, take, read_states, src, states)) {
             free(scratch);
             return 0;
         }
         for (jint i = 0; i < take; ++i) {
-            if (matches(states[i], required, forbidden)) {
+            if (all_states || (read_states && matches(states[i], required, forbidden))) {
                 /* Stable inputs are the caller's contract; a violated count must
                  * nevertheless never write beyond the native allocation. */
                 if (cursor == selected) {
@@ -178,6 +183,10 @@ Java_com_m3_collections_M3MaskViewportNative_projectPage(JNIEnv *env, jclass cls
         raise(env, "java/lang/IndexOutOfBoundsException", "negative visible page bounds");
         return 0;
     }
+    /* State-independent queries still validate every logical offset. */
+    const int all_states = required == 0 && forbidden == 0;
+    const int read_states = !all_states
+            && (((uint32_t) required & (uint32_t) forbidden) == 0U);
     const jint end = first + length;
     jint src[M3_VIEWPORT_CHUNK];
     jint states[M3_VIEWPORT_CHUNK];
@@ -191,13 +200,13 @@ Java_com_m3_collections_M3MaskViewportNative_projectPage(JNIEnv *env, jclass cls
     for (jint begin = first; begin < end;) {
         jint take = end - begin;
         if (take > M3_VIEWPORT_CHUNK) take = M3_VIEWPORT_CHUNK;
-        if (!read_chunk(env, offsets, flags, begin, take, src, states)) return 0;
+        if (!read_chunk(env, offsets, flags, begin, take, read_states, src, states)) return 0;
         for (jint i = 0; i < take; ++i) {
             if (src[i] < 0) {
                 raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
                 return 0;
             }
-            if (matches(states[i], required, forbidden)) {
+            if (all_states || (read_states && matches(states[i], required, forbidden))) {
                 /* No skip+limit arithmetic: both can independently be INT_MAX. */
                 if (available >= skipVisible && needed < maxVisible) {
                     if (needed == 0) pageFirst = begin + i;
@@ -244,12 +253,12 @@ Java_com_m3_collections_M3MaskViewportNative_projectPage(JNIEnv *env, jclass cls
             }
             cursor += take;
         } else {
-            if (!read_chunk(env, offsets, flags, begin, take, src, states)) {
+            if (!read_chunk(env, offsets, flags, begin, take, read_states, src, states)) {
                 free(scratch);
                 return 0;
             }
             for (jint i = 0; i < take; ++i) {
-                if (matches(states[i], required, forbidden)) {
+                if (all_states || (read_states && matches(states[i], required, forbidden))) {
                     if (cursor == needed) {
                         free(scratch);
                         raise(env, "java/util/ConcurrentModificationException", "projection inputs changed");
