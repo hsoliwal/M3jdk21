@@ -28,15 +28,35 @@ if [[ "$(git -C "$root" hash-object "$test/jdk/internal/mindex/M3CollectionMaskC
   echo "HOLD: original jtreg oracle source drift" >&2
   exit 1
 fi
+# Confirm the actual original JDK callers, not only the stand-alone kernel.
+if [[ "$(git -C "$root" hash-object "$src/java/util/ArrayList.java")" \
+       != "885d891b0f817080824622d592691a27cf8ffa26" ]]; then
+  echo "HOLD: original M3JDK21 java.util.ArrayList source drift" >&2
+  exit 1
+fi
+if [[ "$(git -C "$root" hash-object "$src/java/util/Vector.java")" \
+       != "a79a77ce8700dc494d02d906b2a7765670629eee" ]]; then
+  echo "HOLD: original M3JDK21 java.util.Vector source drift" >&2
+  exit 1
+fi
+if [[ "$(git -C "$root" hash-object "$test/java/util/ArrayList/M3ArrayMaskCallersContract.java")" \
+       != "81fcd00c088dd9ae8ed203b71a59a1dae6fdee7e" ]]; then
+  echo "HOLD: original JDK ArrayList/Vector behavior oracle source drift" >&2
+  exit 1
+fi
 
 mkdir -p "$tmp/src/jdk/internal/mindex" "$tmp/src/java/util" "$tmp/classes" "$tmp/tests"
 cp "$src/jdk/internal/mindex/M3CollectionMaskCompactor.java" "$tmp/src/jdk/internal/mindex/"
 cp "$src/java/util/CollectionViews.java" "$tmp/src/java/util/"
+cp "$src/java/util/ArrayList.java" "$tmp/src/java/util/"
+cp "$src/java/util/Vector.java" "$tmp/src/java/util/"
 
 # Explicit source files: never invoke a repo-wide patch-module compilation.
 javac -source 21 -target 21 -Xlint:all -Werror -proc:none \
   --patch-module "java.base=$tmp/src" -d "$tmp/classes" \
   "$tmp/src/jdk/internal/mindex/M3CollectionMaskCompactor.java" \
+  "$tmp/src/java/util/ArrayList.java" \
+  "$tmp/src/java/util/Vector.java" \
   "$tmp/src/java/util/CollectionViews.java"
 
 javac -source 21 -target 21 -Xlint:all -Werror -proc:none \
@@ -44,9 +64,30 @@ javac -source 21 -target 21 -Xlint:all -Werror -proc:none \
   --add-exports "java.base/jdk.internal.mindex=ALL-UNNAMED" \
   -d "$tmp/tests" \
   "$test/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java" \
+  "$test/java/util/ArrayList/M3ArrayMaskCallersContract.java" \
   "$test/java/util/CollectionViews/RunSearchJni.java" \
   "$test/java/util/CollectionViews/BootstrapViewsTest.java" \
   "$test/java/util/CollectionViews/CollectionViewsContract.java"
+
+# Check the original JDK21 caller behavior before patching java.base.
+java --add-opens "java.base/java.util=ALL-UNNAMED" \
+  -cp "$tmp/tests" M3ArrayMaskCallersContract
+java -Xint --add-opens "java.base/java.util=ALL-UNNAMED" \
+  -cp "$tmp/tests" M3ArrayMaskCallersContract
+
+# Verify both original collection classes directly call the product-owned M3 atom.
+javap -p -c "$tmp/classes/java/util/ArrayList.class" > "$tmp/arraylist-bytecode.txt"
+javap -p -c "$tmp/classes/java/util/Vector.class" > "$tmp/vector-bytecode.txt"
+grep -Fq "jdk/internal/mindex/M3CollectionMaskCompactor.compact" "$tmp/arraylist-bytecode.txt"
+grep -Fq "jdk/internal/mindex/M3CollectionMaskCompactor.compact" "$tmp/vector-bytecode.txt"
+
+# Execute actual M3JDK21 java.util.ArrayList and Vector under mixed and interpreted VM modes.
+java --patch-module "java.base=$tmp/classes" \
+  --add-opens "java.base/java.util=ALL-UNNAMED" \
+  -cp "$tmp/tests" M3ArrayMaskCallersContract
+java -Xint --patch-module "java.base=$tmp/classes" \
+  --add-opens "java.base/java.util=ALL-UNNAMED" \
+  -cp "$tmp/tests" M3ArrayMaskCallersContract
 
 java --patch-module "java.base=$tmp/classes" \
   --add-exports "java.base/jdk.internal.mindex=ALL-UNNAMED" \
@@ -65,4 +106,4 @@ java --patch-module "java.base=$tmp/classes" -Xss256k \
   --add-opens "java.base/java.util=ALL-UNNAMED" --add-modules jdk.management \
   -cp "$tmp/tests" CollectionViewsContract
 
-echo "PASS: JDK21 patch-module compaction, bootstrap filtered views and sorted contract oracles"
+echo "PASS: baseline and integrated JDK ArrayList/Vector masks, java.base compaction, bootstrap filtered and sorted contract oracles"
