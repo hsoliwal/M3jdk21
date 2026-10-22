@@ -8797,6 +8797,10 @@
           {
             "id": "M3CollectionMaskCompactorPrefixTest",
             "receipt": "m3/qualification/mask-prefix-scalar-20261021/README.md"
+          },
+          {
+            "id": "M3ArrayMaskCallersContract",
+            "receipt": "m3/qualification/mask-prefix-scalar-20261021/README.md"
           }
         ],
         "provenance": {
