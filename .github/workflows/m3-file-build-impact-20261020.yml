@@ -15,25 +15,11 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-      - name: Exact M3File source and binary impact contracts
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p build/m3-file-impact
-          javac --release 21 -proc:none -Xlint:all,-module -Werror -d build/m3-file-impact \
-            m3/file/src/main/java/module-info.java \
-            m3/file/src/main/java/com/m3/file/M3File.java \
-            m3/file/src/main/java/com/m3/file/M3FileDeltaLedger.java \
-            m3/file/src/main/java/com/m3/file/M3FileBuildImpact.java \
-            m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java \
-            m3/file/src/test/java/com/m3/file/M3FileBuildImpactContract.java
-          java --module-path build/m3-file-impact \
-            -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract
-          java --module-path build/m3-file-impact \
-            -m com.m3.file/com.m3.file.M3FileBuildImpactContract
-          java -Xint --module-path build/m3-file-impact \
-            -m com.m3.file/com.m3.file.M3FileBuildImpactContract
+      - name: Full M3File module and source/binary reverse impact contracts
+        run: python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$RUNNER_TEMP/m3-file-impact-suite"

@@ -23,6 +23,8 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -32,13 +34,14 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/m3-observable"
           javac --release 21 -Xlint:all,-module -Werror \
-            -sourcepath m3/collections/src/main/java \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
             -d "$RUNNER_TEMP/m3-observable" \
+            m3/collections/src/main/java/module-info.java \
             m3/collections/src/test/java/com/m3/collections/M3ObservableListContract.java \
             m3/collections/src/test/java/com/m3/collections/M3ObservableIndexedViewsContract.java
       - name: Existing observable List contract
-        run: java -Xcheck:jni -cp "$RUNNER_TEMP/m3-observable" com.m3.collections.M3ObservableListContract
+        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable" -m com.m3.collections/com.m3.collections.M3ObservableListContract
       - name: Observable filtered/sorted primitive-index contract
-        run: java -Xcheck:jni -cp "$RUNNER_TEMP/m3-observable" com.m3.collections.M3ObservableIndexedViewsContract
+        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable" -m com.m3.collections/com.m3.collections.M3ObservableIndexedViewsContract
       - name: Source-sealed Maven/OpenRewrite recipe and refusal
         run: mvn -B -ntp -f m3/collections/recipe/observable-indexed-views-20261021/pom.xml test
