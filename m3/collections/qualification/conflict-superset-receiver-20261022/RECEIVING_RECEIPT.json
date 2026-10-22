@@ -1,0 +1,103 @@
+{
+  "schema": "com.synexia.m3jdk21.receiver-execution-receipt/v1",
+  "status": "DRAFT_HOLD_JTREG_PERFORMANCE_API_ADMISSION",
+  "product": "M3JDK21 integrated SDK",
+  "product_repo": "hsoliwal/M3jdk21",
+  "base_commit": "b1cc8ab32eaef5b01582623b100da80946fd9346",
+  "module": "m3/collections",
+  "private_recipe": {
+    "repo": "hsoliwal/com.synexia",
+    "class": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "crate": "m3-collection-conflict-union-20261022",
+    "commit": "0b9136b56608c42bab31faa35b4ad0ce5f7793bc",
+    "review_pr": "https://github.com/hsoliwal/com.synexia/pull/13062"
+  },
+  "donor_prs": [
+    "https://github.com/hsoliwal/M3jdk21/pull/1305",
+    "https://github.com/hsoliwal/M3jdk21/pull/1330",
+    "https://github.com/hsoliwal/M3jdk21/pull/1340",
+    "https://github.com/hsoliwal/M3jdk21/pull/1379"
+  ],
+  "postimages": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "before_sha256": "4f38bc4801a488c9b3cf1c2ec848a3293ec6b89c91bf01e6f6a9334197bbc0fa",
+      "postimage_sha256": "9833b3d8d36287fe38025d9b7c38fb09e495f94f27c611af85433130f1e72ac2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3HashMap.java",
+      "before_sha256": "ABSENT",
+      "postimage_sha256": "2a368feb9c5a277bf3e307e14da6ee549595a4f4d3af7259f48ca084c930d591"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3HashSet.java",
+      "before_sha256": "ABSENT",
+      "postimage_sha256": "84c6d02ffeb50d826d2a9ec0a24d7b7e3c7bded13d6fb5f60c0e7c4a03489928"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "before_sha256": "fa3ee5d9d10a7ce5bdcb5c8c85d2e2cba90ecc0915ec891ea6e1627bf5e2aec8",
+      "postimage_sha256": "82dd12c877780c61c3e8edf901262dbe27319c80e61593bf97d631ab6e21efb3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "before_sha256": "3e1145fdb6968bf40b369d56c932daf110d6b26c15b0cb6cf29309eff43dfaf9",
+      "postimage_sha256": "cfd5ec8ad333416a47004825d41339e2b91ebf1a577bec2c3e383a2240417ff1"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3HashMapSetTest.java",
+      "before_sha256": "ABSENT",
+      "postimage_sha256": "93ecdd9619b390a95e1531e9dd9eb6c0e2e64e4ed861f2e34fd7c86c32c1b7dc"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedHashBackshiftTest.java",
+      "before_sha256": "ABSENT",
+      "postimage_sha256": "26038e1ad1bb21a811ab7e6d4df7bc2ad27e31795aad71413b12d962111620ed"
+    }
+  ],
+  "executed": {
+    "jdk": "Eclipse Temurin 21.0.12.1+1",
+    "maven": "3.9.11",
+    "openrewrite_recipe_junit": {
+      "pass": 7,
+      "fail": 0
+    },
+    "compiler": {
+      "release": 21,
+      "lint": "-Xlint:all,-module -Werror",
+      "baseline_source_units": 285,
+      "generated_receiver_source_units": 287,
+      "existing_test_sources": 339,
+      "new_test_sources": 2,
+      "compiled_without_warning": true
+    },
+    "existing_owner_jvm_public_protected_descriptors": "IDENTICAL: M3ArrayList, M3LinkedHashMap, M3ObjectIndexSnapshot",
+    "native_c17_libraries_compiled_strict": 10,
+    "junit_native_latest_master": {
+      "tests": 585,
+      "passed": 585,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0,
+      "xml_sha256": "9f175dafa2ef99ac584d488c7a058647c8d061d97b99194fb125b446c24b3349"
+    },
+    "previous_master_java_only": {
+      "tested": 584,
+      "passed": 582,
+      "native_assumption_aborts": 2
+    },
+    "previous_master_native": {
+      "tested": 584,
+      "passed": 584
+    },
+    "standalone_modular_jar_jlink_smoke_on_prior_master": "PASS",
+    "existing_thread_allocation_probe_on_prior_master": "12 operation families x 3 runs x 1000000 ops; 0 allocated bytes each both baseline and candidate"
+  },
+  "not_yet_executed": [
+    "full-integrated-M3JDK21-HotSpot-image-build",
+    "whole-JDK-jtreg",
+    "native-memory-and-GC-profiles",
+    "representative-JMH-high-collision-backshift-performance",
+    "GitHub-required-checks-and-release-admission"
+  ]
+}
