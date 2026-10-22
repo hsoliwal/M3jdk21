@@ -2,6 +2,7 @@
 package com.m3.fs;
 
 import java.io.Closeable;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -171,6 +172,75 @@ public final class MFileStreams {
         @Override public void onComplete(Completion result) throws IOException {
             for (MFileShadow observer : observers) observer.onComplete(result);
         }
+    }
+
+    /**
+     * Streams selected half-open source byte ranges from any MFileContent
+     * provider into a borrowed output. This is the sequential fallback for
+     * local, archive, database and remote providers that cannot seek. It uses
+     * one input stream and 8 KiB scratch space; no file-wide payload, per-range
+     * object or independent background reader is retained.
+     *
+     * <p>Offsets and lengths must be ordered and non-overlapping; maxEnd is
+     * the greatest permitted source coordinate, including unread gaps. Gaps
+     * are consumed, not written, and still count as input progress and shadows.
+     * This method neither claims a full-content hash nor replays failed writes.
+     * A failed borrowed destination may have received a partial prefix.
+     * Caller retains destination ownership and must close/flush it.
+     *
+     * <p>Source arrays are copied before any provider work. If there are no
+     * ranges, no provider is opened. Successful return reports transferred
+     * bytes, not an atomic destination commit or stable source generation.
+     */
+    public static long transferRanges(MFileContent source, OutputStream destination,
+            long[] offsets, long[] lengths, long maxEnd, M3FsProgress progress)
+            throws IOException {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(destination, "destination");
+        Objects.requireNonNull(offsets, "offsets");
+        Objects.requireNonNull(lengths, "lengths");
+        Objects.requireNonNull(progress, "progress");
+        if (maxEnd < 0 || offsets.length != lengths.length) {
+            throw new IllegalArgumentException("invalid range column geometry");
+        }
+        long[] selected = offsets.clone();
+        long[] extents = lengths.clone();
+        long previousEnd = 0;
+        for (int row = 0; row < selected.length; row++) {
+            long start = selected[row], length = extents[row];
+            if (start < previousEnd || length < 0 || start > maxEnd
+                    || length > maxEnd - start) {
+                throw new IllegalArgumentException("ranges must be ordered, disjoint and bounded");
+            }
+            previousEnd = start + length;
+        }
+        if (selected.length == 0) return 0;
+        progress.checkCanceled();
+        byte[] scratch = new byte[8192];
+        long sourcePosition = 0;
+        long written = 0;
+        try (Input input = source.openInputStream(progress)) {
+            for (int row = 0; row < selected.length; row++) {
+                long gap = selected[row] - sourcePosition;
+                while (gap > 0) {
+                    int amount = input.read(scratch, 0, (int) Math.min(scratch.length, gap));
+                    if (amount < 0) throw new EOFException("source ended before selected range");
+                    // Input itself rejects a zero-progress or invalid provider result.
+                    sourcePosition += amount;
+                    gap -= amount;
+                }
+                long remaining = extents[row];
+                while (remaining > 0) {
+                    int amount = input.read(scratch, 0, (int) Math.min(scratch.length, remaining));
+                    if (amount < 0) throw new EOFException("source shortened in selected range");
+                    destination.write(scratch, 0, amount);
+                    sourcePosition += amount;
+                    written += amount;
+                    remaining -= amount;
+                }
+            }
+        }
+        return written;
     }
 
     /**
