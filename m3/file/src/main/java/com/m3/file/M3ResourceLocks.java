@@ -17,6 +17,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * No JNI callback, queue of element nodes, or second filesystem is created.
  */
 public final class M3ResourceLocks {
+    /** Preserve the accessible no-argument construction contract explicitly. */
+    public M3ResourceLocks() { }
     /**
      * Immutable lexical scope over one provider-owned absolute NIO Path.
      * A subtree scope covers its root and descendants; an exact scope covers
