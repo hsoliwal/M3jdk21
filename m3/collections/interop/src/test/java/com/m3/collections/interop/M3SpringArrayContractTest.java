@@ -87,7 +87,16 @@ final class M3SpringArrayContractTest {
                 case 3 -> assertEquals(expected.remove(key), actual.remove(key));
                 case 4 -> {
                     List<Integer> input = Arrays.asList(value, value);
-                    actual.addAll(key, input); expected.addAll(key, input);
+                    // Both Spring 6.2 and M3 retain borrowed list references, including
+                    // fixed-size Arrays.asList values. Compare exception parity rather
+                    // than aborting before the original Spring reference executes.
+                    boolean actualRejected = false;
+                    try { actual.addAll(key, input); }
+                    catch (UnsupportedOperationException rejected) { actualRejected = true; }
+                    boolean springRejected = false;
+                    try { expected.addAll(key, input); }
+                    catch (UnsupportedOperationException rejected) { springRejected = true; }
+                    assertEquals(springRejected, actualRejected, "list mutability parity step " + step);
                 }
                 case 5 -> {
                     List<Integer> a = random.nextInt(6) == 0 ? null : new ArrayList<>(Arrays.asList(value));
