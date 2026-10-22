@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Jackson source facts Java 21
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JsonLimits.java'
+      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3SourceHash.java'
+      - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3SourceFactsContract.java'
+      - '.github/workflows/m3-jackson-source-facts-java21.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Diff and strict isolated Java 21 contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^ HEAD
+          SRC=m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson
+          TEST=m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson
+          OUT="$(mktemp -d)"
+          trap 'rm -rf "$OUT"' EXIT
+          javac --release 21 -encoding UTF-8 -Xlint:all -Werror -d "$OUT" \
+            "$SRC/M3JsonLimits.java" "$SRC/M3SourceHash.java" \
+            "$TEST/M3SourceFactsContract.java"
+          java -cp "$OUT" jdk.m3.jackson.M3SourceFactsContract
