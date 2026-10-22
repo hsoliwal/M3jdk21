@@ -1,0 +1,23 @@
+# path	before_git_blob	qualified_postimage_git_blob	product_donor_pr	synexia_recipe_pr	problem_category
+m3/docs/name-mapping.d/m3fs-provider-defaults-20261021.json	ABSENT	8c509e82e7f28914e87ee933798bb4fd5b9d4f4e	1747	12844	NAMING
+m3/docs/name-mapping.json	7aa5efec83fffa8e266ba3614fadea621b12013a	4702a9f7e8aec01f7c6890199295866332fb207b	1747	12844	NAMING
+m3/file/src/main/java/com/m3/file/M3File.java	c706e9867178d4eb417cf74f97b9bf5605b90573	62ac2f7eee03e4269922cfbe2870906dd5c37f66	new	new	M3FILE_CAPTURE
+m3/file/src/test/java/com/m3/file/M3FileCapturedBytesContract.java	ABSENT	bce734e1e936013e33ccb07c17395a1a8447fd9e	new	new	M3FILE_CAPTURE_TEST
+m3/file/verify.py	7ed897480d16134c27ab4325529d4cdb39856c68	356a49680097a5dc055aac2c01f57b0809e6859c	new	new	STRICT_GATE
+m3/fs/legal/commons-vfs2/CHANGES-M3FS.md	2f91d5f4a7ade693d62dc38c044ce7c131e6c449	fff890fb20443a2bf3f5929db92c58220c07cc5e	1747	12844	LICENSE
+m3/fs/README.md	78a453f503f702ed8552b4de8d9e55a5fabe4e13	f803c3e55f1b3dcb27e9cffdeebebc501c01b310	1747	12844	DOC
+m3/fs/src/main/java/com/m3/fs/DatabaseFileName.java	ABSENT	8bc4506aa2edb01346b61dd2e22fa120479916c3	1747	12844	SQLITE_PROVIDER
+m3/fs/src/main/java/com/m3/fs/DatabaseFileObject.java	ABSENT	bf26ee7e4ed3208e63e4ada693a75867d02c9811	1747	12844	SQLITE_PROVIDER
+m3/fs/src/main/java/com/m3/fs/DatabaseFileProvider.java	ABSENT	a673ea0c4e645ac9177f4c54a1ad5eafaa8a59ba	1747	12844	SQLITE_PROVIDER
+m3/fs/src/main/java/com/m3/fs/DatabaseFileSystem.java	ABSENT	0133155070d77095cea5d5c8dd4cb3df484467c3	1747	12844	SQLITE_PROVIDER
+m3/fs/src/main/java/com/m3/fs/MFileContent.java	b967cae78bed06bd5e283ab6b3c7d7bdc7a55401	a052d334f464dca92febf9ccded56f84369a0e4b	1747	12844	FILE_CONTENT
+m3/fs/src/main/java/com/m3/fs/MFiles.java	7389d905941b74b2822e1f1de099e9fddd1898ca	bec9a90677bc912fefa2c760228679f3826cb3fc	1747	12844	TRAVERSAL
+m3/fs/src/main/java/com/m3/fs/NioFileProvider.java	ABSENT	bc66dec75a86a548a8e2c0f0d3f27f6c4a61a751	1747	12844	NIO_PROVIDER
+m3/fs/src/main/resources/com/m3/fs/vfs/impl/providers.xml	590255be6bc63f1cb1685166fddb09eee3ae52d1	4ef7edda568242a42546f6bd6b0207430d657b5e	1747	12844	PROVIDER_REGISTRY
+m3/fs/src/test/java/com/m3/fs/DatabaseFileProviderTest.java	ABSENT	c74dc9879d200ce7310029809d48edebb1976fac	1747	12844	SQLITE_TEST
+m3/fs/src/test/java/com/m3/fs/M3FsProviderDefaultsIntegrationTest.java	ABSENT	93805c946f27ea0f8b410e58d3ea9cbf92a67029	1747	12844	INTEGRATION_TEST
+m3/fs/src/test/java/com/m3/fs/MFileContentDefaultsTest.java	ABSENT	40a7076956fadd03dbf60179f391c292cb22f128	1747	12844	FILE_CONTENT_TEST
+m3/fs/src/test/java/com/m3/fs/NioFileProviderTest.java	ABSENT	4414c342877e2e7f2d1fe07c4a7f401f7bef657b	1747	12844	NIO_TEST
+m3/fs/src/test/java/com/m3/fs/verification/M3VfsImageProbe.java	f503623942191b4f8b9d74fe2b590daca8f67337	ca836c4411ae4bf33d4d6a45f53e10a9ce4648a5	1747	12844	JMOD_PROBE
+m3/fs/vfs/PROVIDER_DEFAULTS.md	ABSENT	0df8776ea943848e1606ff880da133a88b9be51c	1747	12844	DOC
+m3/tooling/name-contract/name-plan.json	ae2cb4aae7a4e0e51ccf56216ef2378d1b418000	ea29b711d41e6abb31cfc2a2d103f7d988d8fd0f	1747	12844	NAMING
