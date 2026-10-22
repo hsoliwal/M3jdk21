@@ -22,6 +22,8 @@ import java.util.Objects;
  */
 public final class M3SourceSignalImage {
     private static final String HEADER = "# M3JDK21-SOURCE-SIGNALS/1\n";
+    private static final String HEADER_METHODS = "# M3JDK21-SOURCE-SIGNALS/2\n";
+    private static final int METHOD_SCALARS = 13;
     private static final String TRAILER = "# sha256\t";
     private static final int SCALARS = 15;
     private static final int MAX_BYTES = 64 * 1024 * 1024;
@@ -44,6 +46,7 @@ public final class M3SourceSignalImage {
 
     private final M3SignalColumns signals;
     private final M3SignalRelations relationships;
+    private final M3SourceMethodImage methodImage;
     private final int[] namesOffsets;
     private final byte[] nameBytes;
     private final int[] tokenOffsets;
@@ -55,12 +58,14 @@ public final class M3SourceSignalImage {
     private final long externalCandidateSites;
 
     private M3SourceSignalImage(M3SignalColumns signals, M3SignalRelations relationships,
+                                M3SourceMethodImage methodImage,
                                 int[] namesOffsets, byte[] nameBytes, int[] tokenOffsets,
                                 long[] featureHashes, byte[] featureKinds, String sourceSha256,
                                 long sourceIdentityHint, int externalCandidateRecords,
                                 long externalCandidateSites) {
         this.signals = signals;
         this.relationships = relationships;
+        this.methodImage = methodImage;
         this.namesOffsets = namesOffsets;
         this.nameBytes = nameBytes;
         this.tokenOffsets = tokenOffsets;
@@ -78,8 +83,10 @@ public final class M3SourceSignalImage {
         if (text.length() > MAX_BYTES) {
             throw new IllegalArgumentException("oversized compiler image");
         }
+        boolean hasMethodSignals = text.startsWith(HEADER_METHODS);
         byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
-        if (bytes.length > MAX_BYTES || !text.startsWith(HEADER) || !text.endsWith("\n")) {
+        if (bytes.length > MAX_BYTES || (!hasMethodSignals && !text.startsWith(HEADER))
+                || !text.endsWith("\n")) {
             throw new IllegalArgumentException("unsupported or oversized compiler image");
         }
         int trailer = text.lastIndexOf(TRAILER);
@@ -103,9 +110,19 @@ public final class M3SourceSignalImage {
         IntLane counts = new IntLane();
         ByteLane kinds = new ByteLane();
         List<String> edgeTargets = new ArrayList<>();
-        int currentRow = -1, phase = 0, previousFamily = -1;
+        // /2 method rows reuse the same signed source identity and type-order scanner.
+        List<String> methodNames = new ArrayList<>();
+        List<int[]> methodScalars = new ArrayList<>();
+        List<String> methodCallees = new ArrayList<>();
+        IntLane methodOwners = new IntLane();
+        IntLane methodSources = new IntLane();
+        IntLane methodSites = new IntLane();
+        ByteLane methodKinds = new ByteLane();
+        int currentRow = -1, currentMethod = -1, phase = 0, previousFamily = -1;
         long previousHash = 0L;
         String lastCall = null;
+        String lastMethod = null;
+        String lastMethodCall = null;
         boolean headerComplete = false;
         for (String line : lines) {
             if (line.isEmpty()) continue;
@@ -135,6 +152,9 @@ public final class M3SourceSignalImage {
                     phase = 1;
                     previousFamily = -1;
                     lastCall = null;
+                    lastMethod = null;
+                    lastMethodCall = null;
+                    currentMethod = -1;
                 }
                 case "T" -> {
                     if (fields.length != 4 || currentRow < 0 || phase > 2
@@ -160,7 +180,7 @@ public final class M3SourceSignalImage {
                     phase = 2;
                 }
                 case "E" -> {
-                    if (fields.length != 4 || currentRow < 0
+                    if (fields.length != 4 || currentRow < 0 || phase > 3
                             || !names.getLast().equals(unescape(fields[1]))) {
                         throw new IllegalArgumentException("edge owner/shape");
                     }
@@ -176,6 +196,60 @@ public final class M3SourceSignalImage {
                     if (source.size() > MAX_FEATURES) throw new IllegalArgumentException("too many edges");
                     lastCall = call;
                     phase = 3;
+                }
+                case "M" -> {
+                    if (!hasMethodSignals || fields.length != METHOD_SCALARS + 3
+                            || currentRow < 0 || !names.getLast().equals(unescape(fields[1]))) {
+                        throw new IllegalArgumentException("method owner/shape");
+                    }
+                    String signature = unescape(fields[2]);
+                    if (signature.isBlank() || !signature.startsWith(names.getLast() + "#")
+                            || (lastMethod != null && signature.compareTo(lastMethod) <= 0)
+                            || (!methodNames.isEmpty()
+                                    && signature.compareTo(methodNames.getLast()) <= 0)) {
+                        throw new IllegalArgumentException("unordered or invalid method identity");
+                    }
+                    if (methodNames.size() >= MAX_ROWS) {
+                        throw new IllegalArgumentException("too many method declarations");
+                    }
+                    int[] metrics = new int[METHOD_SCALARS];
+                    for (int i = 0; i < METHOD_SCALARS; i++) {
+                        metrics[i] = nonnegative(fields[i + 3]);
+                    }
+                    methodNames.add(signature);
+                    methodScalars.add(metrics);
+                    methodOwners.add(currentRow);
+                    currentMethod = methodNames.size() - 1;
+                    lastMethod = signature;
+                    lastMethodCall = null;
+                    phase = 4;
+                }
+                case "R" -> {
+                    if (!hasMethodSignals || fields.length != 5 || currentMethod < 0
+                            || phase < 4 || !names.getLast().equals(unescape(fields[1]))
+                            || !methodNames.get(currentMethod).equals(unescape(fields[2]))) {
+                        throw new IllegalArgumentException("method edge owner/shape");
+                    }
+                    String edge = unescape(fields[3]);
+                    if (lastMethodCall != null && edge.compareTo(lastMethodCall) <= 0) {
+                        throw new IllegalArgumentException("unordered method call edge");
+                    }
+                    EdgeTarget kind = edgeTarget(edge);
+                    int left = edge.indexOf(':'), right = edge.indexOf(':', left + 1);
+                    String signature = edge.substring(right + 1);
+                    if (signature.indexOf('#') <= 0 || signature.indexOf('(') < 0
+                            || signature.indexOf(')') < 0) {
+                        throw new IllegalArgumentException("invalid attributed callee signature");
+                    }
+                    methodSources.add(currentMethod);
+                    methodCallees.add(signature);
+                    methodKinds.add(kind.kind());
+                    methodSites.add(positive(fields[4]));
+                    if (methodSources.size() > MAX_FEATURES) {
+                        throw new IllegalArgumentException("too many method call edges");
+                    }
+                    lastMethodCall = edge;
+                    phase = 5;
                 }
                 default -> throw new IllegalArgumentException("unknown source signal row: " + fields[0]);
             }
@@ -231,7 +305,11 @@ public final class M3SourceSignalImage {
         columns[SCALARS + 1] = new M3SignalColumns.Column(M3SignalColumns.Kind.LONG,
                 M3SignalColumns.Origin.STATIC, evidence ^ (SCALARS + 1), false,
                 validity, null, out, null);
-        return new M3SourceSignalImage(new M3SignalColumns(rows, columns), graph,
+        M3SourceMethodImage methods = hasMethodSignals
+                ? M3SourceMethodImage.build(methodNames, methodScalars, methodOwners.toArray(),
+                        methodSources.toArray(), methodCallees, methodKinds.toArray(),
+                        methodSites.toArray(), evidence) : null;
+        return new M3SourceSignalImage(new M3SignalColumns(rows, columns), graph, methods,
                 namePositions, packedNames.toByteArray(), tokenOffsets.toArray(),
                 hashes.toArray(), families.toArray(), digest, evidence, unknown, unknownSites);
     }
@@ -239,6 +317,14 @@ public final class M3SourceSignalImage {
     public int rowCount() { return namesOffsets.length - 1; }
     public M3SignalColumns columns() { return signals; }
     public M3SignalRelations relationships() { return relationships; }
+    /** Source-time method facts are opt-in; /1 never invents missing per-method evidence. */
+    public boolean hasMethodSignals() { return methodImage != null; }
+    public M3SourceMethodImage methodSignals() {
+        if (methodImage == null) {
+            throw new IllegalStateException("source image lacks method facts; use methods=on");
+        }
+        return methodImage;
+    }
     public String sourceSha256() { return sourceSha256; }
     /** Non-certifying 64-bit index hint from SHA-256; full source identity is sourceSha256(). */
     public long sourceIdentityHint() { return sourceIdentityHint; }
