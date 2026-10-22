@@ -5,6 +5,9 @@ on:
   pull_request:
     paths:
       - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java'
       - 'test/jdk/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java'
       - 'm3/qualification/mask-prefix-scalar-20261021/**'
       - 'test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java'
@@ -65,4 +68,5 @@ jobs:
           grep -q '^MASK_WINDOW_PASS ' "$receipt"
           grep -q 'BootstrapViewsTest.*PASS' "$receipt"
           grep -q 'CollectionViewsContract.*PASS' "$receipt"
-          grep -q '^PASS: exact integrated M3JDK21 Java21 java.base owners,' "$receipt"
+          test "$(grep -c '^PASS M3FusedMaskedFilteredSortedViewTest checks=' "$receipt")" -ge 2
+          grep -q '^PASS: exact integrated M3JDK21 Java21 array/mask fused views,' "$receipt"
