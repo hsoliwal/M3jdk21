@@ -58,6 +58,9 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
     const jint end = first + length;
     jint src[M3_VIEWPORT_CHUNK];
     jint states[M3_VIEWPORT_CHUNK];
+    /* Reuse page capture for a small full selection. Keep all input reads and
+     * validation before publication, including late errors and aliased output. */
+    jint inlineSelection[M3_VIEWPORT_CHUNK];
     jint selected = 0;
     for (jint begin = first; begin < end;) {
         jint take = end - begin;
@@ -68,7 +71,10 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
                 raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
                 return 0;
             }
-            if (matches(states[i], required, forbidden)) ++selected;
+            if (matches(states[i], required, forbidden)) {
+                if (selected < M3_VIEWPORT_CHUNK) inlineSelection[selected] = src[i];
+                ++selected;
+            }
         }
         begin += take;
     }
@@ -77,6 +83,10 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
         return 0;
     }
     if (selected == 0) return 0;
+    if (selected <= M3_VIEWPORT_CHUNK) {
+        (*env)->SetIntArrayRegion(env, target, targetOffset, selected, inlineSelection);
+        return (*env)->ExceptionCheck(env) ? 0 : selected;
+    }
     if ((size_t) selected > SIZE_MAX / sizeof(jint)) {
         raise(env, "java/lang/OutOfMemoryError", "projection size overflow");
         return 0;

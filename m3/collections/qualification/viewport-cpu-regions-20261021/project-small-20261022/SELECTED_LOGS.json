@@ -1,0 +1,26 @@
+{
+  "sdk-test.stdout": {
+    "sha256": "3db5827df142a7065f5f3e36a85547f36e78f660d0e2a46769e62df1ca8ec397",
+    "text": "[INFO] Scanning for projects...\n[INFO] \n[INFO] -----< com.synexia.verification:viewport-native-small-page-proof >------\n[INFO] Building viewport-native-small-page-proof 1\n[INFO]   from pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- surefire:3.2.5:test (default-cli) @ viewport-native-small-page-proof ---\n[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider\n[INFO] \n[INFO] -------------------------------------------------------\n[INFO]  T E S T S\n[INFO] -------------------------------------------------------\n[INFO] Running com.synexia.rewrite.M3ViewportNativeRecipeTest\n[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.060 s -- in com.synexia.rewrite.M3ViewportNativeRecipeTest\n[INFO] \n[INFO] Results:\n[INFO] \n[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0\n[INFO] \n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  2.557 s\n[INFO] Finished at: 2026-10-22T05:28:45Z\n[INFO] ------------------------------------------------------------------------\n"
+  },
+  "sdk-test.stderr": {
+    "sha256": "af043de2b9c78ccc15ea624dfdc68d401dc4e87b910f277824a710c5c0ba2bee",
+    "text": "SLF4J: No SLF4J providers were found.\nSLF4J: Defaulting to no-operation (NOP) logger implementation\nSLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.\n"
+  },
+  "sdk-admission.stdout": {
+    "sha256": "2ae8d64c03e7bfca51013f95d319824d503106627ffafc587fb205390fe583ed",
+    "text": "SDK_RESULT_ADMISSION_PASS sha256=96b93585d5a08ac719ed229850797173cb51598ee0dd818eaa74fab8c9eaae03 receiver_changes=1 fixed_point=0\n"
+  },
+  "resume/budget/baseline.stdout": {
+    "sha256": "b2c9ffc8bcd4d3a27484b918b9448d8081b3ee12fe3b7111d13d4fde24a6d6ef",
+    "text": "PROJECT_BUDGET rows=1000000 selected=64 optimized=0 heap_bytes=256 reads=31252 writes=1 max_region=128\nPROJECT_BUDGET rows=1000000 selected=129 optimized=0 heap_bytes=516 reads=31252 writes=1 max_region=128\nPROJECT_BUDGET_PASS checks=7654560 cases=7829\n"
+  },
+  "resume/budget/candidate.stdout": {
+    "sha256": "a81c37a23c81fdeeaccbd45b1ae1936460c5ef48f63cc465827fb4e87a78af67",
+    "text": "PROJECT_BUDGET rows=1000000 selected=64 optimized=1 heap_bytes=0 reads=15626 writes=1 max_region=128\nPROJECT_BUDGET rows=1000000 selected=129 optimized=1 heap_bytes=516 reads=31252 writes=1 max_region=128\nPROJECT_BUDGET_PASS checks=5272701 cases=5666\n"
+  },
+  "resume/jni-candidate/M3MaskViewportPageContract-mixed.stdout": {
+    "sha256": "703b86ff9f9b7cfee73d8d9bdbbe2476f991e46283d1f9dca89ea74e62dbc20d",
+    "text": "M3_MASK_VIEWPORT_PAGE_PASS checks=163640 existingJni=true\n"
+  }
+}
