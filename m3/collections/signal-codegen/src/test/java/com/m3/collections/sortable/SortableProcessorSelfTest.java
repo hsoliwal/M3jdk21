@@ -26,6 +26,7 @@ public final class SortableProcessorSelfTest {
     private SortableProcessorSelfTest() { }
 
     public static void main(String[] args) throws Exception {
+        M3CompilerFactsContract.main(new String[0]);
         String header = "package demo; import com.m3.collections.sortable.Sortable; "
                 + "@Sortable(signal=\"absoluteWeight\") public class Person {"
                 + "public int age; public java.util.List<String> tags; "
@@ -60,6 +61,43 @@ public final class SortableProcessorSelfTest {
             long[][] fresh = (long[][]) projection.getMethod("structuralSignals").invoke(null);
             check(StructuralSignals.weightedDistance(lanes, fresh, new double[]{1,1,1,1,1,1}) == 0.0,
                     "identical structure has zero projected distance");
+            M3CompilerFacts compiler = (M3CompilerFacts)
+                    projection.getMethod("compilerFacts").invoke(null);
+            check(compiler.known(M3CompilerFacts.FIELDS)
+                    && compiler.count(M3CompilerFacts.FIELDS) == 2,
+                    "two model-declared fields, not runtime reflection");
+            check(compiler.known(M3CompilerFacts.METHODS)
+                    && compiler.count(M3CompilerFacts.METHODS) == 2,
+                    "two compiler-declared methods");
+            check(compiler.known(M3CompilerFacts.METHOD_INVOCATIONS)
+                    && compiler.count(M3CompilerFacts.METHOD_INVOCATIONS) >= 1,
+                    "javac Trees invocation sites source-time");
+            check(compiler.known(M3CompilerFacts.DISTINCT_RESOLVED_CALLEE_TOKENS)
+                    && compiler.count(M3CompilerFacts.DISTINCT_RESOLVED_CALLEE_TOKENS) >= 1,
+                    "resolved-call hints retained as token counts");
+            check(compiler.origin(M3CompilerFacts.FIELDS)
+                    == M3CompilerFacts.Origin.COMPILER_MODEL,
+                    "model provenance retained");
+            check(compiler.origin(M3CompilerFacts.METHOD_INVOCATIONS)
+                    == M3CompilerFacts.Origin.COMPILER_AST,
+                    "AST provenance retained");
+            check(!compiler.known(M3CompilerFacts.INCOMING_CALLS)
+                    && !compiler.known(M3CompilerFacts.RUNTIME_INVOCATIONS),
+                    "unavailable caller graph and runtime frequency never invented as zero");
+            int[] changedFacts = compiler.counts();
+            changedFacts[M3CompilerFacts.FIELDS] = 123456;
+            check(compiler.count(M3CompilerFacts.FIELDS) == 2,
+                    "generated primitive fact image is immutable");
+            M3CompilerFacts compilerAgain = (M3CompilerFacts)
+                    projection.getMethod("compilerFacts").invoke(null);
+            check(compilerAgain.count(M3CompilerFacts.FIELDS) == 2,
+                    "generated static primitive source data cannot be mutated by exports");
+            double[] scoring = new double[M3CompilerFacts.COUNT];
+            scoring[M3CompilerFacts.METHODS] = 2.0;
+            check(compiler.project(scoring) == 4.0, "domain heuristic projection");
+            scoring[M3CompilerFacts.RUNTIME_INVOCATIONS] = 1.0;
+            check(Double.isNaN(compiler.project(scoring)),
+                    "missing runtime signal refuses false score");
             lanes[0][0] ^= 1;
             check(fresh[0][0] != lanes[0][0], "defensive source-time metadata export");
             check(StructuralSignals.weightedDistance(lanes, fresh, new double[]{1,1,1,1,1,1}) > 0.0,
@@ -70,6 +108,47 @@ public final class SortableProcessorSelfTest {
                 + "@Sortable public class MetaOnly {public String name;} ", true)) {
             check(c.ok, "metadata only is accepted: " + c.messages);
             check(!c.generated.contains("absoluteSignal("), "no invented absolute weight");
+        }
+        String hostileSource = """
+                package demo;
+                import com.m3.collections.sortable.Sortable;
+                @Sortable public class Hostile {
+                    String fake = "if (x) for (y) throw new Exception();";
+                    // if(true) while(false) new Runnable();
+                    int branch(int n) {
+                        Runnable task = () -> { };
+                        for (int i = 0; i < n; i++) {
+                            if (i > 0) n--;
+                        }
+                        try {
+                            return n > 1 ? n : 0;
+                        } catch (RuntimeException error) {
+                            throw error;
+                        }
+                    }
+                    static class Nested {
+                        int ignored(int x) { if (x > 0) return x; return 0; }
+                    }
+                }
+                """;
+        try (Compiled hostile = compile("demo.Hostile", hostileSource, true)) {
+            check(hostile.ok, "nested/code-looking source compiles");
+            Class<?> companion = hostile.loader.loadClass("demo.HostileM3Sortable");
+            M3CompilerFacts facts = (M3CompilerFacts)
+                    companion.getMethod("compilerFacts").invoke(null);
+            check(facts.count(M3CompilerFacts.LOOPS) == 1,
+                    "one real loop, text/comments ignored");
+            check(facts.count(M3CompilerFacts.IF_BRANCHES) == 1,
+                    "nested class has separate source ownership");
+            check(facts.count(M3CompilerFacts.CONDITIONAL_EXPRESSIONS) == 1,
+                    "conditional AST shape retained");
+            check(facts.count(M3CompilerFacts.LAMBDAS) == 1,
+                    "lambda syntactic signal");
+            check(facts.count(M3CompilerFacts.TRY_BLOCKS) == 1
+                    && facts.count(M3CompilerFacts.CATCH_BLOCKS) == 1,
+                    "exception paths from AST");
+            check(facts.count(M3CompilerFacts.RETURN_STATEMENTS) == 1,
+                    "nested return statements not stolen by enclosing class");
         }
         String prefix = "package demo; import com.m3.collections.sortable.Sortable;";
         expectFail("demo.Missing", prefix + "@Sortable(signal=\"missing\") public class Missing {}",
