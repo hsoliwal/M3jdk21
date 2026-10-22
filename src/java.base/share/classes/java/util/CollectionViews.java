@@ -308,6 +308,19 @@ public final class CollectionViews {
         @Override
         @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
+            if (backing instanceof Set<?>) {
+                if (!backing.contains(candidate)) return false;
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    if (stored == candidate) return visible(stored);
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent);
+            }
             // Collection membership is defined by the stored occurrence, not by a
             // caller-provided equal probe. Equivalence does not imply that a
             // predicate depending on other fields agrees for both instances.
@@ -341,6 +354,21 @@ public final class CollectionViews {
         @Override
         @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
+            if (backing instanceof Set<?>) {
+                if (!backing.contains(candidate)) return false;
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    if (stored == candidate) {
+                        return visible(stored) && backing.remove(stored);
+                    }
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent) && backing.remove(equivalent);
+            }
             // A List can contain a hidden and visible occurrence that compare
             // equal. Removing by probe would delete the wrong physical element.
             // Indexed deletion also admits Lists whose iterators are read-only
