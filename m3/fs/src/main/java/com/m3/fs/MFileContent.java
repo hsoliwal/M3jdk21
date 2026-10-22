@@ -4,6 +4,7 @@ package com.m3.fs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -24,6 +25,16 @@ public interface MFileContent {
      */
     default OutputStream openOutputStream(boolean append) throws IOException {
         throw new IOException("This content provider does not support output");
+    }
+
+    /** Opens replacing output, retaining any progress/shadow configuration on this view. */
+    default OutputStream openOutputStream() throws IOException {
+        return openOutputStream(false);
+    }
+
+    /** Opens replacing output with an explicit borrowed monitor. */
+    default MFileStreams.Output openOutputStream(M3FsProgress progress) throws IOException {
+        return openOutputStream(false, progress);
     }
 
     /**
@@ -127,9 +138,190 @@ public interface MFileContent {
     default long transferTo(OutputStream destination, M3FsProgress progress) throws IOException {
         Objects.requireNonNull(destination, "destination");
         Objects.requireNonNull(progress, "progress");
-        try (MFileStreams.Input input = openInputStream(progress)) {
-            return input.transferTo(destination);
+        return transferAndCloseInput(openInputStream(progress), destination);
+    }
+
+    /**
+     * Transfers to a borrowed output, retaining this view's progress and shadows.
+     * The newly opened input closes; the supplied output is neither flushed nor closed.
+     */
+    default long transferTo(OutputStream destination) throws IOException {
+        Objects.requireNonNull(destination, "destination");
+        return transferAndCloseInput(openInputStream(), destination);
+    }
+
+    /**
+     * Reads complete content within an explicit byte limit. Exceeding the limit
+     * throws rather than returning truncated content. At most one byte beyond
+     * the limit is consumed to distinguish EOF from excess. The input always
+     * closes; configured progress, shadows and successful-read capture remain active.
+     * Returned arrays are ordinary caller-owned materializations.
+     */
+    default byte[] readAllBytes(int maxBytes) throws IOException {
+        checkLimit(maxBytes);
+        return readBoundedAndClose(openInputStream(), maxBytes);
+    }
+
+    /** Reads bounded complete content with an explicit borrowed monitor. */
+    default byte[] readAllBytes(int maxBytes, M3FsProgress progress) throws IOException {
+        checkLimit(maxBytes);
+        Objects.requireNonNull(progress, "progress");
+        return readBoundedAndClose(openInputStream(progress), maxBytes);
+    }
+
+    /**
+     * Decodes bounded complete content using {@link String#String(byte[], Charset)}
+     * replacement semantics for malformed input. The limit counts encoded bytes.
+     */
+    default String readString(int maxBytes, Charset charset) throws IOException {
+        Objects.requireNonNull(charset, "charset");
+        return new String(readAllBytes(maxBytes), charset);
+    }
+
+    /** Decodes bounded content with an explicit borrowed monitor. */
+    default String readString(int maxBytes, Charset charset, M3FsProgress progress) throws IOException {
+        Objects.requireNonNull(charset, "charset");
+        return new String(readAllBytes(maxBytes, progress), charset);
+    }
+
+    /** Replaces content with the supplied bytes and closes the newly opened output. */
+    default void write(byte[] bytes) throws IOException {
+        Objects.requireNonNull(bytes, "bytes");
+        write(bytes, 0, bytes.length, false);
+    }
+
+    /** Replaces content using an explicit borrowed monitor. */
+    default void write(byte[] bytes, M3FsProgress progress) throws IOException {
+        Objects.requireNonNull(bytes, "bytes");
+        write(bytes, 0, bytes.length, false, progress);
+    }
+
+    /** Appends bytes when the provider supports append, retaining configured observations. */
+    default void append(byte[] bytes) throws IOException {
+        Objects.requireNonNull(bytes, "bytes");
+        write(bytes, 0, bytes.length, true);
+    }
+
+    /** Appends bytes using an explicit borrowed monitor. */
+    default void append(byte[] bytes, M3FsProgress progress) throws IOException {
+        Objects.requireNonNull(bytes, "bytes");
+        write(bytes, 0, bytes.length, true, progress);
+    }
+
+    /**
+     * Writes a validated array region through one provider output. Arguments are
+     * checked before an output can be opened or truncated. A zero-length replacing
+     * write still opens replacing output. Provider effects before a failure are
+     * not rolled back. The caller must not modify the region during this call.
+     */
+    default void write(byte[] bytes, int offset, int length, boolean append) throws IOException {
+        Objects.requireNonNull(bytes, "bytes");
+        Objects.checkFromIndexSize(offset, length, bytes.length);
+        writeAndClose(openOutputStream(append), bytes, offset, length);
+    }
+
+    /** Writes an array region with explicit progress over successfully written bytes. */
+    default void write(byte[] bytes, int offset, int length, boolean append,
+            M3FsProgress progress) throws IOException {
+        Objects.requireNonNull(bytes, "bytes");
+        Objects.checkFromIndexSize(offset, length, bytes.length);
+        Objects.requireNonNull(progress, "progress");
+        writeAndClose(openOutputStream(append, progress), bytes, offset, length);
+    }
+
+    /** Replaces content from a borrowed input; the input is never closed. */
+    default long transferFrom(InputStream source) throws IOException {
+        return transferFrom(source, false);
+    }
+
+    /** Replaces content from a borrowed input with explicit output-byte progress. */
+    default long transferFrom(InputStream source, M3FsProgress progress) throws IOException {
+        return transferFrom(source, false, progress);
+    }
+
+    /**
+     * Transfers a borrowed input through one newly opened output. The output
+     * closes on every exit. Existing view progress/shadows remain active. Failure
+     * can leave partial content under the provider's own write contract; this is
+     * not a transaction and does not protect against caller-selected source aliases.
+     */
+    default long transferFrom(InputStream source, boolean append) throws IOException {
+        Objects.requireNonNull(source, "source");
+        return transferAndCloseOutput(source, openOutputStream(append));
+    }
+
+    /**
+     * Transfers with progress over confirmed output bytes. Cancellation is
+     * cooperative at output boundaries; it cannot interrupt a blocking provider
+     * read. The supplied input and monitor remain caller-owned.
+     */
+    default long transferFrom(InputStream source, boolean append,
+            M3FsProgress progress) throws IOException {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(progress, "progress");
+        return transferAndCloseOutput(source, openOutputStream(append, progress));
+    }
+
+    private static void checkLimit(int maxBytes) {
+        if (maxBytes < 0) throw new IllegalArgumentException("maxBytes must not be negative");
+    }
+
+    // Providers may reuse one failure for I/O and close. Preserve that primary
+    // failure instead of attempting Throwable self-suppression during cleanup.
+    private static byte[] readBoundedAndClose(InputStream input, int maxBytes) throws IOException {
+        final byte[] bytes;
+        try {
+            bytes = input.readNBytes(maxBytes);
+            if (input.read() != -1) throw new IOException("Content exceeds byte limit: " + maxBytes);
+        } catch (IOException | RuntimeException | Error failure) {
+            MFileStreams.closeAfterFailure(input, failure);
+            throw failure;
         }
+        input.close();
+        return bytes;
+    }
+
+    private static void writeAndClose(OutputStream output, byte[] bytes, int offset, int length)
+            throws IOException {
+        try {
+            output.write(bytes, offset, length);
+        } catch (IOException | RuntimeException | Error failure) {
+            MFileStreams.closeAfterFailure(output, failure);
+            throw failure;
+        }
+        output.close();
+    }
+
+    private static long transferAndCloseInput(InputStream input, OutputStream destination)
+            throws IOException {
+        long count = 0;
+        try {
+            // InputStream overrides may flush the destination. This boundary
+            // promises a borrowed output with no flush, so own the copy loop.
+            byte[] buffer = new byte[8192];
+            for (int read; (read = input.read(buffer)) != -1;) {
+                destination.write(buffer, 0, read);
+                count += read;
+            }
+        } catch (IOException | RuntimeException | Error failure) {
+            MFileStreams.closeAfterFailure(input, failure);
+            throw failure;
+        }
+        input.close();
+        return count;
+    }
+
+    private static long transferAndCloseOutput(InputStream source, OutputStream output)
+            throws IOException {
+        final long count;
+        try {
+            count = source.transferTo(output);
+        } catch (IOException | RuntimeException | Error failure) {
+            MFileStreams.closeAfterFailure(output, failure);
+            throw failure;
+        }
+        output.close();
+        return count;
     }
 
 }

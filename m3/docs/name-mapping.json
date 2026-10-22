@@ -8710,6 +8710,257 @@
         },
         "source_state": "proposed",
         "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
+      },
+      {
+        "id": "m3.fs.provider-defaults",
+        "kind": "adapter",
+        "status": "implemented-tested",
+        "reason": "Source-sealed filesystem provider extensions with executed Java/JNI and linked-module receipts; this record does not promote a Java SE backend or qualify the whole M3JDK21 SDK.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/DatabaseFileProvider.java.template",
+            "symbol": "com.m3.fs.DatabaseFileProvider",
+            "signatures": [
+              "DatabaseFileProvider()",
+              "FileSystemOptions options(boolean)"
+            ],
+            "sha256": "3fe0054c721ca6ed2e0668eb0b668c31d94a66c8b004926e02de1b8672370e29",
+            "git_blob_sha1": "a673ea0c4e645ac9177f4c54a1ad5eafaa8a59ba",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/DatabaseFileSystem.java.template",
+            "symbol": "com.m3.fs.DatabaseFileSystem",
+            "signatures": [
+              "DatabaseFileSystem(AbstractFileName,FileObject,Path,FileSystemOptions)"
+            ],
+            "sha256": "c7b9298701e15c8c0694ddda200f12a7f0b55eb0bbb6d80c5f8a43caa018b43e",
+            "git_blob_sha1": "0133155070d77095cea5d5c8dd4cb3df484467c3",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/DatabaseFileObject.java.template",
+            "symbol": "com.m3.fs.DatabaseFileObject",
+            "signatures": [
+              "DatabaseFileObject(AbstractFileName,DatabaseFileSystem)"
+            ],
+            "sha256": "8270e4e57542b037628d1f57e7890af30782488a88175641d4e9e02ca0ea7a9f",
+            "git_blob_sha1": "bf26ee7e4ed3208e63e4ada693a75867d02c9811",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/DatabaseFileName.java.template",
+            "symbol": "com.m3.fs.DatabaseFileName",
+            "signatures": [
+              "DatabaseFileName(String,FileName,String,FileType)"
+            ],
+            "sha256": "b623496d5986e5f3a304754ea5946f4a1ab17f0c97d0eb0048d2439f70286abc",
+            "git_blob_sha1": "8bc4506aa2edb01346b61dd2e22fa120479916c3",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/NioFileProvider.java.template",
+            "symbol": "com.m3.fs.NioFileProvider",
+            "signatures": [
+              "FileObject resolve(Path)"
+            ],
+            "sha256": "ef843e6be00b15e201f1f2fc03b8f5143d1028288f100c8db4d230b391f231a6",
+            "git_blob_sha1": "bc66dec75a86a548a8e2c0f0d3f27f6c4a61a751",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/DatabaseFileProvider.java",
+            "symbol": "com.m3.fs.DatabaseFileProvider",
+            "signatures": [
+              "DatabaseFileProvider()",
+              "FileSystemOptions options(boolean)"
+            ],
+            "sha256": "3fe0054c721ca6ed2e0668eb0b668c31d94a66c8b004926e02de1b8672370e29",
+            "git_blob_sha1": "a673ea0c4e645ac9177f4c54a1ad5eafaa8a59ba",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/DatabaseFileSystem.java",
+            "symbol": "com.m3.fs.DatabaseFileSystem",
+            "signatures": [
+              "DatabaseFileSystem(AbstractFileName,FileObject,Path,FileSystemOptions)"
+            ],
+            "sha256": "c7b9298701e15c8c0694ddda200f12a7f0b55eb0bbb6d80c5f8a43caa018b43e",
+            "git_blob_sha1": "0133155070d77095cea5d5c8dd4cb3df484467c3",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/DatabaseFileObject.java",
+            "symbol": "com.m3.fs.DatabaseFileObject",
+            "signatures": [
+              "DatabaseFileObject(AbstractFileName,DatabaseFileSystem)"
+            ],
+            "sha256": "8270e4e57542b037628d1f57e7890af30782488a88175641d4e9e02ca0ea7a9f",
+            "git_blob_sha1": "bf26ee7e4ed3208e63e4ada693a75867d02c9811",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/DatabaseFileName.java",
+            "symbol": "com.m3.fs.DatabaseFileName",
+            "signatures": [
+              "DatabaseFileName(String,FileName,String,FileType)"
+            ],
+            "sha256": "b623496d5986e5f3a304754ea5946f4a1ab17f0c97d0eb0048d2439f70286abc",
+            "git_blob_sha1": "8bc4506aa2edb01346b61dd2e22fa120479916c3",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/NioFileProvider.java",
+            "symbol": "com.m3.fs.NioFileProvider",
+            "signatures": [
+              "FileObject resolve(Path)"
+            ],
+            "sha256": "ef843e6be00b15e201f1f2fc03b8f5143d1028288f100c8db4d230b391f231a6",
+            "git_blob_sha1": "bc66dec75a86a548a8e2c0f0d3f27f6c4a61a751",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          }
+        ],
+        "owner": "M3JDK21 jdk.m3fs owns the delivered provider API; the existing M3FS native SQLite owner retains database payload/namespace authority and each caller retains its borrowed NIO FileSystem.",
+        "identity": {
+          "namespace": "Database names use the existing mounted native namespace and inode identity. NIO addresses identify the exact live borrowed FileSystem instance in the same JVM; they do not create a second namespace.",
+          "generation": "Database transfers retain their opened owner/path/inode and use existing checked-inode JNI. NIO bindings are weak identities; the traversal owns its content streams and never closes or remounts the caller filesystem."
+        },
+        "contract": {
+          "differences": [
+            "Add public com.m3.fs.DatabaseFileProvider for the m3db layered URI and internal NioFileProvider for MFiles nondefault Path inputs; preserve existing Java SE classes and provider interfaces.",
+            "Keep DatabaseFileSystem, DatabaseFileObject, DatabaseFileName and NioFileProvider package-private within the existing com.m3.fs owner. Existing jdk.m3fs exports suffice; no new module or export is introduced.",
+            "The package keeps provider hooks beside the existing M3FS/MFiles owners while reusing attributed com.m3.fs.vfs base classes; it does not add a competing abstract filesystem or JNI store."
+          ],
+          "compatibility_obligations": [
+            "Preserve the public Java SE java.nio.file.FileSystem/Path contracts and existing MFiles/MFileContent entry points; source adapters do not replace those classes or require a Synexia runtime.",
+            "Database backing is an existing regular local M3FS database. Read-only mounts reject mutations, native mode bits remain metadata, VFS timestamps use milliseconds, and symbolic-link content is not dereferenced.",
+            "Database moves require the same mount except harmless same-inode no-ops; NIO file moves require the same borrowed filesystem instance. Source existence, roots and overlapping paths are checked before inherited destination mutation.",
+            "Inherit FileSystem.executeM3Batch through AbstractFileSystem.doExecuteM3Batch unchanged. The fallback is ordered/nontransactional and refuses atomic batches before provider I/O; individual provider safeguards remain in force.",
+            "Preserve caller stream/monitor ownership, progress, shadows, capture and checked native lifetime; no full-remote-provider, performance, snapshot, permission-enforcement or atomic-generic-move claim is added."
+          ],
+          "public_surface": [
+            "com.m3.fs.DatabaseFileProvider() and DatabaseFileProvider.options(boolean) extend the existing VFS provider API in jdk.m3fs.",
+            "DatabaseFileSystem, DatabaseFileObject, DatabaseFileName and NioFileProvider are internal package-private implementation types.",
+            "Existing MFiles.from(Path), MFiles.from(String), Plan.withProvider and MFileContent default operations remain the user entry points."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing jdk.m3fs package/module and native M3FS ABI. m3db layered addresses use the existing VFS parser; m3nio addresses require the same live in-JVM NIO binding. No java.base, HotSpot or JNI symbol change."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Reuse the existing M3FS SQLite/JNI owner, M3DirectoryTable, VFS AbstractFileSystem/AbstractFileObject/DefaultFileContent and MFiles/MFileStreams owners.",
+          "joins": "Provider-required path/name projections and stream buffering only; no JDBC store, copied database, remounted NIO filesystem or duplicate retained per-file payload.",
+          "outputs": "VFS file/content projections, existing observations/captures and bounded caller-requested byte/string materializations.",
+          "cached_facts": "Existing VFS cache and refresh semantics remain; NIO registry retains weak instance identities, not a parallel file index."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.M3FsProviderDefaults20261021",
+          "version": "20261021",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021",
+          "preconditions": [
+            "Apply the existing canonical hash-pinned Java/text snapshot owners to the exact manifest preimages; refuse drift and preserve unknown main-map fields and all prior capability IDs.",
+            "Per-file Java postimages are sealed above; recipe manifests seal the mapping and documentation without a circular self-hash.",
+            "Use recorded source/target publication receipts for exact candidate commits; null commit fields are not claims that an uncommitted candidate is merged."
+          ],
+          "rollback": "Restore only the exact manifest-owned preimages through a reviewed source-sealed recipe; preserve unrelated or subsequently modified files."
+        },
+        "tests": [
+          {
+            "id": "m3fs-provider-defaults-native",
+            "receipt": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021/evidence/product-verification.json"
+          },
+          {
+            "id": "m3fs-provider-defaults-dbfs",
+            "receipt": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021/evidence/dbfs-green.log"
+          },
+          {
+            "id": "m3fs-provider-defaults-nio",
+            "receipt": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021/evidence/nio-verification.json"
+          },
+          {
+            "id": "m3fs-provider-defaults-linked-module",
+            "receipt": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021/evidence/linked-native/runtime-proof.json"
+          }
+        ],
+        "provenance": {
+          "license": "Copyright 2026 Hitesh Soliwal and contributors; Apache-2.0 for the canonical source/templates. Existing Apache VFS notices and OpenJDK rights remain unchanged.",
+          "publication": "Canonical source, manifests and exact qualification receipts remain in hsoliwal/com.synexia; M3JDK21 owns the generated runtime sources and target acceptance.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": "5eeb841168ed420085223806fefcfca8d1b6b3ca",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Existing integrated M3JDK21 jdk.m3fs module and com.m3.fs export; package-private provider helpers preserve owner/package closure.",
+            "Inherited bulk hook compatibility reviewed at b7ef4cacece061414e56e231f98c76f6932140ca; the batch fallback does not change provider transaction contracts."
+          ],
+          "pending": [
+            "Exact-current-candidate source-built M3JDK21 image and whole-JDK JNI/GC/VM acceptance remain separate from linked supplied-JDK module receipts.",
+            "Comparative CPU/retained-heap/native-memory and excluded remote/backend qualification are not claimed by this capability record."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "This stable naming record admits filesystem-provider names and preserves the String -> arrays -> collections receiving order; it does not advance a whole-JDK receiving phase. The companion name-mapping.d file is supporting detail, not a second authority."
       }
     ]
   },

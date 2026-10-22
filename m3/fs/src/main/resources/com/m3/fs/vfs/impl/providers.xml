@@ -22,6 +22,9 @@
     <provider class-name="com.m3.fs.vfs.provider.local.DefaultLocalFileProvider">
         <scheme name="file" />
     </provider>
+    <provider class-name="com.m3.fs.DatabaseFileProvider">
+        <scheme name="m3db" />
+    </provider>
     <provider class-name="com.m3.fs.vfs.provider.zip.ZipFileProvider">
         <scheme name="zip" />
     </provider>

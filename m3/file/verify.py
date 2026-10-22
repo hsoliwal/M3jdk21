@@ -176,6 +176,7 @@ def main():
             'M3ShadowStreamsContract': 'M3_SHADOW_STREAM_PASS',
             'M3FileWatcherContract': 'M3_FILE_WATCHER_PASS',
             'M3ProjectDeltaPermutationContract': 'M3_PROJECT_DELTA_PERMUTATION_PASS',
+            'M3FileCapturedBytesContract': 'M3_FILE_CAPTURE_PASS',
         }
         if {path.stem for path in test_sources} != set(contracts):
             raise RuntimeError('module contract inventory changed; review each executable contract')
