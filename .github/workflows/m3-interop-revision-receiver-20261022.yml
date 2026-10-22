@@ -70,8 +70,21 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Compile original M3JDK21 dynamic-array/index/mask core without skipping compilation
-        run: mvn -B -ntp -f m3/collections/pom.xml -DskipTests install
+      - name: Compile original M3JDK21 dynamic-array/index/mask core with proven strict javac
+        shell: bash
+        run: |
+          set -euo pipefail
+          C="$RUNNER_TEMP/m3-interop-core/classes"
+          mkdir -p "$C/META-INF"
+          find m3/collections/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/m3-core-sources.txt"
+          javac --release 21 -Xlint:all,-module -Werror \
+            -d "$C" @"$RUNNER_TEMP/m3-core-sources.txt"
+          cp m3/collections/{LICENSE,NOTICE,provenance.json,name-mapping.json} "$C/META-INF/"
+          jar --create --file "$RUNNER_TEMP/m3-collections.jar" -C "$C" .
+          mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
+            -Dfile="$RUNNER_TEMP/m3-collections.jar" \
+            -DgroupId=com.m3 -DartifactId=m3-collections \
+            -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true
       - name: Execute original JDK Apache Guava Eclipse Spring interop Java 21 tests
         run: mvn -B -ntp -f m3/collections/interop/pom.xml clean verify
       - name: Preserve real Maven/JUnit results
