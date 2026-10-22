@@ -14,6 +14,8 @@ import java.util.Objects;
  * a source of JVM object-reference/lifecycle facts. The caller must keep the input arrays
  * unchanged during each scan call and revalidate its parent generation between calls.
  * No Java predicate or comparator crosses the optional JNI boundary.
+ * Native calls stage only bounded primitive output; the caller's array changes
+ * after the original cursor check completes without failure.
  */
 public final class M3IndexMaskWindow {
     /** Maximum values copied in one call; bounded even for very large source arrays. */
@@ -73,9 +75,11 @@ public final class M3IndexMaskWindow {
                 throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
             }
             if (limit == 0) return pack(firstIndex, 0);
+            int[] staged = new int[limit];
             long result = scanNative(orderedRows, rowStates, firstIndex, requiredMask,
-                    excludedMask, output, outputOffset, limit);
+                    excludedMask, staged, 0, limit);
             requireValidResult(result, firstIndex, orderedRows.length, limit);
+            System.arraycopy(staged, 0, output, outputOffset, written(result));
             return result;
         }
         if (limit == 0) return pack(firstIndex, 0);
@@ -122,9 +126,11 @@ public final class M3IndexMaskWindow {
                 throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
             }
             if (limit == 0 || end == firstIndex) return pack(firstIndex, 0);
+            int[] staged = new int[limit];
             long result = scanBoundedNative(orderedRows, rowStates, firstIndex, end,
-                    requiredMask, excludedMask, output, outputOffset, limit);
+                    requiredMask, excludedMask, staged, 0, limit);
             requireValidResult(result, firstIndex, end, limit);
+            System.arraycopy(staged, 0, output, outputOffset, written(result));
             return result;
         }
         if (limit == 0 || end == firstIndex) return pack(firstIndex, 0);
