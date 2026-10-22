@@ -49,3 +49,23 @@ jobs:
           grep -q 'CollectionViewsContract.*PASS' "$receipt"
           test "$(grep -c '^PASS M3JDK21 ArrayList+Vector mask-callers checks=' "$receipt")" -eq 4
           grep -q '^PASS: baseline and integrated JDK ArrayList/Vector masks,' "$receipt"
+
+  native-mask-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original M3JDK21 C11 JNI state-mask selector and prove Java parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/collections/qualification/required-excluded-windows-20261021/verify.sh \
+            | tee "$RUNNER_TEMP/m3-native-mask-parity.log"
+          grep -qx 'M3_TWO_MASK_WINDOW_JAVA_JNI_SOURCE_PASS' \
+            "$RUNNER_TEMP/m3-native-mask-parity.log"
