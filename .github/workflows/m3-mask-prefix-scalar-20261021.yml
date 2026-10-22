@@ -47,4 +47,5 @@ jobs:
           grep -q '^PASS M3JDK21 direct java.base mask-prefix checks=' "$receipt"
           grep -q 'BootstrapViewsTest.*PASS' "$receipt"
           grep -q 'CollectionViewsContract.*PASS' "$receipt"
-          grep -q '^PASS: JDK21 patch-module compaction,' "$receipt"
+          test "$(grep -c '^PASS M3JDK21 ArrayList+Vector mask-callers checks=' "$receipt")" -eq 4
+          grep -q '^PASS: baseline and integrated JDK ArrayList/Vector masks,' "$receipt"
