@@ -53,3 +53,26 @@ duplicate or malformed input must be refused. The source packet is candidate-onl
 No receiving stage advanced; String -> arrays -> collections remains the target policy.
 No LeetCode/HackerRank/GeeksforGeeks source, editorial or submission body was copied.
 Apache-2.0 first-party provenance and original upstream notices are preserved.
+
+## October 22 hosted Java21 CI counterexample
+
+The initial target [GitHub Actions run](https://github.com/hsoliwal/M3jdk21/actions/runs/39624234926)
+**failed**, rather than passing: javac reported `file should be on source path,
+or on patch path for module` for the two qualification Java classes. The module
+sourcepath in the original script included only production sources.
+
+Canonical Synexia recipe postimage now uses `-sourcepath "$SRC:$TESTS"`
+and `-Xlint:all,-module -Werror`. This was established with a real Java 21
+named-module negative/positive compiler fixture, including a regex operating on
+code-looking string data, returning `M3FMT_MODULE_SOURCEPATH_CONTRACT_PASS`.
+
+- Original script SHA-256: `b09f90df9c610e0c0df6e727f6e4e3792f53a77b833d95e7b8a4311a90280c19`.
+- Reviewed replacement SHA-256: `7b4214c5efc741baa9fb944a937565c51dced519fcc6c5b33048be7697b670ea`.
+- Source custody, case ID, signature and applicability are in Synexia
+  `synexia-openrewrite-recipes/recipe-crates/m3fmt-shared-lexicon-20261021/RECIPE_MEMORY_20261022.md`.
+
+**New hosted product CI and canonical Maven/OpenRewrite JUnit execution remain
+unverified**. The earlier 441-check scope was a narrower isolated proof, not a
+completed SDK-module build. This correction changes test/source-root handling
+only. Original Java and JNI product public APIs and observable semantics remain
+unchanged. This PR must remain draft until the required gates execute.
