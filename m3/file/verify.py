@@ -175,6 +175,7 @@ def main():
             'M3FileStreamsContract': 'M3_FILE_SHADOW_STREAM_PASS',
             'M3ShadowStreamsContract': 'M3_SHADOW_STREAM_PASS',
             'M3FileWatcherContract': 'M3_FILE_WATCHER_PASS',
+            'M3FileRangeContract': 'M3_FILE_RANGES_PASS',
             'M3ProjectDeltaPermutationContract': 'M3_PROJECT_DELTA_PERMUTATION_PASS',
             'M3ResourceLocksContract': 'M3_RESOURCE_LOCKS_PASS',
             'M3ResourceLocksTimedContract': 'M3_TIMED_RESOURCE_LOCKS_PASS',
