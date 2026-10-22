@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 five-library three Java21 diagnostics and 36+8+40 source admission
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+      - 'm3/collections/interop/qualification/current-census-superset-20261022/**'
+      - '.github/workflows/m3-interop-three-java21-receiver-20261022.yml'
+  push:
+    branches:
+      - m3/interop-three-java21-receiver-20261022
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-source-and-provenance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: a720780b1a5ab41ea27182b9b7ad873efdf533b4
+          path: historical-product
+          sparse-checkout: |
+            m3/collections/interop
+          persist-credentials: false
+      - name: Reject source drift and verify all three revised JUnit classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          import re
+          R = Path('m3/collections/interop/qualification/current-census-superset-20261022/receipts')
+          entries = []
+          for receipt in ('changed-historical-01.tsv', 'changed-added-02.tsv'):
+              file = R / receipt
+              if file.is_symlink() or not file.is_file():
+                  raise SystemExit('missing source revision receipt: ' + receipt)
+              rows = [x.split('\t') for x in file.read_text().splitlines() if x and not x.startswith('#')]
+              entries.extend(rows)
+          if len(entries) != 3 or sorted(x[0] for x in entries) != [x[0] for x in entries]:
+              raise SystemExit('missing/unsorted Java21 source revisions')
+          count = 0
+          for path, before_sha, before_blob, after_sha, after_blob, recipe, methods, state in entries:
+              data = Path(path).read_bytes()
+              actual_sha = hashlib.sha256(data).hexdigest()
+              actual_blob = hashlib.sha1(
+                  b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+              if actual_sha != after_sha or actual_blob != after_blob:
+                  raise SystemExit('generated source changed: ' + path)
+              if recipe != 'com.synexia.m3.M3InteropThreeJava21Diagnostics20261022':
+                  raise SystemExit('unattributed result: ' + path)
+              declared = len(re.findall(r'@Test\b', data.decode('utf-8')))
+              if declared != int(methods) or state != 'PENDING_JAVA21_VENDOR_CI':
+                  raise SystemExit('JUnit test identity changed: ' + path)
+              count += declared
+          if count != 13:
+              raise SystemExit('13 original JUnit tests not preserved')
+          print('M3_INTEROP_THREE_JAVA21_SOURCE_PASS tests=13')
+          PY
+      - name: Preserve immutable historical 36, eight explicit revisions and all 40 additional owners
+        run: |
+          python3 m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py \
+            --product . --historical-product historical-product \
+            | tee "$RUNNER_TEMP/m3-interop-source-proof.log"
+          grep -F 'M3_FIVE_LIBRARY_SOURCE_SUPERSET_PASS original=36 revised=8 additive=40 total=76' \
+            "$RUNNER_TEMP/m3-interop-source-proof.log"
+      - name: Exercise original and successor source refusal tests
+        run: |
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 \
+            -p 'test_*.py' -v
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 \
+            -p 'test_*.py' -v
