@@ -1,7 +1,7 @@
 name: M3 four-library receiver admission
 on:
   pull_request:
-    branches: [master]
+    branches: [master, m3/interop-three-test-compile-receiver-20261022]
     paths:
       - 'm3/collections/interop/**'
       - 'm3/collections/src/main/java/**'
