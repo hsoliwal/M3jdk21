@@ -5,26 +5,31 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 OUT="$1"
 [[ "$OUT" == /* && ! -e "$OUT" ]] || { echo 'output must be a new absolute directory' >&2; exit 2; }
-mkdir -p "$OUT"/{before-src/java/util,after-src/java/util,before-classes,after-classes,test-classes}
+mkdir -p "$OUT"/{before-src/java/util,after-src/java/util,prior-id-src/java/util,before-classes,after-classes,prior-id-classes,test-classes}
 SOURCE=src/java.base/share/classes/java/util/CollectionViews.java
 TEST=test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
 BLOB=2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66
+PRIOR_BLOB=da15fab9b06c6f08320d63a85dabb19782e00a1f
 git -C "$ROOT" cat-file blob "$BLOB" > "$OUT/before-src/java/util/CollectionViews.java"
+git -C "$ROOT" cat-file blob "$PRIOR_BLOB" > "$OUT/prior-id-src/java/util/CollectionViews.java"
 cp "$ROOT/$SOURCE" "$OUT/after-src/java/util/CollectionViews.java"
 (cd "$ROOT" && sha256sum --check <<'SEALS'
-46a17d53954bb7b259e3c7285985623028f76a942158b78bbbcc447aef0df126  src/java.base/share/classes/java/util/CollectionViews.java
+d847da2d84aa1db4a7a4f9258f695eaf96136868ef37ebe043ae8166fbdff57a  src/java.base/share/classes/java/util/CollectionViews.java
 f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6  test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
 f35b8547a5163aa79cee603e0e8bdcbf7361515d435914ac205feb9a037990e2  test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java
 e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad  test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java
 ca6760ed91cc55eb948cf376d03eebcbdca39a28aeb3faab33491300b808437a  test/jdk/java/util/CollectionViews/FilteredIsEmptyTerminalTest.java
+9f2721b3285c16bedd1aa39f24ac4704265a621cd03e26c285a2f6b6d0754242  test/jdk/java/util/CollectionViews/FilteredIdentityBackingContractTest.java
 SEALS
 ) | tee "$OUT/seals.log"
 echo "a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d  $OUT/before-src/java/util/CollectionViews.java" | sha256sum -c - | tee -a "$OUT/seals.log"
+echo "46a17d53954bb7b259e3c7285985623028f76a942158b78bbbcc447aef0df126  $OUT/prior-id-src/java/util/CollectionViews.java" | sha256sum -c - | tee -a "$OUT/seals.log"
 java -version > "$OUT/java-version.txt" 2>&1
 javac -version > "$OUT/javac-version.txt" 2>&1
 javac --patch-module java.base="$OUT/before-src" -Xlint:all -Werror -d "$OUT/before-classes" "$OUT/before-src/java/util/CollectionViews.java"
+javac --patch-module java.base="$OUT/prior-id-src" -Xlint:all -Werror -d "$OUT/prior-id-classes" "$OUT/prior-id-src/java/util/CollectionViews.java"
 javac --patch-module java.base="$OUT/after-src" -Xlint:all -Werror -d "$OUT/after-classes" "$OUT/after-src/java/util/CollectionViews.java"
-javac --patch-module java.base="$OUT/after-classes" -Xlint:all -Werror -d "$OUT/test-classes" "$ROOT/$TEST" "$ROOT/test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java" "$ROOT/test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java" "$ROOT/test/jdk/java/util/CollectionViews/FilteredIsEmptyTerminalTest.java"
+javac --patch-module java.base="$OUT/after-classes" -Xlint:all -Werror -d "$OUT/test-classes" "$ROOT/$TEST" "$ROOT/test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java" "$ROOT/test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java" "$ROOT/test/jdk/java/util/CollectionViews/FilteredIsEmptyTerminalTest.java" "$ROOT/test/jdk/java/util/CollectionViews/FilteredIdentityBackingContractTest.java"
 javap -public -s -classpath "$OUT/before-classes" java.util.CollectionViews > "$OUT/abi-before.txt"
 javap -public -s -classpath "$OUT/after-classes" java.util.CollectionViews > "$OUT/abi-after.txt"
 diff -u "$OUT/abi-before.txt" "$OUT/abi-after.txt" > "$OUT/abi-diff.txt"
@@ -43,6 +48,15 @@ java -Xint --patch-module java.base="$OUT/before-classes" -cp "$OUT/test-classes
 SORTED_RED=$?
 set -e
 [[ "$SORTED_RED" -ne 0 ]] && grep -q 'missing owner sorted characteristics check=1' "$OUT/baseline-sorted-red.txt" || { echo 'baseline sorted metadata defect not reproduced' >&2; exit 1; }
+# This counterexample is green on the original owner, red on the previous
+# candidate's broad equals() scan, and green after the bounded opaque-owner fix.
+set +e
+java -Xint --patch-module java.base="$OUT/prior-id-classes" -cp "$OUT/test-classes" FilteredIdentityBackingContractTest > "$OUT/identity-prior-red.txt" 2>&1
+IDENTITY_RED=$?
+set -e
+[[ "$IDENTITY_RED" -ne 0 ]] && grep -q 'hidden exact identity is not visible check=4' "$OUT/identity-prior-red.txt" || { echo 'previous identity counterexample was not reproduced' >&2; exit 1; }
+java -Xint --patch-module java.base="$OUT/before-classes" -cp "$OUT/test-classes" FilteredIdentityBackingContractTest > "$OUT/identity-baseline-green.txt" 2>&1
+grep -q 'PASS FilteredIdentityBackingContractTest checks=' "$OUT/identity-baseline-green.txt"
 # Unlike the three red baselines, isEmpty must be observationally equivalent.
 java -Xint --patch-module java.base="$OUT/before-classes" -cp "$OUT/test-classes" FilteredIsEmptyTerminalTest > "$OUT/baseline-isempty-pass.txt" 2>&1
 grep -q 'PASS FilteredIsEmptyTerminalTest checks=10805' "$OUT/baseline-isempty-pass.txt"
@@ -62,5 +76,9 @@ for mode in mixed xint c1 c2; do
   diff -u "$OUT/baseline-isempty-pass.txt" "$OUT/isempty-green-$mode.txt" > "$OUT/isempty-parity-$mode.diff"
   cat "$OUT/sorted-green-$mode.txt"
   cat "$OUT/isempty-green-$mode.txt"
+  java "${flags[@]}" --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" FilteredIdentityBackingContractTest > "$OUT/identity-green-$mode.txt" 2>&1
+  grep -q 'PASS FilteredIdentityBackingContractTest checks=' "$OUT/identity-green-$mode.txt"
+  diff -u "$OUT/identity-baseline-green.txt" "$OUT/identity-green-$mode.txt" > "$OUT/identity-parity-$mode.diff"
+  cat "$OUT/identity-green-$mode.txt"
 done
-echo 'PASS: original java.base owner + three defect repairs plus isEmpty observational-parity Java21 regression; JNI and full JDK gates still pending' | tee "$OUT/summary.txt"
+echo 'PASS: original java.base owner + three prior defect repairs plus isEmpty parity and opaque owner identity baseline-red/green regression; JNI and full JDK gates still pending' | tee "$OUT/summary.txt"
