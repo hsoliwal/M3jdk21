@@ -51,3 +51,26 @@ jobs:
           mvn -B -ntp -f m3/collections/pom.xml
           -Dtest=M3SignalTopKTest,M3SignalColumnsTest,M3SignalDimensionsTest
           test
+
+  portable-qualified-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Explicitly isolated JUnit 5.11.4 against ACTUAL product Java owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp \
+            -f m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
+            -Dtest=M3SignalTopKTest,M3SignalColumnsTest test
+      - name: Scope limitation
+        run: |
+          echo "ALTERNATE_JUNIT: ordinary test-only JUnit 5.11.4 for original sources."
+          echo "Original m3/collections/pom.xml customized JUnit fork remains required and unresolved."
+          echo "This job does not certify custom-JUnit compatibility or installed M3JDK21."
