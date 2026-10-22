@@ -1,0 +1,54 @@
+{
+  "schema": "M3_RANK_PAGE_TARGET_REVIEW_V1",
+  "date": "2026-10-22",
+  "product_pr": 1759,
+  "product_parent": "febcbf410207268dcd4a9c6ba46e84b0ee5a8614",
+  "canonical_pr": "hsoliwal/com.synexia#12855",
+  "canonical_commit": "663743b6ab686f8dcb41abefb55bfd9df2c7a8bc",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/viewport-cpu-regions-20261021",
+  "canonical_dataset_tree": "dbc893e9f3640326074227615d2b7f27b49eccf5",
+  "canonical_source_manifest_blob": "c056792049a0dc870229687cce9105742d690312",
+  "canonical_host_receipt_blob": "698d2eff42138acabb141970654bbf56d308ec4d",
+  "canonical_raw_log_blob": "8af8a28120a2ff9e67a6e0278dbf60560679b33e",
+  "raw_log_entries": 103,
+  "review_diff_sha256": "108bdf0102c62b0d0331e915231429fc58ff091baaec97abf2f146f5c335adef",
+  "diff_role": "inert three-owner refinement versus previous candidate; not a runtime application patch",
+  "new_target_count": 9,
+  "host_exit": 0,
+  "qualified_source_bytes_unchanged": true,
+  "extent_checks_per_execution": 2192618,
+  "extent_digest": "a8a18947ed8b1cdb",
+  "java_page_checks_per_execution": 19330,
+  "java_page_digest": "5f512261012adde3",
+  "jni_page_checks_per_execution": 38659,
+  "jni_page_digest": "c5981fe8550910db",
+  "native_page_fixture": {
+    "checks": 664508,
+    "cases": 5848,
+    "sanitizers": "ASan+UBSan+leak detection"
+  },
+  "observations": {
+    "extent_tree_reads": {
+      "before": 395284,
+      "after": 131040,
+      "queries": 4096,
+      "measurements": 65535,
+      "instrumented_test_copy": true
+    },
+    "thread_allocated_bytes": {
+      "before": 5440000,
+      "after": 0,
+      "measured_calls": 20000,
+      "workload": "contiguous 64-ID alias page inside sparse 512-row owner"
+    }
+  },
+  "new_public_api": false,
+  "new_native_exports_this_pass": 0,
+  "runtime_sources_changed": false,
+  "maven_sdk_replay_fixedpoint_refusal": "NOT_RUN",
+  "actual_product_receiving": "NOT_RUN",
+  "full_product_widget_provider_qualification": "NOT_RUN",
+  "performance_limits": "No throughput, retained-heap, native/process RSS or universal speedup claim",
+  "coverage_limits": "Repeated finite corpora overlap; no summed independent coverage",
+  "completion": false
+}
