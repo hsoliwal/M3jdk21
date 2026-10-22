@@ -1,0 +1,48 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 typed signal facts Java 21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalColumns.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SignalColumns*.java'
+      - '.github/workflows/m3-typed-signal-columns-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-exact-primitive-facts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile actual product sources with strict Java21
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          mkdir -p "$RUNNER_TEMP/m3-signal-classes"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-signal-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/test/java/com/m3/collections/M3SignalColumnsSelfTest.java
+          java -cp "$RUNNER_TEMP/m3-signal-classes" \
+            com.m3.collections.M3SignalColumnsSelfTest
+  original-maven-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Existing owning collections Maven module
+        run: >
+          mvn -B -ntp -f m3/collections/pom.xml
+          -Dtest=M3SignalColumnsTest,M3SignalDimensionsTest
+          test
