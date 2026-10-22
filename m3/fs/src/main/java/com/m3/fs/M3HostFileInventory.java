@@ -125,6 +125,10 @@ public final class M3HostFileInventory {
         combined.update(toolContextSha256);
         byte[] context = combined.digest();
         Rows rows = new Rows(limits);
+        // This pass is explicitly serial. Reuse a single bounded caller-owned
+        // byte lane for every M3File provider channel, without per-file scratch
+        // allocation, duplicated file reads or extra retained native buffers.
+        byte[] scratch = new byte[64 * 1024];
         long total = 0;
         try (Stream<M3File> walk = entries.sequential()) {
             Iterator<M3File> cursor = walk.iterator();
@@ -155,7 +159,8 @@ public final class M3HostFileInventory {
                 M3StreamProgress child = progress.subProgress(metadata.size());
                 M3File.Observation observed = entry.observe(
                         Math.min(limits.maxFileBytes(), limits.maxTotalBytes() - total),
-                        child, (bytes, from, length) -> layer.onBytes(entry, bytes, from, length));
+                        scratch, child,
+                        (bytes, from, length) -> layer.onBytes(entry, bytes, from, length));
                 layer.completed(entry, observed);
                 long count = observed.fingerprint().size();
                 total = Math.addExact(total, count);
