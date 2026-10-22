@@ -303,10 +303,14 @@ public final class CollectionViews {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
-            // Preserve the owner's membership semantics (including identity sets)
-            // before evaluating the predicate on its actual stored occurrences.
+            // Owner admission is authoritative; non-List/Set collections may use
+            // reference identity or reject a domain that equals() would accept.
             if (!backing.contains(candidate)) return false;
+            if (!(backing instanceof List<?>) && !(backing instanceof Set<?>)) {
+                return predicate.test((E) candidate);
+            }
             if (backing instanceof Set<?>) {
                 E equivalent = null;
                 boolean found = false;
@@ -348,6 +352,11 @@ public final class CollectionViews {
         @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
             if (!backing.contains(candidate)) return false;
+            // Arbitrary Collection.remove may be identity-, domain- or
+            // owner-specific; an equals-based iterator removal is not equivalent.
+            if (!(backing instanceof List<?>) && !(backing instanceof Set<?>)) {
+                return predicate.test((E) candidate) && backing.remove(candidate);
+            }
             if (backing instanceof List<?>) {
                 // Remove the visible physical occurrence, not an earlier hidden
                 // equals-duplicate. Indexed removal also supports COW lists.
