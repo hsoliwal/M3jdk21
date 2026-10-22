@@ -93,12 +93,13 @@ when their mathematical contract proves a safe negative condition; otherwise the
 nominate candidates only. Equality, edit thresholds, regex matches, compiler behavior and public
 JDK results remain exact-authority operations.
 
-Every LLM-assisted source-changing M3JDK task remains recipe-first: author or improve a
-Maven/OpenRewrite hash-pinned recipe crate, exercise it against exact preimages/postimages, require
-compiler/test/runtime and applicable native parity gates, and prove fixed-point replay. Manual
-file-by-file edits are not the canonical delivery mechanism. Synexia recipe bodies themselves are
-eligible Apache-2.0 donor assets, but the M3JDK receiving recipe, names, postimages and promotion
-receipts are target-owned.
+Every LLM-assisted source-changing M3JDK task remains recipe-first: develop or improve the
+Maven/OpenRewrite transformation exclusively in `hsoliwal/com.synexia`, validate exact
+preimages/postimages and fixed-point refusal there, and independently verify the resulting Java/JNI
+product source in M3JDK21. No manual production-file patches and no second transformation
+framework. The recipe bodies, templates, authoring manifests and donor experiments stay in
+Synexia. M3JDK21 owns only its qualified generated product source, public contracts, names,
+tests, provenance references, runtime verification and promotion receipts.
 
 ## Convergence, handoff and promotion
 
@@ -136,15 +137,26 @@ and third-party licences retain their own scope; a port does not relicense them.
 See [m3-porting.md](m3-porting.md) for the serial execution order and
 [migration-mapping-lifecycle.md](migration-mapping-lifecycle.md) for record updates.
 
-## Free reuse of Synexia assets, including recipes
+## Reuse qualified Synexia results; never duplicate recipe ownership
 
-**ASSET_REUSE_INCLUDES_RECIPES.** M3JDK21 should freely copy and adapt eligible
-Synexia-owned Apache-2.0 assets instead of reimplementing them. This includes
-Java/JNI/native code, algorithms, collections, MIndex/String/AST/precompute
-atoms, Maven/OpenRewrite recipe bodies, atomizer/patternizer compositions,
-generators, templates, tests, fixtures, benchmarks, documentation and proof
-receipts. Recipe bodies are reusable source, not a service Synexia must host.
-The same convergence-to-product model covers every task-bound public target.
+**SYNEXIA_EXCLUSIVE_RECIPE_HOME.** Apache-2.0 permits reuse of eligible first-party
+material but does not require all source types to be shipped in every target.
+Synexia alone owns donor harvesting, recipe source/classes, Maven/OpenRewrite
+authoring crates, templates, execution and candidate qualification. M3JDK21,
+JDK, Eclipse/SWT and other public product forks may receive **only** the
+qualified Java/JNI/native transformation results and corresponding public tests,
+compatible product build logic, licensing/provenance, mapping and proof receipts.
+No new reusable or target-specific recipe source is to be copied into a public
+product fork. JDK-specific backports are authored as Synexia recipes against
+pinned JDK preimages, then received as tested results. The product remains
+independent of Synexia at runtime and controls its own API/JNI/GC/JIT gates.
+
+Previously deposited recipe source or mirror files in M3JDK21 are legacy
+migration debt; their presence is not permission for a second recipe owner.
+Retire them through separately qualified, proof-preserving migrations. The
+product PR #1810 and Synexia PR #12951 are an example: five exact source
+results remain in the product, while three canonical recipe crates, their
+manifests and replay tests live in Synexia.
 
 Keep applicable Apache-2.0 licensing and copyright/attribution/NOTICE material,
 record modifications, and carry exact donor -> Synexia -> target lineage and
