@@ -8710,6 +8710,604 @@
         },
         "source_state": "proposed",
         "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
+      },
+      {
+        "contract": {
+          "compatibility_obligations": [
+            "Exact whole-match, zero/one/many repetition, line-terminator, ASCII class and horizontal/vertical space behavior for the explicitly recognized grammar.",
+            "Preserve Java regex validation/exceptions, empty input, surrogate refusal where required, prepared-range ownership, races/eviction and cold behavior.",
+            "Fourteen curated predicates are a bounded supported set, not an empirical most-common ranking or complete Java regex coverage."
+          ],
+          "differences": [
+            "Two int class masks and one shared int[128] lookup table extend existing prepared facts; an admitted warm decision reads masks rather than rescanning text.",
+            "A one-character cold guard preserves the existing cold allocation path; unsupported/cold cases continue through existing matching paths, including the preserved dot/star DP and Pattern fallback."
+          ],
+          "public_surface": [
+            "Existing String.matches(String) and public preparation path retain their signatures and fallback behavior."
+          ]
+        },
+        "dependencies": [],
+        "format": {
+          "abi": null,
+          "bootstrap": "Existing java.base owner only; no new runtime dependency, public JDK type, storage owner or native symbol.",
+          "schema": null
+        },
+        "id": "m3.regex.common-class-precompute",
+        "identity": {
+          "generation": "Facts belong to the prepared immutable owner/range and follow its existing lifetime and refusal rules.",
+          "namespace": "Existing immutable String owner/range identity; no second canonical text or identity domain."
+        },
+        "kind": "specialization",
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+              "fingerprint": null,
+              "git_blob_sha1": "14fc79e035ac7c8fe610b0fc9191ba428b683133",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+              "repo": "hsoliwal/M3JDK21",
+              "revision_role": "pinned",
+              "sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a",
+              "signatures": [],
+              "symbol": "java.lang.M3StringFacts"
+            },
+            {
+              "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+              "fingerprint": null,
+              "git_blob_sha1": "acdf089b702410188b220dcb6f08b9666b539ddf",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+              "repo": "hsoliwal/M3JDK21",
+              "revision_role": "pinned",
+              "sha256": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
+              "signatures": [],
+              "symbol": "java.lang.M3StringRegexDp"
+            }
+          ],
+          "supersedes": []
+        },
+        "materialization": {
+          "admission": "Existing facts prepared by existing String operations; no eager matching-time preparation.",
+          "cached_facts": "All-class intersection and any-class union, fourteen bits each; shared ASCII table counted separately from per-owner fields.",
+          "joins": "No text join or new canonical text storage.",
+          "outputs": "Existing boolean/unknown dispatch; no new public result type."
+        },
+        "observation": "Exact final c831-based image passes public preparation/String.matches acceptance in both CompactStrings settings: 672 public comparisons and 128 oracle evaluations each, with 574/2 and 572/4 admitted/evicted concurrent results. Separate test-only facts harness passes 1,246,849 checks per setting and retains productImage=false scope. Current regression comparison has 28 clean batch/test results, three exact matched baseline failures and no new/changed failures. Current common14 performance is not remeasured; historical image measurements are not promoted.",
+        "owner": "Existing java.lang.M3StringFacts derived metadata and M3StringRegexDp dispatch; canonical text remains with its existing M3 String owner.",
+        "provenance": {
+          "copied_code": false,
+          "license": "Existing GPL-2.0-only WITH Classpath-exception-2.0 headers retained; first-party product implementation, no donor code copy.",
+          "publication": "First-party existing-product refinement and product tests/catalogue only. External problem and donor references provide categories; no donor implementation or private source body is imported. Build-only documentation companion: synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-baseline-doclint-final.yml (SHA-256 73879bf8533cd72cde3153b8294a2947df8c33537c33b30a149df6a41ec35923); retain its separate receive/replay and baseline-image receipts. This is not a fifth behavioral capability."
+        },
+        "reason": "Capture fourteen bounded character-class predicates in the existing prepared facts and reuse exact known facts for supported full-match runs; this is distinct from the three historical pending DP capabilities.",
+        "recipe": {
+          "id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-combined-c831.yml",
+          "preconditions": [
+            "Exact sealed preimages/postimages and actual SDK, sealing, receiver-contract and receiving receipts bound in the public qualification summary.",
+            "Preserve canonical predecessor order and zero-change replay; unicode-prefix-c831 requires the combined-c831 Query postimage, not the original c831 Query body.",
+            "Pending remains a capability/closure status. The public-metadata dataset and merge-result gates require separate actual receipts; no global promotion."
+          ],
+          "rollback": "Use the exact received-stage rollback contract and preimages; never overwrite unrelated drift or delete history to force admission.",
+          "sha256": "527af1e3de1c62d5d5e72b927a8cd57d2d1463cc4b3f1043dc8a272be1485a90",
+          "version": "combined-c831"
+        },
+        "source_state": "implemented",
+        "sources": [
+          {
+            "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+            "fingerprint": null,
+            "git_blob_sha1": "14fc79e035ac7c8fe610b0fc9191ba428b683133",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "pinned",
+            "sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a",
+            "signatures": [],
+            "symbol": "java.lang.M3StringFacts"
+          },
+          {
+            "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+            "fingerprint": null,
+            "git_blob_sha1": "acdf089b702410188b220dcb6f08b9666b539ddf",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "pinned",
+            "sha256": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
+            "signatures": [],
+            "symbol": "java.lang.M3StringRegexDp"
+          }
+        ],
+        "status": "pending",
+        "sync": {
+          "conflicts": [],
+          "direction": "source-to-target",
+          "pending": [
+            "Canonical receiving and zero-change replay of this final public-metadata payload, then publication/merge-result checks.",
+            "Unchanged global STRING_QUALIFICATION owner-pin drift and twelve open closure items; no family/repository completion.",
+            "Later upstream strict naming CLI correction and exact merge-result rerun; current image proof remains c831 based.",
+            "Full canonical wrapper and whole-JDK/language/native-Unicode/JIT/CDS/JFR qualification remain outside the bounded result."
+          ],
+          "source_revision": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "target_adaptations": [
+            "Two int class masks and one shared int[128] lookup table extend existing prepared facts; an admitted warm decision reads masks rather than rescanning text.",
+            "A one-character cold guard preserves the existing cold allocation path; unsupported/cold cases continue through existing matching paths, including the preserved dot/star DP and Pattern fallback."
+          ],
+          "target_revision": null
+        },
+        "targets": [
+          {
+            "commit": null,
+            "fingerprint": null,
+            "git_blob_sha1": "bd4d7878ceb9d3c74f8f012c05cac4aff392a128",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "candidate",
+            "sha256": "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a",
+            "signatures": [],
+            "symbol": "java.lang.M3StringFacts"
+          },
+          {
+            "commit": null,
+            "fingerprint": null,
+            "git_blob_sha1": "9bfcdd972e704ef88ef5fdfe3112576aba99f3cd",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "candidate",
+            "sha256": "faa373f77eef1d2dd3457bfe8c5d65d2dff819bb606e00f7c269e7b08a37cf25",
+            "signatures": [],
+            "symbol": "java.lang.M3StringRegexDp"
+          }
+        ],
+        "tests": [
+          {
+            "id": "public-string-matches-common14",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "actual-owner-facts-oracle",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "matched-current-regression",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "facts-dp-api-jni",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          }
+        ]
+      },
+      {
+        "contract": {
+          "compatibility_obligations": [
+            "Use the JDK compiled node grammar, not a new regex parser; at most 256 atoms and an existing admitted greedy zero-or-more repeat.",
+            "Preserve exact Unicode/supplementary/lone-surrogate Boolean results, flags, unsupported graph refusal and original Matcher state/captures/coordinates/exceptions.",
+            "A bounded fixture cannot establish all Java regex equivalence or bound arbitrary backtracking time."
+          ],
+          "differences": [
+            "A per-atom boolean width lane records the actual compiled node kind, rather than inferring width from predicate interface.",
+            "The rolling transition retains both the high-unit intermediate frontier and full-code-point frontier; blanket surrogate refusal is removed only for the existing admitted chain grammar.",
+            "Existing scalar and wide ASCII masks are retained; optional native ASCII oracle continues to refuse non-ASCII.",
+            "For an all-nullable admitted chain with a live first-star frontier and a general-width first compiled node, consume the exact accepted prefix through that predicate while preserving the complete nonzero frontier; resume the unchanged dual-frontier recurrence before the first rejected code point. No new fields, cached metadata or admission limit."
+          ],
+          "public_surface": [
+            "Existing Pattern/Matcher and String matching signatures; no new public API."
+          ]
+        },
+        "dependencies": [],
+        "format": {
+          "abi": null,
+          "bootstrap": "Existing java.base owner only; no new runtime dependency, public JDK type, storage owner or native symbol.",
+          "schema": null
+        },
+        "id": "m3.regex.pattern-boolean-unicode",
+        "identity": {
+          "generation": "Prepared per-plan facts are immutable; rolling frontier state belongs to each call.",
+          "namespace": "Immutable compiled Pattern node plan; flags and grammar admission stay with the existing Pattern owner."
+        },
+        "kind": "specialization",
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+              "fingerprint": null,
+              "git_blob_sha1": "2eb4ca854b6ef35d57d7a2599c97c3024ff81296",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+              "repo": "hsoliwal/M3JDK21",
+              "revision_role": "pinned",
+              "sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+              "signatures": [],
+              "symbol": "java.util.regex.M3PatternQuery"
+            },
+            {
+              "commit": null,
+              "fingerprint": null,
+              "git_blob_sha1": "03c10224279f373282a4c1b0e681f0f54eb0fcd1",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+              "repo": "hsoliwal/M3JDK21",
+              "revision_role": "candidate",
+              "sha256": "06aadfc5d57fc57f7bbad70a6737694963852e5985e6cb2cf8d3b951980e1d3d",
+              "signatures": [],
+              "symbol": "java.util.regex.M3PatternQuery"
+            }
+          ],
+          "supersedes": []
+        },
+        "materialization": {
+          "admission": "Existing compiled straight-line character/slice/repeat nodes with established grammar/flag guards.",
+          "cached_facts": "Existing immutable plan plus one boolean width lane; invocation-local rolling and optional intermediate rows, no retained Matcher. Nullable-prefix reuse adds no retained fields or metadata.",
+          "joins": "Read the existing String with original UTF-16 coordinates; no flattening or normalization.",
+          "outputs": "Boolean 0/1 for the admitted full-match plan; original matching path remains authoritative for unsupported graphs."
+        },
+        "observation": "Final installed owner 190d541c passes the unchanged finite 551,959-pair corpus in default/M3 compact/M3 wide: 371,584 exact internal decisions, zero refusals and matching semantic digest. Focused nullable-prefix fixture passes 940 checks per mode. The preserved 06aadfc5 candidate's measured 256-star regression is repaired in the final selected workload; 13 of 84 public CPU medians remain higher than baseline. No general speed or universal-regex admission; measured direct-array shallow graph scope excludes whole heap.",
+        "owner": "Existing java.util.regex.M3PatternQuery.BooleanPlan over JDK compiled Pattern nodes; Matcher retains observable state authority.",
+        "provenance": {
+          "copied_code": false,
+          "license": "Existing GPL-2.0-only WITH Classpath-exception-2.0 header retained; first-party product refinement, no challenge or donor implementation copy.",
+          "publication": "First-party existing-product refinement and product tests/catalogue only. External problem and donor references provide categories; no donor implementation or private source body is imported. Build-only documentation companion: synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-baseline-doclint-final.yml (SHA-256 73879bf8533cd72cde3153b8294a2947df8c33537c33b30a149df6a41ec35923); retain its separate receive/replay and baseline-image receipts. This is not a fifth behavioral capability."
+        },
+        "reason": "Extend the existing at-most-256-atom Boolean chain plan to preserve BMP-unit and code-point consumption for supplementary pairs and lone surrogates; preserve scalar/wide ASCII frontiers and unsupported-graph fallback.",
+        "recipe": {
+          "id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/unicode-prefix-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-unicode-prefix-c831.yml",
+          "preconditions": [
+            "Exact sealed preimages/postimages and actual SDK, sealing, receiver-contract and receiving receipts bound in the public qualification summary.",
+            "Preserve canonical predecessor order and zero-change replay; unicode-prefix-c831 requires the combined-c831 Query postimage, not the original c831 Query body.",
+            "Pending remains a capability/closure status. The public-metadata dataset and merge-result gates require separate actual receipts; no global promotion."
+          ],
+          "rollback": "Use the exact received-stage rollback contract and preimages; never overwrite unrelated drift or delete history to force admission.",
+          "sha256": "78b73b1a84bd73b642cd3f2f0ca4e8f919459616b8c608e581de4439726d63c0",
+          "version": "unicode-prefix-c831"
+        },
+        "source_state": "implemented",
+        "sources": [
+          {
+            "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+            "fingerprint": null,
+            "git_blob_sha1": "2eb4ca854b6ef35d57d7a2599c97c3024ff81296",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "pinned",
+            "sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+            "signatures": [],
+            "symbol": "java.util.regex.M3PatternQuery"
+          }
+        ],
+        "status": "pending",
+        "sync": {
+          "conflicts": [],
+          "direction": "source-to-target",
+          "pending": [
+            "Canonical receiving and zero-change replay of this final public-metadata payload, then publication/merge-result checks.",
+            "Unchanged global STRING_QUALIFICATION owner-pin drift and twelve open closure items; no family/repository completion.",
+            "Later upstream strict naming CLI correction and exact merge-result rerun; current image proof remains c831 based.",
+            "Full canonical wrapper and whole-JDK/language/native-Unicode/JIT/CDS/JFR qualification remain outside the bounded result."
+          ],
+          "source_revision": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "target_adaptations": [
+            "A per-atom boolean width lane records the actual compiled node kind, rather than inferring width from predicate interface.",
+            "The rolling transition retains both the high-unit intermediate frontier and full-code-point frontier; blanket surrogate refusal is removed only for the existing admitted chain grammar.",
+            "Existing scalar and wide ASCII masks are retained; optional native ASCII oracle continues to refuse non-ASCII.",
+            "For an all-nullable admitted chain with a live first-star frontier and a general-width first compiled node, consume the exact accepted prefix through that predicate while preserving the complete nonzero frontier; resume the unchanged dual-frontier recurrence before the first rejected code point. No new fields, cached metadata or admission limit."
+          ],
+          "target_revision": null
+        },
+        "targets": [
+          {
+            "commit": null,
+            "fingerprint": null,
+            "git_blob_sha1": "33eeccc2ecdffa2b7ffdf7c11533caa232c2672b",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "candidate",
+            "sha256": "190d541c497c344ba5015f38edadf6d6fb359e10010afbb88729905e04b1c1d7",
+            "signatures": [],
+            "symbol": "java.util.regex.M3PatternQuery"
+          }
+        ],
+        "tests": [
+          {
+            "id": "installed-unicode-finite-oracle",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "nullable-prefix-red-and-green",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "three-stage-resource-observations",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "query-api-state-boundary",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          }
+        ]
+      },
+      {
+        "contract": {
+          "compatibility_obligations": [
+            "False and true results, row/occurrence identity, checked span bounds, regex flags, collisions, races and fresh-owner behavior remain correct.",
+            "Mutable CharSequence and all vocabulary-backed/contextual regex rows stay uncached.",
+            "No per-lexeme B_P capability, global cache, lexical spelling owner or new lifetime protocol is admitted."
+          ],
+          "differences": [
+            "One volatile recent primitive word, plus a lazily allocated at-most-256-entry long[] collision table; every hit checks exact packed identity and truth.",
+            "Cache conflicts may replace entries, but cannot turn a different occurrence into a hit; Pattern is shared, Matcher remains ephemeral on misses."
+          ],
+          "public_surface": [
+            "Existing internal M3TokenPredicateCache bind/test/row API retains signatures; no java.util.regex public API change."
+          ]
+        },
+        "dependencies": [],
+        "format": {
+          "abi": null,
+          "bootstrap": "Existing java.base owner only; no new runtime dependency, public JDK type, storage owner or native symbol.",
+          "schema": null
+        },
+        "id": "m3.token.regex-occurrence-reuse",
+        "identity": {
+          "generation": "Lifetime is the already bound immutable String/token index owner; contextual vocabulary and mutable sources are excluded from result reuse.",
+          "namespace": "Owner-local exact row and token-occurrence pair, not lexeme ID alone or a lossy hash key."
+        },
+        "kind": "specialization",
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+              "fingerprint": null,
+              "git_blob_sha1": "325cb8d5c133a3b66d710c9e09cfff7802d9b66b",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+              "repo": "hsoliwal/M3JDK21",
+              "revision_role": "pinned",
+              "sha256": "0ed768ba1672780790c55b4e64ac28b9c702740ba5a03484805e68b4d8725a10",
+              "signatures": [],
+              "symbol": "jdk.internal.mindex.M3TokenPredicateCache"
+            }
+          ],
+          "supersedes": []
+        },
+        "materialization": {
+          "admission": "Existing bound cache with String source and defensive immutable token index; text regex rows only.",
+          "cached_facts": "Owner-local exact primitive identity/truth values; one recent long and at most one retained long[256].",
+          "joins": "No spelling materialization retained; existing Span and Matcher are ephemeral on misses.",
+          "outputs": "Existing boolean predicate result."
+        },
+        "observation": "Exact final installed image passes 55,199 token semantic checks per storage mode and frozen repeated positive/negative occurrence witnesses: each 20,000-call block changes from 4,800,000 baseline allocated bytes to zero candidate bytes in interpreter mode. Primitive shape checks and actual product jtreg pass; no retained-byte, throughput or mutable/vocabulary-cache claim.",
+        "owner": "Existing jdk.internal.mindex.M3TokenPredicateCache; immutable M3TokenIndex and bound source preserve context authority.",
+        "provenance": {
+          "copied_code": false,
+          "license": "Existing Apache-2.0 component notice retained; separate admitted component identity is not relabeled as GPL merely because the file resides under java.base.",
+          "publication": "First-party existing-product refinement and product tests/catalogue only. External problem and donor references provide categories; no donor implementation or private source body is imported. Build-only documentation companion: synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-baseline-doclint-final.yml (SHA-256 73879bf8533cd72cde3153b8294a2947df8c33537c33b30a149df6a41ec35923); retain its separate receive/replay and baseline-image receipts. This is not a fifth behavioral capability."
+        },
+        "reason": "Reuse exact text-row/token-occurrence regex results only for final immutable String input, retaining fresh Matcher evaluation on misses and all mutable/vocabulary-backed regex paths.",
+        "recipe": {
+          "id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-combined-c831.yml",
+          "preconditions": [
+            "Exact sealed preimages/postimages and actual SDK, sealing, receiver-contract and receiving receipts bound in the public qualification summary.",
+            "Preserve canonical predecessor order and zero-change replay; unicode-prefix-c831 requires the combined-c831 Query postimage, not the original c831 Query body.",
+            "Pending remains a capability/closure status. The public-metadata dataset and merge-result gates require separate actual receipts; no global promotion."
+          ],
+          "rollback": "Use the exact received-stage rollback contract and preimages; never overwrite unrelated drift or delete history to force admission.",
+          "sha256": "527af1e3de1c62d5d5e72b927a8cd57d2d1463cc4b3f1043dc8a272be1485a90",
+          "version": "combined-c831"
+        },
+        "source_state": "implemented",
+        "sources": [
+          {
+            "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+            "fingerprint": null,
+            "git_blob_sha1": "325cb8d5c133a3b66d710c9e09cfff7802d9b66b",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "pinned",
+            "sha256": "0ed768ba1672780790c55b4e64ac28b9c702740ba5a03484805e68b4d8725a10",
+            "signatures": [],
+            "symbol": "jdk.internal.mindex.M3TokenPredicateCache"
+          }
+        ],
+        "status": "pending",
+        "sync": {
+          "conflicts": [],
+          "direction": "source-to-target",
+          "pending": [
+            "Canonical receiving and zero-change replay of this final public-metadata payload, then publication/merge-result checks.",
+            "Unchanged global STRING_QUALIFICATION owner-pin drift and twelve open closure items; no family/repository completion.",
+            "Later upstream strict naming CLI correction and exact merge-result rerun; current image proof remains c831 based.",
+            "Full canonical wrapper and whole-JDK/language/native-Unicode/JIT/CDS/JFR qualification remain outside the bounded result."
+          ],
+          "source_revision": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "target_adaptations": [
+            "One volatile recent primitive word, plus a lazily allocated at-most-256-entry long[] collision table; every hit checks exact packed identity and truth.",
+            "Cache conflicts may replace entries, but cannot turn a different occurrence into a hit; Pattern is shared, Matcher remains ephemeral on misses."
+          ],
+          "target_revision": null
+        },
+        "targets": [
+          {
+            "commit": null,
+            "fingerprint": null,
+            "git_blob_sha1": "ddd25bf0b749934b7173b7c6ebb3b93378261ce6",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "candidate",
+            "sha256": "1aa4e472110c2ca9432efc68cf7bea09c22ade8af670017fa4fe473bebfade88",
+            "signatures": [],
+            "symbol": "jdk.internal.mindex.M3TokenPredicateCache"
+          }
+        ],
+        "tests": [
+          {
+            "id": "installed-token-semantics",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "positive-negative-occurrence-reuse",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "bounded-private-storage-shape",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "final-product-token-jtreg",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          }
+        ]
+      },
+      {
+        "contract": {
+          "compatibility_obligations": [
+            "Failure at each of the seven copy allocations preserves all plane identities/lengths/contents and logical size, allocated/free state, order and generations.",
+            "Successful growth and post-failure retry preserve handles, lease/state masks and indexed/filter/sorted-view invariants.",
+            "This is single-owner allocation-failure consistency under existing synchronization; it supplies no new lock-free or concurrent publication guarantee and no collection-family promotion."
+          ],
+          "differences": [
+            "Replace sequential allocate-and-publish with allocate-all-then-publish in the existing ensureCapacity method.",
+            "Capacity formula, seven plane types, normal insertion/order, masks, offsets and public surface remain unchanged.",
+            "Old and replacement planes remain simultaneously reachable until all copies finish; this trades a larger transient live set for failure consistency without adding final retained fields or arrays."
+          ],
+          "public_surface": [
+            "Existing internal M3IndexedArray signatures only; no new storage/API/native symbols."
+          ]
+        },
+        "dependencies": [],
+        "format": {
+          "abi": null,
+          "bootstrap": "Existing java.base owner only; no new runtime dependency, public JDK type, storage owner or native symbol.",
+          "schema": null
+        },
+        "id": "m3.collections.indexed-array-growth-atomicity",
+        "identity": {
+          "generation": "Retain existing stale-handle, lease/state and version contracts; allocation failure must publish no partial capacity change.",
+          "namespace": "Existing physical slot indexes, packed generation handles, logical order and reference payload owner."
+        },
+        "kind": "specialization",
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+              "fingerprint": null,
+              "git_blob_sha1": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+              "repo": "hsoliwal/M3JDK21",
+              "revision_role": "pinned",
+              "sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+              "signatures": [],
+              "symbol": "jdk.internal.m3.M3IndexedArray"
+            }
+          ],
+          "supersedes": []
+        },
+        "materialization": {
+          "admission": "Existing capacity growth with the same overflow/maximum-capacity checks.",
+          "cached_facts": "Existing Object[] values and six aligned int[] planes; replacement arrays remain locals until all copies succeed.",
+          "joins": "No retained per-entry Node/Entry/Cell and no payload owner duplication.",
+          "outputs": "Same owner on success; unchanged prior owner state on failed replacement allocation."
+        },
+        "observation": "Paired installed exact-owner fault proof has 21 cases and 4,914 candidate checks per -Xint/-Xmixed mode, versus 18 intended baseline failures. Final-image owner class is byte-identical and four collection plus one token product jtreg entries pass. Seven replacement arrays and final layout are unchanged; derived transient reachability increases and CPU regressions remain explicit. Deterministic pre-copy injection is not real heap exhaustion or a new concurrent-publication guarantee.",
+        "owner": "Existing jdk.internal.m3.M3IndexedArray reference payload plus six aligned int planes; no new collection owner.",
+        "provenance": {
+          "copied_code": false,
+          "license": "Existing GPL-2.0-only WITH Classpath-exception-2.0 SPDX notice retained; independently expressed first-party transactional publication, no donor adaptation.",
+          "publication": "First-party existing-product refinement and product tests/catalogue only. External problem and donor references provide categories; no donor implementation or private source body is imported. Build-only documentation companion: synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-baseline-doclint-final.yml (SHA-256 73879bf8533cd72cde3153b8294a2947df8c33537c33b30a149df6a41ec35923); retain its separate receive/replay and baseline-image receipts. This is not a fifth behavioral capability."
+        },
+        "reason": "Prepare all seven replacement arrays in locals before publishing any field so a failing growth allocation leaves the pre-growth owner intact; exact current-product gates remain separately pending.",
+        "recipe": {
+          "id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/collections-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-collections-c831.yml",
+          "preconditions": [
+            "Exact sealed preimages/postimages and actual SDK, sealing, receiver-contract and receiving receipts bound in the public qualification summary.",
+            "Preserve canonical predecessor order and zero-change replay; unicode-prefix-c831 requires the combined-c831 Query postimage, not the original c831 Query body.",
+            "Pending remains a capability/closure status. The public-metadata dataset and merge-result gates require separate actual receipts; no global promotion."
+          ],
+          "rollback": "Use the exact received-stage rollback contract and preimages; never overwrite unrelated drift or delete history to force admission.",
+          "sha256": "e7f5780f5353de451ad82c58558c1bc746d05c993ebacf2cde8732bf2d5cc378",
+          "version": "collections-c831"
+        },
+        "source_state": "implemented",
+        "sources": [
+          {
+            "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+            "fingerprint": null,
+            "git_blob_sha1": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "pinned",
+            "sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+            "signatures": [],
+            "symbol": "jdk.internal.m3.M3IndexedArray"
+          }
+        ],
+        "status": "pending",
+        "sync": {
+          "conflicts": [],
+          "direction": "source-to-target",
+          "pending": [
+            "Canonical receiving and zero-change replay of this final public-metadata payload, then publication/merge-result checks.",
+            "Unchanged global STRING_QUALIFICATION owner-pin drift and twelve open closure items; no family/repository completion.",
+            "Later upstream strict naming CLI correction and exact merge-result rerun; current image proof remains c831 based.",
+            "Full canonical wrapper and whole-JDK/language/native-Unicode/JIT/CDS/JFR qualification remain outside the bounded result."
+          ],
+          "source_revision": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "target_adaptations": [
+            "Replace sequential allocate-and-publish with allocate-all-then-publish in the existing ensureCapacity method.",
+            "Capacity formula, seven plane types, normal insertion/order, masks, offsets and public surface remain unchanged.",
+            "Old and replacement planes remain simultaneously reachable until all copies finish; this trades a larger transient live set for failure consistency without adding final retained fields or arrays."
+          ],
+          "target_revision": null
+        },
+        "targets": [
+          {
+            "commit": null,
+            "fingerprint": null,
+            "git_blob_sha1": "93b8e8513f9e28c3493df58a685ca25014439886",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+            "repo": "hsoliwal/M3JDK21",
+            "revision_role": "candidate",
+            "sha256": "e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43",
+            "signatures": [],
+            "symbol": "jdk.internal.m3.M3IndexedArray"
+          }
+        ],
+        "tests": [
+          {
+            "id": "installed-pre-copy-fault-proof",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "final-product-collection-jtreg",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "installed-owner-byte-continuity",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          },
+          {
+            "id": "array-allocation-and-reachability-tradeoff",
+            "receipt": "m3/collections/qualification/regex-language-mastery-20261021/QUALIFICATION.json"
+          }
+        ]
       }
     ]
   },

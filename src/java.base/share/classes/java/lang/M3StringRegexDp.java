@@ -18,7 +18,9 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * Pattern opcodes are derived metadata, never a second canonical spelling owner. Effects
  * memoize (program, canonical owner, exact range, incoming frontier) -> outgoing frontier.
  * Tuple children consume one continuous frontier; a component boundary is not a regex boundary.
- * Captures, flags, search, supplementary characters and unsupported syntax stay with Pattern.
+ * Prepared exact class facts also answer standalone class runs, including supplementary text.
+ * Captures, flags, search and unsupported syntax stay with Pattern. The dot/star DP lane
+ * continues to refuse surrogate input independently of the prepared class-fact lane.
  *
  * <p>Synexia MIndexRegexProgram/MIndexRegexEffects supply the finite-state/composition
  * design lineage. This target-owned adaptation uses the existing M3 names and native owners,
@@ -51,10 +53,13 @@ final class M3StringRegexDp {
     /** UNKNOWN always means that the existing caller must execute Pattern.matches. */
     static int tryMatch(M3String source, String regex) {
         int n = regex.length();
-        if (n < 2 || n > MAX_PATTERN_UNITS) return UNKNOWN;
-        int m = source.length();
-        if (m > MAX_TEXT_UNITS) return UNKNOWN;
+        if (n < 1 || n > MAX_PATTERN_UNITS) return UNKNOWN;
         try {
+            int prepared = preparedClassMatch(source, regex);
+            if (prepared != UNKNOWN) return prepared;
+            if (n < 2) return UNKNOWN;
+            int m = source.length();
+            if (m > MAX_TEXT_UNITS) return UNKNOWN;
             Tables cache = tables();
             Plan plan = prepare(regex, cache);
             if (plan == null || ((long) m + 1) * (plan.atoms.length + 1) > MAX_DP_CELLS) {
@@ -88,6 +93,180 @@ final class M3StringRegexDp {
             // Derived-state allocation is optional; the ordinary JDK path remains authoritative.
             return UNKNOWN;
         }
+    }
+
+
+    private static final int NEGATED_CLASS = 1 << 15;
+
+    /**
+     * A complete one-class expression is exactly all/none membership plus code-point
+     * cardinality. Consume prepared facts only: cold calls do not scan or retain text.
+     */
+    private static int preparedClassMatch(M3String source, String regex) {
+        int token = commonClass(regex);
+        if (token == 0) return UNKNOWN;
+        long bounds = repetitionBounds(regex, token >>> 16);
+        if (bounds < 0) return UNKNOWN;
+        M3StringFacts facts = source.factsIfPrepared();
+        if (facts == null || facts.utf16Length != source.length()) return UNKNOWN;
+        int count = facts.codePointCount;
+        if (count < (int) (bounds >>> 32) || count > (int) bounds) return NO_MATCH;
+        int mask = token & M3StringFacts.REGEX_CLASSES;
+        boolean matches = (token & NEGATED_CLASS) == 0
+                ? (facts.regexAllClasses & mask) != 0
+                : (facts.regexAnyClasses & mask) == 0;
+        return matches ? MATCH : NO_MATCH;
+    }
+
+    /** Packed consumed UTF-16 length, negation and one exact class bit; zero refuses. */
+    private static int commonClass(String regex) {
+        char first = regex.charAt(0);
+        if (first == '.') return (1 << 16) | M3StringFacts.REGEX_DOT;
+        if (first == '\\' && regex.length() >= 2) {
+            char kind = regex.charAt(1);
+            int mask = switch (kind) {
+                case 'd', 'D' -> M3StringFacts.REGEX_DIGIT;
+                case 'w', 'W' -> M3StringFacts.REGEX_WORD;
+                case 's', 'S' -> M3StringFacts.REGEX_SPACE;
+                case 'h', 'H' -> M3StringFacts.REGEX_HORIZONTAL;
+                case 'v', 'V' -> M3StringFacts.REGEX_VERTICAL;
+                default -> 0;
+            };
+            if (mask != 0) {
+                return (2 << 16) | mask
+                        | (kind >= 'A' && kind <= 'Z' ? NEGATED_CLASS : 0);
+            }
+            if ((kind != 'p' && kind != 'P') || regex.length() < 4
+                    || regex.charAt(2) != '{') return 0;
+            int length;
+            if (regex.startsWith("Lower}", 3)) {
+                mask = M3StringFacts.REGEX_LOWER; length = 9;
+            }
+            else if (regex.startsWith("Upper}", 3)) {
+                mask = M3StringFacts.REGEX_UPPER; length = 9;
+            }
+            else if (regex.startsWith("ASCII}", 3)) {
+                mask = M3StringFacts.REGEX_ASCII; length = 9;
+            }
+            else if (regex.startsWith("Alpha}", 3)) {
+                mask = M3StringFacts.REGEX_ALPHA; length = 9;
+            }
+            else if (regex.startsWith("Digit}", 3)) {
+                mask = M3StringFacts.REGEX_DIGIT; length = 9;
+            }
+            else if (regex.startsWith("Alnum}", 3)) {
+                mask = M3StringFacts.REGEX_ALNUM; length = 9;
+            }
+            else if (regex.startsWith("XDigit}", 3)) {
+                mask = M3StringFacts.REGEX_HEX; length = 10;
+            }
+            else if (regex.startsWith("Space}", 3)) {
+                mask = M3StringFacts.REGEX_SPACE; length = 9;
+            }
+            else return 0;
+            return (length << 16) | mask | (kind == 'P' ? NEGATED_CLASS : 0);
+        }
+        if (first != '[' || regex.length() < 2) return 0;
+        boolean negated = regex.charAt(1) == '^';
+        int start = negated ? 2 : 1;
+        int mask;
+        int length;
+        if (regex.startsWith("0-9]", start)) {
+            mask = M3StringFacts.REGEX_DIGIT; length = 4;
+        }
+        else if (regex.startsWith("a-z]", start)) {
+            mask = M3StringFacts.REGEX_LOWER; length = 4;
+        }
+        else if (regex.startsWith("A-Z]", start)) {
+            mask = M3StringFacts.REGEX_UPPER; length = 4;
+        }
+        else if (regex.startsWith("a-zA-Z]", start)) {
+            mask = M3StringFacts.REGEX_ALPHA; length = 7;
+        }
+        else if (regex.startsWith("A-Za-z]", start)) {
+            mask = M3StringFacts.REGEX_ALPHA; length = 7;
+        }
+        else if (regex.startsWith("a-zA-Z0-9]", start)) {
+            mask = M3StringFacts.REGEX_ALNUM; length = 10;
+        }
+        else if (regex.startsWith("A-Za-z0-9]", start)) {
+            mask = M3StringFacts.REGEX_ALNUM; length = 10;
+        }
+        else if (regex.startsWith("a-zA-Z_0-9]", start)) {
+            mask = M3StringFacts.REGEX_WORD; length = 11;
+        }
+        else if (regex.startsWith("a-zA-Z0-9_]", start)) {
+            mask = M3StringFacts.REGEX_WORD; length = 11;
+        }
+        else if (regex.startsWith("A-Za-z0-9_]", start)) {
+            mask = M3StringFacts.REGEX_WORD; length = 11;
+        }
+        else if (regex.startsWith("0-9a-fA-F]", start)) {
+            mask = M3StringFacts.REGEX_HEX; length = 10;
+        }
+        else if (regex.startsWith("0-9A-Fa-f]", start)) {
+            mask = M3StringFacts.REGEX_HEX; length = 10;
+        }
+        else if (regex.startsWith("A-Fa-f0-9]", start)) {
+            mask = M3StringFacts.REGEX_HEX; length = 10;
+        }
+        else if (regex.startsWith("a-fA-F0-9]", start)) {
+            mask = M3StringFacts.REGEX_HEX; length = 10;
+        }
+        else if (regex.startsWith("0-9a-f]", start)) {
+            mask = M3StringFacts.REGEX_LOWER_HEX; length = 7;
+        }
+        else if (regex.startsWith("0-9A-F]", start)) {
+            mask = M3StringFacts.REGEX_UPPER_HEX; length = 7;
+        }
+        else return 0;
+        return ((start + length) << 16) | mask | (negated ? NEGATED_CLASS : 0);
+    }
+
+    /** Inclusive minimum/maximum counts; -1 refuses syntax without masking Pattern errors. */
+    private static long repetitionBounds(String regex, int start) {
+        int length = regex.length();
+        if (start == length) return (1L << 32) | 1L;
+        if (start + 1 == length) {
+            return switch (regex.charAt(start)) {
+                case '?' -> 1L;
+                case '*' -> Integer.MAX_VALUE;
+                case '+' -> (1L << 32) | Integer.MAX_VALUE;
+                default -> -1L;
+            };
+        }
+        if (regex.charAt(start) != '{') return -1L;
+        long first = decimalBound(regex, start + 1);
+        if (first < 0) return -1L;
+        int minimum = (int) first;
+        int end = (int) (first >>> 32);
+        if (end == length - 1 && regex.charAt(end) == '}') {
+            return ((long) minimum << 32) | minimum;
+        }
+        if (end >= length || regex.charAt(end) != ',') return -1L;
+        end++;
+        if (end == length - 1 && regex.charAt(end) == '}') {
+            return ((long) minimum << 32) | Integer.MAX_VALUE;
+        }
+        long last = decimalBound(regex, end);
+        if (last < 0 || (int) (last >>> 32) != length - 1
+                || regex.charAt(length - 1) != '}') return -1L;
+        int maximum = (int) last;
+        return minimum > maximum ? -1L : ((long) minimum << 32) | maximum;
+    }
+
+    /** Parse only ASCII decimal syntax, refusing overflow before multiplication. */
+    private static long decimalBound(String regex, int start) {
+        int value = 0;
+        int end = start;
+        while (end < regex.length()) {
+            int digit = regex.charAt(end) - '0';
+            if (digit < 0 || digit > 9) break;
+            if (value > (Integer.MAX_VALUE - digit) / 10) return -1L;
+            value = value * 10 + digit;
+            end++;
+        }
+        return end == start ? -1L : ((long) end << 32) | value;
     }
 
     private static Tables tables() {

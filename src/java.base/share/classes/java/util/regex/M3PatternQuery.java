@@ -88,6 +88,7 @@ final class M3PatternQuery {
 
         Pattern.CharPredicate[] atoms = new Pattern.CharPredicate[count];
         boolean[] repeated = new boolean[count];
+        boolean[] codePoint = new boolean[count];
         boolean[] empty = new boolean[count + 1];
         empty[0] = true;
         int index = 0;
@@ -95,30 +96,37 @@ final class M3PatternQuery {
             if (node instanceof Pattern.CharPropertyGreedy greedy) {
                 atoms[index] = greedy.predicate;
                 repeated[index] = true;
+                codePoint[index] = !(greedy instanceof Pattern.BmpCharPropertyGreedy);
                 empty[index + 1] = empty[index];
                 index++;
             } else if (node instanceof Pattern.CharProperty property) {
+                // The only subclass is BmpCharProperty, which consumes one UTF-16 unit.
+                // Use the actual node kind: a predicate's interface does not set its width.
+                codePoint[index] = property.getClass() == Pattern.CharProperty.class;
                 atoms[index++] = property.predicate;
             } else if (node instanceof Pattern.Slice slice) {
                 for (int unit : slice.buffer) atoms[index++] = Pattern.Single(unit);
             }
         }
-        return new BooleanPlan(atoms, repeated, empty);
+        return new BooleanPlan(atoms, repeated, codePoint, empty);
     }
 
     /** Immutable pattern facts; each invocation owns a scalar frontier or a rolling DP row. */
     static final class BooleanPlan {
         private final Pattern.CharPredicate[] atoms;
         private final boolean[] repeated;
+        private final boolean[] codePoint;
         private final boolean[] empty;
         // Optional derived metadata belongs to this plan, never to M3String or its backing.
         // Scalar: 136 longs. Wide: 137 planes of <=5 words; at most 5,480 payload bytes.
         private final long[] ascii;
         private final long repeatedStates;
 
-        private BooleanPlan(Pattern.CharPredicate[] atoms, boolean[] repeated, boolean[] empty) {
+        private BooleanPlan(Pattern.CharPredicate[] atoms, boolean[] repeated,
+                            boolean[] codePoint, boolean[] empty) {
             this.atoms = atoms;
             this.repeated = repeated;
+            this.codePoint = codePoint;
             this.empty = empty;
             long stars = 0L;
             if (atoms.length <= 63) {
@@ -164,7 +172,7 @@ final class M3PatternQuery {
             }
         }
 
-        /** Returns 0/1, or -1 to defer surrogate semantics to the original Matcher. */
+        /** Returns the Boolean full-match result for the admitted compiled-node chain. */
         int matches(String input) {
             long[] masks = ascii;
             if (masks == null) return matchesRolling(input);
@@ -173,7 +181,6 @@ final class M3PatternQuery {
             for (int offset = 0; offset < input.length(); offset++) {
                 char unit = input.charAt(offset);
                 // Convert the exact prefix frontier once, then continue the original DP.
-                // Do not stop at a dead frontier: a later surrogate must still produce -1.
                 if (unit >= 128) {
                     boolean[] row = new boolean[atoms.length + 1];
                     for (int atom = 0; atom <= atoms.length; atom++) {
@@ -229,7 +236,7 @@ final class M3PatternQuery {
          * One invocation-local frontier, at most five words. OLD predecessor carry advances
          * a consuming edge; NEW closed predecessor carry advances an epsilon edge. Keeping
          * those carries distinct permits serial in-place updates across 64-bit boundaries.
-         * A dead frontier does not bypass later non-ASCII/surrogate interpretation.
+         * Non-ASCII input continues from the same exact prefix frontier.
          */
         private int matchesWideAscii(String input, long[] masks) {
             int words = (atoms.length >>> 6) + 1;
@@ -268,16 +275,57 @@ final class M3PatternQuery {
             return (state[last] & masks[135 * words + last]) != 0L ? 1 : 0;
         }
 
-        /** Original one-row DP kept as the non-ASCII and optional-metadata fallback. */
+        /** Bounded rolling DP for non-ASCII input and optional-metadata absence. */
         private int matchesRolling(String input) {
             return matchesRolling(input, empty.clone(), 0);
         }
 
         /** Continue from a proved prefix frontier without rereading the input prefix. */
         private int matchesRolling(String input, boolean[] row, int start) {
+            // If every atom is optional, a live first star closes every later state.
+            // Its general-width predicate can consume this prefix without changing
+            // that frontier. BMP nodes must retain the intermediate-unit paths below.
+            if (empty[atoms.length] && codePoint[0] && row[1]) {
+                while (start < input.length()) {
+                    int cp = Character.codePointAt(input, start);
+                    if (!atoms[0].is(cp)) break;
+                    row[0] = false;
+                    start += Character.charCount(cp);
+                }
+                if (start == input.length()) return 1;
+            }
+            boolean[] middle = null;
             for (int offset = start; offset < input.length(); offset++) {
                 char unit = input.charAt(offset);
-                if (Character.isSurrogate(unit)) return -1;
+                if (Character.isHighSurrogate(unit) && offset + 1 < input.length()
+                        && Character.isLowSurrogate(input.charAt(offset + 1))) {
+                    char low = input.charAt(++offset);
+                    int cp = Character.toCodePoint(unit, low);
+                    if (middle == null) middle = new boolean[atoms.length + 1];
+                    // General nodes consume the pair. BMP nodes may consume its high unit,
+                    // leaving a distinct frontier at the low unit. Keep both possibilities;
+                    // calling every predicate with cp would erase the latter path.
+                    middle[0] = false;
+                    for (int atom = 0; atom < atoms.length; atom++) {
+                        boolean consumesHigh = !codePoint[atom] && atoms[atom].is(unit);
+                        middle[atom + 1] = repeated[atom]
+                                ? middle[atom] || (row[atom + 1] && consumesHigh)
+                                : row[atom] && consumesHigh;
+                    }
+                    boolean diagonal = row[0];
+                    row[0] = false;
+                    for (int atom = 0; atom < atoms.length; atom++) {
+                        boolean above = row[atom + 1];
+                        row[atom + 1] = repeated[atom]
+                                ? row[atom] || (above && codePoint[atom] && atoms[atom].is(cp))
+                                        || (middle[atom + 1] && atoms[atom].is(low))
+                                : (diagonal && codePoint[atom] && atoms[atom].is(cp))
+                                        || (middle[atom] && atoms[atom].is(low));
+                        diagonal = above;
+                    }
+                    continue;
+                }
+                // An unpaired surrogate is one code point and one UTF-16 unit in Matcher.
                 boolean diagonal = row[0];
                 row[0] = false;
                 for (int atom = 0; atom < atoms.length; atom++) {
