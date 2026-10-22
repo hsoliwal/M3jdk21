@@ -33,11 +33,11 @@ MOP therefore accumulates reusable, testable improvements rather than relying on
 
 ### 2.1 Canonical ownership and related contracts
 
-This target-side specification extends the existing [recipe atom, evidence, and DAG contract](recipe-atom-evidence-and-dag.md), subject to the [M3JDK21 porting and naming invariant](m3jdk21-porting-invariant.md) and [first-party rights notice](../../M3-SYNEXIA-RIGHTS.md). It does not supersede their ownership, license, admission, or receiving-order requirements.
+This target-side specification extends the existing [recipe atom, evidence, and DAG contract](recipe-atom-evidence-and-dag.md), subject to the [M3JDK21 porting and naming invariant](m3jdk21-porting-invariant.md) and [first-party rights notice](../../M3-SYNEXIA-RIGHTS.md). It preserves their license, admission and receiving-order requirements. For recipe and improvement-memory placement, the exclusive Synexia boundary below and the current repository agent instructions supersede older wording that allowed target-side recipe or memory mirrors.
 
-**Synexia (`hsoliwal/com.synexia`) remains the canonical owner of reusable Maven/OpenRewrite recipes, their correction memory, fixtures, source seals, provenance, and convergence receipts. M3JDK21 owns the integrated Java/HotSpot/JNI product and target acceptance.** Recipe-owned memory follows that existing canonical recipe authority. Improvements to a reusable recipe MUST return as new Synexia convergence evidence; target records link the exact recipe revision, event hashes, license lineage, and executed target receipts.
+**Synexia (`hsoliwal/com.synexia`) is the exclusive convergence workspace for authoring, storing and executing reusable Maven/OpenRewrite recipes and their execution machinery, correction memory, recipe fixtures, source seals, provenance and convergence receipts. M3JDK21 owns the integrated Java/HotSpot/JNI product and target acceptance.** Recipe-owned memory follows that existing canonical recipe authority. Improvements to a reusable recipe MUST return as new Synexia convergence evidence; target records link the exact recipe revision, event hashes, license lineage, and executed target receipts.
 
-A target-local mirror MUST retain exact canonical provenance and MUST NOT become a competing recipe or memory authority. Target-specific observations can remain target-owned while linking back to the canonical correction record. No new recipe engine, global store, Synexia runtime service, Maven runtime dependency, or phase advancement is authorized by this document. M3JDK21 is the integrated product, not an overlay over an unchanged JDK.
+M3JDK21 and other public product forks MUST receive only executed recipe results and their data-only provenance and target acceptance evidence, not recipe sources, recipe execution machinery or improvement-memory mirrors. Recipe memory events, lesson stores, indexes, writers and retrievers MUST remain in Synexia. Target receipts may reference exact Synexia recipe revisions and event hashes without embedding recipe or memory payloads. Target-specific acceptance observations can remain target-owned while linking back to the Synexia correction record. Conceptual documentation, including the illustrative layout and interface in this specification and its companion paper, is not an executable recipe or memory store and does not authorize deploying either downstream. No new recipe engine, global store, Synexia runtime service, Maven runtime dependency, or phase advancement is authorized by this document. M3JDK21 is the integrated product, not an overlay over an unchanged JDK.
 
 ### 2.2 Terms
 
@@ -99,7 +99,7 @@ Unknown information MUST be labeled unknown. Missing tests MUST be labeled `NOT_
 
 The recipe's authoritative memory MUST be append-only. A later event may reject, revoke, supersede, or narrow a previous conclusion, but MUST NOT silently rewrite the original evidence. Erroneous records MUST be corrected through linked amendments. Sensitive data accidentally captured must be handled under the repository's authorized security/removal procedure; append-only design is not a justification for retaining secrets.
 
-A practical illustrative layout under the existing canonical recipe owner is:
+A practical illustrative layout inside Synexia, never in M3JDK21 or another public product fork, is:
 
 - `recipes/<recipe-id>/recipe.*`: owning transformation and version metadata.
 - `recipes/<recipe-id>/memory/events/<event-digest>.json`: immutable structured events.
@@ -168,7 +168,7 @@ Memory SHOULD contain concise factual rationale, not hidden chain-of-thought or 
 
 ## 7. Java 21 and JNI architectural integration
 
-For M3JDK21, an implementation SHOULD expose this contract through existing recipe, catalogue, provenance, and verification owners rather than create an unrelated integration layer. The following are requirements for future qualification, not claims about present implementation:
+Within Synexia, an implementation SHOULD expose this contract through existing recipe, catalogue, provenance and verification owners rather than create an unrelated integration layer. Java 21 here identifies an implementation language, not permission to place recipe execution or memory machinery in M3JDK21. The JDK receiver retains executed product results and data-only provenance/target acceptance evidence, not this subsystem. The following are requirements for future qualification, not claims about present implementation:
 
 - Java 21 may perform schema validation, canonical serialization, digest verification, indexing, and lesson retrieval using deterministic behavior.
 - JNI/native recipes must pin native source, compiler, flags, ABI, target, and runtime conditions alongside Java inputs.

@@ -5,8 +5,10 @@
 ## Recipe Owned Memory for Self Improving Coding Agents
 
 **Hitesh Soliwal · Synexia**  
-Technical design paper · Version 1.0 · 20 October 2026  
-Project destination: M3JDK21  
+Technical design paper · Version 1.1 · 22 October 2026
+
+Documentation destination: M3JDK21 · Recipe execution and memory workspace: Synexia
+
 Companion invariant: SYNEXIA-MOP-RECIPE-MEMORY-1
 
 Copyright 2026 Hitesh Soliwal and contributors.  
@@ -29,7 +31,7 @@ The central invariant is: **each time an LLM, coding agent or developer corrects
 
 MOP is the name used here for the Synexia Machine-Oriented Programming approach. Its durable state comprises explicit source identities, transformations, contracts and evidence, rather than dependence on a particular conversation or model instance. “Self-improving” means that the engineering system accumulates qualified improvements and makes them available to later agents. It does not mean that a model retrains its weights, that every generated correction improves the system, or that the agent gains authority from its own records.
 
-The existing repository ownership split remains controlling. Synexia is the canonical convergence workspace for reusable Maven/OpenRewrite recipes, their fixtures, source seals, provenance and correction memory. M3JDK21 owns the delivered integrated Java, HotSpot and JNI product and its target acceptance. A target copy or proof-tooling mirror retains exact canonical lineage; it does not become a competing recipe implementation. Target-specific observations may be stored with the target and linked back to the canonical event. No Synexia runtime service is introduced into the JDK by this proposal.
+The existing repository ownership split remains controlling. Synexia is the exclusive convergence workspace for authoring, storing and executing reusable Maven/OpenRewrite recipes, their execution machinery, recipe fixtures, source seals, provenance and correction memory. M3JDK21 owns the delivered integrated Java, HotSpot and JNI product and its target acceptance. M3JDK21 and other public product forks receive only executed recipe results and data-only provenance/target acceptance evidence. They must not contain recipe sources, recipe execution machinery, correction-memory events, lesson stores, indexes or mirrors. Target-specific acceptance observations may be stored with the target and reference exact Synexia recipe/event identities without copying their payloads. Conceptual documentation may explain the design; it is not an executable recipe or a deployed memory store. This placement rule supersedes older target-copy or proof-tooling-mirror allowances in the historical references, without changing their copyright or license grants. No Synexia runtime service is introduced into the JDK by this proposal.
 
 The companion operational specification defines mandatory requirements and the illustrative MOP-RCM/1.0 record profile. This paper explains the rationale and evaluation model. Neither document advances the repository's staged receiving order or substitutes documentation for implementation. Existing public API, licensing, source-custody and target-runtime requirements remain in force [1–4].
 
@@ -55,7 +57,7 @@ The applicable memory for a task is a derived view of valid events whose recipe 
 
 ## 5 Architecture and correction lifecycle
 
-The proposed architecture has five logical responsibilities: a canonical recipe owner; an immutable event store associated with that owner; retained fixtures and evidence; rebuildable machine and human indexes; and an admission evaluator. These are responsibilities, not a requirement for five new services. Existing repository, catalogue and verification infrastructure should implement them where possible. The target receiver records which exact canonical recipe and event produced a target change and which target gates were executed.
+The proposed architecture has five logical responsibilities: a canonical recipe owner; an immutable event store associated with that owner; retained fixtures and evidence; rebuildable machine and human indexes; and an admission evaluator. These are responsibilities, not a requirement for five new services. Existing Synexia repository, catalogue and verification infrastructure should implement them where possible; these recipe and improvement-memory responsibilities remain inside Synexia. The target receiver records which exact canonical recipe and event produced a target change and which target gates were executed.
 
 The lifecycle begins with **recall**. Before changing a recipe, the agent retrieves applicable lessons, unsuccessful approaches, exclusions and revoked conclusions. It compares current source and dependency identities with the recorded preconditions. A stale result remains a lead, not an instruction. The agent then identifies the failure, atomizes the affected behavior, patternizes a proposed repair and changes the owning recipe rather than only its generated output.
 
@@ -93,7 +95,7 @@ Memory is evidence, not authority. Logs, donor comments, example prompts and ret
 
 ## 9 Java and JNI integration boundaries
 
-Java 21 can provide deterministic validation, serialization, hashing, indexing and retrieval through existing recipe and provenance owners. This is a proposed implementation direction, not a statement that such a complete memory subsystem has shipped. Array-backed representations, offsets and masks may support internal storage, but choosing them does not relax public contracts or eliminate the need to measure retained heap and native memory.
+Inside Synexia, Java 21 can provide deterministic validation, serialization, hashing, indexing and retrieval through existing recipe and provenance owners. Java 21 identifies the implementation language; it does not place this subsystem in the JDK or another public product fork. This is a proposed implementation direction, not a statement that such a complete memory subsystem has shipped. Array-backed representations, offsets and masks may support internal storage, but choosing them does not relax public contracts or eliminate the need to measure retained heap and native memory.
 
 For JNI-related recipes, evidence must identify Java and native source revisions, compiler and flags, ABI, target and runtime conditions. Preconditions must include relevant array ownership, pinning or copying behavior, bounds, lifetimes, mutation visibility and exception handling. A Java-side pass cannot establish native safety, and one native platform's results cannot be propagated to other backends. Target qualification must retain its own exact receipts while linking the canonical recipe event.
 
@@ -119,7 +121,7 @@ A recipe should carry forward the engineering knowledge created when it is corre
 
 ## Proposed Java interface contract
 
-The following Java 21 boundary sketch makes the interaction explicit. It is a proposed interface, not an installed SDK API or a storage implementation. `appendEvent` handles correction, verification, admission, rejection, supersession and revocation by appending events; no method edits an old event in place. An adapter must implement exact profile validation, expected-frontier comparison, durable publication and bounded retrieval through the existing canonical owner. Constructor null checks and immutable list snapshots are not substitutes for those semantic checks.
+The following Java 21 boundary sketch makes the interaction explicit. Its implementation and execution owner is exclusively the Synexia convergence workspace, not M3JDK21 or another public product fork. This documentation-only sketch is a proposed interface, not an installed SDK API, executable recipe or storage implementation. `appendEvent` handles correction, verification, admission, rejection, supersession and revocation by appending events; no method edits an old event in place. An adapter must implement exact profile validation, expected-frontier comparison, durable publication and bounded retrieval through the existing canonical owner. Constructor null checks and immutable list snapshots are not substitutes for those semantic checks.
 
 The expected revision is an optimistic-concurrency token, and the parent digests describe the event frontier observed by the caller. A stale token or incompatible parent set must be refused, allowing the caller to retrieve and reconcile without losing another writer's history. Errors, interruption, conflicts and successful durable appends must remain distinguishable in a concrete binding. The eventual owning API must define typed failure outcomes and retry/idempotency semantics; this sketch does not pretend that an unspecified exception contract already provides them.
 

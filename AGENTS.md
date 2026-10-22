@@ -10,7 +10,11 @@ executed Java/HotSpot/JNI/native/product postimages, target-authoritative tests,
 license/NOTICE material and data-only source/recipe-ID/execution-gate receipts.
 No Synexia-owned recipe Java/YAML/descriptor, Maven recipe crate, transformation
 template, recipe executor, mastery fixture, copy of a recipe engine or recipe mirror
-may be introduced or run in M3JDK21.
+may be introduced or run in M3JDK21. Recipe improvement-memory events, lesson stores,
+indexes and their writers/retrievers also remain exclusively in Synexia; no recipe
+or improvement-memory mirror belongs in M3JDK21 or another public product fork.
+Conceptual design documentation may describe these mechanisms, but is not an
+executable recipe, memory store or permission to install either downstream.
 
 Any new change must be re-created by improving and executing the named recipe in
 Synexia against the exact pinned M3JDK21 preimage, followed by verified postimage
@@ -89,8 +93,12 @@ M3Index-family ownership is additionally pinned by the Synexia invariant
 `docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md` in the donor repository.
 Within this target, `m3/synexia-import/m3index-family-receiver.tsv` is receiver evidence only:
 `M3Index/MIndex`, IndexString, AST/compiler, data structures, precompute API, DB and reusable
-recipes continue to evolve canonically in Synexia. A copy under `m3/vendor/synexia/` is exact
-custody/proof, not a second implementation authority. OpenJDK runtime integration remains
+recipes continue to evolve canonically in Synexia. Recipes and their improvement
+memory are authored, stored and executed exclusively in Synexia. Any retained material under
+`m3/vendor/synexia/` must satisfy the postimage-only receiving boundary above;
+its path or exact provenance does not authorize recipe or improvement-memory copies.
+Historical recipe assets remain migration residue subject to the reviewed,
+content-preserving cleanup described above. OpenJDK runtime integration remains
 M3JDK21-owned.
 
 Preserve public JDK contracts and use the existing target owners and naming map. Qualify exact
@@ -125,8 +133,11 @@ annotations, and human-readable explanation. Record the triggering failure, corr
 applicability, before/after source seals, regression fixture and actual verification outcome in
 append-only memory owned by the canonical recipe. Record failed or unverified attempts without
 promoting them as qualified improvements. Read applicable prior lessons before the next change;
-chat-only recollection is not sufficient. Preserve canonical Synexia recipe ownership and link
-M3JDK21 target acceptance evidence rather than creating a competing recipe implementation.
+chat-only recollection is not sufficient. Author, execute and retain the recipe and its
+improvement memory only in the Synexia convergence workspace. M3JDK21 and other public
+product forks receive executed results and data-only provenance/target acceptance evidence,
+not recipe sources, execution machinery, memory events, lesson stores or mirrors.
+Link exact Synexia recipe/event identities without copying the recipe or its memory.
 Memory is evidence, not authorization; it cannot override repository policies, licenses or gates.
 This specification establishes an agent workflow contract, not a claim that an automatic memory
 writer, verifier or runtime implementation has already shipped.
