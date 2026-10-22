@@ -1,5 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026 by Hitesh Soliwal and contributors: retain invalidation
+// witnesses, reject the blanket reentry guard, and exercise actual JNI when required.
 package com.m3.collections;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /** Self-contained Java21 oracle; no JUnit or native binary needed. */
 public final class M3IndexedLiveViewContract {
@@ -97,7 +100,100 @@ public final class M3IndexedLiveViewContract {
         ints.sort(null);
         assertEqual(natural, List.of(1, 2, 3));
         assertEqual(natural.physicalIndex(0), 0);
+        reentrantPreparationContracts();
         randomDifferential();
+    }
+
+    private static void reentrantPreparationContracts() {
+        M3ArrayList<Integer> owner = new M3ArrayList<>(List.of(3, 1, 2));
+
+        // Invalidation during predicate execution must abort publication.
+        AtomicReference<M3IndexedLiveView<Integer>> filteredRef = new AtomicReference<>();
+        AtomicInteger filterCalls = new AtomicInteger();
+        M3IndexedLiveView<Integer> filteredView = M3IndexedLiveView.filtered(owner, value -> {
+            if (filterCalls.getAndIncrement() == 0) filteredRef.get().invalidate();
+            return value > 0;
+        });
+        filteredRef.set(filteredView);
+        fails(ConcurrentModificationException.class, filteredView::size);
+        assertEqual(filteredView, List.of(3, 1, 2));
+
+        // Sorting cannot publish an obsolete physical index after invalidation.
+        AtomicReference<M3IndexedLiveView<Integer>> sortedRef = new AtomicReference<>();
+        AtomicInteger comparisonCalls = new AtomicInteger();
+        M3IndexedLiveView<Integer> sortedView = M3IndexedLiveView.sorted(owner, (left, right) -> {
+            if (comparisonCalls.getAndIncrement() == 0) sortedRef.get().invalidate();
+            return Integer.compare(left, right);
+        });
+        sortedRef.set(sortedView);
+        fails(ConcurrentModificationException.class, sortedView::size);
+        assertEqual(sortedView, List.of(1, 2, 3));
+        assertEqual(Arrays.toString(sortedView.physicalIndices()), "[1, 2, 0]");
+
+        // Existing documentation rejects parent mutation, not finite read-only reentry.
+        M3IndexedLiveReentryContract.contracts();
+        assertEqual(sortedView.size(), 3);
+        assertEqual(filteredView.size(), 3);
+        callbackExceptionIdentityContracts(owner);
+        nativeSelectionContracts(owner);
+    }
+
+    private static void sameFailure(Throwable expected, Runnable action) {
+        try {
+            action.run();
+        } catch (Throwable thrown) {
+            if (thrown != expected) {
+                throw new AssertionError("callback exception identity changed", thrown);
+            }
+            checks++;
+            return;
+        }
+        throw new AssertionError("missing callback exception");
+    }
+
+    private static void callbackExceptionIdentityContracts(M3ArrayList<Integer> owner) {
+        RuntimeException predicateFailure = new IllegalStateException("predicate marker");
+        AtomicReference<M3IndexedLiveView<Integer>> filterRef = new AtomicReference<>();
+        AtomicInteger filters = new AtomicInteger();
+        M3IndexedLiveView<Integer> filtered = M3IndexedLiveView.filtered(owner, value -> {
+            if (filters.getAndIncrement() == 0) {
+                filterRef.get().invalidate();
+                throw predicateFailure;
+            }
+            return true;
+        });
+        filterRef.set(filtered);
+        sameFailure(predicateFailure, filtered::size);
+        assertEqual(filtered, List.of(3, 1, 2));
+
+        RuntimeException comparatorFailure = new IllegalStateException("comparator marker");
+        AtomicReference<M3IndexedLiveView<Integer>> sortRef = new AtomicReference<>();
+        AtomicInteger comparisons = new AtomicInteger();
+        M3IndexedLiveView<Integer> sorted = M3IndexedLiveView.sorted(owner, (left, right) -> {
+            if (comparisons.getAndIncrement() == 0) {
+                sortRef.get().invalidate();
+                throw comparatorFailure;
+            }
+            return Integer.compare(left, right);
+        });
+        sortRef.set(sorted);
+        sameFailure(comparatorFailure, sorted::size);
+        assertEqual(sorted, List.of(1, 2, 3));
+    }
+
+    private static void nativeSelectionContracts(M3ArrayList<Integer> owner) {
+        if (!M3IndexMaskCompactor.nativeAvailable()) return;
+        AtomicInteger calls = new AtomicInteger();
+        M3IndexedLiveView<Integer> nativeView = M3IndexedLiveView.filteredSorted(owner, value -> {
+            calls.incrementAndGet();
+            return (value & 1) != 0;
+        }, Integer::compare, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+        assertEqual(nativeView, List.of(1, 3));
+        assertEqual(Arrays.toString(nativeView.physicalIndices()), "[1, 0]");
+        assertEqual(calls.get(), 3);
+        nativeView.invalidate();
+        assertEqual(nativeView.size(), 2);
+        assertEqual(calls.get(), 6);
     }
 
     private static void randomDifferential() {
@@ -129,6 +225,10 @@ public final class M3IndexedLiveViewContract {
     private static Integer randomValue(Random r) { return r.nextInt(8) == 0 ? null : r.nextInt(13) - 6; }
 
     public static void main(String[] args) {
+        if (Arrays.asList(args).contains("--require-native")
+                && !M3IndexMaskCompactor.nativeAvailable()) {
+            throw new AssertionError("JNI mask peer unavailable; native live-view gate cannot pass");
+        }
         contracts();
         System.out.println("M3_INDEXED_LIVE_VIEW_PASS checks=" + checks);
     }

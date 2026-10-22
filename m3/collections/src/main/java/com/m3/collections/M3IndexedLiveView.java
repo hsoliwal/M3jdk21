@@ -1,5 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026 by Hitesh Soliwal and contributors: reject an invalidated
+// preparation while preserving finite read-only callback reentry.
 package com.m3.collections;
 
 import java.util.AbstractList;
@@ -95,10 +97,20 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
         }
     }
 
+    /** A callback can also invalidate this view without changing parent epochs. */
+    private void checkPreparation(int expectedStructure, long expectedValue,
+            long expectedInvalidation) {
+        checkEpoch(expectedStructure, expectedValue);
+        if (invalidationEpoch != expectedInvalidation) {
+            throw new ConcurrentModificationException("M3 indexed view invalidated during preparation");
+        }
+    }
+
     private void refresh() {
         int structure = owner.m3StructureEpoch();
         long values = owner.m3ValueEpoch();
         if (prepared && structure == structureEpoch && values == valueEpoch) return;
+        long expectedInvalidation = invalidationEpoch;
         if (filter != null && backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED
                 && !M3IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
@@ -111,21 +123,21 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
         } else {
             byte[] selectedMask = new byte[length];
             for (int i = 0; i < length; i++) {
-                checkEpoch(structure, values);
+                checkPreparation(structure, values, expectedInvalidation);
                 E value = owner.get(i);
                 selectedMask[i] = (byte) (filter.test(value) ? 1 : 0);
-                checkEpoch(structure, values);
+                checkPreparation(structure, values, expectedInvalidation);
             }
             selected = M3IndexMaskCompactor.selectPositions(selectedMask, 1, backend);
         }
-        checkEpoch(structure, values);
+        checkPreparation(structure, values, expectedInvalidation);
         if (sorted) {
             M3IndexSort.stable(selected, index -> {
-                checkEpoch(structure, values);
+                checkPreparation(structure, values, expectedInvalidation);
                 return owner.get(index);
             }, comparator);
         }
-        checkEpoch(structure, values);
+        checkPreparation(structure, values, expectedInvalidation);
         // One publication after all callbacks, JNI selection and sorting complete.
         physical = selected;
         structureEpoch = structure;
