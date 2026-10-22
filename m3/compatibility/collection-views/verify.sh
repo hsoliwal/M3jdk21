@@ -9,7 +9,7 @@ OUT="$1"
 mkdir -p "$OUT"
 (cd "$ROOT" && sha256sum -c <<'SEALS'
 6759e1c605be7c52c3471767879cfa4aec7751e220699f6af49a43ba0902660b  src/java.base/share/classes/java/util/CollectionViews.java
-a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d  m3/runtime-integration/stored-occurrence-20261021/preimage/CollectionViews.java.txt
+a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d  m3/compatibility/collection-views/preimage/CollectionViews.java.txt
 f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6  test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
 SEALS
 ) | tee "$OUT/seals.log"
@@ -17,7 +17,7 @@ java -version > "$OUT/java-version.log" 2>&1
 javac -version > "$OUT/javac-version.log" 2>&1
 mkdir -p "$OUT"/{before-src,after-src,before-classes,after-classes,test-classes}
 mkdir -p "$OUT"/{before-src,after-src}/java/util
-cp "$ROOT/m3/runtime-integration/stored-occurrence-20261021/preimage/CollectionViews.java.txt" "$OUT/before-src/java/util/CollectionViews.java"
+cp "$ROOT/m3/compatibility/collection-views/preimage/CollectionViews.java.txt" "$OUT/before-src/java/util/CollectionViews.java"
 cp "$ROOT/src/java.base/share/classes/java/util/CollectionViews.java" "$OUT/after-src/java/util/CollectionViews.java"
 javac --patch-module java.base="$OUT/before-src" -Xlint:all -Werror -d "$OUT/before-classes" "$OUT/before-src/java/util/CollectionViews.java"
 javac --patch-module java.base="$OUT/after-src" -Xlint:all -Werror -d "$OUT/after-classes" "$OUT/after-src/java/util/CollectionViews.java"
