@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors.
 // Modified 2026: primitive query staging and immutable fact-key sharing.
+// Modified 2026-10-21: adaptive gallop for dense prepared containment.
 package jdk.internal.mindex;
 
 import java.util.ArrayList;
@@ -330,8 +331,9 @@ public final class M3TQ {
      *
      * <p>This is still only a substring/regex necessary condition: membership discards ordering
      * and multiplicity, so true always requires exact verification. Sparse requirements use
-     * O(m log n) membership lookups; dense requirements retain the O(n + m) merge. Neither
-     * path allocates metadata or reads the original payload.</p>
+     * O(m log n) membership lookups; dense requirements use an O(n + m) merge that
+     * adaptively gallops over long source-only runs. Neither path allocates metadata
+     * or reads the original payload.</p>
      */
     public boolean containsAll(Facts required) {
       Objects.requireNonNull(required, "required");
@@ -352,18 +354,58 @@ public final class M3TQ {
 
       int source = 0;
       int needle = 0;
+      int minGallop = 7;
+      final int maxGallop = 64;
       while (source < keys.length && needle < required.keys.length) {
         long left = keys[source];
         long right = required.keys[needle];
-        if (left < right) source++;
-        else if (left == right) {
-          source++;
-          needle++;
-        } else {
-          return false;
+        if (left < right) {
+          int remaining = minGallop;
+          do {
+            if (++source == keys.length) return false;
+            left = keys[source];
+          } while (left < right && --remaining > 0);
+          if (left < right) {
+            int next = gallopFactKey(keys, source, right);
+            // Reward useful skips; back off when adjacent merge work is cheaper.
+            minGallop = next - source >= minGallop
+                ? Math.max(1, minGallop - 1) : Math.min(maxGallop, minGallop + 1);
+            source = next;
+            if (source == keys.length) return false;
+            left = keys[source];
+          }
         }
+        if (left != right) return false;
+        source++;
+        needle++;
       }
       return needle == required.keys.length;
+    }
+
+    /**
+     * First key >= value in a trusted sorted suffix. Adapted from Synexia's
+     * PackedPrimitiveArrayOps long[] gallopBound/bound; no key or payload copy.
+     */
+    private static int gallopFactKey(long[] sorted, int from, long value) {
+      int to = sorted.length;
+      if (from == to || sorted[from] >= value) return from;
+      int low = from + 1;
+      int high = to;
+      // Long offsets keep exponential probes safe at the int array-index boundary.
+      for (long offset = 1; (long) from + offset < to; offset = (offset << 1) + 1) {
+        int probe = (int) ((long) from + offset);
+        if (sorted[probe] >= value) {
+          high = probe;
+          break;
+        }
+        low = probe + 1;
+      }
+      while (low < high) {
+        int mid = low + ((high - low) >>> 1);
+        if (sorted[mid] < value) low = mid + 1;
+        else high = mid;
+      }
+      return low;
     }
 
     /**
