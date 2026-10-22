@@ -353,13 +353,20 @@ public final class CollectionViews {
         public boolean remove(Object candidate) {
             if (!backing.contains(candidate)) return false;
             if (backing instanceof List<?>) {
-                // Remove the selected physical occurrence, not an earlier
-                // equal occurrence that was hidden by the filter.
+                // Prefer the owner's iterator mutation for the visible physical
+                // occurrence. Snapshot iterators (e.g. CopyOnWriteArrayList)
+                // require indexed removal instead.
                 List<E> list = (List<E>) backing;
+                Iterator<E> iterator = list.iterator();
                 int physical = 0;
-                for (E stored : list) {
+                while (iterator.hasNext()) {
+                    E stored = iterator.next();
                     if (Objects.equals(candidate, stored) && visible(stored)) {
-                        list.remove(physical);
+                        try {
+                            iterator.remove();
+                        } catch (UnsupportedOperationException unsupported) {
+                            list.remove(physical);
+                        }
                         return true;
                     }
                     physical++;

@@ -61,7 +61,8 @@ jobs:
             "$P/FilteredCopyOnWriteBulkTest.java" \
             "$P/FilteredIsEmptyDirectTest.java" \
             "$P/FilteredOwnerMembershipTest.java" \
-            "$P/StoredRepresentativeOracle.java"
+            "$P/StoredRepresentativeOracle.java" \
+            "$P/FilteredListRemoveContractTest.java"
       - name: Run original java.base API contract and five regression classes
         shell: bash
         run: |
@@ -79,6 +80,7 @@ jobs:
           "${JDK[@]}" FilteredIsEmptyDirectTest
           "${JDK[@]}" FilteredOwnerMembershipTest
           "${JDK[@]}" StoredRepresentativeOracle
+          "${JDK[@]}" FilteredListRemoveContractTest
       - name: Confirm first-party in-place JDK ownership
         shell: bash
         run: |
