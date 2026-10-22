@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: hsoliwal/M3jdk21
-          ref: 378da3e595c0279faea28fb3a172e1f307c9db8d22a
+          ref: m3/interop-three-test-compile-receiver-20261022
           path: previous-product
           sparse-checkout: |
             m3/collections/interop
