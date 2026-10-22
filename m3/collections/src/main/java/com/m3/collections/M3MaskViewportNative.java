@@ -12,4 +12,9 @@ final class M3MaskViewportNative {
     static native int project(int[] logicalOffsets, int[] states, int first,
             int length, int requiredBits, int forbiddenBits, int[] target,
             int targetOffset);
+
+    /** Native resident-page projection; the Java CPU model remains authoritative. */
+    static native int projectPage(int[] logicalOffsets, int[] states, int first,
+            int length, int requiredBits, int forbiddenBits, int skipVisible,
+            int maxVisible, int[] target, int targetOffset);
 }
