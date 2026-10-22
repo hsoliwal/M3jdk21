@@ -67,7 +67,16 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Build original source-owned JUnit dependency closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 \
+            -am -DskipTests install
       - name: Original collection module POM with new/old JUnit
-        run: >
-          mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=M3IndexPathRankTest,M3IndexPathRankBulkTest test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3IndexPathRankTest,M3IndexPathRankBulkTest test
