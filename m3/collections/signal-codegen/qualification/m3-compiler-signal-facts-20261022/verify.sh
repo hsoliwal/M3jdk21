@@ -3,7 +3,7 @@
 # Copyright 2026 Hitesh Soliwal and contributors.
 set -euo pipefail
 export LC_ALL=C
-home="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+home="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
 manifest="$home/m3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/SOURCE_MANIFEST.tsv"
 last=''
 count=0
