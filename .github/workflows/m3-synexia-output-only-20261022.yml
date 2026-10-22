@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: hsoliwal/com.synexia
-          ref: 5e27da4ab852de517439c744f44320206399ecc2
+          ref: 4cf4440bbdfd785976e59d9abedc52626d42e519
           path: .synexia-convergence
           persist-credentials: false
           token: ${{ secrets.SYNEXIA_READER_TOKEN }}
