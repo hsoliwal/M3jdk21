@@ -24,6 +24,14 @@ PACKAGE = re.compile(r"(?m)^\s*package\s+([a-zA-Z_$][\w$]*(?:\.[a-zA-Z_$][\w$]*)
 PUBLIC = re.compile(r"\bpublic\s+(?:(?:abstract|final|sealed|non-sealed)\s+)*"
                     r"(?:class|interface|enum|record)\s+([A-Za-z_$][\w$]*)\b")
 JDK_SOURCE = re.compile(r"^src/[^/]+/(?:share|unix|linux|windows|macosx|bsd)/classes/(java|javax)/")
+RECIPE_ROOTS = (
+    "synexia-openrewrite-recipes/",
+    "synexia-m3-recipe/",
+    "m3/tooling/migration-recipes/",
+)
+RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
+RECIPE_JAVA = re.compile(r"(?:^|/)(?:rewrite|recipes?)/[^/]*Recipe(?:Test)?\.java$")
+
 
 
 @dataclass(frozen=True)
@@ -71,9 +79,15 @@ def changes(root: Path, base: str, head: str) -> list[Change]:
 def problems(change: Change, text: str | None = None) -> list[str]:
     path = change.path
     added = change.status.startswith(("A", "C", "R"))
+    # Legacy public-repository recipe sources are custody, not a second
+    # ongoing convergence workspace. Refuse their modification as well.
+    if path.startswith(RECIPE_ROOTS):
+        return ["Maven/OpenRewrite recipe sources belong exclusively in Synexia"]
     if not added:
-        return []  # preserve existing names; changes to them require contract proof separately
+        return []  # existing product APIs are separately guarded
     found = []
+    if RECIPE_DESCRIPTOR.search(path) or RECIPE_JAVA.search(path):
+        found.append("new transformation recipe source/descriptor belongs in Synexia")
     parts = PurePosixPath(path).parts
     name = parts[-1]
     if any(DATE.search(seg) or VERSION.search(seg) for seg in parts):
