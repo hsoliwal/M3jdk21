@@ -50,6 +50,41 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
     return COMPOUND_TRANSITION
 
 
+# This ledger is a source-sealed extension, not a modification of the
+# original 36+7+40 history or the previous one-test compound-var transition.
+COMPILER_RECEIPT_BLOB = 'b232af6a8867ebba2ffe7082b37ea5d07f663472'
+APACHE_TEST = TEST + 'M3ApacheCollectionsTest.java'
+COMPILER_TEST_PATHS = (
+    APACHE_TEST,
+    TEST + 'M3FiveLibraryKeyRangesTest.java',
+    TEST + 'M3FiveProviderFlagSelectionTest.java',
+)
+COMPILER_RECIPE = 'com.synexia.m3.M3Jdk21InteropThreeCompilerAtoms20261022'
+
+
+def admitted_compiler_revisions(receipts: Path) -> dict[str, tuple[str, str, str, str]]:
+    receipt = receipts / 'changed-compiler-03.tsv'
+    if receipt.is_symlink() or not receipt.is_file():
+        raise ValueError('missing or aliased exact three-source Java21 compiler receipt')
+    data = receipt.read_bytes()
+    if git_blob(data) != COMPILER_RECEIPT_BLOB:
+        raise ValueError('three-source compiler receipt blob drift')
+    records = [line.split('\t') for line in data.decode('utf-8').splitlines()
+               if line and not line.startswith('#')]
+    if (len(records) != 3 or any(len(row) != 7 for row in records)
+            or tuple(row[0] for row in records) != COMPILER_TEST_PATHS):
+        raise ValueError('unapproved Java21 compiler source path or record count')
+    result: dict[str, tuple[str, str, str, str]] = {}
+    for path, old_sha, old_blob, new_sha, new_blob, recipe, status in records:
+        if (not HEX64.fullmatch(old_sha) or not HEX40.fullmatch(old_blob)
+                or not HEX64.fullmatch(new_sha) or not HEX40.fullmatch(new_blob)
+                or old_sha == new_sha or old_blob == new_blob
+                or recipe != COMPILER_RECIPE or status != 'PENDING_FULL_VENDOR_CI'):
+            raise ValueError('invalid Java21 compiler source revision admission')
+        result[path] = (old_sha, old_blob, new_sha, new_blob)
+    return result
+
+
 def verify_additions(product: Path, receipts: Path,
                      older: set[str], tracked: set[str]) -> list[str]:
     product = product.resolve(strict=True)
@@ -88,6 +123,9 @@ def verify_additions(product: Path, receipts: Path,
         or (receipts / 'changed-01.tsv').is_symlink()) else None
     if successor is not None and successor[0] not in paths:
         raise ValueError('one-test source transition target not admitted')
+    compiler = admitted_compiler_revisions(receipts)
+    if any(path not in paths for path in COMPILER_TEST_PATHS[1:]):
+        raise ValueError('additional compiler source not in frozen 40-owner receipt')
     production = tests = 0
     for relative, sha, blob, family, kind, license_id in rows:
         if (not relative.endswith('.java') or not (relative.startswith(MAIN)
@@ -109,6 +147,11 @@ def verify_additions(product: Path, receipts: Path,
             if (sha, blob) != (successor[1], successor[2]):
                 raise ValueError('invalid one-test predecessor identity')
             sha, blob = successor[3], successor[4]
+        if relative in compiler:
+            before_sha, before_blob, after_sha, after_blob = compiler[relative]
+            if (sha, blob) != (before_sha, before_blob):
+                raise ValueError('invalid Java21 compiler owner preimage: ' + relative)
+            sha, blob = after_sha, after_blob
         if (hashlib.sha256(data).hexdigest() != sha or git_blob(data) != blob
                 or b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]):
             raise ValueError('source SHA, Git blob or license header drift: ' + relative)
@@ -178,6 +221,13 @@ def verify_historical_revisions(product: Path, receipts: Path,
                 or status != 'SOURCE_ONLY_PENDING_CONTRACT'):
             raise ValueError('unadmitted historical source revision: ' + path)
         revised[path] = (new_sha, new_blob)
+    compiler = admitted_compiler_revisions(receipts)
+    apache = compiler[APACHE_TEST]
+    if APACHE_TEST not in legacy or legacy[APACHE_TEST] != apache[:2]:
+        raise ValueError('Apache deprecation test historical identity mismatch')
+    if APACHE_TEST in revised:
+        raise ValueError('Apache source revision collides with historical seven')
+    revised[APACHE_TEST] = apache[2:]
     for path, historic_identity in legacy.items():
         source = product / path
         if (source.is_symlink() or not source.is_file()
