@@ -102,6 +102,15 @@ java -Xint --patch-module "java.base=$tmp/classes" \
   --add-opens "java.base/java.util=ALL-UNNAMED" \
   -cp "$tmp/tests" M3ArrayMaskCallersContract
 
+# Source-built java.base classes with three stock Java21 collectors: stores,
+# reference identity and post-removal tail clearing must remain correct.
+# This is NOT a full custom HotSpot/GC image qualification.
+for collector in UseSerialGC UseParallelGC UseG1GC; do
+  java "-XX:+$collector" --patch-module "java.base=$tmp/classes" \
+    --add-opens "java.base/java.util=ALL-UNNAMED" \
+    -cp "$tmp/tests" M3ArrayMaskCallersContract
+done
+
 # Reuse original JDK integration regression rather than inventing another collection engine.
 java -ea -Xcheck:jni --patch-module "java.base=$tmp/classes" \
   --add-exports "java.base/jdk.internal.mindex=ALL-UNNAMED" \
