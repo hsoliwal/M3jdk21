@@ -40,7 +40,7 @@ jobs:
           set -euo pipefail
           tmp="$(mktemp -d)"
           mkdir -p "$tmp/classes"
-          javac --release 21 -Xlint:all -Werror -d "$tmp/classes" \\
+          javac --release 21 -Xlint:all -Werror -d "$tmp/classes" \
             m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
             m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java \
             m3/collections/src/test/java/com/m3/collections/M3StateMaskSelectContract.java
