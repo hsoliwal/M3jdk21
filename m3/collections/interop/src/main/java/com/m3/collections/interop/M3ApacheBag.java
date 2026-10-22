@@ -116,7 +116,11 @@ public final class M3ApacheBag<E> extends AbstractCollection<E> implements Bag<E
         return changed;
     }
 
-    /** Keep min(ownedCount, inputCount) for every distinct key. */
+    /**
+     * Commons Collections 4.5.0 AbstractMapBag.retainAll parity.
+     * In that release a request for MORE copies than owned removes the owned key.
+     * Preserve its published behavior, including this nonstandard edge case.
+     */
     @Override public boolean retainAll(Collection<?> source) {
         Objects.requireNonNull(source, "source");
         if (source == this) return false;
