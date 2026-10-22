@@ -116,14 +116,20 @@ public final class M3ApacheBag<E> extends AbstractCollection<E> implements Bag<E
         return changed;
     }
 
-    /** Keep min(ownedCount, inputCount) for every distinct key. */
+    /**
+     * Commons AbstractMapBag 4.5 retains requested cardinality only when
+     * 1 <= requestedCount <= ownedCount. A requested excess removes the whole
+     * existing key as well; mirror this donor-specific contract exactly.
+     */
     @Override public boolean retainAll(Collection<?> source) {
         Objects.requireNonNull(source, "source");
         if (source == this) return false;
         M3CountedBag<Object> wanted = tally(source);
         boolean changed = false;
         for (E key : new ArrayList<>(counts.distinctElements())) {
-            int excess = counts.count(key) - wanted.count(key);
+            int owned = counts.count(key);
+            int requested = wanted.count(key);
+            int excess = requested > 0 && requested <= owned ? owned - requested : owned;
             if (excess > 0) changed |= remove(key, excess);
         }
         return changed;

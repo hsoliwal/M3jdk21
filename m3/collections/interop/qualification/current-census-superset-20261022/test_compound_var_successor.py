@@ -65,12 +65,14 @@ class CompoundVarSourceReceiptTest(unittest.TestCase):
         self.assertEqual(census.COMPOUND_TRANSITION[1], found[0][1])
         self.assertEqual(census.COMPOUND_TRANSITION[2], found[0][2])
 
-    def test_corrected_test_is_the_only_admitted_product_image(self):
+    def test_corrected_syntax_chains_into_exact_nine_owner_product_image(self):
         target = ROOT / census.COMPOUND_TEST_PATH
         self.assertTrue(target.is_file(), str(target))
         data = target.read_bytes()
-        self.assertEqual(census.COMPOUND_TRANSITION[3], hashlib.sha256(data).hexdigest())
-        self.assertEqual(census.COMPOUND_TRANSITION[4], census.git_blob(data))
+        successor = census.exact_gate_transitions(HERE / 'receipts')[census.COMPOUND_TEST_PATH]
+        self.assertEqual(census.COMPOUND_TRANSITION[3:5], successor[:2])
+        self.assertEqual(successor[2], hashlib.sha256(data).hexdigest())
+        self.assertEqual(successor[3], census.git_blob(data))
         source = data.decode("utf-8")
         self.assertIn("var left=sorted.slice(0,3);", source)
         self.assertIn("var right=sorted.slice(3,5);", source)
