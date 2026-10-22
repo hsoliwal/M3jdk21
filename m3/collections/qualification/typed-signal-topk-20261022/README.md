@@ -12,7 +12,7 @@ The existing public `M3SignalColumns.compare` still returns its diagnostic sign/
 
 The global String → arrays → collections → AST/compiler receiving order has not been declared complete.
 
-## Independent actual-source JUnit gate while custom fork is unavailable
+## Source-vendored original JUnit and independent portable qualification
 
 The original `m3/collections/pom.xml` declares the test dependency
 `org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1`.
@@ -37,6 +37,23 @@ mvn -B -ntp -f m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
 ```
 
 The focused workflow reports this as **ALTERNATE_JUNIT**.
-The original owning module must independently pass when its customized
-test artifact becomes available. Do not convert a portable pass into an
-unqualified release/whole-JDK/modified-JUnit acceptance.
+The original owning module must independently pass against the **exact source-vendored**
+custom artifact. The previous Maven failure reflected an **uninstalled local source build**,
+not missing source or an unavailable fork: `m3/vendor/third_party/junit-jupiter-5.10.2/`
+already contains the unchanged upstream sources, EPL-2.0 licence and provenance manifests
+and declares precisely `5.10.2-m3-source-1`. The owning JUnit CI job now installs the
+corresponding reactor subset and its source dependencies, verifies donor and packaged legal
+bytes, **then runs the unchanged original collections POM**:
+
+```sh
+mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+  -pl junit-jupiter-5.10.2 -am -DskipTests install
+python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py \
+  m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+mvn -B -ntp -f m3/collections/pom.xml \
+  -Dtest=M3SignalTopKTest,M3SignalColumnsTest,M3SignalDimensionsTest test
+```
+
+This is an **unexecuted source-build/qualified JUnit workflow** until CI reports a result.
+The separately source-sealed JUnit 5.11.4 sidecar remains secondary `ALTERNATE_JUNIT`
+evidence and never replaces exact vendored-source, modified-JDK, JNI or JCK acceptance.
