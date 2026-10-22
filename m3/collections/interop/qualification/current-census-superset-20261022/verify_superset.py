@@ -78,35 +78,104 @@ def verify_additions(product: Path, receipts: Path,
     return paths
 
 
-def verify_product_checkout(product: Path, receipts: Path) -> tuple[int, int]:
-    product = product.resolve(strict=True)
-    previous_script = (product / 'm3/collections/interop/qualification/'
-                       'current-census-20261017/verify.py')
-    if not previous_script.is_file() or previous_script.is_symlink():
-        raise ValueError('original 36-owner census verifier absent')
-    spec = importlib.util.spec_from_file_location('m3_original_census_36', previous_script)
+# Source-history commit at which the immutable 36-owner census was authored.
+# Checking these bytes at a separate pinned checkout is not a semantic DAG walk.
+HISTORICAL_COMMIT = "a720780b1a5ab41ea27182b9b7ad873efdf533b4"
+HISTORICAL_CENSUS_BLOB = "9dbfe94767eb36c9371fd931e7513cb11e168768"
+HISTORICAL_VERIFIER_BLOB = "efe6d0f959cdc3172d6f6659f06bb486ef825291"
+
+
+def verify_historical_revisions(product: Path, receipts: Path,
+                                historical_product: Path) -> tuple[set[str], int]:
+    """Compare two generations without rewriting the historical source receipt."""
+    old_script = ('m3/collections/interop/qualification/'
+                  'current-census-20261017/verify.py')
+    old_census = ('m3/collections/interop/qualification/'
+                  'current-census-20261017/current-source-census.tsv')
+    historic = historical_product.resolve(strict=True)
+    revision = subprocess.check_output(
+        ['git', 'rev-parse', 'HEAD'], cwd=historic, text=True).strip()
+    if revision != HISTORICAL_COMMIT:
+        raise ValueError('wrong historical M3JDK21 source generation: ' + revision)
+    for relative, expected_blob in ((old_script, HISTORICAL_VERIFIER_BLOB),
+                                    (old_census, HISTORICAL_CENSUS_BLOB)):
+        before = historic / relative
+        current = product / relative
+        if (before.is_symlink() or current.is_symlink() or not before.is_file()
+                or not current.is_file()):
+            raise ValueError('missing or aliased original census authority')
+        if (git_blob(before.read_bytes()) != expected_blob
+                or git_blob(current.read_bytes()) != expected_blob):
+            raise ValueError('original 36-owner census authority mutated')
+    spec = importlib.util.spec_from_file_location('m3_original_census_36', historic / old_script)
     if spec is None or spec.loader is None:
-        raise ValueError('original census verifier unimportable')
+        raise ValueError('historical verifier not importable')
     original = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(original)
-    # Prove original 36 source bytes and historical five-file predecessor first.
-    admitted = original.verify(root=product, check_tracked=False)
-    older = {path for path, _ in admitted}
+    # Run the original verifier UNMODIFIED against its real historical tree.
+    admission = original.verify(root=historic, check_tracked=False)
+    if len(admission) != 36:
+        raise ValueError('original 36-owner baseline proof not established')
+    legacy = {row[0]: (row[2], row[3]) for row in original.rows(historic / old_census, 4)}
+    if set(legacy) != {path for path, _ in admission}:
+        raise ValueError('original 36-owner census and runtime verifier disagree')
+
+    changed = receipts / 'changed-07.tsv'
+    if changed.is_symlink() or not changed.is_file():
+        raise ValueError('missing or aliased seven-atom revision ledger')
+    lines = [line for line in changed.read_text(encoding='utf-8').splitlines()
+             if line and not line.startswith('#')]
+    rows = [line.split('\t') for line in lines]
+    paths = [row[0] for row in rows if len(row) == 8]
+    if (len(rows) != 7 or any(len(row) != 8 for row in rows)
+            or paths != sorted(set(paths))):
+        raise ValueError('seven revised M3 source atoms must be sorted, unique and exact')
+    revised = {}
+    for path, old_sha, old_blob, new_sha, new_blob, last_commit, license_id, status in rows:
+        if (path not in legacy or legacy[path] != (old_sha, old_blob)
+                or not HEX64.fullmatch(new_sha) or not HEX40.fullmatch(new_blob)
+                or not HEX40.fullmatch(last_commit) or new_sha == old_sha
+                or new_blob == old_blob or license_id != 'Apache-2.0'
+                or status != 'SOURCE_ONLY_PENDING_CONTRACT'):
+            raise ValueError('unadmitted historical source revision: ' + path)
+        revised[path] = (new_sha, new_blob)
+    for path, historic_identity in legacy.items():
+        source = product / path
+        if (source.is_symlink() or not source.is_file()
+                or not source.resolve().is_relative_to(product)):
+            raise ValueError('missing or aliased current historical source: ' + path)
+        data = source.read_bytes()
+        expected_sha, expected_blob = revised.get(path, historic_identity)
+        if hashlib.sha256(data).hexdigest() != expected_sha or git_blob(data) != expected_blob:
+            raise ValueError('unadmitted current historical atom drift: ' + path)
+        if path in revised and b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]:
+            raise ValueError('revised historical atom license mismatch: ' + path)
+    return set(legacy), len(revised)
+
+
+def verify_product_checkout(product: Path, receipts: Path,
+                            historical_product: Path) -> tuple[int, int, int]:
+    product = product.resolve(strict=True)
+    receipts = receipts.resolve(strict=True)
+    older, revisions = verify_historical_revisions(product, receipts, historical_product)
     tracked = set(subprocess.check_output(['git', 'ls-files', '--',
         PREFIX + 'main', PREFIX + 'test'], cwd=product, text=True).splitlines())
     extras = verify_additions(product, receipts, older, tracked)
-    return len(older), len(extras)
+    return len(older), revisions, len(extras)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--product', type=Path, required=True,
-                        help='Source checkout of pinned M3JDK21 commit')
+                        help='Current M3JDK21 product checkout')
+    parser.add_argument('--historical-product', type=Path, required=True,
+                        help='Immutable original 36-source M3JDK21 checkout')
     parser.add_argument('--receipts', type=Path, default=Path(__file__).parent / 'receipts')
     args = parser.parse_args()
-    original, additive = verify_product_checkout(args.product, args.receipts)
-    print(f'M3_FIVE_LIBRARY_SOURCE_SUPERSET_PASS original={original} additive={additive} '
-          f'total={original + additive}')
+    original, revisions, additive = verify_product_checkout(
+        args.product, args.receipts, args.historical_product)
+    print(f'M3_FIVE_LIBRARY_SOURCE_SUPERSET_PASS original={original} revised={revisions} '
+          f'additive={additive} total={original + additive}')
 
 
 if __name__ == '__main__':
