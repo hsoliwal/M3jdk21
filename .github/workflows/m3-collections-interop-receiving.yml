@@ -39,7 +39,8 @@ jobs:
           ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
           test "$(git hash-object "$ENGINE")" = 05e02169c7429183107a99c60e1aad05b4d73b5f
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
-          python3 m3/collections/interop/qualification/current-census-20261017/verify.py | tee proof/admitted-postimages.tsv
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-tests.log
+          python3 m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py --product . | tee proof/admitted-postimages.tsv
       - name: Run all six actual recipe proofs before delivery
         shell: bash
         run: |
@@ -63,7 +64,7 @@ jobs:
           mvn -B -ntp -f m3/collections/interop/recipe/pom.xml \
             '-Dtest=M3CollectionsLibraryInteropTest#exactOutputsFixedPointAndOptionalMaterialization' \
             test 2>&1 | tee proof/recipe-delivery.log
-          python3 m3/collections/interop/qualification/current-census-20261017/verify.py > proof/current-successor-ledger.tsv
+          python3 m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py --product . > proof/current-successor-ledger.tsv
           cat m3/collections/interop/recipe-receipt.tsv | tee proof/recipe-receipt.tsv
           git diff --exit-code -- m3/collections/interop/src m3/collections/interop/recipe-receipt.tsv
       - name: Compile unchanged M3 core and verify the dependency boundary
