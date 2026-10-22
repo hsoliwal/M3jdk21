@@ -127,7 +127,7 @@ public final class SortableProcessorSelfTest {
                         }
                     }
                     static class Nested {
-                        int ignored(int x) { if (x > 0) return x; return 0; }
+                        int ignored(int x) { if (x > 0) return java.lang.Math.abs(x); return 0; }
                     }
                 }
                 """;
@@ -136,6 +136,13 @@ public final class SortableProcessorSelfTest {
             Class<?> companion = hostile.loader.loadClass("demo.HostileM3Sortable");
             M3CompilerFacts facts = (M3CompilerFacts)
                     companion.getMethod("compilerFacts").invoke(null);
+            long[][] retainedTokens = (long[][])
+                    companion.getMethod("structuralSignals").invoke(null);
+            check(retainedTokens[5].length >= 1,
+                    "original six-lane call tokens still include nested declarations");
+            check(facts.count(M3CompilerFacts.METHOD_INVOCATIONS) == 0
+                    && facts.count(M3CompilerFacts.DISTINCT_RESOLVED_CALLEE_TOKENS) == 0,
+                    "new type-local invocation counts exclude nested class method bodies");
             check(facts.count(M3CompilerFacts.LOOPS) == 1,
                     "one real loop, text/comments ignored");
             check(facts.count(M3CompilerFacts.IF_BRANCHES) == 1,
