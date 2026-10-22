@@ -134,6 +134,29 @@ public final class M3SignalColumns {
         return new Comparison(0, -1, Double.NaN, true, 0L);
     }
 
+    /** One typed domain coordinate comparison; no diagnostic record or heap Entry allocation. */
+    int orderAt(int dimension, int left, int right) {
+        Column column = columns[Objects.checkIndex(dimension, columns.length)];
+        Objects.checkIndex(left, rows);
+        Objects.checkIndex(right, rows);
+        boolean a = column.present(left), b = column.present(right);
+        if (a != b) return a ? -1 : 1;
+        if (!a) return 0;
+        int sign = Integer.signum(column.compare(left, right));
+        return column.descending ? -sign : sign;
+    }
+
+    /** Private stable sorter now compares primitive signs without per-pair objects. */
+    int orderOnly(int left, int right) {
+        Objects.checkIndex(left, rows);
+        Objects.checkIndex(right, rows);
+        for (int dimension = 0; dimension < columns.length; dimension++) {
+            int sign = orderAt(dimension, left, right);
+            if (sign != 0) return sign;
+        }
+        return 0;
+    }
+
     /** Stable primitive-index mergesort. Equal coordinates retain selected encounter order. */
     public int[] sortSelected(int[] selectedRows) {
         Objects.requireNonNull(selectedRows, "selectedRows");
@@ -147,7 +170,7 @@ public final class M3SignalColumns {
                 int hi = (int) Math.min(base + (width << 1), order.length);
                 int a = lo, b = mid, out = lo;
                 while (a < mid && b < hi) {
-                    scratch[out++] = compare(order[a], order[b]).sign() <= 0
+                    scratch[out++] = orderOnly(order[a], order[b]) <= 0
                             ? order[a++] : order[b++];
                 }
                 while (a < mid) scratch[out++] = order[a++];
