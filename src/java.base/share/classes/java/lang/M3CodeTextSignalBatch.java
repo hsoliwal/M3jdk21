@@ -9,13 +9,15 @@ package java.lang;
 import java.util.Objects;
 
 /**
- * Bounded host-Java packed-image receiver for Synexia code-text lexical precompute.
+ * Bounded packed-image receiver for code-text lexical precompute.
  *
  * <p>The packed lane is a necessary-condition routing signal. It is not Java syntax proof,
- * regex validity proof, or semantic authority. JNI may later implement the same ABI, but this
- * class remains the reference implementation and exact behavior fallback.</p>
+ * regex validity proof, or semantic authority. Java remains the default and semantic reference.
+ * Explicit native execution requires the integrated libjava ABI and never silently falls back.</p>
  */
 final class M3CodeTextSignalBatch {
+    enum Backend { JAVA, NATIVE_REQUIRED }
+
     record Limits(long maxTransferBytes, long maxUtf16Units, int maxRows) {
         static final Limits DEFAULT = new Limits(64L << 20, 16_000_000L, 1_000_000);
 
@@ -40,6 +42,37 @@ final class M3CodeTextSignalBatch {
         }
         return result;
     }
+
+    /**
+     * Selects an internal implementation explicitly, without an automatic size threshold.
+     * The caller must keep all three input arrays unchanged for the duration of this call.
+     * Rows may overlap and appear in any order; no text or result is retained after return.
+     * Native admission validates the complete geometry before allocating or scanning output.
+     * An unavailable required native ABI throws UnsatisfiedLinkError, including for zero rows.
+     */
+    static long[] analyze(
+            char[] units,
+            int[] offsets,
+            int[] lengths,
+            Limits limits,
+            Backend backend) {
+        return switch (Objects.requireNonNull(backend, "backend")) {
+            case JAVA -> analyze(units, offsets, lengths, limits);
+            case NATIVE_REQUIRED -> {
+                validate(units, offsets, lengths, limits);
+                yield analyzeNative(units, offsets, lengths,
+                        limits.maxTransferBytes(), limits.maxUtf16Units(), limits.maxRows());
+            }
+        };
+    }
+
+    private static native long[] analyzeNative(
+            char[] units,
+            int[] offsets,
+            int[] lengths,
+            long maxTransferBytes,
+            long maxUtf16Units,
+            int maxRows);
 
     static void validate(
             char[] units,
