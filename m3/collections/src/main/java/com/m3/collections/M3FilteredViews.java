@@ -552,27 +552,36 @@ public final class M3FilteredViews {
          */
         private Entry<K, V> boundedEntry(K query, boolean forward, boolean inclusive) {
             NavigableMap<K, V> range;
-            try {
-                range = forward ? nav.tailMap(query, inclusive) : nav.headMap(query, inclusive);
-            } catch (IllegalArgumentException outOfRange) {
-                Iterator<Entry<K, V>> bounded = forward
-                        ? nav.entrySet().iterator() : nav.descendingMap().entrySet().iterator();
-                Comparator<? super K> comparator = nav.comparator();
-                while (bounded.hasNext()) {
-                    Entry<K, V> stored = bounded.next();
-                    int relation = compareStored(stored.getKey(), query, comparator);
-                    if ((forward ? relation > 0 || (inclusive && relation == 0)
-                            : relation < 0 || (inclusive && relation == 0))
-                            && predicate.test(stored.getKey(), stored.getValue())) {
-                        return new SimpleImmutableEntry<>(stored);
-                    }
+            if (nav instanceof M3TreeMap<K, V> owner) {
+                range = owner.rangeOrNull(query, forward, inclusive);
+                if (range == null) return boundedFallback(query, forward, inclusive);
+            } else {
+                try {
+                    range = forward ? nav.tailMap(query, inclusive) : nav.headMap(query, inclusive);
+                } catch (IllegalArgumentException outOfRange) {
+                    return boundedFallback(query, forward, inclusive);
                 }
-                return null;
             }
             Iterator<Entry<K, V>> cursor = forward ? range.entrySet().iterator()
                     : range.descendingMap().entrySet().iterator();
             return firstVisible(cursor);
         }
+        private Entry<K, V> boundedFallback(K query, boolean forward, boolean inclusive) {
+            Iterator<Entry<K, V>> bounded = forward
+                    ? nav.entrySet().iterator() : nav.descendingMap().entrySet().iterator();
+            Comparator<? super K> comparator = nav.comparator();
+            while (bounded.hasNext()) {
+                Entry<K, V> stored = bounded.next();
+                int relation = compareStored(stored.getKey(), query, comparator);
+                if ((forward ? relation > 0 || (inclusive && relation == 0)
+                        : relation < 0 || (inclusive && relation == 0))
+                        && predicate.test(stored.getKey(), stored.getValue())) {
+                    return new SimpleImmutableEntry<>(stored);
+                }
+            }
+            return null;
+        }
+
         @Override public Entry<K, V> lowerEntry(K key) {
             return boundedEntry(key, false, false);
         }

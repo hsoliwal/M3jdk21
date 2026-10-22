@@ -213,24 +213,33 @@ public final class M3MutableFilteredViews {
         /** One-seek normal path; recover only invalid bounded-range construction. */
         private E bounded(E query, boolean forward, boolean inclusive) {
             NavigableSet<E> range;
-            try {
-                range = forward ? source.tailSet(query, inclusive) : source.headSet(query, inclusive);
-            } catch (IllegalArgumentException outOfRange) {
-                Iterator<E> bounded = forward ? source.iterator() : source.descendingIterator();
-                Comparator<? super E> comparator = source.comparator();
-                while (bounded.hasNext()) {
-                    E stored = bounded.next();
-                    int relation = compareStored(stored, query, comparator);
-                    if ((forward ? relation > 0 || (inclusive && relation == 0)
-                            : relation < 0 || (inclusive && relation == 0))
-                            && predicate.test(stored)) {
-                        return stored;
-                    }
+            if (source instanceof M3TreeSet<E> owner) {
+                range = owner.rangeOrNull(query, forward, inclusive);
+                if (range == null) return boundedFallback(query, forward, inclusive);
+            } else {
+                try {
+                    range = forward ? source.tailSet(query, inclusive) : source.headSet(query, inclusive);
+                } catch (IllegalArgumentException outOfRange) {
+                    return boundedFallback(query, forward, inclusive);
                 }
-                return null;
             }
             Iterator<E> cursor = forward ? range.iterator() : range.descendingIterator();
             return seek(cursor);
+        }
+
+        private E boundedFallback(E query, boolean forward, boolean inclusive) {
+            Iterator<E> bounded = forward ? source.iterator() : source.descendingIterator();
+            Comparator<? super E> comparator = source.comparator();
+            while (bounded.hasNext()) {
+                E stored = bounded.next();
+                int relation = compareStored(stored, query, comparator);
+                if ((forward ? relation > 0 || (inclusive && relation == 0)
+                        : relation < 0 || (inclusive && relation == 0))
+                        && predicate.test(stored)) {
+                    return stored;
+                }
+            }
+            return null;
         }
 
         @Override public E lower(E value) { return bounded(value, false, false); }

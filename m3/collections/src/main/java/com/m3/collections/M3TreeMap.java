@@ -64,11 +64,14 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                 || hasHigh && ((c = tree.compare(key, high)) > 0 || c == 0 && !highInclusive));
     }
     private boolean slotWithin(int s) { return s >= 0 && within(keyAt(s)); }
-    private void endpoint(K key, boolean inclusive) {
+    private boolean endpointAdmitted(K key, boolean inclusive) {
         checked(key);
         int c;
-        if (hasLow && ((c = tree.compare(key, low)) < 0 || c == 0 && inclusive && !lowInclusive)
-                || hasHigh && ((c = tree.compare(key, high)) > 0 || c == 0 && inclusive && !highInclusive)) {
+        return !(hasLow && ((c = tree.compare(key, low)) < 0 || c == 0 && inclusive && !lowInclusive)
+                || hasHigh && ((c = tree.compare(key, high)) > 0 || c == 0 && inclusive && !highInclusive));
+    }
+    private void endpoint(K key, boolean inclusive) {
+        if (!endpointAdmitted(key, inclusive)) {
             throw new IllegalArgumentException("endpoint outside view");
         }
     }
@@ -296,13 +299,24 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     }
     @Override public M3TreeMap<K, V> headMap(K to, boolean inclusive) {
         endpoint(to, inclusive);
+        return headRange(to, inclusive);
+    }
+    private M3TreeMap<K, V> headRange(K to, boolean inclusive) {
         return descending ? new M3TreeMap<>(tree, true, to, inclusive, hasHigh, high, highInclusive, true)
                 : new M3TreeMap<>(tree, hasLow, low, lowInclusive, true, to, inclusive, false);
     }
     @Override public M3TreeMap<K, V> tailMap(K from, boolean inclusive) {
         endpoint(from, inclusive);
+        return tailRange(from, inclusive);
+    }
+    private M3TreeMap<K, V> tailRange(K from, boolean inclusive) {
         return descending ? new M3TreeMap<>(tree, hasLow, low, lowInclusive, true, from, inclusive, true)
                 : new M3TreeMap<>(tree, true, from, inclusive, hasHigh, high, highInclusive, false);
+    }
+    /** Normal endpoint rejection is distinct from an exception thrown by user comparison. */
+    M3TreeMap<K, V> rangeOrNull(K key, boolean forward, boolean inclusive) {
+        if (!endpointAdmitted(key, inclusive)) { return null; }
+        return forward ? tailRange(key, inclusive) : headRange(key, inclusive);
     }
     @Override public SortedMap<K, V> subMap(K from, K to) { return subMap(from, true, to, false); }
     @Override public SortedMap<K, V> headMap(K to) { return headMap(to, false); }
