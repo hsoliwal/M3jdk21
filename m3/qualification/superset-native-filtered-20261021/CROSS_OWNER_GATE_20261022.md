@@ -95,3 +95,39 @@ backend promotion or advancing String → arrays → collections phases.
 Keep this draft stacked on PR #1797 pending explicit test and parent
 dependency gates; never rebase/force-push Synexia develop, or overwrite
 newer corrected CollectionViews atoms from other reviewed PR stacks.
+
+## Additional qualified scalar array-mask atom
+
+This stacked receiver now also incorporates the previously qualified **actual
+java.base M3CollectionMaskCompactor** scalar behavior atom from M3JDK21
+[#1754](https://github.com/hsoliwal/M3jdk21/pull/1754) and the
+canonical Synexia [#12851](https://github.com/hsoliwal/com.synexia/pull/12851).
+
+The original `jdk.internal.mindex.M3CollectionMaskCompactor.java` Git blob
+`51ea3a72bb191afc250a58be964363bd5680467c` was checked before applying
+the exact existing postimage `f85e7359010bd25e0a909a145e283007cff25d7c`.
+The source-sealed original jtreg test, including normal and interpreter
+runs, has blob `d720912f0f57bcde9fc07a05f31869a19f3452eb`.
+The earlier first-party verification script and report were received byte
+identically; its original parent verifier script blob is
+`60f757ba48acfeb77d8ac6c46ce36c94262eddec`.
+
+This single private atom avoids reference self-writes before the first
+deleted bit in a physical Object[] window. It keeps the original dynamic array,
+long[] relative-bit-mask, offset/physical-slot and null/order/exceptions,
+and leaves the existing System.arraycopy/GC-barrier bulk path intact.
+No extra Entry/Node storage, public ABI, JNI symbol or separate runtime layer.
+
+The earlier PR locally proved 2,371,785 assertions per baseline/candidate
+execution and interpreter-mode candidate execution. **Those are historical
+bounded proofs, not new PR CI results.** The combined workflow requires
+the original `m3/qualification/mask-prefix-scalar-20261021/verify.sh` to
+execute on this exact combined source tree in both normal and interpreter
+modes, as well as the native `libjava`/filtered/sorted checks described above.
+
+The two canonical recipe owners remain separate in Synexia for reuse and
+counterexample correction: mask-prefix `com.synexia.m3.M3Jdk21MaskPrefixScalar20261021`
+and this cross-owner integration
+`com.synexia.m3.M3Jdk21NativeFilteredIntegration20261022`.
+These form a **dependency DAG**, not competing Java class implementations.
+Their tests and source receipts must be read together before product merge.
