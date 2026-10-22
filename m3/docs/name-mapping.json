@@ -466,7 +466,7 @@
       "target": "com.m3.precompute.M3CodeTextSignalBatchNative",
       "status": "no direct port; reuse existing target native owner",
       "source_role": "Synexia dedicated recipe-mastery regex/String static-signal JNI ABI",
-      "target_rule": "do not introduce a second M3 native ABI; reuse existing M3 code-text signal JNI provider and retain JDK Pattern regex semantics on Java side"
+      "target_rule": "retain this separate-module provider and its existing ABI; the java.base receiver has a target-owned libjava batch candidate recorded as m3.code-text-signal-batch. No external module loader enters java.base; retain JDK Pattern regex semantics on Java side"
     },
     {
       "source": "com.synexia.indexstring.shared.SharedArrayNative.compare / hash32 / metrics / copyTo; SharedSegments.preparedBuffers",
@@ -4034,7 +4034,7 @@
         "id": "synexia.counterpart.MIndexCompilerASTPrecompute",
         "kind": "pending",
         "status": "pending",
-        "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
+        "reason": "Historical Synexia counterpart migration remains pending. The existing target compiler owner and the separately qualified method-fact extension are recorded below without promoting the whole counterpart.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
@@ -4138,7 +4138,36 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
+        "observation": "The existing public M3AST/M3ASTPC owner already captures original javac events. The 20261022 receiving extension adds detached method facts in that owner; it does not implement the entire historical Synexia counterpart or a complete build/call graph.",
+        "receiving_observations": [
+          {
+            "date": "2026-10-22",
+            "state": "SOURCE_COMPONENT_CANDIDATE",
+            "target_base": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+            "owner": "com.sun.source.util.M3AST / com.sun.tools.javac.m3.M3ASTPC",
+            "schema": "M3AST_METHOD_FACTS_V1",
+            "columns": 24,
+            "relations": [
+              "CALL",
+              "FIELD_READ",
+              "FIELD_WRITE",
+              "MEMBER_REFERENCE"
+            ],
+            "recipe_id": "com.synexia.m3.M3JdkSignalManufacture20261022",
+            "recipe_version": "20261022",
+            "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk-signal-manufacture-20261022",
+            "java_manifest_sha256": "70d841bbc9b4405874bafc49eee2d37f04018149f90f054bcc104dd317878cbc",
+            "context_rule": "Original ANALYZED event, exact source seal and opaque per-task identity; no portable classpath/toolchain fingerprint.",
+            "contract_rule": "Existing API declarations/descriptors retained; additive typed method-fact API. No retained compiler state, second parse, global graph or implied optimization authority.",
+            "evidence": "m3/docs/signal-manufacture-20261022.md and linked canonical receiving packet",
+            "remaining_gates": [
+              "full installed M3JDK21 configure/build",
+              "real jtreg/JCK and wider compiler suites",
+              "cross-platform/runtime integration",
+              "comparative performance and retained-memory qualification"
+            ]
+          }
+        ]
       },
       {
         "id": "synexia.counterpart.MIndexClassBoundary",
@@ -8710,6 +8739,124 @@
         },
         "source_state": "proposed",
         "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
+      },
+      {
+        "id": "m3.code-text-signal-batch",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Extend the existing internal java.base lexical receiver with an explicit equivalent libjava batch entry; component proof is separate from installed SDK admission.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java",
+            "symbol": "java.lang.M3CodeTextSignalBatch",
+            "signatures": [
+              "analyze(char[], int[], int[], Limits)",
+              "pack(char[], int, int)"
+            ],
+            "sha256": "955c3490c1869fb38492a067be93916c8a2358ef824d3de7d83d95a698578668",
+            "git_blob_sha1": "99d084a47b36a2588bd79c850d7d647ffd98bd7f",
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java",
+            "symbol": "java.lang.M3CodeTextSignalBatch",
+            "signatures": [
+              "analyze(char[], int[], int[], Limits)",
+              "analyze(char[], int[], int[], Limits, Backend)"
+            ],
+            "sha256": "6ef55adb2e93f94c1ee57f3795fea1fc069a421230f25b4937ff52cebac26503",
+            "git_blob_sha1": "06fc5d79c230b778914409429d2efe9b18ed2033",
+            "revision_role": "candidate",
+            "tracking_ref": null
+          }
+        ],
+        "owner": "java.lang.M3CodeTextSignalBatch",
+        "identity": {
+          "namespace": "Internal java.base lexical batch; separate com.m3.precompute module API remains unchanged.",
+          "generation": "Packed schema preserves all 16 flag bits and six saturated byte lanes."
+        },
+        "contract": {
+          "differences": [
+            "Add explicit package-private backend overload and private batch JNI entry."
+          ],
+          "compatibility_obligations": [
+            "Existing Java analyze, Limits, validate and pack source remains unchanged.",
+            "Complete native geometry checks before result publication.",
+            "Caller does not mutate input arrays during the call.",
+            "Required native ABI absence throws UnsatisfiedLinkError even for empty batches."
+          ],
+          "public_surface": [
+            "No exported class, new public java.* type, production loader hook or Synexia runtime dependency."
+          ]
+        },
+        "format": {
+          "schema": "existing M3CodeTextFacts packed long",
+          "abi": "Java_java_lang_M3CodeTextSignalBatch_analyzeNative ([C[I[IJJI)[J",
+          "bootstrap": "src/java.base/share/native/libjava/M3CodeTextSignalBatch.c; existing libjava source discovery"
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "existing-owner",
+            "reason": "Uses exact existing Facts/Batch contract and generated JNI header."
+          }
+        ],
+        "materialization": {
+          "admission": "Explicit JAVA or NATIVE_REQUIRED; no automatic profitability threshold.",
+          "joins": "Primitive arrays, offsets and lengths only.",
+          "outputs": "Caller-owned long[] result; rows may overlap or repeat.",
+          "cached_facts": "No retained text, results, native heap allocation, global JNI references or heap pins."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.M3JdkSignalManufacture20261022",
+          "version": "20261022",
+          "path": "synexia-openrewrite-recipes/recipes/m3jdk-signal-manufacture-20261022",
+          "sha256": "70d841bbc9b4405874bafc49eee2d37f04018149f90f054bcc104dd317878cbc",
+          "preconditions": [
+            "Exact b985 source preimage or fixed-point postimage; new C/test paths absent."
+          ],
+          "rollback": "Restore sealed Java preimage and remove only the newly received C/test files in a reviewed revert."
+        },
+        "tests": [
+          "test/jdk/java/lang/String/M3CodeTextSignalBatchNativeTest.java",
+          "Strict Java21, javac-h, C11/C17, Xcheck:jni and UBSan component parity in canonical packet."
+        ],
+        "provenance": {
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0 for target source; Apache-2.0 for canonical orchestration.",
+          "publication": "User explicitly requested integrated Java/JNI implementation and reviewable M3JDK21 PRs.",
+          "copied_code": false,
+          "donor_boundary": "New C derives from exact existing GPL Java atom; inspected Apache native providers are architectural references only."
+        },
+        "sync": {
+          "source_revision": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+          "target_revision": null,
+          "direction": "canonical-recipe-to-target",
+          "target_adaptations": [
+            "Place equivalent lexical JNI kernel in libjava; retain existing external proving-ground provider unchanged."
+          ],
+          "pending": [
+            "Full installed image and real jtreg",
+            "Other platforms/architectures and broad runtime suites",
+            "Comparative cold/warm performance and memory evidence"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "target-owned",
+        "observation": "Lexical routing facts do not prove regex validity, program semantics or a native speedup."
       }
     ]
   },
