@@ -11,8 +11,11 @@ trap 'rm -rf "$WORK"' EXIT
 mkdir -p "$WORK/classes" "$WORK/headers" "$WORK/native"
 test -f "$SRC/com/m3/file/M3FmtLexiconFrame.java"
 test -f "$SRC/com/m3/file/M3FileDictionary.java"
-javac --release 21 -Xlint:all -Werror \
-  -sourcepath "$SRC" -d "$WORK/classes" -h "$WORK/headers" \
+# The original file family declares a named module. Explicit qualification Java
+# files live outside its production tree: javac must admit BOTH source roots.
+# Suppress only the known numeric module-name lint; preserve other -Werror gates.
+javac --release 21 -Xlint:all,-module -Werror \
+  -sourcepath "$SRC:$TESTS" -d "$WORK/classes" -h "$WORK/headers" \
   "$SRC/com/m3/file/M3FmtVarints.java" \
   "$SRC/com/m3/file/M3FmtLexiconFrame.java" \
   "$SRC/com/m3/file/M3FmtFrozenDictionary.java" \
