@@ -14,3 +14,4 @@ JNI_ABI_EXPORTS	NOT_RUN	javac -h, actual generated header, JNI C17 compile, symb
 M3JDK21_HOTSPOT	NOT_RUN	make images and jtreg/JCK/GC
 PLATFORM_MATRIX	NOT_RUN	Windows/macOS/Linux/Android and native provider semantics
 CPU_HEAP_NATIVE	NOT_MEASURED	JNI calls saved may not beat Java for tiny path counts
+STAT_RESULT_ORIGINAL_JAVA21_SCOPED	PASS_3070994	Original M3FsStatBatch Git blob, standalone Java21 fuzz oracle with only M3FS.Kind/Stat API-shaped stub; Synexia #13073 verification/README.md
