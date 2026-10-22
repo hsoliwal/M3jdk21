@@ -1,0 +1,13 @@
+gate	status	proof_or_remediation
+EXACT_MANAGER_PREIMAGE	PASS	Git blob d77ad058b73a61ed304312053574029fa33643a0
+FIVE_SOURCE_POSTIMAGES	PASS	Exact GitHub donor readback, five received files
+ORIGINAL_MANAGER_API	SOURCE_PRESERVED	Existing abstract descriptors retained, default methods additive
+MASKED_COMMAND_INDEX	SOURCE_PRESERVED	Source-owned long[] bitmap and physical ordered commands
+COMPETING_PROVIDER_ENGINE	NOT_CREATED	Existing VFS manager and M3FsBulk original owners
+DONOR_JAVA21_TESTS	HISTORICAL_SCOPED	#1749 ten isolated tests not rerun on this receiver
+CANONICAL_MAVEN_OPENREWRITE	NOT_RUN	Synexia #12846 Recipe.run/fixed point required
+ORIGINAL_M3FS_MAVEN_JUNIT	NOT_RUN	Source-built original VFS/SQL/JNI required
+PROVIDER_NATIVE_TRANSACTIONS	NOT_RUN	Original multi-provider real I/O, partial effects, cancellation/cleanup
+FULL_JDK21_HOTSPOT	NOT_RUN	Source image, JMOD, jtreg and native binary exports required
+PLATFORM_CPU_HEAP	NOT_MEASURED	Windows/macOS/Android and native memory performance pending
+NATIVE_STAT_BATCH_RECONCILIATION	HELD_SEPARATE	Original M3FS.java newer than historical donor, no wholesale replacement
