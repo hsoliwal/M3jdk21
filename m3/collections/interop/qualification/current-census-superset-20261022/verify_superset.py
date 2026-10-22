@@ -63,7 +63,7 @@ def exact_apache450_transitions(receipts: Path) -> dict[str, tuple[str, ...]]:
     file = receipts / 'changed-apache-bag-retain450-02.tsv'
     if file.is_symlink() or not file.is_file():
         raise ValueError('missing or aliased Apache450 dual-source receipt')
-    parsed = tuple(tuple(line.split('\\t')) for line in
+    parsed = tuple(tuple(line.split('\t')) for line in
                    file.read_text(encoding='utf-8').splitlines()
                    if line and not line.startswith('#'))
     if parsed != APACHE450_TRANSITIONS:
