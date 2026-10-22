@@ -1,9 +1,7 @@
 name: M3 four-library receiver admission
 on:
   pull_request:
-    # Qualify the dependent #1847 receiver against #1840's exact head;
-    # remove the temporary branch admission when the stack lands on master.
-    branches: [master, codex/m3-collections-seven-target-superset-20261022]
+    branches: [master]
     paths:
       - 'm3/collections/interop/**'
       - 'm3/collections/src/main/java/**'
