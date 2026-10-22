@@ -2,7 +2,24 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 package com.m3.collections.sortable;
 
+import com.sun.source.tree.CatchTree;
+import com.sun.source.tree.ClassTree;
+import com.sun.source.tree.ConditionalExpressionTree;
+import com.sun.source.tree.DoWhileLoopTree;
+import com.sun.source.tree.EnhancedForLoopTree;
+import com.sun.source.tree.ForLoopTree;
+import com.sun.source.tree.IfTree;
+import com.sun.source.tree.LambdaExpressionTree;
 import com.sun.source.tree.MethodInvocationTree;
+import com.sun.source.tree.NewArrayTree;
+import com.sun.source.tree.NewClassTree;
+import com.sun.source.tree.ReturnTree;
+import com.sun.source.tree.SwitchExpressionTree;
+import com.sun.source.tree.SwitchTree;
+import com.sun.source.tree.SynchronizedTree;
+import com.sun.source.tree.ThrowTree;
+import com.sun.source.tree.TryTree;
+import com.sun.source.tree.WhileLoopTree;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
@@ -73,6 +90,15 @@ public final class SortableProcessor extends AbstractProcessor {
         @SuppressWarnings("unchecked")
         TreeSet<Long>[] lanes = (TreeSet<Long>[]) new TreeSet<?>[StructuralSignals.DIMENSIONS];
         for (int i = 0; i < lanes.length; i++) lanes[i] = new TreeSet<>(UNSIGNED);
+        int[] facts = new int[M3CompilerFacts.COUNT];
+        long validFacts = (1L << M3CompilerFacts.MODEL_FACTS) - 1L;
+        facts[M3CompilerFacts.FIELDS] =
+                ElementFilter.fieldsIn(type.getEnclosedElements()).size();
+        facts[M3CompilerFacts.METHODS] =
+                ElementFilter.methodsIn(type.getEnclosedElements()).size();
+        facts[M3CompilerFacts.CONSTRUCTORS] =
+                ElementFilter.constructorsIn(type.getEnclosedElements()).size();
+        facts[M3CompilerFacts.IMPLEMENTED_INTERFACES] = type.getInterfaces().size();
         add(lanes[0], "package:" + pkg);
         add(lanes[1], "class:" + type.getQualifiedName());
         dependencies(type.getSuperclass(), lanes[4]);
@@ -84,6 +110,8 @@ public final class SortableProcessor extends AbstractProcessor {
         for (ExecutableElement method : ElementFilter.methodsIn(type.getEnclosedElements())) {
             StringBuilder signature = new StringBuilder("method:")
                     .append(method.getSimpleName()).append('(');
+            facts[M3CompilerFacts.METHOD_PARAMETERS] += method.getParameters().size();
+            facts[M3CompilerFacts.DECLARED_THROWS] += method.getThrownTypes().size();
             for (VariableElement p : method.getParameters()) {
                 signature.append(p.asType()).append(';');
                 dependencies(p.asType(), lanes[4]);
@@ -93,20 +121,30 @@ public final class SortableProcessor extends AbstractProcessor {
             dependencies(method.getReturnType(), lanes[4]);
             for (TypeMirror ex : method.getThrownTypes()) dependencies(ex, lanes[4]);
         }
-        // javac Trees resolves receiver/callee symbols; non-javac processors still emit the
-        // package/class/field/method/type dimensions and an empty explicit calls dimension.
+        facts[M3CompilerFacts.DECLARED_TYPE_TOKENS] = lanes[4].size();
+        // Source-path syntax counts are admitted only when Trees supplies the actual
+        // annotated root. Any nested/local type is separately owned, not included
+        // in this type's syntactic counts. No call-graph completeness is inferred.
         try {
             Trees trees = Trees.instance(processingEnv);
             TreePath path = trees.getPath(type);
             if (path != null) {
                 new TreePathScanner<Void, Void>() {
-                    @Override
-                    public Void visitMethodInvocation(MethodInvocationTree tree, Void unused) {
+                    private boolean rootType = true;
+                    @Override public Void visitClass(ClassTree tree, Void unused) {
+                        if (!rootType) return null;
+                        rootType = false;
+                        return super.visitClass(tree, unused);
+                    }
+                    @Override public Void visitMethodInvocation(
+                            MethodInvocationTree tree, Void unused) {
+                        facts[M3CompilerFacts.METHOD_INVOCATIONS]++;
                         Element target = trees.getElement(getCurrentPath());
                         if (target instanceof ExecutableElement method) {
                             Element owner = method.getEnclosingElement();
                             StringBuilder signature = new StringBuilder("call:")
-                                    .append(owner).append('#').append(method.getSimpleName()).append('(');
+                                    .append(owner).append('#').append(method.getSimpleName())
+                                    .append('(');
                             for (VariableElement p : method.getParameters()) {
                                 signature.append(p.asType()).append(';');
                             }
@@ -114,10 +152,82 @@ public final class SortableProcessor extends AbstractProcessor {
                         }
                         return super.visitMethodInvocation(tree, unused);
                     }
+                    @Override public Void visitIf(IfTree tree, Void unused) {
+                        facts[M3CompilerFacts.IF_BRANCHES]++;
+                        return super.visitIf(tree, unused);
+                    }
+                    @Override public Void visitSwitch(SwitchTree tree, Void unused) {
+                        facts[M3CompilerFacts.SWITCHES]++;
+                        return super.visitSwitch(tree, unused);
+                    }
+                    @Override public Void visitSwitchExpression(
+                            SwitchExpressionTree tree, Void unused) {
+                        facts[M3CompilerFacts.SWITCHES]++;
+                        return super.visitSwitchExpression(tree, unused);
+                    }
+                    @Override public Void visitForLoop(ForLoopTree tree, Void unused) {
+                        facts[M3CompilerFacts.LOOPS]++;
+                        return super.visitForLoop(tree, unused);
+                    }
+                    @Override public Void visitEnhancedForLoop(
+                            EnhancedForLoopTree tree, Void unused) {
+                        facts[M3CompilerFacts.LOOPS]++;
+                        return super.visitEnhancedForLoop(tree, unused);
+                    }
+                    @Override public Void visitWhileLoop(WhileLoopTree tree, Void unused) {
+                        facts[M3CompilerFacts.LOOPS]++;
+                        return super.visitWhileLoop(tree, unused);
+                    }
+                    @Override public Void visitDoWhileLoop(DoWhileLoopTree tree, Void unused) {
+                        facts[M3CompilerFacts.LOOPS]++;
+                        return super.visitDoWhileLoop(tree, unused);
+                    }
+                    @Override public Void visitConditionalExpression(
+                            ConditionalExpressionTree tree, Void unused) {
+                        facts[M3CompilerFacts.CONDITIONAL_EXPRESSIONS]++;
+                        return super.visitConditionalExpression(tree, unused);
+                    }
+                    @Override public Void visitLambdaExpression(
+                            LambdaExpressionTree tree, Void unused) {
+                        facts[M3CompilerFacts.LAMBDAS]++;
+                        return super.visitLambdaExpression(tree, unused);
+                    }
+                    @Override public Void visitNewClass(NewClassTree tree, Void unused) {
+                        facts[M3CompilerFacts.NEW_EXPRESSIONS]++;
+                        return super.visitNewClass(tree, unused);
+                    }
+                    @Override public Void visitNewArray(NewArrayTree tree, Void unused) {
+                        facts[M3CompilerFacts.NEW_EXPRESSIONS]++;
+                        return super.visitNewArray(tree, unused);
+                    }
+                    @Override public Void visitSynchronized(
+                            SynchronizedTree tree, Void unused) {
+                        facts[M3CompilerFacts.SYNCHRONIZED_BLOCKS]++;
+                        return super.visitSynchronized(tree, unused);
+                    }
+                    @Override public Void visitThrow(ThrowTree tree, Void unused) {
+                        facts[M3CompilerFacts.THROW_STATEMENTS]++;
+                        return super.visitThrow(tree, unused);
+                    }
+                    @Override public Void visitTry(TryTree tree, Void unused) {
+                        facts[M3CompilerFacts.TRY_BLOCKS]++;
+                        return super.visitTry(tree, unused);
+                    }
+                    @Override public Void visitCatch(CatchTree tree, Void unused) {
+                        facts[M3CompilerFacts.CATCH_BLOCKS]++;
+                        return super.visitCatch(tree, unused);
+                    }
+                    @Override public Void visitReturn(ReturnTree tree, Void unused) {
+                        facts[M3CompilerFacts.RETURN_STATEMENTS]++;
+                        return super.visitReturn(tree, unused);
+                    }
                 }.scan(path, null);
+                facts[M3CompilerFacts.DISTINCT_RESOLVED_CALLEE_TOKENS] = lanes[5].size();
+                long modelKnown = (1L << M3CompilerFacts.MODEL_FACTS) - 1L;
+                validFacts |= ((1L << M3CompilerFacts.AST_FACTS_END) - 1L) & ~modelKnown;
             }
         } catch (IllegalArgumentException unavailable) {
-            // Model-level fields, methods and declared types remain available.
+            // Only model-level coordinates are known without Trees.
         }
 
         String fqGenerated = (pkg.isEmpty() ? "" : pkg + ".") + name + "M3Sortable";
@@ -135,6 +245,16 @@ public final class SortableProcessor extends AbstractProcessor {
             writer.write("    public static long[][] structuralSignals() {\n");
             writer.write("        return new long[][] {L0.clone(), L1.clone(), L2.clone(), "
                     + "L3.clone(), L4.clone(), L5.clone()};\n    }\n");
+            // The structural hashed-token API remains exactly as before. Numeric facts are
+            // independent, typed int counts with an explicit validity mask.
+            writer.write("    private static final int[] FACT_COUNTS = new int[] {");
+            for (int feature : facts) writer.write(feature + ",");
+            writer.write("};\n");
+            writer.write("    private static final long[] FACT_KNOWN = new long[] {0x"
+                    + Long.toHexString(validFacts) + "L};\n");
+            writer.write("    public static com.m3.collections.sortable.M3CompilerFacts compilerFacts() {\n");
+            writer.write("        return new com.m3.collections.sortable.M3CompilerFacts("
+                    + "FACT_COUNTS, FACT_KNOWN);\n    }\n");
             if (!accessor.isEmpty()) {
                 writer.write("    public static double absoluteSignal(" + name + " value) {\n");
                 writer.write("        java.util.Objects.requireNonNull(value, \"value\");\n");
