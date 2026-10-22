@@ -1,0 +1,44 @@
+M3 / Synexia first-party work
+Copyright © 2026 Hitesh Soliwal and Contributors to the Synexia Project
+Licensed under the Apache License, Version 2.0, within the repository's bounded
+first-party release surface and subject to all path-specific provenance.
+
+M3, M3Scale, and M3Index copyrightable first-party source, specifications,
+documentation, diagrams, tests, recipes, manifests, and independently authored
+implementations are attributed to their respective M3/Synexia authors.
+Abstract ideas, algorithms, methods of operation, and general engineering
+concepts are not claimed as copyright property by this notice.
+
+Third-party and donor materials retain their original copyright, licenses,
+NOTICE files, attribution, and modification obligations. Nothing in this
+notice blanket-relicenses donor material.
+
+See COPYRIGHT.md and LICENSE.spdx for the detailed boundary.
+
+------------------------------------------------------------------------------
+
+M3-owned code, scripts, manifests, and documentation selected for release from this workspace are intended for Apache License 2.0 distribution.
+
+This NOTICE applies only to the M3-owned release surface described in:
+- docs/m3/M3_APACHE2_RELEASE_BOUNDARY.md
+
+Specific bounded release packages may include:
+- M3-owned tooling scripts from `scripts\*`, `launch.ps1`, and `launch-mcp-tools.ps1`
+- DayBook core accounting domain files that are explicitly marked as ported from Apache OFBiz and Apache Fineract patterns
+
+When those bounded packages are published:
+- keep Apache OFBiz and Apache Fineract attribution visible in the bundled third-party notices
+- preserve the file-level modification markings already present in the source headers
+- do not imply blanket relicensing of the full workspace
+
+This NOTICE does not relicense or supersede the original licenses of any third-party donor or reference repositories, including but not limited to:
+- Apache OFBiz
+- Apache Fineract
+- Elastic Path repositories
+- Spree
+- Medusa
+- Saleor
+- Vercel Commerce
+- local donor/reference roots under oss-* or downloaded FOSS corpora
+
+Donor code remains under its upstream license. M3 artifacts retain provenance and license-class ledgers to prevent accidental relicensing.
