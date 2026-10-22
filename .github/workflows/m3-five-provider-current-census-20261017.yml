@@ -12,6 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Prove the 36 historical owners at their real authoring commit, without
+      # relaxing the immutable current-census-20261017 source verifier.
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: a720780b1a5ab41ea27182b9b7ad873efdf533b4
+          path: historical-product
+          sparse-checkout: |
+            m3/collections/interop
+          persist-credentials: false
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -39,7 +49,9 @@ jobs:
         run: |
           cd m3/collections/interop/qualification/current-census-20261017
           python3 -m unittest discover -p 'test_*.py' -v
-          python3 verify.py
+          cd "$GITHUB_WORKSPACE"
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v
+          python3 m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py --product . --historical-product historical-product
   five-real-provider-runtime:
     runs-on: ubuntu-latest
     needs: source-sealed-current-census
