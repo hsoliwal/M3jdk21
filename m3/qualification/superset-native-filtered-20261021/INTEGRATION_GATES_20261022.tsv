@@ -9,3 +9,6 @@ FILTERED_SORTED_BACKED_CONTRACTS	NOT_RUN	verify-integrated-java-jni.sh	Existing 
 M3JDK21_MATCHED_IMAGE	NOT_RUN	configure/make image + jtreg/JCK	Product bootstrap/HotSpot/GC/native-image proof pending
 ALL_FIVE_COLLECTION_LIBRARIES	NOT_RUN	provider-specific suites	JDK Guava Eclipse Collections Apache Commons Collections Spring pending
 CPU_HEAP_NATIVE_MEMORY	NOT_RUN	paired cold/warm measured comparison	No universal speedup or reduction claim
+MASK_PREFIX_EXACT_BLOBS	PASS	f85e7359010bd25e0a909a145e283007cff25d7c;d720912f0f57bcde9fc07a05f31869a19f3452eb	Actual Java/test blobs equal canonical Synexia #12851 first-party recipe output
+MASK_PREFIX_LOCAL_HISTORY	HISTORICAL_PASS_NOT_RERUN	M3JDK21 #1754	Earlier 2371785-assertion normal and interpreter evidence; no current combined-branch PASS
+MASK_PREFIX_COMBINED_CI	NOT_RUN	bash m3/qualification/mask-prefix-scalar-20261021/verify.sh	Source-built patch java.base compactor plus original live/sorted regression pending CI
