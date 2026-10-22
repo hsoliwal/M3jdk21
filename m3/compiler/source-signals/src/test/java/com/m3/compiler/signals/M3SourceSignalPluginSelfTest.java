@@ -70,6 +70,7 @@ public final class M3SourceSignalPluginSelfTest {
             annotatedAndCompanionCoexist(root);
             deterministicAcrossCompilationPermutations(root);
             mutationChangesSignals(root);
+            methodOptInRetainsV1Output(root);
             invalidOptionsReject(root);
             System.out.println("PASS M3 source-signal compiler checks=" + checks);
         } finally {
@@ -147,6 +148,42 @@ public final class M3SourceSignalPluginSelfTest {
         verifyChecksum(after);
     }
 
+    /** Default v1 is byte-for-byte the same as explicit methods=off; v2 stays opt-in. */
+    private static void methodOptInRetainsV1Output(Path root) throws Exception {
+        Path dir = root.resolve("method-v2");
+        Path annotation = source(dir, "com/m3/collections/sortable/Sortable.java", ANNOTATION);
+        Path model = source(dir, "demo/Model.java", MODEL);
+        Path other = source(dir, "demo/Other.java", OTHER);
+        List<Path> sources = List.of(model, other, annotation);
+        Path ordinary = dir.resolve("out/ordinary.tsv");
+        Path disabled = dir.resolve("out/methods-off.tsv");
+        Path withMethods = dir.resolve("out/methods-on.tsv");
+        compile(dir, ordinary, sources, "include=all");
+        compile(dir, disabled, sources, "include=all methods=off");
+        check(Arrays.equals(Files.readAllBytes(ordinary), Files.readAllBytes(disabled)),
+                "method extension must preserve every legacy /1 byte");
+        compile(dir, withMethods, sources, "include=all methods=on");
+        String emitted = Files.readString(withMethods, StandardCharsets.UTF_8);
+        check(emitted.startsWith("# M3JDK21-SOURCE-SIGNALS/2\n"),
+                "explicit methods=on schema v2");
+        check(emitted.contains("S\tdemo.Model\t"), "legacy type scalars remain available");
+        check(emitted.contains("E\tdemo.Model\tcall:DIRECT:java.lang.Math#max"),
+                "legacy attributed type edge remains unchanged");
+        check(emitted.contains("M\tdemo.Model\tdemo.Model#count("),
+                "method declaration with exact compiler signature");
+        check(emitted.contains("R\tdemo.Model\tdemo.Model#count("),
+                "method to method caller evidence");
+        check(emitted.contains("call:DIRECT:java.lang.Math#max"),
+                "method-level direct static edge");
+        check(emitted.contains("DISPATCH_CANDIDATE:java.lang.String#startsWith"),
+                "virtual dispatch remains candidate rather than measured target");
+        verifyChecksum(emitted);
+        Path reversed = dir.resolve("out/methods-on-reordered.tsv");
+        compile(dir, reversed, List.of(other, annotation, model), "include=all methods=on");
+        check(Arrays.equals(Files.readAllBytes(withMethods), Files.readAllBytes(reversed)),
+                "method /2 artifact independent of source argument order");
+    }
+
     private static void invalidOptionsReject(Path root) throws Exception {
         Path dir=root.resolve("bad-options");
         Path source=source(dir,"demo/Shape.java","package demo; public class Shape {}");
@@ -154,6 +191,16 @@ public final class M3SourceSignalPluginSelfTest {
         try { compile(dir,dir.resolve("signals.tsv"),List.of(source),"unknown-option"); }
         catch (IllegalArgumentException problem) { rejected=true; }
         check(rejected,"unknown options fail closed");
+        rejected = false;
+        try { compile(dir, dir.resolve("invalid-methods.tsv"), List.of(source),
+                "include=all methods=unrecognized"); }
+        catch (IllegalArgumentException problem) { rejected = true; }
+        check(rejected, "unknown method producer options fail closed");
+        rejected = false;
+        try { compile(dir, dir.resolve("duplicate-methods.tsv"), List.of(source),
+                "methods=on methods=off"); }
+        catch (IllegalArgumentException problem) { rejected = true; }
+        check(rejected, "duplicate method mode rejects rather than silently overriding");
     }
 
     private static Path source(Path root,String relative,String text) throws IOException {
