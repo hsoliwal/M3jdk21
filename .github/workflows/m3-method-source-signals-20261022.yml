@@ -1,0 +1,78 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 opt-in attributed method source signals Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java'
+      - 'm3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java'
+      - 'm3/compiler/source-signals/src/test/java/com/m3/compiler/signals/M3MethodSignals*.java'
+      - 'm3/compiler/source-signals/qualification/method-signals-20261022/**'
+      - '.github/workflows/m3-method-source-signals-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict-javac-source-and-legacy-byte-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source receipt and diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/master...HEAD
+          bash m3/compiler/source-signals/qualification/method-signals-20261022/verify.sh
+      - name: Strict actual plugin source, attributed JavacTask fixture and original v1 bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-method"
+          mkdir -p "$out/classes/META-INF/services" "$out/sample" "$out/compiled"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java \
+            m3/compiler/source-signals/src/test/java/com/m3/compiler/signals/M3MethodSignalsSelfTest.java
+          cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
+            "$out/classes/META-INF/services/com.sun.source.util.Plugin"
+          java -cp "$out/classes" com.m3.compiler.signals.M3MethodSignalsSelfTest
+          cat > "$out/sample/Model.java" <<'JAVA'
+          package demo;
+          class Model {
+              static int calculate(int n) { return n * 2; }
+              int run(int n) { if (n > 0) return calculate(n) + new Worker().go(); return 0; }
+              String fake = "fakeCall()";
+          }
+          class Worker { int go() { return 3; } }
+          JAVA
+          javac --release 21 -proc:none -processorpath "$out/classes" \
+            "-Xplugin:M3SourceSignals out=$out/type-original.tsv include=all" \
+            -d "$out/compiled" "$out/sample/Model.java"
+          javac --release 21 -proc:none -processorpath "$out/classes" \
+            "-Xplugin:M3SourceSignals out=$out/type-extra.tsv methodOut=$out/methods.tsv include=all" \
+            -d "$out/compiled" "$out/sample/Model.java"
+          cmp "$out/type-original.tsv" "$out/type-extra.tsv"
+          grep -q 'M3JDK21-METHOD-SIGNALS/1' "$out/methods.tsv"
+          grep -q 'call:DIRECT:demo.Model#calculate(int;):int' "$out/methods.tsv"
+          grep -q 'call:DISPATCH_CANDIDATE:demo.Worker#go():int' "$out/methods.tsv"
+  original-javac-maven-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Existing javac plugin suite, new JUnit integration and opt-in source seals
+        run: >
+          mvn -B -ntp -f m3/compiler/source-signals/pom.xml
+          -Dtest=M3SourceSignalPluginJUnitTest,M3MethodSignalsJUnitTest,M3MethodSignalsPluginTest
+          test
