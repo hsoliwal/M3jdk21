@@ -8710,6 +8710,121 @@
         },
         "source_state": "proposed",
         "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
+      },
+      {
+        "id": "m3.java-base.mask-prefix-scalar-20261021",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Direct integrated M3JDK21 scalar deletion-mask atom is source-sealed, Java21 patch-module tested, and not yet accepted by a full source-built JDK image or performance gates.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java",
+            "symbol": "jdk.internal.mindex.M3CollectionMaskCompactor.compact",
+            "signatures": [
+              "public static int compact(Object[] values, int from, int to, long[] deleted)"
+            ],
+            "sha256": "1c3f3d2cf129b0ccc44e001fce9f68a251e964ce2c5f7ac5007990cfdaca3216",
+            "git_blob_sha1": "51ea3a72bb191afc250a58be964363bd5680467c",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "008e952df4b62a188401e6c3146017a82099e096",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java",
+            "symbol": "jdk.internal.mindex.M3CollectionMaskCompactor.compact",
+            "signatures": [
+              "public static int compact(Object[] values, int from, int to, long[] deleted)"
+            ],
+            "sha256": "221bc2531f34ec8febe4f6c96f4eb642a95fd575a5809eca075306d139339079",
+            "git_blob_sha1": "f85e7359010bd25e0a909a145e283007cff25d7c",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/m3/array-mask-prefix-java-base-20261021"
+          }
+        ],
+        "owner": "Existing java.base M3CollectionMaskCompactor over ArrayList Object[] payload and long[] delete masks; no separate runtime, class or Entry owner",
+        "identity": {
+          "namespace": "Original physical array, relative deletion mask and JDK class identity unchanged",
+          "generation": "Caller controls List modification epoch, GC barriers and tail reference clearing; helper mints no generation"
+        },
+        "contract": {
+          "differences": [
+            "Skip redundant scalar self-writes until the first deletion; unchanged exclusive survivor index and reference ordering."
+          ],
+          "compatibility_obligations": [
+            "Exact null/bounds/mask-length exception contracts and short-circuit order",
+            "Exact ordered survivor Object[] reference identities, offset and mask coordinate semantics",
+            "ArrayList modCount, fail-fast, predicate effects and physical tail clearing",
+            "Preserve java.util.CollectionViews filtered/sorted contracts and module/JNI ownership"
+          ],
+          "public_surface": [
+            "public static int compact(Object[] values, int from, int to, long[] deleted)"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Unchanged Java21 java.base static method; no native ABI additions",
+          "bootstrap": "Existing java.base jdk.internal.mindex helper; public JDK classes retain original names"
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Use exact existing Object[] payload and caller-supplied long[] relative mask; no new owner",
+          "joins": "None",
+          "outputs": "In-place compacted prefix; no new retained Object[] or Entry objects",
+          "cached_facts": "None; existing mask-word next/removalRuns code reused"
+        },
+        "recipe": {
+          "id": "com.synexia.m3.M3Jdk21MaskPrefixScalar20261021",
+          "version": "1",
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-mask-prefix-scalar-20261021.yml",
+          "sha256": null,
+          "preconditions": [
+            "Original file Git blob 51ea3a72bb191afc250a58be964363bd5680467c and SHA-256 1c3f3d2cf129b0ccc44e001fce9f68a251e964ce2c5f7ac5007990cfdaca3216",
+            "Explicit ABSENT-before jtreg file",
+            "Contract, source/license, per-file fixed-point and drift refusal tests"
+          ],
+          "rollback": "Restore the exact pinned original preimage in a reviewed additive revert; do not force-push or rebase develop history."
+        },
+        "tests": [
+          {
+            "id": "M3CollectionMaskCompactorPrefixTest",
+            "receipt": "m3/qualification/mask-prefix-scalar-20261021/README.md"
+          }
+        ],
+        "provenance": {
+          "license": "Original product Java source retains GPLv2 with Classpath exception; first-party Synexia recipe and fixture Apache-2.0 attribution remain distinct",
+          "publication": "Direct candidate in original java.base source; no competitive-programming solution or third-party source copied",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "target_revision": "f3fe17db304d33f4a5036fde0f704b2b46c359eb",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Scalar copied suffix starts after first deleted bit while bulk run scanning and public API stay unchanged"
+          ],
+          "pending": [
+            "Canonical Maven/OpenRewrite JUnit fixed-point/refusal execution",
+            "Source-built M3JDK21 installed java.base jtreg/JVM/GC/native acceptance",
+            "Comparative CPU, allocated heap, retained heap and native memory benchmarking"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "2,371,785 strict Java21 patch-module differential assertions passed for both original and candidate. Full product image and Maven/CI receipt remain pending."
       }
     ]
   },
