@@ -1,0 +1,100 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 arrayified five-library Java21 var grammar and receipt
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+      - 'm3/collections/interop/qualification/arrayification-var-20261022/**'
+      - '.github/workflows/m3-interop-arrayification-var-20261022.yml'
+  push:
+    branches:
+      - m3/interop-arrayification-var-receiver-20261022
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-java21-receiver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          sparse-checkout: |
+            m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
+            m3/collections/interop/qualification/arrayification-var-20261022
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: a397cc81977a3d979a0484bd339246a05bec84d1
+          path: baseline
+          sparse-checkout: |
+            m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse any Java source delta beyond one exact compound-var split
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          target = Path('m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java')
+          old = Path('baseline') / target
+          source = old.read_bytes()
+          received = target.read_bytes()
+          before = b'        var left=sorted.slice(0,3),right=sorted.slice(3,5);'
+          after = b'        var left=sorted.slice(0,3);\n        var right=sorted.slice(3,5);'
+          if source.count(before) != 1:
+              raise SystemExit('frozen Java21 source input drift')
+          if received != source.replace(before, after):
+              raise SystemExit('product Java source deviates from canonical Synexia recipe')
+          for data, expected in [
+              (source, '43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d'),
+              (received, '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565'),
+          ]:
+              if hashlib.sha256(data).hexdigest() != expected:
+                  raise SystemExit('source pre/postimage SHA256 invalid')
+          receipt = Path('m3/collections/interop/qualification/arrayification-var-20261022/source-handoff.tsv').read_text()
+          if 'com.synexia.m3.M3Jdk21InteropArrayificationVar20261022' not in receipt:
+              raise SystemExit('missing canonical Synexia source receipt')
+          print('M3_FIVE_LIBRARY_VAR_SOURCE_RECEIVER_PASS')
+          PY
+      - name: Prove Java21 rejects original grammar but compiles exact split grammar
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-var-proof/before" "$RUNNER_TEMP/m3-var-proof/after"
+          cat > "$RUNNER_TEMP/m3-var-proof/before/M3VarProof.java" <<'JAVA'
+          final class M3VarProof {
+            static final class Rows { Rows slice(int a, int b) { return this; } }
+            static boolean probe() {
+              Rows sorted = new Rows();
+              var left=sorted.slice(0,3),right=sorted.slice(3,5);
+              return left == right;
+            }
+          }
+          JAVA
+          sed 's/var left=sorted.slice(0,3),right=sorted.slice(3,5);/var left=sorted.slice(0,3); var right=sorted.slice(3,5);/' \
+            "$RUNNER_TEMP/m3-var-proof/before/M3VarProof.java" \
+            > "$RUNNER_TEMP/m3-var-proof/after/M3VarProof.java"
+          if javac --release 21 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-var-proof/before" \
+            "$RUNNER_TEMP/m3-var-proof/before/M3VarProof.java" \
+            > "$RUNNER_TEMP/m3-var-proof/original.log" 2>&1; then
+            echo 'ERROR: original invalid Java 21 grammar was accepted'
+            exit 1
+          fi
+          grep -F "'var' is not allowed in a compound declaration" \
+            "$RUNNER_TEMP/m3-var-proof/original.log"
+          javac --release 21 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-var-proof/after" \
+            "$RUNNER_TEMP/m3-var-proof/after/M3VarProof.java"
+          echo M3_FIVE_LIBRARY_VAR_JAVA21_COMPILER_PASS
