@@ -104,6 +104,8 @@ def check_revision(current: Path, previous: Path, receipt: Path) -> int:
 def verify(current: Path, previous: Path, predecessor: Path,
            historical: Path, receipt: Path) -> int:
     previous = previous.resolve(strict=True)
+    predecessor = predecessor.resolve(strict=True)
+    historical = historical.resolve(strict=True)
     if subprocess.check_output(["git", "rev-parse", "HEAD"],
                                cwd=previous, text=True).strip() != PREVIOUS_HEAD:
         raise ValueError("previous product source generation not pinned")
