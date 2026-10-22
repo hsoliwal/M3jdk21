@@ -326,6 +326,7 @@ public final class M3IndexedArray<E> {
         if (count < 2) {
             return;
         }
+        final int bulkCopyThreshold = 16;
         int[] source = indexes;
         int[] target = new int[count];
         for (long width = 1; width < count; width *= 2) {
@@ -341,11 +342,17 @@ public final class M3IndexedArray<E> {
                     rejectReentrantMutation(initialVersion, stateAware);
                     target[output++] = ordering <= 0 ? source[l++] : source[r++];
                 }
-                while (l < leftEnd) {
-                    target[output++] = source[l++];
-                }
-                while (r < rightEnd) {
-                    target[output++] = source[r++];
+                if (leftEnd - l >= bulkCopyThreshold) {
+                    System.arraycopy(source, l, target, output, leftEnd - l);
+                } else if (rightEnd - r >= bulkCopyThreshold) {
+                    System.arraycopy(source, r, target, output, rightEnd - r);
+                } else {
+                    while (l < leftEnd) {
+                        target[output++] = source[l++];
+                    }
+                    while (r < rightEnd) {
+                        target[output++] = source[r++];
+                    }
                 }
             }
             final int[] previousSource = source;

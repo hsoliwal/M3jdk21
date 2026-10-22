@@ -8710,6 +8710,406 @@
         },
         "source_state": "proposed",
         "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
+      },
+      {
+        "kind": "pending",
+        "status": "pending",
+        "format": {
+          "schema": null,
+          "abi": "Unchanged existing Java signatures and native identifiers; no exported API added.",
+          "bootstrap": "Intrinsic java.base/libjava owners; Maven/OpenRewrite is tool-only."
+        },
+        "dependencies": [],
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "proposed",
+        "provenance": {
+          "license": "Retain each existing owner notice; Java indexed owners are GPL-2.0-only WITH Classpath-exception-2.0, independently authored mask/tooling files retain Apache-2.0. No blanket JDK relicensing.",
+          "publication": "Candidate recipe and evidence are local; actual publication/receiving is tracked separately by the coordinator.",
+          "copied_code": true
+        },
+        "id": "synexia.collections.indexed-live-views",
+        "reason": "Current intrinsic live filtered/sorted owners already exist. A copy-only successor is host-qualified; full-image and programme promotion remain pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+            "symbol": "jdk.internal.m3.M3IndexedArray",
+            "signatures": [
+              "long append(E)",
+              "boolean replace(long,E)",
+              "boolean remove(long)",
+              "List<E> filtered(Predicate)",
+              "List<E> sorted(Comparator)",
+              "List<E> filteredSorted(Predicate,Comparator)",
+              "List<E> maskedStates(int,int)",
+              "List<E> maskedSortedStates(int,int,Comparator)"
+            ],
+            "sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+            "git_blob_sha1": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+            "fingerprint": null,
+            "revision_role": "pinned-current-owner"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
+            "symbol": "jdk.internal.m3.M3IndexedView",
+            "signatures": [
+              "E get(int)",
+              "int size()",
+              "List<E> subList(int,int)",
+              "Spliterator<E> spliterator()"
+            ],
+            "sha256": "6eaccec5b5ccc41b39ba165c2b5c57768e84d964430a7c28fba0c5061d41ba04",
+            "git_blob_sha1": "885f237a80cdd5997a852609fa60066d0f7d11c4",
+            "fingerprint": null,
+            "revision_role": "pinned-current-owner"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+            "symbol": "jdk.internal.m3.M3IndexedArray",
+            "signatures": [
+              "long append(E)",
+              "boolean replace(long,E)",
+              "boolean remove(long)",
+              "List<E> filtered(Predicate)",
+              "List<E> sorted(Comparator)",
+              "List<E> filteredSorted(Predicate,Comparator)",
+              "List<E> maskedStates(int,int)",
+              "List<E> maskedSortedStates(int,int,Comparator)"
+            ],
+            "sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+            "git_blob_sha1": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+            "fingerprint": null,
+            "revision_role": "pinned-current-owner"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
+            "symbol": "jdk.internal.m3.M3IndexedView",
+            "signatures": [
+              "E get(int)",
+              "int size()",
+              "List<E> subList(int,int)",
+              "Spliterator<E> spliterator()"
+            ],
+            "sha256": "6eaccec5b5ccc41b39ba165c2b5c57768e84d964430a7c28fba0c5061d41ba04",
+            "git_blob_sha1": "885f237a80cdd5997a852609fa60066d0f7d11c4",
+            "fingerprint": null,
+            "revision_role": "pinned-current-owner"
+          }
+        ],
+        "owner": "jdk.internal.m3.M3IndexedArray owns payload/state/generation/order planes; M3IndexedView owns derived primitive selection indexes only.",
+        "identity": {
+          "namespace": "Physical slot plus generation-qualified long handle; logical order is a separate int[] directory. Payload identity and duplicate order are retained.",
+          "generation": "Value and state epochs remain distinct; leases change only state-aware views, and bound ranges/cursors retain existing fail-fast epochs."
+        },
+        "contract": {
+          "differences": [
+            "Candidate replaces only exhausted primitive merge tails of at least16 indexes with System.arraycopy; short tails retain scalar loops.",
+            "Existing filtered/sorted APIs, comparator/predicate call sequence, stable ties, reentrant mutation failures and monitor ownership remain unchanged."
+          ],
+          "compatibility_obligations": [
+            "Preserve nulls, duplicate payload identities, exception identity/stopping, lease refusal and generation-safe slot reuse.",
+            "Preserve lazy refresh/warm reuse, range binding, readonly mutation ordering and fail-fast traversal.",
+            "No Java callback crosses JNI; no public JDK collection replacement or CollectionViews wrapper integration is implied."
+          ],
+          "public_surface": [
+            "Existing internal M3IndexedArray and List-based view signatures only."
+          ]
+        },
+        "materialization": {
+          "admission": "Existing synchronized selection and epoch checks; bulk tail threshold16 affects only copy cost.",
+          "joins": "Bottom-up stable merge comparisons are unchanged; no run-recognition comparisons or new sorter.",
+          "outputs": "Existing int[] slot directory; no copied payload entries or new retained cache.",
+          "cached_facts": "Warm view indexes remain version-bound; measured Java allocation and comparator counts match the baseline."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.IndexedMergeTailV220261021",
+          "version": "20261021",
+          "path": null,
+          "sha256": "ef9c18a68deeaf4810cab95545e5b5650ef118b19115b296625982e333a70994",
+          "source_repo": "hsoliwal/com.synexia",
+          "source_commit": null,
+          "proposed_source_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-indexed-merge-tail-v2-20261021.yml",
+          "canonical_engine": {
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+            "commit": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
+            "git_blob_sha1": "98138cb6734ad86e3f77b8722fa5ff459842e841",
+            "sha256": "595ab8c4314de4f84708b3ec081fbef375e534787e5684ee98131ee16ab397b8"
+          },
+          "preconditions": [
+            "Exact declared target preimage or postimage only; no foreign edits, duplicate owners or missing required inputs.",
+            "Candidate descriptor and manifest are local task outputs, not files asserted present at the canonical baseline.",
+            "Run serial source gates and retain full-JDK/jtreg/platform/licensing/String-first promotion holds."
+          ],
+          "rollback": "Use a separately reviewed inverse exact-preimage recipe; never delete or overwrite unrelated edits."
+        },
+        "tests": [
+          {
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-intrinsic-collections-20261021/evidence/java-runtime-002/RESULT.json",
+            "sha256": "adb25d903778f950481adcbe4d4e4f88e570e2bb3c9c0a200f5895994ba43a74",
+            "scope": "Actual patched Java21 baseline/candidate mixed+Xint semantics/API and five-sample resource probe",
+            "source_commit": null,
+            "publication_state": "local candidate proof; not asserted present at canonical baseline"
+          },
+          {
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-intrinsic-collections-20261021/evidence/java-risk-001/RESULT.json",
+            "sha256": "f7ed3fd6fa6ab1b04fa7dd762cb87b7c8df614259a49f576488574a849bd7f1f",
+            "scope": "Seven-pair isolated1024-random timing risk check; noisy host measurements",
+            "source_commit": null,
+            "publication_state": "local candidate proof; not asserted present at canonical baseline"
+          },
+          {
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-intrinsic-collections-20261021/evidence/java-runtime-002/DECISION.json",
+            "sha256": "c139798df33ed94bafda92618d7adbf0ce666e9ea7e6ca1f4a1be286fd38de9a",
+            "scope": "Bounded candidate selection; v1 regression remains preserved",
+            "source_commit": null,
+            "publication_state": "local candidate proof; not asserted present at canonical baseline"
+          }
+        ],
+        "sync": {
+          "source_revision": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+          "target_revision": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+          "direction": "intrinsic-owner-refinement",
+          "target_adaptations": [
+            {
+              "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+              "preimage_sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+              "candidate_sha256": "2377c47affb4a7cd68d1ee6c6917adc69c48ecfe9b54a422cc8ad26abe6a8266",
+              "candidate_git_blob_sha1": "acab53769fe608bd99b6efff92efd811e7f3514e",
+              "target_commit": null,
+              "revision_role": "recipe-emitted-uncommitted-candidate",
+              "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-indexed-merge-tail-v2-20261021/manifest.tsv",
+              "manifest_sha256": "376fc3f26dce605823f994c832e0ebd3176269cd350fb46ee71958a1e2b91048"
+            },
+            {
+              "path": "test/jdk/jdk/internal/m3/M3IndexedMergeTailTest.java",
+              "preimage_sha256": "ABSENT",
+              "candidate_sha256": "e7401be282aec588b9c26f9c41edabd052b8495208ff8ac9949e688f46b09a38",
+              "candidate_git_blob_sha1": "3a4641542ae48651c4918fd022df930940cbe9f5",
+              "target_commit": null,
+              "revision_role": "recipe-emitted-uncommitted-candidate",
+              "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-indexed-merge-tail-test-20261021/manifest.tsv",
+              "manifest_sha256": "54428913834523e43dfdc894a08239883c5e13a139f1d07d46f63f1da09d1a38"
+            }
+          ],
+          "pending": [
+            "Actual coordinated receiving/publication commit",
+            "Rebuilt matching JDK and actual jtreg",
+            "Broader collector/platform/interop/resource qualification",
+            "String-first programme promotion and existing license gates"
+          ],
+          "conflicts": []
+        },
+        "observation": "Pinned targets are existing baseline owners. Generated successor hashes are explicit candidate adaptations; host tests do not promote the collection family or prove all donor functionality transferred."
+      },
+      {
+        "kind": "pending",
+        "status": "pending",
+        "format": {
+          "schema": null,
+          "abi": "Unchanged existing Java signatures and native identifiers; no exported API added.",
+          "bootstrap": "Intrinsic java.base/libjava owners; Maven/OpenRewrite is tool-only."
+        },
+        "dependencies": [],
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "proposed",
+        "provenance": {
+          "license": "Retain each existing owner notice; Java indexed owners are GPL-2.0-only WITH Classpath-exception-2.0, independently authored mask/tooling files retain Apache-2.0. No blanket JDK relicensing.",
+          "publication": "Candidate recipe and evidence are local; actual publication/receiving is tracked separately by the coordinator.",
+          "copied_code": true
+        },
+        "id": "synexia.collections.mask-window-jni",
+        "reason": "Existing intrinsic ordered primitive mask scanner is present. A full-chunk staging-copy successor is host-qualified; rebuilt-image and cross-platform acceptance remain pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+            "symbol": "jdk.internal.m3.M3IndexMaskWindow",
+            "signatures": [
+              "long scan(int[],byte[],int,int,int,int[],int,int,Backend)",
+              "long scanBounded(int[],byte[],int,int,int,int,int[],int,int,Backend)",
+              "boolean nativeAvailable()"
+            ],
+            "sha256": "f42473470989a103062696f1a3f4aa348e524308391edcaffff3df311d35eacf",
+            "git_blob_sha1": "f1e41112e980da7eaa33b2062f8cca743686dd8f",
+            "fingerprint": null,
+            "revision_role": "pinned-current-owner"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+            "module": "java.base",
+            "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+            "symbol": "Java_jdk_internal_m3_M3IndexMaskWindow_scanNative / scanBoundedNative",
+            "signatures": [
+              "Java_jdk_internal_m3_M3IndexMaskWindow_scanNative",
+              "Java_jdk_internal_m3_M3IndexMaskWindow_scanBoundedNative"
+            ],
+            "sha256": "80ef8aa795825efe9940f0230ba20802084b7d164450668660297516a1091301",
+            "git_blob_sha1": "37f2154791a09425852d095b73d0b137f3511fc6",
+            "fingerprint": null,
+            "revision_role": "pinned-current-owner"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+            "symbol": "jdk.internal.m3.M3IndexMaskWindow",
+            "signatures": [
+              "long scan(int[],byte[],int,int,int,int[],int,int,Backend)",
+              "long scanBounded(int[],byte[],int,int,int,int,int[],int,int,Backend)",
+              "boolean nativeAvailable()"
+            ],
+            "sha256": "f42473470989a103062696f1a3f4aa348e524308391edcaffff3df311d35eacf",
+            "git_blob_sha1": "f1e41112e980da7eaa33b2062f8cca743686dd8f",
+            "fingerprint": null,
+            "revision_role": "pinned-current-owner"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+            "module": "java.base",
+            "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+            "symbol": "Java_jdk_internal_m3_M3IndexMaskWindow_scanNative / scanBoundedNative",
+            "signatures": [
+              "Java_jdk_internal_m3_M3IndexMaskWindow_scanNative",
+              "Java_jdk_internal_m3_M3IndexMaskWindow_scanBoundedNative"
+            ],
+            "sha256": "80ef8aa795825efe9940f0230ba20802084b7d164450668660297516a1091301",
+            "git_blob_sha1": "37f2154791a09425852d095b73d0b137f3511fc6",
+            "fingerprint": null,
+            "revision_role": "pinned-current-owner"
+          }
+        ],
+        "owner": "jdk.internal.m3.M3IndexMaskWindow and its existing two libjava JNI entry points own one bounded primitive row/state scan.",
+        "identity": {
+          "namespace": "Source ordinal, caller-owned int row IDs and aligned unsigned byte state bits; duplicate/extreme row IDs remain legal.",
+          "generation": "Caller keeps primitive inputs stable during each call and revalidates its parent generation between resumptions; native code retains no array pointer."
+        },
+        "contract": {
+          "differences": [
+            "Candidate bypasses selected[] staging only when matches==128 and pending==0, then advances the identical consumed cursor.",
+            "All partial/pending fallback loop statements remain unchanged; JNI state/row/output call geometry and exception checks are equal."
+          ],
+          "compatibility_obligations": [
+            "Preserve unsigned masks, contradictory/zero-mask lanes, limit4096, chunk128, first/output/budget validation and packed resumable cursors.",
+            "Preserve exact exported symbols, generated descriptors, no heap allocation/persistent pins/callbacks, and unchanged output guards.",
+            "nativeAvailable currently reports libjava loading; missing added symbols refuse nonempty calls while zero-limit/zero-budget calls retain existing no-op semantics."
+          ],
+          "public_surface": [
+            "Existing internal Java methods and two libjava native symbols only."
+          ]
+        },
+        "materialization": {
+          "admission": "matches<=consumed<=take<=128, so matches128 proves every chunk ordinal is selected and values[] is contiguous; pending0 excludes older staged rows.",
+          "joins": "No conversion to generic collection payloads or Java Predicate/Comparator callback bridge.",
+          "outputs": "Same bounded int output window and high32 next/low32 written cursor, in source order.",
+          "cached_facts": "Existing fixed stack buffers remain; no retained native metadata or new allocation."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.MaskFullWindowV220261021",
+          "version": "20261021",
+          "path": null,
+          "sha256": "82d1cbc6d80758dbfb66ed1acc0c429e5edf1fedc46d01feec9a95a1e0ba8f7d",
+          "source_repo": "hsoliwal/com.synexia",
+          "source_commit": null,
+          "proposed_source_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-mask-full-window-v2-20261021.yml",
+          "canonical_engine": {
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+            "commit": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
+            "git_blob_sha1": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+            "sha256": "c4517401a7defd94ecc621bb2c19773bd6672c8fa3ee965c1ad37a63718bd92a"
+          },
+          "preconditions": [
+            "Exact declared target preimage or postimage only; no foreign edits, duplicate owners or missing required inputs.",
+            "Candidate descriptor and manifest are local task outputs, not files asserted present at the canonical baseline.",
+            "Run serial source gates and retain full-JDK/jtreg/platform/licensing/String-first promotion holds."
+          ],
+          "rollback": "Use a separately reviewed inverse exact-preimage recipe; never delete or overwrite unrelated edits."
+        },
+        "tests": [
+          {
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-intrinsic-collections-20261021/evidence/native-runtime-003/RESULT.json",
+            "sha256": "d32379cc1573007132189fa80435c05049b7ea5c1fb2dfd5b624fc13801e5783",
+            "scope": "Actual production C and bootstrap Java21, mixed+Xint checked JNI, ABI/header parity, UBSan and fault tapes",
+            "source_commit": null,
+            "publication_state": "local candidate proof; not asserted present at canonical baseline"
+          },
+          {
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-intrinsic-collections-20261021/evidence/native-risk-001/RESULT.json",
+            "sha256": "ad02aeb67ec0f404b0651cce9aff699fb1893a629880f84b193e0a7b68a820fd",
+            "scope": "Seven-pair isolated fallback timing risk check",
+            "source_commit": null,
+            "publication_state": "local candidate proof; not asserted present at canonical baseline"
+          },
+          {
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-intrinsic-collections-20261021/evidence/native-runtime-003/DECISION.json",
+            "sha256": "a0bbf6348a3536dff0051bd3076f4763c5c79cad7baa8ecdd8687a7622d1fbae",
+            "scope": "Bounded selection; prior regression and incompatible historical missing-ABI fixture failure retained",
+            "source_commit": null,
+            "publication_state": "local candidate proof; not asserted present at canonical baseline"
+          }
+        ],
+        "sync": {
+          "source_revision": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+          "target_revision": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+          "direction": "intrinsic-owner-refinement",
+          "target_adaptations": [
+            {
+              "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+              "preimage_sha256": "80ef8aa795825efe9940f0230ba20802084b7d164450668660297516a1091301",
+              "candidate_sha256": "153ec9727301febd6fff24a55877ec549850ebac997366fe25bb04e9b9bee81b",
+              "candidate_git_blob_sha1": "9fd46e422956744d7d662d5e6fdcf1046aa5db6f",
+              "target_commit": null,
+              "revision_role": "recipe-emitted-uncommitted-candidate",
+              "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-mask-full-window-v2-20261021/manifest.tsv",
+              "manifest_sha256": "58ba278844f3f5221cf068be2cb2305da8b9f2c245b6b322d0c7f12ab4a6a1f8"
+            },
+            {
+              "path": "test/jdk/jdk/internal/m3/M3MaskFullWindowTest.java",
+              "preimage_sha256": "ABSENT",
+              "candidate_sha256": "1135aa509a6c225cca3a76a0b0da67860a2a267bc53b504e578aefadec1e143d",
+              "candidate_git_blob_sha1": "da7b2e8e7abfa48e3caff45e47e54919b006c5ae",
+              "target_commit": null,
+              "revision_role": "recipe-emitted-uncommitted-candidate",
+              "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-full-window-test-20261021/manifest.tsv",
+              "manifest_sha256": "7c47147f8660fc5bb047b221e8ea6139f484f2b351d8dabee5a9a9cca3164414"
+            }
+          ],
+          "pending": [
+            "Actual coordinated receiving/publication commit",
+            "Rebuilt matching libjava image and actual jtreg",
+            "Other operating systems/architectures/compilers/collectors",
+            "Historical core license promotion and String-first programme gates"
+          ],
+          "conflicts": []
+        },
+        "observation": "The mask scanner is distinct from the indexed live-view int-state representation. This candidate does not claim to connect those representations or to repair the inherited availability policy."
       }
     ]
   },
