@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 compiler fact validity columns Java21/JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/**'
+      - 'm3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/**'
+      - 'm3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/**'
+      - '.github/workflows/m3-compiler-signal-facts-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-time-javac21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact product source identity, Git blobs and diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/master...HEAD
+          bash m3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/verify.sh
+      - name: Original javac annotation processor and 24980-assertion primitive contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/collections/signal-codegen/verify.sh
+      - name: Preserve six original structural hash/similarity lane semantics
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/compiler-facts-test"
+          mkdir -p "$out/classes"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$out/classes" \
+            m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/M3CompilerFacts.java \
+            m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/StructuralSignals.java \
+            m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/M3CompilerFactsContract.java \
+            m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/StructuralSignalsExtremeWeightsContract.java
+          java -ea -cp "$out/classes" com.m3.collections.sortable.M3CompilerFactsContract
+          java -ea -cp "$out/classes" com.m3.collections.sortable.StructuralSignalsExtremeWeightsContract
+
+  existing-primitive-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile existing C JNI M3 signal order, no new native symbol
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/compiler-facts-jni"
+          mkdir -p "$out/classes" "$out/native"
+          gcc -std=c11 -Wall -Wextra -Werror -fPIC -shared \
+            -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_signal_order_jni.c \
+            -o "$out/native/libm3signalorder.so"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java \
+            m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/M3CompilerFacts.java \
+            m3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/M3CompilerFactsJniProof.java
+          java -Xcheck:jni -Dm3.collections.signal.native=true \
+            -Djava.library.path="$out/native" -cp "$out/classes" \
+            com.m3.collections.sortable.M3CompilerFactsJniProof
+
+  original-maven:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Original source-time generator Maven test entrypoint
+        run: mvn -B -ntp -f m3/collections/signal-codegen/pom.xml test
