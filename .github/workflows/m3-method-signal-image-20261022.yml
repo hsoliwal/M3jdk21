@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 compiler method image primitive CSR Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3MethodSignalImage.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MethodSignalImage*.java'
+      - 'm3/collections/qualification/method-signal-image-20261022/**'
+      - '.github/workflows/m3-method-signal-image-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  strict-java21-original-owners-and-compiler-plugin:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source postimages and safe stacked diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/m3/method-source-signals-20261022...HEAD
+          bash m3/collections/qualification/method-signal-image-20261022/verify.sh
+      - name: Compile actual M3JDK21 primitive columns/CSR/method image and run seeded tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-method-receiver"
+          mkdir -p "$out/classes" "$out/plugin/META-INF/services" "$out/generated"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/com/m3/collections/M3MethodSignalImage.java \
+            m3/collections/src/test/java/com/m3/collections/M3MethodSignalImageSelfTest.java
+          java -cp "$out/classes" com.m3.collections.M3MethodSignalImageSelfTest
+      - name: Compile and invoke existing javac opt-in methodOut plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-method-receiver"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/plugin" \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java
+          cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
+            "$out/plugin/META-INF/services/com.sun.source.util.Plugin"
+          mkdir -p "$out/demo"
+          cat > "$out/demo/MethodExample.java" <<'JAVA'
+          package demo;
+          class Alpha {
+              static int twice(int value) { return value * 2; }
+              int run() { return twice(3); }
+          }
+          class Beta {
+              int apply() { return new Alpha().run(); }
+          }
+          JAVA
+          javac --release 21 -proc:none -processorpath "$out/plugin" \
+            "-Xplugin:M3SourceSignals out=$out/type-signals.tsv methodOut=$out/method-signals.tsv include=all" \
+            -d "$out/generated" "$out/demo/MethodExample.java"
+          test -s "$out/type-signals.tsv"
+          test -s "$out/method-signals.tsv"
+          java -cp "$out/classes" com.m3.collections.M3MethodSignalImageSelfTest \
+            "$out/method-signals.tsv"
+
+  portable-original-sources-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Test actual original product source under explicit alternate public JUnit
+        run: >
+          mvn -B -ntp -f m3/collections/qualification/method-signal-image-20261022/pom.xml test
