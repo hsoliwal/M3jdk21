@@ -7,7 +7,6 @@ package com.m3.collections;
 
 import java.util.AbstractList;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -248,17 +247,31 @@ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements R
 
     public M3ObjectIndexSnapshot<E> filtered(Predicate<? super E> predicate) {
         Objects.requireNonNull(predicate, "predicate");
-        BitSet accepted = new BitSet(size());
-        for (int i = 0; i < size(); i++) {
-            if (predicate.test(get(i))) accepted.set(i);
+        int length = size();
+        int first = 0;
+        while (first < length && predicate.test(get(first))) first++;
+        if (first == length) return this;
+        // The accepted prefix needs no metadata. Allocate only the remaining bits;
+        // predicates still run exactly once and all captured lanes stay immutable.
+        long[] accepted = new long[((length - first - 1) >>> 6) + 1];
+        int count = first;
+        for (int i = first + 1; i < length; i++) {
+            if (predicate.test(get(i))) {
+                int relative = i - first;
+                accepted[relative >>> 6] |= 1L << relative;
+                count++;
+            }
         }
-        int count = accepted.cardinality();
-        if (count == size()) return this;
         int[] selected = new int[count];
-        int written = 0;
-        for (int bit = accepted.nextSetBit(0); bit >= 0; bit = accepted.nextSetBit(bit + 1)) {
-            selected[written++] = rows[from + bit];
-            if (bit == Integer.MAX_VALUE) break;
+        System.arraycopy(rows, from, selected, 0, first);
+        int written = first;
+        for (int word = 0; word < accepted.length && written < count; word++) {
+            long bits = accepted[word];
+            while (bits != 0) {
+                int relative = (word << 6) + Long.numberOfTrailingZeros(bits);
+                selected[written++] = rows[from + first + relative];
+                bits &= bits - 1;
+            }
         }
         return withRows(selected, order);
     }
