@@ -123,7 +123,11 @@ public final class M3ApacheBag<E> extends AbstractCollection<E> implements Bag<E
         M3CountedBag<Object> wanted = tally(source);
         boolean changed = false;
         for (E key : new ArrayList<>(counts.distinctElements())) {
-            int excess = counts.count(key) - wanted.count(key);
+            int stored = counts.count(key);
+            int requested = wanted.count(key);
+            // Apache Commons Collections 4.5.0 AbstractMapBag.retainAll:
+            // an over-requested multiplicity removes all incumbent copies.
+            int excess = requested >= 1 && requested <= stored ? stored - requested : stored;
             if (excess > 0) changed |= remove(key, excess);
         }
         return changed;
