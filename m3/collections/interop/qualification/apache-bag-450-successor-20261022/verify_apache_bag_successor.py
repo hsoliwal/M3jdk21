@@ -15,7 +15,7 @@ import sys
 
 SOURCE_ROOT = "m3/collections/interop/src/"
 TARGET = SOURCE_ROOT + "main/java/com/m3/collections/interop/M3ApacheBag.java"
-PREVIOUS_HEAD = "378da3e595c0279faea28fb3a172e1f307c9db8d22a"
+PREVIOUS_HEAD = "378da3e595c0279faea6e2c3ea504364886f89bd"
 PREVIOUS_GATE = ("m3/collections/interop/qualification/"
                  "compiler-three-test-successor-20261022/verify_compile_successor.py")
 RECIPE = "com.synexia.m3.M3Jdk21ApacheBag450Retain20261022"
