@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Additive, source-sealed inventory; never rewrite the 36-owner predecessor."""
+"""Additive source-sealed 36+40 census with ordered one-test and nine-atom successors."""
 import argparse
 import hashlib
 import importlib.util
@@ -22,8 +22,8 @@ def git_blob(data: bytes) -> str:
     return hashlib.sha1(b'blob ' + str(len(data)).encode('ascii') + b'\0' + data).hexdigest()
 
 
-# The 40-source receipt is immutable. The next generation has exactly one
-# source-sealed, Java21-syntax-only test transition and no other valid changes.
+# The 36- and 40-source receipts stay immutable. First one Java 21 syntax
+# repair, then nine compiler/runtime transitions advance only pinned identities.
 COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
 COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
 COMPOUND_TRANSITION = (
@@ -50,8 +50,73 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
     return COMPOUND_TRANSITION
 
 
+# This is a successor, not a rewrite of the original 36/40 source ledgers,
+# changed-07 historical revision ledger, or changed-01 syntax transition.
+# Each of the nine before identities is checked AGAINST its immediate prior
+# admitted generation before its postimage may be read from the product.
+GATE_RECEIPT_SHA256 = '59715b1686750b1121ee065cc06c1ccf25499c9cf839090261db0707bef4baaa'
+GATE_PATHS = (
+    MAIN + 'M3ApacheBag.java',
+    TEST + 'M3ApacheCollectionsTest.java',
+    TEST + 'M3FiveLibraryArrayificationTest.java',
+    TEST + 'M3FiveLibraryKeyRangesTest.java',
+    TEST + 'M3FiveProviderFlagSelectionTest.java',
+    TEST + 'M3LibraryClosureTest.java',
+    TEST + 'M3SdkFamiliesTest.java',
+    TEST + 'M3SpringArrayContractTest.java',
+    TEST + 'M3SpringCaseInsensitiveSdkFactoryTest.java',
+)
+GATE_STATUS = 'CANDIDATE_JAVA21_158_PASS_JTREG_HOLD'
+GATE_COMPILE_CRATE = 'm3-interop-compile-gates-20261022'
+GATE_RUNTIME_CRATE = 'm3-interop-runtime-gates-20261022'
+
+
+def exact_gate_transitions(receipts: Path) -> dict[str, tuple[str, str, str, str]]:
+    """Fail closed on a missing, aliased, reordered or edited nine-owner ledger."""
+    file = receipts / 'changed-09.tsv'
+    if file.is_symlink() or not file.is_file():
+        raise ValueError('missing or aliased nine-owner successor receipt')
+    data = file.read_bytes()
+    if hashlib.sha256(data).hexdigest() != GATE_RECEIPT_SHA256:
+        raise ValueError('nine-owner successor receipt was tampered')
+    rows = [line.split('\t') for line in data.decode('utf-8').splitlines()
+            if line and not line.startswith('#')]
+    if (len(rows) != len(GATE_PATHS)
+            or any(len(row) != 8 for row in rows)
+            or tuple(row[0] for row in rows) != GATE_PATHS):
+        raise ValueError('nine-owner successor paths are not exact, sorted and unique')
+    admitted = {}
+    for path, before_sha, before_blob, after_sha, after_blob, crate, license_id, status in rows:
+        expected_crate = (GATE_COMPILE_CRATE if path in (
+            TEST + 'M3ApacheCollectionsTest.java',
+            TEST + 'M3FiveLibraryKeyRangesTest.java',
+            TEST + 'M3FiveProviderFlagSelectionTest.java') else GATE_RUNTIME_CRATE)
+        if (not HEX64.fullmatch(before_sha) or not HEX40.fullmatch(before_blob)
+                or not HEX64.fullmatch(after_sha) or not HEX40.fullmatch(after_blob)
+                or before_sha == after_sha or before_blob == after_blob
+                or crate != expected_crate or license_id != 'Apache-2.0'
+                or status != GATE_STATUS):
+            raise ValueError('invalid nine-owner successor proof: ' + path)
+        admitted[path] = (before_sha, before_blob, after_sha, after_blob)
+    return admitted
+
+
+def advance_expected_image(path: str, prior: tuple[str, str],
+                           successor: dict[str, tuple[str, str, str, str]]
+                           ) -> tuple[str, str]:
+    """Advance only when the exact immediately preceding generation is proved."""
+    row = successor.get(path)
+    if row is None:
+        return prior
+    if prior != row[:2]:
+        raise ValueError('nine-owner immediate predecessor identity mismatch: ' + path)
+    return row[2], row[3]
+
+
 def verify_additions(product: Path, receipts: Path,
-                     older: set[str], tracked: set[str]) -> list[str]:
+                     older: set[str], tracked: set[str],
+                     gate_successor: dict[str, tuple[str, str, str, str]] | None = None
+                     ) -> list[str]:
     product = product.resolve(strict=True)
     receipts = receipts.resolve(strict=True)
     if len(older) != 36 or any(not p.startswith((MAIN, TEST)) for p in older):
@@ -81,11 +146,15 @@ def verify_additions(product: Path, receipts: Path,
         unadmitted = sorted(tracked - expected)
         raise ValueError('installed interop tracking drift: missing=' + repr(absent[:8])
                          + ', unadmitted=' + repr(unadmitted[:8]))
-    # Do not weaken the older forty source identities; the extra receipt names
-    # exactly one old/new byte-pinned syntax repair and all other rows stay frozen.
+    # Chain old forty-owner identity -> one exact Java 21 syntax-only transition
+    # -> nine-owner qualified successor. All original ledger rows stay frozen.
     successor = exact_compound_transition(receipts) if (
         (receipts / 'changed-01.tsv').exists()
         or (receipts / 'changed-01.tsv').is_symlink()) else None
+    gate = gate_successor if gate_successor is not None else (
+        exact_gate_transitions(receipts) if (
+            (receipts / 'changed-09.tsv').exists()
+            or (receipts / 'changed-09.tsv').is_symlink()) else {})
     if successor is not None and successor[0] not in paths:
         raise ValueError('one-test source transition target not admitted')
     production = tests = 0
@@ -109,6 +178,7 @@ def verify_additions(product: Path, receipts: Path,
             if (sha, blob) != (successor[1], successor[2]):
                 raise ValueError('invalid one-test predecessor identity')
             sha, blob = successor[3], successor[4]
+        sha, blob = advance_expected_image(relative, (sha, blob), gate)
         if (hashlib.sha256(data).hexdigest() != sha or git_blob(data) != blob
                 or b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]):
             raise ValueError('source SHA, Git blob or license header drift: ' + relative)
@@ -125,7 +195,9 @@ HISTORICAL_VERIFIER_BLOB = "efe6d0f959cdc3172d6f6659f06bb486ef825291"
 
 
 def verify_historical_revisions(product: Path, receipts: Path,
-                                historical_product: Path) -> tuple[set[str], int]:
+                                historical_product: Path,
+                                gate_successor: dict[str, tuple[str, str, str, str]] | None = None
+                                ) -> tuple[set[str], int]:
     """Compare two generations without rewriting the historical source receipt."""
     old_script = ('m3/collections/interop/qualification/'
                   'current-census-20261017/verify.py')
@@ -185,6 +257,8 @@ def verify_historical_revisions(product: Path, receipts: Path,
             raise ValueError('missing or aliased current historical source: ' + path)
         data = source.read_bytes()
         expected_sha, expected_blob = revised.get(path, historic_identity)
+        expected_sha, expected_blob = advance_expected_image(
+            path, (expected_sha, expected_blob), gate_successor or {})
         if hashlib.sha256(data).hexdigest() != expected_sha or git_blob(data) != expected_blob:
             raise ValueError('unadmitted current historical atom drift: ' + path)
         if path in revised and b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]:
@@ -199,10 +273,14 @@ def verify_product_checkout(product: Path, receipts: Path,
     # A new product receiver must carry the exact additive transformation
     # receipt; the old six-test fixture runs verify_additions without it.
     exact_compound_transition(receipts)
-    older, revisions = verify_historical_revisions(product, receipts, historical_product)
+    successor = exact_gate_transitions(receipts)
+    older, revisions = verify_historical_revisions(
+        product, receipts, historical_product, successor)
     tracked = set(subprocess.check_output(['git', 'ls-files', '--',
         PREFIX + 'main', PREFIX + 'test'], cwd=product, text=True).splitlines())
-    extras = verify_additions(product, receipts, older, tracked)
+    extras = verify_additions(product, receipts, older, tracked, successor)
+    if not set(successor).issubset(older | set(extras)):
+        raise ValueError('nine-owner transition was not admitted to the 76-source census')
     return len(older), revisions, len(extras)
 
 
@@ -217,7 +295,8 @@ def main() -> None:
     original, revisions, additive = verify_product_checkout(
         args.product, args.receipts, args.historical_product)
     print(f'M3_FIVE_LIBRARY_SOURCE_SUPERSET_PASS original={original} revised={revisions} '
-          f'additive={additive} total={original + additive}')
+          f'additive={additive} gate_successors={len(GATE_PATHS)} '
+          f'total={original + additive}')
 
 
 if __name__ == '__main__':

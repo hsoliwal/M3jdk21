@@ -20,6 +20,15 @@ import org.springframework.util.MultiValueMapAdapter;
 
 /** Exact real Spring 6.2 interface, donor differential and ownership qualification. */
 final class M3SpringArrayContractTest {
+    /** Immutable caller-provided lists must fail equally on the Spring oracle and M3 owner. */
+    private static void compareUnsupportedOutcome(Runnable oracle, Runnable receiver) {
+        boolean oracleRejected = false;
+        boolean receiverRejected = false;
+        try { oracle.run(); } catch (UnsupportedOperationException expected) { oracleRejected = true; }
+        try { receiver.run(); } catch (UnsupportedOperationException expected) { receiverRejected = true; }
+        assertEquals(oracleRejected, receiverRejected, "Spring borrowed list mutability contract");
+    }
+
     @Test void directContractNotSpringAdapter() {
         var actual = M3LibraryCollections.<String, Integer>springMultiValueMap();
         assertInstanceOf(M3SpringArrayMultiValueMap.class, actual);
@@ -81,13 +90,15 @@ final class M3SpringArrayContractTest {
             Integer key = random.nextInt(7) == 0 ? null : random.nextInt(32);
             Integer value = random.nextInt(8) == 0 ? null : random.nextInt(50);
             switch (random.nextInt(13)) {
-                case 0 -> { actual.add(key, value); expected.add(key, value); }
+                case 0 -> compareUnsupportedOutcome(
+                        () -> expected.add(key, value), () -> actual.add(key, value));
                 case 1 -> { actual.set(key, value); expected.set(key, value); }
                 case 2 -> { actual.addIfAbsent(key, value); expected.addIfAbsent(key, value); }
                 case 3 -> assertEquals(expected.remove(key), actual.remove(key));
                 case 4 -> {
                     List<Integer> input = Arrays.asList(value, value);
-                    actual.addAll(key, input); expected.addAll(key, input);
+                    compareUnsupportedOutcome(
+                            () -> expected.addAll(key, input), () -> actual.addAll(key, input));
                 }
                 case 5 -> {
                     List<Integer> a = random.nextInt(6) == 0 ? null : new ArrayList<>(Arrays.asList(value));
