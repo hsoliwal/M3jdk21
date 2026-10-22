@@ -125,20 +125,24 @@ public final class SortableProcessor extends AbstractProcessor {
         // Source-path syntax counts are admitted only when Trees supplies the actual
         // annotated root. Any nested/local type is separately owned, not included
         // in this type's syntactic counts. No call-graph completeness is inferred.
+        TreeSet<Long> localCallTokens = new TreeSet<>(UNSIGNED);
         try {
             Trees trees = Trees.instance(processingEnv);
             TreePath path = trees.getPath(type);
             if (path != null) {
                 new TreePathScanner<Void, Void>() {
-                    private boolean rootType = true;
+                    private int classDepth;
                     @Override public Void visitClass(ClassTree tree, Void unused) {
-                        if (!rootType) return null;
-                        rootType = false;
-                        return super.visitClass(tree, unused);
+                        classDepth++;
+                        try {
+                            return super.visitClass(tree, unused);
+                        } finally {
+                            classDepth--;
+                        }
                     }
                     @Override public Void visitMethodInvocation(
                             MethodInvocationTree tree, Void unused) {
-                        facts[M3CompilerFacts.METHOD_INVOCATIONS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.METHOD_INVOCATIONS]++;
                         Element target = trees.getElement(getCurrentPath());
                         if (target instanceof ExecutableElement method) {
                             Element owner = method.getEnclosingElement();
@@ -148,81 +152,85 @@ public final class SortableProcessor extends AbstractProcessor {
                             for (VariableElement p : method.getParameters()) {
                                 signature.append(p.asType()).append(';');
                             }
-                            add(lanes[5], signature.append(')').toString());
+                            String token = signature.append(')').toString();
+                            // Preserve all original structural tokens (including nested
+                            // types). The new type-local fact excludes nested declarations.
+                            add(lanes[5], token);
+                            if (classDepth == 1) add(localCallTokens, token);
                         }
                         return super.visitMethodInvocation(tree, unused);
                     }
                     @Override public Void visitIf(IfTree tree, Void unused) {
-                        facts[M3CompilerFacts.IF_BRANCHES]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.IF_BRANCHES]++;
                         return super.visitIf(tree, unused);
                     }
                     @Override public Void visitSwitch(SwitchTree tree, Void unused) {
-                        facts[M3CompilerFacts.SWITCHES]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.SWITCHES]++;
                         return super.visitSwitch(tree, unused);
                     }
                     @Override public Void visitSwitchExpression(
                             SwitchExpressionTree tree, Void unused) {
-                        facts[M3CompilerFacts.SWITCHES]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.SWITCHES]++;
                         return super.visitSwitchExpression(tree, unused);
                     }
                     @Override public Void visitForLoop(ForLoopTree tree, Void unused) {
-                        facts[M3CompilerFacts.LOOPS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.LOOPS]++;
                         return super.visitForLoop(tree, unused);
                     }
                     @Override public Void visitEnhancedForLoop(
                             EnhancedForLoopTree tree, Void unused) {
-                        facts[M3CompilerFacts.LOOPS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.LOOPS]++;
                         return super.visitEnhancedForLoop(tree, unused);
                     }
                     @Override public Void visitWhileLoop(WhileLoopTree tree, Void unused) {
-                        facts[M3CompilerFacts.LOOPS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.LOOPS]++;
                         return super.visitWhileLoop(tree, unused);
                     }
                     @Override public Void visitDoWhileLoop(DoWhileLoopTree tree, Void unused) {
-                        facts[M3CompilerFacts.LOOPS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.LOOPS]++;
                         return super.visitDoWhileLoop(tree, unused);
                     }
                     @Override public Void visitConditionalExpression(
                             ConditionalExpressionTree tree, Void unused) {
-                        facts[M3CompilerFacts.CONDITIONAL_EXPRESSIONS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.CONDITIONAL_EXPRESSIONS]++;
                         return super.visitConditionalExpression(tree, unused);
                     }
                     @Override public Void visitLambdaExpression(
                             LambdaExpressionTree tree, Void unused) {
-                        facts[M3CompilerFacts.LAMBDAS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.LAMBDAS]++;
                         return super.visitLambdaExpression(tree, unused);
                     }
                     @Override public Void visitNewClass(NewClassTree tree, Void unused) {
-                        facts[M3CompilerFacts.NEW_EXPRESSIONS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.NEW_EXPRESSIONS]++;
                         return super.visitNewClass(tree, unused);
                     }
                     @Override public Void visitNewArray(NewArrayTree tree, Void unused) {
-                        facts[M3CompilerFacts.NEW_EXPRESSIONS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.NEW_EXPRESSIONS]++;
                         return super.visitNewArray(tree, unused);
                     }
                     @Override public Void visitSynchronized(
                             SynchronizedTree tree, Void unused) {
-                        facts[M3CompilerFacts.SYNCHRONIZED_BLOCKS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.SYNCHRONIZED_BLOCKS]++;
                         return super.visitSynchronized(tree, unused);
                     }
                     @Override public Void visitThrow(ThrowTree tree, Void unused) {
-                        facts[M3CompilerFacts.THROW_STATEMENTS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.THROW_STATEMENTS]++;
                         return super.visitThrow(tree, unused);
                     }
                     @Override public Void visitTry(TryTree tree, Void unused) {
-                        facts[M3CompilerFacts.TRY_BLOCKS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.TRY_BLOCKS]++;
                         return super.visitTry(tree, unused);
                     }
                     @Override public Void visitCatch(CatchTree tree, Void unused) {
-                        facts[M3CompilerFacts.CATCH_BLOCKS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.CATCH_BLOCKS]++;
                         return super.visitCatch(tree, unused);
                     }
                     @Override public Void visitReturn(ReturnTree tree, Void unused) {
-                        facts[M3CompilerFacts.RETURN_STATEMENTS]++;
+                        if (classDepth == 1) facts[M3CompilerFacts.RETURN_STATEMENTS]++;
                         return super.visitReturn(tree, unused);
                     }
                 }.scan(path, null);
-                facts[M3CompilerFacts.DISTINCT_RESOLVED_CALLEE_TOKENS] = lanes[5].size();
+                facts[M3CompilerFacts.DISTINCT_RESOLVED_CALLEE_TOKENS] = localCallTokens.size();
                 long modelKnown = (1L << M3CompilerFacts.MODEL_FACTS) - 1L;
                 validFacts |= ((1L << M3CompilerFacts.AST_FACTS_END) - 1L) & ~modelKnown;
             }
