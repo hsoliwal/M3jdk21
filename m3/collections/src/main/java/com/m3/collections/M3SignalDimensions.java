@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+// Modified 2026: reuse the private signal permutation for its terminal physical-coordinate remap.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -145,11 +147,11 @@ public final class M3SignalDimensions {
             }
         }
         int[] relative = orderSelected(prepared, descending, backend, identity(selected));
-        int[] result = new int[selected];
+        // Both coordinate lanes are private; reuse the final permutation for physical rows.
         for (int index = 0; index < selected; index++) {
-            result[index] = physical[relative[index]];
+            relative[index] = physical[relative[index]];
         }
-        return result;
+        return relative;
     }
 
     /**

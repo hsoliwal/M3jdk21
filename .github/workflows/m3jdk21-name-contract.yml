@@ -26,9 +26,17 @@ jobs:
             m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
             m3/tooling/name-contract/**
             src/java.base/share/classes/java/lang/Class.java
-            src/java.base/share/classes/jdk/internal/mindex/M3Class.java
-            src/java.base/share/classes/jdk/internal/mindex/M3Address28.java
+            src/java.base/share/classes/java/lang/M3StringRegexDp.java
+            src/java.base/share/classes/java/util/regex/Matcher.java
+            src/java.base/share/classes/jdk/internal/mindex/**
+            src/java.base/share/native/libjava/M3BitLane28.c
+            src/java.base/share/native/libjava/M3StateRelation.c
+            src/java.base/share/native/libjava/m3_state_relation.h
+            src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**
             m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+            m3/tooling/migration-recipes/src/**
+            m3/fs/src/main/java/com/m3/fs/**
+            test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java
             .github/workflows/m3jdk21-name-contract.yml
       - name: Canonical name and package mapping gate
         run: python3 m3/tooling/name-contract/check.py
