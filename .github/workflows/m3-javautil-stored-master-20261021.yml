@@ -6,6 +6,7 @@ on:
       - 'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java'
       - 'test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java'
       - 'test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java'
+      - 'test/jdk/java/util/CollectionViews/FilteredIsEmptyTerminalTest.java'
       - 'm3/qualification/javautil-stored-master-20261021/**'
       - '.github/workflows/m3-javautil-stored-master-20261021.yml'
   workflow_dispatch:
