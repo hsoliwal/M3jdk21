@@ -77,6 +77,37 @@ Candidate normalized inventory: SHA-256 `7defa67185f4bb1c695ac3add006ede120153a4
 
 **Next action:** repair these two ingestion/proof failures through the Synexia-owned source-sealed Maven/OpenRewrite/text recipe with adversarial numeric-prefix/multi-ID, wide-TSV and current-source fixtures, then replay against M3JDK21 and run authoritative product gates. No direct source acceptance or branch merge is authorized by this receipt.
 
+## Independently executed GA file-delta and current-tree reconciliation — 2026-10-22
+
+Using the existing `file_delta_inventory.py` without changing the generator, the pinned Java 21 GA tree was compared against every final JDK 22–27 GA tree. The generated **435,987 release/path records** (a union of paths for each of six release comparisons, **not** 435,987 distinct files, JBS IDs, or eligible changes) are locally reproducible with SHA-256 `514af145deb9e33013ee1eb494b9d848550cf016ae6495152141234d0766c23c`. This 89-MB data-only derivation was not committed as a parallel receiver catalogue.
+
+Each Git blob *and mode* was then matched independently against actual public `hsoliwal/M3jdk21@4bd27a6fc78ba3f7ca019125c096c33d8a324cee` (`master`, **124,920** paths), not against missing files in the sparse working tree:
+
+| GA donor | Compared release/paths | Current equals baseline, not donor | Current equals donor (including unchanged) | Current differs from both |
+| --- | ---: | ---: | ---: | ---: |
+| 22 | 69,288 | 10,587 | 58,557 | 144 |
+| 23 | 70,334 | 18,552 | 51,629 | 153 |
+| 24 | 71,982 | 25,178 | 46,644 | 160 |
+| 25 | 73,596 | 30,516 | 42,920 | 160 |
+| 26 | 74,924 | 33,959 | 40,805 | 160 |
+| 27 | 75,863 | 37,051 | 38,651 | 161 |
+| **Comparisons** | **435,987** | **155,843** | **279,206** | **938** |
+
+Of the 435,987 records, 279,258 are `SAME` between Java 21 and donor GA; only 91 *changed* records already equal an exact donor blob, 155,843 changed records retain an exact baseline preimage, and 795 changed records have target divergence. These repeat across six release snapshots. The 19,279 `REMOVED` donor records require explicit deletion review (even when the current tree still equals the baseline). **Exact blob identity is source custody, not feature compatibility, patch dependency closure, or proof that a newer GA file can replace the Java 21 file.**
+
+### Source-sealed first serial candidate chain (no source promotion)
+
+| Order | Upstream JBS donor/commit | Target path and preimage | Mechanically established evidence | Current gate |
+| --- | --- | --- | --- | --- |
+| 1 | [JDK-8309665](https://bugs.openjdk.org/browse/JDK-8309665), OpenJDK `dc842e8587f1e27ef599abeec80a38a043b3d0b3` | `src/java.base/share/classes/java/util/Arrays.java`, current and Java 21 GA Git blob **`9d1034e6fef6c8ecf9fe4b5b4032fbd2622fc79b`** | Exact upstream parent preimage; one-file copyOf/Range refactor produces blob `85c514da3083c4509dd6f7a31110873ef9708660` | Maven/OpenRewrite recipe, Java 21 exception/arraycopy/cloning and performance oracles pending |
+| 2 | [JDK-8312164](https://bugs.openjdk.org/browse/JDK-8312164), OpenJDK `b5b6f4e7a77db4d13e19e186d3cd402cd7c626ea` | Same `Arrays.java`, after pass 1 | Upstream parent **exactly equals** pass-1 postimage; hashCode refactor yields blob `c5412776d202bc6fb36a3a9e65ba35437a98cbef`, also exact **JDK 22 GA** `Arrays.java` | Serial pass/fixed-point, all primitive/Object hash oracle including NaN, signed zero and null, javac/jtreg pending |
+| 3 (separate build lane) | [JDK-8306281](https://bugs.openjdk.org/browse/JDK-8306281), OpenJDK `9b0baa10b9140045aa3a49b03e685dcd3ea7c623` | `make/conf/jib-profiles.js`, current and Java 21 GA blob `da8f2f87a62e13faffa6e5a815153d00c4beeec9` | Identified untouched WSL version-case comparison and upstream one-line `toLowerCase()` adaptation. **Donor commit's parent blob differs from Java 21 baseline**, so full-file verbatim replay is not admitted | Adapted, hash-bound text recipe and WSL2/Jib/environment tests pending |
+| Hold | Post-21 String/JVM changes | `src/java.base/share/classes/java/lang/String.java`, current Git blob `e890f4cc4888a88214badf75d3d46e9addef3dd3`, Java 21 GA `5c234d4dfacac9e642578483640d4e6b41488beb` | Current M3 String owner already diverged; no baseline-clean replay | Meaningful behavioral-atom, HotSpot/JNI ABI and native memory proofs required |
+
+The sealed `Arrays.java` source SHA-256 chain is **`fb63f716ddcf750357d2c5747896336b45ad343eb4d3c2de329f3212c6bf49ec` → `67763d7bf2363b079351b48f71d87656341ec94111d6e9590ba91d9ce780bb43` → `0ba39f0b1a0be0c1e8040f778253ea41b5342f34b39786be64988f8b31d12c73`**. The build-script source at Java 21 baseline is SHA-256 `de39fb416074fbd2f8a53179070c6c77dd35a18d78fc769866c1ae05cd89feb5`; its exact upstream one-line donor postimage is SHA-256 `1e055a07fbe369597676913bdd0babffc9bed4291726c25b73620c2ffcdf342b` and must **not** be substituted as a whole file. `git diff --check jdk-21+35 jdk-22+36 -- Arrays.java` returned success; no Java 21 compile, jtreg, native or performance gate was executed for these candidate atoms.
+
+These records prepare exact source/preimage and serial ordering inputs for the existing **private Synexia** canonical JDK backport recipe owners; they create no new public recipe, source modification or admission. The local executor still lacks an authenticated private `com.synexia` Git checkout and Java 21/Maven toolchain, so the recipe and product-proof gate is explicitly **BLOCKED**, not silently passed.
+
 ## Acceptance / next serial passes
 
 1. Reconcile generated 14,948-commit source inventory with existing JEP/JBS rows, preserving each distinct upstream commit and JBS relationship; reject gaps, duplicates and stale tags.
