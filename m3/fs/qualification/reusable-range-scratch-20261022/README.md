@@ -39,7 +39,7 @@ is introduced.
 
 ## Recipe-first and algorithm donor custody
 
-Canonical [Synexia recipe](https://github.com/hsoliwal/com.synexia/pull/13018)
+Canonical [Synexia recipe](https://github.com/hsoliwal/com.synexia/pull/13095)
 uses the existing M3HashPinnedJavaSnapshotRecipe, original
 `MFileStreams.java` and original `MFileRangeTransferTest.java`
 before/after SHA256, exact two-cycle fixed-point/source-drift-refusal
