@@ -7,6 +7,7 @@ on:
       - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java'
       - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java'
       - '.github/workflows/m3-apache-bag-retain450.yml'
+      - 'm3/collections/interop/qualification/current-census-superset-20261022/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,6 +22,21 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: a720780b1a5ab41ea27182b9b7ad873efdf533b4
+          path: historical-product
+          persist-credentials: false
+          sparse-checkout: |
+            m3/collections/interop
+      - name: Exact 36+7+40 original-source proof and dual successor denial tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          Q=m3/collections/interop/qualification/current-census-superset-20261022
+          python3 -m unittest discover -s "$Q" -p 'test_apache450_transition.py' -v
+          python3 "$Q/verify_superset.py" --product . --historical-product historical-product
       - name: Compile original M3 collection owner and focused Apache 4.5.0 contract test
         shell: bash
         run: |
