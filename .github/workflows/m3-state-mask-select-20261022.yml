@@ -1,0 +1,48 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 source-owned required excluded array-state selection Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3StateMaskSelectContract.java'
+      - 'm3/collections/qualification/state-mask-select-20261022/**'
+      - '.github/workflows/m3-state-mask-select-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-m3-array-owners:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact head patch hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check "origin/${{ github.base_ref }}...HEAD"
+      - name: Refuse source drift from canonical Synexia postimage
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual="$(sha256sum m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java | awk '{print $1}')"
+          test "$actual" = "84181e87ab510ee84c1ee8c3645033192ef25a4dbb377aa76d60976bc3026357"
+      - name: Compile exact original-owner source and differential test
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          mkdir -p "$tmp/classes"
+          javac --release 21 -Xlint:all -Werror -d "$tmp/classes" \\
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java \
+            m3/collections/src/test/java/com/m3/collections/M3StateMaskSelectContract.java
+          java -cp "$tmp/classes" com.m3.collections.M3StateMaskSelectContract
+          java -Xint -cp "$tmp/classes" com.m3.collections.M3StateMaskSelectContract
