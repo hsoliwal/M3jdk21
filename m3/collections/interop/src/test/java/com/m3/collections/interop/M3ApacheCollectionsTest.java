@@ -17,6 +17,7 @@ import org.apache.commons.collections4.Predicate;
 import org.junit.jupiter.api.Test;
 
 /** Contract differential for Apache admission semantics, not a Guava live-filter oracle. */
+@SuppressWarnings("deprecation")
 final class M3ApacheCollectionsTest {
     private static final Predicate<Integer> NONNEGATIVE = value -> value != null && value >= 0;
 
