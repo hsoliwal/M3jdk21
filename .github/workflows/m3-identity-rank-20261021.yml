@@ -38,7 +38,7 @@ jobs:
           3d63ae8ed3d7e1c02ffbc1b96daa7d14ee143fffc12da11ba9aec44eaecc0d3b  m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java
           bc9755bd43350d583ad724408926f4e2ef76d8c5fc8040278a2620c9dc7a65ba  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java
           dcba4e115ae235321aa2558804a2b3f2cc053fa3b20a7a785b1a487422b2f60e  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentityTest.java
-          463045956ddd7792f5ae8614c979c129f6fdd2ad30491a8637db10a11c3dc1c1  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java
+          5af79b8408cd3f14e300a8f274e74ec539d3f945a0d03655b55ddc03eb351b70  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java
           3cad49e2d2e0c5aa1c8d2b880ddca19392cc072a68c2203872634550deae7b60  m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
           11eaa64f85575aac225b2839872a74e6db52d06981196488834a0f1799eaf7d3  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java
           05e276a47fc63c158fe20e3ba14fd3d3adc468b47eabf0966516c392a7cc3f98  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java
@@ -66,7 +66,20 @@ jobs:
           java -cp "$out/classes" com.m3.collections.M3IndexPathRankSelfTest
           java -Xcheck:jni -Djava.library.path="$out/native" -cp "$out/classes" \
             com.m3.collections.M3IndexPathRankNativeSelfTest
-      - name: Original owner and new identity-rank JUnit regressions
-        run: >
-          mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=M3IndexPathIdentityTest,M3LongStateArrayTest,M3IndexPathRankTest,M3IndexPathRankBulkTest,M3IndexedLiveViewTest test
+      - name: Original Java21 state, rank and filtered-live contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-identity-live-classes"
+          mkdir -p "$classes"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
+            -d "$classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java
+          java -ea -cp "$classes" com.m3.collections.M3IndexedLiveViewContract
+          java -ea -cp "$classes" com.m3.collections.M3IndexPathRankBulkSelfTest
+          java -ea -cp "$classes" com.m3.collections.M3IndexPathIdentitySelfTest
