@@ -16,3 +16,22 @@ The previous M3JDK21 #1803 typed columns, #1809 compiler image, #1832 TopK, `M3P
 Required actual acceptance: source seals; strict Java21 compile and standalone exception/version/metric differential; original Maven/JUnit against the repository's custom source-vendored JUnit artifact; Synexia Maven/OpenRewrite first apply, second fixed point, changed-source refusal; source-built M3JDK21 javac/jtreg/JCK, JNI/HotSpot/JIT/GC/CDS, VM/OS resource measurement. No rewritten source or mocked compiler test proves these until executed.
 
 The original M3JDK21 #1803 source-compile gate passed but its JUnit gate failed before tests because the custom JUnit source artifact had not been installed. The #1832 stack contains source-vendored JUnit-reactor installation; this PR reuses it, without weakening the original POM or recasting the alternate JUnit sidecar as fork acceptance. Keep DRAFT.
+
+## Source-image integrity-checked entry point
+
+The general `compile(columns,version,sourceSha256,...)` API is explicitly a **caller-declared**
+digest identity; formatting validation alone cannot authenticate a producer. For source-time
+facts from the **existing** `M3SourceSignalImage.parse`, use
+`compileVerified(image,version,completeExactSchema,lanes...)`. It reuses the image parser's
+strong SHA-256 **content integrity** verification of the compiler S/T/E sidecar and then
+performs the same fail-closed typed-coordinate admission. SHA-256 is not a signature and
+does not prove the author/compiler's identity. Full-object and metric certifications remain
+caller-supplied independent domain assertions.
+
+The bridge regression generates an actual v1 S/T/E source artifact, seals it with a
+real SHA-256 trailer, parses it through `M3SourceSignalImage`, compares source-owned
+structural counts, and tests refusal when an S record is modified without updating
+the original trailer. CI now compiles the existing `M3SourceSignalImage` and
+`M3SignalRelations` owners alongside this bridge; no second javac parser was added.
+The canonical source manifests were re-sealed after correcting the Java tab/newline
+fixture escapes. Actual Java/JUnit and full JDK acceptance are still pending.
