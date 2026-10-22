@@ -85,3 +85,35 @@ Do not merge related stacked PR bodies by copying whole files: qualify the
 existing filtered/sorted wrapper improvements separately against the current
 owner in #1734 and associated Synexia recipes. Keep one serial file writer,
 review SHA-256 identities and improve the canonical recipe upon counterexamples.
+
+## Original JDK caller / HotSpot qualification extension — 2026-10-22
+
+Direct caller inventory confirmed both original `java.util.ArrayList.removeIf` and
+`java.util.Vector.bulkRemove` find the first rejected index and set
+`deathRow[0] = 1L` before invoking `M3CollectionMaskCompactor` for
+windows of at least 512 elements. Therefore the candidate's leading-prefix
+skip has **no demonstrated hot-path speedup** for these callers; the precomputed
+first-bit fast path may add work. Retain it only as a contract-qualified
+general compactor candidate pending measurements.
+
+The exact new test `test/jdk/java/util/ArrayList/M3ArrayMaskCallersContract.java`
+was first saved under canonical Synexia recipe #12851 (Git blob
+`81fcd00c088dd9ae8ed203b71a59a1dae6fdee7e`).
+It preserves source identity and independently asserts original collection
+behavior: selection and tail clearing, physical element reference identity,
+nulls, duplicates, every predicate call, pre-existing iterator modCount/CME,
+no-op mutation neutrality, rollback on predicate exceptions, and reentrant
+structural mutation refusal. Stock OpenJDK 21 passed **365,398 assertions**
+in normal and interpreted mode locally.
+
+The product-scoped `verify.sh` now source-pins the real, unchanged
+`ArrayList.java` and `Vector.java`, compiles them directly in
+`java.base` with the candidate compactor and `CollectionViews`,
+checks both compiled call sites via bytecode, then executes original-JDK
+baseline and patched-JDK implementations under mixed and interpreted
+modes. Exact script/CI output remains pending qualification.
+
+This is still a focused java.base **patch-module** proof, not a
+`make images`/jtreg/JCK installed modified OpenJDK build or a JIT/GC
+performance benchmark. New tests may fail and must be fixed in the
+canonical recipe first; no equivalence or speedup is inferred from queued CI.
