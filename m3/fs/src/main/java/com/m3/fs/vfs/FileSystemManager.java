@@ -26,6 +26,10 @@ import java.net.URL;
 import java.net.URLStreamHandlerFactory;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.Objects;
+
+import com.m3.fs.M3FsBulk;
+import com.m3.fs.M3FsManagerBulk;
 
 import org.apache.commons.logging.Log;
 import com.m3.fs.vfs.operations.FileOperationProvider;
@@ -366,5 +370,78 @@ public interface FileSystemManager extends AutoCloseable {
     default FileObject toFileObject(final Path path) throws FileSystemException {
         return toFileObject(path.toFile());
     }
+
+
+    /**
+     * Execute an ordered multi-provider packet through this manager's registered
+     * providers. Unlike the same-filesystem bulk hook, this default explicitly
+     * does not promise an atomic transaction across provider boundaries.
+     */
+    default M3FsBulk.Result executeM3Batch(M3FsBulk.Batch batch) {
+        return M3FsManagerBulk.execute(this, batch);
+    }
+
+    /** Execute only physical command indexes selected by the detached bit mask. */
+    default M3FsBulk.Result executeM3Batch(M3FsBulk.Batch batch, long[] selectedSlots) {
+        return M3FsManagerBulk.execute(this, batch, selectedSlots);
+    }
+
+    /**
+     * Execute commands in a half-open physical slot window. Mask bit indexes
+     * are absolute indexes into the original batch, not window-relative.
+     */
+    default M3FsBulk.Result executeM3Batch(M3FsBulk.Batch batch, int first, int count,
+                                          long[] selectedSlots) {
+        return M3FsManagerBulk.execute(this, batch, first, count, selectedSlots);
+    }
+
+    /** Ordered metadata checks across any registered provider schemes. */
+    default M3FsBulk.Result statAll(String... paths) {
+        Objects.requireNonNull(paths, "paths");
+        M3FsBulk.Builder batch = M3FsBulk.builder(paths.length);
+        for (String path : paths) batch.stat(path);
+        return executeM3Batch(batch.build());
+    }
+
+    /** Ordered folder creation with each provider's own create semantics. */
+    default M3FsBulk.Result createFolders(String... paths) {
+        Objects.requireNonNull(paths, "paths");
+        M3FsBulk.Builder batch = M3FsBulk.builder(paths.length);
+        for (String path : paths) batch.mkdir(path);
+        return executeM3Batch(batch.build());
+    }
+
+    /** Ordered non-recursive deletes. Per-path NO_EFFECT remains observable. */
+    default M3FsBulk.Result deletePaths(String... paths) {
+        Objects.requireNonNull(paths, "paths");
+        M3FsBulk.Builder batch = M3FsBulk.builder(paths.length);
+        for (String path : paths) batch.delete(path);
+        return executeM3Batch(batch.build());
+    }
+
+    /**
+     * Copy aligned source/target paths. Validates the entire input column
+     * geometry before any provider callback; partial provider failures remain
+     * indexed in the returned result, without cross-provider rollback.
+     */
+    default M3FsBulk.Result copyAll(String[] sources, String[] targets) {
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(targets, "targets");
+        if (sources.length != targets.length) throw new IllegalArgumentException("path column lengths differ");
+        M3FsBulk.Builder batch = M3FsBulk.builder(sources.length);
+        for (int i = 0; i < sources.length; i++) batch.copy(sources[i], targets[i]);
+        return executeM3Batch(batch.build());
+    }
+
+    /** Move aligned source/target paths with each destination provider's semantics. */
+    default M3FsBulk.Result moveAll(String[] sources, String[] targets) {
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(targets, "targets");
+        if (sources.length != targets.length) throw new IllegalArgumentException("path column lengths differ");
+        M3FsBulk.Builder batch = M3FsBulk.builder(sources.length);
+        for (int i = 0; i < sources.length; i++) batch.move(sources[i], targets[i]);
+        return executeM3Batch(batch.build());
+    }
+
 
 }
