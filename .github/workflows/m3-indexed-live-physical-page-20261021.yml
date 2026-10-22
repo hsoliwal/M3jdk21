@@ -33,9 +33,19 @@ jobs:
           330bbcac884527af49fa36f124830c653393c8477da1196c54f0b73f9235f56f  m3/collections/src/test/java/com/m3/collections/M3IndexedLivePhysicalPageTest.java
           HASHES
           git diff --check
-      - name: Owning Maven JUnit and existing live view contracts
+      - name: Strict original Java 21 source-backed live-view contracts
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/collections/pom.xml \
-            -Dtest=M3IndexedLivePhysicalPageTest,M3IndexedLiveViewTest test
+          classes="$RUNNER_TEMP/m3-live-view-contracts"
+          mkdir -p "$classes"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
+            -d "$classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedLivePhysicalPageContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
+          java -ea -cp "$classes" com.m3.collections.M3IndexedLivePhysicalPageContract
+          java -ea -cp "$classes" com.m3.collections.M3IndexedLiveViewContract
+          java -ea -Xint -cp "$classes" com.m3.collections.M3IndexedLivePhysicalPageContract
+          java -ea -Xint -cp "$classes" com.m3.collections.M3IndexedLiveViewContract

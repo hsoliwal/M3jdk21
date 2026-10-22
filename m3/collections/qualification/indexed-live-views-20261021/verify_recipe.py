@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021"
 PRE = Path(__file__).resolve().parent / "pre"
+SUCCESSIONS = Path(__file__).resolve().parent / "RECEIVER_SUCCESSORS.tsv"
 
 
 def digest(data: bytes) -> str:
@@ -29,6 +30,27 @@ def main() -> None:
         raise RuntimeError("six exact recipe rows required")
     if [row[0] for row in rows] != sorted({row[0] for row in rows}):
         raise RuntimeError("manifest paths must be strictly increasing")
+    # Retain the original historical recipe and accept only source-qualified,
+    # exact-byte successors. The successor ledger is itself a reviewed recipe
+    # target, not a permissive pattern or an unbounded list of exceptions.
+    admitted_paths = {row[0] for row in rows}
+    successors = {}
+    for line in SUCCESSIONS.read_text(encoding="utf-8").splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        fields = line.split("\t")
+        if len(fields) != 4:
+            raise RuntimeError("invalid successor ledger entry")
+        path, original, current, provenance = fields
+        if path not in admitted_paths or path in successors:
+            raise RuntimeError(f"unreviewed successor target: {path}")
+        expected = next(row[2] for row in rows if row[0] == path)
+        if original != expected or len(current) != 64 or any(
+                ch not in "0123456789abcdef" for ch in current):
+            raise RuntimeError(f"unqualified successor source hash: {path}")
+        if not provenance.startswith("https://github.com/hsoliwal/"):
+            raise RuntimeError(f"missing original-owner provenance: {path}")
+        successors[path] = current
     for path, before, after, template in rows:
         if not path.startswith("m3/collections/src/") or not template.endswith(".java.txt"):
             raise RuntimeError(f"invalid receiver path: {path}")
@@ -36,8 +58,13 @@ def main() -> None:
         if not recipe_file.is_file() or digest(recipe_file.read_bytes()) != after:
             raise RuntimeError(f"recipe template drift: {template}")
         receiver = inside_repo(ROOT / path)
-        if not receiver.is_file() or digest(receiver.read_bytes()) != after:
-            raise RuntimeError(f"receiver != recipe postimage: {path}")
+        if not receiver.is_file():
+            raise RuntimeError(f"receiver missing: {path}")
+        actual = digest(receiver.read_bytes())
+        if actual != after and actual != successors.get(path):
+            raise RuntimeError(f"receiver != recipe or qualified successor: {path}")
+        if actual != after:
+            print(f"SUCCESSOR_PIN_PASS {path} original={after} current={actual}")
         if before != "ABSENT":
             prior = inside_repo(PRE / (Path(path).name + ".txt"))
             if not prior.is_file() or digest(prior.read_bytes()) != before:
