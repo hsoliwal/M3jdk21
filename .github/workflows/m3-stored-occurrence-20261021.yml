@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 composite filtered collection regression
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/**'
+      - 'm3/runtime-integration/stored-occurrence-20261021/**'
+      - '.github/workflows/m3-stored-occurrence-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-head-patched-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            src/java.base/share/classes/java/util/CollectionViews.java
+            test/jdk/java/util/CollectionViews/**
+            m3/runtime-integration/stored-occurrence-20261021/**
+            .github/workflows/m3-stored-occurrence-20261021.yml
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify original and stacked java.base source, old-red, stored and reentrant contracts
+        run: bash m3/runtime-integration/stored-occurrence-20261021/verify.sh "$RUNNER_TEMP/m3-stored-occurrence"
