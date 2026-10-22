@@ -30,8 +30,9 @@ import java.util.function.UnaryOperator;
  * externally modified element's predicate/sort properties cannot be detected:
  * call {@link #invalidate()} after mutating such an object. No concurrency or
  * snapshot guarantee is offered; iterators fail fast on parent-list mutations.
- * Predicate/comparator reentrancy that mutates the parent is rejected during
- * preparation, and failed preparation never publishes a partial index.
+ * Predicate/comparator callbacks that mutate the parent, invalidate the view
+ * or recursively request the same index are rejected during preparation.
+ * Failed preparation never publishes a partial index.
  * JNI receives only primitive state bytes and ordinal indexes, never values or
  * callbacks. NATIVE_REQUIRED refuses before invoking the first predicate.
  */
@@ -46,6 +47,7 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
     private long valueEpoch;
     private boolean prepared;
     private long invalidationEpoch;
+    private boolean preparing;
 
     private M3IndexedLiveView(M3ArrayList<E> owner, Predicate<? super E> filter,
             Comparator<? super E> comparator, boolean sorted,
@@ -95,7 +97,21 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
         }
     }
 
+    private void checkPreparationEpoch(int expectedStructure, long expectedValue,
+            long expectedInvalidation) {
+        checkEpoch(expectedStructure, expectedValue);
+        if (invalidationEpoch != expectedInvalidation) {
+            throw new ConcurrentModificationException(
+                    "M3 indexed view invalidated during preparation");
+        }
+    }
+
     private void refresh() {
+        // A predicate or comparator may call this same view. Reject recursion
+        // instead of endlessly building the same index on the Java stack.
+        if (preparing) {
+            throw new ConcurrentModificationException("M3 indexed view recursively refreshed");
+        }
         int structure = owner.m3StructureEpoch();
         long values = owner.m3ValueEpoch();
         if (prepared && structure == structureEpoch && values == valueEpoch) return;
@@ -103,34 +119,41 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
                 && !M3IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
         }
-        int length = owner.size();
-        int[] selected;
-        if (filter == null) {
-            selected = new int[length];
-            for (int i = 0; i < length; i++) selected[i] = i;
-        } else {
-            byte[] selectedMask = new byte[length];
-            for (int i = 0; i < length; i++) {
-                checkEpoch(structure, values);
-                E value = owner.get(i);
-                selectedMask[i] = (byte) (filter.test(value) ? 1 : 0);
-                checkEpoch(structure, values);
+        long expectedInvalidation = invalidationEpoch;
+        preparing = true;
+        try {
+            int length = owner.size();
+            int[] selected;
+            if (filter == null) {
+                selected = new int[length];
+                for (int i = 0; i < length; i++) selected[i] = i;
+            } else {
+                byte[] selectedMask = new byte[length];
+                for (int i = 0; i < length; i++) {
+                    checkPreparationEpoch(structure, values, expectedInvalidation);
+                    E value = owner.get(i);
+                    selectedMask[i] = (byte) (filter.test(value) ? 1 : 0);
+                    checkPreparationEpoch(structure, values, expectedInvalidation);
+                }
+                selected = M3IndexMaskCompactor.selectPositions(selectedMask, 1, backend);
             }
-            selected = M3IndexMaskCompactor.selectPositions(selectedMask, 1, backend);
+            checkPreparationEpoch(structure, values, expectedInvalidation);
+            if (sorted) {
+                M3IndexSort.stable(selected, index -> {
+                    checkPreparationEpoch(structure, values, expectedInvalidation);
+                    return owner.get(index);
+                }, comparator);
+            }
+            // Comparator callbacks can invalidate the view after the final
+            // owner lookup. This final check must precede publication.
+            checkPreparationEpoch(structure, values, expectedInvalidation);
+            physical = selected;
+            structureEpoch = structure;
+            valueEpoch = values;
+            prepared = true;
+        } finally {
+            preparing = false;
         }
-        checkEpoch(structure, values);
-        if (sorted) {
-            M3IndexSort.stable(selected, index -> {
-                checkEpoch(structure, values);
-                return owner.get(index);
-            }, comparator);
-        }
-        checkEpoch(structure, values);
-        // One publication after all callbacks, JNI selection and sorting complete.
-        physical = selected;
-        structureEpoch = structure;
-        valueEpoch = values;
-        prepared = true;
     }
 
     @Override public int size() { refresh(); return physical.length; }
