@@ -4,6 +4,9 @@ name: M3JDK21 java.base JNI plus filtered/sorted integration
 on:
   pull_request:
     paths:
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+      - 'test/jdk/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java'
+      - 'm3/qualification/mask-prefix-scalar-20261021/**'
       - 'test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java'
       - 'm3/qualification/superset-native-filtered-20261021/**'
       - '.github/workflows/m3jdk21-original-native-filtered-integration-20261022.yml'
@@ -39,10 +42,21 @@ jobs:
           set -euo pipefail
           bash m3/qualification/superset-native-filtered-20261021/verify-integrated-java-jni.sh \
             | tee "$RUNNER_TEMP/m3jdk21-integrated-mask-proof.log"
+      - name: Run the existing source-sealed original ArrayList Object-array mask atom proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/qualification/mask-prefix-scalar-20261021/verify.sh \
+            | tee "$RUNNER_TEMP/m3jdk21-scalar-mask-proof.log"
       - name: Require executed non-skipped behavioral receipts
         shell: bash
         run: |
           set -euo pipefail
+          prefix="$RUNNER_TEMP/m3jdk21-scalar-mask-proof.log"
+          test -s "$prefix"
+          test "$(grep -c '^PASS M3JDK21 direct java.base mask-prefix checks=' "$prefix")" -ge 2
+          grep -q 'BootstrapViewsTest.*PASS' "$prefix"
+          grep -q 'CollectionViewsContract.*PASS' "$prefix"
           receipt="$RUNNER_TEMP/m3jdk21-integrated-mask-proof.log"
           test -s "$receipt"
           grep -q '^M3_INTEGRATED_MASK_FILTER_PASS mode=java checks=' "$receipt"
