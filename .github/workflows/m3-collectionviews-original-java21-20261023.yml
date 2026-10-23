@@ -1,0 +1,88 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Execute existing original CollectionViews in java.base with no separate owner.
+# Host Java21 source-patch proof, not full installed M3JDK21 JCK/runtime admission.
+name: M3JDK21 direct filtered sorted CollectionViews host
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-collectionviews-original-java21-20261023.yml'
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  backed-filter-sorted-navigable-original-owner:
+    if: github.repository == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse source/fixture drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected = {
+              'src/java.base/share/classes/java/util/CollectionViews.java': 'c8820e5bbd7b7c7b4c683f5081ec74b99a4aac6b854f6c8dc79d4e0ee4767ffb',
+              'test/jdk/java/util/CollectionViews/BootstrapViewsTest.java': 'a36b48eee0924abd57ce1a356d26ce4e8c6516170e65478cd42cb2d09fbd8a75',
+              'test/jdk/java/util/CollectionViews/CollectionViewsContract.java': '9177fd1b1e69f5b0ef05188e4c24aad73ac286a32d7e0abdbeff8db730a94067',
+              'test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java': 'f35b8547a5163aa79cee603e0e8bdcbf7361515d435914ac205feb9a037990e2',
+              'test/jdk/java/util/CollectionViews/M3CollectionViewsCursorMaskContract.java': '2a89e7cf879444b101b0f7886bb7ee5820f90e9bd850b0f42b1317d4c54844f5',
+              'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java': 'f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6',
+          }
+          for name, pinned in expected.items():
+              path = Path(name)
+              if path.is_symlink() or not path.is_file():
+                  raise SystemExit("MISSING_OR_LINKED_OWNER " + name)
+              digest = hashlib.sha256(path.read_bytes()).hexdigest()
+              if digest != pinned:
+                  raise SystemExit("SOURCE_SHA256_DRIFT " + name + ": " + digest)
+              print("SOURCE_SEAL_OK", name)
+          PY
+      - name: Compile the unchanged original java.util.CollectionViews into java.base
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-collectionviews"
+          mkdir -p "$out/src/java/util" "$out/patch" "$out/tests"
+          cp src/java.base/share/classes/java/util/CollectionViews.java "$out/src/java/util/"
+          javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            --patch-module java.base="$out/src" -d "$out/patch" \
+            "$out/src/java/util/CollectionViews.java"
+      - name: Compile existing original JDK filter/sorted/spliterator contract tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-collectionviews"
+          javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            --patch-module java.base="$out/patch" \
+            -d "$out/tests" \
+            test/jdk/java/util/CollectionViews/BootstrapViewsTest.java \
+            test/jdk/java/util/CollectionViews/CollectionViewsContract.java \
+            test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java \
+            test/jdk/java/util/CollectionViews/M3CollectionViewsCursorMaskContract.java \
+            test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
+      - name: Execute original JDK owner through original public java.util APIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-collectionviews"
+          for suite in BootstrapViewsTest CollectionViewsContract \
+              FilteredSpliteratorReentrantTest M3CollectionViewsCursorMaskContract \
+              StoredRepresentativeOracle; do
+            java -Xss256k --patch-module java.base="$out/patch" \
+              --add-opens java.base/java.util=ALL-UNNAMED \
+              -cp "$out/tests" "$suite"
+          done
+          echo "ORIGINAL_JAVA_UTIL_FILTERED_SORTED_HOST_PASS; FULL_JDK_AND_VENDOR_GATES_PENDING"
