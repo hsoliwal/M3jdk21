@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3Jdk21SingleByteCursorReuse
+displayName: M3JDK21 source-sealed single-byte scalar-run cursor reuse
+description: >-
+  Reuses the current canonical Java snapshot provider for one production owner
+  and an actual M3JDK test. Fast paths, replacement, sizing and native owner calls
+  retain their contracts. GPL target resources retain their license. SDK,
+  matched JDK/JNI execution and performance remain independent required gates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-single-byte-cursor-20261023

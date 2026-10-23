@@ -1,0 +1,11 @@
+{
+  "schema": "M3_SINGLE_BYTE_AUTHORING_CONTROLS_V1",
+  "sdkFiles": 14,
+  "sourceTargets": 2,
+  "deterministicReplays": 2,
+  "refused": 4,
+  "baselineProductionUnchanged": true,
+  "productionOwnerOnly": "src/java.base/share/classes/java/lang/M3String.java",
+  "actualOpenRewriteExecuted": false,
+  "actualTargetJdkExecuted": false
+}

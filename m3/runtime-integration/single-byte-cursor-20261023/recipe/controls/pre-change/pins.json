@@ -1,0 +1,73 @@
+{
+  "schema": "M3_SINGLE_BYTE_CANONICAL_SDK_INPUTS_V1",
+  "scope": "CANONICAL_EF56_SIX_SDK_TESTS_ONLY",
+  "sourceCommit": "aa7661674605341352b97ad844177106eae2f053",
+  "variant": "RED_CONTROL",
+  "files": [
+    {
+      "path": "licenses/OpenJDK-ADDITIONAL_LICENSE_INFO",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "unchangedGitBlob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b"
+    },
+    {
+      "path": "licenses/OpenJDK-LICENSE",
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "unchangedGitBlob": "8b400c7ab81b7b18baff3f81d597f5e511883134"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "unchangedGitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "f46223926683294733ee2779bb9bffb045fc9c8d8a0d0b52f39493293a973482",
+      "unchangedGitBlob": "ef56d2e7bf7dbe6503740c606c0d53e877ebd2ab"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "03c70135bb419a0ae3058444fb3d43d92772a993e81df67a8fe40ce2364f76df",
+      "unchangedGitBlob": "4eb9b7224a22f3ad02111ab8cd731acfc53dfbe0"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "288d837cdd8593b19d1e208cd8f53ad9bcf3de0db85b1df58ea2dd80405d636c",
+      "unchangedGitBlob": "12b07d7f9d07425a1f0411217404dff83f435c10"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3jdk21-single-byte-cursor-20261023.yml",
+      "sha256": "45e222eed75ecf915a1c639affc1e5e8066dee833547ca1d09e47d8b756d3575",
+      "unchangedGitBlob": "938c8b9a5c3d0f990296aa49dce34d7ad0409c38"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-single-byte-cursor-20261023/M3String.before.java.txt",
+      "sha256": "b16c1d8478f24f3e10b7249ea3d9264dca8b90fb93e3e77c3800d42fda69615f",
+      "unchangedGitBlob": "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-single-byte-cursor-20261023/M3String.java.txt",
+      "sha256": "b16c1d8478f24f3e10b7249ea3d9264dca8b90fb93e3e77c3800d42fda69615f",
+      "unchangedGitBlob": "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-single-byte-cursor-20261023/M3StringSingleByteCursorTest.java.txt",
+      "sha256": "d51dcac448c6439fe92e1e3ad760dab7d765b82f0d758984340e9b14f73001d9",
+      "unchangedGitBlob": "07e183224e75515f207679942e851bc2be0c9013"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-single-byte-cursor-20261023/manifest.tsv",
+      "sha256": "6087383f88f1f60114daba53d5c1437ec1dbb5f30eba85f5c08e3c34a0b1fbd9",
+      "unchangedGitBlob": "83becfeaf96aef1d21ecff16121ac0b053499224"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3SingleByteCursorRecipeTest.java",
+      "sha256": "bcd6af7f2a1ae861d82b2caf6e937f7776c4b3181f4b888a3e7f38bbb3b62c47",
+      "unchangedGitBlob": "152fedf92e8d6d907f9bb207a4c7c6a25d4f6167"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "b66caaba423034de88f35605b1a5a010184ff52c25d12546701980dbe3ce07c7",
+      "unchangedGitBlob": "963dbad211b3bbf36af9686a52f524a832e71700"
+    }
+  ]
+}
