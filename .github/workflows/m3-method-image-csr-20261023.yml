@@ -1,0 +1,112 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 method-level javac signals primitive CSR Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3MethodSignalImage.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MethodSignalImage*.java'
+      - 'm3/collections/qualification/method-image-csr-20261023/**'
+      - '.github/workflows/m3-method-image-csr-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  strict-original-javac-to-primitive-method-csr:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact product Git/SHA seals, zero unrelated source diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/master...HEAD
+          bash m3/collections/qualification/method-image-csr-20261023/verify.sh
+      - name: Strict actual owning typed columns, CSR and method image Java21
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-method-image"
+          mkdir -p "$out/classes" "$out/plugin/META-INF/services" "$out/fixture"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/com/m3/collections/M3MethodSignalImage.java \
+            m3/collections/src/test/java/com/m3/collections/M3MethodSignalImageSelfTest.java
+          java -cp "$out/classes" com.m3.collections.M3MethodSignalImageSelfTest
+      - name: Original javac methodOut producer, unchanged type image and parsed method CSR
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-method-image"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/plugin" \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java \
+            m3/compiler/source-signals/src/test/java/com/m3/compiler/signals/M3MethodSignalsSelfTest.java
+          cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
+            "$out/plugin/META-INF/services/com.sun.source.util.Plugin"
+          java -cp "$out/plugin" com.m3.compiler.signals.M3MethodSignalsSelfTest
+          mkdir -p "$out/fixture-src/demo" "$out/fixture-classes"
+          cat > "$out/fixture-src/demo/Example.java" <<'JAVA'
+          package demo;
+          class Example {
+              int counter;
+              static int twice(int value) { return value * 2; }
+              int run(int input) {
+                  counter += input;
+                  if (input > 0) return twice(input) + new Worker().go();
+                  String fake = "notReallyCalled()";
+                  /* fakeCall(); */
+                  return fake.length();
+              }
+          }
+          class Worker { int go() { return 3; } }
+          JAVA
+          javac --release 21 -proc:none -processorpath "$out/plugin" \
+            "-Xplugin:M3SourceSignals out=$out/type-baseline.tsv include=all" \
+            -d "$out/fixture-classes" "$out/fixture-src/demo/Example.java"
+          javac --release 21 -proc:none -processorpath "$out/plugin" \
+            "-Xplugin:M3SourceSignals out=$out/type-with-methods.tsv methodOut=$out/methods.tsv include=all" \
+            -d "$out/fixture-classes" "$out/fixture-src/demo/Example.java"
+          cmp "$out/type-baseline.tsv" "$out/type-with-methods.tsv"
+          grep -F 'M3JDK21-METHOD-SIGNALS/1' "$out/methods.tsv"
+          java -cp "$out/classes" com.m3.collections.M3MethodSignalImageSelfTest \
+            "$out/methods.tsv"
+
+  original-source-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 105
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Original attributed javac plugin Maven/JUnit and ServiceLoader package
+        run: >
+          mvn -B -ntp -f m3/compiler/source-signals/pom.xml clean verify
+      - name: Source-build original Jupiter and Launcher vendor test prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 -am \
+            -DskipTests install
+          python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py \
+            m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+      - name: Build unchanged M3 arrays reactor prerequisite
+        run: >
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Original owning collections JUnit: typed facts, type image and new methods
+        run: >
+          mvn -B -ntp -f m3/collections/pom.xml
+          -Dtest=M3MethodSignalImageTest,M3SourceSignalImageTest,M3SignalColumnsTest
+          test
