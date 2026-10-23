@@ -1,5 +1,3 @@
-// Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
-// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
@@ -9,10 +7,10 @@ package com.m3.collections;
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -22,7 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
-import java.util.Spliterator;
+import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -76,23 +74,22 @@ public final class M3FilteredViews {
     private static <E> Iterator<E> filtered(Iterator<E> source,
             Predicate<? super E> predicate) {
         return new Iterator<>() {
-            private static final int READY = 1;
-            private static final int EXHAUSTED = 1 << 1;
             private E next;
-            private int state;
+            private boolean ready;
+            private boolean exhausted;
 
             @Override public boolean hasNext() {
-                if ((state & READY) != 0) return true;
-                if ((state & EXHAUSTED) != 0) return false;
+                if (ready) return true;
+                if (exhausted) return false;
                 while (source.hasNext()) {
                     E candidate = source.next();
                     if (predicate.test(candidate)) {
                         next = candidate;
-                        state |= READY;
+                        ready = true;
                         return true;
                     }
                 }
-                state |= EXHAUSTED;
+                exhausted = true;
                 return false;
             }
 
@@ -100,7 +97,7 @@ public final class M3FilteredViews {
                 if (!hasNext()) throw new NoSuchElementException();
                 E result = next;
                 next = null;
-                state &= ~READY;
+                ready = false;
                 return result;
             }
 
@@ -129,12 +126,6 @@ public final class M3FilteredViews {
     private static <E> boolean visible(Collection<E> source,
             Predicate<? super E> predicate, Object value) {
         if (!source.contains(value)) return false;
-        return visibleMember(source, predicate, value);
-    }
-
-    /** Membership has already succeeded; preserve the original representative probe order. */
-    private static <E> boolean visibleMember(Collection<E> source,
-            Predicate<? super E> predicate, Object value) {
         if (source instanceof Set<?>) {
             for (E owned : source) {
                 if (owned == value) return predicate.test(owned);
@@ -146,20 +137,6 @@ public final class M3FilteredViews {
         return false;
     }
 
-    /** Open only private read-only owners whose iterator is exactly the same filter decorator. */
-    @SuppressWarnings("unchecked")
-    private static <E> CollectionView<E> iterationView(Collection<E> source) {
-        if (source instanceof CollectionView<?> view) return (CollectionView<E>) view;
-        return source instanceof SetView<?> view ? ((SetView<E>) view).view : null;
-    }
-
-    /** Sorted membership has a different representative probe and remains an opaque boundary. */
-    @SuppressWarnings("unchecked")
-    private static <E> CollectionView<E> membershipView(Collection<E> source) {
-        if (source instanceof CollectionView<?> view) return (CollectionView<E>) view;
-        return source.getClass() == SetView.class ? ((SetView<E>) source).view : null;
-    }
-
     private static class CollectionView<E> extends AbstractCollection<E> {
         private final Collection<E> source;
         private final Predicate<? super E> predicate;
@@ -169,63 +146,14 @@ public final class M3FilteredViews {
             this.predicate = Objects.requireNonNull(predicate, "predicate");
         }
 
-        @Override public Iterator<E> iterator() {
-            if (iterationView(source) == null) return filtered(source.iterator(), predicate);
-            // Immutable wrapper links are read twice without callbacks. One exact
-            // predicate array replaces ArrayList growth and nested iterator frames.
-            CollectionView<E> layer = this;
-            Collection<E> backing;
-            int depth = 0;
-            do {
-                depth++;
-                backing = layer.source;
-                layer = iterationView(backing);
-            } while (layer != null);
-            @SuppressWarnings("unchecked")
-            Predicate<? super E>[] filters = (Predicate<? super E>[]) new Predicate<?>[depth];
-            layer = this;
-            for (int index = 0; index < filters.length; index++) {
-                filters[index] = layer.predicate;
-                if (index + 1 < filters.length) layer = iterationView(layer.source);
-            }
-            return filtered(backing.iterator(), value -> {
-                for (int index = filters.length - 1; index >= 0; index--) {
-                    if (!filters[index].test(value)) return false;
-                }
-                return true;
-            });
-        }
+        @Override public Iterator<E> iterator() { return filtered(source.iterator(), predicate); }
         @Override public int size() {
             int count = 0;
-            Iterator<E> cursor = iterator();
-            while (cursor.hasNext()) { cursor.next(); count++; }
+            for (E item : source) if (predicate.test(item)) count++;
             return count;
         }
         @Override public boolean isEmpty() { return !iterator().hasNext(); }
-        @Override public boolean contains(Object value) {
-            if (membershipView(source) == null) return visible(source, predicate, value);
-            // Replay the existing inner membership and outer representative scans in order.
-            int depth = 0;
-            CollectionView<E> layer = this;
-            CollectionView<E> inner;
-            while ((inner = membershipView(layer.source)) != null) {
-                depth++;
-                layer = inner;
-            }
-            @SuppressWarnings("unchecked")
-            CollectionView<E>[] pending = (CollectionView<E>[]) new CollectionView<?>[depth];
-            layer = this;
-            for (int index = 0; index < pending.length; index++) {
-                pending[index] = layer;
-                layer = membershipView(layer.source);
-            }
-            if (!visible(layer.source, layer.predicate, value)) return false;
-            for (int index = pending.length - 1; index >= 0; index--) {
-                layer = pending[index];
-                if (!visibleMember(layer.source, layer.predicate, value)) return false;
-            }
-            return true;
-        }
+        @Override public boolean contains(Object value) { return visible(source, predicate, value); }
         @Override public boolean add(E value) { throw readonly(); }
         @Override public boolean remove(Object value) { throw readonly(); }
         @Override public boolean addAll(Collection<? extends E> values) { throw readonly(); }
@@ -253,51 +181,6 @@ public final class M3FilteredViews {
         @Override public void clear() { throw readonly(); }
     }
 
-    /** Guard the existing JDK reversed traversal without rebuilding its predicate pipeline. */
-    private static <E> SortedSet<E> readOnlySortedSet(SortedSet<E> source) {
-        return source instanceof SortedSetView<?> || source instanceof ReadOnlySortedSet<?>
-                ? source : new ReadOnlySortedSet<>(source);
-    }
-
-    private static final class ReadOnlySortedSet<E> extends AbstractSet<E> implements SortedSet<E> {
-        private final SortedSet<E> source;
-        private ReadOnlySortedSet(SortedSet<E> source) { this.source = source; }
-        @Override public int size() { return source.size(); }
-        @Override public boolean isEmpty() { return source.isEmpty(); }
-        @Override public boolean contains(Object value) { return source.contains(value); }
-        @Override public boolean containsAll(Collection<?> values) { return source.containsAll(values); }
-        @Override public Iterator<E> iterator() { return Collections.unmodifiableSet(source).iterator(); }
-        /** Preserve the reverse owner's iterator/size demand and every split's ordering. */
-        @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.sorted(source); }
-        @Override public Object[] toArray() { return source.toArray(); }
-        @Override public <T> T[] toArray(T[] target) { return source.toArray(target); }
-        @Override public <T> T[] toArray(java.util.function.IntFunction<T[]> factory) {
-            return source.toArray(factory);
-        }
-        @Override public void forEach(java.util.function.Consumer<? super E> action) { source.forEach(action); }
-        @Override public boolean equals(Object other) { return other == this || source.equals(other); }
-        @Override public int hashCode() { return source.hashCode(); }
-        @Override public String toString() { return source.toString(); }
-        @Override public Comparator<? super E> comparator() { return source.comparator(); }
-        @Override public E first() { return source.first(); }
-        @Override public E last() { return source.last(); }
-        @Override public SortedSet<E> subSet(E from, E to) { return readOnlySortedSet(source.subSet(from, to)); }
-        @Override public SortedSet<E> headSet(E to) { return readOnlySortedSet(source.headSet(to)); }
-        @Override public SortedSet<E> tailSet(E from) { return readOnlySortedSet(source.tailSet(from)); }
-        @Override public SortedSet<E> reversed() { return readOnlySortedSet(source.reversed()); }
-        @Override public boolean add(E value) { throw readonly(); }
-        @Override public boolean remove(Object value) { throw readonly(); }
-        @Override public boolean addAll(Collection<? extends E> values) { throw readonly(); }
-        @Override public boolean removeAll(Collection<?> values) { throw readonly(); }
-        @Override public boolean retainAll(Collection<?> values) { throw readonly(); }
-        @Override public boolean removeIf(Predicate<? super E> filter) { throw readonly(); }
-        @Override public void clear() { throw readonly(); }
-        @Override public void addFirst(E value) { throw readonly(); }
-        @Override public void addLast(E value) { throw readonly(); }
-        @Override public E removeFirst() { throw readonly(); }
-        @Override public E removeLast() { throw readonly(); }
-    }
-
     private static class SortedSetView<E> extends SetView<E> implements SortedSet<E> {
         protected final SortedSet<E> sorted;
         protected final Predicate<? super E> predicate;
@@ -309,10 +192,6 @@ public final class M3FilteredViews {
         }
 
         @Override public Comparator<? super E> comparator() { return sorted.comparator(); }
-        /** Preserve custom ordering on every recursively split child. */
-        @Override public Spliterator<E> spliterator() {
-            return M3SlotSpliterators.sorted(this);
-        }
         @Override public boolean contains(Object value) {
             if (!sorted.contains(value)) return false;
             @SuppressWarnings("unchecked") E alias = (E) value;
@@ -329,14 +208,6 @@ public final class M3FilteredViews {
         @Override public SortedSet<E> tailSet(E from) {
             return new SortedSetView<>(sorted.tailSet(from), predicate);
         }
-        @Override public SortedSet<E> reversed() {
-            return readOnlySortedSet(SortedSet.super.reversed());
-        }
-        // An explicit read-only boundary refuses even empty endpoint mutations.
-        @Override public void addFirst(E value) { throw readonly(); }
-        @Override public void addLast(E value) { throw readonly(); }
-        @Override public E removeFirst() { throw readonly(); }
-        @Override public E removeLast() { throw readonly(); }
         @Override public E first() { return iterator().next(); }
         @Override public E last() {
             Iterator<E> iterator = iterator();
@@ -367,15 +238,9 @@ public final class M3FilteredViews {
          */
         private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
             Comparator<? super E> order = nav.comparator();
-            if (order == null || nav.isEmpty()) return false;
-            // Retain the former first/last lookup order. A null member need not
-            // be an extreme: the opposite stored boundary proves whether a
-            // navigational candidate exists, even when that candidate is null.
-            // Compare only a stored value; do not fabricate an unsupported null.
-            E first = nav.first();
-            E last = first == null ? null : nav.last();
-            E boundary = first == null || last == null ? null : (forward ? last : first);
-            int direction = order.compare(boundary, query);
+            if (order == null || nav.isEmpty()
+                    || (nav.first() != null && nav.last() != null)) return false;
+            int direction = order.compare(null, query);
             return forward ? (inclusive ? direction >= 0 : direction > 0)
                     : (inclusive ? direction <= 0 : direction < 0);
         }
@@ -419,7 +284,6 @@ public final class M3FilteredViews {
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
-        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public Iterator<E> descendingIterator() {
             return filtered(nav.descendingSet().iterator(), predicate);
         }
@@ -449,14 +313,37 @@ public final class M3FilteredViews {
             this.sorted = Objects.requireNonNull(sorted, "sorted");
             this.predicate = Objects.requireNonNull(predicate, "predicate");
         }
+        /** The original M3 AVL owner, not an adapter or a secondary collection. */
+        @SuppressWarnings("unchecked")
+        protected final M3TreeMap<K, V> indexed() {
+            return sorted instanceof M3TreeMap<?, ?> m3 ? (M3TreeMap<K, V>) m3 : null;
+        }
+        protected final boolean visibleSlot(M3TreeMap<K, V> owner, int slot) {
+            return predicate.test(owner.keyAt(slot), owner.valueAt(slot));
+        }
+        protected final int boundarySlot(M3TreeMap<K, V> owner, boolean first) {
+            int slot = first ? owner.firstSlot() : owner.lastSlot();
+            while (slot >= 0 && !visibleSlot(owner, slot)) {
+                slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+            }
+            return slot;
+        }
         @Override public Comparator<? super K> comparator() { return sorted.comparator(); }
         @Override public int size() {
+            M3TreeMap<K, V> owner = indexed();
             int count = 0;
-            for (Entry<K, V> entry : sorted.entrySet())
-                if (predicate.test(entry.getKey(), entry.getValue())) count++;
+            if (owner != null) {
+                for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot))
+                    if (visibleSlot(owner, slot)) count++;
+            } else {
+                for (Entry<K, V> entry : sorted.entrySet())
+                    if (predicate.test(entry.getKey(), entry.getValue())) count++;
+            }
             return count;
         }
         @Override public boolean isEmpty() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) return boundarySlot(owner, true) < 0;
             return !filtered(sorted.entrySet().iterator(),
                     item -> predicate.test(item.getKey(), item.getValue())).hasNext();
         }
@@ -466,14 +353,28 @@ public final class M3FilteredViews {
          * when the query is a distinct comparator-equivalent object.
          */
         protected K storedKey(Object query) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) return owner.keyAt(owner.findSlot(query));
             @SuppressWarnings("unchecked") K alias = (K) query;
             return sorted.tailMap(alias).firstKey();
         }
         @Override public boolean containsKey(Object key) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                int slot = owner.findSlot(key);
+                return slot >= 0 && visibleSlot(owner, slot);
+            }
             if (!sorted.containsKey(key)) return false;
             return predicate.test(storedKey(key), sorted.get(key));
         }
         @Override public V get(Object key) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                int slot = owner.findSlot(key);
+                if (slot < 0) return null;
+                V value = owner.valueAt(slot);
+                return predicate.test(owner.keyAt(slot), value) ? value : null;
+            }
             if (!sorted.containsKey(key)) return null;
             V value = sorted.get(key);
             return predicate.test(storedKey(key), value) ? value : null;
@@ -481,17 +382,29 @@ public final class M3FilteredViews {
         @Override public Set<Entry<K, V>> entrySet() {
             return new AbstractSet<>() {
                 @Override public int size() { return SortedMapView.this.size(); }
-                @Override public boolean contains(Object candidate) {
-                    if (!(candidate instanceof Entry<?, ?> probe)) return false;
-                    Object key = probe.getKey();
-                    if (!sorted.containsKey(key)) return false;
-                    V value = sorted.get(key);
-                    // Reuse comparator membership and the existing stored-key
-                    // atom. A nullable mapping is distinct from an absent key.
-                    return predicate.test(storedKey(key), value)
-                            && Objects.equals(value, probe.getValue());
-                }
                 @Override public Iterator<Entry<K, V>> iterator() {
+                    M3TreeMap<K, V> owner = indexed();
+                    if (owner != null) {
+                        return new Iterator<>() {
+                            private int next = owner.firstSlot();
+                            private final int expected = owner.revision();
+                            private void check() {
+                                if (expected != owner.revision()) throw new ConcurrentModificationException();
+                            }
+                            @Override public boolean hasNext() {
+                                check();
+                                while (next >= 0 && !visibleSlot(owner, next)) next = owner.nextSlot(next);
+                                return next >= 0;
+                            }
+                            @Override public Entry<K, V> next() {
+                                if (!hasNext()) throw new NoSuchElementException();
+                                int slot = next;
+                                next = owner.nextSlot(slot);
+                                return new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
+                            }
+                            @Override public void remove() { throw readonly(); }
+                        };
+                    }
                     Iterator<Entry<K, V>> cursor = sorted.entrySet().iterator();
                     Iterator<Entry<K, V>> filtered = M3FilteredViews.filtered(cursor,
                             item -> predicate.test(item.getKey(), item.getValue()));
@@ -509,16 +422,125 @@ public final class M3FilteredViews {
             };
         }
         @Override public K firstKey() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                int slot = boundarySlot(owner, true);
+                if (slot < 0) throw new NoSuchElementException();
+                return owner.keyAt(slot);
+            }
             Iterator<Entry<K, V>> cursor = entrySet().iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             return cursor.next().getKey();
         }
         @Override public K lastKey() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                int slot = boundarySlot(owner, false);
+                if (slot < 0) throw new NoSuchElementException();
+                return owner.keyAt(slot);
+            }
             Iterator<Entry<K, V>> cursor = entrySet().iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             K key = cursor.next().getKey();
             while (cursor.hasNext()) key = cursor.next().getKey();
             return key;
+        }
+        /** Direct value cursor: ordinary values iteration never creates a Map.Entry. */
+        @Override public Collection<V> values() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.values();
+            return new AbstractCollection<>() {
+                @Override public int size() { return SortedMapView.this.size(); }
+                @Override public Iterator<V> iterator() {
+                    return new Iterator<>() {
+                        private int next = owner.firstSlot();
+                        private final int expected = owner.revision();
+                        private void check() {
+                            if (expected != owner.revision()) throw new ConcurrentModificationException();
+                        }
+                        @Override public boolean hasNext() {
+                            check();
+                            while (next >= 0 && !visibleSlot(owner, next)) next = owner.nextSlot(next);
+                            return next >= 0;
+                        }
+                        @Override public V next() {
+                            if (!hasNext()) throw new NoSuchElementException();
+                            int slot = next;
+                            next = owner.nextSlot(slot);
+                            return owner.valueAt(slot);
+                        }
+                        @Override public void remove() { throw readonly(); }
+                    };
+                }
+            };
+        }
+        @Override public boolean containsValue(Object value) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.containsValue(value);
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                V stored = owner.valueAt(slot);
+                if (predicate.test(owner.keyAt(slot), stored) && Objects.equals(value, stored))
+                    return true;
+            }
+            return false;
+        }
+        @Override public void forEach(BiConsumer<? super K, ? super V> consumer) {
+            Objects.requireNonNull(consumer, "consumer");
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) { super.forEach(consumer); return; }
+            int expected = owner.revision();
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (predicate.test(key, value)) consumer.accept(key, value);
+                if (expected != owner.revision()) throw new ConcurrentModificationException();
+            }
+        }
+        @Override public int hashCode() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.hashCode();
+            int hash = 0;
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (predicate.test(key, value))
+                    hash += Objects.hashCode(key) ^ Objects.hashCode(value);
+            }
+            return hash;
+        }
+        @Override public boolean equals(Object other) {
+            if (this == other) return true;
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.equals(other);
+            if (!(other instanceof Map<?, ?> map) || map.size() != size()) return false;
+            try {
+                for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                    K key = owner.keyAt(slot);
+                    V value = owner.valueAt(slot);
+                    if (predicate.test(key, value)
+                            && (!Objects.equals(value, map.get(key))
+                            || value == null && !map.containsKey(key))) return false;
+                }
+            } catch (ClassCastException | NullPointerException ex) {
+                return false;
+            }
+            return true;
+        }
+        @Override public String toString() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.toString();
+            StringBuilder builder = new StringBuilder("{");
+            boolean comma = false;
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (!predicate.test(key, value)) continue;
+                if (comma) builder.append(", ");
+                comma = true;
+                builder.append(key == this ? "(this Map)" : key).append('=')
+                        .append(value == this ? "(this Map)" : value);
+            }
+            return builder.append('}').toString();
         }
         @Override public SortedMap<K, V> subMap(K from, K to) {
             return new SortedMapView<>(sorted.subMap(from, to), predicate);
@@ -544,10 +566,36 @@ public final class M3FilteredViews {
             nav = source;
         }
         @Override protected K storedKey(Object key) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) return owner.keyAt(owner.findSlot(key));
             @SuppressWarnings("unchecked") K alias = (K) key;
             // A matching key exists (checked by containsKey); floorEntry
             // retrieves its stored comparator-equivalent representative.
             return nav.floorEntry(alias).getKey();
+        }
+
+        /** Search by the existing bounded AVL neighbor index, skipping hidden slots. */
+        private int indexedNeighbor(M3TreeMap<K, V> owner, K query,
+                boolean forward, boolean inclusive) {
+            int relation = forward ? (inclusive ? 1 : 2) : (inclusive ? -1 : -2);
+            int slot = owner.nearIndexedSlot(query, relation);
+            while (slot >= 0 && !visibleSlot(owner, slot)) {
+                slot = forward ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+            }
+            return slot;
+        }
+        private Entry<K, V> indexedEntry(M3TreeMap<K, V> owner, int slot) {
+            return slot < 0 ? null : new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
+        }
+        private K indexedKey(M3TreeMap<K, V> owner, int slot) {
+            return slot < 0 ? null : owner.keyAt(slot);
+        }
+        private K boundKey(K key, boolean forward, boolean inclusive) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                return indexedKey(owner, indexedNeighbor(owner, key, forward, inclusive));
+            }
+            return keyOf(boundedEntry(key, forward, inclusive));
         }
         /**
          * Select the first visible entry from a bounded backing iterator and detach it
@@ -566,69 +614,59 @@ public final class M3FilteredViews {
          * comparator-backed bounded iterator, retaining each stored key/value.
          */
         private Entry<K, V> boundedEntry(K query, boolean forward, boolean inclusive) {
-            NavigableMap<K, V> range;
-            if (nav instanceof M3TreeMap<K, V> owner) {
-                range = owner.rangeOrNull(query, forward, inclusive);
-                if (range == null) return boundedFallback(query, forward, inclusive);
-            } else {
-                try {
-                    range = forward ? nav.tailMap(query, inclusive) : nav.headMap(query, inclusive);
-                } catch (IllegalArgumentException outOfRange) {
-                    return boundedFallback(query, forward, inclusive);
-                }
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                return indexedEntry(owner, indexedNeighbor(owner, query, forward, inclusive));
             }
-            Iterator<Entry<K, V>> cursor = forward ? range.entrySet().iterator()
-                    : range.descendingMap().entrySet().iterator();
+            Iterator<Entry<K, V>> cursor;
+            try {
+                cursor = forward ? nav.tailMap(query, inclusive).entrySet().iterator()
+                        : nav.headMap(query, inclusive).descendingMap().entrySet().iterator();
+            } catch (IllegalArgumentException outOfRange) {
+                Iterator<Entry<K, V>> bounded = forward
+                        ? nav.entrySet().iterator() : nav.descendingMap().entrySet().iterator();
+                Comparator<? super K> comparator = nav.comparator();
+                while (bounded.hasNext()) {
+                    Entry<K, V> stored = bounded.next();
+                    int relation = compareStored(stored.getKey(), query, comparator);
+                    if ((forward ? relation > 0 || (inclusive && relation == 0)
+                            : relation < 0 || (inclusive && relation == 0))
+                            && predicate.test(stored.getKey(), stored.getValue())) {
+                        return new SimpleImmutableEntry<>(stored);
+                    }
+                }
+                return null;
+            }
             return firstVisible(cursor);
         }
-        private Entry<K, V> boundedFallback(K query, boolean forward, boolean inclusive) {
-            Iterator<Entry<K, V>> bounded = forward
-                    ? nav.entrySet().iterator() : nav.descendingMap().entrySet().iterator();
-            Comparator<? super K> comparator = nav.comparator();
-            while (bounded.hasNext()) {
-                Entry<K, V> stored = bounded.next();
-                int relation = compareStored(stored.getKey(), query, comparator);
-                if ((forward ? relation > 0 || (inclusive && relation == 0)
-                        : relation < 0 || (inclusive && relation == 0))
-                        && predicate.test(stored.getKey(), stored.getValue())) {
-                    return new SimpleImmutableEntry<>(stored);
-                }
-            }
-            return null;
-        }
-
         @Override public Entry<K, V> lowerEntry(K key) {
             return boundedEntry(key, false, false);
         }
-        @Override public K lowerKey(K key) { return keyOf(lowerEntry(key)); }
+        @Override public K lowerKey(K key) { return boundKey(key, false, false); }
         @Override public Entry<K, V> floorEntry(K key) {
             return boundedEntry(key, false, true);
         }
-        @Override public K floorKey(K key) { return keyOf(floorEntry(key)); }
+        @Override public K floorKey(K key) { return boundKey(key, false, true); }
         @Override public Entry<K, V> ceilingEntry(K key) {
             return boundedEntry(key, true, true);
         }
-        @Override public K ceilingKey(K key) { return keyOf(ceilingEntry(key)); }
+        @Override public K ceilingKey(K key) { return boundKey(key, true, true); }
         @Override public Entry<K, V> higherEntry(K key) {
             return boundedEntry(key, true, false);
         }
-        @Override public K higherKey(K key) { return keyOf(higherEntry(key)); }
+        @Override public K higherKey(K key) { return boundKey(key, true, false); }
         @Override public Entry<K, V> firstEntry() {
-            return firstVisible(nav.entrySet().iterator());
+            M3TreeMap<K, V> owner = indexed();
+            return owner == null ? firstVisible(nav.entrySet().iterator())
+                    : indexedEntry(owner, boundarySlot(owner, true));
         }
         @Override public Entry<K, V> lastEntry() {
-            return firstVisible(nav.descendingMap().entrySet().iterator());
+            M3TreeMap<K, V> owner = indexed();
+            return owner == null ? firstVisible(nav.descendingMap().entrySet().iterator())
+                    : indexedEntry(owner, boundarySlot(owner, false));
         }
-        @Override public K firstKey() {
-            Entry<K, V> e = firstEntry();
-            if (e == null) throw new NoSuchElementException();
-            return e.getKey();
-        }
-        @Override public K lastKey() {
-            Entry<K, V> e = lastEntry();
-            if (e == null) throw new NoSuchElementException();
-            return e.getKey();
-        }
+        @Override public K firstKey() { return super.firstKey(); }
+        @Override public K lastKey() { return super.lastKey(); }
         private K keyOf(Entry<K, V> entry) { return entry == null ? null : entry.getKey(); }
         @Override public Entry<K, V> pollFirstEntry() { throw readonly(); }
         @Override public Entry<K, V> pollLastEntry() { throw readonly(); }
@@ -658,4 +696,3 @@ public final class M3FilteredViews {
         @Override public NavigableMap<K, V> tailMap(K from) { return tailMap(from, true); }
     }
 }
-

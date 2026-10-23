@@ -88,6 +88,12 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     @Override int nextSlot(int slot) {
         int s = tree.step(slot, descending); return slotWithin(s) ? s : -1;
     }
+    /** Opposite encounter direction on this bounded/descending array-backed owner. */
+    int previousIndexedSlot(int slot) {
+        int s = tree.step(slot, !descending); return slotWithin(s) ? s : -1;
+    }
+    /** Existing AVL neighbor kernel exposed to sibling filtered views as a slot only. */
+    int nearIndexedSlot(K key, int relation) { return near(key, relation); }
     @Override int findSlot(Object key) {
         K k = checked(key); return within(k) ? tree.find(k) : -1;
     }
