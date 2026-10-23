@@ -27,6 +27,38 @@ public final class M3JavacParser {
                 unit -> capture(unit, maxNodes));
     }
 
+    /** Reuses one M3AST-index projection per original PARSED event and task. */
+    public static M3AST.Projection<M3ASTIndex> indexProjection(M3ASTIngress.Limits limits) {
+        Objects.requireNonNull(limits, "limits");
+        return new M3AST.Projection<>("jdk.m3.parser.javac.index.v1", unit -> {
+            if (unit.phase() != M3AST.Phase.PARSED) {
+                throw new IllegalArgumentException("javac index requires a PARSED event");
+            }
+            M3AST.Source frozen = unit.source();
+            M3File source = M3File.of(frozen.uri(), frozen.text());
+            if (!source.utf16Sha256().equals(frozen.utf16Sha256())) {
+                throw new IllegalStateException("M3AST source seal mismatch");
+            }
+            return M3ASTIngress.javac(source, unit.tree(), unit.trees(), limits);
+        });
+    }
+
+    /** Register a shared indexed projection; existing M3JavacTree callers are unaffected. */
+    public static M3AST attachIndex(JavacTask task,
+            M3AST.Projection<M3ASTIndex> projection,
+            Consumer<? super M3ASTIndex> consumer) {
+        Objects.requireNonNull(task, "task");
+        Objects.requireNonNull(projection, "projection");
+        Objects.requireNonNull(consumer, "consumer");
+        M3AST handle = M3AST.open(task, true);
+        handle.addConsumer(new M3AST.Consumer() {
+            @Override public void parsed(M3AST.Unit unit) throws Exception {
+                consumer.accept(unit.project(projection));
+            }
+        });
+        return handle;
+    }
+
     /**
      * Caller-owned rich syntax-index operation. Reuse this exact key to share
      * one bounded detached index per PARSED event through the existing M3AST
