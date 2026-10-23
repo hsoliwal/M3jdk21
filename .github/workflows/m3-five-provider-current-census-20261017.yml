@@ -5,6 +5,8 @@ on:
     paths:
       - 'm3/collections/interop/qualification/current-census-20261017/**'
       - 'm3/collections/interop/qualification/compiler-three-test-successor-20261022/**'
+      - 'm3/collections/interop/qualification/apache-bag-450-successor-20261022/**'
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java'
       - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java'
       - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
       - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
@@ -16,6 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # First reproduce the exact previous 76-owner and three-test source generation.
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: m3/interop-three-test-compile-receiver-20261022
+          path: previous-product
+          sparse-checkout: |
+            m3/collections/interop
+          persist-credentials: false
       # Run the unchanged 36+7+40 source verifier against its real predecessor,
       # then compare exactly three changes in the new product source generation.
       - uses: actions/checkout@v4
@@ -66,7 +77,8 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v
           python3 -m unittest discover -s m3/collections/interop/qualification/compiler-three-test-successor-20261022 -p 'test_*.py' -v
-          python3 m3/collections/interop/qualification/compiler-three-test-successor-20261022/verify_compile_successor.py --product . --predecessor predecessor-product --historical-product historical-product
+          python3 -m unittest discover -s m3/collections/interop/qualification/apache-bag-450-successor-20261022 -p 'test_*.py' -v
+          python3 m3/collections/interop/qualification/apache-bag-450-successor-20261022/verify_apache_bag_successor.py --product . --previous-product previous-product --predecessor predecessor-product --historical-product historical-product
   five-real-provider-runtime:
     runs-on: ubuntu-latest
     needs: source-sealed-current-census
