@@ -4,7 +4,7 @@
 
 **Product identity:** M3JDK21 is the integrated JDK. M3File is the
 existing file/module implementation, not a new filesystem API or an
-application wrapper. This is a bounded *verification repair*.
+application wrapper. This is a bounded two-file *verification repair*, not a production API mutation.
 
 Canonical source recipe:
 [Synexia #13230](https://github.com/hsoliwal/com.synexia/pull/13230),
@@ -62,3 +62,32 @@ JNI symbol changes or native implementations.
 
 **State: DRAFT / HOLD.** No automatic merge, rebases of develop,
 public-recipe copies, or project-wide blanket naming changes.
+
+## Follow-on Java21 strict-lint pass
+
+When the first source-sealed verifier update executed, the merged-atom
+preservation's 12 rows passed, but the actual host module build reported
+`[missing-explicit-ctor]` for the original existing
+`M3FileObservationContract` class. The CI used `-Werror` as required.
+
+The same canonical [Synexia #13230](https://github.com/hsoliwal/com.synexia/pull/13230)
+recipe now composes a second, separate Java LST source atom. The existing
+implicit **public** no-arg constructor is made explicit with one
+`public M3FileObservationContract() { }` declaration. Public JVM
+constructor descriptor and all observation callbacks/tests stay unchanged.
+No compiler warnings are disabled.
+
+Exact source Git blobs:
+`ddb0aa6e88cad6ff3e6519557c092fc349008fdf` →
+`a5044ca5cdfca1f879de81cb5d6ee9b722d872ba`.
+SHA-256:
+`8696f405e1ff93b891f9bd2ebbab1ec90ef75d8f0008b61b7a7dc4946b70361c` →
+`eea934797b1bcb54c55c6bea2366b3da0b51d2ae3775c44a4536706dd356b855`.
+
+Java21 synthetic exported-module compiler reproduction: PASS under
+`-Xlint:all,-module -Werror` with explicit public descriptor checked
+using `javap`. This is *not* the actual M3File host/jlink qualification:
+current-head CI results are required for that. A separate original
+`M3ResourceLocks` handoff SHA mismatch remains held pending canonical
+source-history reconciliation. Historical rows must not be silently
+overwritten just to make preservation pass.
