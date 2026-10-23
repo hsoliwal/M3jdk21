@@ -28,6 +28,8 @@ EXPECTED_ROLES = {
     "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java": "differential_oracle_postimage",
     "m3/arrays/pom.xml": "test_only_maven_dependency_postimage",
     "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionContract.java": "one_character_java21_test_syntax_postimage",
+    "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java": "atomic_tree_sibling_key_validation_postimage",
+    "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java": "negative_and_overflow_atomic_refusal_regression",
 }
 NATIVE_PATHS = {
     "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
