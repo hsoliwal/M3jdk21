@@ -14,7 +14,8 @@
     "recipe": "com.synexia.rewrite.M3ArrayListDualWordMaskRecipe",
     "atom": "M3ArrayList.removeIf decision mask",
     "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-arraylist-dual-word-20261023/manifest.tsv",
-    "build_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-junit-resolve-20261023.yml"
+    "build_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-junit-resolve-20261023.yml",
+    "syntax_bootstrap_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-longtree-seed-syntax-20261023.yml"
   },
   "files": [
     {
@@ -40,6 +41,14 @@
       "preimage_sha256": "1448e9b9597df4648c3469ef1c49a57086df58de246e25b946e10b5c04906dd5",
       "postimage_sha256": "12b02965bdb4058068885e5acd109334d0f1f827ea2176e3d3e111db320a65e7",
       "role": "test_only_maven_dependency_postimage"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionContract.java",
+      "preimage_git_blob_sha1": "74369df9ef10241fb748b710ab50ec1075edbee6",
+      "postimage_git_blob_sha1": "8a33b08f52ef2da14354499d577090b099e2c515",
+      "preimage_sha256": "7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25",
+      "postimage_sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
+      "role": "one_character_java21_test_syntax_postimage"
     }
   ],
   "algorithm": {
@@ -106,6 +115,12 @@
       "corrective_postimage": "use released 5.10.2 already in m3/collections module",
       "release_scope": "TEST_ONLY",
       "production_bytecode_api_change": false
+    },
+    "longtree_seed_compilation": {
+      "previous_failure": "testCompile at M3LongTreeSetMaskCompactionContract.java:12 integer number too large",
+      "corrected_token": "0x4D33534F52544C -> 0x4D33534F52544CL",
+      "status": "PENDING_NEW_TARGET_CI",
+      "semantics": "same positive integral value; no algorithm mutation"
     }
   },
   "admission": {
