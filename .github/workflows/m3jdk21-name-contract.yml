@@ -29,6 +29,7 @@ jobs:
           sparse-checkout: |
             AGENTS.md
             m3/docs/name-mapping.json
+            m3/docs/name-mapping.schema.json
             m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
             m3/tooling/name-contract/**
             src/java.base/share/classes/java/lang/Class.java
