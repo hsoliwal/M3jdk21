@@ -22,6 +22,6 @@ while IFS=$'\t' read -r path before after blob; do
   count=$((count + 1))
   previous="$path"
 done < "$manifest"
-[[ "$count" -eq 4 ]] || { echo "FAIL: original-gate receiver expects four files" >&2; exit 15; }
-echo "PASS: four exact M3JDK21 compiler/JUnit source-receiving postimages"
+[[ "$count" -eq 5 ]] || { echo "FAIL: original-gate receiver expects five files" >&2; exit 15; }
+echo "PASS: five exact M3JDK21 compiler/JUnit source-receiving postimages"
 echo "NOTE: source seal does not imply original plugin/JUnit/JNI runtime execution"
