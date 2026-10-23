@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Original M3JDK21 source-time M3SourceSignalPlugin Git blob 076d9dfc9d5320c52002903d7360c095f791bd11
+# Canonical Synexia crate m3-method-source-signals-20261022, original S/T/E schema unchanged
+# path	before_sha256	after_sha256	git_blob	canonical_resource
+m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java	ABSENT	e4e28a5d20c06faf87fd871f203a921ce1951d5825732360ec88e77d52dde097	350b9cd377b9824403badb48ec9ba1efd846e5fd	01-M3MethodSignals.java.txt
+m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java	839088f9f7dcb68e24348ed735cce854664ddb52f68e33cff3b17ac65843abaf	7c7f9e98a7e93ea02387983d224ce197d7ccac3acaea2bf17fe5c06ae57c96d3	358d0f76c72a325691b0599938071bab5f589dc6	00-M3SourceSignalPlugin.java.txt
+m3/compiler/source-signals/src/test/java/com/m3/compiler/signals/M3MethodSignalsJUnitTest.java	ABSENT	1b9743c8ecc749c997e1dd4797520c81c866d0bea8b10b058632307ac0d63ba5	0decf44a42f3ab800916abfd13c1be8cef33587e	04-M3MethodSignalsJUnitTest.java.txt
+m3/compiler/source-signals/src/test/java/com/m3/compiler/signals/M3MethodSignalsPluginTest.java	ABSENT	fddfcdb29587518336d7237d52377ea25a820855c9ec8eea98b2fed75f6dac30	ba629ddc3dbe40562d619d7579a80f62588af577	03-M3MethodSignalsPluginTest.java.txt
+m3/compiler/source-signals/src/test/java/com/m3/compiler/signals/M3MethodSignalsSelfTest.java	ABSENT	1bc5c87ad09aa9d93d41e590789ddb09dc7fb35540079143c3f6297a9e8e16c4	15899617a115e174e8829b969569f87ace1d9dcf	02-M3MethodSignalsSelfTest.java.txt
