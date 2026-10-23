@@ -1,0 +1,18 @@
+gate	status	detail
+M3FILE_ORIGINAL_PREIMAGE	EXACT_SHA256_AND_GIT_BLOB	Original narrow M3File read semantics preserved
+M3BUILDSTATE_V2_PREIMAGE	EXACT_SHA256_AND_GIT_BLOB	No original image codec/ABI/namespace replacement
+MODULE_AND_POM_PREIMAGE	EXACT_SHA256_AND_GIT_BLOB	Original java/Maven modules source qualified
+NEW_JAVA_TEST_FILES	RECIPE_SOURCE_SEALED	New original-owner M3HostFileInventory and JUnit
+POSTIMAGE_CUSTODY	GITHUB_READBACK_MATCH	Five Java/module files plus original POM
+ONE_READ_BYTE_SHADOW	CODE_SUBMITTED_NOT_RUN	M3File SHA256, monitor, ByteObserver on same provider read
+IMPACT_DELTA	CODE_SUBMITTED_NOT_RUN	V2 added, modified, removed compact bitmask logic
+NATIVE_SQLITE_OBSERVATION	CODE_SUBMITTED_NOT_RUN	Master V2 observation separate from successful head
+SOURCE_STABILITY	CONSERVATIVE	Provider version guarantee needed for strict race-free source snapshot
+MAVEN_OPENREWRITE_SDK	NOT_RUN	Recipe.run fixed point/source-drift tests are definitions only
+M3_FILE_JAVA21	NOT_RUN	Original file module tests required
+M3_FS_NATIVE_JNI	NOT_RUN	Original native SQLite/JNI/JUnit required
+M3JDK21_JMOD_HOTSPOT	NOT_RUN	Full installed image and jtreg required
+MAVEN_GRADLE_IDE	NOT_RUN	Consumer effective-model/ABI integration and task gating required
+WRAPPER_LIBRARIES	NOT_RUN	JDK/Guava/Eclipse/Commons/Spring backed/filtered/sorted differential
+ANDROID_AND_PLATFORM	NOT_RUN	Original JNI/Android providers and JVM/GC invariants
+PERFORMANCE	NOT_MEASURED	Bytes/CPU/heap/native memory
