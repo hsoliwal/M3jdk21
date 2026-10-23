@@ -129,6 +129,11 @@ public final class M3IndexPathMasks {
                 || output == requiredMasks || output == forbiddenMasks) {
             throw new IllegalArgumentException("source/output metadata alias");
         }
+        // Mask parameters are borrowed input lanes too. An output alias can
+        // corrupt the active predicate or the next resumable window's rule.
+        if (output == requiredMasks || output == forbiddenMasks) {
+            throw new IllegalArgumentException("mask/output alias");
+        }
         for (int[] plane : statePlanes) {
             if (plane == output) throw new IllegalArgumentException("state/output alias");
         }
