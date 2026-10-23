@@ -142,6 +142,8 @@ public final class SharedLexiconPrecomputeCatalog {
         private final Map<WordIdentity, M3LexiconPrecompute.IndexWordFacts> wordFacts = new HashMap<>();
         private final Map<WordIdentity, M3LexiconPrecompute.IndexWordSignal> wordSignals = new HashMap<>();
 
+        public Builder() { }
+
         public Builder translation(TranslationIdentity identity, M3LexiconPrecompute.TranslationProjection value) {
             Objects.requireNonNull(identity, "translation key");
             Objects.requireNonNull(value, "translation value");

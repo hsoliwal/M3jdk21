@@ -1,0 +1,77 @@
+{
+  "schema": "M3_ECLIPSE_OWNING_EXECUTION_INPUTS_V1",
+  "scope": "ACTUAL_EMITTED_TARGET_UNMODIFIED_OWNING_POM",
+  "captured_before_execution": true,
+  "argv": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-f",
+    "/workspace/scratch/206049dfb270/M3jdk21/m3/eclipse/core-runtime/pom.xml",
+    "verify"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "PATH": "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin:<inherited PATH>",
+    "MAVEN_OPTS": "-Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts"
+  },
+  "input_files": [
+    {
+      "path": "m3/eclipse/core-runtime/pom.xml",
+      "bytes": 1694,
+      "sha256": "3b4d4fadfec5822bd5a9022797870fc41443954f0d63ab718586738cd926e244"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "bytes": 4104,
+      "sha256": "dc7e2cc6243291c362e135311ca2e50fb9d445db4f0c72cee5508d770526b6dd"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java",
+      "bytes": 5174,
+      "sha256": "a9cdf65296a3841a5bdeab909fd24f6f3bbe60773f5d3070c2091a710a00b5a7"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java",
+      "bytes": 3798,
+      "sha256": "10a41822af6ee4a71335fb2ab4e6395dd6be8c076fe8931c0e6b1391c9cef8bd"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "bytes": 4196,
+      "sha256": "89ea9107defabe8f35a3ee8bc5d8559f79c6a13c90e1fa7cbbbf65f3d1c6724f"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "bytes": 6769,
+      "sha256": "9897ba5f3f5cf6dae226844ccf56baed776fd552fa0ca74877a3923ee774e1b7"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "bytes": 5237,
+      "sha256": "e12bdc3c08aec2d886a403d6f342de3ac0b35a0e063409ad43ae0c8784de19e5"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java",
+      "bytes": 4042,
+      "sha256": "480c640c1090373c02f5fef8aac78284f0b93c1911573df468b6c9640eb90e65"
+    }
+  ],
+  "collections_dependency": {
+    "path": "/tmp/m3-build-m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar",
+    "bytes": 959537,
+    "sha256": "c74623ac85af1d4e4254dec6c7d246476b12bdca3b882f96c9a399debbd1bb82",
+    "source_qualified_receipt": "/workspace/scratch/206049dfb270/collections-work/evidence/TARGET_OWNING_INSTALL.json",
+    "source_qualified_receipt_sha256": "6eb2b16f7adb29893b8e73e242e63cbf98b3b0b70213d6ac45f1ff6313c412ce"
+  },
+  "jdk_toolchain": {
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java": "3282b9858bee1ffd212a1a640236699494235d106e3b8bccbf726f9ac02cb0aa",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac": "167e2252877477bb0e0a103bffe117899e058e1a3c27cf2ac2ef58e6118f43ea"
+  },
+  "unchanged_owning_pom": true,
+  "existing_reports": [],
+  "recorded_at_epoch_ns": 1792546005213924029
+}

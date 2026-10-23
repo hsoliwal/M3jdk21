@@ -1,5 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
+// preserve native Eclipse OperationCanceledException cancellation semantics.
 package com.m3.eclipse.runtime;
 
 import com.m3.collections.M3ProgressMonitor;
@@ -10,6 +12,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 
 /**
@@ -97,7 +100,7 @@ public final class M3EclipseJobs {
             Thread.currentThread().interrupt();
             owner.setCanceled(true);
             return Status.CANCEL_STATUS;
-        } catch (CancellationException canceled) {
+        } catch (CancellationException | OperationCanceledException canceled) {
             owner.setCanceled(true);
             return Status.CANCEL_STATUS;
         } catch (Exception failure) {

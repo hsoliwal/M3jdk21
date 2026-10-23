@@ -1,0 +1,25 @@
+public interface java.util.concurrent.ScheduledExecutorService extends java.util.concurrent.ExecutorService {
+  public abstract java.util.concurrent.ScheduledFuture<?> schedule(java.lang.Runnable, long, java.util.concurrent.TimeUnit);
+    descriptor: (Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+
+  public abstract <V> java.util.concurrent.ScheduledFuture<V> schedule(java.util.concurrent.Callable<V>, long, java.util.concurrent.TimeUnit);
+    descriptor: (Ljava/util/concurrent/Callable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+
+  public abstract java.util.concurrent.ScheduledFuture<?> scheduleAtFixedRate(java.lang.Runnable, long, long, java.util.concurrent.TimeUnit);
+    descriptor: (Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+
+  public abstract java.util.concurrent.ScheduledFuture<?> scheduleWithFixedDelay(java.lang.Runnable, long, long, java.util.concurrent.TimeUnit);
+    descriptor: (Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+
+  public default java.util.concurrent.ScheduledFuture<?> scheduleMonitored(java.lang.Runnable, long, java.util.concurrent.TimeUnit, java.util.concurrent.ProgressMonitor);
+    descriptor: (Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/ProgressMonitor;)Ljava/util/concurrent/ScheduledFuture;
+
+  public default <V> java.util.concurrent.ScheduledFuture<V> scheduleMonitored(java.util.concurrent.Callable<V>, long, java.util.concurrent.TimeUnit, java.util.concurrent.ProgressMonitor);
+    descriptor: (Ljava/util/concurrent/Callable;JLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/ProgressMonitor;)Ljava/util/concurrent/ScheduledFuture;
+
+  public default java.util.concurrent.ScheduledFuture<?> scheduleAtFixedRateMonitored(java.lang.Runnable, long, long, java.util.concurrent.TimeUnit, java.util.concurrent.ProgressMonitor);
+    descriptor: (Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/ProgressMonitor;)Ljava/util/concurrent/ScheduledFuture;
+
+  public default java.util.concurrent.ScheduledFuture<?> scheduleWithFixedDelayMonitored(java.lang.Runnable, long, long, java.util.concurrent.TimeUnit, java.util.concurrent.ProgressMonitor);
+    descriptor: (Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/ProgressMonitor;)Ljava/util/concurrent/ScheduledFuture;
+}

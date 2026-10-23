@@ -1,0 +1,390 @@
+{
+  "donor_jmods": {
+    "lucene": {
+      "com.fasterxml.jackson.annotation": {
+        "content_sha256": "ba361dcda9b6050c692591ab9cd253a15bb73a90af942c017a7c46f29a705486",
+        "input_jmod_sha256": "49bb897789cae05510e23242b841f98582d80352b0b40a20f97b07be01605d38"
+      },
+      "com.fasterxml.jackson.core": {
+        "content_sha256": "aa34ba56cd673737193060aa0d7fed98d7121b274cd89fd32ca0e017996ac925",
+        "input_jmod_sha256": "5efc7dfda408f46f505c5d54a5143b3dc358bb953871fdd538e20dd40cf163e6"
+      },
+      "com.fasterxml.jackson.databind": {
+        "content_sha256": "3a438df2fe8bcbeea34b61ffa59104fd690a5a1222e5ec1a041dc2b9e96d6f95",
+        "input_jmod_sha256": "efed19299fe2eaa0ace62992f9d39a69c697c92df1a4337253b40a003cf400fb"
+      },
+      "com.ibm.icu": {
+        "content_sha256": "bf8770915551301cc3e5ead6865ed21c4d6759e86148d4eff09dad8cb4bb8b95",
+        "input_jmod_sha256": "e03fb67af6472c7b5b20e364b2d7046959ba5ca52fe74cd9f9c32cd4e43794b9"
+      },
+      "hppc": {
+        "content_sha256": "e3a04324dfcdb2d8a3c18a35ba343f42c842a0382666b118d155abef65c2b209",
+        "input_jmod_sha256": "aadcf0bce0908b80318392d5da93b65fd4fd400d18647997c4a7473cd32fdb83"
+      },
+      "io.github.classgraph": {
+        "content_sha256": "93df413ac797174c540a8669ba027571ca969ea0a610ac28373300ec4ba0034d",
+        "input_jmod_sha256": "588340a5053ded8ac2ececf946d26f9cb7c9abb8c7870ac59bdfd594ab302b0c"
+      },
+      "io.github.dmlloyd.classfile": {
+        "content_sha256": "e92e4d8bae60f97f8205bbcab6891b330aecbf18f749a760e949c6f89e46aef1",
+        "input_jmod_sha256": "f35c7975c507dcfea59c67f1821c615e10179d63c3d312928005defebf89ddc4"
+      },
+      "jcommander": {
+        "content_sha256": "481dca84133771157dadb76eb435824e71f75656494e1f8e3c485ff27fddd3a4",
+        "input_jmod_sha256": "ff5be5f785c46a9461b998661cadd08b2ec1ea07ad3e74e0baab4b7c75069705"
+      },
+      "libsvm": {
+        "content_sha256": "9b417e140ddacfe7944936e0c9e234961e26b57d538a26b22dd50be285c771b9",
+        "input_jmod_sha256": "c390bdb8f628e882550b21a8a9b78d11e945799915c94238aedf9879bc3f35e9"
+      },
+      "morfologik.ukrainian.search": {
+        "content_sha256": "f95450f52c30a07fa32f9386b2130a8021484e37d9a00d3d1ea8c3513be90cd6",
+        "input_jmod_sha256": "fc6ed5e502285f69df10b0dff63cf960eaf2fe00c6b47b1aebe58a583d795c15"
+      },
+      "noggit": {
+        "content_sha256": "64a90ff584493a71877b562afba8e4d9995e4b43e8e46a7c8038e26427f42122",
+        "input_jmod_sha256": "e87582a3fd1855393dff803cd15252893e38663066d5008b9a7a294f1951c4b3"
+      },
+      "org.antlr.antlr4.runtime": {
+        "content_sha256": "7b11d625762f408a2e2bd3f1a0cd201d4f430d1df9e0affafe76259d950d2706",
+        "input_jmod_sha256": "be8ead2ddee961a5afc1ed5f2834103d346eccd5de86cba439573944c3c80424"
+      },
+      "org.apache.commons.codec": {
+        "content_sha256": "87e7d10fd00692ebbae6dfbe0950e1d0ed50b1c284e3d43ff71c087a1c0ebc0b",
+        "input_jmod_sha256": "8b343d4c7b51668133eb6e136d80db4ede8facab0fe91bde0b869b80286a88de"
+      },
+      "org.apache.commons.xml.secure": {
+        "content_sha256": "3f9feca8190a74dedf24afcadffd84b935c8b816ab1e9a50db77b294688e3739",
+        "input_jmod_sha256": "836abb01b9d5fd62fc23605745dd54571e5abc6cab9df41872d610ab2d4bc1a2"
+      },
+      "org.apache.lucene.analysis.common": {
+        "content_sha256": "102a164a273971b59b44b416bba209ef2bf72466f9c6e505d0f86a3667de9cea",
+        "input_jmod_sha256": "a4a49e59a5ffe2ced2050309cba042d5732913547d5309bdb5eaf1c35792751a"
+      },
+      "org.apache.lucene.analysis.icu": {
+        "content_sha256": "7932a7136a1e813b0a0ee023ab4504f99afbf5477d9eccb82affe5c5226254d0",
+        "input_jmod_sha256": "6f1402fdf84d19ce41a547faea78474052c5f5ac1adb1cdb8674b3478eb27624"
+      },
+      "org.apache.lucene.analysis.kuromoji": {
+        "content_sha256": "a1368bee8d9fab9a06d4c7992d1480dd83927d837bc5c35b79e9feeadaeff1cc",
+        "input_jmod_sha256": "ae0856e68ad3dac6dcbc7b5c4cae23d1c810a50d3bb8ffc6bf6d42898ab4b465"
+      },
+      "org.apache.lucene.analysis.morfologik": {
+        "content_sha256": "1f438c283d3c43c0883113878e243b66547009079cd5230cac8bf4138d6d9428",
+        "input_jmod_sha256": "cd7912a594d372e8140d3f2c3ff034d21c06d85a0422837fad9b952c0c53c950"
+      },
+      "org.apache.lucene.analysis.nori": {
+        "content_sha256": "2a2911f9e5c0eb4dc43277e2f496aa053dcd208933162b04132afba20c91fa10",
+        "input_jmod_sha256": "0090b82762058fc5013e017048d6f1b75e7d75cdedf68429b2629be5b2e2a3d4"
+      },
+      "org.apache.lucene.analysis.opennlp": {
+        "content_sha256": "81a885a87c456af44778725312c1204f2d50d1c2b71c38019a1d1bfe82f439b2",
+        "input_jmod_sha256": "b43665805b77493884ed31500f1c816c0990b8d542ed0928ae303314b430e225"
+      },
+      "org.apache.lucene.analysis.phonetic": {
+        "content_sha256": "17d4c0486caed9356f443e36d61d4954593b92e19b115b0a0561c6b375677b2f",
+        "input_jmod_sha256": "425d2a3bcd1235bd6ae2954f5d35e220de8f17a3ea7459ec111a848eeab2defe"
+      },
+      "org.apache.lucene.analysis.smartcn": {
+        "content_sha256": "96a70a56c60a8a68864f1e5b8d0bbf2599a2b6101db8727e1787db5efc9d83e0",
+        "input_jmod_sha256": "a2e2708f2c8be3d40530b15959e16cba34474c24eceb2cdc6a54bd4dc4567682"
+      },
+      "org.apache.lucene.analysis.stempel": {
+        "content_sha256": "e37e53f9e2fbd497558aff9bdf1a0e571e43b2641acc413b2c77a2fbf5fa8e96",
+        "input_jmod_sha256": "f0a6a27dfed9c65f5de161c4f2a63271ed7fabbed8a946a24d401bb26e6bdb8d"
+      },
+      "org.apache.lucene.backward_codecs": {
+        "content_sha256": "bd9e9b5c7c63f9435b3d2c8fdb23ec1a378b5eed37b73d2a0092e8840ae0294f",
+        "input_jmod_sha256": "800b0dceac4e056cbdef1dfe0ecb94dfa1de7c4e39af4bc81917c0590f4a51fc"
+      },
+      "org.apache.lucene.classification": {
+        "content_sha256": "a2d98f49748a2dd1c4361dd22ec75628db9b0baaffafbedf40fd066325a809fa",
+        "input_jmod_sha256": "1fa35db4be0b70bd010e1577477e1e3e93d9634d8b4a1eaa7d2b41b542a26446"
+      },
+      "org.apache.lucene.codecs": {
+        "content_sha256": "12afc1798219e4d2f38a24604c4eb8cffd5b09420347a6d231d62b8f7ee98e8f",
+        "input_jmod_sha256": "4b0939080db6d5229d15b2ee65ffd842074dc056549b25a0d43b8ce2cd26adf0"
+      },
+      "org.apache.lucene.core": {
+        "content_sha256": "7b2a00fd80e8c085850512f94bfe220215be8b064542bb54d6b95057f03b75ae",
+        "input_jmod_sha256": "a3e69b458acb836e7218f33c276ee8ea3da92860438d26c794f54e89ebba359e"
+      },
+      "org.apache.lucene.expressions": {
+        "content_sha256": "efff8534fa3dc50cefe6c2a2aa793877d84ff69fd131ae0266e1338f24c91ca7",
+        "input_jmod_sha256": "0025ee875a1383103d278c66276c33e792b249168d8b1884da0c198165abad41"
+      },
+      "org.apache.lucene.facet": {
+        "content_sha256": "b2c0420f3c126b2c87752722181ffdfeb11b6b1953328b5c53dd169fcf342585",
+        "input_jmod_sha256": "153bad7b9fcd9a1245d8608f04c68389d14b6fecabd0761ffde9098597361a6c"
+      },
+      "org.apache.lucene.grouping": {
+        "content_sha256": "b99a816044f34a56c23df083fa0f98569a27b007ad85a695e95c03cbe19f2727",
+        "input_jmod_sha256": "b735c946b8c8400a8d7f15140df1f7e077993db39f41cd0ee6a458a50272de18"
+      },
+      "org.apache.lucene.highlighter": {
+        "content_sha256": "b1418e5f54711da92e19281804230da225efb75b16df8d35d9f3a3013f077af5",
+        "input_jmod_sha256": "407fa8526f60a14aa047f51e9ca8694c4a1297534d4fc1449cedd55bee8412d9"
+      },
+      "org.apache.lucene.join": {
+        "content_sha256": "3e36381d47b241489f02dcb721d86b1b4e86abea31ed0f565fc79394dd98c6af",
+        "input_jmod_sha256": "169ea4680636b558845324952126828796a56fb0b2c67f12dfb6fe4cedd09606"
+      },
+      "org.apache.lucene.luke": {
+        "content_sha256": "71671e2e787ee7ae8b29884f33519b7539b423ee831756bd99562e8963549766",
+        "input_jmod_sha256": "849925b2004ddb2392dd4dd801307477fa36ecc7532947be37b20dc6f1d17e80"
+      },
+      "org.apache.lucene.memory": {
+        "content_sha256": "2f14470fa90db0253a8b3b3ec792419f6778139cd58b0a12caa2c618ae239091",
+        "input_jmod_sha256": "5e51ed3a250bb2a6ea033f7d6e2f32316b4299bdf229caf18fa47b87c6dc36da"
+      },
+      "org.apache.lucene.misc": {
+        "content_sha256": "0b9cebb0bbd89fcacff71a43152630de99aa8be9991016ff9538417545185dc9",
+        "input_jmod_sha256": "b65ec30b01fff7abf481e9a0d15eb8881765057b0417e718cf21b76146e709b9"
+      },
+      "org.apache.lucene.monitor": {
+        "content_sha256": "7d7e867972fc1f9bed565f5feb9dae6693e4ead01b7ae54aa666dd3d782a6535",
+        "input_jmod_sha256": "17cda60a0758588a8ce236bf681f5d01bbdcb938b70fa4674f9dd3e668656b9e"
+      },
+      "org.apache.lucene.queries": {
+        "content_sha256": "cf43c183758ba8e59a45745add08fe75638e4a440c308d9c9f7cdb9417c33fbf",
+        "input_jmod_sha256": "f4ef46bf2fd0645508b4e5eed2a7cf7bedb43cb08a6c9a353697141a839db268"
+      },
+      "org.apache.lucene.queryparser": {
+        "content_sha256": "4d97b73951ab0d81dcdb6df8a8834de626d3d2046c83ec8d026f74e9394c994b",
+        "input_jmod_sha256": "bb1d5bb5fc87dcb186f0f77bf45947c6ec79668622a5478fcb70196b0be3debf"
+      },
+      "org.apache.lucene.replicator": {
+        "content_sha256": "5df4b026895ad490e7ca879947314922e278631865a3bd24cdf8f9520005d4a7",
+        "input_jmod_sha256": "6a3f178e0e565cfb4904a5e89da184b2c048932211ccac6f26896ca69d4eae02"
+      },
+      "org.apache.lucene.sandbox": {
+        "content_sha256": "2f89021440265ba9681fa7396b6c0eed1f768c910fd2e4be6070c4dc6c39ca36",
+        "input_jmod_sha256": "767ee3d3e1b40261aef863c665c61740c35ade878434b2d9e97b25dab2d479e6"
+      },
+      "org.apache.lucene.spatial3d": {
+        "content_sha256": "1012ccb4ace976512341c722947845afa0f6390ff47ffb5fb4f6ecedfeaad863",
+        "input_jmod_sha256": "a45934806910e59cc357fb8e85d31ff4b7dda744f3f83100f26eb2c7fe5b946b"
+      },
+      "org.apache.lucene.spatial_extras": {
+        "content_sha256": "186b91781140fa9d1f5ec48d95b3f5f2de7ed4612550bb65d34624c8b17ddf78",
+        "input_jmod_sha256": "6612f1f711291fb5baecf13656252cc26e3e7bdcc1c9761e6e10e742b145574f"
+      },
+      "org.apache.lucene.suggest": {
+        "content_sha256": "dbe2d8fca000d390144fe369a1ddd0bc1aa62f1945ee54a4bdc5ce7e9fa7eb19",
+        "input_jmod_sha256": "dab782fb96c6d9275c190f8456314f58f6483578b8d952b1416f9b828a8737d7"
+      },
+      "org.apache.opennlp.morfologik": {
+        "content_sha256": "48daee878266540662760dbf298174a6f0589fff3d012281bd803ff589e182a8",
+        "input_jmod_sha256": "8a2571af00ed2371dbe4486650fbd4a5251563d85f395b5b8a8070f9616f5292"
+      },
+      "org.apache.opennlp.spellcheck": {
+        "content_sha256": "0b3b01acc5faabb37ea4e86b39af2a66f8f643837274de8a05979a482c8d183d",
+        "input_jmod_sha256": "e8ca4b3c557c0fa0225dfc3f8027a7d14c49909f30a37a489bba8624ec563154"
+      },
+      "org.apache.opennlp.tools": {
+        "content_sha256": "42a7af238b83f3c1ba49d555c4cac2acd156c8e88c5fe549426f01747d342ad8",
+        "input_jmod_sha256": "694d8eff0ad7c9f81b5c0fe9ef31e869f5c91f6d7a72464116d6e88107741371"
+      },
+      "org.apache.opennlp.uima": {
+        "content_sha256": "d51b6fb7ff98eb209100ca2174547ec32d66231792c133dce364d413c15fb101",
+        "input_jmod_sha256": "6c122ff26902c0c7f58c6e4ffbb4a54456bb4b4147b27fd55a3ee473f8e1a7c7"
+      },
+      "org.carrot2.morfologik.fsa": {
+        "content_sha256": "e0fdac7c4cad9eafbb3dc8511ff221c2a5141329c71e614d184b58c009673587",
+        "input_jmod_sha256": "7d3da9f57a4cccb8f51f182c207f33f283c22dab97269b8e886aa17b7b7a4147"
+      },
+      "org.carrot2.morfologik.fsa_builders": {
+        "content_sha256": "4e670235f552bd12c63258d40738f400646b2b92d30caa60fb973c65c8b8871e",
+        "input_jmod_sha256": "87de31b4541abb59a6f7bb91d33e46033400fb358c371af3dc06fc63aca7671c"
+      },
+      "org.carrot2.morfologik.polish": {
+        "content_sha256": "441358777fa36c2f52701adcc362a041900987e4cf33b2d00ea7fc618cba9615",
+        "input_jmod_sha256": "54840f3774990e1e84132070a1ed23a5e156ba305d2e2428047849387089a557"
+      },
+      "org.carrot2.morfologik.stemming": {
+        "content_sha256": "0d76969711270e43076a091b13a1f455ed6b29306f26a5728e6809a8f6158616",
+        "input_jmod_sha256": "35f042290f4d4d2994667ce542070aadf70cdb74a9ca5308abe76e1e41f6edf4"
+      },
+      "org.carrot2.morfologik.tools": {
+        "content_sha256": "cec62e9c79bd5b3734e580be4441a29ceb3240270eada5b86f5ff8b182abd739",
+        "input_jmod_sha256": "ce5a7eeaab012f5bda4b929b79a5bd772b1f3d243d78c6e535b2557e356db218"
+      },
+      "org.locationtech.jts": {
+        "content_sha256": "a466726175735dc853401eee897a547739c05ededa58e9f1ad474f7440b19917",
+        "input_jmod_sha256": "a65738beccc1c48042ae2e2209cd0de1969f08a604ad989b463ac747e330e2fc"
+      },
+      "org.slf4j": {
+        "content_sha256": "75871a9b919697f59b7d94b5c8bbde346288f175062cd05a4c74da9d9ce171b8",
+        "input_jmod_sha256": "b31b27be1445f3f6ff5cf44db35787e83add6345abfdc27db3a0848352ea540d"
+      },
+      "org.slf4j.simple": {
+        "content_sha256": "6459d71bdb6908f51de9ac6d3ae2b28c006f22a98993f52551a76c706dac3752",
+        "input_jmod_sha256": "100babd40b8c7cc54e6cf2a72ec282d65b26e59da26b3ec60057d431b90a3a02"
+      },
+      "s2.geometry.library.java": {
+        "content_sha256": "8df0c5dd12ce87ca93cabb441b4454e12789171ca603f722256f0d0e21ccf3bc",
+        "input_jmod_sha256": "97a58673973e94539deaa1e0379b0cd42bf20bcf29153271a1a55769a45b7fea"
+      },
+      "spatial4j": {
+        "content_sha256": "ee64d27b0db20037069c4960124b70fda19c5e923cf91c52082ba7618a608d3a",
+        "input_jmod_sha256": "59a39610ad91f4db2d48fd97a16878e7ff56bf27cd6dcfdf0f0e11d1d8524375"
+      },
+      "uimaj.core": {
+        "content_sha256": "f2c94478d9abaf496a7c3815e64516dfda3b5a5399ac7bfb6a185285efbc1330",
+        "input_jmod_sha256": "b30a429f948761cf6ed20e225a354d667ea8398277072f343da89916162997e3"
+      },
+      "zlibsvm.core": {
+        "content_sha256": "a1d4e4d60241b5c4fe50a691ac92e118da571fb1b4f41f94b81574072916937b",
+        "input_jmod_sha256": "9db92b42946b6f39d8ad3cac88b3257601c6b7431d3db782a71f43faef7b4be8"
+      }
+    },
+    "opennlp": {
+      "hppc": {
+        "content_sha256": "e3a04324dfcdb2d8a3c18a35ba343f42c842a0382666b118d155abef65c2b209",
+        "input_jmod_sha256": "c17cf69d30e33991807c24e699eb741eaea11b4557d025121e71e6aec1328d03"
+      },
+      "io.github.classgraph": {
+        "content_sha256": "93df413ac797174c540a8669ba027571ca969ea0a610ac28373300ec4ba0034d",
+        "input_jmod_sha256": "878bc927aed7d6a20560572ffe4f81fa507b0805fad3524bcc10790bfc3f5b5e"
+      },
+      "jcommander": {
+        "content_sha256": "481dca84133771157dadb76eb435824e71f75656494e1f8e3c485ff27fddd3a4",
+        "input_jmod_sha256": "65327004686b5358e5af0c925a4389c7511f0628fe7a05e15c380aa28994ea94"
+      },
+      "libsvm": {
+        "content_sha256": "9b417e140ddacfe7944936e0c9e234961e26b57d538a26b22dd50be285c771b9",
+        "input_jmod_sha256": "8280cc7a1f542219f736a774f5e4c3f0fd938a0efda8030938c6e7d021eb936b"
+      },
+      "org.apache.commons.xml.secure": {
+        "content_sha256": "3f9feca8190a74dedf24afcadffd84b935c8b816ab1e9a50db77b294688e3739",
+        "input_jmod_sha256": "8cc6f5c42cfbf0ce9b78147c95fe87fb2a7bd9a79b79df12897b0de9005522aa"
+      },
+      "org.apache.opennlp.morfologik": {
+        "content_sha256": "48daee878266540662760dbf298174a6f0589fff3d012281bd803ff589e182a8",
+        "input_jmod_sha256": "d7568e137a76295a6acd9c0396215e11c20dafb86582e6888595165b655c3dd8"
+      },
+      "org.apache.opennlp.spellcheck": {
+        "content_sha256": "0b3b01acc5faabb37ea4e86b39af2a66f8f643837274de8a05979a482c8d183d",
+        "input_jmod_sha256": "294aac193347fe13b8da60c7223ad2e09447863e99407ecdef4ccd3112d7aeb6"
+      },
+      "org.apache.opennlp.tools": {
+        "content_sha256": "42a7af238b83f3c1ba49d555c4cac2acd156c8e88c5fe549426f01747d342ad8",
+        "input_jmod_sha256": "cb3c9e7b342c091c315760ffde8ee6164e786064e818d1db5573d4d059961a28"
+      },
+      "org.apache.opennlp.uima": {
+        "content_sha256": "d51b6fb7ff98eb209100ca2174547ec32d66231792c133dce364d413c15fb101",
+        "input_jmod_sha256": "2e5321e1715424b89d71e25660aab9843b2e1fb8758607e2d9d978c62aeeca23"
+      },
+      "org.carrot2.morfologik.fsa": {
+        "content_sha256": "e0fdac7c4cad9eafbb3dc8511ff221c2a5141329c71e614d184b58c009673587",
+        "input_jmod_sha256": "e42f16dcd05b06280720e22b0d2381fe199ea57572899ed5ed1139c35239a233"
+      },
+      "org.carrot2.morfologik.fsa_builders": {
+        "content_sha256": "4e670235f552bd12c63258d40738f400646b2b92d30caa60fb973c65c8b8871e",
+        "input_jmod_sha256": "f465623340658975a48eba31f00dfb709d554a41339e7f35784df2e4728e206b"
+      },
+      "org.carrot2.morfologik.stemming": {
+        "content_sha256": "0d76969711270e43076a091b13a1f455ed6b29306f26a5728e6809a8f6158616",
+        "input_jmod_sha256": "951469cc93f3923b7a598466c618e13cbdcf3568f9557780f7942b05d790d9b2"
+      },
+      "org.carrot2.morfologik.tools": {
+        "content_sha256": "cec62e9c79bd5b3734e580be4441a29ceb3240270eada5b86f5ff8b182abd739",
+        "input_jmod_sha256": "78e79185cc09737dda26a4614ff56ee4ab79834a40ea79693f98860bc70fd83a"
+      },
+      "org.slf4j": {
+        "content_sha256": "75871a9b919697f59b7d94b5c8bbde346288f175062cd05a4c74da9d9ce171b8",
+        "input_jmod_sha256": "2dada196d9a089fb2c037b5d5ee96bd2ff13324cc1e727e7c5f3348b2b5a1f5f"
+      },
+      "org.slf4j.simple": {
+        "content_sha256": "6459d71bdb6908f51de9ac6d3ae2b28c006f22a98993f52551a76c706dac3752",
+        "input_jmod_sha256": "c98b1048b058ba0756564822e22aa2af8df69b65a7b615a0ae1cf1febaa639df"
+      },
+      "uimaj.core": {
+        "content_sha256": "f2c94478d9abaf496a7c3815e64516dfda3b5a5399ac7bfb6a185285efbc1330",
+        "input_jmod_sha256": "1fffc50d5cf3ae29cb910ae98375976c21c0f848a50833a7e4ae9f6cc932e6cf"
+      },
+      "zlibsvm.core": {
+        "content_sha256": "a1d4e4d60241b5c4fe50a691ac92e118da571fb1b4f41f94b81574072916937b",
+        "input_jmod_sha256": "ad777a723da7e6bccb6d6db858b551333291a3302281edaa5147d206a2f1a332"
+      }
+    }
+  },
+  "java_release": 21,
+  "module_jars": {
+    "com.fasterxml.jackson.annotation": "90c1c860090b7e99c7b4106e3581d326cd9513d7a1d9ed3236d00e843f945b7f",
+    "com.fasterxml.jackson.core": "4334ba0da1faaf328ae17afeb67c9e60139a1f00c501dbbf6ea2ad95a491f9b6",
+    "com.fasterxml.jackson.databind": "00163210225420370a5eaf06ce99c6e85b74874ee20fe64250d224834808428e",
+    "com.ibm.icu": "17ec8c4e7aa50e216cf13f4d5a47e4c049eae7ba318d55d544ec290de0040907",
+    "com.m3.text": "4235c6d20f8beca69d65e76b3e4bdfd655279c2368d8f8ed51ba52c9a92f3391",
+    "hppc": "f7b6fd630248ffb6304b9720848bc245788d4808c3cd9fe6ad7edeaf0ed0a180",
+    "io.github.classgraph": "5c91fe294d2bd3d04c3fe37b1bab7f1d7074d4c4412063a88126be0f832eec8e",
+    "io.github.dmlloyd.classfile": "4e6dcba50fef5f9ee4044da4ccf8edb4486ac6f8a9a803c0f9e3e68b997d6c5d",
+    "jcommander": "e27b0bda3df16765c089a95afaddf9900640979c395ab20b32e9b801e1ca9eda",
+    "jdk.m3.compiletime": "7657ae949d07538426e9c19f6d30af6e155b73d0da2a9fe5f382554ea3fcebe2",
+    "jdk.m3.nlp.search": "d41ee8aa65ec7c4839f5cc40a2980b65dfeebc26b027b824ca0cb1eb23a7c882",
+    "libsvm": "a95c6efb1e49a22355610ae3e45c42d70736adc0d30a28b2e7ac93b6031512bf",
+    "morfologik.ukrainian.search": "524f0babb05988737fa8176fa92415a92cae2f18b4d32aa9dd4a75e2c5d81afd",
+    "noggit": "b9723907834cda32f55264ebb8f04b9704f85559f010652c8f17da8ff75509d5",
+    "org.antlr.antlr4.runtime": "715c8e60bcfe2c2b5212343d2fa279e2cb29084b2a4161058003266b83e7be56",
+    "org.apache.commons.codec": "b8bf09ed455ccf7dba285c18825aa3a87623ea2fde0098e7513b93d2c36e6fc3",
+    "org.apache.commons.xml.secure": "b42a2e3afdadc409612ce696b8bcd65e577efdd3c96cff3df6daf64504dc57fe",
+    "org.apache.lucene.analysis.common": "8ea54e18ee6d71faae59b25da9a860978e9cda38cb30e6150c9cae4ba4dcef28",
+    "org.apache.lucene.analysis.icu": "91b070217bcbe4f7fd00f0526e01782cc5c5224c7935e91d52671b2629322260",
+    "org.apache.lucene.analysis.kuromoji": "00ad7ca4517f0f2d7b7f539eb87bced01c390c990453a37f2138b381c5b49331",
+    "org.apache.lucene.analysis.morfologik": "b097f1c95e6ac5252ab944db74d14dfc6ea15f0bff3cbb1d1af14653d970bee3",
+    "org.apache.lucene.analysis.nori": "0b9b45d18375fddda142a18a85c42dbcbc6ee42a4dde0b89f29efc1a93f063b6",
+    "org.apache.lucene.analysis.opennlp": "fe76f06096923c4da0f5126ff0899f54bd9f5193e46788b10cab846edae0fbca",
+    "org.apache.lucene.analysis.phonetic": "d5ee5115e2fdfe74c18b0778c07218562b84ceba57a75fd80525c80b59e3ab62",
+    "org.apache.lucene.analysis.smartcn": "21e8e345634ea9457b2e48119e8f9a825323e8c1ceb0f34f53b27250c43325ae",
+    "org.apache.lucene.analysis.stempel": "d7012b818428943f44cd5d907cb5f2d3a1448bd9736462f12a2f0522f3610323",
+    "org.apache.lucene.backward_codecs": "e3e6d4d9e3cdee8c0e2f372ba48cadbe2197f52a8ea796929cc5bb21cbef1383",
+    "org.apache.lucene.classification": "c2567fb91bf6ce3fa7d49b6ce637206a48d49577d6c50ac009a77170f635d692",
+    "org.apache.lucene.codecs": "b826613124cf70ff39c53fb76b098d42478d95121754d244a3f363df0f77d0cd",
+    "org.apache.lucene.core": "b74f7c7d0210477feba9396ddbdf09bea4a5754d5e7a74909f8741331c2789cb",
+    "org.apache.lucene.expressions": "3396a97fd4ac3e9a5e8847b4eec549dacb0768c9e0e8b6e5f4615d80e6d30b83",
+    "org.apache.lucene.facet": "34ab7666954f3739327e16be6b59c2132c4ac5e7f2279b4091e0da90fbbd8cd5",
+    "org.apache.lucene.grouping": "edc57e5a1e240684d42f58d68d3a2b27b60cda8b4a9be86a7e9fcd2bad4c0f20",
+    "org.apache.lucene.highlighter": "2ba71a8ebd622cb4d41efd611061350ebacf294c10000586238b08c8e6c58345",
+    "org.apache.lucene.join": "64af1df032376219ead691ed7e8116350e28e6f868d38ac4d6de3ab532766a20",
+    "org.apache.lucene.luke": "eec288603dc7f0a40e4e6e61e964eaf4b0a7c68c0f8f1c75e697e35d015656c3",
+    "org.apache.lucene.memory": "7b76b6670b7b5a52024ca64007e102d94e2ab43b0020085cfc297cf902e8b3fd",
+    "org.apache.lucene.misc": "3891f953d91c7ac9df7eb56c337fdfc6051097187bbff9f8788d0114c9da81ac",
+    "org.apache.lucene.monitor": "4369109cfafc8b8273c6f2102a8a13832dd766e47da9803ff317266d3db17f54",
+    "org.apache.lucene.queries": "917539ecbe18765d00a80fdff6bdac451ea35e40fa4e9e443cd93fe3dad281eb",
+    "org.apache.lucene.queryparser": "9085780f8414172d015cd613d30c2c2f6aeb4595895901b77536dd521e6ea233",
+    "org.apache.lucene.replicator": "76ccfcebac9a05c6e23729ef315696ce3f909ea507755dafb2f00770946a954e",
+    "org.apache.lucene.sandbox": "e5066931b65b0b90d0dafabc17290d4421aab3e32e08108dac44b23d7a7a6a4f",
+    "org.apache.lucene.spatial3d": "fabf0aaf7031fcdf1851f01ca398f3bc1dc3b61671e4efa50e8bd542daceeb34",
+    "org.apache.lucene.spatial_extras": "9f2cd9d32b090e1eed1f1240ad6d9a2d0fb59b14cc2d6024f5d10f8ecbf5089e",
+    "org.apache.lucene.suggest": "4305e6c938a80bf2d5ab1f292458425af50a13c2bf39d03c286c5e9c8af4a719",
+    "org.apache.opennlp.morfologik": "964092bbd1ac72d64a00f24adad67ddf85dbea232e48ef624cbf50f7f5dfd793",
+    "org.apache.opennlp.spellcheck": "637adcde78bd30a83c533ac2c106de269ade00e206892b9d4d3308007e4fd6c4",
+    "org.apache.opennlp.tools": "a7d4a446c7d5368a3b7e606e9bafe6a9b42c1aa7296d08f098a40815e8e68b87",
+    "org.apache.opennlp.uima": "4f7c9afe25bcd447a0d5ca1f47258e0dcc6f552936ca8ea0cff0ad939b7b2375",
+    "org.carrot2.morfologik.fsa": "ea569874d7909a62ea65d719392f9188af5e4586e20939073bab35c96cd57f9b",
+    "org.carrot2.morfologik.fsa_builders": "aa8ca70e3c4f017a75ed0a6b4ff426e8717bb0dc98aed2aa7725ac59e359185d",
+    "org.carrot2.morfologik.polish": "b18a8192636eb4e7b286ebfcc01eb596ee6a424caaaee90693ec2283d8b33172",
+    "org.carrot2.morfologik.stemming": "405381710a7e19c8339c9dff5eb9abd880f4f0823f2157fa5671c5d4f021f178",
+    "org.carrot2.morfologik.tools": "f28c70ae1b9674c2ef1f48cc20d8053613d320fd422dda25bc3e952ff2e8552d",
+    "org.locationtech.jts": "3f3b233106941b454678c2a87925252f7f29d493015684e5237d139f08aad3da",
+    "org.slf4j": "e2038cee67ccfcafcf8e72fa560782a8d5bf46010553314c9a365a48c2cedf08",
+    "org.slf4j.simple": "e78aba9e69bc8c064f7a0659334a3f122ff0228e1a61836c5bac3d16732c79b6",
+    "s2.geometry.library.java": "32f0b4fb2193013cc0b569efc1f4aef8794061403334e98b2a6e56cfdbbc7f6d",
+    "spatial4j": "68705f89e10df9ddae60150f4e4742cc82373b4c1b0e41a4ea89bdc66cbe603f",
+    "uimaj.core": "126fdb24335aded7b7c0298800c5f8fbeda3dfb4249b391bce5817ef3c956e9c",
+    "zlibsvm.core": "fc6cffcc239dc8d103d546c3815ad7789d131ed1319a7057be44e275fda934f9"
+  },
+  "preview_required": true,
+  "receiver": {
+    "base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "repository": "hsoliwal/M3jdk21"
+  },
+  "runtime_dependency_on_com_synexia_repository": false,
+  "schema": "M3_CURRENT_FORK_NLP_SEARCH_1",
+  "source_lock_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+  "tests": {
+    "ModelSourceProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nModelSourceProbe PASS: real token/sentence model train/serialize/reload; immutable source offsets and probability parity",
+    "SourceFactsProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nSourceFactsProbe PASS: 2000 raw UTF-16 digest oracles; snapshot/null contracts",
+    "SourceIntegrationProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nOct 21, 2026 3:32:26 AM org.apache.lucene.util.HotspotVMOptions <clinit>\nWARNING: Lucene cannot access JVM internals to optimize algorithms or calculate object sizes, unless the 'jdk.management' Java module is readable [please add 'jdk.management' to modular application either by command line or its module descriptor].\nWARNING: A restricted method in java.lang.foreign.Linker has been called\nWARNING: java.lang.foreign.Linker::downcallHandle has been called by module org.apache.lucene.core\nWARNING: Use --enable-native-access=org.apache.lucene.core to avoid a warning for this module\n\nSourceIntegrationProbe PASS: M3File/M3String/M3AST sharing; 2000 AST span oracles; 300 Unicode token oracles; disk indexing/query/term-vector offsets"
+  }
+}

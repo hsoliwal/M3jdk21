@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "repo_root": "/workspace/scratch/206049dfb270/maven-work/candidate-repo",
+  "fork_commit": "2993571eedbe96e06a737eaa8ae47cf112b255de",
+  "baseline_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "source_builder_tests": {
+    "tests": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_built_fork_jars": 16,
+  "provider_artifact_count": 90,
+  "results": {
+    "baseline": "M3_MAVEN4_BASELINE_GAP checks=13",
+    "candidate": "M3_MAVEN4_REAL_PROVIDER_PASS checks=102"
+  },
+  "incumbent_maven3_jdt_shapes_equal": true,
+  "added_public_method": "public static jdk.m3.parser.M3ASTIndex maven4Effective(jdk.m3.parser.M3File, java.lang.Object, jdk.m3.parser.M3ASTIngress$Limits);",
+  "source_postimage_sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+  "input_sha256": "a2b8391aefa987b4339f6545bc92087b2ed54d3b554d192a170270711bb91b51",
+  "commands_sha256": "96a997717305ad373f9a941b4646eea36923a5454d6b765829dad92c9505b55d",
+  "artifacts_sha256": "08d73ec9ff2e4949d4da0c8a3673b3fb72294e79d7e375ef13a84e30a08789f7",
+  "limits": [
+    "Host Java 21 provider qualification; full parser/JMOD owner gate is separate.",
+    "Maven4 source API/implementation closure and 41 model-builder tests, not full fork/distribution/plugin execution.",
+    "Maven3.9.11 and JDT3.40.0 incumbent libraries are cached artifacts; current custom JDT fork is not source-qualified here.",
+    "External dependencies and Maven build plugins are cached artifacts, not claimed source-built.",
+    "No full custom JDK, HotSpot, cross-platform, Maven Resolver fork, m2e, Tycho or mvnd promotion."
+  ]
+}

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py", line 145, in <module>
+    main()
+  File "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py", line 111, in main
+    raise ValueError('product source drift: ' + path)
+ValueError: product source drift: m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java

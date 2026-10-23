@@ -1,0 +1,41 @@
+{
+  "schema": "M3_CANONICAL_ADDITIVE_ABSENCE_READBACK/1",
+  "repository": "hsoliwal/com.synexia",
+  "revision": "ad85831eda771cbd050124c806b45c050e545984",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-049/manifest.tsv",
+      "state": "ABSENT",
+      "tool": "github_fetch_file",
+      "error_code": "NOT_FOUND",
+      "error_data": {
+        "message": "Not Found",
+        "documentation_url": "https://docs.github.com/rest/repos/contents#get-repository-content",
+        "status": "404"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-049/postimage.txt",
+      "state": "ABSENT",
+      "tool": "github_fetch_file",
+      "error_code": "NOT_FOUND",
+      "error_data": {
+        "message": "Not Found",
+        "documentation_url": "https://docs.github.com/rest/repos/contents#get-repository-content",
+        "status": "404"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/widget-backing-20261014/scrollbar-fullrange-20261020/proposal/.github/workflows/swt-scrollbar-fullrange-20261020.yml",
+      "state": "ABSENT",
+      "tool": "github_fetch_file",
+      "error_code": "NOT_FOUND",
+      "error_data": {
+        "message": "Not Found",
+        "documentation_url": "https://docs.github.com/rest/repos/contents#get-repository-content",
+        "status": "404"
+      }
+    }
+  ],
+  "scope": "Exact successor resources and unregistered SWT proposal placement. Prior prefix/registry/ledger proof remains in PUBLICATION_PREIMAGES.json."
+}

@@ -1,0 +1,153 @@
+{
+  "schema": "M3_CURRENT_OWNER_FOCUSED_PROVENANCE_CHECK/1",
+  "status": "FAIL",
+  "existing_validator": "scripts/legal/check_m3_provenance.py",
+  "validator_sha256": "55e8183c58e4bf3608355e650e3be18609feab70f7baa75c935716b396d24900",
+  "invocation": "Imported existing load_policy/load_ledger/validate_change over the exact additive set; bounded hydration is not a full checkout CLI/reactor gate.",
+  "new_files": 736,
+  "modified_append_owners": 2,
+  "new_provenance_rows": 736,
+  "registry_rows_added": 6,
+  "classifications": {
+    "FIRST_PARTY_NO_HEADER": 56,
+    "GENERATED": 472,
+    "FIRST_PARTY": 32,
+    "PRESERVED_HISTORY": 150,
+    "UPSTREAM_MODIFIED": 26
+  },
+  "prior_registry_prefix_exact": true,
+  "prior_ledger_prefix_exact": true,
+  "violations": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/pom.xml",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/prepare_packet.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/pom.xml",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/prepare_packet.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/qualify.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/src/test/java/com/synexia/rewrite/M3NlpCurrentReceiverLockRecipeTest.java",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/verify_sources.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/qualify.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/src/test/java/com/synexia/rewrite/M3NlpCurrentReceiverLockRecipeTest.java",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/verify_sources.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/pom.xml",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/prepare_packet.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/pom.xml",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/prepare_packet.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/com/synexia/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/com/synexia/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    }
+  ],
+  "limits": "Exact changed-file metadata/header check only; no legal opinion, license regrant, runtime or hosted admission."
+}

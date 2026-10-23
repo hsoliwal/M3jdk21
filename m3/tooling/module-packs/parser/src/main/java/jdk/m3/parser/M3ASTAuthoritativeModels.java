@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-// Modified 2026-10-20: consume the original JDT rewrite plan without another parse.
+// Modified 2026-10-21: consume completed Maven 4 models through the existing projection owner.
 package jdk.m3.parser;
 
 import java.lang.reflect.Array;
@@ -42,129 +42,11 @@ public final class M3ASTAuthoritativeModels {
     }
 
     /**
-     * Snapshot the structural result of an original JDT ASTRewrite plan without
-     * applying text edits or parsing again. Child replacements and rewritten
-     * lists are read from JDT's existing event owner; single-node copy/move
-     * placeholders resolve through that rewriter's original-node accessor.
-     * No foreign nodes or rewrite plan are retained by the returned index.
-     *
-     * <p>The source is the immutable <em>original parse</em> snapshot, not an
-     * emitted document. All output ranges are unknown, including unchanged
-     * nodes: their positions in the planned document have not been measured.
-     * Simple properties, comments and binding objects remain with JDT. Existing
-     * binding results still describe JDT's original resolution context; this
-     * structural snapshot does not resolve transformed names or dependencies.
-     *
-     * <p>The caller must exclusively own the AST and plan during this call and
-     * pass its current {@code AST.modificationCount()} after constructing all
-     * planned new nodes. The counter is checked before and after traversal to
-     * reject physical AST generation drift. It does not version rewrite-plan
-     * edits, so callers must not cache a plan snapshot by that counter or source
-     * hash alone. Every changed plan requires a new snapshot. Raw-string, group
-     * and multi-node range placeholders are refused because they have no single
-     * parsed semantic node. Single-node placeholders must belong to this plan.
-     *
-     * <p>This capability requires the qualified JDT core's public
-     * {@code ASTRewrite.getOriginalNode(ASTNode)} method; older providers are
-     * refused without a fallback parse. The existing parse-origin overload is
-     * unchanged and remains available with those providers.
-     */
-    public static M3ASTIndex eclipseJdtRewrite(M3File source, Object originalTree,
-            CharSequence parsedSource, Object rewrite, long expectedAstGeneration,
-            M3ASTIngress.Limits limits) {
-        check(source, limits);
-        Objects.requireNonNull(parsedSource, "JDT original parse characters");
-        if (!contentEquals(source.text(), parsedSource)) {
-            throw new IllegalArgumentException("JDT source generation changed");
-        }
-        if (expectedAstGeneration < 0) throw new IllegalArgumentException("negative JDT AST generation");
-        Class<?> nodeType = requireType(originalTree, "org.eclipse.jdt.core.dom.ASTNode");
-        Class<?> rewriteType = requireType(rewrite, "org.eclipse.jdt.core.dom.rewrite.ASTRewrite");
-        try {
-            ClassLoader loader = nodeType.getClassLoader();
-            Class<?> propertyType = load(loader, "org.eclipse.jdt.core.dom.StructuralPropertyDescriptor");
-            Class<?> listPropertyType = load(loader, "org.eclipse.jdt.core.dom.ChildListPropertyDescriptor");
-            Class<?> listRewriteType = load(loader, "org.eclipse.jdt.core.dom.rewrite.ListRewrite");
-            Method astOwner = nodeType.getMethod("getAST");
-            Object ast = astOwner.invoke(originalTree);
-            if (ast != rewriteType.getMethod("getAST").invoke(rewrite)) {
-                throw new IllegalArgumentException("JDT rewrite belongs to another AST");
-            }
-            Method generation = load(loader, "org.eclipse.jdt.core.dom.AST").getMethod("modificationCount");
-            if ((Long) generation.invoke(ast) != expectedAstGeneration) {
-                throw new IllegalArgumentException("JDT AST generation changed");
-            }
-            Method original = rewriteType.getMethod("getOriginalNode", nodeType);
-            Method properties = nodeType.getMethod("structuralPropertiesForType");
-            Method isChild = propertyType.getMethod("isChildProperty");
-            Method isList = propertyType.getMethod("isChildListProperty");
-            Method getChild = rewriteType.getMethod("get", nodeType, propertyType);
-            Method getList = rewriteType.getMethod("getListRewrite", nodeType, listPropertyType);
-            Method rewrittenList = listRewriteType.getMethod("getRewrittenList");
-            Method getFlags = nodeType.getMethod("getFlags");
-            int recoveredBits = nodeType.getField("RECOVERED").getInt(null)
-                    | nodeType.getField("MALFORMED").getInt(null);
-            M3ASTIndex.Builder out = M3ASTIndex.builder(source,
-                    M3ASTIndex.Domain.ECLIPSE_JDT, limits.maxNodes());
-            int capacity = Math.min(32, limits.maxNodes());
-            Object[] pending = new Object[capacity];
-            int[] parents = new int[capacity], depths = new int[capacity];
-            pending[0] = originalTree; parents[0] = -1; depths[0] = 1;
-            int size = 1, appended = 0;
-            while (size != 0) {
-                Object planned = pending[--size];
-                int parent = parents[size], depth = depths[size];
-                pending[size] = null;
-                if (depth > limits.maxDepth()) throw new IllegalArgumentException("JDT rewrite depth budget");
-                if (!nodeType.isInstance(planned)) throw new IllegalArgumentException("foreign JDT rewrite child");
-                Object node = original.invoke(rewrite, planned);
-                int flags = M3ASTIndex.SYNTAX_ONLY | M3ASTIndex.SOURCE_UNVERIFIED;
-                if (((Integer) getFlags.invoke(node) & recoveredBits) != 0) flags |= M3ASTIndex.RECOVERED;
-                int row = out.add(parent, "JDT_" + node.getClass().getSimpleName(), -1, -1, flags);
-                appended++;
-                List<?> descriptors = (List<?>) properties.invoke(node);
-                // Reverse-push directly from JDT lists; do not copy child payloads.
-                for (int property = descriptors.size() - 1; property >= 0; property--) {
-                    Object descriptor = descriptors.get(property);
-                    boolean list = (Boolean) isList.invoke(descriptor);
-                    if (!list && !(Boolean) isChild.invoke(descriptor)) continue;
-                    List<?> children = list
-                            ? (List<?>) rewrittenList.invoke(getList.invoke(rewrite, node, descriptor)) : null;
-                    Object single = list ? null : getChild.invoke(rewrite, node, descriptor);
-                    int childCount = list ? children.size() : single == null ? 0 : 1;
-                    for (int child = childCount - 1; child >= 0; child--) {
-                        if (appended + size >= limits.maxNodes()) {
-                            throw new IllegalArgumentException("JDT rewrite occurrence budget");
-                        }
-                        if (size == pending.length) {
-                            int next = Math.min(limits.maxNodes(), pending.length + (pending.length >>> 1) + 1);
-                            pending = Arrays.copyOf(pending, next);
-                            parents = Arrays.copyOf(parents, next);
-                            depths = Arrays.copyOf(depths, next);
-                        }
-                        pending[size] = list ? children.get(child) : single;
-                        parents[size] = row;
-                        depths[size++] = depth + 1;
-                    }
-                }
-            }
-            if ((Long) generation.invoke(ast) != expectedAstGeneration) {
-                throw new IllegalArgumentException("JDT AST generation changed during projection");
-            }
-            return out.seal();
-        } catch (ReflectiveOperationException problem) {
-            Throwable reason = problem instanceof InvocationTargetException wrapped
-                    ? wrapped.getCause() : problem;
-            throw new IllegalArgumentException("JDT original rewrite owner is missing/incompatible", reason);
-        }
-    }
-
-    /**
      * Project an actual Maven 3.x ModelBuildingResult. The *effective* model,
      * with its inherited/activated results, is the Maven ModelBuilder's result,
      * not a value inferred from raw XML. All positions intentionally stay unknown
      * because effective models can combine multiple source POMs and profiles.
-     * Maven 4's distinct API needs an independently qualified provider.
+     * Maven 4's distinct API is accepted by {@link #maven4Effective}.
      */
     public static M3ASTIndex mavenEffective(M3File source, Object modelBuildingResult,
             M3ASTIngress.Limits limits) {
@@ -173,14 +55,38 @@ public final class M3ASTAuthoritativeModels {
                 "org.apache.maven.model.building.ModelBuildingResult");
         Object model = required(call(type, modelBuildingResult, "getEffectiveModel"),
                 "completed Maven effective model");
+        return mavenEffectiveModel(source, model, limits, false);
+    }
+
+    /**
+     * Project an already completed Maven 4 ModelBuilderResult through its own API.
+     * The original builder remains responsible for inheritance, interpolation,
+     * profiles and resolution. Validation-only results without an effective model
+     * are refused. Subprojects take precedence over the legacy modules list, as in
+     * Maven 4's builder. No child result is rebuilt or resolved by this projection.
+     * All source positions remain unknown because effective data can span POMs.
+     */
+    public static M3ASTIndex maven4Effective(M3File source, Object modelBuilderResult,
+            M3ASTIngress.Limits limits) {
+        check(source, limits);
+        Class<?> type = requireType(modelBuilderResult,
+                "org.apache.maven.api.services.ModelBuilderResult");
+        Object model = required(call(type, modelBuilderResult, "getEffectiveModel"),
+                "completed Maven 4 effective model");
+        requireType(model, "org.apache.maven.api.model.Model");
+        return mavenEffectiveModel(source, model, limits, true);
+    }
+
+    private static M3ASTIndex mavenEffectiveModel(M3File source, Object model,
+            M3ASTIngress.Limits limits, boolean maven4) {
         M3ASTIndex.Builder out = M3ASTIndex.builder(source,
                 M3ASTIndex.Domain.MAVEN_POM, limits.maxNodes());
         int root = unknown(out, -1, "MAVEN_EFFECTIVE_MODEL");
         Object parent = optional(model, "getParent");
         if (parent != null) unknown(out, root, "MAVEN_INHERITED_PARENT");
-        for (Object ignored : elements(optional(model, "getModules"))) {
-            unknown(out, root, "MAVEN_MODULE");
-        }
+        List<?> modules = elements(optional(model, maven4 ? "getSubprojects" : "getModules"));
+        if (maven4 && modules.isEmpty()) modules = elements(optional(model, "getModules"));
+        for (Object ignored : modules) unknown(out, root, "MAVEN_MODULE");
         append(out, root, optional(model, "getDependencies"), "MAVEN_DEPENDENCY");
         Object managed = optional(model, "getDependencyManagement");
         if (managed != null) {
@@ -204,7 +110,20 @@ public final class M3ASTAuthoritativeModels {
         append(out, root, optional(model, "getProfiles"), "MAVEN_PROFILE");
         append(out, root, optional(model, "getRepositories"), "MAVEN_REPOSITORY");
         append(out, root, optional(model, "getPluginRepositories"), "MAVEN_PLUGIN_REPOSITORY");
-        return out.seal();
+        M3ASTIndex index = out.seal();
+        if (maven4) {
+            // The effective-model projection is at most four levels deep. Check
+            // the actual occurrence path without allocating a second directory.
+            for (int node = 0; node < index.nodeCount(); node++) {
+                int depth = 0;
+                for (int ancestor = node; ancestor >= 0; ancestor = index.parent(ancestor)) {
+                    if (++depth > limits.maxDepth()) {
+                        throw new IllegalArgumentException("Maven 4 model depth budget");
+                    }
+                }
+            }
+        }
+        return index;
     }
 
     /**

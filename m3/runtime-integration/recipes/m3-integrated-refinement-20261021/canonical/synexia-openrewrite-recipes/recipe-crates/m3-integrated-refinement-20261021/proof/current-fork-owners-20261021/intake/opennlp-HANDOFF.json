@@ -1,0 +1,296 @@
+[
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/SOURCE_HYDRATION.json",
+    "relative_path": "evidence/SOURCE_HYDRATION.json",
+    "bytes": 1561,
+    "sha256": "08a0e038642709ddcd39fedeb44892b0524abf644878c2e0368bd2ebac40628e"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/opennlp-fetch.log",
+    "relative_path": "evidence/opennlp-fetch.log",
+    "bytes": 696,
+    "sha256": "2971a74bee5b18653a650d363391df7fb0ecbd33644ae4d1460c9f6f8ae8abd7"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/GITHUB_SOURCE_READBACK.json",
+    "relative_path": "evidence/GITHUB_SOURCE_READBACK.json",
+    "bytes": 2043,
+    "sha256": "470bd970b5a337debd1ffc9118ab8756a1c9471d1c78cafc0dea416b781c223a"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/OPENNLP_DEPENDENCIES_001.json",
+    "relative_path": "evidence/OPENNLP_DEPENDENCIES_001.json",
+    "bytes": 5747,
+    "sha256": "b4c2868660c0114ceebae4030c90335cacca0c7767636d19aa2e129976c8a21e"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/opennlp-dependencies-001.log",
+    "relative_path": "evidence/opennlp-dependencies-001.log",
+    "bytes": 1193,
+    "sha256": "9964528ddf4f20f601ca46b3733b838aa602d05a3a743c293b94fb536796396e"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/OPENNLP_OWNER_001.json",
+    "relative_path": "evidence/OPENNLP_OWNER_001.json",
+    "bytes": 2082,
+    "sha256": "422f9ee85eb0e9dabcfef6a432ff2a32a5fe47c5457ac723532286170edced5c"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/OPENNLP_OWNER_001.log",
+    "relative_path": "evidence/OPENNLP_OWNER_001.log",
+    "bytes": 652,
+    "sha256": "ddfea326285a6d879cf4397681946dbae46a6fa3687f415b268b066d3b2ff15b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/OPENNLP_OWNER_001_INPUTS.json",
+    "relative_path": "evidence/OPENNLP_OWNER_001_INPUTS.json",
+    "bytes": 560054,
+    "sha256": "13fcac60acbf95b6f43ac40f2b602524ad2d6aa359437d1a5cce72b89c380378"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/OPENNLP_OWNER_001_READBACK.json",
+    "relative_path": "evidence/OPENNLP_OWNER_001_READBACK.json",
+    "bytes": 560054,
+    "sha256": "13fcac60acbf95b6f43ac40f2b602524ad2d6aa359437d1a5cce72b89c380378"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/OPENNLP_INSTALLED_ARTIFACTS.json",
+    "relative_path": "evidence/OPENNLP_INSTALLED_ARTIFACTS.json",
+    "bytes": 7021,
+    "sha256": "1127e5721c5e2ae0a7406cd00042af84851a64f6c9bcc370bc22df7f70d01fbe"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/CURRENT_RECIPE_001.json",
+    "relative_path": "evidence/CURRENT_RECIPE_001.json",
+    "bytes": 170972,
+    "sha256": "e11e19f338cb6d2fd312e1e05565c2520cfc930a20ceebf48268d3e007739507"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/CURRENT_RECIPE_001.log",
+    "relative_path": "evidence/CURRENT_RECIPE_001.log",
+    "bytes": 3067,
+    "sha256": "f0c84cd1659d26d833682a604ed1832702b7aad1ce153e756a740783fe9ff32e"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/CURRENT_RECEIVER_001.json",
+    "relative_path": "evidence/CURRENT_RECEIVER_001.json",
+    "bytes": 1993,
+    "sha256": "c74725aa452de9bbe804da3d137897550e733b8911e1f988a86f178ac2967def"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/CURRENT_RECEIVER_001.log",
+    "relative_path": "evidence/CURRENT_RECEIVER_001.log",
+    "bytes": 848,
+    "sha256": "59f425942a6a9cb07848ad725e3f2106efe81f69cc1fcefa8f38727e59e2d5bb"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/run_donor_gate.py",
+    "relative_path": "run_donor_gate.py",
+    "bytes": 3999,
+    "sha256": "14fd6b83b3b20b40d8e7f9ef43ca567460581217114ca6cc2d1bd854f60e7b33"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/run_recipe_gate.py",
+    "relative_path": "run_recipe_gate.py",
+    "bytes": 2711,
+    "sha256": "f0fe9079a62a11b4404e963de1eb5ade782b8a171e56c884210081bff8e6f04f"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/provision_dependencies.py",
+    "relative_path": "provision_dependencies.py",
+    "bytes": 2595,
+    "sha256": "751db33a9aec5415a3e0d77d649b0c73acbf2c70edf005a5023adab2210ac2f1"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/prepare_sources.py",
+    "relative_path": "prepare_sources.py",
+    "bytes": 4940,
+    "sha256": "ea94bb9a85ddeb1b2f04a5ece93b551a747e266f666b9ca9dc227a4c92079ecd"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/BUILD.json",
+    "relative_path": "opennlp-owner-001/BUILD.json",
+    "bytes": 111966,
+    "sha256": "e8b0b44892254fa9fdd5051a9de63dd7020684dccb1809460f4d643faa13b642"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/verification.log",
+    "relative_path": "opennlp-owner-001/verification.log",
+    "bytes": 66,
+    "sha256": "4630d8224b60cf6132dbdc099149d9a0a9fbe3937ba1a1f7aa84f72d2a35df03"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/CustomProviderProbe.log",
+    "relative_path": "opennlp-owner-001/CustomProviderProbe.log",
+    "bytes": 106,
+    "sha256": "a90d7ad27c7a6f1dd0a1d2a8967bf069ea6862b242244102e6f8cc1c6ff1ce0d"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/CoreProbe.log",
+    "relative_path": "opennlp-owner-001/CoreProbe.log",
+    "bytes": 169,
+    "sha256": "6f70387b9586ff4cbdac2522993162a42f33784196aa53863df8abb234622698"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/ImmutableTextProbe.log",
+    "relative_path": "opennlp-owner-001/ImmutableTextProbe.log",
+    "bytes": 136,
+    "sha256": "4c322230b3a49002110826163bd3289d4217cbce460d6a002a7a6b38648f3756"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/ExtensionProbe.log",
+    "relative_path": "opennlp-owner-001/ExtensionProbe.log",
+    "bytes": 128,
+    "sha256": "2170eae54ea21d80fe3e9aa2e0ee8b7b3566b9575453e842084f3b4d199ab956"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/cli.log",
+    "relative_path": "opennlp-owner-001/cli.log",
+    "bytes": 5990,
+    "sha256": "77e1d45a8d11f83f7e071af0f090545cfe76d947125356e621b5180e7029ebd8"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/validate-modules.log",
+    "relative_path": "opennlp-owner-001/validate-modules.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/core-compile.log",
+    "relative_path": "opennlp-owner-001/core-compile.log",
+    "bytes": 302,
+    "sha256": "e34607bc8ea047c0f647a2fec975de49b526b4797569e8d7058ee6cd236efa8b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/morfologik-compile.log",
+    "relative_path": "opennlp-owner-001/morfologik-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/spellcheck-compile.log",
+    "relative_path": "opennlp-owner-001/spellcheck-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/uima-compile.log",
+    "relative_path": "opennlp-owner-001/uima-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/test-compile.log",
+    "relative_path": "opennlp-owner-001/test-compile.log",
+    "bytes": 358,
+    "sha256": "db9aa475ed209c72b70496456cd9cc84cbe1831a40164159a3290a698c7587d9"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/pack.log",
+    "relative_path": "opennlp-owner-001/pack.log",
+    "bytes": 195,
+    "sha256": "c088b121aec8ef9f674ff4a5dfda0a28f9ccc2b35461696afc4876c936277aab"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/pack/JMOD_PACK.tsv",
+    "relative_path": "opennlp-owner-001/pack/JMOD_PACK.tsv",
+    "bytes": 814,
+    "sha256": "450a41748835156384a43946bb32b3f3683cc7ca5e0dae834a79e6c71b05c72e"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/IMAGE.tsv",
+    "relative_path": "opennlp-owner-001/IMAGE.tsv",
+    "bytes": 625,
+    "sha256": "24c5df9625a750a9a94eb1f880ebc8d0b749c7410122e039c753367af9d6a1f4"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/DESCRIPTORS.tsv",
+    "relative_path": "opennlp-owner-001/DESCRIPTORS.tsv",
+    "bytes": 4749,
+    "sha256": "ec16af727e162a24fe49e69af23c0fba1426ee4bb4682e18280988294cbfeaa1"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/build.py",
+    "relative_path": "forks/opennlp/dev/m3-jmod/build.py",
+    "bytes": 14886,
+    "sha256": "3a86e1b1d4c13d4beea48bd4df9491557c382bddd661a1cb7b94eac4259b9a46"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/source-lock.json",
+    "relative_path": "forks/opennlp/dev/m3-jmod/source-lock.json",
+    "bytes": 177056,
+    "sha256": "1fb329b1dcac7cae78aa1867624111dd9d5e36107153042b2530d6ad0bd49bb5"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/dependency-lock.json",
+    "relative_path": "forks/opennlp/dev/m3-jmod/dependency-lock.json",
+    "bytes": 2582,
+    "sha256": "bd56b7e43cf8190793c828ddb067e8b292bf226456b2de13fcf64449aeab8c66"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/tests/verify.py",
+    "relative_path": "forks/opennlp/dev/m3-jmod/tests/verify.py",
+    "bytes": 5018,
+    "sha256": "87b670194552fbcdc0213d8b01c06770489d6829b516bc07ca098dfc4c9417cc"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/tests/baseline-behavior.json",
+    "relative_path": "forks/opennlp/dev/m3-jmod/tests/baseline-behavior.json",
+    "bytes": 318,
+    "sha256": "4694a5fdc1aec114ad30b4ce16c8619535bb12c2e3e042fb1c46002c26729eb6"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/LICENSE",
+    "relative_path": "forks/opennlp/LICENSE",
+    "bytes": 23193,
+    "sha256": "670826f9a15f2c3ca50a0381d9f05551f2b0d7e1c939241d32143b7480788d26"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/NOTICE",
+    "relative_path": "forks/opennlp/NOTICE",
+    "bytes": 9460,
+    "sha256": "1272b1c6e5cd932e5741abf992bb1cbf66da01d9fbe8e6e10c1bed1bba24b6fb"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/module-info.java",
+    "relative_path": "forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/module-info.java",
+    "bytes": 1032,
+    "sha256": "b372cb6fc259f5b6f2f6836370342c85fc68246e79cecf246482a22e0fbfdd0d"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/CoreProbe.java",
+    "relative_path": "forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/CoreProbe.java",
+    "bytes": 4950,
+    "sha256": "05182e5fc011693d25834b5f844ba6d1f218062f07f8fee2fa54947188e22c5e"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/CustomProvider.java",
+    "relative_path": "forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/CustomProvider.java",
+    "bytes": 996,
+    "sha256": "63e0cae51279a02be28fef21c14f565e551c753db49eafb60db634be30960574"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/CustomProviderProbe.java",
+    "relative_path": "forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/CustomProviderProbe.java",
+    "bytes": 1733,
+    "sha256": "8193076b1e1552becc10e294f5b26e17c6baf461d561817215fc1037d00dce48"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/ExampleProvider.java",
+    "relative_path": "forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/ExampleProvider.java",
+    "bytes": 1422,
+    "sha256": "8246941fa916b15715f20c63bbea70cd67af8466f9a8b0d301c88147bdc5bab4"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/ExtensionProbe.java",
+    "relative_path": "forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/ExtensionProbe.java",
+    "bytes": 4737,
+    "sha256": "95fde6e2a98423671193ea26351161babc23f64ec821670a74d7c1058070a973"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/ImmutableTextProbe.java",
+    "relative_path": "forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/probe/ImmutableTextProbe.java",
+    "bytes": 7734,
+    "sha256": "81bbb052a6f3ecb3acb66fd3a1c5f67ee2b2375ccb2f97c935bbf015de45fa07"
+  }
+]

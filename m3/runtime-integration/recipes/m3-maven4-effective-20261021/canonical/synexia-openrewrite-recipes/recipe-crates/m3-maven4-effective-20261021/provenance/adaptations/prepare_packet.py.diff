@@ -1,0 +1,39 @@
+--- qualified-sdk003/prepare_packet.py
++++ maven4-packet/prepare_packet.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026-10-21 from qualified integrated SDK003 for the separate Maven4 packet.
+ """Seal this task's reviewed fixtures for the existing canonical snapshot engines.
+ 
+ This preparation step writes only the canonical task resources and immutable
+@@ -16,8 +17,8 @@
+ import re
+ import subprocess
+ 
+-TASK = 'm3-integrated-refinement-20261021'
+-NAMED = 'com.synexia.m3.IntegratedRefinement20261021'
++TASK = 'm3-maven4-effective-20261021'
++NAMED = 'com.synexia.m3.Maven4Effective20261021'
+ SOURCE = '2779aba3f98f31c324be43f731be7914e1a05935'
+ CANONICAL = 'e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07'
+ HEADER = '# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project\n# SPDX-License-Identifier: Apache-2.0\n'
+@@ -111,7 +112,7 @@
+     # All input, source, kind, duplicate and byte checks precede any custody writes.
+     phases = 'id\tkind\n'
+     yaml = HEADER + 'type: specs.openrewrite.org/v1beta/recipe\nname: ' + NAMED
+-    yaml += '\ndisplayName: M3 integrated refinement recovery 20261021\n'
++    yaml += '\ndisplayName: M3 Maven4 effective model projection 20261021\n'
+     yaml += 'description: Apply independently qualified hash-pinned file phases.\nrecipeList:\n'
+     seals = []
+     for row in prepared:
+@@ -128,7 +129,7 @@
+         seals.append({key: value for key, value in row.items() if key not in ('baseline', 'candidate')})
+     put(crate / 'phases.tsv', phases.encode())
+     put(module / 'src/main/resources/META-INF/rewrite' / (TASK + '.yml'), yaml.encode())
+-    record = {'schema': 'M3_INTEGRATED_RECOVERY_SOURCE_SEALS/1', 'task': TASK, 'recipe': NAMED,
++    record = {'schema': 'M3_MAVEN4_EFFECTIVE_SOURCE_SEALS/1', 'task': TASK, 'recipe': NAMED,
+               'canonical_source_revision': CANONICAL, 'receiving_repository': 'hsoliwal/M3jdk21',
+               'receiving_revision': SOURCE, 'files': seals, 'input_handoffs': handoffs,
+               'qualification': 'NOT_RUN; source custody is not recipe or runtime proof'}

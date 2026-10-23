@@ -1,0 +1,28 @@
+{
+  "status": "GENERATED_WORKFLOW_SUCCESSOR_APPLIED",
+  "steps": [
+    {
+      "name": "preflight",
+      "exit": 0,
+      "files": 48,
+      "writes": 1
+    },
+    {
+      "name": "apply",
+      "exit": 0,
+      "files": 48,
+      "writes": 1
+    },
+    {
+      "name": "replay",
+      "exit": 0,
+      "files": 48,
+      "writes": 0
+    }
+  ],
+  "source_seals_sha256": "b931ab0a97eb0b5b708f549c2ee79c321ee3ad62d8c27c1f1cb23006c964bc68",
+  "offline_sdk_receipt_sha256": "72ea68db76198ff1f8d4e55f7df9bd6c5a40c1cc075abbfb851a7a343ff9e0ff",
+  "predecessor_application_sha256": "dd402799ec9550d6c7b541f3c8c1e388efd6ae09ae0c1dcad19520c4868f6dd5",
+  "runtime_source_changes": 0,
+  "workflow_changes": 1
+}

@@ -1,0 +1,12 @@
+{
+  "selected_pr": 1618,
+  "selected_commit": "6198bd110f16a09c572324d716f181c92ca84d38",
+  "selected_blob": "15e24106b2e7afad25d9549ae1a8210e1d956a2d",
+  "target": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+  "before_sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+  "after_sha256": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76",
+  "comparison_pr1616_commit": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+  "comparison": "Same executable root and receipt correction; distinct comments and line formatting. Exact1618 selected.",
+  "observed_baseline": "FileNotFoundError from duplicated m3/vendor prefix; current receipt revision key also differs from actual PROVENANCE schema.",
+  "scope": "Verifier tooling only; pinned source Java, license, POM, PROVENANCE and file hashes unchanged; postimage execution waits canonical SDK."
+}
