@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 primitive rank bulk Java 21 and existing JNI parity
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulk*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java'
+      - 'm3/collections/qualification/indexpath-bulk-20261021/**'
+      - '.github/workflows/m3-indexpath-rank-bulk-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict-java-and-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact current-source receipt and diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/master...HEAD
+          bash m3/collections/qualification/indexpath-bulk-20261021/verify.sh
+      - name: Strict Java21 standalone rank and bounded paging regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-indexpath-bulk"
+          mkdir -p "$out/classes" "$out/native"
+          javac --release 21 -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java
+          java -cp "$out/classes" com.m3.collections.M3IndexPathRankSelfTest
+          java -cp "$out/classes" com.m3.collections.M3IndexPathRankBulkSelfTest
+      - name: Existing path-mask C11/JNI selector and exact bulk parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-indexpath-bulk"
+          javac --release 21 -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java
+          gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
+            -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$out/native/libm3_collections_pathmask.so"
+          java -Xcheck:jni -Djava.library.path="$out/native" -cp "$out/classes" \
+            com.m3.collections.M3IndexPathRankNativeSelfTest
+
+  collection-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build original source-owned JUnit dependency closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 \
+            -am -DskipTests install
+      - name: Original collection module POM with new/old JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3IndexPathRankTest,M3IndexPathRankBulkTest test

@@ -5,6 +5,7 @@ on:
     paths:
       - 'm3/collections/src/**/M3IndexPathRank*.java'
       - 'm3/collections/qualification/m3-index-path-rank-20261017/**'
+      - 'm3/collections/qualification/indexpath-bulk-20261021/**'
       - 'm3/collections/algorithm-catalog/index-path-rank-20261017.tsv'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-path-rank-20261017/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-path-rank-20261017.yml'
@@ -24,12 +25,13 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Diff and sealed recipe postimage preflight
+      - name: Inventory historical recipe templates and validate current successor separately
         shell: bash
         run: |
           set -euo pipefail
           git diff --check
-          python3 m3/collections/qualification/m3-index-path-rank-20261017/verify.py
+          python3 m3/collections/qualification/indexpath-bulk-20261021/verify_history.py
+          bash m3/collections/qualification/indexpath-bulk-20261021/verify.sh
       - name: Real Maven OpenRewrite LST generation fixed-point and refusal
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
