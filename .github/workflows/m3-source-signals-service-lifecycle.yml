@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 javac source signals Maven service lifecycle
+on:
+  pull_request:
+    paths:
+      - 'm3/compiler/source-signals/pom.xml'
+      - '.github/workflows/m3-source-signals-service-lifecycle.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  original-compiler-module-maven:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Strict Maven source compile and original JUnit suite from clean classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/master...HEAD
+          mvn -B -ntp -f m3/compiler/source-signals/pom.xml clean verify
+      - name: Verify original provider identity in compiled classes and packaged JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          module="m3/compiler/source-signals"
+          descriptor="META-INF/services/com.sun.source.util.Plugin"
+          test -f "$module/target/classes/$descriptor"
+          diff "$module/src/main/resources/$descriptor" "$module/target/classes/$descriptor"
+          jar_file="$(find "$module/target" -maxdepth 1 -name 'm3-source-signal-compiler-*.jar' | head -1)"
+          test -n "$jar_file"
+          jar tf "$jar_file" | grep -Fx "$descriptor"
+          extracted="$(mktemp -d)"
+          (cd "$extracted" && jar xf "$GITHUB_WORKSPACE/$jar_file" "$descriptor")
+          diff "$module/src/main/resources/$descriptor" "$extracted/$descriptor"
+      - name: Incremental Maven execution reuses valid compiled provider registration
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/compiler/source-signals/pom.xml test
