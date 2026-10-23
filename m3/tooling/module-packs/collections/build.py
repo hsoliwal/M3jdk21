@@ -18,6 +18,19 @@ CONTRACTS = ("jdk.m3.collections.M3FilteredViewsContract",
              "jdk.m3.collections.M3MutableFilteredViewsContract",
              "com.m3.util.M3PrimitiveIndexViewFilterContract")
 NATIVE_SYMBOL = "Java_com_m3_collections_M3IndexMaskCompactor_selectNative"
+NATIVE_SYMBOLS = frozenset((
+    NATIVE_SYMBOL,
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+    "Java_com_m3_collections_M3IndexMaskWindow_scanNative",
+    "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+))
 
 
 def command(log, *args, expected=None):
@@ -57,17 +70,24 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
                 "-Xcheck:jni", *common, "--patch-module", "jdk.m3.collections=" + str(patch),
                 "-m", "jdk.m3.collections/" + name, expected="PASS")
     mask_test = repo / "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+    native_tests = [mask_test,
+                    mask_test.with_name("M3IndexMaskWindowRecoverySelfTest.java"),
+                    mask_test.with_name("M3BudgetedMaskWindowContract.java")]
     native_patch = output / (label + "-native-contracts")
     native_patch.mkdir()
     command(output / (label + "-native-oracle-javac.log"), javac,
             "-source", "21", "-target", "21", "-Xlint:all,-module", "-Werror", "-proc:none",
             *common, "--patch-module", "com.m3.collections=" + str(mask_test.parent),
-            "-d", native_patch, mask_test)
+            "-d", native_patch, *native_tests)
     library_path = [] if linked else ["-Djava.library.path=" + str(native)]
-    command(output / (label + "-native-oracle.log"), java, "-Xcheck:jni", *library_path,
-            *common, "--patch-module", "com.m3.collections=" + str(native_patch),
-            "-m", "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest",
-            "--native", expected="JNI=true")
+    for name, log_name, marker in (
+            ("M3IndexMaskCompactorSelfTest", "native-oracle", "JNI=true"),
+            ("M3IndexMaskWindowRecoverySelfTest", "native-window-recovery", "JNI=true"),
+            ("M3BudgetedMaskWindowContract", "native-budgeted-window", "backend=NATIVE_REQUIRED")):
+        command(output / (label + "-" + log_name + ".log"), java, "-Xcheck:jni", *library_path,
+                *common, "--patch-module", "com.m3.collections=" + str(native_patch),
+                "-m", "com.m3.collections/com.m3.collections." + name,
+                "--native", expected=marker)
 
 
 def main():
@@ -92,9 +112,10 @@ def main():
     view_sources = sorted((pack / "src/main/java").rglob("*.java"))
     port = repo / "m3/ports/collections/src/main/java/com/m3/util"
     view_sources.extend(port / (name + ".java") for name in PORT_CLASSES)
-    native_source = repo / "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
+    native_sources = [repo / "m3/collections/src/main/native/collections" / name
+                      for name in ("m3_index_mask_compactor.c", "m3_index_mask_window.c")]
     packager = repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
-    for source in [*collection_sources, *view_sources, native_source, packager]:
+    for source in [*collection_sources, *view_sources, *native_sources, packager]:
         source.resolve(strict=True)
     if not collection_sources or not (pack / "src/main/java/module-info.java").is_file():
         raise ValueError("complete collection source modules required")
@@ -104,24 +125,26 @@ def main():
         directory.mkdir()
     source_receipt = ["path\tsha256"]
     source_receipt.extend(str(path.relative_to(repo)) + "\t" + digest(path)
-                          for path in sorted([*collection_sources, *view_sources, native_source, packager]))
+                          for path in sorted([*collection_sources, *view_sources, *native_sources, packager]))
     (output / "COMPILED_INPUTS.tsv").write_text("\n".join(source_receipt) + "\n", encoding="utf-8")
     for name, sources in (("com.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
         command(output / (name + "-javac.log"), home / "bin/javac", "--release", "21",
                 "-Xlint:all,-module", "-Werror", "-proc:none", "-h", headers,
                 "-d", modules / name, *sources)
     header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
-    if NATIVE_SYMBOL not in header.read_text():
+    window_header = headers / "com_m3_collections_M3IndexMaskWindow.h"
+    header_source = header.read_text() + "\n" + window_header.read_text()
+    if not all(symbol in header_source for symbol in NATIVE_SYMBOLS):
         raise ValueError("existing JNI header contract is missing")
     library = native / "libm3_collections_mask.so"
     command(output / "native-compile.log", os.environ.get("CC", "cc"), "-std=c17", "-O2",
             "-fPIC", "-shared", "-Wall", "-Wextra", "-Werror",
             "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
-            "-include", header, "-o", library, native_source)
+            "-include", header, "-include", window_header, "-o", library, *native_sources)
     symbols = command(output / "native-symbols.log", "nm", "-D", "--defined-only", library)
     exported_jni = {line.split()[-1] for line in symbols.splitlines()
                     if line.split() and line.split()[-1].startswith("Java_")}
-    if exported_jni != {NATIVE_SYMBOL}:
+    if exported_jni != NATIVE_SYMBOLS:
         raise ValueError("unexpected JNI export set: " + repr(exported_jni))
     qualify(home / "bin/java", home / "bin/javac", modules, pack, repo, output, native, False)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]

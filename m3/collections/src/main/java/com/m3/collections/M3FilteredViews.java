@@ -1,9 +1,8 @@
-// Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+// Reconciled 2026: retain the qualified guarded reverse atom after additive merge.
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
- * Modified 2026: recognize interior-null candidates in readonly set navigation.
  */
 package com.m3.collections;
 
@@ -252,8 +251,7 @@ public final class M3FilteredViews {
         @Override public boolean contains(Object value) { return source.contains(value); }
         @Override public boolean containsAll(Collection<?> values) { return source.containsAll(values); }
         @Override public Iterator<E> iterator() { return Collections.unmodifiableSet(source).iterator(); }
-        /** Preserve the reverse owner's iterator/size demand and every split's ordering. */
-        @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.sorted(source); }
+        @Override public java.util.Spliterator<E> spliterator() { return source.spliterator(); }
         @Override public Object[] toArray() { return source.toArray(); }
         @Override public <T> T[] toArray(T[] target) { return source.toArray(target); }
         @Override public <T> T[] toArray(java.util.function.IntFunction<T[]> factory) {
@@ -401,10 +399,10 @@ public final class M3FilteredViews {
         }
         @Override public E pollFirst() { throw readonly(); }
         @Override public E pollLast() { throw readonly(); }
+        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
-        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public Iterator<E> descendingIterator() {
             return filtered(nav.descendingSet().iterator(), predicate);
         }
@@ -551,9 +549,10 @@ public final class M3FilteredViews {
          * comparator-backed bounded iterator, retaining each stored key/value.
          */
         private Entry<K, V> boundedEntry(K query, boolean forward, boolean inclusive) {
-            NavigableMap<K, V> range;
+            Iterator<Entry<K, V>> cursor;
             try {
-                range = forward ? nav.tailMap(query, inclusive) : nav.headMap(query, inclusive);
+                cursor = forward ? nav.tailMap(query, inclusive).entrySet().iterator()
+                        : nav.headMap(query, inclusive).descendingMap().entrySet().iterator();
             } catch (IllegalArgumentException outOfRange) {
                 Iterator<Entry<K, V>> bounded = forward
                         ? nav.entrySet().iterator() : nav.descendingMap().entrySet().iterator();
@@ -569,8 +568,6 @@ public final class M3FilteredViews {
                 }
                 return null;
             }
-            Iterator<Entry<K, V>> cursor = forward ? range.entrySet().iterator()
-                    : range.descendingMap().entrySet().iterator();
             return firstVisible(cursor);
         }
         @Override public Entry<K, V> lowerEntry(K key) {
@@ -634,4 +631,3 @@ public final class M3FilteredViews {
         @Override public NavigableMap<K, V> tailMap(K from) { return tailMap(from, true); }
     }
 }
-

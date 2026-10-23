@@ -1,3 +1,4 @@
+// Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
@@ -69,6 +70,14 @@ public final class M3ObjectResidency<T> {
     private final byte[] states;
     private final long[] weights;
     private final long[] touched;
+    /** Optional primitive topology over the existing resident slots; zero encodes no slot. */
+    private final int[] lruPreviousEncoded;
+    private final int[] lruNextEncoded;
+    private int lruFirstEncoded;
+    private int lruLastEncoded;
+    private long lruLastTick;
+    /** Preserve the original signed scan after rollover, ties, or incomplete publication. */
+    private boolean lruScanRequired;
     private final int[] active;
     /** Explicit cooperative lease counts, not JVM heap reference counts. */
     private final int[] borrowers;
@@ -107,6 +116,10 @@ public final class M3ObjectResidency<T> {
         this.active = new int[slots];
         this.borrowers = new int[slots];
         this.callerInstalled = new boolean[slots];
+        boolean trackLru = (flags & LRU) != 0 && (flags & (SWAP_SECONDARY | RECREATE)) != 0
+                && (flags & OBSERVE_ONLY) == 0;
+        this.lruPreviousEncoded = trackLru ? new int[slots] : null;
+        this.lruNextEncoded = trackLru ? new int[slots] : null;
         Arrays.fill(states, (byte) State.ABSENT.ordinal());
     }
 
@@ -151,7 +164,7 @@ public final class M3ObjectResidency<T> {
         ensureResident(slot, estimatedBytes);
         @SuppressWarnings("unchecked") T value = (T) resident[slot];
         active[slot]++;
-        touched[slot] = ++tick;
+        touch(slot);
         try {
             R result = operation.apply(value);
             if ((flags & STRICT_NO_ESCAPE) != 0 && result == value) {
@@ -254,7 +267,7 @@ public final class M3ObjectResidency<T> {
             if ((flags & PIN_EXPOSED) != 0 && result == value) {
                 states[slot] = (byte) (states[slot] | SLOT_PINNED);
             }
-            touched[slot] = ++tick;
+            touch(slot);
             return result;
         } finally {
             active[slot]--;
@@ -292,9 +305,10 @@ public final class M3ObjectResidency<T> {
         callerInstalled[slot] = true;
         if ((flags & PIN_EXPOSED) != 0) states[slot] = (byte) (states[slot] | SLOT_PINNED);
         weights[slot] = estimatedBytes;
+        if (residentBytes > Long.MAX_VALUE - estimatedBytes) lruScanRequired = true;
         residentBytes = Math.addExact(residentBytes, estimatedBytes);
         setState(slot, State.RESIDENT);
-        touched[slot] = ++tick;
+        touch(slot);
         decision(slot, State.ABSENT, State.RESIDENT, "installed");
     }
 
@@ -331,9 +345,10 @@ public final class M3ObjectResidency<T> {
             }
             resident[slot] = value;
             weights[slot] = estimatedBytes;
+            if (residentBytes > Long.MAX_VALUE - estimatedBytes) lruScanRequired = true;
             residentBytes = Math.addExact(residentBytes, estimatedBytes);
             setState(slot, State.RESIDENT);
-            touched[slot] = ++tick;
+            touch(slot);
             decision(slot, before, State.RESIDENT, before == State.SWAPPED ? "restored" : "created");
         } catch (IOException failure) {
             setState(slot, before);
@@ -394,7 +409,48 @@ public final class M3ObjectResidency<T> {
         return incoming > target || residentBytes > target - incoming;
     }
 
+    private void touch(int slot) {
+        touched[slot] = ++tick;
+        if (lruNextEncoded == null || lruScanRequired) return;
+        if (tick <= lruLastTick || tick == Long.MAX_VALUE) {
+            // The old scan compares signed longs, breaks ties by slot, and skips MAX_VALUE.
+            lruScanRequired = true;
+            return;
+        }
+        lruLastTick = tick;
+        int encoded = slot + 1;
+        if (lruLastEncoded == encoded) return;
+        unlinkLru(slot);
+        lruPreviousEncoded[slot] = lruLastEncoded;
+        if (lruLastEncoded == 0) lruFirstEncoded = encoded;
+        else lruNextEncoded[lruLastEncoded - 1] = encoded;
+        lruLastEncoded = encoded;
+    }
+
+    private void unlinkLru(int slot) {
+        if (lruNextEncoded == null || lruScanRequired) return;
+        int previous = lruPreviousEncoded[slot];
+        int next = lruNextEncoded[slot];
+        if (previous != 0) lruNextEncoded[previous - 1] = next;
+        else if (lruFirstEncoded == slot + 1) lruFirstEncoded = next;
+        else return; // A newly published resident has not been linked by touch() yet.
+        if (next != 0) lruPreviousEncoded[next - 1] = previous;
+        else lruLastEncoded = previous;
+        lruPreviousEncoded[slot] = 0;
+        lruNextEncoded[slot] = 0;
+    }
+
     private int leastRecentlyUsed(int excluded) {
+        if (lruNextEncoded == null || lruScanRequired) return scanLeastRecentlyUsed(excluded);
+        for (int encoded = lruFirstEncoded; encoded != 0; encoded = lruNextEncoded[encoded - 1]) {
+            int slot = encoded - 1;
+            if (slot != excluded && resident[slot] != null && active[slot] == 0 && borrowers[slot] == 0
+                    && (Byte.toUnsignedInt(states[slot]) & SLOT_PINNED) == 0) return slot;
+        }
+        return -1;
+    }
+
+    private int scanLeastRecentlyUsed(int excluded) {
         if ((flags & LRU) == 0) return -1;
         int victim = -1;
         long oldest = Long.MAX_VALUE;
@@ -418,6 +474,7 @@ public final class M3ObjectResidency<T> {
                 byte[] snapshot = Objects.requireNonNull(codec.encode(typed), "encoded snapshot");
                 spill.write(slot, snapshot);
                 resident[slot] = null;
+                unlinkLru(slot);
                 residentBytes -= weights[slot];
                 weights[slot] = 0L;
                 setState(slot, State.SWAPPED);
@@ -430,6 +487,7 @@ public final class M3ObjectResidency<T> {
         }
         if ((flags & RECREATE) != 0) {
             resident[slot] = null;
+            unlinkLru(slot);
             residentBytes -= weights[slot];
             weights[slot] = 0L;
             setState(slot, State.ABSENT);
@@ -475,3 +533,4 @@ public final class M3ObjectResidency<T> {
         }
     }
 }
+

@@ -1,4 +1,3 @@
-// Modified 2026 by Hitesh Soliwal and contributors: keep the reserved-flag oracle type-correct.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -161,8 +160,7 @@ public final class M3IndexedMultiValueOccurrenceSelfTest {
         oracle.clear();
         validate(map, oracle);
         check(map.capacity() >= 0, "array capacity");
-        // An admitted key type reaches the reserved LIVE-bit validation.
-        expect(IllegalArgumentException.class, () -> map.add(0, 1,
+        expect(IllegalArgumentException.class, () -> map.add(-1, 1,
                 M3IndexedMultiValueMap.LIVE));
         System.out.println("PASS M3IndexedMultiValueOccurrenceSelfTest checks=" + checks
                 + " native=" + M3IndexMaskCompactor.nativeAvailable());

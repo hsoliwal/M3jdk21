@@ -1128,5 +1128,39 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "source_set_successor_20261018"
+  "source_set_successor_current": "source_set_successor_20261018",
+  "tools4j_unix_refinement_20261019": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
+    "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
+    "successor_receipt": "qualification/tools4j-unix-source-successor-20261019.tsv",
+    "successor_receipt_sha256": "a802b36b031d2280c72e148baf93e0977a422ef1f07525f349526a2e2b31e46b",
+    "receipt_columns": [
+      "path",
+      "inherited_manifest_sha256",
+      "pinned_master_sha256",
+      "final_received_sha256"
+    ],
+    "inherited_composed_manifest_sha256": "104bd2f6582f4ce496ff13524a7a8f33e7f4c10fb18981ae9e3229c6da5ba7b9",
+    "inherited_rows": 113,
+    "successor_rows": 418,
+    "resulting_rows": 510,
+    "exact_java_source_membership": 503,
+    "existing_unlisted_java_files_reconciled": 396,
+    "preexisting_stale_hashes_reconciled": 18,
+    "new_pass_hash_drift_in_previously_current_rows": 3,
+    "source_refinement_paths": 9,
+    "canonical_recipe_repository": "hsoliwal/com.synexia",
+    "canonical_recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "canonical_metadata_datasets": [
+      "tools4j-receipt-20261019",
+      "tools4j-donation-gate-20261019",
+      "tools4j-module-map-20261019",
+      "tools4j-donation-link-20261019"
+    ],
+    "target_handoff": "m3/tooling/refinement-proofs/tools4j-unix-20261019",
+    "naming_disposition": "EXISTING_OWNER_REFINEMENT_NO_RENAME; BASELINE_INVENTORY_RECONCILIATION",
+    "historical_hash_rule": "Original donor and target hash records retain their recorded receiving revisions. Current listed source hashes are the final_received_sha256 column of this exact successor; historical files and receipts are not rewritten.",
+    "review_scope": "Inventory reconciliation is not algorithm review of all503 Java files. Source refinements and their individual canonical recipes/gates remain separately recorded in the target handoff.",
+    "phase_advance": false
+  }
 }
