@@ -1,0 +1,110 @@
+# Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: qualify monitored scheduling in the existing progress workflow.
+name: M3 Object adapter/progress candidate proof
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/lang/Object.java'
+      - 'src/java.base/share/classes/java/lang/Runnable.java'
+      - 'src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java'
+      - 'src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java'
+      - 'src/java.base/share/classes/java/util/concurrent/Executor*.java'
+      - 'src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java'
+      - 'src/java.base/share/classes/java/util/concurrent/Callable.java'
+      - 'src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java'
+      - 'src/java.base/share/classes/java/util/concurrent/ProgressJob.java'
+      - 'test/jdk/java/util/concurrent/ProgressJob/**'
+      - 'm3/runtime-integration/scheduled-progress-20261021/**'
+      - 'm3/runtime-integration/recipes/m3-integrated-refinement-20261021/**'
+      - 'src/java.base/share/classes/java/util/function/*.java'
+      - 'm3/compatibility/*object*progress*'
+      - 'm3/compatibility/M3ObjectProgressStandaloneProbe.java'
+      - '.github/workflows/m3-object-progress-candidate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bounded-progress-subset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check exact source handoff and isolated progress implementation
+        run: bash m3/compatibility/verify-object-progress-standalone.sh
+      - name: Scope disclaimer
+        run: echo 'This is not modified JDK compilation, jtreg, HotSpot, JNI or Maven/OpenRewrite qualification.'
+
+  scheduled-progress-defaults:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check actual head and canonical source seals
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/scheduled-progress
+          git rev-parse HEAD > proof/scheduled-progress/head.txt
+          CRATE=m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021
+          python3 "$CRATE/verify_sources.py" . 2>&1 | tee proof/scheduled-progress/source-readback.log
+      - name: Restore only the sealed baseline sources from their original commit
+        shell: bash
+        run: |
+          set -euxo pipefail
+          BASE_REVISION=2779aba3f98f31c324be43f731be7914e1a05935
+          git fetch --no-tags --depth=1 origin "$BASE_REVISION" 2>&1 | tee proof/scheduled-progress/baseline-fetch.log
+          python3 - <<'PYBASE' 2>&1 | tee proof/scheduled-progress/baseline-readback.log
+          from pathlib import Path, PurePosixPath
+          import hashlib
+          import json
+          import subprocess
+          pins = json.loads(Path('m3/runtime-integration/scheduled-progress-20261021/SOURCE_PIN.json').read_text())
+          revision = pins['receiving_revision']
+          assert revision == '2779aba3f98f31c324be43f731be7914e1a05935'
+          rows = [(pins['owner']['path'], pins['owner']['before_sha256'])]
+          rows += [(row['path'], row['sha256']) for row in pins['dependencies']]
+          rows += [(row['path'], row['sha256']) for row in pins['tests']
+                   if row['path'] == 'test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java']
+          assert len(rows) == len({path for path, digest in rows}) == 10
+          records = []
+          for relative, expected in rows:
+              path = PurePosixPath(relative)
+              assert not path.is_absolute() and '..' not in path.parts
+              data = subprocess.check_output(['git', 'show', revision + ':' + relative])
+              actual = hashlib.sha256(data).hexdigest()
+              assert actual == expected, relative
+              target = Path('proof/scheduled-progress/baseline') / relative
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_bytes(data)
+              assert hashlib.sha256(target.read_bytes()).hexdigest() == expected, relative
+              records.append({'path': relative, 'sha256': actual, 'bytes': len(data)})
+          receipt = {'revision': revision, 'status': 'EXACT_BASELINE', 'files': records}
+          Path('proof/scheduled-progress/BASELINE.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          print(json.dumps({'status': 'EXACT_BASELINE', 'files': len(records)}))
+          PYBASE
+      - name: Compile and run actual scheduled owners and frozen clients
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 m3/runtime-integration/scheduled-progress-20261021/verify.py \
+            --root . \
+            --baseline-root proof/scheduled-progress/baseline \
+            --jdk-home "$JAVA_HOME" \
+            --out proof/scheduled-progress/receiver \
+            2>&1 | tee proof/scheduled-progress/receiver.log
+      - name: Preserve source, compiler and runtime receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-scheduled-progress-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 14
+          path: proof/scheduled-progress/

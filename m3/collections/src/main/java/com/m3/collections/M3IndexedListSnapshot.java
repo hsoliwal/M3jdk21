@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: sort newly selected physical indexes in place.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -51,7 +52,9 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
 
     public static <E> M3IndexedListSnapshot<E> copyOf(Collection<? extends E> source) {
         Objects.requireNonNull(source, "source");
-        return fromOwned(source.toArray());
+        Object[] copy = source.toArray();
+        copy = Arrays.copyOf(copy, copy.length, Object[].class);
+        return fromOwned(copy);
     }
 
     public static <E> M3IndexedListSnapshot<E> copyOf(E[] source) {
@@ -225,44 +228,12 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             M3IndexPathMasks.Backend backend) {
         Objects.requireNonNull(physicalStates, "physicalStates");
         Objects.requireNonNull(backend, "backend");
-        return maskedByPhysicalStates(
-                new int[][] {physicalStates},
-                new int[] {requiredMask}, new int[] {forbiddenMask}, backend);
-    }
-
-    /**
-     * Multi-stage full-width selection over the physical state words of this
-     * snapshot's canonical Object[] slots. Stages are tested left-to-right
-     * without copying values, predicates or mask arrays. A single returned
-     * int[] directory preserves logical encounter order and duplicate values.
-     *
-     * <p>Each plane must be exactly one int word per canonical physical slot;
-     * required/forbidden masks retain all 32 bits, including the sign bit.
-     * The caller must not mutate a plane during selection. The resulting
-     * immutable snapshot retains neither plane nor mask vector. JNI is an
-     * explicit opt-in to the existing primitive M3IndexPathMasks kernel.
-     */
-    public M3IndexedListSnapshot<E> maskedByPhysicalStates(
-            int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
-            M3IndexPathMasks.Backend backend) {
-        Objects.requireNonNull(physicalStates, "physicalStates");
-        Objects.requireNonNull(requiredMasks, "requiredMasks");
-        Objects.requireNonNull(forbiddenMasks, "forbiddenMasks");
-        Objects.requireNonNull(backend, "backend");
-        if (physicalStates.length == 0
-                || physicalStates.length != requiredMasks.length
-                || physicalStates.length != forbiddenMasks.length) {
-            throw new IllegalArgumentException("unaligned physical state stages");
-        }
-        for (int stage = 0; stage < physicalStates.length; stage++) {
-            int[] plane = Objects.requireNonNull(
-                    physicalStates[stage], "physicalStates[" + stage + "]");
-            if (plane.length != values.length) {
-                throw new IllegalArgumentException("state words must align with physical slots");
-            }
+        if (physicalStates.length != values.length) {
+            throw new IllegalArgumentException("state words must align with physical slots");
         }
         int[] admitted = M3IndexPathMasks.select(
-                positions, positions, physicalStates, requiredMasks, forbiddenMasks,
+                positions, positions, new int[][] {physicalStates},
+                new int[] {requiredMask}, new int[] {forbiddenMask},
                 from, size(), 1, backend);
         return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
     }
@@ -277,21 +248,8 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
         M3IndexedListSnapshot<E> selected = maskedByPhysicalState(
                 physicalStates, requiredMask, forbiddenMask, backend);
-        selected.sortPositions(selected.positions, comparator);
-        return selected;
-    }
-
-    /**
-     * Fuses multi-plane physical-state selection with the established stable
-     * indirect int[] sorter. Only admitted Java values reach the comparator.
-     * The returned int[] index directory is private, and sorting it cannot
-     * modify any parent view or the canonical object payload.
-     */
-    public M3IndexedListSnapshot<E> sortedMaskedByPhysicalStates(
-            int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
-            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
-        M3IndexedListSnapshot<E> selected = maskedByPhysicalStates(
-                physicalStates, requiredMasks, forbiddenMasks, backend);
+        // Selection owns a fresh index directory with zero-based bounds. Sort
+        // that private directory directly, as filteredSorted already does.
         selected.sortPositions(selected.positions, comparator);
         return selected;
     }
@@ -303,114 +261,33 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 physicalMembership);
     }
 
-    /**
-     * Stable descending order of this snapshot's physical positions.
-     *
-     * <p>Already ascending index paths reverse comparator-distinct groups in
-     * O(k) time while retaining encounter order inside equal groups.
-     * Otherwise the existing primitive stable merge sort is reused.
-     * The canonical Object[] payload, caller arrays and parent view stay intact.
-     */
-    public M3IndexedListSnapshot<E> sortedDescending(Comparator<? super E> comparator) {
-        int[] result = physicalIndices();
-        orderDescending(result, comparator);
-        return new M3IndexedListSnapshot<>(values, result, 0, result.length,
-                physicalMembership);
-    }
-
-    /** Natural Comparable descending order; never reverses equal-value encounters. */
-    public M3IndexedListSnapshot<E> sortedDescending() {
-        return sortedDescending(null);
-    }
-
-    /**
-     * Mask all 32-bit physical state planes before descending index sorting.
-     * No Java callback or object reference crosses the existing JNI boundary.
-     * The selected int[] is private, so its sort does not copy the directory.
-     */
-    public M3IndexedListSnapshot<E> sortedMaskedByPhysicalStatesDescending(
-            int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
-            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
-        M3IndexedListSnapshot<E> selected = maskedByPhysicalStates(
-                physicalStates, requiredMasks, forbiddenMasks, backend);
-        selected.orderDescending(selected.positions, comparator);
-        return selected;
-    }
-
-    /**
-     * Two deterministic paths: a linear-time reverse of ascending equality
-     * groups or the original stable int[] merge sorter with reversed operands.
-     * Operand reversal (not sign negation) handles MIN_VALUE comparison results.
-     */
-    @SuppressWarnings("unchecked")
-    private void orderDescending(int[] indices, Comparator<? super E> comparator) {
-        int length = indices.length;
-        if (length < 2) return;
-        boolean ascending = true;
-        for (int i = 1; i < length; i++) {
-            if (compare(indices[i - 1], indices[i], comparator) > 0) {
-                ascending = false;
-                break;
-            }
-        }
-        if (ascending) {
-            // Observe the exact historical comparator schedule before mutating an
-            // index. Store only equality-group starts, one bit per physical position,
-            // rather than materializing a second int[length] directory.
-            long[] groupStarts = new long[(int) (((long) length + 63L) >>> 6)];
-            for (int end = length; end > 0;) {
-                int begin = end - 1;
-                while (begin > 0 && compare(indices[begin - 1],
-                        indices[begin], comparator) == 0) begin--;
-                groupStarts[begin >>> 6] |= 1L << (begin & 63);
-                end = begin;
-            }
-
-            // Reverse the private index directory, then restore encounter order
-            // inside each original comparator-equality group. No user callback
-            // occurs after the first write to indices.
-            reversePositions(indices, 0, length);
-            int output = 0;
-            for (int end = length; end > 0;) {
-                int begin = precedingGroupStart(groupStarts, end - 1);
-                int next = output + (end - begin);
-                reversePositions(indices, output, next);
-                output = next;
-                end = begin;
-            }
-        } else {
-            sortPositions(indices, (left, right) ->
-                    comparator != null ? comparator.compare(right, left)
-                            : ((Comparable<? super E>) right).compareTo(left));
-        }
-    }
-
-    /** Last admitted equality-group start at or before a selected source ordinal. */
-    private static int precedingGroupStart(long[] groupStarts, int ordinal) {
-        int word = ordinal >>> 6;
-        long candidates = groupStarts[word] & (-1L >>> (63 - (ordinal & 63)));
-        while (candidates == 0L) {
-            if (--word < 0) {
-                throw new IllegalStateException("missing immutable equality-group start");
-            }
-            candidates = groupStarts[word];
-        }
-        return (word << 6) + Long.SIZE - 1 - Long.numberOfLeadingZeros(candidates);
-    }
-
-    /** Reverse only a private primitive-index range; no payload, entry or callback. */
-    private static void reversePositions(int[] indices, int from, int to) {
-        for (int left = from, right = to - 1; left < right; left++, right--) {
-            int value = indices[left];
-            indices[left] = indices[right];
-            indices[right] = value;
-        }
-    }
-
-    /** Share the original stable primitive-index sorter with live parent views. */
-    @SuppressWarnings("unchecked")
+    /** Stable bottom-up mergesort of physical indices with an int[] scratch lane. */
     private void sortPositions(int[] current, Comparator<? super E> comparator) {
-        M3IndexSort.stable(current, index -> (E) values[index], comparator);
+        int length = current.length;
+        if (length < 2) return;
+        int[] scratch = new int[length];
+        int[] source = current, destination = scratch;
+        // Use wide loop arithmetic to avoid overflow near Java's array-size limit.
+        for (long width = 1; width < length; width <<= 1) {
+            for (long base = 0; base < length; base += width * 2) {
+                int low = (int) base;
+                int mid = (int) Math.min(length, base + width);
+                int high = (int) Math.min(length, base + width * 2);
+                int a = low, b = mid, out = low;
+                while (a < mid && b < high) {
+                    // Left wins equal comparisons, retaining previous stable order.
+                    if (compare(source[a], source[b], comparator) <= 0) {
+                        destination[out++] = source[a++];
+                    } else destination[out++] = source[b++];
+                }
+                while (a < mid) destination[out++] = source[a++];
+                while (b < high) destination[out++] = source[b++];
+            }
+            int[] swap = source; source = destination; destination = swap;
+        }
+        // The selected int[] is the output owner; copy at most once, and only
+        // if merge passes finished in the scratch lane.
+        if (source != current) System.arraycopy(source, 0, current, 0, length);
     }
 
     /** Signed/natural Comparable ordering when elements permit it. */

@@ -1,5 +1,6 @@
+// Modified 2026 by Hitesh Soliwal and contributors: restore strict sequenced refusal and original backed reversal.
+// Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
-// Reconciled 2026: retain the qualified guarded reverse atom after additive merge.
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
@@ -251,7 +252,8 @@ public final class M3FilteredViews {
         @Override public boolean contains(Object value) { return source.contains(value); }
         @Override public boolean containsAll(Collection<?> values) { return source.containsAll(values); }
         @Override public Iterator<E> iterator() { return Collections.unmodifiableSet(source).iterator(); }
-        @Override public java.util.Spliterator<E> spliterator() { return source.spliterator(); }
+        /** Preserve the reverse owner's iterator/size demand and every split's ordering. */
+        @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.sorted(source); }
         @Override public Object[] toArray() { return source.toArray(); }
         @Override public <T> T[] toArray(T[] target) { return source.toArray(target); }
         @Override public <T> T[] toArray(java.util.function.IntFunction<T[]> factory) {
@@ -631,3 +633,4 @@ public final class M3FilteredViews {
         @Override public NavigableMap<K, V> tailMap(K from) { return tailMap(from, true); }
     }
 }
+

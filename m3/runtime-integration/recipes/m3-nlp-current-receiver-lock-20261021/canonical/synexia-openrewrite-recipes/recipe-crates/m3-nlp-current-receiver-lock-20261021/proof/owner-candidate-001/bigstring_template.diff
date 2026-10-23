@@ -1,0 +1,51 @@
+--- actual2779/m3/core/src/com/m3/text/M3BigString.java
++++ canonical12347-immutable-head/m3/core/src/com/m3/text/M3BigString.java
+@@ -8,6 +8,7 @@
+ import java.util.Objects;
+ import java.util.regex.Matcher;
+ import java.util.regex.Pattern;
++import java.util.stream.LongStream;
+ 
+ /**
+  * Immutable, long-indexed string composition over existing immutable text chunks.
+@@ -189,6 +190,40 @@
+     /** Number of UTF-16 code units; unlike CharSequence.length(), this can exceed int range. */
+     public long length() { return end - start; }
+ 
++    /**
++     * Lazily expose UTF-16 code units as primitive long values. The stream is ordered and
++     * long-indexed, so its range and count do not narrow the text length to int.
++     */
++    public LongStream codeUnits() {
++        return LongStream.range(0L, length()).map(index -> charAt(index));
++    }
++
++    /**
++     * Lazily expose Unicode code points as primitive long values, merging surrogate pairs
++     * even when their two UTF-16 code units live in different chunks. Unpaired surrogates
++     * are emitted as their code-unit values, matching String.codePoints() semantics.
++     */
++    public LongStream codePoints() {
++        long size = length();
++        return LongStream.range(0L, size)
++                .filter(index -> {
++                    char current = charAt(index);
++                    return !(Character.isLowSurrogate(current)
++                            && index > 0
++                            && Character.isHighSurrogate(charAt(index - 1)));
++                })
++                .map(index -> {
++                    char first = charAt(index);
++                    if (Character.isHighSurrogate(first) && index + 1 < size) {
++                        char second = charAt(index + 1);
++                        if (Character.isLowSurrogate(second)) {
++                            return Character.toCodePoint(first, second);
++                        }
++                    }
++                    return first;
++                });
++    }
++
+     public boolean isEmpty() { return start == end; }
+ 
+     /** UTF-16 code-unit access with a long index. */

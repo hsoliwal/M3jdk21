@@ -1,0 +1,46 @@
+{
+  "status": "REFUSED_UNCHANGED_RECEIVER_SOURCE_DRIFT",
+  "receiving_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current_forks.py",
+    "--jdk-home",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "--out",
+    "/workspace/scratch/206049dfb270/nlp-work/current-receiver-001",
+    "--receiver",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source",
+    "--opennlp-source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp",
+    "--lucene-source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
+    "--recipe-runner",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
+    "--recipe-resources",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources"
+  ],
+  "exit_code": 1,
+  "log_sha256": "59f425942a6a9cb07848ad725e3f2106efe81f69cc1fcefa8f38727e59e2d5bb",
+  "source_lock_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+  "hash_drift": [
+    {
+      "module": "com.m3.text",
+      "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+      "expected": "f3ed3fd91d7e60220ba22e717f6fec41dc7759e5a221ef1dba65251d0028f8d7",
+      "actual": "2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd"
+    }
+  ],
+  "coverage_drift": [
+    {
+      "module": "com.m3.text",
+      "extra": [
+        "m3/core/src/com/m3/text/M3BigString.java",
+        "m3/core/src/com/m3/text/M3RopeTextIndex.java"
+      ],
+      "missing": []
+    }
+  ],
+  "output_directory_created": false,
+  "gate_bypassed": false,
+  "disposition": "Combined current-fork receiver remains unqualified. Independent exact-donor gates are separate and may proceed."
+}

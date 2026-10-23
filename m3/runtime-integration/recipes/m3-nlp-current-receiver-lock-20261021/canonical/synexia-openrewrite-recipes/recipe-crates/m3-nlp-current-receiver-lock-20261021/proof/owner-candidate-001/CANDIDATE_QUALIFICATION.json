@@ -1,0 +1,87 @@
+{
+  "canonical_namespace": "m3-nlp-current-receiver-lock-20261021",
+  "combined_gate": {
+    "all_input_readbacks_equal": true,
+    "elapsed_seconds": 204.887,
+    "installed_image_probes": {
+      "ModelSourceProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nModelSourceProbe PASS: real token/sentence model train/serialize/reload; immutable source offsets and probability parity",
+      "SourceFactsProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nSourceFactsProbe PASS: 2000 raw UTF-16 digest oracles; snapshot/null contracts",
+      "SourceIntegrationProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nOct 21, 2026 3:32:26 AM org.apache.lucene.util.HotspotVMOptions <clinit>\nWARNING: Lucene cannot access JVM internals to optimize algorithms or calculate object sizes, unless the 'jdk.management' Java module is readable [please add 'jdk.management' to modular application either by command line or its module descriptor].\nWARNING: A restricted method in java.lang.foreign.Linker has been called\nWARNING: java.lang.foreign.Linker::downcallHandle has been called by module org.apache.lucene.core\nWARNING: Use --enable-native-access=org.apache.lucene.core to avoid a warning for this module\n\nSourceIntegrationProbe PASS: M3File/M3String/M3AST sharing; 2000 AST span oracles; 300 Unicode token oracles; disk indexing/query/term-vector offsets"
+    },
+    "locked_external_named_modules": 26,
+    "lucene_production_java_sources": 3626,
+    "m3_production_java_sources": 142,
+    "modules": 62,
+    "opennlp_production_java_sources": 1000,
+    "receipt": "combined-candidate-001-receipts/RESULT.json",
+    "source_built_named_modules": 36,
+    "source_input_readbacks": 11372
+  },
+  "historical_source_custody": "LINEAGE_REVIEW.json records matching receiving commits/manifests and the differing immutable BigString source/test templates. No historical regeneration claim or extra streaming APIs.",
+  "owner_gates": {
+    "bigstring": {
+      "checks": 3213,
+      "literal_owning_workflow_executed": true
+    },
+    "constructor": {
+      "builder_full_executable_disassembly_equal": true,
+      "debug_line_table_equivalence_claimed": false,
+      "existing_owning_checks_baseline": 50,
+      "existing_owning_checks_candidate": 50,
+      "public_classes_compared": 9,
+      "public_descriptors_equal": true
+    },
+    "gvas": {
+      "checks_per_child": 17530,
+      "initial_sandbox_proc_failure_preserved": true,
+      "native_same_address_and_inode": true,
+      "processes": 3
+    },
+    "rope": {
+      "checks_per_mode": 83941,
+      "earlier_finite_dependency_closure_diagnostic_retained_separately": true,
+      "initial_missing_explicit_ctor_lint_refusal_preserved": true,
+      "modes": [
+        "normal JIT",
+        "-Xint",
+        "-XX:-CompactStrings",
+        "-Xbatch -XX:-TieredCompilation"
+      ],
+      "original_whole_module_gate": "PASS"
+    }
+  },
+  "pending_at_candidate_seal": [
+    "Canonical two-file SDK emission and actual receiving-tree source readback are separate authorities.",
+    "Fresh actual-target runtime gate is separate from this isolated proof.",
+    "Original Java25 upstream lane/full suites, global String/JDK/HotSpot, platform, optional native/model and performance gates are not promoted."
+  ],
+  "runtime_warnings_retained": [
+    "Optional jdk.management is not readable by Lucene for JVM internals/object sizing; no optimization or sizing-performance acceptance is claimed.",
+    "Lucene core invokes Java21 foreign Linker downcallHandle without --enable-native-access=org.apache.lucene.core; the original warning and unchanged launch flags are retained."
+  ],
+  "schema": "M3_NLP_CURRENT_SOURCE_LOCK_CANDIDATE_QUALIFICATION_1",
+  "source_coverage": {
+    "all_other_guards_and_metadata_unchanged": true,
+    "com_m3_text_java_files_including_descriptor": 27,
+    "locked_files": 145,
+    "logical_manifest_changes": 4,
+    "m3_production_java_sources_excluding_three_descriptors": 142
+  },
+  "state": "QUALIFIED_ISOLATED_CANDIDATE",
+  "target_changes": [
+    {
+      "after_sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+      "before_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+      "candidate_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/candidates/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "kind": "JAVA",
+      "target_path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
+    },
+    {
+      "after_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+      "before_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+      "candidate_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/candidates/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "kind": "TEXT",
+      "target_path": "m3/tooling/module-packs/nlp-search/current-source-lock.json"
+    }
+  ]
+}

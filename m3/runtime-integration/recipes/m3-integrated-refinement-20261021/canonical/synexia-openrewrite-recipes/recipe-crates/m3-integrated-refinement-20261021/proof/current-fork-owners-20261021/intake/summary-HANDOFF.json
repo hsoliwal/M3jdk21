@@ -1,0 +1,20 @@
+[
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/NLP_RUNTIME_SUMMARY.json",
+    "relative_path": "evidence/NLP_RUNTIME_SUMMARY.json",
+    "bytes": 6366,
+    "sha256": "e7eb8de77a79b99fb5eee4e5c05791ec3c58b7b64b19f3a1a6cb9631e1ce7131"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
+    "relative_path": "evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
+    "bytes": 2552,
+    "sha256": "77e200b5ce35d939bd013b51c4d397e24afca576713d5cf370bac84a75f402a1"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/CURRENT_FORK_REFS.json",
+    "relative_path": "combined-receiver-source/m3/tooling/module-packs/nlp-search/CURRENT_FORK_REFS.json",
+    "bytes": 723,
+    "sha256": "b4151ffe154630e5c5b93e043b1c29919f93f9a8fc39459a41408b165d59cc06"
+  }
+]

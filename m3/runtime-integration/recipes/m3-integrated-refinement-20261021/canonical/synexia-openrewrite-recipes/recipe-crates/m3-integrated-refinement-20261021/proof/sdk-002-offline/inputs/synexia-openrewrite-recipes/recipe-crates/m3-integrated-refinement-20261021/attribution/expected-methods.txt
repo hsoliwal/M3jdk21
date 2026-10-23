@@ -1,0 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+com.m3.collections.M3FilteredViews#filter
+com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#capture
+com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#size
+com.m3.eclipse.runtime.M3EclipseProgressMonitor#borrowed
+com.m3.eclipse.runtime.M3EclipseProgressMonitor#worked

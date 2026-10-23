@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "comparison": "Exact existing PR1576 donor declarations and descriptors retained in corrected candidate",
+  "target_admission": "Two new additive public types and nested Task interface; no current target API removal or replacement",
+  "classes": [
+    "com.m3.eclipse.runtime.M3EclipseJobs",
+    "com.m3.eclipse.runtime.M3EclipseJobs$Task",
+    "com.m3.eclipse.runtime.M3EclipseJobScheduler"
+  ],
+  "original": {
+    "path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/PUBLIC_PROTECTED_API.txt",
+    "sha256": "0fbabc977a014617a582b1e8e99a129605f14a4c2abd34a3a07fd2319eec9b49"
+  },
+  "candidate": {
+    "path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-current-candidate-03/PUBLIC_PROTECTED_API.txt",
+    "sha256": "0fbabc977a014617a582b1e8e99a129605f14a4c2abd34a3a07fd2319eec9b49"
+  }
+}

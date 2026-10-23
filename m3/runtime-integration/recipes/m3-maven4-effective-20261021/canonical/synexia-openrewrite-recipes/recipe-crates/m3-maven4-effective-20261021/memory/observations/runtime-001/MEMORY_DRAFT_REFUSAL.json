@@ -1,0 +1,25 @@
+{
+  "schema": "M3_MEMORY_AUTHORING_REFUSAL/1",
+  "status": "REFUSED",
+  "command": [
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+    "-cp",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+    "com.synexia.rewrite.memory.M3RecoveryMemory",
+    "publish",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/draft-002.json",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events"
+  ],
+  "exit": 1,
+  "draft": {
+    "path": "memory/draft-002.json",
+    "sha256": "88540606f1513b71f9d965c3048007fbeb7bc1b5897a59a6504ced15a00b2adf"
+  },
+  "log": {
+    "path": "proof/memory-conformance-001/publish-002.log",
+    "sha256": "23835d4a22fd7279a783e6116211285ead54968fad2129420e7c5175c1fc1c3d"
+  },
+  "cause": "The closed profile requires source_manifest_before to reference an actual artifact, even when historical source custody is unknown. The draft supplied null; recipe_before may be null but the manifest reference may not.",
+  "correction": "Retain the rejected draft and reference a real manifest explicitly documenting unknown historical source custody. No helper/schema relaxation and no invented source seals."
+}

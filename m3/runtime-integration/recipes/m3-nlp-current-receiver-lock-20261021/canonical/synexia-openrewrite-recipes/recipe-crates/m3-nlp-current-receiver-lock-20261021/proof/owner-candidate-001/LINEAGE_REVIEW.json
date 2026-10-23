@@ -1,0 +1,110 @@
+{
+  "all_three_manifest_source_and_test_hashes_match_actual2779": true,
+  "baseline_receiver": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "bigstring_immutable_template_discrepancy": {
+    "canonical_head": "87219f9b837e78cb317e9ebee91334269a5f1668",
+    "disposition": "Retain exact discrepancy; do not claim historical head regeneration or import its extra API. Qualify current received manifest/workflow-pinned source as independently observed existing owner.",
+    "material_difference": [
+      "Template additionally declares public codeUnits() and codePoints() returning LongStream.",
+      "Template test additionally covers those stream methods and LocalM3Arena interoperability."
+    ],
+    "source_manifest_hash": "e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de",
+    "source_template_hash": "eb62c188e6b39ccc79d9cf372f15abdba12fd5ecd21f35e96eb22dd7ab08261e",
+    "test_manifest_hash": "5f47db4885a99b1ec7dc95957276d0130f2eab7cba16614907995c722fa6f9a6",
+    "test_template_hash": "ad5737365bcacdf839fa62ead8369e35e78efbc7f7afd55739d708f0512d358f"
+  },
+  "canonical_observed_metadata": [
+    {
+      "bytes": 34850,
+      "git_blob": "1f49dc7583a03eb5974d182677f4c6ff5e363747",
+      "key": "bigstring_template",
+      "sha256": "eb62c188e6b39ccc79d9cf372f15abdba12fd5ecd21f35e96eb22dd7ab08261e",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/87219f9b837e78cb317e9ebee91334269a5f1668/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-bigstring-rope-summary-20261018/M3BigString.java.txt"
+    },
+    {
+      "bytes": 10486,
+      "git_blob": "e6e8b42eea957afb19b6574ac8f3395aa2df6468",
+      "key": "bigstring_test_template",
+      "sha256": "ad5737365bcacdf839fa62ead8369e35e78efbc7f7afd55739d708f0512d358f",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/87219f9b837e78cb317e9ebee91334269a5f1668/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-bigstring-rope-summary-20261018/M3BigStringSelfTest.java.txt"
+    },
+    {
+      "bytes": 323,
+      "git_blob": "54949f4ceed2dc75ab7f9171401b40c047532987",
+      "key": "bigstring_manifest",
+      "sha256": "a56f0c5671117d2ac7962368b8590acf5ff4545784b9ddd24d11c4d892217057",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/87219f9b837e78cb317e9ebee91334269a5f1668/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-bigstring-rope-summary-20261018/manifest.tsv"
+    },
+    {
+      "bytes": 480,
+      "git_blob": "e2050aeab229c7c6fb873d622977c0b58a9d9e7b",
+      "key": "gvas_manifest",
+      "sha256": "f132f8468f5be3787d851a0d94076254c35e8b11b6288e3579087265e672011b",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/c28bd8e83d0b88a9dba0c0a9fdbd35a25e6ecd07/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-gvas-primitive-hash-20261018/manifest.tsv"
+    },
+    {
+      "bytes": 287,
+      "git_blob": "feeff6144993359df38ad39b31b6f405100440b9",
+      "key": "rope_manifest",
+      "sha256": "2130ba1cc3c02f6a50191f94e8c5aa85478155ab88c8053107f31041b747deff",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/d6f1b7a3b9b3eda4a29877ff65b6c2d2901dd1be/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-rope-bigtext-index-20261018/manifest.tsv"
+    }
+  ],
+  "historical_pr_runtime_claims": "Original PR bodies record SDK/runtime qualification not run; merged state alone is not a passing gate. Fresh gate receipts are separate.",
+  "schema": "M3_NLP_RECEIVER_SOURCE_LINEAGE_REVIEW_1",
+  "scope": "Finite current source-lock coverage successor only; full String/JDK family and platform admission unchanged.",
+  "source_receipts": [
+    {
+      "bytes": 11215,
+      "canonical_head": "c28bd8e83d0b88a9dba0c0a9fdbd35a25e6ecd07",
+      "canonical_template_git_blob_equal_current2779": true,
+      "git_blob": "c27d6603b32d9c7f277ed097b70ee8eac174b08b",
+      "owner": "gvas",
+      "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+      "receiving_commit": "c09e67319378740dcad570d506463594dbfad3ee",
+      "receiving_commit_bytes_equal_current2779": true,
+      "sha256": "2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/c09e67319378740dcad570d506463594dbfad3ee/m3/core/src/com/m3/text/M3GvasLiteralImage.java"
+    },
+    {
+      "bytes": 33365,
+      "git_blob": "9f66122b2dba2e4e0bc417208f18d0f8a2f95dec",
+      "owner": "bigstring",
+      "path": "m3/core/src/com/m3/text/M3BigString.java",
+      "receiving_commit": "632a9eefb68798d86acd83e886fd267938638e01",
+      "receiving_commit_bytes_equal_current2779": true,
+      "sha256": "e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/632a9eefb68798d86acd83e886fd267938638e01/m3/core/src/com/m3/text/M3BigString.java"
+    },
+    {
+      "bytes": 9740,
+      "canonical_head": "d6f1b7a3b9b3eda4a29877ff65b6c2d2901dd1be",
+      "canonical_template_git_blob_equal_current2779": true,
+      "git_blob": "b8e29cf9431d00aa3ee5d1c658ec8c7fa8177e03",
+      "owner": "rope",
+      "path": "m3/core/src/com/m3/text/M3RopeTextIndex.java",
+      "receiving_commit": "b2f989a0fc77bc95a5fddfee7b378085d742fe8c",
+      "receiving_commit_bytes_equal_current2779": true,
+      "sha256": "ff2495c01b8df68a01167e29daa4ea4a6af25650e59c5cc705cc2fdc7cfa0141",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/b2f989a0fc77bc95a5fddfee7b378085d742fe8c/m3/core/src/com/m3/text/M3RopeTextIndex.java"
+    },
+    {
+      "bytes": 7802,
+      "canonical_head": "c28bd8e83d0b88a9dba0c0a9fdbd35a25e6ecd07",
+      "canonical_template_git_blob_equal_current2779": true,
+      "git_blob": "d4af3a34e45b58fb6849b1d8ec85d31fdda7b287",
+      "owner": "gvas-test",
+      "path": "m3/core/test/com/m3/text/M3GvasLiteralImageContractTest.java",
+      "sha256": "9bb67410bda500c43eb58f65c648351fc1ac477328abe84da2537bab823f114d"
+    },
+    {
+      "bytes": 8903,
+      "canonical_head": "d6f1b7a3b9b3eda4a29877ff65b6c2d2901dd1be",
+      "canonical_template_git_blob_equal_current2779": true,
+      "git_blob": "cef8b5f91b7dc666627ddf5a5eb1c8a4611ebf73",
+      "owner": "rope-test",
+      "path": "m3/core/test/M3RopeTextIndexTest.java",
+      "sha256": "1374a5b14a32a58324f50f980731a94e5e938235fbfdf27c2e679f0ea1681c92"
+    }
+  ]
+}

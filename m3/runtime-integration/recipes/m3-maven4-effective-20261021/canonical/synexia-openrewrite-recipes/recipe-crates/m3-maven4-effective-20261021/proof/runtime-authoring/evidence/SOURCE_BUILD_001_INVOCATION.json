@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-s",
+    "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-pl",
+    "impl/maven-impl",
+    "-am",
+    "-Dtest=DefaultModelBuilderTest",
+    "-Dsurefire.failIfNoSpecifiedTests=false",
+    "package"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270/maven-work/fork",
+  "scope": "Pinned Maven4 impl reactor with actual DefaultModelBuilderTest; unrelated module test selectors may have no matches. No release/plugin/distribution/full-fork test acceptance claimed."
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "M3_ECLIPSE_EXECUTED_COMMAND_CUSTODY_V1",
+  "custody": "RETROSPECTIVE_EXACT_TRANSCRIPTION_FROM_SESSION_EXEC_COMMAND_TOOL_CALLS",
+  "captured_in_result_at_execution": false,
+  "existing_results_modified": false,
+  "reason": "Original result files retained sources, logs, reports and runtime JARs but omitted their command arrays; commands were retained in session tool history and transcribed here separately. This is not a claim that this JSON existed before those executions.",
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "PATH": "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin:<inherited PATH>",
+    "MAVEN_OPTS": "-Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts"
+  },
+  "trials": [
+    {
+      "trial": "eclipse-evaluation",
+      "tool_session_id": 79761,
+      "argv": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-s",
+        "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/pom.xml",
+        "test"
+      ],
+      "cwd": "/workspace/scratch/206049dfb270",
+      "stdout_and_stderr_redirect": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/maven-original-donor.log",
+      "exit_code": 0,
+      "log_sha256": "2954b2e87319baf5e864136157ca178b5c6fa27e6ce2c01b1a6e980ef360c030",
+      "pom_sha256": "d62076540a93bac5b3bcd57ebaddc0206efc131614af41d9a1a315be452b7ebc",
+      "result_sha256": "7c8219f905f060bed732a86cabff10d3e086c11e56a4311c32fe081956948510"
+    },
+    {
+      "trial": "eclipse-contract-donor-01",
+      "tool_session_id": 43675,
+      "argv": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-o",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/jobs-work/eclipse-contract-donor-01/pom.xml",
+        "test"
+      ],
+      "cwd": "/workspace/scratch/206049dfb270",
+      "stdout_and_stderr_redirect": "/workspace/scratch/206049dfb270/jobs-work/eclipse-contract-donor-01/maven.log",
+      "exit_code": 1,
+      "log_sha256": "1b6e0c8d7ebfde301d6b127a1bc7d66c0c793f07bcb1644c0f02e1e38074f275",
+      "pom_sha256": "d62076540a93bac5b3bcd57ebaddc0206efc131614af41d9a1a315be452b7ebc",
+      "result_sha256": "8f376b6bca15d672d8f06fca66b0fcc2e77139e42933f27824bdcdfc517c243b"
+    },
+    {
+      "trial": "eclipse-contract-candidate-02",
+      "tool_session_id": 3656,
+      "argv": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-o",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/jobs-work/eclipse-contract-candidate-02/pom.xml",
+        "test"
+      ],
+      "cwd": "/workspace/scratch/206049dfb270",
+      "stdout_and_stderr_redirect": "/workspace/scratch/206049dfb270/jobs-work/eclipse-contract-candidate-02/maven.log",
+      "exit_code": 0,
+      "log_sha256": "f4b07fb672d88529a5ca80ed6ff8f5c1f17d7800ffc06e669e284b49c7596f5b",
+      "pom_sha256": "d62076540a93bac5b3bcd57ebaddc0206efc131614af41d9a1a315be452b7ebc",
+      "result_sha256": "1f6b8e28de7a10c0a8dee6afd3a747be169e6fd8943080d9c2651d11a4bf4fce"
+    },
+    {
+      "trial": "eclipse-current-candidate-03",
+      "tool_session_id": 43484,
+      "argv": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-s",
+        "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/jobs-work/eclipse-current-candidate-03/pom.xml",
+        "test"
+      ],
+      "cwd": "/workspace/scratch/206049dfb270",
+      "stdout_and_stderr_redirect": "/workspace/scratch/206049dfb270/jobs-work/eclipse-current-candidate-03/maven.log",
+      "exit_code": 0,
+      "log_sha256": "cbeeeae9fca6dc11abb02fb57e88807215985bc1085d720aaebda8769768e184",
+      "pom_sha256": "fe31189f987c200ada8aeb76776f6f7f38c894416872a4bfb36d904980e36a3e",
+      "result_sha256": "7584ff1ca7865cb05f3200d33283c3c5f71ad81c7fec23d0de2e8297c161921b"
+    }
+  ]
+}

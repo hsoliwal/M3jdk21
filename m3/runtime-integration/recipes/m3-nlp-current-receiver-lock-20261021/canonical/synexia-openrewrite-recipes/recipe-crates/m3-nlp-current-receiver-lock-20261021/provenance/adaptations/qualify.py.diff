@@ -1,0 +1,38 @@
+--- synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/qualify.py
++++ synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/qualify.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ # SPDX-License-Identifier: Apache-2.0
++# Adapted 2026-10-21 from published core #12648 for this distinct NLP lock task.
+ """Run and retain this finite task's actual Maven/OpenRewrite qualification.
+ 
+ The existing recipe owners and JUnit harness perform every transformation and
+@@ -153,16 +154,14 @@
+         tree = ET.parse(report).getroot()
+         suites.append({key: tree.attrib.get(key, '') for key in
+                        ('name', 'tests', 'failures', 'errors', 'skipped', 'time')})
+-    expected_suites = {
+-        'com.synexia.rewrite.M3IntegratedRefinementRecipeTest',
+-        'com.synexia.rewrite.memory.M3CorrectionMemoryConformanceTest'}
++    expected_suites = {'com.synexia.rewrite.M3NlpCurrentReceiverLockRecipeTest'}
+     counts = {key: sum(int(suite[key]) for suite in suites) for key in
+               ('tests', 'failures', 'errors', 'skipped')}
+     proof_status = crate / 'target/proof-status.tsv'
+     source_pass = proof_status.is_file() and proof_status.read_text().splitlines()[-1].startswith('PASS\t')
+     passed = (exit_code == 0 and before == after and dependencies == dependencies_after
+               and {suite['name'] for suite in suites} == expected_suites
+-              and counts == {'tests': 2, 'failures': 0, 'errors': 0, 'skipped': 0} and source_pass)
++              and counts == {'tests': 1, 'failures': 0, 'errors': 0, 'skipped': 0} and source_pass)
+     for name in ('recipe-proof.tsv', 'proof-status.tsv', 'named-recipe.yml'):
+         path = crate / 'target' / name
+         if path.is_file():
+@@ -171,7 +170,7 @@
+         path = crate / 'target' / name
+         if passed and path.is_dir():
+             shutil.copytree(path, out / name)
+-    receipt = {'schema': 'M3_INTEGRATED_RECOVERY_SDK_ATTEMPT/1', 'task': TASK,
++    receipt = {'schema': 'M3_NLP_CURRENT_RECEIVER_LOCK_SDK_ATTEMPT/1', 'task': TASK,
+                'status': 'PASS' if passed else 'FAIL', 'scope': 'source-replay-only',
+                'dependency_lane': 'online-artifact-bootstrap' if args.online_bootstrap else 'offline-cached-artifacts',
+                'full_source_vendored_reactor': 'NOT_RUN', 'receiving_runtime_gates': 'SEPARATE',

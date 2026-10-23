@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: restore strict sequenced refusal and original backed reversal.
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
@@ -98,6 +99,8 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
     @Override public boolean retainAll(Collection<?> values) { throw readonly(); }
     @Override public boolean removeIf(Predicate<? super E> predicate) { throw readonly(); }
     @Override public void clear() { throw readonly(); }
+    @Override public E removeFirst() { throw readonly(); }
+    @Override public E removeLast() { throw readonly(); }
     @Override public E pollFirst() { throw readonly(); }
     @Override public E pollLast() { throw readonly(); }
     @Override public E removeFirst() { throw readonly(); }
