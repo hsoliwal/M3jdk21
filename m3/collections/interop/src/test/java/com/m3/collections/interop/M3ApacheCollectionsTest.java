@@ -17,10 +17,8 @@ import org.apache.commons.collections4.Predicate;
 import org.junit.jupiter.api.Test;
 
 /** Contract differential for Apache admission semantics, not a Guava live-filter oracle. */
-@SuppressWarnings("deprecation")
 final class M3ApacheCollectionsTest {
-    // Apache's published Predicate contract is deprecated in 4.5 but remains the tested API.
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation") // Apache 4.5 Predicate is part of the compatibility contract.
     private static final Predicate<Integer> NONNEGATIVE = value -> value != null && value >= 0;
 
     @Test
