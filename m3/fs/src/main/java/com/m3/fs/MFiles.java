@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.net.URI;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -64,6 +65,11 @@ import com.m3.fs.vfs.provider.zip.ZipFileSystem;
  * <p>The facade requests metadata during traversal and opens payload streams only
  * through explicit content operations. Provider resolution, archive mounting,
  * and provider metadata methods can perform I/O according to their own contracts.
+ * Non-default NIO paths retain their caller-owned filesystem, which is never
+ * closed or remounted by this facade. Their native URI is available from
+ * {@link MFile#uri()}; their {@code m3nio:} source address identifies that exact
+ * live filesystem instance and resolves only while its binding remains open in
+ * this JVM. The internal scheme is reserved and registration collisions fail.
  * No filesystem snapshot, archive-record identity, or repeatable content is
  * implied. The original VFS {@code FileObject.close()} contract is unchanged.</p>
  */
@@ -95,7 +101,7 @@ public final class MFiles {
                 Integer.MAX_VALUE, TraversalOrder.DEPTH_FIRST, null, 0, Map.of());
     }
 
-    /** Opens an owned stream for a local path. */
+    /** Opens an owned stream for a path, borrowing any non-default NIO filesystem. */
     public static Stream<MFile> stream(Path root) throws IOException {
         return from(root).stream();
     }
@@ -167,7 +173,7 @@ public final class MFiles {
      * many callbacks plus unconsumed results hold result credits. Each unit
      * opens and closes its own provider session on one worker. Local Path
      * subtrees may be reopened as independent units without sharing live VFS
-     * objects. Archive layers and provider-address roots remain single-owner
+     * objects. Non-default NIO paths, archive layers and provider-address roots remain single-owner
      * regions; distinct roots can overlap. Provider factories are serialized
      * within this operation and must supply fresh instances. Provider child
      * arrays, archive indexes/caches/spooling, and task-owned memory are outside
@@ -407,6 +413,7 @@ public final class MFiles {
             Session session = new Session(new StandardFileSystemManager());
             try {
                 session.manager.init();
+                session.manager.addProvider(NioFileProvider.SCHEME, session.nioProvider);
                 for (Map.Entry<String, Supplier<? extends FileProvider>> registration : providers.entrySet()) {
                     if (session.manager.hasProvider(registration.getKey())) {
                         throw new IOException("Provider scheme is already registered: " + registration.getKey());
@@ -416,7 +423,7 @@ public final class MFiles {
                     session.manager.addProvider(registration.getKey(), provider);
                 }
                 FileObject root = path == null ? session.manager.resolveFile(address)
-                        : session.manager.toFileObject(path.toAbsolutePath().toFile());
+                        : session.resolve(path);
                 EntryMetadata rootMetadata = session.inspect(root);
                 if (!rootMetadata.file() && !rootMetadata.directory() && !rootMetadata.link()) {
                     throw new IOException("The selected MFiles root does not exist");
@@ -1048,6 +1055,7 @@ public final class MFiles {
 
             private void providers(Session session) throws IOException {
                 session.manager.init();
+                session.manager.addProvider(NioFileProvider.SCHEME, session.nioProvider);
                 for (Map.Entry<String, Supplier<? extends FileProvider>> registration : plan.providers.entrySet()) {
                     requireRunning();
                     if (session.manager.hasProvider(registration.getKey())) {
@@ -1076,7 +1084,7 @@ public final class MFiles {
                     requireRunning();
                     FileObject root = location != null ? session.manager.resolveFile(location.address())
                             : plan.path == null ? session.manager.resolveFile(plan.address)
-                            : session.manager.toFileObject(plan.path.toAbsolutePath().toFile());
+                            : session.resolve(plan.path);
                     EntryMetadata metadata = session.inspect(root);
                     if (!metadata.file() && !metadata.directory() && !metadata.link()) {
                         throw new IOException("MFiles parallel root does not exist or has no supported type");
@@ -1088,7 +1096,8 @@ public final class MFiles {
                             location == null || location.root(), layer, metadata);
                     Session owned = session;
                     Traversal traversal = new Traversal(session, plan, initial,
-                            plan.path == null ? null : node -> fork(plan, node),
+                            plan.path == null || plan.path.getFileSystem() != FileSystems.getDefault()
+                                    ? null : node -> fork(plan, node),
                             Parallel.this::requireRunning, Parallel.this::stop);
                     while (traversal.tryAdvance(file -> apply(owned, file))) {
                         requireRunning();
@@ -1119,11 +1128,18 @@ public final class MFiles {
 
     static final class Session {
         private final StandardFileSystemManager manager;
+        private final NioFileProvider nioProvider = new NioFileProvider();
         private final Set<Closeable> content = Collections.newSetFromMap(new IdentityHashMap<>());
         private volatile boolean closed;
 
         Session(StandardFileSystemManager manager) {
             this.manager = manager;
+        }
+
+        FileObject resolve(Path path) throws IOException {
+            return path.getFileSystem() == FileSystems.getDefault()
+                    ? manager.toFileObject(path.toAbsolutePath().toFile())
+                    : nioProvider.resolve(path);
         }
 
         EntryMetadata inspect(FileObject file) throws IOException {

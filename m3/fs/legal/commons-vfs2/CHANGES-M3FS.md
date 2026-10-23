@@ -38,3 +38,10 @@ compiled providers. This is not binary-compatible with original-namespace plugin
 
 No source file loses its original license header. The M3 changes do not claim
 authorship of the original Apache implementation or endorsement by Apache.
+
+The 2026-10-21 provider-default extension registers the first-party
+com.m3.fs.DatabaseFileProvider under m3db in the existing providers.xml resource.
+Its database and NIO adapters reuse the attributed AbstractFileSystem and
+AbstractFileObject template owners without changing the donor Java bodies. The
+first-party MFileContent defaults and MFiles path bridge remain in com.m3.fs.
+Original Apache copyrights, LICENSE and NOTICE remain unchanged.
