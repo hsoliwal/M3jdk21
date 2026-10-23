@@ -136,20 +136,32 @@ def main() -> int:
         proof.run("java-compile", [str(javac), "--release", "21", "-encoding", "UTF-8",
                   "-Xlint:all", "-Werror", "-h", str(headers), "-d", str(classes),
                   *map(str, sources[1:5])])
-        # Compile the new native declaration ONLY in an isolated proof image.
-        # Product M3MaskViewportNative.java remains byte-identical and exposes project only.
+        # Exact original-owner Java admission: before receiving, compile the
+        # independent test-only declaration; after receiving, compile the
+        # already-qualified product Java source with no duplicate method.
+        java_source_hash = digest(sources[2])
+        admitted_before = "36158dcb03adc764bddfab16172cb864d926518a304704fcea390040a7cf4069"
+        admitted_after = "8a7b47da2819923f7e64d16a9d9827f92a9ee962a9512a1fe369a75665b60957"
+        if java_source_hash not in (admitted_before, admitted_after):
+            raise ValueError("native Java owner source drift")
+        product_frame_wired = java_source_hash == admitted_after
+        receipt.update(java_frame_wired=product_frame_wired,
+                       frame_test_only=not product_frame_wired)
         frame_package = output / "frame-src/com/m3/collections"
         frame_package.mkdir(parents=True)
         frame_declaration = frame_package / "M3MaskViewportNative.java"
         original_native = sources[2].read_text()
-        close = "\n}\n"
-        if original_native.count(close) != 1:
-            raise ValueError("native proof declaration anchor drift")
-        new_method = ("\n    static native int projectFramePage(int[] offsets, int[] states, "
-                      "int first, int length, int required, int forbidden, "
-                      "int skip, int max, int[] rows, int rowOffset, "
-                      "int[] slots, int slotOffset, int[] words, int wordOffset);\n")
-        frame_declaration.write_text(original_native.replace(close, new_method + close))
+        if product_frame_wired:
+            frame_declaration.write_text(original_native)
+        else:
+            close = "\n}\n"
+            if original_native.count(close) != 1:
+                raise ValueError("native proof declaration anchor drift")
+            new_method = ("\n    static native int projectFramePage(int[] offsets, int[] states, "
+                          "int first, int length, int required, int forbidden, "
+                          "int skip, int max, int[] rows, int rowOffset, "
+                          "int[] slots, int slotOffset, int[] words, int wordOffset);\n")
+            frame_declaration.write_text(original_native.replace(close, new_method + close))
         # Opaque text fixture becomes a Java source only inside the isolated proof image.
         frame_contract = frame_package / "M3FrameRegionContract.java"
         frame_contract.write_bytes((q / "fixtures/M3FrameRegionContract.txt").read_bytes())
