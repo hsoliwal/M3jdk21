@@ -1,0 +1,47 @@
+{
+  "red": {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-cp",
+      "/workspace/scratch/f8287c652798/M3jdk21/m3/collections/target/classes:/workspace/scratch/f8287c652798/work/identity-set/classes",
+      "com.m3.collections.M3FilteredSetIdentityContract"
+    ],
+    "exit": 1
+  },
+  "green": {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-cp",
+      "/workspace/scratch/f8287c652798/work/identity-set/classes:/workspace/scratch/f8287c652798/M3jdk21/m3/collections/target/classes",
+      "com.m3.collections.M3FilteredSetIdentityContract"
+    ],
+    "exit": 0
+  },
+  "baseline-api": {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-cp",
+      "/workspace/scratch/f8287c652798/M3jdk21/m3/collections/target/classes",
+      "com.m3.collections.M3CollectionViews"
+    ],
+    "exit": 0
+  },
+  "candidate-api": {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-cp",
+      "/workspace/scratch/f8287c652798/work/identity-set/classes",
+      "com.m3.collections.M3CollectionViews"
+    ],
+    "exit": 0
+  },
+  "public_api_equal": true,
+  "runtime_promotion": "NOT_CLAIMED; standalone collections proving surface only",
+  "pending_gates": [
+    "Canonical recipe materialization/replay/fixed point/drift refusal owned by root",
+    "Full collection Maven suite with received postimage owned by root",
+    "Native/JNI/runtime/resource gates outside this Java-only membership correction"
+  ]
+}
