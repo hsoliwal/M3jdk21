@@ -44,3 +44,14 @@ There are now four exact source-receiving SHA-256/Git-blob rows in the product
 manifest (two original POM/workflow inputs, one additive focused gate and one
 original invalid Java21 test fixture). This is a reviewable draft, not global
 String/arrays/collections/compiler admission.
+
+## Broad original owning collection compatibility gate
+
+The previously passing three-signal JUnit gate remains unchanged. An
+**additional** original full `m3/collections/pom.xml test` GitHub Actions
+workflow is source-sealed as an ABSENT fifth output, using the same exact
+source-vendored JUnit Jupiter/Launcher and unchanged M3 arrays prerequisite.
+It retains all available module tests with no `-Dtest` filter, skip or
+`continue-on-error`. This broader result may fail independently; only
+actual GitHub execution determines its status. Success would still not
+establish JDK-image/jtreg/JCK/HotSpot/JNI/platform acceptance.
