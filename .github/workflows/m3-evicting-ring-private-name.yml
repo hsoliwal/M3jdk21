@@ -1,0 +1,48 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 evicting ring private naming contract
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/guava-evicting-queue/**'
+      - 'm3/tooling/name-contract/receipts/evicting-ring-private-name-20261023.json'
+      - '.github/workflows/m3-evicting-ring-private-name.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-and-behavior:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/collections/implementations/guava-evicting-queue/**
+            m3/tooling/name-contract/receipts/evicting-ring-private-name-20261023.json
+            .github/workflows/m3-evicting-ring-private-name.yml
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact produced source and private atom callsite gate
+        run: |
+          python3 - <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+          path = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java')
+          source = path.read_bytes()
+          assert sha256(source).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
+          assert source.count(b'copyRingInto(') == 4
+          assert b'copyInto(' not in source
+          assert b'package com.m3.collections.guava;' in source
+          assert b'public final class M3EvictingQueue<E>' in source
+          print('exact postimage and four private callsites verified')
+          PY
+      - name: Compile M3JDK21-owned queue and probe on Java 21
+        run: mvn -B -ntp -f m3/collections/implementations/guava-evicting-queue/pom.xml test
+      - name: Enforce Java 21 public, serialized and behavior baseline
+        run: |
+          java -cp m3/collections/implementations/guava-evicting-queue/target/classes:m3/collections/implementations/guava-evicting-queue/target/test-classes com.m3.collections.guava.M3EvictingQueueContractProbe
+          javap -p -classpath m3/collections/implementations/guava-evicting-queue/target/classes com.m3.collections.guava.M3EvictingQueue | python3 -c 'import sys; data=sys.stdin.read(); assert "private void copyRingInto(java.lang.Object[], int)" in data; assert "copyInto(" not in data'
