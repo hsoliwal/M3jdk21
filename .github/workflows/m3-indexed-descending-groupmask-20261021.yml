@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 filtered sorted stable group-mask Java21/JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedDescendingGroupMask*.java'
+      - 'm3/collections/qualification/descending-groupmask-20261021/**'
+      - '.github/workflows/m3-indexed-descending-groupmask-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-java21-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source seal and diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/master...HEAD
+          bash m3/collections/qualification/descending-groupmask-20261021/verify.sh
+      - name: Strict actual-owner Java21 and comparator/exception JDK differential
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-groupmask"
+          mkdir -p "$out/classes" "$out/native"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexSort.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedDescendingGroupMaskSelfTest.java
+          java -cp "$out/classes" com.m3.collections.M3IndexedDescendingGroupMaskSelfTest
+      - name: Build original JNI path-mask selector and run native-required oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-groupmask"
+          gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
+            -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$out/native/libm3_collections_pathmask.so"
+          java -Xcheck:jni -Djava.library.path="$out/native" -cp "$out/classes" \
+            com.m3.collections.M3IndexedDescendingGroupMaskSelfTest native
+
+  full-original-collections-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Original owner JUnit and adjacent indexed/native regressions
+        run: >
+          mvn -B -ntp -f m3/collections/pom.xml
+          -Dtest=M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3IndexedSnapshotPositionTest
+          test
