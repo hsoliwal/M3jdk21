@@ -67,6 +67,11 @@ jobs:
             m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
           python3 m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py \
             m3/vendor/third_party/junit-platform-launcher-1.10.2/target/junit-platform-launcher-1.10.2-m3-source-1.jar
+      - name: Build unchanged original array substrate before collections JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
       - name: Run original M3JDK21 collection JUnit without replacing its custom dependencies
         run: >
           mvn -B -ntp -f m3/collections/pom.xml
