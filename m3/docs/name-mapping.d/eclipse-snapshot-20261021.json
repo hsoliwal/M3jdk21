@@ -1,0 +1,17 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "mappings": [
+    {
+      "source": "Existing M3ObjectStateSlots28.nextMatchingSlot and M3Collections.arrayList",
+      "target": "com.m3.eclipse.framework.M3EclipseIndexedSnapshot",
+      "module": "m3/eclipse/framework",
+      "recipe": "com.synexia.m3jdk.EclipseStructures20261021.snapshot",
+      "target_path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "contract": "Keep captured state, dense append-only physical-slot/ordinal equality, generation handles, reference identity, encounter order, null and invalid-mask errors, immutable detached results. No JNI or additional retained state.",
+      "status": "Qualified scoped internal selection refinement; see receiving evidence",
+      "ownership": "M3JDK21 product owns runtime; canonical Synexia recipe owns transformation and memory",
+      "phase": "Global STRING-first stage unchanged",
+      "gates": "Java21 strict compile, all65536 mask pairs, bounds/immutability/callback oracle, unchanged complete javap; full owning module and actual received tree evidence separate; UI/full image pending"
+    }
+  ]
+}
