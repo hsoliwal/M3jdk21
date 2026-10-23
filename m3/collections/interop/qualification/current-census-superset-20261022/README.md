@@ -23,6 +23,16 @@ PRODUCTION/TEST physical role and observed Apache-2.0 header. The
 `receipts/changed-07.tsv` ledger independently records the prior and current
 identity of every historical revision, including its history commit. Both
 historical and current verifier/manifest bytes remain immutably pinned.
+
+One of the originally added 40 **test files** then received an independently
+generated Java 21 grammar correction: the arrayification test's compound
+`var` statement was split into two declarations. This later revision is
+authorized by a separate, narrowly bound
+`receipts/changed-added-01.tsv` entry containing the original SHA-256/Git
+blob from `added-01.tsv`, the exact corrected SHA-256/Git blob, the canonical
+Synexia recipe identity and **pending** product compatibility status.
+The original `added-01.tsv` snapshot is immutable; no other source change
+is accepted as a consequence of this one corrected test.
 The complete tracked set must equal **all 76 exact source/test paths**, with
 no unknown files. Symlink aliases, drifted old/new images, duplicate paths,
 forged hashes and new unadmitted sources fail closed.
@@ -43,7 +53,8 @@ Proof order:
 2. Compare the current 29 unchanged and seven revised historical owners
    against an exact old→current revision receipt.
 3. Run six adversarial successor verifier tests.
-4. Verify all 40 added source identities and the full 76-path tracked set.
+4. Verify the original 40 added source identities, then apply the single
+   SHA-256/Git-blob-authorized Java21 test revision and check all 76 paths.
 5. Continue unchanged original Maven recipe proofs, full collection-module
    compilation, API/ABI/serialization, Guava/Apache/Eclipse/Spring/JDK
    differential tests and available JNI mask-compaction parity.

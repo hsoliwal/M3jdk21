@@ -72,7 +72,8 @@ def exact_apache450_transitions(receipts: Path) -> dict[str, tuple[str, ...]]:
 
 
 def verify_additions(product: Path, receipts: Path,
-                     older: set[str], tracked: set[str]) -> list[str]:
+                     older: set[str], tracked: set[str],
+                     require_revision: bool = False) -> list[str]:
     product = product.resolve(strict=True)
     receipts = receipts.resolve(strict=True)
     if len(older) != 36 or any(not p.startswith((MAIN, TEST)) for p in older):
@@ -233,7 +234,7 @@ def verify_product_checkout(product: Path, receipts: Path,
     older, revisions = verify_historical_revisions(product, receipts, historical_product)
     tracked = set(subprocess.check_output(['git', 'ls-files', '--',
         PREFIX + 'main', PREFIX + 'test'], cwd=product, text=True).splitlines())
-    extras = verify_additions(product, receipts, older, tracked)
+    extras = verify_additions(product, receipts, older, tracked, require_revision=True)
     return len(older), revisions, len(extras)
 
 
