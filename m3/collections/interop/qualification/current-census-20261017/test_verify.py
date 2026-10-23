@@ -31,13 +31,13 @@ class SourceCensusTest(unittest.TestCase):
         census = root / 'current.tsv'
         census.write_text('\n'.join('\t'.join(x) for x in now)+'\n')
         return census, baseline
-    def test_five_historical_plus_thirty_one_additive(self):
+    def test_five_historical_plus_seventy_one_additive(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             current, old = self.make_fixture(root)
             allowed = verify.verify(root, current, old,
                 verify.sha256(current.read_bytes()), verify.git_blob(old.read_bytes()), False)
-            self.assertEqual(len(allowed), 36)
+            self.assertEqual(len(allowed), 76)
     def test_missing_drift_and_alias_refusal(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -79,6 +79,35 @@ class SourceCensusTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'changed unapproved historical'):
                 verify.verify(root, current, old, verify.sha256(current.read_bytes()),
                     verify.git_blob(old.read_bytes()), False)
+
+    def test_chronological_successor_refusal(self):
+        prior = verify.predecessor_rows()
+        self.assertEqual(len(prior), 36)
+        before = {r[0]: r for r in prior}
+        now = []
+        for path in verify.ALLOWED_PATHS:
+            old = before.get(path)
+            if old is None:
+                now.append((path, 'ABSENT', 'c'*64, 'd'*40))
+            elif path in verify.CHANGED_FROM_PREDECESSOR:
+                now.append((path, old[2], 'c'*64, 'd'*40))
+            else:
+                now.append(old)
+        self.assertEqual(verify.verify_lineage(prior, now), 76)
+        broken = list(now)
+        i = next(i for i, r in enumerate(broken) if r[0] in verify.CHANGED_FROM_PREDECESSOR)
+        row = list(broken[i]); row[1] = 'ABSENT'; broken[i] = tuple(row)
+        with self.assertRaisesRegex(ValueError, 'unapproved source history'):
+            verify.verify_lineage(prior, broken)
+        with self.assertRaisesRegex(ValueError, 'chronology'):
+            verify.verify_lineage(prior, now[:-1])
+
+    def test_predecessor_receipt_tamper(self):
+        with tempfile.TemporaryDirectory() as temp:
+            damaged = Path(temp) / 'old.tsv'
+            damaged.write_bytes(verify.PREDECESSOR.read_bytes() + b'tamper')
+            with self.assertRaisesRegex(ValueError, 'predecessor source receipt'):
+                verify.predecessor_rows(damaged)
 
 if __name__ == '__main__':
     unittest.main()

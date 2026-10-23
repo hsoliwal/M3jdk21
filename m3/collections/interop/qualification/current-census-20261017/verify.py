@@ -4,7 +4,7 @@
 """Fail-closed M3 interop installed-source successor; never relax the historical recipe.
 
 Historical five-file postimages remain immutable. This receipt admits exactly the
-current thirty-six first-party source/test owners and their SHA-256 and Git blobs.
+current seventy-six original-source owners; predecessor thirty-six retained and their SHA-256 and Git blobs.
 """
 import hashlib
 from pathlib import Path
@@ -14,54 +14,107 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4] if len(HERE.parents) > 4 else Path.cwd()
 CENSUS = HERE / 'current-source-census.tsv'
 LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
-RECEIPT_SHA256 = '5ebaf6ef12f2f954029f588e38e36c844cf97b550626a4f16e35c9219d725620'
+RECEIPT_SHA256 = 'bc80523d994a68c8f87bfc5fb2a1cc75ad0559b31f84f317c70a40290552603e'
+PREDECESSOR = HERE / 'predecessor-source-census-20261017.tsv'
+PREDECESSOR_SHA256 = '5ebaf6ef12f2f954029f588e38e36c844cf97b550626a4f16e35c9219d725620'
 LEGACY_GIT_BLOB = 'bdc0cab41cd4033421388fbd44f37203d765f57e'
 BASE = 'm3/collections/interop/src/'
 MAIN = BASE + 'main/java/com/m3/collections/interop/'
 TEST = BASE + 'test/java/com/m3/collections/interop/'
 ALLOWED_PATHS = tuple(sorted([
     MAIN + name for name in (
-        'M3ApacheBag.java',
-        'M3ApacheBidiMap.java',
-        'M3ApacheCollections.java',
-        'M3ApacheListValuedMap.java',
-        'M3ApacheMultiSet.java',
-        'M3ApacheSetValuedMap.java',
-        'M3BiMap.java',
-        'M3BiMaps.java',
-        'M3EclipseListMultimap.java',
-        'M3EclipseSetMultimap.java',
-        'M3FiveLibraryIndexViews.java',
-        'M3GuavaBiMap.java',
-        'M3GuavaMultiset.java',
-        'M3LibraryBinding.java',
-        'M3LibraryBindings.java',
-        'M3LibraryCollections.java',
-        'M3LibraryCollectors.java',
-        'M3SpringArrayMultiValueMap.java',
-        'M3SpringMultiValueMap.java',
+        "M3ApacheBag.java",
+        "M3ApacheBidiMap.java",
+        "M3ApacheCollections.java",
+        "M3ApacheListValuedMap.java",
+        "M3ApacheMultiSet.java",
+        "M3ApacheSetValuedMap.java",
+        "M3BiMap.java",
+        "M3BiMaps.java",
+        "M3EclipseBag.java",
+        "M3EclipseBagMultimap.java",
+        "M3EclipseListMultimap.java",
+        "M3EclipseSetMultimap.java",
+        "M3FiveFamilyPreparedSelection.java",
+        "M3FiveLibraryIndexViews.java",
+        "M3FiveLibraryKeyRanges.java",
+        "M3FiveLibraryPreparedRows.java",
+        "M3FiveListFamilies.java",
+        "M3FiveProviderFlagSelection.java",
+        "M3FiveProviderKeyGroups.java",
+        "M3GuavaBiMap.java",
+        "M3GuavaClassToInstanceMaps.java",
+        "M3GuavaListMultimap.java",
+        "M3GuavaMultiset.java",
+        "M3GuavaRowSortedTable.java",
+        "M3GuavaSetMultimap.java",
+        "M3LibraryBinding.java",
+        "M3LibraryBindings.java",
+        "M3LibraryCollections.java",
+        "M3LibraryCollectors.java",
+        "M3SpringArrayMultiValueMap.java",
+        "M3SpringCaseInsensitiveMap.java",
+        "M3SpringMultiValueMap.java",
     )
 ] + [
     TEST + name for name in (
-        'M3ApacheBagContractTest.java',
-        'M3ApacheBidiMapContractTest.java',
-        'M3ApacheCollectionsTest.java',
-        'M3BiMapTest.java',
-        'M3CountedProviderContractTest.java',
-        'M3EclipseListMultimapSelfTest.java',
-        'M3EclipseMultimapTest.java',
-        'M3EclipseSetMultimapSelfTest.java',
-        'M3FiveLibraryIndexViewsTest.java',
-        'M3FiveLibraryInteropContractTest.java',
-        'M3GuavaBiMapContractTest.java',
-        'M3GuavaBiMapSelfTest.java',
-        'M3LibraryBindingsSelfTest.java',
-        'M3LibraryClosureTest.java',
-        'M3LibraryCollectionsTest.java',
-        'M3SdkFamiliesTest.java',
-        'M3SpringArrayContractTest.java',
+        "M3ApacheBagContractTest.java",
+        "M3ApacheBidiMapContractTest.java",
+        "M3ApacheCollectionsTest.java",
+        "M3BiMapTest.java",
+        "M3CountedProviderContractTest.java",
+        "M3EclipseBagMultimapSelfTest.java",
+        "M3EclipseBagMultimapTest.java",
+        "M3EclipseListMultimapSelfTest.java",
+        "M3EclipseMultimapTest.java",
+        "M3EclipseSetMultimapSelfTest.java",
+        "M3FiveFamilyPreparedSelectionSelfTest.java",
+        "M3FiveFamilyPreparedSelectionTest.java",
+        "M3FiveLibraryArrayificationTest.java",
+        "M3FiveLibraryExpandedContractsTest.java",
+        "M3FiveLibraryIndexViewsTest.java",
+        "M3FiveLibraryInteropContractTest.java",
+        "M3FiveLibraryKeyRangesTest.java",
+        "M3FiveLibraryPreparedRowsTest.java",
+        "M3FiveLibraryState32Test.java",
+        "M3FiveListFamiliesContract.java",
+        "M3FiveListFamiliesTest.java",
+        "M3FiveProviderBagContractTest.java",
+        "M3FiveProviderCountSharingRegressionTest.java",
+        "M3FiveProviderFlagSelectionTest.java",
+        "M3FiveProviderKeyGroupClosureTest.java",
+        "M3FiveProviderKeyGroupsTest.java",
+        "M3GuavaBiMapContractTest.java",
+        "M3GuavaBiMapSelfTest.java",
+        "M3GuavaClassToInstanceMapsSelfTest.java",
+        "M3GuavaClassToInstanceMapsTest.java",
+        "M3GuavaListMultimapContract.java",
+        "M3GuavaListMultimapRealTest.java",
+        "M3GuavaRowSortedTableContract.java",
+        "M3GuavaRowSortedTableTest.java",
+        "M3GuavaSetMultimapTest.java",
+        "M3LibraryBindingsSelfTest.java",
+        "M3LibraryClosureTest.java",
+        "M3LibraryCollectionsTest.java",
+        "M3ObjectStreamProviderContractTest.java",
+        "M3SdkFamiliesTest.java",
+        "M3SpringArrayContractTest.java",
+        "M3SpringCaseInsensitiveContract.java",
+        "M3SpringCaseInsensitiveSdkFactoryTest.java",
+        "M3SpringCaseInsensitiveTest.java",
     )
 ]))
+
+CHANGED_FROM_PREDECESSOR = frozenset((
+    MAIN + "M3ApacheMultiSet.java",
+    MAIN + "M3FiveLibraryIndexViews.java",
+    MAIN + "M3GuavaMultiset.java",
+    MAIN + "M3LibraryCollections.java",
+    TEST + "M3ApacheCollectionsTest.java",
+    TEST + "M3LibraryBindingsSelfTest.java",
+    TEST + "M3LibraryCollectionsTest.java",
+    TEST + "M3SdkFamiliesTest.java",
+))
 
 
 def sha256(data):
@@ -85,6 +138,43 @@ def rows(path, width):
         raise ValueError('duplicate source path in ' + str(path))
     return result
 
+def predecessor_rows(path=PREDECESSOR, expected_sha=PREDECESSOR_SHA256):
+    path = Path(path)
+    if path.is_symlink() or not path.is_file() or sha256(path.read_bytes()) != expected_sha:
+        raise ValueError('drifted, missing or aliased predecessor source receipt')
+    saved = rows(path, 4)
+    if len(saved) != 36 or [r[0] for r in saved] != sorted(r[0] for r in saved):
+        raise ValueError('predecessor source census shape changed')
+    return saved
+
+
+def verify_lineage(previous, current):
+    if len(previous) != 36 or len(current) != 76:
+        raise ValueError('unsupported source census chronology')
+    prior = {r[0]: r for r in previous}
+    successor = {r[0]: r for r in current}
+    if (len(prior) != 36 or len(successor) != 76
+            or not set(prior).issubset(successor)
+            or set(successor) != set(ALLOWED_PATHS)):
+        raise ValueError('lost, duplicate or unadmitted source in successor')
+    changed = set()
+    for path, before, after, blob in current:
+        historical = prior.get(path)
+        if historical is None:
+            if before != 'ABSENT':
+                raise ValueError('new source has non-ABSENT predecessor: ' + path)
+        elif (after, blob) == (historical[2], historical[3]):
+            if before != historical[1]:
+                raise ValueError('unchanged source predecessor drift: ' + path)
+        else:
+            if path not in CHANGED_FROM_PREDECESSOR or before != historical[2]:
+                raise ValueError('unapproved source history change: ' + path)
+            changed.add(path)
+    if changed != CHANGED_FROM_PREDECESSOR:
+        raise ValueError('incomplete pinned successor change set')
+    return len(successor)
+
+
 def verify(root=ROOT, census=CENSUS, legacy=LEGACY,
            receipt_sha=RECEIPT_SHA256, legacy_blob=LEGACY_GIT_BLOB,
            check_tracked=True):
@@ -106,6 +196,15 @@ def verify(root=ROOT, census=CENSUS, legacy=LEGACY,
     if len(current) != len(ALLOWED_PATHS) or tuple(r[0] for r in current) != ALLOWED_PATHS:
         raise ValueError('current interop file census not exact/reordered')
     if check_tracked:
+        predecessor = predecessor_rows()
+        before = {r[0]: r for r in predecessor}
+        for path, _, sealed_sha, _ in previous:
+            historical = before.get(path)
+            if historical is None or historical[1] != sealed_sha:
+                raise ValueError('historical five-file predecessor lost: ' + path)
+            if path != MAIN + 'M3LibraryCollections.java' and historical[2] != sealed_sha:
+                raise ValueError('historical five-file implementation changed: ' + path)
+        verify_lineage(predecessor, current)
         tracked = set(subprocess.check_output(
             ['git', 'ls-files', '--', BASE + 'main', BASE + 'test'],
             cwd=root, text=True).splitlines())
@@ -114,12 +213,17 @@ def verify(root=ROOT, census=CENSUS, legacy=LEGACY,
                              repr(sorted(tracked ^ set(ALLOWED_PATHS))))
     report = []
     for path, before, after, blob in current:
-        if ((before != old[path] if path in old else before != 'ABSENT')
-                or len(after) != 64 or any(v not in '0123456789abcdef' for v in after)
-                or len(blob) != 40 or any(v not in '0123456789abcdef' for v in blob)):
+        if ((before != 'ABSENT' and (len(before) != 64
+                or any(d not in '0123456789abcdef' for d in before)))
+                or len(after) != 64 or any(d not in '0123456789abcdef' for d in after)
+                or len(blob) != 40 or any(d not in '0123456789abcdef' for d in blob)):
             raise ValueError('invalid exact predecessor/current identity: ' + path)
-        if path in old and path != MAIN + 'M3LibraryCollections.java' and after != old[path]:
-            raise ValueError('changed unapproved historical implementation: ' + path)
+        if not check_tracked:
+            if path in old and before != old[path]:
+                raise ValueError('changed unapproved historical predecessor: ' + path)
+            if (path in old and path != MAIN + 'M3LibraryCollections.java'
+                    and after != old[path]):
+                raise ValueError('changed unapproved historical implementation: ' + path)
         source = root / path
         if source.is_symlink() or not source.is_file():
             raise ValueError('missing or aliased current source: ' + path)
