@@ -10,12 +10,15 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Queue;
+import java.util.SplittableRandom;
 
 /**
  * Differential proof for the historical binary/serialized owner and the
@@ -55,8 +58,175 @@ public final class M3EvictingQueueCanonicalContractProbe {
         require(!new String(after.wire(), StandardCharsets.ISO_8859_1).contains(LEGACY),
                 "canonical stream unexpectedly contains legacy Java class name");
 
+        long steps = runSeededQueueModel(legacy) + runSeededQueueModel(canonical);
         System.out.println("M3_EVICTING_CANONICAL_NAME_PASS normalized_wire_sha256="
-                + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(normalized)));
+                + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(normalized))
+                + " randomized_model_steps=" + steps);
+    }
+
+    /**
+     * Independent JDK deque oracle: no implementation reflection, no reuse of M3
+     * ring offsets, masks, or removal algorithms in the expected-state model.
+     * Fixed seeds make a failure repeatable on Java 21 and across platforms.
+     */
+    private static long runSeededQueueModel(Class<?> owner) throws Exception {
+        int[] capacities = {0, 1, 2, 3, 7, 31};
+        long[] seeds = {0x63716c2d6d3321L, 0x6c656761637921L, 0x7fffffffffffffffL};
+        long steps = 0;
+        for (int capacity : capacities) {
+            for (long seed : seeds) {
+                SplittableRandom random = new SplittableRandom(seed);
+                Queue<String> actual = create(owner, capacity);
+                ArrayDeque<String> expected = new ArrayDeque<>();
+                for (int step = 0; step < 15_000; step++) {
+                    int operation = random.nextInt(16);
+                    String value = "v" + random.nextInt(19);
+                    switch (operation) {
+                        case 0 -> {
+                            require(actual.add(value), "add returned false");
+                            appendBounded(expected, value, capacity);
+                        }
+                        case 1 -> {
+                            require(actual.offer(value), "offer returned false");
+                            appendBounded(expected, value, capacity);
+                        }
+                        case 2 -> require(java.util.Objects.equals(actual.poll(), expected.poll()),
+                                "poll differed");
+                        case 3 -> require(java.util.Objects.equals(actual.peek(), expected.peek()),
+                                "peek differed");
+                        case 4 -> require(actual.contains(value) == expected.contains(value),
+                                "contains differed");
+                        case 5 -> require(actual.remove(value) == expected.remove(value),
+                                "remove(Object) differed");
+                        case 6 -> {
+                            actual.clear();
+                            expected.clear();
+                        }
+                        case 7 -> {
+                            ArrayList<String> batch = new ArrayList<>();
+                            for (int index = random.nextInt(0, capacity + 5); index > 0; index--) {
+                                batch.add("b" + random.nextInt(11));
+                            }
+                            boolean changed = actual.addAll(batch);
+                            for (String item : batch) appendBounded(expected, item, capacity);
+                            require(changed == (!batch.isEmpty() && capacity > 0),
+                                    "addAll changed contract differed");
+                        }
+                        case 8 -> {
+                            boolean a = actual.removeIf(item -> item.endsWith("3") || item.endsWith("7"));
+                            boolean b = expected.removeIf(item -> item.endsWith("3") || item.endsWith("7"));
+                            require(a == b, "removeIf differed");
+                        }
+                        case 9 -> {
+                            List<String> keep = List.of(value, "b2", "v0");
+                            require(actual.retainAll(keep) == expected.retainAll(keep),
+                                    "retainAll differed");
+                        }
+                        case 10 -> {
+                            List<String> drop = List.of(value, "b2", "v0");
+                            require(actual.removeAll(drop) == expected.removeAll(drop),
+                                    "removeAll differed");
+                        }
+                        case 11 -> {
+                            if (!expected.isEmpty()) {
+                                int index = random.nextInt(expected.size());
+                                Iterator<String> a = actual.iterator();
+                                Iterator<String> b = expected.iterator();
+                                for (int position = 0; position <= index; position++) {
+                                    require(a.next().equals(b.next()), "iterator traversal differed");
+                                }
+                                a.remove();
+                                b.remove();
+                            }
+                        }
+                        case 12 -> {
+                            Iterator<String> a = actual.iterator();
+                            Iterator<String> b = expected.iterator();
+                            int index = 0;
+                            while (b.hasNext()) {
+                                require(a.hasNext(), "M3 iterator ended early");
+                                require(a.next().equals(b.next()), "iterator element differed");
+                                if ((index++ & 1) == 0) {
+                                    a.remove();
+                                    b.remove();
+                                }
+                            }
+                            require(!a.hasNext(), "M3 iterator ended late");
+                        }
+                        case 13 -> {
+                            Iterator<String> a = actual.iterator();
+                            Iterator<String> b = expected.iterator();
+                            if (b.hasNext() && random.nextBoolean()) {
+                                require(a.next().equals(b.next()), "prefix traversal differed");
+                            }
+                            ArrayList<String> left = new ArrayList<>();
+                            ArrayList<String> right = new ArrayList<>();
+                            a.forEachRemaining(left::add);
+                            b.forEachRemaining(right::add);
+                            require(left.equals(right), "iterator.forEachRemaining differed");
+                        }
+                        case 14 -> {
+                            String[] a = new String[actual.size() + 2];
+                            String[] b = new String[expected.size() + 2];
+                            Arrays.fill(a, "sentinel");
+                            Arrays.fill(b, "sentinel");
+                            require(Arrays.equals(actual.toArray(a), expected.toArray(b)),
+                                    "oversized typed toArray differed");
+                        }
+                        case 15 -> {
+                            if (expected.isEmpty()) {
+                                try {
+                                    actual.element();
+                                    throw new AssertionError("element on empty queue succeeded");
+                                } catch (NoSuchElementException correct) {
+                                    // JDK Queue's empty-element exception contract.
+                                }
+                            } else {
+                                require(actual.element().equals(expected.element()),
+                                        "element differed");
+                                if (random.nextBoolean()) {
+                                    require(actual.remove().equals(expected.remove()),
+                                            "remove() differed");
+                                }
+                            }
+                        }
+                        default -> throw new AssertionError("unknown model operation");
+                    }
+                    assertModeledState(owner, capacity, seed, step, operation, actual, expected);
+                    if ((step & 2047) == 2047) {
+                        Queue<?> recovered = (Queue<?>) deserialize(serialize(actual));
+                        require(recovered.getClass() == owner, "randomized serialization identity differed");
+                        require(Arrays.equals(recovered.toArray(), expected.toArray()),
+                                "randomized serialization contents differed");
+                    }
+                    steps++;
+                }
+            }
+        }
+        return steps;
+    }
+
+    private static void appendBounded(ArrayDeque<String> deque, String value, int capacity) {
+        if (capacity == 0) return;
+        if (deque.size() == capacity) deque.removeFirst();
+        deque.addLast(value);
+    }
+
+    private static void assertModeledState(Class<?> owner, int capacity, long seed,
+            int step, int operation, Queue<String> actual, ArrayDeque<String> expected)
+            throws Exception {
+        Object[] a = actual.toArray();
+        Object[] b = expected.toArray();
+        if (!Arrays.equals(a, b)) {
+            throw new AssertionError(owner.getSimpleName() + " cap=" + capacity
+                    + " seed=" + seed + " step=" + step + " operation=" + operation
+                    + " actual=" + Arrays.toString(a) + " oracle=" + Arrays.toString(b));
+        }
+        require(actual.size() == expected.size(), "size differed");
+        require(actual.isEmpty() == expected.isEmpty(), "isEmpty differed");
+        require(actual.toString().equals(expected.toString()), "toString differed");
+        int remaining = (Integer) owner.getMethod("remainingCapacity").invoke(actual);
+        require(remaining == capacity - expected.size(), "remainingCapacity differed");
     }
 
     private static Evidence examine(Class<?> owner) throws Exception {
