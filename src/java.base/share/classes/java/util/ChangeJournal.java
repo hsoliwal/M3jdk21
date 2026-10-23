@@ -180,6 +180,9 @@ public final class ChangeJournal {
      * A stale cursor is rejected even for zero-length requests. No model element
      * or per-change wrapper is retained beyond the batch's six compact lanes.
      *
+     * @param afterVersion the version of the last change already processed
+     * @param maxChanges the maximum number of consecutive changes to copy
+     * @return an immutable batch of up to the requested number of changes
      * @throws IllegalArgumentException if the cursor or bound is invalid
      * @throws IllegalStateException if the requested history was overwritten
      */
