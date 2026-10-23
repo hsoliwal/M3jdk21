@@ -463,4 +463,15 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             return n;
         }
     }
+
+        M3TreeMap<K, V> rangeOrNull(K key, boolean forward, boolean inclusive) {
+            if (!endpointAdmitted(key, inclusive)) { return null; }
+            return forward ? tailRange(key, inclusive) : headRange(key, inclusive);
+        }
+
+        int nearIndexedSlot(K key, int relation) { return near(key, relation); }
+
+        int previousIndexedSlot(int slot) {
+            int s = tree.step(slot, !descending); return slotWithin(s) ? s : -1;
+        }
 }
