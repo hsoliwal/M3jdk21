@@ -1,0 +1,4 @@
+--patch-module
+com.m3.arrays=_
+--add-reads
+com.m3.arrays=ALL-UNNAMED
