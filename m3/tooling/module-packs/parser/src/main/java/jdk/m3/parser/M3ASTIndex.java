@@ -43,6 +43,8 @@ public final class M3ASTIndex {
     /** The external source owner could not be verified against the original AST. */
     public static final int SOURCE_UNVERIFIED = 4;
     public static final int RECOVERED = 8;
+    /** Resolved from original javac declaration modifiers only; never inferred from spelling. */
+    public static final int STATIC = 16, FINAL = 32, INTERFACE = 64;
     private final M3File source;
     private final Domain domain;
     private final String[] names;
@@ -312,6 +314,10 @@ public final class M3ASTIndex {
         private String[] nodeNames, literalValues;
         private int size;
         private boolean sealed;
+        private int[] semantic;
+        private String[] semanticValues;
+        private Map<String, Integer> semanticDictionary;
+        private int semanticCount;
 
         private Builder(M3File source, Domain domain, int maxNodes) {
             this.source = Objects.requireNonNull(source, "source");
@@ -336,7 +342,8 @@ public final class M3ASTIndex {
                     || (start >= 0 && end >= start && end <= source.length()))) {
                 throw new IllegalArgumentException("invalid UTF-16 half-open AST range");
             }
-            if ((flags & ~(EXACT_RANGE | SYNTAX_ONLY | SOURCE_UNVERIFIED | RECOVERED)) != 0) {
+            if ((flags & ~(EXACT_RANGE | SYNTAX_ONLY | SOURCE_UNVERIFIED | RECOVERED
+                    | STATIC | FINAL | INTERFACE)) != 0) {
                 throw new IllegalArgumentException("unknown AST index flags");
             }
             if ((flags & EXACT_RANGE) != 0 && start == NO_RANGE) {
@@ -362,6 +369,33 @@ public final class M3ASTIndex {
                 childCounts[parent]++;
             }
             return row;
+        }
+
+        /** Attach original javac simple-name or literal metadata without retaining compiler nodes. */
+        public void annotate(int node, String name, String literal) {
+            if (sealed) throw new IllegalStateException("index already sealed");
+            Objects.checkIndex(node, size);
+            if ((name == null) == (literal == null)) {
+                throw new IllegalArgumentException("exactly one identifier or literal required");
+            }
+            if (semantic == null) semantic = new int[kinds.length];
+            if (semantic[node] != 0) throw new IllegalStateException("node already annotated");
+            String value = name == null ? literal : name;
+            if (value.length() > 1_048_576) throw new IllegalArgumentException("semantic literal too large");
+            if (semanticDictionary == null) {
+                semanticDictionary = new HashMap<>();
+                semanticValues = new String[16];
+            }
+            Integer id = semanticDictionary.get(value);
+            if (id == null) {
+                if (semanticCount == 1_000_000) throw new IllegalArgumentException("semantic dictionary budget");
+                id = semanticCount++;
+                if (id == semanticValues.length)
+                    semanticValues = Arrays.copyOf(semanticValues, semanticValues.length * 2);
+                semanticValues[id] = value;
+                semanticDictionary.put(value, id);
+            }
+            semantic[node] = name == null ? -(id + 1) : id + 1;
         }
 
         /** Complete a previously unknown block/source range, before publication. */

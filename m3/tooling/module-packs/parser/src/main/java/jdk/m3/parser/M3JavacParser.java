@@ -16,6 +16,58 @@ import java.util.function.Consumer;
 public final class M3JavacParser {
     private M3JavacParser() { }
 
+    /*
+     * A shared key lets independent Maven, Gradle, JDT-bridge and bug-finder
+     * consumers request the same detached primitive index per PARSE event.
+     * They do not create another parser or attribute another source generation.
+     */
+    private static final M3AST.Projection<M3ASTIndex> DEFAULT_INDEX =
+            new M3AST.Projection<>("jdk.m3.parser.javac.index.default",
+                    unit -> index(unit, M3ASTIngress.Limits.defaults()));
+
+    /** Reuse this exact key across consumers of one original compilation task. */
+    public static M3AST.Projection<M3ASTIndex> indexProjection() {
+        return DEFAULT_INDEX;
+    }
+
+    /** A caller-owned, bounded index projection for non-default limits. */
+    public static M3AST.Projection<M3ASTIndex> indexProjection(M3ASTIngress.Limits limits) {
+        Objects.requireNonNull(limits, "limits");
+        if (limits.equals(M3ASTIngress.Limits.defaults())) return DEFAULT_INDEX;
+        return new M3AST.Projection<>("jdk.m3.parser.javac.index.scoped",
+                unit -> index(unit, limits));
+    }
+
+    /** Attach a projection to the original javac task; no new compiler is created. */
+    public static M3AST attachIndex(JavacTask task,
+            M3AST.Projection<M3ASTIndex> projection,
+            Consumer<? super M3ASTIndex> consumer) {
+        Objects.requireNonNull(task, "task");
+        Objects.requireNonNull(projection, "projection");
+        Objects.requireNonNull(consumer, "consumer");
+        M3AST session = M3AST.open(task, true);
+        session.addConsumer(new M3AST.Consumer() {
+            @Override public void parsed(M3AST.Unit unit) throws Exception {
+                consumer.accept(unit.project(projection));
+            }
+        });
+        return session;
+    }
+
+    private static M3ASTIndex index(M3AST.Unit unit, M3ASTIngress.Limits limits)
+            throws Exception {
+        if (unit.phase() != M3AST.Phase.PARSED) {
+            throw new IllegalArgumentException("original javac PARSED event required");
+        }
+        M3AST.Source snapshot = unit.source();
+        M3File file = M3File.of(snapshot.uri(), snapshot.text());
+        if (!file.utf16Sha256().equals(snapshot.utf16Sha256())) {
+            throw new IllegalStateException("original compiler source-generation seal mismatch");
+        }
+        return M3ASTIngress.javac(file, unit.tree(), unit.trees(), snapshot.text(), limits);
+    }
+
+
     /**
      * Create a caller-owned operation identity. Reuse this exact instance across
      * consumers to obtain one projection per event from the existing M3AST cache.
