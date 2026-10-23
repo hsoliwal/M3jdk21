@@ -100,6 +100,13 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Build source-vendored JUnit 5.10.2 dependency closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
+          test -s "$HOME/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.jar"
       - name: Run owning filtered collection Maven reactor and JUnit contracts
         shell: bash
         run: |
