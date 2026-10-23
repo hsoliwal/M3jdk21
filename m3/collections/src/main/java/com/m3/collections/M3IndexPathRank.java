@@ -275,7 +275,7 @@ public final class M3IndexPathRank {
                 while (bits != 0 && copied < count) {
                     int sourceOrdinal =
                             (wordIndex << 6) + Long.numberOfTrailingZeros(bits);
-                    output[outputOffset + copied++] = owner.rows[sourceOrdinal];
+                    output[outputOffset + copied++] = owner.rowIdAt(sourceOrdinal);
                     bits &= bits - 1;
                 }
             }
