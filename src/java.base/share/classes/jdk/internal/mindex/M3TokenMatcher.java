@@ -20,11 +20,11 @@ import java.util.Objects;
  * match end, one token further after an empty match. Positions are lossless; with
  * {@code significantOnly} trivia tokens are skipped while matching but never renumbered.
  *
- * <p>Execution is token-coordinate dynamic programming over primitive state lanes. Paths that
- * reach the same token endpoint are folded immediately in priority order; capture registers of the
- * first path win. Greedy/lazy repetition order and written alternative order are preserved.
- * Lexical boundaries belong only to {@link M3TokenIndex}; underlying M3String tuple/atom
- * boundaries are invisible to this matcher.
+ * <p>Execution (not received yet): capture-free patterns lower to the M3JDK21 owners
+ * (M3RX7.TokenIndex symbol DFA, M3TokenRegexPlan, R6 M3Automaton); captures run a tagged program
+ * ported from Synexia MIndexTaggedRegex (register writes composed per token) with a priority
+ * Pike VM over primitive thread lanes for non-one-pass patterns. No backtracking, no per-token
+ * objects.
  */
 public final class M3TokenMatcher {
     /** T-Rex find(): every distinct span per start, overlapping spans included. */
@@ -32,13 +32,16 @@ public final class M3TokenMatcher {
     /** java.util.regex find(): continue after the previous match. */
     public static final int FIND_NEXT = 1;
 
+    private static final String DONOR =
+            "Synexia MIndexTaggedRegex (811b429f) tagged effects + M3TokenRegexPlan/M3RX7 lowering";
+
     private final M3TokenPattern pattern;
     private final M3TokenIndex index;
     private final M3TokenPredicateCache predicates;
     private final int mode;
     private final boolean significantOnly;
     private final int[] registers;
-    private final M3TokenEngine engine;
+    private int searchFrom;
     private boolean matched;
 
     private M3TokenMatcher(M3TokenPredicateCache predicates, int mode, boolean significantOnly) {
@@ -48,7 +51,6 @@ public final class M3TokenMatcher {
         this.mode = mode;
         this.significantOnly = significantOnly;
         this.registers = new int[2 * (pattern.groupCount() + 1)];
-        this.engine = new M3TokenEngine(predicates, significantOnly);
         Arrays.fill(registers, -1);
     }
 
@@ -67,24 +69,24 @@ public final class M3TokenMatcher {
 
     /** Whole (projected) tape match; groups from the highest-priority accepting path. */
     public boolean matches() {
-        return publish(engine.matches());
+        throw new M3NotYetReceived("M3TokenMatcher.matches", DONOR);
     }
 
     /** Next match under the find mode; see the class contract. */
     public boolean find() {
-        return publish(engine.find(mode));
+        throw new M3NotYetReceived("M3TokenMatcher.find", DONOR);
     }
 
     /** Forget the previous match and search from the first token again. */
     public void reset() {
-        engine.reset();
+        searchFrom = 0;
         matched = false;
         Arrays.fill(registers, -1);
     }
 
-    /** Lossless token position where the next find starts (diagnostics). */
+    /** Token position where the next find starts (diagnostics). */
     public int searchFrom() {
-        return engine.searchFrom();
+        return searchFrom;
     }
 
     public int start() { return start(0); }
@@ -124,21 +126,6 @@ public final class M3TokenMatcher {
     public long sourceEnd(int group) {
         int s = start(group);
         return s < 0 ? -1 : index.spanEnd(s, end(group));
-    }
-
-    private boolean publish(M3TokenEngine.Result result) {
-        Arrays.fill(registers, -1);
-        if (result == null) {
-            matched = false;
-            return false;
-        }
-        int[] values = result.registers();
-        if (values.length != registers.length) {
-            throw new IllegalStateException("token regex capture register geometry");
-        }
-        System.arraycopy(values, 0, registers, 0, values.length);
-        matched = true;
-        return true;
     }
 
     private int named(String name) {

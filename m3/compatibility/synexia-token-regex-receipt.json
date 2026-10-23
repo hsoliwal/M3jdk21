@@ -1,0 +1,117 @@
+{
+  "schema": "M3JDK21_SYNEXIA_TOKEN_REGEX_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0 (first-party headers, as M3RX7 in jdk.internal.mindex)",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-token-regex-20261018",
+    "pullRequest": 12396,
+    "commit": "d83afc946b8ff7eee3305ac74832164b835bc0de",
+    "base": "refs/m3run/synexia-develop-20261017 = 11c94feb18155a53cc213708c353791132edc4a7",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.TokenRegex",
+    "crate": "m3-token-regex",
+    "fossReuseDecisionRow": "crates/m3-string-consumers/token-regex/FOSS_REUSE_DECISION.tsv (15 rows)",
+    "donors": [
+      {
+        "path": "square/t-rex src/main/antlr/com/squareup/trex/TRex.g4",
+        "blob": "a431e7c865739be30e4bdade61fce70ca31d3051",
+        "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+        "target": "jdk.internal.mindex.M3TokenPattern",
+        "mechanics": "PORT of the grammar as a specification: hand-written recursive-descent parser, no ANTLR runtime, no T-Rex code; pattern-level | right-branching, token-body & | left-branching with equal precedence"
+      },
+      {
+        "path": "square/t-rex src/main/java/com/squareup/trex/Matcher.java + SequencePattern.java + src/test/java/com/squareup/trex/MatcherTest.java",
+        "blob": "aa625278e7ba8c8305fda30e75342ed1326f201a / 4dc911a0 / 7fb8b0ba",
+        "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+        "target": "jdk.internal.mindex.M3TokenMatcher + test/jdk/jdk/internal/mindex/M3TokenRegexTest",
+        "mechanics": "PORT_PATTERN of the capture policy (last span, greedy longest-first, reluctant shortest-first, find enumerates distinct spans per start); TRANSPILE of reference spans"
+      },
+      {
+        "path": "instituutnederlandsetaal/BlackLab engine/src/main/java/nl/inl/blacklab/search/fimatch/NfaStateToken.java",
+        "blob": "0e0dee357f9483438febad83fd9f8c9b7e0323de",
+        "commit": "0f8c3bac68fe082e6b727d973dde652a0e156c49",
+        "target": "jdk.internal.mindex.M3TokenPredicateCache",
+        "mechanics": "ADAPT pattern: per-state accepted term set becomes lexeme-id mask words; Eclipse Collections MutableIntSet not admitted"
+      },
+      {
+        "path": "hsoliwal/com.synexia synexia-indexstring/src/main/java/com/synexia/indexstring/projection/MIndexTaggedRegex.java",
+        "blob": "811b429f381917d33ed1a0960fde9f9ef1aa1b94",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "jdk.internal.mindex.M3TokenMatcher (captures)",
+        "mechanics": "PENDING PORT: tagged register writes composed per token; bodies throw M3NotYetReceived"
+      }
+    ],
+    "license": "first-party Synexia/M3 (Apache-2.0); third-party donors are specification or pattern only",
+    "disposition": "TARGET_OWNED_PORT scaffold: parser, lanes and predicate table real; match bodies pending by design"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "refs/m3run/m3jdk21-master-20261017 = 970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "branch": "m3/token-regex-20261018",
+    "ownerCommit": "00eedf4329e2b1a411eaaf32b4a4516f50dca0de",
+    "owners": [
+      "jdk.internal.mindex.M3NotYetReceived",
+      "jdk.internal.mindex.M3TokenIndex",
+      "jdk.internal.mindex.M3TokenMatcher",
+      "jdk.internal.mindex.M3TokenPattern",
+      "jdk.internal.mindex.M3TokenPredicateCache"
+    ],
+    "publicJdkApiChange": false,
+    "relatedFleet": "M3JDK21 #1338 (M3RX7.prepareTokenIndex spelling rows), #1378 (symbol DFA), #1380 (M3TokenRegexPlan): lowering targets, not modified here"
+  },
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "before": "ABSENT",
+      "after": "ba5802a1b93b714e42e9770b398b4b51458d17d4d8e3b033a52ba3c5418f59f2",
+      "resource": "hash-pinned-java/00-M3NotYetReceived.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenIndex.java",
+      "before": "ABSENT",
+      "after": "606ca90bece15f486485fbc6749ed50ccdf6bcb3f18bdfd5b26784c4f4b0fb16",
+      "resource": "hash-pinned-java/01-M3TokenIndex.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenMatcher.java",
+      "before": "ABSENT",
+      "after": "6683641031307ae219d22cf5be0312bd2f6e71d63146a6902e6deff36e27bc2e",
+      "resource": "hash-pinned-java/02-M3TokenMatcher.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPattern.java",
+      "before": "ABSENT",
+      "after": "d9e28e0b40adcdf518bc91c4bd9500051b34699a6e9a940b6c43f1498bb5ff45",
+      "resource": "hash-pinned-java/03-M3TokenPattern.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+      "before": "ABSENT",
+      "after": "1ff8bfead87ca62c84bf3fc2b96be4f6cac03bb433e04c6357131d2bf318b680",
+      "resource": "hash-pinned-java/04-M3TokenPredicateCache.java.txt"
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3TokenRegexTest.java",
+      "before": "ABSENT",
+      "after": "ba73e9c57b32f4878a835d2717f74d1b09e6610de86d1f5664d271bf0a633f1a",
+      "resource": "hash-pinned-java/05-M3TokenRegexTest.java.txt"
+    }
+  ],
+  "gates": {
+    "apply": "PASS_WINDOWS six ABSENT targets installed by byte copy of the hash-pinned postimages; sha256 of every installed file equals the manifest after_sha256",
+    "g7PatchModuleCompile": "PASS_WINDOWS javac (host JDK 21) -Xlint:all -Werror --patch-module java.base over the five owners, test compiled with --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED (log sha256 4d145d98b3b6b7444986e1079526835cf8f5351b2f2b40bb655f313c70a0b048); the target module-info.class produced in the patch output is ignored at runtime",
+    "jtregBodyLocal": "PASS_WINDOWS M3TokenRegexTest run directly against the patched module: 115 checks, 7 matcher cases pending (M3NotYetReceived by design)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3TokenRegexRecipeTest 2/2 (mvn log sha256 ca304a7df3c5c24a0aec8472728777b379f65ae05ef1e07fb68880c2ac169d02)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jtregLinux": "PENDING_LINUX (test/jdk/jdk/internal/mindex/M3TokenRegexTest on the built JDK)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "storage atoms never introduce lexical boundaries: the token index is the only boundary owner and the source is read in place (charAt over the span), never joined or copied",
+    "exact text: lexeme-id compare when both sides are lexicon words; a token outside the lexicon compares its source span; CASE_INSENSITIVE folds per char with toLowerCase(toUpperCase(c))",
+    "occurrence predicates (binding, attribute columns, flags) are evaluated at the token and never cached by spelling",
+    "regex-on-spelling rows and every match body throw M3NotYetReceived naming their donor; unsupported syntax (pattern-level &, $VAR, (?$name ...)) is refused with PatternSyntaxException, never approximated",
+    "no timing or runtime claim; Linux jtreg and the hosted build remain pending"
+  ]
+}
