@@ -15,7 +15,9 @@
     "atom": "M3ArrayList.removeIf decision mask",
     "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-arraylist-dual-word-20261023/manifest.tsv",
     "build_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-junit-resolve-20261023.yml",
-    "syntax_bootstrap_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-longtree-seed-syntax-20261023.yml"
+    "syntax_bootstrap_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-longtree-seed-syntax-20261023.yml",
+    "tree_recipe": "com.synexia.rewrite.M3TreeWindowShiftBoundaryRecipe",
+    "tree_crate": "m3-tree-window-shift-boundary-20261023"
   },
   "files": [
     {
@@ -49,6 +51,22 @@
       "preimage_sha256": "7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25",
       "postimage_sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
       "role": "one_character_java21_test_syntax_postimage"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+      "preimage_git_blob_sha1": "f4f064f370a38bd8363b1e6309e4b151fb987b1c",
+      "postimage_git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+      "preimage_sha256": "837aeb592e797902f9c50bcdbf4f85db3f9dbf97ee7537b5d6e85a9fa4a4e41a",
+      "postimage_sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
+      "role": "atomic_tree_sibling_key_validation_postimage"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java",
+      "preimage_git_blob_sha1": "6733286d3153899ab2566b7ab0396e9de391720c",
+      "postimage_git_blob_sha1": "9aa583324d9ba144c6b3692dcb4dfc423b9174fc",
+      "preimage_sha256": "7d856bb61fc64be86ab5442e21c5f60d77526e6e7059d10863ff3d3e3c1eecc1",
+      "postimage_sha256": "91aff0d97913138fd0b60e482c98ab052fff695d4581aa8c480da7a7698303a7",
+      "role": "negative_and_overflow_atomic_refusal_regression"
     }
   ],
   "algorithm": {
@@ -121,6 +139,26 @@
       "corrected_token": "0x4D33534F52544C -> 0x4D33534F52544CL",
       "status": "PENDING_NEW_TARGET_CI",
       "semantics": "same positive integral value; no algorithm mutation"
+    },
+    "full_collections_maven": {
+      "baseline_ci_run": "39962398436",
+      "status": "FAILED_ONE_CONTRACT_TEST",
+      "tests_run": 601,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 2,
+      "description": "M3TreeCoverageTest.siblingShiftsRewriteOnlyMatchingKeys expected 'negative child index', got 'shifted child index outside int range'; source-sealed error branch and atomicity oracle now received; rerun required",
+      "requalification": "PENDING_CI"
+    },
+    "tree_window_index_shift": {
+      "status": "PENDING_CI",
+      "preserves": [
+        "preflight all affected keys before mutation",
+        "same native row handles on rejected negative shift",
+        "same native row handles on rejected positive overflow",
+        "unchanged public signatures and JNI symbols"
+      ],
+      "scope": "One implementation and one existing JUnit coverage test, exact SHA-256/Git blob postimages"
     }
   },
   "admission": {
@@ -138,8 +176,8 @@
   ],
   "catalogue": {
     "path": "m3/collections/algorithm-catalog/arraylist-dual-word-mask-20261023.tsv",
-    "git_blob_sha1": "749485fba4a394cb6ecf4298021d3ca4e1ee0c4d",
-    "category_count": 10,
+    "git_blob_sha1": "75db7ab053383308a57ade18e1ea9ea38467ddbf",
+    "category_count": 11,
     "source_owner_sha256_corrected": true
   },
   "unchanged_native_sources": [
