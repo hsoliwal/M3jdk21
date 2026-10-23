@@ -1,0 +1,27 @@
+{
+  "schema": "M3_CANONICAL_RECEIVER_PUBLICATION_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "1124f5b72744b306884beedebafd8558d49d4c4c",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12403",
+  "recipe": "com.synexia.m3.GvasLookupIndex20261018",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-gvas-lookup-index-20261018",
+  "source_seals_sha256": "4c1bf74d2c5654db9a7768e40f499c857cf86f1738fff6d8d97359fd29797704",
+  "received_target_count": 8,
+  "canonical_sdk_tests_passed": 6,
+  "receiver_readback": "a450ebc13335a4b65536bc52da7ebbad0c35561ae7beefc2a079ab16ec7c2a6a",
+  "code_bytes_match_final_receiver": true,
+  "qualification_status": "BOUNDED_LOCAL_QUALIFICATION_PASS_HOSTED_CI_PENDING",
+  "evidence": {
+    "canonical_crate": "https://github.com/hsoliwal/com.synexia/tree/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/recipe-crates/m3-gvas-lookup-index-20261018",
+    "catalogue": "https://github.com/hsoliwal/com.synexia/blob/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/catalogs/m3-string-index-reverse-20261018.md",
+    "primary": "https://github.com/hsoliwal/com.synexia/blob/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/recipe-crates/m3-string-index-reverse-20261018/evidence/gvas-runtime/MEASUREMENTS.json"
+  },
+  "notes": [
+    "Three actual JVMs passed 15433 strict mapping checks each; five lookup fixtures passed 43015 checks; 25 process identity tests passed.",
+    "New CI lookup driver executed locally; hosted workflow execution is not asserted.",
+    "Warm forward lookup improves in retained diagnostics; reverse-access median is unfavorable; no RAM-speed or uniform-nonregression claim."
+  ],
+  "receipt_role": "Generated publication custody metadata. This file is not a transformation engine, runtime input, or admission/phase-advancement authority."
+}

@@ -9,12 +9,14 @@ three distinct JVMs which MUST all see the same native pointer and inode.
 """
 from __future__ import annotations
 
+from contextlib import contextmanager
 import hashlib
 import os
 from pathlib import Path
 import re
 import subprocess
 import tempfile
+from typing import Iterator
 
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / "ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralImageWriter.java"
@@ -61,6 +63,69 @@ def java_case(jdk: Path, work: Path, mode: str, lib: Path, image: Path, digest: 
     return process.stdout
 
 
+def _proc_identity(identity: Path, *, require_parent: bool = True) -> tuple[int, int | None, tuple[int, ...]]:
+    required = {"Pid", "NSpid", "PPid"} if require_parent else {"Pid", "NSpid"}
+    fields: dict[str, tuple[int, ...]] = {}
+    for line in identity.read_text().splitlines():
+        name, separator, value = line.partition(":")
+        if separator and name in required:
+            words = value.split()
+            if (name in fields or not words
+                    or any(re.fullmatch(r"[0-9]+", word) is None for word in words)
+                    or (name != "NSpid" and len(words) != 1)):
+                raise AssertionError(f"invalid {name} in {identity}")
+            fields[name] = tuple(int(word) for word in words)
+    if set(fields) != required:
+        raise AssertionError(f"missing process identity in {identity}")
+    pid, namespace_pids = fields["Pid"][0], fields["NSpid"]
+    if pid <= 0 or any(value <= 0 for value in namespace_pids) or namespace_pids[0] != pid:
+        raise AssertionError(f"inconsistent process identity in {identity}")
+    return pid, fields["PPid"][0] if require_parent else None, namespace_pids
+
+
+@contextmanager
+def proc_child_identity(namespace_pid: int, proc_root: Path = Path("/proc")) -> Iterator[int]:
+    """Keep an exact procfs association while inspecting this parent's child.
+
+    Popen.pid stays in the caller's namespace for wait/kill. A numeric /proc path
+    with that value may name an unrelated host process. Namespace mismatch uses a
+    kernel pidfd; its descriptor remains open through the caller's mapping checks.
+    The proof retains its unwaited children until after those checks, preventing
+    reuse of an exited child's PID during either route.
+    """
+    if namespace_pid <= 0:
+        raise AssertionError(f"invalid child namespace PID: {namespace_pid}")
+    parent_link = os.readlink(proc_root / "self")
+    if re.fullmatch(r"[1-9][0-9]*", parent_link) is None:
+        raise AssertionError(f"invalid procfs self link: {parent_link!r}")
+    parent_proc_pid = int(parent_link)
+    parent_pid, _, parent_namespaces = _proc_identity(proc_root / "self/status")
+    if parent_pid != parent_proc_pid or parent_namespaces[-1] != os.getpid():
+        raise AssertionError("procfs self identity does not match this parent")
+    namespace_index = len(parent_namespaces) - 1
+    descriptor: int | None = None
+    descriptor_namespaces: tuple[int, ...] | None = None
+    try:
+        if parent_pid == os.getpid() and len(parent_namespaces) == 1:
+            proc_pid = namespace_pid
+        else:
+            descriptor = os.pidfd_open(namespace_pid, 0)
+            proc_pid, _, descriptor_namespaces = _proc_identity(
+                proc_root / f"self/fdinfo/{descriptor}", require_parent=False)
+            if (len(descriptor_namespaces) <= namespace_index
+                    or descriptor_namespaces[namespace_index] != namespace_pid):
+                raise AssertionError("pidfd identity does not match the child namespace PID")
+        pid, parent, namespaces = _proc_identity(proc_root / f"{proc_pid}/status")
+        if (pid != proc_pid or parent != parent_proc_pid
+                or len(namespaces) <= namespace_index or namespaces[namespace_index] != namespace_pid
+                or (descriptor_namespaces is not None and namespaces != descriptor_namespaces)):
+            raise AssertionError(f"invalid parent-owned child relationship: {proc_pid}")
+        yield proc_pid
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+
+
 def proof(jdk: Path, work: Path, lib: Path, image: Path, digest: str) -> None:
     for mode, token in (("collision", "M3_GVAS_LITERAL_COLLISION_REFUSED"),
                         ("digest", "M3_GVAS_LITERAL_DIGEST_REFUSED")):
@@ -96,13 +161,14 @@ def proof(jdk: Path, work: Path, lib: Path, image: Path, digest: str) -> None:
             raise AssertionError(f"canonical hello pointer differs: {results}")
         inode = image.stat().st_ino
         for p in processes:
-            maps = [line.split() for line in Path(f"/proc/{p.pid}/maps").read_text().splitlines()
-                    if str(image) in line]
-            ok = any(int(row[0].split("-")[0], 16) == BASE
-                     and row[1] == "r--s" and int(row[2], 16) == 0
-                     and int(row[4]) == inode for row in maps)
-            if not ok:
-                raise AssertionError(f"same inode/address mapping failed for pid={p.pid}: {maps}")
+            with proc_child_identity(p.pid) as proc_pid:
+                maps = [line.split() for line in Path(f"/proc/{proc_pid}/maps").read_text().splitlines()
+                        if str(image) in line]
+                ok = any(int(row[0].split("-")[0], 16) == BASE
+                         and row[1] == "r--s" and int(row[2], 16) == 0
+                         and int(row[4]) == inode for row in maps)
+                if not ok:
+                    raise AssertionError(f"same inode/address mapping failed for pid={p.pid} proc_pid={proc_pid}: {maps}")
         for p in processes:
             assert p.stdin is not None
             p.stdin.write("\n")
