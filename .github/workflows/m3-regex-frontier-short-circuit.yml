@@ -7,8 +7,8 @@ on:
     paths:
       - 'src/java.base/share/classes/java/util/regex/M3PatternQuery.java'
       - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
-      - 'm3/qualification/regex-frontier-short-circuit-20261023/**'
-      - '.github/workflows/m3-regex-frontier-short-circuit-20261023.yml'
+      - 'm3/qualification/regex-frontier-short-circuit/**'
+      - '.github/workflows/m3-regex-frontier-short-circuit.yml'
   workflow_dispatch:
 permissions:
   contents: read

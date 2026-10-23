@@ -7,7 +7,7 @@ on:
     paths:
       - 'src/java.base/share/classes/java/util/regex/M3PatternQuery.java'
       - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
-      - '.github/workflows/m3-regex-original-image-20261023.yml'
+      - '.github/workflows/m3-regex-original-image.yml'
   workflow_dispatch:
 permissions:
   contents: read
