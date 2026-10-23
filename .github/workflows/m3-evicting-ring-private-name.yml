@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/implementations/guava-evicting-queue/**'
-      - 'm3/tooling/name-contract/receipts/evicting-ring-private-name-20261023.json'
+      - 'm3/tooling/name-contract/receipts/evicting-ring-private-name.json'
       - '.github/workflows/m3-evicting-ring-private-name.yml'
   workflow_dispatch:
 permissions:
@@ -20,7 +20,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             m3/collections/implementations/guava-evicting-queue/**
-            m3/tooling/name-contract/receipts/evicting-ring-private-name-20261023.json
+            m3/tooling/name-contract/receipts/evicting-ring-private-name.json
             .github/workflows/m3-evicting-ring-private-name.yml
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
