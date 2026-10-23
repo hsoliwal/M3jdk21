@@ -7,6 +7,8 @@ from the dispositions the programme already recorded for JEPs (JEP_CATALOGUE.tsv
 `disposition` column stays UNCLASSIFIED until the reading pass confirms a row.
 Usage: jbs_classify.py JBS_ENHANCEMENTS_22_27.tsv JEP_CATALOGUE.tsv UPSTREAM_CHANGE_SEEDS.tsv > out.tsv"""
 import csv, sys, collections, re
+sys.stdout.reconfigure(encoding="utf-8", newline="")   # summaries hold non-cp1252 characters; the Windows console codec would stop the run
+sys.stderr.reconfigure(encoding="utf-8")
 rows = list(csv.DictReader(open(sys.argv[1], encoding="utf-8", newline=""), delimiter="\t"))
 # component family -> provisional disposition, from the programme's own rules (locked compiler/source semantics,
 # JIT holds, high-risk runtime/native, additive tooling admitted)
