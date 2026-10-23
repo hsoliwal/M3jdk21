@@ -1,0 +1,196 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+22	JDK-8222329	candidate-adapted	admitted-docs	Readable.read spec clarification
+22	JDK-8268829	candidate-adapted	hold-api	new StackWalker option (public API)
+22	JDK-8285447	candidate-adapted	candidate-adapted	StackWalker batch size for getCallerClass; internal tuning
+22	JDK-8295391	candidate-adapted	admitted-docs	binary/decimal conversion discussion
+22	JDK-8296246	candidate-adapted	hold-data	Unicode 15.1 data files; platform data change, not a 21 backport
+22	JDK-8301492	candidate-adapted	candidate-adapted	ResourceBundle CacheKey equals modernization; internal
+22	JDK-8302987	candidate-adapted	hold-api	new RandomGenerator bounded double streams (public API)
+22	JDK-8309196	candidate-adapted	hold-removal	removes Thread.countStackFrames; compatibility change
+22	JDK-8309408	candidate-adapted	candidate-adapted	Thread.sleep cleanup; internal, check virtual-thread coupling
+22	JDK-8309665	candidate-adapted	candidate-collections-lane	Arrays.copyOf/copyOfRange simplification; arrays family
+22	JDK-8310453	candidate-adapted	admitted-docs	java.lang.Object javadoc
+22	JDK-8310502	candidate-adapted	candidate-string-lane	Long.fastUUID optimization; String construction path, M3String owners review
+22	JDK-8310571	candidate-adapted	admitted-docs	inline @return tags in Objects
+22	JDK-8310848	candidate-adapted	candidate-adapted	ClassDesc/MethodTypeDesc static finals; java.lang.constant internal
+22	JDK-8310849	candidate-adapted	candidate-adapted	pattern matching cleanup in j.l.invoke and reflect; mechanical, Java 21 compatible
+22	JDK-8310929	candidate-adapted	candidate-string-lane	Integer.toString optimization; String construction path
+22	JDK-8311220	candidate-adapted	candidate-string-lane	StringLatin1 toUpper/toLower optimization; M3String has its own ROOT/ASCII lane
+22	JDK-8312414	candidate-adapted	candidate-adapted	ServiceLoader.LANG_ACCESS final; trivial
+22	JDK-8313875	candidate-adapted	candidate-adapted	Math literals instead of static fields; trivial
+22	JDK-8314129	candidate-adapted	candidate-adapted	Scanner fields final; trivial
+22	JDK-8314321	candidate-adapted	candidate-adapted	unused field removal; trivial
+22	JDK-8314489	candidate-adapted	admitted-docs	Math javadoc index entries
+22	JDK-8315454	candidate-adapted	candidate-collections-lane	immutable BitSet snapshot (internal ImmutableBitSetPredicate); bitset lane interest
+22	JDK-8315789	candidate-adapted	candidate-adapted	HexFormat minor performance; internal
+22	JDK-8315850	candidate-adapted	candidate-collections-lane	AbstractMap anonymous iterator classes; collections lane
+22	JDK-8315968	candidate-adapted	candidate-string-lane	java.util.Digits moved to jdk.internal.util; digit formatting shared with String lanes
+22	JDK-8316144	candidate-adapted	candidate-adapted	unused field removal; trivial
+22	JDK-8316426	candidate-adapted	candidate-adapted	HexFormat.formatHex optimization; internal
+22	JDK-8317515	candidate-adapted	candidate-adapted	unified parse families in Integer and Long; internal
+22	JDK-8317763	candidate-adapted	hold-jit	Arrays.sort AVX512 intrinsics follow-up; HotSpot intrinsic (JIT hold)
+22	JDK-8317795	candidate-adapted	candidate-collections-lane	ImmutableBitSetPredicate variant for <= 128 elements; bitset lane
+22	JDK-8318457	candidate-adapted	candidate-string-lane	String concat prepend methods; StringConcatHelper is M3-modified (m3Concat), adapt by hand
+22	JDK-8318646	candidate-adapted	candidate-adapted	NumberFormatException message for empty input; behavior detail, low risk
+22	JDK-8320781	candidate-adapted	admitted-docs	snippet whitespace
+22	JDK-8320940	candidate-adapted	admitted-docs	typo
+22	JDK-8321223	candidate-adapted	hold-preview	Scoped Values second preview
+23	JDK-8316708	candidate-adapted	admitted-tests	WorstCaseTests additions
+23	JDK-8319577	candidate-adapted	hold-jit	AVX2 Arrays.sort intrinsics; HotSpot
+23	JDK-8320532	candidate-adapted	hold-removal	removes Thread/ThreadGroup suspend/resume
+23	JDK-8320786	candidate-adapted	hold-removal	removes ThreadGroup.stop
+23	JDK-8321468	candidate-adapted	candidate-string-lane	removes StringUTF16::equals; String internals, M3String equals lane review
+23	JDK-8325169	candidate-adapted	candidate-string-lane	String::indexOf overhead reduction; M3 indexOf has its own precompute path, adapt the flat path only
+23	JDK-8326370	candidate-adapted	admitted-tests	micro benchmark cleanup
+23	JDK-8327487	candidate-adapted	admitted-tests	WorstCaseTests additions
+23	JDK-8329593	candidate-adapted	hold-runtime	virtual thread I/O parallelism adjustments; runtime-coupled
+23	JDK-8330681	candidate-adapted	candidate-adapted	explicit hashCode/equals in SwitchBootstraps TypePairs; internal
+23	JDK-8330802	candidate-adapted	candidate-adapted	desugar switch in Locale.createLocale; internal
+23	JDK-8331108	candidate-adapted	candidate-adapted	unused Math.abs in FdLibm; trivial
+23	JDK-8331114	candidate-adapted	candidate-adapted	MethodTypeDesc.descriptorString performance; internal
+23	JDK-8331187	candidate-adapted	candidate-adapted	MethodTypeDesc/ClassDesc.ofDescriptor primitives; internal
+23	JDK-8331189	candidate-adapted	hold-preview	Scoped Values third preview
+23	JDK-8331264	candidate-adapted	candidate-adapted	java.lang.constant initialization overhead; internal
+23	JDK-8331724	candidate-adapted	candidate-adapted	j.l.constant implementation moved to internal package; refactor, no API
+23	JDK-8332029	candidate-adapted	candidate-adapted	JavaLangAccess initial stderr; internal shared secret
+23	JDK-8332528	candidate-adapted	candidate-adapted	SwitchBootstraps generated code shape; internal
+24	JDK-8319993	candidate-adapted	hold-data	Unicode 16.0 data files
+24	JDK-8333749	candidate-adapted	candidate-adapted	ConstantDesc conversion consolidation; internal
+24	JDK-8333768	candidate-adapted	admitted-docs	Float/Double docs
+24	JDK-8333774	candidate-adapted	candidate-collections-lane	avoid eager EmptySpliterator loading; collections startup
+24	JDK-8333828	candidate-adapted	admitted-docs	value javadoc tag
+24	JDK-8333893	candidate-adapted	candidate-string-lane	StringBuilder append boolean/null optimization; AbstractStringBuilder is on the M3 admission path
+24	JDK-8334772	candidate-adapted	candidate-adapted	Class::signers explicit field; internal, HotSpot field layout check
+24	JDK-8335182	candidate-adapted	candidate-string-lane	String concat code shapes consolidated; StringConcatFactory is M3-modified (generateM3Concat)
+24	JDK-8335637	candidate-adapted	admitted-docs	Object.toString non-null expectation
+24	JDK-8336254	candidate-adapted	hold-runtime	virtual thread implementation updates; runtime-coupled
+24	JDK-8336479	candidate-adapted	hold-api	Process.waitFor(Duration) new public API
+24	JDK-8336831	candidate-adapted	candidate-string-lane	StringConcatHelper.simpleConcat optimization; M3 concat path
+24	JDK-8336856	candidate-adapted	candidate-string-lane	hidden-class string concatenation strategy; StringConcatFactory M3-modified, measure
+24	JDK-8337167	candidate-adapted	candidate-string-lane	StringSize deduplication; concat helper
+24	JDK-8337245	candidate-adapted	admitted-docs	comment fix
+24	JDK-8338409	candidate-adapted	candidate-adapted	record simplification in java.util; mechanical
+24	JDK-8338532	candidate-adapted	candidate-adapted	MethodTypeDesc.ofDescriptor speed-up; internal
+24	JDK-8338930	candidate-adapted	candidate-string-lane	StringConcatFactory hard-coded strategy; M3-modified class
+24	JDK-8338936	candidate-adapted	candidate-adapted	StringConcatFactory MethodType construction; internal
+24	JDK-8338937	candidate-adapted	candidate-adapted	ClassDesc string concatenation; internal
+24	JDK-8339592	candidate-adapted	candidate-adapted	ObjectMethods clinit cleanup; internal
+24	JDK-8339635	candidate-adapted	candidate-string-lane	StringConcatFactory with CompactStrings off; M3 coder paths
+24	JDK-8339934	candidate-adapted	candidate-adapted	Math.scalb simplification; internal
+24	JDK-8340082	candidate-adapted	admitted-docs	inline return tags
+24	JDK-8340983	candidate-adapted	admitted-docs	index and definition tags
+24	JDK-8341064	candidate-adapted	admitted-docs	wrapper classes anchor
+24	JDK-8341243	candidate-adapted	candidate-collections-lane	SOFT_MAX_ARRAY_LENGTH use in java.base; arrays/collections growth policy
+24	JDK-8341260	candidate-adapted	hold-api	Float16 in jdk.incubator.vector; incubator API
+24	JDK-8341548	candidate-adapted	candidate-adapted	concise classfile API use; internal
+24	JDK-8341664	candidate-adapted	candidate-adapted	ReferenceClassDescImpl internalName cache; internal
+24	JDK-8341903	candidate-adapted	hold-preview	Scoped Values fourth preview
+24	JDK-8342083	candidate-adapted	candidate-adapted	FileSystemPreferences fields final; trivial
+24	JDK-8342650	candidate-adapted	candidate-string-lane	getChars moved to DecimalDigits; digit formatting into byte[] shared with M3String construction
+24	JDK-8342693	candidate-adapted	candidate-adapted	FDBigInteger byte[] parameter; internal
+24	JDK-8342863	candidate-adapted	candidate-adapted	pattern matching in wrapper equals; mechanical
+24	JDK-8342865	candidate-adapted	candidate-adapted	Class::getPrimitiveClass type parameter; internal
+24	JDK-8343132	candidate-adapted	hold-runtime	virtual thread transitions; runtime-coupled
+24	JDK-8343453	candidate-adapted	admitted-tests	FloatingDecimal tests
+24	JDK-8343500	candidate-adapted	candidate-adapted	ArrayClassDescImpl computeDescriptor; internal
+24	JDK-8343650	candidate-adapted	candidate-string-lane	StringLatin1/UTF16 putCharsAt reuse; String internals
+24	JDK-8343704	candidate-adapted	hold-runtime	Cleaner queue GC parallelism; GC interaction
+24	JDK-8343819	candidate-adapted	admitted-docs	NaN links
+24	JDK-8343981	candidate-adapted	hold-jep	security manager removal cleanup (JEP 486) in Thread; SM still present in 21
+24	JDK-8344289	candidate-adapted	hold-jep	SM cleanup in jdk.internal.util; JEP 486
+24	JDK-8344336	candidate-adapted	hold-jep	SM cleanup in System, Runtime, String, StackWalker; JEP 486
+24	JDK-8344534	candidate-adapted	hold-jep	AccessControlContext import leftover; JEP 486 follow-up
+24	JDK-8345403	candidate-adapted	admitted-tests	FloatingDecimal randomized tests
+25	JDK-8343110	candidate-adapted	hold-api	CharSequence.getChars new public API (useful for M3String but a surface change)
+25	JDK-8343829	candidate-adapted	candidate-adapted	FloatingDecimal parsing unification; internal
+25	JDK-8343962	candidate-adapted	candidate-string-lane	[REDO] getChars to DecimalDigits
+25	JDK-8347605	candidate-adapted	admitted-docs	spec tag for IEEE 754
+25	JDK-8348870	candidate-adapted	candidate-adapted	DecimalDigits bound checks elimination; internal
+25	JDK-8348898	candidate-adapted	candidate-adapted	unused OctalDigits removal; trivial
+25	JDK-8349284	candidate-adapted	hold-native	libExplicitAttach for static JDK; native build
+25	JDK-8350542	candidate-adapted	admitted-docs	Optional.orElseThrow spec
+25	JDK-8350703	candidate-adapted	hold-api	new standard system property stdin.encoding
+25	JDK-8350909	candidate-adapted	admitted-tests	JMH test fix
+25	JDK-8351374	candidate-adapted	admitted-docs	CleanerImpl comment
+25	JDK-8351740	candidate-adapted	candidate-adapted	encoding property initialization cleanup; internal
+25	JDK-8351927	candidate-adapted	hold-runtime	VirtualThread uses FJP delayed tasks; runtime-coupled
+25	JDK-8351970	candidate-adapted	candidate-adapted	retire JavaLangAccess::exit; internal shared secret
+25	JDK-8353197	candidate-adapted	admitted-docs	JavaLangAccess preconditions
+25	JDK-8353741	candidate-adapted	candidate-string-lane	UUID.toString without table lookup; String construction path
+25	JDK-8354300	candidate-adapted	candidate-string-lane	String.hash @Stable; M3jdk21 String hashCode has an M3 fast path, adapt
+25	JDK-8354334	candidate-adapted	admitted-docs	@ValueBased removed from ProcessHandle (annotation only)
+25	JDK-8354335	candidate-adapted	hold-api	deprecation status of wrapper constructors; API surface
+25	JDK-8354464	candidate-adapted	candidate-adapted	native.encoding setup cleanup; internal
+25	JDK-8355022	candidate-adapted	hold-preview	JEP 506 Scoped Values final; new API in 25, hold for the 21 line
+25	JDK-8355215	candidate-adapted	admitted-docs	spec tags
+25	JDK-8355240	candidate-adapted	candidate-adapted	unused import; trivial
+25	JDK-8355992	candidate-adapted	hold-api	new Math/StrictMath methods
+25	JDK-8357178	candidate-adapted	candidate-adapted	Class::componentType simplification; internal
+25	JDK-8357179	candidate-adapted	hold-native	VFORK deprecation (linux launcher)
+25	JDK-8357436	candidate-adapted	hold-native	jspawnhelper warning text (native)
+25	JDK-8357685	candidate-adapted	candidate-string-lane	Integer::digits char[] to byte[]; digit tables used by String construction
+25	JDK-8357690	candidate-adapted	candidate-string-lane	@Stable and final on CharacterData classes; Character data path
+25	JDK-8357798	candidate-adapted	candidate-collections-lane	ReverseOrderListView Boolean boxes; collections lane
+26	JDK-8210549	candidate-adapted	hold-native	Runtime.exec closeDescriptors FD_CLOEXEC (native)
+26	JDK-8328874	candidate-adapted	candidate-adapted	Class.forName0 name length validation; internal, check HotSpot side
+26	JDK-8334015	candidate-adapted	hold-api	UUIDv7 new public API
+26	JDK-8346944	candidate-adapted	hold-data	Unicode 17.0 data files
+26	JDK-8355177	candidate-adapted	candidate-string-lane	StringBuilder.append(char[]) via copyMemory; AbstractStringBuilder on the M3 admission path
+26	JDK-8356439	candidate-adapted	candidate-adapted	JavaLangAccess NoRepl renames; internal
+26	JDK-8356995	candidate-adapted	hold-api	Comparator.min/max default methods; new public API
+26	JDK-8357289	candidate-adapted	candidate-string-lane	String constructor split into smaller methods; M3jdk21 String constructors carry the admission gate, adapt by hand
+26	JDK-8357821	candidate-adapted	candidate-adapted	JavaLangAccess unchecked* rename revert; internal
+26	JDK-8358540	candidate-adapted	candidate-adapted	MathUtils for FloatingDecimal; internal
+26	JDK-8359732	candidate-adapted	candidate-adapted	i/o encoding properties as StaticProperty; internal
+26	JDK-8360884	candidate-adapted	hold-preview	scoped values follow-up
+26	JDK-8361426	candidate-adapted	candidate-adapted	remove jdk.internal.ref.Cleaner; internal, check users in java.base
+26	JDK-8362376	candidate-adapted	candidate-adapted	@Stable in FDLIBM; internal
+26	JDK-8364317	candidate-adapted	admitted-docs	StringUTF16 assumptions documented
+26	JDK-8364319	candidate-adapted	candidate-adapted	AsTypeMethodHandleDesc moved internal; refactor
+26	JDK-8364320	candidate-adapted	candidate-string-lane	String encodeUTF8 latin1 negatives; M3String.encode has the M3 side
+26	JDK-8364361	candidate-adapted	hold-api	Process implements Closeable; API surface
+26	JDK-8364540	candidate-adapted	candidate-adapted	@Stable on shared secrets; internal
+26	JDK-8365620	candidate-adapted	candidate-adapted	enhanced switch in MethodHandleDesc; Java 21 compatible
+26	JDK-8365675	candidate-adapted	hold-api	String Unicode case folding new API
+26	JDK-8365719	candidate-adapted	candidate-string-lane	JLA.uncheckedNewStringNoRepl uses; String construction entry points
+26	JDK-8366017	candidate-adapted	candidate-adapted	FloatingDecimal fast paths; internal
+26	JDK-8366178	candidate-adapted	hold-preview	JEP 526 Lazy Constants second preview
+26	JDK-8366224	candidate-adapted	candidate-string-lane	DecimalDigits.appendPair; digit formatting
+26	JDK-8366765	candidate-adapted	candidate-adapted	[REDO] NoRepl renames; internal
+26	JDK-8367382	candidate-adapted	admitted-docs	representation equivalence terminology
+26	JDK-8367787	candidate-adapted	admitted-docs	terminology in Float16 (incubator docs)
+26	JDK-8367942	candidate-adapted	admitted-docs	Double.compareTo total order note
+26	JDK-8368226	candidate-adapted	hold-removal	removes Thread.stop
+26	JDK-8368822	candidate-adapted	hold-api	Float16 refactor (incubator)
+26	JDK-8368985	candidate-adapted	hold-api	Float16 refactor (incubator)
+26	JDK-8369051	candidate-adapted	hold-api	Float16 refactor (incubator)
+26	JDK-8369123	candidate-adapted	hold-api	Float16 refactor (incubator)
+26	JDK-8369312	candidate-adapted	candidate-string-lane	Float.toHexString without regex; regex-free formatting matches the precompute goal
+26	JDK-8370013	candidate-adapted	candidate-string-lane	Double.toHexString without regex and StringBuilder
+26	JDK-8370028	candidate-adapted	admitted-docs	author tags
+26	JDK-8370370	candidate-adapted	admitted-tests	WorstCaseTests
+26	JDK-8370503	candidate-adapted	candidate-string-lane	Integer/Long toString via newStringWithLatin1Bytes; String construction path
+26	JDK-8371130	candidate-adapted	candidate-adapted	String template leftovers removed; internal
+26	JDK-8371164	candidate-adapted	candidate-collections-lane	ArrayList.addAll optimizations
+26	JDK-8371226	candidate-adapted	admitted-docs	Thread interruption section
+26	JDK-8371882	candidate-adapted	hold-preview	Lazy Constants docs
+26	JDK-8372146	candidate-adapted	hold-preview	Lazy Constants follow-up
+27	JDK-8357089	candidate-adapted	hold-native	VFORK removal (linux launcher)
+27	JDK-8372353	candidate-adapted	hold-api	byte-length-of-encoded-String API; new public API (M3String could serve it later)
+27	JDK-8373068	candidate-adapted	hold-api	Float16 conversion (incubator)
+27	JDK-8374540	candidate-adapted	admitted-docs	Math.fma comment
+27	JDK-8375237	candidate-adapted	admitted-docs	divideUnsigned docs
+27	JDK-8376477	candidate-adapted	candidate-adapted	avoid loading Lock classes in Shutdown and ReferenceQueue; startup
+27	JDK-8376568	candidate-adapted	hold-runtime	Thread::getStackTrace handshake op; HotSpot
+27	JDK-8376811	candidate-adapted	hold-preview	JEP 531 Lazy Constants third preview
+27	JDK-8377388	candidate-adapted	candidate-adapted	Scanner uses Reader.of; internal, Reader.of exists in 21? verify (added in 24: hold if absent)
+27	JDK-8377603	candidate-adapted	admitted-tests	worst-case testing review
+27	JDK-8377903	candidate-adapted	admitted-docs	ArraysSupport.mismatch docs
+27	JDK-8378268	candidate-adapted	hold-runtime	Thread.join waits on Thread; runtime/virtual thread coupling
+27	JDK-8378698	candidate-adapted	candidate-string-lane	Base64.Encoder.encodeToString optimization; String construction path
+27	JDK-8379344	candidate-adapted	hold-data	Unicode/CLDR version tables
+27	JDK-8379830	candidate-adapted	admitted-docs	value-based class warnings text
+27	JDK-8379967	candidate-adapted	hold-native	ProcessBuilder error reporting (launcher)
+27	JDK-8380671	candidate-adapted	admitted-tests	Float16 tests
+27	JDK-8381772	candidate-adapted	admitted-docs	String javadoc wording
+27	JDK-8385054	candidate-adapted	admitted-docs	ofLazy spec clarification (Lazy Constants API absent in 21: hold-preview)
