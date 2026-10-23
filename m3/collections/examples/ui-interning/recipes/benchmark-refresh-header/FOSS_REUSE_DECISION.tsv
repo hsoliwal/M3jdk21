@@ -1,0 +1,3 @@
+capability	classification	repository	commit	license	fit
+benchmark-header-literal-replacement	WRAP	openrewrite/rewrite	3bd8271be963c025ce0856072d0f09360e3184cd	Apache-2.0	Existing FindAndReplace seven-option YAML; no Java code copied or new dispatcher
+maven-recipe-invocation	WRAP	openrewrite/rewrite-maven-plugin	f4e1ac2af034603f8ffdf86e0731c99e02cc64a8	Apache-2.0	Existing 5.23.1 no-fork goals; fixture proof only, environment limitations retained

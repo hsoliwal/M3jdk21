@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+# Configuration of an existing Apache-2.0 OpenRewrite recipe.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.agent.BenchmarkRefreshHeader20261020
+displayName: Add the existing refresh data column to the benchmark header
+description: Update one hash-sealed benchmark header and preserve all row data.
+recipeList:
+  - org.openrewrite.text.FindAndReplace:
+      find: "frame_us_p90\\n"
+      replace: "frame_us_p90\\\\trefresh_ms\\\\n"
+      regex: false
+      caseSensitive: true
+      multiline: false
+      dotAll: false
+      filePattern: "m3/collections/examples/ui-interning/M3ImmediateLabelBench.java"

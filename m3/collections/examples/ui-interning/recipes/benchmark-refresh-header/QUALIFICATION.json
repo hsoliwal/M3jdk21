@@ -1,0 +1,133 @@
+{
+  "schema": "m3.recipe.fixture-qualification.v1",
+  "status": "PASS_SCOPED_BYTES_FIXEDPOINT_AND_RECEIVING_COMPILE_ENVIRONMENT_LIMITED",
+  "source_before_commit": "d9ec4784654d62887c2ff2bfb3608405e683b3dd",
+  "target": "m3/collections/examples/ui-interning/M3ImmediateLabelBench.java",
+  "preimage_sha256": "f76e2d948d44ee0222b07ff78651a3dfe276696275af07da44820f44330bb902",
+  "postimage_sha256": "67848c52b378520219b23afc6a5ad11befeaa0848cefa7da731d9a6ee69ddc35",
+  "receiving_mode": "100644",
+  "recipe": "org.openrewrite.text.FindAndReplace",
+  "artifact": "org.openrewrite:rewrite-core:8.17.1",
+  "options": {
+    "find": "frame_us_p90\\n",
+    "replace": "frame_us_p90\\\\trefresh_ms\\\\n",
+    "regex": false,
+    "caseSensitive": true,
+    "multiline": false,
+    "dotAll": false,
+    "filePattern": "m3/collections/examples/ui-interning/M3ImmediateLabelBench.java"
+  },
+  "checks": {
+    "header_fields_before": 11,
+    "data_fields": 12,
+    "header_fields_after": 12,
+    "exact_single_file_and_line_dryrun": true,
+    "actual_Matcher_escaping": true,
+    "exact_applied_bytes": true,
+    "unrelated_same_text_control_unchanged": true,
+    "fresh_process_fixed_point_zero_patch": true,
+    "strict_Java21_before_and_after_compile": true,
+    "source_files_per_compile": 5,
+    "class_files_per_compile": 7,
+    "class_major": 65,
+    "compile_captures_empty": true,
+    "protected_API_captures_byte_equal": true,
+    "native_recipe_actions": 3,
+    "native_receiving_actions": 4,
+    "all_seven_native_trees_exit0_terminal_active0_handles_closed": true
+  },
+  "donor_source": {
+    "repository": "openrewrite/rewrite",
+    "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+    "path": "rewrite-core/src/main/java/org/openrewrite/text/FindAndReplace.java",
+    "git_blob": "a24333a90943786185f52d7e733c15d5b1d0a572",
+    "bytes": 6921,
+    "sha256": "b2ca9434d337492a3e6221647ae46887f58d16699d003f23fdc3a9f6917f71cf",
+    "license": "Apache-2.0",
+    "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/text/FindAndReplace.java"
+  },
+  "receiving_dependency_sources": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d9ec4784654d62887c2ff2bfb3608405e683b3dd",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LabelLanes.java",
+      "git_blob": "20caa0659caccb59b453464c1c8a8e8cc98fdc2a",
+      "sha256": "fcdf917f8096b46b900bd3b19a80421a34e0c891d102e9c203b7d48d30dcafc9",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d9ec4784654d62887c2ff2bfb3608405e683b3dd",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LabelPool.java",
+      "git_blob": "f311f91a43e8fc12830a6cbd8fc9b67e26d015fe",
+      "sha256": "6afb8b52caa16357c56f94e60419f22436a06e240513daaaa311a75d65620d76",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d9ec4784654d62887c2ff2bfb3608405e683b3dd",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ShortLabel.java",
+      "git_blob": "2358477620a85266576c2af10a8ed1f40b2473fe",
+      "sha256": "13cc808c47bd4f1ac96e9798a7d02718789fcf6248c1d713a324861e726b7f33",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d9ec4784654d62887c2ff2bfb3608405e683b3dd",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TextExtentCache.java",
+      "git_blob": "0646293bdf9798710eb14c6b4a0de13937b4710b",
+      "sha256": "f4f028cb7e13423678538d2a1bb9c8bf81877c57b85b2b26917dbb36b0ba33c6",
+      "license": "Apache-2.0 OR EPL-2.0"
+    }
+  ],
+  "postrun_only_project_dependency_pins": [
+    {
+      "coordinate": "commons-io:commons-io:jar:2.15.1",
+      "bytes": "501218",
+      "postrun_sha256": "a58af12ee1b68cfd2ebb0c27caef164f084381a00ec81a48cc275fd7ea54e154"
+    },
+    {
+      "coordinate": "org.opentest4j:opentest4j:jar:1.3.0",
+      "bytes": "14304",
+      "postrun_sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "coordinate": "org.junit.platform:junit-platform-commons:jar:1.10.2",
+      "bytes": "106232",
+      "postrun_sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae"
+    },
+    {
+      "coordinate": "org.apiguardian:apiguardian-api:jar:1.1.2",
+      "bytes": "6806",
+      "postrun_sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    },
+    {
+      "coordinate": "org.junit.platform:junit-platform-engine:jar:1.10.2",
+      "bytes": "204821",
+      "postrun_sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3"
+    },
+    {
+      "coordinate": "org.slf4j:slf4j-api:jar:2.0.13",
+      "bytes": "68605",
+      "postrun_sha256": "e7c2a48e8515ba1f49fa637d57b4e2f590b3f5bd97407ac699c3aa5efb1204a9"
+    }
+  ],
+  "private_execution_receipt_hashes": {
+    "recipe": "45ca7b0d2f04f60741c9ba7338a9ade6ad311e1634fea51077e5504e921c3556",
+    "receiving": "ac08ac449fdc4b2868fb84c3a767c45b8bb4cf10bf630d9a9319fa4c5e86cdc6",
+    "independent_recipe_review": "dc1f00216b97824897b1c0600eb1be999d9eaba9e337328e99c9c546fd56469d"
+  },
+  "log_hashes": {
+    "dryrun_before": "421febfdc3e42a414806cc267bc304fa661823f3df9482cad5ecf8908c3b5d2b",
+    "apply": "e07ee682125d64f3d029f76efe5e73c87f87dc2296305d65edc1b72a75fb4588",
+    "dryrun_fixed": "196eee000bd50060561804993ecb62bf81fb69f2fb246f1a8cc663cb68751445"
+  },
+  "limitations": [
+    "Fixture bytes, exact path/control, replacement escaping and fresh-process fixed point are proved; no general host admission.",
+    "All 360 declared execution input pins were verified before and after; six actual project TEST graph JARs were not prebound and were hashed only afterward.",
+    "JGit optional bash --login -c which git probes in the first two goals failed through WSL because an existing E: VHD was unavailable. Warnings are retained; no recovery or replay occurred.",
+    "Generated patch index mode 100755 is Windows fixture metadata. The receiving Git tree keeps the original 100644 file mode.",
+    "Strict receiving compilation is the example plus four exact M3 sources in an unnamed module; no benchmark main, full module build, installed-M3JDK21, platform or performance admission.",
+    "No drift refusal fixture was executed for this text recipe; exact external preimage/expected-postimage checks were enforced."
+  ]
+}

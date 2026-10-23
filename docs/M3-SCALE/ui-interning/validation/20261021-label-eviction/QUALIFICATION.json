@@ -1,0 +1,100 @@
+{
+  "schema": "synexia.ui.label-eviction.qualification.v1",
+  "status": "SCOPED_SINGLE_METHOD_PASS",
+  "validation_action": "ACTION.json",
+  "existing_PR": 1606,
+  "source_commit": "fe5d02986b6364f42df3e6d213bdad42e851784a",
+  "receiving_head": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+  "concrete_result": "Replacing first with second at maxCached0 invalidates the first label cached extent in font1.",
+  "source_scope": {
+    "files": 5,
+    "bytes": 54438,
+    "unchanged": true
+  },
+  "retained_bytecode": {
+    "classes": 7,
+    "major": 65,
+    "custody": "evidence/RETAINED_CLASS_CUSTODY.json",
+    "recompiled": false
+  },
+  "junit": {
+    "method": "com.m3.collections.M3LabelLanesTest#evictedLabelsLeaveTheExtentCache",
+    "tests_found": 1,
+    "tests_started": 1,
+    "tests_successful": 1,
+    "tests_skipped": 0,
+    "tests_aborted": 0,
+    "tests_failed": 0,
+    "XML_exact_selected_method": true
+  },
+  "native": {
+    "actions": 1,
+    "exitcode": 0,
+    "same_handle_wait": 0,
+    "active": 0,
+    "total_processes": 2,
+    "all_handles_closed": true,
+    "own_lock_released": true
+  },
+  "independent_review": {
+    "path": "evidence/INDEPENDENT_POSTRUN_REVIEW.json",
+    "sha256": "b83a5fab1c0c3451518a50ce8ae0a6e92917b694e018206a23ea934f92a64fe3"
+  },
+  "evidence": [
+    {
+      "path": "evidence/EXECUTION_ARGV_PROJECTION.json",
+      "bytes": 3047,
+      "sha256": "e98b5a83983784d17a0fea462b5d12bd348e45ab29a1cb82cc22e6d42ff79745"
+    },
+    {
+      "path": "evidence/INDEPENDENT_POSTRUN_REVIEW.json",
+      "bytes": 2290,
+      "sha256": "b83a5fab1c0c3451518a50ce8ae0a6e92917b694e018206a23ea934f92a64fe3"
+    },
+    {
+      "path": "evidence/JUNIT_REPORT_PROJECTION.json",
+      "bytes": 672,
+      "sha256": "40d5c3a9c401b65cc52e15e3da836b178ecab14a37b7f9d8a91c72c60cce35a3"
+    },
+    {
+      "path": "evidence/OUTPUT_MANIFEST.json",
+      "bytes": 938,
+      "sha256": "4927ecfbf3d60ed3647bd2e103f32a90a87a70e628eb17209f8251a0b347f162"
+    },
+    {
+      "path": "evidence/RECEIVING_SOURCE_MEMBERSHIP.json",
+      "bytes": 1792,
+      "sha256": "8d792113da104e5b2cac5c840362cdcdb1ffd68f5c0a94f6111f0d24000d9fc2"
+    },
+    {
+      "path": "evidence/RESULT.json",
+      "bytes": 1606,
+      "sha256": "772e985256fa44680fe77b394ddf5d21d5154dda6a8076f3b39e6bc0610e4cb9"
+    },
+    {
+      "path": "evidence/RETAINED_CLASS_CUSTODY.json",
+      "bytes": 5950,
+      "sha256": "26f3f21a294ded8c979f0aebbdae53862e7f377a04e684a3db45a49db8008222"
+    },
+    {
+      "path": "evidence/test.NATIVE.json",
+      "bytes": 451,
+      "sha256": "eac11790a103fc1f7170465094158908ad7e3f971265477c61859893caf5a20a"
+    },
+    {
+      "path": "evidence/test.log",
+      "bytes": 479,
+      "sha256": "1c112c39110783ffc2f5e8e7786a2bbff0474ffa5ec901c1976e37610b30b988"
+    }
+  ],
+  "limits": [
+    "One existing one-font label-eviction test with a deterministic synthetic measurer; no new code or tests.",
+    "No multi-font, id-reuse, shared-pool observer, GUI/toolkit/viewport, measurement-count or performance admission.",
+    "No owning-module, installed-M3JDK21, SDK, cross-platform, global recipe or generic executor admission.",
+    "Source-bound class reuse is not a compile replay; original refresh and six marker methods were not selected.",
+    "No whole-OS/C-write or per-child loaded-image/CWD audit is claimed."
+  ],
+  "global_recipe_descriptor_status": "HOLD_ENVIRONMENT_AND_FIT",
+  "no_source_test_or_binary_distribution": true,
+  "future_delivery_receipt_external": true
+}
