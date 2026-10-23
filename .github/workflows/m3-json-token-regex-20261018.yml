@@ -1,0 +1,92 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JSON AST token regex contracts
+
+on:
+  push:
+    branches:
+      - m3/json-token-regex-receiver-20261018
+  pull_request:
+    paths:
+      - m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3TokenRegex.java
+      - m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3AST.java
+      - m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3TokenRegexContract.java
+      - .github/workflows/m3-json-token-regex-20261018.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Fetch same-version Jackson 2.19.2 module dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          JARS="$RUNNER_TEMP/m3-jars"
+          mkdir -p "$JARS"
+          for jar in jackson-core jackson-annotations jackson-databind; do
+            curl --fail --location --retry 3 --silent --show-error \
+              "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/$jar/2.19.2/$jar-2.19.2.jar" \
+              --output "$JARS/$jar-2.19.2.jar"
+          done
+          sha256sum "$JARS"/*.jar
+      - name: Strict Java 21 source compile and original tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          PACK="$GITHUB_WORKSPACE/m3/tooling/module-packs/jackson"
+          JARS="$RUNNER_TEMP/m3-jars"
+          MODS="$RUNNER_TEMP/m3-modules"
+          TESTS="$RUNNER_TEMP/m3-test-classes"
+          mkdir -p "$MODS/jdk.m3.jackson" "$TESTS"
+          find "$PACK/src/main/java" -name '*.java' -print0 | sort -z \
+            | xargs -0 javac --release 21 -Xlint:all,-module -Werror -proc:none \
+              --module-path "$JARS" -d "$MODS/jdk.m3.jackson"
+          find "$PACK/src/test/java" -name '*.java' -print0 | sort -z \
+            | xargs -0 javac --release 21 -Xlint:all,-module -Werror -proc:none \
+              --module-path "$JARS:$MODS" --add-modules jdk.m3.jackson \
+              -d "$TESTS"
+          mkdir -p "$MODS/jdk.m3.jackson/META-INF/services"
+          cp "$PACK/src/main/resources/META-INF/services/com.fasterxml.jackson.databind.Module" \
+            "$MODS/jdk.m3.jackson/META-INF/services/"
+          java --module-path "$JARS:$MODS" --add-modules jdk.m3.jackson \
+            -cp "$TESTS" jdk.m3.jackson.tests.M3JacksonContract \
+            "$RUNNER_TEMP/absent-original-jackson-contract"
+      - name: Token-aware AST regex contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          java --module-path "$RUNNER_TEMP/m3-jars:$RUNNER_TEMP/m3-modules" \
+            --add-modules jdk.m3.jackson \
+            -cp "$RUNNER_TEMP/m3-test-classes" \
+            jdk.m3.jackson.tests.M3TokenRegexContract \
+            | tee "$RUNNER_TEMP/m3-token-regex-contract.log"
+          grep '^M3_TOKEN_REGEX_CONTRACT_PASS checks=' "$RUNNER_TEMP/m3-token-regex-contract.log"
+      - name: Save proof receipts
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p m3-token-regex-proof
+          if test -f "$RUNNER_TEMP/m3-token-regex-contract.log"; then
+            cp "$RUNNER_TEMP/m3-token-regex-contract.log" m3-token-regex-proof/
+          fi
+          if test -f "$RUNNER_TEMP/absent-original-jackson-contract/CONTRACT_RESULTS.tsv"; then
+            cp "$RUNNER_TEMP/absent-original-jackson-contract/CONTRACT_RESULTS.tsv" m3-token-regex-proof/
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-json-token-regex-receipts
+          path: m3-token-regex-proof/
+          if-no-files-found: warn
+          retention-days: 14
