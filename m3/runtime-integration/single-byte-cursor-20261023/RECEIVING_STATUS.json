@@ -1,0 +1,47 @@
+{
+  "schema": "M3_SINGLE_BYTE_RECEIVING_STATUS_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "status": "NOT_RECEIVED_QUALIFICATION_PENDING",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalCommit": "16949a8b1f740d8fdc91d0623b22864d2bc02871",
+  "canonicalPullRequest": "https://github.com/hsoliwal/com.synexia/pull/13188",
+  "recipeId": "com.synexia.rewrite.M3Jdk21SingleByteCursorReuse",
+  "authoringCommit": "aa7661674605341352b97ad844177106eae2f053",
+  "custodyManifest": {
+    "path": "synexia-openrewrite-recipes/tasks/m3-single-byte-cursor-20261023/qualification/SOURCE_CUSTODY.json",
+    "gitBlob": "2cde42a04e825ee4d296422167de2a96dc3292e3",
+    "sha256": "106edcd6b36371050c2049ecc47e0e06c1fa4124a5bde4e7ee0e53e75eda222f"
+  },
+  "sourcePreparationCorrection": {
+    "previousTopicCommit": "d2989da4db09bcf84a898e7f9992acafc943dc42",
+    "filesPreservedInSynexia": 32,
+    "filesRemovedFromCurrentPublicTree": 32,
+    "sourceBodiesChanged": false,
+    "historyRewritten": false,
+    "policyGitBlob": "b1f5d55d96b18cece4452cca2383669f52564f35"
+  },
+  "target": {
+    "preimageCommit": "797d5646898509cfbc0bfd3e7737e08400d59dc2",
+    "ownerPath": "src/java.base/share/classes/java/lang/M3String.java",
+    "ownerSha256": "b16c1d8478f24f3e10b7249ea3d9264dca8b90fb93e3e77c3800d42fda69615f",
+    "runtimePostimageApplied": false,
+    "targetTestApplied": false
+  },
+  "gates": {
+    "mavenOpenRewriteSdk": "NOT_RUN",
+    "javaJunit": "NOT_RUN",
+    "matchedJdkJtreg": "NOT_RUN",
+    "jniGc": "NOT_RUN",
+    "performanceAndMemory": "NOT_MEASURED",
+    "formalReview": "NOT_RUN"
+  },
+  "localExecution": {
+    "status": "REFUSED_BEFORE_JVM_STORAGE_RESERVE",
+    "reserveBytes": 8589934592,
+    "kMeasuredFreeBytes": 6927917056,
+    "measuredAtUtc": "2026-10-23T03:04:17Z"
+  },
+  "publicArtifactClass": "DATA_ONLY_RECEIPT",
+  "disclosureScope": "Passive references and gate states for the already-public preparation; no recipe bodies or improvement memory."
+}
