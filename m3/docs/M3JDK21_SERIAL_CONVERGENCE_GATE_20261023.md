@@ -8,7 +8,8 @@ M3JDK21 is one integrated JDK, not M3 plus JDK. Public String, ArrayList, HashMa
 
 ## Canonical producer and source boundary
 
-The reusable Synexia recipe and its memory remain exclusively in hsoliwal/com.synexia/synexia-openrewrite-recipes. The additive read-only recipe com.synexia.rewrite.M3Jdk21MigrationStageRecipe invokes M3Jdk21MigrationStageGate on a source-sealed stage ledger.
+The reusable Synexia recipe and its memory remain exclusively in hsoliwal/com.synexia/synexia-openrewrite-recipes.
+Canonical source review: https://github.com/hsoliwal/com.synexia/pull/13209 (draft; SDK proof pending). The additive read-only recipe com.synexia.rewrite.M3Jdk21MigrationStageRecipe invokes M3Jdk21MigrationStageGate on a source-sealed stage ledger.
 
 This recipient's only authoritative capability naming registry is m3/docs/name-mapping.json migration.records[].id. Reuse the existing Synexia name-adaptation, owner-naming, hash-pinned snapshot, M3JdkHandoff and category-catalogued behavioral atoms owners. Do not copy recipe source/YAML, task crates, templates, algorithm catalogues or improvement memory into M3JDK21.
 
