@@ -1,8 +1,10 @@
+// SPDX-License-Identifier: Apache-2.0
 /*
  * @test
  * @summary Compiled trigram Boolean short-circuiting is a sound Matcher.find absence gate
- * @modules java.base/jdk.internal.mindex
- * @run main/othervm --add-opens java.base/java.util.regex=ALL-UNNAMED M3RegexShortCircuitTest
+ * @modules java.base/java.util.regex:+open
+ *          java.base/jdk.internal.mindex
+ * @run main/othervm -Xmx512m M3RegexShortCircuitTest
  */
 
 import java.lang.reflect.Field;
@@ -112,6 +114,18 @@ public final class M3RegexShortCircuitTest {
         }
         reused.reset("no candidate here");
         if (reused.find()) throw new AssertionError("new subject leaked old cache");
+        Matcher sliced = first.matcher("abc---qqq").region(3, 9);
+        if (sliced.find() || CACHED_QUERY.get(sliced) != QUERY.get(first)) {
+            throw new AssertionError("region absence was not cached");
+        }
+        sliced.region(0, 9);
+        if (!sliced.find() || !"abc".equals(sliced.group())) {
+            throw new AssertionError("region expansion reused a stale negative");
+        }
+        Matcher mutable = first.matcher(new StringBuilder("abc---qqq"));
+        if (!mutable.find() || CACHED_QUERY.get(mutable) != null) {
+            throw new AssertionError("mutable input must bypass the candidate cache");
+        }
         System.out.println("PASS product JDK matcher comparisons=" + comparisons);
     }
 }
