@@ -374,7 +374,7 @@ Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclas
         }
     }
     jint *ordinals = scratch + needed;
-    jint *values = scratch + needed * 2;
+    jint *values = scratch + ((size_t) needed * 2U);
     jint left = skipVisible;
     jint written = 0;
     for (jint start = first; start < end && written < needed;) {
