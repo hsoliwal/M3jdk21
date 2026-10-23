@@ -572,6 +572,19 @@ public class JavaCompiler {
      */
     protected Set<JavaFileObject> inputFiles = new HashSet<>();
 
+    /** Original-owner admission state; includes reads without PARSE events. */
+    private boolean sourceProcessingStarted;
+
+    /** Whether a source workset can no longer be bound before this task starts. */
+    public boolean hasStartedSourceProcessing() {
+        return sourceProcessingStarted || hasBeenUsed;
+    }
+
+    private void beforeSourceProcessing(JavaFileObject file) {
+        sourceProcessingStarted = true;
+        com.sun.tools.javac.m3.M3ASTPC.beforeSourceRead(context, file);
+    }
+
     /** Used by the resolveBinaryNameOrIdent to say that the given type cannot be found, and that
      *  an error has already been produced about that.
      */
@@ -612,6 +625,7 @@ public class JavaCompiler {
      *  @param filename   The file name of the input stream to be opened.
      */
     public CharSequence readSource(JavaFileObject filename) {
+        beforeSourceProcessing(filename);
         try {
             inputFiles.add(filename);
             return filename.getCharContent(false);
@@ -635,6 +649,7 @@ public class JavaCompiler {
      *  @param silent       true if TaskListeners should not be notified
      */
     private JCCompilationUnit parse(JavaFileObject filename, CharSequence content, boolean silent) {
+        beforeSourceProcessing(filename);
         long msec = now();
         JCCompilationUnit tree = make.TopLevel(List.nil());
         if (content != null) {
@@ -828,6 +843,7 @@ public class JavaCompiler {
 
         if (tree == null) {
             try {
+                beforeSourceProcessing(filename);
                 tree = parse(filename, filename.getCharContent(false));
             } catch (IOException e) {
                 log.error(Errors.ErrorReadingFile(filename, JavacFileManager.getMessage(e)));
@@ -1843,6 +1859,7 @@ public class JavaCompiler {
         DiagnosticHandler dh = new DiscardDiagnosticHandler(log);
         JavaFileObject prevSource = log.useSource(fo);
         try {
+            beforeSourceProcessing(fo);
             JCTree.JCCompilationUnit t = parse(fo, fo.getCharContent(false), true);
             return tree2Name.apply(t);
         } catch (IOException e) {
