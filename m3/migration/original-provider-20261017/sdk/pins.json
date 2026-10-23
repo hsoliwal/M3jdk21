@@ -7,7 +7,7 @@
   "receiverBaseEquivalence": "Original55-input4e29/d47 equivalence is historical. Fresh4598 audit: all54KEEP exact; workflow alreadyAFTER,4ADD absent; currentA56 migration raw equals oldA while59top mappings/optional fields are preserved by reviewed value-only successor.",
   "originalCliGitBlob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
   "canonicalBeforeGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
-  "canonicalAfterGitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
+  "canonicalAfterGitBlob": "a90f96ed14bdb8c2ce3310d3ed4a3e40cea28f4f",
   "targets": [
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
@@ -368,6 +368,18 @@
       "before": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
       "after": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
       "resource": "after-059.txt"
+    },
+    {
+      "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
+      "before": "ABSENT",
+      "after": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
+      "resource": "after-000.txt"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "after": "051debeca7331c8aab5c636c0d8cd200c61d60e5c3a64362597f96c17751ab17",
+      "resource": "after-009.txt"
     }
   ],
   "expectedExecution": {
@@ -823,6 +835,42 @@
       "gitBlob": "bc28a0831873d696f7195b2ed7dcdeecdfba9b83",
       "sha256": "218f7ff9eefcc066eda0c1f7330bda1cb29007a908f265979d710f8321034179",
       "bytes": 21133
+    },
+    {
+      "path": "pom.xml",
+      "gitBlob": "344fd4e38d166366039ea0f0235c07c0bc7c7beb",
+      "sha256": "3b19535312253aa518dae9e86dc87a529f63c5b8539419606e409ff42f529432",
+      "bytes": 2806
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-000.txt",
+      "gitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+      "sha256": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
+      "bytes": 34558
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-009.txt",
+      "gitBlob": "a90f96ed14bdb8c2ce3310d3ed4a3e40cea28f4f",
+      "sha256": "051debeca7331c8aab5c636c0d8cd200c61d60e5c3a64362597f96c17751ab17",
+      "bytes": 453878
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/manifest.tsv",
+      "gitBlob": "b26de7b52b8fdb89913ce3362c326b47bbafc5f6",
+      "sha256": "3d52b74babc843461aa20b27f39d064a2de93608e30206ce899b344ff4581ea7",
+      "bytes": 11923
+    },
+    {
+      "path": "src/test/java/com/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",
+      "gitBlob": "a09227509be476e87a2fa8772a97007ff5f9be84",
+      "sha256": "c9887254606d9f17fb60227dc4c7153cbaf988bd0dafc6199a2b5ebf2c7ce083",
+      "bytes": 46173
+    },
+    {
+      "path": "verify.py",
+      "gitBlob": "43c9c6e70742d7623a86229cf950a50b029db598",
+      "sha256": "25101c50d4158ff007c792c61222405b1b2246e9281daf9095d92cfbd0768759",
+      "bytes": 15431
     }
   ],
   "baselineProjectionSuccessor": {

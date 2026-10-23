@@ -2343,8 +2343,95 @@
         "id": "family.substring-conflict",
         "kind": "pending",
         "status": "pending",
-        "reason": "Task identifies arbitrary UTF-16 ranges versus surrogate-splitting refusal/materialization. No renaming consolidation performed.",
-        "sources": [],
+        "reason": "Source-only contract inspection of separate runtime/indexstring range and composite owners. Related existing M3/String surfaces are comparison references, not target ownership, an admitted rename/port, an applied change or runtime conformance.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6291b100548f7850279f49e693621d6460be25f9",
+            "module": "synexia-mindex/runtime",
+            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexString.java",
+            "symbol": "com.synexia.mindex.SubMIndexString",
+            "signatures": [
+              "SubMIndexString of(MIndexString,int,int)",
+              "SubMIndexString ofUtf16(MIndexString,int,int)",
+              "SubMIndexString ofCodePointSafe(MIndexString,int,int)",
+              "SubMIndexString subSequence(int,int)",
+              "MIndexString parent()",
+              "int start()",
+              "int end()",
+              "MIndexString intern()"
+            ],
+            "sha256": "80625746ec369c7071d97685e7742359e80b73f7c8b246de76e59655fa1289b7",
+            "git_blob_sha1": "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6291b100548f7850279f49e693621d6460be25f9",
+            "module": "synexia-indexstring",
+            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/SubMIndexString.java",
+            "symbol": "com.synexia.indexstring.SubMIndexString",
+            "signatures": [
+              "MIndexString source()",
+              "int beginIndex()",
+              "int endIndex()",
+              "SubMIndexString subSequence(int,int)",
+              "SubMIndexString view(int,int)",
+              "String materialize()",
+              "MIndexString detach()"
+            ],
+            "sha256": "718e4514f2a09d708a33412ca1ef46b07ac9132cf21b7a3fdbd9036b711a0f36",
+            "git_blob_sha1": "1f6c1ae0bfdeeae4b7aec49549f05866ce46bd45",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6291b100548f7850279f49e693621d6460be25f9",
+            "module": "synexia-mindex/runtime",
+            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCharSequence.java",
+            "symbol": "com.synexia.mindex.MIndexCharSequence",
+            "signatures": [
+              "MIndexCharSequence of(MIndexString...)",
+              "MIndexCharSequence of(MIndexCompositeString)",
+              "int segmentCount()",
+              "char charAt(int)",
+              "MIndexCharSequence subSequence(int,int)",
+              "void copyTo(int,char[],int,int)",
+              "byte[] encode(Charset)"
+            ],
+            "sha256": "4d435e90316b69b5d4a67bdc5a46db1bf2e8d4db17e25efeb42fa899b1b37313",
+            "git_blob_sha1": "6c0821756c4ac4241ab22c97ca336f07b92cfd2e",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6291b100548f7850279f49e693621d6460be25f9",
+            "module": "synexia-mindex/runtime",
+            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCompositeString.java",
+            "symbol": "com.synexia.mindex.MIndexCompositeString",
+            "signatures": [
+              "Segment sourceSegment(int)",
+              "SubMIndexString segmentView(int)",
+              "SubMIndexString segmentViewUtf16(int)",
+              "MIndexString subSequence(int,int)",
+              "SubMIndexCompositeString view(int,int)",
+              "int segmentCount()",
+              "MIndexStringMetadata segmentMetadata(int)",
+              "MIndexString materialize()"
+            ],
+            "sha256": "8037a689789fc351ccdeef8105122a961a6722bb27e8f54cfe42cfd2370365e3",
+            "git_blob_sha1": "71d1fcada1cec89c1b0d5f0122ca7707d0b1dd58",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          }
+        ],
         "targets": [],
         "owner": "Separate existing indexstring and runtime SubMIndexString contracts",
         "identity": {
@@ -2352,23 +2439,38 @@
           "generation": "Retain owner generation; destination audit pending."
         },
         "contract": {
-          "differences": [],
-          "compatibility_obligations": [
-            "Preserve API/native/serialization contracts; no prefix renaming."
+          "differences": [
+            "runtime.SubMIndexString.of/ofCodePointSafe reject boundaries inside surrogate pairs; ofUtf16 permits exact UTF16 code-unit ranges. At this baseline subSequence routes through historical strict of even for a permissive origin. The unexecuted source-repair candidate is not applied.",
+            "indexstring.SubMIndexString composes unrestricted UTF16 ranges with checked base arithmetic and one packed begin/length lane; this is a separate source owner, not an interchangeable class rename.",
+            "Runtime and indexstring source views retain original source references and absolute coordinates for empty ranges. Related package-private M3String.range returns global EMPTY for zero length; String.substring returns empty String except its whole-range identity fast path. Preserve each observable identity/ownership contract.",
+            "Composite stores segment occurrences, parent ranges and metadata lanes, including empty occurrences. MIndexCharSequence.of(composite) retains those ranges/counts, whereas of(MIndexString...) drops empty values. Its current duplicate cumulative-end lookup has a separate unapplied source-repair candidate.",
+            "Source Composite.subSequence validates surrogate boundaries and materializes a pooled result; Composite.view permits exact UTF16 ranges. Related M3StringTuple retains child M3String coordinates in a persistent DAG; no source occurrence/annotation mapping to that representation is admitted.",
+            "java.lang.M3String and M3StringTuple are package-private implementation classes. Related public String.substring/subSequence retain Java SE signatures and UTF16 behavior; no new public M3 API is inferred."
           ],
-          "public_surface": []
+          "compatibility_obligations": [
+            "Preserve API/native/serialization contracts; no prefix renaming.",
+            "Keep strict source factories and explicit UTF16 factories distinguishable across nested ranges; do not copy a source-only policy field into M3String layout.",
+            "Preserve source parent/absolute empty-range coordinates, composite empty occurrence metadata, validation order and explicit materialization boundaries.",
+            "Prove actual generated source, original model/EveryModule, Java/JNI, baseline differential behavior, rollback and matched complete-JDK Routes A/B/C before port or performance claims.",
+            "Audit full dependency closure and retained heap/native/mapped memory independently; a reference pin or pending map validation is not a dependency, lifecycle or runtime proof."
+          ],
+          "public_surface": [
+            "Source: com.synexia.mindex.SubMIndexString.of/ofUtf16/ofCodePointSafe/subSequence and com.synexia.indexstring.SubMIndexString.view/subSequence/materialize/detach.",
+            "Source: MIndexCharSequence.of/charAt/subSequence/copyTo/encode and MIndexCompositeString.subSequence/view/sourceSegment/segmentViewUtf16/segmentMetadata.",
+            "Related target public surface: java.lang.String.substring(int), substring(int,int), subSequence(int,int); M3String/M3StringTuple remain package-private comparison surfaces."
+          ]
         },
         "format": {
           "schema": null,
           "abi": null,
-          "bootstrap": "Outside java.base; inclusion requires bootstrap review."
+          "bootstrap": "Source owners remain outside java.base; related target implementations already live in java.base. No bootstrap, field-layout or JNI ABI admission follows from this inspection."
         },
         "dependencies": [],
         "materialization": {
-          "admission": "Uninspected.",
-          "joins": "Uninspected.",
-          "outputs": "Uninspected.",
-          "cached_facts": "Uninspected."
+          "admission": "Inspected Sub views retain an existing parent without admitting a new pooled spelling at construction/subslicing. This is not an assertion about arbitrary Composite.Builder inputs, every operation or all caches.",
+          "joins": "Composite retains separate parent/range and occurrence metadata lanes. Explicit pooled subsequence/materialize/intern paths and generic append admission require their existing contracts; related target tuple composition is comparison only.",
+          "outputs": "Runtime Sub intern delegates to parent.substring; toString returns parent.toString().substring. indexstring materialize builds a String and detach delegates to source.substring. Runtime Sub codePointCount/equality/hash operations call parent.toString; no universal materialization-free claim.",
+          "cached_facts": "Current Composite has cached canonical/fact state; related M3String exposes prepared owner/range facts. No source cache, new payload, source policy field or zero-retention guarantee is transferred by this metadata."
         },
         "recipe": {
           "id": null,
@@ -2376,14 +2478,17 @@
           "path": null,
           "sha256": null,
           "preconditions": [
-            "Complete source/dependency inventory."
+            "Complete source/dependency inventory and original-model/EveryModule admission remain pending.",
+            "Canonical map refinement uses existing com.synexia.m3.OriginalMappingProvider20261017; it is metadata ownership, not a target runtime receiving recipe.",
+            "Source-repair owner mindex.segmented-string-composition has unexecuted candidates in private PR12419 and PR12426; product owners pinned above remain unchanged.",
+            "Do not populate target receiving recipe fields or tests receipts until an actual qualified target recipe and exact executions exist."
           ],
           "rollback": "No target mutation."
         },
         "tests": [],
         "provenance": {
-          "license": "Per-file verification pending; see observation.",
-          "publication": "No unrelated private code or fixtures.",
+          "license": "Inspected Synexia source owner headers: Apache-2.0. Related M3String/M3StringTuple/String comparison headers: GPLv2 with Classpath exception. Reference metadata only; no target source body copied.",
+          "publication": "Migration-relevant repository paths, symbols, signatures and content identities only. No private fixture bodies, scratch paths, storage/account/job state, credentials or unrelated private implementations.",
           "copied_code": false
         },
         "sync": {
@@ -2392,17 +2497,22 @@
           "direction": "source-to-target",
           "target_adaptations": [],
           "pending": [
-            "Contract/dependency audit and port pending."
+            "Source-only partial contract inspection; dependency closure, target receiving recipe, actual generation/application, runtime/differential/rollback/JNI/full-JDK and performance/retention remain pending.",
+            "Historical recorded sync revisions/direction are preserved unchanged; artifact commits identify inspected snapshots, not a newly applied or proven successful synchronization."
           ],
-          "conflicts": []
+          "conflicts": [
+            "Strict source surrogate refusal and exact target UTF16 slicing require explicit API adaptation; no blanket permissive replacement.",
+            "Source empty-range parent coordinates and composite occurrence/metadata contracts differ from target empty normalization and tuple DAG representation.",
+            "Pending target comparison references must not reserve whole-file implementation ownership through targets[]."
+          ]
         },
         "lineage": {
           "previous_sources": [],
           "previous_targets": [],
           "supersedes": []
         },
-        "source_state": "uninspected",
-        "observation": "Discovery is not proof of implementation or conformance."
+        "source_state": "partial",
+        "observation": "RELATED_TARGET_REFERENCE_ONLY. This record reconciles separate source contracts and reserves no target implementation owner. Exact inspected comparison surfaces, not target artifacts or a port: [{\"repo\":\"hsoliwal/M3jdk21\",\"commit\":\"a3e88976ee8664d1ef5d0cade96aec1206b2133d\",\"module\":\"java.base\",\"path\":\"src/java.base/share/classes/java/lang/M3String.java\",\"symbol\":\"java.lang.M3String\",\"sha256\":\"fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0\",\"git_blob_sha1\":\"e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e\",\"signatures\":[\"slice(int,int): M3String (package-private)\",\"subSequence(int,int): M3String (public member of package-private class)\"],\"fingerprint\":null,\"revision_role\":\"pinned\",\"tracking_ref\":\"refs/heads/master\"},{\"repo\":\"hsoliwal/M3jdk21\",\"commit\":\"a3e88976ee8664d1ef5d0cade96aec1206b2133d\",\"module\":\"java.base\",\"path\":\"src/java.base/share/classes/java/lang/M3StringTuple.java\",\"symbol\":\"java.lang.M3StringTuple\",\"sha256\":\"0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9\",\"git_blob_sha1\":\"0d4cfb75317e68d54244588a474eba98bf7df27b\",\"signatures\":[\"charAt(int): char (package-private)\",\"getChars(int,int,char[],int): void (package-private)\"],\"fingerprint\":null,\"revision_role\":\"pinned\",\"tracking_ref\":\"refs/heads/master\"},{\"repo\":\"hsoliwal/M3jdk21\",\"commit\":\"a3e88976ee8664d1ef5d0cade96aec1206b2133d\",\"module\":\"java.base\",\"path\":\"src/java.base/share/classes/java/lang/String.java\",\"symbol\":\"java.lang.String\",\"sha256\":\"abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd\",\"git_blob_sha1\":\"db3fd603765644fffe9edd92511624b944914068\",\"signatures\":[\"substring(int): String\",\"substring(int,int): String\",\"subSequence(int,int): CharSequence\"],\"fingerprint\":null,\"revision_role\":\"pinned\",\"tracking_ref\":\"refs/heads/master\"}]. sources[] pins actual baseline owners only. Candidate corrections PR12419@dc2ff40d771dae3205dc3212bc8842bdf8da8a73 and PR12426@b2e34ffd776aec7982c853bce3fc42d78deadcd2 are authored recipe/fixture sources, NOT_APPLIED and NOT_RUN. tests[] is empty because no execution receipt exists. targets[] and target-receiving recipe fields remain empty/null. Observed source support references include runtime MIndexString, MIndexDictionary, MIndexStringPool, MIndexStringMetadata, MIndexText and SubMIndexCompositeString, and indexstring MIndexString, MIndexStringBitOps, MIndexPattern and MIndexMatcher. Support bodies and direct/transitive target admission were not inventoried. dependencies[] is UNASSESSED: this partial source-contract audit asserts no migration dependency graph, not a dependency-free or resolved-closure claim; no receiving dependency or reuse prerequisite is selected. Historical sync fields remain recorded metadata, not a refreshed successful synchronization. Current scope is PARTIAL_SOURCE_INSPECTION_ONLY; Java/Maven/provider/CLI/runtime/JNI/rollback/full-JDK/performance/retention are unverified."
       },
       {
         "id": "family.word-facts",

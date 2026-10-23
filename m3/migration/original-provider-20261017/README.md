@@ -2,6 +2,20 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Original mapping provider qualification
 
+# Current draft: substring contract recipe qualification
+
+This draft mirrors the exact existing Maven/OpenRewrite SDK from [Synexia PR #12431](https://github.com/hsoliwal/com.synexia/pull/12431), immutable commit `5a3339df604fba2ea0cedd80707bc616e41cb596`, SDK tree `cb7764db204a5e87fca101bbec8bb9944785d589`. The72 files total1,919,301 bytes;71 nonself pins bind their source identity. Exactly four SDK files change from `638520715ffb00255639cb1e6667494bab729b53`: the existing map resource, manifest, qualification test and pins. The six accompanying receiver metadata files bind and describe this draft.
+
+The pending substring record now pins four actual source owners and records three non-owning M3/String comparisons. It leaves target ownership empty and dependencies explicitly unassessed. Every byte outside the migration value and all59 top-level mappings remain unchanged;53 original records are unchanged, three explicitly reconciled and four restored. The existing tenth qualification method adds four named YAML scenarios/eight invocations with fixed points; all ten method names and the first nine bodies remain intact.
+
+**Current exact-candidate Maven/OpenRewrite, provider and original CLI qualification: NOT_RUN.** The unchanged public PR workflow is the configured qualification route. Its binding checks this receiving Git tree; independent source path/tree custody is also required. This SDK copy is authoring/proof input custody. The recipe subsequently emits60 product overlay files for verification; no product overlay, active canonical map or runtime implementation is applied by this draft. Source ownership stays in Synexia, with existing module and embedded-fixture notices preserved.
+
+Previous compiler/provider successes and failures below belong to earlier candidates. They do not qualify this SDK. Runtime/JNI, original-model dependency closure, complete Routes A/B/C, performance and heap/native/mapped retention remain open. `runtimeApplied`, `phaseAdvanced` and `fullMigrationComplete` stay false. The full continual optimization goal remains active.
+
+## Historical receiver notes (unchanged)
+
+# Genuine original mapping validator qualification
+
 This receiver mirrors the [canonical Synexia Maven recipe](https://github.com/hsoliwal/com.synexia/tree/f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b/synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017) from [PR12264](https://github.com/hsoliwal/com.synexia/pull/12264). Its74-file/1955646-byte SDKtree is c93b25915d57178bec19458ba9ddc34383d92639; source-binding.json seals the owner, pins and existing workflow. Production mapping and four provider outputs remain unchanged.
 
 The independently qualified earlier packet at924b88d8 passed10 recipe methods,22 custody controls,38 provider boundary methods and26 unchanged original tests in run39099435918. That is evidence for the old packet. The new successor has not executed. It generates the exact original55-file/795620-byte PRE from pinned resources under a separate owned root, never from installed POST, and seals all55 files before and after the unchanged provider/CLI execution.
