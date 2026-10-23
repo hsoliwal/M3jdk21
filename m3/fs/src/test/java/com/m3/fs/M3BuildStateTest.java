@@ -181,6 +181,47 @@ class M3BuildStateTest {
         }
     }
 
+    @Test void independentObservedProfilesShareOneSuccessfulBuildHead() throws Exception {
+        Path database = temp.resolve("profiled-observations.sqlite");
+        byte[] maven = sha("maven-4-jdk21-context");
+        byte[] gradle = sha("gradle-jdk21-context");
+        try (M3FS fs = M3FS.create(database)) {
+            fs.mkdir("/project", 0700);
+            fs.createFile("/project/A.java", 0600);
+            replaceSource(fs, "class A {}");
+            M3BuildState mavenInventory = inventory(database, maven);
+            M3BuildState gradleInventory = inventory(database, gradle);
+            assertTrue(mavenInventory.completeInventory() && gradleInventory.completeInventory());
+            byte[] mavenObserved = M3BuildStateStore.observe(
+                    fs, mavenInventory, null, null, maven, MAX_BYTES, 10, 0).commitment();
+            byte[] gradleObserved = M3BuildStateStore.observe(
+                    fs, gradleInventory, null, null, gradle, MAX_BYTES, 10, 0).commitment();
+            try (M3FS snapshot = M3FS.openSnapshot(database)) {
+                assertArrayEquals(mavenObserved, M3BuildStateStore.readObserved(
+                        snapshot, null, maven, MAX_BYTES, 10, 0).orElseThrow().commitment());
+                assertArrayEquals(gradleObserved, M3BuildStateStore.readObserved(
+                        snapshot, null, gradle, MAX_BYTES, 10, 0).orElseThrow().commitment());
+                assertTrue(M3BuildStateStore.readObserved(
+                        snapshot, null, MAX_BYTES, 10, 0).isEmpty(),
+                        "unprofiled original checkpoint remains untouched");
+            }
+            assertThrows(IllegalArgumentException.class, () -> M3BuildStateStore.observe(
+                    fs, mavenInventory, null, null, sha("foreign"),
+                    MAX_BYTES, 10, 0));
+            assertThrows(IllegalArgumentException.class, () -> M3BuildStateStore.readObserved(
+                    fs, null, new byte[31], MAX_BYTES, 10, 0));
+            byte[] successful = M3BuildStateStore.promoteObserved(fs, null,
+                    mavenObserved, maven, MAX_BYTES, 10, 0).commitment();
+            assertArrayEquals(mavenObserved, successful);
+            assertArrayEquals(successful, M3BuildStateStore.read(
+                    fs, MAX_BYTES, 10, 0).orElseThrow().commitment());
+            // A different profile never authorizes another global success
+            // without rebasing on the just-committed successful image.
+            assertThrows(IOException.class, () -> M3BuildStateStore.promoteObserved(
+                    fs, null, gradleObserved, gradle, MAX_BYTES, 10, 0));
+        }
+    }
+
     private record VersionPair(byte[] observed) { }
     private static VersionPair observe(M3FS fs, M3BuildState candidate, byte[] successful,
             byte[] observed) throws IOException {
@@ -188,8 +229,12 @@ class M3BuildStateTest {
                 MAX_BYTES, 10, 0).commitment());
     }
     private static M3BuildState inventory(Path database) throws IOException {
+        return inventory(database, sha("compiler-context"));
+    }
+
+    private static M3BuildState inventory(Path database, byte[] context) throws IOException {
         try (M3FS snapshot = M3FS.openSnapshot(database)) {
-            return M3BuildState.captureInventory(snapshot, "/project", sha("compiler-context"),
+            return M3BuildState.captureInventory(snapshot, "/project", context,
                     new M3FS.InventoryLimits(1, 8, 10, MAX_BYTES), MAX_BYTES, M3FsProgress.noop());
         }
     }
