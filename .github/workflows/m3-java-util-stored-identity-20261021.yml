@@ -1,0 +1,78 @@
+name: M3JDK21 original java.base stored Set identity proof
+
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java'
+      - 'test/jdk/java/util/CollectionViews/FilteredRepresentativeContractTest.java'
+      - 'test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java'
+      - 'm3/runtime-integration/java-util-stored-identity-20261021/**'
+      - '.github/workflows/m3-java-util-stored-identity-20261021.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-java-base-identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout complete original and proposed Git lineage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact source and original oracle preimages
+        shell: bash
+        run: |
+          printf '%s  %s\n' \
+            '779510ab4000f0154a387137244ccc8000a59b1eee31ca47782c03866891ebaa' 'src/java.base/share/classes/java/util/CollectionViews.java' \
+            'f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6' 'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java' | sha256sum -c -
+          git cat-file -e ef24da4c5224ca0f728db3c3c30fa412592c7765^{commit}
+      - name: Compile old and current actual java.base sources
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/pre-src/java/util" "$RUNNER_TEMP/pre-classes" "$RUNNER_TEMP/now-classes" "$RUNNER_TEMP/tests"
+          git show ef24da4c5224ca0f728db3c3c30fa412592c7765:src/java.base/share/classes/java/util/CollectionViews.java > "$RUNNER_TEMP/pre-src/java/util/CollectionViews.java"
+          printf '%s  %s\n' 'e6c6779848e867e0898a5b577a5c6109094bb2b9ed5ba5e625b446735102e3c6' "$RUNNER_TEMP/pre-src/java/util/CollectionViews.java" | sha256sum -c -
+          javac --release 21 -proc:none -Xlint:all,-module,-serial -Werror \
+            --patch-module java.base="$RUNNER_TEMP/pre-src" \
+            -d "$RUNNER_TEMP/pre-classes" "$RUNNER_TEMP/pre-src/java/util/CollectionViews.java"
+          javac --release 21 -proc:none -Xlint:all,-module,-serial -Werror \
+            --patch-module java.base=src/java.base/share/classes \
+            -d "$RUNNER_TEMP/now-classes" src/java.base/share/classes/java/util/CollectionViews.java
+          javap -public -s "$RUNNER_TEMP/pre-classes/java/util/CollectionViews.class" > "$RUNNER_TEMP/pre-api.txt"
+          javap -public -s "$RUNNER_TEMP/now-classes/java/util/CollectionViews.class" > "$RUNNER_TEMP/now-api.txt"
+          diff -u "$RUNNER_TEMP/pre-api.txt" "$RUNNER_TEMP/now-api.txt"
+      - name: Compile historical and inherited jtreg sources
+        shell: bash
+        run: |
+          javac --release 21 -proc:none -Xlint:all,-serial,-module -Werror \
+            --patch-module java.base="$RUNNER_TEMP/now-classes" -d "$RUNNER_TEMP/tests" \
+            test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java \
+            test/jdk/java/util/CollectionViews/FilteredRepresentativeContractTest.java \
+            test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java \
+            test/jdk/java/util/CollectionViews/BootstrapViewsTest.java
+      - name: Reproduce original identity failure, then prove repaired source
+        shell: bash
+        run: |
+          set +e
+          java --patch-module java.base="$RUNNER_TEMP/pre-classes" -cp "$RUNNER_TEMP/tests" StoredRepresentativeOracle > "$RUNNER_TEMP/old.log" 2>&1
+          old_status=$?
+          set -e
+          test "$old_status" -ne 0
+          grep -F 'AssertionError: check=9' "$RUNNER_TEMP/old.log"
+          java --patch-module java.base="$RUNNER_TEMP/now-classes" -cp "$RUNNER_TEMP/tests" StoredRepresentativeOracle | tee "$RUNNER_TEMP/new.log"
+          grep -F 'StoredRepresentativeOracle PASS checks=736018' "$RUNNER_TEMP/new.log"
+      - name: Preserve inherited filtered-view and reentrant cursor contracts
+        shell: bash
+        run: |
+          for clazz in FilteredRepresentativeContractTest FilteredSpliteratorReentrantTest BootstrapViewsTest; do
+            java --patch-module java.base="$RUNNER_TEMP/now-classes" -cp "$RUNNER_TEMP/tests" "$clazz"
+          done
