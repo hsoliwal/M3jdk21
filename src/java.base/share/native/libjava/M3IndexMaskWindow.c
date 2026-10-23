@@ -95,6 +95,15 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
             jint span = (jint) offsets[matches - 1] - first_match + 1;
             (*env)->GetIntArrayRegion(env, rows, next + first_match, span, values);
             if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+            if (matches == M3_MASK_WINDOW_CHUNK && pending == 0) {
+                /* Every ordinal in this chunk is selected; values is already contiguous. */
+                written += matches;
+                (*env)->SetIntArrayRegion(env, output,
+                        output_offset + written - matches, matches, values);
+                if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+                next += consumed;
+                continue;
+            }
             for (jint i = 0; i < matches; i++) {
                 selected[pending++] = values[(jint) offsets[i] - first_match];
                 written++;

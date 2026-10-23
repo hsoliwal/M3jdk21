@@ -125,12 +125,11 @@ public final class M3PatternAsciiFrontierTest {
     private static void verify(Prepared prepared, String input) throws Exception {
         if (prepared == null) return;
         int actual = match(prepared.plan, input);
-        boolean surrogate = false, ascii = true;
+        boolean ascii = true;
         for (int i = 0; i < input.length(); i++) {
-            surrogate |= Character.isSurrogate(input.charAt(i));
             ascii &= input.charAt(i) < 128;
         }
-        int expected = surrogate ? -1 : prepared.pattern.matcher(input).matches() ? 1 : 0;
+        int expected = prepared.pattern.matcher(new StringBuilder(input)).matches() ? 1 : 0;
         check(actual == expected, "SEMANTIC_DIVERGENCE pattern=" + prepared.pattern
                 + " input=" + escape(input) + " expected=" + expected + " actual=" + actual);
         if (prepared.masks != null) {
@@ -300,11 +299,21 @@ public final class M3PatternAsciiFrontierTest {
             };
             Prepared p = prepare(expression, family == 3 ? Pattern.DOTALL : 0);
             check(p != null && p.atoms == count, "WIDE_COMPILED_GEOMETRY");
+            // These exact four families have equivalent short forms. Use ordinary Matcher
+            // for surrogate cases without exponential backtracking through 256 equal stars.
+            Pattern unicodeOracle = Pattern.compile(switch (family) {
+                case 0 -> "a*";
+                case 1 -> "ba*";
+                case 2 -> "a".repeat(count - 1) + "b*";
+                default -> "[ab]*.";
+            }, family == 3 ? Pattern.DOTALL : 0);
             long[] saved = p.masks.clone();
             for (String input : List.of("", "a", "b", "ab", "a".repeat(count - 1),
                     "a".repeat(count), "a".repeat(63) + "b", "ab".repeat(65),
                     "a".repeat(65) + "\u00e9", "b\u0085ab", "z\ud800", "b" + "a".repeat(193) + "\udc00")) {
-                int expected = wideJavaOracle(p, input);
+                int expected = input.chars().anyMatch(c -> Character.isSurrogate((char) c))
+                        ? unicodeOracle.matcher(new StringBuilder(input)).matches() ? 1 : 0
+                        : wideJavaOracle(p, input);
                 check(match(p.plan, input) == expected, "WIDE_PARITY:" + count + ":" + family);
                 boolean ascii = input.chars().allMatch(c -> c < 128);
                 check(nativeMatch(p, input) == (ascii ? expected : -1), "WIDE_JNI_PARITY");
