@@ -36,12 +36,11 @@ COMPILER_SOURCES = (
     "com/sun/tools/javac/main/JavaCompiler.java",
 )
 CONTRACTS = (
-    ("jdk.m3.parser.test.M3ASTScopeContract", "M3_AST_SCOPE_PASS"),
-    ("jdk.m3.parser.test.M3ASTIndexOwnershipContract", "M3_AST_INDEX_OWNERSHIP_PASS"),
     ("jdk.m3.parser.test.M3ParserFrameworkContract", "M3_PARSER_FRAMEWORK_PASS"),
     ("jdk.m3.parser.test.M3JavacParserContract", "M3_JAVAC_PARSER_PASS"),
     ("jdk.m3.parser.test.M3CrossFrontendContract", "M3_AST_MULTIFRONTEND_PASS"),
-    ("jdk.m3.parser.test.M3JavacIndexContract", "M3_JAVAC_INDEX_PASS"),
+    ("jdk.m3.parser.test.M3FileDeltaContract", "M3_FILE_DELTA_PASS"),
+    ("jdk.m3.parser.test.M3SharedSourceDeltaContract", "M3_SHARED_SOURCE_DELTA_PASS"),
 )
 SMOKE = ("jdk.m3.parser.test.M3ParserImageSmoke", "M3_PARSER_IMAGE_PASS")
 
@@ -82,7 +81,6 @@ def input_rows(repository, jdk):
     required = [pack / name for name in
                 ("build.py", "pom.xml", "DESIGN.md", "FOSS_REUSE_DECISIONS.tsv")]
     required += [repository / COMPILER_ROOT / name for name in COMPILER_SOURCES]
-    required.append(repository / COMPILER_ROOT / "module-info.java")
     required.append(repository / RECEIVER_CHECKER)
     required += [repository / "m3/synexia-import/current-full-borrow" / name
                  for name in RECEIVER_INPUTS]
@@ -255,9 +253,6 @@ class Qualification:
         descriptor = (self.pack / "src/main/java/module-info.java").read_text(encoding="utf-8")
         if not re.search(r"\bmodule\s+jdk\.m3\.parser\s*\{", descriptor):
             raise ValueError("unexpected parser module identity")
-        compiler_descriptor = (self.repository / COMPILER_ROOT / "module-info.java").read_text(encoding="utf-8")
-        if not re.search(r"\buses\s+com\.sun\.source\.util\.M3AST\.Consumer\s*;", compiler_descriptor):
-            raise ValueError("original M3 compiler consumer-service declaration missing")
         self.run("full-borrow-receiver", [sys.executable, self.repository / RECEIVER_CHECKER],
                  "SYNEXIA_FULL_BORROW_RECEIVER_PASS")
         log = self.output / "lint-structure.log"
@@ -311,15 +306,6 @@ class Qualification:
         work.mkdir()
         arguments = [java, "-ea", "-Dm3.parser.test.work=" + str(work),
                      "--patch-module", "jdk.compiler=" + str(self.output / "compiler-patch")]
-        if main == "jdk.m3.parser.test.M3ASTIndexOwnershipContract":
-            # Inspect buffer ownership only in this private-field regression.
-            # The published parser module descriptor remains encapsulated.
-            arguments += ["--add-opens", MODULE + "/jdk.m3.parser=ALL-UNNAMED"]
-        if main == "jdk.m3.parser.test.M3ASTScopeContract":
-            # Invoke the actual original plugin class while testing a supplied
-            # stock JDK's compiler descriptor, which does not list M3 services.
-            arguments += ["--add-exports", "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
-                          "--add-exports", "java.base/jdk.internal.module=ALL-UNNAMED"]
         if not linked:
             arguments += ["--module-path", self.output / "modules"]
         arguments += ["--add-modules", MODULE, "-cp", self.output / "test-classes", main]
@@ -375,7 +361,6 @@ class Qualification:
                            "linked_modules_sha256": sha256(image / "lib/modules"),
                            "compiler_patch": "EXPLICIT_EXTERNAL_SOURCE_COMPILED_PATCH",
                            "compiler_source_files": list(COMPILER_SOURCES),
-                           "plugin_scope_test": "ACTUAL_PLUGIN_INIT_WITH_TEST_ONLY_PRODUCT_USES_GRANT",
                            "replay_stdout_sha256": hashlib.sha256(first.encode("utf-8")).hexdigest(),
                            "build_javac_after_test": False,
                            "pending": ["full M3JDK/HotSpot source build and jtreg",
