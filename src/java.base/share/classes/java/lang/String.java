@@ -5567,6 +5567,20 @@ public final class String
         return storage == null ? null : new String(storage);
     }
 
+    /**
+     * JNI-callable internal ingress for selected UTF-16 ranges. Native callers can resolve this
+     * static method with signature {@code ([[C[I[I)Ljava/lang/String;} and pass Java-owned
+     * {@code char[][]}, start, and length arrays without acquiring or retaining element pointers.
+     * The method interns each piece in the canonical M3 pool and returns an immutable tuple-backed
+     * String, or {@code null} when M3 admission is disabled or the bounded pool declines; callers
+     * then retain their existing flat fallback.
+     */
+    static String m3JoinCharRanges(char[][] sources, int[] starts, int[] lengths) {
+        if (!m3JoinedStringsEnabled()) return null;
+        M3String storage = M3String.joinCharRanges(sources, starts, lengths);
+        return storage == null ? null : new String(storage);
+    }
+
     private byte rawCoder() {
         return COMPACT_STRINGS ? coder : UTF16;
     }
