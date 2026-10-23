@@ -61,6 +61,20 @@ public final class M3IndexPathIdentitySelfTest {
                     eq(a.size(), b.size(), "window size");
                     eq(a.sourceSize(), b.sourceSize(), "window source size");
                     array(a.toArray(), b.toArray(), "window rows");
+                    // The same bulk atom must work with implicit and explicit rows.
+                    int firstSelected = b.size() == 0 ? 0
+                            : random.nextInt(b.size() + 1);
+                    int take = random.nextInt(b.size() - firstSelected + 1);
+                    int[] destination = new int[take + 2];
+                    Arrays.fill(destination, 0x3456789a);
+                    b.copySelectedRowIds(firstSelected, destination, 1, take);
+                    eq(0x3456789a, destination[0], "bulk before destination");
+                    eq(0x3456789a, destination[destination.length - 1],
+                            "bulk after destination");
+                    for (int k = 0; k < take; k++) {
+                        eq(b.selectedRowId(firstSelected + k), destination[k + 1],
+                                "implicit identity bulk");
+                    }
                     for (int selected = 0; selected < a.size(); selected++) {
                         eq(a.selectedSourceOrdinal(selected),
                                 b.selectedSourceOrdinal(selected), "window ordinal");
