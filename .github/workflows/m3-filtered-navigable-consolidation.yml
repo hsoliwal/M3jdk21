@@ -9,6 +9,9 @@ on:
       - 'm3/collections/docs/FILTERED_SORTED_VIEWS_RECEIVING_20261017.md'
       - 'm3/collections/qualification/filtered-navigable-consolidation-20261017/**'
       - '.github/workflows/m3-filtered-navigable-consolidation.yml'
+      - 'm3/collections/qualification/filtered-plan-20261023/**'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredSortedIteratorPlanSelfTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredSortedIteratorPlanTest.java'
   workflow_dispatch:
 permissions:
   contents: read
@@ -25,8 +28,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Verify source receipt and selected contracts
+      - name: Verify successor source receipt and selected contracts
         shell: bash
-        run: bash m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
+        run: bash m3/collections/qualification/filtered-plan-20261023/verify.sh
       - name: Explicit hold
         run: echo 'Selected collections receiver proof only; full Maven/JDK/phase promotion remains separate.'
