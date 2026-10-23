@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "S:\m3-scratch\jdk21\backports\jbs_classify.py", line 10, in <module>
+    rows = list(csv.DictReader(open(sys.argv[1], encoding="utf-8", newline=""), delimiter="\t"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\csv.py", line 116, in __next__
+    row = next(self.reader)
+          ^^^^^^^^^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x92 in position 6400: invalid start byte
