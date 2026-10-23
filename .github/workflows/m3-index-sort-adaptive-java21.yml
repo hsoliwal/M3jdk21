@@ -8,6 +8,8 @@ on:
       - 'm3/collections/src/main/java/com/m3/collections/M3IndexSort.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveContract.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexSortStrictContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexSortStrictTest.java'
       - 'm3/collections/qualification/index-sort-adaptive/**'
       - '.github/workflows/m3-index-sort-adaptive-java21.yml'
 
@@ -34,9 +36,11 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$M3_EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3IndexSort.java)" = 'f786685aa7c7cf0e4e6a1b975f98227449fb637a'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveContract.java)" = '74a8fe76fbab3c87b1caac198e01bf2cf1855fd4'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3IndexSort.java)" = 'a62fc49228ac09213bf44c3a9075098f1d5c65ef'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveContract.java)" = '49a913ba2427451e12ae4016d2b529af18f3fbef'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveTest.java)" = '15d06bd2740ea7c9ebc320b697a2ac347b446d1d'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3IndexSortStrictContract.java)" = '7a61f99ac3fb5703385b61ea99b0e763a53ae82f'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3IndexSortStrictTest.java)" = 'ea757248616e6ba01fe78625ea0696b6ff3969cb'
       - name: Strict compile of original M3JDK21 index owner and oracle
         shell: bash
         run: |
@@ -44,7 +48,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-index-sort"
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-index-sort" \
             m3/collections/src/main/java/com/m3/collections/M3IndexSort.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveContract.java
+            m3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexSortStrictContract.java
       - name: Execute exact Java21 normal and interpreter contract
         shell: bash
         run: |
@@ -57,6 +62,14 @@ jobs:
             | tee "$RUNNER_TEMP/m3-index-sort-interpreter.txt"
           grep -Fxq 'PASS M3_INDEX_SORT_ADAPTIVE checks=6576' "$RUNNER_TEMP/m3-index-sort-normal.txt"
           cmp "$RUNNER_TEMP/m3-index-sort-normal.txt" "$RUNNER_TEMP/m3-index-sort-interpreter.txt"
+          java -cp "$RUNNER_TEMP/m3-index-sort" \
+            com.m3.collections.M3IndexSortStrictContract \
+            | tee "$RUNNER_TEMP/m3-index-sort-strict-normal.txt"
+          java -Xint -cp "$RUNNER_TEMP/m3-index-sort" \
+            com.m3.collections.M3IndexSortStrictContract \
+            | tee "$RUNNER_TEMP/m3-index-sort-strict-interpreter.txt"
+          grep -Fxq 'PASS M3_INDEX_SORT_STRICT checks=9' "$RUNNER_TEMP/m3-index-sort-strict-normal.txt"
+          cmp "$RUNNER_TEMP/m3-index-sort-strict-normal.txt" "$RUNNER_TEMP/m3-index-sort-strict-interpreter.txt"
       - name: Preserve bounded proof receipts
         if: ${{ always() }}
         uses: actions/upload-artifact@v4

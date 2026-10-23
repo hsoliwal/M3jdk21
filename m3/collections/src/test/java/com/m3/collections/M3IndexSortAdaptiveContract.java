@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntFunction;
 
-/** Standalone Java 21 oracle comparing original physical-index order to stable JDK sorting. */
+/** Standalone Java 21 oracle for the explicit trusted prepared-index sorting path. */
 public final class M3IndexSortAdaptiveContract {
     private static long checks;
     private M3IndexSortAdaptiveContract() { }
@@ -41,17 +41,17 @@ public final class M3IndexSortAdaptiveContract {
 
     public static long contracts() {
         checks = 0;
-        expect(NullPointerException.class, () -> M3IndexSort.stable(null, x -> x, null));
-        expect(NullPointerException.class, () -> M3IndexSort.stable(new int[0], null, null));
+        expect(NullPointerException.class, () -> M3IndexSort.stablePrepared(null, x -> x, null));
+        expect(NullPointerException.class, () -> M3IndexSort.stablePrepared(new int[0], null, null));
         expect(ClassCastException.class, () ->
-                M3IndexSort.stable(new int[] {0, 1}, x -> new Object(), null));
+                M3IndexSort.stablePrepared(new int[] {0, 1}, x -> new Object(), null));
         expect(NullPointerException.class, () ->
-                M3IndexSort.stable(new int[] {0, 1}, x -> null, null));
+                M3IndexSort.stablePrepared(new int[] {0, 1}, x -> null, null));
         // The comparator exception is propagated without modifying the index lane.
         int[] exceptional = {2, 1, 0};
         RuntimeException sentinel = new IllegalStateException("source-order-callback");
         try {
-            M3IndexSort.stable(exceptional, x -> x, (a, b) -> { throw sentinel; });
+            M3IndexSort.stablePrepared(exceptional, x -> x, (a, b) -> { throw sentinel; });
             throw new AssertionError("Comparator exception swallowed");
         } catch (RuntimeException actual) {
             check(actual == sentinel, "exception identity");
@@ -80,7 +80,7 @@ public final class M3IndexSortAdaptiveContract {
                 Arrays.sort(boxed, (a, b) -> comp.compare(valueAt.apply(a), valueAt.apply(b)));
                 int[] expected = Arrays.stream(boxed).mapToInt(Integer::intValue).toArray();
                 int[] actual = positions.clone();
-                M3IndexSort.stable(actual, valueAt, comparator);
+                M3IndexSort.stablePrepared(actual, valueAt, comparator);
                 same(expected, actual, "random size=" + size + " iteration=" + iteration);
             }
         }
@@ -89,7 +89,7 @@ public final class M3IndexSortAdaptiveContract {
             int[] sorted = new int[size];
             for (int i = 0; i < size; i++) sorted[i] = i;
             AtomicInteger comparisons = new AtomicInteger();
-            M3IndexSort.stable(sorted, i -> i, (a, b) -> {
+            M3IndexSort.stablePrepared(sorted, i -> i, (a, b) -> {
                 comparisons.incrementAndGet(); return a.compareTo(b);
             });
             check(comparisons.get() == size - 1, "linear fast-path comparisons n=" + size);
@@ -97,7 +97,7 @@ public final class M3IndexSortAdaptiveContract {
         }
         // Explicit natural-order overload and physical negative coordinates.
         int[] natural = {3, -4, 1, 3, 0, -4};
-        M3IndexSort.stable(natural, i -> i, null);
+        M3IndexSort.stablePrepared(natural, i -> i, null);
         same(new int[] {-4, -4, 0, 1, 3, 3}, natural, "Comparable order");
         System.out.println("PASS M3_INDEX_SORT_ADAPTIVE checks=" + checks);
         return checks;
