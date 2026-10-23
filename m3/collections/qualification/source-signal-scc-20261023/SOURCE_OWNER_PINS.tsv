@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Exact original M3JDK21 compatible owner revisions on base b032048ee.
+# source_path	git_blob	disposition
+m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java	547124aa0466185ea667df866efc3af76b54279d	UNCHANGED
+m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java	2d01ee580593d04690df7ca6aba9006516aa7ce4	UNCHANGED
+m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java	abc928825c6e98c5ea7ce5fb4842dd97356ed0f6	UNCHANGED
+m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java	358d0f76c72a325691b0599938071bab5f589dc6	UNCHANGED
