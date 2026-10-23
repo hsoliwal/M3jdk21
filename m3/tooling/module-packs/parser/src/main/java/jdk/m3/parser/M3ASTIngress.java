@@ -2,6 +2,19 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package jdk.m3.parser;
 
+import com.sun.source.tree.ClassTree;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.IdentifierTree;
+import com.sun.source.tree.LiteralTree;
+import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.tree.MethodTree;
+import com.sun.source.tree.ModifiersTree;
+import com.sun.source.tree.Tree;
+import com.sun.source.tree.TypeParameterTree;
+import com.sun.source.tree.VariableTree;
+import com.sun.source.util.SourcePositions;
+import com.sun.source.util.TreeScanner;
+import com.sun.source.util.Trees;
 import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.Method;
@@ -9,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import javax.lang.model.element.Modifier;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -44,16 +58,149 @@ public final class M3ASTIngress {
 
     private M3ASTIngress() { }
 
+
     /**
-     * Index the javac compilation unit already produced by its owning task.
-     * This consumes the original Trees/LineMap and does not invoke another parser.
-     * Caller must supply the exact M3File source generation used for that unit;
-     * URI equality alone is not cryptographic source-content attestation.
+     * Index the caller's original javac CompilationUnitTree in a single bounded
+     * preorder pass. This NEVER constructs a JavacTask or reparses source.
+     * The caller must supply an M3File snapshot from the same parse generation.
+     * The URI is checked here; use the parsedSource overload to check spelling.
+     *
+     * <p>Original javac trees/types/positions are not retained in the resulting
+     * primitive index. Source and semantic-environment seals remain independent:
+     * this syntax index does not authorize reuse of stale attributed symbols.
      */
-    public static M3ASTIndex javac(M3File source,
-            com.sun.source.tree.CompilationUnitTree unit,
-            com.sun.source.util.Trees trees, Limits limits) {
-        return M3JavacIndexIngress.javac(source, unit, trees, limits);
+    public static M3ASTIndex javac(M3File source, CompilationUnitTree root,
+            Trees trees, Limits limits) {
+        check(source, limits);
+        Objects.requireNonNull(root, "original javac compilation unit");
+        Objects.requireNonNull(trees, "original javac Trees");
+        if (root.getSourceFile() == null
+                || !source.uri().equals(root.getSourceFile().toUri())) {
+            throw new IllegalArgumentException("javac source URI does not match M3File owner");
+        }
+        M3ASTIndex.Builder output = M3ASTIndex.builder(
+                source, M3ASTIndex.Domain.JAVAC, limits.maxNodes());
+        SourcePositions positions = trees.getSourcePositions();
+        int capacity = Math.min(32, limits.maxNodes());
+        Tree[] pending = new Tree[capacity];
+        int[] parents = new int[capacity];
+        int[] depth = new int[capacity];
+        pending[0] = root; parents[0] = -1; depth[0] = 1;
+        int size = 1;
+        int visited = 0;
+        ArrayList<Tree> children = new ArrayList<>();
+        JavacDirectChildren collector = new JavacDirectChildren();
+        while (size != 0) {
+            Tree node = pending[--size];
+            int parent = parents[size], level = depth[size];
+            pending[size] = null;
+            if (level > limits.maxDepth()) {
+                throw new IllegalArgumentException("javac nesting exceeds AST budget");
+            }
+            if (visited++ == limits.maxNodes()) {
+                throw new IllegalArgumentException("javac AST node budget exceeded");
+            }
+            long startPosition = positions.getStartPosition(root, node);
+            long endPosition = positions.getEndPosition(root, node);
+            int start = -1, end = -1;
+            int flags = M3ASTIndex.SYNTAX_ONLY;
+            if (parent == -1) {
+                // The root source envelope is exact even when javac does not
+                // provide a JCCompilationUnit endPosition.
+                start = 0; end = source.length();
+                flags |= M3ASTIndex.EXACT_RANGE;
+            } else if (startPosition >= 0 && endPosition >= startPosition) {
+                if (endPosition > source.length()) {
+                    throw new IllegalArgumentException("javac source span outside snapshot");
+                }
+                start = (int) startPosition;
+                end = (int) endPosition;
+                flags |= M3ASTIndex.EXACT_RANGE;
+            }
+            ModifiersTree modifiers = null;
+            String name = null;
+            String literal = null;
+            if (node instanceof ClassTree declaration) {
+                modifiers = declaration.getModifiers();
+                name = declaration.getSimpleName().toString();
+                if (node.getKind() == Tree.Kind.INTERFACE
+                        || node.getKind() == Tree.Kind.ANNOTATION_TYPE) {
+                    flags |= M3ASTIndex.INTERFACE;
+                }
+            } else if (node instanceof MethodTree declaration) {
+                modifiers = declaration.getModifiers();
+                name = declaration.getName().toString();
+            } else if (node instanceof VariableTree declaration) {
+                modifiers = declaration.getModifiers();
+                name = declaration.getName().toString();
+            } else if (node instanceof IdentifierTree identifier) {
+                name = identifier.getName().toString();
+            } else if (node instanceof MemberSelectTree select) {
+                name = select.getIdentifier().toString();
+            } else if (node instanceof TypeParameterTree parameter) {
+                name = parameter.getName().toString();
+            } else if (node instanceof LiteralTree value) {
+                Object originalValue = value.getValue();
+                literal = originalValue == null ? "null" : originalValue.toString();
+            }
+            if (modifiers != null) {
+                if (modifiers.getFlags().contains(Modifier.STATIC)) flags |= M3ASTIndex.STATIC;
+                if (modifiers.getFlags().contains(Modifier.FINAL)) flags |= M3ASTIndex.FINAL;
+            }
+            int row = output.add(parent, node.getKind().name(), start, end, flags);
+            if (name != null || literal != null) output.annotate(row, name, literal);
+
+            children.clear();
+            collector.remaining = limits.maxNodes() - visited - size;
+            node.accept(collector, children);
+            for (int i = children.size() - 1; i >= 0; i--) {
+                if (size == pending.length) {
+                    int expanded = Math.min(limits.maxNodes(),
+                            pending.length + (pending.length >>> 1) + 1);
+                    if (expanded <= size) throw new IllegalArgumentException("javac pending node budget");
+                    pending = Arrays.copyOf(pending, expanded);
+                    parents = Arrays.copyOf(parents, expanded);
+                    depth = Arrays.copyOf(depth, expanded);
+                }
+                pending[size] = children.get(i);
+                parents[size] = row;
+                depth[size++] = level + 1;
+            }
+        }
+        return output.seal();
+    }
+
+    /**
+     * Verify the exact original parsed characters without reading the filesystem.
+     * Callers with M3AST.Unit use its sealed source text from the parse callback.
+     */
+    public static M3ASTIndex javac(M3File source, CompilationUnitTree root,
+            Trees trees, CharSequence parsedSource, Limits limits) {
+        Objects.requireNonNull(parsedSource, "original parsed source");
+        if (source.length() != parsedSource.length()) {
+            throw new IllegalArgumentException("javac source generation length changed");
+        }
+        for (int i = 0; i < source.length(); i++) {
+            if (source.charAt(i) != parsedSource.charAt(i)) {
+                throw new IllegalArgumentException("javac source generation content changed");
+            }
+        }
+        return javac(source, root, trees, limits);
+    }
+
+    /** Reuse one scanner whose scan() collects only direct children. */
+    private static final class JavacDirectChildren extends TreeScanner<Void, ArrayList<Tree>> {
+        int remaining;
+
+        @Override public Void scan(Tree node, ArrayList<Tree> children) {
+            if (node != null) {
+                if (children.size() >= remaining) {
+                    throw new IllegalArgumentException("javac AST pending budget exceeded");
+                }
+                children.add(node);
+            }
+            return null;
+        }
     }
 
     /** Secure, complete POM XML parsing; exact element byte offsets are unavailable. */
