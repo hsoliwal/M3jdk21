@@ -6,7 +6,7 @@ name: M3JDK21 direct filtered sorted CollectionViews host
 on:
   pull_request:
     paths:
-      - '.github/workflows/m3-collectionviews-original-java21-20261023.yml'
+      - '.github/workflows/m3-collectionviews-original-java21.yml'
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/java/util/CollectionViews/**'
   workflow_dispatch:
