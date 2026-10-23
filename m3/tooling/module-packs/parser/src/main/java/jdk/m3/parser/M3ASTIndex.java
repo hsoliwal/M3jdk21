@@ -2,39 +2,21 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package jdk.m3.parser;
 
-import java.security.DigestException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.HexFormat;
+import java.util.HashMap;
 import java.util.Objects;
-import java.util.Optional;
-import javax.lang.model.element.Modifier;
 
 /**
  * One source-owned, primitive-coordinate *index* of a parser's existing AST.
  *
  * <p>It is not a replacement parser, semantic tree, source owner or mutable AST.
  * The external parser remains authoritative. This index retains only kind IDs,
- * source geometry, occurrence-parent coordinates and sibling chains. Optional
- * detail lanes retain detached names and canonical scalar literal Strings; no
- * tree, symbol, binding, Name, Map or compiler context is retained.
+ * source geometry, occurrence-parent coordinates and sibling chains; no node
+ * objects, Maps, entries, Strings of token text or compiler objects are retained.
  * Nodes are occurrence identities within this immutable source generation.
  */
 public final class M3ASTIndex {
-    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON, JAVAC, OPENREWRITE }
-    public enum LiteralKind { NONE, NULL, BOOLEAN, CHAR, STRING, INT, LONG, FLOAT, DOUBLE }
-    private static final LiteralKind[] LITERAL_KINDS = LiteralKind.values();
-    public static final String DETAILS_SCHEMA = "M3_AST_DETAILS_V1";
-    public static final String SOURCE_RANGE_HASH_SCHEMA = "M3_SOURCE_RANGE_UTF16BE_SHA256_V1";
-    public static final String STRUCTURAL_HASH_SCHEMA = "M3_AST_STRUCTURE_SHA256_V1";
-    /** Stable V1 modifier encoding, separate from the original four index flags. */
-    public static final long PUBLIC = 1L, PROTECTED = 1L << 1, PRIVATE = 1L << 2;
-    public static final long ABSTRACT = 1L << 3, DEFAULT = 1L << 4, STATIC = 1L << 5;
-    public static final long FINAL = 1L << 6, TRANSIENT = 1L << 7, VOLATILE = 1L << 8;
-    public static final long SYNCHRONIZED = 1L << 9, NATIVE = 1L << 10, STRICTFP = 1L << 11;
-    public static final long SEALED = 1L << 12, NON_SEALED = 1L << 13, INTERFACE = 1L << 14;
-    private static final long ALL_MODIFIERS = (1L << 15) - 1;
+    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON, JAVAC }
     public static final int NO_RANGE = -1;
     /** The origin parser guarantees an exact half-open UTF-16 source range. */
     public static final int EXACT_RANGE = 1;
@@ -43,14 +25,17 @@ public final class M3ASTIndex {
     /** The external source owner could not be verified against the original AST. */
     public static final int SOURCE_UNVERIFIED = 4;
     public static final int RECOVERED = 8;
+    /** Original javac modifiers; never synthesize semantic binding from syntax. */
+    public static final int STATIC = 16, FINAL = 32, INTERFACE = 64;
+    private static final long HASH_SEED = 0xcbf29ce484222325L;
+    private static final long HASH_PRIME = 0x100000001b3L;
     private final M3File source;
     private final Domain domain;
-    private final String[] names;
+    private final String[] names, symbols;
     private final int[] kinds, parents, starts, ends, flags, first, next, childCounts;
-    private final int[] startLines, endLines, enclosingTypes, enclosingExecutables;
-    private final byte[] literalKinds;
-    private final long[] modifiers;
-    private final String[] nodeNames, literalValues;
+    /** Optional javac-only lanes; absent for Maven/JDT/Jackson/Gradle indexes. */
+    private final int[] lines, endLines, symbolIds, literalIds;
+    private volatile long[] structureHashes;
 
     private M3ASTIndex(Builder builder) {
         source = builder.source;
@@ -64,21 +49,19 @@ public final class M3ASTIndex {
         first = Arrays.copyOf(builder.first, builder.size);
         next = Arrays.copyOf(builder.next, builder.size);
         childCounts = Arrays.copyOf(builder.childCounts, builder.size);
-        if (builder.literalKinds == null) {
-            startLines = endLines = enclosingTypes = enclosingExecutables = null;
-            literalKinds = null;
-            modifiers = null;
-            nodeNames = literalValues = null;
-        } else {
-            startLines = Arrays.copyOf(builder.startLines, builder.size);
-            endLines = Arrays.copyOf(builder.endLines, builder.size);
-            enclosingTypes = Arrays.copyOf(builder.enclosingTypes, builder.size);
-            enclosingExecutables = Arrays.copyOf(builder.enclosingExecutables, builder.size);
-            literalKinds = Arrays.copyOf(builder.literalKinds, builder.size);
-            modifiers = Arrays.copyOf(builder.modifiers, builder.size);
-            nodeNames = Arrays.copyOf(builder.nodeNames, builder.size);
-            literalValues = Arrays.copyOf(builder.literalValues, builder.size);
-        }
+        lines = trim(builder.lines, builder.size);
+        endLines = trim(builder.endLines, builder.size);
+        symbolIds = trim(builder.symbolIds, builder.size);
+        literalIds = trim(builder.literalIds, builder.size);
+        symbols = builder.symbols == null ? new String[0] : Arrays.copyOf(builder.symbols, builder.symbolCount);
+    }
+    private static int[] trim(int[] values, int length) {
+        return values == null ? null : Arrays.copyOf(values, length);
+    }
+    private static long hashKind(String value, int flags) {
+        long result = HASH_SEED;
+        for (int i = 0; i < value.length(); i++) result = (result ^ value.charAt(i)) * HASH_PRIME;
+        return (result ^ flags) * HASH_PRIME;
     }
 
     public static Builder builder(M3File source, Domain domain, int maxNodes) {
@@ -104,196 +87,68 @@ public final class M3ASTIndex {
         if (!hasExactRange(node)) throw new IllegalStateException("unverified/unknown source range");
         return source.subSequence(starts[node], ends[node]);
     }
-    public long primitiveBytes() { return (long) kinds.length * 8L * Integer.BYTES; }
-    /** Optional primitive lanes only; excludes references, Strings and object headers. */
-    public long metadataBytes() { return literalKinds == null ? 0L : nodeCount() * 25L; }
-    public boolean hasDetails(int node) { check(node); return literalKinds != null && literalKinds[node] >= 0; }
-    public int startLine(int node) { return hasDetails(node) ? startLines[node] : -1; }
-    public int line(int node) { return startLine(node); }
-    /** Line of the exclusive end offset, possibly the start of the next line. */
-    public int endLine(int node) { return hasDetails(node) ? endLines[node] : -1; }
-    public Optional<String> name(int node) { return hasDetails(node) ? Optional.ofNullable(nodeNames[node]) : Optional.empty(); }
-    public LiteralKind literalKind(int node) {
-        return hasDetails(node) ? LITERAL_KINDS[literalKinds[node]] : LiteralKind.NONE;
+    /** Original javac LineMap positions; -1 for other domains/unavailable geometry. */
+    public int line(int node) {
+        int row = check(node);
+        return lines == null ? -1 : lines[row];
     }
-    /** NONE and NULL have no value; CHAR is one UTF-16 unit, IEEE values are unsigned raw bits. */
-    public Optional<String> literalValue(int node) {
-        return hasDetails(node) ? Optional.ofNullable(literalValues[node]) : Optional.empty();
+    public record LineSpan(int first, int last) { }
+    /** Inclusive line span, or (-1,-1) when unavailable. */
+    public LineSpan spanLines(int node) {
+        int row = check(node);
+        return lines == null ? new LineSpan(-1, -1) : new LineSpan(lines[row], endLines[row]);
     }
-    public long modifierBits(int node) { return hasDetails(node) ? modifiers[node] : 0L; }
-    public int enclosingType(int node) { return hasDetails(node) ? enclosingTypes[node] : -1; }
-    public int enclosingExecutable(int node) { return hasDetails(node) ? enclosingExecutables[node] : -1; }
-
-    /** Closest strict ancestor with the exact provider kind name, or -1. */
-    public int firstEnclosing(int node, String kind) {
-        Objects.requireNonNull(kind, "kind");
+    /** Simple name/value dictionaries are indexed by primitive node rows, not entry objects. */
+    public String simpleName(int node) {
+        int row = check(node);
+        return symbolIds == null || symbolIds[row] < 0 ? null : symbols[symbolIds[row]];
+    }
+    public String literal(int node) {
+        int row = check(node);
+        return literalIds == null || literalIds[row] < 0 ? null : symbols[literalIds[row]];
+    }
+    /** First strict ancestor of the named kind, -1 when none. */
+    public int firstEnclosing(int node, String syntaxKind) {
+        Objects.requireNonNull(syntaxKind, "syntaxKind");
         for (int row = parents[check(node)]; row >= 0; row = parents[row]) {
-            if (names[kinds[row]].equals(kind)) return row;
+            if (names[kinds[row]].equals(syntaxKind)) return row;
         }
         return -1;
     }
-
-    /**
-     * Covered source lines: unknown is -1, empty is 0, otherwise count through
-     * end-1. An exclusive end at the next line's start does not cover that line.
-     * CRLF is one line break; the boundary between CR and LF is on the old line.
-     */
-    public int spanLines(int node) {
-        check(node);
-        if (!hasDetails(node) || startLines[node] < 0 || starts[node] < 0) return -1;
-        if (starts[node] == ends[node]) return 0;
-        int lastLine = endLines[node];
-        char last = source.charAt(ends[node] - 1);
-        if (last == '\n' || (last == '\r'
-                && (ends[node] == source.length() || source.charAt(ends[node]) != '\n'))) lastLine--;
-        return lastLine - startLines[node] + 1;
-    }
-
-    /** Explicit bounded exact UTF-16BE range hash; source-verification flags are not changed. */
-    public String sourceRangeSha256(int node, int maxUtf16Units) {
-        if (maxUtf16Units < 0) throw new IllegalArgumentException("negative source hash budget");
-        if (!hasExactRange(node)) throw new IllegalStateException("unknown/unavailable source range");
-        if (ends[node] - starts[node] > maxUtf16Units) throw new IllegalArgumentException("source hash unit budget exceeded");
-        MessageDigest digest = sha256();
-        for (int i = starts[node]; i < ends[node]; i++) putChar(digest, source.charAt(i));
-        return HexFormat.of().formatHex(digest.digest());
-    }
-
-    /**
-     * One bounded bottom-up pass over this detached occurrence index. The text
-     * budget counts each row's kind, optional name and literal-value UTF-16 units.
-     * Budgets are checked before allocating the 32-byte-per-row result. No source
-     * span is hashed, no tree is retained, and no result is cached in the index.
-     *
-     * <p>V1 frames schema, provider domain, kind, SYNTAX_ONLY/RECOVERED flags,
-     * detail presence, name, literal kind/value, modifiers and ordered child
-     * digests. Source geometry, URI, enclosing coordinates and source-verification
-     * flags are excluded. This is contextual structure evidence, not a proof of
-     * semantic equivalence or compatibility with another owner's atom format.
-     */
-    public StructuralHashes structuralHashes(int maxNodes, long maxTextUnits) {
-        if (maxNodes < 0 || maxTextUnits < 0) throw new IllegalArgumentException("negative structural hash budget");
-        if (nodeCount() > maxNodes) throw new IllegalArgumentException("structural hash node budget exceeded");
-        long units = 0;
-        for (int row = 0; row < nodeCount(); row++) {
-            units += names[kinds[row]].length();
-            if (hasDetails(row)) {
-                if (nodeNames[row] != null) units += nodeNames[row].length();
-                if (literalValues[row] != null) units += literalValues[row].length();
+    /** Lazy, immutable-on-publication structural hint: never a semantic proof. */
+    public long structuralHash64(int node) {
+        int row = check(node);
+        long[] hashes = structureHashes;
+        if (hashes == null) {
+            synchronized (this) {
+                hashes = structureHashes;
+                if (hashes == null) {
+                    hashes = new long[nodeCount()];
+                    for (int current = nodeCount() - 1; current >= 0; current--) {
+                        long hash = hashKind(names[kinds[current]], flags[current] & (STATIC | FINAL | INTERFACE));
+                        for (int child = first[current]; child != -1; child = next[child]) {
+                            hash = (hash ^ hashes[child]) * HASH_PRIME;
+                        }
+                        hashes[current] = (hash ^ childCounts[current]) * HASH_PRIME;
+                    }
+                    structureHashes = hashes;
+                }
             }
-            if (units > maxTextUnits) throw new IllegalArgumentException("structural hash text budget exceeded");
         }
-        byte[] result = new byte[Math.multiplyExact(nodeCount(), 32)];
-        MessageDigest digest = sha256();
-        for (int row = nodeCount() - 1; row >= 0; row--) {
-            digest.reset();
-            putText(digest, STRUCTURAL_HASH_SCHEMA);
-            putText(digest, domain.name());
-            putText(digest, names[kinds[row]]);
-            putInt(digest, flags[row] & (SYNTAX_ONLY | RECOVERED));
-            digest.update((byte) (hasDetails(row) ? 1 : 0));
-            if (hasDetails(row)) {
-                putText(digest, nodeNames[row]);
-                putText(digest, LITERAL_KINDS[literalKinds[row]].name());
-                putText(digest, literalValues[row]);
-                putLong(digest, modifiers[row]);
-            }
-            putInt(digest, childCounts[row]);
-            for (int child = first[row]; child >= 0; child = next[child]) digest.update(result, child * 32, 32);
-            try { digest.digest(result, row * 32, 32); }
-            catch (DigestException impossible) { throw new AssertionError(impossible); }
-        }
-        return new StructuralHashes(result, units);
+        return hashes[row];
     }
-
-    public static final class StructuralHashes {
-        private final byte[] values;
-        private final long textUnits;
-        private StructuralHashes(byte[] values, long textUnits) {
-            this.values = values;
-            this.textUnits = textUnits;
-        }
-        /** Internal count observed by the existing structural-hash admission. */
-        long textUnits() { return textUnits; }
-        /** Borrow the existing SHA bytes for primitive candidate-bucket lookup. */
-        long prefix64(int node) {
-            int start = Objects.checkIndex(node, nodeCount()) * 32;
-            long result = 0;
-            for (int i = 0; i < 8; i++) result = (result << 8) | (values[start + i] & 255L);
-            return result;
-        }
-        boolean sameHash(int left, int right) {
-            int a = Objects.checkIndex(left, nodeCount()) * 32;
-            int b = Objects.checkIndex(right, nodeCount()) * 32;
-            return Arrays.mismatch(values, a, a + 32, values, b, b + 32) < 0;
-        }
-        public String schema() { return STRUCTURAL_HASH_SCHEMA; }
-        public int nodeCount() { return values.length / 32; }
-        public String sha256(int node) {
-            int start = Objects.checkIndex(node, nodeCount()) * 32;
-            return HexFormat.of().formatHex(values, start, start + 32);
-        }
+    /** Exact source-range fingerprint; collision-prone discovery signal, not an exact proof. */
+    public long exactHash64(int node) {
+        if (!hasExactRange(node)) throw new IllegalStateException("exact source hash requires verified range");
+        long hash = HASH_SEED;
+        for (int i = starts[node]; i < ends[node]; i++) hash = (hash ^ source.charAt(i)) * HASH_PRIME;
+        return hash;
     }
-
-    public static long modifierBit(Modifier modifier) {
-        return switch (Objects.requireNonNull(modifier, "modifier")) {
-            case PUBLIC -> PUBLIC;
-            case PROTECTED -> PROTECTED;
-            case PRIVATE -> PRIVATE;
-            case ABSTRACT -> ABSTRACT;
-            case DEFAULT -> DEFAULT;
-            case STATIC -> STATIC;
-            case FINAL -> FINAL;
-            case TRANSIENT -> TRANSIENT;
-            case VOLATILE -> VOLATILE;
-            case SYNCHRONIZED -> SYNCHRONIZED;
-            case NATIVE -> NATIVE;
-            case STRICTFP -> STRICTFP;
-            case SEALED -> SEALED;
-            case NON_SEALED -> NON_SEALED;
-        };
+    public long primitiveBytes() {
+        return (long) kinds.length * 8L * Integer.BYTES
+                + (lines == null ? 0L : (long) kinds.length * 4L * Integer.BYTES)
+                + (structureHashes == null ? 0L : (long) kinds.length * Long.BYTES);
     }
-
-    private static MessageDigest sha256() {
-        try { return MessageDigest.getInstance("SHA-256"); }
-        catch (NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
-    }
-    private static void putChar(MessageDigest digest, char value) {
-        digest.update((byte) (value >>> 8)); digest.update((byte) value);
-    }
-    private static void putInt(MessageDigest digest, int value) {
-        digest.update((byte) (value >>> 24)); digest.update((byte) (value >>> 16));
-        digest.update((byte) (value >>> 8)); digest.update((byte) value);
-    }
-    private static void putLong(MessageDigest digest, long value) {
-        putInt(digest, (int) (value >>> 32)); putInt(digest, (int) value);
-    }
-    private static void putText(MessageDigest digest, String value) {
-        putInt(digest, value == null ? -1 : value.length());
-        if (value != null) for (int i = 0; i < value.length(); i++) putChar(digest, value.charAt(i));
-    }
-    /** Internal primitive queries reuse the original kind vocabulary. */
-    int kindOrdinal(int node) { return kinds[check(node)]; }
-    int kindVocabularySize() { return names.length; }
-    String kindVocabularyName(int ordinal) {
-        return names[Objects.checkIndex(ordinal, names.length)];
-    }
-
-    /** Compare exactly the retained structural atom lanes, not semantic bindings. */
-    boolean sameStructuralAtom(int firstNode, int secondNode) {
-        int a = check(firstNode), b = check(secondNode);
-        if (kinds[a] != kinds[b] || childCounts[a] != childCounts[b]
-                || (flags[a] & (SYNTAX_ONLY | RECOVERED))
-                   != (flags[b] & (SYNTAX_ONLY | RECOVERED))) return false;
-        boolean aDetails = literalKinds != null && literalKinds[a] >= 0;
-        boolean bDetails = literalKinds != null && literalKinds[b] >= 0;
-        if (aDetails != bDetails) return false;
-        return !aDetails || (Objects.equals(nodeNames[a], nodeNames[b])
-                && literalKinds[a] == literalKinds[b]
-                && Objects.equals(literalValues[a], literalValues[b])
-                && modifiers[a] == modifiers[b]);
-    }
-
     private int check(int node) { return Objects.checkIndex(node, kinds.length); }
 
     /** Bounded, single-owner creation; discarded immediately after immutable publication. */
@@ -306,10 +161,10 @@ public final class M3ASTIndex {
         private int[] kinds = new int[32], parents = new int[32], starts = new int[32];
         private int[] ends = new int[32], flags = new int[32], first = new int[32];
         private int[] last = new int[32], next = new int[32], childCounts = new int[32];
-        private int[] startLines, endLines, enclosingTypes, enclosingExecutables;
-        private byte[] literalKinds;
-        private long[] modifiers;
-        private String[] nodeNames, literalValues;
+        private int[] lines, endLines, symbolIds, literalIds;
+        private String[] symbols;
+        private final HashMap<String, Integer> symbolDictionary = new HashMap<>();
+        private int symbolCount;
         private int size;
         private boolean sealed;
 
@@ -336,7 +191,9 @@ public final class M3ASTIndex {
                     || (start >= 0 && end >= start && end <= source.length()))) {
                 throw new IllegalArgumentException("invalid UTF-16 half-open AST range");
             }
-            if ((flags & ~(EXACT_RANGE | SYNTAX_ONLY | SOURCE_UNVERIFIED | RECOVERED)) != 0) {
+            int permitted = EXACT_RANGE | SYNTAX_ONLY | SOURCE_UNVERIFIED | RECOVERED;
+            if (domain == Domain.JAVAC) permitted |= STATIC | FINAL | INTERFACE;
+            if ((flags & ~permitted) != 0) {
                 throw new IllegalArgumentException("unknown AST index flags");
             }
             if ((flags & EXACT_RANGE) != 0 && start == NO_RANGE) {
@@ -355,6 +212,10 @@ public final class M3ASTIndex {
             ends[row] = end;
             this.flags[row] = flags;
             first[row] = last[row] = next[row] = -1;
+            if (symbolIds != null) {
+                symbolIds[row] = -1; literalIds[row] = -1;
+                lines[row] = -1; endLines[row] = -1;
+            }
             if (parent >= 0) {
                 if (first[parent] == -1) first[parent] = row;
                 else next[last[parent]] = row;
@@ -362,6 +223,50 @@ public final class M3ASTIndex {
                 childCounts[parent]++;
             }
             return row;
+        }
+
+        /**
+         * Attach authoritative javac-only facts to the just-added node.
+         * The transient hash map interns repeated spellings and does not survive seal().
+         */
+        public void annotateJavac(int row, int firstLine, int finalLine,
+                String simpleName, String literalValue) {
+            if (sealed || domain != Domain.JAVAC || row != size - 1) {
+                throw new IllegalStateException("Javac facts require current unsealed Javac row");
+            }
+            if ((firstLine == -1) != (finalLine == -1)
+                    || (firstLine != -1 && (firstLine < 1 || finalLine < firstLine))) {
+                throw new IllegalArgumentException("invalid javac line span");
+            }
+            if (lines == null) {
+                lines = new int[kinds.length]; endLines = new int[kinds.length];
+                symbolIds = new int[kinds.length]; literalIds = new int[kinds.length];
+                Arrays.fill(lines, -1); Arrays.fill(endLines, -1);
+                Arrays.fill(symbolIds, -1); Arrays.fill(literalIds, -1);
+            }
+            lines[row] = firstLine; endLines[row] = finalLine;
+            symbolIds[row] = atom(simpleName);
+            literalIds[row] = atom(literalValue);
+        }
+        private int atom(String text) {
+            if (text == null) return -1;
+            if (text.length() > 65_535) {
+                throw new IllegalArgumentException("javac value dictionary string budget exceeded");
+            }
+            Integer existing = symbolDictionary.get(text);
+            if (existing != null) return existing;
+            if (symbolCount == maxNodes) {
+                throw new IllegalArgumentException("javac value dictionary budget exceeded");
+            }
+            if (symbols == null) symbols = new String[16];
+            if (symbolCount == symbols.length) {
+                symbols = Arrays.copyOf(symbols,
+                        Math.min(maxNodes, Math.max(symbolCount + 1, symbols.length * 2)));
+            }
+            int slot = symbolCount++;
+            symbols[slot] = text;
+            symbolDictionary.put(text, slot);
+            return slot;
         }
 
         /** Complete a previously unknown block/source range, before publication. */
@@ -395,76 +300,6 @@ public final class M3ASTIndex {
             return new M3ASTIndex(this);
         }
 
-        /**
-         * Publish detached optional details once per row. Line numbers are
-         * one-based in the supplied source; both unknown lines are -1. Enclosing
-         * owners must be strict ancestors, never the row itself or a sibling.
-         * FLOAT/DOUBLE values are unsigned decimal raw IEEE bits; integer values
-         * are canonical decimal, CHAR exactly one UTF-16 unit, STRING any String.
-         */
-        public void details(int node, int startLine, int endLine, String name,
-                            LiteralKind literalKind, String literalValue, long modifierBits,
-                            int enclosingType, int enclosingExecutable) {
-            if (sealed) throw new IllegalStateException("index already sealed");
-            Objects.checkIndex(node, size);
-            if (literalKinds != null && literalKinds[node] >= 0) throw new IllegalStateException("details already assigned");
-            if (!((startLine == -1 && endLine == -1) || (startLine >= 1 && endLine >= startLine))) {
-                throw new IllegalArgumentException("invalid one-based line pair");
-            }
-            if (starts[node] < 0 && startLine != -1) throw new IllegalArgumentException("line facts without source geometry");
-            if (starts[node] == ends[node] && startLine != endLine) throw new IllegalArgumentException("empty range spans no line boundary");
-            if ((modifierBits & ~ALL_MODIFIERS) != 0) throw new IllegalArgumentException("unknown modifier bits");
-            checkAncestor(node, enclosingType);
-            checkAncestor(node, enclosingExecutable);
-            validateLiteral(Objects.requireNonNull(literalKind, "literalKind"), literalValue);
-            if (literalKinds == null) allocateDetails(kinds.length);
-            startLines[node] = startLine;
-            endLines[node] = endLine;
-            nodeNames[node] = name;
-            literalKinds[node] = (byte) literalKind.ordinal();
-            literalValues[node] = literalValue;
-            modifiers[node] = modifierBits;
-            enclosingTypes[node] = enclosingType;
-            enclosingExecutables[node] = enclosingExecutable;
-        }
-
-        private void checkAncestor(int node, int ancestor) {
-            if (ancestor == -1) return;
-            int parent = parents[node];
-            if (parent >= 0 && (parent == ancestor || (literalKinds != null && literalKinds[parent] >= 0
-                    && (enclosingTypes[parent] == ancestor || enclosingExecutables[parent] == ancestor)))) return;
-            for (int row = parents[node]; row >= 0; row = parents[row]) if (row == ancestor) return;
-            throw new IllegalArgumentException("enclosing coordinate is not a strict ancestor");
-        }
-
-        private static void validateLiteral(LiteralKind kind, String value) {
-            boolean valid = switch (kind) {
-                case NONE, NULL -> value == null;
-                case STRING -> value != null;
-                case CHAR -> value != null && value.length() == 1;
-                case BOOLEAN -> "true".equals(value) || "false".equals(value);
-                case INT -> value != null && Integer.toString(Integer.parseInt(value)).equals(value);
-                case LONG -> value != null && Long.toString(Long.parseLong(value)).equals(value);
-                case FLOAT -> value != null && Integer.toUnsignedString(Integer.parseUnsignedInt(value)).equals(value);
-                case DOUBLE -> value != null && Long.toUnsignedString(Long.parseUnsignedLong(value)).equals(value);
-            };
-            if (!valid) throw new IllegalArgumentException("noncanonical detached literal value");
-        }
-
-        private void allocateDetails(int capacity) {
-            startLines = new int[capacity]; endLines = new int[capacity];
-            enclosingTypes = new int[capacity]; enclosingExecutables = new int[capacity];
-            literalKinds = new byte[capacity]; modifiers = new long[capacity];
-            nodeNames = new String[capacity]; literalValues = new String[capacity];
-            fillMissingDetails(0, capacity);
-        }
-
-        private void fillMissingDetails(int from, int to) {
-            Arrays.fill(startLines, from, to, -1); Arrays.fill(endLines, from, to, -1);
-            Arrays.fill(enclosingTypes, from, to, -1); Arrays.fill(enclosingExecutables, from, to, -1);
-            Arrays.fill(literalKinds, from, to, (byte) -1);
-        }
-
         private int nameId(String value) {
             if (value.isEmpty() || value.length() > 1024) {
                 throw new IllegalArgumentException("invalid bounded AST kind");
@@ -479,7 +314,6 @@ public final class M3ASTIndex {
         }
 
         private void grow() {
-            int previous = kinds.length;
             int cap = (int) Math.min(maxNodes, Math.max((long) size + 1L, size + (long) (size >>> 1) + 1));
             kinds = Arrays.copyOf(kinds, cap);
             parents = Arrays.copyOf(parents, cap);
@@ -490,13 +324,9 @@ public final class M3ASTIndex {
             last = Arrays.copyOf(last, cap);
             next = Arrays.copyOf(next, cap);
             childCounts = Arrays.copyOf(childCounts, cap);
-            if (literalKinds != null) {
-                startLines = Arrays.copyOf(startLines, cap); endLines = Arrays.copyOf(endLines, cap);
-                enclosingTypes = Arrays.copyOf(enclosingTypes, cap);
-                enclosingExecutables = Arrays.copyOf(enclosingExecutables, cap);
-                literalKinds = Arrays.copyOf(literalKinds, cap); modifiers = Arrays.copyOf(modifiers, cap);
-                nodeNames = Arrays.copyOf(nodeNames, cap); literalValues = Arrays.copyOf(literalValues, cap);
-                fillMissingDetails(previous, cap);
+            if (lines != null) {
+                lines = Arrays.copyOf(lines, cap); endLines = Arrays.copyOf(endLines, cap);
+                symbolIds = Arrays.copyOf(symbolIds, cap); literalIds = Arrays.copyOf(literalIds, cap);
             }
         }
     }
