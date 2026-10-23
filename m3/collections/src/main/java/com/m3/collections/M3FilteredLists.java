@@ -287,9 +287,12 @@ public final class M3FilteredLists {
             private ListIterator<E> iterator;
             private int logical;
             private int lastPhysical = -1;
-            private boolean lastWasNext;
-            private boolean failed;
-            private boolean nextPrepared, previousPrepared;
+            // Parent-owned cursor behavior: one primitive mask, no boolean field quartet.
+            private static final int NEXT_PREPARED = 1;
+            private static final int PREVIOUS_PREPARED = 1 << 1;
+            private static final int FAILED = 1 << 2;
+            private static final int LAST_WAS_NEXT = 1 << 3;
+            private int state;
             private int nextSteps, previousSteps;
             private E nextValue, previousValue;
 
@@ -299,11 +302,11 @@ public final class M3FilteredLists {
             }
 
             private void live() {
-                if (failed) throw new IllegalStateException("filtered List iterator failed");
+                if ((state & FAILED) != 0) throw new IllegalStateException("filtered List iterator failed");
             }
 
             private void discardProbes() {
-                nextPrepared = previousPrepared = false;
+                state &= ~(NEXT_PREPARED | PREVIOUS_PREPARED);
                 nextValue = previousValue = null;
                 nextSteps = previousSteps = 0;
             }
@@ -311,8 +314,8 @@ public final class M3FilteredLists {
             /** Probe and restore underlying cursor; callers never expose the probe's last-returned. */
             private int probe(boolean forward) {
                 live();
-                if (forward && nextPrepared) return nextSteps;
-                if (!forward && previousPrepared) return previousSteps;
+                if (forward && (state & NEXT_PREPARED) != 0) return nextSteps;
+                if (!forward && (state & PREVIOUS_PREPARED) != 0) return previousSteps;
                 int walked = 0, match = 0;
                 E accepted = null;
                 try {
@@ -322,7 +325,7 @@ public final class M3FilteredLists {
                         if (predicate.test(item)) { match = walked; accepted = item; break; }
                     }
                 } catch (RuntimeException | Error exception) {
-                    failed = true;
+                    state |= FAILED;
                     throw exception;
                 } finally {
                     // Predicate or transport failures leave the iterator terminally failed.
@@ -331,14 +334,14 @@ public final class M3FilteredLists {
                             if (forward) iterator.previous(); else iterator.next();
                         }
                     } catch (RuntimeException | Error failure) {
-                        failed = true;
+                        state |= FAILED;
                         throw failure;
                     }
                 }
                 if (forward) {
-                    nextPrepared = true; nextSteps = match; nextValue = accepted;
+                    state |= NEXT_PREPARED; nextSteps = match; nextValue = accepted;
                 } else {
-                    previousPrepared = true; previousSteps = match; previousValue = accepted;
+                    state |= PREVIOUS_PREPARED; previousSteps = match; previousValue = accepted;
                 }
                 return match;
             }
@@ -349,9 +352,9 @@ public final class M3FilteredLists {
                 if (!hasNext()) throw new NoSuchElementException();
                 E result = nextValue;
                 try { for (int i = 0; i < nextSteps; i++) iterator.next(); }
-                catch (RuntimeException | Error exception) { failed = true; throw exception; }
+                catch (RuntimeException | Error exception) { state |= FAILED; throw exception; }
                 lastPhysical = iterator.previousIndex();
-                lastWasNext = true;
+                state |= LAST_WAS_NEXT;
                 logical++;
                 discardProbes();
                 return result;
@@ -360,9 +363,9 @@ public final class M3FilteredLists {
                 if (!hasPrevious()) throw new NoSuchElementException();
                 E result = previousValue;
                 try { for (int i = 0; i < previousSteps; i++) iterator.previous(); }
-                catch (RuntimeException | Error exception) { failed = true; throw exception; }
+                catch (RuntimeException | Error exception) { state |= FAILED; throw exception; }
                 lastPhysical = iterator.nextIndex();
-                lastWasNext = false;
+                state &= ~LAST_WAS_NEXT;
                 logical--;
                 discardProbes();
                 return result;
@@ -378,7 +381,7 @@ public final class M3FilteredLists {
                 backing.remove(target);
                 if (target < position) position--;
                 iterator = backing.listIterator(position);
-                if (lastWasNext) logical--;
+                if ((state & LAST_WAS_NEXT) != 0) logical--;
                 lastPhysical = -1;
                 modCount++;
                 discardProbes();

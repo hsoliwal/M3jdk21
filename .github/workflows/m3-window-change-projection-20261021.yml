@@ -1,0 +1,45 @@
+name: M3JDK21 indexed viewport delta CPU proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3WindowPlan.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3WindowPlanChangeContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3WindowPlanChangeTest.java'
+      - 'm3/collections/qualification/window-delta-20261021/**'
+      - 'm3/docs/eclipse-jdk-gap-20261021/**'
+      - '.github/workflows/m3-window-change-projection-20261021.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java21-window-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse output drift against canonical source SHA-256
+        shell: bash
+        run: |
+          printf '%s  %s\n' \
+            'b52c2947be7b45b0f66ca7fa472bf25c929266281f90c1db2566158aea8f52ae' 'm3/collections/src/main/java/com/m3/collections/M3WindowPlan.java' \
+            '635f5c5d8570b6424215b0fd252bc4e00a6d140dbb7dfd0db186284cdca95542' 'm3/collections/src/test/java/com/m3/collections/M3WindowPlanChangeContract.java' \
+            'a732f65d015ad2a6e721b6c394048fa83c028f96a5eeea89b115d2a3f49c7aae' 'm3/collections/src/test/java/com/m3/collections/M3WindowPlanChangeTest.java' | sha256sum -c -
+      - name: Compile real owner and execute seeded strict contract
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/window-current"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/window-current" \
+            m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java \
+            m3/collections/src/test/java/com/m3/collections/M3WindowPlanChangeContract.java
+          java -cp "$RUNNER_TEMP/window-current" com.m3.collections.M3WindowPlanChangeContract \
+            | tee "$RUNNER_TEMP/window-proof.txt"
+          grep -Fx 'M3_WINDOW_DELTA_PROJECTION_PASS checks=349502' "$RUNNER_TEMP/window-proof.txt"

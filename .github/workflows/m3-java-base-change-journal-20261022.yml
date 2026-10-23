@@ -1,0 +1,48 @@
+# SPDX-License-Identifier: Apache-2.0
+# Direct product qualification: original java.base, no separate M3 runtime.
+name: M3JDK21 java.base viewport change journal contract
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/ChangeJournal.java'
+      - 'test/jdk/java/util/ChangeJournalTest.java'
+      - 'test/jdk/java/util/ChangeJournalWindowTest.java'
+      - '.github/workflows/m3-java-base-change-journal-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-java-base-classes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            src/java.base/share/classes/java/util/ChangeJournal.java
+            test/jdk/java/util/ChangeJournalTest.java
+            test/jdk/java/util/ChangeJournalWindowTest.java
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile modified original java.base journal using Java 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE="$RUNNER_TEMP/m3-java-base-sources"
+          PATCH="$RUNNER_TEMP/m3-java-base-classes"
+          TESTS="$RUNNER_TEMP/m3-java-base-tests"
+          mkdir -p "$SOURCE/java/util" "$PATCH" "$TESTS"
+          cp src/java.base/share/classes/java/util/ChangeJournal.java "$SOURCE/java/util/ChangeJournal.java"
+          javac -Xlint:all -Werror \
+            --patch-module "java.base=$SOURCE" \
+            -d "$PATCH" "$SOURCE/java/util/ChangeJournal.java"
+          javac --patch-module "java.base=$PATCH" -d "$TESTS" \
+            test/jdk/java/util/ChangeJournalTest.java \
+            test/jdk/java/util/ChangeJournalWindowTest.java
+          java --patch-module "java.base=$PATCH" -cp "$TESTS" ChangeJournalTest
+          java --patch-module "java.base=$PATCH" -cp "$TESTS" ChangeJournalWindowTest
+          sha256sum src/java.base/share/classes/java/util/ChangeJournal.java

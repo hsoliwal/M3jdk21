@@ -194,12 +194,30 @@ public final class M3TreeWindowPlan {
 	 */
 	public void shiftSiblings (int parentId, int fromIndex, int delta) {
 		if (delta == 0) return;
+		// A shift is one structural atom: reject an invalid final coordinate
+		// before changing any native-handle key. A partial update would leave
+		// slotByKey indexed by old coordinates and make later plans lose rows.
+		for (int entry = 0; entry < size; entry++) {
+			long previous = keys [entry];
+			int index = (int) previous;
+			if ((int) (previous >> 32) == parentId && index >= fromIndex) {
+				long next = (long) index + delta;
+				if (next < 0 || next > Integer.MAX_VALUE) {
+					throw new IllegalArgumentException ("shifted child index outside int range");
+				}
+				// Negative shifts require the deleted range to have left the
+				// resident topology already. Never merge two native row handles
+				// onto one (parent, childIndex) coordinate.
+				if (next < fromIndex && slotByKey.containsKey (key (parentId, (int) next))) {
+					throw new IllegalArgumentException ("shift overlaps a resident sibling");
+				}
+			}
+		}
 		boolean moved = false;
 		for (int entry = 0; entry < size; entry++) {
-			long key = keys [entry];
-			int index = (int) key;
-			if ((int) (key >> 32) == parentId && index >= fromIndex) {
-				if (index + delta < 0) throw new IllegalArgumentException ("negative child index");
+			long previous = keys [entry];
+			int index = (int) previous;
+			if ((int) (previous >> 32) == parentId && index >= fromIndex) {
 				keys [entry] = key (parentId, index + delta);
 				moved = true;
 			}

@@ -364,6 +364,8 @@ catch (NoSuchFileException | NotDirectoryException missing) { return new FileInf
                             visited[size++] = true;
                             String after = "";
                             for (;;) {
+                                //FLLDCIM: MARK — EFS_CANCEL m3fs-page-loop CONTRACT
+                                canceled(monitor);
                                 M3FS.DirectoryPage page = image.listPage(next, after, 512);
                                 M3DirectoryTable table = page.table();
                                 for (int row = 0; row < table.size(); row++) {
@@ -456,7 +458,7 @@ catch (NoSuchFileException | NotDirectoryException missing) { return new FileInf
             super.copyDirectory(sourceInfo, destination, options, monitor);
             return;
         }
-        IFileStore[] children = childStores(EFS.NONE, null);
+        IFileStore[] children = childStores(EFS.NONE, monitor);
         SubMonitor progress = SubMonitor.convert(monitor, children.length + 1);
         super.copyDirectory(sourceInfo, destination, options | EFS.SHALLOW, progress.newChild(1));
         MultiStatus failures = null;

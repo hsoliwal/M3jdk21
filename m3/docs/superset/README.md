@@ -1,0 +1,14 @@
+# Superset branch m3/superset-20261023 (M3jdk21)
+
+Built 2026-10-23 from master by merging every open PR head server side (POST /repos/{r}/merges, no rebase, no
+force, no PR merged or closed) in the order of `build_order.py`: default-branch PRs first, GitHub-mergeable before
+dirty, oldest first, a PR stacked on another PR right after its base. `SUPERSET_20261023.tsv` is the ledger: one
+row per PR with MERGED (merge commit on this branch) or CONFLICT (left out; its row names the track and files).
+
+The conflicts are the fill: 84 PRs were already dirty against master, the rest conflict with PRs merged before
+them in this branch (shared owners: m3/collections M3FilteredViews, M3IndexedListSnapshot, M3LongIndexProjection;
+m3/docs/name-mapping.json). They are resolved one PR at a time by agents (merge the superset into the PR branch,
+resolve as a superset, gate with the module's Maven build, push a side branch, merge that into the superset) and
+never by hand-editing shared ledgers (feedback-com-synexia-push-api-fallback).
+
+Merge is the owner's call. Tools: S:/m3-scratch/consolidate (dump_prs.py, build_order.py, superset_merge.sh).

@@ -30,11 +30,11 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
      * @throws IllegalArgumentException if expectedKeys is negative
      */
     public M3LinkedHashMap(int expectedKeys) {
-        this(new Table(false, false, expectedKeys), false);
+        this(createTable(false, false, expectedKeys), false);
     }
     /** Select insertion order or access order, as with LinkedHashMap. */
-    public M3LinkedHashMap(boolean accessOrder) { this(new Table(accessOrder, false), false); }
-    M3LinkedHashMap(boolean accessOrder, boolean keyOnly) { this(new Table(accessOrder, keyOnly), false); }
+    public M3LinkedHashMap(boolean accessOrder) { this(createTable(accessOrder, false, 0), false); }
+    M3LinkedHashMap(boolean accessOrder, boolean keyOnly) { this(createTable(accessOrder, keyOnly, 0), false); }
     private M3LinkedHashMap(Table table, boolean reversed) { this.table = table; this.reversed = reversed; }
     @Override int firstSlot() { return reversed ? table.last : table.first; }
     @Override int lastSlot() { return reversed ? table.first : table.last; }
@@ -71,6 +71,14 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     /** Validate index membership, encounter links and free-slot ownership. */
     public void verifyInvariants() { table.verify(); }
 
+    private static Table createTable(boolean accessOrder, boolean keyOnly, int expectedKeys) {
+        if (expectedKeys < 0) { throw new IllegalArgumentException("negative expectedKeys"); }
+        if (!com.m3.arrays.M3ArrayNative.isLoaded()) {
+            com.m3.arrays.M3ArrayNative.allocateObjectsRequired(0);
+        }
+        return new Table(accessOrder, keyOnly, expectedKeys);
+    }
+
     private static final class Table {
         private Object[] keys = M3SlotArrays.EMPTY_OBJECTS, values = M3SlotArrays.EMPTY_OBJECTS;
         private int[] hashes = M3SlotArrays.EMPTY_INTS, before = M3SlotArrays.EMPTY_INTS,
@@ -97,7 +105,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             while (index[p] != 0) { p = (p + 1) & (index.length - 1); } return p;
         }
         void rehash(int capacity) {
-            int[] replacement = new int[capacity];
+            int[] replacement = com.m3.arrays.M3ArrayNative.allocateIntsRequired(capacity);
             for (int s = first; s >= 0; s = after[s]) {
                 int p = hashes[s] & (capacity - 1);
                 while (replacement[p] != 0) { p = (p + 1) & (capacity - 1); }
@@ -117,11 +125,21 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             }
             return capacity;
         }
+        private static Object[] copyObjects(Object[] source, int length) {
+            Object[] target = com.m3.arrays.M3ArrayNative.allocateObjectsRequired(length);
+            System.arraycopy(source, 0, target, 0, Math.min(source.length, length));
+            return target;
+        }
+        private static int[] copyInts(int[] source, int length) {
+            int[] target = com.m3.arrays.M3ArrayNative.allocateIntsRequired(length);
+            System.arraycopy(source, 0, target, 0, Math.min(source.length, length));
+            return target;
+        }
         void grow() {
             int n = keys.length == 0 ? initialPayloadCapacity() : M3SlotArrays.grow(keys.length);
-            Object[] k = Arrays.copyOf(keys, n), v = keyOnly ? values : Arrays.copyOf(values, n);
-            int[] h = Arrays.copyOf(hashes, n), b = Arrays.copyOf(before, n), a = Arrays.copyOf(after, n), p = Arrays.copyOf(positions, n);
-            int[] buckets = index.length == 0 ? new int[initialIndexCapacity()] : index;
+            Object[] k = copyObjects(keys, n), v = keyOnly ? values : copyObjects(values, n);
+            int[] h = copyInts(hashes, n), b = copyInts(before, n), a = copyInts(after, n), p = copyInts(positions, n);
+            int[] buckets = index.length == 0 ? com.m3.arrays.M3ArrayNative.allocateIntsRequired(initialIndexCapacity()) : index;
             // Publish only after every payload, metadata and first index allocation succeeds.
             keys = k; values = v; hashes = h; before = b; after = a; positions = p; index = buckets;
         }

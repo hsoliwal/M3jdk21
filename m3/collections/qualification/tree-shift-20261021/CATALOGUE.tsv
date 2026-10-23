@@ -1,0 +1,8 @@
+problem_category	candidate	decision	complexity	provenance_and_license	reason
+VIEWPORT_TREE_SHIFT	in-place two-pass validation then mutation	SELECT	O(n) checks + O(n) existing reindex; O(1) scratch	Existing M3TreeWindowPlan; original SWT VirtualTreeResidentPlan elected Apache-2.0 from Apache-2.0 OR EPL-2.0	Atomic refusal even when late overflow would otherwise mutate prior sibling keys
+SIGNED_INDEX_ADMISSION	long intermediate for (int childIndex)+(int delta)	SELECT	O(1) per key	Java21 primitive arithmetic, no external code copied	Refuse negative or >Integer.MAX_VALUE coordinates before modifying the original lane
+RESIDENT_HANDLE_COLLISION	reuse original primitive M3LongLongHashMap indexed key lookup	SELECT	Expected O(1) per moved key	M3JDK21 first-party primitive-map implementation Apache-2.0	Reject left-shifts onto unmoved sibling coordinates without per-row Entry
+COPY_WHOLE_TREE	build HashMap<Key,Node> for every shifted index	REJECT	O(n) new object graph	JDK API reference only; not copied	Violates one-model array/index/mask structure and GC goals
+ONE_PASS_SHIFT	old write-then-check int addition	REJECT	O(n), but not exception-atomic	M3JDK21 original source blob 8ca008289633710d9581d45ca93fb4c825d7ee67	Local old-atom test fails at check 12: partial primitive-key mutation
+JNI_OR_GPU	run Java native-row coordinate changes on GPU/JNI	REJECT	Transfer cost unproved	Existing M3 native mask kernels unchanged	CPU control-side atom; keep GPU for qualified batch raster
+EDUCATIONAL_TAXONOMY	LeetCode trees/arrays; HackerRank array manipulation; GeeksforGeeks overflow/interval	CATEGORIES_ONLY	No copied code	Public problem categories only, no challenge or editorial donor source imported	Adversarial test categories, not implementation donors

@@ -1,0 +1,11 @@
+repository	pr	head_sha	source	qualification
+hsoliwal/commons-collections	7	7d7ed92138a46df531e48ba35809b2ca22130a58	GitHub.get_pr_info turn714file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/eclipse-collections	6	6460aee4bd999bff2eb0a2d539df00280079ddb8	GitHub.get_pr_info turn715file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/com.synexia	12340	8d470151f32c79e9aa14f4984ea6fafb30f3a999	GitHub.get_pr_info turn712file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/guava	8	d21189dd684090ec4afad7bf52b25d82d09b6167	GitHub.get_pr_info turn717file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/com.synexia	12427	d3338bf4746398e63abc4fd263ddea83a784b6ec	GitHub.get_pr_info turn722file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/commons-collections	9	33d9bbc9155cc6f9f9ef1b1ca8d8929ae9bcc674	GitHub.get_pr_info turn718file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/guava	10	8b40b586defd8c965a50a28de028e62e6bc555da	GitHub.get_pr_info turn720file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/eclipse-collections	8	639db03b7db37619c089306e9412b3940ad3968e	GitHub.get_pr_info turn719file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/com.synexia	12522	61626c4fdd1a6cfa7be84c5bcf38a23cb1bde76a	GitHub.get_pr_info turn713file0	metadata readback only; PR-body test results not reexecuted
+hsoliwal/M3jdk21	1614	9baafbd12daa7cda2d3d81bee33365ef35d75d19	GitHub.get_pr_info turn721file0	metadata readback only; PR-body test results not reexecuted

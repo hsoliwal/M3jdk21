@@ -1,0 +1,6 @@
+scope	order	result	evidence
+recipe-epoch1	diff/lint/compile/tests	PASS after cache-origin correction	evidence/recipe-compile.log;recipe-compile-02.log;recipe-test-01.log
+product-epoch1	diff/lint/compile/JUnit/runtime	PASS	evidence/product-inputs-and-lint.json;*-compile.log;*-junit.log;RUNTIME_RECEIPTS.json
+recipe-epoch2	diff/lint/compile/tests/replay	PASS	evidence/recipe-epoch-02-*.log;FRESH_PROCESS_REPLAY.json
+product-epoch2	diff/lint/compile/JUnit/resource-runtime	PASS; resource results mixed	evidence/product-epoch-02-diff-lint.json;*-epoch-02-*.log;RESOURCE_OBSERVATIONS.json
+legacy-native	identity/lint/compile/runtime	PASS	evidence/legacy-intake-lint.json;LEGACY_ABI_RECEIPTS.json

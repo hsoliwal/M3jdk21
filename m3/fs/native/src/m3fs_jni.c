@@ -852,6 +852,65 @@ Java_com_m3_fs_M3FsNative_nativeStat(
   return make_stat(env, &stat);
 }
 
+/* One JNI transition, primitive metadata lanes; each path remains a separate native read.
+ * Missing/failed rows carry their native status, never a fabricated zero-byte stat.
+ * The caller may choose a retained M3FS read snapshot for cross-row consistency.
+ */
+JNIEXPORT jlongArray JNICALL
+Java_com_m3_fs_M3FsNative_nativeStatBatch(
+    JNIEnv *env, jclass type, jlong handle, jobjectArray paths) {
+  (void)type;
+  if (paths == NULL) {
+    throw_class(env, "java/lang/NullPointerException", "paths");
+    return NULL;
+  }
+  jsize count = (*env)->GetArrayLength(env, paths);
+  if (count < 0 || count > 4096) {
+    throw_class(env, "java/lang/IllegalArgumentException", "stat batch limit");
+    return NULL;
+  }
+  m3_jni_lease lease;
+  if (!acquire_fs(env, handle, &lease)) return NULL;
+  jlongArray result = (*env)->NewLongArray(env, count * 9);
+  if (result == NULL) {
+    release_fs(&lease);
+    return NULL;
+  }
+  jlong slab[9 * 32];
+  jsize filled = 0;
+  for (jsize i = 0; i < count; i++) {
+    jstring raw = (jstring)(*env)->GetObjectArrayElement(env, paths, i);
+    if ((*env)->ExceptionCheck(env)) break;
+    char *path = NULL;
+    int encoded = utf8_encode(env, raw, M3FS_MAX_PATH_BYTES, &path);
+    if (raw != NULL) (*env)->DeleteLocalRef(env, raw);
+    if (!encoded) break;
+    m3fs_stat stat;
+    memset(&stat, 0, sizeof(stat));
+    int status = m3fs_stat_path(lease.fs, path, &stat);
+    free(path);
+    jlong *lane = &slab[filled * 9];
+    lane[0] = (jlong)status;
+    lane[1] = status == M3FS_OK ? (jlong)stat.inode : 0;
+    lane[2] = status == M3FS_OK ? (jlong)stat.size : 0;
+    lane[3] = status == M3FS_OK ? (jlong)stat.generation : 0;
+    lane[4] = status == M3FS_OK ? (jlong)stat.mtime_ns : 0;
+    lane[5] = status == M3FS_OK ? (jlong)stat.kind : 0;
+    lane[6] = status == M3FS_OK ? (jlong)stat.mode : 0;
+    lane[7] = status == M3FS_OK ? (jlong)stat.nlink : 0;
+    lane[8] = status == M3FS_OK ? (jlong)stat.block_size : 0;
+    filled++;
+    if (filled == 32 || i + 1 == count) {
+      (*env)->SetLongArrayRegion(env, result, (i + 1 - filled) * 9,
+          filled * 9, slab);
+      if ((*env)->ExceptionCheck(env)) break;
+      filled = 0;
+    }
+  }
+  release_fs(&lease);
+  if ((*env)->ExceptionCheck(env)) return NULL;
+  return result;
+}
 typedef struct list_buffer {
   unsigned char *data;
   size_t length;

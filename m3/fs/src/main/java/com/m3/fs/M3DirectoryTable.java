@@ -13,6 +13,11 @@ import java.util.RandomAccess;
 
 /** Immutable directory metadata columns. Names, stats and entry objects exist only at API access. */
 public final class M3DirectoryTable {
+  /** Kind flags address the original native 1=file, 2=directory, 3=symlink lane. */
+  public static final int KIND_FILE = 1;
+  public static final int KIND_DIRECTORY = 2;
+  public static final int KIND_SYMLINK = 4;
+  public static final int KIND_ALL = KIND_FILE | KIND_DIRECTORY | KIND_SYMLINK;
   private final char[] names;
   private final int[] offsets;
   private final int[] state;
@@ -145,6 +150,132 @@ public final class M3DirectoryTable {
   private final class Entries extends AbstractList<M3FS.DirEntry> implements RandomAccess {
     @Override public int size() { return M3DirectoryTable.this.size(); }
     @Override public M3FS.DirEntry get(int index) { return entry(index); }
+  }
+
+  /**
+   * Select physical row ordinals without materializing DirEntry/Stat objects.
+   * A row bit represents its existing native state-kind column, never its name.
+   * Returned coordinates are detached and in the original directory encounter order.
+   */
+  public int[] selectedRows(int allowedKinds) {
+    return selectedRows(0, size(), allowedKinds);
+  }
+
+  /** Half-open physical window selection with absolute returned row indexes. */
+  public int[] selectedRows(int first, int length, int allowedKinds) {
+    validateSelection(first, length, allowedKinds);
+    int matches = 0;
+    for (int row = first, end = first + length; row < end; row++) {
+      if (kindAllowed(row, allowedKinds)) matches++;
+    }
+    int[] selected = new int[matches];
+    int written = 0;
+    for (int row = first, end = first + length; row < end; row++) {
+      if (kindAllowed(row, allowedKinds)) selected[written++] = row;
+    }
+    return selected;
+  }
+
+  /** A detached bit mask of physical source row indexes, not a second payload owner. */
+  public long[] selectedMaskWords(int allowedKinds) {
+    return selectedMaskWords(0, size(), allowedKinds);
+  }
+
+  /** Keep the full parent coordinate space even for a bounded sub-window. */
+  public long[] selectedMaskWords(int first, int length, int allowedKinds) {
+    validateSelection(first, length, allowedKinds);
+    long[] words = new long[(size() >>> 6) + ((size() & 63) == 0 ? 0 : 1)];
+    for (int row = first, end = first + length; row < end; row++) {
+      if (kindAllowed(row, allowedKinds)) words[row >>> 6] |= 1L << (row & 63);
+    }
+    return words;
+  }
+
+  /**
+   * Stable primitive-index sort by original 64-bit file sizes. Comparator ties
+   * retain physical directory order, including when descending is requested.
+   * The source's char[], offsets and metadata lanes are never reordered/copied.
+   */
+  public int[] rowsBySize(int allowedKinds, boolean descending) {
+    return rowsBySize(0, size(), allowedKinds, descending);
+  }
+
+  /** Stable sorted physical indexes drawn only from the selected physical window. */
+  public int[] rowsBySize(int first, int length, int allowedKinds, boolean descending) {
+    int[] selected = selectedRows(first, length, allowedKinds);
+    int count = selected.length;
+    if (count < 2) return selected;
+    int[] scratch = new int[count];
+    int[] input = selected;
+    int[] output = scratch;
+    for (long width = 1; width < count; width <<= 1) {
+      for (long start = 0; start < count; start += width * 2) {
+        int left = (int) start;
+        int middle = (int) Math.min(count, start + width);
+        int right = middle;
+        int end = (int) Math.min(count, start + width * 2);
+        int written = left;
+        while (left < middle && right < end) {
+          long leftSize = scalar[input[left] * 4 + 1];
+          long rightSize = scalar[input[right] * 4 + 1];
+          int compare = Long.compare(leftSize, rightSize);
+          if (descending) compare = -compare;
+          output[written++] = compare <= 0 ? input[left++] : input[right++];
+        }
+        while (left < middle) output[written++] = input[left++];
+        while (right < end) output[written++] = input[right++];
+      }
+      int[] swap = input;
+      input = output;
+      output = swap;
+    }
+    if (input != selected) System.arraycopy(input, 0, selected, 0, count);
+    return selected;
+  }
+
+  /**
+   * Project already selected/sorted physical rows as a strict read-only List.
+   * Clone and validate caller indexes before publication; duplicates are allowed.
+   * Row objects materialize only on get(), iterator access or other public demand.
+   */
+  public List<M3FS.DirEntry> entriesByRows(int[] physicalRows) {
+    int[] indexes = Objects.requireNonNull(physicalRows, "physicalRows").clone();
+    for (int index : indexes) Objects.checkIndex(index, size());
+    return ownedRowsView(indexes);
+  }
+
+  /** On-demand filtered entries; parent native columns remain the sole owner. */
+  public List<M3FS.DirEntry> entriesOfKind(int allowedKinds) {
+    return ownedRowsView(selectedRows(allowedKinds));
+  }
+
+  /** On-demand size-sorted entries, preserving original directory order on ties. */
+  public List<M3FS.DirEntry> entriesBySize(int allowedKinds, boolean descending) {
+    return ownedRowsView(rowsBySize(allowedKinds, descending));
+  }
+
+  private List<M3FS.DirEntry> ownedRowsView(int[] ownedIndexes) {
+    return Collections.unmodifiableList(new IndexEntries(ownedIndexes));
+  }
+
+  private final class IndexEntries extends AbstractList<M3FS.DirEntry> implements RandomAccess {
+    private final int[] indexes;
+    private IndexEntries(int[] ownedIndexes) { this.indexes = ownedIndexes; }
+    @Override public int size() { return indexes.length; }
+    @Override public M3FS.DirEntry get(int index) {
+      return entry(indexes[Objects.checkIndex(index, indexes.length)]);
+    }
+  }
+
+  private void validateSelection(int first, int length, int allowedKinds) {
+    Objects.checkFromIndexSize(first, length, size());
+    if ((allowedKinds & ~KIND_ALL) != 0) {
+      throw new IllegalArgumentException("unknown directory kind mask");
+    }
+  }
+
+  private boolean kindAllowed(int row, int allowedKinds) {
+    return (allowedKinds & (1 << (state[row * 4] - 1))) != 0;
   }
 
   @Override public boolean equals(Object other) {

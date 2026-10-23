@@ -1,0 +1,50 @@
+{
+  "schema": "M3JDK21_HOST_M3FILE_STREAM_V2_RECEIVER_V1",
+  "product": "M3JDK21 integrated Java21/HotSpot/JNI SDK",
+  "base_source_pr": 1758,
+  "canonical_recipe_pr": 12877,
+  "canonical_recipe_branch": "chatgpt/m3jdk21-masterv2-host-stream-ingress-20261021",
+  "owner_map": [
+    {
+      "owner": "com.m3.file.M3File",
+      "atom": "one checked source input read + byte shadow and subprogress",
+      "public_compatibility": "additive overload, unchanged existing API"
+    },
+    {
+      "owner": "com.m3.fs.M3BuildState",
+      "atom": "V2 complete host-row factory",
+      "public_compatibility": "package-private additive factory"
+    },
+    {
+      "owner": "com.m3.fs.M3HostFileInventory",
+      "atom": "one caller supplied Stream<M3File> to original V2 inventory, delta masks and staged native SQLite",
+      "public_compatibility": "new in-package coordinator; not a new FS or parser"
+    },
+    {
+      "owner": "com.m3.fs.M3BuildStateStore",
+      "atom": "existing profile-specific observed-vs-successful WAL/CAS",
+      "public_compatibility": "unchanged Java/native existing #1758 owner"
+    },
+    {
+      "owner": "jdk.m3fs module and original m3-fs Maven POM",
+      "atom": "one-way source-built com.m3.file dependency",
+      "public_compatibility": "no duplicate JNI runtime"
+    }
+  ],
+  "algorithm_contracts": [
+    "serial file-by-file recipe-first",
+    "parent-owned dynamic primitive/reference arrays and state masks",
+    "one file-byte read and synchronous observer per regular file",
+    "unknown ABI/edges remain unknown",
+    "no watcher required for offline deltas",
+    "native SQLite observation never claims successful build"
+  ],
+  "proof": {
+    "source_seal": true,
+    "readback": true,
+    "java21_compile": "NOT_RUN",
+    "sqlite_jni": "NOT_RUN",
+    "installed_hotspot": "NOT_RUN",
+    "performance": "NOT_RUN"
+  }
+}

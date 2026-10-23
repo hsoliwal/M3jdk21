@@ -1,0 +1,5 @@
+path	sha256
+m3/collections/src/main/java/com/m3/collections/M3ArrayifiedIndexOps.java	32c98a947abe7622767f15a2bdbf04b124953d6660c09e013457391f50b731c0
+m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexContract.java	b9f5b9f559a09189fe39e3bebec0380e8e1c487d5cf7ba7a59707c7992a2a133
+m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexContractTest.java	6d5d09c8b73c74bb0988c1059016628b20a9f399e125b7ba141248638d6d7d81
+m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexResourceProbe.java	20f00638d0d7c48e44f722b6908950549e37741353e450d0c05ef7a42ceb7c88

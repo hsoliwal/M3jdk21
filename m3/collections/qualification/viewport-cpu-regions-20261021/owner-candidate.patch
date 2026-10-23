@@ -1,0 +1,182 @@
+--- a/m3/collections/src/main/c/m3maskviewport.c
++++ b/m3/collections/src/main/c/m3maskviewport.c
+@@ -6,19 +6,32 @@
+ #include <stdint.h>
+ #include <stdlib.h>
+ 
++/* Reuse the existing mask-window owner's bounded-region pattern, not its
++ * byte-mask/alias contract. These inputs retain all 32 state bits. */
++#define M3_VIEWPORT_CHUNK 128
++
+ static void raise(JNIEnv *env, const char *type, const char *message) {
+     jclass cls = (*env)->FindClass(env, type);
+     if (cls != NULL) {
+         (*env)->ThrowNew(env, cls, message);
++        (*env)->DeleteLocalRef(env, cls);
+     }
+ }
+ 
+ static int matches(jint state, jint required, jint forbidden) {
+-    /* Unsigned casts make bit 31 behavior explicit and avoid signed shifts. */
+     uint32_t value = (uint32_t) state;
+     uint32_t yes = (uint32_t) required;
+     uint32_t no = (uint32_t) forbidden;
+     return (value & yes) == yes && (value & no) == 0U;
++}
++
++/* Never acquire or retain a pointer to either complete Java input array. */
++static int read_chunk(JNIEnv *env, jintArray offsets, jintArray flags,
++        jint first, jint length, jint *src, jint *states) {
++    (*env)->GetIntArrayRegion(env, offsets, first, length, src);
++    if ((*env)->ExceptionCheck(env)) return 0;
++    (*env)->GetIntArrayRegion(env, flags, first, length, states);
++    return !(*env)->ExceptionCheck(env);
+ }
+ 
+ JNIEXPORT jint JNICALL
+@@ -42,58 +55,67 @@
+         raise(env, "java/lang/IndexOutOfBoundsException", "invalid array window");
+         return 0;
+     }
+-    jint *src = (*env)->GetIntArrayElements(env, offsets, NULL);
+-    if (src == NULL) {
+-        return 0; /* JVM has an exception pending. */
+-    }
+-    jint *states = (*env)->GetIntArrayElements(env, flags, NULL);
+-    if (states == NULL) {
+-        (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
+-        return 0;
+-    }
++    const jint end = first + length;
++    jint src[M3_VIEWPORT_CHUNK];
++    jint states[M3_VIEWPORT_CHUNK];
+     jint selected = 0;
+-    for (jint i = first; i < first + length; ++i) {
+-        if (src[i] < 0) {
+-            raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
+-            goto release;
++    for (jint begin = first; begin < end;) {
++        jint take = end - begin;
++        if (take > M3_VIEWPORT_CHUNK) take = M3_VIEWPORT_CHUNK;
++        if (!read_chunk(env, offsets, flags, begin, take, src, states)) return 0;
++        for (jint i = 0; i < take; ++i) {
++            if (src[i] < 0) {
++                raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
++                return 0;
++            }
++            if (matches(states[i], required, forbidden)) ++selected;
+         }
+-        if (matches(states[i], required, forbidden)) {
+-            ++selected;
+-        }
++        begin += take;
+     }
+     if (selected > outputSize - targetOffset) {
+         raise(env, "java/lang/IndexOutOfBoundsException", "destination capacity");
+-        goto release;
++        return 0;
+     }
+-    if (selected == 0) {
+-        goto release;
+-    }
+-    /* Never mutate the destination until every possible input validation
+-       has succeeded, including aliasing of target with either input array. */
++    if (selected == 0) return 0;
+     if ((size_t) selected > SIZE_MAX / sizeof(jint)) {
+         raise(env, "java/lang/OutOfMemoryError", "projection size overflow");
+-        goto release;
++        return 0;
+     }
++    /* Keep the original O(selected) scratch and single-commit writeback.
++     * Alias and JNI-read failures must not publish a partially selected result. */
+     jint *scratch = (jint *) malloc((size_t) selected * sizeof(jint));
+     if (scratch == NULL) {
+         raise(env, "java/lang/OutOfMemoryError", "projection scratch allocation");
+-        goto release;
++        return 0;
+     }
+     jint cursor = 0;
+-    for (jint i = first; i < first + length; ++i) {
+-        if (matches(states[i], required, forbidden)) {
+-            scratch[cursor++] = src[i];
++    for (jint begin = first; begin < end;) {
++        jint take = end - begin;
++        if (take > M3_VIEWPORT_CHUNK) take = M3_VIEWPORT_CHUNK;
++        if (!read_chunk(env, offsets, flags, begin, take, src, states)) {
++            free(scratch);
++            return 0;
+         }
++        for (jint i = 0; i < take; ++i) {
++            if (matches(states[i], required, forbidden)) {
++                /* Stable inputs are the caller's contract; a violated count must
++                 * nevertheless never write beyond the native allocation. */
++                if (cursor == selected) {
++                    free(scratch);
++                    raise(env, "java/util/ConcurrentModificationException", "projection inputs changed");
++                    return 0;
++                }
++                scratch[cursor++] = src[i];
++            }
++        }
++        begin += take;
+     }
+-    /* Pinned/copy source elements must be released before the writeback,
+-       so target-source aliasing does not let an abort undo output. */
+-    (*env)->ReleaseIntArrayElements(env, flags, states, JNI_ABORT);
+-    (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
++    if (cursor != selected) {
++        free(scratch);
++        raise(env, "java/util/ConcurrentModificationException", "projection inputs changed");
++        return 0;
++    }
+     (*env)->SetIntArrayRegion(env, target, targetOffset, selected, scratch);
+     free(scratch);
+     return (*env)->ExceptionCheck(env) ? 0 : selected;
+-release:
+-    (*env)->ReleaseIntArrayElements(env, flags, states, JNI_ABORT);
+-    (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
+-    return 0;
+ }
+--- a/m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
+@@ -103,8 +103,21 @@
+         if (skipVisible < 0 || maxVisible < 0) {
+             throw new IndexOutOfBoundsException("negative visible page bounds");
+         }
+-        final int available = preflight(logicalOffsets, states, first, length,
+-                requiredBits, forbiddenBits);
++        // Validate the complete window, but remember the requested physical start.
++        // The renderer needs a page of logical identities, not skipped row payloads.
++        int available = 0;
++        int pageFirst = first + length;
++        for (int i = first, end = first + length; i < end; i++) {
++            if (logicalOffsets[i] < 0) {
++                throw new IllegalArgumentException("negative logical offset");
++            }
++            if (matches(states[i], requiredBits, forbiddenBits)) {
++                if (available == skipVisible) {
++                    pageFirst = i;
++                }
++                available++;
++            }
++        }
+         final int needed = skipVisible >= available ? 0
+                 : Math.min(available - skipVisible, maxVisible);
+         if (needed > target.length - targetOffset) {
+@@ -115,12 +128,12 @@
+         }
+         if (target == logicalOffsets || target == states) {
+             final int[] scratch = new int[needed];
+-            copyPage(logicalOffsets, states, first, length, requiredBits,
+-                    forbiddenBits, skipVisible, needed, scratch, 0);
++            copyPage(logicalOffsets, states, pageFirst, first + length - pageFirst,
++                    requiredBits, forbiddenBits, 0, needed, scratch, 0);
+             System.arraycopy(scratch, 0, target, targetOffset, needed);
+         } else {
+-            copyPage(logicalOffsets, states, first, length, requiredBits,
+-                    forbiddenBits, skipVisible, needed, target, targetOffset);
++            copyPage(logicalOffsets, states, pageFirst, first + length - pageFirst,
++                    requiredBits, forbiddenBits, 0, needed, target, targetOffset);
+         }
+         return needed;
+     }

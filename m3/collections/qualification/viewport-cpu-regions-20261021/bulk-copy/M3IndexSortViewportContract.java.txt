@@ -1,0 +1,251 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.collections;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.function.IntFunction;
+
+/** Deterministic contract for the existing primitive sort/filter/viewport owners. */
+public final class M3IndexSortViewportContract {
+    private static long checks;
+    private static long observations = 0xcbf29ce484222325L;
+    private static final int FENCE = -918273;
+
+    private M3IndexSortViewportContract() { }
+
+    private static void observe(long value) {
+        observations = (observations ^ value) * 0x100000001b3L;
+    }
+
+    private static void observe(int[] values) {
+        observe(values.length);
+        for (int value : values) observe(value);
+    }
+
+    private static void check(boolean condition) {
+        checks++;
+        if (!condition) throw new AssertionError("check " + checks);
+    }
+
+    private static void equal(int[] expected, int[] actual) {
+        check(Arrays.equals(expected, actual));
+        observe(actual);
+    }
+
+    private static void expect(Class<? extends Throwable> type, Runnable task) {
+        try {
+            task.run();
+        } catch (RuntimeException failure) {
+            check(type.isInstance(failure));
+            observe(failure.getClass().getName().hashCode());
+            observe(String.valueOf(failure.getMessage()).hashCode());
+            return;
+        }
+        throw new AssertionError("expected " + type.getName());
+    }
+
+    private static int[] positions(int length, int shape) {
+        int[] result = new int[length];
+        for (int i = 0; i < length; i++) {
+            result[i] = switch (shape) {
+                case 0 -> i;
+                case 1 -> length - 1 - i;
+                case 2 -> length == 0 ? 0 : (i * 37 + 13) % length;
+                default -> i / 3;
+            };
+        }
+        return result;
+    }
+
+    private static int key(int index, int shape) {
+        return switch (shape) {
+            case 0 -> index;
+            case 1 -> -index;
+            case 2 -> index % 5;
+            default -> ((index * 101) ^ (index >>> 2)) % 29;
+        };
+    }
+
+    private static Integer[] boxed(int[] values) {
+        Integer[] result = new Integer[values.length];
+        for (int i = 0; i < values.length; i++) result[i] = values[i];
+        return result;
+    }
+
+    private static int[] unbox(Integer[] values) {
+        int[] result = new int[values.length];
+        for (int i = 0; i < values.length; i++) result[i] = values[i];
+        return result;
+    }
+
+    private static void independentSort() {
+        int[] lengths = {0, 1, 2, 3, 4, 7, 8, 15, 16, 31, 32, 63, 64,
+                127, 128, 129, 255, 256, 257, 1024, 2049};
+        for (int length : lengths) {
+            for (int shape = 0; shape < 4; shape++) {
+                int[] payload = new int[length];
+                for (int i = 0; i < length; i++) payload[i] = key(i, shape);
+                int[] saved = payload.clone();
+                for (int permutation = 0; permutation < 4; permutation++) {
+                    int[] order = positions(length, permutation);
+                    Integer[] expected = boxed(order);
+                    Arrays.sort(expected, Comparator.comparingInt(i -> payload[i]));
+                    M3IndexSort.stable(order, i -> payload[i], null);
+                    equal(unbox(expected), order);
+                    equal(saved, payload);
+                    order = positions(length, permutation);
+                    expected = boxed(order);
+                    Comparator<Integer> nullable = Comparator.nullsFirst(Comparator.naturalOrder());
+                    IntFunction<Integer> valueAt = i -> i % 7 == 0 ? null : payload[i];
+                    Arrays.sort(expected, (a, b) -> nullable.compare(valueAt.apply(a), valueAt.apply(b)));
+                    M3IndexSort.stable(order, valueAt, nullable);
+                    equal(unbox(expected), order);
+                    equal(saved, payload);
+                }
+            }
+        }
+    }
+
+    private static final class ProbeFailure extends RuntimeException {
+        private static final long serialVersionUID = 1L;
+    }
+
+    /** Log every callback and exact partial int[] state at each failure boundary. */
+    private static int failureCase(int length, int shape, int failAt, boolean mutate) {
+        int[] order = positions(length, shape);
+        int[] calls = {0};
+        ProbeFailure marker = new ProbeFailure();
+        IntFunction<Integer> accessor = index -> {
+            observe(0x40000000L | (index & 0xffffffffL));
+            observe(++calls[0]);
+            if (calls[0] == failAt) throw marker;
+            return key(index, 3);
+        };
+        Comparator<Integer> comparator = (a, b) -> {
+            observe(0x80000000L | (a & 0xffffffffL));
+            observe(b);
+            observe(++calls[0]);
+            if (calls[0] == failAt) throw marker;
+            if (mutate && calls[0] % 9 == 0 && order.length > 0) {
+                order[order.length - 1] = calls[0] % order.length;
+            }
+            return Integer.compare(a, b);
+        };
+        boolean threw = false;
+        try {
+            M3IndexSort.stable(order, accessor, comparator);
+        } catch (ProbeFailure failure) {
+            check(failure == marker);
+            threw = true;
+        }
+        check(threw == (failAt > 0 && calls[0] >= failAt));
+        observe(threw ? 1 : 0);
+        observe(calls[0]);
+        observe(order);
+        return calls[0];
+    }
+
+    private static void callbackFailures() {
+        for (int length = 0; length <= 17; length++) {
+            for (int shape = 0; shape < 4; shape++) {
+                for (boolean mutate : new boolean[] {false, true}) {
+                    int events = failureCase(length, shape, 0, mutate);
+                    for (int fail = 1; fail <= events; fail++) {
+                        check(failureCase(length, shape, fail, mutate) == fail);
+                    }
+                }
+            }
+        }
+        expect(NullPointerException.class, () -> M3IndexSort.stable(null, null, null));
+        expect(NullPointerException.class, () -> M3IndexSort.stable(new int[0], null, null));
+        expect(NullPointerException.class, () -> M3IndexSort.stable(new int[] {0, 1}, i -> null, null));
+        expect(ClassCastException.class,
+                () -> M3IndexSort.stable(new int[] {0, 1}, i -> new Object(), null));
+    }
+
+    /** Filtering precedes sorting; only ordinal arrays enter JNI and paging. */
+    private static void pipeline(boolean nativeEnabled) {
+        int[] lengths = {0, 1, 2, 7, 31, 127, 128, 129, 255, 256, 257, 513};
+        int[][] masks = {{0, 0}, {1, 2}, {Integer.MIN_VALUE, 4}, {1, 1}, {-1, 0}};
+        for (int length : lengths) {
+            for (int shape = 0; shape < 4; shape++) {
+                int[] payload = new int[length];
+                int[] offsets = positions(length, shape);
+                int[] flags = new int[length];
+                for (int i = 0; i < length; i++) {
+                    payload[i] = key(i, 2);
+                    flags[i] = offsets[i] % 3 == 0 ? -1 : offsets[i] % 2 == 0 ? 1 : 0;
+                }
+                int[] savedPayload = payload.clone();
+                int[] savedOffsets = offsets.clone();
+                int[] savedFlags = flags.clone();
+                for (int[] mask : masks) {
+                    int[] buffer = new int[length + 4];
+                    Arrays.fill(buffer, FENCE);
+                    int count = M3MaskViewportKernel.project(offsets, flags, 0, length,
+                            mask[0], mask[1], buffer, 2);
+                    int[] expectedBuffer = new int[length + 4];
+                    Arrays.fill(expectedBuffer, FENCE);
+                    int expectedCount = 0;
+                    for (int i = 0; i < length; i++) {
+                        if ((flags[i] & mask[0]) == mask[0] && (flags[i] & mask[1]) == 0) {
+                            expectedBuffer[2 + expectedCount++] = offsets[i];
+                        }
+                    }
+                    check(count == expectedCount);
+                    equal(expectedBuffer, buffer);
+                    if (nativeEnabled) {
+                        int[] nativeBuffer = new int[length + 4];
+                        Arrays.fill(nativeBuffer, FENCE);
+                        check(M3MaskViewportNative.project(offsets, flags, 0, length,
+                                mask[0], mask[1], nativeBuffer, 2) == count);
+                        equal(buffer, nativeBuffer);
+                    }
+                    int[] sorted = Arrays.copyOfRange(buffer, 2, 2 + count);
+                    Integer[] expectedSorted = boxed(sorted);
+                    Arrays.sort(expectedSorted, Comparator.comparingInt(i -> payload[i]));
+                    M3IndexSort.stable(sorted, i -> payload[i], null);
+                    equal(unbox(expectedSorted), sorted);
+                    int[] states = new int[count];
+                    Arrays.fill(states, -1);
+                    if (nativeEnabled) {
+                        int[] nativeSorted = new int[count];
+                        check(M3MaskViewportNative.project(sorted, states, 0, count,
+                                Integer.MIN_VALUE, 0, nativeSorted, 0) == count);
+                        equal(sorted, nativeSorted);
+                    }
+                    int[] skips = {0, 1, count, count + 1};
+                    for (int skip : skips) {
+                        for (int limit : new int[] {0, 1, 7, 64}) {
+                            int[] page = new int[limit + 4];
+                            Arrays.fill(page, FENCE);
+                            int written = M3MaskViewportKernel.projectPage(sorted, states,
+                                    0, count, Integer.MIN_VALUE, 0, skip, limit, page, 2);
+                            int wanted = Math.min(Math.max(0, count - skip), limit);
+                            check(written == wanted);
+                            int[] expectedPage = new int[limit + 4];
+                            Arrays.fill(expectedPage, FENCE);
+                            for (int i = 0; i < wanted; i++) expectedPage[2 + i] = expectedSorted[skip + i];
+                            equal(expectedPage, page);
+                        }
+                    }
+                    equal(savedPayload, payload);
+                    equal(savedOffsets, offsets);
+                    equal(savedFlags, flags);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        if (args.length != 1) throw new IllegalArgumentException("--java or absolute JNI library path");
+        boolean nativeEnabled = !"--java".equals(args[0]);
+        if (nativeEnabled) System.load(args[0]);
+        independentSort();
+        callbackFailures();
+        pipeline(nativeEnabled);
+        System.out.printf("M3_INDEX_SORT_VIEWPORT_%s checks=%d digest=%016x%n",
+                nativeEnabled ? "JNI" : "JAVA", checks, observations);
+    }
+}

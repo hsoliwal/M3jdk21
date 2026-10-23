@@ -1,0 +1,114 @@
+{
+  "DLL_limit_bytes": 32768,
+  "binaries": [
+    {
+      "bytes": 14336,
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\m3_arrays_current.dll",
+      "sha256": "8daf087344d1a54e99beccb664cd1d542abb8006421a368909ce3221a71f4144"
+    }
+  ],
+  "bounded_process": {
+    "bytes": 8615,
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\eclipse-unified-map-qualification\\protocol-runner-v1\\bounded_process.py",
+    "sha256": "6414b225a982db600ce8e817b42c51dcfc000d95f181a68747f406662e737267"
+  },
+  "combined_log_limit_bytes": 32768,
+  "command": [
+    "C:\\ProgramData\\mingw64\\mingw64\\bin\\gcc.exe",
+    "-std=c17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-pipe",
+    "-s",
+    "-IC:\\Program Files\\Java\\jdk-21\\include",
+    "-IC:\\Program Files\\Java\\jdk-21\\include\\win32",
+    "-IC:\\m3-work-c\\wt\\m3-ctp\\m3\\arrays\\src\\main\\native\\include",
+    "-IS:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\m3\\arrays\\src\\main\\native",
+    "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\actual-sdk-v1\\src\\main\\native\\m3_arrays_jni.c",
+    "C:\\m3-work-c\\wt\\m3-ctp\\m3\\arrays\\src\\main\\native\\m3_arrays.c",
+    "-o",
+    "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\m3_arrays_current.dll"
+  ],
+  "controller": {
+    "bytes": 7976,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\RUN.py",
+    "sha256": "bd45eaf0ce0bbb4d4102f2e57ab46041255f1d98f661009e8268d45ad65d024c"
+  },
+  "core": {
+    "bytes": 470,
+    "path": "C:\\m3-work-c\\wt\\m3-ctp\\m3\\arrays\\src\\main\\native\\m3_arrays.c",
+    "sha256": "0c7be7f8176ca235c40d88aad2cefab15e7ce7363d7fc648bafba4fdb535695d"
+  },
+  "current_header": {
+    "bytes": 2262,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\m3\\native\\include\\m3_jni_core.h",
+    "sha256": "0df5c1391c159a036620d0b03a1c67898be8351da5a173775ffd57e15d14933e"
+  },
+  "execution_inputs": {
+    "seal_path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\seals\\current-native-composition-v1-native-compile-1.json",
+    "seal_sha256": "2f3691775df35da41d7e5fd8a985cc2d5d798470dad15bffde5d008619e41fe0",
+    "sealed_file_count": 24
+  },
+  "failure": null,
+  "formal_review": "NO_VERDICT",
+  "full_goal": "UNFINISHED",
+  "header": {
+    "bytes": 342,
+    "path": "C:\\m3-work-c\\wt\\m3-ctp\\m3\\arrays\\src\\main\\native\\include\\m3_arrays.h",
+    "sha256": "f2eec872591c7af40c13af75012fb20efb8376cdb29209c9e8151fd9775d758d"
+  },
+  "input_seal": {
+    "bytes": 5915,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\seals\\current-native-composition-v1-native-compile-1.json",
+    "sha256": "2f3691775df35da41d7e5fd8a985cc2d5d798470dad15bffde5d008619e41fe0"
+  },
+  "logs": [
+    {
+      "bytes": 0,
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\gcc.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\gcc.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "metrics_after": {
+    "K_free": 9018056704,
+    "S_free": 13556228096,
+    "commit_available": 32547995648,
+    "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+    "output_bytes": 109502951,
+    "physical_available": 15832010752
+  },
+  "phase_budget_bytes": 98304,
+  "process": {
+    "capacityChecks": 17,
+    "capturedBytes": 0,
+    "combinedLogLimitBytes": 32768,
+    "elapsedSeconds": 13.437,
+    "pid": 25608,
+    "readerThreadsJoined": true,
+    "reason": "completed",
+    "returncode": 0,
+    "treeContainment": "Windows kill-on-close job with stdin-gated command"
+  },
+  "runtime_JNI_GC_ABI_installed_image": "PENDING_CURRENT_COMPOSED_DLL",
+  "schema": "M3_CURRENT_NATIVE_COMPILE_RESULT_V1",
+  "source": {
+    "bytes": 6349,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\actual-sdk-v1\\src\\main\\native\\m3_arrays_jni.c",
+    "sha256": "da4ba8620a190e07f08446d4a1cc6081d860dcd6d98f94ab2633b87643ddcfb7"
+  },
+  "source_SDK": {
+    "bytes": 3046,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\ACTUAL_SDK_RESULT_V1.json",
+    "sha256": "164cedbda1bd70b89d527bfadafc7a2e545a5c1ef7fec2d033c9c92a523ee4a0"
+  },
+  "status": "PASS",
+  "storage_protection": "ACTIVE"
+}

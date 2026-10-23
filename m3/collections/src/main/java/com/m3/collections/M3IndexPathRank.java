@@ -198,25 +198,63 @@ public final class M3IndexPathRank {
             return owner.window(from + relativeFrom, from + relativeTo);
         }
 
-        public int[] toArray() {
-            int[] result = new int[size()];
-            if (result.length == 0) return result;
-            int firstWord = from >>> 6;
+        /**
+         * Fill an existing primitive output lane with selected row IDs at consecutive
+         * <em>selected</em> ranks inside this source-ordinal window.
+         *
+         * <p>The caller owns the output array; source payloads, predicates and
+         * comparator objects are never retained or projected into Entry objects.
+         * All rank and output coordinates are validated before any write.
+         * A zero-count request at the end of this window is valid. The destination
+         * must not alias the immutable rank owner's internal row directory.</p>
+         *
+         * @param selectedFrom inclusive selected rank relative to this window
+         * @param output caller-owned destination int array
+         * @param outputOffset first element of the destination window
+         * @param count number of consecutive selected row IDs to write
+         */
+        public void copySelectedRowIds(
+                int selectedFrom, int[] output, int outputOffset, int count) {
+            Objects.requireNonNull(output, "output");
+            Objects.checkFromIndexSize(selectedFrom, count, size());
+            Objects.checkFromIndexSize(outputOffset, count, output.length);
+            if (output == owner.rows) {
+                throw new IllegalArgumentException("output aliases source row directory");
+            }
+            if (count == 0) return;
+
+            // A first-page request is already positioned by the immutable source
+            // coordinate. Subsequent pages need only one prefix-rank seek.
+            int ordinal = selectedFrom == 0
+                    ? from : owner.selectedSourceOrdinal(firstRank + selectedFrom);
+            int firstWord = ordinal >>> 6;
             int lastWord = (to - 1) >>> 6;
-            int write = 0;
-            for (int wordIndex = firstWord; wordIndex <= lastWord; wordIndex++) {
+            int copied = 0;
+            for (int wordIndex = firstWord; wordIndex <= lastWord && copied < count;
+                    wordIndex++) {
                 long bits = owner.selected[wordIndex];
-                if (wordIndex == firstWord) bits &= -1L << (from & 63);
+                if (wordIndex == firstWord) bits &= -1L << (ordinal & 63);
                 if (wordIndex == lastWord && (to & 63) != 0) {
                     bits &= (1L << (to & 63)) - 1L;
                 }
-                while (bits != 0) {
-                    int sourceOrdinal = (wordIndex << 6) + Long.numberOfTrailingZeros(bits);
-                    result[write++] = owner.rows[sourceOrdinal];
+                while (bits != 0 && copied < count) {
+                    int sourceOrdinal =
+                            (wordIndex << 6) + Long.numberOfTrailingZeros(bits);
+                    output[outputOffset + copied++] = owner.rows[sourceOrdinal];
                     bits &= bits - 1;
                 }
             }
+            if (copied != count) {
+                throw new IllegalStateException("immutable selection rank/bitmap mismatch");
+            }
+        }
+
+        /** Fresh exact-length array; shares the same bitmap word-walk bulk atom. */
+        public int[] toArray() {
+            int[] result = new int[size()];
+            copySelectedRowIds(0, result, 0, result.length);
             return result;
         }
+
     }
 }

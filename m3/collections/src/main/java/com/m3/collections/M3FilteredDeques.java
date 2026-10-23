@@ -66,6 +66,11 @@ public final class M3FilteredDeques {
         @Override public Iterator<E> iterator() { return new Cursor(false); }
         @Override public Iterator<E> descendingIterator() { return new Cursor(true); }
 
+        /** One lazy ordered cursor; short-circuit streams do not pre-count the entire view. */
+        @Override public java.util.Spliterator<E> spliterator() {
+            return M3SlotSpliterators.lateBoundOrdered(this::iterator);
+        }
+
         /** One cursor, one value and physical ordinal; no retained element index. */
         private final class Cursor implements Iterator<E> {
             private final boolean descending;
@@ -74,9 +79,10 @@ public final class M3FilteredDeques {
             private int readyOrdinal;
             private int delivered = -1;
             private E readyValue;
-            private boolean ready;
-            private boolean ended;
-            private boolean poisoned;
+            private static final int READY = 1;
+            private static final int ENDED = 1 << 1;
+            private static final int POISONED = 1 << 2;
+            private int state;
 
             private Cursor(boolean descending) {
                 this.descending = descending;
@@ -84,31 +90,31 @@ public final class M3FilteredDeques {
             }
 
             @Override public boolean hasNext() {
-                if (poisoned) throw new IllegalStateException("failed filtered Deque cursor");
-                if (ready) return true;
-                if (ended) return false;
+                if ((state & POISONED) != 0) throw new IllegalStateException("failed filtered Deque cursor");
+                if ((state & READY) != 0) return true;
+                if ((state & ENDED) != 0) return false;
                 try {
                     while (source.hasNext()) {
                         E value = source.next();
                         int ordinal = consumed++;
                         if (predicate.test(value)) {
-                            ready = true;
+                            state |= READY;
                             readyValue = value;
                             readyOrdinal = ordinal;
                             return true;
                         }
                     }
-                    ended = true;
+                    state |= ENDED;
                     return false;
                 } catch (RuntimeException | Error failure) {
-                    poisoned = true;
+                    state |= POISONED;
                     throw failure;
                 }
             }
 
             @Override public E next() {
                 if (!hasNext()) throw new NoSuchElementException();
-                ready = false;
+                state &= ~READY;
                 delivered = readyOrdinal;
                 E value = readyValue;
                 readyValue = null;
@@ -116,7 +122,7 @@ public final class M3FilteredDeques {
             }
 
             @Override public void remove() {
-                if (poisoned) throw new IllegalStateException("failed filtered Deque cursor");
+                if ((state & POISONED) != 0) throw new IllegalStateException("failed filtered Deque cursor");
                 if (delivered < 0) throw new IllegalStateException("next required before remove");
                 // Hot path: no lookahead advanced the backing cursor since the
                 // last delivered element. Preserve its native O(1) iterator removal.
@@ -134,7 +140,7 @@ public final class M3FilteredDeques {
                 // Rebind at the next unread physical row after the removed one;
                 // retain a prepared value, if any, without re-running its predicate.
                 consumed--;
-                if (ready) readyOrdinal--;
+                if ((state & READY) != 0) readyOrdinal--;
                 source = sourceCursor(descending);
                 for (int index = 0; index < consumed; index++) source.next();
                 delivered = -1;
@@ -293,6 +299,11 @@ public final class M3FilteredDeques {
         @Override public boolean contains(Object item) { return selected.contains(item); }
         @Override public Iterator<E> iterator() { return noRemove(selected.iterator()); }
         @Override public Iterator<E> descendingIterator() { return noRemove(selected.descendingIterator()); }
+
+        /** Preserve the selected view's late binding without a redundant size scan. */
+        @Override public java.util.Spliterator<E> spliterator() {
+            return selected.spliterator();
+        }
         @Override public E getFirst() { return selected.getFirst(); }
         @Override public E getLast() { return selected.getLast(); }
         @Override public E peekFirst() { return selected.peekFirst(); }

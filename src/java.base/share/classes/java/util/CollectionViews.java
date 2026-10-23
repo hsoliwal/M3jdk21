@@ -303,9 +303,27 @@ public final class CollectionViews {
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
-            return backing.contains(candidate) && predicate.test((E) candidate);
+            // Probe equality alone does not establish visibility: predicates
+            // belong to stored occurrences, not caller-supplied equal aliases.
+            if (!backing.contains(candidate)) return false;
+            if (backing instanceof Set<?>) {
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    // Identity-keyed sets require the same stored object.
+                    if (stored == candidate) return visible(stored);
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent);
+            }
+            for (E stored : backing) {
+                if (Objects.equals(candidate, stored) && visible(stored)) return true;
+            }
+            return false;
         }
 
         @Override
@@ -328,8 +346,53 @@ public final class CollectionViews {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
-            return contains(candidate) && backing.remove(candidate);
+            if (!backing.contains(candidate)) return false;
+            if (backing instanceof List<?>) {
+                // Remove the selected physical occurrence, not an earlier
+                // equal occurrence that was hidden by the filter.
+                List<E> list = (List<E>) backing;
+                int physical = 0;
+                for (E stored : list) {
+                    if (Objects.equals(candidate, stored) && visible(stored)) {
+                        list.remove(physical);
+                        return true;
+                    }
+                    physical++;
+                }
+                return false;
+            }
+            if (backing instanceof Set<?>) {
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    if (stored == candidate) return visible(stored) && backing.remove(stored);
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent) && backing.remove(equivalent);
+            }
+            Iterator<E> iterator = backing.iterator();
+            boolean skippedHiddenEqual = false;
+            while (iterator.hasNext()) {
+                E stored = iterator.next();
+                if (Objects.equals(candidate, stored)) {
+                    if (visible(stored)) {
+                        try {
+                            iterator.remove();
+                            return true;
+                        } catch (UnsupportedOperationException unsupported) {
+                            if (skippedHiddenEqual) throw unsupported;
+                            return backing.remove(stored);
+                        }
+                    }
+                    skippedHiddenEqual = true;
+                }
+            }
+            return false;
         }
 
         @Override
@@ -614,6 +677,8 @@ public final class CollectionViews {
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> enclosingAction = action;
+            boolean enclosingDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -622,7 +687,8 @@ public final class CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = enclosingAction;
+                delivered = enclosingDelivered;
             }
         }
 
@@ -672,24 +738,27 @@ public final class CollectionViews {
     private static <E> Iterator<E> selected(
             Iterator<E> source, Predicate<? super E> predicate) {
         return new Iterator<>() {
-            private boolean prepared;
-            private boolean found;
+            private static final int PREPARED = 1;
+            private static final int FOUND = 1 << 1;
+            private int state;
             private E next;
 
             @Override
             public boolean hasNext() {
-                if (!prepared) {
-                    prepared = true;
+                if ((state & PREPARED) == 0) {
+                    // Retain original failure semantics: a predicate exception
+                    // leaves PREPARED set even when no value has been accepted.
+                    state |= PREPARED;
                     while (source.hasNext()) {
                         E candidate = source.next();
                         if (predicate.test(candidate)) {
                             next = candidate;
-                            found = true;
+                            state |= FOUND;
                             break;
                         }
                     }
                 }
-                return found;
+                return (state & FOUND) != 0;
             }
 
             @Override
@@ -699,8 +768,7 @@ public final class CollectionViews {
                 }
                 E result = next;
                 next = null;
-                prepared = false;
-                found = false;
+                state &= ~(PREPARED | FOUND);
                 return result;
             }
 
