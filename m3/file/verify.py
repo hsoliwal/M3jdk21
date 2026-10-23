@@ -169,6 +169,8 @@ def main():
         test_sources = sorted((root / 'src/test/java').rglob('*.java'))
         contracts = {
             'M3FileDeltaLedgerContract': 'M3_FILE_DELTA_PASS',
+            'M3FileMoveCandidatesContract': 'M3_FILE_MOVES_PASS',
+            'M3FileObservationContract': 'M3_FILE_OBSERVATION_PASS',
             'M3BuildImpactPlanContract': 'M3_BUILD_IMPACT_PASS',
             'M3FileBuildImpactContract': 'M3_FILE_IMPACT_PASS',
             'M3ReactorImpactPlanContract': 'M3_REACTOR_IMPACT_PASS',
