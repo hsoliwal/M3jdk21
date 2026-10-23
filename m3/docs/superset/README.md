@@ -12,3 +12,15 @@ resolve as a superset, gate with the module's Maven build, push a side branch, m
 never by hand-editing shared ledgers (feedback-com-synexia-push-api-fallback).
 
 Merge is the owner's call. Tools: S:/m3-scratch/consolidate (dump_prs.py, build_order.py, superset_merge.sh).
+
+<!-- resolutions -->
+## Resolutions (snapshot 2026-10-23 05:43 UTC)
+
+`SUPERSET_20261023_RESOLUTIONS.tsv` is the additive successor of the conflict rows: 35 resolved, 93 refused; finish failed after ledger union: 16; JNI implementations diverge: 1; neither side compiles: 4; no gate for native or workflow conflicts: 64; conflicts span 1 module: 1; conflicts span 2 module: 1; finish failed: 4; conflicts span 0 module: 2.
+RESOLVED = merged into this branch through a side branch (hand resolution with the module's Maven gate, or the
+compiler-arbitrated batch: superset side first, PR side if the gate fails, refused if both fail). REFUSED rows name the
+reason; the C/JNI and workflow conflicts no gate here covers have their reading packets under
+`reading-20261023/` (conflict-marked files, SUMMARY.tsv, HUNKS.tsv with a class per hunk, NATIVE_SYMBOLS.tsv with the
+native entry points of both sides). Tools and the day's corrections: Synexia recipe crate
+`recipe-crates/m3-superset-merge-20261023` (RECIPE_MEMORY.tsv). Merge is the owner's call.
+<!-- /resolutions -->
