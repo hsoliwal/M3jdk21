@@ -1,0 +1,37 @@
+{
+  "schema": "m3-insert-growth-frontier-admission/v1",
+  "rule22_sha256": "332c57369d209296fc06aeae6cb4ccd01363b519f6c4e6020fd870054aca2a8d",
+  "source_before": "1b90f024f54a5d41a3b83b73879a9ea60d57cc43",
+  "problem_sources": [
+    "https://www.hackerrank.com/challenges/self-balancing-tree/problem",
+    "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/",
+    "https://leetcode.com/problems/balance-a-binary-search-tree/"
+  ],
+  "licensed_donor": {
+    "repository": "vigna/fastutil",
+    "commit": "e70f36a137c349efa50f346818d16917a9f91986",
+    "path": "drv/AVLTreeMap.drv",
+    "blob": "2528ba9cf1c3692c6263241750931d0fc23662e2",
+    "selected_law": "Insertion propagation is bounded by subtree height growth, as in add lowest nonzero balance ancestor/update frontier",
+    "license": "Apache-2.0"
+  },
+  "invariant": [
+    "Only insertion can stop when height of the post-rotation subtree root equals the pre-update height.",
+    "Deletion retains full upward propagation; its transplanted successor height is pre-updated.",
+    "No new payload/state lanes, node objects, public API, comparator calls or revision semantics.",
+    "Challenge node/height representation is translated to existing M3 arrays; null0/leaf1 convention retained.",
+    "TreeMap/TreeSet public reference corpus, prior132/113 and exactpublicAPI must pass before benchmark.",
+    "Benchmark identical source/inputs/JDK/heap/forks across baseline/protocol/candidate. Keep only justified choices; no global peak claim."
+  ],
+  "status": "ADMITTED_FOR_IMPLEMENTATION_NOT_VALIDATED",
+  "gate": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 25511780352,
+    "logical_bytes": 529512857,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}

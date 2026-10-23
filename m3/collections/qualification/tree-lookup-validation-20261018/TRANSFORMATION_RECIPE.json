@@ -1,0 +1,13 @@
+{
+  "schema": "m3-exact-file-recipe/v1",
+  "file": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+  "preimageSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
+  "postimageSha256": "21dc9a2eed607c55b1ff4d49ffef5e19b3bac43b591b62e13191791cabbc3b41",
+  "preimageGitBlob": "fc8a9e75011f5dc8b86f1ee553caba979cb2e30b",
+  "replacementCount": 1,
+  "inverseVerified": true,
+  "fixedPoint": "Only exact preimage is transformable; postimage recognized as already applied",
+  "refusal": "Any other preimage refused",
+  "storageLayoutChanged": false,
+  "publicAPIChanged": false
+}
