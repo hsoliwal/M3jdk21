@@ -9,6 +9,10 @@ on:
       - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
       - 'test/jdk/jdk/internal/m3/M3IndexedArrayGrowth*.java'
       - 'test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java'
+      - 'src/java.base/share/native/libjava/M3IndexMaskWindow.c'
+      - 'test/jdk/jdk/internal/m3/M3Mask*.java'
+      - 'm3/qualification/combined-atomic-fused-jni-20261023/**'
       - '.github/workflows/m3-indexed-array-atomic-growth-20261023.yml'
       - 'm3/qualification/indexed-array-atomic-growth-20261023/**'
   workflow_dispatch:
@@ -131,3 +135,11 @@ jobs:
             java "$mode" --patch-module "java.base=$out/patch" \
               jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
           done
+      - name: Verify current atomic-fused JDK owners plus original Java/C JNI mask count
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/qualification/combined-atomic-fused-jni-20261023/verify.sh \
+            | tee "$RUNNER_TEMP/m3-current-atomic-fused-jni.log"
+          grep -q '^PASS: M3JDK21 current atomic-fused Java/C JNI scan-count' \
+            "$RUNNER_TEMP/m3-current-atomic-fused-jni.log"

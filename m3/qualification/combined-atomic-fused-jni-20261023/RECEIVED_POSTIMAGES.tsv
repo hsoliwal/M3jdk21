@@ -1,0 +1,12 @@
+# Data-only original M3JDK21 receiver receipt. Git blobs are SHA-1, NOT SHA-256; full source SHA-256 values are pinned by canonical Synexia manifests. All combined-host and release gates are pending.
+kind	target_path	before_git_blob	after_git_blob	origin	verification_status
+CHANGED	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java	f1e41112e980da7eaa33b2062f8cca743686dd8f	b9c942d354189c26ed0848d7dd73f21754838049	synexia-recipe-m3jdk21-atomic-fused-jni-convergence-20261023	GIT_BLOB_READBACK_PASS_RUNTIME_PENDING
+CHANGED	src/java.base/share/native/libjava/M3IndexMaskWindow.c	9fd46e422956744d7d662d5e6fdcf1046aa5db6f	59b2130ca8e897e75e24afbd45e8fd885c55b0e9	synexia-recipe-m3jdk21-atomic-fused-jni-convergence-20261023	GIT_BLOB_READBACK_PASS_RUNTIME_PENDING
+ADDED	test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java	ABSENT	a5a7d4508513b829d1ac14b9562aa108998a0e3f	M3JDK21-1878-and-Synexia-13223	GIT_BLOB_READBACK_PASS_RUNTIME_PENDING
+ADDED	test/jdk/jdk/internal/m3/M3MaskCountTest.java	ABSENT	3c6d7ca77c3b2e6e0e8e2cfd2b685790c1963d74	M3JDK21-1878-and-Synexia-13223	GIT_BLOB_READBACK_PASS_RUNTIME_PENDING
+ADDED	test/jdk/jdk/internal/m3/M3MaskPreparedPredicateTest.java	ABSENT	03ae7033b6d5d5357135fe23327da50bc4edbb2e	M3JDK21-1878-and-Synexia-13223	GIT_BLOB_READBACK_PASS_RUNTIME_PENDING
+ADDED	m3/qualification/combined-atomic-fused-jni-20261023/verify.sh	ABSENT	eb7a2100f15e4c4a0a7b4a26922ea69076ff6151	synexia-recipe-m3jdk21-atomic-fused-jni-convergence-20261023	GIT_BLOB_READBACK_PASS_RUNTIME_PENDING
+CHANGED	.github/workflows/m3-indexed-array-atomic-growth-20261023.yml	f4e081b61c37d355670282d1e34d5f51784a7bbb	0c30d92d5adb15e62331c57cf2d3f145243317c9	synexia-recipe-m3jdk21-atomic-fused-jni-convergence-20261023	GIT_BLOB_READBACK_PASS_RUNTIME_PENDING
+RETAINED	src/java.base/share/classes/java/util/CollectionViews.java	2fe6e7ede2af18d4523f3a5531038e9a865cdb6d	2fe6e7ede2af18d4523f3a5531038e9a865cdb6d	M3JDK21-current-contract-owner	UNCHANGED_SOURCE_BLOB_VERIFIED
+RETAINED	src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java	e6059aeb9b2e7f332fb0baea2684395c268a5414	e6059aeb9b2e7f332fb0baea2684395c268a5414	M3JDK21-1879-atomic-fused-owner	UNCHANGED_SOURCE_BLOB_VERIFIED
+RETAINED	src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java	885f237a80cdd5997a852609fa60066d0f7d11c4	885f237a80cdd5997a852609fa60066d0f7d11c4	M3JDK21-current-index-owner	UNCHANGED_SOURCE_BLOB_VERIFIED
