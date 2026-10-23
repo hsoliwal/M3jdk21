@@ -79,7 +79,7 @@ PRECOMPUTE_OBSERVATION_HEADER = [
 ]
 EXPECTED_PRECOMPUTE_OBSERVATION = {
     "schema": "M3JDK21_STRING_PRECOMPUTE_OBSERVATION_V2",
-    "snapshot_date_utc": "2026-10-21",
+    "snapshot_date_utc": "2026-10-15",
     "source_symbol": "com.synexia.indexstring.MIndexStringSearchPlan",
     "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringSearchPlan.java",
     "source_git_blob": "402e6d8cf2f99d19ffc9c1291afee7baf80665ec",
@@ -101,8 +101,8 @@ EXPECTED_PRECOMPUTE_OBSERVATION = {
     "observation_target_git_blob": "ac68eacd6ee4e6048ab424542ccf5c2cf5595908",
     "current_m3jdk_pr": "920",
     "current_m3jdk_merge_commit": "3d9d44eeed2859fe5c3d353723e7b627b379205d",
-    "current_m3jdk_master_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
-    "current_target_git_blob": "6f89d8cc25c8d8b7d372faaa7a9a550f819868c3",
+    "current_m3jdk_master_commit": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+    "current_target_git_blob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
     "synexia_source_recipe_pr": "11559",
     "synexia_source_recipe_head": "46d4d4864fcbffda3538e594f6be9babc0f88407",
     "synexia_source_recipe_state_at_capture": "OPEN_DRAFT",
@@ -130,12 +130,15 @@ EXPECTED_STRING_CHAIN = (
      "42399d411c1516a56a47dcdb10242960157b4677", "11247", "864"),
     ("42399d411c1516a56a47dcdb10242960157b4677",
      "35ed998540e044eed8cb7596e2e2c019ae369bd3", "11448", "898"),
+    ("35ed998540e044eed8cb7596e2e2c019ae369bd3",
+     "1e6c5c33569dbfd17cb75de2ceb61f567e6767af", "10774", "1530"),
 )
 
 SUCCESSOR_MARKERS = {
     "src/java.base/share/classes/java/lang/M3String.java": (
         "private final M3StringOwner owner;",
         "private final long value;",
+        "static M3String joinCharRanges(char[][] sources, int[] starts, int[] lengths)",
         "static M3String joinDesignated(",
         "M3String left = canonicalize(first);",
         "if (left == null) return null;",
