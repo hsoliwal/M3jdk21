@@ -1,0 +1,88 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Build original M3JDK21 OpenJDK image; this is not a complete release qualification.
+name: M3JDK21 original regex source-built image
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/regex/M3PatternQuery.java'
+      - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
+      - '.github/workflows/m3-regex-original-image-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-built-image-regex:
+    if: github.repository == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - name: Checkout complete original JDK product
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          lfs: false
+          submodules: false
+          persist-credentials: false
+      - name: Install Java 21 boot compiler
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check exact java.base regex and test source SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          source = {
+              'src/java.base/share/classes/java/util/regex/M3PatternQuery.java':
+                  'b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147',
+              'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java':
+                  'b5463d8e126b9a70dc874f181674f79f2484f6677fb30b864654d9b62fa25614',
+          }
+          for name, expected in source.items():
+              path = Path(name)
+              if not path.is_file() or path.is_symlink():
+                  raise SystemExit("MISSING_JDK_SOURCE " + name)
+              actual = hashlib.sha256(path.read_bytes()).hexdigest()
+              if actual != expected:
+                  raise SystemExit("SOURCE_DRIFT " + name + ": " + actual)
+              print("SOURCE_SEALED", name)
+          PY
+      - name: Configure actual OpenJDK and HotSpot
+        shell: bash
+        run: |
+          set -euo pipefail
+          df -h .
+          bash configure --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release --with-jvm-variants=server \
+            --enable-headless-only --disable-warnings-as-errors \
+            --with-freetype=bundled --with-jobs=2
+      - name: Build original M3JDK21 image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make images JOBS=2
+      - name: Run direct source-built Pattern Boolean-plan regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          java_path="$(find build -mindepth 3 -maxdepth 9 -type f -path '*/images/jdk/bin/java' -print -quit)"
+          if [[ -z "$java_path" ]]; then
+            echo "M3JDK21_IMAGE_NOT_FOUND"
+            exit 1
+          fi
+          jdk_home="$(dirname "$(dirname "$java_path")")"
+          "$jdk_home/bin/java" -version
+          mkdir -p "$RUNNER_TEMP/m3-regex-image-tests"
+          "$jdk_home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-regex-image-tests" \
+            test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java
+          for mode in -Xint -Xmixed; do
+            "$jdk_home/bin/java" "$mode" \
+              --add-opens java.base/java.util.regex=ALL-UNNAMED \
+              -cp "$RUNNER_TEMP/m3-regex-image-tests" M3RegexFrontierShortCircuitTest
+          done
+          echo "SOURCE_BUILT_REGEX_BOOLEAN_PLAN_ONLY_PASS"
