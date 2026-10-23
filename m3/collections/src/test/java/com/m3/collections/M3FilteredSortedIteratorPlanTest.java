@@ -54,12 +54,12 @@ class M3FilteredSortedIteratorPlanTest {
             calls.add("outer:" + value);
             return true;
         });
-        assertEquals(List.of(1, 3), new ArrayList<>(outer));
+        assertEquals(List.of(1, 3), consumeExactlyOnce(outer));
         assertEquals(List.of("inner:1", "outer:1", "inner:2", "inner:3", "outer:3"),
                 calls);
 
         calls.clear();
-        assertEquals(List.of(1, 3), new ArrayList<>(outer));
+        assertEquals(List.of(1, 3), consumeExactlyOnce(outer));
         assertEquals(List.of("inner:1", "outer:1", "inner:2", "inner:3", "outer:3"),
                 calls);
 
@@ -132,5 +132,12 @@ class M3FilteredSortedIteratorPlanTest {
         backing.put(8, "v8");
         assertFalse(filtered.containsKey(0));
         assertEquals(List.of(2, 4, 6, 8), new ArrayList<>(filtered.navigableKeySet()));
+    }
+
+    private static <E> List<E> consumeExactlyOnce(Collection<E> source) {
+        List<E> result = new ArrayList<>();
+        Iterator<E> iterator = source.iterator();
+        while (iterator.hasNext()) result.add(iterator.next());
+        return result;
     }
 }
