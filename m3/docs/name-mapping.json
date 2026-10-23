@@ -841,6 +841,24 @@
       "status": "no direct port; reuse existing target native owner",
       "source_role": "Synexia dedicated recipe-mastery regex/String static-signal JNI ABI",
       "target_rule": "retain this separate-module provider and its existing ABI; the java.base receiver has a target-owned libjava batch candidate recorded as m3.code-text-signal-batch. No external module loader enters java.base; retain JDK Pattern regex semantics on Java side"
+    },
+    {
+      "source": "com.synexia.rewrite.M3Jdk21ObjectPhysicalSlotProjection (Synexia recipe and candidate contract)",
+      "source_commit": "96bc482c0be6eb5ead933bf538b02912ed3cb58b",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_license": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors",
+      "target": "com.m3.collections.M3ObjectIndexSnapshot.filteredByPhysicalStatePlane",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "target_module": "m3/collections",
+      "target_owner": "M3ObjectIndexSnapshot and existing M3IndexPathMasks; no second payload or native ABI",
+      "source_preimage_sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+      "target_postimage_sha256": "db9e91e59fab8ef1166ee42d2936db0e23a6b59b34165273bfcac5b73382fa7a",
+      "recipe": "com.synexia.rewrite.M3Jdk21ObjectPhysicalSlotProjection",
+      "recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-object-physical-slot-projection-20261018",
+      "receiver_test": "m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java",
+      "status": "ISOLATED_COLLECTION_CANDIDATE; STRING -> arrays -> collections phase not advanced",
+      "gates": "source-sealed OpenRewrite fixed point; Java21 -Xlint Werror; full-int mask sort/slice/immutability; existing C17 JNI native-required parity; later jtreg/JCK/runtime image and cost gates pending",
+      "attribution": "No external donor source copied; LeetCode/HackerRank/GeeksforGeeks used for problem-category comparison only"
     }
   ],
   "imported_donor_sources": [],
