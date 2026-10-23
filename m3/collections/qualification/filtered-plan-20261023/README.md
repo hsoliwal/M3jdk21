@@ -116,3 +116,25 @@ committed JUnit tests still require passing remote or local execution;
 their GitHub Actions jobs were queued when this receipt was written.
 Neither this C harness nor the source-gated Java tests constitute
 a full Java/JNI matched-image differential run.
+
+
+## GitHub Actions successor result
+
+Selected [GitHub Actions run #39960123479](https://github.com/hsoliwal/M3jdk21/actions/runs/39960123479)
+completed successfully against product head
+`f3896dec812b3999097655387ff7ea30f9b15ee5`.
+The workflow's exact source receipt and Java 21 strict compilation passed.
+Observed test outputs:
+
+```text
+PASS M3_FILTERED_VIEWS checks=123500 randomized=750
+PASS M3FilteredNavigableFacadeSelfTest checks=117773 randomized=750
+M3FilteredSortedIteratorPlanSelfTest checks=29
+PASS viewport JNI regions: bounded=1024 disjoint_allocations=0 overlap_snapshot=4097 late_invalid_writes=0
+PASS sealed successor Java21 and inherited JNI region contracts; no full-image or phase promotion
+```
+
+This receipt resolves the previous historical-blob CI failure for the new
+branch without modifying the older 2026-10-17 source receipt. Maven JUnit,
+full M3JDK21 image, and product-VM JNI differential testing remain separate
+gates. No benchmark performance claim is made.
