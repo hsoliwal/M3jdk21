@@ -296,25 +296,25 @@ public final class CollectionViews {
 
         @Override
         public boolean isEmpty() {
-            // The original selected(...).hasNext() scans this same owner cursor.
-            // Avoid materializing the temporary filtering iterator for one terminal query.
-            Iterator<E> cursor = backing.iterator();
-            while (cursor.hasNext()) {
-                if (visible(cursor.next())) return false;
+            for (E element : backing) {
+                if (visible(element)) return false;
             }
             return true;
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
-            // Probe equality alone does not establish visibility: predicates
-            // belong to stored occurrences, not caller-supplied equal aliases.
+            // Owner admission is authoritative; non-List/Set collections may use
+            // reference identity or reject a domain that equals() would accept.
             if (!backing.contains(candidate)) return false;
+            if (!(backing instanceof List<?>) && !(backing instanceof Set<?>)) {
+                return predicate.test((E) candidate);
+            }
             if (backing instanceof Set<?>) {
                 E equivalent = null;
                 boolean found = false;
                 for (E stored : backing) {
-                    // Identity-keyed sets require the same stored object.
                     if (stored == candidate) return visible(stored);
                     if (!found && Objects.equals(candidate, stored)) {
                         equivalent = stored;
@@ -352,21 +352,19 @@ public final class CollectionViews {
         @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
             if (!backing.contains(candidate)) return false;
+            // Arbitrary Collection.remove may be identity-, domain- or
+            // owner-specific; an equals-based iterator removal is not equivalent.
+            if (!(backing instanceof List<?>) && !(backing instanceof Set<?>)) {
+                return predicate.test((E) candidate) && backing.remove(candidate);
+            }
             if (backing instanceof List<?>) {
-                // Prefer the owner's iterator mutation for the visible physical
-                // occurrence. Snapshot iterators (e.g. CopyOnWriteArrayList)
-                // require indexed removal instead.
+                // Remove the visible physical occurrence, not an earlier hidden
+                // equals-duplicate. Indexed removal also supports COW lists.
                 List<E> list = (List<E>) backing;
-                Iterator<E> iterator = list.iterator();
                 int physical = 0;
-                while (iterator.hasNext()) {
-                    E stored = iterator.next();
+                for (E stored : list) {
                     if (Objects.equals(candidate, stored) && visible(stored)) {
-                        try {
-                            iterator.remove();
-                        } catch (UnsupportedOperationException unsupported) {
-                            list.remove(physical);
-                        }
+                        list.remove(physical);
                         return true;
                     }
                     physical++;
@@ -377,7 +375,9 @@ public final class CollectionViews {
                 E equivalent = null;
                 boolean found = false;
                 for (E stored : backing) {
-                    if (stored == candidate) return visible(stored) && backing.remove(stored);
+                    if (stored == candidate) {
+                        return visible(stored) && backing.remove(stored);
+                    }
                     if (!found && Objects.equals(candidate, stored)) {
                         equivalent = stored;
                         found = true;
@@ -429,12 +429,6 @@ public final class CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
-            // These exact owners publish bulk changes without mutating snapshot iterators.
-            // Subclasses retain their existing iterator dispatch and override contracts.
-            if (backing.getClass() == java.util.concurrent.CopyOnWriteArrayList.class
-                    || backing.getClass() == java.util.concurrent.CopyOnWriteArraySet.class) {
-                return backing.removeIf(element -> visible(element) && condition.test(element));
-            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {
@@ -452,40 +446,6 @@ public final class CollectionViews {
     private static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
         private FilteredSet(Set<E> source, Predicate<? super E> predicate) {
             super(source, predicate);
-        }
-
-        /**
-         * Preserve owner membership before resolving stored visibility. Identity
-         * sets may retain equals-equal references, so an exact reference wins.
-         */
-        @Override
-        public boolean contains(Object candidate) {
-            if (!backing.contains(candidate)) return false;
-            for (E stored : backing) {
-                if (stored == candidate) return predicate.test(stored);
-            }
-            return super.contains(candidate);
-        }
-
-        @Override
-        public boolean remove(Object candidate) {
-            if (!backing.contains(candidate)) return false;
-            Iterator<E> cursor = backing.iterator();
-            while (cursor.hasNext()) {
-                E stored = cursor.next();
-                if (stored == candidate) {
-                    if (!predicate.test(stored)) return false;
-                    try {
-                        cursor.remove();
-                        return true;
-                    } catch (UnsupportedOperationException unsupported) {
-                        // Preserve the existing Set owner fallback, including
-                        // CopyOnWriteArraySet's read-only traversal cursors.
-                        return backing.remove(stored);
-                    }
-                }
-            }
-            return super.remove(candidate);
         }
 
         @Override
