@@ -7,9 +7,9 @@ This is an original M3JDK21 product-source refinement, not a compatibility overl
 - Master source commit (before): b032048eece51c897d8623fd7a69f7f16eac5a57
 - Existing source Git blob (before): 30a3bcb1d3a58935c548c40b99862b5643484e06
 - Result source Git blob: f786685aa7c7cf0e4e6a1b975f98227449fb637a
-- Result standalone contract Git blob: b6f558d55df9715b6536dcc7fbcecb4dd05aeba7
-- Result JUnit wrapper Git blob: 18862e0b96dfa096fc76c27605e88f19b8265937
-- Canonical source-sealed Synexia recipe: hsoliwal/com.synexia PR #13224, commit ca5c5cc0668187bf85562dbe1fd1653b95ef8480, recipe com.synexia.m3.Jdk21IndexSortAdaptive20261023. This product branch contains only admitted Java result sources/tests and this data-only receipt, not recipe code.
+- Result standalone contract Git blob: 74a8fe76fbab3c87b1caac198e01bf2cf1855fd4
+- Result JUnit wrapper Git blob: 15d06bd2740ea7c9ebc320b697a2ac347b446d1d
+- Canonical source-sealed Synexia recipe: hsoliwal/com.synexia PR #13224, commit 39dddf26d757af861a02ed6117b6213d667ac97d, recipe com.synexia.m3.Jdk21IndexSortAdaptive20261023. This product branch contains only admitted Java result sources/tests and this data-only receipt, not recipe code.
 
 ## Contract and storage
 Use existing parent-owned dynamic Object[] and primitive int[] physical positions. The original M3IndexSort.stable signature is retained; no new public method, type, JNI export, callback-to-native ABI, per-row Entry object or payload copy. Already-ordered indexes take a linear no-scratch path; disordered <=32 indexes sort stably in-place; larger disordered indexes use the original stable bottom-up merge kernel. Neither source payload nor caller comparison implementation is transferred into native memory.
