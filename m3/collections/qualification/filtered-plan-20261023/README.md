@@ -138,3 +138,28 @@ This receipt resolves the previous historical-blob CI failure for the new
 branch without modifying the older 2026-10-17 source receipt. Maven JUnit,
 full M3JDK21 image, and product-VM JNI differential testing remain separate
 gates. No benchmark performance claim is made.
+
+
+## Maven/JUnit selected contract completion
+
+The successor workflow
+[GitHub Actions run #39961681605](https://github.com/hsoliwal/M3jdk21/actions/runs/39961681605)
+completed with both jobs successful. The isolated Maven test POM is
+`m3/collections/qualification/filtered-plan-20261023/pom.xml`;
+it compiles exactly the filtered view and comparator spliterator owners
+under Java 21 and runs `M3FilteredSortedIteratorPlanTest`.
+
+```text
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
+The initial test-only Maven job failed on the known `com.m3.collections`
+module-name style warning due to overly broad test-harness lint. The
+corrected harness follows the owning collections module's
+`-Xlint:all,-module -Werror` configuration, without weakening all
+other compiler warnings. Java/JNI source receipts and the predecessor
+historical verifier remain unchanged.
+
+A passing selected JUnit suite is not full-method/atom coverage, full
+M3JDK21 image validation, or throughput evidence.
