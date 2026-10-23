@@ -150,6 +150,12 @@ public final class Matcher implements MatchResult {
     private int m3TqFactsFrom = -1;
     private int m3TqFactsTo = -1;
     private M3TQ.Facts m3TqFacts;
+    // The Pattern-compiled monotone plan needs only a Boolean region verdict;
+    // retain it across find() calls on the same immutable String and query.
+    private M3TQ m3TqScanQuery;
+    private int m3TqScanFrom = -1;
+    private int m3TqScanTo = -1;
+    private boolean m3TqScanAllowed;
 
     /**
      * Matcher state used by the last node. NOANCHOR is used when a
@@ -463,6 +469,9 @@ public final class Matcher implements MatchResult {
             m3TqFacts = null;
             m3TqFactsFrom = -1;
             m3TqFactsTo = -1;
+            m3TqScanQuery = null;
+            m3TqScanFrom = -1;
+            m3TqScanTo = -1;
         }
         text = input;
         return reset();
@@ -1748,6 +1757,32 @@ public final class Matcher implements MatchResult {
         }
 
         M3TQ.Facts facts = m3TqFacts;
+        if (facts != null && m3TqFactsFrom == this.from && m3TqFactsTo == to) {
+            return query.testPrecomputed(facts);
+        }
+        if (query.hasScanPlan()) {
+            if (m3TqScanQuery == query
+                    && m3TqScanFrom == this.from
+                    && m3TqScanTo == to) {
+                return m3TqScanAllowed;
+            }
+            boolean allowed;
+            try {
+                jdk.internal.access.JavaLangAccess access =
+                        jdk.internal.access.SharedSecrets.getJavaLangAccess();
+                java.util.function.LongPredicate prepared = access == null
+                        ? null : access.stringM3TrigramFacts((String) text);
+                allowed = (prepared == null || query.test(prepared))
+                        && query.testScanning(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
+            } catch (OutOfMemoryError unavailable) {
+                return true;
+            }
+            m3TqScanFrom = this.from;
+            m3TqScanTo = to;
+            m3TqScanQuery = query;
+            m3TqScanAllowed = allowed;
+            return allowed;
+        }
         if (facts == null
                 || m3TqFactsFrom != this.from
                 || m3TqFactsTo != to) {
@@ -1756,9 +1791,7 @@ public final class Matcher implements MatchResult {
                         jdk.internal.access.SharedSecrets.getJavaLangAccess();
                 java.util.function.LongPredicate prepared = access == null
                         ? null : access.stringM3TrigramFacts((String) text);
-                if (prepared != null && !query.test(prepared)) {
-                    return false;
-                }
+                if (prepared != null && !query.test(prepared)) return false;
                 facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
             } catch (OutOfMemoryError unavailable) {
                 // Candidate precompute must never add a new failure mode to Matcher.find().
