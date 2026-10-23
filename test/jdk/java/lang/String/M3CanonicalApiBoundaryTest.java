@@ -8,6 +8,8 @@
  */
 
 import java.lang.module.ModuleDescriptor;
+import java.lang.module.ModuleFinder;
+import java.lang.module.ModuleReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -37,8 +39,8 @@ public final class M3CanonicalApiBoundaryTest {
     private M3CanonicalApiBoundaryTest() {}
 
     public static void main(String[] args) throws Exception {
-        Class<?> stringOwner = Class.forName(STRING_OWNER);
-        Class<?> classOwner = Class.forName(CLASS_OWNER);
+        Class<?> stringOwner = Class.forName(STRING_OWNER, false, null);
+        Class<?> classOwner = Class.forName(CLASS_OWNER, false, null);
         Module javaBase = String.class.getModule();
         if (stringOwner.getModule() != javaBase || classOwner.getModule() != javaBase) {
             throw new AssertionError("internal implementation escaped java.base");
@@ -65,7 +67,32 @@ public final class M3CanonicalApiBoundaryTest {
         }) {
             verifyCanonical(canonical);
         }
+        auditExportedJavaPackages();
         System.out.println("M3JDK_CANONICAL_API_BOUNDARY_PASS 7 canonical owners, 2 internal owners");
+    }
+
+    /** Find all M3-named top-level classes in exported java.lang/java.util families. */
+    private static void auditExportedJavaPackages() throws Exception {
+        try (ModuleReader reader = ModuleFinder.ofSystem().find("java.base")
+                .orElseThrow().open();
+             var entries = reader.list()) {
+            for (String resource : entries.filter(entry -> entry.endsWith(".class")
+                    && !entry.contains("$")
+                    && (entry.startsWith("java/lang/") || entry.startsWith("java/util/")))
+                    .sorted().toList()) {
+                String simple = resource.substring(resource.lastIndexOf('/') + 1,
+                        resource.length() - ".class".length());
+                if (!internalSpelling(simple)) {
+                    continue;
+                }
+                String binaryName = resource.substring(0,
+                        resource.length() - ".class".length()).replace('/', '.');
+                Class<?> internal = Class.forName(binaryName, false, null);
+                if (Modifier.isPublic(internal.getModifiers())) {
+                    throw new AssertionError("exported JDK package exposes M3 class: " + binaryName);
+                }
+            }
+        }
     }
 
     private static void verifyCanonical(Class<?> canonical) {
