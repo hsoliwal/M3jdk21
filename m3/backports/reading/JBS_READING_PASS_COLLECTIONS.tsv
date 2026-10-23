@@ -1,0 +1,42 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+22	JDK-8271268	candidate-collections-lane	admitted-docs	Javadoc link fix for Stream.mapMulti; no code
+22	JDK-8314280	candidate-collections-lane	hold-preview	StructuredTaskScope is a preview API in 21; the doc change rides the preview surface
+22	JDK-8315973	candidate-collections-lane	candidate-collections-lane	removes unused ThreadLocalRandom fields; internal, allocation-neutral, no API
+22	JDK-8318420	candidate-collections-lane	candidate-collections-lane	AbstractPipeline constructor calls an overridable method; internal stream pipeline fix
+22	JDK-8318421	candidate-collections-lane	candidate-collections-lane	sourceStageSpliterator pointer chasing; internal, performance, no API
+22	JDK-8319123	candidate-collections-lane	hold-preview	JEP 461 Stream Gatherers is a preview feature (new public API); not backported to 21
+22	JDK-8320440	candidate-collections-lane	hold-preview	Structured Concurrency second preview; preview API surface
+23	JDK-8310351	candidate-collections-lane	admitted-docs	typo in ImmutableCollections comments
+23	JDK-8322149	candidate-collections-lane	candidate-collections-lane	ConcurrentHashMap presizing for copy constructor and putAll; internal, measurable, no API
+23	JDK-8331987	candidate-collections-lane	candidate-measured	CompletableFuture CancellationException stack trace clarity; changes exception stacks seen by callers, measure before admitting
+23	JDK-8332064	candidate-collections-lane	hold-preview	Structured Concurrency third preview; preview API surface
+24	JDK-8325679	candidate-collections-lane	candidate-collections-lane	ArrayList.subList sort optimization; internal, performance, no API
+24	JDK-8332842	candidate-collections-lane	candidate-collections-lane	empty CopyOnWriteArrayList allocation optimization; internal, no API
+24	JDK-8333265	candidate-collections-lane	candidate-collections-lane	FindOps method-reference de-duplication; internal cleanup
+24	JDK-8342707	candidate-collections-lane	hold-preview	prepares Gatherers for graduation; depends on the preview API absent in 21
+24	JDK-8343250	candidate-collections-lane	candidate-collections-lane	ArrayBlockingQueue serialization thread-safety bug fix; internal, correctness
+25	JDK-8319447	candidate-collections-lane	candidate-collections-lane	delayed task handling performance in ScheduledThreadPoolExecutor; internal, measure
+25	JDK-8327858	candidate-collections-lane	candidate-collections-lane	spliterator and forEach for single-element immutable collections; internal, allocation reduction
+25	JDK-8352971	candidate-collections-lane	candidate-collections-lane	ReentrantReadWriteLock maximum hold count raised; implementation constant, no API
+25	JDK-8355369	candidate-collections-lane	candidate-collections-lane	removes setAccessible on final fields in java.util.concurrent; internal, reflection hygiene
+25	JDK-8356486	candidate-collections-lane	candidate-collections-lane	ReverseOrderListView.reversed() returns the base list; spec-conforming fix, no new API
+25	JDK-8357797	candidate-collections-lane	hold-preview	StructuredTaskScopeImpl state init; preview implementation
+25	JDK-8358151	candidate-collections-lane	admitted-tests	JSR166 test hardening only
+26	JDK-6317534	candidate-collections-lane	hold-api	CyclicBarrier.cancel() is new public API; platform surface change, not a 21 backport
+26	JDK-6351533	candidate-collections-lane	hold-api	CyclicBarrier.reset() return type change; public API change
+26	JDK-6526284	candidate-collections-lane	admitted-docs	AbstractExecutorService javadoc
+26	JDK-6625724	candidate-collections-lane	hold-api	ReentrantReadWriteLock option to skip per-thread read-hold tracking; new public API
+26	JDK-7176957	candidate-collections-lane	admitted-docs	ExecutorService.submit javadoc
+26	JDK-8137156	candidate-collections-lane	admitted-docs	Future cancellation javadoc
+26	JDK-8199501	candidate-collections-lane	admitted-docs	CompletableFuture and CompletionStage documentation
+26	JDK-8210149	candidate-collections-lane	admitted-docs	Flow javadoc example correction
+26	JDK-8210312	candidate-collections-lane	admitted-docs	SubmissionPublisher javadoc example correction
+26	JDK-8292365	candidate-collections-lane	admitted-docs	memory model guarantees documented for CompletableFuture and CompletionStage
+26	JDK-8311131	candidate-collections-lane	admitted-docs	ConcurrentHashMap.forEachKey parallelismThreshold wording
+26	JDK-8333172	candidate-collections-lane	admitted-docs	recommendation to use VarHandles over the atomic field updaters; docs
+26	JDK-8353155	candidate-collections-lane	admitted-docs	FutureTask.run() javadoc
+26	JDK-8362958	candidate-collections-lane	candidate-collections-lane	streams skip copying and sorting under Comparator.naturalOrder(); internal, performance
+26	JDK-8368178	candidate-collections-lane	candidate-collections-lane	SequencedCollection method specializations in the standard list factories; implementation of existing 21 API
+26	JDK-8371815	candidate-collections-lane	hold-preview	StructuredTaskScope.open docs; preview API
+27	JDK-8371656	candidate-collections-lane	candidate-collections-lane	HashMap.putAll optimizations; internal, performance, measure
+27	JDK-8376698	candidate-collections-lane	admitted-tests	Spliterator tests for TreeMap sub-maps; tests only
