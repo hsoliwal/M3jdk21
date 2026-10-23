@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+24	JDK-8283779	core-libs	java.net	P3	doc-only	Clarify API documentation of NetworkInterface with respect to configuration changes	UNCLASSIFIED	candidate-adapted
+24	JDK-8324209	core-libs	java.net	P4	httpclient,release-note=yes	Check implementation of Expect: 100-continue in the java.net.http.HttpClient	UNCLASSIFIED	candidate-adapted
+24	JDK-8326949	core-libs	java.net	P3	dcsas,httpclient,regression,release-note=yes,reproducer-yes,webbug	Authorization header is removed when a proxy Authenticator is set on HttpClient	UNCLASSIFIED	candidate-adapted
+24	JDK-8343150	core-libs	java.net	P4	jep486,noreg-cleanup	Change URLClassLoader.getPermissions to return empty PermissionCollection	UNCLASSIFIED	candidate-adapted
+24	JDK-8345074	core-libs	java.net	P4	noreg-cleanup	java.net.InterfaceAddress constructor could be made private	UNCLASSIFIED	candidate-adapted
+24	JDK-8345176	core-libs	java.net	P4	noreg-self,testbug,ursqe-triaged	Add tests to verify java.net.Socket constructors close the socket on failure	UNCLASSIFIED	candidate-adapted
+25	JDK-8228773	core-libs	java.net	P3	noreg-doc	URLClassLoader constructors should include API note warning that the parent should not be null	UNCLASSIFIED	candidate-adapted
+25	JDK-8285888	core-libs	java.net	P4	dcsaw,httpclient,noreg-doc,reproducer-other,webbug	Clarify that java.net.http.HttpClient do NOT support Digest authentication	UNCLASSIFIED	candidate-adapted
+25	JDK-8328919	core-libs	java.net	P4	httpclient,release-note=yes	Add BodyHandlers / BodySubscribers methods to handle excessive server input	UNCLASSIFIED	candidate-adapted
+25	JDK-8336412	core-libs	java.net	P5	cleanup,noreg-cleanup	sun.net.www.MimeTable has a few unused methods	UNCLASSIFIED	candidate-adapted
+25	JDK-8342807	core-libs	java.net	P4	noreg-cleanup	Update links in java.base to use https://	UNCLASSIFIED	candidate-adapted
+25	JDK-8345249	core-libs	java.net	P4	noreg-cleanup	Apply some conservative cleanups in FileURLConnection	UNCLASSIFIED	candidate-adapted
+25	JDK-8348986	core-libs	java.net	P3		Improve coverage of enhanced exception messages	UNCLASSIFIED	candidate-adapted
+25	JDK-8350279	core-libs	java.net	P4	httpclient,release-note=yes	HttpClient: Add a new HttpResponse method to identify connections	UNCLASSIFIED	candidate-adapted
+25	JDK-8350915	core-libs	java.net	P4	noreg-self	[JMH] test SocketChannelConnectionSetup failed for 2 threads config	UNCLASSIFIED	candidate-adapted
+25	JDK-8352858	core-libs	java.net	P4	noreg-cleanup	Make java.net.JarURLConnection fields final	UNCLASSIFIED	candidate-adapted
+25	JDK-8353278	core-libs	java.net	P4	noreg-cleanup	Consolidate local file URL checks in jar: and file: URL schemes	UNCLASSIFIED	candidate-adapted
+25	JDK-8353440	core-libs	java.net	P4	release-note=yes	Disable FTP fallback for non-local file URLs by default	UNCLASSIFIED	candidate-adapted
+25	JDK-8353642	core-libs	java.net	P3		Deprecate URL::getPermission method and networking permission classes for removal	UNCLASSIFIED	candidate-adapted
+25	JDK-8353949	core-libs	java.net	P4	amazon-interest,dcsae,dcspt,httpclient,jdk21u-fix-no,jdk21u-fix-request,noreg-perf,reproducer-other,webbug	HttpHeaders.firstValueAsLong unnecessarily boxes to Long	UNCLASSIFIED	candidate-adapted
+25	JDK-8354024	core-libs	java.net	P4	noreg-self	[JMH] Create ephemeral UnixDomainSocketAddress provider with thread-safe close semantics	UNCLASSIFIED	candidate-adapted
+25	JDK-8354826	core-libs	java.net	P5	noreg-cleanup	Make ResolverConfigurationImpl.lock field final	UNCLASSIFIED	candidate-adapted
+25	JDK-8356154	core-libs	java.net	P4	release-note=yes	Respecify java.net.Socket constructors that allow creating UDP sockets to throw IllegalArgumentException	UNCLASSIFIED	candidate-adapted
+25	JDK-8357013	core-libs	java.net	P4	dcsaw,webbug	HttpURLConnection#getResponseCode can avoid substring call when parsing to int	UNCLASSIFIED	candidate-adapted
+26	JDK-8329829	core-libs	java.net	P4	httpclient,release-note=yes	HttpClient: Add a BodyPublishers.ofFileChannel method	UNCLASSIFIED	candidate-adapted
+26	JDK-8331195	core-libs	java.net	P4		Improve com.sun.net.httpserver.HttpExchange usability	UNCLASSIFIED	candidate-adapted
+26	JDK-8332623	core-libs	java.net	P4	release-note=yes	Remove setTTL()/getTTL() methods from DatagramSocketImpl/MulticastSocket and MulticastSocket.send(DatagramPacket, byte)	UNCLASSIFIED	candidate-adapted
+26	JDK-8347167	core-libs	java.net	P4	amazon-interest,jdk25u-fix-request,jdk25u-fix-yes	Reduce allocation in com.sun.net.httpserver.Headers::normalize	UNCLASSIFIED	candidate-adapted
+26	JDK-8349910	core-libs	java.net	P3	http3,httpclient	Implement JEP 517: HTTP/3 for the HTTP Client API	UNCLASSIFIED	candidate-adapted
+26	JDK-8358688	core-libs	java.net	P4	httpclient,noreg-cleanup	HttpClient: Simplify file streaming in RequestPublishers.FilePublisher	UNCLASSIFIED	candidate-adapted
+26	JDK-8359223	core-libs	java.net	P4	httpclient,jdk25u-fix-request,jdk25u-fix-yes,noreg-cleanup,noreg-self	HttpClient: Remove leftovers from the SecurityManager cleanup	UNCLASSIFIED	candidate-adapted
+26	JDK-8361060	core-libs	java.net	P4	httpclient	Keep track of the origin server against which a jdk.internal.net.http.HttpConnection was constructed	UNCLASSIFIED	candidate-adapted
+26	JDK-8365239	core-libs	java.net	P3	conformance,noreg-doc	Spec Clarification - InterfaceAddress:getBroadcast() returning null for loop back address	UNCLASSIFIED	candidate-adapted
+26	JDK-8366040	core-libs	java.net	P4	URLStreamHandler	Change URL.lookupViaProviders to use ScopedValue to detect recursive lookup	UNCLASSIFIED	candidate-adapted
+26	JDK-8366575	core-libs	java.net	P4	release-note=yes,removal,sdp,socket	Remove SDP support	UNCLASSIFIED	candidate-adapted
+26	JDK-8366577	core-libs	java.net	P4	deprecation,release-note=yes,socket	Deprecate java.net.Socket::setPerformancePreferences	UNCLASSIFIED	candidate-adapted
+26	JDK-8367114	core-libs	java.net	P4		Update jdk.test.lib.net.SimpleHttpServer to use SimpleFileServer 	UNCLASSIFIED	candidate-adapted
+26	JDK-8369920	core-libs	java.net	P4	http3,httpclient	HttpClient QuicSelectorThread could be a VirtualThread	UNCLASSIFIED	candidate-adapted
+26	JDK-8371091	core-libs	java.net	P4	httpclient	Improve the exception message of NullPointerException thrown by the methods in the default implementation of HttpRequest.Builder	UNCLASSIFIED	candidate-adapted
+26	JDK-8371475	core-libs	java.net	P4	http3,httpclient	HttpClient: Implement CUBIC congestion controller	UNCLASSIFIED	candidate-adapted
+26	JDK-8371802	core-libs	java.net	P3	http3,httpclient	Do not let QUIC connection to idle terminate when HTTP/3 is configured with a higher idle timeout	UNCLASSIFIED	candidate-adapted
+26	JDK-8372159	core-libs	java.net	P4	httpclient	HttpClient SelectorManager thread could be a VirtualThread	UNCLASSIFIED	candidate-adapted
+27	JDK-8227493	core-libs	java.net	P4	dcs-pso,noreg-hard,reproducer-other,webbug	Return a more useful error message from lookupAllHostAddr if getaddrinfo results in EAI_SYSTEM error	UNCLASSIFIED	candidate-adapted
+27	JDK-8372731	core-libs	java.net	P4	jdk25u-fix-request,jdk25u-fix-yes	Detailed authentication failure messages	UNCLASSIFIED	candidate-adapted
+27	JDK-8372746	core-libs	java.net	P5		Some httpserver files could benefit from some formatting cleanup 	UNCLASSIFIED	candidate-adapted
+27	JDK-8373677	core-libs	java.net	P4		Clear text HttpServer connection could fail fast if receiving SSL ClientHello	UNCLASSIFIED	candidate-adapted
+27	JDK-8374706	core-libs	java.net	P4	httpclient,noreg-self	HttpClient: Ensure that request body publishers support multiple subscriptions	UNCLASSIFIED	candidate-adapted
+27	JDK-8375580	core-libs	java.net	P4	noreg-cleanup	Avoid using ArrayDeque in jdk.internal.loader.URLClassPath	UNCLASSIFIED	candidate-adapted
+27	JDK-8375683	core-libs	java.net	P4	doc-only,hgupdate-sync,noreg-doc	Add notes for sctp tests	UNCLASSIFIED	candidate-adapted
+27	JDK-8379528	core-libs	java.net	P4		Add @required in open/test/jdk/:jdk_sctp test, as these are applicable only on linux platforms	UNCLASSIFIED	candidate-adapted
+27	JDK-8379557	core-libs	java.net	P4	noreg-perf	Further optimize URL.toExternalForm	UNCLASSIFIED	candidate-adapted
+27	JDK-8379567	core-libs	java.net	P4	dcsaw,webbug	URL documentation about encoding/decoding is hard to read	UNCLASSIFIED	candidate-adapted
+27	JDK-8380824	core-libs	java.net	P4	noreg-self	 java/net/DatagramSocket/SendReceiveMaxSize.java could also test the loopback interface	UNCLASSIFIED	candidate-adapted
+27	JDK-8382118	core-libs	java.net	P4		Refactor open/test/jdk/sun/net/www/protocol/file/DirPermissionDenied.java test	UNCLASSIFIED	candidate-adapted
+27	JDK-8383174	core-libs	java.net	P4		Improve exceptions in Java_sun_net_www_protocol_http_ntlm_NTLMAuthSequence_getNextToken	UNCLASSIFIED	candidate-adapted
+22	JDK-8214248	core-libs	java.nio	P3	conformance,noreg-doc	(fs) Files:mismatch spec clarifications	UNCLASSIFIED	candidate-adapted
+22	JDK-8241800	core-libs	java.nio	P3		Disable IPV6_MULTICAST_ALL to prevent interference from all multicast groups	UNCLASSIFIED	candidate-adapted
+22	JDK-8262742	core-libs	java.nio	P4	dcsaw,reproducer-other,webbug	(fs) Add Path::resolve with varargs string	UNCLASSIFIED	candidate-adapted
+22	JDK-8310978	core-libs	java.nio	P4		JFR events SocketReadEvent/SocketWriteEvent for Socket adaptor ops	UNCLASSIFIED	candidate-adapted
+22	JDK-8312089	core-libs	java.nio	P4	noreg-cleanup	Simplify and modernize equals, hashCode, and compareTo in java.nio and implementation code	UNCLASSIFIED	candidate-adapted
+22	JDK-8313743	core-libs	java.nio	P5	noreg-trivial	Make fields final in sun.nio.ch	UNCLASSIFIED	candidate-adapted
+22	JDK-8314569	core-libs	java.nio	P4		(fs) Improve normalization of UnixPath for input with trailing slashes	UNCLASSIFIED	candidate-adapted
+22	JDK-8314746	core-libs	java.nio	P5	noreg-cleanup	Remove unused private put* methods from DirectByteBufferR	UNCLASSIFIED	candidate-adapted
+22	JDK-8318422	core-libs	java.nio	P3	amazon-interest,loom,noreg-perf	Allow poller threads be virtual threads	UNCLASSIFIED	candidate-adapted
+22	JDK-8319417	core-libs	java.nio	P4	noreg-doc	(dc) DatagramChannel.connect undocumented behavior	UNCLASSIFIED	candidate-adapted
+23	JDK-8321279	core-libs	java.nio	P4	amazon-interest	Implement hashCode() in Heap-X-Buffer.java.template	UNCLASSIFIED	candidate-adapted
+23	JDK-8321429	core-libs	java.nio	P4	dcsaw,noreg-other,reproducer-other,webbug	(fc) FileChannel.lock creates a FileKey containing two long index values, they could be stored as int values	UNCLASSIFIED	candidate-adapted
+23	JDK-8321561	core-libs	java.nio	P4	noreg-doc	(fs) Clarify non-atomic behavior of Files.move	UNCLASSIFIED	candidate-adapted
+23	JDK-8321594	core-libs	java.nio	P4	loom,noreg-other	NativeThreadSet should use placeholder for virtual threads	UNCLASSIFIED	candidate-adapted
+23	JDK-8321802	core-libs	java.nio	P4		(zipfs) Add validation of incorrect LOC signature in ZipFileSystem	UNCLASSIFIED	candidate-adapted
+23	JDK-8322565	core-libs	java.nio	P4		(zipfs) Files.setPosixPermissions should preserve 'external file attributes' bits	UNCLASSIFIED	candidate-adapted
+23	JDK-8322829	core-libs	java.nio	P3	loom,noreg-other	Refactor nioBlocker to avoid blocking while holding Thread's interrupt lock	UNCLASSIFIED	candidate-adapted
+23	JDK-8323612	core-libs	java.nio	P4	noreg-hard	IOVecWrapper should be changed to be TerminatingThreadLocal	UNCLASSIFIED	candidate-adapted
+23	JDK-8327002	core-libs	java.nio	P4	noreg-self,ursqe-triaged	(fs) java/nio/file/Files/CopyMoveVariations.java should be able to test across file systems	UNCLASSIFIED	candidate-adapted
+23	JDK-8327095	core-libs	java.nio	P4	noreg-self,ursqe-triaged	(ch) java/nio/channels/AsyncCloseAndInterrupt.java: improve error message when mkfifo fails	UNCLASSIFIED	candidate-adapted
+23	JDK-8329138	core-libs	java.nio	P4		Convert JFR FileForceEvent to static mirror event	UNCLASSIFIED	candidate-adapted
+23	JDK-8330077	core-libs	java.nio	P4	release-note=yes,webbug	Allow max number of events to be buffered to be configurable to avoid OVERFLOW_EVENT	UNCLASSIFIED	candidate-adapted
+24	JDK-8233451	core-libs	java.nio	P4	dcs-pso,reproducer-other,webbug	(fs) Files.newInputStream() cannot be used with character special files	UNCLASSIFIED	candidate-adapted
+24	JDK-8324048	core-libs	java.nio	P4	noreg-other	(fc) Make FileKey fields final	UNCLASSIFIED	candidate-adapted
+24	JDK-8336675	core-libs	java.nio	P5	noreg-cleanup	Remove UnixFileSystemProvider.checkPath in favor of UnixPath.toUnixPath	UNCLASSIFIED	candidate-adapted
+24	JDK-8336755	core-libs	java.nio	P4	noreg-cleanup	Remove unused UNALIGNED field from view buffers	UNCLASSIFIED	candidate-adapted
+24	JDK-8338142	core-libs	java.nio	P4	noreg-hard	(dc) DatagramChannelImpl.blockingReceive can use untimed-park when no timeout set	UNCLASSIFIED	candidate-adapted
+24	JDK-8343785	core-libs	java.nio	P4	noreg-other	(fs) Remove syscalls that set file times with microsecond precision	UNCLASSIFIED	candidate-adapted
+24	JDK-8343823	core-libs	java.nio	P4	dcsaw,noreg-doc,webbug	(fs) Files.createLink: inconsistent behavior when creating link to symbolic link	UNCLASSIFIED	candidate-adapted
+24	JDK-8344112	core-libs	java.nio	P4	jep486,noreg-cleanup	Remove code to support security manager execution mode from DatagramChannel implementation	UNCLASSIFIED	candidate-adapted
+24	JDK-8344183	core-libs	java.nio	P4	jep486,noreg-cleanup	(zipfs) SecurityManager cleanup in the ZipFS area	UNCLASSIFIED	candidate-adapted
+24	JDK-8344328	core-libs	java.nio	P4	noreg-cleanup	(dc) DatagramChannelImpl.blockingReceive can now synchronize on packet	UNCLASSIFIED	candidate-adapted
+24	JDK-8344882	core-libs	java.nio	P4	release-note=yes	(bf) Temporary direct buffers should not count against the upper limit on direct buffer memory	UNCLASSIFIED	candidate-adapted
+24	JDK-8345433	core-libs	java.nio	P4	noreg-other	(fs) Use stream to load FileTypeDetectors in Files.probeContentType	UNCLASSIFIED	candidate-adapted
+25	JDK-8345421	core-libs	java.nio	P4	noreg-self,ursqe-triaged	(bf) Create specific test for temporary direct buffers and the buffer size limit	UNCLASSIFIED	candidate-adapted
+25	JDK-8345432	core-libs	java.nio	P4	noreg-other,release-note=yes	(ch, fs) Replace anonymous Thread with InnocuousThread	UNCLASSIFIED	candidate-adapted
+25	JDK-8350654	core-libs	java.nio	P4	dcsas,noreg-doc,reproducer-other,webbug	(fs) Files.createTempDirectory should say something about the default file permissions when no file attributes specified	UNCLASSIFIED	candidate-adapted
+25	JDK-8350880	core-libs	java.nio	P4	release-note=yes	(zipfs) Add support for read-only zip file systems	UNCLASSIFIED	candidate-adapted
+25	JDK-8353053	core-libs	java.nio	P4	jdk24u-fix-SQE-ok,jdk24u-fix-request,jdk24u-fix-yes	(fs) Add support for UserDefinedFileAttributeView on AIX	UNCLASSIFIED	candidate-adapted
+25	JDK-8356036	core-libs	java.nio	P5	noreg-cleanup	(fs) FileKey.hashCode and UnixFileStore.hashCode implementations can use Long.hashCode	UNCLASSIFIED	candidate-adapted
+25	JDK-8356606	core-libs	java.nio	P4	dcsas,noreg-cleanup,reproducer-other,webbug	(fs) PosixFileAttributes.permissions() implementations should return an EnumSet	UNCLASSIFIED	candidate-adapted
+25	JDK-8356678	core-libs	java.nio	P4		(fs) Files.readAttributes should map ENOTDIR to NoSuchFileException where possible (unix)	UNCLASSIFIED	candidate-adapted
+25	JDK-8357303	core-libs	java.nio	P4	dcsaw,webbug	(fs) UnixSecureDirectoryStream.implDelete has unused haveFlags parameter	UNCLASSIFIED	candidate-adapted
+25	JDK-8357425	core-libs	java.nio	P4	dcsaw,reproducer-yes,webbug	(fs) SecureDirectoryStream setPermissions should use fchmodat	UNCLASSIFIED	candidate-adapted
+25	JDK-8358558	core-libs	java.nio	P4	noreg-doc	(zipfs) Reorder the listing of "accessMode" property in the ZIP file system's documentation	UNCLASSIFIED	candidate-adapted
+26	JDK-8220816	core-libs	java.nio	P5	dcs-pso,noreg-doc,webbug	(fs) Files.createDirectory should make it more obvious that it fails when the directory already exists	UNCLASSIFIED	candidate-adapted
+26	JDK-8344332	core-libs	java.nio	P4	amazon-interest	(bf) Migrate DirectByteBuffer away from jdk.internal.ref.Cleaner	UNCLASSIFIED	candidate-adapted
+26	JDK-8357959	core-libs	java.nio	P4	amazon-interest,jdk25u-fix-SQE-ok-next,jdk25u-fix-request,jdk25u-fix-yes	(bf) ByteBuffer.allocateDirect initialization can result in large TTSP spikes	UNCLASSIFIED	candidate-adapted
+26	JDK-8361209	core-libs	java.nio	P4	noreg-other	(bf) Use CharSequence::getChars for StringCharBuffer bulk get methods	UNCLASSIFIED	candidate-adapted
+26	JDK-8362637	core-libs	java.nio	P4	release-note=yes	Convert java.nio.ByteOrder to an enum	UNCLASSIFIED	candidate-adapted
+26	JDK-8364954	core-libs	java.nio	P3	google-interest,noreg-other	(bf) CleaningThread should be InnocuousThread	UNCLASSIFIED	candidate-adapted
+26	JDK-8366911	core-libs	java.nio	P4	release-note=yes	(fs) Remove support for normalizing file names to Unicode normalized form D (macOS)	UNCLASSIFIED	candidate-adapted
+26	JDK-8367988	core-libs	java.nio	P4	jdk25u-fix-SQE-ok,jdk25u-fix-request,jdk25u-fix-yes,noreg-self,test-fail,tier2	NewFileSystemTests.readOnlyZipFileFailure fails when run by root user	UNCLASSIFIED	candidate-adapted
+26	JDK-8368907	core-libs	java.nio	P4	additional-information-received,dcsaw,noreg-hard,webbug	(fs) Windows Error code 1314 not translated to AccessDeniedException (win)	UNCLASSIFIED	candidate-adapted
+27	JDK-8367284	core-libs	java.nio	P4		(fs) Support current working directory target in SecureDirectoryStream.move	UNCLASSIFIED	candidate-adapted

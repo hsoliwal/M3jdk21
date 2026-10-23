@@ -1,0 +1,111 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+24	JDK-8283779	candidate-adapted	admitted-docs	NetworkInterface javadoc clarification only
+24	JDK-8324209	candidate-adapted	candidate-measured	release-noted change to HttpClient Expect 100-continue handling visible to callers
+24	JDK-8326949	candidate-adapted	candidate-measured	regression fix keeps user Authorization header; release-noted wire behaviour change
+24	JDK-8343150	candidate-adapted	hold-jep	JEP 486 security manager removal step in URLClassLoader.getPermissions
+24	JDK-8345074	candidate-adapted	candidate-adapted	package-private InterfaceAddress constructor made private; no public API change
+24	JDK-8345176	candidate-adapted	admitted-tests	new tests for Socket constructor close-on-failure
+25	JDK-8228773	candidate-adapted	admitted-docs	URLClassLoader constructor API note only
+25	JDK-8285888	candidate-adapted	admitted-docs	HttpClient javadoc states Digest auth is unsupported
+25	JDK-8328919	candidate-adapted	hold-api	adds BodyHandlers.limiting and BodySubscribers.limiting public methods
+25	JDK-8336412	candidate-adapted	candidate-adapted	removes unused methods in internal sun.net.www.MimeTable
+25	JDK-8342807	candidate-adapted	admitted-docs	https link updates in java.base comments and javadoc
+25	JDK-8345249	candidate-adapted	candidate-adapted	internal FileURLConnection cleanup with no API change
+25	JDK-8348986	candidate-adapted	hold-api	adds jdk.includeInExceptions security property categories and changes its default filtering
+25	JDK-8350279	candidate-adapted	hold-api	adds HttpResponse.connectionLabel public method
+25	JDK-8350915	candidate-adapted	admitted-tests	JMH microbenchmark fix only
+25	JDK-8352858	candidate-adapted	candidate-adapted	private JarURLConnection fields made final; no API change
+25	JDK-8353278	candidate-adapted	candidate-adapted	internal consolidation of local file URL checks in jar and file handlers
+25	JDK-8353440	candidate-adapted	hold-removal	disables FTP fallback for non-local file URLs by default behind new jdk.net.file.ftpfallback property
+25	JDK-8353642	candidate-adapted	hold-removal	deprecates URL.getPermission and networking permission classes for removal
+25	JDK-8353949	candidate-adapted	candidate-measured	removes boxing in HttpHeaders.firstValueAsLong; perf claim and 21u backport declined
+25	JDK-8354024	candidate-adapted	admitted-tests	JMH helper for UnixDomainSocketAddress benchmarks only
+25	JDK-8354826	candidate-adapted	candidate-adapted	internal lock field made final in ResolverConfigurationImpl
+25	JDK-8356154	candidate-adapted	hold-removal	Socket UDP-mode constructors respecified to throw IllegalArgumentException
+25	JDK-8357013	candidate-adapted	candidate-measured	avoids substring in HttpURLConnection.getResponseCode; allocation perf claim
+26	JDK-8329829	candidate-adapted	hold-api	adds BodyPublishers.ofFileChannel public method
+26	JDK-8331195	candidate-adapted	hold-api	adds public usability members to com.sun.net.httpserver.HttpExchange
+26	JDK-8332623	candidate-adapted	hold-removal	removes deprecated setTTL/getTTL and MulticastSocket.send(DatagramPacket,byte)
+26	JDK-8347167	candidate-adapted	candidate-measured	allocation reduction in httpserver Headers.normalize; perf claim
+26	JDK-8349910	candidate-adapted	hold-jep	JEP 517 HTTP/3 for the HTTP Client API is not in 21
+26	JDK-8358688	candidate-adapted	candidate-adapted	internal FilePublisher streaming simplification; keep 21 security manager path
+26	JDK-8359223	candidate-adapted	hold-jep	HttpClient security manager leftover removal follows JEP 486
+26	JDK-8361060	candidate-adapted	candidate-adapted	internal HttpConnection origin tracking with no API; HTTP/3 groundwork
+26	JDK-8365239	candidate-adapted	admitted-docs	InterfaceAddress.getBroadcast spec clarification only
+26	JDK-8366040	candidate-adapted	hold-preview	uses ScopedValue which is a preview API in 21
+26	JDK-8366575	candidate-adapted	hold-removal	removes SDP support
+26	JDK-8366577	candidate-adapted	hold-removal	deprecates public Socket.setPerformancePreferences API
+26	JDK-8367114	candidate-adapted	admitted-tests	test library SimpleHttpServer moves onto SimpleFileServer
+26	JDK-8369920	candidate-adapted	hold-jep	QUIC selector thread belongs to JEP 517 HTTP/3 not in 21
+26	JDK-8371091	candidate-adapted	candidate-measured	changes NullPointerException messages in HttpRequest.Builder
+26	JDK-8371475	candidate-adapted	hold-jep	QUIC CUBIC congestion controller belongs to JEP 517 HTTP/3
+26	JDK-8371802	candidate-adapted	hold-jep	QUIC idle timeout fix belongs to JEP 517 HTTP/3
+26	JDK-8372159	candidate-adapted	hold-runtime	moves HttpClient SelectorManager onto a virtual thread; 21 pins on monitors
+27	JDK-8227493	candidate-adapted	hold-native	libnet getaddrinfo EAI_SYSTEM error message is native code
+27	JDK-8372731	candidate-adapted	candidate-measured	changes authentication failure exception messages
+27	JDK-8372746	candidate-adapted	candidate-adapted	formatting-only cleanup of httpserver sources
+27	JDK-8373677	candidate-adapted	candidate-measured	plain HttpServer fails fast on TLS ClientHello; wire-visible behaviour
+27	JDK-8374706	candidate-adapted	candidate-adapted	internal body publisher fix for repeated subscriptions
+27	JDK-8375580	candidate-adapted	candidate-adapted	internal URLClassPath change away from ArrayDeque
+27	JDK-8375683	candidate-adapted	admitted-docs	comment notes in sctp tests only
+27	JDK-8379528	candidate-adapted	admitted-tests	jtreg requires tag on Linux-only sctp tests
+27	JDK-8379557	candidate-adapted	candidate-measured	URL.toExternalForm optimization; perf claim
+27	JDK-8379567	candidate-adapted	admitted-docs	URL encoding and decoding javadoc rewrite
+27	JDK-8380824	candidate-adapted	admitted-tests	extends DatagramSocket max-size test to loopback
+27	JDK-8382118	candidate-adapted	admitted-tests	refactors DirPermissionDenied test
+27	JDK-8383174	candidate-adapted	hold-native	Windows NTLMAuthSequence native exception change
+22	JDK-8214248	candidate-adapted	admitted-docs	Files.mismatch spec clarification only
+22	JDK-8241800	candidate-adapted	hold-native	Linux native socket option IPV6_MULTICAST_ALL disabled
+22	JDK-8262742	candidate-adapted	hold-api	adds Path.resolve varargs public methods
+22	JDK-8310978	candidate-adapted	hold-runtime	JFR socket read and write events for adaptor operations
+22	JDK-8312089	candidate-adapted	candidate-adapted	equals hashCode compareTo modernization in java.nio; semantics kept
+22	JDK-8313743	candidate-adapted	candidate-adapted	fields made final in sun.nio.ch
+22	JDK-8314569	candidate-adapted	candidate-measured	UnixPath trailing-slash normalization fast path; perf claim
+22	JDK-8314746	candidate-adapted	candidate-adapted	removes unused private DirectByteBufferR methods from templates
+22	JDK-8318422	candidate-adapted	hold-runtime	poller threads as virtual threads (loom)
+22	JDK-8319417	candidate-adapted	admitted-docs	DatagramChannel.connect behaviour documented
+23	JDK-8321279	candidate-adapted	candidate-measured	heap buffer hashCode override; perf claim, verify heap and direct hash parity
+23	JDK-8321429	candidate-adapted	hold-native	Windows FileKey fields to int need native JNI change
+23	JDK-8321561	candidate-adapted	admitted-docs	Files.move non-atomic behaviour clarified
+23	JDK-8321594	candidate-adapted	hold-runtime	NativeThreadSet virtual thread placeholder (loom)
+23	JDK-8321802	candidate-adapted	candidate-measured	zipfs now rejects bad LOC signature with ZipException; caller-visible
+23	JDK-8322565	candidate-adapted	candidate-adapted	zipfs keeps external attribute bits in setPosixPermissions; internal bug fix
+23	JDK-8322829	candidate-adapted	hold-runtime	Thread interrupt lock and nioBlocker refactor (loom)
+23	JDK-8323612	candidate-adapted	candidate-adapted	IOVecWrapper moves to TerminatingThreadLocal which exists in 21
+23	JDK-8327002	candidate-adapted	admitted-tests	CopyMoveVariations test extended across file systems
+23	JDK-8327095	candidate-adapted	admitted-tests	test error message for mkfifo failure
+23	JDK-8329138	candidate-adapted	hold-runtime	JFR FileForceEvent static mirror event conversion
+23	JDK-8330077	candidate-adapted	hold-api	new jdk.nio.file.WatchService.maxEventsPerPoll system property
+24	JDK-8233451	candidate-adapted	hold-native	ChannelInputStream fix adds native isOther file-type check
+24	JDK-8324048	candidate-adapted	candidate-adapted	FileKey fields made final
+24	JDK-8336675	candidate-adapted	candidate-adapted	internal UnixFileSystemProvider.checkPath removal
+24	JDK-8336755	candidate-adapted	candidate-adapted	removes unused UNALIGNED field in view buffer templates
+24	JDK-8338142	candidate-adapted	candidate-adapted	DatagramChannelImpl untimed park when no timeout set
+24	JDK-8343785	candidate-adapted	hold-native	removes native utimes futimes lutimes syscall paths
+24	JDK-8343823	candidate-adapted	admitted-docs	Files.createLink symbolic link behaviour documented
+24	JDK-8344112	candidate-adapted	hold-jep	JEP 486 security manager removal in DatagramChannel
+24	JDK-8344183	candidate-adapted	hold-jep	JEP 486 security manager removal in zipfs
+24	JDK-8344328	candidate-adapted	hold-runtime	synchronizing on packet relies on JEP 491 unpinned monitors absent in 21
+24	JDK-8344882	candidate-adapted	candidate-measured	temporary direct buffers leave MaxDirectMemorySize accounting; release-noted
+24	JDK-8345433	candidate-adapted	candidate-adapted	FileTypeDetectors loaded via ServiceLoader stream; internal
+25	JDK-8345421	candidate-adapted	admitted-tests	test for temporary direct buffer limit; pair with JDK-8344882
+25	JDK-8345432	candidate-adapted	candidate-measured	NIO helper threads become InnocuousThread; release-noted thread context change
+25	JDK-8350654	candidate-adapted	admitted-docs	Files.createTempDirectory default permissions documented
+25	JDK-8350880	candidate-adapted	hold-api	new zipfs accessMode property for read-only file systems
+25	JDK-8353053	candidate-adapted	hold-native	AIX native user-defined attribute support
+25	JDK-8356036	candidate-adapted	candidate-adapted	Long.hashCode in FileKey and UnixFileStore; same hash values
+25	JDK-8356606	candidate-adapted	candidate-adapted	permissions() returns EnumSet; same contents
+25	JDK-8356678	candidate-adapted	candidate-measured	ENOTDIR now maps to NoSuchFileException; exception type change
+25	JDK-8357303	candidate-adapted	candidate-adapted	removes unused parameter in UnixSecureDirectoryStream.implDelete
+25	JDK-8357425	candidate-adapted	hold-native	adds native fchmodat for SecureDirectoryStream
+25	JDK-8358558	candidate-adapted	hold-api	docs reorder for zipfs accessMode which arrives with held JDK-8350880
+26	JDK-8220816	candidate-adapted	admitted-docs	Files.createDirectory existing-directory failure documented
+26	JDK-8344332	candidate-adapted	hold-runtime	DirectByteBuffer leaves jdk.internal.ref.Cleaner; reference processing coupling
+26	JDK-8357959	candidate-adapted	candidate-measured	chunked direct buffer zeroing to cut time-to-safepoint; timing claim
+26	JDK-8361209	candidate-adapted	candidate-string-lane	StringCharBuffer bulk get via CharSequence.getChars, a JDK 25 API; adapt by hand
+26	JDK-8362637	candidate-adapted	hold-api	ByteOrder class converted to an enum
+26	JDK-8364954	candidate-adapted	hold-runtime	follow-up to held DirectByteBuffer Cleaner migration JDK-8344332
+26	JDK-8366911	candidate-adapted	hold-removal	removes macOS normalization form D file name support
+26	JDK-8367988	candidate-adapted	hold-api	test fix for read-only zipfs test added by held JDK-8350880
+26	JDK-8368907	candidate-adapted	candidate-measured	Windows error 1314 now AccessDeniedException; exception type change
+27	JDK-8367284	candidate-adapted	hold-api	extends SecureDirectoryStream.move spec to a current-directory target

@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+27	JDK-8372950	security-libs	java.security	P4	noreg-trivial	Pem.pemEncoded should cache the Pattern	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8374524	security-libs	java.security	P4	noreg-self	Investigate and cleanup test/jdk/sun/security/provider/SecureRandom/StrongSecureRandom.java and convert to junit	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8374808	security-libs	java.security	P4	release-note=yes	Add new methods to KeyStore and KeyStoreSpi that return the creation date as an Instant instead of Date	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8377506	security-libs	java.security	P3		Implement JEP 538: PEM Encodings of Cryptographic Objects (Third Preview)	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8378443	security-libs	java.security	P4		ACVP testing should include LMS signature verification	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8312306	security-libs	javax.crypto	P3	amazon-interest	Add more Reference.reachabilityFence() calls to the security classes using Cleaner	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8315974	security-libs	javax.crypto	P5		Make fields final in 'com.sun.crypto.provider' package	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8318756	security-libs	javax.crypto	P3		Create better internal buffer for AEADs	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8325162	security-libs	javax.crypto	P4	noreg-cleanup	Remove duplicate GCMParameters class	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8327779	security-libs	javax.crypto	P4	noreg-cleanup	Remove deprecated internal field sun.security.x509.X509Key.key	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8330108	security-libs	javax.crypto	P4	amazon-interest,jdk21u-fix-no,jdk21u-fix-request,release-note=yes	Increase CipherInputStream buffer size	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8331008	security-libs	javax.crypto	P3		Implement JEP 478: Key Derivation Function API (Preview)	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344144	security-libs	javax.crypto	P4		AES/CBC slow at big payloads	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344214	security-libs	javax.crypto	P3	jep486,noreg-cleanup	Remove Security Manager dependencies from jdk.crypto.mscapi module	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344310	security-libs	javax.crypto	P3	jep486,noreg-cleanup	Remove Security Manager dependencies from javax.crypto and com.sun.crypto packages	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344766	security-libs	javax.crypto	P4		AES/CTR slow at big payloads	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8348405	security-libs	javax.crypto	P4	noreg-doc,starter-bug	Add PBES2 as a standard AlgorithmParameters algorithm	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8349106	security-libs	javax.crypto	P4	noreg-perf,security-performance	Change ChaCha20 intrinsic to use quarter-round parallel implementation on aarch64	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8350147	security-libs	javax.crypto	P4	noreg-doc,starter-bug	Replace example in KEM class with the one from JEP 452	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8353578	security-libs	javax.crypto	P3	noreg-cleanup	Refactor existing usage of internal HKDF impl to use the KDF API	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8325448	security-libs	javax.crypto	P3	release-note=yes	Hybrid Public Key Encryption	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8326609	security-libs	javax.crypto	P3		New AES implementation with updates specified in FIPS 197	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8343316	security-libs	javax.crypto	P4	amazon-interest,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	Review and update tests using explicit provider names	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8353925	security-libs	javax.crypto	P3	openjdk-na,release-note=yes	Remove Sun Microsystems JCE Code Signing Root CA	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8370082	security-libs	javax.crypto	P4	noreg-cleanup	Intermediate objects clean up in ECDH, EdDSA, XDH, DHKEM, and HKDF	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8371450	security-libs	javax.crypto	P4	noreg-perf,performance	AES performance improvements for key schedule generation	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8371820	security-libs	javax.crypto	P4	noreg-perf,performance	Further AES performance improvements for key schedule generation	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8350711	security-libs	javax.crypto	P4	noreg-self	[JMH] test Signatures.RSASSAPSS failed for 2 threads config	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8376164	security-libs	javax.crypto	P4		Optimize AES/ECB implementation using full-message intrinsic stub and parallel RoundKey addition	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8378893	security-libs	javax.crypto	P3	performance	X25519 should utilize a larger limb size	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8383635	security-libs	javax.crypto	P4	jdk25u-fix-request,jdk25u-fix-yes,noreg-perf,seclibs-pqc	Improve performance of ML-KEM's implKyberNttMultJava() method	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8384353	security-libs	javax.crypto	P4	intrinsic,performance,release-note=yes,seclibs-pqc,security-libs	SHA3 AVX2 and AVX512 intrinsics and improvements	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8330842	security-libs	javax.crypto:pkcs11	P4	release-note=yes	Support AES CBC with Ciphertext Stealing (CTS) in SunPKCS11	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344120	security-libs	javax.crypto:pkcs11	P3	jep486,noreg-cleanup	Remove Security Manager dependencies from jdk.crypto.cryptoki module	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8328119	security-libs	javax.crypto:pkcs11	P4	release-note=yes	Support HKDF in SunPKCS11	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8346720	security-libs	javax.crypto:pkcs11	P4		Support Generic keys in SunPKCS11 SecretKeyFactory	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8361711	security-libs	javax.crypto:pkcs11	P4	jdk25u-fix-SQE-ok-next,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	Add library name configurability to PKCS11Test.java	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8311596	security-libs	javax.net.ssl	P3	release-note=yes	Add separate system properties for TLS server and client for maximum chain length	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8331682	security-libs	javax.net.ssl	P4	starter-bug	Slow networks/Impatient clients can potentially send unencrypted TLSv1.3 alerts that won't parse on the server	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344366	security-libs	javax.net.ssl	P3	jep486,noreg-cleanup	Remove Security Manager dependencies from javax.net.ssl and sun.security.ssl packages	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8310003	security-libs	javax.net.ssl	P4	noreg-trivial,starter-bug	Improve logging when default truststore is inaccessible	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8341346	security-libs	javax.net.ssl	P3	bugdb_37222487,release-note=yes	Add support for exporting TLS Keying Material	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8350705	security-libs	javax.net.ssl	P4	noreg-self	[JMH] test security.SSLHandshake failed for 2 threads configuration	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8357033	security-libs	javax.net.ssl	P4		Reduce stateless session ticket size	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8156715	security-libs	javax.net.ssl	P4	dcs-pso,noreg-hard,reproducer-no,webbug	TrustStoreManager does not buffer keystore input stream	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8351354	security-libs	javax.net.ssl	P4		Enhance java -XshowSettings:security:tls to show enabled TLS groups	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8359956	security-libs	javax.net.ssl	P4	release-note	Support algorithm constraints and certificate checks in SunX509 key manager	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8366364	security-libs	javax.net.ssl	P4	release-note=yes	Return enabled signature schemes with SSLConfiguration#getSSLParameters() call	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8366978	security-libs	javax.net.ssl	P4	dcsaw,noreg-cleanup,starter,webbug	dead code in SunCertPathBuilder	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8367104	security-libs	javax.net.ssl	P4		Check for RSASSA-PSS parameters when validating certificates against algorithm constraints	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8345954	security-libs	javax.net.ssl	P4	noreg-perf	Revisit Class Initializers and Locking in X509TrustManagerImpl	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8356544	security-libs	javax.net.ssl	P4	noreg-self	Implement additional tests for ciphersuites disabled with wildcards	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8370885	security-libs	javax.net.ssl	P5		Default namedGroups values are not being filtered against algorithm constraints	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8371333	security-libs	javax.net.ssl	P4		Optimize static initialization of SSLContextImpl classes and improve logging	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8371721	security-libs	javax.net.ssl	P5		Refactor checkTrusted methods in X509TrustManagerImpl	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8372526	security-libs	javax.net.ssl	P3	release-note=yes	Add support for ZLIB TLS Certificate Compression	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8373018	security-libs	javax.net.ssl	P4	interoperability,noreg-self	Update OpenSSL version to 3.5.4	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8373426	security-libs	javax.net.ssl	P4	amazon-interest,release-note=yes,starter	Remove ffdhe6144 and ffdhe8192 from default list of TLS named groups	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8374317	security-libs	javax.net.ssl	P4	noreg-trivial	Change GCM IV size to 12 bytes when encrypting/decrypting TLS session ticket	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8375183	security-libs	javax.net.ssl	P4	noreg-cleanup	Remove unused SSLConfiguration.maximumProtocolVersion variable	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8381380	security-libs	javax.net.ssl	P5	noreg-self	Test host wildcard matching as part of a TLS validation of the server's identity	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8296244	security-libs	javax.security	P3	post-jep411,release-note=yes	Alternate implementation of user-based authorization Subject APIs that doesnt depend on Security Manager APIs	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344147	security-libs	javax.security	P3	jep486,noreg-cleanup	Remove Security Manager dependencies from java.security.sasl module	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344420	security-libs	javax.security	P3	jep486,noreg-cleanup	Remove Security Manager dependencies from javax.security package	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8349550	security-libs	javax.security	P4	noreg-cleanup	Improve SASL random usage 	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8277489	security-libs	javax.security	P4		Rewrite JAAS UnixLoginModule with FFM	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8371975	security-libs	javax.security	P4	amazon-interest,noreg-other,starter	Apply java.io.Serial annotations in java.security.sasl	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8331958	security-libs	javax.smartcardio	P4	noreg-other	Update PC/SC Lite for Suse Linux to 2.3.0	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8314180	security-libs	javax.xml.crypto	P4	release-note=yes	Disable XPath in XML Signatures	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8359395	security-libs	javax.xml.crypto	P4	release-note=yes	XML signature generation does not support user provided SecureRandom	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8364039	security-libs	javax.xml.crypto	P4	noreg-doc	Adding implNote to DOMSignContext and DOMValidateContext on JDK-specific properties	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8360373	security-libs	jdk.security	P4	noreg-self,ursqe-triaged	src/java.base/share/classes/sun/security/util/Debug.java implement negative testing	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8369995	security-libs	jdk.security	P4		Fix StringIndexOutOfBoundsException and implement extra logging and/or propagate errors in X509KeyManagerImpl 	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8372817	security-libs	jdk.security	P4	noreg-self	Remove test/jdk/sun/security/rsa silent skips 	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8373016	security-libs	jdk.security	P4	noreg-self	Passes instead of skips/ignoring the platform in sun/security/mscapi, jarsigner, keytool and pkcs12 tests 	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8380457	security-libs	jdk.security	P4	noreg-self	Cleanup ShortRSAKeyWithinTLS test and remove hardcoded debug	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8381434	security-libs	jdk.security	P5	noreg-self	Convert hard coded debug to Boolean.getBoolean in security libraries	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8327818	security-libs	org.ietf.jgss	P4	release-note=yes	Implement Kerberos debug with sun.security.util.Debug	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344248	security-libs	org.ietf.jgss	P3	jep486,noreg-cleanup	Remove Security Manager dependencies from java.security.jgss and jdk.security.jgss modules	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8370368	security-libs	org.ietf.jgss	P4	noreg-other	Apply java.io.Serial annotations in java.security.jgss	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8308540	security-libs	org.ietf.jgss:krb5	P4	additional-information-received,dcsaw,reproducer-hard,webbug	On Kerberos TGT referral, if krb5.conf is missing realm, bad exception message	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8309356	security-libs	org.ietf.jgss:krb5	P4	release-note=yes	Read files in includedir in alphanumeric order	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8331975	security-libs	org.ietf.jgss:krb5	P4	release-note=yes	Enable case-sensitive check in ccache and keytab entry lookup	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8382403	security-libs	org.ietf.jgss:krb5	P4	noreg-trivial	Enhance Kerberos DNS KDC discovery logging to expose sanitized DNS failure	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8305341	core-svc	-	P4		Alignment should be enforced by alignas instead of compiler specific attributes	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8309673	core-svc	-	P4	serviceability	Refactor ref_at methods in SA ConstantPool	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8356870	core-svc	-	P3	loom,release-note=yes	HotSpotDiagnosticMXBean.dumpThreads and jcmd Thread.dump_to_file updates	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8309335	core-svc	debugger	P4		Get rid of use of reflection to call Thread.isVirtual() in nsk/jdi/EventRequestManager/stepRequests/stepreq001t.java	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8318573	core-svc	debugger	P4		The nsk.share.jpda.SocketConnection should fail if socket was closed.	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8322980	core-svc	debugger	P5	noreg-other	Debug agent's dumpThread() API should update thread's name before printing it	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8322981	core-svc	debugger	P4	noreg-trivial	Fix 2 locations in JDI that throw IOException without using the "Caused by" exception	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8332488	core-svc	debugger	P4		Add JVMTI DataDumpRequest to the debug agent	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336401	core-svc	debugger	P4		Remove the option onjcmd from the jdwp agent	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338708	core-svc	debugger	P4		Don't create/destroy debug agent cmdQueueLock for each connection	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341295	core-svc	debugger	P5		Add some useful debugging APIs to the debug agent	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8351310	core-svc	debugger	P4	cleanup	Deprecate com.sun.jdi.JDIPermission for removal	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8355211	core-svc	debugger	P4	noreg-self	nsk/jdi/EventRequest/disable/disable001.java should use JDIBase superclass	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8355214	core-svc	debugger	P4	noreg-self	nsk/jdi/ThreadStartRequest/addThreadFilter/addthreadfilter001.java should use JDIBase superclass	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8355221	core-svc	debugger	P4	noreg-self	Get rid of unnecessary override of JDIBase.breakpointForCommunication in nsk/jdi tests	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8309400	core-svc	debugger	P4	release-note=yes	JDI spec needs to clarify when OpaqueFrameException and NativeMethodException are thrown	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8364312	core-svc	debugger	P5		debug agent should set FD_CLOEXEC flag rather than explicitly closing every open file	UNCLASSIFIED	candidate-adapted-serviceability
+27	JDK-8377950	core-svc	debugger	P4	noreg-self	Refactor ClassUnloader to provide explicit waiting API	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335619	core-svc	java.lang.instrument	P4	amazon-interest	Add an @apiNote to j.l.i.ClassFileTransformer to warn about recursive class loading and ClassCircularityErrors	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8344187	core-svc	java.lang.instrument	P4	cleanup,jep486,noreg-cleanup,security-manager	Remove SecurityManager and related calls from java.instrument	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8359180	core-svc	java.lang.instrument	P4	noreg-other	Apply java.io.Serial annotations in java.instrument	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8334493	core-svc	java.lang.management	P4	cleanup,security-manager	Remove SecurityManager Permissions infrastructure from DiagnosticCommands	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335625	core-svc	java.lang.management	P4		Update Javadoc for GetCpuLoad	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338890	core-svc	java.lang.management	P3	loom,release-note=yes	Add monitoring/management interface for the virtual thread scheduler	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8350818	core-svc	java.lang.management	P4	jdk24u-fix-SQE-ok,jdk24u-fix-request,jdk24u-fix-yes,noreg-self	Improve OperatingSystemMXBean cpu load tests to not accept -1.0 by default	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8368527	core-svc	java.lang.management	P4	amazon-interest,release-note=yes	JMX: Add an MXBeans method to query GC CPU time	UNCLASSIFIED	candidate-adapted-serviceability

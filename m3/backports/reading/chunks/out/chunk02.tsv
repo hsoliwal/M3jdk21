@@ -1,0 +1,111 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+25	JDK-8355446	admitted-additive-tooling	admitted-additive-tooling	Oracle jib profile toolchain pin; build config only
+25	JDK-8355697	admitted-additive-tooling	admitted-additive-tooling	devkit creation makefiles; build tooling only
+25	JDK-8356656	admitted-additive-tooling	admitted-additive-tooling	jib-profiles.js cleanup; build config only
+25	JDK-8356657	admitted-additive-tooling	admitted-additive-tooling	jib cmp-baseline profile source-date; build config only
+25	JDK-8356820	admitted-additive-tooling	admitted-additive-tooling	fixpath build script path handling; no product change
+26	JDK-8233115	admitted-additive-tooling	admitted-additive-tooling	makefile ExecuteWithLog helper hardening; backed out and redone as 8367034
+26	JDK-8246325	admitted-additive-tooling	admitted-additive-tooling	SetupExecute DRYRUN makefile facility; build only
+26	JDK-8332872	admitted-additive-tooling	admitted-additive-tooling	SetupExecute working-dir makefile change; build only
+26	JDK-8341735	admitted-additive-tooling	admitted-tests	rewrites test/jdk/build/AbsPathsInImage.java; test only
+26	JDK-8343546	admitted-additive-tooling	admitted-additive-tooling	GitHub Actions workflow caching; CI only
+26	JDK-8357079	admitted-additive-tooling	admitted-additive-tooling	Windows AArch64 devkit makefiles; build only
+26	JDK-8361142	admitted-additive-tooling	admitted-additive-tooling	custom makefile hook extension points; build only
+26	JDK-8365238	admitted-additive-tooling	admitted-additive-tooling	configure JVM feature dependency check; build only
+26	JDK-8365491	admitted-additive-tooling	admitted-additive-tooling	VSCode IDE configuration generator; tooling only
+26	JDK-8366399	admitted-additive-tooling	admitted-additive-tooling	update_copyright_year.sh option; dev script only
+26	JDK-8367026	admitted-additive-tooling	admitted-tests	jtreg failure_handler command order; test infrastructure only
+26	JDK-8367034	admitted-additive-tooling	admitted-additive-tooling	redo of ExecuteWithLog makefile hardening; build only
+26	JDK-8367801	admitted-additive-tooling	admitted-tests	jtreg failure_handler ps invocation; test infrastructure only
+26	JDK-8367859	admitted-additive-tooling	admitted-additive-tooling	nio exception gensrc replaced by checked-in equivalent sources; verify generated classes identical
+26	JDK-8369080	admitted-additive-tooling	admitted-additive-tooling	devkit cpu detection script; build only
+26	JDK-8369242	admitted-additive-tooling	admitted-additive-tooling	devkit Tools.gmk variable rename; build only
+26	JDK-8369246	admitted-additive-tooling	admitted-additive-tooling	devkit download URLs to https; build only
+26	JDK-8369328	admitted-additive-tooling	admitted-additive-tooling	devkit makefile variable naming; build only
+26	JDK-8369454	admitted-additive-tooling	admitted-additive-tooling	devkit source bundle checksum verification; build only
+26	JDK-8370438	admitted-additive-tooling	admitted-additive-tooling	opt-in per-library LTO makefile support; build only
+26	JDK-8371425	admitted-additive-tooling	admitted-additive-tooling	vscode workspace generator; tooling only
+26	JDK-8371626	admitted-additive-tooling	hold-native	Linux linker icf=all folds identical native functions; OS-specific native build change needing native verification
+26	JDK-8372733	admitted-additive-tooling	admitted-additive-tooling	GitHub Actions runner image bump; CI only
+27	JDK-8332189	admitted-additive-tooling	hold-native	warning flag enablement with nullptr fixes across HotSpot and native sources
+27	JDK-8372966	admitted-additive-tooling	admitted-docs	developer process document only
+27	JDK-8374471	admitted-additive-tooling	admitted-additive-tooling	JDK image content validation check; build or test only
+27	JDK-8374507	admitted-additive-tooling	admitted-additive-tooling	GitHub Actions debug symbol setting; CI only
+27	JDK-8374521	admitted-additive-tooling	admitted-additive-tooling	new configure option for native debug symbol level; build only
+27	JDK-8374754	admitted-additive-tooling	admitted-tests	jtreg failure_handler HTML report scripts; test infrastructure only
+27	JDK-8374767	admitted-additive-tooling	admitted-additive-tooling	configure option rename follow-up to 8374521; build only
+27	JDK-8375241	admitted-additive-tooling	admitted-additive-tooling	configure option implementation cleanup; build only
+27	JDK-8376585	admitted-additive-tooling	admitted-additive-tooling	update_copyright_year.sh file-list mode; dev script only
+27	JDK-8376684	admitted-additive-tooling	admitted-additive-tooling	configure/make support for headless build without X11; build only
+27	JDK-8376892	admitted-additive-tooling	admitted-additive-tooling	per-subset conversion warning flags; build only
+27	JDK-8379202	admitted-additive-tooling	admitted-additive-tooling	linktime-gc configure support for clang; opt-in build flag
+27	JDK-8380776	admitted-additive-tooling	admitted-additive-tooling	harfbuzz warning flag removal; build only, check flag exists in 21
+27	JDK-8382030	admitted-additive-tooling	admitted-additive-tooling	GitHub Actions Windows ARM64 test job; CI only
+27	JDK-8383243	admitted-additive-tooling	admitted-additive-tooling	objcopy debug-info compression configure option; build only
+27	JDK-8384145	admitted-additive-tooling	admitted-additive-tooling	build-time JVM GC flag for build tools; confirm CDS dump flags unchanged
+27	JDK-8385011	admitted-additive-tooling	admitted-additive-tooling	GitHub Actions Linux AArch64 test job; CI only
+27	JDK-8385525	admitted-additive-tooling	admitted-additive-tooling	configure error message hint for Xcode 26; build only
+27	JDK-8385552	admitted-additive-tooling	admitted-additive-tooling	devkit/sysroot creation scripts; build only
+25	JDK-8353009	admitted-additive-tooling	admitted-docs	building.md Windows AArch64 documentation only
+24	JDK-8339783	admitted-additive-tooling	hold-removal	JEP 479 removes the Windows 32-bit x86 port
+25	JDK-8301971	admitted-additive-tooling	admitted-additive-tooling	javac -encoding UTF-8 switch plus source re-encoding; no runtime change, very large diff
+25	JDK-8311227	admitted-additive-tooling	admitted-additive-tooling	adds .editorconfig; tooling only
+25	JDK-8346773	admitted-additive-tooling	admitted-docs	bracket typo fixes in comments and text of misc files
+26	JDK-8314488	admitted-additive-tooling	hold-native	C++17 toolchain standard switch touching HotSpot and native sources
+26	JDK-8364352	admitted-additive-tooling	admitted-tests	test fixes for limited pregenerated CDS archives; test only
+24	JDK-8173970	admitted-additive-tooling	hold-api	adds jar extract directory command-line option with release note
+25	JDK-8268611	admitted-additive-tooling	hold-api	extends jar --validate, an option absent in 21
+25	JDK-8345431	admitted-additive-tooling	hold-api	extends jar --validate with release note; option absent in 21
+25	JDK-8346232	admitted-additive-tooling	candidate-adapted	dead-code cleanup of 24-era --normalize leftovers; likely no-op in 21
+26	JDK-8268613	admitted-additive-tooling	hold-api	extends jar --validate, an option absent in 21
+27	JDK-8375433	admitted-additive-tooling	candidate-measured	jar tool newly rejects invalid automatic module names; caller-visible error change
+22	JDK-8304006	admitted-additive-tooling	candidate-adapted	jlink cross-link jimage endianness fix; tool internals only
+23	JDK-8321620	admitted-additive-tooling	candidate-measured	jdk.internal.jimage decompressor performance claim on class-loading path
+23	JDK-8323794	admitted-additive-tooling	candidate-adapted	removes unused jimage compressor plugin configuration; cleanup
+24	JDK-8311302	admitted-additive-tooling	hold-jep	JEP 493 linking without JMODs not in 21
+25	JDK-8353185	admitted-additive-tooling	hold-jep	follow-up to JEP 493 not in 21
+26	JDK-8347007	admitted-additive-tooling	candidate-adapted	jlink StripDebugPlugin keeps MethodParameters; tool bug fix
+26	JDK-8347831	admitted-additive-tooling	candidate-measured	jlink cross-link version check behaviour change with release note
+22	JDK-8310933	admitted-additive-tooling	candidate-adapted	jpackage symlink copy fix alters app-image output; tool bug fix
+22	JDK-8316547	admitted-additive-tooling	admitted-tests	jpackage JUnit test property wiring; test only
+23	JDK-8333307	admitted-additive-tooling	admitted-tests	jpackage test logging; test only
+24	JDK-8319457	admitted-additive-tooling	admitted-additive-tooling	WiX 4/5 toolset support in jpackage; 21-bp labelled, check 21u for existing backport
+24	JDK-8340311	admitted-additive-tooling	candidate-adapted	Windows app launcher regression introduced in 22; verify 21 unaffected, likely no-op
+24	JDK-8344322	admitted-additive-tooling	admitted-tests	jpackage test library capabilities; test only
+24	JDK-8344415	admitted-additive-tooling	candidate-adapted	jpackage utility class refactoring; internal only
+24	JDK-8344587	admitted-additive-tooling	candidate-adapted	jpackage internal package dependency refactoring; internal only
+25	JDK-8150442	admitted-additive-tooling	candidate-measured	MSI gains supported-platform condition; installer newly rejects unsupported Windows
+25	JDK-8333568	admitted-additive-tooling	admitted-tests	jpackage read-only files test; test only
+25	JDK-8333664	admitted-additive-tooling	candidate-adapted	large jpackage internal refactoring separating CLI parsing from building
+25	JDK-8341641	admitted-additive-tooling	hold-api	documented launcher .cfg file format gains env variable expansion in native launcher
+25	JDK-8347297	admitted-additive-tooling	admitted-tests	test skip condition; test only
+25	JDK-8349504	admitted-additive-tooling	admitted-tests	platform-specific JUnit test support in jpackage tests; test only
+25	JDK-8349509	admitted-additive-tooling	candidate-adapted	macOS dead code removal in jpackage; cleanup
+25	JDK-8350011	admitted-additive-tooling	admitted-tests	test lib conversion to JUnit; test only
+25	JDK-8350013	admitted-additive-tooling	admitted-tests	new test for 8150442; test only
+25	JDK-8350601	admitted-additive-tooling	admitted-tests	jpackage test lib updates; test only
+25	JDK-8351369	admitted-additive-tooling	candidate-adapted	macOS DMG packaging honours --install-dir; existing option behaviour fix
+25	JDK-8351372	admitted-additive-tooling	admitted-tests	negative test coverage; test only
+25	JDK-8352176	admitted-additive-tooling	admitted-tests	mac signing test environment automation; test only
+25	JDK-8353321	admitted-additive-tooling	admitted-tests	test case signing requirement; test only
+25	JDK-8353679	admitted-additive-tooling	candidate-adapted	jdk.jpackage.internal class restructuring; internal only
+25	JDK-8354985	admitted-additive-tooling	admitted-tests	test lib unit tests; test only
+25	JDK-8354990	admitted-additive-tooling	admitted-tests	signing negative tests; test only
+25	JDK-8355328	admitted-additive-tooling	admitted-tests	signing negative tests; test only
+25	JDK-8357930	admitted-additive-tooling	candidate-adapted	follow-up amendment to 8333664 refactoring; internal only
+25	JDK-8358017	admitted-additive-tooling	admitted-tests	jpackage test helper enhancements; test only
+26	JDK-8308349	admitted-additive-tooling	candidate-measured	end-user visible shortcut working-directory change; check for CSR or new option
+26	JDK-8333727	admitted-additive-tooling	candidate-measured	CLI parser replaced by JOpt; verify option parsing and error output unchanged
+26	JDK-8334238	admitted-additive-tooling	admitted-tests	test enhancement; test only
+26	JDK-8343220	admitted-additive-tooling	admitted-tests	test cases added; test only
+26	JDK-8351095	admitted-additive-tooling	admitted-tests	macOS app store option tests; test only
+26	JDK-8356218	admitted-additive-tooling	admitted-docs	jpackage man page documents --app-content; docs only
+26	JDK-8356574	admitted-additive-tooling	admitted-tests	option test; test only
+26	JDK-8356575	admitted-additive-tooling	admitted-tests	app image fill order test; test only
+26	JDK-8356578	admitted-additive-tooling	admitted-tests	option test; test only
+26	JDK-8362598	admitted-additive-tooling	admitted-tests	custom Info.plist tests; test only
+26	JDK-8363979	admitted-additive-tooling	candidate-measured	--runtime-image input newly validated; caller-visible error change
+26	JDK-8363980	admitted-additive-tooling	candidate-adapted	embedded runtime Info.plist gains JDK keys; bundle output fix
+26	JDK-8364129	admitted-additive-tooling	hold-native	renames the native Windows libwixhelper DLL and its build
+26	JDK-8365555	admitted-additive-tooling	candidate-adapted	jpackage implementation redundancy cleanup; internal only
+26	JDK-8368030	admitted-additive-tooling	candidate-adapted	package bundler refactoring to stateless; internal only

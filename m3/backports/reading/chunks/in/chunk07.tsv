@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+27	JDK-8374658	core-libs	javax.annotation.processing	P4	doc-only,noreg-doc	Consider use of "included" rather than "enclosed" in jx.a.p.Processor	UNCLASSIFIED	candidate-adapted
+22	JDK-8246280	core-libs	javax.lang.model	P4		Refine API to model sealed classes and interfaces in javax.lang.model	UNCLASSIFIED	candidate-adapted
+22	JDK-8281169	core-libs	javax.lang.model	P4	noreg-doc	Expand discussion of elements and types	UNCLASSIFIED	candidate-adapted
+22	JDK-8309964	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Use directed inheritDoc for javax.lang.model API	UNCLASSIFIED	candidate-adapted
+22	JDK-8312418	core-libs	javax.lang.model	P4		Add Elements.getEnumConstantBody	UNCLASSIFIED	candidate-adapted
+22	JDK-8314477	core-libs	javax.lang.model	P4	noreg-doc	Improve definition of "prototypical type"	UNCLASSIFIED	candidate-adapted
+22	JDK-8315137	core-libs	javax.lang.model	P4	noreg-doc	Add explicit override RecordComponentElement.asType()	UNCLASSIFIED	candidate-adapted
+22	JDK-8320803	core-libs	javax.lang.model	P4	noreg-doc	Update SourceVersion.RELEASE_22 description for language changes	UNCLASSIFIED	candidate-adapted
+22	JDK-8320941	core-libs	javax.lang.model	P4	noreg-doc	Discuss receiver type handling	UNCLASSIFIED	candidate-adapted
+23	JDK-8175386	core-libs	javax.lang.model	P4		Clarify exception behavior of Types utility methods	UNCLASSIFIED	candidate-adapted
+23	JDK-8322248	core-libs	javax.lang.model	P4	noreg-doc	Fix inconsistent wording in ElementFilter.typesIn	UNCLASSIFIED	candidate-adapted
+23	JDK-8329296	core-libs	javax.lang.model	P3		Update Elements for '///' documentation comments	UNCLASSIFIED	candidate-adapted
+23	JDK-8329624	core-libs	javax.lang.model	P4		Add visitors for preview language features	UNCLASSIFIED	candidate-adapted
+23	JDK-8329644	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Discuss expected visitor evolution patterns in javax.lang.model.util	UNCLASSIFIED	candidate-adapted
+23	JDK-8330703	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Improve link syntax in javax.lang.model.util	UNCLASSIFIED	candidate-adapted
+23	JDK-8333586	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Improve syntax of @see tags in javax.lang.model	UNCLASSIFIED	candidate-adapted
+24	JDK-8338333	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Add jls links to javax.lang.model.element.Modifier	UNCLASSIFIED	candidate-adapted
+24	JDK-8339696	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Clarify modeling scope of javax.lang.model.element	UNCLASSIFIED	candidate-adapted
+24	JDK-8339781	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Better use of Javadoc tags in javax.lang.model	UNCLASSIFIED	candidate-adapted
+24	JDK-8340399	core-libs	javax.lang.model	P4	noreg-doc	Update comment in SourceVersion for language evolution history	UNCLASSIFIED	candidate-adapted
+24	JDK-8345324	core-libs	javax.lang.model	P4	noreg-doc	Update comment in SourceVersion for language evolution history for changes in 24	UNCLASSIFIED	candidate-adapted
+26	JDK-8372850	core-libs	javax.lang.model	P4	noreg-doc	Update comment in SourceVersion for language evolution history for changes in 26	UNCLASSIFIED	candidate-adapted
+27	JDK-8374749	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Clarify AnnotationValue specification	UNCLASSIFIED	candidate-adapted
+27	JDK-8374752	core-libs	javax.lang.model	P4	doc-only,noreg-doc	Add more JLS links to javax.lang.model.element.*	UNCLASSIFIED	candidate-adapted
+27	JDK-8374953	core-libs	javax.lang.model	P4	noreg-doc	Add note on about implicit state when comparing TypeMirrors	UNCLASSIFIED	candidate-adapted
+27	JDK-8385836	core-libs	javax.lang.model	P4	noreg-doc	Update comment in SourceVersion for language evolution history for changes in 27	UNCLASSIFIED	candidate-adapted
+24	JDK-8338536	core-libs	javax.naming	P4	release-note=yes	Permanently disable remote code downloading in JNDI	UNCLASSIFIED	candidate-adapted
+24	JDK-8340359	core-libs	javax.naming	P4	release-note=yes	Remove javax.naming.Context.APPLET	UNCLASSIFIED	candidate-adapted
+24	JDK-8344023	core-libs	javax.naming	P5		Unnecessary Hashtable usage in LdapClient.defaultBinaryAttrs	UNCLASSIFIED	candidate-adapted
+27	JDK-8219203	core-libs	javax.naming	P4	dcs-pso,noreg-trivial,reproducer-other,webbug	Use StringBuilder instead of StringBuffer in com.sun.jndi.dns.ResourceRecord	UNCLASSIFIED	candidate-adapted
+26	JDK-8359225	core-libs	javax.script	P4	noreg-cleanup	Remove unused test/jdk/javax/script/MyContext.java	UNCLASSIFIED	candidate-adapted
+26	JDK-8369027	core-libs	javax.script	P4	noreg-other	Apply java.io.Serial annotations in java.scripting	UNCLASSIFIED	candidate-adapted
+24	JDK-8344259	core-libs	vector	P4	noreg-hard,vectorAPI	Annotate Float16 with jdk.internal.ValueBased 	UNCLASSIFIED	candidate-adapted
+25	JDK-8310691	core-libs	vector	P4	vectorapi	[REDO] [vectorapi] Refactor VectorShuffle implementation	UNCLASSIFIED	candidate-adapted
+25	JDK-8350748	core-libs	vector	P4	performance,vectorapi	VectorAPI: Method "checkMaskFromIndexSize" should be force inlined	UNCLASSIFIED	candidate-adapted
+25	JDK-8351096	core-libs	vector	P4	cleanup,noreg-doc,vectorapi	Typos in Vector API doc	UNCLASSIFIED	candidate-adapted
+25	JDK-8351993	core-libs	vector	P4	vectorapi	VectorShuffle access to and from MemorySegments	UNCLASSIFIED	candidate-adapted
+26	JDK-8358768	core-libs	vector	P4	oracle-triage-26,vectorapi	[vectorapi] Make VectorOperators.SUADD an Associative	UNCLASSIFIED	candidate-adapted
+27	JDK-8376602	core-libs	vector	P4	vectorapi	[Vector API] Upgrade SLEEF from 3.6.1 to 3.9.0	UNCLASSIFIED	candidate-adapted
+27	JDK-8380915	core-libs	vector	P4	vectorapi	Cleanup some Java declarations of the Vector API	UNCLASSIFIED	candidate-adapted
+26	JDK-8359760	deploy	-	P4	release-note=yes,sn_199	Remove the jdk.jsobject module	UNCLASSIFIED	candidate-adapted
+22	JDK-8301991	globalization	translation	P4		Convert l10n properties resource bundles to UTF-8 native	UNCLASSIFIED	candidate-adapted
+22	JDK-8314075	other-libs	-	P3		Update JCov version for JDK 22	UNCLASSIFIED	candidate-adapted
+26	JDK-8366365	other-libs	other	P4	jdk25u-fix-SQE-ok-next,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	[test] test/lib-test/jdk/test/whitebox/CPUInfoTest.java should be updated	UNCLASSIFIED	candidate-adapted
+27	JDK-8378642	other-libs	other	P4		Add src/utils/LogCompilation/logc.jar to .gitignore	UNCLASSIFIED	candidate-adapted
+22	JDK-8310460	tools	-	P4	release-note=yes	Remove jdeps -profile option	UNCLASSIFIED	candidate-adapted
+22	JDK-8318458	tools	-	P3	manpage	Update javac and java manpages with restricted method options	UNCLASSIFIED	candidate-adapted
+24	JDK-8317611	tools	-	P3	foreign-memaccess+abi	Add a tool like jdeprscan to find usage of restricted methods	UNCLASSIFIED	candidate-adapted
+25	JDK-8353840	tools	-	P4		JNativeScan should not abort for missing classes	UNCLASSIFIED	candidate-adapted
+25	JDK-8353917	tools	-	P4		jnativescan: Simplify ClassResolver	UNCLASSIFIED	candidate-adapted
+26	JDK-8367157	tools	-	P4	noreg-other,release-note=yes	Remove jrunscript tool	UNCLASSIFIED	candidate-adapted
+23	JDK-8182774	tools	javap	P4	RN-NewFeature,release-note=yes	Verify code in javap	UNCLASSIFIED	candidate-adapted
+24	JDK-8341924	tools	javap	P4		Improve error message with structurally malformed Code array	UNCLASSIFIED	candidate-adapted
+24	JDK-8345145	tools	javap	P5		Display javap LineNumberTable and LocalVariableTable iff disassembled code output with `-c` or `-v`	UNCLASSIFIED	candidate-adapted
+22	JDK-8305814	xml	jaxp	P4		Update Xalan Java to 2.7.3	UNCLASSIFIED	candidate-adapted
+22	JDK-8306055	xml	jaxp	P4	release-note=yes	Add a built-in Catalog to JDK XML module	UNCLASSIFIED	candidate-adapted
+22	JDK-8306632	xml	jaxp	P4	release-note=yes	Add a JDK Property for specifying DTD support	UNCLASSIFIED	candidate-adapted
+22	JDK-8316996	xml	jaxp	P4		Catalog API Enhancement: add a factory method	UNCLASSIFIED	candidate-adapted
+22	JDK-8321406	xml	jaxp	P4	noreg-sqe	Null IDs should be resolved as before catalogs are added	UNCLASSIFIED	candidate-adapted
+23	JDK-8330542	xml	jaxp	P4	noreg-trivial	Template for Creating Strict JAXP Configuration File	UNCLASSIFIED	candidate-adapted
+24	JDK-8343001	xml	jaxp	P4	release-note=yes	Adjust XSLT and XPath Extension Function Property	UNCLASSIFIED	candidate-adapted
+24	JDK-8343004	xml	jaxp	P4	release-note=yes	Adjust JAXP limits	UNCLASSIFIED	candidate-adapted
+24	JDK-8344800	xml	jaxp	P4	release-note=yes	Add W3C DTDs and XSDs to the JDK built-in Catalog	UNCLASSIFIED	candidate-adapted
+25	JDK-8353232	xml	jaxp	P4	noreg-sqe	Standardizing and Unifying XML Component Configurations	UNCLASSIFIED	candidate-adapted
+25	JDK-8353234	xml	jaxp	P4	noreg-cleanup	Refactor XMLSecurityPropertyManager	UNCLASSIFIED	candidate-adapted
+25	JDK-8354084	xml	jaxp	P4	release-note=yes	Streamline XPath API's extension function control	UNCLASSIFIED	candidate-adapted
+22	JDK-8175874	security-libs	java.security	P4	dcs-pso,reproducer-yes,starter-bug,webbug	Update Security.insertProviderAt to specify behavior when requested position is out of range.	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8302233	security-libs	java.security	P3	release-note=yes,seclibs-pqc	HSS/LMS: keytool and jarsigner changes	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8308398	security-libs	java.security	P3	release-note=yes	Move SunEC crypto provider into java.base	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8314059	security-libs	java.security	P4	noreg-cleanup	Remove PKCS7.verify()	UNCLASSIFIED	candidate-adapted-security
+22	JDK-8318096	security-libs	java.security	P3		Introduce AsymmetricKey interface with a getParams method	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8317431	security-libs	java.security	P3		Implement simpler Comparator when building certification paths	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8320362	security-libs	java.security	P4	release-note=yes	Load anchor certificates from Keychain keystore	UNCLASSIFIED	candidate-adapted-security
+23	JDK-8323624	security-libs	java.security	P4	noreg-cleanup	ProviderList.ServiceList does not need to be a list	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8248981	security-libs	java.security	P4	noreg-doc,release-note=yes	Specify list of standard message digest and mgf algorithms for RSASSA-PSS signature	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8305406	security-libs	java.security	P3	noreg-doc	Add @spec tags in java.base/java.* (part 2)	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8319332	security-libs	java.security	P3	release-note=yes	Security properties files inclusion	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8338411	security-libs	java.security	P3		Implement JEP 486: Permanently Disable the Security Manager	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8343194	security-libs	java.security	P5	noreg-cleanup	Avoid redundant Hashtable.containsKey call in CodeSource.readObject	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344024	security-libs	java.security	P5	noreg-cleanup	Unnecessary Hashtable usage in RSAPSSSignature.DIGEST_LENGTHS	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8344397	security-libs	java.security	P3	jep486,noreg-cleanup	Remove Security Manager dependencies from java.security and sun.security packages	UNCLASSIFIED	candidate-adapted-security
+24	JDK-8345221	security-libs	java.security	P4	noreg-other	Replace legacy with new Provider APIs in SunNativeGSS	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8283795	security-libs	java.security	P3	noreg-jck,release-note=yes	Add TLSv1.3 and CNSA 1.0 algorithms to implementation requirements	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8298420	security-libs	java.security	P2	bugdb_29304177	Implement JEP 470: PEM Encodings of Cryptographic Objects (Preview)	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8328914	security-libs	java.security	P4	noreg-doc	Document the java.security.debug property in javadoc	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8341775	security-libs	java.security	P4		Duplicate manifest files are removed by jarsigner after signing 	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8345940	security-libs	java.security	P4	starter-bug	Migrate security-related resources from Java classes to properties files	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8346736	security-libs	java.security	P3	noreg-doc	Java Security Standard Algorithm Names spec should include key algorithm names	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8348967	security-libs	java.security	P3	noreg-doc,release-note=yes	Deprecate security permission classes for removal	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8349400	security-libs	java.security	P4	noreg-cleanup	Improve startup speed via eliminating nested classes	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8350689	security-libs	java.security	P4	release-note=yes	Turn on timestamp and thread metadata by default for java.security.debug	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8357592	security-libs	java.security	P4	noreg-self,ursqe-triaged	Update output parsing in test/jdk/sun/security/tools/jarsigner/compatibility/Compatibility.java	UNCLASSIFIED	candidate-adapted-security
+25	JDK-8358319	security-libs	java.security	P4	noreg-trivial,sonarcloud-found	Pem.decode should cache the Pattern	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8349732	security-libs	java.security	P3	amazon-interest,release-note=yes,seclibs-pqc	Add support for JARs signed with ML-DSA	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8353749	security-libs	java.security	P3	release-note=yes	Improve security warning when using JKS or JCEKS keystores	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8355379	security-libs	java.security	P4		Annotate lazy fields in java.security @Stable	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8356557	security-libs	java.security	P3	release-note=yes	Update CodeSource::implies API documentation and deprecate java.net.SocketPermission class for removal	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8357470	security-libs	java.security	P4	amazon-interest,jdk25u-fix-request,jdk25u-fix-yes,noreg-self,ursqe-triaged	src/java.base/share/classes/sun/security/util/Debug.java implement the test for args.toLowerCase 	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8357915	security-libs	java.security	P4	noreg-perf	SecureRandom nextLong memory usage	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8358099	security-libs	java.security	P3	hgupdate-sync,jdk25-enhancement-request,jdk25-enhancement-yes	PEM spec updates	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8358171	security-libs	java.security	P3	hgupdate-sync,noreg-self	Additional code coverage for PEM API	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8360564	security-libs	java.security	P4		Implement JEP 524: PEM Encodings of Cryptographic Objects (Second Preview)	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8361964	security-libs	java.security	P3	noreg-jck,release-note=yes	Remove outdated algorithms from requirements and add PBES2 algorithms	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8362894	security-libs	java.security	P4	amazon-interest,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	PKCS12 KeyStore PBMAC1 interoperability testing	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8365069	security-libs	java.security	P4		Refactor tests to use PEM API (Phase 1)	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8365072	security-libs	java.security	P4		Refactor tests to use PEM API (Phase 2)	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8365581	security-libs	java.security	P4	noreg-perf	Optimize Java implementation of P256 arithmetic	UNCLASSIFIED	candidate-adapted-security
+26	JDK-8371574	security-libs	java.security	P4	noreg-self	Improve code coverage of PEM classes decode functionality	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8368692	security-libs	java.security	P4	release-note=yes	Restrict Password::readPassword from reading from System.in	UNCLASSIFIED	candidate-adapted-security
+27	JDK-8369917	security-libs	java.security	P3	release-note=yes,seclibs-pqc	LMS/HSS RFC 9858 Support	UNCLASSIFIED	candidate-adapted-security

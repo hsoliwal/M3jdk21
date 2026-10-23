@@ -1,0 +1,111 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+27	JDK-8377946	candidate-adapted-serviceability	hold-runtime	serviceability agent DWARF unwinding for mixed jstack on Linux AArch64; needs HotSpot/SA build
+22	JDK-8254693	candidate-high-risk	hold-api	new public Linker.Option.critical(allowHeapAccess) API; FFM is preview in 21 (JEP 442)
+22	JDK-8293511	candidate-high-risk	hold-preview	javadoc of FFM API which is preview in 21; text tracks the 22 final API (JEP 454)
+22	JDK-8313406	candidate-high-risk	hold-native	HotSpot x86 downcall invoker blob generation
+22	JDK-8313889	candidate-high-risk	admitted-tests	-Wconversion fix in native benchmark sources only
+22	JDK-8314949	candidate-high-risk	hold-native	new PPC64 BE platform port of the FFM linker (HotSpot cpu/ppc + CallArranger)
+22	JDK-8316046	candidate-high-risk	hold-native	HotSpot x86 upcall stub register save set
+22	JDK-8316050	candidate-high-risk	hold-preview	toString format of preview FFM API impl
+22	JDK-8316970	candidate-high-risk	hold-preview	@Restricted annotation and javac lint are part of JEP 454 finalization
+22	JDK-8317545	candidate-high-risk	hold-native	new AIX PPC64 platform port of the FFM linker
+22	JDK-8317819	candidate-high-risk	hold-preview	scope semantics change for JEP 454 finalization of a 21 preview API
+22	JDK-8317824	candidate-high-risk	hold-preview	javadoc of FFM var handle API which is preview in 21
+22	JDK-8317837	candidate-high-risk	hold-preview	implementation sync for JEP 454 finalization
+22	JDK-8318538	candidate-high-risk	hold-api	new MemoryLayout path element API on a 21 preview API
+22	JDK-8318598	candidate-high-risk	hold-preview	stylistic cleanup of preview FFM sources
+22	JDK-8319316	candidate-high-risk	hold-preview	Linker javadoc of FFM API which is preview in 21
+22	JDK-8319556	candidate-high-risk	hold-preview	formatting-only on preview FFM API sources
+22	JDK-8319560	candidate-high-risk	hold-preview	formatting-only on preview FFM API sources
+22	JDK-8319563	candidate-high-risk	hold-preview	formatting-only on preview FFM API sources
+22	JDK-8319820	candidate-high-risk	reject-language	uses unnamed variables _ (JEP 443 preview in 21; M3JDK21 forbids _)
+22	JDK-8321300	candidate-high-risk	admitted-tests	test cleanup only (TestHFA); FFM tests run with --enable-preview in 21
+23	JDK-8314592	candidate-high-risk	hold-api	new public SymbolLookup::findOrThrow
+23	JDK-8323601	candidate-high-risk	hold-preview	PathElement toString of preview FFM API impl
+23	JDK-8323746	candidate-high-risk	hold-api	adds specified equals/hashCode to PathElement
+23	JDK-8329997	candidate-high-risk	hold-api	new public MemorySegment::maxByteAlignment
+23	JDK-8330049	candidate-high-risk	hold-preview	internal FFM impl cleanup; FFM preview in 21
+23	JDK-8331865	candidate-high-risk	hold-preview	internal LayoutPath consolidation; FFM preview in 21
+24	JDK-8294432	candidate-high-risk	hold-preview	internal MemorySegment content hash in preview FFM impl
+24	JDK-8331671	candidate-high-risk	hold-jep	JEP 472 restrict JNI: new --illegal-native-access option and warnings
+24	JDK-8333843	candidate-high-risk	hold-preview	javadoc guidance on preview FFM API
+24	JDK-8333886	candidate-high-risk	hold-preview	spec wording of asSlice/reinterpret on preview FFM API
+24	JDK-8334107	candidate-high-risk	hold-preview	spec wording of get/setString on preview FFM API
+24	JDK-8335480	candidate-high-risk	hold-runtime	HotSpot handshake/deoptimization filter when closing shared arena
+24	JDK-8336768	candidate-high-risk	hold-api	Linker option combination spec change (CSR)
+24	JDK-8338591	candidate-high-risk	hold-preview	SegmentBulkOperations perf in preview FFM impl; measure if ever taken
+24	JDK-8338677	candidate-high-risk	hold-preview	var handle combinator chain rework in preview FFM impl
+24	JDK-8338728	candidate-high-risk	hold-preview	memory layout javadoc on preview FFM API
+24	JDK-8338731	candidate-high-risk	hold-preview	offsetHandle bug fix in preview FFM API impl
+24	JDK-8338967	candidate-high-risk	hold-preview	fill perf in preview FFM impl
+24	JDK-8339531	candidate-high-risk	hold-preview	mismatch perf in preview FFM impl
+24	JDK-8340120	candidate-high-risk	hold-preview	SegmentBulkOperations cleanup; class absent in 21 preview impl
+24	JDK-8340307	candidate-high-risk	hold-preview	reinterpret javadoc on preview FFM API
+24	JDK-8341127	candidate-high-risk	hold-preview	fixes 24 regression from JDK-8338677 not present in 21
+24	JDK-8343188	candidate-high-risk	hold-preview	ofBuffer simplification in preview FFM impl
+24	JDK-8343394	candidate-high-risk	hold-preview	@Stable state field in preview FFM impl
+24	JDK-8343844	candidate-high-risk	admitted-tests	JMH benchmarks only
+24	JDK-8344086	candidate-high-risk	hold-jep	JEP 486 security manager removal
+24	JDK-8344134	candidate-high-risk	hold-preview	SystemLookup internal tweak in preview FFM impl
+24	JDK-8344912	candidate-high-risk	hold-preview	internal return type sharpening in preview FFM impl
+24	JDK-8345164	candidate-high-risk	hold-preview	21 FFM tests and benchmarks still require --enable-preview
+24	JDK-8345389	candidate-high-risk	admitted-docs	copyright header bump only; moot without held JDK-8336768
+25	JDK-8287788	candidate-high-risk	hold-preview	downcall allocator in preview FFM impl; backed out and redone by JDK-8349146
+25	JDK-8339527	candidate-high-risk	hold-preview	fill native threshold in preview FFM impl
+25	JDK-8345687	candidate-high-risk	hold-preview	allocateSegment impl in preview FFM impl
+25	JDK-8346609	candidate-high-risk	hold-preview	toString of preview FFM API impl
+25	JDK-8346610	candidate-high-risk	hold-preview	import ordering on preview FFM API sources
+25	JDK-8347408	candidate-high-risk	hold-preview	internal errno method handle adapter in preview FFM impl
+25	JDK-8348668	candidate-high-risk	hold-preview	confined arena cleanup bug fix in preview FFM impl
+25	JDK-8348976	candidate-high-risk	hold-preview	@ForceInline on reinterpret in preview FFM impl
+25	JDK-8349146	candidate-high-risk	hold-preview	REDO of downcall allocator in preview FFM impl
+25	JDK-8349344	candidate-high-risk	hold-preview	Arena.ofConfined javadoc on preview FFM API
+25	JDK-8350701	candidate-high-risk	admitted-tests	JMH benchmark fix only
+25	JDK-8350811	candidate-high-risk	admitted-tests	JMH benchmark fix only
+25	JDK-8354121	candidate-high-risk	hold-preview	record vs lambda cleanup in preview FFM impl
+26	JDK-8346657	candidate-high-risk	hold-preview	out-of-bounds message wording in preview FFM impl
+26	JDK-8362893	candidate-high-risk	hold-preview	getString fast path in preview FFM StringSupport; string-lane interest if ever taken
+26	JDK-8370822	candidate-high-risk	hold-preview	fill perf in preview FFM impl
+27	JDK-8369564	candidate-high-risk	hold-api	new public MemorySegment getString with length
+27	JDK-8377245	candidate-high-risk	hold-preview	@ForceInline on getString in preview FFM impl
+27	JDK-8378559	candidate-high-risk	hold-api	new Linker.Option for setting captured call state
+27	JDK-8379630	candidate-high-risk	admitted-tests	JMH benchmark only
+27	JDK-8381012	candidate-high-risk	hold-preview	javadoc warning on preview FFM API
+27	JDK-8381935	candidate-high-risk	hold-native	PPC64 CallArranger; PPC64 FFM port absent in 21
+22	JDK-6983726	candidate-high-risk	hold-api	release-noted spec/behaviour change: asInterfaceInstance no longer a Proxy class (CSR)
+22	JDK-8310157	candidate-high-risk	hold-api	collectCoordinates spec change allowing void filters (CSR)
+23	JDK-8330595	candidate-high-risk	candidate-adapted	BootstrapMethodInvoker exact-invoke path for ObjectMethods; internal startup
+23	JDK-8332547	candidate-high-risk	candidate-adapted	DirectMethodHandle signature class resolution fix; internal
+24	JDK-8339640	candidate-high-risk	candidate-string-lane	StringConcatFactory; InlineHiddenClassStrategy absent in 21 (JDK-8336856); string owners decide
+24	JDK-8339837	candidate-high-risk	candidate-adapted	dead code removal in BootstrapMethodInvoker
+24	JDK-8340280	candidate-high-risk	candidate-adapted	LambdaForm creation startup tweak; internal
+24	JDK-8340838	candidate-high-risk	candidate-adapted	MutableCallSite release fence instead of AtomicInteger; internal
+24	JDK-8341755	candidate-high-risk	candidate-adapted	InnerClassLambdaMetafactory argNames optimisation; internal
+24	JDK-8341776	candidate-high-risk	candidate-adapted	dead enum values removed from LambdaForm.Kind
+25	JDK-8350462	candidate-high-risk	candidate-adapted	MethodTypeForm cache cleanup; internal
+25	JDK-8350607	candidate-high-risk	candidate-adapted	MethodHandles.zero delegates to constant; public API unchanged
+25	JDK-8354890	candidate-high-risk	hold-jep	AOT cache initialization (JEP 483/Leyden) not in 21
+26	JDK-8360303	candidate-high-risk	candidate-adapted	unused file removal in java.lang.invoke
+26	JDK-8366455	candidate-high-risk	admitted-additive-tooling	build-time generation of VarHandleGuards; no runtime change
+26	JDK-8368024	candidate-high-risk	candidate-string-lane	removes MH inline-copy strategy which is 21 primary concat strategy; string owners decide
+27	JDK-8378715	candidate-high-risk	hold-jep	Valhalla strict-field prep in ClassFile-API generators (API final in 24)
+24	JDK-8343982	candidate-high-risk	hold-jep	JEP 486 security manager removal from ClassLoader
+22	JDK-6361826	candidate-high-risk	hold-api	new public Class.forPrimitiveName
+22	JDK-8305104	candidate-high-risk	hold-removal	removes old core reflection impl and jdk.reflect.useDirectMethodHandle property
+22	JDK-8312203	candidate-high-risk	admitted-docs	Array.newInstance javadoc clarification
+22	JDK-8314734	candidate-high-risk	candidate-adapted	unused field removal in TypeVariableImpl
+22	JDK-8315810	candidate-high-risk	candidate-measured	release-noted reimplementation of serialization constructor accessor; measure serialization libs
+23	JDK-8229959	candidate-high-risk	candidate-measured	proxy classes use condy; 21 ProxyGenerator is ASM-based; measure startup and compat
+23	JDK-8322878	candidate-high-risk	hold-api	Class.toGenericString output spec change (CSR)
+23	JDK-8322979	candidate-high-risk	admitted-docs	Modifier javadoc discussion
+23	JDK-8326653	candidate-high-risk	candidate-adapted	unused jdk.internal.reflect.UTF8 removed
+23	JDK-8332586	candidate-high-risk	candidate-adapted	avoid empty array clones in Method/Constructor; jdk21u declined as enhancement only
+24	JDK-8250659	candidate-high-risk	admitted-docs	ParameterizedType.getRawType javadoc clarification
+24	JDK-8309821	candidate-high-risk	admitted-docs	Class::isHidden javadoc link
+24	JDK-8327624	candidate-high-risk	hold-runtime	HotSpot verification bypass removal for reflection; depends on JDK-8305104
+24	JDK-8332249	candidate-high-risk	candidate-adapted	Method.hashCode micro-optimisation keeping value
+24	JDK-8334437	candidate-high-risk	candidate-adapted	ProxyGenerator list dedup; adapt to 21 ASM-based generator
+24	JDK-8336267	candidate-high-risk	candidate-adapted	shared signature parsing on root Method/Constructor; internal
+24	JDK-8336934	candidate-high-risk	candidate-adapted	JavaLangReflectAccess cleanup; internal
+24	JDK-8339789	candidate-high-risk	admitted-docs	index/definition javadoc tags in AnnotatedElement
+24	JDK-8340456	candidate-high-risk	candidate-adapted	ProxyGenerator Object-method overhead; adapt to 21 ASM-based generator

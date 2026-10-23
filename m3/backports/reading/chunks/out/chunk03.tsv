@@ -1,0 +1,111 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+26	JDK-8369206	admitted-additive-tooling	admitted-additive-tooling	jpackage tool fix to launcher file permissions; no program runtime change
+26	JDK-8370120	admitted-additive-tooling	admitted-tests	jpackage test output stabilization only
+26	JDK-8370122	admitted-additive-tooling	admitted-tests	jpackage test library only
+26	JDK-8370123	admitted-additive-tooling	admitted-additive-tooling	jpackage internal refactoring; tool only
+26	JDK-8370126	admitted-additive-tooling	admitted-tests	jpackage signing tests only
+26	JDK-8370136	admitted-additive-tooling	admitted-tests	jpackage test harness async execution only
+26	JDK-8370965	admitted-additive-tooling	admitted-tests	removes a jpackage test only
+26	JDK-8371184	admitted-additive-tooling	admitted-tests	jpackage --app-image test coverage only
+26	JDK-8371440	admitted-additive-tooling	admitted-additive-tooling	jpackage errors on ambiguous macOS signing certificates; tool only
+26	JDK-8372290	admitted-additive-tooling	admitted-tests	jpackage test library only
+26	JDK-8372292	admitted-additive-tooling	admitted-additive-tooling	jpackage internal throws-clause cleanup; tool only
+26	JDK-8372359	admitted-additive-tooling	admitted-additive-tooling	jpackage error message cleanup; tool only
+27	JDK-8278591	admitted-additive-tooling	hold-api	new jpackage installer message feature; option or resource surface unverified
+27	JDK-8356684	admitted-additive-tooling	admitted-additive-tooling	jpackage error message wording; tool only
+27	JDK-8371182	admitted-additive-tooling	admitted-additive-tooling	macOS bundle identifier error message; tool only
+27	JDK-8371438	admitted-additive-tooling	admitted-additive-tooling	jpackage --mac-sign without identity options handling fix; tool only
+27	JDK-8371924	admitted-additive-tooling	hold-api	changes which jpackage mode accepts the --mac-app-store option
+27	JDK-8373631	admitted-additive-tooling	admitted-additive-tooling	jpackage internal function utilities; tool only, needs refactored jpackage base
+27	JDK-8373710	admitted-additive-tooling	admitted-additive-tooling	jpackage error reporting; tool only
+27	JDK-8373833	admitted-additive-tooling	admitted-additive-tooling	deduplicates jpackage signing error messages; tool only
+27	JDK-8374839	admitted-additive-tooling	admitted-additive-tooling	jpackage information message wording; tool only
+27	JDK-8375050	admitted-additive-tooling	admitted-tests	jpackage test process management only
+27	JDK-8375054	admitted-additive-tooling	hold-api	changes jpackage app-image file format by dropping the signed property
+27	JDK-8375061	admitted-additive-tooling	admitted-additive-tooling	jpackage ToolProvider logging config isolation fix; tool only
+27	JDK-8375240	admitted-additive-tooling	admitted-additive-tooling	jpackage progress message consistency; tool only
+27	JDK-8375242	admitted-additive-tooling	admitted-tests	macOS jpackage signing test coverage only
+27	JDK-8375323	admitted-additive-tooling	admitted-additive-tooling	jpackage --app-content/--input handling fix; confirm no option semantics change
+27	JDK-8377231	admitted-additive-tooling	hold-native	native jpackage launcher library build optimization flags
+27	JDK-8377331	admitted-additive-tooling	admitted-additive-tooling	jpackage signing error reporting; tool only
+27	JDK-8377514	admitted-additive-tooling	admitted-additive-tooling	jpackage top-level error handler internals; tool only
+27	JDK-8377629	admitted-additive-tooling	admitted-tests	jpackage test output validation only
+27	JDK-8377897	admitted-additive-tooling	admitted-tests	jpackage test MockUtils visibility only
+27	JDK-8378873	admitted-additive-tooling	admitted-additive-tooling	jpackage ModuleInfo internal refactor; tool only
+27	JDK-8378874	admitted-additive-tooling	admitted-additive-tooling	removes redundant jpackage messages; tool only
+27	JDK-8378876	admitted-additive-tooling	admitted-additive-tooling	jpackage internals reshaped for mock testing; tool only
+27	JDK-8378877	admitted-additive-tooling	hold-native	Windows exe rebranding goes through native libjpackage resource editing
+27	JDK-8379341	admitted-additive-tooling	admitted-tests	jpackage modular app test consolidation only
+27	JDK-8379345	admitted-additive-tooling	admitted-tests	jpackage test fixes only
+27	JDK-8379432	admitted-additive-tooling	admitted-tests	jpackage test library CannedFormattedString only
+27	JDK-8381384	admitted-additive-tooling	admitted-tests	jpackage WiX discovery test coverage only
+27	JDK-8382022	admitted-additive-tooling	admitted-additive-tooling	jpackage internal CompositeProxy utility; tool only
+27	JDK-8382684	admitted-additive-tooling	admitted-tests	jpackage test library fixes only
+27	JDK-8383162	admitted-additive-tooling	admitted-additive-tooling	jpackage Windows MSI packager internal decoupling; tool only
+27	JDK-8383168	admitted-additive-tooling	admitted-tests	jpackage test library console-output checks only
+22	JDK-8319311	admitted-additive-tooling	hold-api	adds ProcessBuilder configurability to jdk.jshell execution API
+23	JDK-8325168	admitted-additive-tooling	hold-jep	jshell rendering of Markdown doc comments from JEP 467, not in 21
+24	JDK-8332314	admitted-additive-tooling	hold-api	adds a method to the public JavaShellToolBuilder interface
+24	JDK-8340133	admitted-additive-tooling	hold-native	java launcher usage output change in native libjli
+24	JDK-8341176	admitted-additive-tooling	hold-api	changes jdk.jshell JShell.diagnostics contract for transient snippets
+25	JDK-8350983	admitted-additive-tooling	candidate-measured	jshell local-execution stop-check placement claims performance; take with JDK-8355323
+25	JDK-8355323	admitted-additive-tooling	candidate-adapted	jshell local-execution stop-check at method entry; pair with JDK-8350983
+26	JDK-8285150	admitted-additive-tooling	admitted-additive-tooling	jshell annotation tab completion; tool only
+26	JDK-8366691	admitted-additive-tooling	hold-api	new jshell completion feature; API or option surface unverified
+27	JDK-8373097	admitted-additive-tooling	admitted-additive-tooling	jshell /save creates missing parent directories; tool only
+27	JDK-8378251	admitted-additive-tooling	admitted-additive-tooling	jshell line-editor word delimiters; tool only
+22	JDK-8227229	admitted-additive-tooling	hold-removal	deprecates -Xdebug/-debug launcher flags with a warning
+22	JDK-8311653	admitted-additive-tooling	hold-api	changes -XshowSettings command-line option behaviour (release note)
+22	JDK-8318295	admitted-additive-tooling	hold-preview	launcher help for --enable-native-access follows FFM final in 22; preview in 21
+24	JDK-8211033	admitted-additive-tooling	hold-native	launcher native classpath argument processing cleanup
+24	JDK-8335896	admitted-additive-tooling	hold-javac	source launcher in jdk.compiler sets TCCL; visible change on JEP 458 code
+24	JDK-8344540	admitted-additive-tooling	admitted-docs	java man page text only
+26	JDK-8370393	admitted-additive-tooling	hold-native	Windows native java_props_md cleanup
+22	JDK-8284493	candidate-adapted	candidate-measured	RandomSupport exponential tail rewrite changes generated values; perf claim
+22	JDK-8311178	candidate-adapted	admitted-tests	JMH microbenchmark output-buffer fixes only
+22	JDK-8311207	candidate-adapted	candidate-string-lane	UUID.toString hex formatting moved off Long via JLA; digit formatting lane
+22	JDK-8312522	candidate-adapted	hold-preview	JEP 454 FFM finalization; FFM is preview in 21
+22	JDK-8314085	candidate-adapted	admitted-tests	JMH microbenchmark state scope only
+22	JDK-8315938	candidate-adapted	hold-removal	deprecates sun.misc.Unsafe methods for removal
+22	JDK-8316160	candidate-adapted	hold-removal	removes sun.misc.Unsafe shouldBeInitialized/ensureClassInitialized
+22	JDK-8316190	candidate-adapted	hold-preview	MemorySegment.toString of FFM API, preview in 21
+22	JDK-8316421	candidate-adapted	hold-native	Windows libjava native DLL loading change
+23	JDK-8316704	candidate-adapted	candidate-string-lane	Formatter specifier parser rewrite under String.format; exceptions must match
+23	JDK-8325189	candidate-adapted	admitted-additive-tooling	build lint flag plus @SuppressWarnings only; may trip M3 code under -Werror
+23	JDK-8326941	candidate-adapted	candidate-string-lane	StringUTF16 byte-order init and native isBigEndian removal
+23	JDK-8327444	candidate-adapted	hold-native	native RESTARTABLE macro cleanup
+23	JDK-8327729	candidate-adapted	hold-removal	removes internal Unsafe xxxObject aliases; can break add-exports users
+23	JDK-8331670	candidate-adapted	hold-removal	JEP 471 deprecates sun.misc.Unsafe memory-access methods for removal
+24	JDK-8325949	candidate-adapted	candidate-adapted	internal VarHandle lookup helper refactor; no API change
+24	JDK-8333833	candidate-adapted	candidate-string-lane	UUID.toString hex digit formatting rewrite
+24	JDK-8334328	candidate-adapted	candidate-string-lane	FloatToDecimal/DoubleToDecimal allocation change under Double.toString and StringBuilder.append
+24	JDK-8335645	candidate-adapted	candidate-string-lane	Formatter trailing zeros via String.repeat; formatting lane
+24	JDK-8335802	candidate-adapted	candidate-string-lane	HexFormat internal case flag; hex digit formatting
+24	JDK-8336278	candidate-adapted	candidate-adapted	call-site String.format(%n) to System.lineSeparator; no API change
+24	JDK-8339631	candidate-adapted	admitted-docs	javadoc @jls/@jvms tag fixes only
+24	JDK-8342380	candidate-adapted	hold-jep	JEP 498 Unsafe memory-access warnings and new launcher option; integrity by default
+24	JDK-8344011	candidate-adapted	hold-jep	JEP 486 security manager removal in Class and reflection
+24	JDK-8344300	candidate-adapted	hold-preview	JEP 499 structured concurrency fourth preview
+24	JDK-8344419	candidate-adapted	candidate-measured	property reads moved to startup StaticProperty snapshot; runtime setProperty effect changes
+24	JDK-8345286	candidate-adapted	hold-jep	JEP 486 security manager API removal in misc areas
+24	JDK-8345565	candidate-adapted	hold-jep	JEP 486 removal of SecurityManager-motivated sun.reflect.util APIs
+25	JDK-8342486	candidate-adapted	hold-preview	JEP 505 structured concurrency fifth preview
+25	JDK-8344943	candidate-adapted	hold-api	marks exported java.base classes final; public API modifier change
+25	JDK-8348301	candidate-adapted	admitted-tests	removes test reflection break-ins only
+25	JDK-8349620	candidate-adapted	admitted-tests	jtreg VMProps static-JDK property only
+25	JDK-8353641	candidate-adapted	hold-removal	deprecates core library permission classes for removal
+25	JDK-8353686	candidate-adapted	hold-jit	new x86_64 Math.cbrt stub intrinsic
+25	JDK-8355573	candidate-adapted	hold-native	jpackage native C++ header cleanup
+25	JDK-8357063	candidate-adapted	admitted-docs	DecimalDigits precondition comments only
+25	JDK-8357081	candidate-adapted	candidate-string-lane	removes HexDigits methods; string owners check M3 callers
+25	JDK-8357808	candidate-adapted	admitted-tests	TestRandomFloatingDecimal option only
+26	JDK-8361112	candidate-adapted	hold-preview	tests for incubator Float16, absent in 21
+26	JDK-8361300	candidate-adapted	admitted-docs	documents Unsafe offset method exceptions; confirm no code delta
+26	JDK-8361593	candidate-adapted	admitted-docs	comment-only removal of dead native code left by JDK-8342868
+26	JDK-8366421	candidate-adapted	candidate-string-lane	modified UTF-8 length overflow for huge strings; character data lane
+26	JDK-8367598	candidate-adapted	admitted-tests	jdk.test.lib.Utils seed calculation only
+26	JDK-8367857	candidate-adapted	hold-preview	JEP 525 structured concurrency sixth preview
+26	JDK-8369997	candidate-adapted	admitted-tests	virtual thread tests switch to VThreadScheduler helper only
+27	JDK-8380109	candidate-adapted	hold-preview	JEP 533 structured concurrency seventh preview
+27	JDK-8384505	candidate-adapted	admitted-tests	stack walk test frame accounting only
+22	JDK-8219567	candidate-adapted	admitted-docs	RandomAccessFile parameter name and javadoc consistency only

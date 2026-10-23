@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+26	JDK-8369206	tools	jpackage	P4	sn_207	jpackage should not set R/O permission on app launchers	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8370120	tools	jpackage	P4	sn_205	Make jpackage tests output more stable	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8370122	tools	jpackage	P4	sn_206	jpackage test lib improvements	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8370123	tools	jpackage	P4	sn_206	Minor jpackage refactoring	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8370126	tools	jpackage	P4	sn_206	Improve jpackage signing testing	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8370136	tools	jpackage	P4	sn_206	Support async execution of jpackage tests	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8370965	tools	jpackage	P4	sn_206	Remove SigningPackageFromTwoStepAppImageTest test	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8371184	tools	jpackage	P4	sn_207	Improve jpackage test coverage for "--app-image" option	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8371440	tools	jpackage	P4	sn_208	jpackage should exit with an error if it finds multiple matching signing certificates	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8372290	tools	jpackage	P4	sn_208	jpackage test lib improvements	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8372292	tools	jpackage	P4	sn_208	Remove redundant "throws ConfigException"	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8372359	tools	jpackage	P4	sn_208	Clean jpackage error messages	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8278591	tools	jpackage	P4	dcsad,reproducer-other,sn_213,sn_214,sn_215,webbug	Jpackage post installation information message 	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8356684	tools	jpackage	P4	sn_211	jpackage error messages are not helpful	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8371182	tools	jpackage	P4	macos,sn_216	[macos] Improve error messages for "invalid mac bundle identifier"	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8371438	tools	jpackage	P4	macos,sn_208,sn_210,sn_214	jpackage should handle the case when "--mac-sign" is specified without signing identity options	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8371924	tools	jpackage	P4	macos,sn_216	--mac-app-store should be accepted option for app image signing 	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8373631	tools	jpackage	P4	sn_210	Improve classes in the "jdk.jpackage.internal.util.function" package	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8373710	tools	jpackage	P4	sn_210	Improve jpackage error reporting	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8373833	tools	jpackage	P4	sn_210	error.cert.not.found and "error.explicit-sign-no-cert" errors duplicate each other	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8374839	tools	jpackage	P4	sn_212,sn_213,sn_214,sn_215,sn_216,sn_219	Improve jpackage information messages	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8375050	tools	jpackage	P4	noreg-self,sn_211	Simplify process management in jpackage tests	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8375054	tools	jpackage	P4	sn_211	Removed "signed" property from jpackage app image file	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8375061	tools	jpackage	P4	sn_211	Multiple jpackage tool providers may share the same logging config	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8375240	tools	jpackage	P4	sn_211	Make bundling progress messages issued by jpackage consistent across platforms	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8375242	tools	jpackage	P4	macos,sn_211	[macos] Improve jpackage signing coverage	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8375323	tools	jpackage	P4	sn_211	Improve handling of the "--app-content" and "--input" options in jpackage	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8377231	tools	jpackage	P4		Build jpackage with SIZE optimization	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8377331	tools	jpackage	P4	sn_212	jpackage: improve sign errors reporting	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8377514	tools	jpackage	P4	sn_213	jpackage: support passing multiple exceptions to the top-level error handler 	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8377629	tools	jpackage	P4		jpackage: Tighten up output validation in tests	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8377897	tools	jpackage	P4	sn_214	jpackage: make jdk.jpackage.internal.MockUtils available from other packages	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8378873	tools	jpackage	P4	sn_214	jpackage: remove macOS-specific code from jdk.jpackage.internal.ModuleInfo	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8378874	tools	jpackage	P4	sn_214	jpackage: remove redundant messages	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8378876	tools	jpackage	P4	sn_214	jpackage: facilitate testing with mocks	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8378877	tools	jpackage	P4	sn_214	jpackage: improve rebranding of exe files on Windows	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8379341	tools	jpackage	P4	sn_214	jpackage: consolidate modular app tests	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8379345	tools	jpackage	P4	sn_214	jpackage: Fix issues in tests to improve their flexibility	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8379432	tools	jpackage	P4	sn_215	jpackage: Make default equals() in jdk.jpackage.test.CannedFormattedString class work as expected	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8381384	tools	jpackage	P4	sn_216	jpackage: add test coverage to WiX discovery	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8382022	tools	jpackage	P4	sn_217	jpackage: enhance CompositeProxy	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8382684	tools	jpackage	P4	sn_218	jpackage: assorted fixes of the test lib	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8383162	tools	jpackage	P4	sn_218	jpackage: decouple WinMsiPackager and RTF converter	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8383168	tools	jpackage	P4	sn_218	jpackage: enhance capabilities of the test lib for testing jpackage console output	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8319311	tools	jshell	P4		JShell Process Builder should be configurable	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325168	tools	jshell	P3		JShell should support Markdown comments	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8332314	tools	jshell	P4	jshell-API	Add window size configuration option to JavaShellToolBuilder interface	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8340133	tools	jshell	P4		Add concise usage message to the java executable	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8341176	tools	jshell	P3		Permit access to diagnostics for transient snippets	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8350983	tools	jshell	P4	noreg-perf	JShell LocalExecutionControl only needs stopCheck() on backward branches	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8355323	tools	jshell	P4		JShell LocalExecutionControl should add stopCheck() at method entry	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8285150	tools	jshell	P4	webbug	Improve tab completion for annotations	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8366691	tools	jshell	P4		JShell should support a more convenient completion	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8373097	tools	jshell	P4		Save command should create missing parent directories	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8378251	tools	jshell	P4		Extend word delimiters used in jshell	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8227229	tools	launcher	P4	release-note=yes	Deprecate the launcher -Xdebug/-debug flags that have not done anything since Java 6	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8311653	tools	launcher	P4	release-note=yes	Modify -XshowSettings launcher behavior	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8318295	tools	launcher	P4		Update launcher help for enable-native-access	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8211033	tools	launcher	P4	noreg-cleanup	Clean up the processing -classpath argument not to set LM_CLASS 	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8335896	tools	launcher	P4		Source launcher should set TCCL	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8344540	tools	launcher	P5	noreg-doc	Remove superseded wildcard description from java manpage	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8370393	tools	launcher	P4	jdk25u-fix-request,jdk25u-fix-yes	Cleanup handling of ancient Windows versions from GetJavaProperties java_props_md	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8284493	core-libs	-	P4	amazon-interest	Improve computeNextExponential tail performance and accuracy	UNCLASSIFIED	candidate-adapted
+22	JDK-8311178	core-libs	-	P4		JMH tests don't scale well when sharing output buffers	UNCLASSIFIED	candidate-adapted
+22	JDK-8311207	core-libs	-	P4		Cleanup for Optimization for UUID.toString	UNCLASSIFIED	candidate-adapted
+22	JDK-8312522	core-libs	-	P3		Implementation of Foreign Function & Memory API	UNCLASSIFIED	candidate-adapted
+22	JDK-8314085	core-libs	-	P4		Fixing scope from benchmark to thread for JMH tests having shared state	UNCLASSIFIED	candidate-adapted
+22	JDK-8315938	core-libs	-	P4	release-note=yes	Deprecate for removal Unsafe methods that have standard APIs for many releases	UNCLASSIFIED	candidate-adapted
+22	JDK-8316160	core-libs	-	P4	noreg-cleanup,release-note=yes	Remove sun.misc.Unsafe.{shouldBeInitialized,ensureClassInitialized}	UNCLASSIFIED	candidate-adapted
+22	JDK-8316190	core-libs	-	P4		Improve MemorySegment::toString	UNCLASSIFIED	candidate-adapted
+22	JDK-8316421	core-libs	-	P4	noreg-cleanup	libjava should load shell32.dll eagerly	UNCLASSIFIED	candidate-adapted
+23	JDK-8316704	core-libs	-	P4		Regex-free parsing of Formatter and FormatProcessor specifiers	UNCLASSIFIED	candidate-adapted
+23	JDK-8325189	core-libs	-	P3	noreg-build	Enable this-escape javac warning in java.base	UNCLASSIFIED	candidate-adapted
+23	JDK-8326941	core-libs	-	P4	noreg-hard	Remove StringUTF16::isBigEndian	UNCLASSIFIED	candidate-adapted
+23	JDK-8327444	core-libs	-	P4		simplify RESTARTABLE macro usage in JDK codebase	UNCLASSIFIED	candidate-adapted
+23	JDK-8327729	core-libs	-	P4	noreg-cleanup	Remove deprecated xxxObject methods from jdk.internal.misc.Unsafe	UNCLASSIFIED	candidate-adapted
+23	JDK-8331670	core-libs	-	P4		Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	UNCLASSIFIED	candidate-adapted
+24	JDK-8325949	core-libs	-	P5	noreg-other	Create an internal utility method for creating VarHandle instances	UNCLASSIFIED	candidate-adapted
+24	JDK-8333833	core-libs	-	P4	noreg-cleanup	Remove the use of ByteArrayLittleEndian from UUID::toString	UNCLASSIFIED	candidate-adapted
+24	JDK-8334328	core-libs	-	P4		Reduce object allocation for FloatToDecimal and DoubleToDecimal	UNCLASSIFIED	candidate-adapted
+24	JDK-8335645	core-libs	-	P4	noreg-cleanup	j.u.Formatter#trailingZeros improved with String repeat	UNCLASSIFIED	candidate-adapted
+24	JDK-8335802	core-libs	-	P4	noreg-cleanup	Improve startup speed HexFormat uses boolean instead of enum	UNCLASSIFIED	candidate-adapted
+24	JDK-8336278	core-libs	-	P4		Micro-optimize Replace String.format("%n") to System.lineSeparator	UNCLASSIFIED	candidate-adapted
+24	JDK-8339631	core-libs	-	P4	noreg-doc	Fix block @jls and @jvms tags	UNCLASSIFIED	candidate-adapted
+24	JDK-8342380	core-libs	-	P4		Implement JEP 498: Warn upon Use of Memory-Access Methods in sun.misc.Unsafe	UNCLASSIFIED	candidate-adapted
+24	JDK-8344011	core-libs	-	P4	jep486,noreg-cleanup	Remove usage of security manager from Class and reflective APIs	UNCLASSIFIED	candidate-adapted
+24	JDK-8344300	core-libs	-	P4	noreg-doc	Implement JEP 499: Structured Concurrency (Fourth Preview)	UNCLASSIFIED	candidate-adapted
+24	JDK-8344419	core-libs	-	P5		Use StaticProperty in some JDK classes	UNCLASSIFIED	candidate-adapted
+24	JDK-8345286	core-libs	-	P4	jep486,noreg-cleanup	Remove use of SecurityManager API from misc areas	UNCLASSIFIED	candidate-adapted
+24	JDK-8345565	core-libs	-	P4	jep486,noreg-cleanup	Remove remaining SecurityManager motivated APIs from sun.reflect.util	UNCLASSIFIED	candidate-adapted
+25	JDK-8342486	core-libs	-	P3		Implement JEP 505: Structured Concurrency (Fifth Preview)	UNCLASSIFIED	candidate-adapted
+25	JDK-8344943	core-libs	-	P4		Mark not subclassable classes final in java.base exported classes	UNCLASSIFIED	candidate-adapted
+25	JDK-8348301	core-libs	-	P4	noreg-self	Remove unused Reference.waitForReferenceProcessing break-ins in tests	UNCLASSIFIED	candidate-adapted
+25	JDK-8349620	core-libs	-	P4		Add VMProps for static JDK	UNCLASSIFIED	candidate-adapted
+25	JDK-8353641	core-libs	-	P3	noreg-doc	Deprecate core library permission classes for removal	UNCLASSIFIED	candidate-adapted
+25	JDK-8353686	core-libs	-	P4		Optimize Math.cbrt for x86 64 bit platforms	UNCLASSIFIED	candidate-adapted
+25	JDK-8355573	core-libs	-	P4		Remove kludge_c++11.h from jpackage code	UNCLASSIFIED	candidate-adapted
+25	JDK-8357063	core-libs	-	P4	noreg-doc	Document preconditions for DecimalDigits methods	UNCLASSIFIED	candidate-adapted
+25	JDK-8357081	core-libs	-	P4	noreg-cleanup	Removed unused methods of HexDigits	UNCLASSIFIED	candidate-adapted
+25	JDK-8357808	core-libs	-	P4	noreg-self,numerics	Add a command line option for specifying a counter in TestRandomFloatingDecimal	UNCLASSIFIED	candidate-adapted
+26	JDK-8361112	core-libs	-	P4	jdk25u-fix-SQE-ok-next,jdk25u-fix-request,jdk25u-fix-yes,noreg-self,numerics,ursqe-triaged	Use exact float -> Float16 conversion method in Float16 tests	UNCLASSIFIED	candidate-adapted
+26	JDK-8361300	core-libs	-	P4		Document exceptions for Unsafe offset methods	UNCLASSIFIED	candidate-adapted
+26	JDK-8361593	core-libs	-	P4	amazon-interest,cleanup	Commented dead code in JDK-8342868 can be removed	UNCLASSIFIED	candidate-adapted
+26	JDK-8366421	core-libs	-	P5		ModifiedUtf.utfLen may overflow for giant string	UNCLASSIFIED	candidate-adapted
+26	JDK-8367598	core-libs	-	P4	jdk25u-fix-SQE-ok-next,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	Switch to CRC32C for SEED calculation in jdk.test.lib.Utils	UNCLASSIFIED	candidate-adapted
+26	JDK-8367857	core-libs	-	P3		Implement JEP 525: Structured Concurrency (Sixth Preview)	UNCLASSIFIED	candidate-adapted
+26	JDK-8369997	core-libs	-	P4	amazon-interest,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	Tests that use custom scheduler should use jdk.test.lib.thread.VThreadScheduler	UNCLASSIFIED	candidate-adapted
+27	JDK-8380109	core-libs	-	P3		Implement JEP 533: Structured Concurrency (Seventh Preview)	UNCLASSIFIED	candidate-adapted
+27	JDK-8384505	core-libs	-	P4	test-only	Account for all jtreg-based frames in stack walk test	UNCLASSIFIED	candidate-adapted
+22	JDK-8219567	core-libs	java.io	P5	dcs-pso,noreg-doc,webbug	Name of first parameter of RandomAccessFile(String,String) is inconsistent	UNCLASSIFIED	candidate-adapted

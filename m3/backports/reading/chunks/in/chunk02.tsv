@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+25	JDK-8355446	infrastructure	build	P4	CPU27_04-release-candidate	Change to Xcode 15.4 for building on macOS at Oracle	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8355697	infrastructure	build	P4		Create windows devkit on wsl and msys2	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8356656	infrastructure	build	P4		Drop unused DEVKIT_HOME from jib-profiles.js	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8356657	infrastructure	build	P4		Use stable source-date for cmp-baseline jib profiles	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8356820	infrastructure	build	P4	build-infra,build-usability,windows	fixpath should allow + in paths on Windows	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8233115	infrastructure	build	P4	build-infra,build-maintainability	Protect ExecuteWithLog from running with redirection without a subshell	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8246325	infrastructure	build	P4	build-infra,build-usability	Add DRYRUN facility to SetupExecute	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8332872	infrastructure	build	P4	build-infra,build-usability	SetupExecute should cd to temp directory	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8341735	infrastructure	build	P4	amazon-interest,build-infra,build-stability,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	Rewrite the build/AbsPathsInImage.java test to not load the entire file at once	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8343546	infrastructure	build	P4	build-infra,build-usability,jdk25u-fix-request,jdk25u-fix-yes,noreg-build	GHA: Cache required dependencies in master-branch workflow	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8357079	infrastructure	build	P4	build-infra,build-performance	Fix Windows AArch64 DevKit Creation	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8361142	infrastructure	build	P3	build-functionality,build-infra,noreg-build	Improve custom hooks for makefiles	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8365238	infrastructure	build	P4	amazon-interest,build-failure,noreg-build	'jfr' feature requires 'services' with 'custom' build variant	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8365491	infrastructure	build	P5	noreg-build	VSCode IDE: add basic configuration for the Oracle Java extension	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8366399	infrastructure	build	P4	noreg-build	Allow custom base reference for update_copyright_year.sh	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8367026	infrastructure	build	P4		Reorder the timeout failure handler commands to have jstack run before the rest	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8367034	infrastructure	build	P4	build-infra,build-maintainability	[REDO] Protect ExecuteWithLog from running with redirection without a subshell	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8367801	infrastructure	build	P4	noreg-build	jtreg failure_handler - don't use the -L option for ps command	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8367859	infrastructure	build	P3	build-infra,build-maintainability	Remove nio exception gensrc	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8369080	infrastructure	build	P4		Use uname -m for devkit cpu detection	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8369242	infrastructure	build	P4		Rename URL variables in devkit/Tools.gmk	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8369246	infrastructure	build	P4		Use https in make/devkit scripts	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8369328	infrastructure	build	P4		Use uppercase variable names in the devkit makefiles	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8369454	infrastructure	build	P4		Verify checksums of downloaded source bundles when creating devkit	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8370438	infrastructure	build	P3		Offer link time optimization support on library level	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8371425	infrastructure	build	P4	amazon-interest,build-infra,build-usability,jdk25u-fix-request,jdk25u-fix-yes	Include folder names in vscode workspace virtual folders	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8371626	infrastructure	build	P4	amazon-interest	[linux] use icf=all for linking libraries	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8372733	infrastructure	build	P4	amazon-interest,gha,jdk25u-fix-request,jdk25u-fix-yes	GHA: Bump to Ubuntu 24.04	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8332189	infrastructure	build	P4	build-functionality,build-infra	Enable -Wzero-as-null-pointer-constant for gcc/clang	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8372966	infrastructure	build	P4		Add closed counterpart to doc/starting-next-release.md	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8374471	infrastructure	build	P4		Check bin and lib folder of JDK image for unwanted files	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8374507	infrastructure	build	P4	amazon-interest,hgupdate-sync,jdk25u-fix-request,jdk25u-fix-yes	GHA: Limit debug symbols generation to conserve disk space	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8374521	infrastructure	build	P4	amazon-interest,jdk25u-fix-request,jdk25u-fix-yes	Support fine-grained native debug levels	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8374754	infrastructure	build	P4	noreg-other	jtreg failure handler - replace inline javascript and inline event handlers with same origin javascript files	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8374767	infrastructure	build	P4	amazon-interest,jdk25u-fix-request,jdk25u-fix-yes	Amend JDK-8374521 with new option name	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8375241	infrastructure	build	P4		Simplify --with-native-debug-symbols-level option implementation	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8376585	infrastructure	build	P4		bin/update_copyright_year.sh could allow updating a specified list of files	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8376684	infrastructure	build	P4	jdk25u-fix-request,jdk25u-fix-yes,jdk26u-fix-SQE-ok-next,jdk26u-fix-request,jdk26u-fix-yes,noreg-build,sust-bp-triaged,x11	Compile OpenJDK in headless mode without required X11 libraries	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8376892	infrastructure	build	P4	noreg-build	Allow conversion warnings in subsets of the code base	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8379202	infrastructure	build	P4	jdk25u-fix-request,jdk25u-fix-yes,jdk26u-fix-SQE-ok-next,jdk26u-fix-request,jdk26u-fix-yes	Support linktime-gc on Linux with clang	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8380776	infrastructure	build	P4		No longer necessary to disable calloc-transposed-args warnings when building harfbuzz	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8382030	infrastructure	build	P4		GHA: Enable Windows ARM64 tests	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8383243	infrastructure	build	P4		Make objcopy configurable to compress debug info	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8384145	infrastructure	build	P4	gc-g1	Use the default collector in JDK builds	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8385011	infrastructure	build	P4	jdk26u-fix-request	GHA: Enable Linux AArch64 tests	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8385525	infrastructure	build	P4		Suggest Metal toolchain download in configure error on Xcode 26+	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8385552	infrastructure	build	P4		Improve devkit/sysroot creation	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8353009	infrastructure	docs	P4	build-docs	Improve documentation for Windows AArch64 builds	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8339783	infrastructure	other	P3		Implement JEP 479: Remove the Windows 32-bit x86 Port	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8301971	infrastructure	other	P3	build-infra,product-wide	Make JDK source code UTF-8	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8311227	infrastructure	other	P4	build-infra,build-usability	Add .editorconfig	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8346773	infrastructure	other	P4		Fix unmatched brackets in some misc files	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8314488	infrastructure	other	P4	build-infra,cpp17,docsnoimpact	Compiling the JDK with C++17	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8364352	infrastructure	other	P4	jdk25u-fix-SQE-ok-next,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	Some tests fail when using a limited number of pregenerated .jsa CDS archives	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8173970	tools	jar	P3	release-note=yes	jar tool should have a way to extract to a directory	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8268611	tools	jar	P4		jar --validate should check targeted classes in MR-JAR files	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8345431	tools	jar	P4	release-note=yes	Improve jar --validate to detect duplicate or invalid entries	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8346232	tools	jar	P4	noreg-cleanup	Remove leftovers of the jar --normalize feature	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8268613	tools	jar	P4		jar --validate should check inital entries of a JAR file	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8375433	tools	jar	P4		jar should validate automatic module names	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8304006	tools	jlink	P4		jlink should create the jimage file in the native endian for the target platform	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8321620	tools	jlink	P4		Optimize JImage decompressors	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8323794	tools	jlink	P4		Remove unused jimage compressor plugin configuration	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8311302	tools	jlink	P4	jep493,redhat-interest	Implement JEP 493: Linking Run-Time Images without JMODs	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8353185	tools	jlink	P3	jdk24u-fix-SQE-ok,jdk24u-fix-request,jdk24u-fix-yes,jep493	Introduce the concept of upgradeable files in context of JEP 493	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8347007	tools	jlink	P3	jdk25u-fix-request,jdk25u-fix-yes	--strip-debug removes parameter names included with -parameters	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8347831	tools	jlink	P3	noreg-hard,release-note=yes	Re-examine version check when cross linking	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8310933	tools	jpackage	P4	dcsad,reproducer-other,sn_155,sn_156,webbug	Copying from runtime image to application image should not follow symlinks	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8316547	tools	jpackage	P4	sn_153	Use JUnit.dir jtreg property with jpackage JUnit tests	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8333307	tools	jpackage	P4	sn_170	Don't suppress jpackage logging in tests when it is detecting packaging tools in the system	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8319457	tools	jpackage	P3	17-bp,21-bp,dcsad,reproducer-other,sn_168,sn_169,sn_170,sn_171,sup-nrt,webbug	Update jpackage to support WiX v4 and v5 on Windows	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8340311	tools	jpackage	P4	dcsaw,reproducer-other,sn_181,webbug	JPackage app-image exe launches multiple exe's in JDK 22+	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8344322	tools	jpackage	P4	noreg-self,sn_182,sn_183,testbug,ursqe-triaged	Improve capabilities of jpackage test lib to validate error output of jpackage	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8344415	tools	jpackage	P4	sn_183	Restruct jpackage utility classes	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8344587	tools	jpackage	P4	sn_183	Reduce number of "jdk.jpackage.internal" classes used from other packages	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8150442	tools	jpackage	P4	dcspks,reproducer-yes,sn_187,sn_188,webbug	Enforce Supported Platforms in Packager for MSI bundles	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8333568	tools	jpackage	P4	sn_194	Test that jpackage doesn't modify R/O files/directories	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8333664	tools	jpackage	P3	sn_172,sn_194,sn_195	Decouple command line parsing and package building in jpackage	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8341641	tools	jpackage	P4	sn_189,sn_190,sn_191,sn_192,sup-nrt,webbug	Make %APPDATA% and %LOCALAPPDATA% env variables available in *.cfg files	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8347297	tools	jpackage	P4	noreg-self,sn_185,testbug,ursqe-triaged	Skip the RuntimeImageSymbolicLinksTest test on Windows when it is executed outside of the jtreg	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8349504	tools	jpackage	P3	junit,sn_187	Support platform-specific JUnit tests in jpackage	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8349509	tools	jpackage	P4	sn_187	[macos] Clean up macOS dead code in jpackage	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8350011	tools	jpackage	P4	sn_188	Convert jpackage test lib tests in JUnit format	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8350013	tools	jpackage	P4	sn_188,sn_189	Add a test for JDK-8150442	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8350601	tools	jpackage	P4	sn_189	Miscellaneous updates to jpackage test lib	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8351369	tools	jpackage	P4	macos,sn_190,sn_194,sn_195	[macos] Use --install-dir option with DMG packaging	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8351372	tools	jpackage	P3	sn_189,sn_190	Improve negative tests coverage of jpackage	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8352176	tools	jpackage	P4	macos,sn_190,sn_191	Automate setting up environment for mac signing tests	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8353321	tools	jpackage	P4	macos,sn_191	[macos] ErrorTest.testAppContentWarning test case requires signing environment	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8353679	tools	jpackage	P4	sn_191	Restructure classes in jdk.jpackage.internal package	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8354985	tools	jpackage	P4	sn_192	Add unit tests for Executor class from jpackage test lib	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8354990	tools	jpackage	P4	macos,sn_192,sn_193	Improve negative tests coverage for jpackage signing	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8355328	tools	jpackage	P4	sn_193	Improve negative tests coverage for jpackage signing	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8357930	tools	jpackage	P4		Amendment for JDK-8333664	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8358017	tools	jpackage	P4	sn_195	Various enhancements of jpackage test helpers	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8308349	tools	jpackage	P4	dcsad,reproducer-other,sn_149,sn_150,sn_153,sn_156,sn_193,sn_196,sn_197,sn_199,sn_200,sn_201,webbug	missing working directory option for launcher when invoked from shortcuts	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8333727	tools	jpackage	P3	sn_204,sn_205,sn_206,sn_207,sn_208	Use JOpt in jpackage to parse command line 	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8334238	tools	jpackage	P3	jdk25u-fix-SQE-ok-next,jdk25u-fix-request,jdk25u-fix-yes,noreg-self,sn_200	Enhance AddLShortcutTest jpackage test	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8343220	tools	jpackage	P4	sn_206,testbug	Add test cases to AppContentTest jpackage test	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8351095	tools	jpackage	P4	macos,sn_190,sn_208	[macos] Add more jpackage tests for --mac-app-store option	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8356218	tools	jpackage	P3	macos,sn_201	[macos] Document --app-content	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8356574	tools	jpackage	P4	sn_207	Test --linux-menu-group option	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8356575	tools	jpackage	P4	sn_205	Test order in which jpackage fills app image 	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8356578	tools	jpackage	P4	macos,sn_205,sn_206	Test --mac-entitlements	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8362598	tools	jpackage	P4	macos,sn_204,sn_205	[macos] Add tests for custom info plist files	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8363979	tools	jpackage	P3	sn_204,sn_205	Add JDK bundle/image validation for --runtime-image option	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8363980	tools	jpackage	P4	sn_205,sn_206,sn_207,sn_208	[macos] Add JDK specific keys/values to Info.plist of embedded runtime	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8364129	tools	jpackage	P4	sn_200	Rename libwixhelper	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8365555	tools	jpackage	P3		Cleanup redundancies in jpackage implementation	UNCLASSIFIED	admitted-additive-tooling
+26	JDK-8368030	tools	jpackage	P4	sn_204	Make package bundlers stateless	UNCLASSIFIED	admitted-additive-tooling

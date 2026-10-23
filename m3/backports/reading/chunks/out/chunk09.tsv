@@ -1,0 +1,111 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+27	JDK-8369736	candidate-adapted-serviceability	hold-jep	new AOT cache MXBean in jdk.management; Leyden AOT cache (JEP 483/514) absent in 21
+27	JDK-8380641	candidate-adapted-serviceability	admitted-tests	thread dump test-library parser and tests only
+27	JDK-8381002	candidate-adapted-serviceability	hold-api	JSON thread dump emits numbers instead of strings; dump file format change
+27	JDK-8381487	candidate-adapted-serviceability	admitted-docs	format description document replaces schema file; docs only, describe the 21 format
+23	JDK-8318707	candidate-adapted-serviceability	hold-removal	removes JMX m-let API (javax.management.loading)
+23	JDK-8326666	candidate-adapted-serviceability	hold-removal	removes JMX subject delegation API
+23	JDK-8328341	candidate-adapted-serviceability	hold-removal	removes per-thread compiler stats from internal HotspotCompilation MBean
+24	JDK-8334165	candidate-adapted-serviceability	hold-removal	removes jmx.serial.form 1.0 serial-form compatibility
+24	JDK-8338603	candidate-adapted-serviceability	hold-api	changes DiagnosticCommandMBean parameter type descriptors seen by JMX clients
+24	JDK-8344177	candidate-adapted-serviceability	hold-jep	SecurityManager removal in java.management; JEP 486, SM still live in 21
+24	JDK-8344181	candidate-adapted-serviceability	hold-jep	SecurityManager removal in jdk.management and jdk.management.agent; JEP 486
+24	JDK-8344394	candidate-adapted-serviceability	hold-jep	SecurityManager removal in java.management.rmi; JEP 486
+25	JDK-8344966	candidate-adapted-serviceability	hold-removal	removes jdk.jmx.mbeans.allowNonPublic compatibility property
+25	JDK-8344969	candidate-adapted-serviceability	hold-removal	removes jmx.mxbean.multiname compatibility property
+25	JDK-8344976	candidate-adapted-serviceability	hold-removal	removes jmx.invoke.getters compatibility property
+25	JDK-8345045	candidate-adapted-serviceability	hold-removal	removes jmx.remote.x.buffer.size notification property
+25	JDK-8345048	candidate-adapted-serviceability	hold-removal	removes jmx.extend.open.types compatibility property
+25	JDK-8345049	candidate-adapted-serviceability	hold-removal	removes jmx.tabular.data.hash.map compatibility property
+25	JDK-8345079	candidate-adapted-serviceability	hold-jep	RMIConnectionImpl exception cleanup after doPrivileged removal; JEP 486 follow-up
+25	JDK-8345984	candidate-adapted-serviceability	hold-jep	removes permission-check helpers emptied by JEP 486; SM checks still live in 21
+25	JDK-8345987	candidate-adapted-serviceability	candidate-adapted	internal duplicate Util.newObjectName removal; no API change
+25	JDK-8347345	candidate-adapted-serviceability	hold-jep	policy file redundant only after JEP 486 test cleanup; verify 21 test usage first
+25	JDK-8347433	candidate-adapted-serviceability	hold-removal	deprecates DescriptorSupport XML interchange for removal
+25	JDK-8347985	candidate-adapted-serviceability	hold-jep	deprecates JMX Permission classes for removal; JEP 486, SM still live in 21
+25	JDK-8348265	candidate-adapted-serviceability	hold-jep	drops Subject.callAs on MarshalledObject in RMIConnectionImpl; JEP 486 follow-up
+25	JDK-8350571	candidate-adapted-serviceability	admitted-tests	JMX test comment cleanup only
+26	JDK-8347114	candidate-adapted-serviceability	hold-api	JMXServiceURL rejects missing protocol; public API spec change
+26	JDK-8351413	candidate-adapted-serviceability	hold-removal	removes DescriptorSupport XML constructor and toXMLString
+26	JDK-8359809	candidate-adapted-serviceability	hold-api	AttributeList, RoleList, RoleUnresolvedList reject foreign elements; public API spec change
+22	JDK-8311077	candidate-adapted-serviceability	hold-runtime	JVMTI -Wconversion cleanup; needs HotSpot build
+22	JDK-8319244	candidate-adapted-serviceability	hold-runtime	JVMTI handshakes for virtual threads; loom runtime
+22	JDK-8320239	candidate-adapted-serviceability	hold-runtime	JvmtiVTMSTransitionDisabler sync switch; loom runtime
+23	JDK-8313332	candidate-adapted-serviceability	hold-runtime	InstanceKlass jmethodID cache rework; HotSpot runtime
+23	JDK-8318563	candidate-adapted-serviceability	hold-runtime	GetClassFields field iteration perf; HotSpot JVMTI
+23	JDK-8318566	candidate-adapted-serviceability	hold-runtime	heap walking field iteration rework; HotSpot JVMTI
+23	JDK-8324241	candidate-adapted-serviceability	hold-jit	JIT always records evol_method deps (experimental flag); compiler and JVMTI coupling
+23	JDK-8324680	candidate-adapted-serviceability	hold-runtime	nullptr in generated JVMTI code; HotSpot build
+23	JDK-8325186	candidate-adapted-serviceability	hold-runtime	removes unused JVMTI virtual thread closure; HotSpot
+23	JDK-8326716	candidate-adapted-serviceability	admitted-docs	JVMTI spec wording on null pointers; spec text only
+23	JDK-8327056	candidate-adapted-serviceability	hold-runtime	JvmtiAgentList dead code removal; HotSpot
+23	JDK-8328083	candidate-adapted-serviceability	hold-removal	degrades GetObjectMonitorUsage virtual thread support; JVMTI spec change
+23	JDK-8328285	candidate-adapted-serviceability	hold-runtime	GetOwnedMonitorInfo via JvmtiHandshake; loom runtime
+23	JDK-8328758	candidate-adapted-serviceability	hold-runtime	GetCurrentContendedMonitor via JvmtiHandshake; loom runtime
+23	JDK-8329432	candidate-adapted-serviceability	hold-runtime	PopFrame and ForceEarlyReturn via JvmtiHandshake; loom runtime
+23	JDK-8329491	candidate-adapted-serviceability	hold-runtime	GetThreadListStackTraces via JvmtiHandshake; loom runtime
+23	JDK-8329674	candidate-adapted-serviceability	hold-runtime	reset_current_location via JvmtiHandshake; HotSpot JVMTI
+23	JDK-8330852	candidate-adapted-serviceability	hold-runtime	JvmtiEnvBase caller signature cleanup; HotSpot JVMTI
+23	JDK-8331683	candidate-adapted-serviceability	hold-runtime	GetCarrierThread cleanup; loom runtime
+24	JDK-8335370	candidate-adapted-serviceability	admitted-tests	warning fix in JVMTI test support header; tests only
+24	JDK-8335688	candidate-adapted-serviceability	admitted-tests	warning fixes in JVMTI native tests only
+24	JDK-8337787	candidate-adapted-serviceability	hold-runtime	warning fix for JVMTI-disabled HotSpot build
+24	JDK-8342577	candidate-adapted-serviceability	hold-runtime	JVMTI breakpoint support cleanup; HotSpot
+25	JDK-8337016	candidate-adapted-serviceability	admitted-tests	RedefineLeakThrowable test metaspace fix; test only
+25	JDK-8346143	candidate-adapted-serviceability	hold-api	adds JVMTI ClearAllFramePops function
+25	JDK-8346460	candidate-adapted-serviceability	hold-api	NotifyFramePop returns new JVMTI_ERROR_DUPLICATE; JVMTI spec change
+25	JDK-8352812	candidate-adapted-serviceability	hold-runtime	SuspendThread implementation cleanup; HotSpot JVMTI
+25	JDK-8356251	candidate-adapted-serviceability	hold-runtime	interp_only_mode cleanup; HotSpot
+25	JDK-8357673	candidate-adapted-serviceability	hold-jep	test obsolete only after JEP 491 dropped jdk.tracePinnedThreads; still valid on 21
+25	JDK-8357800	candidate-adapted-serviceability	hold-runtime	JvmtiThreadState bool field init cleanup; HotSpot
+26	JDK-8309399	candidate-adapted-serviceability	admitted-docs	JVMTI spec clarification of OPAQUE_FRAME cases; spec text only
+26	JDK-8359168	candidate-adapted-serviceability	admitted-tests	test-only revert; no-op on 21 without stdin.encoding
+26	JDK-8359707	candidate-adapted-serviceability	admitted-tests	RedefineClassHelper test library; check ClassFile API use on 21
+26	JDK-8361680	candidate-adapted-serviceability	hold-runtime	heap walk root claim value fix; HotSpot and GC interaction
+26	JDK-8364973	candidate-adapted-serviceability	admitted-tests	JVMTI stress agent for test runs; test infrastructure only
+26	JDK-8367576	candidate-adapted-serviceability	hold-runtime	unused JvmtiThreadState field removal; HotSpot
+26	JDK-8367719	candidate-adapted-serviceability	hold-runtime	JNI redefinition-aware verify refactor; HotSpot
+26	JDK-8369734	candidate-adapted-serviceability	hold-runtime	post_class_file_load_hook return value cleanup; HotSpot
+26	JDK-8371680	candidate-adapted-serviceability	hold-runtime	unused JVMTI VM operation removal; HotSpot
+27	JDK-8376956	candidate-adapted-serviceability	hold-runtime	JVMTI phase changes in hs_err event log; HotSpot
+27	JDK-8382306	candidate-adapted-serviceability	hold-runtime	JvmtiTagMap debug check removal; HotSpot
+27	JDK-8385583	candidate-adapted-serviceability	hold-native	RISC-V stepping perf fix; arch-specific HotSpot build
+22	JDK-8193513	candidate-adapted-serviceability	hold-api	adds LogClassLoadingCauseFor flag and class+load+cause log tags
+22	JDK-8250269	candidate-adapted-serviceability	hold-runtime	HotSpot-wide alignas cleanup; needs HotSpot build
+22	JDK-8261894	candidate-adapted-serviceability	hold-removal	removes -XX:+UseSHM option
+22	JDK-8281455	candidate-adapted-serviceability	hold-gc-matrix	GC flag types narrowed to 32 bits across collectors
+22	JDK-8292692	candidate-adapted-serviceability	hold-runtime	MethodCounters header refactor; HotSpot
+22	JDK-8298443	candidate-adapted-serviceability	hold-removal	JDK 22 expired-flag removal; version-specific
+22	JDK-8299825	candidate-adapted-serviceability	hold-runtime	unified logging StdoutLog/StderrLog move; HotSpot
+22	JDK-8299915	candidate-adapted-serviceability	hold-removal	removes ArrayAllocatorMallocLimit flag
+22	JDK-8301327	candidate-adapted-serviceability	hold-native	Windows IDIV exception handler assert to guarantee; OS-specific
+22	JDK-8303852	candidate-adapted-serviceability	hold-runtime	stack region query dedupe across os ports; HotSpot
+22	JDK-8304939	candidate-adapted-serviceability	hold-native	Windows exit_process_or_thread noreturn; OS-specific
+22	JDK-8305506	candidate-adapted-serviceability	hold-api	SafepointTimeoutDelay becomes fractional; command-line option change
+22	JDK-8305507	candidate-adapted-serviceability	hold-api	adds AbortVMOnSafepointTimeoutDelay flag
+22	JDK-8305753	candidate-adapted-serviceability	hold-runtime	JIT enabled during CDS static dump; HotSpot CDS
+22	JDK-8306582	candidate-adapted-serviceability	hold-runtime	CDS static dump exit path cleanup; HotSpot
+22	JDK-8307312	candidate-adapted-serviceability	hold-runtime	constantPool parameter rename; HotSpot
+22	JDK-8307356	candidate-adapted-serviceability	hold-runtime	Metaspace BinList simplification; HotSpot
+22	JDK-8307907	candidate-adapted-serviceability	hold-removal	removes RTM locking on ppc
+22	JDK-8308463	candidate-adapted-serviceability	hold-runtime	CDS regenerated lambda form class refactor; HotSpot
+22	JDK-8308603	candidate-adapted-serviceability	hold-runtime	MetaspaceClosure cleanup for CDS; HotSpot
+22	JDK-8308850	candidate-adapted-serviceability	hold-runtime	runtime flag types narrowed to 32 bits; HotSpot
+22	JDK-8308903	candidate-adapted-serviceability	hold-runtime	CDS map log detail for archived objects; HotSpot
+22	JDK-8309034	candidate-adapted-serviceability	hold-runtime	box cache class init failure fix from fuzzing; HotSpot
+22	JDK-8309240	candidate-adapted-serviceability	hold-runtime	dynamic CDS archive stores array classes; HotSpot CDS
+22	JDK-8309599	candidate-adapted-serviceability	hold-runtime	WeakHandle and OopHandle release clear pointer; GC interaction
+22	JDK-8309692	candidate-adapted-serviceability	hold-runtime	javaClasses -Wconversion cleanup; HotSpot
+22	JDK-8309753	candidate-adapted-serviceability	hold-runtime	PrintSharedArchiveAndExit lists array classes; HotSpot CDS
+22	JDK-8309878	candidate-adapted-serviceability	hold-runtime	header include reduction; HotSpot build
+22	JDK-8310076	candidate-adapted-serviceability	hold-runtime	header include reduction; HotSpot build
+22	JDK-8310107	candidate-adapted-serviceability	hold-runtime	page size trace naming; HotSpot
+22	JDK-8310146	candidate-adapted-serviceability	hold-runtime	unused PerfData field removal; HotSpot
+22	JDK-8310170	candidate-adapted-serviceability	hold-runtime	outputStream indent perf; HotSpot utility
+22	JDK-8310225	candidate-adapted-serviceability	hold-runtime	header include reduction; HotSpot build
+22	JDK-8310276	candidate-adapted-serviceability	hold-native	RISC-V shadd use; arch-specific HotSpot build
+22	JDK-8310332	candidate-adapted-serviceability	hold-runtime	MethodData -Wconversion cleanup; HotSpot
+22	JDK-8310494	candidate-adapted-serviceability	hold-runtime	instanceKlass header include cleanup; HotSpot build
+22	JDK-8310510	candidate-adapted-serviceability	hold-runtime	WordsPerLong removal; HotSpot
+22	JDK-8310577	candidate-adapted-serviceability	hold-runtime	interpreter and oops -Wconversion cleanup; HotSpot
+22	JDK-8310644	candidate-adapted-serviceability	hold-preview	FFM arena close via async handshakes; FFM preview in 21, HotSpot change

@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+24	JDK-8334299	hotspot	runtime	P4	lilliput,release-note=yes,sync	Deprecate LockingMode option, along with LM_LEGACY and LM_MONITOR	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8334357	hotspot	runtime	P4	logging	Use NonInterleavingLogStream for report_metadata_oome	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8334392	hotspot	runtime	P4	nmt	Switch RNG in NMT's treap	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8334489	hotspot	runtime	P4	containers,os	Add function os::used_memory	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335059	hotspot	runtime	P4	classloading	Consider renaming ClassLoaderData::keep_alive	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335062	hotspot	runtime	P4	nmt	NMT: Make StackIndex non-opaque	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335091	hotspot	runtime	P4	nmt	NMT: VMATree reserve_mapping and commit_mapping APIs need MEMFLAGS while un/-committing API has no MEMFLAGS arg 	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335397	hotspot	runtime	P4	jdk23u-fix-request,jdk23u-fix-yes,noreg-self,sync	Improve reliability of TestRecursiveMonitorChurn.java	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335583	hotspot	runtime	P4	cds	Avoid using pointers in CDS tables	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335591	hotspot	runtime	P4		Fix -Wzero-as-null-pointer-constant warnings in ConcurrentHashTable	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335946	hotspot	runtime	P4	dtrace	DTrace code snippets should be generated when DTrace flags are enabled	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336080	hotspot	runtime	P4	classloading	Fix -Wzero-as-null-pointer-constant warnings in ClassLoaderStats ctor	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336081	hotspot	runtime	P4		Fix -Wzero-as-null-pointer-constant warnings in JVMTypedFlagLimit ctors	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336082	hotspot	runtime	P4		Fix -Wzero-as-null-pointer-constant warnings in SimpleCompactHashtable	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336085	hotspot	runtime	P4		Fix simple -Wzero-as-null-pointer-constant warnings in CDS code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336103	hotspot	runtime	P4	amazon-interest,cleanup	Clean up confusing Method::is_initializer	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336152	hotspot	runtime	P4	cleanup	Remove unused forward declaration in classLoadInfo.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336289	hotspot	runtime	P4		Obliterate most references to _snprintf in the Windows JDK	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336468	hotspot	runtime	P4	amazon-interest,reflection	Reflection and MethodHandles should use more precise initializer checks	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336796	hotspot	runtime	P4	jni,noreg-doc	Clean up the JNI specification for MonitorEnter and MonitorExit	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8336919	hotspot	runtime	P4	classloading	Cleanup and rename tags in placeholders code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337239	hotspot	runtime	P4		Fix simple -Wzero-as-null-pointer-constant warnings in classfile code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337416	hotspot	runtime	P4		Fix -Wzero-as-null-pointer-constant warnings in misc. runtime code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337418	hotspot	runtime	P4	cleanup	Fix -Wzero-as-null-pointer-constant warnings in prims code 	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337515	hotspot	runtime	P4	noreg-cleanup	JVM_DumpAllStacks is dead code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337550	hotspot	runtime	P4	cleanup,noreg-self	Add documentation to TestOutOfMemoryDuringInit.java	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337563	hotspot	runtime	P4	cleanup,nmt	NMT: rename MEMFLAGS to MemTag	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337595	hotspot	runtime	P4	cleanup,metaspace,sonarcloud-found,starter	Remove empty statements in src/hotspot/share/memory/metaspace	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337657	hotspot	runtime	P4	amazon-interest,jdk21u-fix-no,jdk21u-fix-request,jni,sync	AArch64: No need for acquire fence in safepoint poll during JNI calls	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337683	hotspot	runtime	P4	cleanup	Fix -Wconversion problem with arrayOop.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337782	hotspot	runtime	P4		Use THROW_NULL instead of THROW_0 in pointer contexts in prims code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337783	hotspot	runtime	P4		Use THROW_NULL instead of THROW_0 in pointer contexts in misc runtime code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337784	hotspot	runtime	P4		Fix simple -Wzero-as-null-pointer-constant warnings in linux/posix code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337785	hotspot	runtime	P4		Fix simple -Wzero-as-null-pointer-constant warnings in x86 code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337786	hotspot	runtime	P4	cleanup	Fix simple -Wzero-as-null-pointer-constant warnings in aarch64 code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337828	hotspot	runtime	P4	cds	CDS: Trim down minimum GC region alignment	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338011	hotspot	runtime	P4	archived-heap,cds	CDS archived heap object support for 64-bit Windows	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338019	hotspot	runtime	P4	cleanup	Fix simple -Wzero-as-null-pointer-constant warnings in riscv code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338155	hotspot	runtime	P4		Fix -Wzero-as-null-pointer-constant warnings involving PTHREAD_MUTEX_INITIALIZER	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338330	hotspot	runtime	P4	cleanup,utils	Fix -Wzero-as-null-pointer-constant warnings from THROW_XXX_0	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338331	hotspot	runtime	P4	cleanup,jni	Fix -Wzero-as-null-pointer-constant warnings from CHECK_0 in jni.cpp	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338383	hotspot	runtime	P2	loom	Implement JEP 491: Synchronize Virtual Threads without Pinning	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338447	hotspot	runtime	P4	metadata	Remove InstanceKlass::_is_marked_dependent	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338526	hotspot	runtime	P4	lilliput,metadata	Don't store abstract and interface Klasses in class metaspace	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338530	hotspot	runtime	P4	cds	CDS warning Skipping java/lang/invoke/BoundMethodHandle$Species_LLLL	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338727	hotspot	runtime	P4	oraclejdk-na	RISC-V: Avoid synthetic data dependency in nmethod barrier on Ztso	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338760	hotspot	runtime	P4		Adjust the comment after UseObjectMonitorTable	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338851	hotspot	runtime	P4	os	Hoist os::Posix::realpath() to os::realpath() and implement on Windows	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338912	hotspot	runtime	P4	cds	CDS: Segmented roots array	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338947	hotspot	runtime	P4	cmd	Deprecate the UseLinuxPosixThreadCPUClocks flag and remove it in a future release	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8339030	hotspot	runtime	P4	stack	frame::print_value_on(outputStream* st, JavaThread *thread) doesn't need thread argument	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8339112	hotspot	runtime	P4	metadata	Move JVM Klass flags out of AccessFlags	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8339342	hotspot	runtime	P4	classloading,cleanup	FieldAllocationCount is mostly unused	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8339540	hotspot	runtime	P4	os	Unify include requirements for PlatformMonitor/Mutex constructors/destructors	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8339771	hotspot	runtime	P5	oraclejdk-na	RISC-V: Reduce icache flushes	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8339983	hotspot	runtime	P4	c1,interpreter,oraclejdk-na	[s390x] secondary_super_cache does not scale well: C1 and interpreter	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340102	hotspot	runtime	P4	leyden	Move assert-only loop in OopMapSort::sort under debug macro	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340103	hotspot	runtime	P4	nmt	Add internal set_flag function to VMATree	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340105	hotspot	runtime	P4		Expose BitMap::print_on in release builds	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340119	hotspot	runtime	P4		Remove oopDesc::size_might_change()	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340166	hotspot	runtime	P4	cds	[REDO] CDS: Trim down minimum GC region alignment	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340171	hotspot	runtime	P4	cds	CDS: Enhance bitmap truncation	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340177	hotspot	runtime	P4	parser,verifier	Malformed system classes loaded by bootloader crash the JVM in product builds	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340241	hotspot	runtime	P4	oraclejdk-na	RISC-V: Returns mispredicted	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340353	hotspot	runtime	P4	coops	Remove CompressedOops::ptrs_base	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340392	hotspot	runtime	P4		Handle OopStorage in location decoder	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340436	hotspot	runtime	P4		Remove unused CompressedOops::AnyNarrowOopMode	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340491	hotspot	runtime	P3	threads	Thread stack-base assertion should report which thread has the un-set stack	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340524	hotspot	runtime	P4	cleanup	Remove NarrowPtrStruct	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340620	hotspot	runtime	P4	coops	Fix -Wzero-as-null-pointer-constant warnings for CompressedOops	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340731	hotspot	runtime	P4	cleanup	Cleanup remaining IA64 references in hotspot code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340796	hotspot	runtime	P4	sync	Use a consistent order when loading cxq and EntryList	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340864	hotspot	runtime	P4	cleanup	Remove unused lines related to vmClasses	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8340880	hotspot	runtime	P4	oraclejdk-na	RISC-V: add t3-t6 alias into assemler_riscv.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341013	hotspot	runtime	P4		Optimize x86/aarch64 MD5 intrinsics by reducing data dependency	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341015	hotspot	runtime	P4		OopStorage location decoder crashes accessing non-initalized OopStorage	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341094	hotspot	runtime	P4	classloading,cleanup	Clean up relax_verify in ClassFileParser	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341168	hotspot	runtime	P4	cleanup	Cleanup dead code after JDK-8322630	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341334	hotspot	runtime	P4	cds,leyden	CDS: Parallel relocation	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341336	hotspot	runtime	P4	cleanup	Fix -Wzero-as-null-pointer-constant warnings in PRODUCT-only code	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341413	hotspot	runtime	P4		Stop including osThread_os.hpp in the middle of the OSThread class	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341513	hotspot	runtime	P4	cleanup,starter,threads	Remove the unused thread_type field from OSThread	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341553	hotspot	runtime	P3	cds,lilliput,release-note=yes	Remove UseCompactObjectHeaders extra CDS archives	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341622	hotspot	runtime	P4	logging	Tag-specific disabled default decorators for UnifiedLogging	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341633	hotspot	runtime	P4	utils	StatSampler::assert_system_property: Print the keys and values of the assert 	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341708	hotspot	runtime	P4	amazon-interest,safepoint	Optimize safepoint poll encoding with smaller poll data offset	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341913	hotspot	runtime	P4	archive-heap,cds,oraclejdk-na	Support CDS heap dumping for Shenandoah and Epsilon	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341916	hotspot	runtime	P3	classloading,jep486,problemlist	Remove ProtectionDomain related hotspot code and tests	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8341931	hotspot	runtime	P4	cpp	os_linux gtest uses lambdas with explicit capture lists	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8342011	hotspot	runtime	P4	coops,memory	Conditionally compile ReservedHeapSpace compressed heap support	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8342089	hotspot	runtime	P3	cds,conformance,tck-red-24	Require --enable-native-access to be the same between CDS dump time and run time	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8342540	hotspot	runtime	P4	noreg-self	InterfaceCalls micro-benchmark gives misleading results	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8342561	hotspot	runtime	P4	metaspace	Metaspace for generated reflection classes is no longer needed	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8342882	hotspot	runtime	P4	oraclejdk-na	RISC-V: Unify handling of jumps to runtime	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8342953	hotspot	runtime	P4	oraclejdk-na	RISC-V: Fix definition of RISCV_HWPROBE_EXT_ZVFHMIN	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343030	hotspot	runtime	P4	oraclejdk-na	RISC-V: Small assembler cleanups	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343115	hotspot	runtime	P4	cleanup	SkipIfEqual class is not used after JDK-8335946	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343167	hotspot	runtime	P4	interpreter	Unnecessary define checks in InterpreterRuntime after JDK-8199809	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343493	hotspot	runtime	P4	cds	Perform module checks during MetaspaceShared::map_archives()	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343703	hotspot	runtime	P4	cleanup	Symbol name cleanups after JEP 479	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343756	hotspot	runtime	P3		CAN_SHOW_REGISTERS_ON_ASSERT for Windows	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343783	hotspot	runtime	P4		Improve asserts in concurrentHashTable.inline.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343800	hotspot	runtime	P4	cleanup	Cleanup definition of NULL_WORD	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343801	hotspot	runtime	P4	noreg-self	Change string printed by nsk_null_string for null strings	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343931	hotspot	runtime	P4		Removed unused code in CompressedKlassPointers::initialize_for_given_encoding	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8343957	hotspot	runtime	P4	sync	Rename ObjectMonitor::owner_from() and JavaThread::_lock_id	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8344247	hotspot	runtime	P4	loom,sync	Move objectWaiter field to VirtualThread instance	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8344356	hotspot	runtime	P4	interpreter	Aarch64: implement -XX:+VerifyActivationFrameSize	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8344445	hotspot	runtime	P4	metadata,noreg-cleanup	MethodCounters don't need a vptr	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8344479	hotspot	runtime	P4	cleanup,starter	Declare MetaspaceObj::operator delete to be deleted	UNCLASSIFIED	candidate-adapted-serviceability

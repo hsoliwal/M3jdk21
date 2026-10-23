@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+22	JDK-8308591	core-libs	java.io	P4	release-note=yes	JLine as the default Console provider	UNCLASSIFIED	candidate-adapted
+22	JDK-8310530	core-libs	java.io	P4		PipedOutputStream.flush() accesses sink racily	UNCLASSIFIED	candidate-adapted
+22	JDK-8311489	core-libs	java.io	P4	noreg-cleanup	Remove unused dirent_md files	UNCLASSIFIED	candidate-adapted
+23	JDK-8305457	core-libs	java.io	P3		Implement java.io.IO	UNCLASSIFIED	candidate-adapted
+23	JDK-8320971	core-libs	java.io	P4		Use BufferedInputStream.buf directly when param of implTransferTo() is trusted	UNCLASSIFIED	candidate-adapted
+23	JDK-8325152	core-libs	java.io	P4	noreg-doc	Clarify specification of java.io.RandomAccessFile.setLength	UNCLASSIFIED	candidate-adapted
+23	JDK-8325340	core-libs	java.io	P4	noreg-perf	Add ASCII fast-path to Data-/ObjectInputStream.readUTF	UNCLASSIFIED	candidate-adapted
+23	JDK-8330276	core-libs	java.io	P4	release-note=yes	Console methods with explicit Locale	UNCLASSIFIED	candidate-adapted
+24	JDK-8003887	core-libs	java.io	P3	netbeans,noreg-hard	File.getCanonicalFile() does not resolve symlinks on MS Windows	UNCLASSIFIED	candidate-adapted
+24	JDK-8339699	core-libs	java.io	P4		Optimize DataOutputStream writeUTF	UNCLASSIFIED	candidate-adapted
+24	JDK-8340232	core-libs	java.io	P4		Optimize DataInputStream::readUTF	UNCLASSIFIED	candidate-adapted
+24	JDK-8341566	core-libs	java.io	P4	performance,release-note=yes	Add Reader.of(CharSequence)	UNCLASSIFIED	candidate-adapted
+24	JDK-8341975	core-libs	java.io	P4		Unable to set encoding for IO.println, IO.print and IO.readln	UNCLASSIFIED	candidate-adapted
+24	JDK-8343039	core-libs	java.io	P4	noreg-other	Remove jdk.internal.misc.InternalLock and usages from java.io	UNCLASSIFIED	candidate-adapted
+25	JDK-8351435	core-libs	java.io	P4	release-note=yes	Change the default Console implementation back to the built-in one in `java.base` module	UNCLASSIFIED	candidate-adapted
+25	JDK-8354724	core-libs	java.io	P4	release-note=yes	Methods in java.io.Reader to read all characters and all lines	UNCLASSIFIED	candidate-adapted
+25	JDK-8356985	core-libs	java.io	P4		Use "stdin.encoding" in Console's read*() methods	UNCLASSIFIED	candidate-adapted
+26	JDK-8358533	core-libs	java.io	P4	noreg-perf	Improve performance of java.io.Reader.readAllLines	UNCLASSIFIED	candidate-adapted
+26	JDK-8368846	core-libs	java.io	P4	amazon-interest,skip,test-fail,tier2	java/io/File/createTempFile/TargetDirectory fails when run by root user	UNCLASSIFIED	candidate-adapted
+26	JDK-8370387	core-libs	java.io	P4	InterruptedIOException,noreg-other,release-note=yes	Remove handling of InterruptedIOException from java.io classes	UNCLASSIFIED	candidate-adapted
+27	JDK-8373647	core-libs	java.io	P4	sap-aix-na	Avoid fstat when opening file for write with RandomAccessFile or FileOutputStream	UNCLASSIFIED	candidate-adapted
+22	JDK-8309688	core-libs	java.io:serialization	P4	google-interest	Data race on java.io.ClassCache$CacheRef.strongReferent	UNCLASSIFIED	candidate-adapted
+23	JDK-8275338	core-libs	java.io:serialization	P4		Add JFR events for notable serialization situations	UNCLASSIFIED	candidate-adapted
+23	JDK-8327225	core-libs	java.io:serialization	P4		Revert DataInputStream.readUTF to static final	UNCLASSIFIED	candidate-adapted
+24	JDK-8333796	core-libs	java.io:serialization	P4	release-note=yes	Add missing serialization functionality to sun.reflect.ReflectionFactory	UNCLASSIFIED	candidate-adapted
+24	JDK-8337840	core-libs	java.io:serialization	P5	noreg-cleanup	Remove redundant null check in ObjectOutputStream.writeProxyDesc	UNCLASSIFIED	candidate-adapted
+25	JDK-8356694	core-libs	java.io:serialization	P4		Removed unused subclass audits in ObjectInput/OutputStream	UNCLASSIFIED	candidate-adapted
+22	JDK-8306650	core-libs	java.lang.classfile	P4	classfile-api	Improve control of stack maps generation in Classfile API	UNCLASSIFIED	candidate-adapted
+22	JDK-8309838	core-libs	java.lang.classfile	P4	classfile-api	Classfile API Util.toBinaryName and other cleanup	UNCLASSIFIED	candidate-adapted
+22	JDK-8311084	core-libs	java.lang.classfile	P4	classfile-api	Add typeSymbol() API for applicable constant pool entries	UNCLASSIFIED	candidate-adapted
+22	JDK-8313452	core-libs	java.lang.classfile	P4	classfile-api	Improve Classfile API attributes handling safety	UNCLASSIFIED	candidate-adapted
+22	JDK-8315678	core-libs	java.lang.classfile	P4	classfile-api	Classfile API ConstantPool::entryCount and ConstantPool::entryByIndex methods are confusing	UNCLASSIFIED	candidate-adapted
+22	JDK-8316587	core-libs	java.lang.classfile	P4	classfile-api	Use ArraysSupport.vectorizedHashCode in Utf8EntryImpl	UNCLASSIFIED	candidate-adapted
+23	JDK-8320396	core-libs	java.lang.classfile	P3	classfile-api	Class-File API ClassModel::verify should include checks from hotspot/share/classfile/classFileParser.cpp 	UNCLASSIFIED	candidate-adapted
+23	JDK-8322847	core-libs	java.lang.classfile	P4	classfile-api,noreg-doc	java.lang.classfile.BufWriter should specify @throws for its writeXXX methods	UNCLASSIFIED	candidate-adapted
+23	JDK-8323058	core-libs	java.lang.classfile	P3	classfile-api	Revisit j.l.classfile.CodeBuilder API surface	UNCLASSIFIED	candidate-adapted
+23	JDK-8323183	core-libs	java.lang.classfile	P4	classfile-api	ClassFile API performance improvements	UNCLASSIFIED	candidate-adapted
+23	JDK-8323707	core-libs	java.lang.classfile	P4	classfile-api	Adjust Classfile API's type arg model to better represent the embodied type	UNCLASSIFIED	candidate-adapted
+23	JDK-8331291	core-libs	java.lang.classfile	P4		java.lang.classfile.Attributes class performs a lot of static initializations	UNCLASSIFIED	candidate-adapted
+23	JDK-8331744	core-libs	java.lang.classfile	P4		java.lang.classfile.TypeKind improvements	UNCLASSIFIED	candidate-adapted
+23	JDK-8332597	core-libs	java.lang.classfile	P4		Remove redundant methods from j.l.classfile.ClassReader API	UNCLASSIFIED	candidate-adapted
+23	JDK-8332614	core-libs	java.lang.classfile	P4		Type-checked ConstantPool.entryByIndex and ClassReader.readEntryOrNull	UNCLASSIFIED	candidate-adapted
+24	JDK-8317356	core-libs	java.lang.classfile	P4	classfile-api	Fix missing null checks in the ClassFile API	UNCLASSIFIED	candidate-adapted
+24	JDK-8335290	core-libs	java.lang.classfile	P4		Rename ClassFile::transform to ClassFile::transformClass	UNCLASSIFIED	candidate-adapted
+24	JDK-8335642	core-libs	java.lang.classfile	P4	noreg-cleanup	Hide Transform implementation for Class-File API	UNCLASSIFIED	candidate-adapted
+24	JDK-8335905	core-libs	java.lang.classfile	P4		CompoundElement API cleanup	UNCLASSIFIED	candidate-adapted
+24	JDK-8335927	core-libs	java.lang.classfile	P4		Revisit AnnotationConstantValueEntry and AnnotationValue.OfConstant	UNCLASSIFIED	candidate-adapted
+24	JDK-8335938	core-libs	java.lang.classfile	P4		Review XxxBuilder.original and XxxModel.parent	UNCLASSIFIED	candidate-adapted
+24	JDK-8335939	core-libs	java.lang.classfile	P3		Hide element writing across the ClassFile API	UNCLASSIFIED	candidate-adapted
+24	JDK-8336756	core-libs	java.lang.classfile	P4	noreg-cleanup	Improve ClassFile Annotation writing	UNCLASSIFIED	candidate-adapted
+24	JDK-8339217	core-libs	java.lang.classfile	P4		Optimize ClassFile API loadConstant	UNCLASSIFIED	candidate-adapted
+24	JDK-8339260	core-libs	java.lang.classfile	P4		Move rarely used constants out of ClassFile	UNCLASSIFIED	candidate-adapted
+24	JDK-8339317	core-libs	java.lang.classfile	P4		Optimize ClassFile writeBuffer	UNCLASSIFIED	candidate-adapted
+24	JDK-8339401	core-libs	java.lang.classfile	P4		Optimize ClassFile load and store instructions	UNCLASSIFIED	candidate-adapted
+24	JDK-8342336	core-libs	java.lang.classfile	P4	noreg-cleanup	Optimize ClassFile imports	UNCLASSIFIED	candidate-adapted
+24	JDK-8343881	core-libs	java.lang.classfile	P4	dcsaw,reproducer-other,webbug	java.lang.classfile.Attribute  attributeName() method should return Utf8Entry	UNCLASSIFIED	candidate-adapted
+25	JDK-8342206	core-libs	java.lang.classfile	P4		Convenience method to check if a constant pool entry matches nominal descriptors	UNCLASSIFIED	candidate-adapted
+25	JDK-8345773	core-libs	java.lang.classfile	P3	hgupdate-sync,jdk24-enhancement-request,jdk24-enhancement-yes	Class-File API debug printing capability	UNCLASSIFIED	candidate-adapted
+26	JDK-8350938	core-libs	java.lang.classfile	P5	noreg-perf,starter	ResourceParsingClassHierarchyResolver inflates all Utf8 CP entries	UNCLASSIFIED	candidate-adapted
+26	JDK-8354871	core-libs	java.lang.classfile	P4	amazon-interest,noreg-cleanup,starter	Replace stack map frame type magics with constants	UNCLASSIFIED	candidate-adapted
+26	JDK-8361526	core-libs	java.lang.classfile	P4		Synchronize ClassFile API verifier with hotspot	UNCLASSIFIED	candidate-adapted
+26	JDK-8367585	core-libs	java.lang.classfile	P4		Prevent creation of unrepresentable Utf8Entry	UNCLASSIFIED	candidate-adapted
+27	JDK-8341272	core-libs	java.lang.classfile	P4	starter,starter-api	Factory to create wide iinc instruction with small arguments	UNCLASSIFIED	candidate-adapted
+24	JDK-8344231	core-libs	java.lang.module	P4	jep486,noreg-cleanup	SecurityManager cleanup in java.lang.module and jdk.internal.module	UNCLASSIFIED	candidate-adapted
+24	JDK-8345075	core-libs	java.lang.module	P4	noreg-cleanup	java.lang.module.ModuleDescriptor constructor could be made private	UNCLASSIFIED	candidate-adapted
+27	JDK-8377244	core-libs	java.lang.module	P4	noreg-cleanup,test	Update ModuleReaderTest to JUnit prior to making changes	UNCLASSIFIED	candidate-adapted
+27	JDK-8377362	core-libs	java.lang.module	P4	lworld,noreg-cleanup,test	[lworld] CLONE - Update ModuleReaderTest to JUnit prior to making changes	UNCLASSIFIED	candidate-adapted
+27	JDK-8381710	core-libs	java.lang.module	P4	cds,leyden	Avoid using lambdas in ModuleBootstrap in AOT training mode	UNCLASSIFIED	candidate-adapted
+22	JDK-8318476	core-libs	java.math	P4	doc-only,noreg-doc	Add resource consumption note to BigInteger and BigDecimal	UNCLASSIFIED	candidate-adapted
+23	JDK-8331907	core-libs	java.math	P4	noreg-perf	BigInteger and BigDecimal should use optimized division	UNCLASSIFIED	candidate-adapted
+24	JDK-8334755	core-libs	java.math	P4	dcsaw,dcslnk,reproducer-other,webbug	Asymptotically faster implementation of square root algorithm	UNCLASSIFIED	candidate-adapted
+24	JDK-8336274	core-libs	java.math	P4	numerics	MutableBigInteger.leftShift(int) optimization	UNCLASSIFIED	candidate-adapted
+24	JDK-8341470	core-libs	java.math	P4	numerics	BigDecimal.stripTrailingZeros() optimization	UNCLASSIFIED	candidate-adapted
+25	JDK-8341402	core-libs	java.math	P4	dcsas,numerics,reproducer-other,webbug	BigDecimal's square root optimization	UNCLASSIFIED	candidate-adapted
+25	JDK-8355300	core-libs	java.math	P4	noreg	Add final to BitSieve	UNCLASSIFIED	candidate-adapted
+25	JDK-8355719	core-libs	java.math	P4	numerics	Reduce memory consumption of BigInteger.pow()	UNCLASSIFIED	candidate-adapted
+25	JDK-8356709	core-libs	java.math	P4		Avoid redundant String formatting in BigDecimal.valueOf(double)	UNCLASSIFIED	candidate-adapted
+25	JDK-8356891	core-libs	java.math	P4	dcspt,noreg-cleanup,numerics,webbug	Some code simplifications in BigInteger	UNCLASSIFIED	candidate-adapted
+26	JDK-8077587	core-libs	java.math	P4	numerics,webbug	BigInteger Roots	UNCLASSIFIED	candidate-adapted
+26	JDK-8357913	core-libs	java.math	P4	noreg-trivial,numeric	Add `@Stable` to BigInteger and BigDecimal	UNCLASSIFIED	candidate-adapted
+26	JDK-8358804	core-libs	java.math	P4	doc-only,noreg-doc,numerics	Improve the API Note of BigDecimal.valueOf(double)	UNCLASSIFIED	candidate-adapted
+26	JDK-8365832	core-libs	java.math	P4		Optimize FloatingDecimal and DigitList with byte[] and cleanup	UNCLASSIFIED	candidate-adapted
+26	JDK-8368968	core-libs	java.math	P4	numerics	FloatingDecimal: Clean up unused code	UNCLASSIFIED	candidate-adapted
+26	JDK-8370628	core-libs	java.math	P4	numerics	Rename BigInteger::nthRoot to rootn, and similarly for nthRootAndRemainder	UNCLASSIFIED	candidate-adapted
+27	JDK-8366478	core-libs	java.math	P4	numerics	BigDecimal roots	UNCLASSIFIED	candidate-adapted
+27	JDK-8374202	core-libs	java.math	P5	noreg-cleanup	Simplify significand normalization in BigDecimal(double, MathContext) constructor	UNCLASSIFIED	candidate-adapted
+22	JDK-8272215	core-libs	java.net	P4	dcsaw,reproducer-no,webbug	Add InetAddress methods for parsing IP address literals	UNCLASSIFIED	candidate-adapted
+22	JDK-8308995	core-libs	java.net	P4	noreg-other	Update Network IO JFR events to be static mirror events	UNCLASSIFIED	candidate-adapted
+22	JDK-8309910	core-libs	java.net	P4	httpclient,noreg-cleanup	Introduce jdk.internal.net.http.HttpConnection.getSNIServerNames() method	UNCLASSIFIED	candidate-adapted
+22	JDK-8313948	core-libs	java.net	P5		Remove unnecessary static fields defaultUpper/defaultLower in sun.net.PortConfig	UNCLASSIFIED	candidate-adapted
+22	JDK-8314261	core-libs	java.net	P5		Make fields final in sun.net.www	UNCLASSIFIED	candidate-adapted
+22	JDK-8314774	core-libs	java.net	P4		Optimize URLEncoder	UNCLASSIFIED	candidate-adapted
+22	JDK-8314877	core-libs	java.net	P5		Make fields final in 'java.net' package	UNCLASSIFIED	candidate-adapted
+22	JDK-8315098	core-libs	java.net	P4		Improve URLEncodeDecode microbenchmark	UNCLASSIFIED	candidate-adapted
+22	JDK-8316433	core-libs	java.net	P4	noreg-perf	net.dll should delay load winhttp.dll	UNCLASSIFIED	candidate-adapted
+22	JDK-8316681	core-libs	java.net	P4		Rewrite URLEncoder.encode to use small reusable buffers	UNCLASSIFIED	candidate-adapted
+22	JDK-8317246	core-libs	java.net	P4		Cleanup java.net.URLEncoder and URLDecoder use of file.encoding property	UNCLASSIFIED	candidate-adapted
+22	JDK-8317866	core-libs	java.net	P4		replace NET_SocketAvailable	UNCLASSIFIED	candidate-adapted
+23	JDK-8216984	core-libs	java.net	P3	noreg-doc,socketimpl	Deprecate for removal Socket constructors to create UDP sockets	UNCLASSIFIED	candidate-adapted
+23	JDK-8278353	core-libs	java.net	P4		Provide Duke as default favicon in Simple Web Server	UNCLASSIFIED	candidate-adapted
+23	JDK-8306928	core-libs	java.net	P5	noreg-cleanup	Duplicate variable assignement in jdk.internal.net.http.AuthenticationFilter#getCredentials	UNCLASSIFIED	candidate-adapted
+23	JDK-8309259	core-libs	java.net	P5	noreg-cleanup	Reduce calls to MethodHandles.lookup() in jdk.internal.net.http.Stream	UNCLASSIFIED	candidate-adapted
+23	JDK-8312444	core-libs	java.net	P5		Delete unused parameters and variables in SocketPermission	UNCLASSIFIED	candidate-adapted
+23	JDK-8315767	core-libs	java.net	P3		InetAddress: constructing objects from BSD literal addresses	UNCLASSIFIED	candidate-adapted
+23	JDK-8327738	core-libs	java.net	P4	noreg-cleanup	Remove unused internal method sun.n.w.p.h.HttpURLConnection.setDefaultAuthenticator	UNCLASSIFIED	candidate-adapted
+23	JDK-8327991	core-libs	java.net	P3	httpclient,noreg-doc	Improve HttpClient documentation with regard to reclaiming resources	UNCLASSIFIED	candidate-adapted
+23	JDK-8329662	core-libs	java.net	P4	httpclient,test-only	Add a test to verify the behaviour of the default HEAD() method on HttpRequest.Builder	UNCLASSIFIED	candidate-adapted
+23	JDK-8329733	core-libs	java.net	P4	noreg-doc	Update the documentation in java.net.SocketOptions to direct to java.net.StandardSocketOptions	UNCLASSIFIED	candidate-adapted
+23	JDK-8329745	core-libs	java.net	P4	noreg-doc	Update the documentation of ServerSocket and Socket to refer to StandardSocketOptions instead of legacy SocketOptions	UNCLASSIFIED	candidate-adapted
+23	JDK-8329825	core-libs	java.net	P4	noreg-doc	Clarify the value type for java.net.SocketOptions.SO_LINGER	UNCLASSIFIED	candidate-adapted

@@ -1,0 +1,18 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+24	JDK-8341100	candidate-high-risk	admitted-docs	doc-only javadoc index entries in java.lang.Class
+25	JDK-8297271	candidate-high-risk	hold-api	adds public AccessFlag.maskToAccessFlags overload taking ClassFileFormatVersion
+25	JDK-8347063	candidate-high-risk	admitted-docs	noreg-doc comments in ClassFileFormatVersion only
+25	JDK-8347397	candidate-high-risk	candidate-adapted	internal cleanup of leftover reflection code, no API change
+25	JDK-8347471	candidate-high-risk	hold-api	adds public AccessFlag.Location flags and flagsMask methods
+25	JDK-8350704	candidate-high-risk	admitted-tests	new tests for core reflection failure behaviour
+26	JDK-8353835	candidate-high-risk	hold-jep	JEP 500 integrity-by-default final field mutation warnings and new command-line option
+26	JDK-8370839	candidate-high-risk	admitted-tests	tests for Proxy dispatching behaviour only
+26	JDK-8371319	candidate-high-risk	candidate-adapted	identity short-circuit in Method.equals, internal and noreg-perf
+27	JDK-8357728	candidate-high-risk	candidate-adapted	internal Parameter name caching fix for synthesized argN names
+27	JDK-8373125	candidate-high-risk	candidate-measured	changes Field and Parameter toString output for odd modifier bits, caller visible
+27	JDK-8380074	candidate-high-risk	candidate-adapted	noreg-cleanup routing Class.isNestmateOf through existing Reflection.areNestMates
+22	JDK-8309976	candidate-measured	admitted-tests	JMH microbenchmark under test/micro only
+23	JDK-8325403	candidate-measured	admitted-tests	JMH SystemGC benchmarks under test/micro only
+24	JDK-8343305	candidate-measured	admitted-tests	removes Indify-dependent microbenchmarks under test/micro only
+25	JDK-8355559	candidate-measured	admitted-tests	microbenchmark build isolation in test/micro infrastructure
+26	JDK-8370150	candidate-measured	admitted-tests	StrictMath FDLIBM JMH benchmarks under test/micro only

@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+27	JDK-8371979	core-libs	java.nio	P4		Convert java/nio/file/FileStore/Basic.java to JUnit	UNCLASSIFIED	candidate-adapted
+27	JDK-8374170	core-libs	java.nio	P4	loom	I/O Poller updates	UNCLASSIFIED	candidate-adapted
+27	JDK-8376419	core-libs	java.nio	P4	noreg-self	(fs) Minor improvement of java/nio/file/attribute/UserDefinedFileAttributeView/Basic.java	UNCLASSIFIED	candidate-adapted
+27	JDK-8377018	core-libs	java.nio	P4		Convert java/nio/file/DirectoryStream/SecureDS.java to junit	UNCLASSIFIED	candidate-adapted
+27	JDK-8380665	core-libs	java.nio	P4	noreg-self	(dc) java/nio/channels/DatagramChannel/SendReceiveMaxSize.java could also test the loopback interface	UNCLASSIFIED	candidate-adapted
+27	JDK-8383623	core-libs	java.nio	P4	filesystem,os,windows	(fs) Update Windows file system provider to use GetFileInformationByName where possible	UNCLASSIFIED	candidate-adapted
+22	JDK-8310047	core-libs	java.nio.charsets	P4	release-note=yes	Add UTF-32 based Charsets into StandardCharsets	UNCLASSIFIED	candidate-adapted
+24	JDK-8339017	core-libs	java.nio.charsets	P5	noreg-cleanup	Make a couple of fields in DoubleByte static	UNCLASSIFIED	candidate-adapted
+24	JDK-8344025	core-libs	java.nio.charsets	P5	noreg-cleanup	Remove unused ISO2022.Encoder.maximumDesignatorLength	UNCLASSIFIED	candidate-adapted
+24	JDK-8344330	core-libs	java.nio.charsets	P3	jep486,noreg-cleanup	Remove AccessController.doPrivileged() from jdk.charsets module	UNCLASSIFIED	candidate-adapted
+26	JDK-8359119	core-libs	java.nio.charsets	P4	noreg-perf,performance	Change Charset to use StableValue	UNCLASSIFIED	candidate-adapted
+26	JDK-8363925	core-libs	java.nio.charsets	P4	noreg-cleanup	Remove unused sun.nio.cs.ArrayEncoder::encode	UNCLASSIFIED	candidate-adapted
+24	JDK-8344149	core-libs	java.rmi	P4	jep486,noreg-cleanup	Remove usage of Security Manager from java.rmi	UNCLASSIFIED	candidate-adapted
+23	JDK-8330686	core-libs	java.sql	P5	api-doc,dcsas,noreg-doc,webbug	Fix typos in the DatabaseMetaData javadoc	UNCLASSIFIED	candidate-adapted
+24	JDK-8344365	core-libs	java.sql	P4	jep486,noreg-cleanup	SecurityManager cleanups in java.sql and java.sql.rowset modules	UNCLASSIFIED	candidate-adapted
+26	JDK-8369432	core-libs	java.sql	P4		Add Support for JDBC 4.5 MR	UNCLASSIFIED	candidate-adapted
+22	JDK-8041488	core-libs	java.text	P4	release-note=yes	Locale-Dependent List Patterns	UNCLASSIFIED	candidate-adapted
+22	JDK-8309686	core-libs	java.text	P4	noreg-doc	inconsistent URL for https://www.unicode.org/reports/tr35	UNCLASSIFIED	candidate-adapted
+22	JDK-8312411	core-libs	java.text	P4	noreg-cleanup	MessageFormat.formatToCharacterIterator() can be improved	UNCLASSIFIED	candidate-adapted
+22	JDK-8317265	core-libs	java.text	P3	conformance,noreg-doc	ListFormat::format specification could be made clearer regarding handling IllegalArgumentException.	UNCLASSIFIED	candidate-adapted
+22	JDK-8317471	core-libs	java.text	P3	conformance,noreg-doc	ListFormat::parseObject()  spec can be improved on parsePosition valid values	UNCLASSIFIED	candidate-adapted
+22	JDK-8318569	core-libs	java.text	P4		Add getter methods for Locale and Patterns in ListFormat	UNCLASSIFIED	candidate-adapted
+22	JDK-8319628	core-libs	java.text	P4	dcsaw,noreg-doc,reproducer-yes,webbug	DateFormat does not mention IllegalArgumentException for invalid style args	UNCLASSIFIED	candidate-adapted
+22	JDK-8321059	core-libs	java.text	P4	dcsaw,noreg-cleanup,reproducer-other,webbug	Unneeded array assignments in MergeCollation and  CompactByteArray	UNCLASSIFIED	candidate-adapted
+23	JDK-8318761	core-libs	java.text	P4		MessageFormat pattern support for CompactNumberFormat, ListFormat, and DateTimeFormatter	UNCLASSIFIED	candidate-adapted
+23	JDK-8321545	core-libs	java.text	P4		Override toString() for Format subclasses	UNCLASSIFIED	candidate-adapted
+23	JDK-8327640	core-libs	java.text	P4		Allow NumberFormat strict parsing	UNCLASSIFIED	candidate-adapted
+23	JDK-8327875	core-libs	java.text	P5		ChoiceFormat should advise throwing UnsupportedOperationException for unused methods	UNCLASSIFIED	candidate-adapted
+23	JDK-8329222	core-libs	java.text	P4	noreg-doc	java.text.NumberFormat (and subclasses) spec updates	UNCLASSIFIED	candidate-adapted
+24	JDK-8337839	core-libs	java.text	P5	noreg-cleanup	Make a few fields in MergeCollation static	UNCLASSIFIED	candidate-adapted
+25	JDK-8357681	core-libs	java.text	P5	noreg-hard,noreg-trivial	Fixed the DigitList::toString method causing incorrect results during debugging	UNCLASSIFIED	candidate-adapted
+26	JDK-8358880	core-libs	java.text	P4	dcsaw,webbug	Performance of parsing with DecimalFormat can be improved	UNCLASSIFIED	candidate-adapted
+26	JDK-8362448	core-libs	java.text	P4	numerics,release-note=yes	Make use of the Double.toString(double) algorithm in java.text.DecimalFormat	UNCLASSIFIED	candidate-adapted
+26	JDK-8363972	core-libs	java.text	P4	release-note=yes	Lenient parsing of minus sign pattern in DecimalFormat/CompactNumberFormat	UNCLASSIFIED	candidate-adapted
+26	JDK-8367324	core-libs	java.text	P4	numerics	Avoid redundant parsing when formatting with DigitList	UNCLASSIFIED	candidate-adapted
+27	JDK-8385736	core-libs	java.text	P4		Optimize ListFormat custom pattern parsing	UNCLASSIFIED	candidate-adapted
+22	JDK-8319423	core-libs	java.time	P4		Improve Year.isLeap by checking divisibility by 16	UNCLASSIFIED	candidate-adapted
+23	JDK-8324665	core-libs	java.time	P4	release-note=yes	Loose matching of space separators in the lenient date/time parsing mode	UNCLASSIFIED	candidate-adapted
+23	JDK-8331202	core-libs	java.time	P4	google-interest,release-note=yes	Support for Duration until another Instant	UNCLASSIFIED	candidate-adapted
+24	JDK-8336706	core-libs	java.time	P4	noreg-cleanup	Optimize LocalDate.toString with StringBuilder.repeat 	UNCLASSIFIED	candidate-adapted
+24	JDK-8336741	core-libs	java.time	P4	noreg-perf	Optimize LocalTime.toString with StringBuilder.repeat	UNCLASSIFIED	candidate-adapted
+24	JDK-8336792	core-libs	java.time	P4		DateTimeFormatterBuilder append zeros based on StringBuilder.repeat	UNCLASSIFIED	candidate-adapted
+24	JDK-8337168	core-libs	java.time	P4	noreg-perf	Optimize LocalDateTime.toString	UNCLASSIFIED	candidate-adapted
+24	JDK-8337832	core-libs	java.time	P4		Optimize datetime toString	UNCLASSIFIED	candidate-adapted
+25	JDK-8337279	core-libs	java.time	P4		Share StringBuilder to format instant	UNCLASSIFIED	candidate-adapted
+25	JDK-8348880	core-libs	java.time	P4		Replace ConcurrentMap with AtomicReferenceArray for ZoneOffset.QUARTER_CACHE	UNCLASSIFIED	candidate-adapted
+25	JDK-8355391	core-libs	java.time	P4	noreg-cleanup	Use Long::hashCode in java.time	UNCLASSIFIED	candidate-adapted
+26	JDK-8365186	core-libs	java.time	P4	noreg-perf	Reduce size of j.t.f.DateTimePrintContext::adjust	UNCLASSIFIED	candidate-adapted
+26	JDK-8366829	core-libs	java.time	P4	release-note=yes	Add java.time.Duration constants MIN and MAX	UNCLASSIFIED	candidate-adapted
+26	JDK-8368172	core-libs	java.time	P4		Make java.time.format.DateTimePrintContext immutable	UNCLASSIFIED	candidate-adapted
+26	JDK-8368825	core-libs	java.time	P4		Use switch expression for DateTimeFormatterBuilder pattern character lookup	UNCLASSIFIED	candidate-adapted
+27	JDK-8379973	core-libs	java.time	P3	salesforce-interest	Provide means to customize localized patterns in DateTimeFormatter/Builder	UNCLASSIFIED	candidate-adapted
+23	JDK-8206447	core-libs	java.util.jar	P4	dcs-pso,reproducer-other,webbug	InflaterInputStream.skip receives long but it's limited to Integer.MAX_VALUE	UNCLASSIFIED	candidate-adapted
+23	JDK-8303866	core-libs	java.util.jar	P4		Allow ZipInputStream.readEnd to parse small Zip64 ZIP files	UNCLASSIFIED	candidate-adapted
+23	JDK-8319626	core-libs	java.util.jar	P4	noreg-trivial	Override toString() for ZipFile	UNCLASSIFIED	candidate-adapted
+23	JDK-8321396	core-libs	java.util.jar	P4		Retire test/jdk/java/util/zip/NoExtensionSignature.java	UNCLASSIFIED	candidate-adapted
+23	JDK-8322802	core-libs	java.util.jar	P4	test-only	Add testing for ZipFile.getEntry respecting the 'Language encoding' flag 	UNCLASSIFIED	candidate-adapted
+23	JDK-8326096	core-libs	java.util.jar	P4		Deprecate getTotalIn, getTotalOut methods of java.util.zip.Inflater, java.util.zip.Deflater 	UNCLASSIFIED	candidate-adapted
+23	JDK-8326099	core-libs	java.util.jar	P4	noreg-cleanup	GZIPOutputStream should use Deflater.getBytesRead() instead of Deflater.getTotalIn()	UNCLASSIFIED	candidate-adapted
+23	JDK-8327208	core-libs	java.util.jar	P4		Remove unused method java.util.jar.Manifest.make72Safe	UNCLASSIFIED	candidate-adapted
+24	JDK-8321274	core-libs	java.util.jar	P4	noreg-cleanup	Rename ZipEntry.extraAttributes to ZipEntry.externalFileAttributes	UNCLASSIFIED	candidate-adapted
+24	JDK-8336843	core-libs	java.util.jar	P4	noreg-doc,release-note=yes	Deprecate java.util.zip.ZipError for removal	UNCLASSIFIED	candidate-adapted
+24	JDK-8336844	core-libs	java.util.jar	P4	noreg-cleanup	ZipConstants64 defines duplicate constants EXTID_ZIP64 and ZIP64_EXTID	UNCLASSIFIED	candidate-adapted
+24	JDK-8338729	core-libs	java.util.jar	P4	noreg-cleanup	Retire the test jdk/java/util/zip/TestZipError.java	UNCLASSIFIED	candidate-adapted
+24	JDK-8339711	core-libs	java.util.jar	P4	noreg-cleanup	ZipFile.Source.initCEN needlessly reads END header 	UNCLASSIFIED	candidate-adapted
+24	JDK-8339874	core-libs	java.util.jar	P4	noreg-cleanup	Avoid duplicate checking of trailing slash in ZipFile.getZipEntry	UNCLASSIFIED	candidate-adapted
+24	JDK-8340885	core-libs	java.util.jar	P5	noreg-perf,performance,startup	Desugar ZipCoder.Comparison	UNCLASSIFIED	candidate-adapted
+24	JDK-8341594	core-libs	java.util.jar	P4		Use Unsafe to coalesce reads in java.util.zip.ZipUtils	UNCLASSIFIED	candidate-adapted
+24	JDK-8341595	core-libs	java.util.jar	P4		Clean up iteration of CEN headers in ZipFile.Source.initCEN	UNCLASSIFIED	candidate-adapted
+24	JDK-8341597	core-libs	java.util.jar	P4	noreg-cleanup	ZipFileInflaterInputStream input buffer size uses uncompressed size 	UNCLASSIFIED	candidate-adapted
+24	JDK-8342040	core-libs	java.util.jar	P4	noreg-perf	Further improve entry lookup performance for multi-release JARs	UNCLASSIFIED	candidate-adapted
+24	JDK-8343307	core-libs	java.util.jar	P4	noreg-cleanup	Throw ZipException instead of IAE in ZipFile.Source::initCEN	UNCLASSIFIED	candidate-adapted
+24	JDK-8344179	core-libs	java.util.jar	P4	jep486,noreg-cleanup	SecurityManager cleanup in the ZIP and JAR areas	UNCLASSIFIED	candidate-adapted
+25	JDK-8066583	core-libs	java.util.jar	P5		DeflaterInput/OutputStream and InflaterInput/OutputStream should explain responsibility for freeing resources	UNCLASSIFIED	candidate-adapted
+25	JDK-8225763	core-libs	java.util.jar	P4	release-note=yes	Inflater and Deflater should implement AutoCloseable	UNCLASSIFIED	candidate-adapted
+26	JDK-8365703	core-libs	java.util.jar	P4	noreg-cleanup	Refactor ZipCoder to use common JLA.uncheckedNewStringNoRepl	UNCLASSIFIED	candidate-adapted
+26	JDK-8366101	core-libs	java.util.jar	P4	noreg-cleanup	Replace the use of ThreadTracker with ScopedValue in java.util.jar.JarFile	UNCLASSIFIED	candidate-adapted
+27	JDK-8376271	core-libs	java.util.jar	P4	noreg-trivial	ZipFile comment confusingly refers to "native" ZIP file implementation	UNCLASSIFIED	candidate-adapted
+27	JDK-8376294	core-libs	java.util.jar	P4	noreg-trivial	ZipFile.Source.Key should not hold on to its BasicFileAttributes instance	UNCLASSIFIED	candidate-adapted
+27	JDK-8376403	core-libs	java.util.jar	P4	noreg-cleanup	Avoid loading ArrayDeque in java.util.zip.ZipFile	UNCLASSIFIED	candidate-adapted
+27	JDK-8380542	core-libs	java.util.jar	P4		ZipOutputStream.setComment and ZipEntry.setComment spec updates for rejecting unmappable characters and allowing null or empty comments	UNCLASSIFIED	candidate-adapted
+22	JDK-8313768	core-libs	java.util.logging	P4		Reduce interaction with volatile field in j.u.l.StreamHandler	UNCLASSIFIED	candidate-adapted
+26	JDK-8361533	core-libs	java.util.logging	P4	noreg-other	Apply java.io.Serial annotations in java.logging	UNCLASSIFIED	candidate-adapted
+22	JDK-8311939	core-libs	java.util.regex	P4	amazon-interest,jdk21u-fix-no,jdk21u-fix-request	Excessive allocation of Matcher.groups array	UNCLASSIFIED	candidate-adapted
+23	JDK-8328700	core-libs	java.util.regex	P5	dcsaw,noreg-cleanup,reproducer-other,webbug	Unused import and variable should be deleted in regex package	UNCLASSIFIED	candidate-adapted
+22	JDK-8296250	core-libs	java.util:i18n	P4	icu4j,unicode	Update ICU4J to Version 74.1	UNCLASSIFIED	candidate-adapted
+22	JDK-8306116	core-libs	java.util:i18n	P3	cldr,release-note=yes	Update CLDR to Version 44.0	UNCLASSIFIED	candidate-adapted
+22	JDK-8311968	core-libs	java.util:i18n	P4	noreg-doc	Clarify Three-letter time zone IDs in java.util.TimeZone	UNCLASSIFIED	candidate-adapted
+22	JDK-8312521	core-libs	java.util:i18n	P5		Unused field LocaleProviderAdapter#defaultLocaleProviderAdapter could be removed	UNCLASSIFIED	candidate-adapted
+22	JDK-8316557	core-libs	java.util:i18n	P5		Make fields final in 'sun.util' package	UNCLASSIFIED	candidate-adapted
+22	JDK-8317979	core-libs	java.util:i18n	P4	cldr	Use TZ database style abbreviations in the  CLDR locale provider	UNCLASSIFIED	candidate-adapted
+23	JDK-8174269	core-libs	java.util:i18n	P4	release-note=yes	Remove COMPAT locale data provider from JDK	UNCLASSIFIED	candidate-adapted
+23	JDK-8319990	core-libs	java.util:i18n	P3	cldr,release-note=yes	Update CLDR to Version 45.0	UNCLASSIFIED	candidate-adapted
+23	JDK-8329691	core-libs	java.util:i18n	P4		Support `nonlikelyScript` parent locale inheritance	UNCLASSIFIED	candidate-adapted
+24	JDK-8319992	core-libs	java.util:i18n	P4	icu4j,unicode	Update ICU4J to Version 76.1	UNCLASSIFIED	candidate-adapted
+24	JDK-8333582	core-libs	java.util:i18n	P3	cldr,release-note=yes,windowszones-update-46	Update CLDR to Version 46.0	UNCLASSIFIED	candidate-adapted
+24	JDK-8340073	core-libs	java.util:i18n	P4	jdk23u-fix-SQE-ok,jdk23u-fix-request,jdk23u-fix-yes,noreg-hard	Support "%z" time zone abbreviation format in TZ files	UNCLASSIFIED	candidate-adapted
+24	JDK-8341923	core-libs	java.util:i18n	P4	noreg-doc	java.util.Locale class specification improvements	UNCLASSIFIED	candidate-adapted
+24	JDK-8343236	core-libs	java.util:i18n	P4	noreg-doc	Use @apiNote and @implSpec in j.util.Currency	UNCLASSIFIED	candidate-adapted
+25	JDK-8342550	core-libs	java.util:i18n	P4		Log warning for using JDK1.1 compatible time zone IDs for future removal	UNCLASSIFIED	candidate-adapted
+25	JDK-8346948	core-libs	java.util:i18n	P3	cldr,release-note=yes	Update CLDR to Version 47.0	UNCLASSIFIED	candidate-adapted
+25	JDK-8347949	core-libs	java.util:i18n	P4		Currency method to stream available Currencies	UNCLASSIFIED	candidate-adapted
+25	JDK-8347955	core-libs	java.util:i18n	P4		TimeZone methods to stream the available timezone IDs	UNCLASSIFIED	candidate-adapted
+25	JDK-8356021	core-libs	java.util:i18n	P4	noreg-cleanup	Use Double::hashCode in java.util.Locale::hashCode	UNCLASSIFIED	candidate-adapted
+26	JDK-8346947	core-libs	java.util:i18n	P4	icu4j,unicode	Update ICU4J to Version 78.1	UNCLASSIFIED	candidate-adapted
+26	JDK-8354548	core-libs	java.util:i18n	P3	cldr,release-note=yes	Update CLDR to Version 48.0	UNCLASSIFIED	candidate-adapted
+26	JDK-8358520	core-libs	java.util:i18n	P4	noreg-cleanup	Improve lazy computation in BreakIteratorResourceBundle and related classes	UNCLASSIFIED	candidate-adapted
+26	JDK-8370420	core-libs	java.util:i18n	P4	noreg-cleanup	HostLocaleProviderAdapter_md.c from libjava can use GetLocaleInfoEx, GetCalendarInfoEx, EnumCalendarInfoExEx directly	UNCLASSIFIED	candidate-adapted
+27	JDK-8371842	core-libs	java.util:i18n	P3	cldr,release-note=yes	Update CLDR to Version 48.2	UNCLASSIFIED	candidate-adapted
+27	JDK-8382031	core-libs	java.util:i18n	P4	lsr	Update IANA Language Subtag Registry to Version 2026-05-05	UNCLASSIFIED	candidate-adapted

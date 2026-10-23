@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+27	JDK-8377946	hotspot	svc-agent	P4		Use DWARF in mixed jstack on Linux AArch64	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8254693	core-libs	java.lang.foreign	P2	foreign-memaccess+abi	Add Panama feature to pass heap segments to native code	UNCLASSIFIED	candidate-high-risk
+22	JDK-8293511	core-libs	java.lang.foreign	P3	noreg-doc	Javadoc style issues in the foreign API	UNCLASSIFIED	candidate-high-risk
+22	JDK-8313406	core-libs	java.lang.foreign	P4		nep_invoker_blob can be simplified more	UNCLASSIFIED	candidate-high-risk
+22	JDK-8313889	core-libs	java.lang.foreign	P4	cleanup	Fix -Wconversion warnings in foreign benchmarks	UNCLASSIFIED	candidate-high-risk
+22	JDK-8314949	core-libs	java.lang.foreign	P4		linux PPC64 Big Endian: Implementation of Foreign Function & Memory API	UNCLASSIFIED	candidate-high-risk
+22	JDK-8316046	core-libs	java.lang.foreign	P3	foreign-memaccess+abi	x64 platforms unecessarily save xmm16-31 when UseAVX >= 3	UNCLASSIFIED	candidate-high-risk
+22	JDK-8316050	core-libs	java.lang.foreign	P4		Use hexadecimal encoding in MemorySegment::toString	UNCLASSIFIED	candidate-high-risk
+22	JDK-8316970	core-libs	java.lang.foreign	P3	foreign-memaccess+abi	Add internal annotation to mark restricted methods	UNCLASSIFIED	candidate-high-risk
+22	JDK-8317545	core-libs	java.lang.foreign	P3		AIX PPC64: Implementation of Foreign Function & Memory API	UNCLASSIFIED	candidate-high-risk
+22	JDK-8317819	core-libs	java.lang.foreign	P2		Scope should reflect lifetime of underying resource (mainline)	UNCLASSIFIED	candidate-high-risk
+22	JDK-8317824	core-libs	java.lang.foreign	P3		Beef up javadoc for base offset in var handles derived from layouts (mainline)	UNCLASSIFIED	candidate-high-risk
+22	JDK-8317837	core-libs	java.lang.foreign	P3		Leftover FFM implementation-only changes	UNCLASSIFIED	candidate-high-risk
+22	JDK-8318538	core-libs	java.lang.foreign	P3	foreign-memaccess+abi	Add a way to obtain a strided var handle from a layout	UNCLASSIFIED	candidate-high-risk
+22	JDK-8318598	core-libs	java.lang.foreign	P4		FFM stylistic cleanups	UNCLASSIFIED	candidate-high-risk
+22	JDK-8319316	core-libs	java.lang.foreign	P3	noreg-doc	Clarify text around which layouts a linker supports	UNCLASSIFIED	candidate-high-risk
+22	JDK-8319556	core-libs	java.lang.foreign	P5	noreg-trivial	Harmonize interface formatting in the FFM API	UNCLASSIFIED	candidate-high-risk
+22	JDK-8319560	core-libs	java.lang.foreign	P5	noreg-trivial	Reformat method parameters in the FFM API	UNCLASSIFIED	candidate-high-risk
+22	JDK-8319563	core-libs	java.lang.foreign	P5	noreg-trivial	Reformat code in the FFM API	UNCLASSIFIED	candidate-high-risk
+22	JDK-8319820	core-libs	java.lang.foreign	P5	noreg-trivial	Use unnamed variables in the FFM implementation	UNCLASSIFIED	candidate-high-risk
+22	JDK-8321300	core-libs	java.lang.foreign	P4		Cleanup TestHFA	UNCLASSIFIED	candidate-high-risk
+23	JDK-8314592	core-libs	java.lang.foreign	P3		Add shortcut to SymbolLookup::find	UNCLASSIFIED	candidate-high-risk
+23	JDK-8323601	core-libs	java.lang.foreign	P4		Improve LayoutPath.PathElement::toString	UNCLASSIFIED	candidate-high-risk
+23	JDK-8323746	core-libs	java.lang.foreign	P4		Add PathElement hashCode and equals	UNCLASSIFIED	candidate-high-risk
+23	JDK-8329997	core-libs	java.lang.foreign	P3		Add provisions for checking memory segment alignment constraints	UNCLASSIFIED	candidate-high-risk
+23	JDK-8330049	core-libs	java.lang.foreign	P4		Remove unused AbstractLinker::linkerByteOrder	UNCLASSIFIED	candidate-high-risk
+23	JDK-8331865	core-libs	java.lang.foreign	P3		Consolidate size and alignment checks in LayoutPath	UNCLASSIFIED	candidate-high-risk
+24	JDK-8294432	core-libs	java.lang.foreign	P3	foreign-memaccess+abi,performance	Add provisions to calculate hash values from MemorySegments	UNCLASSIFIED	candidate-high-risk
+24	JDK-8331671	core-libs	java.lang.foreign	P4		Implement JEP 472: Prepare to Restrict the Use of JNI	UNCLASSIFIED	candidate-high-risk
+24	JDK-8333843	core-libs	java.lang.foreign	P4	dcsaw,reproducer-other,webbug	Provide guidelines on MemorySegment to read strings with known lengths	UNCLASSIFIED	candidate-high-risk
+24	JDK-8333886	core-libs	java.lang.foreign	P4	hgupdate-sync,noreg-doc	Explicitly specify that asSlice and reinterpret return a memory segment backed by the same region of memory.	UNCLASSIFIED	candidate-high-risk
+24	JDK-8334107	core-libs	java.lang.foreign	P4	noreg-doc	Specification for MemorySegment::get/setString could use some clarification	UNCLASSIFIED	candidate-high-risk
+24	JDK-8335480	core-libs	java.lang.foreign	P3		Only deoptimize threads if needed when closing shared arena	UNCLASSIFIED	candidate-high-risk
+24	JDK-8336768	core-libs	java.lang.foreign	P3		Allow captureCallState and critical linker options to be combined	UNCLASSIFIED	candidate-high-risk
+24	JDK-8338591	core-libs	java.lang.foreign	P3	performance	Improve performance of MemorySegment::copy	UNCLASSIFIED	candidate-high-risk
+24	JDK-8338677	core-libs	java.lang.foreign	P3		Improve startup of memory access var handles by simplifying combinator chains	UNCLASSIFIED	candidate-high-risk
+24	JDK-8338728	core-libs	java.lang.foreign	P4	noreg-doc	Misc issues in memory layout javadoc	UNCLASSIFIED	candidate-high-risk
+24	JDK-8338731	core-libs	java.lang.foreign	P3		MemoryLayout::offsetHandle can return a negative offset	UNCLASSIFIED	candidate-high-risk
+24	JDK-8338967	core-libs	java.lang.foreign	P4	performance	Improve performance for MemorySegment::fill	UNCLASSIFIED	candidate-high-risk
+24	JDK-8339531	core-libs	java.lang.foreign	P4	performance	Improve performance of MemorySegment::mismatch	UNCLASSIFIED	candidate-high-risk
+24	JDK-8340120	core-libs	java.lang.foreign	P4	noreg-hard	Remove redundant code in SegmentBulkOperations::mismatch	UNCLASSIFIED	candidate-high-risk
+24	JDK-8340307	core-libs	java.lang.foreign	P3	foreign-memaccess+abi	Add explanation around MemorySegment:reinterpret regarding arenas	UNCLASSIFIED	candidate-high-risk
+24	JDK-8341127	core-libs	java.lang.foreign	P2	jdk23u-fix-SQE-ok,jdk23u-fix-request,jdk23u-fix-yes,noreg-perf,regression	Extra call to MethodHandle::asType from memory segment var handles fails to inline	UNCLASSIFIED	candidate-high-risk
+24	JDK-8343188	core-libs	java.lang.foreign	P4	performance	Investigate ways to simplify MemorySegment::ofBuffer	UNCLASSIFIED	candidate-high-risk
+24	JDK-8343394	core-libs	java.lang.foreign	P4	performance	Make MemorySessionImpl.state a stable field	UNCLASSIFIED	candidate-high-risk
+24	JDK-8343844	core-libs	java.lang.foreign	P5		Add benchmarks for superword/autovectorization in FFM BulkOperations	UNCLASSIFIED	candidate-high-risk
+24	JDK-8344086	core-libs	java.lang.foreign	P4	cleanup,jep486	Remove security manager dependency in FFM	UNCLASSIFIED	candidate-high-risk
+24	JDK-8344134	core-libs	java.lang.foreign	P5	noreg-trivial	Use static property in SystemLookup	UNCLASSIFIED	candidate-high-risk
+24	JDK-8344912	core-libs	java.lang.foreign	P4	cleanup	Sharpen the return type of various internal methods in jdk.internal.foreign	UNCLASSIFIED	candidate-high-risk
+24	JDK-8345164	core-libs	java.lang.foreign	P5	noreg-cleanup	Remove residual --enable-preview in FFM tests and benchmarks	UNCLASSIFIED	candidate-high-risk
+24	JDK-8345389	core-libs	java.lang.foreign	P4		Bump missed copyright years for JDK-8336768	UNCLASSIFIED	candidate-high-risk
+25	JDK-8287788	core-libs	java.lang.foreign	P3	foreign-memaccess+abi	Implement a better allocator for downcalls	UNCLASSIFIED	candidate-high-risk
+25	JDK-8339527	core-libs	java.lang.foreign	P4	noreg-perf	Adjust threshold for MemorySegment::fill native invocation	UNCLASSIFIED	candidate-high-risk
+25	JDK-8345687	core-libs	java.lang.foreign	P4	performance	Improve the implementation of SegmentFactories::allocateSegment	UNCLASSIFIED	candidate-high-risk
+25	JDK-8346609	core-libs	java.lang.foreign	P4		Improve MemorySegment.toString	UNCLASSIFIED	candidate-high-risk
+25	JDK-8346610	core-libs	java.lang.foreign	P5	noreg-cleanup	Make all imports consistent in the FFM API	UNCLASSIFIED	candidate-high-risk
+25	JDK-8347408	core-libs	java.lang.foreign	P4	performance	Create an internal method handle adapter for system calls with errno	UNCLASSIFIED	candidate-high-risk
+25	JDK-8348668	core-libs	java.lang.foreign	P4		Prevent first resource cleanup in confined arena from escaping	UNCLASSIFIED	candidate-high-risk
+25	JDK-8348976	core-libs	java.lang.foreign	P4		MemorySegment::reinretpret should be force inlined	UNCLASSIFIED	candidate-high-risk
+25	JDK-8349146	core-libs	java.lang.foreign	P3	foreign-memaccess+abi	[REDO] Implement a better allocator for downcalls	UNCLASSIFIED	candidate-high-risk
+25	JDK-8349344	core-libs	java.lang.foreign	P4	foreign-memaccess+abi,noreg-doc	Clarify documentation of Arena.ofConfined	UNCLASSIFIED	candidate-high-risk
+25	JDK-8350701	core-libs	java.lang.foreign	P4		[JMH] test foreign.AllocFromSliceTest failed with Exception for size>1024	UNCLASSIFIED	candidate-high-risk
+25	JDK-8350811	core-libs	java.lang.foreign	P4		[JMH] test foreign.StrLenTest failed with StringIndexOutOfBoundsException for size=451	UNCLASSIFIED	candidate-high-risk
+25	JDK-8354121	core-libs	java.lang.foreign	P4	noreg-perf,performance	Use a record class rather than a lambda in AbstractMemorySegmentImpl::cleanupAction	UNCLASSIFIED	candidate-high-risk
+26	JDK-8346657	core-libs	java.lang.foreign	P4		Improve out of bounds exception messages for MemorySegments	UNCLASSIFIED	candidate-high-risk
+26	JDK-8362893	core-libs	java.lang.foreign	P3	google-interest,noreg-perf,performance	Improve performance for MemorySegment::getString	UNCLASSIFIED	candidate-high-risk
+26	JDK-8370822	core-libs	java.lang.foreign	P4	noreg-perf,performance	Improve performance for MemorySegment::fill	UNCLASSIFIED	candidate-high-risk
+27	JDK-8369564	core-libs	java.lang.foreign	P4	google-interest	Provide a MemorySegment API to read strings with known lengths	UNCLASSIFIED	candidate-high-risk
+27	JDK-8377245	core-libs	java.lang.foreign	P4	noreg-perf	AbstractMemorySegmentImpl#getString with length should be @ForceInline	UNCLASSIFIED	candidate-high-risk
+27	JDK-8378559	core-libs	java.lang.foreign	P4		Add setting of captured states like errno	UNCLASSIFIED	candidate-high-risk
+27	JDK-8379630	core-libs	java.lang.foreign	P4	noreg-other	Add JMH benchmark to measure the overhead of using captured call state	UNCLASSIFIED	candidate-high-risk
+27	JDK-8381012	core-libs	java.lang.foreign	P4	noreg-doc	Add warning for == for MemorySegment.NULL	UNCLASSIFIED	candidate-high-risk
+27	JDK-8381935	core-libs	java.lang.foreign	P4	jdk25u-fix-request,jdk25u-fix-yes,jdk26u-fix-request,noreg-cleanup	Improve numChunks range in the PPC64 CallAranger	UNCLASSIFIED	candidate-high-risk
+22	JDK-6983726	core-libs	java.lang.invoke	P4	cleanup,jsr292,release-note=yes	Reimplement MethodHandleProxies.asInterfaceInstance	UNCLASSIFIED	candidate-high-risk
+22	JDK-8310157	core-libs	java.lang.invoke	P4		Allow void-returning filters for MethodHandles::collectCoordinates	UNCLASSIFIED	candidate-high-risk
+23	JDK-8330595	core-libs	java.lang.invoke	P4	leyden,startup	Invoke ObjectMethods::bootstrap method exactly	UNCLASSIFIED	candidate-high-risk
+23	JDK-8332547	core-libs	java.lang.invoke	P4		Unloaded signature classes in DirectMethodHandles	UNCLASSIFIED	candidate-high-risk
+24	JDK-8339640	core-libs	java.lang.invoke	P4		Reduce construction overheads in StringConcatFactory$InlineHiddenClassStrategy	UNCLASSIFIED	candidate-high-risk
+24	JDK-8339837	core-libs	java.lang.invoke	P5	noreg-cleanup	Remove unused BootstrapMethodsInvokers.isLambdaMetafactoryCondyBSM	UNCLASSIFIED	candidate-high-risk
+24	JDK-8340280	core-libs	java.lang.invoke	P4	startup	Avoid calling MT.invokerType() when creating LambdaForms	UNCLASSIFIED	candidate-high-risk
+24	JDK-8340838	core-libs	java.lang.invoke	P4	noreg-cleanup	Clean up MutableCallSite to use explicit release fence instead of AtomicInteger	UNCLASSIFIED	candidate-high-risk
+24	JDK-8341755	core-libs	java.lang.invoke	P4		Optimize argNames in InnerClassLambdaMetafactory	UNCLASSIFIED	candidate-high-risk
+24	JDK-8341776	core-libs	java.lang.invoke	P5	noreg-cleanup	Remove unused enum values from LambdaForm$Kind	UNCLASSIFIED	candidate-high-risk
+25	JDK-8350462	core-libs	java.lang.invoke	P4	noreg-cleanup,starter	MethodTypeForm.LF_INTERPRET can cache the MemberName instead	UNCLASSIFIED	candidate-high-risk
+25	JDK-8350607	core-libs	java.lang.invoke	P4	noreg-cleanup	Consolidate MethodHandles::zero into MethodHandles::constant	UNCLASSIFIED	candidate-high-risk
+25	JDK-8354890	core-libs	java.lang.invoke	P3	cds	AOT-initialize j.l.i.MethodHandleImpl and inner classes	UNCLASSIFIED	candidate-high-risk
+26	JDK-8360303	core-libs	java.lang.invoke	P4	noreg-cleanup	Remove two unused invoke files	UNCLASSIFIED	candidate-high-risk
+26	JDK-8366455	core-libs	java.lang.invoke	P4	noreg-build	Move VarHandles.GuardMethodGenerator to execute on build	UNCLASSIFIED	candidate-high-risk
+26	JDK-8368024	core-libs	java.lang.invoke	P4	noreg-cleanup	Remove StringConcatFactory#generateMHInlineCopy	UNCLASSIFIED	candidate-high-risk
+27	JDK-8378715	core-libs	java.lang.invoke	P4	noreg-cleanup,valhalla	Use early field initialization for java.lang.invoke generated code	UNCLASSIFIED	candidate-high-risk
+24	JDK-8343982	core-libs	java.lang:class_loading	P4	jep486,noreg-cleanup	Remove usage of security manager from ClassLoader and related classes	UNCLASSIFIED	candidate-high-risk
+22	JDK-6361826	core-libs	java.lang:reflect	P4		(reflect) provide method for mapping strings to class object for primitive types	UNCLASSIFIED	candidate-high-risk
+22	JDK-8305104	core-libs	java.lang:reflect	P4	release-note=yes	Remove the old core reflection implementation	UNCLASSIFIED	candidate-high-risk
+22	JDK-8312203	core-libs	java.lang:reflect	P4	noreg-doc	Improve specification of Array.newInstance	UNCLASSIFIED	candidate-high-risk
+22	JDK-8314734	core-libs	java.lang:reflect	P5		Remove unused field TypeVariableImpl.EMPTY_ANNOTATION_ARRAY	UNCLASSIFIED	candidate-high-risk
+22	JDK-8315810	core-libs	java.lang:reflect	P3	release-note=yes	Reimplement sun.reflect.ReflectionFactory::newConstructorForSerialization with method handles	UNCLASSIFIED	candidate-high-risk
+23	JDK-8229959	core-libs	java.lang:reflect	P4		Convert proxy class to use constant dynamic	UNCLASSIFIED	candidate-high-risk
+23	JDK-8322878	core-libs	java.lang:reflect	P4		Including sealing information Class.toGenericString()	UNCLASSIFIED	candidate-high-risk
+23	JDK-8322979	core-libs	java.lang:reflect	P4	noreg-doc	Add informative discussion to Modifier	UNCLASSIFIED	candidate-high-risk
+23	JDK-8326653	core-libs	java.lang:reflect	P5	noreg-cleanup	Remove jdk.internal.reflect.UTF8	UNCLASSIFIED	candidate-high-risk
+23	JDK-8332586	core-libs	java.lang:reflect	P4	amazon-interest,jdk21u-fix-no,jdk21u-fix-request	Avoid cloning empty arrays in java.lang.reflect.{Method,Constructor}	UNCLASSIFIED	candidate-high-risk
+24	JDK-8250659	core-libs	java.lang:reflect	P4	dcsad,noreg-doc,reproducer-other,webbug	Clarify in ParameterizedType.getRawType() doc that only Class is returned	UNCLASSIFIED	candidate-high-risk
+24	JDK-8309821	core-libs	java.lang:reflect	P4	noreg-doc,starter	Link to hidden classes section in Class specification for Class::isHidden	UNCLASSIFIED	candidate-high-risk
+24	JDK-8327624	core-libs	java.lang:reflect	P4		Remove VM implementation that bypass verification for core reflection	UNCLASSIFIED	candidate-high-risk
+24	JDK-8332249	core-libs	java.lang:reflect	P4	amazon-interest	Micro-optimize Method.hashCode	UNCLASSIFIED	candidate-high-risk
+24	JDK-8334437	core-libs	java.lang:reflect	P5		De-duplicate ProxyMethod list creation	UNCLASSIFIED	candidate-high-risk
+24	JDK-8336267	core-libs	java.lang:reflect	P4	noreg-perf	Method and Constructor signature parsing can be shared on the root object	UNCLASSIFIED	candidate-high-risk
+24	JDK-8336934	core-libs	java.lang:reflect	P4		Clean up JavaLangReflectAccess	UNCLASSIFIED	candidate-high-risk
+24	JDK-8339789	core-libs	java.lang:reflect	P4	doc-only,noreg-doc	Use index and definition tags in AnnotatedElement	UNCLASSIFIED	candidate-high-risk
+24	JDK-8340456	core-libs	java.lang:reflect	P4		Reduce overhead of proxying Object methods in ProxyGenerator	UNCLASSIFIED	candidate-high-risk

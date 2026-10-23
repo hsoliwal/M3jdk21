@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+27	JDK-8369736	core-svc	java.lang.management	P3	cds,hgupdate-sync,jdk25-enhancement-request,jdk25u-fix-request,jdk25u-fix-yes,jdk26-enhancement-request,jdk26-enhancement-yes,leyden,release-note=yes	Add management interface for AOT cache creation	UNCLASSIFIED	candidate-adapted-serviceability
+27	JDK-8380641	core-svc	java.lang.management	P4	jdk25u-fix-request,jdk25u-fix-yes,noreg-self	Thread dump parsing and test improvements	UNCLASSIFIED	candidate-adapted-serviceability
+27	JDK-8381002	core-svc	java.lang.management	P4	release-note=yes	Thread dump should convert longs to json numbers if possible	UNCLASSIFIED	candidate-adapted-serviceability
+27	JDK-8381487	core-svc	java.lang.management	P4	noreg-doc	Replace threadDump.schema.json with document to describe format	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8318707	core-svc	javax.management	P2	post-jep411,release-note=yes	Remove the Java Management Extension (JMX) Management Applet (m-let) feature	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8326666	core-svc	javax.management	P3	post-jep411,release-note=yes	Remove the Java Management Extension (JMX) Subject Delegation feature	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8328341	core-svc	javax.management	P4	noreg-cleanup	Remove deprecated per-thread compiler stats in sun.management	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8334165	core-svc	javax.management	P4	cleanup,release-note=yes	Remove serialVersionUID compatibility logic from JMX	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8338603	core-svc	javax.management	P4		DiagnosticCommandMBean operations should standardize types for parameters	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8344177	core-svc	javax.management	P4	cleanup,jep486,security-manager	Remove SecurityManager and related calls from java.management	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8344181	core-svc	javax.management	P4	cleanup,security-manager	Remove SecurityManager and related calls from jdk.management and jdk.management.agent	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8344394	core-svc	javax.management	P4	cleanup,security-manager	Remove SecurityManager and related calls from java.management.rmi	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8344966	core-svc	javax.management	P4	cleanup	Remove the allowNonPublic MBean compatibility property	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8344969	core-svc	javax.management	P4	cleanup	Remove the jmx.mxbean.multiname compatibility property	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8344976	core-svc	javax.management	P4	cleanup	Remove the jmx.invoke.getters compatibility property	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8345045	core-svc	javax.management	P4	cleanup	Remove the jmx.remote.x.buffer.size JMX notification property	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8345048	core-svc	javax.management	P4	cleanup	Remove the jmx.extend.open.types compatibility property	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8345049	core-svc	javax.management	P4	cleanup	Remove the jmx.tabular.data.hash.map compatibility property	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8345079	core-svc	javax.management	P4	cleanup,jep486	Simplify/cleanup Exception handling in RMIConnectionImpl	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8345984	core-svc	javax.management	P4	cleanup	Remove redundant checkXXX methods from java.management Util class	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8345987	core-svc	javax.management	P4	cleanup	java.management has two Util.newObjectName methods (remove one)	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8347345	core-svc	javax.management	P4	cleanup	Remove redundant test policy file from ModelMBeanInfoSupport directory	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8347433	core-svc	javax.management	P4	noreg-other,release-note=yes	Deprecate XML interchange in java.management/javax/management/modelmbean/DescriptorSupport for removal	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8347985	core-svc	javax.management	P4	cleanup,jep486	Deprecate java.management Permission classes for removal	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8348265	core-svc	javax.management	P4	cleanup,jep486	RMIConnectionImpl: Remove Subject.callAs on MarshalledObject	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8350571	core-svc	javax.management	P4		Remove mention of Tonga test suite from JMX tests	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8347114	core-svc	javax.management	P4	release-note=yes	JMXServiceURL should require an explicit protocol	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8351413	core-svc	javax.management	P4	noreg-cleanup	Remove XML interchange in java.management/javax/management/modelmbean/DescriptorSupport 	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8359809	core-svc	javax.management	P4	release-note=yes	AttributeList, RoleList and RoleUnresolvedList should never accept other types of Object	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8311077	hotspot	jvmti	P4	cleanup	Fix -Wconversion warnings in jvmti code	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8319244	hotspot	jvmti	P4	loom	implement JVMTI handshakes support for virtual threads	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8320239	hotspot	jvmti	P4	loom	add dynamic switch for JvmtiVTMSTransitionDisabler sync protocol	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8313332	hotspot	jvmti	P4		Simplify lazy jmethodID cache in InstanceKlass	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8318563	hotspot	jvmti	P4	amazon-interest	GetClassFields should not use random access to field	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8318566	hotspot	jvmti	P4	amazon-interest	Heap walking functions should not use FilteredFieldStream	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8324241	hotspot	jvmti	P4	amazon-interest	Always record evol_method deps to avoid excessive method flushing	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8324680	hotspot	jvmti	P4	cleanup	Replace NULL with nullptr in JVMTI generated code	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8325186	hotspot	jvmti	P5	cleanup,noreg-cleanup	JVMTI VirtualThreadGetThreadStateClosure class is no longer used and should be removed	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8326716	hotspot	jvmti	P4		JVMTI spec: clarify what nullptr means for C/C++ developers	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8327056	hotspot	jvmti	P4		Remove unused static char array in JvmtiAgentList::lookup	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8328083	hotspot	jvmti	P3	loom,release-note=yes	degrade virtual thread support for GetObjectMonitorUsage	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8328285	hotspot	jvmti	P4	loom	GetOwnedMonitorInfo functions should use JvmtiHandshake	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8328758	hotspot	jvmti	P4	loom	GetCurrentContendedMonitor function should use JvmtiHandshake	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8329432	hotspot	jvmti	P4	loom	PopFrame and ForceEarlyReturn functions should use JvmtiHandshake	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8329491	hotspot	jvmti	P4	loom	GetThreadListStackTraces function should use JvmtiHandshake	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8329674	hotspot	jvmti	P4		JvmtiEnvThreadState::reset_current_location function should use JvmtiHandshake	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8330852	hotspot	jvmti	P4		All callers of JvmtiEnvBase::get_threadOop_and_JavaThread should pass current thread explicitly	UNCLASSIFIED	candidate-adapted-serviceability
+23	JDK-8331683	hotspot	jvmti	P4	loom	Clean up GetCarrierThread	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335370	hotspot	jvmti	P4		Fix -Wzero-as-null-pointer-constant warning in jvmti_common.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8335688	hotspot	jvmti	P4		Fix -Wzero-as-null-pointer-constant warnings from fflush calls in jvmti tests	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8337787	hotspot	jvmti	P4		Fix -Wzero-as-null-pointer-constant warnings when JVMTI feature is disabled	UNCLASSIFIED	candidate-adapted-serviceability
+24	JDK-8342577	hotspot	jvmti	P4	cleanup	Clean up JVMTI breakpoint support	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8337016	hotspot	jvmti	P4	noreg-self	serviceability/jvmti/RedefineClasses/RedefineLeakThrowable.java gets Metaspace OOM	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8346143	hotspot	jvmti	P4		add ClearAllFramePops function to speedup debugger single stepping in some cases	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8346460	hotspot	jvmti	P4	release-note=yes	NotifyFramePop should return JVMTI_ERROR_DUPLICATE	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8352812	hotspot	jvmti	P4	cleanup	remove useless class and function parameter in SuspendThread impl	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8356251	hotspot	jvmti	P4		Need minor cleanup for interp_only_mode	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8357673	hotspot	jvmti	P4	noreg-self	remove test serviceability/jvmti/vthread/TestPinCaseWithCFLH	UNCLASSIFIED	candidate-adapted-serviceability
+25	JDK-8357800	hotspot	jvmti	P4	amazon-interest,sonarcloud-found	Initialize JvmtiThreadState bool fields with bool literals	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8309399	hotspot	jvmti	P4	release-note=yes	JVMTI spec needs to clarify when OPAQUE_FRAME is thrown for reasons other than a native method	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8359168	hotspot	jvmti	P4	noreg-cleanup	Revert stdin.encoding usage in test/hotspot/jtreg/vmTestbase/nsk/jvmti/AttachOnDemand/attach010/attach010Agent00.java	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8359707	hotspot	jvmti	P4	amazon-interest,jdk25u-fix-request,jdk25u-fix-yes,noreg-self	Add classfile modification code to RedefineClassHelper	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8361680	hotspot	jvmti	P4		Use correct enum Claim value in VM_HeapWalkOperation::collect_simple_roots	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8364973	hotspot	jvmti	P4	noreg-self,ursqe-triaged	Add JVMTI stress testing mode	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8367576	hotspot	jvmti	P4	amazon-interest,cleanup,jvmti	JvmtiThreadState::_debuggable is unused	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8367719	hotspot	jvmti	P4		Refactor JNI code that uses class_to_verify_considering_redefinition()	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8369734	hotspot	jvmti	P4	amazon-interest,jvmti	JvmtiExport::post_class_file_load_hook return value is never used	UNCLASSIFIED	candidate-adapted-serviceability
+26	JDK-8371680	hotspot	jvmti	P4	noreg-cleanup	JVMTI: Remove unused VMOp type JvmtiPostObjectFree	UNCLASSIFIED	candidate-adapted-serviceability
+27	JDK-8376956	hotspot	jvmti	P4	jdk25u-fix-request,jdk25u-fix-yes,jdk26u-fix-SQE-ok-next,jdk26u-fix-request,jdk26u-fix-yes	Add JVMTI phase entering/setting to hserr event log	UNCLASSIFIED	candidate-adapted-serviceability
+27	JDK-8382306	hotspot	jvmti	P4	noreg-cleanup	Remove JvmtiTagMap::check_hashmap	UNCLASSIFIED	candidate-adapted-serviceability
+27	JDK-8385583	hotspot	jvmti	P4		RISC-V: Debugger very slow during stepping	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8193513	hotspot	runtime	P4	classloading,tracing	add support for printing a stack trace on class loading	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8250269	hotspot	runtime	P4	cpp14	Replace ATTRIBUTE_ALIGNED with alignas	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8261894	hotspot	runtime	P4	large-pages	Remove support for UseSHM	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8281455	hotspot	runtime	P4	cmd	Change JVM options with small ranges from 64 to 32 bits, for gc_globals.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8292692	hotspot	runtime	P4	include,starter	Move MethodCounters inline functions out of method.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8298443	hotspot	runtime	P3		Remove expired flags in JDK 22	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8299825	hotspot	runtime	P4	logging	Move StdoutLog and StderrLog to LogConfiguration	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8299915	hotspot	runtime	P4	cleanup,memory	Remove ArrayAllocatorMallocLimit and associated code	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8301327	hotspot	runtime	P4	amazon-interest,os,signals,starter	convert assert to guarantee in Handle_IDiv_Exception	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8303852	hotspot	runtime	P3	cleanup,stack	current_stack_region() gets called twice unnecessarily	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8304939	hotspot	runtime	P4	cpp,os	os::win32::exit_process_or_thread should be marked noreturn	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8305506	hotspot	runtime	P4	sync	Add support for fractional values of SafepointTimeoutDelay	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8305507	hotspot	runtime	P4	sync	Add support for grace period before AbortVMOnSafepointTimeout triggers	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8305753	hotspot	runtime	P4	cds	Allow JIT compilation for -Xshare:dump	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8306582	hotspot	runtime	P4	cds	Remove MetaspaceShared::exit_after_static_dump()	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8307312	hotspot	runtime	P4	metadata	Replace "int which" with "int cp_index" in constantPool	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8307356	hotspot	runtime	P4	metaspace	Metaspace: simplify BinList handling	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8307907	hotspot	runtime	P4	cleanup,oraclejdk-na,problemlist	[ppc] Remove RTM locking implementation	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8308463	hotspot	runtime	P4	cds	Refactor regenerated class handling in lambdaFormInvokers.cpp	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8308603	hotspot	runtime	P4	cds	Removing do_pending_ref/enclosing_ref from MetaspaceClosure	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8308850	hotspot	runtime	P4	cmd	Change JVM options with small ranges that get -Wconversion warnings to 32 bits	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8308903	hotspot	runtime	P4	cds	Print detailed info for Java objects in -Xlog:cds+map	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8309034	hotspot	runtime	P4	fuzzgen	NoClassDefFoundError when initializing Long$LongCache	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8309240	hotspot	runtime	P4	cds	Array classes should be stored in dynamic CDS archive	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8309599	hotspot	runtime	P4	metadata	WeakHandle and OopHandle release should clear obj pointer	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8309692	hotspot	runtime	P4	cleanup	Fix -Wconversion warnings in javaClasses	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8309753	hotspot	runtime	P4	cds	Include array classes in the output of -XX:+PrintSharedArchiveAndExit	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8309878	hotspot	runtime	P4	headers	Reduce inclusion of resolvedIndyEntry.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310076	hotspot	runtime	P4	headers	Reduce inclusion of bytecodeStream.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310107	hotspot	runtime	P4		os::trace_page_sizes_for_requested_size should name alignment as requested page size	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310146	hotspot	runtime	P4		Removing unused PerfLongVariant::_sampled	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310170	hotspot	runtime	P4		Use sp's argument to improve performance of outputStream::indent and remove SP_USE_TABS	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310225	hotspot	runtime	P4	headers	Reduce inclusion of oopMapCache.hpp and generateOopMap.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310276	hotspot	runtime	P4	oraclejdk-na	RISC-V: Make use of shadd macro-assembler function when possible	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310332	hotspot	runtime	P4	cleanup	Fix -Wconversion warnings in MethodData	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310494	hotspot	runtime	P4	headers	Do not include constantPool.hpp from instanceKlass.hpp	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310510	hotspot	runtime	P4		Remove WordsPerLong	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310577	hotspot	runtime	P4	cleanup	Fix -Wconversion warnings in interpreter and oops	UNCLASSIFIED	candidate-adapted-serviceability
+22	JDK-8310644	hotspot	runtime	P3	apache-lucene,foreign-memaccess+abi,jni	Make panama memory segment close use async handshakes	UNCLASSIFIED	candidate-adapted-serviceability

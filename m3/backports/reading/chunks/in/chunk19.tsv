@@ -1,0 +1,18 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+24	JDK-8341100	core-libs	java.lang:reflect	P4	doc-only,noreg-doc	Add index entries for terms used in java.lang.Class	UNCLASSIFIED	candidate-high-risk
+25	JDK-8297271	core-libs	java.lang:reflect	P3		AccessFlag.maskToAccessFlags should be specific to class file version	UNCLASSIFIED	candidate-high-risk
+25	JDK-8347063	core-libs	java.lang:reflect	P4	noreg-doc	Add comments in ClassFileFormatVersion for class file format evolution history	UNCLASSIFIED	candidate-high-risk
+25	JDK-8347397	core-libs	java.lang:reflect	P4		Cleanup of JDK-8169880	UNCLASSIFIED	candidate-high-risk
+25	JDK-8347471	core-libs	java.lang:reflect	P4		Provide valid flags and mask in AccessFlag.Location	UNCLASSIFIED	candidate-high-risk
+25	JDK-8350704	core-libs	java.lang:reflect	P4		Create tests to ensure the failure behavior of core reflection APIs	UNCLASSIFIED	candidate-high-risk
+26	JDK-8353835	core-libs	java.lang:reflect	P4		Implement JEP 500: Prepare to Make Final Mean Final	UNCLASSIFIED	candidate-high-risk
+26	JDK-8370839	core-libs	java.lang:reflect	P4		Tests to verify peculiar Proxy dispatching behaviors	UNCLASSIFIED	candidate-high-risk
+26	JDK-8371319	core-libs	java.lang:reflect	P4	dcsas,noreg-perf,starter,webbug	java.lang.reflect.Method#equals doesn't short-circuit with same instances	UNCLASSIFIED	candidate-high-risk
+27	JDK-8357728	core-libs	java.lang:reflect	P4	additional-information-received,dcsaw,hgupdate-sync,webbug	Avoid caching synthesized names in synthesized parameters	UNCLASSIFIED	candidate-high-risk
+27	JDK-8373125	core-libs	java.lang:reflect	P4		Add defensive screening of modifiers for Field and Parameter toString() results	UNCLASSIFIED	candidate-high-risk
+27	JDK-8380074	core-libs	java.lang:reflect	P4	amazon-interest,noreg-cleanup,starter	Reflection::areNestMates should be used by Class::isNestmateOf	UNCLASSIFIED	candidate-high-risk
+22	JDK-8309976	performance	hotspot	P4	benchmark,performance	Add microbenchmark for stressing code cache	UNCLASSIFIED	candidate-measured
+23	JDK-8325403	performance	hotspot	P3	gc	Add SystemGC JMH benchmarks 	UNCLASSIFIED	candidate-measured
+24	JDK-8343305	performance	libraries	P4	cleanup,noreg-cleanup	Remove Indify-dependent microbenchmarks	UNCLASSIFIED	candidate-measured
+25	JDK-8355559	performance	libraries	P4		Benchmark modification/extension shouldn't affect the behavior of other benchmarks	UNCLASSIFIED	candidate-measured
+26	JDK-8370150	performance	libraries	P4	numerics	Add StrictMath microbenchmarks to cover FDLIBM algorithms	UNCLASSIFIED	candidate-measured

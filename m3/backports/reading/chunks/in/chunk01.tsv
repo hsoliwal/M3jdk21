@@ -1,0 +1,111 @@
+release	jbs	component	subcomponent	priority	labels	summary	disposition	provisional_disposition
+23	JDK-8323546	core-svc	tools	P4	doc,jcmd	Cleanup jcmd docs for Compiler.perfmap and VM.cds filename parameter	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8327793	core-svc	tools	P4	release-note=yes,svc-rmi	Deprecate jstatd for removal	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8334287	core-svc	tools	P4		Man page update for jstatd deprecation	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8334492	core-svc	tools	P4	jcmd	DiagnosticCommands (jcmd) should accept %p in output filenames and substitute PID	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8337199	core-svc	tools	P4	loom,release-note=yes	Add jcmd Thread.vthread_scheduler and Thread.vthread_pollers diagnostic commands	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8339927	core-svc	tools	P4		Man page update for deprecating jhsdb debugd for removal	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8344105	core-svc	tools	P4	cleanup,security-manager	Remove SecurityManager and related calls from jdk.attach and jdk.hotspot.agent	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8345745	core-svc	tools	P4	attach-api,noreg-hard	Update mode of the Attach API communication pipe.	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8351224	core-svc	tools	P4	cleanup	Deprecate com.sun.tools.attach.AttachPermission for removal	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8353439	core-svc	tools	P4	release-note	Shell grouping of -XX:OnError= commands is surprising	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8354460	core-svc	tools	P4		Streaming output for attach API should be turned on by default	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8358588	core-svc	tools	P4	sonarcloud-found	ThreadSnapshot.ThreadLock should be static nested class	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8319589	core-svc	tools	P3	bellsoft-interest	Attach from root to a user java process not supported in Mac	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8357439	core-svc	tools	P4	jcmd,user-experience	Add bash autocompletion for jcmd	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8376052	core-svc	tools	P4		Use AttachOperationFailedException rather than AttachNotSupportedException in findTargetProcessTmpDirectory()	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8312882	infrastructure	-	P4	noreg-doc	Update the CONTRIBUTING.md with pointers to lifecycle of a PR	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8335911	infrastructure	-	P4	amazon-interest,ide-support	Document ccls indexer in doc/ide.md	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8348905	infrastructure	-	P4		Add support to specify the JDK for compiling Jtreg tests	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8355669	infrastructure	-	P4		Add static-jdk-bundles make target	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8374990	infrastructure	-	P4	noreg-self	Check include and jmods folder of JDK image for unwanted files	UNCLASSIFIED	admitted-additive-tooling
+27	JDK-8378657	infrastructure	-	P4	starter	OutputAnalyzer should have a quiet mode	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8268719	infrastructure	build	P4	build-infra,windows	Force execution (and source) code page used when compiling on Windows	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8294549	infrastructure	build	P4	build-infra	configure script should detect unsupported path	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8307858	infrastructure	build	P4	jdk21-enhancement-no,jdk21-enhancement-request	[REDO] JDK-8307194 Add make target for optionally building a complete set of all JDK and hotspot libjvm static libraries	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8309880	infrastructure	build	P4		Add support for linking libffi on Windows and Mac	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8310376	infrastructure	build	P4		Extend SetupTarget macro with DIR parameter	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8310384	infrastructure	build	P4		Add hooks for custom image creation	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8310454	infrastructure	build	P4		Introduce static-libs-graal bundle	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8310728	infrastructure	build	P4	noreg-build	Enable Zc:inline flag in Visual Studio build	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8311545	infrastructure	build	P4		Allow test symbol files to be kept in the test image	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8314444	infrastructure	build	P4		Update jib-profiles.js to use JMH 1.37 devkit	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8314543	infrastructure	build	P4		gitattributes: make diffs easier to read	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8315278	infrastructure	build	P4		Patch 'print-targets' target to print targets separated by new line	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8317560	infrastructure	build	P4		Change to Xcode 14.3.1 for building on macOS at Oracle	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8317620	infrastructure	build	P4		Build JDK tools with ModuleMainClass attribute	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8319573	infrastructure	build	P4		Change to Visual Studio 2022 17.6.5 for building on Windows at Oracle	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8320334	infrastructure	build	P4	build-infra	Reflow markdown in testing.md	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8320410	infrastructure	build	P4	build-infra	Reflow markdown in building.md	UNCLASSIFIED	admitted-additive-tooling
+22	JDK-8320526	infrastructure	build	P4	build-infra	Use title case in building.md	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8017234	infrastructure	build	P3	bleaklow-interest,build-infra	Hotspot should stop using mapfiles	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8316657	infrastructure	build	P4	build-infra	Support whitebox testing in microbenchmarks	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8322757	infrastructure	build	P4		Enable -Wparentheses warnings	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8322801	infrastructure	build	P5		RISC-V: The riscv path of the debian sysroot had been changed	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8323529	infrastructure	build	P4		Relativize test image dependencies in microbenchmarks	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8323995	infrastructure	build	P4		Suppress notes generated on incremental microbenchmark builds	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325148	infrastructure	build	P3	noreg-build	Enable restricted javac warning in java.base	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325558	infrastructure	build	P4	build-infra	Add jcheck whitespace checking for properties files	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325570	infrastructure	build	P4		Update to Graphviz 9.0.0	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325626	infrastructure	build	P4	build-infra	Allow selection of non-matching configurations using CONF=!string	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325800	infrastructure	build	P4		Drop unused cups declaration from Oracle build configuration	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325877	infrastructure	build	P3	build-infra	Split up NativeCompilation.gmk	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325878	infrastructure	build	P4	build-infra	Require minimum Clang version 13	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325880	infrastructure	build	P4	build-infra	Require minimum Open XL C/C++ version 17.1.1	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8325881	infrastructure	build	P4	build-infra	Require minimum gcc version 10	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8326831	infrastructure	build	P4		Clarify test harness control variables in make help	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8327389	infrastructure	build	P4		Remove use of HOTSPOT_BUILD_USER	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8327493	infrastructure	build	P4	build-infra	Update minimum Xcode version in docs	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8328074	infrastructure	build	P4	build-infra	Add jcheck whitespace checking for assembly files	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8329970	infrastructure	build	P4		Update autoconf build-aux files with latest from 2024-01-01	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8330107	infrastructure	build	P3	build-infra	Separate out "awt" libraries from Awt2dLibraries.gmk	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8330690	infrastructure	build	P4	build-infra	RunTest should support REPEAT_COUNT for JCK	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8331886	infrastructure	build	P4		Allow markdown src file overrides	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8332808	infrastructure	build	P4	build-infra	Always set java.io.tmpdir to a suitable value in the build	UNCLASSIFIED	admitted-additive-tooling
+23	JDK-8332849	infrastructure	build	P4		Update doc/testing.{md,html} (spelling and stale information)	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8282944	infrastructure	build	P4	build-infra	GHA: Add Alpine Linux x86_64 pre-integration check	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8298920	infrastructure	build	P4	build-infra,build-performance	Improve microbenchmark build times	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8329288	infrastructure	build	P4	build-infra	Update Visual Studio visibility support for POSIX functions	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8330586	infrastructure	build	P4	build-infra	GHA: Drop additional gcc/glibc packages installation for x86_32 	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8333685	infrastructure	build	P4		Make update-copyright-year script more useful	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8335880	infrastructure	build	P4	build-docs,build-infra	More troubleshooting tips around windows space in path	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8337536	infrastructure	build	P4	build-infra	AArch64: Enable BTI branch protection for runtime part	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8338290	infrastructure	build	P4	build-infra,macosx	Xcode project generator for hotspot	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8338768	infrastructure	build	P3	build-infra,build-maintainability	Introduce runtime lookup to check for static builds	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8339480	infrastructure	build	P2	build-infra	Build static-jdk image with a statically linked launcher	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8339570	infrastructure	build	P4	build-infra	Add Tidy build support for JDK tests	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8343190	infrastructure	build	P4		GHA: Try building JTReg several times	UNCLASSIFIED	admitted-additive-tooling
+24	JDK-8344350	infrastructure	build	P5	build-infra,build-usability	Add '.gdbinit' and '.lldbinit' to file '.gitignore'	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8187520	infrastructure	build	P4	build-infra,build-usability	Add --disable-java-warnings-as-errors configure option	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8244533	infrastructure	build	P3	build-infra,build-usability,windows	Configure should abort on missing short names in Windows	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8282493	infrastructure	build	P4	build-infra,build-usability	Add --with-jcov-modules convenience option	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8285692	infrastructure	build	P4	build-functionality,build-infra	Enable _FORTIFY_SOURCE=2 when building with Clang	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8287122	infrastructure	build	P4	build-infra	Use gcc12 -ftrivial-auto-var-init=pattern in debug builds	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8317012	infrastructure	build	P5	build-infra,build-maintainability	Explicitly check for 32-bit word size for using libatomic with zero	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8343832	infrastructure	build	P4	build-infra,build-usability	Enhance test summary with number of skipped tests	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8345627	infrastructure	build	P4	build-infra	[REDO] Use gcc12 -ftrivial-auto-var-init=pattern in debug builds	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8345726	infrastructure	build	P4		Update mx in RunTestPrebuiltSpec to reflect change in JDK-8345302	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8346830	infrastructure	build	P4	build-infra,build-maintainability	Simplify adlc build config for aix	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8347909	infrastructure	build	P4		Automatic precompiled.hpp inclusion	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8348182	infrastructure	build	P4		Remove DONT_USE_PRECOMPILED_HEADER	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8348190	infrastructure	build	P3	build-infra,build-maintainability	Framework for tracing makefile inclusion and parsing	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8348429	infrastructure	build	P3	build-functionality,build-infra	Update cross-compilation devkits to Fedora 41/gcc 13.2	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8348998	infrastructure	build	P4	build-infra,build-maintainability	Split out PreInit.gmk from Init.gmk	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8349399	infrastructure	build	P4		GHA: Add static-jdk build on linux-x64	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8350443	infrastructure	build	P4	amazon-interest	GHA: Split static-libs-bundles into a separate job	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8350819	infrastructure	build	P4		Ignore core files	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8351154	infrastructure	build	P3	build-functionality,build-infra	Use -ftrivial-auto-var-init=pattern for clang too	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8351322	infrastructure	build	P4	build-infra,build-maintainability,webbug	Parameterize link option for pthreads	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8351323	infrastructure	build	P4	build-infra,build-maintainability,webbug	Parameterize compiler and linker flags for iconv	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8351440	infrastructure	build	P4		Link with -reproducible on macOS	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8352284	infrastructure	build	P4		EXTRA_CFLAGS incorrectly applied to BUILD_LIBJVM src/hotspot C++ source files	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8352506	infrastructure	build	P4	build-infra,build-maintainability,build-usability	Simplify make/test/JtregNativeHotspot.gmk	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8352618	infrastructure	build	P4	build-infra,build-maintainability	Remove old deprecated functionality in the build system	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8352645	infrastructure	build	P4		Add tool support to check order of includes	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8352692	infrastructure	build	P3	noreg-build	Add support for extra jlink options	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8353066	infrastructure	build	P4	build-infra,build-usability,jdk24u-fix-SQE-ok,jdk24u-fix-request,jdk24u-fix-yes	Properly detect Windows/aarch64 as build platform	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8353573	infrastructure	build	P4	webbug	System giflib not found by configure if it's not in system directories	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8353580	infrastructure	build	P4	webbug	libjpeg is not found if not installed in system directories	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8354919	infrastructure	build	P5		Move HotSpot .editorconfig into the global .editorconfig	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8355235	infrastructure	build	P4		Clean out old versions from Tools.gmk	UNCLASSIFIED	admitted-additive-tooling
+25	JDK-8355400	infrastructure	build	P5		Better git detection in update_copyright_year.sh	UNCLASSIFIED	admitted-additive-tooling

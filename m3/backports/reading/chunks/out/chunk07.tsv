@@ -1,0 +1,111 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+27	JDK-8374658	candidate-adapted	admitted-docs	Processor javadoc wording only
+22	JDK-8246280	candidate-adapted	hold-javac	javax.lang.model sealed-type spec refinement coupled to javac model
+22	JDK-8281169	candidate-adapted	admitted-docs	javadoc discussion of elements and types only
+22	JDK-8309964	candidate-adapted	admitted-docs	directed inheritDoc in javadoc only
+22	JDK-8312418	candidate-adapted	hold-api	adds public method Elements.getEnumConstantBody
+22	JDK-8314477	candidate-adapted	admitted-docs	javadoc definition of prototypical type only
+22	JDK-8315137	candidate-adapted	hold-api	redeclares asType in public RecordComponentElement interface
+22	JDK-8320803	candidate-adapted	hold-javac	documents SourceVersion.RELEASE_22 which is absent in 21
+22	JDK-8320941	candidate-adapted	admitted-docs	javadoc on receiver type handling only
+23	JDK-8175386	candidate-adapted	hold-javac	Types spec and javac model exception behaviour change
+23	JDK-8322248	candidate-adapted	admitted-docs	ElementFilter javadoc wording only
+23	JDK-8329296	candidate-adapted	hold-jep	Markdown doc comment model API from JEP 467 not in 21
+23	JDK-8329624	candidate-adapted	hold-preview	adds preview-feature visitor classes to javax.lang.model.util
+23	JDK-8329644	candidate-adapted	admitted-docs	javadoc on visitor evolution only
+23	JDK-8330703	candidate-adapted	admitted-docs	javadoc link syntax only
+23	JDK-8333586	candidate-adapted	admitted-docs	javadoc see-tag syntax only
+24	JDK-8338333	candidate-adapted	admitted-docs	JLS links in Modifier javadoc only
+24	JDK-8339696	candidate-adapted	admitted-docs	package javadoc scope clarification only
+24	JDK-8339781	candidate-adapted	admitted-docs	javadoc tag usage only
+24	JDK-8340399	candidate-adapted	hold-javac	SourceVersion evolution comment covers post-21 language releases
+24	JDK-8345324	candidate-adapted	hold-javac	SourceVersion evolution comment for 24 language changes
+26	JDK-8372850	candidate-adapted	hold-javac	SourceVersion evolution comment for 26 language changes
+27	JDK-8374749	candidate-adapted	admitted-docs	AnnotationValue javadoc clarification only
+27	JDK-8374752	candidate-adapted	admitted-docs	JLS links in element javadoc only
+27	JDK-8374953	candidate-adapted	admitted-docs	javadoc note on TypeMirror comparison only
+27	JDK-8385836	candidate-adapted	hold-javac	SourceVersion evolution comment for 27 language changes
+24	JDK-8338536	candidate-adapted	hold-removal	removes JNDI trustURLCodebase opt-in for remote class loading
+24	JDK-8340359	candidate-adapted	hold-removal	removes public constant javax.naming.Context.APPLET
+24	JDK-8344023	candidate-adapted	candidate-adapted	internal LdapClient Hashtable cleanup
+27	JDK-8219203	candidate-adapted	candidate-adapted	internal JNDI DNS swap of StringBuffer to StringBuilder usage
+26	JDK-8359225	candidate-adapted	admitted-tests	deletes unused javax.script test helper
+26	JDK-8369027	candidate-adapted	candidate-adapted	source-retention Serial annotations in java.scripting
+24	JDK-8344259	candidate-adapted	hold-preview	Float16 is an incubator class absent in 21
+25	JDK-8310691	candidate-adapted	hold-jit	incubator VectorShuffle refactor with C2 intrinsic rework
+25	JDK-8350748	candidate-adapted	hold-preview	incubator Vector API force-inline change
+25	JDK-8351096	candidate-adapted	admitted-docs	Vector API javadoc typo fixes only
+25	JDK-8351993	candidate-adapted	hold-preview	adds incubator VectorShuffle MemorySegment API
+26	JDK-8358768	candidate-adapted	hold-preview	incubator VectorOperators change on post-21 SUADD
+27	JDK-8376602	candidate-adapted	hold-native	upgrades bundled native SLEEF library absent in 21
+27	JDK-8380915	candidate-adapted	hold-preview	incubator Vector API declaration cleanup
+26	JDK-8359760	candidate-adapted	hold-removal	removes jdk.jsobject module
+22	JDK-8301991	candidate-adapted	hold-data	mass re-encoding of bundled l10n resource bundles with build coupling
+22	JDK-8314075	candidate-adapted	admitted-additive-tooling	build-time JCov version bump; runtime-neutral
+26	JDK-8366365	candidate-adapted	admitted-tests	whitebox CPUInfoTest update only
+27	JDK-8378642	candidate-adapted	admitted-additive-tooling	gitignore entry for LogCompilation jar
+22	JDK-8310460	candidate-adapted	hold-removal	removes jdeps -profile command-line option
+22	JDK-8318458	candidate-adapted	hold-preview	man pages for FFM restricted-method options finalized after 21
+24	JDK-8317611	candidate-adapted	hold-preview	new jnativescan tool built on FFM restricted methods not final in 21
+25	JDK-8353840	candidate-adapted	hold-preview	fix to jnativescan tool absent in 21
+25	JDK-8353917	candidate-adapted	hold-preview	refactor of jnativescan tool absent in 21
+26	JDK-8367157	candidate-adapted	hold-removal	removes jrunscript tool
+23	JDK-8182774	candidate-adapted	hold-api	adds javap -verify command-line option
+24	JDK-8341924	candidate-adapted	hold-javac	javap diagnostic on ClassFile-API javap not in 21
+24	JDK-8345145	candidate-adapted	hold-javac	changes javap -l output on ClassFile-API javap
+22	JDK-8305814	candidate-adapted	candidate-adapted	internal Xalan 2.7.3 refresh without public API change
+22	JDK-8306055	candidate-adapted	hold-api	adds JDK built-in catalog and jdk.xml.jdkcatalog.resolve property
+22	JDK-8306632	candidate-adapted	hold-api	adds jdk.xml.dtd.support property
+22	JDK-8316996	candidate-adapted	hold-api	adds public Catalog API factory method
+22	JDK-8321406	candidate-adapted	hold-api	follow-up fix to the 22 built-in catalog held with it
+23	JDK-8330542	candidate-adapted	hold-api	adds conf template using JAXP properties absent in 21
+24	JDK-8343001	candidate-adapted	hold-api	changes semantics of jdk.xml.enableExtensionFunctions property
+24	JDK-8343004	candidate-adapted	hold-api	changes default JAXP limit property values
+24	JDK-8344800	candidate-adapted	hold-data	bundles W3C DTD and XSD data into the 22 built-in catalog
+25	JDK-8353232	candidate-adapted	hold-api	reworks JAXP configuration surface on post-21 config file model
+25	JDK-8353234	candidate-adapted	candidate-adapted	internal XMLSecurityPropertyManager refactor; check post-21 prerequisites
+25	JDK-8354084	candidate-adapted	hold-api	changes XPath API extension function control
+22	JDK-8175874	candidate-adapted-security	admitted-docs	insertProviderAt javadoc documents existing out-of-range behaviour
+22	JDK-8302233	candidate-adapted-security	candidate-adapted-security	HSS/LMS support in keytool and jarsigner without new public API
+22	JDK-8308398	candidate-adapted-security	hold-removal	moves SunEC into java.base and deprecates jdk.crypto.ec for removal
+22	JDK-8314059	candidate-adapted-security	candidate-adapted-security	removes unused internal PKCS7.verify method
+22	JDK-8318096	candidate-adapted-security	hold-api	adds public java.security.AsymmetricKey interface
+23	JDK-8317431	candidate-adapted-security	candidate-adapted-security	internal PKIX path-building comparator simplification
+23	JDK-8320362	candidate-adapted-security	hold-api	adds KeychainStore-ROOT keystore type with macOS native code
+23	JDK-8323624	candidate-adapted-security	candidate-adapted-security	internal JCA ProviderList service iteration cleanup
+24	JDK-8248981	candidate-adapted-security	admitted-docs	standard RSASSA-PSS digest and MGF names documentation only
+24	JDK-8305406	candidate-adapted-security	admitted-docs	javadoc spec tags only
+24	JDK-8319332	candidate-adapted-security	hold-api	adds include directive to java.security properties file format
+24	JDK-8338411	candidate-adapted-security	hold-jep	JEP 486 security manager disablement not in 21
+24	JDK-8343194	candidate-adapted-security	candidate-adapted-security	internal CodeSource.readObject Hashtable lookup cleanup
+24	JDK-8344024	candidate-adapted-security	candidate-adapted-security	internal RSAPSSSignature Hashtable cleanup
+24	JDK-8344397	candidate-adapted-security	hold-jep	JEP 486 security manager dependency removal
+24	JDK-8345221	candidate-adapted-security	candidate-adapted-security	SunNativeGSS registration via existing Provider service API
+25	JDK-8283795	candidate-adapted-security	hold-api	adds algorithms to Java SE implementation requirements
+25	JDK-8298420	candidate-adapted-security	hold-preview	JEP 470 PEM encodings API preview
+25	JDK-8328914	candidate-adapted-security	admitted-docs	javadoc for java.security.debug; keep to options present in 21
+25	JDK-8341775	candidate-adapted-security	candidate-adapted-security	jarsigner duplicate manifest handling fix without API change
+25	JDK-8345940	candidate-adapted-security	candidate-adapted-security	internal security resource bundles moved to properties files
+25	JDK-8346736	candidate-adapted-security	admitted-docs	standard algorithm names spec text only
+25	JDK-8348967	candidate-adapted-security	hold-removal	deprecates security permission classes for removal after JEP 486
+25	JDK-8349400	candidate-adapted-security	candidate-measured	startup speed claim from nested class elimination
+25	JDK-8350689	candidate-adapted-security	hold-api	changes default java.security.debug output built on post-21 options
+25	JDK-8357592	candidate-adapted-security	admitted-tests	jarsigner compatibility test output parsing only
+25	JDK-8358319	candidate-adapted-security	candidate-adapted-security	cache whitespace Pattern in internal Pem.decode
+26	JDK-8349732	candidate-adapted-security	hold-jep	JAR signing with ML-DSA from JEP 497 not in 21
+26	JDK-8353749	candidate-adapted-security	candidate-adapted-security	keytool and jarsigner warning text for JKS and JCEKS only
+26	JDK-8355379	candidate-adapted-security	candidate-measured	Stable annotations on lazy java.security fields change JIT folding
+26	JDK-8356557	candidate-adapted-security	hold-removal	deprecates java.net.SocketPermission for removal
+26	JDK-8357470	candidate-adapted-security	admitted-tests	adds test for Debug option lower-casing
+26	JDK-8357915	candidate-adapted-security	candidate-measured	SecureRandom.nextLong allocation change; verify output sequence and cost
+26	JDK-8358099	candidate-adapted-security	hold-preview	PEM preview API spec updates
+26	JDK-8358171	candidate-adapted-security	hold-preview	tests for PEM preview API absent in 21
+26	JDK-8360564	candidate-adapted-security	hold-preview	JEP 524 PEM second preview
+26	JDK-8361964	candidate-adapted-security	hold-api	changes Java SE required algorithm list
+26	JDK-8362894	candidate-adapted-security	hold-api	tests PKCS12 PBMAC1 support absent in 21
+26	JDK-8365069	candidate-adapted-security	hold-preview	tests rewritten onto PEM preview API absent in 21
+26	JDK-8365072	candidate-adapted-security	hold-preview	tests rewritten onto PEM preview API absent in 21
+26	JDK-8365581	candidate-adapted-security	candidate-measured	P256 field arithmetic performance claim on post-21 code
+26	JDK-8371574	candidate-adapted-security	hold-preview	tests for PEM preview decode absent in 21
+27	JDK-8368692	candidate-adapted-security	hold-removal	restricts tool password input from System.in
+27	JDK-8369917	candidate-adapted-security	candidate-adapted-security	adds RFC 9858 LMS parameter sets to verifier without new API
