@@ -50,30 +50,43 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
     return COMPOUND_TRANSITION
 
 
-# Exact receiver generation after the immutable 36+7+40 census.
-# Both a historical source and a historical donor JUnit test transition are sealed.
-# This does NOT relax the 36-owner historical proof or the 40-new-file shard proofs.
-APACHE450_TRANSITIONS = (
-    ('m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java', '5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f', '86473e61bf886a28ca3a40010b6bd25f5f34cdb0', 'bd03c0a1460f9ccbb24eed31100d86fb3d7ea05be9872971cb81ad9852ad4b36', 'ac35841fb84a28d86390843e5a3dadcb390f069a', 'com.synexia.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
-    ('m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java', '737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a', '4184a8b861025d80010723d4700588f075eca105', 'fa8c854c0e924a6394df83eac12bfdc062147a1f04fe1270b1de288f17b0569a', '73dd1833f5384d9404392ee9a79e19559ef865fd', 'com.synexia.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
+# This ledger is a source-sealed extension, not a modification of the
+# original 36+7+40 history or the previous one-test compound-var transition.
+COMPILER_RECEIPT_BLOB = 'b232af6a8867ebba2ffe7082b37ea5d07f663472'
+APACHE_TEST = TEST + 'M3ApacheCollectionsTest.java'
+COMPILER_TEST_PATHS = (
+    APACHE_TEST,
+    TEST + 'M3FiveLibraryKeyRangesTest.java',
+    TEST + 'M3FiveProviderFlagSelectionTest.java',
 )
+COMPILER_RECIPE = 'com.synexia.m3.M3Jdk21InteropThreeCompilerAtoms20261022'
 
 
-def exact_apache450_transitions(receipts: Path) -> dict[str, tuple[str, ...]]:
-    file = receipts / 'changed-apache-bag-retain450-02.tsv'
-    if file.is_symlink() or not file.is_file():
-        raise ValueError('missing or aliased Apache450 dual-source receipt')
-    parsed = tuple(tuple(line.split('\t')) for line in
-                   file.read_text(encoding='utf-8').splitlines()
-                   if line and not line.startswith('#'))
-    if parsed != APACHE450_TRANSITIONS:
-        raise ValueError('unadmitted Apache450 source or test successor')
-    return {row[0]: row for row in parsed}
+def admitted_compiler_revisions(receipts: Path) -> dict[str, tuple[str, str, str, str]]:
+    receipt = receipts / 'changed-compiler-03.tsv'
+    if receipt.is_symlink() or not receipt.is_file():
+        raise ValueError('missing or aliased exact three-source Java21 compiler receipt')
+    data = receipt.read_bytes()
+    if git_blob(data) != COMPILER_RECEIPT_BLOB:
+        raise ValueError('three-source compiler receipt blob drift')
+    records = [line.split('\t') for line in data.decode('utf-8').splitlines()
+               if line and not line.startswith('#')]
+    if (len(records) != 3 or any(len(row) != 7 for row in records)
+            or tuple(row[0] for row in records) != COMPILER_TEST_PATHS):
+        raise ValueError('unapproved Java21 compiler source path or record count')
+    result: dict[str, tuple[str, str, str, str]] = {}
+    for path, old_sha, old_blob, new_sha, new_blob, recipe, status in records:
+        if (not HEX64.fullmatch(old_sha) or not HEX40.fullmatch(old_blob)
+                or not HEX64.fullmatch(new_sha) or not HEX40.fullmatch(new_blob)
+                or old_sha == new_sha or old_blob == new_blob
+                or recipe != COMPILER_RECIPE or status != 'PENDING_FULL_VENDOR_CI'):
+            raise ValueError('invalid Java21 compiler source revision admission')
+        result[path] = (old_sha, old_blob, new_sha, new_blob)
+    return result
 
 
 def verify_additions(product: Path, receipts: Path,
-                     older: set[str], tracked: set[str],
-                     require_revision: bool = False) -> list[str]:
+                     older: set[str], tracked: set[str]) -> list[str]:
     product = product.resolve(strict=True)
     receipts = receipts.resolve(strict=True)
     if len(older) != 36 or any(not p.startswith((MAIN, TEST)) for p in older):
@@ -110,6 +123,9 @@ def verify_additions(product: Path, receipts: Path,
         or (receipts / 'changed-01.tsv').is_symlink()) else None
     if successor is not None and successor[0] not in paths:
         raise ValueError('one-test source transition target not admitted')
+    compiler = admitted_compiler_revisions(receipts)
+    if any(path not in paths for path in COMPILER_TEST_PATHS[1:]):
+        raise ValueError('additional compiler source not in frozen 40-owner receipt')
     production = tests = 0
     for relative, sha, blob, family, kind, license_id in rows:
         if (not relative.endswith('.java') or not (relative.startswith(MAIN)
@@ -131,6 +147,11 @@ def verify_additions(product: Path, receipts: Path,
             if (sha, blob) != (successor[1], successor[2]):
                 raise ValueError('invalid one-test predecessor identity')
             sha, blob = successor[3], successor[4]
+        if relative in compiler:
+            before_sha, before_blob, after_sha, after_blob = compiler[relative]
+            if (sha, blob) != (before_sha, before_blob):
+                raise ValueError('invalid Java21 compiler owner preimage: ' + relative)
+            sha, blob = after_sha, after_blob
         if (hashlib.sha256(data).hexdigest() != sha or git_blob(data) != blob
                 or b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]):
             raise ValueError('source SHA, Git blob or license header drift: ' + relative)
@@ -200,9 +221,13 @@ def verify_historical_revisions(product: Path, receipts: Path,
                 or status != 'SOURCE_ONLY_PENDING_CONTRACT'):
             raise ValueError('unadmitted historical source revision: ' + path)
         revised[path] = (new_sha, new_blob)
-    bag450 = exact_apache450_transitions(receipts)
-    if not set(bag450).issubset(legacy):
-        raise ValueError('Apache450 transition does not bind original historical source')
+    compiler = admitted_compiler_revisions(receipts)
+    apache = compiler[APACHE_TEST]
+    if APACHE_TEST not in legacy or legacy[APACHE_TEST] != apache[:2]:
+        raise ValueError('Apache deprecation test historical identity mismatch')
+    if APACHE_TEST in revised:
+        raise ValueError('Apache source revision collides with historical seven')
+    revised[APACHE_TEST] = apache[2:]
     for path, historic_identity in legacy.items():
         source = product / path
         if (source.is_symlink() or not source.is_file()
@@ -210,13 +235,6 @@ def verify_historical_revisions(product: Path, receipts: Path,
             raise ValueError('missing or aliased current historical source: ' + path)
         data = source.read_bytes()
         expected_sha, expected_blob = revised.get(path, historic_identity)
-        if path in bag450:
-            _, old_sha, old_blob, new_sha, new_blob, recipe, status = bag450[path]
-            if ((expected_sha, expected_blob) != (old_sha, old_blob)
-                    or recipe != 'com.synexia.m3.M3ApacheBagRetain450Recipe'
-                    or status != 'PENDING_REAL_DONOR_JUNIT'):
-                raise ValueError('Apache450 transition predecessor or recipe mismatch: ' + path)
-            expected_sha, expected_blob = new_sha, new_blob
         if hashlib.sha256(data).hexdigest() != expected_sha or git_blob(data) != expected_blob:
             raise ValueError('unadmitted current historical atom drift: ' + path)
         if path in revised and b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]:
@@ -234,7 +252,7 @@ def verify_product_checkout(product: Path, receipts: Path,
     older, revisions = verify_historical_revisions(product, receipts, historical_product)
     tracked = set(subprocess.check_output(['git', 'ls-files', '--',
         PREFIX + 'main', PREFIX + 'test'], cwd=product, text=True).splitlines())
-    extras = verify_additions(product, receipts, older, tracked, require_revision=True)
+    extras = verify_additions(product, receipts, older, tracked)
     return len(older), revisions, len(extras)
 
 
