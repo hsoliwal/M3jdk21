@@ -24,6 +24,8 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import jdk.m3.parser.M3JavacParser;
 import jdk.m3.parser.M3JavacTree;
+import jdk.m3.parser.M3ASTIndex;
+import jdk.m3.parser.M3ASTIngress;
 
 /** Direct existing-M3AST contracts; no plugin descriptor or service-loader claim. */
 public final class M3JavacParserContract {
@@ -33,6 +35,7 @@ public final class M3JavacParserContract {
 
     public static void main(String[] arguments) throws Exception {
         sharedProjectionAndRanges();
+        indexedProjectionAndReuse();
         distinctProjectionIdentities();
         nodeBudgetAndCleanup();
         parsedPhaseOnly();
@@ -148,6 +151,32 @@ public final class M3JavacParserContract {
         expect(IndexOutOfBoundsException.class, () -> tree.kind(-1));
         expect(IndexOutOfBoundsException.class, () -> tree.end(tree.nodeCount()));
         check(!summary.completed(), "parse-only caller does not invent a full compilation event");
+    }
+
+    private static void indexedProjectionAndReuse() throws Exception {
+        String text = "class Indexed { static final int VALUE=42; int method(){ return VALUE; }}";
+        Source input = new Source("Indexed", text);
+        M3ASTIndex[] output = new M3ASTIndex[2];
+        try (var manager = ToolProvider.getSystemJavaCompiler().getStandardFileManager(
+                null, null, StandardCharsets.UTF_8)) {
+            JavacTask task = task(input, manager, new DiagnosticCollector<>());
+            var projection = M3JavacParser.indexProjection(
+                    new M3ASTIngress.Limits(100_000, 2_048, 256));
+            try (M3AST session = M3JavacParser.attachIndex(task, projection,
+                    index -> output[0] = index)) {
+                check(M3JavacParser.attachIndex(task, projection,
+                        index -> output[1] = index) == session, "one compiler event handle");
+                task.parse();
+                check(session.summary().projectionComputations() == 1
+                        && session.summary().projectionHits() == 1,
+                        "two consumers reuse one indexed compiler projection");
+            }
+        }
+        check(output[0] != null && output[0] == output[1], "shared immutable index identity");
+        check(output[0].domain() == M3ASTIndex.Domain.JAVAC, "original javac domain");
+        check(output[0].nodeCount() > 8 && output[0].parent(0) == -1,
+                "detached javac tree root and preorder");
+        check(input.reads == 1, "no second javac source read");
     }
 
     private static void distinctProjectionIdentities() throws Exception {
