@@ -38,8 +38,8 @@ jobs:
           3d63ae8ed3d7e1c02ffbc1b96daa7d14ee143fffc12da11ba9aec44eaecc0d3b  m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java
           bc9755bd43350d583ad724408926f4e2ef76d8c5fc8040278a2620c9dc7a65ba  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java
           dcba4e115ae235321aa2558804a2b3f2cc053fa3b20a7a785b1a487422b2f60e  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentityTest.java
-          463045956ddd7792f5ae8614c979c129f6fdd2ad30491a8637db10a11c3dc1c1  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java
-          3cad49e2d2e0c5aa1c8d2b880ddca19392cc072a68c2203872634550deae7b60  m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
+          fa2caa272b1915b6949f5776ebf4c2554503d18a62a32faefdcc487bd903d30b  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java
+          56f1e5e32506d9cd20755cf893f5af2f22b072150334401b08286e3919d54704  m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
           11eaa64f85575aac225b2839872a74e6db52d06981196488834a0f1799eaf7d3  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java
           05e276a47fc63c158fe20e3ba14fd3d3adc468b47eabf0966516c392a7cc3f98  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java
           011dc027f62c3ba5f8a7bd53808d4fd12531262434e10705b53e42446b7c7298  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkTest.java
