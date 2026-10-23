@@ -784,7 +784,7 @@ final class M3String implements CharSequence {
 
     /**
      * Thread-confined logical UTF-16 reader over persistent canonical tuple coordinates.
-     * It resolves each contiguous visible scalar run once, not once per code unit.
+     * It resolves the complete visible scalar run once, for reads in either direction.
      * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
      */
     static final class CodeUnitCursor implements IntUnaryOperator {
@@ -818,26 +818,27 @@ final class M3String implements CharSequence {
         private void seek(int index) {
             int position = source.start() + index;
             M3StringOwner current = source.owner();
-            int remaining = source.length() - index;
+            int before = index;
+            int after = source.length() - index;
             while (current instanceof M3StringTuple tuple) {
                 int leftLength = tuple.left.length();
-                M3String child;
-                int childIndex;
                 if (position < leftLength) {
-                    child = tuple.left;
-                    childIndex = position;
+                    // The selected left child clips only the visible interval after the read.
+                    after = Math.min(after, leftLength - position);
+                    position += tuple.left.start();
+                    current = tuple.left.owner();
                 } else {
-                    child = tuple.right;
-                    childIndex = position - leftLength;
+                    position -= leftLength;
+                    // Clip before translating through a possibly nonzero child start.
+                    before = Math.min(before, position);
+                    position += tuple.right.start();
+                    current = tuple.right.owner();
                 }
-                remaining = Math.min(remaining, child.length() - childIndex);
-                position = child.start() + childIndex;
-                current = child.owner();
             }
             scalar = current;
-            logicalBegin = index;
-            logicalEnd = index + remaining;
-            scalarOffset = position;
+            logicalBegin = index - before;
+            logicalEnd = index + after;
+            scalarOffset = position - before;
         }
     }
 
