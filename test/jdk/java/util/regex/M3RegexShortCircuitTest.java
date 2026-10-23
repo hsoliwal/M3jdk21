@@ -17,6 +17,7 @@ import jdk.internal.mindex.M3TQ;
 public final class M3RegexShortCircuitTest {
     private static final Field QUERY;
     private static final Field CACHED_QUERY;
+    private static final Field CACHED_FACTS;
     private static long comparisons;
 
     static {
@@ -25,6 +26,8 @@ public final class M3RegexShortCircuitTest {
             QUERY.setAccessible(true);
             CACHED_QUERY = Matcher.class.getDeclaredField("m3TqScanQuery");
             CACHED_QUERY.setAccessible(true);
+            CACHED_FACTS = Matcher.class.getDeclaredField("m3TqFacts");
+            CACHED_FACTS.setAccessible(true);
         } catch (ReflectiveOperationException problem) {
             throw new ExceptionInInitializerError(problem);
         }
@@ -125,6 +128,21 @@ public final class M3RegexShortCircuitTest {
         Matcher mutable = first.matcher(new StringBuilder("abc---qqq"));
         if (!mutable.find() || CACHED_QUERY.get(mutable) != null) {
             throw new AssertionError("mutable input must bypass the candidate cache");
+        }
+        // Pattern.LITERAL must retain the older shared facts cache for reuse
+        // across a usePattern() transition, even when a scan plan is available.
+        Matcher literal = Pattern.compile("acb", Pattern.LITERAL)
+                .matcher("abc".repeat(100));
+        if (literal.find()) throw new AssertionError("literal cold rejection");
+        Object facts = CACHED_FACTS.get(literal);
+        if (facts == null) throw new AssertionError("literal facts not populated");
+        literal.reset();
+        if (literal.find() || CACHED_FACTS.get(literal) != facts) {
+            throw new AssertionError("literal reset did not preserve immutable facts");
+        }
+        literal.usePattern(Pattern.compile("abc", Pattern.LITERAL));
+        if (!literal.find() || CACHED_FACTS.get(literal) != facts) {
+            throw new AssertionError("literal facts were not shared across queries");
         }
         System.out.println("PASS product JDK matcher comparisons=" + comparisons);
     }
