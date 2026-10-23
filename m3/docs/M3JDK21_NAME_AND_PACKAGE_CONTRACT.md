@@ -145,3 +145,41 @@ product mutation from this queue until mapping updates, exact staging receipts
 and independent tests are reviewed. Source-first processing stays serial per
 file; different files may prepare candidates concurrently, and promoted
 results must be proven on the actual JDK image.
+
+
+## Executable target-image public/internal boundary
+
+The target receives **only** the product-side jtreg check
+[`test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java`](../../test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java).
+The reusable OpenRewrite compiler and source-structure admission logic remain
+exclusively in the Synexia convergence workspace, currently under review in
+[hsoliwal/com.synexia#13180](https://github.com/hsoliwal/com.synexia/pull/13180).
+
+The target test checks package-private `java.lang.M3String` and the
+non-exported/non-opened `jdk.internal.mindex` implementation package,
+including qualified exports and runtime export overrides. It also inspects
+public/protected reflection signatures for `String`, `Class`,
+`ArrayList`, `HashMap`, `TreeMap`, `Pattern` and `Matcher`.
+No production class, serialized format, JNI symbol or JDK-facing method
+signature is modified by this receiver.
+
+Compile and run **against the actual M3JDK21 build image**, after
+configuration and jtreg acquisition:
+
+```sh
+make run-test TEST=test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+```
+
+A local patched stock-JDK21 fixture is an additional syntactic and refusal
+proof only; it is **not** runtime qualification of the fork. Record jtreg
+results separately from lint, Maven recipe replay, ABI, differential behavior,
+JNI/GC/JMM and CPU/heap/native measurements.
+
+Selected source audit (M3JDK21 master, 2026-10-23): 22 direct `M3*.java`
+classes under `java.lang` and four under `java.util` were observed
+package-private; `jdk.internal.mindex.M3Class` has `public` JVM
+accessibility within an unexported package. Separate `com.m3.collections`
+and `com.m3.file` modules still export legacy `M3ArrayList` and `M3File`.
+Those public standalone SDK symbols are unresolved migration debt, not proof
+that they are canonical JDK replacements. Resolve their external clients and
+serialization contracts before any visibility-changing OpenRewrite recipe.
