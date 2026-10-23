@@ -48,13 +48,22 @@ base="$root/src/java.base/share/classes"
 libjava="$root/src/java.base/share/native/libjava"
 tests="$root/test/jdk"
 
-# Compile the actual M3JDK21 product owners, with no synthetic replacement classes.
+# Compile only the original, exact M3JDK21 product owners. Passing the
+# entire OpenJDK source tree to --patch-module can implicitly compile unrelated
+# WeakHashMap.java and fail on its upstream this-escape warning under -Werror.
+# Keep ALL lint categories enabled and source-stage only these four JDK owners.
+patch_sources="$scratch/patch-java-base"
+mkdir -p "$patch_sources/jdk/internal/m3" "$patch_sources/java/util"
+cp -- "$base/jdk/internal/m3/M3IndexMaskWindow.java" "$patch_sources/jdk/internal/m3/M3IndexMaskWindow.java"
+cp -- "$base/jdk/internal/m3/M3IndexedArray.java" "$patch_sources/jdk/internal/m3/M3IndexedArray.java"
+cp -- "$base/jdk/internal/m3/M3IndexedView.java" "$patch_sources/jdk/internal/m3/M3IndexedView.java"
+cp -- "$base/java/util/CollectionViews.java" "$patch_sources/java/util/CollectionViews.java"
 "$JAVA_HOME/bin/javac" -source 21 -target 21 -Xlint:all -Werror -proc:none \
-  --patch-module "java.base=$base" -h "$scratch/headers" -d "$scratch/classes" \
-  "$base/jdk/internal/m3/M3IndexMaskWindow.java" \
-  "$base/jdk/internal/m3/M3IndexedArray.java" \
-  "$base/jdk/internal/m3/M3IndexedView.java" \
-  "$base/java/util/CollectionViews.java"
+  --patch-module "java.base=$patch_sources" -h "$scratch/headers" -d "$scratch/classes" \
+  "$patch_sources/jdk/internal/m3/M3IndexMaskWindow.java" \
+  "$patch_sources/jdk/internal/m3/M3IndexedArray.java" \
+  "$patch_sources/jdk/internal/m3/M3IndexedView.java" \
+  "$patch_sources/java/util/CollectionViews.java"
 
 # Real libjava JNI implementation; original javac-generated symbol declarations.
 "$CC" -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
