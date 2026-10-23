@@ -13,7 +13,8 @@
     "pr": "https://github.com/hsoliwal/com.synexia/pull/13222",
     "recipe": "com.synexia.rewrite.M3ArrayListDualWordMaskRecipe",
     "atom": "M3ArrayList.removeIf decision mask",
-    "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-arraylist-dual-word-20261023/manifest.tsv"
+    "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-arraylist-dual-word-20261023/manifest.tsv",
+    "build_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-junit-resolve-20261023.yml"
   },
   "files": [
     {
@@ -31,6 +32,14 @@
       "preimage_sha256": "7beb39be4f5686b6f08b230f8a49dbadc5d82a5c8bfe23356fe5932504bf414b",
       "postimage_sha256": "d8c109e3f7a5bc3fc836109d01ba7754ea523549dc2703b557edd90f0b8c6230",
       "role": "differential_oracle_postimage"
+    },
+    {
+      "path": "m3/arrays/pom.xml",
+      "preimage_git_blob_sha1": "45b090e6c6003a21db08884379678b3ba410754c",
+      "postimage_git_blob_sha1": "668fab1d24bbebd407ed920664487db848db464e",
+      "preimage_sha256": "1448e9b9597df4648c3469ef1c49a57086df58de246e25b946e10b5c04906dd5",
+      "postimage_sha256": "12b02965bdb4058068885e5acd109334d0f1f827ea2176e3d3e111db320a65e7",
+      "role": "test_only_maven_dependency_postimage"
     }
   ],
   "algorithm": {
@@ -90,6 +99,13 @@
       "contract": "M3BudgetedMaskWindowContract in Java and --native modes",
       "native_library": "m3_collections_mask",
       "jni_abi_changed": false
+    },
+    "junit_artifact_resolution": {
+      "status": "PENDING_NEW_CI",
+      "previous_failure": "Maven Central lacks test-only junit-jupiter 5.10.2-m3-source-1",
+      "corrective_postimage": "use released 5.10.2 already in m3/collections module",
+      "release_scope": "TEST_ONLY",
+      "production_bytecode_api_change": false
     }
   },
   "admission": {
