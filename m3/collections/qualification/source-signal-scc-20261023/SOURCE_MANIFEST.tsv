@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical Synexia recipe m3-source-signal-scc-20261023
+# Product base M3JDK21 master b032048eece51c897d8623fd7a69f7f16eac5a57
+# path	before_sha256	after_sha256	post_git_blob	canonical_resource
+m3/collections/src/main/java/com/m3/collections/M3SignalGraphComponents.java	ABSENT	185393025fd4f3930725d1010d38257e759ba740b626944226c7e94161d97b53	8765b9dcdad1353d59890dc8a1e270a9b6d19ef5	00-M3SignalGraphComponents.java.txt
+m3/collections/src/test/java/com/m3/collections/M3SignalGraphComponentsSelfTest.java	ABSENT	4b7a81b8a2702062e6f7f95e625f86518e199516b9dabcefab65be617431056c	76a73fb1b5ff096b304852f118a3c57166cbdffe	01-M3SignalGraphComponentsSelfTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3SignalGraphComponentsTest.java	ABSENT	c7532b6312aa307ade3d9729bdb87d3591f880496be20daac576cce47ab48971	8f94afe817556181469339966b8294891b45b5e3	02-M3SignalGraphComponentsTest.java.txt
