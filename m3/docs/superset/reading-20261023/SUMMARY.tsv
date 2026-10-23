@@ -1,392 +1,421 @@
 pr	reason	file	hunks	lines	ours_only	theirs_only
-1292	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	291	21	0
-1292	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_window.c	1	163	21	24
-1294	no gate for native or workflow conflicts	m3/collections/algorithm-catalog/wrapper-convergence-20261018/README.md	1	216	59	157
-1294	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	8	898	60	105
-1294	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	2	483	25	14
-1294	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	5	299	49	7
-1294	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1	938	22	8
-1294	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_path_masks.c	1	276	117	2
-1294	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java	2	29	7	16
-1305	no gate for native or workflow conflicts	.github/workflows/m3-object-physical-slot-20261018.yml	2	82	7	5
-1305	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9390	134	16
-1330	neither side compiles (ours 6, theirs 2 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3ArrayDeque.java	5	541	304	218
-1330	neither side compiles (ours 6, theirs 2 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3HashMap.java	1	264	4	1
-1330	neither side compiles (ours 6, theirs 2 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3PriorityQueue.java	4	556	330	207
-1330	neither side compiles (ours 6, theirs 2 errors): reading pass	m3/collections/src/test/java/com/m3/collections/M3HashMapSetTest.java	2	187	39	0
-1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3LFUCache.java	3	333	150	172
-1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	5	271	44	31
-1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java	1	72	1	1
-1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3SlotMap.java	1	293	1	1
-1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3TreeMap.java	2	545	2	8
-1335	finish failed after ledger union	already in superset	0	0	0	0
-1340	finish failed after ledger union	already in superset	0	0	0	0
-1344	no gate for native or workflow conflicts	src/hotspot/share/classfile/classLoader.cpp	1	1645	4	4
-1357	no gate for native or workflow conflicts	m3/collections/qualification/full-java-jni-20261018/README.md	1	70	42	28
-1357	no gate for native or workflow conflicts	m3/collections/qualification/full-java-jni-20261018/verify.py	7	192	12	5
-1357	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	640	3	2
-1357	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1	945	2	2
-1357	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java	1	370	0	1
-1357	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java	1	32	1	0
-1357	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9385	27	11
-1357	no gate for native or workflow conflicts	m3/vendor/third_party/apiguardian-api/pom.xml	1	160	19	3
-1357	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	48	4	2
-1357	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/mindex/M3RX7.java	11	736	401	20
-1357	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	3	280	177	1
-1366	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	461	109	34
-1366	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	2	619	33	63
-1368	no gate for native or workflow conflicts	m3/collections/algorithm-catalog/wrapper-convergence-20261018/README.md	1	220	59	161
-1368	no gate for native or workflow conflicts	m3/collections/recipes/native-index-range-20261017/pom.xml	1	213	158	37
-1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	2	829	4	4
-1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	11	928	50	123
-1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	2	483	25	14
-1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	461	109	34
-1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	5	299	49	7
-1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	2	945	24	10
-1368	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	3	620	33	64
-1368	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_path_masks.c	1	276	117	2
-1368	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java	4	413	11	23
-1368	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java	1	32	1	0
-1368	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java	2	29	7	16
-1368	no gate for native or workflow conflicts	m3/docs/name-mapping.json	4	9398	4	4
-1368	no gate for native or workflow conflicts	src/hotspot/share/classfile/classLoader.cpp	1	1640	4	5
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/Runnable.java	2	68	2	3
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/Strings.java	27	567	130	167
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Callable.java	1	82	3	4
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Executor.java	2	168	4	8
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ExecutorService.java	2	473	9	14
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	1	36	3	3
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	1	30	1	1
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	5	129	51	39
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	8	268	45	48
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Consumer.java	1	94	8	9
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Function.java	1	130	9	10
-1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Supplier.java	1	77	8	9
-1375	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	666	26	19
-1375	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	1	353	4	3
-1375	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	461	109	34
-1375	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	3	620	33	64
-1375	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_window.c	1	161	21	22
-1381	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	656	14	18
-1381	no gate for native or workflow conflicts	m3/runtime-integration/check-m3rx7-v7-image-codec.sh	1	383	347	33
-1381	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	283	46	0
-1406	no gate for native or workflow conflicts	.github/workflows/mindex-string-backing.yml	1	244	66	1
-1406	no gate for native or workflow conflicts	m3/core/src/com/m3/text/M3GvasLiteralImage.java	3	314	13	13
-1406	no gate for native or workflow conflicts	m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java	8	265	11	121
-1406	no gate for native or workflow conflicts	m3/runtime-integration/check-m3string-invariants.py	6	2045	74	78
-1406	no gate for native or workflow conflicts	m3/runtime-integration/test_string_pool_precompute.py	6	292	182	66
-1406	no gate for native or workflow conflicts	m3/verify-gvas-lookup-index.py	1	52	0	8
-1406	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringAtom.java	1	556	52	10
-1406	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPool.java	11	1815	56	185
-1406	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java	10	447	77	9
-1406	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java	2	617	23	0
-1424	no gate for native or workflow conflicts	src/hotspot/share/classfile/classLoader.cpp	1	1640	4	5
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/Runnable.java	2	73	5	8
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/Strings.java	27	554	134	154
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Callable.java	1	87	5	9
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Executor.java	2	172	8	12
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ExecutorService.java	2	473	9	14
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	1	36	3	3
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	1	32	3	3
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	3	140	60	50
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	7	274	46	54
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Consumer.java	1	95	5	10
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Function.java	1	131	6	11
-1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Supplier.java	1	78	5	10
-1426	no gate for native or workflow conflicts	.github/workflows/mindex-string-backing.yml	1	247	66	1
-1426	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	756	12	25
-1426	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1	1075	1	10
-1426	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_state_mask_histogram.c	1	179	90	0
-1426	no gate for native or workflow conflicts	m3/core/src/com/m3/text/M3GvasLiteralImage.java	3	314	13	13
-1426	no gate for native or workflow conflicts	m3/runtime-integration/check-m3string-invariants.py	11	2446	137	479
-1426	no gate for native or workflow conflicts	m3/runtime-integration/test_string_pool_precompute.py	6	292	182	66
-1426	no gate for native or workflow conflicts	m3/synexia-import/current-full-borrow/check_string_phase.py	1	606	0	16
-1426	no gate for native or workflow conflicts	src/hotspot/share/classfile/classLoader.cpp	1	1640	4	5
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java	4	283	21	8
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPool.java	2	1644	19	14
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/Runnable.java	2	73	5	8
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/Strings.java	27	554	134	154
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Callable.java	1	87	5	9
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Executor.java	2	172	8	12
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ExecutorService.java	2	473	9	14
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	1	36	3	3
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	1	32	3	3
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	3	140	60	50
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	7	274	46	54
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Consumer.java	1	95	5	10
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Function.java	1	131	6	11
-1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Supplier.java	1	78	5	10
-1426	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3StringPool.c	1	255	121	0
-1426	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java	2	438	31	0
-1435	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1	641	8	4
-1435	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1435	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_state_mask_histogram.c	1	179	90	0
-1435	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/Strings.java	1	402	5	2
-1456	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	2	830	4	4
-1456	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	4	300	31	7
-1456	no gate for native or workflow conflicts	m3/synexia-import/current-full-borrow/check_string_phase.py	1	611	0	32
-1456	no gate for native or workflow conflicts	m3/synexia-import/current-full-borrow/test_string_phase_successors.py	1	382	2	7
-1456	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	6	362	39	9
-1456	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/System.java	2	2708	17	0
-1456	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/CollectionViews.java	7	1460	844	583
-1456	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java	2	637	17	0
-1456	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	283	46	0
-1463	no gate for native or workflow conflicts	.github/workflows/mindex-string-backing.yml	1	244	66	1
-1463	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	6	929	26	193
-1463	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1	1103	1	10
-1463	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_state_mask_histogram.c	1	179	90	0
-1463	no gate for native or workflow conflicts	m3/core/src/com/m3/text/M3GvasLiteralImage.java	3	314	13	13
-1463	no gate for native or workflow conflicts	m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java	8	265	11	121
-1463	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9396	134	22
-1463	no gate for native or workflow conflicts	m3/runtime-integration/check-m3rx7-v7-image-codec.sh	1	383	347	33
-1463	no gate for native or workflow conflicts	m3/runtime-integration/check-m3string-invariants.py	6	2045	74	78
-1463	no gate for native or workflow conflicts	m3/runtime-integration/test_string_pool_precompute.py	6	292	182	66
-1463	no gate for native or workflow conflicts	m3/verify-gvas-lookup-index.py	1	52	0	8
-1463	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPool.java	11	1815	56	185
-1463	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	283	46	0
-1463	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java	10	447	77	9
-1479	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1	648	1	0
-1479	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java	2	275	2	3
-1479	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	2	620	33	63
-1479	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java	1	172	2	1
-1479	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionTest.java	2	324	6	310
-1479	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java	1	152	1	1
-1497	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	6	344	197	63
-1497	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	639	1	2
-1513	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1	650	0	2
-1513	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	5	624	57	74
-1513	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	2	596	193	9
-1515	no gate for native or workflow conflicts	m3/collections/pom.xml	1	318	15	3
-1515	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	3	563	32	2
-1515	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java	1	327	1	27
-1515	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1515	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	5	597	43	30
-1515	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java	2	19	8	4
-1515	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexPathRankWordWalkProof.java	3	125	6	33
-1522	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1522	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	2	620	33	63
-1522	no gate for native or workflow conflicts	m3/docs/name-mapping.json	4	11736	118	418
-1522	no gate for native or workflow conflicts	m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java	2	499	38	3
-1522	no gate for native or workflow conflicts	m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java	2	105	14	2
-1522	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	48	4	2
-1522	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3StateRelation.c	1	212	18	45
-1522	no gate for native or workflow conflicts	src/java.desktop/share/classes/sun/swing/list/M3ListMeasure.java	7	294	33	13
-1530	no gate for native or workflow conflicts	.github/workflows/mindex-string-backing.yml	1	246	66	1
-1530	no gate for native or workflow conflicts	m3/runtime-integration/FOSS_REUSE_DECISION.tsv	1	29	4	1
-1530	no gate for native or workflow conflicts	m3/synexia-import/current-full-borrow/check_string_phase.py	1	565	0	2
-1530	no gate for native or workflow conflicts	m3/tooling/migration-recipes/pom.xml	1	406	23	4
-1538	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	1	829	4	4
-1538	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1538	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	657	33	76
-1538	no gate for native or workflow conflicts	m3/file/pom.xml	1	140	118	14
-1538	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	1	315	124	22
-1538	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/build.py	1	433	6	1
-1538	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java	1	97	7	2
-1538	no gate for native or workflow conflicts	m3/tooling/shared-frontend/algorithm-catalogue.tsv	1	54	4	39
-1538	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	48	4	2
-1546	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1546	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	657	33	76
-1546	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	1	315	124	22
-1546	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/build.py	1	433	6	1
-1546	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java	1	97	7	2
-1546	no gate for native or workflow conflicts	m3/tooling/shared-frontend/algorithm-catalogue.tsv	1	45	4	30
-1546	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	48	4	2
-1553	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_path_masks.c	1	251	4	4
-1553	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_residency_state_mask.c	2	103	2	3
-1553	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	276	1	1
-1577	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1577	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	660	33	79
-1577	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	1	315	124	22
-1577	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/build.py	1	433	6	1
-1577	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java	1	97	7	2
-1577	no gate for native or workflow conflicts	m3/tooling/shared-frontend/algorithm-catalogue.tsv	1	45	4	30
-1577	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	48	4	2
-1577	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	1	355	32	2
-1603	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	1	566	4	4
-1603	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	1	355	32	2
-1616	no gate for native or workflow conflicts	.github/workflows/m3-eclipse-framework-forward-20261017.yml	3	149	28	25
-1616	no gate for native or workflow conflicts	.github/workflows/m3-eclipse-progress-forward-20261017.yml	1	154	21	7
-1616	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java	1	158	30	13
-1616	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	114	3	3
-1616	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	3	563	32	2
-1616	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1616	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	5	554	4	4
-1616	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_path_masks.c	2	311	13	3
-1616	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java	2	19	8	4
-1616	no gate for native or workflow conflicts	m3/eclipse/framework/pom.xml	1	150	35	7
-1616	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	48	4	2
-1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	2	332	15	33
-1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	1	829	4	4
-1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	457	15	1
-1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java	2	326	4	3
-1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1619	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	643	76	76
-1619	no gate for native or workflow conflicts	m3/docs/m3jdk21-native-mask-window-receiver-20261020.md	1	282	71	207
-1619	no gate for native or workflow conflicts	m3/file/README.md	1	100	36	40
-1619	no gate for native or workflow conflicts	m3/file/pom.xml	1	138	118	13
-1619	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	3	546	293	46
-1619	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	7	804	227	267
-1619	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java	5	721	193	140
-1619	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacFactImage.java	1	181	8	0
-1619	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3String.java	3	1789	36	70
-1619	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	1	355	32	2
-1619	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	2	225	19	32
-1619	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/CollectionViews.java	28	1089	178	212
-1619	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java	5	297	2	91
-1619	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java	1	458	1	2
-1619	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	5	245	32	97
-1619	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3StateRelation.c	1	212	18	45
-1619	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java	1	182	1	1
-1627	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java	2	326	4	3
-1627	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	3	615	24	61
-1627	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3String.java	2	1754	29	33
-1627	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	1	355	32	2
-1627	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	2	220	19	27
-1627	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/CollectionViews.java	21	985	116	108
-1627	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java	1	182	1	1
-1627	no gate for native or workflow conflicts	test/jdk/java/util/CollectionViews/CollectionViewsContract.java	2	310	1	2
-1637	no gate for native or workflow conflicts	.github/workflows/m3-eclipse-framework-forward-20261017.yml	4	161	48	19
-1637	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	429	15	2
-1637	no gate for native or workflow conflicts	m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java	3	119	1	4
-1637	no gate for native or workflow conflicts	m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java	1	275	2	2
-1684	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	312	15	18
-1684	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3String.java	1	1792	16	18
-1684	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	6	362	39	9
-1684	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	1	215	13	22
-1684	no gate for native or workflow conflicts	src/java.base/share/native/libjava/String.c	1	187	3	1
-1755	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	2	332	15	33
-1755	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	1	829	4	4
-1755	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	427	15	1
-1755	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	310	10	19
-1755	no gate for native or workflow conflicts	m3/docs/m3jdk21-native-mask-window-receiver-20261020.md	1	282	71	207
-1755	no gate for native or workflow conflicts	m3/file/README.md	1	100	36	40
-1755	no gate for native or workflow conflicts	m3/file/pom.xml	1	138	118	13
-1755	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	3	546	293	46
-1755	no gate for native or workflow conflicts	m3/fs/pom.xml	2	339	51	5
-1755	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3BuildState.java	16	564	219	9
-1755	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3BuildStateStore.java	8	420	201	120
-1755	no gate for native or workflow conflicts	m3/fs/src/main/module/module-info.java	1	42	13	3
-1755	no gate for native or workflow conflicts	m3/fs/src/test/java/com/m3/fs/M3BuildStateContract.java	2	199	5	0
-1755	no gate for native or workflow conflicts	m3/fs/src/test/java/com/m3/fs/M3BuildStateTest.java	2	265	184	0
-1755	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	9	681	220	144
-1755	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java	5	721	193	140
-1755	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacFactImage.java	1	181	8	0
-1755	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/CollectionViews.java	23	1009	191	132
-1755	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java	2	215	1	9
-1755	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	2	152	13	4
-1761	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1765	JNI implementations diverge (chunked GetIntArrayRegion in the superset vs borrowed arrays with a paged window in the PR); no C toolchain or JNI parity run here, so neither side can be gated: reading pass with the native build	m3/collections/src/main/c/m3maskviewport.c	6	350	184	45
-1766	no gate for native or workflow conflicts	.github/workflows/m3-collections-interop-receiving.yml	2	155	9	11
-1766	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	100	13	77
-1766	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	90	14	14
-1766	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	190	28	77
-1766	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	5	420	137	157
-1766	no gate for native or workflow conflicts	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	1	174	4	5
-1766	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	112	1	0
-1769	no gate for native or workflow conflicts	.github/workflows/m3jdk21-name-contract.yml	1	46	19	0
-1769	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java	2	383	71	4
-1769	no gate for native or workflow conflicts	m3/docs/name-mapping.json	4	9778	115	404
-1769	no gate for native or workflow conflicts	m3/tooling/name-contract/audit.py	2	131	3	2
-1769	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1769	no gate for native or workflow conflicts	m3/tooling/name-contract/test_audit.py	1	213	0	1
-1769	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1780	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	46	13	23
-1780	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	91	15	15
-1780	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	130	28	17
-1780	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	5	368	145	128
-1780	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	6	444	184	45
-1791	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	46	13	23
-1791	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	91	15	15
-1791	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	130	28	17
-1791	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	5	368	145	128
-1791	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	6	444	184	45
-1795	no gate for native or workflow conflicts	.github/workflows/m3-identity-rank-20261021.yml	1	87	2	2
-1795	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	46	13	23
-1795	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	91	15	15
-1795	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	130	28	17
-1795	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	5	368	145	128
-1795	no gate for native or workflow conflicts	m3/collections/qualification/indexed-live-views-20261021/verify_recipe.py	2	103	26	28
-1795	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	6	444	184	45
-1797	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1802	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9474	121	100
-1802	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java	1	172	9	12
-1802	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1804	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9474	121	100
-1804	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java	3	410	8	15
-1804	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java	1	172	9	12
-1804	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1805	no gate for native or workflow conflicts	.github/workflows/m3-identity-rank-20261021.yml	1	74	2	2
-1805	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	46	13	23
-1805	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	91	15	15
-1805	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	130	28	17
-1805	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	5	368	145	128
-1805	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	6	444	184	45
-1808	no gate for native or workflow conflicts	.github/workflows/m3-collections-interop-receiving.yml	2	155	9	11
-1808	no gate for native or workflow conflicts	.github/workflows/m3-identity-rank-20261021.yml	1	87	2	2
-1808	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	100	13	77
-1808	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	90	14	14
-1808	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	190	28	77
-1808	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	5	420	137	157
-1808	no gate for native or workflow conflicts	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	1	174	4	5
-1808	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	112	1	0
-1808	no gate for native or workflow conflicts	m3/collections/qualification/indexed-live-views-20261021/verify_recipe.py	2	103	26	28
-1808	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	6	444	184	45
-1814	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9610	121	236
-1814	no gate for native or workflow conflicts	m3/file/verify.py	1	249	2	1
-1814	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1814	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1816	no gate for native or workflow conflicts	.github/workflows/m3-collections-interop-receiving.yml	2	155	9	11
-1816	no gate for native or workflow conflicts	.github/workflows/m3-identity-rank-20261021.yml	1	87	2	2
-1816	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	100	13	77
-1816	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	90	14	14
-1816	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	190	28	77
-1816	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	5	420	137	157
-1816	no gate for native or workflow conflicts	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	1	174	4	5
-1816	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	112	1	0
-1816	no gate for native or workflow conflicts	m3/collections/qualification/indexed-live-views-20261021/verify_recipe.py	2	103	26	28
-1816	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	6	444	184	45
-1817	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1823	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9610	121	236
-1823	no gate for native or workflow conflicts	m3/file/verify.py	1	249	2	1
-1823	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1823	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1824	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9610	121	236
-1824	no gate for native or workflow conflicts	m3/file/verify.py	1	254	4	6
-1824	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1824	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1825	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9610	121	236
-1825	no gate for native or workflow conflicts	m3/file/verify.py	1	254	4	6
-1825	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1825	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1836	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9610	121	236
-1836	no gate for native or workflow conflicts	m3/file/verify.py	1	254	4	6
-1836	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	1	392	0	99
-1836	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1836	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1841	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9610	121	236
-1841	no gate for native or workflow conflicts	m3/file/verify.py	1	254	4	6
-1841	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1841	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1843	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9610	121	236
-1843	no gate for native or workflow conflicts	m3/file/verify.py	1	254	4	6
-1843	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1843	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1846	no gate for native or workflow conflicts	.github/workflows/m3-collections-interop-receiving.yml	2	158	3	3
-1846	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	113	2	1
-1846	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java	1	190	1	1
-1847	no gate for native or workflow conflicts	.github/workflows/m3-collections-interop-receiving.yml	2	156	9	12
-1847	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py	2	332	26	63
-1847	no gate for native or workflow conflicts	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	2	173	5	4
-1847	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	113	2	1
-1851	no gate for native or workflow conflicts	m3/docs/name-mapping.json	3	9610	121	236
-1851	no gate for native or workflow conflicts	m3/file/verify.py	1	254	4	6
-1851	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/MFileStreams.java	2	583	1	27
-1851	no gate for native or workflow conflicts	m3/fs/src/test/java/com/m3/fs/MFileRangeTransferTest.java	1	223	0	65
-1851	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	40	1	1
-1851	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	230	17	18
-1855	no gate for native or workflow conflicts	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	1	173	2	4
-1857	no gate for native or workflow conflicts	.github/workflows/m3-collections-interop-receiving.yml	2	156	9	12
-1857	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-superset-20261022/README.md	1	115	26	24
-1857	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py	2	373	26	93
-1857	no gate for native or workflow conflicts	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	2	173	5	4
-1857	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	113	2	1
+1292	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	322	52	29
+1292	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_window.c	2	182	40	22
+1294	no gate for native or workflow conflicts	m3/collections/algorithm-catalog/wrapper-convergence-20261018/README.md	1	217	60	157
+1294	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	8	1004	166	163
+1294	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	2	486	28	15
+1294	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	3	367	117	72
+1294	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1	961	45	8
+1294	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_path_masks.c	1	279	120	2
+1294	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java	1	36	14	22
+1305	conflicts span 0 module(s) and 0 java.base files, or no pom: reading pass	.github/workflows/m3-object-physical-slot-20261018.yml	1	153	78	75
+1305	conflicts span 0 module(s) and 0 java.base files, or no pom: reading pass	m3/docs/name-mapping.json	1	9448	192	18
+1330	neither side compiles (ours 6, theirs 2 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3ArrayDeque.java	1	561	324	237
+1330	neither side compiles (ours 6, theirs 2 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3HashMap.java	1	524	264	260
+1330	neither side compiles (ours 6, theirs 2 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3PriorityQueue.java	1	576	350	226
+1330	neither side compiles (ours 6, theirs 2 errors): reading pass	m3/collections/src/test/java/com/m3/collections/M3HashMapSetTest.java	1	336	188	148
+1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3LFUCache.java	1	345	162	183
+1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	6	287	60	28
+1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java	1	74	3	1
+1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3SlotMap.java	2	317	23	7
+1332	neither side compiles (ours 6, theirs 12 errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3TreeMap.java	2	580	5	8
+1344	no gate for native or workflow conflicts	src/hotspot/share/classfile/classLoader.cpp	1	1651	10	4
+1357	no gate for native or workflow conflicts	m3/collections/qualification/full-java-jni-20261018/README.md	1	71	43	28
+1357	no gate for native or workflow conflicts	m3/collections/qualification/full-java-jni-20261018/verify.py	1	368	188	180
+1357	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	685	48	45
+1357	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1	947	4	2
+1357	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java	1	374	4	3
+1357	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java	1	64	33	31
+1357	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9443	30	13
+1357	no gate for native or workflow conflicts	m3/vendor/third_party/apiguardian-api/pom.xml	1	164	23	4
+1357	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	52	8	3
+1357	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/mindex/M3RX7.java	2	943	608	225
+1357	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	383	280	103
+1366	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	463	111	35
+1366	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	2	664	78	63
+1368	no gate for native or workflow conflicts	m3/collections/algorithm-catalog/wrapper-convergence-20261018/README.md	1	221	60	161
+1368	no gate for native or workflow conflicts	m3/collections/recipes/native-index-range-20261017/pom.xml	2	237	182	36
+1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	2	832	7	4
+1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	10	1050	172	202
+1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	2	486	28	15
+1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	463	111	35
+1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	3	367	117	72
+1368	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	2	970	49	10
+1368	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	3	668	81	65
+1368	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_path_masks.c	1	279	120	2
+1368	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java	1	793	391	402
+1368	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java	1	64	33	31
+1368	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java	1	36	14	22
+1368	no gate for native or workflow conflicts	m3/docs/name-mapping.json	4	9462	13	5
+1368	no gate for native or workflow conflicts	src/hotspot/share/classfile/classLoader.cpp	1	1646	10	5
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/Runnable.java	2	72	6	5
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/Strings.java	27	675	238	221
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Callable.java	1	88	9	8
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Executor.java	2	175	11	12
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ExecutorService.java	2	479	15	17
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	1	42	9	7
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	1	36	7	5
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	10	146	68	45
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	10	298	75	62
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Consumer.java	2	100	14	10
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Function.java	2	136	15	11
+1368	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Supplier.java	2	83	14	10
+1375	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	674	34	20
+1375	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	1	356	7	3
+1375	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	463	111	35
+1375	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	3	668	81	65
+1375	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_window.c	2	180	40	20
+1381	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	665	23	18
+1381	no gate for native or workflow conflicts	m3/runtime-integration/check-m3rx7-v7-image-codec.sh	2	399	363	32
+1381	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	388	151	104
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	.github/workflows/mindex-string-backing.yml	1	246	68	1
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	m3/core/src/com/m3/text/M3GvasLiteralImage.java	3	325	24	21
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java	1	399	145	254
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	m3/runtime-integration/check-m3string-invariants.py	1	2144	173	176
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	m3/runtime-integration/test_string_pool_precompute.py	1	337	227	110
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	m3/verify-gvas-lookup-index.py	1	97	45	52
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	src/java.base/share/classes/java/lang/M3StringAtom.java	1	565	61	11
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	src/java.base/share/classes/java/lang/M3StringPool.java	11	1981	222	268
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java	1	809	439	370
+1406	conflicts span 1 module(s) and 2 java.base files, or no pom: reading pass	test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java	1	993	399	375
+1424	no gate for native or workflow conflicts	src/hotspot/share/classfile/classLoader.cpp	1	1646	10	5
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/Runnable.java	2	78	10	9
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/Strings.java	27	658	238	204
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Callable.java	1	91	9	11
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Executor.java	2	179	15	14
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ExecutorService.java	2	479	15	17
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	1	42	9	7
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	1	36	7	5
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	10	148	68	47
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	8	295	67	63
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Consumer.java	1	98	8	11
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Function.java	1	134	9	12
+1424	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Supplier.java	1	81	8	11
+1426	no gate for native or workflow conflicts	.github/workflows/mindex-string-backing.yml	1	249	68	1
+1426	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	760	16	26
+1426	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1	1077	3	10
+1426	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_state_mask_histogram.c	1	200	111	20
+1426	no gate for native or workflow conflicts	m3/core/src/com/m3/text/M3GvasLiteralImage.java	3	325	24	21
+1426	no gate for native or workflow conflicts	m3/runtime-integration/check-m3string-invariants.py	2	2608	299	639
+1426	no gate for native or workflow conflicts	m3/runtime-integration/test_string_pool_precompute.py	1	337	227	110
+1426	no gate for native or workflow conflicts	m3/synexia-import/current-full-borrow/check_string_phase.py	1	609	3	18
+1426	no gate for native or workflow conflicts	src/hotspot/share/classfile/classLoader.cpp	1	1646	10	5
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java	1	538	276	262
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPool.java	2	1660	35	28
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/Runnable.java	2	78	10	9
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/Strings.java	27	658	238	204
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Callable.java	1	91	9	11
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/Executor.java	2	179	15	14
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ExecutorService.java	2	479	15	17
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	1	42	9	7
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	1	36	7	5
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	10	148	68	47
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	8	295	67	63
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Consumer.java	1	98	8	11
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Function.java	1	134	9	12
+1426	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/function/Supplier.java	1	81	8	11
+1426	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3StringPool.c	1	390	256	134
+1426	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java	1	846	439	407
+1430	json: CONFLICT at $.observedUtc: both sides changed it differently 	m3/migration/original-provider-20261017/README.md	1	33	5	16
+1430	json: CONFLICT at $.observedUtc: both sides changed it differently 	m3/migration/original-provider-20261017/TASK_STATUS.json	8	482	220	178
+1430	json: CONFLICT at $.observedUtc: both sides changed it differently 	m3/migration/original-provider-20261017/sdk/pins.json	2	862	26	6
+1430	json: CONFLICT at $.observedUtc: both sides changed it differently 	m3/migration/original-provider-20261017/source-binding.json	2	89	16	7
+1435	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1	646	13	5
+1435	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1435	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_state_mask_histogram.c	1	200	111	20
+1435	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/Strings.java	1	405	8	2
+1456	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	2	833	7	4
+1456	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	321	52	26
+1456	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9440	56	10
+1456	no gate for native or workflow conflicts	m3/runtime-integration/rope-navigation-20261018/run_actual_owner_cursor.py	1	335	168	167
+1456	no gate for native or workflow conflicts	m3/synexia-import/current-full-borrow/check_string_phase.py	1	614	3	34
+1456	no gate for native or workflow conflicts	m3/synexia-import/current-full-borrow/test_string_phase_successors.py	1	385	5	7
+1456	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	6	377	54	9
+1456	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/System.java	1	2716	25	7
+1456	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/CollectionViews.java	1	1494	878	616
+1456	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java	1	646	26	8
+1456	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	388	151	104
+1456	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringPathCursorTest.java	1	1116	525	591
+1463	no gate for native or workflow conflicts	.github/workflows/mindex-string-backing.yml	1	246	68	1
+1463	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	6	1063	160	194
+1463	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1	1105	3	10
+1463	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_state_mask_histogram.c	1	200	111	20
+1463	no gate for native or workflow conflicts	m3/core/src/com/m3/text/M3GvasLiteralImage.java	3	325	24	21
+1463	no gate for native or workflow conflicts	m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java	1	399	145	254
+1463	no gate for native or workflow conflicts	m3/runtime-integration/check-m3rx7-v7-image-codec.sh	2	399	363	32
+1463	no gate for native or workflow conflicts	m3/runtime-integration/check-m3string-invariants.py	1	2144	173	176
+1463	no gate for native or workflow conflicts	m3/runtime-integration/test_string_pool_precompute.py	1	337	227	110
+1463	no gate for native or workflow conflicts	m3/verify-gvas-lookup-index.py	1	97	45	52
+1463	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPool.java	11	1981	222	268
+1463	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	388	151	104
+1463	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java	1	809	439	370
+1479	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1	652	5	0
+1479	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java	2	278	5	3
+1479	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	2	665	78	63
+1479	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java	1	174	4	1
+1479	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionTest.java	1	333	15	318
+1479	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java	1	155	4	2
+1482	neither side compiles (ours 1, theirs 1 javac errors): reading pass	m3/collections/name-mapping.json	1	1017	19	35
+1482	neither side compiles (ours 1, theirs 1 javac errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1	641	5	0
+1482	neither side compiles (ours 1, theirs 1 javac errors): reading pass	m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java	1	173	4	1
+1482	neither side compiles (ours 1, theirs 1 javac errors): reading pass	m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapSelfTest.java	2	237	37	23
+1482	neither side compiles (ours 1, theirs 1 javac errors): reading pass	m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java	1	154	4	2
+1482	neither side compiles (ours 1, theirs 1 javac errors): reading pass	m3/collections/synexia-donation.json	1	1169	117	35
+1497	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	8	403	256	70
+1497	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	2	656	18	2
+1513	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1	654	4	5
+1513	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3SlotMap.java	1	269	3	6
+1513	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	6	680	113	73
+1513	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	2	427	69	26
+1515	no gate for native or workflow conflicts	m3/collections/pom.xml	1	322	19	3
+1515	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	3	628	97	30
+1515	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java	1	331	5	27
+1515	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1515	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	5	670	116	52
+1515	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java	1	27	16	11
+1515	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexPathRankWordWalkProof.java	1	212	93	119
+1522	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1522	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	2	665	78	63
+1522	no gate for native or workflow conflicts	m3/docs/name-mapping.json	2	11811	193	2215
+1522	no gate for native or workflow conflicts	m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java	1	958	497	461
+1522	no gate for native or workflow conflicts	m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java	2	112	21	2
+1522	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	52	8	3
+1522	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3StateRelation.c	1	213	19	45
+1522	no gate for native or workflow conflicts	src/java.desktop/share/classes/sun/swing/list/M3ListMeasure.java	1	543	282	261
+1530	conflicts span 2 module(s) and 0 java.base files, or no pom: reading pass	.github/workflows/mindex-string-backing.yml	1	248	68	1
+1530	conflicts span 2 module(s) and 0 java.base files, or no pom: reading pass	m3/runtime-integration/FOSS_REUSE_DECISION.tsv	1	30	5	1
+1530	conflicts span 2 module(s) and 0 java.base files, or no pom: reading pass	m3/synexia-import/current-full-borrow/check_string_phase.py	1	568	3	4
+1530	conflicts span 2 module(s) and 0 java.base files, or no pom: reading pass	m3/tooling/migration-recipes/pom.xml	1	411	28	4
+1538	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	1	832	7	6
+1538	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1538	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	731	107	77
+1538	no gate for native or workflow conflicts	m3/file/pom.xml	2	28	6	7
+1538	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	1	318	127	24
+1538	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/build.py	1	429	2	1
+1538	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java	1	100	10	2
+1538	no gate for native or workflow conflicts	m3/tooling/shared-frontend/algorithm-catalogue.tsv	1	55	5	39
+1538	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	52	8	3
+1546	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1546	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	731	107	77
+1546	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	1	318	127	24
+1546	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/build.py	1	429	2	1
+1546	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java	1	100	10	2
+1546	no gate for native or workflow conflicts	m3/tooling/shared-frontend/algorithm-catalogue.tsv	1	46	5	30
+1546	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	52	8	3
+1553	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_path_masks.c	2	256	9	2
+1553	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_residency_state_mask.c	2	110	9	3
+1553	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3RX7.c	1	277	2	1
+1559	neither side compiles (ours 50, theirs 50 javac errors): reading pass	m3/tooling/module-packs/parser/DESIGN.md	1	236	23	102
+1559	neither side compiles (ours 50, theirs 50 javac errors): reading pass	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	1	368	32	14
+1559	neither side compiles (ours 50, theirs 50 javac errors): reading pass	src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java	4	977	40	29
+1573	conflicts span 2 module(s) and 0 java.base files, or no pom: reading pass	m3/file/src/main/java/com/m3/file/M3File.java	1	265	87	49
+1573	conflicts span 2 module(s) and 0 java.base files, or no pom: reading pass	m3/tooling/module-packs/parser/build.py	1	425	2	2
+1577	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1577	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	734	107	80
+1577	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	1	318	127	24
+1577	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/build.py	1	429	2	1
+1577	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java	1	100	10	2
+1577	no gate for native or workflow conflicts	m3/tooling/shared-frontend/algorithm-catalogue.tsv	1	46	5	30
+1577	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	52	8	3
+1577	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	1	358	35	2
+1586	neither side compiles (ours 7, theirs 7 errors): reading pass	src/java.base/share/classes/java/lang/M3StringPool.java	1	1673	37	21
+1586	neither side compiles (ours 7, theirs 7 errors): reading pass	src/java.base/share/classes/java/lang/System.java	1	2721	25	12
+1586	neither side compiles (ours 7, theirs 7 errors): reading pass	src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java	1	646	26	8
+1586	neither side compiles (ours 7, theirs 7 errors): reading pass	test/jdk/java/util/regex/M3RX7Test.java	2	232	85	63
+1597	finish failed: server merge failed: {"message":"Merge conflict","documentation_url":"https://docs.github.com/rest/branches/branches#mer	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	8	534	144	185
+1597	finish failed: server merge failed: {"message":"Merge conflict","documentation_url":"https://docs.github.com/rest/branches/branches#mer	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java	1	540	13	145
+1597	finish failed: server merge failed: {"message":"Merge conflict","documentation_url":"https://docs.github.com/rest/branches/branches#mer	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacIndexContract.java	1	266	89	177
+1603	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	1	576	14	8
+1603	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	1	358	35	2
+1608	conflicts span 3 module(s) and 1 java.base files, or no pom: reading pass	m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1	643	3	5
+1608	conflicts span 3 module(s) and 1 java.base files, or no pom: reading pass	m3/file/pom.xml	1	25	4	6
+1608	conflicts span 3 module(s) and 1 java.base files, or no pom: reading pass	m3/file/src/main/java/com/m3/file/M3File.java	1	345	87	118
+1608	conflicts span 3 module(s) and 1 java.base files, or no pom: reading pass	m3/file/src/main/java/com/m3/file/M3FileSnapshot.java	1	155	42	113
+1608	conflicts span 3 module(s) and 1 java.base files, or no pom: reading pass	m3/file/src/test/java/com/m3/file/M3FileObservationProviderTest.java	1	733	330	403
+1608	conflicts span 3 module(s) and 1 java.base files, or no pom: reading pass	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	1	440	64	105
+1608	conflicts span 3 module(s) and 1 java.base files, or no pom: reading pass	src/java.base/share/classes/java/lang/M3StringImmediate.java	6	377	54	9
+1614	neither side compiles (ours 1, theirs 1 javac errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	3	342	25	33
+1614	neither side compiles (ours 1, theirs 1 javac errors): reading pass	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	434	22	5
+1616	no gate for native or workflow conflicts	.github/workflows/m3-eclipse-framework-forward-20261017.yml	3	167	46	25
+1616	no gate for native or workflow conflicts	.github/workflows/m3-eclipse-progress-forward-20261017.yml	1	155	22	7
+1616	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java	1	161	33	15
+1616	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	116	5	3
+1616	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	3	628	97	30
+1616	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1616	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	614	64	40
+1616	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_path_masks.c	2	322	24	3
+1616	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java	1	27	16	11
+1616	no gate for native or workflow conflicts	m3/eclipse/framework/pom.xml	1	157	42	7
+1616	no gate for native or workflow conflicts	m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	2	52	8	3
+1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	3	342	25	33
+1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	1	832	7	6
+1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	464	22	5
+1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java	2	331	9	5
+1619	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1619	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	4	718	151	76
+1619	no gate for native or workflow conflicts	m3/docs/m3jdk21-native-mask-window-receiver-20261020.md	1	287	76	211
+1619	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9469	56	39
+1619	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3FileShadowInputStream.java	3	175	22	20
+1619	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	8	650	144	297
+1619	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java	1	540	13	145
+1619	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacFactImage.java	1	355	182	173
+1619	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacIndexContract.java	1	266	89	177
+1619	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3String.java	3	1796	42	71
+1619	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	1	358	35	2
+1619	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	2	234	28	36
+1619	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/CollectionViews.java	1	1789	878	911
+1619	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java	1	502	207	295
+1619	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java	1	461	4	3
+1619	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	362	149	213
+1619	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3StateRelation.c	1	213	19	45
+1619	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java	1	363	182	181
+1627	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java	2	331	9	5
+1627	no gate for native or workflow conflicts	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	3	669	78	61
+1627	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9443	56	13
+1627	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3String.java	2	1762	36	36
+1627	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	1	358	35	2
+1627	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	2	229	28	31
+1627	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/CollectionViews.java	1	1747	878	869
+1627	no gate for native or workflow conflicts	test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java	1	363	182	181
+1627	no gate for native or workflow conflicts	test/jdk/java/util/CollectionViews/CollectionViewsContract.java	1	618	309	309
+1637	conflicts span 3 module(s) and 0 java.base files, or no pom: reading pass	.github/workflows/m3-eclipse-framework-forward-20261017.yml	4	199	86	19
+1637	conflicts span 3 module(s) and 0 java.base files, or no pom: reading pass	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	436	22	6
+1637	conflicts span 3 module(s) and 0 java.base files, or no pom: reading pass	m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java	1	234	116	118
+1637	conflicts span 3 module(s) and 0 java.base files, or no pom: reading pass	m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java	1	276	3	2
+1684	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	320	23	24
+1684	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3String.java	6	1836	60	79
+1684	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringImmediate.java	6	377	54	9
+1684	no gate for native or workflow conflicts	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	1	219	17	22
+1684	no gate for native or workflow conflicts	src/java.base/share/native/libjava/String.c	1	190	6	3
+1747	json: CONFLICT at $.authority_blob: both sides changed it differently 	m3/docs/name-mapping.json	1	9681	137	251
+1747	json: CONFLICT at $.authority_blob: both sides changed it differently 	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1755	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	3	342	25	33
+1755	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	1	832	7	6
+1755	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1	434	22	5
+1755	no gate for native or workflow conflicts	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	2	314	14	20
+1755	no gate for native or workflow conflicts	m3/docs/m3jdk21-native-mask-window-receiver-20261020.md	1	287	76	211
+1755	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9456	56	26
+1755	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3FileShadowInputStream.java	3	175	22	20
+1755	no gate for native or workflow conflicts	m3/fs/pom.xml	1	349	61	10
+1755	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3BuildState.java	1	901	556	345
+1755	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3BuildStateStore.java	1	520	301	219
+1755	no gate for native or workflow conflicts	m3/fs/src/main/module/module-info.java	2	44	15	2
+1755	no gate for native or workflow conflicts	m3/fs/src/test/java/com/m3/fs/M3BuildStateContract.java	1	394	200	194
+1755	no gate for native or workflow conflicts	m3/fs/src/test/java/com/m3/fs/M3BuildStateTest.java	1	347	266	81
+1755	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	8	534	144	185
+1755	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java	1	540	13	145
+1755	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacFactImage.java	1	355	182	173
+1755	no gate for native or workflow conflicts	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacIndexContract.java	1	266	89	177
+1755	no gate for native or workflow conflicts	src/java.base/share/classes/java/util/CollectionViews.java	1	1696	878	818
+1755	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java	1	421	207	214
+1755	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	288	149	139
+1761	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1765	JNI implementations diverge (chunked GetIntArrayRegion in the superset vs borrowed arrays with a paged window in the PR); no C toolchain or JNI parity run here, so neither side can be gated: reading pass with the native build	m3/collections/src/main/c/m3maskviewport.c	8	389	223	43
+1769	no gate for native or workflow conflicts	.github/workflows/m3jdk21-name-contract.yml	1	58	31	0
+1769	no gate for native or workflow conflicts	m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java	2	557	245	176
+1769	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9855	137	425
+1769	no gate for native or workflow conflicts	m3/tooling/name-contract/audit.py	2	135	7	2
+1769	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1769	no gate for native or workflow conflicts	m3/tooling/name-contract/test_audit.py	1	216	3	3
+1769	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1780	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	48	15	23
+1780	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	8	130	54	39
+1780	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	132	30	18
+1780	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	7	411	188	125
+1780	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	8	483	223	43
+1791	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	48	15	23
+1791	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	8	130	54	39
+1791	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	132	30	18
+1791	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	7	411	188	125
+1791	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	8	483	223	43
+1795	no gate for native or workflow conflicts	.github/workflows/m3-identity-rank-20261021.yml	1	90	5	2
+1795	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	48	15	23
+1795	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	8	130	54	39
+1795	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	132	30	18
+1795	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	7	411	188	125
+1795	no gate for native or workflow conflicts	m3/collections/qualification/indexed-live-views-20261021/verify_recipe.py	2	107	30	28
+1795	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	8	483	223	43
+1797	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1802	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9545	137	115
+1802	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java	1	181	18	12
+1802	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1804	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9545	137	115
+1804	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java	3	443	41	30
+1804	no gate for native or workflow conflicts	src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java	1	181	18	12
+1804	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1805	no gate for native or workflow conflicts	.github/workflows/m3-identity-rank-20261021.yml	1	77	5	2
+1805	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	48	15	23
+1805	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	8	130	54	39
+1805	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	132	30	18
+1805	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	7	411	188	125
+1805	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	8	483	223	43
+1808	no gate for native or workflow conflicts	.github/workflows/m3-collections-interop-receiving.yml	2	168	22	11
+1808	no gate for native or workflow conflicts	.github/workflows/m3-identity-rank-20261021.yml	1	90	5	2
+1808	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	102	15	77
+1808	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	128	52	35
+1808	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	192	30	78
+1808	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	7	464	181	154
+1808	no gate for native or workflow conflicts	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	1	176	6	5
+1808	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	114	3	1
+1808	no gate for native or workflow conflicts	m3/collections/qualification/indexed-live-views-20261021/verify_recipe.py	2	107	30	28
+1808	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	8	483	223	43
+1811	tree rebuild failed on m3/docs/name-mapping.json	m3/docs/name-mapping.json	1	9577	137	118
+1811	tree rebuild failed on m3/docs/name-mapping.json	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1814	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9681	137	251
+1814	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	3	485	112	185
+1814	no gate for native or workflow conflicts	m3/file/verify.py	1	250	3	1
+1814	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1814	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1816	no gate for native or workflow conflicts	.github/workflows/m3-collections-interop-receiving.yml	2	168	22	11
+1816	no gate for native or workflow conflicts	.github/workflows/m3-identity-rank-20261021.yml	1	90	5	2
+1816	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/README.md	1	102	15	77
+1816	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv	7	128	52	35
+1816	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/test_verify.py	1	192	30	78
+1816	no gate for native or workflow conflicts	m3/collections/interop/qualification/current-census-20261017/verify.py	7	464	181	154
+1816	no gate for native or workflow conflicts	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	1	176	6	5
+1816	no gate for native or workflow conflicts	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	114	3	1
+1816	no gate for native or workflow conflicts	m3/collections/qualification/indexed-live-views-20261021/verify_recipe.py	2	107	30	28
+1816	no gate for native or workflow conflicts	m3/collections/src/main/c/m3maskviewport.c	8	483	223	43
+1817	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	1	264	31	44
+1817	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1823	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9681	137	251
+1823	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	3	506	112	206
+1823	no gate for native or workflow conflicts	m3/file/verify.py	1	250	3	1
+1823	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1823	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1824	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9681	137	251
+1824	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	4	676	137	353
+1824	no gate for native or workflow conflicts	m3/file/verify.py	2	255	5	5
+1824	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1824	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1825	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9681	137	251
+1825	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	4	676	137	353
+1825	no gate for native or workflow conflicts	m3/file/verify.py	2	255	5	5
+1825	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1825	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1836	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9681	137	251
+1836	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	4	676	137	353
+1836	no gate for native or workflow conflicts	m3/file/verify.py	2	255	5	5
+1836	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	1	519	127	225
+1836	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1836	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1841	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9681	137	251
+1841	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	4	676	137	353
+1841	no gate for native or workflow conflicts	m3/file/verify.py	2	255	5	5
+1841	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1841	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1843	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9681	137	251
+1843	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	4	676	137	353
+1843	no gate for native or workflow conflicts	m3/file/verify.py	2	255	5	5
+1843	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1843	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
+1849	neither side compiles (ours 152, theirs 152 errors): reading pass	m3/collections/interop/qualification/current-census-superset-20261022/README.md	1	120	27	34
+1849	neither side compiles (ours 152, theirs 152 errors): reading pass	m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py	2	307	26	42
+1849	neither side compiles (ours 152, theirs 152 errors): reading pass	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	1	114	3	1
+1851	no gate for native or workflow conflicts	m3/docs/name-mapping.json	1	9681	137	251
+1851	no gate for native or workflow conflicts	m3/file/src/main/java/com/m3/file/M3File.java	4	676	137	353
+1851	no gate for native or workflow conflicts	m3/file/verify.py	2	255	5	5
+1851	no gate for native or workflow conflicts	m3/fs/src/main/java/com/m3/fs/MFileStreams.java	1	652	70	95
+1851	no gate for native or workflow conflicts	m3/fs/src/test/java/com/m3/fs/MFileRangeTransferTest.java	1	382	159	223
+1851	no gate for native or workflow conflicts	m3/tooling/name-contract/name-plan.json	1	42	3	1
+1851	no gate for native or workflow conflicts	src/java.base/share/native/libjava/M3IndexMaskWindow.c	1	239	26	18
