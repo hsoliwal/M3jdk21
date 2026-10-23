@@ -171,6 +171,8 @@ def main():
             'M3FileDeltaLedgerContract': 'M3_FILE_DELTA_PASS',
             'M3BuildImpactPlanContract': 'M3_BUILD_IMPACT_PASS',
             'M3FileBuildImpactContract': 'M3_FILE_IMPACT_PASS',
+            'M3FileMoveCandidatesContract': 'M3_FILE_MOVES_PASS',
+            'M3FileObservationContract': 'M3_FILE_OBSERVATION_PASS',
             'M3ReactorImpactPlanContract': 'M3_REACTOR_IMPACT_PASS',
             'M3FileStreamsContract': 'M3_FILE_SHADOW_STREAM_PASS',
             'M3ShadowStreamsContract': 'M3_SHADOW_STREAM_PASS',
