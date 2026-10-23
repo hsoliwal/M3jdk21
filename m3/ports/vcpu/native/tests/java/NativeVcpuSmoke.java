@@ -51,6 +51,82 @@ public final class NativeVcpuSmoke {
             i(1, 11, 0, 11, 0x13), b(-8, 12, 11, 4), 0x0000000B};
     }
 
+
+    /* Crosses every 256-int JNI staging boundary, preserving logical positions
+     * and duplicate/signed values without requiring the GPU backend. */
+    private static void verifyStagedTransfer(long session, String backend) {
+        int[] sizes = {0, 1, 2, 255, 256, 257, 511, 512, 513, 4095, 4096, 4097, 8193};
+        java.util.SplittableRandom random = new java.util.SplittableRandom(0x4d334a4e49534cL);
+        for (int size : sizes) {
+            long buffer = NativeVcpu.alloc(session, (size + 32L) * Integer.BYTES);
+            try {
+                int[] src = new int[size + 13];
+                int[] dst = new int[size + 19];
+                for (int i = 0; i < src.length; i++) src[i] = random.nextInt();
+                int[] before = src.clone();
+                java.util.Arrays.fill(dst, 0x51a7e1);
+                NativeVcpu.upload(buffer, 7L * Integer.BYTES, src, 3, size);
+                NativeVcpu.download(buffer, 7L * Integer.BYTES, dst, 5, size);
+                boolean correct = java.util.Arrays.equals(before, src);
+                for (int i = 0; i < dst.length; i++) {
+                    int value = i >= 5 && i < size + 5 ? src[i - 2] : 0x51a7e1;
+                    if (dst[i] != value) { correct = false; break; }
+                }
+                check(correct, backend + ": staged int[] copy size " + size);
+                expect(IndexOutOfBoundsException.class,
+                        () -> NativeVcpu.upload(buffer, Long.MAX_VALUE, new int[1], 0, 1),
+                        backend + ": invalid native addressable byte range");
+            } finally {
+                NativeVcpu.close(buffer);
+            }
+            expect(IllegalStateException.class,
+                    () -> NativeVcpu.download(buffer, 0, new int[1], 0, 1),
+                    backend + ": retired staging buffer");
+        }
+    }
+
+    /* Either full completion before retirement, or IllegalStateException
+     * after retirement, is admissible; corrupted data or process crash is not. */
+    private static void verifyConcurrentClose(long session) {
+        long handle = NativeVcpu.alloc(session, 131072);
+        int[] input = new int[8192];
+        java.util.Arrays.fill(input, 0x1f6e5bd);
+        java.util.concurrent.CountDownLatch ready = new java.util.concurrent.CountDownLatch(1);
+        java.util.concurrent.atomic.AtomicReference<Throwable> error =
+                new java.util.concurrent.atomic.AtomicReference<>();
+        Thread worker = new Thread(() -> {
+            try {
+                ready.await();
+                for (int attempt = 0; attempt < 500; attempt++) {
+                    try {
+                        NativeVcpu.upload(handle, 0, input, 0, input.length);
+                        int[] output = new int[input.length];
+                        NativeVcpu.download(handle, 0, output, 0, output.length);
+                        if (!java.util.Arrays.equals(input, output)) {
+                            throw new AssertionError("buffer changed during serialized transfer");
+                        }
+                    } catch (IllegalStateException retired) {
+                        return;
+                    }
+                }
+            } catch (Throwable failure) {
+                error.compareAndSet(null, failure);
+            }
+        }, "m3vcpu-jni-transfer-close");
+        worker.start();
+        ready.countDown();
+        NativeVcpu.close(handle);
+        try { worker.join(); }
+        catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
+            throw new AssertionError(interrupted);
+        }
+        NativeVcpu.close(handle);
+        check(error.get() == null, "concurrent retired-buffer transfer " + error.get());
+        expect(IllegalStateException.class,
+                () -> NativeVcpu.upload(handle, 0, input, 0, 1), "retired handle reused");
+    }
+
     private static void runBackend(String backend) {
         long session;
         try {
@@ -101,6 +177,10 @@ public final class NativeVcpuSmoke {
                     backend + " upload of a non-buffer object");
             expect(UnsupportedOperationException.class,
                     () -> NativeVcpu.launch(session, "nope", 1, 0, new long[] {mem}), backend + " unknown kernel");
+            if ("cpu".equals(backend)) {
+                verifyStagedTransfer(session, backend);
+                verifyConcurrentClose(session);
+            }
             NativeVcpu.upload(config, 0, new int[] {cores * 2, words, 10}, 0, 3);
             expect(IndexOutOfBoundsException.class,
                     () -> NativeVcpu.launch(session, NativeVcpu.RV32IM_SLICE, cores, 0,

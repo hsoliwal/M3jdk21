@@ -198,6 +198,69 @@ static int m3j_enter(JNIEnv *env, m3j_session *owner, const char *op)
     return 1;
 }
 
+
+/* The table reference protects session lifetime, not a retired buffer slot.
+ * Revalidate under the session lock before using the borrowed buffer pointer.
+ * close() retires the slot under the table lock, then takes the session lock;
+ * it never holds both locks while waiting, so this lock order is safe. */
+static int m3j_enter_buffer(JNIEnv *env, m3j_session *owner, jlong handle,
+                            m3vcpu_buf *expected, const char *op)
+{
+    m3j_slot *slot;
+    int live;
+    if (!m3j_enter(env, owner, op)) {
+        return 0;
+    }
+    m3_mutex_lock(&m3j_table_lock);
+    slot = m3j_lookup_locked(handle, M3J_BUFFER);
+    live = slot != NULL && slot->owner == owner && slot->buf == expected;
+    m3_mutex_unlock(&m3j_table_lock);
+    if (!live) {
+        m3_mutex_unlock(&owner->lock);
+        m3j_throw_class(env, "java/lang/IllegalStateException", op);
+        return 0;
+    }
+    return 1;
+}
+
+/* Session handles obey the same retire-before-lock rule as buffer handles.
+ * Allocating after session-slot retirement must not resurrect a closed session. */
+static int m3j_enter_session(JNIEnv *env, m3j_session *owner, jlong handle,
+                             const char *op)
+{
+    m3j_slot *slot;
+    int live;
+    if (!m3j_enter(env, owner, op)) return 0;
+    m3_mutex_lock(&m3j_table_lock);
+    slot = m3j_lookup_locked(handle, M3J_SESSION);
+    live = slot != NULL && slot->owner == owner;
+    m3_mutex_unlock(&m3j_table_lock);
+    if (!live) {
+        m3_mutex_unlock(&owner->lock);
+        m3j_throw_class(env, "java/lang/IllegalStateException", op);
+        return 0;
+    }
+    return 1;
+}
+
+/* Check every session-owned argument while serializing buffer release. */
+static int m3j_launch_buffers_live(m3j_session *owner, const jlong *handles,
+                                   const m3vcpu_arg *args, jsize count)
+{
+    jsize i;
+    int live = 1;
+    m3_mutex_lock(&m3j_table_lock);
+    for (i = 0; i < count; i++) {
+        m3j_slot *slot = m3j_lookup_locked(handles[i], M3J_BUFFER);
+        if (slot == NULL || slot->owner != owner || slot->buf != args[i].buf) {
+            live = 0;
+            break;
+        }
+    }
+    m3_mutex_unlock(&m3j_table_lock);
+    return live;
+}
+
 /* ---- entry points ------------------------------------------------------------------------- */
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
@@ -264,8 +327,9 @@ JNIEXPORT jlong JNICALL Java_com_m3_vcpu_internal_NativeVcpu_alloc(JNIEnv *env, 
     int32_t rc;
     jlong handle = 0;
     (void)type;
-    if (bytes <= 0) {
-        m3j_throw(env, M3VCPU_E_INVALID_ARG, "alloc", "bytes must be > 0");
+    if (bytes <= 0 || (uint64_t)bytes > (uint64_t)SIZE_MAX) {
+        m3j_throw(env, M3VCPU_E_INVALID_ARG, "alloc",
+                  "bytes must be positive and addressable on this target");
         return 0;
     }
     owner = m3j_acquire(session, M3J_SESSION, NULL);
@@ -273,7 +337,7 @@ JNIEXPORT jlong JNICALL Java_com_m3_vcpu_internal_NativeVcpu_alloc(JNIEnv *env, 
         m3j_throw_class(env, "java/lang/IllegalStateException", "m3vcpu alloc: stale or closed session handle");
         return 0;
     }
-    if (m3j_enter(env, owner, "m3vcpu alloc: session closed")) {
+    if (m3j_enter_session(env, owner, session, "m3vcpu alloc: session closed")) {
         rc = m3vcpu_buffer_alloc(owner->s, (size_t)bytes, M3VCPU_BUF_READ_WRITE, &buf);
         if (rc != M3VCPU_OK) {
             m3j_throw(env, rc, "alloc", m3vcpu_last_error(owner->s));
@@ -302,13 +366,121 @@ static int m3j_range(JNIEnv *env, const char *op, jlong byte_offset, jlong offse
     return 1;
 }
 
-JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_upload(JNIEnv *env, jclass type, jlong buffer,
-                                                                    jlong byte_offset, jobject src, jint src_offset,
-                                                                    jint length)
+
+/* Bounded temporary lanes, never a borrowed Java heap pointer. The JNI
+ * critical-array prohibition on blocking backend calls is respected. */
+/* M3J_TRANSFER_INTS belongs to the single-call staging helper below. */
+
+/* Java int offset/count remain logical element units. Device offsets are bytes.
+ * Validate BEFORE narrowing to size_t (notably on 32-bit phone runtimes). */
+static int m3j_transfer_range(JNIEnv *env, const char *op,
+                              jlong device_offset, jlong offset, jlong length,
+                              jlong capacity, size_t element_size)
+{
+    uint64_t available;
+    if (!m3j_range(env, op, device_offset, offset, length, capacity)) {
+        return 0;
+    }
+    if ((uint64_t)device_offset > (uint64_t)SIZE_MAX) {
+        m3j_throw_class(env, "java/lang/IndexOutOfBoundsException",
+                        "device byte offset exceeds native addressable range");
+        return 0;
+    }
+    available = (uint64_t)SIZE_MAX - (uint64_t)device_offset;
+    if ((uint64_t)length > available / (uint64_t)element_size) {
+        m3j_throw_class(env, "java/lang/IndexOutOfBoundsException",
+                        "device byte extent exceeds native addressable range");
+        return 0;
+    }
+    return 1;
+}
+
+
+/* Preserve ONE backend transfer per Java int[] call.
+ * For <=256 words use stack scratch; otherwise allocate exactly the requested
+ * native span, release it on every return, and never retain Java heap pointers.
+ * This spends O(n) temporary native bytes to retain the original backend
+ * call/failure boundary. Direct ByteBuffer upload keeps its separate path. */
+enum { M3J_TRANSFER_INTS = 256 };
+
+static jint *m3j_transfer_storage(JNIEnv *env, jint length,
+                                  jint local[M3J_TRANSFER_INTS], const char *op)
+{
+    jint *storage;
+    if (length <= M3J_TRANSFER_INTS) return local;
+    storage = (jint *)malloc((size_t)length * sizeof(jint));
+    if (storage == NULL) {
+        m3j_throw(env, M3VCPU_E_OUT_OF_MEMORY, op, "native array staging");
+    }
+    return storage;
+}
+
+static void m3j_upload_int_region(JNIEnv *env, m3j_session *owner, m3vcpu_buf *buf,
+                                  jlong byte_offset, jintArray src,
+                                  jint src_offset, jint length)
+{
+    jint local[M3J_TRANSFER_INTS] = {0};
+    jint *staging;
+    int32_t rc;
+    size_t bytes = (size_t)length * sizeof(jint);
+    /* Zero-byte validation is provided by the existing HAL and does not reach
+     * a device backend. Fail invalid whole ranges BEFORE staging or mutation. */
+    rc = m3vcpu_buffer_write(owner->s, buf, (size_t)byte_offset + bytes, local, 0);
+    if (rc != M3VCPU_OK) {
+        m3j_throw(env, rc, "upload", m3vcpu_last_error(owner->s));
+        return;
+    }
+    if (length == 0) return;
+    staging = m3j_transfer_storage(env, length, local, "upload");
+    if (staging == NULL) return;
+    /* Input region acquisition may be chunked; backend output is NOT. */
+    for (jint done = 0; done < length;) {
+        jint take = length - done;
+        if (take > M3J_TRANSFER_INTS) take = M3J_TRANSFER_INTS;
+        (*env)->GetIntArrayRegion(env, src, src_offset + done, take, staging + done);
+        if ((*env)->ExceptionCheck(env)) {
+            if (staging != local) free(staging);
+            return;
+        }
+        done += take;
+    }
+    rc = m3vcpu_buffer_write(owner->s, buf, (size_t)byte_offset, staging, bytes);
+    if (rc != M3VCPU_OK) {
+        m3j_throw(env, rc, "upload", m3vcpu_last_error(owner->s));
+    }
+    if (staging != local) free(staging);
+}
+
+static void m3j_download_int_region(JNIEnv *env, m3j_session *owner, m3vcpu_buf *buf,
+                                    jlong byte_offset, jintArray dst,
+                                    jint dst_offset, jint length)
+{
+    jint local[M3J_TRANSFER_INTS] = {0};
+    jint *staging;
+    int32_t rc;
+    size_t bytes = (size_t)length * sizeof(jint);
+    rc = m3vcpu_buffer_read(owner->s, buf, (size_t)byte_offset + bytes, local, 0);
+    if (rc != M3VCPU_OK) {
+        m3j_throw(env, rc, "download", m3vcpu_last_error(owner->s));
+        return;
+    }
+    if (length == 0) return;
+    staging = m3j_transfer_storage(env, length, local, "download");
+    if (staging == NULL) return;
+    rc = m3vcpu_buffer_read(owner->s, buf, (size_t)byte_offset, staging, bytes);
+    if (rc == M3VCPU_OK) {
+        (*env)->SetIntArrayRegion(env, dst, dst_offset, length, staging);
+    } else {
+        m3j_throw(env, rc, "download", m3vcpu_last_error(owner->s));
+    }
+    if (staging != local) free(staging);
+}
+
+JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_upload(JNIEnv *env, jclass type,
+        jlong buffer, jlong byte_offset, jobject src, jint src_offset, jint length)
 {
     m3vcpu_buf *buf = NULL;
     m3j_session *owner;
-    int32_t rc = M3VCPU_OK;
     (void)type;
     if (src == NULL) {
         m3j_throw_class(env, "java/lang/NullPointerException", "m3vcpu upload: null source");
@@ -319,29 +491,30 @@ JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_upload(JNIEnv *env, 
         m3j_throw_class(env, "java/lang/IllegalStateException", "m3vcpu upload: stale or closed buffer handle");
         return;
     }
-    if ((*env)->IsInstanceOf(env, src, m3j_int_array)) {
+    jboolean is_int_array = (*env)->IsInstanceOf(env, src, m3j_int_array);
+    if ((*env)->ExceptionCheck(env)) {
+        m3j_release(owner);
+        return;
+    }
+    if (is_int_array) {
         jsize n = (*env)->GetArrayLength(env, (jintArray)src);
-        if (m3j_range(env, "upload", byte_offset, src_offset, length, n)
-            && m3j_enter(env, owner, "m3vcpu upload: session closed")) {
-            jint *data = (jint *)(*env)->GetPrimitiveArrayCritical(env, (jarray)src, NULL);
-            if (data != NULL) {
-                rc = m3vcpu_buffer_write(owner->s, buf, (size_t)byte_offset, data + src_offset,
-                                         (size_t)length * sizeof(jint));
-                (*env)->ReleasePrimitiveArrayCritical(env, (jarray)src, data, JNI_ABORT);
-            }
-            if (rc != M3VCPU_OK) {
-                m3j_throw(env, rc, "upload", m3vcpu_last_error(owner->s));
-            }
+        if (!(*env)->ExceptionCheck(env)
+                && m3j_transfer_range(env, "upload", byte_offset, src_offset, length, n, sizeof(jint))
+                && m3j_enter_buffer(env, owner, buffer, buf, "m3vcpu upload: closed buffer")) {
+            m3j_upload_int_region(env, owner, buf, byte_offset, (jintArray)src, src_offset, length);
             m3_mutex_unlock(&owner->lock);
         }
     } else {
         uint8_t *base = (uint8_t *)(*env)->GetDirectBufferAddress(env, src);
         jlong capacity = base == NULL ? -1 : (*env)->GetDirectBufferCapacity(env, src);
-        if (base == NULL || capacity < 0) {
+        if ((*env)->ExceptionCheck(env)) {
+            /* Preserve pending VM error; no second exception is thrown. */
+        } else if (base == NULL || capacity < 0) {
             m3j_throw(env, M3VCPU_E_INVALID_ARG, "upload", "source must be int[] or a direct ByteBuffer");
-        } else if (m3j_range(env, "upload", byte_offset, src_offset, length, capacity)
-                   && m3j_enter(env, owner, "m3vcpu upload: session closed")) {
-            rc = m3vcpu_buffer_write(owner->s, buf, (size_t)byte_offset, base + src_offset, (size_t)length);
+        } else if (m3j_transfer_range(env, "upload", byte_offset, src_offset, length, capacity, 1)
+                   && m3j_enter_buffer(env, owner, buffer, buf, "m3vcpu upload: closed buffer")) {
+            int32_t rc = m3vcpu_buffer_write(owner->s, buf, (size_t)byte_offset,
+                                             base + src_offset, (size_t)length);
             if (rc != M3VCPU_OK) {
                 m3j_throw(env, rc, "upload", m3vcpu_last_error(owner->s));
             }
@@ -351,13 +524,11 @@ JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_upload(JNIEnv *env, 
     m3j_release(owner);
 }
 
-JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_download(JNIEnv *env, jclass type, jlong buffer,
-                                                                      jlong byte_offset, jintArray dst,
-                                                                      jint dst_offset, jint length)
+JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_download(JNIEnv *env, jclass type,
+        jlong buffer, jlong byte_offset, jintArray dst, jint dst_offset, jint length)
 {
     m3vcpu_buf *buf = NULL;
     m3j_session *owner;
-    int32_t rc = M3VCPU_OK;
     (void)type;
     if (dst == NULL) {
         m3j_throw_class(env, "java/lang/NullPointerException", "m3vcpu download: null destination");
@@ -368,17 +539,11 @@ JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_download(JNIEnv *env
         m3j_throw_class(env, "java/lang/IllegalStateException", "m3vcpu download: stale or closed buffer handle");
         return;
     }
-    if (m3j_range(env, "download", byte_offset, dst_offset, length, (*env)->GetArrayLength(env, dst))
-        && m3j_enter(env, owner, "m3vcpu download: session closed")) {
-        jint *data = (jint *)(*env)->GetPrimitiveArrayCritical(env, dst, NULL);
-        if (data != NULL) {
-            rc = m3vcpu_buffer_read(owner->s, buf, (size_t)byte_offset, data + dst_offset,
-                                    (size_t)length * sizeof(jint));
-            (*env)->ReleasePrimitiveArrayCritical(env, dst, data, rc == M3VCPU_OK ? 0 : JNI_ABORT);
-        }
-        if (rc != M3VCPU_OK) {
-            m3j_throw(env, rc, "download", m3vcpu_last_error(owner->s));
-        }
+    jsize n = (*env)->GetArrayLength(env, dst);
+    if (!(*env)->ExceptionCheck(env)
+            && m3j_transfer_range(env, "download", byte_offset, dst_offset, length, n, sizeof(jint))
+            && m3j_enter_buffer(env, owner, buffer, buf, "m3vcpu download: closed buffer")) {
+        m3j_download_int_region(env, owner, buf, byte_offset, dst, dst_offset, length);
         m3_mutex_unlock(&owner->lock);
     }
     m3j_release(owner);
@@ -407,6 +572,7 @@ JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_launch(JNIEnv *env, 
         return;
     }
     (*env)->GetLongArrayRegion(env, buffers, 0, count, handles);
+    if ((*env)->ExceptionCheck(env)) return;
     owner = m3j_acquire(session, M3J_SESSION, NULL);
     if (owner == NULL) {
         m3j_throw_class(env, "java/lang/IllegalStateException", "m3vcpu launch: stale or closed session handle");
@@ -429,6 +595,12 @@ JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_launch(JNIEnv *env, 
     if (taken != count || (count > 0 && refs[count - 1] != owner)) {
         m3j_throw(env, M3VCPU_E_INVALID_ARG, "launch", "stale buffer handle or buffer of another session");
     } else if (name != NULL && m3j_enter(env, owner, "m3vcpu launch: session closed")) {
+        if (!m3j_launch_buffers_live(owner, handles, args, count)) {
+            m3j_throw(env, M3VCPU_E_INVALID_ARG, "launch",
+                      "buffer closed before launch acquired the session lock");
+            m3_mutex_unlock(&owner->lock);
+            goto launch_done;
+        }
         rc = m3vcpu_kernel_builtin(owner->s, name, &k);
         if (rc == M3VCPU_OK) {
             rc = m3vcpu_launch_1d(owner->s, k, (uint64_t)global, (uint32_t)local, args, (uint32_t)count);
@@ -441,6 +613,7 @@ JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_launch(JNIEnv *env, 
         }
         m3_mutex_unlock(&owner->lock);
     }
+launch_done:
     if (name != NULL) {
         (*env)->ReleaseStringUTFChars(env, kernel, name);
     }
