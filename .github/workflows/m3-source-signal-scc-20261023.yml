@@ -1,0 +1,126 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 compiler type graph SCC Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalGraphComponents.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SignalGraphComponents*.java'
+      - 'm3/collections/qualification/source-signal-scc-20261023/**'
+      - '.github/workflows/m3-source-signal-scc-20261023.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-source-and-strict-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source custody and diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/master...HEAD
+          bash m3/collections/qualification/source-signal-scc-20261023/verify.sh
+      - name: Compile actual M3JDK21 graph and typed owners with Java21 warnings as errors
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-source-scc/classes"
+          mkdir -p "$classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalGraphComponents.java \
+            m3/collections/src/test/java/com/m3/collections/M3SignalGraphComponentsSelfTest.java
+          java -Xss256k -cp "$classes" \
+            com.m3.collections.M3SignalGraphComponentsSelfTest
+
+  actual-javac-image-integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original compiler producer, strict consumer and immutable CSR
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-attributed-scc"
+          mkdir -p "$out/plugin/META-INF/services" "$out/classes" "$out/fixture"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/plugin" \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java
+          cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
+            "$out/plugin/META-INF/services/com.sun.source.util.Plugin"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalGraphComponents.java \
+            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java
+          mkdir -p "$out/demo"
+          cat > "$out/demo/GraphFixture.java" <<'JAVA'
+          package demo;
+          class A {
+              static void run() { B.target(); new C().virtual(); }
+          }
+          class B { static void target() {} }
+          class C { void virtual() {} }
+          JAVA
+          javac --release 21 -proc:none -processorpath "$out/plugin" \
+            "-Xplugin:M3SourceSignals out=$out/compiler-signals.tsv include=all" \
+            -d "$out/fixture" "$out/demo/GraphFixture.java"
+          cat > "$out/SccSignalProof.java" <<'JAVA'
+          import com.m3.collections.M3SourceSignalImage;
+          import com.m3.collections.M3SignalGraphComponents;
+          import java.nio.file.Files;
+          import java.nio.file.Path;
+          public final class SccSignalProof {
+              private SccSignalProof() {}
+              public static void main(String[] args) throws Exception {
+                  var image = M3SourceSignalImage.parse(Files.readString(Path.of(args[0])));
+                  var raw = image.relationships();
+                  var direct = M3SignalGraphComponents.from(raw, false);
+                  var possible = M3SignalGraphComponents.from(raw, true);
+                  if (image.rowCount() < 3 || raw.edgeCount() == 0
+                          || direct.typeCount() != image.rowCount()
+                          || possible.typeCount() != image.rowCount()
+                          || possible.structuralColumns(image.sourceIdentityHint()).columnCount() != 6
+                          || !image.sourceSha256().matches("[0-9a-f]{64}")) {
+                      throw new AssertionError("actual javac graph-to-typed SCC admission failed");
+                  }
+                  System.out.println("PASS: original javac ANALYZE -> SHA256 S/T/E -> typed CSR -> SCC");
+              }
+          }
+          JAVA
+          javac --release 21 -proc:none -Xlint:all -Werror -cp "$out/classes" \
+            -d "$out/classes" "$out/SccSignalProof.java"
+          java -cp "$out/classes" SccSignalProof "$out/compiler-signals.tsv"
+
+  original-m3-maven-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Resolve original M3 primitive-array library before owning collection reactor
+        run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Run original JUnit owner and relation/typed facts contracts
+        run: >
+          mvn -B -ntp -f m3/collections/pom.xml
+          -Dtest=M3SignalGraphComponentsTest,M3SignalColumnsTest,M3SourceSignalImageTest
+          test
