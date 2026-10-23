@@ -1,0 +1,157 @@
+name: M3 Eclipse progress forward receiver (Java 21)
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/eclipse/core-runtime/**'
+      - 'm3/collections/src/main/java/**'
+      - 'm3/recipes/runtime-convergence-20261020/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - '.github/workflows/m3-eclipse-progress-forward-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  m3-eclipse-progress-receiver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Bind the complete current Java inventory to successor source seals
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof
+          git rev-parse HEAD > proof/head.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import subprocess
+          base = Path('m3/recipes/runtime-convergence-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020')
+          seal = Path('m3/eclipse/core-runtime/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv')
+          manifest = [s.split('\t') for s in (base / 'manifest.tsv').read_text().splitlines() if s and not s.startswith('#')]
+          bindings = [r for r in manifest if r[0] == seal.as_posix()]
+          assert len(bindings) == 1 and len(bindings[0]) == 4, bindings
+          _, _, digest, template = bindings[0]
+          for candidate in (seal, base / template):
+              assert candidate.is_file() and not candidate.is_symlink(), candidate
+              assert hashlib.sha256(candidate.read_bytes()).hexdigest() == digest, candidate
+          rows = [s.split('\t') for s in seal.read_text().splitlines() if s and not s.startswith('#')]
+          assert len(rows) == 2
+          assert all(len(r) == 2 for r in rows)
+          paths = [r[0] for r in rows]
+          assert paths == sorted(set(paths)), paths
+          tracked = {p for p in subprocess.check_output(['git', 'ls-files', 'm3/eclipse/core-runtime/src'], text=True).splitlines() if p.endswith('.java')}
+          present = {p.as_posix() for p in Path('m3/eclipse/core-runtime/src').rglob('*.java')}
+          assert tracked == present == set(paths), (tracked ^ set(paths), present ^ set(paths))
+          for relative, digest in rows:
+              candidate = Path(relative)
+              assert candidate.is_file() and not candidate.is_symlink(), candidate
+              assert hashlib.sha256(candidate.read_bytes()).hexdigest() == digest, candidate
+          Path('proof/source-seals.tsv').write_bytes(seal.read_bytes())
+          print('EXACT_CURRENT_PROGRESS_JAVA_INVENTORY', len(rows))
+          PY
+<<<<<<< 72b3b8a43682e5d51dae5f17d1e77eb1fa3be8ca
+      - name: Verify scheduled-task recipe custody
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          root = Path("m3/eclipse/core-runtime/recipe/src/test/resources/com/synexia/rewrite/hash-pinned-java/eclipse-m3-scheduled-tasks-20261021")
+          rows = [line.split("\t") for line in (root / "manifest.tsv").read_text(encoding="utf-8").splitlines()
+                  if line and not line.startswith("#")]
+          assert len(rows) == 2, rows
+          assert [row[0] for row in rows] == sorted(row[0] for row in rows)
+          for relative, before, expected, template in rows:
+              assert before == "ABSENT", relative
+              assert len(expected) == 64, expected
+              for item in (Path(relative), root / template):
+                  assert item.is_file() and not item.is_symlink(), item
+                  actual = hashlib.sha256(item.read_bytes()).hexdigest()
+                  assert actual == expected, (item, expected, actual)
+          print("M3_ECLIPSE_SCHEDULED_TASKS_SEALED", len(rows))
+          PY
+=======
+      - name: Execute canonical successor SDK application, refusal and fixed-point tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/recipes/runtime-convergence-20261020/pom.xml \
+            -Drecipe.owner.root="$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
+            -Dm3.recipe.name=com.synexia.m3jdk.RuntimeConvergence20261020 test 2>&1 | tee proof/successor-recipe.txt
+>>>>>>> 683d8738ecec081cc554b1c2652f75f32f63cbb3
+      - name: Run hash-pinned Java LST recipe and refusal/fixed-point tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/eclipse/core-runtime/recipe/pom.xml test 2>&1 | tee proof/recipe.txt
+      - name: Compile unchanged M3 collections and install runtime dependency
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/classes
+          find m3/collections/src/main/java -name '*.java' | sort > proof/m3-sources.txt
+          javac --release 21 -Xlint:all,-module -Werror -d proof/classes @proof/m3-sources.txt 2>&1 | tee proof/m3-compile.txt
+          jar --create --file proof/m3-collections.jar -C proof/classes .
+          mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
+            -Dfile="$GITHUB_WORKSPACE/proof/m3-collections.jar" \
+            -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT \
+            -Dpackaging=jar -DgeneratePom=true
+      - name: Compile and test real Eclipse API forwarding
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/eclipse/core-runtime/pom.xml verify 2>&1 | tee proof/maven-bridge.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as E
+          reports = list(Path('m3/eclipse/core-runtime/target/surefire-reports').glob('TEST-*.xml'))
+          assert reports, 'no JUnit reports'
+          roots = [E.parse(p).getroot() for p in reports]
+          counts = {k: sum(int(v.attrib.get(k, 0)) for v in roots) for k in ('tests', 'errors', 'failures', 'skipped')}
+          assert counts == {'tests': 16, 'errors': 0, 'failures': 0, 'skipped': 0}, counts
+          print('REAL_ECLIPSE_PROGRESS_JUNIT_TESTS', counts)
+          PY
+          git diff --exit-code -- m3/collections/src/main/java m3/eclipse/core-runtime/src
+      - name: Require scheduled-task product and recipe JUnit receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          cases = {
+              Path("m3/eclipse/core-runtime/recipe/target/surefire-reports/"
+                   "TEST-com.synexia.rewrite.M3EclipseScheduledTasksRecipeTest.xml"): 4,
+              Path("m3/eclipse/core-runtime/target/surefire-reports/"
+                   "TEST-com.m3.eclipse.runtime.M3EclipseScheduledTasksTest.xml"): 9
+          }
+          for path, count in cases.items():
+              assert path.is_file(), f"missing execution receipt {path}"
+              root = ET.parse(path).getroot()
+              actual = {k: int(root.attrib.get(k, "0"))
+                        for k in ("tests", "errors", "failures", "skipped")}
+              assert actual == dict(tests=count, errors=0, failures=0, skipped=0), (path, actual)
+          print("M3_ECLIPSE_SCHEDULED_TASKS_RECEIPTS_PASS")
+          PY
+      - name: Preserve receipts and JUnit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-eclipse-progress-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            proof/
+            m3/recipes/runtime-convergence-20261020/target/surefire-reports/
+            m3/eclipse/core-runtime/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv
+            m3/eclipse/core-runtime/recipe/target/surefire-reports/
+            m3/eclipse/core-runtime/target/surefire-reports/

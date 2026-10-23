@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors.
+name: M3 identity-rank Java21 JNI source-sealed qualification
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongStateArray.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathIdentity*.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulk*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java'
+      - 'm3/collections/algorithm-catalogue/identity-index-rank-20261021/**'
+      - '.github/workflows/m3-identity-rank-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-native-identity-rank:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source seal and whitespace checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          cat <<'SHA' | sha256sum --check
+          d650c7fb84b1911d367b5b89ba31f943ac147a594a62948a6a862f1d23ec8010  m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java
+          3d63ae8ed3d7e1c02ffbc1b96daa7d14ee143fffc12da11ba9aec44eaecc0d3b  m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java
+          bc9755bd43350d583ad724408926f4e2ef76d8c5fc8040278a2620c9dc7a65ba  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java
+          dcba4e115ae235321aa2558804a2b3f2cc053fa3b20a7a785b1a487422b2f60e  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentityTest.java
+<<<<<<< 72b3b8a43682e5d51dae5f17d1e77eb1fa3be8ca
+          fa2caa272b1915b6949f5776ebf4c2554503d18a62a32faefdcc487bd903d30b  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java
+          56f1e5e32506d9cd20755cf893f5af2f22b072150334401b08286e3919d54704  m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
+=======
+          5af79b8408cd3f14e300a8f274e74ec539d3f945a0d03655b55ddc03eb351b70  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java
+          3cad49e2d2e0c5aa1c8d2b880ddca19392cc072a68c2203872634550deae7b60  m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
+>>>>>>> 8ffe1f8c047161076bf91eb537a187efce96f645
+          11eaa64f85575aac225b2839872a74e6db52d06981196488834a0f1799eaf7d3  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java
+          05e276a47fc63c158fe20e3ba14fd3d3adc468b47eabf0966516c392a7cc3f98  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java
+          011dc027f62c3ba5f8a7bd53808d4fd12531262434e10705b53e42446b7c7298  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkTest.java
+          SHA
+      - name: Compile exact Java21 identity rank and existing JNI parity probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-identity-rank"
+          mkdir -p "$out/classes" "$out/native"
+          javac --release 21 -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java
+          gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
+            -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$out/native/libm3_collections_pathmask.so"
+          java -cp "$out/classes" com.m3.collections.M3IndexPathIdentitySelfTest
+          java -cp "$out/classes" com.m3.collections.M3IndexPathRankBulkSelfTest
+          java -cp "$out/classes" com.m3.collections.M3IndexPathRankSelfTest
+          java -Xcheck:jni -Djava.library.path="$out/native" -cp "$out/classes" \
+            com.m3.collections.M3IndexPathRankNativeSelfTest
+      - name: Original Java21 state, rank and filtered-live contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-identity-live-classes"
+          mkdir -p "$classes"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
+            -d "$classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java
+          java -ea -cp "$classes" com.m3.collections.M3IndexedLiveViewContract
+          java -ea -cp "$classes" com.m3.collections.M3IndexPathRankBulkSelfTest
+          java -ea -cp "$classes" com.m3.collections.M3IndexPathIdentitySelfTest

@@ -1,0 +1,43 @@
+{
+  "schema": "M3JDK21_NAME_CONTRACT_PLAN_V1",
+  "authority": "m3/docs/name-mapping.json",
+<<<<<<< 72b3b8a43682e5d51dae5f17d1e77eb1fa3be8ca
+  "authority_blob": "fe77055e75116df42fafb40c433d351fbac139cc",
+=======
+  "authority_blob": "4702a9f7e8aec01f7c6890199295866332fb207b",
+>>>>>>> 04eccf3e98f3384ed2eb6c9b96478aa751b794a9
+  "operations": [
+    {
+      "mapping_id": "synexia.counterpart.MIndexClass",
+      "kind": "JDK_BACKEND",
+      "state": "QUEUED",
+      "before_type": "jdk.internal.mindex.M3Class",
+      "after_type": "java.lang.Class",
+      "reason": "M3Class is an internal indexed Class view, not a verified replacement for java.lang.Class. Do not promote without pinned source, full Class public/protected ABI and reflection/loader/serialization differential tests, image/jtreg/JNI-GC/runtime and CPU/heap/native-memory evidence."
+    },
+    {
+      "mapping_id": "synexia.collections.SegmentedAddress28",
+      "kind": "FORMAT_ONLY",
+      "state": "QUEUED",
+      "before_type": "jdk.internal.mindex.M3Address28",
+      "after_type": "jdk.internal.mindex.M3Address28",
+      "reason": "Format only an exact reviewed Java staging projection while retaining M3Address28 as internal; formatting cannot change behavior, make it a public JDK class, or imply collection replacement."
+    },
+    {
+      "mapping_id": "m3.prefix-z",
+      "kind": "INTERNAL_MOVE",
+      "state": "QUEUED",
+      "before_type": "com.m3.algorithm.M3PrefixZ",
+      "after_type": "com.m3.algorithms.M3PrefixZ",
+      "reason": "Potential package consolidation for algorithm-only candidate; do not relocate until the canonical name map adds an approved destination symbol, all users/imports/service/reflection/serialization are inventoried and a proven Synexia typed recipe is replayed."
+    },
+    {
+      "mapping_id": "m3.collections.evicting-queue.owner-naming",
+      "kind": "INTERNAL_MOVE",
+      "state": "QUEUED",
+      "before_type": "com.m3.collections.guava.M3EvictingQueue",
+      "after_type": "com.m3.collections.queue.M3EvictingQueue",
+      "reason": "Review-only semantic package name for a real owned queue, not a generated scaffold. Existing class is public final and Serializable; callers, binary compatibility, serialized class descriptor, plugin/service/reflection consumers, canonical destination owner, complete Synexia recipe execution and installed JDK21 ABI/JNI/jtreg/performance gates are unproven. Collections phase must not advance before String/arrays."
+    }
+  ]
+}
