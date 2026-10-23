@@ -141,3 +141,23 @@ message exclusions the Synexia multipass marks and the recipe compiler's lint ap
 tree, second parser or OpenRewrite LST is touched; the result is two primitive lanes (occurrence
 row, culprit ordinal). A comment mark written by the OpenRewrite recipe and a finding produced
 here name the same site, so the analyzer no longer needs its own tree.
+
+## Facts contract and driver provisioning (2026-10-23)
+
+`M3FactsWriterContract` is a registered consumer contract (`M3_FACTS_WRITER_PASS`): one real javac parse,
+one JAVAC-domain `M3ASTIndex` through `M3ASTIngress.javac`, one `M3FactsWriter.write` into the consumer work
+directory, then JDBC readback of `target/m3/facts.sqlite`. It asserts that the `m3_ast_meta` marker equals
+`M3FactsWriter.SCHEMA`, that the per-generation file and node rows and the generation totals equal the
+returned `Result`, that `committed` is true, that every node lane round-trips exactly (one ordered lane
+digest compared against the index), that a repeated generation is refused whole by the generation primary
+key with the first generation intact while a new generation is appended, that a missing driver surfaces the
+writer's declared `SQLException`, and that a facts path which cannot be a regular file is refused by the
+writer's own `IOException`.
+
+Driver rule: the module keeps `requires static transitive java.sql` and no driver dependency. `build.py`
+resolves the newest local Xerial `sqlite-jdbc` 3.45.x jar from the local Maven repository
+(`--maven-repository`, default `~/.m2/repository`) together with the one `slf4j-api` version its sibling
+POM declares (`org.sqlite.JDBC` cannot initialize without it), seals both paths and SHA-256 values in
+`INPUTS.json` (owner `maven-repository`, with the POM) and `lint-structure.log`, and places them only on
+the consumer test classpath, never on the module path, the JAR, the JMOD or the linked image. An absent
+jar refuses the sequence with one line naming the expected path; nothing is downloaded.
