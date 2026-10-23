@@ -16,8 +16,21 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,31 +75,48 @@ public final class M3CanonicalApiBoundaryTest {
             throw new AssertionError("runtime options exposed the internal class-index package");
         }
         for (Class<?> canonical : new Class<?>[] {
-                String.class, Class.class, ArrayList.class, HashMap.class,
-                TreeMap.class, Pattern.class, Matcher.class
+                String.class, Class.class, InputStream.class, OutputStream.class,
+                ArrayList.class, HashMap.class, TreeMap.class, HashSet.class,
+                TreeSet.class, LinkedList.class, ArrayDeque.class,
+                PriorityQueue.class, Arrays.class, Collections.class,
+                ConcurrentHashMap.class, Pattern.class, Matcher.class,
+                Path.class, Files.class
         }) {
             verifyCanonical(canonical);
         }
         auditExportedJavaPackages();
-        System.out.println("M3JDK_CANONICAL_API_BOUNDARY_PASS 7 canonical owners, 2 internal owners");
+        System.out.println("M3JDK_CANONICAL_API_BOUNDARY_PASS 19 canonical owners, 2 required internal owners");
     }
 
-    /** Find all M3-named top-level classes in exported java.lang/java.util families. */
+    /** Validate top-level M3 classes in every exported or opened java.base package. */
     private static void auditExportedJavaPackages() throws Exception {
+        ModuleDescriptor descriptor = String.class.getModule().getDescriptor();
+        Set<String> visiblePackages = new HashSet<>();
+        for (ModuleDescriptor.Exports exp : descriptor.exports()) {
+            visiblePackages.add(exp.source());
+        }
+        for (ModuleDescriptor.Opens op : descriptor.opens()) {
+            visiblePackages.add(op.source());
+        }
         try (ModuleReader reader = ModuleFinder.ofSystem().find("java.base")
                 .orElseThrow().open();
              var entries = reader.list()) {
             for (String resource : entries.filter(entry -> entry.endsWith(".class")
-                    && !entry.contains("$")
-                    && (entry.startsWith("java/lang/") || entry.startsWith("java/util/")))
-                    .sorted().toList()) {
-                String simple = resource.substring(resource.lastIndexOf('/') + 1,
+                    && !entry.contains("$")).sorted().toList()) {
+                int lastSlash = resource.lastIndexOf('/');
+                if (lastSlash < 0) {
+                    continue;
+                }
+                String simple = resource.substring(lastSlash + 1,
                         resource.length() - ".class".length());
                 if (!internalSpelling(simple)) {
                     continue;
                 }
-                String binaryName = resource.substring(0,
-                        resource.length() - ".class".length()).replace('/', '.');
+                String packageName = resource.substring(0, lastSlash).replace('/', '.');
+                if (!visiblePackages.contains(packageName)) {
+                    continue;
+                }
+                String binaryName = packageName + "." + simple;
                 Class<?> internal = Class.forName(binaryName, false, null);
                 if (Modifier.isPublic(internal.getModifiers())) {
                     throw new AssertionError("exported JDK package exposes M3 class: " + binaryName);
