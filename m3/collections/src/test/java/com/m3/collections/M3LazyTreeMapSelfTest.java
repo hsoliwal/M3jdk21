@@ -1,6 +1,7 @@
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: cancellation fixture setup limited to the first provider attempt.
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: align repeated live-entry identity with the existing view-local facade cache.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
@@ -78,8 +79,8 @@ public final class M3LazyTreeMapSelfTest {
         same(identity, snapshot.getValue()); equal(2, calls[0]);
         Object replaced = new Object(); same(identity, view.put(6, replaced));
         same(identity, snapshot.getValue()); same(replaced, map.get(6));
-        Map.Entry<Integer, Object> fresh = view.entrySet().iterator().next();
-        require(live != fresh, "entries are fresh caller projections");
+        Map.Entry<Integer, Object> repeated = view.entrySet().iterator().next();
+        require(live == repeated, "same view reuses its cached live entry projection");
         Object explicit = new Object(); same(identity, live.setValue(explicit)); same(explicit, map.get(7));
         M3Progress progress = M3Progress.of(5); view.preload(progress);
         equal(5, calls[0]); require(progress.isDone(), "bounded preload complete");

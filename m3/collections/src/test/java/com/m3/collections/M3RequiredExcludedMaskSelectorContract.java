@@ -1,6 +1,5 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
- * Modified 2026 by Hitesh Soliwal and contributors: preserve unsigned high-bit rows in the required/excluded boundary oracle.
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.m3.collections;
@@ -25,7 +24,7 @@ public final class M3RequiredExcludedMaskSelectorContract {
     private static void boundary() {
         var java = M3IndexMaskCompactor.Backend.JAVA;
         byte[] states = {0, 1, 2, 3, (byte) 0x80, (byte) 0xff};
-        // 0x80 is unsigned state 128 and has no excluded low bit, so row 4 is selected.
+        // The unrelated high bit in state[4] does not exclude that logical position.
         eq(new int[] {0, 2, 4}, M3IndexMaskCompactor.selectPositions(states, 0, 1, java));
         eq(new int[] {1}, M3IndexMaskCompactor.selectPositions(states, 1, 2, java));
         eq(new int[] {4}, M3IndexMaskCompactor.selectPositions(states, 128, 1, java));

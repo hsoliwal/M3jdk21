@@ -80,11 +80,12 @@ public final class M3LongAddressBoundedSelfTest {
             for (int bad : new int[] {-1, payload.length, Integer.MAX_VALUE, Integer.MIN_VALUE}) {
                 addresses[3 + at] = bad;
                 Arrays.fill(actual, -901L);
-                Throwable error = expect(backend == M3IndexMaskCompactor.Backend.JAVA
-                        ? ArrayIndexOutOfBoundsException.class : IndexOutOfBoundsException.class,
+                Throwable error = expect(ArrayIndexOutOfBoundsException.class,
                         () -> M3LongAddressKernel.gatherInto(payload, addresses, 3, length, actual, 5, backend));
                 if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
-                    check("physical address outside payload".equals(error.getMessage()), "native failure contract");
+                    // Native diagnostics match the recorded Java 21 array-bounds diagnostic.
+                    check(("Index " + bad + " out of bounds for length " + payload.length)
+                            .equals(error.getMessage()), "native failure contract");
                 }
                 for (int i = 0; i < actual.length; i++) {
                     long expected = i >= 5 && i < 5 + at ? payload[addresses[i - 2]] : -901L;
