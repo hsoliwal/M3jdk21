@@ -8,8 +8,8 @@ on:
     paths:
       - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
       - 'test/jdk/jdk/internal/m3/M3IndexedArrayGrowth*.java'
-      - '.github/workflows/m3-indexed-array-atomic-growth-20261023.yml'
-      - 'm3/qualification/indexed-array-atomic-growth-20261023/**'
+      - '.github/workflows/m3-indexed-array-atomic-growth.yml'
+      - 'm3/qualification/indexed-array-atomic-growth/**'
   workflow_dispatch:
 permissions:
   contents: read
