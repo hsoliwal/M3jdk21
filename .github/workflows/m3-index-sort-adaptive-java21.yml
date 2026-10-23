@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical CI candidate: Synexia PR #13224; target: original M3JDK21 PR #1882.
+name: M3JDK21 original adaptive index-sort Java21 proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexSort.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveTest.java'
+      - 'm3/collections/qualification/index-sort-adaptive/**'
+      - '.github/workflows/m3-index-sort-adaptive-java21.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-sealed-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Bind exact PR head and original product source
+        shell: bash
+        env:
+          M3_EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$M3_EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3IndexSort.java)" = 'f786685aa7c7cf0e4e6a1b975f98227449fb637a'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveContract.java)" = '74a8fe76fbab3c87b1caac198e01bf2cf1855fd4'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveTest.java)" = '15d06bd2740ea7c9ebc320b697a2ac347b446d1d'
+      - name: Strict compile of original M3JDK21 index owner and oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-index-sort"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-index-sort" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexSort.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexSortAdaptiveContract.java
+      - name: Execute exact Java21 normal and interpreter contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -cp "$RUNNER_TEMP/m3-index-sort" \
+            com.m3.collections.M3IndexSortAdaptiveContract \
+            | tee "$RUNNER_TEMP/m3-index-sort-normal.txt"
+          java -Xint -cp "$RUNNER_TEMP/m3-index-sort" \
+            com.m3.collections.M3IndexSortAdaptiveContract \
+            | tee "$RUNNER_TEMP/m3-index-sort-interpreter.txt"
+          grep -Fxq 'PASS M3_INDEX_SORT_ADAPTIVE checks=6576' "$RUNNER_TEMP/m3-index-sort-normal.txt"
+          cmp "$RUNNER_TEMP/m3-index-sort-normal.txt" "$RUNNER_TEMP/m3-index-sort-interpreter.txt"
+      - name: Preserve bounded proof receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-index-sort-adaptive-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-index-sort-*.txt
+          if-no-files-found: warn
+          retention-days: 14
