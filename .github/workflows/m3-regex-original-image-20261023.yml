@@ -51,6 +51,14 @@ jobs:
                   raise SystemExit("SOURCE_DRIFT " + name + ": " + actual)
               print("SOURCE_SEALED", name)
           PY
+      - name: Provision native JDK21 system headers without modifying product source
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev
       - name: Configure actual OpenJDK and HotSpot
         shell: bash
         run: |
