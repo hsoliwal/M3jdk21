@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /** Self-contained Java21 oracle; no JUnit or native binary needed. */
 public final class M3IndexedLiveViewContract {
@@ -97,7 +98,51 @@ public final class M3IndexedLiveViewContract {
         ints.sort(null);
         assertEqual(natural, List.of(1, 2, 3));
         assertEqual(natural.physicalIndex(0), 0);
+        reentrantPreparationContracts();
         randomDifferential();
+    }
+
+    private static void reentrantPreparationContracts() {
+        M3ArrayList<Integer> owner = new M3ArrayList<>(List.of(3, 1, 2));
+
+        // Invalidation during predicate execution must abort publication.
+        AtomicReference<M3IndexedLiveView<Integer>> filteredRef = new AtomicReference<>();
+        AtomicInteger filterCalls = new AtomicInteger();
+        M3IndexedLiveView<Integer> filteredView = M3IndexedLiveView.filtered(owner, value -> {
+            if (filterCalls.getAndIncrement() == 0) filteredRef.get().invalidate();
+            return value > 0;
+        });
+        filteredRef.set(filteredView);
+        fails(ConcurrentModificationException.class, filteredView::size);
+        assertEqual(filteredView, List.of(3, 1, 2));
+
+        // Sorting cannot publish an obsolete physical index after invalidation.
+        AtomicReference<M3IndexedLiveView<Integer>> sortedRef = new AtomicReference<>();
+        AtomicInteger comparisonCalls = new AtomicInteger();
+        M3IndexedLiveView<Integer> sortedView = M3IndexedLiveView.sorted(owner, (left, right) -> {
+            if (comparisonCalls.getAndIncrement() == 0) sortedRef.get().invalidate();
+            return Integer.compare(left, right);
+        });
+        sortedRef.set(sortedView);
+        fails(ConcurrentModificationException.class, sortedView::size);
+        assertEqual(sortedView, List.of(1, 2, 3));
+        assertEqual(Arrays.toString(sortedView.physicalIndices()), "[1, 2, 0]");
+
+        // A client predicate must not recur into the same half-built projection.
+        AtomicReference<M3IndexedLiveView<Integer>> recursiveRef = new AtomicReference<>();
+        AtomicInteger recursionCalls = new AtomicInteger();
+        M3IndexedLiveView<Integer> recursive = M3IndexedLiveView.filtered(owner, value -> {
+            if (recursionCalls.getAndIncrement() == 0) recursiveRef.get().size();
+            return true;
+        });
+        recursiveRef.set(recursive);
+        fails(ConcurrentModificationException.class, recursive::size);
+        assertEqual(recursive, List.of(3, 1, 2));
+
+        // The fail-fast state must be cleared by finally, even after exceptions.
+        assertEqual(recursive.size(), 3);
+        assertEqual(sortedView.size(), 3);
+        assertEqual(filteredView.size(), 3);
     }
 
     private static void randomDifferential() {

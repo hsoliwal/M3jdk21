@@ -46,8 +46,8 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
     private int structureEpoch;
     private long valueEpoch;
     private boolean prepared;
-    private long invalidationEpoch;
     private boolean preparing;
+    private long invalidationEpoch;
 
     private M3IndexedLiveView(M3ArrayList<E> owner, Predicate<? super E> filter,
             Comparator<? super E> comparator, boolean sorted,
