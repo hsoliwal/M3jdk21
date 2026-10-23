@@ -4,6 +4,8 @@
  *
  * Additive M3 indexed-array receiver, generated from a sealed Synexia recipe.
  */
+// Modified 2026 by Hitesh Soliwal and contributors: bulk-copy only
+// unopposed merge tails; retain stable physical-slot ordering.
 package com.m3.collections;
 
 import java.util.Arrays;
@@ -280,8 +282,11 @@ public final class M3LongIndexProjection {
                     if (descending ? cmp >= 0 : cmp <= 0) scratch[write++] = current[a++];
                     else scratch[write++] = current[b++];
                 }
-                while (a < middle) scratch[write++] = current[a++];
-                while (b < right) scratch[write++] = current[b++];
+                if (a < middle) {
+                    System.arraycopy(current, a, scratch, write, middle - a);
+                } else if (b < right) {
+                    System.arraycopy(current, b, scratch, write, right - b);
+                }
             }
             int[] swap = current; current = scratch; scratch = swap;
         }

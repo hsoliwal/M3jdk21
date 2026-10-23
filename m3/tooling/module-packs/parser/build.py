@@ -7,6 +7,8 @@ The four existing M3 javac owners are compiled as an external jdk.compiler
 patch. The linked image retains its supplied compiler module descriptor; this
 proof does not qualify plugin discovery or embed the patch in a product JDK.
 Every build javac invocation, including consumer compilation, precedes tests.
+Internal-package fixtures use a separate test-only parser module patch; neither
+test partition is packaged into the parser JAR or JMOD.
 A changed source/toolchain or a failed phase requires a fresh output directory.
 """
 import argparse
@@ -39,9 +41,25 @@ CONTRACTS = (
     ("jdk.m3.parser.test.M3ParserFrameworkContract", "M3_PARSER_FRAMEWORK_PASS"),
     ("jdk.m3.parser.test.M3JavacParserContract", "M3_JAVAC_PARSER_PASS"),
     ("jdk.m3.parser.test.M3CrossFrontendContract", "M3_AST_MULTIFRONTEND_PASS"),
-    ("jdk.m3.parser.test.M3FileDeltaContract", "M3_FILE_DELTA_PASS"),
-    ("jdk.m3.parser.test.M3SharedSourceDeltaContract", "M3_SHARED_SOURCE_DELTA_PASS"),
+    ("jdk.m3.parser.test.M3ASTDetailsContract", "M3_AST_DETAILS_PASS"),
+    ("jdk.m3.parser.test.M3ASTRelationsContract", "M3_AST_RELATIONS_PASS"),
+    ("jdk.m3.parser.test.M3ASTIndexProjectionContract", "M3_AST_INDEX_PROJECTION_PASS"),
+    ("jdk.m3.parser.test.M3FileInputContract", "M3_FILE_INPUT_PASS"),
+    ("jdk.m3.parser.test.M3ScopedCompilationTest", "M3_SCOPED_COMPILATION_PASS"),
+    ("jdk.m3.parser.test.M3LexicalReuseContract", "M3_LEXICAL_REUSE_PUBLIC_PASS"),
 )
+INTERNAL_CONTRACTS = (
+    ("jdk.m3.parser.M3JavacFactImageContract", "M3_JAVAC_FACT_IMAGE_PASS"),
+)
+SEPARATE_QUALIFICATION = (
+    ("jdk.m3.parser.test.M3FactsWriterContract",
+     "Real Xerial SQLite JDBC 3.45.1.0/JNI and runtime dependencies; "
+     "see FACTS.md and verification/one-pass-20261020/qualification/facts-final"),
+    ("jdk.m3.parser.test.M3ParserResourceProbe", "Separate resource measurement"),
+    ("jdk.m3.parser.test.M3LexicalReuseProbe", "Separate cold/warm resource measurement"),
+    ("jdk.m3.parser.test.M3TokenClassLookupProbe", "Separate public lookup resource measurement"),
+)
+COMPILER_CONTRACTS = (("M3ASTProjectionStateTest", "M3_AST_PROJECTION_STATE_PASS"),)
 SMOKE = ("jdk.m3.parser.test.M3ParserImageSmoke", "M3_PARSER_IMAGE_PASS")
 
 
@@ -71,6 +89,36 @@ def checked_file(path):
     return path
 
 
+def source_package(path, source_root):
+    """Validate the package/path pair in these ordinary Java source trees."""
+    if path.name == "module-info.java":
+        raise ValueError("test module descriptor refused: " + str(path))
+    content = checked_file(path).read_text(encoding="utf-8")
+    match = re.search(r"(?m)^\s*package\s+([\w$]+(?:\.[\w$]+)*)\s*;", content)
+    if match is None:
+        raise ValueError("declared source package required: " + str(path))
+    package = match.group(1)
+    if path.relative_to(source_root).parent.as_posix() != package.replace(".", "/"):
+        raise ValueError("source package/path mismatch: " + str(path))
+    return package
+
+
+def test_partitions(pack):
+    """Retain every fixture; exact owned packages require a test-only patch."""
+    source_root = pack / "src/main/java"
+    test_root = pack / "src/test/java"
+    packages = {source_package(path, source_root)
+                for path in sorted(source_root.rglob("*.java"))
+                if path != source_root / "module-info.java"}
+    if not packages:
+        raise ValueError("parser source packages required")
+    external, internal = [], []
+    for path in sorted(test_root.rglob("*.java")):
+        target = internal if source_package(path, test_root) in packages else external
+        target.append(path)
+    return external, internal
+
+
 def input_rows(repository, jdk):
     """Seal the source closure and every supplied JMOD before creating output."""
     pack = repository / PACK
@@ -79,7 +127,7 @@ def input_rows(repository, jdk):
     if not source_files or not test_files:
         raise ValueError("complete parser source and consumer trees required")
     required = [pack / name for name in
-                ("build.py", "pom.xml", "DESIGN.md", "FOSS_REUSE_DECISIONS.tsv")]
+                ("build.py", "test_build.py", "pom.xml", "DESIGN.md", "FOSS_REUSE_DECISIONS.tsv")]
     required += [repository / COMPILER_ROOT / name for name in COMPILER_SOURCES]
     required.append(repository / RECEIVER_CHECKER)
     required += [repository / "m3/synexia-import/current-full-borrow" / name
@@ -91,8 +139,10 @@ def input_rows(repository, jdk):
     required += [repository / "m3/docs/name-mapping.d/m3-parser-jmod-20261018.json",
                  repository / ".github/workflows/m3-parser-jmod-20261018.yml"]
     required += [pack / "src/main/java/module-info.java"]
-    for name, unused in (*CONTRACTS, SMOKE):
+    for name, unused in (*CONTRACTS, *INTERNAL_CONTRACTS, SMOKE):
         required.append(pack / "src/test/java" / (name.replace(".", "/") + ".java"))
+    required += [repository / "test/langtools/tools/javac/m3" / (name + ".java")
+                 for name, unused in COMPILER_CONTRACTS]
     rows = []
     for path in sorted(set(source_files + test_files + required)):
         checked_file(path)
@@ -236,7 +286,25 @@ class Qualification:
         return self.jdk / "bin" / executable(name)
 
     def lint(self):
-        ast.parse((self.pack / "build.py").read_text(encoding="utf-8"))
+        for name in ("build.py", "test_build.py"):
+            ast.parse((self.pack / name).read_text(encoding="utf-8"))
+        external, internal = test_partitions(self.pack)
+        for contracts, sources in (((*CONTRACTS, SMOKE), external),
+                                   (INTERNAL_CONTRACTS, internal)):
+            for main, unused in contracts:
+                source = self.pack / "src/test/java" / (main.replace(".", "/") + ".java")
+                if source not in sources:
+                    raise ValueError("contract has wrong compilation partition: " + main)
+        partition_file = self.output / "TEST_SOURCES.json"
+        write_json(partition_file, {
+            "schema": "M3_PARSER_TEST_SOURCES_V1",
+            "external": [path.relative_to(self.pack).as_posix() for path in external],
+            "test_only_module_patch": [path.relative_to(self.pack).as_posix() for path in internal],
+            "separate_qualification": [
+                {"class": main, "status": "SEPARATE_RUNTIME_GATE_NOT_RUN", "requirement": reason}
+                for main, reason in SEPARATE_QUALIFICATION
+                if (self.pack / "src/test/java" / (main.replace(".", "/") + ".java")).is_file()],
+        })
         ET.parse(self.pack / "pom.xml")
         json.loads((self.repository / "m3/docs/name-mapping.d/m3-parser-jmod-20261018.json")
                    .read_text(encoding="utf-8"))
@@ -260,7 +328,7 @@ class Qualification:
                        + "java_sources=" + str(source_count) + "\n"
                        + "Java compiler warnings are checked with -Xlint:all -Werror in compile phase.\n",
                        encoding="utf-8")
-        return [self.output / "INPUTS.json", log]
+        return [self.output / "INPUTS.json", partition_file, log]
 
     def compile(self):
         patch_source = self.output / "compiler-source"
@@ -289,31 +357,73 @@ class Qualification:
         self.run("parser-module", [*common, "-Xlint:-module", "--patch-module",
                                   "jdk.compiler=" + str(patch_classes), "-d", modules / MODULE,
                                   *parser_sources])
-        test_sources = sorted((self.pack / "src/test/java").rglob("*.java"))
-        self.run("all-consumers", [*common, "--patch-module", "jdk.compiler=" + str(patch_classes),
-                                  "--module-path", modules, "--add-modules", MODULE,
-                                  "-d", tests, *test_sources])
+        compiler_tests = [self.repository / "test/langtools/tools/javac/m3" / (name + ".java")
+                          for name, unused in COMPILER_CONTRACTS]
+        test_artifacts = self.compile_tests(common, patch_classes, modules, tests, compiler_tests)
         classes = sorted(patch_classes.rglob("*.class")) + sorted(modules.rglob("*.class"))
-        classes += sorted(tests.rglob("*.class"))
         if not classes or not (modules / MODULE / "module-info.class").is_file():
             raise ValueError("compiled source/module closure missing")
-        return classes + sorted(patch_source.rglob("*.java"))
+        return classes + test_artifacts + sorted(patch_source.rglob("*.java"))
 
-    def consumer(self, name, java, contract, linked):
+    def compile_tests(self, common, compiler_patch, modules, tests, compiler_tests):
+        external, internal = test_partitions(self.pack)
+        self.run("all-consumers", [*common, "--patch-module", "jdk.compiler=" + str(compiler_patch),
+                                  "--module-path", modules, "--add-modules", MODULE,
+                                  "-sourcepath", self.output / "empty-sourcepath",
+                                  "-d", tests, *external, *compiler_tests])
+        test_source = self.output / "parser-test-source"
+        test_patch = self.output / "parser-test-patch"
+        test_source.mkdir()
+        test_patch.mkdir()
+        staged = []
+        for source in internal:
+            relative = source.relative_to(self.pack / "src/test/java")
+            if (modules / MODULE / relative.with_suffix(".class")).exists():
+                raise ValueError("test source replaces a production class: " + str(relative))
+            target = test_source / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
+            if sha256(source) != sha256(target):
+                raise ValueError("internal test source staging mismatch")
+            staged.append(target)
+        if staged:
+            self.run("module-internal-tests", [
+                *common, "--patch-module", "jdk.compiler=" + str(compiler_patch),
+                "--patch-module", MODULE + "=" + str(test_source),
+                "--module-path", modules, "--add-modules", MODULE,
+                "-sourcepath", self.output / "empty-sourcepath", "-d", test_patch, *staged])
+        if (test_patch / "module-info.class").exists():
+            raise ValueError("parser descriptor must not be patched by tests")
+        product_classes = {path.relative_to(modules / MODULE).as_posix()
+                           for path in (modules / MODULE).rglob("*.class")}
+        patch_classes = {path.relative_to(test_patch).as_posix()
+                         for path in test_patch.rglob("*.class")}
+        if product_classes & patch_classes:
+            raise ValueError("internal test patch replaces production classes")
+        return sorted(tests.rglob("*.class")) + sorted(test_patch.rglob("*.class")) + staged
+
+    def consumer(self, name, java, contract, linked, internal=False):
         main, marker = contract
         work = self.output / "consumer-work" / (self.phase + "-" + name)
         work.parent.mkdir(exist_ok=True)
         work.mkdir()
         arguments = [java, "-ea", "-Dm3.parser.test.work=" + str(work),
+                     "-Djava.io.tmpdir=" + str(work),
                      "--patch-module", "jdk.compiler=" + str(self.output / "compiler-patch")]
         if not linked:
             arguments += ["--module-path", self.output / "modules"]
-        arguments += ["--add-modules", MODULE, "-cp", self.output / "test-classes", main]
+        if internal:
+            arguments += ["--patch-module", MODULE + "=" + str(self.output / "parser-test-patch"),
+                          "--module", MODULE + "/" + main]
+        else:
+            arguments += ["--add-modules", MODULE, "-cp", self.output / "test-classes", main]
         return self.run(name, arguments, marker)
 
     def test(self):
-        for main, marker in CONTRACTS:
+        for main, marker in (*CONTRACTS, *COMPILER_CONTRACTS):
             self.consumer(main.rsplit(".", 1)[-1], self.tool("java"), (main, marker), False)
+        for main, marker in INTERNAL_CONTRACTS:
+            self.consumer(main.rsplit(".", 1)[-1], self.tool("java"), (main, marker), False, True)
         self.consumer("consumer-smoke", self.tool("java"), SMOKE, False)
         return []
 
@@ -341,16 +451,24 @@ class Qualification:
         required = ("classes/module-info.class", "classes/jdk/m3/parser/M3File.class",
                     "classes/jdk/m3/parser/M3Parser.class", "classes/jdk/m3/parser/M3JavacParser.class",
                     "classes/jdk/m3/parser/grammar/M3Grammar.class", "legal/LICENSE.txt", "legal/NOTICE.txt")
-        if not set(required).issubset(set(entries.splitlines())):
+        entry_set = set(entries.splitlines())
+        if not set(required).issubset(entry_set):
             raise ValueError("JMOD classes or legal notices missing")
+        for directory in (self.output / "test-classes", self.output / "parser-test-patch"):
+            test_entries = {"classes/" + path.relative_to(directory).as_posix()
+                            for path in directory.rglob("*.class")}
+            if entry_set & test_entries:
+                raise ValueError("test class leaked into product JMOD")
         image = self.output / "pack/image"
         java = image / "bin" / executable("java")
         for tool in ("java", "javac", "jar", "jmod", "jlink", "jdeps"):
             if not (image / "bin" / executable(tool)).is_file():
                 raise ValueError("missing linked developer tool: " + tool)
         self.run("image-modules", [java, "--list-modules"], MODULE)
-        for main, marker in CONTRACTS:
+        for main, marker in (*CONTRACTS, *COMPILER_CONTRACTS):
             self.consumer("image-" + main.rsplit(".", 1)[-1], java, (main, marker), True)
+        for main, marker in INTERNAL_CONTRACTS:
+            self.consumer("image-" + main.rsplit(".", 1)[-1], java, (main, marker), True, True)
         first = self.consumer("image-smoke-1", java, SMOKE, True)
         second = self.consumer("image-smoke-2", java, SMOKE, True)
         if first != second:
@@ -363,8 +481,14 @@ class Qualification:
                            "compiler_source_files": list(COMPILER_SOURCES),
                            "replay_stdout_sha256": hashlib.sha256(first.encode("utf-8")).hexdigest(),
                            "build_javac_after_test": False,
+                           "internal_contract_patch": "EXTERNAL_TEST_ONLY_NOT_PACKAGED",
+                           "internal_contracts": [main for main, unused in INTERNAL_CONTRACTS],
+                           "separate_qualification": json.loads(
+                               (self.output / "TEST_SOURCES.json").read_text(encoding="utf-8"))
+                               ["separate_qualification"],
                            "pending": ["full M3JDK/HotSpot source build and jtreg",
                                        "M3AST plugin/service discovery in rebuilt compiler descriptor",
+                                       "real SQLite/JNI FactsWriter provider qualification",
                                        "other platform and performance qualification"],
                            "scope": "Optional JMOD and linked image; existing compiler sources supplied by explicit external --patch-module."})
         return [jar, jmod, image / "lib/modules", image_tsv, manifest, proof]

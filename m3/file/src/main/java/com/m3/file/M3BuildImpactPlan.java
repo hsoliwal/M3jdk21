@@ -3,6 +3,7 @@
 package com.m3.file;
 
 // Modified 2026-10-21: Add explicit selection policy and file/source counts through the existing impact plan.
+// Modified 2026-10-21: Allocate traversal scratch only for verified dependency propagation.
 
 import java.util.Objects;
 
@@ -276,9 +277,6 @@ public final class M3BuildImpactPlan {
             throw new IllegalArgumentException("unverified dependencies must not be supplied");
         }
         byte[] bits = new byte[count];
-        int[] queue = new int[count];
-        byte[] queued = new byte[count];
-        int write = 0;
         boolean changed = false;
         boolean buildInputChange = false;
         for (int slot = 0; slot < count; slot++) {
@@ -302,6 +300,9 @@ public final class M3BuildImpactPlan {
                 }
             }
         } else {
+            int[] queue = new int[count];
+            byte[] queued = new byte[count];
+            int write = 0;
             // Only semantically unsafe direct deltas seed propagation; a stable
             // ABI source still recompiles itself but does not invalidate users.
             for (int slot = 0; slot < count; slot++) {

@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  * M3 indexed-path rank/select extension: recipe-generated target candidate.
  */
+// Modified 2026 by Hitesh Soliwal and contributors: keep the bulk row-copy
+// helper package-private so the existing public API remains unchanged.
 package com.m3.collections;
 
 import java.util.Objects;
@@ -248,7 +250,7 @@ public final class M3IndexPathRank {
          * @param outputOffset first element of the destination window
          * @param count number of consecutive selected row IDs to write
          */
-        public void copySelectedRowIds(
+        void copySelectedRowIds(
                 int selectedFrom, int[] output, int outputOffset, int count) {
             Objects.requireNonNull(output, "output");
             Objects.checkFromIndexSize(selectedFrom, count, size());

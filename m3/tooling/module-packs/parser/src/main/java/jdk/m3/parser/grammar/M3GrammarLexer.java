@@ -29,6 +29,9 @@ public final class M3GrammarLexer {
 
   M3TokenStream lex(CharSequence input, M3GrammarBudget budget) {
     String source = budget.snapshot(input);
+    M3TokenStream reused = profile.reuseTokens(source, limits, budget);
+    if (reused != null) return reused;
+    long remainingBeforeScan = budget.remainingWork();
     int capacity = Math.min(limits.maxTokens(), Math.max(8, Math.min(1024, source.length() >>> 2)));
     int[] starts = new int[capacity];
     int[] ends = new int[capacity];
@@ -108,7 +111,12 @@ public final class M3GrammarLexer {
       classes[size] = (byte) tokenClass.ordinal();
       size++;
     }
-    return new M3TokenStream(source, Arrays.copyOf(starts, size), Arrays.copyOf(ends, size), Arrays.copyOf(classes, size));
+    M3TokenStream result = new M3TokenStream(
+        source, Arrays.copyOf(starts, size), Arrays.copyOf(ends, size), Arrays.copyOf(classes, size));
+    if (limits.equals(budget.limits())) {
+      profile.rememberTokens(result, limits, remainingBeforeScan - budget.remainingWork());
+    }
+    return result;
   }
 
   private int commentEnd(CharSequence source, int index, M3GrammarBudget budget) {
