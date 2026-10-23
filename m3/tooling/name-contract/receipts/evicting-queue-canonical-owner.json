@@ -37,5 +37,12 @@
     "Repo-wide import, reflection, service, JNI and client closure",
     "Installed SDK/HotSpot jtreg and performance admission"
   ],
-  "note": "No vendor API renamed; old type is retained unchanged. The exact duplicated body is a temporary compatibility migration, not an approved permanent second collection implementation."
+  "note": "No vendor API renamed; old type is retained unchanged. The exact duplicated body is a temporary compatibility migration, not an approved permanent second collection implementation.",
+  "authority_map": {
+    "path": "m3/docs/name-mapping.json",
+    "git_blob_sha1": "fbdde4dc25d9b63d1f6bde9cd48169debe4bdf7b",
+    "proposal_status": "review-only additive target; downstream INTERNAL_MOVE still QUEUED"
+  },
+  "product_pr": "https://github.com/hsoliwal/M3jdk21/pull/1886",
+  "recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/13228"
 }
