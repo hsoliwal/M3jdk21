@@ -58,7 +58,8 @@ jobs:
           sudo apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev
+            libx11-dev libxext-dev libxrender-dev libxtst-dev \
+            libxt-dev libxrandr-dev libxi-dev libice-dev libsm-dev
       - name: Configure actual OpenJDK and HotSpot
         shell: bash
         run: |
