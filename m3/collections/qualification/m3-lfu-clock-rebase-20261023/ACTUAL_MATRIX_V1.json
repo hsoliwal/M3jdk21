@@ -1,0 +1,69 @@
+{
+  "schema": "M3_LFU_CLOCK_TARGET_QUALIFICATION_V1",
+  "status": "FINITE_CLOCK_REPAIR_QUALIFIED",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_proof_commit": "ca1dd139762fe15bb792a4b58eff0d3170ddad06",
+  "canonical_matrix": "https://github.com/hsoliwal/com.synexia/blob/ca1dd139762fe15bb792a4b58eff0d3170ddad06/synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/lfu-clock-rebase-v1/ACTUAL_MATRIX_V3.json",
+  "canonical_frontier": "https://github.com/hsoliwal/com.synexia/blob/ca1dd139762fe15bb792a4b58eff0d3170ddad06/synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/lfu-clock-rebase-v1/EXECUTION_FRONTIER_V3.json",
+  "receiving_parent": "3a3b1a5592851df72ed2b45c3587839826f40f7d",
+  "sole_production_owner": "m3/collections/src/main/java/com/m3/collections/M3LFUCache.java",
+  "policy": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
+  "candidate": {
+    "bytes": 6455,
+    "sha256": "8e404bcd1e6a0efc94e8f1828feaf4d2d3da1375f07b8a64d238390e09d36f27",
+    "git_blob": "f2d1a17877561a1143965e195d1710068f23c57e",
+    "origin": "recipe-v1/actual-sdk-v1/m3/collections/src/main/java/com/m3/collections/M3LFUCache.java"
+  },
+  "preimage": {
+    "bytes": 5074,
+    "git_blob": "1a5ec22386269ad33fe4ffcfca95f890255d4119",
+    "sha256": "4c9956096b1d92cfe9ba2db5293104e38d622c4273c3ab491345925a7779a417"
+  },
+  "scope": "Exact canonical SDK output; two method bodies differ from the already qualified JNI constructor postimage; five allocator calls, all fields and other source bytes retained",
+  "SDK": [
+    5,
+    0,
+    0,
+    0
+  ],
+  "strict_compile": "PASS_JAVA21",
+  "expected_RED": 6,
+  "boundary": {
+    "modes": 5,
+    "checks": 91
+  },
+  "regression": {
+    "modes": 6,
+    "checks": 98778,
+    "ordinary_checks": 98602,
+    "ordinary_trace": "51204e91d697be7f16e38e3470869fffb2e2520bb5eb9ce0e78c90e8d165edd9"
+  },
+  "positive_runtime_assertions": 98869,
+  "JNI_diagnostics": 0,
+  "class_metadata": {
+    "fields": 8,
+    "methods": 11,
+    "result": "EQUAL_WITHIN_DOCUMENTED_METADATA_SCOPE",
+    "excluded": [
+      "Code",
+      "annotations",
+      "Exceptions",
+      "other reflective attributes"
+    ]
+  },
+  "source_and_proof_advisories": "NO_CONCRETE_SCOPED_BLOCKER; distinct from configured review",
+  "formal_review": "NO_VERDICT",
+  "failures": "Resource-failed attempts remain preserved and unqualified in canonical packet; no completed phase replayed",
+  "storage": "ACTIVE; existing105MiB S-only task exception, all reserve/RAM/Job controls retained",
+  "pending": [
+    "Formal configured autoreview NO_VERDICT (required --no-tools refused before an engine; source advisories are distinct)",
+    "Full source-version reactor/jtreg/installed-image/C++20/Unicode native-path loading",
+    "Later-allocation faults (fault fixtures cover first Object[] allocation only)",
+    "Donor-compatible API projection integration through M3LFUCache, including escaped liveness/ownership",
+    "Factory reentry, concurrency and serialization qualification",
+    "Frozen workload performance measurements; O(capacity * distinct) rank path is not a peak claim",
+    "Full JDK21/Eclipse/Spring/Apache/Guava/fastutil family superset",
+    "Both reusable compiled regex and configurable programming-language detection/tokenization"
+  ],
+  "full_goal": "ACTIVE_UNFINISHED"
+}

@@ -111,7 +111,7 @@ final class M3LFUCache<K, V> {
             }
             int frequency = frequencies[i];
             long recent = accessStamps[i];
-            if (frequency < leastFrequency
+            if (selected < 0 || frequency < leastFrequency
                     || frequency == leastFrequency && recent < leastRecent) {
                 selected = i;
                 leastFrequency = frequency;
@@ -139,6 +139,36 @@ final class M3LFUCache<K, V> {
             if (minimum == Long.MAX_VALUE) {
                 clock = 0L;
                 Arrays.fill(accessStamps, 0L);
+            } else if (minimum == 0L) {
+                // Preserve recency and ties without allocating after a cache mutation.
+                // Nonnegative live stamps become temporary negative dense ranks.
+                long rank = 0L;
+                while (true) {
+                    boolean found = false;
+                    long next = Long.MAX_VALUE;
+                    for (int i = 0; i < accessStamps.length; i++) {
+                        if ((states[i] & OCCUPIED) != 0 && accessStamps[i] >= 0L
+                                && (!found || accessStamps[i] < next)) {
+                            next = accessStamps[i];
+                            found = true;
+                        }
+                    }
+                    if (!found) {
+                        break;
+                    }
+                    rank++;
+                    for (int i = 0; i < accessStamps.length; i++) {
+                        if ((states[i] & OCCUPIED) != 0 && accessStamps[i] == next) {
+                            accessStamps[i] = -rank;
+                        }
+                    }
+                }
+                for (int i = 0; i < accessStamps.length; i++) {
+                    if ((states[i] & OCCUPIED) != 0) {
+                        accessStamps[i] = -accessStamps[i];
+                    }
+                }
+                clock = rank;
             } else {
                 for (int i = 0; i < accessStamps.length; i++) {
                     if ((states[i] & OCCUPIED) != 0) {
