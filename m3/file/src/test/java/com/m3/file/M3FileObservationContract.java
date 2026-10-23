@@ -15,6 +15,8 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 public final class M3FileObservationContract {
+    /** Only the static contract entrypoint is part of the module test interface. */
+    private M3FileObservationContract() { }
     private static int checks;
     private static void check(boolean x, String name) {
         checks++;
