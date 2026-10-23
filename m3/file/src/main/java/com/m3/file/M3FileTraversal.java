@@ -3,175 +3,136 @@
 package com.m3.file;
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
+import java.io.UncheckedIOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.regex.Pattern;
-import java.util.stream.Collector;
-import java.util.stream.IntStream;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 /**
- * A traversal of {@link M3File} entries over the lanes of one {@link M3FileTree}.
+ * Lazy, provider-preserving filesystem traversal that materializes no retained directory tree.
  *
- * <p>Implementations supply two methods: the owning {@link #tree()} and an id-level
- * {@link #idSpliterator()}. Everything else is a default method: ids stay ints until a caller asks
- * for an entry, and entries are facades from {@link M3FileTree#file(int)} (DOOP). Encounter order is
- * the id spliterator's order; parallel streams split it.</p>
+ * <p>Roots (drives/mount roots) are independent streams and can be traversed in parallel.
+ * Downstream file work may also use {@link Stream#parallel()}; provider-specific directory walking
+ * remains owned by {@link Files#walk(Path, int, java.nio.file.FileVisitOption...)}.</p>
  */
-public interface M3FileTraversal {
-    /** Tree whose lanes back this traversal. */
-    M3FileTree tree();
+public final class M3FileTraversal {
+    private M3FileTraversal() { }
 
-    /** Fresh id-level spliterator; each call starts a new traversal. */
-    Spliterator.OfInt idSpliterator();
-
-    /** Row ids, no facades. */
-    default IntStream ids() {
-        return StreamSupport.intStream(idSpliterator(), false);
-    }
-
-    /** Facade spliterator with the id spliterator's characteristics. */
-    default Spliterator<M3File> spliterator() {
-        return new M3FileSpliterator(tree(), idSpliterator());
-    }
-
-    default Stream<M3File> stream() {
-        return StreamSupport.stream(spliterator(), false);
-    }
-
-    default Stream<M3File> parallelStream() {
-        return StreamSupport.stream(spliterator(), true);
-    }
-    /**
-     * Bounded file-local work over this traversal's primitive row IDs. The
-     * original `M3FileTree` and filters select candidates; no file facade is
-     * created until a worker consumes that row, and only a bounded number of
-     * tasks/futures are resident. Results are delivered in encounter order.
-     */
-    default <R> long parallelFiles(int maxParallelism, M3FileProgress progress,
-            M3FileParallel.FileTask<R> work, M3FileParallel.FileResult<R> sink)
-            throws IOException {
-        return M3FileParallel.files(this, maxParallelism, progress, work, sink);
-    }
-
-    /**
-     * Treat selected directory rows as independent scan roots. A lazy scan
-     * specification avoids expanding the whole filesystem. Select disjoint
-     * directories if overlapping subtree work is not intended.
-     */
-    default <R> long parallelDirectories(M3FileScanSpec policy, int maxParallelism,
-            M3FileProgress progress, M3FileParallel.RootTask<R> work,
-            M3FileParallel.RootResult<R> sink) throws IOException {
-        M3FileTree owner = tree();
-        return M3FileParallel.roots(ids()
-                        .filter(id -> owner.flag(M3FileFlag.DIR, id))
-                        .mapToObj(owner::path),
-                policy, maxParallelism, progress, work, sink);
-    }
-
-
-    default <R> Stream<R> map(Function<? super M3File, ? extends R> mapper) {
-        return stream().map(mapper);
-    }
-
-    default void forEach(Consumer<? super M3File> action) {
-        spliterator().forEachRemaining(action);
-    }
-
-    default <R, A> R collect(Collector<? super M3File, A, R> collector) {
-        return stream().collect(collector);
-    }
-
-    default List<M3File> toList() {
-        return stream().toList();
-    }
-
-    /** Count without facades; exact without traversal when the id spliterator is SIZED. */
-    default long count() {
-        return ids().count();
-    }
-
-    /** Cold: materialised paths. */
-    default Stream<Path> paths() {
-        return stream().map(M3File::toPath);
-    }
-
-    default Optional<M3File> first() {
-        return stream().findFirst();
-    }
-
-    /** {@code du -b}: bytes of the regular files, from the size lanes; no I/O. */
-    default long bytes() {
-        M3FileTree tree = tree();
-        return ids().filter(id -> tree.flag(M3FileFlag.REGULAR, id)).mapToLong(id -> Math.max(0, tree.size(id))).sum();
-    }
-
-    /** {@code wc} over the regular files, one shadow pass each; progress units are bytes. */
-    default M3FileWordCount wc(long maxBytes, M3FileProgress progress) throws InterruptedIOException {
-        M3FileTree tree = tree();
-        int[] files = ids().filter(id -> tree.flag(M3FileFlag.REGULAR, id)).toArray();
-        progress.begin("wc", bytes());
-        long lines = 0;
-        long words = 0;
-        long bytes = 0;
-        long failed = 0;
-        for (int id : files) {
-            M3FileWcShadow counts = M3FileShadow.wc();
-            if (observe(tree, id, maxBytes, progress, counts)) {
-                lines += counts.lines();
-                words += counts.words();
-                bytes += counts.bytes();
-            } else {
-                failed++;
-            }
+    public record Options(int maxDepth, boolean parallelRoots, Predicate<Path> include) {
+        public Options {
+            if (maxDepth < 0) throw new IllegalArgumentException("negative maxDepth");
+            include = Objects.requireNonNull(include, "include");
         }
-        progress.done();
-        return new M3FileWordCount(files.length - failed, lines, words, bytes, failed);
+
+        public static Options all() {
+            return new Options(Integer.MAX_VALUE, false, path -> true);
+        }
+
+        public static Options suffixes(String... suffixes) {
+            String[] copy = Objects.requireNonNull(suffixes, "suffixes").clone();
+            for (int i = 0; i < copy.length; i++) {
+                String suffix = Objects.requireNonNull(copy[i], "suffix").strip();
+                if (suffix.isEmpty() || suffix.indexOf('/') >= 0 || suffix.indexOf('\0') >= 0) {
+                    throw new IllegalArgumentException("invalid suffix");
+                }
+                copy[i] = suffix;
+            }
+            return new Options(
+                    Integer.MAX_VALUE,
+                    false,
+                    path -> {
+                        if (!Files.isRegularFile(path, java.nio.file.LinkOption.NOFOLLOW_LINKS)) {
+                            return false;
+                        }
+                        String name = path.getFileName() == null ? "" : path.getFileName().toString();
+                        for (String suffix : copy) if (name.endsWith(suffix)) return true;
+                        return false;
+                    });
+        }
+
+        public Options withParallelRoots(boolean parallel) {
+            return new Options(maxDepth, parallel, include);
+        }
+
+        public Options withMaxDepth(int depth) {
+            return new Options(depth, parallelRoots, include);
+        }
+    }
+
+    public static Stream<M3File> system(Options options, M3ProgressMonitor progress) {
+        return roots(FileSystems.getDefault(), options, progress);
+    }
+
+    public static Stream<M3File> roots(
+            FileSystem fileSystem, Options options, M3ProgressMonitor progress) {
+        Objects.requireNonNull(fileSystem, "fileSystem");
+        return roots(
+                StreamSupport.stream(fileSystem.getRootDirectories().spliterator(), false),
+                options,
+                progress);
+    }
+
+    public static Stream<M3File> roots(
+            Stream<Path> roots, Options options, M3ProgressMonitor progress) {
+        Stream<Path> rootStream = Objects.requireNonNull(roots, "roots");
+        Options checked = Objects.requireNonNull(options, "options");
+        M3ProgressMonitor monitor = Objects.requireNonNull(progress, "progress");
+        if (checked.parallelRoots()) rootStream = rootStream.parallel();
+
+        return rootStream.flatMap(root -> walk(root, checked, monitor));
     }
 
     /**
-     * {@code grep}: lines of the regular text files matching {@code pattern} ({@link java.util.regex.Matcher#find}),
-     * in traversal order; files containing NUL bytes are skipped as binary. One shadow pass per file.
+     * Immediate children only. This is the directory-level partition boundary for schedulers that
+     * want to process independent directories/files concurrently without retaining a tree.
      */
-    default List<M3FileMatch> grep(Pattern pattern, long maxBytes, M3FileProgress progress) throws InterruptedIOException {
-        Objects.requireNonNull(pattern, "pattern");
-        M3FileTree tree = tree();
-        int[] files = ids().filter(id -> tree.flag(M3FileFlag.REGULAR, id)).toArray();
-        progress.begin("grep " + pattern, bytes());
-        List<M3FileMatch> matches = new ArrayList<>();
-        for (int id : files) {
-            M3FileGrepShadow lines = new M3FileGrepShadow(tree.file(id), pattern);
-            boolean[] binary = {false};
-            M3FileShadow nulProbe = (block, offset, length) -> {
-                for (int i = offset; i < offset + length && !binary[0]; i++) binary[0] = block[i] == 0;
-            };
-            if (observe(tree, id, maxBytes, progress, nulProbe, M3FileShadow.utf8(lines)) && !binary[0]) {
-                matches.addAll(lines.matches());
-            }
-        }
-        progress.done();
-        return matches;
-    }
-
-    private static boolean observe(M3FileTree tree, int id, long maxBytes, M3FileProgress progress,
-            M3FileShadow... shadows) throws InterruptedIOException {
+    public static Stream<M3File> children(
+            Path directory, Options options, M3ProgressMonitor progress) {
+        Path parent = Objects.requireNonNull(directory, "directory");
+        Options checked = Objects.requireNonNull(options, "options");
+        M3ProgressMonitor monitor = Objects.requireNonNull(progress, "progress");
+        monitor.checkCanceled();
         try {
-            tree.file(id).observe(maxBytes, progress.split(Math.max(0, tree.size(id))), shadows);
-            tree.clearFailure(id);
-            return true;
-        } catch (InterruptedIOException canceled) {
-            throw canceled;
-        } catch (IOException failed) {
-            tree.fail(id, failed);
-            return false;
+            return Files.list(parent)
+                    .peek(ignored -> {
+                        monitor.worked(1L);
+                        monitor.checkCanceled();
+                    })
+                    .filter(checked.include())
+                    .map(M3File::of);
+        } catch (IOException failure) {
+            throw new UncheckedIOException(failure);
         }
+    }
+
+    public static Stream<M3File> walk(
+            Path root, Options options, M3ProgressMonitor progress) {
+        Path start = Objects.requireNonNull(root, "root");
+        Options checked = Objects.requireNonNull(options, "options");
+        M3ProgressMonitor monitor = Objects.requireNonNull(progress, "progress");
+        monitor.checkCanceled();
+        try {
+            return Files.walk(start, checked.maxDepth())
+                    .peek(ignored -> {
+                        monitor.worked(1L);
+                        monitor.checkCanceled();
+                    })
+                    .filter(checked.include())
+                    .map(M3File::of);
+        } catch (IOException failure) {
+            throw new UncheckedIOException(failure);
+        }
+    }
+
+    /** Convenience for several known roots without retaining or sorting their contents. */
+    public static Stream<M3File> roots(
+            List<Path> roots, Options options, M3ProgressMonitor progress) {
+        return roots(Objects.requireNonNull(roots, "roots").stream(), options, progress);
     }
 }
