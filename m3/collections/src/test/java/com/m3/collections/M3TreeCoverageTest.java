@@ -333,6 +333,12 @@ public class M3TreeCoverageTest {
 		assertEquals (9L, call (plan, "handleOf", 5, 0), "another parent's child keeps its key");
 		assertEquals ("negative child index", assertThrows (IllegalArgumentException.class,
 				() -> call (plan, "shiftSiblings", ROOT, 0, -4)).getMessage ());
+		assertEquals (7L, call (plan, "handleOf", ROOT, 3), "negative-refused shift is atomic");
+		assertEquals (8L, call (plan, "handleOf", ROOT, 6), "negative-refused shift keeps sibling keys");
+		assertEquals ("shifted child index outside int range", assertThrows (IllegalArgumentException.class,
+				() -> call (plan, "shiftSiblings", ROOT, 4, Integer.MAX_VALUE)).getMessage ());
+		assertEquals (7L, call (plan, "handleOf", ROOT, 3), "overflow-refused shift is atomic");
+		assertEquals (8L, call (plan, "handleOf", ROOT, 6), "overflow-refused shift keeps sibling keys");
 		call (plan, "clear");
 		assertEquals (0, call (plan, "size"));
 		assertEquals (0, call (plan, "plannedCount"));
