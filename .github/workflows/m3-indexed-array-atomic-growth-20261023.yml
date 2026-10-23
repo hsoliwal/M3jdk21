@@ -8,6 +8,7 @@ on:
     paths:
       - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
       - 'test/jdk/jdk/internal/m3/M3IndexedArrayGrowth*.java'
+      - 'test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java'
       - '.github/workflows/m3-indexed-array-atomic-growth-20261023.yml'
       - 'm3/qualification/indexed-array-atomic-growth-20261023/**'
   workflow_dispatch:
@@ -37,10 +38,11 @@ jobs:
           from pathlib import Path
           import hashlib
           expected = {
-              "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "90f9c573c48319d1811fd5a663d6690b075c45ab257c8a80256f9beccdf6b791",
+              "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
               "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthAgent.java": "0a1957ea4c6db007f13ab9d1ef669e2334eb2dc7121fcc4c0d16602e843aead3",
               "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.java": "3cffeb6f2352e20cbdfa7843b29d6372181d78aff6eed305939c3497315aa750",
               "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFault.java": "f4f28798f4ef81eb8f49fefb972b90d9daa15b7ff5255515efe6e0ceaf8541a0",
+              "test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java": "1c599c9f7a8dd98dd1c6b067c7703105923914fa9a86082899a133993ed1bf97",
           }
           for filename, target in expected.items():
               path = Path(filename)
@@ -116,3 +118,16 @@ jobs:
               -cp "$out/test" "$test"
           done
           echo "PASS_HOST_PATCHED_JAVA_BASE; FULL_M3JDK21_IMAGE_JTREG_AND_JNI_STILL_PENDING"
+      - name: Verify fused predicate/mask/sorted contract on the same original JDK owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-atomic-growth"
+          javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            --patch-module "java.base=$out/patch:$PWD/test/jdk/jdk/internal/m3" \
+            -d "$out/patch" \
+            test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java
+          for mode in -Xint -Xmixed; do
+            java "$mode" --patch-module "java.base=$out/patch" \
+              jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
+          done
