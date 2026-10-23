@@ -161,3 +161,12 @@ POM declares (`org.sqlite.JDBC` cannot initialize without it), seals both paths 
 `INPUTS.json` (owner `maven-repository`, with the POM) and `lint-structure.log`, and places them only on
 the consumer test classpath, never on the module path, the JAR, the JMOD or the linked image. An absent
 jar refuses the sequence with one line naming the expected path; nothing is downloaded.
+
+`M3FactsTransactionContract` (`M3_FACTS_TRANSACTION_PASS`) and `M3FactsStreamContract` (`M3_FACTS_STREAM_PASS`)
+recover the transaction-level checks of the first one-pass facts contract on real `jdbc:sqlite::memory:`
+connections (fixtures in `M3FactsFixtures`): an autocommit connection gets one owned transaction and is handed
+back usable, a caller transaction gets one savepoint and keeps publication, and refused generations, budgets,
+foreign tables, foreign triggers and TEMP shadows publish nothing; exact range hashes obey their cumulative
+budget; a supplied Stream is closed exactly once, before commit, on success, close failure and setup failure;
+a two-domain generation keeps a lone-surrogate literal lossless; a module directory reached through a symbolic
+link is refused, reported `SKIPPED` (not PASS) when a Windows process lacks the symbolic-link privilege.

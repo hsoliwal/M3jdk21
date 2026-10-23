@@ -8,7 +8,7 @@ patch. The linked image retains its supplied compiler module descriptor; this
 proof does not qualify plugin discovery or embed the patch in a product JDK.
 Every build javac invocation, including consumer compilation, precedes tests.
 A changed source/toolchain or a failed phase requires a fresh output directory.
-The SQLite JDBC driver used by the facts contract, with the slf4j-api its POM
+The SQLite JDBC driver used by the facts contracts, with the slf4j-api its POM
 declares, is resolved from the local Maven repository onto the consumer
 classpath only; nothing is downloaded.
 """
@@ -49,11 +49,13 @@ CONTRACTS = (
     ("jdk.m3.parser.test.M3JavacFactImageContract", "M3_JAVAC_FACT_IMAGE_PASS"),
     ("jdk.m3.parser.test.M3CulpritsContract", "M3_CULPRITS_PASS"),
     ("jdk.m3.parser.test.M3FactsWriterContract", "M3_FACTS_WRITER_PASS"),
+    ("jdk.m3.parser.test.M3FactsTransactionContract", "M3_FACTS_TRANSACTION_PASS"),
+    ("jdk.m3.parser.test.M3FactsStreamContract", "M3_FACTS_STREAM_PASS"),
     ("jdk.m3.parser.test.M3FileInputContract", "M3_FILE_INPUT_PASS"),
 )
 COMPILER_CONTRACTS = (("M3ASTProjectionStateTest", "M3_AST_PROJECTION_STATE_PASS"),)
 SMOKE = ("jdk.m3.parser.test.M3ParserImageSmoke", "M3_PARSER_IMAGE_PASS")
-# Consumer-classpath-only JDBC driver for the facts contract; never a module dependency.
+# Consumer-classpath-only JDBC driver for the facts contracts; never a module dependency.
 SQLITE_JDBC = Path("org/xerial/sqlite-jdbc")
 SQLITE_JDBC_FAMILY = "3.45."
 SLF4J_API = Path("org/slf4j/slf4j-api")
