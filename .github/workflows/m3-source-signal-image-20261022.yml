@@ -84,10 +84,21 @@ jobs:
         run: |
           set -euo pipefail
           python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+          python3 m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py
+          # Surefire's Platform Launcher is a separate test-runtime artifact:
+          # Jupiter -am alone does not install this source-vendored module.
           mvn -B -ntp -f m3/vendor/third_party/pom.xml \
-            -pl junit-jupiter-5.10.2 -am -DskipTests install
+            -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 \
+            -am -DskipTests install
           python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py \
             m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+          python3 m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py \
+            m3/vendor/third_party/junit-platform-launcher-1.10.2/target/junit-platform-launcher-1.10.2-m3-source-1.jar
+      - name: Install original M3 array substrate required by current collections reactor
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
       - name: Original M3 collections typed-signal and CSR tests
         run: >
           mvn -B -ntp -f m3/collections/pom.xml
