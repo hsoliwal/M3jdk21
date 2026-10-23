@@ -114,18 +114,32 @@ public final class M3Patch {
 
 	/** Applies the patch to {@code before}, taking inserted keys from {@code after}; answers {@code after}'s keys. */
 	public long [] apply (long [] before, long [] after) {
-		M3LongArrayList list = M3LongArrayList.copyOf (before);
-		applyTo (new Target () {
-			@Override
-			public void remove (int index, int count) {
-				for (int k = 0; k < count; k++) list.removeAt (index);
+		// Runs are already normalized: old removals descend; new insertions
+		// ascend. Compose them directly into one primitive destination lane
+		// rather than shifting a dynamic list once per removed/inserted item.
+		int length = Math.addExact (Math.subtractExact (before.length, removed), inserted);
+		long [] result = new long [length];
+		int oldIndex = 0, newIndex = 0;
+		int removal = removeAt.length - 1, insertion = 0;
+		while (newIndex < length) {
+			if (removal >= 0 && oldIndex == removeAt [removal]) {
+				oldIndex += removeCount [removal--];
+				continue;
 			}
-
-			@Override
-			public void insert (int index, int count) {
-				for (int k = 0; k < count; k++) list.add (index + k, after [index + k]);
+			if (insertion < insertAt.length && newIndex == insertAt [insertion]) {
+				int count = insertCount [insertion++];
+				System.arraycopy (after, newIndex, result, newIndex, count);
+				newIndex += count;
+				continue;
 			}
-		});
-		return list.toArray ();
+			int oldLimit = removal >= 0 ? removeAt [removal] : before.length;
+			int newLimit = insertion < insertAt.length ? insertAt [insertion] : length;
+			int count = Math.min (oldLimit - oldIndex, newLimit - newIndex);
+			if (count <= 0) throw new IllegalArgumentException ("invalid patch runs");
+			System.arraycopy (before, oldIndex, result, newIndex, count);
+			oldIndex += count;
+			newIndex += count;
+		}
+		return result;
 	}
 }

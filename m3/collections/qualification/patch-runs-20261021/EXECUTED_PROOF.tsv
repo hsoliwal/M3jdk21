@@ -1,0 +1,10 @@
+scope	jdk_mode	result	assertions	limitations
+Actual exact full M3Patch.java source javac -Xlint:all -Werror	Java21.0.12.1	PASS	N/A	Only original product owner and standalone test; no full Maven reactor
+Actual exact M3Patch.java source oracle default	default	PASS	125036	25k random patches plus explicit move and 200k-row alternating stress
+Actual exact M3Patch.java source oracle interpreter	-Xint	PASS	125036	Same deterministic test under interpreter
+Actual exact M3Patch.java source oracle C1	-XX:TieredStopAtLevel=1	PASS	125036	Same deterministic test under C1
+Actual exact M3Patch.java source oracle nontiered	-XX:-TieredCompilation	PASS	125036	Same deterministic test without tiered compilation
+Old reconstructed method and independent oracle	default --quick	PASS	125034	Old implementation remains correct for smaller valid patches; benchmark not qualified
+New reconstructed method and independent oracle	default --quick	PASS	125034	Does not prove runtime speedup
+Actual Maven/OpenRewrite SDK	unavailable	NOT_RUN	0	Local Maven and OpenRewrite jars absent
+Original M3ListDiffTest and full M3JDK21 image	unavailable	NOT_RUN	0	Full product gates pending

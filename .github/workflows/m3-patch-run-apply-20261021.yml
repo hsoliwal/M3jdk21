@@ -1,0 +1,50 @@
+name: M3JDK21 original packed patch run application
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3Patch.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3PatchApplyRunsContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3PatchApplyRunsTest.java'
+      - 'm3/collections/qualification/patch-runs-20261021/**'
+      - '.github/workflows/m3-patch-run-apply-20261021.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-oracle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse source drift from canonical Maven/OpenRewrite output templates
+        shell: bash
+        run: |
+          printf '%s  %s\n' \
+            'f6a64f760de80b7cf3866eb9449d8b4815c111e9212bca0eb5946e85c442f3f1' 'm3/collections/src/main/java/com/m3/collections/M3Patch.java' \
+            '64a42e585ed4622c02a30db566ff129f45d0f54a2c09e25cd2d130b4e2199612' 'm3/collections/src/test/java/com/m3/collections/M3PatchApplyRunsContract.java' \
+            'f1c1c0f1885637db66b9fc9e88bbf3fb81e677269c20559ab8971931353b6d3c' 'm3/collections/src/test/java/com/m3/collections/M3PatchApplyRunsTest.java' | sha256sum -c -
+      - name: Strict compile full original owner and test all Java21 VM modes
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-patch-classes"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-patch-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3Patch.java \
+            m3/collections/src/test/java/com/m3/collections/M3PatchApplyRunsContract.java
+          for mode in default interpreter c1 non-tiered; do
+            case "$mode" in
+              default) opts=() ;;
+              interpreter) opts=(-Xint) ;;
+              c1) opts=(-XX:TieredStopAtLevel=1) ;;
+              non-tiered) opts=(-XX:-TieredCompilation) ;;
+            esac
+            java "${opts[@]}" -cp "$RUNNER_TEMP/m3-patch-classes" \
+              com.m3.collections.M3PatchApplyRunsContract | tee "$RUNNER_TEMP/patch-$mode.txt"
+            grep -Fx 'M3_PATCH_RUN_APPLY_PASS checks=125036' "$RUNNER_TEMP/patch-$mode.txt"
+          done
