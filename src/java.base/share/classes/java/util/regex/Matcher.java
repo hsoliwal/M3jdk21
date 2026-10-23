@@ -1760,28 +1760,33 @@ public final class Matcher implements MatchResult {
         if (facts != null && m3TqFactsFrom == this.from && m3TqFactsTo == to) {
             return query.testPrecomputed(facts);
         }
-        if (query.hasScanPlan()) {
+        // Preserve the established reusable facts contract for Pattern.LITERAL:
+        // literals can share one precomputed region index across changing queries.
+        if (query.hasScanPlan() && (parentPattern.flags() & Pattern.LITERAL) == 0) {
             if (m3TqScanQuery == query
                     && m3TqScanFrom == this.from
                     && m3TqScanTo == to) {
                 return m3TqScanAllowed;
             }
-            boolean allowed;
             try {
                 jdk.internal.access.JavaLangAccess access =
                         jdk.internal.access.SharedSecrets.getJavaLangAccess();
                 java.util.function.LongPredicate prepared = access == null
                         ? null : access.stringM3TrigramFacts((String) text);
-                allowed = (prepared == null || query.test(prepared))
-                        && query.testScanning(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
+                if (prepared == null) {
+                    boolean allowed = query.testScanning(
+                            text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
+                    m3TqScanFrom = this.from;
+                    m3TqScanTo = to;
+                    m3TqScanQuery = query;
+                    m3TqScanAllowed = allowed;
+                    return allowed;
+                }
+                // Prepared owner signals already have an established regional
+                // verification/facts cache. Keep that cache and its reuse contract.
             } catch (OutOfMemoryError unavailable) {
                 return true;
             }
-            m3TqScanFrom = this.from;
-            m3TqScanTo = to;
-            m3TqScanQuery = query;
-            m3TqScanAllowed = allowed;
-            return allowed;
         }
         if (facts == null
                 || m3TqFactsFrom != this.from
