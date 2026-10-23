@@ -9,7 +9,7 @@ count=0
 previous=''
 while IFS=$'\t' read -r path before after blob; do
   [[ -z "${path:-}" || "${path:0:1}" == '#' ]] && continue
-  [[ "$path" > "$previous" && "$before" != ABSENT && "$path" != /* && "$path" != *'..'* ]] || {
+  [[ "$path" > "$previous" && "$path" != /* && "$path" != *'..'* ]] || {
     echo "FAIL: path or original-input contract error $path" >&2; exit 11;
   }
   [[ -f "$root/$path" ]] || { echo "FAIL: missing M3JDK21 owner $path" >&2; exit 12; }
@@ -22,6 +22,6 @@ while IFS=$'\t' read -r path before after blob; do
   count=$((count + 1))
   previous="$path"
 done < "$manifest"
-[[ "$count" -eq 2 ]] || { echo "FAIL: original-gate receiver expects two files" >&2; exit 15; }
-echo "PASS: two M3JDK21 original-source Maven/JUnit metadata outputs match canonical hashes"
+[[ "$count" -eq 3 ]] || { echo "FAIL: original-gate receiver expects three files" >&2; exit 15; }
+echo "PASS: three M3JDK21 Maven/JUnit source-receiving outputs match canonical hashes"
 echo "NOTE: source seal does not imply original plugin/JUnit/JNI runtime execution"
