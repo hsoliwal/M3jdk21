@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+// Modified 2026-10-20: transfer full buffers at sealing and release every builder reference.
 package jdk.m3.parser;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Objects;
  * Nodes are occurrence identities within this immutable source generation.
  */
 public final class M3ASTIndex {
-    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON, JAVAC }
+    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON }
     public static final int NO_RANGE = -1;
     /** The origin parser guarantees an exact half-open UTF-16 source range. */
     public static final int EXACT_RANGE = 1;
@@ -25,43 +25,28 @@ public final class M3ASTIndex {
     /** The external source owner could not be verified against the original AST. */
     public static final int SOURCE_UNVERIFIED = 4;
     public static final int RECOVERED = 8;
-    /** Original javac modifiers; never synthesize semantic binding from syntax. */
-    public static final int STATIC = 16, FINAL = 32, INTERFACE = 64;
-    private static final long HASH_SEED = 0xcbf29ce484222325L;
-    private static final long HASH_PRIME = 0x100000001b3L;
     private final M3File source;
     private final Domain domain;
-    private final String[] names, symbols;
+    private final String[] names;
     private final int[] kinds, parents, starts, ends, flags, first, next, childCounts;
-    /** Optional javac-only lanes; absent for Maven/JDT/Jackson/Gradle indexes. */
-    private final int[] lines, endLines, symbolIds, literalIds;
-    private volatile long[] structureHashes;
 
     private M3ASTIndex(Builder builder) {
         source = builder.source;
         domain = builder.domain;
-        names = Arrays.copyOf(builder.names, builder.nameCount);
-        kinds = Arrays.copyOf(builder.kinds, builder.size);
-        parents = Arrays.copyOf(builder.parents, builder.size);
-        starts = Arrays.copyOf(builder.starts, builder.size);
-        ends = Arrays.copyOf(builder.ends, builder.size);
-        flags = Arrays.copyOf(builder.flags, builder.size);
-        first = Arrays.copyOf(builder.first, builder.size);
-        next = Arrays.copyOf(builder.next, builder.size);
-        childCounts = Arrays.copyOf(builder.childCounts, builder.size);
-        lines = trim(builder.lines, builder.size);
-        endLines = trim(builder.endLines, builder.size);
-        symbolIds = trim(builder.symbolIds, builder.size);
-        literalIds = trim(builder.literalIds, builder.size);
-        symbols = builder.symbols == null ? new String[0] : Arrays.copyOf(builder.symbols, builder.symbolCount);
+        names = builder.names.length == builder.nameCount ? builder.names
+                : Arrays.copyOf(builder.names, builder.nameCount);
+        kinds = retained(builder.kinds, builder.size);
+        parents = retained(builder.parents, builder.size);
+        starts = retained(builder.starts, builder.size);
+        ends = retained(builder.ends, builder.size);
+        flags = retained(builder.flags, builder.size);
+        first = retained(builder.first, builder.size);
+        next = retained(builder.next, builder.size);
+        childCounts = retained(builder.childCounts, builder.size);
     }
-    private static int[] trim(int[] values, int length) {
-        return values == null ? null : Arrays.copyOf(values, length);
-    }
-    private static long hashKind(String value, int flags) {
-        long result = HASH_SEED;
-        for (int i = 0; i < value.length(); i++) result = (result ^ value.charAt(i)) * HASH_PRIME;
-        return (result ^ flags) * HASH_PRIME;
+
+    private static int[] retained(int[] values, int size) {
+        return values.length == size ? values : Arrays.copyOf(values, size);
     }
 
     public static Builder builder(M3File source, Domain domain, int maxNodes) {
@@ -87,84 +72,19 @@ public final class M3ASTIndex {
         if (!hasExactRange(node)) throw new IllegalStateException("unverified/unknown source range");
         return source.subSequence(starts[node], ends[node]);
     }
-    /** Original javac LineMap positions; -1 for other domains/unavailable geometry. */
-    public int line(int node) {
-        int row = check(node);
-        return lines == null ? -1 : lines[row];
-    }
-    public record LineSpan(int first, int last) { }
-    /** Inclusive line span, or (-1,-1) when unavailable. */
-    public LineSpan spanLines(int node) {
-        int row = check(node);
-        return lines == null ? new LineSpan(-1, -1) : new LineSpan(lines[row], endLines[row]);
-    }
-    /** Simple name/value dictionaries are indexed by primitive node rows, not entry objects. */
-    public String simpleName(int node) {
-        int row = check(node);
-        return symbolIds == null || symbolIds[row] < 0 ? null : symbols[symbolIds[row]];
-    }
-    public String literal(int node) {
-        int row = check(node);
-        return literalIds == null || literalIds[row] < 0 ? null : symbols[literalIds[row]];
-    }
-    /** First strict ancestor of the named kind, -1 when none. */
-    public int firstEnclosing(int node, String syntaxKind) {
-        Objects.requireNonNull(syntaxKind, "syntaxKind");
-        for (int row = parents[check(node)]; row >= 0; row = parents[row]) {
-            if (names[kinds[row]].equals(syntaxKind)) return row;
-        }
-        return -1;
-    }
-    /** Lazy, immutable-on-publication structural hint: never a semantic proof. */
-    public long structuralHash64(int node) {
-        int row = check(node);
-        long[] hashes = structureHashes;
-        if (hashes == null) {
-            synchronized (this) {
-                hashes = structureHashes;
-                if (hashes == null) {
-                    hashes = new long[nodeCount()];
-                    for (int current = nodeCount() - 1; current >= 0; current--) {
-                        long hash = hashKind(names[kinds[current]], flags[current] & (STATIC | FINAL | INTERFACE));
-                        for (int child = first[current]; child != -1; child = next[child]) {
-                            hash = (hash ^ hashes[child]) * HASH_PRIME;
-                        }
-                        hashes[current] = (hash ^ childCounts[current]) * HASH_PRIME;
-                    }
-                    structureHashes = hashes;
-                }
-            }
-        }
-        return hashes[row];
-    }
-    /** Exact source-range fingerprint; collision-prone discovery signal, not an exact proof. */
-    public long exactHash64(int node) {
-        if (!hasExactRange(node)) throw new IllegalStateException("exact source hash requires verified range");
-        long hash = HASH_SEED;
-        for (int i = starts[node]; i < ends[node]; i++) hash = (hash ^ source.charAt(i)) * HASH_PRIME;
-        return hash;
-    }
-    public long primitiveBytes() {
-        return (long) kinds.length * 8L * Integer.BYTES
-                + (lines == null ? 0L : (long) kinds.length * 4L * Integer.BYTES)
-                + (structureHashes == null ? 0L : (long) kinds.length * Long.BYTES);
-    }
+    public long primitiveBytes() { return (long) kinds.length * 8L * Integer.BYTES; }
     private int check(int node) { return Objects.checkIndex(node, kinds.length); }
 
-    /** Bounded, single-owner creation; discarded immediately after immutable publication. */
+    /** Bounded, single-owner creation; sealing releases all retained input and array references. */
     public static final class Builder {
-        private final M3File source;
-        private final Domain domain;
+        private M3File source;
+        private Domain domain;
         private final int maxNodes;
         private String[] names = new String[16];
         private int nameCount;
         private int[] kinds = new int[32], parents = new int[32], starts = new int[32];
         private int[] ends = new int[32], flags = new int[32], first = new int[32];
         private int[] last = new int[32], next = new int[32], childCounts = new int[32];
-        private int[] lines, endLines, symbolIds, literalIds;
-        private String[] symbols;
-        private final HashMap<String, Integer> symbolDictionary = new HashMap<>();
-        private int symbolCount;
         private int size;
         private boolean sealed;
 
@@ -191,9 +111,7 @@ public final class M3ASTIndex {
                     || (start >= 0 && end >= start && end <= source.length()))) {
                 throw new IllegalArgumentException("invalid UTF-16 half-open AST range");
             }
-            int permitted = EXACT_RANGE | SYNTAX_ONLY | SOURCE_UNVERIFIED | RECOVERED;
-            if (domain == Domain.JAVAC) permitted |= STATIC | FINAL | INTERFACE;
-            if ((flags & ~permitted) != 0) {
+            if ((flags & ~(EXACT_RANGE | SYNTAX_ONLY | SOURCE_UNVERIFIED | RECOVERED)) != 0) {
                 throw new IllegalArgumentException("unknown AST index flags");
             }
             if ((flags & EXACT_RANGE) != 0 && start == NO_RANGE) {
@@ -212,10 +130,6 @@ public final class M3ASTIndex {
             ends[row] = end;
             this.flags[row] = flags;
             first[row] = last[row] = next[row] = -1;
-            if (symbolIds != null) {
-                symbolIds[row] = -1; literalIds[row] = -1;
-                lines[row] = -1; endLines[row] = -1;
-            }
             if (parent >= 0) {
                 if (first[parent] == -1) first[parent] = row;
                 else next[last[parent]] = row;
@@ -223,50 +137,6 @@ public final class M3ASTIndex {
                 childCounts[parent]++;
             }
             return row;
-        }
-
-        /**
-         * Attach authoritative javac-only facts to the just-added node.
-         * The transient hash map interns repeated spellings and does not survive seal().
-         */
-        public void annotateJavac(int row, int firstLine, int finalLine,
-                String simpleName, String literalValue) {
-            if (sealed || domain != Domain.JAVAC || row != size - 1) {
-                throw new IllegalStateException("Javac facts require current unsealed Javac row");
-            }
-            if ((firstLine == -1) != (finalLine == -1)
-                    || (firstLine != -1 && (firstLine < 1 || finalLine < firstLine))) {
-                throw new IllegalArgumentException("invalid javac line span");
-            }
-            if (lines == null) {
-                lines = new int[kinds.length]; endLines = new int[kinds.length];
-                symbolIds = new int[kinds.length]; literalIds = new int[kinds.length];
-                Arrays.fill(lines, -1); Arrays.fill(endLines, -1);
-                Arrays.fill(symbolIds, -1); Arrays.fill(literalIds, -1);
-            }
-            lines[row] = firstLine; endLines[row] = finalLine;
-            symbolIds[row] = atom(simpleName);
-            literalIds[row] = atom(literalValue);
-        }
-        private int atom(String text) {
-            if (text == null) return -1;
-            if (text.length() > 65_535) {
-                throw new IllegalArgumentException("javac value dictionary string budget exceeded");
-            }
-            Integer existing = symbolDictionary.get(text);
-            if (existing != null) return existing;
-            if (symbolCount == maxNodes) {
-                throw new IllegalArgumentException("javac value dictionary budget exceeded");
-            }
-            if (symbols == null) symbols = new String[16];
-            if (symbolCount == symbols.length) {
-                symbols = Arrays.copyOf(symbols,
-                        Math.min(maxNodes, Math.max(symbolCount + 1, symbols.length * 2)));
-            }
-            int slot = symbolCount++;
-            symbols[slot] = text;
-            symbolDictionary.put(text, slot);
-            return slot;
         }
 
         /** Complete a previously unknown block/source range, before publication. */
@@ -297,7 +167,17 @@ public final class M3ASTIndex {
         public M3ASTIndex seal() {
             if (sealed || size < 1) throw new IllegalStateException("AST index not open or empty");
             sealed = true;
-            return new M3ASTIndex(this);
+            try {
+                return new M3ASTIndex(this);
+            } finally {
+                // A caller may retain the sealed builder. It must not retain a
+                // second copy of the index buffers or keep the source alive.
+                names = null;
+                kinds = parents = starts = ends = flags = null;
+                first = last = next = childCounts = null;
+                source = null;
+                domain = null;
+            }
         }
 
         private int nameId(String value) {
@@ -324,10 +204,6 @@ public final class M3ASTIndex {
             last = Arrays.copyOf(last, cap);
             next = Arrays.copyOf(next, cap);
             childCounts = Arrays.copyOf(childCounts, cap);
-            if (lines != null) {
-                lines = Arrays.copyOf(lines, cap); endLines = Arrays.copyOf(endLines, cap);
-                symbolIds = Arrays.copyOf(symbolIds, cap); literalIds = Arrays.copyOf(literalIds, cap);
-            }
         }
     }
 }
