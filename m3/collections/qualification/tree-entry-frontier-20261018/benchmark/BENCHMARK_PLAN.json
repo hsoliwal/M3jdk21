@@ -1,0 +1,109 @@
+{
+  "id": "M3TreeMap-public-JMH1.37-comparison-v1",
+  "phase": "PLAN_FROZEN_BEFORE_BENCHMARK_SOURCE; NO_COMPILATION_OR_EXECUTION",
+  "target": "com.m3.collections.M3TreeMap<Integer,Integer>; typed public APIs only; no implementation inspection/reflection fallback",
+  "benchmarkClass": "com.m3.bench.M3TreeMapPublicBench",
+  "matrix": {
+    "sizes": [
+      4096,
+      65536
+    ],
+    "order": [
+      "ascending",
+      "descending",
+      "seededshuffle"
+    ],
+    "methods": [
+      "entrySetFullScan",
+      "freshInsertion",
+      "removeReinsertChurn"
+    ],
+    "cellsPerRuntime": 18,
+    "runtimeLabels": [
+      "preprotocol-old8d",
+      "protocol1b",
+      "current-candidate-insertion-earlystop-if-qualified"
+    ],
+    "runtimeIdentityStatus": "PENDING root full source/class/classpath hashes and public-API/correctness qualification. Labels are not sufficient pins."
+  },
+  "data": {
+    "keys": "Preboxed Integer[i] for i=0..size-1",
+    "values": "Preboxed Integer.valueOf(i ^ 0x5A5A5A5A); no null values",
+    "traversal": "int[] order prepared once; ascending/reverse or seeded Fisher-Yates using java.util.Random(0x4d33545245454cL ^ size)",
+    "boxing": "No Integer.valueOf/new Integer/key generation in benchmark loops; map internal allocation remains measured."
+  },
+  "workloads": {
+    "entrySetFullScan": "Prebuilt map from configured insertion order; iterate complete public entrySet; return 64-bit checksum of key/value pairs. Iterator/Entry projections and allocation are part of measurement.",
+    "freshInsertion": "Create new map and put every reused key/value in configured order; Blackhole consumes finished map and final size is returned. Includes construction, growth and all puts.",
+    "removeReinsertChurn": "Prebuilt map; for each configured key, remove then reinsert the returned same Integer value before the next key; return checksum of removed mappings. Every invocation restores logical contents; physical steady state may evolve during warmup."
+  },
+  "harness": {
+    "library": "JMH1.37 cached DIRECT_IMPORT",
+    "jdk": "Java21; root pins exact same vendor/build/flags across runtime versions",
+    "state": "Scope.Thread",
+    "threads": 1,
+    "mode": "AverageTime",
+    "outputTimeUnit": "NANOSECONDS",
+    "warmup": {
+      "iterations": 3,
+      "time": 300,
+      "timeUnit": "MILLISECONDS",
+      "batchSize": 1
+    },
+    "measurement": {
+      "iterations": 5,
+      "time": 300,
+      "timeUnit": "MILLISECONDS",
+      "batchSize": 1
+    },
+    "forks": 2,
+    "operationsPerInvocation": "Absent; dynamic size is not misrepresented by a constant annotation",
+    "profiler": "Root CLI must request -prof gc",
+    "jvmAnnotations": "No jvmArgs/jvmArgsAppend overrides in @Fork or other annotations"
+  },
+  "validation": "Trial setup validates key count, ascending entry traversal, all public lookups, checksum and a separate one-pass churn probe; trial teardown revalidates retained map. No validation/fixture construction in timed loops. This sanity check does not replace root correctness proofs.",
+  "normalization": {
+    "primary": "Keep raw JMH ns/op as whole invocation, score/error/confidence and all per-fork data.",
+    "scan": "ns/entry = rawScore/size; allocation B/entry = gc.alloc.rate.norm/size",
+    "insert": "ns/put = rawScore/size; includes fresh constructor/growth overhead",
+    "churn": "ns/(remove+reinsert pair)=rawScore/size; optional ns/mapMutation=rawScore/(2*size), explicitly labeled",
+    "errors": "Apply same scale factor to score error/confidence endpoints; retain raw B/op and normalized B/entry/pair."
+  },
+  "comparison": "One source hash, one common processor/JMH configuration, and identical parameter cells across all qualified runtimes. Compile once against qualified common public API if binary compatible; pin generated benchmark classes/resources and exact runtime classpath separately. Never include two versions of M3 classes in one fork. Root records version execution order/background load and measures versions without competing benchmark jobs.",
+  "acceptance": "Root correctness qualification and JMH generated benchmark discovery must pass before performance comparison. Any benchmark exception, timeout, incomplete cell, changed settings/source, missing gc profiler or identity mismatch invalidates that comparison. Report per-cell changes/regressions and uncertainty; do not infer universal peak, platform acceptance, or optimality from LeetCode/HackerRank problem statements.",
+  "storage": "Author outputs <=16384B here. Root generated classes/resources/logs/results separately <=524288B. Every JVM/child uses verified S temp/user/cache routing, 128MiB heap and ActiveProcessorCount=2 supplied externally; recheck reserve/capacity. No annotation overrides of JVM resource flags.",
+  "offlineDependencies": [
+    [
+      "org.openjdk.jmh:jmh-core:1.37",
+      "C:/Users/hsoliwal/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar",
+      552986,
+      "dc0eaf2bbf0036a70b60798c785d6e03a9daf06b68b8edb0f1ba9eb3421baeb3"
+    ],
+    [
+      "org.openjdk.jmh:jmh-generator-annprocess:1.37",
+      "C:/Users/hsoliwal/.m2/repository/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar",
+      30881,
+      "6a5604b5b804e0daca1145df1077609321687734a8b49387e49f10557c186c77"
+    ],
+    [
+      "net.sf.jopt-simple:jopt-simple:5.0.4",
+      "C:/Users/hsoliwal/.m2/repository/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar",
+      78146,
+      "df26cc58f235f477db07f753ba5a3ab243ebe5789d9f89ecf68dd62ea9a66c28"
+    ],
+    [
+      "org.apache.commons:commons-math3:3.6.1",
+      "C:/Users/hsoliwal/.m2/repository/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar",
+      2213560,
+      "1e56d7b058d28b65abd256b8458e3885b674c1d588fa43cd7d1cbb9c7ef2b308"
+    ]
+  ],
+  "primaryReferences": [
+    "https://github.com/openjdk/jmh/blob/1.37/README.md",
+    "https://github.com/openjdk/jmh/blob/1.37/LICENSE",
+    "https://github.com/openjdk/jmh/blob/1.37/jmh-core/src/main/java/org/openjdk/jmh/annotations/Benchmark.java",
+    "https://github.com/openjdk/jmh/blob/1.37/jmh-core/src/main/java/org/openjdk/jmh/annotations/OperationsPerInvocation.java",
+    "https://github.com/openjdk/jmh/blob/1.37/jmh-core/src/main/java/org/openjdk/jmh/profile/GCProfiler.java"
+  ],
+  "sourceScope": "Original task-specific benchmark only; no third-party benchmark, LeetCode or HackerRank code copied. JMH binaries/processor are reused unmodified from provisioned cache. Prior frozen contracts untouched."
+}

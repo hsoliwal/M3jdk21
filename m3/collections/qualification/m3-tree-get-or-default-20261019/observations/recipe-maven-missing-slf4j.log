@@ -1,0 +1,128 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< com.synexia.verification:m3-tree-get-or-default >-----------
+[INFO] Building m3-tree-get-or-default 20261019
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-tree-get-or-default ---
+[INFO] Copying 5 resources from ../../src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-tree-get-or-default ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-tree-get-or-default ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/a20ebe6f78bb/Synexia/synexia-openrewrite-recipes/verification/m3-tree-get-or-default-20261019/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-tree-get-or-default ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-tree-get-or-default ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest
+[ERROR] Tests run: 5, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 40.15 s <<< FAILURE! -- in com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest
+[ERROR] com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.appliesDeterministicallyAndEmitsOnlyQualifiedSdkOutputs -- Time elapsed: 9.673 s <<< ERROR!
+java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.appliesDeterministicallyAndEmitsOnlyQualifiedSdkOutputs(M3TreeMapGetOrDefaultRecipeTest.java:62)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 6 more
+
+[ERROR] com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.rejectsMissingRequiredOriginal -- Time elapsed: 0.020 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.refuse(M3TreeMapGetOrDefaultRecipeTest.java:49)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.rejectsMissingRequiredOriginal(M3TreeMapGetOrDefaultRecipeTest.java:90)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.appliesDeterministicallyAndEmitsOnlyQualifiedSdkOutputs(M3TreeMapGetOrDefaultRecipeTest.java:62)
+	... 3 more
+
+[ERROR] com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.rejectsConflictingExistingRegressionInsteadOfOverwritingIt -- Time elapsed: 20.39 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.refuse(M3TreeMapGetOrDefaultRecipeTest.java:49)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.rejectsConflictingExistingRegressionInsteadOfOverwritingIt(M3TreeMapGetOrDefaultRecipeTest.java:96)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.appliesDeterministicallyAndEmitsOnlyQualifiedSdkOutputs(M3TreeMapGetOrDefaultRecipeTest.java:62)
+	... 3 more
+
+[ERROR] com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.rejectsUnknownPreimagesIncludingCodeLookingDecoys -- Time elapsed: 7.827 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.refuse(M3TreeMapGetOrDefaultRecipeTest.java:49)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.rejectsUnknownPreimagesIncludingCodeLookingDecoys(M3TreeMapGetOrDefaultRecipeTest.java:87)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.appliesDeterministicallyAndEmitsOnlyQualifiedSdkOutputs(M3TreeMapGetOrDefaultRecipeTest.java:62)
+	... 3 more
+
+[ERROR] com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.rejectsDuplicateOriginal -- Time elapsed: 2.124 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.refuse(M3TreeMapGetOrDefaultRecipeTest.java:49)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.rejectsDuplicateOriginal(M3TreeMapGetOrDefaultRecipeTest.java:93)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.recipe(M3TreeMapGetOrDefaultRecipeTest.java:46)
+	at com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest.appliesDeterministicallyAndEmitsOnlyQualifiedSdkOutputs(M3TreeMapGetOrDefaultRecipeTest.java:62)
+	... 3 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   M3TreeMapGetOrDefaultRecipeTest.appliesDeterministicallyAndEmitsOnlyQualifiedSdkOutputs:62->recipe:46 » NoClassDefFound org/slf4j/LoggerFactory
+[ERROR]   M3TreeMapGetOrDefaultRecipeTest.rejectsConflictingExistingRegressionInsteadOfOverwritingIt:96->refuse:49->recipe:46 NoClassDefFound Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+[ERROR]   M3TreeMapGetOrDefaultRecipeTest.rejectsDuplicateOriginal:93->refuse:49->recipe:46 NoClassDefFound Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+[ERROR]   M3TreeMapGetOrDefaultRecipeTest.rejectsMissingRequiredOriginal:90->refuse:49->recipe:46 NoClassDefFound Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+[ERROR]   M3TreeMapGetOrDefaultRecipeTest.rejectsUnknownPreimagesIncludingCodeLookingDecoys:87->refuse:49->recipe:46 NoClassDefFound Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+[INFO] 
+[ERROR] Tests run: 5, Failures: 0, Errors: 5, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  51.805 s
+[INFO] Finished at: 2026-10-19T19:34:29+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project m3-tree-get-or-default: 
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/a20ebe6f78bb/Synexia/synexia-openrewrite-recipes/verification/m3-tree-get-or-default-20261019/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
