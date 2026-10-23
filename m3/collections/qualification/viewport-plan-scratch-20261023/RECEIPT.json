@@ -1,0 +1,41 @@
+{
+  "schema": "M3JDK21_TREE_WINDOW_SCRATCH_REVIEW_ONLY_V1",
+  "date": "2026-10-23",
+  "product_pr": 1759,
+  "product_parent": "22009882312e497eda2d9f742324db4efde07bac",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "a9e9f67b532ad15f93d4256489a5725cefed95f6",
+  "canonical_dataset": "viewport-plan-scratch-20261023",
+  "previous_dataset": "vpt-tree-commit-20261022",
+  "source_path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+  "product_source_sha256": "939c71664bda0330d30cbf88532226ec601c8908e12cf9a6a42a013bd3624368",
+  "predecessor_candidate_sha256": "ac4fc038798a5aa75480bc26a17d498300e9fcb325d93b6926d6da62e5634d8c",
+  "successor_candidate_sha256": "1aadb71fb2b39f4370ac3430864ebeb697e427b3bb72618795fa70abb493d52e",
+  "successor_candidate_blob": "a4eb1ab27ff378757ced228630cc92c92eee94fd",
+  "local_java21_compiler": "PASS",
+  "local_compiled_java_contract_checks": 2242259,
+  "local_java_observation_root": "5f3f8aa4eff85725",
+  "local_compact_oracle_checks": 133225,
+  "local_tree_java_jni_contract_checks": 417171,
+  "local_tree_frames": 1024,
+  "local_tree_root": "79e90d00d243eaf1303ea975ea65384765e4bdcf7fc3bd40a0930a16fac93e03",
+  "jni_xcheck_ubsan": "PASS",
+  "direct_plan_allocation": {
+    "rows": 128,
+    "steady_calls": 25000,
+    "previous_bytes": 13400000,
+    "candidate_bytes": 0
+  },
+  "negative_controls": {
+    "output_reuse": "REFUSED",
+    "source_drift": "REFUSED",
+    "missing_sentinel_reset": "REJECTED"
+  },
+  "hosted_run": 39886469558,
+  "hosted_status_last_observation": "queued",
+  "canonical_java_openrewrite": "NOT_RUN",
+  "target_java_receiving": "NOT_RUN",
+  "runtime_sources_modified": false,
+  "full_program_complete": false
+}
