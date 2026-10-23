@@ -31,11 +31,11 @@ final class M3LFUCache<K, V> {
         if (capacity < 0) {
             throw new IllegalArgumentException("negative capacity");
         }
-        keys = new Object[capacity];
-        values = new Object[capacity];
-        frequencies = new int[capacity];
-        accessStamps = new long[capacity];
-        states = new byte[capacity];
+        keys = com.m3.arrays.M3ArrayNative.allocateObjectsRequired(capacity);
+        values = com.m3.arrays.M3ArrayNative.allocateObjectsRequired(capacity);
+        frequencies = com.m3.arrays.M3ArrayNative.allocateIntsRequired(capacity);
+        accessStamps = com.m3.arrays.M3ArrayNative.allocateLongsRequired(capacity);
+        states = com.m3.arrays.M3ArrayNative.allocateBytesRequired(capacity);
     }
 
     @SuppressWarnings("unchecked")
