@@ -8710,6 +8710,142 @@
         },
         "source_state": "proposed",
         "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
+      },
+      {
+        "id": "m3.collections.evicting-queue.owner-naming",
+        "kind": "internal-relocation-proposal",
+        "status": "proposed",
+        "reason": "The existing owned Object[] ring and stable long-mask implementation has a third-party-labelled M3 namespace. Review a semantic M3 owner namespace; do not confuse this real implementation with generated throw-only provider scaffolds or with installed Java SE collection integration.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "4bd27a6fc78ba3f7ca019125c096c33d8a324cee",
+            "module": "m3/collections/implementations/guava-evicting-queue",
+            "path": "m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java",
+            "symbol": "com.m3.collections.guava.M3EvictingQueue",
+            "signatures": [
+              "public final class M3EvictingQueue<E> extends AbstractCollection<E> implements Queue<E>, Serializable",
+              "public static <E> M3EvictingQueue<E> create(int)",
+              "public int remainingCapacity()",
+              "public boolean add(E)",
+              "public boolean offer(E)",
+              "public int size()"
+            ],
+            "sha256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840",
+            "git_blob_sha1": "12eb65d7d4f01624ed34dae6bcad59c14657c46c",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "4bd27a6fc78ba3f7ca019125c096c33d8a324cee",
+            "module": "m3/collections/implementations/guava-evicting-queue",
+            "path": "m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java",
+            "symbol": "com.m3.collections.guava.M3EvictingQueue",
+            "signatures": [
+              "public final class M3EvictingQueue<E> extends AbstractCollection<E> implements Queue<E>, Serializable",
+              "public static <E> M3EvictingQueue<E> create(int)",
+              "public int remainingCapacity()",
+              "public boolean add(E)",
+              "public boolean offer(E)",
+              "public int size()"
+            ],
+            "sha256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840",
+            "git_blob_sha1": "12eb65d7d4f01624ed34dae6bcad59c14657c46c",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "Existing proving-ground owner com.m3.collections.guava.M3EvictingQueue; proposed semantic name com.m3.collections.queue.M3EvictingQueue is not an approved target or published alias.",
+        "identity": {
+          "namespace": "Current nominal and binary owner identity is com.m3.collections.guava.M3EvictingQueue; serialVersionUID=0L. A future move changes serialized class descriptor even when the UID is unchanged.",
+          "generation": "Queue instances own an Object[] dynamic ring, primitive head/tail indexes, a state bit and long[] removal masks; no generated scaffold is promoted."
+        },
+        "contract": {
+          "differences": [
+            "Only a potential M3-owned internal package spelling changes; Guava's final com.google.common.collect.EvictingQueue and JDK java.util.Queue APIs retain exact externally required names.",
+            "The current class is public and Serializable, so a ChangeType transformation alone does not prove binary/reflection/serialization compatibility."
+          ],
+          "compatibility_obligations": [
+            "Inventory every direct, transitive, reflected, module-info, service, resource, generated-code, JNI and serialization consumer before staging.",
+            "Either preserve an explicitly qualified legacy binary/serial boundary, or prove no supported clients/serialized data depend on the old class name; do not silently break an existing API.",
+            "Preserve exact queue and collection semantics, own lazy stream behavior, default removeIf versus bulk compaction, exception/null and identity policies.",
+            "Keep public JDK and provider API names; do not claim this proving-ground owner replaces java.util.ArrayDeque or a Guava concrete class.",
+            "Run Maven/OpenRewrite attributed ChangeType with exact source and closure SHA-256; test fixed point, drift refusal and rollback, followed by Java 21 module, installed SDK, ABI/JNI/jtreg, memory and performance gates."
+          ],
+          "public_surface": [
+            "M3EvictingQueue<E> extends AbstractCollection<E> implements Queue<E>, Serializable",
+            "static <E> M3EvictingQueue<E> create(int)",
+            "int remainingCapacity()",
+            "long serialVersionUID = 0L; private(int) constructor; custom serialization"
+          ]
+        },
+        "format": {
+          "schema": "Java serialization; class-descriptor owner identity currently includes vendor-labelled M3 package",
+          "abi": "Class is public final; preserving source or binary clients on rename is unresolved.",
+          "bootstrap": "Standalone Maven proving module, not a demonstrated installed M3JDK21 java.base/runtime class."
+        },
+        "dependencies": [
+          {
+            "id": "m3.collections.evicting-queue.contract-closure",
+            "resolution": "pending",
+            "reason": "No repo-wide import/reflection/serialization consumer closure, replacement package, or installed-image proof is sealed."
+          }
+        ],
+        "materialization": {
+          "admission": "Retain existing Object[] dynamic ring and primitive coordinate/state/mask owners; package-only candidate cannot create a replacement collection implementation.",
+          "joins": "No new array copying, native queue storage or compatibility facade is authorized by this queued mapping.",
+          "outputs": "No production output in this PR; old Java class and bytecode remain untouched.",
+          "cached_facts": "Existing mask and ring-state facts stay implementation-local; no new global index."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3Jdk21ReviewedOwnerNaming",
+          "version": "20261022-queued",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "The private Synexia naming recipe PR #12987 is a draft, and it currently refuses absent closed callers/contract receipts.",
+            "Before staging: pin target source, after symbol and full closure files in this single canonical mapping; verify publisher ABI and serialized class identity.",
+            "A proven source-sealed Synexia Maven/OpenRewrite execution must precede target Java source receiving."
+          ],
+          "rollback": "No postimage is generated by a queued entry. Later rollback must be exact and preserve independently changed code and serialized/binary compatibility."
+        },
+        "tests": [
+          {
+            "id": "historical-owner-protocol-only",
+            "receipt": "m3/collections/qualification/owned-guava-evicting-queue-20261018/proof-summary.json"
+          },
+          {
+            "id": "historical-owned-serialization-only",
+            "receipt": "m3/collections/qualification/owned-guava-evicting-queue-20261018/serialization-review/REGRESSION_RESULTS.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 owner; retain ASF/Guava contributor notices, original per-file headers and third-party attribution.",
+          "publication": "Target mapping/queue review only. Historical proof summaries are not rename/ABI/JNI/installed image evidence.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "4bd27a6fc78ba3f7ca019125c096c33d8a324cee",
+          "target_revision": "4bd27a6fc78ba3f7ca019125c096c33d8a324cee",
+          "direction": "same-repository internal name review",
+          "target_adaptations": [],
+          "pending": [
+            "Confirm canonical package ownership and public API versus internal implementation designation",
+            "Close all consumers, reflected names, serialized class identity and compatibility guarantees",
+            "Run pinned Synexia recipe and JDK21/SDK/ABI/JNI/jtreg/performance gates; obey String -> arrays -> collections order"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented-proving-module-unpromoted",
+        "observation": "The 20261018 source-bound finite proofs concern existing owner behavior and its own wire identity. Local Maven/CI and installed M3JDK runtime acceptance are outstanding; historical performance report says size-1024 owner was slower on all seven examined workloads."
       }
     ]
   },
