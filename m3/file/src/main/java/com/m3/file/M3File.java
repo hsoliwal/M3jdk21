@@ -1,12 +1,9 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-// Modified 2026-10-21 by the Synexia m3-project-delta recipe: checked timestamp observations.
 package com.m3.file;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
@@ -26,17 +23,11 @@ import java.util.Objects;
  * <p>Adapted from Synexia MIndexResourceAccess file-edge semantics. No new
  * filesystem, directory tree, interned path table or retained file descriptor is
  * created. Metadata is a point-in-time observation and is not an immutable view
- * of an externally changing filesystem. Symbolic links are never followed by
- * the file-open operations.</p>
+ * of an externally changing filesystem. File-open operations refuse a symbolic
+ * link at the final component; ancestor resolution remains provider-owned.</p>
  */
 public final class M3File {
-    /** A previously absent logical file now has an observed fingerprint. */
-    public static final int ADDED = 1;
-    /** A previously observed logical file is now known to be absent. */
-    public static final int REMOVED = 2;
-    /** Both observations exist and their byte count or raw SHA-256 differs. */
-    public static final int CONTENT_CHANGED = 4;
-
+    private static final int HASH_BUFFER_BYTES = 8192;
     private final Path path;
 
     private M3File(Path path) {
@@ -50,11 +41,7 @@ public final class M3File {
 
     /** Every invocation refreshes metadata with NOFOLLOW_LINKS. */
     public Metadata metadata() throws IOException {
-        BasicFileAttributes attributes = Files.readAttributes(
-                path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
-        return new Metadata(attributes.isRegularFile(), attributes.isDirectory(),
-                attributes.isSymbolicLink(), attributes.size(),
-                attributes.lastModifiedTime());
+        return metadata(attributes());
     }
 
     /** Opens a caller-owned channel; the caller MUST close it. */
@@ -66,24 +53,6 @@ public final class M3File {
     /** Caller owns the returned stream and closes the underlying channel. */
     public InputStream openInputStream() throws IOException {
         return Channels.newInputStream(openReadChannel());
-    }
-
-    /** Monitor read/skip byte work without buffering or duplicating source data. */
-    public InputStream openInputStream(M3StreamProgress progress) throws IOException {
-        M3StreamProgress.require(progress);
-        return M3ShadowStreams.monitoredInput(openInputStream(), progress);
-    }
-
-    /**
-     * Open one original provider channel with a bounded, shared shadow-page arena.
-     * All layered consumers obtain cursors using {@code shared.shadow(child)};
-     * the owning caller closes this stream. No filesystem scan or new source owner.
-     */
-    public M3ShadowStreams.SharedInput openShadowInputStream(
-            int maxRetainedBytes, M3StreamProgress progress) throws IOException {
-        if (maxRetainedBytes < 0) throw new IllegalArgumentException("negative shadow capacity");
-        M3StreamProgress.require(progress);
-        return M3ShadowStreams.input(openInputStream(), maxRetainedBytes, progress);
     }
 
     /**
@@ -105,284 +74,95 @@ public final class M3File {
     }
 
     /**
-     * Hash already-known, ordered, non-overlapping byte spans through one NIO
-     * channel. This is intended for FileIndex record/chunk reuse after a caller
-     * has established which spans require work; it does not discover changes.
+     * Observe existence, metadata and a complete raw-byte SHA-256 using bounded memory.
      *
-     * <p>Offsets are half-open physical byte coordinates, never UTF-16 indexes.
-     * maxEnd bounds the largest source coordinate, including gaps. Provider
-     * metadata is checked before and after reading but does not establish an
-     * atomic snapshot or prove unchanged bytes in gaps. No complete file digest,
-     * compiler ABI result or persistent cache is inferred from range hashes.
+     * <p>Only an initial {@link NoSuchFileException} produces an absent observation.
+     * Present files must be regular files and satisfy both the observed-size and
+     * streamed-length budget. The final path component is opened with NOFOLLOW_LINKS,
+     * as in {@link #openReadChannel()}; ancestor resolution remains provider-owned.
+     * Before/after type, size, modification time, creation time and file key must
+     * match, and both sizes must match the bytes read. Other failures propagate.</p>
      *
-     * <p>Inputs are copied before any provider I/O so progress callbacks cannot
-     * change selected ranges. Result storage is three primitive long[] lanes:
-     * starts, lengths, and four SHA-256 digest words per physical range.
-     */
-    public RangeFingerprints fingerprintRanges(long[] offsets, long[] lengths,
-                                               long maxEnd) throws IOException {
-        return fingerprintRanges(offsets, lengths, maxEnd, M3StreamProgress.none());
-    }
-
-    /** Bounded selection with a borrowed progress monitor; one opened channel. */
-    public RangeFingerprints fingerprintRanges(long[] offsets, long[] lengths,
-                                               long maxEnd, M3StreamProgress progress)
-            throws IOException {
-        Objects.requireNonNull(offsets, "offsets");
-        Objects.requireNonNull(lengths, "lengths");
-        M3StreamProgress.require(progress);
-        if (maxEnd < 0 || offsets.length != lengths.length
-                || offsets.length > Integer.MAX_VALUE / 4) {
-            throw new IllegalArgumentException("invalid range column geometry");
-        }
-        long[] selected = offsets.clone();
-        long[] extents = lengths.clone();
-        long previousEnd = 0;
-        for (int row = 0; row < selected.length; row++) {
-            long start = selected[row], extent = extents[row];
-            if (start < previousEnd || extent < 0 || start > maxEnd
-                    || extent > maxEnd - start) {
-                throw new IllegalArgumentException("ranges must be ordered, disjoint and bounded");
-            }
-            previousEnd = start + extent;
-        }
-        long[] digestWords = new long[selected.length * 4];
-        progress.checkCancelled();
-        BasicFileAttributes before = Files.readAttributes(
-                path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
-        if (!before.isRegularFile()) throw new IOException("resource is not a regular file");
-        for (int row = 0; row < selected.length; row++) {
-            if (selected[row] > before.size()
-                    || extents[row] > before.size() - selected[row]) {
-                throw new EOFException("range exceeds the observed file size");
-            }
-        }
-        MessageDigest digest;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException impossible) {
-            throw new AssertionError("required SHA-256 provider unavailable", impossible);
-        }
-        byte[] bytes = new byte[8192];
-        ByteBuffer page = ByteBuffer.wrap(bytes);
-        if (selected.length != 0) {
-            try (SeekableByteChannel channel = openReadChannel()) {
-                for (int row = 0; row < selected.length; row++) {
-                    progress.checkCancelled();
-                    channel.position(selected[row]);
-                    long remaining = extents[row];
-                    digest.reset();
-                    while (remaining > 0) {
-                        progress.checkCancelled();
-                        page.clear().limit((int) Math.min(bytes.length, remaining));
-                        int read = readProgressing(channel, page);
-                        if (read < 0) throw new EOFException("range shortened during observation");
-                        digest.update(bytes, 0, read);
-                        remaining -= read;
-                        progress.worked(read);
-                    }
-                    ByteBuffer completed = ByteBuffer.wrap(digest.digest());
-                    int at = row * 4;
-                    digestWords[at] = completed.getLong();
-                    digestWords[at + 1] = completed.getLong();
-                    digestWords[at + 2] = completed.getLong();
-                    digestWords[at + 3] = completed.getLong();
-                }
-            }
-        }
-        BasicFileAttributes after = Files.readAttributes(
-                path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
-        if (!after.isRegularFile() || before.size() != after.size()
-                || !before.lastModifiedTime().equals(after.lastModifiedTime())
-                || !Objects.equals(before.fileKey(), after.fileKey())) {
-            throw new IOException("resource changed during range observation");
-        }
-        return new RangeFingerprints(selected, extents, digestWords, after.lastModifiedTime());
-    }
-
-    /**
-     * Observe raw bytes once with bounded scratch space, for source or binary files.
+     * <p>This identifies bytes observed through one closed stream, not an atomic
+     * filesystem revision. Undetectable concurrent writes or ancestor replacement
+     * can still occur. A caller needing a stable build input must control its input
+     * generation. No decoded source, AST, class ABI or payload copy is retained.</p>
      *
-     * <p>The returned fingerprint retains only a byte count and four SHA-256 words.
-     * Reuse it for an already admitted immutable generation instead of reading and
-     * hashing again for each consumer. This method does not parse source or classes,
-     * create a cache, or establish compilation/ABI equivalence.</p>
-     *
-     * <p>The byte limit is enforced during reading, including file growth. Detected
-     * size, modification-time or file-key changes are refused. These checks do not
-     * make an externally mutable file atomic: an undetected concurrent overwrite
-     * can still produce a stream observation rather than one filesystem generation.
-     * Build owners must establish stable input admission before reusing outputs.</p>
-     *
-     * @param maxBytes maximum accepted stream length, including zero
+     * @param maxBytes maximum complete file length, including zero for an empty file
+     * @return a detached immutable observation of this original provider path
      * @throws IllegalArgumentException if maxBytes is negative
-     * @throws IOException if reading fails, the file is not regular, the budget is
-     *         exceeded, or a concurrent change is detected; errors never mean absence
+     * @throws IOException if admission, reading, the budget or observed stability fails
      */
-    public Fingerprint fingerprint(long maxBytes) throws IOException {
-        return observe(maxBytes).fingerprint();
-    }
-
-    /**
-     * Observe content and its checked modification time in the same bounded read.
-     * The timestamp is metadata, not part of {@link Fingerprint} equality or
-     * {@link #contentDelta(Fingerprint, Fingerprint)}. Concurrent-change and byte
-     * limit checks are identical to {@link #fingerprint(long)}; this is not an
-     * atomic filesystem snapshot. Errors never produce an absent observation.
-     */
-    public Observation observe(long maxBytes) throws IOException {
-        return observe(maxBytes, new byte[8192], false, M3StreamProgress.none(), null);
-    }
-
-    /**
-     * A synchronous, borrowed view of bytes already read by this original M3File
-     * observation. The callback must not mutate the scratch bytes or retain
-     * their array: source, SHA-256, progress and parser layers advance together.
-     * An exception cancels publication; no complete fingerprint is returned.
-     */
-    @FunctionalInterface
-    public interface ByteObserver {
-        void onBytes(byte[] buffer, int offset, int length) throws IOException;
-    }
-
-    /** One bounded source read: content SHA-256 plus progress and optional layers. */
-    public Observation observe(long maxBytes, M3StreamProgress progress,
-            ByteObserver observer) throws IOException {
-        return observe(maxBytes, new byte[8192], false,
-                M3StreamProgress.require(progress), Objects.requireNonNull(observer, "observer"));
-    }
-
-    /** Ledger-only admission: only absence at the first metadata read returns null. */
-    Observation observeIfExists(byte[] scratch) throws IOException {
-        return observe(Long.MAX_VALUE, scratch, true, M3StreamProgress.none(), null);
-    }
-
-    private Observation observe(long maxBytes, byte[] buffer, boolean initialAbsenceAllowed,
-            M3StreamProgress progress, ByteObserver observer) throws IOException {
+    public M3FileSnapshot snapshot(long maxBytes) throws IOException {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
-        Objects.requireNonNull(buffer, "scratch");
-        if (buffer.length == 0) throw new IllegalArgumentException("empty scratch buffer");
         BasicFileAttributes before;
         try {
-            before = Files.readAttributes(path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
-        } catch (NoSuchFileException missing) {
-            if (initialAbsenceAllowed) return null;
-            throw missing;
+            before = attributes();
+        } catch (NoSuchFileException absent) {
+            return M3FileSnapshot.absent(path);
         }
         if (!before.isRegularFile()) throw new IOException("resource is not a regular file");
-        if (before.size() > maxBytes) {
-            throw new IOException("resource exceeds configured read limit");
+        if (before.size() > maxBytes) throw new IOException("resource exceeds configured read limit");
+
+        MessageDigest digest = sha256();
+        long count;
+        try (InputStream input = Channels.newInputStream(Files.newByteChannel(
+                path, StandardOpenOption.READ, LinkOption.NOFOLLOW_LINKS))) {
+            count = hash(input, digest, maxBytes);
         }
-        MessageDigest digest;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException impossible) {
-            throw new AssertionError("required SHA-256 provider unavailable", impossible);
-        }
+        BasicFileAttributes after = attributes();
+        requireStable(before, after, count);
+        return M3FileSnapshot.present(path, metadata(after), digest.digest());
+    }
+
+    private BasicFileAttributes attributes() throws IOException {
+        return Files.readAttributes(path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
+    }
+
+    private static Metadata metadata(BasicFileAttributes attributes) {
+        return new Metadata(attributes.isRegularFile(), attributes.isDirectory(),
+                attributes.isSymbolicLink(), attributes.size(), attributes.lastModifiedTime());
+    }
+
+    private static long hash(InputStream input, MessageDigest digest, long maxBytes)
+            throws IOException {
+        byte[] buffer = new byte[HASH_BUFFER_BYTES];
         long count = 0;
-        ByteBuffer scratch = ByteBuffer.wrap(buffer);
-        try (SeekableByteChannel channel = openReadChannel()) {
-            while (count < maxBytes) {
-                progress.checkCancelled();
-                scratch.clear().limit((int) Math.min(buffer.length, maxBytes - count));
-                int read = readProgressing(channel, scratch);
-                if (read < 0) break;
+        while (count < maxBytes) {
+            int allowed = (int) Math.min(buffer.length, maxBytes - count);
+            int read = input.read(buffer, 0, allowed);
+            if (read < 0) return count;
+            if (read == 0) {
+                int value = input.read();
+                if (value < 0) return count;
+                digest.update((byte) value);
+                count++;
+            } else {
                 digest.update(buffer, 0, read);
-                progress.worked(read);
-                if (observer != null) observer.onBytes(buffer, 0, read);
                 count += read;
             }
-            if (count == maxBytes) {
-                progress.checkCancelled();
-                scratch.clear().limit(1);
-                if (readProgressing(channel, scratch) >= 0) {
-                    throw new IOException("resource exceeds configured read limit");
-                }
-            }
         }
-        BasicFileAttributes after = Files.readAttributes(
-                path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
+        if (input.read() != -1) throw new IOException("resource exceeds configured read limit");
+        return count;
+    }
+
+    private static void requireStable(BasicFileAttributes before, BasicFileAttributes after,
+            long count) throws IOException {
         if (!after.isRegularFile() || before.size() != count || after.size() != count
+                || before.isDirectory() != after.isDirectory()
+                || before.isSymbolicLink() != after.isSymbolicLink()
                 || !before.lastModifiedTime().equals(after.lastModifiedTime())
+                || !before.creationTime().equals(after.creationTime())
                 || !Objects.equals(before.fileKey(), after.fileKey())) {
-            throw new IOException("resource changed during fingerprint observation");
-        }
-        ByteBuffer hash = ByteBuffer.wrap(digest.digest());
-        Fingerprint content = new Fingerprint(count, hash.getLong(), hash.getLong(), hash.getLong(), hash.getLong());
-        return new Observation(content, after.lastModifiedTime());
-    }
-
-    /** A stalled provider must fail rather than hang a ledger scan or invent a zero byte. */
-    private static int readProgressing(SeekableByteChannel channel, ByteBuffer scratch) throws IOException {
-        for (int attempt = 0; attempt <= 16; attempt++) {
-            int read = channel.read(scratch);
-            if (read != 0) return read;
-        }
-        throw new IOException("M3File read made no progress");
-    }
-
-    /**
-     * Compare two admitted content observations of the same logical file without I/O.
-     *
-     * <p>Null means caller-established absence, never unread/unknown/inaccessible.
-     * Zero means equal fingerprints or two known absences; a nonzero result is one
-     * of {@link #ADDED}, {@link #REMOVED}, or {@link #CONTENT_CHANGED}. Locations,
-     * timestamps, ABI, compiler context and output validity are not compared.
-     * SHA-256 equality is a content-addressing signal, not collision-free byte
-     * equality proof or authorization to skip compiler, processor, test or plugin work.</p>
-     */
-    public static int contentDelta(Fingerprint previous, Fingerprint current) {
-        if (previous == null) return current == null ? 0 : ADDED;
-        if (current == null) return REMOVED;
-        return previous.equals(current) ? 0 : CONTENT_CHANGED;
-    }
-
-    /**
-     * Detached, immutable columnar range fingerprints. Returned Fingerprint
-     * records materialize on demand; this owner retains no per-range objects.
-     */
-    public static final class RangeFingerprints {
-        private final long[] offsets;
-        private final long[] lengths;
-        private final long[] hashWords;
-        private final FileTime lastModified;
-
-        private RangeFingerprints(long[] offsets, long[] lengths,
-                                  long[] hashWords, FileTime lastModified) {
-            this.offsets = offsets;
-            this.lengths = lengths;
-            this.hashWords = hashWords;
-            this.lastModified = lastModified;
-        }
-
-        public int size() { return offsets.length; }
-        public long offset(int row) { return offsets[Objects.checkIndex(row, size())]; }
-        public long length(int row) { return lengths[Objects.checkIndex(row, size())]; }
-        public FileTime lastModified() { return lastModified; }
-
-        public Fingerprint fingerprint(int row) {
-            int at = Objects.checkIndex(row, size()) * 4;
-            return new Fingerprint(lengths[row], hashWords[at], hashWords[at + 1],
-                    hashWords[at + 2], hashWords[at + 3]);
+            throw new IOException("resource changed during snapshot observation");
         }
     }
 
-    /**
-     * Compact immutable raw-byte observation; digest words are in big-endian order.
-     * This format is distinct from decoded UTF-16 and framed source-fact digests.
-     * A caller importing existing digest words remains responsible for their provenance.
-     */
-    public record Fingerprint(long size, long digest0, long digest1, long digest2, long digest3) {
-        public Fingerprint {
-            if (size < 0) throw new IllegalArgumentException("negative fingerprint size");
-        }
-    }
-
-    /** Immutable content plus checked metadata; timestamp equality does not certify unchanged bytes. */
-    public record Observation(Fingerprint fingerprint, FileTime lastModified) {
-        public Observation {
-            Objects.requireNonNull(fingerprint, "fingerprint");
-            Objects.requireNonNull(lastModified, "lastModified");
+    private static MessageDigest sha256() {
+        try {
+            return MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new IllegalStateException("required SHA-256 provider unavailable", impossible);
         }
     }
 
