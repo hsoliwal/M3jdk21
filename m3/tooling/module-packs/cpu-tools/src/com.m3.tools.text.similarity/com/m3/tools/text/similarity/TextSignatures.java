@@ -49,12 +49,21 @@ public final class TextSignatures {
 
     /** A bounded, reproducible signal over the provided exact token sequence. */
     public static Signature compute(List<String> tokens, int lanes) {
+        return compute(tokens, lanes, () -> { });
+    }
+
+    /** Checkpoints cover admission, UTF-16 hashing, weighted voting, and MinHash lanes. */
+    public static Signature compute(List<String> tokens, int lanes, Runnable checkpoint) {
         Objects.requireNonNull(tokens, "tokens");
+        Objects.requireNonNull(checkpoint, "checkpoint");
         if (lanes < 1 || lanes > MAX_LANES) throw new IllegalArgumentException("signature lane budget");
         if (tokens.size() > MAX_TOKENS) throw new IllegalArgumentException("token count budget");
+        checkpoint.run();
         int total = 0;
         TreeMap<String, Integer> frequencies = new TreeMap<>();
+        int seen = 0;
         for (String token : tokens) {
+            if ((seen++ & 4095) == 0) checkpoint.run();
             Objects.requireNonNull(token, "token");
             total = Math.addExact(total, token.length());
             if (total > MAX_TOKEN_UNITS) throw new IllegalArgumentException("token UTF-16 budget");
@@ -64,8 +73,10 @@ public final class TextSignatures {
         int[] votes = new int[Long.SIZE];
         long[] minima = new long[lanes];
         Arrays.fill(minima, -1L);
+        int distinct = 0;
         for (Map.Entry<String, Integer> entry : frequencies.entrySet()) {
-            long identity = hashUtf16(entry.getKey());
+            if ((distinct++ & 1023) == 0) checkpoint.run();
+            long identity = hashUtf16(entry.getKey(), checkpoint);
             int weight = entry.getValue();
             for (int bit = 0; bit < Long.SIZE; bit++) {
                 votes[bit] += ((identity >>> bit) & 1L) == 0L ? -weight : weight;
@@ -79,6 +90,7 @@ public final class TextSignatures {
         for (int bit = 0; bit < Long.SIZE; bit++) {
             if (votes[bit] > 0) simHash |= 1L << bit;
         }
+        checkpoint.run();
         return new Signature(simHash, minima, tokens.size(), frequencies.size());
     }
 
@@ -104,7 +116,7 @@ public final class TextSignatures {
         return matches / (double) left.lanes();
     }
 
-    private static long hashUtf16(String text) {
+    private static long hashUtf16(String text, Runnable checkpoint) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             digest.update("m3-text-token-utf16-v1".getBytes(StandardCharsets.US_ASCII));
@@ -114,6 +126,7 @@ public final class TextSignatures {
             digest.update((byte) (length >>> 8));
             digest.update((byte) length);
             for (int i = 0; i < length; i++) {
+                if ((i & 4095) == 0) checkpoint.run();
                 char unit = text.charAt(i);
                 digest.update((byte) (unit >>> 8));
                 digest.update((byte) unit);

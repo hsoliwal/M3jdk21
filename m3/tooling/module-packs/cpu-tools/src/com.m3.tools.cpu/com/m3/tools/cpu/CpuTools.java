@@ -411,7 +411,7 @@ public final class CpuTools {
         Objects.requireNonNull(source, "source");
         ProgressMonitor progress = effective(monitor);
         progress.checkCancelled();
-        MultiLiteralSearch.Prepared search = MultiLiteralSearch.prepare(literals);
+        MultiLiteralSearch.Prepared search = MultiLiteralSearch.prepare(literals, progress::checkCancelled);
         MultiLiteralSearch.Result found = search.find(source.text(), maxHits, progress::checkCancelled);
         Canonical hash = new Canonical("m3-cpu-multi-literal-result-v1").text(Implementation.ROOT)
                 .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
@@ -459,7 +459,9 @@ public final class CpuTools {
         if (source.length() > MAX_SIGNATURE_SOURCE_UTF16) {
             throw new IllegalArgumentException("signature source UTF-16 budget");
         }
-        TextSignatures.Signature value = TextSignatures.compute(WordTokenizer.words(source.text()), lanes);
+        TextSignatures.Signature value = TextSignatures.compute(
+                WordTokenizer.words(source.text(), progress::checkCancelled), lanes,
+                progress::checkCancelled);
         progress.checkCancelled();
         Canonical hash = new Canonical("m3-cpu-text-signature-result-v1").text(Implementation.ROOT)
                 .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())

@@ -76,13 +76,14 @@ public final class MultiLiteralSearch {
         private final int[] terminalIds;
         private final String sha256;
 
-        private Prepared(String[] patterns, List<Node> states) {
+        private Prepared(String[] patterns, List<Node> states, Runnable checkpoint) {
             this.patterns = patterns;
             failure = new int[states.size()];
             outputLinks = new int[states.size()];
             edgeStarts = new int[states.size() + 1];
             terminalStarts = new int[states.size() + 1];
             for (int i = 0; i < states.size(); i++) {
+                if ((i & 4095) == 0) checkpoint.run();
                 Node node = states.get(i);
                 failure[i] = node.fail;
                 outputLinks[i] = node.outputLink;
@@ -93,6 +94,7 @@ public final class MultiLiteralSearch {
             edgeTargets = new int[edgeKeys.length];
             terminalIds = new int[terminalStarts[states.size()]];
             for (int i = 0; i < states.size(); i++) {
+                if ((i & 4095) == 0) checkpoint.run();
                 Node node = states.get(i);
                 int cursor = edgeStarts[i];
                 for (Map.Entry<Character, Integer> edge : node.edges.entrySet()) {
@@ -106,9 +108,14 @@ public final class MultiLiteralSearch {
             MessageDigest hash = digest();
             number(hash, patterns.length);
             for (String pattern : patterns) {
+                checkpoint.run();
                 number(hash, pattern.length());
-                for (int i = 0; i < pattern.length(); i++) number(hash, pattern.charAt(i));
+                for (int i = 0; i < pattern.length(); i++) {
+                    if ((i & 4095) == 0) checkpoint.run();
+                    number(hash, pattern.charAt(i));
+                }
             }
+            checkpoint.run();
             sha256 = HexFormat.of().formatHex(hash.digest());
         }
 
@@ -173,13 +180,21 @@ public final class MultiLiteralSearch {
     }
 
     public static Prepared prepare(List<String> literals) {
+        return prepare(literals, () -> { });
+    }
+
+    /** The checkpoint also covers trie assembly, failure links, and plan hashing. */
+    public static Prepared prepare(List<String> literals, Runnable checkpoint) {
         Objects.requireNonNull(literals, "literals");
+        Objects.requireNonNull(checkpoint, "checkpoint");
         if (literals.size() > MAX_PATTERNS) throw new IllegalArgumentException("pattern count budget");
+        checkpoint.run();
         String[] patterns = new String[literals.size()];
         List<Node> states = new ArrayList<>();
         states.add(new Node());
         int totalUnits = 0;
         for (int id = 0; id < patterns.length; id++) {
+            if ((id & 255) == 0) checkpoint.run();
             String literal = Objects.requireNonNull(literals.get(id), "literal");
             if (literal.isEmpty()) throw new IllegalArgumentException("empty literal");
             totalUnits = Math.addExact(totalUnits, literal.length());
@@ -187,6 +202,7 @@ public final class MultiLiteralSearch {
             patterns[id] = literal;
             int state = 0;
             for (int i = 0; i < literal.length(); i++) {
+                if ((i & 4095) == 0) checkpoint.run();
                 char unit = literal.charAt(i);
                 Integer target = states.get(state).edges.get(unit);
                 if (target == null) {
@@ -201,7 +217,9 @@ public final class MultiLiteralSearch {
         }
         ArrayDeque<Integer> queue = new ArrayDeque<>();
         for (int child : states.get(0).edges.values()) queue.addLast(child);
+        int visited = 0;
         while (!queue.isEmpty()) {
+            if ((visited++ & 4095) == 0) checkpoint.run();
             int state = queue.removeFirst();
             Node parent = states.get(state);
             for (Map.Entry<Character, Integer> edge : parent.edges.entrySet()) {
@@ -220,7 +238,8 @@ public final class MultiLiteralSearch {
                 queue.addLast(child);
             }
         }
-        return new Prepared(patterns, states);
+        checkpoint.run();
+        return new Prepared(patterns, states, checkpoint);
     }
 
     private static MessageDigest digest() {

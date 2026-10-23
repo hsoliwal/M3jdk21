@@ -181,6 +181,16 @@ public final class M3DonorToolsTest {
         check(duplicates.find("aba\ud83d\ude00aba", 100).hits().equals(expected), "duplicate suffix and split surrogate");
         check(duplicates.sha256().equals(MultiLiteralSearch.prepare(
                 List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00")).sha256()), "plan SHA replay");
+        check(duplicates.sha256().equals(MultiLiteralSearch.prepare(
+                List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"), () -> { }).sha256()),
+                "checkpointed plan preserves exact automaton fingerprint");
+        int[] preparationChecks = {0};
+        rejects(IllegalStateException.class, () -> MultiLiteralSearch.prepare(
+                List.of("x".repeat(12_000)), () -> {
+                    if (++preparationChecks[0] == 5) throw new IllegalStateException("cancel during trie construction");
+                }));
+        check(preparationChecks[0] == 5, "mid-construction checkpoint executes");
+        rejects(NullPointerException.class, () -> MultiLiteralSearch.prepare(List.of("a"), null));
         rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(List.of("")));
         rejects(NullPointerException.class, () -> MultiLiteralSearch.prepare(Arrays.asList("a", null)));
         rejects(IllegalArgumentException.class, () -> duplicates.find("a", -1));
@@ -224,6 +234,18 @@ public final class M3DonorToolsTest {
         }
 
         rejects(IllegalArgumentException.class, () -> TextSignatures.compute(List.of("a"), 0));
+        rejects(NullPointerException.class, () -> TextSignatures.compute(List.of("a"), 4, null));
+        int[] hashingChecks = {0};
+        rejects(IllegalStateException.class, () -> TextSignatures.compute(
+                List.of("x".repeat(12_000)), 4, () -> {
+                    if (++hashingChecks[0] == 5) throw new IllegalStateException("cancel during SHA-256");
+                }));
+        check(hashingChecks[0] == 5, "mid-token UTF-16 hashing checkpoint executes");
+        int[] tokenizerChecks = {0};
+        check(WordTokenizer.words("Hello, 42 world", () -> tokenizerChecks[0]++)
+                .equals(WordTokenizer.words("Hello, 42 world")) && tokenizerChecks[0] >= 3,
+                "tokenizer checkpoint preserves BreakIterator semantics");
+        rejects(NullPointerException.class, () -> WordTokenizer.words("ok", null));
         rejects(IllegalArgumentException.class, () -> TextSignatures.compute(List.of("a"), 129));
         rejects(IllegalArgumentException.class, () -> TextSignatures.compute(
                 java.util.Collections.nCopies(TextSignatures.MAX_TOKENS + 1, "a"), 1));

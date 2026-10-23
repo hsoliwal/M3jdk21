@@ -11,15 +11,24 @@ import java.util.Objects;
 public final class WordTokenizer {
     private WordTokenizer() { }
     public static List<String> words(String text) {
+        return words(text, () -> { });
+    }
+    /** Exact JDK BreakIterator word semantics with cooperative boundary checkpoints. */
+    public static List<String> words(String text, Runnable checkpoint) {
         Objects.requireNonNull(text);
+        Objects.requireNonNull(checkpoint, "checkpoint");
+        checkpoint.run();
         BreakIterator iterator = BreakIterator.getWordInstance(Locale.ROOT);
         iterator.setText(text);
         List<String> result = new ArrayList<>();
         int start = iterator.first();
+        int boundaries = 0;
         for (int end = iterator.next(); end != BreakIterator.DONE; start = end, end = iterator.next()) {
+            if ((boundaries++ & 1023) == 0) checkpoint.run();
             String span = text.substring(start, end);
             if (span.codePoints().anyMatch(Character::isLetterOrDigit)) result.add(span);
         }
+        checkpoint.run();
         return List.copyOf(result);
     }
     public static void main(String[] args) {
