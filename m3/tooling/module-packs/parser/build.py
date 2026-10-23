@@ -44,6 +44,7 @@ CONTRACTS = (
     ("jdk.m3.parser.test.M3ASTIndexProjectionContract", "M3_AST_INDEX_PROJECTION_PASS"),
     ("jdk.m3.parser.test.M3JavacTreeViewContract", "M3_JAVAC_TREE_VIEW_PASS"),
     ("jdk.m3.parser.test.M3JavacFactImageContract", "M3_JAVAC_FACT_IMAGE_PASS"),
+    ("jdk.m3.parser.test.M3CulpritsContract", "M3_CULPRITS_PASS"),
     ("jdk.m3.parser.test.M3FileInputContract", "M3_FILE_INPUT_PASS"),
 )
 COMPILER_CONTRACTS = (("M3ASTProjectionStateTest", "M3_AST_PROJECTION_STATE_PASS"),)

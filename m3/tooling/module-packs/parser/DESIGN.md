@@ -131,3 +131,13 @@ the original event cache. Analyzers (lint, clustering, facts) read the index lan
 them builds another tree. The compiletime port's `com.m3.compiletime.ast.M3AST` wrapper over
 `MIndexASTDocument` is a separate owner with its own atom pool. These files may be similar.
 Please confirm via hash or diff before any merge of that owner into this module.
+
+## Culprit lanes (2026-10-23)
+
+`M3Culprits.scan(M3ASTIndex, Limits)` evaluates the M3 hard limits as lane queries over one
+JAVAC-domain index: loops, methods and top-level classes over their line limits, `return null`,
+`System.out`/`System.err`, magic numbers and floating strings, with the same constant and
+message exclusions the Synexia multipass marks and the recipe compiler's lint apply. No javac
+tree, second parser or OpenRewrite LST is touched; the result is two primitive lanes (occurrence
+row, culprit ordinal). A comment mark written by the OpenRewrite recipe and a finding produced
+here name the same site, so the analyzer no longer needs its own tree.
