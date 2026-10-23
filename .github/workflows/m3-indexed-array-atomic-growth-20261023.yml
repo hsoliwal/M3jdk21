@@ -56,12 +56,17 @@ jobs:
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/m3-atomic-growth"
-          mkdir -p "$out/patch" "$out/test"
+          mkdir -p "$out/patch" "$out/test" "$out/src/jdk/internal/m3"
+          # Copy only the two SHA-audited original JDK sources into an isolated
+          # patch input. The full JDK source root would pull unrelated JDK
+          # sources into javac and fail strict lint for out-of-scope code.
+          cp src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java "$out/src/jdk/internal/m3/"
+          cp src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java "$out/src/jdk/internal/m3/"
           javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
-            --patch-module java.base=src/java.base/share/classes \
+            --patch-module java.base="$out/src" \
             -d "$out/patch" \
-            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java \
-            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+            "$out/src/jdk/internal/m3/M3IndexedArray.java" \
+            "$out/src/jdk/internal/m3/M3IndexedView.java"
       - name: Compile original 21-site fault injection and existing indexed view oracles
         shell: bash
         run: |
