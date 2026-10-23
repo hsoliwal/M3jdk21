@@ -4,131 +4,69 @@ package com.m3.file;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
- * The M3 file entry: a thin facade over one {@link M3FileTree} row, and the read boundary over the
- * caller's original NIO Path/provider.
+ * Thin, stateless read boundary over the caller's original NIO Path/provider.
  *
- * <p>Tree entries come only from {@link M3FileTree#file(int)}; they hold {@code (tree, id)} and build
- * their {@link Path} lazily from the name lanes. Identity is the row, not the instance: the tree may
- * drop and recreate facades at will ({@link M3FileResidency}). {@link #of(Path)} keeps the original
- * detached edge: no tree, no interned path table, no retained descriptor. Metadata is a point-in-time
- * observation. Symbolic links are never followed by the file-open operations. Reads go through the
- * tree's {@link M3FileSource}; for archive entries {@link #path()} is a logical path below the archive
- * file (use the read methods here, not {@code Files}).</p>
- *
- * <p>Detached read edge adapted from Synexia MIndexResourceAccess file-edge semantics.</p>
+ * <p>Adapted from Synexia MIndexResourceAccess file-edge semantics. No new
+ * filesystem, directory tree, interned path table or retained file descriptor is
+ * created. Metadata is a point-in-time observation and is not an immutable view
+ * of an externally changing filesystem. Symbolic links are never followed by
+ * the file-open operations.</p>
  */
 public final class M3File {
-    private final M3FileTree tree;
-    private final int id;
-    private Path path;
+    private final Path path;
 
     private M3File(Path path) {
-        this.tree = M3FileTree.detached();
-        this.id = -1;
         this.path = Objects.requireNonNull(path, "path");
     }
 
-    M3File(M3FileTree tree, int id) {
-        this.tree = tree;
-        this.id = id;
-    }
-
-    /** Detached edge over a caller-owned Path; lane accessors are unavailable on it. */
     public static M3File of(Path path) { return new M3File(path); }
 
-    /** Original provider-owned Path for a detached file; {@code root.resolve(names)} for a tree entry (memoised). */
-    public Path path() {
-        Path current = path;
-        if (current == null) {
-            current = tree.path(id);
-            path = current;
-        }
-        return current;
-    }
+    /** Original provider-owned Path, not an invented global file identifier. */
+    public Path path() { return path; }
 
-    /** Same as {@link #path()}; named for tree-entry callers. */
-    public Path toPath() { return path(); }
-
-    /** Row id, or {@code -1} for a detached file. */
-    public int id() { return id; }
-
-    public boolean isTreeEntry() { return id >= 0; }
-
-    /** Owning tree; {@link M3FileTree#detached()} for a detached file. */
-    public M3FileTree tree() { return tree; }
-
-    public String name() { return tree.name(entryId()); }
-
-    public Optional<M3File> parent() {
-        int parentId = tree.parent(entryId());
-        return parentId < 0 ? Optional.empty() : Optional.of(tree.file(parentId));
-    }
-
-    public int depth() { return tree.depth(entryId()); }
-
-    public int childCount() { return tree.childCount(entryId()); }
-
-    public IntStream childIds() { return tree.childIds(entryId()); }
-
-    public Stream<M3File> children() { return childIds().mapToObj(tree::file); }
-
-    public boolean isDirectory() { return tree.flag(M3FileFlag.DIR, entryId()); }
-
-    public boolean isSymbolicLink() { return tree.flag(M3FileFlag.LINK, entryId()); }
-
-    public boolean isRegularFile() { return tree.flag(M3FileFlag.REGULAR, entryId()); }
-
-    public M3FileKind kind() { return tree.kind(entryId()); }
-
-    /** Interned lower-case extension, {@code ""} for none and for directories. */
-    public String type() { return tree.type(entryId()); }
-
-    public int typeId() { return tree.typeId(entryId()); }
-
-    /** Walk over this entry and its descendants. */
-    public M3FileWalk walk() { return tree.walk(entryId()); }
-
-    public boolean isHidden() { return tree.flag(M3FileFlag.HIDDEN, entryId()); }
-
-    public boolean flag(M3FileFlag flag) { return tree.flag(flag, entryId()); }
-
-    /** Why the last observation of this entry failed; {@link M3FileError#NONE} otherwise. */
-    public M3FileError error() { return tree.error(entryId()); }
-
-    /** Byte length observed at scan time; {@code -1} unknown. */
-    public long size() { return tree.size(entryId()); }
-
-    /** Last-modified epoch millis observed at scan time; {@code Long.MIN_VALUE} unknown. */
-    public long lastModified() { return tree.mtime(entryId()); }
-
-    /**
-     * Metadata from the tree's {@link M3FileSource}: for the file system every invocation refreshes
-     * with NOFOLLOW_LINKS; archive entries report their central-directory observation.
-     */
+    /** Every invocation refreshes metadata with NOFOLLOW_LINKS. */
     public Metadata metadata() throws IOException {
-        return tree.source().metadata(this);
+        BasicFileAttributes attributes = Files.readAttributes(
+                path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
+        return new Metadata(attributes.isRegularFile(), attributes.isDirectory(),
+                attributes.isSymbolicLink(), attributes.size(),
+                attributes.lastModifiedTime());
     }
 
-    /** Opens a caller-owned channel; the caller MUST close it. Archive entries have none. */
+    /** Opens a caller-owned channel; the caller MUST close it. */
     public SeekableByteChannel openReadChannel() throws IOException {
         requireRegular();
-        return tree.source().openChannel(this);
+        return Files.newByteChannel(path, StandardOpenOption.READ, LinkOption.NOFOLLOW_LINKS);
     }
 
-    /** Caller owns the returned stream and closes the underlying channel or entry stream. */
+    /** Caller owns the returned stream and closes the underlying channel. */
     public InputStream openInputStream() throws IOException {
-        requireRegular();
-        return tree.source().openContent(this);
+        return Channels.newInputStream(openReadChannel());
+    }
+
+    /**
+     * Opens one monitored stream whose shadows advance only when the primary stream is read.
+     *
+     * <p>Observers are invoked in declaration order and receive borrowed buffer ranges only.
+     * No observer causes a second file read.</p>
+     */
+    public InputStream openInputStream(
+            M3ProgressMonitor progress, M3StreamObserver... observers) throws IOException {
+        M3ProgressMonitor monitor = Objects.requireNonNull(progress, "progress");
+        return new M3ShadowInputStream(openInputStream(), monitor, compose(observers));
     }
 
     /**
@@ -136,60 +74,109 @@ public final class M3File {
      * stream is checked again to handle concurrent file growth or replacement.
      */
     public byte[] readAllBytes(int maxBytes) throws IOException {
+        return readAllBytes(maxBytes, M3ProgressMonitor.none());
+    }
+
+    public byte[] readAllBytes(
+            int maxBytes, M3ProgressMonitor progress, M3StreamObserver... observers)
+            throws IOException {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
-        if (metadata().size() > maxBytes) {
-            throw new M3FileLimitException("resource exceeds configured read limit");
+        Metadata before = metadata();
+        if (before.size() > maxBytes) {
+            throw new IOException("resource exceeds configured read limit");
         }
-        try (InputStream input = openInputStream()) {
+        try (InputStream input = openInputStream(progress, observers)) {
             byte[] data = input.readNBytes(maxBytes);
             if (input.read() != -1) {
-                throw new M3FileLimitException("resource exceeds configured read limit");
+                throw new IOException("resource exceeds configured read limit");
             }
             return data;
         }
     }
 
-    /** {@link #openInputStream(long, M3FileProgress, M3FileShadow...)} without a byte limit. */
-    public M3FileShadowInputStream openInputStream(M3FileProgress progress, M3FileShadow... shadows)
-            throws IOException {
-        return openInputStream(Long.MAX_VALUE, progress, shadows);
+    /** Cheap metadata-only observation for change detection. */
+    public M3FileSnapshot snapshot() throws IOException {
+        return new M3FileSnapshot(metadata(), null);
     }
 
     /**
-     * Caller-closed input stream with a sub-progress monitor (units = bytes, total = observed size) and
-     * shadows that move as it is read; links are not followed, the limit is enforced while streaming.
+     * Exact-content observation. SHA-256 is computed as a shadow of one sequential read and no file
+     * payload is retained. Metadata is checked before and after hashing; a visible metadata change
+     * rejects the observation rather than publishing a mixed-generation snapshot.
      */
-    public M3FileShadowInputStream openInputStream(long maxBytes, M3FileProgress progress, M3FileShadow... shadows)
-            throws IOException {
-        if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
-        Metadata observed = metadata();
-        if (!observed.regularFile()) throw new IOException("resource is not a regular file");
-        if (observed.size() > maxBytes) throw new M3FileLimitException("resource exceeds configured read limit");
-        progress.begin(path().toString(), observed.size());
-        return new M3FileShadowInputStream(tree.source().openContent(this), maxBytes, progress, shadows);
+    public M3FileSnapshot snapshotWithSha256(M3ProgressMonitor progress) throws IOException {
+        return indexedSnapshot(progress).source();
     }
 
     /**
-     * Caller-closed output stream (create or truncate, links not followed) with a sub-progress monitor
-     * and shadows that move as it is written; read-only sources refuse. Tree lanes are a scan-time
-     * observation and do not change.
+     * Drives source hashing and all supplied parser/index fact observers from one physical read.
+     *
+     * <p>Observers may maintain arbitrary incremental parser/index state but publish only a
+     * fixed-width fact receipt back to this module. M3File therefore never owns M3AST, regex,
+     * JSON, binary-format or index-specific runtime objects.</p>
      */
-    public M3FileShadowOutputStream openOutputStream(M3FileProgress progress, M3FileShadow... shadows)
-            throws IOException {
-        OutputStream output = tree.source().openOutput(this);
-        progress.begin(path().toString(), 0);
-        return new M3FileShadowOutputStream(output, Long.MAX_VALUE, progress, shadows);
-    }
+    public M3FileIndexedSnapshot indexedSnapshot(
+            M3ProgressMonitor progress, M3FileFactObserver... observers) throws IOException {
+        Metadata before = metadata();
+        if (!before.regularFile()) throw new IOException("resource is not a regular file");
 
-    /** One read pass that only feeds {@code shadows}; returns the bytes read. */
-    public long observe(long maxBytes, M3FileProgress progress, M3FileShadow... shadows) throws IOException {
-        try (M3FileShadowInputStream input = openInputStream(maxBytes, progress, shadows)) {
-            byte[] buffer = new byte[8192];
-            for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
-                // shadows consume the block
+        M3FileFactObserver[] checked =
+                Objects.requireNonNull(observers, "observers").clone();
+        MessageDigest sourceDigest = sha256();
+        M3StreamObserver[] shadows = new M3StreamObserver[checked.length + 1];
+        shadows[0] = sourceDigest::update;
+        for (int index = 0; index < checked.length; index++) {
+            shadows[index + 1] = Objects.requireNonNull(checked[index], "fact observer");
+        }
+
+        try (InputStream input = openInputStream(progress, shadows)) {
+            byte[] buffer = new byte[64 * 1024];
+            while (input.read(buffer) >= 0) {
+                // The shadows perform all layered work; this loop only drives the primary stream.
             }
-            progress.done();
-            return input.count();
+        }
+
+        Metadata after = metadata();
+        if (!before.equals(after)) {
+            throw new IOException("resource metadata changed while indexing");
+        }
+
+        M3FileFact[] facts = new M3FileFact[checked.length];
+        for (int index = 0; index < checked.length; index++) {
+            M3FileFact fact = Objects.requireNonNull(checked[index].fact(), "fact");
+            if (!checked[index].factName().equals(fact.name())) {
+                throw new IllegalStateException("fact observer name changed after publication");
+            }
+            facts[index] = fact;
+        }
+        return new M3FileIndexedSnapshot(
+                new M3FileSnapshot(after, sourceDigest.digest()),
+                M3FileFacts.of(facts));
+    }
+
+    public M3FileDelta deltaSince(
+            M3FileSnapshot before, boolean exactContent, M3ProgressMonitor progress)
+            throws IOException {
+        M3FileSnapshot after =
+                exactContent ? snapshotWithSha256(progress) : snapshot();
+        return Objects.requireNonNull(before, "before").deltaTo(after);
+    }
+
+    private static M3StreamObserver compose(M3StreamObserver[] observers) {
+        M3StreamObserver[] checked = Objects.requireNonNull(observers, "observers").clone();
+        if (checked.length == 0) return (bytes, offset, length) -> { };
+        M3StreamObserver result = Objects.requireNonNull(checked[0], "observer");
+        for (int index = 1; index < checked.length; index++) {
+            result = result.andThen(Objects.requireNonNull(checked[index], "observer"));
+        }
+        return result;
+    }
+
+    private static MessageDigest sha256() {
+        try {
+            return MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
         }
     }
 
@@ -197,28 +184,6 @@ public final class M3File {
         if (!metadata().regularFile()) {
             throw new IOException("resource is not a regular file");
         }
-    }
-
-    private int entryId() {
-        if (id < 0) throw new IllegalStateException("detached M3File has no tree row: " + path);
-        return id;
-    }
-
-    /** Tree entries are equal by {@code (tree, id)}; detached files by Path. */
-    @Override
-    public boolean equals(Object other) {
-        return other instanceof M3File that && that.tree == tree && that.id == id
-                && (id >= 0 || that.path().equals(path()));
-    }
-
-    @Override
-    public int hashCode() {
-        return id >= 0 ? 31 * System.identityHashCode(tree) + id : path().hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return id >= 0 ? "M3File[" + id + ":" + name() + "]" : "M3File[" + path + "]";
     }
 
     public record Metadata(boolean regularFile, boolean directory,
