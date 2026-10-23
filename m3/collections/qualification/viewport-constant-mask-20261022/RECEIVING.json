@@ -1,0 +1,52 @@
+{
+  "schema": "M3_CONSTANT_MASK_NATIVE_RECEIVING_V1",
+  "product_parent": "6b56c1cf69b95b52581674484f2b4b82032fd2dc",
+  "canonical_commit": "b852de0cc4fff0dad7a56a5aaa22d4c4f961e558",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/viewport-constant-mask-20261022",
+  "canonical_dataset_tree": "46558eed75cd24eec993cbe6978369a1eeabf412",
+  "recipe": "com.synexia.m3jdk.ViewportConstantMask20261022",
+  "engine_git_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+  "target": "m3/collections/src/main/c/m3maskviewport.c",
+  "before_sha256": "96b93585d5a08ac719ed229850797173cb51598ee0dd818eaa74fab8c9eaae03",
+  "after_sha256": "58fc963e525064ba95997cfad38aff27813d58761db25695edb082ebf27a64fb",
+  "after_git_blob": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",
+  "received_bytes": "actual SDK Result compiled and exercised, not a manual target rewrite",
+  "fresh_qualification": {
+    "exit": 0,
+    "resumed": false,
+    "sdk_tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "sdk_results": 1,
+    "reapply_changes": 0,
+    "java_product_checks": 121831,
+    "jni_product_checks": 163640,
+    "modes": [
+      "normal",
+      "interpreted"
+    ],
+    "fault_candidate_cases": 7716,
+    "fault_baseline_cases": 8756,
+    "fault_digest": "6c3ed4454aec8b05",
+    "general_fault_cases_per_version": 5666
+  },
+  "fresh_raw_log_entries": 125,
+  "fresh_raw_log_sha256": "ab78646e5a177d9e01f54e0dc22ffecc37dfab15c235f8da8df589890eb51f2b",
+  "full_input_validation": "retained including contradictory-mask and empty-page queries",
+  "constant_state_read_elision": true,
+  "java_runtime_changed": false,
+  "jni_exports_changed": false,
+  "native_page_java_wired": false,
+  "naming_disposition": "existing native owner; no rename, public class promotion or naming-map change",
+  "installed_library_proof": "historical exact-source test retained in canonical RECEIPT.json; not rerun in fresh continuation",
+  "pending": [
+    "Java21 parser and Java-LST receiving",
+    "native-page Java wiring",
+    "complete filtered/sorted-provider suites",
+    "source-built JDK/HotSpot/jtreg",
+    "SWT/Nebula/GEF/RWT rendering and theme/language/IME/accessibility",
+    "cross-platform and representative resource qualification"
+  ],
+  "full_program_complete": false
+}

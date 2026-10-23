@@ -1,0 +1,105 @@
+{
+  "schema": "M3_NATIVE_VIEWPORT_PAGE_V1",
+  "date": "2026-10-22",
+  "canonical_parent": "5a0e2eaa2f1c5db1106db5068e614e2ff5e9fa2f",
+  "product_preimage": "5246250c4a33386f34abccd0e5c2b279e86a3560",
+  "targets": 7,
+  "existing_project_body_unchanged_from_previous_candidate": true,
+  "new_internal_jni_entry": "M3MaskViewportNative.projectPage",
+  "public_api_change": false,
+  "host_exit": 0,
+  "final_verifier_sha256": "d903f417429f842badffeed366efd779d148bb1eeee62037f6ea78a19f343b7f",
+  "raw_logs_sha256": "0e6403dc09716948ab819b001cefca524c413be73339ec2db59851b04e5de448",
+  "abi": {
+    "existing_descriptors_unchanged": true,
+    "existing_generated_prototypes_unchanged": true,
+    "existing_exports": [
+      "Java_com_m3_collections_M3MaskViewportNative_project"
+    ],
+    "additive_internal_export": "Java_com_m3_collections_M3MaskViewportNative_projectPage",
+    "new_internal_descriptor": "descriptor: ([I[IIIIIII[II)I",
+    "public_api_change": false
+  },
+  "observations": {
+    "java_page": "M3_NATIVE_PAGE_JAVA checks=14514 digest=52b77c772971ea98",
+    "jni_page": "M3_NATIVE_PAGE_JNI checks=29027 digest=d4a2bd4306d04227",
+    "native_budget": "PAGE_BUDGET rows=1000000 dense=0 skip=142700 limit=64 returned=64 scratch_bytes=256 reads=15634 writes=1 max_region=128\nPAGE_BUDGET rows=1000000 dense=1 skip=999900 limit=64 returned=64 scratch_bytes=256 reads=15627 writes=1 max_region=128\nPAGE_BUDGET_PASS checks=446661 cases=3933",
+    "legacy_binary": "M3_NATIVE_PAGE_LEGACY_ABI_PASS checks=8",
+    "legacy_clients": "M3_VIEWPORT_PROJECTION_PASS checks=108891 native=true digest=b02020cc25dc5c63",
+    "original_java": "M3_VIEWPORT_PROJECTION_PASS checks=72591 native=false digest=6c8c89cc84cae62c",
+    "original_jni": "M3_VIEWPORT_PROJECTION_PASS checks=108891 native=true digest=b02020cc25dc5c63",
+    "sort_java": "M3_INDEX_SORT_VIEWPORT_JAVA checks=36424 digest=942cc04fc49a2249",
+    "sort_jni": "M3_INDEX_SORT_VIEWPORT_JNI checks=37384 digest=39a505907985bcf3"
+  },
+  "execution_modes": [
+    "mixed",
+    "interpreter"
+  ],
+  "controls": [
+    "javac --release 21 -Xlint:all -Werror",
+    "GCC/Clang strict C17 lint",
+    "real JVM -Xcheck:jni",
+    "fatal UBSan",
+    "standalone allocator/read fixture ASan+UBSan with leak detection",
+    "64 MiB SerialGC"
+  ],
+  "runtime_stderr": "EMPTY",
+  "maven_openrewrite_sdk": "NOT_RUN",
+  "actual_sdk_product_receiving": "NOT_RUN",
+  "runtime_product_sources_changed": false,
+  "whole_live_wrapper_provider_suite": "NOT_RUN",
+  "widget_gpu_theme_language_integration": "NOT_RUN",
+  "source_built_jdk_hotspot_jtreg": "NOT_RUN",
+  "performance_claim": "NO_THROUGHPUT_CLAIM; validation still O(input window); native output allocation bounded by returned page",
+  "coverage_note": "Repeated finite corpora overlap; no summed coverage or universal equivalence claim",
+  "source_targets": [
+    {
+      "path": "m3/collections/src/main/c/m3maskviewport.c",
+      "pre": "53ee3427813810010a5e2eae31fd79e53ed53915d1bda5cdebdfd78225b3cf4d",
+      "post": "6b531f17c19d0c996c18c23921930cb5de1c34113faff88470bb116234c0fe2a",
+      "blob": "b678ab3ff386c419575c0bcaaf5700a722942b33"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexSort.java",
+      "pre": "6f9da9bbb5d65388bcb8efb1dfc80525c847a4cfbd9286b7baf514a6f2249ad4",
+      "post": "3423c2d41106a2689bfa93373ac7ed41c4472e7cc7f3d97c83224e83c43c7667",
+      "blob": "2561101df3ba8c8c82825424ac104e7d376073f9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java",
+      "pre": "5af5cb6fed85fa0803384ec4374be4b96659844bd547788be8805bbfe942635f",
+      "post": "3a3c3af8b16a1f66529adbcac74b74afbbe56fd211e23d799f4988af60991123",
+      "blob": "02c2ad689d91adf11be3ea224d02ece1fdcf8f07"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java",
+      "pre": "36158dcb03adc764bddfab16172cb864d926518a304704fcea390040a7cf4069",
+      "post": "33fbeda5854327ab9b1dadf86a5b682a28662818b85687cf8941134035689b53",
+      "blob": "c35d1a7c72a579a449fd625792ce43bcc1188e4d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexSortViewportContract.java",
+      "pre": "ABSENT",
+      "post": "29017f5f626c88233b119cb1b44a7986f0b377f6ca7d2cddfc9b0d532276d923",
+      "blob": "d93740de2e4a626bf1ce2171ebf8e3eeedb976ff"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportNativePageContract.java",
+      "pre": "ABSENT",
+      "post": "cfc1556b9d3423b7d5e4375410fe2296fc7f88e397f6b4151fa00ef46f929450",
+      "blob": "f86a00921efda5f527ce28ce85c9fe2de1bcdc3e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportProjectionContract.java",
+      "pre": "ABSENT",
+      "post": "f6c6e43d5cf805580fe531b007398e4cdf5dc16ca315c9390104df719843d044",
+      "blob": "36f3b42938e232bb672461a97dcc1091510122d8"
+    }
+  ],
+  "completion": false,
+  "canonical_commit": "073aeea39f7561a4f050f895f5a6a6834d4a1ae5",
+  "canonical_pr": 12855,
+  "product_pr": 1759,
+  "custody_only": true,
+  "canonical_raw_logs_git_blob": "ca9e9d632aca256c8ad1e5ac226a23287cb2834f"
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "M3_PROJECT_SMALL_RECEIVER_V1",
+  "product_parent": "7fb4de24b1e85cc5cc11911565e277ac929bdf1a",
+  "target": "m3/collections/src/main/c/m3maskviewport.c",
+  "before_sha256": "9a6c1f305ad3cb00068f846bdd0d85e8c1201bde75db2a77ad3b12a1900350e1",
+  "after_sha256": "96b93585d5a08ac719ed229850797173cb51598ee0dd818eaa74fab8c9eaae03",
+  "after_git_blob": "a934768a587c52f52d56ac2da0e166e8d416eb0d",
+  "recipe": "com.synexia.m3jdk.ViewportProjectSmall20261022",
+  "engine_git_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+  "sdk_tests": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "names": [
+      "exactSourceAndEngineSeals",
+      "namedReplayOrderAndFixedPoint",
+      "driftMissingDuplicateRefuse",
+      "postScanMutationRefuses",
+      "corruptTemplateRefusesThenRecovers",
+      "retainActualSdkResult",
+      "receiveExactProductPreimageAndFixedPoint"
+    ]
+  },
+  "sdk_results": 1,
+  "receiver_changes": 1,
+  "fixed_point_changes": 0,
+  "received_output_compiled_and_run": true,
+  "runtime_java_changed": false,
+  "jni_descriptors_and_exports_changed": false,
+  "helpers_and_projectPage_source_unchanged": true,
+  "observations": {
+    "product_java": "M3_MASK_VIEWPORT_PAGE_PASS checks=121831 existingJni=false",
+    "product_jni": "M3_MASK_VIEWPORT_PAGE_PASS checks=163640 existingJni=true",
+    "projection_java": "M3_VIEWPORT_PROJECTION_PASS checks=72591 native=false digest=6c8c89cc84cae62c",
+    "projection_jni": "M3_VIEWPORT_PROJECTION_PASS checks=108891 native=true digest=b02020cc25dc5c63",
+    "sort_java": "M3_INDEX_SORT_VIEWPORT_JAVA checks=36424 digest=942cc04fc49a2249",
+    "sort_jni": "M3_INDEX_SORT_VIEWPORT_JNI checks=37384 digest=39a505907985bcf3",
+    "budget_baseline": "PROJECT_BUDGET rows=1000000 selected=64 optimized=0 heap_bytes=256 reads=31252 writes=1 max_region=128\nPROJECT_BUDGET rows=1000000 selected=129 optimized=0 heap_bytes=516 reads=31252 writes=1 max_region=128\nPROJECT_BUDGET_PASS checks=7654560 cases=7829\n",
+    "budget_candidate": "PROJECT_BUDGET rows=1000000 selected=64 optimized=1 heap_bytes=0 reads=15626 writes=1 max_region=128\nPROJECT_BUDGET rows=1000000 selected=129 optimized=1 heap_bytes=516 reads=31252 writes=1 max_region=128\nPROJECT_BUDGET_PASS checks=5272701 cases=5666\n"
+  },
+  "resource_probe": {
+    "input_rows": 1000000,
+    "selected_64": {
+      "heap_bytes_before": 256,
+      "heap_bytes_after": 0,
+      "region_reads_before": 31252,
+      "region_reads_after": 15626
+    },
+    "selected_129": {
+      "heap_bytes_both": 516,
+      "region_reads_both": 31252
+    },
+    "writebacks": 1,
+    "max_region_ints": 128,
+    "project_stack_frame_before": 1168,
+    "project_stack_frame_after": 1664,
+    "stack_environment": "GCC14.2 -O2 x86_64 fstack-usage; excludes callees and JVM",
+    "extra_declared_local_buffer_bytes": 512,
+    "throughput_total_process_memory_claim": false
+  },
+  "interruption": {
+    "outer_command_limit_seconds": 180,
+    "last_verified": "candidate mixed Java; candidate original page interpreter",
+    "interrupted": "candidate M3ViewportProjectionContract -Xint --java",
+    "partial_logs_retained": true,
+    "next": "java-tail -> jni-baseline -> jni-candidate -> budget",
+    "complete_uninterrupted_qualification_claimed": false
+  },
+  "source_input_seals_unchanged": 22,
+  "raw_log_entries": 91,
+  "raw_logs_sha256": "d09f8d17bae38a6b4fc0d29ca277395f3e10b2907f17d5df6532e231207386ca",
+  "java_parser_recovery": "BLOCKED missing Java21 provider and Lombok; no stub or text Java substitution",
+  "complete_java_lst_receiving": "NOT_RUN",
+  "complete_jdk_widget_provider_programme": "NOT_RUN",
+  "completion": false,
+  "coverage_note": "finite repeated corpora; no sum as independent coverage; fewer fault sites because reads decrease",
+  "canonical_commit": "3d8ba758c204201e3145504fe8b825b009ef1908",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/viewport-project-small-20261022"
+}
