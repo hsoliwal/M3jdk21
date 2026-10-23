@@ -1,0 +1,156 @@
+{
+  "status": "PASS",
+  "image": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/sdk-image-v3",
+  "stage": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/qualification/final-sdk-v3",
+  "checks": {
+    "final_manifest_sealed": true,
+    "final_sdk_receipt_sealed": true,
+    "sdk-api_baseline_exact": true,
+    "sdk-api_previous_exact": true,
+    "sdk-M3ArrayifiedIndexContract_baseline_exact": true,
+    "sdk-M3ArrayifiedIndexContract_previous_exact": true,
+    "sdk-M3ArrayifiedIndexContract-native_baseline_exact": true,
+    "sdk-M3ArrayifiedIndexContract-native_previous_exact": true,
+    "sdk-M3RequiredExcludedWindowContract_baseline_exact": true,
+    "sdk-M3RequiredExcludedWindowContract_previous_exact": true,
+    "sdk-M3RequiredExcludedWindowRefinementContract_baseline_exact": true,
+    "sdk-M3RequiredExcludedWindowRefinementContract_previous_exact": true,
+    "sdk-M3LongBitmapFilteredSnapshotSelfTest_baseline_exact": true,
+    "sdk-M3LongBitmapFilteredSnapshotSelfTest_previous_exact": true,
+    "sdk-M3BitmapOrdinalSelectionSelfTest_baseline_exact": true,
+    "sdk-M3BitmapOrdinalSelectionSelfTest_previous_exact": true,
+    "sdk-M3BitmapOccurrenceRefinementProbe_baseline_exact": true,
+    "sdk-M3BitmapOccurrenceRefinementProbe_previous_exact": true,
+    "sdk-M3BitmapOccurrenceRefinementProbe-native_baseline_exact": true,
+    "sdk-M3BitmapOccurrenceRefinementProbe-native_previous_exact": true,
+    "protected_331_tests_unchanged": true,
+    "all_336_test_sources_identical": true,
+    "all_12_jni_headers_identical": true,
+    "only_index_owner_changed_in_sdk_main": true,
+    "final_sdk_main_exactly_matches_pass05": true,
+    "compiled_sdk_main_exactly_matches_pass05": true,
+    "keep_exact_m3_index_mask_compactor.c": true,
+    "keep_exact_M3LongBitmapFilteredSnapshot.java": true,
+    "complete_compile_census": true,
+    "strict_compile_diagnostics_empty": true,
+    "junit_found": true,
+    "junit_started": true,
+    "junit_successful": true,
+    "junit_skipped": true,
+    "junit_aborted": true,
+    "junit_failed": true,
+    "exact_12_gate_order": true,
+    "all_commands_successful_and_logs_sealed": true,
+    "all_jvm_gates_require_baseline_native_closure": true,
+    "all_emitted_target_hashes_match": true
+  },
+  "log_comparisons": [
+    {
+      "gate": "sdk-api",
+      "baseline_sha256": "3b303cdabf32e93e5105cc730f102183b3995357a8ef3681460fa995eb6ba83e",
+      "previous_pass05_sha256": "3b303cdabf32e93e5105cc730f102183b3995357a8ef3681460fa995eb6ba83e",
+      "final_sha256": "3b303cdabf32e93e5105cc730f102183b3995357a8ef3681460fa995eb6ba83e",
+      "baseline_equal": true,
+      "previous_equal": true
+    },
+    {
+      "gate": "sdk-M3ArrayifiedIndexContract",
+      "baseline_sha256": "d1633e65e6609538c560e6fd059b731cd3792f4acf265a21b2f4ac56a3c68666",
+      "previous_pass05_sha256": "d1633e65e6609538c560e6fd059b731cd3792f4acf265a21b2f4ac56a3c68666",
+      "final_sha256": "d1633e65e6609538c560e6fd059b731cd3792f4acf265a21b2f4ac56a3c68666",
+      "baseline_equal": true,
+      "previous_equal": true
+    },
+    {
+      "gate": "sdk-M3ArrayifiedIndexContract-native",
+      "baseline_sha256": "573815dd4620be6e5261a559c34b57f41948cfcebc4211fc8f94eadcaecf5aea",
+      "previous_pass05_sha256": "573815dd4620be6e5261a559c34b57f41948cfcebc4211fc8f94eadcaecf5aea",
+      "final_sha256": "573815dd4620be6e5261a559c34b57f41948cfcebc4211fc8f94eadcaecf5aea",
+      "baseline_equal": true,
+      "previous_equal": true
+    },
+    {
+      "gate": "sdk-M3RequiredExcludedWindowContract",
+      "baseline_sha256": "9dfa1b568759a6fe023b865e7d29c30de449eb8f6144af207ed950cde967ea70",
+      "previous_pass05_sha256": "9dfa1b568759a6fe023b865e7d29c30de449eb8f6144af207ed950cde967ea70",
+      "final_sha256": "9dfa1b568759a6fe023b865e7d29c30de449eb8f6144af207ed950cde967ea70",
+      "baseline_equal": true,
+      "previous_equal": true
+    },
+    {
+      "gate": "sdk-M3RequiredExcludedWindowRefinementContract",
+      "baseline_sha256": "8142c4a2c8b4dbd9f213775204930f89c0b38b3812d9daa38551b90d48d36a07",
+      "previous_pass05_sha256": "8142c4a2c8b4dbd9f213775204930f89c0b38b3812d9daa38551b90d48d36a07",
+      "final_sha256": "8142c4a2c8b4dbd9f213775204930f89c0b38b3812d9daa38551b90d48d36a07",
+      "baseline_equal": true,
+      "previous_equal": true
+    },
+    {
+      "gate": "sdk-M3LongBitmapFilteredSnapshotSelfTest",
+      "baseline_sha256": "4e5b2a142cd2686d0d868a6202446489bb18a2cfb024b1712d2813ea19c9876d",
+      "previous_pass05_sha256": "4e5b2a142cd2686d0d868a6202446489bb18a2cfb024b1712d2813ea19c9876d",
+      "final_sha256": "4e5b2a142cd2686d0d868a6202446489bb18a2cfb024b1712d2813ea19c9876d",
+      "baseline_equal": true,
+      "previous_equal": true
+    },
+    {
+      "gate": "sdk-M3BitmapOrdinalSelectionSelfTest",
+      "baseline_sha256": "cfc34ccbe22fd3037acea0b22afa5d79951bdf56f5fa7b380b2bb43a513051bf",
+      "previous_pass05_sha256": "cfc34ccbe22fd3037acea0b22afa5d79951bdf56f5fa7b380b2bb43a513051bf",
+      "final_sha256": "cfc34ccbe22fd3037acea0b22afa5d79951bdf56f5fa7b380b2bb43a513051bf",
+      "baseline_equal": true,
+      "previous_equal": true
+    },
+    {
+      "gate": "sdk-M3BitmapOccurrenceRefinementProbe",
+      "baseline_sha256": "b424415a8bdfb5a79da43aeedf0bf89a393b88df9cff9497be346dd86a3f3f97",
+      "previous_pass05_sha256": "b424415a8bdfb5a79da43aeedf0bf89a393b88df9cff9497be346dd86a3f3f97",
+      "final_sha256": "b424415a8bdfb5a79da43aeedf0bf89a393b88df9cff9497be346dd86a3f3f97",
+      "baseline_equal": true,
+      "previous_equal": true
+    },
+    {
+      "gate": "sdk-M3BitmapOccurrenceRefinementProbe-native",
+      "baseline_sha256": "e4398f48eab407e9a18e35fe0bf5b18f3c5cb71748bdcc6b98f6d11567fc40c1",
+      "previous_pass05_sha256": "e4398f48eab407e9a18e35fe0bf5b18f3c5cb71748bdcc6b98f6d11567fc40c1",
+      "final_sha256": "e4398f48eab407e9a18e35fe0bf5b18f3c5cb71748bdcc6b98f6d11567fc40c1",
+      "baseline_equal": true,
+      "previous_equal": true
+    }
+  ],
+  "junit_counts": {
+    "found": 578,
+    "started": 578,
+    "successful": 578,
+    "skipped": 0,
+    "aborted": 0,
+    "failed": 0
+  },
+  "sdk_main_changed_paths": [
+    "com/m3/collections/M3ArrayifiedIndexOps.java"
+  ],
+  "keep_owners": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "original_sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052",
+      "final_sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "original_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
+      "final_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d"
+    }
+  ],
+  "protected_test_snapshot_sha256": "99da061bf35d37c001c1f4b9bdaf6f14cc283c9271bef403379c70cb3a89cd15",
+  "all_test_snapshot_sha256": "9d107853c085db4d4e777cd67370c0858527ce46c874433339630a9f41430fec",
+  "jni_header_snapshot_sha256": "17b1466dfbc7214bcd95624b228ab08472d6e928678ea8c6c7d849f33821620a",
+  "sdk_main_snapshot_sha256": "2934095d034fb5b4f9308c030db50fba754d6fe457cdde73c954ee21d0a784dc",
+  "baseline_receipt_sha256": "4cacdb2f16c28c3cd5bf2f26e59b6b1131b8f44461658bfa8ec6e632e1bce06c",
+  "previous_pass05_receipt_sha256": "559435e1be57fc5ee3e1ad928815d37dd6e5dc9b0acb2d73bd5a72ba5e2cbbb2",
+  "final_receipt_sha256": "c001c80e6d93664d3fcb49adf030ba71f9d0b9f885f6eba0ef670f9698701d97",
+  "final_commands_sha256": "7aab60460d39cf2e433c2741a37bd458d7aa5e6547a46459c5f4e6ecd79094ad",
+  "image_seal_sha256": "5a86d32ebf909816b9e8774651c9320170175515315493c05fa43043c54e7271",
+  "native_baseline_receipt_sha256": "04159b3810292fb8ff3a87f5d633e5604328bd4f09c2ea87e38849310545b55f",
+  "comparison_adapter_sha256": "6d7bd5e65d311e4935e954a20f13d483449d2f147a9a8537b87cc9abb009b628",
+  "scope": "Complete selected SDK source/test closure, API descriptors, JNI headers and deterministic direct transcripts; no performance rerun or full-image/owning-reactor claim."
+}

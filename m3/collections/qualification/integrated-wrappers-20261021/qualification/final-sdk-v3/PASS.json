@@ -1,0 +1,7 @@
+{
+  "status": "FINAL_COMPONENT_PASS",
+  "lane": "sdk",
+  "image": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/sdk-image-v3",
+  "manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2",
+  "scope": "selected-source component qualification, not full current JDK image or owning Maven reactor"
+}

@@ -1,0 +1,175 @@
+{
+  "schema": "m3.integrated.collections.target-parent-verification.v1",
+  "status": "PASS",
+  "repository": "hsoliwal/M3jdk21",
+  "parent_commit": "d66bdbf3a8f870708a29d93d84c4a61fdebad911",
+  "parent_tree": "661c6739f70d5f992875b16a75263be83d5abd80",
+  "qualified_m3_pin": "33d2e6ae8048c436bd55b951d9f7dbfab2f3efcb",
+  "branch_base": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+  "qualified_pin_to_branch_base": [
+    {
+      "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+      "status": "modified"
+    }
+  ],
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+      "expected_before_sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+      "parent_blob": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+      "disposition": "MODIFY",
+      "matched": true
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java",
+      "expected_before_sha256": "24362173215883732a306e9bed08e76af35ac44bb343a2922a47e6e7c8826830",
+      "parent_blob": "628c877913904f3e6eb34d5bc5fb38c5ef5f774a",
+      "disposition": "MODIFY",
+      "matched": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "expected_before_sha256": "a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d",
+      "parent_blob": "2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66",
+      "disposition": "MODIFY",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "expected_before_sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052",
+      "parent_blob": "bedd442346de5b7dd9d5f1965c510950e0c45ea1",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayifiedIndexOps.java",
+      "expected_before_sha256": "42b3d760c9dfcf30eba72da193159e0ac6bd7ee06a3de292b132f49bd955ea77",
+      "parent_blob": "26c8f2fa2645d94fbf1b5561321b74b09dded877",
+      "disposition": "MODIFY",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "expected_before_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
+      "parent_blob": "385d800b0dff1eb7f437e9d7958602f81339aee3",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
+      "expected_before_sha256": "6eaccec5b5ccc41b39ba165c2b5c57768e84d964430a7c28fba0c5061d41ba04",
+      "parent_blob": "885f237a80cdd5997a852609fa60066d0f7d11c4",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "expected_before_sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
+      "parent_blob": "f464b17228ca22ed2e84bce15e510447c2347ff5",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "expected_before_sha256": "546bc46416b146a9a5c132c078dbb73683f27293892a38fea89131de16c85ab2",
+      "parent_blob": "bf58cc5e711383e05034193d7347b062490ab9c6",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "expected_before_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "parent_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+      "expected_before_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+      "parent_blob": "d0b389681ade738e97426d950b6291c746912cf0",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "expected_before_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "parent_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "expected_before_sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "parent_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "m3/native/include/m3_jni_core.h",
+      "expected_before_sha256": "0df5c1391c159a036620d0b03a1c67898be8351da5a173775ffd57e15d14933e",
+      "parent_blob": "a1bd5aab67eaed2db6fdc3851d85312f24bfc63d",
+      "disposition": "KEEP",
+      "matched": true
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3IndexAtomContract.java",
+      "expected_before_sha256": "ABSENT",
+      "parent_blob": null,
+      "disposition": "ADD",
+      "matched": true
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3IndexAtomResourceProbe.java",
+      "expected_before_sha256": "ABSENT",
+      "parent_blob": null,
+      "disposition": "ADD",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "expected_before_sha256": "ABSENT",
+      "parent_blob": null,
+      "disposition": "ADD",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_required_excluded_window_refinement.c",
+      "expected_before_sha256": "ABSENT",
+      "parent_blob": null,
+      "disposition": "ADD",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BitmapOccurrenceRefinementProbe.java",
+      "expected_before_sha256": "ABSENT",
+      "parent_blob": null,
+      "disposition": "ADD",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexContract.java",
+      "expected_before_sha256": "ABSENT",
+      "parent_blob": null,
+      "disposition": "ADD",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexContractTest.java",
+      "expected_before_sha256": "ABSENT",
+      "parent_blob": null,
+      "disposition": "ADD",
+      "matched": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexResourceProbe.java",
+      "expected_before_sha256": "ABSENT",
+      "parent_blob": null,
+      "disposition": "ADD",
+      "matched": true
+    }
+  ],
+  "publication_paths_checked": 70,
+  "metadata_new_slots_clear": true,
+  "docs_first_slots_exact": true,
+  "scope": "Exact parent Git tree identities and unchanged selected source/preimages; does not replace component tests or remaining full-product gates."
+}
