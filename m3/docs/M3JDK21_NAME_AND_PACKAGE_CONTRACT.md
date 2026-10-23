@@ -157,11 +157,15 @@ exclusively in the Synexia convergence workspace, currently under review in
 
 The target test checks package-private `java.lang.M3String` and the
 non-exported/non-opened `jdk.internal.mindex` implementation package,
-including qualified exports and runtime export overrides. It also inspects
-public/protected reflection signatures for `String`, `Class`,
-`ArrayList`, `HashMap`, `TreeMap`, `Pattern` and `Matcher`.
-No production class, serialized format, JNI symbol or JDK-facing method
-signature is modified by this receiver.
+including qualified exports and runtime export overrides. It inspects
+public/protected reflection signatures for 19 canonical JDK owners spanning
+String, Class, I/O streams, core collections and concurrent collections,
+regex and NIO file APIs. It also enumerates compiled classes through
+`java.base`'s `ModuleReader` and checks every top-level M3/MIndex/MatIndex
+type inside a module-exported or opened package without class initialization.
+Package visibility is checked against a single indexed set of exposed
+packages, not a repeated scan per class. No production class, serialized
+format, JNI symbol or JDK-facing method signature is modified by this receiver.
 
 Compile and run **against the actual M3JDK21 build image**, after
 configuration and jtreg acquisition:
