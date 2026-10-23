@@ -48,3 +48,28 @@ Open item: full image + jtreg + JNI regression suites and benchmarks are
 required before promoting the revised JDK implementation. Existing
 filtered/sorted collection wrappers and JNI viewport routines are independent
 qualification lanes, not automatically validated by this change.
+
+
+## Reproduced exact source-and-test qualification (2026-10-23)
+
+The selected source has Git blob
+`e6ca59d8ae7fba700765e670dd5ec7d8dd84bc8d`; the jtreg test source
+has blob `066eb1b6a636b38c56bc007d1a83eeb6793ddf40`.
+They were independently materialized byte-for-byte and compared to the
+repository Git hashes, then executed using OpenJDK `21.0.12.1`.
+
+```sh
+bash m3/collections/qualification/java-base-mask-20261023/verify.sh
+# M3CollectionMaskCompactorContract checks=2000865
+# PASS strict Java21 --patch-module kernel oracle; full M3JDK21 jtreg remains open
+```
+
+An exact preimage (`51ea3a72bb191afc250a58be964363bd5680467c`)
+was also compiled and run with the identical test: `2000865` checks passed.
+The canonical Synexia recipe was compiled with `--release 21 -Xlint:all -Werror`
+and executed against that preimage: `PLANNED`, `APPLIED`, `UNCHANGED`.
+Its generated SHA-256 is identical to this product source.
+
+The targeted GitHub Actions job remains a separate remote CI check.
+Neither a stock-JDK `--patch-module` test nor its CI equivalent is a
+source-built M3JDK21 image or full regression qualification.
