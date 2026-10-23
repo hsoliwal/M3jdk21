@@ -29,6 +29,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Source-sealed postimages and unchanged JNI source custody
+        run: |
+          python3 m3/collections/qualification/arraylist-dual-word-20261023/verify_receiver.py
+          python3 -m unittest discover \
+            -s m3/collections/qualification/arraylist-dual-word-20261023 \
+            -p 'test_verify_receiver.py' -v
       - name: Compile and install real M3 array substrate
         run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
       - name: Compile and test actual M3 collections module
