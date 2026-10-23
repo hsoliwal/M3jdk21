@@ -21,6 +21,7 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--jdk-home", type=Path, required=True)

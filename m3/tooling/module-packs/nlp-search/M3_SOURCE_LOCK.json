@@ -1,0 +1,14 @@
+{
+  "compiler-src/jdk.m3.search.compiler/jdk/m3/search/compiler/M3ASTSearch.java": "5bc9430b952089f2de980dff48859023ee524cf9f46b6a8f74d53ef0d3b7c3ff",
+  "compiler-src/jdk.m3.search.compiler/module-info.java": "3d9824739a7f60839eedda318fb4cde2d009fffbdd8dc5adad10b0674102c290",
+  "fixtures/src/test/java/M3ASTSearchChecks.java": "03881ca7ad91608330bc7f4721c53945e9bfe28ed0f1b9e5d2a2c7a1c576c448",
+  "fixtures/src/test/java/M3SourceSearchChecks.java": "a72c8fff35fc04763be548d1af19bb107bb96f34646ac7ea7b39c5a20927016e",
+  "fixtures/src/test/java/OpenNlpCompositeIntegrationChecks.java": "040bb64d9ef124055c8a4f7283f150c42313ee8b5319afc94b409cddb9187c85",
+  "fixtures/src/test/java/SyntheticModelsProbe.java": "aa7adf521a7e7a3fae7d602dc0fd712d8080083a075221ae0dec7345d71d0a47",
+  "fixtures/src/test/java/ToolsProbe.java": "715cb6fd86acf622ce69ae2fbbe3392b1e37ab54eb3f2018fb3f2f7d4d844e73",
+  "src/jdk.m3.search/jdk/m3/search/M3File.java": "8aac8a2357fd7c4d742f723b89ad9dfcac1f63a2af52062ae3a07312664f808a",
+  "src/jdk.m3.search/jdk/m3/search/M3FileSourceFacts.java": "90f1ae0e2dcbcfe1adaeeb8da719faffa108e3e126e51612e6a76b3957737bf6",
+  "src/jdk.m3.search/jdk/m3/search/M3Search.java": "74e4829f2b307eb556a33fa17d8143e09ca172481afc075d272b9128bfc074a7",
+  "src/jdk.m3.search/module-info.java": "5cf34f802dc4006b744789713722f37ebd221e98f66f0f29184baf4d5b4dbe65",
+  "src/org.apache.opennlp.tools/module-info.java": "8f6daaf624f5c6a5daaef081702d0df126a5f6338a63e012a4a80471c8aeb62a"
+}
