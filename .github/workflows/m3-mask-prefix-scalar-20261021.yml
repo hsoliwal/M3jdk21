@@ -1,0 +1,136 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 direct array-mask prefix and filtered/sorted view proof
+
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+      - 'test/jdk/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java'
+      - 'm3/qualification/mask-prefix-scalar-20261021/**'
+      - '.github/workflows/m3-mask-prefix-scalar-20261021.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  direct-java-base:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check source and exact patch contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -version
+          javac -version
+          git diff --check
+      - name: Execute direct M3JDK21 array-mask and sorted view contract regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/qualification/mask-prefix-scalar-20261021/verify.sh \
+            | tee "$RUNNER_TEMP/m3-mask-prefix-scalar.log"
+      - name: Refuse missing or skipped Java proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/m3-mask-prefix-scalar.log"
+          test -s "$receipt"
+          grep -q '^PASS M3JDK21 direct java.base mask-prefix checks=' "$receipt"
+          grep -q 'BootstrapViewsTest.*PASS' "$receipt"
+          grep -q 'CollectionViewsContract.*PASS' "$receipt"
+          test "$(grep -c '^PASS M3JDK21 ArrayList+Vector mask-callers checks=' "$receipt")" -eq 7
+          grep -q '^M3_JDK_ARRAY_MASK_DIFF_PASS checks=' "$receipt"
+          grep -q '^M3_JDK_REMOVEIF_COLLECTION_CONTRACT_PASS checks=' "$receipt"
+          grep -q '^PASS: original Java21 API, native M3JDK ArrayList/Vector and mask differentials,' "$receipt"
+
+  native-mask-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original M3JDK21 C11 JNI state-mask selector and prove Java parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/collections/qualification/required-excluded-windows-20261021/verify.sh \
+            | tee "$RUNNER_TEMP/m3-native-mask-parity.log"
+          grep -qx 'M3_TWO_MASK_WINDOW_JAVA_JNI_SOURCE_PASS' \
+            "$RUNNER_TEMP/m3-native-mask-parity.log"
+
+  source-built-jdk-jtreg:
+    # Direct OpenJDK image and real jtreg are independent admission gates.
+    # This heavier job intentionally reuses the existing OpenJDK bootstrap actions.
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Obtain canonical Boot JDK
+        id: bootjdk
+        uses: ./.github/actions/get-bootjdk
+        with:
+          platform: linux-x64
+      - name: Obtain canonical jtreg
+        id: jtreg
+        uses: ./.github/actions/get-jtreg
+      - name: Install original OpenJDK build dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gcc-11 g++-11 libxrandr-dev libxtst-dev \
+            libcups2-dev libasound2-dev libfontconfig1-dev libfreetype6-dev
+      - name: Configure the actual M3JDK21 source image
+        shell: bash
+        env:
+          BOOT_JDK: ${{ steps.bootjdk.outputs.path }}
+          JTREG_HOME: ${{ steps.jtreg.outputs.path }}
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-conf-name=m3jdk21-mask-prefix-release \
+            --with-debug-level=release \
+            --with-jvm-variants=server \
+            --with-boot-jdk="$BOOT_JDK" \
+            --with-jtreg="$JTREG_HOME" \
+            --with-native-debug-symbols=none \
+            --with-zlib=system
+      - name: Build actual JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make CONF=m3jdk21-mask-prefix-release JOBS=2 LOG=warn images
+          test -x build/m3jdk21-mask-prefix-release/images/jdk/bin/java
+          build/m3jdk21-mask-prefix-release/images/jdk/bin/java -version
+      - name: Run actual JDK java.base jtreg and collection contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          make CONF=m3jdk21-mask-prefix-release JOBS=2 LOG=warn test \
+            TEST="test/jdk/java/util/ArrayList/M3ArrayMaskCallersContract.java \
+                  test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java \
+                  test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java \
+                  test/jdk/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java \
+                  test/jdk/java/util/CollectionViews/BootstrapViewsTest.java \
+                  test/jdk/java/util/CollectionViews/CollectionViewsContract.java"
+      - name: Record source-build scope without calling unexecuted gates green
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "M3JDK21_SOURCE_IMAGE_AND_FOCUSED_JTREG_PASS"
