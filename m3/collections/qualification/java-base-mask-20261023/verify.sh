@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
+# Selected in-java.base source and jtreg-oracle smoke gate, not an M3JDK image build.
+set -euo pipefail
+cd "$(dirname "$0")/../../../.."
+src=src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java
+test=test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java
+source_blob=$(git hash-object "$src")
+test_blob=$(git hash-object "$test")
+[[ "$source_blob" == e6ca59d8ae7fba700765e670dd5ec7d8dd84bc8d ]] || {
+  echo "Unexpected compactor source revision: $source_blob" >&2
+  exit 1
+}
+[[ "$test_blob" == 066eb1b6a636b38c56bc007d1a83eeb6793ddf40 ]] || {
+  echo "Unexpected jtreg oracle revision: $test_blob" >&2
+  exit 1
+}
+build=$(mktemp -d)
+trap 'rm -rf -- "$build"' EXIT
+mkdir -p "$build/java.base" "$build/tests"
+javac -Xlint:all -Werror \
+  --patch-module java.base=src/java.base/share/classes \
+  -d "$build/java.base" "$src"
+javac -Xlint:all -Werror \
+  --patch-module java.base="$build/java.base" \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+  -d "$build/tests" "$test"
+java --patch-module java.base="$build/java.base" \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+  -cp "$build/tests" M3CollectionMaskCompactorContract
+echo "PASS strict Java21 --patch-module kernel oracle; full M3JDK21 jtreg remains open"
