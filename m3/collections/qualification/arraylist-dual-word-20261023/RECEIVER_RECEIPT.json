@@ -84,6 +84,12 @@
     "licensing": {
       "status": "FIRST_PARTY_APACHE_2_0",
       "note": "Challenge links are problem taxonomy only; no external solution implementation copied"
+    },
+    "mask_window_java_native_ci": {
+      "status": "PENDING_CI",
+      "contract": "M3BudgetedMaskWindowContract in Java and --native modes",
+      "native_library": "m3_collections_mask",
+      "jni_abi_changed": false
     }
   },
   "admission": {
@@ -98,5 +104,21 @@
     "https://www.hackerrank.com/challenges/dynamic-array/problem",
     "https://www.geeksforgeeks.org/dsa/check-whether-k-th-bit-set-not/",
     "https://github.com/RoaringBitmap/RoaringBitmap"
+  ],
+  "catalogue": {
+    "path": "m3/collections/algorithm-catalog/arraylist-dual-word-mask-20261023.tsv",
+    "git_blob_sha1": "749485fba4a394cb6ecf4298021d3ca4e1ee0c4d",
+    "category_count": 10,
+    "source_owner_sha256_corrected": true
+  },
+  "unchanged_native_sources": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob_sha1": "bedd442346de5b7dd9d5f1965c510950e0c45ea1"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "git_blob_sha1": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+    }
   ]
 }
