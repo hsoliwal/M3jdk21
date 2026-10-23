@@ -39,7 +39,10 @@
           <release>21</release>
           <proc>none</proc>
           <compilerArgs>
-            <arg>-Xlint:all</arg>
+            <!-- The original fixed module is com.m3.collections; javac's
+                 module-name lint is excluded in its owning Maven POM as well.
+                 Keep all other lint warnings fatal, with no public module rename. -->
+            <arg>-Xlint:all,-module</arg>
             <arg>-Werror</arg>
           </compilerArgs>
           <includes>
