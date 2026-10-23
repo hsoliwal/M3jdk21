@@ -10,6 +10,8 @@ import com.m3.tools.text.frequency.TermFrequency;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
 import com.m3.tools.text.search.ExactSearch;
+import com.m3.tools.text.search.MultiLiteralSearch;
+import com.m3.tools.text.similarity.TextSignatures;
 import com.m3.tools.text.tokenize.WordTokenizer;
 import com.m3.tools.verify.sha256.Sha256;
 import java.io.IOException;
@@ -377,6 +379,106 @@ public final class CpuTools {
         Search actual = literal(source, needle, maxHits, monitor);
         return actual.complete == expected.complete && actual.sha256.equals(expected.sha256)
                 && Arrays.equals(actual.positions, expected.positions);
+    }
+
+    /** A compact multi-literal result backed by the existing separate text-search module. */
+    public static final class MultiSearch {
+        private final MultiLiteralSearch.Result result;
+        private final String sha256;
+
+        private MultiSearch(MultiLiteralSearch.Result result, String sha256) {
+            this.result = result;
+            this.sha256 = sha256;
+        }
+        public int size() { return result.size(); }
+        public boolean complete() { return result.complete(); }
+        public MultiLiteralSearch.Hit hit(int index) { return result.hit(index); }
+        public List<MultiLiteralSearch.Hit> hits() { return result.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static MultiSearch multiLiteral(M3File source, List<String> literals, int maxHits) {
+        return multiLiteral(source, literals, maxHits, null);
+    }
+
+    /**
+     * One immutable M3File snapshot, one prepared UTF-16 multi-needle search.
+     * The receipt includes raw-byte and UTF-16 identities, source location,
+     * literal order, cap, completeness, and every emitted coordinate.
+     */
+    public static MultiSearch multiLiteral(M3File source, List<String> literals, int maxHits,
+                                           ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        MultiLiteralSearch.Prepared search = MultiLiteralSearch.prepare(literals);
+        MultiLiteralSearch.Result found = search.find(source.text(), maxHits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-multi-literal-result-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.length()).number(source.byteLength())
+                .text(search.sha256()).number(maxHits).number(found.complete() ? 1 : 0)
+                .number(found.size());
+        for (int i = 0; i < found.size(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            var hit = found.hit(i);
+            hash.number(hit.patternId()).number(hit.start()).number(hit.end());
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new MultiSearch(found, hash.finish());
+    }
+
+    /** Independent exact re-execution; an identity receipt alone is not semantic proof. */
+    public static boolean verifyMultiLiteral(M3File source, List<String> literals, int maxHits,
+                                             MultiSearch expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        MultiSearch actual = multiLiteral(source, literals, maxHits, monitor);
+        return actual.complete() == expected.complete() && actual.sha256().equals(expected.sha256())
+                && actual.hits().equals(expected.hits());
+    }
+
+    /** Signature inputs use the existing word breaker; this tighter cap bounds eager tokenization. */
+    public static final int MAX_SIGNATURE_SOURCE_UTF16 = 262_144;
+
+    public record SignatureResult(TextSignatures.Signature signature, String sha256) {
+        public SignatureResult { Objects.requireNonNull(signature); Objects.requireNonNull(sha256); }
+    }
+
+    public static SignatureResult signature(M3File source, int lanes) {
+        return signature(source, lanes, null);
+    }
+
+    /**
+     * Computes candidate-only SimHash/MinHash signals. It cannot prove two
+     * sources equal; exact M3File identities remain authoritative.
+     */
+    public static SignatureResult signature(M3File source, int lanes, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_SIGNATURE_SOURCE_UTF16) {
+            throw new IllegalArgumentException("signature source UTF-16 budget");
+        }
+        TextSignatures.Signature value = TextSignatures.compute(WordTokenizer.words(source.text()), lanes);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-text-signature-result-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.length()).number(lanes).number(value.tokenCount())
+                .number(value.distinctCount()).number(value.simHash64());
+        for (long candidate : value.minHash64()) hash.number(candidate);
+        progress.worked(1);
+        progress.checkCancelled();
+        return new SignatureResult(value, hash.finish());
+    }
+
+    /** Replays the signature and compares its exact primitive lanes and file-bound receipt. */
+    public static boolean verifySignature(M3File source, int lanes, SignatureResult expected,
+                                          ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        SignatureResult actual = signature(source, lanes, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.signature().simHash64() == expected.signature().simHash64()
+                && Arrays.equals(actual.signature().minHash64(), expected.signature().minHash64());
     }
 
     /**

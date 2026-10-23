@@ -14,7 +14,9 @@ import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
 import com.m3.tools.text.regex.RegexMatcher;
 import com.m3.tools.text.search.ExactSearch;
+import com.m3.tools.text.search.MultiLiteralSearch;
 import com.m3.tools.text.similarity.EditDistance;
+import com.m3.tools.text.similarity.TextSignatures;
 import com.m3.tools.text.tokenize.WordTokenizer;
 import com.m3.tools.verify.sha256.Sha256;
 import java.math.BigInteger;
@@ -42,7 +44,7 @@ public final class M3DonorToolsTest {
     private M3DonorToolsTest() { }
 
     public static void main(String[] args) throws Exception {
-        text(); graphs(); postings(); numeric(); priority(); refusals();
+        text(); multiSearchAndSignatures(); graphs(); postings(); numeric(); priority(); refusals();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -150,6 +152,115 @@ public final class M3DonorToolsTest {
                     matrix[i - 1][j - 1] + (left.charAt(i - 1) == right.charAt(j - 1) ? 0 : 1)));
         }
         return matrix[left.length()][right.length()];
+    }
+
+    /** Independent nested-loop matching oracle; never calls the automaton in the witness. */
+    private static List<MultiLiteralSearch.Hit> bruteMulti(String text, List<String> patterns) {
+        List<MultiLiteralSearch.Hit> matches = new ArrayList<>();
+        for (int end = 1; end <= text.length(); end++) {
+            for (int id = 0; id < patterns.size(); id++) {
+                String pattern = patterns.get(id);
+                int start = end - pattern.length();
+                if (start >= 0 && text.startsWith(pattern, start)) {
+                    matches.add(new MultiLiteralSearch.Hit(id, start, end));
+                }
+            }
+        }
+        matches.sort(Comparator.comparingInt(MultiLiteralSearch.Hit::end)
+                .thenComparing(Comparator.comparingInt(
+                        (MultiLiteralSearch.Hit hit) -> patterns.get(hit.patternId()).length()).reversed())
+                .thenComparingInt(MultiLiteralSearch.Hit::patternId));
+        return matches;
+    }
+
+    private static void multiSearchAndSignatures() throws Exception {
+        var empty = MultiLiteralSearch.prepare(List.of());
+        check(empty.stateCount() == 1 && empty.find("ab", 0).complete(), "empty pattern set");
+        var duplicates = MultiLiteralSearch.prepare(List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"));
+        var expected = bruteMulti("aba\ud83d\ude00aba", List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"));
+        check(duplicates.find("aba\ud83d\ude00aba", 100).hits().equals(expected), "duplicate suffix and split surrogate");
+        check(duplicates.sha256().equals(MultiLiteralSearch.prepare(
+                List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00")).sha256()), "plan SHA replay");
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(List.of("")));
+        rejects(NullPointerException.class, () -> MultiLiteralSearch.prepare(Arrays.asList("a", null)));
+        rejects(IllegalArgumentException.class, () -> duplicates.find("a", -1));
+        rejects(IllegalArgumentException.class, () -> duplicates.find("a", MultiLiteralSearch.MAX_HITS + 1));
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(
+                java.util.Collections.nCopies(MultiLiteralSearch.MAX_PATTERNS + 1, "a")));
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(
+                List.of("a".repeat(MultiLiteralSearch.MAX_PATTERN_UNITS + 1))));
+        rejects(IllegalArgumentException.class, () -> empty.find(
+                "a".repeat(MultiLiteralSearch.MAX_TEXT_UNITS + 1), 0));
+        rejects(IllegalStateException.class, () -> duplicates.find("abc", 1, () -> {
+            throw new IllegalStateException("cancelled");
+        }));
+
+        String[] tokens = {"", "a", "b", "Aa", "BB", "\ud83d", "\ude00", "\u00e9", "\u0301"};
+        for (int trial = 0; trial < 450; trial++) {
+            String text = randomText(65);
+            int patternCount = RANDOM.nextInt(1, 12);
+            List<String> patterns = new ArrayList<>();
+            for (int i = 0; i < patternCount; i++) {
+                String pattern;
+                if (i > 0 && RANDOM.nextInt(4) == 0) pattern = patterns.get(RANDOM.nextInt(i));
+                else if (!text.isEmpty() && RANDOM.nextBoolean()) {
+                    int from = RANDOM.nextInt(text.length());
+                    int to = from + 1 + RANDOM.nextInt(Math.min(5, text.length() - from));
+                    pattern = text.substring(from, to);
+                } else pattern = randomText(5) + "a";
+                patterns.add(pattern);
+            }
+            var prepared = MultiLiteralSearch.prepare(patterns);
+            List<MultiLiteralSearch.Hit> oracle = bruteMulti(text, patterns);
+            for (int cap : new int[]{0, 1, 2, 7, 250}) {
+                var result = prepared.find(text, cap);
+                check(result.size() == Math.min(cap, oracle.size()), "multi-literal hit count");
+                check(result.complete() == (oracle.size() <= cap), "multi-literal completeness");
+                check(result.hits().equals(oracle.subList(0, Math.min(cap, oracle.size()))),
+                        "multi-literal independent UTF-16 oracle");
+                for (int i = 0; i < result.size(); i++) check(result.hit(i).equals(oracle.get(i)),
+                        "detached ordinal projection");
+            }
+        }
+
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(List.of("a"), 0));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(List.of("a"), 129));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(
+                java.util.Collections.nCopies(TextSignatures.MAX_TOKENS + 1, "a"), 1));
+        rejects(NullPointerException.class, () -> TextSignatures.compute(Arrays.asList("a", null), 1));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(
+                List.of("a".repeat(TextSignatures.MAX_TOKEN_UNITS + 1)), 1));
+        var absent = TextSignatures.compute(List.of(), 32);
+        check(absent.tokenCount() == 0 && absent.distinctCount() == 0
+                && absent.simHash64() == 0 && absent.minHash64()[0] == -1L, "empty signatures");
+        check(TextSignatures.estimatedJaccard(absent, absent) == 1.0, "empty set similarity");
+        check(TextSignatures.estimatedJaccard(absent, TextSignatures.compute(List.of("x"), 32)) == 0.0,
+                "empty to nonempty similarity");
+        rejects(IllegalArgumentException.class, () -> TextSignatures.estimatedJaccard(
+                absent, TextSignatures.compute(List.of("x"), 16)));
+
+        for (int trial = 0; trial < 500; trial++) {
+            List<String> words = new ArrayList<>();
+            for (int i = RANDOM.nextInt(60); i > 0; i--) words.add(tokens[RANDOM.nextInt(tokens.length)]);
+            var first = TextSignatures.compute(words, 32);
+            var replay = TextSignatures.compute(words, 32);
+            check(first.tokenCount() == words.size(), "signature token count");
+            check(first.distinctCount() == Set.copyOf(words).size(), "signature distinct count");
+            check(first.simHash64() == replay.simHash64()
+                    && Arrays.equals(first.minHash64(), replay.minHash64()), "signature replay");
+            Collections.reverse(words);
+            var shuffled = TextSignatures.compute(words, 32);
+            check(first.simHash64() == shuffled.simHash64()
+                    && Arrays.equals(first.minHash64(), shuffled.minHash64()), "order independent signatures");
+            var unique = new ArrayList<>(new TreeSet<>(words));
+            check(Arrays.equals(first.minHash64(), TextSignatures.compute(unique, 32).minHash64()),
+                    "MinHash set semantics ignore multiplicity");
+            check(TextSignatures.hamming64(first, replay) == 0
+                    && TextSignatures.estimatedJaccard(first, replay) == 1.0, "identical signal semantics");
+            long[] projected = first.minHash64();
+            projected[0] ^= 1L;
+            check(!Arrays.equals(projected, first.minHash64()), "immutable primitive lanes");
+        }
     }
 
     private static void graphs() {

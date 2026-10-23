@@ -187,11 +187,32 @@ public final class M3CpuToolsTest {
         check(CpuTools.verifyLiteral(source, "aba", 1, hits, null), "search re-execution receipt");
         check(!CpuTools.verifyLiteral(source, "aba", 2, hits, null), "cap is receipt-bound");
         check(!CpuTools.verifyLiteral(changed, "aba", 1, hits, null), "source is receipt-bound");
+        List<String> patterns = List.of("aba", "ba", "\ud83d\ude42");
+        var many = CpuTools.multiLiteral(source, patterns, 3);
+        check(many.size() == 3 && !many.complete(), "multi-literal capped prefix");
+        check(many.hits().get(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.Hit(0, 0, 3))
+                && many.hits().get(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.Hit(1, 1, 3)),
+                "multi-literal suffix and UTF-16 coordinates");
+        check(CpuTools.verifyMultiLiteral(source, patterns, 3, many, null), "multi-literal replay");
+        check(!CpuTools.verifyMultiLiteral(source, patterns, 4, many, null), "multi-literal cap binding");
+        check(!CpuTools.verifyMultiLiteral(changed, patterns, 3, many, null), "multi-literal file binding");
+        var signal = CpuTools.signature(source, 16);
+        check(signal.sha256().matches("[0-9a-f]{64}"), "signature receipt format");
+        check(CpuTools.verifySignature(source, 16, signal, null), "signature exact-lane replay");
+        check(!CpuTools.verifySignature(changed, 16, signal, null), "signature source binding");
+        check(!CpuTools.verifySignature(source, 15, signal, null), "signature lane binding");
+        long[] mutableSignature = signal.signature().minHash64();
+        mutableSignature[0] ^= 1L;
+        check(!Arrays.equals(signal.signature().minHash64(), mutableSignature),
+                "signature primitive lanes are detached");
+        expect(IllegalArgumentException.class, () -> CpuTools.multiLiteral(source, List.of(""), 2));
         expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", -1));
         expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", 1_000_001));
         CountMonitor cancelled = new CountMonitor();
         cancelled.cancelled = true;
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.multiLiteral(source, patterns, 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.signature(source, 16, cancelled));
         cancelled.cancelled = false;
         cancelled.cancelAfterWork = true;
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
@@ -246,6 +267,19 @@ public final class M3CpuToolsTest {
         check(run.equals(invoke("--run", "text.sort,text.uniq", text.toString())), "CLI source receipt repeat");
         var find = invoke("--find", "b", text.toString(), "1");
         check(find.code == 0 && find.output.equals("0\n") && find.error.contains("complete=false"), "CLI explicit search truncation");
+        Path patterns = work.resolve("needles.txt");
+        Files.writeString(patterns, "a\nb\n");
+        var findAny = invoke("--find-any", patterns.toString(), text.toString(), "2");
+        check(findAny.code == 0 && findAny.output.equals("1\t0\t1\n0\t2\t3\n")
+                && findAny.error.contains("complete=false") && findAny.error.contains("coordinates=UTF-16"),
+                "CLI multi-literal source/needle receipts");
+        check(findAny.equals(invoke("--find-any", patterns.toString(), text.toString(), "2")),
+                "CLI repeated multi-literal identity");
+        var signature = invoke("--signature", text.toString(), "16");
+        check(signature.code == 0 && signature.output.contains("simhash64\t")
+                && signature.output.lines().filter(line -> line.startsWith("minhash64\t")).count() == 16
+                && signature.error.contains("approximate=true"), "CLI signature evidence");
+        check(signature.equals(invoke("--signature", text.toString(), "16")), "CLI repeated signature");
         var invalid = invoke("--run", "missing", work.resolve("absent.txt").toString());
         check(invalid.code == 1 && invalid.error.contains("unknown binding"), "binding refusal precedes file read");
         Files.writeString(text, "1\n0\t1\n");
