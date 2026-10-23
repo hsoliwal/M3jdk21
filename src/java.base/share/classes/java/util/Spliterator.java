@@ -661,6 +661,21 @@ public interface Spliterator<T> {
      */
     @SuppressWarnings("overloads")
     public interface OfInt extends OfPrimitive<Integer, IntConsumer, OfInt> {
+        /**
+         * Primitive spliterator traversal, named distinctly from Iterator.
+         * Credit follows each successfully completed tryAdvance invocation.
+         */
+        default void forEachRemainingSpliteratorIntMonitored(IntConsumer action, java.util.concurrent.ProgressMonitor monitor) {
+            Objects.requireNonNull(action);
+            Objects.requireNonNull(monitor);
+            while (true) {
+                monitor.checkCancelled();
+                if (!tryAdvance(action)) break;
+                monitor.worked(1);
+            }
+            monitor.checkCancelled();
+        }
+
 
         @Override
         OfInt trySplit();
@@ -726,6 +741,21 @@ public interface Spliterator<T> {
      */
     @SuppressWarnings("overloads")
     public interface OfLong extends OfPrimitive<Long, LongConsumer, OfLong> {
+        /**
+         * Primitive spliterator traversal, named distinctly from Iterator.
+         * Credit follows each successfully completed tryAdvance invocation.
+         */
+        default void forEachRemainingSpliteratorLongMonitored(LongConsumer action, java.util.concurrent.ProgressMonitor monitor) {
+            Objects.requireNonNull(action);
+            Objects.requireNonNull(monitor);
+            while (true) {
+                monitor.checkCancelled();
+                if (!tryAdvance(action)) break;
+                monitor.worked(1);
+            }
+            monitor.checkCancelled();
+        }
+
 
         @Override
         OfLong trySplit();
@@ -791,6 +821,21 @@ public interface Spliterator<T> {
      */
     @SuppressWarnings("overloads")
     public interface OfDouble extends OfPrimitive<Double, DoubleConsumer, OfDouble> {
+        /**
+         * Primitive spliterator traversal, named distinctly from Iterator.
+         * Credit follows each successfully completed tryAdvance invocation.
+         */
+        default void forEachRemainingSpliteratorDoubleMonitored(DoubleConsumer action, java.util.concurrent.ProgressMonitor monitor) {
+            Objects.requireNonNull(action);
+            Objects.requireNonNull(monitor);
+            while (true) {
+                monitor.checkCancelled();
+                if (!tryAdvance(action)) break;
+                monitor.worked(1);
+            }
+            monitor.checkCancelled();
+        }
+
 
         @Override
         OfDouble trySplit();
@@ -849,5 +894,22 @@ public interface Spliterator<T> {
                 forEachRemaining((DoubleConsumer) action::accept);
             }
         }
+    }
+
+    /**
+     * Cooperative, caller-monitored operation. The monitor is borrowed and
+     * never begun, finished or cancelled by this method. One unit is credited
+     * after each successfully completed element/callback operation.
+     * Cancellation is checked at delegate boundaries only.
+     */
+    default void forEachRemainingSpliteratorMonitored(Consumer<? super T> action, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(action);
+        Objects.requireNonNull(monitor);
+        while (true) {
+            monitor.checkCancelled();
+            if (!tryAdvance(action)) break;
+            monitor.worked(1);
+        }
+        monitor.checkCancelled();
     }
 }

@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 collection progress Java21 receiver host proof
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/lang/Iterable.java'
+      - 'src/java.base/share/classes/java/util/Iterator.java'
+      - 'src/java.base/share/classes/java/util/PrimitiveIterator.java'
+      - 'src/java.base/share/classes/java/util/Spliterator.java'
+      - 'src/java.base/share/classes/java/util/Collection.java'
+      - 'src/java.base/share/classes/java/util/List.java'
+      - 'src/java.base/share/classes/java/util/Map.java'
+      - 'test/jdk/java/util/MonitoredCollectionDefaults.java'
+      - 'm3/qualification/collection-progress-20261023/**'
+      - '.github/workflows/m3jdk21-collection-progress-receiver-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-host-patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Java21 compile and 17 method contracts in normal and -Xint VM
+        run: bash m3/qualification/collection-progress-20261023/verify-host-patch.sh
