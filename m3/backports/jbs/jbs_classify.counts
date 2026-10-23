@@ -1,0 +1,14 @@
+candidate-adapted-serviceability	1017
+hold-jit	979
+hold-gc-matrix	976
+candidate-adapted	894
+already-in-jdk21u	733
+admitted-additive-tooling	184
+candidate-adapted-security	128
+candidate-high-risk	121
+hold-javac	119
+reject-client-libs	77
+candidate-collections-lane	41
+reject-language	13
+admitted-docs	12
+candidate-measured	5
