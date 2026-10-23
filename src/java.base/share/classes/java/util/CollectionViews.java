@@ -337,12 +337,14 @@ public final class CollectionViews {
         @Override
         public boolean addAll(Collection<? extends E> elements) {
             Objects.requireNonNull(elements, "elements");
-            for (E element : elements) {
+            // Validate and retain each supplied occurrence exactly once before writing.
+            // An arbitrary Collection need not be repeatable (or side-effect-free).
+            return backing.addAll(selectedCopy(elements, element -> {
                 if (!visible(element)) {
                     throw new IllegalArgumentException("element rejected by view predicate");
                 }
-            }
-            return backing.addAll(elements);
+                return true;
+            }));
         }
 
         @Override
@@ -419,6 +421,13 @@ public final class CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
+            // Direct COW owners have snapshot iterators without remove(). Delegate the
+            // selected operation to that same owner's atomic bulk mutation contract.
+            // Preserve the established iterator path for every other implementation.
+            if (backing.getClass() == java.util.concurrent.CopyOnWriteArrayList.class
+                    || backing.getClass() == java.util.concurrent.CopyOnWriteArraySet.class) {
+                return backing.removeIf(element -> visible(element) && condition.test(element));
+            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {
