@@ -26,6 +26,31 @@ final class M3SlotSpliterators {
         return Spliterators.spliterator(collection,
                 Spliterator.ORDERED | (distinct ? Spliterator.DISTINCT : 0));
     }
+    /**
+     * Unknown-size, late-binding ordered iteration for live predicate views.
+     * Unlike Spliterators.spliterator(Collection,...), this does not first call
+     * Collection.size(), which would evaluate every predicate before findFirst.
+     * All callbacks remain in Java; no duplicate element or index store exists.
+     */
+    static <E> Spliterator<E> lateBoundOrdered(
+            Supplier<? extends Iterator<? extends E>> iteratorSupplier) {
+        Objects.requireNonNull(iteratorSupplier, "iteratorSupplier");
+        return new Spliterator<>() {
+            private Iterator<? extends E> cursor;
+            @Override public boolean tryAdvance(Consumer<? super E> action) {
+                Objects.requireNonNull(action, "action");
+                if (cursor == null) cursor = Objects.requireNonNull(
+                        iteratorSupplier.get(), "iterator");
+                if (!cursor.hasNext()) return false;
+                action.accept(cursor.next());
+                return true;
+            }
+            @Override public Spliterator<E> trySplit() { return null; }
+            @Override public long estimateSize() { return Long.MAX_VALUE; }
+            @Override public int characteristics() { return Spliterator.ORDERED; }
+        };
+    }
+
     static <E> Spliterator<E> concurrent(Iterator<E> iterator, boolean ordered, boolean distinct) {
         int flags = Spliterator.CONCURRENT | Spliterator.NONNULL;
         if (ordered) { flags |= Spliterator.ORDERED; }
