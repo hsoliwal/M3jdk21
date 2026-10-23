@@ -14,9 +14,9 @@ never by hand-editing shared ledgers (feedback-com-synexia-push-api-fallback).
 Merge is the owner's call. Tools: S:/m3-scratch/consolidate (dump_prs.py, build_order.py, superset_merge.sh).
 
 <!-- resolutions -->
-## Resolutions (snapshot 2026-10-23 06:29 UTC)
+## Resolutions (snapshot 2026-10-23 06:49 UTC)
 
-`SUPERSET_20261023_RESOLUTIONS.tsv` is the additive successor of the conflict rows: 52 resolved, 50 refused; JNI implementations diverge: 1; no gate for native or workflow conflicts: 49.
+`SUPERSET_20261023_RESOLUTIONS.tsv` is the additive successor of the conflict rows: 62 resolved, 66 refused; JNI implementations diverge: 1; neither side compiles: 10; no gate for native or workflow conflicts: 49; conflicts span 3 module: 1; conflicts span 1 module: 3; finish failed: 1; conflicts span 0 module: 1.
 RESOLVED = merged into this branch through a side branch (hand resolution with the module's Maven gate, or the
 compiler-arbitrated batch: superset side first, PR side if the gate fails, refused if both fail). REFUSED rows name the
 reason; the C/JNI and workflow conflicts no gate here covers have their reading packets under
