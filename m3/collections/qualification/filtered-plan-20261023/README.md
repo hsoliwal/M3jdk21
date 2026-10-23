@@ -78,3 +78,41 @@ Apache Commons predicated collections and algorithmic in-place removal
 references were evaluated as conceptual/category comparators, but do not
 share this API's strict read-only mutation semantics and were not copied.
 The per-category decision table and attribution notes are in Synexia.
+
+
+## Successor Java/JNI source-integrity gate (2026-10-23)
+
+The predecessor verifier at
+`qualification/filtered-navigable-consolidation-20261017/verify.sh`
+remains unchanged and still rejects files diverging from its historical
+pinned source. That exact-blob check was observed to fail when invoked
+against this newer revision; it is **not** a failure of the new behavior
+oracle. Rather than broaden historical hashes to accept arbitrary revisions,
+the filtered navigable workflow in this branch now runs:
+
+```sh
+bash m3/collections/qualification/filtered-plan-20261023/verify.sh
+```
+
+This pins the current Java source owners by Git blob, compiles selected
+`M3FilteredViews`, `M3FilteredNavigableSet` and
+`M3SlotSpliterators` with `javac --release 21 -Xlint:all -Werror`,
+runs the older two dependency-free filtered-view contracts plus a new
+deep-filter/sorted/map oracle, then checks the unchanged JNI C owner and
+its native-region harness using `cc -Werror -fsanitize=undefined`.
+
+The exact inherited JNI source blob
+`521eb6170fd89f3bc62eb810aa6202236a2708e2` and native test blob
+`f54a9d1cecffe1049815f80be664937a7f03067f` were independently
+compiled and executed locally with UBSan. Result:
+
+```text
+PASS viewport JNI regions: bounded=1024 disjoint_allocations=0 overlap_snapshot=4097 late_invalid_writes=0
+```
+
+This local JNI result is a predecessor-kernel check, not a newly changed
+native implementation. The successor Java filtered-view build and all
+committed JUnit tests still require passing remote or local execution;
+their GitHub Actions jobs were queued when this receipt was written.
+Neither this C harness nor the source-gated Java tests constitute
+a full Java/JNI matched-image differential run.
