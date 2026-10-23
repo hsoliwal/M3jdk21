@@ -2,6 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  * Optional JNI parity backend for precomputed integer mask stages.
+ * Modified 2026: batch only detached output writes in the existing cached lane.
  * Only primitive Region APIs; no GetPrimitiveArrayCritical, retained Java pointers,
  * Java callbacks, persistent references, or per-row heap allocations.
  * This general gather kernel is not claimed faster than the Java reference path.
@@ -56,6 +57,10 @@ static int m3_matches(JNIEnv *env, jobjectArray planes,
  * All local references are released on every normal/exceptional exit.
  */
 #define M3_CACHED_STAGE_LIMIT 8
+/* Reuse the bounded pending-output Region pattern from m3_index_mask_window.c.
+ * Only the private result is buffered; every source read retains its order.
+ */
+#define M3_PATH_OUTPUT_CHUNK 128
 
 typedef struct {
     jintArray plane[M3_CACHED_STAGE_LIMIT];
@@ -122,12 +127,14 @@ static jintArray m3_select_cached(JNIEnv *env, jintArray rows, jintArray offsets
     if (!m3_prepare_stages(env, planes, required, forbidden, stages, &cache)) return NULL;
     jintArray result = NULL;
     jsize matching = 0;
+    jint selected[M3_PATH_OUTPUT_CHUNK];
     for (jint pass = 0; pass < 2; ++pass) {
         if (pass == 1) {
             result = (*env)->NewIntArray(env, matching);
             if (result == NULL) goto failure;
         }
         jsize written = 0;
+        jsize pending = 0;
         jlong at = first;
         for (jint ordinal = 0; ordinal < count; ++ordinal, at += stride) {
             jint physical;
@@ -147,8 +154,14 @@ static jintArray m3_select_cached(JNIEnv *env, jintArray rows, jintArray offsets
                 jint row;
                 (*env)->GetIntArrayRegion(env, rows, (jsize)at, 1, &row);
                 if ((*env)->ExceptionCheck(env)) goto failure;
-                (*env)->SetIntArrayRegion(env, result, written++, 1, &row);
-                if ((*env)->ExceptionCheck(env)) goto failure;
+                selected[pending++] = row;
+                ++written;
+                if (pending == M3_PATH_OUTPUT_CHUNK) {
+                    (*env)->SetIntArrayRegion(env, result, written - pending,
+                            pending, selected);
+                    if ((*env)->ExceptionCheck(env)) goto failure;
+                    pending = 0;
+                }
             }
         }
         if (pass == 1) {
@@ -156,6 +169,11 @@ static jintArray m3_select_cached(JNIEnv *env, jintArray rows, jintArray offsets
                 m3_throw(env, "java/util/ConcurrentModificationException",
                         "mask stages changed during JNI selection");
                 goto failure;
+            }
+            if (pending != 0) {
+                (*env)->SetIntArrayRegion(env, result, written - pending,
+                        pending, selected);
+                if ((*env)->ExceptionCheck(env)) goto failure;
             }
             m3_release_stages(env, &cache);
             return result;
