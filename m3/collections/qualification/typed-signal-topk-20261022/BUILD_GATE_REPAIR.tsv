@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
 # 2026-10-23: immutable exact-source receiving; canonical Synexia M3SignalPortableJunitModuleRecipe
 # path	before_sha256	after_sha256	post_git_blob	canonical_resource
-.github/workflows/m3-typed-signal-topk-20261022.yml	cdf740c67faf08696211028844b8aaa275f6ebb39ffbac503933f43022861e8d	1dfff9281ac18bb2fe9ae4bcf2371a9d1f651d22aeb74b584c571e269889c8b0	b811fac95d2dd3e467c0267dde14ba63a9bde430	01-topk-workflow.yml.txt
+.github/workflows/m3-typed-signal-topk-20261022.yml	cdf740c67faf08696211028844b8aaa275f6ebb39ffbac503933f43022861e8d	f78cf37da392150c080a325b13777f34b4f0cecb6b7b823c9717ac01fa8bd281	f8c3793bd321a5dfb705a3fa1a6c259524176075	01-topk-workflow.yml.txt
 m3/collections/qualification/typed-signal-topk-20261022/pom.xml	2fed9e5c0381485aea5a56c55fdc6928e36dadb6956c21cfa4ddfce171ea7aec	9e84859b2a1db3fe56f52264c4cd29db56772d97a74cb5762b5934883c858a8f	8ab8b69b34f6477f2d4c040e5251e8064b6dc727	00-topk-portable-pom.xml.txt
