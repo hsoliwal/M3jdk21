@@ -115,3 +115,78 @@ Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
   }
   return result;
 }
+
+/* Required-native collection backing allocation through the existing array owner.
+ * Standard JNI APIs create ordinary GC-managed Java arrays. No heap pointer,
+ * global reference, native payload allocator or alternate storage owner is added.
+ */
+static void m3_backing_throw(JNIEnv *env, const char *name, const char *message) {
+  if ((*env)->ExceptionCheck(env)) return;
+  jclass type = (*env)->FindClass(env, name);
+  if (type != NULL) {
+    (void)(*env)->ThrowNew(env, type, message);
+    (*env)->DeleteLocalRef(env, type);
+  }
+}
+
+static int m3_backing_length(JNIEnv *env, jint length) {
+  if ((*env)->ExceptionCheck(env)) return 0;
+  if (length < 0) {
+    m3_backing_throw(env, "java/lang/NegativeArraySizeException", "negative backing array length");
+    return 0;
+  }
+  return 1;
+}
+
+static void m3_backing_failed(JNIEnv *env) {
+  /* Preserve an existing allocation exception. Java also guards silent NULL if
+   * native exception reporting itself cannot install an exception.
+   */
+  m3_backing_throw(env, "java/lang/OutOfMemoryError", "native backing array allocation failed");
+}
+
+JNIEXPORT jobjectArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateObjects(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jclass component = (*env)->FindClass(env, "java/lang/Object");
+  if (component == NULL) {
+    m3_backing_failed(env);
+    return NULL;
+  }
+  jobjectArray result = (*env)->NewObjectArray(env, length, component, NULL);
+  (*env)->DeleteLocalRef(env, component);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}
+
+JNIEXPORT jbyteArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateBytes(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jbyteArray result = (*env)->NewByteArray(env, length);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}
+
+JNIEXPORT jintArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateInts(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jintArray result = (*env)->NewIntArray(env, length);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}
+
+JNIEXPORT jlongArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateLongs(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jlongArray result = (*env)->NewLongArray(env, length);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}

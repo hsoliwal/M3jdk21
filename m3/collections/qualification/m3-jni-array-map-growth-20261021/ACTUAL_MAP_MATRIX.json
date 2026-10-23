@@ -1,0 +1,140 @@
+{
+  "105authority": {
+    "bytes": 938,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\TASK_AUTHORIZATION_105_MIB.json",
+    "sha256": "c53d4f8acf251e5a25ecba629d20346c19bed7036371d58eacd780fedc2ae1a9"
+  },
+  "actual_source_SHA256": "79b033383db19026dc88361dc95f4ecc0ea4e5262c23701460b183d4d83c6188",
+  "cases": [
+    {
+      "attempt": 2,
+      "checks": 3354773,
+      "mode": "baseline-native",
+      "result": {
+        "bytes": 2007,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\map-native-retained-growth-runtime-v1\\baseline-native-2\\RESULT.json",
+        "sha256": "9940254ed3e1f9829f29ac2d73d7b4ff8ec5f88ff9cdedbe7ac7d3f9e006b17c"
+      },
+      "terminal": {
+        "bytes": 4430,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\map-native-growth-runtime-v1-baseline-native-2.json",
+        "sha256": "d4f8d3d390e1ec37cbdf509be86095b290638cc3482be067fca4bd5d463834ff"
+      }
+    },
+    {
+      "attempt": 1,
+      "checks": 3354776,
+      "mode": "baseline-silent",
+      "result": {
+        "bytes": 2007,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\map-native-retained-growth-runtime-v1\\baseline-silent-1\\RESULT.json",
+        "sha256": "81a27c0b7934964a6cbe71a5cadc3d0bd19851c8439b9578812c9d003dc6a837"
+      },
+      "terminal": {
+        "bytes": 4420,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\map-native-growth-runtime-v1-baseline-silent-1.json",
+        "sha256": "985c9e032d7dad5d03b5724ca3b48974899c6c03dcc42e5843a9b55aa11dff9c"
+      }
+    },
+    {
+      "attempt": 1,
+      "checks": 3367161,
+      "mode": "after-native",
+      "result": {
+        "bytes": 1995,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\map-native-retained-growth-runtime-v1\\after-native-1\\RESULT.json",
+        "sha256": "8fc07f6cebb3a7718a23336bb051811bd8bb0f4957e5abfe9f881d2ae4138596"
+      },
+      "terminal": {
+        "bytes": 4392,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\map-native-growth-runtime-v1-after-native-1.json",
+        "sha256": "0b3b3b0cfb9787f503e2082d7c0a22eb6fd9fac1f0a713c77f908c2e3cd2197c"
+      }
+    },
+    {
+      "attempt": 1,
+      "checks": 208,
+      "mode": "after-silent",
+      "result": {
+        "bytes": 1991,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\map-native-retained-growth-runtime-v1\\after-silent-1\\RESULT.json",
+        "sha256": "082eccb8bd9014944b8ea16ad683aa78d55b9a2262f576d4452757160932f625"
+      },
+      "terminal": {
+        "bytes": 4385,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\map-native-growth-runtime-v1-after-silent-1.json",
+        "sha256": "81bf6f7de932bc58e995571cfb4b969b22402c406454479cea877408c0dad2e3"
+      }
+    },
+    {
+      "attempt": 1,
+      "checks": 208,
+      "mode": "after-pending",
+      "result": {
+        "bytes": 1995,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\map-native-retained-growth-runtime-v1\\after-pending-1\\RESULT.json",
+        "sha256": "2b91d75851e83a3c0b61a6d651b26514da3b4cad35fdece4f3160c2138b71e33"
+      },
+      "terminal": {
+        "bytes": 4681,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\map-native-growth-runtime-v1-after-pending-1.json",
+        "sha256": "ba6aa67793a1a8333ca0d6d8412fb81208c14567152ed8e478f4b613c055c6ee"
+      }
+    },
+    {
+      "attempt": 2,
+      "checks": 208,
+      "mode": "after-legacy",
+      "result": {
+        "bytes": 1991,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\map-native-retained-growth-runtime-v1\\after-legacy-2\\RESULT.json",
+        "sha256": "22f69241db851c709fc6dbc4aa0c40ec02a3ad0aed1c8b54ba4cf14a89b89c58"
+      },
+      "terminal": {
+        "bytes": 4386,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\map-native-growth-runtime-v1-after-legacy-2.json",
+        "sha256": "d79fbb54819efc403cb9674df1cb378c2ac5b6ee528dba6e08540d4d3cdc0acb"
+      }
+    }
+  ],
+  "checks": 10077334,
+  "compile": {
+    "bytes": 3759,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\map-native-retained-growth-runtime-v1\\compile-1\\RESULT.json",
+    "sha256": "85b276a1ca4e7c66ed2add6ead29b3f1a188792f023492ddbd52f317cc8eb9a2"
+  },
+  "formal_review": "NO_VERDICT",
+  "full_goal": "UNFINISHED",
+  "global_slot_admission": false,
+  "modes": 6,
+  "pending": [
+    "Slot4RED globalreentry",
+    "later allocation failure",
+    "LFU",
+    "concurrency/serialization/installation",
+    "Unicode loader baselinegap",
+    "currentC sharedcorecomposition",
+    "fullsuperset"
+  ],
+  "prepared": {
+    "bytes": 6031,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\map-native-retained-growth-runtime-v1\\PREPARED_RUNTIME_V1.json",
+    "sha256": "4c87ee9a02936ccebdf2a10fc56cc5f77ea7d1bd94479ac03e7a3b2a9a6fb31c"
+  },
+  "preserved_refusals": [
+    {
+      "bytes": 1453,
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\map-native-growth-runtime-v1-baseline-native-1-admission-refused.json",
+      "sha256": "040565bc837d254c6275984eb2d17ee81375db7e0d78d6ead1b0575960d0b1a8"
+    },
+    {
+      "bytes": 4401,
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\map-native-growth-runtime-v1-after-legacy-1.json",
+      "sha256": "e4c20bf86f56f2a721145940fb94a74b2929ef6fd325f1c97b94866b7db440d2"
+    }
+  ],
+  "schema": "M3_MAP_JNI_GROWTH_ACTUAL_MATRIX_V1",
+  "scope": "Named whole arrays module/current-source parents, CodeSources, JDK21 order/identity oracle, growth/rehash/free slots/clear, full physical prefixes and zero tails, exact pending-exception identity and first-allocation fault atomicity. Explicit native preload only.",
+  "status": "PASS_FINITE_PRELOADED_ASCII_SCOPE",
+  "storage_protection": "ACTIVE"
+}

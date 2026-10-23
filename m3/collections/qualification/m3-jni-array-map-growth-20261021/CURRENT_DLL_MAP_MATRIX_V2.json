@@ -1,0 +1,102 @@
+{
+  "DLL_SHA256": "8daf087344d1a54e99beccb664cd1d542abb8006421a368909ce3221a71f4144",
+  "JNI_warnings": 0,
+  "adapted_fixture_SHA256": "8a7c9562c74e46af1a787159471650cbb1b9d905d6651021e8befd52550c782a",
+  "checks": 6721934,
+  "formal_review": "NO_VERDICT",
+  "fresh_JVMs": 2,
+  "full_goal": "ACTIVE_UNFINISHED",
+  "global_slot_admission": false,
+  "historical_fault_modes": "Previous six-mode proof preserved; fault DLLs not re-executed here",
+  "independent_source_advisory": "V2 incorporates exact fresh binary seal correction; not formal review",
+  "metadata_correction": "V1 native_DLL field incorrectly pointed to compile receipt. This correction references the actual DLL; all runtime results unchanged.",
+  "native_DLL": {
+    "bytes": 14336,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\m3_arrays_current.dll",
+    "sha256": "8daf087344d1a54e99beccb664cd1d542abb8006421a368909ce3221a71f4144"
+  },
+  "original_fixture_SHA256": "7015482ebdb81dbed3ba407f42d68155f34f869c751bb2f75aad6b7fc747c97c",
+  "pending": [
+    "full reactor/jtreg/installed image",
+    "C++20",
+    "nth-allocation failure",
+    "LFU API projection ownership/liveness",
+    "concurrency/serialization",
+    "Unicode native-path loading",
+    "full SDK-family superset",
+    "both regex compilation reuse and language rules"
+  ],
+  "phase_budget_bytes": 196608,
+  "phases": [
+    {
+      "checks": null,
+      "phase": "compile",
+      "process": {
+        "capacityChecks": 4,
+        "capturedBytes": 0,
+        "combinedLogLimitBytes": 16384,
+        "elapsedSeconds": 2.547,
+        "pid": 5992,
+        "readerThreadsJoined": true,
+        "reason": "completed",
+        "returncode": 0,
+        "treeContainment": "Windows kill-on-close job with stdin-gated command"
+      },
+      "receipt": {
+        "bytes": 6251,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-dll-map-runtime-v1\\compile-1\\RESULT.json",
+        "sha256": "28449b50f00773c9074e38cb7404c5cc7676b0f987ba60f9cd90c56b7a735632"
+      }
+    },
+    {
+      "checks": 3354773,
+      "phase": "baseline-native",
+      "process": {
+        "capacityChecks": 6,
+        "capturedBytes": 128,
+        "combinedLogLimitBytes": 16384,
+        "elapsedSeconds": 4.672,
+        "pid": 18224,
+        "readerThreadsJoined": true,
+        "reason": "completed",
+        "returncode": 0,
+        "treeContainment": "Windows kill-on-close job with stdin-gated command"
+      },
+      "receipt": {
+        "bytes": 4770,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-dll-map-runtime-v1\\baseline-native-1\\RESULT.json",
+        "sha256": "d4fb6869e7b808759ab4024daab6e6e9f88cf77e456c7a23b6f4cf228119bece"
+      }
+    },
+    {
+      "checks": 3367161,
+      "phase": "after-native",
+      "process": {
+        "capacityChecks": 7,
+        "capturedBytes": 125,
+        "combinedLogLimitBytes": 16384,
+        "elapsedSeconds": 3.672,
+        "pid": 22364,
+        "readerThreadsJoined": true,
+        "reason": "completed",
+        "returncode": 0,
+        "treeContainment": "Windows kill-on-close job with stdin-gated command"
+      },
+      "receipt": {
+        "bytes": 4721,
+        "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-dll-map-runtime-v1\\after-native-1\\RESULT.json",
+        "sha256": "c497a097db9e63f97f56c0b062f1233776f6ab854cc578888d1a502975cf0753"
+      }
+    }
+  ],
+  "previous_summary": {
+    "bytes": 3709,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-dll-map-runtime-v1\\ACTUAL_MATRIX_V1.json",
+    "sha256": "9f935a2e348d8f9b8a7d269750abc164c9d239a53ca7d6815a31401628bb5101"
+  },
+  "production_Map_Table": "Recompiled classes exactly match existing qualified overlay",
+  "schema": "M3_CURRENT_DLL_MAP_MATRIX_V2",
+  "source_delta": "No production change; exact one DLL hash token in fixture",
+  "status": "PASS",
+  "storage_protection": "ACTIVE"
+}
