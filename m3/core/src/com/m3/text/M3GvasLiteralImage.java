@@ -22,6 +22,10 @@ public final class M3GvasLiteralImage {
     private static final String MAGIC = "M3GVAS01";
     private static final int HEADER_BYTES = 64;
     private static final int ROW_BYTES = 32;
+    // Optional derived metadata only; rows/payload addresses remain in the mapped image.
+    private static final int LOOKUP_SLOT_LIMIT = 1 << 22;
+    private static final int LOOKUP_PROBE_LIMIT = 64;
+    private static final int LOOKUP_MIN_ROWS = 32;
     private final M3FixedAddressMapping.Image mapped;
     private final ByteBuffer data;
     private final int count;
@@ -231,6 +235,43 @@ public final class M3GvasLiteralImage {
             else lo = middle + 1;
         }
         return -1;
+    }
+
+    /** Build from validated facts; refusal affects lookup cost, never image admission. */
+    private static int[] prepareLookup(ByteBuffer image, int rows) {
+        if (rows < LOOKUP_MIN_ROWS || rows > LOOKUP_SLOT_LIMIT / 2) return null;
+        int capacity = 1;
+        while (capacity < rows * 2) capacity <<= 1;
+        int[] slots;
+        try {
+            slots = new int[capacity];
+        } catch (OutOfMemoryError unavailable) {
+            return null;
+        }
+        int mask = capacity - 1;
+        for (int row = 0; row < rows; row++) {
+            int at = HEADER_BYTES + row * ROW_BYTES;
+            int slot = lookupSlot(image.getInt(at + 8), image.getInt(at + 4), mask);
+            int probe = 0;
+            while (slots[slot] != 0 && probe < LOOKUP_PROBE_LIMIT) {
+                slot = (slot + 1) & mask;
+                probe++;
+            }
+            if (probe == LOOKUP_PROBE_LIMIT) return null;
+            slots[slot] = row + 1;
+        }
+        return slots;
+    }
+
+    private static int lookupSlot(int hash, int length, int mask) {
+        // Integer mixing only chooses a candidate. Exact UTF-16 comparison proves identity.
+        long mixed = (Integer.toUnsignedLong(hash) << 32) | Integer.toUnsignedLong(length);
+        mixed ^= mixed >>> 33;
+        mixed *= 0xff51afd7ed558ccdL;
+        mixed ^= mixed >>> 33;
+        mixed *= 0xc4ceb9fe1a85ec53L;
+        mixed ^= mixed >>> 33;
+        return (int) mixed & mask;
     }
 
     /** Exact numeric pointer to the canonical code-unit payload, or zero when absent. */
