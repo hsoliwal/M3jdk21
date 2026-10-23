@@ -6,8 +6,6 @@ package com.m3.collections;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.NoSuchElementException;
@@ -64,14 +62,11 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                 || hasHigh && ((c = tree.compare(key, high)) > 0 || c == 0 && !highInclusive));
     }
     private boolean slotWithin(int s) { return s >= 0 && within(keyAt(s)); }
-    private boolean endpointAdmitted(K key, boolean inclusive) {
+    private void endpoint(K key, boolean inclusive) {
         checked(key);
         int c;
-        return !(hasLow && ((c = tree.compare(key, low)) < 0 || c == 0 && inclusive && !lowInclusive)
-                || hasHigh && ((c = tree.compare(key, high)) > 0 || c == 0 && inclusive && !highInclusive));
-    }
-    private void endpoint(K key, boolean inclusive) {
-        if (!endpointAdmitted(key, inclusive)) {
+        if (hasLow && ((c = tree.compare(key, low)) < 0 || c == 0 && inclusive && !lowInclusive)
+                || hasHigh && ((c = tree.compare(key, high)) > 0 || c == 0 && inclusive && !highInclusive)) {
             throw new IllegalArgumentException("endpoint outside view");
         }
     }
@@ -88,26 +83,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     @Override int nextSlot(int slot) {
         int s = tree.step(slot, descending); return slotWithin(s) ? s : -1;
     }
-    /** Opposite encounter direction on this bounded/descending array-backed owner. */
-    int previousIndexedSlot(int slot) {
-        int s = tree.step(slot, !descending); return slotWithin(s) ? s : -1;
-    }
-    /** Existing AVL neighbor kernel exposed to sibling filtered views as a slot only. */
-    int nearIndexedSlot(K key, int relation) { return near(key, relation); }
     @Override int findSlot(Object key) {
-        if (tree.size == 0 && !hasLow && !hasHigh) {
-            // Empty natural lookup checks null/type without comparing a key.
-            if (tree.comparator == null) { Objects.requireNonNull((Comparable<?>) key); }
-            return -1;
-        }
-        @SuppressWarnings("unchecked") K k = (K) key;
-        return within(k) ? tree.find(k) : -1;
-    }
-    @Override int entrySlot(K key, int hint, int expected) {
-        // Attached API entries can address their slot without invoking the comparator.
-        // After structural change retain the existing key-based resolution semantics.
-        return expected == revision() && hint >= 0 && hint < tree.used
-                && tree.height[hint] != 0 && tree.keys[hint] == key ? hint : findSlot(key);
+        K k = checked(key); return within(k) ? tree.find(k) : -1;
     }
     @Override K keyAt(int slot) { return M3SlotArrays.get(tree.keys, slot); }
     @Override V valueAt(int slot) {
@@ -130,30 +107,22 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         if (tree.lazy != null) { tree.lazy.admitted(slot, true); }
         return old;
     }
-    @Override V eraseAt(int slot) { tree.writable(); V old = valueAt(slot); forgetEntryFacade(keyAt(slot)); tree.erase(slot); return old; }
+    @Override V eraseAt(int slot) {
+        tree.writable();
+        V old = valueAt(slot);
+        invalidateEntryProjection(slot);
+        tree.erase(slot);
+        return old;
+    }
     @Override int revision() { return tree.modifications; }
+    @Override int projectionGeneration(int slot) { return tree.generations[slot]; }
     @Override public int size() {
         if (!hasLow && !hasHigh) { return tree.size; }
         int count = 0; for (int s = firstSlot(); s >= 0; s = nextSlot(s)) { count++; } return count;
     }
     @Override public boolean isEmpty() { return firstSlot() < 0; }
-    /** Single-search value lookup, independent of getOrDefault's null-result probe. */
-    @Override public V get(Object key) { return super.getOrDefault(key, null); }
-    /** Preserve JDK TreeMap's observable second search after a null result. */
-    @Override public V getOrDefault(Object key, V fallback) {
-        // M3-specific value modes retain their established single-search contract.
-        if (tree.lazy != null || tree.keyOnly) { return super.getOrDefault(key, fallback); }
-        V value = get(key);
-        if (value != null) { return value; }
-        return containsKey(key) ? null : fallback;
-    }
     @Override public V put(K key, V value) {
-        tree.writable();
-        // Ordinary nonempty roots validate against visited keys during descent.
-        // Keep admission validation for the first key and all other value/view modes.
-        if (tree.size == 0 || hasLow || hasHigh || descending || tree.lazy != null || tree.keyOnly) {
-            checked(key);
-        }
+        tree.writable(); checked(key);
         if (!within(key)) { throw new IllegalArgumentException("key outside view"); }
         int expected = revision(), p = -1, s = tree.root, cmp = 0;
         while (s >= 0) {
@@ -163,27 +132,9 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         }
         check(expected); tree.insert(p, cmp, key, value); return null;
     }
-    /**
-     * Copy compatible sorted inputs into an empty eager owner in linear time.
-     * Other views, value modes and inputs retain the ordinary per-mapping path.
-     */
-    @Override boolean putAllSorted(Map<? extends K, ? extends V> source) {
-        int expected = revision();
-        if (!hasLow && !hasHigh && !descending && tree.size == 0
-                && tree.lazy == null && !tree.keyOnly
-                && source instanceof SortedMap<?, ?> sorted
-                && Objects.equals(sorted.comparator(), tree.comparator)) {
-            int count = source.size();
-            if (count > 0) {
-                tree.loadSorted(count, source.entrySet().iterator(), expected);
-                return true;
-            }
-        }
-        return false;
-    }
     @Override public void clear() {
         tree.writable();
-        clearEntryFacades();
+        clearEntryProjections();
         if (!hasLow && !hasHigh) { tree.clear(); return; }
         int s = firstSlot();
         while (s >= 0) { int next = nextSlot(s); tree.erase(s); s = next; }
@@ -309,11 +260,16 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     @Override public K floorKey(K k) { return nullableKey(near(k, -1)); }
     @Override public K ceilingKey(K k) { return nullableKey(near(k, 1)); }
     @Override public K higherKey(K k) { return nullableKey(near(k, 2)); }
-    private Entry<K, V> poll(int s) { Entry<K, V> e = snapshot(s); if (s >= 0) { tree.erase(s); } return e; }
+    private Entry<K, V> poll(int s) {
+        Entry<K, V> e = snapshot(s);
+        if (s >= 0) { invalidateEntryProjection(s); tree.erase(s); }
+        return e;
+    }
     @Override public Entry<K, V> pollFirstEntry() { return poll(firstSlot()); }
     @Override public Entry<K, V> pollLastEntry() { return poll(lastSlot()); }
     K pollKey(boolean last) {
-        int s = last ? lastSlot() : firstSlot(); K k = nullableKey(s); if (s >= 0) { tree.erase(s); } return k;
+        int s = last ? lastSlot() : firstSlot(); K k = nullableKey(s);
+        if (s >= 0) { invalidateEntryProjection(s); tree.erase(s); } return k;
     }
     @Override public M3TreeMap<K, V> reversed() { return descendingMap(); }
     @Override public M3TreeMap<K, V> descendingMap() {
@@ -332,24 +288,13 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     }
     @Override public M3TreeMap<K, V> headMap(K to, boolean inclusive) {
         endpoint(to, inclusive);
-        return headRange(to, inclusive);
-    }
-    private M3TreeMap<K, V> headRange(K to, boolean inclusive) {
         return descending ? new M3TreeMap<>(tree, true, to, inclusive, hasHigh, high, highInclusive, true)
                 : new M3TreeMap<>(tree, hasLow, low, lowInclusive, true, to, inclusive, false);
     }
     @Override public M3TreeMap<K, V> tailMap(K from, boolean inclusive) {
         endpoint(from, inclusive);
-        return tailRange(from, inclusive);
-    }
-    private M3TreeMap<K, V> tailRange(K from, boolean inclusive) {
         return descending ? new M3TreeMap<>(tree, hasLow, low, lowInclusive, true, from, inclusive, true)
                 : new M3TreeMap<>(tree, true, from, inclusive, hasHigh, high, highInclusive, false);
-    }
-    /** Normal endpoint rejection is distinct from an exception thrown by user comparison. */
-    M3TreeMap<K, V> rangeOrNull(K key, boolean forward, boolean inclusive) {
-        if (!endpointAdmitted(key, inclusive)) { return null; }
-        return forward ? tailRange(key, inclusive) : headRange(key, inclusive);
     }
     @Override public SortedMap<K, V> subMap(K from, K to) { return subMap(from, true, to, false); }
     @Override public SortedMap<K, V> headMap(K to) { return headMap(to, false); }
@@ -358,9 +303,12 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     public void verifyInvariants() { tree.verify(); }
 
     private static final class Tree<K, V> {
+        private static final int SLOT_LIVE = 1;
+        private static final int SLOT_FREE = 1 << 1;
         private Object[] keys = M3SlotArrays.EMPTY_OBJECTS;
         private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
         private int[] left = M3SlotArrays.EMPTY_INTS, right = M3SlotArrays.EMPTY_INTS, parent = M3SlotArrays.EMPTY_INTS;
+        private int[] generations = M3SlotArrays.EMPTY_INTS, stateMasks = M3SlotArrays.EMPTY_INTS;
         // N(45)=2,971,215,072 exceeds the slot limit; even a transient height fits a byte.
         private byte[] height = M3SlotArrays.EMPTY_BYTES;
         private int root = -1, free = -1, used, size, modifications;
@@ -417,10 +365,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             parent[s] = pivot; if (middle >= 0) { parent[middle] = s; }
             update(s); update(pivot); return pivot;
         }
-        void balance(int s) { balance(s, false); }
-        void balance(int s, boolean stopWhenStable) {
+        void balance(int s) {
             while (s >= 0) {
-                int previousHeight = stopWhenStable ? h(s) : 0;
                 update(s); int delta = h(left[s]) - h(right[s]);
                 if (delta > 1) {
                     if (h(left[left[s]]) < h(right[left[s]])) { rotate(left[s], false); }
@@ -429,9 +375,6 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                     if (h(right[right[s]]) < h(left[right[s]])) { rotate(right[s], true); }
                     s = rotate(s, false);
                 }
-                // Insertion cannot affect higher ancestors after this height is stable.
-                // Deletion keeps the full walk: transplanted successors are pre-updated.
-                if (stopWhenStable && h(s) == previousHeight) { return; }
                 s = parent[s];
             }
         }
@@ -439,58 +382,28 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             int n = M3SlotArrays.grow(keys.length);
             Object[] k = Arrays.copyOf(keys, n), v = keyOnly ? values : Arrays.copyOf(values, n);
             int[] l = Arrays.copyOf(left, n), r = Arrays.copyOf(right, n), p = Arrays.copyOf(parent, n);
+            int[] generationsNext = Arrays.copyOf(generations, n), masksNext = Arrays.copyOf(stateMasks, n);
             byte[] h = Arrays.copyOf(height, n);
             if (lazy != null) { lazy.grow(n); }
             keys = k; values = v; left = l; right = r; parent = p; height = h;
-        }
-        /**
-         * In-order balanced construction adapted from fastutil AVLTreeMap.drv
-         * readTree, Apache-2.0, Copyright (C) 2002-2026 Sebastiano Vigna,
-         * commit e70f36a137c349efa50f346818d16917a9f91986. Only the ordered
-         * subtree split is reused; payloads and links stay in M3 arrays.
-         */
-        void loadSorted(int count, Iterator<? extends Map.Entry<? extends K, ? extends V>> entries,
-                int expected) {
-            if (count > Integer.MAX_VALUE - 8) {
-                throw new OutOfMemoryError("collection capacity exhausted");
-            }
-            int capacity = 0;
-            while (capacity < count) { capacity = M3SlotArrays.grow(capacity); }
-            // Keep the old empty storage intact until every source entry is read.
-            Tree<K, V> built = new Tree<>(comparator, false, null);
-            built.keys = new Object[capacity]; built.values = new Object[capacity];
-            built.left = new int[capacity]; built.right = new int[capacity];
-            built.parent = new int[capacity]; built.height = new byte[capacity];
-            built.root = built.readSorted(entries, 0, count, -1);
-            if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }
-            keys = built.keys; values = built.values;
-            left = built.left; right = built.right; parent = built.parent; height = built.height;
-            root = built.root; free = -1; used = count; size = count; modifications++;
-        }
-        private int readSorted(Iterator<? extends Map.Entry<? extends K, ? extends V>> entries,
-                int first, int count, int owner) {
-            if (count == 0) { return -1; }
-            int rightCount = count / 2, leftCount = count - rightCount - 1;
-            int slot = first + leftCount;
-            parent[slot] = owner;
-            left[slot] = readSorted(entries, first, leftCount, slot);
-            Map.Entry<? extends K, ? extends V> entry = entries.next();
-            keys[slot] = entry.getKey(); values[slot] = entry.getValue();
-            right[slot] = readSorted(entries, slot + 1, rightCount, slot);
-            update(slot);
-            return slot;
+            generations = generationsNext; stateMasks = masksNext;
         }
         void insert(int p, int direction, K key, V value) { insert(p, direction, key, value, true); }
         void insert(int p, int direction, K key, V value, boolean loaded) {
             writable();
             if (free < 0 && used == keys.length) { grow(); }
-            int s;
-            if (free < 0) { s = used++; } else { s = free; free = left[s]; }
+            int s = free < 0 ? used : free;
+            if (generations[s] == Integer.MAX_VALUE) {
+                throw new IllegalStateException("physical tree slot generation exhausted");
+            }
+            if (free < 0) { used++; } else { free = left[s]; }
+            generations[s]++;
+            stateMasks[s] = SLOT_LIVE;
             keys[s] = key; if (!keyOnly) { values[s] = value; }
             if (lazy != null) { lazy.admitted(s, loaded); }
             left[s] = -1; right[s] = -1; parent[s] = p; height[s] = 1;
             if (p < 0) { root = s; } else if (direction < 0) { left[p] = s; } else { right[p] = s; }
-            size++; modifications++; balance(p, true);
+            size++; modifications++; balance(p);
         }
         void erase(int s) {
             writable();
@@ -510,12 +423,15 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             keys[s] = null; if (!keyOnly) { values[s] = null; }
             if (lazy != null) { lazy.erased(s); }
             height[s] = 0; parent[s] = -1; right[s] = -1; left[s] = free; free = s;
+            stateMasks[s] = SLOT_FREE;
             size--; modifications++; balance(rebalance);
         }
         void clear() {
             writable();
             if (size == 0) { return; }
             Arrays.fill(keys, null); Arrays.fill(values, null); Arrays.fill(height, (byte) 0);
+            Arrays.fill(stateMasks, 0);
+            // Preserve generations when slots are reused following clear().
             if (lazy != null) { lazy.cleared(); }
             root = -1; free = -1; used = 0; size = 0; modifications++;
         }
@@ -525,7 +441,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             if (verify(root, -1, seen) != size) { throw new AssertionError("tree size"); }
             int n = size;
             for (int s = free; s >= 0; s = left[s]) {
-                if (s >= used || seen[s] || height[s] != 0 || keys[s] != null || !keyOnly && values[s] != null) { throw new AssertionError("free slot"); }
+                if (s >= used || seen[s] || height[s] != 0 || stateMasks[s] != SLOT_FREE
+                        || keys[s] != null || !keyOnly && values[s] != null) { throw new AssertionError("free slot"); }
                 if (lazy != null) { lazy.verifySlot(s, false, values); }
                 seen[s] = true; n++;
             }
@@ -538,7 +455,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         }
         int verify(int s, int p, boolean[] seen) {
             if (s < 0) { return 0; }
-            if (s >= used || seen[s] || parent[s] != p) { throw new AssertionError("tree links"); }
+            if (s >= used || seen[s] || parent[s] != p || stateMasks[s] != SLOT_LIVE
+                    || generations[s] == 0) { throw new AssertionError("tree links and slot state"); }
             if (lazy != null) { lazy.verifySlot(s, true, values); }
             seen[s] = true; int n = 1 + verify(left[s], s, seen) + verify(right[s], s, seen);
             if (height[s] != 1 + Math.max(h(left[s]), h(right[s])) || Math.abs(h(left[s]) - h(right[s])) > 1) { throw new AssertionError("AVL balance"); }

@@ -43,6 +43,8 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
         while (++s < states.length) { if (live(s)) { return s; } } return -1;
     }
     @Override int revision() { return modifications; }
+    /** A cached API entry would defeat weak-key reclamation. */
+    @Override boolean retainApiProjections() { return false; }
     @Override int findSlot(Object key) {
         drain(); int hash = M3SlotArrays.hash(key), mask = states.length - 1;
         // Hash evaluation above remains observable even before storage is allocated.
