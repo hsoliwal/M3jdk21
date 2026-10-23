@@ -171,6 +171,65 @@ public final class M3WindowPlan {
 		return Math.max (0, row - first);
 	}
 
+	/**
+	 * Count the intersection between a contiguous model-change range and the
+	 * currently committed native viewport, without changing its geometry.
+	 * An empty or offscreen change has no native cost. Range arithmetic is checked
+	 * before use; this operation allocates no data and does not paint anything.
+	 */
+	public int changedCount (int row, int count) {
+		if (row < 0 || count < 0 || row > Integer.MAX_VALUE - count) throw new IllegalArgumentException ("change");
+		int start = Math.max (row, first);
+		int end = Math.min (row + count, first + size);
+		return Math.max (0, end - start);
+	}
+
+	/**
+	 * Native start index of a nonempty changed range, or -1 when there is no
+	 * resident intersection. This and {@link #changedCount(int, int)} are a
+	 * zero-allocation alternative to rebuilding or repainting every item.
+	 */
+	public int changedEntry (int row, int count) {
+		if (changedCount (row, count) == 0) return -1;
+		return Math.max (row, first) - first;
+	}
+
+	/**
+	 * Project arbitrary changed model rows into the committed native viewport.
+	 * The input is a caller-owned logical index lane; output is native row indexes.
+	 * Hidden rows are ignored, while encounter order and duplicate notifications
+	 * are preserved. No model value, facade, Entry, or native handle is copied.
+	 *
+	 * All input rows and output bounds are checked before writing any result.
+	 * Source/output aliasing uses a page-sized temporary int[]; nonalias calls
+	 * allocate no objects or arrays. Concurrent changes require owner fencing.
+	 *
+	 * @return number of native row indexes written
+	 */
+	public int projectChangedRows (int [] changedRows, int from, int length,
+			int [] nativeEntries, int targetOffset) {
+		java.util.Objects.requireNonNull (changedRows, "changedRows");
+		java.util.Objects.requireNonNull (nativeEntries, "nativeEntries");
+		java.util.Objects.checkFromIndexSize (from, length, changedRows.length);
+		java.util.Objects.checkFromIndexSize (targetOffset, 0, nativeEntries.length);
+		int count = 0;
+		for (int i = from, end = from + length; i < end; i++) {
+			int row = changedRows [i];
+			if (row < 0) throw new IllegalArgumentException ("negative model row");
+			if (row >= first && row < first + size) count++;
+		}
+		if (count > nativeEntries.length - targetOffset) throw new IndexOutOfBoundsException ("native output capacity");
+		if (count == 0) return 0;
+		int [] destination = changedRows == nativeEntries ? new int [count] : nativeEntries;
+		int write = changedRows == nativeEntries ? 0 : targetOffset;
+		for (int i = from, end = from + length; i < end; i++) {
+			int row = changedRows [i];
+			if (row >= first && row < first + size) destination [write++] = row - first;
+		}
+		if (destination != nativeEntries) System.arraycopy (destination, 0, nativeEntries, targetOffset, count);
+		return count;
+	}
+
 	/** Forgets the committed window (the caller deleted every native row). */
 	public void clear () {
 		first = size = plannedFirst = plannedSize = 0;
