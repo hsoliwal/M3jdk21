@@ -9,7 +9,7 @@ import java.util.function.LongPredicate;
 
 /** Executable Java 21 contract oracle for parent-owned page slots and packed keep bits. */
 public final class M3LongTreeSetMaskCompactionContract {
-    private static final long SEED = 0x4D33534F52544C;
+    private static final long SEED = 0x4D33534F52544CL;
     private static final int[] SIZES = {0, 1, 2, 3, 4, 7, 8, 16, 31, 32, 63, 64, 65, 128, 129, 257};
     private static final int[] CAPACITIES = {4, 8, 16, 64};
 
