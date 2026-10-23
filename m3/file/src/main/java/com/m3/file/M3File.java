@@ -4,8 +4,6 @@ package com.m3.file;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
@@ -14,6 +12,9 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 import java.util.Objects;
 
 /**
@@ -26,6 +27,7 @@ import java.util.Objects;
  * the file-open operations.</p>
  */
 public final class M3File {
+    private static final int FINGERPRINT_BUFFER_BYTES = 8192;
     private final Path path;
 
     private M3File(Path path) {
@@ -58,34 +60,15 @@ public final class M3File {
     }
 
     /**
-     * Opens one monitored stream whose shadows advance only when the primary stream is read.
-     *
-     * <p>Observers are invoked in declaration order and receive borrowed buffer ranges only.
-     * No observer causes a second file read.</p>
-     */
-    public InputStream openInputStream(
-            M3ProgressMonitor progress, M3StreamObserver... observers) throws IOException {
-        M3ProgressMonitor monitor = Objects.requireNonNull(progress, "progress");
-        return new M3ShadowInputStream(openInputStream(), monitor, compose(observers));
-    }
-
-    /**
      * Bounded complete read; a size precheck is only an optimization. The actual
      * stream is checked again to handle concurrent file growth or replacement.
      */
     public byte[] readAllBytes(int maxBytes) throws IOException {
-        return readAllBytes(maxBytes, M3ProgressMonitor.none());
-    }
-
-    public byte[] readAllBytes(
-            int maxBytes, M3ProgressMonitor progress, M3StreamObserver... observers)
-            throws IOException {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
-        Metadata before = metadata();
-        if (before.size() > maxBytes) {
+        if (metadata().size() > maxBytes) {
             throw new IOException("resource exceeds configured read limit");
         }
-        try (InputStream input = openInputStream(progress, observers)) {
+        try (InputStream input = openInputStream()) {
             byte[] data = input.readNBytes(maxBytes);
             if (input.read() != -1) {
                 throw new IOException("resource exceeds configured read limit");
@@ -94,95 +77,73 @@ public final class M3File {
         }
     }
 
-    /** Cheap metadata-only observation for change detection. */
-    public M3FileSnapshot snapshot() throws IOException {
-        return new M3FileSnapshot(metadata(), null);
-    }
-
     /**
-     * Exact-content observation. SHA-256 is computed as a shadow of one sequential read and no file
-     * payload is retained. Metadata is checked before and after hashing; a visible metadata change
-     * rejects the observation rather than publishing a mixed-generation snapshot.
-     */
-    public M3FileSnapshot snapshotWithSha256(M3ProgressMonitor progress) throws IOException {
-        return indexedSnapshot(progress).source();
-    }
-
-    /**
-     * Drives source hashing and all supplied parser/index fact observers from one physical read.
+     * Stream a bounded raw-byte SHA-256 observation without retaining file content.
      *
-     * <p>Observers may maintain arbitrary incremental parser/index state but publish only a
-     * fixed-width fact receipt back to this module. M3File therefore never owns M3AST, regex,
-     * JSON, binary-format or index-specific runtime objects.</p>
+     * <p>Every call reads the content through this owner's regular-file, nofollow
+     * stream. Neither modification time nor file size authorizes reuse. The
+     * accepted length is inclusive; at most one additional byte is read to
+     * detect a limit violation. The stream closes on success and failure.</p>
+     *
+     * <p>The result describes bytes observed during this read, not an atomic
+     * filesystem version. Equal digests are not proof of class ABI or semantic
+     * equivalence. Binary class files, archives and resources are never decoded
+     * as text.</p>
+     *
+     * @param maxBytes maximum accepted byte count, from zero to Long.MAX_VALUE
+     * @return immutable length and digest metadata, with no retained payload
+     * @throws IllegalArgumentException if maxBytes is negative
+     * @throws IOException if the file cannot be read, is not a regular file,
+     *         exceeds the limit, or a read makes no progress
      */
-    public M3FileIndexedSnapshot indexedSnapshot(
-            M3ProgressMonitor progress, M3FileFactObserver... observers) throws IOException {
-        Metadata before = metadata();
-        if (!before.regularFile()) throw new IOException("resource is not a regular file");
-
-        M3FileFactObserver[] checked =
-                Objects.requireNonNull(observers, "observers").clone();
-        MessageDigest sourceDigest = sha256();
-        M3StreamObserver[] shadows = new M3StreamObserver[checked.length + 1];
-        shadows[0] = sourceDigest::update;
-        for (int index = 0; index < checked.length; index++) {
-            shadows[index + 1] = Objects.requireNonNull(checked[index], "fact observer");
-        }
-
-        try (InputStream input = openInputStream(progress, shadows)) {
-            byte[] buffer = new byte[64 * 1024];
-            while (input.read(buffer) >= 0) {
-                // The shadows perform all layered work; this loop only drives the primary stream.
+    public Fingerprint fingerprint(long maxBytes) throws IOException {
+        if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
+        MessageDigest digest = sha256Digest();
+        byte[] block = new byte[FINGERPRINT_BUFFER_BYTES];
+        long size = 0;
+        try (InputStream input = openInputStream()) {
+            while (true) {
+                long remaining = maxBytes - size;
+                int limit = remaining >= block.length ? block.length : (int) remaining + 1;
+                int count = input.read(block, 0, limit);
+                if (count < 0) break;
+                if (count == 0) throw new IOException("resource read made no progress");
+                if (count > remaining) {
+                    throw new IOException("resource exceeds configured fingerprint limit");
+                }
+                digest.update(block, 0, count);
+                size += count;
             }
         }
-
-        Metadata after = metadata();
-        if (!before.equals(after)) {
-            throw new IOException("resource metadata changed while indexing");
-        }
-
-        M3FileFact[] facts = new M3FileFact[checked.length];
-        for (int index = 0; index < checked.length; index++) {
-            M3FileFact fact = Objects.requireNonNull(checked[index].fact(), "fact");
-            if (!checked[index].factName().equals(fact.name())) {
-                throw new IllegalStateException("fact observer name changed after publication");
-            }
-            facts[index] = fact;
-        }
-        return new M3FileIndexedSnapshot(
-                new M3FileSnapshot(after, sourceDigest.digest()),
-                M3FileFacts.of(facts));
+        return new Fingerprint(size, HexFormat.of().formatHex(digest.digest()));
     }
 
-    public M3FileDelta deltaSince(
-            M3FileSnapshot before, boolean exactContent, M3ProgressMonitor progress)
-            throws IOException {
-        M3FileSnapshot after =
-                exactContent ? snapshotWithSha256(progress) : snapshot();
-        return Objects.requireNonNull(before, "before").deltaTo(after);
-    }
-
-    private static M3StreamObserver compose(M3StreamObserver[] observers) {
-        M3StreamObserver[] checked = Objects.requireNonNull(observers, "observers").clone();
-        if (checked.length == 0) return (bytes, offset, length) -> { };
-        M3StreamObserver result = Objects.requireNonNull(checked[0], "observer");
-        for (int index = 1; index < checked.length; index++) {
-            result = result.andThen(Objects.requireNonNull(checked[index], "observer"));
-        }
-        return result;
-    }
-
-    private static MessageDigest sha256() {
+    private static MessageDigest sha256Digest() {
         try {
             return MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException impossible) {
-            throw new ExceptionInInitializerError(impossible);
+            throw new AssertionError("required SHA-256 provider unavailable", impossible);
         }
     }
 
     private void requireRegular() throws IOException {
         if (!metadata().regularFile()) {
             throw new IOException("resource is not a regular file");
+        }
+    }
+
+    /** Metadata for observed bytes; digest equality does not certify class ABI equality. */
+    public record Fingerprint(long size, String sha256) {
+        public Fingerprint {
+            if (size < 0) throw new IllegalArgumentException("negative file size");
+            Objects.requireNonNull(sha256, "sha256");
+            if (sha256.length() != 64) throw new IllegalArgumentException("invalid SHA-256");
+            for (int index = 0; index < sha256.length(); index++) {
+                char digit = sha256.charAt(index);
+                if (!(digit >= '0' && digit <= '9' || digit >= 'a' && digit <= 'f')) {
+                    throw new IllegalArgumentException("invalid lowercase SHA-256");
+                }
+            }
         }
     }
 

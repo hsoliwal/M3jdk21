@@ -39,7 +39,8 @@ public final class M3ParserImageSmoke {
                     List.of("-proc:none", "-source", "21", "-target", "21"), null, List.of(input));
             try (M3AST session = M3JavacParser.attach(task, M3JavacParser.projection(512), value -> captured[0] = value)) {
                 task.parse();
-                if (session.summary().parsedUnits() != 1 || session.summary().projectionComputations() != 1) {
+                if (session.summary().parsedUnits() != 1 || session.summary().projectionComputations() != 2
+                        || session.summary().capturedSources() != 1 || session.summary().sourceReads() != 0) {
                     throw new AssertionError("linked existing-compiler projection contract failed");
                 }
             }
