@@ -23,6 +23,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             m3/arrays/**
+            m3/native/include/m3_jni_core.h
             m3/collections/**
             .github/workflows/m3jdk21-arraylist-dual-word-20261023.yml
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
