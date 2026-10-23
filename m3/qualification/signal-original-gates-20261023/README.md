@@ -20,3 +20,27 @@ Canonical Maven/OpenRewrite recipe and first-apply/fixed-point/drift-refusal tes
 Strict actual Maven/JUnit and source-vendored launcher compilation are required. A success of these two **does not** qualify HotSpot/JNI/full JDK image, JCK/jtreg, cross-platform behavior, performance or the remaining 4,770-path receiving inventory. Existing owned source/JNI contracts and the locked String → arrays → collections → AST/compiler order remain unchanged.
 
 Statuses at authoring: SOURCE_RECEIVER_IDENTITY=PASS; original Maven compiler=NOT_RUN on corrected POM; original Jupiter+Launcher=NOT_RUN on corrected workflow; whole JDK/JNI=NOT_RUN. No automatic merge or ancestry rewrite.
+
+## Completed original-gate progression and Java21 fixture correction
+
+Focused run [39886641532](https://github.com/hsoliwal/M3jdk21/actions/runs/39886641532)
+**PASSED** the original `M3SourceSignalPlugin` Maven/JUnit SPI job. In
+[39888402849](https://github.com/hsoliwal/M3jdk21/actions/runs/39888402849)
+the original source-vendored Jupiter and Launcher plus current `m3-arrays`
+prerequisite progressed through build, but M3 collections `testCompile`
+failed at `M3LongTreeSetMaskCompactionContract.java:12:38` with
+`integer number too large`. That pre-existing invalid Java21 test source
+declared a `long` seed with unsuffixed `0x4D33534F52544C`.
+
+The canonical **named, double SHA-256 guarded** Synexia recipe
+`m3-long-tree-mask-seed-literal-20261023` adds only the Java `L` suffix.
+Host Java21 `javac --release 21` independently rejects the exact old
+literal and compiles its long-typed successor with `-Xlint:all -Werror`.
+The original full 1,280-case test fixture is retained unchanged except for
+the suffix; it is not considered a passing product test until the owning
+Maven/JUnit workflow runs on the corrected checkout.
+
+There are now four exact source-receiving SHA-256/Git-blob rows in the product
+manifest (two original POM/workflow inputs, one additive focused gate and one
+original invalid Java21 test fixture). This is a reviewable draft, not global
+String/arrays/collections/compiler admission.
