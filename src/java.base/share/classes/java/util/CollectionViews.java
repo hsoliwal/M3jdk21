@@ -302,10 +302,13 @@ public final class CollectionViews {
         @Override
         @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
-            // Preserve the owner's membership semantics (including identity sets)
-            // before evaluating the predicate on its actual stored occurrences.
-            if (!backing.contains(candidate)) return false;
+            // Collection membership is defined by the stored occurrence, not by a
+            // caller-provided equal probe. Equivalence does not imply that a
+            // predicate depending on other fields agrees for both instances.
             if (backing instanceof Set<?>) {
+                // Equality against a stored value is not enough for identity-backed
+                // sets. Delegate candidate admission to the actual owning Set.
+                if (!backing.contains(candidate)) return false;
                 E equivalent = null;
                 boolean found = false;
                 for (E stored : backing) {
@@ -318,7 +321,9 @@ public final class CollectionViews {
                 return found && visible(equivalent);
             }
             for (E stored : backing) {
-                if (Objects.equals(candidate, stored) && visible(stored)) return true;
+                if (Objects.equals(candidate, stored) && visible(stored)) {
+                    return true;
+                }
             }
             return false;
         }
@@ -334,22 +339,22 @@ public final class CollectionViews {
         @Override
         public boolean addAll(Collection<? extends E> elements) {
             Objects.requireNonNull(elements, "elements");
-            // Hand the owner only the references admitted by this traversal.
-            // Reuse the existing snapshot atom; never read the caller twice.
-            return backing.addAll(selectedCopy(elements, element -> {
+            for (E element : elements) {
                 if (!visible(element)) {
                     throw new IllegalArgumentException("element rejected by view predicate");
                 }
-                return true;
-            }));
+            }
+            return backing.addAll(elements);
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
-            if (!backing.contains(candidate)) return false;
+            // A List can contain a hidden and visible occurrence that compare
+            // equal. Removing by probe would delete the wrong physical element.
+            // Indexed deletion also admits Lists whose iterators are read-only
+            // but whose indexed removal is writable (CopyOnWriteArrayList).
             if (backing instanceof List<?>) {
-                // Remove the visible physical occurrence, not an earlier hidden
-                // equals-duplicate. Indexed removal also supports COW lists.
                 List<E> list = (List<E>) backing;
                 int physical = 0;
                 for (E stored : list) {
@@ -362,6 +367,9 @@ public final class CollectionViews {
                 return false;
             }
             if (backing instanceof Set<?>) {
+                // Select the actual stored member using this owner's membership
+                // policy, including reference identity where applicable.
+                if (!backing.contains(candidate)) return false;
                 E equivalent = null;
                 boolean found = false;
                 for (E stored : backing) {
@@ -375,21 +383,26 @@ public final class CollectionViews {
                 }
                 return found && visible(equivalent) && backing.remove(equivalent);
             }
-            Iterator<E> iterator = backing.iterator();
-            boolean skippedHiddenEqual = false;
-            while (iterator.hasNext()) {
-                E stored = iterator.next();
+            Iterator<E> cursor = backing.iterator();
+            boolean skippedEqual = false;
+            while (cursor.hasNext()) {
+                E stored = cursor.next();
                 if (Objects.equals(candidate, stored)) {
                     if (visible(stored)) {
                         try {
-                            iterator.remove();
+                            cursor.remove();
                             return true;
                         } catch (UnsupportedOperationException unsupported) {
-                            if (skippedHiddenEqual) throw unsupported;
-                            return backing.remove(stored);
+                            // A Set has at most one equal occurrence. For other
+                            // owners, direct removal is safe only if no earlier
+                            // hidden equal occurrence could be removed instead.
+                            if (backing instanceof Set<?> || !skippedEqual) {
+                                return backing.remove(stored);
+                            }
+                            throw unsupported;
                         }
                     }
-                    skippedHiddenEqual = true;
+                    skippedEqual = true;
                 }
             }
             return false;
@@ -436,6 +449,46 @@ public final class CollectionViews {
     private static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
         private FilteredSet(Set<E> source, Predicate<? super E> predicate) {
             super(source, predicate);
+        }
+
+        /**
+         * Preserve owner membership before resolving stored visibility. Identity
+         * sets may retain equals-equal references, so an exact reference wins.
+         */
+        @Override
+        public boolean contains(Object candidate) {
+            if (!backing.contains(candidate)) return false;
+            for (E stored : backing) {
+                if (stored == candidate) return predicate.test(stored);
+            }
+            return super.contains(candidate);
+        }
+
+        @Override
+        public boolean remove(Object candidate) {
+            if (!backing.contains(candidate)) return false;
+            Iterator<E> cursor = backing.iterator();
+            while (cursor.hasNext()) {
+                E stored = cursor.next();
+                if (stored == candidate) {
+                    if (!predicate.test(stored)) return false;
+                    try {
+                        cursor.remove();
+                        return true;
+                    } catch (UnsupportedOperationException unsupported) {
+                        // Preserve the existing Set owner fallback, including
+                        // CopyOnWriteArraySet's read-only traversal cursors.
+                        return backing.remove(stored);
+                    }
+                }
+            }
+            return super.remove(candidate);
+        }
+
+        @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(backing.spliterator(), predicate,
+                    Spliterator.DISTINCT, null);
         }
 
         @Override
@@ -505,6 +558,14 @@ public final class CollectionViews {
         @Override
         public Comparator<? super E> comparator() {
             return sorted.comparator();
+        }
+
+        /** Owner order is authoritative, including bounded and descending views. */
+        @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(sorted.spliterator(), super.predicate,
+                    Spliterator.DISTINCT | Spliterator.SORTED | Spliterator.ORDERED,
+                    sorted.comparator());
         }
 
         @Override
@@ -666,17 +727,28 @@ public final class CollectionViews {
     private static final class SelectionSpliterator<E> implements Spliterator<E>, Consumer<E> {
         private final Spliterator<E> source;
         private final Predicate<? super E> predicate;
+        private final int guaranteed;
+        private final Comparator<? super E> ownerComparator;
         private Consumer<? super E> action;
         private boolean delivered;
 
         private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate) {
+            this(source, predicate, 0, null);
+        }
+
+        private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate,
+                int guaranteed, Comparator<? super E> ownerComparator) {
             this.source = source;
             this.predicate = predicate;
+            this.guaranteed = guaranteed;
+            this.ownerComparator = ownerComparator;
         }
 
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> enclosingAction = action;
+            boolean enclosingDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -685,7 +757,8 @@ public final class CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = enclosingAction;
+                delivered = enclosingDelivered;
             }
         }
 
@@ -709,7 +782,7 @@ public final class CollectionViews {
         @Override
         public Spliterator<E> trySplit() {
             Spliterator<E> prefix = source.trySplit();
-            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate);
+            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate, guaranteed, ownerComparator);
         }
 
         @Override
@@ -719,12 +792,12 @@ public final class CollectionViews {
 
         @Override
         public int characteristics() {
-            return source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE);
+            return (source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE)) | guaranteed;
         }
 
         @Override
         public Comparator<? super E> getComparator() {
-            return source.getComparator();
+            return (guaranteed & SORTED) != 0 ? ownerComparator : source.getComparator();
         }
     }
 
