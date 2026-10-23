@@ -1,0 +1,100 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 typed domain progressive evidence Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalColumns.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalDomainPolicy.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SignalDomainPolicy*.java'
+      - 'm3/collections/qualification/typed-signal-domain-evidence-20261022/**'
+      - '.github/workflows/m3-typed-signal-domain-evidence-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  actual-java21-owner-and-javac-producer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source hashes, parent preimage and mechanical hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/m3/typed-signal-topk-20261022...HEAD
+          bash m3/collections/qualification/typed-signal-domain-evidence-20261022/verify.sh
+      - name: Strict Java21 compile of ACTUAL M3JDK21 typed signals and existing progressive engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-domain-evidence"
+          mkdir -p "$out/classes" "$out/plugin/META-INF/services" "$out/demo-classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalTopK.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
+            m3/collections/src/main/java/com/m3/collections/M3ProgressiveSignalEvidence.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalDomainPolicy.java \
+            m3/collections/src/test/java/com/m3/collections/M3SignalDomainPolicySelfTest.java
+          java -cp "$out/classes" com.m3.collections.M3SignalDomainPolicySelfTest
+      - name: Original javac M3SourceSignals Plugin -> SHA-256 image -> original policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-domain-evidence"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/plugin" \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java
+          cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
+            "$out/plugin/META-INF/services/com.sun.source.util.Plugin"
+          mkdir -p "$out/example"
+          cat > "$out/example/Example.java" <<'JAVA'
+          package demo;
+          class Example {
+              static void run() { new Target().run(); }
+          }
+          class Target { void run() { } }
+          JAVA
+          javac --release 21 -proc:none -processorpath "$out/plugin" \
+            "-Xplugin:M3SourceSignals out=$out/source.tsv include=all" \
+            -d "$out/demo-classes" "$out/example/Example.java"
+          java -cp "$out/classes" com.m3.collections.M3SignalDomainPolicySelfTest \
+            "$out/source.tsv"
+
+  alternate-junit-actual-product-sources:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: ALTERNATE_JUNIT (original customized JUnit dependency remains blocked)
+        run: >
+          mvn -B -ntp -f m3/collections/qualification/typed-signal-domain-evidence-20261022/pom.xml
+          test
+
+  original-reactor-custom-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: ORIGINAL_REACTOR (do not bypass source-pinned JUnit 5.10.2-m3-source-1)
+        run: >
+          mvn -B -ntp -f m3/collections/pom.xml
+          -Dtest=M3SignalDomainPolicyTest,M3SignalColumnsTest,M3SignalTopKTest
+          test

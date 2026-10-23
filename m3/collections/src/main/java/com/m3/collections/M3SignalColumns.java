@@ -117,6 +117,37 @@ public final class M3SignalColumns {
         return column(column).present(row);
     }
 
+    /**
+     * Source-validated numeric coordinate for the *existing* progressive L1 engine.
+     * Reject missing/nonfinite facts and long values whose conversion to double could
+     * silently change the declared metric. Ordinal sorting continues to use exact
+     * int/long/Double.compare through orderAt and never calls this method.
+     *
+     * <p>Package-private: no public JDK or M3 caller contract is changed.</p>
+     */
+    double finiteMetricAt(int dimension, int row) {
+        Column c = column(dimension);
+        Objects.checkIndex(row, rows);
+        if (!c.present(row)) {
+            throw new IllegalArgumentException("missing numeric metric coordinate");
+        }
+        double value = switch (c.kind) {
+            case INTEGER -> c.integers[row];
+            case LONG -> {
+                long number = c.longs[row];
+                if (number < -(1L << 53) || number > (1L << 53)) {
+                    throw new IllegalArgumentException("long metric loses 64-bit precision");
+                }
+                yield (double) number;
+            }
+            case DOUBLE -> c.doubles[row];
+        };
+        if (!Double.isFinite(value)) {
+            throw new IllegalArgumentException("nonfinite metric coordinate");
+        }
+        return value;
+    }
+
     /** Exact typed ordinal order; missing coordinates are always last. */
     public Comparison compare(int left, int right) {
         Objects.checkIndex(left, rows);
