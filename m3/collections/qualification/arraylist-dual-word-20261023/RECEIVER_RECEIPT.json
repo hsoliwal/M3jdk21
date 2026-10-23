@@ -1,0 +1,102 @@
+{
+  "schema": "M3JDK21_COLLECTION_ATOM_RECEIVER_V1",
+  "date": "2026-10-23",
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseline_commit": "b032048eece51c897d8623fd7a69f7f16eac5a57",
+    "kind": "JDK_SOURCE_TREE_STANDALONE_PROVING_OWNER",
+    "public_jdk_api_mutated": false
+  },
+  "convergence": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-arraylist-mask-register-20261023",
+    "pr": "https://github.com/hsoliwal/com.synexia/pull/13222",
+    "recipe": "com.synexia.rewrite.M3ArrayListDualWordMaskRecipe",
+    "atom": "M3ArrayList.removeIf decision mask",
+    "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-arraylist-dual-word-20261023/manifest.tsv"
+  },
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "preimage_git_blob_sha1": "eaada4ef3f198e780dd2a792ec76dddabb8d3616",
+      "postimage_git_blob_sha1": "b1315351aafdad389a065f6d5776923b535224cc",
+      "preimage_sha256": "9833b3d8d36287fe38025d9b7c38fb09e495f94f27c611af85433130f1e72ac2",
+      "postimage_sha256": "adf2bcbf3c596d7a682d82babe8c56965948321f38133247be622cf8bc3e00ff",
+      "role": "implementation_postimage"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "preimage_git_blob_sha1": "298b2cf45e30959af08d676f862de3921c9dbf33",
+      "postimage_git_blob_sha1": "054be11f5ba9bdacbc3e6aa4ca01c43b81526239",
+      "preimage_sha256": "7beb39be4f5686b6f08b230f8a49dbadc5d82a5c8bfe23356fe5932504bf414b",
+      "postimage_sha256": "d8c109e3f7a5bc3fc836109d01ba7754ea523549dc2703b557edd90f0b8c6230",
+      "role": "differential_oracle_postimage"
+    }
+  ],
+  "algorithm": {
+    "problem_category": "STABLE_BULK_REMOVE_MASK",
+    "chosen": "two primitive long bitmasks for logical indices 0..127; incumbent BitSet above",
+    "timing_complexity": "O(n) predicate pass + O(n) stable compaction",
+    "additional_space": "2 primitive mask words at n<=128; BitSet O(ceil(n/64)) beyond",
+    "limitations": "128 is one candidate threshold, not a universal performance winner"
+  },
+  "invariants": [
+    "single Object[] owning element references",
+    "stable retained-reference ordering and duplicate/null identities",
+    "exactly one predicate evaluation per original logical occurrence",
+    "all callback exceptions propagated before outer compaction",
+    "same modCount semantics and fail-fast iterator boundaries",
+    "clear vacated tail references",
+    "no new API, serialization format, JNI method, Java callback into JNI, or new wrapper"
+  ],
+  "verification": {
+    "isolated_java21_atom": {
+      "status": "PASSED",
+      "checks": 714400,
+      "command": "javac -Xlint:all -Werror DualWordMaskAtomProof.java && java DualWordMaskAtomProof",
+      "scope": "small standalone atom; not a full JDK source build"
+    },
+    "exact_preimage_and_target_blob_readback": {
+      "status": "PASSED",
+      "scope": "source Git blobs match Synexia preimage fixtures and receiving postimage templates"
+    },
+    "expanded_target_oracle": {
+      "status": "PENDING_CI",
+      "command": "java -cp <compiled-real-M3-collections> com.m3.collections.M3ArrayListShortWordMaskContract"
+    },
+    "maven_openrewrite_replay": {
+      "status": "PENDING_CI",
+      "command": "mvn -B -ntp -f synexia-openrewrite-recipes/crates/m3-arraylist-dual-word-20261023/pom.xml test"
+    },
+    "source_built_jdk_jtreg_abi": {
+      "status": "NOT_RUN"
+    },
+    "jni_gc_jmm": {
+      "status": "NOT_CHANGED_BUT_PARITY_NOT_RUN"
+    },
+    "cpu_benchmark_jmh": {
+      "status": "NOT_RUN",
+      "note": "Illustrative local mask-only comparison is not a qualification"
+    },
+    "allocation_heap_native": {
+      "status": "NOT_RUN"
+    },
+    "licensing": {
+      "status": "FIRST_PARTY_APACHE_2_0",
+      "note": "Challenge links are problem taxonomy only; no external solution implementation copied"
+    }
+  },
+  "admission": {
+    "state": "DRAFT_REVIEW_CANDIDATE_NOT_CANONICAL_JDK_PROMOTION",
+    "legacy_public_m3arraylist": "still exposed standalone SDK; closure tracked separately in naming PR #1868",
+    "rollback": "Restore pinned source preimages; no binary-layout schema or JNI symbol changes"
+  },
+  "donor_urls": [
+    "https://leetcode.com/problems/move-zeroes/",
+    "https://leetcode.com/problems/remove-element/",
+    "https://www.hackerrank.com/challenges/countingsort4/problem",
+    "https://www.hackerrank.com/challenges/dynamic-array/problem",
+    "https://www.geeksforgeeks.org/dsa/check-whether-k-th-bit-set-not/",
+    "https://github.com/RoaringBitmap/RoaringBitmap"
+  ]
+}
