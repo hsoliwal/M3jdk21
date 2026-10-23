@@ -12,19 +12,13 @@ package java.util.concurrent;
 @FunctionalInterface
 public interface MonitoredRunnable extends Runnable {
     /**
-     * Runs the task body using the supplied borrowed progress monitor.
+     * Replaceable task body; implementations report progress through monitor.
      *
-     * @param monitor the monitor bound by the template run
+     * @param monitor the borrowed progress monitor for the task
      */
     void runMonitored(ProgressMonitor monitor);
 
-    /**
-     * Inherits the current monitor, checks cancellation, and dispatches the body.
-     * Cancellation is checked again after the body returns.
-     *
-     * @throws CancellationException if cancellation is observed before or
-     *         after the body
-     */
+    /** Template method: inherit monitor, check cancellation, dispatch body. */
     @Override
     default void run() {
         ProgressMonitor monitor = ProgressMonitors.current();

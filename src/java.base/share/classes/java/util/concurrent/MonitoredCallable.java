@@ -13,24 +13,15 @@ package java.util.concurrent;
 @FunctionalInterface
 public interface MonitoredCallable<V> extends Callable<V> {
     /**
-     * Computes a result using the supplied borrowed progress monitor.
-     * This body does not own completion of the monitor.
+     * Replaceable checked body, with no ownership over monitor completion.
      *
-     * @param monitor the monitor bound by the template call
+     * @param monitor the borrowed progress monitor for the task
      * @return the computed result
-     * @throws Exception if the body cannot compute a result
+     * @throws Exception if the task cannot compute a result
      */
     V callMonitored(ProgressMonitor monitor) throws Exception;
 
-    /**
-     * Inherits the current monitor, checks cancellation, and dispatches the body.
-     * Cancellation is checked again after the body returns.
-     *
-     * @return the result computed by {@link #callMonitored(ProgressMonitor)}
-     * @throws CancellationException if cancellation is observed before or
-     *         after the body
-     * @throws Exception if the body cannot compute a result
-     */
+    /** Template method: inherit monitor, check cancellation, dispatch body. */
     @Override
     default V call() throws Exception {
         ProgressMonitor monitor = ProgressMonitors.current();
