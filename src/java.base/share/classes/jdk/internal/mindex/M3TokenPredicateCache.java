@@ -4,10 +4,7 @@
  */
 package jdk.internal.mindex;
 
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.VarHandle;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 /**
  * Predicate table of one {@link M3TokenPattern} bound to one {@link M3TokenIndex} generation.
@@ -21,16 +18,8 @@ import java.util.regex.Pattern;
  * the token and never cached by spelling. Accepted-lexeme sets follow the BlackLab
  * NfaStateToken per-state term set (Apache-2.0, pattern only) with M3 mask words instead of a
  * third-party int set.
- *
- * <p>For an immutable String, completed text-regex answers are reused per exact row and token
- * occurrence inside this owner. The recent answer uses one primitive word; a second distinct
- * query may allocate at most 256 primitive result words. Collisions evict reuse, not correctness.
- * This does not complete the pending per-lexeme B_P table or certify arbitrary lexeme ids.
  */
 public final class M3TokenPredicateCache {
-    private static final int MAX_TEXT_REGEX_RESULTS = 256;
-    private static final VarHandle TEXT_REGEX_ELEMENT = MethodHandles.arrayElementVarHandle(long[].class);
-
     /** Caller vocabulary; must be the one that assigned the index lexeme lane. */
     public interface Vocabulary {
         /** Canonical lexeme id of the spelling, 0 when it is not a lexicon word. */
@@ -40,14 +29,6 @@ public final class M3TokenPredicateCache {
         default int symbolOf(String key, String value) {
             return -1;
         }
-
-        /**
-         * Reverse spelling of a symbolic lane value for token-regex predicates, or {@code null}
-         * when this vocabulary has no textual spelling for that coordinate.
-         */
-        default CharSequence symbolText(String key, int value) {
-            return null;
-        }
     }
 
     private final M3TokenPattern pattern;
@@ -56,23 +37,15 @@ public final class M3TokenPredicateCache {
     private final boolean caseInsensitive;
     private final long[] values;
     private final int[] columns;
-    private final Pattern[] regex;
-    private final Vocabulary vocabulary;
-    /** Exact row/occurrence key and truth, together in one atomic word; zero is empty. */
-    private volatile long textRegexRecent;
-    /** Optional bounded result metadata, allocated only after two different immutable occurrences. */
-    private volatile long[] textRegexResults;
 
     private M3TokenPredicateCache(M3TokenPattern pattern, M3TokenIndex index, CharSequence source,
-            long[] values, int[] columns, Pattern[] regex, Vocabulary vocabulary) {
+            long[] values, int[] columns) {
         this.pattern = pattern;
         this.index = index;
         this.source = source;
         this.caseInsensitive = (pattern.flags() & M3TokenPattern.CASE_INSENSITIVE) != 0;
         this.values = values;
         this.columns = columns;
-        this.regex = regex;
-        this.vocabulary = vocabulary;
     }
 
     /**
@@ -90,15 +63,11 @@ public final class M3TokenPredicateCache {
         int rows = pattern.rowCount();
         long[] values = new long[rows];
         int[] columns = new int[rows];
-        Pattern[] regex = new Pattern[rows];
         for (int r = 0; r < rows; r++) {
             columns[r] = columnOf(pattern, index, r);
             values[r] = valueOf(pattern, vocabulary, r);
-            if (pattern.rowOp(r) == M3TokenPattern.O_REGEX) {
-                regex[r] = Pattern.compile(pattern.rowLiteral(r));
-            }
         }
-        return new M3TokenPredicateCache(pattern, index, source, values, columns, regex, vocabulary);
+        return new M3TokenPredicateCache(pattern, index, source, values, columns);
     }
 
     private static int columnOf(M3TokenPattern pattern, M3TokenIndex index, int r) {
@@ -145,9 +114,7 @@ public final class M3TokenPredicateCache {
         return switch (key) {
             case M3TokenPattern.K_KIND -> "kind";
             case M3TokenPattern.K_LEXEME -> "lexeme";
-            case M3TokenPattern.K_BINDING -> "binding";
-            case M3TokenPattern.K_FLAGS -> "flags";
-            default -> "text";
+            default -> "binding";
         };
     }
 
@@ -197,7 +164,8 @@ public final class M3TokenPredicateCache {
     public boolean row(int r, int token) {
         byte op = pattern.rowOp(r);
         if (op == M3TokenPattern.O_REGEX) {
-            return regexRow(r, token);
+            throw new M3NotYetReceived("M3TokenPredicateCache.regexRow",
+                    "M3JDK21 #1338 M3RX7.TokenIndex rows or Synexia MIndexTokenRegex rank bitmap");
         }
         return switch (pattern.rowKey(r)) {
             case M3TokenPattern.K_TEXT -> textRow(r, op, token);
@@ -209,128 +177,13 @@ public final class M3TokenPredicateCache {
         };
     }
 
-    private boolean regexRow(int r, int token) {
-        CharSequence text;
-        byte key = pattern.rowKey(r);
-        if (key == M3TokenPattern.K_TEXT) {
-            long start = index.startAt(token);
-            long end = index.endAt(token);
-            if (start < 0 || end < start || end > source.length()) return false;
-            if (source instanceof String) {
-                return immutableTextRegex(r, token, Math.toIntExact(start), Math.toIntExact(end));
-            }
-            text = new Span(source, Math.toIntExact(start), Math.toIntExact(end));
-        } else {
-            long raw = switch (key) {
-                case M3TokenPattern.K_KIND -> index.kindAt(token);
-                case M3TokenPattern.K_LEXEME -> index.lexemeAt(token);
-                case M3TokenPattern.K_BINDING -> index.bindingAt(token);
-                case M3TokenPattern.K_FLAGS -> index.flagsAt(token);
-                default -> {
-                    int column = columns[r];
-                    yield column < 0 ? 0L : index.attributeAt(column, token);
-                }
-            };
-            if (raw < Integer.MIN_VALUE || raw > Integer.MAX_VALUE) {
-                text = Long.toString(raw);
-            } else {
-                String name = key == M3TokenPattern.K_ATTR
-                        ? pattern.rowAttribute(r) : keyName(key);
-                CharSequence symbolic = vocabulary.symbolText(name, (int) raw);
-                text = symbolic != null ? symbolic : Long.toString(raw);
-            }
-        }
-        return regex[r].matcher(text).matches();
-    }
-
-    /** No-copy CharSequence projection of one source token span. */
-    private record Span(CharSequence source, int start, int end) implements CharSequence {
-        Span {
-            Objects.requireNonNull(source, "source");
-            Objects.checkFromToIndex(start, end, source.length());
-        }
-
-        @Override public int length() { return end - start; }
-
-        @Override
-        public char charAt(int index) {
-            Objects.checkIndex(index, length());
-            return source.charAt(start + index);
-        }
-
-        @Override
-        public CharSequence subSequence(int from, int to) {
-            Objects.checkFromToIndex(from, to, length());
-            return new Span(source, start + from, start + to);
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder out = new StringBuilder(length());
-            for (int index = 0; index < length(); index++) out.append(charAt(index));
-            return out.toString();
-        }
-    }
-
-    /**
-     * Reuses only this owner's immutable String and defensive token-index snapshot. Lexeme ids
-     * and vocabulary symbols are not spelling identity. Each miss still uses a fresh Matcher;
-     * mutable sources and occurrence-dependent symbolic rows never enter this result lane.
-     */
-    private boolean immutableTextRegex(int row, int token, int start, int end) {
-        long key = textRegexKey(row, token, index.count());
-        long recent = textRegexRecent;
-        if ((recent & ~1L) == key) {
-            return (recent & 1L) != 0;
-        }
-        long[] results = textRegexResults;
-        if (results != null) {
-            int slot = (int) (key >>> 1) & (results.length - 1);
-            long result = (long) TEXT_REGEX_ELEMENT.getOpaque(results, slot);
-            if ((result & ~1L) == key) {
-                return (result & 1L) != 0;
-            }
-        }
-        boolean matched = regex[row].matcher(new Span(source, start, end)).matches();
-        long result = key | (matched ? 1L : 0L);
-        textRegexRecent = result;
-        if (results != null) {
-            int slot = (int) (key >>> 1) & (results.length - 1);
-            TEXT_REGEX_ELEMENT.setOpaque(results, slot, result);
-        } else if (recent != 0) {
-            // Concurrent initializers may lose reuse, never key/truth integrity. Publication
-            // retains at most one bounded primitive array; no spelling or Matcher is retained.
-            try {
-                long required = Math.min(MAX_TEXT_REGEX_RESULTS, (long) index.count() * pattern.rowCount());
-                int capacity = 2;
-                while (capacity < required) capacity <<= 1;
-                results = new long[capacity];
-                results[(int) (recent >>> 1) & (capacity - 1)] = recent;
-                results[(int) (key >>> 1) & (capacity - 1)] = result;
-                textRegexResults = results;
-            } catch (OutOfMemoryError unavailable) {
-                // The exact answer is already known; this optional metadata is expendable.
-            }
-        }
-        return matched;
-    }
-
-    /**
-     * Called only after row/token bounds checks. For nonnegative int row and token < count,
-     * row * count + token + 1 is positive and below 2^62. Its doubled key cannot overflow,
-     * never aliases the empty word, and leaves bit zero exclusively for the Boolean result.
-     */
-    private static long textRegexKey(int row, int token, int count) {
-        return ((long) row * count + token + 1L) << 1;
-    }
-
     private boolean textRow(int r, byte op, int token) {
         if (op == M3TokenPattern.O_ABSENT) {
             return false;
         }
         if (op != M3TokenPattern.O_EQ) {
-            throw new M3NotYetReceived("M3TokenPredicateCache.numericTextRow "
-                    + "T-Rex NumericPattern semantics over the in-place span");
+            throw new M3NotYetReceived("M3TokenPredicateCache.numericTextRow",
+                    "T-Rex NumericPattern semantics over the in-place span");
         }
         int lexeme = index.lexemeAt(token);
         long wanted = values[r];
