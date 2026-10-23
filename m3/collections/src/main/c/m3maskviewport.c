@@ -279,3 +279,133 @@ Java_com_m3_collections_M3MaskViewportNative_projectPage(JNIEnv *env, jclass cls
     free(scratch);
     return (*env)->ExceptionCheck(env) ? 0 : needed;
 }
+
+/* Additive JNI original-owner CPU viewport output. Old project symbol unchanged. */
+#define M3_FRAME_REGION 128
+
+static int m3_read_frame(JNIEnv *env, jintArray offsets, jintArray flags,
+        jint position, jint count, int fetchStates, jint *ids, jint *masks) {
+    (*env)->GetIntArrayRegion(env, offsets, position, count, ids);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    if (fetchStates) {
+        (*env)->GetIntArrayRegion(env, flags, position, count, masks);
+        if ((*env)->ExceptionCheck(env)) return 0;
+    }
+    return 1;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclass cls,
+        jintArray offsets, jintArray flags, jint first, jint length,
+        jint required, jint forbidden, jint skipVisible, jint maxVisible,
+        jintArray rows, jint rowOffset, jintArray slots, jint slotOffset,
+        jintArray words, jint wordOffset) {
+    (void) cls;
+    if (offsets == NULL || flags == NULL || rows == NULL || slots == NULL || words == NULL) {
+        raise(env, "java/lang/NullPointerException", "null frame lane");
+        return 0;
+    }
+    const jsize size = (*env)->GetArrayLength(env, offsets);
+    const jsize flagSize = (*env)->GetArrayLength(env, flags);
+    const jsize rowSize = (*env)->GetArrayLength(env, rows);
+    const jsize slotSize = (*env)->GetArrayLength(env, slots);
+    const jsize wordSize = (*env)->GetArrayLength(env, words);
+    if (size != flagSize) {
+        raise(env, "java/lang/IllegalArgumentException", "offset and state array lengths differ");
+        return 0;
+    }
+    if ((*env)->IsSameObject(env, rows, offsets) || (*env)->IsSameObject(env, rows, flags)
+            || (*env)->IsSameObject(env, slots, offsets) || (*env)->IsSameObject(env, slots, flags)
+            || (*env)->IsSameObject(env, words, offsets) || (*env)->IsSameObject(env, words, flags)
+            || (*env)->IsSameObject(env, rows, slots) || (*env)->IsSameObject(env, rows, words)
+            || (*env)->IsSameObject(env, slots, words)) {
+        raise(env, "java/lang/IllegalArgumentException", "frame outputs must be disjoint");
+        return 0;
+    }
+    if (first < 0 || length < 0 || first > size - length
+            || skipVisible < 0 || maxVisible < 0) {
+        raise(env, "java/lang/IndexOutOfBoundsException", "invalid source window");
+        return 0;
+    }
+
+    const int allStates = required == 0 && forbidden == 0;
+    const int contradictory = (((uint32_t) required & (uint32_t) forbidden) != 0U);
+    const int fetchStates = !allStates && !contradictory;
+    const jint end = first + length;
+    jint ids[M3_FRAME_REGION];
+    jint masks[M3_FRAME_REGION];
+    jint available = 0;
+    for (jint start = first; start < end;) {
+        jint take = end - start;
+        if (take > M3_FRAME_REGION) take = M3_FRAME_REGION;
+        if (!m3_read_frame(env, offsets, flags, start, take, fetchStates, ids, masks)) return 0;
+        for (jint i = 0; i < take; ++i) {
+            if (ids[i] < 0) {
+                raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
+                return 0;
+            }
+            if (allStates || (fetchStates && matches(masks[i], required, forbidden))) {
+                ++available;
+            }
+        }
+        start += take;
+    }
+    const jint needed = skipVisible >= available ? 0
+            : (available - skipVisible < maxVisible ? available - skipVisible : maxVisible);
+    if (rowOffset < 0 || slotOffset < 0 || wordOffset < 0
+            || needed > rowSize || rowOffset > rowSize - needed
+            || needed > slotSize || slotOffset > slotSize - needed
+            || needed > wordSize || wordOffset > wordSize - needed) {
+        raise(env, "java/lang/IndexOutOfBoundsException", "destination capacity");
+        return 0;
+    }
+    if (needed == 0) return 0;
+    if ((size_t) needed > SIZE_MAX / (3U * sizeof(jint))) {
+        raise(env, "java/lang/OutOfMemoryError", "scratch size overflow");
+        return 0;
+    }
+    jint small[M3_FRAME_REGION * 3];
+    jint *scratch = small;
+    if (needed > M3_FRAME_REGION) {
+        scratch = (jint *) malloc(3U * (size_t) needed * sizeof(jint));
+        if (scratch == NULL) {
+            raise(env, "java/lang/OutOfMemoryError", "scratch allocation");
+            return 0;
+        }
+    }
+    jint *ordinals = scratch + needed;
+    jint *values = scratch + needed * 2;
+    jint left = skipVisible;
+    jint written = 0;
+    for (jint start = first; start < end && written < needed;) {
+        jint take = end - start;
+        if (take > M3_FRAME_REGION) take = M3_FRAME_REGION;
+        if (!m3_read_frame(env, offsets, flags, start, take, 1, ids, masks)) {
+            if (scratch != small) free(scratch);
+            return 0;
+        }
+        for (jint i = 0; i < take && written < needed; ++i) {
+            if (allStates || (fetchStates && matches(masks[i], required, forbidden))) {
+                if (left > 0) {
+                    --left;
+                } else {
+                    scratch[written] = ids[i];
+                    ordinals[written] = start + i;
+                    values[written] = masks[i];
+                    ++written;
+                }
+            }
+        }
+        start += take;
+    }
+    if (written != needed) {
+        if (scratch != small) free(scratch);
+        raise(env, "java/util/ConcurrentModificationException", "frame input changed");
+        return 0;
+    }
+    (*env)->SetIntArrayRegion(env, rows, rowOffset, needed, scratch);
+    if (!(*env)->ExceptionCheck(env)) (*env)->SetIntArrayRegion(env, slots, slotOffset, needed, ordinals);
+    if (!(*env)->ExceptionCheck(env)) (*env)->SetIntArrayRegion(env, words, wordOffset, needed, values);
+    if (scratch != small) free(scratch);
+    return (*env)->ExceptionCheck(env) ? 0 : needed;
+}
