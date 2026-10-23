@@ -75,6 +75,14 @@ public final class M3JavacFactImage {
     }
 
     /**
+     * Capture from the consolidated JAVAC-domain index through its geometry view.
+     * The bytes equal a capture of the geometry projection of the same unit.
+     */
+    public static byte[] capture(M3ASTIndex index, byte[] contextSha256, int maxBytes) throws IOException {
+        return capture(M3JavacTree.of(index), contextSha256, maxBytes);
+    }
+
+    /**
      * Admit a prior image only with exactly matching source and build-context
      * identities. No file I/O, source parsing or javac task is performed here.
      */
