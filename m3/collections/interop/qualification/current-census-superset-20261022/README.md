@@ -57,3 +57,29 @@ M3JDK21 master and prior 40-row Synexia receipts.
 Historical origin: M3JDK21 failed four-library workflow on October 22, 2026;
 canonical Synexia source successor PR #12999, which preserved the 36-file
 baseline and catalogued 40 additional Java files.
+
+## Exact Commons Collections 4.5.0 Bag source/test successor (2026-10-22)
+
+The immutable original 36-owner census and all 40 added source shards are
+unchanged. A further, exact two-row historical successor is now stored at
+`receipts/changed-apache-bag-retain450-02.tsv`. Its two permitted paths are
+`M3ApacheBag.java` (original owner) and
+`M3ApacheBagContractTest.java` (existing donor differential).
+
+`verify_superset.py` checks each old SHA-256/Git blob against the original
+census, then admits only the explicitly named new SHA-256/Git blob from the
+new two-row receipt. Missing, altered, symlinked or unknown receipts fail
+closed. The actual `verify_historical_revisions` path still runs the
+unaltered historical verifier on its pinned original checkout, and still
+enforces all 36 original and 40 additional source identities.
+
+This transition fixes Commons 4.5.0 `AbstractMapBag.retainAll(Bag)` behavior:
+a request greater than the owned multiplicity removes all copies of that
+key. The receiving source retains M3 arrays/counts and public/JNI contracts.
+The canonical mechanical authoring and donor catalogue remain in
+`hsoliwal/com.synexia` #13114; this product only stores the resulting
+Java source, tests and receiving proofs (#1854).
+
+At this checkpoint real Maven/JUnit/JNI gates are **pending**. This is one
+of the six independently reported remaining five-provider issues in #1852,
+not a claim that all 158 original tests now pass.
