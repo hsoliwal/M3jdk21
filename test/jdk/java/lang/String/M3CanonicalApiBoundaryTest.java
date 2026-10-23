@@ -1,6 +1,6 @@
 /*
- * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
- * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
+ * GPLv2 with the Classpath exception.
  *
  * @test
  * @summary M3 implementation structures stay internal to canonical M3JDK21 APIs
