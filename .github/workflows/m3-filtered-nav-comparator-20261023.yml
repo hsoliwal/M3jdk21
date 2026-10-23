@@ -37,6 +37,8 @@ jobs:
             m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableComparatorContract.java \
             72f40f9ff6c297f33e7c175aec267ceb430d817f6a8b91631594930032674251 \
             m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableComparatorTest.java \
+            e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe \
+            m3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionContract.java \
             | sha256sum -c -
       - name: Build source-vendored Jupiter and Launcher
         shell: bash
@@ -49,7 +51,7 @@ jobs:
       - name: Run actual M3 filtered navigable and existing randomized Java21 contracts
         run: |
           mvn -B -ntp -f m3/collections/pom.xml \
-            -Dtest=M3FilteredNavigableComparatorTest,M3FilteredViewsTest \
+            -Dtest=M3FilteredNavigableComparatorTest,M3FilteredViewsTest,M3LongTreeSetMaskCompactionTest \
             -DfailIfNoTests=true test
       - name: Require non-skipped contract reports
         shell: bash
@@ -58,7 +60,8 @@ jobs:
           from pathlib import Path
           from xml.etree import ElementTree as ET
           reports = Path('m3/collections/target/surefire-reports')
-          for name in ('M3FilteredNavigableComparatorTest', 'M3FilteredViewsTest'):
+          for name in ('M3FilteredNavigableComparatorTest', 'M3FilteredViewsTest',
+                       'M3LongTreeSetMaskCompactionTest'):
               files = list(reports.glob('TEST-*' + name + '.xml'))
               if len(files) != 1: raise SystemExit('missing JUnit report: ' + name)
               root = ET.parse(files[0]).getroot()
