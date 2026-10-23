@@ -55,7 +55,6 @@
   "pending": [
     "full reactor, jtreg and installed image",
     "C++20 qualification",
-    "combined current-DLL Map mode replay; separate current DLL boundary proof passed",
     "global Slot reentry",
     "LFU API projections",
     "concurrency and serialization",
@@ -66,5 +65,11 @@
   "storage": "105 MiB S-only user approval; protection active",
   "delivery_receipt_commit": "4043f9b6f95782533efe758dc77641e2b5790517",
   "delivery_receipt_path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/delivery/JNI_ARRAY_MAP_PUBLICATION_V1.json",
-  "delivery_checkpoint_path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/delivery/CONTINUATION_STATE_V21.json"
+  "delivery_checkpoint_path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/delivery/CONTINUATION_STATE_V21.json",
+  "current_DLL_Map_canonical_commit": "4170473b960c860fb0afbe0f6390eabca5485d5a",
+  "current_DLL_Map_matrix": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/current-dll-map-runtime-v1/ACTUAL_MATRIX_V2.json",
+  "current_DLL_Map_matrix_SHA256": "50f9822678a29c13889d61bd8bc44df78367be74729008e8559a582ab652d2b1",
+  "current_DLL_Map_checks": 6721934,
+  "current_DLL_Map_fresh_JVMs": 2,
+  "current_DLL_Map_compilation": "Strict Java21; exact original Map/Table binary hashes; private Job exit0 and joined readers"
 }
