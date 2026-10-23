@@ -2,16 +2,13 @@
 #include <jni.h>
 #include <stdint.h>
 #include "com_m3_collections_M3ResidencyStateMaskIndex.h"
+#include "../../../../../native/include/m3_jni_core.h"
 
 /* Only ephemeral primitive index/word/state snapshots cross JNI; no Java object handles. */
 #define M3_CHUNK 256
 
 static void fail(JNIEnv *env, const char *name, const char *message) {
-    if ((*env)->ExceptionCheck(env)) return;
-    jclass kind = (*env)->FindClass(env, name);
-    if (kind == NULL) return;
-    (void) (*env)->ThrowNew(env, kind, message);
-    (*env)->DeleteLocalRef(env, kind);
+    m3_jni_throw_new(env, name, message);
 }
 
 static int selected(jlong bits, jbyte state, jlong required,
@@ -19,7 +16,7 @@ static int selected(jlong bits, jbyte state, jlong required,
     int life = state;
     if (life < 0 || life >= 6) return 0;
     return ((allowed_states & (1 << life)) != 0)
-            && ((bits & required) == required) && ((bits & forbidden) == 0);
+            && m3_jni_matches_u64(bits, required, forbidden);
 }
 
 JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3ResidencyStateMaskIndex_select0(
@@ -64,6 +61,10 @@ JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3ResidencyStateMaskIndex_se
     }
     jintArray result = (*env)->NewIntArray(env, matches);
     if (result == NULL || (*env)->ExceptionCheck(env)) return NULL;
+    /* First pass already validated every lifecycle ordinal. When none passes the
+     * masks, no coordinate read, second state scan or JNI region write is needed.
+     * Caller-held snapshots must remain stable during this native operation. */
+    if (matches == 0) return result;
     jsize written = 0, buffered = 0;
     for (jsize base = 0; base < length;) {
         jsize take = length - base < M3_CHUNK ? length - base : M3_CHUNK;

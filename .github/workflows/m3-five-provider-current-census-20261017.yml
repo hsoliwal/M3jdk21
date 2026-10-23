@@ -4,6 +4,10 @@ on:
   pull_request:
     paths:
       - 'm3/collections/interop/qualification/current-census-20261017/**'
+      - 'm3/collections/interop/qualification/compiler-three-test-successor-20261022/**'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
       - 'm3/collections/qualification/m3-five-provider-current-census-20261017/**'
       - '.github/workflows/m3-five-provider-current-census-20261017.yml'
   workflow_dispatch:
@@ -12,6 +16,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Run the unchanged 36+7+40 source verifier against its real predecessor,
+      # then compare exactly three changes in the new product source generation.
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: 4bd27a6fc78ba3f7ca019125c096c33d8a324cee
+          path: predecessor-product
+          sparse-checkout: |
+            m3/collections/interop
+          persist-credentials: false
+      # Prove the 36 historical owners at their real authoring commit, without
+      # relaxing the immutable current-census-20261017 source verifier.
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: a720780b1a5ab41ea27182b9b7ad873efdf533b4
+          path: historical-product
+          sparse-checkout: |
+            m3/collections/interop
+          persist-credentials: false
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -39,7 +63,10 @@ jobs:
         run: |
           cd m3/collections/interop/qualification/current-census-20261017
           python3 -m unittest discover -p 'test_*.py' -v
-          python3 verify.py
+          cd "$GITHUB_WORKSPACE"
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v
+          python3 -m unittest discover -s m3/collections/interop/qualification/compiler-three-test-successor-20261022 -p 'test_*.py' -v
+          python3 m3/collections/interop/qualification/compiler-three-test-successor-20261022/verify_compile_successor.py --product . --predecessor predecessor-product --historical-product historical-product
   five-real-provider-runtime:
     runs-on: ubuntu-latest
     needs: source-sealed-current-census

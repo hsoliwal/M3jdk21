@@ -1,0 +1,6 @@
+depth	baseline_build_median_us	paged_build_median_us	baseline_build_alloc_bytes	paged_build_alloc_bytes	baseline_traverse_ns_per_element	paged_traverse_ns_per_element	method
+64	66.8	76.9	13384	15440	1006	562	7 median samples, 2 warmup builds, each separate patched OpenJDK21 process
+256	96.8	127.9	152392	63312	2425	2331	7 median samples, 2 warmup builds, each separate patched OpenJDK21 process
+1024	770.3	249.4	2229064	324432	2353	2578	7 median samples, 2 warmup builds, each separate patched OpenJDK21 process
+4096	4955.4	457.4	34865992	2474832	13406	12050	7 median samples, 2 warmup builds, each separate patched OpenJDK21 process
+8192	12577.5	641.5	138937160	8094544	20040	20847	7 median samples, 2 warmup builds, each separate patched OpenJDK21 process

@@ -1,0 +1,50 @@
+{
+  "00-before-lint-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "01-before-M3RequiredExcludedMaskSelectorContract.log": {
+    "sha256": "2b170f79eebbefb9a3e39900718d704697e003fdb6712e03f1524242d350abbc",
+    "content": "PASS M3RequiredExcludedMaskSelectorContract checks=133140\n"
+  },
+  "02-before-M3RequiredExcludedMaskSelectorNativeContract.log": {
+    "sha256": "c1a67ac51dee0798af3359903f125ca0bdf6b71f5e1f73ef666ff06dbb0147e0",
+    "content": "PASS M3RequiredExcludedMaskSelectorNativeContract checks=512\n"
+  },
+  "03-before-capability-current.log": {
+    "sha256": "eeccc24dcee9bbe5abe5792dc46151c4522b958a9e484fb7487ee37b6d238e54",
+    "content": "PASS M3RequiredExcludedLegacyProbe mode=current checks=7\n"
+  },
+  "04-before-capability-legacy.log": {
+    "sha256": "86840ee781a8a1aea08f470d5c7ccd770885cf1f824c35ade061421ace4dd5fa",
+    "content": "PASS M3RequiredExcludedLegacyProbe mode=legacy checks=7\n"
+  },
+  "05-before-capability-missing.log": {
+    "sha256": "9ebcef7f41610c08ebb10165092b8424471981fe9f22f513e77fc68725976561",
+    "content": "PASS M3RequiredExcludedLegacyProbe mode=missing checks=7\n"
+  },
+  "06-test-lint-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "07-test-M3RequiredExcludedMaskSelectorContract.log": {
+    "sha256": "2b170f79eebbefb9a3e39900718d704697e003fdb6712e03f1524242d350abbc",
+    "content": "PASS M3RequiredExcludedMaskSelectorContract checks=133140\n"
+  },
+  "08-test-M3RequiredExcludedMaskSelectorNativeContract.log": {
+    "sha256": "c1a67ac51dee0798af3359903f125ca0bdf6b71f5e1f73ef666ff06dbb0147e0",
+    "content": "PASS M3RequiredExcludedMaskSelectorNativeContract checks=512\n"
+  },
+  "09-test-capability-current.log": {
+    "sha256": "eeccc24dcee9bbe5abe5792dc46151c4522b958a9e484fb7487ee37b6d238e54",
+    "content": "PASS M3RequiredExcludedLegacyProbe mode=current checks=7\n"
+  },
+  "10-test-capability-legacy.log": {
+    "sha256": "86840ee781a8a1aea08f470d5c7ccd770885cf1f824c35ade061421ace4dd5fa",
+    "content": "PASS M3RequiredExcludedLegacyProbe mode=legacy checks=7\n"
+  },
+  "11-test-capability-missing.log": {
+    "sha256": "9ebcef7f41610c08ebb10165092b8424471981fe9f22f513e77fc68725976561",
+    "content": "PASS M3RequiredExcludedLegacyProbe mode=missing checks=7\n"
+  }
+}

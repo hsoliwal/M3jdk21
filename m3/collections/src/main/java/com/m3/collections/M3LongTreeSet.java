@@ -230,25 +230,28 @@ public final class M3LongTreeSet implements M3LongSortedSet {
             return 0;
         }
         int before = size;
-        long[] kept = new long[size];
-        int write = 0;
-        int page = 0;
-        int index = 0;
+        // Evaluate against the untouched physical owner, even when callbacks read this set.
+        // One bit per original value replaces the former long[size] scratch payload.
+        long[] admitted = new long[(int) (((long) before + 63L) >>> 6)];
+        int evaluated = 0;
+        int rejected = 0;
         try {
-            for (; page < pageCount; page++, index = 0) {
+            for (int page = 0; page < pageCount; page++) {
                 int offset = pageOffset(page);
                 int count = pageCounts[page];
-                for (; index < count; index++) {
-                    long value = values[offset + index];
-                    if (predicate.test(value)) {
-                        kept[write++] = value;
+                for (int index = 0; index < count; index++) {
+                    if (predicate.test(values[offset + index])) {
+                        admitted[evaluated >>> 6] |= 1L << (evaluated & 63);
+                    } else {
+                        rejected++;
                     }
+                    evaluated++;
                 }
             }
         } finally {
-            write = appendUntested(kept, write, page, index);
-            if (write != before) {
-                rebuild(kept, write);
+            // A throwing predicate leaves the current and untested suffix admitted.
+            if (rejected != 0) {
+                compactRetained(admitted, evaluated);
             }
         }
         return before - size;
@@ -396,15 +399,7 @@ public final class M3LongTreeSet implements M3LongSortedSet {
     private int locatePage(long value) {
         int low = 0;
         int high = pageCount - 1;
-        while (low < high) {
-            int mid = (low + high) >>> 1;
-            if (value <= pageMaxima[mid]) {
-                high = mid;
-            } else {
-                low = mid + 1;
-            }
-        }
-        return low;
+        return M3LaneSearch.lowerBound(pageMaxima, low, high, value);
     }
 
     private int pageOffset(int page) {
@@ -467,34 +462,37 @@ public final class M3LongTreeSet implements M3LongSortedSet {
         pageCount--;
     }
 
-    /** Copies the untested tail, from (page, index) onward, behind the kept prefix. */
-    private int appendUntested(long[] kept, int write, int page, int index) {
-        for (int p = page; p < pageCount; p++) {
-            int from = p == page ? index : 0;
-            int count = pageCounts[p] - from;
-            System.arraycopy(values, pageOffset(p) + from, kept, write, count);
-            write += count;
+    /**
+     * Packs accepted ordinals into the original physical page lanes after all
+     * predicate callbacks finish. Destination logical positions never lead the
+     * source logical page: this remains safe even when pageSlot[] is permuted.
+     * No object/entry or second long-value lane is retained.
+     */
+    private void compactRetained(long[] admitted, int evaluated) {
+        int ordinal = 0;
+        int written = 0;
+        for (int readPage = 0; readPage < pageCount; readPage++) {
+            int source = pageOffset(readPage);
+            int count = pageCounts[readPage];
+            for (int index = 0; index < count; index++, ordinal++) {
+                if (ordinal >= evaluated
+                        || (admitted[ordinal >>> 6] & (1L << (ordinal & 63))) != 0L) {
+                    int destination = pageOffset(written / pageCapacity) + written % pageCapacity;
+                    values[destination] = values[source + index];
+                    written++;
+                }
+            }
         }
-        return write;
-    }
-
-    /** Repacks a sorted distinct run into full pages in slot order (donor rule after a bulk edit). */
-    private void rebuild(long[] run, int length) {
-        int pages = Math.max(1, (length + pageCapacity - 1) / pageCapacity);
-        ensurePages(pages);
-        pageCount = 0;
-        slotsUsed = 0;
-        freeCount = 0;
-        for (int from = 0, page = 0; from < length; from += pageCapacity, page++) {
-            int count = Math.min(pageCapacity, length - from);
-            int slot = allocateSlot();
-            System.arraycopy(run, from, values, slot * pageCapacity, count);
-            pageSlot[page] = slot;
+        int retainedPages = (int) (((long) written + pageCapacity - 1L) / pageCapacity);
+        for (int page = 0; page < retainedPages; page++) {
+            int count = Math.min(pageCapacity, written - page * pageCapacity);
             pageCounts[page] = count;
-            pageMaxima[page] = run[from + count - 1];
-            pageCount++;
+            pageMaxima[page] = values[pageOffset(page) + count - 1];
         }
-        size = length;
+        while (pageCount > retainedPages) {
+            removePage(pageCount - 1);
+        }
+        size = written;
         modCount++;
     }
 

@@ -401,11 +401,68 @@ public final class M3FsPrecomputeBundle {
       return new String(toCharArray());
     }
 
+    /**
+     * Compare immutable UTF-16 code units through the original mapped segment lanes.
+     *
+     * <p>Ordinary CharSequences are visited in increasing logical order, exactly once
+     * per tested code unit. For another M3FS composite (including a range view), both
+     * sides walk their precomputed cumulative ends instead of binary-searching every
+     * character. No parent is flattened and no per-character object is allocated.</p>
+     */
     public boolean contentEquals(CharSequence other) {
       Objects.requireNonNull(other, "other");
       if (other.length() != length) return false;
-      for (int index = 0; index < length; index++) {
-        if (charAt(index) != other.charAt(index)) return false;
+      if (length == 0) return true;
+      if (other instanceof SegmentedUtf16String segmented) {
+        return contentEqualsSegments(segmented, 0);
+      }
+      if (other instanceof Range range) {
+        return contentEqualsSegments(range.source, range.start);
+      }
+
+      int previous = 0;
+      for (int segment = 0; segment < lengths.remaining(); segment++) {
+        int end = logicalEnds.get(segment);
+        int start = parentStarts.get(segment);
+        ByteBuffer parent = parents[parentIndexes.get(segment)];
+        for (int logical = previous; logical < end; logical++) {
+          if (parent.getChar((start + logical - previous) * Character.BYTES)
+              != other.charAt(logical)) return false;
+        }
+        previous = end;
+      }
+      return true;
+    }
+
+    /**
+     * Two immutable prefix-indexed segment cursors, expressed as primitive positions.
+     * Whole/range comparisons cost O(UTF-16 length + traversed segments), with
+     * constant auxiliary storage and no repeated per-character segment search.
+     */
+    private boolean contentEqualsSegments(SegmentedUtf16String other, int otherStart) {
+      int leftSegment = 0;
+      int rightSegment = otherStart == 0 ? 0 : other.segmentAt(otherStart);
+      int logical = 0;
+      while (logical < length) {
+        while (logicalEnds.get(leftSegment) <= logical) leftSegment++;
+        int rightLogical = otherStart + logical;
+        while (other.logicalEnds.get(rightSegment) <= rightLogical) rightSegment++;
+
+        int leftPrevious = leftSegment == 0 ? 0 : logicalEnds.get(leftSegment - 1);
+        int rightPrevious = rightSegment == 0 ? 0
+            : other.logicalEnds.get(rightSegment - 1);
+        int shared = Math.min(logicalEnds.get(leftSegment) - logical,
+            other.logicalEnds.get(rightSegment) - rightLogical);
+        int leftStart = parentStarts.get(leftSegment) + logical - leftPrevious;
+        int rightStart = other.parentStarts.get(rightSegment)
+            + rightLogical - rightPrevious;
+        ByteBuffer left = parents[parentIndexes.get(leftSegment)];
+        ByteBuffer right = other.parents[other.parentIndexes.get(rightSegment)];
+        for (int index = 0; index < shared; index++) {
+          if (left.getChar((leftStart + index) * Character.BYTES)
+              != right.getChar((rightStart + index) * Character.BYTES)) return false;
+        }
+        logical += shared;
       }
       return true;
     }
@@ -511,6 +568,15 @@ public final class M3FsPrecomputeBundle {
       }
       if (cursor != bytes.remaining()) throw new IllegalArgumentException("prepared segment terminal");
     }
+    // Each accessor projects an independent cursor over the same admitted payload.
+    @Override public ByteBuffer bytes() { return bytes.asReadOnlyBuffer().order(bytes.order()); }
+    @Override public IntBuffer starts() { return starts.asReadOnlyBuffer(); }
+    @Override public IntBuffer lengths() { return lengths.asReadOnlyBuffer(); }
+    @Override public LongBuffer bytePresence() { return bytePresence.asReadOnlyBuffer(); }
+    @Override public LongBuffer pairNgramPresence() { return pairNgramPresence.asReadOnlyBuffer(); }
+    @Override public LongBuffer trigramNgramPresence() { return trigramNgramPresence.asReadOnlyBuffer(); }
+    @Override public IntBuffer metadata() { return metadata.asReadOnlyBuffer(); }
+
     public int size() { return segmentCount(); }
     public int packedBytes() { return bytes.remaining(); }
     public int byteAt(int index) { return Byte.toUnsignedInt(bytes.get(bytes.position() + Objects.checkIndex(index, bytes.remaining()))); }
@@ -565,6 +631,13 @@ public final class M3FsPrecomputeBundle {
         }
       }
     }
+    // Each accessor projects an independent cursor over the same admitted payload.
+    @Override public ByteBuffer patternBytes() { return patternBytes.asReadOnlyBuffer().order(patternBytes.order()); }
+    @Override public IntBuffer patternOffsets() { return patternOffsets.asReadOnlyBuffer(); }
+    @Override public IntBuffer transitions() { return transitions.asReadOnlyBuffer(); }
+    @Override public LongBuffer outputMasks() { return outputMasks.asReadOnlyBuffer(); }
+    @Override public IntBuffer metadata() { return metadata.asReadOnlyBuffer(); }
+
     public int totalPatternBytes() { return patternBytes.remaining(); }
     public int patternOffset(int index) { return patternOffsets.get(patternOffsets.position() + Objects.checkIndex(index, patternCount() + 1)); }
     public int patternLength(int index) { Objects.checkIndex(index, patternCount()); return patternOffset(index + 1) - patternOffset(index); }
@@ -646,6 +719,12 @@ public final class M3FsPrecomputeBundle {
       }
     }
 
+    // Each accessor projects an independent cursor over the same admitted payload.
+    @Override public ByteBuffer asciiClassByValue() { return asciiClassByValue.asReadOnlyBuffer().order(asciiClassByValue.order()); }
+    @Override public ShortBuffer transitions() { return transitions.asReadOnlyBuffer(); }
+    @Override public ByteBuffer accepting() { return accepting.asReadOnlyBuffer().order(accepting.order()); }
+    @Override public IntBuffer metadata() { return metadata.asReadOnlyBuffer(); }
+
     public int startState() {
       return metadata.get(metadata.position());
     }
@@ -699,6 +778,11 @@ public final class M3FsPrecomputeBundle {
         }
       }
     }
+
+    // Each accessor projects an independent cursor over the same admitted payload.
+    @Override public ByteBuffer bytes() { return bytes.asReadOnlyBuffer().order(bytes.order()); }
+    @Override public LongBuffer offsets() { return offsets.asReadOnlyBuffer(); }
+    @Override public IntBuffer lengths() { return lengths.asReadOnlyBuffer(); }
 
     public int segmentCount() {
       return lengths.remaining();

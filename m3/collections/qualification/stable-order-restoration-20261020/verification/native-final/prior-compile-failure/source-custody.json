@@ -1,0 +1,44 @@
+[
+  {
+    "git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+    "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_index_mask_compactor.c",
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+    "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+  },
+  {
+    "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+    "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_index_mask_window.c",
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+    "sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+    "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+  },
+  {
+    "git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
+    "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_long_address_kernel.c",
+    "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+    "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+    "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+  },
+  {
+    "git_blob": "52d4e5b20fade6ab7aa3f63d5d92a6b210e437bd",
+    "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_mask_window_regions.c",
+    "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+    "sha256": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab",
+    "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+  },
+  {
+    "git_blob": "32e03bc8c79a3a90cb540ab22c130e8d673ec197",
+    "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_mask_window_spans.c",
+    "path": "m3/collections/src/test/native/m3_mask_window_spans.c",
+    "sha256": "219d1cf76e3a02a08ec649f3da16e36e720b08f15124fa6a2b4504587468edb4",
+    "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+  },
+  {
+    "git_blob": "9f812fc1376970c77914c261f89c6904f48f47ac",
+    "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-src/com/m3/collections/M3NativeIndexRangeSelfTest.java",
+    "path": "m3/collections/src/test/java/com/m3/collections/M3NativeIndexRangeSelfTest.java",
+    "sha256": "6350e1da0ca13de67a2406c73823e4297c8cc51c0c68c5e5a8973d0fb778b821",
+    "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+  }
+]

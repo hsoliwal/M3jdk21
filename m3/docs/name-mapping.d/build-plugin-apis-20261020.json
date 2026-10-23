@@ -1,0 +1,65 @@
+{
+  "schema": "M3JDK21_EXISTING_OWNER_EXTENSION_V1",
+  "capability": "callable OpenRewrite, native compiler/linker, and Graal common build APIs",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 for this mapping; original per-file payload licenses remain authoritative",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "product_repository": "hsoliwal/M3jdk21",
+  "base_source_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "delta_foundation_commit": "74840a363e3acc4c4f034da85e5e4092a40149ee",
+  "mappings": [
+    {
+      "source": "OpenRewrite8.17.1 Recipe/SourceFile/ExecutionContext/RecipeRun",
+      "target": "org.m3jdk.tooling.rewrite.M3RewriteTool.execute",
+      "target_path": "m3/tooling/shared-frontend/openrewrite-tool/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteTool.java",
+      "rule": "Add a typed entry point to the existing owner; preserve native framework objects and scheduling, no compiler task or parser at this boundary",
+      "dataset": "retained-api-20261020"
+    },
+    {
+      "source": "MojoHaus maven-native1.1.0 compiler/linker API and generic-C provider",
+      "source_commit": "59b9d76471f42265141e1edd3594f9dca156099a",
+      "target": "org.codehaus.mojo.natives.compiler.Compiler and org.codehaus.mojo.natives.linker.Linker",
+      "target_path": "m3/tooling/module-packs/build-support/native-api",
+      "rule": "Preserve original public packages and per-file MIT/Apache-2.0 rights; source-build selected capability with original dependencies",
+      "intake_mode": "INDEPENDENT_SELECTED_BUILD_CAPABILITY"
+    },
+    {
+      "source": "Original CompilerConfiguration and AbstractCompiler",
+      "target": "same original public owners",
+      "rule": "Default-compatible checkStaleCompilation option permits an admitted explicit workset without dependency rescanning; no new planner"
+    },
+    {
+      "source": "GraalVM Native Build Tools1.1.13 utils and reachability-metadata modules",
+      "source_commit": "71d6b71f52be9747ffc6b552bce8fe19687218eb",
+      "target": "org.graalvm.buildtools.agent, org.graalvm.buildtools.utils, org.graalvm.reachability",
+      "target_path": "m3/tooling/module-packs/build-support/graal-build-api",
+      "rule": "Source-build original common APIs with original UPL rights; agent argument generation and metadata selection do not provide the AOT engine"
+    },
+    {
+      "source": "OpenJSON1.0.13",
+      "source_commit": "a83081b08f7f0fad0744aa087620982ec5843c16",
+      "target": "com.github.openjson",
+      "rule": "Source-build the original dependency for Graal metadata; preserve Apache-2.0 rights and original parser ownership"
+    },
+    {
+      "source": "M3File raw-byte content observations",
+      "target": "com.m3.file.M3File",
+      "rule": "Existing module supplies input observations to caller-owned admission; native compiler API adds no mandatory M3File dependency"
+    },
+    {
+      "source": "Existing module-pack installer and module graph",
+      "target": "m3/tooling/module-packs and com.m3.tools.modulepack",
+      "rule": "Reuse selected installation and graph owners; do not create a competing registry or attach build libraries to java.base"
+    }
+  ],
+  "contract": "m3/docs/build-api-invariant.md",
+  "public_jdk_api_changes": false,
+  "synexia_runtime_dependency": false,
+  "new_generic_plugin_engine": false,
+  "maven_gradle_planner_integration": "PENDING",
+  "graalvm_native_image_integration": "PENDING_SEPARATE_TOOLCHAIN_INTAKE",
+  "full_product_qualification": "PENDING",
+  "comparative_performance": "NOT_CLAIMED",
+  "receiving_sequence_advanced": false
+}

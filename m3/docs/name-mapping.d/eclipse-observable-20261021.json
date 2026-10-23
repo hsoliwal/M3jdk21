@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "date": "2026-10-21",
+  "source": "Eclipse EMF EList/NotifyingList notification contract; M3JDK21 existing M3ArrayList and M3LazyEvents",
+  "source_role": "public contract inspiration only; no Eclipse/EMF donor source copied",
+  "target": "com.m3.collections.M3ObservableList",
+  "product_owner": "m3/collections",
+  "storage_owner": "com.m3.collections.M3ArrayList",
+  "type": "JAVA_COLLECTION_OBSERVABILITY_PRIMITIVE",
+  "status": "ISOLATED_JAVA21_DIFFERENTIAL_ONLY_EMF_ADAPTER_PENDING",
+  "recipe": "com.synexia.m3jdk.AstBuildReverse20261017",
+  "recipe_dataset": "eclipse-observable-20261021",
+  "target_rule": "Existing M3ArrayList Object[] remains the only element payload owner; copy-on-subscription listener array and synchronous index/range notifications allocate no per-element event nodes; no changed standard Java API",
+  "gates": [
+    "Canonical Maven/OpenRewrite SDK result and fixed-point/drift refusal",
+    "Owning Maven/JUnit collection suite and actual source-built JDK image",
+    "EMF EList/NotifyingList NotificationChain, eInverseAdd/eInverseRemove and proxy resolution differential",
+    "OSGi classloading, SWT/JFace UI-thread listener lifecycle, benchmark and GC/JNI cross-platform matrix"
+  ]
+}

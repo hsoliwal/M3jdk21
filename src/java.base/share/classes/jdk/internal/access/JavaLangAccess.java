@@ -58,6 +58,30 @@ import sun.nio.ch.Interruptible;
 
 public interface JavaLangAccess {
 
+    /** Primitive, invocation-owned token image of one M3-backed ASCII String. */
+    record M3StringTokenSnapshot(byte[] packedAscii, int[] offsets, int[] lengths, int[] sequence) {
+        public M3StringTokenSnapshot {
+            packedAscii = java.util.Objects.requireNonNull(packedAscii, "packedAscii").clone();
+            offsets = java.util.Objects.requireNonNull(offsets, "offsets").clone();
+            lengths = java.util.Objects.requireNonNull(lengths, "lengths").clone();
+            sequence = java.util.Objects.requireNonNull(sequence, "sequence").clone();
+            if (offsets.length != lengths.length) {
+                throw new IllegalArgumentException("token geometry");
+            }
+            for (int token = 0; token < offsets.length; token++) {
+                java.util.Objects.checkFromIndexSize(
+                        offsets[token], lengths[token], packedAscii.length);
+                if (lengths[token] == 0) throw new IllegalArgumentException("empty token");
+            }
+            for (int token : sequence) java.util.Objects.checkIndex(token, offsets.length);
+        }
+
+        @Override public byte[] packedAscii() { return packedAscii.clone(); }
+        @Override public int[] offsets() { return offsets.clone(); }
+        @Override public int[] lengths() { return lengths.clone(); }
+        @Override public int[] sequence() { return sequence.clone(); }
+    }
+
     /**
      * Returns the list of {@code Method} objects for the declared public
      * methods of this class or interface that have the specified method name
@@ -426,6 +450,31 @@ public interface JavaLangAccess {
      * segmented storage rather than eagerly materializing one byte array.
      */
     boolean stringConcatUsesM3Storage();
+
+    /**
+     * Returns a thread-confined logical UTF-16 cursor for an already-admitted
+     * M3 String, or null for a flat String. The cursor retains its canonical
+     * owner and never copies text or triggers storage admission.
+     */
+    default java.util.function.IntUnaryOperator stringCodeUnitCursor(String text) {
+        return null;
+    }
+
+    /**
+     * Return immutable, already-prepared M3 String trigram candidate facts, or null.
+     * Lookup never admits storage or prepares facts. Absence proves nothing.
+     */
+    default java.util.function.LongPredicate stringM3TrigramFacts(String text) {
+        return null;
+    }
+
+    /**
+     * Returns a bounded token image over canonical M3 scalar ranges, or null when the String is
+     * not M3-backed, contains non-ASCII text, or exceeds the caller's resource budget.
+     */
+    M3StringTokenSnapshot m3StringAsciiTokens(
+            String value, int maxSequence, int maxVocabulary,
+            int maxTokenLength, int maxPackedBytes);
 
    /**
     * Get the coder for the supplied character.

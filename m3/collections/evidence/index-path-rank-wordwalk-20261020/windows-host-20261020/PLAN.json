@@ -1,0 +1,542 @@
+{
+  "schema": "synexia.m3.index-path-rank.exact-source-proof.v1",
+  "status": "PREPARED_NOT_EXECUTED",
+  "product_repository": "hsoliwal/M3jdk21",
+  "product_pr": 1540,
+  "product_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb",
+  "change_scope": "Existing Window.toArray implementation only:15 added lines,2 removed lines; existing WordWalkProof added by PR, existing SelfTest retained unchanged",
+  "execution_root": "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+  "scope": {
+    "candidate_owner_files": 1,
+    "shared_existing_proof_sources": 2,
+    "baseline_owner_files": 1,
+    "new_java_or_pom_or_test_sources": false,
+    "product_source_modified": false,
+    "external_dependencies": 0,
+    "JNI": false,
+    "Maven": false,
+    "full_JDK_image": false,
+    "performance_claim": false,
+    "global_active_family_advanced": false
+  },
+  "source_pins": [
+    {
+      "path": "src/com/m3/collections/M3IndexPathRank.java",
+      "local_path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\index-path-rank-v1\\src\\com\\m3\\collections\\M3IndexPathRank.java",
+      "bytes": 9834,
+      "git_blob": "4a60fd1fab763c03dd14f1e4e5abe4ff33a712fa",
+      "sha256": "24fc18d444d8e92d0a136b2541b5a92e203e3179b1ab1c4518f6d6becf902e2a",
+      "license": "Apache-2.0",
+      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+      "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
+    },
+    {
+      "path": "src/com/m3/collections/M3IndexPathRankSelfTest.java",
+      "local_path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\index-path-rank-v1\\src\\com\\m3\\collections\\M3IndexPathRankSelfTest.java",
+      "bytes": 10699,
+      "git_blob": "0a95152c8b7345fc73901e850bde66bb1fcd390b",
+      "sha256": "d354516b794666bb594d91acb1da0128172b88771b48a899e4c456da947759d2",
+      "license": "Apache-2.0",
+      "repository_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java",
+      "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
+    },
+    {
+      "path": "src/com/m3/collections/M3IndexPathRankWordWalkProof.java",
+      "local_path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\index-path-rank-v1\\src\\com\\m3\\collections\\M3IndexPathRankWordWalkProof.java",
+      "bytes": 4857,
+      "git_blob": "18267cd65e757a2d875754d4b852c2205b2e4e7d",
+      "sha256": "876fd1c73030a39b1e629580111b94cee6cd39205da34e2ff900a0570057eae9",
+      "license": "Apache-2.0",
+      "repository_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankWordWalkProof.java",
+      "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
+    },
+    {
+      "path": "baseline/src/com/m3/collections/M3IndexPathRank.java",
+      "local_path": "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline/src/com/m3/collections/M3IndexPathRank.java",
+      "git_blob": "6bc439b69f739608141acf6ee3800e5b5b0163c3",
+      "sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
+      "bytes": 9214,
+      "license": "Apache-2.0",
+      "role": "Exact incumbent owner; shared candidate test sources are used unchanged for both strict compilations"
+    }
+  ],
+  "canonical_recipe": {
+    "repository": "hsoliwal/com.synexia",
+    "pr": 12545,
+    "head": "8ed3b94b207612bc71fbff6fd02de985bb930107",
+    "name": "com.synexia.m3.M3IndexPathRankWordWalk20261020",
+    "state": "Existing two-target hash-pinned snapshot manifest+YAML; actual canonical OpenRewrite SDK execution remains NOT_RUN in this proving pass",
+    "recipe_execution_by_this_plan": false,
+    "scope_boundary": "Source compilation/proof mains are separate from recipe application or promotion"
+  },
+  "tool_paths": {
+    "javac": "C:/Program Files/Java/jdk-21/bin/javac.exe",
+    "java": "C:/Program Files/Java/jdk-21/bin/java.exe",
+    "javap": "C:/Program Files/Java/jdk-21/bin/javap.exe"
+  },
+  "tools_hashes": {
+    "javac": "8a1d32f529ba4d01940194e3b06d14aff828e5d47f5f374ec88c81902fc3456f",
+    "java": "d27c1a75edf380963c430232e93340eab4bd3694044976cff85421bf163b876c",
+    "javap": "f87c22763907b019cefc5db416168f4e9f355afbfd7ca8777e9c5433533c3378"
+  },
+  "owned_directories": [
+    "baseline/classes",
+    "classes",
+    "empty-sourcepath",
+    "tmp/jna",
+    "tmp/jansi",
+    "tmp/snappy",
+    "home/AppData/Local",
+    "home/AppData/Roaming",
+    "home/.cache",
+    "prefs/user",
+    "prefs/system",
+    "dumps"
+  ],
+  "commands": [
+    {
+      "id": "baseline-compile",
+      "kind": "COMPILE",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/javac.exe",
+        "-J-Xms32m",
+        "-J-Xmx512m",
+        "-J-XX:+UseSerialGC",
+        "-J-XX:MaxMetaspaceSize=256m",
+        "-J-XX:ReservedCodeCacheSize=64m",
+        "-J-XX:TieredStopAtLevel=1",
+        "-J-XX:-UsePerfData",
+        "-J-XX:+DisableAttachMechanism",
+        "-J-XX:-HeapDumpOnOutOfMemoryError",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-J-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/dumps",
+        "-J-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp",
+        "-J-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/home",
+        "-J-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+        "-J-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jna",
+        "-J-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jansi",
+        "-J-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/snappy",
+        "-J-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/user",
+        "-J-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/system",
+        "-J-Dfile.encoding=UTF-8",
+        "-J-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline-javac-hs_err_pid%p.log",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-parameters",
+        "-proc:none",
+        "-implicit:none",
+        "-Xlint:all",
+        "-Werror",
+        "-sourcepath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/empty-sourcepath",
+        "-classpath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline/classes",
+        "-d",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline/classes",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline/src/com/m3/collections/M3IndexPathRank.java",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/src/com/m3/collections/M3IndexPathRankSelfTest.java",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/src/com/m3/collections/M3IndexPathRankWordWalkProof.java"
+      ],
+      "deadline_seconds": 120,
+      "stdout_acceptance": {
+        "exact_empty": true
+      }
+    },
+    {
+      "id": "baseline-selftest",
+      "kind": "JAVA_PROOF",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline-selftest-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline/classes",
+        "com.m3.collections.M3IndexPathRankSelfTest"
+      ],
+      "deadline_seconds": 60,
+      "stdout_acceptance": {
+        "line_regex": "^PASS M3IndexPathRank Java21 deterministic differential: ([0-9]+) rank checks; 900 randomized paths\\r?\\n$",
+        "captured_integer_name": "rank_checks",
+        "minimum": 900,
+        "maximum": 144000,
+        "claim": "rank checks, not total assertions; record actual count"
+      }
+    },
+    {
+      "id": "baseline-wordwalk",
+      "kind": "JAVA_PROOF",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline-wordwalk-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline/classes",
+        "com.m3.collections.M3IndexPathRankWordWalkProof"
+      ],
+      "deadline_seconds": 60,
+      "stdout_acceptance": {
+        "exact_line": "PASS M3IndexPathRank word walk: 6300 independent Java21 windows; signed rows, duplicates, strides, masks",
+        "line_ending": "one LF or CRLF",
+        "window_count": 6300
+      }
+    },
+    {
+      "id": "baseline-javap",
+      "kind": "JAVAP_PROTECTED",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/javap.exe",
+        "-J-Xms32m",
+        "-J-Xmx512m",
+        "-J-XX:+UseSerialGC",
+        "-J-XX:MaxMetaspaceSize=256m",
+        "-J-XX:ReservedCodeCacheSize=64m",
+        "-J-XX:TieredStopAtLevel=1",
+        "-J-XX:-UsePerfData",
+        "-J-XX:+DisableAttachMechanism",
+        "-J-XX:-HeapDumpOnOutOfMemoryError",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-J-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/dumps",
+        "-J-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp",
+        "-J-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/home",
+        "-J-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+        "-J-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jna",
+        "-J-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jansi",
+        "-J-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/snappy",
+        "-J-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/user",
+        "-J-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/system",
+        "-J-Dfile.encoding=UTF-8",
+        "-J-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline-javap-hs_err_pid%p.log",
+        "-protected",
+        "-classpath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline/classes",
+        "com.m3.collections.M3IndexPathRank",
+        "com.m3.collections.M3IndexPathRank$Window"
+      ],
+      "deadline_seconds": 60,
+      "stdout_acceptance": {
+        "nonempty": true,
+        "contains_classes": [
+          "com.m3.collections.M3IndexPathRank",
+          "com.m3.collections.M3IndexPathRank$Window"
+        ],
+        "compare": "Exact stdout bytes must equal the other version's javap output"
+      }
+    },
+    {
+      "id": "candidate-compile",
+      "kind": "COMPILE",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/javac.exe",
+        "-J-Xms32m",
+        "-J-Xmx512m",
+        "-J-XX:+UseSerialGC",
+        "-J-XX:MaxMetaspaceSize=256m",
+        "-J-XX:ReservedCodeCacheSize=64m",
+        "-J-XX:TieredStopAtLevel=1",
+        "-J-XX:-UsePerfData",
+        "-J-XX:+DisableAttachMechanism",
+        "-J-XX:-HeapDumpOnOutOfMemoryError",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-J-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/dumps",
+        "-J-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp",
+        "-J-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/home",
+        "-J-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+        "-J-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jna",
+        "-J-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jansi",
+        "-J-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/snappy",
+        "-J-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/user",
+        "-J-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/system",
+        "-J-Dfile.encoding=UTF-8",
+        "-J-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/candidate-javac-hs_err_pid%p.log",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-parameters",
+        "-proc:none",
+        "-implicit:none",
+        "-Xlint:all",
+        "-Werror",
+        "-sourcepath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/empty-sourcepath",
+        "-classpath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/classes",
+        "-d",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/classes",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/src/com/m3/collections/M3IndexPathRank.java",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/src/com/m3/collections/M3IndexPathRankSelfTest.java",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/src/com/m3/collections/M3IndexPathRankWordWalkProof.java"
+      ],
+      "deadline_seconds": 120,
+      "stdout_acceptance": {
+        "exact_empty": true
+      }
+    },
+    {
+      "id": "candidate-selftest",
+      "kind": "JAVA_PROOF",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/candidate-selftest-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/classes",
+        "com.m3.collections.M3IndexPathRankSelfTest"
+      ],
+      "deadline_seconds": 60,
+      "stdout_acceptance": {
+        "line_regex": "^PASS M3IndexPathRank Java21 deterministic differential: ([0-9]+) rank checks; 900 randomized paths\\r?\\n$",
+        "captured_integer_name": "rank_checks",
+        "minimum": 900,
+        "maximum": 144000,
+        "claim": "rank checks, not total assertions; record actual count"
+      }
+    },
+    {
+      "id": "candidate-wordwalk",
+      "kind": "JAVA_PROOF",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/candidate-wordwalk-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/classes",
+        "com.m3.collections.M3IndexPathRankWordWalkProof"
+      ],
+      "deadline_seconds": 60,
+      "stdout_acceptance": {
+        "exact_line": "PASS M3IndexPathRank word walk: 6300 independent Java21 windows; signed rows, duplicates, strides, masks",
+        "line_ending": "one LF or CRLF",
+        "window_count": 6300
+      }
+    },
+    {
+      "id": "candidate-javap",
+      "kind": "JAVAP_PROTECTED",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/javap.exe",
+        "-J-Xms32m",
+        "-J-Xmx512m",
+        "-J-XX:+UseSerialGC",
+        "-J-XX:MaxMetaspaceSize=256m",
+        "-J-XX:ReservedCodeCacheSize=64m",
+        "-J-XX:TieredStopAtLevel=1",
+        "-J-XX:-UsePerfData",
+        "-J-XX:+DisableAttachMechanism",
+        "-J-XX:-HeapDumpOnOutOfMemoryError",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-J-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/dumps",
+        "-J-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp",
+        "-J-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/home",
+        "-J-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+        "-J-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jna",
+        "-J-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/jansi",
+        "-J-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/tmp/snappy",
+        "-J-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/user",
+        "-J-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/prefs/system",
+        "-J-Dfile.encoding=UTF-8",
+        "-J-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/candidate-javap-hs_err_pid%p.log",
+        "-protected",
+        "-classpath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/classes",
+        "com.m3.collections.M3IndexPathRank",
+        "com.m3.collections.M3IndexPathRank$Window"
+      ],
+      "deadline_seconds": 60,
+      "stdout_acceptance": {
+        "nonempty": true,
+        "contains_classes": [
+          "com.m3.collections.M3IndexPathRank",
+          "com.m3.collections.M3IndexPathRank$Window"
+        ],
+        "compare": "Exact stdout bytes must equal the other version's javap output"
+      }
+    }
+  ],
+  "common": {
+    "no_external_dependencies": true,
+    "source_status": "Existing source bytes copied verbatim; no Java/POM/test generation",
+    "source_guard": "All four source copies must match exact Git blob and SHA-256 before and after every action"
+  },
+  "execution_protocol": {
+    "serial_actions": 8,
+    "no_parallel_JVMs": true,
+    "no_retry_of_started_or_uncertain_actions": true,
+    "abort_following_actions_on_any_failure": true,
+    "isolated_classpaths": {
+      "baseline": "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/baseline/classes",
+      "candidate": "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1/classes"
+    },
+    "supervisor": {
+      "source": "S:/codex-work/storage-recovery-20261013/native-process-cwd-recipe-20261016/target/generated/OwnedJobSupervisor.py",
+      "sha256": "c3f5f71cacbb8b95c99eaff74b3bc787359540ad738d65a007668da6b6ad83e9",
+      "bind_ROOT_to": "K:/codex-work/m3jdk21-recipe-pass-20261020/index-path-rank-v1",
+      "scope": "Borrow definitions only; never execute the historical main"
+    },
+    "operational_reference": {
+      "path": "K:/codex-work/claude-preservation-20261020/bootstrap-conflict/qualification-k-v1/run_qualification.py",
+      "sha256": "e0513362b4240c6698fb8190a05420e9fcd6e1894a918cf54a998a5919cc34d8",
+      "reuse": "Definitions/protocol only; completed main must not be rerun"
+    },
+    "global_jvm_lock": {
+      "path": "K:/m3-work/tmp/jvm.lock",
+      "acquire": "One atomic mkdir; HOLD if existing. No wait loop or stale deletion.",
+      "hold": "Across all eight actions.",
+      "release": "Only own unchanged identity, empty directory and exact resolved path, after native terminal evidence is durably published.",
+      "ownership": "Separate owned K PID/token/identity receipt, not a file in shared empty lock directory"
+    },
+    "native_success": [
+      "terminal",
+      "same_handle_wait=0",
+      "exitcode=0",
+      "job_active_processes=0",
+      "all_owned_native_handles_closed",
+      "cleanup_errors empty",
+      "supervisor_error null"
+    ],
+    "receipt_policy": "Create-only claims; mutable native/final receipts use owned same-directory temp+flush/fsync+atomic replace. Persist terminal evidence before lock release, then persist release state.",
+    "clear_child_environment": [
+      "JAVA_TOOL_OPTIONS",
+      "JDK_JAVA_OPTIONS",
+      "_JAVA_OPTIONS",
+      "CLASSPATH",
+      "MAVEN_OPTS",
+      "MAVEN_ARGS"
+    ],
+    "child_environment": {
+      "TEMP": "K:/codex-work/agent-temp",
+      "TMP": "K:/codex-work/agent-temp",
+      "home_and_cache_paths": "Owned K home directories; JVM properties in exact argv bind all JVM temp/home/preferences/native caches/error/dump paths"
+    },
+    "storage": {
+      "minimum_K_free_bytes_before_and_during": 8673820672,
+      "combined_roots": [
+        "K:/codex-work/claude-preservation-20261020",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020"
+      ],
+      "combined_output_cap_bytes": 83886080,
+      "per_execution_root_cap_bytes": 67108864,
+      "capacity_interval_ms": 250,
+      "physical_and_commit_min_before_bytes": 536870912,
+      "physical_and_commit_min_during_bytes": 268435456,
+      "stop_on_breach": true,
+      "protection": "ACTIVE"
+    }
+  },
+  "acceptance": {
+    "exit_zero_alone_insufficient": true,
+    "source_hashes_unchanged": true,
+    "tools_hashes_unchanged": true,
+    "all_eight_native_actions_terminal": true,
+    "stdout_pair_comparisons": [
+      [
+        "baseline-selftest",
+        "candidate-selftest"
+      ],
+      [
+        "baseline-wordwalk",
+        "candidate-wordwalk"
+      ],
+      [
+        "baseline-javap",
+        "candidate-javap"
+      ]
+    ],
+    "compare_exact_stdout_bytes_and_sha256": true,
+    "rank_checks_observed_not_invented": true,
+    "forbidden_scope_claims": [
+      "No JNI or native parity proof",
+      "No benchmark/speedup proof",
+      "No whole JDK product-image or interface-wide proof",
+      "No Maven/plugin/OpenRewrite recipe execution proof",
+      "No automatic merge/promotion or global-family advancement"
+    ],
+    "reported_capability": "Only the exact before/after owner bytes compile under Java21 strict warnings, pass the two unchanged bounded Java mains, and have matching javap public/protected member text if every planned check executes successfully"
+  },
+  "approval": {
+    "root_and_independent_review_required": true,
+    "launch_authorized": false
+  }
+}

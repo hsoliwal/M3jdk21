@@ -1,0 +1,87 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 indexed filtered/sorted view original-owner callback epochs
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewPreparationContract.java'
+      - 'm3/collections/qualification/indexed-live-callback-epoch-20261022/**'
+      - 'm3/collections/algorithm-catalogue/indexed-live-callback-epoch-20261022.tsv'
+      - '.github/workflows/m3-indexed-live-callback-epoch-20261022.yml'
+  push:
+    branches:
+      - m3/indexed-live-callback-epoch-20261022
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java21-original-owner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: fee49d6f6197dc62c35ee741f564a8898cd2c5ba
+          path: baseline
+          sparse-checkout: |
+            m3/collections/src/main/java
+            m3/collections/src/test/java
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source-sealed owner, exact preimage and generated postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(sha256sum baseline/m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java | cut -d' ' -f1)" = '84e9437c27f59060543cd4728a5222b489fe98f7e39068e66f4431b7ee00867f'
+          printf '%s\n' \
+            '2e5c00296e26186c071fc47d2e3bcd16315825c8404bf271eafa8cd597c268af  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java' \
+            'dd709c6a87a629290126b42d8123f2ce039351846950d3a0b371f5e7b1c93e03  m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewPreparationContract.java' \
+            | sha256sum -c -
+      - name: Compile original Java 21 collection owners and both differential contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-indexed-live/new" "$RUNNER_TEMP/m3-indexed-live/original"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
+            -d "$RUNNER_TEMP/m3-indexed-live/new" \
+            m3/collections/src/main/java/module-info.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewPreparationContract.java
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -sourcepath baseline/m3/collections/src/main/java:baseline/m3/collections/src/test/java \
+            -d "$RUNNER_TEMP/m3-indexed-live/original" \
+            baseline/m3/collections/src/main/java/module-info.java \
+            baseline/m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
+      - name: Preserve original public Java collection type and method signatures
+        shell: bash
+        run: |
+          set -euo pipefail
+          javap -public -classpath "$RUNNER_TEMP/m3-indexed-live/original" \
+            com.m3.collections.M3IndexedLiveView > "$RUNNER_TEMP/m3-indexed-live/original.api"
+          javap -public -classpath "$RUNNER_TEMP/m3-indexed-live/new" \
+            com.m3.collections.M3IndexedLiveView > "$RUNNER_TEMP/m3-indexed-live/new.api"
+          diff -u "$RUNNER_TEMP/m3-indexed-live/original.api" \
+            "$RUNNER_TEMP/m3-indexed-live/new.api"
+      - name: Original M3 collection index and read-only wrapper regression
+        run: |
+          java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-indexed-live/new" \
+            -m com.m3.collections/com.m3.collections.M3IndexedLiveViewContract
+      - name: New callback epoch, recursion, stable offset and JDK List differential
+        run: |
+          java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-indexed-live/new" \
+            -m com.m3.collections/com.m3.collections.M3IndexedLiveViewPreparationContract
+          java -Xint --module-path "$RUNNER_TEMP/m3-indexed-live/new" \
+            -m com.m3.collections/com.m3.collections.M3IndexedLiveViewPreparationContract

@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -65,7 +66,31 @@ static jmethodID m3_method(
 {
     jclass type = (*env)->GetObjectClass(env, value);
     if (type == NULL) return NULL;
-    return (*env)->GetMethodID(env, type, name, signature);
+    jmethodID method = (*env)->GetMethodID(env, type, name, signature);
+    /* The class local reference is not needed during the bulk Java array copy. */
+    (*env)->DeleteLocalRef(env, type);
+    return method;
+}
+
+
+/*
+ * Validate against the canonical logical length before allocating a projection.
+ * Arguments have already passed the negative-range check. Subtraction keeps the
+ * check defined even when a hostile start + length would overflow jint.
+ */
+static jboolean m3_check_shadow_range(
+        JNIEnv *env, jobject value, jint start, jint length, const char *exception)
+{
+    jmethodID get_length = m3_method(env, value, "length", "()I");
+    if (get_length == NULL) return JNI_FALSE;
+
+    jint source_length = (*env)->CallIntMethod(env, value, get_length);
+    if ((*env)->ExceptionCheck(env)) return JNI_FALSE;
+    if (start > source_length || length > source_length - start) {
+        m3_throw(env, exception, "M3 shadow source range");
+        return JNI_FALSE;
+    }
+    return JNI_TRUE;
 }
 
 JNIEXPORT jbyteArray JNICALL
@@ -78,6 +103,10 @@ Java_java_lang_M3String_nativeByteShadow(
     }
     if (start < 0 || length < 0 || (coder != 0 && coder != 1)) {
         m3_throw(env, "java/lang/IllegalArgumentException", "invalid M3 shadow range/coder");
+        return NULL;
+    }
+    if (!m3_check_shadow_range(env, value, start, length,
+                               "java/lang/IndexOutOfBoundsException")) {
         return NULL;
     }
     jlong byte_length = ((jlong)length) << coder;
@@ -112,6 +141,11 @@ Java_java_lang_M3String_nativeCharShadow(
     }
     if (start < 0 || length < 0) {
         m3_throw(env, "java/lang/IllegalArgumentException", "invalid M3 char shadow range");
+        return NULL;
+    }
+
+    if (!m3_check_shadow_range(env, value, start, length,
+                               "java/lang/StringIndexOutOfBoundsException")) {
         return NULL;
     }
 

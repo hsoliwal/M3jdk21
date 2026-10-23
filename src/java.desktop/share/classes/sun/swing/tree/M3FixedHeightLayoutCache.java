@@ -340,13 +340,26 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
             unmap(changedNode);
             if (wasVisible && wasExpanded) {
                 expand(newState(p, mi));
+                // as the stock: reset again, also when the node is now a leaf and expand did nothing
+                if (treeSelectionModel != null) {
+                    treeSelectionModel.resetRowSelection();
+                }
             }
         }
     }
 
     // ---- structure ----------------------------------------------------------------------------
 
+    /** Full rebuilds so far (setModel, a structure change of the root): the rule 24 counter the differentials read. */
+    private int rebuilds;
+
+    /** The number of full rebuilds of this cache (for the differentials). */
+    public int rebuilds() {
+        return rebuilds;
+    }
+
     private void rebuild(boolean clearSelection) {
+        rebuilds++;
         nodeCount = 1;
         mapSize = 0;
         Arrays.fill(mapKeys, null);
@@ -553,7 +566,8 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         int removed = tot[n];
         propagate(n, -removed);
         flags[n] &= ~EXPANDED;
-        if (adjust && removed > 0 && treeSelectionModel != null) {
+        // the stock resets also when no row was removed (an expanded node without children)
+        if (adjust && treeSelectionModel != null) {
             treeSelectionModel.resetRowSelection();
         }
     }

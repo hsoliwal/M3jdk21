@@ -109,3 +109,25 @@ All verification commands are recorded with status and output. A failure stops
 dependent stages. A source change begins a new lint/compile/test/runtime pass.
 Compilation of test consumers is completed before test execution. Final review
 includes the target PR and canonical Synexia recipe PR; neither is auto-merged.
+
+## One javac geometry, one detailed index (consolidation 2026-10-23)
+
+Three detached surfaces describe a javac unit today:
+
+| Surface | Lanes | Owner |
+|---------|-------|-------|
+| `M3JavacTree` | kind, parent, start, end | `M3JavacParser.projection` (geometry fast path) |
+| `M3ASTIndex` (`Domain.JAVAC`) | the four geometry lanes plus details: lines, names, literals, modifiers, enclosing type and executable | `M3ASTIngress.javac`, `M3JavacParser.indexProjection` |
+| `M3JavacFactImage` | the four geometry lanes, sealed to source and build context | `M3JavacFactImage.capture` |
+
+The geometry lanes are a strict subset of the index. `M3JavacTree.of(M3ASTIndex)` is the
+geometry surface as a view over the one index: no second projection, no copied lanes, only a
+kind-translation lane per kind-vocabulary entry. `M3JavacFactImage.capture(M3ASTIndex, ...)`
+captures from that view and yields the bytes of the geometry projection of the same unit;
+`M3JavacTreeViewContract` proves row equality and image equality on a real parse event.
+
+The geometry projection stays for callers that never need details; both projections share
+the original event cache. Analyzers (lint, clustering, facts) read the index lanes; none of
+them builds another tree. The compiletime port's `com.m3.compiletime.ast.M3AST` wrapper over
+`MIndexASTDocument` is a separate owner with its own atom pool. These files may be similar.
+Please confirm via hash or diff before any merge of that owner into this module.

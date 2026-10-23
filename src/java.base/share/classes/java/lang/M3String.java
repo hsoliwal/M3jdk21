@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.IntConsumer;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 import sun.nio.cs.ArrayEncoder;
@@ -150,6 +151,75 @@ final class M3String implements CharSequence {
         } finally {
             ADMITTING.remove();
         }
+    }
+
+    /**
+     * Canonically composes independent mutable UTF-16 arrays without flattening them.
+     *
+     * <p>The outer reference lane is snapshotted before validation. Every non-empty array is
+     * admitted as one canonical scalar M3 atom and the atoms are combined through the existing
+     * persistent tuple owner. The caller must exclude concurrent mutation while admission is in
+     * progress; no source array is retained after admission.</p>
+     *
+     * @return canonical composition, {@link #empty()} for zero logical length, or {@code null}
+     *         when the canonical pool refuses any scalar admission
+     */
+    static M3String admitArrays(char[]... arrays) {
+        char[][] snapshot = Objects.requireNonNull(arrays, "arrays").clone();
+        int[] offsets = new int[snapshot.length];
+        int[] lengths = new int[snapshot.length];
+        for (int index = 0; index < snapshot.length; index++) {
+            char[] source = Objects.requireNonNull(snapshot[index], "array");
+            lengths[index] = source.length;
+        }
+        return admitArrayRanges(snapshot, offsets, lengths);
+    }
+
+    /**
+     * Canonically composes selected ranges from independent UTF-16 arrays.
+     *
+     * <p>All lane cardinality, null, range and aggregate-length checks complete before the first
+     * scalar is admitted. Zero-length ranges contribute no physical owner. Temporary Java arrays
+     * contain only caller references and integer metadata; the resulting M3String retains only its
+     * canonical owner and packed coordinate.</p>
+     */
+    static M3String admitArrayRanges(
+            char[][] arrays, int[] offsets, int[] lengths) {
+        char[][] sources = Objects.requireNonNull(arrays, "arrays").clone();
+        int[] starts = Objects.requireNonNull(offsets, "offsets").clone();
+        int[] counts = Objects.requireNonNull(lengths, "lengths").clone();
+        if (sources.length != starts.length || sources.length != counts.length) {
+            throw new IllegalArgumentException("char-array range lane cardinality mismatch");
+        }
+
+        long totalLength = 0L;
+        int nonEmpty = 0;
+        for (int index = 0; index < sources.length; index++) {
+            char[] source = Objects.requireNonNull(sources[index], "array");
+            Objects.checkFromIndexSize(starts[index], counts[index], source.length);
+            totalLength += counts[index];
+            if (totalLength > Integer.MAX_VALUE) {
+                throw new OutOfMemoryError("Required length exceeds implementation limit");
+            }
+            if (counts[index] != 0) nonEmpty++;
+        }
+        if (totalLength == 0L) return EMPTY;
+
+        ArrayList<M3String> admitted = new ArrayList<>(nonEmpty);
+        ADMITTING.set(Boolean.TRUE);
+        try {
+            for (int index = 0; index < sources.length; index++) {
+                int count = counts[index];
+                if (count == 0) continue;
+                M3String value =
+                        M3StringPool.internChars(sources[index], starts[index], count);
+                if (value == null) return null;
+                admitted.add(value);
+            }
+        } finally {
+            ADMITTING.remove();
+        }
+        return joinValues(admitted);
     }
 
     static M3String admit(byte[] compactValue, byte coder) {
@@ -571,12 +641,153 @@ final class M3String implements CharSequence {
                 : owner.rangeFactsIfPrepared(value);
     }
 
+    static final class TokenSnapshot {
+        final byte[] packedAscii;
+        final int[] offsets;
+        final int[] lengths;
+        final int[] sequence;
+
+        TokenSnapshot(byte[] packedAscii, int[] offsets, int[] lengths, int[] sequence) {
+            this.packedAscii = packedAscii;
+            this.offsets = offsets;
+            this.lengths = lengths;
+            this.sequence = sequence;
+        }
+    }
+
+    TokenSnapshot asciiTokenSnapshot(
+            int maxSequence, int maxVocabulary, int maxTokenLength, int maxPackedBytes) {
+        if (maxSequence < 0 || maxVocabulary < 0 || maxTokenLength < 1 || maxPackedBytes < 0) {
+            throw new IllegalArgumentException("invalid M3 token snapshot budget");
+        }
+        if (length() == 0) {
+            return new TokenSnapshot(new byte[0], new int[0], new int[0], new int[0]);
+        }
+        if (maxSequence == 0 || maxVocabulary == 0 || maxPackedBytes == 0) return null;
+
+        int uniqueCapacity = Math.min(8, maxVocabulary);
+        M3StringOwner[] owners = new M3StringOwner[uniqueCapacity];
+        int[] starts = new int[uniqueCapacity];
+        int[] lengths = new int[uniqueCapacity];
+        int[] offsets = new int[uniqueCapacity];
+        int[] slots = new int[16];
+
+        int sequenceCapacity = Math.min(8, maxSequence);
+        int[] sequence = new int[sequenceCapacity];
+        byte[] packed = new byte[Math.min(64, maxPackedBytes)];
+
+        int unique = 0;
+        int sequenceSize = 0;
+        int packedSize = 0;
+        M3StringLeafCursor cursor = new M3StringLeafCursor(this, false);
+        while (cursor.next()) {
+            M3StringOwner scalar = cursor.owner();
+            int scalarStart = cursor.start();
+            int remaining = cursor.length();
+            while (remaining != 0) {
+                if (sequenceSize == maxSequence) return null;
+                int tokenLength = Math.min(remaining, maxTokenLength);
+                int tokenStart = scalarStart;
+
+                if ((long) (unique + 1) * 10L >= (long) slots.length * 6L
+                        && unique < maxVocabulary) {
+                    int[] grown = new int[Math.multiplyExact(slots.length, 2)];
+                    for (int index = 0; index < unique; index++) {
+                        int slot = tokenSlot(
+                                owners[index], starts[index], lengths[index], grown.length - 1);
+                        while (grown[slot] != 0) slot = (slot + 1) & (grown.length - 1);
+                        grown[slot] = index + 1;
+                    }
+                    slots = grown;
+                }
+
+                int slot = tokenSlot(scalar, tokenStart, tokenLength, slots.length - 1);
+                int vocabulary = -1;
+                while (slots[slot] != 0) {
+                    int candidate = slots[slot] - 1;
+                    if (owners[candidate] == scalar
+                            && starts[candidate] == tokenStart
+                            && lengths[candidate] == tokenLength) {
+                        vocabulary = candidate;
+                        break;
+                    }
+                    slot = (slot + 1) & (slots.length - 1);
+                }
+
+                if (vocabulary < 0) {
+                    if (unique == maxVocabulary || tokenLength > maxPackedBytes - packedSize) {
+                        return null;
+                    }
+                    if (unique == owners.length) {
+                        int capacity = Math.min(
+                                maxVocabulary,
+                                Math.max(unique + 1, Math.multiplyExact(owners.length, 2)));
+                        owners = Arrays.copyOf(owners, capacity);
+                        starts = Arrays.copyOf(starts, capacity);
+                        lengths = Arrays.copyOf(lengths, capacity);
+                        offsets = Arrays.copyOf(offsets, capacity);
+                    }
+                    if (packedSize + tokenLength > packed.length) {
+                        int capacity = Math.min(
+                                maxPackedBytes,
+                                Math.max(
+                                        packedSize + tokenLength,
+                                        Math.multiplyExact(packed.length, 2)));
+                        packed = Arrays.copyOf(packed, capacity);
+                    }
+                    int offset = packedSize;
+                    for (int index = 0; index < tokenLength; index++) {
+                        char unit = scalar.charAt(tokenStart + index);
+                        if (unit >= 128) return null;
+                        packed[packedSize++] = (byte) unit;
+                    }
+                    vocabulary = unique++;
+                    owners[vocabulary] = scalar;
+                    starts[vocabulary] = tokenStart;
+                    lengths[vocabulary] = tokenLength;
+                    offsets[vocabulary] = offset;
+                    slots[slot] = vocabulary + 1;
+                }
+
+                if (sequenceSize == sequence.length) {
+                    int capacity = Math.min(
+                            maxSequence,
+                            Math.max(
+                                    sequenceSize + 1,
+                                    Math.multiplyExact(sequence.length, 2)));
+                    sequence = Arrays.copyOf(sequence, capacity);
+                }
+                sequence[sequenceSize++] = vocabulary;
+                scalarStart += tokenLength;
+                remaining -= tokenLength;
+            }
+        }
+
+        return new TokenSnapshot(
+                Arrays.copyOf(packed, packedSize),
+                Arrays.copyOf(offsets, unique),
+                Arrays.copyOf(lengths, unique),
+                Arrays.copyOf(sequence, sequenceSize));
+    }
+
+    private static int tokenSlot(M3StringOwner owner, int start, int length, int mask) {
+        int hash = System.identityHashCode(owner);
+        hash = 31 * hash + start;
+        hash = 31 * hash + length;
+        hash ^= hash >>> 16;
+        hash *= 0x7feb352d;
+        hash ^= hash >>> 15;
+        hash *= 0x846c_a68b;
+        hash ^= hash >>> 16;
+        return hash & mask;
+    }
+
     /**
      * Thread-confined logical UTF-16 reader over persistent canonical tuple coordinates.
      * It resolves each contiguous visible scalar run once, not once per code unit.
      * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
      */
-    static final class CodeUnitCursor {
+    static final class CodeUnitCursor implements IntUnaryOperator {
         private final M3String source;
         private M3StringOwner scalar;
         private int logicalBegin;
@@ -587,12 +798,21 @@ final class M3String implements CharSequence {
             this.source = source;
         }
 
+        @Override
+        public int applyAsInt(int index) {
+            return at(index);
+        }
+
         char at(int index) {
             Objects.checkIndex(index, source.length());
+            prepare(index);
+            return scalar.charAt(scalarOffset + index - logicalBegin);
+        }
+
+        private void prepare(int index) {
             if (scalar == null || index < logicalBegin || index >= logicalEnd) {
                 seek(index);
             }
-            return scalar.charAt(scalarOffset + index - logicalBegin);
         }
 
         private void seek(int index) {
@@ -764,10 +984,64 @@ final class M3String implements CharSequence {
         } else if (other.length() != length()) {
             return false;
         }
-        for (int index = 0; index < length(); index++) {
-            if (charAt(index) != other.charAt(index)) return false;
+        return that != null
+                ? comparePrefix(that, length()) == 0
+                : compareFlatPrefix(other, length()) == 0;
+    }
+
+    /**
+     * Compare a logical prefix using existing scalar runs. Owner identity proves equality only for
+     * the same offset and run length; different owners or tuple segmentation still compare text.
+     */
+    int comparePrefix(M3String other, int count) {
+        Objects.requireNonNull(other, "other");
+        Objects.checkFromIndexSize(0, count, length());
+        Objects.checkFromIndexSize(0, count, other.length());
+        if (count == 0 || sameCoordinate(other)) return 0;
+        if (!(owner instanceof M3StringTuple) && !(other.owner instanceof M3StringTuple)) {
+            return compareScalarRange(owner, start(), other.owner, other.start(), count);
         }
-        return true;
+        CodeUnitCursor left = new CodeUnitCursor(this);
+        CodeUnitCursor right = new CodeUnitCursor(other);
+        for (int index = 0; index < count; ) {
+            left.prepare(index);
+            right.prepare(index);
+            int runEnd = Math.min(count, Math.min(left.logicalEnd, right.logicalEnd));
+            int difference = compareScalarRange(
+                    left.scalar, left.scalarOffset + index - left.logicalBegin,
+                    right.scalar, right.scalarOffset + index - right.logicalBegin,
+                    runEnd - index);
+            if (difference != 0) return difference;
+            index = runEnd;
+        }
+        return 0;
+    }
+
+    private static int compareScalarRange(
+            M3StringOwner left, int leftStart, M3StringOwner right, int rightStart, int count) {
+        if (left == right && leftStart == rightStart) return 0;
+        if (left instanceof M3StringAtom leftAtom && right instanceof M3StringAtom rightAtom) {
+            return leftAtom.compareRange(leftStart, rightAtom, rightStart, count);
+        }
+        for (int index = 0; index < count; index++) {
+            int difference = left.charAt(leftStart + index) - right.charAt(rightStart + index);
+            if (difference != 0) return difference;
+        }
+        return 0;
+    }
+
+    /** Mixed flat/M3 comparison never admits, flattens, or prepares facts for either side. */
+    int compareFlatPrefix(String other, int count) {
+        Objects.requireNonNull(other, "other");
+        Objects.checkFromIndexSize(0, count, length());
+        Objects.checkFromIndexSize(0, count, other.length());
+        CodeUnitCursor units = owner instanceof M3StringTuple ? new CodeUnitCursor(this) : null;
+        for (int index = 0; index < count; index++) {
+            char unit = units != null ? units.at(index) : owner.charAt(start() + index);
+            int difference = unit - other.charAt(index);
+            if (difference != 0) return difference;
+        }
+        return 0;
     }
 
     void getChars(int sourceBegin, int sourceEnd, char[] destination, int destinationBegin) {
@@ -1061,6 +1335,22 @@ final class M3String implements CharSequence {
             if (offset == length() - checked.length() && !sourceFacts.suffixMayMatch(prefixFacts)) {
                 return false;
             }
+        }
+        // A long prefix of a composite would otherwise descend the balanced
+        // tuple DAG once per UTF-16 unit. Reuse the existing scalar-run cursor:
+        // at most two request-local cursors, no leaf directory or copied text.
+        // Short/flat comparisons retain their allocation-free direct path.
+        if (checked.length() >= 64
+                && (owner instanceof M3StringTuple
+                        || checked.owner() instanceof M3StringTuple)) {
+            CodeUnitCursor sourceUnits = new CodeUnitCursor(this);
+            CodeUnitCursor prefixUnits = new CodeUnitCursor(checked);
+            for (int index = 0; index < checked.length(); index++) {
+                if (sourceUnits.at(offset + index) != prefixUnits.at(index)) {
+                    return false;
+                }
+            }
+            return true;
         }
         for (int index = 0; index < checked.length(); index++) {
             if (charAt(offset + index) != checked.charAt(index)) return false;

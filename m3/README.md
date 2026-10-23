@@ -13,7 +13,7 @@ Original contributions: Hitesh Soliwal <hsoliwal@gmail.com>. OpenJDK retains its
 
 Set `M3_JDK` to a private JDK 21 directory and run `./m3/build.sh`. The script compiles the named module, executes deterministic tests under normal JIT, interpreter, noncompact Strings and C2-focused modes, then builds an original 13-word English **fixture** image. This is not a production English lexicon. `m3/build/` is ignored. The built JDK image can be used as `M3_JDK` after a native OpenJDK build.
 
-Use `python3 m3/recipes/apply.py --check` to verify the source-bound manifest. The same deterministic recipe can install these exact new files into a separate checkout at the pinned runtime baseline using `--target PATH`. It refuses changed inputs or non-identical existing destination files. `python3 m3/recipes/test_recipe.py` tests repeatability and rejection of corrupted inputs.
+The historical `m3/recipes/` scripts are **migration residue** from an earlier receiver model. They must not be used for new source changes. The owning Maven/OpenRewrite recipes, task crates, fixtures and execution live only in Synexia. This repository receives the exact qualified postimages and independently verifies their source hashes, JDK contracts and installed-product behavior. Before cleaning up the old scripts, source-seal them in Synexia and verify all callers.
 
 ## Implemented contracts
 
@@ -63,23 +63,23 @@ acceptance evidence and installed JDKs are not changed by the documentation hand
 
 ## M3JDK21 Maven control plane
 
-The OpenJDK configure/make build remains authoritative for the JDK itself. M3 uses Maven for its
-independent recipe, admission, inventory and proof substrate.
-
-Run:
-
-`mvn -B -ntp -f m3/pom.xml clean verify`
-
-The default reactor verifies migration/OpenRewrite recipes, the scope-aware backport recipe DAG and
-backport inventory/admission. The DAG is framework-neutral; Camel, Airflow and Drools are projections
-over the same canonical dependency/scope graph rather than separate sources of truth.
+The OpenJDK configure/make build remains authoritative for this integrated JDK product.
+Source transformation and Maven/OpenRewrite recipe execution are exclusively Synexia-owned.
+The historical `m3/pom.xml` reactor still includes legacy target-local recipe wiring;
+it is **migration residue**, not an authorized recipe-production entrypoint.
+Receiver-side verification must build the actual produced Java/JNI/HotSpot postimages and
+run the relevant JDK/jtreg/API/ABI/native/runtime or installed-image tests.
+Do not move target-local recipes to a different folder and call that convergence.
 
 
 ## Synexia convergence delivery
 
-Synexia is the donor-convergence workspace and M3JDK21 is a delivery target. Pinned Apache-2.0
-Synexia source, recipes, tests and JNI atoms may be imported below m3/vendor/synexia/ through
-the independently verified manifest/receiver contract.
+Synexia is the **exclusive convergence and recipe execution workspace**; M3JDK21 is a
+delivery target. Only exact executed postimages (Java/JNI/native/product files), rights
+and NOTICE records, target-specific tests and data-only execution receipts may be
+received under `m3/vendor/synexia/` or admitted into canonical JDK owners.
+Recipe code, Maven/OpenRewrite descriptors, task crates and executable templates
+must remain in Synexia.
 
 See docs/synexia-delivery.md.
 

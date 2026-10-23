@@ -73,6 +73,78 @@ final class M3MaskViewportKernel {
         return needed;
     }
 
+    /**
+     * Projects a bounded visible page from the filtered encounter-order sequence.
+     * The caller's ordinal is a rank among matches, not a physical array position.
+     * This is a viewport operation: rows outside the visible page are never
+     * materialized. It preserves already-sorted/permuted offsets, duplicates,
+     * and all 32 mask bits without owning a second element store.
+     *
+     * <p>The entire input window is preflighted before any output mutation,
+     * including when the page is empty or begins past the last visible row.
+     * A shared destination/source array uses a page-sized scratch buffer;
+     * disjoint arrays require no allocation. Callers synchronize concurrent
+     * mutations and own any snapshot-generation validation.</p>
+     *
+     * @return number of logical offsets written, at most {@code maxVisible}
+     */
+    static int projectPage(final int[] logicalOffsets, final int[] states,
+            final int first, final int length, final int requiredBits,
+            final int forbiddenBits, final int skipVisible,
+            final int maxVisible, final int[] target, final int targetOffset) {
+        Objects.requireNonNull(logicalOffsets, "logicalOffsets");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(target, "target");
+        if (logicalOffsets.length != states.length) {
+            throw new IllegalArgumentException("offset and state array lengths differ");
+        }
+        checkSlice(states.length, first, length);
+        checkSlice(target.length, targetOffset, 0);
+        if (skipVisible < 0 || maxVisible < 0) {
+            throw new IndexOutOfBoundsException("negative visible page bounds");
+        }
+        final int available = preflight(logicalOffsets, states, first, length,
+                requiredBits, forbiddenBits);
+        final int needed = skipVisible >= available ? 0
+                : Math.min(available - skipVisible, maxVisible);
+        if (needed > target.length - targetOffset) {
+            throw new IndexOutOfBoundsException("destination capacity");
+        }
+        if (needed == 0) {
+            return 0;
+        }
+        if (target == logicalOffsets || target == states) {
+            final int[] scratch = new int[needed];
+            copyPage(logicalOffsets, states, first, length, requiredBits,
+                    forbiddenBits, skipVisible, needed, scratch, 0);
+            System.arraycopy(scratch, 0, target, targetOffset, needed);
+        } else {
+            copyPage(logicalOffsets, states, first, length, requiredBits,
+                    forbiddenBits, skipVisible, needed, target, targetOffset);
+        }
+        return needed;
+    }
+
+    private static void copyPage(final int[] offsets, final int[] states,
+            final int first, final int length, final int required,
+            final int forbidden, final int skipVisible, final int needed,
+            final int[] target, final int targetOffset) {
+        int remaining = skipVisible;
+        int written = 0;
+        for (int i = first, end = first + length; i < end; i++) {
+            if (matches(states[i], required, forbidden)) {
+                if (remaining != 0) {
+                    remaining--;
+                } else {
+                    target[targetOffset + written++] = offsets[i];
+                    if (written == needed) {
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     /** Selects a single matching logical offset by zero-based window rank. */
     static int atRank(final int[] logicalOffsets, final int[] states,
             final int first, final int length, final int requiredBits,

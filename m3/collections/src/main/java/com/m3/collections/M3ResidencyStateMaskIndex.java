@@ -67,6 +67,8 @@ public final class M3ResidencyStateMaskIndex {
                         requiredBits, forbiddenBits, allowedStates)) matches++;
             }
             int[] selected = new int[matches];
+            // After a complete preflight, no second traversal is needed for zero hits.
+            if (matches == 0) return selected;
             int written = 0;
             for (int i = 0; i < count; i++) {
                 int slot = orderedSlots[(int) ((long) offset + (long) i * stride)];
@@ -120,6 +122,8 @@ public final class M3ResidencyStateMaskIndex {
             if (kept > destination.length - destinationOffset) {
                 throw new IndexOutOfBoundsException("destination cannot contain selected coordinates");
             }
+            // Preserve alias, bounds and contract checks; skip only the empty emission pass.
+            if (kept == 0) return 0;
             int written = 0;
             for (int i = 0; i < count; i++) {
                 int slot = orderedSlots[(int) ((long) offset + (long) i * stride)];

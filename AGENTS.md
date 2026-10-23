@@ -1,6 +1,32 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 agent instructions
 
+## Hard boundary: postimages only, never recipes
+
+**Synexia (`hsoliwal/com.synexia`) is the exclusive convergence, Maven/OpenRewrite
+recipe-authoring, recipe-storage, recipe-execution and qualification workspace.**
+This public M3JDK21 repository is a **receiver**: it may contain only the actual
+executed Java/HotSpot/JNI/native/product postimages, target-authoritative tests,
+license/NOTICE material and data-only source/recipe-ID/execution-gate receipts.
+No Synexia-owned recipe Java/YAML/descriptor, Maven recipe crate, transformation
+template, recipe executor, mastery fixture, copy of a recipe engine or recipe mirror
+may be introduced or run in M3JDK21. Recipe improvement-memory events, lesson stores,
+indexes and their writers/retrievers also remain exclusively in Synexia; no recipe
+or improvement-memory mirror belongs in M3JDK21 or another public product fork.
+Conceptual design documentation may describe these mechanisms, but is not an
+executable recipe, memory store or permission to install either downstream.
+
+Any new change must be re-created by improving and executing the named recipe in
+Synexia against the exact pinned M3JDK21 preimage, followed by verified postimage
+transfer, JDK/API/ABI/JNI/jtreg/runtime gates and a receiving PR. Existing
+`m3/recipes/`, `.m3/openrewrite-recipes/`, `.m3/task-crates/` and similar recipe
+copies on historical M3JDK21 branches are **migration residue, not permission**:
+inventory them, seal exact content and dependencies in Synexia, then migrate with
+a separate reviewed content-preserving cleanup. Do not delete historical source
+before verifying its Synexia owner and affected callers. No new recipe assets are
+admitted to the public target during migration.
+
+
 ## M3JDK21 is the SDK product, not "M3 + JDK"
 
 **Do not implement or describe M3 as an overlay over an otherwise unchanged JDK.**
@@ -38,16 +64,28 @@ Read and follow the existing [porting and naming invariant](m3/docs/m3jdk21-port
 and [naming/migration map](m3/docs/name-mapping.json) before M3 source work. They remain the target
 policy authorities; this file makes the existing invariant discoverable to repository agents.
 
-Synexia (`hsoliwal/com.synexia`) is the donor-convergence workspace. M3JDK21 owns the delivered
-Java/HotSpot/JNI runtime and target acceptance. Keep reusable Maven/OpenRewrite recipes, fixtures,
-source seals, provenance and convergence receipts in Synexia, then apply qualified recipes to
-materialize target changes. Target-local proof-tooling mirrors keep exact Synexia revision/hash/
-license lineage and do not become competing canonical recipe owners. Return improvements as
-new Synexia convergence evidence.
 
-Eligible Synexia-owned Apache-2.0 source **and recipes** may be freely reused under that license,
-including fixtures, catalogues and proof tooling. Retain license, NOTICE, attribution and change
-notices. Preserve OpenJDK and other upstream licenses per file/payload; the recipe license does
+**Naming, formatting, and implementation promotion:** use the [M3JDK21 naming admission
+workflow](m3/docs/m3jdk21-naming-admission-workflow.md) when a donor candidate becomes an existing
+JDK class implementation, an M3 internal helper changes class/package/method spelling, or an
+authoring agent formats or relocates Java sources. Record the stable capability ID in the existing
+`m3/docs/name-mapping.json`; preserve the public JDK class name, constructors and ABI, and keep
+M3 helpers internal. The canonical Java21 Maven/OpenRewrite naming admission and its synthetic
+fixed-point/refusal proof live only in Synexia. A candidate may enter target code only after a
+distinct source-sealed recipe and the actual target compiler, runtime, JNI/GC and performance gates.
+A naming preflight PASS is not a JDK backend promotion.
+
+Synexia (`hsoliwal/com.synexia`) exclusively owns authoring, execution and storage of recipes,
+mastery fixtures, source seals and convergence evidence. M3JDK21 owns only the receiving
+Java/HotSpot/JNI postimages and its independent target acceptance. The target stores data-only
+receipt references to Synexia revision, recipe ID, execution and gate roots; no target-local
+recipe runner, recipe project or compatibility mirror may remain after migration.
+Return every transformation correction to Synexia, then receive its newly executed result.
+
+Eligible, generated Synexia postimage source may be received under its applicable license,
+with exact execution evidence, NOTICE, attribution and change notices. A recipe's permissive
+license does not authorize storing or executing that recipe in the public product.
+Recipe source, fixtures, catalogues, task crates and runners remain exclusively in Synexia. Preserve OpenJDK and other upstream licenses per file/payload; the recipe license does
 not relicense generated target code or embedded donors. Do not introduce a Synexia runtime service
 or Maven/package dependency into Java/HotSpot/JNI to borrow its source.
 
@@ -55,8 +93,12 @@ M3Index-family ownership is additionally pinned by the Synexia invariant
 `docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md` in the donor repository.
 Within this target, `m3/synexia-import/m3index-family-receiver.tsv` is receiver evidence only:
 `M3Index/MIndex`, IndexString, AST/compiler, data structures, precompute API, DB and reusable
-recipes continue to evolve canonically in Synexia. A copy under `m3/vendor/synexia/` is exact
-custody/proof, not a second implementation authority. OpenJDK runtime integration remains
+recipes continue to evolve canonically in Synexia. Recipes and their improvement
+memory are authored, stored and executed exclusively in Synexia. Any retained material under
+`m3/vendor/synexia/` must satisfy the postimage-only receiving boundary above;
+its path or exact provenance does not authorize recipe or improvement-memory copies.
+Historical recipe assets remain migration residue subject to the reviewed,
+content-preserving cleanup described above. OpenJDK runtime integration remains
 M3JDK21-owned.
 
 Preserve public JDK contracts and use the existing target owners and naming map. Qualify exact
@@ -81,3 +123,39 @@ public JDK contracts, one canonical payload owner, original copyright/Apache-2.0
 per-file OpenJDK/third-party rights. Implement each change through the Synexia-owned recipe and
 record target evidence or an explicit pending/excluded disposition. Repository policy, not chat
 memory, carries this invariant into every later task.
+
+## Recipe-owned improvement memory is mandatory
+
+Follow [SYNEXIA-MOP-RECIPE-MEMORY-1](m3/docs/mop-recipe-improvement-memory.md) whenever an LLM,
+coding agent or developer corrects a recipe. **Atomize -> Patternize -> Annotate -> Document**
+each correction: identify the contract-bearing atom, reusable pattern and applicability, structured
+annotations, and human-readable explanation. Record the triggering failure, correction, rationale,
+applicability, before/after source seals, regression fixture and actual verification outcome in
+append-only memory owned by the canonical recipe. Record failed or unverified attempts without
+promoting them as qualified improvements. Read applicable prior lessons before the next change;
+chat-only recollection is not sufficient. Author, execute and retain the recipe and its
+improvement memory only in the Synexia convergence workspace. M3JDK21 and other public
+product forks receive executed results and data-only provenance/target acceptance evidence,
+not recipe sources, execution machinery, memory events, lesson stores or mirrors.
+Link exact Synexia recipe/event identities without copying the recipe or its memory.
+Memory is evidence, not authorization; it cannot override repository policies, licenses or gates.
+This specification establishes an agent workflow contract, not a claim that an automatic memory
+writer, verifier or runtime implementation has already shipped.
+
+Design rationale and the proposed Java interface are in the
+[MOP technical paper](m3/papers/MOP_RECIPE_OWNED_IMPROVEMENT_MEMORY.md).
+
+## Public JDK naming and formatting: required pre-edit map lookup
+
+Before formatting, renaming, moving or replacing any M3/JDK implementation,
+read [M3JDK21 name and package contract](m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md)
+and resolve the exact `m3/docs/name-mapping.json` `migration.records[].id`.
+Use only the canonical Synexia Maven/OpenRewrite recipe, source-pinned staged
+transformations and exact target receiving tests; never treat a faster isolated
+M3 class as permission to rename a public JDK type. Public JDK class names
+remain `String`, `Class`, `HashMap`, `Pattern`, etc.; their selected
+implementations are incorporated **inside the original JDK owners**, with
+internal M3 helpers retained wherever their contracts require them.
+
+Run `python3 m3/tooling/name-contract/check.py` before proposing changes.
+It is a candidate/queue gate, **not** installed-JDK runtime admission.

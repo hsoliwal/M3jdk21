@@ -23,26 +23,32 @@ import java.util.function.Predicate;
  * filters. This avoids recursive sink chains and per-traversal closures.
  */
 public final class M3PipelinePlan<T> {
+    private static final int PAGE_SHIFT = 6;
+    private static final int PAGE_MASK = (1 << PAGE_SHIFT) - 1;
     private static final Object[] EMPTY_OPERATIONS = new Object[0];
+    private static final Object[][] EMPTY_PAGES = new Object[0][];
     private static final long[] EMPTY_FILTER_MASK = new long[0];
 
     private final Iterable<?> source;
-    private final Object[] operations;
+    private final Object[][] pages;
     private final long[] filterMask;
+    private final int size;
 
     private interface Sink {
         void accept(Object value);
     }
 
-    private M3PipelinePlan(Iterable<?> source, Object[] operations, long[] filterMask) {
+    private M3PipelinePlan(Iterable<?> source, Object[][] pages,
+                           long[] filterMask, int size) {
         this.source = source;
-        this.operations = operations;
+        this.pages = pages;
         this.filterMask = filterMask;
+        this.size = size;
     }
 
     public static <T> M3PipelinePlan<T> from(Iterable<T> source) {
         return new M3PipelinePlan<>(Objects.requireNonNull(source),
-                EMPTY_OPERATIONS, EMPTY_FILTER_MASK);
+                EMPTY_PAGES, EMPTY_FILTER_MASK, 0);
     }
 
     public M3PipelinePlan<T> filter(Predicate<? super T> predicate) {
@@ -53,14 +59,22 @@ public final class M3PipelinePlan<T> {
         return append(Objects.requireNonNull(mapper), false);
     }
 
-    /** New plans own their metadata arrays; parent plans stay immutable. */
+    /**
+     * Copy only the touched (at most 64-entry) page and the primitive page
+     * directory/mask. Completed pages are shared, never modified; ancestors
+     * and independently forked plans keep their original execution sequences.
+     */
     private <R> M3PipelinePlan<R> append(Object operation, boolean filter) {
-        int offset = operations.length;
-        Object[] nextOperations = Arrays.copyOf(operations, offset + 1);
-        nextOperations[offset] = operation;
-        long[] nextFilterMask = Arrays.copyOf(filterMask, (offset >>> 6) + 1);
-        if (filter) nextFilterMask[offset >>> 6] |= 1L << (offset & 63);
-        return new M3PipelinePlan<>(source, nextOperations, nextFilterMask);
+        int pageIndex = size >>> PAGE_SHIFT;
+        int lane = size & PAGE_MASK;
+        Object[][] nextPages = Arrays.copyOf(pages, pageIndex + 1);
+        Object[] prior = lane == 0 ? EMPTY_OPERATIONS : pages[pageIndex];
+        Object[] current = Arrays.copyOf(prior, lane + 1);
+        current[lane] = operation;
+        nextPages[pageIndex] = current;
+        long[] nextFilterMask = Arrays.copyOf(filterMask, pageIndex + 1);
+        if (filter) nextFilterMask[pageIndex] |= 1L << lane;
+        return new M3PipelinePlan<>(source, nextPages, nextFilterMask, size + 1);
     }
 
     /** Encounter-ordered distinct, with one result list and one membership set. */
@@ -96,15 +110,19 @@ public final class M3PipelinePlan<T> {
         for (Object sourceValue : source) {
             Object value = sourceValue;
             boolean accepted = true;
-            for (int offset = 0; offset < operations.length; offset++) {
-                Object operation = operations[offset];
-                if ((filterMask[offset >>> 6] & (1L << (offset & 63))) != 0) {
-                    if (!((Predicate<Object>) operation).test(value)) {
-                        accepted = false;
-                        break;
+            for (int pageIndex = 0; pageIndex < pages.length && accepted; pageIndex++) {
+                Object[] page = pages[pageIndex];
+                long bits = filterMask[pageIndex];
+                for (int lane = 0; lane < page.length; lane++) {
+                    Object operation = page[lane];
+                    if ((bits & (1L << lane)) != 0) {
+                        if (!((Predicate<Object>) operation).test(value)) {
+                            accepted = false;
+                            break;
+                        }
+                    } else {
+                        value = ((Function<Object, Object>) operation).apply(value);
                     }
-                } else {
-                    value = ((Function<Object, Object>) operation).apply(value);
                 }
             }
             if (accepted) terminal.accept(value);

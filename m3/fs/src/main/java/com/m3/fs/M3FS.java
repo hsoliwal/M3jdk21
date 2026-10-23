@@ -3,6 +3,8 @@
 // Adapted for the M3JDK21 M3FS runtime from the pinned Synexia donor.
 package com.m3.fs;
 
+// Modified 2026-10-21: bounded, pinned native-container inventory capture through existing stream hashes.
+
 import java.io.IOException;
 import java.lang.ref.Cleaner;
 import java.nio.ByteBuffer;
@@ -863,6 +865,200 @@ public final class M3FS implements AutoCloseable {
     M3DirectoryTable table = M3DirectoryTable.decode(data);
     if (table.size() != count) throw new IllegalStateException("directory page count mismatch");
     return new DirectoryPage(table, more != 0);
+  }
+
+  /** Explicit bounds for a complete native-container inventory; no limit silently prunes a tree. */
+  public record InventoryLimits(int pageEntries, int maxDepth, int maxEntries, long maxContentBytes) {
+    public InventoryLimits {
+      if (pageEntries < 1 || pageEntries > MAX_PAGE_ENTRIES || maxDepth < 0
+          || maxEntries < 0 || maxContentBytes < 0) throw new IllegalArgumentException("inventory limits");
+    }
+  }
+
+  /** Borrowed synchronous sink. Side effects belong to its caller and are not committed by M3FS. */
+  @FunctionalInterface
+  public interface InventorySink {
+    void accept(String relativePath, Stat metadata, MFileCapture capture) throws IOException;
+  }
+
+  /** Issued only after every admitted entry, content EOF and callback completed successfully. */
+  public static final class InventoryReceipt {
+    private final String scope;
+    private final int entries;
+    private final int files;
+    private final long bytes;
+    private final M3ContentId tuples;
+
+    private InventoryReceipt(String scope, int entries, int files, long bytes, M3ContentId tuples) {
+      this.scope = scope; this.entries = entries; this.files = files; this.bytes = bytes; this.tuples = tuples;
+    }
+    public String scope() { return scope; }
+    public int entries() { return entries; }
+    public int files() { return files; }
+    public long bytes() { return bytes; }
+    public M3ContentId tupleSha256() { return tuples; }
+  }
+
+  /**
+   * Scans one pinned native SQLite container view, not a ZIP/TAR provider traversal.
+   * Each regular-file byte is read once through the existing MFileStreams hash owner.
+   * Exact nanosecond metadata is in the Stat; MFileObservation retains its existing
+   * millisecond metadata contract. Symlinks and noncanonical paths fail this build-input slice.
+   *
+   * <p>Only an openSnapshot handle is accepted. A receipt is returned after complete
+   * traversal, all file EOFs/clean closes and all sink callbacks. A caller may admit
+   * deletions or commit its own transaction only after that return. Earlier sink
+   * side effects must remain staged on any exception. The sink and snapshot are
+   * borrowed; neither is closed here. No payload or global inventory is retained:
+   * scratch is one 64-KiB buffer plus at most one bounded page per directory depth.
+   * A sink retaining rows has its own O(N) memory cost. Long snapshots retain WAL history.</p>
+   */
+  public InventoryReceipt scanInventory(String root, InventoryLimits limits,
+      M3FsProgress progress, InventorySink sink) throws IOException {
+    Objects.requireNonNull(limits, "limits"); Objects.requireNonNull(progress, "progress");
+    Objects.requireNonNull(sink, "sink");
+    String selected = inventoryRoot(root);
+    if (!isSnapshot() || !isOpen()) throw new IOException("inventory requires an open pinned M3FS snapshot");
+    progress.checkCanceled();
+    if (stat(selected).kind() != Kind.DIRECTORY) throw new IOException("inventory root must be a directory");
+    String scope = inventoryAddress(selected);
+    java.security.MessageDigest digest = M3ContentId.newDigest();
+    java.io.DataOutputStream tuples = new java.io.DataOutputStream(
+        new java.security.DigestOutputStream(java.io.OutputStream.nullOutputStream(), digest));
+    byte[] scopeBytes = scope.getBytes(StandardCharsets.UTF_8);
+    tuples.writeInt(1); tuples.writeInt(scopeBytes.length); tuples.write(scopeBytes);
+    byte[] buffer = new byte[64 * 1024];
+    java.util.ArrayDeque<InventoryFrame> frames = new java.util.ArrayDeque<>();
+    frames.push(new InventoryFrame(selected, "", 0));
+    int entries = 0, files = 0; long bytes = 0;
+    while (!frames.isEmpty()) {
+      progress.checkCanceled();
+      InventoryFrame frame = frames.peek();
+      if (frame.page == null || frame.index == frame.page.table().size()) {
+        if (frame.page != null && !frame.page.hasMore()) { frames.pop(); continue; }
+        String after = frame.page == null ? null : frame.page.nextAfter();
+        DirectoryPage page = listPage(frame.path, after, limits.pageEntries());
+        String prior = after;
+        for (int row = 0; row < page.table().size(); row++) {
+          String name = page.table().name(row);
+          inventoryName(name);
+          if (prior != null && Arrays.compareUnsigned(prior.getBytes(StandardCharsets.UTF_8),
+                  name.getBytes(StandardCharsets.UTF_8)) >= 0) {
+            throw new IOException("non-increasing or duplicate inventory cursor");
+          }
+          prior = name;
+        }
+        frame.page = page; frame.index = 0;
+        if (page.table().size() == 0) { frames.pop(); continue; }
+      }
+      DirEntry entry = frame.page.entries().get(frame.index++);
+      if (entries == limits.maxEntries()) throw new IOException("inventory entry budget exceeded");
+      entries++;
+      int depth = Math.addExact(frame.depth, 1);
+      if (depth > limits.maxDepth()) throw new IOException("inventory depth budget exceeded");
+      String relative = frame.relative.isEmpty() ? entry.name() : frame.relative + "/" + entry.name();
+      String absolute = frame.path.equals("/") ? "/" + entry.name() : frame.path + "/" + entry.name();
+      Stat metadata = entry.stat();
+      if (metadata.kind() == Kind.SYMLINK) throw new IOException("inventory symbolic link is not a regular input");
+      byte[] name = relative.getBytes(StandardCharsets.UTF_8);
+      tuples.writeInt(name.length); tuples.write(name); tuples.writeInt(metadata.kind().ordinal());
+      tuples.writeLong(metadata.size()); tuples.writeLong(metadata.modifiedTimeNanos());
+      if (metadata.kind() == Kind.DIRECTORY) {
+        frames.push(new InventoryFrame(absolute, relative, depth));
+      } else {
+        if (metadata.size() > limits.maxContentBytes() - bytes) {
+          throw new IOException("inventory content budget exceeded");
+        }
+        MFileCapture capture = captureInventoryFile(absolute, metadata, progress, buffer);
+        tuples.write(capture.manifest().raw().id().bytes());
+        sink.accept(relative, metadata, capture);
+        bytes += metadata.size(); files++;
+      }
+    }
+    progress.checkCanceled();
+    if (!isOpen()) throw new IOException("inventory snapshot closed before completion");
+    tuples.writeInt(entries); tuples.writeInt(files); tuples.writeLong(bytes); tuples.flush();
+    return new InventoryReceipt(scope, entries, files, bytes, M3ContentId.of(digest.digest()));
+  }
+
+  private MFileCapture captureInventoryFile(String absolute, Stat metadata,
+      M3FsProgress progress, byte[] buffer) throws IOException {
+    java.io.InputStream raw = new java.io.InputStream() {
+      private long offset;
+      private boolean closed;
+      private final byte[] single = new byte[1];
+      @Override public int read() throws IOException {
+        int count = read(single, 0, 1); return count < 0 ? -1 : single[0] & 255;
+      }
+      @Override public int read(byte[] output, int at, int length) throws IOException {
+        Objects.checkFromIndexSize(at, length, output.length);
+        if (closed) throw new IOException("inventory input closed");
+        if (length == 0) return 0;
+        int count = readIfInode(absolute, metadata.inode(), offset, output, at, length);
+        if (count < 0 || count > length || count > metadata.size() - offset) {
+          throw new IOException("inventory content exceeds declared size");
+        }
+        if (count == 0) {
+          if (offset != metadata.size()) throw new java.io.EOFException("truncated inventory content");
+          return -1;
+        }
+        offset += count; return count;
+      }
+      @Override public void close() throws IOException {
+        closed = true;
+        if (!isOpen()) throw new IOException("inventory snapshot closed during content read");
+      }
+    };
+    MFileStreams.Input input = MFileStreams.input(raw, progress);
+    try (input) { while (input.read(buffer) >= 0) { /* digest in the existing stream owner */ } }
+    if (!input.complete() || input.position() != metadata.size()) {
+      throw new IOException("inventory content was not completely observed");
+    }
+    String source = inventoryAddress(absolute);
+    int flags = MFileObservation.EXISTS_KNOWN | MFileObservation.EXISTS | MFileObservation.TYPE_KNOWN
+        | MFileObservation.FILE | MFileObservation.SIZE_KNOWN | MFileObservation.MODIFIED_KNOWN;
+    MFileObservation observation = MFileObservation.metadata(source, flags, metadata.size(),
+        metadata.modifiedTimeNanos() / 1_000_000L, MFileObservation.ChangeStamp.unavailable());
+    return MFileCapture.fromInput(observation, System.currentTimeMillis(), new MFileStreams.Completion(
+        "m3fs-snapshot-input", input.position(), input.contentHash().orElseThrow(),
+        MFileStreams.CompletionKind.INPUT_EOF));
+  }
+
+  private String inventoryAddress(String selected) {
+    String container = database.toUri().toASCIIString();
+    // Length framing keeps literal archive-boundary punctuation from aliasing identities.
+    return "m3fs:" + container.length() + ":" + container + selected;
+  }
+
+  private static String inventoryRoot(String root) throws IOException {
+    Objects.requireNonNull(root, "root");
+    if (!root.startsWith("/") || root.length() > 1 && root.endsWith("/")) {
+      throw new IOException("inventory root must be a canonical absolute M3FS path");
+    }
+    if (!root.equals("/")) for (String name : root.substring(1).split("/", -1)) inventoryName(name);
+    return root;
+  }
+
+  private static void inventoryName(String name) throws IOException {
+    if (name.isEmpty() || name.equals(".") || name.equals("..") || name.indexOf('/') >= 0
+        || name.indexOf('\\') >= 0 || name.indexOf('\0') >= 0) {
+      throw new IOException("noncanonical inventory path component");
+    }
+    try {
+      StandardCharsets.UTF_8.newEncoder().onMalformedInput(CodingErrorAction.REPORT)
+          .onUnmappableCharacter(CodingErrorAction.REPORT).encode(java.nio.CharBuffer.wrap(name));
+    } catch (CharacterCodingException invalid) { throw new IOException("invalid UTF-8 inventory path", invalid); }
+  }
+
+  private static final class InventoryFrame {
+    final String path;
+    final String relative;
+    final int depth;
+    DirectoryPage page;
+    int index;
+    InventoryFrame(String path, String relative, int depth) {
+      this.path = path; this.relative = relative; this.depth = depth;
+    }
   }
 
   public synchronized void symlink(String target, String linkPath) throws IOException {

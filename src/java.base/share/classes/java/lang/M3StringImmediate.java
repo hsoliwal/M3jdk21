@@ -8,10 +8,10 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * Canonical immediate owner: the whole text of a short String carried in one {@code long}.
+ * Canonical immediate owner: packed short text in a fixed-size, parent-owned {@code long[]} page.
  *
- * <p>No native payload, no pool bucket and no byte reservation exist for an immediate owner; the
- * packed value is the text. Two profiles are admitted. The profile is chosen from the content in a
+ * <p>No native text payload or byte reservation exists for an immediate owner; its word
+ * resides in a fixed 32-slot array page. Two profiles are admitted, chosen from the content in a
  * fixed order (LATIN1 first, then IDENT), so the packed value is a canonical function of the text:
  * two whole immediate owners hold equal text if and only if their packed values are equal.</p>
  *
@@ -34,9 +34,9 @@ import java.util.Objects;
  * <p>HotSpot decodes the same layout in {@code java_lang_M3String::immediate_char_at}
  * (javaClasses.cpp); both sides change together.</p>
  */
-//FLLDCIM: IOP — pattern=M3StringOwnerKinds role=ImmediateOwner contract=M3StringOwner(charAt,getChars,computeFacts,computeRangeFacts)
-//FLLDCIM: HPCPOP — hot path; pack/unit/charAt allocate nothing
-//FLLDCIM: E14 — no magic numbers: every width, mask and multiplier below is a named constant
+//FLLDCIM: IOP - pattern=M3StringOwnerKinds role=ImmediateOwner contract=M3StringOwner(charAt,getChars,computeFacts,computeRangeFacts)
+//FLLDCIM: HPCPOP - hot path; pack/unit/charAt allocate nothing
+//FLLDCIM: E14 - no magic numbers: every width, mask and multiplier below is a named constant
 final class M3StringImmediate extends M3StringOwner {
     static final int TAG_BITS = 3;
     static final int TAG_SHIFT = Long.SIZE - TAG_BITS;
@@ -81,16 +81,96 @@ final class M3StringImmediate extends M3StringOwner {
     /** A code point that no profile admits (any supplementary point maps here). */
     private static final int REFUSED_UNIT = Integer.MAX_VALUE;
 
-    final long packed;
+    /*
+     * Every word is stored in an indexed slot of a fixed-size parent-owned long[] page.
+     * The owner is a stable handle to a slot, not a second scalar payload.
+     * Published slot words cannot change while an owner remains reachable.
+     */
+    private static final int INTERN_BUCKET_BITS = 12;
+    private static final int INTERN_BUCKET_COUNT = 1 << INTERN_BUCKET_BITS;
+    private static final int INTERN_PAGE_WORDS = 32;
+    private static final int INTERN_LOCK_COUNT = 64;
+    private static final Object[] INTERN_LOCKS = makeInternLocks();
+    private static final PackedPage[] INTERN_BUCKETS = new PackedPage[INTERN_BUCKET_COUNT];
 
-    private M3StringImmediate(long packed, int length, int javaHash) {
+    final long[] words;
+    final int slot;
+
+    private M3StringImmediate(long[] words, int slot, long packed, int length, int javaHash) {
         super(IMMEDIATE, length, String.LATIN1, javaHash, mix64(packed));
-        this.packed = packed;
+        this.words = words;
+        this.slot = slot;
     }
 
-    /** The owner for an admitted packed value; {@code packed} must come from a pack method. */
-    //FLLDCIM: ATOM — of: packed -> owner (length + String.hashCode parity)
+    private long packed() {
+        return words[slot];
+    }
+
+    private static Object[] makeInternLocks() {
+        Object[] locks = new Object[INTERN_LOCK_COUNT];
+        for (int index = 0; index < locks.length; index++) locks[index] = new Object();
+        return locks;
+    }
+
+    /** Fixed-capacity, weakly indexed interned words; only a new page adds physical capacity. */
+    private static final class PackedPage {
+        final long[] words = new long[INTERN_PAGE_WORDS];
+        final java.lang.ref.WeakReference<?>[] owners =
+                new java.lang.ref.WeakReference<?>[INTERN_PAGE_WORDS];
+        final PackedPage next;
+        int used;
+
+        PackedPage(PackedPage next) {
+            this.next = next;
+        }
+    }
+
+    /**
+     * Intern a validated packed value by its exact word.
+     *
+     * <p>The directory is a fixed array of buckets. Each bucket contains linked, fixed-size
+     * pages, never resizable arrays. Weak owners permit a slot to be reused after its last
+     * M3String owner becomes unreachable. A reachable owner always retains its word array;
+     * no stale native address is cached or returned.</p>
+     */
+    //FLLDCIM: ATOM - fixed-page intern: owner reuse, no copied whole-text payload
     static M3StringImmediate of(long packed) {
+        int bucket = (int) mix64(packed) & (INTERN_BUCKET_COUNT - 1);
+        synchronized (INTERN_LOCKS[bucket & (INTERN_LOCK_COUNT - 1)]) {
+            PackedPage available = null;
+            int availableSlot = -1;
+            for (PackedPage page = INTERN_BUCKETS[bucket]; page != null; page = page.next) {
+                for (int index = 0; index < page.used; index++) {
+                    java.lang.ref.WeakReference<?> reference = page.owners[index];
+                    Object candidate = reference == null ? null : reference.get();
+                    if (candidate instanceof M3StringImmediate live) {
+                        if (page.words[index] == packed) return live;
+                    } else if (available == null) {
+                        available = page;
+                        availableSlot = index;
+                    }
+                }
+                if (available == null && page.used < INTERN_PAGE_WORDS) {
+                    available = page;
+                    availableSlot = page.used;
+                }
+            }
+
+            if (available == null) {
+                available = new PackedPage(INTERN_BUCKETS[bucket]);
+                INTERN_BUCKETS[bucket] = available;
+                availableSlot = 0;
+            }
+            if (availableSlot == available.used) available.used++;
+            available.words[availableSlot] = packed;
+            M3StringImmediate created = createOwner(available.words, availableSlot, packed);
+            available.owners[availableSlot] = new java.lang.ref.WeakReference<>(created);
+            return created;
+        }
+    }
+
+    /** Exact per-text String.hashCode facts, created only on a new canonical slot. */
+    private static M3StringImmediate createOwner(long[] words, int slot, long packed) {
         int length = length(packed);
         int hash = 0;
         if (isLatin1(packed)) {
@@ -104,10 +184,10 @@ final class M3StringImmediate extends M3StringOwner {
                 digits = nextDigits(digits);
             }
         }
-        return new M3StringImmediate(packed, length, hash);
+        return new M3StringImmediate(words, slot, packed, length, hash);
     }
 
-    //FLLDCIM: ATOM — pack: four source kinds, one canonical packed value or NONE
+    //FLLDCIM: ATOM - pack: four source kinds, one canonical packed value or NONE
     static long packCompactBytes(byte[] source, int offset, int length, byte coder) {
         return pack(coder == String.LATIN1 ? KIND_LATIN1_BYTES : KIND_UTF16_BYTES,
                 source, offset, length);
@@ -123,7 +203,7 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** Unit count of an admitted packed value. */
-    //FLLDCIM: ATOM — length: LATIN1 field, IDENT digit count
+    //FLLDCIM: ATOM - length: LATIN1 field, IDENT digit count
     static int length(long packed) {
         long tag = packed & TAG_MASK;
         if (tag == TAG_LATIN1) {
@@ -140,7 +220,7 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** Unit {@code index} of an admitted packed value; the bounds are the caller's. */
-    //FLLDCIM: ATOM — unit: O(1) LATIN1 shift, O(index) IDENT digit walk (index below IDENT_MAX)
+    //FLLDCIM: ATOM - unit: O(1) LATIN1 shift, O(index) IDENT digit walk (index below IDENT_MAX)
     static char unit(long packed, int index) {
         if (isLatin1(packed)) {
             return latin1Unit(packed, index);
@@ -153,23 +233,24 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** Equal text of two whole immediate owners is equal packed values (canonical profile). */
-    //FLLDCIM: ATOM — sameText: identity of text = equality of packed words
+    //FLLDCIM: ATOM - sameText: identity of text = equality of packed words
     static boolean sameText(M3StringOwner left, M3StringOwner right) {
         return left instanceof M3StringImmediate a
                 && right instanceof M3StringImmediate b
-                && a.packed == b.packed;
+                && a.packed() == b.packed();
     }
 
     @Override
     char charAt(int index) {
         Objects.checkIndex(index, length);
-        return unit(packed, index);
+        return unit(packed(), index);
     }
 
     @Override
     void getChars(int start, int end, char[] destination, int destinationStart) {
         Objects.checkFromToIndex(start, end, length);
         Objects.checkFromIndexSize(destinationStart, end - start, destination.length);
+        long packed = packed();
         if (isLatin1(packed)) {
             for (int source = start, target = destinationStart; source < end; source++, target++) {
                 destination[target] = latin1Unit(packed, source);

@@ -114,6 +114,22 @@ public final class M3StateMaskArrays {
         return M3IndexMaskCompactor.select(rowSlots, stateBits, requiredBits, backend);
     }
 
+    /**
+     * Select stable physical indexes requiring every included bit and no forbidden bit.
+     *
+     * <p>The source owns its index and aligned state lanes. This operation reuses
+     * the existing Java/JNI window selector and returns detached index metadata,
+     * not duplicated element payloads. Validate unsigned/disjoint masks before
+     * dispatch; no Java predicate or comparator crosses JNI.
+     */
+    public static int[] select(int[] rowSlots, byte[] stateBits, int requiredBits,
+                               int forbiddenBits, M3IndexMaskCompactor.Backend backend) {
+        requireAligned(rowSlots, stateBits);
+        checkMasks(requiredBits, forbiddenBits);
+        return M3IndexMaskCompactor.selectWindow(rowSlots, 0, stateBits, 0,
+                rowSlots.length, requiredBits, forbiddenBits, backend);
+    }
+
     private static void reverse(int[] slots, byte[] states, int from, int to) {
         for (int left = from, right = to - 1; left < right; left++, right--) {
             int slot = slots[left]; slots[left] = slots[right]; slots[right] = slot;

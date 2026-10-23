@@ -77,6 +77,8 @@ public final class M3SourceSignalPlugin implements Plugin {
 
     private final TreeMap<String, Facts> facts = new TreeMap<>();
     private Path output;
+    private Path methodOutput;
+    private M3MethodSignals methodSignals;
     private boolean includeAll;
     private boolean written;
     private Trees trees;
@@ -97,6 +99,11 @@ public final class M3SourceSignalPlugin implements Plugin {
                     throw new IllegalArgumentException("provide exactly one nonempty out=FILE");
                 }
                 output = Path.of(argument.substring(4)).toAbsolutePath().normalize();
+            } else if (argument.startsWith("methodOut=")) {
+                if (methodOutput != null || argument.length() == 10) {
+                    throw new IllegalArgumentException("provide exactly one nonempty methodOut=FILE");
+                }
+                methodOutput = Path.of(argument.substring(10)).toAbsolutePath().normalize();
             } else if (argument.equals("include=all")) {
                 includeAll = true;
             } else if (argument.equals("include=annotated")) {
@@ -106,7 +113,14 @@ public final class M3SourceSignalPlugin implements Plugin {
             }
         }
         if (output == null) throw new IllegalArgumentException("M3SourceSignals requires out=FILE");
+        if (methodOutput != null && methodOutput.equals(output)) {
+            throw new IllegalArgumentException("methodOut= must not alias the original out= image");
+        }
         trees = Trees.instance(task);
+        if (methodOutput != null) {
+            methodSignals = new M3MethodSignals(trees, methodOutput,
+                    M3SourceSignalPlugin::methodSignature);
+        }
         task.addTaskListener(new TaskListener() {
             @Override
             public void started(TaskEvent event) {
@@ -119,6 +133,7 @@ public final class M3SourceSignalPlugin implements Plugin {
                 if (event.getKind() == TaskEvent.Kind.COMPILATION && !written) {
                     written = true;
                     publish();
+                    if (methodSignals != null) methodSignals.publish();
                 }
             }
         });
@@ -163,6 +178,7 @@ public final class M3SourceSignalPlugin implements Plugin {
         }
         new SourceScanner(row, root).scan(path, null);
         facts.put(qname, row);
+        if (methodSignals != null) methodSignals.collect(path);
     }
 
     private static void addMethod(ExecutableElement method, Facts row) {

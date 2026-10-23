@@ -1,0 +1,68 @@
+{
+  "schema": 2,
+  "recipe": "com.synexia.m3.CollectionRecovery20261020",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "10f781ae3e525b7630ed0661b3bb99a41f092fb4",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-recovery-20261020",
+  "target_base": "df532e779056dbec203dde20030657c3d144f5b5",
+  "status": "SDK_GENERATED_FILE_ATOMS_QUALIFIED_IMAGE_PENDING",
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "after_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb"
+    },
+    {
+      "path": "m3/collections/src/test/java/MaskWindowConvergence.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "d6a39208e6f869d04b188ae001da471543a92bddb53d84ff7ba3d68dbde84de1",
+      "after_blob": "f9984077d684c918f1c1d7d218449be635e6f4cd"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNullNavigationProbe.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "fb53a688c8e7ad3fa1a1cb21c3248b59ce9c49e1e5a82fe374ea61aa46fa3f54",
+      "after_blob": "71395196b1d4244c7c435addd69d0d4b5c7df2bd"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f3c44e00f608aba01171e7ce781a233949686034cb621254ade6af8ebf3bbc54",
+      "after_blob": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/SortedSet.java",
+      "before_sha256": "9e7c747ca013801ae2261f77cd3b5e98ac7debe33dfb71882515f6ef7f558def",
+      "after_sha256": "cad903e966ac81eae0763973d9bbfdc37f50233c5a60e82beeb8e064028febe4",
+      "after_blob": "ad3ee89d40de8c0ca344863bb6fc4469cec97a09"
+    },
+    {
+      "path": "test/jdk/java/util/SortedSet/SortedSetSplitOrder.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "53436025986374971be348d431f4419d730f7174729964549860db76f05ae0bf",
+      "after_blob": "f02816b296c00e3d0a0e8b25de7381d360876382"
+    }
+  ],
+  "generation": "Actual named Maven/OpenRewrite execution; five tests pass; outputs match all six SHA-256 seals",
+  "runtime": "Current-wrapper source blobs verified; recompile produces identical tested class bytes; Java/JNI and patched java.base finite runtime pass",
+  "public_interfaces": "javap public/protected before/after parity for both production owners",
+  "receiving_sequence_advanced": false,
+  "preserved": [
+    "current M3FilteredViews",
+    "current M3SlotSpliterators",
+    "current ReverseOrderSortedSetView",
+    "bitmap membership",
+    "native mask window",
+    "native signed-stride histogram"
+  ],
+  "pending": [
+    "source-built full M3JDK21 image and full jtreg",
+    "Linux/macOS JNI/platform matrix",
+    "retained heap/native/process-memory comparison",
+    "five-library complete compatibility",
+    "ordered String-to-arrays-to-collections admission",
+    "historical composite recipe remains separate unqualified candidate",
+    "historical source-seal workflows require qualified successor receipts"
+  ]
+}

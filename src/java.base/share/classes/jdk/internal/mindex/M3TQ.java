@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors.
+// Modified 2026: primitive query staging and immutable fact-key sharing.
 package jdk.internal.mindex;
 
 import java.util.ArrayList;
@@ -81,7 +83,8 @@ public final class M3TQ {
     Objects.requireNonNull(input, "input");
 
     ArrayList<M3TQ> flat = new ArrayList<>();
-    ArrayList<Long> grams = new ArrayList<>();
+    long[] grams = ALL.trigrams; // Shared empty array; never written before growth.
+    int used = 0;
     for (M3TQ term : input) {
       M3TQ checked = Objects.requireNonNull(term, "term");
       if (op == Op.AND) {
@@ -93,29 +96,36 @@ public final class M3TQ {
       }
 
       if (checked.op == op) {
-        for (long gram : checked.trigrams) grams.add(gram);
+        grams = growTrigrams(grams, used, checked.trigrams.length);
+        System.arraycopy(checked.trigrams, 0, grams, used, checked.trigrams.length);
+        used += checked.trigrams.length;
         flat.addAll(checked.subqueries);
       } else if (checked.subqueries.isEmpty() && checked.trigrams.length == 1) {
-        grams.add(checked.trigrams[0]);
+        grams = growTrigrams(grams, used, 1);
+        grams[used++] = checked.trigrams[0];
       } else {
         flat.add(checked);
       }
     }
 
-    if (grams.isEmpty() && flat.isEmpty()) return op == Op.AND ? ALL : NONE;
-    if (grams.isEmpty() && flat.size() == 1) return flat.getFirst();
+    if (used == 0 && flat.isEmpty()) return op == Op.AND ? ALL : NONE;
+    if (used == 0 && flat.size() == 1) return flat.getFirst();
 
-    long[] gramArray = new long[grams.size()];
-    for (int i = 0; i < gramArray.length; i++) gramArray[i] = grams.get(i);
-    if (gramArray.length > 1) {
-      Arrays.sort(gramArray);
-      int unique = 1;
-      for (int i = 1; i < gramArray.length; i++) {
-        if (gramArray[i] != gramArray[unique - 1]) gramArray[unique++] = gramArray[i];
-      }
-      gramArray = Arrays.copyOf(gramArray, unique);
+    long[] gramArray = used == grams.length ? grams : Arrays.copyOf(grams, used);
+    Arrays.sort(gramArray);
+    return new M3TQ(op, compactFactKeys(gramArray), flat);
+  }
+
+  /** Grow primitive staging only; input-list traversal and short circuit stay single-pass. */
+  private static long[] growTrigrams(long[] keys, int used, int additional) {
+    long required = (long) used + additional;
+    if (required > Integer.MAX_VALUE) {
+      throw new OutOfMemoryError("Required trigram array length too large");
     }
-    return new M3TQ(op, gramArray, flat);
+    if (required <= keys.length) return keys;
+    int capacity = jdk.internal.util.ArraysSupport.newLength(keys.length,
+        (int) required - keys.length, Math.max(8, keys.length >>> 1));
+    return Arrays.copyOf(keys, capacity);
   }
 
   public Op op() {
@@ -359,7 +369,9 @@ public final class M3TQ {
     /**
      * Prepare facts for the ordered concatenation using metadata only.
      *
-     * <p>With k retained keys this uses O(k) merge work and O(k) temporary/output space.
+     * <p>With k retained keys the general path uses O(k) merge work and output space.
+     * Shared/empty operands whose seam keys are already present reuse their immutable
+     * key array after at most two O(log k) probes. No temporary seam array is created.
      * The budget is checked before allocation, including for empty identities. No global
      * cache or all-pairs precomputation is performed. Callers own retention and reuse.
      *
@@ -378,27 +390,19 @@ public final class M3TQ {
       int nextPrefix = utf16Length >= 2 ? prefix : (suffix << 16) | right.first();
       int nextSuffix = right.utf16Length >= 2
           ? right.suffix : ((int) (char) suffix << 16) | right.suffix;
-      long[] seam = seamKeys(right);
-      return new Facts(length, nextPrefix, nextSuffix, mergeFactKeys(keys, right.keys, seam));
+      // All valid keys are unsigned 48-bit values; MAX_VALUE is an absent seam.
+      long firstSeam = utf16Length >= 2
+          ? trigram((char) (suffix >>> 16), (char) suffix, right.first()) : Long.MAX_VALUE;
+      long secondSeam = right.utf16Length >= 2
+          ? trigram((char) suffix, right.first(), (char) right.prefix) : Long.MAX_VALUE;
+      return new Facts(length, nextPrefix, nextSuffix,
+          mergeFactKeys(keys, right.keys, firstSeam, secondSeam));
     }
 
     private char first() {
       return (char) (utf16Length == 1 ? prefix : prefix >>> 16);
     }
 
-    private long[] seamKeys(Facts right) {
-      int count = (utf16Length >= 2 ? 1 : 0) + (right.utf16Length >= 2 ? 1 : 0);
-      long[] seam = new long[count];
-      int index = 0;
-      if (utf16Length >= 2) {
-        seam[index++] = trigram((char) (suffix >>> 16), (char) suffix, right.first());
-      }
-      if (right.utf16Length >= 2) {
-        seam[index] = trigram((char) suffix, right.first(), (char) right.prefix);
-      }
-      Arrays.sort(seam);
-      return seam;
-    }
   }
 
   private static void requireFactBudget(int length, int budget) {
@@ -416,23 +420,37 @@ public final class M3TQ {
     return count == keys.length ? keys : Arrays.copyOf(keys, count);
   }
 
-  private static long[] mergeFactKeys(long[] left, long[] right, long[] seam) {
-    int capacity = Math.addExact(Math.addExact(left.length, right.length), seam.length);
+  /** Merge immutable key sets and scalar seams; never mutate a shared operand. */
+  private static long[] mergeFactKeys(long[] left, long[] right,
+      long firstSeam, long secondSeam) {
+    int seams = (firstSeam != Long.MAX_VALUE ? 1 : 0)
+        + (secondSeam != Long.MAX_VALUE ? 1 : 0);
+    int capacity = Math.addExact(Math.addExact(left.length, right.length), seams);
+    long[] shared = left == right || right.length == 0 ? left
+        : left.length == 0 ? right : null;
+    if (shared != null && containsSeam(shared, firstSeam)
+        && containsSeam(shared, secondSeam)) {
+      return shared;
+    }
     long[] merged = new long[capacity];
     int a = 0;
     int b = 0;
-    int c = 0;
     int count = 0;
-    while (a < left.length || b < right.length || c < seam.length) {
-      long key = Math.min(a < left.length ? left[a] : Long.MAX_VALUE,
-          Math.min(b < right.length ? right[b] : Long.MAX_VALUE,
-              c < seam.length ? seam[c] : Long.MAX_VALUE));
+    while (a < left.length || b < right.length
+        || firstSeam != Long.MAX_VALUE || secondSeam != Long.MAX_VALUE) {
+      long key = Math.min(Math.min(a < left.length ? left[a] : Long.MAX_VALUE,
+          b < right.length ? right[b] : Long.MAX_VALUE), Math.min(firstSeam, secondSeam));
       if (a < left.length && left[a] == key) a++;
       if (b < right.length && right[b] == key) b++;
-      if (c < seam.length && seam[c] == key) c++;
+      if (firstSeam == key) firstSeam = Long.MAX_VALUE;
+      if (secondSeam == key) secondSeam = Long.MAX_VALUE;
       if (count == 0 || merged[count - 1] != key) merged[count++] = key;
     }
     return count == capacity ? merged : Arrays.copyOf(merged, count);
+  }
+
+  private static boolean containsSeam(long[] keys, long seam) {
+    return seam == Long.MAX_VALUE || Arrays.binarySearch(keys, seam) >= 0;
   }
 
   /** Packs three UTF-16 units into one unsigned 48-bit key. */

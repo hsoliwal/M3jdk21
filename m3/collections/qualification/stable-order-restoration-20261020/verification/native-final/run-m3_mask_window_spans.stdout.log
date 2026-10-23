@@ -1,0 +1,1 @@
+JNI_SPANS_PASS single=1/128 dense_limit1=1/128 cross_chunk=130/300 faults=3

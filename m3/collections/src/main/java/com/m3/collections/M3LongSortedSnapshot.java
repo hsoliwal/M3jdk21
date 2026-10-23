@@ -96,6 +96,62 @@ public final class M3LongSortedSnapshot implements M3LongSortedSet {
         return new M3LongSortedSnapshot(detached, 0, detached.length);
     }
 
+    /**
+     * Detached signed-natural sorted snapshot selecting precomputed required
+     * flags and rejecting excluded flags. Reuses the original M3 mask owner;
+     * no predicate callbacks or per-entry structural wrappers are retained.
+     */
+    public static M3LongSortedSnapshot fromAlignedMasks(
+            long[] sortedUnique, byte[] alignedStates, int requiredMask, int excludedMask) {
+        Objects.requireNonNull(sortedUnique, "sortedUnique");
+        validateSortedUnique(sortedUnique);
+        long[] detached = M3IndexMaskCompactor.selectLong(
+                sortedUnique, alignedStates, requiredMask, excludedMask);
+        return new M3LongSortedSnapshot(detached, 0, detached.length);
+    }
+
+    /**
+     * Detached sorted-set snapshot from a bounded slice of caller-owned long rows
+     * and independently offset unsigned-byte state flags. Only the inspected row
+     * slice must be strictly increasing; rows outside it are never consulted.
+     *
+     * <p>This reuses the original M3 dynamic-array, index and JNI-mask owner,
+     * allocating only the exact-sized detached selected primitive result. The
+     * returned rank, select, navigation and range methods retain their original
+     * signed-natural sorted-set contracts. No predicate or source array is
+     * retained, and neither state nor row owner is changed.
+     */
+    public static M3LongSortedSnapshot fromAlignedMasksWindow(
+            long[] sortedUniqueRows, int rowOffset, byte[] states, int stateOffset,
+            int length, int requiredMask, int excludedMask) {
+        return fromAlignedMasksWindow(sortedUniqueRows, rowOffset, states,
+                stateOffset, length, requiredMask, excludedMask,
+                M3IndexMaskCompactor.Backend.JAVA);
+    }
+
+    /** Explicit JNI execution remains opt-in and fails if its exact mask ABI is unavailable. */
+    public static M3LongSortedSnapshot fromAlignedMasksWindow(
+            long[] sortedUniqueRows, int rowOffset, byte[] states, int stateOffset,
+            int length, int requiredMask, int excludedMask,
+            M3IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(sortedUniqueRows, "sortedUniqueRows");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, sortedUniqueRows.length);
+        Objects.checkFromIndexSize(stateOffset, length, states.length);
+        int end = rowOffset + length;
+        for (int index = rowOffset + 1; index < end; index++) {
+            if (sortedUniqueRows[index] <= sortedUniqueRows[index - 1]) {
+                throw new IllegalArgumentException(
+                        "sorted window must have strictly increasing unique long values");
+            }
+        }
+        long[] selected = M3IndexMaskCompactor.selectLongWindow(
+                sortedUniqueRows, rowOffset, states, stateOffset, length,
+                requiredMask, excludedMask, backend);
+        return new M3LongSortedSnapshot(selected, 0, selected.length);
+    }
+
     private static void validateSortedUnique(long[] values) {
         for (int index = 1; index < values.length; index++) {
             if (values[index] <= values[index - 1]) {
@@ -206,23 +262,13 @@ public final class M3LongSortedSnapshot implements M3LongSortedSet {
     private int lowerBound(long value) {
         int low = from;
         int high = to;
-        while (low < high) {
-            int middle = low + ((high - low) >>> 1);
-            if (values[middle] < value) low = middle + 1;
-            else high = middle;
-        }
-        return low;
+        return M3LaneSearch.lowerBound(values, low, high, value);
     }
 
     private int upperBound(long value) {
         int low = from;
         int high = to;
-        while (low < high) {
-            int middle = low + ((high - low) >>> 1);
-            if (values[middle] <= value) low = middle + 1;
-            else high = middle;
-        }
-        return low;
+        return M3LaneSearch.upperBound(values, low, high, value);
     }
 
     private static UnsupportedOperationException immutable() {

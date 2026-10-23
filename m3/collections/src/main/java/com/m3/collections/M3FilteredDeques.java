@@ -163,7 +163,7 @@ public final class M3FilteredDeques {
             Iterator<E> cursor = backing.iterator();
             while (cursor.hasNext()) {
                 E value = cursor.next();
-                if (Objects.equals(value, item) && predicate.test(value)) {
+                if (Objects.equals(item, value) && predicate.test(value)) {
                     cursor.remove();
                     return true;
                 }
@@ -179,7 +179,7 @@ public final class M3FilteredDeques {
             Iterator<E> cursor = backing.descendingIterator();
             while (cursor.hasNext()) {
                 E value = cursor.next();
-                if (Objects.equals(value, item) && predicate.test(value)) {
+                if (Objects.equals(item, value) && predicate.test(value)) {
                     cursor.remove();
                     return true;
                 }

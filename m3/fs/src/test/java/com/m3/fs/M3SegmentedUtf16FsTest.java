@@ -5,6 +5,7 @@ package com.m3.fs;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -116,6 +117,74 @@ class M3SegmentedUtf16FsTest {
 
     try (var objects = Files.walk(store.root().resolve("objects"))) {
       assertEquals(0L, objects.filter(Files::isRegularFile).count());
+    }
+  }
+
+  @Test
+  void comparesIndexedSegmentsSequentiallyWithExactUtf16Callbacks() throws Exception {
+    List<CharSequence> parents =
+        List.of("XAa", "\uD83D", "\uDE03", "b\u2003Z");
+    int segments = 2048;
+    int[] indexes = new int[segments];
+    int[] starts = new int[segments];
+    int[] sizes = new int[segments];
+    StringBuilder oracle = new StringBuilder();
+    for (int index = 0; index < segments; index++) {
+      int parent = index % parents.size();
+      int start = parent == 0 ? 1 : 0;
+      int count = index % 19 == 0 ? 0 : (parent == 0 ? 2 : parent == 3 ? 3 : 1);
+      indexes[index] = parent;
+      starts[index] = start;
+      sizes[index] = count;
+      oracle.append(parents.get(parent), start, start + count);
+    }
+    String expected = oracle.toString();
+
+    M3DirectoryContentStore store = new M3DirectoryContentStore(temp.resolve("many-segments"));
+    M3PrecomputeCache cache = new M3PrecomputeCache(store);
+    M3ObjectRef source =
+        store.put("run-index".getBytes(StandardCharsets.UTF_8), M3ObjectKind.RAW_BYTES);
+    M3PrecomputeKey key =
+        new M3PrecomputeKey(
+            "string", "segmented-utf16", 1, List.of(source.id()),
+            Map.of("case", "many-segments"));
+    new M3FsPrecomputeWriter(store, key, "mindex-segmented-utf16-v1")
+        .addSegmentedUtf16(parents, indexes, starts, sizes)
+        .publish(cache);
+
+    M3FsPrecomputeBundle.SegmentedUtf16String text =
+        cache.lookupBundle(key).orElseThrow().openMapped(store, 1 << 20, 4L << 20)
+            .segmentedUtf16String();
+    assertEquals(segments, text.segmentCount());
+    assertEquals(expected.length(), text.length());
+
+    java.util.concurrent.atomic.AtomicInteger reads =
+        new java.util.concurrent.atomic.AtomicInteger();
+    CharSequence traced = new CharSequence() {
+      @Override public int length() { return expected.length(); }
+      @Override public char charAt(int index) {
+        assertEquals(reads.getAndIncrement(), index, "comparison must visit indices in order");
+        return expected.charAt(index);
+      }
+      @Override public CharSequence subSequence(int start, int end) {
+        return expected.subSequence(start, end);
+      }
+    };
+    assertTrue(text.contentEquals(traced));
+    assertEquals(expected.length(), reads.get());
+    assertTrue(text.contentEquals(expected));
+    assertFalse(text.contentEquals(expected + "!"), "different length must refuse");
+
+    char[] mismatch = expected.toCharArray();
+    mismatch[mismatch.length - 1] ^= 1;
+    assertFalse(text.contentEquals(new String(mismatch)), "last UTF-16 code unit mismatch");
+    assertEquals(expected, text.toJavaString());
+    assertEquals(expected.substring(7, expected.length() - 11),
+        text.subSequence(7, expected.length() - 11).toString());
+    java.util.Random random = new java.util.Random(20261020L);
+    for (int sample = 0; sample < 2048; sample++) {
+      int index = random.nextInt(expected.length());
+      assertEquals(expected.charAt(index), text.charAt(index));
     }
   }
 }

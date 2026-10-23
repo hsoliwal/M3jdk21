@@ -192,6 +192,116 @@ public final class M3ASTLeafIndex {
         return result;
     }
 
+    /**
+     * Resolve existing L4/L3/L2 scope rows. No parse, secondary index or symbol
+     * resolution occurs: the row is owned by this immutable L0-L5 projection.
+     * -1 means that the source scope has no admitted file facts.
+     */
+    public int projectRow(String project) {
+        return findChild(repositoryRow(), PROJECT, frame(label(project, "project")));
+    }
+
+    public int moduleRow(String project, String module) {
+        String p = label(project, "project");
+        String m = label(module, "module");
+        return findChild(projectRow(p), MODULE, frame(p) + frame(m));
+    }
+
+    public int packageRow(String project, String module, String packageName) {
+        String p = label(project, "project");
+        String m = label(module, "module");
+        String name = label(packageName, "package");
+        return findChild(moduleRow(p, m), PACKAGE,
+                frame(p) + frame(m) + frame(name));
+    }
+
+    /**
+     * The same relative file name is valid in different modules/projects.
+     * The package is metadata, not another source-owner discriminator.
+     */
+    public int fileRow(String project, String module, String path) {
+        int moduleRow = moduleRow(project, module);
+        String name = normalizedPath(path);
+        if (moduleRow < 0) return -1;
+        for (int p = 0; p < childCount[moduleRow]; p++) {
+            int packageRow = edges[childStart[moduleRow] + p];
+            for (int f = 0; f < childCount[packageRow]; f++) {
+                int candidate = edges[childStart[packageRow] + f];
+                if (scope[candidate].equals(name)) return candidate;
+            }
+        }
+        return -1;
+    }
+
+    private int findChild(int owner, int wantedLevel, String exactKey) {
+        if (owner < 0) return -1;
+        for (int i = 0; i < childCount[owner]; i++) {
+            int child = edges[childStart[owner] + i];
+            if (level[child] == wantedLevel && scope[child].equals(exactKey)) {
+                return child;
+            }
+        }
+        return -1;
+    }
+
+    /** The original source/file owner receives its existing file and facts rows. */
+    @FunctionalInterface
+    public interface FileOwner {
+        void accept(int fileRow, int factsRow);
+    }
+
+    /** The original AST owner receives an occurrence, not a copied AST node. */
+    @FunctionalInterface
+    public interface AtomOwner {
+        void accept(int atomId, int physicalOffset, long stateWord);
+    }
+
+    /**
+     * Dispatch a FILE/PACKAGE/MODULE/PROJECT/REPOSITORY scope to the caller's
+     * actual parser/compiler owner. Files without atoms are still visited.
+     * No file is opened, parsed, copied or retained by this operation.
+     */
+    public int dispatchFiles(int scopeRow, FileOwner owner) {
+        int selected = checkRow(scopeRow);
+        Objects.requireNonNull(owner, "original file owner");
+        if (level[selected] < FILE) {
+            throw new IllegalArgumentException("file dispatch requires an L1-L5 scope");
+        }
+        int count = 0;
+        for (int ordinal = 0; ordinal < levelCount[FILE]; ordinal++) {
+            int file = levelStart[FILE] + ordinal;
+            int ancestor = file;
+            while (ancestor >= 0 && ancestor != selected) ancestor = parent[ancestor];
+            if (ancestor != selected) continue;
+            owner.accept(file, edges[childStart[file]]);
+            count++;
+        }
+        return count;
+    }
+
+    /**
+     * Dispatch source-owner atom handles in their original physical order.
+     * Duplicate atom IDs are distinct physical occurrences. Both state masks
+     * are full-width long values; no temporary selection int[] is allocated.
+     */
+    public int dispatchAtoms(int scopeRow, long required, long forbidden, AtomOwner owner) {
+        int selected = checkRow(scopeRow);
+        Objects.requireNonNull(owner, "original AST owner");
+        if ((required & forbidden) != 0) {
+            throw new IllegalArgumentException("conflicting state masks");
+        }
+        int from = atomStart[selected];
+        int end = from + atomCount[selected];
+        int count = 0;
+        for (int physical = from; physical < end; physical++) {
+            long state = atomState[physical];
+            if (!matches(state, required, forbidden)) continue;
+            owner.accept(atomIds[physical], physical, state);
+            count++;
+        }
+        return count;
+    }
+
     private static boolean matches(long word, long required, long forbidden) {
         return (word & required) == required && (word & forbidden) == 0;
     }

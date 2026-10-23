@@ -24,6 +24,25 @@ prepare a review; it does not change those authorities or any license.
    the JDK collection backend. Missing provenance or qualification is an explicit pending
    disposition, never a reason to weaken a gate.
 
+## Public class names, M3 internals and future implementation changes
+
+When a proven M3 algorithm replaces the existing Java SE implementation, it must live
+**inside the original JDK owner** (`String`, `HashMap`, `ArrayList`,
+`ConcurrentHashMap`, etc.); never introduce a competing public `M3*`
+Java SE type. The source path, module, package, declared class name, constructor
+names, method descriptors, native symbols, serialized surfaces and public/protected
+ABI remain governed by the JDK contract. New `M3*` helpers normally stay in
+existing internal packages or package-private alongside the original owner.
+
+Follow the [naming/formatting and promotion workflow](m3/docs/m3jdk21-naming-admission-workflow.md).
+It uses the target's existing `m3/docs/name-mapping.json` stable capability IDs,
+and the Synexia-owned `M3Jdk21NamingAdmission` policy with the original hash-pinned
+Maven/OpenRewrite recipe engine. An exact per-file formatting, class move or method
+rename requires a separate source-sealed recipe, attributed dependency/constructor/
+reflection/JNI closure, second-pass fixed point and target-side tests; it is not
+authorized by a donor filename or a preliminary faster benchmark. Do not move
+later receiving phases forward until their full gates have passed.
+
 ## First build: prerequisites, outputs and test selection
 
 The [build/test routes](m3/docs/native-build.md#current-checkout-verification-routes)

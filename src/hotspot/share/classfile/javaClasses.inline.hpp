@@ -271,7 +271,10 @@ jchar java_lang_M3String::char_at(oop value, int index) {
   }
 
   if (o->klass() == vmClasses::M3StringImmediate_klass()) {
-    return immediate_char_at(o->long_field(_immediate_packed_offset), logical);
+    typeArrayOop words = (typeArrayOop)o->obj_field(_immediate_words_offset);
+    const int slot = o->int_field(_immediate_slot_offset);
+    assert(words != nullptr && slot >= 0 && slot < words->length(), "M3 immediate slot");
+    return immediate_char_at(words->long_at(slot), logical);
   }
 
   assert(o->klass() == vmClasses::M3StringTuple_klass(), "M3 owner must be atom, immediate or tuple");

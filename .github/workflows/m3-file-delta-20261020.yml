@@ -1,0 +1,25 @@
+name: M3File native delta and build-impact Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-delta-20261020.yml'
+  push:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-delta-20261020.yml'
+jobs:
+  source-class-delta-and-impact:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile and verify original M3File module plus all contract oracles
+        run: python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$RUNNER_TEMP/m3-file-delta-suite"

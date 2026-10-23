@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3LongIndexOrderFlip20261020
+displayName: Stable O(n) opposite-order index projection on native M3JDK21 arrays
+description: >-
+  Exactly replace the independently verified sorted-direction atom and emit
+  regression tests, retaining parent-owned primitive payload, offset/mask
+  semantics and immutable private physical index views.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-long-index-order-flip-20261020

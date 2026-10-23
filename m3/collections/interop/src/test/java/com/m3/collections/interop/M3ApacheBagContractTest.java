@@ -47,6 +47,38 @@ final class M3ApacheBagContractTest {
         }
     }
 
+    @Test void apache450RetainAllOverfullRequestRemovesOwnedCopies() {
+        // AbstractMapBag in Commons Collections 4.5.0 has an intentional legacy edge:
+        // when requested copies exceed owned copies, retainAll removes that key.
+        Bag<Integer> expected = new HashBag<>();
+        Bag<Integer> actual = new M3ApacheBag<>();
+        expected.add(6, 2);
+        actual.add(6, 2);
+        expected.add(10, 1);
+        actual.add(10, 1);
+        List<Integer> requested = Arrays.asList(6, 6, 6);
+        assertEquals(expected.retainAll(requested), actual.retainAll(requested));
+        assertEquals(expected.size(), actual.size());
+        assertEquals(0, actual.getCount(6));
+        assertEquals(expected, actual);
+
+        // Cardinalities below and equal to the owned count retain the normal minimum.
+        expected.add(6, 4);
+        actual.add(6, 4);
+        requested = Arrays.asList(6, 6);
+        assertEquals(expected.retainAll(requested), actual.retainAll(requested));
+        assertEquals(2, actual.getCount(6));
+        assertEquals(expected, actual);
+
+        // Null is a legal bag key; its count follows the same 4.5.0 donor contract.
+        expected.add(null, 1);
+        actual.add(null, 1);
+        requested = Arrays.asList(null, null);
+        assertEquals(expected.retainAll(requested), actual.retainAll(requested));
+        assertEquals(0, actual.getCount(null));
+        assertEquals(expected, actual);
+    }
+
     @Test void iteratorLiveUniqueAndRealPrimitiveMaskSelection() {
         M3ApacheBag<String> actual=new M3ApacheBag<>();
         M3CountedBag<String> store=actual.m3Backend();

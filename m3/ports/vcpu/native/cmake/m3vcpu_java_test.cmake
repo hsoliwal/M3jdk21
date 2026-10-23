@@ -24,7 +24,7 @@ execute_process(COMMAND "${JAVAC}" --release 21 -Xlint:all -Werror -cp "${OUT}" 
 if(NOT rc EQUAL 0)
   message(FATAL_ERROR "javac failed: ${rc}")
 endif()
-execute_process(COMMAND "${JAVA}" -Xmx256m "-Dm3.vcpu.native.pathFile=${PATH_FILE}" -cp "${OUT}" ${MAIN}
+execute_process(COMMAND "${JAVA}" -Xcheck:jni -Xmx256m "-Dm3.vcpu.native.pathFile=${PATH_FILE}" -cp "${OUT}" ${MAIN}
                 RESULT_VARIABLE rc)
 if(NOT rc EQUAL 0)
   message(FATAL_ERROR "${MAIN} failed: ${rc}")

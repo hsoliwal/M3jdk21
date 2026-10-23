@@ -118,7 +118,7 @@ public final class M3IntAlgorithms {
                 result[used++] = values[i];
             }
         }
-        return Arrays.copyOf(result, used);
+        return used == result.length ? result : Arrays.copyOf(result, used);
     }
 
     private static boolean hasBit(long[] bitmap, int index) {
@@ -152,7 +152,7 @@ public final class M3IntAlgorithms {
                 result[used++] = value;
             }
         }
-        return Arrays.copyOf(result, used);
+        return used == result.length ? result : Arrays.copyOf(result, used);
     }
 
     private static boolean contains(int[] keys, byte[] state, int mask, int value) {

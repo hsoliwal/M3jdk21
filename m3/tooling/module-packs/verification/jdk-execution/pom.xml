@@ -28,11 +28,19 @@
         <executions>
           <execution>
             <id>java21-proof-host</id>
-            <goals><goal>enforce</goal></goals>
-            <configuration><rules>
-              <requireJavaVersion><version>[21,22)</version></requireJavaVersion>
-              <requireMavenVersion><version>[3.9,)</version></requireMavenVersion>
-            </rules></configuration>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[21,22)</version>
+                </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>[3.9,)</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -42,49 +50,154 @@
         <version>3.1.0</version>
         <executions>
           <execution>
-            <id>assembler-refusal-tests</id><phase>verify</phase><goals><goal>exec</goal></goals>
-            <configuration><executable>python3</executable><arguments>
-              <argument>-S</argument><argument>-m</argument><argument>unittest</argument>
-              <argument>discover</argument><argument>-s</argument><argument>${m3.tools}</argument>
-              <argument>-p</argument><argument>test*.py</argument><argument>-v</argument>
-            </arguments></configuration>
+            <id>assembler-refusal-tests</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>python3</executable>
+              <arguments>
+                <argument>-S</argument>
+                <argument>-m</argument>
+                <argument>unittest</argument>
+                <argument>discover</argument>
+                <argument>-s</argument>
+                <argument>${m3.tools}</argument>
+                <argument>-p</argument>
+                <argument>test*.py</argument>
+                <argument>-v</argument>
+              </arguments>
+            </configuration>
           </execution>
           <execution>
-            <id>module-kernel-contracts</id><phase>verify</phase><goals><goal>exec</goal></goals>
-            <configuration><executable>python3</executable><arguments>
-              <argument>-S</argument><argument>${m3.tools}/verify.py</argument>
-              <argument>--jdk</argument><argument>${m3.jdk}</argument>
-              <argument>--out</argument><argument>${project.build.directory}/kernel</argument>
-            </arguments></configuration>
+            <id>module-kernel-contracts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>python3</executable>
+              <arguments>
+                <argument>-S</argument>
+                <argument>${m3.tools}/verify.py</argument>
+                <argument>--jdk</argument>
+                <argument>${m3.jdk}</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/kernel</argument>
+              </arguments>
+            </configuration>
           </execution>
           <execution>
-            <id>password-policy-backport</id><phase>verify</phase><goals><goal>exec</goal></goals>
-            <configuration><executable>python3</executable><arguments>
-              <argument>-S</argument><argument>${m3.tools}/verify_backport.py</argument>
-              <argument>--jdk</argument><argument>${m3.jdk}</argument>
-              <argument>--repo</argument><argument>${m3.repo}</argument>
-              <argument>--out</argument><argument>${project.build.directory}/password</argument>
-            </arguments></configuration>
+            <id>password-policy-backport</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>python3</executable>
+              <arguments>
+                <argument>-S</argument>
+                <argument>${m3.tools}/verify_backport.py</argument>
+                <argument>--jdk</argument>
+                <argument>${m3.jdk}</argument>
+                <argument>--repo</argument>
+                <argument>${m3.repo}</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/password</argument>
+              </arguments>
+            </configuration>
           </execution>
           <execution>
-            <id>diagnostics-image-regression</id><phase>verify</phase><goals><goal>exec</goal></goals>
-            <configuration><executable>python3</executable><arguments>
-              <argument>-S</argument><argument>${m3.tools}/build_pack.py</argument>
-              <argument>--jdk</argument><argument>${m3.jdk}</argument>
-              <argument>--out</argument><argument>${project.build.directory}/diagnostics</argument>
-            </arguments></configuration>
+            <id>diagnostics-image-regression</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>python3</executable>
+              <arguments>
+                <argument>-S</argument>
+                <argument>${m3.tools}/build_pack.py</argument>
+                <argument>--jdk</argument>
+                <argument>${m3.jdk}</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/diagnostics</argument>
+              </arguments>
+            </configuration>
           </execution>
           <execution>
-            <id>developer-image-and-native-launcher</id><phase>verify</phase><goals><goal>exec</goal></goals>
-            <configuration><executable>python3</executable><arguments>
-              <argument>-S</argument><argument>${m3.tools}/build_pack.py</argument>
-              <argument>--jdk</argument><argument>${m3.jdk}</argument>
-              <argument>--profile</argument><argument>developer</argument>
-              <argument>--out</argument><argument>${project.build.directory}/developer</argument>
-            </arguments></configuration>
+            <id>developer-image-and-native-launcher</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>python3</executable>
+              <arguments>
+                <argument>-S</argument>
+                <argument>${m3.tools}/build_pack.py</argument>
+                <argument>--jdk</argument>
+                <argument>${m3.jdk}</argument>
+                <argument>--profile</argument>
+                <argument>developer</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/developer</argument>
+              </arguments>
+            </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

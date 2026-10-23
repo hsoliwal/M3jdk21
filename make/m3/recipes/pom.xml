@@ -26,7 +26,9 @@
           <execution>
             <id>m3-inventory-determinism</id>
             <phase>test</phase>
-            <goals><goal>java</goal></goals>
+            <goals>
+              <goal>java</goal>
+            </goals>
             <configuration>
               <mainClass>org.synexia.m3.recipe.M3InventoryRecipeTest</mainClass>
               <classpathScope>test</classpathScope>
@@ -36,7 +38,9 @@
           <execution>
             <id>m3-problem-catalogue-contracts</id>
             <phase>test</phase>
-            <goals><goal>java</goal></goals>
+            <goals>
+              <goal>java</goal>
+            </goals>
             <configuration>
               <mainClass>org.synexia.m3.recipe.M3ProblemCatalogueTest</mainClass>
               <classpathScope>test</classpathScope>
@@ -49,4 +53,54 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

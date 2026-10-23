@@ -45,6 +45,8 @@ public final class M3IndexedArray<E> {
     private int size;
     private int freeHead = -1;
     private long version;
+    // Value and state epochs differ: cooperative leases do not change values.
+    private long stateVersion;
 
     /** Adds a logical element and returns a stable, generation-qualified slot handle. */
     public synchronized long append(E value) {
@@ -58,6 +60,7 @@ public final class M3IndexedArray<E> {
         positions[slot] = size;
         order[size++] = slot;
         version++;
+        stateVersion++;
         return pack(slot, generations[slot]);
     }
 
@@ -93,6 +96,7 @@ public final class M3IndexedArray<E> {
         }
         values[slot] = value;
         version++; // Filtering and sorted indexing may now change.
+        stateVersion++;
         return true;
     }
 
@@ -128,6 +132,7 @@ public final class M3IndexedArray<E> {
             freeHead = slot;
         }
         version++;
+        stateVersion++;
         return true;
     }
 
@@ -176,28 +181,78 @@ public final class M3IndexedArray<E> {
                                    Objects.requireNonNull(comparator));
     }
 
+    /**
+     * Live read-only view selected by the physical slot state bits.
+     * Required bits must all be present; forbidden bits must all be absent.
+     * No payload references or state planes are copied into this view.
+     */
+    public List<E> maskedStates(int requiredMask, int forbiddenMask) {
+        checkMasks(requiredMask, forbiddenMask);
+        return new M3IndexedView<>(this, null, null,
+                requiredMask, forbiddenMask, true);
+    }
+
+    /** Stable state-selected order, using only a primitive slot directory. */
+    public List<E> maskedSortedStates(int requiredMask, int forbiddenMask,
+                                      Comparator<? super E> comparator) {
+        Objects.requireNonNull(comparator, "comparator");
+        checkMasks(requiredMask, forbiddenMask);
+        return new M3IndexedView<>(this, null, comparator,
+                requiredMask, forbiddenMask, true);
+    }
+
+    private static void checkMasks(int requiredMask, int forbiddenMask) {
+        if ((requiredMask & forbiddenMask) != 0) {
+            throw new IllegalArgumentException("overlapping required/forbidden M3 state bits");
+        }
+    }
+
+    synchronized long stateVersion() {
+        return stateVersion;
+    }
+
     synchronized int[] select(Predicate<? super E> predicate,
                               Comparator<? super E> comparator) {
-        final long originalVersion = version;
-        final int[] selected = new int[size];
-        int used = 0;
-        for (int i = 0; i < size; i++) {
-            final int slot = order[i];
-            if (predicate == null || predicate.test(valueAtSlot(slot))) {
-                selected[used++] = slot;
+        return select(predicate, comparator, 0, 0, false);
+    }
+
+    synchronized int[] select(Predicate<? super E> predicate,
+                              Comparator<? super E> comparator,
+                              int requiredMask, int forbiddenMask,
+                              boolean stateAware) {
+        final long initialVersion = stateAware ? stateVersion : version;
+        final int[] result;
+        if (predicate == null && !stateAware) {
+            // The monitor protects this private directory; no callback or state test
+            // can change the epoch while the unconditional selection is copied.
+            result = Arrays.copyOf(order, size);
+        } else {
+            final int[] selected = new int[size];
+            int used = 0;
+            for (int i = 0; i < size; i++) {
+                final int slot = order[i];
+                final int state = states[slot];
+                if ((!stateAware || ((state & requiredMask) == requiredMask
+                                     && (state & forbiddenMask) == 0))
+                        && (predicate == null || predicate.test(valueAtSlot(slot)))) {
+                    selected[used++] = slot;
+                }
+                rejectReentrantMutation(initialVersion, stateAware);
             }
-            rejectReentrantMutation(originalVersion);
+            result = used == selected.length ? selected : Arrays.copyOf(selected, used);
         }
-        final int[] result = used == selected.length
-                ? selected : Arrays.copyOf(selected, used);
         if (comparator != null) {
-            stableSort(result, comparator, originalVersion);
+            stableSort(result, comparator, initialVersion, stateAware);
         }
         return result;
     }
 
     synchronized E viewValue(long expectedVersion, int slot) {
-        rejectReentrantMutation(expectedVersion);
+        return viewValue(expectedVersion, slot, false);
+    }
+
+    synchronized E viewValue(long expectedVersion, int slot, boolean stateAware) {
+        rejectReentrantMutation(expectedVersion, stateAware);
         return valueAtSlot(slot);
     }
 
@@ -248,6 +303,7 @@ public final class M3IndexedArray<E> {
         final int owners = leaseCounts[slot];
         states[slot] = LIVE | (owners > 0 ? LEASED : 0)
                 | (owners > 1 ? SHARED : 0);
+        stateVersion++;
     }
 
     @SuppressWarnings("unchecked")
@@ -260,14 +316,18 @@ public final class M3IndexedArray<E> {
     }
 
     private void rejectReentrantMutation(long initialVersion) {
-        if (version != initialVersion) {
+        rejectReentrantMutation(initialVersion, false);
+    }
+
+    private void rejectReentrantMutation(long initialVersion, boolean stateAware) {
+        if ((stateAware ? stateVersion : version) != initialVersion) {
             throw new ConcurrentModificationException("M3 predicate/comparator mutated the backing store");
         }
     }
 
     /** Bottom-up stable merge sort of primitive slot indexes, never entries. */
     private void stableSort(int[] indexes, Comparator<? super E> comparator,
-                            long initialVersion) {
+                            long initialVersion, boolean stateAware) {
         final int count = indexes.length;
         if (count < 2) {
             return;
@@ -284,14 +344,14 @@ public final class M3IndexedArray<E> {
                 while (l < leftEnd && r < rightEnd) {
                     final int ordering = comparator.compare(valueAtSlot(source[l]),
                                                             valueAtSlot(source[r]));
-                    rejectReentrantMutation(initialVersion);
+                    rejectReentrantMutation(initialVersion, stateAware);
                     target[output++] = ordering <= 0 ? source[l++] : source[r++];
                 }
-                while (l < leftEnd) {
-                    target[output++] = source[l++];
-                }
-                while (r < rightEnd) {
-                    target[output++] = source[r++];
+                // An unopposed tail needs no comparator calls or epoch checks.
+                if (l < leftEnd) {
+                    System.arraycopy(source, l, target, output, leftEnd - l);
+                } else if (r < rightEnd) {
+                    System.arraycopy(source, r, target, output, rightEnd - r);
                 }
             }
             final int[] previousSource = source;

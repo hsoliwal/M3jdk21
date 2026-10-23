@@ -1,0 +1,22 @@
+trex_type	trex_path	atom_start_end_as_recorded	atom_sha256_16	m3_construct	disposition
+SingleTokenPattern	src/main/java/com/squareup/trex/SingleTokenPattern.java	19-74	78f5a1606dfdc585	M3TokenPatternParser <id> -> M3RegexAst CLASS (one id)	PATTERN_MAPPED (string equality moved to lexicon interning; id compare in the DFA)
+StringPattern	src/main/java/com/squareup/trex/StringPattern.java	15-82	bf5e0b4e783781e9	<id> after lexicon lookup of the literal	PATTERN_MAPPED
+SingleTokenDisjunctionPattern	src/main/java/com/squareup/trex/SingleTokenDisjunctionPattern.java	9-67	366c4cead3fc1ff0	<a,b,c> / <a-b> id set and ranges (one CLASS)	PATTERN_MAPPED
+NegatedPattern	src/main/java/com/squareup/trex/NegatedPattern.java	16-51	6141a2393a1e6404	<!spec> complement over [0, Integer.MAX_VALUE]	PATTERN_MAPPED
+WildcardPattern	src/main/java/com/squareup/trex/WildcardPattern.java	13-29	c67da3f5df43a23e	<.> any token	PATTERN_MAPPED
+NullPattern	src/main/java/com/squareup/trex/NullPattern.java	12-45	54fc2dd52804e36b	M3RegexAst EMPTY	PATTERN_MAPPED
+SequenceBoundaryPattern	src/main/java/com/squareup/trex/SequenceBoundaryPattern.java	14-56	07bfa27dc284ac4c	^ and $ (ASSERT BEGIN/END, PikeVM)	PATTERN_MAPPED
+SequencePattern	src/main/java/com/squareup/trex/SequencePattern.java	18804-18804	614759a817af0690	CONCAT and REPEAT in the Thompson NFA	ENGINE_REPLACED (backtracking SequencePatternIterator -> lazy DFA + PikeVM, no per-match objects)
+DisjunctionPattern	src/main/java/com/squareup/trex/DisjunctionPattern.java	193-6424	ea747cf25fc5a2f0	ALT with leftmost-first split priority	ENGINE_REPLACED
+Matcher	src/main/java/com/squareup/trex/Matcher.java	48-1740	8da9c7ed1fa4d883	M3CursorMatcher (find/matches/lookingAt/start/end)	ENGINE_REPLACED (no timeout thread, no Map/Set per match)
+CaptureGroup	src/main/java/com/squareup/trex/Matcher.java	58-140	3c80ca03f29ba742	int group coordinates in M3CursorMatcher.groups	PATTERN_MAPPED (no CaptureGroup objects, no List<T> views)
+TRexInputToken	src/main/java/com/squareup/trex/TRexInputToken.java	13-30	3fb972d7bf5c7fc0	M3TokenCursor int lanes of interned ids	PATTERN_MAPPED (attributes interned at lexing time)
+MapTRexInputToken	src/main/java/com/squareup/trex/MapTRexInputToken.java	16-57	8df0f00e19142aba	M3TokenCursor + lexicon class table (<#NAME>)	PATTERN_MAPPED
+CoreLabelInputToken	src/main/java/com/squareup/trex/CoreLabelInputToken.java	28-131	61629fbae3d13b1d	none (CoreNLP adapter)	NO_FIT (third-party NLP object model)
+PatternVisitor	src/main/java/com/squareup/trex/Pattern.java	37-1237	b7b99b3a40a9e94a	M3TokenPatternParser (recursive descent, no ANTLR)	PATTERN_MAPPED (grammar shape only)
+SingleValueIterator	src/main/java/com/squareup/trex/SingleValueIterator.java	21-69	220d927d00067705	PikeVM thread lists	NOT_NEEDED
+RegexPattern	src/main/java/com/squareup/trex/RegexPattern.java	19-114	1cf8fe4d5e31936b	<#CLASS> expanded from the lexicon at image time	GAP (lexicon-backed class expansion: next leaf TOKEN-LEXICON-CLASS)
+SingleTokenConjunctionPattern	src/main/java/com/squareup/trex/SingleTokenConjunctionPattern.java	12-77	78cacc2a9ae4b7e7	class intersection of id sets	GAP (M3RegexAst has union and complement; intersection = complement of union of complements, next leaf)
+NumericPattern	src/main/java/com/squareup/trex/NumericPattern.java	11-196	32857554218ef8c2	predicate over a numeric attribute lane	GAP (needs a value lane beside the id lane)
+ConjunctionPattern	src/main/java/com/squareup/trex/ConjunctionPattern.java	148-241	d7fadfc3b3b4592d	same-span conjunction of two patterns	GAP (product automaton; next leaf)
+PatternTest	src/test/java/com/squareup/trex/PatternTest.java	35-1109	b6a3c045bb65ac16	scenario source for M3TokenPatternTest	LICENSE_REVIEW_REQUIRED (scenario port blocked until LICENSE resolved)

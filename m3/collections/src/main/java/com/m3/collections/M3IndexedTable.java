@@ -267,10 +267,21 @@ public final class M3IndexedTable<R, C, V> {
     public final class IndexView {
         private final int[] indices;
         private final int from, to;
+        /** Reverse order is an index-coordinate transformation, not an array copy. */
+        private final boolean reverseOrder;
         private final long expectedRevision;
         private IndexView(int[] indices, int from, int to, long expectedRevision) {
+            this(indices, from, to, false, expectedRevision);
+        }
+        private IndexView(int[] indices, int from, int to,
+                boolean reverseOrder, long expectedRevision) {
             this.indices = indices; this.from = from; this.to = to;
+            this.reverseOrder = reverseOrder;
             this.expectedRevision = expectedRevision;
+        }
+        /** Resolve logical position to its physical slot without moving payloads. */
+        private int slotAt(int logicalIndex) {
+            return indices[reverseOrder ? to - 1 - logicalIndex : from + logicalIndex];
         }
         private void valid() {
             if (revision != expectedRevision) {
@@ -279,7 +290,7 @@ public final class M3IndexedTable<R, C, V> {
         }
         public int size() { valid(); return to - from; }
         public int physicalAt(int index) {
-            valid(); return indices[from + Objects.checkIndex(index, to - from)];
+            valid(); return slotAt(Objects.checkIndex(index, to - from));
         }
         public R rowAt(int index) {
             int slot = physicalAt(index);
@@ -292,19 +303,25 @@ public final class M3IndexedTable<R, C, V> {
         public V valueAt(int index) { return M3SlotArrays.get(values, physicalAt(index)); }
         public int stateAt(int index) { return flags[physicalAt(index)] & 0xff; }
         public int[] physicalIndices() {
-            valid(); return Arrays.copyOfRange(indices, from, to);
+            valid();
+            if (!reverseOrder) return Arrays.copyOfRange(indices, from, to);
+            int[] detached = new int[to - from];
+            for (int i = 0; i < detached.length; i++) {
+                detached[i] = slotAt(i);
+            }
+            return detached;
         }
         /** Shares the original int[] physical permutation; O(1) metadata slice. */
         public IndexView slice(int begin, int end) {
             valid(); Objects.checkFromToIndex(begin, end, to - from);
-            return new IndexView(indices, from + begin, from + end, expectedRevision);
+            return reverseOrder
+                    ? new IndexView(indices, to - end, to - begin, true, expectedRevision)
+                    : new IndexView(indices, from + begin, from + end, false, expectedRevision);
         }
+        /** O(1) metadata-only reversal; no int[] clone and no payload relocation. */
         public IndexView reversed() {
-            valid(); int[] changed = physicalIndices();
-            for (int left = 0, right = changed.length - 1; left < right; left++, right--) {
-                int saved = changed[left]; changed[left] = changed[right]; changed[right] = saved;
-            }
-            return new IndexView(changed, 0, changed.length, expectedRevision);
+            valid();
+            return new IndexView(indices, from, to, !reverseOrder, expectedRevision);
         }
         /**
          * Stable bottom-up primitive mergesort of slot IDs only. Values never move.
@@ -360,19 +377,20 @@ public final class M3IndexedTable<R, C, V> {
                 return new IndexView(selected, 0, selected.length, expectedRevision);
             }
             if (required == 0 && forbidden == 0) {
-                return new IndexView(indices, from, to, expectedRevision);
+                return new IndexView(indices, from, to, reverseOrder, expectedRevision);
             }
             int matches = 0;
-            for (int i = from; i < to; i++) {
-                int bits = flags[indices[i]] & 0xff;
+            for (int i = 0; i < to - from; i++) {
+                int bits = flags[slotAt(i)] & 0xff;
                 if ((bits & required) == required && (bits & forbidden) == 0) matches++;
             }
             int[] selected = new int[matches];
             int cursor = 0;
-            for (int i = from; i < to; i++) {
-                int bits = flags[indices[i]] & 0xff;
+            for (int i = 0; i < to - from; i++) {
+                int slot = slotAt(i);
+                int bits = flags[slot] & 0xff;
                 if ((bits & required) == required && (bits & forbidden) == 0) {
-                    selected[cursor++] = indices[i];
+                    selected[cursor++] = slot;
                 }
             }
             return new IndexView(selected, 0, selected.length, expectedRevision);

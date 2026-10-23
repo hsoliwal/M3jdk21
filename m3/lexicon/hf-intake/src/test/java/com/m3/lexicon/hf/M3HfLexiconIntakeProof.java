@@ -63,10 +63,19 @@ public final class M3HfLexiconIntakeProof {
                 .findFirst().orElse("");
     }
 
+    private static void requireStructureRecord(List<String> lines, String id, String category, String marker) {
+        String[] fields = splitTsv(discoveryRecord(lines, id));
+        require(fields.length == 9 && category.equals(fields[2])
+                && "REFERENCE_ONLY".equals(fields[7]),
+                "structure record has typed category and remains reference-only: " + id);
+        if (fields.length == 9) require(String.join(" ", fields).contains(marker),
+                "structure record preserves donor distinction: " + id);
+    }
+
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 231, "230 language-resource candidates plus header");
+        require(lines.size() == 285, "284 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -90,237 +99,185 @@ public final class M3HfLexiconIntakeProof {
                     "catalogue evidence links are HTTPS: " + fields[0]);
         }
         require(sourceIds.equals(java.util.Set.of(
-                "iana-language-subtags",
-                "wikidata-lexemes",
-                "unicode-cldr-48-2",
-                "unicode-ucd-17",
-                "iso-3166-code-elements",
-                "universal-dependencies",
-                "unimorph-language-files",
-                "glottolog-5-3",
-                "grambank",
-                "phoible-2",
-                "wals",
-                "lexibank",
-                "wiktionary-wiktextract",
-                "panlex",
-                "open-multilingual-wordnet",
-                "open-english-wordnet-namenet-2025",
-                "leipzig-corpora",
-                "google-books-ngrams-v3",
-                "tatoeba",
-                "opus-hplt-v3",
-                "geonames",
-                "bipm-si-brochure-2026",
-                "mozilla-common-voice-26",
-                "hf-vocabradar-wordfreq",
-                "hf-finefreq",
-                "hf-lefff-morphology",
-                "hf-seacrowd-unimorph",
-                "hf-multilingual-core-vocabulary",
-                "hf-langdex",
-                "kaggle-langdex-notebook",
-                "iso-4217-code-elements",
-                "hf-langdex-dictionaries",
-                "dgt-tm",
-                "elrc-share",
-                "apertium-language-data",
-                "wordfreq-3-0-2",
-                "subtlex-us",
-                "nga-geonames",
-                "unicode-uax29-18",
-                "clarin-vlo-api-4-15",
-                "olac-archive-network-2026",
-                "elra-language-resource-catalogue",
-                "concepticon-3-4",
-                "norare-1-0",
-                "asjp-database",
-                "clics-4",
-                "wold",
-                "asl-lex-2",
-                "mudidi-hf-2026",
-                "openslr-beep",
-                "dobes-archive",
-                "elar-archive",
-                "elarspeech-preprint-2026",
-                "ai4bharat-indic-frequency-lists",
-                "morphynet-multilingual-morphology",
-                "cmudict-us-english-pronunciations",
-                "hunspell-language-dictionaries",
-                "global-wordnet-discovery-index",
-                "babelnet-restricted-lexical-graph",
-                "hf-paranames-1-0",
-                "giellalt-language-repositories",
-                "gf-resource-grammar-library",
-                "sigmorphon-2022-segmentation",
-                "hf-world-languages-7130",
-                "wordfreq-3-0-2-data",
-                "reflex-africa-v1-0",
-                "opus-corpus-index-2026",
-                "google-fleurs-102",
-                "google-waxalnlp",
-                "dictionaria-cldf-dictionaries",
-                "nchlt-south-african-resource-bundles",
-                "sails-south-american-grammar",
-                "word2word-bilingual-lexicons",
-                "wordhoard-frequency-morphology",
-                "muse-bilingual-dictionary-benchmarks",
-                "numeralbank-chan-numerals-2019",
-                "numeralbank-cosinus-v2-2026",
-                "ai4bharat-aksharantar-26m",
-                "ai4bharat-samanantar-v0-3",
-                "ai4bharat-indiccorp-v2",
-                "ai4bharat-naamapadam-11",
-                "mozilla-common-voice-text-lid-300",
-                "dbnary-ontolex-wiktionary-26",
-                "masakhaner2-african-20",
-                "ids-intercontinental-dictionary-series",
-                "autotyp-typology-database-v1-1-1",
-                "apics-creole-grammar-cldf",
-                "dplace-language-culture-environment",
-                "apertium-language-data-packs",
-                "parseme-multilingual-mwe-corpus-v2",
-                "wikipron-pronunciation-lexicons",
-                "hplt-monolingual-v3",
-                "oldi-flores-plus-4-6",
-                "doreco-spoken-documentation-2",
-                "tico-19-medical-translation",
-                "mafand-mt-african-news",
-                "opus-100-parallel-corpus",
-                "afridoc-mt-health",
-                "multiconer-v2-entities",
-                "google-smol-gatitos",
-                "sprakbanken-flex",
-                "sprakbanken-kubord-lex",
-                "sprakbanken-lexin",
-                "sprakbanken-parole-lexplus",
-                "sprakbanken-swedish-names-2023",
-                "linguabase-english-lexical-graph",
-                "bashkir-frequency-index",
-                "bashkir-word-ngram-index",
-                "eurovoc-4-24",
-                "ufal-morfflex-cz-2-1",
-                "dmii-core-icelandic",
-                "unidic-ja-3-1-0",
-                "taigi-common-use-dictionary",
-                "hf-uzbek-lexicon-skeleton",
-                "hf-khmer-search-frequency",
-                "hf-afri-dict",
-                "hf-fineweb-2",
-                "sign-language-dataset-compendium-v1-5",
-                "easier-multilingual-sign-language-wordnet",
-                "corola-romanian-frequency-lists",
-                "hf-mainlp-word-level-translations",
-                "hf-jnext-chinese-word-frequency",
-                "hf-google-books-ngram-pos",
-                "hf-dillm-persian-grammar-corpus",
-                "hf-pashto-grammar-100",
-                "hf-qor-af-soomaali-frequency",
-                "hf-kablex-kabyle-lexicon",
-                "hf-kabinflect-kabyle-morphology",
-                "hf-hmar-heritage-wordlist",
-                "hf-kencorpus-kenpos",
-                "hf-galahad-dutch-frequency",
-                "hf-sango-vocabulary-grammar",
-                "hf-haajidheere-somali-dictionary",
-                "hf-nltk-word-lists",
-                "hf-nltk-swadesh-24",
-                "massive-nlu-1-1",
-                "madar-arabic-dialect-lexicon",
-                "samer-arabic-readability-v2",
-                "sil-bloom-library-discovery",
-                "arbml-masader-catalogue",
-                "hf-vocab-bloom-hub-en",
-                "madlad-400-v1-5",
-                "hf-wikidata-label-maps-2025",
-                "ai4bharat-bhasaanuvaad",
-                "iate-eu-terminology",
-                "crossgram-magram",
-                "gff-geez-data-archive",
-                "kelly-language-frequency-lists",
-                "clear-global-gamayun-kits",
-                "afrispeech-africa-corpus",
-                "ldc-global-yoruba-lexical-database",
-                "frequencywords-opensubtitles",
-                "lexique-fr-4-10",
-                "fao-agrovoc",
-                "gemet-environment-thesaurus",
-                "google-dakshina-v1",
-                "lexibank-cldf-v2-2",
-                "lexibank-austronesian-comparative-dictionary",
-                "dictionaria-teanu",
-                "shabd-cstt-indian-technical-terminology",
-                "iwn-en-indowordnet",
-                "multilingual-open-text-mot-release1",
-                "multi-simlex-12-language",
-                "tsammalex-v0-3",
-                "dicovalence-french-valency-v2",
-                "morphalou-3-1",
-                "rl-fr-2025-03",
-                "bel-rl-fr-3-1",
-                "prolexbase-2-2",
-                "unicode-unilex",
-                "polyglotta-africana-cldf-v2-0",
-                "lexik-fr-1-0-2026-10",
-                "ealex-east-african-lexome-2026",
-                "nzonza-cialr-44",
-                "dannet-danish-wordnet-2026-08-21",
-                "aiatsis-austlang-live-2026",
-                "afwn-2022-release-1-0",
-                "crubadan-hf-character-trigrams-449",
-                "elg-catalogue-release-3-0-2026",
-                "oanc-open-frequency-derivation",
-                "elexis-dictionary-rest-discovery",
-                "hf-multilingual-frequency-lists",
-                "hf-mlnorm-resources-composite",
-                "hf-multilexnorm2026-full-pub",
-                "hf-nanai-russian-dictionary",
-                "hf-haitian-creole-word-freq",
-                "hf-sindhi-open-lexicon",
-                "hf-javanese-multilingual-lexicon",
-                "hf-tajiknlp-ar-ru-en-dictionary",
-                "hf-tigre-data-lexicon",
-                "hf-tigre-generated-dictionary",
-                "nict-japanese-english-kyoto-wiki-corpus",
-                "kaggle-google-web-english-frequency-333333",
-                "hf-ratman-african-stopword-frequency",
-                "hf-amharic-gemination-lexicon-v3",
-                "hf-khmer-dictionary-44k",
-                "hf-khpos-seanghay-2023",
-                "hf-sasak-benchmark-100k",
-                "hf-georgian-case-alignment",
-                "hf-tibetan-word-segmentation-100",
-                "hf-bridgeconn-sign-dictionary-isl",
-                "hf-hmar-numeral-words",
-                "hf-hmar-unigrams",
-                "hf-hmar-corpus-archive",
-                "hf-robinson-hausa-en-1914",
-                "hf-african-tokenizer-challenge-v1",
-                "hf-naath-en-nuer-dinka-sw-corpus",
-                "hf-dusun-dictionary-corpus",
-                "hf-okinawan-dictionary-index",
-                "hf-tigre-parallel-multilingual",
-                "hf-multilingual-endangered-cultural-heritage",
-                "hf-nenets-mixed-schema",
-                "cefrlex-six-language",
-                "clearpond-five-language-neighborhoods",
-                "manulex-french-child-directed-lexicons",
-                "multi-lex-french-ngrams-2022",
-                "hf-malayalam-pronunciation-lexicon",
-                "hf-nusax-mt",
-                "hf-maori-language-eval",
-                "hf-afrisud-treebanks",
-                "hf-wolof-french-jolof",
-                "hf-apertium-breton-french",
-                "inuktitutcomputing-uqailaut-roots",
-                "nrc-nunavut-hansard-3",
-                "hf-americasnli",
-                "hf-teara-maori-english",
-                "jmdict-edrdg",
-                "jmnedict-edrdg",
-                "kanjidic2-edrdg",
-                "cc-cedict-v2"
-        )), "exact 230 language-resource source IDs match the pinned catalogue");
+                "iana-language-subtags", "wikidata-lexemes", "unicode-cldr-48-2", "unicode-ucd-17",
+                "iso-3166-code-elements", "universal-dependencies", "unimorph-language-files", "glottolog-5-3",
+                "grambank", "phoible-2", "wals", "lexibank",
+                "wiktionary-wiktextract", "panlex", "open-multilingual-wordnet", "open-english-wordnet-namenet-2025",
+                "leipzig-corpora", "google-books-ngrams-v3", "tatoeba", "opus-hplt-v3",
+                "geonames", "bipm-si-brochure-2026", "mozilla-common-voice-26", "hf-vocabradar-wordfreq",
+                "hf-finefreq", "hf-lefff-morphology", "hf-seacrowd-unimorph", "hf-multilingual-core-vocabulary",
+                "hf-langdex", "kaggle-langdex-notebook", "iso-4217-code-elements", "hf-langdex-dictionaries",
+                "dgt-tm", "elrc-share", "apertium-language-data", "wordfreq-3-0-2",
+                "subtlex-us", "nga-geonames", "unicode-uax29-18", "clarin-vlo-api-4-15",
+                "olac-archive-network-2026", "elra-language-resource-catalogue", "concepticon-3-4", "norare-1-0",
+                "asjp-database", "clics-4", "wold", "asl-lex-2",
+                "mudidi-hf-2026", "openslr-beep", "dobes-archive", "elar-archive",
+                "elarspeech-preprint-2026", "ai4bharat-indic-frequency-lists", "morphynet-multilingual-morphology", "cmudict-us-english-pronunciations",
+                "hunspell-language-dictionaries", "global-wordnet-discovery-index", "babelnet-restricted-lexical-graph", "hf-paranames-1-0",
+                "giellalt-language-repositories", "gf-resource-grammar-library", "sigmorphon-2022-segmentation", "hf-world-languages-7130",
+                "wordfreq-3-0-2-data", "reflex-africa-v1-0", "opus-corpus-index-2026", "google-fleurs-102",
+                "google-waxalnlp", "dictionaria-cldf-dictionaries", "nchlt-south-african-resource-bundles", "sails-south-american-grammar",
+                "word2word-bilingual-lexicons", "wordhoard-frequency-morphology", "muse-bilingual-dictionary-benchmarks", "numeralbank-chan-numerals-2019",
+                "numeralbank-cosinus-v2-2026", "ai4bharat-aksharantar-26m", "ai4bharat-samanantar-v0-3", "ai4bharat-indiccorp-v2",
+                "ai4bharat-naamapadam-11", "mozilla-common-voice-text-lid-300", "dbnary-ontolex-wiktionary-26", "masakhaner2-african-20",
+                "ids-intercontinental-dictionary-series", "autotyp-typology-database-v1-1-1", "apics-creole-grammar-cldf", "dplace-language-culture-environment",
+                "apertium-language-data-packs", "parseme-multilingual-mwe-corpus-v2", "wikipron-pronunciation-lexicons", "hplt-monolingual-v3",
+                "oldi-flores-plus-4-6", "doreco-spoken-documentation-2", "tico-19-medical-translation", "mafand-mt-african-news",
+                "opus-100-parallel-corpus", "afridoc-mt-health", "multiconer-v2-entities", "google-smol-gatitos",
+                "sprakbanken-flex", "sprakbanken-kubord-lex", "sprakbanken-lexin", "sprakbanken-parole-lexplus",
+                "sprakbanken-swedish-names-2023", "linguabase-english-lexical-graph", "bashkir-frequency-index", "bashkir-word-ngram-index",
+                "eurovoc-4-24", "ufal-morfflex-cz-2-1", "dmii-core-icelandic", "unidic-ja-3-1-0",
+                "taigi-common-use-dictionary", "hf-uzbek-lexicon-skeleton", "hf-khmer-search-frequency", "hf-afri-dict",
+                "hf-fineweb-2", "sign-language-dataset-compendium-v1-5", "easier-multilingual-sign-language-wordnet", "corola-romanian-frequency-lists",
+                "hf-mainlp-word-level-translations", "hf-jnext-chinese-word-frequency", "hf-google-books-ngram-pos", "hf-dillm-persian-grammar-corpus",
+                "hf-pashto-grammar-100", "hf-qor-af-soomaali-frequency", "hf-kablex-kabyle-lexicon", "hf-kabinflect-kabyle-morphology",
+                "hf-hmar-heritage-wordlist", "hf-kencorpus-kenpos", "hf-galahad-dutch-frequency", "hf-sango-vocabulary-grammar",
+                "hf-haajidheere-somali-dictionary", "hf-nltk-word-lists", "hf-nltk-swadesh-24", "massive-nlu-1-1",
+                "madar-arabic-dialect-lexicon", "samer-arabic-readability-v2", "sil-bloom-library-discovery", "arbml-masader-catalogue",
+                "hf-vocab-bloom-hub-en", "madlad-400-v1-5", "hf-wikidata-label-maps-2025", "ai4bharat-bhasaanuvaad",
+                "iate-eu-terminology", "crossgram-magram", "gff-geez-data-archive", "kelly-language-frequency-lists",
+                "clear-global-gamayun-kits", "afrispeech-africa-corpus", "ldc-global-yoruba-lexical-database", "frequencywords-opensubtitles",
+                "lexique-fr-4-10", "fao-agrovoc", "gemet-environment-thesaurus", "google-dakshina-v1",
+                "lexibank-cldf-v2-2", "lexibank-austronesian-comparative-dictionary", "dictionaria-teanu", "shabd-cstt-indian-technical-terminology",
+                "iwn-en-indowordnet", "multilingual-open-text-mot-release1", "multi-simlex-12-language", "tsammalex-v0-3",
+                "dicovalence-french-valency-v2", "morphalou-3-1", "rl-fr-2025-03", "bel-rl-fr-3-1",
+                "prolexbase-2-2", "unicode-unilex", "polyglotta-africana-cldf-v2-0", "lexik-fr-1-0-2026-10",
+                "ealex-east-african-lexome-2026", "nzonza-cialr-44", "dannet-danish-wordnet-2026-08-21", "aiatsis-austlang-live-2026",
+                "afwn-2022-release-1-0", "crubadan-hf-character-trigrams-449", "elg-catalogue-release-3-0-2026", "oanc-open-frequency-derivation",
+                "elexis-dictionary-rest-discovery", "hf-multilingual-frequency-lists", "hf-mlnorm-resources-composite", "hf-multilexnorm2026-full-pub",
+                "hf-nanai-russian-dictionary", "hf-haitian-creole-word-freq", "hf-sindhi-open-lexicon", "hf-javanese-multilingual-lexicon",
+                "hf-tajiknlp-ar-ru-en-dictionary", "hf-tigre-data-lexicon", "hf-tigre-generated-dictionary", "nict-japanese-english-kyoto-wiki-corpus",
+                "kaggle-google-web-english-frequency-333333", "hf-ratman-african-stopword-frequency", "hf-amharic-gemination-lexicon-v3", "hf-khmer-dictionary-44k",
+                "hf-khpos-seanghay-2023", "hf-sasak-benchmark-100k", "hf-georgian-case-alignment", "hf-tibetan-word-segmentation-100",
+                "hf-bridgeconn-sign-dictionary-isl", "hf-hmar-numeral-words", "hf-hmar-unigrams", "hf-hmar-corpus-archive",
+                "hf-robinson-hausa-en-1914", "hf-african-tokenizer-challenge-v1", "hf-naath-en-nuer-dinka-sw-corpus", "hf-dusun-dictionary-corpus",
+                "hf-okinawan-dictionary-index", "hf-tigre-parallel-multilingual", "hf-multilingual-endangered-cultural-heritage", "hf-nenets-mixed-schema",
+                "cefrlex-six-language", "clearpond-five-language-neighborhoods", "manulex-french-child-directed-lexicons", "multi-lex-french-ngrams-2022",
+                "hf-malayalam-pronunciation-lexicon", "hf-nusax-mt", "hf-maori-language-eval", "hf-afrisud-treebanks",
+                "hf-wolof-french-jolof", "hf-apertium-breton-french", "inuktitutcomputing-uqailaut-roots", "nrc-nunavut-hansard-3",
+                "hf-americasnli", "hf-teara-maori-english", "jmdict-edrdg", "jmnedict-edrdg",
+                "kanjidic2-edrdg", "cc-cedict-v2", "iso-639-2023", "iso-15924-script-codes",
+                "clts-2-3-0", "multext-east-v6-morphosyntax", "dmlex-v1-0", "ontolex-lemon-model",
+                "lexinfo-3-0", "lmf-iso-24613-1-2024", "cldf-format-spec", "cldf-meta-catalogue",
+                "olia-annotation-ontologies", "ontolex-frac", "tei-p5-dictionaries", "tei-lex-0-v0-9-5",
+                "lift-v0-13", "freedict-tei-dictionaries", "tbx-iso-30042-2019", "xliff-2-2",
+                "tmx-1-4b", "hfst-fst-morphology-toolchain", "iso-12620-dcr-2022", "iso-cd-23096-jlaf",
+                "globalwordnet-wn-lmf-1-4", "iso-maf-core-24611-1-2025", "iso-laf-24612-2012", "iso-synaf-model-24615-1-2014",
+                "iso-mlif-24616-2012", "iso-semaf-24617-family", "unimorph-feature-schema-v1", "conllu-ud-v2-format",
+                "xigt-igt-format-v1-1-1", "ontolex-lexicog-module-2019", "folia-format-2-5-2", "elan-eaf-3-0",
+                "praat-textgrid-format", "talkbank-chat-format", "exmaralda-transcription-formats", "fieldworks-flextext-interlinear-xml",
+                "iso-graf-serialization-24612-2012", "iso-synaf-tigerxml-24615-2-2018",
+                "icu4x-unicode-segmentation-2-3-1",
+                "opencc-1-4-2",
+                "sudachi-dict-v202610-v1",
+                "camel-morph-calima-databases",
+                "zemberek-turkish-morphology-0-17-1",
+                "indic-nlp-library-resources",
+                "vabamorf-estonian-morphology-lexicon",
+                "pymorphy3-opencorpora-dictionary-build",
+                "unicode-cldr-48-2-likely-subtags-grammar",
+                "unitex-gramlab-lingua-resources",
+                "acoli-dicts-ontolex-tiad",
+                "conceptnet-5-7-semantic-network",
+                "panlexia-concept-linked-wordlists",
+                "cygnet-multilingual-wordnet-sqlite"
+        )), "exact 284 language-resource source IDs match the pinned catalogue");
+        requireStructureRecord(lines, "dmlex-v1-0", "lexicographic_data_model_specification", "OASIS DMLex 1.0");
+        requireStructureRecord(lines, "ontolex-lemon-model", "semantic_lexicon_model_specification", "OntoLex-Lemon lexical model");
+        requireStructureRecord(lines, "lexinfo-3-0", "lexical_annotation_data_category_ontology", "LexInfo ontology 3.0");
+        requireStructureRecord(lines, "lmf-iso-24613-1-2024", "lexical_resource_metamodel", "ISO 24613-1:2024 Lexical Ma");
+        requireStructureRecord(lines, "cldf-format-spec", "cross_linguistic_data_format_specification", "CLDF 1.3.1 cross-linguistic");
+        requireStructureRecord(lines, "cldf-meta-catalogue", "language_resource_metadata_catalogue", "CLDF-Meta dataset catalogue");
+        requireStructureRecord(lines, "olia-annotation-ontologies", "linguistic_annotation_ontology", "OLiA linguistic annotation ");
+        requireStructureRecord(lines, "ontolex-frac", "frequency_attestation_annotation_model", "OntoLex FrAC frequency/atte");
+        requireStructureRecord(lines, "tei-p5-dictionaries", "dictionary_encoding_specification", "TEI P5 v4.12.0 dictionary m");
+        requireStructureRecord(lines, "tei-lex-0-v0-9-5", "dictionary_encoding_profile", "TEI Lex-0 v0.9.5 profile");
+        requireStructureRecord(lines, "lift-v0-13", "dictionary_interchange_format", "SIL LIFT 0.13");
+        requireStructureRecord(lines, "freedict-tei-dictionaries", "dictionary_data_fixture", "FreeDict TEI dictionaries");
+        requireStructureRecord(lines, "tbx-iso-30042-2019", "terminology_interchange_standard", "ISO 30042:2019 TBX");
+        requireStructureRecord(lines, "xliff-2-2", "localization_translation_interchange_format", "OASIS XLIFF 2.2");
+        requireStructureRecord(lines, "tmx-1-4b", "translation_memory_interchange_format", "TMX 1.4b Translation Memory");
+        requireStructureRecord(lines, "hfst-fst-morphology-toolchain", "finite_state_morphology_toolchain", "HFST lexicon/rule toolchain");
+        requireStructureRecord(lines, "iso-12620-dcr-2022", "data_category_repository_framework", "ISO 12620-2 data-category r");
+        requireStructureRecord(lines, "iso-cd-23096-jlaf", "linguistic_annotation_json_serialization_draft", "ISO/CD 23096 JLAF JSON seri");
+        requireStructureRecord(lines, "globalwordnet-wn-lmf-1-4", "wordnet_lexical_graph_interchange_format", "Global WordNet WN-LMF 1.4");
+        requireStructureRecord(lines, "iso-maf-core-24611-1-2025", "morphosyntactic_annotation_framework", "ISO 24611-1:2025 MAF Core");
+        requireStructureRecord(lines, "iso-laf-24612-2012", "linguistic_annotation_framework_model", "ISO 24612:2012 LAF abstract");
+        requireStructureRecord(lines, "iso-synaf-model-24615-1-2014", "syntactic_annotation_framework_model", "ISO 24615-1:2014 SynAF synt");
+        requireStructureRecord(lines, "iso-mlif-24616-2012", "multilingual_information_interchange_framework", "ISO 24616:2012 MLIF");
+        requireStructureRecord(lines, "iso-semaf-24617-family", "semantic_annotation_framework", "ISO 24617 SemAF independent");
+        requireStructureRecord(lines, "unimorph-feature-schema-v1", "morphological_feature_schema", "UniMorph schema v1 morphosy");
+        requireStructureRecord(lines, "conllu-ud-v2-format", "dependency_treebank_serialization", "Universal Dependencies CoNL");
+        requireStructureRecord(lines, "xigt-igt-format-v1-1-1", "interlinear_glossed_text_format", "Xigt Interlinear Glossed Te");
+        requireStructureRecord(lines, "ontolex-lexicog-module-2019", "lexicographic_linked_data_module", "OntoLex-Lexicog 2019 module");
+        requireStructureRecord(lines, "folia-format-2-5-2", "linguistic_annotation_interchange_format", "FoLiA 2.5.2 linguistic anno");
+        requireStructureRecord(lines, "elan-eaf-3-0", "multimodal_tier_annotation_format", "ELAN EUDICO Annotation Form");
+        requireStructureRecord(lines, "praat-textgrid-format", "time_aligned_phonetic_annotation_format", "Praat TextGrid file formats");
+        requireStructureRecord(lines, "talkbank-chat-format", "spoken_language_transcription_format", "TalkBank CHAT transcription");
+        requireStructureRecord(lines, "exmaralda-transcription-formats", "multitier_transcription_format", "EXMARaLDA EXB/EXS transcrip");
+        requireStructureRecord(lines, "fieldworks-flextext-interlinear-xml", "interlinear_text_exchange_format", "SIL FieldWorks FLExText int");
+        requireStructureRecord(lines, "iso-graf-serialization-24612-2012", "linguistic_annotation_graph_serialization", "ISO 24612:2012 GrAF XML ser");
+        requireStructureRecord(lines, "iso-synaf-tigerxml-24615-2-2018", "syntactic_annotation_serialization", "ISO 24615-2:2018 SynAF Tige");
+        String icu4x = discoveryRecord(lines, "icu4x-unicode-segmentation-2-3-1");
+        require(icu4x.contains("2.3.1") && icu4x.contains("Unicode License v3")
+                && icu4x.contains("dictionary/LSTM") && icu4x.contains("no corpus"),
+                "ICU4X keeps data licensing, provider choices and reference-only scope explicit");
+        String opencc = discoveryRecord(lines, "opencc-1-4-2");
+        require(opencc.contains("Apache-2.0") && opencc.contains("longest-prefix")
+                && opencc.contains("architecture-dependent") && opencc.contains("not semantic translation"),
+                "OpenCC preserves phrase priority, architecture and dictionary-rights boundaries");
+        String sudachi = discoveryRecord(lines, "sudachi-dict-v202610-v1");
+        require(sudachi.contains("V1") && sudachi.contains("A/B/C")
+                && sudachi.contains("UniDic") && sudachi.contains("NEologd")
+                && sudachi.contains("incompatible with V0"),
+                "Sudachi keeps granularity, source identity and binary compatibility explicit");
+        String camel = discoveryRecord(lines, "camel-morph-calima-databases");
+        require(camel.contains("GPL-2.0") && camel.contains("CC BY 4.0")
+                && camel.contains("SAMA") && camel.contains("analysis, generation and reinflection"),
+                "CAMeL preserves database-specific rights and morphology operations");
+        String zemberek = discoveryRecord(lines, "zemberek-turkish-morphology-0-17-1");
+        require(zemberek.contains("0.17.1") && zemberek.contains("2019")
+                && zemberek.contains("slow-maintenance") && zemberek.contains("Apache-2.0"),
+                "Zemberek age and code/data license distinction remain visible");
+        String indic = discoveryRecord(lines, "indic-nlp-library-resources");
+        require(indic.contains("separate source identities") && indic.contains("MIT")
+                && indic.contains("Pin both repositories"),
+                "Indic library and model resources retain separate provenance");
+        String vabamorf = discoveryRecord(lines, "vabamorf-estonian-morphology-lexicon");
+        require(vabamorf.contains("prefix, suffix and special-list")
+                && vabamorf.contains("historical source metadata may be unreliable")
+                && vabamorf.contains("LGPL"),
+                "Vabamorf retains its structured lexicon layout and provenance blocker");
+        String pymorphy = discoveryRecord(lines, "pymorphy3-opencorpora-dictionary-build");
+        require(pymorphy.contains("CC BY-SA 3.0") && pymorphy.contains("MIT")
+                && pymorphy.contains("suffix-length backoff"),
+                "pymorphy3 separates builder licensing from OpenCorpora data and backoff");
+        String cldrGrammar = discoveryRecord(lines, "unicode-cldr-48-2-likely-subtags-grammar");
+        require(cldrGrammar.contains("likely-subtag") && cldrGrammar.contains("grammatical-feature")
+                && cldrGrammar.contains("release-48-2") && cldrGrammar.contains("parentLocales")
+                && cldrGrammar.contains("specification prose"),
+                "CLDR fallback and grammar data remain release- and rights-scoped");
+        String unitex = discoveryRecord(lines, "unitex-gramlab-lingua-resources");
+        require(unitex.contains("DELA") && unitex.contains(".grf") && unitex.contains(".fst2")
+                && unitex.contains("LGPLLR") && unitex.contains("Corpus.info"),
+                "Unitex keeps dictionary/graph pairing and resource licensing explicit");
+        String acoli = discoveryRecord(lines, "acoli-dicts-ontolex-tiad");
+        require(acoli.contains("3,000") && acoli.contains("400+") && acoli.contains("2,500+")
+                && acoli.contains("copyright clearance") && acoli.contains("TIAD-TSV"),
+                "ACoLi scale, source-specific IDs and clearance state remain explicit");
+        String conceptNet = discoveryRecord(lines, "conceptnet-5-7-semantic-network");
+        require(conceptNet.contains("JSON-LD") && conceptNet.contains("per-edge license")
+                && conceptNet.contains("CC BY-SA 4.0") && conceptNet.contains("Apache-2.0")
+                && conceptNet.contains("not a translation"),
+                "ConceptNet relation/provenance/licensing fields stay non-equivalent");
+        String panlexia = discoveryRecord(lines, "panlexia-concept-linked-wordlists");
+        require(panlexia.contains("PWN or PLX") && panlexia.contains("CC BY 4.0")
+                && panlexia.contains("upstream-source") && panlexia.contains("not a guarantee"),
+                "Panlexia concept joins preserve source rights and avoid translation overclaim");
+        String cygnet = discoveryRecord(lines, "cygnet-multilingual-wordnet-sqlite");
+        require(cygnet.contains("CILI") && cygnet.contains("40+ languages")
+                && cygnet.contains("provenance database") && cygnet.contains("per-wordnet license"),
+                "Cygnet index retains per-source identity and licensing");
         String jmdict = discoveryRecord(lines, "jmdict-edrdg");
         require(jmdict.contains("JMdict_e/JMdict_b")
                 && jmdict.contains("legacy generation")
@@ -335,6 +292,34 @@ public final class M3HfLexiconIntakeProof {
                 && ccCedict.contains("[Wang2]") && ccCedict.contains("[wang2]")
                 && ccCedict.contains("case-fold Pinyin"),
                 "CC-CEDICT V2 preserves case-sensitive Pinyin identity");
+        String iso639 = discoveryRecord(lines, "iso-639-2023");
+        require(iso639.contains("\tlanguage_identity_and_code_system\t")
+                && iso639.contains("Edition 2 (2023)")
+                && iso639.contains("ISO 639-1") && iso639.contains("ISO 639-5")
+                && iso639.contains("free-of-charge use")
+                && iso639.contains("BCP 47 tags"),
+                "ISO language-code sets, code-use rights and namespace boundaries stay explicit");
+        String iso15924 = discoveryRecord(lines, "iso-15924-script-codes");
+        require(iso15924.contains("\tscript_identity_and_code_system\t")
+                && iso15924.contains("four-letter alphabetic")
+                && iso15924.contains("three-digit numeric")
+                && iso15924.contains("not language IDs")
+                && iso15924.contains("Unicode Script values"),
+                "ISO script-code forms and distinct language/Unicode identities stay explicit");
+        String clts = discoveryRecord(lines, "clts-2-3-0");
+        require(clts.contains("\tphonetic_transcription_and_sound_feature_specification\t")
+                && clts.contains("five transcription systems")
+                && clts.contains("22 transcription datasets")
+                && clts.contains("six sound-class systems")
+                && clts.contains("CC BY 4.0"),
+                "CLTS version, transcription coverage, feature schemes and attribution stay explicit");
+        String multext = discoveryRecord(lines, "multext-east-v6-morphosyntax");
+        require(multext.contains("\tmorphosyntactic_feature_and_tag_specification\t")
+                && multext.contains("2022-06-24") && multext.contains("compact MSD tag")
+                && multext.contains("CC BY-SA 4.0")
+                && multext.contains("specification artifact, not associated lexica or corpora")
+                && multext.contains("unknown versus absent"),
+                "MULTEXT-East versioned language-specific grammar specs and rights stay explicit");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -816,8 +801,10 @@ public final class M3HfLexiconIntakeProof {
                 .filter(line -> "wordfreq-3-0-2-data".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
         require(wordfreq.contains("CC BY-SA 4.0") && wordfreq.contains("Apache-2.0")
-                && wordfreq.contains("2021") && wordfreq.contains("bare CSV"),
-                "wordfreq data/code rights, vintage and attribution constraints remain explicit");
+                && wordfreq.contains("2021") && wordfreq.contains("bare CSV")
+                && wordfreq.contains("issue #120") && wordfreq.contains("unanswered")
+                && wordfreq.contains("binary-derived"),
+                "wordfreq data/code rights, vintage and unresolved derived-list terms remain explicit");
         String reflex = lines.stream().skip(1)
                 .filter(line -> "reflex-africa-v1-0".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
@@ -1072,6 +1059,12 @@ public final class M3HfLexiconIntakeProof {
         return lines.size() - 1;
     }
 
+    private static String algorithmRecord(List<String> lines, String category) {
+        return lines.stream().skip(1)
+                .filter(line -> category.equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+    }
+
     private static int verifyAlgorithmCatalogue() throws IOException {
         Path catalogue = Path.of("algorithm-catalogue.tsv");
         if (!Files.isRegularFile(catalogue)) {
@@ -1080,7 +1073,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 79, "78 algorithm patterns plus header");
+        require(lines.size() == 101, "100 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -1172,8 +1165,30 @@ public final class M3HfLexiconIntakeProof {
                 "multiword_ngram_frequency_index",
                 "regional_parallel_pair_views",
                 "african_sud_treebank_precompute",
-                "indigenous_language_task_partitioned_regression"
-        )), "all 78 algorithm categories match the pinned catalogue");
+                "indigenous_language_task_partitioned_regression",
+                "icu4x_complex_script_provider_tradeoff",
+                "opencc_phrase_priority_conversion",
+                "sudachi_multigranular_morphological_tokenization",
+                "camel_spec_to_morphology_database",
+                "vabamorf_paradigm_compound_constraints",
+                "pymorphy_suffix_backoff_probabilities",
+                "cldr_locale_fallback_grammatical_features",
+                "unicode_boundary_property_conformance",
+                "unitex_dela_graph_pair_compilation",
+                "acoli_ontolex_tiad_provenance_gate",
+                "conceptnet_edge_scoped_semantic_candidate_rank",
+                "panlexia_concept_id_language_pair_projection",
+                "cygnet_cili_provenance_sqlite_lookup",
+                "regex_compiled_pattern_plan_reuse",
+                "regex_unicode_property_table_precompute",
+                "regex_pattern_set_single_scan",
+                "mindex_regex_sound_prefilter",
+                "mindex_segmented_regex_cursor",
+                "programming_language_regex_callsite_recipe",
+                "mindex_input_property_mask_precompute",
+                "regex_hybrid_dfa_state_cache",
+                "regex_native_jit_target_profile"
+        )), "all 100 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
@@ -1196,13 +1211,149 @@ public final class M3HfLexiconIntakeProof {
                 "multiword_ngram_frequency_index",
                 "regional_parallel_pair_views",
                 "african_sud_treebank_precompute",
-                "indigenous_language_task_partitioned_regression")) {
+                "indigenous_language_task_partitioned_regression",
+                "icu4x_complex_script_provider_tradeoff",
+                "opencc_phrase_priority_conversion",
+                "sudachi_multigranular_morphological_tokenization",
+                "camel_spec_to_morphology_database",
+                "vabamorf_paradigm_compound_constraints",
+                "pymorphy_suffix_backoff_probabilities",
+                "cldr_locale_fallback_grammatical_features",
+                "unicode_boundary_property_conformance",
+                "unitex_dela_graph_pair_compilation",
+                "acoli_ontolex_tiad_provenance_gate",
+                "conceptnet_edge_scoped_semantic_candidate_rank",
+                "panlexia_concept_id_language_pair_projection",
+                "cygnet_cili_provenance_sqlite_lookup",
+                "regex_compiled_pattern_plan_reuse",
+                "regex_unicode_property_table_precompute",
+                "regex_pattern_set_single_scan",
+                "mindex_regex_sound_prefilter",
+                "mindex_segmented_regex_cursor",
+                "programming_language_regex_callsite_recipe",
+                "mindex_input_property_mask_precompute",
+                "regex_hybrid_dfa_state_cache",
+                "regex_native_jit_target_profile")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
             require(!row.isEmpty() && "EVALUATE_ONLY".equals(splitTsv(row)[3]),
                     "algorithm candidate remains evaluation-only: " + category);
         }
+        String icu4x = algorithmRecord(lines, "icu4x_complex_script_provider_tradeoff");
+        require(splitTsv(icu4x).length == 6
+                && splitTsv(icu4x)[2].contains("dictionary-backed versus LSTM")
+                && splitTsv(icu4x)[5].contains("startup"),
+                "ICU4X provider tradeoff stays a measured, evaluation-only pattern");
+        String opencc = algorithmRecord(lines, "opencc_phrase_priority_conversion");
+        require(splitTsv(opencc).length == 6
+                && splitTsv(opencc)[2].contains("longest-prefix")
+                && splitTsv(opencc)[2].contains("not semantic translation")
+                && splitTsv(opencc)[4].contains("translation mappings remain authoritative"),
+                "OpenCC phrase conversion remains separate from translation identity");
+        String sudachi = algorithmRecord(lines, "sudachi_multigranular_morphological_tokenization");
+        require(splitTsv(sudachi).length == 6
+                && splitTsv(sudachi)[2].contains("A/B/C")
+                && splitTsv(sudachi)[5].contains("V0 refusal"),
+                "Sudachi segmentation modes retain versioned differential gates");
+        String camel = algorithmRecord(lines, "camel_spec_to_morphology_database");
+        require(splitTsv(camel).length == 6
+                && splitTsv(camel)[2].contains("analysis/generation/reinflection")
+                && splitTsv(camel)[5].contains("SAMA-gated"),
+                "CAMeL database compilation retains operations and license gate");
+        String vabamorf = algorithmRecord(lines, "vabamorf_paradigm_compound_constraints");
+        require(splitTsv(vabamorf).length == 6
+                && splitTsv(vabamorf)[2].contains("paradigm")
+                && splitTsv(vabamorf)[5].contains("compound acceptance"),
+                "Vabamorf paradigm and compound behavior stays measurable");
+        String pymorphy = algorithmRecord(lines, "pymorphy_suffix_backoff_probabilities");
+        require(splitTsv(pymorphy).length == 6
+                && splitTsv(pymorphy)[2].contains("suffix-length backoff")
+                && splitTsv(pymorphy)[5].contains("no train/test leakage"),
+                "pymorphy backoff remains a held-out candidate-ranking evaluation");
+        String cldr = algorithmRecord(lines, "cldr_locale_fallback_grammatical_features");
+        require(splitTsv(cldr).length == 6
+                && splitTsv(cldr)[1].contains("likelySubtags.xml")
+                && splitTsv(cldr)[1].contains("supplementalData.xml(parentLocales)")
+                && splitTsv(cldr)[5].contains("parentLocales chains"),
+                "CLDR locale fallback is separately tested from transliteration");
+        String unicode = algorithmRecord(lines, "unicode_boundary_property_conformance");
+        require(splitTsv(unicode).length == 6
+                && splitTsv(unicode)[1].contains("UAX #29")
+                && splitTsv(unicode)[1].contains("revision 47")
+                && splitTsv(unicode)[1].contains("revision 55")
+                && splitTsv(unicode)[2].contains("UAX #14")
+                && splitTsv(unicode)[5].contains("UAX #14 conformance vectors")
+                && splitTsv(unicode)[5].contains("split atoms"),
+                "Unicode boundary conformance covers segmented M3String inputs");
+        String unitex = algorithmRecord(lines, "unitex_dela_graph_pair_compilation");
+        require(splitTsv(unitex).length == 6 && splitTsv(unitex)[2].contains("DELA")
+                && splitTsv(unitex)[2].contains("editable .grf")
+                && "EVALUATE_ONLY".equals(splitTsv(unitex)[3]),
+                "Unitex dictionary/graph composition stays a measured donor comparison");
+        String acoli = algorithmRecord(lines, "acoli_ontolex_tiad_provenance_gate");
+        require(splitTsv(acoli).length == 6 && splitTsv(acoli)[1].contains("OntoLex-Lemon")
+                && splitTsv(acoli)[5].contains("copyright-clearance rejection"),
+                "ACoLi cross-format parity is gated by per-dataset clearance");
+        String conceptNet = algorithmRecord(lines, "conceptnet_edge_scoped_semantic_candidate_rank");
+        require(splitTsv(conceptNet).length == 6 && splitTsv(conceptNet)[2].contains("edge weight")
+                && splitTsv(conceptNet)[4].contains("exact translation")
+                && splitTsv(conceptNet)[5].contains("reject any equivalence claim"),
+                "ConceptNet ranker preserves semantic-edge provenance and non-equivalence");
+        String panlexia = algorithmRecord(lines, "panlexia_concept_id_language_pair_projection");
+        require(splitTsv(panlexia).length == 6 && splitTsv(panlexia)[2].contains("concept IDs")
+                && splitTsv(panlexia)[4].contains("not canonical translation")
+                && splitTsv(panlexia)[5].contains("incorporated dataset's terms"),
+                "Panlexia pair views retain concept multiplicity and source rights");
+        String cygnet = algorithmRecord(lines, "cygnet_cili_provenance_sqlite_lookup");
+        require(splitTsv(cygnet).length == 6 && splitTsv(cygnet)[2].contains("CILI")
+                && splitTsv(cygnet)[2].contains("provenance")
+                && splitTsv(cygnet)[5].contains("full rebuild cost"),
+                "Cygnet index is qualified against source IDs and build cost");
+        String compiledRegex = algorithmRecord(lines, "regex_compiled_pattern_plan_reuse");
+        require(splitTsv(compiledRegex).length == 6 && splitTsv(compiledRegex)[2].contains("Unicode/UCD version")
+                && splitTsv(compiledRegex)[2].contains("fresh mutable match state")
+                && splitTsv(compiledRegex)[5].contains("eviction equivalence"),
+                "compiled-regex reuse keys semantics and keeps matcher state local");
+        String unicodeRegex = algorithmRecord(lines, "regex_unicode_property_table_precompute");
+        require(splitTsv(unicodeRegex).length == 6 && splitTsv(unicodeRegex)[2].contains("version-pinned")
+                && splitTsv(unicodeRegex)[2].contains("string-valued properties")
+                && splitTsv(unicodeRegex)[5].contains("Script_Extensions"),
+                "Unicode regex property tables are versioned and distinguish string properties");
+        String regexSet = algorithmRecord(lines, "regex_pattern_set_single_scan");
+        require(splitTsv(regexSet).length == 6 && splitTsv(regexSet)[2].contains("pattern IDs")
+                && splitTsv(regexSet)[2].contains("unsupported constructs")
+                && splitTsv(regexSet)[5].contains("large-set build cost"),
+                "multi-pattern scans retain exact fallback for unsupported semantics");
+        String regexFilter = algorithmRecord(lines, "mindex_regex_sound_prefilter");
+        require(splitTsv(regexFilter).length == 6 && splitTsv(regexFilter)[2].contains("false negatives are not")
+                && splitTsv(regexFilter)[4].contains("M3TQ/M3StringSearchPrecompute"),
+                "MIndex regex signatures only reject candidates and reuse existing owners");
+        String segmentedRegex = algorithmRecord(lines, "mindex_segmented_regex_cursor");
+        require(splitTsv(segmentedRegex).length == 6 && splitTsv(segmentedRegex)[2].contains("without flattening")
+                && splitTsv(segmentedRegex)[2].contains("contiguous JNI boundaries")
+                && splitTsv(segmentedRegex)[5].contains("split surrogate pairs"),
+                "segmented regex scanning preserves engine-specific materialization boundaries");
+        String sourceRegex = algorithmRecord(lines, "programming_language_regex_callsite_recipe");
+        require(splitTsv(sourceRegex).length == 6 && splitTsv(sourceRegex)[2].contains("source span")
+                && splitTsv(sourceRegex)[5].contains("ordinary strings/comments")
+                && splitTsv(sourceRegex)[5].contains("initialization timing"),
+                "regex call-site inventory is language-aware and rejects unsafe rewrites");
+        String inputMask = algorithmRecord(lines, "mindex_input_property_mask_precompute");
+        require(splitTsv(inputMask).length == 6 && splitTsv(inputMask)[2].contains("O(n) scan")
+                && splitTsv(inputMask)[4].contains("M3StringSearchPrecompute")
+                && splitTsv(inputMask)[5].contains("reuse threshold"),
+                "input property masks pay their scan and memory cost only when reused");
+        String lazyDfa = algorithmRecord(lines, "regex_hybrid_dfa_state_cache");
+        require(splitTsv(lazyDfa).length == 6 && splitTsv(lazyDfa)[2].contains("strictly bounded")
+                && splitTsv(lazyDfa)[2].contains("cache pressure")
+                && splitTsv(lazyDfa)[5].contains("adversarial churn"),
+                "lazy DFA state reuse is bounded and falls back under churn");
+        String nativeRegex = algorithmRecord(lines, "regex_native_jit_target_profile");
+        require(splitTsv(nativeRegex).length == 6 && splitTsv(nativeRegex)[2].contains("CPU features")
+                && splitTsv(nativeRegex)[4].contains("portable fallback")
+                && splitTsv(nativeRegex)[5].contains("ARM, Android, macOS and x86_64"),
+                "native regex artifacts stay target-specific with a portable fallback");
         String bilingual = lines.stream().skip(1)
                 .filter(line -> "bilingual_dictionary_regression".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");

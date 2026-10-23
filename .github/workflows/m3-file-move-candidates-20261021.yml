@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3File move candidates and source recipes
+
+on:
+  push:
+    branches:
+      - master
+      - m3/restore-merged-atoms-ci-20261022
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-move-candidates-20261021.yml'
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-file-move-candidates-20261021/**'
+      - '.github/workflows/m3-file-move-candidates-20261021.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  delta-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify M3File module and linked-image contracts
+        run: python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$RUNNER_TEMP/m3-file-move-contract"

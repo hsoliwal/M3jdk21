@@ -1,0 +1,12 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+# Attribution and source boundaries
+
+The new independent orchestration, scanner wrapper and tests are Apache-2.0 Synexia tooling. The unchanged recipe engine 1c1b1b568d369f688f6953161636bf36b484bf5a, manifest kernel 38df5f97bbeec8a8a8cfc77091d56bda925c07f2 and Maven POM d79867bcc09ad6329e12418e15907e54b8ab025f are reused from hsoliwal/com.synexia@515f2f2153aa6afbc758da34c495c7223ee7997a, synexia-openrewrite-recipes/recipes/m3-regex-relations-current-owner-20261017/sdk. Their source notices are retained. The existing Central OpenRewrite 8.17.1 and JUnit 5.10.2 dependencies and versions remain unchanged. No challenge-site code or private corpus is copied.
+
+The five sealed test payloads are original receiver source files used as data. MIndexString-before.java.txt, M3String-predecessor.java.txt and M3StringFacts-predecessor.java.txt retain their explicit GPLv2/ClassPath headers. MIndexStringInvariant-before.java.txt retains its explicit Apache-2.0 header. M3StringConcatLengthOverflowTest-predecessor.java.txt retains its actual copyright/jtreg header, which contains no explicit GPL grant. The receiver repository GPLv2 LICENSE is separate evidence; this fixture's per-file license remains NOASSERTION, with no inferred Classpath grant. Packaging any payload in this Apache tooling module does not relicense that payload. sdk/LICENSE.OpenJDK is the unchanged receiver repository GPLv2 LICENSE, blob 8b400c7ab81b7b18baff3f81d597f5e511883134.
+
+The three historical recipe files are not republished here as newly licensed source. Qualification reads the exact existing receiver-owned apply.py, manifest.json and test_recipe.py at their existing original paths, copies them unchanged only into ephemeral receiver-shaped proof fixtures alongside the unchanged receiver LICENSE, and executes the Python files as separate programs. Their headerless per-file licensing remains NOASSERTION; repository GPLv2 evidence is retained without inventing Apache or Classpath permission. New orchestration does not embed or import their implementation bodies.
+
+Exact input and donor identities are in INPUTS.json, the preserved INVENTORY.json and ADMISSION.json, and the task-local copy of the committed pre-code FOSS row. The caller must independently seal INPUTS.json. Original source histories, receiver licenses and unresolved rights boundaries remain authoritative.

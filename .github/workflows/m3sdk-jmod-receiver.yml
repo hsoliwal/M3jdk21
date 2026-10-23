@@ -7,6 +7,13 @@ on:
       - 'm3/tooling/jmod-recipes/**'
       - 'm3/vendor/third_party-m3/**'
       - 'm3/tooling/module-packs/nlp-search/**'
+      - 'm3/ports/file/**'
+      - 'm3/tooling/shared-frontend/**'
+      - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
+      - 'src/jdk.compiler/share/classes/module-info.java'
+      - 'test/langtools/tools/javac/m3/**'
       - 'm3/tooling/module-packs/text-tools/**'
       - 'm3/tooling/module-packs/jackson/**'
       - 'm3/vendor/third_party/jackson-annotations-2.19.2/**'
@@ -80,16 +87,36 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Build source-vendored recipe and JUnit prerequisites
+        run: >-
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl rewrite-core,rewrite-java,rewrite-java-21,slf4j-api-1.7.36,slf4j-api-2.0.9,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
+          -am -DskipTests install
       - name: Run original hash-pinned JMOD descriptor OpenRewrite JUnit
         run: >-
           mvn -B -ntp -f m3/tooling/jmod-recipes/pom.xml
           -Dtest=M3ModuleDescriptorRecipeTest test
+      - name: Run the exact receiver recipe-custody proof mirror
+        run: >-
+          mvn -B -ntp
+          -f m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml
+          clean test
+      - name: Retain descriptor and receiver recipe proof reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-recipe-custody-proof
+          if-no-files-found: error
+          path: |
+            m3/tooling/jmod-recipes/target/surefire-reports/**
+            m3/tooling/module-packs/nlp-search/recipe-custody/target/surefire-reports/**
+            m3/tooling/module-packs/nlp-search/recipe-custody/target/evidence/**
 
 
   full-tool-images:
-    name: Full OpenNLP Lucene and JNI images
+    name: Full M3File OpenNLP Lucene and compiler images
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v5
         with:
@@ -97,11 +124,12 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '21.0.8+9'
-      - name: Build and execute full OpenNLP and Lucene from local source
+          java-version: '21'
+      - name: Build ten JMODs and run full file JNI NLP and M3AST contracts
         run: >-
           python3 m3/tooling/module-packs/nlp-search/build.py
-          --jdk-home "$JAVA_HOME" --out build/m3-nlp-search
+          --jdk-home "$JAVA_HOME" --compiler-source-proof
+          --out build/m3-nlp-search
       - name: Build and execute text and POSIX JNI tools
         run: |
           set -euo pipefail
@@ -127,6 +155,9 @@ jobs:
           path: |
             build/m3-nlp-search/**/*.log
             build/m3-nlp-search/**/*.json
+            build/m3-nlp-search/**/*.tsv
+            build/m3-nlp-search/pack/jmods/*.jmod
+            build/m3-nlp-search/native/*.so
             build/m3-text-tools/**/*.log
 
   jackson-source-jmods:
@@ -238,3 +269,5 @@ jobs:
             build/m3-jackson-upstream-proof/**/test-classes/**
             build/m3-jackson-upstream-proof/**/test-classpath.txt
             build/m3-jackson-upstream-proof/**/release.txt
+            build/m3-text-tools/**/*.json
+            build/m3-text-tools/**/*.tsv

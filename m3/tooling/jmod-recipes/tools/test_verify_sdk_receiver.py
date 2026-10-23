@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 from verify_sdk_receiver import (
-    HEADER, SOURCE_COMMIT, SUCCESSOR_COMMIT, SUCCESSORS, git_blob_sha1, rows_from_text, verify,
+    HEADER, SOURCE_COMMIT, SUCCESSOR_COMMIT, SUCCESSOR_COMMITS, SUCCESSORS, git_blob_sha1, rows_from_text, verify,
 )
 
 
@@ -86,7 +86,8 @@ class SdkReceiverTests(unittest.TestCase):
                 text = HEADER + "\n" + "\t".join((name, predecessor, "788", SOURCE_COMMIT)) + "\n"
                 self.ledger.write_text(text)
                 result = verify(self.root, self.ledger, 1)
-                self.assertEqual(SUCCESSOR_COMMIT, result["qualified_source_successors"][0]["canonical_commit"])
+                self.assertEqual(SUCCESSOR_COMMITS.get(name, SUCCESSOR_COMMIT),
+                                 result["qualified_source_successors"][0]["canonical_commit"])
                 self.assertFalse(result["product_accepted"])
                 target.write_bytes(payload + b"\n")
                 with self.assertRaisesRegex(ValueError, "BLOB_DRIFT"):

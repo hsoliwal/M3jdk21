@@ -38,18 +38,33 @@ static int compose_rows(const uint64_t *a, const uint64_t *b, uint64_t *out, siz
             return 0;
         }
     }
+    /* Keep the original low-overhead loop when the initial sparse rows differ.
+     * This is a cost choice, not a semantic assumption about later rows. */
+    if (n < 2 || (a[0] != a[1] && (a[0] & (a[0] - 1)) == 0)) {
+        for (size_t i = 0; i < n; i++) {
+            uint64_t frontier = a[i], value = 0;
+            while (frontier != 0 && value != ceiling) {
+                value |= b[first_bit(frontier)];
+                frontier &= frontier - 1;
+            }
+            result[i] = value;
+        }
+        memcpy(out, result, n * sizeof(uint64_t));
+        return 0;
+    }
+    /* Reuse the adjacent-frontier pattern of the existing M3StateRelation owner.
+     * Invocation-local equality is exact; no retained cache or hash hit is involved. */
+    uint64_t previous = 0, value = 0;
     for (size_t i = 0; i < n; i++) {
-        uint64_t frontier = a[i], value = 0;
-        while (frontier != 0 && value != ceiling) {
-            unsigned bit = 0;
-#if (defined(__GNUC__) || defined(__clang__)) && !defined(M3_REGEX_PORTABLE)
-            bit = (unsigned)__builtin_ctzll(frontier);
-#else
-            uint64_t scan = frontier;
-            while ((scan & UINT64_C(1)) == 0) { scan >>= 1; bit++; }
-#endif
-            value |= b[bit];
-            frontier &= frontier - 1;
+        const uint64_t active = a[i];
+        if (i == 0 || active != previous) {
+            uint64_t frontier = active;
+            value = active == mask ? ceiling : 0;
+            while (frontier != 0 && value != ceiling) {
+                value |= b[first_bit(frontier)];
+                frontier &= frontier - 1;
+            }
+            previous = active;
         }
         result[i] = value;
     }
@@ -63,7 +78,12 @@ static unsigned first_bit(uint64_t word) {
     return (unsigned)__builtin_ctzll(word);
 #else
     unsigned bit = 0;
-    while ((word & UINT64_C(1)) == 0) { word >>= 1; bit++; }
+    if ((word & UINT64_C(0xffffffff)) == 0) { bit += 32; word >>= 32; }
+    if ((word & UINT64_C(0xffff)) == 0) { bit += 16; word >>= 16; }
+    if ((word & UINT64_C(0xff)) == 0) { bit += 8; word >>= 8; }
+    if ((word & UINT64_C(0xf)) == 0) { bit += 4; word >>= 4; }
+    if ((word & UINT64_C(0x3)) == 0) { bit += 2; word >>= 2; }
+    if ((word & UINT64_C(1)) == 0) ++bit;
     return bit;
 #endif
 }
@@ -95,15 +115,9 @@ static int compose_structured_rows(const uint64_t *a, const uint64_t *b, uint64_
             result[i] = selected == 0 ? 0 : b[first_bit(selected)];
         }
     } else {
-        /* The exact generic union traversal remains the fallback. */
-        for (size_t i = 0; i < n; i++) {
-            uint64_t frontier = a[i], value = 0;
-            while (frontier != 0 && value != ceiling) {
-                value |= b[first_bit(frontier)];
-                frontier &= frontier - 1;
-            }
-            result[i] = value;
-        }
+        // Reuse the existing generic atom, including alias-safe staging and shortcuts.
+        // This fallback revalidates at most 64 rows; no new JNI boundary is crossed.
+        return compose_rows(a, b, out, n);
     }
     memcpy(out, result, n * sizeof(uint64_t));
     return 0;
@@ -179,9 +193,29 @@ static int repeat_rows(const uint64_t *rows, uint64_t *out, size_t n,
     }
     int (*compose)(const uint64_t*, const uint64_t*, uint64_t*, size_t) =
             structured ? compose_structured_rows : compose_rows;
-    for (uint64_t remaining = count; remaining != 0; remaining >>= 1) {
-        if ((remaining & UINT64_C(1)) != 0 && compose(result, power, result, n) != 0) return -1;
-        if (remaining > 1 && compose(power, power, power, n) != 0) return -1;
+    if (count < UINT64_C(256)) {
+        /* Retain the low-overhead loop for short exponents. */
+        for (uint64_t remaining = count; remaining != 0; remaining >>= 1) {
+            if ((remaining & UINT64_C(1)) != 0 && compose(result, power, result, n) != 0) return -1;
+            if (remaining > 1 && compose(power, power, power, n) != 0) return -1;
+        }
+    } else {
+        uint64_t square_storage[64];
+        uint64_t *current = power, *square = square_storage;
+        for (uint64_t remaining = count; remaining != 0; remaining >>= 1) {
+            const int consumed = (remaining & UINT64_C(1)) != 0;
+            if (consumed && compose(result, current, result, n) != 0) return -1;
+            if (remaining == 1) break;
+            if (compose(current, current, square, n) != 0) return -1;
+            /* Exact idempotence, not hash agreement: P*P == P implies P^k == P
+             * for every positive k. Remaining higher bits need at most one P.
+             * If this bit consumed P already, a further P changes nothing. */
+            if (memcmp(current, square, n * sizeof(uint64_t)) == 0) {
+                if (!consumed && compose(result, current, result, n) != 0) return -1;
+                break;
+            }
+            uint64_t *swap = current; current = square; square = swap;
+        }
     }
     memcpy(out, result, n * sizeof(uint64_t));
     return 0;

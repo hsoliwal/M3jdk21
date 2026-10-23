@@ -1,0 +1,238 @@
+[
+  {
+    "stage": "before-lint-compile",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/classes",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/before",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3RequiredExcludedMaskSelectorContract.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3RequiredExcludedMaskSelectorNativeContract.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3SignalDimensions.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3SignalOrder.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3SignalOrderNative.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/M3RequiredExcludedLegacyProbe.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/M3RequiredExcludedLongProbe.java"
+    ],
+    "exit": 0,
+    "log": "00-before-lint-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "stage": "before-M3RequiredExcludedMaskSelectorContract",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/before:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/classes",
+      "com.m3.collections.M3RequiredExcludedMaskSelectorContract"
+    ],
+    "exit": 0,
+    "log": "01-before-M3RequiredExcludedMaskSelectorContract.log",
+    "sha256": "2b170f79eebbefb9a3e39900718d704697e003fdb6712e03f1524242d350abbc"
+  },
+  {
+    "stage": "before-M3RequiredExcludedMaskSelectorNativeContract",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/before:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/classes",
+      "com.m3.collections.M3RequiredExcludedMaskSelectorNativeContract"
+    ],
+    "exit": 0,
+    "log": "02-before-M3RequiredExcludedMaskSelectorNativeContract.log",
+    "sha256": "c1a67ac51dee0798af3359903f125ca0bdf6b71f5e1f73ef666ff06dbb0147e0"
+  },
+  {
+    "stage": "before-M3RequiredExcludedLongProbe",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/before:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/classes",
+      "com.m3.collections.M3RequiredExcludedLongProbe"
+    ],
+    "exit": 0,
+    "log": "03-before-M3RequiredExcludedLongProbe.log",
+    "sha256": "698caf168a976d5437af05e99309cdf04139e06384cec18d5f0facaeebf2b1ba"
+  },
+  {
+    "stage": "before-capability-current",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/before:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/classes",
+      "com.m3.collections.M3RequiredExcludedLegacyProbe",
+      "current"
+    ],
+    "exit": 0,
+    "log": "04-before-capability-current.log",
+    "sha256": "eeccc24dcee9bbe5abe5792dc46151c4522b958a9e484fb7487ee37b6d238e54"
+  },
+  {
+    "stage": "before-capability-legacy",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/legacy-native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/before:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/classes",
+      "com.m3.collections.M3RequiredExcludedLegacyProbe",
+      "legacy"
+    ],
+    "exit": 0,
+    "log": "05-before-capability-legacy.log",
+    "sha256": "86840ee781a8a1aea08f470d5c7ccd770885cf1f824c35ade061421ace4dd5fa"
+  },
+  {
+    "stage": "before-capability-missing",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/empty",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/before:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/before/classes",
+      "com.m3.collections.M3RequiredExcludedLegacyProbe",
+      "missing"
+    ],
+    "exit": 0,
+    "log": "06-before-capability-missing.log",
+    "sha256": "9ebcef7f41610c08ebb10165092b8424471981fe9f22f513e77fc68725976561"
+  },
+  {
+    "stage": "test-lint-compile",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/classes",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/test",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3RequiredExcludedMaskSelectorContract.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3RequiredExcludedMaskSelectorNativeContract.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3SignalDimensions.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3SignalOrder.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/fixtures/M3SignalOrderNative.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/M3RequiredExcludedLegacyProbe.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/reconciliation-20261021/M3RequiredExcludedLongProbe.java"
+    ],
+    "exit": 0,
+    "log": "07-test-lint-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "stage": "test-M3RequiredExcludedMaskSelectorContract",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/test:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/classes",
+      "com.m3.collections.M3RequiredExcludedMaskSelectorContract"
+    ],
+    "exit": 0,
+    "log": "08-test-M3RequiredExcludedMaskSelectorContract.log",
+    "sha256": "2b170f79eebbefb9a3e39900718d704697e003fdb6712e03f1524242d350abbc"
+  },
+  {
+    "stage": "test-M3RequiredExcludedMaskSelectorNativeContract",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/test:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/classes",
+      "com.m3.collections.M3RequiredExcludedMaskSelectorNativeContract"
+    ],
+    "exit": 0,
+    "log": "09-test-M3RequiredExcludedMaskSelectorNativeContract.log",
+    "sha256": "c1a67ac51dee0798af3359903f125ca0bdf6b71f5e1f73ef666ff06dbb0147e0"
+  },
+  {
+    "stage": "test-M3RequiredExcludedLongProbe",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/test:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/classes",
+      "com.m3.collections.M3RequiredExcludedLongProbe"
+    ],
+    "exit": 0,
+    "log": "10-test-M3RequiredExcludedLongProbe.log",
+    "sha256": "698caf168a976d5437af05e99309cdf04139e06384cec18d5f0facaeebf2b1ba"
+  },
+  {
+    "stage": "test-capability-current",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/test:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/classes",
+      "com.m3.collections.M3RequiredExcludedLegacyProbe",
+      "current"
+    ],
+    "exit": 0,
+    "log": "11-test-capability-current.log",
+    "sha256": "eeccc24dcee9bbe5abe5792dc46151c4522b958a9e484fb7487ee37b6d238e54"
+  },
+  {
+    "stage": "test-capability-legacy",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/legacy-native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/test:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/classes",
+      "com.m3.collections.M3RequiredExcludedLegacyProbe",
+      "legacy"
+    ],
+    "exit": 0,
+    "log": "12-test-capability-legacy.log",
+    "sha256": "86840ee781a8a1aea08f470d5c7ccd770885cf1f824c35ade061421ace4dd5fa"
+  },
+  {
+    "stage": "test-capability-missing",
+    "argv": [
+      "java",
+      "-Xmx64m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/empty",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/current-proof-v3-notices/test:/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v2/test/classes",
+      "com.m3.collections.M3RequiredExcludedLegacyProbe",
+      "missing"
+    ],
+    "exit": 0,
+    "log": "13-test-capability-missing.log",
+    "sha256": "9ebcef7f41610c08ebb10165092b8424471981fe9f22f513e77fc68725976561"
+  }
+]

@@ -1,0 +1,35 @@
+jep	release	title	classification	default_java21	dependency	owner_lane	evidence_url	note
+423	22	Region Pinning for G1	COMPATIBLE_RUNTIME	CANDIDATE		RUNTIME	https://openjdk.org/jeps/423	Implementation/runtime candidate; prove transparent Java21 source/classfile behavior and GC regressions.
+454	22	Foreign Function & Memory API	OPT_IN_SE_API_EXTENSION	NO		API	https://openjdk.org/jeps/454	Final SE API differs from the Java21 preview surface; never masquerade as stock Java21 API.
+456	22	Unnamed Variables & Patterns	REJECT_LANGUAGE_SPEC	NO		LANGUAGE	https://openjdk.org/jeps/456	Changes Java language grammar/semantics.
+457	22	Class-File API (Preview)	OPT_IN_SE_API_EXTENSION	NO		API	https://openjdk.org/jeps/457	New preview SE API; keep outside default Java21 API identity.
+458	22	Launch Multi-File Source-Code Programs	COMPATIBLE_TOOLING	OPT_IN		LAUNCHER	https://openjdk.org/jeps/458	Launcher/tool behavior candidate; retain Java21 source/classfile target and prove current-master equivalence.
+459	22	String Templates (Second Preview)	REJECT_LANGUAGE_SPEC	NO		LANGUAGE	https://openjdk.org/jeps/459	Preview language syntax; not a default Java21 feature.
+460	22	Vector API (Seventh Incubator)	OPT_IN_JDK_API_EXTENSION	NO		INCUBATOR	https://openjdk.org/jeps/460	Incubator API evolution must be explicitly namespaced/versioned.
+461	22	Stream Gatherers (Preview)	OPT_IN_SE_API_EXTENSION	NO		API	https://openjdk.org/jeps/461	Preview java.util.stream API extension.
+462	22	Structured Concurrency (Second Preview)	OPT_IN_JDK_API_EXTENSION	NO		API	https://openjdk.org/jeps/462	Preview JDK API evolution; do not replace Java21 preview contract.
+463	22	Implicitly Declared Classes and Instance Main Methods (Second Preview)	REJECT_LANGUAGE_SPEC	NO		LANGUAGE	https://openjdk.org/jeps/463	Preview language/launcher source semantics.
+464	22	Scoped Values (Second Preview)	OPT_IN_JDK_API_EXTENSION	NO		API	https://openjdk.org/jeps/464	Preview JDK API evolution; default Java21 contract stays sealed.
+455	23	Primitive Types in Patterns instanceof and switch (Preview)	REJECT_LANGUAGE_SPEC	NO		LANGUAGE	https://openjdk.org/jeps/455	Preview language semantics.
+466	23	Class-File API (Second Preview)	OPT_IN_SE_API_EXTENSION	NO	457	API	https://openjdk.org/jeps/466	Preview SE API evolution.
+467	23	Markdown Documentation Comments	OPT_IN_SOURCE_TOOLING	NO		JAVADOC	https://openjdk.org/jeps/467	Compiler/javadoc recognizes /// documentation syntax; tooling lane only, not stock Java21 identity.
+469	23	Vector API (Eighth Incubator)	OPT_IN_JDK_API_EXTENSION	NO	460	INCUBATOR	https://openjdk.org/jeps/469	Incubator API evolution.
+471	23	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	COMPATIBLE_TOOLING	OPT_IN		RUNTIME_DIAGNOSTIC	https://openjdk.org/jeps/471	Warning/deprecation behavior candidate; preserve Java21 execution compatibility by default.
+474	23	ZGC Generational Mode by Default	COMPATIBLE_RUNTIME	OPT_IN		GC	https://openjdk.org/jeps/474	Runtime implementation candidate; default switch requires explicit operational approval.
+476	23	Module Import Declarations (Preview)	REJECT_LANGUAGE_SPEC	NO		LANGUAGE	https://openjdk.org/jeps/476	Preview Java grammar/JLS change.
+477	23	Implicitly Declared Classes and Instance Main Methods (Third Preview)	REJECT_LANGUAGE_SPEC	NO	463	LANGUAGE	https://openjdk.org/jeps/477	Preview language evolution.
+480	23	Structured Concurrency (Third Preview)	OPT_IN_JDK_API_EXTENSION	NO	462	API	https://openjdk.org/jeps/480	Preview API evolution.
+481	23	Scoped Values (Third Preview)	OPT_IN_JDK_API_EXTENSION	NO	464	API	https://openjdk.org/jeps/481	Preview API evolution.
+482	23	Flexible Constructor Bodies (Second Preview)	REJECT_LANGUAGE_SPEC	NO		LANGUAGE	https://openjdk.org/jeps/482	Preview constructor-language semantics.
+404	24	Generational Shenandoah (Experimental)	COMPATIBLE_RUNTIME	CANDIDATE		GC	https://openjdk.org/jeps/404	Base generational Shenandoah runtime candidate; dependency-gated and requires GC/platform parity before any Java21 admission.
+483	24	Ahead-of-Time Class Loading & Linking	COMPATIBLE_RUNTIME	CANDIDATE		AOT	https://openjdk.org/jeps/483	Runtime/CDS candidate; dependency-gated and transparent Java21 classfile/source proof required.
+484	24	Class-File API	OPT_IN_SE_API_EXTENSION	NO	466	API	https://openjdk.org/jeps/484	Final java.lang.classfile SE API is post-21 public API.
+485	24	Stream Gatherers	OPT_IN_SE_API_EXTENSION	NO	461	API	https://openjdk.org/jeps/485	Final java.util.stream API extension; explicit LIBRARY_API/M3 extension only.
+493	24	Linking Run-Time Images without JMODs	COMPATIBLE_TOOLING	OPT_IN		JLINK	https://openjdk.org/jeps/493	jlink/build tooling candidate; preserve stock Java21 image semantics unless explicitly selected.
+494	24	Module Import Declarations (Second Preview)	REJECT_LANGUAGE_SPEC	NO	476	LANGUAGE	https://openjdk.org/jeps/494	Preview language grammar/JLS change.
+499	24	Structured Concurrency (Fourth Preview)	OPT_IN_JDK_API_EXTENSION	NO	480	API	https://openjdk.org/jeps/499	Preview JDK API evolution.
+511	25	Module Import Declarations	REJECT_LANGUAGE_SPEC	NO	494	LANGUAGE	https://openjdk.org/jeps/511	Final language/JLS feature; cannot be default Java21.
+514	25	Ahead-of-Time Command-Line Ergonomics	COMPATIBLE_TOOLING	CANDIDATE	483	AOT	https://openjdk.org/jeps/514	Tool/runtime candidate dependent on AOT loading/linking substrate.
+515	25	Ahead-of-Time Method Profiling	COMPATIBLE_RUNTIME	CANDIDATE	483	AOT	https://openjdk.org/jeps/515	Runtime candidate; requires AOT dependency closure and Java21 behavior proof.
+516	26	Ahead-of-Time Object Caching with Any GC	COMPATIBLE_RUNTIME	CANDIDATE	483,514,515	AOT	https://openjdk.org/jeps/516	Runtime candidate only after prior Leyden dependency closure and GC parity proof.
+521	25	Generational Shenandoah	COMPATIBLE_RUNTIME	OPT_IN		GC	https://openjdk.org/jeps/521	Makes the existing generational Shenandoah mode non-experimental; candidate only with GC/runtime parity and explicit operational approval.

@@ -12,6 +12,7 @@ on:
       - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
+      - 'test/langtools/tools/javac/m3/M3ASTProjectionStateTest.java'
       - '.github/workflows/m3-parser-jmod-20261018.yml'
   workflow_dispatch:
 

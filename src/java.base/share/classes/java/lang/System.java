@@ -2537,6 +2537,30 @@ public final class System {
                 return String.m3JoinedStringsEnabled();
             }
 
+            public java.util.function.IntUnaryOperator stringCodeUnitCursor(String text) {
+                M3String source = text.m3();
+                return source == null ? null : new M3String.CodeUnitCursor(source);
+            }
+
+            public java.util.function.LongPredicate stringM3TrigramFacts(String text) {
+                if (text == null) return null;
+                M3String source = text.m3();
+                return source == null
+                        ? null : M3StringPrecomputeBridge.trigramFactsIfPrepared(source);
+            }
+
+            public JavaLangAccess.M3StringTokenSnapshot m3StringAsciiTokens(
+                    String value, int maxSequence, int maxVocabulary,
+                    int maxTokenLength, int maxPackedBytes) {
+                String checked = Objects.requireNonNull(value, "value");
+                M3String storage = checked.m3();
+                if (storage == null) return null;
+                M3String.TokenSnapshot snapshot = storage.asciiTokenSnapshot(
+                        maxSequence, maxVocabulary, maxTokenLength, maxPackedBytes);
+                return snapshot == null ? null : new JavaLangAccess.M3StringTokenSnapshot(
+                        snapshot.packedAscii, snapshot.offsets, snapshot.lengths, snapshot.sequence);
+            }
+
             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
             public long stringConcatCoder(char value) {
                 return StringConcatHelper.coder(value);

@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: Public JDK naming contract
+on:
+  pull_request:
+    branches: [master]
+permissions:
+  contents: read
+jobs:
+  public-names:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Test naming refusal and unchanged historic owners
+        run: python3 -m unittest discover -s m3/compatibility -p test_public_names.py -v
+      - name: Check exact PR changes against public JDK naming rules
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: python3 m3/compatibility/check_public_names.py --base "$BASE" --head "$HEAD"
