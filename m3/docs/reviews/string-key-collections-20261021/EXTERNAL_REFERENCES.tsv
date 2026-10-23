@@ -1,0 +1,8 @@
+id	source	url	use
+J1	Java SE 21 String	https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html	Content equality; hash; UTF-16 comparison contracts
+J2	Java SE 21 IdentityHashMap	https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/IdentityHashMap.html	Reference identity exclusion
+J3	Java SE 21 WeakHashMap	https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/WeakHashMap.html	Weak reachability obligations
+J4	Java SE 21 TreeMap	https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html	Comparator and backed range contracts
+J5	Java SE 21 Stream	https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html	Stable distinct and stream semantics
+J6	Java SE 21 JNI functions	https://docs.oracle.com/en/java/javase/21/docs/specs/jni/functions.html	Native access and release lifetimes
+D1	Apache Lucene 9.9.1 BytesRefHash	https://lucene.apache.org/core/9_9_1/core/org/apache/lucene/util/BytesRefHash.html	Candidate pattern: byte-to-ID hash; non-admitting find; pool-offset reuse

@@ -1,0 +1,8 @@
+item	status	detail
+targeted_source_review	EXECUTED	Five named source owners inspected; some targeted ranges only
+family_matrix	PROPOSED	15 evaluation rows; not a complete source/caller census
+production_modifications	NONE	No repository source changed
+recipe_application	NOT_RUN	Evaluation only
+compile_tests_runtime	NOT_RUN	No new executable candidate
+benchmark	NOT_RUN	Benefits remain workload-dependent hypotheses
+publication_merge	NOT_RUN	Local analysis packet only

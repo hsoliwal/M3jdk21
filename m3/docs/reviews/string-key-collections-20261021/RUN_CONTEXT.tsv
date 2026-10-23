@@ -1,0 +1,11 @@
+field	value
+date	2026-10-21
+mode	READ_ONLY_EVALUATION
+repository	hsoliwal/M3jdk21
+revision	a4415af418a9b0f21a06cd5801d238577fbb6eb7
+question	Evaluate all collection leverage points including String keys and M3String underlying storage
+public_api	LOCKED
+external_behavior	LOCKED
+local_output	/mnt/data/M3_STRING_KEY_COLLECTION_EVALUATION_20261021
+retrieval	Connected GitHub succeeded; direct container network request failed DNS
+scope_limit	Targeted source inspection plus proposed coverage matrix, not exhaustive audit
