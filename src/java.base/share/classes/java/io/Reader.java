@@ -458,4 +458,64 @@ public abstract class Reader implements Readable, Closeable {
         return transferred;
     }
 
+
+    /**
+     * Reads one bounded character chunk with caller-owned progress and
+     * cooperative cancellation. A blocked read remains subject to the
+     * delegate's own interruption/close contract.
+     *
+     * @param chars destination array
+     * @param offset first destination position
+     * @param length maximum characters
+     * @param monitor borrowed monitor
+     * @return count, or -1 at end of input
+     * @throws IOException on delegate failure
+     * @throws java.util.concurrent.CancellationException if cancelled
+     */
+    public int readMonitored(char[] chars, int offset, int length,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        Objects.requireNonNull(monitor, "monitor");
+        Objects.checkFromIndexSize(offset, length, chars.length);
+        monitor.checkCancelled();
+        int count = read(chars, offset, Math.min(length, TRANSFER_BUFFER_SIZE));
+        if (length > 0 && count == 0) throw new IOException("No progress from Reader.read");
+        if (count > 0) monitor.worked(count);
+        monitor.checkCancelled();
+        return count;
+    }
+
+    /**
+     * Transfers UTF-16 code units without splitting an individual delegate
+     * write. Work is credited only after a full write completes; no delegate
+     * or borrowed monitor is closed by this method.
+     *
+     * @param output destination writer
+     * @param monitor borrowed monitor
+     * @return characters successfully written, saturated at Long.MAX_VALUE
+     * @throws IOException on delegate failure
+     * @throws java.util.concurrent.CancellationException if cancelled
+     */
+    public long transferToMonitored(Writer output,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        Objects.requireNonNull(output, "output");
+        Objects.requireNonNull(monitor, "monitor");
+        char[] buffer = new char[TRANSFER_BUFFER_SIZE];
+        long transferred = 0L;
+        while (true) {
+            monitor.checkCancelled();
+            int count = read(buffer, 0, buffer.length);
+            if (count < 0) break;
+            if (count == 0) throw new IOException("No progress from Reader.read");
+            if (count > 0) {
+                monitor.checkCancelled();
+                output.write(buffer, 0, count);
+                monitor.worked(count);
+                transferred = count > Long.MAX_VALUE - transferred
+                        ? Long.MAX_VALUE : transferred + count;
+            }
+        }
+        monitor.checkCancelled();
+        return transferred;
+    }
+
 }
