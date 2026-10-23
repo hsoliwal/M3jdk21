@@ -17,10 +17,11 @@ test_blob=$(git hash-object "$test")
 }
 build=$(mktemp -d)
 trap 'rm -rf -- "$build"' EXIT
-mkdir -p "$build/java.base" "$build/tests"
+mkdir -p "$build/source/jdk/internal/mindex" "$build/java.base" "$build/tests"
+cp -- "$src" "$build/source/jdk/internal/mindex/M3CollectionMaskCompactor.java"
 javac -Xlint:all -Werror \
-  --patch-module java.base=src/java.base/share/classes \
-  -d "$build/java.base" "$src"
+  --patch-module java.base="$build/source" \
+  -d "$build/java.base" "$build/source/jdk/internal/mindex/M3CollectionMaskCompactor.java"
 javac -Xlint:all -Werror \
   --patch-module java.base="$build/java.base" \
   --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
