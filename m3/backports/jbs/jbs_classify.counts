@@ -1,14 +1,11 @@
-candidate-adapted-serviceability	1017
-hold-jit	979
-hold-gc-matrix	976
-candidate-adapted	894
-already-in-jdk21u	733
-admitted-additive-tooling	184
-candidate-adapted-security	128
-candidate-high-risk	121
-hold-javac	119
-reject-client-libs	77
-candidate-collections-lane	41
-reject-language	13
-admitted-docs	12
-candidate-measured	5
+Traceback (most recent call last):
+  File "S:\m3-scratch\jdk21\backports\jbs_classify.py", line 44, in <module>
+    c[r["provisional_disposition"]] += 1; w.writerow(r)
+                                          ^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\x92' in position 152: character maps to <undefined>

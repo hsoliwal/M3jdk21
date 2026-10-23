@@ -17,6 +17,8 @@ RULES = [
     (r"^tools/javac|^tools/javadoc|^specification", "hold-javac"),
     (r"^core-libs/java\.lang\.foreign|^core-libs/java\.lang\.invoke|^core-libs/java\.lang:class_loading|^core-libs/java\.lang:reflect", "candidate-high-risk"),
     (r"^core-libs/java\.util:collections|^core-libs/java\.util\.stream|^core-libs/java\.util\.concurrent", "candidate-collections-lane"),
+    (r"^hotspot/jfr|^hotspot/", "hold-runtime"),            # reading pass 2026-10-23: every other HotSpot component is runtime-coupled
+    (r"^tools/jpackage|^tools/jshell|^tools/jdeps", "admitted-additive-tooling"),
     (r"^core-libs/java\.lang|^core-libs/java\.util|^core-libs/java\.text|^core-libs/java\.time|^core-libs/java\.io|^core-libs/java\.nio|^core-libs/java\.net|^core-libs/xml|^xml", "candidate-adapted"),
     (r"^security-libs", "candidate-adapted-security"),
     (r"^client-libs", "reject-client-libs"),
@@ -34,7 +36,7 @@ def provisional(component, sub, summary):
         if re.search(rx, key): return d
     return "candidate-adapted"
 out = sys.stdout
-fields = list(rows[0].keys()) + ["provisional_disposition"]
+fields = [k for k in rows[0].keys() if k != "provisional_disposition"] + ["provisional_disposition"]   # re-runs read their own output
 w = csv.DictWriter(out, fieldnames=fields, delimiter="\t", lineterminator="\n", quoting=csv.QUOTE_NONE, quotechar=None, escapechar=None)
 w.writeheader(); c = collections.Counter()
 for r in rows:
