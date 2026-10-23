@@ -1,0 +1,69 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 original filtered navigable comparator exception
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredNavigableComparator*.java'
+      - 'm3/collections/qualification/filtered-nav-comparator-20261023/**'
+      - '.github/workflows/m3-filtered-nav-comparator-20261023.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-owning-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Require exact canonical source-sealed results
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' \
+            d66050dff02b90c296a20466f17a8108b6abfd65037ad0d5d34b57a0dcf06ffc \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java \
+            f30b8a9da4288009d5bcd3c09a66712bf50c5d09d9838764cbf3c7944eda0f1f \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableComparatorContract.java \
+            72f40f9ff6c297f33e7c175aec267ceb430d817f6a8b91631594930032674251 \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableComparatorTest.java \
+            | sha256sum -c -
+      - name: Build source-vendored Jupiter and Launcher
+        shell: bash
+        run: |
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 \
+            -am -DskipTests install
+      - name: Build original array substrate
+        run: mvn -B -ntp -f m3/arrays/pom.xml -Dmaven.test.skip=true install
+      - name: Run actual M3 filtered navigable and existing randomized Java21 contracts
+        run: |
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3FilteredNavigableComparatorTest,M3FilteredViewsTest \
+            -DfailIfNoTests=true test
+      - name: Require non-skipped contract reports
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          reports = Path('m3/collections/target/surefire-reports')
+          for name in ('M3FilteredNavigableComparatorTest', 'M3FilteredViewsTest'):
+              files = list(reports.glob('TEST-*' + name + '.xml'))
+              if len(files) != 1: raise SystemExit('missing JUnit report: ' + name)
+              root = ET.parse(files[0]).getroot()
+              if int(root.attrib.get('tests','0')) < 1: raise SystemExit('empty suite '+name)
+              if any(int(root.attrib.get(k,'0')) for k in ('errors','failures','skipped')):
+                  raise SystemExit('test failed or skipped: '+name)
+          print('M3_NAVIGABLE_COMPARATOR_SOURCE_PASS')
+          PY

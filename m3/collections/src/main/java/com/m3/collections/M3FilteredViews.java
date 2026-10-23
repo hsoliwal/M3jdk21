@@ -572,11 +572,21 @@ public final class M3FilteredViews {
                 range = owner.rangeOrNull(query, forward, inclusive);
                 if (range == null) return boundedFallback(query, forward, inclusive);
             } else {
-                try {
-                    range = forward ? nav.tailMap(query, inclusive) : nav.headMap(query, inclusive);
-                } catch (IllegalArgumentException outOfRange) {
-                    return boundedFallback(query, forward, inclusive);
+                // A navigation query is legal outside a bounded JDK map. Calling
+                // the owner's near-entry primitive also preserves user comparator
+                // exceptions; catching every IllegalArgumentException from a
+                // headMap/tailMap construction would silently swallow those.
+                Entry<K, V> nearest = forward
+                        ? (inclusive ? nav.ceilingEntry(query) : nav.higherEntry(query))
+                        : (inclusive ? nav.floorEntry(query) : nav.lowerEntry(query));
+                if (nearest == null) return null;
+                if (predicate.test(nearest.getKey(), nearest.getValue())) {
+                    return new SimpleImmutableEntry<>(nearest);
                 }
+                // The stored representative is already inside the bounded view.
+                // Skip it and scan the remaining range in encounter order.
+                range = forward ? nav.tailMap(nearest.getKey(), false)
+                        : nav.headMap(nearest.getKey(), false);
             }
             Iterator<Entry<K, V>> cursor = forward ? range.entrySet().iterator()
                     : range.descendingMap().entrySet().iterator();
