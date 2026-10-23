@@ -276,7 +276,8 @@
             "dependency-reuse",
             "pending",
             "excluded",
-            "tombstone"
+            "tombstone",
+            "internal-relocation-proposal"
           ]
         },
         "status": {
@@ -286,7 +287,8 @@
             "pending",
             "blocked",
             "excluded",
-            "tombstone"
+            "tombstone",
+            "proposed"
           ]
         },
         "reason": {
@@ -553,7 +555,8 @@
               "enum": [
                 "source-to-target",
                 "target-to-source-proposal",
-                "traceability-only"
+                "traceability-only",
+                "same-repository internal name review"
               ]
             },
             "target_adaptations": {
@@ -624,7 +627,8 @@
             "partial",
             "blocked",
             "absent",
-            "uninspected"
+            "uninspected",
+            "implemented-proving-module-unpromoted"
           ]
         },
         "observation": {
@@ -651,7 +655,92 @@
         "sync",
         "lineage"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "m3.collections.evicting-queue.owner-naming"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "internal-relocation-proposal"
+              },
+              "status": {
+                "const": "proposed"
+              },
+              "sync": {
+                "properties": {
+                  "direction": {
+                    "const": "same-repository internal name review"
+                  }
+                }
+              },
+              "source_state": {
+                "const": "implemented-proving-module-unpromoted"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "direct-port",
+                  "rename",
+                  "adapter",
+                  "consolidation",
+                  "specialization",
+                  "dependency-reuse",
+                  "pending",
+                  "excluded",
+                  "tombstone"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "implemented-tested",
+                  "implemented-unverified",
+                  "pending",
+                  "blocked",
+                  "excluded",
+                  "tombstone"
+                ]
+              },
+              "sync": {
+                "properties": {
+                  "direction": {
+                    "enum": [
+                      "source-to-target",
+                      "target-to-source-proposal",
+                      "traceability-only"
+                    ]
+                  }
+                }
+              },
+              "source_state": {
+                "enum": [
+                  "implemented",
+                  "experimental",
+                  "proposed",
+                  "duplicate",
+                  "superseded",
+                  "partial",
+                  "blocked",
+                  "absent",
+                  "uninspected"
+                ]
+              }
+            }
+          }
+        }
+      ]
     },
     "receipt": {
       "type": "object",
