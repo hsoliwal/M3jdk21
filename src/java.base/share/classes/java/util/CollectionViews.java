@@ -448,6 +448,13 @@ public final class CollectionViews {
         }
 
         @Override
+        public Spliterator<E> spliterator() {
+            // Set identity guarantees DISTINCT even when an owner's cursor omits it.
+            return new SelectionSpliterator<>(backing.spliterator(), predicate,
+                    Spliterator.DISTINCT, null);
+        }
+
+        @Override
         public boolean equals(Object other) {
             if (other == this) {
                 return true;
@@ -514,6 +521,15 @@ public final class CollectionViews {
         @Override
         public Comparator<? super E> comparator() {
             return sorted.comparator();
+        }
+
+        @Override
+        public Spliterator<E> spliterator() {
+            // A SortedSet's own contract guarantees ordering regardless of how
+            // its storage Spliterator chooses to advertise metadata.
+            return new SelectionSpliterator<>(sorted.spliterator(), super.predicate,
+                    Spliterator.DISTINCT | Spliterator.ORDERED | Spliterator.SORTED,
+                    sorted.comparator());
         }
 
         @Override
@@ -675,12 +691,21 @@ public final class CollectionViews {
     private static final class SelectionSpliterator<E> implements Spliterator<E>, Consumer<E> {
         private final Spliterator<E> source;
         private final Predicate<? super E> predicate;
+        private final int guaranteed;
+        private final Comparator<? super E> ownerComparator;
         private Consumer<? super E> action;
         private boolean delivered;
 
         private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate) {
+            this(source, predicate, 0, null);
+        }
+
+        private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate,
+                int guaranteed, Comparator<? super E> ownerComparator) {
             this.source = source;
             this.predicate = predicate;
+            this.guaranteed = guaranteed;
+            this.ownerComparator = ownerComparator;
         }
 
         @Override
@@ -721,7 +746,8 @@ public final class CollectionViews {
         @Override
         public Spliterator<E> trySplit() {
             Spliterator<E> prefix = source.trySplit();
-            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate);
+            return prefix == null ? null
+                    : new SelectionSpliterator<>(prefix, predicate, guaranteed, ownerComparator);
         }
 
         @Override
@@ -731,12 +757,13 @@ public final class CollectionViews {
 
         @Override
         public int characteristics() {
-            return source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE);
+            return (source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE))
+                    | guaranteed;
         }
 
         @Override
         public Comparator<? super E> getComparator() {
-            return source.getComparator();
+            return (guaranteed & SORTED) != 0 ? ownerComparator : source.getComparator();
         }
     }
 

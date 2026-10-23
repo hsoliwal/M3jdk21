@@ -1,0 +1,23 @@
+{
+  "schema": "m3jdk21.collectionviews.serial-receiver.v2",
+  "source_owner": "hsoliwal/M3jdk21",
+  "source_preimage_commit": "29d78c3564cd6888cde69bcaa97f8762c274bf05",
+  "canonical_synexia_commit": "c8a70cbb3ae85de5b783e22186edfa603fc1e491",
+  "recipe_id": "com.synexia.m3.CollectionViewsSortedMetadata20261023",
+  "preimage_sha256": "d0713f7a8c949a6b11c89fbe637f1ccebb53d45f164a7c69029c517f5eb3eb2f",
+  "postimage_sha256": "4fc81eda7a7b1831f36abc20fca52f9ba898fa7a767f2c1b62f8eab872ec056f",
+  "test_sha256": "e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad",
+  "jni_symbols_added": 0,
+  "phase1_recipe": "com.synexia.m3.CollectionViewsOnePassCowSuperset20261023",
+  "phase1_postimage_sha256": "d0713f7a8c949a6b11c89fbe637f1ccebb53d45f164a7c69029c517f5eb3eb2f",
+  "verification": {
+    "source_seal": "PASS",
+    "git_blob_parity": "PENDING_READBACK",
+    "sdk_execution": "NOT_RUN",
+    "target_build": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "jni": "NOT_RUN",
+    "all_five_families": "NOT_RUN"
+  },
+  "admission": "HOLD_UNQUALIFIED"
+}
