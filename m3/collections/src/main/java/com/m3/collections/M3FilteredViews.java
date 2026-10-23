@@ -3,6 +3,7 @@
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: recognize interior-null candidates in readonly set navigation.
  */
 package com.m3.collections;
 
