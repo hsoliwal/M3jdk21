@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors. -->
+<!--
+  ALTERNATE_JUNIT verification only. Compile the ACTUAL M3JDK21 source owners.
+  Not equivalent to the original collections reactor's forked JUnit dependency
+  junit-jupiter:5.10.2-m3-source-1, whose resolution is separately BLOCKED.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.qualification</groupId>
+  <artifactId>m3-typed-domain-progressive-evidence</artifactId>
+  <version>2026.10.22</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.11.4</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+          <includes>
+            <include>com/m3/collections/M3SignalColumns.java</include>
+            <include>com/m3/collections/M3SignalTopK.java</include>
+            <include>com/m3/collections/M3SignalRelations.java</include>
+            <include>com/m3/collections/M3SourceSignalImage.java</include>
+            <include>com/m3/collections/M3ProgressiveSignalEvidence.java</include>
+            <include>com/m3/collections/M3SignalDomainPolicy.java</include>
+          </includes>
+          <testIncludes>
+            <testInclude>com/m3/collections/M3SignalColumnsSelfTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SignalColumnsTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SignalTopKSelfTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SignalTopKTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SourceSignalImageSelfTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SourceSignalImageTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SignalDomainPolicySelfTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SignalDomainPolicyTest.java</testInclude>
+          </testIncludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <failIfNoTests>true</failIfNoTests>
+          <includes>
+            <include>**/M3SignalColumnsTest.java</include>
+            <include>**/M3SignalTopKTest.java</include>
+            <include>**/M3SourceSignalImageTest.java</include>
+            <include>**/M3SignalDomainPolicyTest.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
