@@ -35,8 +35,12 @@ jobs:
           python3 -m unittest discover \
             -s m3/collections/qualification/arraylist-dual-word-20261023 \
             -p 'test_verify_receiver.py' -v
-      - name: Compile and install real M3 array substrate
-        run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Build, native-check and install actual M3 array/JNI substrate
+        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
+      - name: Expose proven M3 array JNI to all subsequent JVM test processes
+        run: |
+          test -s "$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so"
+          echo "JAVA_TOOL_OPTIONS=-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" >> "$GITHUB_ENV"
       - name: Compile and test actual M3 collections module
         run: mvn -B -ntp -f m3/collections/pom.xml test
       - name: Run full Java21 M3ArrayList differential contract
