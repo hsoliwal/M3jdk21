@@ -35,8 +35,8 @@ class SourceReceiverContractTests(unittest.TestCase):
 
     def test_all_actual_postimages_and_jni_are_pinned(self):
         state = receiver.verify(receiver.REPO_ROOT)
-        self.assertEqual(state["source_postimages"], 4)
-        self.assertEqual(state["catalogue_categories"], 10)
+        self.assertEqual(state["source_postimages"], 6)
+        self.assertEqual(state["catalogue_categories"], 11)
         self.assertEqual(state["unchanged_native_sources"], 2)
 
     def test_detached_exact_receiving_copy_is_fixed_point(self):
@@ -52,6 +52,35 @@ class SourceReceiverContractTests(unittest.TestCase):
             source = root / "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java"
             source.write_bytes(source.read_bytes() + b"// drift\n")
             with self.assertRaisesRegex(ValueError, "Git source postimage drift"):
+                receiver.verify(root)
+
+    def test_tree_window_owner_mutation_is_refused(self):
+        with tempfile.TemporaryDirectory() as home:
+            root = Path(home)
+            self.copy_fixture(root)
+            source = root / "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java"
+            source.write_bytes(source.read_bytes() + b"// unintended tree change\n")
+            with self.assertRaisesRegex(ValueError, "Git source postimage drift"):
+                receiver.verify(root)
+
+    def test_missing_tree_regression_test_is_refused(self):
+        with tempfile.TemporaryDirectory() as home:
+            root = Path(home)
+            self.copy_fixture(root)
+            (root / "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java").unlink()
+            with self.assertRaisesRegex(ValueError, "missing/out-of-root"):
+                receiver.verify(root)
+
+    def test_unknown_tree_contract_role_is_refused(self):
+        with tempfile.TemporaryDirectory() as home:
+            root = Path(home)
+            self.copy_fixture(root)
+            path = root / receiver.RECEIPT
+            receipt = json.loads(path.read_text(encoding="utf-8"))
+            tree = next(row for row in receipt["files"] if row["path"].endswith("/M3TreeWindowPlan.java"))
+            tree["role"] = "unqualified"
+            path.write_text(json.dumps(receipt) + "\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "duplicate/unexpected"):
                 receiver.verify(root)
 
     def test_unreviewed_jni_change_is_refused(self):
