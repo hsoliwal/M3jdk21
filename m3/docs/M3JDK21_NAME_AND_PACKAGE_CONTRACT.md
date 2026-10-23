@@ -245,3 +245,29 @@ through JSON Schema 2020-12 conditional `if/then/else`; every other
 migration record remains restricted to the original enum vocabularies.
 This is a mapping-contract repair, not evidence that the queue was
 source-sealed, renamed, installed or performance-qualified.
+
+## Receiver input interpretation and path custody
+
+Both target-only, **read-only** tools in `m3/tooling/name-contract/`—
+`check.py` (queue admission) and `audit.py` (mapped target census)—reject
+duplicate JSON keys in the canonical mapping or plan, including nested keys.
+The parser never uses a last-key-wins interpretation of a pinned authority.
+
+Every mapped filename is a canonical forward-slash relative path. Empty,
+dot/dot-dot, NUL, backslash, drive-qualified and absolute aliases are refused.
+No source file or intermediate path component may be a symlink, even when the
+symlink resolves inside the checkout. The target does not copy Synexia's
+OpenRewrite recipes or create another naming authority.
+
+`test_input_safety.py` keeps seven positive/refusal fixtures for these
+constraints. The existing target naming workflow checks out only the mapped
+owner/module sources needed by its tests; full JDK runtime and ABI gates
+remain separate from these Python receipt checks.
+
+The Synexia recipe's Java 21 AST postimage verifier also now rejects leaked
+M3 structures in implicitly public interface fields, methods and nested
+types; public record components; exposed annotations; renamed types from
+internal JDK/SDK packages; and mismatched declared JDK module names.
+Private implementation members remain internal. Passing these checks is
+**not** a substitute for method-descriptor, reflection/serialization,
+JNI/native or source-built jtreg qualification.
