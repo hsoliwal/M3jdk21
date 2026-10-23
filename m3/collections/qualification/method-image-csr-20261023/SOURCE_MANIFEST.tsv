@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical Synexia recipe m3-method-image-csr-20261023
+# Source owner: original javac M3MethodSignals M/C v1; no original-owner modification
+# path	before_sha256	after_sha256	git_blob	canonical_resource
+m3/collections/src/main/java/com/m3/collections/M3MethodSignalImage.java	ABSENT	5a39cc5e6366227fe2c82bf84cccb7d354bf1a4fc67d299787d2ded420f403d7	d6be957ccdedb7f53b3a56084f25570fce587770	00-M3MethodSignalImage.java.txt
+m3/collections/src/test/java/com/m3/collections/M3MethodSignalImageSelfTest.java	ABSENT	e07194d38960b1d5191fc57d4b8d322595a4872e7bd8000a8363a295472ebc40	fc3607457652e1a3d61f6c4119100b4c09fa6345	01-M3MethodSignalImageSelfTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3MethodSignalImageTest.java	ABSENT	acce57d17549dd9f3fdc33d0263f6f0b9081f22f5d4012aaccabded74e51c7d3	a9af5a83c548026a5cba0661504d42022ba5dff2	02-M3MethodSignalImageTest.java.txt
