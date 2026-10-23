@@ -227,3 +227,21 @@ remains explicitly **unverified**; none of these hashes prove semantic
 equivalence or performance. Source-backed migration must use Synexia-owned
 OpenRewrite recipes with deterministic fixed-point, compiler, runtime and
 refusal evidence before the canonical JDK class receives any implementation.
+
+
+## Historical evicting-queue map vocabulary correction
+
+The existing `m3.collections.evicting-queue.owner-naming` mapping (not a new
+migration record) carries four deliberate historical state literals:
+`kind=internal-relocation-proposal`, `status=proposed`,
+`sync.direction=same-repository internal name review`, and
+`source_state=implemented-proving-module-unpromoted`.
+The earlier schema enums did not admit these existing values, making the
+canonical map fail JSON Schema checks **before** the legacy-export additions.
+
+The schema correction preserves that record and all other map data unchanged.
+It admits the four historical literals **only** for that exact stable ID
+through JSON Schema 2020-12 conditional `if/then/else`; every other
+migration record remains restricted to the original enum vocabularies.
+This is a mapping-contract repair, not evidence that the queue was
+source-sealed, renamed, installed or performance-qualified.
