@@ -296,21 +296,15 @@ public final class CollectionViews {
 
         @Override
         public boolean isEmpty() {
-            for (E element : backing) {
-                if (visible(element)) return false;
-            }
-            return true;
+            return !iterator().hasNext();
         }
 
         @Override
         @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
-            // Owner admission is authoritative; non-List/Set collections may use
-            // reference identity or reject a domain that equals() would accept.
+            // Preserve the owner's membership semantics (including identity sets)
+            // before evaluating the predicate on its actual stored occurrences.
             if (!backing.contains(candidate)) return false;
-            if (!(backing instanceof List<?>) && !(backing instanceof Set<?>)) {
-                return predicate.test((E) candidate);
-            }
             if (backing instanceof Set<?>) {
                 E equivalent = null;
                 boolean found = false;
@@ -340,23 +334,19 @@ public final class CollectionViews {
         @Override
         public boolean addAll(Collection<? extends E> elements) {
             Objects.requireNonNull(elements, "elements");
-            for (E element : elements) {
+            // Hand the owner only the references admitted by this traversal.
+            // Reuse the existing snapshot atom; never read the caller twice.
+            return backing.addAll(selectedCopy(elements, element -> {
                 if (!visible(element)) {
                     throw new IllegalArgumentException("element rejected by view predicate");
                 }
-            }
-            return backing.addAll(elements);
+                return true;
+            }));
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
             if (!backing.contains(candidate)) return false;
-            // Arbitrary Collection.remove may be identity-, domain- or
-            // owner-specific; an equals-based iterator removal is not equivalent.
-            if (!(backing instanceof List<?>) && !(backing instanceof Set<?>)) {
-                return predicate.test((E) candidate) && backing.remove(candidate);
-            }
             if (backing instanceof List<?>) {
                 // Remove the visible physical occurrence, not an earlier hidden
                 // equals-duplicate. Indexed removal also supports COW lists.
@@ -449,12 +439,6 @@ public final class CollectionViews {
         }
 
         @Override
-        public Spliterator<E> spliterator() {
-            return new SelectionSpliterator<>(backing.spliterator(), predicate,
-                    Spliterator.DISTINCT, null);
-        }
-
-        @Override
         public boolean equals(Object other) {
             if (other == this) {
                 return true;
@@ -521,14 +505,6 @@ public final class CollectionViews {
         @Override
         public Comparator<? super E> comparator() {
             return sorted.comparator();
-        }
-
-        /** Owner order is authoritative, including bounded and descending views. */
-        @Override
-        public Spliterator<E> spliterator() {
-            return new SelectionSpliterator<>(sorted.spliterator(), super.predicate,
-                    Spliterator.DISTINCT | Spliterator.SORTED | Spliterator.ORDERED,
-                    sorted.comparator());
         }
 
         @Override
@@ -690,28 +666,17 @@ public final class CollectionViews {
     private static final class SelectionSpliterator<E> implements Spliterator<E>, Consumer<E> {
         private final Spliterator<E> source;
         private final Predicate<? super E> predicate;
-        private final int guaranteed;
-        private final Comparator<? super E> ownerComparator;
         private Consumer<? super E> action;
         private boolean delivered;
 
         private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate) {
-            this(source, predicate, 0, null);
-        }
-
-        private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate,
-                int guaranteed, Comparator<? super E> ownerComparator) {
             this.source = source;
             this.predicate = predicate;
-            this.guaranteed = guaranteed;
-            this.ownerComparator = ownerComparator;
         }
 
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
-            Consumer<? super E> enclosingAction = action;
-            boolean enclosingDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -720,8 +685,7 @@ public final class CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = enclosingAction;
-                delivered = enclosingDelivered;
+                action = null;
             }
         }
 
@@ -745,7 +709,7 @@ public final class CollectionViews {
         @Override
         public Spliterator<E> trySplit() {
             Spliterator<E> prefix = source.trySplit();
-            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate, guaranteed, ownerComparator);
+            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate);
         }
 
         @Override
@@ -755,12 +719,12 @@ public final class CollectionViews {
 
         @Override
         public int characteristics() {
-            return (source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE)) | guaranteed;
+            return source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE);
         }
 
         @Override
         public Comparator<? super E> getComparator() {
-            return (guaranteed & SORTED) != 0 ? ownerComparator : source.getComparator();
+            return source.getComparator();
         }
     }
 
