@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors. -->
+<!--
+  Isolated OPTIONAL Java21/JUnit verification against ACTUAL M3JDK21 product sources.
+  This is NOT the original collections reactor's customized junit-jupiter artifact.
+  The original forked test dependency remains untouched and separately BLOCKED.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.qualification</groupId>
+  <artifactId>m3-typed-signal-topk-portable-junit</artifactId>
+  <version>2026.10.22</version>
+  <packaging>jar</packaging>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.11.4</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <!-- Compile only the real product owners, never a hand-maintained test copy. -->
+    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+          <includes>
+            <include>com/m3/collections/M3SignalColumns.java</include>
+            <include>com/m3/collections/M3SignalTopK.java</include>
+          </includes>
+          <testIncludes>
+            <testInclude>com/m3/collections/M3SignalColumnsSelfTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SignalColumnsTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SignalTopKSelfTest.java</testInclude>
+            <testInclude>com/m3/collections/M3SignalTopKTest.java</testInclude>
+          </testIncludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <failIfNoTests>true</failIfNoTests>
+          <includes>
+            <include>**/M3SignalColumnsTest.java</include>
+            <include>**/M3SignalTopKTest.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
