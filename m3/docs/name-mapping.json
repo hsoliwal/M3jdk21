@@ -8846,6 +8846,216 @@
         },
         "source_state": "implemented-proving-module-unpromoted",
         "observation": "The 20261018 source-bound finite proofs concern existing owner behavior and its own wire identity. Local Maven/CI and installed M3JDK runtime acceptance are outstanding; historical performance report says size-1024 owner was slower on all seven examined workloads."
+      },
+      {
+        "id": "m3jdk21.legacy-export.M3ArrayList",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "Existing public M3ArrayList is exported by com.m3.collections and has independent List, capacity, snapshot, iterator and serialized-form contracts. It is not java.util.ArrayList; the class must not be blindly renamed or hidden.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "85ac51d562af4e3efff73d46a724134fe189a842",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+            "symbol": "com.m3.collections.M3ArrayList",
+            "signatures": [],
+            "sha256": null,
+            "git_blob_sha1": "eaada4ef3f198e780dd2a792ec76dddabb8d3616",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "85ac51d562af4e3efff73d46a724134fe189a842",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+            "symbol": "com.m3.collections.M3ArrayList",
+            "signatures": [],
+            "sha256": null,
+            "git_blob_sha1": "eaada4ef3f198e780dd2a792ec76dddabb8d3616",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "owner": "com.m3.collections.M3ArrayList — exported standalone compatibility owner (not canonical JDK)",
+        "identity": {
+          "namespace": "Existing com.m3.collections.M3ArrayList binary/package/class identity must be preserved pending approved migration.",
+          "generation": "Existing serializer and classloader lifetime; no alternate canonical identity admitted."
+        },
+        "contract": {
+          "differences": [
+            "M3ArrayList extends AbstractList and has its own binary/serialization identity; it is not the concrete java.util.ArrayList type.",
+            "Storage and snapshot APIs and caller-dependent subclasses/reflection require independent compatibility analysis."
+          ],
+          "compatibility_obligations": [
+            "Preserve all public/protected constructors, methods, provider module exports, reflective and serialized identities until separate approval.",
+            "Inventory transitive source, binary, service, JNI and serialization consumers with exact before/after hashes.",
+            "Only a fully qualified backend may enter java.util.ArrayList under that class's existing JDK contract; no public M3 alias."
+          ],
+          "public_surface": [
+            "public com.m3.collections.M3ArrayList<E>",
+            "List<E> contract plus public capacity/snapshot and iterator methods; full descriptor census pending"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "com.m3.collections is a standalone exported module, not java.base."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Pending complete ABI and caller closure.",
+          "joins": "No proven JDK internal backend replacement.",
+          "outputs": "No postimage emitted; existing public type untouched.",
+          "cached_facts": "No validated canonical storage equivalence."
+        },
+        "recipe": {
+          "id": null,
+          "version": null,
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Complete exported public API, caller and serial form census.",
+            "Qualify source-built JDK ABI and behavior before considering JDK backend.",
+            "Use hash-pinned Synexia Maven/OpenRewrite recipe only after reviewed mapping and receipt gates."
+          ],
+          "rollback": "No mutation. Keep current public legacy type and export until a compatibility-approved source-sealed transaction."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0 first-party target module; preserve file attribution.",
+          "publication": "Source-sealed M3JDK21 convergence receipt; no code copied in this mapping record.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "85ac51d562af4e3efff73d46a724134fe189a842",
+          "target_revision": "85ac51d562af4e3efff73d46a724134fe189a842",
+          "direction": "traceability-only",
+          "target_adaptations": [],
+          "pending": [
+            "Complete external client ABI/reference/serialization inventory.",
+            "Prepare internal implementation and canonical JDK contract comparison.",
+            "Installed JDK jtreg/JNI/GC/performance qualification."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Public legacy SDK surface observed at pinned Git blob eaada4ef3f198e780dd2a792ec76dddabb8d3616; pending internalization; no ABI or runtime promotion asserted."
+      },
+      {
+        "id": "m3jdk21.legacy-export.M3File",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "Existing public M3File is exported by com.m3.file and owns Path-backed metadata, channel, stream and shadow-view operations. It is not a replacement for java.nio.file.Path or Files; external contracts remain locked until qualified migration.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "85ac51d562af4e3efff73d46a724134fe189a842",
+            "module": "com.m3.file",
+            "path": "m3/file/src/main/java/com/m3/file/M3File.java",
+            "symbol": "com.m3.file.M3File",
+            "signatures": [],
+            "sha256": null,
+            "git_blob_sha1": "b63b952442778e24eeee444e8d57de01fdceeb69",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "85ac51d562af4e3efff73d46a724134fe189a842",
+            "module": "com.m3.file",
+            "path": "m3/file/src/main/java/com/m3/file/M3File.java",
+            "symbol": "com.m3.file.M3File",
+            "signatures": [],
+            "sha256": null,
+            "git_blob_sha1": "b63b952442778e24eeee444e8d57de01fdceeb69",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "owner": "com.m3.file.M3File — exported standalone compatibility owner (not canonical JDK)",
+        "identity": {
+          "namespace": "Existing com.m3.file.M3File binary/package/class identity must be preserved pending approved migration.",
+          "generation": "Existing serializer and classloader lifetime; no alternate canonical identity admitted."
+        },
+        "contract": {
+          "differences": [
+            "M3File is a separate stateful Path view/operation boundary, not an implementation of java.nio.file.Path.",
+            "Shadow input streams, progress, metadata and delta operations require explicit contract classification and caller migration."
+          ],
+          "compatibility_obligations": [
+            "Preserve all public/protected constructors, methods, provider module exports, reflective and serialized identities until separate approval.",
+            "Inventory transitive source, binary, service, JNI and serialization consumers with exact before/after hashes.",
+            "Only a fully qualified backend may enter java.nio.file.Files under that class's existing JDK contract; no public M3 alias."
+          ],
+          "public_surface": [
+            "public com.m3.file.M3File",
+            "of(Path), path(), metadata(), openInputStream(), readAllBytes(int), shadow methods; full descriptor census pending"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "com.m3.file is a standalone exported module, not java.base."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Pending complete ABI and caller closure.",
+          "joins": "No proven JDK internal backend replacement.",
+          "outputs": "No postimage emitted; existing public type untouched.",
+          "cached_facts": "No validated canonical storage equivalence."
+        },
+        "recipe": {
+          "id": null,
+          "version": null,
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Complete exported public API, caller and serial form census.",
+            "Qualify source-built JDK ABI and behavior before considering JDK backend.",
+            "Use hash-pinned Synexia Maven/OpenRewrite recipe only after reviewed mapping and receipt gates."
+          ],
+          "rollback": "No mutation. Keep current public legacy type and export until a compatibility-approved source-sealed transaction."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0 first-party target module; preserve file attribution.",
+          "publication": "Source-sealed M3JDK21 convergence receipt; no code copied in this mapping record.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "85ac51d562af4e3efff73d46a724134fe189a842",
+          "target_revision": "85ac51d562af4e3efff73d46a724134fe189a842",
+          "direction": "traceability-only",
+          "target_adaptations": [],
+          "pending": [
+            "Complete external client ABI/reference/serialization inventory.",
+            "Prepare internal implementation and canonical JDK contract comparison.",
+            "Installed JDK jtreg/JNI/GC/performance qualification."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Public legacy SDK surface observed at pinned Git blob b63b952442778e24eeee444e8d57de01fdceeb69; pending internalization; no ABI or runtime promotion asserted."
       }
     ]
   },
