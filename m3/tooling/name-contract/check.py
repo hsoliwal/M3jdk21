@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 """Read-only M3JDK21 naming and package receiving gate.
 
@@ -35,16 +35,34 @@ def git_blob(data: bytes) -> str:
     return hashlib.sha1(header + data).hexdigest()
 
 
+def unique_keys(pairs: list[tuple[str, object]]) -> dict:
+    """All mapping/plan JSON objects must have one unambiguous value per key."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            refuse("duplicate JSON object key: " + key)
+        result[key] = value
+    return result
+
+
 def local_file(root: Path, relative: str) -> Path:
-    if not isinstance(relative, str) or not relative or "\\" in relative:
+    if (not isinstance(relative, str) or not relative or "\\" in relative
+            or "\x00" in relative or re.match(r"^[A-Za-z]:", relative)):
         refuse("invalid relative path")
+    components = relative.split("/")
     raw = Path(relative)
-    if raw.is_absolute() or any(part in (".", "..") for part in raw.parts):
+    if raw.is_absolute() or any(part in ("", ".", "..") for part in components):
+        refuse("noncanonical outside-root path")
+    base = root.resolve()
+    candidate = base
+    for part in components:
+        candidate = candidate / part
+        if candidate.is_symlink():
+            refuse("symlink target path forbidden: " + relative)
+    resolved = candidate.resolve()
+    if not resolved.is_relative_to(base):
         refuse("outside-root path")
-    path = (root / raw).resolve()
-    if not path.is_relative_to(root.resolve()):
-        refuse("outside-root path")
-    return path
+    return resolved
 
 
 def checked_fqn(value: str, field: str) -> None:
@@ -83,7 +101,8 @@ def validate(root: Path) -> tuple[int, list[str]]:
     agents = local_file(root, "AGENTS.md").read_text(encoding="utf-8")
     if DOC not in agents:
         refuse("AGENTS.md lacks naming contract link")
-    plan = json.loads(local_file(root, PLAN).read_text(encoding="utf-8"))
+    plan = json.loads(local_file(root, PLAN).read_text(encoding="utf-8"),
+                      object_pairs_hook=unique_keys)
     if plan.get("schema") != SCHEMA or plan.get("authority") != MAP:
         refuse("plan uses wrong schema or a competing map")
     blob = plan.get("authority_blob")
@@ -92,7 +111,8 @@ def validate(root: Path) -> tuple[int, list[str]]:
     original = local_file(root, MAP).read_bytes()
     if git_blob(original) != blob:
         refuse("canonical naming map drift: re-pin and review changes")
-    official = json.loads(original.decode("utf-8"))
+    official = json.loads(original.decode("utf-8"),
+                          object_pairs_hook=unique_keys)
     if official.get("schema") != 1:
         refuse("unexpected canonical naming map schema")
     records = official.get("migration", {}).get("records", [])
