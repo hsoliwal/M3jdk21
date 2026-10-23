@@ -105,6 +105,87 @@ def donor_references(source: str) -> set[str]:
     return set(DONOR_REFERENCE.findall(code_without_literals(source)))
 
 
+
+RECIPE_ROOTS = (
+    "synexia-openrewrite-recipes/",
+    "synexia-m3-recipe/",
+    "m3/tooling/migration-recipes/",
+)
+RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
+RECIPE_JAVA = re.compile(r"(?:^|/)(?:rewrite|recipes?)/[^/]*Recipe(?:Test)?\.java$")
+
+
+
+JDK_PRODUCT_SOURCE = re.compile(
+    r"^src/(?!m3[.])[^/]+/(?:share|unix|linux|windows|macosx|bsd)/classes/.+\.java$"
+)
+DONOR_REFERENCE = re.compile(
+    r"(?<![A-Za-z0-9_$.])(?:com\.synexia|com\.m3|com\.google\.common|"
+    r"org\.eclipse\.collections|org\.apache\.commons\.collections4|"
+    r"org\.springframework)(?:\.[A-Za-z_$][\w$]*)+"
+)
+
+
+def code_without_literals(source: str) -> str:
+    """Mask comments, Java strings, char literals and text blocks."""
+    output = []
+    state = "code"
+    position = 0
+    while position < len(source):
+        if state == "code":
+            for prefix, next_state in (("//", "line"), ("/*", "block"), ('"""', "text")):
+                if source.startswith(prefix, position):
+                    output.extend(" " * len(prefix))
+                    position += len(prefix)
+                    state = next_state
+                    break
+            else:
+                character = source[position]
+                if character in ('"', "'"):
+                    output.append(" ")
+                    position += 1
+                    state = "string" if character == '"' else "char"
+                else:
+                    output.append(character)
+                    position += 1
+            continue
+        if state == "line" and source[position] == "\n":
+            output.append("\n")
+            position += 1
+            state = "code"
+            continue
+        if state == "block" and source.startswith("*/", position):
+            output.extend("  ")
+            position += 2
+            state = "code"
+            continue
+        if state == "text" and source.startswith('"""', position):
+            output.extend("   ")
+            position += 3
+            state = "code"
+            continue
+        if state in ("string", "char"):
+            quote = '"' if state == "string" else "'"
+            if source[position] == "\\" and position + 1 < len(source):
+                output.extend("\n" if ch == "\n" else " "
+                              for ch in source[position:position + 2])
+                position += 2
+                continue
+            if source[position] == quote:
+                output.append(" ")
+                position += 1
+                state = "code"
+                continue
+        output.append("\n" if source[position] == "\n" else " ")
+        position += 1
+    return "".join(output)
+
+
+def donor_references(source: str) -> set[str]:
+    """Lexical preflight only; attributed Java/JNI closure remains mandatory."""
+    return set(DONOR_REFERENCE.findall(code_without_literals(source)))
+
+
 @dataclass(frozen=True)
 class Change:
     status: str

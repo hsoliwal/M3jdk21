@@ -127,6 +127,34 @@ class PublicNamesTest(unittest.TestCase):
             self.assertEqual(GATE.main(["--base", "HEAD", "--head", head, "--repo", str(root)]), 2)
 
 
+    def test_new_synexia_recipe_crate_refused(self):
+        self.assertTrue(self.issue("synexia-openrewrite-recipes/crates/catalogue/pom.xml"))
+
+    def test_historical_product_recipe_source_mutation_refused(self):
+        self.assertTrue(self.issue(
+            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/OldRecipe.java", status="M"))
+
+    def test_new_openrewrite_java_recipe_refused(self):
+        self.assertTrue(self.issue(
+            "m3/collections/src/main/java/com/m3/rewrite/OptimizeRecipe.java",
+            "class OptimizeRecipe {}"))
+
+    def test_new_openrewrite_yaml_descriptor_refused(self):
+        self.assertTrue(self.issue(
+            "m3/collections/src/main/resources/META-INF/rewrite/optimize.yml"))
+
+    def test_native_and_jdk_implementation_results_allowed(self):
+        self.assertFalse(self.issue(
+            "src/java.base/share/classes/jdk/internal/mindex/M3IndexLane.java",
+            "package jdk.internal.mindex; class M3IndexLane {}"))
+        self.assertFalse(self.issue("src/java.base/share/native/libjava/M3IndexLane.c"))
+
+    def test_product_test_and_qualification_results_allowed(self):
+        self.assertFalse(self.issue(
+            "test/jdk/java/util/CollectionViews/FilteredOwnerMembershipTest.java",
+            "class FilteredOwnerMembershipTest {}"))
+        self.assertFalse(self.issue("m3/compatibility/collection-views/README.md"))
+
     def test_new_donor_imports_in_jdk_owner_refused(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
         self.assertTrue(self.issue(
