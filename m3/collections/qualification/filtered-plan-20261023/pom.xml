@@ -39,7 +39,8 @@
             <testInclude>com/m3/collections/M3FilteredSortedIteratorPlanTest.java</testInclude>
           </testIncludes>
           <compilerArgs>
-            <arg>-Xlint:all</arg>
+            <!-- Align solely the module-name style suppression with the owning collections POM. -->
+            <arg>-Xlint:all,-module</arg>
             <arg>-Werror</arg>
           </compilerArgs>
         </configuration>
