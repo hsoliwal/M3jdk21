@@ -49,6 +49,46 @@ public final class M3LongRankBatchNative {
         return results;
     }
 
+    /**
+     * Flat primitive [lower, upper) index pairs, one pair per query, in encounter order.
+     * Both endpoints are insertion coordinates even when no value matches.
+     * A single JNI transition handles prepared batches; small batches stay in Java.
+     * No comparator or user callback is invoked by the native kernel.
+     */
+    static int[] equalRanges(long[] sorted, long[] queries) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(queries, "queries");
+        int[] ranges = new int[Math.multiplyExact(queries.length, 2)];
+        if (sorted.length == 0 || queries.length == 0) {
+            return ranges;
+        }
+        if (AVAILABLE && queries.length >= NATIVE_MIN_BATCH) {
+            equalRanges0(sorted, queries, ranges);
+            return ranges;
+        }
+        for (int index = 0; index < queries.length; index++) {
+            long value = queries[index];
+            int lo = 0;
+            int hi = sorted.length;
+            while (lo < hi) {
+                int middle = lo + ((hi - lo) >>> 1);
+                if (sorted[middle] < value) lo = middle + 1;
+                else hi = middle;
+            }
+            int first = lo;
+            hi = sorted.length;
+            while (lo < hi) {
+                int middle = lo + ((hi - lo) >>> 1);
+                if (sorted[middle] <= value) lo = middle + 1;
+                else hi = middle;
+            }
+            int pair = index << 1;
+            ranges[pair] = first;
+            ranges[pair + 1] = lo;
+        }
+        return ranges;
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -62,4 +102,6 @@ public final class M3LongRankBatchNative {
     }
 
     private static native void lowerBounds0(long[] sorted, long[] queries, int[] results);
+
+    private static native void equalRanges0(long[] sorted, long[] queries, int[] ranges);
 }

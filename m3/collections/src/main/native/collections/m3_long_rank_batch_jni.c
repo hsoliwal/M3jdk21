@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 #include <jni.h>
 #include <stddef.h>
+#include <limits.h>
 
 /*
  * One JNI transition per batch, signed jlong order matching Java Long.compare.
@@ -54,4 +55,66 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
     (*env)->ReleaseIntArrayElements(env, results, positions, 0);
     (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
     (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+}
+
+/*
+ * LeetCode 34 category, M3 contract: one sorted long[] plus a batch of
+ * queries yields interleaved [lower, upper) insertion coordinates. Unlike
+ * an inclusive "last occurrence" there is no target+1 overflow at LONG_MAX.
+ * Inputs remain read-only under JNI_ABORT and no callback crosses JNI.
+ */
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_equalRanges0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
+        jintArray ranges) {
+    (void) ignored;
+    if (sorted == NULL || queries == NULL || ranges == NULL) {
+        jclass error = (*env)->FindClass(env, "java/lang/NullPointerException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "null batch argument");
+        return;
+    }
+    jsize size = (*env)->GetArrayLength(env, sorted);
+    jsize count = (*env)->GetArrayLength(env, queries);
+    if (count > INT_MAX / 2 || (*env)->GetArrayLength(env, ranges) != count * 2) {
+        jclass error = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "range output length mismatch");
+        return;
+    }
+    if (count == 0) return;
+
+    const jlong *values = (*env)->GetLongArrayElements(env, sorted, NULL);
+    if (values == NULL) return;
+    const jlong *targets = (*env)->GetLongArrayElements(env, queries, NULL);
+    if (targets == NULL) {
+        (*env)->ReleaseLongArrayElements(env, sorted, (jlong *) values, JNI_ABORT);
+        return;
+    }
+    jint *result = (*env)->GetIntArrayElements(env, ranges, NULL);
+    if (result == NULL) {
+        (*env)->ReleaseLongArrayElements(env, queries, (jlong *) targets, JNI_ABORT);
+        (*env)->ReleaseLongArrayElements(env, sorted, (jlong *) values, JNI_ABORT);
+        return;
+    }
+    for (jsize i = 0; i < count; ++i) {
+        jlong needle = targets[i];
+        jsize lo = 0;
+        jsize hi = size;
+        while (lo < hi) {
+            jsize mid = lo + (hi - lo) / 2;
+            if (values[mid] < needle) lo = mid + 1;
+            else hi = mid;
+        }
+        jint first = (jint) lo;
+        hi = size;
+        while (lo < hi) {
+            jsize mid = lo + (hi - lo) / 2;
+            if (values[mid] <= needle) lo = mid + 1;
+            else hi = mid;
+        }
+        result[2 * i] = first;
+        result[2 * i + 1] = (jint) lo;
+    }
+    (*env)->ReleaseIntArrayElements(env, ranges, result, 0);
+    (*env)->ReleaseLongArrayElements(env, queries, (jlong *) targets, JNI_ABORT);
+    (*env)->ReleaseLongArrayElements(env, sorted, (jlong *) values, JNI_ABORT);
 }
