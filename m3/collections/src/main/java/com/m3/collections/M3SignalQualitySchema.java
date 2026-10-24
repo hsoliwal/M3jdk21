@@ -226,6 +226,12 @@ public final class M3SignalQualitySchema {
         }
     }
 
+    /** Original typed owner: package-private zero-copy index access. */
+    M3SignalColumns valueColumnsOwner() { return signals; }
+
+    /** Original invalidation owner shared by source-dependent indexes. */
+    M3SignalDependencyEpochs invalidationEpochsOwner() { return epochs; }
+
     private int column(int index) { return Objects.checkIndex(index, names.length); }
     private static boolean sha256(String digest) {
         return digest != null && digest.matches("[0-9a-f]{64}");
