@@ -59,9 +59,57 @@ public final class M3EvictingQueueCanonicalContractProbe {
                 "canonical stream unexpectedly contains legacy Java class name");
 
         long steps = runSeededQueueModel(legacy) + runSeededQueueModel(canonical);
+        verifyBoundedInitialStorage();
         System.out.println("M3_EVICTING_CANONICAL_NAME_PASS normalized_wire_sha256="
                 + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(normalized))
                 + " randomized_model_steps=" + steps);
+    }
+
+    /** Exercise bounded empty-capacity storage, physical ring growth, wrap and wire replay. */
+    private static void verifyBoundedInitialStorage() throws Exception {
+        final int limit = 1_000_000_000;
+        M3EvictingQueue<Integer> actual = M3EvictingQueue.create(limit);
+        var storage = M3EvictingQueue.class.getDeclaredField("elements");
+        storage.setAccessible(true);
+        require(((Object[]) storage.get(actual)).length == 16,
+                "large logical limit allocated a large backing array");
+        ArrayDeque<Integer> expected = new ArrayDeque<>();
+        for (int index = 0; index < 257; index++) {
+            actual.add(index);
+            expected.addLast(index);
+        }
+        for (int index = 0; index < 113; index++) {
+            require(actual.remove().equals(expected.removeFirst()), "poll after growth differed");
+        }
+        for (int index = 257; index < 521; index++) {
+            actual.add(index);
+            expected.addLast(index);
+        }
+        require(Arrays.equals(actual.toArray(), expected.toArray()),
+                "ring ordering after bounded growth and wrap differed");
+        require(actual.remainingCapacity() == limit - expected.size(),
+                "large logical limit was changed by physical growth");
+        @SuppressWarnings("unchecked")
+        Queue<Integer> recovered = (Queue<Integer>) deserialize(serialize(actual));
+        require(recovered.getClass() == M3EvictingQueue.class,
+                "bounded queue serialization changed binary identity");
+        require(Arrays.equals(recovered.toArray(), expected.toArray()),
+                "bounded queue serialized payload differed");
+        // The wire image uses count+1 slots, not the new 16-slot constructor.
+        // Force repeated growth after readObject() and verify FIFO preservation.
+        for (int index = 521; index < 2048; index++) {
+            recovered.add(index);
+            expected.addLast(index);
+        }
+        require(Arrays.equals(recovered.toArray(), expected.toArray()),
+                "serialized ring growth changed FIFO order");
+        while (!expected.isEmpty()) {
+            require(recovered.remove().equals(expected.removeFirst()),
+                    "serialized ring growth/drain differed");
+        }
+        require(recovered.isEmpty(), "serialized ring did not drain to empty");
+        System.out.println("M3_EVICTING_SERIALIZED_GROWTH_PASS");
+        System.out.println("M3_EVICTING_LAZY_INITIAL_STORAGE_PASS");
     }
 
     /**
@@ -70,7 +118,7 @@ public final class M3EvictingQueueCanonicalContractProbe {
      * Fixed seeds make a failure repeatable on Java 21 and across platforms.
      */
     private static long runSeededQueueModel(Class<?> owner) throws Exception {
-        int[] capacities = {0, 1, 2, 3, 7, 31};
+        int[] capacities = {0, 1, 2, 3, 7, 15, 16, 17, 31, 63, 64, 65};
         long[] seeds = {0x63716c2d6d3321L, 0x6c656761637921L, 0x7fffffffffffffffL};
         long steps = 0;
         for (int capacity : capacities) {

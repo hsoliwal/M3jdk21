@@ -64,7 +64,7 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
             throw new IllegalArgumentException("maxSize (" + maxSize + ") must >= 0");
         }
         this.maxSize = maxSize;
-        int slots = maxSize == Integer.MAX_VALUE ? maxSize : maxSize + 1;
+        int slots = maxSize >= 15 ? 16 : maxSize + 1;
         elements = new Object[slots];
         refreshState();
     }

@@ -35,15 +35,20 @@ jobs:
           old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java').read_bytes()
           new = Path('m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java').read_bytes()
           assert hashlib.sha256(old).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
-          assert hashlib.sha256(new).hexdigest() == '77ba9ea62487377c2cab36d147e38bbd5f4cfc9ca03dd68b4a614a851c168317'
+          assert hashlib.sha256(new).hexdigest() == 'be567e756470fbb96d1aeec7c5b21b4eacae77136ed3854bf965189bce07353f'
           normalized = new.replace(
               b'package com.m3.collections.queue;',
               b'package com.m3.collections.guava;')
           normalized = normalized.replace(
               b'* <p>This is the vendor-neutral M3 owner with its own serialization class identity.\n * The earlier package spelling remains a separate historical compatibility class.',
               b'* <p>This is a mapped M3 owner, with its own serialization class identity.\n * It is not a subtype of the final Guava concrete class.')
+          old_capacity = b'        int slots = maxSize == Integer.MAX_VALUE ? maxSize : maxSize + 1;'
+          new_capacity = b'        int slots = maxSize >= 15 ? 16 : maxSize + 1;'
+          assert old.count(old_capacity) == 1
+          assert new.count(new_capacity) == 1
+          normalized = normalized.replace(new_capacity, old_capacity)
           assert normalized == old
-          print('Sealed legacy and additive canonical implementation match exactly')
+          print('Sealed canonical implementation differs only by admitted private lazy-capacity atom')
           PY
       - name: Build both standalone M3JDK21 Java 21 queue modules
         run: |
@@ -54,7 +59,7 @@ jobs:
           OLD=m3/collections/implementations/guava-evicting-queue/target
           NEW=m3/collections/implementations/evicting-queue/target
           java -cp "$OLD/classes:$OLD/test-classes" com.m3.collections.guava.M3EvictingQueueContractProbe
-          java -cp "$OLD/classes:$NEW/classes:$NEW/test-classes" com.m3.collections.queue.M3EvictingQueueCanonicalContractProbe
+          java -Xmx64m -cp "$OLD/classes:$NEW/classes:$NEW/test-classes" com.m3.collections.queue.M3EvictingQueueCanonicalContractProbe
           javap -p -classpath "$NEW/classes" com.m3.collections.queue.M3EvictingQueue | python3 -c 'import sys; data=sys.stdin.read(); assert "public final class com.m3.collections.queue.M3EvictingQueue" in data and "private void copyRingInto(java.lang.Object[], int)" in data'
       - name: Enforce vendor-neutral canonical Maven binary and retained license manifests
         run: |
