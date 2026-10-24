@@ -11,6 +11,7 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReferenceArray;
+import jdk.internal.mindex.M3DotStarRelations;
 
 /**
  * Bounded Boolean full-match specialization behind String's unchanged Pattern fallback.
@@ -43,6 +44,8 @@ final class M3StringRegexDp {
     private static volatile SoftReference<Tables> caches;
     private static volatile boolean preparationSuspended;
     private static volatile boolean nativeUnavailable;
+    // Stateless access geometry only; optional allocation stays outside class initialization.
+    private static volatile M3DotStarRelations.Access<M3String> RELATION_ACCESS;
 
     private M3StringRegexDp() { }
 
@@ -59,7 +62,24 @@ final class M3StringRegexDp {
             if (plan == null || ((long) m + 1) * (plan.atoms.length + 1) > MAX_DP_CELLS) {
                 return UNKNOWN;
             }
-            if (plan.closure == null) return rolling(source, plan);
+            if (plan.closure == null) {
+                // Restore the bounded receiver for the existing ordered relation algebra.
+                // The current <=32-atom frontier and native kernels remain selected below.
+                if (m >= 256 && plan.atoms.length < Long.SIZE
+                        && source.owner() instanceof M3StringTuple) {
+                    int decision;
+                    try {
+                        decision = M3DotStarRelations.evaluate(source, relationAccess(),
+                                plan.atoms, plan.atoms.length, 128,
+                                Math.min(MAX_DP_CELLS, (long) m * (plan.atoms.length + 1)),
+                                null, null).decision();
+                    } finally {
+                        Reference.reachabilityFence(source);
+                    }
+                    if (decision != UNKNOWN) return decision;
+                }
+                return rolling(source, plan);
+            }
             long state = evaluate(source.owner(), source.start(), m,
                     plan, plan.closure[0], cache, 0);
             return state == UNKNOWN ? UNKNOWN
@@ -275,6 +295,42 @@ final class M3StringRegexDp {
                 + (MAX_BIT_ATOMS + 1L + 128L + 2L) * Long.BYTES + Integer.BYTES;
         return (PLAN_SLOTS + (long) EFFECT_SLOTS) * perPlan
                 + EFFECT_SLOTS * 3L * Long.BYTES;
+    }
+
+    /** Lazily publish stateless coordinates; never retain a String, owner, range or native handle. */
+    private static M3DotStarRelations.Access<M3String> relationAccess() {
+        M3DotStarRelations.Access<M3String> current = RELATION_ACCESS;
+        if (current != null) return current;
+        synchronized (M3StringRegexDp.class) {
+            current = RELATION_ACCESS;
+            if (current == null) {
+                current = new M3DotStarRelations.Access<>() {
+                    @Override public Object owner(M3String value) { return value.owner(); }
+                    @Override public long coordinate(M3String value) { return value.coordinate(); }
+                    @Override public int length(M3String value) { return value.length(); }
+                    @Override public int codeUnitAt(M3String value, int index) {
+                        return value.charAt(index);
+                    }
+                    @Override public M3String first(M3String value) {
+                        if (!(value.owner() instanceof M3StringTuple tuple)) return null;
+                        int start = value.start();
+                        int end = value.end();
+                        int split = tuple.left.length();
+                        return start >= split
+                                ? tuple.right.slice(start - split, end - split)
+                                : tuple.left.slice(start, Math.min(end, split));
+                    }
+                    @Override public M3String second(M3String value) {
+                        if (!(value.owner() instanceof M3StringTuple tuple)) return null;
+                        int split = tuple.left.length();
+                        return value.start() < split && value.end() > split
+                                ? tuple.right.slice(0, value.end() - split) : null;
+                    }
+                };
+                RELATION_ACCESS = current;
+            }
+        }
+        return current;
     }
 
     private static boolean isAsciiAlphanumeric(char value) {

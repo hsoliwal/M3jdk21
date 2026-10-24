@@ -46,12 +46,17 @@ public final class M3StringHierarchicalRegexTest {
             if (value.matches("a.*b") != expected) throw new AssertionError("seam/code-point fallback");
             checks++;
         }
-        String required = String.join("", "aa".repeat(2048), "b");
+        // Start with actual admitted storage so repeat creates the shared DAG being tested.
+        String required = String.join("", new String(new char[]{'a', 'a'}).repeat(2048), "b");
         if (backing.get(required) == null) throw new AssertionError("required M3 path not exercised");
         // Exercise the exact receiver Access adapter on a real shared M3String DAG, not a fixture.
         Class<?> dp = Class.forName("java.lang.M3StringRegexDp");
         Field access = dp.getDeclaredField("RELATION_ACCESS");
         access.setAccessible(true);
+        // Optional adapter allocation is lazy and independent of earlier random cohorts.
+        Method accessFactory = dp.getDeclaredMethod("relationAccess");
+        accessFactory.setAccessible(true);
+        accessFactory.invoke(null);
         Class<?> relations = Class.forName("jdk.internal.mindex.M3DotStarRelations");
         Method evaluate = relations.getMethod("evaluate", Object.class,
                 Class.forName("jdk.internal.mindex.M3DotStarRelations$Access"), int[].class,
