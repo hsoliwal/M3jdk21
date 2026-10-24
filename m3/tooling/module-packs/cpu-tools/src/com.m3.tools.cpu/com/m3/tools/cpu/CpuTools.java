@@ -7,6 +7,7 @@ import com.m3.tools.graph.paths.ShortestPaths;
 import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.frequency.TermFrequency;
+import com.m3.tools.text.index.Bm25Ranker;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
 import com.m3.tools.text.search.ExactSearch;
@@ -481,6 +482,94 @@ public final class CpuTools {
         return actual.sha256().equals(expected.sha256())
                 && actual.signature().simHash64() == expected.signature().simHash64()
                 && Arrays.equals(actual.signature().minHash64(), expected.signature().minHash64());
+    }
+
+    /** Source-bound ranking over the incumbent UTF-16 tokenizer and primitive inverted index. */
+    public static final class Ranking {
+        private final Bm25Ranker.Result ranked;
+        private final String sha256;
+
+        private Ranking(Bm25Ranker.Result ranked, String sha256) {
+            this.ranked = ranked;
+            this.sha256 = sha256;
+        }
+        public int size() { return ranked.size(); }
+        public int totalMatches() { return ranked.totalMatches(); }
+        public boolean complete() { return ranked.complete(); }
+        public Bm25Ranker.Hit hit(int ordinal) { return ranked.hit(ordinal); }
+        public List<Bm25Ranker.Hit> hits() { return ranked.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static final int MAX_RANK_SOURCE_UTF16 = 4 * 1024 * 1024;
+
+    public static Ranking rank(List<M3File> sources, List<String> query, int maxResults) {
+        return rank(sources, query, maxResults, null);
+    }
+
+    /**
+     * Admission binds every ordered M3File URI/raw-byte/UTF-16 identity, the
+     * exact query tokens, prepared corpus SHA, result cap and scored ordinals.
+     * BM25 scores are approximate relevance signals, never source equality.
+     */
+    public static Ranking rank(List<M3File> sources, List<String> query, int maxResults,
+                               ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(query, "query");
+        if (sources.size() > Bm25Ranker.MAX_DOCUMENTS) {
+            throw new IllegalArgumentException("rank source-count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        List<String> exactQuery = List.copyOf(query);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-bm25-ranked-sources-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<List<String>> documents = new ArrayList<>(snapshot.size());
+        int sourceUnits = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File source = snapshot.get(id);
+            sourceUnits = Math.addExact(sourceUnits, source.length());
+            if (sourceUnits > MAX_RANK_SOURCE_UTF16) {
+                throw new IllegalArgumentException("rank combined UTF-16 source budget");
+            }
+            hash.number(id).text(source.uri().toASCIIString()).text(source.rawSha256())
+                    .text(source.utf16Sha256()).number(source.byteLength()).number(source.length());
+            documents.add(WordTokenizer.words(source.text(), progress::checkCancelled));
+        }
+        Bm25Ranker.Prepared corpus = Bm25Ranker.prepare(
+                documents, Bm25Ranker.Parameters.defaults(), progress::checkCancelled);
+        Bm25Ranker.Result ranked = corpus.rank(exactQuery, maxResults, progress::checkCancelled);
+        hash.text(corpus.sha256()).number(maxResults).number(ranked.totalMatches())
+                .number(ranked.complete() ? 1 : 0).number(exactQuery.size());
+        for (String token : exactQuery) {
+            progress.checkCancelled();
+            hash.number(token.length());
+            for (int i = 0; i < token.length(); i++) {
+                if ((i & 4095) == 0) progress.checkCancelled();
+                hash.number(token.charAt(i));
+            }
+        }
+        hash.number(ranked.size());
+        for (int id = 0; id < ranked.size(); id++) {
+            progress.checkCancelled();
+            Bm25Ranker.Hit hit = ranked.hit(id);
+            hash.number(hit.documentId()).number(Double.doubleToLongBits(hit.score()));
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new Ranking(ranked, hash.finish());
+    }
+
+    /** Deterministic re-execution checks the source-bound receipt and exact output lanes. */
+    public static boolean verifyRank(List<M3File> sources, List<String> query, int maxResults,
+                                     Ranking expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        Ranking actual = rank(sources, query, maxResults, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.totalMatches() == expected.totalMatches()
+                && actual.hits().equals(expected.hits());
     }
 
     /**

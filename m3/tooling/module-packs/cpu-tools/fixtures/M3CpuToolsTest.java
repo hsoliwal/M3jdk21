@@ -205,6 +205,25 @@ public final class M3CpuToolsTest {
         mutableSignature[0] ^= 1L;
         check(!Arrays.equals(signal.signature().minHash64(), mutableSignature),
                 "signature primitive lanes are detached");
+        List<M3File> rankedSources = List.of(source, changed);
+        var ranking = CpuTools.rank(rankedSources, List.of("ababa"), 1);
+        check(ranking.size() == 1 && ranking.totalMatches() == 1 && ranking.complete()
+                && ranking.hit(0).documentId() == 0 && ranking.hit(0).score() > 0.0d,
+                "source-bound BM25 score and document ordinal");
+        check(ranking.sha256().matches("[0-9a-f]{64}"), "BM25 source receipt format");
+        check(CpuTools.verifyRank(rankedSources, List.of("ababa"), 1, ranking, null),
+                "BM25 exact rank and receipt replay");
+        check(!CpuTools.verifyRank(List.of(changed, source), List.of("ababa"), 1, ranking, null),
+                "BM25 receipt binds corpus order");
+        check(!CpuTools.verifyRank(List.of(M3File.load(copied), changed), List.of("ababa"), 1, ranking, null),
+                "BM25 receipt binds source URI even for byte-identical documents");
+        check(!CpuTools.verifyRank(rankedSources, List.of("ababa", "ababa"), 1, ranking, null),
+                "BM25 receipt binds exact query multiplicity despite set-like scoring");
+        var cappedRanking = CpuTools.rank(rankedSources, List.of("ababa"), 0);
+        check(cappedRanking.size() == 0 && cappedRanking.totalMatches() == 1 && !cappedRanking.complete(),
+                "BM25 zero-cap completeness proof");
+        expect(IllegalArgumentException.class, () -> CpuTools.rank(rankedSources, List.of("ababa"), -1));
+        expect(NullPointerException.class, () -> CpuTools.rank(Arrays.asList(source, null), List.of("a"), 1));
         expect(IllegalArgumentException.class, () -> CpuTools.multiLiteral(source, List.of(""), 2));
         expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", -1));
         expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", 1_000_001));
@@ -213,6 +232,7 @@ public final class M3CpuToolsTest {
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
         expect(CancellationException.class, () -> CpuTools.multiLiteral(source, patterns, 2, cancelled));
         expect(CancellationException.class, () -> CpuTools.signature(source, 16, cancelled));
+        expect(CancellationException.class, () -> CpuTools.rank(rankedSources, List.of("ababa"), 1, cancelled));
         cancelled.cancelled = false;
         cancelled.cancelAfterWork = true;
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));

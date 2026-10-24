@@ -9,6 +9,7 @@ import com.m3.tools.plan.priority.StablePriorityQueue;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.diff.TextDelta;
 import com.m3.tools.text.frequency.TermFrequency;
+import com.m3.tools.text.index.Bm25Ranker;
 import com.m3.tools.text.index.InvertedIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
@@ -44,7 +45,7 @@ public final class M3DonorToolsTest {
     private M3DonorToolsTest() { }
 
     public static void main(String[] args) throws Exception {
-        text(); multiSearchAndSignatures(); graphs(); postings(); numeric(); priority(); refusals();
+        text(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -382,9 +383,27 @@ public final class M3DonorToolsTest {
             for (String term : vocabulary) {
                 int[] wanted = expected.getOrDefault(term, new TreeSet<>()).stream().mapToInt(Integer::intValue).toArray();
                 check(Arrays.equals(index.documents(term), wanted), "posting list");
+                int[] wantedFrequency = Arrays.stream(wanted)
+                        .map(id -> Collections.frequency(documents.get(id), term)).toArray();
+                check(Arrays.equals(index.termFrequencies(term), wantedFrequency), "primitive posting frequency");
+                check(index.documentFrequency(term) == wanted.length, "document frequency");
+                Map<Integer, Integer> visited = new TreeMap<>();
+                index.forEachPosting(term, visited::put);
+                for (int at = 0; at < wanted.length; at++) {
+                    check(visited.get(wanted[at]) == wantedFrequency[at], "primitive posting visitor");
+                }
                 int[] returned = index.documents(term);
                 if (returned.length > 0) returned[0] = -1;
                 check(Arrays.equals(index.documents(term), wanted), "detached posting");
+                int[] frequencies = index.termFrequencies(term);
+                if (frequencies.length > 0) frequencies[0] = -1;
+                check(Arrays.equals(index.termFrequencies(term), wantedFrequency), "detached term frequency");
+            }
+            check(index.documentCount() == documents.size(), "document-count lane");
+            check(index.totalTokenCount() == documents.stream().mapToInt(List::size).sum(),
+                    "total token lane");
+            for (int id = 0; id < documents.size(); id++) {
+                check(index.documentLength(id) == documents.get(id).size(), "document-length lane");
             }
             for (List<String> document : documents) document.clear();
             check(index.terms().equals(expected.keySet()), "input containers detached");
@@ -396,6 +415,101 @@ public final class M3DonorToolsTest {
         rejects(UnsupportedOperationException.class, () -> TermFrequency.count(List.of("a")).clear());
         check(Arrays.stream(InvertedIndex.class.getDeclaredFields()).noneMatch(
                 field -> Map.class.isAssignableFrom(field.getType())), "no retained map entry structure");
+    }
+
+    /** Oracle uses independent per-document term scans, never the index or its posting lanes. */
+    private static List<Bm25Ranker.Hit> bruteBm25(List<? extends List<String>> documents,
+                                                  List<String> query, Bm25Ranker.Parameters parameters) {
+        int documentCount = documents.size();
+        int tokens = documents.stream().mapToInt(List::size).sum();
+        double average = documentCount == 0 ? 0.0d : tokens / (double) documentCount;
+        double[] scores = new double[documentCount];
+        for (String term : new TreeSet<>(query)) {
+            int df = 0;
+            for (List<String> document : documents) if (document.contains(term)) df++;
+            if (df == 0) continue;
+            double idf = StrictMath.log1p((documentCount - df + 0.5d) / (df + 0.5d));
+            for (int id = 0; id < documentCount; id++) {
+                int frequency = Collections.frequency(documents.get(id), term);
+                if (frequency == 0) continue;
+                double normalized = parameters.k1() * (1.0d - parameters.b()
+                        + parameters.b() * documents.get(id).size() / average);
+                scores[id] += idf * frequency * (parameters.k1() + 1.0d) / (frequency + normalized);
+            }
+        }
+        List<Bm25Ranker.Hit> ranked = new ArrayList<>();
+        for (int id = 0; id < scores.length; id++) {
+            if (scores[id] > 0.0d) ranked.add(new Bm25Ranker.Hit(id, scores[id]));
+        }
+        ranked.sort(Comparator.comparingDouble(Bm25Ranker.Hit::score).reversed()
+                .thenComparingInt(Bm25Ranker.Hit::documentId));
+        return ranked;
+    }
+
+    private static void ranking() throws Exception {
+        Bm25Ranker.Parameters defaults = Bm25Ranker.Parameters.defaults();
+        check(defaults.k1() == 1.2d && defaults.b() == 0.75d, "published BM25 parameters");
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(-0.1d, 0.75d));
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(Double.NaN, 0.75d));
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(1.2d, 1.01d));
+        rejects(NullPointerException.class, () -> Bm25Ranker.prepare(List.of(Arrays.asList("a", null))));
+        rejects(IllegalArgumentException.class, () -> Bm25Ranker.prepare(
+                Collections.nCopies(Bm25Ranker.MAX_DOCUMENTS + 1, List.of("a"))));
+        var empty = Bm25Ranker.prepare(List.of());
+        check(empty.rank(List.of("a"), 0).complete() && empty.rank(List.of("a"), 10).size() == 0,
+                "empty corpus");
+        var identical = Bm25Ranker.prepare(List.of(List.of("a"), List.of("a")));
+        check(identical.rank(List.of("a"), 2).hits().get(0).documentId() == 0
+                && identical.rank(List.of("a"), 2).hits().get(1).documentId() == 1,
+                "stable equal-score document ordinal");
+        rejects(IllegalArgumentException.class, () -> identical.rank(List.of("a"), -1));
+        rejects(NullPointerException.class, () -> identical.rank(Arrays.asList("a", null), 1));
+        rejects(IllegalStateException.class, () -> Bm25Ranker.prepare(
+                List.of(List.of("a")), defaults, () -> { throw new IllegalStateException("cancel prepare"); }));
+        rejects(IllegalStateException.class, () -> identical.rank(List.of("a"), 1,
+                () -> { throw new IllegalStateException("cancel scoring"); }));
+
+        String[] vocabulary = {"", "a", "b", "beta", "\ud83d\ude00", "\ud83d", "\u0301"};
+        for (int trial = 0; trial < 360; trial++) {
+            List<List<String>> documents = new ArrayList<>();
+            for (int id = 0, count = RANDOM.nextInt(12); id < count; id++) {
+                List<String> document = new ArrayList<>();
+                for (int token = 0, words = RANDOM.nextInt(35); token < words; token++) {
+                    document.add(vocabulary[RANDOM.nextInt(vocabulary.length)]);
+                }
+                documents.add(document);
+            }
+            List<String> query = new ArrayList<>();
+            for (int id = 0, count = RANDOM.nextInt(10); id < count; id++) {
+                query.add(vocabulary[RANDOM.nextInt(vocabulary.length)]);
+            }
+            Bm25Ranker.Parameters parameters = trial % 3 == 0
+                    ? new Bm25Ranker.Parameters(0.0d, 1.0d)
+                    : trial % 3 == 1 ? new Bm25Ranker.Parameters(2.5d, 0.0d) : defaults;
+            Bm25Ranker.Prepared prepared = Bm25Ranker.prepare(documents, parameters);
+            List<Bm25Ranker.Hit> oracle = bruteBm25(documents, query, parameters);
+            check(prepared.sha256().matches("[0-9a-f]{64}"), "exact corpus fingerprint");
+            check(prepared.sha256().equals(Bm25Ranker.prepare(documents, parameters).sha256()),
+                    "deterministic corpus fingerprint");
+            for (int cap : new int[]{0, 1, 3, 10, 100}) {
+                Bm25Ranker.Result ranked = prepared.rank(query, cap);
+                check(ranked.size() == Math.min(cap, oracle.size()), "BM25 bounded top-K size");
+                check(ranked.totalMatches() == oracle.size() && ranked.complete() == (oracle.size() <= cap),
+                        "BM25 exact completeness and total-matches count");
+                for (int id = 0; id < ranked.size(); id++) {
+                    Bm25Ranker.Hit actual = ranked.hit(id), wanted = oracle.get(id);
+                    check(actual.documentId() == wanted.documentId(), "BM25 independent ranking ordinal");
+                    check(Math.abs(actual.score() - wanted.score()) <= 1.0e-11d,
+                            "BM25 independent numeric oracle");
+                }
+            }
+            var stable = prepared.rank(query, 100);
+            Collections.reverse(query);
+            check(stable.hits().equals(prepared.rank(query, 100).hits()),
+                    "BM25 order-independent query set and summation");
+            for (List<String> document : documents) document.clear();
+            check(stable.hits().equals(prepared.rank(query, 100).hits()), "BM25 detached input lists");
+        }
     }
 
     private static void numeric() throws Exception {
