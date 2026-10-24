@@ -78,3 +78,25 @@ jobs:
           path: ${{ runner.temp }}/m3-index-sort-*.txt
           if-no-files-found: warn
           retention-days: 14
+
+  whole-module-java21:
+    needs: source-sealed-java21
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build original com.m3.arrays then com.m3.collections on module path
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          bash m3/collections/qualification/index-sort-adaptive/verify-module-java21.sh "$PWD"

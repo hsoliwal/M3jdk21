@@ -41,3 +41,13 @@ cases. These do not certify full owning module Maven/JUnit, JDK image/jtreg,
 JNI mask parity or runtime performance. Explicit prepared lane has no
 production caller in this bounded pass; therefore no production speedup is
 claimed. Keep draft/HOLD until remaining qualification runs.
+
+## Current-head modular compile and strict callback admission
+
+Canonical Synexia validation source: PR #13224 commit 2f14c1e734808b16ba01b96a3b5e2079bccf702c. The exact shell candidate (Git blob 950437ecd6f8e06e091650638056c64ec695e3e1) is received as qualification/index-sort-adaptive/verify-module-java21.sh; the exact CI result (Git blob f30cf09ce7dfbb667a7bd351f662e6ebce5422cd) is received into .github/workflows/m3-index-sort-adaptive-java21.yml. No recipe engine or Synexia runtime dependency is imported.
+
+The new whole-module-java21 job is dependent on the original source-sealed-java21 job, and independently compiles the real com.m3.arrays module from the existing src/main/java source, then the real com.m3.collections module with an explicit Java module path. It verifies that the collection descriptor still requires com.m3.arrays, compiles adaptive/strict contract classes through --patch-module, and executes both contracts in normal and -Xint VM modes. This tests module resolution without removing the existing requires directive.
+
+The existing historical full collection/JNI gate remains unchanged and FAILED on this source revision: its compiler omitted com.m3.arrays from the Java module path. Its historical source manifest, packaging and native parity checks are not bypassed or treated as passed. This additional module-source proof is not a source-built JDK image, JUnit/Maven reactor, JNI parity, native library, performance, or release-qualification replacement.
+
+Before publication, this script passed Bash syntax validation and the complete modular compile/execute sequence on a disposable two-module Java21 fixture. The full real M3JDK21 source execution on GitHub is a separate pending gate. This PR stays draft/HOLD.
