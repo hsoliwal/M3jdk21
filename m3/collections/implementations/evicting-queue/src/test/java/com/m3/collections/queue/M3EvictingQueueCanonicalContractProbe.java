@@ -62,6 +62,7 @@ public final class M3EvictingQueueCanonicalContractProbe {
         verifyBoundedInitialStorage();
         verifySelfReferenceRendering();
         verifyPhysicalGrowthCeiling();
+        verifyPhysicalGrowthArithmetic();
         System.out.println("M3_EVICTING_CANONICAL_NAME_PASS normalized_wire_sha256="
                 + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(normalized))
                 + " randomized_model_steps=" + steps);
@@ -124,6 +125,53 @@ public final class M3EvictingQueueCanonicalContractProbe {
             require(actual.isEmpty(), "bounded growth queue was not fully drained: limit=" + limit);
         }
         System.out.println("M3_EVICTING_PHYSICAL_GROWTH_CEILING_PASS");
+    }
+
+
+    /** Check the real private growth calculation, without allocating capacity-sized arrays. */
+    private static void verifyPhysicalGrowthArithmetic() throws Exception {
+        Method growth = M3EvictingQueue.class.getDeclaredMethod("expandedLength", int.class);
+        growth.setAccessible(true);
+        var storage = M3EvictingQueue.class.getDeclaredField("elements");
+        storage.setAccessible(true);
+        SplittableRandom random = new SplittableRandom(0x72696e675f333031L);
+        long expansions = 0;
+        for (int capacity = 0; capacity < 4096; capacity++) {
+            expansions += verifyGrowthSequence(growth, storage, capacity);
+        }
+        for (int sample = 0; sample < 16_384; sample++) {
+            expansions += verifyGrowthSequence(growth, storage, random.nextInt(Integer.MAX_VALUE));
+        }
+        int[] extremes = {Integer.MAX_VALUE, Integer.MAX_VALUE - 1,
+                Integer.MAX_VALUE - 8, Integer.MAX_VALUE - 9,
+                Integer.MAX_VALUE - 10, 1_000_000_000,
+                127, 128, 129, 15, 16, 17, 31, 63, 64, 65};
+        for (int capacity : extremes) {
+            expansions += verifyGrowthSequence(growth, storage, capacity);
+        }
+        require(expansions > 700_000L, "growth oracle did not exercise enough expansions");
+        System.out.println("M3_EVICTING_GROWTH_ARITHMETIC_PASS configurations=20496 expansions="
+                + expansions);
+    }
+
+    private static long verifyGrowthSequence(Method growth,
+            java.lang.reflect.Field storage, int limit) throws Exception {
+        M3EvictingQueue<Integer> owner = M3EvictingQueue.create(limit);
+        int physical = limit >= 15 ? 16 : limit + 1;
+        require(((Object[]) storage.get(owner)).length == physical,
+                "initial physical slots differed from constructor for limit=" + limit);
+        // A Java Object[] length is int: the mathematical MAX_VALUE+1 is not allocatable.
+        long feasible = Math.min((long) limit + 1, (long) Integer.MAX_VALUE);
+        int steps = 0;
+        while (physical < feasible) {
+            int next = (Integer) growth.invoke(owner, physical);
+            require(next > physical && next <= feasible,
+                    "invalid M3 ring expansion: limit=" + limit
+                            + " old=" + physical + " next=" + next);
+            physical = next;
+            require(++steps <= 100, "nonconvergent M3 ring growth for limit=" + limit);
+        }
+        return steps;
     }
 
     /** Exercise bounded empty-capacity storage, physical ring growth, wrap and wire replay. */
