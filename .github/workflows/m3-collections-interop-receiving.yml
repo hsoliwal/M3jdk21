@@ -60,6 +60,7 @@ jobs:
           test "$(git hash-object "$ENGINE")" = 05e02169c7429183107a99c60e1aad05b4d73b5f
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-tests.log
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261024 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-v2-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/compiler-three-test-successor-20261022 -p 'test_*.py' -v 2>&1 | tee proof/compiler-source-revision-tests.log
           python3 m3/collections/interop/qualification/compiler-three-test-successor-20261022/verify_compile_successor.py --product . --predecessor predecessor-product --historical-product historical-product | tee proof/admitted-postimages.tsv
       - name: Run all six actual recipe proofs before delivery
