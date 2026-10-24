@@ -187,11 +187,89 @@ public final class M3CpuToolsTest {
         check(CpuTools.verifyLiteral(source, "aba", 1, hits, null), "search re-execution receipt");
         check(!CpuTools.verifyLiteral(source, "aba", 2, hits, null), "cap is receipt-bound");
         check(!CpuTools.verifyLiteral(changed, "aba", 1, hits, null), "source is receipt-bound");
+        List<String> patterns = List.of("aba", "ba", "\ud83d\ude42");
+        var many = CpuTools.multiLiteral(source, patterns, 3);
+        check(many.size() == 3 && !many.complete(), "multi-literal capped prefix");
+        check(many.hits().get(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.Hit(0, 0, 3))
+                && many.hits().get(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.Hit(1, 1, 3)),
+                "multi-literal suffix and UTF-16 coordinates");
+        check(CpuTools.verifyMultiLiteral(source, patterns, 3, many, null), "multi-literal replay");
+        check(!CpuTools.verifyMultiLiteral(source, patterns, 4, many, null), "multi-literal cap binding");
+        check(!CpuTools.verifyMultiLiteral(changed, patterns, 3, many, null), "multi-literal file binding");
+        var grams = CpuTools.gramIndex(source, 2);
+        check(grams.sha256().matches("[0-9a-f]{64}") && grams.gramSize() == 2
+                && grams.windowCount() == source.length() - 1, "source-bound indexed gram receipt");
+        check(Arrays.equals(grams.positions("ab"), new int[]{0, 2})
+                && Arrays.equals(grams.positions("ba"), new int[]{1, 3})
+                && Arrays.equals(grams.positions("\ud83d\ude42"), new int[]{5})
+                && grams.frequency("ab") == 2, "physical UTF-16 gram coordinates");
+        check(grams.counts().equals(com.m3.tools.text.ngram.NGrams.count(source.text(), 2)),
+                "gram source oracle parity");
+        int[] mutableGrams = grams.positions("ab");
+        mutableGrams[0] = 999;
+        check(grams.positions("ab")[0] == 0, "gram primitive positions detached");
+        check(CpuTools.verifyGramIndex(source, 2, grams, null), "exact gram replay");
+        check(!CpuTools.verifyGramIndex(source, 3, grams, null), "gram size receipt binding");
+        check(!CpuTools.verifyGramIndex(changed, 2, grams, null), "gram file byte binding");
+        check(!CpuTools.verifyGramIndex(M3File.load(copied), 2, grams, null),
+                "gram file URI binding for identical bytes");
+        expect(IllegalArgumentException.class, () -> CpuTools.gramIndex(source, 0));
+        expect(IllegalArgumentException.class, () -> CpuTools.gramIndex(source, 65));
+        expect(NullPointerException.class, () -> CpuTools.gramIndex(null, 2));
+        var lexicon = CpuTools.affixIndex(source);
+        check(lexicon.sha256().matches("[0-9a-f]{64}")
+                && lexicon.lexiconSha256().matches("[0-9a-f]{64}"), "file-bound lexicon identity");
+        check(lexicon.tokenCount() == 1 && lexicon.distinctCount() == 1
+                && lexicon.wordAt(0).equals("ababa") && lexicon.contains("ababa"),
+                "reuse JDK word breaking without a second payload owner");
+        check(lexicon.countPrefix("aba") == 1 && lexicon.countSuffix("ba") == 1,
+                "file lexicon prefix/suffix queries");
+        check(lexicon.prefix("a", 0).totalMatches() == 1 && !lexicon.prefix("a", 0).complete(),
+                "file lexicon capped query");
+        check(CpuTools.verifyAffixIndex(source, lexicon, null), "exact lexicon replay");
+        check(!CpuTools.verifyAffixIndex(changed, lexicon, null), "lexicon file byte binding");
+        check(!CpuTools.verifyAffixIndex(M3File.load(copied), lexicon, null),
+                "lexicon file URI binding for identical bytes");
+        expect(NullPointerException.class, () -> CpuTools.affixIndex(null));
+        var signal = CpuTools.signature(source, 16);
+        check(signal.sha256().matches("[0-9a-f]{64}"), "signature receipt format");
+        check(CpuTools.verifySignature(source, 16, signal, null), "signature exact-lane replay");
+        check(!CpuTools.verifySignature(changed, 16, signal, null), "signature source binding");
+        check(!CpuTools.verifySignature(source, 15, signal, null), "signature lane binding");
+        long[] mutableSignature = signal.signature().minHash64();
+        mutableSignature[0] ^= 1L;
+        check(!Arrays.equals(signal.signature().minHash64(), mutableSignature),
+                "signature primitive lanes are detached");
+        List<M3File> rankedSources = List.of(source, changed);
+        var ranking = CpuTools.rank(rankedSources, List.of("ababa"), 1);
+        check(ranking.size() == 1 && ranking.totalMatches() == 1 && ranking.complete()
+                && ranking.hit(0).documentId() == 0 && ranking.hit(0).score() > 0.0d,
+                "source-bound BM25 score and document ordinal");
+        check(ranking.sha256().matches("[0-9a-f]{64}"), "BM25 source receipt format");
+        check(CpuTools.verifyRank(rankedSources, List.of("ababa"), 1, ranking, null),
+                "BM25 exact rank and receipt replay");
+        check(!CpuTools.verifyRank(List.of(changed, source), List.of("ababa"), 1, ranking, null),
+                "BM25 receipt binds corpus order");
+        check(!CpuTools.verifyRank(List.of(M3File.load(copied), changed), List.of("ababa"), 1, ranking, null),
+                "BM25 receipt binds source URI even for byte-identical documents");
+        check(!CpuTools.verifyRank(rankedSources, List.of("ababa", "ababa"), 1, ranking, null),
+                "BM25 receipt binds exact query multiplicity despite set-like scoring");
+        var cappedRanking = CpuTools.rank(rankedSources, List.of("ababa"), 0);
+        check(cappedRanking.size() == 0 && cappedRanking.totalMatches() == 1 && !cappedRanking.complete(),
+                "BM25 zero-cap completeness proof");
+        expect(IllegalArgumentException.class, () -> CpuTools.rank(rankedSources, List.of("ababa"), -1));
+        expect(NullPointerException.class, () -> CpuTools.rank(Arrays.asList(source, null), List.of("a"), 1));
+        expect(IllegalArgumentException.class, () -> CpuTools.multiLiteral(source, List.of(""), 2));
         expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", -1));
         expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", 1_000_001));
         CountMonitor cancelled = new CountMonitor();
         cancelled.cancelled = true;
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.multiLiteral(source, patterns, 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.signature(source, 16, cancelled));
+        expect(CancellationException.class, () -> CpuTools.gramIndex(source, 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.affixIndex(source, cancelled));
+        expect(CancellationException.class, () -> CpuTools.rank(rankedSources, List.of("ababa"), 1, cancelled));
         cancelled.cancelled = false;
         cancelled.cancelAfterWork = true;
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
@@ -246,6 +324,19 @@ public final class M3CpuToolsTest {
         check(run.equals(invoke("--run", "text.sort,text.uniq", text.toString())), "CLI source receipt repeat");
         var find = invoke("--find", "b", text.toString(), "1");
         check(find.code == 0 && find.output.equals("0\n") && find.error.contains("complete=false"), "CLI explicit search truncation");
+        Path patterns = work.resolve("needles.txt");
+        Files.writeString(patterns, "a\nb\n");
+        var findAny = invoke("--find-any", patterns.toString(), text.toString(), "2");
+        check(findAny.code == 0 && findAny.output.equals("1\t0\t1\n0\t2\t3\n")
+                && findAny.error.contains("complete=false") && findAny.error.contains("coordinates=UTF-16"),
+                "CLI multi-literal source/needle receipts");
+        check(findAny.equals(invoke("--find-any", patterns.toString(), text.toString(), "2")),
+                "CLI repeated multi-literal identity");
+        var signature = invoke("--signature", text.toString(), "16");
+        check(signature.code == 0 && signature.output.contains("simhash64\t")
+                && signature.output.lines().filter(line -> line.startsWith("minhash64\t")).count() == 16
+                && signature.error.contains("approximate=true"), "CLI signature evidence");
+        check(signature.equals(invoke("--signature", text.toString(), "16")), "CLI repeated signature");
         var invalid = invoke("--run", "missing", work.resolve("absent.txt").toString());
         check(invalid.code == 1 && invalid.error.contains("unknown binding"), "binding refusal precedes file read");
         Files.writeString(text, "1\n0\t1\n");

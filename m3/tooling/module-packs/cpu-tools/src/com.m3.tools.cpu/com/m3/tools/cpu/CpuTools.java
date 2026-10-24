@@ -7,9 +7,14 @@ import com.m3.tools.graph.paths.ShortestPaths;
 import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.frequency.TermFrequency;
+import com.m3.tools.text.index.Bm25Ranker;
+import com.m3.tools.text.ngram.NGramIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
+import com.m3.tools.text.search.AffixIndex;
 import com.m3.tools.text.search.ExactSearch;
+import com.m3.tools.text.search.MultiLiteralSearch;
+import com.m3.tools.text.similarity.TextSignatures;
 import com.m3.tools.text.tokenize.WordTokenizer;
 import com.m3.tools.verify.sha256.Sha256;
 import java.io.IOException;
@@ -377,6 +382,341 @@ public final class CpuTools {
         Search actual = literal(source, needle, maxHits, monitor);
         return actual.complete == expected.complete && actual.sha256.equals(expected.sha256)
                 && Arrays.equals(actual.positions, expected.positions);
+    }
+
+    /** A compact multi-literal result backed by the existing separate text-search module. */
+    public static final class MultiSearch {
+        private final MultiLiteralSearch.Result result;
+        private final String sha256;
+
+        private MultiSearch(MultiLiteralSearch.Result result, String sha256) {
+            this.result = result;
+            this.sha256 = sha256;
+        }
+        public int size() { return result.size(); }
+        public boolean complete() { return result.complete(); }
+        public MultiLiteralSearch.Hit hit(int index) { return result.hit(index); }
+        public List<MultiLiteralSearch.Hit> hits() { return result.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static MultiSearch multiLiteral(M3File source, List<String> literals, int maxHits) {
+        return multiLiteral(source, literals, maxHits, null);
+    }
+
+    /**
+     * One immutable M3File snapshot, one prepared UTF-16 multi-needle search.
+     * The receipt includes raw-byte and UTF-16 identities, source location,
+     * literal order, cap, completeness, and every emitted coordinate.
+     */
+    public static MultiSearch multiLiteral(M3File source, List<String> literals, int maxHits,
+                                           ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        MultiLiteralSearch.Prepared search = MultiLiteralSearch.prepare(literals, progress::checkCancelled);
+        MultiLiteralSearch.Result found = search.find(source.text(), maxHits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-multi-literal-result-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.length()).number(source.byteLength())
+                .text(search.sha256()).number(maxHits).number(found.complete() ? 1 : 0)
+                .number(found.size());
+        for (int i = 0; i < found.size(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            var hit = found.hit(i);
+            hash.number(hit.patternId()).number(hit.start()).number(hit.end());
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new MultiSearch(found, hash.finish());
+    }
+
+    /** Independent exact re-execution; an identity receipt alone is not semantic proof. */
+    public static boolean verifyMultiLiteral(M3File source, List<String> literals, int maxHits,
+                                             MultiSearch expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        MultiSearch actual = multiLiteral(source, literals, maxHits, monitor);
+        return actual.complete() == expected.complete() && actual.sha256().equals(expected.sha256())
+                && actual.hits().equals(expected.hits());
+    }
+
+    /** One bounded immutable lexicon from the existing JDK word-break owner. */
+    public static final int MAX_AFFIX_SOURCE_UTF16 = 262_144;
+
+    public static final class FileAffixIndex {
+        private final AffixIndex index;
+        private final String sha256;
+
+        private FileAffixIndex(AffixIndex index, String sha256) {
+            this.index = index;
+            this.sha256 = sha256;
+        }
+
+        public int tokenCount() { return index.inputCount(); }
+        public int distinctCount() { return index.distinctCount(); }
+        public String wordAt(int ordinal) { return index.wordAt(ordinal); }
+        public boolean contains(String word) { return index.contains(word); }
+        public int countPrefix(String prefix) { return index.countPrefix(prefix); }
+        public int countSuffix(String suffix) { return index.countSuffix(suffix); }
+        public AffixIndex.Result prefix(String prefix, int maxHits) { return index.prefix(prefix, maxHits); }
+        public AffixIndex.Result suffix(String suffix, int maxHits) { return index.suffix(suffix, maxHits); }
+        public AffixIndex.Result prefix(String prefix, int maxHits, ProgressMonitor monitor) {
+            return index.prefix(prefix, maxHits, effective(monitor)::checkCancelled);
+        }
+        public AffixIndex.Result suffix(String suffix, int maxHits, ProgressMonitor monitor) {
+            return index.suffix(suffix, maxHits, effective(monitor)::checkCancelled);
+        }
+        public String lexiconSha256() { return index.sha256(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static FileAffixIndex affixIndex(M3File source) {
+        return affixIndex(source, null);
+    }
+
+    /**
+     * One authoritative M3File snapshot; no file reopen or separate token pool.
+     * Lexicon identity includes canonical UTF-16 words; the result receipt
+     * additionally commits to the source URI, raw bytes and UTF-16 contents.
+     */
+    public static FileAffixIndex affixIndex(M3File source, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_AFFIX_SOURCE_UTF16) {
+            throw new IllegalArgumentException("affix source UTF-16 budget");
+        }
+        AffixIndex index = AffixIndex.prepare(
+                WordTokenizer.words(source.text(), progress::checkCancelled), progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-affix-index-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length())
+                .text(index.sha256()).number(index.inputCount()).number(index.distinctCount());
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileAffixIndex(index, hash.finish());
+    }
+
+    /** Re-execution checks both the source receipt and all canonical dictionary IDs. */
+    public static boolean verifyAffixIndex(M3File source, FileAffixIndex expected,
+                                           ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        ProgressMonitor progress = effective(monitor);
+        FileAffixIndex actual = affixIndex(source, progress);
+        if (!actual.sha256.equals(expected.sha256)
+                || actual.tokenCount() != expected.tokenCount()
+                || actual.distinctCount() != expected.distinctCount()) return false;
+        for (int i = 0; i < actual.distinctCount(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            if (!actual.wordAt(i).equals(expected.wordAt(i))) return false;
+        }
+        progress.checkCancelled();
+        return true;
+    }
+
+    /** Indexed UTF-16 characters, in source-offset order, rather than tokenized words. */
+    public static final int MAX_GRAM_SOURCE_UTF16 = 262_144;
+
+    public static final class GramIndex {
+        private final NGramIndex index;
+        private final String sha256;
+
+        private GramIndex(NGramIndex index, String sha256) {
+            this.index = index;
+            this.sha256 = sha256;
+        }
+        public int gramSize() { return index.gramSize(); }
+        public int windowCount() { return index.windowCount(); }
+        public int distinctCount() { return index.distinctCount(); }
+        public int frequency(String gram) { return index.frequency(gram); }
+        public int[] positions(String gram) { return index.positions(gram); }
+        public Map<String, Integer> counts() { return index.counts(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static GramIndex gramIndex(M3File source, int gramSize) {
+        return gramIndex(source, gramSize, null);
+    }
+
+    /**
+     * Exact source-bound positional n-grams. The receipt commits to the M3File
+     * location, raw bytes, UTF-16 identity, gram size and every output offset.
+     * Rolling hashes are only candidate filters; source identity is not inferred.
+     */
+    public static GramIndex gramIndex(M3File source, int gramSize, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_GRAM_SOURCE_UTF16) {
+            throw new IllegalArgumentException("gram index source UTF-16 budget");
+        }
+        NGramIndex index = NGrams.prepare(source.text(), gramSize, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-gram-index-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length()).number(gramSize)
+                .number(index.windowCount()).number(index.distinctCount());
+        for (int ordinal = 0; ordinal < index.distinctCount(); ordinal++) {
+            progress.checkCancelled();
+            String gram = index.gramAt(ordinal);
+            hash.number(gram.length());
+            for (int unit = 0; unit < gram.length(); unit++) hash.number(gram.charAt(unit));
+            hash.number(index.frequencyAt(ordinal));
+            index.forEachPosition(ordinal, offset -> {
+                progress.checkCancelled();
+                hash.number(offset);
+            });
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new GramIndex(index, hash.finish());
+    }
+
+    /** Fresh computation checks the full positional result and exact file-bound receipt. */
+    public static boolean verifyGramIndex(M3File source, int gramSize, GramIndex expected,
+                                          ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        GramIndex actual = gramIndex(source, gramSize, monitor);
+        if (!actual.sha256().equals(expected.sha256()) || actual.windowCount() != expected.windowCount()
+                || actual.distinctCount() != expected.distinctCount()) return false;
+        for (String gram : expected.counts().keySet()) {
+            if (actual.frequency(gram) != expected.frequency(gram)
+                    || !Arrays.equals(actual.positions(gram), expected.positions(gram))) return false;
+        }
+        return true;
+    }
+
+    /** Signature inputs use the existing word breaker; this tighter cap bounds eager tokenization. */
+    public static final int MAX_SIGNATURE_SOURCE_UTF16 = 262_144;
+
+    public record SignatureResult(TextSignatures.Signature signature, String sha256) {
+        public SignatureResult { Objects.requireNonNull(signature); Objects.requireNonNull(sha256); }
+    }
+
+    public static SignatureResult signature(M3File source, int lanes) {
+        return signature(source, lanes, null);
+    }
+
+    /**
+     * Computes candidate-only SimHash/MinHash signals. It cannot prove two
+     * sources equal; exact M3File identities remain authoritative.
+     */
+    public static SignatureResult signature(M3File source, int lanes, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_SIGNATURE_SOURCE_UTF16) {
+            throw new IllegalArgumentException("signature source UTF-16 budget");
+        }
+        TextSignatures.Signature value = TextSignatures.compute(
+                WordTokenizer.words(source.text(), progress::checkCancelled), lanes,
+                progress::checkCancelled);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-text-signature-result-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.length()).number(lanes).number(value.tokenCount())
+                .number(value.distinctCount()).number(value.simHash64());
+        for (long candidate : value.minHash64()) hash.number(candidate);
+        progress.worked(1);
+        progress.checkCancelled();
+        return new SignatureResult(value, hash.finish());
+    }
+
+    /** Replays the signature and compares its exact primitive lanes and file-bound receipt. */
+    public static boolean verifySignature(M3File source, int lanes, SignatureResult expected,
+                                          ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        SignatureResult actual = signature(source, lanes, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.signature().simHash64() == expected.signature().simHash64()
+                && Arrays.equals(actual.signature().minHash64(), expected.signature().minHash64());
+    }
+
+    /** Source-bound ranking over the incumbent UTF-16 tokenizer and primitive inverted index. */
+    public static final class Ranking {
+        private final Bm25Ranker.Result ranked;
+        private final String sha256;
+
+        private Ranking(Bm25Ranker.Result ranked, String sha256) {
+            this.ranked = ranked;
+            this.sha256 = sha256;
+        }
+        public int size() { return ranked.size(); }
+        public int totalMatches() { return ranked.totalMatches(); }
+        public boolean complete() { return ranked.complete(); }
+        public Bm25Ranker.Hit hit(int ordinal) { return ranked.hit(ordinal); }
+        public List<Bm25Ranker.Hit> hits() { return ranked.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static final int MAX_RANK_SOURCE_UTF16 = 4 * 1024 * 1024;
+
+    public static Ranking rank(List<M3File> sources, List<String> query, int maxResults) {
+        return rank(sources, query, maxResults, null);
+    }
+
+    /**
+     * Admission binds every ordered M3File URI/raw-byte/UTF-16 identity, the
+     * exact query tokens, prepared corpus SHA, result cap and scored ordinals.
+     * BM25 scores are approximate relevance signals, never source equality.
+     */
+    public static Ranking rank(List<M3File> sources, List<String> query, int maxResults,
+                               ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(query, "query");
+        if (sources.size() > Bm25Ranker.MAX_DOCUMENTS) {
+            throw new IllegalArgumentException("rank source-count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        List<String> exactQuery = List.copyOf(query);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-bm25-ranked-sources-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<List<String>> documents = new ArrayList<>(snapshot.size());
+        int sourceUnits = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File source = snapshot.get(id);
+            sourceUnits = Math.addExact(sourceUnits, source.length());
+            if (sourceUnits > MAX_RANK_SOURCE_UTF16) {
+                throw new IllegalArgumentException("rank combined UTF-16 source budget");
+            }
+            hash.number(id).text(source.uri().toASCIIString()).text(source.rawSha256())
+                    .text(source.utf16Sha256()).number(source.byteLength()).number(source.length());
+            documents.add(WordTokenizer.words(source.text(), progress::checkCancelled));
+        }
+        Bm25Ranker.Prepared corpus = Bm25Ranker.prepare(
+                documents, Bm25Ranker.Parameters.defaults(), progress::checkCancelled);
+        Bm25Ranker.Result ranked = corpus.rank(exactQuery, maxResults, progress::checkCancelled);
+        hash.text(corpus.sha256()).number(maxResults).number(ranked.totalMatches())
+                .number(ranked.complete() ? 1 : 0).number(exactQuery.size());
+        for (String token : exactQuery) {
+            progress.checkCancelled();
+            hash.number(token.length());
+            for (int i = 0; i < token.length(); i++) {
+                if ((i & 4095) == 0) progress.checkCancelled();
+                hash.number(token.charAt(i));
+            }
+        }
+        hash.number(ranked.size());
+        for (int id = 0; id < ranked.size(); id++) {
+            progress.checkCancelled();
+            Bm25Ranker.Hit hit = ranked.hit(id);
+            hash.number(hit.documentId()).number(Double.doubleToLongBits(hit.score()));
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new Ranking(ranked, hash.finish());
+    }
+
+    /** Deterministic re-execution checks the source-bound receipt and exact output lanes. */
+    public static boolean verifyRank(List<M3File> sources, List<String> query, int maxResults,
+                                     Ranking expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        Ranking actual = rank(sources, query, maxResults, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.totalMatches() == expected.totalMatches()
+                && actual.hits().equals(expected.hits());
     }
 
     /**

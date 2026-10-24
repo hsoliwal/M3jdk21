@@ -9,12 +9,17 @@ import com.m3.tools.plan.priority.StablePriorityQueue;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.diff.TextDelta;
 import com.m3.tools.text.frequency.TermFrequency;
+import com.m3.tools.text.index.Bm25Ranker;
 import com.m3.tools.text.index.InvertedIndex;
+import com.m3.tools.text.ngram.NGramIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
 import com.m3.tools.text.regex.RegexMatcher;
+import com.m3.tools.text.search.AffixIndex;
 import com.m3.tools.text.search.ExactSearch;
+import com.m3.tools.text.search.MultiLiteralSearch;
 import com.m3.tools.text.similarity.EditDistance;
+import com.m3.tools.text.similarity.TextSignatures;
 import com.m3.tools.text.tokenize.WordTokenizer;
 import com.m3.tools.verify.sha256.Sha256;
 import java.math.BigInteger;
@@ -25,6 +30,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -42,7 +48,7 @@ public final class M3DonorToolsTest {
     private M3DonorToolsTest() { }
 
     public static void main(String[] args) throws Exception {
-        text(); graphs(); postings(); numeric(); priority(); refusals();
+        text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -141,6 +147,181 @@ public final class M3DonorToolsTest {
                 (byte) 0x98, (byte) 0x80})), "UTF8 byte identity");
     }
 
+    /** Independent substring enumeration proves rolling-hash candidates never decide equality. */
+    private static void ngramIndex() throws Exception {
+        rejects(NullPointerException.class, () -> NGrams.prepare(null, 2));
+        rejects(NullPointerException.class, () -> NGrams.prepare("ab", 2, null));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare("ab", 0));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare("ab", 65));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare(
+                "a".repeat(NGramIndex.MAX_SOURCE_UTF16 + 1), 2));
+        var empty = NGrams.prepare("", 3);
+        check(empty.windowCount() == 0 && empty.distinctCount() == 0 && empty.counts().isEmpty(),
+                "empty positional index");
+        check(NGrams.overlap(empty, empty).coefficient() == 1.0d, "empty gram multiset");
+        check(NGrams.overlap(NGrams.prepare("abc", 4), NGrams.prepare("", 4)).union() == 0,
+                "short string overlap");
+        rejects(IllegalArgumentException.class,
+                () -> NGrams.overlap(NGrams.prepare("a", 1), NGrams.prepare("a", 2)));
+        rejects(NullPointerException.class, () -> empty.frequency(null));
+        rejects(NullPointerException.class, () -> empty.positions(null));
+        rejects(NullPointerException.class, () -> empty.forEachPosition(0, null));
+        rejects(IndexOutOfBoundsException.class, () -> empty.gramAt(0));
+        rejects(IllegalArgumentException.class,
+                () -> new NGramIndex.Overlap(2, 1));
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> NGrams.prepare("x".repeat(30_000), 1, () -> {
+            if (checkpoints.incrementAndGet() == 2) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 2, "indexed cancellation inside scan");
+        var dense = NGrams.prepare("a".repeat(70_000), 64);
+        check(dense.distinctCount() == 1 && dense.frequency("a".repeat(64)) == 69_937,
+                "single parent-owned dense posting lane");
+        check(dense.positions("a".repeat(64)).length == 69_937, "dense positional visit");
+
+        for (int trial = 0; trial < 1_000; trial++) {
+            String left = randomText(76), right = randomText(76);
+            int n = 1 + RANDOM.nextInt(12);
+            NGramIndex indexed = NGrams.prepare(left, n);
+            NGramIndex other = NGrams.prepare(right, n);
+            Map<String, List<Integer>> positions = new LinkedHashMap<>();
+            for (int i = 0; i + n <= left.length(); i++) {
+                positions.computeIfAbsent(left.substring(i, i + n), key -> new ArrayList<>()).add(i);
+            }
+            Map<String, Integer> expected = new TreeMap<>();
+            positions.forEach((gram, offsets) -> expected.put(gram, offsets.size()));
+            check(indexed.windowCount() == Math.max(0, left.length() - n + 1), "gram window count");
+            check(indexed.distinctCount() == expected.size(), "gram primitive distinct count");
+            check(indexed.counts().equals(expected) && indexed.counts().equals(NGrams.count(left, n)),
+                    "gram legacy-map parity including unpaired surrogates");
+            check(indexed.gramSize() == n && indexed.frequency("too long to be this gram") == 0,
+                    "gram query length contract");
+            for (int id = 0; id < indexed.distinctCount(); id++) {
+                String gram = indexed.gramAt(id);
+                List<Integer> expectedOffsets = positions.get(gram);
+                int[] expectedArray = expectedOffsets.stream().mapToInt(Integer::intValue).toArray();
+                check(indexed.firstOffset(id) == expectedArray[0] && indexed.frequencyAt(id) == expectedArray.length,
+                        "first source offset and physical frequency");
+                check(Arrays.equals(indexed.positions(gram), expectedArray), "collision-checked gram offsets");
+                List<Integer> visited = new ArrayList<>();
+                indexed.forEachPosition(id, visited::add);
+                check(visited.equals(expectedOffsets), "allocation-free visitor order");
+                int[] detached = indexed.positions(gram);
+                detached[0] = Integer.MIN_VALUE;
+                check(indexed.positions(gram)[0] == expectedArray[0], "gram offsets are detached");
+            }
+            rejects(UnsupportedOperationException.class, () -> indexed.counts().put("not-in-index", 42));
+            Map<String, Integer> rightCounts = new TreeMap<>();
+            for (int at = 0; at + n <= right.length(); at++) {
+                rightCounts.merge(right.substring(at, at + n), 1, Integer::sum);
+            }
+            long intersection = 0;
+            for (var entry : expected.entrySet()) {
+                intersection += Math.min(entry.getValue(), rightCounts.getOrDefault(entry.getKey(), 0));
+            }
+            long union = (long) indexed.windowCount() + other.windowCount() - intersection;
+            NGramIndex.Overlap overlap = NGrams.overlap(indexed, other);
+            check(overlap.intersection() == intersection && overlap.union() == union,
+                    "exact multiset overlap oracle");
+            check(Double.compare(overlap.coefficient(), union == 0 ? 1.0d : intersection / (double) union) == 0,
+                    "overlap coefficient contract");
+            check(NGrams.overlap(other, indexed).equals(overlap), "overlap symmetry");
+        }
+    }
+
+    /** Differential UTF-16 prefix/suffix ranges: construction has no retained nodes. */
+    private static void affixIndex() throws Exception {
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(null));
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(List.of(), null));
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(Arrays.asList("a", null)));
+        rejects(IllegalArgumentException.class,
+                () -> AffixIndex.prepare(Collections.nCopies(AffixIndex.MAX_TERMS + 1, "a")));
+        rejects(IllegalArgumentException.class,
+                () -> AffixIndex.prepare(List.of("a".repeat(AffixIndex.MAX_TERM_UTF16 + 1))));
+        rejects(IllegalArgumentException.class, () -> AffixIndex.prepare(
+                Collections.nCopies(129, "a".repeat(AffixIndex.MAX_TERM_UTF16))));
+        var empty = AffixIndex.prepare(List.of());
+        check(empty.distinctCount() == 0 && empty.inputCount() == 0, "empty affix index");
+        check(empty.prefix("", 0).complete() && empty.suffix("", 0).complete(), "empty affix query");
+        rejects(NullPointerException.class, () -> empty.prefix(null, 1));
+        rejects(NullPointerException.class, () -> empty.suffix(null, 1));
+        rejects(NullPointerException.class, () -> empty.contains(null));
+        rejects(IndexOutOfBoundsException.class, () -> empty.wordAt(0));
+        rejects(IllegalArgumentException.class, () -> empty.prefix("", -1));
+        rejects(IllegalArgumentException.class, () -> empty.suffix("", AffixIndex.MAX_TERMS + 1));
+        rejects(IllegalArgumentException.class,
+                () -> empty.prefix("a".repeat(AffixIndex.MAX_TERM_UTF16 + 1), 1));
+
+        var manual = AffixIndex.prepare(List.of("", "a", "ab", "aba", "xaba", "ab", "\ud800", "\ud800a"));
+        check(manual.inputCount() == 8 && manual.distinctCount() == 7, "duplicate terms collapsed");
+        check(manual.countPrefix("a") == 3 && manual.countSuffix("a") == 4, "literal affix cardinalities");
+        check(manual.prefix("", 0).totalMatches() == 7 && !manual.prefix("", 0).complete(),
+                "zero-cap partial result is explicit");
+        check(manual.prefix("absent", 0).complete(), "zero-cap empty result is complete");
+        var capped = manual.suffix("a", 2);
+        check(capped.size() == 2 && capped.totalMatches() == 4 && !capped.complete(), "suffix cap");
+        int[] detached = capped.ordinals();
+        detached[0] = -99;
+        check(capped.ordinalAt(0) >= 0, "suffix IDs detached");
+
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> AffixIndex.prepare(List.of("aa", "ab"), () -> {
+            if (checkpoints.incrementAndGet() == 2) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 2, "cancellation during affix admission");
+        rejects(IllegalStateException.class, () -> manual.prefix("a", 2, () -> {
+            throw new IllegalStateException("cancel query");
+        }));
+
+        for (int trial = 0; trial < 1_200; trial++) {
+            List<String> inputs = new ArrayList<>();
+            int length = RANDOM.nextInt(40);
+            for (int i = 0; i < length; i++) inputs.add(randomText(18));
+            AffixIndex index = AffixIndex.prepare(inputs);
+            List<String> canonical = new ArrayList<>(new TreeSet<>(inputs));
+            check(index.inputCount() == inputs.size() && index.distinctCount() == canonical.size(),
+                    "canonical lexicon cardinality");
+            for (int i = 0; i < canonical.size(); i++) {
+                check(index.wordAt(i).equals(canonical.get(i)), "canonical word ID");
+                check(index.contains(canonical.get(i)), "exact membership");
+            }
+            List<String> shuffled = new ArrayList<>(inputs);
+            Collections.reverse(shuffled);
+            check(index.sha256().equals(AffixIndex.prepare(shuffled).sha256()), "stable lexicon fingerprint");
+            for (int q = 0; q < 9; q++) {
+                String query = q == 0 ? "" : q == 1 && !canonical.isEmpty()
+                        ? canonical.get(RANDOM.nextInt(canonical.size())) : randomText(5);
+                int cap = RANDOM.nextInt(8);
+                for (boolean suffix : new boolean[]{false, true}) {
+                    List<String> expected = canonical.stream().filter(suffix
+                            ? word -> word.endsWith(query) : word -> word.startsWith(query)).toList();
+                    if (suffix) expected = expected.stream()
+                            .sorted(Comparator.comparing(M3DonorToolsTest::reverseUtf16)).toList();
+                    var result = suffix ? index.suffix(query, cap) : index.prefix(query, cap);
+                    check(result.totalMatches() == expected.size(), "indexed affix exact total");
+                    check(result.size() == Math.min(cap, expected.size())
+                            && result.complete() == (expected.size() <= cap), "indexed affix completeness");
+                    for (int i = 0; i < result.size(); i++) {
+                        check(index.wordAt(result.ordinalAt(i)).equals(expected.get(i)),
+                                "indexed affix UTF-16 order");
+                    }
+                    check((suffix ? index.countSuffix(query) : index.countPrefix(query)) == expected.size(),
+                            "indexed affix count parity");
+                }
+            }
+        }
+    }
+
+    private static String reverseUtf16(String word) {
+        char[] units = word.toCharArray();
+        for (int i = 0, j = units.length - 1; i < j; i++, j--) {
+            char temp = units[i];
+            units[i] = units[j];
+            units[j] = temp;
+        }
+        return new String(units);
+    }
+
     private static int distance(String left, String right) {
         int[][] matrix = new int[left.length() + 1][right.length() + 1];
         for (int i = 0; i <= left.length(); i++) matrix[i][0] = i;
@@ -150,6 +331,137 @@ public final class M3DonorToolsTest {
                     matrix[i - 1][j - 1] + (left.charAt(i - 1) == right.charAt(j - 1) ? 0 : 1)));
         }
         return matrix[left.length()][right.length()];
+    }
+
+    /** Independent nested-loop matching oracle; never calls the automaton in the witness. */
+    private static List<MultiLiteralSearch.Hit> bruteMulti(String text, List<String> patterns) {
+        List<MultiLiteralSearch.Hit> matches = new ArrayList<>();
+        for (int end = 1; end <= text.length(); end++) {
+            for (int id = 0; id < patterns.size(); id++) {
+                String pattern = patterns.get(id);
+                int start = end - pattern.length();
+                if (start >= 0 && text.startsWith(pattern, start)) {
+                    matches.add(new MultiLiteralSearch.Hit(id, start, end));
+                }
+            }
+        }
+        matches.sort(Comparator.comparingInt(MultiLiteralSearch.Hit::end)
+                .thenComparing(Comparator.comparingInt(
+                        (MultiLiteralSearch.Hit hit) -> patterns.get(hit.patternId()).length()).reversed())
+                .thenComparingInt(MultiLiteralSearch.Hit::patternId));
+        return matches;
+    }
+
+    private static void multiSearchAndSignatures() throws Exception {
+        var empty = MultiLiteralSearch.prepare(List.of());
+        check(empty.stateCount() == 1 && empty.find("ab", 0).complete(), "empty pattern set");
+        var duplicates = MultiLiteralSearch.prepare(List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"));
+        var expected = bruteMulti("aba\ud83d\ude00aba", List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"));
+        check(duplicates.find("aba\ud83d\ude00aba", 100).hits().equals(expected), "duplicate suffix and split surrogate");
+        check(duplicates.sha256().equals(MultiLiteralSearch.prepare(
+                List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00")).sha256()), "plan SHA replay");
+        check(duplicates.sha256().equals(MultiLiteralSearch.prepare(
+                List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"), () -> { }).sha256()),
+                "checkpointed plan preserves exact automaton fingerprint");
+        int[] preparationChecks = {0};
+        rejects(IllegalStateException.class, () -> MultiLiteralSearch.prepare(
+                List.of("x".repeat(12_000)), () -> {
+                    if (++preparationChecks[0] == 5) throw new IllegalStateException("cancel during trie construction");
+                }));
+        check(preparationChecks[0] == 5, "mid-construction checkpoint executes");
+        rejects(NullPointerException.class, () -> MultiLiteralSearch.prepare(List.of("a"), null));
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(List.of("")));
+        rejects(NullPointerException.class, () -> MultiLiteralSearch.prepare(Arrays.asList("a", null)));
+        rejects(IllegalArgumentException.class, () -> duplicates.find("a", -1));
+        rejects(IllegalArgumentException.class, () -> duplicates.find("a", MultiLiteralSearch.MAX_HITS + 1));
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(
+                java.util.Collections.nCopies(MultiLiteralSearch.MAX_PATTERNS + 1, "a")));
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(
+                List.of("a".repeat(MultiLiteralSearch.MAX_PATTERN_UNITS + 1))));
+        rejects(IllegalArgumentException.class, () -> empty.find(
+                "a".repeat(MultiLiteralSearch.MAX_TEXT_UNITS + 1), 0));
+        rejects(IllegalStateException.class, () -> duplicates.find("abc", 1, () -> {
+            throw new IllegalStateException("cancelled");
+        }));
+
+        String[] tokens = {"", "a", "b", "Aa", "BB", "\ud83d", "\ude00", "\u00e9", "\u0301"};
+        for (int trial = 0; trial < 450; trial++) {
+            String text = randomText(65);
+            int patternCount = RANDOM.nextInt(1, 12);
+            List<String> patterns = new ArrayList<>();
+            for (int i = 0; i < patternCount; i++) {
+                String pattern;
+                if (i > 0 && RANDOM.nextInt(4) == 0) pattern = patterns.get(RANDOM.nextInt(i));
+                else if (!text.isEmpty() && RANDOM.nextBoolean()) {
+                    int from = RANDOM.nextInt(text.length());
+                    int to = from + 1 + RANDOM.nextInt(Math.min(5, text.length() - from));
+                    pattern = text.substring(from, to);
+                } else pattern = randomText(5) + "a";
+                patterns.add(pattern);
+            }
+            var prepared = MultiLiteralSearch.prepare(patterns);
+            List<MultiLiteralSearch.Hit> oracle = bruteMulti(text, patterns);
+            for (int cap : new int[]{0, 1, 2, 7, 250}) {
+                var result = prepared.find(text, cap);
+                check(result.size() == Math.min(cap, oracle.size()), "multi-literal hit count");
+                check(result.complete() == (oracle.size() <= cap), "multi-literal completeness");
+                check(result.hits().equals(oracle.subList(0, Math.min(cap, oracle.size()))),
+                        "multi-literal independent UTF-16 oracle");
+                for (int i = 0; i < result.size(); i++) check(result.hit(i).equals(oracle.get(i)),
+                        "detached ordinal projection");
+            }
+        }
+
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(List.of("a"), 0));
+        rejects(NullPointerException.class, () -> TextSignatures.compute(List.of("a"), 4, null));
+        int[] hashingChecks = {0};
+        rejects(IllegalStateException.class, () -> TextSignatures.compute(
+                List.of("x".repeat(12_000)), 4, () -> {
+                    if (++hashingChecks[0] == 5) throw new IllegalStateException("cancel during SHA-256");
+                }));
+        check(hashingChecks[0] == 5, "mid-token UTF-16 hashing checkpoint executes");
+        int[] tokenizerChecks = {0};
+        check(WordTokenizer.words("Hello, 42 world", () -> tokenizerChecks[0]++)
+                .equals(WordTokenizer.words("Hello, 42 world")) && tokenizerChecks[0] >= 3,
+                "tokenizer checkpoint preserves BreakIterator semantics");
+        rejects(NullPointerException.class, () -> WordTokenizer.words("ok", null));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(List.of("a"), 129));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(
+                java.util.Collections.nCopies(TextSignatures.MAX_TOKENS + 1, "a"), 1));
+        rejects(NullPointerException.class, () -> TextSignatures.compute(Arrays.asList("a", null), 1));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(
+                List.of("a".repeat(TextSignatures.MAX_TOKEN_UNITS + 1)), 1));
+        var absent = TextSignatures.compute(List.of(), 32);
+        check(absent.tokenCount() == 0 && absent.distinctCount() == 0
+                && absent.simHash64() == 0 && absent.minHash64()[0] == -1L, "empty signatures");
+        check(TextSignatures.estimatedJaccard(absent, absent) == 1.0, "empty set similarity");
+        check(TextSignatures.estimatedJaccard(absent, TextSignatures.compute(List.of("x"), 32)) == 0.0,
+                "empty to nonempty similarity");
+        rejects(IllegalArgumentException.class, () -> TextSignatures.estimatedJaccard(
+                absent, TextSignatures.compute(List.of("x"), 16)));
+
+        for (int trial = 0; trial < 500; trial++) {
+            List<String> words = new ArrayList<>();
+            for (int i = RANDOM.nextInt(60); i > 0; i--) words.add(tokens[RANDOM.nextInt(tokens.length)]);
+            var first = TextSignatures.compute(words, 32);
+            var replay = TextSignatures.compute(words, 32);
+            check(first.tokenCount() == words.size(), "signature token count");
+            check(first.distinctCount() == Set.copyOf(words).size(), "signature distinct count");
+            check(first.simHash64() == replay.simHash64()
+                    && Arrays.equals(first.minHash64(), replay.minHash64()), "signature replay");
+            Collections.reverse(words);
+            var shuffled = TextSignatures.compute(words, 32);
+            check(first.simHash64() == shuffled.simHash64()
+                    && Arrays.equals(first.minHash64(), shuffled.minHash64()), "order independent signatures");
+            var unique = new ArrayList<>(new TreeSet<>(words));
+            check(Arrays.equals(first.minHash64(), TextSignatures.compute(unique, 32).minHash64()),
+                    "MinHash set semantics ignore multiplicity");
+            check(TextSignatures.hamming64(first, replay) == 0
+                    && TextSignatures.estimatedJaccard(first, replay) == 1.0, "identical signal semantics");
+            long[] projected = first.minHash64();
+            projected[0] ^= 1L;
+            check(!Arrays.equals(projected, first.minHash64()), "immutable primitive lanes");
+        }
     }
 
     private static void graphs() {
@@ -249,9 +561,27 @@ public final class M3DonorToolsTest {
             for (String term : vocabulary) {
                 int[] wanted = expected.getOrDefault(term, new TreeSet<>()).stream().mapToInt(Integer::intValue).toArray();
                 check(Arrays.equals(index.documents(term), wanted), "posting list");
+                int[] wantedFrequency = Arrays.stream(wanted)
+                        .map(id -> Collections.frequency(documents.get(id), term)).toArray();
+                check(Arrays.equals(index.termFrequencies(term), wantedFrequency), "primitive posting frequency");
+                check(index.documentFrequency(term) == wanted.length, "document frequency");
+                Map<Integer, Integer> visited = new TreeMap<>();
+                index.forEachPosting(term, visited::put);
+                for (int at = 0; at < wanted.length; at++) {
+                    check(visited.get(wanted[at]) == wantedFrequency[at], "primitive posting visitor");
+                }
                 int[] returned = index.documents(term);
                 if (returned.length > 0) returned[0] = -1;
                 check(Arrays.equals(index.documents(term), wanted), "detached posting");
+                int[] frequencies = index.termFrequencies(term);
+                if (frequencies.length > 0) frequencies[0] = -1;
+                check(Arrays.equals(index.termFrequencies(term), wantedFrequency), "detached term frequency");
+            }
+            check(index.documentCount() == documents.size(), "document-count lane");
+            check(index.totalTokenCount() == documents.stream().mapToInt(List::size).sum(),
+                    "total token lane");
+            for (int id = 0; id < documents.size(); id++) {
+                check(index.documentLength(id) == documents.get(id).size(), "document-length lane");
             }
             for (List<String> document : documents) document.clear();
             check(index.terms().equals(expected.keySet()), "input containers detached");
@@ -263,6 +593,101 @@ public final class M3DonorToolsTest {
         rejects(UnsupportedOperationException.class, () -> TermFrequency.count(List.of("a")).clear());
         check(Arrays.stream(InvertedIndex.class.getDeclaredFields()).noneMatch(
                 field -> Map.class.isAssignableFrom(field.getType())), "no retained map entry structure");
+    }
+
+    /** Oracle uses independent per-document term scans, never the index or its posting lanes. */
+    private static List<Bm25Ranker.Hit> bruteBm25(List<? extends List<String>> documents,
+                                                  List<String> query, Bm25Ranker.Parameters parameters) {
+        int documentCount = documents.size();
+        int tokens = documents.stream().mapToInt(List::size).sum();
+        double average = documentCount == 0 ? 0.0d : tokens / (double) documentCount;
+        double[] scores = new double[documentCount];
+        for (String term : new TreeSet<>(query)) {
+            int df = 0;
+            for (List<String> document : documents) if (document.contains(term)) df++;
+            if (df == 0) continue;
+            double idf = StrictMath.log1p((documentCount - df + 0.5d) / (df + 0.5d));
+            for (int id = 0; id < documentCount; id++) {
+                int frequency = Collections.frequency(documents.get(id), term);
+                if (frequency == 0) continue;
+                double normalized = parameters.k1() * (1.0d - parameters.b()
+                        + parameters.b() * documents.get(id).size() / average);
+                scores[id] += idf * frequency * (parameters.k1() + 1.0d) / (frequency + normalized);
+            }
+        }
+        List<Bm25Ranker.Hit> ranked = new ArrayList<>();
+        for (int id = 0; id < scores.length; id++) {
+            if (scores[id] > 0.0d) ranked.add(new Bm25Ranker.Hit(id, scores[id]));
+        }
+        ranked.sort(Comparator.comparingDouble(Bm25Ranker.Hit::score).reversed()
+                .thenComparingInt(Bm25Ranker.Hit::documentId));
+        return ranked;
+    }
+
+    private static void ranking() throws Exception {
+        Bm25Ranker.Parameters defaults = Bm25Ranker.Parameters.defaults();
+        check(defaults.k1() == 1.2d && defaults.b() == 0.75d, "published BM25 parameters");
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(-0.1d, 0.75d));
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(Double.NaN, 0.75d));
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(1.2d, 1.01d));
+        rejects(NullPointerException.class, () -> Bm25Ranker.prepare(List.of(Arrays.asList("a", null))));
+        rejects(IllegalArgumentException.class, () -> Bm25Ranker.prepare(
+                Collections.nCopies(Bm25Ranker.MAX_DOCUMENTS + 1, List.of("a"))));
+        var empty = Bm25Ranker.prepare(List.of());
+        check(empty.rank(List.of("a"), 0).complete() && empty.rank(List.of("a"), 10).size() == 0,
+                "empty corpus");
+        var identical = Bm25Ranker.prepare(List.of(List.of("a"), List.of("a")));
+        check(identical.rank(List.of("a"), 2).hits().get(0).documentId() == 0
+                && identical.rank(List.of("a"), 2).hits().get(1).documentId() == 1,
+                "stable equal-score document ordinal");
+        rejects(IllegalArgumentException.class, () -> identical.rank(List.of("a"), -1));
+        rejects(NullPointerException.class, () -> identical.rank(Arrays.asList("a", null), 1));
+        rejects(IllegalStateException.class, () -> Bm25Ranker.prepare(
+                List.of(List.of("a")), defaults, () -> { throw new IllegalStateException("cancel prepare"); }));
+        rejects(IllegalStateException.class, () -> identical.rank(List.of("a"), 1,
+                () -> { throw new IllegalStateException("cancel scoring"); }));
+
+        String[] vocabulary = {"", "a", "b", "beta", "\ud83d\ude00", "\ud83d", "\u0301"};
+        for (int trial = 0; trial < 360; trial++) {
+            List<List<String>> documents = new ArrayList<>();
+            for (int id = 0, count = RANDOM.nextInt(12); id < count; id++) {
+                List<String> document = new ArrayList<>();
+                for (int token = 0, words = RANDOM.nextInt(35); token < words; token++) {
+                    document.add(vocabulary[RANDOM.nextInt(vocabulary.length)]);
+                }
+                documents.add(document);
+            }
+            List<String> query = new ArrayList<>();
+            for (int id = 0, count = RANDOM.nextInt(10); id < count; id++) {
+                query.add(vocabulary[RANDOM.nextInt(vocabulary.length)]);
+            }
+            Bm25Ranker.Parameters parameters = trial % 3 == 0
+                    ? new Bm25Ranker.Parameters(0.0d, 1.0d)
+                    : trial % 3 == 1 ? new Bm25Ranker.Parameters(2.5d, 0.0d) : defaults;
+            Bm25Ranker.Prepared prepared = Bm25Ranker.prepare(documents, parameters);
+            List<Bm25Ranker.Hit> oracle = bruteBm25(documents, query, parameters);
+            check(prepared.sha256().matches("[0-9a-f]{64}"), "exact corpus fingerprint");
+            check(prepared.sha256().equals(Bm25Ranker.prepare(documents, parameters).sha256()),
+                    "deterministic corpus fingerprint");
+            for (int cap : new int[]{0, 1, 3, 10, 100}) {
+                Bm25Ranker.Result ranked = prepared.rank(query, cap);
+                check(ranked.size() == Math.min(cap, oracle.size()), "BM25 bounded top-K size");
+                check(ranked.totalMatches() == oracle.size() && ranked.complete() == (oracle.size() <= cap),
+                        "BM25 exact completeness and total-matches count");
+                for (int id = 0; id < ranked.size(); id++) {
+                    Bm25Ranker.Hit actual = ranked.hit(id), wanted = oracle.get(id);
+                    check(actual.documentId() == wanted.documentId(), "BM25 independent ranking ordinal");
+                    check(Math.abs(actual.score() - wanted.score()) <= 1.0e-11d,
+                            "BM25 independent numeric oracle");
+                }
+            }
+            var stable = prepared.rank(query, 100);
+            Collections.reverse(query);
+            check(stable.hits().equals(prepared.rank(query, 100).hits()),
+                    "BM25 order-independent query set and summation");
+            for (List<String> document : documents) document.clear();
+            check(stable.hits().equals(prepared.rank(query, 100).hits()), "BM25 detached input lists");
+        }
     }
 
     private static void numeric() throws Exception {
