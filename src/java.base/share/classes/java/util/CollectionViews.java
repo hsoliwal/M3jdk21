@@ -350,13 +350,20 @@ public final class CollectionViews {
         public boolean remove(Object candidate) {
             if (!backing.contains(candidate)) return false;
             if (backing instanceof List<?>) {
-                // Remove the selected physical occurrence, not an earlier
-                // equal occurrence that was hidden by the filter.
+                // Prefer the owner's iterator mutation for the visible physical
+                // occurrence. Snapshot iterators (e.g. CopyOnWriteArrayList)
+                // require indexed removal instead.
                 List<E> list = (List<E>) backing;
+                Iterator<E> iterator = list.iterator();
                 int physical = 0;
-                for (E stored : list) {
+                while (iterator.hasNext()) {
+                    E stored = iterator.next();
                     if (Objects.equals(candidate, stored) && visible(stored)) {
-                        list.remove(physical);
+                        try {
+                            iterator.remove();
+                        } catch (UnsupportedOperationException unsupported) {
+                            list.remove(physical);
+                        }
                         return true;
                     }
                     physical++;
@@ -419,6 +426,12 @@ public final class CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
+            // These exact owners publish bulk changes without mutating snapshot iterators.
+            // Subclasses retain their existing iterator dispatch and override contracts.
+            if (backing.getClass() == java.util.concurrent.CopyOnWriteArrayList.class
+                    || backing.getClass() == java.util.concurrent.CopyOnWriteArraySet.class) {
+                return backing.removeIf(element -> visible(element) && condition.test(element));
+            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {
@@ -436,6 +449,12 @@ public final class CollectionViews {
     private static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
         private FilteredSet(Set<E> source, Predicate<? super E> predicate) {
             super(source, predicate);
+        }
+
+        @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(backing.spliterator(), predicate,
+                    Spliterator.DISTINCT, null);
         }
 
         @Override
@@ -505,6 +524,14 @@ public final class CollectionViews {
         @Override
         public Comparator<? super E> comparator() {
             return sorted.comparator();
+        }
+
+        /** Owner order is authoritative, including bounded and descending views. */
+        @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(sorted.spliterator(), super.predicate,
+                    Spliterator.DISTINCT | Spliterator.SORTED | Spliterator.ORDERED,
+                    sorted.comparator());
         }
 
         @Override
@@ -666,12 +693,21 @@ public final class CollectionViews {
     private static final class SelectionSpliterator<E> implements Spliterator<E>, Consumer<E> {
         private final Spliterator<E> source;
         private final Predicate<? super E> predicate;
+        private final int guaranteed;
+        private final Comparator<? super E> ownerComparator;
         private Consumer<? super E> action;
         private boolean delivered;
 
         private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate) {
+            this(source, predicate, 0, null);
+        }
+
+        private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate,
+                int guaranteed, Comparator<? super E> ownerComparator) {
             this.source = source;
             this.predicate = predicate;
+            this.guaranteed = guaranteed;
+            this.ownerComparator = ownerComparator;
         }
 
         @Override
@@ -712,7 +748,7 @@ public final class CollectionViews {
         @Override
         public Spliterator<E> trySplit() {
             Spliterator<E> prefix = source.trySplit();
-            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate);
+            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate, guaranteed, ownerComparator);
         }
 
         @Override
@@ -722,12 +758,12 @@ public final class CollectionViews {
 
         @Override
         public int characteristics() {
-            return source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE);
+            return (source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE)) | guaranteed;
         }
 
         @Override
         public Comparator<? super E> getComparator() {
-            return source.getComparator();
+            return (guaranteed & SORTED) != 0 ? ownerComparator : source.getComparator();
         }
     }
 

@@ -8,7 +8,7 @@ OUT="$1"
 [[ "$OUT" == /* && ! -e "$OUT" ]] || { echo 'require a new absolute output directory' >&2; exit 2; }
 mkdir -p "$OUT"
 (cd "$ROOT" && sha256sum -c <<'SEALS'
-6759e1c605be7c52c3471767879cfa4aec7751e220699f6af49a43ba0902660b  src/java.base/share/classes/java/util/CollectionViews.java
+f0e20d963ba2e7d0bb49f0347b2f45f2bd7058f962d3f3aac0d95cc82364dcd5  src/java.base/share/classes/java/util/CollectionViews.java
 a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d  m3/compatibility/collection-views/preimage/CollectionViews.java.txt
 f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6  test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
 SEALS
@@ -25,10 +25,7 @@ javap -public -s "$OUT/before-classes/java/util/CollectionViews.class" > "$OUT/a
 javap -public -s "$OUT/after-classes/java/util/CollectionViews.class" > "$OUT/abi-after.txt"
 diff -u "$OUT/abi-before.txt" "$OUT/abi-after.txt" > "$OUT/abi-diff.txt"
 javac --patch-module java.base="$OUT/after-classes" --add-modules jdk.management -Xlint:all -Werror -d "$OUT/test-classes" \
-    "$ROOT/test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java" \
-    "$ROOT/test/jdk/java/util/CollectionViews/BootstrapViewsTest.java" \
-    "$ROOT/test/jdk/java/util/CollectionViews/RunSearchJni.java" \
-    "$ROOT/test/jdk/java/util/CollectionViews/CollectionViewsContract.java"
+    "$ROOT/test/jdk/java/util/CollectionViews/"*.java
 set +e
 java -Xint --patch-module java.base="$OUT/before-classes" -cp "$OUT/test-classes" StoredRepresentativeOracle > "$OUT/old-red.log" 2>&1
 RED=$?
@@ -53,4 +50,9 @@ done
 java --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" BootstrapViewsTest | tee "$OUT/bootstrap.log"
 java -Xss256k --add-opens java.base/java.util=ALL-UNNAMED --add-modules jdk.management \
     --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" CollectionViewsContract | tee "$OUT/contract.log"
+for test in FilteredCopyOnWriteBulkTest FilteredIsEmptyDirectTest FilteredListRemoveContractTest \
+    FilteredOwnerMembershipTest FilteredRepresentativeContractTest FilteredSortedSpliteratorMetadataTest \
+    FilteredSetMutationDispatchTest FilteredSpliteratorReentrantTest M3CollectionViewsCursorMaskContract; do
+    java --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" "$test" | tee "$OUT/$test.log"
+done
 echo 'SOURCE_SEALED_COLLECTIONVIEWS_PATCH_MODULE_PASS; full JDK and native runtime still pending' | tee "$OUT/summary.log"
