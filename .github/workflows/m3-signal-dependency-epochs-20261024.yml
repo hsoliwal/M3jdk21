@@ -49,6 +49,11 @@ jobs:
           python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
           mvn -B -ntp -f m3/vendor/third_party/pom.xml \
             -pl junit-jupiter-5.10.2 -am -DskipTests install
+      - name: Build original arrays dependency for real collections Maven module
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
       - name: Run original owning JUnit test
         shell: bash
         run: |
