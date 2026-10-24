@@ -123,10 +123,16 @@
     "note": "Independent reviews run after the build and before the draft PR; their results are not recorded in this receipt"
   },
   "pending": [
-    "Default install/deploy skips in the 19 donor POMs (build-quarantine successor, leaf A2)",
     "PROVIDERS.tsv rows EA/EI switch from PATTERN_ONLY to received source (decided; follow-up leaf after A1)",
     "M3 prefix for the four first-party indexed red-black classes (naming item C3 #9, undecided)",
     "Full Maven, OSGi and JPMS builds and the full donor test suites",
     "Per-concrete array/index/offset/mask conversion, stored-entry elimination and JNI"
-  ]
+  ],
+  "configSuccessor": {
+    "changedFiles": "2 POMs: the root pom.xml (inherited by the 17 modules whose parent is eclipse-collections-parent) and the standalone m3/stream-interop/pom.xml; Java and templates unchanged",
+    "defaults": "maven.install.skip and maven.deploy.skip are true by default and can be overridden on the command line",
+    "bindings": "FULL_SOURCE_BINDINGS.tsv afterGitBlob/afterSHA256/afterBytes updated for the 2 POMs",
+    "mavenOrBundleExecution": "Not run for this config-only successor (offline POM parse and property check only)",
+    "notIncluded": "p2-site stays a module of the root POM; bnd.bnd untouched (OSGi identity is already the module name)"
+  }
 }
