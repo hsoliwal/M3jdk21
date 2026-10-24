@@ -20,6 +20,45 @@ public final class M3SourceSignalQualityFactory {
     private M3SourceSignalQualityFactory() { }
 
     /**
+     * One image-scoped binding with a graph policy fixed at creation.
+     * The compiler graph is recorded evidence, not complete runtime call closure.
+     * Invalidation remains explicitly caller-driven, including invalidateAll() for
+     * reflection, native/external mutation, and otherwise unrecorded relationships.
+     */
+    public static final class RecordedGraphBinding {
+        private final M3SignalQualitySchema schema;
+        private final M3SignalDependencyEpochs invalidations;
+        private final boolean includeDispatchCandidates;
+
+        private RecordedGraphBinding(M3SignalQualitySchema schema,
+                M3SignalDependencyEpochs invalidations, boolean includeDispatchCandidates) {
+            this.schema = schema;
+            this.invalidations = invalidations;
+            this.includeDispatchCandidates = includeDispatchCandidates;
+        }
+
+        public M3SignalQualitySchema schema() { return schema; }
+        public M3SignalDependencyEpochs invalidations() { return invalidations; }
+        public boolean includesDispatchCandidates() { return includeDispatchCandidates; }
+    }
+
+    /**
+     * Construct freshness and typed quality from the SAME SHA-256-verified compiler
+     * image. No separate caller-created CSR index can accidentally be bound here.
+     * The returned owner tracks only recorded source relationships under the
+     * explicitly chosen direct/candidate policy; unrecorded edges require
+     * conservative invalidation by the consuming runtime.
+     */
+    public static RecordedGraphBinding bindRecordedGraph(M3SourceSignalImage image,
+            long sourceVersion, boolean includeDispatchCandidates) {
+        Objects.requireNonNull(image, "verified compiler image");
+        M3SignalDependencyEpochs invalidations = M3SignalDependencyEpochs.from(
+                image.relationships(), includeDispatchCandidates);
+        return new RecordedGraphBinding(fromVerifiedCompilerImage(image,
+                invalidations, sourceVersion), invalidations, includeDispatchCandidates);
+    }
+
+    /**
      * Receive the original graph generation owner, with dispatch policy selected by
      * the caller. Returning a schema does not transfer or hide invalidation control.
      */
