@@ -3,6 +3,7 @@
 # Successor 20261024 (D2): copied from ../owned-spring-case-insensitive-map-20261018/run_contracts.py; the bound core is
 # the projection proof's compile closure (source-bindings.json selectedBaseJavaSources) and the volume reserve is 1 GiB
 # beside the 512 MiB task budget, so a developer host can run it; hosted runners keep their own disk assertion.
+# D2 step 1 adds the locale differential oracle (SpringCaseFoldLocaleOracle.java) before compare.py.
 import argparse
 import ctypes
 import importlib.util
@@ -144,6 +145,13 @@ def main():
             raise SystemExit('explicit native library directory absent')
         run('owned-projection-native', [java, *runtime, '-Xcheck:jni', '-Djava.library.path=' + str(native),
             '-cp', owned_cp, 'SpringCaseInsensitiveMapMaskProjectionProof', OWNER, 'native'], 'owned-projection-native.json')
+    # D2 step 1: the locale differential oracle (owned against the provider, same locale, seeded operations).
+    oracle = output / 'locale-oracle'
+    oracle.mkdir()
+    run('strict-locale-oracle-compile', [javac, *compiler_vm, *strict, '-Xlint:all', '-Werror',
+        '-cp', os.pathsep.join(map(str, [owned, jar])), '-d', oracle, HERE / 'SpringCaseFoldLocaleOracle.java'])
+    run('locale-oracle', [java, *runtime, absent, '-cp', os.pathsep.join(map(str, [oracle, owned, jar])),
+        'SpringCaseFoldLocaleOracle'], 'locale-oracle.txt')
     run('compare-actual-output', [sys.executable, '-I', '-S', '-B', HERE / 'compare.py', output])
     try:
         sys.argv = ['verify.py', '--root', str(root), '--jar', str(jar)]

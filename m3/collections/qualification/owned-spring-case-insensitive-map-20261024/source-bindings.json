@@ -129,9 +129,19 @@
       "bytes": 2088
     },
     {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/M3LinkedCaseInsensitiveMapFoldBench.java",
+      "sha256": "188f49dc2b219078fd018a0a2d7c0dc5e757cc787bf05a2bcd22b1b75fbe59eb",
+      "bytes": 3125
+    },
+    {
       "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/OwnedBaselineLauncher.java",
       "sha256": "7b30cf9fea1b2d871e6f9b8ff6ac00abf6808bdf16ac7a0b68038a119af6ff76",
       "bytes": 308
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/PROOF_20261024.json",
+      "sha256": "6f1374d2efbbe4d0531dc873d5a4d7594c259a7d8dd959b1dc8dbaecf9536fa8",
+      "bytes": 4521
     },
     {
       "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/ProviderBaselineLauncher.java",
@@ -140,8 +150,13 @@
     },
     {
       "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/README.md",
-      "sha256": "babf65268cd94bd04c0f5d2607ff1ac9f62d18bbe53a28781e9cd85e94c102b1",
-      "bytes": 2006
+      "sha256": "bee0b98f2da3853f3c405a6995f15ffcc20b8976305e42fa8e61b2e49ab85bc6",
+      "bytes": 3453
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringCaseFoldLocaleOracle.java",
+      "sha256": "ec68e639aa1a1d2506b6f37ebf589466933ca0315a6aacd8562d071a98972f61",
+      "bytes": 5612
     },
     {
       "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringCaseInsensitiveMapEntryCompatibilityObserver.java",
@@ -265,8 +280,8 @@
     },
     {
       "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/run_contracts.py",
-      "sha256": "e61e2b34d4d341c02d309a0cb485fd54da08e8d6e5b649a571f7b5b1a183f398",
-      "bytes": 9636
+      "sha256": "d5b9584c817a6e4582156b3024425850ac04ead9db431e2ac229272a97dfe8b1",
+      "bytes": 10279
     },
     {
       "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/verify.py",

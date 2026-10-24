@@ -1,0 +1,148 @@
+{
+  "schema": "spring-owner-casefold-d2-proof-v1",
+  "status": "PASS",
+  "baseCommit": "b35759a36ecdfc299855a5e53b4d1a05f9f3884d",
+  "shippedOwner": {
+    "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+    "bytes": 31224,
+    "gitBlob": "8fbaa772934dcf257dd3b14063f1ed2fdd073918"
+  },
+  "stepZero": {
+    "runContracts": "PASS",
+    "commands": 18,
+    "nativeProjection": true
+  },
+  "shippedWithOracle": {
+    "runContracts": "PASS",
+    "labels": [
+      "strict-core-compile",
+      "strict-jdk-only-owner-compile",
+      "strict-provider-fixture-compile",
+      "strict-owned-fixture-compile",
+      "strict-projection-fixture-compile",
+      "provider-protocol",
+      "owned-protocol",
+      "full-surface",
+      "provider-constructors",
+      "provider-getter",
+      "provider-equality",
+      "owned-constructors",
+      "owned-getter",
+      "owned-equality",
+      "provider-projection",
+      "owned-projection-java",
+      "owned-projection-native",
+      "strict-locale-oracle-compile",
+      "locale-oracle",
+      "compare-actual-output"
+    ],
+    "localeOracle": "PASS SPRING_CASE_FOLD_LOCALE_ORACLE locales=10 keys=34 operations=40000 checks=4160000"
+  },
+  "native": {
+    "compiler": "GCC 15.2.0 MinGW-Builds x86_64-posix-seh, -std=c17 -O2 -Wall -Wextra -Werror -shared",
+    "dllSHA256": "e29f57f513108b672fc5eeb56a5b28a83ed9c756e16952d3318896036dfabd04"
+  },
+  "experiment": {
+    "name": "fold probe on the two directories (brief FAST mode, phase 1)",
+    "bodySHA256": "1c5a03b52a2f65c77e57f3e6d7231527e8406c7e458e743054b4602950b5b19e",
+    "bodyBytes": 35892,
+    "runContracts": "PASS",
+    "labels": [
+      "strict-core-compile",
+      "strict-jdk-only-owner-compile",
+      "strict-provider-fixture-compile",
+      "strict-owned-fixture-compile",
+      "strict-projection-fixture-compile",
+      "provider-protocol",
+      "owned-protocol",
+      "full-surface",
+      "provider-constructors",
+      "provider-getter",
+      "provider-equality",
+      "owned-constructors",
+      "owned-getter",
+      "owned-equality",
+      "provider-projection",
+      "owned-projection-java",
+      "owned-projection-native",
+      "strict-locale-oracle-compile",
+      "locale-oracle",
+      "compare-actual-output"
+    ],
+    "localeOracle": "PASS SPRING_CASE_FOLD_LOCALE_ORACLE locales=10 keys=34 operations=40000 checks=4160000",
+    "oracleMutant": "tr/az/lt gate removed: the oracle fails",
+    "jmh": {
+      "settings": "JMH 1.37, -f 1 -wi 5 -i 5 -w 1s -r 1s -prof gc, JDK 21.0.9",
+      "shipped": {
+        "containsKeyAbsent/en": {
+          "nsPerOp": 50.15,
+          "bytesPerOp": 38.5
+        },
+        "containsKeyAbsent/tr": {
+          "nsPerOp": 247.96,
+          "bytesPerOp": 129.0
+        },
+        "containsKeyOtherCase/en": {
+          "nsPerOp": 34.79,
+          "bytesPerOp": 29.0
+        },
+        "containsKeyOtherCase/tr": {
+          "nsPerOp": 188.02,
+          "bytesPerOp": 110.0
+        },
+        "getOtherCase/en": {
+          "nsPerOp": 68.51,
+          "bytesPerOp": 29.0
+        },
+        "getOtherCase/tr": {
+          "nsPerOp": 183.47,
+          "bytesPerOp": 128.0
+        },
+        "putSameKeyOtherCase/en": {
+          "nsPerOp": 69.33,
+          "bytesPerOp": 29.0
+        },
+        "putSameKeyOtherCase/tr": {
+          "nsPerOp": 198.01,
+          "bytesPerOp": 110.0
+        }
+      },
+      "experiment": {
+        "containsKeyAbsent/en": {
+          "nsPerOp": 75.24,
+          "bytesPerOp": 0.0
+        },
+        "containsKeyAbsent/tr": {
+          "nsPerOp": 382.71,
+          "bytesPerOp": 129.0
+        },
+        "containsKeyOtherCase/en": {
+          "nsPerOp": 74.06,
+          "bytesPerOp": 0.0
+        },
+        "containsKeyOtherCase/tr": {
+          "nsPerOp": 213.54,
+          "bytesPerOp": 128.0
+        },
+        "getOtherCase/en": {
+          "nsPerOp": 74.53,
+          "bytesPerOp": 0.0
+        },
+        "getOtherCase/tr": {
+          "nsPerOp": 204.9,
+          "bytesPerOp": 128.0
+        },
+        "putSameKeyOtherCase/en": {
+          "nsPerOp": 90.14,
+          "bytesPerOp": 0.0
+        },
+        "putSameKeyOtherCase/tr": {
+          "nsPerOp": 204.53,
+          "bytesPerOp": 128.0
+        }
+      }
+    },
+    "decision": "REJECTED_MEASURED: 0 B/op but slower in time (JDK intrinsics of toLowerCase/hashCode/equals)"
+  },
+  "limits": "Local Windows host; the hosted workflow run is pending. Single-table merge, serialization synthesis and back-shift deletion are not attempted."
+}

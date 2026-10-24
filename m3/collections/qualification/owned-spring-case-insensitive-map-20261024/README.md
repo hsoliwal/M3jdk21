@@ -25,3 +25,22 @@ Local proof (JDK 21.0.9, GCC 15.2.0 MinGW for the native compactor, which builds
 provider and owned protocol runs, surface, constructors, getter, equality, Java and native projections, and
 `compare.py` against the sealed recorded outputs. Custody: 53 sources. The bound core is one file,
 `M3IndexMaskCompactor.java`, the only core class the projection proof loads.
+
+## Step 1: fold fast path, measured and not shipped
+
+The first phase of the brief's FAST mode was built and measured: allocation-free fold probes on the existing two
+directories. An ASCII key probes the alias directory by its fold hash (`31*h + lower(c)`) and a fold compare instead
+of building `convertKey(key)`. It applied only without `convertKey`/`getLocale` overrides and outside tr, az and lt.
+- **Correctness:** `run_contracts.py` passed with it (20 commands, every frozen row equal). The locale oracle passed
+  (4,160,000 checks), and a variant without the tr/az/lt gate failed the oracle.
+- **Measurement:** JMH (`M3LinkedCaseInsensitiveMapFoldBench`, en) reached 0 B/op instead of 29 B/op, but
+  `containsKey` went from 34.8 to 74.1 ns, `get` from 68.5 to 74.5 ns, an absent `containsKey` from 50.2 to 75.2 ns,
+  and `put` from 69.3 to 90.1 ns. JDK 21's intrinsic `toLowerCase`, `hashCode` and `equals` beat a char-by-char loop.
+- **Decision:** the body stays `8fbaa772`, and the catalogue row is `REJECTED_MEASURED`. The single-table merge
+  (brief 4.2) is not measured; it would need a fold that keeps the intrinsics.
+
+Kept as qualification tools:
+- `SpringCaseFoldLocaleOracle.java`: owned against Spring 6.2.0 in 10 locales and 34 keys. `run_contracts.py` runs
+  it as `locale-oracle`, so it also qualifies the current body.
+- `M3LinkedCaseInsensitiveMapFoldBench.java`.
+- `PROOF_20261024.json`: the runs and both benchmark tables.
