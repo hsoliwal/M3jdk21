@@ -1,0 +1,20 @@
+{
+  "schema": "m3jdk21.source-sealed-receiver.v1",
+  "synexia_recipe_commit": "3fe010e384e2b0e6aecaa0e770b40bd546152949",
+  "recipe_id": "com.synexia.m3.CollectionViewsOnePassCowSuperset20261023",
+  "preimage_commit": "b032048eece51c897d8623fd7a69f7f16eac5a57",
+  "postimage_sha256": "d0713f7a8c949a6b11c89fbe637f1ccebb53d45f164a7c69029c517f5eb3eb2f",
+  "test_sha256": "a948973df45ca9247c3811f6aad7dbbc5969091602e93a7fae2c2c9248c8113f",
+  "source_path": "src/java.base/share/classes/java/util/CollectionViews.java",
+  "test_path": "test/jdk/java/util/CollectionViews/FilteredOnePassCowSupersetTest.java",
+  "kind": "TARGET_JAVA_AND_JTREG_POSTIMAGE_ONLY",
+  "new_jni_symbols": 0,
+  "preflight": "SOURCE_HASH_MATCH",
+  "openrewrite_sdk": "NOT_RUN",
+  "jdk21_compiler": "NOT_RUN",
+  "jtreg": "NOT_RUN",
+  "jni_runtime": "NOT_RUN",
+  "five_family_parity": "NOT_RUN",
+  "performance": "NOT_RUN",
+  "admission": "HOLD_UNQUALIFIED"
+}
