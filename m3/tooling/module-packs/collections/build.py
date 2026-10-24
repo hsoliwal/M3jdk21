@@ -71,18 +71,25 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
         command(output / (label + "-" + name.rsplit(".", 1)[1] + ".log"), java,
                 "-Xcheck:jni", *common, "--patch-module", "jdk.m3.collections=" + str(patch),
                 "-m", "jdk.m3.collections/" + name, expected="PASS")
-    mask_test = repo / "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+    mask_tests = repo / "m3/collections/src/test/java/com/m3/collections"
+    native_contracts = (
+        ("M3IndexMaskCompactorSelfTest", "native-oracle", "JNI=true"),
+        ("M3IndexMaskWindowSelfTest", "native-window-oracle", "native=true"),
+        ("M3BudgetedMaskWindowContract", "native-budget-oracle", "backend=NATIVE_REQUIRED"),
+    )
+    tests = [mask_tests / (name + ".java") for name, _, _ in native_contracts]
     native_patch = output / (label + "-native-contracts")
     native_patch.mkdir()
     command(output / (label + "-native-oracle-javac.log"), javac,
             "-source", "21", "-target", "21", "-Xlint:all,-module", "-Werror", "-proc:none",
-            *common, "--patch-module", "com.m3.collections=" + str(mask_test.parent),
-            "-d", native_patch, mask_test)
+            *common, "--patch-module", "com.m3.collections=" + str(mask_tests),
+            "-d", native_patch, *tests)
     library_path = [] if linked else ["-Djava.library.path=" + str(native)]
-    command(output / (label + "-native-oracle.log"), java, "-Xcheck:jni", *library_path,
-            *common, "--patch-module", "com.m3.collections=" + str(native_patch),
-            "-m", "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest",
-            "--native", expected="JNI=true")
+    for name, log_name, marker in native_contracts:
+        command(output / (label + "-" + log_name + ".log"), java, "-Xcheck:jni", *library_path,
+                *common, "--patch-module", "com.m3.collections=" + str(native_patch),
+                "-m", "com.m3.collections/com.m3.collections." + name,
+                "--native", expected=marker)
 
 
 def main():
@@ -107,9 +114,10 @@ def main():
     view_sources = sorted((pack / "src/main/java").rglob("*.java"))
     port = repo / "m3/ports/collections/src/main/java/com/m3/util"
     view_sources.extend(port / (name + ".java") for name in PORT_CLASSES)
-    native_source = repo / "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
+    native_sources = [repo / "m3/collections/src/main/native/collections" / name
+                      for name in ("m3_index_mask_compactor.c", "m3_index_mask_window.c")]
     packager = repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
-    for source in [*collection_sources, *view_sources, native_source, packager]:
+    for source in [*collection_sources, *view_sources, *native_sources, packager]:
         source.resolve(strict=True)
     if not collection_sources or not (pack / "src/main/java/module-info.java").is_file():
         raise ValueError("complete collection source modules required")
@@ -119,19 +127,23 @@ def main():
         directory.mkdir()
     source_receipt = ["path\tsha256"]
     source_receipt.extend(str(path.relative_to(repo)) + "\t" + digest(path)
-                          for path in sorted([*collection_sources, *view_sources, native_source, packager]))
+                          for path in sorted([*collection_sources, *view_sources, *native_sources, packager]))
     (output / "COMPILED_INPUTS.tsv").write_text("\n".join(source_receipt) + "\n", encoding="utf-8")
     for name, sources in (("com.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
         command(output / (name + "-javac.log"), home / "bin/javac", "--release", "21",
                 "-Xlint:all,-module", "-Werror", "-proc:none", "-h", headers,
                 "-d", modules / name, *sources)
-    header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
+    # Preserve each javac-generated owner header and qualify their complete union.
+    owner_headers = [headers / name for name in (
+        "com_m3_collections_M3IndexMaskCompactor.h", "com_m3_collections_M3IndexMaskWindow.h")]
+    header = headers / "m3_collections_mask_jni.h"
+    header.write_bytes(b"\n".join(owner.read_bytes() for owner in owner_headers))
     expected_jni = jni_header_symbols(header)
     library = native / "libm3_collections_mask.so"
     command(output / "native-compile.log", os.environ.get("CC", "cc"), "-std=c17", "-O2",
             "-fPIC", "-shared", "-Wall", "-Wextra", "-Werror",
             "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
-            "-include", header, "-o", library, native_source)
+            "-include", header, "-o", library, *native_sources)
     symbols = command(output / "native-symbols.log", "nm", "-D", "--defined-only", library)
     exported_jni = {line.split()[-1] for line in symbols.splitlines()
                     if line.split() and line.split()[-1].startswith("Java_")}
@@ -173,6 +185,8 @@ def main():
                "existing_collection_source_files": len(collection_sources),
                "optional_projection_source_files": len(view_sources),
                "native_symbol": NATIVE_SYMBOL, "native_symbols": sorted(expected_jni),
+               "native_owner_headers": [str(path.relative_to(output)) for path in owner_headers],
+               "native_window_contracts_on_host_and_image": True,
                "native_sha256": digest(library),
                "linked_native_sha256": digest(linked_library),
                "native_packaging_transform": "objcopy --strip-debug reference; exact linked byte parity",
