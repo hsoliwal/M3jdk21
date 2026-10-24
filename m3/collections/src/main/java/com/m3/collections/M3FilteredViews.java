@@ -614,7 +614,27 @@ public final class M3FilteredViews {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
         @Override public Iterator<E> descendingIterator() {
-            return filtered(nav.descendingSet().iterator(), predicate);
+            if (!(nav instanceof NavigableSetView<?>)) {
+                return filtered(nav.descendingSet().iterator(), predicate);
+            }
+            // Reuse the ascending iterator's depth-sized predicate plan, opening
+            // the original descending owner only after the private chain is peeled.
+            ArrayList<Predicate<? super E>> filters = new ArrayList<>();
+            NavigableSetView<E> layer = this;
+            NavigableSet<E> backing;
+            while (true) {
+                filters.add(layer.predicate);
+                backing = layer.nav;
+                if (!(backing instanceof NavigableSetView<?> nested)) break;
+                @SuppressWarnings("unchecked")
+                NavigableSetView<E> inner = (NavigableSetView<E>) nested;
+                layer = inner;
+            }
+            Collection<E> descending = backing.descendingSet();
+            for (int index = filters.size() - 1; index >= 0; index--) {
+                descending = new CollectionView<>(descending, filters.get(index));
+            }
+            return descending.iterator();
         }
         @Override public NavigableSet<E> subSet(E from, boolean inclusiveFrom,
                 E to, boolean inclusiveTo) {
