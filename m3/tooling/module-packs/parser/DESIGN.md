@@ -131,3 +131,42 @@ the original event cache. Analyzers (lint, clustering, facts) read the index lan
 them builds another tree. The compiletime port's `com.m3.compiletime.ast.M3AST` wrapper over
 `MIndexASTDocument` is a separate owner with its own atom pool. These files may be similar.
 Please confirm via hash or diff before any merge of that owner into this module.
+
+## Culprit lanes (2026-10-23)
+
+`M3Culprits.scan(M3ASTIndex, Limits)` evaluates the M3 hard limits as lane queries over one
+JAVAC-domain index: loops, methods and top-level classes over their line limits, `return null`,
+`System.out`/`System.err`, magic numbers and floating strings, with the same constant and
+message exclusions the Synexia multipass marks and the recipe compiler's lint apply. No javac
+tree, second parser or OpenRewrite LST is touched; the result is two primitive lanes (occurrence
+row, culprit ordinal). A comment mark written by the OpenRewrite recipe and a finding produced
+here name the same site, so the analyzer no longer needs its own tree.
+
+## Facts contract and driver provisioning (2026-10-23)
+
+`M3FactsWriterContract` is a registered consumer contract (`M3_FACTS_WRITER_PASS`): one real javac parse,
+one JAVAC-domain `M3ASTIndex` through `M3ASTIngress.javac`, one `M3FactsWriter.write` into the consumer work
+directory, then JDBC readback of `target/m3/facts.sqlite`. It asserts that the `m3_ast_meta` marker equals
+`M3FactsWriter.SCHEMA`, that the per-generation file and node rows and the generation totals equal the
+returned `Result`, that `committed` is true, that every node lane round-trips exactly (one ordered lane
+digest compared against the index), that a repeated generation is refused whole by the generation primary
+key with the first generation intact while a new generation is appended, that a missing driver surfaces the
+writer's declared `SQLException`, and that a facts path which cannot be a regular file is refused by the
+writer's own `IOException`.
+
+Driver rule: the module keeps `requires static transitive java.sql` and no driver dependency. `build.py`
+resolves the newest local Xerial `sqlite-jdbc` 3.45.x jar from the local Maven repository
+(`--maven-repository`, default `~/.m2/repository`) together with the one `slf4j-api` version its sibling
+POM declares (`org.sqlite.JDBC` cannot initialize without it), seals both paths and SHA-256 values in
+`INPUTS.json` (owner `maven-repository`, with the POM) and `lint-structure.log`, and places them only on
+the consumer test classpath, never on the module path, the JAR, the JMOD or the linked image. An absent
+jar refuses the sequence with one line naming the expected path; nothing is downloaded.
+
+`M3FactsTransactionContract` (`M3_FACTS_TRANSACTION_PASS`) and `M3FactsStreamContract` (`M3_FACTS_STREAM_PASS`)
+recover the transaction-level checks of the first one-pass facts contract on real `jdbc:sqlite::memory:`
+connections (fixtures in `M3FactsFixtures`): an autocommit connection gets one owned transaction and is handed
+back usable, a caller transaction gets one savepoint and keeps publication, and refused generations, budgets,
+foreign tables, foreign triggers and TEMP shadows publish nothing; exact range hashes obey their cumulative
+budget; a supplied Stream is closed exactly once, before commit, on success, close failure and setup failure;
+a two-domain generation keeps a lone-surrogate literal lossless; a module directory reached through a symbolic
+link is refused, reported `SKIPPED` (not PASS) when a Windows process lacks the symbolic-link privilege.
