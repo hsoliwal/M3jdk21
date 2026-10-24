@@ -60,9 +60,39 @@ public final class M3EvictingQueueCanonicalContractProbe {
 
         long steps = runSeededQueueModel(legacy) + runSeededQueueModel(canonical);
         verifyBoundedInitialStorage();
+        verifySelfReferenceRendering();
         System.out.println("M3_EVICTING_CANONICAL_NAME_PASS normalized_wire_sha256="
                 + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(normalized))
                 + " randomized_model_steps=" + steps);
+    }
+
+    /** JDK AbstractCollection direct self-reference contract, including wire round-trip. */
+    private static void verifySelfReferenceRendering() throws Exception {
+        M3EvictingQueue<Object> actual = M3EvictingQueue.create(3);
+        ArrayDeque<Object> expected = new ArrayDeque<>();
+        actual.add("start");
+        expected.addLast("start");
+        actual.add(actual);
+        expected.addLast(expected);
+        actual.add("end");
+        expected.addLast("end");
+        require(actual.toString().equals(expected.toString()),
+                "canonical direct self-reference rendering differs from JDK Collection");
+        require(actual.toString().equals("[start, (this Collection), end]"),
+                "canonical direct self-reference must not recurse");
+        Queue<?> restored = (Queue<?>) deserialize(serialize(actual));
+        require(restored.getClass() == M3EvictingQueue.class,
+                "serialized self-referential owner identity changed");
+        require(restored.toArray()[1] == restored,
+                "self-referential member was not restored as the queue itself");
+        require(restored.toString().equals(expected.toString()),
+                "self-reference render after readObject differs from JDK Collection");
+        actual.add("tail");
+        expected.removeFirst();
+        expected.addLast("tail");
+        require(actual.toString().equals(expected.toString()),
+                "direct self-reference rendering after eviction differs from JDK Collection");
+        System.out.println("M3_EVICTING_SELF_REFERENCE_RENDER_PASS");
     }
 
     /** Exercise bounded empty-capacity storage, physical ring growth, wrap and wire replay. */

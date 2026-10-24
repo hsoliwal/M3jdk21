@@ -414,8 +414,9 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
         if (!cursor.hasNext()) return "[]";
         StringBuilder text = new StringBuilder("[");
         while (true) {
-            // The provider renders through a distinct internal owner: outer self is not special.
-            text.append(cursor.next());
+            // Preserve direct self-reference rendering per JDK Collection semantics.
+            Object value = cursor.next();
+            text.append(value == this ? "(this Collection)" : value);
             if (!cursor.hasNext()) return text.append(']').toString();
             text.append(", ");
         }
