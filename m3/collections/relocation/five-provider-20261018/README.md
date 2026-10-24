@@ -3,6 +3,8 @@
 
 # M3JDK21 five-source provider relocation — canonical recipe
 
+> **Superseded:** the `com.m3.sdk.*` package scheme of this recipe is superseded by the `com.m3.collections.<token>` scheme of the received sources (rule R3 in [NAMING.md](../../NAMING.md)). This directory is kept as history; new relocations use `com.m3.collections.<token>`.
+
 **Task:** first mechanically rename isolated donor source packages; only then qualify
 M3 dynamic arrays, logical offsets, physical indexes, state masks, cached filtering and
 sorted wrappers file-by-file. This is a *source-first* recipe for the complete five-provider
