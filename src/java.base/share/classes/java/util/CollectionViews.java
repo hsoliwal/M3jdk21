@@ -337,12 +337,14 @@ public final class CollectionViews {
         @Override
         public boolean addAll(Collection<? extends E> elements) {
             Objects.requireNonNull(elements, "elements");
-            for (E element : elements) {
+            // Validate and retain each supplied occurrence exactly once before writing.
+            // An arbitrary Collection need not be repeatable (or side-effect-free).
+            return backing.addAll(selectedCopy(elements, element -> {
                 if (!visible(element)) {
                     throw new IllegalArgumentException("element rejected by view predicate");
                 }
-            }
-            return backing.addAll(elements);
+                return true;
+            }));
         }
 
         @Override

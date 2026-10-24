@@ -8,7 +8,7 @@ OUT="$1"
 [[ "$OUT" == /* && ! -e "$OUT" ]] || { echo 'require a new absolute output directory' >&2; exit 2; }
 mkdir -p "$OUT"
 (cd "$ROOT" && sha256sum -c <<'SEALS'
-f0e20d963ba2e7d0bb49f0347b2f45f2bd7058f962d3f3aac0d95cc82364dcd5  src/java.base/share/classes/java/util/CollectionViews.java
+e09db07fb113233e52a67960411608d8b18dc0eedfc5a7f861cdaecc7c1cc1e6  src/java.base/share/classes/java/util/CollectionViews.java
 a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d  m3/compatibility/collection-views/preimage/CollectionViews.java.txt
 f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6  test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
 SEALS
@@ -50,9 +50,10 @@ done
 java --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" BootstrapViewsTest | tee "$OUT/bootstrap.log"
 java -Xss256k --add-opens java.base/java.util=ALL-UNNAMED --add-modules jdk.management \
     --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" CollectionViewsContract | tee "$OUT/contract.log"
-for test in FilteredCopyOnWriteBulkTest FilteredIsEmptyDirectTest FilteredListRemoveContractTest \
+for test in FilteredBatchAdmissionTest FilteredCopyOnWriteBulkTest FilteredIsEmptyDirectTest FilteredListRemoveContractTest \
     FilteredOwnerMembershipTest FilteredRepresentativeContractTest FilteredSortedSpliteratorMetadataTest \
     FilteredSetMutationDispatchTest FilteredSpliteratorReentrantTest M3CollectionViewsCursorMaskContract; do
     java --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" "$test" | tee "$OUT/$test.log"
 done
+java -Xint --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" FilteredBatchAdmissionTest | tee "$OUT/FilteredBatchAdmissionTest-interpreter.log"
 echo 'SOURCE_SEALED_COLLECTIONVIEWS_PATCH_MODULE_PASS; full JDK and native runtime still pending' | tee "$OUT/summary.log"
