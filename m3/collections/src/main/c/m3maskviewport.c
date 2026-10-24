@@ -332,6 +332,12 @@ Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclas
     const int contradictory = (((uint32_t) required & (uint32_t) forbidden) != 0U);
     const int fetchStates = !allStates && !contradictory;
     const jint end = first + length;
+    /* For a bounded filtered frame, stage every selected result during the
+     * mandatory source validation pass. No second JNI input-region traversal. */
+    const int inlineFast = fetchStates && maxVisible <= M3_FRAME_REGION;
+    jint small[M3_FRAME_REGION * 3];
+    jint inlineWritten = 0;
+    jint inlineLeft = skipVisible;
     jint ids[M3_FRAME_REGION];
     jint masks[M3_FRAME_REGION];
     jint available = 0;
@@ -345,6 +351,16 @@ Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclas
                 return 0;
             }
             if (allStates || (fetchStates && matches(masks[i], required, forbidden))) {
+                if (inlineFast && inlineWritten < maxVisible) {
+                    if (inlineLeft > 0) {
+                        --inlineLeft;
+                    } else {
+                        small[inlineWritten] = ids[i];
+                        small[M3_FRAME_REGION + inlineWritten] = start + i;
+                        small[M3_FRAME_REGION * 2 + inlineWritten] = masks[i];
+                        ++inlineWritten;
+                    }
+                }
                 ++available;
             }
         }
@@ -360,11 +376,24 @@ Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclas
         return 0;
     }
     if (needed == 0) return 0;
+    if (inlineFast) {
+        if (inlineWritten != needed) {
+            raise(env, "java/util/ConcurrentModificationException", "frame input changed");
+            return 0;
+        }
+        (*env)->SetIntArrayRegion(env, rows, rowOffset, needed, small);
+        if (!(*env)->ExceptionCheck(env)) {
+            (*env)->SetIntArrayRegion(env, slots, slotOffset, needed, small + M3_FRAME_REGION);
+        }
+        if (!(*env)->ExceptionCheck(env)) {
+            (*env)->SetIntArrayRegion(env, words, wordOffset, needed, small + M3_FRAME_REGION * 2);
+        }
+        return (*env)->ExceptionCheck(env) ? 0 : needed;
+    }
     if ((size_t) needed > SIZE_MAX / (3U * sizeof(jint))) {
         raise(env, "java/lang/OutOfMemoryError", "scratch size overflow");
         return 0;
     }
-    jint small[M3_FRAME_REGION * 3];
     jint *scratch = small;
     if (needed > M3_FRAME_REGION) {
         scratch = (jint *) malloc(3U * (size_t) needed * sizeof(jint));
