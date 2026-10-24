@@ -61,11 +61,11 @@ out of its test/JNI classpaths. The actual product module descriptor explicitly
 requires com.m3.arrays; that contract must NOT be removed.
 
 Canonical Synexia source-sealed text recipe: PR #13224, commit
-`c04275f1ea19bffbe3f513996769308464847241`,
+`d9a82ffdde9a43a66286b53817ef352466244149`,
 `com.synexia.m3.Jdk21FullCollectionJniModuleClosure20261024`.
 The reused M3HashPinnedTextSnapshotRecipe owns one exact Python verifier target.
 Product preimage blob `cf5e385420cae668fa0e68f769545f7ca6b16e03`;
-exact emitted postimage blob `dd38848e22829223838011f848b2741999571e7f`.
+exact emitted postimage blob `73a90bdf35b770b0e91ecc832fff65d976650a13`.
 
 The corrected existing verifier compiles and installs original m3/arrays from
 its source POM (after pinned donor/JUnit closure), checks its real Java module
@@ -86,3 +86,22 @@ and both new recipe tests must still RUN and PASS on their current heads.
 The frozen donation source manifest and source-versioned OpenRewrite vendor
 dependency need independent qualified successors, not ignored failures.
 Remain DRAFT/HOLD until full JDK, JNI, jtreg/JCK and installed-image gates pass.
+
+### Versioned/unversioned `jar --describe-module` regression
+
+A local Java 21 named-module fixture demonstrated that an explicit module may
+appear as `com.m3.arrays jar:file:...` without any `@version`. The original
+first repair incorrectly interpreted the entire unversioned header as a module
+name. Corrected source now reads the first whitespace token and removes
+`@version` only if present. The rejected intermediate verifier blob
+`dd38848e22829223838011f848b2741999571e7f` is preserved solely in the
+Synexia recipe's correction history; it is **not** the current product code.
+
+The version-neutral corrected verifier blob is
+`73a90bdf35b770b0e91ecc832fff65d976650a13`, exact canonical Synexia
+source template at `d9a82ffdde9a43a66286b53817ef352466244149`.
+The JDK 21 fixture passed explicit arrays module build,
+`--module-path` compilation and `jdeps` closure check for
+`com.m3.arrays,java.base`. Full owning M3JDK21 Maven/JUnit/JNI and
+OpenRewrite SDK execution are still outstanding; this source-receipt pass
+does not assert their success.

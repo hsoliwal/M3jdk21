@@ -102,7 +102,7 @@ def main():
             raise RuntimeError('M3 arrays built artifact lost its module descriptor')
     array_module = subprocess.check_output(
         [JAVA / 'bin/jar', '--describe-module', '--file', arrays_jar],
-        text=True).splitlines()[0].split('@')[0].strip()
+        text=True).splitlines()[0].split()[0].split('@')[0]
     if array_module != 'com.m3.arrays':
         raise RuntimeError('Unexpected product arrays module identity: ' + array_module)
 
