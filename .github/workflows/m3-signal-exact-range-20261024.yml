@@ -34,6 +34,10 @@ jobs:
             m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java \
+            m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java \
+            m3/collections/src/main/java/com/m3/collections/M3ProgressState.java \
+            m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java \
+            m3/collections/src/main/java/com/m3/collections/M3ShadowStreams.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalExactRangeIndex.java \
             m3/collections/src/test/java/com/m3/collections/M3SignalExactRangeIndexSelfTest.java
           java -cp "$out/classes" com.m3.collections.M3SignalExactRangeIndexSelfTest
