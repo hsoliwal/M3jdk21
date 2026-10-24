@@ -384,7 +384,7 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
         return true;
     }
 
-    private void copyInto(Object[] output, int count) {
+    private void copyRingInto(Object[] output, int count) {
         Object[] ring = elements;
         int first = Math.min(count, ring.length - head);
         System.arraycopy(ring, head, output, 0, first);
@@ -393,7 +393,7 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
 
     @Override public Object[] toArray() {
         Object[] result = new Object[size()];
-        copyInto(result, result.length);
+        copyRingInto(result, result.length);
         return result;
     }
 
@@ -404,7 +404,7 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
         if (count > a.length) {
             result = (T[]) java.lang.reflect.Array.newInstance(a.getClass().getComponentType(), count);
         }
-        copyInto(result, count);
+        copyRingInto(result, count);
         if (count < result.length) result[count] = null;
         return result;
     }
@@ -424,7 +424,7 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
     @Serial private void writeObject(ObjectOutputStream output) throws IOException {
         int count = size();
         Object[] image = new Object[count + 1];
-        copyInto(image, count);
+        copyRingInto(image, count);
         output.defaultWriteObject();
         output.writeInt(count);
         output.writeObject(image);
