@@ -8412,7 +8412,18 @@
       "canonical_recipe": "com.synexia.m3.M3JdkCollectionPublicationOwners20261017",
       "target_proof": "m3/tooling/module-packs/collections/build.py",
       "existing_generic_module": "com.m3.collections",
-      "optional_exported_package": "com.m3.util"
+      "optional_exported_package": "com.m3.util",
+      "refinement_receipts": [
+        {
+          "date": "2026-10-24",
+          "canonical_recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+          "qualified_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+          "source_epoch": "22c70a28966e2470352af34abf914d6917d941d5",
+          "receipt": "m3/runtime-integration/combined-runtime-20261018/RECEIVING_20261024.json",
+          "execution": "m3/runtime-integration/combined-runtime-20261018/CURRENT_EXECUTION_20261024.json",
+          "scope": "Filtered descending iterator and existing JNI mask module packaging. Existing optional module status and ordered String receiving remain unchanged."
+        }
+      ]
     }
   ]
 }
