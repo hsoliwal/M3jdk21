@@ -8,7 +8,7 @@ OUT="$1"
 [[ "$OUT" == /* && ! -e "$OUT" ]] || { echo 'require a new absolute output directory' >&2; exit 2; }
 mkdir -p "$OUT"
 (cd "$ROOT" && sha256sum -c <<'SEALS'
-6759e1c605be7c52c3471767879cfa4aec7751e220699f6af49a43ba0902660b  src/java.base/share/classes/java/util/CollectionViews.java
+736b9f6df1d50d76dde9cf4333a47ffe7a98b1fe5ac48029bcbcd30e304bd3fa  src/java.base/share/classes/java/util/CollectionViews.java
 a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d  m3/compatibility/collection-views/preimage/CollectionViews.java.txt
 f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6  test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
 SEALS

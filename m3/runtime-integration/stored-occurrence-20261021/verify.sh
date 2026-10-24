@@ -13,10 +13,10 @@ mkdir -p "$OUT"/{before-src,after-src}/java/util
 cp "$ROOT/src/java.base/share/classes/java/util/CollectionViews.java" "$OUT/after-src/java/util/CollectionViews.java"
 {
   test "$(git -C "$ROOT" hash-object "$OUT/before-src/java/util/CollectionViews.java")" = "2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66"
-  test "$(git -C "$ROOT" hash-object "$OUT/after-src/java/util/CollectionViews.java")" = "b3d21d61844f070df99b0289e514eff350a3f6e7"
+  test "$(git -C "$ROOT" hash-object "$OUT/after-src/java/util/CollectionViews.java")" = "540ebf535672a27a90f2a547f2d21aeebebe88aa"
   printf '%s  %s\n' "a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d" "$OUT/before-src/java/util/CollectionViews.java" | sha256sum -c -
   printf '%s  %s\n' "f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6" "$ROOT/test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java" | sha256sum -c -
-  printf '%s  %s\n' "c3da7a7f33b7a90058a8b033b6df65df6b56409495567253e836b50dd985bc40" "$OUT/after-src/java/util/CollectionViews.java" | sha256sum -c -
+  printf '%s  %s\n' "736b9f6df1d50d76dde9cf4333a47ffe7a98b1fe5ac48029bcbcd30e304bd3fa" "$OUT/after-src/java/util/CollectionViews.java" | sha256sum -c -
 } | tee "$OUT/seals.log"
 java -version > "$OUT/java-version.log" 2>&1
 javac -version > "$OUT/javac-version.log" 2>&1
@@ -28,6 +28,7 @@ diff -u "$OUT/abi-before.txt" "$OUT/abi-after.txt" > "$OUT/abi-diff.txt"
 javac --patch-module java.base="$OUT/after-classes" --add-modules jdk.management -Xlint:all -Werror -d "$OUT/test-classes" \
     "$ROOT/test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java" \
     "$ROOT/test/jdk/java/util/CollectionViews/BootstrapViewsTest.java" \
+    "$ROOT/test/jdk/java/util/CollectionViews/RunSearchJni.java" \
     "$ROOT/test/jdk/java/util/CollectionViews/CollectionViewsContract.java" \
     "$ROOT/test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java"
 set +e
