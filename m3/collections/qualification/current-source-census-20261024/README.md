@@ -1,14 +1,14 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Current M3JDK21 collection source census (non-admission)
 
-This is **M3JDK21**, an integrated product JDK—not an M3 overlay. This packet is an original-product qualification tool, not a runtime collection API or a migration recipe. Canonical source text and replay recipe belong only to [Synexia #13224](https://github.com/hsoliwal/com.synexia/pull/13224), commit `b8a5b2817af8711a8702d06289396293aeb2afcb`, recipe `com.synexia.m3.Jdk21CollectionSourceCensus20261024`.
+This is **M3JDK21**, an integrated product JDK—not an M3 overlay. This packet is an original-product qualification tool, not a runtime collection API or a migration recipe. Canonical source text and replay recipe belong only to [Synexia #13224](https://github.com/hsoliwal/com.synexia/pull/13224), commit `8068da16c8cf86be7f925bbd7ba5aa46032d5626`, recipe `com.synexia.m3.Jdk21CollectionSourceCensus20261024`.
 
 ## Exact generated original product tools
 
 | Product path | Canonical Git blob |
 | --- | --- |
 | `audit.py` | `99d7bc41f024ba24f388c683444a474d23a7b622` |
-| `test_audit.py` | `8ff6c68c71ad0942141c315bb25ccfdda6553714` |
+| `test_audit.py` | `b1fa399afc9d631360eb1fd7b9d620f7648f612c` |
 | `.github/workflows/m3-current-source-census-20261024.yml` | `f3978d4553044d0cf180d7f3abad2fbd6201dcdc` |
 
 No runtime collection implementation, native library, JNI export, `java.util` API, dependency or existing source-manifest/provenance file is changed in this receiving pass.
@@ -31,3 +31,6 @@ python3 m3/collections/qualification/current-source-census-20261024/audit.py . -
 The exact-head GitHub Actions workflow does this with explicit PR-head checking, then uploads the derived report as an artifact. A successful *inventory job* is not success for full Java/JNI release admission. The original `verify_donation.py`, full JNI/Maven recipe, vendor build, installed-JDK image, jtreg/JCK and performance gates remain independent.
 
 **Qualification truth:** Five synthetic Python contract/refusal cases, Python syntax, and YAML structure passed locally; three received Git blobs were compared byte-for-byte against Synexia. **Pending:** actual full-current-source census execution on the installed repo head, real OpenRewrite Text SDK, full module/native/JNI tests, and JDK image proof. Keep draft and do not merge based on inventory alone.
+
+
+The accepted updated test now explicitly tampers with a **duplicate** historical source row *and recomputes the manifest packet SHA-256* before requiring the original path-uniqueness guard to reject it. All five fixture tests passed again locally. The previous test image is superseded only by the exact canonical test source; other owner files and historical manifests remain unchanged.

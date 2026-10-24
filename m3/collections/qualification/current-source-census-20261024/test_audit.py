@@ -60,8 +60,12 @@ class CurrentSourceCensusTest(unittest.TestCase):
             manifest.write_text(manifest.read_text() + manifest.read_text())
             with self.assertRaisesRegex(ValueError, 'manifest is missing or changed'):
                 inspect(root)
-            manifest.write_text('# unadmitted alteration\n' + manifest.read_text())
-            with self.assertRaises(ValueError):
+            # Even a newly signed manifest must refuse duplicate owner paths.
+            packet = root / 'm3/collections/synexia-donation.json'
+            info = json.loads(packet.read_text())
+            info['installed_source_manifest_sha256'] = sha(manifest.read_bytes())
+            packet.write_text(json.dumps(info))
+            with self.assertRaisesRegex(ValueError, 'duplicate historical source path'):
                 inspect(root)
 
     def test_historical_row_order_is_preserved_not_reinterpreted(self):
