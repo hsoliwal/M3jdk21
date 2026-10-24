@@ -1,7 +1,10 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 package com.m3.collections;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
@@ -41,7 +44,92 @@ public final class M3SourceSignalQualityFactorySelfTest {
         String source=text.toString();
         return source + "# sha256\t" + sha(source) + "\n";
     }
+    private static String graphImageText() {
+        StringBuilder text = new StringBuilder("# M3JDK21-SOURCE-SIGNALS/1\n");
+        for (String name : new String[] {"catalog.Alpha", "catalog.Beta", "catalog.Gamma"}) {
+            text.append("S\t").append(name);
+            for (int i = 0; i < 15; i++) text.append('\t').append(i + 1);
+            text.append('\n');
+            if (name.equals("catalog.Alpha")) {
+                text.append("E\tcatalog.Alpha\tcall:DIRECT:catalog.Beta#b():void\t2\n");
+                text.append("E\tcatalog.Alpha\tcall:DISPATCH_CANDIDATE:catalog.Gamma#c():void\t3\n");
+            }
+        }
+        String records = text.toString();
+        return records + "# sha256\t" + sha(records) + "\n";
+    }
+
+    private static void originalGraphPolicyBinding() {
+        var image = M3SourceSignalImage.parse(graphImageText());
+        check(image.rowCount() == 3 && image.relationships().edgeCount() == 2,
+                "actual S/E parser supplies both direct and dispatch-candidate edges");
+        var direct = M3SourceSignalQualityFactory.bindRecordedGraph(image, 23, false);
+        var candidate = M3SourceSignalQualityFactory.bindRecordedGraph(image, 23, true);
+        check(!direct.includesDispatchCandidates() && candidate.includesDispatchCandidates(),
+                "explicit graph policy retained");
+        check(direct.invalidations().dependencyEdgeCount() == 1,
+                "only original DIRECT compiler relationship admitted");
+        check(candidate.invalidations().dependencyEdgeCount() == 2,
+                "candidate policy adds the recorded virtual dispatch candidate");
+        check(direct.schema().sourceSha256().equals(image.sourceSha256())
+                && candidate.schema().sourceSha256().equals(image.sourceSha256()),
+                "image identity remains the exact original SHA-256");
+        var directStamp = direct.schema().capture(new int[] {0});
+        var candidateStamp = candidate.schema().capture(new int[] {0});
+        direct.invalidations().invalidate(2);
+        candidate.invalidations().invalidate(2);
+        check(direct.schema().unchanged(directStamp, 23, image.sourceSha256()),
+                "unselected candidate target must not invalidate direct-only caller");
+        check(!candidate.schema().unchanged(candidateStamp, 23, image.sourceSha256()),
+                "included candidate must invalidate caller");
+        var fresh = direct.schema().capture(new int[] {0});
+        direct.invalidations().invalidate(1);
+        check(!direct.schema().unchanged(fresh, 23, image.sourceSha256()),
+                "direct dependency change must invalidate original caller");
+        var old = candidate.schema().capture(new int[] {0});
+        candidate.invalidations().invalidateAll();
+        check(!candidate.schema().unchanged(old, 23, image.sourceSha256()),
+                "unknown external/reflective dependencies require full invalidation");
+        refuses(IllegalArgumentException.class, () ->
+                M3SourceSignalQualityFactory.bindRecordedGraph(image, -1, false));
+        String tampered = graphImageText().replace("catalog.Gamma", "catalog.Zeta");
+        refuses(IllegalArgumentException.class, () ->
+                M3SourceSignalQualityFactory.bindRecordedGraph(M3SourceSignalImage.parse(tampered), 23, true));
+    }
+
+    /** Optional file is emitted by the original existing javac M3SourceSignals plugin. */
+    private static void attributedCompilerImage(Path sourceImage) {
+        final String serialized;
+        try {
+            serialized = Files.readString(sourceImage, StandardCharsets.UTF_8);
+        } catch (IOException failure) {
+            throw new IllegalStateException("cannot read original attributed compiler image", failure);
+        }
+        var image = M3SourceSignalImage.parse(serialized);
+        check(image.rowCount() >= 2 && image.relationships().edgeCount() >= 1,
+                "actual attributed S/T/E javac product fixture");
+        var binding = M3SourceSignalQualityFactory.bindRecordedGraph(image, 42, true);
+        check(binding.schema().dimensionCount() == M3SourceSignalImage.Scalar.values().length,
+                "original parsed javac image retains all seventeen typed dimensions");
+        check(binding.schema().sourceAuthority()
+                == M3SignalQualitySchema.SourceAuthority.COMPILER_IMAGE_SHA256_VERIFIED,
+                "real compiler image digest authenticated by original parser");
+        check(binding.invalidations().dependencyEdgeCount() == image.relationships().edgeCount(),
+                "bound invalidation indexes the very same attributed graph");
+        int[] selected = new int[image.rowCount()];
+        for (int i = 0; i < selected.length; i++) selected[i] = i;
+        var stamp = binding.schema().capture(selected);
+        check(binding.schema().unchanged(stamp, 42, image.sourceSha256()),
+                "new original compiler-image snapshot initially fresh");
+        binding.invalidations().invalidateAll();
+        check(!binding.schema().unchanged(stamp, 42, image.sourceSha256()),
+                "unrecorded source effects always conservatively invalidate");
+    }
+
     public static void main(String[] args) {
+        originalGraphPolicyBinding();
+        if (args.length == 1) attributedCompilerImage(Path.of(args[0]));
+        if (args.length > 1) throw new IllegalArgumentException("at most one compiler image");
         String image=imageText();
         var verified=M3SourceSignalImage.parse(image);
         check(verified.rowCount()==2,"two sorted observed source types");
