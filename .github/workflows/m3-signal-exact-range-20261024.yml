@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original typed signal exact range Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalColumns.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalExactRangeIndex.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SignalExactRangeIndex*.java'
+      - 'm3/collections/qualification/signal-exact-range-20261024/**'
+      - '.github/workflows/m3-signal-exact-range-20261024.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-source-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile actual M3 typed owners and run exact primitive range differential
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-signal-exact-range"
+          mkdir -p "$out/classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalExactRangeIndex.java \
+            m3/collections/src/test/java/com/m3/collections/M3SignalExactRangeIndexSelfTest.java
+          java -cp "$out/classes" com.m3.collections.M3SignalExactRangeIndexSelfTest
+          java -Xint -cp "$out/classes" com.m3.collections.M3SignalExactRangeIndexSelfTest
+  original-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Rebuild original source-vendored Jupiter dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
+      - name: Build original arrays then execute owning collections JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3SignalExactRangeIndexTest test
