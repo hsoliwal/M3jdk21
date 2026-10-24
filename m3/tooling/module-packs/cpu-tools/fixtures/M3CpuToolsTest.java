@@ -216,6 +216,21 @@ public final class M3CpuToolsTest {
         expect(IllegalArgumentException.class, () -> CpuTools.gramIndex(source, 0));
         expect(IllegalArgumentException.class, () -> CpuTools.gramIndex(source, 65));
         expect(NullPointerException.class, () -> CpuTools.gramIndex(null, 2));
+        var lexicon = CpuTools.affixIndex(source);
+        check(lexicon.sha256().matches("[0-9a-f]{64}")
+                && lexicon.lexiconSha256().matches("[0-9a-f]{64}"), "file-bound lexicon identity");
+        check(lexicon.tokenCount() == 1 && lexicon.distinctCount() == 1
+                && lexicon.wordAt(0).equals("ababa") && lexicon.contains("ababa"),
+                "reuse JDK word breaking without a second payload owner");
+        check(lexicon.countPrefix("aba") == 1 && lexicon.countSuffix("ba") == 1,
+                "file lexicon prefix/suffix queries");
+        check(lexicon.prefix("a", 0).totalMatches() == 1 && !lexicon.prefix("a", 0).complete(),
+                "file lexicon capped query");
+        check(CpuTools.verifyAffixIndex(source, lexicon, null), "exact lexicon replay");
+        check(!CpuTools.verifyAffixIndex(changed, lexicon, null), "lexicon file byte binding");
+        check(!CpuTools.verifyAffixIndex(M3File.load(copied), lexicon, null),
+                "lexicon file URI binding for identical bytes");
+        expect(NullPointerException.class, () -> CpuTools.affixIndex(null));
         var signal = CpuTools.signature(source, 16);
         check(signal.sha256().matches("[0-9a-f]{64}"), "signature receipt format");
         check(CpuTools.verifySignature(source, 16, signal, null), "signature exact-lane replay");
@@ -253,6 +268,7 @@ public final class M3CpuToolsTest {
         expect(CancellationException.class, () -> CpuTools.multiLiteral(source, patterns, 2, cancelled));
         expect(CancellationException.class, () -> CpuTools.signature(source, 16, cancelled));
         expect(CancellationException.class, () -> CpuTools.gramIndex(source, 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.affixIndex(source, cancelled));
         expect(CancellationException.class, () -> CpuTools.rank(rankedSources, List.of("ababa"), 1, cancelled));
         cancelled.cancelled = false;
         cancelled.cancelAfterWork = true;

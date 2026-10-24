@@ -15,6 +15,7 @@ import com.m3.tools.text.ngram.NGramIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
 import com.m3.tools.text.regex.RegexMatcher;
+import com.m3.tools.text.search.AffixIndex;
 import com.m3.tools.text.search.ExactSearch;
 import com.m3.tools.text.search.MultiLiteralSearch;
 import com.m3.tools.text.similarity.EditDistance;
@@ -47,7 +48,7 @@ public final class M3DonorToolsTest {
     private M3DonorToolsTest() { }
 
     public static void main(String[] args) throws Exception {
-        text(); ngramIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
+        text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -226,6 +227,99 @@ public final class M3DonorToolsTest {
                     "overlap coefficient contract");
             check(NGrams.overlap(other, indexed).equals(overlap), "overlap symmetry");
         }
+    }
+
+    /** Differential UTF-16 prefix/suffix ranges: construction has no retained nodes. */
+    private static void affixIndex() throws Exception {
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(null));
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(List.of(), null));
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(Arrays.asList("a", null)));
+        rejects(IllegalArgumentException.class,
+                () -> AffixIndex.prepare(Collections.nCopies(AffixIndex.MAX_TERMS + 1, "a")));
+        rejects(IllegalArgumentException.class,
+                () -> AffixIndex.prepare(List.of("a".repeat(AffixIndex.MAX_TERM_UTF16 + 1))));
+        rejects(IllegalArgumentException.class, () -> AffixIndex.prepare(
+                Collections.nCopies(129, "a".repeat(AffixIndex.MAX_TERM_UTF16))));
+        var empty = AffixIndex.prepare(List.of());
+        check(empty.distinctCount() == 0 && empty.inputCount() == 0, "empty affix index");
+        check(empty.prefix("", 0).complete() && empty.suffix("", 0).complete(), "empty affix query");
+        rejects(NullPointerException.class, () -> empty.prefix(null, 1));
+        rejects(NullPointerException.class, () -> empty.suffix(null, 1));
+        rejects(NullPointerException.class, () -> empty.contains(null));
+        rejects(IndexOutOfBoundsException.class, () -> empty.wordAt(0));
+        rejects(IllegalArgumentException.class, () -> empty.prefix("", -1));
+        rejects(IllegalArgumentException.class, () -> empty.suffix("", AffixIndex.MAX_TERMS + 1));
+        rejects(IllegalArgumentException.class,
+                () -> empty.prefix("a".repeat(AffixIndex.MAX_TERM_UTF16 + 1), 1));
+
+        var manual = AffixIndex.prepare(List.of("", "a", "ab", "aba", "xaba", "ab", "\ud800", "\ud800a"));
+        check(manual.inputCount() == 8 && manual.distinctCount() == 7, "duplicate terms collapsed");
+        check(manual.countPrefix("a") == 3 && manual.countSuffix("a") == 4, "literal affix cardinalities");
+        check(manual.prefix("", 0).totalMatches() == 7 && !manual.prefix("", 0).complete(),
+                "zero-cap partial result is explicit");
+        check(manual.prefix("absent", 0).complete(), "zero-cap empty result is complete");
+        var capped = manual.suffix("a", 2);
+        check(capped.size() == 2 && capped.totalMatches() == 4 && !capped.complete(), "suffix cap");
+        int[] detached = capped.ordinals();
+        detached[0] = -99;
+        check(capped.ordinalAt(0) >= 0, "suffix IDs detached");
+
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> AffixIndex.prepare(List.of("aa", "ab"), () -> {
+            if (checkpoints.incrementAndGet() == 2) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 2, "cancellation during affix admission");
+        rejects(IllegalStateException.class, () -> manual.prefix("a", 2, () -> {
+            throw new IllegalStateException("cancel query");
+        }));
+
+        for (int trial = 0; trial < 1_200; trial++) {
+            List<String> inputs = new ArrayList<>();
+            int length = RANDOM.nextInt(40);
+            for (int i = 0; i < length; i++) inputs.add(randomText(18));
+            AffixIndex index = AffixIndex.prepare(inputs);
+            List<String> canonical = new ArrayList<>(new TreeSet<>(inputs));
+            check(index.inputCount() == inputs.size() && index.distinctCount() == canonical.size(),
+                    "canonical lexicon cardinality");
+            for (int i = 0; i < canonical.size(); i++) {
+                check(index.wordAt(i).equals(canonical.get(i)), "canonical word ID");
+                check(index.contains(canonical.get(i)), "exact membership");
+            }
+            List<String> shuffled = new ArrayList<>(inputs);
+            Collections.reverse(shuffled);
+            check(index.sha256().equals(AffixIndex.prepare(shuffled).sha256()), "stable lexicon fingerprint");
+            for (int q = 0; q < 9; q++) {
+                String query = q == 0 ? "" : q == 1 && !canonical.isEmpty()
+                        ? canonical.get(RANDOM.nextInt(canonical.size())) : randomText(5);
+                int cap = RANDOM.nextInt(8);
+                for (boolean suffix : new boolean[]{false, true}) {
+                    List<String> expected = canonical.stream().filter(suffix
+                            ? word -> word.endsWith(query) : word -> word.startsWith(query)).toList();
+                    if (suffix) expected = expected.stream()
+                            .sorted(Comparator.comparing(M3DonorToolsTest::reverseUtf16)).toList();
+                    var result = suffix ? index.suffix(query, cap) : index.prefix(query, cap);
+                    check(result.totalMatches() == expected.size(), "indexed affix exact total");
+                    check(result.size() == Math.min(cap, expected.size())
+                            && result.complete() == (expected.size() <= cap), "indexed affix completeness");
+                    for (int i = 0; i < result.size(); i++) {
+                        check(index.wordAt(result.ordinalAt(i)).equals(expected.get(i)),
+                                "indexed affix UTF-16 order");
+                    }
+                    check((suffix ? index.countSuffix(query) : index.countPrefix(query)) == expected.size(),
+                            "indexed affix count parity");
+                }
+            }
+        }
+    }
+
+    private static String reverseUtf16(String word) {
+        char[] units = word.toCharArray();
+        for (int i = 0, j = units.length - 1; i < j; i++, j--) {
+            char temp = units[i];
+            units[i] = units[j];
+            units[j] = temp;
+        }
+        return new String(units);
     }
 
     private static int distance(String left, String right) {

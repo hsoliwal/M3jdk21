@@ -11,6 +11,7 @@ import com.m3.tools.text.index.Bm25Ranker;
 import com.m3.tools.text.ngram.NGramIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
+import com.m3.tools.text.search.AffixIndex;
 import com.m3.tools.text.search.ExactSearch;
 import com.m3.tools.text.search.MultiLiteralSearch;
 import com.m3.tools.text.similarity.TextSignatures;
@@ -437,6 +438,80 @@ public final class CpuTools {
         MultiSearch actual = multiLiteral(source, literals, maxHits, monitor);
         return actual.complete() == expected.complete() && actual.sha256().equals(expected.sha256())
                 && actual.hits().equals(expected.hits());
+    }
+
+    /** One bounded immutable lexicon from the existing JDK word-break owner. */
+    public static final int MAX_AFFIX_SOURCE_UTF16 = 262_144;
+
+    public static final class FileAffixIndex {
+        private final AffixIndex index;
+        private final String sha256;
+
+        private FileAffixIndex(AffixIndex index, String sha256) {
+            this.index = index;
+            this.sha256 = sha256;
+        }
+
+        public int tokenCount() { return index.inputCount(); }
+        public int distinctCount() { return index.distinctCount(); }
+        public String wordAt(int ordinal) { return index.wordAt(ordinal); }
+        public boolean contains(String word) { return index.contains(word); }
+        public int countPrefix(String prefix) { return index.countPrefix(prefix); }
+        public int countSuffix(String suffix) { return index.countSuffix(suffix); }
+        public AffixIndex.Result prefix(String prefix, int maxHits) { return index.prefix(prefix, maxHits); }
+        public AffixIndex.Result suffix(String suffix, int maxHits) { return index.suffix(suffix, maxHits); }
+        public AffixIndex.Result prefix(String prefix, int maxHits, ProgressMonitor monitor) {
+            return index.prefix(prefix, maxHits, effective(monitor)::checkCancelled);
+        }
+        public AffixIndex.Result suffix(String suffix, int maxHits, ProgressMonitor monitor) {
+            return index.suffix(suffix, maxHits, effective(monitor)::checkCancelled);
+        }
+        public String lexiconSha256() { return index.sha256(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static FileAffixIndex affixIndex(M3File source) {
+        return affixIndex(source, null);
+    }
+
+    /**
+     * One authoritative M3File snapshot; no file reopen or separate token pool.
+     * Lexicon identity includes canonical UTF-16 words; the result receipt
+     * additionally commits to the source URI, raw bytes and UTF-16 contents.
+     */
+    public static FileAffixIndex affixIndex(M3File source, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_AFFIX_SOURCE_UTF16) {
+            throw new IllegalArgumentException("affix source UTF-16 budget");
+        }
+        AffixIndex index = AffixIndex.prepare(
+                WordTokenizer.words(source.text(), progress::checkCancelled), progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-affix-index-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length())
+                .text(index.sha256()).number(index.inputCount()).number(index.distinctCount());
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileAffixIndex(index, hash.finish());
+    }
+
+    /** Re-execution checks both the source receipt and all canonical dictionary IDs. */
+    public static boolean verifyAffixIndex(M3File source, FileAffixIndex expected,
+                                           ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        ProgressMonitor progress = effective(monitor);
+        FileAffixIndex actual = affixIndex(source, progress);
+        if (!actual.sha256.equals(expected.sha256)
+                || actual.tokenCount() != expected.tokenCount()
+                || actual.distinctCount() != expected.distinctCount()) return false;
+        for (int i = 0; i < actual.distinctCount(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            if (!actual.wordAt(i).equals(expected.wordAt(i))) return false;
+        }
+        progress.checkCancelled();
+        return true;
     }
 
     /** Indexed UTF-16 characters, in source-offset order, rather than tokenized words. */
