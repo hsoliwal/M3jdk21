@@ -1,0 +1,282 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "provider": {
+    "coordinate": "org.springframework:spring-core:6.2.0",
+    "bytes": 1954386,
+    "sha256": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162",
+    "url": "https://repo.maven.apache.org/maven2/org/springframework/spring-core/6.2.0/spring-core-6.2.0.jar"
+  },
+  "schema": "spring-selected-owner-current-base-source-bindings-v6",
+  "baseCommit": "b35759a36ecdfc299855a5e53b4d1a05f9f3884d",
+  "baseTree": "020cd3d30bc03c2648be9f53870a067921ebd971",
+  "selectedBaseJavaSources": 1,
+  "selectedBaseNativeSources": 1,
+  "limits": "Successor of the 20261018 bindings (unchanged as history). Bound core = the compile closure of SpringCaseInsensitiveMapMaskProjectionProof on the current base (no module-info.java, no M3LinkedHashMap, so no m3/arrays), the native compactor, the successor packet files, the 20261018 recipe crate, the owner module and the workflow, all at current master bytes.",
+  "sources": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "sha256": "0b6398e423e1a436aba20169f8bc62d4aa1a9be85ff9f9e09faa0c434743fa6b",
+      "bytes": 25743
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052",
+      "bytes": 21506
+    },
+    {
+      "path": ".github/workflows/m3-owned-spring-case-insensitive-map.yml",
+      "sha256": "8abf9ca61924044d7487bef03a4779e012246bd54aab9ef5711a70b135b7c428",
+      "bytes": 6101
+    },
+    {
+      "path": "m3/collections/implementations/spring-case-insensitive-map/LICENSE.txt",
+      "sha256": "56dfc19e0dc836e30177332f73e8e6fbc297941acf3d906eec6eaaa46c2c452a",
+      "bytes": 11360
+    },
+    {
+      "path": "m3/collections/implementations/spring-case-insensitive-map/NOTICE.txt",
+      "sha256": "4a6625833a8e16e19694e4b0a58a5587b6a210e649033f9f6c7153a005f39694",
+      "bytes": 517
+    },
+    {
+      "path": "m3/collections/implementations/spring-case-insensitive-map/README.md",
+      "sha256": "44bfa9ceb60bca995a2db8f10fd6ea4fc98a444566680afc541a187b5d3c848f",
+      "bytes": 2572
+    },
+    {
+      "path": "m3/collections/implementations/spring-case-insensitive-map/THIRD_PARTY_NOTICES.md",
+      "sha256": "8db285e24d2b942a7221cab40ecca8b5ed3dda685bf86b03bf8293ab1d45325e",
+      "bytes": 2761
+    },
+    {
+      "path": "m3/collections/implementations/spring-case-insensitive-map/pom.xml",
+      "sha256": "9109909a0ec47d7a358c5b5fe9ccf8fc3240e48f391544a8f6a09514c3420cf3",
+      "bytes": 3911
+    },
+    {
+      "path": "m3/collections/implementations/spring-case-insensitive-map/src/main/java/com/m3/collections/spring/M3LinkedCaseInsensitiveMap.java",
+      "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+      "bytes": 31224
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/FOSS_RECEIVING_DECISION.tsv",
+      "sha256": "a9c40945a94bcc4f213fd143a5039de706e63a9fa5180da0986a2c02c8abe682",
+      "bytes": 3167
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/README.md",
+      "sha256": "9ec30aa77bd5296e16be1448007adcf3dcc654149e787d7479b627ddb1bceee4",
+      "bytes": 3555
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "bytes": 13805
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/pom.xml",
+      "sha256": "164c36404481678b4d1a75e7de832e15c0478d00b7950c5c09d032d3f8b4447c",
+      "bytes": 5177
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/META-INF/LICENSE.txt",
+      "sha256": "56dfc19e0dc836e30177332f73e8e6fbc297941acf3d906eec6eaaa46c2c452a",
+      "bytes": 11360
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/META-INF/NOTICE.txt",
+      "sha256": "4a6625833a8e16e19694e4b0a58a5587b6a210e649033f9f6c7153a005f39694",
+      "bytes": 517
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/META-INF/THIRD_PARTY_NOTICES.md",
+      "sha256": "8db285e24d2b942a7221cab40ecca8b5ed3dda685bf86b03bf8293ab1d45325e",
+      "bytes": 2761
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/META-INF/rewrite/m3-owned-spring-case-insensitive-map.yml",
+      "sha256": "9c3b6f63e0d05b853521721c8885ff595a018b4ade43ccd657455ca8a0545458",
+      "bytes": 531
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
+      "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+      "bytes": 31224
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/engine-receipt.tsv",
+      "sha256": "7b1a2aee52fb611cc6fdf406bee8eeaf25d505598d4cbb08b86b228f7e6670de",
+      "bytes": 179
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/manifest.tsv",
+      "sha256": "0e81b6c09c63b3c9c73007f4585a85112259ec079606a646029fcf55812c99fe",
+      "bytes": 239
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/source-receipt.tsv",
+      "sha256": "e060f53dbdc5b66063a840175a9f6364ddad90d77d2475588b2bf24f617fbc37",
+      "bytes": 202
+    },
+    {
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/test/java/com/synexia/rewrite/M3OwnedSpringCaseInsensitiveMapRecipeTest.java",
+      "sha256": "04943fca61debfe7ae48fe8fb83899e3cb9b128f5dce78cbbc4c4cbdb31fe135",
+      "bytes": 13550
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/FOSS_REUSE_DECISION.tsv",
+      "sha256": "ec431677268466daa17d78867d89739497ba6b5056d7e47a1a6e28aaffba28c9",
+      "bytes": 2088
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/OwnedBaselineLauncher.java",
+      "sha256": "7b30cf9fea1b2d871e6f9b8ff6ac00abf6808bdf16ac7a0b68038a119af6ff76",
+      "bytes": 308
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/ProviderBaselineLauncher.java",
+      "sha256": "2e0d6c6281bdac2e947c8221048b7d3f3e749500c5513067f3c734aa7861459d",
+      "bytes": 511
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/README.md",
+      "sha256": "babf65268cd94bd04c0f5d2607ff1ac9f62d18bbe53a28781e9cd85e94c102b1",
+      "bytes": 2006
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringCaseInsensitiveMapEntryCompatibilityObserver.java",
+      "sha256": "adc3caa0ff0ee7f1098f21e539d1ca673868b85d36f1e0f243ee5961959392ad",
+      "bytes": 5946
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringCaseInsensitiveMapFullSurfaceProof.java",
+      "sha256": "d6eb97b9b89cac648249eacbffd5aae08000d32b42f4d0e945ac2c462bf04f16",
+      "bytes": 5826
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringCaseInsensitiveMapMaskProjectionProof.java",
+      "sha256": "e7b83f57343e3399865671eab4ec76997eed4953f8607fe8774c8ac9714c3b65",
+      "bytes": 10181
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringCaseInsensitiveMapProtocolProof.java",
+      "sha256": "36fa181e2cd543e96aa9ae7a06291c542e0b095bbe7395d3d3ae88e9120cdc07",
+      "bytes": 39986
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringEmptyLargeConstructorProbe.java",
+      "sha256": "719bd75e7d33b4c2345abb51162fffc9f7c6cc77b09ec952730bb9c902f46554",
+      "bytes": 4810
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringEntryGetterProtocol.java",
+      "sha256": "c98c0a55be337139d03ffc457d326e36776f8e5c2a63dc4c91cd9ed87e7a7779",
+      "bytes": 3129
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/SpringMapEqualityProtocol.java",
+      "sha256": "20db98ef08686c4887baf32fb2ad7fa96fed2ef6aa28c957026629837a630cca",
+      "bytes": 2420
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/archive/proof-plan/BASELINE_PARTITIONS_V2.json",
+      "sha256": "4b0651aa7f65805384e548679b676e83177ca5915ae1121c0435243840f87e3d",
+      "bytes": 2286
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/compare.py",
+      "sha256": "d21fd0bfa5fa0c6146c0bdb7d805c1ab010aa27c7d53dc59a604ac8d6fc5bdf5",
+      "bytes": 7516
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/owned-hook/SpringCaseInsensitiveMapHookCases.java",
+      "sha256": "abbdbac75cb7b7b890d816675c09b75511083b5453f9706e51d621e4a937f7bd",
+      "bytes": 6949
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/proof-summary.json",
+      "sha256": "e9cd6f96e55829823ed7e3085a3961e4c0a69c88ebcd8df7758b049a04f573d3",
+      "bytes": 14875
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/provider-hook/SpringCaseInsensitiveMapHookCases.java",
+      "sha256": "ffb3a7e0cab79b1fe7b9ea3ec6cd29ace9eb08464dcf9a46c34658acd59f85e9",
+      "bytes": 6938
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/owned-constructors.jsonl",
+      "sha256": "2cfacbdf9fcd9d8140e05e2e22c0f2f115309c2ef03d9858cbdf97bcd0ab43e5",
+      "bytes": 3846
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/owned-equality.tsv",
+      "sha256": "0af94f9abc374748ea4e5b5e7459e9b9f3cbd023c09481f5c0caf81d8a7fc5b3",
+      "bytes": 225
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/owned-getter.tsv",
+      "sha256": "c4f739b436fdb52e1dd04f704b87d97515e249d50c80de43dd3ead9d81f81008",
+      "bytes": 557
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/owned-projection-java.json",
+      "sha256": "2c59a9f5aa844880cda795249ab44fd0b8ac640ecfb1ae4fc2f8cda3a1822be2",
+      "bytes": 250
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/owned-projection-native.json",
+      "sha256": "2c59a9f5aa844880cda795249ab44fd0b8ac640ecfb1ae4fc2f8cda3a1822be2",
+      "bytes": 250
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/owned-protocol.jsonl",
+      "sha256": "11f4c7c991760b28140288ed5008a82e22dbc3b21c3538e8930708fe1f759973",
+      "bytes": 251360
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/provider-constructors.jsonl",
+      "sha256": "2cfacbdf9fcd9d8140e05e2e22c0f2f115309c2ef03d9858cbdf97bcd0ab43e5",
+      "bytes": 3846
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/provider-equality.tsv",
+      "sha256": "0af94f9abc374748ea4e5b5e7459e9b9f3cbd023c09481f5c0caf81d8a7fc5b3",
+      "bytes": 225
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/provider-getter.tsv",
+      "sha256": "c4f739b436fdb52e1dd04f704b87d97515e249d50c80de43dd3ead9d81f81008",
+      "bytes": 557
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/provider-projection.json",
+      "sha256": "2c59a9f5aa844880cda795249ab44fd0b8ac640ecfb1ae4fc2f8cda3a1822be2",
+      "bytes": 250
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/provider-protocol.jsonl",
+      "sha256": "bc1ee56b7fcfdbcda3d7533e36f45fb285b94c03ba449ff15fba0b7ccf6404a5",
+      "bytes": 251368
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/recorded/surface.json",
+      "sha256": "f50f39ffff37f5fad2298fdd7bdcedb554d475c0ff905d58635381df910bc10d",
+      "bytes": 263
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/run_contracts.py",
+      "sha256": "e61e2b34d4d341c02d309a0cb485fd54da08e8d6e5b649a571f7b5b1a183f398",
+      "bytes": 9636
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/verify.py",
+      "sha256": "90c23a1233c28cbb99b2f022345a037aa47f543c15ec148c601f7cf00ca6f833",
+      "bytes": 1563
+    },
+    {
+      "path": "m3/collections/qualification/owned-spring-case-insensitive-map-20261024/verify_module.py",
+      "sha256": "8e9844f61d5b6433659a41607a9351aa52b1af6f21ed8c8eaf9a172cf0159879",
+      "bytes": 1458
+    }
+  ]
+}
