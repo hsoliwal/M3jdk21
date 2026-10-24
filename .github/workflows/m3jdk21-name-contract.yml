@@ -7,6 +7,12 @@ on:
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
       - 'm3/tooling/name-contract/**'
+      - 'm3/docs/name-mapping.schema.json'
+      - 'm3/collections/src/main/java/com/m3/collections/M3ArrayList.java'
+      - 'm3/collections/src/main/java/module-info.java'
+      - 'm3/file/src/main/java/com/m3/file/M3File.java'
+      - 'm3/file/src/main/java/module-info.java'
+      - 'test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java'
       - '.github/workflows/m3jdk21-name-contract.yml'
   workflow_dispatch:
 permissions:
@@ -23,6 +29,7 @@ jobs:
           sparse-checkout: |
             AGENTS.md
             m3/docs/name-mapping.json
+            m3/docs/name-mapping.schema.json
             m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
             m3/tooling/name-contract/**
             src/java.base/share/classes/java/lang/Class.java
@@ -34,6 +41,10 @@ jobs:
             src/java.base/share/native/libjava/m3_state_relation.h
             src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**
             m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+            m3/collections/src/main/java/com/m3/collections/M3ArrayList.java
+            m3/collections/src/main/java/module-info.java
+            m3/file/src/main/java/com/m3/file/M3File.java
+            m3/file/src/main/java/module-info.java
             m3/tooling/migration-recipes/src/**
             m3/fs/src/main/java/com/m3/fs/**
             test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java

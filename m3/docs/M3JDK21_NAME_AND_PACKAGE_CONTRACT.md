@@ -145,3 +145,129 @@ product mutation from this queue until mapping updates, exact staging receipts
 and independent tests are reviewed. Source-first processing stays serial per
 file; different files may prepare candidates concurrently, and promoted
 results must be proven on the actual JDK image.
+
+
+## Executable target-image public/internal boundary
+
+The target receives **only** the product-side jtreg check
+[`test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java`](../../test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java).
+The reusable OpenRewrite compiler and source-structure admission logic remain
+exclusively in the Synexia convergence workspace, currently under review in
+[hsoliwal/com.synexia#13180](https://github.com/hsoliwal/com.synexia/pull/13180).
+
+The target test checks package-private `java.lang.M3String` and the
+non-exported/non-opened `jdk.internal.mindex` implementation package,
+including qualified exports and runtime export overrides. It inspects
+public/protected reflection signatures for 19 canonical JDK owners spanning
+String, Class, I/O streams, core collections and concurrent collections,
+regex and NIO file APIs. It also enumerates compiled classes through
+`java.base`'s `ModuleReader` and checks every top-level M3/MIndex/MatIndex
+type inside a module-exported or opened package without class initialization.
+Package visibility is checked against a single indexed set of exposed
+packages, not a repeated scan per class. No production class, serialized
+format, JNI symbol or JDK-facing method signature is modified by this receiver.
+
+Compile and run **against the actual M3JDK21 build image**, after
+configuration and jtreg acquisition:
+
+```sh
+make run-test TEST=test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+```
+
+A local patched stock-JDK21 fixture is an additional syntactic and refusal
+proof only; it is **not** runtime qualification of the fork. Record jtreg
+results separately from lint, Maven recipe replay, ABI, differential behavior,
+JNI/GC/JMM and CPU/heap/native measurements.
+
+Selected source audit (M3JDK21 master, 2026-10-23): 22 direct `M3*.java`
+classes under `java.lang` and four under `java.util` were observed
+package-private; `jdk.internal.mindex.M3Class` has `public` JVM
+accessibility within an unexported package. Separate `com.m3.collections`
+and `com.m3.file` modules still export legacy `M3ArrayList` and `M3File`.
+Those public standalone SDK symbols are unresolved migration debt, not proof
+that they are canonical JDK replacements. Resolve their external clients and
+serialization contracts before any visibility-changing OpenRewrite recipe.
+
+
+## Exported legacy M3 types: pending migration IDs
+
+The existing canonical map records two observed exported standalone SDK
+classes as **pending**, with no JDK implementation equivalence or ABI claim:
+
+| Stable mapping ID | Existing public class | Current disposition |
+| --- | --- | --- |
+| `m3jdk21.legacy-export.M3ArrayList` | `com.m3.collections.M3ArrayList` | Exported `com.m3.collections` legacy API. Must close List/storage/snapshot/serialization callers before transferring its qualified backend into the original `java.util.ArrayList`. |
+| `m3jdk21.legacy-export.M3File` | `com.m3.file.M3File` | Exported `com.m3.file` legacy API. Its metadata, channel and shadow-stream contracts are not an implementation of `java.nio.file.Path`; separate API classification and caller migration required. |
+
+These are traceability entries only: `kind=pending`,
+`status=pending`, `sync.direction=traceability-only`. They pin the
+observed Git source blobs, do not enable a recipe or update a class,
+and do not silently remove any exported packages. The previous 61 mapping
+records, the other map content and all four queued plan operations remain
+unchanged. No new operation becomes `READY_FOR_STAGING`.
+
+Provenance of this bounded mapping change:
+
+```text
+m3/docs/name-mapping.json
+  old Git blob SHA-1: fe77055e75116df42fafb40c433d351fbac139cc
+  new Git blob SHA-1: 28df2b56aec04f00ca82c15d6b3e8c10e0e87aa8
+  old SHA-256: 2beaf836d56b50e71f94e1be94d7923198baed7b7355dc4997342ca5257e8116
+  new SHA-256: 3cd37056abe11669f0d1b8c49c07eae4b72a1286583d2a063bb021e71c32fc72
+
+m3/tooling/name-contract/name-plan.json
+  old Git blob SHA-1: 98d543dbd0c4f8fabbe23c222da837b3e5f558ca
+  new Git blob SHA-1: 67b88d919bee9d22873b6540a570abbf4b689505
+  old SHA-256: e28fc37d2a91ea4bd022c393427e32b04dc19a9751a4905f3388632116ef1b99
+  new SHA-256: 73dcc7a4cb044ba810970d71a32a460cd6c02dff34afe99d3b24dc197f324bfc
+```
+
+The full source-tree, exported ABI and native/serialized consumer closure
+remains explicitly **unverified**; none of these hashes prove semantic
+equivalence or performance. Source-backed migration must use Synexia-owned
+OpenRewrite recipes with deterministic fixed-point, compiler, runtime and
+refusal evidence before the canonical JDK class receives any implementation.
+
+
+## Historical evicting-queue map vocabulary correction
+
+The existing `m3.collections.evicting-queue.owner-naming` mapping (not a new
+migration record) carries four deliberate historical state literals:
+`kind=internal-relocation-proposal`, `status=proposed`,
+`sync.direction=same-repository internal name review`, and
+`source_state=implemented-proving-module-unpromoted`.
+The earlier schema enums did not admit these existing values, making the
+canonical map fail JSON Schema checks **before** the legacy-export additions.
+
+The schema correction preserves that record and all other map data unchanged.
+It admits the four historical literals **only** for that exact stable ID
+through JSON Schema 2020-12 conditional `if/then/else`; every other
+migration record remains restricted to the original enum vocabularies.
+This is a mapping-contract repair, not evidence that the queue was
+source-sealed, renamed, installed or performance-qualified.
+
+## Receiver input interpretation and path custody
+
+Both target-only, **read-only** tools in `m3/tooling/name-contract/`—
+`check.py` (queue admission) and `audit.py` (mapped target census)—reject
+duplicate JSON keys in the canonical mapping or plan, including nested keys.
+The parser never uses a last-key-wins interpretation of a pinned authority.
+
+Every mapped filename is a canonical forward-slash relative path. Empty,
+dot/dot-dot, NUL, backslash, drive-qualified and absolute aliases are refused.
+No source file or intermediate path component may be a symlink, even when the
+symlink resolves inside the checkout. The target does not copy Synexia's
+OpenRewrite recipes or create another naming authority.
+
+`test_input_safety.py` keeps seven positive/refusal fixtures for these
+constraints. The existing target naming workflow checks out only the mapped
+owner/module sources needed by its tests; full JDK runtime and ABI gates
+remain separate from these Python receipt checks.
+
+The Synexia recipe's Java 21 AST postimage verifier also now rejects leaked
+M3 structures in implicitly public interface fields, methods and nested
+types; public record components; exposed annotations; renamed types from
+internal JDK/SDK packages; and mismatched declared JDK module names.
+Private implementation members remain internal. Passing these checks is
+**not** a substitute for method-descriptor, reflection/serialization,
+JNI/native or source-built jtreg qualification.
