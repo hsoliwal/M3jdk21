@@ -165,6 +165,170 @@ public final class M3SignalBooleanQuery {
         throw new IllegalArgumentException("unsupported signal predicate");
     }
 
+    /**
+     * Postfix expression steps are query-time plans, never per-entity metadata.
+     * Term.slot addresses the ordinal in the query's selected dimensions, not the
+     * global column number. AND/OR are binary, NOT unary, ALL/NONE are constants.
+     */
+    public sealed interface Step permits Term, Logic { }
+
+    public record Term(int slot, Predicate predicate) implements Step {
+        public Term { Objects.requireNonNull(predicate, "predicate"); }
+    }
+
+    public enum Logic implements Step { AND, OR, NOT, ALL, NONE }
+
+    /**
+     * Validate and compile one bounded postfix Boolean expression into primitive
+     * opcodes. Arbitrary nested AND/OR/NOT is supported without recursive evaluation.
+     * A missing coordinate remains distinct from NaN, zero and an unknown estimate.
+     */
+    public Compiled compile(Step... expression) {
+        Objects.requireNonNull(expression, "expression");
+        if (expression.length == 0 || expression.length > 4096) {
+            throw new IllegalArgumentException("postfix expression length outside [1,4096]");
+        }
+        requireFresh(schema.sourceVersion(), schema.sourceSha256());
+        byte[] opcodes = new byte[expression.length];
+        int[] slots = new int[expression.length];
+        Predicate[] filters = new Predicate[expression.length];
+        int depth = 0;
+        int maximumDepth = 0;
+        for (int i = 0; i < expression.length; i++) {
+            Step step = Objects.requireNonNull(expression[i], "expression[" + i + "]");
+            if (step instanceof Term term) {
+                int slot = Objects.checkIndex(term.slot(), indexes.length);
+                validatePredicate(slot, term.predicate());
+                opcodes[i] = 0;
+                slots[i] = slot;
+                filters[i] = term.predicate();
+                depth++;
+            } else if (step instanceof Logic logical) {
+                opcodes[i] = (byte) (logical.ordinal() + 1);
+                switch (logical) {
+                    case ALL, NONE -> depth++;
+                    case NOT -> {
+                        if (depth < 1) throw new IllegalArgumentException("postfix NOT stack underflow");
+                    }
+                    case AND, OR -> {
+                        if (depth < 2) throw new IllegalArgumentException("postfix binary stack underflow");
+                        depth--;
+                    }
+                }
+            } else {
+                throw new IllegalArgumentException("unsupported signal instruction");
+            }
+            maximumDepth = Math.max(maximumDepth, depth);
+        }
+        if (depth != 1) throw new IllegalArgumentException("postfix expression must produce one result");
+        return new Compiled(opcodes, slots, filters, maximumDepth);
+    }
+
+    private void validatePredicate(int slot, Predicate predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        if (predicate instanceof Missing) return;
+        M3SignalColumns.Kind expected = indexes[Objects.checkIndex(slot, indexes.length)].kind();
+        if ((predicate instanceof IntBetween && expected != M3SignalColumns.Kind.INTEGER)
+                || (predicate instanceof LongBetween && expected != M3SignalColumns.Kind.LONG)
+                || (predicate instanceof DoubleBetween && expected != M3SignalColumns.Kind.DOUBLE)) {
+            throw new IllegalArgumentException("postfix predicate does not match typed column");
+        }
+    }
+
+    /** Reusable immutable bytecode; no retained per-row expression or value wrappers. */
+    public final class Compiled {
+        private final byte[] codes;
+        private final int[] slots;
+        private final Predicate[] filters;
+        private final int maximumDepth;
+
+        private Compiled(byte[] codes, int[] slots, Predicate[] filters, int maximumDepth) {
+            this.codes = codes;
+            this.slots = slots;
+            this.filters = filters;
+            this.maximumDepth = maximumDepth;
+        }
+
+        public int instructionCount() { return codes.length; }
+        public int maximumStackDepth() { return maximumDepth; }
+
+        /**
+         * Evaluate nested postfix predicates using bounded, temporary primitive
+         * bitmasks. No recursive traversal or per-source-row graph is retained.
+         * The caller must revalidate source lifecycle before publishing the result.
+         */
+        public int[] evaluate(long version, String sourceSha256) {
+            requireFresh(version, sourceSha256);
+            int words = (int) (((long) rows + 63L) >>> 6);
+            long totalWords = Math.multiplyExact((long) words, (long) maximumDepth);
+            long heapBudget = Runtime.getRuntime().maxMemory() / 8L / Long.BYTES;
+            long upperWords = Math.min(8_388_608L, heapBudget); // 64 MiB max scratch.
+            if (totalWords > upperWords) {
+                throw new IllegalStateException("signal Boolean workspace exceeds memory budget");
+            }
+            long[][] stack = new long[maximumDepth][words];
+            int top = 0;
+            for (int pc = 0; pc < codes.length; pc++) {
+                byte opcode = codes[pc];
+                if (opcode == 0) {
+                    long[] target = stack[top++];
+                    // Every stack slot may be recycled by a prior binary operation.
+                    Arrays.fill(target, 0L);
+                    int[] matching = rowsFor(indexes[slots[pc]], filters[pc], version, sourceSha256);
+                    for (int row : matching) target[row >>> 6] |= 1L << (row & 63);
+                } else {
+                    switch (opcode) {
+                        case 4 -> { // ALL
+                            Arrays.fill(stack[top], -1L);
+                            maskTail(stack[top]);
+                            top++;
+                        }
+                        case 5 -> { // NONE
+                            Arrays.fill(stack[top], 0L);
+                            top++;
+                        }
+                        case 3 -> { // NOT
+                            long[] target = stack[top - 1];
+                            for (int word = 0; word < words; word++) target[word] = ~target[word];
+                            maskTail(target);
+                        }
+                        case 1, 2 -> { // AND, OR
+                            long[] target = stack[top - 2], other = stack[top - 1];
+                            for (int word = 0; word < words; word++) {
+                                target[word] = opcode == 1
+                                        ? target[word] & other[word]
+                                        : target[word] | other[word];
+                            }
+                            top--;
+                        }
+                        default -> throw new AssertionError("unknown compiled opcode");
+                    }
+                }
+            }
+            int count = 0;
+            for (long word : stack[0]) count = Math.addExact(count, Long.bitCount(word));
+            int[] answer = new int[count];
+            int position = 0;
+            for (int i = 0; i < words; i++) {
+                long bits = stack[0][i];
+                while (bits != 0L) {
+                    answer[position++] = (i << 6) + Long.numberOfTrailingZeros(bits);
+                    bits &= bits - 1;
+                }
+            }
+            requireFresh(version, sourceSha256);
+            return answer;
+        }
+
+        /** Remove bits beyond the last original physical row after ALL/NOT. */
+        private void maskTail(long[] bitset) {
+            int tail = rows & 63;
+            if (tail != 0 && bitset.length != 0) {
+                bitset[bitset.length - 1] &= -1L >>> (64 - tail);
+            }
+        }
+    }
+
     private void requireFresh(long version, String digest) {
         schema.requireCurrent(version, digest);
         if (epochs.epoch() != builtEpoch) {
