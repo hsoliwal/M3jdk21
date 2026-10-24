@@ -1,0 +1,83 @@
+{
+  "schema": "M3JDK21_DENSE_ORACLE_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "metadata_license": "Apache-2.0; source retains its own headers",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "3a9759d73222fa3be34b2cf858fbf820525a97f6",
+  "canonical_recipe_id": "m3-dense-lonely-20261024",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipes/m3jdk21-collection-convergence-20261024/DENSE_EVIDENCE.json",
+  "canonical_evidence_sha256": "86179a46a0d2958b49a8ffa15a5e3d2a37104b1f32e791d32f3c0ee06670498e",
+  "target_parent": "f5704b920214dd6ddc48518acd6d467e5222ec7b",
+  "target_source_changes": [],
+  "target_test": {
+    "path": "test/jdk/jdk/internal/m3/M3LonelyDenseBitmapTest.java",
+    "before": "ABSENT",
+    "after": "218095a487643d67b28dbc9bd7238293dd736d8f1e69c440cb39956c732f18af",
+    "template": "M3LonelyDenseBitmapTest.java.txt",
+    "license": "Apache-2.0"
+  },
+  "retained_owner": {
+    "path": "src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java",
+    "before": "765135a735a4651eb4ebf4dbefd87e0c5527bcff77f79444a918b1d579c32518",
+    "after": "765135a735a4651eb4ebf4dbefd87e0c5527bcff77f79444a918b1d579c32518",
+    "template": "M3IntAlgorithms.java.txt",
+    "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+  },
+  "result": "Independent differential oracle added; production algorithm retained byte-for-byte after resource rejection",
+  "execution": {
+    "maven_sdk": {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "strict_source_image_build": {
+      "exit_code": 0,
+      "warning_policy": "unchanged warnings-as-errors",
+      "native": "unchanged libjava/libjvm reused, no claim that native compilation reran"
+    },
+    "installed_image_jtreg": {
+      "passed": 26,
+      "failed": 0,
+      "errors": 0,
+      "exit_code": 0
+    },
+    "installed_owner_bytecode": "Incumbent before-image and restored image javap -p -c identical",
+    "naming": "PASS, zero promotions; exact missing tracked source restored, no naming source change"
+  },
+  "oracle_cases_per_vm": 23084,
+  "prior_twenty_one_postimages_verified_unchanged": true,
+  "image_file_seals": {
+    "bin/java": {
+      "sha256": "f1ae83e16d626564eb6dedf0cda40484c2396f5ed3d391a13805e72aead409ba",
+      "bytes": 16320
+    },
+    "lib/modules": {
+      "sha256": "cce1098489877ee5a5a94bc30c4ef630419debe503734c2364c38fe73124e5f7",
+      "bytes": 143547498
+    },
+    "lib/libjava.so": {
+      "sha256": "18c57c074047b2fccdeed23f5f59f745fc7d6cef15ad0e49876dc86e233c2b57",
+      "bytes": 215880
+    },
+    "lib/server/libjvm.so": {
+      "sha256": "1ad30700d33b892ed83ef37b1ed18981e217e8d44e097c59ae29fba82cf45979",
+      "bytes": 26473136
+    },
+    "release": {
+      "sha256": "8737ce21114ffa49cc92b371f7920dd4daa4af9240d22481d393daef6d2abbef",
+      "bytes": 1224
+    }
+  },
+  "remaining_release_gates": [
+    "Full jtreg/JCK and affected full vendor contract families",
+    "Cross-platform JNI/GC/CDS/JIT qualification beyond selected tests",
+    "Comparative CPU, heap and native-memory qualification",
+    "Existing Apache-licensed core material product license acceptance",
+    "Global naming/phase admission gates",
+    "Full historical canonical provenance-ledger set check; scoped new-file checker only",
+    "Remote CI completion; draft review and owner approval"
+  ],
+  "release_qualified": false,
+  "merged": false
+}
