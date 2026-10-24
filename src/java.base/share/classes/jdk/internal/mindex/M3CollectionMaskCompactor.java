@@ -42,11 +42,18 @@ public final class M3CollectionMaskCompactor {
         if (length == 0) return from;
         int words = ((length - 1) >>> 6) + 1;
         if (deleted.length < words) throw new IllegalArgumentException("mask too short");
-        if (length < 512 || removalRuns(deleted, length) > Math.max(4, length >>> 7)) {
+        // A complete run inventory also identifies no-op masks without writing
+        // the same references back or introducing unnecessary GC card marks.
+        int runs = length < 512 ? -1 : removalRuns(deleted, length);
+        if (runs == 0) return to;
+        if (length < 512 || runs > Math.max(4, length >>> 7)) {
             int write = from;
             for (int read = 0; read < length; read++) {
                 if ((deleted[read >>> 6] & (1L << (read & 63))) == 0) {
-                    values[write++] = values[from + read];
+                    // The untouched prefix is already in place; preserve every
+                    // reference without writing it again.
+                    if (write != from + read) values[write] = values[from + read];
+                    write++;
                 }
             }
             return write;
