@@ -204,4 +204,39 @@ public abstract class OutputStream implements Closeable, Flushable {
     public void close() throws IOException {
     }
 
+
+    /**
+     * Writes in bounded chunks, observing cancellation between delegate
+     * calls. A borrowed monitor is not completed. Progress records only
+     * chunks whose write returns successfully; a partially written failing
+     * chunk cannot be counted exactly. Flush and close are caller-owned.
+     *
+     * @param bytes input buffer
+     * @param offset first byte
+     * @param length number of bytes
+     * @param monitor borrowed monitor
+     * @throws IOException if an underlying write fails
+     * @throws java.util.concurrent.CancellationException if cancelled
+     */
+    public void writeMonitored(byte[] bytes, int offset, int length,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        Objects.requireNonNull(monitor, "monitor");
+        Objects.checkFromIndexSize(offset, length, bytes.length);
+        monitor.checkCancelled();
+        if (length == 0) {
+            write(bytes, offset, 0);
+            monitor.checkCancelled();
+            return;
+        }
+        int written = 0;
+        while (written < length) {
+            monitor.checkCancelled();
+            int count = Math.min(length - written, 8192);
+            write(bytes, offset + written, count);
+            written += count;
+            monitor.worked(count);
+        }
+        monitor.checkCancelled();
+    }
+
 }
