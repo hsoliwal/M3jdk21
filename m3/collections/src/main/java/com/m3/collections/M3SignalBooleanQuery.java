@@ -269,6 +269,51 @@ public final class M3SignalBooleanQuery {
          */
         public int[] evaluate(long version, String sourceSha256,
                 M3ProgressMonitor monitor) {
+            return executeWindow(0, Integer.MAX_VALUE, version, sourceSha256, monitor).rows;
+        }
+
+        /**
+         * One page in ascending physical-row order, including the complete exact
+         * match count. The answer owns its row storage; the caller cannot rewrite
+         * the underlying computed page. Pagination is tied to the original source
+         * identity and invalidation generation, NOT an unlocked live source view.
+         */
+        public static final class Window {
+            private final int totalMatches;
+            private final int start;
+            private final int[] rows;
+
+            private Window(int totalMatches, int start, int[] rows) {
+                this.totalMatches = totalMatches;
+                this.start = start;
+                this.rows = rows;
+            }
+            public int totalMatches() { return totalMatches; }
+            public int start() { return start; }
+            public int size() { return rows.length; }
+            public int[] rows() { return rows.clone(); }
+        }
+
+        /** Evaluates a bounded viewport without allocating a full result row array. */
+        public Window evaluateWindow(int skip, int limit, long version, String sourceSha256) {
+            return evaluateWindow(skip, limit, version, sourceSha256, null);
+        }
+
+        /**
+         * Cancellable exact page evaluation; validates paging before starting a task.
+         * Matching and total count are based on the same complete bit-mask result.
+         * Only [skip,skip+limit) matching physical IDs are materialized.
+         */
+        public Window evaluateWindow(int skip, int limit, long version,
+                String sourceSha256, M3ProgressMonitor monitor) {
+            return executeWindow(skip, limit, version, sourceSha256, monitor);
+        }
+
+        private Window executeWindow(int skip, int limit, long version,
+                String sourceSha256, M3ProgressMonitor monitor) {
+            if (skip < 0 || limit < 0) {
+                throw new IllegalArgumentException("negative signal query page coordinate");
+            }
             requireFresh(version, sourceSha256);
             if (monitor != null) monitor.checkCanceled();
             int words = (int) (((long) rows + 63L) >>> 6);
@@ -337,15 +382,31 @@ public final class M3SignalBooleanQuery {
                 if (monitor != null && (wordIndex & 1023) == 0) monitor.checkCanceled();
                 count = Math.addExact(count, Long.bitCount(stack[0][wordIndex]));
             }
-            int[] answer = new int[count];
-            int position = 0;
-            for (int i = 0; i < words; i++) {
+            int from = Math.min(skip, count);
+            int selected = Math.min(limit, count - from);
+            // The full result array is avoided for pages; count-only queries pass limit 0.
+            int[] answer = new int[selected];
+            int position = 0, remainingSkip = from;
+            for (int i = 0; selected > 0 && i < words; i++) {
                 if (monitor != null && (i & 1023) == 0) monitor.checkCanceled();
                 long bits = stack[0][i];
-                while (bits != 0L) {
-                    answer[position++] = (i << 6) + Long.numberOfTrailingZeros(bits);
-                    bits &= bits - 1;
+                if (remainingSkip > 0) {
+                    int available = Long.bitCount(bits);
+                    if (remainingSkip >= available) {
+                        remainingSkip -= available;
+                        continue;
+                    }
+                    while (remainingSkip > 0) {
+                        bits &= bits - 1L;
+                        remainingSkip--;
+                    }
+                    remainingSkip = 0;
                 }
+                while (bits != 0L && position < selected) {
+                    answer[position++] = (i << 6) + Long.numberOfTrailingZeros(bits);
+                    bits &= bits - 1L;
+                }
+                if (position == selected) break;
             }
             if (monitor != null) monitor.checkCanceled();
             requireFresh(version, sourceSha256);
@@ -355,7 +416,7 @@ public final class M3SignalBooleanQuery {
                 monitor.checkCanceled();
                 requireFresh(version, sourceSha256);
             }
-            return answer;
+            return new Window(count, from, answer);
         }
 
         /** Remove bits beyond the last original physical row after ALL/NOT. */
