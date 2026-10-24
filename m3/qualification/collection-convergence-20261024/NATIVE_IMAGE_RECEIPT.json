@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_SOURCE_IMAGE_COLLECTION_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "metadata_license": "Apache-2.0; source retains its own headers",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "883b9d5b1ca76613370a320a5547230c106f87ba",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipes/m3jdk21-collection-convergence-20261024/NATIVE_IMAGE_EVIDENCE.json",
+  "canonical_evidence_sha256": "69042ec2370ca907893fb0292933d59d8459b96839e259178a222987e249991d",
+  "canonical_recipe_id": "m3-changejournal-doclint-java-20261023",
+  "donor_revision": "af6b8535570dcdfb60fcc2585f00d4c69749a78e",
+  "target_parent": "685675e29694fc2022974c4f4b8cb8fe75ff8d11",
+  "source_changes": [
+    {
+      "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+      "preimage_sha256": "b6cd87d65584b65d7191b50d84c1dacb1f2e352f1c9a9ce5dd721abff8af3609",
+      "postimage_sha256": "7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    }
+  ],
+  "prior_receipt": "m3/qualification/collection-convergence-20261024/RECEIPT.json",
+  "prior_twenty_postimages_verified_unchanged": true,
+  "execution": {
+    "maven_openrewrite": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "configure": "PASS",
+    "make_images": "PASS",
+    "java_doclint_all_werror": "PASS",
+    "native_werror": "PASS",
+    "compiler_execution": "direct interim compiler; shared javac server disabled after connection-refused failure",
+    "source_built_image_jtreg": {
+      "passed": 23,
+      "failed": 0,
+      "errors": 0,
+      "selection": "evidence/source-image/jtreg-selected.txt",
+      "full_suite": false,
+      "native_checks": "Actual built libjava, explicit NATIVE backend and -Xcheck:jni; -Xint and default modes where test headers specify"
+    }
+  },
+  "built_image_identity": "21-internal-adhoc.root.m3-oct24",
+  "image_file_seals": {
+    "release": {
+      "sha256": "f3821c0a33fa71b44c9daf78e4838708f90115f7efd1125d1dc6f35b992bd1ec",
+      "bytes": 1224
+    },
+    "bin/java": {
+      "sha256": "f1ae83e16d626564eb6dedf0cda40484c2396f5ed3d391a13805e72aead409ba",
+      "bytes": 16320
+    },
+    "lib/modules": {
+      "sha256": "fce7f5656d68ad989110d1bcaf56fffe3ae6de272655821d9e8d8c8af63f3b17",
+      "bytes": 143547480
+    },
+    "lib/libjava.so": {
+      "sha256": "18c57c074047b2fccdeed23f5f59f745fc7d6cef15ad0e49876dc86e233c2b57",
+      "bytes": 215880
+    },
+    "lib/server/libjvm.so": {
+      "sha256": "1ad30700d33b892ed83ef37b1ed18981e217e8d44e097c59ae29fba82cf45979",
+      "bytes": 26473136
+    }
+  },
+  "remaining_release_gates": [
+    "Full jtreg/JCK and affected full vendor contract families",
+    "Cross-platform JNI/GC/CDS/JIT qualification beyond selected tests",
+    "Comparative CPU, heap and native-memory qualification",
+    "Existing Apache-licensed core material product license acceptance",
+    "Global naming/phase admission gates",
+    "Full historical canonical provenance-ledger set check; scoped new-file checker only",
+    "Remote CI completion; draft review and owner approval"
+  ],
+  "release_qualified": false,
+  "merged": false
+}

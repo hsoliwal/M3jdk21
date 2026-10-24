@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
-      - 'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java'
+      - 'test/jdk/java/util/CollectionViews/**'
       - 'm3/compatibility/collection-views/**'
       - '.github/workflows/collection-views-contract.yml'
   workflow_dispatch:

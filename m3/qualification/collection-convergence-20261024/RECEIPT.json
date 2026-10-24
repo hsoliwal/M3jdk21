@@ -1,0 +1,191 @@
+{
+  "schema": "M3JDK21_EXECUTED_COLLECTION_CONVERGENCE_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "metadata_license": "Apache-2.0; product source retains its own headers",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "f46d46538fe9abeaaa41d13f4f3f2dee8d90886d",
+  "canonical_recipe": "m3jdk21-collection-convergence-20261024",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipes/m3jdk21-collection-convergence-20261024/EVIDENCE.json",
+  "canonical_evidence_sha256": "649a8c8384856a3b2ea5e8d11f4daa5c0d5d71d2cecbff4876bf60b1a7bffd2a",
+  "baseline": "e2a8ae5602a2afa1201e5facb7c74b70bafc4506",
+  "execution": "MAVEN_OPENREWRITE_SDK_EXECUTION",
+  "changed_files": [
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "preimage_sha256": "c8820e5bbd7b7c7b4c683f5081ec74b99a4aac6b854f6c8dc79d4e0ee4767ffb",
+      "postimage_sha256": "f0e20d963ba2e7d0bb49f0347b2f45f2bd7058f962d3f3aac0d95cc82364dcd5",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+      "preimage_sha256": "6ebdbef74bd512c22fa9503bdd461f0c00c666c4797b7bceafcddcc2c896779e",
+      "postimage_sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+      "preimage_sha256": "f42473470989a103062696f1a3f4aa348e524308391edcaffff3df311d35eacf",
+      "postimage_sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+      "preimage_sha256": "153ec9727301febd6fff24a55877ec549850ebac997366fe25bb04e9b9bee81b",
+      "postimage_sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/FilteredCopyOnWriteBulkTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "6563e9bb7017b11a338a93f781bb96a94ce98b00bd3887c3b398a99bfdab6a75",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/FilteredIsEmptyDirectTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "0fe6343c88b471507754c96f7f7921e56f9cd4dc70f08b854ca9f4bedb578ba7",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/FilteredListRemoveContractTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "bbb64e2000bd435971414312ac199718831b5a3d1b9a766af1f54e3489c35f57",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/FilteredOwnerMembershipTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "b55a70ebfdfc71b3f1afa6471416aba8a4246a36504c40fefc75c4fea95c7f7e",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/FilteredRepresentativeContractTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "b50da4e43303e37e53435cfc0a8f264a9aded64ebcef7bae9e55ef98a3fbd698",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "c231806069792a5df88db1b7c75044f2137fc500177a73d885f49412f4dea615",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "56410d2d889a1a581c83c8d597b449fcfa2a2f4b373ab1e10514041d25d0e3f6",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3MaskCountTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "988ab3de69205aebd2c42b26c1be06ae098d149da110ebb5dee861515482b898",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3MaskPreparedPredicateTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "650969a480f12a861a34252dee5512d1f53c4da9f32370fd546faacc1ef8d572",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthAgent.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "0a1957ea4c6db007f13ab9d1ef669e2334eb2dc7121fcc4c0d16602e843aead3",
+      "license": "GPL-2.0-only"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "3cffeb6f2352e20cbdfa7843b29d6372181d78aff6eed305939c3497315aa750",
+      "license": "GPL-2.0-only"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFault.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "f4f28798f4ef81eb8f49fefb972b90d9daa15b7ff5255515efe6e0ceaf8541a0",
+      "license": "GPL-2.0-only"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/FilteredSetMutationDispatchTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "79a9f914802b4f07be1aa2e0c64a42bcae037da4e01f4af28627e98172b7b976",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": ".github/workflows/collection-views-contract.yml",
+      "preimage_sha256": "de2366a54794b51fe2a9e4768359abffa9f4ed875c72e0707f283789daf5d093",
+      "postimage_sha256": "0367d1033d9239297d3a0c1aed158b39a04add3eca6500bd2677e93d68f0443f",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/compatibility/collection-views/verify.sh",
+      "preimage_sha256": "42ade65a87ca18fd0f3946759a48393e08e269e09c60db9762c74c83681125f0",
+      "postimage_sha256": "340ca4d101360668cc4c61ddc5fc211499d86c96ce13dca2405156a7ff7c6c5a",
+      "license": "Apache-2.0"
+    }
+  ],
+  "gates": {
+    "sdk_tests": 6,
+    "java_mixed_states": 16,
+    "sdk_fixed_point": "PASS",
+    "runtime": "PASS 28 focused invocations; 12 collection, 2 growth, 2 indexed, 2 fused, 6 Java/native parity, 1 interpreter count, 2 missing ABI, 1 legacy ABI",
+    "count_parity": {
+      "cases_per_backend": 86000,
+      "digest": "5a2d565283f0d55c"
+    },
+    "predicate_parity": {
+      "truth_cases_per_backend": 16777216,
+      "vectors_per_backend": 220788,
+      "digest": "ca418d1bd8cf018b"
+    },
+    "growth": "21 failure cases per -Xint and -Xmixed; 4914 checks each; all planes unpublished on failure",
+    "collection_existing_gate": "PASS exact source/ABI, historical RED, stored occurrence oracle default/interpreter/C1/C2, full contract and new regression tests",
+    "api": {
+      "array": {
+        "removed": [],
+        "added": [
+          "  public java.util.List<E> filteredMaskedStates(java.util.function.Predicate<? super E>, int, int);",
+          "  public java.util.List<E> filteredMaskedSortedStates(java.util.function.Predicate<? super E>, int, int, java.util.Comparator<? super E>);"
+        ]
+      },
+      "mask": {
+        "removed": [],
+        "added": [
+          "  public static boolean nativeCountAvailable();",
+          "  public static long countBounded(byte[], int, int, int, int, jdk.internal.m3.M3IndexMaskWindow$Backend);"
+        ]
+      },
+      "views": {
+        "removed": [],
+        "added": []
+      }
+    },
+    "native_symbols_preserved": [
+      "Java_jdk_internal_m3_M3IndexMaskWindow_scanNative",
+      "Java_jdk_internal_m3_M3IndexMaskWindow_scanBoundedNative"
+    ],
+    "native_symbols_added": [
+      "Java_jdk_internal_m3_M3IndexMaskWindow_countBoundedNative"
+    ],
+    "legacy_native_abi": "PASS old exact libjava source exports scans, nativeAvailable remains true, additive count refuses (26 checks)",
+    "receiver_readback": "PASS every SDK output copied only after exact preimage and postimage SHA256 checks; received originals reran full host JNI suite",
+    "holds": {
+      "installed_product_image": "configure failed: Autoconf not found; no image build",
+      "full_jtreg": "NOT_RUN; corrected headers, host equivalent main launches only",
+      "full_synexia_reactor": "NOT_RUN; focused isolated Maven crate executed",
+      "cross_platform_JIT_GC_CDS": "NOT_RUN beyond stated host VM modes",
+      "performance_promotion": "NOT_RUN; no speedup or memory-reduction claim",
+      "target_license_acceptance": "HOLD existing Apache core files; original GPL/Apache headers preserved",
+      "global_name_gate": "unchanged baseline refuses public JDK Class target pending explicit owner/module review",
+      "full_canonical_provenance_set": "connector cannot read 8.37MB baseline ledger; new changed-file/shard structural verification reported separately"
+    }
+  },
+  "boundary": "Data-only receipt. No recipe, template, catalogue or improvement-memory mirror. No phase promotion or installed-image claim."
+}
