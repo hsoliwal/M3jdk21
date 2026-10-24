@@ -112,6 +112,7 @@ and [`qualification/netbeans-collection-atoms-20261019`](qualification/netbeans-
 | Root `com.m3.collections.M3EnumBiMap`, a superset scaffold | R8: one owner per M3 simple name | Superseded by the owned body `com.m3.collections.guava.M3EnumBiMap` in [`implementations/guava-enum-bi-map`](implementations/guava-enum-bi-map). Neither class is renamed. |
 | [`algorithm-catalog/`](algorithm-catalog) beside [`algorithm-catalogue/`](algorithm-catalogue) | one directory per area | `algorithm-catalog/` is frozen, because existing files and workflows read its paths. New rows go under `algorithm-catalogue/`. |
 | [`recipe/`](recipe) beside [`recipes/`](recipes) | one directory per area | Both are kept. |
+| `implementations/eclipse-collections-14.0.0-snapshot-00a668d6`, the planned full Eclipse Collections receive | R2: only release tags are received | Owner-approved exception (2026-10-24). The receive takes fork master `acefe9c62227` (upstream master `00a668d6` plus the merged M3 work), which already compiles at `--release 21`. The name carries the snapshot version and the upstream commit. |
 
 ## Checklist
 
