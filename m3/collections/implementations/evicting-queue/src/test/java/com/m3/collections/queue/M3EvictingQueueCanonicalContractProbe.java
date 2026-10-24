@@ -61,6 +61,7 @@ public final class M3EvictingQueueCanonicalContractProbe {
         long steps = runSeededQueueModel(legacy) + runSeededQueueModel(canonical);
         verifyBoundedInitialStorage();
         verifySelfReferenceRendering();
+        verifyPhysicalGrowthCeiling();
         System.out.println("M3_EVICTING_CANONICAL_NAME_PASS normalized_wire_sha256="
                 + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(normalized))
                 + " randomized_model_steps=" + steps);
@@ -93,6 +94,36 @@ public final class M3EvictingQueueCanonicalContractProbe {
         require(actual.toString().equals(expected.toString()),
                 "direct self-reference rendering after eviction differs from JDK Collection");
         System.out.println("M3_EVICTING_SELF_REFERENCE_RENDER_PASS");
+    }
+
+    /** Reserve no more than logical capacity plus one physical sentinel slot. */
+    private static void verifyPhysicalGrowthCeiling() throws Exception {
+        var storage = M3EvictingQueue.class.getDeclaredField("elements");
+        storage.setAccessible(true);
+        for (int limit : new int[] {16, 17, 18, 31, 32, 33, 63, 64, 65, 127, 128, 129}) {
+            M3EvictingQueue<Integer> actual = M3EvictingQueue.create(limit);
+            ArrayDeque<Integer> expected = new ArrayDeque<>();
+            for (int index = 0; index < limit * 4; index++) {
+                actual.add(index);
+                if (expected.size() == limit) expected.removeFirst();
+                expected.addLast(index);
+                Object[] ring = (Object[]) storage.get(actual);
+                require(ring.length <= limit + 1,
+                        "ring exceeded logical max plus sentinel: limit=" + limit);
+                require(Arrays.equals(actual.toArray(), expected.toArray()),
+                        "bounded growth FIFO differed: limit=" + limit + " step=" + index);
+                if (index % 7 == 3) {
+                    require(actual.poll().equals(expected.poll()),
+                            "bounded growth poll differed: limit=" + limit + " step=" + index);
+                }
+            }
+            while (!expected.isEmpty()) {
+                require(actual.remove().equals(expected.removeFirst()),
+                        "bounded growth drain differed: limit=" + limit);
+            }
+            require(actual.isEmpty(), "bounded growth queue was not fully drained: limit=" + limit);
+        }
+        System.out.println("M3_EVICTING_PHYSICAL_GROWTH_CEILING_PASS");
     }
 
     /** Exercise bounded empty-capacity storage, physical ring growth, wrap and wire replay. */
