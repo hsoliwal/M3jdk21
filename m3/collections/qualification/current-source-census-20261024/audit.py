@@ -66,12 +66,33 @@ def read_historical(root):
     return manifest_rel, checksum(manifest), rows
 
 
+def git_head(root):
+    return subprocess.check_output(
+        ['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
+
+
+def exact_git_java_sources(root, manifest_rel, current_paths):
+    # Match the original index, not merely whatever happened to exist on disk.
+    # Untracked Java files, deleted tracked files and staged changes are all
+    # refused before any report can claim exact-head source evidence.
+    paths = subprocess.check_output([
+        'git', '-C', str(root), 'ls-files', '-z', '--', 'm3/collections/src'])
+    tracked = {item.decode('utf-8') for item in paths.split(b'\0') if item}
+    tracked_java = {path for path in tracked if path.endswith('.java')}
+    if tracked_java != current_paths:
+        fail('current Java source set differs from the checked-out Git index')
+    dirty = subprocess.check_output([
+        'git', '-C', str(root), 'status', '--porcelain', '--untracked-files=no', '--',
+        'm3/collections/src', 'm3/collections/synexia-donation.json', manifest_rel])
+    if dirty:
+        fail('tracked collection source or provenance modified after checkout')
+    return len(tracked_java)
+
+
 def inspect(root, expected_head=None):
     root = Path(root).resolve(strict=True)
-    if expected_head:
-        actual = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
-        if actual != expected_head:
-            fail('checked-out head does not match requested PR head')
+    if expected_head and git_head(root) != expected_head:
+        fail('checked-out head does not match requested PR head')
     manifest_rel, manifest_sha, history = read_historical(root)
     source = root / 'm3/collections/src'
     if not source.is_dir():
@@ -84,6 +105,11 @@ def inspect(root, expected_head=None):
         current[relative] = checksum(file)
     if not current:
         fail('empty current Java owner inventory')
+    tracked_count = None
+    if expected_head:
+        tracked_count = exact_git_java_sources(root, manifest_rel, set(current))
+        if git_head(root) != expected_head:
+            fail('checked-out head changed during source census')
     old_java = {p: digest for p, digest in history.items()
                 if p.startswith('m3/collections/src/') and p.endswith('.java')}
     mismatch = sorted(p for p in old_java if p in current and current[p] != old_java[p])
@@ -94,6 +120,8 @@ def inspect(root, expected_head=None):
         'schema': 'M3_COLLECTION_CURRENT_SOURCE_CENSUS_V1',
         'status': 'INVENTORY_ONLY_NOT_QUALIFIED',
         'promotion_allowed': False,
+        'checked_head_sha': expected_head,
+        'exact_git_java_index_count': tracked_count,
         'historical_manifest': manifest_rel,
         'historical_manifest_sha256': manifest_sha,
         'historical_total_rows': len(history),

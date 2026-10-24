@@ -4,6 +4,7 @@
 """Original source-census compatibility and tamper-refusal oracle."""
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 import tempfile
 import unittest
@@ -83,6 +84,39 @@ class CurrentSourceCensusTest(unittest.TestCase):
             self.assertEqual(2, census['historical_java_rows'])
             self.assertEqual(2, census['historical_exact_match'])
             self.assertFalse(census['promotion_allowed'])
+
+    def test_git_commit_binding_and_tracked_mutation_refusal(self):
+        with tempfile.TemporaryDirectory() as d:
+            root, old, _, _ = self.root(d)
+            subprocess.run(['git', '-C', str(root), 'init', '-q'], check=True)
+            subprocess.run(['git', '-C', str(root), 'config', 'user.name', 'M3 source oracle'], check=True)
+            subprocess.run(['git', '-C', str(root), 'config', 'user.email', 'source-oracle@example.invalid'], check=True)
+            subprocess.run(['git', '-C', str(root), 'add', '-A'], check=True)
+            subprocess.run(['git', '-C', str(root), 'commit', '-qm', 'frozen fixture'], check=True)
+            head = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
+            census = inspect(root, head)
+            self.assertEqual(head, census['checked_head_sha'])
+            self.assertEqual(2, census['exact_git_java_index_count'])
+            self.assertFalse(census['promotion_allowed'])
+            with self.assertRaisesRegex(ValueError, 'requested PR head'):
+                inspect(root, '0' * 40)
+            old.write_text('class A { int changed; }\n')
+            with self.assertRaisesRegex(ValueError, 'modified after checkout'):
+                inspect(root, head)
+
+    def test_untracked_source_is_not_accepted_as_exact_git_head(self):
+        with tempfile.TemporaryDirectory() as d:
+            root, old, _, _ = self.root(d)
+            subprocess.run(['git', '-C', str(root), 'init', '-q'], check=True)
+            subprocess.run(['git', '-C', str(root), 'config', 'user.name', 'M3 source oracle'], check=True)
+            subprocess.run(['git', '-C', str(root), 'config', 'user.email', 'source-oracle@example.invalid'], check=True)
+            subprocess.run(['git', '-C', str(root), 'add', '-A'], check=True)
+            subprocess.run(['git', '-C', str(root), 'commit', '-qm', 'frozen fixture'], check=True)
+            head = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
+            extra = old.with_name('Untracked.java')
+            extra.write_text('class Untracked {}\n')
+            with self.assertRaisesRegex(ValueError, 'differs from the checked-out Git index'):
+                inspect(root, head)
 
     def test_symlinked_java_refused(self):
         with tempfile.TemporaryDirectory() as d:

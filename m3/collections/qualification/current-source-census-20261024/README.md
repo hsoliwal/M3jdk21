@@ -34,3 +34,38 @@ The exact-head GitHub Actions workflow does this with explicit PR-head checking,
 
 
 The accepted updated test now explicitly tampers with a **duplicate** historical source row *and recomputes the manifest packet SHA-256* before requiring the original path-uniqueness guard to reject it. All five fixture tests passed again locally. The previous test image is superseded only by the exact canonical test source; other owner files and historical manifests remain unchanged.
+
+## Exact Git HEAD and source-index successor
+
+The original three-target census recipe remains immutable in
+[Synexia #13224](https://github.com/hsoliwal/com.synexia/pull/13224).
+New canonical two-target successor recipe
+`com.synexia.m3.Jdk21CollectionCensusGitHeadBinding20261024`, committed
+to Synexia `8cf142474ce4a3839cf2e9b6d1410bef5a67ca80`, receives only
+the original product `audit.py` and `test_audit.py` changes.
+
+| Exact original product owner | Before Git blob | Exact received postimage |
+|---|---|---|
+| `audit.py` | `99d7bc41f024ba24f388c683444a474d23a7b622` | `8a0debdbbc041add745b0ceb99bc6aaf3aacce47` |
+| `test_audit.py` | `b1fa399afc9d631360eb1fd7b9d620f7648f612c` | `50b0cc48deca377aac81930950d14e4217058110` |
+
+The report still returns `INVENTORY_ONLY_NOT_QUALIFIED` and
+`promotion_allowed=false`. For `--expected-head`, it additionally
+records `checked_head_sha` and `exact_git_java_index_count`, requires
+all Java source paths to match `git ls-files` (untracked/missing Java
+is refused), rejects staged/unstaged changes to tracked Java sources
+or the historical manifest/packet, and checks Git HEAD again after
+scanning. These are evidence integrity checks, not source-promotion
+authorization.
+
+The original five Python tests remain; the updated Python suite now
+has **seven** synthetic tests, including HEAD mismatch, tracked mutation
+and untracked Java refusal. They passed locally, along with strict
+Python compilation. The actual GitHub current-head census workflow
+and real OpenRewrite Text SDK fixed-point tests are independently
+required and are **not yet qualified**.
+
+No Java collection implementation, native source, JNI symbol, original
+historical source receipt, source module ABI, or JDK release gate was
+changed. Keep PR #1882 DRAFT/HOLD while full Java/JNI, installed-JDK,
+jtreg/JCK and source-receipt successor admission remain unresolved.
