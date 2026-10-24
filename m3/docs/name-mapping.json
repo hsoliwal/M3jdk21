@@ -8422,6 +8422,14 @@
           "receipt": "m3/runtime-integration/combined-runtime-20261018/RECEIVING_20261024.json",
           "execution": "m3/runtime-integration/combined-runtime-20261018/CURRENT_EXECUTION_20261024.json",
           "scope": "Filtered descending iterator and existing JNI mask module packaging. Existing optional module status and ordered String receiving remain unchanged."
+        },
+        {
+          "date": "2026-10-24",
+          "canonical_recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+          "qualified_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+          "source_epoch": "28e34762d10d67a86f52c40cea7eb47c76ff3a01",
+          "receipt": "m3/runtime-integration/combined-runtime-20261018/CONTINUATION_20261024.json",
+          "scope": "Maintained regex/public routing and filtered callback witnesses; exact qualified strict-read-only iterator guard. Public/JNI contracts and ordered String receiving retained."
         }
       ]
     }
