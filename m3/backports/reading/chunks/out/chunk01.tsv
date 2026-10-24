@@ -1,0 +1,111 @@
+release	jbs	provisional_disposition	reading_disposition	rationale
+23	JDK-8323546	admitted-additive-tooling	admitted-docs	jcmd man page and help text cleanup only
+24	JDK-8327793	admitted-additive-tooling	hold-removal	deprecates jstatd for removal
+24	JDK-8334287	admitted-additive-tooling	hold-removal	man page text follows the held jstatd deprecation
+24	JDK-8334492	admitted-additive-tooling	hold-runtime	%p substitution implemented in HotSpot diagnostic command framework
+24	JDK-8337199	admitted-additive-tooling	hold-runtime	new jcmd commands expose virtual thread scheduler and poller internals
+24	JDK-8339927	admitted-additive-tooling	hold-removal	man page text follows the jhsdb debugd deprecation for removal
+24	JDK-8344105	admitted-additive-tooling	hold-jep	SecurityManager removal under JEP 486
+25	JDK-8345745	admitted-additive-tooling	hold-native	attach listener pipe mode change in OS-specific native code
+25	JDK-8351224	admitted-additive-tooling	hold-removal	deprecates public AttachPermission for removal
+25	JDK-8353439	admitted-additive-tooling	hold-runtime	changes how HotSpot executes -XX:OnError commands
+25	JDK-8354460	admitted-additive-tooling	hold-runtime	attach streaming output protocol is absent in 21 and couples to HotSpot attach listener
+25	JDK-8358588	admitted-additive-tooling	hold-runtime	ThreadSnapshot class is part of 25 thread dump support absent in 21
+27	JDK-8319589	admitted-additive-tooling	hold-native	macOS attach uid handling in native VirtualMachineImpl
+27	JDK-8357439	admitted-additive-tooling	admitted-additive-tooling	adds a bash completion script for jcmd
+27	JDK-8376052	admitted-additive-tooling	candidate-measured	changes the exception type thrown by Linux attach lookup
+22	JDK-8312882	admitted-additive-tooling	admitted-docs	CONTRIBUTING.md text only
+24	JDK-8335911	admitted-additive-tooling	admitted-docs	doc/ide.md text only
+25	JDK-8348905	admitted-additive-tooling	admitted-additive-tooling	jtreg test compilation JDK selection in the build
+25	JDK-8355669	admitted-additive-tooling	admitted-additive-tooling	new make target for static-jdk bundles
+27	JDK-8374990	admitted-additive-tooling	admitted-tests	noreg-self image content check test
+27	JDK-8378657	admitted-additive-tooling	admitted-tests	test library OutputAnalyzer addition
+22	JDK-8268719	admitted-additive-tooling	admitted-additive-tooling	Windows compiler code page flags in the build
+22	JDK-8294549	admitted-additive-tooling	admitted-additive-tooling	configure path validation
+22	JDK-8307858	admitted-additive-tooling	admitted-additive-tooling	optional make target for static libraries
+22	JDK-8309880	admitted-additive-tooling	admitted-additive-tooling	configure support for libffi linking
+22	JDK-8310376	admitted-additive-tooling	admitted-additive-tooling	make macro parameter
+22	JDK-8310384	admitted-additive-tooling	admitted-additive-tooling	make hooks for custom images
+22	JDK-8310454	admitted-additive-tooling	admitted-additive-tooling	new static-libs-graal bundle target
+22	JDK-8310728	admitted-additive-tooling	admitted-additive-tooling	Visual Studio compiler flag in the build
+22	JDK-8311545	admitted-additive-tooling	admitted-additive-tooling	test image symbol file option
+22	JDK-8314444	admitted-additive-tooling	admitted-additive-tooling	jib devkit profile update
+22	JDK-8314543	admitted-additive-tooling	admitted-additive-tooling	gitattributes diff hints
+22	JDK-8315278	admitted-additive-tooling	admitted-additive-tooling	make print-targets formatting
+22	JDK-8317560	admitted-additive-tooling	admitted-additive-tooling	Oracle jib toolchain profile update
+22	JDK-8317620	admitted-additive-tooling	admitted-additive-tooling	build sets ModuleMainClass on tool modules
+22	JDK-8319573	admitted-additive-tooling	admitted-additive-tooling	Oracle jib toolchain profile update
+22	JDK-8320334	admitted-additive-tooling	admitted-docs	testing.md reflow only
+22	JDK-8320410	admitted-additive-tooling	admitted-docs	building.md reflow only
+22	JDK-8320526	admitted-additive-tooling	admitted-docs	building.md heading case only
+23	JDK-8017234	admitted-additive-tooling	hold-native	HotSpot symbol export moves from mapfiles to visibility attributes in native sources
+23	JDK-8316657	admitted-additive-tooling	admitted-tests	microbenchmark whitebox support
+23	JDK-8322757	admitted-additive-tooling	hold-native	warning enablement with fixes across C and C++ sources
+23	JDK-8322801	admitted-additive-tooling	admitted-additive-tooling	devkit sysroot path
+23	JDK-8323529	admitted-additive-tooling	admitted-additive-tooling	microbenchmark build dependencies
+23	JDK-8323995	admitted-additive-tooling	admitted-additive-tooling	microbenchmark build output
+23	JDK-8325148	admitted-additive-tooling	hold-preview	restricted lint belongs to FFM final JEP 454 which is preview in 21
+23	JDK-8325558	admitted-additive-tooling	admitted-additive-tooling	jcheck conf plus whitespace-only properties edits
+23	JDK-8325570	admitted-additive-tooling	admitted-additive-tooling	javadoc build tool version
+23	JDK-8325626	admitted-additive-tooling	admitted-additive-tooling	make CONF selection syntax
+23	JDK-8325800	admitted-additive-tooling	admitted-additive-tooling	Oracle build configuration cleanup
+23	JDK-8325877	admitted-additive-tooling	admitted-additive-tooling	makefile split
+23	JDK-8325878	admitted-additive-tooling	admitted-additive-tooling	configure toolchain minimum
+23	JDK-8325880	admitted-additive-tooling	admitted-additive-tooling	configure toolchain minimum
+23	JDK-8325881	admitted-additive-tooling	admitted-additive-tooling	configure toolchain minimum
+23	JDK-8326831	admitted-additive-tooling	admitted-docs	make help text only
+23	JDK-8327389	admitted-additive-tooling	hold-runtime	drops build user from the HotSpot internal version string
+23	JDK-8327493	admitted-additive-tooling	admitted-docs	building.md Xcode note only
+23	JDK-8328074	admitted-additive-tooling	admitted-additive-tooling	jcheck conf for assembly files
+23	JDK-8329970	admitted-additive-tooling	admitted-additive-tooling	autoconf helper file refresh
+23	JDK-8330107	admitted-additive-tooling	admitted-additive-tooling	makefile split for awt libraries, build only
+23	JDK-8330690	admitted-additive-tooling	admitted-additive-tooling	RunTest REPEAT_COUNT option
+23	JDK-8331886	admitted-additive-tooling	admitted-additive-tooling	build markdown override hook
+23	JDK-8332808	admitted-additive-tooling	admitted-additive-tooling	build sets java.io.tmpdir for build tools
+23	JDK-8332849	admitted-additive-tooling	admitted-docs	testing.md text only
+24	JDK-8282944	admitted-additive-tooling	admitted-additive-tooling	GHA workflow job
+24	JDK-8298920	admitted-additive-tooling	admitted-additive-tooling	microbenchmark build speed
+24	JDK-8329288	admitted-additive-tooling	admitted-additive-tooling	Visual Studio build defines
+24	JDK-8330586	admitted-additive-tooling	admitted-additive-tooling	GHA workflow packages
+24	JDK-8333685	admitted-additive-tooling	admitted-additive-tooling	copyright year script
+24	JDK-8335880	admitted-additive-tooling	admitted-docs	building.md troubleshooting text only
+24	JDK-8337536	admitted-additive-tooling	hold-native	AArch64 BTI branch protection changes native code generation flags
+24	JDK-8338290	admitted-additive-tooling	admitted-additive-tooling	Xcode IDE project generator
+24	JDK-8338768	admitted-additive-tooling	hold-native	runtime static-build lookup in launcher and java.base native code
+24	JDK-8339480	admitted-additive-tooling	hold-native	statically linked launcher changes libjli native code
+24	JDK-8339570	admitted-additive-tooling	admitted-additive-tooling	Tidy check in the test build
+24	JDK-8343190	admitted-additive-tooling	admitted-additive-tooling	GHA jtreg build retry
+24	JDK-8344350	admitted-additive-tooling	admitted-additive-tooling	gitignore entries
+25	JDK-8187520	admitted-additive-tooling	admitted-additive-tooling	configure option for java warnings
+25	JDK-8244533	admitted-additive-tooling	admitted-additive-tooling	configure check on Windows short names
+25	JDK-8282493	admitted-additive-tooling	admitted-additive-tooling	configure jcov option
+25	JDK-8285692	admitted-additive-tooling	hold-native	_FORTIFY_SOURCE changes native runtime checks under Clang
+25	JDK-8287122	admitted-additive-tooling	hold-native	native compiler flag for debug builds
+25	JDK-8317012	admitted-additive-tooling	admitted-additive-tooling	configure libatomic check for zero
+25	JDK-8343832	admitted-additive-tooling	admitted-additive-tooling	test summary output in RunTests
+25	JDK-8345627	admitted-additive-tooling	hold-native	native compiler flag for debug builds
+25	JDK-8345726	admitted-additive-tooling	admitted-additive-tooling	test spec for mx tool
+25	JDK-8346830	admitted-additive-tooling	admitted-additive-tooling	adlc build config
+25	JDK-8347909	admitted-additive-tooling	hold-native	removes precompiled.hpp includes across all HotSpot sources
+25	JDK-8348182	admitted-additive-tooling	hold-native	HotSpot header and build change for precompiled headers
+25	JDK-8348190	admitted-additive-tooling	admitted-additive-tooling	makefile tracing framework
+25	JDK-8348429	admitted-additive-tooling	admitted-additive-tooling	cross-compilation devkit update
+25	JDK-8348998	admitted-additive-tooling	admitted-additive-tooling	makefile split
+25	JDK-8349399	admitted-additive-tooling	admitted-additive-tooling	GHA workflow job
+25	JDK-8350443	admitted-additive-tooling	admitted-additive-tooling	GHA workflow job split
+25	JDK-8350819	admitted-additive-tooling	admitted-additive-tooling	gitignore entries
+25	JDK-8351154	admitted-additive-tooling	hold-native	native compiler flag for clang
+25	JDK-8351322	admitted-additive-tooling	admitted-additive-tooling	configure pthreads link option
+25	JDK-8351323	admitted-additive-tooling	admitted-additive-tooling	configure iconv flags
+25	JDK-8351440	admitted-additive-tooling	admitted-additive-tooling	macOS reproducible link flag
+25	JDK-8352284	admitted-additive-tooling	admitted-additive-tooling	build flag plumbing fix
+25	JDK-8352506	admitted-additive-tooling	admitted-additive-tooling	test makefile simplification
+25	JDK-8352618	admitted-additive-tooling	admitted-additive-tooling	build system option cleanup, no runtime API
+25	JDK-8352645	admitted-additive-tooling	admitted-additive-tooling	include order check tool
+25	JDK-8352692	admitted-additive-tooling	admitted-additive-tooling	configure option for extra jlink options
+25	JDK-8353066	admitted-additive-tooling	admitted-additive-tooling	configure platform detection
+25	JDK-8353573	admitted-additive-tooling	admitted-additive-tooling	configure giflib detection
+25	JDK-8353580	admitted-additive-tooling	admitted-additive-tooling	configure libjpeg detection
+25	JDK-8354919	admitted-additive-tooling	admitted-additive-tooling	editorconfig merge
+25	JDK-8355235	admitted-additive-tooling	admitted-additive-tooling	Tools.gmk cleanup
+25	JDK-8355400	admitted-additive-tooling	admitted-additive-tooling	copyright year script git detection

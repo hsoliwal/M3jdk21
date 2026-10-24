@@ -1,111 +1,111 @@
 release	jbs	provisional_disposition	reading_disposition	rationale
-25	JDK-8351655	candidate-adapted-serviceability	hold-runtime	ObjectMonitor entry-list perf tweak in HotSpot sync
-25	JDK-8351673	candidate-adapted-serviceability	hold-runtime	legacy locking-mode cleanup in HotSpot sync
-25	JDK-8352084	candidate-adapted-serviceability	hold-jep	AOT cache test setup (JEP 483) absent in 21
-25	JDK-8352178	candidate-adapted-serviceability	hold-runtime	VMThread::execute deadlock precondition in HotSpot
-25	JDK-8352191	candidate-adapted-serviceability	admitted-docs	JNI spec text clarification for GetStringUTFRegion buffer sizing
-25	JDK-8352256	candidate-adapted-serviceability	hold-runtime	JFR event posting in ObjectSynchronizer notify path
-25	JDK-8352415	candidate-adapted-serviceability	hold-runtime	x86 template interpreter method entry codegen
-25	JDK-8352435	candidate-adapted-serviceability	admitted-tests	CDS test library refactor only; may need newer CDS test helpers
+25	JDK-8351655	candidate-adapted-serviceability	hold-runtime	HotSpot ObjectMonitor fast-path change; needs HotSpot build and sync tests
+25	JDK-8351673	candidate-adapted-serviceability	hold-runtime	HotSpot legacy-locking cleanup in LockingMode code; HotSpot build
+25	JDK-8352084	candidate-adapted-serviceability	hold-jep	test setup for AOT cache (JEP 483) which 21 does not have
+25	JDK-8352178	candidate-adapted-serviceability	hold-runtime	VMThread::execute precondition; HotSpot runtime safepoint coupling
+25	JDK-8352191	candidate-adapted-serviceability	admitted-docs	JNI specification wording only (noreg-doc)
+25	JDK-8352256	candidate-adapted-serviceability	hold-runtime	ObjectSynchronizer quick_notify JFR event path; HotSpot sync plus JFR
+25	JDK-8352415	candidate-adapted-serviceability	hold-runtime	x86 template interpreter entry assembly; HotSpot build and tests
+25	JDK-8352435	candidate-adapted-serviceability	admitted-tests	CDS test library refactor only; verify against 21 test lib
 25	JDK-8352579	candidate-adapted-serviceability	hold-runtime	CDS lambda proxy archiving refactor in HotSpot
-25	JDK-8352897	candidate-adapted-serviceability	hold-native	RISC-V port flag default change
-25	JDK-8352948	candidate-adapted-serviceability	hold-jep	follow-up to 32-bit x86 port removal (JEP 503) not in 21
-25	JDK-8353014	candidate-adapted-serviceability	hold-jep	AOT cache content rule (JEP 483 line) absent in 21
-25	JDK-8353273	candidate-adapted-serviceability	hold-runtime	instance oop map layout change; GC iteration interaction
-25	JDK-8353325	candidate-adapted-serviceability	admitted-tests	test-only rewrite onto CDSAppTester; port helper if missing
-25	JDK-8353344	candidate-adapted-serviceability	hold-native	RISC-V extension detection for debug builds
-25	JDK-8353597	candidate-adapted-serviceability	hold-jep	AOT cache VM option handling (JEP 483/514) absent in 21
-25	JDK-8353692	candidate-adapted-serviceability	hold-runtime	ObjectMonitorTable from JDK 24 absent in 21
-25	JDK-8353753	candidate-adapted-serviceability	hold-runtime	trivial HotSpot header cleanup
-25	JDK-8353829	candidate-adapted-serviceability	hold-native	RISC-V extension auto-enable for debug builds
-25	JDK-8354292	candidate-adapted-serviceability	hold-runtime	HotSpot macro cleanup
-25	JDK-8354329	candidate-adapted-serviceability	admitted-tests	rewrite of JSR class-file tests only
-25	JDK-8354347	candidate-adapted-serviceability	hold-runtime	AArch64 HotSpot padding size change claiming performance
-25	JDK-8354453	candidate-adapted-serviceability	hold-runtime	HotSpot os::strdup internal change
-25	JDK-8354547	candidate-adapted-serviceability	hold-runtime	NMT mem_tag call-site refactor across HotSpot
-25	JDK-8354560	candidate-adapted-serviceability	hold-runtime	native thread creation EAGAIN backoff; timing change in HotSpot os
-25	JDK-8354636	candidate-adapted-serviceability	admitted-docs	PPC64 source comments only
-25	JDK-8354803	candidate-adapted-serviceability	hold-runtime	HotSpot macro cleanup
-25	JDK-8354811	candidate-adapted-serviceability	hold-runtime	HotSpot os_linux/os_posix code dedup
-25	JDK-8354897	candidate-adapted-serviceability	hold-jep	AOT cache reference support (Leyden JEPs) absent in 21
-25	JDK-8354954	candidate-adapted-serviceability	hold-runtime	new HotSpot static-init utility
-25	JDK-8354969	candidate-adapted-serviceability	hold-runtime	HotSpot ResourceArea utility addition
+25	JDK-8352897	candidate-adapted-serviceability	hold-native	RISC-V port flag default; secondary arch native code
+25	JDK-8352948	candidate-adapted-serviceability	hold-jep	follow-up of 32-bit x86 port removal (JEP 503); port still present in 21
+25	JDK-8353014	candidate-adapted-serviceability	hold-jep	AOT cache tooling exclusion; AOT cache (JEP 483) absent in 21
+25	JDK-8353273	candidate-adapted-serviceability	hold-runtime	instance oop map layout change; HotSpot runtime and GC oop iteration
+25	JDK-8353325	candidate-adapted-serviceability	admitted-tests	appcds methodHandles tests rewritten; needs CDSAppTester test lib
+25	JDK-8353344	candidate-adapted-serviceability	hold-native	RISC-V extension detection; secondary arch native code
+25	JDK-8353597	candidate-adapted-serviceability	hold-jep	AOTCache input/output option handling; AOT cache absent in 21
+25	JDK-8353692	candidate-adapted-serviceability	hold-runtime	ObjectMonitorTable counter memory ordering; table absent in 21 lightweight locking
+25	JDK-8353753	candidate-adapted-serviceability	hold-runtime	oop.hpp header cleanup; HotSpot build
+25	JDK-8353829	candidate-adapted-serviceability	hold-native	RISC-V extension auto-enable; secondary arch native code
+25	JDK-8354292	candidate-adapted-serviceability	hold-runtime	HotSpot compiler-warning macro cleanup; HotSpot build
+25	JDK-8354329	candidate-adapted-serviceability	admitted-tests	runtime/ClassFile jsr tests rewritten; test only
+25	JDK-8354347	candidate-adapted-serviceability	hold-runtime	aarch64 cache-line padding default in HotSpot; measure after HotSpot build
+25	JDK-8354453	candidate-adapted-serviceability	hold-runtime	os::strdup memcpy change in HotSpot os layer
+25	JDK-8354547	candidate-adapted-serviceability	hold-runtime	NMT mem_tag signature change across HotSpot allocators
+25	JDK-8354560	candidate-adapted-serviceability	hold-native	os_posix thread creation EAGAIN backoff; OS-specific native code
+25	JDK-8354636	candidate-adapted-serviceability	admitted-docs	PPC64 comment cleanup only
+25	JDK-8354803	candidate-adapted-serviceability	hold-runtime	HotSpot globalDefinitions constant cleanup
+25	JDK-8354811	candidate-adapted-serviceability	hold-native	os_linux/os_posix clock_tics_per_sec dedup; OS-specific native code
+25	JDK-8354897	candidate-adapted-serviceability	hold-jep	Soft/Weak Reference archiving in AOT cache; AOT cache absent in 21
+25	JDK-8354954	candidate-adapted-serviceability	hold-runtime	Deferred<> typed static storage utility in HotSpot
+25	JDK-8354969	candidate-adapted-serviceability	hold-runtime	ResourceArea strdup helper in HotSpot memory layer
 25	JDK-8355228	candidate-adapted-serviceability	hold-jep	test tweak for compact object headers (JEP 450) absent in 21
-25	JDK-8355237	candidate-adapted-serviceability	hold-jep	AOT test cases for Leyden features absent in 21
-25	JDK-8355481	candidate-adapted-serviceability	hold-runtime	HotSpot MethodHandleNatives cleanup
-25	JDK-8355490	candidate-adapted-serviceability	hold-runtime	JVMTI RedefineClasses signature cleanup
-25	JDK-8355617	candidate-adapted-serviceability	hold-runtime	wide HotSpot macro rename
-25	JDK-8355646	candidate-adapted-serviceability	hold-runtime	ObjectMonitor::exit perf in HotSpot sync
-25	JDK-8355648	candidate-adapted-serviceability	hold-runtime	HotSpot SpinAcquire signature cleanup
-25	JDK-8355650	candidate-adapted-serviceability	hold-runtime	HotSpot ParkEvent field cleanup
-25	JDK-8355692	candidate-adapted-serviceability	hold-runtime	HotSpot outputStream indentation refactor
-25	JDK-8356025	candidate-adapted-serviceability	hold-api	adds a new diagnostic -XX flag
-25	JDK-8356159	candidate-adapted-serviceability	hold-native	RISC-V Zabha extension support
-25	JDK-8356173	candidate-adapted-serviceability	hold-runtime	removes internal ThreadCritical lock; NMT/runtime coupling
-25	JDK-8356329	candidate-adapted-serviceability	hold-jep	hs_err line for compact object headers (JEP 450) absent in 21
-25	JDK-8356390	candidate-adapted-serviceability	hold-runtime	HotSpot ResolvedIndyEntry rename
-25	JDK-8356595	candidate-adapted-serviceability	hold-jep	-Xlog:aot tag conversion for AOT cache JEPs
-25	JDK-8356597	candidate-adapted-serviceability	hold-runtime	CDS archive file permission change on 21 dump path
-25	JDK-8356631	candidate-adapted-serviceability	hold-runtime	OopHandle empty-handle assertion fix
-25	JDK-8356946	candidate-adapted-serviceability	hold-runtime	x86 interpreter profile update codegen
-25	JDK-8356949	candidate-adapted-serviceability	hold-runtime	AArch64 template interpreter method entry codegen
-25	JDK-8356998	candidate-adapted-serviceability	hold-jep	-Xlog:aot tag conversion step 2 for AOT cache JEPs
-25	JDK-8357056	candidate-adapted-serviceability	hold-native	RISC-V assembler width fixes
-25	JDK-8357223	candidate-adapted-serviceability	hold-runtime	AArch64 interpreter profile update codegen
-25	JDK-8357434	candidate-adapted-serviceability	hold-runtime	x86 interpreter branch profiling simplification
-25	JDK-8357504	candidate-adapted-serviceability	hold-runtime	InstanceKlassFlags loader-bit refactor
-25	JDK-8357626	candidate-adapted-serviceability	hold-native	RISC-V template interpreter method entry
-25	JDK-8357695	candidate-adapted-serviceability	hold-jit	RISC-V C2 vector intrinsic matcher change
-25	JDK-8358035	candidate-adapted-serviceability	hold-runtime	trivial HotSpot declaration removal
-25	JDK-8358105	candidate-adapted-serviceability	hold-native	RISC-V interpreter profile update codegen
-25	JDK-8358283	candidate-adapted-serviceability	hold-runtime	MetaspaceObj allocation failure-mode fix
-26	JDK-8265754	candidate-adapted-serviceability	hold-runtime	JVMTI suspend/resume handshake refactor
-26	JDK-8268406	candidate-adapted-serviceability	hold-runtime	jmethodID lifetime change visible to JNI/JVMTI; release note
-26	JDK-8272160	candidate-adapted-serviceability	hold-runtime	CDS counter width cleanup in HotSpot
-26	JDK-8284016	candidate-adapted-serviceability	hold-runtime	HotSpot handshake closure renames
-26	JDK-8292984	candidate-adapted-serviceability	hold-runtime	HotSpot container support refactor
-26	JDK-8295851	candidate-adapted-serviceability	hold-runtime	BytecodeTracer locking change
-26	JDK-8307495	candidate-adapted-serviceability	hold-native	AIX-PPC atomic bitset specialization
-26	JDK-8317269	candidate-adapted-serviceability	hold-jep	AOT cache linked old classes (Leyden JEPs) absent in 21
-26	JDK-8334866	candidate-adapted-serviceability	hold-runtime	hs_err ElfDecoder speedup
-26	JDK-8334898	candidate-adapted-serviceability	hold-jep	AOT class linking dump-time resolution (JEP 483 line)
-26	JDK-8337217	candidate-adapted-serviceability	hold-runtime	NMT VMATree port; VMATree absent in 21
-26	JDK-8342730	candidate-adapted-serviceability	hold-runtime	NMT VMATree internals absent in 21
-26	JDK-8344165	candidate-adapted-serviceability	hold-runtime	HotSpot exception logging with full call stack
-26	JDK-8346237	candidate-adapted-serviceability	hold-removal	obsoletes the UseOprofile flag
-26	JDK-8347707	candidate-adapted-serviceability	hold-runtime	HotSpot snprintf usage normalization
-26	JDK-8350550	candidate-adapted-serviceability	hold-jep	AOT cache class preloading (Leyden JEPs) absent in 21
-26	JDK-8351595	candidate-adapted-serviceability	hold-runtime	trivial JVM_FindClassFromCaller cleanup
-26	JDK-8351661	candidate-adapted-serviceability	hold-runtime	NMT VMATree call-stack tracking; VMATree absent in 21
-26	JDK-8352067	candidate-adapted-serviceability	hold-runtime	NMT treap to red-black tree swap; both absent in 21
-26	JDK-8353444	candidate-adapted-serviceability	hold-runtime	NMT malloc tracker rename
-26	JDK-8354937	candidate-adapted-serviceability	hold-runtime	dead SPARC code cleanup in os_linux
-26	JDK-8356556	candidate-adapted-serviceability	hold-preview	AArch64 FFM downcall safepoint fence; FFM is preview in 21
-26	JDK-8356807	candidate-adapted-serviceability	hold-runtime	CDS loading-error reporting change; depends on post-21 AOT logging helpers
-26	JDK-8357220	candidate-adapted-serviceability	hold-runtime	BootstrapMethods attribute struct refactor
-26	JDK-8357591	candidate-adapted-serviceability	admitted-tests	test-only re-enable tied to JDK-8345826; likely no-op on 21
-26	JDK-8358326	candidate-adapted-serviceability	hold-runtime	HotSpot array allocation call-site cleanup
-26	JDK-8358593	candidate-adapted-serviceability	hold-native	BSD AArch64 ucontext accessors
-26	JDK-8358653	candidate-adapted-serviceability	admitted-docs	s390 source comments only
-26	JDK-8358655	candidate-adapted-serviceability	hold-runtime	AArch64 interpreter branch profiling simplification
-26	JDK-8358685	candidate-adapted-serviceability	hold-jep	AOT logging test fix; AOT cache absent in 21
-26	JDK-8358799	candidate-adapted-serviceability	hold-runtime	HotSpot os::jvm_path refactor
-26	JDK-8358891	candidate-adapted-serviceability	hold-runtime	PerfData sampling dead code removal
-26	JDK-8359105	candidate-adapted-serviceability	hold-native	RISC-V JNI safepoint poll fence
-26	JDK-8359114	candidate-adapted-serviceability	hold-native	s390x z17 CPU detection
-26	JDK-8359373	candidate-adapted-serviceability	hold-runtime	stub generator blob split for VM bootstrap ordering
-26	JDK-8359423	candidate-adapted-serviceability	hold-runtime	CDS archive-missing error text in HotSpot
-26	JDK-8359801	candidate-adapted-serviceability	hold-native	RISC-V interpreter branch profiling
-26	JDK-8359920	candidate-adapted-serviceability	hold-runtime	verifier stackmap frame-type refactor
-26	JDK-8359923	candidate-adapted-serviceability	hold-runtime	follow-up to post-21 Deferred utility
-26	JDK-8360281	candidate-adapted-serviceability	hold-runtime	VMError hs_err format string fix
-26	JDK-8360458	candidate-adapted-serviceability	hold-runtime	rename of post-21 Deferred utility
-26	JDK-8360515	candidate-adapted-serviceability	hold-runtime	HotSpot size formatting macro fix
-26	JDK-8361085	candidate-adapted-serviceability	hold-runtime	MemoryReserver format fix; class postdates 21
-26	JDK-8361215	candidate-adapted-serviceability	hold-jep	AOT test for verification constraints; AOT cache absent in 21
-26	JDK-8361292	candidate-adapted-serviceability	hold-runtime	HotSpot ModuleEntry rename
-26	JDK-8361325	candidate-adapted-serviceability	hold-runtime	CDS ClassLoaderExt refactor
-26	JDK-8361536	candidate-adapted-serviceability	hold-native	s390x return_pc offset fix
-26	JDK-8361693	candidate-adapted-serviceability	hold-runtime	subklass tree cleanup in class unloading; GC interaction
-26	JDK-8362088	candidate-adapted-serviceability	hold-runtime	HotSpot const-correctness tweak
-26	JDK-8362151	candidate-adapted-serviceability	hold-runtime	HotSpot friend-class cleanup
+25	JDK-8355237	candidate-adapted-serviceability	hold-jep	AOT cache test cases from Leyden; feature absent in 21
+25	JDK-8355481	candidate-adapted-serviceability	hold-runtime	methodHandles.cpp bootstrap argument copy cleanup; HotSpot build
+25	JDK-8355490	candidate-adapted-serviceability	hold-runtime	VM_RedefineClasses signature cleanup; JVMTI redefine coupling
+25	JDK-8355617	candidate-adapted-serviceability	hold-runtime	HotSpot-wide debug_only macro rename; HotSpot build
+25	JDK-8355646	candidate-adapted-serviceability	hold-runtime	ObjectMonitor::exit fast-path change; HotSpot sync tests
+25	JDK-8355648	candidate-adapted-serviceability	hold-runtime	Thread::SpinAcquire parameter cleanup; HotSpot build
+25	JDK-8355650	candidate-adapted-serviceability	hold-runtime	ParkEvent field removal; HotSpot sync
+25	JDK-8355692	candidate-adapted-serviceability	hold-runtime	HotSpot outputStream indentation refactor; HotSpot build
+25	JDK-8356025	candidate-adapted-serviceability	hold-api	adds -XX:+PrintVMInfoAtExit diagnostic command-line flag
+25	JDK-8356159	candidate-adapted-serviceability	hold-native	RISC-V Zabha extension support; secondary arch native code
+25	JDK-8356173	candidate-adapted-serviceability	hold-runtime	removes ThreadCritical lock from HotSpot runtime and NMT
+25	JDK-8356329	candidate-adapted-serviceability	hold-jep	hs_err reporting of compact object headers (JEP 450) absent in 21
+25	JDK-8356390	candidate-adapted-serviceability	hold-runtime	ResolvedIndyEntry accessor rename; HotSpot build
+25	JDK-8356595	candidate-adapted-serviceability	hold-jep	-Xlog aot tag conversion for AOT cache; feature absent in 21
+25	JDK-8356597	candidate-adapted-serviceability	hold-jep	AOT cache creation mode check; AOT cache absent in 21
+25	JDK-8356631	candidate-adapted-serviceability	hold-runtime	OopHandle replace assertions; HotSpot runtime
+25	JDK-8356946	candidate-adapted-serviceability	hold-runtime	x86 interpreter profile update assembly; HotSpot build and tests
+25	JDK-8356949	candidate-adapted-serviceability	hold-runtime	AArch64 template interpreter entry assembly; HotSpot build and tests
+25	JDK-8356998	candidate-adapted-serviceability	hold-jep	-Xlog aot tag conversion step 2; AOT cache absent in 21
+25	JDK-8357056	candidate-adapted-serviceability	hold-native	RISC-V assembler width fixes; secondary arch native code
+25	JDK-8357223	candidate-adapted-serviceability	hold-runtime	AArch64 interpreter profile update assembly; HotSpot build and tests
+25	JDK-8357434	candidate-adapted-serviceability	hold-runtime	x86 interpreter profile_taken_branch simplification; HotSpot build
+25	JDK-8357504	candidate-adapted-serviceability	hold-runtime	InstanceKlassFlags loader bit assignment refactor; HotSpot CDS
+25	JDK-8357626	candidate-adapted-serviceability	hold-native	RISC-V template interpreter entry; secondary arch native code
+25	JDK-8357695	candidate-adapted-serviceability	hold-jit	RISC-V C2 match_rule_supported_vector change; compiler
+25	JDK-8358035	candidate-adapted-serviceability	hold-runtime	ClassFileStream unused declaration removal; HotSpot build
+25	JDK-8358105	candidate-adapted-serviceability	hold-native	RISC-V interpreter profile updates; secondary arch native code
+25	JDK-8358283	candidate-adapted-serviceability	hold-runtime	MetaspaceObj operator new failure mode; HotSpot metaspace
+26	JDK-8265754	candidate-adapted-serviceability	hold-runtime	HandshakeState suspend/resume API move; HotSpot threads
+26	JDK-8268406	candidate-adapted-serviceability	hold-runtime	jmethodID native memory lifecycle; JNI/JVMTI coupling, release-noted
+26	JDK-8272160	candidate-adapted-serviceability	hold-runtime	CDS counter width cleanup; HotSpot build
+26	JDK-8284016	candidate-adapted-serviceability	hold-runtime	handshake closure renames; HotSpot build
+26	JDK-8292984	candidate-adapted-serviceability	hold-native	Linux cgroup container interface refactor; OS-specific native code
+26	JDK-8295851	candidate-adapted-serviceability	hold-runtime	BytecodeTracer ttyLock removal; HotSpot runtime logging
+26	JDK-8307495	candidate-adapted-serviceability	hold-native	aix-ppc atomic bitset specialization; OS/arch-specific native code
+26	JDK-8317269	candidate-adapted-serviceability	hold-jep	old classes linked state in AOT cache; feature absent in 21
+26	JDK-8334866	candidate-adapted-serviceability	hold-native	ElfDecoder hs_err symbol search; Linux ELF native code
+26	JDK-8334898	candidate-adapted-serviceability	hold-jep	dump-time static resolution for AOT cache linking; feature absent in 21
+26	JDK-8337217	candidate-adapted-serviceability	hold-runtime	NMT VirtualMemoryTracker port to VMATree; VMATree absent in 21
+26	JDK-8342730	candidate-adapted-serviceability	hold-runtime	NMT VMATree cleanup; VMATree absent in 21
+26	JDK-8344165	candidate-adapted-serviceability	hold-runtime	-Xlog:exceptions call-stack tracing; HotSpot runtime output
+26	JDK-8346237	candidate-adapted-serviceability	hold-removal	obsoletes UseOprofile product flag
+26	JDK-8347707	candidate-adapted-serviceability	hold-runtime	os::snprintf usage standardisation across HotSpot
+26	JDK-8350550	candidate-adapted-serviceability	hold-jep	AOT cache class preloading at bootstrap; feature absent in 21
+26	JDK-8351595	candidate-adapted-serviceability	hold-runtime	JVM_FindClassFromCaller unused variable cleanup; HotSpot build
+26	JDK-8351661	candidate-adapted-serviceability	hold-runtime	NMT VMATree reserve/commit call-stacks; VMATree absent in 21
+26	JDK-8352067	candidate-adapted-serviceability	hold-runtime	NMT treap replaced by red-black tree; HotSpot utils
+26	JDK-8353444	candidate-adapted-serviceability	hold-runtime	NMT malloc tracker rename; HotSpot build
+26	JDK-8354937	candidate-adapted-serviceability	hold-native	os_linux sparc leftover cleanup; OS-specific native code
+26	JDK-8356556	candidate-adapted-serviceability	hold-preview	AArch64 FFM downcall stub fence; FFM is preview (JEP 442) in 21
+26	JDK-8356807	candidate-adapted-serviceability	hold-runtime	CDS loading error reporting refactor; HotSpot CDS
+26	JDK-8357220	candidate-adapted-serviceability	hold-runtime	constant pool BSM attribute struct; HotSpot metadata
+26	JDK-8357591	candidate-adapted-serviceability	admitted-tests	re-enables CDS jvmci tests; only if JDK-8345826 fix is present
+26	JDK-8358326	candidate-adapted-serviceability	hold-runtime	oopFactory array allocation usage; HotSpot runtime
+26	JDK-8358593	candidate-adapted-serviceability	hold-native	BSD aarch64 ucontext accessors; OS-specific native code
+26	JDK-8358653	candidate-adapted-serviceability	admitted-docs	s390 comment cleanup only
+26	JDK-8358655	candidate-adapted-serviceability	hold-runtime	AArch64 interpreter profile_taken_branch simplification; HotSpot build
+26	JDK-8358685	candidate-adapted-serviceability	hold-jep	AOTLoggingTag test fix; AOT logging absent in 21
+26	JDK-8358799	candidate-adapted-serviceability	hold-native	os::jvm_path refactor across os_* files; OS-specific native code
+26	JDK-8358891	candidate-adapted-serviceability	hold-runtime	PerfData sampling interval code removal; HotSpot runtime
+26	JDK-8359105	candidate-adapted-serviceability	hold-native	RISC-V JNI safepoint poll fence; secondary arch native code
+26	JDK-8359114	candidate-adapted-serviceability	hold-native	s390x z17 detection; secondary arch native code
+26	JDK-8359373	candidate-adapted-serviceability	hold-runtime	stub generator blob split around universe init; HotSpot startup
+26	JDK-8359423	candidate-adapted-serviceability	hold-runtime	CDS missing archive error message; HotSpot user-visible output
+26	JDK-8359801	candidate-adapted-serviceability	hold-native	RISC-V interpreter profile_taken_branch; secondary arch native code
+26	JDK-8359920	candidate-adapted-serviceability	hold-runtime	verifier stackmap frame type names; HotSpot verifier
+26	JDK-8359923	candidate-adapted-serviceability	hold-runtime	Deferred<> const accessors; HotSpot utils
+26	JDK-8360281	candidate-adapted-serviceability	hold-runtime	VMError format string fix; HotSpot error reporting
+26	JDK-8360458	candidate-adapted-serviceability	hold-runtime	Deferred<> rename to DeferredStatic<>; HotSpot utils
+26	JDK-8360515	candidate-adapted-serviceability	hold-runtime	PROPERFMTARGS template cleanup; HotSpot utils
+26	JDK-8361085	candidate-adapted-serviceability	hold-runtime	MemoryReserver log format fix; MemoryReserver absent in 21
+26	JDK-8361215	candidate-adapted-serviceability	hold-jep	AOT cache verification constraint test; feature absent in 21
+26	JDK-8361292	candidate-adapted-serviceability	hold-runtime	ModuleEntry accessor rename; HotSpot build
+26	JDK-8361325	candidate-adapted-serviceability	hold-runtime	ClassLoaderExt refactor; HotSpot CDS
+26	JDK-8361536	candidate-adapted-serviceability	hold-native	s390x return_pc frame offset fix; secondary arch native code
+26	JDK-8361693	candidate-adapted-serviceability	hold-runtime	Klass subklass tree cleanup removal; class unloading and GC interaction
+26	JDK-8362088	candidate-adapted-serviceability	hold-runtime	CompressedKlassPointers const correctness; HotSpot build
+26	JDK-8362151	candidate-adapted-serviceability	hold-runtime	ClassLoaderDataGraph friend cleanup; HotSpot build

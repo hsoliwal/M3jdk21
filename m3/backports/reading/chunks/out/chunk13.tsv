@@ -45,7 +45,7 @@ release	jbs	provisional_disposition	reading_disposition	rationale
 25	JDK-8345589	candidate-adapted-serviceability	hold-native	Windows-only strtok_r definition simplification
 25	JDK-8345629	candidate-adapted-serviceability	hold-removal	removes VM flags expired in 25; still valid in 21
 25	JDK-8345655	candidate-adapted-serviceability	hold-runtime	memory reservation code moved out of ReservedSpace
-25	JDK-8345658	candidate-adapted-serviceability	admitted-tests	WhiteBox NMT test API fix only
+25	JDK-8345658	candidate-adapted-serviceability	hold-runtime	WhiteBox NMT commit fix lives in HotSpot prims/whitebox.cpp; needs HotSpot build
 25	JDK-8345678	candidate-adapted-serviceability	hold-runtime	mirror creation refactor for class modifiers
 25	JDK-8345911	candidate-adapted-serviceability	hold-runtime	sealed-class ICCE message change in HotSpot class loading; caller-visible text
 25	JDK-8345936	candidate-adapted-serviceability	hold-runtime	CDS class bytes read path limited to multi-release jars; startup perf
@@ -66,7 +66,7 @@ release	jbs	provisional_disposition	reading_disposition	rationale
 25	JDK-8347719	candidate-adapted-serviceability	hold-runtime	HotSpot-wide forbidden C function declaration mechanism
 25	JDK-8347794	candidate-adapted-serviceability	hold-native	RISC-V Zfhmin float cleanup; port-specific
 25	JDK-8348028	candidate-adapted-serviceability	admitted-tests	gtest harness fix to run gtests with CDS
-25	JDK-8348029	candidate-adapted-serviceability	admitted-tests	gtest death-test support for real crash signals
+25	JDK-8348029	candidate-adapted-serviceability	hold-runtime	gtest death tests with real crash signals touch HotSpot signal handling; needs HotSpot build
 25	JDK-8348117	candidate-adapted-serviceability	hold-runtime	interpreter signature handler dead overload removal
 25	JDK-8348169	candidate-adapted-serviceability	hold-runtime	NMT Treap value destruction; Treap utility postdates 21
 25	JDK-8348195	candidate-adapted-serviceability	hold-runtime	follow-up casts to AccessFlags u2 change

@@ -1,111 +1,111 @@
 release	jbs	provisional_disposition	reading_disposition	rationale
-27	JDK-8371979	candidate-adapted	admitted-tests	test-only conversion of FileStore/Basic.java to JUnit
-27	JDK-8374170	candidate-adapted	hold-runtime	virtual-thread I/O poller rework (loom); runtime-coupled
-27	JDK-8376419	candidate-adapted	admitted-tests	test-only improvement to UserDefinedFileAttributeView/Basic.java
-27	JDK-8377018	candidate-adapted	admitted-tests	test-only conversion of DirectoryStream/SecureDS.java to JUnit
-27	JDK-8380665	candidate-adapted	admitted-tests	test-only: SendReceiveMaxSize also covers the loopback interface
-27	JDK-8383623	candidate-adapted	hold-native	Windows file system provider native change (GetFileInformationByName); OS-specific
-22	JDK-8310047	candidate-adapted	hold-api	new public StandardCharsets UTF_32 constants
-24	JDK-8339017	candidate-adapted	candidate-adapted	DoubleByte fields made static; internal charset cleanup
-24	JDK-8344025	candidate-adapted	candidate-adapted	unused internal ISO2022 encoder field removed; trivial
-24	JDK-8344330	candidate-adapted	hold-jep	doPrivileged removal in jdk.charsets (JEP 486); security manager still present in 21
-26	JDK-8359119	candidate-adapted	hold-preview	Charset adopts StableValue, a preview API absent from 21
-26	JDK-8363925	candidate-adapted	candidate-string-lane	drops ArrayEncoder.encode, interface behind the String encode fast path; STRING owners confirm M3String does not call it
-24	JDK-8344149	candidate-adapted	hold-jep	security manager usage removal in java.rmi (JEP 486)
-23	JDK-8330686	candidate-adapted	admitted-docs	DatabaseMetaData javadoc typo fixes
-24	JDK-8344365	candidate-adapted	hold-jep	security manager cleanup in java.sql and java.sql.rowset (JEP 486)
-26	JDK-8369432	candidate-adapted	hold-api	JDBC 4.5 MR adds public java.sql API
-22	JDK-8041488	candidate-adapted	hold-api	new public java.text.ListFormat class
-22	JDK-8309686	candidate-adapted	admitted-docs	TR35 URL consistency in docs
-22	JDK-8312411	candidate-adapted	candidate-adapted	MessageFormat.formatToCharacterIterator internal cleanup
-22	JDK-8317265	candidate-adapted	hold-api	spec text for ListFormat.format, a 22 API absent from 21; travels with JDK-8041488
-22	JDK-8317471	candidate-adapted	hold-api	spec text for ListFormat.parseObject; ListFormat absent from 21
-22	JDK-8318569	candidate-adapted	hold-api	new public getters on ListFormat
-22	JDK-8319628	candidate-adapted	admitted-docs	DateFormat javadoc documents the existing IllegalArgumentException
-22	JDK-8321059	candidate-adapted	candidate-adapted	needless array assignments removed in MergeCollation and CompactByteArray; internal
-23	JDK-8318761	candidate-adapted	hold-api	extends MessageFormat pattern syntax with new format types (CSR)
-23	JDK-8321545	candidate-adapted	hold-api	adds public toString overrides with javadoc to Format subclasses (CSR); SE 21 API surface
+27	JDK-8371979	candidate-adapted	admitted-tests	JUnit conversion of a test only
+27	JDK-8374170	candidate-adapted	hold-runtime	sun.nio.ch Poller is virtual-thread I/O coupling
+27	JDK-8376419	candidate-adapted	admitted-tests	test improvement only
+27	JDK-8377018	candidate-adapted	admitted-tests	JUnit conversion of a test only
+27	JDK-8380665	candidate-adapted	admitted-tests	test adds loopback case only
+27	JDK-8383623	candidate-adapted	hold-native	Windows libnio native GetFileInformationByName change
+22	JDK-8310047	candidate-adapted	hold-api	adds UTF_32 constants to public StandardCharsets
+24	JDK-8339017	candidate-adapted	candidate-adapted	internal sun.nio.cs field cleanup
+24	JDK-8344025	candidate-adapted	candidate-adapted	removes unused internal encoder field
+24	JDK-8344330	candidate-adapted	hold-jep	JEP 486 doPrivileged removal
+26	JDK-8359119	candidate-adapted	hold-preview	StableValue (JEP 502) absent in 21
+26	JDK-8363925	candidate-adapted	candidate-adapted	removes unused internal ArrayEncoder method
+24	JDK-8344149	candidate-adapted	hold-jep	JEP 486 SecurityManager removal in java.rmi
+23	JDK-8330686	candidate-adapted	admitted-docs	javadoc typo fixes
+24	JDK-8344365	candidate-adapted	hold-jep	JEP 486 SecurityManager cleanup
+26	JDK-8369432	candidate-adapted	hold-api	JDBC 4.5 adds public API
+22	JDK-8041488	candidate-adapted	hold-api	new java.text.ListFormat public class
+22	JDK-8309686	candidate-adapted	admitted-docs	URL fix in javadoc
+22	JDK-8312411	candidate-adapted	candidate-measured	formatToCharacterIterator refactor; verify output and null handling
+22	JDK-8317265	candidate-adapted	hold-api	ListFormat spec; class absent in 21
+22	JDK-8317471	candidate-adapted	hold-api	ListFormat spec; class absent in 21
+22	JDK-8318569	candidate-adapted	hold-api	new ListFormat getters; class absent in 21
+22	JDK-8319628	candidate-adapted	admitted-docs	javadoc throws clarification
+22	JDK-8321059	candidate-adapted	candidate-adapted	internal array assignment cleanup
+23	JDK-8318761	candidate-adapted	hold-api	new MessageFormat pattern types are supported API
+23	JDK-8321545	candidate-adapted	hold-api	new public toString overrides with specified output
 23	JDK-8327640	candidate-adapted	hold-api	new NumberFormat strict parsing API
-23	JDK-8327875	candidate-adapted	admitted-docs	javadoc advice on unused NumberFormat methods in ChoiceFormat
-23	JDK-8329222	candidate-adapted	admitted-docs	NumberFormat family spec wording updates
-24	JDK-8337839	candidate-adapted	candidate-adapted	MergeCollation fields made static; trivial
-25	JDK-8357681	candidate-adapted	candidate-adapted	DigitList.toString debug output fix; internal java.text
-26	JDK-8358880	candidate-adapted	candidate-measured	DecimalFormat parse performance claim; code drifted after the 23 strict-parsing work
-26	JDK-8362448	candidate-adapted	candidate-measured	DecimalFormat switches to Double.toString digits; output may differ (release note), STRING owners review digit code
-26	JDK-8363972	candidate-adapted	hold-api	changes DecimalFormat/CompactNumberFormat lenient minus-sign parsing spec (release note)
-26	JDK-8367324	candidate-adapted	candidate-measured	DigitList double-path perf change; likely stacked on JDK-8362448, check
-27	JDK-8385736	candidate-adapted	hold-api	optimizes ListFormat, a 22 API absent from 21
-22	JDK-8319423	candidate-adapted	candidate-measured	equivalent leap-year arithmetic for speed; perf claim
-23	JDK-8324665	candidate-adapted	hold-api	changes lenient date/time parsing spec for space separators (CSR, release note)
-23	JDK-8331202	candidate-adapted	hold-api	new public Instant.until(Instant)
-24	JDK-8336706	candidate-adapted	candidate-measured	LocalDate.toString perf rewrite; StringBuilder.repeat exists in 21
-24	JDK-8336741	candidate-adapted	candidate-measured	LocalTime.toString perf rewrite; check for post-21 DecimalDigits helpers
-24	JDK-8336792	candidate-adapted	candidate-measured	zero padding via StringBuilder.repeat; perf-motivated
-24	JDK-8337168	candidate-adapted	candidate-measured	LocalDateTime.toString perf rewrite (noreg-perf)
-24	JDK-8337832	candidate-adapted	candidate-measured	datetime toString perf rewrite across java.time
-25	JDK-8337279	candidate-adapted	candidate-measured	shared StringBuilder for Instant formatting; allocation and perf claim
-25	JDK-8348880	candidate-adapted	candidate-measured	ZoneOffset quarter cache moves to AtomicReferenceArray; perf claim
-25	JDK-8355391	candidate-adapted	candidate-adapted	Long::hashCode in java.time; identical hash results
-26	JDK-8365186	candidate-adapted	candidate-measured	shrinks DateTimePrintContext.adjust for inlining; perf claim (noreg-perf)
+23	JDK-8327875	candidate-adapted	hold-api	NumberFormat/ChoiceFormat spec change with CSR
+23	JDK-8329222	candidate-adapted	admitted-docs	NumberFormat spec wording only
+24	JDK-8337839	candidate-adapted	candidate-adapted	internal static field cleanup
+25	JDK-8357681	candidate-adapted	candidate-adapted	internal DigitList toString fix
+26	JDK-8358880	candidate-adapted	candidate-measured	DecimalFormat parse performance claim
+26	JDK-8362448	candidate-adapted	candidate-measured	release-noted DecimalFormat output change via Double.toString algorithm
+26	JDK-8363972	candidate-adapted	candidate-measured	release-noted lenient minus-sign parse behaviour change
+26	JDK-8367324	candidate-adapted	candidate-measured	DigitList formatting performance claim
+27	JDK-8385736	candidate-adapted	hold-api	ListFormat absent in 21
+22	JDK-8319423	candidate-adapted	candidate-measured	Year.isLeap micro-optimisation claim
+23	JDK-8324665	candidate-adapted	candidate-measured	release-noted lenient space-separator parse change
+23	JDK-8331202	candidate-adapted	hold-api	new Instant.until(Instant) public method
+24	JDK-8336706	candidate-adapted	candidate-measured	LocalDate.toString performance claim via StringBuilder.repeat
+24	JDK-8336741	candidate-adapted	candidate-measured	LocalTime.toString performance claim
+24	JDK-8336792	candidate-adapted	candidate-measured	DateTimeFormatterBuilder zero padding performance claim
+24	JDK-8337168	candidate-adapted	candidate-measured	LocalDateTime.toString performance claim
+24	JDK-8337832	candidate-adapted	candidate-measured	datetime toString performance claim
+25	JDK-8337279	candidate-adapted	candidate-measured	Instant formatting StringBuilder sharing performance claim
+25	JDK-8348880	candidate-adapted	candidate-adapted	internal ZoneOffset cache structure swap
+25	JDK-8355391	candidate-adapted	candidate-adapted	internal hashCode helper cleanup
+26	JDK-8365186	candidate-adapted	candidate-measured	DateTimePrintContext size reduction performance claim
 26	JDK-8366829	candidate-adapted	hold-api	new public Duration.MIN and MAX constants
-26	JDK-8368172	candidate-adapted	candidate-adapted	package-private DateTimePrintContext made immutable; internal refactor
-26	JDK-8368825	candidate-adapted	candidate-adapted	switch expression replaces map lookup for pattern letters; internal, Java 21 syntax
-27	JDK-8379973	candidate-adapted	hold-api	new DateTimeFormatter/Builder localized-pattern customization API
-23	JDK-8206447	candidate-adapted	candidate-adapted	InflaterInputStream.skip Integer.MAX_VALUE cap; bug fix, no new API
-23	JDK-8303866	candidate-adapted	candidate-adapted	ZipInputStream reads small Zip64 data descriptors; bug fix
-23	JDK-8319626	candidate-adapted	hold-api	adds public ZipFile.toString override; SE 21 API surface
-23	JDK-8321396	candidate-adapted	admitted-tests	retires redundant zip test
-23	JDK-8322802	candidate-adapted	admitted-tests	test-only coverage for ZipFile.getEntry language encoding flag
-23	JDK-8326096	candidate-adapted	hold-api	deprecates public Inflater/Deflater getTotalIn/getTotalOut; API status change
-23	JDK-8326099	candidate-adapted	candidate-adapted	GZIPOutputStream uses getBytesRead internally; no API change
-23	JDK-8327208	candidate-adapted	candidate-adapted	removes unused package-private Manifest.make72Safe; not public API
-24	JDK-8321274	candidate-adapted	candidate-adapted	package-private ZipEntry field rename; internal shared-secret accessors
-24	JDK-8336843	candidate-adapted	hold-removal	deprecates java.util.zip.ZipError for removal
-24	JDK-8336844	candidate-adapted	candidate-adapted	duplicate constant cleanup in package-private ZipConstants64
-24	JDK-8338729	candidate-adapted	admitted-tests	retires obsolete TestZipError test
-24	JDK-8339711	candidate-adapted	candidate-adapted	initCEN skips a needless END header read; internal
-24	JDK-8339874	candidate-adapted	candidate-adapted	removes duplicate trailing-slash check in ZipFile.getZipEntry; internal
-24	JDK-8340885	candidate-adapted	candidate-measured	ZipCoder.Comparison desugared for startup; perf claim (noreg-perf)
-24	JDK-8341594	candidate-adapted	candidate-measured	Unsafe coalesced reads in ZipUtils; perf claim
-24	JDK-8341595	candidate-adapted	candidate-adapted	CEN header iteration cleanup in initCEN; internal
-24	JDK-8341597	candidate-adapted	candidate-adapted	ZipFile inflater input buffer sized from compressed size; internal fix
-24	JDK-8342040	candidate-adapted	candidate-measured	multi-release JAR entry lookup perf (noreg-perf)
-24	JDK-8343307	candidate-adapted	candidate-adapted	internal exception plumbing in initCEN (noreg-cleanup)
-24	JDK-8344179	candidate-adapted	hold-jep	security manager cleanup in ZIP and JAR (JEP 486)
-25	JDK-8066583	candidate-adapted	admitted-docs	javadoc on who frees Inflater/Deflater resources; verify no links to 25-only close()
-25	JDK-8225763	candidate-adapted	hold-api	Inflater and Deflater implement AutoCloseable; public API
-26	JDK-8365703	candidate-adapted	candidate-string-lane	ZipCoder moves to the JLA String NoRepl factory (26 naming); String/JLA decode entry points are M3-modified
-26	JDK-8366101	candidate-adapted	hold-preview	JarFile uses ScopedValue, preview in 21
-27	JDK-8376271	candidate-adapted	admitted-docs	ZipFile comment wording only
-27	JDK-8376294	candidate-adapted	candidate-adapted	ZipFile.Source.Key drops retained BasicFileAttributes; internal footprint fix
-27	JDK-8376403	candidate-adapted	candidate-adapted	avoids ArrayDeque class load in ZipFile; startup cleanup (noreg-cleanup)
-27	JDK-8380542	candidate-adapted	hold-api	ZipOutputStream/ZipEntry setComment spec change (null, empty, unmappable)
-22	JDK-8313768	candidate-adapted	candidate-adapted	StreamHandler reads volatile writer field once; internal, low risk
-26	JDK-8361533	candidate-adapted	candidate-adapted	@Serial annotations in java.logging; source retention, no bytecode change
-22	JDK-8311939	candidate-adapted	candidate-measured	Matcher.groups allocation reduction; jdk21u-fix-no, measure
-23	JDK-8328700	candidate-adapted	candidate-adapted	unused import and variable removal in regex; trivial
-22	JDK-8296250	candidate-adapted	hold-data	ICU4J 74.1 refresh (Unicode data)
+26	JDK-8368172	candidate-adapted	candidate-adapted	internal DateTimePrintContext immutability refactor
+26	JDK-8368825	candidate-adapted	candidate-adapted	internal switch expression refactor
+27	JDK-8379973	candidate-adapted	hold-api	new DateTimeFormatter customization API
+23	JDK-8206447	candidate-adapted	candidate-adapted	InflaterInputStream.skip long bug fix, no API change
+23	JDK-8303866	candidate-adapted	candidate-adapted	ZipInputStream Zip64 end-record parse bug fix
+23	JDK-8319626	candidate-adapted	hold-api	new public ZipFile.toString override
+23	JDK-8321396	candidate-adapted	admitted-tests	test retirement only
+23	JDK-8322802	candidate-adapted	admitted-tests	test-only addition
+23	JDK-8326096	candidate-adapted	hold-api	deprecates public Inflater/Deflater methods
+23	JDK-8326099	candidate-adapted	candidate-adapted	internal GZIPOutputStream accounting fix
+23	JDK-8327208	candidate-adapted	candidate-adapted	removes unused package-private Manifest method
+24	JDK-8321274	candidate-adapted	candidate-adapted	internal field rename
+24	JDK-8336843	candidate-adapted	hold-removal	ZipError deprecated for removal
+24	JDK-8336844	candidate-adapted	candidate-adapted	internal duplicate constant cleanup
+24	JDK-8338729	candidate-adapted	admitted-tests	test retirement only
+24	JDK-8339711	candidate-adapted	candidate-adapted	internal initCEN read cleanup
+24	JDK-8339874	candidate-adapted	candidate-adapted	internal getZipEntry check cleanup
+24	JDK-8340885	candidate-adapted	candidate-measured	ZipCoder startup performance claim
+24	JDK-8341594	candidate-adapted	candidate-measured	Unsafe coalesced reads performance claim
+24	JDK-8341595	candidate-adapted	candidate-adapted	internal CEN iteration cleanup
+24	JDK-8341597	candidate-adapted	candidate-adapted	internal inflater buffer sizing fix
+24	JDK-8342040	candidate-adapted	candidate-measured	multi-release JAR lookup performance claim
+24	JDK-8343307	candidate-adapted	candidate-measured	exception type visible to callers changes
+24	JDK-8344179	candidate-adapted	hold-jep	JEP 486 SecurityManager cleanup
+25	JDK-8066583	candidate-adapted	admitted-docs	javadoc on resource ownership only
+25	JDK-8225763	candidate-adapted	hold-api	Inflater/Deflater implement AutoCloseable
+26	JDK-8365703	candidate-adapted	candidate-string-lane	routes through JLA uncheckedNewStringNoRepl, String owners adapt
+26	JDK-8366101	candidate-adapted	hold-preview	ScopedValue is preview in 21
+27	JDK-8376271	candidate-adapted	admitted-docs	source comment wording only
+27	JDK-8376294	candidate-adapted	candidate-adapted	internal Source.Key retention fix
+27	JDK-8376403	candidate-adapted	candidate-adapted	internal startup class-loading cleanup
+27	JDK-8380542	candidate-adapted	hold-api	setComment spec and behaviour change with CSR
+22	JDK-8313768	candidate-adapted	candidate-measured	StreamHandler volatile access performance claim
+26	JDK-8361533	candidate-adapted	candidate-adapted	@Serial annotation-only cleanup
+22	JDK-8311939	candidate-adapted	candidate-measured	Matcher.groups allocation performance claim, declined in 21u
+23	JDK-8328700	candidate-adapted	candidate-adapted	unused import and variable removal
+22	JDK-8296250	candidate-adapted	hold-data	ICU4J and Unicode data refresh
 22	JDK-8306116	candidate-adapted	hold-data	CLDR 44 data refresh
-22	JDK-8311968	candidate-adapted	admitted-docs	TimeZone three-letter ID javadoc clarification
-22	JDK-8312521	candidate-adapted	candidate-adapted	unused LocaleProviderAdapter field removed; internal
-22	JDK-8316557	candidate-adapted	candidate-adapted	sun.util fields made final; trivial
-22	JDK-8317979	candidate-adapted	hold-data	CLDR provider adopts TZDB-style zone abbreviations; locale data change
-23	JDK-8174269	candidate-adapted	hold-removal	removes the COMPAT locale data provider
+22	JDK-8311968	candidate-adapted	admitted-docs	TimeZone javadoc clarification
+22	JDK-8312521	candidate-adapted	candidate-adapted	removes unused internal field
+22	JDK-8316557	candidate-adapted	candidate-adapted	internal final field cleanup
+22	JDK-8317979	candidate-adapted	hold-data	changes generated CLDR zone-name data
+23	JDK-8174269	candidate-adapted	hold-removal	removes COMPAT locale provider
 23	JDK-8319990	candidate-adapted	hold-data	CLDR 45 data refresh
-23	JDK-8329691	candidate-adapted	hold-data	CLDR 45 nonlikelyScript parent-locale rule; travels with the CLDR refresh
-24	JDK-8319992	candidate-adapted	hold-data	ICU4J 76.1 refresh (Unicode data)
+23	JDK-8329691	candidate-adapted	hold-data	CLDR locale inheritance data change
+24	JDK-8319992	candidate-adapted	hold-data	ICU4J and Unicode data refresh
 24	JDK-8333582	candidate-adapted	hold-data	CLDR 46 data refresh
-24	JDK-8340073	candidate-adapted	hold-data	build-tool support for tzdata %z abbreviations; travels with tzdata refresh
-24	JDK-8341923	candidate-adapted	admitted-docs	Locale class spec wording improvements
-24	JDK-8343236	candidate-adapted	admitted-docs	Currency javadoc tags (@apiNote, @implSpec)
-25	JDK-8342550	candidate-adapted	hold-removal	warning toward removal of the JDK 1.1 compatible time zone ID mapping
+24	JDK-8340073	candidate-adapted	admitted-additive-tooling	tzdb build-tool parser support for %z, no runtime change
+24	JDK-8341923	candidate-adapted	admitted-docs	Locale spec wording only
+24	JDK-8343236	candidate-adapted	admitted-docs	Currency javadoc tags only
+25	JDK-8342550	candidate-adapted	hold-removal	warning step toward removing JDK1.1 zone IDs
 25	JDK-8346948	candidate-adapted	hold-data	CLDR 47 data refresh
-25	JDK-8347949	candidate-adapted	hold-api	new public Currency stream method for available currencies
-25	JDK-8347955	candidate-adapted	hold-api	new public TimeZone stream methods for available IDs
-25	JDK-8356021	candidate-adapted	candidate-adapted	Double::hashCode in Locale hashing; identical hash results
-26	JDK-8346947	candidate-adapted	hold-data	ICU4J 78.1 refresh (Unicode data)
+25	JDK-8347949	candidate-adapted	hold-api	new public Currency stream method
+25	JDK-8347955	candidate-adapted	hold-api	new public TimeZone stream methods
+25	JDK-8356021	candidate-adapted	candidate-adapted	internal hashCode helper cleanup
+26	JDK-8346947	candidate-adapted	hold-data	ICU4J and Unicode data refresh
 26	JDK-8354548	candidate-adapted	hold-data	CLDR 48 data refresh
-26	JDK-8358520	candidate-adapted	candidate-adapted	lazy-init rework in BreakIteratorResourceBundle; internal, confirm no StableValue dependency
-26	JDK-8370420	candidate-adapted	hold-native	Windows native locale provider code (HostLocaleProviderAdapter_md.c)
+26	JDK-8358520	candidate-adapted	candidate-adapted	internal lazy resource computation cleanup
+26	JDK-8370420	candidate-adapted	hold-native	libjava Windows C change
 27	JDK-8371842	candidate-adapted	hold-data	CLDR 48.2 data refresh
-27	JDK-8382031	candidate-adapted	hold-data	IANA language subtag registry data refresh
+27	JDK-8382031	candidate-adapted	hold-data	IANA language subtag registry refresh

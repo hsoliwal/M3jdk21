@@ -1,111 +1,111 @@
 release	jbs	provisional_disposition	reading_disposition	rationale
-22	JDK-8308591	candidate-adapted	hold-api	JLine becomes default System.console() and Console.isTerminal() is added (22); reverted in 25
-22	JDK-8310530	candidate-adapted	candidate-adapted	PipedOutputStream.flush data-race fix; internal, no API change
-22	JDK-8311489	candidate-adapted	hold-native	deletes unused Windows native dirent_md sources; native build only
-23	JDK-8305457	candidate-adapted	hold-preview	java.io.IO is a preview API of JEP 477 implicit classes
-23	JDK-8320971	candidate-adapted	candidate-measured	BufferedInputStream.transferTo hands its buffer to trusted streams; perf claim, check trust list
-23	JDK-8325152	candidate-adapted	admitted-docs	spec clarification of RandomAccessFile.setLength only
-23	JDK-8325340	candidate-adapted	candidate-string-lane	readUTF ASCII fast path building Strings from bytes; M3String gate
-23	JDK-8330276	candidate-adapted	hold-api	adds Locale-taking Console format/printf/readLine/readPassword methods
-24	JDK-8003887	candidate-adapted	hold-native	Windows native canonicalize now resolves symlinks; caller-visible path results
-24	JDK-8339699	candidate-adapted	candidate-string-lane	writeUTF fast path scanning String contents; perf claim, string owners
-24	JDK-8340232	candidate-adapted	candidate-string-lane	readUTF decode fast path producing Strings; perf claim, M3String gate
+22	JDK-8308591	candidate-adapted	hold-api	changes default of jdk.console system property to JLine provider; reverted in 25 by JDK-8351435
+22	JDK-8310530	candidate-adapted	candidate-adapted	internal race fix in PipedOutputStream.flush sink access
+22	JDK-8311489	candidate-adapted	hold-native	removes unused Windows libjava dirent_md native sources and build lines
+23	JDK-8305457	candidate-adapted	hold-preview	new java.io.IO class is JEP 477 preview API, final only in 25 (JEP 512)
+23	JDK-8320971	candidate-adapted	candidate-adapted	internal copy avoidance in BufferedInputStream.implTransferTo for trusted targets
+23	JDK-8325152	candidate-adapted	admitted-docs	noreg-doc javadoc clarification of RandomAccessFile.setLength
+23	JDK-8325340	candidate-adapted	candidate-string-lane	modified UTF-8 to String ASCII fast path uses String internals via JavaLangAccess
+23	JDK-8330276	candidate-adapted	hold-api	adds Console.format/printf/readLine/readPassword overloads taking Locale
+24	JDK-8003887	candidate-adapted	hold-native	Windows canonicalize_md.c symlink resolution change with visible File.getCanonicalPath behaviour change
+24	JDK-8339699	candidate-adapted	candidate-string-lane	writeUTF String to modified UTF-8 encoder rewrite touches String coder access
+24	JDK-8340232	candidate-adapted	candidate-string-lane	readUTF decode rewrite constructs String via internal no-replacement paths
 24	JDK-8341566	candidate-adapted	hold-api	adds public Reader.of(CharSequence) factory
-24	JDK-8341975	candidate-adapted	hold-preview	fix to java.io.IO preview API (JEP 495) absent in 21
-24	JDK-8343039	candidate-adapted	hold-jep	relies on JEP 491 unpinned monitors (24); in 21 synchronized java.io would pin virtual threads
-25	JDK-8351435	candidate-adapted	hold-api	reverts the 22 JLine Console default; 21 already defaults to java.base so no-op
-25	JDK-8354724	candidate-adapted	hold-api	adds Reader.readAllAsString and Reader.readAllLines public API
-25	JDK-8356985	candidate-adapted	hold-api	depends on stdin.encoding standard property added in 25
-26	JDK-8358533	candidate-adapted	hold-api	optimizes Reader.readAllLines added in 25 (JDK-8354724); absent in 21
-26	JDK-8368846	candidate-adapted	admitted-tests	test fix for runs as root; apply only if the test exists in 21
-26	JDK-8370387	candidate-adapted	hold-removal	removes legacy InterruptedIOException handling; behaviour removal with release note
-27	JDK-8373647	candidate-adapted	hold-native	Unix native open path drops fstat; native build and tests
-22	JDK-8309688	candidate-adapted	candidate-adapted	ClassCache strongReferent data-race fix; ClassCache present in 21
-23	JDK-8275338	candidate-adapted	hold-runtime	adds JFR SerializationMisdeclaration event; JFR coupling
-23	JDK-8327225	candidate-adapted	candidate-string-lane	restores static final after JDK-8325340; take only with that readUTF change
-24	JDK-8333796	candidate-adapted	hold-api	adds methods to supported sun.reflect.ReflectionFactory in jdk.unsupported
-24	JDK-8337840	candidate-adapted	candidate-adapted	removes redundant null check in writeProxyDesc; internal cleanup
-25	JDK-8356694	candidate-adapted	hold-jep	SecurityManager-removal follow-up (JEP 486); subclass audits still live with 21 SecurityManager
-22	JDK-8306650	candidate-adapted	hold-preview	ClassFile API stack-map option change; API preview in 22 (JEP 457), internal-only in 21
-22	JDK-8309838	candidate-adapted	hold-preview	ClassFile API cleanup on the preview track; 21 has only jdk.internal.classfile
-22	JDK-8311084	candidate-adapted	hold-preview	adds typeSymbol() to ClassFile pool entries; API not final in 21
-22	JDK-8313452	candidate-adapted	hold-preview	ClassFile attribute-handling change on the preview track
-22	JDK-8315678	candidate-adapted	hold-preview	reshapes ClassFile ConstantPool methods on the preview track
-22	JDK-8316587	candidate-adapted	hold-preview	ClassFile Utf8EntryImpl hash tweak; 21 internal classfile diverged from the preview API
-23	JDK-8320396	candidate-adapted	hold-preview	extends ClassFile verifier on the preview track (JEP 466)
-23	JDK-8322847	candidate-adapted	hold-preview	javadoc for preview ClassFile BufWriter; API absent in 21
-23	JDK-8323058	candidate-adapted	hold-preview	reshapes CodeBuilder API surface on the preview track
-23	JDK-8323183	candidate-adapted	hold-preview	ClassFile implementation perf on the preview API code base
-23	JDK-8323707	candidate-adapted	hold-preview	changes ClassFile signature type-arg model on the preview track
-23	JDK-8331291	candidate-adapted	hold-preview	restructures ClassFile Attributes initialization; preview API
-23	JDK-8331744	candidate-adapted	hold-preview	changes ClassFile TypeKind API on the preview track
-23	JDK-8332597	candidate-adapted	hold-preview	removes ClassReader API methods on the preview track
-23	JDK-8332614	candidate-adapted	hold-preview	changes ConstantPool/ClassReader signatures on the preview track
-24	JDK-8317356	candidate-adapted	hold-preview	ClassFile API null-check hardening before JEP 484 finalization
-24	JDK-8335290	candidate-adapted	hold-preview	renames ClassFile::transform during JEP 484 finalization
-24	JDK-8335642	candidate-adapted	hold-preview	hides ClassFile Transform implementation; JEP 484 not in 21
-24	JDK-8335905	candidate-adapted	hold-preview	CompoundElement API cleanup; JEP 484 not in 21
-24	JDK-8335927	candidate-adapted	hold-preview	reshapes ClassFile annotation constant model; JEP 484 not in 21
-24	JDK-8335938	candidate-adapted	hold-preview	changes ClassFile builder original and model parent API; JEP 484 not in 21
-24	JDK-8335939	candidate-adapted	hold-preview	hides ClassFile element writing API; JEP 484 not in 21
-24	JDK-8336756	candidate-adapted	hold-preview	ClassFile annotation writer cleanup on the JEP 484 code base
-24	JDK-8339217	candidate-adapted	hold-preview	ClassFile loadConstant perf on the JEP 484 code base absent in 21
-24	JDK-8339260	candidate-adapted	hold-preview	moves rarely used constants out of ClassFile; JEP 484 not in 21
-24	JDK-8339317	candidate-adapted	hold-preview	ClassFile writeBuffer perf on the JEP 484 code base
-24	JDK-8339401	candidate-adapted	hold-preview	ClassFile load/store instruction perf on the JEP 484 code base
-24	JDK-8342336	candidate-adapted	hold-preview	import cleanup in ClassFile sources absent from 21
-24	JDK-8343881	candidate-adapted	hold-preview	changes Attribute.attributeName() return type; JEP 484 not in 21
-25	JDK-8342206	candidate-adapted	hold-preview	adds ClassFile constant-pool matching methods; ClassFile API (JEP 484) not in 21
-25	JDK-8345773	candidate-adapted	hold-preview	ClassFile API debug printing; API not in 21
-26	JDK-8350938	candidate-adapted	hold-preview	ClassFile hierarchy resolver perf fix; API not in 21
-26	JDK-8354871	candidate-adapted	hold-preview	ClassFile stack-map frame type constants; API not in 21
-26	JDK-8361526	candidate-adapted	hold-preview	syncs ClassFile verifier with HotSpot; API not in 21
-26	JDK-8367585	candidate-adapted	hold-preview	ClassFile Utf8Entry representability validation; API not in 21
-27	JDK-8341272	candidate-adapted	hold-preview	new ClassFile wide iinc factory method; API not in 21
-24	JDK-8344231	candidate-adapted	hold-jep	JEP 486 SecurityManager-removal cleanup; SecurityManager still in 21
-24	JDK-8345075	candidate-adapted	candidate-adapted	narrows non-public ModuleDescriptor constructor to private; no public API change
-27	JDK-8377244	candidate-adapted	admitted-tests	converts ModuleReaderTest to JUnit; test only
-27	JDK-8377362	candidate-adapted	admitted-tests	Valhalla lworld clone of JDK-8377244; test only, take the mainline change once
-27	JDK-8381710	candidate-adapted	hold-jep	Leyden AOT training mode (JEP 483 line) not in 21
-22	JDK-8318476	candidate-adapted	admitted-docs	javadoc resource-consumption note only
-23	JDK-8331907	candidate-adapted	candidate-measured	switches BigInteger/BigDecimal to optimized division; perf claim, measure and diff results
-24	JDK-8334755	candidate-adapted	candidate-measured	new BigInteger sqrt algorithm; perf claim, measure and diff results
-24	JDK-8336274	candidate-adapted	candidate-measured	MutableBigInteger.leftShift optimization; perf claim
-24	JDK-8341470	candidate-adapted	candidate-measured	stripTrailingZeros optimization; perf claim
-25	JDK-8341402	candidate-adapted	candidate-measured	BigDecimal.sqrt rewrite; perf claim, measure and diff results
-25	JDK-8355300	candidate-adapted	candidate-adapted	package-private BitSieve made final; cleanup
-25	JDK-8355719	candidate-adapted	candidate-measured	BigInteger.pow memory reduction; perf claim
-25	JDK-8356709	candidate-adapted	candidate-string-lane	BigDecimal.valueOf(double) bypasses Double.toString formatting; digit formatting lane
-25	JDK-8356891	candidate-adapted	candidate-adapted	BigInteger internal simplifications; no API change
-26	JDK-8077587	candidate-adapted	hold-api	adds BigInteger root methods to public API
-26	JDK-8357913	candidate-adapted	candidate-measured	@Stable JIT folding hint on BigInteger/BigDecimal fields; verify invariants and measure
-26	JDK-8358804	candidate-adapted	admitted-docs	apiNote wording for BigDecimal.valueOf(double) only
-26	JDK-8365832	candidate-adapted	candidate-string-lane	FloatingDecimal/DigitList byte[] digit-buffer rewrite; digit formatting lane
-26	JDK-8368968	candidate-adapted	candidate-string-lane	FloatingDecimal dead-code cleanup; digit formatting lane
-26	JDK-8370628	candidate-adapted	hold-api	renames BigInteger root API added in 26
-27	JDK-8366478	candidate-adapted	hold-api	adds BigDecimal root methods to public API
-27	JDK-8374202	candidate-adapted	candidate-adapted	BigDecimal(double, MathContext) internal normalization simplification
-22	JDK-8272215	candidate-adapted	hold-api	adds InetAddress/Inet4Address/Inet6Address ofLiteral public API
-22	JDK-8308995	candidate-adapted	hold-runtime	reworks socket JFR events as static mirror events; JFR coupling
-22	JDK-8309910	candidate-adapted	candidate-adapted	internal HttpClient SNI helper; no public API
-22	JDK-8313948	candidate-adapted	candidate-adapted	sun.net.PortConfig static field cleanup
-22	JDK-8314261	candidate-adapted	candidate-adapted	internal final-field cleanup in sun.net.www
-22	JDK-8314774	candidate-adapted	candidate-measured	URLEncoder rewrite; perf claim, measure and diff encodings
-22	JDK-8314877	candidate-adapted	candidate-adapted	non-public java.net fields made final; no API change
-22	JDK-8315098	candidate-adapted	admitted-tests	JMH microbenchmark only
-22	JDK-8316433	candidate-adapted	hold-native	Windows net.dll delay-load linker change
-22	JDK-8316681	candidate-adapted	candidate-measured	URLEncoder.encode reusable-buffer rewrite; perf claim, measure and diff encodings
-22	JDK-8317246	candidate-adapted	candidate-adapted	URLEncoder/URLDecoder use Charset.defaultCharset instead of a file.encoding lookup
-22	JDK-8317866	candidate-adapted	hold-native	replaces libnet native NET_SocketAvailable helper
-23	JDK-8216984	candidate-adapted	hold-removal	deprecates Socket datagram constructors for removal
-23	JDK-8278353	candidate-adapted	candidate-measured	SimpleFileServer starts answering /favicon.ico; caller-visible responses
-23	JDK-8306928	candidate-adapted	candidate-adapted	HttpClient AuthenticationFilter duplicate-assignment cleanup
-23	JDK-8309259	candidate-adapted	candidate-adapted	HttpClient Stream VarHandle lookup consolidation; internal
-23	JDK-8312444	candidate-adapted	candidate-adapted	SocketPermission unused parameter cleanup; no API change
-23	JDK-8315767	candidate-adapted	hold-api	adds Inet4Address.ofPosixLiteral public API
-23	JDK-8327738	candidate-adapted	candidate-adapted	removes unused internal sun.net HttpURLConnection method
+24	JDK-8341975	candidate-adapted	hold-preview	fix to java.io.IO preview API (JEP 495) absent from 21
+24	JDK-8343039	candidate-adapted	hold-runtime	InternalLock removal relies on JEP 491 synchronized without pinning; 21 virtual threads still pin
+25	JDK-8351435	candidate-adapted	hold-api	reverts jdk.console default to built-in; 21 already has built-in default so nothing to take
+25	JDK-8354724	candidate-adapted	hold-api	adds public Reader.readAllAsString and readAllLines
+25	JDK-8356985	candidate-adapted	hold-api	depends on stdin.encoding standard system property introduced in 25
+26	JDK-8358533	candidate-adapted	hold-api	optimizes Reader.readAllLines which does not exist in 21 (JDK-8354724)
+26	JDK-8368846	candidate-adapted	admitted-tests	test fix for createTempFile TargetDirectory when run as root
+26	JDK-8370387	candidate-adapted	hold-removal	removes InterruptedIOException re-interrupt handling in java.io with release note
+27	JDK-8373647	candidate-adapted	hold-native	Unix io_util_md.c fileOpen change skipping fstat
+22	JDK-8309688	candidate-adapted	candidate-adapted	internal data race fix in ClassCache CacheRef strongReferent
+23	JDK-8275338	candidate-adapted	hold-runtime	adds new JFR serialization misdeclaration events
+23	JDK-8327225	candidate-adapted	candidate-string-lane	companion modifier revert of JDK-8325340 readUTF fast path
+24	JDK-8333796	candidate-adapted	hold-api	adds supported serialization accessor methods to sun.reflect.ReflectionFactory in jdk.unsupported
+24	JDK-8337840	candidate-adapted	candidate-adapted	removes redundant null check in ObjectOutputStream.writeProxyDesc
+25	JDK-8356694	candidate-adapted	hold-jep	subclass audits were SecurityManager permission checks removed after JEP 486
+22	JDK-8306650	candidate-adapted	hold-preview	Class-File API shaping under JEP 457 preview; 21 only has jdk.internal.classfile
+22	JDK-8309838	candidate-adapted	hold-preview	Class-File API cleanup under JEP 457 preview surface
+22	JDK-8311084	candidate-adapted	hold-preview	adds typeSymbol API to JEP 457 preview Class-File API
+22	JDK-8313452	candidate-adapted	hold-preview	Class-File API attribute handling change under JEP 457 preview
+22	JDK-8315678	candidate-adapted	hold-preview	ConstantPool API rename under JEP 457 preview
+22	JDK-8316587	candidate-adapted	hold-preview	Utf8EntryImpl hash change on JEP 457 preview snapshot; vectorizedHashCode intrinsic coupling
+23	JDK-8320396	candidate-adapted	hold-preview	ClassModel verify extension on JEP 466 second preview
+23	JDK-8322847	candidate-adapted	admitted-docs	javadoc @throws only on BufWriter (jdk.internal.classfile in 21)
+23	JDK-8323058	candidate-adapted	hold-preview	CodeBuilder API surface revision under JEP 466 preview
+23	JDK-8323183	candidate-adapted	hold-preview	performance work on JEP 466 preview API shape not present in 21
+23	JDK-8323707	candidate-adapted	hold-preview	type argument model change under JEP 466 preview
+23	JDK-8331291	candidate-adapted	hold-preview	Attributes static init rework on JEP 466 preview API
+23	JDK-8331744	candidate-adapted	hold-preview	TypeKind API changes under JEP 466 preview
+23	JDK-8332597	candidate-adapted	hold-preview	ClassReader API removal under JEP 466 preview
+23	JDK-8332614	candidate-adapted	hold-preview	ConstantPool and ClassReader API change under JEP 466 preview
+24	JDK-8317356	candidate-adapted	hold-preview	null check hardening across JEP 484 finalization API shape
+24	JDK-8335290	candidate-adapted	hold-preview	ClassFile.transform rename for JEP 484 finalization
+24	JDK-8335642	candidate-adapted	hold-preview	Transform implementation hiding for JEP 484 finalization
+24	JDK-8335905	candidate-adapted	hold-preview	CompoundElement API cleanup for JEP 484 finalization
+24	JDK-8335927	candidate-adapted	hold-preview	AnnotationValue API revision for JEP 484 finalization
+24	JDK-8335938	candidate-adapted	hold-preview	Builder.original and Model.parent API review for JEP 484 finalization
+24	JDK-8335939	candidate-adapted	hold-preview	element writing hidden across JEP 484 finalization API
+24	JDK-8336756	candidate-adapted	hold-preview	annotation writing rework on JEP 484 API shape
+24	JDK-8339217	candidate-adapted	hold-preview	loadConstant optimization on JEP 484 API shape absent in 21
+24	JDK-8339260	candidate-adapted	hold-preview	moves constants out of ClassFile interface for JEP 484 finalization
+24	JDK-8339317	candidate-adapted	hold-preview	writeBuffer optimization on JEP 484 API shape absent in 21
+24	JDK-8339401	candidate-adapted	hold-preview	load and store instruction optimization on JEP 484 API shape
+24	JDK-8342336	candidate-adapted	hold-preview	import cleanup on JEP 484 finalization sources
+24	JDK-8343881	candidate-adapted	hold-preview	Attribute.attributeName return type change for JEP 484 finalization
+25	JDK-8342206	candidate-adapted	hold-api	adds public PoolEntry matching convenience methods to final Class-File API
+25	JDK-8345773	candidate-adapted	hold-api	adds ClassPrinter debug printing public API
+26	JDK-8350938	candidate-adapted	candidate-measured	noreg-perf lazy Utf8 inflation; measure on 21 jdk.internal.classfile resolver if present
+26	JDK-8354871	candidate-adapted	candidate-adapted	named constants replace stack map frame magics in internal StackMapGenerator
+26	JDK-8361526	candidate-adapted	candidate-adapted	internal verifier fixes in jdk.internal.classfile.impl.verifier mirroring hotspot
+26	JDK-8367585	candidate-adapted	candidate-adapted	internal Utf8Entry length guard; API internal in 21
+27	JDK-8341272	candidate-adapted	hold-api	adds public wide iinc factory to Class-File API
+24	JDK-8344231	candidate-adapted	hold-jep	SecurityManager removal cleanup under JEP 486
+24	JDK-8345075	candidate-adapted	candidate-adapted	ModuleDescriptor constructor visibility cleanup with no public API change
+27	JDK-8377244	candidate-adapted	admitted-tests	ModuleReaderTest migrated to JUnit
+27	JDK-8377362	candidate-adapted	hold-preview	Valhalla lworld clone of JDK-8377244; mainline test change taken via JDK-8377244
+27	JDK-8381710	candidate-adapted	hold-jep	motivated by Leyden AOT training mode (JEP 483) absent in 21
+22	JDK-8318476	candidate-adapted	admitted-docs	doc-only resource consumption note on BigInteger and BigDecimal
+23	JDK-8331907	candidate-adapted	candidate-measured	noreg-perf Burnikel-Ziegler division threshold change in BigInteger and BigDecimal
+24	JDK-8334755	candidate-adapted	candidate-measured	new BigInteger sqrt algorithm; verify results and measure
+24	JDK-8336274	candidate-adapted	candidate-measured	MutableBigInteger.leftShift optimization claim
+24	JDK-8341470	candidate-adapted	candidate-measured	BigDecimal.stripTrailingZeros optimization claim
+25	JDK-8341402	candidate-adapted	candidate-measured	BigDecimal.sqrt algorithm rewrite; verify results and measure
+25	JDK-8355300	candidate-adapted	candidate-adapted	adds final to internal BitSieve class
+25	JDK-8355719	candidate-adapted	candidate-measured	BigInteger.pow memory reduction claim
+25	JDK-8356709	candidate-adapted	candidate-string-lane	BigDecimal.valueOf(double) bypasses Double.toString via digit formatting internals
+25	JDK-8356891	candidate-adapted	candidate-adapted	noreg-cleanup simplifications in BigInteger
+26	JDK-8077587	candidate-adapted	hold-api	adds public BigInteger nth root methods
+26	JDK-8357913	candidate-adapted	candidate-adapted	adds internal @Stable annotations to BigInteger and BigDecimal fields
+26	JDK-8358804	candidate-adapted	admitted-docs	doc-only API note on BigDecimal.valueOf(double)
+26	JDK-8365832	candidate-adapted	candidate-string-lane	FloatingDecimal and DigitList digit formatting rewrite to byte[]
+26	JDK-8368968	candidate-adapted	candidate-string-lane	FloatingDecimal digit formatting dead code cleanup
+26	JDK-8370628	candidate-adapted	hold-api	renames public BigInteger nthRoot API added by JDK-8077587
+27	JDK-8366478	candidate-adapted	hold-api	adds public BigDecimal root methods
+27	JDK-8374202	candidate-adapted	candidate-adapted	noreg-cleanup normalization simplification in BigDecimal(double, MathContext)
+22	JDK-8272215	candidate-adapted	hold-api	adds public InetAddress.ofLiteral and Inet4/6Address.ofLiteral
+22	JDK-8308995	candidate-adapted	hold-runtime	JFR network IO event mirror restructuring
+22	JDK-8309910	candidate-adapted	candidate-adapted	internal HttpConnection.getSNIServerNames helper in java.net.http
+22	JDK-8313948	candidate-adapted	candidate-adapted	removes unused static fields in sun.net.PortConfig
+22	JDK-8314261	candidate-adapted	candidate-adapted	final fields in sun.net.www internals
+22	JDK-8314774	candidate-adapted	candidate-measured	URLEncoder optimization claim; measure and diff encodings
+22	JDK-8314877	candidate-adapted	candidate-adapted	final fields in java.net package internals
+22	JDK-8315098	candidate-adapted	admitted-tests	microbenchmark change under test/micro only
+22	JDK-8316433	candidate-adapted	hold-native	Windows net.dll delay-load linker flag for winhttp.dll
+22	JDK-8316681	candidate-adapted	candidate-measured	URLEncoder.encode buffer rewrite with performance claim
+22	JDK-8317246	candidate-adapted	candidate-adapted	drops file.encoding property read in URLEncoder/URLDecoder for Charset.defaultCharset
+22	JDK-8317866	candidate-adapted	hold-native	replaces NET_SocketAvailable in libnet native code
+23	JDK-8216984	candidate-adapted	hold-removal	deprecates for removal Socket UDP constructors
+23	JDK-8278353	candidate-adapted	candidate-measured	SimpleFileServer now serves a default favicon; visible response change
+23	JDK-8306928	candidate-adapted	candidate-adapted	duplicate assignment cleanup in http AuthenticationFilter
+23	JDK-8309259	candidate-adapted	candidate-adapted	fewer MethodHandles.lookup calls in http Stream internals
+23	JDK-8312444	candidate-adapted	candidate-adapted	unused parameters and variables removed from SocketPermission
+23	JDK-8315767	candidate-adapted	hold-api	adds public Inet4Address.ofPosixLiteral for BSD-style literals
+23	JDK-8327738	candidate-adapted	candidate-adapted	removes unused internal HttpURLConnection.setDefaultAuthenticator
 23	JDK-8327991	candidate-adapted	admitted-docs	HttpClient javadoc on reclaiming resources
-23	JDK-8329662	candidate-adapted	admitted-tests	new HttpRequest.Builder HEAD() test only
-23	JDK-8329733	candidate-adapted	admitted-docs	SocketOptions javadoc points to StandardSocketOptions
-23	JDK-8329745	candidate-adapted	admitted-docs	Socket/ServerSocket javadoc points to StandardSocketOptions
-23	JDK-8329825	candidate-adapted	admitted-docs	SO_LINGER javadoc value-type clarification
+23	JDK-8329662	candidate-adapted	admitted-tests	test-only for HttpRequest.Builder default HEAD
+23	JDK-8329733	candidate-adapted	admitted-docs	javadoc update in SocketOptions
+23	JDK-8329745	candidate-adapted	admitted-docs	javadoc update in ServerSocket and Socket
+23	JDK-8329825	candidate-adapted	admitted-docs	javadoc clarification of SO_LINGER value type

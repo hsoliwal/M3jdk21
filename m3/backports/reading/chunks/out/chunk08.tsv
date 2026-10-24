@@ -3,10 +3,10 @@ release	jbs	provisional_disposition	reading_disposition	rationale
 27	JDK-8374524	candidate-adapted-security	admitted-tests	StrongSecureRandom test cleanup and junit conversion
 27	JDK-8374808	candidate-adapted-security	hold-api	new KeyStore/KeyStoreSpi Instant creation-date methods (public API)
 27	JDK-8377506	candidate-adapted-security	hold-preview	JEP 538 PEM encodings third preview
-27	JDK-8378443	candidate-adapted-security	admitted-tests	ACVP test harness extended to LMS verification; test-only
+27	JDK-8378443	candidate-adapted-security	hold-api	ACVP test exercises HSS/LMS verification (JDK 22 algorithm, JDK-8298127) absent in 21
 22	JDK-8312306	candidate-adapted-security	candidate-adapted-security	reachabilityFence for Cleaner-backed security classes; internal correctness fix
 22	JDK-8315974	candidate-adapted-security	candidate-adapted-security	final fields in com.sun.crypto.provider; internal cleanup
-22	JDK-8318756	candidate-adapted-security	candidate-adapted-security	internal AEAD (GCM/ChaCha20) buffering rework; no API
+22	JDK-8318756	candidate-adapted-security	candidate-measured	internal AEAD (GCM/ChaCha20) buffering rework for throughput; perf claim, no API
 23	JDK-8325162	candidate-adapted-security	candidate-adapted-security	removes duplicate internal GCMParameters class
 23	JDK-8327779	candidate-adapted-security	candidate-adapted-security	removes deprecated internal X509Key.key field; sun.security.x509 not exported
 23	JDK-8330108	candidate-adapted-security	candidate-measured	CipherInputStream buffer 512 to 8192 visible to callers (release note); jdk21u-fix-no
@@ -15,7 +15,7 @@ release	jbs	provisional_disposition	reading_disposition	rationale
 24	JDK-8344214	candidate-adapted-security	hold-jep	security manager removal (JEP 486) in jdk.crypto.mscapi; SM still present in 21
 24	JDK-8344310	candidate-adapted-security	hold-jep	security manager removal (JEP 486) in javax.crypto; SM still present in 21
 24	JDK-8344766	candidate-adapted-security	candidate-measured	AES/CTR big-payload slowdown fix in provider path; perf claim, verify Java-only
-25	JDK-8348405	candidate-adapted-security	hold-api	adds PBES2 to standard algorithm names spec (normative)
+25	JDK-8348405	candidate-adapted-security	admitted-docs	standard-names doc entry only (noreg-doc); SunJCE PBES2 AlgorithmParameters already in 21
 25	JDK-8349106	candidate-adapted-security	hold-jit	aarch64 ChaCha20 intrinsic rewrite
 25	JDK-8350147	candidate-adapted-security	admitted-docs	KEM class javadoc example replaced; KEM exists in 21
 25	JDK-8353578	candidate-adapted-security	hold-jep	moves internal HKDF users onto KDF API (JEP 510) absent in 21
@@ -44,7 +44,7 @@ release	jbs	provisional_disposition	reading_disposition	rationale
 25	JDK-8350705	candidate-adapted-security	admitted-tests	JMH SSLHandshake microbenchmark fix
 25	JDK-8357033	candidate-adapted-security	candidate-adapted-security	internal stateless session ticket encoding shrink; no API
 26	JDK-8156715	candidate-adapted-security	candidate-adapted-security	buffers truststore input stream; internal I/O fix
-26	JDK-8351354	candidate-adapted-security	admitted-additive-tooling	-XshowSettings:security:tls lists TLS groups; launcher diagnostics only, category exists in 21
+26	JDK-8351354	candidate-adapted-security	hold-api	extends -XshowSettings:security (JDK 22 launcher option, JDK-8281658) absent in 21
 26	JDK-8359956	candidate-adapted-security	hold-api	SunX509 key manager gains constraint/cert checks with control property (release note)
 26	JDK-8366364	candidate-adapted-security	candidate-measured	getSSLParameters returns enabled signature schemes instead of null; caller-visible
 26	JDK-8366978	candidate-adapted-security	candidate-adapted-security	dead code removal in SunCertPathBuilder
