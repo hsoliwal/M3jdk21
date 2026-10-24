@@ -119,6 +119,57 @@ public final class M3SignalExactRangeIndex {
         return checkedSlice(start, end, version, sha256);
     }
 
+    /**
+     * Query-owner primitive mask projection. Unlike public range methods, this
+     * allocates no intermediate row array; the exact column and its values stay
+     * with the original M3SignalColumns owner. Each call is additive to mask.
+     * Cancellation checkpoints are bounded by 1024 selected rows.
+     */
+    void markMissing(long[] mask, long version, String digest, M3ProgressMonitor monitor) {
+        markRows(mask, missing, 0, missing.length, version, digest, monitor);
+    }
+
+    void markInts(long[] mask, int lower, int upper, long version, String digest,
+            M3ProgressMonitor monitor) {
+        requireKind(M3SignalColumns.Kind.INTEGER);
+        if (lower > upper) throw new IllegalArgumentException("inverted int interval");
+        requireFresh(version, digest);
+        markRows(mask, ordered, lowerInt(lower), upperInt(upper), version, digest, monitor);
+    }
+
+    void markLongs(long[] mask, long lower, long upper, long version, String digest,
+            M3ProgressMonitor monitor) {
+        requireKind(M3SignalColumns.Kind.LONG);
+        if (lower > upper) throw new IllegalArgumentException("inverted long interval");
+        requireFresh(version, digest);
+        markRows(mask, ordered, lowerLong(lower), upperLong(upper), version, digest, monitor);
+    }
+
+    void markDoubles(long[] mask, double lower, double upper, long version, String digest,
+            M3ProgressMonitor monitor) {
+        requireKind(M3SignalColumns.Kind.DOUBLE);
+        if (Double.compare(lower, upper) > 0) {
+            throw new IllegalArgumentException("inverted double-total-order interval");
+        }
+        requireFresh(version, digest);
+        markRows(mask, ordered, lowerDouble(lower), upperDouble(upper), version, digest, monitor);
+    }
+
+    private void markRows(long[] mask, int[] source, int start, int end,
+            long version, String digest, M3ProgressMonitor monitor) {
+        Objects.requireNonNull(mask, "target bit mask");
+        int words = (int) (((long) schema.rowCount() + 63L) >>> 6);
+        if (mask.length != words) throw new IllegalArgumentException("wrong mask width");
+        requireFresh(version, digest);
+        for (int at = start; at < end; at++) {
+            if (monitor != null && ((at - start) & 1023) == 0) monitor.checkCanceled();
+            int row = source[at];
+            mask[row >>> 6] |= 1L << (row & 63);
+        }
+        if (monitor != null) monitor.checkCanceled();
+        requireFresh(version, digest);
+    }
+
     private void requireKind(M3SignalColumns.Kind expected) {
         if (kind != expected) throw new IllegalArgumentException("wrong typed signal interval");
     }

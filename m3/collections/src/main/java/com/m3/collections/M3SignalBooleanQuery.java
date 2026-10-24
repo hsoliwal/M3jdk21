@@ -124,10 +124,9 @@ public final class M3SignalBooleanQuery {
         long[] membership = new long[words];
         long[] scratch = union ? null : new long[words];
         for (int i = 0; i < indexes.length; i++) {
-            int[] matches = rowsFor(indexes[i], predicates[i], version, digest);
             long[] target = union || i == 0 ? membership : scratch;
             if (!union && i > 0) Arrays.fill(target, 0L);
-            for (int row : matches) target[row >>> 6] |= 1L << (row & 63);
+            markPredicate(indexes[i], predicates[i], target, version, digest, null);
             if (!union && i > 0) {
                 for (int word = 0; word < words; word++) {
                     membership[word] &= scratch[word];
@@ -150,19 +149,20 @@ public final class M3SignalBooleanQuery {
         return result;
     }
 
-    private static int[] rowsFor(M3SignalExactRangeIndex index, Predicate predicate,
-            long version, String sha) {
-        if (predicate instanceof Missing) return index.missingRows(version, sha);
-        if (predicate instanceof IntBetween range) {
-            return index.betweenInts(range.lower, range.upper, version, sha);
+    /** Fused range-to-bitmask projection; no intermediate int[] result per predicate. */
+    private static void markPredicate(M3SignalExactRangeIndex index, Predicate predicate,
+            long[] target, long version, String sha, M3ProgressMonitor monitor) {
+        if (predicate instanceof Missing) {
+            index.markMissing(target, version, sha, monitor);
+        } else if (predicate instanceof IntBetween range) {
+            index.markInts(target, range.lower, range.upper, version, sha, monitor);
+        } else if (predicate instanceof LongBetween range) {
+            index.markLongs(target, range.lower, range.upper, version, sha, monitor);
+        } else if (predicate instanceof DoubleBetween range) {
+            index.markDoubles(target, range.lower, range.upper, version, sha, monitor);
+        } else {
+            throw new IllegalArgumentException("unsupported signal predicate");
         }
-        if (predicate instanceof LongBetween range) {
-            return index.betweenLongs(range.lower, range.upper, version, sha);
-        }
-        if (predicate instanceof DoubleBetween range) {
-            return index.betweenDoubles(range.lower, range.upper, version, sha);
-        }
-        throw new IllegalArgumentException("unsupported signal predicate");
     }
 
     /**
@@ -258,7 +258,19 @@ public final class M3SignalBooleanQuery {
          * The caller must revalidate source lifecycle before publishing the result.
          */
         public int[] evaluate(long version, String sourceSha256) {
+            return evaluate(version, sourceSha256, null);
+        }
+
+        /**
+         * Optional existing M3 progress/cancellation owner, not a new scheduler.
+         * Progress is credited per completed instruction; cancellation is polled
+         * during large primitive scans. No partial result is ever published and
+         * done() is called only after a successful complete evaluation.
+         */
+        public int[] evaluate(long version, String sourceSha256,
+                M3ProgressMonitor monitor) {
             requireFresh(version, sourceSha256);
+            if (monitor != null) monitor.checkCanceled();
             int words = (int) (((long) rows + 63L) >>> 6);
             long totalWords = Math.multiplyExact((long) words, (long) maximumDepth);
             long heapBudget = Runtime.getRuntime().maxMemory() / 8L / Long.BYTES;
@@ -266,16 +278,23 @@ public final class M3SignalBooleanQuery {
             if (totalWords > upperWords) {
                 throw new IllegalStateException("signal Boolean workspace exceeds memory budget");
             }
+            if (monitor != null) {
+                monitor.beginTask("M3 Boolean signal query", codes.length);
+                monitor.checkCanceled();
+                requireFresh(version, sourceSha256);
+            }
             long[][] stack = new long[maximumDepth][words];
             int top = 0;
             for (int pc = 0; pc < codes.length; pc++) {
+                if (monitor != null) monitor.checkCanceled();
+                requireFresh(version, sourceSha256);
                 byte opcode = codes[pc];
                 if (opcode == 0) {
                     long[] target = stack[top++];
                     // Every stack slot may be recycled by a prior binary operation.
                     Arrays.fill(target, 0L);
-                    int[] matching = rowsFor(indexes[slots[pc]], filters[pc], version, sourceSha256);
-                    for (int row : matching) target[row >>> 6] |= 1L << (row & 63);
+                    markPredicate(indexes[slots[pc]], filters[pc], target,
+                            version, sourceSha256, monitor);
                 } else {
                     switch (opcode) {
                         case 4 -> { // ALL
@@ -289,12 +308,16 @@ public final class M3SignalBooleanQuery {
                         }
                         case 3 -> { // NOT
                             long[] target = stack[top - 1];
-                            for (int word = 0; word < words; word++) target[word] = ~target[word];
+                            for (int word = 0; word < words; word++) {
+                                if (monitor != null && (word & 1023) == 0) monitor.checkCanceled();
+                                target[word] = ~target[word];
+                            }
                             maskTail(target);
                         }
                         case 1, 2 -> { // AND, OR
                             long[] target = stack[top - 2], other = stack[top - 1];
                             for (int word = 0; word < words; word++) {
+                                if (monitor != null && (word & 1023) == 0) monitor.checkCanceled();
                                 target[word] = opcode == 1
                                         ? target[word] & other[word]
                                         : target[word] | other[word];
@@ -304,19 +327,34 @@ public final class M3SignalBooleanQuery {
                         default -> throw new AssertionError("unknown compiled opcode");
                     }
                 }
+                if (monitor != null) {
+                    monitor.worked(1L);
+                    monitor.checkCanceled();
+                }
             }
             int count = 0;
-            for (long word : stack[0]) count = Math.addExact(count, Long.bitCount(word));
+            for (int wordIndex = 0; wordIndex < words; wordIndex++) {
+                if (monitor != null && (wordIndex & 1023) == 0) monitor.checkCanceled();
+                count = Math.addExact(count, Long.bitCount(stack[0][wordIndex]));
+            }
             int[] answer = new int[count];
             int position = 0;
             for (int i = 0; i < words; i++) {
+                if (monitor != null && (i & 1023) == 0) monitor.checkCanceled();
                 long bits = stack[0][i];
                 while (bits != 0L) {
                     answer[position++] = (i << 6) + Long.numberOfTrailingZeros(bits);
                     bits &= bits - 1;
                 }
             }
+            if (monitor != null) monitor.checkCanceled();
             requireFresh(version, sourceSha256);
+            if (monitor != null) {
+                monitor.done();
+                // A listener is free to invalidate the original source during done().
+                monitor.checkCanceled();
+                requireFresh(version, sourceSha256);
+            }
             return answer;
         }
 
