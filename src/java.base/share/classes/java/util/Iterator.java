@@ -132,4 +132,22 @@ public interface Iterator<E> {
         while (hasNext())
             action.accept(next());
     }
+
+    /**
+     * Cooperative, caller-monitored operation. The monitor is borrowed and
+     * never begun, finished or cancelled by this method. One unit is credited
+     * after each successfully completed element/callback operation.
+     * Cancellation is checked at delegate boundaries only.
+     */
+    default void forEachRemainingMonitored(Consumer<? super E> action, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(action);
+        Objects.requireNonNull(monitor);
+        while (true) {
+            monitor.checkCancelled();
+            if (!hasNext()) break;
+            action.accept(next());
+            monitor.worked(1);
+        }
+        monitor.checkCancelled();
+    }
 }
