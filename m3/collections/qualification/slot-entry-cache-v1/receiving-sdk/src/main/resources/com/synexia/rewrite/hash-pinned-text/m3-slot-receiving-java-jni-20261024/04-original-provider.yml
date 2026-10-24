@@ -1,0 +1,715 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 original mapping provider and reconciliation
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-original-mapping-provider-qualification.yml'
+      - 'm3/migration/**'
+      - 'm3/docs/name-mapping*.json'
+      - 'm3/algorithms/src/com/m3/algorithm/M3PrefixZ.java'
+      - 'm3/algorithms/test/PrefixZContractTest.java'
+      - 'm3/algorithms/test/ViewInteropContractTest.java'
+      - 'm3/core/src/com/m3/text/JoinedM3StringPiece.java'
+      - 'm3/core/src/com/m3/text/LocalM3Arena.java'
+      - 'm3/core/src/com/m3/text/LocalM3StringPiece.java'
+      - 'm3/core/src/com/m3/text/M3StringPiece.java'
+      - 'm3/core/src/com/m3/text/StorageIdentity.java'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/docs/name-mapping.schema.json'
+      - 'm3/migration/evidence/local-20261002-final/prefix-z-interpreter.log'
+      - 'm3/migration/evidence/local-20261002-final/prefix-z-normal.log'
+      - 'm3/migration/evidence/local-20261002-final/receipt.json'
+      - 'm3/migration/migration.py'
+      - 'm3/migration/pinned-dependencies.json'
+      - 'm3/migration/recipes/prefix-z-v1.tsv'
+      - 'm3/migration/requirements.txt'
+      - 'm3/migration/run-tests.py'
+      - 'm3/migration/src/com/m3/migration/ExactFileRecipe.java'
+      - 'm3/migration/test/RecipeContractTest.java'
+      - 'm3/migration/test/test_migration.py'
+      - 'm3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
+      - 'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv'
+      - 'm3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv'
+      - 'm3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv'
+      - 'm3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
+      - 'src/java.base/share/classes/java/util/regex/Matcher.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Bits.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CB.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CI.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Class.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Field.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Member.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Method.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3PC.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Release.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3VI.java'
+      - 'src/java.base/share/native/libjava/M3BitLane28.c'
+      - 'src/java.base/share/native/libjava/M3StateRelation.c'
+      - 'src/java.base/share/native/libjava/m3_state_relation.h'
+  push:
+    branches: ['master', 'codex/original-mapping-provider-receiver-20261017', 'pr/m3-slot-entry-cache-20261024-53f1763c']
+    paths:
+      - '.github/workflows/m3-original-mapping-provider-qualification.yml'
+      - 'm3/migration/**'
+      - 'm3/docs/name-mapping*.json'
+      - 'm3/algorithms/src/com/m3/algorithm/M3PrefixZ.java'
+      - 'm3/algorithms/test/PrefixZContractTest.java'
+      - 'm3/algorithms/test/ViewInteropContractTest.java'
+      - 'm3/core/src/com/m3/text/JoinedM3StringPiece.java'
+      - 'm3/core/src/com/m3/text/LocalM3Arena.java'
+      - 'm3/core/src/com/m3/text/LocalM3StringPiece.java'
+      - 'm3/core/src/com/m3/text/M3StringPiece.java'
+      - 'm3/core/src/com/m3/text/StorageIdentity.java'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/docs/name-mapping.schema.json'
+      - 'm3/migration/evidence/local-20261002-final/prefix-z-interpreter.log'
+      - 'm3/migration/evidence/local-20261002-final/prefix-z-normal.log'
+      - 'm3/migration/evidence/local-20261002-final/receipt.json'
+      - 'm3/migration/migration.py'
+      - 'm3/migration/pinned-dependencies.json'
+      - 'm3/migration/recipes/prefix-z-v1.tsv'
+      - 'm3/migration/requirements.txt'
+      - 'm3/migration/run-tests.py'
+      - 'm3/migration/src/com/m3/migration/ExactFileRecipe.java'
+      - 'm3/migration/test/RecipeContractTest.java'
+      - 'm3/migration/test/test_migration.py'
+      - 'm3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
+      - 'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv'
+      - 'm3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv'
+      - 'm3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv'
+      - 'm3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
+      - 'src/java.base/share/classes/java/util/regex/Matcher.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Bits.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CB.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CI.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Class.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Field.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Member.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Method.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3PC.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Release.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3VI.java'
+      - 'src/java.base/share/native/libjava/M3BitLane28.c'
+      - 'src/java.base/share/native/libjava/M3StateRelation.c'
+      - 'src/java.base/share/native/libjava/m3_state_relation.h'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-mapping-provider:
+    if: ${{ github.ref != 'refs/heads/pr/m3-slot-entry-cache-20261024-53f1763c' && github.head_ref != 'pr/m3-slot-entry-cache-20261024-53f1763c' }}
+    name: genuine provider, recipe and unchanged original CLI
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Reserve storage and select existing toolchains
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,re
+          reserve,cap=8*1024**3,512*1024**2
+          for key in ("RUNNER_TEMP","GITHUB_WORKSPACE"):
+              base=pathlib.Path(os.environ[key])
+              if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise SystemExit("redirected/missing runner storage")
+              st=os.statvfs(base)
+              if st.f_bavail*st.f_frsize<reserve+cap:raise SystemExit("HOLD_STORAGE 8GiB after512MiB")
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          if root.exists() or source.exists():raise SystemExit("owned output paths must be fresh")
+          cache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])
+          javas=[]
+          for version in (cache/"Java_Temurin-Hotspot_jdk").glob("21.*"):
+              home=version/"x64"
+              if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",version.name) and (version/"x64.complete").is_file() and all(os.access(home/"bin"/name,os.X_OK) for name in ("java","javac")):javas.append(home)
+          pythons=[]
+          for version in (cache/"Python").glob("3.12.*"):
+              home=version/"x64";python=home/"bin/python3.12"
+              if re.fullmatch(r"3\.12\.\d+",version.name) and (version/"x64.complete").is_file() and os.access(python,os.X_OK) and (home/"lib/python3.12/venv/__init__.py").is_file() and (home/"lib/python3.12/ensurepip/__init__.py").is_file():pythons.append(python)
+          if not javas or not pythons:raise SystemExit("HOLD_TOOLCHAIN preinstalled JDK21/CPython3.12 required; no setup/download fallback")
+          java=sorted(javas)[-1].resolve();python=sorted(pythons)[-1].resolve()
+          for directory in ("home/.m2","m2","tmp","cache","config","data","baseline"):(root/directory).mkdir(parents=True,exist_ok=False)
+          settings='<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>\n'
+          for name in ("settings.xml","global-settings.xml"):(root/"home/.m2"/name).write_text(settings,encoding="utf-8")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:
+              f.write("java="+str(java)+"\npython="+str(python)+"\npython-bin="+str(python.parent)+"\n")
+
+          PY
+      - name: Narrow exact-head checkout
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: m3-original-provider-source
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/workflows/m3-original-mapping-provider-qualification.yml
+            /m3/migration/original-provider-20261017/
+            /m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+            /m3/algorithms/test/PrefixZContractTest.java
+            /m3/algorithms/test/ViewInteropContractTest.java
+            /m3/core/src/com/m3/text/JoinedM3StringPiece.java
+            /m3/core/src/com/m3/text/LocalM3Arena.java
+            /m3/core/src/com/m3/text/LocalM3StringPiece.java
+            /m3/core/src/com/m3/text/M3StringPiece.java
+            /m3/core/src/com/m3/text/StorageIdentity.java
+            /m3/docs/name-mapping.json
+            /m3/docs/name-mapping.schema.json
+            /m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log
+            /m3/migration/evidence/local-20261002-final/prefix-z-normal.log
+            /m3/migration/evidence/local-20261002-final/receipt.json
+            /m3/migration/migration.py
+            /m3/migration/pinned-dependencies.json
+            /m3/migration/recipes/prefix-z-v1.tsv
+            /m3/migration/requirements.txt
+            /m3/migration/run-tests.py
+            /m3/migration/src/com/m3/migration/ExactFileRecipe.java
+            /m3/migration/test/RecipeContractTest.java
+            /m3/migration/test/test_migration.py
+            /m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv
+            /m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv
+            /m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv
+            /m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv
+            /m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv
+            /m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv
+            /src/java.base/share/classes/java/util/regex/Matcher.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Address28.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Bits.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3CB.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3CI.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Class.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Field.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Member.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Method.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3PC.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Release.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3VI.java
+            /src/java.base/share/native/libjava/M3BitLane28.c
+            /src/java.base/share/native/libjava/M3StateRelation.c
+            /src/java.base/share/native/libjava/m3_state_relation.h
+      - name: Qualify recipe and genuine original validator under storage supervision
+        shell: bash
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
+          M3_JAVA_HOME: ${{ steps.preflight.outputs.java }}
+          M3_PYTHON: ${{ steps.preflight.outputs.python }}
+          M3_PYTHON_BIN: ${{ steps.preflight.outputs.python-bin }}
+          EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          GIT_OPTIONAL_LOCKS: '0'
+          GIT_NO_LAZY_FETCH: '1'
+          GIT_TERMINAL_PROMPT: '0'
+          GCM_INTERACTIVE: never
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import hashlib,json,os,pathlib,re,shutil,signal,subprocess,time
+          reserve,cap=8*1024**3,512*1024**2
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
+          source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          sdk=source/"m3/migration/original-provider-20261017/sdk"
+          start=time.monotonic()
+          def traversal_error(error):raise RuntimeError("storage census failed") from error
+          def gate(limit=480*1024**2):
+              used=0
+              for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),source):
+                  if not base.is_dir() or base.is_symlink():raise RuntimeError("missing/redirected storage")
+                  for folder,names,files in os.walk(base,followlinks=False,onerror=traversal_error):
+                      for name in names+files:
+                          try:info=os.lstat(pathlib.Path(folder)/name)
+                          except FileNotFoundError:continue
+                          used+=max(info.st_size,info.st_blocks*512)
+              if used>limit:raise RuntimeError("512MiB aggregate task limit (32MiB artifact reserve)")
+              for base in (root,source):
+                  st=os.statvfs(base)
+                  if st.f_bavail*st.f_frsize<reserve+cap-used:raise RuntimeError("8GiB-after-output reserve")
+              return used
+          def getgit(*args):
+              return subprocess.check_output(["git",*args],cwd=source,text=True,timeout=15).strip()
+          gate()
+          head=getgit("rev-parse","HEAD")
+          if head!=os.environ["EXPECTED_SOURCE_SHA"] or not re.fullmatch("[0-9a-f]{40}",head):raise RuntimeError("checkout is not exact candidate head")
+          binding=json.loads((source/"m3/migration/original-provider-20261017/source-binding.json").read_bytes())
+          if binding["repository"]!="hsoliwal/com.synexia" or binding["receiverCorePath"]!="m3/migration/original-provider-20261017/sdk":raise RuntimeError("canonical owner drift")
+          if not re.fullmatch("[0-9a-f]{40}",binding["sourceCommit"]):raise RuntimeError("missing canonical commit")
+          if binding["runtimeApplied"] is not False or binding["phaseAdvanced"] is not False:raise RuntimeError("scope drift")
+          tree=getgit("rev-parse","HEAD:"+binding["receiverCorePath"])
+          pins=(sdk/"pins.json").read_bytes()
+          workflow=source/".github/workflows/m3-original-mapping-provider-qualification.yml"
+          if tree!=binding["moduleGitTree"] or hashlib.sha256(pins).hexdigest()!=binding["pinsSha256"] or hashlib.sha256(workflow.read_bytes()).hexdigest()!=binding["workflowSha256"]:raise RuntimeError("exact SDK/workflow binding drift")
+          env=os.environ.copy()
+          for name in list(env):
+              if name in ("GITHUB_TOKEN","GH_TOKEN","_JAVA_OPTIONS","JDK_JAVAC_OPTIONS") or name.startswith(("PIP_","PYTHON","MAVEN_","JAVA_TOOL_OPTIONS","JDK_JAVA_OPTIONS")):env.pop(name,None)
+          env.update(HOME=str(root/"home"),USERPROFILE=str(root/"home"),MAVEN_USER_HOME=str(root/"home/.m2"),TMPDIR=str(root/"tmp"),TEMP=str(root/"tmp"),TMP=str(root/"tmp"),JAVA_HOME=os.environ["M3_JAVA_HOME"],PATH=os.environ["M3_PYTHON_BIN"]+os.pathsep+os.environ["M3_JAVA_HOME"]+"/bin"+os.pathsep+env["PATH"],MAVEN_OPTS="-Xmx512m -Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home"),JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home")+" -XX:+PerfDisableSharedMem",PIP_CONFIG_FILE=os.devnull,PIP_DISABLE_PIP_VERSION_CHECK="1",PIP_NO_CACHE_DIR="1",PYTHONDONTWRITEBYTECODE="1",GIT_OPTIONAL_LOCKS="0",GIT_NO_LAZY_FETCH="1",GIT_TERMINAL_PROMPT="0")
+          records=[]
+          log=root/"qualification.log"
+          def cleanup(child):
+              # Every descendant inherits this owned session; bootstrap creates no nested sessions.
+              for sig,seconds in ((signal.SIGTERM,2),(signal.SIGKILL,3)):
+                  try:os.killpg(child.pid,sig)
+                  except ProcessLookupError:pass
+                  end=time.monotonic()+seconds
+                  while time.monotonic()<end:
+                      try:os.killpg(child.pid,0)
+                      except ProcessLookupError:return
+                      time.sleep(.05)
+              raise RuntimeError("owned process group terminal state unproved")
+          def run(name,command,deadline=300):
+              if time.monotonic()-start>720:raise RuntimeError("global deadline before launch")
+              gate()
+              child=None;code=None
+              with log.open("ab") as out:
+                  try:
+                      child=subprocess.Popen(command,cwd=source,env=env,stdin=subprocess.DEVNULL,stdout=out,stderr=subprocess.STDOUT,start_new_session=True)
+                      command_start=time.monotonic()
+                      while child.poll() is None:
+                          gate()
+                          if time.monotonic()-command_start>deadline or time.monotonic()-start>720:raise RuntimeError("owned command deadline")
+                          time.sleep(.5)
+                      code=child.wait()
+                      if time.monotonic()-start>720:raise RuntimeError("global deadline after child exit")
+                  finally:
+                      if child is not None:
+                          if child.poll() is None:
+                              try:os.killpg(child.pid,signal.SIGTERM)
+                              except ProcessLookupError:pass
+                              try:child.wait(timeout=2)
+                              except subprocess.TimeoutExpired:
+                                  try:os.killpg(child.pid,signal.SIGKILL)
+                                  except ProcessLookupError:pass
+                                  child.wait(timeout=5)
+                          cleanup(child)
+                          records.append({"name":name,"returncode":child.returncode,"parentReaped":True,"ownedSessionAbsent":True})
+              gate()
+              if code:raise RuntimeError(name+" failed with "+str(code))
+          py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
+          build=root/"target";overlay=root/"emitted";baseline=root/"baseline"
+          runid=os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"]+"-"+head[:12]
+          bootstrap=overlay/"m3/migration/provider/python312-linux-x86_64/bootstrap.py"
+          settings=root/"home/.m2"
+          try:
+              run("closed-sdk-source-and-current-target-custody",py+[str(sdk/"verify.py"),"--self-test","--receiver",str(source)])
+              run("actual-maven-openrewrite-sdk",["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-f",str(sdk/"pom.xml"),"-Dm3.build.root="+str(build),"-Dm3.output.root="+str(overlay),"-Dm3.baseline.root="+str(baseline),"verify"])
+              run("named-sdk-and-exact-emission-receipt",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-execution.json"),"--run-id",runid])
+              run("provider-stdlib-boundary-tests",py+[str(bootstrap),"--self-test","--output",str(root/"provider-boundaries"),"--lock",str(bootstrap.with_name("wheels.lock.json"))])
+              try:
+                  run("genuine-provider-and-unchanged-original-cli",py+[str(bootstrap),"--root",str(overlay),"--baseline-root",str(baseline),"--output",str(root/"provider"),"--lock",str(bootstrap.with_name("wheels.lock.json"))],360)
+              finally:
+                  run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])
+              pre=json.loads((root/"recipe-execution.json").read_bytes())["frozenPreBaseline"]
+              after=json.loads((root/"recipe-after-provider.json").read_bytes())["frozenPreBaseline"]
+              if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")
+              # Exact bootstrap receipt shape is checked below after provider implementation freezes.
+              provider_receipt_path=root/"provider"/"provider-receipt.json"
+              provider=json.loads(provider_receipt_path.read_bytes())
+              if provider.get("schema")!="M3_ORIGINAL_MAPPING_PYTHON_PROVIDER_RECEIPT_V1" or provider.get("exitCode")!=0 or provider.get("providerQualified") is not True or provider.get("originalSyntheticTestsPassed") is not True:raise RuntimeError("genuine provider/original unit execution gate")
+              if provider.get("baselineManifestValid") is not False or provider.get("currentManifestValid") is not True or provider.get("migrationComplete") is not False:raise RuntimeError("expected PRE invalid / POST valid but INCOMPLETE transition")
+              if any(provider.get(k) is not False for k in ("runtimeQualified","jniQualified","jdkQualified","performanceQualified","phaseAdvanced")):raise RuntimeError("provider cannot advance runtime acceptance")
+              units=provider.get("originalUnits",{})
+              if units.get("testsRun")!=26 or len(units.get("methods",[]))!=26 or len(set(units["methods"]))!=26 or any(units.get(k)!=0 for k in ("failures","errors","skipped","expectedFailures","unexpectedSuccesses")):raise RuntimeError("original 26 named methods missing/failing")
+              bpath=root/"provider-boundaries/stdlib-boundary-tests.json"
+              boundary=json.loads(bpath.read_bytes())
+              if boundary.get("schema")!="M3_PYTHON_PROVIDER_STDLIB_BOUNDARY_TESTS_V1" or boundary.get("testsRun")!=38 or boundary.get("exitCode")!=0 or any(boundary.get(k)!=0 for k in ("failures","errors","skipped","expectedFailures","unexpectedSuccesses")):raise RuntimeError("38 stdlib boundary methods missing/failing")
+              probes=provider.get("provider",{})
+              if probes.get("draft2020Discriminators")!={"prefixItems":True,"unevaluatedProperties":True,"invalidSchemaRefused":True,"localRef":True} or probes.get("hashTrieMapImmutableOperations") is not True or not probes.get("loadedNativePayloads") or len(probes.get("releasedPayloads",{}))!=6:raise RuntimeError("genuine Draft2020/native/installed-payload proof absent")
+              records_by_label={r["label"]:r for r in provider["commands"]}
+              for label,expected in (("baseline-validate",1),("baseline-report",1),("baseline-complete",1),("current-validate",0),("current-report",0),("current-complete",2)):
+                  record=records_by_label[label]
+                  if record["returncode"]!=expected or record["termination"] is not None:raise RuntimeError("unchanged CLI result drift "+label)
+                  for stream in ("stdout","stderr"):
+                      path=root/"provider"/record[stream+"Path"]
+                      if path.is_symlink() or path.stat().st_size>2*1024**2:raise RuntimeError("CLI output fence")
+                      content=path.read_bytes()
+                      if len(content)!=record[stream+"Bytes"] or hashlib.sha256(content).hexdigest()!=record[stream+"Sha256"]:raise RuntimeError("CLI output receipt drift")
+              baseline_error=(root/"provider"/records_by_label["baseline-validate"]["stderrPath"]).read_text(encoding="utf-8")
+              if "target hash drift: src/java.base/share/classes/jdk/internal/mindex/M3TQ.java" not in baseline_error or "missing file: synexia-openrewrite-recipes/" not in baseline_error:raise RuntimeError("original baseline diagnostics absent")
+              marker=(root/"provider"/records_by_label["current-validate"]["stdoutPath"]).read_text(encoding="utf-8")
+              completion=(root/"provider"/records_by_label["current-complete"]["stderrPath"]).read_text(encoding="utf-8").splitlines()
+              if marker!="MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n" or len(completion)!=158:raise RuntimeError("unchanged completion boundaries lost")
+              coverage=(root/"provider"/records_by_label["current-report"]["stdoutPath"]).read_text(encoding="utf-8")
+              if "**INCOMPLETE**" not in coverage:raise RuntimeError("actual original coverage report not incomplete")
+              final={"schema":"M3_ORIGINAL_MAPPING_PROVIDER_HOSTED_V1","runId":runid,"checkoutCommit":head,"canonicalSourceCommit":binding["sourceCommit"],"sdkTree":tree,"pinsSha256":hashlib.sha256(pins).hexdigest(),"commands":records,"providerReceiptSha256":hashlib.sha256(provider_receipt_path.read_bytes()).hexdigest(),"recipeReceiptSha256":hashlib.sha256((root/"recipe-execution.json").read_bytes()).hexdigest(),"baselineAfterProviderReceiptSha256":hashlib.sha256((root/"recipe-after-provider.json").read_bytes()).hexdigest(),"frozenPreBaseline":pre,"baselineVerifiedBeforeAndAfterProvider":True,"runtimeJniQualified":False,"matchedJdkQualified":False,"performanceRetentionQualified":False,"phaseAdvanced":False}
+              (root/"hosted-receipt.json").write_text(json.dumps(final,indent=2)+"\n",encoding="utf-8")
+          finally:
+              # Never write failure artifacts until fresh reserve and planned-copy gates pass.
+              tail=b""
+              if log.is_file() and not log.is_symlink():
+                  with log.open("rb") as f:f.seek(max(0,log.stat().st_size-32768));tail=f.read(32768)
+              try:
+                  before=gate(496*1024**2)
+                  selected=[root/"recipe-execution.json",root/"recipe-after-provider.json",root/"hosted-receipt.json",source/"m3/migration/original-provider-20261017/source-binding.json",sdk/"src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv"]
+                  selected+=sorted(build.glob("surefire-reports/TEST-*.xml"))
+                  selected+=sorted((root/"provider").glob("*.json"))
+                  selected+=sorted((root/"provider-boundaries").glob("*.json"))
+                  selected+=sorted((root/"provider").glob("*.md"))
+                  selected+=sorted((root/"provider").glob("logs/*.stdout"))+sorted((root/"provider").glob("logs/*.stderr"))
+                  selected=sorted(set(p for p in selected if p.is_file()),key=str)
+                  if len(selected)>256 or any(any(x.is_symlink() for x in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
+                  planned=sum(p.stat().st_size for p in selected)+len(tail)
+                  if planned>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("closed artifact budget")
+              except BaseException:
+                  print(tail.decode("utf-8",errors="replace"))
+                  raise
+              bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
+              inv={}
+              for n,path in enumerate(selected):
+                  gate(496*1024**2)
+                  label=str(n).zfill(3)+"-"+path.name;shutil.copyfile(path,bundle/label)
+                  inv[label]={"bytes":path.stat().st_size,"sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"source":str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))}
+              gate(496*1024**2)
+              (bundle/"log-tail.txt").write_bytes(tail);print(tail.decode("utf-8",errors="replace"))
+              (bundle/"inventory.json").write_text(json.dumps(inv,indent=2)+"\n",encoding="utf-8")
+              (bundle/"commands.json").write_text(json.dumps(records,indent=2)+"\n",encoding="utf-8")
+              print("Final aggregate bytes before artifact upload:",gate(496*1024**2))
+
+          PY
+      - name: Retain bounded original receipts and failure tail
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/artifacts/
+          include-hidden-files: true
+          compression-level: 0
+          retention-days: 90
+          if-no-files-found: error
+
+  slotmap-java-jni:
+    name: SlotMap canonical recipe, original suites and current JNI array provider
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/pr/m3-slot-entry-cache-20261024-53f1763c' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      M3_PROOF_ROOT: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}
+      M3_SOURCE_ROOT: ${{ github.workspace }}/m3-slot-original-source
+      TMPDIR: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+      TEMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+      TMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+      XDG_CACHE_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/cache
+      XDG_CONFIG_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/config
+      XDG_DATA_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/data
+    steps:
+      - name: Reserve storage and select existing toolchains
+        id: slot-preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,re,shutil
+          reserve,cap=8*1024**3,512*1024**2
+          for key in ("RUNNER_TEMP","GITHUB_WORKSPACE"):
+              base=pathlib.Path(os.environ[key])
+              if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise SystemExit("redirected/missing runner storage")
+              st=os.statvfs(base)
+              if st.f_bavail*st.f_frsize<reserve+cap:raise SystemExit("HOLD_STORAGE 8GiB after512MiB")
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          if root.exists() or source.exists():raise SystemExit("owned output paths must be fresh")
+          cache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])
+          javas=[]
+          for version in (cache/"Java_Temurin-Hotspot_jdk").glob("21.*"):
+              home=version/"x64"
+              if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",version.name) and (version/"x64.complete").is_file() and all(os.access(home/"bin"/name,os.X_OK) for name in ("java","javac","jdeps")):javas.append(home)
+          pythons=[]
+          for version in (cache/"Python").glob("3.12.*"):
+              home=version/"x64";python=home/"bin/python3.12"
+              if re.fullmatch(r"3\.12\.\d+",version.name) and (version/"x64.complete").is_file() and os.access(python,os.X_OK):pythons.append(python)
+          tools={name:shutil.which(name) for name in ("git","mvn","cc","cmake","ctest","make")}
+          if not javas or not pythons or not all(tools.values()):raise SystemExit("HOLD_TOOLCHAIN preinstalled JDK21/CPython3.12/Git/Maven/CMake/C compiler required; no setup/download fallback")
+          java=sorted(javas)[-1].resolve();python=sorted(pythons)[-1].resolve()
+          for directory in ("home/.m2","m2","tmp","cache","config","data"):(root/directory).mkdir(parents=True,exist_ok=False)
+          settings='<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>\n'
+          for name in ("settings.xml","global-settings.xml"):(root/"home/.m2"/name).write_text(settings,encoding="utf-8")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:
+              f.write("java="+str(java)+"\npython="+str(python)+"\npython-bin="+str(python.parent)+"\n")
+              for name,path in tools.items():f.write(name+"="+str(pathlib.Path(path).resolve())+"\n")
+          PY
+      - name: Supervise exact sparse checkout, canonical recipe and original Java JNI qualification
+        shell: bash
+        env:
+          M3_JAVA_HOME: ${{ steps.slot-preflight.outputs.java }}
+          M3_PYTHON: ${{ steps.slot-preflight.outputs.python }}
+          M3_PYTHON_BIN: ${{ steps.slot-preflight.outputs.python-bin }}
+          M3_MVN: ${{ steps.slot-preflight.outputs.mvn }}
+          M3_GIT: ${{ steps.slot-preflight.outputs.git }}
+          M3_CC: ${{ steps.slot-preflight.outputs.cc }}
+          EXPECTED_SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import hashlib,json,os,pathlib,re,shutil,signal,subprocess,time
+          reserve,cap=8*1024**3,512*1024**2
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          workspace=pathlib.Path(os.environ["GITHUB_WORKSPACE"])
+          start=time.monotonic()
+          def traversal_error(error):raise RuntimeError("storage census failed") from error
+          def gate(limit=480*1024**2):
+              used=0
+              for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),workspace):
+                  if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise RuntimeError("missing/redirected storage")
+                  for folder,names,files in os.walk(base,followlinks=False,onerror=traversal_error):
+                      for name in names+files:
+                          try:info=os.lstat(pathlib.Path(folder)/name)
+                          except FileNotFoundError:continue
+                          used+=max(info.st_size,info.st_blocks*512)
+              if used>limit:raise RuntimeError("512MiB aggregate task limit (32MiB artifact reserve)")
+              for base in (root,workspace):
+                  st=os.statvfs(base)
+                  if st.f_bavail*st.f_frsize<reserve+cap-used:raise RuntimeError("8GiB-after-output reserve")
+              return used
+          head=os.environ["EXPECTED_SOURCE_SHA"]
+          if not re.fullmatch("[0-9a-f]{40}",head):raise RuntimeError("exact candidate SHA required")
+          if os.environ["GITHUB_REPOSITORY"]!="hsoliwal/M3jdk21" or os.environ["GITHUB_REF"]!="refs/heads/pr/m3-slot-entry-cache-20261024-53f1763c":raise RuntimeError("focused receiving branch only")
+          env=os.environ.copy()
+          for name in list(env):
+              if name in ("GITHUB_TOKEN","GH_TOKEN","_JAVA_OPTIONS","JDK_JAVAC_OPTIONS") or name.startswith(("PIP_","PYTHON","MAVEN_","JAVA_TOOL_OPTIONS","JDK_JAVA_OPTIONS","GIT_")):env.pop(name,None)
+          env.update(HOME=str(root/"home"),USERPROFILE=str(root/"home"),MAVEN_USER_HOME=str(root/"home/.m2"),M2_REPO=str(root/"m2"),M3_MAVEN_OFFLINE="0",MVN=os.environ["M3_MVN"],CC=os.environ["M3_CC"],TMPDIR=str(root/"tmp"),TEMP=str(root/"tmp"),TMP=str(root/"tmp"),XDG_CACHE_HOME=str(root/"cache"),XDG_CONFIG_HOME=str(root/"config"),XDG_DATA_HOME=str(root/"data"),JAVA_HOME=os.environ["M3_JAVA_HOME"],EXPECTED_HEAD=head,PATH=os.environ["M3_PYTHON_BIN"]+os.pathsep+os.environ["M3_JAVA_HOME"]+"/bin"+os.pathsep+env["PATH"],MAVEN_OPTS="-Xmx512m -Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home")+" -XX:ErrorFile="+str(root/"tmp/hs_err_pid%p.log")+" -XX:ReplayDataFile="+str(root/"tmp/replay_pid%p.log")+" -XX:-UsePerfData",JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home")+" -XX:ErrorFile="+str(root/"tmp/hs_err_pid%p.log")+" -XX:ReplayDataFile="+str(root/"tmp/replay_pid%p.log")+" -XX:-UsePerfData -XX:+PerfDisableSharedMem",PIP_CONFIG_FILE=os.devnull,PIP_DISABLE_PIP_VERSION_CHECK="1",PIP_NO_CACHE_DIR="1",PYTHONDONTWRITEBYTECODE="1",GIT_OPTIONAL_LOCKS="0",GIT_TERMINAL_PROMPT="0",GCM_INTERACTIVE="never",GIT_ASKPASS="/bin/false",SSH_ASKPASS="/bin/false",GIT_CONFIG_NOSYSTEM="1")
+          records=[];log=root/"qualification.log"
+          def cleanup(child):
+              # Existing verifier/vendor/Maven/CMake children inherit this owned session.
+              for sig,seconds in ((signal.SIGTERM,2),(signal.SIGKILL,3)):
+                  try:os.killpg(child.pid,sig)
+                  except ProcessLookupError:pass
+                  end=time.monotonic()+seconds
+                  while time.monotonic()<end:
+                      try:os.killpg(child.pid,0)
+                      except ProcessLookupError:return
+                      time.sleep(.05)
+              raise RuntimeError("owned process group terminal state unproved")
+          def run(name,command,deadline=120):
+              if time.monotonic()-start>720:raise RuntimeError("global deadline before launch")
+              gate();child=None;code=None
+              begin=log.stat().st_size if log.exists() else 0
+              with log.open("ab") as out:
+                  try:
+                      child=subprocess.Popen(list(map(str,command)),cwd=source,env=env,stdin=subprocess.DEVNULL,stdout=out,stderr=subprocess.STDOUT,start_new_session=True)
+                      command_start=time.monotonic()
+                      while child.poll() is None:
+                          gate()
+                          if log.stat().st_size>8*1024**2:raise RuntimeError("8MiB aggregate command log limit")
+                          if time.monotonic()-command_start>deadline or time.monotonic()-start>720:raise RuntimeError("owned command deadline")
+                          time.sleep(.5)
+                      code=child.wait()
+                      if time.monotonic()-start>720:raise RuntimeError("global deadline after child exit")
+                  finally:
+                      if child is not None:
+                          if child.poll() is None:
+                              try:os.killpg(child.pid,signal.SIGTERM)
+                              except ProcessLookupError:pass
+                              try:child.wait(timeout=2)
+                              except subprocess.TimeoutExpired:
+                                  try:os.killpg(child.pid,signal.SIGKILL)
+                                  except ProcessLookupError:pass
+                                  child.wait(timeout=5)
+                          cleanup(child)
+                          records.append({"name":name,"returncode":child.returncode,"parentReaped":True,"ownedSessionAbsent":True})
+              gate()
+              if log.stat().st_size>8*1024**2:raise RuntimeError("8MiB aggregate command log limit")
+              if code:raise RuntimeError(name+" failed with "+str(code))
+              with log.open("rb") as stream:stream.seek(begin);return stream.read()
+          def owning_proof_summary(proof,matrix):
+              provider_keys=("module","native_profile","native_jupiter","native_jupiter_report_sha256","jar_sha256","bridge_class_sha256","native_library_sha256","native_library")
+              contract_keys=("fixture_source_sha256","fixture_binary_sha256","provider_classes","provider_module","current_c_sha256","required_backing_modes","configured_startup_covered","configured_startup_remaining","production_c_mock_expected_cases")
+              summary={key:proof[key] for key in ("required_current_sources","junit","original_full_lazy_mains","explicit_native_contracts")}
+              summary["array_provider"]={key:proof["array_provider"][key] for key in provider_keys}
+              summary["array_contracts"]={key:proof["array_contracts"][key] for key in contract_keys}
+              summary["array_contracts"]["commands"]=[{key:row[key] for key in ("phase","process_exit")} for row in proof["array_contracts"]["commands"]]
+              summary["array_log_markers"]=matrix
+              summary["original_jupiter"]={}
+              for mode in ("java","native"):
+                  counts={}
+                  for name in proof["required_original_jupiter_methods"]:
+                      report=source/"m3/collections/target/full-java-jni"/(mode+"-reports")/("TEST-com.m3.collections."+name+".xml")
+                      suite=ET.parse(report).getroot()
+                      counts[name]={key:int(suite.attrib[key]) for key in ("tests","errors","failures","skipped")}
+                  summary["original_jupiter"][mode]=counts
+              return summary
+          def persist_success_receipt(final):
+              data=(json.dumps(final,separators=(",",":"),ensure_ascii=True)+"\n").encode("utf-8")
+              if len(data)>16384:raise RuntimeError("16KiB hosted success receipt limit")
+              used=gate()
+              if used+len(data)>480*1024**2:raise RuntimeError("hosted success receipt output fence")
+              path=root/"hosted-receipt.json";path.write_bytes(data)
+              if path.read_bytes()!=data:raise RuntimeError("hosted success receipt readback drift")
+              gate()
+              print("M3_SLOT_HOSTED_RECEIPT_JSON="+data.decode("utf-8").rstrip("\n"),flush=True)
+          def checked_array_markers(text):
+              if re.search(r"WARNING in native method|FATAL ERROR in native method|JNI DETECTED ERROR|WARNING:\s*JNI|WARNING:\s*Calling other JNI",text,re.I):raise RuntimeError("JNI diagnostics in bounded full log")
+              prefixes=["M3_BACKING_ARRAY_CONTRACT_V2_PASS mode="+mode+" checks=" for mode in ("native","unloaded","legacy","silent","pending")]
+              prefixes+=["M3_CONFIGURED_ARRAY_STARTUP_CONTRACT_PASS mode="+mode+" checks=" for mode in ("first-objects","first-bytes","first-ints","first-longs")]
+              prefixes+=["M3_BACKING_ARRAY_MOCK_PASS cases=58 checks="]
+              rows=[]
+              for prefix in prefixes:
+                  candidates=[line for line in text.splitlines() if line.startswith(prefix)]
+                  if len(candidates)!=1 or not re.fullmatch(re.escape(prefix)+r"[1-9][0-9]*",candidates[0]):raise RuntimeError("one actual positive array marker required: "+prefix)
+                  rows.append({"line":candidates[0],"checks":int(candidates[0][len(prefix):])})
+              if sum(line.startswith(("M3_BACKING_ARRAY_CONTRACT_V2_PASS ","M3_CONFIGURED_ARRAY_STARTUP_CONTRACT_PASS ","M3_BACKING_ARRAY_MOCK_PASS ")) for line in text.splitlines())!=10:raise RuntimeError("exact array marker cardinality required")
+              return rows
+          git=os.environ["M3_GIT"]
+          verifier=source/"m3/collections/qualification/full-java-jni-20261018/verify.py"
+          workflow=source/".github/workflows/m3-original-mapping-provider-qualification.yml"
+          sdk=source/"m3/collections/qualification/slot-entry-cache-v1/receiving-sdk"
+          sdk_output=root/"receiving-sdk"
+          sdk_xml=sdk_output/"surefire-reports/TEST-com.synexia.rewrite.M3SlotReceivingJavaJniRecipeTest.xml"
+          sdk_receipt=sdk_output/"receiving-sdk-receipt.tsv"
+          matrix_path=root/"array-matrix-markers.json"
+          sdk_pins={
+              "pom.xml":"f039d30043c0ded20902d379135be4a2681eeb7322bbcedb4635fb1b10de7dd4",
+              "engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java":"c4517401a7defd94ecc621bb2c19773bd6672c8fa3ee965c1ad37a63718bd92a",
+              "src/test/java/com/synexia/rewrite/M3SlotReceivingJavaJniRecipeTest.java":"49036230c21b348408a08b85e343f4e784d9815df5a48bab432086d9a5310082",
+              "src/main/resources/META-INF/rewrite/m3-slot-receiving-java-jni-20261024.yml":"dc9e8a0c4c7ae64beb53fb6e3d5f099d89a429616dc85b31fbcf67cf082db089",
+          }
+          try:
+              gate()
+              if source.exists():raise RuntimeError("fresh source path required")
+              source.mkdir()
+              run("git-init",[git,"init","--quiet"])
+              run("git-no-hooks",[git,"config","core.hooksPath","/dev/null"])
+              run("git-sparse-mode",[git,"sparse-checkout","init","--no-cone"])
+              patterns=["/.gitattributes","/.github/workflows/m3-original-mapping-provider-qualification.yml","/m3/collections/src/","/m3/collections/pom.xml","/m3/collections/LICENSE","/m3/collections/NOTICE","/m3/collections/provenance.json","/m3/collections/synexia-donation.json","/m3/collections/name-mapping.json","/m3/collections/SYNEXIA-DONATION-NOTICE.txt","/m3/collections/NETBEANS-NOTICE.txt","/m3/collections/qualification/full-java-jni-20261018/verify.py","/m3/arrays/pom.xml","/m3/arrays/LICENSE","/m3/arrays/NOTICE","/m3/arrays/provenance.json","/m3/arrays/src/","/m3/native/include/","/m3/vendor/third_party/apiguardian-api/","/m3/vendor/third_party/opentest4j/","/m3/vendor/third_party/univocity-parsers/","/m3/vendor/third_party/junit-platform-commons-1.10.2/","/m3/vendor/third_party/junit-platform-engine-1.10.2/","/m3/vendor/third_party/junit-jupiter-api-5.10.2/","/m3/vendor/third_party/junit-jupiter-params-5.10.2/","/m3/vendor/third_party/junit-jupiter-engine-5.10.2/","/m3/vendor/third_party/junit-jupiter-5.10.2/","/m3/migration/original-provider-20261017/source-binding.json","/m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/","/.github/workflows/m3-file-build-impact-20261020.yml","/.github/workflows/m3-file-delta-20261020.yml","/.github/workflows/m3-native-shadow-stream-progress-20261020.yml","/m3/collections/qualification/slot-entry-cache-v1/array-fixtures/"]
+              gate()
+              (source/".git/info/sparse-checkout").write_text("\n".join(patterns)+"\n",encoding="utf-8")
+              run("git-origin",[git,"remote","add","origin","https://github.com/hsoliwal/M3jdk21.git"])
+              run("bounded-exact-commit-fetch",[git,"-c","protocol.version=2","fetch","--no-tags","--no-recurse-submodules","--no-progress","--depth=1","--filter=blob:none","origin",head],120)
+              run("bounded-sparse-exact-checkout",[git,"-c","advice.detachedHead=false","checkout","--detach","--force","--no-progress","FETCH_HEAD"],120)
+              if run("exact-head",[git,"rev-parse","HEAD"],15).decode().strip()!=head:raise RuntimeError("checkout is not exact receiving head")
+              if run("tracked-input-clean-before",[git,"status","--porcelain","--untracked-files=no"],15).strip():raise RuntimeError("tracked checkout drift")
+              env["GIT_NO_LAZY_FETCH"]="1"
+              if hashlib.sha256(verifier.read_bytes()).hexdigest()!="be69eae9a27dec3d6b4bf0524db39fdb483953c83413b0248eb62c9574daea1b":raise RuntimeError("exact current verifier source drift")
+              for relative,expected in sdk_pins.items():
+                  if not re.fullmatch("[0-9a-f]{64}",expected) or hashlib.sha256((sdk/relative).read_bytes()).hexdigest()!=expected:raise RuntimeError("canonical receiving SDK source drift: "+relative)
+              settings=root/"home/.m2"
+              run("actual-canonical-text-recipe-sdk",[os.environ["M3_MVN"],"-B","-ntp","-s",settings/"settings.xml","-gs",settings/"global-settings.xml","-Dmaven.repo.local="+str(root/"m2"),"-Dm3.receiver.root="+str(source),"-Dm3.output="+str(sdk_output),"-f",sdk/"pom.xml","test"],300)
+              import xml.etree.ElementTree as ET
+              xml=ET.parse(sdk_xml).getroot()
+              counts=[int(xml.attrib[k]) for k in ("tests","errors","failures","skipped")]
+              methods=[x.attrib["name"] for x in xml.findall("testcase")]
+              if counts!=[6,0,0,0] or xml.attrib.get("name")!="com.synexia.rewrite.M3SlotReceivingJavaJniRecipeTest" or sorted(methods)!=sorted(["exactEngineAndManifestAreSealed","exactEmissionFixedPointAndReceiverReadback","namedYamlMatchesDirectEngine","unknownInputRemainsUnchanged","everyTargetRefusesDriftMissingAndDuplicate","replacementRetainsAttributesMarkersAndId"]) or not sdk_receipt.is_file():raise RuntimeError("six actual canonical receiving SDK tests/emission receipt required")
+              run("full-original-java-jni-and-current-array-provider",[os.environ["M3_PYTHON"],"-I","-S","-B",verifier],660)
+              matrix=checked_array_markers(log.read_text(encoding="utf-8"))
+              gate()
+              matrix_path.write_text(json.dumps({"schema":"M3_SLOT_CURRENT_ARRAY_LOG_MARKERS_V1","markers":matrix,"JNI_diagnostics":False,"full_log_bytes":log.stat().st_size,"full_log_sha256":hashlib.sha256(log.read_bytes()).hexdigest()},indent=2)+"\n",encoding="utf-8")
+              proof_path=source/"m3/collections/target/full-java-jni/PROOF.json"
+              proof=json.loads(proof_path.read_bytes())
+              if proof.get("status")!="PASS_OWNING_COLLECTION_JAVA_AND_JNI" or proof.get("head_sha")!=head or proof.get("worktree_dirty") is not False:raise RuntimeError("owning original Java/JNI receipt absent or dirty")
+              if run("tracked-input-clean-after",[git,"status","--porcelain","--untracked-files=no"],15).strip():raise RuntimeError("tracked source changed during qualification")
+              final={"schema":"M3_SLOT_ORIGINAL_COLLECTION_HOSTED_V1","runId":os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"],"checkoutCommit":head,"verifierSha256":hashlib.sha256(verifier.read_bytes()).hexdigest(),"workflowSha256":hashlib.sha256(workflow.read_bytes()).hexdigest(),"arrayMarkerReceiptSha256":hashlib.sha256(matrix_path.read_bytes()).hexdigest(),"proofSha256":hashlib.sha256(proof_path.read_bytes()).hexdigest(),"receivingSdk":{"counts":counts,"methods":methods,"reportSha256":hashlib.sha256(sdk_xml.read_bytes()).hexdigest(),"emissionReceiptSha256":hashlib.sha256(sdk_receipt.read_bytes()).hexdigest(),"independentSources":sdk_pins},"commands":records,"aggregateAllocatedBytes":gate(),"scope":"original collection Java/JNI and current array provider; no full-family/JDK/performance promotion","phaseAdvanced":False}
+              final["owningProofSummary"]=owning_proof_summary(proof,matrix)
+              persist_success_receipt(final)
+          finally:
+              # Reuse the donor's reserve and planned-copy fence before failure artifacts.
+              tail=b""
+              if log.is_file() and not log.is_symlink():
+                  with log.open("rb") as f:f.seek(max(0,log.stat().st_size-32768));tail=f.read(32768)
+              try:
+                  before=gate(496*1024**2)
+                  selected=[root/"hosted-receipt.json",matrix_path,verifier,workflow,sdk_xml,sdk_receipt,source/"m3/migration/original-provider-20261017/source-binding.json",source/"m3/collections/target/full-java-jni/PROOF.json"]
+                  for relative in ("m3/collections/target/surefire-reports/TEST-*.xml","m3/collections/target/full-java-jni/java-reports/TEST-*.xml","m3/collections/target/full-java-jni/native-reports/TEST-*.xml","m3/arrays/target/surefire-reports/TEST-*.xml","m3/arrays/target/native/Testing/Temporary/LastTest*.log","m3/arrays/target/native/Testing/Temporary/CTestCostData.txt"):selected+=sorted(source.glob(relative))
+                  selected=sorted(set(p for p in selected if p.is_file()),key=str)
+                  if len(selected)>256 or any(any(x.is_symlink() for x in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
+                  planned=sum(p.stat().st_size for p in selected)+len(tail)
+                  if planned>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("closed artifact budget")
+              except BaseException:
+                  print(tail.decode("utf-8",errors="replace"))
+                  raise
+              bundle=root/"artifacts";bundle.mkdir(exist_ok=False);inv={}
+              for n,path in enumerate(selected):
+                  gate(496*1024**2)
+                  label=str(n).zfill(3)+"-"+path.name;shutil.copyfile(path,bundle/label)
+                  inv[label]={"bytes":path.stat().st_size,"sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"source":str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))}
+              gate(496*1024**2)
+              (bundle/"log-tail.txt").write_bytes(tail);print(tail.decode("utf-8",errors="replace"))
+              (bundle/"inventory.json").write_text(json.dumps(inv,indent=2)+"\n",encoding="utf-8")
+              (bundle/"commands.json").write_text(json.dumps(records,indent=2)+"\n",encoding="utf-8")
+              print("Final aggregate bytes before artifact upload:",gate(496*1024**2))
+          PY
+      - name: Retain bounded original collection and native receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/artifacts/
+          include-hidden-files: true
+          compression-level: 0
+          retention-days: 90
+          if-no-files-found: error

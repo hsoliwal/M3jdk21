@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
-// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: restore fresh caller-owned entry projections without retained facade storage.
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: bound API projections through existing JNI LFU lanes with shared-revision invalidation.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
@@ -21,9 +21,12 @@ import java.util.function.Function;
 
 /**
  * Shared JDK semantics over integer slots. Internal operations use slots and arrays;
- * public entry views alone create fresh, caller-owned live projections.
+ * public entry views request key-bound live projections through a bounded owner-local LFU.
  */
 abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
+    private static final int ENTRY_FACADE_CACHE_CAPACITY = 64;
+    private M3LFUCache<K, LiveEntry> entryFacades;
+    private int entryFacadeRevision;
     abstract int firstSlot();
     abstract int nextSlot(int slot);
     abstract int findSlot(Object key);
@@ -38,19 +41,37 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         if (revision() != expected) { throw new ConcurrentModificationException(); }
     }
     /**
-     * Compatibility hook retained for existing subclasses. It is invoked once for each
-     * live projection; its return value never permits owner retention of the entry.
+     * Weak-key owners opt out so API projections cannot retain their keys.
+     * Invoke this hook once per request before any cache access.
      */
     protected boolean cacheEntryFacades() { return true; }
     final Entry<K, V> entryFacade(K key) {
-        // Preserve subclass callback effects before constructing the caller's projection.
-        cacheEntryFacades();
-        return new LiveEntry(key);
+        if (!cacheEntryFacades()) { return new LiveEntry(key); }
+        int currentRevision = revision();
+        M3LFUCache<K, LiveEntry> cache = entryFacades;
+        if (cache == null) {
+            cache = new M3LFUCache<>(ENTRY_FACADE_CACHE_CAPACITY);
+            entryFacades = cache;
+            entryFacadeRevision = currentRevision;
+        } else if (entryFacadeRevision != currentRevision) {
+            cache.clear();
+            entryFacadeRevision = currentRevision;
+        }
+        return cache.getOrCreate(key, candidate -> new LiveEntry(candidate));
     }
-    /** Compatibility invalidation hook; there is no retained projection state. */
-    final void forgetEntryFacade(K key) { }
-    /** Compatibility invalidation hook; there is no retained projection state. */
-    final void clearEntryFacades() { }
+    /** Internal invalidation never allocates an API projection cache. */
+    final void forgetEntryFacade(K key) {
+        M3LFUCache<K, LiveEntry> cache = entryFacades;
+        if (cache != null) { cache.removeIdentity(key); }
+    }
+    /** Internal invalidation never allocates an API projection cache. */
+    final void clearEntryFacades() {
+        M3LFUCache<K, LiveEntry> cache = entryFacades;
+        if (cache != null) {
+            cache.clear();
+            entryFacades = null;
+        }
+    }
     @Override public boolean containsKey(Object key) { return findSlot(key) >= 0; }
     @Override public V get(Object key) { return getOrDefault(key, null); }
     @Override public V getOrDefault(Object key, V fallback) {

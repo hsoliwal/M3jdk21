@@ -5,6 +5,8 @@ on:
       - 'm3/file/**'
       - '.github/workflows/m3-file-build-impact-20261020.yml'
   push:
+    branches-ignore:
+      - 'pr/m3-slot-entry-cache-20261024-53f1763c'
     paths:
       - 'm3/file/**'
       - '.github/workflows/m3-file-build-impact-20261020.yml'

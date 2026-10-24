@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SlotReceivingJavaJni20261024
+displayName: Bind SlotMap receiving Java and JNI qualification
+description: Apply six exact reviewed receiving-verifier and workflow metadata postimages through the existing hash-pinned text owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-slot-receiving-java-jni-20261024

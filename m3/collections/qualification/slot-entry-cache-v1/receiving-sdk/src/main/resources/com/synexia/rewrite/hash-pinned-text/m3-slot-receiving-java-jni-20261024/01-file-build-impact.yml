@@ -1,0 +1,27 @@
+name: M3File reverse impact Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-build-impact-20261020.yml'
+  push:
+    branches-ignore:
+      - 'pr/m3-slot-entry-cache-20261024-53f1763c'
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-build-impact-20261020.yml'
+jobs:
+  array-graph-contract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Full M3File module and source/binary reverse impact contracts
+        run: python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$RUNNER_TEMP/m3-file-impact-suite"

@@ -79,7 +79,7 @@ public final class M3LazyTreeMapSelfTest {
         Object replaced = new Object(); same(identity, view.put(6, replaced));
         same(identity, snapshot.getValue()); same(replaced, map.get(6));
         Map.Entry<Integer, Object> fresh = view.entrySet().iterator().next();
-        require(live != fresh, "entries are fresh caller projections");
+        same(live, fresh); equal(2, calls[0]); // API reuse must not resolve another lazy value.
         Object explicit = new Object(); same(identity, live.setValue(explicit)); same(explicit, map.get(7));
         M3Progress progress = M3Progress.of(5); view.preload(progress);
         equal(5, calls[0]); require(progress.isDone(), "bounded preload complete");

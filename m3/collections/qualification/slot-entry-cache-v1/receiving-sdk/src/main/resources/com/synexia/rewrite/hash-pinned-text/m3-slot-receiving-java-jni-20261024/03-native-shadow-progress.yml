@@ -1,0 +1,46 @@
+name: M3JDK21 single-source layered shadow I/O
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-native-shadow-stream-progress-20261020.yml'
+  push:
+    branches-ignore:
+      - 'pr/m3-slot-entry-cache-20261024-53f1763c'
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-native-shadow-stream-progress-20261020.yml'
+jobs:
+  original-m3file-io-contract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original M3File module and run exact normal/interpreted shadow contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/m3-native-shadow
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d build/m3-native-shadow \
+            m3/file/src/main/java/module-info.java \
+            m3/file/src/main/java/com/m3/file/M3File.java \
+            m3/file/src/main/java/com/m3/file/M3StreamProgress.java \
+            m3/file/src/main/java/com/m3/file/M3ShadowStreams.java \
+            m3/file/src/test/java/com/m3/file/M3ShadowStreamsContract.java
+          java --module-path build/m3-native-shadow \
+            -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+          java -Xint --module-path build/m3-native-shadow \
+            -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+          jmod create --class-path build/m3-native-shadow build/com.m3.file.jmod
+          jlink --module-path "$JAVA_HOME/jmods:build" \
+            --add-modules com.m3.file --output build/linked-m3-file
+          build/linked-m3-file/bin/java \
+            -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+          build/linked-m3-file/bin/java -Xint \
+            -m com.m3.file/com.m3.file.M3ShadowStreamsContract

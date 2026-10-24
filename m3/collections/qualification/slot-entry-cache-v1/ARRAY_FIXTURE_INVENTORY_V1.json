@@ -1,0 +1,86 @@
+{
+  "schema": "M3_SLOT_EXISTING_ARRAY_FIXTURE_INVENTORY_V1",
+  "status": "SOURCE_AND_COMMAND_FIT_ONLY_ACTUAL_LINUX_EXECUTION_PENDING",
+  "canonicalCommit": "d5d468bf35d2b939711f925f13f1eaf49a9a360a",
+  "receivingBase": "53f1763c80b1b9f260572aca247eaa1fcfa9112b",
+  "receivingRoot": "m3/collections/qualification/slot-entry-cache-v1/array-fixtures",
+  "fixtures": [
+    {
+      "name": "M3BackingArrayContractV2.java",
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/executed/proof-v2/M3BackingArrayContractV2.java",
+      "git": "e9f11b0a548d9729f1ba7038622a7aae3bbc58b2",
+      "bytes": 7080,
+      "sha256": "5d648e9536a53056fc7a40b4646477196acbfb2c3afbc0ea506d980a7924e5e8"
+    },
+    {
+      "name": "M3ConfiguredArrayStartupContract.java",
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/executed/configured-startup-v1/proof-v1/M3ConfiguredArrayStartupContract.java",
+      "git": "2facd95ebece5fbd5d88959b384436528476c0b0",
+      "bytes": 23779,
+      "sha256": "3a969a23e1e86f02412761f089dca33ebfc9d89c1d974ac335669bcb9f0a3dd4"
+    },
+    {
+      "name": "fault_backing_arrays.c",
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/executed/runtime-v1/fault_backing_arrays.c",
+      "git": "08cd64d48210b5f689b8a679c991fa71adfad595",
+      "bytes": 2031,
+      "sha256": "49e473a33dd1f78ea3771d3a3b2f116734f9b9aaec4d65c5d331e0213917478c"
+    },
+    {
+      "name": "legacy_m3_arrays_jni.c",
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/executed/native-recipe-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-jni-backing-array-native-v1-20261021/before-m3_arrays_jni.c.txt",
+      "git": "78bb0a19eb8afd0abfd02f30b42063723312cbbf",
+      "bytes": 3926,
+      "sha256": "d5dd8f71a86e5f527941886a5358eeec5596a0f6a5735c82db8c10b72a129d1a"
+    },
+    {
+      "name": "backing_array_mock.c",
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/executed/mock-v1/backing_array_mock.c",
+      "git": "7f26a5fc13c5d833f31051c68e700d39671a0fbf",
+      "bytes": 12272,
+      "sha256": "0498ad5cb126a3824aadac73ebaef74ad179be047e3711ce7bb24b3c803203e8"
+    }
+  ],
+  "currentVerifier": {
+    "git": "5df1a1131571630bf722a74ef6e41dd648b7f67f",
+    "sha256": "be69eae9a27dec3d6b4bf0524db39fdb483953c83413b0248eb62c9574daea1b",
+    "cpuProof": "644cbc0e874bc4dbf5aa017422cfa7bde79fd257",
+    "terminalChunk": "e41b3e",
+    "exit": 0,
+    "actualNative": false,
+    "actualJVM": false
+  },
+  "plans": {
+    "directCurrentProvider": "Freshly compiled complete com.m3.arrays; actual CodeSource directory checked by unchanged mains; rebuild Linux native from existing source, not a Windows DLL",
+    "backingModes": [
+      "native",
+      "unloaded",
+      "legacy",
+      "silent",
+      "pending"
+    ],
+    "startupModes": [
+      "first-objects",
+      "first-bytes",
+      "first-ints",
+      "first-longs"
+    ],
+    "faultLibraries": "Existing fault source compiled with M3_PENDING=0 and1; exact old legacy source with unchanged core",
+    "mock": "Existing58-case harness linked to actual current production JNI source; no VM/GC inference from C mock",
+    "freshJVMs": 9,
+    "vm": "Fixed256MiB, -ea, -Xcheck:jni, explicit blank native property for isolated probes, actual arrays module path; native reflection opened only for native case",
+    "noNewAllocator": true,
+    "noRetainedStructuralEntryNode": true
+  },
+  "remaining": [
+    "Actual Linux source compilation, CTest, native fixtures and nine fresh JVM outcomes",
+    "Other original startup modes, path variants, concurrency/crossloader/distribution matrix",
+    "Public/protected descriptors and formal review",
+    "Complete collection-family/API/behavior superset and both regex compiled-pattern/language-rule tracks"
+  ],
+  "oldProofs": "Preserve all prior Windows/native/mock results; none substitutes for the current Linux provider",
+  "policy": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
+  "soleProductionOwner": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+  "fullGoal": "ACTIVE_UNFINISHED",
+  "formalReview": "NO_VERDICT"
+}

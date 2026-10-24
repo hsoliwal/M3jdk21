@@ -21,13 +21,15 @@ import org.junit.jupiter.api.Test;
 /**
  * Mechanical LEAN guard: logical collection entries are not retained as structural objects.
  *
- * <p>Map.Entry is permitted only as a transient Java API projection. Canonical packed storage must
- * remain payload lanes plus primitive slot/index/topology state.</p>
+ * <p>Map.Entry is permitted only at the API boundary through the exact bounded owner-local LFU.
+ * Canonical packed storage remains payload lanes plus primitive slot/index/topology state.</p>
  */
 final class M3NoRetainedStructuralEntryTest {
     private static final String PACKAGE = "com.m3.collections.";
 
     private static final List<Class<?>> STORAGE_ROOTS = List.of(
+            M3HashMap.class,
+            M3LFUCache.class,
             M3LinkedHashMap.class,
             M3TreeMap.class,
             M3LinkedList.class,
@@ -58,36 +60,25 @@ final class M3NoRetainedStructuralEntryTest {
     }
 
     @Test
-    void returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage() {
+    void returnedMapEntriesReuseOnlyThroughBoundedApiCaches()
+            throws ReflectiveOperationException {
         var hash = new M3LinkedHashMap<Integer, Integer>();
         hash.put(1, 10);
         hash.put(2, 20);
         Map.Entry<Integer, Integer> hashEntry = hash.entrySet().iterator().next();
         Map.Entry<Integer, Integer> hashEntryAgain = hash.entrySet().iterator().next();
-        assertFalse(
-                hashEntry == hashEntryAgain,
-                "PackedHashMap reused/cached an API Entry object");
-        assertFalse(
-                retainsIdentity(hash, hashEntry),
-                "PackedHashMap retained an entry API projection as canonical storage");
-        assertFalse(
-                retainsIdentity(hash, hashEntryAgain),
-                "PackedHashMap retained a repeated entry API projection");
+        assertTrue(hashEntry == hashEntryAgain, "unchanged live mapping must reuse its API entry");
+        assertTrue(retainsIdentity(hash, hashEntry), "the API cache must own the reused projection");
+        M3EntryFacadeCacheTest.assertNoOwnedEntries(hash);
 
         var tree = new M3TreeMap<Integer, Integer>();
         tree.put(1, 10);
         tree.put(2, 20);
         Map.Entry<Integer, Integer> treeEntry = tree.entrySet().iterator().next();
         Map.Entry<Integer, Integer> treeEntryAgain = tree.entrySet().iterator().next();
-        assertFalse(
-                treeEntry == treeEntryAgain,
-                "PackedTreeMap reused/cached an API Entry object");
-        assertFalse(
-                retainsIdentity(tree, treeEntry),
-                "PackedTreeMap retained an entry API projection as canonical storage");
-        assertFalse(
-                retainsIdentity(tree, treeEntryAgain),
-                "PackedTreeMap retained a repeated entry API projection");
+        assertTrue(treeEntry == treeEntryAgain, "unchanged live mapping must reuse its API entry");
+        assertTrue(retainsIdentity(tree, treeEntry), "the API cache must own the reused projection");
+        M3EntryFacadeCacheTest.assertNoOwnedEntries(tree);
 
         hashEntry.setValue(11);
         treeEntry.setValue(11);
@@ -96,12 +87,8 @@ final class M3NoRetainedStructuralEntryTest {
 
         assertFreshBurst(hash::firstEntry, "hash firstEntry");
         assertFreshBurst(tree::firstEntry, "tree firstEntry");
-        assertFreshBurst(
-                () -> hash.entrySet().iterator().next(),
-                "hash entrySet iterator projection");
-        assertFreshBurst(
-                () -> tree.entrySet().iterator().next(),
-                "tree entrySet iterator projection");
+        assertReusedBurst(() -> hash.entrySet().iterator().next(), "hash entrySet projection");
+        assertReusedBurst(() -> tree.entrySet().iterator().next(), "tree entrySet projection");
     }
 
     private static void assertFreshBurst(
@@ -119,25 +106,34 @@ final class M3NoRetainedStructuralEntryTest {
         }
     }
 
-    private static void inspectFieldsRecursively(Class<?> type) {
-        for (Field field : type.getDeclaredFields()) {
-            Class<?> retained = field.getType();
-            Class<?> component = retained.isArray() ? retained.getComponentType() : retained;
-            assertFalse(
-                    Map.Entry.class.isAssignableFrom(component),
-                    () -> type.getName() + " retains Map.Entry field " + field.getName()
-                            + (Modifier.isStatic(field.getModifiers()) ? " (static cache/pool)" : ""));
-            assertFalse(
-                    isStructuralCarrier(component),
-                    () -> type.getName() + " retains structural object field "
-                            + field.getName() + ":" + component.getName());
-        }
-        for (Class<?> nested : type.getDeclaredClasses()) {
-            inspectFieldsRecursively(nested);
+    private static void assertReusedBurst(
+            Supplier<? extends Map.Entry<?, ?>> supplier, String label) {
+        Map.Entry<?, ?> first = supplier.get();
+        for (int iteration = 0; iteration < 1_024; iteration++) {
+            assertTrue(first == supplier.get(), label + " failed unchanged-mapping reuse at " + iteration);
         }
     }
 
-    private static boolean isStructuralCarrier(Class<?> type) {
+    private static void inspectFieldsRecursively(Class<?> type) {
+        for (Class<?> owner = type; owner != null && owner.getName().startsWith(PACKAGE);
+                owner = owner.getSuperclass()) {
+            for (Field field : owner.getDeclaredFields()) {
+                Class<?> retained = field.getType();
+                Class<?> component = retained.isArray() ? retained.getComponentType() : retained;
+                assertFalse(
+                        Map.Entry.class.isAssignableFrom(component),
+                        () -> type.getName() + " retains Map.Entry field " + field.getName()
+                                + (Modifier.isStatic(field.getModifiers()) ? " (static cache/pool)" : ""));
+                assertFalse(
+                        isStructuralCarrier(component),
+                        () -> type.getName() + " retains structural object field "
+                                + field.getName() + ":" + component.getName());
+            }
+            for (Class<?> nested : owner.getDeclaredClasses()) inspectFieldsRecursively(nested);
+        }
+    }
+
+    static boolean isStructuralCarrier(Class<?> type) {
         if (type.isPrimitive()) {
             return false;
         }
@@ -200,18 +196,18 @@ final class M3NoRetainedStructuralEntryTest {
             return false;
         }
 
-        for (Field field : type.getDeclaredFields()) {
-            if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) {
-                continue;
-            }
-            assertTrue(field.trySetAccessible(), () -> "cannot inspect " + type.getName() + "." + field.getName());
-            try {
-                Object retained = field.get(value);
-                if (retained == target || retainsIdentity(retained, target, seen)) {
-                    return true;
+        for (Class<?> owner = type; owner != null && owner.getName().startsWith(PACKAGE);
+                owner = owner.getSuperclass()) {
+            for (Field field : owner.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) continue;
+                assertTrue(field.trySetAccessible(),
+                        () -> "cannot inspect " + type.getName() + "." + field.getName());
+                try {
+                    Object retained = field.get(value);
+                    if (retained == target || retainsIdentity(retained, target, seen)) return true;
+                } catch (IllegalAccessException impossible) {
+                    throw new AssertionError(impossible);
                 }
-            } catch (IllegalAccessException impossible) {
-                throw new AssertionError(impossible);
             }
         }
         return false;

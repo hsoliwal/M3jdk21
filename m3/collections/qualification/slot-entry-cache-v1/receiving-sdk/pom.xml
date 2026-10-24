@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- Adapted from FullJavaJni POM 613ebf728008e43e29b3adbf14c1cd67bd708e29 and qualified no-fork POM 1aa72d05d22a818c60c6841ab024f409b61eb6c6. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.m3</groupId><artifactId>slot-receiving-java-jni-sdk-proof</artifactId><version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <m3.output>${project.basedir}/target</m3.output>
+  </properties>
+  <dependencies>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version><scope>test</scope></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>1.7.36</version><scope>test</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${project.basedir}/engine</sourceDirectory>
+    <directory>${m3.output}</directory>
+    <outputDirectory>${m3.output}/classes</outputDirectory>
+    <testOutputDirectory>${m3.output}/test-classes</testOutputDirectory>
+    <resources/>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version><configuration><skip>true</skip></configuration></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><release>21</release><proc>none</proc><fork>false</fork>
+          <includes><include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include></includes>
+          <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration><useModulePath>false</useModulePath><forkCount>0</forkCount><failIfNoTests>true</failIfNoTests>
+          <additionalClasspathElements><additionalClasspathElement>${project.basedir}/src/main/resources</additionalClasspathElement></additionalClasspathElements>
+          <systemPropertyVariables>
+            <m3.sdk.crate>${project.basedir}</m3.sdk.crate>
+            <m3.sdk.output>${m3.output}</m3.sdk.output>
+            <m3.receiver.root>${m3.receiver.root}</m3.receiver.root>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
