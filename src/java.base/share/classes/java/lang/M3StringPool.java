@@ -59,6 +59,13 @@ final class M3StringPool {
     static final String MAX_LOCAL_BYTES_PROPERTY = "m3.string.pool.maxBytes";
     static final String MAX_RETAINED_TUPLES_PROPERTY = "m3.string.pool.maxTuples";
     static final long DEFAULT_MAX_RETAINED_TUPLES = 1L << 20;
+    static final String IMMEDIATE_PROPERTY = "m3.string.immediate";
+    /**
+     * Short Latin-1 / identifier text is admitted as an {@link M3StringImmediate} owner (no native
+     * payload, no bucket) unless {@code -Dm3.string.immediate=false}.
+     */
+    static final boolean IMMEDIATE_STRINGS = !"false".equals(
+            VM.initLevel() >= 1 ? VM.getSavedProperty(IMMEDIATE_PROPERTY) : null);
     /** Native byte budget of the VM-local scalar lane; {@code 0} admits no multi-unit local atom. */
     static final long MAX_LOCAL_BYTES =
             bound(MAX_LOCAL_BYTES_PROPERTY, Runtime.getRuntime().maxMemory());
@@ -175,6 +182,12 @@ final class M3StringPool {
             int row = active.findCodePoints(source, offset, count, utf16Length);
             if (row >= 0) return M3String.whole(active.atom(row));
         }
+        if (IMMEDIATE_STRINGS && coder == String.LATIN1 && utf16Length == count) {
+            long packed = M3StringImmediate.packCodePoints(source, offset, count);
+            if (packed != M3StringImmediate.NONE) {
+                return M3String.whole(M3StringImmediate.of(packed));
+            }
+        }
 
         int byteLength = utf16Length << coder;
         long hash64 =
@@ -255,6 +268,12 @@ final class M3StringPool {
             int row = active.findCompactBytes(source, sourceOffset, length, sourceCoder);
             if (row >= 0) return M3String.whole(active.atom(row));
         }
+        if (IMMEDIATE_STRINGS && targetCoder == String.LATIN1) {
+            long packed = M3StringImmediate.packCompactBytes(source, sourceOffset, length, sourceCoder);
+            if (packed != M3StringImmediate.NONE) {
+                return M3String.whole(M3StringImmediate.of(packed));
+            }
+        }
 
         int byteLength = length << targetCoder;
         long hash64 =
@@ -319,6 +338,12 @@ final class M3StringPool {
         if (active != null && active.available()) {
             int row = active.findLatin1Bytes(source, offset, length);
             if (row >= 0) return M3String.whole(active.atom(row));
+        }
+        if (IMMEDIATE_STRINGS && coder == String.LATIN1) {
+            long packed = M3StringImmediate.packCompactBytes(source, offset, length, String.LATIN1);
+            if (packed != M3StringImmediate.NONE) {
+                return M3String.whole(M3StringImmediate.of(packed));
+            }
         }
 
         int byteLength = length << coder;
@@ -389,6 +414,12 @@ final class M3StringPool {
         if (active != null && active.available()) {
             int row = active.find(source, offset, length);
             if (row >= 0) return M3String.whole(active.atom(row));
+        }
+        if (IMMEDIATE_STRINGS && coder == String.LATIN1) {
+            long packed = M3StringImmediate.packChars(source, offset, length);
+            if (packed != M3StringImmediate.NONE) {
+                return M3String.whole(M3StringImmediate.of(packed));
+            }
         }
 
         int byteLength = length << coder;
@@ -740,6 +771,11 @@ final class M3StringPool {
                 : right.charAt(index - leftLength);
     }
 
+    /** Leaf identity for canonical tuple comparison; immediate owners are equal by packed text. */
+    private static boolean sameLeaf(M3StringOwner left, M3StringOwner right) {
+        return left == right || M3StringImmediate.sameText(left, right);
+    }
+
     private static boolean sameLeafSequence(
             M3String existing, M3String left, M3String right) {
         LeafCursor candidate = new LeafCursor(existing, null);
@@ -749,7 +785,7 @@ final class M3StringPool {
             boolean requestedNext = requested.next();
             if (candidateNext != requestedNext) return false;
             if (!candidateNext) return true;
-            if (candidate.atom() != requested.atom()
+            if (!sameLeaf(candidate.atom(), requested.atom())
                     || candidate.start() != requested.start()
                     || candidate.length() != requested.length()) {
                 return false;
@@ -818,16 +854,16 @@ final class M3StringPool {
         private long[] pendingCoordinates = new long[8];
         private int pendingSize;
 
-        private M3StringAtom atom;
+        private M3StringOwner atom;
         private int start;
         private int length;
 
         private boolean buffered;
-        private M3StringAtom bufferedAtom;
+        private M3StringOwner bufferedAtom;
         private int bufferedStart;
         private int bufferedLength;
 
-        private M3StringAtom rawAtom;
+        private M3StringOwner rawAtom;
         private int rawStart;
         private int rawLength;
 
@@ -881,7 +917,7 @@ final class M3StringPool {
             return true;
         }
 
-        M3StringAtom atom() { return atom; }
+        M3StringOwner atom() { return atom; }
         int start() { return start; }
         int length() { return length; }
 
@@ -893,14 +929,13 @@ final class M3StringPool {
                 long coordinate = pendingCoordinates[top];
                 int rangeStart = (int) (coordinate >>> Integer.SIZE);
                 int rangeLength = (int) coordinate;
-                if (owner instanceof M3StringAtom scalar) {
-                    rawAtom = scalar;
+                if (!(owner instanceof M3StringTuple tuple)) {
+                    rawAtom = owner;
                     rawStart = rangeStart;
                     rawLength = rangeLength;
                     return true;
                 }
 
-                M3StringTuple tuple = (M3StringTuple) owner;
                 int rangeEnd = rangeStart + rangeLength;
                 int leftLength = tuple.left.length();
 
