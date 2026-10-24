@@ -11,7 +11,8 @@ no Synexia contributor line. The `original/` copies are the donor files as recei
 differ from them only in lines that name the package (`org.apache.commons.collections4` becomes
 `com.m3.collections.apache`).
 
-Git blob and SHA-256 of every copy: `DONOR_SHA256.tsv` (checked against the files when this notice was generated).
+Git blob of each `original/` copy and SHA-256 of every copy: `DONOR_SHA256.tsv` (checked against the files when
+this notice was generated).
 
 | Copy | Lines that differ from the original copy |
 |---|---|
