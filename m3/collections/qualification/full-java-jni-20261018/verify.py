@@ -12,6 +12,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[4]
 MODULE = ROOT / 'm3/collections'
+ARRAYS = ROOT / 'm3/arrays'
 OUT = MODULE / 'target/full-java-jni'
 JAVA = Path(os.environ['JAVA_HOME'])
 VENDOR = ROOT / 'm3/vendor/third_party'
@@ -85,10 +86,31 @@ def main():
         run(['python3', owner / 'verify_source.py', jar])
         dependency_proof[module] = {'provenance_sha256': sha(owner / 'PROVENANCE.json'),
                                     'jar_sha256': sha(jar)}
+    # First-party arrays are a declared Java module dependency, not a
+    # classpath stub or a transitive java.base feature. Build their actual
+    # source owner after the vendored JUnit dependency closure.
+    arrays_sources = sorted((ARRAYS / 'src/main/java').rglob('*.java'))
+    arrays_descriptor = ARRAYS / 'src/main/java/module-info.java'
+    if not arrays_sources or arrays_descriptor not in arrays_sources:
+        raise RuntimeError('Missing original com.m3.arrays module source')
+    maven(ARRAYS / 'pom.xml', '-DskipTests', 'install')
+    arrays_jar = ARRAYS / 'target/m3-arrays-0.1.0-SNAPSHOT.jar'
+    if not arrays_jar.is_file():
+        raise RuntimeError('Built original com.m3.arrays module artifact missing')
+    with zipfile.ZipFile(arrays_jar) as arrays_package:
+        if 'module-info.class' not in arrays_package.namelist():
+            raise RuntimeError('M3 arrays built artifact lost its module descriptor')
+    array_module = subprocess.check_output(
+        [JAVA / 'bin/jar', '--describe-module', '--file', arrays_jar],
+        text=True).splitlines()[0].split()[0].split('@')[0]
+    if array_module != 'com.m3.arrays':
+        raise RuntimeError('Unexpected product arrays module identity: ' + array_module)
+
     sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
     tests = sorted((MODULE / 'src/test/java').rglob('*.java'))
     (OUT / 'main.args').write_text('\n'.join(map(str, sources)) + '\n')
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror', '-Xpkginfo:always',
+         '--module-path', arrays_jar,
          '-h', OUT / 'headers', '-d', OUT / 'classes', '@' + str(OUT / 'main.args')])
     native = MODULE / 'src/main/native/collections'
     admitted = {native / name for rows in LIBRARIES.values() for name, _ in rows}
@@ -108,7 +130,8 @@ def main():
         run(cc + ['-shared', *objects, '-o', OUT / 'native' / ('lib' + library + '.so')])
     # Existing navigation fixture has its own test-only JNI ABI; keep it out of the product library.
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror',
-         '-cp', OUT / 'classes', '-h', OUT / 'headers', '-d', OUT / 'fixture-classes',
+         '-cp', os.pathsep.join((str(OUT / 'classes'), str(arrays_jar))),
+         '-h', OUT / 'headers', '-d', OUT / 'fixture-classes',
          MODULE / 'src/test/java/com/m3/collections/M3BitLaneJumpProof.java'])
     run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/com_m3_collections_M3BitLaneJumpProof.h',
               MODULE / 'src/test/native/m3_bitlane_jump_jni.c', '-o',
@@ -142,9 +165,13 @@ def main():
         for name in ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'name-mapping.json', 'SYNEXIA-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
             if archive.read('META-INF/' + name) != (MODULE / name).read_bytes():
                 raise RuntimeError('Packaged module legal/provenance bytes differ: ' + name)
-    runtime_modules = subprocess.check_output([JAVA / 'bin/jdeps', '--print-module-deps', jar], text=True).strip()
-    if runtime_modules != 'java.base': raise RuntimeError('Unexpected runtime dependencies: ' + runtime_modules)
-    cp = str(MODULE / 'target/classes') + os.pathsep + str(MODULE / 'target/test-classes')
+    runtime_modules = subprocess.check_output(
+        [JAVA / 'bin/jdeps', '--module-path', arrays_jar,
+         '--print-module-deps', jar], text=True).strip()
+    if set(runtime_modules.split(',')) != {'java.base', 'com.m3.arrays'}:
+        raise RuntimeError('Unexpected runtime dependencies: ' + runtime_modules)
+    cp = os.pathsep.join((str(MODULE / 'target/classes'),
+                          str(MODULE / 'target/test-classes'), str(arrays_jar)))
     java = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
     contracts = [('M3MaskWindowSparseContract', ['native']),
                  ('M3BudgetedMaskWindowContract', ['--native']),
@@ -177,7 +204,12 @@ def main():
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,
-             'source_dependencies': dependency_proof, 'native_libraries': sorted(LIBRARIES),
+             'source_dependencies': dependency_proof,
+             'first_party_module_dependencies': {'com.m3.arrays': {
+                 'module_descriptor_sha256': sha(arrays_descriptor),
+                 'artifact_sha256': sha(arrays_jar),
+                 'source_sha256': {str(p.relative_to(ROOT)): sha(p) for p in arrays_sources}}},
+             'native_libraries': sorted(LIBRARIES),
              'explicit_native_contracts': [name for name, _ in contracts],
              'native': 'generated headers; C17 strict; fatal UBSan; actual -Xcheck:jni',
              'source_sha256': {str(p.relative_to(ROOT)): sha(p) for p in sources + tests + sorted(admitted) + native_fixtures}}

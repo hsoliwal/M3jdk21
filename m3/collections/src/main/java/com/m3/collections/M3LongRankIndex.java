@@ -212,6 +212,16 @@ public final class M3LongRankIndex {
         return values.clone();
     }
 
+    /**
+     * Batched half-open [lower, upper) coordinates in a flat primitive int[].
+     * Pair i resides at offsets 2*i and 2*i+1, including insertion coordinates
+     * when a value is absent. Explicit JNI batches never retain any entry object
+     * or invoke a caller comparator.
+     */
+    public int[] equalRanges(long[] queries) {
+        return M3LongRankBatchNative.equalRanges(values, queries);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(
