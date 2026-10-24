@@ -35,7 +35,7 @@ jobs:
           old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java').read_bytes()
           new = Path('m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java').read_bytes()
           assert hashlib.sha256(old).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
-          assert hashlib.sha256(new).hexdigest() == 'be567e756470fbb96d1aeec7c5b21b4eacae77136ed3854bf965189bce07353f'
+          assert hashlib.sha256(new).hexdigest() == 'dc304948eb6ebbbd3534939b007143f8579810d13b5eea7dcaf94fc030663810'
           normalized = new.replace(
               b'package com.m3.collections.queue;',
               b'package com.m3.collections.guava;')
@@ -47,8 +47,13 @@ jobs:
           assert old.count(old_capacity) == 1
           assert new.count(new_capacity) == 1
           normalized = normalized.replace(new_capacity, old_capacity)
+          old_render = b'            // The provider renders through a distinct internal owner: outer self is not special.\n            text.append(cursor.next());'
+          new_render = b'            // Preserve direct self-reference rendering per JDK Collection semantics.\n            Object value = cursor.next();\n            text.append(value == this ? "(this Collection)" : value);'
+          assert old.count(old_render) == 1
+          assert new.count(new_render) == 1
+          normalized = normalized.replace(new_render, old_render)
           assert normalized == old
-          print('Sealed canonical implementation differs only by admitted private lazy-capacity atom')
+          print('Sealed canonical implementation differs only by the admitted capacity and direct self-reference atoms')
           PY
       - name: Build both standalone M3JDK21 Java 21 queue modules
         run: |
