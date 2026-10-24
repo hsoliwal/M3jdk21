@@ -35,7 +35,7 @@ jobs:
           old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java').read_bytes()
           new = Path('m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java').read_bytes()
           assert hashlib.sha256(old).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
-          assert hashlib.sha256(new).hexdigest() == '488d21e74727cb6bb019874a9506d96a8009e2511f604d59875668d79e8a9fda'
+          assert hashlib.sha256(new).hexdigest() == 'e4d4f9fa4e260d25df4622aaba2d0b5fb88410828df0b8ef3e046edcc85861e5'
           normalized = new.replace(
               b'package com.m3.collections.queue;',
               b'package com.m3.collections.guava;')
@@ -60,8 +60,12 @@ jobs:
           assert old.count(old_growth_fallback) == 1 and new.count(new_growth_fallback) == 1
           normalized = normalized.replace(new_growth_target, old_growth_target)
           normalized = normalized.replace(new_growth_fallback, old_growth_fallback)
+          old_jump = b'        long jump = oldLength < 64 ? (long) oldLength + 2 : oldLength / 2L;'
+          new_jump = b'        long jump = oldLength < 64 ? (long) oldLength + 2 : (long) oldLength;'
+          assert old.count(old_jump) == 1 and new.count(new_jump) == 1
+          normalized = normalized.replace(new_jump, old_jump)
           assert normalized == old
-          print('Sealed canonical implementation differs only by admitted capacity, direct-self and bounded-growth atoms')
+          print('Sealed canonical implementation differs only by admitted capacity, direct-self, bounded-growth and geometric-growth atoms')
           PY
       - name: Build both standalone M3JDK21 Java 21 queue modules
         run: |

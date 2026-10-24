@@ -149,9 +149,10 @@ public final class M3EvictingQueueCanonicalContractProbe {
         for (int capacity : extremes) {
             expansions += verifyGrowthSequence(growth, storage, capacity);
         }
-        require(expansions > 700_000L, "growth oracle did not exercise enough expansions");
+        require(expansions == 453_002L, "source-sealed geometric-growth count drifted");
         System.out.println("M3_EVICTING_GROWTH_ARITHMETIC_PASS configurations=20496 expansions="
                 + expansions);
+        System.out.println("M3_EVICTING_DOUBLING_GROWTH_PASS transitions=" + expansions);
     }
 
     private static long verifyGrowthSequence(Method growth,

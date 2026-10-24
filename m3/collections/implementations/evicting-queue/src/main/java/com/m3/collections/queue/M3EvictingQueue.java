@@ -118,7 +118,7 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
     @Override public boolean offer(E element) { return add(element); }
 
     private int expandedLength(int oldLength) {
-        long jump = oldLength < 64 ? (long) oldLength + 2 : oldLength / 2L;
+        long jump = oldLength < 64 ? (long) oldLength + 2 : (long) oldLength;
         long target = Math.min(oldLength + jump, (long) maxSize + 1);
         if (target <= ARRAY_LIMIT) return (int) target;
         long minimum = (long) oldLength + 1;
