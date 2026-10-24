@@ -76,3 +76,4 @@ org.apache.commons.collections4.set.CompositeSet	OPEN	-	-	#1403 M3FlatteningView
 org.apache.commons.collections4.map.CompositeMap	OPEN	-	-	#1403 M3FlatteningView	compose, do not duplicate
 org.apache.commons.collections4.list.LazyList	OPEN	-	-	#1403 M3SparseItemStore	-
 org.apache.commons.collections4.list.GrowthList	OPEN	-	-	#1403 M3SparseItemStore	-
+org.apache.commons.collections4.map.PassiveExpiringMap	DONE #1913	com.m3.collections.apache.M3PassiveExpiringMap	PR #1913: implementations/apache-passive-expiring-map + qualification/owned-apache-passive-expiring-map-20261024	-	C20 expiry-order index (owner decision D3, 2026-10-24)
