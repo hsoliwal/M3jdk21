@@ -11,6 +11,7 @@ import com.m3.tools.text.diff.TextDelta;
 import com.m3.tools.text.frequency.TermFrequency;
 import com.m3.tools.text.index.Bm25Ranker;
 import com.m3.tools.text.index.InvertedIndex;
+import com.m3.tools.text.ngram.NGramIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
 import com.m3.tools.text.regex.RegexMatcher;
@@ -28,6 +29,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -45,7 +47,7 @@ public final class M3DonorToolsTest {
     private M3DonorToolsTest() { }
 
     public static void main(String[] args) throws Exception {
-        text(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
+        text(); ngramIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -142,6 +144,88 @@ public final class M3DonorToolsTest {
         check(Sha256.utf8("abc").equals("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"), "abc SHA");
         check(Sha256.utf8("\ud83d\ude00").equals(Sha256.hex(new byte[]{(byte) 0xf0, (byte) 0x9f,
                 (byte) 0x98, (byte) 0x80})), "UTF8 byte identity");
+    }
+
+    /** Independent substring enumeration proves rolling-hash candidates never decide equality. */
+    private static void ngramIndex() throws Exception {
+        rejects(NullPointerException.class, () -> NGrams.prepare(null, 2));
+        rejects(NullPointerException.class, () -> NGrams.prepare("ab", 2, null));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare("ab", 0));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare("ab", 65));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare(
+                "a".repeat(NGramIndex.MAX_SOURCE_UTF16 + 1), 2));
+        var empty = NGrams.prepare("", 3);
+        check(empty.windowCount() == 0 && empty.distinctCount() == 0 && empty.counts().isEmpty(),
+                "empty positional index");
+        check(NGrams.overlap(empty, empty).coefficient() == 1.0d, "empty gram multiset");
+        check(NGrams.overlap(NGrams.prepare("abc", 4), NGrams.prepare("", 4)).union() == 0,
+                "short string overlap");
+        rejects(IllegalArgumentException.class,
+                () -> NGrams.overlap(NGrams.prepare("a", 1), NGrams.prepare("a", 2)));
+        rejects(NullPointerException.class, () -> empty.frequency(null));
+        rejects(NullPointerException.class, () -> empty.positions(null));
+        rejects(NullPointerException.class, () -> empty.forEachPosition(0, null));
+        rejects(IndexOutOfBoundsException.class, () -> empty.gramAt(0));
+        rejects(IllegalArgumentException.class,
+                () -> new NGramIndex.Overlap(2, 1));
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> NGrams.prepare("x".repeat(30_000), 1, () -> {
+            if (checkpoints.incrementAndGet() == 2) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 2, "indexed cancellation inside scan");
+        var dense = NGrams.prepare("a".repeat(70_000), 64);
+        check(dense.distinctCount() == 1 && dense.frequency("a".repeat(64)) == 69_937,
+                "single parent-owned dense posting lane");
+        check(dense.positions("a".repeat(64)).length == 69_937, "dense positional visit");
+
+        for (int trial = 0; trial < 1_000; trial++) {
+            String left = randomText(76), right = randomText(76);
+            int n = 1 + RANDOM.nextInt(12);
+            NGramIndex indexed = NGrams.prepare(left, n);
+            NGramIndex other = NGrams.prepare(right, n);
+            Map<String, List<Integer>> positions = new LinkedHashMap<>();
+            for (int i = 0; i + n <= left.length(); i++) {
+                positions.computeIfAbsent(left.substring(i, i + n), key -> new ArrayList<>()).add(i);
+            }
+            Map<String, Integer> expected = new TreeMap<>();
+            positions.forEach((gram, offsets) -> expected.put(gram, offsets.size()));
+            check(indexed.windowCount() == Math.max(0, left.length() - n + 1), "gram window count");
+            check(indexed.distinctCount() == expected.size(), "gram primitive distinct count");
+            check(indexed.counts().equals(expected) && indexed.counts().equals(NGrams.count(left, n)),
+                    "gram legacy-map parity including unpaired surrogates");
+            check(indexed.gramSize() == n && indexed.frequency("too long to be this gram") == 0,
+                    "gram query length contract");
+            for (int id = 0; id < indexed.distinctCount(); id++) {
+                String gram = indexed.gramAt(id);
+                List<Integer> expectedOffsets = positions.get(gram);
+                int[] expectedArray = expectedOffsets.stream().mapToInt(Integer::intValue).toArray();
+                check(indexed.firstOffset(id) == expectedArray[0] && indexed.frequencyAt(id) == expectedArray.length,
+                        "first source offset and physical frequency");
+                check(Arrays.equals(indexed.positions(gram), expectedArray), "collision-checked gram offsets");
+                List<Integer> visited = new ArrayList<>();
+                indexed.forEachPosition(id, visited::add);
+                check(visited.equals(expectedOffsets), "allocation-free visitor order");
+                int[] detached = indexed.positions(gram);
+                detached[0] = Integer.MIN_VALUE;
+                check(indexed.positions(gram)[0] == expectedArray[0], "gram offsets are detached");
+            }
+            rejects(UnsupportedOperationException.class, () -> indexed.counts().put("not-in-index", 42));
+            Map<String, Integer> rightCounts = new TreeMap<>();
+            for (int at = 0; at + n <= right.length(); at++) {
+                rightCounts.merge(right.substring(at, at + n), 1, Integer::sum);
+            }
+            long intersection = 0;
+            for (var entry : expected.entrySet()) {
+                intersection += Math.min(entry.getValue(), rightCounts.getOrDefault(entry.getKey(), 0));
+            }
+            long union = (long) indexed.windowCount() + other.windowCount() - intersection;
+            NGramIndex.Overlap overlap = NGrams.overlap(indexed, other);
+            check(overlap.intersection() == intersection && overlap.union() == union,
+                    "exact multiset overlap oracle");
+            check(Double.compare(overlap.coefficient(), union == 0 ? 1.0d : intersection / (double) union) == 0,
+                    "overlap coefficient contract");
+            check(NGrams.overlap(other, indexed).equals(overlap), "overlap symmetry");
+        }
     }
 
     private static int distance(String left, String right) {

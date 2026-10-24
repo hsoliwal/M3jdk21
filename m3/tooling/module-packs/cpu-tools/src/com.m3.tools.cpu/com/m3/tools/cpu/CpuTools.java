@@ -8,6 +8,7 @@ import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.frequency.TermFrequency;
 import com.m3.tools.text.index.Bm25Ranker;
+import com.m3.tools.text.ngram.NGramIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
 import com.m3.tools.text.search.ExactSearch;
@@ -436,6 +437,77 @@ public final class CpuTools {
         MultiSearch actual = multiLiteral(source, literals, maxHits, monitor);
         return actual.complete() == expected.complete() && actual.sha256().equals(expected.sha256())
                 && actual.hits().equals(expected.hits());
+    }
+
+    /** Indexed UTF-16 characters, in source-offset order, rather than tokenized words. */
+    public static final int MAX_GRAM_SOURCE_UTF16 = 262_144;
+
+    public static final class GramIndex {
+        private final NGramIndex index;
+        private final String sha256;
+
+        private GramIndex(NGramIndex index, String sha256) {
+            this.index = index;
+            this.sha256 = sha256;
+        }
+        public int gramSize() { return index.gramSize(); }
+        public int windowCount() { return index.windowCount(); }
+        public int distinctCount() { return index.distinctCount(); }
+        public int frequency(String gram) { return index.frequency(gram); }
+        public int[] positions(String gram) { return index.positions(gram); }
+        public Map<String, Integer> counts() { return index.counts(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static GramIndex gramIndex(M3File source, int gramSize) {
+        return gramIndex(source, gramSize, null);
+    }
+
+    /**
+     * Exact source-bound positional n-grams. The receipt commits to the M3File
+     * location, raw bytes, UTF-16 identity, gram size and every output offset.
+     * Rolling hashes are only candidate filters; source identity is not inferred.
+     */
+    public static GramIndex gramIndex(M3File source, int gramSize, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_GRAM_SOURCE_UTF16) {
+            throw new IllegalArgumentException("gram index source UTF-16 budget");
+        }
+        NGramIndex index = NGrams.prepare(source.text(), gramSize, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-gram-index-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length()).number(gramSize)
+                .number(index.windowCount()).number(index.distinctCount());
+        for (int ordinal = 0; ordinal < index.distinctCount(); ordinal++) {
+            progress.checkCancelled();
+            String gram = index.gramAt(ordinal);
+            hash.number(gram.length());
+            for (int unit = 0; unit < gram.length(); unit++) hash.number(gram.charAt(unit));
+            hash.number(index.frequencyAt(ordinal));
+            index.forEachPosition(ordinal, offset -> {
+                progress.checkCancelled();
+                hash.number(offset);
+            });
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new GramIndex(index, hash.finish());
+    }
+
+    /** Fresh computation checks the full positional result and exact file-bound receipt. */
+    public static boolean verifyGramIndex(M3File source, int gramSize, GramIndex expected,
+                                          ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        GramIndex actual = gramIndex(source, gramSize, monitor);
+        if (!actual.sha256().equals(expected.sha256()) || actual.windowCount() != expected.windowCount()
+                || actual.distinctCount() != expected.distinctCount()) return false;
+        for (String gram : expected.counts().keySet()) {
+            if (actual.frequency(gram) != expected.frequency(gram)
+                    || !Arrays.equals(actual.positions(gram), expected.positions(gram))) return false;
+        }
+        return true;
     }
 
     /** Signature inputs use the existing word breaker; this tighter cap bounds eager tokenization. */

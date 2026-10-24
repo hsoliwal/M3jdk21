@@ -196,6 +196,26 @@ public final class M3CpuToolsTest {
         check(CpuTools.verifyMultiLiteral(source, patterns, 3, many, null), "multi-literal replay");
         check(!CpuTools.verifyMultiLiteral(source, patterns, 4, many, null), "multi-literal cap binding");
         check(!CpuTools.verifyMultiLiteral(changed, patterns, 3, many, null), "multi-literal file binding");
+        var grams = CpuTools.gramIndex(source, 2);
+        check(grams.sha256().matches("[0-9a-f]{64}") && grams.gramSize() == 2
+                && grams.windowCount() == source.length() - 1, "source-bound indexed gram receipt");
+        check(Arrays.equals(grams.positions("ab"), new int[]{0, 2})
+                && Arrays.equals(grams.positions("ba"), new int[]{1, 3})
+                && Arrays.equals(grams.positions("\ud83d\ude42"), new int[]{5})
+                && grams.frequency("ab") == 2, "physical UTF-16 gram coordinates");
+        check(grams.counts().equals(com.m3.tools.text.ngram.NGrams.count(source.text(), 2)),
+                "gram source oracle parity");
+        int[] mutableGrams = grams.positions("ab");
+        mutableGrams[0] = 999;
+        check(grams.positions("ab")[0] == 0, "gram primitive positions detached");
+        check(CpuTools.verifyGramIndex(source, 2, grams, null), "exact gram replay");
+        check(!CpuTools.verifyGramIndex(source, 3, grams, null), "gram size receipt binding");
+        check(!CpuTools.verifyGramIndex(changed, 2, grams, null), "gram file byte binding");
+        check(!CpuTools.verifyGramIndex(M3File.load(copied), 2, grams, null),
+                "gram file URI binding for identical bytes");
+        expect(IllegalArgumentException.class, () -> CpuTools.gramIndex(source, 0));
+        expect(IllegalArgumentException.class, () -> CpuTools.gramIndex(source, 65));
+        expect(NullPointerException.class, () -> CpuTools.gramIndex(null, 2));
         var signal = CpuTools.signature(source, 16);
         check(signal.sha256().matches("[0-9a-f]{64}"), "signature receipt format");
         check(CpuTools.verifySignature(source, 16, signal, null), "signature exact-lane replay");
@@ -232,6 +252,7 @@ public final class M3CpuToolsTest {
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
         expect(CancellationException.class, () -> CpuTools.multiLiteral(source, patterns, 2, cancelled));
         expect(CancellationException.class, () -> CpuTools.signature(source, 16, cancelled));
+        expect(CancellationException.class, () -> CpuTools.gramIndex(source, 2, cancelled));
         expect(CancellationException.class, () -> CpuTools.rank(rankedSources, List.of("ababa"), 1, cancelled));
         cancelled.cancelled = false;
         cancelled.cancelAfterWork = true;
