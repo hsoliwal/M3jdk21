@@ -460,17 +460,17 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/pr/m3-slot-entry-cache-20261024-53f1763c' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    env:
-      M3_PROOF_ROOT: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}
-      M3_SOURCE_ROOT: ${{ github.workspace }}/m3-slot-original-source
-      TMPDIR: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      TEMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      TMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      XDG_CACHE_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/cache
-      XDG_CONFIG_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/config
-      XDG_DATA_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/data
     steps:
       - name: Reserve storage and select existing toolchains
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-slot-original-source
+          TMPDIR: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/data
         id: slot-preflight
         shell: bash
         run: |
@@ -507,6 +507,14 @@ jobs:
       - name: Supervise exact sparse checkout, canonical recipe and original Java JNI qualification
         shell: bash
         env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-slot-original-source
+          TMPDIR: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/data
           M3_JAVA_HOME: ${{ steps.slot-preflight.outputs.java }}
           M3_PYTHON: ${{ steps.slot-preflight.outputs.python }}
           M3_PYTHON_BIN: ${{ steps.slot-preflight.outputs.python-bin }}
@@ -704,6 +712,15 @@ jobs:
               print("Final aggregate bytes before artifact upload:",gate(496*1024**2))
           PY
       - name: Retain bounded original collection and native receipts
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-slot-original-source
+          TMPDIR: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-slot-original-${{ github.run_id }}-${{ github.run_attempt }}/data
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

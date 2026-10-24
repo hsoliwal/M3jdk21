@@ -1,8 +1,8 @@
 {
-  "schema": "M3_SLOT_ENTRY_CACHE_RECEIVING_CANDIDATE_V1",
-  "status": "SOURCE_CANDIDATE_GUARDED_QUALIFICATION_PENDING",
+  "schema": "M3_SLOT_ENTRY_CACHE_RECEIVING_CANDIDATE_V2",
+  "status": "CONTEXT_CORRECTED_SOURCE_CANDIDATE_GUARDED_QUALIFICATION_PENDING",
   "canonicalRepository": "hsoliwal/com.synexia",
-  "canonicalCommit": "a49faea168d3cba042017909c1f79b50aab800cb",
+  "canonicalCommit": "068e24610c312f99e84295ad2f086b3f00271428",
   "canonicalPullRequest": "https://github.com/hsoliwal/com.synexia/pull/13216",
   "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/",
   "receivingBase": "53f1763c80b1b9f260572aca247eaa1fcfa9112b",
@@ -28,7 +28,7 @@
   "receivingMetadataRecipe": {
     "name": "com.synexia.m3.SlotReceivingJavaJni20261024",
     "crate": "m3-slot-receiving-java-jni-20261024",
-    "manifest": "519e31c5b2f22476307d9b7e0e35334f897e2565",
+    "manifest": "1e1e592750cb445cdb7a46d840193c33d9d6c416",
     "expectedSDK": [
       6,
       0,
@@ -36,14 +36,20 @@
       0
     ],
     "actualSDK": "NOT_RUN",
-    "firstStageRequired": true
+    "firstStageRequired": true,
+    "sourceInputsV2": "33dbb98d27a33335fba906ec344b7483de2d6fb7"
   },
   "sourceChecks": {
     "verifierReportCases": 22,
-    "workflowControls": 75,
+    "workflowControls": 83,
     "provenanceNewRows": 38,
     "existingNoticeReuseRows": 2,
-    "workflowSelectors": 384
+    "workflowSelectors": 384,
+    "correctionProvenance": {
+      "new": 7,
+      "existing": 4,
+      "proof": "47234ff65be50c11e2c545bb09352b4d5d115473"
+    }
   },
   "policy": {
     "id": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
@@ -117,8 +123,8 @@
     },
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
-      "git_blob": "30356d79ec49f3ecbb2839a4e8b06e8ee5ddf586",
-      "bytes": 60424,
+      "git_blob": "0ba75155c57a5c26f43f806be92666349471539f",
+      "bytes": 62147,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
     {
@@ -129,7 +135,7 @@
     },
     {
       "path": "m3/migration/original-provider-20261017/source-binding.json",
-      "git_blob": "cb3090fd0f34dcbda07d7989790aaee690bc17bd",
+      "git_blob": "aa185c5b6aa17f0f75270ad867e0c0d577c6386d",
       "bytes": 3301,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
@@ -183,8 +189,8 @@
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/04-original-provider.yml",
-      "git_blob": "30356d79ec49f3ecbb2839a4e8b06e8ee5ddf586",
-      "bytes": 60424,
+      "git_blob": "0ba75155c57a5c26f43f806be92666349471539f",
+      "bytes": 62147,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
@@ -195,13 +201,13 @@
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/06-source-binding.json",
-      "git_blob": "cb3090fd0f34dcbda07d7989790aaee690bc17bd",
+      "git_blob": "aa185c5b6aa17f0f75270ad867e0c0d577c6386d",
       "bytes": 3301,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/manifest.tsv",
-      "git_blob": "519e31c5b2f22476307d9b7e0e35334f897e2565",
+      "git_blob": "1e1e592750cb445cdb7a46d840193c33d9d6c416",
       "bytes": 1450,
       "role": "CANONICAL_SDK_MIRROR"
     },
@@ -282,6 +288,12 @@
       "git_blob": "ac56ddce78abb46ed16782fab6bf8cffcfa150ed",
       "bytes": 4254,
       "role": "PROVENANCE"
+    },
+    {
+      "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/SOURCE_INPUTS_V2.json",
+      "git_blob": "33dbb98d27a33335fba906ec344b7483de2d6fb7",
+      "bytes": 23996,
+      "role": "CANONICAL_SDK_MIRROR"
     }
   ],
   "selfExcluded": true,
@@ -290,5 +302,20 @@
   "phaseAdvanced": false,
   "formalReview": "NO_VERDICT",
   "remaining": "Actual receiving metadata SDK/Java/JNI proof, other startup/platform/concurrency/descriptor/review gates; full collection superset and compiled regex/language-rule work",
-  "fullGoal": "ACTIVE_UNFINISHED"
+  "fullGoal": "ACTIVE_UNFINISHED",
+  "correctionParent": "2750f98941ce800e86895daff9656eaa44e75a21",
+  "priorReceiverRecordGit": "d5158ac346e27a3eedc6989b71fb5fd04d761140",
+  "workflowContextCorrection": {
+    "firstRun": 40091721939,
+    "firstRunHead": "2750f98941ce800e86895daff9656eaa44e75a21",
+    "firstRunStatus": "FAILED_WORKFLOW_VALIDATION_BEFORE_JOBS",
+    "firstRunJobs": 0,
+    "workflow": "0ba75155c57a5c26f43f806be92666349471539f",
+    "workflowSHA256": "4abfc807132230f2f810ea69e349bed6f2d0743fa7484cc818c75ffb7cde2e50",
+    "binding": "aa185c5b6aa17f0f75270ad867e0c0d577c6386d",
+    "correction": "Same eight routing env values moved to each step; four Python bodies unchanged",
+    "actualGitHubValidation": "PENDING_NEW_COMMIT",
+    "JavaJNIExecutions": 0,
+    "formalReview": "NO_VERDICT"
+  }
 }
