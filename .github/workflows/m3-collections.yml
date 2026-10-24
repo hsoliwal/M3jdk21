@@ -47,7 +47,7 @@ jobs:
   historical-lane-recipe:
     name: Historical lane recipe with real SDK
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -60,6 +60,17 @@ jobs:
           tar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+      - name: Build source-pinned OpenRewrite Java 21 donor dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/vendor/third_party/rewrite-java-21/verify_source.py
+          mvn --batch-mode --no-transfer-progress \
+            --file m3/vendor/third_party/pom.xml \
+            --projects rewrite-java-21 --also-make \
+            -DskipTests install
+          python3 m3/vendor/third_party/rewrite-java-21/verify_source.py \
+            m3/vendor/third_party/rewrite-java-21/target/rewrite-java-21-8.17.1-m3-source-1.jar
       - name: Verify frozen lane recipe and fixed point
         run: mvn --batch-mode --no-transfer-progress --file m3/collections/recipe/pom.xml verify
       - name: Retain historical recipe reports

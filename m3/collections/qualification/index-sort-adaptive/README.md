@@ -105,3 +105,41 @@ The JDK 21 fixture passed explicit arrays module build,
 `com.m3.arrays,java.base`. Full owning M3JDK21 Maven/JUnit/JNI and
 OpenRewrite SDK execution are still outstanding; this source-receipt pass
 does not assert their success.
+
+## Historical collection recipe donor-source bootstrap (2026-10-24)
+
+Actual current-branch predecessor workflow run 39931027347 failed its
+"Historical lane recipe with real SDK" job before Maven/OpenRewrite executed,
+because the original collections recipe POM references the first-party
+source-versioned donor artifact `org.openrewrite:rewrite-java-21:8.17.1-m3-source-1`.
+Maven Central does not host that project-specific version. The repository
+already owns the original unchanged published sources under
+`m3/vendor/third_party/rewrite-java-21` and aggregates them with
+`m3/vendor/third_party/pom.xml`.
+
+Canonical source-sealed Synexia recipe (PR #13224) commit:
+`3579b6591d0487a2ca4ba7be98eec8c9e168ad00`.
+Original product workflow Git blob:
+`7bcc8d43df65cc5b62638bba45514bb7bf469dc1`;
+exact accepted replacement:
+`8f40e0afaf1eaeaa4d02db8809516d55f350ae4b`.
+The existing `M3HashPinnedTextSnapshotRecipe` owns this YAML candidate and
+its predecessor/postimage SHA-256; no recipe source belongs in this product.
+
+Only the original historical recipe job changes: its limit is raised from 20
+to 45 minutes to permit a real source build, and a step immediately before
+the original recipe verification performs pinned `verify_source.py`,
+`mvn -f m3/vendor/third_party/pom.xml --projects rewrite-java-21 --also-make
+-DskipTests install`, then `verify_source.py` on the built JAR.
+The original `m3/collections/recipe/pom.xml verify` command remains in place.
+Both existing installed-collections and all-JNI jobs are unchanged.
+No public runtime type, Java collection owner, JNI export, Maven dependency
+version or source provenance is altered.
+
+The canonical Synexia crate includes a strict one-target before/after text
+recipe, Python exact-diff and drift/fixed-point refusal oracle, and JUnit
+OpenRewrite Text SDK source replay for actual execution. Building the vendored
+donor may reveal further unqualified upstream module problems. This change
+does **not** claim successful Maven reactor, OpenRewrite, JNI/JUnit or
+installed JDK validation until the exact-head Actions job passes. Keep the
+receiver DRAFT/HOLD; do not bypass dependency source or source-manifest gates.
