@@ -51,3 +51,38 @@ The new whole-module-java21 job is dependent on the original source-sealed-java2
 The existing historical full collection/JNI gate remains unchanged and FAILED on this source revision: its compiler omitted com.m3.arrays from the Java module path. Its historical source manifest, packaging and native parity checks are not bypassed or treated as passed. This additional module-source proof is not a source-built JDK image, JUnit/Maven reactor, JNI parity, native library, performance, or release-qualification replacement.
 
 Before publication, this script passed Bash syntax validation and the complete modular compile/execute sequence on a disposable two-module Java21 fixture. The full real M3JDK21 source execution on GitHub is a separate pending gate. This PR stays draft/HOLD.
+
+## Full Java/JNI verifier — original named arrays dependency, 2026-10-24
+
+Original full collection/JNI run 39931027347 failed at javac with
+`module not found: com.m3.arrays`. The older verifier also assumed java.base
+was the only possible runtime dependency in jdeps and left the arrays module
+out of its test/JNI classpaths. The actual product module descriptor explicitly
+requires com.m3.arrays; that contract must NOT be removed.
+
+Canonical Synexia source-sealed text recipe: PR #13224, commit
+`c04275f1ea19bffbe3f513996769308464847241`,
+`com.synexia.m3.Jdk21FullCollectionJniModuleClosure20261024`.
+The reused M3HashPinnedTextSnapshotRecipe owns one exact Python verifier target.
+Product preimage blob `cf5e385420cae668fa0e68f769545f7ca6b16e03`;
+exact emitted postimage blob `dd38848e22829223838011f848b2741999571e7f`.
+
+The corrected existing verifier compiles and installs original m3/arrays from
+its source POM (after pinned donor/JUnit closure), checks its real Java module
+descriptor and name, supplies its jar as a named javac module and test/JNI
+classpath dependency, and accepts only the exact jdeps set
+`{java.base,com.m3.arrays}`. The proof receipt adds original arrays module
+source hashes, descriptor hash, and compiled artifact digest.
+
+Native library inventory, C17/UBSan, JNI headers, required-native JUnit
+non-skipping and parity tests, jar legal/provenance bytes, and all original
+explicit native/missing-native contract checks remain in place. No Java runtime
+collection implementation, JNI export, public API or Synexia runtime
+dependency changes in this receiving pass.
+
+Execution truth: canonical Python AST/digest/refusal tests and real Text
+OpenRewrite SDK replay are added in Synexia; the full Maven/Java/JNI workflow
+and both new recipe tests must still RUN and PASS on their current heads.
+The frozen donation source manifest and source-versioned OpenRewrite vendor
+dependency need independent qualified successors, not ignored failures.
+Remain DRAFT/HOLD until full JDK, JNI, jtreg/JCK and installed-image gates pass.
