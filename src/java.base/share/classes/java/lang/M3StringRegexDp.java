@@ -7,6 +7,7 @@
 package java.lang;
 
 import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReferenceArray;
@@ -34,12 +35,13 @@ final class M3StringRegexDp {
     private static final long MAX_DP_CELLS = 1_000_000L;
     private static final int MAX_BIT_ATOMS = 32;
     private static final int PLAN_SLOTS = 64;
-    private static final int EFFECT_SLOTS = 256;
+    private static final int EFFECT_SLOTS = 128;
     private static final int MIN_EFFECT_UNITS = 16;
     private static final int MIN_NATIVE_UNITS = 256;
     private static final int MAX_TREE_DEPTH = 64;
     // Optional allocation is lazy: an allocation failure does not poison class initialization.
-    private static volatile Tables tables;
+    private static volatile SoftReference<Tables> caches;
+    private static volatile boolean preparationSuspended;
     private static volatile boolean nativeUnavailable;
 
     private M3StringRegexDp() { }
@@ -51,6 +53,7 @@ final class M3StringRegexDp {
         int m = source.length();
         if (m > MAX_TEXT_UNITS) return UNKNOWN;
         try {
+            if (!heapAllowsPreparation()) return UNKNOWN;
             Tables cache = tables();
             Plan plan = prepare(regex, cache);
             if (plan == null || ((long) m + 1) * (plan.atoms.length + 1) > MAX_DP_CELLS) {
@@ -62,19 +65,54 @@ final class M3StringRegexDp {
             return state == UNKNOWN ? UNKNOWN
                     : (state & (1L << plan.atoms.length)) != 0 ? MATCH : NO_MATCH;
         } catch (OutOfMemoryError unavailable) {
+            preparationSuspended = true;
+            releaseCachedMetadata();
             // Derived-state allocation is optional; the ordinary JDK path remains authoritative.
             return UNKNOWN;
         }
     }
 
     private static Tables tables() {
-        Tables current = tables;
+        SoftReference<Tables> reference = caches;
+        Tables current = reference == null ? null : reference.get();
         if (current != null) return current;
         synchronized (M3StringRegexDp.class) {
-            current = tables;
-            if (current == null) tables = current = new Tables();
+            reference = caches;
+            current = reference == null ? null : reference.get();
+            if (current == null) {
+                current = new Tables();
+                caches = new SoftReference<>(current);
+            }
         }
         return current;
+    }
+
+    /** Recomputable metadata only; never clears or closes canonical text owners. */
+    private static void releaseCachedMetadata() {
+        SoftReference<Tables> reference = caches;
+        if (reference != null) reference.clear();
+    }
+
+    /** Advisory heap snapshot, not a reservation or an OS/native-memory measure. */
+    private static boolean heapAllowsPreparation() {
+        Runtime runtime = Runtime.getRuntime();
+        boolean allowed = hasHeapHeadroom(runtime.maxMemory(), runtime.totalMemory(),
+                runtime.freeMemory(), preparationSuspended);
+        preparationSuspended = !allowed;
+        if (!allowed) releaseCachedMetadata();
+        return allowed;
+    }
+
+    /** Overflow-safe normalization and hysteresis; no caller budget or forced GC. */
+    private static boolean hasHeapHeadroom(long maximum, long total, long free,
+            boolean suspended) {
+        if (maximum <= 0) return false;
+        long committed = Math.max(0, Math.min(maximum, total));
+        long unused = Math.max(0, Math.min(committed, free));
+        long headroom = maximum - (committed - unused);
+        long reserve = Math.max(suspended ? 1L << 20 : 1L << 19,
+                maximum >>> (suspended ? 4 : 5));
+        return headroom >= reserve;
     }
 
     private static Plan prepare(String regex, Tables cache) {

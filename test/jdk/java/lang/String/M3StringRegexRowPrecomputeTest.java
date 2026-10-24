@@ -37,6 +37,15 @@ public class M3StringRegexRowPrecomputeTest {
 
     private static Object canonical(String text) throws Exception {
         if (stringM3 != null) {
+            if (text.isEmpty()) {
+                // Empty public Strings deliberately retain no admitted native payload.
+                // Exercise the actual canonical zero-length owner without dropping the row.
+                Method empty = m3Class.getDeclaredMethod("empty");
+                empty.setAccessible(true);
+                Object existing = empty.invoke(null);
+                check(existing != null);
+                return existing;
+            }
             String s = new String(text.toCharArray());
             s.length();
             Object existing = stringM3.get(s);
