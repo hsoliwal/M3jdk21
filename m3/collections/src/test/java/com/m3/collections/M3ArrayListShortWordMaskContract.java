@@ -40,6 +40,11 @@ public final class M3ArrayListShortWordMaskContract {
             case 8 -> ordinal % 3 == 0;
             case 9 -> ordinal < n / 2;
             case 10 -> ordinal >= n / 2;
+            case 11 -> ordinal == 127;
+            case 12 -> ordinal == 128;
+            case 13 -> ordinal == 65;
+            case 14 -> (ordinal & 63) == 0;
+            case 15 -> ordinal == n / 2;
             default -> ordinal == n / 2;
         };
     }
@@ -77,7 +82,7 @@ public final class M3ArrayListShortWordMaskContract {
     }
 
     private static void callbackFailure() {
-        for (int n : new int[] {1, 31, 63, 64, 65, 129}) {
+        for (int n : new int[] {1, 31, 63, 64, 65, 96, 127, 128, 129, 256}) {
             Object[] original = input(n);
             M3ArrayList<Object> actual = new M3ArrayList<>(Arrays.asList(original));
             IllegalStateException marker = new IllegalStateException("callback marker");
@@ -98,7 +103,7 @@ public final class M3ArrayListShortWordMaskContract {
     }
 
     private static void structuralMutation() {
-        for (int n : new int[] {1, 63, 64, 65}) {
+        for (int n : new int[] {1, 63, 64, 65, 127, 128, 129}) {
             M3ArrayList<Object> actual = new M3ArrayList<>(Arrays.asList(input(n)));
             Object appended = new Object();
             boolean[] once = {false};
@@ -117,10 +122,14 @@ public final class M3ArrayListShortWordMaskContract {
 
     public static void main(String[] args) {
         require(args.length == 0, "unexpected arguments");
-        for (int n = 0; n <= 96; n++) for (int p = 0; p < 12; p++) verifyCase(n, p);
+        // Dense 0..129 sweep catches both 64/65 and 128/129 transitions.
+        for (int n = 0; n <= 129; n++) for (int p = 0; p < 16; p++) verifyCase(n, p);
+        for (int n : new int[] {191, 192, 255, 256, 257, 511, 512, 1024}) {
+            for (int p = 0; p < 16; p++) verifyCase(n, p);
+        }
         Random seeded = new Random(0x4d33534d414c4cL);
-        for (int trial = 0; trial < 400; trial++)
-            verifyCase(seeded.nextInt(514), seeded.nextInt(12));
+        for (int trial = 0; trial < 1000; trial++)
+            verifyCase(seeded.nextInt(1025), seeded.nextInt(16));
         callbackFailure();
         structuralMutation();
         System.out.println("PASS M3ArrayListShortWordMaskContract checks=" + checks);
