@@ -75,7 +75,9 @@ def main() -> int:
                  ("M3MaskViewportKernel.java", "M3MaskViewportNative.java")],
                *[root / "src/test/java/com/m3/collections" / name for name in
                  ("M3MaskViewportKernelContract.java", "M3MaskViewportPageContract.java")],
-               q / "CMakeLists.txt", q / "verify.sh", q / "verify.py"]
+               q / "CMakeLists.txt", q / "verify.sh", q / "verify.py",
+               q / "fixtures/M3FrameRegionContract.txt",
+               q / "fixtures/M3NativePageDirectContract.txt"]
     for path in sources:
         no_symlinks(path)
         if not path.is_file():
@@ -115,6 +117,7 @@ def main() -> int:
     proof = Proof(output)
     receipt: dict = {"schema": "M3_VIEWPORT_INSTALLED_NATIVE_V1", "status": "RUNNING",
                      "source_before": before, "java_page_wired": False,
+                     "java_frame_wired": False, "frame_test_only": True,
                      "full_jdk_image": False, "widget_integration": False}
     try:
         proof.advance("lint")
@@ -134,6 +137,58 @@ def main() -> int:
         proof.run("java-compile", [str(javac), "--release", "21", "-encoding", "UTF-8",
                   "-Xlint:all", "-Werror", "-h", str(headers), "-d", str(classes),
                   *map(str, sources[1:5])])
+        # Exact original-owner Java admission: before receiving, compile the
+        # independent test-only declaration; after receiving, compile the
+        # already-qualified product Java source with no duplicate method.
+        java_source_hash = digest(sources[2])
+        admitted_before = "36158dcb03adc764bddfab16172cb864d926518a304704fcea390040a7cf4069"
+        # The merged product master changes only the license/header text; its
+        # package-private method descriptor and javac-h output match the old owner.
+        admitted_master = "099802e72b48be7f489e871b77b50f70bd9e7f2b6621ea688fa5fb929f7e47bb"
+        admitted_after = "8a7b47da2819923f7e64d16a9d9827f92a9ee962a9512a1fe369a75665b60957"
+        admitted_page = "b488da25aa3175ffa3522782867cca231056a60ca32fe3c198dcf3e60bc5873a"
+        if java_source_hash not in (admitted_before, admitted_master, admitted_after, admitted_page):
+            raise ValueError("native Java owner source drift")
+        product_frame_wired = java_source_hash in (admitted_after, admitted_page)
+        product_page_wired = java_source_hash == admitted_page
+        receipt.update(java_frame_wired=product_frame_wired,
+                       java_page_wired=product_page_wired,
+                       frame_test_only=not product_frame_wired)
+        frame_package = output / "frame-src/com/m3/collections"
+        frame_package.mkdir(parents=True)
+        frame_declaration = frame_package / "M3MaskViewportNative.java"
+        original_native = sources[2].read_text()
+        if product_frame_wired:
+            frame_declaration.write_text(original_native)
+        else:
+            close = "\n}\n"
+            if original_native.count(close) != 1:
+                raise ValueError("native proof declaration anchor drift")
+            new_method = ("\n    static native int projectFramePage(int[] offsets, int[] states, "
+                          "int first, int length, int required, int forbidden, "
+                          "int skip, int max, int[] rows, int rowOffset, "
+                          "int[] slots, int slotOffset, int[] words, int wordOffset);\n")
+            frame_declaration.write_text(original_native.replace(close, new_method + close))
+        # Opaque text fixture becomes a Java source only inside the isolated proof image.
+        frame_contract = frame_package / "M3FrameRegionContract.java"
+        frame_contract.write_bytes((q / "fixtures/M3FrameRegionContract.txt").read_bytes())
+        # After the page Java-LST receipt, use the *real* package-private
+        # projectPage declaration with the original Java kernel as the oracle.
+        # The opaque page fixture never enters the shipped product classes.
+        frame_java_inputs = [str(frame_declaration), str(frame_contract)]
+        if product_page_wired:
+            page_contract = frame_package / "M3NativePageDirectContract.java"
+            page_contract.write_bytes((q / "fixtures/M3NativePageDirectContract.txt").read_bytes())
+            frame_java_inputs.extend((str(sources[1]), str(page_contract)))
+        frame_classes, frame_headers = output / "frame-classes", output / "frame-headers"
+        frame_classes.mkdir(); frame_headers.mkdir()
+        proof.run("frame-java-compile", [str(javac), "--release", "21", "-encoding", "UTF-8",
+                  "-Xlint:all", "-Werror", "-h", str(frame_headers), "-d", str(frame_classes),
+                  *frame_java_inputs], clean_stderr=True)
+        frame_header = frame_headers / "com_m3_collections_M3MaskViewportNative.h"
+        if ("Java_com_m3_collections_M3MaskViewportNative_projectFramePage"
+                not in frame_header.read_text()):
+            raise RuntimeError("frame JNI header missing declared native entrypoint")
         build, install = output / "native-build", output / "install"
         proof.run("native-configure", ["cmake", "-S", str(q), "-B", str(build),
                   "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_C_COMPILER=" + str(Path(shutil.which(args.cc)).resolve()),
@@ -147,7 +202,7 @@ def main() -> int:
         exports = proof.run("native-exports", ["nm", "-D", "--defined-only", str(library)])
         names = {line.split()[-1] for line in exports.splitlines() if line.strip()}
         expected = {"Java_com_m3_collections_M3MaskViewportNative_" + method
-                    for method in ("project", "projectPage")}
+                    for method in ("project", "projectPage", "projectFramePage")}
         if names != expected:
             raise RuntimeError("unexpected native exports")
         dynamic = proof.run("native-dependencies", ["readelf", "-d", str(library)])
@@ -188,6 +243,48 @@ def main() -> int:
                 key = "jni-" + name
                 if observations.setdefault(key, result) != result:
                     raise RuntimeError("JNI artifact/collector/mode mismatch")
+        # Independently exercise the third export against its real JVM-side
+        # reference. Run from the test-only class directory, never product classes.
+        frame_observation: str | None = None
+        for label, binary, interpreted in (
+                ("installed", library, False), ("installed", library, True),
+                ("relocated", moved, False), ("ubsan", checked, False),
+                ("ubsan", checked, True)):
+            mode = "int" if interpreted else "mixed"
+            frame_result = proof.run("frame-" + label + "-" + mode,
+                [str(java), "-ea", "-Xcheck:jni", "-Xmx64m", "-XX:+UseSerialGC",
+                 *(["-Xint"] if interpreted else []), "-cp", str(frame_classes),
+                 "com.m3.collections.M3FrameRegionContract", str(binary)], clean_stderr=True)
+            if not frame_result.startswith("M3_FRAME_REGION_PASS checks=35080 digest=ed73ef29740c1e87"):
+                raise RuntimeError("frame JNI reference oracle disagrees")
+            if frame_observation is None:
+                frame_observation = frame_result
+            elif frame_observation != frame_result:
+                raise RuntimeError("frame installed/relocated/ubsan JVM mismatch")
+        observations["jni-M3FrameRegionContract"] = frame_observation
+        if product_page_wired:
+            page_observation: str | None = None
+            for label, binary, gc, interpreted in (
+                    ("installed", library, "Serial", False),
+                    ("installed", library, "Serial", True),
+                    ("installed", library, "G1", False),
+                    ("relocated", moved, "Serial", False),
+                    ("ubsan", checked, "Serial", False),
+                    ("ubsan", checked, "Serial", True)):
+                mode = "int" if interpreted else "mixed"
+                page_result = proof.run("page-direct-" + label + "-" + gc.lower() + "-" + mode,
+                    [str(java), "-ea", "-Xcheck:jni", "-Xmx64m", "-XX:+Use" + gc + "GC",
+                     *(["-Xint"] if interpreted else []), "-cp", str(frame_classes),
+                     "com.m3.collections.M3NativePageDirectContract", str(binary)],
+                    clean_stderr=True)
+                if page_observation is None:
+                    page_observation = page_result
+                elif page_observation != page_result:
+                    raise RuntimeError("page direct installed/relocated/ubsan JVM mismatch")
+            if page_observation is None or not page_observation.startswith(
+                    "M3_NATIVE_PAGE_DIRECT_PASS checks=123474 digest=1102f3656342aadc"):
+                raise RuntimeError("direct page JNI reference oracle disagrees")
+            observations["jni-M3NativePageDirectContract"] = page_observation
         after = {str(path.relative_to(root)): digest(path) for path in sources}
         if after != before:
             raise RuntimeError("source changed during qualification")
