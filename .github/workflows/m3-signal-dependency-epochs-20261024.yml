@@ -5,8 +5,10 @@ on:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SourceSignalQualityFactory.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3SignalDependencyEpochs*.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3SignalQualitySchema*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SourceSignalQualityFactory*.java'
       - 'm3/collections/qualification/signal-dependency-epochs-20261024/**'
       - '.github/workflows/m3-signal-dependency-epochs-20261024.yml'
   workflow_dispatch:
@@ -34,12 +36,16 @@ jobs:
             m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java \
+            m3/collections/src/main/java/com/m3/collections/M3SourceSignalQualityFactory.java \
             m3/collections/src/test/java/com/m3/collections/M3SignalDependencyEpochsSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalQualitySchemaSelfTest.java
+            m3/collections/src/test/java/com/m3/collections/M3SignalQualitySchemaSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3SourceSignalQualityFactorySelfTest.java
           java -Xss256k -cp "$out/classes" com.m3.collections.M3SignalDependencyEpochsSelfTest
           java -Xint -cp "$out/classes" com.m3.collections.M3SignalDependencyEpochsSelfTest
           java -cp "$out/classes" com.m3.collections.M3SignalQualitySchemaSelfTest
           java -Xint -cp "$out/classes" com.m3.collections.M3SignalQualitySchemaSelfTest
+          java -cp "$out/classes" com.m3.collections.M3SourceSignalQualityFactorySelfTest
+          java -Xint -cp "$out/classes" com.m3.collections.M3SourceSignalQualityFactorySelfTest
   original-source-junit:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
@@ -67,4 +73,4 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/collections/pom.xml \
-            -Dtest=M3SignalDependencyEpochsTest,M3SignalQualitySchemaTest test
+            -Dtest=M3SignalDependencyEpochsTest,M3SignalQualitySchemaTest,M3SourceSignalQualityFactoryTest test
