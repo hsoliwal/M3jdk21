@@ -89,11 +89,26 @@ public final class M3EvictingQueueCanonicalContractProbe {
                 "ring ordering after bounded growth and wrap differed");
         require(actual.remainingCapacity() == limit - expected.size(),
                 "large logical limit was changed by physical growth");
-        Queue<?> recovered = (Queue<?>) deserialize(serialize(actual));
+        @SuppressWarnings("unchecked")
+        Queue<Integer> recovered = (Queue<Integer>) deserialize(serialize(actual));
         require(recovered.getClass() == M3EvictingQueue.class,
                 "bounded queue serialization changed binary identity");
         require(Arrays.equals(recovered.toArray(), expected.toArray()),
                 "bounded queue serialized payload differed");
+        // The wire image uses count+1 slots, not the new 16-slot constructor.
+        // Force repeated growth after readObject() and verify FIFO preservation.
+        for (int index = 521; index < 2048; index++) {
+            recovered.add(index);
+            expected.addLast(index);
+        }
+        require(Arrays.equals(recovered.toArray(), expected.toArray()),
+                "serialized ring growth changed FIFO order");
+        while (!expected.isEmpty()) {
+            require(recovered.remove().equals(expected.removeFirst()),
+                    "serialized ring growth/drain differed");
+        }
+        require(recovered.isEmpty(), "serialized ring did not drain to empty");
+        System.out.println("M3_EVICTING_SERIALIZED_GROWTH_PASS");
         System.out.println("M3_EVICTING_LAZY_INITIAL_STORAGE_PASS");
     }
 
