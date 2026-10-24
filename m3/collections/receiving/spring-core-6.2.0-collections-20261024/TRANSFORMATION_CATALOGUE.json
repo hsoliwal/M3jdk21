@@ -1,0 +1,9 @@
+{
+  "schema": "m3.collections.transformation-catalogue.v1",
+  "problemCategory": "iterator storage",
+  "invariant": "iteration order, duplicate refusal and lock behaviour of CompositeIterator unchanged (oracle against the 6.2.0 preimage; Spring v6.2.0 CompositeIteratorTests)",
+  "selected": "registered iterators frozen into an array on first use (array storage)",
+  "donor": "hsoliwal/spring-framework m3/array-storage-20261019",
+  "proof": "CompositeIteratorArrayStorageTests 3/3, contract tests, upstream CompositeIteratorTests 5/5",
+  "next": "none in this slice"
+}
