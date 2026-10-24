@@ -119,13 +119,14 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
 
     private int expandedLength(int oldLength) {
         long jump = oldLength < 64 ? (long) oldLength + 2 : oldLength / 2L;
-        long target = oldLength + jump;
+        long target = Math.min(oldLength + jump, (long) maxSize + 1);
         if (target <= ARRAY_LIMIT) return (int) target;
         long minimum = (long) oldLength + 1;
         if (minimum > Integer.MAX_VALUE) {
             throw new IllegalStateException("Sorry, deque too big");
         }
-        return minimum > ARRAY_LIMIT ? Integer.MAX_VALUE : ARRAY_LIMIT;
+        return (int) Math.min(minimum > ARRAY_LIMIT ? Integer.MAX_VALUE : ARRAY_LIMIT,
+                (long) maxSize + 1);
     }
 
     /** Array growth preserves physical ring coordinates and moves only the wrapped first leg. */
