@@ -65,7 +65,7 @@ public final class M3StringRegexEffectsTest {
                     Field plans = cache.getClass().getDeclaredField("plans"); plans.setAccessible(true);
                     Field effects = cache.getClass().getDeclaredField("effects"); effects.setAccessible(true);
                     check(((AtomicReferenceArray<?>) plans.get(cache)).length() == 64, "bounded plan slots");
-                    check(((AtomicReferenceArray<?>) effects.get(cache)).length() == 128, "bounded effect slots");
+                    check(((AtomicReferenceArray<?>) effects.get(cache)).length() == 256, "bounded effect slots");
                 }
                 ((java.lang.ref.Reference<?>) root).clear();
             }
