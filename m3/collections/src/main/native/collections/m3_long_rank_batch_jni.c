@@ -2,6 +2,33 @@
 #include <jni.h>
 #include <stddef.h>
 #include <limits.h>
+#include <stdint.h>
+
+/*
+ * LeetCode 34/35 (two insertion boundaries) + LeetCode 88 (merge of sorted
+ * streams), adapted independently to primitive JNI batch search.
+ * A monotone query lane admits a merge-style scan O(n + q) instead of
+ * q separate O(log n) bisections. The adaptive cost gate retains binary
+ * search when scanning the owner would be more expensive. No Java array,
+ * JNI export, callback, ownership, exception policy or input mutation changes.
+ */
+static int m3_queries_non_decreasing(const jlong *targets, jsize count) {
+    for (jsize i = 1; i < count; i++) {
+        if (targets[i] < targets[i - 1]) return 0;
+    }
+    return 1;
+}
+
+static int m3_use_monotone_sweep(const jlong *targets, jsize count,
+        jsize size, unsigned int bounds_per_query) {
+    if (count < 2 || !m3_queries_non_decreasing(targets, count)) return 0;
+    unsigned int levels = 0;
+    for (jsize remaining = size; remaining > 0; remaining >>= 1) levels++;
+    /* Cast before multiply: even Integer.MAX_VALUE Java lanes cannot overflow. */
+    uint64_t estimated_binary = (uint64_t) (unsigned int) count
+            * (uint64_t) levels * (uint64_t) bounds_per_query;
+    return (uint64_t) (unsigned int) size <= estimated_binary;
+}
 
 /*
  * One JNI transition per batch, signed jlong order matching Java Long.compare.
@@ -41,16 +68,24 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
         return;
     }
 
-    for (jsize i = 0; i < count; i++) {
-        jlong needle = targets[i];
-        jsize lo = 0;
-        jsize hi = size;
-        while (lo < hi) {
-            jsize mid = lo + ((hi - lo) >> 1);
-            if (values[mid] < needle) lo = mid + 1;
-            else hi = mid;
+    if (m3_use_monotone_sweep(targets, count, size, 1U)) {
+        jsize cursor = 0;
+        for (jsize i = 0; i < count; i++) {
+            while (cursor < size && values[cursor] < targets[i]) cursor++;
+            positions[i] = (jint) cursor;
         }
-        positions[i] = (jint) lo;
+    } else {
+        for (jsize i = 0; i < count; i++) {
+            jlong needle = targets[i];
+            jsize lo = 0;
+            jsize hi = size;
+            while (lo < hi) {
+                jsize mid = lo + ((hi - lo) >> 1);
+                if (values[mid] < needle) lo = mid + 1;
+                else hi = mid;
+            }
+            positions[i] = (jint) lo;
+        }
     }
     (*env)->ReleaseIntArrayElements(env, results, positions, 0);
     (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
@@ -95,24 +130,38 @@ Java_com_m3_collections_M3LongRankBatchNative_equalRanges0(
         (*env)->ReleaseLongArrayElements(env, sorted, (jlong *) values, JNI_ABORT);
         return;
     }
-    for (jsize i = 0; i < count; ++i) {
-        jlong needle = targets[i];
-        jsize lo = 0;
-        jsize hi = size;
-        while (lo < hi) {
-            jsize mid = lo + (hi - lo) / 2;
-            if (values[mid] < needle) lo = mid + 1;
-            else hi = mid;
+    if (m3_use_monotone_sweep(targets, count, size, 2U)) {
+        jsize lower = 0;
+        jsize upper = 0;
+        for (jsize i = 0; i < count; i++) {
+            const jlong needle = targets[i];
+            while (lower < size && values[lower] < needle) lower++;
+            if (upper < lower) upper = lower;
+            /* Never use needle + 1: LONG_MAX remains valid without overflow. */
+            while (upper < size && values[upper] <= needle) upper++;
+            result[2 * i] = (jint) lower;
+            result[2 * i + 1] = (jint) upper;
         }
-        jint first = (jint) lo;
-        hi = size;
-        while (lo < hi) {
-            jsize mid = lo + (hi - lo) / 2;
-            if (values[mid] <= needle) lo = mid + 1;
-            else hi = mid;
+    } else {
+        for (jsize i = 0; i < count; ++i) {
+            jlong needle = targets[i];
+            jsize lo = 0;
+            jsize hi = size;
+            while (lo < hi) {
+                jsize mid = lo + (hi - lo) / 2;
+                if (values[mid] < needle) lo = mid + 1;
+                else hi = mid;
+            }
+            jint first = (jint) lo;
+            hi = size;
+            while (lo < hi) {
+                jsize mid = lo + (hi - lo) / 2;
+                if (values[mid] <= needle) lo = mid + 1;
+                else hi = mid;
+            }
+            result[2 * i] = first;
+            result[2 * i + 1] = (jint) lo;
         }
-        result[2 * i] = first;
-        result[2 * i + 1] = (jint) lo;
     }
     (*env)->ReleaseIntArrayElements(env, ranges, result, 0);
     (*env)->ReleaseLongArrayElements(env, queries, (jlong *) targets, JNI_ABORT);

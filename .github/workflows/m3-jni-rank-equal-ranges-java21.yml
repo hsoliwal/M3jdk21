@@ -11,6 +11,8 @@ on:
       - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesContract.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankMonotoneSweepContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankMonotoneSweepTest.java'
       - 'm3/collections/qualification/jni-rank-equal-ranges-20261024/**'
 
 permissions:
@@ -19,7 +21,7 @@ permissions:
 jobs:
   java-and-jni:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,9 +40,11 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = 'bcf60297cd2a3b04668b10b4a0baae6e80d23bbb'
           test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = 'b6cf17d87db4d0d5890e33febda5332ca6c7ee7a'
-          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '5248b615f66f72b1e390d1aaa7b4797d66691c5b'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '3290b819f9f0cfbc9b61832c4fbc9789450c3afa'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesContract.java)" = '7ca8f2fff2b1d662b53064596a1b29715fe60052'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesTest.java)" = '13512e6278aec62f4ca9f5f1839e72e809df758f'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankMonotoneSweepContract.java)" = '80b2153a19f1e6f34a2c01f2ffd18f33e2c31bb5'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankMonotoneSweepTest.java)" = '63b8064ef2da0104ba57312732d802283e3a6912'
       - name: Strict original Java 21 batch owner and JNI headers
         shell: bash
         run: |
@@ -49,7 +53,8 @@ jobs:
           javac --release 21 -Xlint:all -Werror \
             -h "$RUNNER_TEMP/rank/headers" -d "$RUNNER_TEMP/rank/classes" \
             m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesContract.java
+            m3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankMonotoneSweepContract.java
       - name: Build original JNI shared library with generated ABI and UBSan
         shell: bash
         run: |
@@ -83,6 +88,29 @@ jobs:
           cmp "$root/java.txt" "$root/java-interpreter.txt"
           cmp "$root/jni.txt" "$root/jni-interpreter.txt"
           cmp "$root/java.txt" "$root/native-missing-java-fallback.txt"
+      - name: Differential monotone sweep and binary fallback, signed extremes
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/rank"
+          java -Xcheck:jni -cp "$root/classes" \
+            com.m3.collections.M3LongRankMonotoneSweepContract | tee "$root/sweep-java.txt"
+          java -Xint -Xcheck:jni -cp "$root/classes" \
+            com.m3.collections.M3LongRankMonotoneSweepContract | tee "$root/sweep-java-interpreter.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$root/lib" -cp "$root/classes" \
+            com.m3.collections.M3LongRankMonotoneSweepContract --native | tee "$root/sweep-jni.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$root/lib" -cp "$root/classes" \
+            com.m3.collections.M3LongRankMonotoneSweepContract --native | tee "$root/sweep-jni-interpreter.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$root/absent" -cp "$root/classes" \
+            com.m3.collections.M3LongRankMonotoneSweepContract | tee "$root/sweep-missing-java.txt"
+          grep -Fxq 'PASS M3_LONG_RANK_MONOTONE_SWEEP backend=java checks=3813533' "$root/sweep-java.txt"
+          grep -Fxq 'PASS M3_LONG_RANK_MONOTONE_SWEEP backend=native checks=3813533' "$root/sweep-jni.txt"
+          cmp "$root/sweep-java.txt" "$root/sweep-java-interpreter.txt"
+          cmp "$root/sweep-jni.txt" "$root/sweep-jni-interpreter.txt"
+          cmp "$root/sweep-java.txt" "$root/sweep-missing-java.txt"
       - name: Preserve exact-source and ABI evidence
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
