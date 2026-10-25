@@ -6,6 +6,7 @@ import com.m3.tools.codec.varint.VarInts;
 import com.m3.tools.graph.paths.ShortestPaths;
 import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.stats.streaming.RunningStatistics;
+import com.m3.tools.text.diff.BoundedDiff;
 import com.m3.tools.text.frequency.TermFrequency;
 import com.m3.tools.text.index.Bm25Ranker;
 import com.m3.tools.text.ngram.NGramIndex;
@@ -512,6 +513,69 @@ public final class CpuTools {
         }
         progress.checkCancelled();
         return true;
+    }
+
+    /** The existing M3File snapshots own both sides; the patch owns no file descriptor. */
+    public static final class FileDiff {
+        private final BoundedDiff.Patch patch;
+        private final String sha256;
+
+        private FileDiff(BoundedDiff.Patch patch, String sha256) {
+            this.patch = patch;
+            this.sha256 = sha256;
+        }
+
+        public BoundedDiff.Patch patch() { return patch; }
+        public boolean complete() { return patch.complete(); }
+        public int distance() { return patch.distance(); }
+        public String sha256() { return sha256; }
+        public String apply(M3File original) { return patch.apply(Objects.requireNonNull(original).text()); }
+    }
+
+    public static FileDiff diff(M3File source, M3File target, int maxEdits) {
+        return diff(source, target, maxEdits, null);
+    }
+
+    /**
+     * Bounded exact UTF-16 edit script with a receipt for two ordered, immutable
+     * M3File snapshots. A distance-budget miss remains explicitly incomplete.
+     */
+    public static FileDiff diff(M3File source, M3File target, int maxEdits, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(target, "target");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        BoundedDiff.Patch patch = BoundedDiff.diff(
+                source.text(), target.text(), maxEdits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-bounded-diff-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length())
+                .text(target.uri().toASCIIString()).text(target.rawSha256()).text(target.utf16Sha256())
+                .number(target.byteLength()).number(target.length())
+                .number(maxEdits).number(patch.complete() ? 1 : 0).number(patch.distance())
+                .text(patch.sourceSha256()).text(patch.targetSha256()).number(patch.changes().size());
+        for (BoundedDiff.Change change : patch.changes()) {
+            progress.checkCancelled();
+            hash.number(change.start()).number(change.end()).number(change.inserted().length());
+            for (int index = 0; index < change.inserted().length(); index++) {
+                if ((index & 8191) == 0) progress.checkCancelled();
+                hash.number(change.inserted().charAt(index));
+            }
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileDiff(patch, hash.finish());
+    }
+
+    /** Replay recomputes the whole edit script and both source-bound identities. */
+    public static boolean verifyDiff(M3File source, M3File target, int maxEdits,
+                                     FileDiff expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        FileDiff actual = diff(source, target, maxEdits, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.complete() == expected.complete()
+                && actual.distance() == expected.distance()
+                && actual.patch().changes().equals(expected.patch().changes());
     }
 
     /** Indexed UTF-16 characters, in source-offset order, rather than tokenized words. */

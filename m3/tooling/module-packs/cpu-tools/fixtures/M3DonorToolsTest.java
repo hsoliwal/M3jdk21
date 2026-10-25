@@ -7,6 +7,7 @@ import com.m3.tools.graph.paths.ShortestPaths;
 import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.plan.priority.StablePriorityQueue;
 import com.m3.tools.stats.streaming.RunningStatistics;
+import com.m3.tools.text.diff.BoundedDiff;
 import com.m3.tools.text.diff.TextDelta;
 import com.m3.tools.text.frequency.TermFrequency;
 import com.m3.tools.text.index.Bm25Ranker;
@@ -49,6 +50,7 @@ public final class M3DonorToolsTest {
 
     public static void main(String[] args) throws Exception {
         text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
+        boundedDiff();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -145,6 +147,78 @@ public final class M3DonorToolsTest {
         check(Sha256.utf8("abc").equals("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"), "abc SHA");
         check(Sha256.utf8("\ud83d\ude00").equals(Sha256.hex(new byte[]{(byte) 0xf0, (byte) 0x9f,
                 (byte) 0x98, (byte) 0x80})), "UTF8 byte identity");
+    }
+
+    /** Independent LCS dynamic programming proves the bounded script is minimal. */
+    private static void boundedDiff() throws Exception {
+        rejects(NullPointerException.class, () -> BoundedDiff.diff(null, "", 0));
+        rejects(NullPointerException.class, () -> BoundedDiff.diff("", null, 0));
+        rejects(NullPointerException.class, () -> BoundedDiff.diff("", "", 0, null));
+        rejects(IllegalArgumentException.class, () -> BoundedDiff.diff("a", "b", -1));
+        rejects(IllegalArgumentException.class, () -> BoundedDiff.diff("a", "b", BoundedDiff.MAX_EDITS + 1));
+        rejects(IllegalArgumentException.class, () -> BoundedDiff.diff(
+                "a".repeat(BoundedDiff.MAX_INPUT_UTF16 + 1), "", 0));
+        rejects(IllegalArgumentException.class, () -> new BoundedDiff.Change(-1, 0, ""));
+        rejects(IllegalArgumentException.class, () -> new BoundedDiff.Change(1, 0, ""));
+        rejects(IllegalArgumentException.class, () -> new BoundedDiff.Change(0, 0, ""));
+        rejects(NullPointerException.class, () -> new BoundedDiff.Change(0, 1, null));
+        for (String[] pair : new String[][]{
+                {"", ""}, {"a", ""}, {"", "a"}, {"abc", "abc"},
+                {"ab", "ba"}, {"kitten", "sitting"}, {"\ud800", "\udc00"},
+                {"a\r\nb", "a\nb"}, {"aaaa", "bbbb"}, {"a\0\ud83d\ude00", "a\ud83d\ude00"}}) {
+            checkMinimalPatch(pair[0], pair[1], 20);
+        }
+        for (int trial = 0; trial < 1600; trial++) {
+            String before = randomText(18);
+            String after = randomText(18);
+            int budget = RANDOM.nextInt(20);
+            checkMinimalPatch(before, after, budget);
+        }
+        String longPrefix = "x".repeat(140_000);
+        var big = BoundedDiff.diff(longPrefix + "a", longPrefix + "b", 2);
+        check(big.complete() && big.distance() == 2, "long common prefix bounded cost");
+        check(big.changes().size() == 1 && big.apply(longPrefix + "a").equals(longPrefix + "b"),
+                "long input minimal patch");
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> BoundedDiff.diff(longPrefix, longPrefix, 0, () -> {
+            if (checkpoints.incrementAndGet() == 3) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 3, "cooperative preprocessing cancellation");
+    }
+
+    private static void checkMinimalPatch(String before, String after, int budget) throws Exception {
+        int[][] lcs = new int[before.length() + 1][after.length() + 1];
+        for (int i = before.length() - 1; i >= 0; i--) {
+            for (int j = after.length() - 1; j >= 0; j--) {
+                lcs[i][j] = before.charAt(i) == after.charAt(j)
+                        ? 1 + lcs[i + 1][j + 1] : Math.max(lcs[i + 1][j], lcs[i][j + 1]);
+            }
+        }
+        int optimum = before.length() + after.length() - 2 * lcs[0][0];
+        BoundedDiff.Patch actual = BoundedDiff.diff(before, after, budget);
+        check(actual.sourceLength() == before.length() && actual.targetLength() == after.length(),
+                "exact UTF-16 source/target geometry");
+        check(actual.sourceSha256().matches("[0-9a-f]{64}")
+                        && actual.targetSha256().matches("[0-9a-f]{64}"), "source fingerprints");
+        if (optimum > budget) {
+            check(!actual.complete() && actual.distance() == -1 && actual.changes().isEmpty(),
+                    "honest edit-distance budget miss");
+            rejects(IllegalStateException.class, () -> actual.apply(before));
+            return;
+        }
+        check(actual.complete() && actual.distance() == optimum, "Myers edit count equals independent LCS");
+        check(actual.apply(before).equals(after), "minimal patch reconstructs exact target");
+        check(actual.changes().equals(BoundedDiff.diff(before, after, budget).changes()),
+                "tie break produces stable canonical script");
+        int end = 0;
+        int operationCount = 0;
+        for (BoundedDiff.Change change : actual.changes()) {
+            check(change.start() >= end && change.end() <= before.length(), "ordered nonoverlapping source lanes");
+            operationCount += change.end() - change.start() + change.inserted().length();
+            end = change.end();
+        }
+        check(operationCount == optimum, "coalescing preserves minimal distance");
+        if (!before.isEmpty()) rejects(IllegalArgumentException.class, () -> actual.apply(before + "x"));
     }
 
     /** Independent substring enumeration proves rolling-hash candidates never decide equality. */

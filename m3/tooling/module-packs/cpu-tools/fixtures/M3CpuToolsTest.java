@@ -168,6 +168,27 @@ public final class M3CpuToolsTest {
         Files.copy(path, copied);
         check(!CpuTools.sourceReceipt(source, result).equals(CpuTools.sourceReceipt(M3File.load(copied), result)),
                 "source receipt binds file location as well as bytes");
+        Path editTarget = work.resolve("diff-target.txt");
+        Files.writeString(editTarget, "abXaba\ud83d\ude42\r\n", StandardCharsets.UTF_8);
+        M3File target = M3File.load(editTarget);
+        var diff = CpuTools.diff(source, target, 1);
+        check(diff.complete() && diff.distance() == 1
+                && diff.patch().changes().size() == 1, "bounded minimal UTF-16 file edit");
+        check(diff.apply(source).equals(target.text())
+                && CpuTools.verifyDiff(source, target, 1, diff, null), "source-bound minimal patch and replay");
+        check(!CpuTools.verifyDiff(source, target, 2, diff, null), "edit budget included in receipt");
+        check(!CpuTools.verifyDiff(M3File.load(copied), target, 1, diff, null),
+                "original file URI included in receipt");
+        var missed = CpuTools.diff(source, target, 0);
+        check(!missed.complete() && missed.distance() == -1 && missed.patch().changes().isEmpty(),
+                "insufficient edit budget is explicitly incomplete");
+        expect(IllegalStateException.class, () -> missed.apply(source));
+        var diffMonitor = new CountMonitor();
+        check(CpuTools.diff(source, target, 1, diffMonitor).sha256().equals(diff.sha256())
+                && diffMonitor.work == 1 && diffMonitor.finished == 0,
+                "borrowed diff monitor and stable receipt");
+        diffMonitor.cancelled = true;
+        expect(CancellationException.class, () -> CpuTools.diff(source, target, 1, diffMonitor));
         Files.writeString(path, "changed on disk");
         check(session.execute(List.of("text.identity"), source).equals(result), "execution uses admitted snapshot without reopen");
         var changed = M3File.load(path);
