@@ -1,8 +1,8 @@
 {
-  "schema": "M3_SLOT_ENTRY_CACHE_RECEIVER_VISITOR_REFUSAL_FIX_V4",
-  "status": "QUALIFICATION_ASSERTION_CORRECTED_HOSTED_SDK_PENDING",
+  "schema": "M3_SLOT_SOURCE_JUNIT_LAUNCHER_CLOSURE_RECEIVER_V5",
+  "status": "QUALIFICATION_SOURCE_LAUNCHER_CLOSURE_PREPARED_NOT_EXECUTED",
   "canonicalRepository": "hsoliwal/com.synexia",
-  "canonicalCommit": "2c0aeca03925d816dd38c6212fedeea67d28d5f6",
+  "canonicalCommit": "97d4e66f8aaa003fa78560f9d753cf4113c07ed0",
   "canonicalPullRequest": "https://github.com/hsoliwal/com.synexia/pull/13216",
   "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/",
   "receivingBase": "53f1763c80b1b9f260572aca247eaa1fcfa9112b",
@@ -28,17 +28,18 @@
   "receivingMetadataRecipe": {
     "name": "com.synexia.m3.SlotReceivingJavaJni20261024",
     "crate": "m3-slot-receiving-java-jni-20261024",
-    "manifest": "6f33ae1fd51353bbb0316620d5508edb3830868f",
+    "manifest": "1328a241fc4411fffc8cf10961c77ebbdf75d173",
     "expectedSDK": [
       6,
       0,
       0,
       0
     ],
-    "actualSDK": "PENDING_NEW_HEAD; predecessor failed main compilation before tests",
+    "actualSDK": "NOT_RUN_CURRENT_LAUNCHER_CORRECTION",
     "firstStageRequired": true,
     "sourceInputsV2": "33dbb98d27a33335fba906ec344b7483de2d6fb7",
-    "sourceInputsAnnotationFix": "2b23ca4f631d8b2020795e2cffcef6c066050904"
+    "sourceInputsAnnotationFix": "2b23ca4f631d8b2020795e2cffcef6c066050904",
+    "sourceInputsLauncherFix": "9af99eb2d4cf4f2fcb98e9b0c53334e154b53388"
   },
   "sourceChecks": {
     "verifierReportCases": 22,
@@ -51,7 +52,7 @@
       "existing": 4,
       "proof": "47234ff65be50c11e2c545bb09352b4d5d115473"
     },
-    "historicalFieldSubject": "All older sourceChecks fields retain their pre-correction subjects; visitorRefusalCorrection below binds the current correction. Do not transfer previous compile/guard/SDK counts to new inputs.",
+    "historicalFieldSubject": "Prior verifier/source controls/annotation/visitor correction fields remain historical; current launcher repair independently checked exact1verifier+2workflow atoms only.",
     "currentVisitorRefusalCorrection": {
       "independentSources": 17,
       "logicalBytes": 195007,
@@ -63,6 +64,11 @@
       "productCompile": "NOT_RUN",
       "JavaJNI": "NOT_RUN",
       "formalReview": "NO_VERDICT"
+    },
+    "currentLauncherClosure": {
+      "sourceAudit": "slot_junit_launcher_fit reconstructed exact fullsourcebytes; no suites weakened",
+      "provenance": "cf7b61d82974b89968523bcddfa8574af6954fa4",
+      "sourceGateScope": "11selectedclassification/ledgerpaths, noticeSPDXandnegativecontrols; notruntime"
     }
   },
   "policy": {
@@ -137,19 +143,19 @@
     },
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
-      "git_blob": "debb6189ea4d2b1faaec2fe974b50e3b25f4cdfa",
-      "bytes": 62147,
+      "git_blob": "6b8fbcf2d02ff3d1767d0b46a20079f6ec900af8",
+      "bytes": 62204,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
     {
       "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
-      "git_blob": "5df1a1131571630bf722a74ef6e41dd648b7f67f",
-      "bytes": 26423,
+      "git_blob": "55d6c1a2804586e472a4e820e2564dc2cac7b8ae",
+      "bytes": 26473,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
     {
       "path": "m3/migration/original-provider-20261017/source-binding.json",
-      "git_blob": "795b80e6d3f8660909425df603b7489eaac397e1",
+      "git_blob": "c00aa56dbcbb4d1410b9ec95d2d53602c619a74c",
       "bytes": 3301,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
@@ -203,25 +209,25 @@
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/04-original-provider.yml",
-      "git_blob": "debb6189ea4d2b1faaec2fe974b50e3b25f4cdfa",
-      "bytes": 62147,
+      "git_blob": "6b8fbcf2d02ff3d1767d0b46a20079f6ec900af8",
+      "bytes": 62204,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/05-full-java-jni-verify.py",
-      "git_blob": "5df1a1131571630bf722a74ef6e41dd648b7f67f",
-      "bytes": 26423,
+      "git_blob": "55d6c1a2804586e472a4e820e2564dc2cac7b8ae",
+      "bytes": 26473,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/06-source-binding.json",
-      "git_blob": "795b80e6d3f8660909425df603b7489eaac397e1",
+      "git_blob": "c00aa56dbcbb4d1410b9ec95d2d53602c619a74c",
       "bytes": 3301,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/manifest.tsv",
-      "git_blob": "1764349be4ddde886db8f14f67edbe1e4f70f8cd",
+      "git_blob": "1328a241fc4411fffc8cf10961c77ebbdf75d173",
       "bytes": 1450,
       "role": "CANONICAL_SDK_MIRROR"
     },
@@ -320,6 +326,12 @@
       "git_blob": "8f3430895772a5d29afc0a2f51247a46f39d7e15",
       "bytes": 17596,
       "role": "CURRENT_VISITOR_REFUSAL_FIX_SOURCE_BINDING"
+    },
+    {
+      "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/SOURCE_INPUTS_JUNIT_LAUNCHER_FIX_V1.json",
+      "git_blob": "9af99eb2d4cf4f2fcb98e9b0c53334e154b53388",
+      "bytes": 20960,
+      "role": "CURRENT_SOURCE_LAUNCHER_CLOSURE_BINDING"
     }
   ],
   "selfExcluded": true,
@@ -327,10 +339,10 @@
   "actualCurrentJNI": 0,
   "phaseAdvanced": false,
   "formalReview": "NO_VERDICT",
-  "remaining": "Actual receiving metadata SDK/Java/JNI proof, other startup/platform/concurrency/descriptor/review gates; full collection superset and compiled regex/language-rule work",
+  "remaining": "Execute current six receiving SDK checks and original full arrays/collections Java/JNI proof after source launcher closure. CandidateSlotMap7941 remains focused-qualified/uninstalled; formalreview and wholemodule admission pending. Fullfamily/JDK/performance objective unfinished.",
   "fullGoal": "ACTIVE_UNFINISHED",
-  "correctionParent": "9a67c5c12d18f7e44de4ee0c97c0b95711d8478e",
-  "priorReceiverRecordGit": "6132c21b1b53a88ba48328079b2d96c65781b039",
+  "correctionParent": "7597f9ca890554ffa1ed53f08e2285cbddc78986",
+  "priorReceiverRecordGit": "a9c09bf47308b41bf42d6bbd92ef88ac9021603b",
   "workflowContextCorrection": {
     "firstRun": 40091721939,
     "firstRunHead": "2750f98941ce800e86895daff9656eaa44e75a21",
@@ -400,5 +412,58 @@
     "correctedSDK6": "NOT_RUN",
     "formalReview": "NO_VERDICT",
     "phaseAdvanced": false
+  },
+  "launcherDependencyClosure": {
+    "canonicalCommit": "97d4e66f8aaa003fa78560f9d753cf4113c07ed0",
+    "canonicalInputs": "9af99eb2d4cf4f2fcb98e9b0c53334e154b53388",
+    "priorRun": 40170875470,
+    "priorJob": 121101263717,
+    "priorHead": "7597f9ca890554ffa1ed53f08e2285cbddc78986",
+    "actualFailure": "Missing source-owned org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1 during arraysSurefire",
+    "priorSDK6": "counts6/0/0/0 control-flow inference, actual XML not independentlyread",
+    "priorArrays": {
+      "main": 20,
+      "test": 6,
+      "CTest": "1/1PASS",
+      "Jupiter": "NOT_COMPLETED"
+    },
+    "donorTree": "3873eb738ef914453f304dad9c103e13a09a33fe",
+    "donorSourceCount": 80,
+    "donorLicense": "EPL-2.0",
+    "verifier": "55d6c1a2804586e472a4e820e2564dc2cac7b8ae",
+    "workflow": "6b8fbcf2d02ff3d1767d0b46a20079f6ec900af8",
+    "workflowSHA256": "1b92549cb5e9805fe7f87f31218582e1f56d919125a82d2dfccd601791ad76b3",
+    "binding": "c00aa56dbcbb4d1410b9ec95d2d53602c619a74c",
+    "manifest": "1328a241fc4411fffc8cf10961c77ebbdf75d173",
+    "currentSDK6": "NOT_RUN",
+    "currentFullJavaJNI": "NOT_RUN",
+    "productionOwnerChanged": false,
+    "candidate7941Installed": false,
+    "formalReview": "NO_VERDICT",
+    "phaseAdvanced": false
+  },
+  "focusedConcurrentCandidate": {
+    "canonicalEvidence": "501f6caba6a423f528dbeec66ac81178cc4c232b",
+    "baselineWrongKey": [
+      59,
+      63
+    ],
+    "candidateJUnitCounts": [
+      [
+        12,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0
+      ]
+    ],
+    "currentProvider": "8daf087344d1a54e99beccb664cd1d542abb8006421a368909ce3221a71f4144",
+    "scope": "Local focused proof only; candidate notinstalled, notfullmoduleproof",
+    "formalReview": "NO_VERDICT"
   }
 }
