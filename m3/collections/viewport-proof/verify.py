@@ -147,10 +147,11 @@ def main() -> int:
         admitted_master = "099802e72b48be7f489e871b77b50f70bd9e7f2b6621ea688fa5fb929f7e47bb"
         admitted_after = "8a7b47da2819923f7e64d16a9d9827f92a9ee962a9512a1fe369a75665b60957"
         admitted_page = "b488da25aa3175ffa3522782867cca231056a60ca32fe3c198dcf3e60bc5873a"
-        if java_source_hash not in (admitted_before, admitted_master, admitted_after, admitted_page):
+        admitted_master_page = "bbbe3135f17eb8816d197c03c4b499ca9c4837f4defc7971d026e4ad44e46143"
+        if java_source_hash not in (admitted_before, admitted_master, admitted_after, admitted_page, admitted_master_page):
             raise ValueError("native Java owner source drift")
-        product_frame_wired = java_source_hash in (admitted_after, admitted_page)
-        product_page_wired = java_source_hash == admitted_page
+        product_frame_wired = java_source_hash in (admitted_after, admitted_page, admitted_master_page)
+        product_page_wired = java_source_hash in (admitted_page, admitted_master_page)
         receipt.update(java_frame_wired=product_frame_wired,
                        java_page_wired=product_page_wired,
                        frame_test_only=not product_frame_wired)

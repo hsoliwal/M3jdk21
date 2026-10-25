@@ -22,4 +22,15 @@ final class M3MaskViewportNative {
     static native int project(int[] logicalOffsets, int[] states, int first,
             int length, int requiredBits, int forbiddenBits, int[] target,
             int targetOffset);
+
+    /** Project a bounded frame while preserving input ordinals and complete state words. */
+    static native int projectFramePage(int[] logicalOffsets, int[] states, int first,
+            int length, int requiredBits, int forbiddenBits, int skipVisible, int maxVisible,
+            int[] rows, int rowOffset, int[] slots, int slotOffset,
+            int[] words, int wordOffset);
+
+    /** Select a filtered encounter-order page without a second element owner. */
+    static native int projectPage(int[] logicalOffsets, int[] states, int first,
+            int length, int requiredBits, int forbiddenBits, int skipVisible, int maxVisible,
+            int[] target, int targetOffset);
 }
