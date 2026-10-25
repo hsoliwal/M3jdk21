@@ -17,6 +17,7 @@ public final class M3LongRankBatchNative {
     private static final int NATIVE_MIN_INTERSECTION = 128;
     private static final int MODE_UPPER = 1;
     private static final int MODE_COUNT = 2;
+    private static volatile boolean WINDOW_ABI_MISSING;
     private static final boolean AVAILABLE = loadOptIn();
 
     private M3LongRankBatchNative() { }
@@ -236,6 +237,69 @@ public final class M3LongRankBatchNative {
         return matches;
     }
 
+    /**
+     * LeetCode #349 / #350 problem category: intersect sorted, signed-long
+     * physical windows using two primitive cursors. A distinct intersection
+     * counts each matched value once; multiset mode counts min frequencies.
+     *
+     * <p>No array slice, entry object, sort, callback, or JNI pointer is
+     * retained. Both sources must be nondecreasing and remain immutable for
+     * this call. Unlike a JDK Set, duplicate physical positions remain valid.
+     * The native path is optional for sufficiently large windows; old native
+     * binaries lacking this additive symbol use the exact Java oracle.
+     */
+    static long intersectionWindowCount(long[] left, int leftFrom, int leftLength,
+                                        long[] right, int rightFrom, int rightLength,
+                                        boolean distinct) {
+        return intersectionWindowCount(left, leftFrom, leftLength, right, rightFrom,
+                                       rightLength, distinct, false);
+    }
+
+    /** Explicit JNI requests fail closed if the native ABI is unavailable. */
+    static long intersectionWindowCount(long[] left, int leftFrom, int leftLength,
+                                        long[] right, int rightFrom, int rightLength,
+                                        boolean distinct, boolean nativeRequired) {
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        Objects.checkFromIndexSize(leftFrom, leftLength, left.length);
+        Objects.checkFromIndexSize(rightFrom, rightLength, right.length);
+        if (nativeRequired) {
+            if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch window ABI unavailable");
+            return intersectionWindowCount0(left, leftFrom, leftLength,
+                    right, rightFrom, rightLength, distinct);
+        }
+        if (leftLength == 0 || rightLength == 0) return 0L;
+        if (AVAILABLE && !WINDOW_ABI_MISSING
+                && Math.min(leftLength, rightLength) >= NATIVE_MIN_INTERSECTION) {
+            try {
+                return intersectionWindowCount0(left, leftFrom, leftLength,
+                        right, rightFrom, rightLength, distinct);
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                // Legacy m3rankbatch continues serving its original entrypoints.
+                WINDOW_ABI_MISSING = true;
+            }
+        }
+        int i = leftFrom, j = rightFrom;
+        int leftEnd = leftFrom + leftLength;
+        int rightEnd = rightFrom + rightLength;
+        long count = 0L, last = 0L;
+        boolean matched = false;
+        while (i < leftEnd && j < rightEnd) {
+            long a = left[i], b = right[j];
+            if (a < b) i++;
+            else if (a > b) j++;
+            else {
+                if (!distinct || !matched || last != a) {
+                    count++;
+                    last = a;
+                    matched = true;
+                }
+                i++; j++;
+            }
+        }
+        return count;
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -259,4 +323,9 @@ public final class M3LongRankBatchNative {
             long[] toExclusive, int queryFrom, int length, int[] output, int outputFrom);
 
     private static native long intersectionCount0(long[] left, long[] right);
+
+    /** Package-scope ABI for exact JNI contract tests; not a public collection API. */
+    static native long intersectionWindowCount0(long[] left, int leftFrom,
+            int leftLength, long[] right, int rightFrom, int rightLength,
+            boolean distinct);
 }

@@ -417,3 +417,96 @@ Java_com_m3_collections_M3LongRankBatchNative_intersectionCount0(
     }
     return matches;
 }
+
+/*
+ * Additive LC #349/#350 sorted-window intersection JNI ABI. Both operands
+ * remain Java-owned and read-only; only 256-value fixed stack pages cross
+ * GetLongArrayRegion. This cannot retain moving-GC pointers or invoke Java
+ * comparators, and it shares no mutable state with the original batch ranks.
+ */
+enum { M3_INTERSECTION_WINDOW_PAGE = 256 };
+
+static void m3_window_throw(JNIEnv *env, const char *name, const char *message) {
+    jclass type = (*env)->FindClass(env, name);
+    if (type != NULL) {
+        (*env)->ThrowNew(env, type, message);
+        (*env)->DeleteLocalRef(env, type);
+    }
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_intersectionWindowCount0(
+        JNIEnv *env, jclass ignored, jlongArray left, jint left_from,
+        jint left_length, jlongArray right, jint right_from,
+        jint right_length, jboolean distinct) {
+    (void) ignored;
+    if (left == NULL || right == NULL) {
+        m3_window_throw(env, "java/lang/NullPointerException", "null sorted window");
+        return 0;
+    }
+    jsize left_size = (*env)->GetArrayLength(env, left);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    jsize right_size = (*env)->GetArrayLength(env, right);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    /* Subtraction prevents overflow for an invalid from+length pair. */
+    if (left_from < 0 || left_length < 0 || left_from > left_size
+            || left_length > left_size - left_from
+            || right_from < 0 || right_length < 0 || right_from > right_size
+            || right_length > right_size - right_from) {
+        m3_window_throw(env, "java/lang/IndexOutOfBoundsException",
+                "sorted intersection window outside primitive lane");
+        return 0;
+    }
+    if (left_length == 0 || right_length == 0) return 0;
+
+    const jsize left_end = left_from + left_length;
+    const jsize right_end = right_from + right_length;
+    jlong left_page[M3_INTERSECTION_WINDOW_PAGE];
+    jlong right_page[M3_INTERSECTION_WINDOW_PAGE];
+    jsize left_at = left_from, right_at = right_from;
+    jsize left_cursor = 0, right_cursor = 0;
+    jsize left_loaded = 0, right_loaded = 0;
+    jlong count = 0;
+    jlong previous_match = 0;
+    int matched_before = 0;
+
+    while (left_at < left_end && right_at < right_end) {
+        if (left_cursor == left_loaded) {
+            jsize batch = left_end - left_at;
+            if (batch > M3_INTERSECTION_WINDOW_PAGE) batch = M3_INTERSECTION_WINDOW_PAGE;
+            (*env)->GetLongArrayRegion(env, left, left_at, batch, left_page);
+            if ((*env)->ExceptionCheck(env)) return 0;
+            left_cursor = 0;
+            left_loaded = batch;
+        }
+        if (right_cursor == right_loaded) {
+            jsize batch = right_end - right_at;
+            if (batch > M3_INTERSECTION_WINDOW_PAGE) batch = M3_INTERSECTION_WINDOW_PAGE;
+            (*env)->GetLongArrayRegion(env, right, right_at, batch, right_page);
+            if ((*env)->ExceptionCheck(env)) return 0;
+            right_cursor = 0;
+            right_loaded = batch;
+        }
+        const jlong a = left_page[left_cursor];
+        const jlong b = right_page[right_cursor];
+        if (a < b) {
+            left_cursor++;
+            left_at++;
+        } else if (a > b) {
+            right_cursor++;
+            right_at++;
+        } else {
+            /* #350 counts min(freqL, freqR); #349 counts each match once. */
+            if (distinct != JNI_TRUE || !matched_before || previous_match != a) {
+                count++;
+                previous_match = a;
+                matched_before = 1;
+            }
+            left_cursor++;
+            right_cursor++;
+            left_at++;
+            right_at++;
+        }
+    }
+    return count;
+}
