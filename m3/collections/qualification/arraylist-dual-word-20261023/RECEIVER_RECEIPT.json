@@ -76,15 +76,21 @@
     {
       "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
       "preimage_git_blob_sha1": "f4f064f370a38bd8363b1e6309e4b151fb987b1c",
-      "postimage_git_blob_sha1": "4e5089656f7187773054026e93d82f08ced148db",
+      "postimage_git_blob_sha1": "01b301c99ebb114fa69d3d341d27823250ee8429",
       "preimage_sha256": "837aeb592e797902f9c50bcdbf4f85db3f9dbf97ee7537b5d6e85a9fa4a4e41a",
-      "postimage_sha256": "c3fef0d10353861799e84ae8dbbfd45939232301bf203d6bfe038e547779e173",
+      "postimage_sha256": "e580548398c8c9632c639c9dd94b4f8dc9bcd00d7e676f980d65a2b38aebffb0",
       "role": "atomic_tree_sibling_key_validation_postimage",
       "previous_20261025": {
         "git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
         "sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
         "receipt_role": "atomic_tree_sibling_key_validation_postimage",
         "source_recipe": "m3-tree-window-shift-boundary-20261023",
+        "historical_pin_retained": true
+      },
+      "previous_candidate_20261025": {
+        "git_blob_sha1": "4e5089656f7187773054026e93d82f08ced148db",
+        "sha256": "c3fef0d10353861799e84ae8dbbfd45939232301bf203d6bfe038e547779e173",
+        "disposition": "superseded draft version with incorrect mixed-invalid exception priority",
         "historical_pin_retained": true
       }
     },
@@ -213,10 +219,12 @@
     },
     "tree_commit_failure_atomicity": {
       "status": "PENDING_REAL_MODULE_CI",
-      "methods": 3,
+      "methods": 5,
       "description": "check old key/handle maps remain intact for late-zero/short-coordinate source preflight",
       "source_preimage_sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
-      "postimage_sha256": "c3fef0d10353861799e84ae8dbbfd45939232301bf203d6bfe038e547779e173"
+      "postimage_sha256": "e580548398c8c9632c639c9dd94b4f8dc9bcd00d7e676f980d65a2b38aebffb0",
+      "isolated_exception_priority_checks": 2000,
+      "isolated_exception_priority_status": "PASSED_LOCAL_JAVA21_MODEL_NOT_REAL_PRODUCT_MODULE"
     }
   },
   "admission": {
