@@ -202,7 +202,10 @@ public final class M3TreeWindowPlan {
 			int index = (int) previous;
 			if ((int) (previous >> 32) == parentId && index >= fromIndex) {
 				long next = (long) index + delta;
-				if (next < 0 || next > Integer.MAX_VALUE) {
+				if (next < 0) {
+					throw new IllegalArgumentException ("negative child index");
+				}
+				if (next > Integer.MAX_VALUE) {
 					throw new IllegalArgumentException ("shifted child index outside int range");
 				}
 				// Negative shifts require the deleted range to have left the
