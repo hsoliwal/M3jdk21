@@ -35,6 +35,7 @@ public final class M3File implements CharSequence {
     private final String byteSha256;
     private final int utf8ByteLength;
     private volatile Utf8Offsets utf8Offsets;
+    private volatile LineIndex lineIndex;
 
     private M3File(URI uri, String text, String byteSha256, int utf8ByteLength) {
         this.uri = Objects.requireNonNull(uri, "uri");
@@ -217,6 +218,91 @@ public final class M3File implements CharSequence {
         return boundary > 0 && boundary < value.length()
                 && Character.isHighSurrogate(value.charAt(boundary - 1))
                 && Character.isLowSurrogate(value.charAt(boundary));
+    }
+
+    /**
+     * Lazily index original UTF-16 line starts, without copying the source or
+     * retaining a second line representation. CR, LF and CRLF each terminate
+     * one line; a trailing terminator opens an empty last line. The first line
+     * is one-based, and columns are zero-based UTF-16 offsets. The caller's
+     * bound is enforced both when constructing and when reusing a cached index.
+     */
+    public LineIndex lineIndex(int maxLines) {
+        if (maxLines < 1) throw new IllegalArgumentException("line budget must be positive");
+        LineIndex found = lineIndex;
+        if (found == null) {
+            synchronized (this) {
+                found = lineIndex;
+                if (found == null) lineIndex = found = LineIndex.build(this, maxLines);
+            }
+        }
+        if (found.lineCount() > maxLines) {
+            throw new IllegalArgumentException("source line budget exceeded");
+        }
+        return found;
+    }
+
+    /** One-based line/zero-based UTF-16 column coordinate. */
+    public record LinePosition(int line, int column) {
+        public LinePosition {
+            if (line < 1 || column < 0) throw new IllegalArgumentException("invalid line position");
+        }
+    }
+
+    /** Source-generation-bound sparse structure: one primitive start offset per line. */
+    public static final class LineIndex {
+        private final M3File owner;
+        private final int[] starts;
+
+        private LineIndex(M3File owner, int[] starts) {
+            this.owner = owner;
+            this.starts = starts;
+        }
+
+        private static LineIndex build(M3File owner, int maxLines) {
+            String source = owner.text;
+            int[] starts = new int[16];
+            starts[0] = 0;
+            int lines = 1;
+            for (int i = 0; i < source.length(); i++) {
+                char unit = source.charAt(i);
+                if (unit != '\r' && unit != '\n') continue;
+                if (unit == '\r' && i + 1 < source.length() && source.charAt(i + 1) == '\n') i++;
+                if (lines == maxLines) throw new IllegalArgumentException("source line budget exceeded");
+                if (lines == starts.length) starts = Arrays.copyOf(starts, lines * 2);
+                starts[lines++] = i + 1;
+            }
+            return new LineIndex(owner, Arrays.copyOf(starts, lines));
+        }
+
+        public int lineCount() { return starts.length; }
+        public long primitiveBytes() { return (long) starts.length * Integer.BYTES; }
+        public int lineStart(int oneBasedLine) {
+            if (oneBasedLine < 1 || oneBasedLine > starts.length) {
+                throw new IndexOutOfBoundsException("line outside source");
+            }
+            return starts[oneBasedLine - 1];
+        }
+
+        /** A CRLF interior offset belongs to the preceding line. EOF is legal. */
+        public LinePosition positionAt(int utf16Offset) {
+            if (utf16Offset < 0 || utf16Offset > owner.length()) {
+                throw new IndexOutOfBoundsException("offset outside source");
+            }
+            int found = Arrays.binarySearch(starts, utf16Offset);
+            int row = found >= 0 ? found : -found - 2;
+            return new LinePosition(row + 1, utf16Offset - starts[row]);
+        }
+
+        /** Exact inverse for positions within the requested line, including final EOF. */
+        public int offsetAt(int oneBasedLine, int utf16Column) {
+            int start = lineStart(oneBasedLine);
+            int end = oneBasedLine == starts.length ? owner.length() : starts[oneBasedLine] - 1;
+            if (utf16Column < 0 || utf16Column > end - start) {
+                throw new IndexOutOfBoundsException("column outside line");
+            }
+            return start + utf16Column;
+        }
     }
 
     /**

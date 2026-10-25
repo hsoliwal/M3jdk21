@@ -30,6 +30,8 @@ public final class M3ASTIndex {
     public static final String STRUCTURAL_HASH_SCHEMA = "M3_AST_STRUCTURE_SHA256_V1";
     /** V2 is used only by GENERIC, whose identity includes its grammar and edge roles. */
     public static final String GENERIC_STRUCTURE_HASH_SCHEMA = "M3_AST_GENERIC_STRUCTURE_SHA256_V2";
+    /** V3 additionally distinguishes ordered members of a named list-valued edge. */
+    public static final String GENERIC_POSITIONED_STRUCTURE_HASH_SCHEMA = "M3_AST_GENERIC_STRUCTURE_SHA256_V3";
     /** Stable V1 modifier encoding, separate from the original four index flags. */
     public static final long PUBLIC = 1L, PROTECTED = 1L << 1, PRIVATE = 1L << 2;
     public static final long ABSTRACT = 1L << 3, DEFAULT = 1L << 4, STATIC = 1L << 5;
@@ -56,6 +58,7 @@ public final class M3ASTIndex {
     private final String[] names;
     private final String[] roleNames;
     private final int[] roleIds;
+    private final int[] rolePositions;
     private final int[] kinds, parents, starts, ends, flags, first, next, childCounts;
     private final int[] startLines, endLines, enclosingTypes, enclosingExecutables;
     private final byte[] literalKinds;
@@ -69,6 +72,7 @@ public final class M3ASTIndex {
         names = Arrays.copyOf(builder.names, builder.nameCount);
         roleNames = Arrays.copyOf(builder.roleNames, builder.roleCount);
         roleIds = builder.roleIds == null ? null : Arrays.copyOf(builder.roleIds, builder.size);
+        rolePositions = builder.rolePositions == null ? null : Arrays.copyOf(builder.rolePositions, builder.size);
         kinds = Arrays.copyOf(builder.kinds, builder.size);
         parents = Arrays.copyOf(builder.parents, builder.size);
         starts = Arrays.copyOf(builder.starts, builder.size);
@@ -123,6 +127,11 @@ public final class M3ASTIndex {
         return roleIds == null || roleIds[node] < 0
                 ? Optional.empty() : Optional.of(roleNames[roleIds[node]]);
     }
+    /** List slot in the named incoming edge: -1 means scalar/unknown, 0+ means an ordered element. */
+    public int incomingRolePosition(int node) {
+        check(node);
+        return rolePositions == null ? -1 : rolePositions[node];
+    }
     public boolean hasExactRange(int node) {
         check(node);
         return starts[node] >= 0 && ends[node] >= 0 && (flags[node] & EXACT_RANGE) != 0;
@@ -136,7 +145,8 @@ public final class M3ASTIndex {
     /** Optional primitive lanes only; excludes references, Strings and object headers. */
     public long metadataBytes() {
         return (literalKinds == null ? 0L : nodeCount() * 25L)
-                + (roleIds == null ? 0L : nodeCount() * Integer.BYTES);
+                + (roleIds == null ? 0L : nodeCount() * Integer.BYTES)
+                + (rolePositions == null ? 0L : nodeCount() * Integer.BYTES);
     }
     public boolean hasDetails(int node) { check(node); return literalKinds != null && literalKinds[node] >= 0; }
     public int startLine(int node) { return hasDetails(node) ? startLines[node] : -1; }
@@ -220,7 +230,9 @@ public final class M3ASTIndex {
         }
         byte[] result = new byte[Math.multiplyExact(nodeCount(), 32)];
         MessageDigest digest = sha256();
-        String schema = domain == Domain.GENERIC ? GENERIC_STRUCTURE_HASH_SCHEMA : STRUCTURAL_HASH_SCHEMA;
+        String schema = domain != Domain.GENERIC ? STRUCTURAL_HASH_SCHEMA
+                : rolePositions == null ? GENERIC_STRUCTURE_HASH_SCHEMA
+                : GENERIC_POSITIONED_STRUCTURE_HASH_SCHEMA;
         for (int row = nodeCount() - 1; row >= 0; row--) {
             digest.reset();
             putText(digest, schema);
@@ -231,6 +243,7 @@ public final class M3ASTIndex {
             if (domain == Domain.GENERIC) {
                 putInt(digest, flags[row] & (NAMED | TOKEN | TRIVIA | MISSING | ERROR));
                 putText(digest, roleIds == null || roleIds[row] < 0 ? null : roleNames[roleIds[row]]);
+                if (rolePositions != null) putInt(digest, rolePositions[row]);
             }
             digest.update((byte) (hasDetails(row) ? 1 : 0));
             if (hasDetails(row)) {
@@ -330,7 +343,8 @@ public final class M3ASTIndex {
                    != (flags[b] & (SYNTAX_ONLY | RECOVERED))) return false;
         if (domain == Domain.GENERIC && ((flags[a] & (NAMED | TOKEN | TRIVIA | MISSING | ERROR))
                 != (flags[b] & (NAMED | TOKEN | TRIVIA | MISSING | ERROR))
-                || !incomingRole(a).equals(incomingRole(b)))) return false;
+                || !incomingRole(a).equals(incomingRole(b))
+                || incomingRolePosition(a) != incomingRolePosition(b))) return false;
         boolean aDetails = literalKinds != null && literalKinds[a] >= 0;
         boolean bDetails = literalKinds != null && literalKinds[b] >= 0;
         if (aDetails != bDetails) return false;
@@ -353,6 +367,7 @@ public final class M3ASTIndex {
         private String[] roleNames = new String[8];
         private int roleCount;
         private int[] roleIds;
+        private int[] rolePositions;
         private int[] kinds = new int[32], parents = new int[32], starts = new int[32];
         private int[] ends = new int[32], flags = new int[32], first = new int[32];
         private int[] last = new int[32], next = new int[32], childCounts = new int[32];
@@ -386,6 +401,12 @@ public final class M3ASTIndex {
 
         /** Attach an optional incoming field name without retaining an external AST node. */
         public int add(int parent, String kind, int start, int end, int flags, String role) {
+            return add(parent, kind, start, end, flags, role, -1);
+        }
+
+        /** Preserve a list-valued parser field's zero-based position without a child wrapper. */
+        public int add(int parent, String kind, int start, int end, int flags,
+                       String role, int rolePosition) {
             if (sealed) throw new IllegalStateException("index already sealed");
             if (size == maxNodes) throw new IllegalArgumentException("AST index node budget exceeded");
             if (size == 0 ? parent != -1 : parent < 0 || parent >= size) {
@@ -400,6 +421,9 @@ public final class M3ASTIndex {
             }
             if (parent == -1 && role != null) {
                 throw new IllegalArgumentException("root cannot have an incoming edge role");
+            }
+            if (rolePosition < -1 || (rolePosition >= 0 && (role == null || domain != Domain.GENERIC))) {
+                throw new IllegalArgumentException("list position requires a generic named incoming edge");
             }
             if ((flags & EXACT_RANGE) != 0 && start == NO_RANGE) {
                 throw new IllegalArgumentException("exact range without source coordinates");
@@ -417,6 +441,11 @@ public final class M3ASTIndex {
                 Arrays.fill(roleIds, -1);
             }
             if (roleIds != null) roleIds[row] = roleName;
+            if (rolePosition >= 0 && rolePositions == null) {
+                rolePositions = new int[kinds.length];
+                Arrays.fill(rolePositions, -1);
+            }
+            if (rolePositions != null) rolePositions[row] = rolePosition;
             kinds[row] = name;
             parents[row] = parent;
             starts[row] = start;
@@ -572,6 +601,10 @@ public final class M3ASTIndex {
             if (roleIds != null) {
                 roleIds = Arrays.copyOf(roleIds, cap);
                 Arrays.fill(roleIds, previous, cap, -1);
+            }
+            if (rolePositions != null) {
+                rolePositions = Arrays.copyOf(rolePositions, cap);
+                Arrays.fill(rolePositions, previous, cap, -1);
             }
             if (literalKinds != null) {
                 startLines = Arrays.copyOf(startLines, cap); endLines = Arrays.copyOf(endLines, cap);

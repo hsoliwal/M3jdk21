@@ -94,7 +94,9 @@ public final class M3ASTIngress {
         Objects.requireNonNull(root, "original compilation unit");
         Objects.requireNonNull(positions, "source positions");
         M3ASTIndex.Builder output = M3ASTIndex.builder(source, M3ASTIndex.Domain.JAVAC, limits.maxNodes());
-        SourceLines lines = new SourceLines(source);
+        // One source-generation-owned line map is shared by all AST consumers.
+        M3File.LineIndex lines = source.lineIndex((int) Math.min((long) source.length() + 1,
+                Integer.MAX_VALUE));
         int capacity = Math.min(32, limits.maxNodes());
         Tree[] pending = new Tree[capacity];
         int[] parents = new int[capacity], depths = new int[capacity];
@@ -116,7 +118,8 @@ public final class M3ASTIngress {
             int row = output.add(parent, node.getKind().name(), start, end, flags);
             appended++;
             M3ASTIndex.LiteralKind literal = literalKind(node);
-            output.details(row, start < 0 ? -1 : lines.line(start), end < 0 ? -1 : lines.line(end),
+            output.details(row, start < 0 ? -1 : lines.positionAt(start).line(),
+                    end < 0 ? -1 : lines.positionAt(end).line(),
                     javacName(node), literal, literalValue(node, literal), javacModifiers(node), type, executable);
             int childType = node instanceof ClassTree ? row : type;
             int childExecutable = node instanceof MethodTree || node.getKind() == Tree.Kind.LAMBDA_EXPRESSION ? row : executable;
@@ -177,24 +180,6 @@ public final class M3ASTIngress {
                 nodes.add(node);
             }
             return null;
-        }
-    }
-
-    private static final class SourceLines {
-        private int[] starts = new int[32];
-        private int count = 1;
-        SourceLines(M3File source) {
-            for (int i = 0; i < source.length(); i++) {
-                char c = source.charAt(i);
-                if (c == '\n' || (c == '\r' && (i + 1 == source.length() || source.charAt(i + 1) != '\n'))) {
-                    if (count == starts.length) starts = Arrays.copyOf(starts, Math.addExact(count, (count >>> 1) + 1));
-                    starts[count++] = i + 1;
-                }
-            }
-        }
-        int line(int offset) {
-            int position = Arrays.binarySearch(starts, 0, count, offset);
-            return position >= 0 ? position + 1 : -position - 1;
         }
     }
 

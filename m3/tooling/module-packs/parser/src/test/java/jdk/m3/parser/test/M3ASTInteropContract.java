@@ -22,13 +22,19 @@ public final class M3ASTInteropContract {
         final int start, end, flags;
         final Node[] children;
         final String[] roles;
+        final int[] rolePositions;
         Node(String kind, int start, int end, int flags, Node[] children, String[] roles) {
+            this(kind, start, end, flags, children, roles, null);
+        }
+        Node(String kind, int start, int end, int flags, Node[] children, String[] roles,
+             int[] rolePositions) {
             this.kind = kind;
             this.start = start;
             this.end = end;
             this.flags = flags;
             this.children = children;
             this.roles = roles;
+            this.rolePositions = rolePositions;
         }
         Node(String kind, int start, int end, int flags) {
             this(kind, start, end, flags, new Node[0], new String[0]);
@@ -40,6 +46,9 @@ public final class M3ASTInteropContract {
         @Override public int childCount(Node node) { return node.children.length; }
         @Override public Node child(Node node, int row) { return node.children[row]; }
         @Override public String childRole(Node node, int row) { return node.roles[row]; }
+        @Override public int childRolePosition(Node node, int row) {
+            return node.rolePositions == null ? -1 : node.rolePositions[row];
+        }
         @Override public int start(Node node) { return node.start; }
         @Override public int end(Node node) { return node.end; }
         @Override public int syntaxFlags(Node node) { return node.flags; }
@@ -297,10 +306,118 @@ public final class M3ASTInteropContract {
         }
     }
 
+    private static void fieldListPositionContracts() {
+        M3File source = M3File.of(URI.create("memory:/list-fields.java"), "abc");
+        Node reused = new Node("Name", 0, 1, M3ASTIndex.NAMED);
+        Node root = new Node("Call", 0, 3, M3ASTIndex.NAMED,
+                new Node[] {reused, reused, reused},
+                new String[] {"arguments", "arguments", "arguments"},
+                new int[] {0, 1, 0});
+        M3ASTIndex index = project(source, root,
+                new M3ASTInterop.SourceStamp(source.uri(), source.utf16Sha256(), null),
+                M3ASTInterop.Coordinates.UTF16, new M3ASTIngress.Limits(16, 8, 2));
+        equal(4, index.nodeCount());
+        equal(-1, index.incomingRolePosition(0));
+        equal(0, index.incomingRolePosition(1));
+        equal(1, index.incomingRolePosition(2));
+        equal(0, index.incomingRolePosition(3));
+        equal("arguments", index.incomingRole(2).orElseThrow());
+        equal(32L, index.metadataBytes()); // roles and positions: 2 optional int lanes
+        M3ASTIndex.StructuralHashes hashes = index.structuralHashes(4, 1024);
+        equal(M3ASTIndex.GENERIC_POSITIONED_STRUCTURE_HASH_SCHEMA, hashes.schema());
+        ok(!hashes.sha256(1).equals(hashes.sha256(2)));
+        equal(hashes.sha256(1), hashes.sha256(3));
+
+        Node noOrdinals = new Node("Call", 0, 3, M3ASTIndex.NAMED,
+                root.children, root.roles);
+        M3ASTIndex oldShape = project(source, noOrdinals, null,
+                M3ASTInterop.Coordinates.UTF16, new M3ASTIngress.Limits(16, 8, 2));
+        equal(M3ASTIndex.GENERIC_STRUCTURE_HASH_SCHEMA,
+                oldShape.structuralHashes(4, 1024).schema());
+        equal(-1, oldShape.incomingRolePosition(1));
+        equal(16L, oldShape.metadataBytes());
+        M3ASTIndex.Builder illegal = M3ASTIndex.builder(source, M3ASTIndex.Domain.GENERIC, 3, "provider@1");
+        refuses(IllegalArgumentException.class,
+                () -> illegal.add(-1, "Root", 0, 3, 0, "root", 0));
+        refuses(IllegalArgumentException.class,
+                () -> illegal.add(-1, "Root", 0, 3, 0, null, 0));
+        illegal.add(-1, "Root", 0, 3, 0);
+        refuses(IllegalArgumentException.class,
+                () -> illegal.add(0, "Child", 0, 1, 0, null, 0));
+        refuses(IllegalArgumentException.class,
+                () -> illegal.add(0, "Child", 0, 1, 0, "field", -2));
+        M3ASTIndex.Builder legacy = M3ASTIndex.builder(source, M3ASTIndex.Domain.JAVAC, 3);
+        legacy.add(-1, "Root", 0, 3, 0);
+        refuses(IllegalArgumentException.class,
+                () -> legacy.add(0, "Child", 0, 1, 0, "field", 0));
+        equal(M3ASTIndex.STRUCTURAL_HASH_SCHEMA,
+                legacy.seal().structuralHashes(3, 100).schema());
+
+        M3ASTIndex.Builder grown = M3ASTIndex.builder(source, M3ASTIndex.Domain.GENERIC, 65, "provider@1");
+        grown.add(-1, "Root", 0, 3, 0);
+        for (int i = 0; i < 40; i++) {
+            grown.add(0, "Name", 0, 1, 0, "arguments", i);
+        }
+        M3ASTIndex many = grown.seal();
+        equal(41, many.nodeCount());
+        for (int i = 0; i < 40; i++) equal(i, many.incomingRolePosition(i + 1));
+        equal(328L, many.metadataBytes());
+    }
+
+    private static void sourceLineIndexContracts() {
+        M3File source = M3File.of(URI.create("memory:/lines.java"), "A😺\r\n中\n");
+        M3File.LineIndex lines = source.lineIndex(3);
+        equal(3, lines.lineCount());
+        equal(12L, lines.primitiveBytes());
+        equal(0, lines.lineStart(1));
+        equal(5, lines.lineStart(2));
+        equal(7, lines.lineStart(3));
+        equal(new M3File.LinePosition(1, 3), lines.positionAt(3)); // CR
+        equal(new M3File.LinePosition(1, 4), lines.positionAt(4)); // LF in CRLF
+        equal(new M3File.LinePosition(2, 0), lines.positionAt(5));
+        equal(new M3File.LinePosition(3, 0), lines.positionAt(7)); // empty trailing line
+        equal(4, lines.offsetAt(1, 4));
+        equal(6, lines.offsetAt(2, 1));
+        equal(7, lines.offsetAt(3, 0));
+        ok(lines == source.lineIndex(3));
+        refuses(IllegalArgumentException.class, () -> source.lineIndex(2));
+        refuses(IllegalArgumentException.class, () -> source.lineIndex(0));
+        refuses(IndexOutOfBoundsException.class, () -> lines.positionAt(8));
+        refuses(IndexOutOfBoundsException.class, () -> lines.offsetAt(1, 5));
+        refuses(IndexOutOfBoundsException.class, () -> lines.offsetAt(2, 2));
+        refuses(IndexOutOfBoundsException.class, () -> lines.lineStart(0));
+        refuses(IndexOutOfBoundsException.class, () -> lines.lineStart(4));
+        M3File empty = M3File.of(URI.create("memory:/empty"), "");
+        equal(1, empty.lineIndex(1).lineCount());
+        equal(new M3File.LinePosition(1, 0), empty.lineIndex(1).positionAt(0));
+        equal(0, empty.lineIndex(1).offsetAt(1, 0));
+
+        Random random = new Random(0x11AE2026);
+        String[] units = {"A", "中", "😺", "\r", "\n", "\r\n", "é", " "};
+        for (int trial = 0; trial < 250; trial++) {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, count = random.nextInt(60); i < count; i++) {
+                builder.append(units[random.nextInt(units.length)]);
+            }
+            M3File candidate = M3File.of(URI.create("memory:/seeded-lines"), builder.toString());
+            M3File.LineIndex lineIndex = candidate.lineIndex(128);
+            for (int offset = 0; offset <= candidate.length(); offset++) {
+                M3File.LinePosition point = lineIndex.positionAt(offset);
+                equal(offset, lineIndex.offsetAt(point.line(), point.column()));
+            }
+            if (lineIndex.lineCount() > 1) {
+                int shortBudget = lineIndex.lineCount() - 1;
+                refuses(IllegalArgumentException.class, () -> candidate.lineIndex(shortBudget));
+            }
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         byteAndIndexContracts();
         randomizedOffsets();
         sourceDeltaContracts();
+        fieldListPositionContracts();
+        sourceLineIndexContracts();
         System.out.println("M3_AST_INTEROP_PASS checks=" + checks);
     }
 }

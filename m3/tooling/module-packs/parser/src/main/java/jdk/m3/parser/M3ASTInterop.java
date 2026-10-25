@@ -39,6 +39,8 @@ public final class M3ASTInterop {
 
         /** Optional named field on the parent's ordered child edge. */
         default String childRole(N parent, int ordinal) { return null; }
+        /** -1 for scalar/unknown edges; 0+ for a position in a named list field. */
+        default int childRolePosition(N parent, int ordinal) { return -1; }
         /** Unknown coordinates are exactly (-1,-1), never inferred. */
         default int start(N node) { return M3ASTIndex.NO_RANGE; }
         default int end(N node) { return M3ASTIndex.NO_RANGE; }
@@ -87,7 +89,7 @@ public final class M3ASTInterop {
         int[] indexedRows = new int[capacity];
         int[] childCounts = new int[capacity];
         int[] next = new int[capacity];
-        int rootRow = append(index, -1, root, null, coordinates, offsets, surface, sourceVerified);
+        int rootRow = append(index, -1, root, null, -1, coordinates, offsets, surface, sourceVerified);
         nodes[0] = root;
         indexedRows[0] = rootRow;
         childCounts[0] = count(surface, root);
@@ -103,8 +105,9 @@ public final class M3ASTInterop {
             int ordinal = next[frame]++;
             N child = Objects.requireNonNull(surface.child(parent, ordinal), "foreign AST child");
             String role = surface.childRole(parent, ordinal);
+            int rolePosition = surface.childRolePosition(parent, ordinal);
             if (depth == limits.maxDepth()) throw new IllegalArgumentException("AST depth budget exceeded");
-            int row = append(index, indexedRows[frame], child, role,
+            int row = append(index, indexedRows[frame], child, role, rolePosition,
                     coordinates, offsets, surface, sourceVerified);
             if (depth == nodes.length) {
                 int size = Math.min(limits.maxDepth(), nodes.length * 2);
@@ -139,6 +142,7 @@ public final class M3ASTInterop {
     }
 
     private static <N> int append(M3ASTIndex.Builder index, int parent, N node, String role,
+            int rolePosition,
             Coordinates unit, M3File.Utf8Offsets offsets, Surface<N> surface, boolean verified) {
         int start = surface.start(node), end = surface.end(node);
         if ((start == M3ASTIndex.NO_RANGE) != (end == M3ASTIndex.NO_RANGE)) {
@@ -154,7 +158,7 @@ public final class M3ASTInterop {
         flags |= M3ASTIndex.SYNTAX_ONLY;
         if (verified && start != M3ASTIndex.NO_RANGE) flags |= M3ASTIndex.EXACT_RANGE;
         if (!verified) flags |= M3ASTIndex.SOURCE_UNVERIFIED;
-        int row = index.add(parent, surface.kind(node), start, end, flags, role);
+        int row = index.add(parent, surface.kind(node), start, end, flags, role, rolePosition);
         String name = surface.name(node);
         M3ASTIndex.LiteralKind kind = Objects.requireNonNull(surface.literalKind(node), "literal kind");
         String literal = surface.literalValue(node);

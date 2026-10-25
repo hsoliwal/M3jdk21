@@ -48,6 +48,32 @@ independently of text changes. Same decoded source with different raw bytes
 does not touch the provider filesystem, create a second AST, detect disjoint
 minimal hunks, determine semantic/ABI changes or update persisted build state.
 
+## Additive parser-role and source-line reconciliation
+
+`Surface.childRolePosition(parent, childOrdinal)` now optionally identifies the
+**zero-based position inside a named list-valued field**, independently of the
+ordinal across all of the parent's children. Its default `-1` preserves the
+previous contract for scalar or unknown edges. The original `M3ASTIndex`
+retains these positions in one lazily allocated primitive `int[]` lane,
+without an alternative node graph or a retained adapter object. A position
+requires a named incoming role in the GENERIC domain; the root and original
+domains reject list positions. The lane is absent unless a provider supplies
+at least one nonnegative position, so ordinary V1 and GENERIC V2 indexes keep
+their exact hash schemas. Positioned GENERIC indexes use an explicit V3
+structural schema, incorporating the position of each child edge. Position
+alone is not a type, binding, grammar-equivalence or lossless-token claim.
+
+`M3File.lineIndex(maxLines)` now lazily caches one source-bound `int[]` of
+UTF-16 line starts. It treats CR, LF and CRLF as line terminators and counts
+a trailing empty line. A line is one-based, a column is zero-based UTF-16;
+`positionAt(offset)` and `offsetAt(line,column)` are exact inverses for
+valid offsets, including EOF and offsets inside CRLF (both units belong to
+the preceding line). The max-line budget applies before construction and
+when accessing a previously cached map. The existing javac AST ingress now
+uses this same M3File-owned index instead of allocating its own `SourceLines`
+table. Parser-native row/column conventions still require a provider-specific
+mapping; these coordinates are not silently equated with UTF-8 bytes.
+
 **Source coordinate contract:** all published M3AST spans are zero-based,
 UTF-16, half-open `[start,end)`. Original UTF-8 byte positions may be
 translated at valid codepoint boundaries only; EOF is a valid endpoint.
@@ -59,10 +85,10 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
 
 | Donor authority | Selected insight | M3AST mapping / remaining gate |
 | --- | --- | --- |
-| [Tree-sitter](https://tree-sitter.github.io/tree-sitter/using-parsers/2-basic-parsing.html) | Incremental CST; named/anonymous tokens; named child fields; missing and error nodes; source byte ranges | `Surface`, `incomingRole`, `NAMED/TOKEN/MISSING/ERROR` and UTF-8 map. Actual native/JNI grammar adapter and changed-range qualification still pending. |
+| [Tree-sitter](https://tree-sitter.github.io/tree-sitter/using-parsers/2-basic-parsing.html) | Incremental CST; named/anonymous tokens; named child fields; missing and error nodes; source byte ranges | `Surface`, `incomingRole`, list-position lane, `NAMED/TOKEN/MISSING/ERROR` and UTF-8 map. Actual native/JNI grammar adapter and changed-range qualification still pending. |
 | [Roslyn red/green](https://github.com/dotnet/roslyn/blob/main/docs/compilers/Design/Red-Green%20Trees.md) | Immutable shared green nodes, lazy positioned red views, full fidelity | Original primitive atoms and optional projected metadata; no second red/green AST. Reuse across source generations still needs a separately proven identity/invalidator. |
 | [OpenRewrite LST](https://docs.openrewrite.org/concepts-and-explanations/lossless-semantic-trees) | Full-fidelity trivia, types and recipes; provenance-preserving edits | Borrow an existing LST and record syntax facts; type attribution stays a separate compiler/context sidecar. Actual OpenRewrite ingress and recipe result gates pending. |
-| [Eclipse JDT DOM](https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/dom/ASTNode.html) | Structural property descriptors, source ranges and recovery bits | Named edge roles plus original index; preserve JDT binding owner and `ASTRewrite` edits. Existing JDT ingress must be migrated through a contract diff, not reparsed. |
+| [Eclipse JDT DOM](https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/dom/ASTNode.html) | Structural property descriptors, scalar versus list-valued child slots, source ranges and recovery bits | Named roles and list ordinals in the original index; preserve JDT binding owner and `ASTRewrite` edits. Existing JDT ingress must be migrated through a contract diff, not reparsed. |
 | [ANTLR4](https://www.antlr.org/api/Java/org/antlr/v4/runtime/ParserRuleContext.html) | Rule contexts, alternative numbers, token source intervals and ordered children | Adapter translates original token-inclusive intervals to half-open source positions; direct provider contract missing. |
 | [JavaParser](https://github.com/javaparser/javaparser/blob/master/javaparser-core/src/main/java/com/github/javaparser/ast/Node.java) | Token ranges, lexical preservation, comments and user properties | Map only detached facts; foreign lexical printer/edit owner survives. Direct provider contract pending. |
 | [LibCST](https://libcst.readthedocs.io/en/latest/metadata.html) | Immutable CST and optional metadata/byte-span providers | Optional sidecar model, source coordinate conversion; no Python runtime in M3JDK21. |
@@ -81,8 +107,10 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
    multi-hunk and class-file deltas and invalidate only affected semantic/ABI
    dependents. The bounded snapshot change envelope above is conservative and
    does not itself complete this integration.
-3. Add source-bound optional token/trivia/line/column tables without copying
-   source payloads. Require exact reprint/source round-trips before claiming
+3. Add source-bound optional token/trivia tables and provider-specific byte,
+   scalar and display-column coordinate bridges without copying source
+   payloads. The UTF-16 line map is now present; it is not a substitute for
+   provider fidelity. Require exact reprint/source round-trips before claiming
    a provider is lossless; an AST that omits whitespace never becomes a CST
    merely because M3File holds its original text.
 4. Keep compiler semantic symbols/type bindings and OpenRewrite/JDT rewrite
