@@ -10,6 +10,7 @@ import jdk.internal.mindex.M3DotStarRelations;
 import jdk.internal.mindex.M3RegexDpPlan;
 
 import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReferenceArray;
@@ -44,7 +45,8 @@ final class M3StringRegexDp {
     private static final int MIN_NATIVE_UNITS = 256;
     private static final int MAX_TREE_DEPTH = 64;
     // Optional allocation is lazy: an allocation failure does not poison class initialization.
-    private static volatile Tables tables;
+    private static volatile SoftReference<Tables> caches;
+    private static volatile boolean preparationSuspended;
     private static volatile boolean nativeUnavailable;
     // Stateless access geometry only; optional allocation stays outside class initialization.
     private static volatile M3DotStarRelations.Access<M3String> RELATION_ACCESS;
@@ -56,6 +58,7 @@ final class M3StringRegexDp {
         int n = regex.length();
         if (n < 1 || n > MAX_PATTERN_UNITS) return UNKNOWN;
         try {
+            if (!heapAllowsPreparation()) return UNKNOWN;
             int prepared = preparedClassMatch(source, regex);
             if (prepared != UNKNOWN) return prepared;
             if (n < 2) return UNKNOWN;
@@ -82,7 +85,10 @@ final class M3StringRegexDp {
                     }
                     if (decision != UNKNOWN) return decision;
                 } catch (OutOfMemoryError unavailable) {
-                    // Relation summaries are optional; keep the existing bit/rolling/native path.
+                    preparationSuspended = true;
+                    releaseCachedMetadata();
+                    // Pressure refusal delegates to the caller's existing Pattern path.
+                    return UNKNOWN;
                 }
             }
             if (plan.closure == null) {
@@ -94,6 +100,8 @@ final class M3StringRegexDp {
             return state == UNKNOWN ? tryRepeatedUtf16(source, regex)
                     : (state & (1L << plan.atoms.length)) != 0 ? MATCH : NO_MATCH;
         } catch (OutOfMemoryError unavailable) {
+            preparationSuspended = true;
+            releaseCachedMetadata();
             // Derived-state allocation is optional; the ordinary JDK path remains authoritative.
             return UNKNOWN;
         }
@@ -379,13 +387,46 @@ final class M3StringRegexDp {
     }
 
     private static Tables tables() {
-        Tables current = tables;
+        SoftReference<Tables> reference = caches;
+        Tables current = reference == null ? null : reference.get();
         if (current != null) return current;
         synchronized (M3StringRegexDp.class) {
-            current = tables;
-            if (current == null) tables = current = new Tables();
+            reference = caches;
+            current = reference == null ? null : reference.get();
+            if (current == null) {
+                current = new Tables();
+                caches = new SoftReference<>(current);
+            }
         }
         return current;
+    }
+
+    /** Recomputable metadata only; never clears or closes canonical text owners. */
+    private static void releaseCachedMetadata() {
+        SoftReference<Tables> reference = caches;
+        if (reference != null) reference.clear();
+    }
+
+    /** Advisory heap snapshot, not a reservation or an OS/native-memory measure. */
+    private static boolean heapAllowsPreparation() {
+        Runtime runtime = Runtime.getRuntime();
+        boolean allowed = hasHeapHeadroom(runtime.maxMemory(), runtime.totalMemory(),
+                runtime.freeMemory(), preparationSuspended);
+        preparationSuspended = !allowed;
+        if (!allowed) releaseCachedMetadata();
+        return allowed;
+    }
+
+    /** Overflow-safe normalization and hysteresis; no caller budget or forced GC. */
+    private static boolean hasHeapHeadroom(long maximum, long total, long free,
+            boolean suspended) {
+        if (maximum <= 0) return false;
+        long committed = Math.max(0, Math.min(maximum, total));
+        long unused = Math.max(0, Math.min(committed, free));
+        long headroom = maximum - (committed - unused);
+        long reserve = Math.max(suspended ? 1L << 20 : 1L << 19,
+                maximum >>> (suspended ? 4 : 5));
+        return headroom >= reserve;
     }
 
     private static Plan prepare(String regex, Tables cache) {
