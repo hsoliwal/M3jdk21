@@ -644,7 +644,7 @@ jobs:
           sdk_pins={
               "pom.xml":"8445c71ca3cfd5f273d406b92310a15245625da77bd74da3e1ed3cbd478d8cd4",
               "engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java":"c4517401a7defd94ecc621bb2c19773bd6672c8fa3ee965c1ad37a63718bd92a",
-              "src/test/java/com/synexia/rewrite/M3SlotReceivingJavaJniRecipeTest.java":"dd092d03d67865dffe3a64681f40914e4184bce824ee12cb8f7e57444cdf99e1",
+              "src/test/java/com/synexia/rewrite/M3SlotReceivingJavaJniRecipeTest.java":"eb52823c4b1140d21f44277dc3353285ec529351b21e8efb19496aec93f3b9f1",
               "src/main/resources/META-INF/rewrite/m3-slot-receiving-java-jni-20261024.yml":"dc9e8a0c4c7ae64beb53fb6e3d5f099d89a429616dc85b31fbcf67cf082db089",
           }
           try:

@@ -55,6 +55,7 @@ final class M3SlotReceivingJavaJniRecipeTest {
             ".github/workflows/m3-native-shadow-stream-progress-20261020.yml",
             ".github/workflows/m3-original-mapping-provider-qualification.yml",
             "m3/collections/qualification/full-java-jni-20261018/verify.py",
+            "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionContract.java",
             "m3/migration/original-provider-20261017/source-binding.json");
 
     private record Row(String path, String before, String after, String template) { }
