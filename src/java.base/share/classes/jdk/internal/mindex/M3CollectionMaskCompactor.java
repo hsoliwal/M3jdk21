@@ -43,6 +43,8 @@ public final class M3CollectionMaskCompactor {
         int words = ((length - 1) >>> 6) + 1;
         if (deleted.length < words) throw new IllegalArgumentException("mask too short");
         if (length < 512 || removalRuns(deleted, length) > Math.max(4, length >>> 7)) {
+            // Retain the scalar path for small fragmented windows.
+            if (length >= 1024) return compactWords(values, from, length, deleted);
             int write = from;
             for (int read = 0; read < length; read++) {
                 if ((deleted[read >>> 6] & (1L << (read & 63))) == 0) {
@@ -63,6 +65,29 @@ public final class M3CollectionMaskCompactor {
             }
             write += span;
             read = nextDeletion;
+        }
+        return write;
+    }
+
+    /** Word-local survivor indexes; no element directory or rejected-bit loop. */
+    private static int compactWords(Object[] values, int from, int length, long[] deleted) {
+        int write = from;
+        for (int base = 0; base < length;) {
+            int chunk = Math.min(64, length - base);
+            long valid = -1L >>> (64 - chunk);
+            long survivors = ~deleted[base >>> 6] & valid;
+            int start = from + base;
+            if (survivors == valid) {
+                if (write != start) System.arraycopy(values, start, values, write, chunk);
+                write += chunk;
+            } else {
+                while (survivors != 0L) {
+                    int bit = Long.numberOfTrailingZeros(survivors);
+                    values[write++] = values[start + bit];
+                    survivors &= survivors - 1;
+                }
+            }
+            base += chunk;
         }
         return write;
     }
