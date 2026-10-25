@@ -1,0 +1,184 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Actual original M3JDK21 image and selected regex/collection/JNI tests; not full JCK.
+name: M3JDK21 regex collections original image
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/regex/**'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
+      - 'test/jdk/java/util/regex/M3RegexShortCircuitTest.java'
+      - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
+      - 'test/jdk/java/util/regex/M3PatternStateMaskTest.java'
+      - '.github/workflows/m3-regex-collection-superset.yml'
+      - 'm3/qualification/regex-collection-superset/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-jdk-source-image:
+    if: github.repository == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 115
+    steps:
+      - name: Checkout exact original JDK sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          submodules: false
+      - name: Java 21 boot toolchain
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse regression-source drift and unrelated collection-JNI mutations
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat <<'SEALED' | sha256sum -c
+          b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147  src/java.base/share/classes/java/util/regex/M3PatternQuery.java
+          6ffb6eb3bf57c56101dbcfe97e97f529324efa6363c9648065ee58302e01b48c  src/java.base/share/classes/java/util/regex/Matcher.java
+          1f730adaf2e7abb82f464d75008d5884bbc121b19f9d7ff770a220edc427340e  src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
+          2d1107f841fcb9beecb2abac0002749ecf47de4ac61edea15feed6b25509c4df  test/jdk/java/util/regex/M3PatternStateMaskTest.java
+          b5463d8e126b9a70dc874f181674f79f2484f6677fb30b864654d9b62fa25614  test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java
+          8682503c6c38d2c8cf4837f9188fa609ddfdb9e4c3e59e595da87d93c4e40028  test/jdk/java/util/regex/M3RegexShortCircuitTest.java
+          c0e67fad7a03fe6558ddeb31442b3c2c6a916ded8563572a632da3934d348318  test/jdk/java/util/regex/M3RegexCompactPlanTest.java
+          SEALED
+          while read -r expected path; do
+            test -f "$path"
+            test ! -L "$path"
+            observed="$(git hash-object "$path")"
+            if [[ "$observed" != "$expected" ]]; then
+              echo "ORIGINAL_JDK_COLLECTION_JNI_DRIFT: $path $observed"
+              exit 1
+            fi
+          done <<'PRESERVED'
+          7819788e326c0a833984186af9b4a91f3d156cdf src/java.base/share/classes/java/util/ChangeJournal.java
+          944c61e15ede09dfc0965a425bbd60aafe761176 src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java
+          ea949c6db62f312a71f7fdba3f2576816b512fec test/jdk/java/util/concurrent/CopyOnWriteArrayList/M3CopyOnWriteWordMaskTest.java
+          ac3d3996faca3b5a125b9cda17a4bc7adf7de37a m3/qualification/collection-convergence-20261024/COW_SINGLE_WORD_RECEIPT.json
+          071a3dd97ab4294741a1393b7540398d06af2378 m3/qualification/collection-convergence-20261024/REGEX_COLLECTION_SUPERSET_RECEIPT.json
+          670ed47d9e6e3f57a29dbf4628a0791158e29960 m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json
+          5c39dc53d3bbd80eada25f74b960e22391eeecb6 src/java.base/share/classes/java/util/CollectionViews.java
+          e6059aeb9b2e7f332fb0baea2684395c268a5414 src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
+          885f237a80cdd5997a852609fa60066d0f7d11c4 src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+          b9c942d354189c26ed0848d7dd73f21754838049 src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java
+          59b2130ca8e897e75e24afbd45e8fd885c55b0e9 src/java.base/share/native/libjava/M3IndexMaskWindow.c
+          PRESERVED
+      - name: Native JDK21 build dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev \
+            libxrandr-dev libxi-dev libice-dev libsm-dev
+      - name: Configure real M3JDK21 HotSpot and Java modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release --with-jvm-variants=server \
+            --enable-headless-only --disable-warnings-as-errors \
+            --with-freetype=bundled --with-jobs=2
+      - name: Build real M3JDK21 image without disabling javac warning errors
+        shell: bash
+        run: |
+          set -euo pipefail
+          make images JOBS=2 ENABLE_JAVAC_SERVER=false
+      - name: Compile actual existing regex, indexed and native-count test entrypoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          java_path="$(find build -mindepth 3 -maxdepth 9 -type f -path '*/images/jdk/bin/java' -print -quit)"
+          test -n "$java_path"
+          home="$(dirname "$(dirname "$java_path")")"
+          out="$RUNNER_TEMP/m3-integrated"
+          mkdir -p "$out/tests" "$out/module-src/jdk/internal/m3" "$out/module-tests"
+          echo "$home" > "$out/image.txt"
+          "$home/bin/java" -version
+          "$home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all,-serial -Werror \
+            --add-modules jdk.management \
+            --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+            --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+            -d "$out/tests" \
+            test/jdk/java/util/regex/M3RegexShortCircuitTest.java \
+            test/jdk/java/util/regex/M3RegexCompactPlanTest.java \
+            test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java \
+            test/jdk/java/util/regex/M3PatternStateMaskTest.java \
+            test/jdk/java/util/regex/M3PatternQueryTest.java \
+            test/jdk/java/util/regex/M3RegexReuseTest.java \
+            test/jdk/java/util/regex/M3RegexLiteralTQTest.java \
+            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
+            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java \
+            test/jdk/java/util/CollectionViews/CollectionViewsContract.java \
+            test/jdk/java/util/CollectionViews/RunSearchJni.java \
+            test/jdk/java/util/concurrent/CopyOnWriteArrayList/M3CopyOnWriteWordMaskTest.java
+          cp test/jdk/jdk/internal/m3/M3MaskCountTest.java "$out/module-src/jdk/internal/m3/"
+          cp test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java \
+             "$out/module-src/jdk/internal/m3/"
+          "$home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all,-serial -Werror \
+            --patch-module java.base="$out/module-src" -d "$out/module-tests" \
+            "$out/module-src/jdk/internal/m3/M3MaskCountTest.java" \
+            "$out/module-src/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java"
+      - name: Run original JDK regex short-circuit and state-mask differential
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-integrated"
+          home="$(cat "$out/image.txt")"
+          for mode in -Xmixed -Xint; do
+            "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
+              --add-opens java.base/java.util.regex=ALL-UNNAMED \
+              --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+              -cp "$out/tests" M3RegexFrontierShortCircuitTest
+            "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
+              --add-opens java.base/java.util.regex=ALL-UNNAMED \
+              --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+              -cp "$out/tests" M3RegexShortCircuitTest
+            "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
+              --add-opens java.base/java.util.regex=ALL-UNNAMED \
+              --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED \
+              --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+              -cp "$out/tests" M3RegexCompactPlanTest
+          done
+          "$home/bin/java" -Xmx768m -Xcheck:jni \
+            --add-opens java.base/java.util.regex=ALL-UNNAMED \
+            -cp "$out/tests" M3PatternStateMaskTest candidate
+          "$home/bin/java" -Xmx768m -Xcheck:jni \
+            --add-opens java.base/java.util.regex=ALL-UNNAMED \
+            --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+            -cp "$out/tests" M3PatternQueryTest
+          "$home/bin/java" -Xmx768m -Xcheck:jni --add-modules jdk.management \
+            --add-opens java.base/java.util.regex=ALL-UNNAMED \
+            --add-opens java.base/java.lang=ALL-UNNAMED \
+            -cp "$out/tests" M3RegexReuseTest
+          "$home/bin/java" -Xmx768m -Xcheck:jni \
+            -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage \
+            -cp "$out/tests" M3RegexLiteralTQTest
+      - name: Check unchanged JDK filtered-sorted, indexed, and libjava count JNI owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-integrated"
+          home="$(cat "$out/image.txt")"
+          for name in M3IndexedArrayTest M3StateMaskedIndexedViewTest; do
+            "$home/bin/java" -Xcheck:jni \
+              --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+              -cp "$out/tests" "$name"
+          done
+          "$home/bin/java" -Xss256k -Xcheck:jni --add-modules jdk.management \
+            --add-opens java.base/java.util=ALL-UNNAMED \
+            -cp "$out/tests" CollectionViewsContract
+          for mode in -Xmixed -Xint; do
+            "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
+              -cp "$out/tests" M3CopyOnWriteWordMaskTest
+          done
+          "$home/bin/java" -Xcheck:jni --patch-module java.base="$out/module-tests" \
+            jdk.internal.m3.M3MaskCountTest native-quick
+          "$home/bin/java" -Xint -Xcheck:jni --patch-module java.base="$out/module-tests" \
+            jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
+          echo "M3JDK21_ORIGINAL_REGEX_COLLECTION_JNI_SELECTED_IMAGE_PASS"
