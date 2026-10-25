@@ -1,0 +1,284 @@
+{
+  "schema": "M3_REGEX_COMPACT_METADATA_RECEIVER_V1",
+  "status": "QUALIFIED_SOURCE_DRAFT_RESOURCE_HOLD",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "826a3c7906af9e9b899d4bb4d3b92f8c89db8cf1",
+  "canonical_pr": 13301,
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3-regex-compact-plan-20261025",
+  "target_parent": "a6c4b9bfefa696f08e22ad8adc475d4c4550369f",
+  "target_pr": 1908,
+  "recipe_engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "dataset": "m3-regex-compact-plan-20261025",
+  "scope": "Four recipe-executed Java/test postimages refine original Matcher and M3TQ; ten existing collection/JNI/regex owners unchanged. No new runtime owner, JNI symbol, external layer or provider-family completion.",
+  "executed_postimages": [
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "before_sha256": "eb837c99e40740d48e2a2ab3c14616d3502e9917a9e84eb3a4ce4d85590040de",
+      "after_sha256": "6ffb6eb3bf57c56101dbcfe97e97f529324efa6363c9648065ee58302e01b48c",
+      "template": "00-Matcher.java.txt",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "before_sha256": "f05c47933a11245c697df322fa9aa85ddd1a117f6ba44d68f3d619a1971c0e28",
+      "after_sha256": "1f730adaf2e7abb82f464d75008d5884bbc121b19f9d7ff770a220edc427340e",
+      "template": "01-M3TQ.java.txt",
+      "mode": "100644"
+    },
+    {
+      "path": "test/jdk/java/util/regex/M3RegexCompactPlanTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "c0e67fad7a03fe6558ddeb31442b3c2c6a916ded8563572a632da3934d348318",
+      "template": "02-M3RegexCompactPlanTest.java.txt",
+      "mode": "100644"
+    },
+    {
+      "path": "test/jdk/java/util/regex/M3RegexShortCircuitTest.java",
+      "before_sha256": "7858c30a90fb84b5e991c15c9ea84ff67d8dc9497843e3f339b99f543036e2ef",
+      "after_sha256": "8682503c6c38d2c8cf4837f9188fa609ddfdb9e4c3e59e595da87d93c4e40028",
+      "template": "03-M3RegexShortCircuitTest.java.txt",
+      "mode": "100644"
+    }
+  ],
+  "preserved_owners": [
+    {
+      "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+      "sha256": "7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203",
+      "git_blob_sha1": "7819788e326c0a833984186af9b4a91f3d156cdf"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "sha256": "e09db07fb113233e52a67960411608d8b18dc0eedfc5a7f861cdaecc7c1cc1e6",
+      "git_blob_sha1": "5c39dc53d3bbd80eada25f74b960e22391eeecb6"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+      "sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+      "git_blob_sha1": "b9c942d354189c26ed0848d7dd73f21754838049"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+      "sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+      "git_blob_sha1": "e6059aeb9b2e7f332fb0baea2684395c268a5414"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
+      "sha256": "6eaccec5b5ccc41b39ba165c2b5c57768e84d964430a7c28fba0c5061d41ba04",
+      "git_blob_sha1": "885f237a80cdd5997a852609fa60066d0f7d11c4"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+      "sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
+      "git_blob_sha1": "59b2130ca8e897e75e24afbd45e8fd885c55b0e9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java",
+      "sha256": "8a68f8a3a662fb3d5d80c41848041e81dfeeb2c659a3a26f8d3742717a8c861d",
+      "git_blob_sha1": "944c61e15ede09dfc0965a425bbd60aafe761176"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java",
+      "sha256": "17a2c1b601d5552b3baeb6751c18700f7254ee6faa23afc0913cf3c45a3b4c05",
+      "git_blob_sha1": "3f88d207e1f6d68da96477a0d184cf8d1caaa6d7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "sha256": "b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147",
+      "git_blob_sha1": "4974e71c6db4dcb74b4fe6943254db38a801daac"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+      "git_blob_sha1": "252e46fb57e824f30688eac3600bae9480511fc8"
+    }
+  ],
+  "sdk": {
+    "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "dataset": "m3-regex-compact-plan-20261025",
+    "SDK_EXECUTION": "PASS",
+    "tests": 6,
+    "mixed_states": 16,
+    "input_orders": 2,
+    "all_after_fixed_point": "PASS",
+    "refusals": "All3required preimages missing/drift/duplicate; new ABSENT output drift and duplicate",
+    "exact_typed_java_export": "PASS",
+    "engine_modified": false,
+    "log": "evidence/sdk.log"
+  },
+  "image": {
+    "strict_build": "PASS",
+    "source_configuration": "release/server x86_64 Linux; warnings-as-errors retained; javac server disabled; JOBS=1",
+    "output_subdir": "jdk-pass9",
+    "build": "evidence/image/candidate-build-receipt.json",
+    "identity": "evidence/image/images.json",
+    "cds_archives": "Default and NOCOOPS generated; not full CDS behavioral qualification",
+    "patch_module_final_proof": false,
+    "diagnostic_limit": "Three old-output collisions retained. Diagnostic logging-only jlink succeeds at fresh destinations using both linkers; standard unpatched make images succeeds with JDK_IMAGE_SUBDIR=jdk-pass9. Old destination root cause remains unconfirmed."
+  },
+  "jtreg": {
+    "candidate_passed": 54,
+    "whole_regex_directory": true,
+    "collection_jni": "Selected array, filtered/sorted backed views, COW, mask and NATIVE_REQUIRED suites",
+    "flags": "-Xcheck:jni",
+    "summary": "evidence/image/candidate-jtreg-summary.txt"
+  },
+  "interfaces": {
+    "Pattern_Matcher_public_protected": "BYTE_EQUAL",
+    "M3TQ_internal": "BYTE_EQUAL",
+    "libjava_exports": {
+      "status": "BYTE_EQUAL_EXPORTED_NAMES",
+      "count": 277,
+      "scope": "libjava dynamic defined exported symbol names; no full native ABI structure/layout claim"
+    },
+    "preserved_owners": [
+      {
+        "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+        "sha256": "7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203",
+        "git_blob_sha1": "7819788e326c0a833984186af9b4a91f3d156cdf"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+        "sha256": "e09db07fb113233e52a67960411608d8b18dc0eedfc5a7f861cdaecc7c1cc1e6",
+        "git_blob_sha1": "5c39dc53d3bbd80eada25f74b960e22391eeecb6"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+        "sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+        "git_blob_sha1": "b9c942d354189c26ed0848d7dd73f21754838049"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+        "sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+        "git_blob_sha1": "e6059aeb9b2e7f332fb0baea2684395c268a5414"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
+        "sha256": "6eaccec5b5ccc41b39ba165c2b5c57768e84d964430a7c28fba0c5061d41ba04",
+        "git_blob_sha1": "885f237a80cdd5997a852609fa60066d0f7d11c4"
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+        "sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
+        "git_blob_sha1": "59b2130ca8e897e75e24afbd45e8fd885c55b0e9"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java",
+        "sha256": "8a68f8a3a662fb3d5d80c41848041e81dfeeb2c659a3a26f8d3742717a8c861d",
+        "git_blob_sha1": "944c61e15ede09dfc0965a425bbd60aafe761176"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java",
+        "sha256": "17a2c1b601d5552b3baeb6751c18700f7254ee6faa23afc0913cf3c45a3b4c05",
+        "git_blob_sha1": "3f88d207e1f6d68da96477a0d184cf8d1caaa6d7"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+        "sha256": "b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147",
+        "git_blob_sha1": "4974e71c6db4dcb74b4fe6943254db38a801daac"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+        "sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+        "git_blob_sha1": "252e46fb57e824f30688eac3600bae9480511fc8"
+      }
+    ]
+  },
+  "oracle_mode_runs": 18,
+  "independent_trigram_checks_each": 42635,
+  "resource_evidence": {
+    "status": "RESOURCE_HOLD",
+    "cohorts": 83,
+    "variant_processes": 9,
+    "retained_processes": 6,
+    "aggregation": "Median of last3 samples in each of3 independent processes per variant:9 pooled observations, not9 process pairs. Three rotating variant orders; single host forced C2; no JMH confidence intervals.",
+    "summary": "evidence/resources-summary.json",
+    "allocation_vs_parent": {
+      "better": 34,
+      "equal": 49,
+      "worse": 0,
+      "cold_matcher_bytes_delta": -16
+    },
+    "allocation_vs_original": {
+      "better": 26,
+      "equal": 53,
+      "worse": 4,
+      "remaining_compile_bytes_increase_max": 360
+    },
+    "cpu_counterevidence": "Whole-cohort DNF compile1.690x parent/2.813x original; cold OR2 absent8192 1.297x parent. Isolated longer-warmup followup changes compile to0.825x parent/1.081x original but OR2 remains1.146x parent (47.69ns/call). Retain both, no universal performance claim.",
+    "focused": "evidence/focused/summary.json",
+    "focused_processes": 27,
+    "retained_counterevidence": "1024owners: candidate transient3,916,512B vs parent4,891,936B vs original71,045,736B. Candidate post-GC whole-process heap5,703,360B; parent varies4,373,032..5,805,680B; original4,265,840B. Candidate RSS52,608..53,132KiB vs parent54,412..54,588KiB; NMT committed294,177,148..294,177,212B vs parent293,827,540B. Whole-process metrics do not establish per-owner retained reduction.",
+    "counterevidence": "All cohorts and compilation costs retained. Whole-process post-GC heap, RSS and NMT are not per-owner attribution. No universal CPU, wall, memory or latency claim; full sustained qualification remains open."
+  },
+  "review": {
+    "reviewer": "fresh gpt-6-astra /root/review_regex_compact_pass9",
+    "status": "NO_NEW_CORRECTNESS_BLOCKER_READY_FOR_DRAFT_PUBLICATION",
+    "critical": [],
+    "important": [
+      "Existing RESOURCE_HOLD: isolated cold OR2 CPU1.146x parent, retainedheap attribution inconclusive",
+      "Existing full historical provenance, shallow local full-borrow, required CI and broader release gates remain open"
+    ],
+    "minor": [
+      "Canonical revision placeholder must be replaced by verified private commit before receiving publication; this is an outstanding transaction step, not a deferred source issue"
+    ],
+    "independent_checks": [
+      "Four product/template/executed byteequal seals",
+      "Three required preimages equal pinned parent",
+      "Ten preserved owner seals",
+      "Matcher zero/max complemented starts, usePattern null/invalidation, Facts and prepared global data paths, reset/region/mutable inputs",
+      "M3TQ factory-deduplicated ownedkeys, empty/32/33/UTF16/concurrent paths, compound fallback",
+      "SDK16mixedstates bothorders, fixedpoint/refusal includingduplicate newoutput; stale-negative mutation",
+      "Recorded strict unpatched image,54jtreg and6SDK outcomes",
+      "Catalogue and correction records; existing-owner naming exclusion rule9"
+    ],
+    "declined_to_judge": [
+      "Universal CPU/retained-memory improvement",
+      "Full JCK/JDK, cross-platform/provider and CDS behavioral qualification",
+      "Full historical provenance/full-borrow completion",
+      "Remote CI or publication state"
+    ],
+    "executor_disposition": "Accept source correctness review for draft publication only. Each declined broader behavior remains an explicit unqualified merge gate; claiming release or universal gains would exceed evidence. Canonical pin will be replaced and exact remote blobs checked before receiver CAS.",
+    "ready_to_merge": false,
+    "review_only": true,
+    "broad_test_rerun": false
+  },
+  "source_origins": "Existing target owners at target_parent, refined by the canonical recipe; first-party modifications with unchanged per-file rights",
+  "rights": "Existing per-file notices preserved: Matcher GPL2+Classpath; M3TQ/ShortCircuit/CompactPlan Apache2. No challenge solution or private recipe published.",
+  "naming_exclusion": {
+    "status": "EXPLICIT_REVIEWED_EXISTING_OWNER_EXCLUSION",
+    "reason": "Refines existing Matcher/M3TQ owners, private M3TQ.ScanPlan stays within its existing internal owner; no new top-level owner/public alias/module or migration; public Pattern/Matcher signatures byte equal. Existing name-map and queue unchanged.",
+    "gate": "M3JDK21_NAME_RECEIVER_PASS; no naming/backend/phase promotion"
+  },
+  "full_borrow": {
+    "local_gate": "BLOCKED_SHALLOW_ANCESTRY",
+    "initial_sparse_files": "Restored exact absent tracked HEAD evidence; no product source delta",
+    "remote_compare": "Recorded c9b0704 ancestor confirmed ahead8662/behind0; local shallow4reachablecommits prevents existing checker from passing; not a substitute for full local gate",
+    "evidence": "evidence/full-borrow-ancestry.json"
+  },
+  "scoped_provenance": {
+    "status": "SCOPED_PASS",
+    "checked_paths": 240,
+    "checker": "scripts/legal/check_m3_provenance.py load_ledger + validate_change; exact canonical index order/count/pin assertions",
+    "parent_index_members_preserved": 17,
+    "new_index_members": 18,
+    "old_pins_byte_equal": true,
+    "old_relative_order_preserved": true,
+    "canonical_shard_order": "PASS: lexical after canonical first member",
+    "policy_change": "only ledger_set.index SHA256 and bytes",
+    "full_historical_gate": "NOT_RUN: full historical ledger set was not recovered; no full pass claimed"
+  },
+  "remaining_gates": [
+    "full JCK and full JDK suite",
+    "cross-platform/provider families",
+    "full CDS behavior beyond archive generation",
+    "sustained realistic resource qualification, retained heap and observed CPU regressions",
+    "full canonical reactor",
+    "full historical provenance ledger set unavailable",
+    "local full-borrow gate blocked by shallow ancestry despite remote ancestor confirmation",
+    "remote required CI pending",
+    "String remains active; no naming/backend/phase promotion",
+    "standalone canonical naming admission NOT_RUN; existing-owner maintenance exclusion reviewed separately"
+  ],
+  "receiving_phase": "String remains active; no promotion",
+  "boundary": "Passive receipt only; executable recipes/fixtures/catalogue/correction memory remain canonical private Synexia."
+}

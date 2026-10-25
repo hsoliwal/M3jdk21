@@ -45,7 +45,9 @@ public final class M3TQ {
     this.trigrams = Objects.requireNonNull(trigrams, "trigrams").clone();
     Arrays.sort(this.trigrams);
     this.subqueries = List.copyOf(Objects.requireNonNull(subqueries, "subqueries"));
-    this.scanPlan = ScanPlan.compile(this);
+    // Flat queries already own sorted immutable keys. Only compound queries
+    // need a separate bounded DNF directory; do not retain duplicate flat keys.
+    this.scanPlan = this.subqueries.isEmpty() ? null : ScanPlan.compile(this);
   }
 
   public static M3TQ all() {
@@ -193,7 +195,7 @@ public final class M3TQ {
 
   /** Whether this compiled query has a bounded allocation-free subject scan. */
   public boolean hasScanPlan() {
-    return scanPlan != null;
+    return scanPlan != null || (subqueries.isEmpty() && trigrams.length <= ScanPlan.MAX_KEYS);
   }
 
   /**
@@ -208,6 +210,9 @@ public final class M3TQ {
     Objects.requireNonNull(value, "value");
     Objects.checkFromToIndex(from, to, value.length());
     requireFactBudget(to - from, maxUtf16Units);
+    if (subqueries.isEmpty() && trigrams.length <= ScanPlan.MAX_KEYS) {
+      return ScanPlan.testFlat(op, trigrams, value, from, to);
+    }
     ScanPlan compiled = scanPlan;
     if (compiled == null) {
       throw new IllegalStateException("trigram query exceeds streaming plan bounds");
@@ -307,6 +312,32 @@ public final class M3TQ {
     private static long[] compactFactKeysAfterSort(long[] clauses) {
       Arrays.sort(clauses);
       return compactFactKeys(clauses);
+    }
+
+    /** Scan the original flat key plane; no copied keys, clauses or plan object. */
+    static boolean testFlat(Op op, long[] keys, CharSequence value, int from, int to) {
+      if (op == Op.ALL) return true;
+      if (op == Op.NONE) return false;
+      boolean all = op == Op.AND;
+      if (keys.length == 0) return all;
+      if (value instanceof String string && keys.length <= 2) {
+        for (long key : keys) {
+          if (containsTrigram(string, from, to, key) != all) return !all;
+        }
+        return all;
+      }
+      long remaining = (1L << keys.length) - 1L; // admitted keys.length <= 32
+      long window = 0L;
+      for (int index = from; index < to; index++) {
+        window = ((window << 16) | value.charAt(index)) & 0xffffffffffffL;
+        if (index - from < 2) continue;
+        int position = Arrays.binarySearch(keys, window);
+        if (position < 0) continue;
+        if (!all) return true;
+        remaining &= ~(1L << position);
+        if (remaining == 0L) return true;
+      }
+      return false;
     }
 
     boolean test(CharSequence value, int from, int to) {
