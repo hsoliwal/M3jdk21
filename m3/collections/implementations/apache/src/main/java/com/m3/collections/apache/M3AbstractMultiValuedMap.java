@@ -1,4 +1,4 @@
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: owned M3 array storage, pinned bounded helper closure and documented query-contract repairs.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: owned M3 array storage, pinned bounded helper closure and documented query-contract repairs; incremental value and logical-key counters with an epoch-guarded recount.
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -247,16 +247,17 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
         @Override
         public int getCount(final Object object) {
             int count = 0;
-            final Collection<V> col = M3AbstractMultiValuedMap.this.getMap().get(object);
+            final Collection<V> col = M3AbstractMultiValuedMap.this.map.get(object);
             if (col != null) {
                 count = col.size();
             }
             return count;
         }
 
+        //FLLDCIM: ALG - LC992 logical key count read from nonEmptyGroups, no view allocation
         @Override
         public boolean isEmpty() {
-            return logicalMap().isEmpty();
+            return M3AbstractMultiValuedMap.this.isEmpty();
         }
 
         @Override
@@ -264,9 +265,10 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
             return M3AbstractMultiValuedMap.this.size();
         }
 
+        //FLLDCIM: ALG - LC992 logical key count read from nonEmptyGroups
         @Override
         protected int uniqueElements() {
-            return logicalMap().size();
+            return countedGroups();
         }
     }
 
@@ -375,7 +377,7 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
 
         ValuesIterator(final Object key) {
             this.key = key;
-            this.values = getMap().get(key);
+            this.values = M3AbstractMultiValuedMap.this.map.get(key);
             this.iterator = values.iterator();
         }
 
@@ -389,9 +391,16 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
             return iterator.next();
         }
 
+        //FLLDCIM: ALG - LC904 distinct-count: held group counted only while still attached
         @Override
         public void remove() {
-            iterator.remove();
+            final long ticket = open();
+            final int before = values.size();
+            try {
+                iterator.remove();
+            } finally {
+                closeHeld(ticket, key, values, before);
+            }
             if (values.isEmpty()) {
                 M3AbstractMultiValuedMap.this.remove(key);
             }
@@ -416,33 +425,63 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
             this.key = key;
         }
 
+        //FLLDCIM: ALG - LC904 distinct-count: 0<->1 group transition counted at the wrapper write
         @Override
         public boolean add(final V value) {
-            Collection<V> coll = getMapping();
-            if (coll == null) {
-                coll = createCollection();
-                M3AbstractMultiValuedMap.this.map.put(key, coll);
+            final long ticket = open();
+            Collection<V> coll = null;
+            int before = 0;
+            try {
+                coll = getMapping();
+                if (coll == null) {
+                    coll = createCollection();
+                    putGroup(key, coll);
+                } else {
+                    before = coll.size();
+                }
+                return coll.add(value);
+            } finally {
+                close(ticket, before, coll == null ? 0 : coll.size());
             }
-            return coll.add(value);
         }
 
+        //FLLDCIM: ALG - LC904 distinct-count: bulk delta measured, partial failure included
         @Override
         public boolean addAll(final Collection<? extends V> other) {
-            Collection<V> coll = getMapping();
-            if (coll == null) {
-                coll = createCollection();
-                M3AbstractMultiValuedMap.this.map.put(key, coll);
+            final long ticket = open();
+            Collection<V> coll = null;
+            int before = 0;
+            try {
+                coll = getMapping();
+                if (coll == null) {
+                    coll = createCollection();
+                    putGroup(key, coll);
+                } else {
+                    before = coll.size();
+                }
+                return coll.addAll(other);
+            } finally {
+                close(ticket, before, coll == null ? 0 : coll.size());
             }
-            return coll.addAll(other);
         }
 
+        //FLLDCIM: ALG - LC904 distinct-count: group emptied, then detached
         @Override
         public void clear() {
-            final Collection<V> coll = getMapping();
-            if (coll != null) {
+            final long ticket = open();
+            Collection<V> coll = null;
+            int before = 0;
+            try {
+                coll = getMapping();
+                if (coll == null) {
+                    return;
+                }
+                before = coll.size();
                 coll.clear();
-                M3AbstractMultiValuedMap.this.remove(key);
+            } finally {
+                close(ticket, before, coll == null ? 0 : coll.size());
             }
+            M3AbstractMultiValuedMap.this.remove(key);
         }
 
         @Override
@@ -458,8 +497,9 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
             return coll == null ? java.util.Collections.emptyList().containsAll(other) : coll.containsAll(other);
         }
 
+        //FLLDCIM: ALG - owned read: does not open the getMap() epoch guard
         protected Collection<V> getMapping() {
-            return getMap().get(key);
+            return M3AbstractMultiValuedMap.this.map.get(key);
         }
 
         @Override
@@ -477,44 +517,71 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
             return new ValuesIterator(key);
         }
 
+        //FLLDCIM: ALG - LC904 distinct-count: 1->0 transition counted before the detach
         @Override
         public boolean remove(final Object item) {
-            final Collection<V> coll = getMapping();
-            if (coll == null) {
-                return false;
+            final long ticket = open();
+            Collection<V> coll = null;
+            int before = 0;
+            final boolean result;
+            try {
+                coll = getMapping();
+                if (coll == null) {
+                    return false;
+                }
+                before = coll.size();
+                result = coll.remove(item);
+            } finally {
+                close(ticket, before, coll == null ? 0 : coll.size());
             }
-
-            final boolean result = coll.remove(item);
             if (coll.isEmpty()) {
                 M3AbstractMultiValuedMap.this.remove(key);
             }
             return result;
         }
 
+        //FLLDCIM: ALG - LC904 distinct-count: bulk delta measured, partial failure included
         @Override
         public boolean removeAll(final Collection<?> c) {
-            final Collection<V> coll = getMapping();
-            Objects.requireNonNull(c, "c");
-            if (coll == null) {
-                return false;
+            final long ticket = open();
+            Collection<V> coll = null;
+            int before = 0;
+            final boolean result;
+            try {
+                coll = getMapping();
+                before = coll == null ? 0 : coll.size();
+                Objects.requireNonNull(c, "c");
+                if (coll == null) {
+                    return false;
+                }
+                result = coll.removeAll(c);
+            } finally {
+                close(ticket, before, coll == null ? 0 : coll.size());
             }
-
-            final boolean result = coll.removeAll(c);
             if (coll.isEmpty()) {
                 M3AbstractMultiValuedMap.this.remove(key);
             }
             return result;
         }
 
+        //FLLDCIM: ALG - LC904 distinct-count: bulk delta measured, partial failure included
         @Override
         public boolean retainAll(final Collection<?> c) {
-            final Collection<V> coll = getMapping();
-            Objects.requireNonNull(c, "c");
-            if (coll == null) {
-                return false;
+            final long ticket = open();
+            Collection<V> coll = null;
+            int before = 0;
+            final boolean result;
+            try {
+                coll = getMapping();
+                before = coll == null ? 0 : coll.size();
+                Objects.requireNonNull(c, "c");
+                if (coll == null) {
+                    return false;
+                }
+                result = coll.retainAll(c);
+            } finally {
+                close(ticket, before, coll == null ? 0 : coll.size());
             }
-
-            final boolean result = coll.retainAll(c);
             if (coll.isEmpty()) {
                 M3AbstractMultiValuedMap.this.remove(key);
             }
@@ -572,6 +639,33 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
     /** The map used to store the data */
     private transient Map<K, Collection<V>> map;
 
+    /** The cached logical (non-empty group) view; it holds no state of its own. */
+    private transient LogicalGroups logicalView;
+
+    //FLLDCIM: ALG - LC904 distinct-count: two ints replace the O(#keys) scans of size()/isEmpty()/keySet().size()
+    /** Sum of the attached group sizes; valid only while {@link #exact} holds. */
+    private transient int totalValues;
+
+    /** Attached groups holding at least one value: the logical key count (private empty owners excluded). */
+    private transient int nonEmptyGroups;
+
+    //FLLDCIM: ALG - epoch guard: every counted write, recount and raw directory exposure advances the epoch
+    /** Re-entrancy witness: a counted write applies its delta only if no other write, recount or exposure intervened. */
+    private transient long epoch;
+
+    /** Owned writes in progress; reads made meanwhile (from callbacks) recount instead of trusting the counters. */
+    private transient int inFlight;
+
+    /** True while the counters equal a recount of the directory. */
+    private transient boolean exact;
+
+    /**
+     * Owned final leaves write the directory only through the counted mutation points of this
+     * package. A foreign subclass may keep the map it passed to the wrapping constructor or got
+     * from {@link #getMap()}/{@link #setMap(Map)}, so its reads always recount.
+     */
+    private final transient boolean ownedLeaf = ownedLeaf(getClass());
+
     /**
      * Constructor needed for subclass serialization.
      */
@@ -594,9 +688,15 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
         return asMapView != null ? asMapView : (asMapView = new AsMap(logicalMap()));
     }
 
+    //FLLDCIM: ALG - clear resets both counters to an exact zero
     @Override
     public void clear() {
-        getMap().clear();
+        open();
+        try {
+            map.clear();
+        } finally {
+            closeCleared();
+        }
     }
 
     @Override
@@ -606,7 +706,7 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
 
     @Override
     public boolean containsMapping(final Object key, final Object value) {
-        final Collection<V> coll = getMap().get(key);
+        final Collection<V> coll = map.get(key);
         return coll != null && coll.contains(value);
     }
 
@@ -644,6 +744,8 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
                 values.add(value);
             }
         }
+        //FLLDCIM: ALG - transient counters rebuilt once after deserialization; the wire form is unchanged
+        recount();
     }
 
     /**
@@ -694,10 +796,15 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
 
     /**
      * Gets the map being wrapped.
+     * <p>
+     * The caller may write the returned map directly, so this call invalidates the value and
+     * key counters; the next size query performs one validated O(#keys) recount.
      *
      * @return the wrapped map
      */
+    //FLLDCIM: ALG - epoch guard: raw directory handed to a subclass invalidates the counters
     protected Map<K, ? extends Collection<V>> getMap() {
+        expose();
         return map;
     }
 
@@ -706,9 +813,10 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
         return asMap().hashCode();
     }
 
+    //FLLDCIM: ALG - LC992 logical emptiness from nonEmptyGroups in O(1), no view allocation
     @Override
     public boolean isEmpty() {
-        return logicalMap().isEmpty();
+        return countedGroups() == 0;
     }
 
     /**
@@ -752,18 +860,29 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
      * @param value the value to add to the collection at the key
      * @return the value added if the map changed and null if the map did not change
      */
+    //FLLDCIM: ALG - LC904 distinct-count: a new group is counted only once it is attached
     @Override
     public boolean put(final K key, final V value) {
-        Collection<V> coll = getMap().get(key);
-        if (coll == null) {
-            coll = createCollection();
-            if (coll.add(value)) {
-                map.put(key, coll);
-                return true;
+        final long ticket = open();
+        Collection<V> coll = null;
+        int before = 0;
+        try {
+            final Collection<V> mapped = map.get(key);
+            if (mapped == null) {
+                final Collection<V> created = createCollection();
+                if (created.add(value)) {
+                    putGroup(key, created);
+                    coll = created;
+                    return true;
+                }
+                return false;
             }
-            return false;
+            coll = mapped;
+            before = coll.size();
+            return coll.add(value);
+        } finally {
+            close(ticket, before, coll == null ? 0 : coll.size());
         }
-        return coll.add(value);
     }
 
     /**
@@ -841,7 +960,7 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
      */
     @Override
     public Collection<V> remove(final Object key) {
-        return M3ApacheCollectionUtils.emptyIfNull(getMap().remove(key));
+        return M3ApacheCollectionUtils.emptyIfNull(detach(key));
     }
 
     /**
@@ -857,15 +976,25 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
      * @param value the value to remove
      * @return true if the mapping was removed, false otherwise
      */
+    //FLLDCIM: ALG - LC904 distinct-count: 1->0 transition counted, empty group then detached
     @Override
     public boolean removeMapping(final Object key, final Object value) {
-        final Collection<V> coll = getMap().get(key);
-        if (coll == null) {
-            return false;
+        final long ticket = open();
+        Collection<V> coll = null;
+        int before = 0;
+        final boolean changed;
+        try {
+            coll = map.get(key);
+            if (coll == null) {
+                return false;
+            }
+            before = coll.size();
+            changed = coll.remove(value);
+        } finally {
+            close(ticket, before, coll == null ? 0 : coll.size());
         }
-        final boolean changed = coll.remove(value);
         if (coll.isEmpty()) {
-            getMap().remove(key);
+            detach(key);
         }
         return changed;
     }
@@ -873,33 +1002,32 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
     /**
      * Sets the map being wrapped.
      * <p>
-     * <strong>NOTE:</strong> this method should only be used during deserialization
+     * <strong>NOTE:</strong> this method should only be used during deserialization.
+     * The counters are invalidated and rebuilt by the next size query or by
+     * {@link #doReadObject(ObjectInputStream)}.
      *
      * @param map the map to wrap
      */
+    //FLLDCIM: ALG - epoch guard: a replaced directory invalidates the counters
     @SuppressWarnings("unchecked")
     protected void setMap(final Map<K, ? extends Collection<V>> map) {
         this.map = (Map<K, Collection<V>>) map;
+        expose();
     }
 
     /**
      * {@inheritDoc}
      * <p>
-     * This implementation does <strong>not</strong> cache the total size
-     * of the multivalued map, but rather calculates it by iterating
-     * over the entries of the underlying map.
+     * This implementation caches the total size. Every owned modification (the map,
+     * its wrapped collections, sub-list views and the entry/value/key-set views)
+     * updates the cached total and the logical key count by the size change it made.
+     * After {@link #getMap()} or {@link #setMap(Map)}, or in a subclass not owned by
+     * this package, the total is recomputed by iterating over the groups.
      */
+    //FLLDCIM: ALG - LC904 distinct-count: O(1) read of totalValues
     @Override
     public int size() {
-        // the total size should be cached to improve performance
-        // but this requires that all modifications of the multimap
-        // (including the wrapped collections and entry/value
-        // collections) are tracked.
-        int size = 0;
-        for (final Collection<V> col : getMap().values()) {
-            size += col.size();
-        }
-        return size;
+        return countedValues();
     }
 
     @Override
@@ -931,8 +1059,10 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
         return group != null && !group.isEmpty();
     }
 
+    //FLLDCIM: ALG - one cached logical view instead of one allocation per query
     private Map<K, Collection<V>> logicalMap() {
-        return new LogicalGroups();
+        final LogicalGroups view = logicalView;
+        return view != null ? view : (logicalView = new LogicalGroups());
     }
 
     private final class LogicalGroups extends AbstractMap<K, Collection<V>> {
@@ -942,11 +1072,8 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
         }
         @Override public boolean containsKey(final Object key) { return hasMappings(key); }
         @Override public void clear() { M3AbstractMultiValuedMap.this.clear(); }
-        @Override public int size() {
-            int result = 0;
-            for (final Collection<V> group : map.values()) if (!group.isEmpty()) result++;
-            return result;
-        }
+        //FLLDCIM: ALG - LC992 logical key count read from nonEmptyGroups
+        @Override public int size() { return countedGroups(); }
         @Override public Set<K> keySet() {
             return new AbstractSet<>() {
                 @Override public int size() { return LogicalGroups.this.size(); }
@@ -954,7 +1081,7 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
                 @Override public void clear() { LogicalGroups.this.clear(); }
                 @Override public boolean remove(final Object key) {
                     if (!hasMappings(key)) return false;
-                    map.remove(key);
+                    detach(key);
                     return true;
                 }
                 @Override public Iterator<K> iterator() {
@@ -977,7 +1104,9 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
                     return group != null && Objects.equals(group, entry.getValue());
                 }
                 @Override public boolean remove(final Object object) {
-                    return contains(object) && map.entrySet().remove(object);
+                    if (!contains(object)) return false;
+                    detach(((Map.Entry<?, ?>) object).getKey());
+                    return true;
                 }
                 @Override public Iterator<Map.Entry<K, Collection<V>>> iterator() { return groupIterator(); }
             };
@@ -988,7 +1117,10 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
                 // Cursor-local quota avoids prefetching beyond the last delivered entry.
                 // As with the backing directory, modification outside this cursor is
                 // unsupported while traversing it; group aliases are not a size cache.
+                //FLLDCIM: ALG - LC992 quota now starts from nonEmptyGroups in O(1)
                 private int remaining = LogicalGroups.this.size();
+                /** Group of the entry the source cursor returned last (the one remove() detaches). */
+                private Collection<V> last;
                 @Override public boolean hasNext() {
                     final boolean underlying = source.hasNext();
                     return remaining > 0 && underlying;
@@ -997,15 +1129,141 @@ public abstract class M3AbstractMultiValuedMap<K, V> implements MultiValuedMap<K
                     if (remaining <= 0) throw new java.util.NoSuchElementException();
                     while (source.hasNext()) {
                         final Map.Entry<K, Collection<V>> entry = source.next();
-                        if (!entry.getValue().isEmpty()) { remaining--; return entry; }
+                        last = entry.getValue();
+                        if (!last.isEmpty()) { remaining--; return entry; }
                     }
                     throw new java.util.NoSuchElementException();
                 }
-                @Override public void remove() { source.remove(); }
+                //FLLDCIM: ALG - LC904 distinct-count: cursor detach counts the whole group out
+                @Override public void remove() {
+                    final long ticket = open();
+                    int removed = 0;
+                    try {
+                        source.remove();
+                        removed = last.size();
+                    } finally {
+                        close(ticket, removed, 0);
+                    }
+                }
             };
         }
     }
 
+    //FLLDCIM: ALG - epoch guard: only the owned final leaves keep exact counters between reads
+    private static boolean ownedLeaf(final Class<?> type) {
+        return type == M3ListValuedMap.class || type == M3SetValuedMap.class;
+    }
+
+    /** Owned read of one group; unlike {@link #getMap()} it does not invalidate the counters. */
+    final Collection<V> group(final Object key) {
+        return map.get(key);
+    }
+
+    /**
+     * Attaches a group the caller found absent. Its values are counted by the enclosing
+     * {@link #open()}/{@link #close(long, int, int)} pair; a replaced group (possible only
+     * through re-entrant callbacks) invalidates the counters instead.
+     */
+    final void putGroup(final K key, final Collection<V> group) {
+        if (map.put(key, group) != null) {
+            expose();
+        }
+    }
+
+    /** Removes the group mapped to {@code key} from the directory and counts its values out. */
+    //FLLDCIM: ALG - LC904 distinct-count: detached group leaves both counters
+    final Collection<V> detach(final Object key) {
+        final long ticket = open();
+        Collection<V> removed = null;
+        try {
+            removed = map.remove(key);
+        } finally {
+            close(ticket, removed == null ? 0 : removed.size(), 0);
+        }
+        return removed;
+    }
+
+    /**
+     * Opens a counted owned write. Until the matching close, the counters are marked inexact so
+     * a read from a callback recounts the directory. The returned ticket is the current epoch if
+     * the counters were exact, otherwise -1.
+     */
+    final long open() {
+        final long ticket = exact ? epoch : -1L;
+        exact = false;
+        inFlight++;
+        return ticket;
+    }
+
+    /**
+     * Closes a counted owned write on one attached group that held {@code before} values and now
+     * holds {@code after}. If another write, a recount or a raw directory exposure happened since
+     * {@link #open()}, the epoch differs and the counters stay inexact for one validated recount.
+     */
+    //FLLDCIM: ALG - LC904 distinct-count: 0<->1 group-size transitions move nonEmptyGroups
+    final void close(final long ticket, final int before, final int after) {
+        inFlight--;
+        if (ticket == epoch) {
+            totalValues += after - before;
+            nonEmptyGroups += (after > 0 ? 1 : 0) - (before > 0 ? 1 : 0);
+            exact = inFlight == 0;
+        }
+        epoch++;
+    }
+
+    /** Closes a counted write on a group obtained earlier; a group no longer attached counts nothing. */
+    final void closeHeld(final long ticket, final Object key, final Collection<V> group, final int before) {
+        final boolean attached = map.get(key) == group;
+        close(ticket, before, attached ? group.size() : before);
+    }
+
+    /** Closes {@link #clear()}: an empty directory has exact zero counters whatever the history. */
+    private void closeCleared() {
+        inFlight--;
+        if (map.isEmpty()) {
+            totalValues = 0;
+            nonEmptyGroups = 0;
+            exact = ownedLeaf && inFlight == 0;
+        }
+        epoch++;
+    }
+
+    /** The raw directory left owned code (or was replaced): the next read recounts. */
+    private void expose() {
+        exact = false;
+        epoch++;
+    }
+
+    //FLLDCIM: ALG - epoch guard: validated O(#keys) recount, the only non-O(1) read path
+    private void recount() {
+        int values = 0;
+        int groups = 0;
+        for (final Collection<V> group : map.values()) {
+            final int count = group.size();
+            values += count;
+            if (count > 0) {
+                groups++;
+            }
+        }
+        totalValues = values;
+        nonEmptyGroups = groups;
+        exact = ownedLeaf && inFlight == 0;
+        epoch++;
+    }
+
+    private int countedValues() {
+        if (!exact) {
+            recount();
+        }
+        return totalValues;
+    }
+
+    private int countedGroups() {
+        if (!exact) {
+            recount();
+        }
+        return nonEmptyGroups;
+    }
 
     protected static <A, B> M3LinkedHashMap<A, B> newDirectory(final int capacity) {
         if (capacity < 0) throw new IllegalArgumentException("negative initialMapCapacity");
