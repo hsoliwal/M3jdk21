@@ -1,0 +1,215 @@
+{
+  "schema": "M3JDK21_JAVA_BASE_COLLECTION_CORE_RECEIPT_V1",
+  "product": "M3JDK21",
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0; product files retain their per-file rights",
+  "status": "NAMES_REGISTERED_OWNER_RECEIVING_PENDING",
+  "recipe_authority": "hsoliwal/com.synexia",
+  "published_source": "730294cac8e98d860aaddd12222874a014146d44",
+  "private_parent": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+  "target_base": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+  "target_observed_head": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+  "source_tree_alias": {
+    "local_source_commit": "68e20d9a1fbba111fe180c1c9212f229a93af9ec",
+    "published_commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+    "tree": "e6b0659f99729f703737df8a1e4dfe8600df39d9",
+    "alias_evidence_sha256": "2b4fa47821fe509a9797a6110f7901942f8882a8d08f97381165012b752bc0fd"
+  },
+  "active_phase": "STRING",
+  "phase_advance": false,
+  "runtime_dependency_on_synexia": false,
+  "naming": {
+    "authority": "m3/docs/name-mapping.json",
+    "before": {
+      "sha256": "b31afaed275dbff4ebe377b393f0ed85bba2bc4954a060c191826eff7786bab5",
+      "git_blob_sha1": "e038ef6eb4a77eb37cd473edb85bb4bb35838fc9",
+      "bytes": 502529
+    },
+    "after": {
+      "sha256": "90bd38ec4f882d7e6042567d379de972bc5f7ffe759bc10df49702fb2e71a251",
+      "git_blob_sha1": "1ec5939e50c775bf4b6fa630f5098edd8f6503c8",
+      "bytes": 517587
+    },
+    "preserved_historical_records": 65,
+    "appended_ids": [
+      "m3.collections.filtered-add-all.capture-once",
+      "m3.collections.reverse-sorted-subset.bounded-seek"
+    ],
+    "amended_ids": [],
+    "queue_operations_unchanged": true,
+    "promotions": 0
+  },
+  "executed_datasets": [
+    {
+      "dataset": "m3-jdk-filtered-batch-20261025",
+      "source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+      "descriptor": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025.yml",
+      "descriptor_sha256": "4097e22acb7b6fa00eb33bc745ff41cf665f6abd57e2911a6536dc3d9a3e3e55",
+      "qualification": {
+        "sha256": "4a7b48306f56cb722b08f5feb8e08c32865f70fd6cf7ac7be9e55bb522ba72f4",
+        "status": "PASS_ACTUAL_SDK5_SEALING10_RECEIVER9",
+        "sdk_tests": 5,
+        "sealing_tests": 10,
+        "receiver_cases": 9,
+        "actual_code_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+        "actual_invocation_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+        "successor_source_closure": {
+          "schema": "SYNEXIA_CORE_RECEIPT_COMMON_B_CLOSURE_V1",
+          "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+          "license": "Apache-2.0",
+          "base_pin": "97e654946b98056a2c117eee994905b45fcf0cde",
+          "files": [
+            {
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+              "sha256": "fba17870791ee9f2498173420b3035325b3096aafdeda45565eee53b79ea599c",
+              "git_blob_sha1": "04854ce87cf8333e3e698aaf7eaa06b5f15fd923"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/prepare.py",
+              "sha256": "edf243e9057415b908a62e55abdf8090f23742d51b61536b97cfa36650443bf2",
+              "git_blob_sha1": "882b83b3dbebfc7da7654c961d2841104e029c69"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+              "sha256": "58ea51c0658983a1515f7a0aff9fa14282a5461b36851919b86dd0f9a2319197",
+              "git_blob_sha1": "0238e5b063bb83640ad8e7a4a4c59d80f28cf431"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/test_prepare.py",
+              "sha256": "b2595330f73fe0a39ce90cf3a18576e553b997b7398e98664e65c04c1b2fe45d",
+              "git_blob_sha1": "cda95e284883bfff29f1beb6828b1969bab3e902"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+              "sha256": "b4186dfb05f0df1eb47625001138781c529f5c92c5b11c1bfd441e66d0dcf043",
+              "git_blob_sha1": "5104286de31bc794af85a95a92d8b2f55118d680"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-before.java.txt",
+              "sha256": "7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25",
+              "git_blob_sha1": "74369df9ef10241fb748b710ab50ec1075edbee6"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-after.java.txt",
+              "sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
+              "git_blob_sha1": "8a33b08f52ef2da14354499d577090b099e2c515"
+            }
+          ]
+        }
+      },
+      "sdk_inputs_sha256": "c49024da5f47364a59d3ed761de93f8e1cd181410bceb21be631f913b9f7dfa3",
+      "sdk_results_sha256": "2054da59dea6835154b579b1fcd2ea509a9b69f9a45c51c795db733d8f558411",
+      "receiving_epoch": null,
+      "actual_sdk_outputs": [
+        {
+          "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+          "preimage_sha256": "c8820e5bbd7b7c7b4c683f5081ec74b99a4aac6b854f6c8dc79d4e0ee4767ffb",
+          "sha256": "1c811f4473088c46e39e9621eb27380806e420fe09062072e413d48af78059c0",
+          "git_blob_sha1": "3f2c3eecb6a0c239025ac7051b5bd4f3e6953605",
+          "bytes": 30568,
+          "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025/0001-CollectionViews.java.txt"
+        },
+        {
+          "path": "test/jdk/java/util/CollectionViews/CollectionViewsBatchAdmissionTest.java",
+          "preimage_sha256": "ABSENT",
+          "sha256": "96904ca4643c5dff2ff1cb9b51223e6dd21e4c2dde4a73ca9d6d56f372bd2c61",
+          "git_blob_sha1": "42f8fd5404103241ac616f360021326a4b965d42",
+          "bytes": 10824,
+          "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025/0002-CollectionViewsBatchAdmissionTest.java.txt"
+        }
+      ]
+    },
+    {
+      "dataset": "m3-jdk-reverse-seek-20261025",
+      "source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+      "descriptor": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025.yml",
+      "descriptor_sha256": "79f88c644586050d4a4dbca1fe294dc7b70ca7ce73268685dde50654acef0822",
+      "qualification": {
+        "sha256": "06b89f8c54cb1232fbad430635249fac82361d2cf257a73941105cee76208602",
+        "status": "PASS_ACTUAL_SDK5_SEALING10_RECEIVER9",
+        "sdk_tests": 5,
+        "sealing_tests": 10,
+        "receiver_cases": 9,
+        "actual_code_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+        "actual_invocation_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+        "successor_source_closure": {
+          "schema": "SYNEXIA_CORE_RECEIPT_COMMON_B_CLOSURE_V1",
+          "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+          "license": "Apache-2.0",
+          "base_pin": "97e654946b98056a2c117eee994905b45fcf0cde",
+          "files": [
+            {
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+              "sha256": "fba17870791ee9f2498173420b3035325b3096aafdeda45565eee53b79ea599c",
+              "git_blob_sha1": "04854ce87cf8333e3e698aaf7eaa06b5f15fd923"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/prepare.py",
+              "sha256": "edf243e9057415b908a62e55abdf8090f23742d51b61536b97cfa36650443bf2",
+              "git_blob_sha1": "882b83b3dbebfc7da7654c961d2841104e029c69"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+              "sha256": "58ea51c0658983a1515f7a0aff9fa14282a5461b36851919b86dd0f9a2319197",
+              "git_blob_sha1": "0238e5b063bb83640ad8e7a4a4c59d80f28cf431"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/test_prepare.py",
+              "sha256": "b2595330f73fe0a39ce90cf3a18576e553b997b7398e98664e65c04c1b2fe45d",
+              "git_blob_sha1": "cda95e284883bfff29f1beb6828b1969bab3e902"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+              "sha256": "b4186dfb05f0df1eb47625001138781c529f5c92c5b11c1bfd441e66d0dcf043",
+              "git_blob_sha1": "5104286de31bc794af85a95a92d8b2f55118d680"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-before.java.txt",
+              "sha256": "7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25",
+              "git_blob_sha1": "74369df9ef10241fb748b710ab50ec1075edbee6"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-after.java.txt",
+              "sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
+              "git_blob_sha1": "8a33b08f52ef2da14354499d577090b099e2c515"
+            }
+          ]
+        }
+      },
+      "sdk_inputs_sha256": "69fe044b91ddb0602311352006c0d2f2723c040f8a14e20426e67e07a81913fe",
+      "sdk_results_sha256": "0b978606dea95c37f62907cf444a7d80f7a71add325aa69e098f315a12e1d114",
+      "receiving_epoch": null,
+      "actual_sdk_outputs": [
+        {
+          "path": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
+          "preimage_sha256": "5157b7148a717a01d71277ca99f061938c97065198663b35796eca2e45aa3a40",
+          "sha256": "43e3e77c8fb8e6a311b927b504eb34579b70154ff4d1a8f9a9312f062c32d1ed",
+          "git_blob_sha1": "fae11e4cbc5d4aa5aa8bd976210ceb03ed49c50d",
+          "bytes": 14541,
+          "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025/0001-ReverseOrderSortedSetView.java.txt"
+        },
+        {
+          "path": "test/jdk/java/util/SortedSet/ReverseSubsetSeekTest.java",
+          "preimage_sha256": "ABSENT",
+          "sha256": "eda199afc0651a68b8bea18ab201247455de9d0af3b1900220443e20e08b08ef",
+          "git_blob_sha1": "eb963d8cf0e1c7bec42a7c5fd5bd70921547eb71",
+          "bytes": 17241,
+          "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025/0002-ReverseSubsetSeekTest.java.txt"
+        }
+      ]
+    }
+  ],
+  "target_gates": {
+    "status": "PENDING_PRODUCT_GATES",
+    "runs": []
+  },
+  "native": "Existing java.base Java owner refinement only; no new native source, export, symbol, header or algorithm claimed.",
+  "integration": "Existing java.base bootstrap owners, not optional-module capability or module-count promotion.",
+  "boundaries": [
+    "Source C pins templates/tooling; actual earlier source qualification code/invocation pins remain distinct and explicit.",
+    "Names phase targets are actual unchanged owner preimages, never future received implementation claims.",
+    "Final receiving epochs and built-image epochs are distinct; use exact tree/source identity per gate.",
+    "Recipe Java/YAML, templates, executors, prototypes, catalogue and MOP memory remain private.",
+    "Whole-SDK/family/five-provider/JCK/platform and subsequent global phase admission remain pending."
+  ]
+}
