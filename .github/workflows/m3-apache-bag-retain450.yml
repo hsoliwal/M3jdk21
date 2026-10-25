@@ -8,6 +8,7 @@ on:
       - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java'
       - '.github/workflows/m3-apache-bag-retain450.yml'
       - 'm3/collections/interop/qualification/current-census-superset-20261022/**'
+      - 'm3/collections/interop/qualification/current-census-superset-20261024/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -36,7 +37,8 @@ jobs:
           set -euo pipefail
           Q=m3/collections/interop/qualification/current-census-superset-20261022
           python3 -m unittest discover -s "$Q" -p 'test_apache450_transition.py' -v
-          python3 "$Q/verify_superset.py" --product . --historical-product historical-product
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261024 -p 'test_*.py' -v
+          python3 m3/collections/interop/qualification/current-census-superset-20261024/verify_superset_v2.py --product . --historical-product historical-product
       - name: Compile original M3 collection owner and focused Apache 4.5.0 contract test
         shell: bash
         run: |
