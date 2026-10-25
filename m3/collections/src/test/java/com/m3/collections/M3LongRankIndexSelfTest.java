@@ -86,9 +86,21 @@ public final class M3LongRankIndexSelfTest {
             long[] queries = new long[70 + random.nextInt(75)];
             for (int q = 0; q < queries.length; q++) queries[q] = random.nextInt(101) - 50L;
             int[] batched = index.lowerBounds(queries);
+            int[] upper = index.upperBounds(queries);
+            int[] counts = index.counts(queries);
+            int[] into = new int[queries.length + 4];
+            Arrays.fill(into, -123);
+            index.countInto(queries, 0, queries.length, into, 2);
             for (int q = 0; q < queries.length; q++) {
                 equal(index.lowerBound(queries[q]), batched[q]);
+                equal(index.upperBound(queries[q]), upper[q]);
+                equal(index.count(queries[q]), counts[q]);
+                equal(counts[q], into[q + 2]);
             }
+            equal(-123, into[0]);
+            equal(-123, into[1]);
+            equal(-123, into[into.length - 1]);
+            equal(-123, into[into.length - 2]);
             M3LongRankIndex filtered = M3LongRankIndex.snapshotFiltered(list, v -> v < 0);
             for (long v : filtered.toArray()) if (!(v < 0)) fail("filter");
         }

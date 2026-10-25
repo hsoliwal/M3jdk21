@@ -167,3 +167,77 @@ Java_com_m3_collections_M3LongRankBatchNative_equalRanges0(
     (*env)->ReleaseLongArrayElements(env, queries, (jlong *) targets, JNI_ABORT);
     (*env)->ReleaseLongArrayElements(env, sorted, (jlong *) values, JNI_ABORT);
 }
+
+/* Original LeetCode #34/#35 primitive upper/count-in-window JNI atom. */
+enum { M3_RANK_OUTPUT_CHUNK = 256, M3_RANK_UPPER = 1, M3_RANK_COUNT = 2 };
+
+static jsize m3_bound(const jlong *sorted, jsize length, jlong key, int upper) {
+    jsize lo = 0, hi = length;
+    while (lo < hi) {
+        jsize mid = lo + (hi - lo) / 2;
+        if (upper ? sorted[mid] <= key : sorted[mid] < key) lo = mid + 1;
+        else hi = mid;
+    }
+    return lo;
+}
+
+static void m3_rank_throw(JNIEnv *env, const char *type, const char *message) {
+    jclass error = (*env)->FindClass(env, type);
+    if (error != NULL) (*env)->ThrowNew(env, error, message);
+}
+
+/*
+ * One native transition per eligible batch. Native stack scratch is bounded
+ * to 256 query longs and 256 result ints. No heap Entry/tuple objects and no
+ * object addresses retained. GetPrimitiveArrayCritical has no JNI calls or
+ * blocking operations between acquisition and release; read-only inputs.
+ * A caller-owned output window remains untouched when validation fails.
+ */
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_boundBatchInto0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
+        jint query_from, jint count, jintArray output, jint output_from, jint mode) {
+    (void) ignored;
+    if (sorted == NULL || queries == NULL || output == NULL) {
+        m3_rank_throw(env, "java/lang/NullPointerException", "null rank batch array");
+        return;
+    }
+    if (mode != M3_RANK_UPPER && mode != M3_RANK_COUNT) {
+        m3_rank_throw(env, "java/lang/IllegalArgumentException", "invalid rank output mode");
+        return;
+    }
+    const jsize source_size = (*env)->GetArrayLength(env, sorted);
+    const jsize query_size = (*env)->GetArrayLength(env, queries);
+    const jsize result_size = (*env)->GetArrayLength(env, output);
+    if (query_from < 0 || count < 0 || output_from < 0
+            || query_from > query_size - count || output_from > result_size - count) {
+        m3_rank_throw(env, "java/lang/IndexOutOfBoundsException", "rank window outside array");
+        return;
+    }
+    if (count == 0) return;
+
+    jlong keys[M3_RANK_OUTPUT_CHUNK];
+    jint positions[M3_RANK_OUTPUT_CHUNK];
+    for (jint completed = 0; completed < count;) {
+        jint batch = count - completed;
+        if (batch > M3_RANK_OUTPUT_CHUNK) batch = M3_RANK_OUTPUT_CHUNK;
+        (*env)->GetLongArrayRegion(env, queries, query_from + completed, batch, keys);
+        if ((*env)->ExceptionCheck(env)) return;
+        if (source_size == 0) {
+            for (jint i = 0; i < batch; ++i) positions[i] = 0;
+        } else {
+            const jlong *source = (*env)->GetPrimitiveArrayCritical(env, sorted, NULL);
+            if (source == NULL) return;  /* JVM left OOME pending. */
+            for (jint i = 0; i < batch; ++i) {
+                const jsize hi = m3_bound(source, source_size, keys[i], 1);
+                positions[i] = mode == M3_RANK_COUNT
+                        ? (jint) (hi - m3_bound(source, source_size, keys[i], 0))
+                        : (jint) hi;
+            }
+            (*env)->ReleasePrimitiveArrayCritical(env, sorted, (void *) source, JNI_ABORT);
+        }
+        (*env)->SetIntArrayRegion(env, output, output_from + completed, batch, positions);
+        if ((*env)->ExceptionCheck(env)) return;
+        completed += batch;
+    }
+}

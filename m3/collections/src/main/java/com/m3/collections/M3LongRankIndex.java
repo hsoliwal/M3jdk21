@@ -209,6 +209,31 @@ public final class M3LongRankIndex {
         return M3LongRankBatchNative.equalRanges(values, queries);
     }
 
+    /**
+     * Batched upper insertion coordinates for a signed-long query vector.
+     * JNI is optional and handles large batches without user callbacks.
+     */
+    public int[] upperBounds(long[] queries) {
+        return M3LongRankBatchNative.upperBounds(values, queries);
+    }
+
+    /**
+     * Batched occurrence frequency for each query. Equivalent to
+     * upperBound(query) - lowerBound(query) with no Long.MAX_VALUE arithmetic.
+     */
+    public int[] counts(long[] queries) {
+        return M3LongRankBatchNative.counts(values, queries);
+    }
+
+    /**
+     * Writes occurrence frequencies into a caller-owned int[] window.
+     * Both windows are checked before any write; no boxed Entry is allocated.
+     */
+    public void countInto(long[] queries, int queryFrom, int length,
+                          int[] output, int outputFrom) {
+        M3LongRankBatchNative.countInto(values, queries, queryFrom, length, output, outputFrom);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(
