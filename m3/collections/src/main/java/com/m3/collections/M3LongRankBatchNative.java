@@ -454,6 +454,86 @@ public final class M3LongRankBatchNative {
         return written;
     }
 
+    private static volatile boolean DIFFERENCE_VALUES_ABI_MISSING;
+
+    /**
+     * LeetCode #2215 and #350: original primitive sorted set/multiset difference.
+     * Distinct mode includes a key only if it is absent from the other owner;
+     * occurrence mode subtracts multiplicities. Optional JNI reuses m3rankbatch.
+     */
+    static long[] differenceValues(long[] left, long[] right, boolean distinct) {
+        return differenceValues(left, right, distinct, false, false);
+    }
+
+    /** Sorted symmetric difference: set XOR or absolute frequency difference. */
+    static long[] symmetricDifferenceValues(long[] left, long[] right, boolean distinct) {
+        return differenceValues(left, right, distinct, true, false);
+    }
+
+    /**
+     * Package-local strict JNI test seam. Explicit native requests never fall back
+     * to Java when a legacy native image lacks the additive entry point.
+     */
+    static long[] differenceValues(long[] left, long[] right, boolean distinct,
+                                   boolean symmetric, boolean nativeRequired) {
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        if (nativeRequired) {
+            if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch difference ABI unavailable");
+            return differenceValues0(left, right, distinct, symmetric);
+        }
+        if (AVAILABLE && !DIFFERENCE_VALUES_ABI_MISSING
+                && Math.min(left.length, right.length) >= NATIVE_MIN_INTERSECTION) {
+            try {
+                return differenceValues0(left, right, distinct, symmetric);
+            } catch (UnsatisfiedLinkError oldLibrary) {
+                DIFFERENCE_VALUES_ABI_MISSING = true;
+            }
+        }
+        long size = differenceJavaScan(left, right, distinct, symmetric, null);
+        if (size > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("sorted difference exceeds Java array size");
+        }
+        long[] output = new long[(int) size];
+        if (differenceJavaScan(left, right, distinct, symmetric, output) != size) {
+            throw new IllegalStateException("sorted difference changed between counting and emission");
+        }
+        return output;
+    }
+
+    private static long differenceJavaScan(long[] left, long[] right,
+                                           boolean distinct, boolean symmetric, long[] result) {
+        int i = 0, j = 0;
+        long written = 0;
+        while (i < left.length || j < right.length) {
+            long key = i == left.length ? right[j]
+                    : j == right.length ? left[i] : Math.min(left[i], right[j]);
+            long leftCount = 0, rightCount = 0;
+            while (i < left.length && left[i] == key) { i++; leftCount++; }
+            while (j < right.length && right[j] == key) { j++; rightCount++; }
+            long copies;
+            if (distinct) {
+                copies = symmetric ? ((leftCount > 0) != (rightCount > 0) ? 1 : 0)
+                        : leftCount > 0 && rightCount == 0 ? 1 : 0;
+            } else if (symmetric) {
+                copies = Math.abs(leftCount - rightCount);
+            } else {
+                copies = Math.max(0L, leftCount - rightCount);
+            }
+            if (copies > Integer.MAX_VALUE - written) {
+                throw new OutOfMemoryError("sorted difference exceeds Java array size");
+            }
+            if (result != null) {
+                if (written + copies > result.length) {
+                    throw new IllegalStateException("sorted difference grew between counting and emission");
+                }
+                Arrays.fill(result, (int) written, (int) (written + copies), key);
+            }
+            written += copies;
+        }
+        return written;
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -488,4 +568,8 @@ public final class M3LongRankBatchNative {
 
     /** Additive same-library JNI ABI for sorted multiset union values. */
     static native long[] unionValues0(long[] left, long[] right, boolean distinct);
+
+    /** Additive same-library JNI ABI: bounded pages, no per-Entry allocation. */
+    static native long[] differenceValues0(long[] left, long[] right,
+                                          boolean distinct, boolean symmetric);
 }

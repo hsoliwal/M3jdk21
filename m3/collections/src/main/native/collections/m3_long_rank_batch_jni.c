@@ -745,3 +745,132 @@ Java_com_m3_collections_M3LongRankBatchNative_unionValues0(
     }
     return output;
 }
+
+/*
+ * M3 signed-long primitive difference (LeetCode #2215 / #350 categories).
+ * Unmodified sorted snapshot owners; two bounded JNI page cursors, no
+ * retained VM pointers, no user callbacks, two-pass exact output sizing.
+ * distinct=true is SET algebra (left-only/XOR), whereas false uses
+ * occurrence multiplicities max(left_count-right_count,0) / abs(delta).
+ */
+enum { M3_DIFFERENCE_PAGE = 256 };
+
+typedef struct {
+    jlongArray array;
+    jsize size;
+    jsize index;
+    jsize page_start;
+    jsize page_length;
+    jlong page[M3_DIFFERENCE_PAGE];
+} m3_diff_cursor;
+
+static int m3_diff_peek(JNIEnv *env, m3_diff_cursor *cursor, jlong *value) {
+    if (cursor->index >= cursor->size) return 0;
+    if (cursor->page_length == 0 ||
+            cursor->index < cursor->page_start ||
+            cursor->index - cursor->page_start >= cursor->page_length) {
+        jsize remaining = cursor->size - cursor->index;
+        jsize amount = remaining < M3_DIFFERENCE_PAGE ? remaining : M3_DIFFERENCE_PAGE;
+        (*env)->GetLongArrayRegion(env, cursor->array, cursor->index, amount, cursor->page);
+        if ((*env)->ExceptionCheck(env)) return -1;
+        cursor->page_start = cursor->index;
+        cursor->page_length = amount;
+    }
+    *value = cursor->page[cursor->index - cursor->page_start];
+    return 1;
+}
+
+static jlong m3_difference_scan(JNIEnv *env,
+        jlongArray left, jsize left_size, jlongArray right, jsize right_size,
+        jboolean distinct, jboolean symmetric, jlongArray output, jsize capacity) {
+    m3_diff_cursor lhs = { .array = left, .size = left_size };
+    m3_diff_cursor rhs = { .array = right, .size = right_size };
+    jlong output_page[M3_DIFFERENCE_PAGE];
+    jlong emitted = 0;
+    while (lhs.index < left_size || rhs.index < right_size) {
+        jlong a = 0, b = 0;
+        int has_left = m3_diff_peek(env, &lhs, &a);
+        int has_right = m3_diff_peek(env, &rhs, &b);
+        if (has_left < 0 || has_right < 0) return -1;
+        jlong key = !has_left ? b : !has_right ? a : a < b ? a : b;
+        jlong left_count = 0, right_count = 0;
+        while ((has_left = m3_diff_peek(env, &lhs, &a)) > 0 && a == key) {
+            lhs.index++;
+            left_count++;
+        }
+        if (has_left < 0) return -1;
+        while ((has_right = m3_diff_peek(env, &rhs, &b)) > 0 && b == key) {
+            rhs.index++;
+            right_count++;
+        }
+        if (has_right < 0) return -1;
+        jlong occurrences;
+        if (distinct == JNI_TRUE) {
+            occurrences = symmetric == JNI_TRUE
+                    ? ((left_count > 0) != (right_count > 0))
+                    : (left_count > 0 && right_count == 0);
+        } else if (symmetric == JNI_TRUE) {
+            occurrences = left_count > right_count
+                    ? left_count - right_count : right_count - left_count;
+        } else {
+            occurrences = left_count > right_count ? left_count - right_count : 0;
+        }
+        if (emitted + occurrences > INT_MAX) {
+            m3_window_throw(env, "java/lang/OutOfMemoryError", "sorted difference exceeds Java array limit");
+            return -1;
+        }
+        for (jlong n = 0; n < occurrences && output != NULL; ++n) {
+            if (emitted >= capacity) {
+                m3_window_throw(env, "java/lang/IllegalStateException",
+                        "sorted difference grew between counting and emission");
+                return -1;
+            }
+            output_page[(jsize) (emitted % M3_DIFFERENCE_PAGE)] = key;
+            emitted++;
+            if (emitted % M3_DIFFERENCE_PAGE == 0) {
+                (*env)->SetLongArrayRegion(env, output,
+                        (jsize) (emitted - M3_DIFFERENCE_PAGE),
+                        M3_DIFFERENCE_PAGE, output_page);
+                if ((*env)->ExceptionCheck(env)) return -1;
+            }
+        }
+        if (output == NULL) emitted += occurrences;
+    }
+    if (output != NULL) {
+        jsize pending = (jsize) (emitted % M3_DIFFERENCE_PAGE);
+        if (pending != 0) {
+            (*env)->SetLongArrayRegion(env, output, (jsize) (emitted - pending),
+                    pending, output_page);
+            if ((*env)->ExceptionCheck(env)) return -1;
+        }
+    }
+    return emitted;
+}
+
+JNIEXPORT jlongArray JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_differenceValues0(
+        JNIEnv *env, jclass ignored, jlongArray left, jlongArray right,
+        jboolean distinct, jboolean symmetric) {
+    (void) ignored;
+    if (left == NULL || right == NULL) {
+        m3_window_throw(env, "java/lang/NullPointerException", "null sorted difference input");
+        return NULL;
+    }
+    jsize left_size = (*env)->GetArrayLength(env, left);
+    jsize right_size = (*env)->GetArrayLength(env, right);
+    if ((*env)->ExceptionCheck(env)) return NULL;
+    jlong expected = m3_difference_scan(env, left, left_size, right, right_size,
+            distinct, symmetric, NULL, 0);
+    if (expected < 0) return NULL;
+    jlongArray result = (*env)->NewLongArray(env, (jsize) expected);
+    if (result == NULL) return NULL;
+    jlong written = m3_difference_scan(env, left, left_size, right, right_size,
+            distinct, symmetric, result, (jsize) expected);
+    if (written < 0) return NULL;
+    if (written != expected) {
+        m3_window_throw(env, "java/lang/IllegalStateException",
+                "sorted difference changed between counting and emission");
+        return NULL;
+    }
+    return result;
+}

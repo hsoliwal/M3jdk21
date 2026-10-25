@@ -303,6 +303,28 @@ public final class M3LongRankIndex {
         return (long) values.length + other.values.length - intersectionCount(other);
     }
 
+    /**
+     * LeetCode #2215 / #350 category: sorted difference of this immutable
+     * rank snapshot and another. Distinct mode emits values not present in
+     * other; multiset mode emits max(this frequency - other frequency, 0)
+     * occurrences. Detached primitive results, no retained Entry objects.
+     */
+    public long[] differenceValues(M3LongRankIndex other, boolean distinctValues) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.differenceValues(values, other.values, distinctValues);
+    }
+
+    /**
+     * Sorted symmetric difference: distinct key XOR, or absolute difference
+     * of occurrence multiplicities. Reuses the same JNI provider as rank
+     * batches, without moving either immutable source payload.
+     */
+    public long[] symmetricDifferenceValues(M3LongRankIndex other, boolean distinctValues) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.symmetricDifferenceValues(
+                values, other.values, distinctValues);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(
