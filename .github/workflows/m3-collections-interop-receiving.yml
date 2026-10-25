@@ -26,8 +26,8 @@ jobs:
           sparse-checkout: |
             m3/collections
             m3/tooling/migration-recipes
-      # Run the unchanged 36+7+40 source verifier against its real predecessor,
-      # then compare exactly three changes in the new product source generation.
+      # Keep both historical source checkouts; the successor verifier binds
+      # 36+7+40 originals, three compiled-test atoms and eight new E5 sources.
       - uses: actions/checkout@v4
         with:
           repository: hsoliwal/M3jdk21
@@ -62,7 +62,7 @@ jobs:
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261024 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-v2-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/compiler-three-test-successor-20261022 -p 'test_*.py' -v 2>&1 | tee proof/compiler-source-revision-tests.log
-          python3 m3/collections/interop/qualification/compiler-three-test-successor-20261022/verify_compile_successor.py --product . --predecessor predecessor-product --historical-product historical-product | tee proof/admitted-postimages.tsv
+          python3 m3/collections/interop/qualification/current-census-superset-20261024/verify_superset_v2.py --product . --historical-product historical-product | tee proof/admitted-postimages.tsv
       - name: Run all six actual recipe proofs before delivery
         shell: bash
         run: |
@@ -86,7 +86,7 @@ jobs:
           mvn -B -ntp -f m3/collections/interop/recipe/pom.xml \
             '-Dtest=M3CollectionsLibraryInteropTest#exactOutputsFixedPointAndOptionalMaterialization' \
             test 2>&1 | tee proof/recipe-delivery.log
-          python3 m3/collections/interop/qualification/compiler-three-test-successor-20261022/verify_compile_successor.py --product . --predecessor predecessor-product --historical-product historical-product > proof/current-successor-ledger.tsv
+          python3 m3/collections/interop/qualification/current-census-superset-20261024/verify_superset_v2.py --product . --historical-product historical-product > proof/current-successor-ledger.tsv
           cat m3/collections/interop/recipe-receipt.tsv | tee proof/recipe-receipt.tsv
           git diff --exit-code -- m3/collections/interop/src m3/collections/interop/recipe-receipt.tsv
       - name: Compile unchanged M3 core and verify the dependency boundary
