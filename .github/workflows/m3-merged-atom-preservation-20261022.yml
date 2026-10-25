@@ -75,9 +75,58 @@ jobs:
                   raise SystemExit("lost M3 product source: " + relative)
               actual = hashlib.sha256(file.read_bytes()).hexdigest()
               if actual != expected:
-                  raise SystemExit("M3 source drifted from Synexia recipe result: " + relative)
-          print("M3_PRODUCT_SOURCE_RECIPE_HANDOFF_PASS outputs=5")
+                  # The historical 5-row receipt is immutable. One later, already
+                  # merged Synexia-origin timed-lock method has a separate
+                  # source-sealed continuation. Never accept arbitrary drift.
+                  lock_path = "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java"
+                  historic = "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599"
+                  current = "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718"
+                  if relative != lock_path or expected != historic or actual != current:
+                      raise SystemExit("M3 source drifted from Synexia recipe result: " + relative)
+                  continuation = root / "m3/docs/synexia-m3jdk21-eclipse-resource-locks-current.tsv"
+                  if (continuation.is_symlink() or not continuation.is_file()
+                          or not continuation.resolve().is_relative_to(root)):
+                      raise SystemExit("missing canonical additive source-succession receipt")
+                  saved = [row for row in continuation.read_text(encoding="utf-8").splitlines()
+                           if row and not row.startswith("#")]
+                  if saved != ["\t".join((lock_path, historic, current,
+                                            "hsoliwal/com.synexia#12842",
+                                            "hsoliwal/M3jdk21#1821",
+                                            "ADDITIVE_TIMED_ACQUIRE",
+                                            "SOURCE_VERIFIED_FULL_REACTOR_PENDING", "Apache-2.0"))]:
+                      raise SystemExit("unreviewed M3 resource-lock supersession provenance")
+                  contents = file.read_text(encoding="utf-8")
+                  insertion = "import java.util.concurrent.TimeUnit;\n"
+                  first = "\n     * Wait at most the specified total budget for a participating scope."
+                  last_marker = "\n    }\n\n    /**"
+                  if contents.count(insertion) != 1 or contents.count(first) != 1:
+                      raise SystemExit("resource-lock additive import/method marker drift")
+                  without_import = contents.replace(insertion, "", 1)
+                  begin = without_import.index(first)
+                  finish = without_import.find(last_marker, begin)
+                  if finish < 0:
+                      raise SystemExit("resource-lock timed method closing anchor missing")
+                  finish += len(last_marker)
+                  if finish - begin != 1263:
+                      raise SystemExit("resource-lock additive hunk shape drift")
+                  reconstructed = without_import[:begin] + without_import[finish:]
+                  if hashlib.sha256(reconstructed.encode("utf-8")).hexdigest() != historic:
+                      raise SystemExit("resource-lock source did not preserve old recipe bytes")
+                  print("M3_RESOURCE_LOCKS_ADDITIVE_SUCCESSION_PASS historical_source_preserved=1")
+          print("M3_PRODUCT_SOURCE_RECIPE_HANDOFF_PASS outputs=5 succession=1")
           PY
+      - name: Qualify original and timed resource-lock Java contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLASSES="$RUNNER_TEMP/m3-resource-locks-classes"
+          mkdir -p "$CLASSES"
+          javac --release 21 -encoding UTF-8 -Xlint:all -Werror -d "$CLASSES" \
+            m3/file/src/main/java/com/m3/file/M3ResourceLocks.java \
+            m3/file/src/test/java/com/m3/file/M3ResourceLocksContract.java \
+            m3/file/src/test/java/com/m3/file/M3ResourceLocksTimedContract.java
+          java -ea -cp "$CLASSES" com.m3.file.M3ResourceLocksContract
+          java -ea -cp "$CLASSES" com.m3.file.M3ResourceLocksTimedContract
       - name: Reject new transformation recipe sources in the downstream product
         if: github.event_name == 'pull_request'
         shell: bash
