@@ -1,0 +1,79 @@
+{
+  "schema": "M3JDK21_TREE_NATIVE_COMMIT_ATOMIC_RECEIVER_V1",
+  "date": "2026-10-25",
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "branch": "codex/m3jdk21-tree-commit-atomic-20261025",
+    "source_tree": "original M3JDK21 collections module",
+    "jdk_java_se_api_changed": false,
+    "jni_abi_changed": false,
+    "java_public_signature_changed": false
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-tree-commit-atomic-20261025",
+    "recipe": "com.synexia.rewrite.M3TreeCommitAtomicityRecipe",
+    "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-tree-commit-atomic-20261025/manifest.tsv",
+    "carrier": "reviewed Java 21 postimages only, no executable recipe"
+  },
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+      "before_git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+      "after_git_blob_sha1": "4e5089656f7187773054026e93d82f08ced148db",
+      "before_sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
+      "after_sha256": "c3fef0d10353861799e84ae8dbbfd45939232301bf203d6bfe038e547779e173",
+      "role": "primitive_array_native_window_commit"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCommitAtomicityTest.java",
+      "before_git_blob_sha1": null,
+      "after_git_blob_sha1": "03135f67029a6467a109bab9624897622a41bd68",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f65f1d115ddd7cb362f495722dbe87ef81a0ed7003194414e9a501ab66109754",
+      "role": "JUnit regression postimage"
+    }
+  ],
+  "catalogue": {
+    "path": "m3/collections/algorithm-catalog/tree-commit-atomic-20261025.tsv",
+    "git_blob_sha1": "5cd79f36594e142ea9f4611787b10d4875f847a6",
+    "rows": 4
+  },
+  "history": {
+    "parent_pr": "https://github.com/hsoliwal/M3jdk21/pull/1881",
+    "previous_receiver": "m3/collections/qualification/arraylist-dual-word-20261023/RECEIVER_RECEIPT.json",
+    "previous_receiver_blob_sha1": "e35d5f0acb0e64f1d1677e3635d763e914eaa86c",
+    "previous_source_postimage_git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+    "historical_preimage_preserved": true
+  },
+  "atom": {
+    "category": "FAILURE_ATOMIC_NATIVE_COMMIT",
+    "preflight": "validate int lanes and all new long handles before clearing or rebuilding committed primitive indexes",
+    "complexity": "O(n) preflight + existing O(n) publication, O(1) extra heap",
+    "keeps": [
+      "original long[] native handles",
+      "original long[] keys and int[] parents",
+      "original M3LongLongHashMap ownership",
+      "same successful commit order and public signatures",
+      "IllegalArgumentException zero-native-handle diagnostic",
+      "ArrayIndexOutOfBoundsException for truncated input lane"
+    ],
+    "intentionally_not_added": [
+      "new public Java SE API",
+      "new long/int object entry node",
+      "new JNI native symbol",
+      "new wrapping collection or map",
+      "new callback in native context"
+    ]
+  },
+  "verification": {
+    "git_blob_postimage_readback": "PASS",
+    "source_and_test_sha256_manifest": "PINNED_PENDING_SOURCE_BUILD",
+    "synexia_openrewrite_replay": "PENDING_CI",
+    "jdk21_maven_regression": "PENDING_CI",
+    "source_built_full_m3jdk21_jtreg": "NOT_RUN",
+    "swt_native_window_runtime": "NOT_RUN",
+    "cpu_heap_native_benchmark": "NOT_RUN"
+  },
+  "admission": "DRAFT_REVIEW_NOT_RUNTIME_PROMOTED"
+}
