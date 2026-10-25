@@ -73,6 +73,32 @@ final class M3TreeCommitAtomicityTest {
         assertEquals(203L, window.handleOf(ROOT, 4));
     }
 
+    @Test void laterZeroTakesPriorityOverShortCoordinateLane() {
+        M3TreeWindowPlan window = committedTwoRows();
+        int[] parent = {ROOT, ROOT};
+        int[] children = {2, 3};
+        int[] physical = {-1, -1};
+        window.plan(2, parent, children, physical);
+        IllegalArgumentException invalid = assertThrows(IllegalArgumentException.class,
+                () -> window.commit(2, new int[] {ROOT}, children, physical,
+                        new long[] {201, 0}));
+        assertEquals("uncommitted native row 1", invalid.getMessage());
+        stillCommitted(window);
+        window.commit(2, parent, children, physical, new long[] {201, 202});
+        assertEquals(202L, window.handleOf(ROOT, 3));
+    }
+
+    @Test void firstMissingCoordinateTakesPriorityOverLaterZero() {
+        M3TreeWindowPlan window = committedTwoRows();
+        int[] parent = {ROOT, ROOT};
+        int[] children = {2, 3};
+        int[] physical = {-1, -1};
+        window.plan(2, parent, children, physical);
+        assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> window.commit(2, new int[0], children, physical, new long[] {201, 0}));
+        stillCommitted(window);
+    }
+
     @Test void lastOfManyInvalidHandlesKeepsBothPrimitiveIndexes() {
         M3TreeWindowPlan window = committedTwoRows();
         final int count = 256;
