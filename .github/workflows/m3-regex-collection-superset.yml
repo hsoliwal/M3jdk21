@@ -39,11 +39,12 @@ jobs:
           set -euo pipefail
           cat <<'SEALED' | sha256sum -c
           b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147  src/java.base/share/classes/java/util/regex/M3PatternQuery.java
-          eb837c99e40740d48e2a2ab3c14616d3502e9917a9e84eb3a4ce4d85590040de  src/java.base/share/classes/java/util/regex/Matcher.java
-          f05c47933a11245c697df322fa9aa85ddd1a117f6ba44d68f3d619a1971c0e28  src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
+          6ffb6eb3bf57c56101dbcfe97e97f529324efa6363c9648065ee58302e01b48c  src/java.base/share/classes/java/util/regex/Matcher.java
+          1f730adaf2e7abb82f464d75008d5884bbc121b19f9d7ff770a220edc427340e  src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
           2d1107f841fcb9beecb2abac0002749ecf47de4ac61edea15feed6b25509c4df  test/jdk/java/util/regex/M3PatternStateMaskTest.java
           b5463d8e126b9a70dc874f181674f79f2484f6677fb30b864654d9b62fa25614  test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java
-          7858c30a90fb84b5e991c15c9ea84ff67d8dc9497843e3f339b99f543036e2ef  test/jdk/java/util/regex/M3RegexShortCircuitTest.java
+          8682503c6c38d2c8cf4837f9188fa609ddfdb9e4c3e59e595da87d93c4e40028  test/jdk/java/util/regex/M3RegexShortCircuitTest.java
+          c0e67fad7a03fe6558ddeb31442b3c2c6a916ded8563572a632da3934d348318  test/jdk/java/util/regex/M3RegexCompactPlanTest.java
           SEALED
           while read -r expected path; do
             test -f "$path"
@@ -58,6 +59,8 @@ jobs:
           944c61e15ede09dfc0965a425bbd60aafe761176 src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java
           ea949c6db62f312a71f7fdba3f2576816b512fec test/jdk/java/util/concurrent/CopyOnWriteArrayList/M3CopyOnWriteWordMaskTest.java
           ac3d3996faca3b5a125b9cda17a4bc7adf7de37a m3/qualification/collection-convergence-20261024/COW_SINGLE_WORD_RECEIPT.json
+          071a3dd97ab4294741a1393b7540398d06af2378 m3/qualification/collection-convergence-20261024/REGEX_COLLECTION_SUPERSET_RECEIPT.json
+          670ed47d9e6e3f57a29dbf4628a0791158e29960 m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json
           5c39dc53d3bbd80eada25f74b960e22391eeecb6 src/java.base/share/classes/java/util/CollectionViews.java
           e6059aeb9b2e7f332fb0baea2684395c268a5414 src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
           885f237a80cdd5997a852609fa60066d0f7d11c4 src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
@@ -103,6 +106,7 @@ jobs:
             --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
             -d "$out/tests" \
             test/jdk/java/util/regex/M3RegexShortCircuitTest.java \
+            test/jdk/java/util/regex/M3RegexCompactPlanTest.java \
             test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java \
             test/jdk/java/util/regex/M3PatternStateMaskTest.java \
             test/jdk/java/util/regex/M3PatternQueryTest.java \
@@ -135,6 +139,11 @@ jobs:
               --add-opens java.base/java.util.regex=ALL-UNNAMED \
               --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
               -cp "$out/tests" M3RegexShortCircuitTest
+            "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
+              --add-opens java.base/java.util.regex=ALL-UNNAMED \
+              --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED \
+              --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+              -cp "$out/tests" M3RegexCompactPlanTest
           done
           "$home/bin/java" -Xmx768m -Xcheck:jni \
             --add-opens java.base/java.util.regex=ALL-UNNAMED \
