@@ -147,15 +147,13 @@ public final class Matcher implements MatchResult {
     CharSequence text;
 
     private static final int M3_TQ_MAX_UTF16_UNITS = 32_768;
+    // With no Facts, these stamps cache one Boolean scan verdict: from for
+    // allowed, ~from for rejected. to == -1 is unset, including at from == 0.
+    // usePattern invalidates Boolean stamps; immutable Facts survive query changes.
     private int m3TqFactsFrom = -1;
     private int m3TqFactsTo = -1;
     private M3TQ.Facts m3TqFacts;
-    // The Pattern-compiled monotone plan needs only a Boolean region verdict;
-    // retain it across find() calls on the same immutable String and query.
-    private M3TQ m3TqScanQuery;
-    private int m3TqScanFrom = -1;
-    private int m3TqScanTo = -1;
-    private boolean m3TqScanAllowed;
+
 
     /**
      * Matcher state used by the last node. NOANCHOR is used when a
@@ -402,6 +400,10 @@ public final class Matcher implements MatchResult {
     public Matcher usePattern(Pattern newPattern) {
         if (newPattern == null)
             throw new IllegalArgumentException("Pattern cannot be null");
+        if (m3TqFacts == null) {
+            m3TqFactsFrom = -1;
+            m3TqFactsTo = -1;
+        }
         parentPattern = newPattern;
         namedGroups = null;
 
@@ -469,9 +471,6 @@ public final class Matcher implements MatchResult {
             m3TqFacts = null;
             m3TqFactsFrom = -1;
             m3TqFactsTo = -1;
-            m3TqScanQuery = null;
-            m3TqScanFrom = -1;
-            m3TqScanTo = -1;
         }
         text = input;
         return reset();
@@ -1762,11 +1761,13 @@ public final class Matcher implements MatchResult {
         }
         // Preserve the established reusable facts contract for Pattern.LITERAL:
         // literals can share one precomputed region index across changing queries.
-        if (query.hasScanPlan() && (parentPattern.flags() & Pattern.LITERAL) == 0) {
-            if (m3TqScanQuery == query
-                    && m3TqScanFrom == this.from
-                    && m3TqScanTo == to) {
-                return m3TqScanAllowed;
+        // Existing Facts keep their ordinary stamps and reuse contract. A
+        // Boolean result uses the same two slots only while no Facts are retained.
+        if (facts == null && query.hasScanPlan()
+                && (parentPattern.flags() & Pattern.LITERAL) == 0) {
+            if (m3TqFactsTo == to) {
+                if (m3TqFactsFrom == this.from) return true;
+                if (m3TqFactsFrom == ~this.from) return false;
             }
             try {
                 jdk.internal.access.JavaLangAccess access =
@@ -1776,10 +1777,8 @@ public final class Matcher implements MatchResult {
                 if (prepared == null) {
                     boolean allowed = query.testScanning(
                             text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
-                    m3TqScanFrom = this.from;
-                    m3TqScanTo = to;
-                    m3TqScanQuery = query;
-                    m3TqScanAllowed = allowed;
+                    m3TqFactsFrom = allowed ? this.from : ~this.from;
+                    m3TqFactsTo = to;
                     return allowed;
                 }
                 // Prepared owner signals already have an established regional
