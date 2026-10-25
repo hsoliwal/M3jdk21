@@ -1,0 +1,14 @@
+{
+  "schema": "m3-commons-namespace-source-qualification-v1",
+  "predecessor": "receiving/commons-collections-4.5.0-20261018",
+  "base": "b35759a36ecdfc299855a5e53b4d1a05f9f3884d",
+  "sourceRepository": "hsoliwal/commons-collections",
+  "sourceCommits": ["03f5ae07596f2fd648419cd69e7c4f3dc01d7420", "33d9bbc9155cc6f9f9ef1b1ca8d8929ae9bcc674", "8607908afd758d7a4946cda6bbac4085cff17375", "0268162dfc5eb4d7275a45f8ba625b0fa07cfc7a"],
+  "rows": {"edited": 5, "new": 15},
+  "conflictsResolved": {"IteratorChain": 1, "TreeList": 12},
+  "compile": "javac --release 8 -g on JDK 21.0.9: 359 main sources, 0 errors",
+  "tests": "7 array-storage test classes + donor SparseBloomFilterTest, IteratorChainTest, PermutationIteratorTest, TreeListTest, CircularFifoQueueTest (JUnit 5, javac --release 21): 200/200",
+  "contract": "CircularFifoClearContract: 6,849,617 checks, PASS",
+  "recipe": "recipe/array-storage-commons-4.5.0-20261024: 2 tests (128 transition states with fixed points, 29 refusals)",
+  "notRun": ["CircularFifoClearBenchmark (JMH)", "the full donor test suite of the receive"]
+}
