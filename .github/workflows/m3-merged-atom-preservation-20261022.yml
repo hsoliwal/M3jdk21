@@ -66,7 +66,20 @@ jobs:
                   raise SystemExit("invalid original preimage SHA-256")
               if not re.fullmatch("[0-9a-f]{64}", expected) or license_id != "Apache-2.0":
                   raise SystemExit("invalid M3 postimage SHA or license receipt")
-              if pull != "hsoliwal/com.synexia#12951":
+              # The resource-lock owner advanced after the original five-file
+              # receipt. Bind exactly its later source history and Synexia recipe;
+              # all four other original results retain their original authority.
+              if relative == "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java":
+                  required = (
+                      "com.synexia.m3.M3ResourceLocksCurrentOwner",
+                      "7d0e50075f26400bfce311919457996468321a987d86cf0145737da9fde024c5",
+                      "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718",
+                      "M3JDK21@d2223b9da6a55a8097ea71f856bd86562b9dce83+M3JDK21#1810@2f933b34fec44456c50bd7c7d04486d7f591263e",
+                      "hsoliwal/com.synexia#13255",
+                  )
+                  if (recipe, previous, expected, origin, pull) != required:
+                      raise SystemExit("unadmitted resource-lock source provenance")
+              elif pull != "hsoliwal/com.synexia#12951":
                   raise SystemExit("missing canonical Synexia recipe provenance")
               if state not in ("PENDING_RECIPE_AND_PRODUCT_CI", "QUALIFIED"):
                   raise SystemExit("invalid M3 source admission status")
