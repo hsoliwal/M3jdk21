@@ -166,13 +166,13 @@ public final class M3TreeWindowPlan {
 
 	public void commit (int count, int [] parentIds, int [] childIndices, int [] physicalParents, long [] nativeHandles) {
 		if (count != plannedCount || nativeHandles.length < count) throw new IllegalArgumentException ("commit arrays");
-		// Validate all row lanes and handles before replacing committed maps/arrays.
-		// Invalid later entries must not destroy the previous native window.
-		if (parentIds.length < count || childIndices.length < count || physicalParents.length < count) {
-			throw new ArrayIndexOutOfBoundsException ("commit lane shorter than planned window");
-		}
+		// Preflight in the same left-to-right read/exception order as the old
+		// publication loop. No committed map/array changes until every row passes.
 		for (int entry = 0; entry < count; entry++) {
 			if (nativeHandles [entry] == 0) throw new IllegalArgumentException ("uncommitted native row " + entry);
+			int parent = parentIds [entry];
+			int child = childIndices [entry];
+			int physical = physicalParents [entry];
 		}
 		if (keys.length < count) {
 			int next = capacity (keys.length, count);
