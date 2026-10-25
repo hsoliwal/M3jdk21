@@ -1,0 +1,61 @@
+{
+  "schema": "m3-eclipse-collections-namespace-receiving-disposition-v1",
+  "copyright": "Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.",
+  "metadataLicense": "Apache-2.0 OR EPL-2.0",
+  "authority": {
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "e2a8ae5602a2afa1201e5facb7c74b70bafc4506",
+    "policy": "m3/docs/m3jdk21-porting-invariant.md",
+    "mapping": "m3/docs/name-mapping.json",
+    "naming": "m3/collections/NAMING.md"
+  },
+  "namespaceMapping": {
+    "source": "org.eclipse.collections",
+    "target": "com.m3.collections.eclipse",
+    "modules": [
+      "com.m3.collections.eclipse.api",
+      "com.m3.collections.eclipse.impl"
+    ],
+    "sourceTree": "97cd9b660586845b0015e4882d28af6834ed5527",
+    "scope": "Complete independently licensed source custody of the relocated fork tree; source-only namespace pass"
+  },
+  "targetDisposition": "PENDING_RUNTIME_PORT",
+  "publicJDKNames": "UNCHANGED",
+  "receivingSequenceAdvanced": false,
+  "newCollectionAlgorithmsAdmitted": 0,
+  "arrayNativeStorage": "OPEN",
+  "runtimeDependencyOnSynexia": false,
+  "supersedes": {
+    "directory": "m3/collections/receiving/eclipse-indexed-rb-20261019",
+    "handling": "Kept unchanged as history; its 12 in-scope source files are byte-equal to the received copies or differ only by the fork-first header lines"
+  },
+  "providers": {
+    "file": "m3/collections/qualification/five-provider-inventory-20261018/PROVIDERS.tsv",
+    "rows": "EA, EI",
+    "current": "PATTERN_ONLY (unchanged by this receive)",
+    "decided": "Switch to received source in a follow-up leaf after A1"
+  },
+  "pending": [
+    "Default install/deploy skips in the 19 donor POMs (build-quarantine successor, leaf A2)",
+    "PROVIDERS.tsv rows EA/EI switch to received source (follow-up leaf)",
+    "M3 prefix for the four first-party indexed red-black classes (naming item C3 #9, undecided)",
+    "Full Maven, OSGi and JPMS builds and the full donor test suites",
+    "Per-concrete array/index/offset/mask conversion, stored-entry elimination and JNI",
+    "Concrete existing target-owner mapping, recipe and license admission before src/** promotion"
+  ],
+  "sourceQualification": {
+    "allFileCustody": "PASS: all 3,480 paths/modes/blobs; tree-id equality with the fork prep tree",
+    "javacRelease21": "PASS: api, impl (with generated sources), forkjoin, testutils; 0 errors, 0 inherits abstract and default",
+    "javacRelease17": "PASS: same modules; 0 errors, 0 inherits abstract and default",
+    "namedUnitTests": "PASS: 10 of 10",
+    "unifiedMapSuite": "PASS: 287 of 287, unfiltered",
+    "factorySmoke": "PASS: 10 of 10 API factories; factory namespace probe 255 mappings",
+    "fullMavenReactor": "OPEN",
+    "osgiAndJpmsBundles": "OPEN"
+  },
+  "donorBuildPublication": {
+    "normalLifecycle": "Unchanged in this receive: the 19 donor POMs keep org.eclipse.collections:*:14.0.0-SNAPSHOT; the tree is outside the M3 reactor; leaf A2 adds default install/deploy skips",
+    "GAVs": "Retained unchanged as source provenance",
+    "M3ReceivingGraph": "OPEN: distinct target-owned M3 artifacts and full build"
+  }
+}
