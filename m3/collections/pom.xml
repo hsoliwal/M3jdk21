@@ -50,7 +50,25 @@
           <include>NETBEANS-NOTICE.txt</include>
         </includes>
       </resource>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <includes>
+          <include>com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv</include>
+        </includes>
+      </resource>
     </resources>
+    <testResources>
+      <testResource>
+        <directory>${project.basedir}/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${project.basedir}/qualification/m3-sdk-families-20261017</directory>
+        <targetPath>expected-data/m3-sdk-families-20261017</targetPath>
+        <includes>
+          <include>FAMILY_CATALOG.tsv</include>
+        </includes>
+      </testResource>
+    </testResources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

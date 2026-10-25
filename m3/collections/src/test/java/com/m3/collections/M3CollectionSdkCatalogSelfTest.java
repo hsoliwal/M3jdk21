@@ -49,7 +49,7 @@ public final class M3CollectionSdkCatalogSelfTest {
             }
             vendors[family.vendor().ordinal()]++;
         }
-        check(optional == 12, "selected optional adapters must be enumerated exactly");
+        check(optional == 14, "selected optional adapters must be enumerated exactly");
         for (var vendor : M3CollectionSdkCatalog.Vendor.values()) {
             check(vendors[vendor.ordinal()] > 0, "vendor coverage: " + vendor);
             check(M3CollectionSdkCatalog.byVendor(vendor).size() == vendors[vendor.ordinal()],
