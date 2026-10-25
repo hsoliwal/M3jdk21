@@ -4,6 +4,7 @@ on:
     paths:
       - 'm3/collections/implementations/spring-case-insensitive-map/**'
       - 'm3/collections/qualification/owned-spring-case-insensitive-map-20261018/**'
+      - 'm3/collections/qualification/owned-spring-case-insensitive-map-20261024/**'
       - 'm3/collections/recipe/owned-spring-case-insensitive-map-20261018/**'
       - 'm3/collections/src/main/java/**'
       - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
@@ -35,7 +36,7 @@ jobs:
           mkdir -p "$M3_TASK_OUT/tmp" "$M3_TASK_OUT/native"
           export TMPDIR="$M3_TASK_OUT/tmp" TEMP="$M3_TASK_OUT/tmp" TMP="$M3_TASK_OUT/tmp"
           python -I -S -B -c 'import os,shutil; assert shutil.disk_usage(os.environ["TMPDIR"]).free >= 8*1024**3+512*1024**2'
-          M3_Q="m3/collections/qualification/owned-spring-case-insensitive-map-20261018"
+          M3_Q="m3/collections/qualification/owned-spring-case-insensitive-map-20261024"
           python -I -S -B "$M3_Q/verify.py"
           M3_PROVIDER="$M3_TASK_OUT/spring-core-6.2.0.jar"
           curl --fail --location --silent --show-error --output "$M3_PROVIDER" https://repo.maven.apache.org/maven2/org/springframework/spring-core/6.2.0/spring-core-6.2.0.jar
@@ -69,7 +70,7 @@ jobs:
           export TMPDIR="$M3_TASK_OUT/tmp" TEMP="$M3_TASK_OUT/tmp" TMP="$M3_TASK_OUT/tmp"
           export MAVEN_OPTS="-Xmx512m -XX:-UsePerfData -Djava.io.tmpdir=$M3_TASK_OUT/tmp -Duser.home=$M3_TASK_OUT/tmp"
           python -I -S -B -c 'import os,shutil; assert shutil.disk_usage(os.environ["TMPDIR"]).free >= 8*1024**3+512*1024**2'
-          M3_Q="m3/collections/qualification/owned-spring-case-insensitive-map-20261018"
+          M3_Q="m3/collections/qualification/owned-spring-case-insensitive-map-20261024"
           python -I -S -B "$M3_Q/verify.py"
           mvn -B -ntp -f m3/collections/recipe/owned-spring-case-insensitive-map-20261018/pom.xml -Dmaven.repo.local="$M3_TASK_OUT/m2" -Dm3.recipe.output="$M3_TASK_OUT/target" test
           python -I -S -B "$M3_Q/verify.py"
@@ -99,7 +100,7 @@ jobs:
           export TMPDIR="$M3_TASK_OUT/tmp" TEMP="$M3_TASK_OUT/tmp" TMP="$M3_TASK_OUT/tmp"
           export MAVEN_OPTS="-Xmx512m -XX:-UsePerfData -Djava.io.tmpdir=$M3_TASK_OUT/tmp -Duser.home=$M3_TASK_OUT/tmp"
           python -I -S -B -c 'import os,shutil; assert shutil.disk_usage(os.environ["TMPDIR"]).free >= 8*1024**3+512*1024**2'
-          M3_Q="m3/collections/qualification/owned-spring-case-insensitive-map-20261018"
+          M3_Q="m3/collections/qualification/owned-spring-case-insensitive-map-20261024"
           python -I -S -B "$M3_Q/verify.py"
           mvn -B -ntp -f m3/collections/implementations/spring-case-insensitive-map/pom.xml -Dmaven.repo.local="$M3_TASK_OUT/m2" -Dm3.module.output="$M3_TASK_OUT/target" package
           python -I -S -B "$M3_Q/verify_module.py" "$M3_TASK_OUT/target/m3-owned-spring-case-insensitive-map-0.1.0-SNAPSHOT.jar"

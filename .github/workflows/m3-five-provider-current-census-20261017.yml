@@ -65,6 +65,7 @@ jobs:
           python3 -m unittest discover -p 'test_*.py' -v
           cd "$GITHUB_WORKSPACE"
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261024 -p 'test_*.py' -v
           python3 -m unittest discover -s m3/collections/interop/qualification/compiler-three-test-successor-20261022 -p 'test_*.py' -v
           python3 m3/collections/interop/qualification/compiler-three-test-successor-20261022/verify_compile_successor.py --product . --predecessor predecessor-product --historical-product historical-product
   five-real-provider-runtime:

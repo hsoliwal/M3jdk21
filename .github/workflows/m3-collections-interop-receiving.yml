@@ -24,10 +24,11 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
+            m3/arrays
             m3/collections
             m3/tooling/migration-recipes
-      # Run the unchanged 36+7+40 source verifier against its real predecessor,
-      # then compare exactly three changes in the new product source generation.
+      # Keep both historical source checkouts; the successor verifier binds
+      # 36+7+40 originals, three compiled-test atoms and eight new E5 sources.
       - uses: actions/checkout@v4
         with:
           repository: hsoliwal/M3jdk21
@@ -54,14 +55,15 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          mkdir -p proof/core-classes/META-INF
+          mkdir -p proof/core-classes/META-INF proof/array-classes/META-INF
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
           ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
           test "$(git hash-object "$ENGINE")" = 05e02169c7429183107a99c60e1aad05b4d73b5f
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-tests.log
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261024 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-v2-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/compiler-three-test-successor-20261022 -p 'test_*.py' -v 2>&1 | tee proof/compiler-source-revision-tests.log
-          python3 m3/collections/interop/qualification/compiler-three-test-successor-20261022/verify_compile_successor.py --product . --predecessor predecessor-product --historical-product historical-product | tee proof/admitted-postimages.tsv
+          python3 m3/collections/interop/qualification/current-census-superset-20261024/verify_superset_v2.py --product . --historical-product historical-product | tee proof/admitted-postimages.tsv
       - name: Run all six actual recipe proofs before delivery
         shell: bash
         run: |
@@ -85,23 +87,30 @@ jobs:
           mvn -B -ntp -f m3/collections/interop/recipe/pom.xml \
             '-Dtest=M3CollectionsLibraryInteropTest#exactOutputsFixedPointAndOptionalMaterialization' \
             test 2>&1 | tee proof/recipe-delivery.log
-          python3 m3/collections/interop/qualification/compiler-three-test-successor-20261022/verify_compile_successor.py --product . --predecessor predecessor-product --historical-product historical-product > proof/current-successor-ledger.tsv
+          python3 m3/collections/interop/qualification/current-census-superset-20261024/verify_superset_v2.py --product . --historical-product historical-product > proof/current-successor-ledger.tsv
           cat m3/collections/interop/recipe-receipt.tsv | tee proof/recipe-receipt.tsv
           git diff --exit-code -- m3/collections/interop/src m3/collections/interop/recipe-receipt.tsv
       - name: Compile unchanged M3 core and verify the dependency boundary
         shell: bash
         run: |
           set -euxo pipefail
+          find m3/arrays/src/main/java -name '*.java' | sort > proof/array-sources.txt
+          sha256sum $(cat proof/array-sources.txt) > proof/array-source-hashes.txt
+          javac --release 21 -Xlint:all,-module -Werror -d proof/array-classes @proof/array-sources.txt 2>&1 | tee proof/array-compile.log
+          cp m3/arrays/{LICENSE,NOTICE,provenance.json} proof/array-classes/META-INF/
+          jar --create --file proof/m3-arrays.jar -C proof/array-classes .
           find m3/collections/src/main/java -name '*.java' | sort > proof/core-sources.txt
           sha256sum $(cat proof/core-sources.txt) > proof/core-source-hashes.txt
-          javac --release 21 -Xlint:all,-module -Werror -d proof/core-classes @proof/core-sources.txt 2>&1 | tee proof/core-compile.log
+          javac --release 21 -Xlint:all,-module -Werror --module-path proof/m3-arrays.jar -d proof/core-classes @proof/core-sources.txt 2>&1 | tee proof/core-compile.log
           cp m3/collections/{LICENSE,NOTICE,provenance.json,name-mapping.json} proof/core-classes/META-INF/
           jar --create --file proof/m3-collections.jar -C proof/core-classes .
-          jdeps --print-module-deps proof/m3-collections.jar | tee proof/core-module-deps.txt
-          test "$(cat proof/core-module-deps.txt)" = java.base
+          jdeps --print-module-deps --module-path proof/m3-arrays.jar proof/m3-collections.jar | tee proof/core-module-deps.txt
+          test "$(cat proof/core-module-deps.txt)" = com.m3.arrays,java.base
+          ARRAYS="$GITHUB_WORKSPACE/proof/m3-arrays.jar"
+          (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file -Dfile="$ARRAYS" -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml")
           JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
-            -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
+            -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DpomFile="$GITHUB_WORKSPACE/m3/collections/pom.xml")
       - name: Compile and execute exactly the complete indexed five-library JUnit corpus
         shell: bash
         run: |
