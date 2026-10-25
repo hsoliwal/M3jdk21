@@ -39,7 +39,7 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '20446b00731fdd0b9524ac35be3860fbc0bb062b'
           test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = 'fe87db69813f63bf60beeff702eab10cfe306f99'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '1f84f2d0221d735f2209a6da1673479382e67776'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3RankIntervalBatchContract.java)" = '278e77bd3264b8bd113114f44af996615297ec0d'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3RankIntervalBatchContract.java)" = '9d96a4918aec1082b4a809708f1699a86473c001'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3RankIntervalBatchTest.java)" = 'bdf022d93b9b2f9e71c79e64112a8005ab29a049'
       - name: Strict Java21 compile of the original rank owners and differential oracle
         shell: bash

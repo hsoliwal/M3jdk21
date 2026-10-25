@@ -166,6 +166,26 @@ public final class M3RankIntervalBatchContract {
                     "native inverted interval exception");
         }
         same(new int[]{31, 32, 33}, canary, "native inversion leaves output");
+        // JNI validation must scan the entire 513-element vector before
+        // writing ANY chunk. The only inverted interval follows two full
+        // 256-query chunks; a streaming write would corrupt the canaries.
+        long[] lateFrom = new long[513];
+        long[] lateTo = new long[513];
+        Arrays.fill(lateTo, 100L);
+        lateFrom[512] = 101L;
+        int[] lateCanary = new int[520];
+        Arrays.fill(lateCanary, -927);
+        try {
+            nativeMethod.invoke(null, new long[]{1, 2}, lateFrom, lateTo,
+                    0, lateFrom.length, lateCanary, 2);
+            throw new AssertionError("JNI late inversion accepted");
+        } catch (InvocationTargetException failure) {
+            check(failure.getCause() instanceof IllegalArgumentException,
+                    "native late inversion exception");
+        }
+        for (int value : lateCanary) {
+            check(value == -927, "native late invalid interval wrote output");
+        }
     }
 
     public static void main(String[] arguments) throws Exception {
