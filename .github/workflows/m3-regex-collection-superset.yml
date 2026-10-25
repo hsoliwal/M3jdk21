@@ -14,6 +14,7 @@ on:
       - 'test/jdk/java/util/regex/M3RegexShortCircuitTest.java'
       - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
       - 'test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java'
+      - 'test/jdk/java/util/regex/M3RegexPredicateRunTest.java'
       - 'test/jdk/java/util/regex/M3PatternStateMaskTest.java'
       - '.github/workflows/m3-regex-collection-superset.yml'
       - 'm3/qualification/regex-collection-superset/**'
@@ -43,7 +44,7 @@ jobs:
         run: |
           set -euo pipefail
           cat <<'SEALED' | sha256sum -c
-          b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147  src/java.base/share/classes/java/util/regex/M3PatternQuery.java
+          b62086cfa2ff37e6f6be94ad117511694ae87aae3bd8a0227913b58e0ae4e60b  src/java.base/share/classes/java/util/regex/M3PatternQuery.java
           6ffb6eb3bf57c56101dbcfe97e97f529324efa6363c9648065ee58302e01b48c  src/java.base/share/classes/java/util/regex/Matcher.java
           1f730adaf2e7abb82f464d75008d5884bbc121b19f9d7ff770a220edc427340e  src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
           2d1107f841fcb9beecb2abac0002749ecf47de4ac61edea15feed6b25509c4df  test/jdk/java/util/regex/M3PatternStateMaskTest.java
@@ -53,6 +54,7 @@ jobs:
           2b454b05aa5f6157795d0f2b329e6f414a9b2e507a625721cf09eabfd7993370  test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java
           b8995aa7be1bb74aa55b4f843e6d1fffe05222991a612adb01871547e83d5647  test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java
           0aab957eae32ecf416a5c8b3e789141d3b48b4ca1defcbb20309c20bc7bfe7d8  test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java
+          ff9d3781f69b23c512d1a56921661d04c54d10e80b89ca1cc05708d912cbe8c0  test/jdk/java/util/regex/M3RegexPredicateRunTest.java
           SEALED
           while read -r expected path; do
             test -f "$path"
@@ -118,6 +120,7 @@ jobs:
             test/jdk/java/util/regex/M3RegexCompactPlanTest.java \
             test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java \
             test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java \
+            test/jdk/java/util/regex/M3RegexPredicateRunTest.java \
             test/jdk/java/util/regex/M3PatternStateMaskTest.java \
             test/jdk/java/util/regex/M3PatternQueryTest.java \
             test/jdk/java/util/regex/M3RegexReuseTest.java \
@@ -150,6 +153,9 @@ jobs:
             "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
               --add-opens java.base/java.util.regex=ALL-UNNAMED \
               -cp "$out/tests" M3RegexUnicodeFrontierTest
+            "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
+              --add-opens java.base/java.util.regex=ALL-UNNAMED \
+              -cp "$out/tests" M3RegexPredicateRunTest
             "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
               --add-opens java.base/java.util.regex=ALL-UNNAMED \
               --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \

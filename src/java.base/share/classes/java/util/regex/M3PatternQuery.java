@@ -4,6 +4,7 @@
  *
  * GPLv2 with the Classpath exception.
  */
+// Modified 2026-10-25: reuse word-local identical predicates when preparing ASCII masks.
 package java.util.regex;
 
 import java.util.ArrayDeque;
@@ -218,14 +219,23 @@ final class M3PatternQuery {
             int words = (atoms.length >>> 6) + 1;
             try {
                 long[] masks = new long[137 * words];
-                for (int atom = 0; atom < atoms.length; atom++) {
+                for (int atom = 0; atom < atoms.length;) {
                     int state = atom + 1;
                     int word = state >>> 6;
-                    long bit = 1L << (state & 63);
-                    if (repeated[atom]) masks[136 * words + word] |= bit;
-                    for (int unit = 0; unit < 128; unit++) {
-                        if (atoms[atom].is(unit)) masks[unit * words + word] |= bit;
+                    Pattern.CharPredicate predicate = atoms[atom];
+                    int limit = Math.min(atoms.length, state | 63);
+                    int end = atom + 1;
+                    // Identical predicate objects have identical acceptance. Keep each
+                    // run inside one state word so no range shift can wrap at bit 64.
+                    while (end < limit && atoms[end] == predicate) end++;
+                    long bits = (-1L << (state & 63)) & (-1L >>> (63 - (end & 63)));
+                    for (int index = atom; index < end; index++) {
+                        if (repeated[index]) masks[136 * words + word] |= 1L << ((index + 1) & 63);
                     }
+                    for (int unit = 0; unit < 128; unit++) {
+                        if (predicate.is(unit)) masks[unit * words + word] |= bits;
+                    }
+                    atom = end;
                 }
                 for (int word = 0; word < words; word++) {
                     long jump = masks[136 * words + word];
