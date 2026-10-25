@@ -36,7 +36,17 @@ jobs:
           done
           (cd "$root"; echo "$(cat rewrite-java-21-8.17.1.jar.sha1)  rewrite-java-21-8.17.1.jar" | sha1sum --check --status)
           (cd "$root"; echo "$(cat rewrite-java-21-8.17.1.pom.sha1)  rewrite-java-21-8.17.1.pom" | sha1sum --check --status)
-          jar tf "$root/rewrite-java-21-8.17.1.jar" | grep -q 'Java21Parser.class'
+          # Independent Synexia toolchain receipt, not a hash learned from the
+          # same Maven download. Refuse altered JAR/POM even with matching .sha1.
+          printf '%s\n' \
+            '7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4  rewrite-java-21-8.17.1.jar' \
+            '9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7  rewrite-java-21-8.17.1.pom' \
+            > "$RUNNER_TEMP/m3-java-parser/EXPECTED_SHA256.txt"
+          (cd "$root"; sha256sum --check --status "$RUNNER_TEMP/m3-java-parser/EXPECTED_SHA256.txt")
+          # Under pipefail, grep -q may stop reading before jar finishes (SIGPIPE).
+          # Inspect a completed archive listing instead of a short-circuit pipe.
+          jar tf "$root/rewrite-java-21-8.17.1.jar" > "$RUNNER_TEMP/m3-java-parser/JAR_ENTRIES.txt"
+          grep -Fxq 'org/openrewrite/java/Java21Parser.class' "$RUNNER_TEMP/m3-java-parser/JAR_ENTRIES.txt"
           test "$(stat -c '%s' "$root/rewrite-java-21-8.17.1.jar")" -gt 50000
           (cd "$root"; sha256sum rewrite-java-21-8.17.1.jar rewrite-java-21-8.17.1.pom) \
              | tee "$RUNNER_TEMP/m3-java-parser/SOURCE_MANIFEST.sha256"
@@ -46,7 +56,8 @@ jobs:
         with:
           name: m3-openrewrite-java21-parser-8171
           if-no-files-found: error
-          retention-days: 3
+          retention-days: 30
           path: |
             ${{ runner.temp }}/m3-java-parser/repository/
             ${{ runner.temp }}/m3-java-parser/SOURCE_MANIFEST.sha256
+            ${{ runner.temp }}/m3-java-parser/EXPECTED_SHA256.txt
