@@ -189,6 +189,32 @@ public final class M3CpuToolsTest {
                 "borrowed diff monitor and stable receipt");
         diffMonitor.cancelled = true;
         expect(CancellationException.class, () -> CpuTools.diff(source, target, 1, diffMonitor));
+        Path mergeOtherPath = work.resolve("merge-independent.txt");
+        Files.writeString(mergeOtherPath, "#ababa\ud83d\ude42\r\n", StandardCharsets.UTF_8);
+        M3File mergeOther = M3File.load(mergeOtherPath);
+        var combined = CpuTools.merge(source, target, mergeOther, 1);
+        check(combined.mergeable() && combined.conflictCount() == 0
+                && combined.apply(source).equals("#abXaba\ud83d\ude42\r\n"),
+                "two nonoverlapping file edits preserve their superset");
+        check(CpuTools.verifyMerge(source, target, mergeOther, 1, combined, null),
+                "three-way M3File receipt replays exact scripts");
+        check(!CpuTools.verifyMerge(source, mergeOther, target, 1, combined, null)
+                && !CpuTools.verifyMerge(M3File.load(copied), target, mergeOther, 1, combined, null),
+                "left/right ordering and original base location are source-bound");
+        Path mergeConflictPath = work.resolve("merge-conflict.txt");
+        Files.writeString(mergeConflictPath, "abYaba\ud83d\ude42\r\n", StandardCharsets.UTF_8);
+        var conflict = CpuTools.merge(source, target, M3File.load(mergeConflictPath), 1);
+        check(!conflict.mergeable() && conflict.conflictCount() != 0,
+                "identical-position divergent inserts require review");
+        expect(IllegalStateException.class, () -> conflict.apply(source));
+        check(!CpuTools.merge(source, target, mergeOther, 0).result().complete(),
+                "budget exhaustion cannot silently choose a side");
+        var mergeMonitor = new CountMonitor();
+        check(CpuTools.merge(source, target, mergeOther, 1, mergeMonitor).sha256().equals(combined.sha256())
+                && mergeMonitor.work == 1 && mergeMonitor.finished == 0,
+                "three-way progress is borrowed and deterministic");
+        mergeMonitor.cancelled = true;
+        expect(CancellationException.class, () -> CpuTools.merge(source, target, mergeOther, 1, mergeMonitor));
         Files.writeString(path, "changed on disk");
         check(session.execute(List.of("text.identity"), source).equals(result), "execution uses admitted snapshot without reopen");
         var changed = M3File.load(path);

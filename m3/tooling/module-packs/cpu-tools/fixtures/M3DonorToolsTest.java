@@ -9,6 +9,7 @@ import com.m3.tools.plan.priority.StablePriorityQueue;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.diff.BoundedDiff;
 import com.m3.tools.text.diff.TextDelta;
+import com.m3.tools.text.diff.ThreeWayMerge;
 import com.m3.tools.text.frequency.TermFrequency;
 import com.m3.tools.text.index.Bm25Ranker;
 import com.m3.tools.text.index.InvertedIndex;
@@ -50,7 +51,7 @@ public final class M3DonorToolsTest {
 
     public static void main(String[] args) throws Exception {
         text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
-        boundedDiff();
+        boundedDiff(); threeWayMerge();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -219,6 +220,80 @@ public final class M3DonorToolsTest {
         }
         check(operationCount == optimum, "coalescing preserves minimal distance");
         if (!before.isEmpty()) rejects(IllegalArgumentException.class, () -> actual.apply(before + "x"));
+    }
+
+    /** Independent disjoint-location construction witnesses additive superset merge. */
+    private static void threeWayMerge() throws Exception {
+        rejects(NullPointerException.class, () -> ThreeWayMerge.merge(null, "", "", 0));
+        rejects(NullPointerException.class, () -> ThreeWayMerge.merge("", null, "", 0));
+        rejects(NullPointerException.class, () -> ThreeWayMerge.merge("", "", null, 0));
+        rejects(NullPointerException.class, () -> ThreeWayMerge.merge("", "", "", 0, null));
+        rejects(IllegalArgumentException.class, () -> ThreeWayMerge.merge("", "", "", -1));
+        rejects(IllegalArgumentException.class, () -> ThreeWayMerge.merge("", "", "", 513));
+        var empty = ThreeWayMerge.merge("", "", "", 0);
+        check(empty.mergeable() && empty.merged().isEmpty() && empty.mergedChanges().isEmpty(),
+                "empty base/side three-way identity");
+        var fastForward = ThreeWayMerge.merge("abcde", "abcde", "abcYde", 1);
+        check(fastForward.mergeable() && fastForward.merged().equals("abcYde"),
+                "one unchanged side preserves the other");
+        var identical = ThreeWayMerge.merge("abcde", "abXde", "abXde", 2);
+        check(identical.mergeable() && identical.merged().equals("abXde")
+                && identical.mergedChanges().size() == 1, "identical edit merged once");
+        var adjacent = ThreeWayMerge.merge("abcde", "aXcde", "abYde", 2);
+        check(adjacent.mergeable() && adjacent.merged().equals("aXYde"),
+                "adjacent independent replacements compose");
+        var overlap = ThreeWayMerge.merge("abcde", "abXde", "abYde", 2);
+        check(overlap.status() == ThreeWayMerge.Status.CONFLICT && overlap.complete()
+                && overlap.conflictCount() > 0 && overlap.conflictsComplete(),
+                "different replacements on the same base range conflict");
+        rejects(IllegalStateException.class, overlap::merged);
+        rejects(UnsupportedOperationException.class, () -> overlap.conflicts().clear());
+        var sameOffset = ThreeWayMerge.merge("abcde", "abXcde", "abYcde", 1);
+        check(sameOffset.status() == ThreeWayMerge.Status.CONFLICT && sameOffset.conflictCount() == 1,
+                "divergent insertions at the same physical offset conflict");
+        var boundary = ThreeWayMerge.merge("abcde", "aXcde", "aYbcde", 2);
+        check(boundary.status() == ThreeWayMerge.Status.CONFLICT,
+                "insertion exactly at changed-range boundary is conservatively ambiguous");
+        var incomplete = ThreeWayMerge.merge("abcde", "abXde", "abcde", 1);
+        check(incomplete.status() == ThreeWayMerge.Status.INCOMPLETE && !incomplete.complete()
+                && incomplete.conflicts().isEmpty(), "insufficient edit budget cannot claim merge success");
+        rejects(IllegalStateException.class, incomplete::merged);
+        var surrogate = ThreeWayMerge.merge("a\ud800b", "aX\ud800b", "a\ud800Yb", 1);
+        check(surrogate.mergeable() && surrogate.merged().equals("aX\ud800Yb"),
+                "lone surrogate and exact UTF-16 indexes retained without UTF-8 lossy conversion");
+        String source = "abcdefghijklmno";
+        for (int trial = 0; trial < 2200; trial++) {
+            int p = RANDOM.nextInt(1, 6), q = RANDOM.nextInt(9, 14);
+            String leftInsert = source.substring(0, p) + "X" + source.substring(p);
+            String rightInsert = source.substring(0, q) + "Y" + source.substring(q);
+            var inserted = ThreeWayMerge.merge(source, leftInsert, rightInsert, 1);
+            check(inserted.mergeable() && inserted.merged().equals(
+                    source.substring(0, p) + "X" + source.substring(p, q) + "Y" + source.substring(q)),
+                    "independent inserted offsets compose in source order");
+            check(inserted.mergedChanges().size() == 2 && inserted.conflictCount() == 0,
+                    "two inserted hunks retained without extra copies");
+
+            String leftReplace = source.substring(0, p) + "X" + source.substring(p + 1);
+            String rightReplace = source.substring(0, q) + "Y" + source.substring(q + 1);
+            var replaced = ThreeWayMerge.merge(source, leftReplace, rightReplace, 2);
+            check(replaced.mergeable() && replaced.merged().equals(
+                    source.substring(0, p) + "X" + source.substring(p + 1, q) + "Y" + source.substring(q + 1)),
+                    "nonoverlapping replacement intervals compose");
+            check(replaced.leftPatch().distance() == 2 && replaced.rightPatch().distance() == 2,
+                    "each source-relative edit distance independently budgeted");
+            var conflicting = ThreeWayMerge.merge(source, leftInsert,
+                    source.substring(0, p) + "Y" + source.substring(p), 1);
+            check(conflicting.status() == ThreeWayMerge.Status.CONFLICT
+                    && conflicting.conflictCount() == 1 && !conflicting.mergeable(),
+                    "ambiguous same-offset insertion never chooses one side");
+        }
+        rejects(UnsupportedOperationException.class, () -> adjacent.mergedChanges().clear());
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> ThreeWayMerge.merge(
+                "z".repeat(100_000), "z".repeat(100_000), "z".repeat(100_000), 0, () -> {
+                    if (checkpoints.incrementAndGet() == 3) throw new IllegalStateException("cancel");
+                }));
+        check(checkpoints.get() == 3, "merge checkpoint cancellation happens during preprocessing");
     }
 
     /** Independent substring enumeration proves rolling-hash candidates never decide equality. */
