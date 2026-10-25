@@ -13,6 +13,7 @@ on:
       - 'test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java'
       - 'test/jdk/java/util/regex/M3RegexShortCircuitTest.java'
       - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
+      - 'test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java'
       - 'test/jdk/java/util/regex/M3PatternStateMaskTest.java'
       - '.github/workflows/m3-regex-collection-superset.yml'
       - 'm3/qualification/regex-collection-superset/**'
@@ -51,6 +52,7 @@ jobs:
           c0e67fad7a03fe6558ddeb31442b3c2c6a916ded8563572a632da3934d348318  test/jdk/java/util/regex/M3RegexCompactPlanTest.java
           2b454b05aa5f6157795d0f2b329e6f414a9b2e507a625721cf09eabfd7993370  test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java
           b8995aa7be1bb74aa55b4f843e6d1fffe05222991a612adb01871547e83d5647  test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java
+          0aab957eae32ecf416a5c8b3e789141d3b48b4ca1defcbb20309c20bc7bfe7d8  test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java
           SEALED
           while read -r expected path; do
             test -f "$path"
@@ -115,6 +117,7 @@ jobs:
             test/jdk/java/util/regex/M3RegexShortCircuitTest.java \
             test/jdk/java/util/regex/M3RegexCompactPlanTest.java \
             test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java \
+            test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java \
             test/jdk/java/util/regex/M3PatternStateMaskTest.java \
             test/jdk/java/util/regex/M3PatternQueryTest.java \
             test/jdk/java/util/regex/M3RegexReuseTest.java \
@@ -144,6 +147,9 @@ jobs:
               --add-opens java.base/java.util.regex=ALL-UNNAMED \
               --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
               -cp "$out/tests" M3RegexFrontierShortCircuitTest
+            "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
+              --add-opens java.base/java.util.regex=ALL-UNNAMED \
+              -cp "$out/tests" M3RegexUnicodeFrontierTest
             "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
               --add-opens java.base/java.util.regex=ALL-UNNAMED \
               --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
