@@ -925,6 +925,8 @@ public class CopyOnWriteArrayList<E>
         for (; i < end && !filter.test(elementAt(es, i)); i++)
             ;
         if (i < end) {
+            if (end - i <= Long.SIZE)
+                return bulkRemoveSingleWord(filter, es, i, end);
             final int beg = i;
             final long[] deathRow = nBits(end - beg);
             int deleted = 1;
@@ -950,6 +952,31 @@ public class CopyOnWriteArrayList<E>
                 throw new ConcurrentModificationException();
             return false;
         }
+    }
+
+    /** Plan a short removal window without allocating a temporary bitmap. */
+    private boolean bulkRemoveSingleWord(Predicate<? super E> filter,
+                                         Object[] es, int beg, int end) {
+        // The caller holds lock and has already selected the first deletion.
+        long deathRow = 1L;
+        int deleted = 1;
+        for (int i = beg + 1; i < end; i++) {
+            if (filter.test(elementAt(es, i))) {
+                deathRow |= 1L << (i - beg);
+                deleted++;
+            }
+        }
+        if (es != getArray())
+            throw new ConcurrentModificationException();
+        final Object[] newElts = Arrays.copyOf(es, es.length - deleted);
+        int w = beg;
+        for (int i = beg; i < end; i++) {
+            if ((deathRow & (1L << (i - beg))) == 0)
+                newElts[w++] = es[i];
+        }
+        System.arraycopy(es, end, newElts, w, es.length - end);
+        setArray(newElts);
+        return true;
     }
 
     public void replaceAll(UnaryOperator<E> operator) {
