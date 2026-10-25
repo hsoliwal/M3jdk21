@@ -9491,7 +9491,7 @@
         "id": "m3.collections.filtered-add-all.capture-once",
         "kind": "specialization",
         "status": "pending",
-        "reason": "Capture and validate caller occurrences once with the existing selectedCopy atom before one backing-owner addAll; only the validated references reach the owner. Names registered; owner receiving and target gates remain pending.",
+        "reason": "Capture and validate caller occurrences once with the existing selectedCopy atom before one backing-owner addAll; only the validated references reach the owner. Actual bounded receiving evidence is separate from full admission.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
@@ -9525,15 +9525,15 @@
         "targets": [
           {
             "repo": "hsoliwal/M3JDK21",
-            "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+            "commit": "3000635810b7ee7983d3d7fc1ca172418245e2dc",
             "module": "java.base",
             "path": "src/java.base/share/classes/java/util/CollectionViews.java",
             "symbol": "java.util.CollectionViews",
             "signatures": [
               "boolean FilteredCollection.addAll(Collection<? extends E>)"
             ],
-            "sha256": "c8820e5bbd7b7c7b4c683f5081ec74b99a4aac6b854f6c8dc79d4e0ee4767ffb",
-            "git_blob_sha1": "2fe6e7ede2af18d4523f3a5531038e9a865cdb6d",
+            "sha256": "1c811f4473088c46e39e9621eb27380806e420fe09062072e413d48af78059c0",
+            "git_blob_sha1": "3f2c3eecb6a0c239025ac7051b5bd4f3e6953605",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9602,7 +9602,7 @@
         },
         "sync": {
           "source_revision": "730294cac8e98d860aaddd12222874a014146d44",
-          "target_revision": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+          "target_revision": "3000635810b7ee7983d3d7fc1ca172418245e2dc",
           "direction": "source-to-target",
           "target_adaptations": [
             "Capture and validate caller occurrences once with the existing selectedCopy atom before one backing-owner addAll; only the validated references reach the owner."
@@ -9614,18 +9614,62 @@
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
-          "previous_targets": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "730294cac8e98d860aaddd12222874a014146d44",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025/0001-CollectionViews.java.txt",
+              "symbol": "java.util.CollectionViews",
+              "signatures": [
+                "boolean FilteredCollection.addAll(Collection<? extends E>)"
+              ],
+              "sha256": "1c811f4473088c46e39e9621eb27380806e420fe09062072e413d48af78059c0",
+              "git_blob_sha1": "3f2c3eecb6a0c239025ac7051b5bd4f3e6953605",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+              "module": "com.m3.collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+              "symbol": "com.m3.collections.M3CollectionViews",
+              "signatures": [
+                "boolean FilteredCollection.addAll(Collection<? extends E>)"
+              ],
+              "sha256": "f58efcd9aae4a3c1ee99fa56f9602d688d9a92ffdbd707bfc09cd5fede0bf208",
+              "git_blob_sha1": "839bed1be386e9d246c35bae6e5f57298f5f0c5e",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+              "symbol": "java.util.CollectionViews",
+              "signatures": [
+                "boolean FilteredCollection.addAll(Collection<? extends E>)"
+              ],
+              "sha256": "c8820e5bbd7b7c7b4c683f5081ec74b99a4aac6b854f6c8dc79d4e0ee4767ffb",
+              "git_blob_sha1": "2fe6e7ede2af18d4523f3a5531038e9a865cdb6d",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Pending names/actual preimage only; qualified future SDK output is not yet received."
+        "observation": "Same stable capability now has exact received owner and bounded gate references; broader admission remains pending."
       },
       {
         "id": "m3.collections.reverse-sorted-subset.bounded-seek",
         "kind": "specialization",
         "status": "pending",
-        "reason": "Lazily seek a reversed subset's inclusive head through existing SortedSet ranges, retaining the actual comparator-equivalent representative and strict predecessors without scanning the excluded prefix. Names registered; owner receiving and target gates remain pending.",
+        "reason": "Lazily seek a reversed subset's inclusive head through existing SortedSet ranges, retaining the actual comparator-equivalent representative and strict predecessors without scanning the excluded prefix. Actual bounded receiving evidence is separate from full admission.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
@@ -9645,15 +9689,15 @@
         "targets": [
           {
             "repo": "hsoliwal/M3JDK21",
-            "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+            "commit": "21bdd46c73ebfb81a61bd29d4af3cebabdd50a89",
             "module": "java.base",
             "path": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
             "symbol": "java.util.ReverseOrderSortedSetView",
             "signatures": [
               "Iterator<E> Subset.iterator()"
             ],
-            "sha256": "5157b7148a717a01d71277ca99f061938c97065198663b35796eca2e45aa3a40",
-            "git_blob_sha1": "33f36ab2fa66dfa363cd9022453bb8dd93422333",
+            "sha256": "43e3e77c8fb8e6a311b927b504eb34579b70154ff4d1a8f9a9312f062c32d1ed",
+            "git_blob_sha1": "fae11e4cbc5d4aa5aa8bd976210ceb03ed49c50d",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9723,7 +9767,7 @@
         },
         "sync": {
           "source_revision": "730294cac8e98d860aaddd12222874a014146d44",
-          "target_revision": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+          "target_revision": "21bdd46c73ebfb81a61bd29d4af3cebabdd50a89",
           "direction": "source-to-target",
           "target_adaptations": [
             "Lazily seek a reversed subset's inclusive head through existing SortedSet ranges, retaining the actual comparator-equivalent representative and strict predecessors without scanning the excluded prefix."
@@ -9735,12 +9779,42 @@
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
-          "previous_targets": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "730294cac8e98d860aaddd12222874a014146d44",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025/0001-ReverseOrderSortedSetView.java.txt",
+              "symbol": "java.util.ReverseOrderSortedSetView",
+              "signatures": [
+                "Iterator<E> Subset.iterator()"
+              ],
+              "sha256": "43e3e77c8fb8e6a311b927b504eb34579b70154ff4d1a8f9a9312f062c32d1ed",
+              "git_blob_sha1": "fae11e4cbc5d4aa5aa8bd976210ceb03ed49c50d",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
+              "symbol": "java.util.ReverseOrderSortedSetView",
+              "signatures": [
+                "Iterator<E> Subset.iterator()"
+              ],
+              "sha256": "5157b7148a717a01d71277ca99f061938c97065198663b35796eca2e45aa3a40",
+              "git_blob_sha1": "33f36ab2fa66dfa363cd9022453bb8dd93422333",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Pending names/actual preimage only; qualified future SDK output is not yet received."
+        "observation": "Same stable capability now has exact received owner and bounded gate references; broader admission remains pending."
       }
     ]
   },
