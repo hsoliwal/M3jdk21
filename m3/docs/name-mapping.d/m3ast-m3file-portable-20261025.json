@@ -30,6 +30,9 @@
     "target_maven": "NOT_RUN",
     "installed_jdk": "NOT_RUN",
     "real_provider_adapters": "NOT_RUN",
-    "native_jni": "NOT_APPLICABLE_THIS_CHANGE"
+    "native_jni": "NOT_APPLICABLE_THIS_CHANGE",
+    "jdk21_javac_real_ast_fixture": "PASSED_16_CHECKS",
+    "sealed_postimages": 7,
+    "source_seal_drift_refusal": "PASSED_KERNEL_REPLAY_FIXTURE_NOT_SDK"
   }
 }
