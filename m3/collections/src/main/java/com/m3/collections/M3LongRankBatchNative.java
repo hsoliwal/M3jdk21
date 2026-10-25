@@ -19,6 +19,7 @@ public final class M3LongRankBatchNative {
     private static final int MODE_COUNT = 2;
     private static volatile boolean WINDOW_ABI_MISSING;
     private static volatile boolean INTERSECTION_VALUES_ABI_MISSING;
+    private static volatile boolean UNION_VALUES_ABI_MISSING;
     private static final boolean AVAILABLE = loadOptIn();
 
     private M3LongRankBatchNative() { }
@@ -367,6 +368,92 @@ public final class M3LongRankBatchNative {
         return write;
     }
 
+
+    /**
+     * LeetCode #88 sorted-merge and #26 distinct-run algorithm categories:
+     * detached primitive multiset union (maximum occurrence multiplicity).
+     * Optional distinct mode emits every shared or unshared value exactly once.
+     *
+     * <p>Both source lanes are already-sorted immutable snapshot payloads.
+     * The JNI batch reuses m3rankbatch and bounded array-region pages. No
+     * comparator, boxed Long, Map.Entry, heap pointer or JNI callback escapes.
+     * An old native library without this additive symbol falls back to Java;
+     * an explicit required-native invocation refuses the missing export.</p>
+     */
+    static long[] unionValues(long[] left, long[] right, boolean distinct) {
+        return unionValues(left, right, distinct, false);
+    }
+
+    static long[] unionValues(long[] left, long[] right,
+                              boolean distinct, boolean nativeRequired) {
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        if (nativeRequired) {
+            if (!AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3rankbatch union-value ABI unavailable");
+            }
+            return unionValues0(left, right, distinct);
+        }
+        if (AVAILABLE && !UNION_VALUES_ABI_MISSING
+                && Math.min(left.length, right.length) >= NATIVE_MIN_INTERSECTION) {
+            try {
+                return unionValues0(left, right, distinct);
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                UNION_VALUES_ABI_MISSING = true;
+            }
+        }
+        long count = unionValuesJavaScan(left, right, distinct, null);
+        if (count > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("sorted union exceeds Java array size");
+        }
+        long[] result = new long[(int) count];
+        if (unionValuesJavaScan(left, right, distinct, result) != count) {
+            throw new IllegalStateException("sorted union changed between count and emission");
+        }
+        return result;
+    }
+
+    private static long unionValuesJavaScan(long[] left, long[] right,
+                                            boolean distinct, long[] output) {
+        int i = 0, j = 0;
+        long written = 0L, previous = 0L;
+        boolean seen = false;
+        while (i < left.length || j < right.length) {
+            long next;
+            if (i == left.length) {
+                next = right[j++];
+            } else if (j == right.length) {
+                next = left[i++];
+            } else {
+                long a = left[i], b = right[j];
+                if (a < b) {
+                    next = a;
+                    i++;
+                } else if (a > b) {
+                    next = b;
+                    j++;
+                } else {
+                    next = a;
+                    i++;
+                    j++;
+                }
+            }
+            if (!distinct || !seen || previous != next) {
+                if (output != null) {
+                    if (written >= output.length) {
+                        throw new IllegalStateException(
+                                "sorted union grew between count and emission");
+                    }
+                    output[(int) written] = next;
+                }
+                written++;
+                previous = next;
+                seen = true;
+            }
+        }
+        return written;
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -398,4 +485,7 @@ public final class M3LongRankBatchNative {
 
     /** Additive same-library JNI ABI: count and emit values in 256-long pages. */
     static native long[] intersectionValues0(long[] left, long[] right, boolean distinct);
+
+    /** Additive same-library JNI ABI for sorted multiset union values. */
+    static native long[] unionValues0(long[] left, long[] right, boolean distinct);
 }

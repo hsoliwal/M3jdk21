@@ -618,3 +618,130 @@ Java_com_m3_collections_M3LongRankBatchNative_intersectionValues0(
     }
     return result;
 }
+
+/*
+ * LeetCode #88: two sorted primitive cursors, preserving the maximum
+ * occurrence multiplicity of each value. Optional #26 mode emits one
+ * value per distinct run. No Java array reference is ever pinned or retained.
+ * Input and output move through bounded 256-element JNI region pages.
+ */
+enum { M3_UNION_VALUES_PAGE = 256 };
+
+static jlong m3_union_values_scan(JNIEnv *env, jlongArray left, jsize left_size,
+        jlongArray right, jsize right_size, jboolean distinct,
+        jlongArray output, jsize output_capacity) {
+    jlong left_page[M3_UNION_VALUES_PAGE];
+    jlong right_page[M3_UNION_VALUES_PAGE];
+    jlong result_page[M3_UNION_VALUES_PAGE];
+    jsize li = 0, ri = 0;
+    jsize lc = 0, rc = 0;
+    jsize ll = 0, rl = 0;
+    jlong written = 0;
+    jlong previous = 0;
+    int seen = 0;
+    while (li < left_size || ri < right_size) {
+        if (li < left_size && lc == ll) {
+            jsize batch = left_size - li;
+            if (batch > M3_UNION_VALUES_PAGE) batch = M3_UNION_VALUES_PAGE;
+            (*env)->GetLongArrayRegion(env, left, li, batch, left_page);
+            if ((*env)->ExceptionCheck(env)) return -1;
+            lc = 0;
+            ll = batch;
+        }
+        if (ri < right_size && rc == rl) {
+            jsize batch = right_size - ri;
+            if (batch > M3_UNION_VALUES_PAGE) batch = M3_UNION_VALUES_PAGE;
+            (*env)->GetLongArrayRegion(env, right, ri, batch, right_page);
+            if ((*env)->ExceptionCheck(env)) return -1;
+            rc = 0;
+            rl = batch;
+        }
+
+        jlong next;
+        if (li == left_size) {
+            next = right_page[rc++];
+            ri++;
+        } else if (ri == right_size) {
+            next = left_page[lc++];
+            li++;
+        } else {
+            jlong a = left_page[lc], b = right_page[rc];
+            if (a < b) {
+                next = a;
+                lc++;
+                li++;
+            } else if (a > b) {
+                next = b;
+                rc++;
+                ri++;
+            } else {
+                next = a;
+                lc++;
+                rc++;
+                li++;
+                ri++;
+            }
+        }
+        if (distinct != JNI_TRUE || !seen || previous != next) {
+            if (written >= (jlong) INT_MAX) {
+                m3_window_throw(env, "java/lang/OutOfMemoryError",
+                        "sorted union exceeds Java array size");
+                return -1;
+            }
+            if (output != NULL) {
+                if (written >= output_capacity) {
+                    m3_window_throw(env, "java/lang/IllegalStateException",
+                            "sorted union grew between count and emission");
+                    return -1;
+                }
+                result_page[(jsize) (written % M3_UNION_VALUES_PAGE)] = next;
+            }
+            written++;
+            previous = next;
+            seen = 1;
+            if (output != NULL && written % M3_UNION_VALUES_PAGE == 0) {
+                (*env)->SetLongArrayRegion(env, output,
+                        (jsize) (written - M3_UNION_VALUES_PAGE),
+                        M3_UNION_VALUES_PAGE, result_page);
+                if ((*env)->ExceptionCheck(env)) return -1;
+            }
+        }
+    }
+    if (output != NULL) {
+        jsize pending = (jsize) (written % M3_UNION_VALUES_PAGE);
+        if (pending != 0) {
+            (*env)->SetLongArrayRegion(env, output,
+                    (jsize) (written - pending), pending, result_page);
+            if ((*env)->ExceptionCheck(env)) return -1;
+        }
+    }
+    return written;
+}
+
+JNIEXPORT jlongArray JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_unionValues0(
+        JNIEnv *env, jclass ignored, jlongArray left, jlongArray right,
+        jboolean distinct) {
+    (void) ignored;
+    if (left == NULL || right == NULL) {
+        m3_window_throw(env, "java/lang/NullPointerException",
+                "null sorted union input");
+        return NULL;
+    }
+    jsize ln = (*env)->GetArrayLength(env, left);
+    jsize rn = (*env)->GetArrayLength(env, right);
+    if ((*env)->ExceptionCheck(env)) return NULL;
+    jlong count = m3_union_values_scan(env, left, ln, right, rn, distinct, NULL, 0);
+    if (count < 0) return NULL;
+    jlongArray output = (*env)->NewLongArray(env, (jsize) count);
+    if (output == NULL) return NULL;
+    jlong written = m3_union_values_scan(env, left, ln, right, rn, distinct,
+            output, (jsize) count);
+    if (written < 0) return NULL;
+    if (written != count) {
+        m3_window_throw(env, "java/lang/IllegalStateException",
+                "sorted union changed between count and emission");
+        return NULL;
+    }
+    return output;
+}

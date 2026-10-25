@@ -282,6 +282,18 @@ public final class M3LongRankIndex {
     }
 
     /**
+     * Detached sorted primitive union. In occurrence-preserving mode the result
+     * retains the maximum frequency of each signed long across both snapshots;
+     * distinct mode emits each value only once (LeetCode #88 + #26 categories).
+     * No source payload moves or per-element object allocation occurs.
+     * The existing m3rankbatch JNI provider is optional for large inputs.
+     */
+    public long[] unionValues(M3LongRankIndex other, boolean distinctValues) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.unionValues(values, other.values, distinctValues);
+    }
+
+    /**
      * Multiset union cardinality, counting each value's maximum multiplicity.
      * Long arithmetic is required because two legal int-sized owners can have
      * a combined cardinality exceeding Integer.MAX_VALUE.
