@@ -1,4 +1,4 @@
-// SPDX-License-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package jdk.m3.parser;
 
