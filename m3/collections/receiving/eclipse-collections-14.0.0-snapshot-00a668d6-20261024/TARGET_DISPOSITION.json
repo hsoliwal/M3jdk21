@@ -36,7 +36,6 @@
     "decided": "Switch to received source in a follow-up leaf after A1"
   },
   "pending": [
-    "Default install/deploy skips in the 19 donor POMs (build-quarantine successor, leaf A2)",
     "PROVIDERS.tsv rows EA/EI switch to received source (follow-up leaf)",
     "M3 prefix for the four first-party indexed red-black classes (naming item C3 #9, undecided)",
     "Full Maven, OSGi and JPMS builds and the full donor test suites",
@@ -54,7 +53,7 @@
     "osgiAndJpmsBundles": "OPEN"
   },
   "donorBuildPublication": {
-    "normalLifecycle": "Unchanged in this receive: the 19 donor POMs keep org.eclipse.collections:*:14.0.0-SNAPSHOT; the tree is outside the M3 reactor; leaf A2 adds default install/deploy skips",
+    "normalLifecycle": "Install/deploy skipped by default (config successor A2, branch m3/eclipse-collections-receive-config-20261024); donor GAVs org.eclipse.collections:*:14.0.0-SNAPSHOT kept as provenance; the tree is outside the M3 reactor",
     "GAVs": "Retained unchanged as source provenance",
     "M3ReceivingGraph": "OPEN: distinct target-owned M3 artifacts and full build"
   }
