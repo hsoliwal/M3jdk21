@@ -36,6 +36,7 @@ import org.openrewrite.Validated;
 import org.openrewrite.config.Environment;
 import org.openrewrite.config.YamlResourceLoader;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.internal.RecipeRunException;
 import org.openrewrite.marker.BuildMetadata;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.text.PlainText;
@@ -196,9 +197,10 @@ final class M3SlotReceivingJavaJniRecipeTest {
             for (SourceFile file : files(expected())) recipe.getScanner(inventory).visit(file, context);
             recipe.generate(inventory, context);
             SourceFile late = text(row.path(), textResource(row.template()) + "\nchanged after scan\n");
-            IllegalStateException changed = assertThrows(IllegalStateException.class,
+            RecipeRunException changed = assertThrows(RecipeRunException.class,
                     () -> recipe.getVisitor(inventory).visit(late, context));
-            assertTrue(changed.getMessage().contains("target changed after scan"), changed.getMessage());
+            assertEquals("target changed after scan: " + row.path(),
+                    assertInstanceOf(IllegalStateException.class, changed.getCause()).getMessage());
         }
     }
 

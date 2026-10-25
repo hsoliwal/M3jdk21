@@ -1,8 +1,8 @@
 {
-  "schema": "M3_SLOT_ENTRY_CACHE_RECEIVING_CANDIDATE_V2",
-  "status": "ANNOTATION_DEPENDENCY_REPAIR_SOURCE_RECEIVED_RUNTIME_PENDING",
+  "schema": "M3_SLOT_ENTRY_CACHE_RECEIVER_VISITOR_REFUSAL_FIX_V4",
+  "status": "QUALIFICATION_ASSERTION_CORRECTED_HOSTED_SDK_PENDING",
   "canonicalRepository": "hsoliwal/com.synexia",
-  "canonicalCommit": "0728d8e712720838c0af4ca91ce60e1c7202b786",
+  "canonicalCommit": "2c0aeca03925d816dd38c6212fedeea67d28d5f6",
   "canonicalPullRequest": "https://github.com/hsoliwal/com.synexia/pull/13216",
   "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/",
   "receivingBase": "53f1763c80b1b9f260572aca247eaa1fcfa9112b",
@@ -51,25 +51,18 @@
       "existing": 4,
       "proof": "47234ff65be50c11e2c545bb09352b4d5d115473"
     },
-    "historicalFieldSubject": {
-      "receivingHead": "05fd707a59cad82c380bae7b1ce355befd621f9c",
-      "workflow": "0ba75155c57a5c26f43f806be92666349471539f",
-      "note": "Existing numeric source-check fields and correctionProvenance describe prior executed checks, not fresh tests on this annotation-repair head."
-    },
-    "currentAnnotationRepair": {
-      "sourceDelta": "One dependency declaration and seals; other workflow source bytes and guard control flow unchanged",
-      "SDKsourceClosure": 17,
-      "sourceGate": {
-        "proof": "661cd13ca1d028d8da10765ec4675b917f2f1162",
-        "selectedCanonicalPaths": 23,
-        "SPDXsources": 3,
-        "negativeHeader": "MISSING_CANONICAL_SPDX",
-        "unknownNegative": "UNKNOWN_CLASSIFICATION"
-      },
-      "currentWorkflowControlTests": "NOT_RUN_ON_NEW_SUBJECT; prior83 preserved as historical evidence",
-      "actualReceivingSDK6": "NOT_RUN",
-      "actualJavaJNI": "NOT_RUN",
-      "configuredReview": "NO_VERDICT"
+    "historicalFieldSubject": "All older sourceChecks fields retain their pre-correction subjects; visitorRefusalCorrection below binds the current correction. Do not transfer previous compile/guard/SDK counts to new inputs.",
+    "currentVisitorRefusalCorrection": {
+      "independentSources": 17,
+      "logicalBytes": 195007,
+      "sourceGateSelectedPaths": 12,
+      "sourceGateNewRows": 5,
+      "sourceGatePositiveSPDX": 2,
+      "sourceGateActualExit": 0,
+      "correctedSDK6": "NOT_RUN",
+      "productCompile": "NOT_RUN",
+      "JavaJNI": "NOT_RUN",
+      "formalReview": "NO_VERDICT"
     }
   },
   "policy": {
@@ -144,7 +137,7 @@
     },
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
-      "git_blob": "233956802ef0540ccd40034c2cee686b62dd823f",
+      "git_blob": "debb6189ea4d2b1faaec2fe974b50e3b25f4cdfa",
       "bytes": 62147,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
@@ -156,7 +149,7 @@
     },
     {
       "path": "m3/migration/original-provider-20261017/source-binding.json",
-      "git_blob": "b18d647ecd61a995f0462549238f1069ab85d577",
+      "git_blob": "795b80e6d3f8660909425df603b7489eaac397e1",
       "bytes": 3301,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
@@ -180,8 +173,8 @@
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/test/java/com/synexia/rewrite/M3SlotReceivingJavaJniRecipeTest.java",
-      "git_blob": "05b3e6fb0654b66dfe3452dfa0d299b97fe1235b",
-      "bytes": 19646,
+      "git_blob": "0cd310f6fb5dbb3a95545c1f4f052898d8b865ff",
+      "bytes": 19756,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
@@ -210,7 +203,7 @@
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/04-original-provider.yml",
-      "git_blob": "233956802ef0540ccd40034c2cee686b62dd823f",
+      "git_blob": "debb6189ea4d2b1faaec2fe974b50e3b25f4cdfa",
       "bytes": 62147,
       "role": "CANONICAL_SDK_MIRROR"
     },
@@ -222,13 +215,13 @@
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/06-source-binding.json",
-      "git_blob": "b18d647ecd61a995f0462549238f1069ab85d577",
+      "git_blob": "795b80e6d3f8660909425df603b7489eaac397e1",
       "bytes": 3301,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/manifest.tsv",
-      "git_blob": "6f33ae1fd51353bbb0316620d5508edb3830868f",
+      "git_blob": "1764349be4ddde886db8f14f67edbe1e4f70f8cd",
       "bytes": 1450,
       "role": "CANONICAL_SDK_MIRROR"
     },
@@ -321,17 +314,23 @@
       "git_blob": "2b23ca4f631d8b2020795e2cffcef6c066050904",
       "bytes": 28741,
       "role": "CANONICAL_SDK_MIRROR"
+    },
+    {
+      "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/SOURCE_INPUTS_VISITOR_REFUSAL_FIX_V1.json",
+      "git_blob": "8f3430895772a5d29afc0a2f51247a46f39d7e15",
+      "bytes": 17596,
+      "role": "CURRENT_VISITOR_REFUSAL_FIX_SOURCE_BINDING"
     }
   ],
   "selfExcluded": true,
-  "actualProductionCompile": "NOT_RUN",
-  "actualCurrentJNI": "NOT_RUN",
+  "actualProductionCompile": 0,
+  "actualCurrentJNI": 0,
   "phaseAdvanced": false,
   "formalReview": "NO_VERDICT",
   "remaining": "Actual receiving metadata SDK/Java/JNI proof, other startup/platform/concurrency/descriptor/review gates; full collection superset and compiled regex/language-rule work",
   "fullGoal": "ACTIVE_UNFINISHED",
-  "correctionParent": "05fd707a59cad82c380bae7b1ce355befd621f9c",
-  "priorReceiverRecordGit": "cd3a88fb77c251b779ee4acad9570ee1c891a707",
+  "correctionParent": "9a67c5c12d18f7e44de4ee0c97c0b95711d8478e",
+  "priorReceiverRecordGit": "6132c21b1b53a88ba48328079b2d96c65781b039",
   "workflowContextCorrection": {
     "firstRun": 40091721939,
     "firstRunHead": "2750f98941ce800e86895daff9656eaa44e75a21",
@@ -368,6 +367,38 @@
     "currentJavaJNI": "NOT_RUN",
     "formalReview": "NO_VERDICT",
     "pendingExpandedProposalInstalled": false,
+    "phaseAdvanced": false,
+    "historicalOutcome": "Actual hosted40154916140 confirms SDK main/test compile PASS after annotations dependency repair;6SDKtests ran with1assertionfailure. ProductJNI not reached."
+  },
+  "visitorRefusalCorrection": {
+    "canonicalWorkingParent": "0728d8e712720838c0af4ca91ce60e1c7202b786",
+    "canonicalWorkingCommit": "2c0aeca03925d816dd38c6212fedeea67d28d5f6",
+    "failedRun": 40154916140,
+    "failedJob": 121054119139,
+    "failedHead": "9a67c5c12d18f7e44de4ee0c97c0b95711d8478e",
+    "actualPriorSDKCountsTestsErrorsFailuresSkipped": [
+      6,
+      0,
+      1,
+      0
+    ],
+    "failure": "Visitor wraps exact IllegalStateException in RecipeRunException; test expected rawtype",
+    "testBlob": "0cd310f6fb5dbb3a95545c1f4f052898d8b865ff",
+    "testSHA256": "dd092d03d67865dffe3a64681f40914e4184bce824ee12cb8f7e57444cdf99e1",
+    "fix": "Retain wrapper and exact cause type; strengthen message to exact target path. All six tests/other bytes unchanged.",
+    "patternDonor": "96d26470e7c2001faea7d2fb6eb101cfbebd19df",
+    "actualPatternSDK5Proof": "d5d1efa7404584dce5c1f660e596fbce683f0bf6",
+    "currentSourceInputs": "8f3430895772a5d29afc0a2f51247a46f39d7e15",
+    "workflow": "debb6189ea4d2b1faaec2fe974b50e3b25f4cdfa",
+    "workflowSHA256": "555365c79205510d87ae86f77771e0b83a5f9aac7f6e85cd4cace36c52934782",
+    "binding": "795b80e6d3f8660909425df603b7489eaac397e1",
+    "manifest": "1764349be4ddde886db8f14f67edbe1e4f70f8cd",
+    "textEngineUnchanged": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+    "verifierUnchanged": "5df1a1131571630bf722a74ef6e41dd648b7f67f",
+    "productionOwnerUnchanged": "a1ab1987d5589d941a379c2c0f0f698a3602993b",
+    "concurrentReadCandidate7941Installed": false,
+    "correctedSDK6": "NOT_RUN",
+    "formalReview": "NO_VERDICT",
     "phaseAdvanced": false
   }
 }

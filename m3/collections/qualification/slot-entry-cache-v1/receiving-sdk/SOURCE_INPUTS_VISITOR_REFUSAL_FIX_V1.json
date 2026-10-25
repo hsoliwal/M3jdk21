@@ -1,0 +1,310 @@
+{
+  "schema": "M3_SLOT_RECEIVING_TEXT_SDK_VISITOR_REFUSAL_FIX_INPUTS_V1",
+  "status": "TINY_QUALIFICATION_ASSERTION_REPAIR_BOUND_SDK_NOT_RUN",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_base": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/",
+  "receiving_mirror": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/",
+  "crate_name": "m3-slot-receiving-java-jni-20261024",
+  "recipe": "com.synexia.m3.SlotReceivingJavaJni20261024",
+  "comparison_base": {
+    "canonical": "0728d8e712720838c0af4ca91ce60e1c7202b786",
+    "receiving": "9a67c5c12d18f7e44de4ee0c97c0b95711d8478e"
+  },
+  "target_preimage_commit": "hsoliwal/M3jdk21@53f1763c80b1b9f260572aca247eaa1fcfa9112b",
+  "independent_sdk_sources": [
+    {
+      "relative": "pom.xml",
+      "role": "pom",
+      "git_blob": "706544983e977f0fbe9aa1e0466a6c293e486f0b",
+      "sha256": "8445c71ca3cfd5f273d406b92310a15245625da77bd74da3e1ed3cbd478d8cd4",
+      "ascii_bytes": 3103,
+      "cpu_leaf": "cpu_hash.sha",
+      "local_writes": 0
+    },
+    {
+      "relative": "src/main/resources/META-INF/rewrite/m3-slot-receiving-java-jni-20261024.yml",
+      "role": "descriptor",
+      "git_blob": "164364c28c712dae7af5853d724aa59329c5270b",
+      "sha256": "dc9e8a0c4c7ae64beb53fb6e3d5f099d89a429616dc85b31fbcf67cf082db089",
+      "ascii_bytes": 539,
+      "cpu_leaf": "cpu_hash.sha",
+      "local_writes": 0
+    },
+    {
+      "relative": "src/test/java/com/synexia/rewrite/M3SlotReceivingJavaJniRecipeTest.java",
+      "role": "test",
+      "git_blob": "0cd310f6fb5dbb3a95545c1f4f052898d8b865ff",
+      "sha256": "dd092d03d67865dffe3a64681f40914e4184bce824ee12cb8f7e57444cdf99e1",
+      "bytes": 19756,
+      "cpu_leaf": "cpu_hash.sha",
+      "local_writes": 0
+    },
+    {
+      "relative": "engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "git_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+      "bytes": 20386,
+      "sha256": "c4517401a7defd94ecc621bb2c19773bd6672c8fa3ee965c1ad37a63718bd92a"
+    }
+  ],
+  "expected_sdk_report": {
+    "junit_class": "com.synexia.rewrite.M3SlotReceivingJavaJniRecipeTest",
+    "expected_counts": [
+      6,
+      0,
+      0,
+      0
+    ],
+    "methods": [
+      "exactEngineAndManifestAreSealed",
+      "exactEmissionFixedPointAndReceiverReadback",
+      "namedYamlMatchesDirectEngine",
+      "unknownInputRemainsUnchanged",
+      "everyTargetRefusesDriftMissingAndDuplicate",
+      "replacementRetainsAttributesMarkersAndId"
+    ],
+    "report": "${m3.output}/surefire-reports/TEST-com.synexia.rewrite.M3SlotReceivingJavaJniRecipeTest.xml",
+    "actual_postimages": "${m3.output}/receiver-sdk-emission/<manifest target path>",
+    "emission_receipt": "${m3.output}/receiving-sdk-receipt.tsv",
+    "receipt_scope": "SDK_EMISSION_ONLY; does not replace the complete six-method actual Surefire XML result"
+  },
+  "resource_count": 13,
+  "pre_post_resource_count": 12,
+  "manifest_target_count": 6,
+  "total_resource_bytes": 151223,
+  "independent_sdk_logical_bytes": 43784,
+  "total_17_source_logical_bytes": 195007,
+  "byte_scope": "Logical source bytes, not allocation or peak-output measurement; metadata/proofs excluded",
+  "assets": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/01-file-build-impact.yml",
+      "bytes": 844,
+      "sha256": "b89b23b4e89f5403e3d4df58025936370f9f6e691f81fa301e7a0960fd5c3a21",
+      "target": ".github/workflows/m3-file-build-impact-20261020.yml",
+      "kind": "POSTIMAGE",
+      "git_blob": "10f345e6794725c04f24176252d3ee0373559288",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/01-file-build-impact.yml"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/02-file-delta.yml",
+      "bytes": 859,
+      "sha256": "ff4ed99e680f0987eb07af42052867b2539f8afc8d1ffab24bed3f73ff862b4e",
+      "target": ".github/workflows/m3-file-delta-20261020.yml",
+      "kind": "POSTIMAGE",
+      "git_blob": "bae98be8fb738db589335a2f35150cabfd7abfcc",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/02-file-delta.yml"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/03-native-shadow-progress.yml",
+      "bytes": 1915,
+      "sha256": "420d90f3e9d3ecf3dc43b4d8a5578a0008348ed191bd9a4f3843a40b1e409962",
+      "target": ".github/workflows/m3-native-shadow-stream-progress-20261020.yml",
+      "kind": "POSTIMAGE",
+      "git_blob": "18294270a129172f2ae4145b89ceab52828c313d",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/03-native-shadow-progress.yml"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/04-original-provider.yml",
+      "bytes": 62147,
+      "sha256": "555365c79205510d87ae86f77771e0b83a5f9aac7f6e85cd4cace36c52934782",
+      "target": ".github/workflows/m3-original-mapping-provider-qualification.yml",
+      "kind": "POSTIMAGE",
+      "git_blob": "debb6189ea4d2b1faaec2fe974b50e3b25f4cdfa",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/04-original-provider.yml"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/05-full-java-jni-verify.py",
+      "bytes": 26423,
+      "sha256": "be69eae9a27dec3d6b4bf0524db39fdb483953c83413b0248eb62c9574daea1b",
+      "target": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "kind": "POSTIMAGE",
+      "git_blob": "5df1a1131571630bf722a74ef6e41dd648b7f67f",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/05-full-java-jni-verify.py"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/06-source-binding.json",
+      "bytes": 3301,
+      "sha256": "58f12f50f7dc69f762b66e3d5c06327da03e37fb4b41c0afe182aa60a1559566",
+      "target": "m3/migration/original-provider-20261017/source-binding.json",
+      "kind": "POSTIMAGE",
+      "git_blob": "795b80e6d3f8660909425df603b7489eaac397e1",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/06-source-binding.json"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/manifest.tsv",
+      "bytes": 1450,
+      "sha256": "dd0922ab0da289d16d546eb1e8ac218b350f53bfa10729a93ecf06897c460180",
+      "git_blob": "1764349be4ddde886db8f14f67edbe1e4f70f8cd",
+      "kind": "MANIFEST",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/manifest.tsv"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-01-file-build-impact.yml",
+      "bytes": 772,
+      "sha256": "d21670b1ae66dd5227398fb39de9f3829351a67105a0180228a5767826cb10a6",
+      "target": ".github/workflows/m3-file-build-impact-20261020.yml",
+      "kind": "PREIMAGE",
+      "git_blob": "836e32bb65dced7939f5d39584abc179ae4fe8ec",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-01-file-build-impact.yml"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-02-file-delta.yml",
+      "bytes": 787,
+      "sha256": "d53dc3131528702929d00c31dce777646c54e2144eacc9222995b243e3d1fc49",
+      "target": ".github/workflows/m3-file-delta-20261020.yml",
+      "kind": "PREIMAGE",
+      "git_blob": "6092d1f3bcdfdad03bf8f28ecf6e2a90095aa235",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-02-file-delta.yml"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-03-native-shadow-progress.yml",
+      "bytes": 1843,
+      "sha256": "c7fbe0b8e33240bf4ef8529f62104704ef6c159570b3b84822428fe635224d52",
+      "target": ".github/workflows/m3-native-shadow-stream-progress-20261020.yml",
+      "kind": "PREIMAGE",
+      "git_blob": "c4ced36104123241e0176256783045b8f860cfc1",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-03-native-shadow-progress.yml"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-04-original-provider.yml",
+      "bytes": 35958,
+      "sha256": "7e8b57c875190675ccf2312c4041b8e1d151b87d27b3d9542627066b5fab3af4",
+      "target": ".github/workflows/m3-original-mapping-provider-qualification.yml",
+      "kind": "PREIMAGE",
+      "git_blob": "8702ae33a2cee6760b2c19dc2be1818e6c3cae42",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-04-original-provider.yml"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-05-full-java-jni-verify.py",
+      "bytes": 11623,
+      "sha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+      "target": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "kind": "PREIMAGE",
+      "git_blob": "cf5e385420cae668fa0e68f769545f7ca6b16e03",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-05-full-java-jni-verify.py"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/receiving-java-jni-sdk-v1/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-06-source-binding.json",
+      "bytes": 3301,
+      "sha256": "e8c9dcfdb4b3b3dde0f7fee3e2c5dcfa893b59f30be3e6e0e57d917090821475",
+      "target": "m3/migration/original-provider-20261017/source-binding.json",
+      "kind": "PREIMAGE",
+      "git_blob": "12e8f621d71fe73033d1102b02a6964e551f6a17",
+      "mirror_relative": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/pre-06-source-binding.json"
+    }
+  ],
+  "rows": [
+    {
+      "target_path": ".github/workflows/m3-file-build-impact-20261020.yml",
+      "template": "01-file-build-impact.yml",
+      "before_git_blob": "836e32bb65dced7939f5d39584abc179ae4fe8ec",
+      "before_bytes": 772,
+      "before_sha256": "d21670b1ae66dd5227398fb39de9f3829351a67105a0180228a5767826cb10a6",
+      "after_git_blob": "10f345e6794725c04f24176252d3ee0373559288",
+      "after_bytes": 844,
+      "after_sha256": "b89b23b4e89f5403e3d4df58025936370f9f6e691f81fa301e7a0960fd5c3a21"
+    },
+    {
+      "target_path": ".github/workflows/m3-file-delta-20261020.yml",
+      "template": "02-file-delta.yml",
+      "before_git_blob": "6092d1f3bcdfdad03bf8f28ecf6e2a90095aa235",
+      "before_bytes": 787,
+      "before_sha256": "d53dc3131528702929d00c31dce777646c54e2144eacc9222995b243e3d1fc49",
+      "after_git_blob": "bae98be8fb738db589335a2f35150cabfd7abfcc",
+      "after_bytes": 859,
+      "after_sha256": "ff4ed99e680f0987eb07af42052867b2539f8afc8d1ffab24bed3f73ff862b4e"
+    },
+    {
+      "target_path": ".github/workflows/m3-native-shadow-stream-progress-20261020.yml",
+      "template": "03-native-shadow-progress.yml",
+      "before_git_blob": "c4ced36104123241e0176256783045b8f860cfc1",
+      "before_bytes": 1843,
+      "before_sha256": "c7fbe0b8e33240bf4ef8529f62104704ef6c159570b3b84822428fe635224d52",
+      "after_git_blob": "18294270a129172f2ae4145b89ceab52828c313d",
+      "after_bytes": 1915,
+      "after_sha256": "420d90f3e9d3ecf3dc43b4d8a5578a0008348ed191bd9a4f3843a40b1e409962"
+    },
+    {
+      "target_path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
+      "template": "04-original-provider.yml",
+      "before_git_blob": "8702ae33a2cee6760b2c19dc2be1818e6c3cae42",
+      "before_bytes": 35958,
+      "before_sha256": "7e8b57c875190675ccf2312c4041b8e1d151b87d27b3d9542627066b5fab3af4",
+      "after_git_blob": "debb6189ea4d2b1faaec2fe974b50e3b25f4cdfa",
+      "after_bytes": 62147,
+      "after_sha256": "555365c79205510d87ae86f77771e0b83a5f9aac7f6e85cd4cace36c52934782"
+    },
+    {
+      "target_path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "template": "05-full-java-jni-verify.py",
+      "before_git_blob": "cf5e385420cae668fa0e68f769545f7ca6b16e03",
+      "before_bytes": 11623,
+      "before_sha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+      "after_git_blob": "5df1a1131571630bf722a74ef6e41dd648b7f67f",
+      "after_bytes": 26423,
+      "after_sha256": "be69eae9a27dec3d6b4bf0524db39fdb483953c83413b0248eb62c9574daea1b"
+    },
+    {
+      "target_path": "m3/migration/original-provider-20261017/source-binding.json",
+      "template": "06-source-binding.json",
+      "before_git_blob": "12e8f621d71fe73033d1102b02a6964e551f6a17",
+      "before_bytes": 3301,
+      "before_sha256": "e8c9dcfdb4b3b3dde0f7fee3e2c5dcfa893b59f30be3e6e0e57d917090821475",
+      "after_git_blob": "795b80e6d3f8660909425df603b7489eaac397e1",
+      "after_bytes": 3301,
+      "after_sha256": "58f12f50f7dc69f762b66e3d5c06327da03e37fb4b41c0afe182aa60a1559566"
+    }
+  ],
+  "test_correction": {
+    "before": "05b3e6fb0654b66dfe3452dfa0d299b97fe1235b",
+    "after": "0cd310f6fb5dbb3a95545c1f4f052898d8b865ff",
+    "afterSHA256": "dd092d03d67865dffe3a64681f40914e4184bce824ee12cb8f7e57444cdf99e1",
+    "delta": "Import RecipeRunException and assert wrapper/exact IllegalStateException cause/exact target-specific message; other bytes and six tests unchanged",
+    "qualified_pattern_donor": "96d26470e7c2001faea7d2fb6eb101cfbebd19df",
+    "actual_donor_SDK5_proof": "d5d1efa7404584dce5c1f660e596fbce683f0bf6",
+    "engine": "UNCHANGED14c383724cd3e9dda80d9311e298cc4ed4cf46c7"
+  },
+  "workflow": {
+    "blob": "debb6189ea4d2b1faaec2fe974b50e3b25f4cdfa",
+    "sha256": "555365c79205510d87ae86f77771e0b83a5f9aac7f6e85cd4cace36c52934782",
+    "sourceDelta": "one SDKtest SHA literal"
+  },
+  "binding": {
+    "blob": "795b80e6d3f8660909425df603b7489eaac397e1",
+    "sha256": "58f12f50f7dc69f762b66e3d5c06327da03e37fb4b41c0afe182aa60a1559566",
+    "sourceDelta": "workflowGitBlob and workflowSha256 only"
+  },
+  "manifest": {
+    "blob": "1764349be4ddde886db8f14f67edbe1e4f70f8cd",
+    "sha256": "dd0922ab0da289d16d546eb1e8ac218b350f53bfa10729a93ecf06897c460180",
+    "sourceDelta": "04 and06 afterSHA cells only; all53f preconditions unchanged"
+  },
+  "actual_prior_failure": {
+    "run": 40154916140,
+    "job": 121054119139,
+    "head": "9a67c5c12d18f7e44de4ee0c97c0b95711d8478e",
+    "mainCompile": "PASS",
+    "testCompile": "PASS",
+    "SDKCountsTestsErrorsFailuresSkipped": [
+      6,
+      0,
+      1,
+      0
+    ],
+    "JavaJNI": "NOT_REACHED"
+  },
+  "historical_source_inputs": [
+    "2b23ca4f631d8b2020795e2cffcef6c066050904"
+  ],
+  "runtime_sdk_tests": "CORRECTED6_NOT_RUN",
+  "Java_compile": "PRODUCT_NOT_RUN",
+  "JNI": "NOT_RUN",
+  "formal_review": "NO_VERDICT",
+  "full_source_provenance_gate": "PENDING_SCOPED_CHECK",
+  "sole_production_owner": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+  "productionOwnerChanged": false,
+  "concurrentReadCandidate": "7941fc86c534d9e0ce7df16ab33de634a6dd2a43 NOT_INSTALLED",
+  "policy": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
+  "storage_protection": "ACTIVE; no localS/Kwrites or extraJVM;106SDKexceptionCONSUMED",
+  "full_goal": "ACTIVE_UNFINISHED",
+  "phase_advanced": false
+}
