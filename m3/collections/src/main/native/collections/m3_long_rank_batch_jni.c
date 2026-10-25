@@ -181,6 +181,41 @@ static jsize m3_bound(const jlong *sorted, jsize length, jlong key, int upper) {
     return lo;
 }
 
+/*
+ * LeetCode #34/#35 insertion bounds + #88 monotone two-stream scan:
+ * if the query page is non-decreasing, advance two primitive coordinates
+ * exactly once. The existing cost gate rejects large-owner scans and all
+ * unordered query pages; normal binary rank remains the exact fallback.
+ * Bounded 256-query stack lanes, no JNI calls inside critical sections.
+ */
+static void m3_rank_bound_chunk(const jlong *source, jsize source_size,
+        const jlong *keys, jint batch, jint mode, jint *positions) {
+    if (m3_use_monotone_sweep(keys, batch, source_size,
+            mode == M3_RANK_COUNT ? 2U : 1U)) {
+        jsize lower = 0;
+        jsize upper = 0;
+        for (jint i = 0; i < batch; i++) {
+            const jlong key = keys[i];
+            if (mode == M3_RANK_COUNT) {
+                while (lower < source_size && source[lower] < key) lower++;
+                if (upper < lower) upper = lower;
+                while (upper < source_size && source[upper] <= key) upper++;
+                positions[i] = (jint) (upper - lower);
+            } else {
+                while (upper < source_size && source[upper] <= key) upper++;
+                positions[i] = (jint) upper;
+            }
+        }
+    } else {
+        for (jint i = 0; i < batch; i++) {
+            const jsize hi = m3_bound(source, source_size, keys[i], 1);
+            positions[i] = mode == M3_RANK_COUNT
+                    ? (jint) (hi - m3_bound(source, source_size, keys[i], 0))
+                    : (jint) hi;
+        }
+    }
+}
+
 static void m3_rank_throw(JNIEnv *env, const char *type, const char *message) {
     jclass error = (*env)->FindClass(env, type);
     if (error != NULL) (*env)->ThrowNew(env, error, message);
@@ -228,12 +263,7 @@ Java_com_m3_collections_M3LongRankBatchNative_boundBatchInto0(
         } else {
             const jlong *source = (*env)->GetPrimitiveArrayCritical(env, sorted, NULL);
             if (source == NULL) return;  /* JVM left OOME pending. */
-            for (jint i = 0; i < batch; ++i) {
-                const jsize hi = m3_bound(source, source_size, keys[i], 1);
-                positions[i] = mode == M3_RANK_COUNT
-                        ? (jint) (hi - m3_bound(source, source_size, keys[i], 0))
-                        : (jint) hi;
-            }
+            m3_rank_bound_chunk(source, source_size, keys, batch, mode, positions);
             (*env)->ReleasePrimitiveArrayCritical(env, sorted, (void *) source, JNI_ABORT);
         }
         (*env)->SetIntArrayRegion(env, output, output_from + completed, batch, positions);
