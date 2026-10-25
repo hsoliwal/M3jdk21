@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
+import hashlib
+import json
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
@@ -31,6 +33,31 @@ RECIPE_ROOTS = (
 )
 RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
 RECIPE_JAVA = re.compile(r"(?:^|/)(?:rewrite|recipes?)/[^/]*Recipe(?:Test)?\.java$")
+
+# These two immutable, passive receiving records preserve their existing dated
+# provenance. This is a closed byte-and-schema exception, not permission for
+# other dated data, runtime/API names, or executable recipe artifacts.
+PINNED_PASSIVE_RECEIPTS = {
+    "m3/compatibility/synexia-java-base-collection-core-receipt-20261025.json": (
+        "9d8f3c5ef83f3668c176217973f646dba2c072ef242eeab57b6d0ffba7eacd0f",
+        "M3JDK21_JAVA_BASE_COLLECTION_CORE_RECEIPT_V1"),
+    "m3/compatibility/synexia-sdk-catalogue-maintenance-receipt-20261025.json": (
+        "609d21bca9c3169ae9157f4f2e809501deae444b7ba6a45d1ddb1b74af64577e",
+        "M3JDK21_SDK_CATALOGUE_MAINTENANCE_RECEIPT_V1"),
+}
+
+
+def pinned_passive_receipt(path: str, text: str | None) -> bool:
+    expected = PINNED_PASSIVE_RECEIPTS.get(path)
+    if expected is None or text is None:
+        return False
+    if hashlib.sha256(text.encode("utf-8")).hexdigest() != expected[0]:
+        return False
+    try:
+        value = json.loads(text)
+    except (ValueError, TypeError):
+        return False
+    return isinstance(value, dict) and value.get("schema") == expected[1]
 
 
 
@@ -90,7 +117,8 @@ def problems(change: Change, text: str | None = None) -> list[str]:
         found.append("new transformation recipe source/descriptor belongs in Synexia")
     parts = PurePosixPath(path).parts
     name = parts[-1]
-    if any(DATE.search(seg) or VERSION.search(seg) for seg in parts):
+    if (any(DATE.search(seg) or VERSION.search(seg) for seg in parts)
+            and not pinned_passive_receipt(path, text)):
         found.append("unstable date/version identifier")
     if path.startswith("m3/docs/name-mapping.d/"):
         found.append("new parallel mapping fragment; update canonical name-mapping.json instead")
@@ -120,7 +148,8 @@ def check(root: Path, base: str, head: str) -> tuple[list[Change], list[tuple[st
     violations = []
     for change in delta:
         source = None
-        if change.status.startswith(("A", "C", "R")) and change.path.endswith(".java"):
+        if (change.status.startswith(("A", "C", "R"))
+                and (change.path.endswith(".java") or change.path in PINNED_PASSIVE_RECEIPTS)):
             source = git(root, "show", head + ":" + change.path).decode("utf-8")
         for reason in problems(change, source):
             violations.append((change.path, reason))

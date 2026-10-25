@@ -6,6 +6,9 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+import hashlib
+import json
+from unittest import mock
 
 SCRIPT = Path(__file__).with_name("check_public_names.py")
 SPEC = importlib.util.spec_from_file_location("public_names", SCRIPT)
@@ -125,6 +128,96 @@ class PublicNamesTest(unittest.TestCase):
             self.assertFalse(failures)
             self.assertEqual(GATE.main(["--base", base, "--head", head, "--repo", str(root)]), 0)
             self.assertEqual(GATE.main(["--base", "HEAD", "--head", head, "--repo", str(root)]), 2)
+
+
+class PinnedPassiveReceiptTest(unittest.TestCase):
+    RECEIPTS = (
+        ("m3/compatibility/synexia-java-base-collection-core-receipt-20261025.json",
+         "M3JDK21_JAVA_BASE_COLLECTION_CORE_RECEIPT_V1"),
+        ("m3/compatibility/synexia-sdk-catalogue-maintenance-receipt-20261025.json",
+         "M3JDK21_SDK_CATALOGUE_MAINTENANCE_RECEIPT_V1"),
+    )
+
+    def receipt(self, path):
+        return (Path(__file__).resolve().parents[2] / path).read_text(encoding="utf-8")
+
+    def test_exact_two_actual_pinned_receipts_allowed(self):
+        self.assertEqual(set(GATE.PINNED_PASSIVE_RECEIPTS), {p for p, _ in self.RECEIPTS})
+        for path, schema in self.RECEIPTS:
+            with self.subTest(path=path):
+                source = self.receipt(path)
+                self.assertEqual(json.loads(source)["schema"], schema)
+                self.assertFalse(GATE.problems(GATE.Change("A", path), source))
+
+    def test_receipt_changed_bytes_refused_even_with_same_json(self):
+        for path, _ in self.RECEIPTS:
+            source = self.receipt(path)
+            self.assertEqual(json.loads(source), json.loads(source + "\n"))
+            self.assertTrue(GATE.problems(GATE.Change("A", path), source + "\n"))
+
+    def test_receipt_schema_checked_independently_of_hash(self):
+        path, schema = self.RECEIPTS[0]
+        value = json.loads(self.receipt(path))
+        value["schema"] = "FOREIGN_EXECUTABLE_OR_RECEIPT_SCHEMA"
+        source = json.dumps(value)
+        # Qualify the schema fence independently: a matching byte pin alone
+        # cannot admit a foreign schema into the finite passive receipt set.
+        with mock.patch.dict(GATE.PINNED_PASSIVE_RECEIPTS, {
+                path: (hashlib.sha256(source.encode("utf-8")).hexdigest(), schema)}):
+            self.assertTrue(GATE.problems(GATE.Change("A", path), source))
+
+    def test_receipt_top_level_object_required_independently_of_hash(self):
+        path, schema = self.RECEIPTS[0]
+        source = json.dumps([{"schema": schema}])
+        with mock.patch.dict(GATE.PINNED_PASSIVE_RECEIPTS, {
+                path: (hashlib.sha256(source.encode("utf-8")).hexdigest(), schema)}):
+            self.assertTrue(GATE.problems(GATE.Change("A", path), source))
+
+    def test_receipt_malformed_json_refused_independently_of_hash(self):
+        path, schema = self.RECEIPTS[0]
+        source = '{"schema":'
+        with mock.patch.dict(GATE.PINNED_PASSIVE_RECEIPTS, {
+                path: (hashlib.sha256(source.encode("utf-8")).hexdigest(), schema)}):
+            self.assertTrue(GATE.problems(GATE.Change("A", path), source))
+
+    def test_receipt_without_content_refused(self):
+        for path, _ in self.RECEIPTS:
+            self.assertTrue(GATE.problems(GATE.Change("A", path)))
+
+    def test_pinned_content_does_not_admit_other_dated_paths(self):
+        source = self.receipt(self.RECEIPTS[0][0])
+        digest = hashlib.sha256(source.encode("utf-8")).hexdigest()
+        for path in ("m3/compatibility/arbitrary-20261025.json",
+                     "m3/compatibility/" + digest + "-20261025.json",
+                     "src/java.base/share/classes/java/util/Receipt20261025-20261025.java",
+                     "m3/collections/src/main/resources/META-INF/rewrite/recipe-20261025.yml",
+                     "synexia-openrewrite-recipes/recipe-20261025.json"):
+            with self.subTest(path=path):
+                self.assertTrue(GATE.problems(GATE.Change("A", path), source))
+
+    def test_real_git_loads_exact_pinned_receipt_json(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+
+            git("init", "-q")
+            git("config", "user.name", "M3 Tests")
+            git("config", "user.email", "tests@example.invalid")
+            (root / "README.md").write_text("baseline\n", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "baseline")
+            base = git("rev-parse", "HEAD")
+            for path, _ in self.RECEIPTS:
+                destination = root / path
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes((Path(__file__).resolve().parents[2] / path).read_bytes())
+            git("add", ".")
+            git("commit", "-qm", "add exact passive evidence")
+            delta, failures = GATE.check(root, base, git("rev-parse", "HEAD"))
+            self.assertEqual({change.path for change in delta}, {p for p, _ in self.RECEIPTS})
+            self.assertFalse(failures)
 
 
 if __name__ == "__main__":
