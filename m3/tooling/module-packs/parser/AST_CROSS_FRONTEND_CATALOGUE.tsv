@@ -8,3 +8,10 @@ Jackson	jdk.m3.jackson.M3AST	public occurrence traversal	linked module and zero-
 Algorithms	LeetCode HackerRank DFS / arrays	primitive parent sibling indexed preorder	no donor challenge source copied
 Algorithms	GeeksforGeeks graph adjacency	sibling link over primitive lanes	budgets and lossless ordering
 Recipes	Synexia Maven/OpenRewrite taxonomy	source sealed Maven-executed generator	attributed OpenRewrite replay unverified
+Tree-sitter	tree-sitter C11 original CST	field roles named/error/missing nodes and UTF-8 byte positions	real parser/JNI changed-range and cancellation proof
+Roslyn	dotnet/roslyn green/red syntax model	immutable atoms and lazy positioned views	cross-generation atom identity and full-fidelity proof
+OpenRewrite	rewrite-java LST	original trivia markers and type facts stay with LST	actual Java LST ingress and recipe fixed-point gate
+ANTLR4	ParserRuleContext and TokenStream	original token range and ordered rule children	inclusive token ranges to exact UTF-16 positions
+JavaParser	Node TokenRange and LexicalPreservingPrinter	original lexical owner with detached occurrence projection	provider and exact reprint contract
+LibCST	MetaDataWrapper and PositionProvider	optional named metadata from immutable CST	provider-specific unit and trivia completeness
+Babel	@babel/parser ESTree plugin	dialect kind vocabulary distinct from semantic aliases	provider identifier and dialect schema contract

@@ -8,12 +8,14 @@ String and javac owners. It has no Synexia runtime or external parser dependency
 
 | API | Responsibility |
 | --- | --- |
-| `M3File` | Immutable URI, retained `String`, exact UTF-16 source seal and optional original-byte seal; bounded strict file reads. |
+| `M3File` | Immutable URI, retained `String`, exact UTF-16 source seal and optional original-byte seal; bounded strict file reads and lazy original UTF-8 byte coordinates. |
 | `M3Parser` | Reusable frozen grammar and limits; a fresh lexer/parser session for each call. |
 | `M3ParseResult` | Detached source plus grammar validation and optional packed parse tree. |
 | `jdk.m3.parser.grammar` | Configurable lexer, grammar builder, Earley recognition/parsing, grammar analysis and packed tree lanes. |
 | `M3JavacParser` | Attach a detached primitive projection to a caller-owned javac task through existing `M3AST` events. |
 | `M3JavacTree` | Immutable preorder node kinds, parents and source offsets; no retained compiler objects. |
+| `M3ASTIndex` | One shared primitive occurrence index, optional field-role and syntax-fidelity facts; provider original AST remains authoritative. |
+| `M3ASTInterop` | Three-method read-only foreign tree cursor with optional source geometry, semantic-independent facts and explicit source-generation evidence. |
 
 The source is an ordinary `java.lang.String`. A matching M3JDK supplies its
 existing package-private `java.lang.M3String` implementation behind that API.
@@ -65,6 +67,11 @@ handling. The UTF-16 seal hashes every code unit in big-endian order, including
 unpaired surrogates. `byteSha256()` is present only for file-byte admission and
 is distinct from the text seal. A later file edit requires a new snapshot;
 existing snapshots remain valid. The read does not promise an atomic disk revision.
+
+For byte-offset parser providers, `file.utf8Offsets()` maps exact original UTF-8
+codepoint boundaries to M3AST's half-open UTF-16 positions. Character-only
+sources and other charsets do not invent byte positions. See
+[universal parser ingress and remaining contracts](UNIVERSAL_INTEROP.md).
 
 ## Shared javac projection
 
