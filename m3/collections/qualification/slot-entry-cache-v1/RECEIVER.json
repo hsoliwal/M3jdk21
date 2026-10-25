@@ -1,8 +1,8 @@
 {
   "schema": "M3_SLOT_ENTRY_CACHE_RECEIVING_CANDIDATE_V2",
-  "status": "CONTEXT_CORRECTED_SOURCE_CANDIDATE_GUARDED_QUALIFICATION_PENDING",
+  "status": "ANNOTATION_DEPENDENCY_REPAIR_SOURCE_RECEIVED_RUNTIME_PENDING",
   "canonicalRepository": "hsoliwal/com.synexia",
-  "canonicalCommit": "068e24610c312f99e84295ad2f086b3f00271428",
+  "canonicalCommit": "0728d8e712720838c0af4ca91ce60e1c7202b786",
   "canonicalPullRequest": "https://github.com/hsoliwal/com.synexia/pull/13216",
   "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/slot-entry-cache-v1/",
   "receivingBase": "53f1763c80b1b9f260572aca247eaa1fcfa9112b",
@@ -28,16 +28,17 @@
   "receivingMetadataRecipe": {
     "name": "com.synexia.m3.SlotReceivingJavaJni20261024",
     "crate": "m3-slot-receiving-java-jni-20261024",
-    "manifest": "1e1e592750cb445cdb7a46d840193c33d9d6c416",
+    "manifest": "6f33ae1fd51353bbb0316620d5508edb3830868f",
     "expectedSDK": [
       6,
       0,
       0,
       0
     ],
-    "actualSDK": "NOT_RUN",
+    "actualSDK": "PENDING_NEW_HEAD; predecessor failed main compilation before tests",
     "firstStageRequired": true,
-    "sourceInputsV2": "33dbb98d27a33335fba906ec344b7483de2d6fb7"
+    "sourceInputsV2": "33dbb98d27a33335fba906ec344b7483de2d6fb7",
+    "sourceInputsAnnotationFix": "2b23ca4f631d8b2020795e2cffcef6c066050904"
   },
   "sourceChecks": {
     "verifierReportCases": 22,
@@ -49,6 +50,26 @@
       "new": 7,
       "existing": 4,
       "proof": "47234ff65be50c11e2c545bb09352b4d5d115473"
+    },
+    "historicalFieldSubject": {
+      "receivingHead": "05fd707a59cad82c380bae7b1ce355befd621f9c",
+      "workflow": "0ba75155c57a5c26f43f806be92666349471539f",
+      "note": "Existing numeric source-check fields and correctionProvenance describe prior executed checks, not fresh tests on this annotation-repair head."
+    },
+    "currentAnnotationRepair": {
+      "sourceDelta": "One dependency declaration and seals; other workflow source bytes and guard control flow unchanged",
+      "SDKsourceClosure": 17,
+      "sourceGate": {
+        "proof": "661cd13ca1d028d8da10765ec4675b917f2f1162",
+        "selectedCanonicalPaths": 23,
+        "SPDXsources": 3,
+        "negativeHeader": "MISSING_CANONICAL_SPDX",
+        "unknownNegative": "UNKNOWN_CLASSIFICATION"
+      },
+      "currentWorkflowControlTests": "NOT_RUN_ON_NEW_SUBJECT; prior83 preserved as historical evidence",
+      "actualReceivingSDK6": "NOT_RUN",
+      "actualJavaJNI": "NOT_RUN",
+      "configuredReview": "NO_VERDICT"
     }
   },
   "policy": {
@@ -123,7 +144,7 @@
     },
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
-      "git_blob": "0ba75155c57a5c26f43f806be92666349471539f",
+      "git_blob": "233956802ef0540ccd40034c2cee686b62dd823f",
       "bytes": 62147,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
@@ -135,14 +156,14 @@
     },
     {
       "path": "m3/migration/original-provider-20261017/source-binding.json",
-      "git_blob": "aa185c5b6aa17f0f75270ad867e0c0d577c6386d",
+      "git_blob": "b18d647ecd61a995f0462549238f1069ab85d577",
       "bytes": 3301,
       "role": "RECIPE_METADATA_POSTIMAGE"
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/pom.xml",
-      "git_blob": "a1ccaa09fa8e82fc29f33c715d6533fe5cc1f853",
-      "bytes": 2980,
+      "git_blob": "706544983e977f0fbe9aa1e0466a6c293e486f0b",
+      "bytes": 3103,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
@@ -189,7 +210,7 @@
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/04-original-provider.yml",
-      "git_blob": "0ba75155c57a5c26f43f806be92666349471539f",
+      "git_blob": "233956802ef0540ccd40034c2cee686b62dd823f",
       "bytes": 62147,
       "role": "CANONICAL_SDK_MIRROR"
     },
@@ -201,13 +222,13 @@
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/06-source-binding.json",
-      "git_blob": "aa185c5b6aa17f0f75270ad867e0c0d577c6386d",
+      "git_blob": "b18d647ecd61a995f0462549238f1069ab85d577",
       "bytes": 3301,
       "role": "CANONICAL_SDK_MIRROR"
     },
     {
       "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-slot-receiving-java-jni-20261024/manifest.tsv",
-      "git_blob": "1e1e592750cb445cdb7a46d840193c33d9d6c416",
+      "git_blob": "6f33ae1fd51353bbb0316620d5508edb3830868f",
       "bytes": 1450,
       "role": "CANONICAL_SDK_MIRROR"
     },
@@ -294,17 +315,23 @@
       "git_blob": "33dbb98d27a33335fba906ec344b7483de2d6fb7",
       "bytes": 23996,
       "role": "CANONICAL_SDK_MIRROR"
+    },
+    {
+      "path": "m3/collections/qualification/slot-entry-cache-v1/receiving-sdk/SOURCE_INPUTS_ANNOTATION_FIX_V1.json",
+      "git_blob": "2b23ca4f631d8b2020795e2cffcef6c066050904",
+      "bytes": 28741,
+      "role": "CANONICAL_SDK_MIRROR"
     }
   ],
   "selfExcluded": true,
-  "actualProductionCompile": false,
-  "actualCurrentJNI": false,
+  "actualProductionCompile": "NOT_RUN",
+  "actualCurrentJNI": "NOT_RUN",
   "phaseAdvanced": false,
   "formalReview": "NO_VERDICT",
   "remaining": "Actual receiving metadata SDK/Java/JNI proof, other startup/platform/concurrency/descriptor/review gates; full collection superset and compiled regex/language-rule work",
   "fullGoal": "ACTIVE_UNFINISHED",
-  "correctionParent": "2750f98941ce800e86895daff9656eaa44e75a21",
-  "priorReceiverRecordGit": "d5158ac346e27a3eedc6989b71fb5fd04d761140",
+  "correctionParent": "05fd707a59cad82c380bae7b1ce355befd621f9c",
+  "priorReceiverRecordGit": "cd3a88fb77c251b779ee4acad9570ee1c891a707",
   "workflowContextCorrection": {
     "firstRun": 40091721939,
     "firstRunHead": "2750f98941ce800e86895daff9656eaa44e75a21",
@@ -317,5 +344,30 @@
     "actualGitHubValidation": "PENDING_NEW_COMMIT",
     "JavaJNIExecutions": 0,
     "formalReview": "NO_VERDICT"
+  },
+  "canonicalWorkingBranch": "codex/m3-slot-annotation-closure-20261025-068e",
+  "relatedCanonicalPRHeadAtPreparation": "068e24610c312f99e84295ad2f086b3f00271428",
+  "canonicalWorkingBranchOnly": true,
+  "annotationDependencyClosure": {
+    "capability": "slot-api-text-sdk-annotation-closure",
+    "coordinate": "org.jetbrains:annotations:24.1.0",
+    "scope": "compile",
+    "POM": "706544983e977f0fbe9aa1e0466a6c293e486f0b",
+    "strictCompilerControls": "UNCHANGED",
+    "previousHead": "05fd707a59cad82c380bae7b1ce355befd621f9c",
+    "previousRun": 40092693679,
+    "previousResult": "FAILED SDK main compile: missing Language annotation warnings under -Werror",
+    "previousSDKtests": 0,
+    "previousJavaJNI": "NOT_RUN",
+    "sourceProof": "661cd13ca1d028d8da10765ec4675b917f2f1162",
+    "sourceProofScope": "23 selected canonical paths/3 SPDX sources; not full global gate or runtime proof",
+    "currentWorkflow": "233956802ef0540ccd40034c2cee686b62dd823f",
+    "currentBinding": "b18d647ecd61a995f0462549238f1069ab85d577",
+    "currentVerifierUnchanged": "5df1a1131571630bf722a74ef6e41dd648b7f67f",
+    "currentSDK6": "NOT_RUN",
+    "currentJavaJNI": "NOT_RUN",
+    "formalReview": "NO_VERDICT",
+    "pendingExpandedProposalInstalled": false,
+    "phaseAdvanced": false
   }
 }

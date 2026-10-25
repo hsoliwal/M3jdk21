@@ -642,7 +642,7 @@ jobs:
           sdk_receipt=sdk_output/"receiving-sdk-receipt.tsv"
           matrix_path=root/"array-matrix-markers.json"
           sdk_pins={
-              "pom.xml":"f039d30043c0ded20902d379135be4a2681eeb7322bbcedb4635fb1b10de7dd4",
+              "pom.xml":"8445c71ca3cfd5f273d406b92310a15245625da77bd74da3e1ed3cbd478d8cd4",
               "engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java":"c4517401a7defd94ecc621bb2c19773bd6672c8fa3ee965c1ad37a63718bd92a",
               "src/test/java/com/synexia/rewrite/M3SlotReceivingJavaJniRecipeTest.java":"49036230c21b348408a08b85e343f4e784d9815df5a48bab432086d9a5310082",
               "src/main/resources/META-INF/rewrite/m3-slot-receiving-java-jni-20261024.yml":"dc9e8a0c4c7ae64beb53fb6e3d5f099d89a429616dc85b31fbcf67cf082db089",
