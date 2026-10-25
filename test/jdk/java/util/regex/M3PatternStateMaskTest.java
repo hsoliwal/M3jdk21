@@ -89,9 +89,15 @@ public class M3PatternStateMaskTest {
             Object plan = read(repeated, "m3BooleanPlan");
             check((plan != null) == (count <= 256), "DP admission " + count);
             if (candidate && plan != null) {
-                check(read(plan, "wordPlan") == null, "no table at compile " + count);
+                // Current compiled JDK owner prepares immutable ASCII scalar/wide masks
+                // at compilation, rather than a lazy wordPlan field.
+                long[] masks = (long[]) read(plan, "ascii");
+                check(masks != null, "prepared ASCII mask absent " + count);
+                int words = (count >>> 6) + 1;
+                check(masks.length == (count <= 63 ? 136 : 137 * words),
+                        "compiled scalar/wide mask geometry " + count);
                 for (int use = 0; use < 40; use++) repeated.asMatchPredicate().test("a");
-                check((read(plan, "wordPlan") != null) == (count <= 63), "word admission " + count);
+                check(read(plan, "ascii") == masks, "immutable mask reused " + count);
             }
             for (String text : samples) pair(repeated, text);
             Pattern tail = Pattern.compile("a".repeat(count - 1) + "b*");
