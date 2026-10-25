@@ -37,6 +37,10 @@ jobs:
           python3 -m unittest discover \
             -s m3/collections/qualification/arraylist-dual-word-20261023 \
             -p 'test_verify_receiver.py' -v
+          python3 m3/collections/qualification/tree-commit-atomic-20261025/verify_receipt.py
+          python3 -m unittest discover \
+            -s m3/collections/qualification/tree-commit-atomic-20261025 \
+            -p 'test_verify_receipt.py' -v
       - name: Build actual original native array substrate
         run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
       - name: Bind verified original native array library
