@@ -292,16 +292,49 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
 
         public Iterator<E> iterator() {
             return new Iterator<>() {
+                private static final int INITIALIZED = 8;
                 E cache;
                 E previous;
                 int state;
-                final Iterator<E> it = descendingIterator(base);
+                Iterator<E> it;
 
                 public boolean hasNext() {
                     if ((state & READY) != 0)
                         return true;
                     if ((state & EXHAUSTED) != 0)
                         return false;
+                    if ((state & INITIALIZED) == 0) {
+                        E first = null;
+                        int initial = INITIALIZED;
+                        Iterator<E> cursor;
+                        if ((bounds & HAS_HEAD) != 0) {
+                            SortedSet<E> inclusive = base.tailSet(head);
+                            if (!inclusive.isEmpty()) {
+                                E candidate = inclusive.first();
+                                if (cmp.compare(candidate, head) == 0) {
+                                    if (belowTail(candidate)) {
+                                        first = candidate;
+                                        initial |= READY;
+                                    } else {
+                                        initial |= EXHAUSTED;
+                                    }
+                                }
+                            }
+                            cursor = descendingIterator(base.headSet(head));
+                        } else {
+                            cursor = descendingIterator(base);
+                        }
+                        // Publish only after all range/comparator setup succeeds.
+                        // Empty owners are detected explicitly; user exceptions
+                        // from first(), including NoSuchElementException, escape.
+                        it = cursor;
+                        cache = first;
+                        state |= initial;
+                        if ((state & READY) != 0)
+                            return true;
+                        if ((state & EXHAUSTED) != 0)
+                            return false;
+                    }
                     while (it.hasNext()) {
                         E e = it.next();
                         if (!aboveHead(e))
