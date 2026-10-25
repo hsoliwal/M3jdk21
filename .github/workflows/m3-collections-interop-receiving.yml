@@ -24,6 +24,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
+            m3/arrays
             m3/collections
             m3/tooling/migration-recipes
       # Keep both historical source checkouts; the successor verifier binds
@@ -54,7 +55,7 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          mkdir -p proof/core-classes/META-INF
+          mkdir -p proof/core-classes/META-INF proof/array-classes/META-INF
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
           ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
           test "$(git hash-object "$ENGINE")" = 05e02169c7429183107a99c60e1aad05b4d73b5f
@@ -93,16 +94,23 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
+          find m3/arrays/src/main/java -name '*.java' | sort > proof/array-sources.txt
+          sha256sum $(cat proof/array-sources.txt) > proof/array-source-hashes.txt
+          javac --release 21 -Xlint:all,-module -Werror -d proof/array-classes @proof/array-sources.txt 2>&1 | tee proof/array-compile.log
+          cp m3/arrays/{LICENSE,NOTICE,provenance.json} proof/array-classes/META-INF/
+          jar --create --file proof/m3-arrays.jar -C proof/array-classes .
           find m3/collections/src/main/java -name '*.java' | sort > proof/core-sources.txt
           sha256sum $(cat proof/core-sources.txt) > proof/core-source-hashes.txt
-          javac --release 21 -Xlint:all,-module -Werror -d proof/core-classes @proof/core-sources.txt 2>&1 | tee proof/core-compile.log
+          javac --release 21 -Xlint:all,-module -Werror --module-path proof/m3-arrays.jar -d proof/core-classes @proof/core-sources.txt 2>&1 | tee proof/core-compile.log
           cp m3/collections/{LICENSE,NOTICE,provenance.json,name-mapping.json} proof/core-classes/META-INF/
           jar --create --file proof/m3-collections.jar -C proof/core-classes .
-          jdeps --print-module-deps proof/m3-collections.jar | tee proof/core-module-deps.txt
-          test "$(cat proof/core-module-deps.txt)" = java.base
+          jdeps --print-module-deps --module-path proof/m3-arrays.jar proof/m3-collections.jar | tee proof/core-module-deps.txt
+          test "$(cat proof/core-module-deps.txt)" = com.m3.arrays,java.base
+          ARRAYS="$GITHUB_WORKSPACE/proof/m3-arrays.jar"
+          (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file -Dfile="$ARRAYS" -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml")
           JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
-            -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
+            -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DpomFile="$GITHUB_WORKSPACE/m3/collections/pom.xml")
       - name: Compile and execute exactly the complete indexed five-library JUnit corpus
         shell: bash
         run: |
