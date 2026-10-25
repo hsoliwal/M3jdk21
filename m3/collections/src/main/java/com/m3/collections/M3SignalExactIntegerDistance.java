@@ -98,17 +98,15 @@ public final class M3SignalExactIntegerDistance {
         return new Distance(accumulator.high, accumulator.low);
     }
 
-    /** Stable exact nearest-neighbor ordering over caller-specified physical row occurrences. */
+    /** Stable exact nearest-neighbor ordering over selected physical row occurrences. */
     public int[] nearest(int sourceRow, int[] candidates, int limit,
             long version, String sourceSha256) {
         return nearest(sourceRow, candidates, limit, version, sourceSha256, null);
     }
 
     /**
-     * Bounded O(k) transient primitive heap; stable ties retain candidate encounter
-     * order, including repeated physical IDs. Caller retains ownership of inputs.
-     * Optional progress monitor reports one completed candidate per unit and may
-     * cancel or invalidate the source; no partial results are ever returned.
+     * Existing array-based API, retained with duplicate occurrence semantics.
+     * A shared primitive ranking loop also handles the new bitmap input below.
      */
     public int[] nearest(int sourceRow, int[] candidates, int limit,
             long version, String sourceSha256, M3ProgressMonitor monitor) {
@@ -117,56 +115,136 @@ public final class M3SignalExactIntegerDistance {
         requireFresh(version, sourceSha256);
         Objects.checkIndex(sourceRow, schema.rowCount());
         for (int row : candidates) Objects.checkIndex(row, schema.rowCount());
+        return rankCandidates(sourceRow, candidates, null, candidates.length, limit,
+                version, sourceSha256, monitor, true);
+    }
+
+    /**
+     * Exact nearest K rows from a caller-owned packed membership mask. The mask
+     * addresses the original physical row coordinates, with no duplicated payload
+     * values or full selected-row array. Equal distance preserves physical row
+     * encounter order. Reject wrong width/padding before allocating the heap.
+     */
+    public int[] nearestByMask(int sourceRow, long[] membership, int limit,
+            long version, String sourceSha256) {
+        return nearestByMask(sourceRow, membership, limit, version, sourceSha256, null);
+    }
+
+    /** Original first-party M3 monitor handles cancellable standalone selection. */
+    public int[] nearestByMask(int sourceRow, long[] membership, int limit,
+            long version, String sourceSha256, M3ProgressMonitor monitor) {
+        return nearestMasked(sourceRow, membership, limit, version, sourceSha256,
+                monitor, true);
+    }
+
+    /**
+     * The Boolean compiler owns the enclosing progress task: poll cancellation,
+     * but do not restart its task, double-count work, or mark it done prematurely.
+     */
+    int[] nearestByMaskWithinTask(int sourceRow, long[] membership, int limit,
+            long version, String sourceSha256, M3ProgressMonitor monitor) {
+        return nearestMasked(sourceRow, membership, limit, version, sourceSha256,
+                monitor, false);
+    }
+
+    /** Prevent binding a metric to a different image with coincidentally equal shape. */
+    boolean ownsSchema(M3SignalQualitySchema owner) { return schema == owner; }
+
+    private int[] nearestMasked(int sourceRow, long[] membership, int limit,
+            long version, String sourceSha256, M3ProgressMonitor monitor,
+            boolean independentProgress) {
+        Objects.requireNonNull(membership, "membership");
+        if (limit < 0) throw new IllegalArgumentException("negative result limit");
+        requireFresh(version, sourceSha256);
+        Objects.checkIndex(sourceRow, schema.rowCount());
+        int physicalRows = schema.rowCount();
+        int words = (int) (((long) physicalRows + 63L) >>> 6);
+        if (membership.length != words) {
+            throw new IllegalArgumentException("integer distance membership width mismatch");
+        }
+        int tail = physicalRows & 63;
+        if (tail != 0 && (membership[words - 1] >>> tail) != 0L) {
+            throw new IllegalArgumentException("phantom physical row in membership tail");
+        }
+        int total = 0;
+        for (long bits : membership) {
+            total = Math.addExact(total, Long.bitCount(bits));
+        }
+        return rankCandidates(sourceRow, null, membership, total, limit,
+                version, sourceSha256, monitor, independentProgress);
+    }
+
+    /** One primitive max-heap and one iterative candidate loop for both inputs. */
+    private int[] rankCandidates(int sourceRow, int[] candidates, long[] membership,
+            int total, int limit, long version, String digest,
+            M3ProgressMonitor monitor, boolean independentProgress) {
         if (monitor != null) monitor.checkCanceled();
-        int k = Math.min(limit, candidates.length);
-        if (k == 0 || candidates.length == 0) {
-            requireFresh(version, sourceSha256);
+        int k = Math.min(limit, total);
+        if (k == 0) {
+            requireFresh(version, digest);
             return new int[0];
         }
-        if (monitor != null) {
-            monitor.beginTask("M3 exact integer signal nearest", candidates.length);
+        long budget = Math.min(64L * 1024L * 1024L,
+                Runtime.getRuntime().maxMemory() / 16L);
+        if ((long) k * (2L * Integer.BYTES + 2L * Long.BYTES) > budget) {
+            throw new IllegalStateException("integer signal nearest heap exceeds memory budget");
+        }
+        if (monitor != null && independentProgress) {
+            monitor.beginTask("M3 exact integer signal nearest", total);
             monitor.checkCanceled();
-            requireFresh(version, sourceSha256);
+            requireFresh(version, digest);
         }
         int[] rows = new int[k];
-        int[] ordinal = new int[k];
+        int[] ordinals = new int[k];
         long[] highs = new long[k], lows = new long[k];
         Accumulator scratch = new Accumulator();
         int filled = 0;
-        for (int position = 0; position < candidates.length; position++) {
+        int word = 0;
+        long pending = 0L;
+        for (int position = 0; position < total; position++) {
             if (monitor != null) monitor.checkCanceled();
-            requireFresh(version, sourceSha256);
-            accumulate(sourceRow, candidates[position], scratch);
+            requireFresh(version, digest);
+            final int nextRow;
+            if (candidates != null) {
+                nextRow = candidates[position];
+            } else {
+                while (pending == 0L) {
+                    pending = membership[word++];
+                }
+                nextRow = ((word - 1) << 6) + Long.numberOfTrailingZeros(pending);
+                pending &= pending - 1L;
+            }
+            accumulate(sourceRow, nextRow, scratch);
             if (filled < k) {
-                rows[filled] = candidates[position];
-                ordinal[filled] = position;
+                rows[filled] = nextRow;
+                ordinals[filled] = position;
                 highs[filled] = scratch.high;
                 lows[filled] = scratch.low;
-                siftUp(rows, ordinal, highs, lows, filled++);
+                siftUp(rows, ordinals, highs, lows, filled++);
             } else if (compare(scratch.high, scratch.low, position,
-                    highs[0], lows[0], ordinal[0]) < 0) {
-                rows[0] = candidates[position];
-                ordinal[0] = position;
+                    highs[0], lows[0], ordinals[0]) < 0) {
+                rows[0] = nextRow;
+                ordinals[0] = position;
                 highs[0] = scratch.high;
                 lows[0] = scratch.low;
-                siftDown(rows, ordinal, highs, lows, 0, filled);
+                siftDown(rows, ordinals, highs, lows, 0, filled);
             }
             if (monitor != null) {
-                monitor.worked(1);
+                if (independentProgress) monitor.worked(1L);
                 monitor.checkCanceled();
             }
         }
-        // Primitive max-heap -> ascending exact distance and stable encounter order.
+        // Ascending unsigned 128-bit distance, stable source encounter order.
         for (int remaining = filled; remaining > 1; remaining--) {
-            swap(rows, ordinal, highs, lows, 0, remaining - 1);
-            siftDown(rows, ordinal, highs, lows, 0, remaining - 1);
+            swap(rows, ordinals, highs, lows, 0, remaining - 1);
+            siftDown(rows, ordinals, highs, lows, 0, remaining - 1);
         }
         if (monitor != null) monitor.checkCanceled();
-        requireFresh(version, sourceSha256);
-        if (monitor != null) {
+        requireFresh(version, digest);
+        if (monitor != null && independentProgress) {
             monitor.done();
             monitor.checkCanceled();
-            requireFresh(version, sourceSha256);
+            requireFresh(version, digest);
         }
         return rows;
     }
