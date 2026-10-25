@@ -21,6 +21,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+          fetch-depth: 2
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             m3/arrays/**
@@ -43,6 +44,22 @@ jobs:
           echo "JAVA_TOOL_OPTIONS=-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" >> "$GITHUB_ENV"
       - name: Compile real M3 collections and run Maven/JUnit tests
         run: mvn -B -ntp -f m3/collections/pom.xml test
+      - name: Compile original public JVM descriptors and refuse ABI drift
+        if: github.event_name == 'pull_request'
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-baseline/src/com/m3/collections" "$RUNNER_TEMP/m3-baseline/classes"
+          git show "HEAD^1:m3/collections/src/main/java/com/m3/collections/M3ArrayList.java" \
+            > "$RUNNER_TEMP/m3-baseline/src/com/m3/collections/M3ArrayList.java"
+          test "$(git hash-object "$RUNNER_TEMP/m3-baseline/src/com/m3/collections/M3ArrayList.java")" \
+            = "c43ca5578521b8f0a2ab1305f5d4becdeabc772e"
+          javac --release 21 -cp m3/collections/target/classes \
+            -d "$RUNNER_TEMP/m3-baseline/classes" \
+            "$RUNNER_TEMP/m3-baseline/src/com/m3/collections/M3ArrayList.java"
+          javap -public -s -classpath "$RUNNER_TEMP/m3-baseline/classes" \
+            com.m3.collections.M3ArrayList > "$RUNNER_TEMP/m3-abi-before.txt"
+          javap -public -s -classpath m3/collections/target/classes \
+            com.m3.collections.M3ArrayList > "$RUNNER_TEMP/m3-abi-after.txt"
+          diff -u "$RUNNER_TEMP/m3-abi-before.txt" "$RUNNER_TEMP/m3-abi-after.txt"
       - name: Original and expanded M3 ArrayList behavioral oracles
         run: |
           java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes com.m3.collections.M3ArrayListShortWordMaskContract
