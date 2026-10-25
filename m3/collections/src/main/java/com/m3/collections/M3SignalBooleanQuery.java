@@ -273,6 +273,27 @@ public final class M3SignalBooleanQuery {
         }
 
         /**
+         * Rank the exact stored-coordinate matches without materializing all
+         * matched physical IDs. The caller explicitly supplies typed precedence;
+         * these coordinates are not semantic equality or sound-distance proofs.
+         * At most k rows are returned, ordered by the original stable Top-K owner.
+         */
+        public int[] evaluateTopK(int limit, int[] precedence,
+                long version, String digest) {
+            return evaluateTopK(limit, precedence, version, digest, null);
+        }
+
+        /** Cancellable Top-K execution over the original packed result mask. */
+        public int[] evaluateTopK(int limit, int[] precedence,
+                long version, String digest, M3ProgressMonitor monitor) {
+            if (limit < 0) throw new IllegalArgumentException("negative ranked result limit");
+            Objects.requireNonNull(precedence, "precedence");
+            requireFresh(version, digest);
+            M3SignalTopK ranking = new M3SignalTopK(schema.valueColumnsOwner(), precedence);
+            return executeWindow(0, limit, version, digest, monitor, ranking).rows;
+        }
+
+        /**
          * One page in ascending physical-row order, including the complete exact
          * match count. The answer owns its row storage; the caller cannot rewrite
          * the underlying computed page. Pagination is tied to the original source
@@ -311,6 +332,11 @@ public final class M3SignalBooleanQuery {
 
         private Window executeWindow(int skip, int limit, long version,
                 String sourceSha256, M3ProgressMonitor monitor) {
+            return executeWindow(skip, limit, version, sourceSha256, monitor, null);
+        }
+
+        private Window executeWindow(int skip, int limit, long version,
+                String sourceSha256, M3ProgressMonitor monitor, M3SignalTopK ranking) {
             if (skip < 0 || limit < 0) {
                 throw new IllegalArgumentException("negative signal query page coordinate");
             }
@@ -382,31 +408,38 @@ public final class M3SignalBooleanQuery {
                 if (monitor != null && (wordIndex & 1023) == 0) monitor.checkCanceled();
                 count = Math.addExact(count, Long.bitCount(stack[0][wordIndex]));
             }
-            int from = Math.min(skip, count);
+            int from = ranking == null ? Math.min(skip, count) : 0;
             int selected = Math.min(limit, count - from);
-            // The full result array is avoided for pages; count-only queries pass limit 0.
-            int[] answer = new int[selected];
-            int position = 0, remainingSkip = from;
-            for (int i = 0; selected > 0 && i < words; i++) {
-                if (monitor != null && (i & 1023) == 0) monitor.checkCanceled();
-                long bits = stack[0][i];
-                if (remainingSkip > 0) {
-                    int available = Long.bitCount(bits);
-                    if (remainingSkip >= available) {
-                        remainingSkip -= available;
-                        continue;
+            final int[] answer;
+            if (ranking != null) {
+                // Reuse original primitive Top-K heap on the bitmap; no full
+                // physical-row selection array is generated for ranked results.
+                answer = ranking.topKByMask(stack[0], selected);
+            } else {
+                // Preserve original physical-order viewport and count-only API.
+                answer = new int[selected];
+                int position = 0, remainingSkip = from;
+                for (int i = 0; selected > 0 && i < words; i++) {
+                    if (monitor != null && (i & 1023) == 0) monitor.checkCanceled();
+                    long bits = stack[0][i];
+                    if (remainingSkip > 0) {
+                        int available = Long.bitCount(bits);
+                        if (remainingSkip >= available) {
+                            remainingSkip -= available;
+                            continue;
+                        }
+                        while (remainingSkip > 0) {
+                            bits &= bits - 1L;
+                            remainingSkip--;
+                        }
+                        remainingSkip = 0;
                     }
-                    while (remainingSkip > 0) {
+                    while (bits != 0L && position < selected) {
+                        answer[position++] = (i << 6) + Long.numberOfTrailingZeros(bits);
                         bits &= bits - 1L;
-                        remainingSkip--;
                     }
-                    remainingSkip = 0;
+                    if (position == selected) break;
                 }
-                while (bits != 0L && position < selected) {
-                    answer[position++] = (i << 6) + Long.numberOfTrailingZeros(bits);
-                    bits &= bits - 1L;
-                }
-                if (position == selected) break;
             }
             if (monitor != null) monitor.checkCanceled();
             requireFresh(version, sourceSha256);
