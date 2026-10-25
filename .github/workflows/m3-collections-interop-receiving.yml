@@ -51,6 +51,17 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Compile original M3 array JNI with strict native contracts
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/m3-native
+          cmake -S m3/arrays/src/main/native -B proof/m3-native \
+            -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+          cmake --build proof/m3-native --config Release --parallel 2
+          ctest --test-dir proof/m3-native --output-on-failure -C Release
+          test -s proof/m3-native/libm3_arrays.so
+          sha256sum proof/m3-native/libm3_arrays.so | tee proof/m3-arrays-native-sha256.txt
       - name: Identify exact head and verify admitted production postimages
         shell: bash
         run: |
@@ -115,7 +126,11 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/interop/pom.xml verify 2>&1 | tee proof/interop.log
+          JNI_LIBRARY="$GITHUB_WORKSPACE/proof/m3-native/libm3_arrays.so"
+          test -s "$JNI_LIBRARY"
+          mvn -B -ntp -f m3/collections/interop/pom.xml \
+            -DargLine="-Dm3.arrays.native.path=$JNI_LIBRARY -Xcheck:jni" \
+            verify 2>&1 | tee proof/interop.log
           python3 -m unittest discover \
             -s m3/collections/interop/qualification/runtime-junit-census-20261022 \
             -p 'test_verify_surefire.py' -v 2>&1 | tee proof/junit-negative-controls.log
