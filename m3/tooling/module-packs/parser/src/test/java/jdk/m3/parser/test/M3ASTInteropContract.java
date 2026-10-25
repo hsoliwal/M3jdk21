@@ -223,9 +223,84 @@ public final class M3ASTInteropContract {
         equal(3, ascii.utf8Offsets().orElseThrow().toByte(3));
     }
 
+    private static boolean insidePair(String value, int index) {
+        return index > 0 && index < value.length()
+                && Character.isHighSurrogate(value.charAt(index - 1))
+                && Character.isLowSurrogate(value.charAt(index));
+    }
+
+    private static void sourceDeltaContracts() throws IOException {
+        URI uri = URI.create("memory:/same-source.java");
+        M3File original = M3File.of(uri, "A😀B");
+        M3File updated = M3File.of(uri, "A😺B");
+        M3File.ChangeEnvelope changed = updated.changeSince(original, 20);
+        equal(1, changed.previousStart());
+        equal(3, changed.previousEnd());
+        equal(1, changed.currentStart());
+        equal(3, changed.currentEnd());
+        ok(changed.textChanged());
+        equal(M3File.RawDigestComparison.UNAVAILABLE, changed.rawDigestComparison());
+
+        M3File.ChangeEnvelope noTextChange = original.changeSince(original, 8);
+        ok(!noTextChange.textChanged());
+        equal(0, noTextChange.previousEnd());
+        refuses(IllegalArgumentException.class, () -> updated.changeSince(original, 7));
+        refuses(IllegalArgumentException.class, () -> updated.changeSince(original, -1));
+        refuses(IllegalArgumentException.class, () -> updated.changeSince(
+                M3File.of(URI.create("memory:/renamed.java"), "A😀B"), 20));
+
+        M3File utf8 = M3File.read(uri, new ByteArrayInputStream(new byte[] {65}),
+                StandardCharsets.UTF_8, 4);
+        M3File utf8Again = M3File.read(uri, new ByteArrayInputStream(new byte[] {65}),
+                StandardCharsets.UTF_8, 4);
+        M3File utf16 = M3File.read(uri, new ByteArrayInputStream(new byte[] {65, 0}),
+                StandardCharsets.UTF_16LE, 4);
+        equal(M3File.RawDigestComparison.SHA256_SAME,
+                utf8Again.changeSince(utf8, 2).rawDigestComparison());
+        M3File.ChangeEnvelope byteOnly = utf16.changeSince(utf8, 2);
+        equal(M3File.RawDigestComparison.SHA256_DIFFERENT, byteOnly.rawDigestComparison());
+        ok(!byteOnly.textChanged());
+
+        M3File insert = M3File.of(uri, "ab😺c");
+        M3File.ChangeEnvelope inserted = insert.changeSince(M3File.of(uri, "abc"), 8);
+        equal(2, inserted.previousStart());
+        equal(2, inserted.previousEnd());
+        equal(4, inserted.currentEnd());
+
+        Random random = new Random(0xD17A2026L);
+        String[] pieces = {"a", "b", "中", "😺", "😀", "\r\n", "\n", "\t", "é"};
+        for (int sample = 0; sample < 500; sample++) {
+            StringBuilder prior = new StringBuilder();
+            int pointCount = random.nextInt(48);
+            for (int position = 0; position < pointCount; position++) {
+                prior.append(pieces[random.nextInt(pieces.length)]);
+            }
+            String previousText = prior.toString();
+            int[] points = previousText.codePoints().toArray();
+            int from = random.nextInt(points.length + 1);
+            int through = from + random.nextInt(points.length - from + 1);
+            int start = previousText.offsetByCodePoints(0, from);
+            int end = previousText.offsetByCodePoints(0, through);
+            String replacement = pieces[random.nextInt(pieces.length)];
+            String currentText = previousText.substring(0, start) + replacement
+                    + previousText.substring(end);
+            M3File.ChangeEnvelope delta = M3File.of(uri, currentText)
+                    .changeSince(M3File.of(uri, previousText), 4096);
+            ok(!insidePair(previousText, delta.previousStart()));
+            ok(!insidePair(previousText, delta.previousEnd()));
+            ok(!insidePair(currentText, delta.currentStart()));
+            ok(!insidePair(currentText, delta.currentEnd()));
+            equal(currentText, previousText.substring(0, delta.previousStart())
+                    + currentText.substring(delta.currentStart(), delta.currentEnd())
+                    + previousText.substring(delta.previousEnd()));
+            equal(!previousText.equals(currentText), delta.textChanged());
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         byteAndIndexContracts();
         randomizedOffsets();
+        sourceDeltaContracts();
         System.out.println("M3_AST_INTEROP_PASS checks=" + checks);
     }
 }

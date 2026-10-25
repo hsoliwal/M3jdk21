@@ -38,6 +38,16 @@ points**. ASCII-only files use empty arrays. Read-only `of(uri, CharSequence)`
 and other character sets do not fabricate original UTF-8 byte offsets.
 Neither input bytes nor an additional character payload is retained.
 
+`M3File.changeSince(previous, maxComparedUtf16Units)` now identifies a
+conservative single-replacement *source-text envelope* between immutable
+snapshots with the same URI. Only a shared prefix/suffix is excluded, and no
+edit boundary splits a valid surrogate pair. An optional original-byte
+SHA-256 comparison reports `SHA256_SAME`, `SHA256_DIFFERENT` or `UNAVAILABLE`
+independently of text changes. Same decoded source with different raw bytes
+**does not certify** parser or compiler input-generation reuse. This operation
+does not touch the provider filesystem, create a second AST, detect disjoint
+minimal hunks, determine semantic/ABI changes or update persisted build state.
+
 **Source coordinate contract:** all published M3AST spans are zero-based,
 UTF-16, half-open `[start,end)`. Original UTF-8 byte positions may be
 translated at valid codepoint boundaries only; EOF is a valid endpoint.
@@ -63,10 +73,14 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
 1. Attach real Tree-sitter (JNI/C11 only if independently justified), ANTLR,
    JavaParser, JDT, OpenRewrite and other parser adapters to their *already
    parsed* trees; compare ranges, roles, errors and token/trivia completeness.
-2. Use `M3File` as the sole file generation/delta authority: reuse metadata
+2. Use the original filesystem `com.m3.file.M3File` as the provider observation
+   and generation/delta authority, connected to the immutable parser source
+   snapshot: reuse metadata
    (file-key/version, mtime, length) as a cheap **change hint**, verify content
    before declaring equality, retain SHA-256 receipts, record precise source
-   and class-file deltas and invalidate only affected semantic/ABI dependents.
+   multi-hunk and class-file deltas and invalidate only affected semantic/ABI
+   dependents. The bounded snapshot change envelope above is conservative and
+   does not itself complete this integration.
 3. Add source-bound optional token/trivia/line/column tables without copying
    source payloads. Require exact reprint/source round-trips before claiming
    a provider is lossless; an AST that omits whitespace never becomes a CST

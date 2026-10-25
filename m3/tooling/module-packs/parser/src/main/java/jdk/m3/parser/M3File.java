@@ -142,6 +142,83 @@ public final class M3File implements CharSequence {
     /** Raw byte SHA-256 when created by read; absent for character-only sources. */
     public Optional<String> byteSha256() { return Optional.ofNullable(byteSha256); }
 
+    /** The two admitted raw-byte SHA-256 receipts are compared, never inferred from decoded text. */
+    public enum RawDigestComparison { UNAVAILABLE, SHA256_SAME, SHA256_DIFFERENT }
+
+    /**
+     * Conservative, single-replacement UTF-16 envelope covering every changed
+     * source unit between two immutable generations of the same URI. Unchanged
+     * common prefix and suffix are excluded; independent edits inside this
+     * envelope are intentionally not represented as separate hunks. Boundaries
+     * never split a valid UTF-16 surrogate pair in either generation.
+     *
+     * <p>This is a source-text change hint, not an ABI/semantic change proof,
+     * filesystem observation or authority to reuse a parser's prior tree.
+     * Raw-byte identity is reported separately: equal decoded text can come
+     * from different original encodings or byte sequences.</p>
+     */
+    public record ChangeEnvelope(int previousStart, int previousEnd,
+                                 int currentStart, int currentEnd,
+                                 RawDigestComparison rawDigestComparison) {
+        public ChangeEnvelope {
+            if (previousStart < 0 || currentStart < 0 || previousStart != currentStart
+                    || previousEnd < previousStart || currentEnd < currentStart) {
+                throw new IllegalArgumentException("invalid source change envelope");
+            }
+            Objects.requireNonNull(rawDigestComparison, "raw digest comparison");
+        }
+
+        public boolean textChanged() {
+            return previousEnd != previousStart || currentEnd != currentStart;
+        }
+    }
+
+    /**
+     * Find one bounded edit envelope without new source storage or reparsing.
+     * The byte budget is in UTF-16 units across both existing String owners;
+     * callers must independently certify any compiler dependency/ABI reuse.
+     */
+    public ChangeEnvelope changeSince(M3File previous, long maxComparedUtf16Units) {
+        Objects.requireNonNull(previous, "previous source generation");
+        if (!uri.equals(previous.uri)) throw new IllegalArgumentException("different source URI");
+        if (maxComparedUtf16Units < 0
+                || (long) text.length() + previous.text.length() > maxComparedUtf16Units) {
+            throw new IllegalArgumentException("source change comparison budget exceeded");
+        }
+        RawDigestComparison raw = byteSha256 == null || previous.byteSha256 == null
+                ? RawDigestComparison.UNAVAILABLE
+                : byteSha256.equals(previous.byteSha256)
+                        ? RawDigestComparison.SHA256_SAME : RawDigestComparison.SHA256_DIFFERENT;
+        if (text == previous.text || text.equals(previous.text)) {
+            return new ChangeEnvelope(0, 0, 0, 0, raw);
+        }
+        int previousLength = previous.text.length();
+        int currentLength = text.length();
+        int prefix = 0;
+        while (prefix < previousLength && prefix < currentLength
+                && previous.text.charAt(prefix) == text.charAt(prefix)) prefix++;
+        if (insideSurrogatePair(previous.text, prefix) || insideSurrogatePair(text, prefix)) prefix--;
+
+        int previousEnd = previousLength, currentEnd = currentLength;
+        while (previousEnd > prefix && currentEnd > prefix
+                && previous.text.charAt(previousEnd - 1) == text.charAt(currentEnd - 1)) {
+            previousEnd--;
+            currentEnd--;
+        }
+        if (insideSurrogatePair(previous.text, previousEnd)
+                || insideSurrogatePair(text, currentEnd)) {
+            previousEnd++;
+            currentEnd++;
+        }
+        return new ChangeEnvelope(prefix, previousEnd, prefix, currentEnd, raw);
+    }
+
+    private static boolean insideSurrogatePair(String value, int boundary) {
+        return boundary > 0 && boundary < value.length()
+                && Character.isHighSurrogate(value.charAt(boundary - 1))
+                && Character.isLowSurrogate(value.charAt(boundary));
+    }
+
     /**
      * Optional, source-generation-bound UTF-8 byte/UTF-16 coordinate bridge.
      * Only strict original UTF-8 reads qualify; character-only sources and
