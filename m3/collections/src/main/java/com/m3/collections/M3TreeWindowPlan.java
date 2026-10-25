@@ -166,6 +166,14 @@ public final class M3TreeWindowPlan {
 
 	public void commit (int count, int [] parentIds, int [] childIndices, int [] physicalParents, long [] nativeHandles) {
 		if (count != plannedCount || nativeHandles.length < count) throw new IllegalArgumentException ("commit arrays");
+		// Preflight in the same left-to-right read/exception order as the old
+		// publication loop. No committed map/array changes until every row passes.
+		for (int entry = 0; entry < count; entry++) {
+			if (nativeHandles [entry] == 0) throw new IllegalArgumentException ("uncommitted native row " + entry);
+			int parent = parentIds [entry];
+			int child = childIndices [entry];
+			int physical = physicalParents [entry];
+		}
 		if (keys.length < count) {
 			int next = capacity (keys.length, count);
 			keys = new long [next];
@@ -176,7 +184,6 @@ public final class M3TreeWindowPlan {
 		slotByHandle.clear ();
 		for (int entry = 0; entry < count; entry++) {
 			long handle = nativeHandles [entry];
-			if (handle == 0) throw new IllegalArgumentException ("uncommitted native row " + entry);
 			keys [entry] = key (parentIds [entry], childIndices [entry]);
 			handles [entry] = handle;
 			parentSlots [entry] = physicalParents [entry];
