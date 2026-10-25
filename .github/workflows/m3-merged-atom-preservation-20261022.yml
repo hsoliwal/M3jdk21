@@ -50,6 +50,9 @@ jobs:
           from pathlib import Path
           root = Path.cwd().resolve()
           receipt = root / "m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
+          historical_sha256 = "d6ad65fcb48f9a80b71acda82baa4cfcfce9438c87eae207d346e71ce2c74bba"
+          if hashlib.sha256(receipt.read_bytes()).hexdigest() != historical_sha256:
+              raise SystemExit("M3 historical source handoff receipt drifted")
           lines = [line for line in receipt.read_text(encoding="utf-8").splitlines()
                    if line and not line.startswith("#")]
           LOCKS_PATH = "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java"

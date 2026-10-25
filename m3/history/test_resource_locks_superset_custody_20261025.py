@@ -18,6 +18,7 @@ WORKFLOW = ".github/workflows/m3-merged-atom-preservation-20261022.yml"
 HISTORICAL = "m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
 SUCCESSOR = "m3/docs/synexia-m3jdk21-eclipse-source-superset-20261025.tsv"
 LOCKS = "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java"
+HISTORICAL_SHA = "d6ad65fcb48f9a80b71acda82baa4cfcfce9438c87eae207d346e71ce2c74bba"
 OLD_SHA = "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599"
 NEW_SHA = "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718"
 
@@ -56,7 +57,9 @@ class ResourceLocksSupersetCustodyTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        lines = (ROOT / HISTORICAL).read_text(encoding="utf-8").splitlines()
+        historical_bytes = (ROOT / HISTORICAL).read_bytes()
+        self.assertEqual(HISTORICAL_SHA, hashlib.sha256(historical_bytes).hexdigest())
+        lines = historical_bytes.decode("utf-8").splitlines()
         targets = [s.split("\t", 1)[0] for s in lines if s and not s.startswith("#")]
         self.assertEqual(5, len(targets))
         for path in [HISTORICAL, SUCCESSOR, *targets]:
@@ -92,6 +95,16 @@ class ResourceLocksSupersetCustodyTests(unittest.TestCase):
         result = self.run_gate()
         self.assertNotEqual(0, result.returncode)
         self.assertIn("M3 source drifted from Synexia recipe result", result.stderr)
+
+    def test_forged_historical_qualification_is_refused(self):
+        path = self.root / HISTORICAL
+        text = path.read_text(encoding="utf-8")
+        self.assertIn("PENDING_RECIPE_AND_PRODUCT_CI", text)
+        path.write_text(text.replace("PENDING_RECIPE_AND_PRODUCT_CI",
+                                     "QUALIFIED", 1), encoding="utf-8")
+        result = self.run_gate()
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("M3 historical source handoff receipt drifted", result.stderr)
 
     def test_forged_successor_qualification_is_refused(self):
         path = self.root / SUCCESSOR
