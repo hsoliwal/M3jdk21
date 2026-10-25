@@ -71,6 +71,8 @@
     "current_synexia_openrewrite": "PENDING_WORKFLOW",
     "source_built_jtreg_abi_gc_jmm": "NOT_RUN",
     "cpu_heap_native_performance": "NOT_RUN",
-    "licensing": "Existing Apache-2.0 OR EPL-2.0 source headers retained; external donor problem references only, no copied code"
+    "licensing": "Existing Apache-2.0 OR EPL-2.0 source headers retained; external donor problem references only, no copied code",
+    "current_public_jvm_abi_diff": "PENDING_WORKFLOW",
+    "current_public_jvm_abi_differential_proof": "javac original source Git blob c43ca5578521b8f0a2ab1305f5d4becdeabc772e from PR base, javap -public -s versus candidate compiled class"
   }
 }
