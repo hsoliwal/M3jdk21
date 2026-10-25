@@ -56,10 +56,34 @@ The six-row pinned `m3-indexed-live-views-20261021` manifest still has
 - `M3IndexedLiveView.java`: old `84e9437c27f59060543cd4728a5222b489fe98f7e39068e66f4431b7ee00867f`;
   current `2e5c00296e26186c071fc47d2e3bcd16315825c8404bf271eafa8cd597c268af`
 
-The last two have **not** been source-history-qualified in this pass.
-The older `indexed-live-views` workflow and merged-recipe handoff
-workflow therefore remain RED and should retain their refusal behavior.
-Do not accept a plain current-hash allow-list as a code-loss proof.
+Source-history qualification of the other two paths is now complete at the
+Git blob/first-parent level. This establishes **serial source custody**, not
+algorithmic equivalence, behavior, installed-JDK acceptance or a waiver of
+strict historical pin checks.
+
+### M3IndexedListSnapshot: two checked successor transitions
+
+| Step | Commit | File Git blob | File SHA-256 | Parent proof |
+| --- | --- | --- | --- | --- |
+| Original indexed-view postimage | `e6fb590b4e5734f3a2878b3325c18b19e5f79850` | `27c56be2bd960ea9de139766ab40960bdbe91b0a` | `c59c2aaa40ef12712b7a5c3ab8af0173a63ae6b995fd4b71695bd61e312d7bff` | Exactly matches original pinned receiver manifest |
+| Comparator-preserving groupmask sort | `4a22d79e92819cd8553a62535688d51a375c7e87` | `6a7cbf805ca8aba1c121eab31fce9c682ca62c51` | `09594e9b2116889f9ca4065fabadf4d7dc4e2d9bae8a506d277f49fdc5ea362f` | Parent `517cc01280aa82bc4e2fbdbe32c9a46399050cb4` contains exact prior `27c56be2...` blob |
+| Constant-word predecessor groupmask | `db09d4871bd9db9121dde75b0de95464a01b5b74` | `d12e15f41fe17069739a1cdbca1728ee8286d9c4` | `43e9eb81a6828137668e597accbe347a315146d278f423e91fab5754af7f1431` | Parent `183f90adfe65ec6bd11c229038cc1522d6d8f6c2` contains exact prior `6a7cbf80...` blob |
+
+### M3IndexedLiveView: checked callback-epoch successor
+
+| Step | Commit | File Git blob | File SHA-256 | Parent proof |
+| --- | --- | --- | --- | --- |
+| Original indexed live-view postimage | `96ed69208e05829e2a0c082aab0231a678fe04ec` | `d710423f42f656b6ab5008076b6f3831118b5b12` | `84e9437c27f59060543cd4728a5222b489fe98f7e39068e66f4431b7ee00867f` | Exactly matches original pinned receiver manifest |
+| Callback epoch and recursive-view guard | `64f0eddbf64f3d92f42721e629c9a274ea1d0ce4` | `fbaa5cd8b1603c1fbc75e2a6dc4e484bd4c43f0f` | `2e5c00296e26186c071fc47d2e3bcd16315825c8404bf271eafa8cd597c268af` | Parent `fee49d6f6197dc62c35ee741f564a8898cd2c5ba` contains exact prior `d710423...` blob |
+
+**Acceptance boundary:** All three mismatching indexed-view rows now have
+explained source-identity successions, including the `M3ArrayList` chain
+above. The old six-row manifest must remain immutable and its original
+postimage checks must continue to reject nonmatching bytes until an
+independent lineage-aware verifier validates the exact full chain, unchanged
+public signatures and applicable runtime behavior. The same applies to the
+historical `M3ResourceLocks` diamond. No current hash alone proves code
+preservation; no JDK or JNI gate is waived.
 
 The newer M3JDK21 #1908 runtime-integrated `java.base` collection/JNI pass
 and #1881 standalone collections receiving pass have disjoint current
