@@ -34,6 +34,7 @@
     <profile>
       <id>m3-extended</id>
       <modules>
+        <module>arrays</module>
         <module>collections</module>
         <module>viewport-core</module>
       </modules>
