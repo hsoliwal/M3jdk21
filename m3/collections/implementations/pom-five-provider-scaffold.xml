@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.m3.collections</groupId><artifactId>m3-five-provider-scaffold-aggregator</artifactId><version>0.1.0-SNAPSHOT</version><packaging>pom</packaging>
   <name>M3 five-provider scaffold aggregator</name>
-  <description>124 SCAFFOLD modules generated from INVENTORY.tsv OPEN rows; none is an owned implementation.</description>
+  <description>123 SCAFFOLD modules generated from INVENTORY.tsv OPEN rows; none is an owned implementation.</description>
   <modules>
     <module>apache-abstract-hashed-map</module>
     <module>apache-array-list-valued-linked-hash-map</module>
@@ -42,7 +42,6 @@
     <module>apache-multi-value-map</module>
     <module>apache-node-caching-linked-list</module>
     <module>apache-ordered-properties</module>
-    <module>apache-passive-expiring-map</module>
     <module>apache-patricia-trie</module>
     <module>apache-predicated-bag</module>
     <module>apache-predicated-collection</module>
