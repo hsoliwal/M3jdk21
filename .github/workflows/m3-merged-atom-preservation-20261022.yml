@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - 'm3/file/**'
+      - 'm3/docs/synexia-m3jdk21-eclipse-source-superset-20261025.tsv'
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/history/**'
@@ -15,6 +16,7 @@ on:
       - m3/restore-merged-atoms-ci-20261022
     paths:
       - 'm3/file/**'
+      - 'm3/docs/synexia-m3jdk21-eclipse-source-superset-20261025.tsv'
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/history/**'
@@ -34,6 +36,8 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Exercise missing, drifted and forged-recipe negative oracles
         run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
+      - name: Exercise M3ResourceLocks rollback and forged-successor negative oracles
+        run: python3 -m unittest discover -s m3/history -p 'test_resource_locks_superset_custody_20261025.py' -v
       - name: Reject disappearing merged product atoms
         run: python3 m3/history/verify-merged-atoms-preservation-20261022.py --root .
       - name: Verify product source SHA-256 matches canonical Synexia handoff receipts
@@ -46,11 +50,33 @@ jobs:
           from pathlib import Path
           root = Path.cwd().resolve()
           receipt = root / "m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
+          historical_sha256 = "d6ad65fcb48f9a80b71acda82baa4cfcfce9438c87eae207d346e71ce2c74bba"
+          if hashlib.sha256(receipt.read_bytes()).hexdigest() != historical_sha256:
+              raise SystemExit("M3 historical source handoff receipt drifted")
           lines = [line for line in receipt.read_text(encoding="utf-8").splitlines()
                    if line and not line.startswith("#")]
+          LOCKS_PATH = "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java"
+          OLD_LOCKS_SHA = "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599"
+          NEW_LOCKS_SHA = "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718"
+          successor_path = root / "m3/docs/synexia-m3jdk21-eclipse-source-superset-20261025.tsv"
+          successor_rows = [x for x in successor_path.read_text(encoding="utf-8").splitlines()
+                            if x and not x.startswith("#")]
+          if len(successor_rows) != 1 or successor_rows[0].split("\t") != [
+                  "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java",
+                  "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599",
+                  "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718",
+                  "58bf5ea2d632c71a025460f43d8410fc67df5459",
+                  "f493038c3829def666664da3c2297fa7a0e9d877",
+                  "d2223b9da6a55a8097ea71f856bd86562b9dce83",
+                  "2f933b34fec44456c50bd7c7d04486d7f591263e",
+                  "PENDING_RECIPE_AND_PRODUCT_CI",
+                  "Apache-2.0"
+          ]:
+              raise SystemExit("unapproved M3ResourceLocks additive successor receipt")
           if len(lines) != 5:
               raise SystemExit("M3 product/source recipe handoff must cover five Java outputs")
           last = ""
+          approved_successors = 0
           for line in lines:
               cells = line.split("\t")
               if len(cells) != 8:
@@ -75,8 +101,19 @@ jobs:
                   raise SystemExit("lost M3 product source: " + relative)
               actual = hashlib.sha256(file.read_bytes()).hexdigest()
               if actual != expected:
-                  raise SystemExit("M3 source drifted from Synexia recipe result: " + relative)
-          print("M3_PRODUCT_SOURCE_RECIPE_HANDOFF_PASS outputs=5")
+                  if (relative != LOCKS_PATH or expected != OLD_LOCKS_SHA
+                          or actual != NEW_LOCKS_SHA):
+                      raise SystemExit("M3 source drifted from Synexia recipe result: " + relative)
+                  content = file.read_text(encoding="utf-8")
+                  if ("public M3ResourceLocks() { }" not in content
+                          or "import java.util.concurrent.TimeUnit;" not in content
+                          or "public Lease tryAcquire(Scope scope, long timeout, TimeUnit unit)" not in content):
+                      raise SystemExit("M3ResourceLocks historical constructor/timed API disappeared")
+                  approved_successors += 1
+                  print("M3_RESOURCE_LOCKS_ADDITIVE_SUCCESSOR_PENDING source=" + relative)
+          if approved_successors != 1:
+              raise SystemExit("required M3ResourceLocks additive successor missing")
+          print("M3_PRODUCT_SOURCE_RECIPE_HANDOFF_PASS historical_rows=5 approved_additive_successors=1")
           PY
       - name: Reject new transformation recipe sources in the downstream product
         if: github.event_name == 'pull_request'
