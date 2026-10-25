@@ -7,6 +7,8 @@ on:
     paths:
       - 'src/java.base/share/classes/java/util/regex/**'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java'
       - 'test/jdk/java/util/regex/M3RegexShortCircuitTest.java'
       - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
       - 'test/jdk/java/util/regex/M3PatternStateMaskTest.java'
@@ -45,6 +47,7 @@ jobs:
           b5463d8e126b9a70dc874f181674f79f2484f6677fb30b864654d9b62fa25614  test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java
           8682503c6c38d2c8cf4837f9188fa609ddfdb9e4c3e59e595da87d93c4e40028  test/jdk/java/util/regex/M3RegexShortCircuitTest.java
           c0e67fad7a03fe6558ddeb31442b3c2c6a916ded8563572a632da3934d348318  test/jdk/java/util/regex/M3RegexCompactPlanTest.java
+          2b454b05aa5f6157795d0f2b329e6f414a9b2e507a625721cf09eabfd7993370  test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java
           SEALED
           while read -r expected path; do
             test -f "$path"
@@ -63,7 +66,7 @@ jobs:
           670ed47d9e6e3f57a29dbf4628a0791158e29960 m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json
           5c39dc53d3bbd80eada25f74b960e22391eeecb6 src/java.base/share/classes/java/util/CollectionViews.java
           e6059aeb9b2e7f332fb0baea2684395c268a5414 src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
-          885f237a80cdd5997a852609fa60066d0f7d11c4 src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+          1dec3dbe282a53f20c3c70458d949ac3f7df53b5 src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
           b9c942d354189c26ed0848d7dd73f21754838049 src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java
           59b2130ca8e897e75e24afbd45e8fd885c55b0e9 src/java.base/share/native/libjava/M3IndexMaskWindow.c
           PRESERVED
@@ -102,6 +105,7 @@ jobs:
           "$home/bin/java" -version
           "$home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all,-serial -Werror \
             --add-modules jdk.management \
+            --add-exports java.base/jdk.internal.access=ALL-UNNAMED \
             --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
             --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
             -d "$out/tests" \
@@ -113,6 +117,7 @@ jobs:
             test/jdk/java/util/regex/M3RegexReuseTest.java \
             test/jdk/java/util/regex/M3RegexLiteralTQTest.java \
             test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
+            test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java \
             test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java \
             test/jdk/java/util/CollectionViews/CollectionViewsContract.java \
             test/jdk/java/util/CollectionViews/RunSearchJni.java \
@@ -154,6 +159,7 @@ jobs:
             -cp "$out/tests" M3PatternQueryTest
           "$home/bin/java" -Xmx768m -Xcheck:jni --add-modules jdk.management \
             --add-opens java.base/java.util.regex=ALL-UNNAMED \
+            --add-exports java.base/jdk.internal.access=ALL-UNNAMED \
             --add-opens java.base/java.lang=ALL-UNNAMED \
             -cp "$out/tests" M3RegexReuseTest
           "$home/bin/java" -Xmx768m -Xcheck:jni \
@@ -165,7 +171,7 @@ jobs:
           set -euo pipefail
           out="$RUNNER_TEMP/m3-integrated"
           home="$(cat "$out/image.txt")"
-          for name in M3IndexedArrayTest M3StateMaskedIndexedViewTest; do
+          for name in M3IndexedArrayTest M3StateMaskedIndexedViewTest M3IndexedViewLifecycleTest; do
             "$home/bin/java" -Xcheck:jni \
               --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
               -cp "$out/tests" "$name"
