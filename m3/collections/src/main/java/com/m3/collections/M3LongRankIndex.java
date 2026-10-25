@@ -254,6 +254,30 @@ public final class M3LongRankIndex {
                 queryFrom, length, output, outputFrom);
     }
 
+    /**
+     * LeetCode #350 sorted-two-pointer category: occurrence-aware intersection
+     * cardinality for immutable M3 rank snapshots. Each matching duplicate
+     * consumes one occurrence from each owner, so the result is the sum of
+     * minimum frequencies. No sorting, boxing or per-entry allocations occur.
+     *
+     * <p>The Java atom is the default; explicitly enabled large batches use
+     * the existing bounded-page m3rankbatch JNI library.</p>
+     */
+    public long intersectionCount(M3LongRankIndex other) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.intersectionCount(values, other.values);
+    }
+
+    /**
+     * Multiset union cardinality, counting each value's maximum multiplicity.
+     * Long arithmetic is required because two legal int-sized owners can have
+     * a combined cardinality exceeding Integer.MAX_VALUE.
+     */
+    public long unionCount(M3LongRankIndex other) {
+        Objects.requireNonNull(other, "other");
+        return (long) values.length + other.values.length - intersectionCount(other);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(

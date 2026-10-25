@@ -355,3 +355,65 @@ Java_com_m3_collections_M3LongRankBatchNative_rangeCountInto0(
         completed += batch;
     }
 }
+
+/*
+ * LeetCode #350 two-pointer intersection, counting min occurrence frequencies.
+ * Existing M3 m3rankbatch JNI owner; one native transition. Two bounded
+ * 256-long pages use 4096 bytes stack, never pin or materialize an entire
+ * Java payload, retain object addresses, or cross into user callbacks.
+ */
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_intersectionCount0(
+        JNIEnv *env, jclass ignored, jlongArray left, jlongArray right) {
+    (void) ignored;
+    if (left == NULL || right == NULL) {
+        jclass error = (*env)->FindClass(env, "java/lang/NullPointerException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "null sorted rank lane");
+        return 0;
+    }
+    jsize left_size = (*env)->GetArrayLength(env, left);
+    jsize right_size = (*env)->GetArrayLength(env, right);
+    if (left_size == 0 || right_size == 0) return 0;
+
+    enum { M3_INTERSECTION_PAGE = 256 };
+    jlong left_page[M3_INTERSECTION_PAGE];
+    jlong right_page[M3_INTERSECTION_PAGE];
+    jsize left_at = 0, right_at = 0;
+    jsize left_page_at = 0, right_page_at = 0;
+    jsize left_page_len = 0, right_page_len = 0;
+    jlong matches = 0;
+    while (left_at < left_size && right_at < right_size) {
+        if (left_page_at == left_page_len) {
+            jsize count = left_size - left_at;
+            if (count > M3_INTERSECTION_PAGE) count = M3_INTERSECTION_PAGE;
+            (*env)->GetLongArrayRegion(env, left, left_at, count, left_page);
+            if ((*env)->ExceptionCheck(env)) return 0;
+            left_page_at = 0;
+            left_page_len = count;
+        }
+        if (right_page_at == right_page_len) {
+            jsize count = right_size - right_at;
+            if (count > M3_INTERSECTION_PAGE) count = M3_INTERSECTION_PAGE;
+            (*env)->GetLongArrayRegion(env, right, right_at, count, right_page);
+            if ((*env)->ExceptionCheck(env)) return 0;
+            right_page_at = 0;
+            right_page_len = count;
+        }
+        jlong a = left_page[left_page_at];
+        jlong b = right_page[right_page_at];
+        if (a < b) {
+            left_at++;
+            left_page_at++;
+        } else if (a > b) {
+            right_at++;
+            right_page_at++;
+        } else {
+            matches++;
+            left_at++;
+            right_at++;
+            left_page_at++;
+            right_page_at++;
+        }
+    }
+    return matches;
+}

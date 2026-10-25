@@ -14,6 +14,7 @@ import java.util.Objects;
  */
 public final class M3LongRankBatchNative {
     private static final int NATIVE_MIN_BATCH = 64;
+    private static final int NATIVE_MIN_INTERSECTION = 128;
     private static final int MODE_UPPER = 1;
     private static final int MODE_COUNT = 2;
     private static final boolean AVAILABLE = loadOptIn();
@@ -201,6 +202,40 @@ public final class M3LongRankBatchNative {
         return lo;
     }
 
+    /**
+     * LeetCode #350 category: multiset intersection cardinality over two
+     * already-sorted signed-long owners. Two physical cursors retain duplicate
+     * occurrence multiplicities without a Map.Entry or boxed result.
+     *
+     * <p>Both inputs must be immutable, sorted snapshots for the duration of
+     * the call. The optional native owner is the existing m3rankbatch library:
+     * one JNI transition and two fixed 256-long scratch pages, not retained
+     * array pointers or a copied full payload.</p>
+     */
+    static long intersectionCount(long[] left, long[] right) {
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        if (left.length == 0 || right.length == 0) return 0L;
+        if (AVAILABLE && Math.min(left.length, right.length) >= NATIVE_MIN_INTERSECTION) {
+            return intersectionCount0(left, right);
+        }
+        int i = 0;
+        int j = 0;
+        long matches = 0L;
+        while (i < left.length && j < right.length) {
+            if (left[i] < right[j]) {
+                i++;
+            } else if (left[i] > right[j]) {
+                j++;
+            } else {
+                matches++;
+                i++;
+                j++;
+            }
+        }
+        return matches;
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -222,4 +257,6 @@ public final class M3LongRankBatchNative {
 
     private static native void rangeCountInto0(long[] sorted, long[] fromInclusive,
             long[] toExclusive, int queryFrom, int length, int[] output, int outputFrom);
+
+    private static native long intersectionCount0(long[] left, long[] right);
 }
