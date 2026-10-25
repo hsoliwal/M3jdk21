@@ -20,18 +20,27 @@
     {
       "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
       "before_git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
-      "after_git_blob_sha1": "4e5089656f7187773054026e93d82f08ced148db",
+      "after_git_blob_sha1": "01b301c99ebb114fa69d3d341d27823250ee8429",
       "before_sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
-      "after_sha256": "c3fef0d10353861799e84ae8dbbfd45939232301bf203d6bfe038e547779e173",
-      "role": "primitive_array_native_window_commit"
+      "after_sha256": "e580548398c8c9632c639c9dd94b4f8dc9bcd00d7e676f980d65a2b38aebffb0",
+      "role": "primitive_array_native_window_commit",
+      "previous_draft_postimage": {
+        "git_blob_sha1": "4e5089656f7187773054026e93d82f08ced148db",
+        "sha256": "c3fef0d10353861799e84ae8dbbfd45939232301bf203d6bfe038e547779e173",
+        "reason": "superseded to preserve exact old Java exception-order evaluation"
+      }
     },
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCommitAtomicityTest.java",
       "before_git_blob_sha1": null,
-      "after_git_blob_sha1": "03135f67029a6467a109bab9624897622a41bd68",
+      "after_git_blob_sha1": "404498b830456217a0960d25d52574d5d7f35229",
       "before_sha256": "ABSENT",
-      "after_sha256": "f65f1d115ddd7cb362f495722dbe87ef81a0ed7003194414e9a501ab66109754",
-      "role": "JUnit regression postimage"
+      "after_sha256": "0e3b20ea0a58442bb0de3fe22bab4d854a676a028593e72bf5605b54711ec8d6",
+      "role": "JUnit regression postimage",
+      "previous_draft_postimage": {
+        "git_blob_sha1": "03135f67029a6467a109bab9624897622a41bd68",
+        "sha256": "f65f1d115ddd7cb362f495722dbe87ef81a0ed7003194414e9a501ab66109754"
+      }
     }
   ],
   "catalogue": {
@@ -42,13 +51,13 @@
   "history": {
     "parent_pr": "https://github.com/hsoliwal/M3jdk21/pull/1881",
     "previous_receiver": "m3/collections/qualification/arraylist-dual-word-20261023/RECEIVER_RECEIPT.json",
-    "previous_receiver_blob_sha1": "e35d5f0acb0e64f1d1677e3635d763e914eaa86c",
+    "previous_receiver_blob_sha1": "127012e84205b84911dd2b77b73f095ae4de0ff9",
     "previous_source_postimage_git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
     "historical_preimage_preserved": true
   },
   "atom": {
     "category": "FAILURE_ATOMIC_NATIVE_COMMIT",
-    "preflight": "validate int lanes and all new long handles before clearing or rebuilding committed primitive indexes",
+    "preflight": "single original-order scan: native handle zero check then parent/child/physical coordinate reads, before clearing committed maps",
     "complexity": "O(n) preflight + existing O(n) publication, O(1) extra heap",
     "keeps": [
       "original long[] native handles",
@@ -56,7 +65,8 @@
       "original M3LongLongHashMap ownership",
       "same successful commit order and public signatures",
       "IllegalArgumentException zero-native-handle diagnostic",
-      "ArrayIndexOutOfBoundsException for truncated input lane"
+      "ArrayIndexOutOfBoundsException for truncated input lane",
+      "mixed-invalid Java exception type, message and per-row priority"
     ],
     "intentionally_not_added": [
       "new public Java SE API",
@@ -70,10 +80,15 @@
     "git_blob_postimage_readback": "PASS",
     "source_and_test_sha256_manifest": "PINNED_PENDING_SOURCE_BUILD",
     "synexia_openrewrite_replay": "PENDING_CI",
-    "jdk21_maven_regression": "PENDING_CI",
+    "jdk21_maven_regression": "PENDING_CI_FIVE_JUNIT_CASES",
     "source_built_full_m3jdk21_jtreg": "NOT_RUN",
     "swt_native_window_runtime": "NOT_RUN",
-    "cpu_heap_native_benchmark": "NOT_RUN"
+    "cpu_heap_native_benchmark": "NOT_RUN",
+    "isolated_invalid_lane_order": {
+      "status": "PASSED_JAVA21_STANDALONE_MODEL",
+      "cases": 2000,
+      "scope": "old/new Java-language read/exception parity, not a complete original product build"
+    }
   },
   "admission": "DRAFT_REVIEW_NOT_RUNTIME_PROMOTED"
 }
