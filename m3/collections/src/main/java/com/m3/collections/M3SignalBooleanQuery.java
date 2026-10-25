@@ -294,6 +294,32 @@ public final class M3SignalBooleanQuery {
         }
 
         /**
+         * Exact nearest-neighbor ranking of matching rows, using the existing
+         * integer-distance owner's unsigned 128-bit primitive metric and heap.
+         * A plan from a different schema is refused even if row counts and SHA
+         * values coincide. This does not certify semantic/object equivalence.
+         */
+        public int[] evaluateNearest(int sourceRow, int limit,
+                M3SignalExactIntegerDistance metric, long version, String digest) {
+            return evaluateNearest(sourceRow, limit, metric, version, digest, null);
+        }
+
+        /** Poll cancellation without resetting the enclosing M3 progress task. */
+        public int[] evaluateNearest(int sourceRow, int limit,
+                M3SignalExactIntegerDistance metric, long version, String digest,
+                M3ProgressMonitor monitor) {
+            Objects.requireNonNull(metric, "exact integer metric");
+            if (limit < 0) throw new IllegalArgumentException("negative nearest result limit");
+            if (!metric.ownsSchema(schema)) {
+                throw new IllegalArgumentException("foreign signal-image integer metric");
+            }
+            requireFresh(version, digest);
+            Objects.checkIndex(sourceRow, rows);
+            return executeWindow(0, limit, version, digest,
+                    monitor, null, metric, sourceRow).rows;
+        }
+
+        /**
          * One page in ascending physical-row order, including the complete exact
          * match count. The answer owns its row storage; the caller cannot rewrite
          * the underlying computed page. Pagination is tied to the original source
@@ -337,6 +363,13 @@ public final class M3SignalBooleanQuery {
 
         private Window executeWindow(int skip, int limit, long version,
                 String sourceSha256, M3ProgressMonitor monitor, M3SignalTopK ranking) {
+            return executeWindow(skip, limit, version, sourceSha256,
+                    monitor, ranking, null, -1);
+        }
+
+        private Window executeWindow(int skip, int limit, long version,
+                String sourceSha256, M3ProgressMonitor monitor, M3SignalTopK ranking,
+                M3SignalExactIntegerDistance metric, int sourceRow) {
             if (skip < 0 || limit < 0) {
                 throw new IllegalArgumentException("negative signal query page coordinate");
             }
@@ -408,10 +441,15 @@ public final class M3SignalBooleanQuery {
                 if (monitor != null && (wordIndex & 1023) == 0) monitor.checkCanceled();
                 count = Math.addExact(count, Long.bitCount(stack[0][wordIndex]));
             }
-            int from = ranking == null ? Math.min(skip, count) : 0;
+            int from = ranking == null && metric == null ? Math.min(skip, count) : 0;
             int selected = Math.min(limit, count - from);
             final int[] answer;
-            if (ranking != null) {
+            if (metric != null) {
+                // Reuse the original exact unsigned 128-bit metric heap directly
+                // from the Boolean membership lane, without a selected int[].
+                answer = metric.nearestByMaskWithinTask(sourceRow, stack[0],
+                        selected, version, sourceSha256, monitor);
+            } else if (ranking != null) {
                 // Reuse original primitive Top-K heap on the bitmap; no full
                 // physical-row selection array is generated for ranked results.
                 answer = ranking.topKByMask(stack[0], selected);
