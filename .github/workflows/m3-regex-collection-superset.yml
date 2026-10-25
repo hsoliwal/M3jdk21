@@ -8,6 +8,8 @@ on:
       - 'src/java.base/share/classes/java/util/regex/**'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
       - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'src/java.base/share/native/libjava/M3IndexMaskWindow.c'
+      - 'test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java'
       - 'test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java'
       - 'test/jdk/java/util/regex/M3RegexShortCircuitTest.java'
       - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
@@ -48,6 +50,7 @@ jobs:
           8682503c6c38d2c8cf4837f9188fa609ddfdb9e4c3e59e595da87d93c4e40028  test/jdk/java/util/regex/M3RegexShortCircuitTest.java
           c0e67fad7a03fe6558ddeb31442b3c2c6a916ded8563572a632da3934d348318  test/jdk/java/util/regex/M3RegexCompactPlanTest.java
           2b454b05aa5f6157795d0f2b329e6f414a9b2e507a625721cf09eabfd7993370  test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java
+          b8995aa7be1bb74aa55b4f843e6d1fffe05222991a612adb01871547e83d5647  test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java
           SEALED
           while read -r expected path; do
             test -f "$path"
@@ -68,7 +71,7 @@ jobs:
           e6059aeb9b2e7f332fb0baea2684395c268a5414 src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
           1dec3dbe282a53f20c3c70458d949ac3f7df53b5 src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
           b9c942d354189c26ed0848d7dd73f21754838049 src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java
-          59b2130ca8e897e75e24afbd45e8fd885c55b0e9 src/java.base/share/native/libjava/M3IndexMaskWindow.c
+          69e6cb5c540934ca35b9c36b5c9fe2592f0f86d7 src/java.base/share/native/libjava/M3IndexMaskWindow.c
           PRESERVED
       - name: Native JDK21 build dependencies
         shell: bash
@@ -118,6 +121,7 @@ jobs:
             test/jdk/java/util/regex/M3RegexLiteralTQTest.java \
             test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
             test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java \
+            test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java \
             test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java \
             test/jdk/java/util/CollectionViews/CollectionViewsContract.java \
             test/jdk/java/util/CollectionViews/RunSearchJni.java \
@@ -171,7 +175,7 @@ jobs:
           set -euo pipefail
           out="$RUNNER_TEMP/m3-integrated"
           home="$(cat "$out/image.txt")"
-          for name in M3IndexedArrayTest M3StateMaskedIndexedViewTest M3IndexedViewLifecycleTest; do
+          for name in M3IndexedArrayTest M3StateMaskedIndexedViewTest M3IndexedViewLifecycleTest M3NativeCountBatchingTest; do
             "$home/bin/java" -Xcheck:jni \
               --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
               -cp "$out/tests" "$name"

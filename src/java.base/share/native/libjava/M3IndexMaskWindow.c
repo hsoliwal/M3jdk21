@@ -1,12 +1,15 @@
+/* Modified 2026-10-25: separate bounded count transfers from selection batching. */
 /* Modified 2026 by Hitesh Soliwal and contributors: trim JNI row spans to admitted ordinals. */
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 /* Internal mask-window ABI in the JDK-owned libjava shared library.
- * Fixed 128-element JNI regions; no persistent pins, Java callbacks, or native heap storage.
+ * Fixed selection/count JNI regions; no persistent pins, callbacks, or native heap storage.
  */
 #include "jdk_internal_m3_M3IndexMaskWindow.h"
 #include <stdint.h>
 
 #define M3_MASK_WINDOW_CHUNK 128
+/* Count has no row/output scratch; amortize JNI copies within a fixed1KiB budget. */
+#define M3_MASK_COUNT_CHUNK 1024
 #define M3_MASK_WINDOW_MAX 4096
 
 static jlong m3_window_result(jint next, jint written) {
@@ -180,7 +183,7 @@ static jint m3_window_count_matches(const jbyte *marks, jint take,
     return count;
 }
 
-/* Additive count ABI: only bounded state reads, 128 scratch bytes plus locals.
+/* Additive count ABI: only bounded state reads, 1024 scratch bytes plus locals.
  * No row-ID reads, output writes, allocation, callbacks or critical-array pins. */
 JNIEXPORT jlong JNICALL
 Java_jdk_internal_m3_M3IndexMaskWindow_countBoundedNative(
@@ -199,11 +202,11 @@ Java_jdk_internal_m3_M3IndexMaskWindow_countBoundedNative(
     }
     if ((required & excluded) != 0) return m3_window_result(end, 0);
     if ((required | excluded) == 0) return m3_window_result(end, end - first);
-    jbyte marks[M3_MASK_WINDOW_CHUNK];
+    jbyte marks[M3_MASK_COUNT_CHUNK];
     jint count = 0;
     for (jint next = first; next < end;) {
         jint take = end - next;
-        if (take > M3_MASK_WINDOW_CHUNK) take = M3_MASK_WINDOW_CHUNK;
+        if (take > M3_MASK_COUNT_CHUNK) take = M3_MASK_COUNT_CHUNK;
         (*env)->GetByteArrayRegion(env, states, next, take, marks);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
         count += m3_window_count_matches(marks, take, required, excluded);
