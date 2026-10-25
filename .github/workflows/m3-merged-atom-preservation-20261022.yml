@@ -36,6 +36,8 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Exercise missing, drifted and forged-recipe negative oracles
         run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
+      - name: Exercise M3ResourceLocks rollback and forged-successor negative oracles
+        run: python3 -m unittest discover -s m3/history -p 'test_resource_locks_superset_custody_20261025.py' -v
       - name: Reject disappearing merged product atoms
         run: python3 m3/history/verify-merged-atoms-preservation-20261022.py --root .
       - name: Verify product source SHA-256 matches canonical Synexia handoff receipts
@@ -71,6 +73,7 @@ jobs:
           if len(lines) != 5:
               raise SystemExit("M3 product/source recipe handoff must cover five Java outputs")
           last = ""
+          approved_successors = 0
           for line in lines:
               cells = line.split("\t")
               if len(cells) != 8:
@@ -103,7 +106,10 @@ jobs:
                           or "import java.util.concurrent.TimeUnit;" not in content
                           or "public Lease tryAcquire(Scope scope, long timeout, TimeUnit unit)" not in content):
                       raise SystemExit("M3ResourceLocks historical constructor/timed API disappeared")
+                  approved_successors += 1
                   print("M3_RESOURCE_LOCKS_ADDITIVE_SUCCESSOR_PENDING source=" + relative)
+          if approved_successors != 1:
+              raise SystemExit("required M3ResourceLocks additive successor missing")
           print("M3_PRODUCT_SOURCE_RECIPE_HANDOFF_PASS historical_rows=5 approved_additive_successors=1")
           PY
       - name: Reject new transformation recipe sources in the downstream product
