@@ -18,6 +18,7 @@ public final class M3LongRankBatchNative {
     private static final int MODE_UPPER = 1;
     private static final int MODE_COUNT = 2;
     private static volatile boolean WINDOW_ABI_MISSING;
+    private static volatile boolean INTERSECTION_VALUES_ABI_MISSING;
     private static final boolean AVAILABLE = loadOptIn();
 
     private M3LongRankBatchNative() { }
@@ -300,6 +301,72 @@ public final class M3LongRankBatchNative {
         return count;
     }
 
+    /**
+     * LeetCode #349/#350 categories: detached sorted intersection values over
+     * two immutable primitive lanes. In distinct mode each shared value appears
+     * once; otherwise min(freq(left), freq(right)) occurrences are retained.
+     * No per-element object, callback, retained JNI pointer or payload sort.
+     *
+     * <p>Existing native libraries without the new symbol safely use the Java
+     * two-pointer oracle. Native-required calls never hide a missing symbol.</p>
+     */
+    static long[] intersectionValues(long[] left, long[] right, boolean distinct) {
+        return intersectionValues(left, right, distinct, false);
+    }
+
+    static long[] intersectionValues(long[] left, long[] right,
+                                     boolean distinct, boolean nativeRequired) {
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        if (nativeRequired) {
+            if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch intersection-value ABI unavailable");
+            return intersectionValues0(left, right, distinct);
+        }
+        if (left.length == 0 || right.length == 0) return new long[0];
+        if (AVAILABLE && !INTERSECTION_VALUES_ABI_MISSING
+                && Math.min(left.length, right.length) >= NATIVE_MIN_INTERSECTION) {
+            try {
+                return intersectionValues0(left, right, distinct);
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                INTERSECTION_VALUES_ABI_MISSING = true;
+            }
+        }
+        int count = intersectionValuesJavaScan(left, right, distinct, null);
+        long[] result = new long[count];
+        if (intersectionValuesJavaScan(left, right, distinct, result) != count) {
+            throw new IllegalStateException("sorted intersection changed between count and emission");
+        }
+        return result;
+    }
+
+    private static int intersectionValuesJavaScan(long[] left, long[] right,
+                                                   boolean distinct, long[] result) {
+        int i = 0, j = 0, write = 0;
+        long previous = 0L;
+        boolean seen = false;
+        while (i < left.length && j < right.length) {
+            long a = left[i], b = right[j];
+            if (a < b) i++;
+            else if (a > b) j++;
+            else {
+                if (!distinct || !seen || previous != a) {
+                    if (result != null) {
+                        if (write >= result.length) {
+                            throw new IllegalStateException(
+                                    "sorted intersection grew between count and emission");
+                        }
+                        result[write] = a;
+                    }
+                    write++;
+                    previous = a;
+                    seen = true;
+                }
+                i++; j++;
+            }
+        }
+        return write;
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -328,4 +395,7 @@ public final class M3LongRankBatchNative {
     static native long intersectionWindowCount0(long[] left, int leftFrom,
             int leftLength, long[] right, int rightFrom, int rightLength,
             boolean distinct);
+
+    /** Additive same-library JNI ABI: count and emit values in 256-long pages. */
+    static native long[] intersectionValues0(long[] left, long[] right, boolean distinct);
 }

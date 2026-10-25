@@ -510,3 +510,111 @@ Java_com_m3_collections_M3LongRankBatchNative_intersectionWindowCount0(
     }
     return count;
 }
+
+/*
+ * LeetCode #349 / #350: exact sorted-set or multiset intersection values.
+ * One JNI call, two linear passes for exact output size, and bounded primitive
+ * windows. Moving-GC object pointers are never acquired or retained.
+ */
+enum { M3_INTERSECTION_VALUES_PAGE = 256 };
+
+static jsize m3_intersection_values_scan(JNIEnv *env, jlongArray left, jsize left_size,
+        jlongArray right, jsize right_size, jboolean distinct,
+        jlongArray output, jsize output_capacity) {
+    jlong left_page[M3_INTERSECTION_VALUES_PAGE];
+    jlong right_page[M3_INTERSECTION_VALUES_PAGE];
+    jlong result_page[M3_INTERSECTION_VALUES_PAGE];
+    jsize left_at = 0, right_at = 0;
+    jsize left_cursor = 0, right_cursor = 0;
+    jsize left_loaded = 0, right_loaded = 0;
+    jsize produced = 0;
+    jlong previous = 0;
+    int seen = 0;
+    while (left_at < left_size && right_at < right_size) {
+        if (left_cursor == left_loaded) {
+            jsize batch = left_size - left_at;
+            if (batch > M3_INTERSECTION_VALUES_PAGE) batch = M3_INTERSECTION_VALUES_PAGE;
+            (*env)->GetLongArrayRegion(env, left, left_at, batch, left_page);
+            if ((*env)->ExceptionCheck(env)) return -1;
+            left_cursor = 0;
+            left_loaded = batch;
+        }
+        if (right_cursor == right_loaded) {
+            jsize batch = right_size - right_at;
+            if (batch > M3_INTERSECTION_VALUES_PAGE) batch = M3_INTERSECTION_VALUES_PAGE;
+            (*env)->GetLongArrayRegion(env, right, right_at, batch, right_page);
+            if ((*env)->ExceptionCheck(env)) return -1;
+            right_cursor = 0;
+            right_loaded = batch;
+        }
+        jlong a = left_page[left_cursor];
+        jlong b = right_page[right_cursor];
+        if (a < b) {
+            left_cursor++;
+            left_at++;
+        } else if (a > b) {
+            right_cursor++;
+            right_at++;
+        } else {
+            if (distinct != JNI_TRUE || !seen || previous != a) {
+                if (output != NULL) {
+                    if (produced >= output_capacity) {
+                        m3_window_throw(env, "java/lang/IllegalStateException",
+                                "sorted intersection grew between count and emission");
+                        return -1;
+                    }
+                    result_page[produced % M3_INTERSECTION_VALUES_PAGE] = a;
+                }
+                produced++;
+                previous = a;
+                seen = 1;
+                if (output != NULL && produced % M3_INTERSECTION_VALUES_PAGE == 0) {
+                    (*env)->SetLongArrayRegion(env, output,
+                            produced - M3_INTERSECTION_VALUES_PAGE,
+                            M3_INTERSECTION_VALUES_PAGE, result_page);
+                    if ((*env)->ExceptionCheck(env)) return -1;
+                }
+            }
+            left_cursor++;
+            right_cursor++;
+            left_at++;
+            right_at++;
+        }
+    }
+    if (output != NULL) {
+        jsize pending = produced % M3_INTERSECTION_VALUES_PAGE;
+        if (pending != 0) {
+            (*env)->SetLongArrayRegion(env, output, produced - pending, pending, result_page);
+            if ((*env)->ExceptionCheck(env)) return -1;
+        }
+    }
+    return produced;
+}
+
+JNIEXPORT jlongArray JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_intersectionValues0(
+        JNIEnv *env, jclass ignored, jlongArray left, jlongArray right,
+        jboolean distinct) {
+    (void) ignored;
+    if (left == NULL || right == NULL) {
+        m3_window_throw(env, "java/lang/NullPointerException", "null sorted intersection input");
+        return NULL;
+    }
+    jsize left_size = (*env)->GetArrayLength(env, left);
+    jsize right_size = (*env)->GetArrayLength(env, right);
+    if ((*env)->ExceptionCheck(env)) return NULL;
+    jsize count = m3_intersection_values_scan(
+            env, left, left_size, right, right_size, distinct, NULL, 0);
+    if (count < 0) return NULL;
+    jlongArray result = (*env)->NewLongArray(env, count);
+    if (result == NULL) return NULL;
+    jsize written = m3_intersection_values_scan(
+            env, left, left_size, right, right_size, distinct, result, count);
+    if (written < 0) return NULL;
+    if (written != count) {
+        m3_window_throw(env, "java/lang/IllegalStateException",
+                "sorted intersection changed between count and emission");
+        return NULL;
+    }
+    return result;
+}

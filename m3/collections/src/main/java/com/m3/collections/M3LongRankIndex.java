@@ -269,6 +269,19 @@ public final class M3LongRankIndex {
     }
 
     /**
+     * Returns detached signed-sorted intersection values with no boxing.
+     * Distinct mode implements the LeetCode #349 set-intersection category;
+     * duplicate-preserving mode implements #350 with min occurrence counts.
+     * The existing parent-owned snapshots never move or expose their arrays.
+     * Large prepared primitive intersections use the existing optional JNI
+     * m3rankbatch owner; missing native support remains a Java fallback.
+     */
+    public long[] intersectionValues(M3LongRankIndex other, boolean distinctValues) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.intersectionValues(values, other.values, distinctValues);
+    }
+
+    /**
      * Multiset union cardinality, counting each value's maximum multiplicity.
      * Long arithmetic is required because two legal int-sized owners can have
      * a combined cardinality exceeding Integer.MAX_VALUE.
