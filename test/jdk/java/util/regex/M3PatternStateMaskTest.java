@@ -4,13 +4,16 @@
  */
 /*
  * @test
- * @summary Short regex plans preserve compiled JDK predicate and UTF-16 semantics
+ * @summary Scalar and wide regex masks preserve compiled JDK predicate and UTF-16 semantics
  * @run main/othervm --add-opens java.base/java.util.regex=ALL-UNNAMED M3PatternStateMaskTest candidate
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage --add-opens java.base/java.util.regex=ALL-UNNAMED M3PatternStateMaskTest candidate
  */
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Random;
@@ -30,6 +33,56 @@ public class M3PatternStateMaskTest {
         Field field = value.getClass().getDeclaredField(name);
         field.setAccessible(true);
         return field.get(value);
+    }
+    // The current owner eagerly prepares final ASCII metadata; the superseded lazy
+    // WordPlan lifecycle is not the contract of this scalar/wide implementation.
+    private static long states(int word, int first, int last, int localMinimum) {
+        long mask = 0L;
+        for (int bit = localMinimum; bit < Long.SIZE; bit++) {
+            int state = word * Long.SIZE + bit;
+            if (state >= first && state <= last) mask |= 1L << bit;
+        }
+        return mask;
+    }
+    private static long[] masks(Object plan, int count, boolean allRepeated) throws Exception {
+        Field field = plan.getClass().getDeclaredField("ascii");
+        check(Modifier.isFinal(field.getModifiers()), "final ASCII metadata " + count);
+        long[] actual = (long[]) read(plan, "ascii");
+        check(actual != null, "eager ASCII metadata " + count);
+        int words = count <= 63 ? 1 : (count >>> 6) + 1;
+        check(actual.length == (count <= 63 ? 136 : 137 * words), "mask layout " + count);
+        int firstRepeat = allRepeated ? 1 : count;
+        long scalarStars = count <= 63 ? states(0, firstRepeat, count, 0) : 0L;
+        check((long) read(plan, "repeatedStates") == scalarStars, "scalar stars " + count);
+        for (int word = 0; word < words; word++) {
+            for (int unit = 0; unit < 128; unit++) {
+                long expected = allRepeated
+                        ? (unit == 'a' ? states(word, 1, count, 0) : 0L)
+                        : (unit == 'a' ? states(word, 1, count - 1, 0)
+                           : unit == 'b' ? states(word, count, count, 0) : 0L);
+                check(actual[unit * words + word] == expected,
+                        "character plane " + count + "/" + word + "/" + unit);
+            }
+            for (int level = 0; level < 6; level++) {
+                int width = 1 << level;
+                // Enumerate each allowed destination. Wide planes close only within a
+                // word; the matcher handles the separate cross-word epsilon carry.
+                long expected = allRepeated ? states(word, width, count, count <= 63 ? 0 : width)
+                        : width == 1 ? states(word, count, count, count <= 63 ? 0 : 1) : 0L;
+                check(actual[(128 + level) * words + word] == expected,
+                        "epsilon plane " + count + "/" + word + "/" + width);
+            }
+            int lastEmpty = allRepeated || count == 1 ? count : 0;
+            check(actual[134 * words + word] == states(word, 0, lastEmpty, 0),
+                    "initial frontier " + count + "/" + word);
+            check(actual[135 * words + word] == states(word, count, count, 0),
+                    "accepting frontier " + count + "/" + word);
+            if (count > 63) {
+                check(actual[136 * words + word] == states(word, firstRepeat, count, 0),
+                        "wide stars " + count + "/" + word);
+            }
+        }
+        return actual;
     }
     private static void pair(Pattern pattern, String text) {
         boolean expected = pattern.matcher(new StringBuilder(text)).matches();
@@ -89,12 +142,18 @@ public class M3PatternStateMaskTest {
             Object plan = read(repeated, "m3BooleanPlan");
             check((plan != null) == (count <= 256), "DP admission " + count);
             if (candidate && plan != null) {
-                check(read(plan, "wordPlan") == null, "no table at compile " + count);
+                long[] prepared = masks(plan, count, true);
+                long[] beforeUses = prepared.clone();
                 for (int use = 0; use < 40; use++) repeated.asMatchPredicate().test("a");
-                check((read(plan, "wordPlan") != null) == (count <= 63), "word admission " + count);
+                check(read(repeated, "m3BooleanPlan") == plan, "same compiled plan " + count);
+                check(read(plan, "ascii") == prepared, "same prepared masks " + count);
+                check(Arrays.equals(prepared, beforeUses), "immutable prepared masks " + count);
             }
             for (String text : samples) pair(repeated, text);
             Pattern tail = Pattern.compile("a".repeat(count - 1) + "b*");
+            Object tailPlan = read(tail, "m3BooleanPlan");
+            check((tailPlan != null) == (count <= 256), "tail DP admission " + count);
+            if (candidate && tailPlan != null) masks(tailPlan, count, false);
             for (String text : List.of("a".repeat(count - 1), "a".repeat(count - 1) + "bbb", "a".repeat(count) + "b")) pair(tail, text);
         }
         Object shortPlan = read(Pattern.compile("a*b*"), "m3BooleanPlan");
