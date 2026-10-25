@@ -111,6 +111,62 @@ public final class M3LongRankBatchNative {
         boundBatchInto(sorted, queries, queryFrom, length, output, outputFrom, MODE_COUNT);
     }
 
+    /**
+     * Batched half-open interval counts for immutable signed-long sorted data.
+     *
+     * <p>Pairs are represented by parallel primitive arrays. Each [from, to)
+     * query is validated before the first output write, including empty-source
+     * queries. Pure primitive batches use one JNI transition above the existing
+     * minimum batch threshold; missing native support uses the Java oracle.
+     * No interval object, JNI callback, or native pointer escapes.</p>
+     */
+    static int[] rangeCounts(long[] sorted, long[] fromInclusive, long[] toExclusive) {
+        Objects.requireNonNull(fromInclusive, "fromInclusive");
+        Objects.requireNonNull(toExclusive, "toExclusive");
+        if (fromInclusive.length != toExclusive.length) {
+            throw new IllegalArgumentException("interval endpoint vector length mismatch");
+        }
+        int[] output = new int[fromInclusive.length];
+        rangeCountInto(sorted, fromInclusive, toExclusive, 0, output.length, output, 0);
+        return output;
+    }
+
+    static void rangeCountInto(long[] sorted, long[] fromInclusive, long[] toExclusive,
+                               int queryFrom, int length, int[] output, int outputFrom) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(fromInclusive, "fromInclusive");
+        Objects.requireNonNull(toExclusive, "toExclusive");
+        Objects.requireNonNull(output, "output");
+        if (fromInclusive.length != toExclusive.length) {
+            throw new IllegalArgumentException("interval endpoint vector length mismatch");
+        }
+        Objects.checkFromIndexSize(queryFrom, length, fromInclusive.length);
+        Objects.checkFromIndexSize(outputFrom, length, output.length);
+        // Prevalidate every interval before any output write. Strict [lo, hi):
+        // equal endpoints count zero; no hi+1 overflow at Long.MAX_VALUE.
+        for (int i = 0; i < length; i++) {
+            int at = queryFrom + i;
+            if (fromInclusive[at] > toExclusive[at]) {
+                throw new IllegalArgumentException("inverted half-open interval at " + at);
+            }
+        }
+        if (length == 0) return;
+        if (sorted.length == 0) {
+            Arrays.fill(output, outputFrom, outputFrom + length, 0);
+            return;
+        }
+        if (AVAILABLE && length >= NATIVE_MIN_BATCH) {
+            rangeCountInto0(sorted, fromInclusive, toExclusive,
+                    queryFrom, length, output, outputFrom);
+            return;
+        }
+        for (int i = 0; i < length; i++) {
+            int at = queryFrom + i;
+            output[outputFrom + i] = bound(sorted, toExclusive[at], false)
+                    - bound(sorted, fromInclusive[at], false);
+        }
+    }
+
     private static void boundBatchInto(long[] sorted, long[] queries, int queryFrom,
                                        int length, int[] output, int outputFrom, int mode) {
         Objects.requireNonNull(sorted, "sorted");
@@ -163,4 +219,7 @@ public final class M3LongRankBatchNative {
 
     private static native void boundBatchInto0(long[] sorted, long[] queries, int queryFrom,
             int length, int[] output, int outputFrom, int mode);
+
+    private static native void rangeCountInto0(long[] sorted, long[] fromInclusive,
+            long[] toExclusive, int queryFrom, int length, int[] output, int outputFrom);
 }

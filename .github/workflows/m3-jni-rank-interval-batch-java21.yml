@@ -1,0 +1,99 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical source: Synexia; actual Java/JNI product receiver: M3JDK21.
+name: M3JDK21 JNI primitive interval batch Java21 C17
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-jni-rank-interval-batch-java21.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3RankIntervalBatchContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3RankIntervalBatchTest.java'
+      - 'm3/collections/qualification/jni-rank-interval-batch-20261025/**'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-original-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Require exact Java and native source postimages
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '20446b00731fdd0b9524ac35be3860fbc0bb062b'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = 'fe87db69813f63bf60beeff702eab10cfe306f99'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '1f84f2d0221d735f2209a6da1673479382e67776'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3RankIntervalBatchContract.java)" = '278e77bd3264b8bd113114f44af996615297ec0d'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3RankIntervalBatchTest.java)" = 'bdf022d93b9b2f9e71c79e64112a8005ab29a049'
+      - name: Strict Java21 compile of the original rank owners and differential oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-interval-classes" "$RUNNER_TEMP/m3-interval-headers" "$RUNNER_TEMP/m3-interval-native"
+          base=m3/collections/src/main/java/com/m3/collections
+          javac --release 21 -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/m3-interval-headers" -d "$RUNNER_TEMP/m3-interval-classes" \
+            "$base/M3LongCollection.java" "$base/M3LongIterator.java" \
+            "$base/M3LaneSearch.java" "$base/M3LongRankBatchNative.java" \
+            "$base/M3LongRankIndex.java" \
+            m3/collections/src/test/java/com/m3/collections/M3RankIntervalBatchContract.java
+          grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_rangeCountInto0' \
+            "$RUNNER_TEMP/m3-interval-headers/com_m3_collections_M3LongRankBatchNative.h"
+      - name: Compile original complete JNI translation unit with checked C17 UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -O2 -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$RUNNER_TEMP/m3-interval-headers/com_m3_collections_M3LongRankBatchNative.h" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/m3-interval-native/libm3rankbatch.so"
+      - name: Execute signed-long interval oracle in Java and actual checked JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          cls=com.m3.collections.M3RankIntervalBatchContract
+          cp="$RUNNER_TEMP/m3-interval-classes"
+          mkdir -p "$RUNNER_TEMP/m3-empty-lib"
+          java -Xcheck:jni -cp "$cp" "$cls" | tee "$RUNNER_TEMP/m3-interval-java.txt"
+          java -Xint -Xcheck:jni -cp "$cp" "$cls" | tee "$RUNNER_TEMP/m3-interval-java-int.txt"
+          grep -Eq '^PASS M3_RANK_INTERVAL_BATCH checks=[0-9]+ native=false$' "$RUNNER_TEMP/m3-interval-java.txt"
+          cmp "$RUNNER_TEMP/m3-interval-java.txt" "$RUNNER_TEMP/m3-interval-java-int.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-empty-lib" -cp "$cp" "$cls" \
+            | tee "$RUNNER_TEMP/m3-interval-missing.txt"
+          grep -Eq '^PASS M3_RANK_INTERVAL_BATCH checks=[0-9]+ native=false$' "$RUNNER_TEMP/m3-interval-missing.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-interval-native" -cp "$cp" "$cls" --native \
+            | tee "$RUNNER_TEMP/m3-interval-native.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-interval-native" -cp "$cp" "$cls" --native \
+            | tee "$RUNNER_TEMP/m3-interval-native-int.txt"
+          grep -Eq '^PASS M3_RANK_INTERVAL_BATCH checks=[0-9]+ native=true$' "$RUNNER_TEMP/m3-interval-native.txt"
+          cmp "$RUNNER_TEMP/m3-interval-native.txt" "$RUNNER_TEMP/m3-interval-native-int.txt"
+      - name: Preserve bounded original Java21 JNI evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-rank-interval-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-interval-*.txt
+          if-no-files-found: warn
+          retention-days: 14

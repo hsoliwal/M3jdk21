@@ -234,6 +234,26 @@ public final class M3LongRankIndex {
         M3LongRankBatchNative.countInto(values, queries, queryFrom, length, output, outputFrom);
     }
 
+    /**
+     * Primitive counts of values within parallel half-open signed-long intervals.
+     *
+     * <p>LeetCode #986 (interval boundaries) and #34/#35 (binary insertion
+     * positions) are problem categories, not copied challenge code. Each
+     * interval [fromInclusive[i], toExclusive[i]) is checked before any
+     * result is written; duplicates count separately and no endpoint is
+     * incremented. The owned sorted snapshot is never exposed or mutated.</p>
+     */
+    public int[] rangeCounts(long[] fromInclusive, long[] toExclusive) {
+        return M3LongRankBatchNative.rangeCounts(values, fromInclusive, toExclusive);
+    }
+
+    /** Writes interval counts into one caller-owned primitive result window. */
+    public void rangeCountInto(long[] fromInclusive, long[] toExclusive, int queryFrom,
+                               int length, int[] output, int outputFrom) {
+        M3LongRankBatchNative.rangeCountInto(values, fromInclusive, toExclusive,
+                queryFrom, length, output, outputFrom);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(

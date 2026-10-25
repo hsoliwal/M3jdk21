@@ -241,3 +241,87 @@ Java_com_m3_collections_M3LongRankBatchNative_boundBatchInto0(
         completed += batch;
     }
 }
+
+/*
+ * LeetCode #986 interval-boundary category + #34/#35 insertion coordinates:
+ * count sorted primitive values in parallel half-open [begin,end) intervals.
+ * Independent M3 algorithm; no challenge code or Java callback is included.
+ * The full input vector is checked before ANY caller-output mutation.
+ * JNI critical-region work is bounded to 256 interval pairs, with no JNI
+ * calls/blocking/allocation during the short-lived critical section.
+ */
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_rangeCountInto0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray starts,
+        jlongArray ends, jint query_from, jint count, jintArray output,
+        jint output_from) {
+    (void) ignored;
+    if (sorted == NULL || starts == NULL || ends == NULL || output == NULL) {
+        m3_rank_throw(env, "java/lang/NullPointerException", "null interval array");
+        return;
+    }
+    const jsize source_size = (*env)->GetArrayLength(env, sorted);
+    const jsize start_size = (*env)->GetArrayLength(env, starts);
+    const jsize end_size = (*env)->GetArrayLength(env, ends);
+    const jsize output_size = (*env)->GetArrayLength(env, output);
+    if (start_size != end_size) {
+        m3_rank_throw(env, "java/lang/IllegalArgumentException",
+                "interval endpoint vector length mismatch");
+        return;
+    }
+    if (query_from < 0 || count < 0 || output_from < 0
+            || query_from > start_size - count
+            || output_from > output_size - count) {
+        m3_rank_throw(env, "java/lang/IndexOutOfBoundsException",
+                "interval/output window outside array");
+        return;
+    }
+    if (count == 0) return;
+
+    jlong from[M3_RANK_OUTPUT_CHUNK];
+    jlong to[M3_RANK_OUTPUT_CHUNK];
+    jint result[M3_RANK_OUTPUT_CHUNK];
+
+    /* Prevalidate ALL endpoints before ANY SetIntArrayRegion operation. */
+    for (jint checked = 0; checked < count;) {
+        jint batch = count - checked;
+        if (batch > M3_RANK_OUTPUT_CHUNK) batch = M3_RANK_OUTPUT_CHUNK;
+        (*env)->GetLongArrayRegion(env, starts, query_from + checked, batch, from);
+        if ((*env)->ExceptionCheck(env)) return;
+        (*env)->GetLongArrayRegion(env, ends, query_from + checked, batch, to);
+        if ((*env)->ExceptionCheck(env)) return;
+        for (jint i = 0; i < batch; i++) {
+            if (from[i] > to[i]) {
+                m3_rank_throw(env, "java/lang/IllegalArgumentException",
+                        "inverted half-open interval");
+                return;
+            }
+        }
+        checked += batch;
+    }
+
+    for (jint completed = 0; completed < count;) {
+        jint batch = count - completed;
+        if (batch > M3_RANK_OUTPUT_CHUNK) batch = M3_RANK_OUTPUT_CHUNK;
+        (*env)->GetLongArrayRegion(env, starts, query_from + completed, batch, from);
+        if ((*env)->ExceptionCheck(env)) return;
+        (*env)->GetLongArrayRegion(env, ends, query_from + completed, batch, to);
+        if ((*env)->ExceptionCheck(env)) return;
+
+        if (source_size == 0) {
+            for (jint i = 0; i < batch; i++) result[i] = 0;
+        } else {
+            const jlong *source = (*env)->GetPrimitiveArrayCritical(env, sorted, NULL);
+            if (source == NULL) return;  /* JVM left OOME pending. */
+            for (jint i = 0; i < batch; i++) {
+                /* Equal endpoints are empty; no target+1 arithmetic. */
+                result[i] = (jint) (m3_bound(source, source_size, to[i], 0)
+                        - m3_bound(source, source_size, from[i], 0));
+            }
+            (*env)->ReleasePrimitiveArrayCritical(env, sorted, (void *) source, JNI_ABORT);
+        }
+        (*env)->SetIntArrayRegion(env, output, output_from + completed, batch, result);
+        if ((*env)->ExceptionCheck(env)) return;
+        completed += batch;
+    }
+}
