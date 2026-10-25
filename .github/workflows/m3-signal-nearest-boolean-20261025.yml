@@ -31,15 +31,22 @@ jobs:
           test -s "$receipt"
           count=0
           previous=""
-          while IFS=$'\t' read -r relative expected; do
+          while IFS=$'\t' read -r relative expected strong; do
             [[ -z "$relative" || "$relative" == \#* ]] && continue
             [[ "$relative" =~ ^m3/collections/src/(main|test)/java/com/m3/collections/[A-Za-z0-9_]+[.]java$ ]] || exit 1
             [[ "$expected" =~ ^[0-9a-f]{40}$ ]] || exit 1
+            [[ "$strong" =~ ^[0-9a-f]{64}$ ]] || exit 1
             [[ -z "$previous" || "$relative" > "$previous" ]] || exit 1
             test -f "$relative"
             actual="$(git hash-object -- "$relative")"
             if [[ "$actual" != "$expected" ]]; then
               echo "Source drift: $relative expected=$expected observed=$actual" >&2
+              exit 1
+            fi
+            observed256="$(sha256sum -- "$relative")"
+            observed256="${observed256%% *}"
+            if [[ "$observed256" != "$strong" ]]; then
+              echo "Strong source drift: $relative expected=$strong observed=$observed256" >&2
               exit 1
             fi
             previous="$relative"
