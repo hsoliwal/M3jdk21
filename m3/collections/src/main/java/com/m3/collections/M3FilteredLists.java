@@ -246,8 +246,26 @@ public final class M3FilteredLists {
             return addAll(size(), elements);
         }
 
+        /**
+         * Delete the selected owner slot by its supported mutation.
+         * Iterator-only Lists can refuse indexed remove(int); snapshot iterators
+         * such as CopyOnWriteArrayList require the indexed fallback.
+         * No detached elements, Entry objects or new JNI owner are retained.
+         */
+        private E removePhysical(int physicalIndex) {
+            Iterator<E> removing = backing.iterator();
+            for (int i = 0; i < physicalIndex; i++) removing.next();
+            E value = removing.next();
+            try {
+                removing.remove();
+            } catch (UnsupportedOperationException unsupported) {
+                return backing.remove(physicalIndex);
+            }
+            return value;
+        }
+
         @Override public E remove(int index) {
-            E old = backing.remove(physical(index, false));
+            E old = removePhysical(physical(index, false));
             modCount++;
             return old;
         }
@@ -378,7 +396,7 @@ public final class M3FilteredLists {
                 if (lastPhysical < 0) throw new IllegalStateException("remove without delivered element");
                 int target = lastPhysical;
                 int position = iterator.nextIndex();
-                backing.remove(target);
+                removePhysical(target);
                 if (target < position) position--;
                 iterator = backing.listIterator(position);
                 if ((state & LAST_WAS_NEXT) != 0) logical--;
