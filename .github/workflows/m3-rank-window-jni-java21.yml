@@ -1,0 +1,98 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 rank-window JNI original-owner Java 21 proof
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-rank-window-jni-java21.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankWindowContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankWindowTest.java'
+      - 'm3/collections/qualification/rank-window-jni-20261026/**'
+permissions:
+  contents: read
+jobs:
+  rank-window-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Bind exact PR head and original source owners
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = 'f546cd6d947b1a9c5f22de9bd7633cf966715f12'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '461f927506227501e26926e08e5aa3f6e360243f'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '9ca26b26412068d7fc58b5e431d9d091c8e062e8'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankWindowContract.java)" = '0535253bbef50c54e3d5836dc724f50c437687cb'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankWindowTest.java)" = '0d3325cc1d0c96a3588bbe39130428dd3cf96e0b'
+          test "$(git hash-object m3/collections/src/test/native/legacy_m3rankbatch.c)" = 'acdd9a32dd04c1b03e4ec2ff79be2e66ea9fd09e'
+      - name: Compile original Java native owner and JNI header
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-rank-window/classes" "$RUNNER_TEMP/m3-rank-window/headers"
+          javac --release 21 -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/m3-rank-window/headers" \
+            -d "$RUNNER_TEMP/m3-rank-window/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankWindowContract.java
+          grep -q 'Java_com_m3_collections_M3LongRankBatchNative_equalRangesWindow0' \
+            "$RUNNER_TEMP/m3-rank-window/headers/com_m3_collections_M3LongRankBatchNative.h"
+      - name: Build original C17 JNI library and deliberately older ABI fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -Wall -Wextra -Werror -O2 -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/m3-rank-window/libm3rankbatch.so"
+          mkdir -p "$RUNNER_TEMP/m3-rank-window/old"
+          cc -std=c17 -Wall -Wextra -Werror -fPIC -shared -O2 \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/test/native/legacy_m3rankbatch.c \
+            -o "$RUNNER_TEMP/m3-rank-window/old/libm3rankbatch.so"
+      - name: Verify Java, JNI and legacy ABI without changing payload arrays
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp="$RUNNER_TEMP/m3-rank-window/classes"
+          lib="$RUNNER_TEMP/m3-rank-window"
+          java -ea -cp "$cp" com.m3.collections.M3LongRankWindowContract \
+            | tee "$lib/java-only.txt"
+          java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$lib" -Dcontract.requireNative=true \
+            -cp "$cp" com.m3.collections.M3LongRankWindowContract \
+            | tee "$lib/native.txt"
+          java -ea -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$lib" -Dcontract.requireNative=true \
+            -cp "$cp" com.m3.collections.M3LongRankWindowContract \
+            | tee "$lib/interpreter.txt"
+          java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$lib/old" -Dcontract.olderNative=true \
+            -cp "$cp" com.m3.collections.M3LongRankWindowContract \
+            | tee "$lib/legacy.txt"
+          grep -Fq 'PASS M3_EQUAL_RANGE_WINDOW checks=3686 available=false' "$lib/java-only.txt"
+          grep -Fq 'PASS M3_EQUAL_RANGE_WINDOW checks=3686 available=true nativeRequired=true' "$lib/native.txt"
+          grep -Fq 'PASS M3_EQUAL_RANGE_WINDOW checks=3686 available=true nativeRequired=true' "$lib/interpreter.txt"
+          grep -Fq 'PASS M3_EQUAL_RANGE_WINDOW checks=3689 available=true nativeRequired=false older=true' "$lib/legacy.txt"
+      - name: Retain bounded source/native receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3rank-window-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-rank-window/*.txt
+          if-no-files-found: error
+          retention-days: 14

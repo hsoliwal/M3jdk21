@@ -214,6 +214,21 @@ public final class M3LongRankIndex {
     }
 
     /**
+     * Writes the batched half-open insertion endpoints into a caller-owned
+     * primitive int[] window. Each query consumes two consecutive int slots
+     * beginning at {@code outputFrom}; no per-query object or new result array
+     * is allocated. Query and output windows are fully checked before writing.
+     *
+     * <p>The native LeetCode #34/#35/#88 kernel is optional, reuses the
+     * existing m3rankbatch library, and releases all JNI array pins by page.
+     */
+    public void equalRangesInto(long[] queries, int queryFrom, int length,
+                                int[] output, int outputFrom) {
+        M3LongRankBatchNative.equalRangesInto(
+                values, queries, queryFrom, length, output, outputFrom);
+    }
+
+    /**
      * Batched upper insertion coordinates for a signed-long query vector.
      * JNI is optional and handles large batches without user callbacks.
      */

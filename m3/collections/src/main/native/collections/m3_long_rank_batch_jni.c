@@ -1274,3 +1274,73 @@ Java_com_m3_collections_M3LongRankBatchNative_pairDistanceCounts0(
         base += length;
     }
 }
+
+/*
+ * LeetCode #34/#35 boundary search and #88 monotone two-pointer query scan.
+ * Original shared m3rankbatch JNI library: appended ABI, no new native owner.
+ * A caller-owned int[] carries 2*length half-open [lower, upper) pairs at an
+ * arbitrary int-slot offset. Each 256-query page has bounded stack scratch.
+ */
+static void m3_rank_equal_range_chunk(const jlong *source, jsize source_size,
+        const jlong *keys, jint batch, jint *pairs) {
+    if (m3_use_monotone_sweep(keys, batch, source_size, 2U)) {
+        jsize lower = 0, upper = 0;
+        for (jint i = 0; i < batch; ++i) {
+            const jlong key = keys[i];
+            while (lower < source_size && source[lower] < key) ++lower;
+            if (upper < lower) upper = lower;
+            while (upper < source_size && source[upper] <= key) ++upper;
+            pairs[2 * i] = (jint) lower;
+            pairs[2 * i + 1] = (jint) upper;
+        }
+    } else {
+        for (jint i = 0; i < batch; ++i) {
+            const jsize lo = m3_bound(source, source_size, keys[i], 0);
+            pairs[2 * i] = (jint) lo;
+            pairs[2 * i + 1] = (jint) m3_bound(source, source_size, keys[i], 1);
+        }
+    }
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_equalRangesWindow0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
+        jint query_from, jint count, jintArray output, jint output_from) {
+    (void) ignored;
+    if (sorted == NULL || queries == NULL || output == NULL) {
+        m3_rank_throw(env, "java/lang/NullPointerException", "null equal-range batch array");
+        return;
+    }
+    const jsize size = (*env)->GetArrayLength(env, sorted);
+    const jsize query_size = (*env)->GetArrayLength(env, queries);
+    const jsize result_size = (*env)->GetArrayLength(env, output);
+    if (query_from < 0 || count < 0 || output_from < 0 || count > INT_MAX / 2
+            || query_from > query_size - count
+            || output_from > result_size - count * 2) {
+        m3_rank_throw(env, "java/lang/IndexOutOfBoundsException",
+                "equal-range window outside array");
+        return;
+    }
+    if (count == 0) return;
+    jlong keys[M3_RANK_OUTPUT_CHUNK];
+    jint positions[2 * M3_RANK_OUTPUT_CHUNK];
+    for (jint completed = 0; completed < count;) {
+        jint batch = count - completed;
+        if (batch > M3_RANK_OUTPUT_CHUNK) batch = M3_RANK_OUTPUT_CHUNK;
+        (*env)->GetLongArrayRegion(env, queries, query_from + completed, batch, keys);
+        if ((*env)->ExceptionCheck(env)) return;
+        if (size == 0) {
+            for (jint i = 0; i < batch * 2; ++i) positions[i] = 0;
+        } else {
+            const jlong *values = (*env)->GetPrimitiveArrayCritical(env, sorted, NULL);
+            if (values == NULL) return;
+            /* No JNI, blocking, allocation or callback while the owner is pinned. */
+            m3_rank_equal_range_chunk(values, size, keys, batch, positions);
+            (*env)->ReleasePrimitiveArrayCritical(env, sorted, (void *) values, JNI_ABORT);
+        }
+        (*env)->SetIntArrayRegion(env, output, output_from + completed * 2,
+                batch * 2, positions);
+        if ((*env)->ExceptionCheck(env)) return;
+        completed += batch;
+    }
+}

@@ -23,6 +23,7 @@ public final class M3LongRankBatchNative {
     private static final int MODE_UPPER = 1;
     private static final int MODE_COUNT = 2;
     private static volatile boolean WINDOW_ABI_MISSING;
+    private static volatile boolean EQUAL_RANGES_WINDOW_ABI_MISSING;
     private static volatile boolean INTERSECTION_VALUES_ABI_MISSING;
     private static volatile boolean UNION_VALUES_ABI_MISSING;
     private static volatile boolean RUN_STATISTICS_ABI_MISSING;
@@ -75,34 +76,72 @@ public final class M3LongRankBatchNative {
         Objects.requireNonNull(sorted, "sorted");
         Objects.requireNonNull(queries, "queries");
         int[] ranges = new int[Math.multiplyExact(queries.length, 2)];
-        if (sorted.length == 0 || queries.length == 0) {
-            return ranges;
+        equalRangesInto(sorted, queries, 0, queries.length, ranges, 0, false);
+        return ranges;
+    }
+
+    /**
+     * LeetCode #34/#35 insertion boundaries in caller-owned primitive storage.
+     * Offset is measured in <em>int slots</em>, with two slots per query.
+     * Validation happens before any result write; caller-owned padding survives.
+     * The old equalRanges0 JNI symbol remains exported for older consumers.
+     * Optional new native ABI failures fall back to exactly the Java oracle.
+     */
+    static void equalRangesInto(long[] sorted, long[] queries, int queryFrom,
+            int length, int[] ranges, int rangeFrom) {
+        equalRangesInto(sorted, queries, queryFrom, length, ranges, rangeFrom, false);
+    }
+
+    /** Explicit native requests never silently fall back to Java or an old ABI. */
+    static void equalRangesInto(long[] sorted, long[] queries, int queryFrom,
+            int length, int[] ranges, int rangeFrom, boolean nativeRequired) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(queries, "queries");
+        Objects.requireNonNull(ranges, "ranges");
+        Objects.checkFromIndexSize(queryFrom, length, queries.length);
+        int outputLength = Math.multiplyExact(length, 2);
+        Objects.checkFromIndexSize(rangeFrom, outputLength, ranges.length);
+        if (nativeRequired) {
+            if (!AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3rankbatch equal-range-window JNI unavailable");
+            }
+            equalRangesWindow0(sorted, queries, queryFrom, length, ranges, rangeFrom);
+            return;
         }
-        if (AVAILABLE && queries.length >= NATIVE_MIN_BATCH) {
-            equalRanges0(sorted, queries, ranges);
-            return ranges;
+        if (length == 0) return;
+        if (sorted.length == 0) {
+            Arrays.fill(ranges, rangeFrom, rangeFrom + outputLength, 0);
+            return;
         }
-        for (int index = 0; index < queries.length; index++) {
-            long value = queries[index];
-            int lo = 0;
-            int hi = sorted.length;
+        if (AVAILABLE && !EQUAL_RANGES_WINDOW_ABI_MISSING
+                && length >= NATIVE_MIN_BATCH) {
+            try {
+                equalRangesWindow0(sorted, queries, queryFrom, length, ranges, rangeFrom);
+                return;
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                // Existing m3rankbatch deployments may not export this additive ABI.
+                EQUAL_RANGES_WINDOW_ABI_MISSING = true;
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            long key = queries[queryFrom + i];
+            int lo = 0, hi = sorted.length;
             while (lo < hi) {
-                int middle = lo + ((hi - lo) >>> 1);
-                if (sorted[middle] < value) lo = middle + 1;
-                else hi = middle;
+                int mid = lo + ((hi - lo) >>> 1);
+                if (sorted[mid] < key) lo = mid + 1;
+                else hi = mid;
             }
             int first = lo;
             hi = sorted.length;
             while (lo < hi) {
-                int middle = lo + ((hi - lo) >>> 1);
-                if (sorted[middle] <= value) lo = middle + 1;
-                else hi = middle;
+                int mid = lo + ((hi - lo) >>> 1);
+                if (sorted[mid] <= key) lo = mid + 1;
+                else hi = mid;
             }
-            int pair = index << 1;
+            int pair = rangeFrom + (i << 1);
             ranges[pair] = first;
             ranges[pair + 1] = lo;
         }
-        return ranges;
     }
 
     static int[] upperBounds(long[] sorted, long[] queries) {
@@ -880,6 +919,10 @@ public final class M3LongRankBatchNative {
     private static native void lowerBounds0(long[] sorted, long[] queries, int[] results);
 
     private static native void equalRanges0(long[] sorted, long[] queries, int[] ranges);
+
+    /** Additive same-library ABI: bounded 256-key pages and no full-array JNI copies. */
+    private static native void equalRangesWindow0(long[] sorted, long[] queries,
+            int queryFrom, int length, int[] ranges, int rangeFrom);
 
     private static native void boundBatchInto0(long[] sorted, long[] queries, int queryFrom,
             int length, int[] output, int outputFrom, int mode);
