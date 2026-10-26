@@ -1514,3 +1514,106 @@ Java_com_m3_collections_M3LongRankBatchNative_floorIndicesInto0(
         done += count;
     }
 }
+
+
+/*
+ * LC #315 Count of Smaller Numbers After Self: strictly smaller right-side
+ * occurrence counts, indexed by original input coordinates. The existing
+ * source-owned m3rankbatch JNI library receives this ABI append, not a new
+ * loader, Java callback or per-element object representation.
+ *
+ * O(n log n) primitive index merge inversion count; O(n) temporary native
+ * storage; 256-long JNI region reads. Never hold a critical JNI pointer
+ * while sorting. All allocations and reads complete before a single output
+ * publication; a failed native operation leaves caller output untouched.
+ */
+static void m3_count_smaller_throw(JNIEnv *env, const char *name,
+        const char *message) {
+    jclass type = (*env)->FindClass(env, name);
+    if (type != NULL) {
+        (*env)->ThrowNew(env, type, message);
+        (*env)->DeleteLocalRef(env, type);
+    }
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_countSmallerRight0(
+        JNIEnv *env, jclass ignored, jlongArray input, jintArray output) {
+    (void) ignored;
+    if (input == NULL || output == NULL) {
+        m3_count_smaller_throw(env, "java/lang/NullPointerException",
+                "null count-smaller JNI input or output");
+        return;
+    }
+    const jsize length = (*env)->GetArrayLength(env, input);
+    if (length != (*env)->GetArrayLength(env, output)) {
+        m3_count_smaller_throw(env, "java/lang/IllegalArgumentException",
+                "count-smaller output length mismatch");
+        return;
+    }
+    if (length < 2) return;
+    const size_t n = (size_t) length;
+    if (n > SIZE_MAX / sizeof(jlong) || n > SIZE_MAX / sizeof(jint)) {
+        m3_count_smaller_throw(env, "java/lang/OutOfMemoryError",
+                "count-smaller JNI array-size overflow");
+        return;
+    }
+    jlong *values = malloc(n * sizeof(*values));
+    jint *indices = malloc(n * sizeof(*indices));
+    jint *scratch = malloc(n * sizeof(*scratch));
+    jint *counts = calloc(n, sizeof(*counts));
+    if (values == NULL || indices == NULL || scratch == NULL || counts == NULL) {
+        free(values); free(indices); free(scratch); free(counts);
+        m3_count_smaller_throw(env, "java/lang/OutOfMemoryError",
+                "count-smaller JNI primitive work buffers");
+        return;
+    }
+    enum { M3_LC315_PAGE = 256 };
+    /* JNI region reads permit JVM object movement during O(n log n) work. */
+    for (jsize start = 0; start < length;) {
+        jsize count = length - start;
+        if (count > M3_LC315_PAGE) count = M3_LC315_PAGE;
+        (*env)->GetLongArrayRegion(env, input, start, count, values + start);
+        if ((*env)->ExceptionCheck(env)) {
+            free(values); free(indices); free(scratch); free(counts);
+            return;
+        }
+        start += count;
+    }
+    for (size_t i = 0; i < n; ++i) indices[i] = (jint) i;
+
+    jint *from = indices;
+    jint *to = scratch;
+    /* Avoid size_t overflow even on 32-bit native targets. */
+    for (size_t width = 1; width < n; width = width > n / 2 ? n : width * 2) {
+        for (size_t base = 0; base < n;) {
+            const size_t middle = base + (width < n - base ? width : n - base);
+            const size_t end = middle + (width < n - middle ? width : n - middle);
+            size_t left = base, right = middle, write = base;
+            jint right_moved = 0;
+            while (left < middle && right < end) {
+                const jint original_left = from[left];
+                const jint original_right = from[right];
+                if (values[original_left] <= values[original_right]) {
+                    counts[original_left] += right_moved;
+                    to[write++] = original_left;
+                    ++left;
+                } else {
+                    to[write++] = original_right;
+                    ++right;
+                    ++right_moved;
+                }
+            }
+            while (left < middle) {
+                const jint original_left = from[left++];
+                counts[original_left] += right_moved;
+                to[write++] = original_left;
+            }
+            while (right < end) to[write++] = from[right++];
+            base = end;
+        }
+        jint *swap = from; from = to; to = swap;
+    }
+    (*env)->SetIntArrayRegion(env, output, 0, length, counts);
+    free(values); free(indices); free(scratch); free(counts);
+}

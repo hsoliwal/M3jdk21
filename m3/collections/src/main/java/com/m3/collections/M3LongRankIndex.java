@@ -194,6 +194,16 @@ public final class M3LongRankIndex {
         return 1 + values.length - upperBound(value);
     }
 
+    /**
+     * LeetCode #315 primitive count-smaller-after-self on original encounter order.
+     * Unlike this type's sorted snapshots, input here may be completely unordered.
+     * The first-party batch kernel uses primitive physical indexes and has no
+     * per-element entries or caller-visible payload mutation.
+     */
+    public static int[] countSmallerAfterSelf(long[] encounterOrder) {
+        return M3LongRankBatchNative.countSmallerRight(encounterOrder);
+    }
+
     /** Java or explicitly enabled JNI batched lower bounds, without per-query boxing. */
     public int[] lowerBounds(long[] queries) {
         return M3LongRankBatchNative.lowerBounds(values, queries);

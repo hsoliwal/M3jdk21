@@ -983,6 +983,7 @@ public final class M3LongRankBatchNative {
 
     private static final int NATIVE_MIN_FLOOR_BATCH = 64;
     private static volatile boolean FLOOR_ABI_MISSING;
+    private static volatile boolean COUNT_SMALLER_ABI_MISSING;
 
     /**
      * LeetCode #35 lower/upper-bound category: index of the last signed-long
@@ -1027,6 +1028,89 @@ public final class M3LongRankBatchNative {
 
     private static native void floorIndicesInto0(long[] sorted, long[] queries,
             int queryFrom, int length, int[] output, int outputFrom);
+
+    /**
+     * LC #315: strictly smaller values to the RIGHT of each original index.
+     * Uses stable primitive-index merge inversion counts; duplicate values do
+     * not contribute. The input long[] remains entirely untouched.
+     *
+     * <p>One JNI transition covers an eligible batch, without Java callbacks
+     * or per-entry objects. Optional JNI dispatch falls back only for an
+     * unavailable ABI; a native-required call must never silently downgrade.
+     */
+    public static int[] countSmallerRight(long[] values) {
+        Objects.requireNonNull(values, "values");
+        int[] result = new int[values.length];
+        if (values.length < 2) return result;
+        if (AVAILABLE && !COUNT_SMALLER_ABI_MISSING && values.length >= NATIVE_MIN_BATCH) {
+            try {
+                countSmallerRight0(values, result);
+                return result;
+            } catch (UnsatisfiedLinkError olderNativeAbi) {
+                COUNT_SMALLER_ABI_MISSING = true;
+            }
+        }
+        countSmallerRightJavaInto(values, result);
+        return result;
+    }
+
+    /** Proof-only mandatory JNI variant; fails closed if no current native ABI. */
+    static int[] countSmallerRightNativeRequired(long[] values) {
+        Objects.requireNonNull(values, "values");
+        if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch count-smaller JNI unavailable");
+        int[] result = new int[values.length];
+        countSmallerRight0(values, result);
+        return result;
+    }
+
+    /** Independent Java 21 oracle for all native and ABI-compatibility tests. */
+    static int[] countSmallerRightJava(long[] values) {
+        Objects.requireNonNull(values, "values");
+        int[] result = new int[values.length];
+        countSmallerRightJavaInto(values, result);
+        return result;
+    }
+
+    private static void countSmallerRightJavaInto(long[] values, int[] result) {
+        int n = values.length;
+        if (n < 2) return;
+        int[] indices = new int[n];
+        int[] scratch = new int[n];
+        for (int i = 0; i < n; i++) indices[i] = i;
+        int[] from = indices, to = scratch;
+        // long widths prevent an overflowing int doubling at maximal lengths.
+        for (long width = 1; width < n; width <<= 1) {
+            for (long base = 0; base < n; base += width * 2) {
+                int middle = (int) Math.min(n, base + width);
+                int end = (int) Math.min(n, base + width * 2);
+                int left = (int) base, right = middle, write = (int) base;
+                int rightMoved = 0;
+                while (left < middle && right < end) {
+                    int originalLeft = from[left];
+                    int originalRight = from[right];
+                    if (values[originalLeft] <= values[originalRight]) {
+                        result[originalLeft] += rightMoved;
+                        to[write++] = originalLeft;
+                        left++;
+                    } else {
+                        to[write++] = originalRight;
+                        right++;
+                        rightMoved++;
+                    }
+                }
+                while (left < middle) {
+                    int originalLeft = from[left++];
+                    result[originalLeft] += rightMoved;
+                    to[write++] = originalLeft;
+                }
+                while (right < end) to[write++] = from[right++];
+            }
+            int[] swap = from; from = to; to = swap;
+        }
+    }
+
+    /** Appended primitive JNI ABI in the existing original m3rankbatch owner. */
+    private static native void countSmallerRight0(long[] input, int[] output);
 
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
