@@ -72,6 +72,86 @@ public final class M3FileEditFramesContract {
         }
         ok(Arrays.equals(intermediate, finalBytes), "sequential frames reconstruct final text");
     }
+
+    /** Differential proof of the bounded LF-only lane against stage-by-stage replay. */
+    private static void linearLfOracle() {
+        Random rng = new Random(0x3a53e7cL);
+        String[] atoms = {"a", "x", "β", "😀", "\n", "_"};
+        String[] inserts = {"", "A", "Ω", "😀", "\n", "a\nb", "\n\n"};
+        for (int repetition = 0; repetition < 500; repetition++) {
+            StringBuilder code = new StringBuilder();
+            for (int j = 0; j < 35 + rng.nextInt(90); j++)
+                code.append(atoms[rng.nextInt(atoms.length)]);
+            byte[] raw = utf8(code.toString());
+            List<Integer> valid = new ArrayList<>();
+            for (int i = 0; i < raw.length; i++)
+                if ((raw[i] & 0xc0) != 0x80) valid.add(i);
+            valid.add(raw.length);
+            M3FileSource original = M3FileSource.fromBytes(raw);
+            M3FileEditBatch batch = M3FileEditBatch.on(original);
+            int previous = -1;
+            for (int k = 0; k < 2 + rng.nextInt(6); k++) {
+                int startIdx = Math.min(valid.size() - 1,
+                        previous + 2 + rng.nextInt(3));
+                if (startIdx == valid.size() - 1) break;
+                int endIdx = Math.min(valid.size() - 1,
+                        startIdx + rng.nextInt(3));
+                batch.replaceBytes(valid.get(startIdx), valid.get(endIdx),
+                        utf8(inserts[rng.nextInt(inserts.length)]));
+                previous = endIdx;
+            }
+            M3FileEditBatch.Applied applied = batch.apply();
+            M3FileEditFrames baseline = M3FileEditFrames.plan(original, applied, Long.MAX_VALUE);
+            M3FileEditFrames fast = M3FileEditFrames.planLinearLf(original, applied,
+                    Long.MAX_VALUE);
+            ok(baseline.size() == fast.size(), "LF-only edit count");
+            ok(baseline.originalSha256().equals(fast.originalSha256())
+                    && baseline.finalSha256().equals(fast.finalSha256()),
+                    "LF-only generation identity");
+            for (int i = 0; i < baseline.size(); i++)
+                ok(baseline.frame(i).equals(fast.frame(i)), "byte and row/column geometry");
+            if (baseline.size() >= 3)
+                ok(fast.materializedByteWork() < baseline.materializedByteWork(),
+                        "linear plan uses less byte materialization");
+        }
+        M3FileSource crlf = M3FileSource.fromBytes(utf8("one\r\ntwo"));
+        var changed = M3FileEditBatch.on(crlf).replaceBytes(0, 3, utf8("ONE")).apply();
+        refuse(IllegalArgumentException.class,
+                () -> M3FileEditFrames.planLinearLf(crlf, changed));
+        M3FileSource clean = M3FileSource.fromBytes(utf8("a😀b\nc"));
+        var fractured = M3FileEditBatch.on(clean).replaceBytes(2, 3, utf8("z")).apply();
+        refuse(IllegalArgumentException.class,
+                () -> M3FileEditFrames.planLinearLf(clean, fractured));
+        var edited = M3FileEditBatch.on(clean).replaceBytes(0, 1, utf8("x")).apply();
+        refuse(IllegalArgumentException.class,
+                () -> M3FileEditFrames.planLinearLf(clean, edited, 1));
+        var invalidInserted = M3FileEditBatch.on(clean).replaceBytes(1, 1,
+                new byte[] {(byte) 0x80}).apply();
+        refuse(IllegalArgumentException.class,
+                () -> M3FileEditFrames.planLinearLf(clean, invalidInserted));
+        var noOp = M3FileEditBatch.on(clean).apply();
+        ok(M3FileEditFrames.planLinearLf(clean, noOp, 0).size() == 0,
+                "no-edit image uses no buffer budget");
+        byte[] large = new byte[1 << 20];
+        Arrays.fill(large, (byte) 'a');
+        var largeSource = M3FileSource.fromBytes(large);
+        var largePlan = M3FileEditBatch.on(largeSource);
+        for (int i = 1; i <= 16; i++) {
+            int offset = i * 65536 - 1;
+            largePlan.replaceBytes(offset, offset, utf8("x\ny"));
+        }
+        var largeApplied = largePlan.apply();
+        var bounded = M3FileEditFrames.planLinearLf(largeSource, largeApplied, 3L << 20);
+        ok(bounded.size() == 16 && bounded.materializedByteWork() < (3L << 20),
+                "large file uses bounded source work, not edits times file bytes");
+        refuse(IllegalArgumentException.class,
+                () -> M3FileEditFrames.plan(largeSource, largeApplied, 3L << 20));
+        var conservative = M3FileEditFrames.plan(largeSource, largeApplied, Long.MAX_VALUE);
+        for (int i = 0; i < bounded.size(); i++)
+            ok(bounded.frame(i).equals(conservative.frame(i)),
+                    "large-file incremental coordinates equal full replay");
+    }
+
     public static void main(String[] args) {
         var original = M3FileSource.fromBytes(utf8("A\r\nβ\n😀\rZ"));
         var edit = M3FileEditBatch.on(original)
@@ -118,6 +198,7 @@ public final class M3FileEditFramesContract {
             }
             compare(image, edits.apply());
         }
+        linearLfOracle();
         System.out.println("M3_FILE_EDIT_FRAMES_PASS checks=" + checks);
     }
 }
