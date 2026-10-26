@@ -130,4 +130,58 @@ public final class M3LongAddressKernel {
     private static native void gatherNative(long[] payload, int[] addresses,
                                             int addressFrom, int length,
                                             long[] output, int outputFrom);
+
+    /** LeetCode 27/283 stable-compaction pattern fused with indexed gather. */
+    public static int gatherSelectedInto(long[] payload, int[] addresses, byte[] rowStates,
+            int addressFrom, int length, long[] output, int outputFrom,
+            int requiredBits, int forbiddenBits, M3IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(payload, "payload");
+        Objects.requireNonNull(addresses, "addresses");
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(output, "output");
+        Objects.requireNonNull(backend, "backend");
+        if ((requiredBits & ~0xff) != 0 || (forbiddenBits & ~0xff) != 0
+                || (requiredBits & forbiddenBits) != 0) {
+            throw new IllegalArgumentException("mask must be 8-bit and disjoint");
+        }
+        Objects.checkFromIndexSize(addressFrom, length, addresses.length);
+        Objects.checkFromIndexSize(addressFrom, length, rowStates.length);
+        // Caller reserves the entire logical-window capacity, even when few rows match.
+        Objects.checkFromIndexSize(outputFrom, length, output.length);
+        if (output == payload) {
+            throw new IllegalArgumentException("output must not alias payload");
+        }
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3 address masked-gather JNI unavailable");
+            }
+            return gatherSelectedNative(payload, addresses, rowStates, addressFrom,
+                    length, output, outputFrom, requiredBits, forbiddenBits);
+        }
+        // Validate every selected address BEFORE writing anything. Unselected rows
+        // need no valid address; they are not materialized into the result.
+        for (int i = 0; i < length; i++) {
+            int at = addressFrom + i;
+            int state = rowStates[at] & 0xff;
+            if ((state & requiredBits) == requiredBits && (state & forbiddenBits) == 0) {
+                int physical = addresses[at];
+                if (physical < 0 || physical >= payload.length) {
+                    throw new IndexOutOfBoundsException("masked physical address outside payload");
+                }
+            }
+        }
+        int written = 0;
+        for (int i = 0; i < length; i++) {
+            int at = addressFrom + i;
+            int state = rowStates[at] & 0xff;
+            if ((state & requiredBits) == requiredBits && (state & forbiddenBits) == 0) {
+                output[outputFrom + written++] = payload[addresses[at]];
+            }
+        }
+        return written;
+    }
+
+    private static native int gatherSelectedNative(long[] payload, int[] addresses,
+            byte[] rowStates, int addressFrom, int length, long[] output,
+            int outputFrom, int requiredBits, int forbiddenBits);
 }
