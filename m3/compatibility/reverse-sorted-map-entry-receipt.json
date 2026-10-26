@@ -1,0 +1,109 @@
+{
+  "schema": "M3JDK21_REVERSE_SORTED_MAP_ENTRY_RECEIPT_V1",
+  "capability_id": "jdk.reverse-sorted-map.entry-value-coherence",
+  "status": "QUALIFIED_BOUNDED_EXISTING_OWNER_FIX",
+  "owner": {
+    "module": "java.base",
+    "class": "java.util.ReverseOrderSortedMapView",
+    "atom": "ViewEntry.setValue",
+    "public_api_changed": false,
+    "new_field_or_entry_store": false,
+    "new_native_symbols": false
+  },
+  "intentional_observation_repair": "Successful setValue updates the existing cached value after backing put returns; failed put preserves the previous cached value and exception identity.",
+  "naming": {
+    "disposition": "REVIEWED_EXCLUSION",
+    "reason": "Existing JDK owner repaired in place; no new or renamed type, package, method, public API, M3 backend or provider admission.",
+    "policy": "m3/docs/m3jdk21-porting-invariant.md#naming-laws"
+  },
+  "recipe": {
+    "canonical_repository": "hsoliwal/com.synexia",
+    "code_revision": "b6e9b8fc19b5d2d9aa6e64dee9a30a5488587f86",
+    "source_dataset_revision": "3ad9eca70061bb5e32440094aa03f299bc6761d4",
+    "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "dataset": "m3-reverse-entry-20261026",
+    "transport_dataset": "m3-reverse-entry-proof-20261026",
+    "sdk_tests": 5,
+    "sealing_tests": 10,
+    "receiver_cases": 9,
+    "sdk_inputs_sha256": "cd231086e62123988cce087ebb7248e540acae55fec78ef5d493ebbdedea472f",
+    "sdk_results_sha256": "f53257f7325826ffc6a99f47b8d390162ab1086c4b14219aa37c5093b79457fc",
+    "qualification_sha256": "bd3c44cd988ee72fffe45fce89a2a9c94e4a4b706d6c820cddba02c04076aec4",
+    "receiving_proof_sha256": "4113d2a863f258165d9bb95d654ad7dbe138853778967d216db0b82cfbfb6411",
+    "successful_source_changes": 2,
+    "zero_change_replay": true
+  },
+  "source": {
+    "declared_original_preimage": "55473093e8ef3aba832fa1a00a7e6e8ef8a54221",
+    "combined_baseline_local": "49db0515e991249b9a0a950e563547874d13034b",
+    "combined_baseline_api": "4ae9130ce3bfbb440b7acbbdcb2d2754b5845dbb",
+    "combined_baseline_tree": "3cb02ee9fe8e3e94280994d3694ab507b50a9f03",
+    "built_candidate_local": "8f2c5939ff7bc5a4cdcf1af7aa23110e7135627f",
+    "candidate_api": "741c53a92956d1c97e5c060887b7929dee72e2f4",
+    "candidate_tree": "0d231985f97b109a06a42daa9c7e797464132b7c",
+    "before_sha256": "5f800d48c68120dc9bc52f4e8c080a646f3650bcb82284c200326598371f8217",
+    "after_sha256": "3bda81191514136a43212e9da1e0ee37fd57d716516ba50cd02cae748bbc66f8",
+    "source_api_alias_tree_equality": true
+  },
+  "actual_installed_sdk": {
+    "build": "release/server/headful; warnings-as-errors; six jobs; javac server off",
+    "baseline_build_exit": 0,
+    "candidate_build_exit": 0,
+    "regular_files_each": 394,
+    "symlinks_each": 1,
+    "jmods_each": 69,
+    "baseline_modules_sha256": "09f74535597411c3999dc62d702489a892f75a3966a626c57edec2ceaf30a300",
+    "candidate_modules_sha256": "305f0acb1f731b3691ac53f7160f94d1d445d4dc39988c7ff0491e34c89797ce",
+    "libjvm_sha256": "a64bdc6d7f736d73952f252a1f9b20d703bbea32b6841e7ac2f5af4b23a8f6a1",
+    "production_patch_module_used": false,
+    "acceptance_sha256": "a3f480332ef0082ea0613fca6298112b532dd42d2d9ccafdd3d25d0be6c4d626",
+    "clean_jtreg_addendum_sha256": "7e2699e80e38443a822667e878bfcaab3f86813c8263051e49f481d702e0f664"
+  },
+  "behavior": {
+    "modes": [
+      "default",
+      "checked-JNI/Serial",
+      "interpreter",
+      "C2",
+      "M3String/interpreter",
+      "M3String/noncompact/interpreter"
+    ],
+    "unique_target_assertions_per_run": 32,
+    "unique_independent_assertions_per_run": 5445,
+    "independent_scenarios": 15,
+    "baseline_target_red_runs": 6,
+    "baseline_independent_red_runs": 6,
+    "candidate_target_pass_runs": 6,
+    "candidate_independent_pass_runs": 6,
+    "clean_jtreg_cases_passed": 8,
+    "flat_cds_start": "PASS",
+    "M3String_explicit_CDS": "EXPECTED_REFUSAL"
+  },
+  "compatibility": {
+    "public_and_implementation_descriptors": "IDENTICAL",
+    "native_libraries_byte_identical": 40,
+    "native_defined_export_rows_identical": 2413,
+    "new_runtime_dependencies": 0
+  },
+  "resources": {
+    "status": "OBSERVED_NO_SPEEDUP_CLAIM",
+    "updates_per_round": 250000,
+    "rounds_each": 9,
+    "baseline_median_postwarm_cpu_ns": 2410739.5,
+    "candidate_median_postwarm_cpu_ns": 3371315.0,
+    "baseline_postwarm_allocation_bytes": "0 except one64B observation",
+    "candidate_postwarm_allocation_bytes": 0,
+    "retained_heap_and_RSS": "Finite noisy process observations; no improvement claim."
+  },
+  "rights": {
+    "target_owner": "GPL-2.0-only WITH Classpath-exception-2.0; original notices retained",
+    "new_test": "Apache-2.0; original first-party attribution retained",
+    "no_challenge_solution_source_copied": true
+  },
+  "limits": [
+    "Finite operation and platform scope; no full JCK or complete jtreg claim.",
+    "String-first receiving phase and family dispositions unchanged.",
+    "No Guava/Eclipse/Apache/Spring family completion or M3 String compiled-JIT promotion.",
+    "Broader Synexia dependency/source mirror completion remains separately pending."
+  ]
+}
