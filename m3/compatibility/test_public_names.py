@@ -100,6 +100,89 @@ class PublicNamesTest(unittest.TestCase):
             "class FilteredOwnerMembershipTest {}"))
         self.assertFalse(self.issue("m3/compatibility/collection-views/README.md"))
 
+
+    def test_versioned_qualification_json_is_validated_passive_data(self):
+        import json
+        filename = "m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json"
+        content = json.dumps({"schema": "M3_REGEX_COMPACT_METADATA_RECEIVER_V1",
+                              "canonical_repository": "hsoliwal/com.synexia",
+                              "status": "RESOURCE_HOLD"})
+        self.assertFalse(self.issue(filename, content))
+        self.assertFalse(self.issue("m3/qualification/collection-convergence-20261024/RECEIPT.json", content))
+        self.assertTrue(self.issue(filename))
+        self.assertTrue(self.issue(filename, "{not-json"))
+        self.assertTrue(self.issue(filename, content.replace("hsoliwal/com.synexia", "wrong/repo")))
+        self.assertTrue(self.issue(filename, content.replace("M3_REGEX", "INVALID_REGEX")))
+
+    def test_qualification_tsv_requires_origin_and_spdx(self):
+        filename = "m3/qualification/indexed-sort-image-20261026/SOURCE_RECEIPT.tsv"
+        content = ("# SPDX-License-Identifier: Apache-2.0\n"
+                   "path\tidentity_kind\tbefore_identity\tafter_identity\tcanonical_origin\tqualification\n"
+                   "test/jdk/jdk/internal/m3/M3IndexedArrayTest.java\tSHA-256\tA\tB\t"
+                   "hsoliwal/com.synexia:m3-recipe\tPENDING\n")
+        self.assertFalse(self.issue(filename, content))
+        self.assertTrue(self.issue(filename, content.replace("hsoliwal/com.synexia", "wrong/repo")))
+        self.assertTrue(self.issue(filename, content.replace("# SPDX-License-Identifier: Apache-2.0\n", "")))
+        self.assertTrue(self.issue(filename, content.replace("\tPENDING\n", "")))
+
+    def test_exact_source_borrow_tsv_version_is_checked(self):
+        filename = "m3/synexia-import/current-full-borrow/string-source-observation-v3.tsv"
+        data = ("schema\ttarget_path\tpredecessor_git_blob\n"
+                "M3JDK21_STRING_SOURCE_OBSERVATION_V3\t"
+                "src/java.base/share/classes/java/lang/M3String.java\tbefore\n")
+        self.assertFalse(self.issue(filename, data))
+        self.assertTrue(self.issue(filename, data.replace("_V3", "_V4")))
+        self.assertTrue(self.issue(filename, data.replace("src/java.base/share/classes/java/lang/", "../")))
+        successor = "m3/synexia-import/current-full-borrow/string-target-successor-v4.tsv"
+        self.assertFalse(self.issue(successor, data.replace(
+            "SOURCE_OBSERVATION_V3", "TARGET_SUCCESSOR_V4")))
+
+    def test_dated_executable_and_nested_artifact_still_refused(self):
+        self.assertTrue(self.issue(".github/workflows/m3-names-20261026.yml"))
+        self.assertTrue(self.issue("m3/qualification/task-20261026/README.md"))
+        self.assertTrue(self.issue("m3/qualification/task-20261026/build.py"))
+        self.assertTrue(self.issue("m3/qualification/task-20261026/run.sh"))
+        self.assertTrue(self.issue("m3/qualification/task-20261026/dir/RECEIPT.json", "{}"))
+        self.assertTrue(self.issue("m3/qualification/task-20261026/RECEIPT.json", "{}"))
+        self.assertTrue(self.issue("src/java.base/share/classes/java/util/M3NewType.java",
+                                   "package java.util; public class M3NewType {}"))
+        self.assertTrue(self.issue("m3/tooling/migration-recipes/README.md", status="M"))
+
+    def test_real_git_diff_reads_and_validates_passive_receipts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+            git("init", "-q")
+            git("config", "user.name", "M3 Tests")
+            git("config", "user.email", "tests@example.invalid")
+            (root / "README.md").write_text("original\n", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "original")
+            baseline = git("rev-parse", "HEAD")
+            receipt = root / "m3/qualification/collection-convergence-20261024/RECEIPT.json"
+            receipt.parent.mkdir(parents=True)
+            receipt.write_text(
+                '{"schema":"M3JDK21_EXECUTED_COLLECTION_CONVERGENCE_V1",'
+                '"canonical_repository":"hsoliwal/com.synexia"}\n',
+                encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "canonical passive receipt")
+            first = git("rev-parse", "HEAD")
+            delta, failed = GATE.check(root, baseline, first)
+            self.assertEqual(1, len(delta))
+            self.assertFalse(failed)
+            receipt.write_text(
+                '{"schema":"M3JDK21_EXECUTED_COLLECTION_CONVERGENCE_V1",'
+                '"canonical_repository":"attacker/forgery"}\n',
+                encoding="utf-8")
+            git("commit", "-qam", "forged receipt source")
+            later = git("rev-parse", "HEAD")
+            delta, failed = GATE.check(root, baseline, later)
+            self.assertEqual(1, len(delta))
+            self.assertEqual(1, len(failed))
+            self.assertIn("unverified or malformed passive provenance receipt", failed[0][1])
+
     def test_real_git_diff_detects_additions_and_renames(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

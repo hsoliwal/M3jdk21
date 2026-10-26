@@ -10,6 +10,7 @@ recipe names, candidate inventories, and chronological evidence.
 from __future__ import annotations
 
 import argparse
+import json
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 import re
@@ -31,6 +32,55 @@ RECIPE_ROOTS = (
 )
 RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
 RECIPE_JAVA = re.compile(r"(?:^|/)(?:rewrite|recipes?)/[^/]*Recipe(?:Test)?\.java$")
+
+
+# These are passive evidence formats, not names of JDK or transformation owners.
+# Source folders, tests, workflows, scripts, mapping fragments and recipes are NOT exempt.
+PROVENANCE_JSON = re.compile(
+    r"^m3/qualification/[a-z][a-z0-9-]*/(?:RECEIPT|[A-Z][A-Z0-9_]*_RECEIPT)\.json$")
+PROVENANCE_TSV = re.compile(
+    r"^m3/qualification/[a-z][a-z0-9-]*/SOURCE_RECEIPT\.tsv$")
+BORROW_TSV = re.compile(
+    r"^m3/synexia-import/current-full-borrow/string-(source-observation|target-successor)-v([1-9][0-9]*)\.tsv$")
+
+
+def passive_receipt_path(path: str) -> bool:
+    return bool(PROVENANCE_JSON.fullmatch(path) or PROVENANCE_TSV.fullmatch(path)
+                or BORROW_TSV.fullmatch(path))
+
+
+def valid_passive_receipt(path: str, text: str | None) -> bool:
+    if text is None or not text.strip() or len(text) > 1048576:
+        return False
+    if PROVENANCE_JSON.fullmatch(path):
+        try:
+            metadata = json.loads(text)
+        except (ValueError, TypeError):
+            return False
+        return (isinstance(metadata, dict)
+                and isinstance(metadata.get("schema"), str)
+                and metadata["schema"].startswith(("M3_", "M3JDK21_"))
+                and metadata.get("canonical_repository") == "hsoliwal/com.synexia")
+    rows = [line for line in text.splitlines() if line.strip() and not line.startswith("#")]
+    if len(rows) < 2:
+        return False
+    header = rows[0].split("\t")
+    body = [line.split("\t") for line in rows[1:]]
+    if not all(len(row) == len(header) for row in body):
+        return False
+    if PROVENANCE_TSV.fullmatch(path):
+        return (header == ["path", "identity_kind", "before_identity", "after_identity",
+                           "canonical_origin", "qualification"]
+                and all("hsoliwal/com.synexia" in row[4] and row[0] for row in body)
+                and "# SPDX-License-Identifier: Apache-2.0" in text)
+    match = BORROW_TSV.fullmatch(path)
+    if match:
+        family, version = match.groups()
+        schema = "M3JDK21_STRING_" + family.replace("-", "_").upper() + "_V" + version
+        return (header[0] == "schema" and "target_path" in header
+                and all(row[0] == schema and row[header.index("target_path")].startswith(
+                    "src/java.base/share/classes/java/lang/") for row in body))
+    return False
 
 
 
@@ -90,7 +140,10 @@ def problems(change: Change, text: str | None = None) -> list[str]:
         found.append("new transformation recipe source/descriptor belongs in Synexia")
     parts = PurePosixPath(path).parts
     name = parts[-1]
-    if any(DATE.search(seg) or VERSION.search(seg) for seg in parts):
+    passive = passive_receipt_path(path)
+    if passive and not valid_passive_receipt(path, text):
+        found.append("unverified or malformed passive provenance receipt")
+    if any(DATE.search(seg) or VERSION.search(seg) for seg in parts) and not passive:
         found.append("unstable date/version identifier")
     if path.startswith("m3/docs/name-mapping.d/"):
         found.append("new parallel mapping fragment; update canonical name-mapping.json instead")
@@ -120,7 +173,8 @@ def check(root: Path, base: str, head: str) -> tuple[list[Change], list[tuple[st
     violations = []
     for change in delta:
         source = None
-        if change.status.startswith(("A", "C", "R")) and change.path.endswith(".java"):
+        if change.status.startswith(("A", "C", "R")) and (
+                change.path.endswith(".java") or passive_receipt_path(change.path)):
             source = git(root, "show", head + ":" + change.path).decode("utf-8")
         for reason in problems(change, source):
             violations.append((change.path, reason))
