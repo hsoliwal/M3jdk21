@@ -631,6 +631,83 @@ public final class M3ASTInteropContract {
         }
     }
 
+    private static void originalCodePointCoordinateContracts() throws IOException {
+        URI uri = URI.create("memory:/antlr-codepoints.java");
+        String contents = "A😺中B\n";
+        M3File source = M3File.of(uri, contents);
+        M3File.CodePointOffsets map = source.codePointOffsets();
+        equal(5, map.codePointLength());
+        equal(6, map.utf16Length());
+        equal(1, map.supplementaryCount());
+        equal(4L, map.primitiveBytes());
+        for (int[] pair : new int[][] {{0,0},{1,1},{2,3},{3,4},{4,5},{5,6}}) {
+            equal(pair[1], map.toUtf16(pair[0]));
+            equal(pair[0], map.toCodePoint(pair[1]));
+        }
+        refuses(IllegalArgumentException.class, () -> map.toCodePoint(2));
+        refuses(IndexOutOfBoundsException.class, () -> map.toUtf16(6));
+        refuses(IndexOutOfBoundsException.class, () -> map.toCodePoint(7));
+
+        Node emoji = new Node("emoji", 1, 2, M3ASTIndex.NAMED | M3ASTIndex.TOKEN,
+                new Node[0], new String[0], null, 1, 2);
+        Node han = new Node("identifier", 2, 3, M3ASTIndex.NAMED | M3ASTIndex.TOKEN);
+        Node root = new Node("unit", 0, 5, M3ASTIndex.NAMED,
+                new Node[] {emoji, han}, new String[] {"name", "name"}, null, 0, 5);
+        M3ASTInterop.SourceStamp stamp = new M3ASTInterop.SourceStamp(
+                uri, source.utf16Sha256(), null);
+        M3ASTIndex index = project(source, root, stamp,
+                M3ASTInterop.Coordinates.CODE_POINTS, new M3ASTIngress.Limits(32, 8, 3));
+        equal(3, index.nodeCount());
+        equal(1, index.start(1));
+        equal(3, index.end(1));
+        equal("😺", index.sourceText(1));
+        equal("😺", index.fullSourceText(1));
+        equal(3, index.start(2));
+        equal(4, index.end(2));
+        equal("中", index.sourceText(2));
+        equal(contents, index.fullSourceText(0));
+        ok(index.hasExactFullRange(0));
+        ok(index.hasExactRange(2));
+
+        M3ASTIndex unknown = project(source, root, null,
+                M3ASTInterop.Coordinates.CODE_POINTS, new M3ASTIngress.Limits(32, 8, 3));
+        ok(!unknown.hasExactRange(1));
+        ok(!unknown.hasExactFullRange(0));
+        refuses(IllegalArgumentException.class, () -> project(source, root,
+                new M3ASTInterop.SourceStamp(uri, "stale-source", null),
+                M3ASTInterop.Coordinates.CODE_POINTS, new M3ASTIngress.Limits(32, 8, 3)));
+
+        Node wrong = new Node("unit", 0, 6, M3ASTIndex.NAMED);
+        refuses(IndexOutOfBoundsException.class, () -> project(source, wrong, stamp,
+                M3ASTInterop.Coordinates.CODE_POINTS, new M3ASTIngress.Limits(32, 8, 3)));
+        refuses(IllegalArgumentException.class,
+                () -> M3File.of(uri, "high\ud83d").codePointOffsets());
+        refuses(IllegalArgumentException.class,
+                () -> M3File.of(uri, "low\ude3a").codePointOffsets());
+        M3File.CodePointOffsets ascii = M3File.of(uri, "source\n").codePointOffsets();
+        equal(0, ascii.supplementaryCount());
+        equal(0L, ascii.primitiveBytes());
+        equal(7, ascii.toUtf16(7));
+
+        Random random = new Random(0xC0DEF0A2026L);
+        String[] pieces = {"x", "é", "中", "\r\n", "\n", "😺", "😀", "👩"};
+        for (int sample = 0; sample < 600; sample++) {
+            StringBuilder value = new StringBuilder();
+            int count = random.nextInt(100);
+            for (int i = 0; i < count; i++) value.append(pieces[random.nextInt(pieces.length)]);
+            String text = value.toString();
+            M3File.CodePointOffsets offsets = M3File.of(uri, text).codePointOffsets();
+            int scalarCount = text.codePointCount(0, text.length());
+            equal(scalarCount, offsets.codePointLength());
+            equal(text.length(), offsets.utf16Length());
+            for (int at = 0; at <= scalarCount; at++) {
+                int utf16 = text.offsetByCodePoints(0, at);
+                equal(utf16, offsets.toUtf16(at));
+                equal(at, offsets.toCodePoint(utf16));
+            }
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         byteAndIndexContracts();
         randomizedOffsets();
@@ -640,6 +717,7 @@ public final class M3ASTInteropContract {
         fullSpanContracts();
         originalUtf8ByteChangeContracts();
         originalUtf8PointEditContracts();
+        originalCodePointCoordinateContracts();
         System.out.println("M3_AST_INTEROP_PASS checks=" + checks);
     }
 }

@@ -35,6 +35,7 @@ public final class M3File implements CharSequence {
     private final String byteSha256;
     private final int utf8ByteLength;
     private volatile Utf8Offsets utf8Offsets;
+    private volatile CodePointOffsets codePointOffsets;
     private volatile LineIndex lineIndex;
 
     private M3File(URI uri, String text, String byteSha256, int utf8ByteLength) {
@@ -408,6 +409,92 @@ public final class M3File implements CharSequence {
             }
         }
         return Optional.of(found);
+    }
+
+    /**
+     * Native Unicode-codepoint to Java UTF-16 boundary conversion for parsers
+     * whose original input symbols are scalar values (ANTLR CodePointCharStream,
+     * for example). This is available for text-only sources too; unlike the
+     * original-byte map it makes no claim about the source encoding.
+     *
+     * <p>A supplementary character adds precisely one UTF-16 unit beyond its
+     * codepoint index. The optional map retains only one int[] containing the
+     * scalar positions of surrogate pairs; BMP-only text uses an empty array.
+     * Unpaired surrogates are refused rather than fabricated as valid scalars.
+     */
+    public CodePointOffsets codePointOffsets() {
+        CodePointOffsets found = codePointOffsets;
+        if (found == null) {
+            synchronized (this) {
+                found = codePointOffsets;
+                if (found == null) codePointOffsets = found = CodePointOffsets.build(text);
+            }
+        }
+        return found;
+    }
+
+    /** One source-owned sparse primitive lane, with exact reversible boundaries. */
+    public static final class CodePointOffsets {
+        private final int utf16Length;
+        private final int scalarLength;
+        private final int[] supplementaryAt;
+
+        private CodePointOffsets(int utf16Length, int scalarLength, int[] supplementaryAt) {
+            this.utf16Length = utf16Length;
+            this.scalarLength = scalarLength;
+            this.supplementaryAt = supplementaryAt;
+        }
+
+        private static CodePointOffsets build(String text) {
+            int[] indexes = new int[16];
+            int pairs = 0, scalars = 0;
+            for (int i = 0; i < text.length();) {
+                char unit = text.charAt(i);
+                if (Character.isHighSurrogate(unit)) {
+                    if (i + 1 == text.length()
+                            || !Character.isLowSurrogate(text.charAt(i + 1))) {
+                        throw new IllegalArgumentException("unpaired high surrogate in scalar source");
+                    }
+                    if (pairs == indexes.length) indexes = Arrays.copyOf(indexes, pairs * 2);
+                    indexes[pairs++] = scalars;
+                    i += 2;
+                } else if (Character.isLowSurrogate(unit)) {
+                    throw new IllegalArgumentException("unpaired low surrogate in scalar source");
+                } else i++;
+                scalars++;
+            }
+            return new CodePointOffsets(text.length(), scalars, Arrays.copyOf(indexes, pairs));
+        }
+
+        public int codePointLength() { return scalarLength; }
+        public int utf16Length() { return utf16Length; }
+        public int supplementaryCount() { return supplementaryAt.length; }
+        public long primitiveBytes() { return (long) supplementaryAt.length * Integer.BYTES; }
+
+        /** Scalar offset to half-open Java source position; EOF is legal. */
+        public int toUtf16(int codePointOffset) {
+            Objects.checkIndex(codePointOffset, scalarLength + 1);
+            int found = Arrays.binarySearch(supplementaryAt, codePointOffset);
+            int completedPairs = found < 0 ? -found - 1 : found;
+            return codePointOffset + completedPairs;
+        }
+
+        /** Reject a UTF-16 boundary between the high and low surrogate halves. */
+        public int toCodePoint(int utf16Offset) {
+            Objects.checkIndex(utf16Offset, utf16Length + 1);
+            int low = 0, high = supplementaryAt.length;
+            while (low < high) {
+                int mid = (low + high) >>> 1;
+                int start = supplementaryAt[mid] + mid;
+                if (start + 2 <= utf16Offset) low = mid + 1;
+                else high = mid;
+            }
+            if (low < supplementaryAt.length
+                    && utf16Offset == supplementaryAt[low] + low + 1) {
+                throw new IllegalArgumentException("offset inside UTF-16 surrogate pair");
+            }
+            return utf16Offset - low;
+        }
     }
 
     /** Boundary-exact, half-open UTF-8 source coordinates; no mid-codepoint rounding. */

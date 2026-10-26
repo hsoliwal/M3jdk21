@@ -113,9 +113,38 @@ status, but **does not invoke Tree-sitter's `ts_tree_edit`, `ts_parser_parse`,
 or `ts_tree_get_changed_ranges`**, nor certify that a previously indexed AST
 is valid after the edit. A provider must own those native/parser operations.
 
+## Unicode scalar offsets for ANTLR and other codepoint frontends
+
+ANTLR 4.7+ `CharStreams` uses `CodePointCharStream` by default: its token source
+indexes count Unicode codepoints, **not Java UTF-16 code units**. Treating
+ANTLR `Token.getStartIndex()` as a Java offset would misplace every source
+range after a supplementary character. The source-owned, lazy
+`M3File.codePointOffsets()` therefore maintains just **one sparse `int[]` of
+supplementary-character scalar starts**. `toUtf16` and `toCodePoint` are exact,
+bounded inverses at scalar boundaries; inside-surrogate offsets and malformed
+UTF-16 sources are refused. BMP-only sources allocate no scalar entries.
+No byte buffer, new parser or secondary string is retained.
+
+`M3ASTInterop.Coordinates.CODE_POINTS` now converts the original provider's
+core and optional full ranges into the **same canonical UTF-16 half-open
+M3ASTIndex lanes**. A matching original URI and UTF-16 source stamp can
+certify text-based scalar ranges; unlike original UTF-8 byte coordinates,
+this does not require a raw byte SHA when no byte claim was made.
+ANTLR's inclusive **token** stop index must still be converted to an exclusive
+codepoint end by the adapter, before projection; M3AST never guesses which
+token stream or coordinate convention a provider used.
+
+The standalone Synexia-side `M3ASTAntlr4RuntimeContract` was compiled and run
+against actual `antlr4-runtime:4.11.1` `CharStreams`, `CommonToken`,
+`ParserRuleContext`, and `TerminalNode` objects. It checks exact UTF-16 source
+ranges for `A😺中B` plus newline while ANTLR returns five scalar token
+positions. **It is a runtime-object mapping fixture, not a generated-grammar
+parser, hidden-channel/trivia or native lexer proof**; those remain pending.
+
 **Source coordinate contract:** all published M3AST spans are zero-based,
 UTF-16, half-open `[start,end)`. Original UTF-8 byte positions may be
-translated at valid codepoint boundaries only; EOF is a valid endpoint.
+translated at valid byte/codepoint boundaries only. Original codepoint spans
+are also mapped exactly, including EOF, with surrogate-safe conversion.
 Provider token-index intervals (ANTLR), inclusive source coordinates and
 line/column records must be translated by the adapter using actual original
 tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
@@ -128,16 +157,18 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
 | [Roslyn red/green](https://github.com/dotnet/roslyn/blob/main/docs/compilers/Design/Red-Green%20Trees.md) | Immutable shared green nodes, lazy positioned red views, separate `Span` and trivia-inclusive `FullSpan` | Optional full-span lanes and original primitive atoms; no second red/green AST. Reuse across source generations still needs a separately proven identity/invalidator. |
 | [OpenRewrite LST](https://docs.openrewrite.org/concepts-and-explanations/lossless-semantic-trees) | Full-fidelity trivia, types and recipes; provenance-preserving edits | Optional full-span source projection; original LST retains formatting and type attribution authority. Actual OpenRewrite provider and exact reprint gates pending. |
 | [Eclipse JDT DOM](https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/dom/ASTNode.html) | Structural property descriptors, scalar/list child slots, normal/extended source ranges and recovery bits | Named/list edges and optional full ranges; preserve JDT bindings and `ASTRewrite`. Existing JDT ingress must be migrated through a contract diff, not reparsed. |
-| [ANTLR4](https://www.antlr.org/api/Java/org/antlr/v4/runtime/ParserRuleContext.html) | Rule contexts, alternative numbers, token source intervals and ordered children | Adapter translates original token-inclusive intervals to half-open source positions; direct provider contract missing. |
+| [ANTLR4](https://github.com/antlr/antlr4/blob/dev/doc/unicode.md) | CodePointCharStream scalar indexes; rule contexts, alternative numbers, inclusive token intervals and ordered children | Single sparse surrogate lane plus `CODE_POINTS` original-range conversion; actual runtime-object fixture PASS. Generated grammar, recovery, trivia and original parser-generation gates pending. |
 | [JavaParser](https://github.com/javaparser/javaparser/blob/master/javaparser-core/src/main/java/com/github/javaparser/ast/Node.java) | Token ranges, lexical preservation, comments and user properties | Map only detached facts; foreign lexical printer/edit owner survives. Direct provider contract pending. |
 | [LibCST](https://libcst.readthedocs.io/en/latest/metadata.html) | Immutable CST and optional metadata/byte-span providers | Optional sidecar model, source coordinate conversion; no Python runtime in M3JDK21. |
 | [Babel ESTree](https://babel.dev/docs/babel-parser) | Dialect-specific node vocabularies and plugin syntax | Explicit provider identity and uninterpreted kind names; no misleading universal semantic node enum. |
 
 ## Next compatibility gates, not yet implemented
 
-1. Attach real Tree-sitter (JNI/C11 only if independently justified), ANTLR,
-   JavaParser, JDT, OpenRewrite and other parser adapters to their *already
-   parsed* trees; compare ranges, roles, errors and token/trivia completeness.
+1. Attach real Tree-sitter (JNI/C11 only if independently justified), ANTLR
+   **generated grammar**, JavaParser, JDT, OpenRewrite and other parser
+   adapters to their *already parsed* trees; compare ranges, roles, errors
+   and token/trivia completeness. The ANTLR runtime-object fixture above
+   demonstrates its source-coordinate bridge, not complete grammar coverage.
 2. Use the original filesystem `com.m3.file.M3File` as the provider observation
    and generation/delta authority, connected to the immutable parser source
    snapshot: reuse metadata

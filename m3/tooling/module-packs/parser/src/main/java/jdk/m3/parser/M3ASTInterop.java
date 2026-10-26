@@ -18,10 +18,12 @@ import java.util.Objects;
  * object in two positions yields two indexed occurrences. Acyclic, stable
  * traversal is the provider's obligation; budgets refuse cycles/depth growth.
  * Detached source geometry is always UTF-16 half-open. Optional UTF-8 byte
- * offsets require an admitted strict UTF-8 {@link M3File} snapshot.</p>
+ * offsets require an admitted strict UTF-8 {@link M3File} snapshot. Original
+ * Unicode scalar/codepoint offsets instead use the source's sparse surrogate
+ * index, never integer arithmetic that mistakes them for UTF-16 units.</p>
  */
 public final class M3ASTInterop {
-    public enum Coordinates { UTF16, UTF8_BYTES }
+    public enum Coordinates { UTF16, UTF8_BYTES, CODE_POINTS }
 
     /** Immutable facts originally recorded by the parser's source owner. */
     public record SourceStamp(URI uri, String utf16Sha256, String byteSha256) {
@@ -83,6 +85,8 @@ public final class M3ASTInterop {
                 ? source.utf8Offsets().orElseThrow(() ->
                         new IllegalArgumentException("byte-offset AST requires strict original UTF-8 snapshot"))
                 : null;
+        M3File.CodePointOffsets codePoints = coordinates == Coordinates.CODE_POINTS
+                ? source.codePointOffsets() : null;
         M3ASTIndex.Builder index = M3ASTIndex.builder(source, M3ASTIndex.Domain.GENERIC,
                 limits.maxNodes(), providerId);
 
@@ -92,7 +96,8 @@ public final class M3ASTInterop {
         int[] indexedRows = new int[capacity];
         int[] childCounts = new int[capacity];
         int[] next = new int[capacity];
-        int rootRow = append(index, -1, root, null, -1, coordinates, offsets, surface, sourceVerified);
+        int rootRow = append(index, -1, root, null, -1, coordinates,
+                offsets, codePoints, surface, sourceVerified);
         nodes[0] = root;
         indexedRows[0] = rootRow;
         childCounts[0] = count(surface, root);
@@ -111,7 +116,7 @@ public final class M3ASTInterop {
             int rolePosition = surface.childRolePosition(parent, ordinal);
             if (depth == limits.maxDepth()) throw new IllegalArgumentException("AST depth budget exceeded");
             int row = append(index, indexedRows[frame], child, role, rolePosition,
-                    coordinates, offsets, surface, sourceVerified);
+                    coordinates, offsets, codePoints, surface, sourceVerified);
             if (depth == nodes.length) {
                 int size = Math.min(limits.maxDepth(), nodes.length * 2);
                 nodes = java.util.Arrays.copyOf(nodes, size);
@@ -135,7 +140,7 @@ public final class M3ASTInterop {
                         && !source.byteSha256().filter(stamp.byteSha256()::equals).isPresent())) {
             throw new IllegalArgumentException("foreign parser source generation");
         }
-        return coordinates == Coordinates.UTF16 || stamp.byteSha256() != null;
+        return coordinates != Coordinates.UTF8_BYTES || stamp.byteSha256() != null;
     }
 
     private static <N> int count(Surface<N> surface, N node) {
@@ -146,7 +151,8 @@ public final class M3ASTInterop {
 
     private static <N> int append(M3ASTIndex.Builder index, int parent, N node, String role,
             int rolePosition,
-            Coordinates unit, M3File.Utf8Offsets offsets, Surface<N> surface, boolean verified) {
+            Coordinates unit, M3File.Utf8Offsets offsets, M3File.CodePointOffsets codePoints,
+            Surface<N> surface, boolean verified) {
         int start = surface.start(node), end = surface.end(node);
         if ((start == M3ASTIndex.NO_RANGE) != (end == M3ASTIndex.NO_RANGE)) {
             throw new IllegalArgumentException("partial foreign source range");
@@ -154,6 +160,9 @@ public final class M3ASTInterop {
         if (unit == Coordinates.UTF8_BYTES && start != M3ASTIndex.NO_RANGE) {
             start = offsets.toUtf16(start);
             end = offsets.toUtf16(end);
+        } else if (unit == Coordinates.CODE_POINTS && start != M3ASTIndex.NO_RANGE) {
+            start = codePoints.toUtf16(start);
+            end = codePoints.toUtf16(end);
         }
         int fullStart = surface.fullStart(node), fullEnd = surface.fullEnd(node);
         if ((fullStart == M3ASTIndex.NO_RANGE) != (fullEnd == M3ASTIndex.NO_RANGE)) {
@@ -162,6 +171,9 @@ public final class M3ASTInterop {
         if (unit == Coordinates.UTF8_BYTES && fullStart != M3ASTIndex.NO_RANGE) {
             fullStart = offsets.toUtf16(fullStart);
             fullEnd = offsets.toUtf16(fullEnd);
+        } else if (unit == Coordinates.CODE_POINTS && fullStart != M3ASTIndex.NO_RANGE) {
+            fullStart = codePoints.toUtf16(fullStart);
+            fullEnd = codePoints.toUtf16(fullEnd);
         }
         int flags = surface.syntaxFlags(node);
         if ((flags & ~SURFACE_FLAGS) != 0) throw new IllegalArgumentException("unknown foreign syntax flags");
