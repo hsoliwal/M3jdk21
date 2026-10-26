@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 captured-buffer original parser source proof
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java'
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java'
+      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CapturedSourceContract.java'
+      - 'm3/tooling/module-packs/parser/build.py'
+      - '.github/workflows/m3-parser-captured-buffer-20261026.yml'
+  workflow_dispatch:
+jobs:
+  original-java21:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile actual original M3File and verify existing plus new behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/m3captured-source"
+          mkdir -p "$dir/classes" "$dir/work"
+          root=m3/tooling/module-packs/parser/src
+          javac --release 21 -Xlint:all -Werror -d "$dir/classes" \
+            "$root/main/java/jdk/m3/parser/M3File.java" \
+            "$root/main/java/jdk/m3/parser/M3Utf8SourceMap.java" \
+            "$root/test/java/jdk/m3/parser/test/M3FileInputContract.java" \
+            "$root/test/java/jdk/m3/parser/test/M3Utf8SourceMapContract.java" \
+            "$root/test/java/jdk/m3/parser/test/M3CapturedSourceContract.java"
+          java -Dm3.parser.test.work="$dir/work" -cp "$dir/classes" jdk.m3.parser.test.M3FileInputContract
+          java -cp "$dir/classes" jdk.m3.parser.test.M3Utf8SourceMapContract
+          java -cp "$dir/classes" jdk.m3.parser.test.M3CapturedSourceContract

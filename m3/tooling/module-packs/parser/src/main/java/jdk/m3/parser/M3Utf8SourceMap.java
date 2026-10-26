@@ -44,7 +44,22 @@ public final class M3Utf8SourceMap {
             throws CharacterCodingException {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(captured, "captured");
-        if (maxBytes < 0 || captured.length > maxBytes) {
+        return verified(source, ByteBuffer.wrap(captured), maxBytes);
+    }
+
+    /**
+     * Verify one original caller-owned captured byte window, including direct
+     * and read-only NIO buffers, without materializing a raw byte[].
+     * Only [position,limit) is admitted; the caller's cursor remains unchanged.
+     * The buffer must not be mutated until admission finishes.
+     */
+    public static M3Utf8SourceMap verified(M3File source, ByteBuffer captured, int maxBytes)
+            throws CharacterCodingException {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(captured, "captured");
+        ByteBuffer window = captured.asReadOnlyBuffer();
+        int rawLength = window.remaining();
+        if (maxBytes < 0 || rawLength > maxBytes) {
             throw new IllegalArgumentException("UTF-8 input exceeds byte budget");
         }
         String claimed = source.byteSha256().orElseThrow(() ->
@@ -52,13 +67,14 @@ public final class M3Utf8SourceMap {
         MessageDigest digest;
         try { digest = MessageDigest.getInstance("SHA-256"); }
         catch (NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
-        if (!HexFormat.of().formatHex(digest.digest(captured)).equals(claimed)) {
+        digest.update(window.duplicate());
+        if (!HexFormat.of().formatHex(digest.digest()).equals(claimed)) {
             throw new IllegalArgumentException("captured bytes differ from M3File generation");
         }
         String decoded = StandardCharsets.UTF_8.newDecoder()
                 .onMalformedInput(CodingErrorAction.REPORT)
                 .onUnmappableCharacter(CodingErrorAction.REPORT)
-                .decode(ByteBuffer.wrap(captured)).toString();
+                .decode(window.duplicate()).toString();
         if (!decoded.equals(source.text())) {
             throw new IllegalArgumentException("M3File was not decoded as strict UTF-8");
         }
@@ -79,7 +95,7 @@ public final class M3Utf8SourceMap {
             chars += Character.charCount(scalar);
             scalars++;
         }
-        if (bytes != captured.length) {
+        if (bytes != rawLength) {
             throw new IllegalArgumentException("UTF-8 coordinate accounting differs from captured bytes");
         }
         if (charStarts[checkpoints - 1] != chars || byteStarts[checkpoints - 1] != bytes) {
