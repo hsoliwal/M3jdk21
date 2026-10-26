@@ -133,22 +133,51 @@ public final class M3TreeWindowPlan {
 		}
 	}
 
+	/**
+	 * Reusable dense coordinate lanes for the next residency snapshot. Never populate
+	 * the active last* arrays until the new plan has been admitted successfully.
+	 */
+	private static final int [] EMPTY_COORDINATES = new int [0];
+	private int [] bufferedParentIds = EMPTY_COORDINATES;
+	private int [] bufferedChildIndices = EMPTY_COORDINATES;
+	private int [] bufferedPhysicalParents = EMPTY_COORDINATES;
+	private int [] lastParentIds, lastChildIndices, lastPhysicalParents;
+
 	/** Convenience form of {@link #plan(int, int[], int[], int[])} over a residency buffer. */
 	public void plan (M3TreeProjection.Residency next) {
 		int count = next.size ();
-		int [] parentIds = new int [count], childIndices = new int [count], physicalParents = new int [count];
-		for (int entry = 0; entry < count; entry++) {
-			parentIds [entry] = next.parentId (entry);
-			childIndices [entry] = next.childIndex (entry);
-			physicalParents [entry] = next.physicalParent (entry);
+		if (bufferedParentIds.length < count) {
+			int nextCapacity = capacity (bufferedParentIds.length, count);
+			bufferedParentIds = new int [nextCapacity];
+			bufferedChildIndices = new int [nextCapacity];
+			bufferedPhysicalParents = new int [nextCapacity];
 		}
-		plan (count, parentIds, childIndices, physicalParents);
-		lastParentIds = parentIds;
-		lastChildIndices = childIndices;
-		lastPhysicalParents = physicalParents;
+		for (int entry = 0; entry < count; entry++) {
+			bufferedParentIds [entry] = next.parentId (entry);
+			bufferedChildIndices [entry] = next.childIndex (entry);
+			bufferedPhysicalParents [entry] = next.physicalParent (entry);
+		}
+		// Any invalid candidate leaves the prior pending commit lanes untouched.
+		plan (count, bufferedParentIds, bufferedChildIndices, bufferedPhysicalParents);
+		int [] previousParents = lastParentIds, previousChildren = lastChildIndices;
+		int [] previousPhysical = lastPhysicalParents;
+		lastParentIds = bufferedParentIds;
+		lastChildIndices = bufferedChildIndices;
+		lastPhysicalParents = bufferedPhysicalParents;
+		bufferedParentIds = previousParents == null ? EMPTY_COORDINATES : previousParents;
+		bufferedChildIndices = previousChildren == null ? EMPTY_COORDINATES : previousChildren;
+		bufferedPhysicalParents = previousPhysical == null ? EMPTY_COORDINATES : previousPhysical;
 	}
 
-	private int [] lastParentIds, lastChildIndices, lastPhysicalParents;
+	/** Reclaim no-longer-pending primitive lanes after a successful commit or a reset. */
+	private void recyclePendingCoordinates () {
+		if (lastParentIds != null && lastParentIds.length >= bufferedParentIds.length) {
+			bufferedParentIds = lastParentIds;
+			bufferedChildIndices = lastChildIndices;
+			bufferedPhysicalParents = lastPhysicalParents;
+		}
+		lastParentIds = lastChildIndices = lastPhysicalParents = null;
+	}
 
 	public int plannedCount () {
 		return plannedCount;
@@ -223,7 +252,7 @@ public final class M3TreeWindowPlan {
 			slotByHandle.put (handle, entry);
 		}
 		size = count;
-		lastParentIds = lastChildIndices = lastPhysicalParents = null;
+		recyclePendingCoordinates ();
 	}
 
 	/**
@@ -294,7 +323,7 @@ public final class M3TreeWindowPlan {
 			slotByHandle.put (handles [entry], entry);
 		}
 		plannedCount = retiredCount = 0;
-		lastParentIds = lastChildIndices = lastPhysicalParents = null;
+		recyclePendingCoordinates ();
 	}
 
 	/** Forgets the committed window (all native rows were deleted by the caller). */
@@ -302,7 +331,7 @@ public final class M3TreeWindowPlan {
 		size = plannedCount = retiredCount = 0;
 		slotByKey.clear ();
 		slotByHandle.clear ();
-		lastParentIds = lastChildIndices = lastPhysicalParents = null;
+		recyclePendingCoordinates ();
 	}
 
 	private void requireEntry (int entry) {
