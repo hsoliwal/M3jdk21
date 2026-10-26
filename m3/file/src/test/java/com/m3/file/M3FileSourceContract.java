@@ -8,6 +8,8 @@ import java.util.Arrays;
 
 /** Standalone source-coordinate and admitted M3File observation contract. */
 public final class M3FileSourceContract {
+    private M3FileSourceContract() { }
+
     private static int checks;
     private static void check(boolean ok, String why) {
         if (!ok) throw new AssertionError(why);

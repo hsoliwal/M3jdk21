@@ -10,6 +10,8 @@ import java.util.Random;
 
 /** Differential reference oracle for a provider-independent TSInputEdit-shaped packet. */
 public final class M3FileEditFramesContract {
+    private M3FileEditFramesContract() { }
+
     private static int checks;
     private static void ok(boolean yes, String reason) {
         if (!yes) throw new AssertionError(reason);

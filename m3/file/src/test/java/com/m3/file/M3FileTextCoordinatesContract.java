@@ -8,6 +8,8 @@ import java.util.Random;
 
 /** Strict external parser coordinate crosswalk through one retained source owner. */
 public final class M3FileTextCoordinatesContract {
+    private M3FileTextCoordinatesContract() { }
+
     private static int checks;
     private static void ok(boolean value, String reason) {
         if (!value) throw new AssertionError(reason);
