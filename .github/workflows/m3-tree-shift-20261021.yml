@@ -61,5 +61,5 @@ jobs:
             esac
             java "${java_opts[@]}" -cp "$RUNNER_TEMP/classes" \
               com.m3.collections.M3TreeWindowShiftContract | tee "$RUNNER_TEMP/proof-$mode.txt"
-            grep -Fx 'M3_TREE_WINDOW_SHIFT_PASS checks=2591918' "$RUNNER_TEMP/proof-$mode.txt"
+            grep -Fx 'M3_TREE_WINDOW_SHIFT_PASS checks=2591930' "$RUNNER_TEMP/proof-$mode.txt"
           done
