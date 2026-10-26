@@ -1,0 +1,33 @@
+{
+  "schema": "M3_TREE_SHIFT_EXPECTED_COUNT_RECEIVING_V1",
+  "source": "hsoliwal/com.synexia",
+  "canonical_commit": "a3332d74a0f55f41a718e4fe2fab50a852793e43",
+  "canonical_recipe": "com.synexia.m3.ViewportTreeShiftCount20261026",
+  "product_pr": 1950,
+  "product_previous_head": "3769eb91a4cc5582268c52164b9ecde4d70a17a4",
+  "original_workflow": ".github/workflows/m3-tree-shift-20261021.yml",
+  "before_git_blob": "dd67611ffe762d93b11a23637efdb50ccc6df7da",
+  "after_git_blob": "74ce28ee496da18e787dacb0453fcfc5c0eed277",
+  "before_sha256": "791f5f275f1226116f3a9a29a46ec7ed13bbdc91a94645946028aebb07e98502",
+  "after_sha256": "3fa14cad6b730b6721dae430334b70e65ec06fe70a59f051f64792fe0cfc7f5d",
+  "source_gate_previous_hosted": "PASS",
+  "compiler_previous_hosted": "PASS",
+  "original_test_sha256": "346b1b23baf27fdb9e5fcfd0609bf1897c7bdaa8fe4b17cb22732b0602b6babd",
+  "original_test_observed": "M3_TREE_WINDOW_SHIFT_PASS checks=2591930",
+  "previous_workflow_literal": "checks=2591918",
+  "local_actual_sdk": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "actual_results": 1,
+    "fixed_point": 0,
+    "canonical_recipe_engine_git_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+    "adapted_local_test_harness_not_byte_identical": true,
+    "junit_xml_sha256": "df7334a1d03c981d6429e92c95177645c2e2b113bedca5858fce4c657d2b993b"
+  },
+  "expected_four_mode_product_gate": "PENDING_NEW_HEAD",
+  "java_jni_source_mutation": false,
+  "installed_jdk_hotspot_jtreg_and_widgets": "NOT_RUN",
+  "throughput_claim": false
+}
