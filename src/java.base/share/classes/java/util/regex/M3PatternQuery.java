@@ -186,7 +186,7 @@ final class M3PatternQuery {
                     for (int atom = 0; atom <= atoms.length; atom++) {
                         row[atom] = ((state >>> atom) & 1L) != 0L;
                     }
-                    return matchesRolling(input, row, offset);
+                    return matchesMixed(input, row, offset, null);
                 }
                 state = (((state << 1) & ~repeatedStates) | (state & repeatedStates))
                         & masks[unit];
@@ -249,7 +249,7 @@ final class M3PatternQuery {
                     for (int atom = 0; atom <= atoms.length; atom++) {
                         row[atom] = ((state[atom >>> 6] >>> (atom & 63)) & 1L) != 0L;
                     }
-                    return matchesRolling(input, row, offset);
+                    return matchesMixed(input, row, offset, state);
                 }
                 long oldCarry = 0L;
                 long closedCarry = 0L;
@@ -337,6 +337,166 @@ final class M3PatternQuery {
                 }
             }
             return row[atoms.length] ? 1 : 0;
+        }
+        /**
+         * Keep the original rolling kernel for absent metadata, tiny programs and
+         * suffixes without an ASCII run in bounded lookahead. This forward routing scan
+         * never evaluates predicates or replays any prefix DP transition.
+         */
+        private int matchesMixed(String input, boolean[] row, int start, long[] wideState) {
+            if (ascii == null || atoms.length < 8
+                    || (empty[atoms.length] && codePoint[0] && row[1])) {
+                return matchesRolling(input, row, start);
+            }
+            int run = 0;
+            // Bound speculative traversal on all-Unicode/composite suffixes. A later
+            // opportunity may stay rolling; this selector never changes admission.
+            int limit = start + Math.min(64, input.length() - start);
+            for (int offset = start; offset < limit; offset++) {
+                run = input.charAt(offset) < 128 ? run + 1 : 0;
+                if (run == 8) return matchesMixedRolling(input, row, start, wideState);
+            }
+            return matchesRolling(input, row, start);
+        }
+
+        /** Continue from a proved prefix frontier without rereading the input prefix. */
+        private int matchesMixedRolling(String input, boolean[] row, int start, long[] wideState) {
+            // If every atom is optional, a live first star closes every later state.
+            // Its general-width predicate can consume this prefix without changing
+            // that frontier. BMP nodes must retain the intermediate-unit paths below.
+            if (empty[atoms.length] && codePoint[0] && row[1]) {
+                while (start < input.length()) {
+                    int cp = Character.codePointAt(input, start);
+                    if (!atoms[0].is(cp)) break;
+                    row[0] = false;
+                    start += Character.charCount(cp);
+                }
+                if (start == input.length()) return 1;
+            }
+            boolean[] middle = null;
+            // Tiny plans retain rolling: conversion and mask steps need not pay there.
+            long[] masks = atoms.length >= 8 ? ascii : null;
+            int nextAsciiCheck = start;
+            for (int offset = start; offset < input.length(); offset++) {
+                char unit = input.charAt(offset);
+                if (unit < 128 && masks != null && offset >= nextAsciiCheck) {
+                    // Inspect each short island once. Packing/unpacking a frontier pays
+                    // only for a run of at least 8 units, never for each ASCII unit.
+                    int limit = offset + Math.min(8, input.length() - offset);
+                    int end = offset + 1;
+                    while (end < limit && input.charAt(end) < 128) end++;
+                    if (end - offset == 8) {
+                        // The wide caller lends its existing invocation-local frontier.
+                        offset = advanceAsciiRun(input, row, offset, masks, wideState) - 1;
+                        continue;
+                    }
+                    nextAsciiCheck = end;
+                }
+                if (Character.isHighSurrogate(unit) && offset + 1 < input.length()
+                        && Character.isLowSurrogate(input.charAt(offset + 1))) {
+                    char low = input.charAt(++offset);
+                    int cp = Character.toCodePoint(unit, low);
+                    if (middle == null) middle = new boolean[atoms.length + 1];
+                    // General nodes consume the pair. BMP nodes may consume its high unit,
+                    // leaving a distinct frontier at the low unit. Keep both possibilities;
+                    // calling every predicate with cp would erase the latter path.
+                    middle[0] = false;
+                    for (int atom = 0; atom < atoms.length; atom++) {
+                        boolean consumesHigh = !codePoint[atom] && atoms[atom].is(unit);
+                        middle[atom + 1] = repeated[atom]
+                                ? middle[atom] || (row[atom + 1] && consumesHigh)
+                                : row[atom] && consumesHigh;
+                    }
+                    boolean diagonal = row[0];
+                    row[0] = false;
+                    for (int atom = 0; atom < atoms.length; atom++) {
+                        boolean above = row[atom + 1];
+                        row[atom + 1] = repeated[atom]
+                                ? row[atom] || (above && codePoint[atom] && atoms[atom].is(cp))
+                                        || (middle[atom + 1] && atoms[atom].is(low))
+                                : (diagonal && codePoint[atom] && atoms[atom].is(cp))
+                                        || (middle[atom] && atoms[atom].is(low));
+                        diagonal = above;
+                    }
+                    continue;
+                }
+                // An unpaired surrogate is one code point and one UTF-16 unit in Matcher.
+                boolean diagonal = row[0];
+                row[0] = false;
+                for (int atom = 0; atom < atoms.length; atom++) {
+                    boolean above = row[atom + 1];
+                    row[atom + 1] = repeated[atom]
+                            ? row[atom] || (above && atoms[atom].is(unit))
+                            : diagonal && atoms[atom].is(unit);
+                    diagonal = above;
+                }
+            }
+            return row[atoms.length] ? 1 : 0;
+        }
+
+        /**
+         * Resume the already prepared masks from an exact closed rolling frontier.
+         * Surrogate transitions finish in rolling before this entry; only ASCII is
+         * consumed here. Buffers are invocation-local and reused across every run.
+         */
+        private int advanceAsciiRun(String input, boolean[] row, int offset,
+                                    long[] masks, long[] wideState) {
+            if (atoms.length <= 63) {
+                long state = 0L;
+                for (int atom = 0; atom <= atoms.length; atom++) {
+                    if (row[atom]) state |= 1L << atom;
+                }
+                while (offset < input.length()) {
+                    char unit = input.charAt(offset);
+                    if (unit >= 128) break;
+                    state = (((state << 1) & ~repeatedStates) | (state & repeatedStates))
+                            & masks[unit];
+                    state |= (state << 1) & masks[128];
+                    state |= (state << 2) & masks[129];
+                    state |= (state << 4) & masks[130];
+                    state |= (state << 8) & masks[131];
+                    state |= (state << 16) & masks[132];
+                    state |= (state << 32) & masks[133];
+                    offset++;
+                }
+                for (int atom = 0; atom <= atoms.length; atom++) {
+                    row[atom] = ((state >>> atom) & 1L) != 0L;
+                }
+                return offset;
+            }
+            int words = wideState.length;
+            for (int word = 0; word < words; word++) wideState[word] = 0L;
+            for (int atom = 0; atom <= atoms.length; atom++) {
+                if (row[atom]) wideState[atom >>> 6] |= 1L << (atom & 63);
+            }
+            while (offset < input.length()) {
+                char unit = input.charAt(offset);
+                if (unit >= 128) break;
+                long oldCarry = 0L;
+                long closedCarry = 0L;
+                for (int word = 0; word < words; word++) {
+                    long before = wideState[word];
+                    long stars = masks[136 * words + word];
+                    long shifted = (before << 1) | oldCarry;
+                    long next = ((shifted & ~stars) | (before & stars))
+                            & masks[unit * words + word];
+                    next |= closedCarry & stars;
+                    next |= (next << 1) & masks[128 * words + word];
+                    next |= (next << 2) & masks[129 * words + word];
+                    next |= (next << 4) & masks[130 * words + word];
+                    next |= (next << 8) & masks[131 * words + word];
+                    next |= (next << 16) & masks[132 * words + word];
+                    next |= (next << 32) & masks[133 * words + word];
+                    wideState[word] = next;
+                    oldCarry = before >>> 63;
+                    closedCarry = next >>> 63;
+                }
+                offset++;
+            }
+            for (int atom = 0; atom <= atoms.length; atom++) {
+                row[atom] = ((wideState[atom >>> 6] >>> (atom & 63)) & 1L) != 0L;
+            }
+            return offset;
         }
     }
 
