@@ -176,6 +176,20 @@ public final class M3CpuToolsTest {
                 && diff.patch().changes().size() == 1, "bounded minimal UTF-16 file edit");
         check(diff.apply(source).equals(target.text())
                 && CpuTools.verifyDiff(source, target, 1, diff, null), "source-bound minimal patch and replay");
+        var indexed = CpuTools.lineDiff(source, target, 2);
+        check(indexed.complete() && indexed.distance() == 2
+                && indexed.patch().sourceLines() == 1 && indexed.patch().targetLines() == 1,
+                "line indexed edit replaces one full source line");
+        check(indexed.apply(source).equals(target.text())
+                && CpuTools.verifyLineDiff(source, target, 2, indexed, null),
+                "line indexed replay reconstructs exact source text");
+        check(!CpuTools.verifyLineDiff(source, target, 3, indexed, null)
+                && !CpuTools.verifyLineDiff(M3File.load(copied), target, 2, indexed, null),
+                "line receipt seals edit budget and URI");
+        var missedLine = CpuTools.lineDiff(source, target, 1);
+        check(!missedLine.complete() && missedLine.patch().changes().isEmpty(),
+                "line edit distance cannot claim a partial patch");
+        expect(IllegalStateException.class, () -> missedLine.apply(source));
         check(!CpuTools.verifyDiff(source, target, 2, diff, null), "edit budget included in receipt");
         check(!CpuTools.verifyDiff(M3File.load(copied), target, 1, diff, null),
                 "original file URI included in receipt");
@@ -189,6 +203,12 @@ public final class M3CpuToolsTest {
                 "borrowed diff monitor and stable receipt");
         diffMonitor.cancelled = true;
         expect(CancellationException.class, () -> CpuTools.diff(source, target, 1, diffMonitor));
+        var indexedMonitor = new CountMonitor();
+        check(CpuTools.lineDiff(source, target, 2, indexedMonitor).sha256().equals(indexed.sha256())
+                && indexedMonitor.work == 1 && indexedMonitor.finished == 0,
+                "line indexed progress is borrowed and deterministic");
+        indexedMonitor.cancelled = true;
+        expect(CancellationException.class, () -> CpuTools.lineDiff(source, target, 2, indexedMonitor));
         Path mergeOtherPath = work.resolve("merge-independent.txt");
         Files.writeString(mergeOtherPath, "#ababa\ud83d\ude42\r\n", StandardCharsets.UTF_8);
         M3File mergeOther = M3File.load(mergeOtherPath);

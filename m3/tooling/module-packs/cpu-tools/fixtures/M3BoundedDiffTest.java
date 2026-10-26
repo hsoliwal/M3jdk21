@@ -39,6 +39,31 @@ public final class M3BoundedDiffTest {
             check(result.patch().changes().getFirst().inserted().equals("!"), "inserted character");
             check(result.apply(before).equals(after.text()), "replay reconstructs target");
             check(CpuTools.verifyDiff(before, after, 1, result, null), "exact receipt replay");
+            var linePatch = CpuTools.lineDiff(before, after, 2);
+            check(linePatch.complete() && linePatch.distance() == 2
+                    && linePatch.patch().sourceLines() == 2 && linePatch.patch().targetLines() == 2,
+                    "indexed line diff counts a replacement as delete plus insert");
+            check(linePatch.patch().changes().size() == 1
+                    && linePatch.patch().changes().getFirst().startUtf16() == 6
+                    && linePatch.patch().changes().getFirst().inserted().equals("right!\ud83d\ude42\n"),
+                    "exact UTF-16 offsets and line-ending payload");
+            check(linePatch.apply(before).equals(after.text())
+                    && CpuTools.verifyLineDiff(before, after, 2, linePatch, null),
+                    "M3File line diff can reconstruct and independently replay");
+            check(!CpuTools.verifyLineDiff(before, after, 3, linePatch, null)
+                    && !CpuTools.verifyLineDiff(M3File.load(moved), after, 2, linePatch, null),
+                    "line edit budget and file location are sealed");
+            try {
+                linePatch.apply(M3File.load(moved));
+                throw new AssertionError("line patch accepted a substituted file URI");
+            } catch (IllegalArgumentException expected) { check(true, "line patch location substitution refused"); }
+            var missedLine = CpuTools.lineDiff(before, after, 1);
+            check(!missedLine.complete() && missedLine.distance() == -1
+                    && missedLine.patch().changes().isEmpty(), "insufficient line budget reports no patch");
+            try {
+                missedLine.apply(before);
+                throw new AssertionError("incomplete line patch applied");
+            } catch (IllegalStateException expected) { check(true, "incomplete line patch cannot apply"); }
             var merged = CpuTools.merge(before, after, independent, 1);
             check(merged.mergeable() && merged.conflictCount() == 0,
                     "bounded three-source M3File merge composes independent edits");
@@ -76,6 +101,10 @@ public final class M3BoundedDiffTest {
             } catch (IllegalStateException expected) { check(true, "incomplete apply refused"); }
             Files.writeString(original, "changed on disk", StandardCharsets.UTF_8);
             check(CpuTools.verifyDiff(before, after, 1, result, null), "admitted snapshot remains immutable");
+            check(CpuTools.verifyLineDiff(before, after, 2, linePatch, null),
+                    "line receipt belongs to admitted snapshot after disk mutation");
+            check(!CpuTools.verifyLineDiff(M3File.load(original), after, 2, linePatch, null),
+                    "new disk version cannot inherit the line receipt");
             check(CpuTools.verifyMerge(before, after, independent, 1, merged, null),
                     "three-way receipt retains admitted snapshot after underlying disk change");
             check(!CpuTools.verifyMerge(M3File.load(original), after, independent, 1, merged, null),
@@ -86,6 +115,15 @@ public final class M3BoundedDiffTest {
             check(CpuTools.diff(before, after, 1, monitor).sha256().equals(result.sha256()),
                     "repeated deterministic result");
             check(monitor.worked == 1 && monitor.finished == 0, "borrowed monitor not completed");
+            var lineMonitor = new Counter();
+            check(CpuTools.lineDiff(before, after, 2, lineMonitor).sha256().equals(linePatch.sha256())
+                    && lineMonitor.worked == 1 && lineMonitor.finished == 0,
+                    "line diff borrows progress monitor and generates stable receipt");
+            lineMonitor.cancelled = true;
+            try {
+                CpuTools.lineDiff(before, after, 2, lineMonitor);
+                throw new AssertionError("cancelled line diff executed");
+            } catch (CancellationException expected) { check(true, "line diff cancellation observed"); }
             monitor.cancelled = true;
             try {
                 CpuTools.diff(before, after, 1, monitor);

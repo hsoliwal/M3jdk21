@@ -8,6 +8,7 @@ import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.plan.priority.StablePriorityQueue;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.diff.BoundedDiff;
+import com.m3.tools.text.diff.LineDiff;
 import com.m3.tools.text.diff.TextDelta;
 import com.m3.tools.text.diff.ThreeWayMerge;
 import com.m3.tools.text.frequency.TermFrequency;
@@ -51,7 +52,7 @@ public final class M3DonorToolsTest {
 
     public static void main(String[] args) throws Exception {
         text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
-        boundedDiff(); threeWayMerge();
+        boundedDiff(); threeWayMerge(); lineIndexedDiff();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -294,6 +295,125 @@ public final class M3DonorToolsTest {
                     if (checkpoints.incrementAndGet() == 3) throw new IllegalStateException("cancel");
                 }));
         check(checkpoints.get() == 3, "merge checkpoint cancellation happens during preprocessing");
+    }
+
+    /** Independent line-token LCS validates edit minimality and exact CR/LF boundaries. */
+    private static void lineIndexedDiff() throws Exception {
+        rejects(NullPointerException.class, () -> LineDiff.diff(null, "", 0));
+        rejects(NullPointerException.class, () -> LineDiff.diff("", null, 0));
+        rejects(NullPointerException.class, () -> LineDiff.diff("", "", 0, null));
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff("", "", -1));
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff("", "", 513));
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff(
+                "x".repeat(LineDiff.MAX_SOURCE_UTF16 + 1), "", 0));
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff("x\n".repeat(LineDiff.MAX_LINES + 1), "", 0));
+        rejects(IllegalArgumentException.class, () -> new LineDiff.LineChange(1, 0, 0, 0, 0, ""));
+        rejects(IllegalArgumentException.class, () -> new LineDiff.LineChange(0, 0, 0, 0, 0, ""));
+        rejects(IllegalArgumentException.class, () -> new LineDiff.LineChange(0, 1, 0, 1, 0, "x"));
+        rejects(NullPointerException.class, () -> new LineDiff.LineChange(0, 1, 0, 1, 0, null));
+        for (String[] casePair : new String[][]{
+                {"", ""}, {"a", ""}, {"", "a"}, {"a\r\n", "a\n"},
+                {"a\r\nb\nc\r", "c\ra\r\nb\n"}, {"a\r\n", "a\r\n"},
+                {"\ud800\r\n", "\ud800\r"}, {"a\n\n", "a\n"},
+                {"\0\n\udc00", "\udc00\n\0"}, {"one\ntwo\n", "one\nTHREE\ntwo\n"}}) {
+            checkMinimalLinePatch(casePair[0], casePair[1], 25);
+        }
+        for (int trial = 0; trial < 2_400; trial++) {
+            checkMinimalLinePatch(randomLineDocument(15), randomLineDocument(15), RANDOM.nextInt(19));
+        }
+        String longDocument = "row\r\n".repeat(80_000);
+        check(longDocument.length() > BoundedDiff.MAX_INPUT_UTF16, "long source exceeds code-unit diff limit");
+        var longPatch = LineDiff.diff(longDocument, longDocument + "tail\r\n", 1);
+        check(longPatch.complete() && longPatch.distance() == 1
+                && longPatch.sourceLines() == 80_000 && longPatch.targetLines() == 80_001,
+                "line-indexed script scales beyond the UTF-16 unit bound");
+        check(longPatch.apply(longDocument).equals(longDocument + "tail\r\n"),
+                "large duplicate-line reconstruction remains exact");
+        StringBuilder unique = new StringBuilder();
+        for (int i = 0; i < LineDiff.MAX_UNIQUE_LINES; i++) unique.append("id:").append(i).append('\n');
+        var fullLexicon = LineDiff.diff(unique.toString(), unique.toString(), 0);
+        check(fullLexicon.complete() && fullLexicon.distance() == 0
+                && fullLexicon.sourceLines() == LineDiff.MAX_UNIQUE_LINES,
+                "entire 16-bit ID domain is admitted, including surrogate-valued IDs");
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff(unique + "id:overflow\n", "", 0));
+        var incomplete = LineDiff.diff("a\r\n", "b\r\n", 1);
+        check(!incomplete.complete() && incomplete.distance() == -1 && incomplete.changes().isEmpty(),
+                "line edit budget miss must be explicit");
+        rejects(IllegalStateException.class, () -> incomplete.apply("a\r\n"));
+        rejects(UnsupportedOperationException.class, () -> LineDiff.diff("a", "b", 2).changes().clear());
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> LineDiff.diff("row\n".repeat(30_000), "", 1, () -> {
+            if (checkpoints.incrementAndGet() == 4) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 4, "line hashing/tokenizing checks cancellation");
+    }
+
+    private static String randomLineDocument(int maximumLines) {
+        String[] contents = {"", "a", "b", "é", "\ud800", "\udc00", "a\0b", "\ud83d\ude42"};
+        String[] endings = {"\r", "\n", "\r\n"};
+        int count = RANDOM.nextInt(maximumLines + 1);
+        StringBuilder text = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            text.append(contents[RANDOM.nextInt(contents.length)]);
+            if (i != count - 1 || RANDOM.nextBoolean()) text.append(endings[RANDOM.nextInt(endings.length)]);
+        }
+        return text.toString();
+    }
+
+    private static List<String> oracleLines(String source) {
+        List<String> lines = new ArrayList<>();
+        int at = 0;
+        while (at < source.length()) {
+            int start = at;
+            while (at < source.length() && source.charAt(at) != '\r' && source.charAt(at) != '\n') at++;
+            if (at < source.length()) {
+                char ending = source.charAt(at++);
+                if (ending == '\r' && at < source.length() && source.charAt(at) == '\n') at++;
+            }
+            lines.add(source.substring(start, at));
+        }
+        return lines;
+    }
+
+    private static void checkMinimalLinePatch(String before, String after, int budget) throws Exception {
+        List<String> a = oracleLines(before), b = oracleLines(after);
+        int[][] lcs = new int[a.size() + 1][b.size() + 1];
+        for (int i = a.size() - 1; i >= 0; i--) for (int j = b.size() - 1; j >= 0; j--) {
+            lcs[i][j] = a.get(i).equals(b.get(j)) ? 1 + lcs[i + 1][j + 1]
+                    : Math.max(lcs[i + 1][j], lcs[i][j + 1]);
+        }
+        int minimum = a.size() + b.size() - 2 * lcs[0][0];
+        LineDiff.Patch actual = LineDiff.diff(before, after, budget);
+        check(actual.sourceLines() == a.size() && actual.targetLines() == b.size(), "true line cardinality");
+        check(actual.sourceLength() == before.length() && actual.targetLength() == after.length(),
+                "exact UTF-16 geometry");
+        check(actual.sourceSha256().matches("[0-9a-f]{64}")
+                && actual.targetSha256().matches("[0-9a-f]{64}"), "domain-separated line identities");
+        if (minimum > budget) {
+            check(!actual.complete() && actual.distance() == -1 && actual.changes().isEmpty(),
+                    "honest line-distance miss");
+            rejects(IllegalStateException.class, () -> actual.apply(before));
+            return;
+        }
+        check(actual.complete() && actual.distance() == minimum, "shortest line SES vs independent LCS");
+        check(actual.apply(before).equals(after), "line patch recreates full UTF-16 with endings");
+        check(actual.changes().equals(LineDiff.diff(before, after, budget).changes()),
+                "same line inputs yield same canonical hunks");
+        int cursor = 0, lineCursor = 0, cost = 0;
+        for (LineDiff.LineChange change : actual.changes()) {
+            check(change.startLine() >= lineCursor && change.startUtf16() >= cursor
+                    && change.endUtf16() <= before.length(), "ordered UTF-16/line ranges");
+            int prefix = a.subList(0, change.startLine()).stream().mapToInt(String::length).sum();
+            int suffix = a.subList(0, change.endLine()).stream().mapToInt(String::length).sum();
+            check(change.startUtf16() == prefix && change.endUtf16() == suffix,
+                    "source offsets equal independent full-line boundaries");
+            check(oracleLines(change.inserted()).size() == change.insertedLines(),
+                    "inserted line cardinality matches physical terminators");
+            cost += change.endLine() - change.startLine() + change.insertedLines();
+            lineCursor = change.endLine(); cursor = change.endUtf16();
+        }
+        check(cost == minimum, "line hunk coalescing keeps shortest edit count");
+        if (!before.isEmpty()) rejects(IllegalArgumentException.class, () -> actual.apply(before + "x"));
     }
 
     /** Independent substring enumeration proves rolling-hash candidates never decide equality. */

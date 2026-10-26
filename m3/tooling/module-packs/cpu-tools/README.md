@@ -74,7 +74,7 @@ pack has no runtime dependency on `com.synexia`.
 | `com.m3.tools.text.ngram` | Overlapping UTF-16 n-gram counts |
 | `com.m3.tools.text.frequency` | Exact term counts |
 | `com.m3.tools.text.similarity` | Bounded UTF-16 Levenshtein distance |
-| `com.m3.tools.text.diff` | Common-prefix/suffix replacement span |
+| `com.m3.tools.text.diff` | Common-prefix/suffix delta, bounded UTF-16 scripts, conservative three-way merge and lossless indexed-line diff |
 | `com.m3.tools.text.index` | Exact immutable term/document postings in primitive lanes |
 | `com.m3.tools.graph.topology` | Deterministic integer topological order |
 | `com.m3.tools.graph.paths` | Nonnegative weighted shortest-path distances |
@@ -221,8 +221,35 @@ retain normal double rounding/overflow behavior; finite input samples can
 produce nonfinite moments. UTF-16 n-gram fields escape
 record delimiters and surrogate code units; n-gram width is not code-point
 width. Varints cover nonnegative signed-long values, not all unsigned 64-bit
-bit patterns. The direct text delta is one replacement span, not a full
-semantic diff or general three-way merge.
+bit patterns. The original direct `TextDelta` is one common-prefix/suffix
+replacement span; it is not a general semantic diff. `BoundedDiff` separately
+computes an exact shortest insertion/deletion script over at most 262,144
+UTF-16 units per side and at most 512 edits (replacement counts as two),
+including unmatched surrogate halves. `ThreeWayMerge` composes two such
+complete scripts against one base, admitting independent or identical edits;
+overlapping edits, divergent co-located inserts and insertion exactly at a
+replacement boundary are conservative conflicts. It cannot resolve semantic
+conflicts and never returns a partial merge. Conflict witnesses are capped at
+1,024 while the full conflict count and truncation state remain available.
+
+The complementary `LineDiff` indexes whole lines as primitive 16-bit IDs and
+reuses the same shortest-edit engine on those IDs. Each token includes its
+exact CR, LF, CRLF or absent ending; the index neither normalizes line endings
+nor retains a second set of line-text substrings. Its per-side limit is 16 Mi
+UTF-16 units and 100,000 lines, with at most 65,536 **distinct lines across
+both sources** and 512 insert/delete line operations. Over-budget distance is
+incomplete with no usable patch; excessive source, line or unique-line
+geometry is explicitly refused. This is not GNU `diff`/`diff3` output
+compatibility or an unbounded large-file algorithm.
+
+The existing `CpuTools.diff`, `merge` and new `lineDiff` Java entry points bind
+their results to ordered immutable `M3File` URI, raw-byte and UTF-16 digests,
+and algorithm/parameter/output facts in deterministic receipts. `verifyDiff`,
+`verifyMerge` and `verifyLineDiff` recompute; `FileLineDiff.apply` refuses a
+substituted source URI even when the text happens to be identical. These
+algorithms use the canonical `String`/M3String text owner and do not alter
+`String`, `Pattern`/M3Regex, JNI/HotSpot symbols or the existing DAG command
+bindings. Their installed M3JDK21 image qualification is still pending.
 
 Receipts bind identities, parameters, source coordinates, implementation
 resources and outputs as appropriate to their API. `sourceReceipt` also checks

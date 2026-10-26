@@ -7,6 +7,7 @@ import com.m3.tools.graph.paths.ShortestPaths;
 import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.diff.BoundedDiff;
+import com.m3.tools.text.diff.LineDiff;
 import com.m3.tools.text.diff.ThreeWayMerge;
 import com.m3.tools.text.frequency.TermFrequency;
 import com.m3.tools.text.index.Bm25Ranker;
@@ -573,6 +574,92 @@ public final class CpuTools {
                                      FileDiff expected, ProgressMonitor monitor) {
         Objects.requireNonNull(expected, "expected");
         FileDiff actual = diff(source, target, maxEdits, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.complete() == expected.complete()
+                && actual.distance() == expected.distance()
+                && actual.patch().changes().equals(expected.patch().changes());
+    }
+
+    /** Exact line-oriented patch; retains no source file handle or line text dictionary. */
+    public static final class FileLineDiff {
+        private final LineDiff.Patch patch;
+        private final String sourceUri;
+        private final String sourceRawSha256;
+        private final String sourceUtf16Sha256;
+        private final String sha256;
+
+        private FileLineDiff(LineDiff.Patch patch, M3File source, String sha256) {
+            this.patch = patch;
+            this.sourceUri = source.uri().toASCIIString();
+            this.sourceRawSha256 = source.rawSha256();
+            this.sourceUtf16Sha256 = source.utf16Sha256();
+            this.sha256 = sha256;
+        }
+
+        public LineDiff.Patch patch() { return patch; }
+        public boolean complete() { return patch.complete(); }
+        public int distance() { return patch.distance(); }
+        public String sha256() { return sha256; }
+
+        /** Validate file URI and both admitted identities before UTF-16 materialization. */
+        public String apply(M3File original) {
+            Objects.requireNonNull(original, "original");
+            if (!sourceUri.equals(original.uri().toASCIIString())
+                    || !sourceRawSha256.equals(original.rawSha256())
+                    || !sourceUtf16Sha256.equals(original.utf16Sha256())) {
+                throw new IllegalArgumentException("line patch source identity mismatch");
+            }
+            return patch.apply(original.text());
+        }
+    }
+
+    public static FileLineDiff lineDiff(M3File source, M3File target, int maxEdits) {
+        return lineDiff(source, target, maxEdits, null);
+    }
+
+    /**
+     * A source-sealed line edit script with exact line terminators. The bounded
+     * shortest-edit engine is reused on indexed line IDs, not input characters.
+     * The returned result is never a partial patch on an edit-budget miss.
+     */
+    public static FileLineDiff lineDiff(M3File source, M3File target, int maxEdits,
+                                        ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(target, "target");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        LineDiff.Patch patch = LineDiff.diff(source.text(), target.text(),
+                maxEdits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-line-diff-v1").text(Implementation.ROOT);
+        for (M3File file : List.of(source, target)) {
+            progress.checkCancelled();
+            hash.text(file.uri().toASCIIString()).text(file.rawSha256()).text(file.utf16Sha256())
+                    .number(file.byteLength()).number(file.length());
+        }
+        hash.number(maxEdits).number(patch.complete() ? 1 : 0).number(patch.distance())
+                .number(patch.sourceLines()).number(patch.targetLines())
+                .text(patch.sourceSha256()).text(patch.targetSha256())
+                .number(patch.changes().size());
+        for (LineDiff.LineChange change : patch.changes()) {
+            progress.checkCancelled();
+            hash.number(change.startLine()).number(change.endLine())
+                    .number(change.startUtf16()).number(change.endUtf16())
+                    .number(change.insertedLines()).number(change.inserted().length());
+            for (int index = 0; index < change.inserted().length(); index++) {
+                if ((index & 8191) == 0) progress.checkCancelled();
+                hash.number(change.inserted().charAt(index));
+            }
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileLineDiff(patch, source, hash.finish());
+    }
+
+    /** Re-execution proves both admitted file identities and all line coordinates. */
+    public static boolean verifyLineDiff(M3File source, M3File target, int maxEdits,
+                                         FileLineDiff expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        FileLineDiff actual = lineDiff(source, target, maxEdits, monitor);
         return actual.sha256().equals(expected.sha256())
                 && actual.complete() == expected.complete()
                 && actual.distance() == expected.distance()
