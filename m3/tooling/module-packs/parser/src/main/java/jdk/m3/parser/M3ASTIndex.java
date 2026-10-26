@@ -49,9 +49,11 @@ public final class M3ASTIndex {
     public static final int RECOVERED = 8;
     /** Optional CST/token facts; ordinary parser producers retain their existing flags. */
     public static final int NAMED = 16, TOKEN = 32, TRIVIA = 64, MISSING = 128, ERROR = 256;
+    /** The external parser certified an optional trivia-inclusive full source range. */
+    public static final int EXACT_FULL_RANGE = 512;
     private static final int LEGACY_FLAGS = EXACT_RANGE | SYNTAX_ONLY | SOURCE_UNVERIFIED | RECOVERED;
     private static final int KNOWN_FLAGS = EXACT_RANGE | SYNTAX_ONLY | SOURCE_UNVERIFIED
-            | RECOVERED | NAMED | TOKEN | TRIVIA | MISSING | ERROR;
+            | RECOVERED | NAMED | TOKEN | TRIVIA | MISSING | ERROR | EXACT_FULL_RANGE;
     private final M3File source;
     private final Domain domain;
     private final String providerId;
@@ -59,6 +61,7 @@ public final class M3ASTIndex {
     private final String[] roleNames;
     private final int[] roleIds;
     private final int[] rolePositions;
+    private final int[] fullStarts, fullEnds;
     private final int[] kinds, parents, starts, ends, flags, first, next, childCounts;
     private final int[] startLines, endLines, enclosingTypes, enclosingExecutables;
     private final byte[] literalKinds;
@@ -73,6 +76,8 @@ public final class M3ASTIndex {
         roleNames = Arrays.copyOf(builder.roleNames, builder.roleCount);
         roleIds = builder.roleIds == null ? null : Arrays.copyOf(builder.roleIds, builder.size);
         rolePositions = builder.rolePositions == null ? null : Arrays.copyOf(builder.rolePositions, builder.size);
+        fullStarts = builder.fullStarts == null ? null : Arrays.copyOf(builder.fullStarts, builder.size);
+        fullEnds = builder.fullEnds == null ? null : Arrays.copyOf(builder.fullEnds, builder.size);
         kinds = Arrays.copyOf(builder.kinds, builder.size);
         parents = Arrays.copyOf(builder.parents, builder.size);
         starts = Arrays.copyOf(builder.starts, builder.size);
@@ -132,6 +137,18 @@ public final class M3ASTIndex {
         check(node);
         return rolePositions == null ? -1 : rolePositions[node];
     }
+    /** Optional trivia-inclusive half-open UTF-16 range; -1 if the provider did not supply one. */
+    public int fullStart(int node) { check(node); return fullStarts == null ? -1 : fullStarts[node]; }
+    public int fullEnd(int node) { check(node); return fullEnds == null ? -1 : fullEnds[node]; }
+    public boolean hasExactFullRange(int node) {
+        check(node);
+        return fullStarts != null && fullStarts[node] >= 0 && (flags[node] & EXACT_FULL_RANGE) != 0;
+    }
+    /** Reprint a certified trivia-inclusive span from the existing source payload. */
+    public String fullSourceText(int node) {
+        if (!hasExactFullRange(node)) throw new IllegalStateException("unverified/unknown full range");
+        return source.subSequence(fullStarts[node], fullEnds[node]);
+    }
     public boolean hasExactRange(int node) {
         check(node);
         return starts[node] >= 0 && ends[node] >= 0 && (flags[node] & EXACT_RANGE) != 0;
@@ -146,7 +163,8 @@ public final class M3ASTIndex {
     public long metadataBytes() {
         return (literalKinds == null ? 0L : nodeCount() * 25L)
                 + (roleIds == null ? 0L : nodeCount() * Integer.BYTES)
-                + (rolePositions == null ? 0L : nodeCount() * Integer.BYTES);
+                + (rolePositions == null ? 0L : nodeCount() * Integer.BYTES)
+                + (fullStarts == null ? 0L : nodeCount() * 2L * Integer.BYTES);
     }
     public boolean hasDetails(int node) { check(node); return literalKinds != null && literalKinds[node] >= 0; }
     public int startLine(int node) { return hasDetails(node) ? startLines[node] : -1; }
@@ -368,6 +386,7 @@ public final class M3ASTIndex {
         private int roleCount;
         private int[] roleIds;
         private int[] rolePositions;
+        private int[] fullStarts, fullEnds;
         private int[] kinds = new int[32], parents = new int[32], starts = new int[32];
         private int[] ends = new int[32], flags = new int[32], first = new int[32];
         private int[] last = new int[32], next = new int[32], childCounts = new int[32];
@@ -418,6 +437,9 @@ public final class M3ASTIndex {
             }
             if ((flags & ~(domain == Domain.GENERIC ? KNOWN_FLAGS : LEGACY_FLAGS)) != 0) {
                 throw new IllegalArgumentException("unknown AST index flags");
+            }
+            if ((flags & EXACT_FULL_RANGE) != 0) {
+                throw new IllegalArgumentException("full-range certificate requires fullRange admission");
             }
             if (parent == -1 && role != null) {
                 throw new IllegalArgumentException("root cannot have an incoming edge role");
@@ -472,6 +494,53 @@ public final class M3ASTIndex {
             return roleCount++;
         }
 
+        /**
+         * Attach one optional provider-certified trivia-inclusive full span.
+         * This is source geometry, deliberately excluded from structural hashes.
+         * The source owner is not copied and a second AST is never retained.
+         */
+        public void fullRange(int node, int start, int end, boolean exact) {
+            if (sealed) throw new IllegalStateException("index already sealed");
+            Objects.checkIndex(node, size);
+            if (domain != Domain.GENERIC) {
+                throw new IllegalArgumentException("full span requires generic foreign AST");
+            }
+            if (exact && (flags[node] & SOURCE_UNVERIFIED) != 0) {
+                throw new IllegalArgumentException("unverified source cannot certify full text");
+            }
+            if (start < 0 || end < start || end > source.length()) {
+                throw new IllegalArgumentException("invalid full UTF-16 source span");
+            }
+            if (fullStarts != null && fullStarts[node] >= 0) {
+                throw new IllegalStateException("full span already assigned");
+            }
+            if (starts[node] >= 0 && (start > starts[node] || end < ends[node])) {
+                throw new IllegalArgumentException("full span excludes syntax core");
+            }
+            int parent = parents[node];
+            if (parent >= 0 && fullStarts != null && fullStarts[parent] >= 0
+                    && (start < fullStarts[parent] || end > fullEnds[parent])) {
+                throw new IllegalArgumentException("full span escapes parent full span");
+            }
+            if (fullStarts != null) {
+                for (int child = first[node]; child >= 0; child = next[child]) {
+                    if (fullStarts[child] >= 0
+                            && (fullStarts[child] < start || fullEnds[child] > end)) {
+                        throw new IllegalArgumentException("full span excludes indexed child full span");
+                    }
+                }
+            }
+            if (fullStarts == null) {
+                fullStarts = new int[kinds.length];
+                fullEnds = new int[kinds.length];
+                Arrays.fill(fullStarts, -1);
+                Arrays.fill(fullEnds, -1);
+            }
+            fullStarts[node] = start;
+            fullEnds[node] = end;
+            if (exact) flags[node] |= EXACT_FULL_RANGE;
+        }
+
         /** Complete a previously unknown block/source range, before publication. */
         public void completeRange(int node, int start, int end, boolean exact) {
             if (sealed) throw new IllegalStateException("index already sealed");
@@ -481,6 +550,10 @@ public final class M3ASTIndex {
             }
             if (start < 0 || end < start || end > source.length()) {
                 throw new IllegalArgumentException("invalid completed source range");
+            }
+            if (fullStarts != null && fullStarts[node] >= 0
+                    && (start < fullStarts[node] || end > fullEnds[node])) {
+                throw new IllegalArgumentException("completed core escapes full span");
             }
             int parent = parents[node];
             if (parent >= 0 && starts[parent] >= 0 && ends[parent] >= 0
@@ -605,6 +678,12 @@ public final class M3ASTIndex {
             if (rolePositions != null) {
                 rolePositions = Arrays.copyOf(rolePositions, cap);
                 Arrays.fill(rolePositions, previous, cap, -1);
+            }
+            if (fullStarts != null) {
+                fullStarts = Arrays.copyOf(fullStarts, cap);
+                fullEnds = Arrays.copyOf(fullEnds, cap);
+                Arrays.fill(fullStarts, previous, cap, -1);
+                Arrays.fill(fullEnds, previous, cap, -1);
             }
             if (literalKinds != null) {
                 startLines = Arrays.copyOf(startLines, cap); endLines = Arrays.copyOf(endLines, cap);

@@ -74,6 +74,45 @@ uses this same M3File-owned index instead of allocating its own `SourceLines`
 table. Parser-native row/column conventions still require a provider-specific
 mapping; these coordinates are not silently equated with UTF-8 bytes.
 
+## Source full spans and strict original-byte change geometry
+
+Foreign “syntax core” and “full source span” are distinct concepts. Roslyn
+exposes `Span` without leading/trailing trivia and `FullSpan` including it;
+Eclipse JDT can supply extended source ranges, while OpenRewrite preserves
+formatting through its LST owner. `Surface.fullStart/fullEnd` now optionally
+projects the original parser's **trivia-inclusive envelope** in the same
+original coordinate unit as the core range. The original M3ASTIndex retains
+it only when supplied, in two lazily allocated primitive `int[]` lanes.
+Core text remains available through `sourceText`, certified full text through
+`fullSourceText`; neither constructs a second syntax tree. Ranges are
+half-open UTF-16 after strict original UTF-8 conversion. A full envelope
+must contain its known syntax core, stay nested within any known parent full
+envelope and never be certified when source provenance is unverified.
+These **geometry** facts are excluded from structural SHA, so V1/V2/V3
+signatures remain unchanged. Retaining a provider's span does not make an
+incomplete AST a lossless CST; token/trivia and reprint oracles remain needed.
+
+`M3File.utf8ChangeSince(previous, maxComparedUtf16Units)` translates the
+existing conservative surrogate-safe single-edit source envelope into the
+**exact original UTF-8 byte offsets** of both source generations, requiring
+strict-UTF-8 source admission on both sides. It retains no additional byte
+payload, and reports the already-separate raw SHA-256 comparison. The output
+is a byte interval, not yet a parser mutation or cache-reuse decision.
+
+`Utf8Offsets.pointAt(byteOffset,maxLines)` and `byteAt(Utf8Point,maxLines)`
+now provide **zero-based LF-only rows and original UTF-8 byte columns**,
+separately from the shared Java-style CR/LF/CRLF UTF-16 line map. A lone CR
+counts toward the byte column, while only LF creates a new row. The first
+request lazily creates one bounded `int[]` of LF byte starts, retained by the
+existing immutable UTF-8 offset owner; EOF is a legal point and partial
+multibyte offsets are refused. A cached index still honors smaller budgets.
+`M3File.utf8InputEditSince(previous,maxUnits,maxLines)` combines original
+strict source-byte offsets and the **three start/old-end/new-end points**
+required by Tree-sitter's `TSInputEdit` geometry. It carries raw SHA receipt
+status, but **does not invoke Tree-sitter's `ts_tree_edit`, `ts_parser_parse`,
+or `ts_tree_get_changed_ranges`**, nor certify that a previously indexed AST
+is valid after the edit. A provider must own those native/parser operations.
+
 **Source coordinate contract:** all published M3AST spans are zero-based,
 UTF-16, half-open `[start,end)`. Original UTF-8 byte positions may be
 translated at valid codepoint boundaries only; EOF is a valid endpoint.
@@ -85,10 +124,10 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
 
 | Donor authority | Selected insight | M3AST mapping / remaining gate |
 | --- | --- | --- |
-| [Tree-sitter](https://tree-sitter.github.io/tree-sitter/using-parsers/2-basic-parsing.html) | Incremental CST; named/anonymous tokens; named child fields; missing and error nodes; source byte ranges | `Surface`, `incomingRole`, list-position lane, `NAMED/TOKEN/MISSING/ERROR` and UTF-8 map. Actual native/JNI grammar adapter and changed-range qualification still pending. |
-| [Roslyn red/green](https://github.com/dotnet/roslyn/blob/main/docs/compilers/Design/Red-Green%20Trees.md) | Immutable shared green nodes, lazy positioned red views, full fidelity | Original primitive atoms and optional projected metadata; no second red/green AST. Reuse across source generations still needs a separately proven identity/invalidator. |
-| [OpenRewrite LST](https://docs.openrewrite.org/concepts-and-explanations/lossless-semantic-trees) | Full-fidelity trivia, types and recipes; provenance-preserving edits | Borrow an existing LST and record syntax facts; type attribution stays a separate compiler/context sidecar. Actual OpenRewrite ingress and recipe result gates pending. |
-| [Eclipse JDT DOM](https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/dom/ASTNode.html) | Structural property descriptors, scalar versus list-valued child slots, source ranges and recovery bits | Named roles and list ordinals in the original index; preserve JDT binding owner and `ASTRewrite` edits. Existing JDT ingress must be migrated through a contract diff, not reparsed. |
+| [Tree-sitter](https://tree-sitter.github.io/tree-sitter/using-parsers/2-basic-parsing.html) | Incremental CST; named/anonymous tokens; named child fields; missing and error nodes; source byte ranges and LF-based byte edit points | `Surface`, `incomingRole`, list-position lane, `NAMED/TOKEN/MISSING/ERROR`, UTF-8 map and exact three-point edit geometry. Actual native/JNI grammar adapter and changed-range qualification still pending. |
+| [Roslyn red/green](https://github.com/dotnet/roslyn/blob/main/docs/compilers/Design/Red-Green%20Trees.md) | Immutable shared green nodes, lazy positioned red views, separate `Span` and trivia-inclusive `FullSpan` | Optional full-span lanes and original primitive atoms; no second red/green AST. Reuse across source generations still needs a separately proven identity/invalidator. |
+| [OpenRewrite LST](https://docs.openrewrite.org/concepts-and-explanations/lossless-semantic-trees) | Full-fidelity trivia, types and recipes; provenance-preserving edits | Optional full-span source projection; original LST retains formatting and type attribution authority. Actual OpenRewrite provider and exact reprint gates pending. |
+| [Eclipse JDT DOM](https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/dom/ASTNode.html) | Structural property descriptors, scalar/list child slots, normal/extended source ranges and recovery bits | Named/list edges and optional full ranges; preserve JDT bindings and `ASTRewrite`. Existing JDT ingress must be migrated through a contract diff, not reparsed. |
 | [ANTLR4](https://www.antlr.org/api/Java/org/antlr/v4/runtime/ParserRuleContext.html) | Rule contexts, alternative numbers, token source intervals and ordered children | Adapter translates original token-inclusive intervals to half-open source positions; direct provider contract missing. |
 | [JavaParser](https://github.com/javaparser/javaparser/blob/master/javaparser-core/src/main/java/com/github/javaparser/ast/Node.java) | Token ranges, lexical preservation, comments and user properties | Map only detached facts; foreign lexical printer/edit owner survives. Direct provider contract pending. |
 | [LibCST](https://libcst.readthedocs.io/en/latest/metadata.html) | Immutable CST and optional metadata/byte-span providers | Optional sidecar model, source coordinate conversion; no Python runtime in M3JDK21. |
@@ -107,9 +146,9 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
    multi-hunk and class-file deltas and invalidate only affected semantic/ABI
    dependents. The bounded snapshot change envelope above is conservative and
    does not itself complete this integration.
-3. Add source-bound optional token/trivia tables and provider-specific byte,
-   scalar and display-column coordinate bridges without copying source
-   payloads. The UTF-16 line map is now present; it is not a substitute for
+3. Add source-bound optional token/trivia tables and other provider-specific
+   scalar/display-column coordinate bridges without copying source payloads.
+   Both Java-style UTF-16 and LF-only UTF-8 line maps are now present; they are not substitutes for
    provider fidelity. Require exact reprint/source round-trips before claiming
    a provider is lossless; an AST that omits whitespace never becomes a CST
    merely because M3File holds its original text.

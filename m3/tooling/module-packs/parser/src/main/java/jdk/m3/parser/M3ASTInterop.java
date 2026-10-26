@@ -44,6 +44,9 @@ public final class M3ASTInterop {
         /** Unknown coordinates are exactly (-1,-1), never inferred. */
         default int start(N node) { return M3ASTIndex.NO_RANGE; }
         default int end(N node) { return M3ASTIndex.NO_RANGE; }
+        /** Optional trivia-inclusive source envelope in the same original coordinate unit. */
+        default int fullStart(N node) { return M3ASTIndex.NO_RANGE; }
+        default int fullEnd(N node) { return M3ASTIndex.NO_RANGE; }
         /** Only NAMED, TOKEN, TRIVIA, MISSING, ERROR and RECOVERED are accepted. */
         default int syntaxFlags(N node) { return 0; }
         /** Optional detached semantic-independent facts, supplied by the original owner. */
@@ -152,6 +155,14 @@ public final class M3ASTInterop {
             start = offsets.toUtf16(start);
             end = offsets.toUtf16(end);
         }
+        int fullStart = surface.fullStart(node), fullEnd = surface.fullEnd(node);
+        if ((fullStart == M3ASTIndex.NO_RANGE) != (fullEnd == M3ASTIndex.NO_RANGE)) {
+            throw new IllegalArgumentException("partial foreign full source range");
+        }
+        if (unit == Coordinates.UTF8_BYTES && fullStart != M3ASTIndex.NO_RANGE) {
+            fullStart = offsets.toUtf16(fullStart);
+            fullEnd = offsets.toUtf16(fullEnd);
+        }
         int flags = surface.syntaxFlags(node);
         if ((flags & ~SURFACE_FLAGS) != 0) throw new IllegalArgumentException("unknown foreign syntax flags");
         if ((flags & (M3ASTIndex.MISSING | M3ASTIndex.ERROR)) != 0) flags |= M3ASTIndex.RECOVERED;
@@ -159,6 +170,7 @@ public final class M3ASTInterop {
         if (verified && start != M3ASTIndex.NO_RANGE) flags |= M3ASTIndex.EXACT_RANGE;
         if (!verified) flags |= M3ASTIndex.SOURCE_UNVERIFIED;
         int row = index.add(parent, surface.kind(node), start, end, flags, role, rolePosition);
+        if (fullStart != M3ASTIndex.NO_RANGE) index.fullRange(row, fullStart, fullEnd, verified);
         String name = surface.name(node);
         M3ASTIndex.LiteralKind kind = Objects.requireNonNull(surface.literalKind(node), "literal kind");
         String literal = surface.literalValue(node);

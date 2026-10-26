@@ -214,6 +214,92 @@ public final class M3File implements CharSequence {
         return new ChangeEnvelope(prefix, previousEnd, prefix, currentEnd, raw);
     }
 
+    /**
+     * Exact original-UTF-8 byte geometry for the same conservative source edit.
+     * No original byte buffer is retained or regenerated for diffing; both
+     * generations must have been independently admitted from strict UTF-8.
+     * Consumers such as Tree-sitter must still compute their own provider-
+     * specific row/column points and certify incremental parser reuse.
+     */
+    public Utf8ChangeEnvelope utf8ChangeSince(M3File previous, long maxComparedUtf16Units) {
+        ChangeEnvelope edit = changeSince(previous, maxComparedUtf16Units);
+        Utf8Offsets earlier = previous.utf8Offsets().orElseThrow(() ->
+                new IllegalArgumentException("previous source lacks original UTF-8 byte geometry"));
+        Utf8Offsets current = utf8Offsets().orElseThrow(() ->
+                new IllegalArgumentException("current source lacks original UTF-8 byte geometry"));
+        int previousStart = earlier.toByte(edit.previousStart());
+        int currentStart = current.toByte(edit.currentStart());
+        if (previousStart != currentStart) {
+            throw new IllegalStateException("shared source prefix has different UTF-8 coordinates");
+        }
+        return new Utf8ChangeEnvelope(previousStart, earlier.toByte(edit.previousEnd()),
+                currentStart, current.toByte(edit.currentEnd()), edit.rawDigestComparison());
+    }
+
+    /**
+     * An original UTF-8 edit with the three LF-based, zero-origin byte points
+     * required by incremental CST parsers such as Tree-sitter. CR is a column
+     * byte; only LF advances the row. This is geometry, not permission to
+     * mutate/reuse the provider's authoritative old tree.
+     */
+    public Utf8InputEdit utf8InputEditSince(M3File previous,
+            long maxComparedUtf16Units, int maxLines) {
+        Utf8ChangeEnvelope envelope = utf8ChangeSince(previous, maxComparedUtf16Units);
+        Utf8Offsets earlier = previous.utf8Offsets().orElseThrow();
+        Utf8Offsets current = utf8Offsets().orElseThrow();
+        Utf8Point startPoint = earlier.pointAt(envelope.previousStartByte(), maxLines);
+        if (!startPoint.equals(current.pointAt(envelope.currentStartByte(), maxLines))) {
+            throw new IllegalStateException("shared UTF-8 prefix has different LF coordinates");
+        }
+        return new Utf8InputEdit(envelope.previousStartByte(), envelope.previousEndByte(),
+                envelope.currentEndByte(), startPoint,
+                earlier.pointAt(envelope.previousEndByte(), maxLines),
+                current.pointAt(envelope.currentEndByte(), maxLines),
+                envelope.rawDigestComparison());
+    }
+
+    /** Zero-based line, zero-based original UTF-8 byte column, with LF-only rows. */
+    public record Utf8Point(int row, int column) {
+        public Utf8Point {
+            if (row < 0 || column < 0) throw new IllegalArgumentException("negative UTF-8 point");
+        }
+    }
+
+    /** Tree-sitter-compatible numerical edit fields; no parser tree is edited here. */
+    public record Utf8InputEdit(int startByte, int oldEndByte, int newEndByte,
+                                Utf8Point startPoint, Utf8Point oldEndPoint,
+                                Utf8Point newEndPoint, RawDigestComparison rawDigestComparison) {
+        public Utf8InputEdit {
+            if (startByte < 0 || oldEndByte < startByte || newEndByte < startByte) {
+                throw new IllegalArgumentException("invalid original UTF-8 input edit");
+            }
+            Objects.requireNonNull(startPoint, "start point");
+            Objects.requireNonNull(oldEndPoint, "old end point");
+            Objects.requireNonNull(newEndPoint, "new end point");
+            Objects.requireNonNull(rawDigestComparison, "raw digest comparison");
+        }
+
+        public boolean textChanged() { return startByte != oldEndByte || startByte != newEndByte; }
+    }
+
+    /** Half-open byte-change envelope, *not* a multi-hunk patch or Tree-sitter point tuple. */
+    public record Utf8ChangeEnvelope(int previousStartByte, int previousEndByte,
+                                     int currentStartByte, int currentEndByte,
+                                     RawDigestComparison rawDigestComparison) {
+        public Utf8ChangeEnvelope {
+            if (previousStartByte < 0 || currentStartByte != previousStartByte
+                    || previousEndByte < previousStartByte
+                    || currentEndByte < currentStartByte) {
+                throw new IllegalArgumentException("invalid original UTF-8 change envelope");
+            }
+            Objects.requireNonNull(rawDigestComparison, "raw digest comparison");
+        }
+
+        public boolean textChanged() {
+            return previousEndByte != previousStartByte || currentEndByte != currentStartByte;
+        }
+    }
+
     private static boolean insideSurrogatePair(String value, int boundary) {
         return boundary > 0 && boundary < value.length()
                 && Character.isHighSurrogate(value.charAt(boundary - 1))
@@ -330,6 +416,7 @@ public final class M3File implements CharSequence {
         private final int byteLength;
         private final int[] byteStarts;
         private final int[] utf16Starts;
+        private volatile int[] lfLineByteStarts;
 
         private Utf8Offsets(String text, int byteLength, int[] byteStarts, int[] utf16Starts) {
             this.text = text;
@@ -371,6 +458,67 @@ public final class M3File implements CharSequence {
         public int utf16Length() { return text.length(); }
         public int nonAsciiCount() { return byteStarts.length; }
         public long primitiveBytes() { return 2L * Integer.BYTES * byteStarts.length; }
+
+        /**
+         * Strict source-byte point using LF, unlike the general Java CR/LF/CRLF
+         * UTF-16 line table. An offset inside a UTF-8 code point is refused.
+         */
+        public Utf8Point pointAt(int byteOffset, int maxLines) {
+            toUtf16(byteOffset);
+            int[] lines = lfLines(maxLines);
+            int found = Arrays.binarySearch(lines, byteOffset);
+            int row = found >= 0 ? found : -found - 2;
+            return new Utf8Point(row, byteOffset - lines[row]);
+        }
+
+        /** Inverse of pointAt for LF-based rows at valid UTF-8 codepoint boundaries. */
+        public int byteAt(Utf8Point point, int maxLines) {
+            Objects.requireNonNull(point, "UTF-8 point");
+            int[] lines = lfLines(maxLines);
+            int row = Objects.checkIndex(point.row(), lines.length);
+            int last = row + 1 == lines.length ? byteLength : lines[row + 1] - 1;
+            if (point.column() > last - lines[row]) {
+                throw new IndexOutOfBoundsException("byte column outside LF-based line");
+            }
+            int byteOffset = lines[row] + point.column();
+            toUtf16(byteOffset);
+            return byteOffset;
+        }
+
+        /** Lazily retain one int[] of UTF-8 starts after each original LF byte. */
+        public int lfLineCount(int maxLines) { return lfLines(maxLines).length; }
+
+        private int[] lfLines(int maxLines) {
+            if (maxLines < 1) throw new IllegalArgumentException("LF line budget must be positive");
+            int[] found = lfLineByteStarts;
+            if (found == null) {
+                synchronized (this) {
+                    found = lfLineByteStarts;
+                    if (found == null) lfLineByteStarts = found = buildLfLines(maxLines);
+                }
+            }
+            if (found.length > maxLines) throw new IllegalArgumentException("LF line budget exceeded");
+            return found;
+        }
+
+        private int[] buildLfLines(int maxLines) {
+            int[] starts = new int[16];
+            int rows = 1, byteOffset = 0;
+            for (int i = 0; i < text.length();) {
+                int codepoint = text.codePointAt(i);
+                byteOffset = Math.addExact(byteOffset, byteWidth(codepoint));
+                i += Character.charCount(codepoint);
+                if (codepoint == '\n') {
+                    if (rows == maxLines) throw new IllegalArgumentException("LF line budget exceeded");
+                    if (rows == starts.length) starts = Arrays.copyOf(starts, rows * 2);
+                    starts[rows++] = byteOffset;
+                }
+            }
+            if (byteOffset != byteLength) {
+                throw new IllegalStateException("original UTF-8 LF map differs from byte length");
+            }
+            return Arrays.copyOf(starts, rows);
+        }
 
         /** Refuse a byte offset inside a multibyte UTF-8 sequence. */
         public int toUtf16(int byteOffset) {
