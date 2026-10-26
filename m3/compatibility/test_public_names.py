@@ -122,6 +122,8 @@ class PublicNamesTest(unittest.TestCase):
                    "hsoliwal/com.synexia:m3-recipe\tPENDING\n")
         self.assertFalse(self.issue(filename, content))
         self.assertTrue(self.issue(filename, content.replace("hsoliwal/com.synexia", "wrong/repo")))
+        self.assertTrue(self.issue(filename, content.replace("hsoliwal/com.synexia:", "spoof/hsoliwal/com.synexia:")))
+        self.assertTrue(self.issue(filename, content.replace("test/jdk/jdk/internal/m3/M3IndexedArrayTest.java", "../evil")))
         self.assertTrue(self.issue(filename, content.replace("# SPDX-License-Identifier: Apache-2.0\n", "")))
         self.assertTrue(self.issue(filename, content.replace("\tPENDING\n", "")))
 
@@ -133,6 +135,8 @@ class PublicNamesTest(unittest.TestCase):
         self.assertFalse(self.issue(filename, data))
         self.assertTrue(self.issue(filename, data.replace("_V3", "_V4")))
         self.assertTrue(self.issue(filename, data.replace("src/java.base/share/classes/java/lang/", "../")))
+        self.assertTrue(self.issue(filename, data.replace("M3String.java", "../M3String.java")))
+        self.assertTrue(self.issue(filename, data.replace("M3String.java", "M3String.class")))
         successor = "m3/synexia-import/current-full-borrow/string-target-successor-v4.tsv"
         self.assertFalse(self.issue(successor, data.replace(
             "SOURCE_OBSERVATION_V3", "TARGET_SUCCESSOR_V4")))

@@ -49,6 +49,12 @@ def passive_receipt_path(path: str) -> bool:
                 or BORROW_TSV.fullmatch(path))
 
 
+def safe_receipt_target(value: str) -> bool:
+    path = PurePosixPath(value)
+    return (bool(value) and not path.is_absolute() and "\\" not in value
+            and not any(part in (".", "..") for part in path.parts))
+
+
 def valid_passive_receipt(path: str, text: str | None) -> bool:
     if text is None or not text.strip() or len(text) > 1048576:
         return False
@@ -71,15 +77,22 @@ def valid_passive_receipt(path: str, text: str | None) -> bool:
     if PROVENANCE_TSV.fullmatch(path):
         return (header == ["path", "identity_kind", "before_identity", "after_identity",
                            "canonical_origin", "qualification"]
-                and all("hsoliwal/com.synexia" in row[4] and row[0] for row in body)
+                and all(safe_receipt_target(row[0]) and (
+                    row[4].startswith("hsoliwal/com.synexia:")
+                    or row[4].startswith("hsoliwal/com.synexia#")
+                    or ";hsoliwal/com.synexia#" in row[4]) for row in body)
                 and "# SPDX-License-Identifier: Apache-2.0" in text)
     match = BORROW_TSV.fullmatch(path)
     if match:
         family, version = match.groups()
         schema = "M3JDK21_STRING_" + family.replace("-", "_").upper() + "_V" + version
         return (header[0] == "schema" and "target_path" in header
-                and all(row[0] == schema and row[header.index("target_path")].startswith(
-                    "src/java.base/share/classes/java/lang/") for row in body))
+                and all(row[0] == schema
+                        and safe_receipt_target(row[header.index("target_path")])
+                        and row[header.index("target_path")].startswith(
+                            "src/java.base/share/classes/java/lang/")
+                        and row[header.index("target_path")].endswith(".java")
+                        for row in body))
     return False
 
 
