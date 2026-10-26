@@ -47,6 +47,8 @@ jobs:
           STUB
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/classes" \
             "$RUNNER_TEMP/src/com/m3/collections/M3TreeProjection.java" \
+            m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \
             m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java \
             m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java \
             m3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftContract.java
