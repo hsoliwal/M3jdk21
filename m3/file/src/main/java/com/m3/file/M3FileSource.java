@@ -77,6 +77,8 @@ public final class M3FileSource {
     }
 
     public int length() { return bytes.length; }
+    /** Read one immutable physical source byte without cloning the whole image. */
+    public int byteAt(int offset) { return Byte.toUnsignedInt(bytes[Objects.checkIndex(offset, bytes.length)]); }
     public String sha256() { return sha256; }
     public byte[] bytes() { return bytes.clone(); }
     public byte[] bytes(int start, int end) {
