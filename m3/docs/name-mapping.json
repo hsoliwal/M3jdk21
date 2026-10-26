@@ -926,6 +926,120 @@
     ],
     "records": [
       {
+        "id": "m3.ast-file.parser-source-coordinates",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Converge JDK21 AST syntax into the existing M3 occurrence/green planes while preserving independently owned source byte/UTF16 coordinate and immutable generation semantics; bounded Java21 proof is not installed JDK acceptance.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "0c8055472edf4d392318f5e6338d974e072d79e1",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/ast-file-ci-20261026/DATASET.json",
+            "symbol": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+            "signatures": []
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "cb34aa49f799de2f13f0789e995ea7ecc6d5c433",
+            "module": "m3/ast and m3/file",
+            "path": "m3/ast/src/main/java/com/m3/ast/M3JavacProjection.java",
+            "symbol": "com.m3.ast.M3JavacProjection",
+            "signatures": [
+              "Result project(CompilationUnitTree,SourcePositions,byte[],IntUnaryOperator)"
+            ]
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "cb34aa49f799de2f13f0789e995ea7ecc6d5c433",
+            "module": "m3/file",
+            "path": "m3/file/src/main/java/com/m3/file/M3FileEncodedEdits.java",
+            "symbol": "com.m3.file.M3FileEncodedEdits",
+            "signatures": [
+              "M3FileEncodedEdits replaceUtf16(int,int,String)",
+              "Applied apply()"
+            ]
+          }
+        ],
+        "owner": "Original M3SyntaxTree/M3SyntaxIndex/M3SyntaxGreenPool and M3FileSource/M3FileEditBatch/M3FileTextCoordinates; native parser semantic bindings remain provider-owned",
+        "identity": {
+          "namespace": "Grammar kinds remain parser-native, syntax hashes are candidates only.",
+          "generation": "Immutable source SHA-256 and projection hashes; edited generations never overwrite prior source."
+        },
+        "contract": {
+          "differences": [
+            "Thin real javac compiler AST adapter, not replacement Java parser.",
+            "Charset-strict UTF16 editor over original source and batch owners."
+          ],
+          "compatibility_obligations": [
+            "Preserve original bytes including comments, ignored parser nodes and error recovery.",
+            "Do not equate compiler syntax/source equality to semantic/JDK/API/ABI equivalence.",
+            "Preserve UTF-8 BOM/UTF-16 endian/Latin1 strict decoding; reject malformed/unrepresentable edits."
+          ],
+          "public_surface": [
+            "No change to java.*, JNI symbols, compiler or file-provider APIs."
+          ]
+        },
+        "format": {
+          "schema": "m3.ast-file.parser-source-coordinates/1",
+          "abi": null,
+          "bootstrap": "JDK 21 public compiler API; no new product parser dependency"
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact source-sealed Synexia recipe candidate only.",
+          "joins": "Optional syntax projections and immutable edit map from original source owners.",
+          "outputs": "Primitive syntax occurrences and immutable source generation with metadata.",
+          "cached_facts": "Structural green reuse candidates must validate exact syntax/gaps; no semantic binding reuse."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "ast-file-ci-20261026",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/ast-file-ci-20261026/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-ast-file-ci-20261026.yml",
+          "preconditions": [
+            "Exact pinned v4 before bytes; no in-place overwrite of newer owners.",
+            "Actual SDK execution, fixed point and changed-source refusal before target promotion."
+          ],
+          "rollback": "Separate source-sealed restoration; preserve retained previous Java sources."
+        },
+        "tests": [
+          {
+            "id": "javac-source-image-projection",
+            "receipt": "m3/ast/src/test/java/com/m3/ast/M3JavacProjectionContract.java"
+          },
+          {
+            "id": "immutable-encoded-source-edit",
+            "receipt": "m3/file/src/test/java/com/m3/file/M3FileEncodedEditsContract.java"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 original Synexia work; original OpenJDK third-party rights unchanged",
+          "publication": "Product postimages only; no recipe source copied into public product",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "0c8055472edf4d392318f5e6338d974e072d79e1",
+          "target_revision": "cb34aa49f799de2f13f0789e995ea7ecc6d5c433",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Source-byte preserving javac adapter and explicit charset source edit plane."
+          ],
+          "pending": [
+            "OpenRewrite SDK Results, actual original M3File module/JUnit/jlink, installed JDK jtreg, semantic bindings, native/resource proof."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental",
+        "observation": "Local Java21 source-only PASS 7025 across 13; additional hosted gates pending; no phase advance."
+      },
+      {
         "id": "m3.prefix-z",
         "kind": "specialization",
         "status": "implemented-tested",
