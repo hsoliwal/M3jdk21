@@ -29,6 +29,61 @@ public final class M3SyntaxSnapshotContract {
         b.close(source.length);
         return b.build();
     }
+    /** Inject a valid wire table record that does not appear in any syntax row. */
+    private static byte[] unusedName(byte[] packet, boolean field) {
+        ByteBuffer reader = ByteBuffer.wrap(packet);
+        int cursor = 8 + 4 + 4 + 32 + 32 + 4;
+        int grammarUnits = reader.getInt(cursor);
+        cursor += 4 + 2 * grammarUnits;
+        int countAt = cursor;
+        int kinds = reader.getInt(cursor);
+        cursor += 4;
+        for (int i = 0; i < kinds; i++) {
+            int units = reader.getInt(cursor);
+            cursor += 4 + 2 * units;
+        }
+        if (field) {
+            countAt = cursor;
+            kinds = reader.getInt(cursor);
+            cursor += 4;
+            for (int i = 0; i < kinds; i++) {
+                int units = reader.getInt(cursor);
+                cursor += 4 + 2 * units;
+            }
+        }
+        String extraName = "UNUSED";
+        int added = 4 + 2 * extraName.length();
+        byte[] result = new byte[packet.length + added];
+        System.arraycopy(packet, 0, result, 0, cursor);
+        System.arraycopy(packet, cursor, result, cursor + added, packet.length - cursor);
+        ByteBuffer writer = ByteBuffer.wrap(result);
+        writer.putInt(countAt, kinds + 1);
+        writer.position(cursor);
+        writer.putInt(extraName.length());
+        for (int i = 0; i < extraName.length(); i++) writer.putChar(extraName.charAt(i));
+        return result;
+    }
+    /** Swap the first two equal-sized names and invert all row IDs. */
+    private static byte[] outOfFirstUseOrder(byte[] packet) {
+        byte[] result = packet.clone();
+        ByteBuffer view = ByteBuffer.wrap(result);
+        int cursor = 8 + 4 + 4 + 32 + 32 + 4;
+        cursor += 4 + 2 * view.getInt(cursor);
+        if (view.getInt(cursor) != 2) throw new AssertionError("expected two kinds");
+        cursor += 4;
+        int firstSize = 4 + 2 * view.getInt(cursor);
+        int secondSize = 4 + 2 * view.getInt(cursor + firstSize);
+        if (firstSize != secondSize) throw new AssertionError("equal size fixture");
+        byte[] first = Arrays.copyOfRange(result, cursor, cursor + firstSize);
+        System.arraycopy(result, cursor + firstSize, result, cursor, secondSize);
+        System.arraycopy(first, 0, result, cursor + secondSize, firstSize);
+        // Rows are the final 6-integer values in preorder.
+        for (int at = result.length - 3 * 6 * Integer.BYTES;
+                at < result.length; at += 6 * Integer.BYTES) {
+            view.putInt(at, 1 - view.getInt(at));
+        }
+        return result;
+    }
     public static void main(String[] args) {
         byte[] bytes = new byte[] {'a', (byte) 0xff, 0, 13, 10, (byte) 0xc0};
         M3SyntaxTree initial = build(bytes);
@@ -97,6 +152,26 @@ public final class M3SyntaxSnapshotContract {
                     && Arrays.equals(encoded, M3SyntaxSnapshot.encode(read, encoded.length)),
                     "random exact source, native names, recovery and deterministic roundtrip");
         }
+        // A valid projection hash does not make arbitrary unused wire-table
+        // records canonical. A dictionary is ordered by first occurrence, with
+        // no unnamed/unused trailing entries. This used to decode successfully.
+        var duplicateKinds = M3SyntaxTree.builder("java/dictionary", new byte[] {1, 2});
+        duplicateKinds.open("root", "", 0, M3SyntaxTree.NAMED);
+        duplicateKinds.leaf("leaf", "name", 0, 1, M3SyntaxTree.TOKEN);
+        duplicateKinds.leaf("leaf", "name", 1, 2, M3SyntaxTree.TOKEN);
+        duplicateKinds.close(2);
+        var smallTree = duplicateKinds.build();
+        byte[] smallSource = smallTree.sourceBytes();
+        byte[] canonical = M3SyntaxSnapshot.encode(smallTree, 512);
+        var noncanonical = unusedName(canonical, false);
+        reject(() -> M3SyntaxSnapshot.decode(noncanonical, smallSource, 16, noncanonical.length));
+        var unusedField = unusedName(canonical, true);
+        reject(() -> M3SyntaxSnapshot.decode(unusedField, smallSource, 16, unusedField.length));
+        var reordered = outOfFirstUseOrder(canonical);
+        reject(() -> M3SyntaxSnapshot.decode(reordered, smallSource, 16, reordered.length));
+        check(Arrays.equals(canonical, M3SyntaxSnapshot.encode(
+                M3SyntaxSnapshot.decode(canonical, smallSource, 16, canonical.length), 512)),
+                "canonical dictionary still round-trips byte-exactly");
         System.out.println("M3_SYNTAX_SNAPSHOT_PASS checks=" + checks);
     }
 }

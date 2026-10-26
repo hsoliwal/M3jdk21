@@ -107,6 +107,10 @@ public final class M3SyntaxSnapshot {
                 throw new IllegalArgumentException("noncanonical syntax payload length");
 
             M3SyntaxTree.Builder builder = M3SyntaxTree.builder(grammar, source);
+            // Wire-table IDs are defined by first preorder occurrence in encode().
+            // Refuse reordered or unused entries rather than accepting multiple
+            // binary encodings of the same source-sealed syntax projection.
+            int firstUnusedKind = 0, firstUnusedField = 0;
             int[] open = new int[nodes];
             int[] closingByte = new int[nodes];
             int depth = 0;
@@ -116,6 +120,10 @@ public final class M3SyntaxSnapshot {
                 if (kindId < 0 || kindId >= kinds.length || fieldId < 0
                         || fieldId >= fields.length || start < 0 || end < start || end > source.length)
                     throw new IllegalArgumentException("invalid syntax row");
+                if (kindId > firstUnusedKind || fieldId > firstUnusedField)
+                    throw new IllegalArgumentException("noncanonical first-use syntax dictionary");
+                if (kindId == firstUnusedKind) firstUnusedKind++;
+                if (fieldId == firstUnusedField) firstUnusedField++;
                 while (depth > 0 && open[depth - 1] != parent) {
                     builder.close(closingByte[depth - 1]);
                     depth--;
@@ -130,6 +138,8 @@ public final class M3SyntaxSnapshot {
                 closingByte[depth] = end;
                 depth++;
             }
+            if (firstUnusedKind != kinds.length || firstUnusedField != fields.length)
+                throw new IllegalArgumentException("unused syntax dictionary entries");
             while (depth > 0) {
                 builder.close(closingByte[depth - 1]);
                 depth--;
