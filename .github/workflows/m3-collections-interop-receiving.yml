@@ -184,9 +184,11 @@ jobs:
           python3 -m unittest discover \
             -s m3/collections/interop/qualification/runtime-junit-census-20261022 \
             -p 'test_verify_surefire.py' -v 2>&1 | tee proof/junit-negative-controls.log
-          python3 m3/collections/interop/qualification/runtime-junit-census-20261022/verify_surefire.py \
+          python3 -m unittest discover \
+            -s m3/collections/interop/qualification/current-junit-census-20261026 \
+            -p 'test_current_surefire.py' -v 2>&1 | tee proof/junit-v4-negative-controls.log
+          python3 m3/collections/interop/qualification/current-junit-census-20261026/verify_current_surefire.py \
             --product . \
-            --receipts m3/collections/interop/qualification/runtime-junit-census-20261022/receipts \
             --reports m3/collections/interop/target/surefire-reports \
             | tee proof/junit-complete-source-method-census.log
           javap -classpath m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar \
