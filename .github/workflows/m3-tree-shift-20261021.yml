@@ -27,8 +27,8 @@ jobs:
         shell: bash
         run: |
           printf '%s  %s\n' \
-            '837aeb592e797902f9c50bcdbf4f85db3f9dbf97ee7537b5d6e85a9fa4a4e41a' 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java' \
-            'b9de04251293b7f376346083d644e241a3c63fd7b79b3b0044c4d10e42fe519e' 'm3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftContract.java' \
+            'bf6fb2f1d5f1c86ee51a94ad7a058537b092d256dc6fa583cbd712e7800b2944' 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java' \
+            '346b1b23baf27fdb9e5fcfd0609bf1897c7bdaa8fe4b17cb22732b0602b6babd' 'm3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftContract.java' \
             'c90296c22e121e0d7934bb74ccc30121438cbe47dd498a1f7ae489e6dcb0b679' 'm3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftTest.java' | sha256sum -c -
       - name: Compile actual M3 owner and existing primitive index map
         shell: bash
@@ -47,6 +47,8 @@ jobs:
           STUB
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/classes" \
             "$RUNNER_TEMP/src/com/m3/collections/M3TreeProjection.java" \
+            m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \
             m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java \
             m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java \
             m3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftContract.java
