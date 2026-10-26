@@ -167,6 +167,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 && !M3IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
         }
+        if (backend == M3IndexMaskCompactor.Backend.JAVA) return filteredJava(predicate);
         byte[] alignedStates = new byte[size()];
         // Evaluate Java callbacks once in logical encounter order. The JNI boundary
         // receives only the primitive state byte lane, never the Object[] owner.
@@ -187,8 +188,43 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     }
 
     /**
+     * Pack transient predicate decisions by logical occurrence, not object identity.
+     * Evaluate once, then enumerate set bits in encounter order into exact index storage.
+     * Scratch is 8 * ceil(size / 64) bytes instead of one byte per candidate; no
+     * payload or persistent membership lane is copied. Native ABI remains unchanged.
+     */
+    private M3IndexedListSnapshot<E> filteredJava(Predicate<? super E> predicate) {
+        int length = size();
+        long[] selected = new long[(int) (((long) length + 63) >>> 6)];
+        int count = 0;
+        for (int i = 0; i < length; i++) {
+            if (predicate.test(get(i))) {
+                selected[i >>> 6] |= 1L << (i & 63);
+                count++;
+            }
+        }
+        if (count == length) {
+            // Reuse a complete immutable directory; do not retain a larger sliced one.
+            int[] all = from == 0 && to == positions.length ? positions
+                    : Arrays.copyOfRange(positions, from, to);
+            return new M3IndexedListSnapshot<>(values, all, 0, length, physicalMembership);
+        }
+        int[] admitted = new int[count];
+        int written = 0;
+        for (int word = 0; word < selected.length; word++) {
+            long bits = selected[word];
+            while (bits != 0) {
+                int logical = (word << 6) + Long.numberOfTrailingZeros(bits);
+                admitted[written++] = positions[from + logical];
+                bits &= bits - 1;
+            }
+        }
+        return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
+    }
+
+    /**
      * Fuses one predicate pass and stable indexed sorting. The filtered projection
-     * owns a newly selected int[]; only that private directory is permuted.
+     * owns a private int[] before sorting; only that directory is permuted.
      * The canonical Object[] payload, this view's offsets and prior projections
      * are never changed. No boxed indices or per-element entry objects are built.
      */
@@ -207,6 +243,9 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             Predicate<? super E> predicate, Comparator<? super E> comparator,
             M3IndexMaskCompactor.Backend backend) {
         M3IndexedListSnapshot<E> selected = filtered(predicate, backend);
+        // Java all-pass selection may share this immutable directory. The fused
+        // sorter must detach it before writing; other selections already own one.
+        if (selected.positions == positions) return selected.sorted(comparator);
         selected.sortPositions(selected.positions, comparator);
         return selected;
     }

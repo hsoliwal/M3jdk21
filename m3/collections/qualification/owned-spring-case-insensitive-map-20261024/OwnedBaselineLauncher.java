@@ -1,0 +1,1 @@
+public final class OwnedBaselineLauncher { private OwnedBaselineLauncher() {} public static void main(String[] args) throws Exception { SpringCaseInsensitiveMapProtocolProof.main(new String[]{args[0], "SpringCaseInsensitiveMapHookCases"}); SpringCaseInsensitiveMapEntryCompatibilityObserver.main(args); } }

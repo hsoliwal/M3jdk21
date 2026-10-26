@@ -11,7 +11,7 @@ and Spring 6.2.0) plus sixteen first-party rows. Each row has one `owned_status`
 | `DONE #PR` / `DONE master` | owned array/mask implementation on master or in an open PR | 16 provider (8 master, 8 PR) + 2 first-party |
 | `EXISTING` | core JDK-shaped M3 owner already on master; no scaffold (NO-DUP) | 10 |
 | `CLAIMED #PR` / `CLAIMED viewport-everywhere` | an open PR or the viewport agent owns it; do not build | 10 provider + 14 first-party |
-| `SCAFFOLD` | generated skeleton module exists; bodies throw `UnsupportedOperationException` | 126 (133 generated; 7 since owned) |
+| `SCAFFOLD` | generated skeleton module exists; bodies throw `UnsupportedOperationException` | 123 (133 generated; 10 since owned) |
 | `PATTERN_ONLY` | Eclipse Collections (EPL-1.0/EDL-1.0): never copied, never a dependency | 578 |
 
 There are no `OPEN` rows left: the generator turns every OPEN JDK/Guava/Apache/Spring row into a

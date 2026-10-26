@@ -32,10 +32,15 @@ public final class M3TreeWindowPlan {
 	private int size;
 	private final M3LongLongHashMap slotByKey = new M3LongLongHashMap ();
 	private final M3LongLongHashMap slotByHandle = new M3LongLongHashMap ();
+	/* Reusable primitive-only admission index; never clears the committed handle map on refusal. */
+	private final M3LongLongHashMap commitHandleAdmission = new M3LongLongHashMap ();
 
 	private long [] planned = new long [0], retired = new long [0];
 	private int [] previousSiblings = new int [0];
+	private int [] lastChild = new int [0];
 	private boolean [] kept = new boolean [0];
+	/* Primitive scratch directory for duplicate-coordinates admission. */
+	private final M3LongLongHashMap planCoordinates = new M3LongLongHashMap ();
 	private int plannedCount, retiredCount;
 
 	public M3TreeWindowPlan () {
@@ -83,14 +88,27 @@ public final class M3TreeWindowPlan {
 		if (count < 0 || parentIds.length < count || childIndices.length < count || physicalParents.length < count) {
 			throw new IllegalArgumentException ("window arrays");
 		}
+		// Validate preorder and coordinate uniqueness before mutating the prepared plan.
+		// No Entry/Node object is allocated per coordinate; the directory is reusable.
+		planCoordinates.clear ();
+		for (int entry = 0; entry < count; entry++) {
+			int parent = physicalParents [entry];
+			if (parent < -1 || parent >= entry) throw new IllegalArgumentException ("preorder");
+			if (!planCoordinates.put (key (parentIds [entry], childIndices [entry]), entry)) {
+				throw new IllegalArgumentException ("duplicate tree coordinate");
+			}
+		}
 		if (planned.length < count) {
 			planned = new long [capacity (planned.length, count)];
 			previousSiblings = new int [planned.length];
 		}
 		if (kept.length < size) kept = new boolean [capacity (kept.length, size)];
 		Arrays.fill (kept, 0, size, false);
-		int [] lastChild = new int [count + 1];
-		Arrays.fill (lastChild, -1);
+		int required = count + 1;
+		if (lastChild.length < required) {
+			lastChild = new int [capacity (lastChild.length, required)];
+		}
+		Arrays.fill (lastChild, 0, required, -1);
 		for (int entry = 0; entry < count; entry++) {
 			int physicalParent = physicalParents [entry];
 			if (physicalParent < -1 || physicalParent >= entry) throw new IllegalArgumentException ("preorder");
@@ -165,7 +183,29 @@ public final class M3TreeWindowPlan {
 	}
 
 	public void commit (int count, int [] parentIds, int [] childIndices, int [] physicalParents, long [] nativeHandles) {
-		if (count != plannedCount || nativeHandles.length < count) throw new IllegalArgumentException ("commit arrays");
+		if (count != plannedCount || parentIds.length < count || childIndices.length < count
+				|| physicalParents.length < count || nativeHandles.length < count) {
+			throw new IllegalArgumentException ("commit arrays");
+		}
+		planCoordinates.clear ();
+		commitHandleAdmission.clear ();
+		// Commit is publication: validate every native handle and dense-preorder
+		// parent before clearing the old coordinate/handle indexes or writing lanes.
+		for (int entry = 0; entry < count; entry++) {
+			if (nativeHandles [entry] == 0) {
+				throw new IllegalArgumentException ("uncommitted native row " + entry);
+			}
+			if (!commitHandleAdmission.put (nativeHandles [entry], entry)) {
+				throw new IllegalArgumentException ("duplicate native handle");
+			}
+			if (!planCoordinates.put (key (parentIds [entry], childIndices [entry]), entry)) {
+				throw new IllegalArgumentException ("duplicate tree coordinate");
+			}
+			int physicalParent = physicalParents [entry];
+			if (physicalParent < -1 || physicalParent >= entry) {
+				throw new IllegalArgumentException ("preorder");
+			}
+		}
 		if (keys.length < count) {
 			int next = capacity (keys.length, count);
 			keys = new long [next];
@@ -176,7 +216,6 @@ public final class M3TreeWindowPlan {
 		slotByHandle.clear ();
 		for (int entry = 0; entry < count; entry++) {
 			long handle = nativeHandles [entry];
-			if (handle == 0) throw new IllegalArgumentException ("uncommitted native row " + entry);
 			keys [entry] = key (parentIds [entry], childIndices [entry]);
 			handles [entry] = handle;
 			parentSlots [entry] = physicalParents [entry];
@@ -202,7 +241,10 @@ public final class M3TreeWindowPlan {
 			int index = (int) previous;
 			if ((int) (previous >> 32) == parentId && index >= fromIndex) {
 				long next = (long) index + delta;
-				if (next < 0 || next > Integer.MAX_VALUE) {
+				if (next < 0) {
+					throw new IllegalArgumentException ("negative child index");
+				}
+				if (next > Integer.MAX_VALUE) {
 					throw new IllegalArgumentException ("shifted child index outside int range");
 				}
 				// Negative shifts require the deleted range to have left the

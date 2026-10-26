@@ -16,6 +16,7 @@ import java.util.regex.PatternSyntaxException;
 public final class M3StringRegexDpTest {
     private static final Field STRING_M3;
     private static final Method TRY_MATCH;
+    private static final Method EMPTY;
     private static long checks;
 
     static {
@@ -26,6 +27,8 @@ public final class M3StringRegexDpTest {
             Class<?> dp = Class.forName("java.lang.M3StringRegexDp");
             TRY_MATCH = dp.getDeclaredMethod("tryMatch", owner, String.class);
             TRY_MATCH.setAccessible(true);
+            EMPTY = owner.getDeclaredMethod("empty");
+            EMPTY.setAccessible(true);
         } catch (ReflectiveOperationException error) {
             throw new ExceptionInInitializerError(error);
         }
@@ -75,7 +78,7 @@ public final class M3StringRegexDpTest {
             int partCount = 1 + random.nextInt(7);
             String[] parts = new String[partCount];
             for (int j = 0; j < partCount; j++) {
-                parts[j] = pieces[random.nextInt(pieces.length)];
+                parts[j] = new String(pieces[random.nextInt(pieces.length)].toCharArray());
             }
             String composite = String.join("", parts);
             String expression = regex.toString();
@@ -122,7 +125,7 @@ public final class M3StringRegexDpTest {
             }
             String[] parts = new String[1 + random.nextInt(10)];
             for (int i = 0; i < parts.length; i++) {
-                parts[i] = leaves[random.nextInt(leaves.length)];
+                parts[i] = new String(leaves[random.nextInt(leaves.length)].toCharArray());
             }
             String source = String.join("", parts);
             String regex = pattern.toString();
@@ -147,10 +150,15 @@ public final class M3StringRegexDpTest {
         String text = String.join("", "a", "bc");
         for (String expression : new String[] {
                 "a**", "*a", "(a*)b", "a+b", "a?b", "a{2,3}",
-                "a|b", "^ab", "[a-z]+", "\\Qa\\E", "(?i)ab", ""
+                "a|b", "^ab", "\\Qa\\E", "(?i)ab", ""
         }) {
             equal(decision(text, expression), -1, "unsupported syntax must delegate: " + expression);
         }
+        // This existing class-fact lane requires prepared facts in both coders.
+        Method facts = Class.forName("java.lang.M3String").getDeclaredMethod("facts");
+        facts.setAccessible(true);
+        facts.invoke(STRING_M3.get(text));
+        verify(text, "[a-z]+", 1);
         equal(decision(text, "abc"), -1, "existing literal equality owner retained");
         String supplementary = String.join("", "a", "\ud83d", "\ude42", "b");
         equal(decision(supplementary, "a.*b"), -1, "surrogate pair across leaves delegated");
@@ -171,6 +179,11 @@ public final class M3StringRegexDpTest {
 
     private static int decision(String text, String regex) throws Exception {
         Object owner = STRING_M3.get(text);
+        if (owner == null && text.isEmpty()) {
+            // Empty public Strings may keep flat storage; direct DP still receives
+            // the actual canonical empty descriptor rather than skipping the case.
+            owner = EMPTY.invoke(null);
+        }
         if (owner == null) {
             throw new AssertionError("expected canonical M3 storage: " + text);
         }

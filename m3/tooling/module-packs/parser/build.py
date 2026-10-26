@@ -8,6 +8,9 @@ patch. The linked image retains its supplied compiler module descriptor; this
 proof does not qualify plugin discovery or embed the patch in a product JDK.
 Every build javac invocation, including consumer compilation, precedes tests.
 A changed source/toolchain or a failed phase requires a fresh output directory.
+The SQLite JDBC driver used by the facts contracts, with the slf4j-api its POM
+declares, is resolved from the local Maven repository onto the consumer
+classpath only; nothing is downloaded.
 """
 import argparse
 import ast
@@ -40,14 +43,25 @@ CONTRACTS = (
     ("jdk.m3.parser.test.M3JavacParserContract", "M3_JAVAC_PARSER_PASS"),
     ("jdk.m3.parser.test.M3CrossFrontendContract", "M3_AST_MULTIFRONTEND_PASS"),
     ("jdk.m3.parser.test.M3ASTDetailsContract", "M3_AST_DETAILS_PASS"),
+    ("jdk.m3.parser.test.M3ASTPortabilityContract", "M3_AST_PORTABILITY_PASS"),
+    ("jdk.m3.parser.test.M3FileLineMapContract", "M3_FILE_LINE_MAP_PASS"),
     ("jdk.m3.parser.test.M3ASTRelationsContract", "M3_AST_RELATIONS_PASS"),
     ("jdk.m3.parser.test.M3ASTIndexProjectionContract", "M3_AST_INDEX_PROJECTION_PASS"),
     ("jdk.m3.parser.test.M3JavacTreeViewContract", "M3_JAVAC_TREE_VIEW_PASS"),
     ("jdk.m3.parser.test.M3JavacFactImageContract", "M3_JAVAC_FACT_IMAGE_PASS"),
+    ("jdk.m3.parser.test.M3CulpritsContract", "M3_CULPRITS_PASS"),
+    ("jdk.m3.parser.test.M3FactsWriterContract", "M3_FACTS_WRITER_PASS"),
+    ("jdk.m3.parser.test.M3FactsTransactionContract", "M3_FACTS_TRANSACTION_PASS"),
+    ("jdk.m3.parser.test.M3FactsStreamContract", "M3_FACTS_STREAM_PASS"),
     ("jdk.m3.parser.test.M3FileInputContract", "M3_FILE_INPUT_PASS"),
 )
 COMPILER_CONTRACTS = (("M3ASTProjectionStateTest", "M3_AST_PROJECTION_STATE_PASS"),)
 SMOKE = ("jdk.m3.parser.test.M3ParserImageSmoke", "M3_PARSER_IMAGE_PASS")
+# Consumer-classpath-only JDBC driver for the facts contracts; never a module dependency.
+SQLITE_JDBC = Path("org/xerial/sqlite-jdbc")
+SQLITE_JDBC_FAMILY = "3.45."
+SLF4J_API = Path("org/slf4j/slf4j-api")
+POM_NAMESPACE = {"m": "http://maven.apache.org/POM/4.0.0"}
 
 
 def sha256(path):
@@ -76,8 +90,36 @@ def checked_file(path):
     return path
 
 
-def input_rows(repository, jdk):
-    """Seal the source closure and every supplied JMOD before creating output."""
+def sqlite_driver(maven_repository):
+    """Newest local sqlite-jdbc 3.45.x jar; absent means refusal, never a download."""
+    family = maven_repository / SQLITE_JDBC
+    expected = family / (SQLITE_JDBC_FAMILY + "<x>") / ("sqlite-jdbc-" + SQLITE_JDBC_FAMILY + "<x>.jar")
+    candidates = []
+    for directory in family.glob(SQLITE_JDBC_FAMILY + "*"):
+        jar = directory / ("sqlite-jdbc-" + directory.name + ".jar")
+        if re.fullmatch(r"3\.45(?:\.\d+)+", directory.name) and jar.is_file() and not jar.is_symlink():
+            candidates.append((tuple(int(part) for part in directory.name.split(".")), jar))
+    if not candidates:
+        raise ValueError("SQLite JDBC driver required at " + expected.as_posix())
+    return max(candidates)[1]
+
+
+def slf4j_api(maven_repository, driver):
+    """The slf4j-api version the driver's own sibling POM declares; org.sqlite.JDBC needs it to initialize."""
+    pom = driver.with_suffix(".pom")
+    versions = [dependency.findtext("m:version", namespaces=POM_NAMESPACE)
+                for dependency in ET.parse(pom).getroot().iterfind(".//m:dependency", POM_NAMESPACE)
+                if dependency.findtext("m:artifactId", namespaces=POM_NAMESPACE) == "slf4j-api"]
+    if len(versions) != 1 or not versions[0] or "$" in versions[0]:
+        raise ValueError("one literal slf4j-api version required in " + pom.as_posix())
+    jar = maven_repository / SLF4J_API / versions[0] / ("slf4j-api-" + versions[0] + ".jar")
+    if jar.is_symlink() or not jar.is_file():
+        raise ValueError("slf4j-api declared by sqlite-jdbc required at " + jar.as_posix())
+    return jar
+
+
+def input_rows(repository, jdk, maven_repository, jars):
+    """Seal the source closure, every supplied JMOD and the consumer JDBC jars before creating output."""
     pack = repository / PACK
     source_files = sorted((pack / "src/main/java").rglob("*.java"))
     test_files = sorted((pack / "src/test/java").rglob("*.java"))
@@ -118,6 +160,9 @@ def input_rows(repository, jdk):
             raise ValueError("missing JDK input: " + str(path))
         rows.append({"owner": "jdk", "path": path.relative_to(jdk).as_posix(),
                      "bytes": path.stat().st_size, "sha256": sha256(path)})
+    for path in jars:
+        rows.append({"owner": "maven-repository", "path": path.relative_to(maven_repository).as_posix(),
+                     "bytes": path.stat().st_size, "sha256": sha256(path)})
     return rows
 
 
@@ -148,7 +193,11 @@ class Qualification:
         release = (self.jdk / "release").read_text(encoding="utf-8")
         if not re.search(r'^JAVA_VERSION="21(?:[.+"-])', release, re.MULTILINE):
             raise ValueError("Java 21 development toolchain required")
-        self.inputs = input_rows(self.repository, self.jdk)
+        self.maven_repository = args.maven_repository.absolute()
+        self.driver = sqlite_driver(self.maven_repository)
+        self.slf4j = slf4j_api(self.maven_repository, self.driver)
+        self.jars = (self.driver, self.driver.with_suffix(".pom"), self.slf4j)
+        self.inputs = input_rows(self.repository, self.jdk, self.maven_repository, self.jars)
         self.input_sha = value_sha256(self.inputs)
         if self.phase == "lint":
             if self.output.exists():
@@ -159,7 +208,12 @@ class Qualification:
                           "active": None, "failed": None}
             write_json(self.output / "INPUTS.json", {"schema": "M3_PARSER_INPUTS_V1",
                                                     "inputs": self.inputs,
-                                                    "input_sha256": self.input_sha})
+                                                    "input_sha256": self.input_sha,
+                                                    "maven_repository": self.maven_repository.as_posix(),
+                                                    "sqlite_jdbc": {"path": self.driver.as_posix(),
+                                                                    "sha256": sha256(self.driver)},
+                                                    "slf4j_api": {"path": self.slf4j.as_posix(),
+                                                                  "sha256": sha256(self.slf4j)}})
             self.save_state()
         else:
             self.state = json.loads((self.output / "STATE.json").read_text(encoding="utf-8"))
@@ -265,6 +319,8 @@ class Qualification:
         log = self.output / "lint-structure.log"
         log.write_text("PASS Python AST, XML, naming JSON, Java UTF-8/LF/license/package structure\n"
                        + "java_sources=" + str(source_count) + "\n"
+                       + "sqlite_jdbc=" + self.driver.as_posix() + " sha256=" + sha256(self.driver) + "\n"
+                       + "slf4j_api=" + self.slf4j.as_posix() + " sha256=" + sha256(self.slf4j) + "\n"
                        + "Java compiler warnings are checked with -Xlint:all -Werror in compile phase.\n",
                        encoding="utf-8")
         return [self.output / "INPUTS.json", log]
@@ -313,11 +369,12 @@ class Qualification:
         work = self.output / "consumer-work" / (self.phase + "-" + name)
         work.parent.mkdir(exist_ok=True)
         work.mkdir()
-        arguments = [java, "-ea", "-Dm3.parser.test.work=" + str(work),
+        arguments = [java, "-ea", "-Dm3.parser.test.work=" + str(work), "-Dorg.sqlite.tmpdir=" + str(work),
                      "--patch-module", "jdk.compiler=" + str(self.output / "compiler-patch")]
         if not linked:
             arguments += ["--module-path", self.output / "modules"]
-        arguments += ["--add-modules", MODULE, "-cp", self.output / "test-classes", main]
+        arguments += ["--add-modules", MODULE, "-cp",
+                      os.pathsep.join((str(self.output / "test-classes"), str(self.driver), str(self.slf4j))), main]
         return self.run(name, arguments, marker)
 
     def test(self):
@@ -384,7 +441,7 @@ class Qualification:
         self.event("START", "source and preceding artifacts sealed")
         try:
             artifacts = getattr(self, self.phase)()
-            if input_rows(self.repository, self.jdk) != self.inputs:
+            if input_rows(self.repository, self.jdk, self.maven_repository, self.jars) != self.inputs:
                 raise ValueError("inputs changed during phase")
             artifacts += self.logs
             commands = self.output / (self.phase + "-commands.json")
@@ -419,6 +476,8 @@ def main():
     parser.add_argument("--jdk-home", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--phase", choices=PHASES, required=True)
+    parser.add_argument("--maven-repository", type=Path, default=Path.home() / ".m2/repository",
+                        help="local Maven repository holding org/xerial/sqlite-jdbc/3.45.x and its slf4j-api (no download)")
     args = parser.parse_args()
     try:
         Qualification(args).execute()
