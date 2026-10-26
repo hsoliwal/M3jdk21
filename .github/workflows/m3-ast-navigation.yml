@@ -2,6 +2,14 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 name: M3AST source navigation Java21
 on:
+  push:
+    paths:
+      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java'
+      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationTest.java'
+      - 'm3/ast/pom.xml'
+      - '.github/workflows/m3-ast-navigation.yml'
   pull_request:
     paths:
       - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java'
