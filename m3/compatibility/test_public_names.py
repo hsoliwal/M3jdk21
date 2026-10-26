@@ -100,6 +100,42 @@ class PublicNamesTest(unittest.TestCase):
             "class FilteredOwnerMembershipTest {}"))
         self.assertFalse(self.issue("m3/compatibility/collection-views/README.md"))
 
+    def test_reviewed_immutable_qualification_receipts_are_data_not_public_names(self):
+        self.assertEqual(len(GATE.QUALIFICATION_RECEIPTS), 17)
+        for receipt in sorted(GATE.QUALIFICATION_RECEIPTS):
+            path = GATE.QUALIFICATION_RECEIPT_ROOT + receipt
+            with self.subTest(path=path):
+                self.assertTrue(GATE.is_reviewed_historical_data_path(path))
+                self.assertFalse(self.issue(path))
+        self.assertFalse(self.issue(GATE.REVIEWED_FULL_BORROW_OBSERVATION))
+
+    def test_unreviewed_evidence_dates_and_versions_remain_refused(self):
+        attempted = (
+            "m3/qualification/collection-convergence-20261024/NEW_RECEIPT.json",
+            "m3/qualification/collection-convergence-20261024/RECEIPT-v2.json",
+            "m3/qualification/collection-convergence-20261025/RECEIPT.json",
+            "m3/qualification/experiment-20261024/RECEIPT.json",
+            "m3/synexia-import/current-full-borrow/string-source-observation-v4.tsv",
+            ".github/workflows/public-api-naming-20261026.yml",
+            "m3/collections/qualification/sort-20261026/README.md",
+        )
+        for path in attempted:
+            with self.subTest(path=path):
+                self.assertFalse(GATE.is_reviewed_historical_data_path(path))
+                self.assertIn("unstable date/version identifier", self.issue(path))
+
+    def test_receipt_exception_does_not_admit_transformations_or_public_types(self):
+        self.assertTrue(self.issue(
+            "synexia-openrewrite-recipes/recipes/dated-20261026/RECEIPT.json"))
+        self.assertTrue(self.issue(
+            "src/java.base/share/classes/java/util/M3Refactor20261026.java",
+            "package java.util; public class M3Refactor20261026 {}"))
+        self.assertTrue(self.issue(
+            "m3/qualification/collection-convergence-20261024/Receipt.java"))
+        self.assertFalse(self.issue(
+            GATE.QUALIFICATION_RECEIPT_ROOT + "RECEIPT.json", status="M"))
+
+
     def test_real_git_diff_detects_additions_and_renames(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

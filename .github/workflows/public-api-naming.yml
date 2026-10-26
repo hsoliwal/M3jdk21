@@ -3,7 +3,7 @@
 name: Public JDK naming contract
 on:
   pull_request:
-    branches: [master]
+    branches: [master, m3/collection-views-convergence-20261024]
 permissions:
   contents: read
 jobs:
@@ -23,3 +23,10 @@ jobs:
           BASE: ${{ github.event.pull_request.base.sha }}
           HEAD: ${{ github.event.pull_request.head.sha }}
         run: python3 m3/compatibility/check_public_names.py --base "$BASE" --head "$HEAD"
+      - name: Recheck complete current M3JDK21 product history against master
+        env:
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          root_base="$(git merge-base origin/master "$HEAD")"
+          python3 m3/compatibility/check_public_names.py --base "$root_base" --head "$HEAD"
