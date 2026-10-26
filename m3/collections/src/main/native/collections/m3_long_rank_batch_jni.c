@@ -1055,3 +1055,106 @@ Java_com_m3_collections_M3LongRankBatchNative_topKFrequent0(
     if ((*env)->ExceptionCheck(env)) return NULL;
     return output;
 }
+
+/*
+ * LC #532 first-party primitive distinct K-diff count. This is an ADDITIVE
+ * entrypoint to the original m3rankbatch JNI owner, not another library.
+ * Strict signed-long sorted input is supplied by immutable M3LongRankIndex.
+ * Unsigned subtraction correctly recognizes mathematically unrepresentable
+ * (>LONG_MAX) differences without UB or a false match. Two monotone cursor
+ * pages are bounded to 256 long values each. GetLongArrayRegion does not pin
+ * Java heap objects or retain addresses across JNI transitions.
+ */
+enum { M3_KDIFF_PAGE = 256 };
+typedef struct {
+    jlong values[M3_KDIFF_PAGE];
+    jsize start;
+    jsize length;
+} m3_kdiff_page;
+
+static int m3_kdiff_at(JNIEnv *env, jlongArray array, jsize size,
+        jsize at, m3_kdiff_page *page, jlong *value) {
+    if (at < page->start || at >= page->start + page->length) {
+        jsize start = (at / M3_KDIFF_PAGE) * M3_KDIFF_PAGE;
+        jsize count = size - start;
+        if (count > M3_KDIFF_PAGE) count = M3_KDIFF_PAGE;
+        (*env)->GetLongArrayRegion(env, array, start, count, page->values);
+        if ((*env)->ExceptionCheck(env)) return 0;
+        page->start = start;
+        page->length = count;
+    }
+    *value = page->values[at - page->start];
+    return 1;
+}
+
+static void m3_kdiff_throw(JNIEnv *env, const char *klass, const char *message) {
+    jclass type = (*env)->FindClass(env, klass);
+    if (type != NULL) {
+        (*env)->ThrowNew(env, type, message);
+        (*env)->DeleteLocalRef(env, type);
+    }
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_distinctDifferencePairCount0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlong distance) {
+    (void) ignored;
+    if (sorted == NULL) {
+        m3_kdiff_throw(env, "java/lang/NullPointerException", "null sorted input");
+        return 0L;
+    }
+    if (distance < 0) {
+        m3_kdiff_throw(env, "java/lang/IllegalArgumentException", "negative K-difference");
+        return 0L;
+    }
+    jsize n = (*env)->GetArrayLength(env, sorted);
+    if (n < 2) return 0L;
+    m3_kdiff_page lp = {{0}, -1, 0};
+    m3_kdiff_page rp = {{0}, -1, 0};
+    jlong total = 0L;
+    if (distance == 0L) {
+        jlong previous;
+        if (!m3_kdiff_at(env, sorted, n, 0, &lp, &previous)) return 0L;
+        int counted = 0;
+        for (jsize i = 1; i < n; i++) {
+            jlong value;
+            if (!m3_kdiff_at(env, sorted, n, i, &lp, &value)) return 0L;
+            if (value == previous) {
+                if (!counted) total++;
+                counted = 1;
+            } else {
+                previous = value;
+                counted = 0;
+            }
+        }
+        return total;
+    }
+    jsize left = 0;
+    jsize right = 1;
+    while (left < n && right < n) {
+        if (right <= left) {
+            right = left + 1;
+            continue;
+        }
+        jlong a, b;
+        if (!m3_kdiff_at(env, sorted, n, left, &lp, &a)
+                || !m3_kdiff_at(env, sorted, n, right, &rp, &b)) return 0L;
+        /* Two signed-ordered values always satisfy b>=a; their mathematically
+         * exact nonnegative difference fits in uint64_t, not always in jlong. */
+        const uint64_t gap = (uint64_t) b - (uint64_t) a;
+        const uint64_t k = (uint64_t) distance;
+        if (gap < k) {
+            right++;
+        } else {
+            if (gap == k) total++;
+            do {
+                left++;
+                if (left == n) break;
+                jlong candidate;
+                if (!m3_kdiff_at(env, sorted, n, left, &lp, &candidate)) return 0L;
+                if (candidate != a) break;
+            } while (left < n);
+        }
+    }
+    return total;
+}

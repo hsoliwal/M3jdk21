@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 public final class M3LongRankBatchNative {
     private static final int NATIVE_MIN_BATCH = 64;
+    private static final int NATIVE_MIN_KDIFF = 256;
+    private static volatile boolean KDIFF_ABI_MISSING;
     private static final int NATIVE_MIN_INTERSECTION = 128;
     private static final int MODE_UPPER = 1;
     private static final int MODE_COUNT = 2;
@@ -699,6 +701,82 @@ public final class M3LongRankBatchNative {
         return ((long) distinct << 32) | (best & 0xffffffffL);
     }
 
+    /**
+     * LeetCode #532 category: number of distinct unordered signed-long value
+     * pairs at a nonnegative absolute distance. This operates on an already
+     * sorted immutable owner; equal physical occurrences are NOT separately
+     * counted. At distance zero, a value needs at least two occurrences.
+     *
+     * <p>The two-cursor Java oracle is O(n), O(1) memory, and checks the
+     * unsigned difference to avoid overflow at the signed long extremes.
+     * For large owners the existing m3rankbatch JNI provider uses two fixed
+     * 256-long GetLongArrayRegion pages; no callback, per-entry object, heap
+     * payload copy or retained Java pointer crosses the native boundary.
+     * Older optional native libraries fall back to this same Java oracle.</p>
+     */
+    static long distinctDifferencePairCount(long[] sorted, long distance) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (distance < 0) throw new IllegalArgumentException("distance must be nonnegative");
+        if (sorted.length < 2) return 0L;
+        if (AVAILABLE && !KDIFF_ABI_MISSING && sorted.length >= NATIVE_MIN_KDIFF) {
+            try {
+                return distinctDifferencePairCount0(sorted, distance);
+            } catch (UnsatisfiedLinkError oldNative) {
+                KDIFF_ABI_MISSING = true;
+            }
+        }
+        return distinctDifferencePairCountJava(sorted, distance);
+    }
+
+    /** Explicit native qualification NEVER masks an unavailable ABI. */
+    static long distinctDifferencePairCountNativeRequired(long[] sorted, long distance) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (distance < 0) throw new IllegalArgumentException("distance must be nonnegative");
+        if (!AVAILABLE) {
+            throw new UnsatisfiedLinkError("m3rankbatch distinct K-diff ABI unavailable");
+        }
+        return distinctDifferencePairCount0(sorted, distance);
+    }
+
+    /** First-party two-pointer scalar oracle for signed long[] snapshots. */
+    static long distinctDifferencePairCountJava(long[] sorted, long distance) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (distance < 0) throw new IllegalArgumentException("distance must be nonnegative");
+        int n = sorted.length;
+        if (n < 2) return 0L;
+        long total = 0;
+        if (distance == 0) {
+            for (int i = 1; i < n;) {
+                if (sorted[i] == sorted[i - 1]) {
+                    total++;
+                    long current = sorted[i];
+                    do { i++; } while (i < n && sorted[i] == current);
+                } else {
+                    i++;
+                }
+            }
+            return total;
+        }
+        int left = 0, right = 1;
+        while (left < n && right < n) {
+            if (right <= left) {
+                right = left + 1;
+                continue;
+            }
+            // For signed sorted values right>=left: unsigned subtraction is
+            // their full mathematical distance, including >Long.MAX_VALUE.
+            int order = Long.compareUnsigned(sorted[right] - sorted[left], distance);
+            if (order < 0) {
+                right++;
+            } else {
+                if (order == 0) total++;
+                long previous = sorted[left];
+                do { left++; } while (left < n && sorted[left] == previous);
+            }
+        }
+        return total;
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -716,6 +794,9 @@ public final class M3LongRankBatchNative {
 
     /** Same existing m3rankbatch JNI library: bounded native run-statistic scan. */
     private static native long runStatistics0(long[] sorted);
+
+    /** Additive primitive-only JNI ABI for the LC #532 pair-count category. */
+    private static native long distinctDifferencePairCount0(long[] sorted, long distance);
 
     private static native void lowerBounds0(long[] sorted, long[] queries, int[] results);
 

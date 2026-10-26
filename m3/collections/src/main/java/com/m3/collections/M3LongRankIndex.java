@@ -372,6 +372,20 @@ public final class M3LongRankIndex {
         return packed;
     }
 
+    /**
+     * Counts distinct unordered signed-long value pairs separated by an exact,
+     * nonnegative absolute distance (LeetCode #532 category). For distance
+     * zero each counted value must occur at least twice. The immutable sorted
+     * snapshot is never exposed, reordered or materialized for JNI.
+     *
+     * <p>Native is an optional same-provider batch kernel above the normal
+     * size threshold, with a Java two-pointer oracle and no callback bridge.
+     * The result is long to retain a primitive order-statistic contract.</p>
+     */
+    public long distinctDifferencePairCount(long distance) {
+        return M3LongRankBatchNative.distinctDifferencePairCount(values, distance);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(
