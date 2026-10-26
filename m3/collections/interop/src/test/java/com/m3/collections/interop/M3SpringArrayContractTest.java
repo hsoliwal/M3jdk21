@@ -44,6 +44,11 @@ final class M3SpringArrayContractTest {
         assertSame(borrowed, actual.get("borrowed"));
         borrowed.add(7);
         assertEquals(Arrays.asList(3, null, 5, 7), actual.get("borrowed"));
+        List<Integer> fixedList = List.of(23);
+        actual.put("immutable", fixedList);
+        assertThrows(UnsupportedOperationException.class,
+                () -> actual.addAll("immutable", List.of(24)));
+        assertSame(fixedList, actual.get("immutable"));
         actual.put("nullList", null);
         assertTrue(actual.containsKey("nullList"));
         assertNull(actual.getFirst("nullList"));
@@ -73,6 +78,15 @@ final class M3SpringArrayContractTest {
         assertFalse(actual.containsKey("a"));
     }
 
+    private static Class<?> mutationFailure(Runnable mutation) {
+        try {
+            mutation.run();
+            return null;
+        } catch (RuntimeException failure) {
+            return failure.getClass();
+        }
+    }
+
     @Test void realSpringSixTwoDifferentialSeeded() {
         MultiValueMap<Integer, Integer> actual = new M3SpringArrayMultiValueMap<>();
         MultiValueMap<Integer, Integer> expected = new MultiValueMapAdapter<>(new LinkedHashMap<>());
@@ -81,13 +95,18 @@ final class M3SpringArrayContractTest {
             Integer key = random.nextInt(7) == 0 ? null : random.nextInt(32);
             Integer value = random.nextInt(8) == 0 ? null : random.nextInt(50);
             switch (random.nextInt(13)) {
-                case 0 -> { actual.add(key, value); expected.add(key, value); }
+                case 0 -> assertEquals(
+                        mutationFailure(() -> expected.add(key, value)),
+                        mutationFailure(() -> actual.add(key, value)),
+                        "add exception parity step " + step);
                 case 1 -> { actual.set(key, value); expected.set(key, value); }
                 case 2 -> { actual.addIfAbsent(key, value); expected.addIfAbsent(key, value); }
                 case 3 -> assertEquals(expected.remove(key), actual.remove(key));
                 case 4 -> {
                     List<Integer> input = Arrays.asList(value, value);
-                    actual.addAll(key, input); expected.addAll(key, input);
+                    assertEquals(mutationFailure(() -> expected.addAll(key, input)),
+                            mutationFailure(() -> actual.addAll(key, input)),
+                            "addAll exception parity step " + step);
                 }
                 case 5 -> {
                     List<Integer> a = random.nextInt(6) == 0 ? null : new ArrayList<>(Arrays.asList(value));
