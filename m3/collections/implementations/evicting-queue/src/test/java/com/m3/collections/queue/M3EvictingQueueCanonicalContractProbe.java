@@ -59,9 +59,166 @@ public final class M3EvictingQueueCanonicalContractProbe {
                 "canonical stream unexpectedly contains legacy Java class name");
 
         long steps = runSeededQueueModel(legacy) + runSeededQueueModel(canonical);
+        verifyBoundedInitialStorage();
+        verifySelfReferenceRendering();
+        verifyPhysicalGrowthCeiling();
+        verifyPhysicalGrowthArithmetic();
         System.out.println("M3_EVICTING_CANONICAL_NAME_PASS normalized_wire_sha256="
                 + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(normalized))
                 + " randomized_model_steps=" + steps);
+    }
+
+    /** JDK AbstractCollection direct self-reference contract, including wire round-trip. */
+    private static void verifySelfReferenceRendering() throws Exception {
+        M3EvictingQueue<Object> actual = M3EvictingQueue.create(3);
+        ArrayDeque<Object> expected = new ArrayDeque<>();
+        actual.add("start");
+        expected.addLast("start");
+        actual.add(actual);
+        expected.addLast(expected);
+        actual.add("end");
+        expected.addLast("end");
+        require(actual.toString().equals(expected.toString()),
+                "canonical direct self-reference rendering differs from JDK Collection");
+        require(actual.toString().equals("[start, (this Collection), end]"),
+                "canonical direct self-reference must not recurse");
+        Queue<?> restored = (Queue<?>) deserialize(serialize(actual));
+        require(restored.getClass() == M3EvictingQueue.class,
+                "serialized self-referential owner identity changed");
+        require(restored.toArray()[1] == restored,
+                "self-referential member was not restored as the queue itself");
+        require(restored.toString().equals(expected.toString()),
+                "self-reference render after readObject differs from JDK Collection");
+        actual.add("tail");
+        expected.removeFirst();
+        expected.addLast("tail");
+        require(actual.toString().equals(expected.toString()),
+                "direct self-reference rendering after eviction differs from JDK Collection");
+        System.out.println("M3_EVICTING_SELF_REFERENCE_RENDER_PASS");
+    }
+
+    /** Reserve no more than logical capacity plus one physical sentinel slot. */
+    private static void verifyPhysicalGrowthCeiling() throws Exception {
+        var storage = M3EvictingQueue.class.getDeclaredField("elements");
+        storage.setAccessible(true);
+        for (int limit : new int[] {16, 17, 18, 31, 32, 33, 63, 64, 65, 127, 128, 129}) {
+            M3EvictingQueue<Integer> actual = M3EvictingQueue.create(limit);
+            ArrayDeque<Integer> expected = new ArrayDeque<>();
+            for (int index = 0; index < limit * 4; index++) {
+                actual.add(index);
+                if (expected.size() == limit) expected.removeFirst();
+                expected.addLast(index);
+                Object[] ring = (Object[]) storage.get(actual);
+                require(ring.length <= limit + 1,
+                        "ring exceeded logical max plus sentinel: limit=" + limit);
+                require(Arrays.equals(actual.toArray(), expected.toArray()),
+                        "bounded growth FIFO differed: limit=" + limit + " step=" + index);
+                if (index % 7 == 3) {
+                    require(actual.poll().equals(expected.poll()),
+                            "bounded growth poll differed: limit=" + limit + " step=" + index);
+                }
+            }
+            while (!expected.isEmpty()) {
+                require(actual.remove().equals(expected.removeFirst()),
+                        "bounded growth drain differed: limit=" + limit);
+            }
+            require(actual.isEmpty(), "bounded growth queue was not fully drained: limit=" + limit);
+        }
+        System.out.println("M3_EVICTING_PHYSICAL_GROWTH_CEILING_PASS");
+    }
+
+
+    /** Check the real private growth calculation, without allocating capacity-sized arrays. */
+    private static void verifyPhysicalGrowthArithmetic() throws Exception {
+        Method growth = M3EvictingQueue.class.getDeclaredMethod("expandedLength", int.class);
+        growth.setAccessible(true);
+        var storage = M3EvictingQueue.class.getDeclaredField("elements");
+        storage.setAccessible(true);
+        SplittableRandom random = new SplittableRandom(0x72696e675f333031L);
+        long expansions = 0;
+        for (int capacity = 0; capacity < 4096; capacity++) {
+            expansions += verifyGrowthSequence(growth, storage, capacity);
+        }
+        for (int sample = 0; sample < 16_384; sample++) {
+            expansions += verifyGrowthSequence(growth, storage, random.nextInt(Integer.MAX_VALUE));
+        }
+        int[] extremes = {Integer.MAX_VALUE, Integer.MAX_VALUE - 1,
+                Integer.MAX_VALUE - 8, Integer.MAX_VALUE - 9,
+                Integer.MAX_VALUE - 10, 1_000_000_000,
+                127, 128, 129, 15, 16, 17, 31, 63, 64, 65};
+        for (int capacity : extremes) {
+            expansions += verifyGrowthSequence(growth, storage, capacity);
+        }
+        require(expansions > 700_000L, "growth oracle did not exercise enough expansions");
+        System.out.println("M3_EVICTING_GROWTH_ARITHMETIC_PASS configurations=20496 expansions="
+                + expansions);
+    }
+
+    private static long verifyGrowthSequence(Method growth,
+            java.lang.reflect.Field storage, int limit) throws Exception {
+        M3EvictingQueue<Integer> owner = M3EvictingQueue.create(limit);
+        int physical = limit >= 15 ? 16 : limit + 1;
+        require(((Object[]) storage.get(owner)).length == physical,
+                "initial physical slots differed from constructor for limit=" + limit);
+        // A Java Object[] length is int: the mathematical MAX_VALUE+1 is not allocatable.
+        long feasible = Math.min((long) limit + 1, (long) Integer.MAX_VALUE);
+        int steps = 0;
+        while (physical < feasible) {
+            int next = (Integer) growth.invoke(owner, physical);
+            require(next > physical && next <= feasible,
+                    "invalid M3 ring expansion: limit=" + limit
+                            + " old=" + physical + " next=" + next);
+            physical = next;
+            require(++steps <= 100, "nonconvergent M3 ring growth for limit=" + limit);
+        }
+        return steps;
+    }
+
+    /** Exercise bounded empty-capacity storage, physical ring growth, wrap and wire replay. */
+    private static void verifyBoundedInitialStorage() throws Exception {
+        final int limit = 1_000_000_000;
+        M3EvictingQueue<Integer> actual = M3EvictingQueue.create(limit);
+        var storage = M3EvictingQueue.class.getDeclaredField("elements");
+        storage.setAccessible(true);
+        require(((Object[]) storage.get(actual)).length == 16,
+                "large logical limit allocated a large backing array");
+        ArrayDeque<Integer> expected = new ArrayDeque<>();
+        for (int index = 0; index < 257; index++) {
+            actual.add(index);
+            expected.addLast(index);
+        }
+        for (int index = 0; index < 113; index++) {
+            require(actual.remove().equals(expected.removeFirst()), "poll after growth differed");
+        }
+        for (int index = 257; index < 521; index++) {
+            actual.add(index);
+            expected.addLast(index);
+        }
+        require(Arrays.equals(actual.toArray(), expected.toArray()),
+                "ring ordering after bounded growth and wrap differed");
+        require(actual.remainingCapacity() == limit - expected.size(),
+                "large logical limit was changed by physical growth");
+        @SuppressWarnings("unchecked")
+        Queue<Integer> recovered = (Queue<Integer>) deserialize(serialize(actual));
+        require(recovered.getClass() == M3EvictingQueue.class,
+                "bounded queue serialization changed binary identity");
+        require(Arrays.equals(recovered.toArray(), expected.toArray()),
+                "bounded queue serialized payload differed");
+        // The wire image uses count+1 slots, not the new 16-slot constructor.
+        // Force repeated growth after readObject() and verify FIFO preservation.
+        for (int index = 521; index < 2048; index++) {
+            recovered.add(index);
+            expected.addLast(index);
+        }
+        require(Arrays.equals(recovered.toArray(), expected.toArray()),
+                "serialized ring growth changed FIFO order");
+        while (!expected.isEmpty()) {
+            require(recovered.remove().equals(expected.removeFirst()),
+                    "serialized ring growth/drain differed");
+        }
+        require(recovered.isEmpty(), "serialized ring did not drain to empty");
+        System.out.println("M3_EVICTING_SERIALIZED_GROWTH_PASS");
+        System.out.println("M3_EVICTING_LAZY_INITIAL_STORAGE_PASS");
     }
 
     /**
@@ -70,7 +227,7 @@ public final class M3EvictingQueueCanonicalContractProbe {
      * Fixed seeds make a failure repeatable on Java 21 and across platforms.
      */
     private static long runSeededQueueModel(Class<?> owner) throws Exception {
-        int[] capacities = {0, 1, 2, 3, 7, 31};
+        int[] capacities = {0, 1, 2, 3, 7, 15, 16, 17, 31, 63, 64, 65};
         long[] seeds = {0x63716c2d6d3321L, 0x6c656761637921L, 0x7fffffffffffffffL};
         long steps = 0;
         for (int capacity : capacities) {

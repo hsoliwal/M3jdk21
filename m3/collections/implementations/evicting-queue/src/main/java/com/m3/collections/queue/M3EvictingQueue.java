@@ -64,7 +64,7 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
             throw new IllegalArgumentException("maxSize (" + maxSize + ") must >= 0");
         }
         this.maxSize = maxSize;
-        int slots = maxSize == Integer.MAX_VALUE ? maxSize : maxSize + 1;
+        int slots = maxSize >= 15 ? 16 : maxSize + 1;
         elements = new Object[slots];
         refreshState();
     }
@@ -119,13 +119,14 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
 
     private int expandedLength(int oldLength) {
         long jump = oldLength < 64 ? (long) oldLength + 2 : oldLength / 2L;
-        long target = oldLength + jump;
+        long target = Math.min(oldLength + jump, (long) maxSize + 1);
         if (target <= ARRAY_LIMIT) return (int) target;
         long minimum = (long) oldLength + 1;
         if (minimum > Integer.MAX_VALUE) {
             throw new IllegalStateException("Sorry, deque too big");
         }
-        return minimum > ARRAY_LIMIT ? Integer.MAX_VALUE : ARRAY_LIMIT;
+        return (int) Math.min(minimum > ARRAY_LIMIT ? Integer.MAX_VALUE : ARRAY_LIMIT,
+                (long) maxSize + 1);
     }
 
     /** Array growth preserves physical ring coordinates and moves only the wrapped first leg. */
@@ -414,8 +415,9 @@ public final class M3EvictingQueue<E> extends AbstractCollection<E>
         if (!cursor.hasNext()) return "[]";
         StringBuilder text = new StringBuilder("[");
         while (true) {
-            // The provider renders through a distinct internal owner: outer self is not special.
-            text.append(cursor.next());
+            // Preserve direct self-reference rendering per JDK Collection semantics.
+            Object value = cursor.next();
+            text.append(value == this ? "(this Collection)" : value);
             if (!cursor.hasNext()) return text.append(']').toString();
             text.append(", ");
         }
