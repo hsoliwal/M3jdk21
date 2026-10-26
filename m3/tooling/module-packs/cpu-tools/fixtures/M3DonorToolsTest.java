@@ -52,7 +52,7 @@ public final class M3DonorToolsTest {
     private M3DonorToolsTest() { }
 
     public static void main(String[] args) throws Exception {
-        text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); corpusSearch(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
+        text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); corpusSearch(); regexCorpusSearch(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
         boundedDiff(); threeWayMerge(); lineIndexedDiff(); lineThreeWayMerge();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
@@ -797,6 +797,78 @@ public final class M3DonorToolsTest {
             }
         }
         return hits;
+    }
+
+    /** Independent JDK Matcher oracle for a compiled-once pattern and fresh per-file matcher. */
+    private static void regexCorpusSearch() throws Exception {
+        List<String> examples = List.of("", "ab", "a\r\nb", "\ud83d\ude00a\ud800", "aba\na");
+        var anchored = RegexMatcher.prepare("(?m)^a");
+        List<RegexMatcher.CorpusHit> expectedAnchors = oracleRegex(examples, "(?m)^a");
+        check(anchored.findCorpus(examples, 100).hits().equals(expectedAnchors)
+                        && anchored.findCorpus(examples, 100).scannedDocuments() == examples.size(),
+                "one authoritative compiled regex searches fresh matcher regions per file");
+        check(RegexMatcher.prepare("ab").findCorpus(List.of("a", "b"), 99).size() == 0,
+                "regex cannot match through adjacent file boundaries");
+        var end = RegexMatcher.prepare("$").findCorpus(List.of("", "a", ""), 100);
+        check(end.complete() && end.hits().equals(oracleRegex(List.of("", "a", ""), "$")),
+                "end anchor and zero-width groups obey JDK semantics per file");
+        var cap0 = RegexMatcher.prepare("a").findCorpus(List.of("", "a", "b"), 0);
+        check(!cap0.complete() && cap0.size() == 0 && cap0.scannedDocuments() == 2,
+                "zero-cap one-extra-match discovery stops at the precise file");
+        check(RegexMatcher.prepare("a").findCorpus(List.of("", ""), 0).complete(),
+                "zero cap is complete if no regex match exists");
+        check(RegexMatcher.prepare("a").findCorpus(List.of(), 0).complete(), "empty corpus complete");
+        rejects(UnsupportedOperationException.class, () -> end.hits().clear());
+        rejects(NullPointerException.class, () -> RegexMatcher.prepare(null));
+        rejects(PatternSyntaxException.class, () -> RegexMatcher.prepare("["));
+        rejects(NullPointerException.class, () -> anchored.findCorpus(null, 1));
+        rejects(NullPointerException.class, () -> anchored.findCorpus(List.of(""), 1, null));
+        rejects(NullPointerException.class, () -> anchored.findCorpus(Arrays.asList("x", null), 1));
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(List.of(""), -1));
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(List.of(""),
+                RegexMatcher.Prepared.MAX_MATCHES + 1));
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(
+                Collections.nCopies(RegexMatcher.Prepared.MAX_DOCUMENTS + 1, ""), 0));
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(
+                List.of("a".repeat(RegexMatcher.Prepared.MAX_DOCUMENT_UTF16 + 1)), 0));
+        String maximal = "a".repeat(RegexMatcher.Prepared.MAX_DOCUMENT_UTF16);
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(
+                Collections.nCopies(5, maximal), 0));
+        rejects(IllegalArgumentException.class, () -> RegexMatcher.prepare(
+                "a".repeat(RegexMatcher.Prepared.MAX_REGEX_UTF16 + 1)).findCorpus(List.of(""), 0));
+        rejects(IllegalStateException.class, () -> anchored.findCorpus(List.of("a"), 1,
+                () -> { throw new IllegalStateException("cancel"); }));
+
+        String[] patterns = {"", "a", "a+", "^", "$", "(?m)^a", "(?=a)", "(?<=a)b",
+                "(ab)|a", "(?s).", "[\\s\\S]", "\\b", "\\X", "(?i)a", "a{0,3}"};
+        for (int trial = 0; trial < 1_100; trial++) {
+            String regex = patterns[RANDOM.nextInt(patterns.length)];
+            RegexMatcher.Prepared prepared = RegexMatcher.prepare(regex);
+            List<String> sources = new ArrayList<>();
+            int count = RANDOM.nextInt(7);
+            for (int i = 0; i < count; i++) sources.add(randomText(42));
+            List<RegexMatcher.CorpusHit> oracle = oracleRegex(sources, regex);
+            for (int maxHits : new int[]{0, 1, 2, 8, 500}) {
+                var actual = prepared.findCorpus(sources, maxHits);
+                check(actual.hits().equals(oracle.subList(0, Math.min(maxHits, oracle.size()))),
+                        "compiled-once corpus result matches fresh standard JDK matchers");
+                check(actual.complete() == (oracle.size() <= maxHits)
+                                && actual.size() == Math.min(maxHits, oracle.size()),
+                        "global match cap and extra-hit completeness match independent oracle");
+                int scanned = oracle.size() <= maxHits ? sources.size()
+                        : oracle.get(maxHits).documentId() + 1;
+                check(actual.scannedDocuments() == scanned, "exact document count at early global stop");
+            }
+        }
+    }
+
+    private static List<RegexMatcher.CorpusHit> oracleRegex(List<String> sources, String regex) {
+        List<RegexMatcher.CorpusHit> result = new ArrayList<>();
+        for (int document = 0; document < sources.size(); document++) {
+            var matcher = Pattern.compile(regex).matcher(sources.get(document));
+            while (matcher.find()) result.add(new RegexMatcher.CorpusHit(document, matcher.start(), matcher.end()));
+        }
+        return result;
     }
 
     private static void multiSearchAndSignatures() throws Exception {

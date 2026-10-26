@@ -64,6 +64,37 @@ public final class M3BoundedDiffTest {
                 CpuTools.corpusLiteral(corpus, needles, 100, corpusMonitor);
                 throw new AssertionError("cancelled corpus search executed");
             } catch (CancellationException expected) { check(true, "corpus search cancellation observed"); }
+            var regex = CpuTools.regexCorpus(corpus, "right", 5);
+            check(regex.complete() && regex.scannedFiles() == 3 && regex.size() == 3,
+                    "one authoritative compiled M3Regex Pattern executes against ordered M3File snapshots");
+            check(regex.hit(0).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 6, 11))
+                    && regex.hit(1).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(1, 6, 11))
+                    && regex.hit(2).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(2, 7, 12)),
+                    "fresh per-file matchers retain original half-open UTF-16 ranges");
+            check(CpuTools.verifyRegexCorpus(corpus, "right", 5, regex, null)
+                    && !CpuTools.verifyRegexCorpus(corpus, "right", 4, regex, null)
+                    && !CpuTools.verifyRegexCorpus(corpus, "(?i)right", 5, regex, null),
+                    "canonical regex expression, result cap and exact M3File input identities are sealed");
+            check(!CpuTools.verifyRegexCorpus(List.of(after, before, independent), "right", 5, regex, null)
+                    && !CpuTools.verifyRegexCorpus(List.of(M3File.load(moved), after, independent),
+                    "right", 5, regex, null),
+                    "regex receipt refuses file reorder and same-bytes different URI substitution");
+            var cappedRegex = CpuTools.regexCorpus(corpus, "right", 1);
+            check(!cappedRegex.complete() && cappedRegex.size() == 1
+                    && cappedRegex.scannedFiles() == 2,
+                    "global regex cap observes an extra match in the second file");
+            check(CpuTools.regexCorpus(List.of(before, after), "missing", 0).complete()
+                    && CpuTools.regexCorpus(List.of(), "^", 0).scannedFiles() == 0,
+                    "no-match zero cap and empty regex file corpus remain complete");
+            var regexMonitor = new Counter();
+            check(CpuTools.regexCorpus(corpus, "right", 5, regexMonitor).sha256().equals(regex.sha256())
+                    && regexMonitor.worked == 1 && regexMonitor.finished == 0,
+                    "deterministic regex source receipt borrows monitor without completing it");
+            regexMonitor.cancelled = true;
+            try {
+                CpuTools.regexCorpus(corpus, "right", 5, regexMonitor);
+                throw new AssertionError("cancelled regex corpus executed");
+            } catch (CancellationException expected) { check(true, "regex corpus cancellation observed"); }
             CpuTools.FileDiff result = CpuTools.diff(before, after, 1);
             check(result.complete() && result.distance() == 1, "shortest insert/delete script");
             check(result.sha256().matches("[0-9a-f]{64}"), "two-source receipt");
@@ -179,6 +210,10 @@ public final class M3BoundedDiffTest {
                     && !CpuTools.verifyCorpusLiteral(List.of(M3File.load(original), after, independent),
                     needles, 100, searched, null),
                     "admitted corpus snapshots survive disk mutation without transferring identity");
+            check(CpuTools.verifyRegexCorpus(corpus, "right", 5, regex, null)
+                    && !CpuTools.verifyRegexCorpus(List.of(M3File.load(original), after, independent),
+                    "right", 5, regex, null),
+                    "admitted immutable regex snapshots survive file mutation but cannot transfer receipt");
             check(CpuTools.verifyMerge(before, after, independent, 1, merged, null),
                     "three-way receipt retains admitted snapshot after underlying disk change");
             check(!CpuTools.verifyMerge(M3File.load(original), after, independent, 1, merged, null),

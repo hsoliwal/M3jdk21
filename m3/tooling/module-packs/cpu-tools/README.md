@@ -232,8 +232,25 @@ recomputes. These APIs do not interpret regex syntax, which remains owned by
 `Pattern`/M3Regex, and do not claim universal full-text indexing or query
 engine performance.
 
-The direct regex API uses the JDK regex engine; its match-count cap does not
-make arbitrary regex execution time-bounded. The graph distance sentinel
+The `RegexMatcher.Prepared` direct API compiles one expression through the
+authoritative JDK `Pattern`/M3Regex engine, then creates a fresh `Matcher` for
+each ordered immutable `String` source. `findCorpus` keeps per-file UTF-16
+offsets, including zero-width matches, in **three primitive hit lanes** and
+uses a global one-extra-match probe for honest capped completeness. The
+`CpuTools.regexCorpus`/`verifyRegexCorpus` entry points seal every ordered
+`M3File` URI, raw-byte and UTF-16 digest, byte/character geometry, exact
+expression code units, match cap, completeness, scanned file count and
+coordinates. Limits are 4,096 files, 64 Mi UTF-16 units combined, 16 Mi per
+file, 4,096 regex UTF-16 units and 1,000,000 reported hits. The existing
+`RegexMatcher.find` contract remains unchanged and continues returning the
+full matched group. No source concatenation, new regex compiler, JNI symbol,
+copied regex group payload or filesystem reopening is introduced. These
+caps limit input storage and result count, **not** worst-case regex CPU
+time or stack consumption: a pathological `Matcher.find` invocation is not
+preemptible by the cooperative progress monitor. Untrusted regexes require
+external time/resource isolation; no ReDoS-safety claim is made.
+
+The graph distance sentinel
 `Long.MAX_VALUE` covers unreachable, exact-maximum and overflowing distances, and must
 not be interpreted as a proved unreachable state. Floating-point moments
 retain normal double rounding/overflow behavior; finite input samples can

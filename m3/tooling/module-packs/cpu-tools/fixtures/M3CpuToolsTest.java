@@ -325,6 +325,40 @@ public final class M3CpuToolsTest {
         corpusMonitor.cancelled = true;
         expect(CancellationException.class,
                 () -> CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 100, corpusMonitor));
+        var regexCorpus = CpuTools.regexCorpus(searchableFiles, "(?=ba)", 100);
+        check(regexCorpus.complete() && regexCorpus.scannedFiles() == 3 && regexCorpus.size() == 3,
+                "one compiled M3Regex/JDK Pattern is reused with independent file-local matcher regions");
+        check(regexCorpus.hit(0).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 1, 1))
+                && regexCorpus.hit(1).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 3, 3))
+                && regexCorpus.hit(2).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(1, 4, 4)),
+                "zero-width overlapping regex observations preserve source-local UTF-16 coordinates");
+        check(regexCorpus.sha256().matches("[0-9a-f]{64}")
+                && CpuTools.verifyRegexCorpus(searchableFiles, "(?=ba)", 100, regexCorpus, null),
+                "compiled regex result is exactly source- and regex-bound");
+        check(!CpuTools.verifyRegexCorpus(searchableFiles, "ba", 100, regexCorpus, null)
+                && !CpuTools.verifyRegexCorpus(List.of(target, source, changed),
+                "(?=ba)", 100, regexCorpus, null)
+                && !CpuTools.verifyRegexCorpus(List.of(M3File.load(copied), target, changed),
+                "(?=ba)", 100, regexCorpus, null),
+                "regex syntax, file ordinals and source URI are part of receipt identity");
+        var regexPrefix = CpuTools.regexCorpus(searchableFiles, "(?=ba)", 2);
+        check(!regexPrefix.complete() && regexPrefix.scannedFiles() == 2
+                && regexPrefix.hits().equals(regexCorpus.hits().subList(0, 2)),
+                "one-more-regex-hit completeness crosses file boundary without joining source text");
+        check(CpuTools.regexCorpus(List.of(), "^", 0).complete()
+                && CpuTools.regexCorpus(searchableFiles, "missing", 0).complete(),
+                "empty or no-match regex corpus reports truthful zero-cap completeness");
+        var regexProgress = new CountMonitor();
+        check(CpuTools.regexCorpus(searchableFiles, "(?=ba)", 100, regexProgress).sha256()
+                .equals(regexCorpus.sha256()) && regexProgress.work == 1 && regexProgress.finished == 0,
+                "prepared regex corpus borrows progress without completion and yields stable SHA");
+        regexProgress.cancelled = true;
+        expect(CancellationException.class,
+                () -> CpuTools.regexCorpus(searchableFiles, "(?=ba)", 100, regexProgress));
+        expect(IllegalArgumentException.class,
+                () -> CpuTools.regexCorpus(searchableFiles, "a", -1));
+        expect(java.util.regex.PatternSyntaxException.class,
+                () -> CpuTools.regexCorpus(searchableFiles, "[", 1));
         var grams = CpuTools.gramIndex(source, 2);
         check(grams.sha256().matches("[0-9a-f]{64}") && grams.gramSize() == 2
                 && grams.windowCount() == source.length() - 1, "source-bound indexed gram receipt");

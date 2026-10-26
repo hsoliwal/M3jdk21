@@ -15,6 +15,7 @@ import com.m3.tools.text.index.Bm25Ranker;
 import com.m3.tools.text.ngram.NGramIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
+import com.m3.tools.text.regex.RegexMatcher;
 import com.m3.tools.text.search.AffixIndex;
 import com.m3.tools.text.search.ExactSearch;
 import com.m3.tools.text.search.MultiLiteralSearch;
@@ -516,6 +517,99 @@ public final class CpuTools {
                                               CorpusSearch expected, ProgressMonitor monitor) {
         Objects.requireNonNull(expected, "expected");
         CorpusSearch actual = corpusLiteral(sources, literals, maxHits, monitor);
+        if (!actual.sha256().equals(expected.sha256()) || actual.complete() != expected.complete()
+                || actual.scannedFiles() != expected.scannedFiles() || actual.size() != expected.size()) return false;
+        for (int i = 0; i < actual.size(); i++) {
+            if (!actual.hit(i).equals(expected.hit(i))) return false;
+        }
+        return true;
+    }
+
+    /** One authoritative compiled M3Regex/JDK Pattern shared across independent M3File snapshots. */
+    public static final class RegexCorpusSearch {
+        private final RegexMatcher.CorpusResult result;
+        private final String sha256;
+
+        private RegexCorpusSearch(RegexMatcher.CorpusResult result, String sha256) {
+            this.result = result;
+            this.sha256 = sha256;
+        }
+
+        public int size() { return result.size(); }
+        public boolean complete() { return result.complete(); }
+        public int scannedFiles() { return result.scannedDocuments(); }
+        public RegexMatcher.CorpusHit hit(int ordinal) { return result.hit(ordinal); }
+        public List<RegexMatcher.CorpusHit> hits() { return result.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static RegexCorpusSearch regexCorpus(List<M3File> sources, String expression, int maxHits) {
+        return regexCorpus(sources, expression, maxHits, null);
+    }
+
+    /**
+     * The incumbent regex compiler owns the compiled graph and match semantics;
+     * this API seals the ordered immutable M3File inputs and original UTF-16
+     * ranges. No cross-file anchor/region behavior is invented by concatenation.
+     * Limits on hits and input geometry do not bound arbitrary regex CPU time.
+     */
+    public static RegexCorpusSearch regexCorpus(List<M3File> sources, String expression,
+                                                int maxHits, ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(expression, "expression");
+        if (maxHits < 0 || maxHits > RegexMatcher.Prepared.MAX_MATCHES) {
+            throw new IllegalArgumentException("regex match budget");
+        }
+        if (expression.length() > RegexMatcher.Prepared.MAX_REGEX_UTF16) {
+            throw new IllegalArgumentException("regex expression UTF-16 budget");
+        }
+        if (sources.size() > RegexMatcher.Prepared.MAX_DOCUMENTS) {
+            throw new IllegalArgumentException("regex corpus file count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-regex-corpus-result-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<String> texts = new ArrayList<>(snapshot.size());
+        long units = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File file = snapshot.get(id);
+            units += file.length();
+            if (file.length() > RegexMatcher.Prepared.MAX_DOCUMENT_UTF16
+                    || units > RegexMatcher.Prepared.MAX_CORPUS_UTF16) {
+                throw new IllegalArgumentException("regex corpus source UTF-16 budget");
+            }
+            hash.number(id).text(file.uri().toASCIIString()).text(file.rawSha256())
+                    .text(file.utf16Sha256()).number(file.byteLength()).number(file.length());
+            texts.add(file.text());
+        }
+        // Canonical code-unit framing also seals patterns containing isolated surrogates.
+        hash.number(expression.length());
+        for (int i = 0; i < expression.length(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            hash.number(expression.charAt(i));
+        }
+        RegexMatcher.Prepared prepared = RegexMatcher.prepare(expression);
+        RegexMatcher.CorpusResult result = prepared.findCorpus(texts, maxHits, progress::checkCancelled);
+        hash.number(maxHits).number(result.size()).number(result.scannedDocuments())
+                .number(result.complete() ? 1 : 0);
+        for (int i = 0; i < result.size(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            RegexMatcher.CorpusHit hit = result.hit(i);
+            hash.number(hit.documentId()).number(hit.start()).number(hit.end());
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new RegexCorpusSearch(result, hash.finish());
+    }
+
+    /** Recompile and independently re-execute; the receipt is not treated as a proof by itself. */
+    public static boolean verifyRegexCorpus(List<M3File> sources, String expression, int maxHits,
+                                            RegexCorpusSearch expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        RegexCorpusSearch actual = regexCorpus(sources, expression, maxHits, monitor);
         if (!actual.sha256().equals(expected.sha256()) || actual.complete() != expected.complete()
                 || actual.scannedFiles() != expected.scannedFiles() || actual.size() != expected.size()) return false;
         for (int i = 0; i < actual.size(); i++) {
