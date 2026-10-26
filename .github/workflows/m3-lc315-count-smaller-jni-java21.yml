@@ -11,6 +11,9 @@ on:
       - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongCountSmallerRightContract.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongCountSmallerRightTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankClosestWindowContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankClosestWindowTest.java'
+      - 'm3/collections/qualification/lc658-closest-window-20261026/**'
       - 'm3/collections/qualification/lc315-count-smaller-20261026/**'
 
 permissions:
@@ -36,19 +39,24 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '7871ab51e2ec8c3e4fb990817f5fbdb7ec9845cb'
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = 'ce7f53f1a4c69c9f5a990f26944519b1194dfe6e'
-          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '442630c291ce9ba4c9c4490dca4076e7f09558c3'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '99812c8ecc434d0550f607a19611585b56a108ab'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '5d7161b457c06a5b807d3356a8fe0b6b2149527c'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'd8953eb3be514aadaafa05d581d57c76cb72b242'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongCountSmallerRightContract.java)" = '90995dfabb36d7d3dc639867270f91723de2b8da'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongCountSmallerRightTest.java)" = 'ce53d077c93db272d9fdaa510bb61e8e22f9e5b9'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankClosestWindowContract.java)" = '0b3aaea7d49959cf3139de9c86db76264edbc5ff'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankClosestWindowTest.java)" = '85fb5cc67b36410f305e22eddd22505fa1155c39'
       - name: Strict compile original Java21 owner and independent quadratic oracle
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/m3-lc315/classes" "$RUNNER_TEMP/m3-lc315/native" "$RUNNER_TEMP/m3-lc315/legacy"
-          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-lc315/classes" \
+          mkdir -p "$RUNNER_TEMP/m3-lc315/classes" "$RUNNER_TEMP/m3-lc315/native" "$RUNNER_TEMP/m3-lc315/legacy" "$RUNNER_TEMP/m3-lc315/headers"
+          javac --release 21 -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/m3-lc315/headers" -d "$RUNNER_TEMP/m3-lc315/classes" \
             m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongCountSmallerRightContract.java
+            m3/collections/src/test/java/com/m3/collections/M3LongCountSmallerRightContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankClosestWindowContract.java
+          grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_closestWindowStarts0' "$RUNNER_TEMP/m3-lc315/headers/com_m3_collections_M3LongRankBatchNative.h"
       - name: Build original C17 JNI owner with UBSan and strict compiler warnings
         shell: bash
         run: |
@@ -59,6 +67,7 @@ jobs:
             m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
             -o "$RUNNER_TEMP/m3-lc315/native/libm3rankbatch.so"
           nm -D "$RUNNER_TEMP/m3-lc315/native/libm3rankbatch.so" | grep -q 'Java_com_m3_collections_M3LongRankBatchNative_countSmallerRight0'
+          nm -D "$RUNNER_TEMP/m3-lc315/native/libm3rankbatch.so" | grep -q 'Java_com_m3_collections_M3LongRankBatchNative_closestWindowStarts0'
           cc -std=c17 -Wall -Wextra -Werror -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             m3/collections/src/test/native/legacy_m3rankbatch.c \
@@ -90,6 +99,27 @@ jobs:
             -Dm3.collections.rank.native=true -cp "$classes" "$base" --missing-native \
             | tee "$RUNNER_TEMP/m3-lc315/missing.txt"
           grep -Fxq 'PASS M3_LC315_COUNT_SMALLER mode=missing-native checks=2865' "$RUNNER_TEMP/m3-lc315/missing.txt"
+          # LeetCode #658 batched nearest windows on the SAME original library.
+          # Differential BigInteger oracle covers every signed-64-bit edge.
+          closest=com.m3.collections.M3LongRankClosestWindowContract
+          java -Xcheck:jni -cp "$classes" "$closest" | tee "$RUNNER_TEMP/m3-lc315/closest-java.txt"
+          grep -Fxq 'PASS CLOSEST_WINDOW_JNI_658 checks=50977 native=false forced=false' "$RUNNER_TEMP/m3-lc315/closest-java.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-lc315/native" -cp "$classes" "$closest" --native \
+            | tee "$RUNNER_TEMP/m3-lc315/closest-native.txt"
+          grep -Fxq 'PASS CLOSEST_WINDOW_JNI_658 checks=50976 native=true forced=true' "$RUNNER_TEMP/m3-lc315/closest-native.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-lc315/native" -cp "$classes" "$closest" --native \
+            | tee "$RUNNER_TEMP/m3-lc315/closest-int.txt"
+          cmp "$RUNNER_TEMP/m3-lc315/closest-native.txt" "$RUNNER_TEMP/m3-lc315/closest-int.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-lc315/legacy" -cp "$classes" "$closest" \
+            | tee "$RUNNER_TEMP/m3-lc315/closest-oldabi.txt"
+          grep -Fxq 'PASS CLOSEST_WINDOW_JNI_658 checks=50976 native=true forced=false' "$RUNNER_TEMP/m3-lc315/closest-oldabi.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-lc315/absent" -cp "$classes" "$closest" \
+            | tee "$RUNNER_TEMP/m3-lc315/closest-missing.txt"
+          grep -Fxq 'PASS CLOSEST_WINDOW_JNI_658 checks=50977 native=false forced=false' "$RUNNER_TEMP/m3-lc315/closest-missing.txt"
       - name: Preserve executable CI receipts
         if: ${{ always() }}
         uses: actions/upload-artifact@v4

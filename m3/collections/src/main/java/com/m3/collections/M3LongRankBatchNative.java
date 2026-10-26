@@ -30,6 +30,8 @@ public final class M3LongRankBatchNative {
     private static final int NATIVE_MIN_RUN_STATISTICS = 256;
     private static final int NATIVE_MIN_FREQUENCY_TOP_K = 256;
     private static volatile boolean TOP_K_FREQUENCY_ABI_MISSING;
+    private static final int NATIVE_MIN_CLOSEST_WINDOW_BATCH = 64;
+    private static volatile boolean CLOSEST_WINDOW_ABI_MISSING;
     private static final boolean AVAILABLE = loadOptIn();
 
     private M3LongRankBatchNative() { }
@@ -1166,4 +1168,82 @@ public final class M3LongRankBatchNative {
     /** Additive same-library JNI ABI: bounded pages, no per-Entry allocation. */
     static native long[] differenceValues0(long[] left, long[] right,
                                           boolean distinct, boolean symmetric);
+
+    /**
+     * LeetCode #658: each output is the physical start of the k-nearest
+     * contiguous sorted-long window. Equal distances prefer smaller values,
+     * and indistinguishable duplicate windows prefer the earliest start.
+     */
+    static int[] closestWindowStarts(long[] sorted, long[] targets, int k) {
+        Objects.requireNonNull(targets, "targets");
+        int[] starts = new int[targets.length];
+        closestWindowStartsInto(sorted, targets, 0, targets.length, k, starts, 0, false);
+        return starts;
+    }
+
+    static void closestWindowStartsInto(long[] sorted, long[] targets, int targetFrom,
+            int length, int k, int[] starts, int startFrom, boolean nativeRequired) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(targets, "targets");
+        Objects.requireNonNull(starts, "starts");
+        Objects.checkFromIndexSize(targetFrom, length, targets.length);
+        Objects.checkFromIndexSize(startFrom, length, starts.length);
+        if (k < 0 || k > sorted.length) {
+            throw new IllegalArgumentException("k outside sorted owner length");
+        }
+        if (nativeRequired) {
+            if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch K-closest JNI unavailable");
+            closestWindowStarts0(sorted, targets, targetFrom, length, k, starts, startFrom);
+            return;
+        }
+        if (length == 0) return;
+        if (k == 0 || k == sorted.length) {
+            Arrays.fill(starts, startFrom, startFrom + length, 0);
+            return;
+        }
+        if (AVAILABLE && !CLOSEST_WINDOW_ABI_MISSING
+                && length >= NATIVE_MIN_CLOSEST_WINDOW_BATCH) {
+            try {
+                closestWindowStarts0(sorted, targets, targetFrom, length, k, starts, startFrom);
+                return;
+            } catch (UnsatisfiedLinkError oldNativeAbi) {
+                CLOSEST_WINDOW_ABI_MISSING = true;
+            }
+        }
+        for (int index = 0; index < length; index++) {
+            starts[startFrom + index] = closestWindowJava(sorted, targets[targetFrom + index], k);
+        }
+    }
+
+    static int closestWindowJava(long[] sorted, long target, int k) {
+        if (k == 0 || k == sorted.length) return 0;
+        int low = 0, high = sorted.length - k;
+        while (low < high) {
+            int middle = low + ((high - low) >>> 1);
+            long left = sorted[middle], right = sorted[middle + k];
+            if (target <= left) {
+                high = middle;
+            } else if (target >= right
+                    || Long.compareUnsigned(target - left, right - target) > 0) {
+                low = middle + 1;
+            } else {
+                high = middle;
+            }
+        }
+        // Equal-value windows are indistinguishable; retain earliest physical identity.
+        if (sorted[low] == sorted[low + k - 1]) {
+            long value = sorted[low];
+            int first = 0, end = low;
+            while (first < end) {
+                int middle = first + ((end - first) >>> 1);
+                if (sorted[middle] < value) first = middle + 1;
+                else end = middle;
+            }
+            return first;
+        }
+        return low;
+    }
+
+    private static native void closestWindowStarts0(long[] sorted, long[] targets,
+            int targetFrom, int length, int k, int[] starts, int startFrom);
 }

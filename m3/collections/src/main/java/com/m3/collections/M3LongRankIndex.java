@@ -466,6 +466,27 @@ public final class M3LongRankIndex {
         return M3LongRankBatchNative.pairDistanceCounts(values, maxDistances);
     }
 
+
+    /**
+     * LeetCode #658: primitive starting coordinates of the k nearest elements
+     * for each query, over this original immutable signed-long index.
+     * If distances tie, the lower value wins; equal-value windows use the
+     * earliest identical physical start. No per-entry allocation.
+     */
+    public int[] closestWindowStarts(long[] queries, int k) {
+        return M3LongRankBatchNative.closestWindowStarts(values, queries, k);
+    }
+
+    /**
+     * Writes k-closest starting coordinates to caller-owned primitive storage.
+     * Query/output ranges and k are validated before the first output write.
+     */
+    public void closestWindowStartsInto(long[] queries, int queryFrom, int length,
+            int k, int[] output, int outputFrom) {
+        M3LongRankBatchNative.closestWindowStartsInto(
+                values, queries, queryFrom, length, k, output, outputFrom, false);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(

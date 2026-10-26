@@ -1617,3 +1617,88 @@ Java_com_m3_collections_M3LongRankBatchNative_countSmallerRight0(
     (*env)->SetIntArrayRegion(env, output, 0, length, counts);
     free(values); free(indices); free(scratch); free(counts);
 }
+/*
+ * LeetCode #658: selected-window start on sorted signed-long owners.
+ * Unsigned positive differences handle Long.MIN_VALUE/Long.MAX_VALUE exactly;
+ * repeated equal windows return the earliest physical start.
+ */
+static jint m3_closest_window_start(const jlong *sorted, jsize size, jint k, jlong target) {
+    if (k == 0 || k == size) return 0;
+    jsize low = 0;
+    jsize high = size - k;
+    while (low < high) {
+        jsize middle = low + (high - low) / 2;
+        jlong left = sorted[middle];
+        jlong right = sorted[middle + k];
+        if (target <= left) {
+            high = middle;
+        } else if (target >= right
+                || (uint64_t) target - (uint64_t) left
+                    > (uint64_t) right - (uint64_t) target) {
+            low = middle + 1;
+        } else {
+            high = middle;
+        }
+    }
+    if (sorted[low] == sorted[low + k - 1]) {
+        jlong value = sorted[low];
+        jsize first = 0;
+        jsize end = low;
+        while (first < end) {
+            jsize middle = first + (end - first) / 2;
+            if (sorted[middle] < value) first = middle + 1;
+            else end = middle;
+        }
+        return (jint) first;
+    }
+    return (jint) low;
+}
+
+/* Batches pure primitive #658 distance windows; no object ownership escapes JNI. */
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_closestWindowStarts0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray targets,
+        jint target_from, jint length, jint k, jintArray starts, jint start_from) {
+    (void) ignored;
+    if (sorted == NULL || targets == NULL || starts == NULL) {
+        jclass type = (*env)->FindClass(env, "java/lang/NullPointerException");
+        if (type != NULL) (*env)->ThrowNew(env, type, "null nearest-window batch");
+        return;
+    }
+    jsize size = (*env)->GetArrayLength(env, sorted);
+    jsize queries = (*env)->GetArrayLength(env, targets);
+    jsize capacity = (*env)->GetArrayLength(env, starts);
+    if (k < 0 || k > size) {
+        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+        if (type != NULL) (*env)->ThrowNew(env, type, "invalid k");
+        return;
+    }
+    if (target_from < 0 || length < 0 || start_from < 0
+            || length > queries || target_from > queries - length
+            || length > capacity || start_from > capacity - length) {
+        jclass type = (*env)->FindClass(env, "java/lang/IndexOutOfBoundsException");
+        if (type != NULL) (*env)->ThrowNew(env, type, "invalid nearest-window bounds");
+        return;
+    }
+    if (length == 0) return;
+    /* Fixed 256-query pages: no copied query vector or full output array. */
+    enum { M3_CLOSEST_PAGE = 256 };
+    jlong requested[M3_CLOSEST_PAGE];
+    jint output[M3_CLOSEST_PAGE];
+    for (jint done = 0; done < length;) {
+        jint chunk = length - done;
+        if (chunk > M3_CLOSEST_PAGE) chunk = M3_CLOSEST_PAGE;
+        (*env)->GetLongArrayRegion(env, targets, target_from + done, chunk, requested);
+        if ((*env)->ExceptionCheck(env)) return;
+        /* Bounded critical region: C-only binary searches, no JNI calls/pointers retained. */
+        const jlong *values = (*env)->GetPrimitiveArrayCritical(env, sorted, NULL);
+        if (values == NULL) return;
+        for (jint i = 0; i < chunk; i++) {
+            output[i] = m3_closest_window_start(values, size, k, requested[i]);
+        }
+        (*env)->ReleasePrimitiveArrayCritical(env, sorted, (void *) values, JNI_ABORT);
+        (*env)->SetIntArrayRegion(env, starts, start_from + done, chunk, output);
+        if ((*env)->ExceptionCheck(env)) return;
+        done += chunk;
+    }
+}
