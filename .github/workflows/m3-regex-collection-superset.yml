@@ -8,6 +8,8 @@ on:
       - 'src/java.base/share/classes/java/util/regex/**'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
       - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
+      - 'test/jdk/jdk/internal/m3/M3IndexedSortWorkspaceTest.java'
       - 'src/java.base/share/native/libjava/M3IndexMaskWindow.c'
       - 'test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java'
       - 'test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java'
@@ -68,6 +70,8 @@ jobs:
           7819788e326c0a833984186af9b4a91f3d156cdf src/java.base/share/classes/java/util/ChangeJournal.java
           944c61e15ede09dfc0965a425bbd60aafe761176 src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java
           ea949c6db62f312a71f7fdba3f2576816b512fec test/jdk/java/util/concurrent/CopyOnWriteArrayList/M3CopyOnWriteWordMaskTest.java
+          0b180a383e42fd413e1a935af7a3041c417a7c8e test/jdk/jdk/internal/m3/M3IndexedSortWorkspaceTest.java
+          7dc12123941099640c94c280b57a4a13299f7def m3/qualification/collection-convergence-20261024/INDEXED_SORT_QUALIFICATION_RECEIPT.json
           ac3d3996faca3b5a125b9cda17a4bc7adf7de37a m3/qualification/collection-convergence-20261024/COW_SINGLE_WORD_RECEIPT.json
           071a3dd97ab4294741a1393b7540398d06af2378 m3/qualification/collection-convergence-20261024/REGEX_COLLECTION_SUPERSET_RECEIPT.json
           670ed47d9e6e3f57a29dbf4628a0791158e29960 m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json
@@ -126,6 +130,7 @@ jobs:
             test/jdk/java/util/regex/M3RegexReuseTest.java \
             test/jdk/java/util/regex/M3RegexLiteralTQTest.java \
             test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
+            test/jdk/jdk/internal/m3/M3IndexedSortWorkspaceTest.java \
             test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java \
             test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java \
             test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java \
@@ -192,6 +197,16 @@ jobs:
               --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
               -cp "$out/tests" "$name"
           done
+          for mode in -Xmixed -Xint; do
+            "$home/bin/java" "$mode" -Xmx512m -Xcheck:jni \
+              --add-modules jdk.management \
+              --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+              -cp "$out/tests" M3IndexedSortWorkspaceTest behavior
+          done
+          "$home/bin/java" -Xmixed -Xmx512m -Xcheck:jni \
+            --add-modules jdk.management \
+            --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+            -cp "$out/tests" M3IndexedSortWorkspaceTest allocation
           "$home/bin/java" -Xss256k -Xcheck:jni --add-modules jdk.management \
             --add-opens java.base/java.util=ALL-UNNAMED \
             -cp "$out/tests" CollectionViewsContract
