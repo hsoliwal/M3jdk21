@@ -356,6 +356,14 @@ final class M3PatternQuery {
                 run = input.charAt(offset) < 128 ? run + 1 : 0;
                 if (run == 8) return matchesMixedRolling(input, row, start, wideState);
             }
+            // A qualified tail can lie beyond the bounded prefix lookahead. Inspect
+            // only its eight units; the existing mixed kernel locates the actual run.
+            if (limit < input.length()) {
+                int offset = input.length() - 1;
+                int tail = input.length() - 8;
+                while (offset >= tail && input.charAt(offset) < 128) offset--;
+                if (offset < tail) return matchesMixedRolling(input, row, start, wideState);
+            }
             return matchesRolling(input, row, start);
         }
 
