@@ -15,6 +15,7 @@ on:
       - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
       - 'test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java'
       - 'test/jdk/java/util/regex/M3RegexPredicateRunTest.java'
+      - 'test/jdk/java/lang/String/M3TQSparseContainmentTest.java'
       - 'test/jdk/java/util/regex/M3PatternStateMaskTest.java'
       - '.github/workflows/m3-regex-collection-superset.yml'
       - 'm3/qualification/regex-collection-superset/**'
@@ -73,6 +74,7 @@ jobs:
           b8995aa7be1bb74aa55b4f843e6d1fffe05222991a612adb01871547e83d5647  test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java
           0aab957eae32ecf416a5c8b3e789141d3b48b4ca1defcbb20309c20bc7bfe7d8  test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java
           ff9d3781f69b23c512d1a56921661d04c54d10e80b89ca1cc05708d912cbe8c0  test/jdk/java/util/regex/M3RegexPredicateRunTest.java
+          8ff07088ef10cff9b44e31be439e8b92b8c284ae04854c7832f96ba79cd88e50  test/jdk/java/lang/String/M3TQSparseContainmentTest.java
           7e9f8ff52c96de88e5479019f217c8ea27eeeda0cbcf548e036110ed705f9178  src/java.base/share/classes/java/lang/M3StringRegexDp.java
           a0b2539b8f6ca5b66333e7eed537e55d527d2de59e796296cd5619f9e0c306e8  src/java.base/share/classes/java/lang/StringBuffer.java
           e81e711d52fee23756fd0bf8e48c27ff0fe971419f4bb1c25ec1aa5ebc203a88  src/java.base/share/classes/java/util/Arrays.java
@@ -161,6 +163,7 @@ jobs:
             test/jdk/java/util/regex/M3PatternQueryTest.java \
             test/jdk/java/util/regex/M3RegexReuseTest.java \
             test/jdk/java/util/regex/M3RegexLiteralTQTest.java \
+            test/jdk/java/lang/String/M3TQSparseContainmentTest.java \
             test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
             test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java \
             test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java \
@@ -217,6 +220,12 @@ jobs:
           "$home/bin/java" -Xmx768m -Xcheck:jni \
             -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage \
             -cp "$out/tests" M3RegexLiteralTQTest
+          for mode in -Xmixed -Xint; do
+            "$home/bin/java" "$mode" -Xmx768m -Xcheck:jni \
+              --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+              --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED \
+              -cp "$out/tests" M3TQSparseContainmentTest
+          done
       - name: Check unchanged JDK filtered-sorted, indexed, and libjava count JNI owners
         shell: bash
         run: |
