@@ -235,6 +235,38 @@ public final class M3CpuToolsTest {
                 "three-way progress is borrowed and deterministic");
         mergeMonitor.cancelled = true;
         expect(CancellationException.class, () -> CpuTools.merge(source, target, mergeOther, 1, mergeMonitor));
+        Path lineBasePath = work.resolve("line-base.txt");
+        Path lineLeftPath = work.resolve("line-left.txt");
+        Path lineRightPath = work.resolve("line-right.txt");
+        Path lineConflictPath = work.resolve("line-conflict.txt");
+        Files.writeString(lineBasePath, "first\r\nsecond\n", StandardCharsets.UTF_8);
+        Files.writeString(lineLeftPath, "FIRST\r\nsecond\n", StandardCharsets.UTF_8);
+        Files.writeString(lineRightPath, "first\r\nSECOND\n", StandardCharsets.UTF_8);
+        Files.writeString(lineConflictPath, "OTHER\r\nsecond\n", StandardCharsets.UTF_8);
+        M3File lineBase = M3File.load(lineBasePath), lineLeft = M3File.load(lineLeftPath),
+                lineRight = M3File.load(lineRightPath);
+        var lineMerged = CpuTools.lineMerge(lineBase, lineLeft, lineRight, 2);
+        check(lineMerged.mergeable() && lineMerged.result().mergedChanges().size() == 2
+                && lineMerged.apply(lineBase).equals("FIRST\r\nSECOND\n"),
+                "line-granular independent edits preserve CRLF and LF");
+        check(CpuTools.verifyLineMerge(lineBase, lineLeft, lineRight, 2, lineMerged, null)
+                && !CpuTools.verifyLineMerge(lineBase, lineRight, lineLeft, 2, lineMerged, null)
+                && !CpuTools.verifyLineMerge(M3File.load(copied), lineLeft, lineRight, 2, lineMerged, null),
+                "ordered source identity and line budget seal three-way line receipt");
+        var lineConflict = CpuTools.lineMerge(lineBase, lineLeft, M3File.load(lineConflictPath), 2);
+        check(!lineConflict.mergeable() && lineConflict.conflictCount() == 1,
+                "same-base-line replacements conflict explicitly");
+        expect(IllegalStateException.class, () -> lineConflict.apply(lineBase));
+        check(!CpuTools.lineMerge(lineBase, lineLeft, lineRight, 1).result().complete(),
+                "insufficient line budget never returns guessed merge");
+        var lineMergeMonitor = new CountMonitor();
+        check(CpuTools.lineMerge(lineBase, lineLeft, lineRight, 2, lineMergeMonitor).sha256()
+                .equals(lineMerged.sha256()) && lineMergeMonitor.work == 1
+                && lineMergeMonitor.finished == 0,
+                "line merge uses a borrowed monitor without completing it");
+        lineMergeMonitor.cancelled = true;
+        expect(CancellationException.class,
+                () -> CpuTools.lineMerge(lineBase, lineLeft, lineRight, 2, lineMergeMonitor));
         Files.writeString(path, "changed on disk");
         check(session.execute(List.of("text.identity"), source).equals(result), "execution uses admitted snapshot without reopen");
         var changed = M3File.load(path);

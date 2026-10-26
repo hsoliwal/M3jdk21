@@ -9,6 +9,7 @@ import com.m3.tools.plan.priority.StablePriorityQueue;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.diff.BoundedDiff;
 import com.m3.tools.text.diff.LineDiff;
+import com.m3.tools.text.diff.LineThreeWayMerge;
 import com.m3.tools.text.diff.TextDelta;
 import com.m3.tools.text.diff.ThreeWayMerge;
 import com.m3.tools.text.frequency.TermFrequency;
@@ -52,7 +53,7 @@ public final class M3DonorToolsTest {
 
     public static void main(String[] args) throws Exception {
         text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
-        boundedDiff(); threeWayMerge(); lineIndexedDiff();
+        boundedDiff(); threeWayMerge(); lineIndexedDiff(); lineThreeWayMerge();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
     }
@@ -346,6 +347,103 @@ public final class M3DonorToolsTest {
             if (checkpoints.incrementAndGet() == 4) throw new IllegalStateException("cancel");
         }));
         check(checkpoints.get() == 4, "line hashing/tokenizing checks cancellation");
+    }
+
+    /** Independent line-list edits witness nonoverlap, conflict and exact byte order. */
+    private static void lineThreeWayMerge() throws Exception {
+        rejects(NullPointerException.class, () -> LineThreeWayMerge.merge(null, "", "", 0));
+        rejects(NullPointerException.class, () -> LineThreeWayMerge.merge("", null, "", 0));
+        rejects(NullPointerException.class, () -> LineThreeWayMerge.merge("", "", null, 0));
+        rejects(NullPointerException.class, () -> LineThreeWayMerge.merge("", "", "", 0, null));
+        rejects(IllegalArgumentException.class, () -> LineThreeWayMerge.merge("", "", "", -1));
+        rejects(IllegalArgumentException.class, () -> LineThreeWayMerge.merge("", "", "", 513));
+        var empty = LineThreeWayMerge.merge("", "", "", 0);
+        check(empty.mergeable() && empty.merged().isEmpty() && empty.mergedChanges().isEmpty()
+                && empty.leftPatch().distance() == 0, "empty line merge");
+        var fastForward = LineThreeWayMerge.merge("a\r\nb\n", "a\r\nb\n", "a\r\nB\n", 2);
+        check(fastForward.mergeable() && fastForward.merged().equals("a\r\nB\n"), "line fast-forward");
+        var identical = LineThreeWayMerge.merge("a\r\nb\n", "A\r\nb\n", "A\r\nb\n", 2);
+        check(identical.mergeable() && identical.merged().equals("A\r\nb\n")
+                && identical.mergedChanges().size() == 1, "identical line edit appears only once");
+        var adjacent = LineThreeWayMerge.merge("a\r\nb\nc\n", "A\r\nb\nc\n", "a\r\nB\nc\n", 2);
+        check(adjacent.mergeable() && adjacent.merged().equals("A\r\nB\nc\n")
+                && adjacent.mergedChanges().size() == 2, "adjacent line replacements remain independent");
+        var conflicting = LineThreeWayMerge.merge("a\nb\nc\n", "a\nX\nc\n", "a\nY\nc\n", 2);
+        check(conflicting.status() == ThreeWayMerge.Status.CONFLICT && !conflicting.mergeable()
+                && conflicting.conflictCount() == 1 && conflicting.conflictsComplete()
+                && conflicting.conflicts().size() == 1 && conflicting.mergedChanges().isEmpty(),
+                "same-base-line replacement conflict is explicit");
+        rejects(IllegalStateException.class, conflicting::merged);
+        var samePosition = LineThreeWayMerge.merge("a\nb\n", "a\nx\nb\n", "a\ny\nb\n", 1);
+        check(samePosition.status() == ThreeWayMerge.Status.CONFLICT && samePosition.conflictCount() == 1,
+                "divergent insertions at one line boundary conflict");
+        var beginningBoundary = LineThreeWayMerge.merge("a\nb\nc\n", "a\nx\nb\nc\n", "a\nB\nc\n", 2);
+        var endingBoundary = LineThreeWayMerge.merge("a\nb\nc\n", "a\nb\nx\nc\n", "a\nB\nc\n", 2);
+        check(beginningBoundary.status() == ThreeWayMerge.Status.CONFLICT
+                && endingBoundary.status() == ThreeWayMerge.Status.CONFLICT,
+                "insertion at either replacement boundary requires review");
+        var incomplete = LineThreeWayMerge.merge("a\nb\n", "a\nB\n", "a\nb\n", 1);
+        check(incomplete.status() == ThreeWayMerge.Status.INCOMPLETE && !incomplete.complete()
+                && incomplete.leftPatch().distance() == -1 && incomplete.conflicts().isEmpty()
+                && incomplete.mergedChanges().isEmpty(), "budget miss never becomes a merge");
+        rejects(IllegalStateException.class, incomplete::merged);
+        var surrogate = LineThreeWayMerge.merge("head\r\n\ud800\rbody\r\nend",
+                "HEAD\r\n\ud800\rbody\r\nend", "head\r\n\ud800\rbody\r\nTAIL", 2);
+        check(surrogate.mergeable() && surrogate.merged().equals("HEAD\r\n\ud800\rbody\r\nTAIL"),
+                "unpaired surrogate and mixed endings survive line merge");
+        rejects(UnsupportedOperationException.class, () -> adjacent.mergedChanges().clear());
+        rejects(UnsupportedOperationException.class, () -> conflicting.conflicts().clear());
+
+        for (int trial = 0; trial < 2_400; trial++) {
+            int n = 3 + RANDOM.nextInt(17);
+            List<String> baseLines = new ArrayList<>();
+            for (int i = 0; i < n; i++) baseLines.add("id:" + trial + ":" + i + "\r\n");
+            String base = String.join("", baseLines);
+            int i = RANDOM.nextInt(n), j = RANDOM.nextInt(n - 1);
+            if (j >= i) j++;
+            List<String> left = new ArrayList<>(baseLines), right = new ArrayList<>(baseLines);
+            left.set(i, "left:" + trial + "\r\n");
+            right.set(j, "right:" + trial + "\r\n");
+            StringBuilder expected = new StringBuilder();
+            for (int k = 0; k < n; k++) expected.append(k == i ? left.get(k) : right.get(k));
+            var changed = LineThreeWayMerge.merge(base, String.join("", left),
+                    String.join("", right), 2);
+            check(changed.mergeable() && changed.merged().contentEquals(expected),
+                    "independent line replacements compose exactly");
+            check(changed.leftPatch().distance() == 2 && changed.rightPatch().distance() == 2,
+                    "each replacement has minimal two-line edit distance");
+
+            int insertAt = RANDOM.nextInt(n + 1), otherAt = RANDOM.nextInt(n);
+            if (otherAt >= insertAt) otherAt++;
+            left = new ArrayList<>(baseLines); right = new ArrayList<>(baseLines);
+            left.add(insertAt, "left-insert:" + trial + "\n");
+            right.add(otherAt, "right-insert:" + trial + "\n");
+            expected = new StringBuilder();
+            for (int k = 0; k <= n; k++) {
+                if (k == insertAt) expected.append("left-insert:").append(trial).append('\n');
+                if (k == otherAt) expected.append("right-insert:").append(trial).append('\n');
+                if (k < n) expected.append(baseLines.get(k));
+            }
+            var inserted = LineThreeWayMerge.merge(base, String.join("", left),
+                    String.join("", right), 1);
+            check(inserted.mergeable() && inserted.merged().contentEquals(expected),
+                    "independent line insertions compose exactly");
+            check(inserted.conflictCount() == 0 && inserted.mergedChanges().size() == 2,
+                    "source-relative inserted line coordinates retained");
+        }
+
+        String longBase = "row\r\n".repeat(80_000);
+        var longMerged = LineThreeWayMerge.merge(longBase, "start\n" + longBase,
+                longBase + "tail\r\n", 1);
+        check(longBase.length() > BoundedDiff.MAX_INPUT_UTF16 && longMerged.mergeable()
+                && longMerged.merged().equals("start\n" + longBase + "tail\r\n"),
+                "80k-line three-way merge exceeds code-unit diff limit without losing text");
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> LineThreeWayMerge.merge("a\n".repeat(30_000),
+                "b\n", "c\n", 2, () -> {
+                    if (checkpoints.incrementAndGet() == 4) throw new IllegalStateException("cancel");
+                }));
+        check(checkpoints.get() == 4, "line merge checks cancellation during side indexing");
     }
 
     private static String randomLineDocument(int maximumLines) {

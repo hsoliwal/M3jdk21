@@ -8,6 +8,7 @@ import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.stats.streaming.RunningStatistics;
 import com.m3.tools.text.diff.BoundedDiff;
 import com.m3.tools.text.diff.LineDiff;
+import com.m3.tools.text.diff.LineThreeWayMerge;
 import com.m3.tools.text.diff.ThreeWayMerge;
 import com.m3.tools.text.frequency.TermFrequency;
 import com.m3.tools.text.index.Bm25Ranker;
@@ -764,6 +765,116 @@ public final class CpuTools {
         for (BoundedDiff.Change change : changes) {
             progress.checkCancelled();
             hash.number(change.start()).number(change.end()).number(change.inserted().length());
+            for (int unit = 0; unit < change.inserted().length(); unit++) {
+                if ((unit & 8191) == 0) progress.checkCancelled();
+                hash.number(change.inserted().charAt(unit));
+            }
+        }
+    }
+
+    /** Exact three-snapshot line merge with independently source-sealed line edit scripts. */
+    public static final class FileLineMerge {
+        private final LineThreeWayMerge.Result result;
+        private final String sourceUri;
+        private final String sourceRawSha256;
+        private final String sourceUtf16Sha256;
+        private final String sha256;
+
+        private FileLineMerge(LineThreeWayMerge.Result result, M3File source, String sha256) {
+            this.result = result;
+            this.sourceUri = source.uri().toASCIIString();
+            this.sourceRawSha256 = source.rawSha256();
+            this.sourceUtf16Sha256 = source.utf16Sha256();
+            this.sha256 = sha256;
+        }
+
+        public LineThreeWayMerge.Result result() { return result; }
+        public ThreeWayMerge.Status status() { return result.status(); }
+        public boolean mergeable() { return result.mergeable(); }
+        public int conflictCount() { return result.conflictCount(); }
+        public String sha256() { return sha256; }
+
+        /** Refuse a relocated or changed base before returning any merged text. */
+        public String apply(M3File original) {
+            Objects.requireNonNull(original, "original");
+            if (!sourceUri.equals(original.uri().toASCIIString())
+                    || !sourceRawSha256.equals(original.rawSha256())
+                    || !sourceUtf16Sha256.equals(original.utf16Sha256())) {
+                throw new IllegalArgumentException("line three-way base identity mismatch");
+            }
+            return result.merged();
+        }
+    }
+
+    public static FileLineMerge lineMerge(M3File base, M3File left, M3File right, int maxEdits) {
+        return lineMerge(base, left, right, maxEdits, null);
+    }
+
+    /**
+     * Independent line-level shortest scripts share the admitted base String.
+     * No file is reopened, no second text owner is retained, and ambiguous edits
+     * produce conflict witnesses rather than a partially applied result.
+     */
+    public static FileLineMerge lineMerge(M3File base, M3File left, M3File right,
+                                          int maxEdits, ProgressMonitor monitor) {
+        Objects.requireNonNull(base, "base");
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        LineThreeWayMerge.Result merged = LineThreeWayMerge.merge(
+                base.text(), left.text(), right.text(), maxEdits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-line-three-way-merge-v1").text(Implementation.ROOT);
+        for (M3File source : List.of(base, left, right)) {
+            progress.checkCancelled();
+            hash.text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                    .number(source.byteLength()).number(source.length());
+        }
+        hash.number(maxEdits).text(merged.status().name());
+        for (LineDiff.Patch patch : List.of(merged.leftPatch(), merged.rightPatch())) {
+            progress.checkCancelled();
+            hash.number(patch.sourceLength()).number(patch.targetLength())
+                    .number(patch.sourceLines()).number(patch.targetLines()).number(patch.distance())
+                    .text(patch.sourceSha256()).text(patch.targetSha256());
+            hashLineMergeChanges(hash, patch.changes(), progress);
+        }
+        hash.number(merged.conflictCount()).number(merged.conflictsComplete() ? 1 : 0);
+        for (LineThreeWayMerge.Conflict conflict : merged.conflicts()) {
+            hashLineMergeChanges(hash, List.of(conflict.left(), conflict.right()), progress);
+        }
+        hashLineMergeChanges(hash, merged.mergedChanges(), progress);
+        if (merged.mergeable()) {
+            String output = merged.merged();
+            hash.number(output.length());
+            for (int index = 0; index < output.length(); index++) {
+                if ((index & 8191) == 0) progress.checkCancelled();
+                hash.number(output.charAt(index));
+            }
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileLineMerge(merged, base, hash.finish());
+    }
+
+    /** Replay and compare the ordered three-file identity and every line hunk. */
+    public static boolean verifyLineMerge(M3File base, M3File left, M3File right, int maxEdits,
+                                          FileLineMerge expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        FileLineMerge actual = lineMerge(base, left, right, maxEdits, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.status() == expected.status()
+                && actual.result().mergedChanges().equals(expected.result().mergedChanges())
+                && actual.result().conflicts().equals(expected.result().conflicts());
+    }
+
+    private static void hashLineMergeChanges(Canonical hash, List<LineDiff.LineChange> changes,
+                                             ProgressMonitor progress) {
+        hash.number(changes.size());
+        for (LineDiff.LineChange change : changes) {
+            progress.checkCancelled();
+            hash.number(change.startLine()).number(change.endLine())
+                    .number(change.startUtf16()).number(change.endUtf16())
+                    .number(change.insertedLines()).number(change.inserted().length());
             for (int unit = 0; unit < change.inserted().length(); unit++) {
                 if ((unit & 8191) == 0) progress.checkCancelled();
                 hash.number(change.inserted().charAt(unit));

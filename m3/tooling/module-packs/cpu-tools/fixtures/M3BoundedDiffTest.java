@@ -64,6 +64,39 @@ public final class M3BoundedDiffTest {
                 missedLine.apply(before);
                 throw new AssertionError("incomplete line patch applied");
             } catch (IllegalStateException expected) { check(true, "incomplete line patch cannot apply"); }
+            var lineMerged = CpuTools.lineMerge(before, after, independent, 2);
+            check(lineMerged.mergeable() && lineMerged.status() == com.m3.tools.text.diff.ThreeWayMerge.Status.MERGED
+                    && lineMerged.conflictCount() == 0 && lineMerged.result().mergedChanges().size() == 2,
+                    "two distinct whole-line replacements compose in base coordinates");
+            check(lineMerged.apply(before).equals("#left\r\nright!\ud83d\ude42\n"),
+                    "file line merge preserves mixed terminators and supplementary code points");
+            check(lineMerged.sha256().matches("[0-9a-f]{64}")
+                    && CpuTools.verifyLineMerge(before, after, independent, 2, lineMerged, null),
+                    "ordered URI and raw/UTF-16 file digests bind the merged line script");
+            check(!CpuTools.verifyLineMerge(before, independent, after, 2, lineMerged, null)
+                    && !CpuTools.verifyLineMerge(M3File.load(moved), after, independent, 2, lineMerged, null)
+                    && !CpuTools.verifyLineMerge(before, after, independent, 3, lineMerged, null),
+                    "side order, original URI and line budget cannot be substituted");
+            try {
+                lineMerged.apply(M3File.load(moved));
+                throw new AssertionError("line merge accepted location-substituted base");
+            } catch (IllegalArgumentException expected) { check(true, "file line merge refuses source relocation"); }
+            var lineConflict = CpuTools.lineMerge(before, after, conflicting, 2);
+            check(lineConflict.status() == com.m3.tools.text.diff.ThreeWayMerge.Status.CONFLICT
+                    && lineConflict.conflictCount() == 1 && lineConflict.result().conflictsComplete(),
+                    "divergent same-line modifications have explicit conflict witness");
+            try {
+                lineConflict.apply(before);
+                throw new AssertionError("conflicting line merge applied");
+            } catch (IllegalStateException expected) { check(true, "conflict cannot materialize partial text"); }
+            var lineIncomplete = CpuTools.lineMerge(before, after, independent, 1);
+            check(!lineIncomplete.mergeable() && !lineIncomplete.result().complete()
+                    && lineIncomplete.result().mergedChanges().isEmpty(),
+                    "over-budget line replacement cannot claim a merge");
+            try {
+                lineIncomplete.apply(before);
+                throw new AssertionError("incomplete line merge applied");
+            } catch (IllegalStateException expected) { check(true, "incomplete merge refuses application"); }
             var merged = CpuTools.merge(before, after, independent, 1);
             check(merged.mergeable() && merged.conflictCount() == 0,
                     "bounded three-source M3File merge composes independent edits");
@@ -105,6 +138,9 @@ public final class M3BoundedDiffTest {
                     "line receipt belongs to admitted snapshot after disk mutation");
             check(!CpuTools.verifyLineDiff(M3File.load(original), after, 2, linePatch, null),
                     "new disk version cannot inherit the line receipt");
+            check(CpuTools.verifyLineMerge(before, after, independent, 2, lineMerged, null)
+                    && !CpuTools.verifyLineMerge(M3File.load(original), after, independent, 2, lineMerged, null),
+                    "immutable admitted line-merge snapshot differs from changed filesystem source");
             check(CpuTools.verifyMerge(before, after, independent, 1, merged, null),
                     "three-way receipt retains admitted snapshot after underlying disk change");
             check(!CpuTools.verifyMerge(M3File.load(original), after, independent, 1, merged, null),
@@ -124,6 +160,16 @@ public final class M3BoundedDiffTest {
                 CpuTools.lineDiff(before, after, 2, lineMonitor);
                 throw new AssertionError("cancelled line diff executed");
             } catch (CancellationException expected) { check(true, "line diff cancellation observed"); }
+            var lineMergeMonitor = new Counter();
+            check(CpuTools.lineMerge(before, after, independent, 2, lineMergeMonitor).sha256()
+                    .equals(lineMerged.sha256()) && lineMergeMonitor.worked == 1
+                    && lineMergeMonitor.finished == 0,
+                    "line merge borrows progress monitor and yields deterministic receipt");
+            lineMergeMonitor.cancelled = true;
+            try {
+                CpuTools.lineMerge(before, after, independent, 2, lineMergeMonitor);
+                throw new AssertionError("cancelled line merge executed");
+            } catch (CancellationException expected) { check(true, "line merge cancellation observed"); }
             monitor.cancelled = true;
             try {
                 CpuTools.diff(before, after, 1, monitor);

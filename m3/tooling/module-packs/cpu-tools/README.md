@@ -74,7 +74,7 @@ pack has no runtime dependency on `com.synexia`.
 | `com.m3.tools.text.ngram` | Overlapping UTF-16 n-gram counts |
 | `com.m3.tools.text.frequency` | Exact term counts |
 | `com.m3.tools.text.similarity` | Bounded UTF-16 Levenshtein distance |
-| `com.m3.tools.text.diff` | Common-prefix/suffix delta, bounded UTF-16 scripts, conservative three-way merge and lossless indexed-line diff |
+| `com.m3.tools.text.diff` | Common-prefix/suffix delta, bounded UTF-16 scripts, conservative character/line three-way merges and lossless indexed-line diff |
 | `com.m3.tools.text.index` | Exact immutable term/document postings in primitive lanes |
 | `com.m3.tools.graph.topology` | Deterministic integer topological order |
 | `com.m3.tools.graph.paths` | Nonnegative weighted shortest-path distances |
@@ -242,11 +242,23 @@ incomplete with no usable patch; excessive source, line or unique-line
 geometry is explicitly refused. This is not GNU `diff`/`diff3` output
 compatibility or an unbounded large-file algorithm.
 
-The existing `CpuTools.diff`, `merge` and new `lineDiff` Java entry points bind
+`LineThreeWayMerge` reuses two `LineDiff` scripts with a **shared base** to
+compose independent full-line edits against original source line/UTF-16
+coordinates. It incorporates identical changes only once and treats
+intersecting replacements, divergent same-position insertions and insertions
+at replacement boundaries as conflicts. A source exceeding either line
+diff's explicit geometry limit is refused, and a distance over either side's
+512-line budget yields `INCOMPLETE`; neither case exposes partial merged text.
+The two source/side dictionaries are per diff, not a persistent global pool.
+Conflict witnesses are capped at 1,024 and their full count is exposed.
+It does not infer renames, semantic AST merges or automatic conflict resolution.
+
+The existing `CpuTools.diff`, `merge`, `lineDiff` and new `lineMerge` Java entry points bind
 their results to ordered immutable `M3File` URI, raw-byte and UTF-16 digests,
 and algorithm/parameter/output facts in deterministic receipts. `verifyDiff`,
-`verifyMerge` and `verifyLineDiff` recompute; `FileLineDiff.apply` refuses a
-substituted source URI even when the text happens to be identical. These
+`verifyMerge`, `verifyLineDiff` and `verifyLineMerge` recompute; both
+`FileLineDiff.apply` and `FileLineMerge.apply` refuse a substituted base/source
+URI even when the text happens to be identical. These
 algorithms use the canonical `String`/M3String text owner and do not alter
 `String`, `Pattern`/M3Regex, JNI/HotSpot symbols or the existing DAG command
 bindings. Their installed M3JDK21 image qualification is still pending.
