@@ -36,6 +36,10 @@ on:
       - 'test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java'
       - 'm3/runtime-integration/check-m3string-concat-reference-dag.py'
       - 'm3/runtime-integration/test_m3string_concat_reference_dag.py'
+      - 'src/java.base/share/classes/java/lang/M3StringPool.java'
+      - 'test/jdk/java/lang/String/M3StringTupleReuseTest.java'
+      - 'test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java'
+      - 'test/jdk/jdk/internal/mindex/M3TokenRegexTest.java'
   workflow_dispatch:
 permissions:
   contents: read
@@ -91,6 +95,10 @@ jobs:
           e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95  test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java
           d47702f58be8a6cda8fa96b02f79cd30de22fb09c9fd869df3cef100f1f2c54b  m3/runtime-integration/check-m3string-concat-reference-dag.py
           d14e92451af4bdbdbaacabd7a71f26431531c00a9e6b4ab677ea5fe46eda1edc  m3/runtime-integration/test_m3string_concat_reference_dag.py
+          2c5a1c67416bff7c17dacae68b3d9c6cd5fc0154ab016a71ad35357ebfcee9af  src/java.base/share/classes/java/lang/M3StringPool.java
+          4b00512c7c7e0280f8935314d134f00224ba9fbd891651278a05d6684b5ae012  test/jdk/java/lang/String/M3StringTupleReuseTest.java
+          a07590946ce9330772bb30a21dc35f1f1da0b87b671fdcf30c8630db33a91ac3  test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java
+          375c1aec980efa8828a4535967f9a5e96562f8ff4d920e4b381439d8e50d03c0  test/jdk/jdk/internal/mindex/M3TokenRegexTest.java
           SEALED
           while read -r expected path; do
             test -f "$path"
@@ -295,3 +303,28 @@ jobs:
           set -euo pipefail
           python3 m3/runtime-integration/test_m3string_concat_reference_dag.py -v
           python3 m3/runtime-integration/check-m3string-concat-reference-dag.py
+      - name: Qualify shared tuple reuse and logical overflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          jdk_home="$(cat "$RUNNER_TEMP/m3-integrated/image.txt")"
+          tests="$RUNNER_TEMP/m3-tuple-tests"
+          mkdir -p "$tests"
+          "$jdk_home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror -d "$tests" test/jdk/java/lang/String/M3StringTupleReuseTest.java test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java
+          for mode in -Xmixed -Xint; do
+            for compact in -XX:+CompactStrings -XX:-CompactStrings; do
+              for test in M3StringTupleReuseTest M3StringConcatLengthOverflowTest; do
+                "$jdk_home/bin/java" "$mode" "$compact" -Xcheck:jni -Xmx512m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage --add-opens java.base/java.lang=ALL-UNNAMED -cp "$tests" "$test"
+              done
+            done
+          done
+          echo "M3JDK21_TUPLE_REUSE_OVERFLOW_PASS"
+      - name: Qualify symbolic token-kind predicate oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          jdk_home="$(cat "$RUNNER_TEMP/m3-integrated/image.txt")"
+          tests="$RUNNER_TEMP/m3-token-kind-tests"
+          mkdir -p "$tests"
+          "$jdk_home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -d "$tests" test/jdk/jdk/internal/mindex/M3TokenRegexTest.java
+          "$jdk_home/bin/java" -Xcheck:jni --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -cp "$tests" M3TokenRegexTest

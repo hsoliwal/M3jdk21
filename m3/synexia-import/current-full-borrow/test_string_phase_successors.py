@@ -367,5 +367,54 @@ class StringTargetSuccessorTest(unittest.TestCase):
                     phase.main(["check_string_phase.py"])
 
 
+    def test_tuple_reuse_transition_preserves_v3_and_preimage(self):
+        rows = phase.load_tsv(phase.POOL_REUSE_SUCCESSOR, phase.POOL_REUSE_HEADER)
+        self.assertEqual(1, len(rows))
+        row = rows[0]
+        historical = {r["target_path"]: r["observed_git_blob"] for r in self.observation_rows()}
+        self.assertEqual(historical[row["target_path"]], row["predecessor_git_blob"])
+        self.assertEqual("061a4e2e3765e97ae6e2c49b057b1794e6fdde71", row["preimage_product_commit"])
+        self.assertEqual("EXECUTED_RECIPE_SOURCE_NOT_RUNTIME_PROMOTED", row["state"])
+        self.assertEqual(row["successor_git_blob"], phase.git_blob(phase.ROOT / row["target_path"]))
+
+    def test_tuple_reuse_refuses_each_metadata_mutation_and_duplicate(self):
+        good = phase.load_tsv(phase.POOL_REUSE_SUCCESSOR, phase.POOL_REUSE_HEADER)
+        cases = [[], good + good]
+        for field in phase.POOL_REUSE_HEADER:
+            altered = [good[0].copy()]
+            altered[0][field] = "unreviewed"
+            cases.append(altered)
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "successor.tsv"
+            for rows in cases:
+                with target.open("w") as handle:
+                    writer = csv.DictWriter(handle, fieldnames=phase.POOL_REUSE_HEADER,
+                                            delimiter="\t", lineterminator="\n")
+                    writer.writeheader()
+                    writer.writerows(rows)
+                with patch.object(phase, "POOL_REUSE_SUCCESSOR", target):
+                    with self.assertRaises(ValueError):
+                        phase.current_target_blobs(self.mapping())
+
+    def test_tuple_reuse_refuses_missing_receipt(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with patch.object(phase, "POOL_REUSE_SUCCESSOR", Path(directory) / "absent"):
+                with self.assertRaises(FileNotFoundError):
+                    phase.current_target_blobs(self.mapping())
+
+    def test_tuple_reuse_predecessor_must_be_exact(self):
+        with self.assertRaisesRegex(ValueError, "tuple reuse predecessor drift"):
+            phase.apply_pool_reuse_successor({"src/java.base/share/classes/java/lang/M3StringPool.java": "0" * 40})
+
+    def test_tuple_reuse_does_not_mutate_previous_map(self):
+        rows = self.observation_rows()
+        previous = {row["target_path"]: row["observed_git_blob"] for row in rows}
+        frozen = previous.copy()
+        updated = phase.apply_pool_reuse_successor(previous)
+        self.assertEqual(frozen, previous)
+        self.assertNotEqual(frozen, updated)
+        self.assertEqual(1, sum(updated[k] != v for k, v in frozen.items()))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -8,14 +8,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from check_m3string_concat_overflow_current import (
-    DIGESTS,
-    JTREG,
-    POOL,
-    WORKFLOW,
-    SourceRefusal,
-    verify,
-)
+import importlib.util
+
+spec = importlib.util.spec_from_file_location(
+    "m3_concat_overflow_current", Path(__file__).with_name("check-m3string-concat-overflow-current.py"))
+if spec is None or spec.loader is None:
+    raise RuntimeError("cannot load current overflow source gate")
+receiver = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(receiver)
+DIGESTS, JTREG, POOL, WORKFLOW = receiver.DIGESTS, receiver.JTREG, receiver.POOL, receiver.WORKFLOW
+SourceRefusal, verify = receiver.SourceRefusal, receiver.verify
+
 
 
 class M3StringConcatOverflowCurrentTest(unittest.TestCase):
@@ -39,7 +42,7 @@ class M3StringConcatOverflowCurrentTest(unittest.TestCase):
         first = verify(self.root)
         self.assertEqual(first, verify(self.root))
         self.assertEqual(first["java_targets"], 2)
-        self.assertEqual(first["workflow_selectors"], 24)
+        self.assertEqual(first["workflow_selectors"], 49)
 
     def test_removed_size_limit_guard_refuses(self) -> None:
         self.change(POOL,

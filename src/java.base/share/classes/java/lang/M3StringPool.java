@@ -846,6 +846,17 @@ final class M3StringPool {
 
     private static boolean sameLeafSequence(
             M3String existing, M3String left, M3String right) {
+        // Identical retained child coordinates already prove this tuple's exact sequence.
+        // Re-expanding a shared repeated DAG here can visit billions of logical leaves.
+        // Other shapes still use the normalized, collision-safe leaf comparison below.
+        if (existing.owner() instanceof M3StringTuple tuple
+                && existing.start() == 0 && existing.length() == tuple.length
+                && sameLeaf(tuple.left.owner(), left.owner())
+                && tuple.left.coordinate() == left.coordinate()
+                && sameLeaf(tuple.right.owner(), right.owner())
+                && tuple.right.coordinate() == right.coordinate()) {
+            return true;
+        }
         M3StringLeafCursor candidate = new M3StringLeafCursor(existing, null, true);
         M3StringLeafCursor requested = new M3StringLeafCursor(left, right, true);
         for (;;) {

@@ -168,8 +168,10 @@ public final class M3TokenRegexTest {
         M3TokenPredicateCache regex = bind("[{text:/c.*t/}]", 0, java, JAVA, vocab);
         check(regex.test(regex.pattern().nodeX(regex.pattern().rootNode()), 2),
                 "regex spelling row");
+        // The hand-lexed tape marks count, String, s and count as identifiers.
+        // A kind-only predicate must not inherit the earlier text:count restriction.
         check(positions("[{kind:/ID.*/}]", 0, java, JAVA, vocab)
-                .equals(List.of(2, 20)), "symbolic kind regex row");
+                .equals(List.of(2, 9, 11, 20)), "symbolic kind regex row");
         check(bind("[{text:count}]", 0, java, JAVA, vocab).cacheKey().endsWith("/0/2f"), "cache key");
         M3TokenIndex attrs = attributeIndex();
         String text = "aa bb cc";

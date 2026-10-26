@@ -299,6 +299,10 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
 
 
 
+POOL_REUSE_SUCCESSOR = Path(__file__).with_name("string-target-successor-v4.tsv")
+POOL_REUSE_HEADER = ['schema', 'target_path', 'predecessor_git_blob', 'successor_git_blob', 'preimage_product_commit', 'source_recipe', 'synexia_pr', 'm3jdk_pr', 'state']
+EXPECTED_POOL_REUSE_SHA256 = "e41a4a4ced290b6634201884cb3fed9191736d83dfe541d33cd57eabdb378c54"
+
 def current_target_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
     """Project sealed source observations over history, without accepting runtime behavior."""
     current = {row["target_path"]: row["target_git_blob"] for row in mapping_rows}
@@ -333,7 +337,30 @@ def current_target_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
         current[target] = row["observed_git_blob"]
     if len(seen) != 9:
         raise ValueError("current String source observation cardinality drift")
-    return current
+    return apply_pool_reuse_successor(current)
+
+
+def apply_pool_reuse_successor(current: dict[str, str]) -> dict[str, str]:
+    """Apply a sealed executed-source transition after the immutable V3 observation."""
+    data = POOL_REUSE_SUCCESSOR.read_bytes()
+    if hashlib.sha256(data).hexdigest() != EXPECTED_POOL_REUSE_SHA256:
+        raise ValueError("unreviewed tuple reuse successor")
+    reader = csv.DictReader(io.StringIO(data.decode("utf-8")), delimiter="\t")
+    rows = list(reader)
+    if reader.fieldnames != POOL_REUSE_HEADER or len(rows) != 1:
+        raise ValueError("invalid tuple reuse successor shape")
+    row = rows[0]
+    target = row["target_path"]
+    if target != "src/java.base/share/classes/java/lang/M3StringPool.java":
+        raise ValueError("unqualified tuple reuse owner")
+    if row["predecessor_git_blob"] != current.get(target):
+        raise ValueError("tuple reuse predecessor drift")
+    if (row["schema"] != "M3JDK21_STRING_TARGET_SUCCESSOR_V4"
+            or row["state"] != "EXECUTED_RECIPE_SOURCE_NOT_RUNTIME_PROMOTED"
+            or not HEX40.fullmatch(row["successor_git_blob"])
+            or row["successor_git_blob"] == current[target]):
+        raise ValueError("invalid tuple reuse successor")
+    return dict(current, **{target: row["successor_git_blob"]})
 
 
 def load_precompute_observation() -> dict[str, str]:
