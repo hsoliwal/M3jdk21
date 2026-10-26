@@ -199,6 +199,41 @@ public final class M3LongRankIndex {
         return M3LongRankBatchNative.lowerBounds(values, queries);
     }
 
+    /**
+     * LC #4 order-statistic category: select the zero-based rank from the
+     * multiset merge of two immutable sorted M3 long snapshots. The original
+     * long[] owners never move or materialize into a combined array.
+     * Worst case O(log(rank + 1)) time, O(1) auxiliary space.
+     */
+    public long selectMerged(M3LongRankIndex other, long rank) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.selectMerged(values, other.values, rank);
+    }
+
+    /**
+     * One detached result array for a batch of global zero-based ranks in the
+     * sorted multiset union. Duplicates retain their occurrence positions.
+     */
+    public long[] selectMergedBatch(M3LongRankIndex other, long[] ranks) {
+        Objects.requireNonNull(other, "other");
+        Objects.requireNonNull(ranks, "ranks");
+        long[] result = new long[ranks.length];
+        M3LongRankBatchNative.selectMergedInto(values, other.values,
+                ranks, 0, ranks.length, result, 0, false);
+        return result;
+    }
+
+    /**
+     * Write a checked rank window without an output allocation. The caller's
+     * output must not alias ranks; all invalid ranks fail before the first write.
+     */
+    public void selectMergedInto(M3LongRankIndex other, long[] ranks,
+            int rankFrom, int length, long[] output, int outputFrom) {
+        Objects.requireNonNull(other, "other");
+        M3LongRankBatchNative.selectMergedInto(values, other.values,
+                ranks, rankFrom, length, output, outputFrom, false);
+    }
+
     public long[] toArray() {
         return values.clone();
     }

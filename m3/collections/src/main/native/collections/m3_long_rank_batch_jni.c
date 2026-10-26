@@ -1344,3 +1344,124 @@ Java_com_m3_collections_M3LongRankBatchNative_equalRangesWindow0(
         completed += batch;
     }
 }
+
+/*
+ * LC #4 two-sorted-lane kth selection, source-owned M3RankBatch JNI atom.
+ * Bounded 128-rank pages; no sorting/merge materialization or Java callbacks.
+ * No JNI operations while Java long[] lanes are pinned.
+ */
+enum { M3_KTH_MERGED_PAGE = 128 };
+
+static jlong m3_kth_merged_value(const jlong *left, jsize left_size,
+                                const jlong *right, jsize right_size,
+                                jlong rank) {
+    jsize a = 0, b = 0;
+    for (;;) {
+        if (a == left_size) return right[b + (jsize) rank];
+        if (b == right_size) return left[a + (jsize) rank];
+        if (rank == 0) return left[a] <= right[b] ? left[a] : right[b];
+        const jlong half = (rank + 1) / 2;
+        const jlong remaining_a = (jlong) left_size - a;
+        const jlong remaining_b = (jlong) right_size - b;
+        const jsize step_a = (jsize) (remaining_a < half ? remaining_a : half);
+        const jsize step_b = (jsize) (remaining_b < half ? remaining_b : half);
+        if (left[a + step_a - 1] <= right[b + step_b - 1]) {
+            a += step_a;
+            rank -= step_a;
+        } else {
+            b += step_b;
+            rank -= step_b;
+        }
+    }
+}
+
+static void m3_kth_merged_throw(JNIEnv *env, const char *class_name,
+                                const char *message) {
+    jclass cls = (*env)->FindClass(env, class_name);
+    if (cls != NULL) (*env)->ThrowNew(env, cls, message);
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_selectMergedInto0(
+        JNIEnv *env, jclass ignored, jlongArray left, jlongArray right,
+        jlongArray ranks, jint rank_from, jint length,
+        jlongArray output, jint output_from) {
+    (void) ignored;
+    if (left == NULL || right == NULL || ranks == NULL || output == NULL) {
+        m3_kth_merged_throw(env, "java/lang/NullPointerException", "null merged selection array");
+        return;
+    }
+    if (output == ranks || output == left || output == right) {
+        m3_kth_merged_throw(env, "java/lang/IllegalArgumentException",
+                            "merged selection output aliases input");
+        return;
+    }
+    const jsize left_size = (*env)->GetArrayLength(env, left);
+    const jsize right_size = (*env)->GetArrayLength(env, right);
+    const jsize rank_size = (*env)->GetArrayLength(env, ranks);
+    const jsize output_size = (*env)->GetArrayLength(env, output);
+    const jlong total = (jlong) left_size + (jlong) right_size;
+    if (rank_from < 0 || length < 0 || output_from < 0
+            || rank_from > rank_size - length
+            || output_from > output_size - length) {
+        m3_kth_merged_throw(env, "java/lang/IndexOutOfBoundsException",
+                            "merged selection window outside array");
+        return;
+    }
+    if (length == 0) return;
+
+    /* First pass refuses ANY invalid rank before modifying caller output. */
+    jlong requested[M3_KTH_MERGED_PAGE];
+    for (jint done = 0; done < length;) {
+        jint count = length - done;
+        if (count > M3_KTH_MERGED_PAGE) count = M3_KTH_MERGED_PAGE;
+        (*env)->GetLongArrayRegion(env, ranks, rank_from + done, count, requested);
+        if ((*env)->ExceptionCheck(env)) return;
+        for (jint i = 0; i < count; ++i) {
+            if (requested[i] < 0 || requested[i] >= total) {
+                m3_kth_merged_throw(env, "java/lang/IndexOutOfBoundsException",
+                                    "merged rank outside combined source");
+                return;
+            }
+        }
+        done += count;
+    }
+
+    jlong answers[M3_KTH_MERGED_PAGE];
+    for (jint done = 0; done < length;) {
+        jint count = length - done;
+        if (count > M3_KTH_MERGED_PAGE) count = M3_KTH_MERGED_PAGE;
+        (*env)->GetLongArrayRegion(env, ranks, rank_from + done, count, requested);
+        if ((*env)->ExceptionCheck(env)) return;
+
+        const jlong *a = NULL, *b = NULL;
+        if (left_size != 0) {
+            a = (*env)->GetPrimitiveArrayCritical(env, left, NULL);
+            if (a == NULL) return;
+        }
+        if (right_size != 0) {
+            if (left == right) {
+                b = a;
+            } else {
+                b = (*env)->GetPrimitiveArrayCritical(env, right, NULL);
+                if (b == NULL) {
+                    if (a != NULL) (*env)->ReleasePrimitiveArrayCritical(env, left, (void *) a, JNI_ABORT);
+                    return;
+                }
+            }
+        }
+        /* GC-sensitive critical region: pure bounded arithmetic and loads. */
+        for (jint i = 0; i < count; ++i) {
+            answers[i] = m3_kth_merged_value(a, left_size, b, right_size, requested[i]);
+        }
+        if (b != NULL && right != left) {
+            (*env)->ReleasePrimitiveArrayCritical(env, right, (void *) b, JNI_ABORT);
+        }
+        if (a != NULL) {
+            (*env)->ReleasePrimitiveArrayCritical(env, left, (void *) a, JNI_ABORT);
+        }
+        (*env)->SetLongArrayRegion(env, output, output_from + done, count, answers);
+        if ((*env)->ExceptionCheck(env)) return;
+        done += count;
+    }
+}

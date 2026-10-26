@@ -892,6 +892,94 @@ public final class M3LongRankBatchNative {
         }
     }
 
+    private static final int NATIVE_MIN_MERGED_SELECT_BATCH = 64;
+    private static volatile boolean MERGED_SELECT_ABI_MISSING;
+
+    /**
+     * LeetCode #4 category: select one zero-based rank across two immutable
+     * signed-sorted long[] owners. No temporary merged array or JNI transition.
+     */
+    static long selectMerged(long[] left, long[] right, long rank) {
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        long total = (long) left.length + right.length;
+        if (rank < 0 || rank >= total) {
+            throw new IndexOutOfBoundsException("merged rank outside combined source");
+        }
+        return selectMergedJava(left, right, rank);
+    }
+
+    /**
+     * Primitive rank window into a caller-owned result lane. Validate every
+     * rank before the first write; output may not alias either source or ranks.
+     * Optional JNI uses bounded 128-rank pages and no per-entry objects.
+     */
+    static void selectMergedInto(long[] left, long[] right, long[] ranks,
+            int rankFrom, int length, long[] output, int outputFrom,
+            boolean nativeRequired) {
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        Objects.requireNonNull(ranks, "ranks");
+        Objects.requireNonNull(output, "output");
+        Objects.checkFromIndexSize(rankFrom, length, ranks.length);
+        Objects.checkFromIndexSize(outputFrom, length, output.length);
+        if (output == ranks || output == left || output == right) {
+            throw new IllegalArgumentException("merged selection output aliases input");
+        }
+        long total = (long) left.length + right.length;
+        for (int i = 0; i < length; i++) {
+            long rank = ranks[rankFrom + i];
+            if (rank < 0 || rank >= total) {
+                throw new IndexOutOfBoundsException("merged rank outside combined source");
+            }
+        }
+        if (nativeRequired) {
+            if (!AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3rankbatch merged selection JNI unavailable");
+            }
+            if (length != 0) selectMergedInto0(left, right, ranks, rankFrom,
+                    length, output, outputFrom);
+            return;
+        }
+        if (AVAILABLE && !MERGED_SELECT_ABI_MISSING
+                && length >= NATIVE_MIN_MERGED_SELECT_BATCH && total >= 128) {
+            try {
+                selectMergedInto0(left, right, ranks, rankFrom, length, output, outputFrom);
+                return;
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                MERGED_SELECT_ABI_MISSING = true;
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            output[outputFrom + i] = selectMergedJava(left, right, ranks[rankFrom + i]);
+        }
+    }
+
+    /** O(log(rank + 1)) scalar elimination; no merged materialization. */
+    private static long selectMergedJava(long[] left, long[] right, long rank) {
+        int leftAt = 0;
+        int rightAt = 0;
+        for (;;) {
+            if (leftAt == left.length) return right[rightAt + (int) rank];
+            if (rightAt == right.length) return left[leftAt + (int) rank];
+            if (rank == 0) return Math.min(left[leftAt], right[rightAt]);
+            long half = (rank + 1) >>> 1;
+            int leftStep = (int) Math.min(half, left.length - leftAt);
+            int rightStep = (int) Math.min(half, right.length - rightAt);
+            if (left[leftAt + leftStep - 1] <= right[rightAt + rightStep - 1]) {
+                leftAt += leftStep;
+                rank -= leftStep;
+            } else {
+                rightAt += rightStep;
+                rank -= rightStep;
+            }
+        }
+    }
+
+    /** Additive source-owned JNI ABI; method and scalar signatures stay internal. */
+    private static native void selectMergedInto0(long[] left, long[] right,
+            long[] ranks, int rankFrom, int length, long[] output, int outputFrom);
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
