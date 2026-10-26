@@ -3,6 +3,17 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+      "source": "Synexia source-sealed syntax green pool, language parser bridge and immutable source character encodings",
+      "target": "com.m3.ast.M3SyntaxGreenPool / M3JavacProjection; com.m3.file.M3FileTextCoordinates / M3FileEncodedEdits",
+      "source_recipe_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/ast-file-ci-20261026",
+      "status": "CANDIDATE_SOURCE_SEALED_AWAITING_EXACT_HEAD_RUNTIME_AND_SDK",
+      "target_rule": "Preserve parser grammar-native kinds and full source bytes with primitive syntax/red positions and exact green content; use declared strict physical-byte to UTF-16 mapping and immutable source generations; retain original JDK APIs, provider binding and compiler authority.",
+      "licensing": "Synexia first-party Apache-2.0 contribution; retain Java/OpenJDK and any foreign donor rights without copying code",
+      "supersedes_fragment": "m3/docs/name-mapping.d/m3ast-file-green-v4-20261026.json",
+      "inherited_capability_id": "m3.ast-file.parser-interop-green-encodings.v4",
+      "gates": "Java21 7025 bounded standalone tests with signature shim passed; Maven/JUnit, OpenRewrite actual SDK Result, real file module/linked-image, jtreg and JNI/performance pending"
+    },
+    {
       "source": "M3JDK21 java.lang.String standard byte[] shape + canonical OS-interned M3String owner/range",
       "target": "java.lang.String.value/m3, java.lang.M3String, java.base JNI/HotSpot String region and array-return boundaries",
       "status": "DRAFT_DUAL_VIEW_CONTRACT_TEST_PENDING_INSTALLED_IMAGE",
