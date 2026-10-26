@@ -1465,3 +1465,52 @@ Java_com_m3_collections_M3LongRankBatchNative_selectMergedInto0(
         done += count;
     }
 }
+
+
+/*
+ * LC #35 predecessor coordinate: last signed-long value <= query, -1
+ * when no such coordinate exists. One JNI call for a validated batch,
+ * fixed 256-slot scratch and no JNI calls while a heap array is pinned.
+ * No overflow-prone query + 1 conversion (LONG_MAX is handled).
+ */
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_floorIndicesInto0(
+        JNIEnv *env, jclass unused, jlongArray sorted, jlongArray queries,
+        jint query_from, jint length, jintArray output, jint output_from) {
+    (void) unused;
+    if (sorted == NULL || queries == NULL || output == NULL) {
+        m3_rank_throw(env, "java/lang/NullPointerException", "null predecessor array");
+        return;
+    }
+    const jsize size = (*env)->GetArrayLength(env, sorted);
+    const jsize query_size = (*env)->GetArrayLength(env, queries);
+    const jsize output_size = (*env)->GetArrayLength(env, output);
+    if (query_from < 0 || length < 0 || output_from < 0
+            || query_from > query_size - length
+            || output_from > output_size - length) {
+        m3_rank_throw(env, "java/lang/IndexOutOfBoundsException", "predecessor window");
+        return;
+    }
+    jlong keys[M3_RANK_OUTPUT_CHUNK];
+    jint indexes[M3_RANK_OUTPUT_CHUNK];
+    for (jint done = 0; done < length;) {
+        jint count = length - done;
+        if (count > M3_RANK_OUTPUT_CHUNK) count = M3_RANK_OUTPUT_CHUNK;
+        (*env)->GetLongArrayRegion(env, queries, query_from + done, count, keys);
+        if ((*env)->ExceptionCheck(env)) return;
+        if (size == 0) {
+            for (jint i = 0; i < count; ++i) indexes[i] = -1;
+        } else {
+            const jlong *values = (*env)->GetPrimitiveArrayCritical(env, sorted, NULL);
+            if (values == NULL) return;
+            /* The existing bounded upper-bound kernel handles signed extremes. */
+            for (jint i = 0; i < count; ++i) {
+                indexes[i] = (jint) m3_bound(values, size, keys[i], 1) - 1;
+            }
+            (*env)->ReleasePrimitiveArrayCritical(env, sorted, (void *) values, JNI_ABORT);
+        }
+        (*env)->SetIntArrayRegion(env, output, output_from + done, count, indexes);
+        if ((*env)->ExceptionCheck(env)) return;
+        done += count;
+    }
+}

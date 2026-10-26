@@ -980,6 +980,54 @@ public final class M3LongRankBatchNative {
     private static native void selectMergedInto0(long[] left, long[] right,
             long[] ranks, int rankFrom, int length, long[] output, int outputFrom);
 
+
+    private static final int NATIVE_MIN_FLOOR_BATCH = 64;
+    private static volatile boolean FLOOR_ABI_MISSING;
+
+    /**
+     * LeetCode #35 lower/upper-bound category: index of the last signed-long
+     * value <= each query, or -1 if none. All queries and outputs are primitive
+     * lanes; no boxed entries, output payload copies, or Java callbacks in JNI.
+     * Sorted source and queries must remain stable during this operation.
+     */
+    static void floorIndicesInto(long[] sorted, long[] queries,
+            int queryFrom, int length, int[] output, int outputFrom,
+            boolean nativeRequired) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(queries, "queries");
+        Objects.requireNonNull(output, "output");
+        Objects.checkFromIndexSize(queryFrom, length, queries.length);
+        Objects.checkFromIndexSize(outputFrom, length, output.length);
+        if (nativeRequired) {
+            if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch floor JNI unavailable");
+            if (length != 0) floorIndicesInto0(sorted, queries,
+                    queryFrom, length, output, outputFrom);
+            return;
+        }
+        if (length == 0) return;
+        if (AVAILABLE && !FLOOR_ABI_MISSING && length >= NATIVE_MIN_FLOOR_BATCH) {
+            try {
+                floorIndicesInto0(sorted, queries, queryFrom, length, output, outputFrom);
+                return;
+            } catch (UnsatisfiedLinkError oldLibrary) {
+                FLOOR_ABI_MISSING = true;
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            output[outputFrom + i] = bound(sorted, queries[queryFrom + i], true) - 1;
+        }
+    }
+
+    static int[] floorIndices(long[] sorted, long[] queries) {
+        Objects.requireNonNull(queries, "queries");
+        int[] result = new int[queries.length];
+        floorIndicesInto(sorted, queries, 0, queries.length, result, 0, false);
+        return result;
+    }
+
+    private static native void floorIndicesInto0(long[] sorted, long[] queries,
+            int queryFrom, int length, int[] output, int outputFrom);
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
