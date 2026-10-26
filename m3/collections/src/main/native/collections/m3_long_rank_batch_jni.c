@@ -874,3 +874,51 @@ Java_com_m3_collections_M3LongRankBatchNative_differenceValues0(
     }
     return result;
 }
+
+/*
+ * LeetCode #26 and #128 categories: a single pass over already-sorted
+ * signed-long physical payloads. Return (distinct_count << 32) | run_length.
+ *
+ * Bounded 256-long GetLongArrayRegion pages cross JNI; never retain moving
+ * GC pointers, copy the entire owner, or invoke Java callbacks. The unsigned
+ * subtraction tests consecutive values without signed MIN/MAX overflow.
+ */
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_runStatistics0(
+        JNIEnv *env, jclass ignored, jlongArray sorted) {
+    (void) ignored;
+    if (sorted == NULL) {
+        m3_rank_throw(env, "java/lang/NullPointerException", "null sorted rank input");
+        return 0;
+    }
+    const jsize size = (*env)->GetArrayLength(env, sorted);
+    if (size == 0) return 0;
+    enum { M3_RUN_PAGE = 256 };
+    jlong page[M3_RUN_PAGE];
+    jlong previous = 0;
+    jint distinct = 0, current = 0, best = 0;
+    for (jsize offset = 0; offset < size;) {
+        jsize count = size - offset;
+        if (count > M3_RUN_PAGE) count = M3_RUN_PAGE;
+        (*env)->GetLongArrayRegion(env, sorted, offset, count, page);
+        if ((*env)->ExceptionCheck(env)) return 0;
+        for (jsize i = 0; i < count; i++) {
+            const jlong value = page[i];
+            if (distinct == 0) {
+                previous = value;
+                distinct = current = best = 1;
+                continue;
+            }
+            if (value == previous) continue;
+            distinct++;
+            /* C unsigned arithmetic cannot overflow, even at signed extremes. */
+            current = value > previous
+                    && (uint64_t) value - (uint64_t) previous == UINT64_C(1)
+                    ? current + 1 : 1;
+            if (current > best) best = current;
+            previous = value;
+        }
+        offset += count;
+    }
+    return ((jlong) distinct << 32) | (jlong) (uint32_t) best;
+}

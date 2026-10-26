@@ -20,6 +20,8 @@ public final class M3LongRankBatchNative {
     private static volatile boolean WINDOW_ABI_MISSING;
     private static volatile boolean INTERSECTION_VALUES_ABI_MISSING;
     private static volatile boolean UNION_VALUES_ABI_MISSING;
+    private static volatile boolean RUN_STATISTICS_ABI_MISSING;
+    private static final int NATIVE_MIN_RUN_STATISTICS = 256;
     private static final boolean AVAILABLE = loadOptIn();
 
     private M3LongRankBatchNative() { }
@@ -534,6 +536,56 @@ public final class M3LongRankBatchNative {
         return written;
     }
 
+    /**
+     * LeetCode #26/#128 categories: distinct cardinality and longest run of
+     * consecutive signed-long values in an immutable sorted primitive lane.
+     * Packed result: high 32 bits = distinct count, low 32 bits = run length.
+     * No source mutation, Map.Entry, object per row or JNI callback.
+     *
+     * <p>JNI scans fixed 256-long array-region pages in one native transition.
+     * An older optional m3rankbatch binary without the additive entrypoint
+     * uses the same Java oracle; an explicit native requirement fails closed.
+     */
+    static long runStatistics(long[] sorted) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (sorted.length == 0) return 0L;
+        if (AVAILABLE && !RUN_STATISTICS_ABI_MISSING
+                && sorted.length >= NATIVE_MIN_RUN_STATISTICS) {
+            try {
+                return runStatistics0(sorted);
+            } catch (UnsatisfiedLinkError oldNativeAbi) {
+                RUN_STATISTICS_ABI_MISSING = true;
+            }
+        }
+        return runStatisticsJava(sorted);
+    }
+
+    /** Strict JNI parity entrypoint: never downgrade a requested native call. */
+    static long runStatisticsNativeRequired(long[] sorted) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (!AVAILABLE) {
+            throw new UnsatisfiedLinkError("m3rankbatch run statistics JNI unavailable");
+        }
+        return runStatistics0(sorted);
+    }
+
+    static long runStatisticsJava(long[] sorted) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (sorted.length == 0) return 0L;
+        int distinct = 1, current = 1, best = 1;
+        long previous = sorted[0];
+        for (int i = 1; i < sorted.length; i++) {
+            long value = sorted[i];
+            if (value == previous) continue;
+            distinct++;
+            // Signed increasing order excludes a Long.MAX_VALUE successor.
+            current = value > previous && value - previous == 1L ? current + 1 : 1;
+            if (current > best) best = current;
+            previous = value;
+        }
+        return ((long) distinct << 32) | (best & 0xffffffffL);
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -545,6 +597,9 @@ public final class M3LongRankBatchNative {
             return false;
         }
     }
+
+    /** Same existing m3rankbatch JNI library: bounded native run-statistic scan. */
+    private static native long runStatistics0(long[] sorted);
 
     private static native void lowerBounds0(long[] sorted, long[] queries, int[] results);
 

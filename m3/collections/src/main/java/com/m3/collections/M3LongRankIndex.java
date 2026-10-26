@@ -29,6 +29,10 @@ public final class M3LongRankIndex {
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private final long[] values;
     private final boolean distinct;
+    // Immutable snapshot fact sidecar. Benign concurrent first reads may
+    // recompute, but volatile publication makes subsequent reads allocation-free.
+    // Nonnegative packing permits -1L as an unequivocal UNCOMPUTED sentinel.
+    private volatile long cachedRunStatistics = -1L;
 
     private M3LongRankIndex(long[] owned, boolean distinct) {
         values = owned;
@@ -323,6 +327,35 @@ public final class M3LongRankIndex {
         Objects.requireNonNull(other, "other");
         return M3LongRankBatchNative.symmetricDifferenceValues(
                 values, other.values, distinctValues);
+    }
+
+
+    /**
+     * Number of different signed-long values in this immutable snapshot.
+     * LeetCode #26 (sorted duplicate runs) supplies the problem category,
+     * not transplanted challenge code. No mutation of the owning long[].
+     */
+    public int distinctValueCount() {
+        return distinct ? values.length : (int) (runStatistics() >>> 32);
+    }
+
+    /**
+     * Maximum number of distinct consecutive values in signed-long order.
+     * Duplicate occurrences do not extend a run; the Long.MAX_VALUE boundary
+     * never wraps to Long.MIN_VALUE. LC #128 is the catalogued problem type.
+     * One lazily cached packed scalar is shared by both queries.
+     */
+    public int longestConsecutiveRun() {
+        return (int) runStatistics();
+    }
+
+    private long runStatistics() {
+        long packed = cachedRunStatistics;
+        if (packed < 0L) {
+            packed = M3LongRankBatchNative.runStatistics(values);
+            cachedRunStatistics = packed;
+        }
+        return packed;
     }
 
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
