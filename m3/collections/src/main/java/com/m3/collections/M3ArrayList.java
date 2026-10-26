@@ -224,26 +224,38 @@ public final class M3ArrayList<E> extends AbstractList<E>
         Objects.requireNonNull(predicate, "predicate");
         int expectedModCount = modCount;
         int oldSize = size;
-        // Reuse the parent-owned Object[] and original stable two-pass algorithm.
-        // Short removal states fit in one primitive word, avoiding a BitSet allocation.
-        final boolean shortMask = oldSize <= Long.SIZE;
-        BitSet removed = shortMask ? null : new BitSet();
-        long removalBits = 0L;
+        // Single owner and two stable passes: first evaluate predicate decisions,
+        // then compact references. Two primitive mask words cover up to 128 slots
+        // without allocating a BitSet; larger sources keep the proven BitSet path.
+        final boolean inlineMask = oldSize <= 2 * Long.SIZE;
+        BitSet removed = inlineMask ? null : new BitSet();
+        long removalLow = 0L;
+        long removalHigh = 0L;
         for (int read = 0; read < oldSize; read++) {
             boolean reject = predicate.test((E) elements[read]);
             if (modCount != expectedModCount) {
                 throw new ConcurrentModificationException("predicate structurally changed owner");
             }
             if (reject) {
-                if (shortMask) removalBits |= 1L << read;
-                else removed.set(read);
+                if (inlineMask) {
+                    if (read < Long.SIZE) removalLow |= 1L << read;
+                    else removalHigh |= 1L << (read - Long.SIZE);
+                } else {
+                    removed.set(read);
+                }
             }
         }
-        int rejected = shortMask ? Long.bitCount(removalBits) : removed.cardinality();
+        int rejected = inlineMask
+                ? Long.bitCount(removalLow) + Long.bitCount(removalHigh)
+                : removed.cardinality();
         if (rejected == 0) return false;
         int write = 0;
         for (int read = 0; read < oldSize; read++) {
-            boolean reject = shortMask ? (removalBits & (1L << read)) != 0 : removed.get(read);
+            boolean reject = inlineMask
+                    ? (read < Long.SIZE
+                        ? (removalLow & (1L << read)) != 0
+                        : (removalHigh & (1L << (read - Long.SIZE))) != 0)
+                    : removed.get(read);
             if (!reject) elements[write++] = elements[read];
         }
         Arrays.fill(elements, write, oldSize, null);
