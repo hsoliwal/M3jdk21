@@ -18,6 +18,19 @@ on:
       - 'test/jdk/java/util/regex/M3PatternStateMaskTest.java'
       - '.github/workflows/m3-regex-collection-superset.yml'
       - 'm3/qualification/regex-collection-superset/**'
+      - 'src/java.base/share/classes/java/lang/M3StringRegexDp.java'
+      - 'src/java.base/share/classes/java/lang/StringBuffer.java'
+      - 'src/java.base/share/classes/java/util/Arrays.java'
+      - 'src/java.base/share/classes/java/util/ChangeJournal.java'
+      - 'test/jdk/java/lang/String/M3RegexNativeRouteProbe.java'
+      - 'test/jdk/java/lang/String/M3StringRegexDpTest.java'
+      - 'test/jdk/java/lang/String/M3StringRegexEffectsTest.java'
+      - 'test/jdk/java/lang/String/M3StringRegexPreparedNativeTest.java'
+      - 'test/jdk/java/lang/String/M3StringRegexPreparedUtf16Test.java'
+      - 'test/jdk/java/lang/String/M3StringRegexPressureTest.java'
+      - 'test/jdk/java/lang/StringBuffer/StringBufferRepeatCache8322512Test.java'
+      - 'test/jdk/java/util/Arrays/HashCode8312164.java'
+      - 'test/jdk/java/lang/String/libM3RegexNativeRouteProbe.c'
   workflow_dispatch:
 permissions:
   contents: read
@@ -55,6 +68,19 @@ jobs:
           b8995aa7be1bb74aa55b4f843e6d1fffe05222991a612adb01871547e83d5647  test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java
           0aab957eae32ecf416a5c8b3e789141d3b48b4ca1defcbb20309c20bc7bfe7d8  test/jdk/java/util/regex/M3RegexUnicodeFrontierTest.java
           ff9d3781f69b23c512d1a56921661d04c54d10e80b89ca1cc05708d912cbe8c0  test/jdk/java/util/regex/M3RegexPredicateRunTest.java
+          7e9f8ff52c96de88e5479019f217c8ea27eeeda0cbcf548e036110ed705f9178  src/java.base/share/classes/java/lang/M3StringRegexDp.java
+          a0b2539b8f6ca5b66333e7eed537e55d527d2de59e796296cd5619f9e0c306e8  src/java.base/share/classes/java/lang/StringBuffer.java
+          e81e711d52fee23756fd0bf8e48c27ff0fe971419f4bb1c25ec1aa5ebc203a88  src/java.base/share/classes/java/util/Arrays.java
+          98c1be201f4eef1f720828f5a65bfa866d7b3313a18397b7bba4c102ef0cf50e  src/java.base/share/classes/java/util/ChangeJournal.java
+          c816ca792348868bd45ccc1ba073a67852239f1872a1a33511a1884f457b2508  test/jdk/java/lang/String/M3RegexNativeRouteProbe.java
+          94d58abfabb42ff980c6714e83c763482165dc64069d4a4c0d1c14680ca7c0fd  test/jdk/java/lang/String/M3StringRegexDpTest.java
+          9dd08a313a4351c146efc0fb1936d6787ca4538c3c47007441a7b7a0b3d7df1f  test/jdk/java/lang/String/M3StringRegexEffectsTest.java
+          533ec17e75eea17d9756ea2d46ee0ae6a0d82f233085bfb9504652dee132399d  test/jdk/java/lang/String/M3StringRegexPreparedNativeTest.java
+          eeb7d32c127111e4c4c85fe3f11df6f9e8dbe1b948bc2142df53592c2de5745d  test/jdk/java/lang/String/M3StringRegexPreparedUtf16Test.java
+          45cf6f68a86bad3c0cec0cb822978f576fe4c82bf08397aa5782082cbc7a9e13  test/jdk/java/lang/String/M3StringRegexPressureTest.java
+          ba2fbfa349a865c4337cdb15a97f3df6c79baa47ec0bf97491859ba918860250  test/jdk/java/lang/StringBuffer/StringBufferRepeatCache8322512Test.java
+          f608c1c8a262cfb7ab021210cd93f64715055e8b31b37841079f835539e10225  test/jdk/java/util/Arrays/HashCode8312164.java
+          c4b8c58308f51d327ea435ab4ce991b47c8e47d3f8572c2bb79f36d47f9a5d6c  test/jdk/java/lang/String/libM3RegexNativeRouteProbe.c
           SEALED
           while read -r expected path; do
             test -f "$path"
@@ -65,7 +91,7 @@ jobs:
               exit 1
             fi
           done <<'PRESERVED'
-          7819788e326c0a833984186af9b4a91f3d156cdf src/java.base/share/classes/java/util/ChangeJournal.java
+          29bbd29f677d5eabe78bc1ff0d4f0f0878d52746 src/java.base/share/classes/java/util/ChangeJournal.java
           944c61e15ede09dfc0965a425bbd60aafe761176 src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java
           ea949c6db62f312a71f7fdba3f2576816b512fec test/jdk/java/util/concurrent/CopyOnWriteArrayList/M3CopyOnWriteWordMaskTest.java
           ac3d3996faca3b5a125b9cda17a4bc7adf7de37a m3/qualification/collection-convergence-20261024/COW_SINGLE_WORD_RECEIPT.json
@@ -204,3 +230,36 @@ jobs:
           "$home/bin/java" -Xint -Xcheck:jni --patch-module java.base="$out/module-tests" \
             jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
           echo "M3JDK21_ORIGINAL_REGEX_COLLECTION_JNI_SELECTED_IMAGE_PASS"
+      - name: Qualify reconciled String regex JNI pressure and JDK defect fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          jdk_home="$(cat "$RUNNER_TEMP/m3-integrated/image.txt")"
+          tests="$RUNNER_TEMP/m3-reconciliation-tests"
+          native="$RUNNER_TEMP/m3-reconciliation-native"
+          mkdir -p "$tests" "$native"
+          "$jdk_home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror -d "$tests" test/jdk/java/lang/String/M3RegexNativeRouteProbe.java test/jdk/java/lang/String/M3StringRegexDpTest.java test/jdk/java/lang/String/M3StringRegexEffectsTest.java test/jdk/java/lang/String/M3StringRegexPreparedNativeTest.java test/jdk/java/lang/String/M3StringRegexPreparedUtf16Test.java test/jdk/java/lang/String/M3StringRegexPressureTest.java test/jdk/java/lang/StringBuffer/StringBufferRepeatCache8322512Test.java test/jdk/java/util/Arrays/HashCode8312164.java
+          gcc -std=c17 -Wall -Wextra -Werror -O2 -fPIC -shared -I"$jdk_home/include" -I"$jdk_home/include/linux" test/jdk/java/lang/String/libM3RegexNativeRouteProbe.c -o "$native/libM3RegexNativeRouteProbe.so"
+          "$jdk_home/bin/java" -cp "$tests" --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringRegexDpTest
+          "$jdk_home/bin/java" -cp "$tests" --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringRegexDpTest
+          "$jdk_home/bin/java" -cp "$tests" --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringRegexEffectsTest enabled
+          "$jdk_home/bin/java" -cp "$tests" --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringRegexEffectsTest enabled
+          "$jdk_home/bin/java" -cp "$tests" -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringRegexEffectsTest disabled
+          "$jdk_home/bin/java" -cp "$tests" -Xint -Xshare:off -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -agentpath:$native/libM3RegexNativeRouteProbe.so -Dm3.regex.route.probe=$native/libM3RegexNativeRouteProbe.so M3StringRegexPreparedNativeTest
+          "$jdk_home/bin/java" -cp "$tests" -Xint -Xshare:off -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -agentpath:$native/libM3RegexNativeRouteProbe.so -Dm3.regex.route.probe=$native/libM3RegexNativeRouteProbe.so M3StringRegexPreparedNativeTest
+          "$jdk_home/bin/java" -cp "$tests" -Xint -Xshare:off --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringRegexPreparedUtf16Test enabled
+          "$jdk_home/bin/java" -cp "$tests" -Xint -Xshare:off --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringRegexPreparedUtf16Test enabled
+          "$jdk_home/bin/java" -cp "$tests" -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringRegexPreparedUtf16Test disabled
+          "$jdk_home/bin/java" -cp "$tests" -Xmx128m -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringRegexPressureTest
+          "$jdk_home/bin/java" -cp "$tests" -Xmx128m -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringRegexPressureTest
+          "$jdk_home/bin/java" -cp "$tests" -Xmx32m -XX:+UseSerialGC -XX:SoftRefLRUPolicyMSPerMB=0 -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringRegexPressureTest pressure
+          "$jdk_home/bin/java" -cp "$tests" -Xmx32m -XX:+UseSerialGC -XX:SoftRefLRUPolicyMSPerMB=0 -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringRegexPressureTest pressure
+          "$jdk_home/bin/java" -cp "$tests" StringBufferRepeatCache8322512Test
+          "$jdk_home/bin/java" -cp "$tests" -Xint StringBufferRepeatCache8322512Test
+          "$jdk_home/bin/java" -cp "$tests" -XX:+CompactStrings StringBufferRepeatCache8322512Test
+          "$jdk_home/bin/java" -cp "$tests" -XX:-CompactStrings StringBufferRepeatCache8322512Test
+          "$jdk_home/bin/java" -cp "$tests" HashCode8312164
+          "$jdk_home/bin/java" -cp "$tests" -Xint HashCode8312164
+          "$jdk_home/bin/java" -cp "$tests" -XX:+CompactStrings HashCode8312164
+          "$jdk_home/bin/java" -cp "$tests" -XX:-CompactStrings HashCode8312164
+          echo "M3JDK21_RECONCILED_UPSTREAM_REGRESSIONS_PASS"

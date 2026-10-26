@@ -8447,87 +8447,65 @@
       },
       {
         "id": "synexia.regex.metadata-pressure",
-        "kind": "pending",
+        "kind": "specialization",
         "status": "pending",
-        "reason": "Existing Synexia pressure-governor policy and its committed current-owner fixture are not received by the pinned strong-table DP owner.",
+        "reason": "Restore reclaimable optional regex metadata with advisory pressure hysteresis on the current owner, preserving64plan/256effect capacities, weak keys, master class-fact/dispatch lanes and the new repeated UTF16 receiver. Bounded receiving evidence does not complete the programme's all-platform/admission gates.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "commit": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
             "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk21-regex-pressure-20261014/M3StringRegexDp.java",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-pressure-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-pressure-20261025/0001-M3StringRegexDp.java.txt",
             "symbol": "java.lang.M3StringRegexDp",
             "signatures": [
-              "Caches caches()",
-              "void releaseCachedMetadata()",
-              "boolean heapAllowsPreparation()",
-              "boolean hasHeapHeadroom(long,long,long,boolean)"
+              "int tryMatch(M3String,String)"
             ],
-            "sha256": "9219bc4f6fc7cb7b1cbdefce4ebe9b9d3e722a89be5132241e66c44a7e19aed5",
-            "git_blob_sha1": "06fdd8072ce07b4b03c0381e7a175878749bf27d",
+            "sha256": "7e9f8ff52c96de88e5479019f217c8ea27eeeda0cbcf548e036110ed705f9178",
+            "git_blob_sha1": "c450d41eb266ce47cf12cc53c7c3075a159aa572",
             "fingerprint": null,
             "revision_role": "pinned"
-          },
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/recipes/m3-regex-pressure-current-owner-20261017/sdk/src/main/resources/com/synexia/rewrite/m3-regex-pressure-current-owner-20261017/out/M3StringRegexDp.java",
-            "symbol": "java.lang.M3StringRegexDp",
-            "signatures": [
-              "int tryMatch(M3String,String)",
-              "Tables tables()",
-              "void releaseCachedMetadata()",
-              "boolean heapAllowsPreparation()",
-              "boolean hasHeapHeadroom(long,long,long,boolean)"
-            ],
-            "sha256": "287ad2b934c91f87ce904018528a16263585b43dd5ff1224f1d3de5dd92d94a3",
-            "git_blob_sha1": "e5b761fe32c9385cb09a8685c852eac3dd912216",
-            "fingerprint": null,
-            "revision_role": "candidate"
           }
         ],
         "targets": [
           {
-            "repo": "hsoliwal/M3jdk21",
-            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "35696f8917b591883b3aac270638863439052779",
             "module": "java.base",
             "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
             "symbol": "java.lang.M3StringRegexDp",
             "signatures": [
               "int tryMatch(M3String,String)"
             ],
-            "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e",
-            "git_blob_sha1": "164c3a369de2b888b5e5b532d0553352acccd032",
+            "sha256": "7e9f8ff52c96de88e5479019f217c8ea27eeeda0cbcf548e036110ed705f9178",
+            "git_blob_sha1": "c450d41eb266ce47cf12cc53c7c3075a159aa572",
             "fingerprint": null,
             "revision_role": "pinned"
           }
         ],
-        "owner": "java.lang.M3StringRegexDp derived metadata; M3StringBacking and M3StringOwner retain canonical payload authority",
+        "owner": "java.lang.M3StringRegexDp; existing M3JDK21 runtime/module owns execution",
         "identity": {
-          "namespace": "Reuse existing immutable owner, generation and UTF-16 range identities; no new intern namespace or target ABI.",
-          "generation": "Caller keeps borrowed owners stable and reachable for the operation; recomputable metadata does not own or close canonical text."
+          "namespace": "Existing target owner, names, payload/index identities and public contracts remain unchanged.",
+          "generation": "This bounded refinement creates no new retained per-entry object owner or identity domain."
         },
         "contract": {
           "differences": [
-            "Candidate replaces static strong Tables retention with SoftReference<Tables>, advisory heap hysteresis and clear/suspend/UNKNOWN on optional-preparation OOM.",
-            "Candidate preserves corrected relation selection, current native/rolling lanes and capacities64 plans/256 effects."
+            "Restore reclaimable optional regex metadata with advisory pressure hysteresis on the current owner, preserving64plan/256effect capacities, weak keys, master class-fact/dispatch lanes and the new repeated UTF16 receiver."
           ],
           "compatibility_obligations": [
-            "No canonical payload loss, forced GC, owner closure, silent error conversion or change to public matching/fallback behavior.",
-            "Headroom is maxMemory-(clampedTotal-clampedFree); suspend reserve=max(512KiB,maxMemory/32), resume=max(1MiB,maxMemory/16).",
-            "Permit strong in-flight table generations; do not claim SoftReference alone bounds active generations or guarantees VM reclamation.",
-            "Retain the current588544 primitive-field/array bound, excluding references, headers, transients and in-flight generations.",
-            "Qualify real allocation pressure/concurrency/OOM behavior and matched public parity; scalar source tests alone are not VM/JNI/retention/performance evidence."
+            "No hidden static strong cache root, forced GC, canonical payload closure or change to public matching/fallback semantics.",
+            "Advisory heap pressure and optional preparation allocation OOM clear/suspend metadata and preserve UNKNOWN/fallback; non-OOM failures retain propagation.",
+            "Preserve master 64plan/256effect capacities and weak owner/backing keys; never import the old128effect downgrade.",
+            "In-flight calls may retain a cache generation; SoftReference alone does not bound active generations or guarantee VM reclamation.",
+            "Actual matched-image pressure/OOM/concurrency/retention and cold/warm CPU/heap/native-process observations remain separate bounded gates."
           ],
           "public_surface": [
-            "Recomputable private java.lang.M3StringRegexDp metadata policy only."
+            "No class/package/method rename, public signature change or JDK backend promotion."
           ]
         },
         "format": {
           "schema": null,
           "abi": null,
-          "bootstrap": "Internal java.base owners and existing JNI identifiers only; Maven/OpenRewrite remains tool-only."
+          "bootstrap": "Existing target module and native entry points; Synexia is tooling only, with no product runtime dependency."
         },
         "dependencies": [
           {
@@ -8537,47 +8515,128 @@
           }
         ],
         "materialization": {
-          "admission": "Candidate checks advisory heap headroom before optional metadata preparation.",
-          "joins": "Existing relation/cache/native/rolling algorithms remain; only metadata admission and retention policy changes.",
-          "outputs": "Recomputable private plan/effect metadata and unchanged fallback decisions.",
-          "cached_facts": "SoftReference<Tables> permits reclamation; no hidden static strong Tables root. In-flight callers may retain a generation."
+          "admission": "Existing private precompute metadata and advisory heap headroom, without canonical payload ownership.",
+          "joins": "Retain current matching algorithms and exact fallback; pressure policy changes only optional metadata admission/retention.",
+          "outputs": "Recomputable derived plans/effects or UNKNOWN; no new public API/native ABI.",
+          "cached_facts": "Reclaimable cache generation, optional clear/suspend and strong in-flight locals; existing capacities and weak keys retained."
         },
         "recipe": {
-          "id": "com.synexia.rewrite.M3RegexPressureCurrentOwnerRecipe",
-          "version": "20261017",
-          "path": null,
-          "sha256": null,
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "m3-regex-pressure-20261025",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-pressure-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-regex-pressure-20261025.yml",
+          "sha256": "19682f8ed20fa636a3541a175a15f0ee5fd300b9272e3865a25273700cffc386",
           "preconditions": [
-            "Private source SDK path is not a receiving recipe.path.",
-            "Require exact corrected dispatch preimage and whole current-owner/metadata/test custody before receiving."
+            "Execute the private Synexia Java21 Maven/OpenRewrite dataset against exact sealed current target preimages.",
+            "All-input admission and foreign/mixed-state refusal must pass before serial receiving.",
+            "This data-only map/receipt never contains or executes the recipe or its correction memory."
           ],
-          "rollback": "This record does not mutate runtime owners. Any future receiving change requires an exact-preimage recipe and separately sealed restoration; refuse foreign edits."
+          "rollback": "Use a separately source-sealed restoration from the exact received postimage; preserve unrelated changes and all historical pins."
         },
-        "tests": [],
+        "tests": [
+          {
+            "id": "regex-pressure-current-owner",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "regex-effects-existing-regression",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "regex-pressure-runtime-epoch2",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          }
+        ],
         "provenance": {
-          "license": "GPLv2 with Classpath exception for original and successor DP fixtures; Apache-2.0 recipe/scalar donor attribution is preserved separately.",
-          "publication": "Source policy donor and successor fixture are committed at the pinned private source revision; no receiving application or runtime result is claimed.",
+          "license": "Existing DP and derived target tests retain GPLv2 with Classpath exception per file; private source-owned recipe/tooling retain Apache-2.0.",
+          "publication": "User-authorized source convergence; exact private recipe/postimage references only. Recipe and MOP memory remain exclusively in Synexia.",
           "copied_code": true
         },
         "sync": {
-          "source_revision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
-          "target_revision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+          "source_revision": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+          "target_revision": "35696f8917b591883b3aac270638863439052779",
           "direction": "source-to-target",
-          "target_adaptations": [],
+          "target_adaptations": [
+            "Restore reclaimable optional regex metadata with advisory pressure hysteresis on the current owner, preserving64plan/256effect capacities, weak keys, master class-fact/dispatch lanes and the new repeated UTF16 receiver."
+          ],
           "pending": [
-            "Receive corrected relation parent and pressure recipe without overwriting current native/cache/rolling lanes",
-            "Execute actual receiving effects/hysteresis/parity/OOM/concurrency/retention tests",
-            "Distinguish source-described scalar11460 from historical16MiB/12008 proof and current VM acceptance"
+            "No String -> arrays -> collections phase advancement.",
+            "Complete applicable cross-platform, JCK/full jtreg, GC/JNI/lifecycle, installed module and comparative resource gates before broader promotion.",
+            "Use the exact dated receipt for bounded PASS/RED/NOT_RUN distinctions; no gate inheritance from historical donors."
           ],
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
-          "previous_targets": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk21-regex-pressure-20261014/M3StringRegexDp.java",
+              "symbol": "java.lang.M3StringRegexDp",
+              "signatures": [
+                "Caches caches()",
+                "void releaseCachedMetadata()",
+                "boolean heapAllowsPreparation()",
+                "boolean hasHeapHeadroom(long,long,long,boolean)"
+              ],
+              "sha256": "9219bc4f6fc7cb7b1cbdefce4ebe9b9d3e722a89be5132241e66c44a7e19aed5",
+              "git_blob_sha1": "06fdd8072ce07b4b03c0381e7a175878749bf27d",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/recipes/m3-regex-pressure-current-owner-20261017/sdk/src/main/resources/com/synexia/rewrite/m3-regex-pressure-current-owner-20261017/out/M3StringRegexDp.java",
+              "symbol": "java.lang.M3StringRegexDp",
+              "signatures": [
+                "int tryMatch(M3String,String)",
+                "Tables tables()",
+                "void releaseCachedMetadata()",
+                "boolean heapAllowsPreparation()",
+                "boolean hasHeapHeadroom(long,long,long,boolean)"
+              ],
+              "sha256": "287ad2b934c91f87ce904018528a16263585b43dd5ff1224f1d3de5dd92d94a3",
+              "git_blob_sha1": "e5b761fe32c9385cb09a8685c852eac3dd912216",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+              "symbol": "java.lang.M3StringRegexDp",
+              "signatures": [
+                "int tryMatch(M3String,String)"
+              ],
+              "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e",
+              "git_blob_sha1": "164c3a369de2b888b5e5b532d0553352acccd032",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "6e6670a8480fb005a63e5ad39025b13ff12311a1",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+              "symbol": "java.lang.M3StringRegexDp",
+              "signatures": [
+                "int tryMatch(M3String,String)"
+              ],
+              "sha256": "94c3bd7d7f8ec1053491faed593df736752d9fd3cfdfadb22721f223afe1a8ed",
+              "git_blob_sha1": "8ca79312703083ef047c8e71f6ba1a9c35de889b",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "supersedes": []
         },
-        "source_state": "proposed",
-        "observation": "Source donor06fd and candidatee5b are traceability artifacts; current receiving DP164c remains strongly cached. Runtime and standalone qualification are NOT_RUN."
+        "source_state": "partial",
+        "observation": "Existing stable capability ID amended, pending full admission. All original source/target pins and their prior lineage remain here; the byte-exact prior full record/map and old recipe metadata remain in the private dated history. Current256slot restoration is distinct from the previously deferred128slot downgrade."
       },
       {
         "id": "synexia.regex.hierarchical-route-acceptance",
@@ -8846,6 +8905,587 @@
         },
         "source_state": "implemented-proving-module-unpromoted",
         "observation": "The 20261018 source-bound finite proofs concern existing owner behavior and its own wire identity. Local Maven/CI and installed M3JDK runtime acceptance are outstanding; historical performance report says size-1024 owner was slower on all seven examined workloads."
+      },
+      {
+        "id": "m3.build.change-journal-doclint",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Complete the three missing Javadoc tags on existing snapshot(long,int) so the unchanged strict Werror/doclint image gate can run. Bounded receiving evidence does not complete the programme's all-platform/admission gates.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-journal-doclint-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-journal-doclint-20261025/0001-ChangeJournal.java.txt",
+            "symbol": "java.util.ChangeJournal",
+            "signatures": [
+              "Batch<E> snapshot(long,int)"
+            ],
+            "sha256": "98c1be201f4eef1f720828f5a65bfa866d7b3313a18397b7bba4c102ef0cf50e",
+            "git_blob_sha1": "29bbd29f677d5eabe78bc1ff0d4f0f0878d52746",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "9f1703213aac084c5ae57df4faff567c90eaedfe",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+            "symbol": "java.util.ChangeJournal",
+            "signatures": [
+              "Batch<E> snapshot(long,int)"
+            ],
+            "sha256": "98c1be201f4eef1f720828f5a65bfa866d7b3313a18397b7bba4c102ef0cf50e",
+            "git_blob_sha1": "29bbd29f677d5eabe78bc1ff0d4f0f0878d52746",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "java.util.ChangeJournal; existing M3JDK21 runtime/module owns execution",
+        "identity": {
+          "namespace": "Existing target owner, names, payload/index identities and public contracts remain unchanged.",
+          "generation": "This bounded refinement creates no new retained per-entry object owner or identity domain."
+        },
+        "contract": {
+          "differences": [
+            "Complete the three missing Javadoc tags on existing snapshot(long,int) so the unchanged strict Werror/doclint image gate can run."
+          ],
+          "compatibility_obligations": [
+            "No runtime statements or method descriptors change; four stripped-debug classfiles are byte-identical.",
+            "Keep the strict baseline RED and successful full-image rebuild as separate evidence."
+          ],
+          "public_surface": [
+            "No class/package/method rename, public signature change or JDK backend promotion."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing target module and native entry points; Synexia is tooling only, with no product runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Documentation-only exact source preimage.",
+          "joins": "No algorithm or native change.",
+          "outputs": "Three Javadoc tags in the existing class.",
+          "cached_facts": "No cache, payload or lifetime change."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "m3-journal-doclint-20261025",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-journal-doclint-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-journal-doclint-20261025.yml",
+          "sha256": "5779aafaf10ce1cffdc33529db1698d1e03b4bbb2fe9b0bf7bfe5d03b8c656b8",
+          "preconditions": [
+            "Execute the private Synexia Java21 Maven/OpenRewrite dataset against exact sealed current target preimages.",
+            "All-input admission and foreign/mixed-state refusal must pass before serial receiving.",
+            "This data-only map/receipt never contains or executes the recipe or its correction memory."
+          ],
+          "rollback": "Use a separately source-sealed restoration from the exact received postimage; preserve unrelated changes and all historical pins."
+        },
+        "tests": [
+          {
+            "id": "journal-doclint-red-green",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "strict-full-image",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          }
+        ],
+        "provenance": {
+          "license": "Existing OpenJDK/target GPLv2 with Classpath exception per file; Synexia recipe retains Apache-2.0.",
+          "publication": "User-authorized source convergence; exact private recipe/postimage references only. Recipe and MOP memory remain exclusively in Synexia.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+          "target_revision": "9f1703213aac084c5ae57df4faff567c90eaedfe",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Complete the three missing Javadoc tags on existing snapshot(long,int) so the unchanged strict Werror/doclint image gate can run."
+          ],
+          "pending": [
+            "No String -> arrays -> collections phase advancement.",
+            "Complete applicable cross-platform, JCK/full jtreg, GC/JNI/lifecycle, installed module and comparative resource gates before broader promotion.",
+            "Use the exact dated receipt for bounded PASS/RED/NOT_RUN distinctions; no gate inheritance from historical donors."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "b35759a36ecdfc299855a5e53b4d1a05f9f3884d",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+              "symbol": "java.util.ChangeJournal",
+              "signatures": [
+                "Batch<E> snapshot(long,int)"
+              ],
+              "sha256": "b6cd87d65584b65d7191b50d84c1dacb1f2e352f1c9a9ce5dd721abff8af3609",
+              "git_blob_sha1": "f8ad1d23e38e94e6cefe92e605a9fb7ae02d61b0",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "New stable identity in the existing authority; pending status is deliberate. Earlier map records and queue candidates remain unchanged."
+      },
+      {
+        "id": "synexia.regex.prepared-utf16-effects.receiver",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "After existing lanes return UNKNOWN, attempt bounded invocation-local repeated UTF16 effects using the existing M3RegexDpPlan and numeric JNI power/composition. Bounded receiving evidence does not complete the programme's all-platform/admission gates.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-utf16-recv-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-utf16-recv-20261025/0001-M3StringRegexDp.java.txt",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "int tryMatch(M3String,String)"
+            ],
+            "sha256": "94c3bd7d7f8ec1053491faed593df736752d9fd3cfdfadb22721f223afe1a8ed",
+            "git_blob_sha1": "8ca79312703083ef047c8e71f6ba1a9c35de889b",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "f6dfd4d1ea9902e97f7e257f023ec78ce759447e",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk21-regex-utf16-20261015/M3StringRegexDp.java",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "int tryMatch(M3String,String)"
+            ],
+            "sha256": "10d4b5d7a43066860ff20ac8bdc064c03e470d4ad961f4b93bd84398fa4fe34f",
+            "git_blob_sha1": "8475f0b3e91f1a864464e6b5d0c37b758d536be1",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "1a4744a29f1a9728cff2beedb7577b7892ca9e05",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "int tryMatch(M3String,String)"
+            ],
+            "sha256": "94c3bd7d7f8ec1053491faed593df736752d9fd3cfdfadb22721f223afe1a8ed",
+            "git_blob_sha1": "8ca79312703083ef047c8e71f6ba1a9c35de889b",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "java.lang.M3StringRegexDp; existing M3JDK21 runtime/module owns execution",
+        "identity": {
+          "namespace": "Existing target owner, names, payload/index identities and public contracts remain unchanged.",
+          "generation": "This bounded refinement creates no new retained per-entry object owner or identity domain."
+        },
+        "contract": {
+          "differences": [
+            "After existing lanes return UNKNOWN, attempt bounded invocation-local repeated UTF16 effects using the existing M3RegexDpPlan and numeric JNI power/composition."
+          ],
+          "compatibility_obligations": [
+            "Preserve actual master class facts, <=32 bit/native, 33–63 ordered relation, rolling and fallback selectors and cache capacities.",
+            "Require equal canonical child owner identity and exact coordinates; preserve supplementary and cross-copy surrogate seams.",
+            "Do not flatten canonical text, retain text shadows, add per-entry owners or claim persistent cross-call cache reuse.",
+            "UNKNOWN, optional allocation OOM and unsupported grammar retain exact String/Pattern fallback; fence borrowed source reachability.",
+            "Prove genuine existing JNI entry separately from a correct semantic result using test-only forwarding observation."
+          ],
+          "public_surface": [
+            "No class/package/method rename, public signature change or JDK backend promotion."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing target module and native entry points; Synexia is tooling only, with no product runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Existing owner/range identity and bounded repeated-source/effect work eligibility.",
+          "joins": "Existing prepared effect algebra and production numeric JNI methods; no new native ABI.",
+          "outputs": "Proven result or UNKNOWN with unchanged public fallback.",
+          "cached_facts": "New effects/plans are invocation-local; existing master persistent tables unchanged."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "m3-regex-utf16-recv-20261025",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-utf16-recv-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-regex-utf16-recv-20261025.yml",
+          "sha256": "7095cf39517370ea0b154b42a81d938c2d9db427dbb6e0f998dd9fcf76cba5ee",
+          "preconditions": [
+            "Execute the private Synexia Java21 Maven/OpenRewrite dataset against exact sealed current target preimages.",
+            "All-input admission and foreign/mixed-state refusal must pass before serial receiving.",
+            "This data-only map/receipt never contains or executes the recipe or its correction memory."
+          ],
+          "rollback": "Use a separately source-sealed restoration from the exact received postimage; preserve unrelated changes and all historical pins."
+        },
+        "tests": [
+          {
+            "id": "regex-prepared-utf16",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "regex-native-route",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "regex-disabled-route-mutants",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "regex-runtime-resources",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          }
+        ],
+        "provenance": {
+          "license": "Existing DP and native probe/test postimages retain GPLv2 with Classpath exception; original first-party rights remain. Synexia recipe Apache-2.0 does not relicense product code.",
+          "publication": "User-authorized source convergence; exact private recipe/postimage references only. Recipe and MOP memory remain exclusively in Synexia.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+          "target_revision": "1a4744a29f1a9728cff2beedb7577b7892ca9e05",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "After existing lanes return UNKNOWN, attempt bounded invocation-local repeated UTF16 effects using the existing M3RegexDpPlan and numeric JNI power/composition."
+          ],
+          "pending": [
+            "No String -> arrays -> collections phase advancement.",
+            "Complete applicable cross-platform, JCK/full jtreg, GC/JNI/lifecycle, installed module and comparative resource gates before broader promotion.",
+            "Use the exact dated receipt for bounded PASS/RED/NOT_RUN distinctions; no gate inheritance from historical donors."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "9f1703213aac084c5ae57df4faff567c90eaedfe",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+              "symbol": "java.lang.M3StringRegexDp",
+              "signatures": [
+                "int tryMatch(M3String,String)"
+              ],
+              "sha256": "faa373f77eef1d2dd3457bfe8c5d65d2dff819bb606e00f7c269e7b08a37cf25",
+              "git_blob_sha1": "9bfcdd972e704ef88ef5fdfe3112576aba99f3cd",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "New stable identity in the existing authority; pending status is deliberate. Earlier map records and queue candidates remain unchanged."
+      },
+      {
+        "id": "m3.collections.indexed-snapshot.packed-filter-directory",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Converge donor packed predicate decisions and immutable all-pass directory reuse with current fused sorting, detaching a shared directory before sorting. Bounded receiving evidence does not complete the programme's all-platform/admission gates.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-snapshot-union-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-snapshot-union-20261025/0001-M3IndexedListSnapshot.java.txt",
+            "symbol": "com.m3.collections.M3IndexedListSnapshot",
+            "signatures": [
+              "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
+              "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
+            ],
+            "sha256": "d0d258bb05d7102955295f5382e8a737cc2ffd93d578864f83f6025ea9150f1d",
+            "git_blob_sha1": "b2647b144d6cffa785d3b9b0b591de67ebbb602c",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "d46d46ab7f20a4cf782e72d353a105f634e10692",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+            "symbol": "com.m3.collections.M3IndexedListSnapshot",
+            "signatures": [
+              "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
+              "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
+            ],
+            "sha256": "9dd26cecb3405d304d2661c1b2e5569d73184e1cd9777843ab4c40158e701a18",
+            "git_blob_sha1": "e69da823d4db909bbd99fb94cb6002d5bff5025f",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "336b0f44141d624235d0384d9f98dfb9125441dc",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+            "symbol": "com.m3.collections.M3IndexedListSnapshot",
+            "signatures": [
+              "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
+              "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
+            ],
+            "sha256": "d0d258bb05d7102955295f5382e8a737cc2ffd93d578864f83f6025ea9150f1d",
+            "git_blob_sha1": "b2647b144d6cffa785d3b9b0b591de67ebbb602c",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "com.m3.collections.M3IndexedListSnapshot; existing M3JDK21 runtime/module owns execution",
+        "identity": {
+          "namespace": "Existing target owner, names, payload/index identities and public contracts remain unchanged.",
+          "generation": "This bounded refinement creates no new retained per-entry object owner or identity domain."
+        },
+        "contract": {
+          "differences": [
+            "Converge donor packed predicate decisions and immutable all-pass directory reuse with current fused sorting, detaching a shared directory before sorting."
+          ],
+          "compatibility_obligations": [
+            "Keep one canonical Object[] payload owner, immutable prior snapshots and physical occurrence order.",
+            "Evaluate each predicate occurrence once, preserving callback order and exception identity.",
+            "Preserve stable comparator ties, slices, duplicates, null contracts and current native-required refusal before callbacks.",
+            "No public/protected API, native source/export/header or retained per-entry representation changes.",
+            "Keep the reproduced naive-union alias-corruption failure; host proofs do not establish installed-module admission."
+          ],
+          "public_surface": [
+            "No class/package/method rename, public signature change or JDK backend promotion."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing target module and native entry points; Synexia is tooling only, with no product runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Existing snapshot payload and primitive physical-slot directory.",
+          "joins": "Packed long[] predicate decisions; enumerate selected original positions; copy shared directory before sort.",
+          "outputs": "Existing immutable snapshot API and exact-sized int[] selection, reusing full immutable directory only when safe.",
+          "cached_facts": "Reuse existing immutable directory/membership where valid; no extra payload owner or per-entry objects."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "m3-snapshot-union-20261025",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-snapshot-union-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-snapshot-union-20261025.yml",
+          "sha256": "c3d10d11c0f017e18bbd2a0d5be842824f8a6f18a4c9a3fdda5c60e72befc7a5",
+          "preconditions": [
+            "Execute the private Synexia Java21 Maven/OpenRewrite dataset against exact sealed current target preimages.",
+            "All-input admission and foreign/mixed-state refusal must pass before serial receiving.",
+            "This data-only map/receipt never contains or executes the recipe or its correction memory."
+          ],
+          "rollback": "Use a separately source-sealed restoration from the exact received postimage; preserve unrelated changes and all historical pins."
+        },
+        "tests": [
+          {
+            "id": "snapshot-alias-red-green",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "snapshot-checked-jni",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "snapshot-owning-maven",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "snapshot-host-resource-observations",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          }
+        ],
+        "provenance": {
+          "license": "Exact master/donor Apache-2.0 header retained; unchanged mask dependencies retain Apache-2.0 OR EPL-2.0 per file.",
+          "publication": "User-authorized source convergence; exact private recipe/postimage references only. Recipe and MOP memory remain exclusively in Synexia.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+          "target_revision": "336b0f44141d624235d0384d9f98dfb9125441dc",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Converge donor packed predicate decisions and immutable all-pass directory reuse with current fused sorting, detaching a shared directory before sorting."
+          ],
+          "pending": [
+            "No String -> arrays -> collections phase advancement.",
+            "Complete applicable cross-platform, JCK/full jtreg, GC/JNI/lifecycle, installed module and comparative resource gates before broader promotion.",
+            "Use the exact dated receipt for bounded PASS/RED/NOT_RUN distinctions; no gate inheritance from historical donors."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "6e6670a8480fb005a63e5ad39025b13ff12311a1",
+              "module": "com.m3.collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+              "symbol": "com.m3.collections.M3IndexedListSnapshot",
+              "signatures": [
+                "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
+                "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
+              ],
+              "sha256": "43e9eb81a6828137668e597accbe347a315146d278f423e91fab5754af7f1431",
+              "git_blob_sha1": "d12e15f41fe17069739a1cdbca1728ee8286d9c4",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "New stable identity in the existing authority; pending status is deliberate. Earlier map records and queue candidates remain unchanged."
+      },
+      {
+        "id": "synexia.collections.tree-window-sibling-shift",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Restore the established negative child index diagnostic while retaining current atomic sibling-shift validation, overflow/collision guards and native row-handle identity; canonical AstBuildReverse20261017 owner lineage is retained. Bounded receiving evidence does not complete the programme's all-platform/admission gates.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-tree-message-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-tree-message-20261025/0001-M3TreeWindowPlan.java.txt",
+            "symbol": "com.m3.collections.M3TreeWindowPlan",
+            "signatures": [
+              "void shiftSiblings(int,int,int)"
+            ],
+            "sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
+            "git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "839eec5b4c613ad686b1db9299abbf5fabe36e38",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+            "symbol": "com.m3.collections.M3TreeWindowPlan",
+            "signatures": [
+              "void shiftSiblings(int,int,int)"
+            ],
+            "sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
+            "git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "com.m3.collections.M3TreeWindowPlan; existing M3JDK21 runtime/module owns execution",
+        "identity": {
+          "namespace": "Existing target owner, names, payload/index identities and public contracts remain unchanged.",
+          "generation": "This bounded refinement creates no new retained per-entry object owner or identity domain."
+        },
+        "contract": {
+          "differences": [
+            "Restore the established negative child index diagnostic while retaining current atomic sibling-shift validation, overflow/collision guards and native row-handle identity; canonical AstBuildReverse20261017 owner lineage is retained."
+          ],
+          "compatibility_obligations": [
+            "Reject negative final coordinates with the existing negative child index message; retain distinct overflow and resident-sibling overlap messages.",
+            "Validate every affected coordinate before changing any key; failed shifts leave all coordinates, native handles and lookup indexes unchanged.",
+            "Keep matching-parent selection, unaffected sibling coordinates and native handle reuse; use existing primitive array/index owners.",
+            "No public class, constructor or method descriptor, native ABI, retained per-entry representation or phase change.",
+            "Retain the reproduced owning-test failure and full existing shift/overflow/collision tests; focused success does not replace full owning acceptance."
+          ],
+          "public_surface": [
+            "No class/package/method rename, public signature change or JDK backend promotion."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing target module and native entry points; Synexia is tooling only, with no product runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Existing committed viewport topology and primitive coordinate/handle lanes.",
+          "joins": "Two-pass validate-then-shift of the current owner; separate negative and positive overflow diagnostics.",
+          "outputs": "Same shifted logical keys and stable native row handles, or original diagnostic without partial mutation.",
+          "cached_facts": "Existing primitive key/handle arrays and lookup indexes only; no new owner or metadata cache."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "m3-tree-message-20261025",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-tree-message-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-tree-message-20261025.yml",
+          "sha256": "068dc49b01ae6b6f9bc69e8c3b99824dabd591264ae8f50b6c6b237d019de546",
+          "preconditions": [
+            "Execute the private Synexia Java21 Maven/OpenRewrite dataset against exact sealed current target preimages.",
+            "All-input admission and foreign/mixed-state refusal must pass before serial receiving.",
+            "This data-only map/receipt never contains or executes the recipe or its correction memory."
+          ],
+          "rollback": "Use a separately source-sealed restoration from the exact received postimage; preserve unrelated changes and all historical pins."
+        },
+        "tests": [
+          {
+            "id": "tree-window-negative-message-red-green",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "tree-window-atomic-shift-contract",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          },
+          {
+            "id": "collections-owning-suite",
+            "receipt": "m3/compatibility/synexia-current-convergence-receipt-20261025.json"
+          }
+        ],
+        "provenance": {
+          "license": "Existing target Apache-2.0 header and source election retained; original SWT Apache-2.0 OR EPL-2.0 lineage remains recorded per file. Source recipe/tooling retain their own Apache-2.0 rights.",
+          "publication": "User-authorized source convergence; exact private recipe/postimage references only. Recipe and MOP memory remain exclusively in Synexia.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6a5d6fbb82c761d5557dab9d900e7ffc2a11ff4a",
+          "target_revision": "839eec5b4c613ad686b1db9299abbf5fabe36e38",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Restore the established negative child index diagnostic while retaining current atomic sibling-shift validation, overflow/collision guards and native row-handle identity; canonical AstBuildReverse20261017 owner lineage is retained."
+          ],
+          "pending": [
+            "No String -> arrays -> collections phase advancement.",
+            "Complete applicable cross-platform, JCK/full jtreg, GC/JNI/lifecycle, installed module and comparative resource gates before broader promotion.",
+            "Use the exact dated receipt for bounded PASS/RED/NOT_RUN distinctions; no gate inheritance from historical donors."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "336b0f44141d624235d0384d9f98dfb9125441dc",
+              "module": "com.m3.collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+              "symbol": "com.m3.collections.M3TreeWindowPlan",
+              "signatures": [
+                "void shiftSiblings(int,int,int)"
+              ],
+              "sha256": "837aeb592e797902f9c50bcdbf4f85db3f9dbf97ee7537b5d6e85a9fa4a4e41a",
+              "git_blob_sha1": "f4f064f370a38bd8363b1e6309e4b151fb987b1c",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "New stable identity in the existing authority; pending status is deliberate. Earlier map records and queue candidates remain unchanged."
       }
     ]
   },

@@ -1,4 +1,4 @@
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: owned M3 array storage, pinned bounded helper closure and documented query-contract repairs.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: owned M3 array storage, pinned bounded helper closure and documented query-contract repairs; counter-preserving group removal.
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -121,9 +121,10 @@ public abstract class M3AbstractSetValuedMap<K, V> extends M3AbstractMultiValued
      * @return the {@code Set} of values removed, will return an empty,
      *   unmodifiable set for no mapping found.
      */
+    //FLLDCIM: ALG - LC904 distinct-count: removed group counted out through detach
     @Override
     public Set<V> remove(final Object key) {
-        final Set<V> removed = getMap().remove(key);
+        final Set<V> removed = (Set<V>) detach(key);
         return removed == null || removed.isEmpty() ? Collections.emptySet() : removed;
     }
 

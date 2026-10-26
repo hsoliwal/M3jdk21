@@ -182,7 +182,7 @@ public final class ChangeJournal {
      *
      * @param afterVersion the version of the last change already processed
      * @param maxChanges the maximum number of consecutive changes to copy
-     * @return an immutable batch of up to the requested number of changes
+     * @return a stable batch with its cursor at the last copied change
      * @throws IllegalArgumentException if the cursor or bound is invalid
      * @throws IllegalStateException if the requested history was overwritten
      */

@@ -1,0 +1,61 @@
+{
+  "schema": "M3JDK21_TREE_VIEWPORT_RECEIVING_DRAFT_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "b426a7ee0ced2fbbb883d6a50738557ffead5e22",
+  "canonical_recipes": [
+    "com.synexia.m3.ViewportTreeHintsMaster20261025",
+    "com.synexia.m3.ViewportTreeGenerationMaster20261025"
+  ],
+  "original_source": "m3/collections/src/main/java/com/m3/collections/M3TreeProjection.java",
+  "product_master_baseline": "882ebe18891c719c0e26b6ee42558e50e96fe33e",
+  "source_pre_git_blob": "2192d806c5b83edd90eb3f05ac75819f6b95c1a4",
+  "source_hints_sdk_result_blob": "0833be942c82a2bc625c5c7b52de51f002eebcdd",
+  "source_final_sdk_result_blob": "143f06c81c08311dffd9ef72d5e1721fd2f39f31",
+  "source_pre_sha256": "9f474bd67f556e7ce1e0f05644885101731a43a36376d49fab0e9094b31f11c1",
+  "source_hints_sha256": "01f77b140fd5f6568ba4f173d09986c6c2e290ed24cdf8e0d98d4962be682ba9",
+  "source_final_sha256": "14b4648230e68518d325df3aeafa9a121f96c254f5276b6a74a2c3c4cc1b7479",
+  "parser_jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+  "parser_pom_sha256": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7",
+  "source_proofs": {
+    "exact_current_Synexia_engine_git_blobs": [
+      "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "98138cb6734ad86e3f77b8722fa5ff459842e841",
+      "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+      "9174dd681f0d75b5086fc19904a71524a03972dc"
+    ],
+    "original_M3TaskRecipeTest_per_stage": {
+      "tests": 5,
+      "failures": 0,
+      "results": 1,
+      "fixed_point": "PASS",
+      "negative_refusals": "PASS"
+    },
+    "original_tree_residency_JUnit": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "java_mixed_and_interpreted_parity": "PASS",
+    "checked_jni_fatal_ubsan_archival_kernel": "PASS",
+    "no_hint_checks_per_execution": 417171,
+    "with_hint_checks_per_execution": 531254,
+    "no_hint_root": "79e90d00d243eaf1303ea975ea65384765e4bdcf7fc3bd40a0930a16fac93e03",
+    "hint_root": "8453cf3f266de7ec41b5f444dafe60463868b61d550a160d90ceb645e01a87f7",
+    "abi_public_descriptor_equal": true
+  },
+  "local_maven_proof_uses_local_pom": true,
+  "local_proof_binding_descriptors": "LOCAL ONLY; official Synexia receive.py not executed in local harness",
+  "original_canonical_receive_py": "NOT_RUN",
+  "hosted_product_build": "NOT_YET_VERIFIED",
+  "release_gates": {
+    "installed_M3JDK21_HotSpot": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "SWT_Nebula_GEF_RWT_real_handles": "NOT_RUN",
+    "Windows_macOS_Android": "NOT_RUN",
+    "accessibility_IME_theme_RTL": "NOT_RUN",
+    "runtime_performance_CPU_heap_RSS": "NOT_MEASURED"
+  },
+  "promotion": "HOLD_DRAFT_NO_MERGE"
+}
