@@ -26,6 +26,7 @@ jobs:
           sparse-checkout: |
             m3/arrays
             m3/collections
+            m3/native
             m3/tooling/migration-recipes
       # Keep both historical source checkouts; the successor verifier binds
       # 36+7+40 originals, three compiled-test atoms and eight new E5 sources.
@@ -111,11 +112,64 @@ jobs:
           JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DpomFile="$GITHUB_WORKSPACE/m3/collections/pom.xml")
+      - name: Build native M3 arrays and prove original JNI allocation boundary
+        shell: bash
+        run: |
+          set -euxo pipefail
+          # Source-owned C11/JNI implementation; no native-only test bypass or Java fallback.
+          command -v cmake
+          command -v ctest
+          command -v cc
+          test -s proof/m3-arrays.jar
+          cmake -S m3/arrays/src/main/native \
+            -B proof/array-native-build -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_TESTING=ON -DJAVA_HOME="$JAVA_HOME"
+          cmake --build proof/array-native-build --config Release --parallel 2
+          ctest --test-dir proof/array-native-build --output-on-failure -C Release
+          NATIVE="$GITHUB_WORKSPACE/proof/array-native-build/libm3_arrays.so"
+          test -s "$NATIVE"
+          sha256sum "$NATIVE" | tee proof/m3-arrays-native-sha256.txt
+          # Fail closed before the vendor tests if native required arrays cannot load.
+          mkdir -p proof/native-handshake
+          cat > proof/native-handshake/M3ArrayNativeRequiredHandshake.java <<'JAVA'
+          // SPDX-License-Identifier: Apache-2.0
+          import com.m3.arrays.M3ArrayNative;
+          public final class M3ArrayNativeRequiredHandshake {
+              public static void main(String[] args) {
+                  if (args.length != 1) throw new AssertionError("native path argument");
+                  System.setProperty("m3.arrays.native.path", args[0]);
+                  Object[] objects = M3ArrayNative.allocateObjectsRequired(3);
+                  byte[] bytes = M3ArrayNative.allocateBytesRequired(5);
+                  int[] ints = M3ArrayNative.allocateIntsRequired(7);
+                  long[] longs = M3ArrayNative.allocateLongsRequired(9);
+                  if (!M3ArrayNative.isLoaded() || objects.length != 3
+                          || bytes.length != 5 || ints.length != 7 || longs.length != 9
+                          || objects[0] != null || objects[2] != null
+                          || bytes[4] != 0 || ints[6] != 0 || longs[8] != 0L) {
+                      throw new AssertionError("original M3 arrays JNI allocation contract");
+                  }
+                  System.out.println("M3_ARRAY_NATIVE_REQUIRED_HANDSHAKE_PASS");
+              }
+          }
+          JAVA
+          javac --release 21 -Xlint:all,-serial -Werror \
+            -cp proof/m3-arrays.jar -d proof/native-handshake \
+            proof/native-handshake/M3ArrayNativeRequiredHandshake.java
+          java -Xcheck:jni -cp "proof/m3-arrays.jar:proof/native-handshake" \
+            M3ArrayNativeRequiredHandshake "$NATIVE" \
+            2>&1 | tee proof/arrays-native-required-handshake.log
       - name: Compile and execute exactly the complete indexed five-library JUnit corpus
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/interop/pom.xml verify 2>&1 | tee proof/interop.log
+          NATIVE="$GITHUB_WORKSPACE/proof/array-native-build/libm3_arrays.so"
+          test -s "$NATIVE"
+          # Surefire's forked JVM must receive the original required-native load property.
+          # All 167+ vendor assertions stay enabled; semantic failures must remain red.
+          mvn -B -ntp -f m3/collections/interop/pom.xml \
+            "-DargLine=-Xcheck:jni -Dm3.arrays.native.path=$NATIVE" \
+            "-Dm3.arrays.native.path=$NATIVE" \
+            verify 2>&1 | tee proof/interop.log
           python3 -m unittest discover \
             -s m3/collections/interop/qualification/runtime-junit-census-20261022 \
             -p 'test_verify_surefire.py' -v 2>&1 | tee proof/junit-negative-controls.log
