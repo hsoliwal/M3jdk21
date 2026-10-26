@@ -26,6 +26,7 @@ jobs:
           sparse-checkout: |
             m3/arrays
             m3/collections
+            m3/native
             m3/tooling/migration-recipes
       # Keep both historical source checkouts; the successor verifier binds
       # 36+7+40 originals, three compiled-test atoms and eight new E5 sources.
