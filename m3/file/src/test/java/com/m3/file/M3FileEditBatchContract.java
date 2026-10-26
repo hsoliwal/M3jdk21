@@ -8,6 +8,7 @@ import java.util.Random;
 
 /** Source-sealed deterministic single-pass edit, mapping and rejection proof. */
 public final class M3FileEditBatchContract {
+    public M3FileEditBatchContract() { }
     private static int checks;
     private static void ok(boolean p, String why) {
         if (!p) throw new AssertionError(why);
