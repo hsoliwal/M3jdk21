@@ -16,6 +16,9 @@ public final class M3LongRankBatchNative {
     private static final int NATIVE_MIN_BATCH = 64;
     private static final int NATIVE_MIN_KDIFF = 256;
     private static volatile boolean KDIFF_ABI_MISSING;
+    private static final int NATIVE_MIN_PAIR_DISTANCE_BATCH = 64;
+    private static final int NATIVE_MIN_PAIR_DISTANCE_OWNER = 128;
+    private static volatile boolean PAIR_DISTANCE_ABI_MISSING;
     private static final int NATIVE_MIN_INTERSECTION = 128;
     private static final int MODE_UPPER = 1;
     private static final int MODE_COUNT = 2;
@@ -777,6 +780,79 @@ public final class M3LongRankBatchNative {
         return total;
     }
 
+    /**
+     * LeetCode #719 count-within-distance predicate over an immutable, sorted
+     * signed-long lane. Each i < j occurrence is counted independently. Input
+     * thresholds are nonnegative signed longs; full mathematical differences
+     * spanning Long.MIN_VALUE..Long.MAX_VALUE use unsigned subtraction.
+     *
+     * <p>JNI batches sufficiently large inputs in the original m3rankbatch
+     * native owner using fixed array-region pages, no Java callback and no
+     * retained GC address. Older optional native binaries fall back to Java;
+     * native-required requests never hide a missing ABI.</p>
+     */
+    static long[] pairDistanceCounts(long[] sorted, long[] thresholds) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(thresholds, "thresholds");
+        validatePairDistances(thresholds);
+        long[] result = new long[thresholds.length];
+        if (sorted.length < 2 || thresholds.length == 0) return result;
+        if (AVAILABLE && !PAIR_DISTANCE_ABI_MISSING
+                && sorted.length >= NATIVE_MIN_PAIR_DISTANCE_OWNER
+                && thresholds.length >= NATIVE_MIN_PAIR_DISTANCE_BATCH) {
+            try {
+                pairDistanceCounts0(sorted, thresholds, result);
+                return result;
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                PAIR_DISTANCE_ABI_MISSING = true;
+            }
+        }
+        for (int i = 0; i < thresholds.length; i++) {
+            result[i] = pairDistanceCountJava(sorted, thresholds[i]);
+        }
+        return result;
+    }
+
+    /** Force the exact original JNI ABI for parity; missing libraries fail closed. */
+    static long[] pairDistanceCountsNativeRequired(long[] sorted, long[] thresholds) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(thresholds, "thresholds");
+        validatePairDistances(thresholds);
+        if (!AVAILABLE) {
+            throw new UnsatisfiedLinkError("m3rankbatch pair-distance JNI unavailable");
+        }
+        long[] result = new long[thresholds.length];
+        pairDistanceCounts0(sorted, thresholds, result);
+        return result;
+    }
+
+    /** Independent original Java two-pointer oracle: O(n), O(1) extra. */
+    static long pairDistanceCountJava(long[] sorted, long maxDistance) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (maxDistance < 0) {
+            throw new IllegalArgumentException("distance threshold must be nonnegative");
+        }
+        int left = 0;
+        long count = 0L;
+        for (int right = 1; right < sorted.length; right++) {
+            while (left < right && Long.compareUnsigned(
+                    sorted[right] - sorted[left], maxDistance) > 0) {
+                left++;
+            }
+            count += right - left;
+        }
+        return count;
+    }
+
+    private static void validatePairDistances(long[] thresholds) {
+        // Verify the full batch before allocating or mutating result storage.
+        for (long distance : thresholds) {
+            if (distance < 0L) {
+                throw new IllegalArgumentException("distance threshold must be nonnegative");
+            }
+        }
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -788,6 +864,9 @@ public final class M3LongRankBatchNative {
             return false;
         }
     }
+
+    /** Additive LC #719 JNI batch predicate over signed sorted long lanes. */
+    static native void pairDistanceCounts0(long[] sorted, long[] thresholds, long[] results);
 
     /** Additive LC #347 source-owned m3rankbatch JNI symbol. */
     private static native long[] topKFrequent0(long[] sorted, int k);

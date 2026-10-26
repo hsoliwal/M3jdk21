@@ -1158,3 +1158,119 @@ Java_com_m3_collections_M3LongRankBatchNative_distinctDifferencePairCount0(
     }
     return total;
 }
+
+/* SPDX-License-Identifier: Apache-2.0 */
+/* Original JNI m3rankbatch owner: LeetCode 719 sliding-window pair predicate.
+ * A fixed two-page cache bounds scratch at 4096 bytes. No retained Java pointer.
+ */
+enum { M3_PAIR_DISTANCE_PAGE = 256 };
+
+typedef struct m3_pair_distance_page {
+    jlong data[M3_PAIR_DISTANCE_PAGE];
+    jsize start;
+    jsize length;
+} m3_pair_distance_page;
+
+static int m3_pair_distance_read(JNIEnv *env, jlongArray sorted, jsize size,
+        jsize ordinal, m3_pair_distance_page *page, jlong *value) {
+    if (ordinal < page->start || ordinal - page->start >= page->length) {
+        jsize start = ordinal - ordinal % M3_PAIR_DISTANCE_PAGE;
+        jsize length = size - start;
+        if (length > M3_PAIR_DISTANCE_PAGE) length = M3_PAIR_DISTANCE_PAGE;
+        (*env)->GetLongArrayRegion(env, sorted, start, length, page->data);
+        if ((*env)->ExceptionCheck(env)) return 0;
+        page->start = start;
+        page->length = length;
+    }
+    *value = page->data[ordinal - page->start];
+    return 1;
+}
+
+static void m3_pair_distance_throw(JNIEnv *env, const char *exception,
+        const char *message) {
+    jclass klass = (*env)->FindClass(env, exception);
+    if (klass != NULL) (*env)->ThrowNew(env, klass, message);
+}
+
+static int m3_pair_distance_count(JNIEnv *env, jlongArray sorted, jsize size,
+        jlong distance, m3_pair_distance_page *left_page,
+        m3_pair_distance_page *right_page, jlong *result) {
+    jsize left = 0;
+    jlong total = 0;
+    for (jsize right = 1; right < size; ++right) {
+        jlong high;
+        if (!m3_pair_distance_read(env, sorted, size, right, right_page, &high))
+            return 0;
+        while (left < right) {
+            jlong low;
+            if (!m3_pair_distance_read(env, sorted, size, left, left_page, &low))
+                return 0;
+            /* Unsigned subtraction represents full mathematical distance of
+             * sorted signed longs, including Long.MIN_VALUE -> Long.MAX_VALUE.
+             * Signed high-low would be undefined behavior in C on overflow.
+             */
+            if ((uint64_t) high - (uint64_t) low <= (uint64_t) distance) break;
+            ++left;
+        }
+        /* n <= INT_MAX: n*(n-1)/2 always fits signed jlong. */
+        total += (jlong) (right - left);
+    }
+    *result = total;
+    return 1;
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_pairDistanceCounts0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray thresholds,
+        jlongArray results) {
+    (void) ignored;
+    if (sorted == NULL || thresholds == NULL || results == NULL) {
+        m3_pair_distance_throw(env, "java/lang/NullPointerException", "null pair distance input");
+        return;
+    }
+    jsize count = (*env)->GetArrayLength(env, thresholds);
+    if (count != (*env)->GetArrayLength(env, results)) {
+        m3_pair_distance_throw(env, "java/lang/IllegalArgumentException",
+                "pair distance output length mismatch");
+        return;
+    }
+    jsize size = (*env)->GetArrayLength(env, sorted);
+    jlong distances[M3_PAIR_DISTANCE_PAGE];
+    jlong answers[M3_PAIR_DISTANCE_PAGE];
+
+    /* Validate every threshold before any output write, even for empty owners.
+     * All input and output arrays remain managed by the VM and never escape.
+     */
+    for (jsize base = 0; base < count;) {
+        jsize length = count - base;
+        if (length > M3_PAIR_DISTANCE_PAGE) length = M3_PAIR_DISTANCE_PAGE;
+        (*env)->GetLongArrayRegion(env, thresholds, base, length, distances);
+        if ((*env)->ExceptionCheck(env)) return;
+        for (jsize i = 0; i < length; ++i) {
+            if (distances[i] < 0) {
+                m3_pair_distance_throw(env, "java/lang/IllegalArgumentException",
+                        "negative pair distance threshold");
+                return;
+            }
+        }
+        base += length;
+    }
+
+    m3_pair_distance_page left_page = {{0}, -1, 0};
+    m3_pair_distance_page right_page = {{0}, -1, 0};
+    for (jsize base = 0; base < count;) {
+        jsize length = count - base;
+        if (length > M3_PAIR_DISTANCE_PAGE) length = M3_PAIR_DISTANCE_PAGE;
+        (*env)->GetLongArrayRegion(env, thresholds, base, length, distances);
+        if ((*env)->ExceptionCheck(env)) return;
+        for (jsize i = 0; i < length; ++i) {
+            jlong total = 0;
+            if (size > 1 && !m3_pair_distance_count(env, sorted, size, distances[i],
+                    &left_page, &right_page, &total)) return;
+            answers[i] = total;
+        }
+        (*env)->SetLongArrayRegion(env, results, base, length, answers);
+        if ((*env)->ExceptionCheck(env)) return;
+        base += length;
+    }
+}

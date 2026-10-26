@@ -386,6 +386,26 @@ public final class M3LongRankIndex {
         return M3LongRankBatchNative.distinctDifferencePairCount(values, distance);
     }
 
+    /**
+     * LeetCode #719 distance-predicate count over all unordered pairs of
+     * occurrence indexes i &lt; j in the immutable sorted owner. Each duplicate
+     * occurrence participates; output is long to avoid int overflow.
+     * Nonnegative thresholds are signed-long distances. Differences greater
+     * than Long.MAX_VALUE are excluded, without subtract/abs overflow.
+     */
+    public long pairCountWithinDistance(long maxDistance) {
+        return M3LongRankBatchNative.pairDistanceCountJava(values, maxDistance);
+    }
+
+    /**
+     * Batched distance-predicate counts. The original m3rankbatch JNI kernel
+     * is optionally used for large batches; each threshold produces one long.
+     * No per-pair objects or Java callbacks cross the JNI boundary.
+     */
+    public long[] pairCountsWithinDistances(long[] maxDistances) {
+        return M3LongRankBatchNative.pairDistanceCounts(values, maxDistances);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(
