@@ -46,6 +46,8 @@ CONTRACTS = (
     ("jdk.m3.parser.test.M3ASTPortabilityContract", "M3_AST_PORTABILITY_PASS"),
     ("jdk.m3.parser.test.M3Utf8SourceMapContract", "M3_UTF8_SOURCE_MAP_PASS"),
     ("jdk.m3.parser.test.M3ASTSyntaxCoverageContract", "M3_AST_SYNTAX_COVERAGE_PASS"),
+    ("jdk.m3.parser.test.M3FileEditsContract", "M3_FILE_EDITS_PASS"),
+    ("jdk.m3.parser.test.M3ASTByteIngressContract", "M3_AST_BYTE_INGRESS_PASS"),
     ("jdk.m3.parser.test.M3FileLineMapContract", "M3_FILE_LINE_MAP_PASS"),
     ("jdk.m3.parser.test.M3ASTRelationsContract", "M3_AST_RELATIONS_PASS"),
     ("jdk.m3.parser.test.M3ASTIndexProjectionContract", "M3_AST_INDEX_PROJECTION_PASS"),
