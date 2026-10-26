@@ -4,6 +4,7 @@ import com.m3.tools.cpu.CpuTools;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ProgressMonitor;
 import jdk.m3.io.M3File;
@@ -30,6 +31,39 @@ public final class M3BoundedDiffTest {
             Files.writeString(conflictingPath, "left\r\nright?\ud83d\ude42\n", StandardCharsets.UTF_8);
             M3File independent = M3File.load(independentPath);
             M3File conflicting = M3File.load(conflictingPath);
+            List<M3File> corpus = List.of(before, after, independent);
+            List<String> needles = List.of("left", "right", "right", "\ud83d\ude42", "!");
+            var searched = CpuTools.corpusLiteral(corpus, needles, 100);
+            check(searched.complete() && searched.scannedFiles() == 3 && searched.size() > 10,
+                    "one compiled literal plan searches all three exact M3File snapshots");
+            check(searched.hit(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 0, 0, 4))
+                    && searched.hit(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 1, 6, 11))
+                    && searched.hit(2).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 2, 6, 11)),
+                    "file ordinal, source-relative UTF-16 positions and duplicate pattern IDs preserved");
+            check(searched.sha256().matches("[0-9a-f]{64}")
+                    && CpuTools.verifyCorpusLiteral(corpus, needles, 100, searched, null),
+                    "three ordered file identities and prepared literal order independently reexecute");
+            check(!CpuTools.verifyCorpusLiteral(List.of(after, before, independent), needles, 100, searched, null)
+                    && !CpuTools.verifyCorpusLiteral(List.of(M3File.load(moved), after, independent),
+                    needles, 100, searched, null)
+                    && !CpuTools.verifyCorpusLiteral(corpus, List.of("right", "left"), 100, searched, null),
+                    "file ordering, substituted URI and pattern order are receipt-bound");
+            var cappedCorpus = CpuTools.corpusLiteral(corpus, needles, 2);
+            check(!cappedCorpus.complete() && cappedCorpus.size() == 2 && cappedCorpus.scannedFiles() == 1
+                    && cappedCorpus.hit(1).patternId() == 1,
+                    "global cap observes a third hit without scanning later files");
+            check(CpuTools.corpusLiteral(List.of(before, after), List.of("not-found"), 0).complete()
+                    && CpuTools.corpusLiteral(List.of(), needles, 0).scannedFiles() == 0,
+                    "zero-cap no-hit and empty ordered corpus are complete");
+            Counter corpusMonitor = new Counter();
+            check(CpuTools.corpusLiteral(corpus, needles, 100, corpusMonitor).sha256()
+                    .equals(searched.sha256()) && corpusMonitor.worked == 1 && corpusMonitor.finished == 0,
+                    "corpus search receipt deterministic with borrowed progress monitor");
+            corpusMonitor.cancelled = true;
+            try {
+                CpuTools.corpusLiteral(corpus, needles, 100, corpusMonitor);
+                throw new AssertionError("cancelled corpus search executed");
+            } catch (CancellationException expected) { check(true, "corpus search cancellation observed"); }
             CpuTools.FileDiff result = CpuTools.diff(before, after, 1);
             check(result.complete() && result.distance() == 1, "shortest insert/delete script");
             check(result.sha256().matches("[0-9a-f]{64}"), "two-source receipt");
@@ -141,6 +175,10 @@ public final class M3BoundedDiffTest {
             check(CpuTools.verifyLineMerge(before, after, independent, 2, lineMerged, null)
                     && !CpuTools.verifyLineMerge(M3File.load(original), after, independent, 2, lineMerged, null),
                     "immutable admitted line-merge snapshot differs from changed filesystem source");
+            check(CpuTools.verifyCorpusLiteral(corpus, needles, 100, searched, null)
+                    && !CpuTools.verifyCorpusLiteral(List.of(M3File.load(original), after, independent),
+                    needles, 100, searched, null),
+                    "admitted corpus snapshots survive disk mutation without transferring identity");
             check(CpuTools.verifyMerge(before, after, independent, 1, merged, null),
                     "three-way receipt retains admitted snapshot after underlying disk change");
             check(!CpuTools.verifyMerge(M3File.load(original), after, independent, 1, merged, null),

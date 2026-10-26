@@ -70,7 +70,7 @@ pack has no runtime dependency on `com.synexia`.
 | `com.m3.tools.text.normalize` | JDK Unicode normalization |
 | `com.m3.tools.text.tokenize` | JDK word-break tokenization |
 | `com.m3.tools.text.regex` | Direct JDK regex match API with a match-count cap |
-| `com.m3.tools.text.search` | Exact overlapping UTF-16 literal positions |
+| `com.m3.tools.text.search` | Exact overlapping UTF-16 literal positions and one-plan ordered-corpus search |
 | `com.m3.tools.text.ngram` | Overlapping UTF-16 n-gram counts |
 | `com.m3.tools.text.frequency` | Exact term counts |
 | `com.m3.tools.text.similarity` | Bounded UTF-16 Levenshtein distance |
@@ -212,6 +212,25 @@ Borrowed progress monitors are checked cooperatively at operation, selected
 loop and emission boundaries; a long library call may complete before the
 next check. Direct donor APIs retain their individual limits, and are not
 automatically governed by a `CpuTools.Session`.
+
+The existing `MultiLiteralSearch.Prepared` uses one primitive-lane compiled
+Aho-Corasick automaton for exact overlapping UTF-16 literal matching. Its new
+`findCorpus` scans up to 4,096 ordered `String` owners (64 Mi UTF-16 units
+combined, 16 Mi units per owner) without concatenating them; search state
+resets at each source boundary so cross-file phantom matches cannot appear.
+An exact global cap of 1,000,000 hits retains the file/end-offset/longer-first/
+duplicate-pattern-ID prefix and checks one additional hit before reporting
+`complete=false`. A zero cap can still be complete when no source contains a
+hit. Source and pattern limits are validated before scanning, even if an
+earlier file would exhaust the result cap. Results retain four primitive
+int-array hit lanes, not a second input text collection; immutable API hit
+records are projected on demand. `CpuTools.corpusLiteral` shares that prepared
+plan over immutable `M3File` snapshots and seals **every ordered** URI,
+raw-byte SHA-256, UTF-16 SHA-256, source length, the plan identity, global cap,
+scanned-file count and exact emitted coordinates. `verifyCorpusLiteral`
+recomputes. These APIs do not interpret regex syntax, which remains owned by
+`Pattern`/M3Regex, and do not claim universal full-text indexing or query
+engine performance.
 
 The direct regex API uses the JDK regex engine; its match-count cap does not
 make arbitrary regex execution time-bounded. The graph distance sentinel

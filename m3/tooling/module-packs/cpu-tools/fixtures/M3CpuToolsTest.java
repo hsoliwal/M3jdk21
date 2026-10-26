@@ -295,6 +295,36 @@ public final class M3CpuToolsTest {
         check(CpuTools.verifyMultiLiteral(source, patterns, 3, many, null), "multi-literal replay");
         check(!CpuTools.verifyMultiLiteral(source, patterns, 4, many, null), "multi-literal cap binding");
         check(!CpuTools.verifyMultiLiteral(changed, patterns, 3, many, null), "multi-literal file binding");
+        List<M3File> searchableFiles = List.of(source, target, changed);
+        List<String> corpusPatterns = List.of("aba", "ba", "\ud83d\ude42");
+        var corpus = CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 100);
+        check(corpus.complete() && corpus.scannedFiles() == 3 && corpus.size() > 5,
+                "one prepared automaton scans all M3File text owners without joining sources");
+        check(corpus.hit(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 0, 0, 3))
+                && corpus.hit(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 1, 1, 3)),
+                "global file order and local UTF-16 coordinates preserve overlapping literal order");
+        check(CpuTools.verifyCorpusLiteral(searchableFiles, corpusPatterns, 100, corpus, null)
+                && corpus.sha256().matches("[0-9a-f]{64}"),
+                "all ordered file hashes, query identity and result coordinates reexecute");
+        check(!CpuTools.verifyCorpusLiteral(List.of(target, source, changed), corpusPatterns, 100, corpus, null)
+                && !CpuTools.verifyCorpusLiteral(List.of(M3File.load(copied), target, changed),
+                corpusPatterns, 100, corpus, null)
+                && !CpuTools.verifyCorpusLiteral(searchableFiles, List.of("ba", "aba"), 100, corpus, null),
+                "file ordinals, same-byte alternate URI, query order are receipt-bound");
+        var cappedCorpus = CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 2);
+        check(!cappedCorpus.complete() && cappedCorpus.scannedFiles() == 1
+                && cappedCorpus.hits().equals(corpus.hits().subList(0, 2)),
+                "one-extra-hit truncation preserves exact global search prefix");
+        var emptyCorpus = CpuTools.corpusLiteral(List.of(), corpusPatterns, 0);
+        check(emptyCorpus.complete() && emptyCorpus.scannedFiles() == 0 && emptyCorpus.size() == 0,
+                "empty corpus has no false incomplete result");
+        var corpusMonitor = new CountMonitor();
+        check(CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 100, corpusMonitor).sha256()
+                .equals(corpus.sha256()) && corpusMonitor.work == 1 && corpusMonitor.finished == 0,
+                "corpus result deterministic with borrowed progress monitor");
+        corpusMonitor.cancelled = true;
+        expect(CancellationException.class,
+                () -> CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 100, corpusMonitor));
         var grams = CpuTools.gramIndex(source, 2);
         check(grams.sha256().matches("[0-9a-f]{64}") && grams.gramSize() == 2
                 && grams.windowCount() == source.length() - 1, "source-bound indexed gram receipt");

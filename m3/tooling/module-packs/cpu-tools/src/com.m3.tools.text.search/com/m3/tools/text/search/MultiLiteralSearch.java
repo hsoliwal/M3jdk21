@@ -28,10 +28,47 @@ public final class MultiLiteralSearch {
     public static final int MAX_PATTERN_UNITS = 1_000_000;
     public static final int MAX_TEXT_UNITS = 16 * 1024 * 1024;
     public static final int MAX_HITS = 1_000_000;
+    public static final int MAX_CORPUS_DOCUMENTS = 4_096;
+    public static final int MAX_CORPUS_UTF16 = 64 * 1024 * 1024;
 
     private MultiLiteralSearch() { }
 
     public record Hit(int patternId, int start, int end) { }
+
+    /** A hit in one numbered input String, with that String's own UTF-16 offsets. */
+    public record CorpusHit(int documentId, int patternId, int start, int end) { }
+
+    /** Compact immutable result: primitive owner lanes, projected API records only on access. */
+    public static final class CorpusResult {
+        private final int[] documents;
+        private final int[] patterns;
+        private final int[] starts;
+        private final int[] ends;
+        private final boolean complete;
+        private final int scannedDocuments;
+
+        private CorpusResult(int[] documents, int[] patterns, int[] starts, int[] ends,
+                             int size, boolean complete, int scannedDocuments) {
+            this.documents = Arrays.copyOf(documents, size);
+            this.patterns = Arrays.copyOf(patterns, size);
+            this.starts = Arrays.copyOf(starts, size);
+            this.ends = Arrays.copyOf(ends, size);
+            this.complete = complete;
+            this.scannedDocuments = scannedDocuments;
+        }
+
+        public int size() { return documents.length; }
+        public boolean complete() { return complete; }
+        public int scannedDocuments() { return scannedDocuments; }
+        public CorpusHit hit(int ordinal) {
+            return new CorpusHit(documents[ordinal], patterns[ordinal], starts[ordinal], ends[ordinal]);
+        }
+        public List<CorpusHit> hits() {
+            List<CorpusHit> result = new ArrayList<>(size());
+            for (int i = 0; i < size(); i++) result.add(hit(i));
+            return List.copyOf(result);
+        }
+    }
 
     /** A bounded, immutable primitive-lane result; Hit objects are only API projections. */
     public static final class Result {
@@ -171,6 +208,66 @@ public final class MultiLiteralSearch {
             }
             checkpoint.run();
             return new Result(ids, starts, ends, count, true);
+        }
+
+        public CorpusResult findCorpus(List<String> texts, int maxHits) {
+            return findCorpus(texts, maxHits, () -> { });
+        }
+
+        /**
+         * Search an ordered corpus with this <em>one</em> immutable automaton.
+         * File boundaries reset its match state: no synthetic cross-file hits.
+         * The global hit budget retains the exact file/end-offset/priority prefix,
+         * observing one additional hit to prove truncation. All inputs are
+         * validated before scanning so later invalid sources cannot be hidden
+         * by a result cap. No input String is retained by the result.
+         */
+        public CorpusResult findCorpus(List<String> texts, int maxHits, Runnable checkpoint) {
+            Objects.requireNonNull(texts, "texts");
+            Objects.requireNonNull(checkpoint, "checkpoint");
+            if (texts.size() > MAX_CORPUS_DOCUMENTS) throw new IllegalArgumentException("corpus document budget");
+            if (maxHits < 0 || maxHits > MAX_HITS) throw new IllegalArgumentException("corpus hit budget");
+            checkpoint.run();
+            List<String> inputs = List.copyOf(texts);
+            long sourceUnits = 0;
+            for (String input : inputs) {
+                checkpoint.run();
+                if (input.length() > MAX_TEXT_UNITS) throw new IllegalArgumentException("document UTF-16 budget");
+                sourceUnits += input.length();
+                if (sourceUnits > MAX_CORPUS_UTF16) throw new IllegalArgumentException("corpus UTF-16 budget");
+            }
+
+            int[] documents = new int[Math.min(maxHits, 16)];
+            int[] ids = new int[documents.length];
+            int[] starts = new int[documents.length];
+            int[] ends = new int[documents.length];
+            int count = 0;
+            int scanned = 0;
+            boolean complete = true;
+            for (int ordinal = 0; ordinal < inputs.size(); ordinal++) {
+                checkpoint.run();
+                Result found = find(inputs.get(ordinal), maxHits - count, checkpoint);
+                int needed = count + found.size();
+                if (needed > documents.length) {
+                    int capacity = Math.min(maxHits, Math.max(needed, Math.max(16, documents.length * 2)));
+                    documents = Arrays.copyOf(documents, capacity);
+                    ids = Arrays.copyOf(ids, capacity);
+                    starts = Arrays.copyOf(starts, capacity);
+                    ends = Arrays.copyOf(ends, capacity);
+                }
+                Arrays.fill(documents, count, needed, ordinal);
+                System.arraycopy(found.ids, 0, ids, count, found.size());
+                System.arraycopy(found.starts, 0, starts, count, found.size());
+                System.arraycopy(found.ends, 0, ends, count, found.size());
+                count = needed;
+                scanned++;
+                if (!found.complete()) {
+                    complete = false;
+                    break;
+                }
+            }
+            checkpoint.run();
+            return new CorpusResult(documents, ids, starts, ends, count, complete, scanned);
         }
 
         private int transition(int state, char unit) {

@@ -444,6 +444,86 @@ public final class CpuTools {
                 && actual.hits().equals(expected.hits());
     }
 
+    /** Exact ordered-corpus search; stores only primitive hit lanes and a source receipt. */
+    public static final class CorpusSearch {
+        private final MultiLiteralSearch.CorpusResult result;
+        private final String sha256;
+
+        private CorpusSearch(MultiLiteralSearch.CorpusResult result, String sha256) {
+            this.result = result;
+            this.sha256 = sha256;
+        }
+
+        public int size() { return result.size(); }
+        public boolean complete() { return result.complete(); }
+        public int scannedFiles() { return result.scannedDocuments(); }
+        public MultiLiteralSearch.CorpusHit hit(int ordinal) { return result.hit(ordinal); }
+        public List<MultiLiteralSearch.CorpusHit> hits() { return result.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static CorpusSearch corpusLiteral(List<M3File> sources, List<String> literals, int maxHits) {
+        return corpusLiteral(sources, literals, maxHits, null);
+    }
+
+    /**
+     * Prepare the incumbent Aho-Corasick automaton once for all immutable
+     * M3File snapshots; each snapshot retains its own original UTF-16 offsets.
+     * The receipt seals <em>every</em> ordered file even when the global cap
+     * stops scanning early. No file reopen or concatenated source is required.
+     */
+    public static CorpusSearch corpusLiteral(List<M3File> sources, List<String> literals,
+                                             int maxHits, ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        if (sources.size() > MultiLiteralSearch.MAX_CORPUS_DOCUMENTS) {
+            throw new IllegalArgumentException("corpus file count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-corpus-literal-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<String> texts = new ArrayList<>(snapshot.size());
+        long units = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File file = snapshot.get(id);
+            units += file.length();
+            if (file.length() > MultiLiteralSearch.MAX_TEXT_UNITS
+                    || units > MultiLiteralSearch.MAX_CORPUS_UTF16) {
+                throw new IllegalArgumentException("corpus UTF-16 source budget");
+            }
+            hash.number(id).text(file.uri().toASCIIString()).text(file.rawSha256())
+                    .text(file.utf16Sha256()).number(file.byteLength()).number(file.length());
+            texts.add(file.text());
+        }
+        MultiLiteralSearch.Prepared plan = MultiLiteralSearch.prepare(literals, progress::checkCancelled);
+        MultiLiteralSearch.CorpusResult result = plan.findCorpus(texts, maxHits, progress::checkCancelled);
+        hash.text(plan.sha256()).number(maxHits).number(result.size())
+                .number(result.scannedDocuments()).number(result.complete() ? 1 : 0);
+        for (int i = 0; i < result.size(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            MultiLiteralSearch.CorpusHit hit = result.hit(i);
+            hash.number(hit.documentId()).number(hit.patternId()).number(hit.start()).number(hit.end());
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new CorpusSearch(result, hash.finish());
+    }
+
+    /** Re-execute the one-plan corpus search and verify exact identities and positions. */
+    public static boolean verifyCorpusLiteral(List<M3File> sources, List<String> literals, int maxHits,
+                                              CorpusSearch expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        CorpusSearch actual = corpusLiteral(sources, literals, maxHits, monitor);
+        if (!actual.sha256().equals(expected.sha256()) || actual.complete() != expected.complete()
+                || actual.scannedFiles() != expected.scannedFiles() || actual.size() != expected.size()) return false;
+        for (int i = 0; i < actual.size(); i++) {
+            if (!actual.hit(i).equals(expected.hit(i))) return false;
+        }
+        return true;
+    }
+
     /** One bounded immutable lexicon from the existing JDK word-break owner. */
     public static final int MAX_AFFIX_SOURCE_UTF16 = 262_144;
 

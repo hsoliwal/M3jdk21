@@ -52,7 +52,7 @@ public final class M3DonorToolsTest {
     private M3DonorToolsTest() { }
 
     public static void main(String[] args) throws Exception {
-        text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
+        text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); corpusSearch(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
         boundedDiff(); threeWayMerge(); lineIndexedDiff(); lineThreeWayMerge();
         System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
                 + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
@@ -717,6 +717,86 @@ public final class M3DonorToolsTest {
                         (MultiLiteralSearch.Hit hit) -> patterns.get(hit.patternId()).length()).reversed())
                 .thenComparingInt(MultiLiteralSearch.Hit::patternId));
         return matches;
+    }
+
+    /** Independent nested-loop oracle for ordered files, boundary reset and one global cap. */
+    private static void corpusSearch() throws Exception {
+        var plan = MultiLiteralSearch.prepare(List.of("aba", "ba", "aba", "\ud800", "\ud83d\ude42"));
+        var files = List.of("", "ab", "a", "aba", "\ud800", "aba\ud83d\ude42");
+        List<MultiLiteralSearch.CorpusHit> oracle = bruteCorpus(files,
+                List.of("aba", "ba", "aba", "\ud800", "\ud83d\ude42"));
+        var all = plan.findCorpus(files, 100);
+        check(all.complete() && all.scannedDocuments() == files.size() && all.hits().equals(oracle),
+                "one prepared multi-pattern automaton searches all files without cross-file hits");
+        rejects(UnsupportedOperationException.class, () -> all.hits().clear());
+        check(plan.findCorpus(List.of("ab", "a"), 10).size() == 0,
+                "a literal spanning adjacent files is never a match");
+        check(plan.findCorpus(List.of(), 0).complete() && plan.findCorpus(List.of(), 0).scannedDocuments() == 0,
+                "zero-document corpus is complete");
+        var zero = plan.findCorpus(List.of("", "aba", "aba"), 0);
+        check(!zero.complete() && zero.size() == 0 && zero.scannedDocuments() == 2,
+                "zero-cap query proves truncation in second file with one extra hit");
+        var one = plan.findCorpus(files, 1);
+        check(!one.complete() && one.scannedDocuments() == 4 && one.size() == 1
+                && one.hit(0).equals(oracle.getFirst()), "global first-hit cap stops at the correct file");
+        check(plan.findCorpus(files, 100).hits().equals(all.hits()), "repeat corpus search deterministic");
+        rejects(NullPointerException.class, () -> plan.findCorpus(null, 1));
+        rejects(NullPointerException.class, () -> plan.findCorpus(List.of("a"), 1, null));
+        rejects(NullPointerException.class, () -> plan.findCorpus(Arrays.asList("a", null), 1));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(List.of("a"), -1));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(List.of("a"),
+                MultiLiteralSearch.MAX_HITS + 1));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(
+                Collections.nCopies(MultiLiteralSearch.MAX_CORPUS_DOCUMENTS + 1, ""), 0));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(
+                List.of("a".repeat(MultiLiteralSearch.MAX_TEXT_UNITS + 1)), 0));
+        String maxInput = "a".repeat(MultiLiteralSearch.MAX_TEXT_UNITS);
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(
+                Collections.nCopies(5, maxInput), 0));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(List.of("aba", maxInput), 1,
+                () -> { throw new IllegalArgumentException("cancel early"); }));
+        check(plan.findCorpus(List.of(""), 0).complete(), "empty source with zero cap is complete");
+
+        for (int trial = 0; trial < 1_400; trial++) {
+            int count = RANDOM.nextInt(10);
+            List<String> corpus = new ArrayList<>();
+            for (int i = 0; i < count; i++) corpus.add(randomText(56));
+            List<String> needles = new ArrayList<>();
+            int patterns = RANDOM.nextInt(1, 10);
+            for (int i = 0; i < patterns; i++) {
+                String literal;
+                if (i > 0 && RANDOM.nextInt(4) == 0) literal = needles.get(RANDOM.nextInt(i));
+                else if (!corpus.isEmpty() && !corpus.get(RANDOM.nextInt(corpus.size())).isEmpty()
+                        && RANDOM.nextBoolean()) {
+                    String source = corpus.get(RANDOM.nextInt(corpus.size()));
+                    literal = source.isEmpty() ? "a" : source.substring(0, Math.min(source.length(), 3));
+                } else literal = randomText(4) + "a";
+                needles.add(literal);
+            }
+            MultiLiteralSearch.Prepared prepared = MultiLiteralSearch.prepare(needles);
+            List<MultiLiteralSearch.CorpusHit> expected = bruteCorpus(corpus, needles);
+            for (int cap : new int[]{0, 1, 3, 15, 600}) {
+                var actual = prepared.findCorpus(corpus, cap);
+                check(actual.size() == Math.min(cap, expected.size())
+                        && actual.complete() == (expected.size() <= cap),
+                        "global corpus cap and completeness vs independent nested loops");
+                check(actual.hits().equals(expected.subList(0, Math.min(cap, expected.size()))),
+                        "UTF-16 file/pattern/offset and priority order vs independent oracle");
+                check(actual.scannedDocuments() <= corpus.size()
+                        && (actual.complete() ? actual.scannedDocuments() == corpus.size() : true),
+                        "scanned-file count is exact on full scan and bounded on truncated scan");
+            }
+        }
+    }
+
+    private static List<MultiLiteralSearch.CorpusHit> bruteCorpus(List<String> files, List<String> patterns) {
+        List<MultiLiteralSearch.CorpusHit> hits = new ArrayList<>();
+        for (int documentId = 0; documentId < files.size(); documentId++) {
+            for (MultiLiteralSearch.Hit hit : bruteMulti(files.get(documentId), patterns)) {
+                hits.add(new MultiLiteralSearch.CorpusHit(documentId, hit.patternId(), hit.start(), hit.end()));
+            }
+        }
+        return hits;
     }
 
     private static void multiSearchAndSignatures() throws Exception {
