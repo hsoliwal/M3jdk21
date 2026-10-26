@@ -50,10 +50,7 @@ public class M3StringConcatTupleTest {
         Random random = new Random(0x4d3353545249L);
         for (Class<?> type : TYPES) {
             MethodHandle mh = (MethodHandle) stringifier.invoke(null, type);
-            if (type == String.class) {
-                check(mh == null, "String needs no stringifier");
-                continue;
-            }
+            check(mh != null, "Every reference, including nullable String, needs conversion");
             check(mh.type().returnType() == String.class && mh.type().parameterCount() == 1, "stringifier type " + mh.type());
             Class<?> param = mh.type().parameterType(0);
             check(type.isPrimitive() ? param == type : param == Object.class,

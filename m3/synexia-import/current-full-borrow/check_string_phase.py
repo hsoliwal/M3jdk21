@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import io
 import json
 import re
 import sys
@@ -131,6 +132,16 @@ EXPECTED_STRING_CHAIN = (
     ("42399d411c1516a56a47dcdb10242960157b4677",
      "35ed998540e044eed8cb7596e2e2c019ae369bd3", "11448", "898"),
 )
+
+
+# Current product-source custody is separate from the immutable historical chain.
+# These observations do not qualify runtime behavior or advance the String phase.
+CURRENT_OBSERVATION = Path(__file__).with_name("string-source-observation-v3.tsv")
+CURRENT_OBSERVATION_HEADER = [
+    "schema", "target_path", "predecessor_git_blob", "observed_git_blob",
+    "observed_product_commit", "product_pr", "canonical_recipe_pr", "state",
+]
+EXPECTED_OBSERVATION_SHA256 = "9bf825a448b991faed6d829cd6916606eb8e141abb9fbe6cc735e15fd8886578"
 
 SUCCESSOR_MARKERS = {
     "src/java.base/share/classes/java/lang/M3String.java": (
@@ -286,6 +297,43 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
         current[M3_STRING_PATH] = after
     return current
 
+
+
+def current_target_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
+    """Project sealed source observations over history, without accepting runtime behavior."""
+    current = {row["target_path"]: row["target_git_blob"] for row in mapping_rows}
+    successors = current_successor_blobs(mapping_rows)
+    current.update(successors)
+    precompute = load_precompute_observation()
+    validate_precompute_mapping(mapping_rows, precompute)
+    if precompute["target_path"] in successors:
+        raise ValueError("M3String precompute owner collides with V1 successor chain")
+    current[precompute["target_path"]] = precompute["current_target_git_blob"]
+
+    # Hash and parse the same bytes; never auto-refresh from the live worktree.
+    data = CURRENT_OBSERVATION.read_bytes()
+    if hashlib.sha256(data).hexdigest() != EXPECTED_OBSERVATION_SHA256:
+        raise ValueError("unreviewed current String source observation")
+    reader = csv.DictReader(io.StringIO(data.decode("utf-8")), delimiter="\t")
+    if reader.fieldnames != CURRENT_OBSERVATION_HEADER:
+        raise ValueError("invalid current String source observation header")
+    seen: set[str] = set()
+    for row in reader:
+        target = row["target_path"]
+        if target in seen or target not in current:
+            raise ValueError("duplicate or unmapped String observation owner: " + target)
+        if row["predecessor_git_blob"] != current[target]:
+            raise ValueError("String observation predecessor drift: " + target)
+        if (row["schema"] != "M3JDK21_STRING_SOURCE_OBSERVATION_V3"
+                or row["state"] != "SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED"
+                or not HEX40.fullmatch(row["observed_git_blob"])
+                or row["observed_git_blob"] == current[target]):
+            raise ValueError("invalid current String source observation: " + target)
+        seen.add(target)
+        current[target] = row["observed_git_blob"]
+    if len(seen) != 9:
+        raise ValueError("current String source observation cardinality drift")
+    return current
 
 
 def load_precompute_observation() -> dict[str, str]:
@@ -492,14 +540,7 @@ def main(argv: list[str]) -> int:
 
     rows = load_tsv(MAP, HEADER)
     successors = approved_successors(rows)
-    current_blobs = current_successor_blobs(rows)
-    precompute_observation = load_precompute_observation()
-    validate_precompute_mapping(rows, precompute_observation)
-    if precompute_observation["target_path"] in current_blobs:
-        raise ValueError("M3String precompute owner collides with V1 successor chain")
-    current_blobs[precompute_observation["target_path"]] = (
-        precompute_observation["current_target_git_blob"]
-    )
+    current_blobs = current_target_blobs(rows)
     relations: set[str] = set()
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in HEADER):

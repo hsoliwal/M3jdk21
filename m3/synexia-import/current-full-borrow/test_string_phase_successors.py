@@ -51,7 +51,7 @@ class StringTargetSuccessorTest(unittest.TestCase):
         for target, row in receipts.items():
             path = phase.ROOT / target
             self.assertTrue(path.is_file(), target)
-            self.assertEqual(phase.current_successor_blobs(self.mapping())[target],
+            self.assertEqual(phase.current_target_blobs(self.mapping())[target],
                              phase.git_blob(path), target)
             phase.validate_successor_source(target, path.read_text(encoding="utf-8"))
 
@@ -292,6 +292,79 @@ class StringTargetSuccessorTest(unittest.TestCase):
         if not target.is_file():
             self.skipTest("M3JDK receiver source tree is not present")
         self.assertEqual(row["current_target_git_blob"], phase.git_blob(target))
+
+
+    def test_current_observation_covers_every_live_mapped_owner(self):
+        current = phase.current_target_blobs(self.mapping())
+        self.assertEqual({row["target_path"] for row in self.mapping()}, set(current))
+        for target, expected in current.items():
+            self.assertEqual(expected, phase.git_blob(phase.ROOT / target), target)
+
+    def test_current_observation_preserves_historical_chain(self):
+        self.assertEqual("35ed998540e044eed8cb7596e2e2c019ae369bd3",
+                         phase.current_successor_blobs(self.mapping())[phase.M3_STRING_PATH])
+        self.assertEqual("8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
+                         phase.current_target_blobs(self.mapping())[phase.M3_STRING_PATH])
+        self.assertEqual("75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
+                         phase.git_blob(phase.SUCCESSOR_CHAIN))
+
+    def observation_rows(self):
+        return phase.load_tsv(phase.CURRENT_OBSERVATION, phase.CURRENT_OBSERVATION_HEADER)
+
+    def with_observation(self, rows, callback):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "observation.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=phase.CURRENT_OBSERVATION_HEADER,
+                                        delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(rows)
+            with patch.object(phase, "CURRENT_OBSERVATION", path):
+                callback()
+
+    def test_current_observation_refuses_every_mutated_field_and_shape(self):
+        rows = self.observation_rows()
+        self.assertEqual(9, len(rows))
+        cases = [rows[:-1], rows + [rows[0].copy()], list(reversed(rows))]
+        for index in range(len(rows)):
+            for field in phase.CURRENT_OBSERVATION_HEADER:
+                changed = [row.copy() for row in rows]
+                changed[index][field] = "unreviewed"
+                cases.append(changed)
+        for changed in cases:
+            self.with_observation(changed, lambda: self.assertRaises(
+                ValueError, phase.current_target_blobs, self.mapping()))
+
+    def test_current_observation_refuses_missing_file(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            with patch.object(phase, "CURRENT_OBSERVATION", Path(temporary) / "absent.tsv"):
+                with self.assertRaises(FileNotFoundError):
+                    phase.current_target_blobs(self.mapping())
+
+    def test_current_observation_refuses_wrong_non_successor_predecessor(self):
+        rows = self.mapping()
+        for row in rows:
+            if row["target_path"].endswith("/M3StringOwner.java"):
+                row["target_git_blob"] = "0" * 40
+        with self.assertRaisesRegex(ValueError, "observation predecessor drift"):
+            phase.current_target_blobs(rows)
+
+    def test_current_observation_never_promotes_the_receiving_phase(self):
+        for row in self.observation_rows():
+            self.assertEqual("SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED", row["state"])
+            self.assertEqual("a3b398b4a5bd263b09de4b19cdc5c2995abf594a",
+                             row["observed_product_commit"])
+        phase.validate_name_mapping()
+
+    def test_current_source_gate_refuses_each_drifted_live_owner(self):
+        real_blob = phase.git_blob
+        for row in self.observation_rows():
+            target = phase.ROOT / row["target_path"]
+            def corrupt(path):
+                return "0" * 40 if path == target else real_blob(path)
+            with patch.object(phase, "git_blob", side_effect=corrupt):
+                with self.assertRaisesRegex(ValueError, "target owner drift"):
+                    phase.main(["check_string_phase.py"])
 
 
 if __name__ == "__main__":

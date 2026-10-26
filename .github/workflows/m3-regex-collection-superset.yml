@@ -31,6 +31,11 @@ on:
       - 'test/jdk/java/lang/StringBuffer/StringBufferRepeatCache8322512Test.java'
       - 'test/jdk/java/util/Arrays/HashCode8312164.java'
       - 'test/jdk/java/lang/String/libM3RegexNativeRouteProbe.c'
+      - 'src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java'
+      - 'test/jdk/java/lang/String/M3StringConcatTupleTest.java'
+      - 'test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java'
+      - 'm3/runtime-integration/check-m3string-concat-reference-dag.py'
+      - 'm3/runtime-integration/test_m3string_concat_reference_dag.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -81,6 +86,11 @@ jobs:
           ba2fbfa349a865c4337cdb15a97f3df6c79baa47ec0bf97491859ba918860250  test/jdk/java/lang/StringBuffer/StringBufferRepeatCache8322512Test.java
           f608c1c8a262cfb7ab021210cd93f64715055e8b31b37841079f835539e10225  test/jdk/java/util/Arrays/HashCode8312164.java
           c4b8c58308f51d327ea435ab4ce991b47c8e47d3f8572c2bb79f36d47f9a5d6c  test/jdk/java/lang/String/libM3RegexNativeRouteProbe.c
+          732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052  src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java
+          3038926c2dc0a9bcfbbcf1698212d02e3283770cd42bb6ad0ab7e6804bd2d39c  test/jdk/java/lang/String/M3StringConcatTupleTest.java
+          e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95  test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java
+          d47702f58be8a6cda8fa96b02f79cd30de22fb09c9fd869df3cef100f1f2c54b  m3/runtime-integration/check-m3string-concat-reference-dag.py
+          d14e92451af4bdbdbaacabd7a71f26431531c00a9e6b4ab677ea5fe46eda1edc  m3/runtime-integration/test_m3string_concat_reference_dag.py
           SEALED
           while read -r expected path; do
             test -f "$path"
@@ -263,3 +273,25 @@ jobs:
           "$jdk_home/bin/java" -cp "$tests" -XX:+CompactStrings HashCode8312164
           "$jdk_home/bin/java" -cp "$tests" -XX:-CompactStrings HashCode8312164
           echo "M3JDK21_RECONCILED_UPSTREAM_REGRESSIONS_PASS"
+      - name: Qualify nullable String concat through the original factory
+        shell: bash
+        run: |
+          set -euo pipefail
+          jdk_home="$(cat "$RUNNER_TEMP/m3-integrated/image.txt")"
+          tests="$RUNNER_TEMP/m3-concat-tests"
+          mkdir -p "$tests"
+          "$jdk_home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror -d "$tests" test/jdk/java/lang/String/M3StringConcatTupleTest.java test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java
+          "$jdk_home/bin/java" -Xcheck:jni --add-opens java.base/java.lang.invoke=ALL-UNNAMED -cp "$tests" M3StringConcatTupleTest
+          for mode in -Xmixed -Xint; do
+            for compact in -XX:+CompactStrings -XX:-CompactStrings; do
+              "$jdk_home/bin/java" "$mode" "$compact" -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage --add-opens java.base/java.lang.invoke=ALL-UNNAMED -cp "$tests" M3StringConcatTupleTest invoke
+              "$jdk_home/bin/java" "$mode" "$compact" -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage --add-opens java.base/java.lang=ALL-UNNAMED -cp "$tests" M3StringConcatReferenceDagTest
+            done
+          done
+          echo "M3JDK21_NULLABLE_STRING_CONCAT_PASS"
+      - name: Refuse nullable concat source-gate regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/runtime-integration/test_m3string_concat_reference_dag.py -v
+          python3 m3/runtime-integration/check-m3string-concat-reference-dag.py

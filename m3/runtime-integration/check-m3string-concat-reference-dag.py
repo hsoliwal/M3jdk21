@@ -90,7 +90,6 @@ for fragment in [
     "MethodHandle stringifier = m3Stringifier(mt.parameterType(i));",
     "mh = MethodHandles.filterArguments(mh, 0, stringifiers);",
     "private static MethodHandle m3Stringifier(Class<?> type)",
-    "if (type == String.class)",
     "return stringValueOf(type);",
     "return stringValueOf(int.class).asType(methodType(String.class, type));",
     "return floatStringifier();",
@@ -102,6 +101,18 @@ for fragment in [
 ]:
     if fragment not in factory:
         raise SystemExit(f"M3_STRING_CONCAT_RECEIVER_FAIL|stringifier={fragment}")
+
+# Scope nullable-reference admission to its original private owner, so an unrelated
+# objectStringifier call elsewhere cannot satisfy the corrected gateway contract.
+stringifier_start = factory.find("private static MethodHandle m3Stringifier(Class<?> type) {")
+stringifier_end = factory.find("\n    }", stringifier_start)
+if stringifier_start < 0 or stringifier_end < 0:
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|cannot_bound_m3Stringifier")
+stringifier_body = factory[stringifier_start:stringifier_end]
+if "type == String.class" in stringifier_body or "return null;" in stringifier_body:
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|nullable_reference_bypass")
+if not stringifier_body.rstrip().endswith("return objectStringifier();"):
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|reference_gateway")
 
 if "static String stringOf(Object value)" not in helper:
     raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|stringOf authority missing")

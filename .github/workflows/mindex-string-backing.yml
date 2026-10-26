@@ -15,6 +15,10 @@ on:
       - 'm3/synexia-import/current-full-borrow/string-phase-gates.tsv'
       - 'm3/synexia-import/current-full-borrow/string-phase-work-orders.tsv'
       - 'm3/synexia-import/current-full-borrow/check_string_phase.py'
+      - 'm3/synexia-import/current-full-borrow/test_string_phase_successors.py'
+      - 'm3/synexia-import/current-full-borrow/string-target-successors.tsv'
+      - 'm3/synexia-import/current-full-borrow/string-target-successor-chain.tsv'
+      - 'm3/synexia-import/current-full-borrow/string-source-observation-v3.tsv'
       - 'm3/synexia-import/current-full-borrow/receiver-status.tsv'
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
       - 'm3/docs/string-precompute-completeness.tsv'
@@ -40,6 +44,7 @@ on:
       - 'src/java.base/share/classes/java/lang/M3String*.java'
       - 'src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java'
       - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java'
       - 'src/java.base/share/classes/java/lang/StringConcatHelper.java'
       - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
       - 'test/jdk/java/lang/String/M3MappedStringBackingTest.java'
@@ -116,7 +121,9 @@ jobs:
       - name: Check current MIndexString history parity
         run: python3 m3/runtime-integration/check-m3string-history-recovery.py
       - name: Check compiler concat reference DAG
-        run: python3 m3/runtime-integration/check-m3string-concat-reference-dag.py
+        run: |
+          python3 m3/runtime-integration/test_m3string_concat_reference_dag.py -v
+          python3 m3/runtime-integration/check-m3string-concat-reference-dag.py
       - name: Check bounded M3 String code-point geometry
         run: python3 m3/runtime-integration/check-m3string-codepoint-geometry.py
       - name: Check conservative literal String.matches receiver
