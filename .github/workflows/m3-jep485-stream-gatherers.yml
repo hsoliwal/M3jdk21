@@ -153,12 +153,17 @@ jobs:
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 
+      - name: Get checksum-pinned JTReg toolchain
+        id: jtreg
+        uses: ./.github/actions/get-jtreg
+
       - name: Configure Java 21-compatible JDK
         shell: bash
         run: |
           set -euo pipefail
           bash configure \
             --with-boot-jdk="$JAVA_HOME" \
+            --with-jtreg="${{ steps.jtreg.outputs.path }}" \
             --with-debug-level=release \
             --with-jvm-variants=server \
             --disable-warnings-as-errors
