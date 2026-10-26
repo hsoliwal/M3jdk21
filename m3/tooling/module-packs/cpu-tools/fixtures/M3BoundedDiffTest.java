@@ -95,6 +95,50 @@ public final class M3BoundedDiffTest {
                 CpuTools.regexCorpus(corpus, "right", 5, regexMonitor);
                 throw new AssertionError("cancelled regex corpus executed");
             } catch (CancellationException expected) { check(true, "regex corpus cancellation observed"); }
+            var preparedRank = CpuTools.prepareRanking(corpus);
+            check(preparedRank.documentCount() == corpus.size()
+                    && preparedRank.corpusSha256().matches("[0-9a-f]{64}")
+                    && preparedRank.sourceSha256().matches("[0-9a-f]{64}"),
+                    "one immutable BM25 corpus prepared from exact M3File owners");
+            for (List<String> query : List.of(List.of("left"), List.of("right"),
+                    List.of("left", "right"), List.of("missing"), List.<String>of())) {
+                for (int cap : new int[]{0, 1, 3, 10}) {
+                    var ranked = preparedRank.rank(query, cap);
+                    var direct = CpuTools.rank(corpus, query, cap);
+                    check(ranked.totalMatches() == direct.totalMatches()
+                                    && ranked.complete() == direct.complete()
+                                    && ranked.hits().equals(direct.hits()),
+                            "prepared queries match independent original one-shot BM25 API");
+                    check(preparedRank.verify(query, cap, ranked, null)
+                                    && CpuTools.verifyPreparedRank(corpus, query, cap, ranked, null),
+                            "cached and source-rebuilt verifiers reproduce exact scored ordinals");
+                }
+            }
+            var rankingReceipt = preparedRank.rank(List.of("right"), 2);
+            check(!preparedRank.verify(List.of("left"), 2, rankingReceipt, null)
+                            && !CpuTools.verifyPreparedRank(List.of(after, before, independent),
+                            List.of("right"), 2, rankingReceipt, null)
+                            && !CpuTools.verifyPreparedRank(List.of(M3File.load(moved), after, independent),
+                            List.of("right"), 2, rankingReceipt, null),
+                    "BM25 prepared receipt binds exact query, file order and same-byte URI substitution");
+            Counter prepMonitor = new Counter();
+            var monitoredRank = CpuTools.prepareRanking(corpus, prepMonitor);
+            check(monitoredRank.sourceSha256().equals(preparedRank.sourceSha256())
+                            && prepMonitor.worked == 1 && prepMonitor.finished == 0,
+                    "preparation performs one borrowed-progress unit and retains stable source SHA");
+            check(monitoredRank.rank(List.of("left"), 1, prepMonitor).hits()
+                            .equals(preparedRank.rank(List.of("left"), 1).hits())
+                            && prepMonitor.worked == 2 && prepMonitor.finished == 0,
+                    "repeated query reuses read-only posting plan with independent progress");
+            prepMonitor.cancelled = true;
+            try {
+                monitoredRank.rank(List.of("left"), 1, prepMonitor);
+                throw new AssertionError("cancelled cached rank executed");
+            } catch (CancellationException expected) { check(true, "cached rank cancellation observed"); }
+            try {
+                CpuTools.prepareRanking(corpus, prepMonitor);
+                throw new AssertionError("cancelled prepare executed");
+            } catch (CancellationException expected) { check(true, "BM25 preparation cancellation observed"); }
             CpuTools.FileDiff result = CpuTools.diff(before, after, 1);
             check(result.complete() && result.distance() == 1, "shortest insert/delete script");
             check(result.sha256().matches("[0-9a-f]{64}"), "two-source receipt");
@@ -214,6 +258,10 @@ public final class M3BoundedDiffTest {
                     && !CpuTools.verifyRegexCorpus(List.of(M3File.load(original), after, independent),
                     "right", 5, regex, null),
                     "admitted immutable regex snapshots survive file mutation but cannot transfer receipt");
+            check(CpuTools.verifyPreparedRank(corpus, List.of("right"), 2, rankingReceipt, null)
+                    && !CpuTools.verifyPreparedRank(List.of(M3File.load(original), after, independent),
+                    List.of("right"), 2, rankingReceipt, null),
+                    "existing prepared BM25 plan survives file mutation, newly loaded data cannot claim receipt");
             check(CpuTools.verifyMerge(before, after, independent, 1, merged, null),
                     "three-way receipt retains admitted snapshot after underlying disk change");
             check(!CpuTools.verifyMerge(M3File.load(original), after, independent, 1, merged, null),

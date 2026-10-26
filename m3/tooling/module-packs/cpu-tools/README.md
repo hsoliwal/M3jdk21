@@ -250,6 +250,32 @@ time or stack consumption: a pathological `Matcher.find` invocation is not
 preemptible by the cooperative progress monitor. Untrusted regexes require
 external time/resource isolation; no ReDoS-safety claim is made.
 
+For repeated retrieval against unchanged source files,
+`CpuTools.prepareRanking(List<M3File>[, ProgressMonitor])` performs **one**
+bounded source-admission/tokenization pass and retains the incumbent immutable
+`Bm25Ranker.Prepared` primitive posting index. Each
+`PreparedRanking.rank(query, maxResults[, monitor])` changes only query-time
+work; it does not reopen any M3File, re-tokenize source files or rebuild the
+BM25 index. Result scores, total match counts, ranking/tie order and cap
+completeness equal the existing `CpuTools.rank` one-shot implementation for
+the same ordered corpus/query. The prepared source SHA seals **all ordered**
+file URI, raw/UTF-16 digests and byte/character lengths, the exact prepared
+BM25 corpus SHA and default BM25 parameters. Each query gets a distinct
+canonical source- and query-bound receipt over exact UTF-16 query units and
+scored output lanes. `PreparedRanking.verify` replays one query against its
+immutable plan; `CpuTools.verifyPreparedRank` additionally rebuilds the plan
+from newly supplied source snapshots to test full source admission. The prior
+`CpuTools.rank` API and its v1 receipt remain unchanged. The same 4 Mi
+combined source UTF-16 bound, 10,000 document cap, 1,000,000 token cap,
+1,024 query terms and 10,000 result cap apply. The source-bound prepared
+index is read-only and owns no retained file handles or duplicate source text.
+Scores are approximate BM25 relevance signals, **not** identity or semantic
+proofs. Preparation cost must be included when comparing one-shot latency.
+The optional `fixtures/M3PreparedRankBenchmark.java` measures separately
+prepared-index admission, repeated query time and the original full one-shot
+path, including a one-query control and parity checks. One synthetic JVM
+measurement is not a production latency or allocation guarantee.
+
 The graph distance sentinel
 `Long.MAX_VALUE` covers unreachable, exact-maximum and overflowing distances, and must
 not be interpreted as a proved unreachable state. Floating-point moments

@@ -359,6 +359,44 @@ public final class M3CpuToolsTest {
                 () -> CpuTools.regexCorpus(searchableFiles, "a", -1));
         expect(java.util.regex.PatternSyntaxException.class,
                 () -> CpuTools.regexCorpus(searchableFiles, "[", 1));
+        var cachedRank = CpuTools.prepareRanking(searchableFiles);
+        check(cachedRank.documentCount() == 3 && cachedRank.corpusSha256().matches("[0-9a-f]{64}")
+                && cachedRank.sourceSha256().matches("[0-9a-f]{64}"),
+                "BM25 source admission and posting construction occur once for multiple queries");
+        for (List<String> query : List.of(List.of("ababa"), List.of("changed"),
+                List.of("ababa", "changed"), List.<String>of())) {
+            for (int limit : new int[]{0, 1, 2, 3}) {
+                var ranked = cachedRank.rank(query, limit);
+                var oneShot = CpuTools.rank(searchableFiles, query, limit);
+                check(ranked.totalMatches() == oneShot.totalMatches()
+                        && ranked.complete() == oneShot.complete()
+                        && ranked.hits().equals(oneShot.hits()),
+                        "cached source postings exactly match original independent one-shot BM25 computation");
+                check(cachedRank.verify(query, limit, ranked, null)
+                        && CpuTools.verifyPreparedRank(searchableFiles, query, limit, ranked, null),
+                        "both query-only and full source re-admission verify score/ordinal receipts");
+            }
+        }
+        var rankReceipt = cachedRank.rank(List.of("ababa"), 2);
+        check(!cachedRank.verify(List.of("changed"), 2, rankReceipt, null)
+                && !CpuTools.verifyPreparedRank(List.of(target, source, changed),
+                List.of("ababa"), 2, rankReceipt, null)
+                && !CpuTools.verifyPreparedRank(List.of(M3File.load(copied), target, changed),
+                List.of("ababa"), 2, rankReceipt, null),
+                "prepared rank source/URI order and query data are identity-bound");
+        var cachedMonitor = new CountMonitor();
+        var monitoredPlan = CpuTools.prepareRanking(searchableFiles, cachedMonitor);
+        check(monitoredPlan.sourceSha256().equals(cachedRank.sourceSha256())
+                && cachedMonitor.work == 1 && cachedMonitor.finished == 0,
+                "source-only preparation borrows progress and creates a canonical source digest");
+        check(monitoredPlan.rank(List.of("ababa"), 2, cachedMonitor).hits().equals(rankReceipt.hits())
+                && cachedMonitor.work == 2 && cachedMonitor.finished == 0,
+                "query execution reuses prepared index and borrows independent progress");
+        cachedMonitor.cancelled = true;
+        expect(CancellationException.class,
+                () -> monitoredPlan.rank(List.of("ababa"), 2, cachedMonitor));
+        expect(CancellationException.class,
+                () -> CpuTools.prepareRanking(searchableFiles, cachedMonitor));
         var grams = CpuTools.gramIndex(source, 2);
         check(grams.sha256().matches("[0-9a-f]{64}") && grams.gramSize() == 2
                 && grams.windowCount() == source.length() - 1, "source-bound indexed gram receipt");

@@ -1262,6 +1262,128 @@ public final class CpuTools {
     }
 
     /**
+     * Read-only, parent-owned BM25 posting plan bound to one ordered source corpus.
+     * It deliberately retains neither the input M3File objects nor their decoded
+     * String/text token lists after preparation: only the incumbent BM25 index
+     * and a canonical immutable source identity survive between queries.
+     */
+    public static final class PreparedRanking {
+        private final Bm25Ranker.Prepared corpus;
+        private final String sourceSha256;
+
+        private PreparedRanking(Bm25Ranker.Prepared corpus, String sourceSha256) {
+            this.corpus = corpus;
+            this.sourceSha256 = sourceSha256;
+        }
+
+        public int documentCount() { return corpus.documentCount(); }
+        public double averageDocumentLength() { return corpus.averageDocumentLength(); }
+        public String corpusSha256() { return corpus.sha256(); }
+        public String sourceSha256() { return sourceSha256; }
+
+        public Ranking rank(List<String> query, int maxResults) {
+            return rank(query, maxResults, null);
+        }
+
+        /**
+         * One query uses the original prepared primitive postings and BM25 scoring
+         * without repeated file decoding, tokenization, or corpus preparation.
+         * Queries are independently copied; the borrowed monitor is never ended.
+         */
+        public Ranking rank(List<String> query, int maxResults, ProgressMonitor monitor) {
+            List<String> immutableQuery = List.copyOf(Objects.requireNonNull(query, "query"));
+            ProgressMonitor progress = effective(monitor);
+            progress.checkCancelled();
+            Bm25Ranker.Result ranked = corpus.rank(immutableQuery, maxResults, progress::checkCancelled);
+            Canonical hash = new Canonical("m3-cpu-bm25-prepared-query-v1").text(Implementation.ROOT)
+                    .text(sourceSha256).text(corpus.sha256()).number(maxResults)
+                    .number(ranked.totalMatches()).number(ranked.complete() ? 1 : 0)
+                    .number(immutableQuery.size());
+            for (String token : immutableQuery) {
+                progress.checkCancelled();
+                hash.number(token.length());
+                for (int i = 0; i < token.length(); i++) {
+                    if ((i & 4095) == 0) progress.checkCancelled();
+                    hash.number(token.charAt(i));
+                }
+            }
+            hash.number(ranked.size());
+            for (int id = 0; id < ranked.size(); id++) {
+                progress.checkCancelled();
+                Bm25Ranker.Hit hit = ranked.hit(id);
+                hash.number(hit.documentId()).number(Double.doubleToLongBits(hit.score()));
+            }
+            progress.worked(1);
+            progress.checkCancelled();
+            return new Ranking(ranked, hash.finish());
+        }
+
+        /** Same prepared graph replay; full source re-admission is a separate entry point. */
+        public boolean verify(List<String> query, int maxResults, Ranking expected,
+                              ProgressMonitor monitor) {
+            Objects.requireNonNull(expected, "expected");
+            Ranking actual = rank(query, maxResults, monitor);
+            return actual.sha256().equals(expected.sha256())
+                    && actual.totalMatches() == expected.totalMatches()
+                    && actual.complete() == expected.complete()
+                    && actual.hits().equals(expected.hits());
+        }
+    }
+
+    public static PreparedRanking prepareRanking(List<M3File> sources) {
+        return prepareRanking(sources, null);
+    }
+
+    /**
+     * One deterministic admission pass over immutable M3File source snapshots.
+     * Subsequent calls to PreparedRanking.rank perform only query-time work.
+     * The previous CpuTools.rank direct API and v1 receipts are left unchanged.
+     */
+    public static PreparedRanking prepareRanking(List<M3File> sources, ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        if (sources.size() > Bm25Ranker.MAX_DOCUMENTS) {
+            throw new IllegalArgumentException("prepared rank source-count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-bm25-prepared-files-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<List<String>> documents = new ArrayList<>(snapshot.size());
+        int units = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File source = snapshot.get(id);
+            units = Math.addExact(units, source.length());
+            if (units > MAX_RANK_SOURCE_UTF16) {
+                throw new IllegalArgumentException("prepared rank UTF-16 source budget");
+            }
+            hash.number(id).text(source.uri().toASCIIString()).text(source.rawSha256())
+                    .text(source.utf16Sha256()).number(source.byteLength()).number(source.length());
+            documents.add(WordTokenizer.words(source.text(), progress::checkCancelled));
+        }
+        Bm25Ranker.Prepared prepared = Bm25Ranker.prepare(
+                documents, Bm25Ranker.Parameters.defaults(), progress::checkCancelled);
+        hash.text(prepared.sha256()).number(prepared.documentCount())
+                .number(Double.doubleToLongBits(prepared.parameters().k1()))
+                .number(Double.doubleToLongBits(prepared.parameters().b()));
+        progress.worked(1);
+        progress.checkCancelled();
+        return new PreparedRanking(prepared, hash.finish());
+    }
+
+    /**
+     * Independent re-execution admits fresh source identities and rebuilds the
+     * prepared index before recomputing one query. A saved SHA alone is not proof.
+     */
+    public static boolean verifyPreparedRank(List<M3File> sources, List<String> query, int maxResults,
+                                             Ranking expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        PreparedRanking prepared = prepareRanking(sources, monitor);
+        return prepared.verify(query, maxResults, expected, monitor);
+    }
+
+    /**
      * Binds an existing DAG receipt to an admitted file's bytes, characters and location.
      * The check prevents attaching a receipt for different input text to this source.
      * This is an integrity receipt, not a signature or a substitute for replay.
