@@ -35,7 +35,7 @@ jobs:
           old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java').read_bytes()
           new = Path('m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java').read_bytes()
           assert hashlib.sha256(old).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
-          assert hashlib.sha256(new).hexdigest() == 'be567e756470fbb96d1aeec7c5b21b4eacae77136ed3854bf965189bce07353f'
+          assert hashlib.sha256(new).hexdigest() == '488d21e74727cb6bb019874a9506d96a8009e2511f604d59875668d79e8a9fda'
           normalized = new.replace(
               b'package com.m3.collections.queue;',
               b'package com.m3.collections.guava;')
@@ -47,8 +47,21 @@ jobs:
           assert old.count(old_capacity) == 1
           assert new.count(new_capacity) == 1
           normalized = normalized.replace(new_capacity, old_capacity)
+          old_render = b'            // The provider renders through a distinct internal owner: outer self is not special.\n            text.append(cursor.next());'
+          new_render = b'            // Preserve direct self-reference rendering per JDK Collection semantics.\n            Object value = cursor.next();\n            text.append(value == this ? "(this Collection)" : value);'
+          assert old.count(old_render) == 1
+          assert new.count(new_render) == 1
+          normalized = normalized.replace(new_render, old_render)
+          old_growth_target = b'        long target = oldLength + jump;'
+          new_growth_target = b'        long target = Math.min(oldLength + jump, (long) maxSize + 1);'
+          old_growth_fallback = b'        return minimum > ARRAY_LIMIT ? Integer.MAX_VALUE : ARRAY_LIMIT;'
+          new_growth_fallback = b'        return (int) Math.min(minimum > ARRAY_LIMIT ? Integer.MAX_VALUE : ARRAY_LIMIT,\n                (long) maxSize + 1);'
+          assert old.count(old_growth_target) == 1 and new.count(new_growth_target) == 1
+          assert old.count(old_growth_fallback) == 1 and new.count(new_growth_fallback) == 1
+          normalized = normalized.replace(new_growth_target, old_growth_target)
+          normalized = normalized.replace(new_growth_fallback, old_growth_fallback)
           assert normalized == old
-          print('Sealed canonical implementation differs only by admitted private lazy-capacity atom')
+          print('Sealed canonical implementation differs only by admitted capacity, direct-self and bounded-growth atoms')
           PY
       - name: Build both standalone M3JDK21 Java 21 queue modules
         run: |
