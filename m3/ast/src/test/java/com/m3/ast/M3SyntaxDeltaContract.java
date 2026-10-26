@@ -91,6 +91,42 @@ public final class M3SyntaxDeltaContract {
                 unchanged(doubled, doubled));
         check(noGuess.candidates() == 1 && noGuess.newNodeForOld(1) == -1
                 && noGuess.newNodeForOld(2) == -1, "ambiguous zero-width nodes never arbitrarily matched");
+        // Old source may contain TWO identical zero-width recovery occurrences,
+        // while the independently reparsed source contains only ONE. A single
+        // available new node is still ambiguous and must not steal the first old.
+        var oneBuilder = M3SyntaxTree.builder("partial/error", new byte[] {'a'});
+        oneBuilder.open("file", "", 0, M3SyntaxTree.NAMED);
+        oneBuilder.leaf("missing", "expected", 1, 1, M3SyntaxTree.TOKEN | M3SyntaxTree.MISSING);
+        oneBuilder.close(1);
+        var one = oneBuilder.build();
+        var oldDuplicate = M3SyntaxDelta.match(new M3SyntaxIndex(doubled),
+                new M3SyntaxIndex(one), unchanged(doubled, one));
+        check(oldDuplicate.candidates() == 0
+                && oldDuplicate.newNodeForOld(1) == -1
+                && oldDuplicate.newNodeForOld(2) == -1
+                && oldDuplicate.oldNodeForNew(1) == -1,
+                "two equivalent old occurrences cannot claim one new recovery token");
+        var newDuplicate = M3SyntaxDelta.match(new M3SyntaxIndex(one),
+                new M3SyntaxIndex(doubled), unchanged(one, doubled));
+        check(newDuplicate.candidates() == 0
+                && newDuplicate.newNodeForOld(1) == -1,
+                "one old recovery token cannot claim two equivalent new occurrences");
+        var unique = M3SyntaxDelta.match(new M3SyntaxIndex(one),
+                new M3SyntaxIndex(one), unchanged(one, one));
+        check(unique.candidates() == one.size() && unique.newNodeForOld(1) == 1,
+                "unique recovery token still matches bidirectionally");
+        var tripleBuilder = M3SyntaxTree.builder("partial/error", new byte[] {'a'});
+        tripleBuilder.open("file", "", 0, M3SyntaxTree.NAMED);
+        for (int i = 0; i < 3; i++)
+            tripleBuilder.leaf("missing", "expected", 1, 1, M3SyntaxTree.TOKEN | M3SyntaxTree.MISSING);
+        tripleBuilder.close(1);
+        var triple = tripleBuilder.build();
+        var threeToOne = M3SyntaxDelta.match(new M3SyntaxIndex(triple),
+                new M3SyntaxIndex(one), unchanged(triple, one));
+        check(threeToOne.candidates() == 0
+                && threeToOne.oldNodeForNew(1) == -1
+                && Arrays.equals(threeToOne.oldUnmatched(), new int[] {0, 1, 2, 3}),
+                "third indistinguishable old token cannot reinstate an invalidated match");
         var longBuilder = M3SyntaxTree.builder("large/js", new byte[1200]);
         longBuilder.open("file", "", 0, 0);
         for (int i = 0; i < 1200; i++)
