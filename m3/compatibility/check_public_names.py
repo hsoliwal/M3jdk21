@@ -89,9 +89,12 @@ def valid_passive_receipt(path: str, text: str | None) -> bool:
         return (header[0] == "schema" and "target_path" in header
                 and all(row[0] == schema
                         and safe_receipt_target(row[header.index("target_path")])
-                        and row[header.index("target_path")].startswith(
-                            "src/java.base/share/classes/java/lang/")
-                        and row[header.index("target_path")].endswith(".java")
+                        and (row[header.index("target_path")].startswith(
+                                 "src/java.base/share/classes/java/lang/")
+                             and row[header.index("target_path")].endswith(".java")
+                             or row[header.index("target_path")] in (
+                                 "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+                                 "src/java.base/share/native/libjava/String.c"))
                         for row in body))
     return False
 

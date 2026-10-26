@@ -137,6 +137,15 @@ class PublicNamesTest(unittest.TestCase):
         self.assertTrue(self.issue(filename, data.replace("src/java.base/share/classes/java/lang/", "../")))
         self.assertTrue(self.issue(filename, data.replace("M3String.java", "../M3String.java")))
         self.assertTrue(self.issue(filename, data.replace("M3String.java", "M3String.class")))
+        self.assertFalse(self.issue(filename, data.replace(
+            "src/java.base/share/classes/java/lang/M3String.java",
+            "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")))
+        self.assertFalse(self.issue(filename, data.replace(
+            "src/java.base/share/classes/java/lang/M3String.java",
+            "src/java.base/share/native/libjava/String.c")))
+        self.assertTrue(self.issue(filename, data.replace(
+            "src/java.base/share/classes/java/lang/M3String.java",
+            "src/java.base/share/native/libjava/Other.c")))
         successor = "m3/synexia-import/current-full-borrow/string-target-successor-v4.tsv"
         self.assertFalse(self.issue(successor, data.replace(
             "SOURCE_OBSERVATION_V3", "TARGET_SUCCESSOR_V4")))
