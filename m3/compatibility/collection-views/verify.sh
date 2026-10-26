@@ -7,10 +7,15 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 OUT="$1"
 [[ "$OUT" == /* && ! -e "$OUT" ]] || { echo 'require a new absolute output directory' >&2; exit 2; }
 mkdir -p "$OUT"
+# Exact current-owner successor; historical seals below remain passive history only.
+# Succession receipt: m3/compatibility/collection-views/current-source-receipt.json
+# Superseded owner SHA-256: 6759e1c605be7c52c3471767879cfa4aec7751e220699f6af49a43ba0902660b
+test "$(git -C "$ROOT" hash-object "$ROOT/src/java.base/share/classes/java/util/CollectionViews.java")" = "3f2c3eecb6a0c239025ac7051b5bd4f3e6953605"
 (cd "$ROOT" && sha256sum -c <<'SEALS'
-6759e1c605be7c52c3471767879cfa4aec7751e220699f6af49a43ba0902660b  src/java.base/share/classes/java/util/CollectionViews.java
+1c811f4473088c46e39e9621eb27380806e420fe09062072e413d48af78059c0  src/java.base/share/classes/java/util/CollectionViews.java
 a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d  m3/compatibility/collection-views/preimage/CollectionViews.java.txt
 f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6  test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
+96904ca4643c5dff2ff1cb9b51223e6dd21e4c2dde4a73ca9d6d56f372bd2c61  test/jdk/java/util/CollectionViews/CollectionViewsBatchAdmissionTest.java
 SEALS
 ) | tee "$OUT/seals.log"
 java -version > "$OUT/java-version.log" 2>&1
@@ -26,6 +31,7 @@ javap -public -s "$OUT/after-classes/java/util/CollectionViews.class" > "$OUT/ab
 diff -u "$OUT/abi-before.txt" "$OUT/abi-after.txt" > "$OUT/abi-diff.txt"
 javac --patch-module java.base="$OUT/after-classes" --add-modules jdk.management -Xlint:all -Werror -d "$OUT/test-classes" \
     "$ROOT/test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java" \
+    "$ROOT/test/jdk/java/util/CollectionViews/CollectionViewsBatchAdmissionTest.java" \
     "$ROOT/test/jdk/java/util/CollectionViews/BootstrapViewsTest.java" \
     "$ROOT/test/jdk/java/util/CollectionViews/RunSearchJni.java" \
     "$ROOT/test/jdk/java/util/CollectionViews/CollectionViewsContract.java"
@@ -50,6 +56,7 @@ for mode in default interpreter c1 c2; do
     grep -q 'StoredRepresentativeOracle PASS checks=' "$OUT/oracle-$mode.log"
     cat "$OUT/oracle-$mode.log"
 done
+java --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" CollectionViewsBatchAdmissionTest | tee "$OUT/batch-admission.log"
 java --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" BootstrapViewsTest | tee "$OUT/bootstrap.log"
 java -Xss256k --add-opens java.base/java.util=ALL-UNNAMED --add-modules jdk.management \
     --patch-module java.base="$OUT/after-classes" -cp "$OUT/test-classes" CollectionViewsContract | tee "$OUT/contract.log"
