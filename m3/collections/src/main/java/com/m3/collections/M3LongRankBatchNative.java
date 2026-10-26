@@ -1246,4 +1246,129 @@ public final class M3LongRankBatchNative {
 
     private static native void closestWindowStarts0(long[] sorted, long[] targets,
             int targetFrom, int length, int k, int[] starts, int startFrom);
+
+    // LeetCode #719: smallest distance pair, lifted to signed-long M3 lanes.
+    // All coordinates are physical positions in a private sorted snapshot.
+    private static final int NATIVE_MIN_KTH_PAIR_SIZE = 256;
+    private static final int NATIVE_MIN_KTH_PAIR_BATCH = 8;
+    private static volatile boolean KTH_PAIR_ABI_MISSING;
+
+    /** One-based selection; reject a mathematical distance > Long.MAX_VALUE. */
+    static long kthPairDistance(long[] sorted, long rank) {
+        Objects.requireNonNull(sorted, "sorted");
+        long total = (long) sorted.length * (sorted.length - 1) / 2;
+        if (rank < 1 || rank > total) {
+            throw new IndexOutOfBoundsException("pair rank is outside [1, n*(n-1)/2]");
+        }
+        long representable = pairDistanceCountJava(sorted, Long.MAX_VALUE);
+        if (rank > representable) {
+            throw new ArithmeticException("selected pair distance exceeds Long.MAX_VALUE");
+        }
+        if (AVAILABLE && !KTH_PAIR_ABI_MISSING
+                && sorted.length >= NATIVE_MIN_KTH_PAIR_SIZE) {
+            long[] target = {rank};
+            long[] output = new long[1];
+            try {
+                kthPairDistancesInto0(sorted, target, 0, 1, output, 0);
+                return output[0];
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                KTH_PAIR_ABI_MISSING = true;
+            }
+        }
+        return kthPairDistanceJava(sorted, rank);
+    }
+
+    /** One-based LeetCode #719 query vector; no result-boxing or payload copy. */
+    static long[] kthPairDistances(long[] sorted, long[] ranks) {
+        Objects.requireNonNull(ranks, "ranks");
+        long[] output = new long[ranks.length];
+        kthPairDistancesInto(sorted, ranks, 0, ranks.length, output, 0, false);
+        return output;
+    }
+
+    /** Explicit JNI tests may require the new native export without fallback. */
+    static long[] kthPairDistancesNativeRequired(long[] sorted, long[] ranks) {
+        Objects.requireNonNull(ranks, "ranks");
+        long[] output = new long[ranks.length];
+        kthPairDistancesInto(sorted, ranks, 0, ranks.length, output, 0, true);
+        return output;
+    }
+
+    /**
+     * Validates the entire rank window before writing any result. Rejects
+     * aliases to source or rank arrays, including overlap with a caller's
+     * output range. The original m3rankbatch JNI owner uses bounded pages.
+     */
+    static void kthPairDistancesInto(long[] sorted, long[] ranks, int rankFrom,
+            int length, long[] output, int outputFrom, boolean nativeRequired) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(ranks, "ranks");
+        Objects.requireNonNull(output, "output");
+        Objects.checkFromIndexSize(rankFrom, length, ranks.length);
+        Objects.checkFromIndexSize(outputFrom, length, output.length);
+        if (output == sorted || output == ranks) {
+            throw new IllegalArgumentException("pair-selection output aliases input");
+        }
+        long total = (long) sorted.length * (sorted.length - 1) / 2;
+        for (int i = 0; i < length; i++) {
+            long rank = ranks[rankFrom + i];
+            if (rank < 1 || rank > total) {
+                throw new IndexOutOfBoundsException("pair rank is outside [1, n*(n-1)/2]");
+            }
+        }
+        // A signed long cannot encode every distance across the complete
+        // Long.MIN_VALUE..Long.MAX_VALUE domain. Check before ANY write.
+        if (length != 0) {
+            long representable = pairDistanceCountJava(sorted, Long.MAX_VALUE);
+            for (int i = 0; i < length; i++) {
+                if (ranks[rankFrom + i] > representable) {
+                    throw new ArithmeticException("selected pair distance exceeds Long.MAX_VALUE");
+                }
+            }
+        }
+        if (nativeRequired) {
+            if (!AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3rankbatch k-th pair distance ABI unavailable");
+            }
+            if (length != 0) {
+                kthPairDistancesInto0(sorted, ranks, rankFrom, length, output, outputFrom);
+            }
+            return;
+        }
+        if (AVAILABLE && !KTH_PAIR_ABI_MISSING
+                && sorted.length >= NATIVE_MIN_KTH_PAIR_SIZE
+                && length >= NATIVE_MIN_KTH_PAIR_BATCH) {
+            try {
+                kthPairDistancesInto0(sorted, ranks, rankFrom, length, output, outputFrom);
+                return;
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                KTH_PAIR_ABI_MISSING = true;
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            output[outputFrom + i] = kthPairDistanceJava(sorted, ranks[rankFrom + i]);
+        }
+    }
+
+    /** Java reference kernel: monotone two-pointer count and 63-bit bisection. */
+    private static long kthPairDistanceJava(long[] sorted, long rank) {
+        int n = sorted.length;
+        long span = sorted[n - 1] - sorted[0];
+        long high = Long.compareUnsigned(span, Long.MAX_VALUE) > 0
+                ? Long.MAX_VALUE : span;
+        long low = 0L;
+        while (low < high) {
+            long midpoint = low + ((high - low) >>> 1);
+            if (pairDistanceCountJava(sorted, midpoint) >= rank) {
+                high = midpoint;
+            } else {
+                low = midpoint + 1;
+            }
+        }
+        return low;
+    }
+
+    /** Existing m3rankbatch shared JNI library; no new native module. */
+    private static native void kthPairDistancesInto0(long[] sorted, long[] ranks,
+            int rankFrom, int length, long[] output, int outputFrom);
 }

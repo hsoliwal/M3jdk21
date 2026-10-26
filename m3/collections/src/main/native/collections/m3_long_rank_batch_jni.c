@@ -1702,3 +1702,104 @@ Java_com_m3_collections_M3LongRankBatchNative_closestWindowStarts0(
         done += chunk;
     }
 }
+
+/* LeetCode #719: batched k-th pair distance over existing signed-long JNI rank owner.
+ * Selects one-based ranks, returning exact representable distances only.
+ * Reuses the existing fixed 256-entry array-region pages for pair counts;
+ * no Java heap pointer, Java comparator or callback crosses the JNI boundary.
+ */
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_kthPairDistancesInto0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray ranks,
+        jint rank_from, jint length, jlongArray output, jint output_from) {
+    (void) ignored;
+    if (sorted == NULL || ranks == NULL || output == NULL) {
+        m3_pair_distance_throw(env, "java/lang/NullPointerException", "null k-th pair batch");
+        return;
+    }
+    if ((*env)->IsSameObject(env, sorted, output)
+            || (*env)->IsSameObject(env, ranks, output)) {
+        m3_pair_distance_throw(env, "java/lang/IllegalArgumentException",
+                "pair-selection output aliases input");
+        return;
+    }
+    jsize size = (*env)->GetArrayLength(env, sorted);
+    jsize ranks_count = (*env)->GetArrayLength(env, ranks);
+    jsize output_count = (*env)->GetArrayLength(env, output);
+    if (rank_from < 0 || length < 0 || output_from < 0
+            || length > ranks_count || rank_from > ranks_count - length
+            || length > output_count || output_from > output_count - length) {
+        m3_pair_distance_throw(env, "java/lang/IndexOutOfBoundsException",
+                "k-th pair selection window outside array");
+        return;
+    }
+    if (length == 0) return;
+
+    /* The maximum pair count fits jlong even for the maximum Java array. */
+    jlong total = (jlong) size * ((jlong) size - 1) / 2;
+    jlong selected[128];
+    /* Prevalidate EVERY rank before publishing ANY result prefix. */
+    for (jint done = 0; done < length;) {
+        jint chunk = length - done;
+        if (chunk > 128) chunk = 128;
+        (*env)->GetLongArrayRegion(env, ranks, rank_from + done, chunk, selected);
+        if ((*env)->ExceptionCheck(env)) return;
+        for (jint i = 0; i < chunk; i++) {
+            if (selected[i] < 1 || selected[i] > total) {
+                m3_pair_distance_throw(env, "java/lang/IndexOutOfBoundsException",
+                        "k-th pair rank outside [1, n*(n-1)/2]");
+                return;
+            }
+        }
+        done += chunk;
+    }
+    m3_pair_distance_page left_page = {{0}, -1, 0};
+    m3_pair_distance_page right_page = {{0}, -1, 0};
+    jlong representable = 0;
+    if (!m3_pair_distance_count(env, sorted, size, INT64_MAX,
+            &left_page, &right_page, &representable)) return;
+    for (jint done = 0; done < length;) {
+        jint chunk = length - done;
+        if (chunk > 128) chunk = 128;
+        (*env)->GetLongArrayRegion(env, ranks, rank_from + done, chunk, selected);
+        if ((*env)->ExceptionCheck(env)) return;
+        for (jint i = 0; i < chunk; i++) {
+            if (selected[i] > representable) {
+                m3_pair_distance_throw(env, "java/lang/ArithmeticException",
+                        "selected pair distance exceeds Long.MAX_VALUE");
+                return;
+            }
+        }
+        done += chunk;
+    }
+
+    jlong first, last;
+    if (!m3_pair_distance_read(env, sorted, size, 0, &left_page, &first)
+            || !m3_pair_distance_read(env, sorted, size, size - 1, &right_page, &last)) {
+        return;
+    }
+    uint64_t extent = (uint64_t) last - (uint64_t) first;
+    jlong bound = extent > (uint64_t) INT64_MAX ? INT64_MAX : (jlong) extent;
+    jlong results[128];
+    for (jint done = 0; done < length;) {
+        jint chunk = length - done;
+        if (chunk > 128) chunk = 128;
+        (*env)->GetLongArrayRegion(env, ranks, rank_from + done, chunk, selected);
+        if ((*env)->ExceptionCheck(env)) return;
+        for (jint i = 0; i < chunk; i++) {
+            jlong low = 0, high = bound;
+            while (low < high) {
+                jlong middle = low + (high - low) / 2;
+                jlong at_most = 0;
+                if (!m3_pair_distance_count(env, sorted, size, middle,
+                        &left_page, &right_page, &at_most)) return;
+                if (at_most >= selected[i]) high = middle;
+                else low = middle + 1;
+            }
+            results[i] = low;
+        }
+        (*env)->SetLongArrayRegion(env, output, output_from + done, chunk, results);
+        if ((*env)->ExceptionCheck(env)) return;
+        done += chunk;
+    }
+}

@@ -468,6 +468,32 @@ public final class M3LongRankIndex {
 
 
     /**
+     * LeetCode #719: one-based k-th smallest absolute difference among all
+     * unordered occurrence pairs in the original immutable signed-long
+     * snapshot. Duplicate physical occurrences remain independent pairs.
+     *
+     * <p>Distances above Long.MAX_VALUE have no signed-long representation
+     * and fail with ArithmeticException instead of wrapping. Invalid ranks
+     * fail with IndexOutOfBoundsException. Uses the original m3rankbatch
+     * Java/native primitive kernel; no Java callback crosses JNI.</p>
+     */
+    public long kthPairDistance(long oneBasedRank) {
+        return M3LongRankBatchNative.kthPairDistance(values, oneBasedRank);
+    }
+
+    /** Selects multiple one-based pair-distance ranks without per-pair objects. */
+    public long[] kthPairDistances(long[] oneBasedRanks) {
+        return M3LongRankBatchNative.kthPairDistances(values, oneBasedRanks);
+    }
+
+    /** Writes selected pair distances into caller-owned output offsets. */
+    public void kthPairDistancesInto(long[] ranks, int rankFrom, int length,
+            long[] output, int outputFrom) {
+        M3LongRankBatchNative.kthPairDistancesInto(
+                values, ranks, rankFrom, length, output, outputFrom, false);
+    }
+
+    /**
      * LeetCode #658: primitive starting coordinates of the k nearest elements
      * for each query, over this original immutable signed-long index.
      * If distances tie, the lower value wins; equal-value windows use the
