@@ -85,8 +85,27 @@ public final class M3SyntaxGreenPoolContract {
         reject(IndexOutOfBoundsException.class, () -> pool.childGreen(first.rootGreen(), 4));
         var tiny = new M3SyntaxGreenPool(2, 100);
         reject(IllegalStateException.class, () -> tiny.intern(a));
+        ok(tiny.uniqueGreens() == 0 && tiny.childReferences() == 0
+                && tiny.retainedLiteralBytes() == 0,
+                "node budget refusal rolls back every partial green");
         var byteLimited = new M3SyntaxGreenPool(100, 0);
         reject(IllegalStateException.class, () -> byteLimited.intern(a));
+        ok(byteLimited.uniqueGreens() == 0 && byteLimited.retainedLiteralBytes() == 0,
+                "literal budget refusal leaves no retained syntax");
+        // Two leaves can be admitted but an ancestor exceeds literal capacity;
+        // the next import must start from an empty canonical pool.
+        var partial = new M3SyntaxGreenPool(100, 2);
+        reject(IllegalStateException.class, () -> partial.intern(a));
+        ok(partial.uniqueGreens() == 0 && partial.childReferences() == 0
+                && partial.retainedLiteralBytes() == 0,
+                "ancestor capacity rejection rolls back already-interned leaves");
+        var simple = M3SyntaxTree.builder("tiny", new byte[] {'x'});
+        simple.open("token", "", 0, M3SyntaxTree.TOKEN);
+        simple.close(1);
+        var recoveredTiny = partial.intern(simple.build());
+        ok(recoveredTiny.rootGreen() == 0 && partial.uniqueGreens() == 1
+                && Arrays.equals(partial.render(0, 1), new byte[] {'x'}),
+                "a previously refused pool remains reusable without corrupted hash slots");
         byte[] utf8 = "é😀".getBytes(StandardCharsets.UTF_8);
         var mono = M3SyntaxTree.builder("unicode", utf8);
         mono.open("file", "", 0, 0);

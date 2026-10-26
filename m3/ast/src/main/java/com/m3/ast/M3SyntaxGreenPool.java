@@ -67,6 +67,9 @@ public final class M3SyntaxGreenPool {
         M3SyntaxIndex index = new M3SyntaxIndex(tree);
         byte[] source = tree.sourceBytes();
         int[] occurrence = new int[tree.size()];
+        int previousGreens = greens, previousChildren = childSize;
+        int previousGaps = gapSize, previousLiterals = literalSize;
+        try {
         // Parent IDs are resolved only after all children: no recursion or red nodes.
         for (int node = tree.size() - 1; node >= 0; node--) {
             byte[] digest = HexFormat.of().parseHex(index.subtreeSha256(node));
@@ -94,6 +97,20 @@ public final class M3SyntaxGreenPool {
             occurrence[node] = id;
         }
         return new Projection(tree, occurrence);
+        } catch (RuntimeException failure) {
+            // Source or budget refusal is a transaction boundary. Arrays may
+            // retain excess capacity, but no partial node, retained literal or
+            // child handle is admitted to the shared canonical index.
+            Arrays.fill(grammar, previousGreens, Math.min(grammar.length, greens + 1), null);
+            Arrays.fill(kind, previousGreens, Math.min(kind.length, greens + 1), null);
+            Arrays.fill(field, previousGreens, Math.min(field.length, greens + 1), null);
+            greens = previousGreens;
+            childSize = previousChildren;
+            gapSize = previousGaps;
+            literalSize = previousLiterals;
+            rehash(buckets.length);
+            throw failure;
+        }
     }
 
     public synchronized int uniqueGreens() { return greens; }
