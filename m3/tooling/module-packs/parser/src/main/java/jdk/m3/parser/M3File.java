@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -133,6 +136,145 @@ public final class M3File implements CharSequence {
         String byteHash = HexFormat.of().formatHex(sha256().digest(bytes));
         return new M3File(uri, text, byteHash,
                 StandardCharsets.UTF_8.equals(charset) ? bytes.length : -1);
+    }
+
+    /**
+     * Receive the bytes of one externally owned, checked file observation as
+     * UTF-8, without reopening the source or retaining an original byte array.
+     * Intended to be passed to the existing physical M3File's synchronous
+     * ByteObserver during its one-pass SHA-256 observation. This class is not
+     * coupled to a particular filesystem provider or its module descriptor.
+     *
+     * <p>The observer's owner must finish its read and metadata checks before
+     * passing the resulting four big-endian SHA-256 words to seal(). M3File
+     * verifies the accepted byte count, but the supplied digest is an external
+     * provenance assertion, not a hash re-computed from retained bytes. A
+     * failed read, decode or source-generation check must never be sealed.
+     * The capture is deliberately single-threaded and one-shot.</p>
+     */
+    public static Utf8Capture captureObservedUtf8(URI uri, int maxBytes) {
+        return new Utf8Capture(uri, maxBytes);
+    }
+
+    /** Bounded, transient UTF-8 decoding state, never a second source owner. */
+    public static final class Utf8Capture {
+        private final URI uri;
+        private final int maxBytes;
+        private final CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPORT)
+                .onUnmappableCharacter(CodingErrorAction.REPORT);
+        private final CharBuffer characters = CharBuffer.allocate(4096);
+        private final byte[] unfinishedScalar = new byte[4];
+        private StringBuilder decoded = new StringBuilder();
+        private int unfinishedLength;
+        private int acceptedBytes;
+        private boolean terminal;
+
+        private Utf8Capture(URI uri, int maxBytes) {
+            this.uri = Objects.requireNonNull(uri, "uri");
+            if (maxBytes < 0 || maxBytes > Integer.MAX_VALUE - 8) {
+                throw new IllegalArgumentException("maxBytes outside supported array bounds");
+            }
+            this.maxBytes = maxBytes;
+        }
+
+        /**
+         * Borrow a caller's bytes only during this invocation. Arbitrary
+         * fragmentation, including splitting all four bytes of one scalar,
+         * is supported. Neither the scratch array nor a source-byte copy is
+         * retained. Every failed call permanently invalidates this capture.
+         */
+        public void onBytes(byte[] bytes, int offset, int length) throws IOException {
+            requireOpen();
+            try {
+                Objects.requireNonNull(bytes, "observed byte chunk");
+                Objects.checkFromIndexSize(offset, length, bytes.length);
+                if (length > maxBytes - acceptedBytes) {
+                    throw new IOException("observed UTF-8 source exceeds byte budget");
+                }
+                int at = offset, end = offset + length;
+                while (unfinishedLength != 0 && at < end) {
+                    if (unfinishedLength == unfinishedScalar.length) {
+                        throw new IOException("invalid incomplete UTF-8 scalar");
+                    }
+                    unfinishedScalar[unfinishedLength++] = bytes[at++];
+                    ByteBuffer fragment = ByteBuffer.wrap(unfinishedScalar, 0, unfinishedLength);
+                    decode(fragment, false);
+                    int remainder = fragment.remaining();
+                    if (remainder != 0 && fragment.position() != 0) {
+                        System.arraycopy(unfinishedScalar, fragment.position(),
+                                unfinishedScalar, 0, remainder);
+                    }
+                    unfinishedLength = remainder;
+                }
+                if (at < end) {
+                    ByteBuffer fragment = ByteBuffer.wrap(bytes, at, end - at);
+                    decode(fragment, false);
+                    unfinishedLength = fragment.remaining();
+                    if (unfinishedLength > unfinishedScalar.length) {
+                        throw new IOException("invalid UTF-8 decoder remainder");
+                    }
+                    fragment.get(unfinishedScalar, 0, unfinishedLength);
+                }
+                acceptedBytes += length;
+            } catch (IOException | RuntimeException | Error failure) {
+                terminal = true;
+                decoded = null;
+                throw failure;
+            }
+        }
+
+        /**
+         * Finish only after the original physical observation succeeds. The
+         * digest words are those of its already-checked SHA-256 Fingerprint,
+         * ordered exactly as ByteBuffer.getLong() reads the digest bytes.
+         */
+        public M3File seal(long observedSize, long digest0, long digest1,
+                long digest2, long digest3) throws IOException {
+            requireOpen();
+            terminal = true;
+            try {
+                if (observedSize != acceptedBytes) {
+                    throw new IOException("physical observation byte count does not match UTF-8 capture");
+                }
+                ByteBuffer last = ByteBuffer.wrap(unfinishedScalar, 0, unfinishedLength);
+                decode(last, true);
+                if (last.hasRemaining()) throw new IOException("incomplete UTF-8 scalar at EOF");
+                while (true) {
+                    CoderResult result = decoder.flush(characters);
+                    drainCharacters();
+                    if (result.isOverflow()) continue;
+                    if (result.isError()) result.throwException();
+                    break;
+                }
+                byte[] digest = ByteBuffer.allocate(32).putLong(digest0).putLong(digest1)
+                        .putLong(digest2).putLong(digest3).array();
+                return new M3File(uri, decoded.toString(), HexFormat.of().formatHex(digest), acceptedBytes);
+            } finally {
+                decoded = null;
+                unfinishedLength = 0;
+            }
+        }
+
+        private void decode(ByteBuffer source, boolean last) throws IOException {
+            while (true) {
+                CoderResult result = decoder.decode(source, characters, last);
+                drainCharacters();
+                if (result.isOverflow()) continue;
+                if (result.isError()) result.throwException();
+                return;
+            }
+        }
+
+        private void drainCharacters() {
+            characters.flip();
+            decoded.append(characters);
+            characters.clear();
+        }
+
+        private void requireOpen() {
+            if (terminal) throw new IllegalStateException("UTF-8 capture is already terminal");
+        }
     }
 
     public URI uri() { return uri; }

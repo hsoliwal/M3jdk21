@@ -5,7 +5,10 @@ package jdk.m3.parser.test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Random;
 import jdk.m3.parser.M3ASTIndex;
@@ -98,6 +101,28 @@ public final class M3ASTInteropContract {
             throw new AssertionError("wrong exception type", exception);
         }
         throw new AssertionError("expected " + kind.getSimpleName());
+    }
+
+    @FunctionalInterface
+    private interface CheckedAction { void run() throws IOException; }
+
+    private static void refusesIo(Class<? extends IOException> kind, CheckedAction action) {
+        checks++;
+        try { action.run(); }
+        catch (IOException failure) {
+            if (kind.isInstance(failure)) return;
+            throw new AssertionError("wrong checked exception type", failure);
+        }
+        throw new AssertionError("expected " + kind.getSimpleName());
+    }
+
+    private static long[] digestWords(byte[] original) {
+        try {
+            ByteBuffer digest = ByteBuffer.wrap(MessageDigest.getInstance("SHA-256").digest(original));
+            return new long[] {digest.getLong(), digest.getLong(), digest.getLong(), digest.getLong()};
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new AssertionError(impossible);
+        }
     }
 
     private static M3ASTIndex project(M3File source, Node root, M3ASTInterop.SourceStamp stamp,
@@ -708,6 +733,127 @@ public final class M3ASTInteropContract {
         }
     }
 
+    /** Strict, bounded original-byte capture with no second physical source read. */
+    private static void onePassObservedUtf8Contracts() throws IOException {
+        URI uri = URI.create("memory:/physical-observation.java");
+        String[] corpus = {"", "ascii\r\n", "A😺中B\r\n", "\ufeffBOM", "\0", "👩🏽‍💻"};
+        Random random = new Random(0x20261026ACE0L);
+        String[] parts = {"A", "中", "😺", "\r\n", "\0", "é", "👩", "\ufeff", "\n"};
+        for (int sample = 0; sample < 300; sample++) {
+            String sourceText;
+            if (sample < corpus.length) sourceText = corpus[sample];
+            else {
+                StringBuilder builder = new StringBuilder();
+                for (int i = random.nextInt(140); i > 0; i--) {
+                    builder.append(parts[random.nextInt(parts.length)]);
+                }
+                sourceText = builder.toString();
+            }
+            byte[] bytes = sourceText.getBytes(StandardCharsets.UTF_8);
+            M3File expected = M3File.read(uri, new ByteArrayInputStream(bytes),
+                    StandardCharsets.UTF_8, bytes.length);
+            long[] digest = digestWords(bytes);
+            for (int stride : new int[] {1, 2, 3, 7, 8192}) {
+                M3File.Utf8Capture capture = M3File.captureObservedUtf8(uri, bytes.length);
+                for (int at = 0; at < bytes.length; at += stride) {
+                    int length = Math.min(stride, bytes.length - at);
+                    byte[] scratch = new byte[length + 2];
+                    System.arraycopy(bytes, at, scratch, 1, length);
+                    capture.onBytes(scratch, 1, length);
+                    // Physical ByteObserver reuses its original scratch on the next read.
+                    Arrays.fill(scratch, (byte) 0x7f);
+                }
+                M3File observed = capture.seal(bytes.length,
+                        digest[0], digest[1], digest[2], digest[3]);
+                equal(expected.uri(), observed.uri());
+                equal(expected.text(), observed.text());
+                equal(expected.utf16Sha256(), observed.utf16Sha256());
+                equal(expected.byteSha256(), observed.byteSha256());
+                equal(expected.utf8Offsets().orElseThrow().byteLength(),
+                        observed.utf8Offsets().orElseThrow().byteLength());
+                equal(expected.codePointOffsets().codePointLength(),
+                        observed.codePointOffsets().codePointLength());
+                refuses(IllegalStateException.class, () -> {
+                    try { capture.onBytes(bytes, 0, bytes.length); }
+                    catch (IOException impossible) { throw new AssertionError(impossible); }
+                });
+                refuses(IllegalStateException.class, () -> {
+                    try { capture.seal(bytes.length, digest[0], digest[1], digest[2], digest[3]); }
+                    catch (IOException impossible) { throw new AssertionError(impossible); }
+                });
+            }
+        }
+
+        for (byte[] malformed : new byte[][] {
+                {(byte) 0x80}, {(byte) 0xc0, (byte) 0xaf}, {(byte) 0xe2},
+                {(byte) 0xf0, (byte) 0x9f, (byte) 0x98},
+                {(byte) 0xed, (byte) 0xa0, (byte) 0x80},
+                {(byte) 0xf4, (byte) 0x90, (byte) 0x80, (byte) 0x80}}) {
+            M3File.Utf8Capture capture = M3File.captureObservedUtf8(uri, malformed.length);
+            long[] words = digestWords(malformed);
+            refusesIo(IOException.class, () -> {
+                for (byte b : malformed) capture.onBytes(new byte[] {b}, 0, 1);
+                capture.seal(malformed.length, words[0], words[1], words[2], words[3]);
+            });
+            refuses(IllegalStateException.class, () -> {
+                try { capture.onBytes(new byte[] {1}, 0, 1); }
+                catch (IOException impossible) { throw new AssertionError(impossible); }
+            });
+        }
+
+        // Differential rejection oracle: the original strict JDK UTF-8
+        // decoder decides which arbitrary byte sequences may be admitted.
+        Random binary = new Random(0x4D3346494C45L);
+        for (int sample = 0; sample < 1800; sample++) {
+            byte[] bytes = new byte[binary.nextInt(20)];
+            binary.nextBytes(bytes);
+            M3File expected = null;
+            try {
+                expected = M3File.read(uri, new ByteArrayInputStream(bytes),
+                        StandardCharsets.UTF_8, bytes.length);
+            } catch (IOException malformedExpected) {
+                // The baseline reader is the authoritative strict decoder.
+            }
+            long[] digest = digestWords(bytes);
+            for (int stride : new int[] {1, 2, 23}) {
+                M3File.Utf8Capture capture = M3File.captureObservedUtf8(uri, bytes.length);
+                M3File observed = null;
+                try {
+                    for (int at = 0; at < bytes.length; at += stride) {
+                        capture.onBytes(bytes, at, Math.min(stride, bytes.length - at));
+                    }
+                    observed = capture.seal(bytes.length,
+                            digest[0], digest[1], digest[2], digest[3]);
+                } catch (IOException malformedObserved) {
+                    // Rejection must agree with the canonical JDK decoder.
+                }
+                equal(expected == null, observed == null);
+                if (expected != null) {
+                    equal(expected.text(), observed.text());
+                    equal(expected.byteSha256(), observed.byteSha256());
+                }
+            }
+        }
+
+        byte[] ascii = "size".getBytes(StandardCharsets.UTF_8);
+        long[] words = digestWords(ascii);
+        M3File.Utf8Capture mismatched = M3File.captureObservedUtf8(uri, ascii.length);
+        mismatched.onBytes(ascii, 0, ascii.length);
+        refusesIo(IOException.class,
+                () -> mismatched.seal(ascii.length - 1L, words[0], words[1], words[2], words[3]));
+        refuses(IllegalStateException.class, () -> {
+            try { mismatched.seal(0, words[0], words[1], words[2], words[3]); }
+            catch (IOException impossible) { throw new AssertionError(impossible); }
+        });
+        M3File.Utf8Capture over = M3File.captureObservedUtf8(uri, 1);
+        refusesIo(IOException.class, () -> over.onBytes(ascii, 0, ascii.length));
+        refuses(IllegalStateException.class, () -> {
+            try { over.onBytes(ascii, 0, 0); }
+            catch (IOException impossible) { throw new AssertionError(impossible); }
+        });
+        refuses(IllegalArgumentException.class, () -> M3File.captureObservedUtf8(uri, -1));
+    }
+
     public static void main(String[] args) throws IOException {
         byteAndIndexContracts();
         randomizedOffsets();
@@ -718,6 +864,7 @@ public final class M3ASTInteropContract {
         originalUtf8ByteChangeContracts();
         originalUtf8PointEditContracts();
         originalCodePointCoordinateContracts();
+        onePassObservedUtf8Contracts();
         System.out.println("M3_AST_INTEROP_PASS checks=" + checks);
     }
 }

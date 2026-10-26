@@ -141,6 +141,49 @@ ranges for `A😺中B` plus newline while ANTLR returns five scalar token
 positions. **It is a runtime-object mapping fixture, not a generated-grammar
 parser, hidden-channel/trivia or native lexer proof**; those remain pending.
 
+## One physical observation, one immutable parser source generation
+
+`com.m3.file.M3File` already owns the original provider's bounded, checked
+`observe(maxBytes,progress,ByteObserver)`: SHA-256 digest words, raw byte count,
+checked modification time, file-key and provider metadata change refusal. A
+parser that reopens the same path to build its own source `String` would lose
+that single-observation provenance and repeat I/O. The parser-owned
+`jdk.m3.parser.M3File.captureObservedUtf8(uri,maxBytes)` now provides a
+transient, strictly decoding `Utf8Capture` for the **existing byte observer**:
+
+```java
+jdk.m3.parser.M3File.Utf8Capture capture =
+        jdk.m3.parser.M3File.captureObservedUtf8(originalPath.toUri(), maxBytes);
+com.m3.file.M3File.Observation observation = physical.observe(
+        maxBytes, progress, capture::onBytes);
+com.m3.file.M3File.Fingerprint raw = observation.fingerprint();
+jdk.m3.parser.M3File source = capture.seal(raw.size(), raw.digest0(),
+        raw.digest1(), raw.digest2(), raw.digest3());
+```
+
+No compiler/parser module requires the other as a runtime dependency. The
+physical owner reads/hashes/validates **once**; the borrowed callback decodes
+the same bytes into the one eventual Java String with standard strict JDK UTF-8
+decoding. Only a 4-byte unfinished-scalar scratch, a reused 4096-char decoder
+buffer and a temporary StringBuilder are used; the returned source releases
+the temporary builder reference, retaining neither a second raw byte array
+nor a physical handle. Byte-chunk boundaries may split multibyte Unicode
+characters; incomplete, malformed or oversized sources refuse admission.
+`seal` is one-shot, checks the observer's byte count and attaches the original
+SHA-256 words **without rehashing**. The caller must supply the exact checked
+physical result, after successful observation: a malicious or unrelated
+four-word digest cannot be cryptographically authenticated without hashing.
+
+An actual product-to-product Synexia fixture compiles and runs the existing
+filesystem `M3File`, `M3ShadowStreams`, progress interface and the parser
+module's `M3File` together, including unchanged-snapshot-after-file-mutation
+and malformed-source refusal. It passes. A seeded 1,800-byte-sequence oracle
+and 300 Unicode-text samples fragmented into five chunk patterns compare
+`Utf8Capture` with the original strict JDK decoder; the Java21 interoperability
+count advances to **125,825** checks. This remains a **one-observation UTF-8
+admission**, not atomic filesystem snapshot isolation or a complete native
+incremental reparse/ABI/cached reactor.
+
 **Source coordinate contract:** all published M3AST spans are zero-based,
 UTF-16, half-open `[start,end)`. Original UTF-8 byte positions may be
 translated at valid byte/codepoint boundaries only. Original codepoint spans
@@ -169,14 +212,14 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
    adapters to their *already parsed* trees; compare ranges, roles, errors
    and token/trivia completeness. The ANTLR runtime-object fixture above
    demonstrates its source-coordinate bridge, not complete grammar coverage.
-2. Use the original filesystem `com.m3.file.M3File` as the provider observation
-   and generation/delta authority, connected to the immutable parser source
-   snapshot: reuse metadata
-   (file-key/version, mtime, length) as a cheap **change hint**, verify content
-   before declaring equality, retain SHA-256 receipts, record precise source
-   multi-hunk and class-file deltas and invalidate only affected semantic/ABI
-   dependents. The bounded snapshot change envelope above is conservative and
-   does not itself complete this integration.
+2. Extend the now-tested **one physical observation → one immutable parser
+   snapshot** bridge into build generations and persistent delta state: reuse
+   original provider metadata (file-key/version, mtime, length) as a cheap
+   **change hint**, verify content before declaring equality, retain SHA-256
+   receipts, record precise source multi-hunk and class-file deltas and
+   invalidate only affected semantic/ABI dependents. Neither the one-pass
+   UTF-8 receiver nor the bounded snapshot envelope alone completes this
+   incremental reactor integration.
 3. Add source-bound optional token/trivia tables and other provider-specific
    scalar/display-column coordinate bridges without copying source payloads.
    Both Java-style UTF-16 and LF-only UTF-8 line maps are now present; they are not substitutes for
