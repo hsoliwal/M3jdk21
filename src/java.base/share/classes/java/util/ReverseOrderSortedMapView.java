@@ -268,7 +268,7 @@ class ReverseOrderSortedMapView<K, V> extends AbstractMap<K, V> implements Sorte
     static class ViewEntry<K, V> implements Map.Entry<K, V> {
         final Map<K, V> map;
         final K key;
-        final V value;
+        V value;
 
         ViewEntry(Map<K, V> map, K key, V value) {
             this.map = map;
@@ -278,7 +278,11 @@ class ReverseOrderSortedMapView<K, V> extends AbstractMap<K, V> implements Sorte
 
         public K getKey()             { return key; }
         public V getValue()           { return value; }
-        public V setValue(V newValue) { return map.put(key, newValue); }
+        public V setValue(V newValue) {
+            V previous = map.put(key, newValue);
+            value = newValue;
+            return previous;
+        }
 
         public boolean equals(Object o) {
             return o instanceof Map.Entry<?, ?> e
