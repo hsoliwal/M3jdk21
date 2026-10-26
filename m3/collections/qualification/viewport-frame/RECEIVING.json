@@ -1,0 +1,37 @@
+{
+  "schema": "M3JDK21_VIEWPORT_FRAME_MERGED_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_commit": "7b31c106c0854cf8916b855849d2f7adb4e7f282",
+  "recipe": "com.synexia.m3.ViewportFrameMerged20261023",
+  "source": "m3/collections/src/main/c/m3maskviewport.c",
+  "pre_git_blob": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",
+  "post_git_blob": "96c4c094667bcfbedf280bac2d223752bc3a1187",
+  "pre_sha256": "58fc963e525064ba95997cfad38aff27813d58761db25695edb082ebf27a64fb",
+  "post_sha256": "7a9001af6f285c005003f8e4cdfbc8b8521f1641418c4bb6f1769eeaf1c8c485",
+  "local_sdk": {
+    "junit": 7,
+    "failures": 0,
+    "results": 1,
+    "replay_changes": 0,
+    "receiving_changes": 1
+  },
+  "local_runtime": {
+    "jni_frame_mixed": 35080,
+    "jni_frame_interpreted": 35080,
+    "jni_frame_digest": "ed73ef29740c1e87",
+    "jni_projection_mixed": 108891,
+    "jni_projection_interpreted": 108891,
+    "jni_page_proof_mixed": 29027,
+    "jni_page_proof_interpreted": 29027
+  },
+  "native_exports": [
+    "project",
+    "projectPage",
+    "projectFramePage"
+  ],
+  "full_jdk_build": "NOT_RUN",
+  "jtreg": "NOT_RUN",
+  "product_java_frame_declaration": "NOT_RECEIVED",
+  "swt_nebula_gef_rwt_native": "NOT_RUN",
+  "status": "DRAFT_REVIEW_ONLY"
+}

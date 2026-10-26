@@ -1,0 +1,66 @@
+{
+  "schema": "M3JDK21_VIEWPORT_FRAME_INLINE_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "02f56532d2fc60639c6644edc7a89ce149e267d8",
+  "named_recipe": "com.synexia.m3.ViewportFrameInline20261024",
+  "source": "m3/collections/src/main/c/m3maskviewport.c",
+  "before_git_blob": "3a0a4e8f789962f6682f6d7ba19fc335bc910528",
+  "after_git_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
+  "before_sha256": "10e8892a4a9b07a4e7fb3f53a2a1a3a4154648e4f1e013da3a0a4f600873d021",
+  "after_sha256": "388f607244b46432ac632fd05c52c1fe95b74e9561aaf0b9bcb04973b9bc9c9c",
+  "actual_local_text_sdk": {
+    "tests": 7,
+    "failures": 0,
+    "results": 1,
+    "received": 1,
+    "replay_changes": 0
+  },
+  "actual_local_jni": {
+    "frame_checks_per_mode": 35080,
+    "frame_digest": "ed73ef29740c1e87",
+    "native_page_checks_per_mode": 29027,
+    "page_digest": "d4a2bd4306d04227",
+    "normal_and_interpreted": true,
+    "checked_jni": true,
+    "gcc_clang_strict": true,
+    "fatal_ubsan": true
+  },
+  "test_only_region_reads": {
+    "general16": [
+      12,
+      10
+    ],
+    "general_skip200_max16": [
+      14,
+      10
+    ],
+    "general128": [
+      12,
+      10
+    ],
+    "general129": [
+      14,
+      14
+    ],
+    "all_states": [
+      7,
+      7
+    ],
+    "contradictory": [
+      5,
+      5
+    ],
+    "empty_page": [
+      10,
+      10
+    ]
+  },
+  "native_public_exports_unchanged": true,
+  "product_java_declarations": "NOT_YET_RECEIVED_AUTHENTIC_JAVA21_LST",
+  "installed_JDK_HotSpot_jtreg": "NOT_RUN",
+  "SWT_Nebula_GEF_RWT_original_UI": "NOT_RUN",
+  "hosted_CI_after_receiving": "PENDING",
+  "throughput_latency_rss_fps_claim": false,
+  "status": "DRAFT_REVIEW_ONLY"
+}
