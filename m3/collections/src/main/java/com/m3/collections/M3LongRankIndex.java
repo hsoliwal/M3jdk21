@@ -331,6 +331,20 @@ public final class M3LongRankIndex {
 
 
     /**
+     * LeetCode #347 Top K Frequent Elements over immutable sorted primitive
+     * payloads. Values are ordered by descending occurrence frequency, then
+     * ascending signed-long value; fewer than k distinct values return all.
+     *
+     * <p>The existing native m3rankbatch batch owner can compute large
+     * prepared snapshots with bounded 256-long JNI pages. Smaller inputs and
+     * missing optional native binaries use the same primitive-array Java
+     * oracle; the owner snapshot and its cached run facts remain untouched.
+     */
+    public long[] topKFrequent(int k) {
+        return M3LongRankBatchNative.topKFrequent(values, k);
+    }
+
+    /**
      * Number of different signed-long values in this immutable snapshot.
      * LeetCode #26 (sorted duplicate runs) supplies the problem category,
      * not transplanted challenge code. No mutation of the owning long[].

@@ -22,6 +22,8 @@ public final class M3LongRankBatchNative {
     private static volatile boolean UNION_VALUES_ABI_MISSING;
     private static volatile boolean RUN_STATISTICS_ABI_MISSING;
     private static final int NATIVE_MIN_RUN_STATISTICS = 256;
+    private static final int NATIVE_MIN_FREQUENCY_TOP_K = 256;
+    private static volatile boolean TOP_K_FREQUENCY_ABI_MISSING;
     private static final boolean AVAILABLE = loadOptIn();
 
     private M3LongRankBatchNative() { }
@@ -537,6 +539,117 @@ public final class M3LongRankBatchNative {
     }
 
     /**
+     * LC #347 sorted run-frequency Top-K, using the existing M3SignalTopK
+     * worst-first primitive heap pattern. The input is an immutable
+     * signed-long sorted snapshot, not a caller-owned arbitrary unsorted array.
+     * Rank tie-break: smaller signed value wins at equal frequency.
+     *
+     * <p>No per-element Entry objects, caller callbacks, copied owner payload,
+     * retained JNI pointers or per-key native transitions. The original JNI
+     * rank symbols remain ABI-compatible; older native libraries fall back
+     * only for optional dispatch, never for explicitly required native mode.
+     */
+    static long[] topKFrequent(long[] sorted, int k) {
+        return topKFrequent(sorted, k, false);
+    }
+
+    /** Package-level native-required proof seam: never silently downgrade. */
+    static long[] topKFrequent(long[] sorted, int k, boolean nativeRequired) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (k < 0) throw new IllegalArgumentException("negative top-K frequency limit");
+        if (nativeRequired) {
+            if (!AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3rankbatch top-K frequency JNI unavailable");
+            }
+            return topKFrequent0(sorted, k);
+        }
+        if (sorted.length == 0 || k == 0) return new long[0];
+        if (AVAILABLE && !TOP_K_FREQUENCY_ABI_MISSING
+                && sorted.length >= NATIVE_MIN_FREQUENCY_TOP_K) {
+            try {
+                return topKFrequent0(sorted, k);
+            } catch (UnsatisfiedLinkError olderNativeAbi) {
+                TOP_K_FREQUENCY_ABI_MISSING = true;
+            }
+        }
+        return topKFrequentJava(sorted, k);
+    }
+
+    /** Exact Java fallback/oracle; two primitive heap lanes, O(min(k,n)) memory. */
+    static long[] topKFrequentJava(long[] sorted, int k) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (k < 0) throw new IllegalArgumentException("negative top-K frequency limit");
+        int capacity = Math.min(k, sorted.length);
+        if (capacity == 0) return new long[0];
+        long[] keys = new long[capacity];
+        int[] frequencies = new int[capacity];
+        int size = 0;
+        long previous = sorted[0];
+        int count = 1;
+        for (int i = 1; i < sorted.length; i++) {
+            long value = sorted[i];
+            if (value == previous) {
+                count++;
+            } else {
+                size = topKOffer(keys, frequencies, size, previous, count);
+                previous = value;
+                count = 1;
+            }
+        }
+        size = topKOffer(keys, frequencies, size, previous, count);
+        // In-place worst-first extraction leaves best-ranked values first.
+        for (int end = size - 1; end > 0; end--) {
+            topKSwap(keys, frequencies, 0, end);
+            topKSiftDown(keys, frequencies, 0, end);
+        }
+        return Arrays.copyOf(keys, size);
+    }
+
+    private static boolean topKWorse(int countA, long keyA, int countB, long keyB) {
+        return countA < countB || (countA == countB && keyA > keyB);
+    }
+
+    private static void topKSwap(long[] keys, int[] frequencies, int a, int b) {
+        long key = keys[a]; keys[a] = keys[b]; keys[b] = key;
+        int count = frequencies[a]; frequencies[a] = frequencies[b]; frequencies[b] = count;
+    }
+
+    private static void topKSiftDown(long[] keys, int[] frequencies, int at, int size) {
+        while (at < size / 2) {
+            int child = at * 2 + 1;
+            if (child >= size) break;
+            if (child + 1 < size && topKWorse(
+                    frequencies[child + 1], keys[child + 1],
+                    frequencies[child], keys[child])) child++;
+            if (!topKWorse(frequencies[child], keys[child],
+                    frequencies[at], keys[at])) return;
+            topKSwap(keys, frequencies, child, at);
+            at = child;
+        }
+    }
+
+    private static int topKOffer(long[] keys, int[] frequencies,
+                                 int size, long key, int count) {
+        if (size < keys.length) {
+            int at = size++;
+            keys[at] = key;
+            frequencies[at] = count;
+            while (at > 0) {
+                int parent = (at - 1) >>> 1;
+                if (!topKWorse(frequencies[at], keys[at],
+                        frequencies[parent], keys[parent])) break;
+                topKSwap(keys, frequencies, at, parent);
+                at = parent;
+            }
+        } else if (topKWorse(frequencies[0], keys[0], count, key)) {
+            keys[0] = key;
+            frequencies[0] = count;
+            topKSiftDown(keys, frequencies, 0, size);
+        }
+        return size;
+    }
+
+    /**
      * LeetCode #26/#128 categories: distinct cardinality and longest run of
      * consecutive signed-long values in an immutable sorted primitive lane.
      * Packed result: high 32 bits = distinct count, low 32 bits = run length.
@@ -597,6 +710,9 @@ public final class M3LongRankBatchNative {
             return false;
         }
     }
+
+    /** Additive LC #347 source-owned m3rankbatch JNI symbol. */
+    private static native long[] topKFrequent0(long[] sorted, int k);
 
     /** Same existing m3rankbatch JNI library: bounded native run-statistic scan. */
     private static native long runStatistics0(long[] sorted);
