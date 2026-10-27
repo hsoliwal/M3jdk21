@@ -44,6 +44,7 @@ CONTRACTS = (
     ("jdk.m3.parser.test.M3CrossFrontendContract", "M3_AST_MULTIFRONTEND_PASS"),
     ("jdk.m3.parser.test.M3ASTDetailsContract", "M3_AST_DETAILS_PASS"),
     ("jdk.m3.parser.test.M3ASTInteropContract", "M3_AST_INTEROP_PASS"),
+    ("jdk.m3.parser.test.M3ASTTreeSitterContract", "M3_AST_TREESITTER_PASS"),
     ("jdk.m3.parser.test.M3ASTRelationsContract", "M3_AST_RELATIONS_PASS"),
     ("jdk.m3.parser.test.M3ASTIndexProjectionContract", "M3_AST_INDEX_PROJECTION_PASS"),
     ("jdk.m3.parser.test.M3JavacTreeViewContract", "M3_JAVAC_TREE_VIEW_PASS"),
