@@ -290,3 +290,78 @@ Java_com_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
     }
     free(scratch);
 }
+
+/* LeetCode #75: reproduce the existing Java DNF swaps, including equal keys.
+ * The array is already range-checked by Java; JNI also checks before pinning.
+ * One JNI transition, O(n) time, O(1) scratch, no caller callbacks and no
+ * retained pointer. GetArrayElements may copy or pin at JVM discretion;
+ * release every acquired lane with mode 0 after exact Java-equivalent swaps.
+ */
+static void m3_partition_throw(JNIEnv *env, const char *name, const char *message) {
+    jclass klass = (*env)->FindClass(env, name);
+    if (klass != NULL) (*env)->ThrowNew(env, klass, message);
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3LaneAlgorithms_partition3Long0(
+        JNIEnv *env, jclass unused, jlongArray array, jint from, jint to, jlong pivot) {
+    (void) unused;
+    if (array == NULL) {
+        m3_partition_throw(env, "java/lang/NullPointerException", "null long partition lane");
+        return 0;
+    }
+    const jsize length = (*env)->GetArrayLength(env, array);
+    if (from < 0 || to < from || to > length) {
+        m3_partition_throw(env, "java/lang/IndexOutOfBoundsException", "long partition range");
+        return 0;
+    }
+    jlong *lane = (*env)->GetLongArrayElements(env, array, NULL);
+    if (lane == NULL) return 0;
+    jint low = from, mid = from, high = to;
+    while (mid < high) {
+        const jlong value = lane[mid];
+        if (value < pivot) {
+            lane[mid++] = lane[low];
+            lane[low++] = value;
+        } else if (value > pivot) {
+            lane[mid] = lane[--high];
+            lane[high] = value;
+        } else {
+            mid++;
+        }
+    }
+    (*env)->ReleaseLongArrayElements(env, array, lane, 0);
+    return ((jlong) (uint32_t) low << 32) | (jlong) (uint32_t) high;
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3LaneAlgorithms_partition3Int0(
+        JNIEnv *env, jclass unused, jintArray array, jint from, jint to, jint pivot) {
+    (void) unused;
+    if (array == NULL) {
+        m3_partition_throw(env, "java/lang/NullPointerException", "null int partition lane");
+        return 0;
+    }
+    const jsize length = (*env)->GetArrayLength(env, array);
+    if (from < 0 || to < from || to > length) {
+        m3_partition_throw(env, "java/lang/IndexOutOfBoundsException", "int partition range");
+        return 0;
+    }
+    jint *lane = (*env)->GetIntArrayElements(env, array, NULL);
+    if (lane == NULL) return 0;
+    jint low = from, mid = from, high = to;
+    while (mid < high) {
+        const jint value = lane[mid];
+        if (value < pivot) {
+            lane[mid++] = lane[low];
+            lane[low++] = value;
+        } else if (value > pivot) {
+            lane[mid] = lane[--high];
+            lane[high] = value;
+        } else {
+            mid++;
+        }
+    }
+    (*env)->ReleaseIntArrayElements(env, array, lane, 0);
+    return ((jlong) (uint32_t) low << 32) | (jlong) (uint32_t) high;
+}

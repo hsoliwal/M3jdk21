@@ -496,4 +496,80 @@ public final class M3LaneAlgorithms {
 
     private static native void slidingMaximumIndices0(long[] values, int from,
             int to, int window, int[] output, int outputFrom);
+
+    private static final int NATIVE_PARTITION_MIN_LENGTH = 256;
+    private static volatile boolean PARTITION3_LONG_ABI_MISSING;
+    private static volatile boolean PARTITION3_INT_ABI_MISSING;
+
+    /**
+     * LeetCode #75 three-way Dutch National Flag partition, using only lane
+     * offsets and a pivot. The existing partition3(int[]/long[]) remains the
+     * reference contract; this explicit prepared route may use the original
+     * m3_collections_address JNI library for sufficiently large primitive lanes.
+     * Native-required mode never falls back when the library or ABI is absent.
+     */
+    public static long partition3Prepared(long[] lane, int from, int to,
+                                          long pivot, boolean nativeRequired) {
+        java.util.Objects.requireNonNull(lane, "lane");
+        checkRange(lane.length, from, to);
+        if (nativeRequired) {
+            if (!PartitionNative.AVAILABLE) {
+                throw new UnsatisfiedLinkError("M3 long partition3 JNI unavailable");
+            }
+            return partition3Long0(lane, from, to, pivot);
+        }
+        if (PartitionNative.AVAILABLE && !PARTITION3_LONG_ABI_MISSING
+                && to - from >= NATIVE_PARTITION_MIN_LENGTH) {
+            try {
+                return partition3Long0(lane, from, to, pivot);
+            } catch (UnsatisfiedLinkError oldNativeImage) {
+                PARTITION3_LONG_ABI_MISSING = true;
+            }
+        }
+        return partition3(lane, from, to, pivot);
+    }
+
+    /** int[] form of the exact LeetCode #75 primitive JNI partition. */
+    public static long partition3Prepared(int[] lane, int from, int to,
+                                          int pivot, boolean nativeRequired) {
+        java.util.Objects.requireNonNull(lane, "lane");
+        checkRange(lane.length, from, to);
+        if (nativeRequired) {
+            if (!PartitionNative.AVAILABLE) {
+                throw new UnsatisfiedLinkError("M3 int partition3 JNI unavailable");
+            }
+            return partition3Int0(lane, from, to, pivot);
+        }
+        if (PartitionNative.AVAILABLE && !PARTITION3_INT_ABI_MISSING
+                && to - from >= NATIVE_PARTITION_MIN_LENGTH) {
+            try {
+                return partition3Int0(lane, from, to, pivot);
+            } catch (UnsatisfiedLinkError oldNativeImage) {
+                PARTITION3_INT_ABI_MISSING = true;
+            }
+        }
+        return partition3(lane, from, to, pivot);
+    }
+
+    /** Native ABI status after any optional older-library probing. */
+    public static boolean partition3NativeAvailable() {
+        return PartitionNative.AVAILABLE
+                && !PARTITION3_LONG_ABI_MISSING && !PARTITION3_INT_ABI_MISSING;
+    }
+
+    private static final class PartitionNative {
+        static final boolean AVAILABLE = load();
+        private static boolean load() {
+            if (!Boolean.getBoolean("m3.collections.lane.native")) return false;
+            try {
+                System.loadLibrary("m3_collections_address");
+                return true;
+            } catch (UnsatisfiedLinkError | SecurityException unavailable) {
+                return false;
+            }
+        }
+    }
+
+    private static native long partition3Long0(long[] lane, int from, int to, long pivot);
+    private static native long partition3Int0(int[] lane, int from, int to, int pivot);
 }
