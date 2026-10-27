@@ -20,3 +20,20 @@ Synexia source recipe [#13207](https://github.com/hsoliwal/com.synexia/pull/1320
 ## Open qualification gates
 
 A complete matched M3JDK21 source-built fastdebug/release image; jtreg on that image covering the actual `ArrayList` and `Vector` integration; GC/barrier correctness; JNI/VM compatibility when affected; concurrency; and reproducible allocation/CPU performance benchmarking. Do not claim a speedup or complete JDK compatibility on the basis of `--patch-module` and stock-reference tests.
+
+## Full matched-image acceptance workflow (not yet executed)
+
+The opt-in GitHub Actions workflow
+`.github/workflows/m3-jdk21-java-base-mask-matched-image-20261027.yml`
+has a `workflow_dispatch` trigger only, to avoid consuming a full OpenJDK
+build on every documentation/test edit while many unrelated checks are queued.
+It installs the Linux build and jtreg prerequisites, reruns the exact
+source/caller seals, executes the repository's
+`m3/build-openjdk.sh` to build an M3JDK21 fastdebug image, locates the actual
+image and runs the two named jtreg tests through `make test`.
+
+A workflow declaration is **not proof that this full image has built or passed**.
+Do not promote the candidate until this workflow completes, its build and
+jtreg logs are reviewed, and any platform-specific failures are resolved.
+Its default two build jobs limit runner pressure; the full test suite and
+throughput/GC benchmarks still require separate admission.
