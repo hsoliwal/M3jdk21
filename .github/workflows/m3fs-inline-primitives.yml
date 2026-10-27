@@ -65,7 +65,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/fs/pom.xml \
-            -Dtest=M3FsDonorFreePrimitivesTest,M3FsInlineCommonsCallsitesTest test \
+            -Dtest=M3FsDonorFreePrimitivesTest,M3FsInlineCommonsCallsitesTest,M3FsEmbeddedCommonsLoggingTest test \
             2>&1 | tee "$RUNNER_TEMP/m3fs-focused.log"
       - name: Full original M3FS Maven/JNI verification
         shell: bash
@@ -73,6 +73,32 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f m3/fs/pom.xml verify \
             2>&1 | tee "$RUNNER_TEMP/m3fs-full.log"
+      - name: Check source-inlined Commons Logging API and runtime closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          awk -F '\t' '$1 ~ /^m3\/fs\// {print $2 "  " $1}' \
+            m3/fs/qualification/embedded-commons-logging/SOURCE-PROVENANCE.tsv | sha256sum -c -
+          jar --list --file m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar \
+            | grep -qx 'org/apache/commons/logging/Log.class'
+          jar --list --file m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar \
+            | grep -qx 'org/apache/commons/logging/LogFactory.class'
+          jar --list --file m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar \
+            | grep -qx 'org/apache/commons/logging/impl/LogFactoryImpl.class'
+          jar --describe-module --file m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar \
+            | tee "$RUNNER_TEMP/m3fs-logging-module.txt"
+          grep -qx 'requires java.logging' "$RUNNER_TEMP/m3fs-logging-module.txt" \
+            || grep -q 'requires java.logging ' "$RUNNER_TEMP/m3fs-logging-module.txt"
+          if grep -q 'requires commons.logging' "$RUNNER_TEMP/m3fs-logging-module.txt"; then
+            echo 'Forbidden downstream commons.logging JPMS module' >&2
+            exit 1
+          fi
+          mvn -B -ntp -f m3/fs/pom.xml dependency:tree -Dscope=runtime \
+            -DoutputFile="$RUNNER_TEMP/m3fs-logging-runtime-tree.txt"
+          if grep -F 'commons-logging:commons-logging' "$RUNNER_TEMP/m3fs-logging-runtime-tree.txt"; then
+            echo 'Forbidden Commons Logging runtime Maven dependency' >&2
+            exit 1
+          fi
       - name: Save consumer-visible runtime closure for future inlining
         if: always()
         shell: bash
@@ -92,3 +118,5 @@ jobs:
             ${{ runner.temp }}/m3fs-full.log
             ${{ runner.temp }}/m3fs-runtime-deps.txt
             m3/fs/target/surefire-reports/
+            ${{ runner.temp }}/m3fs-logging-module.txt
+            ${{ runner.temp }}/m3fs-logging-runtime-tree.txt

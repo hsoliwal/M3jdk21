@@ -6,11 +6,12 @@
  */
 module jdk.m3fs {
     requires java.xml;
+    requires java.logging;
     requires com.m3.file;
     requires org.apache.commons.io;
     requires org.apache.commons.lang3;
-    // Log and TarArchiveEntry occur in exported public/protected provider SPI signatures.
-    requires transitive commons.logging;
+    // Original Apache Commons Logging 1.2 Log ABI is exported from this module's
+    // own source-built package; TarArchiveEntry retains its current separate boundary.
     requires transitive org.apache.commons.compress;
 
     exports com.m3.fs;
@@ -36,4 +37,6 @@ module jdk.m3fs {
     exports com.m3.fs.vfs.provider.url;
     exports com.m3.fs.vfs.provider.zip;
     exports com.m3.fs.vfs.util;
+    exports org.apache.commons.logging;
+    exports org.apache.commons.logging.impl;
 }
