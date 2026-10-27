@@ -38,8 +38,11 @@ jobs:
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/m3-filtered"
-          mkdir -p "$out/classes" "$out/native" "$out/patch-src/java/util" "$out/patch" "$out/test"
-          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+          mkdir -p "$out/classes" "$out/native" "$out/patch-src/java/util" "$out/patch" "$out/test" "$out/sourcepath/com/m3"
+          test -f m3/collections/src/main/java/com/m3/collections/M3TreeMap.java
+          test -f m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java
+          ln -s "$PWD/m3/collections/src/main/java/com/m3/collections" "$out/sourcepath/com/m3/collections"
+          javac --release 21 -proc:none -Xlint:all -Werror -sourcepath "$out/sourcepath" -d "$out/classes" \
             m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java \
             m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java \
             m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java \
