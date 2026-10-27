@@ -1,0 +1,77 @@
+name: M3 unified Guava Multiset and ListMultimap one API owner no downstream vendors
+on:
+  push:
+    branches: ['m3/guava-unified-no-vendor-runtime-20261027']
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/guava-unified/**'
+      - 'm3/docs/name-mapping.d/m3-guava-unified-source-closure-20261027.json'
+      - '.github/workflows/m3-guava-unified-api-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  source-built-java21-and-real-guava-regressions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Authenticate all 10 original public API and M3 implementation/test postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '1cf974b8e73c72e0885872a0746e34e187bc020a7e19a4e5074e73ac05d4e973  m3/collections/implementations/guava-unified/src/main/java/com/google/common/collect/Multiset.java' | sha256sum -c -
+          echo '833c4cac886b45f434b15f4772b483323f9335eda063f9e760f4074665899f5b  m3/collections/implementations/guava-unified/src/main/java/com/google/common/collect/Multimap.java' | sha256sum -c -
+          echo '69d8583bf68cc06c0df761686956f7cca5fd9eb51e8cd5a85e52b84d92462014  m3/collections/implementations/guava-unified/src/main/java/com/google/common/collect/ListMultimap.java' | sha256sum -c -
+          echo '933756a99a937b7b8c1472f1426c6675d00ceba18826c3d4fb89ffec2a39d79c  m3/collections/implementations/guava-unified/src/main/java/com/m3/collections/guava/M3HashMultiset.java' | sha256sum -c -
+          echo '66ef182956a214103b2931f5d00526f1e8a0e727924e6fa73919faf1bc691fda  m3/collections/implementations/guava-unified/src/main/java/com/m3/collections/guava/M3ArrayListMultimap.java' | sha256sum -c -
+          echo '27c8bb1ce9e4c94f7da30493f7f08e0071be98057c090aa3af187e46c374a594  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3HashMultisetContractTest.java' | sha256sum -c -
+          echo '28d242fccbbb1d63327ee4829e590fb2ad35a3c18f0ecadd403489b9153d32e5  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3HashMultisetDifferentialTest.java' | sha256sum -c -
+          echo '213714de304b54d519b7c1fe502d959d6fca361f7af424199caf5cd2a502e4ac  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3ArrayListMultimapContractTest.java' | sha256sum -c -
+          echo 'bf400d158fdc9f37fe166e3ad9e13d5de9ef50836374c2bc969286924bf73190  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3ArrayListMultimapDifferentialTest.java' | sha256sum -c -
+          echo 'd47a670dcef6cd4066c43a0f42875cbc8a661b3405b5718e6d60dfb44ec9260e  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3GuavaUnifiedNoRuntimeTest.java' | sha256sum -c -
+      - name: Compile original M3 engines and one Guava API with NO third-party jars
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          find m3/collections/implementations/guava-unified/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/native-classes.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/native-classes.txt"
+          jar --create --file "$RUNNER_TEMP/unified-guava-m3.jar" -C "$RUNNER_TEMP/classes" .
+          jdeps --print-module-deps "$RUNNER_TEMP/unified-guava-m3.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+          test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^com/google/common/collect/Multiset[.]class$')" -eq 1
+          test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^com/google/common/collect/ListMultimap[.]class$')" -eq 1
+          test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^com/m3/collections/guava/M3HashMultiset[.]class$')" -eq 1
+          test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^com/m3/collections/guava/M3ArrayListMultimap[.]class$')" -eq 1
+      - name: Execute four authentic Guava provider differential suites and owned code coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/guava-unified/pom.xml verify
+      - name: Verify the Maven RUNTIME graph contains no Guava or any other vendor library
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/guava-unified/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/runtime-deps.txt"
+          cat "$RUNNER_TEMP/runtime-deps.txt"
+          ! grep -E 'com.google.guava:guava|org.jspecify:|org.apache.commons:|org.eclipse.collections:|org.springframework:' "$RUNNER_TEMP/runtime-deps.txt"
+      - name: Retain both families' JUnit seed proofs and exact compiled dependency closure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-guava-unified-no-runtime-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/jdeps.txt
+            ${{ runner.temp }}/runtime-deps.txt
+            m3/collections/implementations/guava-unified/target/surefire-reports/
