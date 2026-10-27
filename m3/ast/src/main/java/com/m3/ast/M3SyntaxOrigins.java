@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.ast;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -88,7 +91,7 @@ public final class M3SyntaxOrigins {
         }
         return Arrays.copyOf(result, size);
     }
-    /** The only safe point map: unique one-to-one byte translation. */
+    /** Unique metadata-only offset candidate; use verify() for byte-proven origins. */
     public int exactOriginalByteAt(int generatedByte) {
         int[] matches = originRowsAt(generatedByte);
         if (matches.length != 1) return -1;
@@ -97,6 +100,110 @@ public final class M3SyntaxOrigins {
                 || to[row] - from[row] != originalEnd[row] - originalStart[row]) return -1;
         return Math.addExact(originalStart[row], generatedByte - from[row]);
     }
+    /**
+     * Read a source image by its stable logical ID. The returned array is NOT
+     * trusted: verification clones it, hashes it and compares exact byte spans.
+     * An M3FileSource consumer can adapt this with id -> sourceFor(id).bytes() without
+     * introducing a dependency from the AST module into the file provider.
+     */
+    @FunctionalInterface
+    public interface SourceBytes {
+        byte[] read(String sourceId);
+    }
+
+    /** An original physical byte position proven against immutable source bytes. */
+    public record ExactPoint(String sourceId, String sha256, int byteOffset, byte value) { }
+
+    /**
+     * A fully verified, bounded snapshot of all source origins in this sidecar.
+     * The independent source bytes are copied only once per distinct source ID,
+     * never once per occurrence. Stored arrays are private and never exposed.
+     */
+    public static final class Verified {
+        private final M3SyntaxOrigins origins;
+        private final Map<String, byte[]> snapshots;
+        private final long retainedSourceBytes;
+
+        private Verified(M3SyntaxOrigins origins, Map<String, byte[]> snapshots,
+                         long retainedSourceBytes) {
+            this.origins = origins;
+            this.snapshots = Map.copyOf(snapshots);
+            this.retainedSourceBytes = retainedSourceBytes;
+        }
+        public int distinctSources() { return snapshots.size(); }
+        public long retainedSourceBytes() { return retainedSourceBytes; }
+        public String projectionSha256() { return origins.projectionSha256(); }
+        public void requireProjection(M3SyntaxTree tree) { origins.requireProjection(tree); }
+
+        /** Null for missing, overlapping, derived or otherwise ambiguous origins. */
+        public ExactPoint exactAtByte(int generatedByte) {
+            int[] matches = origins.originRowsAt(generatedByte);
+            if (matches.length != 1) return null;
+            int row = matches[0];
+            if (origins.relation[row] != (byte) Relation.EXACT_BYTES.ordinal()) return null;
+            int index = origins.sourceIndex[row];
+            String id = origins.sourceIds[index];
+            int originalByte = Math.addExact(origins.originalStart[row],
+                    generatedByte - origins.from[row]);
+            return new ExactPoint(id, origins.sha256s[index], originalByte,
+                    snapshots.get(id)[originalByte]);
+        }
+    }
+
+    /**
+     * Upgrade declared origin ranges into checked physical-byte correspondences.
+     * This checks the COMPLETE SHA-256 for each external image and requires every
+     * EXACT_BYTES range to match the generated image byte-for-byte. Derived and
+     * macro correspondences are preserved but cannot become exact points.
+     *
+     * <p>Budgets bound unique source count and all transient/captured bytes,
+     * including one transient copy of the generated M3AST source image. A
+     * failed proof returns nothing and retains no partially accepted state.
+     */
+    public Verified verify(M3SyntaxTree tree, SourceBytes loader,
+                           int maximumSources, long maximumSnapshotBytes) {
+        requireProjection(tree);
+        Objects.requireNonNull(loader, "source resolver");
+        if (maximumSources < 0 || maximumSnapshotBytes < 0
+                || tree.sourceLength() > maximumSnapshotBytes)
+            throw new IllegalArgumentException("source-origin verification budget exceeded");
+        byte[] generated = tree.sourceBytes();
+        long total = generated.length;
+        Map<String, byte[]> copies = new LinkedHashMap<>();
+        for (int row = 0; row < count(); row++) {
+            int index = sourceIndex[row];
+            String id = sourceIds[index];
+            byte[] original = copies.get(id);
+            if (original == null) {
+                if (copies.size() >= maximumSources)
+                    throw new IllegalArgumentException("too many source origins");
+                byte[] supplied = loader.read(id);
+                if (supplied == null || supplied.length > maximumSnapshotBytes - total)
+                    throw new IllegalArgumentException("source image missing or too large");
+                original = supplied.clone();
+                if (!sha256s[index].equals(hashBytes(original)))
+                    throw new IllegalArgumentException("external source generation drift: " + id);
+                copies.put(id, original);
+                total += original.length;
+            }
+            if (originalEnd[row] > original.length)
+                throw new IllegalArgumentException("source correspondence beyond physical image");
+            if (relation[row] == (byte) Relation.EXACT_BYTES.ordinal()
+                    && !Arrays.equals(generated, from[row], to[row],
+                            original, originalStart[row], originalEnd[row]))
+                throw new IllegalArgumentException("declared exact origin has different bytes");
+        }
+        return new Verified(this, copies, total - generated.length);
+    }
+
+    private static String hashBytes(byte[] input) {
+        try {
+            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(input));
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new AssertionError(impossible);
+        }
+    }
+
     private static int upperBound(int[] a, int x) {
         int lo = 0, hi = a.length;
         while (lo < hi) {
