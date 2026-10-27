@@ -44,28 +44,34 @@ public final class M3LongRankBatchNative {
         Objects.requireNonNull(sorted, "sorted");
         Objects.requireNonNull(queries, "queries");
         int[] results = new int[queries.length];
-        if (sorted.length == 0 || queries.length == 0) {
-            return results;
-        }
-        if (AVAILABLE && queries.length >= NATIVE_MIN_BATCH) {
-            lowerBounds0(sorted, queries, results);
-            return results;
-        }
-        for (int index = 0; index < queries.length; index++) {
-            long value = queries[index];
-            int lo = 0;
-            int hi = sorted.length;
-            while (lo < hi) {
-                int middle = lo + ((hi - lo) >>> 1);
-                if (sorted[middle] < value) {
-                    lo = middle + 1;
-                } else {
-                    hi = middle;
-                }
-            }
-            results[index] = lo;
-        }
+        lowerBoundsInto(sorted, queries, 0, queries.length, results, 0);
         return results;
+    }
+
+    /**
+     * LeetCode #35: write signed-long lower-bound coordinates directly into an
+     * existing primitive output lane. All windows are validated before writes.
+     * The existing mode-based JNI export is reused; no callback crosses JNI.
+     */
+    static void lowerBoundsInto(long[] sorted, long[] queries, int queryFrom,
+            int length, int[] output, int outputFrom) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(queries, "queries");
+        Objects.requireNonNull(output, "output");
+        Objects.checkFromIndexSize(queryFrom, length, queries.length);
+        Objects.checkFromIndexSize(outputFrom, length, output.length);
+        if (length == 0) return;
+        if (sorted.length == 0) {
+            Arrays.fill(output, outputFrom, outputFrom + length, 0);
+            return;
+        }
+        if (AVAILABLE && length >= NATIVE_MIN_BATCH) {
+            boundBatchInto0(sorted, queries, queryFrom, length, output, outputFrom, 0);
+            return;
+        }
+        for (int i = 0; i < length; i++) {
+            output[outputFrom + i] = bound(sorted, queries[queryFrom + i], false);
+        }
     }
 
     /**

@@ -200,7 +200,10 @@ static void m3_rank_bound_chunk(const jlong *source, jsize source_size,
         jsize upper = 0;
         for (jint i = 0; i < batch; i++) {
             const jlong key = keys[i];
-            if (mode == M3_RANK_COUNT) {
+            if (mode == 0) {
+                while (lower < source_size && source[lower] < key) lower++;
+                positions[i] = (jint) lower;
+            } else if (mode == M3_RANK_COUNT) {
                 while (lower < source_size && source[lower] < key) lower++;
                 if (upper < lower) upper = lower;
                 while (upper < source_size && source[upper] <= key) upper++;
@@ -212,7 +215,7 @@ static void m3_rank_bound_chunk(const jlong *source, jsize source_size,
         }
     } else {
         for (jint i = 0; i < batch; i++) {
-            const jsize hi = m3_bound(source, source_size, keys[i], 1);
+            const jsize hi = m3_bound(source, source_size, keys[i], mode != 0);
             positions[i] = mode == M3_RANK_COUNT
                     ? (jint) (hi - m3_bound(source, source_size, keys[i], 0))
                     : (jint) hi;
@@ -241,7 +244,7 @@ Java_com_m3_collections_M3LongRankBatchNative_boundBatchInto0(
         m3_rank_throw(env, "java/lang/NullPointerException", "null rank batch array");
         return;
     }
-    if (mode != M3_RANK_UPPER && mode != M3_RANK_COUNT) {
+    if (mode != 0 && mode != M3_RANK_UPPER && mode != M3_RANK_COUNT) {
         m3_rank_throw(env, "java/lang/IllegalArgumentException", "invalid rank output mode");
         return;
     }

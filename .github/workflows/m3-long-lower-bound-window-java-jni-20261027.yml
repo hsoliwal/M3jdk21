@@ -1,0 +1,76 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 original lower-bound Java JNI parity 20261027
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongLowerBoundWindowContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongLowerBoundWindowTest.java'
+      - '.github/workflows/m3-long-lower-bound-window-java-jni-20261027.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  primitive-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Assert exact head and source blobs
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '52f21dbe93b97748fb53f5d5cb7d857d4b04d1cf'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '107d5f86c901042c7fe23c926495aadb568798ca'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongLowerBoundWindowContract.java)" = 'faf32537f1392a1162b610d2382b20bac0217425'
+      - name: Strict Java21 compilation and Java fallback
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes" "$RUNNER_TEMP/native"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongLowerBoundWindowContract.java
+          java -cp "$RUNNER_TEMP/classes" com.m3.collections.M3LongLowerBoundWindowContract \
+            | tee "$RUNNER_TEMP/java.txt"
+          grep -q '^PASS M3_LONG_LOWER_BOUND_WINDOW ' "$RUNNER_TEMP/java.txt"
+          java -Xint -cp "$RUNNER_TEMP/classes" com.m3.collections.M3LongLowerBoundWindowContract \
+            | tee "$RUNNER_TEMP/interpreter.txt"
+          sed 's/ native=.*$//' "$RUNNER_TEMP/java.txt" > "$RUNNER_TEMP/java-normalized.txt"
+          sed 's/ native=.*$//' "$RUNNER_TEMP/interpreter.txt" > "$RUNNER_TEMP/interpreter-normalized.txt"
+          cmp "$RUNNER_TEMP/java-normalized.txt" "$RUNNER_TEMP/interpreter-normalized.txt"
+      - name: Compile the existing JNI library and prove native batch parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -fPIC -shared -O2 -Wall -Wextra -Werror \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/native/libm3rankbatch.so"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/native" \
+            -cp "$RUNNER_TEMP/classes" com.m3.collections.M3LongLowerBoundWindowContract \
+            | tee "$RUNNER_TEMP/jni.txt"
+          grep -q ' native=true$' "$RUNNER_TEMP/jni.txt"
+          sed 's/ native=.*$//' "$RUNNER_TEMP/jni.txt" > "$RUNNER_TEMP/jni-normalized.txt"
+          cmp "$RUNNER_TEMP/java-normalized.txt" "$RUNNER_TEMP/jni-normalized.txt"
+      - name: Retain Java/JNI evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-lower-bound-window-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/*.txt
+          if-no-files-found: warn
+          retention-days: 14
