@@ -191,10 +191,27 @@ public final class M3SignalRankedQuerySelfTest {
         var program=f.query.compile(M3SignalBooleanQuery.Logic.ALL);
         class Probe implements M3ProgressMonitor {
             boolean cancel;boolean changeOnDone;int done;long worked;
-            @Override public void beginTask(String name,long total) { }
+            long totalWork = UNKNOWN;
+            String taskName = "", subTaskName = "";
+            @Override public void beginTask(String name,long total) {
+                taskName = name;
+                totalWork = total;
+                worked = 0L;
+            }
             @Override public void worked(long n) { worked+=n; }
             @Override public void done() { done++; if(changeOnDone) f.epochs.invalidateAll(); }
+            @Override public void setProgress(long completed,long total) {
+                worked = completed;
+                totalWork = total;
+            }
+            @Override public void setTaskName(String name) { taskName = name; }
+            @Override public void subTask(String name) { subTaskName = name; }
             @Override public boolean isCanceled(){return cancel;}
+            @Override public void setCanceled(boolean canceled) { cancel = canceled; }
+            @Override public M3ProgressState state() {
+                return new M3ProgressState(taskName,subTaskName,worked,totalWork,
+                        cancel,done>0,0L,0L);
+            }
         }
         Probe probe=new Probe();
         probe.cancel=true;
@@ -203,6 +220,19 @@ public final class M3SignalRankedQuerySelfTest {
         Probe bad=new Probe();bad.changeOnDone=true;
         rejects(IllegalStateException.class, () -> program.evaluateTopK(5,new int[]{0},VERSION,DIGEST,bad));
         require(bad.done==1,"reentrant invalidation checked after done");
+        require(bad.state().done(),"finished monitor exposes its completed state");
+        Probe completeContract = new Probe();
+        completeContract.setTaskName("ranked probe");
+        completeContract.subTask("phase");
+        completeContract.setProgress(2L,4L);
+        require(completeContract.state().taskName().equals("ranked probe")
+                && completeContract.state().subTaskName().equals("phase")
+                && completeContract.state().worked()==2L
+                && completeContract.state().totalWork()==4L,
+                "all original progress SPI state fields are implemented");
+        completeContract.setCanceled(true);
+        require(completeContract.isCanceled() && completeContract.state().canceled(),
+                "original SPI cancellation setter propagates to immutable state");
     }
 
     public static void main(String[] args) {
