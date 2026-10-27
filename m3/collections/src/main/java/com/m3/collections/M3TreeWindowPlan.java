@@ -119,7 +119,14 @@ public final class M3TreeWindowPlan {
 			previousSiblings [entry] = lastChild [physicalParent + 1];
 			lastChild [physicalParent + 1] = entry;
 			int slot = (int) slotByKey.getOrDefault (key (parentIds [entry], childIndices [entry]), -1L);
-			if (slot >= 0 && !kept [slot]) {
+			// A child cannot retain a native handle when its old physical parent
+			// is being destroyed or its new physical parent has changed.
+			// A native parent deletion destroys the complete old subtree.
+			boolean retainedAncestor = slot >= 0 && (physicalParent == -1
+					? parentSlots [slot] == -1
+					: parentSlots [slot] >= 0
+						&& planned [physicalParent] == handles [parentSlots [slot]]);
+			if (slot >= 0 && !kept [slot] && retainedAncestor) {
 				kept [slot] = true;
 				planned [entry] = handles [slot];
 			} else {
