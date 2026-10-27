@@ -3,6 +3,8 @@ name: M3JDK21 original source typed signal Boolean query Java21
 on:
   pull_request:
     paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalTopK.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalExactIntegerDistance.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3SignalBooleanQuery.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3SignalBooleanQuery*.java'
       - 'm3/collections/qualification/signal-boolean-query-20261024/**'
@@ -37,6 +39,8 @@ jobs:
             m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java \
             m3/collections/src/main/java/com/m3/collections/M3ShadowStreams.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalExactRangeIndex.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalTopK.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalExactIntegerDistance.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalBooleanQuery.java \
             m3/collections/src/test/java/com/m3/collections/M3SignalBooleanQuerySelfTest.java
           java -cp "$out/classes" com.m3.collections.M3SignalBooleanQuerySelfTest

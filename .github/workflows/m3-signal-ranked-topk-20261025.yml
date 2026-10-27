@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3SignalTopK.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalExactIntegerDistance.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3SignalBooleanQuery.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3SignalRankedQuery*.java'
       - 'm3/collections/qualification/signal-ranked-topk-20261025/**'
@@ -40,6 +41,7 @@ jobs:
             m3/collections/src/main/java/com/m3/collections/M3ShadowStreams.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalExactRangeIndex.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalTopK.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalExactIntegerDistance.java \
             m3/collections/src/main/java/com/m3/collections/M3SignalBooleanQuery.java \
             m3/collections/src/test/java/com/m3/collections/M3SignalRankedQuerySelfTest.java
           java -cp "$out/classes" com.m3.collections.M3SignalRankedQuerySelfTest

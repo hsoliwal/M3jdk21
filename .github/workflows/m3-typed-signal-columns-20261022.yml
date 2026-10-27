@@ -41,8 +41,13 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Existing owning collections Maven module
-        run: >
-          mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=M3SignalColumnsTest,M3SignalDimensionsTest
-          test
+      - name: Build source-vendored JUnit, first-party arrays and unchanged original tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3SignalColumnsTest,M3SignalDimensionsTest test
