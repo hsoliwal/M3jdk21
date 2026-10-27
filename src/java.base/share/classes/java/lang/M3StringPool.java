@@ -1030,7 +1030,8 @@ final class M3StringPool {
             this.atoms = atoms;
             this.bigEndian = bigEndian;
             this.exactIndex =
-                    M3FrozenLexiconIndex.buildExact(offsets.length, this::exactKeyForRow);
+                    M3FrozenLexiconIndex.buildExact(
+                            offsets.length, this::exactKeyForRow, this::sameExactRows);
             this.exactRows = exactIndex.rows();
             this.generation64 = generation64;
             this.available = true;
@@ -1208,9 +1209,10 @@ final class M3StringPool {
             int encoded =
                     exactIndex.candidateExact(M3FrozenLexiconIndex.exactHashFinish(exact));
             if (encoded == 0) return -1;
-            int row = encoded - 1;
-            if (javaHashes[row] != hash || lengths[row] != 1) return -1;
-            return mappedUnit(offsets[row], 0) == unit ? row : -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != 1
+                    || mappedUnit(offsets[row], 0) != unit) return -1;
+            return encoded < 0 ? findUnitBinary(unit) : row;
         }
 
         private int findUnitBinary(char unit) {
@@ -1263,13 +1265,21 @@ final class M3StringPool {
             int encoded =
                     exactIndex.candidateExact(M3FrozenLexiconIndex.exactHashFinish(exact));
             if (encoded == 0) return -1;
-            int row = encoded - 1;
-            if (javaHashes[row] != hash || lengths[row] != utf16Length) return -1;
-            return compareCodePoints(
-                            value, offset, count, utf16Length, offsets[row], lengths[row])
-                            == 0
-                    ? row
-                    : -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != utf16Length
+                    || compareCodePoints(
+                                    value,
+                                    offset,
+                                    count,
+                                    utf16Length,
+                                    offsets[row],
+                                    lengths[row])
+                            != 0) {
+                return -1;
+            }
+            return encoded < 0
+                    ? findCodePointsBinary(value, offset, count, utf16Length)
+                    : row;
         }
 
         private int findCodePointsBinary(
@@ -1345,12 +1355,16 @@ final class M3StringPool {
             int encoded =
                     exactIndex.candidateExact(M3FrozenLexiconIndex.exactHashFinish(exact));
             if (encoded == 0) return -1;
-            int row = encoded - 1;
-            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
-            return equalsCompactBytes(
-                            value, sourceOffset, logicalLength, sourceCoder, offsets[row])
-                    ? row
-                    : -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength
+                    || !equalsCompactBytes(
+                            value, sourceOffset, logicalLength, sourceCoder, offsets[row])) {
+                return -1;
+            }
+            return encoded < 0
+                    ? findCompactBytesBinary(
+                            value, sourceOffset, logicalLength, sourceCoder)
+                    : row;
         }
 
         private int findCompactBytesBinary(
@@ -1422,9 +1436,12 @@ final class M3StringPool {
             int encoded =
                     exactIndex.candidateExact(M3FrozenLexiconIndex.exactHashFinish(exact));
             if (encoded == 0) return -1;
-            int row = encoded - 1;
-            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
-            return equalsChars(value, offset, logicalLength, offsets[row]) ? row : -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength
+                    || !equalsChars(value, offset, logicalLength, offsets[row])) {
+                return -1;
+            }
+            return encoded < 0 ? findBinary(value, offset, logicalLength) : row;
         }
 
         private int findBinary(char[] value, int offset, int logicalLength) {
@@ -1532,6 +1549,20 @@ final class M3StringPool {
                         hash, mappedUnit(offsets[row], index));
             }
             return M3FrozenLexiconIndex.exactHashFinish(hash);
+        }
+
+        /** Exact duplicate test used only while freezing the immutable index. */
+        private boolean sameExactRows(int leftRow, int rightRow) {
+            int length = lengths[leftRow];
+            if (length != lengths[rightRow]) return false;
+            int leftOffset = offsets[leftRow];
+            int rightOffset = offsets[rightRow];
+            for (int index = 0; index < length; index++) {
+                if (mappedUnit(leftOffset, index) != mappedUnit(rightOffset, index)) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private char mappedUnit(int offset, int index) {
