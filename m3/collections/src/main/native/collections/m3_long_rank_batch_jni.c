@@ -46,51 +46,54 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
         if (error != NULL) (*env)->ThrowNew(env, error, "null batch argument");
         return;
     }
-    jsize size = (*env)->GetArrayLength(env, sorted);
-    jsize count = (*env)->GetArrayLength(env, queries);
+    const jsize size = (*env)->GetArrayLength(env, sorted);
+    const jsize count = (*env)->GetArrayLength(env, queries);
     if (count != (*env)->GetArrayLength(env, results)) {
         jclass error = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
         if (error != NULL) (*env)->ThrowNew(env, error, "result length mismatch");
         return;
     }
     if (count == 0) return;
-
-    jlong *values = (*env)->GetLongArrayElements(env, sorted, NULL);
-    if (values == NULL) return;
-    jlong *targets = (*env)->GetLongArrayElements(env, queries, NULL);
-    if (targets == NULL) {
-        (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
-        return;
-    }
-    jint *positions = (*env)->GetIntArrayElements(env, results, NULL);
-    if (positions == NULL) {
-        (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
-        (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
-        return;
-    }
-
-    if (m3_use_monotone_sweep(targets, count, size, 1U)) {
-        jsize cursor = 0;
-        for (jsize i = 0; i < count; i++) {
-            while (cursor < size && values[cursor] < targets[i]) cursor++;
-            positions[i] = (jint) cursor;
-        }
-    } else {
-        for (jsize i = 0; i < count; i++) {
-            jlong needle = targets[i];
-            jsize lo = 0;
-            jsize hi = size;
-            while (lo < hi) {
-                jsize mid = lo + ((hi - lo) >> 1);
-                if (values[mid] < needle) lo = mid + 1;
-                else hi = mid;
+    /* LC #35 lower bound and LC #88 monotone merge: bounded JNI query pages.
+     * Existing Java API and JNI symbol are unchanged. No whole-array query
+     * GetArrayElements, no retained pointers, no JNI calls while source pinned.
+     */
+    enum { M3_LOWER_PAGE = 256 };
+    jlong targets[M3_LOWER_PAGE];
+    jint positions[M3_LOWER_PAGE];
+    for (jsize done = 0; done < count;) {
+        jsize batch = count - done;
+        if (batch > M3_LOWER_PAGE) batch = M3_LOWER_PAGE;
+        (*env)->GetLongArrayRegion(env, queries, done, batch, targets);
+        if ((*env)->ExceptionCheck(env)) return;
+        if (size == 0) {
+            for (jsize i = 0; i < batch; i++) positions[i] = 0;
+        } else {
+            const jlong *values = (*env)->GetPrimitiveArrayCritical(env, sorted, NULL);
+            if (values == NULL) return;
+            if (m3_use_monotone_sweep(targets, batch, size, 1U)) {
+                jsize cursor = 0;
+                for (jsize i = 0; i < batch; i++) {
+                    while (cursor < size && values[cursor] < targets[i]) cursor++;
+                    positions[i] = (jint) cursor;
+                }
+            } else {
+                for (jsize i = 0; i < batch; i++) {
+                    jsize lo = 0, hi = size;
+                    while (lo < hi) {
+                        jsize mid = lo + ((hi - lo) >> 1);
+                        if (values[mid] < targets[i]) lo = mid + 1;
+                        else hi = mid;
+                    }
+                    positions[i] = (jint) lo;
+                }
             }
-            positions[i] = (jint) lo;
+            (*env)->ReleasePrimitiveArrayCritical(env, sorted, (void *) values, JNI_ABORT);
         }
+        (*env)->SetIntArrayRegion(env, results, done, batch, positions);
+        if ((*env)->ExceptionCheck(env)) return;
+        done += batch;
     }
-    (*env)->ReleaseIntArrayElements(env, results, positions, 0);
-    (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
-    (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
 }
 
 /*
