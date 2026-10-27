@@ -1,0 +1,63 @@
+name: M3 Apache Commons Bag standalone API runtime dependency gate
+on:
+  push:
+    branches: ['m3/inline-commons-bag-contract-receiver-20261027']
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/apache-hash-bag/**'
+      - '.github/workflows/m3-inline-commons-bag-api-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  strict-standalone-compile-and-donor-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact original Apache source and JUnit postimage SHA-256
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '041c252eb54d502e2a1edd94242fbbf74e948ae6fbdc537b188ac0f64ea22003  m3/collections/implementations/apache-hash-bag/src/main/java/org/apache/commons/collections4/Bag.java' | sha256sum -c -
+          echo '73d12e03851fefe19f3a04ade5838e3bf79cf78406ca3c36cad4a90a10cf0b73  m3/collections/implementations/apache-hash-bag/src/test/java/com/m3/collections/apache/M3BagInlineRuntimeBoundaryTest.java' | sha256sum -c -
+      - name: Strict direct Java21 no-external-jar M3 dense-array compile
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          find m3/collections/implementations/apache-hash-bag/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/standalone.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/standalone.txt"
+          jar --create --file "$RUNNER_TEMP/m3-bag-standalone.jar" -C "$RUNNER_TEMP/classes" .
+          jdeps --print-module-deps "$RUNNER_TEMP/m3-bag-standalone.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+      - name: Run real Commons 4.5.0 as TEST-ONLY differential oracle and API gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/apache-hash-bag/pom.xml verify
+      - name: Verify resolved production dependency tree has no Commons or JSR-305
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/apache-hash-bag/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/runtime-tree.txt"
+          cat "$RUNNER_TEMP/runtime-tree.txt"
+          ! grep -E 'org.apache.commons:commons-collections4|com.google.code.findbugs:jsr305|org.springframework:spring-core' "$RUNNER_TEMP/runtime-tree.txt"
+      - name: Preserve exact-head evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-commons-bag-zero-runtime-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/jdeps.txt
+            ${{ runner.temp }}/runtime-tree.txt
+            m3/collections/implementations/apache-hash-bag/target/surefire-reports/
