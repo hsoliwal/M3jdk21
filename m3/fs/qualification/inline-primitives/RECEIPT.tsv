@@ -41,3 +41,13 @@ a6c74c47c4ac3c1fc09cc5662c4eb9a3462c0666c50220cf59c9e2d1cc1b6b1e	m3/fs/src/main/
 recomputed_digest_gate	exact checked-out UTF-8 source bytes (prior eight second-wave digests corrected)
 previous_head_digest_ci	FAIL source-hash mismatch (no Maven/JNI results)
 current_head_digest_ci	PENDING
+
+fourth_wave_recipe	com.synexia.m3.M3FsInlineDepthDuration
+fourth_wave_canonical_commit	c23fa15903beab57dc152e3e51de8610a2020d6f
+fourth_wave_preimages	2 exact
+fourth_wave_additive_tests	1
+fourth_wave_java21_maven	NOT_EXECUTED_AT_RECEPTION
+fourth_wave_installed_image	HOLD_OTHER_VENDOR_RUNTIME_CLOSURES
+6d0b0739e9d74fcd384504b761c50c440eabc30378fc294767d6731e75e460cd	m3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java
+b166b2e1b60e6af1e72199b9f3e306915823fe0f921d5a3c10b86ea5c3b3ba7e	m3/fs/src/main/java/com/m3/fs/vfs/FileSystemConfigBuilder.java
+1392ceaab3cc79b4fbfacc9752b7110dd5107a12768a270c3de4909fbd10c058	m3/fs/src/test/java/com/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java

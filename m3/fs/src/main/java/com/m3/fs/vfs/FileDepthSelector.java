@@ -19,14 +19,15 @@
 // Relocated Apache Commons VFS 2.10.0 to the M3FS namespace.
 package com.m3.fs.vfs;
 
-import org.apache.commons.lang3.Range;
 
 /**
  * A {@link FileSelector} that selects all files in a particular depth range.
  */
 public class FileDepthSelector implements FileSelector {
 
-    private final Range<Integer> range;
+    // Bounds are canonicalized once; no retained boxed Range object.
+    private final int minimumDepth;
+    private final int maximumDepth;
 
     /**
      * Creates a selector with the same minimum and maximum depths of 0.
@@ -54,7 +55,8 @@ public class FileDepthSelector implements FileSelector {
      * @param maxDepth maximum depth
      */
     public FileDepthSelector(final int minDepth, final int maxDepth) {
-        range = Range.between(minDepth, maxDepth);
+        minimumDepth = Math.min(minDepth, maxDepth);
+        maximumDepth = Math.max(minDepth, maxDepth);
     }
 
     /**
@@ -65,7 +67,8 @@ public class FileDepthSelector implements FileSelector {
      */
     @Override
     public boolean includeFile(final FileSelectInfo fileInfo) throws Exception {
-        return range.contains(fileInfo.getDepth());
+        final int depth = fileInfo.getDepth();
+        return depth >= minimumDepth && depth <= maximumDepth;
     }
 
     /**
@@ -76,6 +79,6 @@ public class FileDepthSelector implements FileSelector {
      */
     @Override
     public boolean traverseDescendents(final FileSelectInfo fileInfo) throws Exception {
-        return fileInfo.getDepth() < range.getMaximum();
+        return fileInfo.getDepth() < maximumDepth;
     }
 }

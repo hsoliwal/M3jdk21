@@ -6,6 +6,9 @@ on:
     paths:
       - 'm3/fs/src/main/java/com/m3/fs/vfs/util/**'
       - 'm3/fs/src/test/java/com/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java'
+      - 'm3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java'
+      - 'm3/fs/src/main/java/com/m3/fs/vfs/FileSystemConfigBuilder.java'
+      - 'm3/fs/src/test/java/com/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java'
       - 'm3/fs/qualification/inline-primitives/**'
       - '.github/workflows/m3fs-inline-primitives.yml'
 permissions:
@@ -28,7 +31,7 @@ jobs:
           set -euo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y cmake libsqlite3-dev
-      - name: Verify six received SHA256 postimages exactly
+      - name: Verify exact received M3FS source SHA256 postimages
         shell: bash
         run: |
           set -euo pipefail
@@ -46,6 +49,9 @@ jobs:
           echo '4a5764a45068b86e9e9e36774695aba1e7a02ce55eae336128c64c150f0b9cff  m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java' | sha256sum -c -
           echo '40a56e8a2967b407624de2ae102a12192f0831f385c5624170e7edc16c4d629f  m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java' | sha256sum -c -
           echo '3a0f4638631755c740b87021dbf161e898cc721e625a6c50b4673f5e00007810  m3/fs/src/test/java/com/m3/fs/vfs/filter/M3FsInlineCommonsCallsitesTest.java' | sha256sum -c -
+          echo '6d0b0739e9d74fcd384504b761c50c440eabc30378fc294767d6731e75e460cd  m3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java' | sha256sum -c -
+          echo 'b166b2e1b60e6af1e72199b9f3e306915823fe0f921d5a3c10b86ea5c3b3ba7e  m3/fs/src/main/java/com/m3/fs/vfs/FileSystemConfigBuilder.java' | sha256sum -c -
+          echo '1392ceaab3cc79b4fbfacc9752b7110dd5107a12768a270c3de4909fbd10c058  m3/fs/src/test/java/com/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java' | sha256sum -c -
           if grep -En '^import org\.apache\.commons\.lang3' \
               m3/fs/src/main/java/com/m3/fs/vfs/util/{Messages,RandomAccessMode,URIBitSets,URIUtils}.java \
               m3/fs/src/main/java/com/m3/fs/vfs/FileSystemException.java \
@@ -54,7 +60,9 @@ jobs:
               m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java \
               m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java \
               m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java \
-              m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java; then
+              m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/FileSystemConfigBuilder.java; then
             echo 'Unexpected Commons Lang import in transformed atoms' >&2
             exit 1
           fi
@@ -65,7 +73,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/fs/pom.xml \
-            -Dtest=M3FsDonorFreePrimitivesTest,M3FsInlineCommonsCallsitesTest,M3FsEmbeddedCommonsLoggingTest test \
+            -Dtest=M3FsDonorFreePrimitivesTest,M3FsInlineCommonsCallsitesTest,M3FsEmbeddedCommonsLoggingTest,M3FsDepthDurationPrimitivesTest test \
             2>&1 | tee "$RUNNER_TEMP/m3fs-focused.log"
       - name: Full original M3FS Maven/JNI verification
         shell: bash
