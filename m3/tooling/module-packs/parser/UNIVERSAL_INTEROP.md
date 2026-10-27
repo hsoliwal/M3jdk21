@@ -192,6 +192,53 @@ Provider token-index intervals (ANTLR), inclusive source coordinates and
 line/column records must be translated by the adapter using actual original
 tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
 
+## Direct Eclipse JDT DOM structural projection (2026-10-27)
+
+The existing `M3ASTIngress.eclipseJdt` remains the legacy-domain receiver
+with unchanged `ECLIPSE_JDT` V1 structural signatures. The opt-in
+`M3ASTInterop.eclipseJdtDom(source, originalJdtRoot, limits)` instead
+projects the **same already-parsed** JDT DOM tree into `GENERIC` V3 lanes.
+This is not a second parser, transplanted JDT node implementation or an
+SDK-required Eclipse dependency. It uses JDT's public
+`ASTNode.structuralPropertiesForType`, `getStructuralProperty` and
+`StructuralPropertyDescriptor.getId` contract. Scalar child properties
+carry their exact field name and `-1` position; list child properties carry
+the original field name and their original zero-based element position.
+JDT `MALFORMED`/`RECOVERED` flags are mapped without inventing token or
+trivia nodes; actual JDT `SimpleName` identifiers are detached.
+
+For providers with many structural list children,
+`Surface.childEdges(node, maxEdges)` may optionally supply one bounded
+parent-local `Edges` cursor. The original minimal `kind/childCount/child`
+interface remains valid unchanged for every existing caller. A cursor is
+read once per parent, retained only on the iterative depth-first frame and
+discarded as that frame completes. It is strictly bounded by remaining
+node capacity; it is **not** another retained AST, a semantic binder or
+an implicit parser cache. Direct JDT property enumeration is linear in
+the number of original child edges, avoiding repeated structural-property
+lookups for each child-role/ordinal query.
+
+JDT source positions are **UTF-16 half-open**. Without an externally
+attested `SourceStamp`, every projection carries `SOURCE_UNVERIFIED`
+even when JDT's offsets happen to fit the supplied `M3File` source.
+The explicit overload accepting a stamp is for a trusted original parser
+input owner, not a digest manufactured from a post-hoc copy. JDT comments,
+whitespace, extended source range, binding identity and ASTRewrite edits
+remain JDT-owned; `fullStart/fullEnd` are absent until their actual owner
+supplies them. The pre-existing `M3File` strict physical-byte capture,
+UTF-8/UTF-16 translation, change envelope and LF byte-point geometry
+remain the same source-generation authority.
+
+**Executed bounded evidence:** Java 21 strict compilation; original
+M3AST interop oracle **125,867** checks including new cursor invariants;
+real Eclipse JDT DOM **3.44.0** ASTParser and structural-descriptor oracle
+**54,183** checks over 120 seeded valid Java sources with LF/CRLF, list
+fields, Unicode identifiers, exact ranges, structural roles and budget/source
+refusal. The real JDT test and its Maven-only dependencies belong to the
+Synexia recipe fixture; no JDT bytecode/dependency is received by the SDK.
+These measurements show correctness on the stated corpus only, not full
+grammar coverage, lossless trivia recovery or comparative performance.
+
 ## Open-source design catalogue (conceptual reuse, no donor bodies copied)
 
 | Donor authority | Selected insight | M3AST mapping / remaining gate |
@@ -199,7 +246,7 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
 | [Tree-sitter](https://tree-sitter.github.io/tree-sitter/using-parsers/2-basic-parsing.html) | Incremental CST; named/anonymous tokens; named child fields; missing and error nodes; source byte ranges and LF-based byte edit points | `Surface`, `incomingRole`, list-position lane, `NAMED/TOKEN/MISSING/ERROR`, UTF-8 map and exact three-point edit geometry. Actual native/JNI grammar adapter and changed-range qualification still pending. |
 | [Roslyn red/green](https://github.com/dotnet/roslyn/blob/main/docs/compilers/Design/Red-Green%20Trees.md) | Immutable shared green nodes, lazy positioned red views, separate `Span` and trivia-inclusive `FullSpan` | Optional full-span lanes and original primitive atoms; no second red/green AST. Reuse across source generations still needs a separately proven identity/invalidator. |
 | [OpenRewrite LST](https://docs.openrewrite.org/concepts-and-explanations/lossless-semantic-trees) | Full-fidelity trivia, types and recipes; provenance-preserving edits | Optional full-span source projection; original LST retains formatting and type attribution authority. Actual OpenRewrite provider and exact reprint gates pending. |
-| [Eclipse JDT DOM](https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/dom/ASTNode.html) | Structural property descriptors, scalar/list child slots, normal/extended source ranges and recovery bits | Named/list edges and optional full ranges; preserve JDT bindings and `ASTRewrite`. Existing JDT ingress must be migrated through a contract diff, not reparsed. |
+| [Eclipse JDT DOM](https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/dom/ASTNode.html) | Structural property descriptors, scalar/list child slots, normal/extended source ranges and recovery bits | **Opt-in real JDT DOM structural projection and seeded parser-object oracle**; legacy domain remains untouched. No recovered trivia, extended span, bindings or `ASTRewrite` claim. |
 | [ANTLR4](https://github.com/antlr/antlr4/blob/dev/doc/unicode.md) | CodePointCharStream scalar indexes; rule contexts, alternative numbers, inclusive token intervals and ordered children | Single sparse surrogate lane plus `CODE_POINTS` original-range conversion; actual runtime-object fixture PASS. Generated grammar, recovery, trivia and original parser-generation gates pending. |
 | [JavaParser](https://github.com/javaparser/javaparser/blob/master/javaparser-core/src/main/java/com/github/javaparser/ast/Node.java) | Token ranges, lexical preservation, comments and user properties | Map only detached facts; foreign lexical printer/edit owner survives. Direct provider contract pending. |
 | [LibCST](https://libcst.readthedocs.io/en/latest/metadata.html) | Immutable CST and optional metadata/byte-span providers | Optional sidecar model, source coordinate conversion; no Python runtime in M3JDK21. |
@@ -208,10 +255,13 @@ tokens/source, not guessed by M3AST. Invalid/missing ranges are `(-1,-1)`.
 ## Next compatibility gates, not yet implemented
 
 1. Attach real Tree-sitter (JNI/C11 only if independently justified), ANTLR
-   **generated grammar**, JavaParser, JDT, OpenRewrite and other parser
+   **generated grammar**, JavaParser, OpenRewrite and other parser
    adapters to their *already parsed* trees; compare ranges, roles, errors
-   and token/trivia completeness. The ANTLR runtime-object fixture above
-   demonstrates its source-coordinate bridge, not complete grammar coverage.
+   and token/trivia completeness. Complete the new JDT ingress with actual
+   extended/comment ranges, incremental binding deltas and `ASTRewrite`
+   round-trip proofs before promoting it as lossless. The ANTLR
+   runtime-object fixture above demonstrates its source-coordinate bridge,
+   not complete grammar coverage.
 2. Extend the now-tested **one physical observation → one immutable parser
    snapshot** bridge into build generations and persistent delta state: reuse
    original provider metadata (file-key/version, mtime, length) as a cheap

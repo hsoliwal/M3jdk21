@@ -341,6 +341,95 @@ public final class M3ASTInteropContract {
         }
     }
 
+    private static void boundedParentEdgeCursorContracts() {
+        M3File source = M3File.of(URI.create("memory:/cursor.java"), "abcdef");
+        Node shared = new Node("Name", 1, 3, M3ASTIndex.NAMED);
+        Node nested = new Node("Group", 0, 4, M3ASTIndex.NAMED,
+                new Node[] {shared}, new String[] {"body"}, new int[] {-1});
+        Node root = new Node("Root", 0, 6, M3ASTIndex.NAMED,
+                new Node[] {shared, nested, shared},
+                new String[] {"members", "members", "members"},
+                new int[] {0, 1, 2});
+        int[] cursors = {0};
+        M3ASTInterop.Surface<Node> cursorSurface = new M3ASTInterop.Surface<>() {
+            @Override public String kind(Node node) { return node.kind; }
+            @Override public int childCount(Node node) {
+                throw new AssertionError("cursor provider must not rescan childCount");
+            }
+            @Override public Node child(Node node, int ordinal) {
+                throw new AssertionError("cursor provider must not rescan child");
+            }
+            @Override public M3ASTInterop.Edges<Node> childEdges(Node node, int maxEdges) {
+                cursors[0]++;
+                if (node.children.length > maxEdges) {
+                    throw new IllegalArgumentException("bounded parent edge cursor");
+                }
+                return new M3ASTInterop.Edges<>() {
+                    @Override public int count() { return node.children.length; }
+                    @Override public Node child(int ordinal) { return node.children[ordinal]; }
+                    @Override public String role(int ordinal) { return node.roles[ordinal]; }
+                    @Override public int rolePosition(int ordinal) {
+                        return node.rolePositions == null ? -1 : node.rolePositions[ordinal];
+                    }
+                };
+            }
+            @Override public int start(Node node) { return node.start; }
+            @Override public int end(Node node) { return node.end; }
+            @Override public int syntaxFlags(Node node) { return node.flags; }
+        };
+        M3ASTInterop.SourceStamp stamp =
+                new M3ASTInterop.SourceStamp(source.uri(), source.utf16Sha256(), null);
+        M3ASTIngress.Limits limits = new M3ASTIngress.Limits(100, 5, 3);
+        M3ASTIndex snapshot = M3ASTInterop.project(source, root, "jdt-probe",
+                M3ASTInterop.Coordinates.UTF16, cursorSurface, stamp, limits);
+        equal(5, snapshot.nodeCount());
+        equal(5, cursors[0]);
+        equal("members", snapshot.incomingRole(1).orElseThrow());
+        equal(0, snapshot.incomingRolePosition(1));
+        equal("members", snapshot.incomingRole(2).orElseThrow());
+        equal(1, snapshot.incomingRolePosition(2));
+        equal("body", snapshot.incomingRole(3).orElseThrow());
+        equal(-1, snapshot.incomingRolePosition(3));
+        equal(2, snapshot.incomingRolePosition(4));
+        equal(2, snapshot.parent(3));
+        equal(0, snapshot.parent(4));
+        equal(M3ASTIndex.GENERIC_POSITIONED_STRUCTURE_HASH_SCHEMA,
+                snapshot.structuralHashes(5, 100).schema());
+        M3ASTIndex direct = M3ASTInterop.project(source, root, "jdt-probe",
+                M3ASTInterop.Coordinates.UTF16, SURFACE, stamp, limits);
+        for (int i = 0; i < snapshot.nodeCount(); i++) {
+            equal(direct.kind(i), snapshot.kind(i));
+            equal(direct.parent(i), snapshot.parent(i));
+            equal(direct.flags(i), snapshot.flags(i));
+            equal(direct.incomingRole(i), snapshot.incomingRole(i));
+            equal(direct.incomingRolePosition(i), snapshot.incomingRolePosition(i));
+        }
+        equal(direct.structuralHashes(5, 100).sha256(0),
+                snapshot.structuralHashes(5, 100).sha256(0));
+
+        refuses(IllegalArgumentException.class, () -> M3ASTInterop.project(
+                source, root, "jdt-probe", M3ASTInterop.Coordinates.UTF16,
+                cursorSurface, stamp, new M3ASTIngress.Limits(100, 4, 3)));
+        refuses(IllegalArgumentException.class, () -> M3ASTInterop.project(
+                source, root, "jdt-probe", M3ASTInterop.Coordinates.UTF16,
+                cursorSurface, stamp, new M3ASTIngress.Limits(100, 5, 2)));
+        refuses(IllegalArgumentException.class, () -> M3ASTInterop.project(
+                source, root, "jdt-probe", M3ASTInterop.Coordinates.UTF16,
+                new M3ASTInterop.Surface<>() {
+                    @Override public String kind(Node node) { return node.kind; }
+                    @Override public int childCount(Node node) { return 0; }
+                    @Override public Node child(Node node, int ordinal) { return null; }
+                    @Override public M3ASTInterop.Edges<Node> childEdges(Node node, int bound) {
+                        return new M3ASTInterop.Edges<>() {
+                            @Override public int count() { return bound + 1; }
+                            @Override public Node child(int ordinal) { return shared; }
+                        };
+                    }
+                }, stamp, limits));
+        refuses(IllegalArgumentException.class, () ->
+                M3ASTInterop.eclipseJdtDom(source, new Object(), limits));
+    }
+
     private static void fieldListPositionContracts() {
         M3File source = M3File.of(URI.create("memory:/list-fields.java"), "abc");
         Node reused = new Node("Name", 0, 1, M3ASTIndex.NAMED);
@@ -858,6 +947,7 @@ public final class M3ASTInteropContract {
         byteAndIndexContracts();
         randomizedOffsets();
         sourceDeltaContracts();
+        boundedParentEdgeCursorContracts();
         fieldListPositionContracts();
         sourceLineIndexContracts();
         fullSpanContracts();

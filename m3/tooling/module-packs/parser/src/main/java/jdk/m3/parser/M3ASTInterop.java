@@ -2,7 +2,11 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package jdk.m3.parser;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -39,6 +43,15 @@ public final class M3ASTInterop {
         int childCount(N node);
         N child(N node, int ordinal);
 
+        /**
+         * Optional, bounded, parent-local edge snapshot. A parser with named
+         * structural properties can enumerate its direct children once instead
+         * of rescanning a list for each ordinal/role. This cursor is dropped
+         * as soon as the depth-first parent frame completes; no foreign tree
+         * or second persistent AST representation is retained.
+         */
+        default Edges<N> childEdges(N node, int maxEdges) { return null; }
+
         /** Optional named field on the parent's ordered child edge. */
         default String childRole(N parent, int ordinal) { return null; }
         /** -1 for scalar/unknown edges; 0+ for a position in a named list field. */
@@ -58,10 +71,36 @@ public final class M3ASTInterop {
         default long modifierBits(N node) { return 0L; }
     }
 
+    /** Ordered direct edges only, bounded independently of the AST node budget. */
+    public interface Edges<N> {
+        int count();
+        N child(int ordinal);
+        default String role(int ordinal) { return null; }
+        default int rolePosition(int ordinal) { return -1; }
+    }
+
     private static final int SURFACE_FLAGS = M3ASTIndex.NAMED | M3ASTIndex.TOKEN
             | M3ASTIndex.TRIVIA | M3ASTIndex.MISSING | M3ASTIndex.ERROR | M3ASTIndex.RECOVERED;
 
     private M3ASTInterop() { }
+
+    /**
+     * Opt-in projection of the original Eclipse JDT DOM tree and its actual
+     * StructuralPropertyDescriptors. JDT remains the sole parser/AST owner;
+     * this method has no compile-time or mandatory runtime JDT dependency.
+     * Without an original source stamp, all ranges remain unverified.
+     */
+    public static M3ASTIndex eclipseJdtDom(M3File source, Object root,
+            M3ASTIngress.Limits limits) {
+        return eclipseJdtDom(source, root, null, limits);
+    }
+
+    /** A stamp is an explicit assertion from the original JDT source owner. */
+    public static M3ASTIndex eclipseJdtDom(M3File source, Object root,
+            SourceStamp parserStamp, M3ASTIngress.Limits limits) {
+        return project(source, root, "eclipse.jdt.core.dom", Coordinates.UTF16,
+                new JdtDomSurface(root), parserStamp, limits);
+    }
 
     /**
      * One iterative, bounded visit of the already parsed source generation.
@@ -96,24 +135,30 @@ public final class M3ASTInterop {
         int[] indexedRows = new int[capacity];
         int[] childCounts = new int[capacity];
         int[] next = new int[capacity];
+        Edges<?>[] edgeFrames = new Edges<?>[capacity];
         int rootRow = append(index, -1, root, null, -1, coordinates,
                 offsets, codePoints, surface, sourceVerified);
         nodes[0] = root;
         indexedRows[0] = rootRow;
-        childCounts[0] = count(surface, root);
+        edgeFrames[0] = surface.childEdges(root, limits.maxNodes() - 1);
+        childCounts[0] = count(surface, root, castEdges(edgeFrames[0]), limits.maxNodes() - 1);
         int depth = 1;
         while (depth > 0) {
             int frame = depth - 1;
             if (next[frame] == childCounts[frame]) {
                 nodes[frame] = null;
+                edgeFrames[frame] = null;
                 depth--;
                 continue;
             }
             N parent = cast(nodes[frame]);
             int ordinal = next[frame]++;
-            N child = Objects.requireNonNull(surface.child(parent, ordinal), "foreign AST child");
-            String role = surface.childRole(parent, ordinal);
-            int rolePosition = surface.childRolePosition(parent, ordinal);
+            Edges<N> edges = castEdges(edgeFrames[frame]);
+            N child = Objects.requireNonNull(edges == null ? surface.child(parent, ordinal)
+                    : edges.child(ordinal), "foreign AST child");
+            String role = edges == null ? surface.childRole(parent, ordinal) : edges.role(ordinal);
+            int rolePosition = edges == null ? surface.childRolePosition(parent, ordinal)
+                    : edges.rolePosition(ordinal);
             if (depth == limits.maxDepth()) throw new IllegalArgumentException("AST depth budget exceeded");
             int row = append(index, indexedRows[frame], child, role, rolePosition,
                     coordinates, offsets, codePoints, surface, sourceVerified);
@@ -123,10 +168,13 @@ public final class M3ASTInterop {
                 indexedRows = java.util.Arrays.copyOf(indexedRows, size);
                 childCounts = java.util.Arrays.copyOf(childCounts, size);
                 next = java.util.Arrays.copyOf(next, size);
+                edgeFrames = java.util.Arrays.copyOf(edgeFrames, size);
             }
             nodes[depth] = child;
             indexedRows[depth] = row;
-            childCounts[depth] = count(surface, child);
+            int remaining = limits.maxNodes() - row - 1;
+            edgeFrames[depth] = surface.childEdges(child, remaining);
+            childCounts[depth] = count(surface, child, castEdges(edgeFrames[depth]), remaining);
             next[depth++] = 0;
         }
         return index.seal();
@@ -148,6 +196,18 @@ public final class M3ASTInterop {
         if (count < 0) throw new IllegalArgumentException("negative foreign child count");
         return count;
     }
+
+    private static <N> int count(Surface<N> surface, N node, Edges<N> edges, int maxEdges) {
+        if (edges == null) return count(surface, node);
+        int count = edges.count();
+        if (count < 0 || count > maxEdges) {
+            throw new IllegalArgumentException("foreign AST edge budget exceeded");
+        }
+        return count;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <N> Edges<N> castEdges(Edges<?> value) { return (Edges<N>) value; }
 
     private static <N> int append(M3ASTIndex.Builder index, int parent, N node, String role,
             int rolePosition,
@@ -191,6 +251,183 @@ public final class M3ASTInterop {
             index.details(row, -1, -1, name, kind, literal, modifiers, -1, -1);
         }
         return row;
+    }
+
+    /**
+     * The JDT-specific work stops at its public DOM reflection surface.
+     * Field metadata is read once per parent, into transient parallel arrays
+     * held only by that parent's bounded traversal frame.
+     */
+    private static final class JdtDomSurface implements Surface<Object> {
+        private final Class<?> nodes;
+        private final Class<?> simpleNames;
+        private final Method structuralProperties;
+        private final Method structuralProperty;
+        private final Method isChildProperty;
+        private final Method isChildListProperty;
+        private final Method propertyId;
+        private final Method nodeStart;
+        private final Method nodeLength;
+        private final Method nodeFlags;
+        private final Method identifier;
+        private final int malformedFlag;
+        private final int recoveredFlag;
+
+        JdtDomSurface(Object root) {
+            Objects.requireNonNull(root, "original Eclipse JDT root");
+            try {
+                ClassLoader loader = root.getClass().getClassLoader();
+                nodes = Class.forName("org.eclipse.jdt.core.dom.ASTNode", false, loader);
+                Class<?> descriptor = Class.forName(
+                        "org.eclipse.jdt.core.dom.StructuralPropertyDescriptor", false, loader);
+                simpleNames = Class.forName("org.eclipse.jdt.core.dom.SimpleName", false, loader);
+                if (!nodes.isInstance(root)) {
+                    throw new IllegalArgumentException("original root is not a JDT DOM ASTNode");
+                }
+                structuralProperties = nodes.getMethod("structuralPropertiesForType");
+                structuralProperty = nodes.getMethod("getStructuralProperty", descriptor);
+                isChildProperty = descriptor.getMethod("isChildProperty");
+                isChildListProperty = descriptor.getMethod("isChildListProperty");
+                propertyId = descriptor.getMethod("getId");
+                nodeStart = nodes.getMethod("getStartPosition");
+                nodeLength = nodes.getMethod("getLength");
+                nodeFlags = nodes.getMethod("getFlags");
+                identifier = simpleNames.getMethod("getIdentifier");
+                malformedFlag = nodes.getField("MALFORMED").getInt(null);
+                recoveredFlag = nodes.getField("RECOVERED").getInt(null);
+            } catch (ReflectiveOperationException failure) {
+                throw new IllegalArgumentException("Eclipse JDT DOM runtime is missing/incompatible", failure);
+            }
+        }
+
+        @Override public String kind(Object node) {
+            requireNode(node);
+            return "JDT_" + node.getClass().getSimpleName();
+        }
+
+        @Override public int childCount(Object node) {
+            return collect(node, Integer.MAX_VALUE).count();
+        }
+
+        @Override public Object child(Object node, int ordinal) {
+            return collect(node, Integer.MAX_VALUE).child(ordinal);
+        }
+
+        @Override public Edges<Object> childEdges(Object node, int maxEdges) {
+            return collect(node, maxEdges);
+        }
+
+        @Override public int start(Object node) {
+            int at = (Integer) invoke(nodeStart, node);
+            if (at < -1) throw new IllegalArgumentException("invalid JDT DOM source start");
+            return at;
+        }
+
+        @Override public int end(Object node) {
+            int at = start(node);
+            int length = (Integer) invoke(nodeLength, node);
+            if (length < 0) throw new IllegalArgumentException("invalid JDT DOM source length");
+            return at == -1 ? -1 : Math.addExact(at, length);
+        }
+
+        @Override public int syntaxFlags(Object node) {
+            int jdt = (Integer) invoke(nodeFlags, node);
+            int bits = M3ASTIndex.NAMED;
+            if ((jdt & recoveredFlag) != 0) bits |= M3ASTIndex.RECOVERED;
+            if ((jdt & malformedFlag) != 0) {
+                bits |= M3ASTIndex.ERROR | M3ASTIndex.RECOVERED;
+            }
+            return bits;
+        }
+
+        @Override public String name(Object node) {
+            return simpleNames.isInstance(node) ? (String) invoke(identifier, node) : null;
+        }
+
+        private void requireNode(Object node) {
+            if (!nodes.isInstance(node)) {
+                throw new IllegalArgumentException("JDT DOM structural child is not an ASTNode");
+            }
+        }
+
+        private Edges<Object> collect(Object parent, int maxEdges) {
+            requireNode(parent);
+            if (maxEdges < 0) throw new IllegalArgumentException("negative child budget");
+            JdtEdges children = null;
+            List<?> descriptors = (List<?>) invoke(structuralProperties, parent);
+            for (Object descriptor : descriptors) {
+                boolean scalar = (Boolean) invoke(isChildProperty, descriptor);
+                boolean list = (Boolean) invoke(isChildListProperty, descriptor);
+                if (!scalar && !list) continue;
+                String role = (String) invoke(propertyId, descriptor);
+                Object value = invoke(structuralProperty, parent, descriptor);
+                if (scalar) {
+                    if (value == null) continue;
+                    requireNode(value);
+                    if (children == null) children = new JdtEdges(maxEdges);
+                    children.add(value, role, -1);
+                } else {
+                    if (!(value instanceof List<?> members)) {
+                        throw new IllegalArgumentException("JDT child-list property is not a List");
+                    }
+                    for (int ordinal = 0; ordinal < members.size(); ordinal++) {
+                        Object child = members.get(ordinal);
+                        requireNode(child);
+                        if (children == null) children = new JdtEdges(maxEdges);
+                        children.add(child, role, ordinal);
+                    }
+                }
+            }
+            return children == null ? JdtEdges.EMPTY : children;
+        }
+
+        private static Object invoke(Method method, Object receiver, Object... arguments) {
+            try {
+                return method.invoke(receiver, arguments);
+            } catch (InvocationTargetException failure) {
+                throw new IllegalArgumentException("original JDT DOM traversal failed", failure.getCause());
+            } catch (IllegalAccessException failure) {
+                throw new IllegalArgumentException("original JDT DOM member inaccessible", failure);
+            }
+        }
+    }
+
+    private static final class JdtEdges implements Edges<Object> {
+        static final JdtEdges EMPTY = new JdtEdges(0);
+        private final int limit;
+        private Object[] children;
+        private String[] roles;
+        private int[] positions;
+        private int size;
+
+        JdtEdges(int limit) {
+            this.limit = limit;
+            int capacity = Math.min(4, limit);
+            children = new Object[capacity];
+            roles = new String[capacity];
+            positions = new int[capacity];
+        }
+
+        void add(Object child, String role, int position) {
+            if (size == limit) throw new IllegalArgumentException("JDT child edge budget exceeded");
+            if (size == children.length) {
+                int grown = (int) Math.min((long) limit,
+                        children.length + (long) (children.length >>> 1) + 1L);
+                children = Arrays.copyOf(children, grown);
+                roles = Arrays.copyOf(roles, grown);
+                positions = Arrays.copyOf(positions, grown);
+            }
+            children[size] = child;
+            roles[size] = role;
+            positions[size++] = position;
+        }
+
+        @Override public int count() { return size; }
+        @Override public Object child(int ordinal) { return children[Objects.checkIndex(ordinal, size)]; }
+        @Override public String role(int ordinal) { return roles[Objects.checkIndex(ordinal, size)]; }
+        @Override public int rolePosition(int ordinal) {
+            return positions[Objects.checkIndex(ordinal, size)];
+        }
     }
 
     @SuppressWarnings("unchecked")
