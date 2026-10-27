@@ -53,6 +53,8 @@ import sun.nio.ch.DirectBuffer;
 final class M3StringPool {
     private static final long LEXICON_MAGIC = 0x4d334c4558303031L;
     private static final int LEXICON_HEADER = 64;
+    private static final long LEXICON_INDEX_MAGIC = 0x4d334c5849445831L; // M3LXIDX1
+    private static final int LEXICON_INDEX_HEADER = 32;
     private static final int MAX_LEXICON_BYTES = 1 << 30;
     private static final Unsafe UNSAFE = Unsafe.getUnsafe();
 
@@ -1020,6 +1022,21 @@ final class M3StringPool {
                 byte[] coders,
                 long generation64,
                 boolean bigEndian) {
+            this(mapping, payloadOffset, offsets, lengths, javaHashes, atoms, coders,
+                    generation64, bigEndian, null);
+        }
+
+        private Lexicon(
+                ByteBuffer mapping,
+                int payloadOffset,
+                int[] offsets,
+                int[] lengths,
+                int[] javaHashes,
+                M3StringAtom[] atoms,
+                byte[] coders,
+                long generation64,
+                boolean bigEndian,
+                M3FrozenLexiconIndex preparedIndex) {
             this.mapping = Objects.requireNonNull(mapping, "mapping");
             this.baseAddress = ((DirectBuffer) mapping).address();
             this.payloadOffset = payloadOffset;
@@ -1029,9 +1046,12 @@ final class M3StringPool {
             this.coders = coders;
             this.atoms = atoms;
             this.bigEndian = bigEndian;
-            this.exactIndex =
-                    M3FrozenLexiconIndex.buildExact(
+            this.exactIndex = preparedIndex != null
+                    ? preparedIndex
+                    : M3FrozenLexiconIndex.buildExact(
                             offsets.length, this::exactKeyForRow, this::sameExactRows);
+            // Heap geometry is exposed to historical tests. Version-3 mapped geometry
+            // deliberately remains in the image and therefore has no heap row mirror.
             this.exactRows = exactIndex.rows();
             this.generation64 = generation64;
             this.available = true;
@@ -1141,17 +1161,23 @@ final class M3StringPool {
                 throw new IOException("unsupported MIndex lexicon image");
             }
             int version = mapped.getInt(8);
-            if (version != 1 && version != 2) {
+            if (version != 1 && version != 2 && version != 3) {
                 throw new IOException("unsupported MIndex lexicon version");
             }
             int count = mapped.getInt(12);
             int directoryBytes = version == 1 ? 8 : 12;
             long payload = mapped.getLong(16);
             long units = mapped.getLong(24);
+            long textEnd;
+            try {
+                textEnd = Math.addExact(payload, Math.multiplyExact(2L, units));
+            } catch (ArithmeticException malformed) {
+                throw new IOException("invalid MIndex lexicon dimensions", malformed);
+            }
             if (count < 0
                     || payload != LEXICON_HEADER + (long) directoryBytes * count
                     || units < 0
-                    || payload + 2L * units != size) {
+                    || (version < 3 ? textEnd != size : textEnd + LEXICON_INDEX_HEADER > size)) {
                 throw new IOException("invalid MIndex lexicon dimensions");
             }
 
@@ -1179,7 +1205,7 @@ final class M3StringPool {
                 long geometry = scanMappedGeometry(
                         mapped, (int) payload + (offset << 1), length, false);
                 int actualHash = (int) geometry;
-                javaHashes[row] = version == 2 ? mapped.getInt(entry + 8) : actualHash;
+                javaHashes[row] = version >= 2 ? mapped.getInt(entry + 8) : actualHash;
                 if (javaHashes[row] != actualHash) {
                     throw new IOException("MIndex lexicon Java hash mismatch");
                 }
@@ -1197,8 +1223,77 @@ final class M3StringPool {
                 }
             }
             long generation64 = ByteBuffer.wrap(actual).getLong();
-            return new Lexicon(
-                    mapped, (int) payload, offsets, lengths, javaHashes, atoms, coders, generation64);
+            if (version < 3) {
+                return new Lexicon(
+                        mapped, (int) payload, offsets, lengths, javaHashes, atoms, coders,
+                        generation64);
+            }
+
+            int indexStart = Math.toIntExact(textEnd);
+            if (mapped.getLong(indexStart) != LEXICON_INDEX_MAGIC) {
+                throw new IOException("invalid MIndex lexicon direct-index magic");
+            }
+            long seed = mapped.getLong(indexStart + 8);
+            int displacementCount = mapped.getInt(indexStart + 16);
+            int rowSlotCount = mapped.getInt(indexStart + 20);
+            int indexedRows = mapped.getInt(indexStart + 24);
+            int flags = mapped.getInt(indexStart + 28);
+            if (displacementCount <= 0
+                    || rowSlotCount < 2
+                    || Integer.bitCount(displacementCount) != 1
+                    || Integer.bitCount(rowSlotCount) != 1
+                    || rowSlotCount > M3FrozenLexiconIndex.MAX_SLOTS
+                    || indexedRows != count
+                    || flags != 0) {
+                throw new IOException("invalid MIndex lexicon direct-index header");
+            }
+            long displacementBytes = (long) displacementCount * Integer.BYTES;
+            long rowBytes = (long) rowSlotCount * Integer.BYTES;
+            long expectedSize =
+                    textEnd + LEXICON_INDEX_HEADER + displacementBytes + rowBytes;
+            if (expectedSize != size) {
+                throw new IOException("invalid MIndex lexicon direct-index dimensions");
+            }
+            long indexAddress = ((DirectBuffer) mapped).address() + indexStart;
+            long displacementAddress = indexAddress + LEXICON_INDEX_HEADER;
+            long rowAddress = displacementAddress + displacementBytes;
+            M3FrozenLexiconIndex prepared;
+            try {
+                prepared =
+                        M3FrozenLexiconIndex.mapped(
+                                seed,
+                                displacementAddress,
+                                displacementCount,
+                                rowAddress,
+                                rowSlotCount);
+            } catch (IllegalArgumentException malformed) {
+                throw new IOException("invalid MIndex lexicon direct-index geometry", malformed);
+            }
+            for (int slot = 0; slot < rowSlotCount; slot++) {
+                int encoded = prepared.rowAtSlot(slot);
+                if (encoded < 0 || encoded > count) {
+                    throw new IOException("invalid MIndex lexicon direct-index row");
+                }
+            }
+            Lexicon result =
+                    new Lexicon(
+                            mapped,
+                            (int) payload,
+                            offsets,
+                            lengths,
+                            javaHashes,
+                            atoms,
+                            coders,
+                            generation64,
+                            false,
+                            prepared);
+            for (int row = 0; row < count; row++) {
+                long exact = result.exactKeyForRow(row, seed);
+                if (prepared.candidateExact(exact) != row + 1) {
+                    throw new IOException("MIndex lexicon direct-index row mismatch");
+                }
+            }
+            return result;
         }
 
         int findUnit(char unit) {
