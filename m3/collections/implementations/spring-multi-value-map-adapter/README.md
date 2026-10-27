@@ -68,3 +68,25 @@ Relation to `implementations/spring` `M3MultiValueMap`, the owner of the LinkedM
 - Its `M3SingleValueMapView` takes an `M3MultiValueMap`, so it cannot view an adapter.
 - This class carries a private first-value view of the same protocol over any `MultiValueMap`.
 - Widening that view's constructor is a proposal only.
+
+## Source-closed Spring 6.2 MultiValueMap, no downstream Spring runtime (2026-10-27)
+
+This module now contains the original Spring Apache-2.0 public
+`org.springframework.util.MultiValueMap` API and its two package-private
+scalar conversion helper classes, modified only to eliminate Spring Assert,
+CollectionUtils and external runtime calls. The `org.springframework.lang.Nullable`
+annotation preserves its Java runtime retention and target positions but not its
+JSR-305 alias meta-annotations (annotation-tooling parity is held).
+The already owned M3MultiValueMapAdapter supplies actual write-through behavior
+over caller-owned maps. Neither Spring Core nor JSR-305 is a production dependency;
+both remain test-only for authentic differential tests.
+
+Canonical recipe `com.synexia.m3.InlineSpringMultiValueApi20261027` lives exclusively
+in hsoliwal/com.synexia. This repository contains Java/test postimages,
+license/NOTICE and data-only execution receipt, not recipe sources.
+
+The existing 99%-per-class JaCoCo gate still checks the M3 implementation.
+Only the inlined upstream API source (`org/springframework/**`) is excluded
+from that first-party M3 threshold, not from compilation or runtime tests.
+A standalone mode must prevent duplicate Spring Core FQCNs or JPMS split packages;
+the entire Spring Framework is not claimed integrated.
