@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
  * GPLv2 with the Classpath exception.
+ * Modified 2026-10-27: resolve empty internal rows through the existing canonical
+ * empty descriptor; retain raw-field admission checks for nonempty String rows.
  *
  * @test
  * @summary M3 canonical String regex candidate signal bitmaps preserve JDK Pattern whole-match semantics
@@ -24,6 +26,7 @@ public class M3StringRegexRowPrecomputeTest {
     private static Class<?> m3Class;
     private static Class<?> indexClass;
     private static Method compile;
+    private static Method empty;
     private static Method prepare;
     private static Method candidates;
     private static Method matches;
@@ -39,7 +42,8 @@ public class M3StringRegexRowPrecomputeTest {
         if (stringM3 != null) {
             String s = new String(text.toCharArray());
             s.length();
-            Object existing = stringM3.get(s);
+            // Public empty Strings may stay flat; use their canonical descriptor.
+            Object existing = s.isEmpty() ? empty.invoke(null) : stringM3.get(s);
             check(existing != null);
             return existing;
         }
@@ -57,6 +61,8 @@ public class M3StringRegexRowPrecomputeTest {
         try {
             stringM3 = String.class.getDeclaredField("m3");
             stringM3.setAccessible(true);
+            empty = m3Class.getDeclaredMethod("empty");
+            empty.setAccessible(true);
         } catch (NoSuchFieldException isolatedFixture) {
             fallbackCtor = m3Class.getDeclaredConstructor(String.class);
             fallbackCtor.setAccessible(true);
