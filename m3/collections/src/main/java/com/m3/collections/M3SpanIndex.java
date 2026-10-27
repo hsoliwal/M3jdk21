@@ -221,6 +221,36 @@ public final class M3SpanIndex {
             }
             return answers;
         }
+
+        /**
+         * LeetCode #35 boundary search over the existing span prefix-max plan.
+         * Writes only {@code length} results to an already-owned primitive lane,
+         * without allocating another Java answer array or exposing source indexes.
+         * Query/output ranges are checked before any write. The source query and
+         * output arrays must be distinct, including for zero-length windows.
+         * NATIVE_REQUIRED never falls back or suppresses a missing JNI symbol.
+         */
+        public void earliestCoveringInto(int[] rows, int queryFrom, int length,
+                                         int[] output, int outputFrom, Backend backend) {
+            Objects.requireNonNull(rows, "rows");
+            Objects.requireNonNull(output, "output");
+            Objects.requireNonNull(backend, "backend");
+            Objects.checkFromIndexSize(queryFrom, length, rows.length);
+            Objects.checkFromIndexSize(outputFrom, length, output.length);
+            if (rows == output) {
+                throw new IllegalArgumentException("output must not alias query array");
+            }
+            if (backend == Backend.NATIVE_REQUIRED) {
+                if (!NATIVE_AVAILABLE) {
+                    throw new UnsatisfiedLinkError("m3_collections_span JNI unavailable");
+                }
+                batchIntoNative(starts, prefix, rows, queryFrom, length, output, outputFrom);
+                return;
+            }
+            for (int i = 0; i < length; i++) {
+                output[outputFrom + i] = earliestCovering(rows[queryFrom + i]);
+            }
+        }
     }
 
     private static final boolean NATIVE_AVAILABLE;
@@ -237,4 +267,8 @@ public final class M3SpanIndex {
 
     private static native int[] batchNative(int[] sortedStarts, long[] prefixMaximumEnds,
             int[] targetRows);
+
+    /** Additive JNI ABI for one transition over an output-backed query window. */
+    private static native void batchIntoNative(int[] sortedStarts, long[] prefixMaximumEnds,
+            int[] targetRows, int queryFrom, int length, int[] output, int outputFrom);
 }

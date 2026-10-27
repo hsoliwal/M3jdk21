@@ -1,7 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
- * Pure primitive JNI batch: Java predicate/comparator/native handles never cross.
+ * Pure primitive JNI batch: Java predicates/comparators/native handles never cross.
  */
 #include <jni.h>
 #include <stddef.h>
@@ -20,6 +20,48 @@ static jint earliest_covering(jint target, const jint *starts, const jlong *pref
     return starts[low] < target ? starts[low] : target;
 }
 
+/* LeetCode #35 boundary search over M3's *existing* prefix-maximum span plan.
+ * Chunked source/output query regions eliminate unbounded query/result JNI pins.
+ * The two immutable snapshot lanes are critically accessed only for 256 queries;
+ * NO JNI calls, allocations, blocking operations or Java callbacks occur while pinned.
+ * JNI may internally copy critical arrays, so no zero-copy guarantee is claimed.
+ */
+enum { M3_SPAN_QUERY_PAGE = 256 };
+static jboolean span_into(JNIEnv *env, jintArray sorted_starts, jlongArray prefix_max,
+        jintArray targets, jsize query_from, jsize length,
+        jintArray output, jsize output_from, jsize count) {
+    jint requests[M3_SPAN_QUERY_PAGE];
+    jint answers[M3_SPAN_QUERY_PAGE];
+    for (jsize done = 0; done < length;) {
+        jsize page = length - done;
+        if (page > M3_SPAN_QUERY_PAGE) page = M3_SPAN_QUERY_PAGE;
+        (*env)->GetIntArrayRegion(env, targets, query_from + done, page, requests);
+        if ((*env)->ExceptionCheck(env)) return JNI_FALSE;
+        const jint *starts = (*env)->GetPrimitiveArrayCritical(env, sorted_starts, NULL);
+        if (starts == NULL) return JNI_FALSE;
+        const jlong *prefix = (*env)->GetPrimitiveArrayCritical(env, prefix_max, NULL);
+        if (prefix == NULL) {
+            (*env)->ReleasePrimitiveArrayCritical(env, sorted_starts, (void *) starts, JNI_ABORT);
+            return JNI_FALSE;
+        }
+        for (jsize i = 0; i < page; i++) {
+            answers[i] = earliest_covering(requests[i], starts, prefix, count);
+        }
+        (*env)->ReleasePrimitiveArrayCritical(env, prefix_max, (void *) prefix, JNI_ABORT);
+        (*env)->ReleasePrimitiveArrayCritical(env, sorted_starts, (void *) starts, JNI_ABORT);
+        (*env)->SetIntArrayRegion(env, output, output_from + done, page, answers);
+        if ((*env)->ExceptionCheck(env)) return JNI_FALSE;
+        done += page;
+    }
+    return JNI_TRUE;
+}
+
+static void span_error(JNIEnv *env, const char *klass, const char *message) {
+    jclass error = (*env)->FindClass(env, klass);
+    if (error != NULL) (*env)->ThrowNew(env, error, message);
+}
+
+/* Existing ABI preserved: returns a detached output array. */
 JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3SpanIndex_batchNative(
         JNIEnv *env, jclass unused, jintArray sorted_starts, jlongArray prefix_max,
         jintArray targets) {
@@ -30,33 +72,37 @@ JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3SpanIndex_batchNative(
     jsize queries = (*env)->GetArrayLength(env, targets);
     jintArray result = (*env)->NewIntArray(env, queries);
     if (result == NULL) return NULL;
-
-    jint *starts = (*env)->GetIntArrayElements(env, sorted_starts, NULL);
-    if (starts == NULL) return NULL;
-    jlong *prefix = (*env)->GetLongArrayElements(env, prefix_max, NULL);
-    if (prefix == NULL) {
-        (*env)->ReleaseIntArrayElements(env, sorted_starts, starts, JNI_ABORT);
-        return NULL;
-    }
-    jint *requested = (*env)->GetIntArrayElements(env, targets, NULL);
-    if (requested == NULL) {
-        (*env)->ReleaseLongArrayElements(env, prefix_max, prefix, JNI_ABORT);
-        (*env)->ReleaseIntArrayElements(env, sorted_starts, starts, JNI_ABORT);
-        return NULL;
-    }
-    jint *answers = (*env)->GetIntArrayElements(env, result, NULL);
-    if (answers == NULL) {
-        (*env)->ReleaseIntArrayElements(env, targets, requested, JNI_ABORT);
-        (*env)->ReleaseLongArrayElements(env, prefix_max, prefix, JNI_ABORT);
-        (*env)->ReleaseIntArrayElements(env, sorted_starts, starts, JNI_ABORT);
-        return NULL;
-    }
-    for (jsize i = 0; i < queries; ++i) {
-        answers[i] = earliest_covering(requested[i], starts, prefix, count);
-    }
-    (*env)->ReleaseIntArrayElements(env, result, answers, 0);
-    (*env)->ReleaseIntArrayElements(env, targets, requested, JNI_ABORT);
-    (*env)->ReleaseLongArrayElements(env, prefix_max, prefix, JNI_ABORT);
-    (*env)->ReleaseIntArrayElements(env, sorted_starts, starts, JNI_ABORT);
+    if (span_into(env, sorted_starts, prefix_max, targets, 0, queries,
+                  result, 0, count) == JNI_FALSE) return NULL;
     return result;
+}
+
+/* Additive ABI: caller-owned output window, no result allocation or pointer lifetime. */
+JNIEXPORT void JNICALL Java_com_m3_collections_M3SpanIndex_batchIntoNative(
+        JNIEnv *env, jclass unused, jintArray sorted_starts, jlongArray prefix_max,
+        jintArray targets, jint query_from, jint length,
+        jintArray output, jint output_from) {
+    (void) unused;
+    if (sorted_starts == NULL || prefix_max == NULL || targets == NULL || output == NULL) {
+        span_error(env, "java/lang/NullPointerException", "null span batch array");
+        return;
+    }
+    jsize count = (*env)->GetArrayLength(env, sorted_starts);
+    if (count != (*env)->GetArrayLength(env, prefix_max)) {
+        span_error(env, "java/lang/IllegalArgumentException", "mismatched span lanes");
+        return;
+    }
+    jsize n = (*env)->GetArrayLength(env, targets);
+    jsize capacity = (*env)->GetArrayLength(env, output);
+    if (query_from < 0 || length < 0 || output_from < 0
+            || query_from > n - length || output_from > capacity - length) {
+        span_error(env, "java/lang/IndexOutOfBoundsException", "span batch window");
+        return;
+    }
+    if ((*env)->IsSameObject(env, targets, output)) {
+        span_error(env, "java/lang/IllegalArgumentException", "output must not alias queries");
+        return;
+    }
+    (void) span_into(env, sorted_starts, prefix_max, targets,
+                     query_from, length, output, output_from, count);
 }
