@@ -75,5 +75,73 @@ class StringLayoutTest(unittest.TestCase):
                 self.assertIn("M3_STRING_LAYOUT_FAIL", result.stderr)
 
 
+    def check_owner_scope(self, source, overrides=None):
+        # Execute the production parser call and retained-owner scan, not a copied predicate.
+        tree = ast.parse((BASE / "check-m3string-invariants.py").read_text(encoding="utf-8"))
+        layout = next(n for n in tree.body if isinstance(n, ast.FunctionDef)
+                      and n.name == "check_m3string_layout")
+        call = next(n for n in tree.body if isinstance(n, ast.Expr)
+                    and isinstance(n.value, ast.Call) and isinstance(n.value.func, ast.Name)
+                    and n.value.func.id == "check_m3string_layout")
+        scan = next(n for n in tree.body if isinstance(n, ast.For)
+                    and any(isinstance(v, ast.Constant) and v.value == "M3StringOwner.java"
+                            for v in ast.walk(n.iter)))
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            target = root / "src/java.base/share/classes/java/lang/M3String.java"
+            target.parent.mkdir(parents=True)
+            target.write_text(source, encoding="utf-8")
+            checker = root / "m3/runtime-integration/src/main/java/M3StringLayout.java"
+            checker.parent.mkdir(parents=True)
+            checker.write_bytes((BASE / "src/main/java/M3StringLayout.java").read_bytes())
+            def fail(message):
+                raise SystemExit(message)
+            scope = dict(Path=Path, ROOT=root, os=os, subprocess=subprocess, fail=fail,
+                         re=__import__("re"), m3=source)
+            for key, name in [("owner", "M3StringOwner"), ("atom", "M3StringAtom"),
+                              ("tuple_", "M3StringTuple"), ("facts", "M3StringFacts")]:
+                scope[key] = (ROOT / ("src/java.base/share/classes/java/lang/" + name + ".java")).read_text()
+            scope.update(overrides or {})
+            exec(compile(ast.Module(body=[layout, call, scan], type_ignores=[]),
+                         "production-owner-layout", "exec"), scope)
+
+    def test_current_nested_snapshot_is_not_retained_string_payload(self):
+        try:
+            self.check_owner_scope((ROOT / "src/java.base/share/classes/java/lang/M3String.java").read_text())
+        except SystemExit as error:
+            self.fail(str(error))
+
+    def test_nested_and_code_looking_arrays_are_not_direct_members(self):
+        source = ('package java.lang; final class M3String {\n'
+                  'private final M3StringOwner owner; private final long value;\n'
+                  'static final class TokenSnapshot {\n final byte[] packedAscii;\n }\n'
+                  'static final String CODE = """\n final char[] fake;\n """;\n'
+                  'void inspect() { class Local {\n final int[] offsets;\n } }\n}')
+        try:
+            self.check_owner_scope(source)
+        except SystemExit as error:
+            self.fail(str(error))
+
+    def test_direct_array_and_nonarray_fields_still_refuse(self):
+        for field in ["private final byte[] payload;", "private final byte payload[];",
+                      "private final Object payload;"]:
+            source = ('package java.lang; final class M3String {\n'
+                      'private final M3StringOwner owner; private final long value;\n' + field + '\n}')
+            with self.subTest(field=field), self.assertRaisesRegex(SystemExit, "M3String layout check failed"):
+                self.check_owner_scope(source)
+
+    def test_other_owner_instance_array_refusals_are_preserved(self):
+        source = ('package java.lang; final class M3String {\n'
+                  'private final M3StringOwner owner; private final long value;\n}')
+        for key in ["owner", "atom", "tuple_", "facts"]:
+            with self.subTest(owner=key), self.assertRaisesRegex(SystemExit, "retains array field"):
+                self.check_owner_scope(source, {key: "final byte[] payload;\n"})
+
+    def test_owner_scan_cannot_bypass_missing_compiler(self):
+        with patch.object(subprocess, "run", side_effect=FileNotFoundError("no compiler")):
+            with self.assertRaisesRegex(SystemExit, "compiler unavailable"):
+                self.check_owner_scope("package java.lang; final class M3String {}")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

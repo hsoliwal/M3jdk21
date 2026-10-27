@@ -319,9 +319,10 @@ def check_m3string_replacement_routes() -> None:
 
 check_m3string_replacement_routes()
 
-# Canonical value/owners/facts may not retain array payload.
+# M3String direct fields are already proved by check_m3string_layout above.
+# A lexical scan cannot assign nested/local fields or code-looking text to their owner.
+# Preserve the separate checks for the remaining canonical owners/facts.
 for path, text in [
-    ("M3String.java", m3),
     ("M3StringOwner.java", owner),
     ("M3StringAtom.java", atom),
     ("M3StringTuple.java", tuple_),
@@ -332,10 +333,6 @@ for path, text in [
         text,
         flags=re.MULTILINE,
     )
-    # Static implementation metadata is outside the value object; no instance array fields
-    # are allowed on the canonical value/owner/fact graph.
-    if path == "M3String.java":
-        retained_arrays = [row for row in retained_arrays if "static" not in row]
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
 
