@@ -96,6 +96,61 @@ public final class M3SpanIndexSelfTest {
         }
     }
 
+    /**
+     * LeetCode #35/#88: batches crossing every 256-query JNI region, including
+     * cross-page continuation, descending resets, duplicates and signed extremes.
+     * The Java snapshot scalar proof is authoritative for every native answer.
+     */
+    private static void verifyPagedBatches() {
+        M3SpanIndex owner = new M3SpanIndex();
+        for (int i = 0; i < 1024; i++) owner.add(i, (long) i + 15, 1);
+        M3SpanIndex.Snapshot snapshot = owner.snapshot(1, 0);
+        if (Boolean.getBoolean("m3.span.paging.native.required")
+                && !M3SpanIndex.nativeAvailable()) {
+            throw new AssertionError("required span page JNI library unavailable");
+        }
+        int[] sizes = {0, 1, 2, 255, 256, 257, 511, 512, 513, 1024, 5000};
+        for (int size : sizes) {
+            for (int mode = 0; mode < 7; mode++) {
+                int[] query = new int[size];
+                for (int i = 0; i < size; i++) {
+                    query[i] = switch (mode) {
+                        case 0 -> i / 4;
+                        case 1 -> size - i;
+                        case 2 -> i % 256;
+                        case 3 -> (i / 260 & 1) != 0 ? 1000 - (i % 260) : i % 260;
+                        case 4 -> i < size / 2 ? i / 3 : Integer.MAX_VALUE;
+                        case 5 -> i % 41 == 0 ? Integer.MIN_VALUE
+                                : i % 19 == 0 ? -1 : i % 17 == 0 ? 0 : i % 300;
+                        default -> 400;
+                    };
+                }
+                int[] java = snapshot.earliestCoveringBatch(query, M3SpanIndex.Backend.JAVA);
+                for (int i = 0; i < size; i++) {
+                    check(java[i] == snapshot.earliestCovering(query[i]),
+                            "page Java scalar oracle mode=" + mode + " ordinal=" + i);
+                }
+                if (M3SpanIndex.nativeAvailable()) {
+                    int[] nativeResult = snapshot.earliestCoveringBatch(
+                            query, M3SpanIndex.Backend.NATIVE_REQUIRED);
+                    check(Arrays.equals(java, nativeResult),
+                            "cross-page JNI parity size=" + size + " mode=" + mode);
+                    int[] output = new int[size + 6];
+                    Arrays.fill(output, -7);
+                    snapshot.earliestCoveringInto(
+                            query, 0, size, output, 3, M3SpanIndex.Backend.NATIVE_REQUIRED);
+                    for (int i = 0; i < size; i++) {
+                        check(output[3 + i] == java[i], "JNI output-window parity");
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        check(output[i] == -7 && output[size + 3 + i] == -7,
+                                "JNI output padding preserved");
+                    }
+                }
+            }
+        }
+    }
+
     public static long runAll() {
         checks = 0;
         M3SpanIndex empty = new M3SpanIndex();
@@ -161,6 +216,7 @@ public final class M3SpanIndexSelfTest {
         check(projected.startAt(0) == 0, "large sorted ascending");
         check(projected.sourceOrdinalAt(0) == 65_535, "large exact source ordinal");
         failExpected(IndexOutOfBoundsException.class, () -> projected.sourceOrdinalAt(-1));
+        verifyPagedBatches();
         long total = checks;
         System.out.println("M3SpanIndex Java21/JNI oracle: PASS " + total
                 + " assertions, JNI=" + M3SpanIndex.nativeAvailable());

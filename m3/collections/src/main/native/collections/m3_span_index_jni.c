@@ -49,11 +49,51 @@ static int span_use_monotone_sweep(const jint *requested, jsize queries, jsize c
     return (uint64_t) (uint32_t) count
             <= (uint64_t) (uint32_t) queries * (uint64_t) levels;
 }
+/*
+ * Preserve the primitive prefix cursor across contiguous nondecreasing
+ * 256-query pages. Restart when a page is unordered or its first query
+ * precedes the previously processed page's last query.
+ *
+ * LeetCode #35 lower-bound and #88 ordered two-stream merge patterns.
+ * No JNI calls, allocation, handles, or mutation of caller arrays here.
+ * Query-count cost gating remains unchanged for first/standalone pages.
+ */
+static jboolean span_answer_page(const jint *requests, jsize page,
+        const jint *starts, const jlong *prefix, jsize count, jint *answers,
+        jsize *cursor, jboolean previous_sweep, jint previous_last) {
+    const jboolean sweep = span_use_monotone_sweep(requests, page, count)
+            ? JNI_TRUE : JNI_FALSE;
+    if (sweep == JNI_TRUE) {
+        if (previous_sweep == JNI_FALSE || requests[0] < previous_last)
+            *cursor = 0;
+        for (jsize i = 0; i < page; i++) {
+            const jint row = requests[i];
+            if (row <= 0) {
+                answers[i] = row < 0 ? 0 : row;
+            } else if (starts[0] >= row || prefix[count - 1] < (jlong) row) {
+                answers[i] = row;
+            } else {
+                /* Sorted query pages never lower an accepted prefix bound. */
+                while (*cursor < count && prefix[*cursor] < (jlong) row)
+                    ++*cursor;
+                answers[i] = starts[*cursor] < row ? starts[*cursor] : row;
+            }
+        }
+    } else {
+        for (jsize i = 0; i < page; i++)
+            answers[i] = earliest_covering(requests[i], starts, prefix, count);
+    }
+    return sweep;
+}
+
 static jboolean span_into(JNIEnv *env, jintArray sorted_starts, jlongArray prefix_max,
         jintArray targets, jsize query_from, jsize length,
         jintArray output, jsize output_from, jsize count) {
     jint requests[M3_SPAN_QUERY_PAGE];
     jint answers[M3_SPAN_QUERY_PAGE];
+    jsize cursor = 0;
+    jint previous_last = 0;
+    jboolean previous_sweep = JNI_FALSE;
     for (jsize done = 0; done < length;) {
         jsize page = length - done;
         if (page > M3_SPAN_QUERY_PAGE) page = M3_SPAN_QUERY_PAGE;
@@ -66,25 +106,9 @@ static jboolean span_into(JNIEnv *env, jintArray sorted_starts, jlongArray prefi
             (*env)->ReleasePrimitiveArrayCritical(env, sorted_starts, (void *) starts, JNI_ABORT);
             return JNI_FALSE;
         }
-        if (span_use_monotone_sweep(requests, page, count)) {
-            jsize cursor = 0;
-            for (jsize i = 0; i < page; i++) {
-                jint row = requests[i];
-                if (row <= 0) {
-                    answers[i] = row < 0 ? 0 : row;
-                } else if (starts[0] >= row || prefix[count - 1] < (jlong) row) {
-                    answers[i] = row;
-                } else {
-                    /* Nondecreasing rows imply nondecreasing lower-bound indexes. */
-                    while (cursor < count && prefix[cursor] < (jlong) row) cursor++;
-                    answers[i] = starts[cursor] < row ? starts[cursor] : row;
-                }
-            }
-        } else {
-            for (jsize i = 0; i < page; i++) {
-                answers[i] = earliest_covering(requests[i], starts, prefix, count);
-            }
-        }
+        previous_sweep = span_answer_page(requests, page, starts, prefix,
+                count, answers, &cursor, previous_sweep, previous_last);
+        previous_last = requests[page - 1];
         (*env)->ReleasePrimitiveArrayCritical(env, prefix_max, (void *) prefix, JNI_ABORT);
         (*env)->ReleasePrimitiveArrayCritical(env, sorted_starts, (void *) starts, JNI_ABORT);
         (*env)->SetIntArrayRegion(env, output, output_from + done, page, answers);
