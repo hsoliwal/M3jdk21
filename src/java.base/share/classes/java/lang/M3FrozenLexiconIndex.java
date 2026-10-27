@@ -15,6 +15,8 @@
 
 package java.lang;
 
+import jdk.internal.misc.Unsafe;
+
 /**
  * Precomputed one-candidate address geometry for an immutable M3 lexicon.
  *
@@ -40,21 +42,73 @@ final class M3FrozenLexiconIndex {
     private static final long EXACT_OFFSET = 0xcbf29ce484222325L;
     private static final long EXACT_PRIME = 0x100000001b3L;
     private static final long EXACT_DOMAIN = 0x4d33455841435431L; // M3EXACT1
+    private static final Unsafe UNSAFE = Unsafe.getUnsafe();
+    private static final int[] NO_INTS = new int[0];
     private static final M3FrozenLexiconIndex EMPTY =
-            new M3FrozenLexiconIndex(0L, new int[0], new int[0]);
+            new M3FrozenLexiconIndex(0L, NO_INTS, NO_INTS);
 
     private final long seed;
     private final int[] displacements;
     private final int[] rows;
+    private final long mappedDisplacements;
+    private final long mappedRows;
+    private final int displacementCount;
+    private final int rowSlotCount;
 
     private M3FrozenLexiconIndex(long seed, int[] displacements, int[] rows) {
         this.seed = seed;
         this.displacements = displacements;
         this.rows = rows;
+        this.mappedDisplacements = 0L;
+        this.mappedRows = 0L;
+        this.displacementCount = displacements.length;
+        this.rowSlotCount = rows.length;
+    }
+
+    private M3FrozenLexiconIndex(
+            long seed,
+            long mappedDisplacements,
+            int displacementCount,
+            long mappedRows,
+            int rowSlotCount) {
+        this.seed = seed;
+        this.displacements = NO_INTS;
+        this.rows = NO_INTS;
+        this.mappedDisplacements = mappedDisplacements;
+        this.mappedRows = mappedRows;
+        this.displacementCount = displacementCount;
+        this.rowSlotCount = rowSlotCount;
     }
 
     static M3FrozenLexiconIndex empty() {
         return EMPTY;
+    }
+
+    /**
+     * Opens lookup geometry that remains owned by an immutable mapped lexicon image.
+     * Integers are stored big-endian so the same image is portable across host byte order.
+     */
+    static M3FrozenLexiconIndex mapped(
+            long seed,
+            long displacementAddress,
+            int displacementCount,
+            long rowAddress,
+            int rowSlotCount) {
+        if (displacementAddress <= 0L
+                || rowAddress <= 0L
+                || displacementCount <= 0
+                || rowSlotCount < 2
+                || Integer.bitCount(displacementCount) != 1
+                || Integer.bitCount(rowSlotCount) != 1
+                || rowSlotCount > MAX_SLOTS) {
+            throw new IllegalArgumentException("invalid mapped M3 frozen index geometry");
+        }
+        return new M3FrozenLexiconIndex(
+                seed,
+                displacementAddress,
+                displacementCount,
+                rowAddress,
+                rowSlotCount);
     }
 
     @FunctionalInterface
@@ -161,17 +215,17 @@ final class M3FrozenLexiconIndex {
     }
 
     boolean available() {
-        return rows.length != 0;
+        return rowSlotCount != 0;
     }
 
     int candidate(int hash, int length) {
-        if (rows.length == 0) return 0;
+        if (rowSlotCount == 0) return 0;
         long mixed = mix64(key(hash, length) ^ seed);
-        int bucket = ((int) mixed) & (displacements.length - 1);
+        int bucket = ((int) mixed) & (displacementCount - 1);
         int slot =
-                (((int) (mixed >>> Integer.SIZE)) + displacements[bucket])
-                        & (rows.length - 1);
-        return rows[slot];
+                (((int) (mixed >>> Integer.SIZE)) + displacementAt(bucket))
+                        & (rowSlotCount - 1);
+        return rowAt(slot);
     }
 
     /**
@@ -181,13 +235,13 @@ final class M3FrozenLexiconIndex {
      * this is pure primitive address arithmetic plus two array reads.</p>
      */
     int candidateExact(long exactHash) {
-        if (rows.length == 0) return 0;
+        if (rowSlotCount == 0) return 0;
         long mixed = mix64(exactHash);
-        int bucket = ((int) mixed) & (displacements.length - 1);
+        int bucket = ((int) mixed) & (displacementCount - 1);
         int slot =
-                (((int) (mixed >>> Integer.SIZE)) + displacements[bucket])
-                        & (rows.length - 1);
-        return rows[slot];
+                (((int) (mixed >>> Integer.SIZE)) + displacementAt(bucket))
+                        & (rowSlotCount - 1);
+        return rowAt(slot);
     }
 
     int[] rows() {
@@ -200,6 +254,31 @@ final class M3FrozenLexiconIndex {
 
     long seed() {
         return seed;
+    }
+
+    int rowSlotCount() {
+        return rowSlotCount;
+    }
+
+    int rowAtSlot(int slot) {
+        if (slot < 0 || slot >= rowSlotCount) {
+            throw new IndexOutOfBoundsException(slot);
+        }
+        return rowAt(slot);
+    }
+
+    private int displacementAt(int bucket) {
+        return mappedDisplacements == 0L
+                ? displacements[bucket]
+                : UNSAFE.getIntUnaligned(
+                        null, mappedDisplacements + ((long) bucket << 2), true);
+    }
+
+    private int rowAt(int slot) {
+        return mappedRows == 0L
+                ? rows[slot]
+                : UNSAFE.getIntUnaligned(
+                        null, mappedRows + ((long) slot << 2), true);
     }
 
     private static Groups group(int[] hashes, int[] lengths) {
