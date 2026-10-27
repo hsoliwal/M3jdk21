@@ -1,0 +1,43 @@
+{
+  "schema": "M3JDK21_VIEWPORT_FENWICK_DOCUMENTATION_RECEIVING_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "05a53325e3f085ac0cb22bff8f1230e6e378c704",
+  "canonical_dataset": "vpt-fenwick-doc-20261027",
+  "canonical_recipe": "com.synexia.m3.ViewportFenwickDocumentation20261027",
+  "predecessor_product_commit": "36dd7250b850bd3d73fb35e0a0cda331bdd1ce17",
+  "predecessor_source_sha256": "67dfc959f41cc12923ae341b8af323a348c54baf6efeef9289f430aa95467a13",
+  "predecessor_source_git_blob": "30da24c981af0ec549d3116d96f3b6ad9dc212b7",
+  "exact_Java_LST_result_git_blob": "ba6b2ebd0fac9f737deb28bce9385fff07164997",
+  "post_sha256": "c33b5fa89838379ff5b4ce12bb16364b09789e9e3179990430b65dff99602d7c",
+  "change_description": "Correct existing M3SparseExtents JavaDoc complexity from O(log squared measured) to O(log measured), after preceding source-changing Fenwick inverse.",
+  "canonical_sdk": {
+    "genuine_java21_parser": "8.17.1",
+    "real_Recipe_run": true,
+    "junit_tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "emitted_results": 1,
+    "receiver_check_changes": 1,
+    "receiver_apply_changes": 1,
+    "receiver_fixed_point_changes": 0
+  },
+  "actual_java_product_tests": {
+    "normal_tests": 12,
+    "interpreted_tests": 12,
+    "all_pass": true
+  },
+  "exact_java_bytecode_before_after": {
+    "before_sha256": "bed4c564473d35fd8f1eeb1330239ab190e88c3b68d4920f762d30ea09c3ee67",
+    "after_sha256": "bed4c564473d35fd8f1eeb1330239ab190e88c3b68d4920f762d30ea09c3ee67",
+    "public_descriptors_unchanged": true
+  },
+  "original_first_stage_receipt": "qualification/viewport-fenwick/RECEIVING.json",
+  "local_test_pom_variation": "Authenticated cached slf4j-api:2.0.9 used in place of unavailable test-only slf4j-simple:2.0.13; production Java and canonical recipe owners exact.",
+  "source_materialization": "REVIEW_BRANCH_ONLY",
+  "product_hosted_ci": "PENDING",
+  "JDK_HotSpot_jtreg": "NOT_RUN",
+  "native_SWT_Nebula_GEF_RWT": "NOT_RUN",
+  "throughput_heap_RSS_FPS_claim": false,
+  "product_default_branch_unchanged": true
+}

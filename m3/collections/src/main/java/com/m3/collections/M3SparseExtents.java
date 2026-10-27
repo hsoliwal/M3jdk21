@@ -35,7 +35,7 @@ import java.util.*;
  * backing. Sorted primitive row IDs and measured extents carry only measured rows;
  * the existing Fenwick algorithm indexes their signed deltas from the estimate.
  * With m measured rows, offset and repeat measurement are O(log m), row lookup is
- * O(log squared m), and sequential first measurements append in O(log m). A first
+ * O(log m), and sequential first measurements append in O(log m). A first
  * measurement inserted in the middle, deletion of measurements, or an estimate
  * change is O(m). This is a sparse-residency tradeoff, not a universal speedup.
  * No Item/proxy or per-row object is created. Reset drops all measurement backing.
