@@ -321,6 +321,101 @@ final class M3FrozenLexiconIndex {
         return new M3FrozenLexiconIndex(seed, displacements, rows);
     }
 
+    /**
+     * Places keys that already include their content seed. Equal prepared keys
+     * are unplaceable by construction and therefore cause a new content seed
+     * to be tried rather than creating an ambiguity marker.
+     */
+    private static M3FrozenLexiconIndex placePrepared(
+            Groups groups, long contentSeed, int bucketCount, int slotCount) {
+        int groupCount = groups.keys.length;
+        int[] bucketCounts = new int[bucketCount];
+        int[] bucketByGroup = new int[groupCount];
+        int[] baseSlotByGroup = new int[groupCount];
+        int bucketMask = bucketCount - 1;
+        int slotMask = slotCount - 1;
+        int maxBucket = 0;
+        int nonEmptyBuckets = 0;
+
+        for (int group = 0; group < groupCount; group++) {
+            long mixed = mix64(groups.keys[group]);
+            int bucket = ((int) mixed) & bucketMask;
+            int count = ++bucketCounts[bucket];
+            if (count == 1) nonEmptyBuckets++;
+            if (count > maxBucket) maxBucket = count;
+            bucketByGroup[group] = bucket;
+            baseSlotByGroup[group] = ((int) (mixed >>> Integer.SIZE)) & slotMask;
+        }
+
+        int[] offsets = new int[bucketCount + 1];
+        for (int bucket = 0; bucket < bucketCount; bucket++) {
+            offsets[bucket + 1] = offsets[bucket] + bucketCounts[bucket];
+        }
+        int[] cursors = offsets.clone();
+        int[] bucketGroups = new int[groupCount];
+        for (int group = 0; group < groupCount; group++) {
+            int bucket = bucketByGroup[group];
+            bucketGroups[cursors[bucket]++] = group;
+        }
+        if (hasAliasedBaseSlots(offsets, bucketGroups, baseSlotByGroup)) return null;
+
+        int[] cardinalities = new int[maxBucket + 1];
+        for (int count : bucketCounts) {
+            if (count != 0) cardinalities[count]++;
+        }
+        int[] starts = new int[maxBucket + 1];
+        int cursor = 0;
+        for (int count = maxBucket; count >= 1; count--) {
+            starts[count] = cursor;
+            cursor += cardinalities[count];
+        }
+        int[] next = starts.clone();
+        int[] order = new int[nonEmptyBuckets];
+        for (int bucket = 0; bucket < bucketCount; bucket++) {
+            int count = bucketCounts[bucket];
+            if (count != 0) order[next[count]++] = bucket;
+        }
+
+        int[] displacements = new int[bucketCount];
+        int[] rows = new int[slotCount];
+        int[] candidates = new int[maxBucket];
+        int attempts = Math.min(slotCount, MAX_DISPLACEMENT_ATTEMPTS);
+        for (int bucket : order) {
+            int count = bucketCounts[bucket];
+            int from = offsets[bucket];
+            boolean placed = false;
+            for (int displacement = 0; displacement < attempts; displacement++) {
+                boolean collision = false;
+                for (int ordinal = 0; ordinal < count; ordinal++) {
+                    int group = bucketGroups[from + ordinal];
+                    int slot = (baseSlotByGroup[group] + displacement) & slotMask;
+                    if (rows[slot] != 0) {
+                        collision = true;
+                        break;
+                    }
+                    for (int prior = 0; prior < ordinal; prior++) {
+                        if (candidates[prior] == slot) {
+                            collision = true;
+                            break;
+                        }
+                    }
+                    if (collision) break;
+                    candidates[ordinal] = slot;
+                }
+                if (collision) continue;
+                displacements[bucket] = displacement;
+                for (int ordinal = 0; ordinal < count; ordinal++) {
+                    int group = bucketGroups[from + ordinal];
+                    rows[candidates[ordinal]] = groups.rows[group];
+                }
+                placed = true;
+                break;
+            }
+            if (!placed) return null;
+        }
+        return new M3FrozenLexiconIndex(contentSeed, displacements, rows);
+    }
+
     private static boolean hasAliasedBaseSlots(
             int[] offsets, int[] bucketGroups, int[] baseSlotByGroup) {
         for (int bucket = 0; bucket < offsets.length - 1; bucket++) {
