@@ -29,6 +29,34 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Refuse target Java source and passive receipt drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(Path(
+              "m3/docs/qualification/current-api-internality-20261027/RECEIVER_RECEIPT.json"
+          ).read_text(encoding="utf-8"))
+          source = Path(receipt["product"]["source_path"])
+          if source.as_posix() != "test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java":
+              raise SystemExit("M3JDK_BOUNDARY_REFUSED: unexpected product owner")
+          data = source.read_bytes()
+          expected = receipt["postimage"]
+          git_blob = hashlib.sha1(
+              b"blob " + str(len(data)).encode("ascii") + b"\\0" + data
+          ).hexdigest()
+          if (hashlib.sha256(data).hexdigest() != expected["sha256"]
+                  or git_blob != expected["git_blob_sha1"]
+                  or len(data) != expected["utf8_bytes"]):
+              raise SystemExit("M3JDK_BOUNDARY_REFUSED: source blob or SHA256 drift")
+          if receipt["product"]["product_jdk_classes_modified"] != 0:
+              raise SystemExit("M3JDK_BOUNDARY_REFUSED: source mutation falsely qualified")
+          print("M3JDK_BOUNDARY_RECEIPT_PASS", len(data), expected["sha256"])
+          PY
       - name: Compile exact target jtreg Java source
         shell: bash
         run: |
