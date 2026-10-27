@@ -90,7 +90,7 @@ public final class M3CodePointSourceContract {
                 && coverage.coveredUtf16() == text.length()
                 && coverage.utf16Sha256().equals(source.utf16Sha256()),
                 "real exact codepoint-ingress token/trivia source fidelity");
-        refuse(IllegalArgumentException.class, () ->
+        refuse(IndexOutOfBoundsException.class, () ->
                 M3ASTExternalIngress.project(source,
                         new Node("bad", 0, 7, 0, new Node[0]),
                         new Adapter(positions), new M3ASTIngress.Limits(100, 10, 10)));
