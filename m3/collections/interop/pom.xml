@@ -17,6 +17,11 @@
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Provider-interface signatures still require four external compile-time
+         families. Keep this opt-in compatibility artifact out of ordinary
+         install/deploy until it meets the zero-third-party consumer contract. -->
+    <maven.install.skip>true</maven.install.skip>
+    <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
   <dependencies>
     <dependency>

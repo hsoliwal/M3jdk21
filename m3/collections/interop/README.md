@@ -92,3 +92,32 @@ remain unqualified. A compatible factory interface does not qualify every concre
 class or serialized form. All unlisted APIs remain unqualified. Pinned dependency versions
 are compatibility inputs, not latest-version or production-security endorsements. Existing
 M3 and upstream licenses and attribution remain intact.
+
+## Publication HOLD: third-party consumer dependencies (2026-10-27)
+
+The independent `com.m3:m3-collections-interop:0.1.0-SNAPSHOT` artifact currently
+exposes Guava, Eclipse Collections, Spring Core and Commons Collections types in
+its public interfaces, and its own POM declares all four as direct compile
+dependencies. This is **not** a zero-third-party downstream-dependency
+implementation. The `com.m3:m3-collections` core remains separate; do not
+conflate these two artifacts or claim that its optional interop bridge is
+fully source-inlined.
+
+Until every provider API is implemented using appropriately licensed,
+per-file provenance-controlled Synexia/M3 source with independently verified
+consumer compile/runtime dependencies, the interoperability artifact is
+**quarantined from ordinary Maven `install` and `deploy`**. Its POM sets
+`maven.install.skip=true` and `maven.deploy.skip=true`. These Maven
+defaults do not remove, shade or silently make optional the existing four
+external dependencies; they do not rewrite any Java/JNI contract. Maven
+`verify` can still execute the existing bounded tests. Explicit command-line
+overrides are possible and are not approval for production distribution.
+
+Admission requires the canonical Synexia OpenRewrite per-file recipe
+inventory and source-license receipts, equal public API/behavior and
+provider-specific tests, `mvn dependency:tree` and an isolated downstream
+consumer compile/runtime proof establishing **zero external transitive
+runtime dependencies**. Preserve provider licenses and the previous runtime
+regression evidence. See
+`qualification/PUBLICATION_HOLD_20261027.tsv`; this source-only
+quarantine is not completion of the inlining or of the larger M3JDK21 build.
