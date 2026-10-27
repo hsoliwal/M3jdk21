@@ -62,6 +62,11 @@ final class M3FrozenLexiconIndex {
         long key(int row, long seed);
     }
 
+    @FunctionalInterface
+    interface ExactEquality {
+        boolean same(int leftRow, int rightRow);
+    }
+
     /**
      * Builds the production one-candidate geometry from complete spelling keys.
      *
@@ -71,8 +76,14 @@ final class M3FrozenLexiconIndex {
      * same full-content key.</p>
      */
     static M3FrozenLexiconIndex buildExact(int count, ExactKeySource source) {
+        return buildExact(count, source, (leftRow, rightRow) -> false);
+    }
+
+    static M3FrozenLexiconIndex buildExact(
+            int count, ExactKeySource source, ExactEquality equality) {
         if (count < 0) throw new IllegalArgumentException("negative M3 frozen index size");
         if (source == null) throw new NullPointerException("source");
+        if (equality == null) throw new NullPointerException("equality");
         if (count == 0 || count > MAX_SLOTS / 2) return EMPTY;
         try {
             int slotCount = nextPowerOfTwo(Math.max(2, Math.multiplyExact(count, 2)));
@@ -84,14 +95,13 @@ final class M3FrozenLexiconIndex {
                                     (count + TARGET_BUCKET_SIZE - 1)
                                             / TARGET_BUCKET_SIZE));
             long[] keys = new long[count];
-            int[] rowIds = new int[count];
-            for (int row = 0; row < count; row++) rowIds[row] = row + 1;
-            Groups groups = new Groups(keys, rowIds);
             for (int seedIndex = 0; seedIndex < MAX_SEEDS; seedIndex++) {
                 long contentSeed = seed(seedIndex);
                 for (int row = 0; row < count; row++) {
                     keys[row] = source.key(row, contentSeed);
                 }
+                Groups groups = groupExact(keys, equality);
+                if (groups == null) continue;
                 M3FrozenLexiconIndex index =
                         placePrepared(groups, contentSeed, bucketCount, slotCount);
                 if (index != null) return index;
@@ -232,6 +242,50 @@ final class M3FrozenLexiconIndex {
             at++;
         }
         return new Groups(keys, rows);
+    }
+
+    /**
+     * Groups only byte-for-byte/UTF-16-identical rows. A seed whose 64-bit
+     * content keys collide for non-identical rows is rejected and retried.
+     * True duplicate spellings keep the historical negative-row marker so the
+     * shared-arena compatibility path can preserve its binary row authority.
+     */
+    private static Groups groupExact(long[] keys, ExactEquality equality) {
+        int capacity = nextPowerOfTwo(Math.max(2, Math.multiplyExact(keys.length, 2)));
+        long[] tableKeys = new long[capacity];
+        int[] tableRows = new int[capacity];
+        int mask = capacity - 1;
+        int groups = 0;
+        for (int row = 0; row < keys.length; row++) {
+            long key = keys[row];
+            int slot = ((int) mix64(key)) & mask;
+            boolean grouped = false;
+            while (tableRows[slot] != 0) {
+                if (tableKeys[slot] == key) {
+                    int priorRow = (tableRows[slot] & Integer.MAX_VALUE) - 1;
+                    if (!equality.same(priorRow, row)) return null;
+                    tableRows[slot] |= Integer.MIN_VALUE;
+                    grouped = true;
+                    break;
+                }
+                slot = (slot + 1) & mask;
+            }
+            if (!grouped) {
+                tableKeys[slot] = key;
+                tableRows[slot] = row + 1;
+                groups++;
+            }
+        }
+        long[] groupedKeys = new long[groups];
+        int[] groupedRows = new int[groups];
+        int at = 0;
+        for (int slot = 0; slot < tableRows.length; slot++) {
+            if (tableRows[slot] == 0) continue;
+            groupedKeys[at] = tableKeys[slot];
+            groupedRows[at] = tableRows[slot];
+            at++;
+        }
+        return new Groups(groupedKeys, groupedRows);
     }
 
     private static M3FrozenLexiconIndex place(
