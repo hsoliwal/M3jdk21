@@ -53,6 +53,50 @@ public final class M3SyntaxOriginsSnapshotContract {
         out.writeInt(s.length());
         for (int i = 0; i < s.length(); i++) out.writeChar(s.charAt(i));
     }
+    /**
+     * Independent compatibility oracle for the original wire writer. This
+     * deliberately builds the first-use dictionaries from the public Origin
+     * accessors rather than using any optimized package-private integer lanes.
+     * Its packet must be byte-identical to the lean writer for every fixture.
+     */
+    private static byte[] referencePacket(M3SyntaxOrigins origins) {
+        var ids = new java.util.LinkedHashMap<String, Integer>();
+        var hashes = new java.util.LinkedHashMap<String, String>();
+        for (int row = 0; row < origins.count(); row++) {
+            var origin = origins.origin(row);
+            ids.computeIfAbsent(origin.sourceId(), ignored -> ids.size());
+            String existing = hashes.putIfAbsent(origin.sourceId(), origin.sha256());
+            if (existing != null && !existing.equals(origin.sha256()))
+                throw new AssertionError("source generation contradiction");
+        }
+        try {
+            var bytes = new ByteArrayOutputStream();
+            var out = new DataOutputStream(bytes);
+            out.writeLong(0x4d334f524947494eL);
+            out.writeInt(1);
+            out.write(HexFormat.of().parseHex(origins.projectionSha256()));
+            out.writeInt(origins.count());
+            out.writeInt(ids.size());
+            for (String id : ids.keySet()) {
+                writeText(out, id);
+                out.write(HexFormat.of().parseHex(hashes.get(id)));
+            }
+            for (int row = 0; row < origins.count(); row++) {
+                var origin = origins.origin(row);
+                out.writeInt(origins.generatedStart(row));
+                out.writeInt(origins.generatedEnd(row));
+                out.writeInt(ids.get(origin.sourceId()));
+                out.writeInt(origin.startByte());
+                out.writeInt(origin.endByte());
+                out.writeInt(origin.relation().ordinal());
+            }
+            out.flush();
+            out.write(HexFormat.of().parseHex(sha(bytes.toByteArray())));
+            return bytes.toByteArray();
+        } catch (IOException impossible) {
+            throw new AssertionError(impossible);
+        }
+    }
     private record Source(String name, String sha256) { }
     private record Row(int from, int to, int source, int originalFrom, int originalTo, int relation) { }
     private static byte[] manuallyBuild(M3SyntaxTree tree, Source[] sources, Row[] rows) {
@@ -99,6 +143,8 @@ public final class M3SyntaxOriginsSnapshotContract {
                 .add(8, 9, secondId, sha2, 0, 1, M3SyntaxOrigins.Relation.EXACT_BYTES)
                 .freeze();
         byte[] packet = M3SyntaxOriginsSnapshot.encode(origins, 20_000);
+        check(Arrays.equals(packet, referencePacket(origins)),
+                "optimized writer retains exact original on-wire bytes");
         M3SyntaxOrigins read = decode(packet, syntax);
         check(Arrays.equals(M3SyntaxOriginsSnapshot.encode(read, 20_000), packet),
                 "canonical binary fixed point");
@@ -180,6 +226,8 @@ public final class M3SyntaxOriginsSnapshotContract {
             }
             M3SyntaxOrigins sidecar = b.freeze();
             byte[] wire = M3SyntaxOriginsSnapshot.encode(sidecar, 32768);
+            check(Arrays.equals(wire, referencePacket(sidecar)),
+                    "reference writer binary compatibility " + iteration);
             M3SyntaxOrigins back = M3SyntaxOriginsSnapshot.decode(wire, t, 512, 32, 32768);
             check(Arrays.equals(wire, M3SyntaxOriginsSnapshot.encode(back, 32768)),
                     "fixed-seed canonical wire round trip " + iteration);
@@ -198,7 +246,10 @@ public final class M3SyntaxOriginsSnapshotContract {
         String dig = sha(x);
         for (int i = 0; i < 4096; i++)
             many.add(0, 1, "source/" + i, dig, 0, 1, M3SyntaxOrigins.Relation.EXACT_BYTES);
-        byte[] mass = M3SyntaxOriginsSnapshot.encode(many.freeze(), 1024 * 1024);
+        M3SyntaxOrigins massOrigins = many.freeze();
+        byte[] mass = M3SyntaxOriginsSnapshot.encode(massOrigins, 1024 * 1024);
+        check(Arrays.equals(mass, referencePacket(massOrigins)),
+                "4096 distinct source IDs preserve the historical byte-for-byte packet");
         var massAgain = M3SyntaxOriginsSnapshot.decode(mass, bigTree, 4096, 4096, 1024 * 1024);
         check(massAgain.count() == 4096 && massAgain.origin(4095).sourceId().equals("source/4095"),
                 "4096 independent source provenance records and dictionary identities");

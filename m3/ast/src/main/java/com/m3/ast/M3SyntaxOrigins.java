@@ -33,6 +33,7 @@ public final class M3SyntaxOrigins {
     private final String[] sourceIds, sha256s;
     private final int[] sourceIndex, from, to, originalStart, originalEnd, maxEndThrough;
     private final byte[] relation;
+    private static final Relation[] RELATIONS = Relation.values();
 
     // Builder-only directory entry. Finalized origins retain primitive columns
     // and two parallel identity-string arrays, never per-origin objects.
@@ -70,8 +71,22 @@ public final class M3SyntaxOrigins {
         int at = Objects.checkIndex(index, count());
         int source = sourceIndex[at];
         return new Origin(sourceIds[source], sha256s[source], originalStart[at],
-                originalEnd[at], Relation.values()[Byte.toUnsignedInt(relation[at])]);
+                originalEnd[at], RELATIONS[Byte.toUnsignedInt(relation[at])]);
     }
+
+    /**
+     * Package-local primitive access for the canonical binary snapshot writer.
+     * No public origin object, alternate collection owner or mutable column is
+     * exposed. These source IDs are in their original first-registration order,
+     * and every source ID belongs to at least one admitted origin row.
+     */
+    int sourceIdentityCount() { return sourceIds.length; }
+    String sourceIdentityAt(int index) { return sourceIds[Objects.checkIndex(index, sourceIds.length)]; }
+    String sourceHashAt(int index) { return sha256s[Objects.checkIndex(index, sha256s.length)]; }
+    int sourceIndexAt(int row) { return sourceIndex[Objects.checkIndex(row, count())]; }
+    int originalStartAt(int row) { return originalStart[Objects.checkIndex(row, count())]; }
+    int originalEndAt(int row) { return originalEnd[Objects.checkIndex(row, count())]; }
+    int relationCodeAt(int row) { return Byte.toUnsignedInt(relation[Objects.checkIndex(row, count())]); }
 
     /** Overlapping macro/template mappings yield every applicable row. */
     public int[] originRowsAt(int generatedByte) {

@@ -12,8 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.HexFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -49,15 +47,9 @@ public final class M3SyntaxOriginsSnapshot {
         Objects.requireNonNull(origins, "origins");
         if (maximumPacketBytes < MIN_PACKET_BYTES)
             throw new IllegalArgumentException("origin snapshot byte budget too small");
-        Map<String, Integer> sources = new LinkedHashMap<>();
-        Map<String, String> hashes = new LinkedHashMap<>();
-        for (int row = 0; row < origins.count(); row++) {
-            M3SyntaxOrigins.Origin origin = origins.origin(row);
-            sources.computeIfAbsent(origin.sourceId(), ignored -> sources.size());
-            String previous = hashes.putIfAbsent(origin.sourceId(), origin.sha256());
-            if (previous != null && !previous.equals(origin.sha256()))
-                throw new IllegalArgumentException("conflicting provenance generation");
-        }
+        // The immutable owner already has the canonical first-use dictionary
+        // and flat integer source-index lane. Rebuilding a map and Origin record
+        // for every row adds heap traffic, especially for large corpus snapshots.
         try {
             BoundedBuffer buffer = new BoundedBuffer(maximumPacketBytes);
             DataOutputStream out = new DataOutputStream(buffer);
@@ -65,19 +57,18 @@ public final class M3SyntaxOriginsSnapshot {
             out.writeInt(VERSION);
             out.write(HexFormat.of().parseHex(origins.projectionSha256()));
             out.writeInt(origins.count());
-            out.writeInt(sources.size());
-            for (String id : sources.keySet()) {
-                writeText(out, id);
-                out.write(HexFormat.of().parseHex(hashes.get(id)));
+            out.writeInt(origins.sourceIdentityCount());
+            for (int i = 0; i < origins.sourceIdentityCount(); i++) {
+                writeText(out, origins.sourceIdentityAt(i));
+                out.write(HexFormat.of().parseHex(origins.sourceHashAt(i)));
             }
             for (int i = 0; i < origins.count(); i++) {
-                M3SyntaxOrigins.Origin origin = origins.origin(i);
                 out.writeInt(origins.generatedStart(i));
                 out.writeInt(origins.generatedEnd(i));
-                out.writeInt(sources.get(origin.sourceId()));
-                out.writeInt(origin.startByte());
-                out.writeInt(origin.endByte());
-                out.writeInt(origin.relation().ordinal());
+                out.writeInt(origins.sourceIndexAt(i));
+                out.writeInt(origins.originalStartAt(i));
+                out.writeInt(origins.originalEndAt(i));
+                out.writeInt(origins.relationCodeAt(i));
             }
             out.flush();
             byte[] content = buffer.toByteArray();
