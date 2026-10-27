@@ -10,7 +10,16 @@ from tempfile import TemporaryDirectory
 from unittest import TestCase, main
 from unittest.mock import patch
 
-import verify as owner
+from importlib.util import module_from_spec, spec_from_file_location
+
+# The new proof fixture has a timeless source path. Its owner remains the
+# original immutable 2026-10-18 JDK verifier, never a duplicated implementation.
+_original_owner = Path(__file__).resolve().parents[1] / "native-java-base-collection-mask-20261018" / "verify.py"
+_spec = spec_from_file_location("m3mask_original_source_verify", _original_owner)
+if _spec is None or _spec.loader is None:
+    raise RuntimeError("original JDK source verifier unavailable")
+owner = module_from_spec(_spec)
+_spec.loader.exec_module(owner)
 
 
 class CompactorSourceSuccessionTests(TestCase):

@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[3]
-SUCCESSIONS = 'm3/qualification/native-java-base-collection-mask-20261018/SOURCE_SUCCESSIONS.tsv'
+SUCCESSIONS = 'm3/qualification/native-mask-source-succession/SOURCE_SUCCESSIONS.tsv'
 COMPACTOR = 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
 HISTORICAL_SHA256 = {
     'src/java.base/share/classes/java/util/ArrayList.java':
