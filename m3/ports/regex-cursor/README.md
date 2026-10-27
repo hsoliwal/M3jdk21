@@ -20,6 +20,7 @@ Donors: [`FOSS_REUSE_DECISION.tsv`](FOSS_REUSE_DECISION.tsv), [`NOTICE`](NOTICE)
 | `M3CursorDfa` | lazy DFA: leftmost-first end, all-match reverse start, `matches()` |
 | `M3CursorPikeVm` | captures and `^ $ \A \z \Z` with leftmost-first priority |
 | `M3CursorRegex`, `M3CursorMatcher` | meta strategy and the `java.util.regex.Matcher`-shaped API |
+| `M3TokenCursor`, `M3TokenPattern`, `M3TokenPatternParser` | token-aware regex over interned token-id lanes (`<id>`, `<a-b>`, `<a,b>`, `<#CLASS>`, `<!...>`, `<.>`); t-rex construct map in `TREX_PATTERN_MAP.tsv` |
 
 ## Build and test
 
