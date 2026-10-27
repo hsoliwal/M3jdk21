@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 primitive Tree plan commit identity and JNI custody
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java'
+      - 'm3/collections/algorithm-catalog/tree-plan-commit-identity-20261027.tsv'
+      - 'm3/collections/qualification/tree-plan-commit-identity-20261027/**'
+      - '.github/workflows/m3jdk21-tree-plan-commit-identity-20261027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  exact-source-custody:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java
+            m3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java
+            m3/collections/algorithm-catalog/tree-plan-commit-identity-20261027.tsv
+            m3/collections/qualification/tree-plan-commit-identity-20261027/**
+            .github/workflows/m3jdk21-tree-plan-commit-identity-20261027.yml
+      - name: Verify exact committed implementation, test and algorithm catalogue SHA identities
+        run: |
+          python3 -m unittest discover -v \
+            -s m3/collections/qualification/tree-plan-commit-identity-20261027 \
+            -p 'test_*.py'
+          python3 m3/collections/qualification/tree-plan-commit-identity-20261027/verify_receipt.py
+
+  actual-java21-collection-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/arrays/**
+            m3/collections/**
+            .github/workflows/m3jdk21-tree-plan-commit-identity-20261027.yml
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build the existing M3 dynamic array substrate first
+        run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Compile actual primitive collection owner and test full tree-plan contracts
+        run: |
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3TreeCommitPlanIdentityTest,M3TreeWindowPlanTest,M3TreeCoverageTest test
+
+  unchanged-jni-source-admission:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c
+            m3/collections/src/main/native/collections/m3_index_mask_window.c
+            .github/workflows/m3jdk21-tree-plan-commit-identity-20261027.yml
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile existing JNI primitive-mask sources against JDK21 headers; no ABI mutation
+        run: |
+          gcc -std=c11 -fsyntax-only -Wall -Wextra -Werror \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            m3/collections/src/main/native/collections/m3_index_mask_window.c
