@@ -179,11 +179,10 @@ Java_com_m3_collections_M3LongAddressKernel_gatherSelectedNative(
  * The first equal maximum wins: evict strictly less values only.
  * No Java heap pointer is retained, and no callbacks cross the native ABI.
  */
-typedef struct m3_max_candidate {
-    jint physical;
-    jlong value;
-} m3_max_candidate;
-
+/* Parallel native primitive lanes, not padded AoS candidate records.
+ * One allocation holds aligned jint offsets followed by jlong values.
+ * Original callback, oldest-equal tie and JNI page behavior are unchanged.
+ */
 enum { M3_MAX_PAGE = 256 };
 
 static jsize m3_max_ring_slot(jsize head, jsize offset, jsize capacity) {
@@ -222,15 +221,32 @@ Java_com_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
         m3_max_throw(env, "java/lang/IndexOutOfBoundsException", "sliding max output range");
         return;
     }
-    if ((size_t) window > SIZE_MAX / sizeof(m3_max_candidate)) {
+    const size_t capacity = (size_t) window;
+    if (capacity > SIZE_MAX / sizeof(jlong)
+            || capacity > SIZE_MAX / sizeof(jint)) {
         m3_max_throw(env, "java/lang/OutOfMemoryError", "sliding max deque too large");
         return;
     }
-    m3_max_candidate *deque = malloc((size_t) window * sizeof(*deque));
-    if (deque == NULL) {
+    const size_t index_bytes = capacity * sizeof(jint);
+    const size_t alignment = _Alignof(jlong);
+    const size_t padding = (alignment - (index_bytes % alignment)) % alignment;
+    if (index_bytes > SIZE_MAX - padding) {
+        m3_max_throw(env, "java/lang/OutOfMemoryError", "sliding max lane alignment");
+        return;
+    }
+    const size_t value_offset = index_bytes + padding;
+    const size_t value_bytes = capacity * sizeof(jlong);
+    if (value_offset > SIZE_MAX - value_bytes) {
+        m3_max_throw(env, "java/lang/OutOfMemoryError", "sliding max lane overflow");
+        return;
+    }
+    unsigned char *scratch = malloc(value_offset + value_bytes);
+    if (scratch == NULL) {
         m3_max_throw(env, "java/lang/OutOfMemoryError", "sliding max deque allocation");
         return;
     }
+    jint *physical = (jint *) scratch;
+    jlong *candidate = (jlong *) (scratch + value_offset);
     jsize head = 0, size = 0, produced = 0, chunk_size = 0;
     jlong input_page[M3_MAX_PAGE];
     jint output_page[M3_MAX_PAGE];
@@ -238,29 +254,29 @@ Java_com_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
         jint count = to - read;
         if (count > M3_MAX_PAGE) count = M3_MAX_PAGE;
         (*env)->GetLongArrayRegion(env, values, read, count, input_page);
-        if ((*env)->ExceptionCheck(env)) { free(deque); return; }
+        if ((*env)->ExceptionCheck(env)) { free(scratch); return; }
         for (jint step = 0; step < count; step++) {
             const jint index = read + step;
             const jlong value = input_page[step];
-            if (size != 0 && deque[head].physical <= index - window) {
+            if (size != 0 && physical[head] <= index - window) {
                 head = (head + 1 == window) ? 0 : head + 1;
                 size--;
             }
             while (size != 0) {
                 jsize tail = m3_max_ring_slot(head, size - 1, window);
-                if (deque[tail].value >= value) break;
+                if (candidate[tail] >= value) break;
                 size--;
             }
             const jsize slot = m3_max_ring_slot(head, size, window);
-            deque[slot].physical = index;
-            deque[slot].value = value;
+            physical[slot] = index;
+            candidate[slot] = value;
             size++;
             if (index - from >= window - 1) {
-                output_page[chunk_size++] = deque[head].physical;
+                output_page[chunk_size++] = physical[head];
                 if (chunk_size == M3_MAX_PAGE) {
                     (*env)->SetIntArrayRegion(env, output,
                             output_from + produced, chunk_size, output_page);
-                    if ((*env)->ExceptionCheck(env)) { free(deque); return; }
+                    if ((*env)->ExceptionCheck(env)) { free(scratch); return; }
                     produced += chunk_size;
                     chunk_size = 0;
                 }
@@ -272,5 +288,5 @@ Java_com_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
         (*env)->SetIntArrayRegion(env, output, output_from + produced,
                 chunk_size, output_page);
     }
-    free(deque);
+    free(scratch);
 }

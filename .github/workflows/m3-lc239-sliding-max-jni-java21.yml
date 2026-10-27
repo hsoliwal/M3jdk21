@@ -34,7 +34,7 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java)" = '6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2'
-          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = 'b4e698c6ede7297f5e3d6d2af6fdeb25bb7fb8e7'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = '76f68619a78b52ab528f4f16dcf26b510288c7c9'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LaneSlidingMaximumContract.java)" = '84cfbc24efa4884584ac7cd1b71b55d6cba6c834'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LaneSlidingMaximumTest.java)" = '987dde85f0260c1f43801df4d514e52a7e1ffd71'
       - name: Strict Java 21 original-source compile and JNI header
@@ -53,6 +53,7 @@ jobs:
           cc -std=c17 -O2 -Wall -Wextra -Werror -fsanitize=undefined \
             -fno-sanitize-recover=undefined -shared -fPIC \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$RUNNER_TEMP/m3lc239/headers/com_m3_collections_M3LaneAlgorithms.h" \
             m3/collections/src/main/native/collections/m3_long_address_kernel.c \
             -o "$RUNNER_TEMP/m3lc239/libm3_collections_address.so"
       - name: Four normal/interpreted Java/JNI differential executions
