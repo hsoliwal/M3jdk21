@@ -39,7 +39,7 @@ jobs:
           mvn -B -ntp -f "$Q/recipe/pom.xml" \
             -Dm3.dataset=filtered-navigation-20261018 \
             -Drecipe.owner.root="$PWD/$Q/recipe/sdk-owner" -Pcontract verify
-          python3 "$Q/recipe/receive.py" --dataset filtered-navigation-20261018 --target "$PWD" --check
+          python3 m3/collections/qualification/filtered-current/verify_shadow.py --crate "$Q/recipe" --dataset filtered-navigation-20261018 --target "$PWD"
           awk -F '\t' '!/^#/ && NF == 3 {print $3 "  " $1}' \
             "$Q/recipe/target/filtered-navigation-20261018/candidate/SDK_RESULTS.tsv" | sha256sum -c -
       - name: Preserve historical receipt and unchanged predecessor outputs
