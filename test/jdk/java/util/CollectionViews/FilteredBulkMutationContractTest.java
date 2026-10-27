@@ -52,8 +52,12 @@ public final class FilteredBulkMutationContractTest {
         @Override public Iterator<E> iterator() { return elements.iterator(); }
     }
 
-    private static final class CopyOnWriteListSubclass<E> extends CopyOnWriteArrayList<E> { }
-    private static final class CopyOnWriteSetSubclass<E> extends CopyOnWriteArraySet<E> { }
+    private static final class CopyOnWriteListSubclass<E> extends CopyOnWriteArrayList<E> {
+        private static final long serialVersionUID = 1L;
+    }
+    private static final class CopyOnWriteSetSubclass<E> extends CopyOnWriteArraySet<E> {
+        private static final long serialVersionUID = 1L;
+    }
 
     private static void check(boolean condition, String reason) {
         checks++;
