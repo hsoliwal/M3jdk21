@@ -50,7 +50,8 @@ jobs:
             m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java \
             m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java \
             m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3StateMaskArraysSelfTest.java
+            m3/collections/src/test/java/com/m3/collections/M3StateMaskArraysSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
       - name: Run Java differential and metamorphic owners
         shell: bash
         run: |
@@ -69,6 +70,10 @@ jobs:
           }
           run_contracts
           run_contracts -Xint
+          java -cp "$OUT/classes" com.m3.collections.M3IndexMaskCompactorSelfTest \
+            > "$OUT/M3IndexMaskCompactorSelfTest.log" 2>&1
+          grep -Fq 'PASS M3IndexMaskCompactorSelfTest checks=' "$OUT/M3IndexMaskCompactorSelfTest.log"
+          cat "$OUT/M3IndexMaskCompactorSelfTest.log"
       - name: Compile and require original JNI mask selection parity
         shell: bash
         run: |
@@ -86,3 +91,10 @@ jobs:
             grep -Eq 'PASS M3LongIndexProjectionSelfTest checks=|PASS M3LongBitmapFilteredSnapshotSelfTest checks=|PASS M3StateMaskArrays checks=' "$OUT/native-${cls##*.}.log"
             cat "$OUT/native-${cls##*.}.log"
           done
+          # The existing first-party oracle requires successful native admission:
+          # a Java-only fallback MUST NOT satisfy this qualification gate.
+          java -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" \
+            com.m3.collections.M3IndexMaskCompactorSelfTest --native \
+            > "$OUT/native-required.log" 2>&1
+          grep -Fq 'PASS M3IndexMaskCompactorSelfTest checks=' "$OUT/native-required.log"
+          cat "$OUT/native-required.log"
