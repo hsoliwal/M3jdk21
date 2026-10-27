@@ -21,7 +21,6 @@ package com.m3.fs.vfs.util;
 
 import java.util.BitSet;
 
-import org.apache.commons.lang3.util.FluentBitSet;
 import com.m3.fs.vfs.provider.GenericURLFileName;
 
 /**
@@ -38,7 +37,7 @@ final class URIBitSets {
      * The percent "%" character always has the reserved purpose of being the escape indicator, it must be escaped as "%25"
      * in order to be used as data within a URI.
      */
-    static final FluentBitSet PERCENT = bitSet('%');
+    static final M3UriMask PERCENT = bitSet('%');
 
     /**
      * BitSet for digit.
@@ -52,7 +51,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet DIGIT = bitSet().setInclusive('0', '9');
+    static final M3UriMask DIGIT = bitSet().setInclusive('0', '9');
 
     /**
      * BitSet for alpha.
@@ -66,7 +65,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet ALPHA = bitSet().setInclusive('a', 'z').setInclusive('A', 'Z');
+    static final M3UriMask ALPHA = bitSet().setInclusive('a', 'z').setInclusive('A', 'Z');
 
     /**
      * BitSet for alphanum (join of alpha &amp; digit).
@@ -80,7 +79,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet ALPHANUM = bitSet().or(ALPHA, DIGIT);
+    static final M3UriMask ALPHANUM = bitSet().or(ALPHA, DIGIT);
 
     /**
      * BitSet for hex.
@@ -94,7 +93,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet HEX = bitSet().or(DIGIT).setInclusive('a', 'f').setInclusive('A', 'F');
+    static final M3UriMask HEX = bitSet().or(DIGIT).setInclusive('a', 'f').setInclusive('A', 'F');
 
     /**
      * BitSet for escaped.
@@ -108,7 +107,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet ESCAPED = bitSet().or(PERCENT, HEX);
+    static final M3UriMask ESCAPED = bitSet().or(PERCENT, HEX);
 
     /**
      * BitSet for mark.
@@ -122,7 +121,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet MARK = bitSet('-', '_', '.', '!', '~', '*', '\'', '(', ')');
+    static final M3UriMask MARK = bitSet('-', '_', '.', '!', '~', '*', '\'', '(', ')');
 
     /**
      * Data characters that are allowed in a URI but do not have a reserved purpose are called unreserved.
@@ -136,7 +135,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet UNRESERVED = bitSet().or(ALPHANUM, MARK);
+    static final M3UriMask UNRESERVED = bitSet().or(ALPHANUM, MARK);
 
     /**
      * BitSet for reserved.
@@ -150,7 +149,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet RESERVED = bitSet(';', '/', '?', ':', '@', '&', '=', '+', '$', ',');
+    static final M3UriMask RESERVED = bitSet(';', '/', '?', ':', '@', '&', '=', '+', '$', ',');
 
     /**
      * BitSet for uric.
@@ -164,7 +163,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet URIC = bitSet().or(RESERVED, UNRESERVED, ESCAPED);
+    static final M3UriMask URIC = bitSet().or(RESERVED, UNRESERVED, ESCAPED);
 
     /**
      * BitSet for fragment (alias for uric).
@@ -178,7 +177,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet FRAGMENT = URIC;
+    static final M3UriMask FRAGMENT = URIC;
 
     /**
      * BitSet for query (alias for uric).
@@ -192,7 +191,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet QUERY = URIC;
+    static final M3UriMask QUERY = URIC;
 
     /**
      * BitSet for pchar.
@@ -206,7 +205,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet PCHAR = bitSet(':', '@', '&', '=', '+', '$', ',').or(UNRESERVED, ESCAPED);
+    static final M3UriMask PCHAR = bitSet(':', '@', '&', '=', '+', '$', ',').or(UNRESERVED, ESCAPED);
 
     /**
      * BitSet for param (alias for pchar).
@@ -220,7 +219,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet PARAM = PCHAR;
+    static final M3UriMask PARAM = PCHAR;
 
     /**
      * BitSet for segment.
@@ -234,7 +233,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet SEGMENT = bitSet(';').or(PCHAR, PARAM);
+    static final M3UriMask SEGMENT = bitSet(';').or(PCHAR, PARAM);
 
     /**
      * BitSet for path segments.
@@ -248,7 +247,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet PATH_SEGMENTS = bitSet('/').or(SEGMENT);
+    static final M3UriMask PATH_SEGMENTS = bitSet('/').or(SEGMENT);
 
     /**
      * URI absolute path.
@@ -262,7 +261,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet ABS_PATH = bitSet('/').or(PATH_SEGMENTS);
+    static final M3UriMask ABS_PATH = bitSet('/').or(PATH_SEGMENTS);
 
     /**
      * URI bitset for encoding typical non-slash characters.
@@ -276,7 +275,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet URIC_NO_SLASH = bitSet(';', '?', ';', '@', '&', '=', '+', '$', ',').or(UNRESERVED, ESCAPED);
+    static final M3UriMask URIC_NO_SLASH = bitSet(';', '?', ';', '@', '&', '=', '+', '$', ',').or(UNRESERVED, ESCAPED);
 
     /**
      * URI bitset that combines uric_no_slash and uric.
@@ -290,7 +289,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet OPAQUE_PART = bitSet().or(URIC_NO_SLASH, URIC);
+    static final M3UriMask OPAQUE_PART = bitSet().or(URIC_NO_SLASH, URIC);
 
     /**
      * URI bitset that combines absolute path and opaque part.
@@ -304,12 +303,12 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet PATH = bitSet().or(ABS_PATH, OPAQUE_PART);
+    static final M3UriMask PATH = bitSet().or(ABS_PATH, OPAQUE_PART);
 
     /**
      * Port, a logical alias for digit.
      */
-    static final FluentBitSet PORT = DIGIT;
+    static final M3UriMask PORT = DIGIT;
 
     /**
      * Bitset that combines digit and dot fo IPv$address.
@@ -323,7 +322,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet IPV4ADDRESS = bitSet('.').or(DIGIT);
+    static final M3UriMask IPV4ADDRESS = bitSet('.').or(DIGIT);
 
     /**
      * RFC 2373.
@@ -337,7 +336,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet IPV6ADDRESS = bitSet(':').or(HEX, IPV4ADDRESS);
+    static final M3UriMask IPV6ADDRESS = bitSet(':').or(HEX, IPV4ADDRESS);
 
     /**
      * RFC 2732, 2373.
@@ -351,7 +350,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet IPV6REFERENCE = bitSet('[', ']').or(IPV6ADDRESS);
+    static final M3UriMask IPV6REFERENCE = bitSet('[', ']').or(IPV6ADDRESS);
 
     /**
      * BitSet for toplabel.
@@ -365,7 +364,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet TOPLABEL = bitSet('-').or(ALPHANUM);
+    static final M3UriMask TOPLABEL = bitSet('-').or(ALPHANUM);
 
     /**
      * BitSet for domainlabel.
@@ -379,7 +378,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet DOMAINLABEL = TOPLABEL;
+    static final M3UriMask DOMAINLABEL = TOPLABEL;
 
     /**
      * BitSet for hostname.
@@ -393,7 +392,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet HOSTNAME = bitSet('.').or(TOPLABEL);
+    static final M3UriMask HOSTNAME = bitSet('.').or(TOPLABEL);
 
     /**
      * BitSet for host.
@@ -407,7 +406,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet HOST = bitSet().or(HOSTNAME, IPV6REFERENCE);
+    static final M3UriMask HOST = bitSet().or(HOSTNAME, IPV6REFERENCE);
 
     // Static initializer for host
 //    static {
@@ -427,7 +426,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet HOSTPORT = bitSet(':').or(HOST, PORT);
+    static final M3UriMask HOSTPORT = bitSet(':').or(HOST, PORT);
 
     /**
      * Bitset for userinfo.
@@ -442,12 +441,12 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet USERINFO = bitSet(';', ':', '&', '=', '+', '$', ',').or(UNRESERVED, ESCAPED);
+    static final M3UriMask USERINFO = bitSet(';', ':', '&', '=', '+', '$', ',').or(UNRESERVED, ESCAPED);
 
     /**
      * BitSet for within the userinfo component like user and password.
      */
-    static final FluentBitSet WITHIN_USERRINFO = bitSet(';', ':', '@', '?', '/').or(USERINFO);
+    static final M3UriMask WITHIN_USERRINFO = bitSet(';', ':', '@', '?', '/').or(USERINFO);
 
     /**
      * Bitset for server.
@@ -461,7 +460,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet SERVER = bitSet('@').or(USERINFO, HOSTPORT);
+    static final M3UriMask SERVER = bitSet('@').or(USERINFO, HOSTPORT);
 
     /**
      * BitSet for reg_name.
@@ -475,7 +474,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet REG_NAME = bitSet('$', ',', ';', ':', '@', '&', '=', '+').or(UNRESERVED, ESCAPED);
+    static final M3UriMask REG_NAME = bitSet('$', ',', ';', ':', '@', '&', '=', '+').or(UNRESERVED, ESCAPED);
 
     /**
      * BitSet for authority.
@@ -489,7 +488,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet AUTHORITY = bitSet().or(SERVER, REG_NAME);
+    static final M3UriMask AUTHORITY = bitSet().or(SERVER, REG_NAME);
 
     /**
      * BitSet for scheme.
@@ -503,7 +502,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet SCHEME = bitSet('+', '-', '.').or(ALPHA, DIGIT);
+    static final M3UriMask SCHEME = bitSet('+', '-', '.').or(ALPHA, DIGIT);
 
     /**
      * BitSet for rel_segment.
@@ -517,7 +516,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet REL_SEGMENT = bitSet(';', '@', '&', '=', '+', '$', ',').or(UNRESERVED, ESCAPED);
+    static final M3UriMask REL_SEGMENT = bitSet(';', '@', '&', '=', '+', '$', ',').or(UNRESERVED, ESCAPED);
 
     /**
      * BitSet for rel_path.
@@ -531,7 +530,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet REL_PATH = bitSet().or(REL_SEGMENT, ABS_PATH);
+    static final M3UriMask REL_PATH = bitSet().or(REL_SEGMENT, ABS_PATH);
 
     /**
      * BitSet for net_path.
@@ -545,7 +544,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet NET_PATH = bitSet('/').or(AUTHORITY, ABS_PATH);
+    static final M3UriMask NET_PATH = bitSet('/').or(AUTHORITY, ABS_PATH);
 
     /**
      * BitSet for hier_part.
@@ -560,7 +559,7 @@ final class URIBitSets {
      * </p>
      */
     // hier_part.set('?'); already included
-    static final FluentBitSet HIER_PART = bitSet().or(NET_PATH, ABS_PATH, QUERY);
+    static final M3UriMask HIER_PART = bitSet().or(NET_PATH, ABS_PATH, QUERY);
 
     /**
      * BitSet for relativeURI.
@@ -575,7 +574,7 @@ final class URIBitSets {
      * </p>
      */
     // relativeURI.set('?'); already included
-    static final FluentBitSet RELATIVEURI = bitSet().or(NET_PATH, ABS_PATH, REL_PATH, QUERY);
+    static final M3UriMask RELATIVEURI = bitSet().or(NET_PATH, ABS_PATH, REL_PATH, QUERY);
 
     /**
      * BitSet for absoluteURI.
@@ -589,7 +588,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet ABSOLUTEURI = bitSet(':').or(SCHEME, HIER_PART, OPAQUE_PART);
+    static final M3UriMask ABSOLUTEURI = bitSet(':').or(SCHEME, HIER_PART, OPAQUE_PART);
 
     /**
      * BitSet for URI-reference.
@@ -603,7 +602,7 @@ final class URIBitSets {
      * </blockquote>
      * </p>
      */
-    static final FluentBitSet URI_REFERENCE = bitSet('#').or(ABSOLUTEURI, RELATIVEURI, FRAGMENT);
+    static final M3UriMask URI_REFERENCE = bitSet('#').or(ABSOLUTEURI, RELATIVEURI, FRAGMENT);
 
     // Characters disallowed within the URI syntax
     // Excluded US-ASCII Characters are like control, space, delims and unwise
@@ -611,121 +610,119 @@ final class URIBitSets {
     /**
      * BitSet for space.
      */
-    static final FluentBitSet SPACE = bitSet(0x20);
+    static final M3UriMask SPACE = bitSet(0x20);
 
     /**
      * BitSet for delims.
      */
-    static final FluentBitSet DELIMS = bitSet('<', '>', '#', '%', '"');
+    static final M3UriMask DELIMS = bitSet('<', '>', '#', '%', '"');
 
     /**
      * BitSet for unwise.
      */
-    static final FluentBitSet UNWISE = bitSet('{', '}', '|', '\\', '^', '[', ']', '`');
+    static final M3UriMask UNWISE = bitSet('{', '}', '|', '\\', '^', '[', ']', '`');
 
     /**
      * Disallowed rel_path before escaping.
      */
-    static final FluentBitSet DISALLOWED_REL_PATH = bitSet().or(URIC).andNot(REL_PATH);
+    static final M3UriMask DISALLOWED_REL_PATH = bitSet().or(URIC).andNot(REL_PATH);
 
     /**
      * Disallowed opaque_part before escaping.
      */
-    static final FluentBitSet DISALLOWED_OPAQUE_PART = bitSet().or(URIC).andNot(OPAQUE_PART);
+    static final M3UriMask DISALLOWED_OPAQUE_PART = bitSet().or(URIC).andNot(OPAQUE_PART);
 
     /**
      * Those characters that are allowed for the authority component.
      */
-    static final FluentBitSet ALLOWED_AUTHORITY = bitSet().or(AUTHORITY).clear('%');
+    static final M3UriMask ALLOWED_AUTHORITY = bitSet().or(AUTHORITY).clear('%');
 
     // Characters allowed within and for each component
 
     /**
      * Those characters that are allowed for the opaque_part.
      */
-    static final FluentBitSet ALLOWED_OPAQUE_PART = bitSet().or(OPAQUE_PART).clear('%');
+    static final M3UriMask ALLOWED_OPAQUE_PART = bitSet().or(OPAQUE_PART).clear('%');
 
     /**
      * Those characters that are allowed for the reg_name.
      */
     // allowed_reg_name.andNot(percent);
-    static final FluentBitSet ALLOWED_REG_NAME = bitSet().or(REG_NAME).clear('%');
+    static final M3UriMask ALLOWED_REG_NAME = bitSet().or(REG_NAME).clear('%');
 
     /**
      * Those characters that are allowed for the userinfo component.
      */
     // allowed_userinfo.andNot(percent);
-    static final FluentBitSet ALLOWED_USER_INFO = bitSet().or(USERINFO).clear('%');
+    static final M3UriMask ALLOWED_USER_INFO = bitSet().or(USERINFO).clear('%');
 
     /**
      * Those characters that are allowed for within the userinfo component.
      */
-    static final FluentBitSet ALLOWED_WITHIN_USERINFO = bitSet().or(WITHIN_USERRINFO).clear('%');
+    static final M3UriMask ALLOWED_WITHIN_USERINFO = bitSet().or(WITHIN_USERRINFO).clear('%');
 
     /**
      * Those characters that are allowed for the IPv6reference component. The characters '[', ']' in IPv6reference should be
      * excluded.
      */
     // allowed_IPv6reference.andNot(unwise);
-    static final FluentBitSet ALLOWED_IPV6REFERENCE = bitSet().or(IPV6REFERENCE).clear('[', ']');
+    static final M3UriMask ALLOWED_IPV6REFERENCE = bitSet().or(IPV6REFERENCE).clear('[', ']');
 
     /**
      * Those characters that are allowed for the host component. The characters '[', ']' in IPv6reference should be
      * excluded.
      */
-    static final FluentBitSet ALLOWED_HOST = bitSet().or(HOSTNAME, ALLOWED_IPV6REFERENCE);
+    static final M3UriMask ALLOWED_HOST = bitSet().or(HOSTNAME, ALLOWED_IPV6REFERENCE);
 
     /**
      * Those characters that are allowed for the authority component.
      */
-    static final FluentBitSet ALLOWED_WITHIN_AUTHORITY = bitSet().or(SERVER, REG_NAME).clear(';', ':', '@', '?', '/');
+    static final M3UriMask ALLOWED_WITHIN_AUTHORITY = bitSet().or(SERVER, REG_NAME).clear(';', ':', '@', '?', '/');
 
     /**
      * Those characters that are allowed for the abs_path.
      */
     // allowed_abs_path.set('/'); // already included
-    static final FluentBitSet ALLOWED_ABS_PATH = bitSet().or(ABS_PATH).andNot(PERCENT).clear('+');
+    static final M3UriMask ALLOWED_ABS_PATH = bitSet().or(ABS_PATH).andNot(PERCENT).clear('+');
 
     /**
      * Those characters that are allowed for the rel_path.
      */
-    static final FluentBitSet ALLOWED_REL_PATH = bitSet().or(REL_PATH).clear('%', '+');
+    static final M3UriMask ALLOWED_REL_PATH = bitSet().or(REL_PATH).clear('%', '+');
 
     /**
      * Those characters that are allowed within the path.
      */
-    static final FluentBitSet ALLOWED_WITHIN_PATH = bitSet().or(ABS_PATH).clear('/', ';', '=', '?');
+    static final M3UriMask ALLOWED_WITHIN_PATH = bitSet().or(ABS_PATH).clear('/', ';', '=', '?');
 
     /**
      * Those characters that are allowed for the query component.
      */
-    static final FluentBitSet ALLOWED_QUERY = bitSet().or(URIC).clear('%');
+    static final M3UriMask ALLOWED_QUERY = bitSet().or(URIC).clear('%');
 
     /**
      * Those characters that are allowed within the query component.
      */
     // excluded 'reserved'
-    static final FluentBitSet ALLOWED_WITHIN_QUERY = bitSet().or(ALLOWED_QUERY).andNot(RESERVED);
+    static final M3UriMask ALLOWED_WITHIN_QUERY = bitSet().or(ALLOWED_QUERY).andNot(RESERVED);
 
     /**
      * Those characters that are allowed for the fragment component.
      */
-    static final FluentBitSet ALLOWED_FRAGMENT = bitSet().or(URIC).clear('%');
+    static final M3UriMask ALLOWED_FRAGMENT = bitSet().or(URIC).clear('%');
 
     /**
      * BitSet for control.
      */
     private static final int CHARACTER_DEL = 0x7F;
     private static final int CHARACTER_US = 0x1F;
-    static final FluentBitSet CONTROL = bitSet().setInclusive(0, CHARACTER_US).set(CHARACTER_DEL);
+    static final M3UriMask CONTROL = bitSet().setInclusive(0, CHARACTER_US).set(CHARACTER_DEL);
 
-    private static final int NBITS = 256;
-
-    static FluentBitSet bitSet() {
-        return new FluentBitSet(NBITS);
+    static M3UriMask bitSet() {
+        return new M3UriMask();
     }
 
-    private static FluentBitSet bitSet(final int... bitIndexArray) {
+    private static M3UriMask bitSet(final int... bitIndexArray) {
         return bitSet().set(bitIndexArray);
     }
 

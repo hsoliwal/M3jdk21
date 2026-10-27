@@ -25,7 +25,6 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Formats messages.
@@ -35,6 +34,7 @@ public final class Messages {
     /**
      * Map from message code to MessageFormat object for the message.
      */
+    private static final Object[] NO_PARAMETERS = {};
     private static final ConcurrentMap<String, MessageFormat> MESSAGE_MAP = new ConcurrentHashMap<>();
     private static final ResourceBundle RESOURCES = new CombinedResources("com.m3.fs.vfs.Resources");
 
@@ -53,7 +53,7 @@ public final class Messages {
      * @return The formatted message.
      */
     public static String getString(final String code) {
-        return getString(code, ArrayUtils.EMPTY_OBJECT_ARRAY);
+        return getString(code, NO_PARAMETERS);
     }
 
     /**

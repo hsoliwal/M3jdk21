@@ -1,0 +1,79 @@
+name: M3FS inline Commons Lang primitive atoms — source-built receiver
+on:
+  push:
+    branches: ['m3/fs-inline-primitive-vendor-atoms-20261027']
+  pull_request:
+    paths:
+      - 'm3/fs/src/main/java/com/m3/fs/vfs/util/**'
+      - 'm3/fs/src/test/java/com/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java'
+      - 'm3/fs/qualification/m3-fs-inline-primitive-vendor-atoms-20261027/**'
+      - '.github/workflows/m3-fs-inline-primitive-vendor-atoms-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  original-m3fs-java21-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build prerequisites for original M3FS JNI owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y cmake libsqlite3-dev
+      - name: Verify six received SHA256 postimages exactly
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '7fbfd49c77ee2c20aad4deb8065cfb8e9c37000066972e13a728741149830bcf  m3/fs/src/main/java/com/m3/fs/vfs/util/M3UriMask.java' | sha256sum -c -
+          echo '8b06f68eb3c4b1e710fa15e53b5dd7225780607c5eee8db8afe16c38ec35a3c2  m3/fs/src/main/java/com/m3/fs/vfs/util/Messages.java' | sha256sum -c -
+          echo '6c14e77353396c7bd2498b3ae7af30a3b8201335758b2f344be917b527552f8c  m3/fs/src/main/java/com/m3/fs/vfs/util/RandomAccessMode.java' | sha256sum -c -
+          echo '67157d62fc8fba6d4efdf80f60c2e5535a581778e2b8bd6b739b967517a50439  m3/fs/src/main/java/com/m3/fs/vfs/util/URIBitSets.java' | sha256sum -c -
+          echo '5c014fbb021f6755935385849868244808c7c25ad1cf507c9ab0c4edc20ee984  m3/fs/src/main/java/com/m3/fs/vfs/util/URIUtils.java' | sha256sum -c -
+          echo '7d4cf9c4645116d8c32d7bf97a7c95804406f7685a9cd41b69817301ef553379  m3/fs/src/test/java/com/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java' | sha256sum -c -
+          if grep -En '^import org\\.apache\\.commons\\.lang3' \
+              m3/fs/src/main/java/com/m3/fs/vfs/util/{Messages,RandomAccessMode,URIBitSets,URIUtils}.java; then
+            echo 'Unexpected Commons Lang import in transformed atoms' >&2
+            exit 1
+          fi
+      - name: Install original M3File internal owner (not a third-party jar)
+        run: mvn -B -ntp -f m3/file/pom.xml -DskipTests install
+      - name: Execute changed M3FS differential JUnit under checked JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/fs/pom.xml \
+            -Dtest=M3FsDonorFreePrimitivesTest test \
+            2>&1 | tee "$RUNNER_TEMP/m3fs-focused.log"
+      - name: Full original M3FS Maven/JNI verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/fs/pom.xml verify \
+            2>&1 | tee "$RUNNER_TEMP/m3fs-full.log"
+      - name: Save consumer-visible runtime closure for future inlining
+        if: always()
+        shell: bash
+        run: |
+          mvn -B -ntp -f m3/fs/pom.xml dependency:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/m3fs-runtime-deps.txt" \
+            || true
+      - name: Keep actual proof and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3fs-inline-primitives-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/m3fs-focused.log
+            ${{ runner.temp }}/m3fs-full.log
+            ${{ runner.temp }}/m3fs-runtime-deps.txt
+            m3/fs/target/surefire-reports/
