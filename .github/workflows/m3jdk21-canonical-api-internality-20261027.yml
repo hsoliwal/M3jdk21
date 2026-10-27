@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 canonical JDK API and M3 internality boundary
+on:
+  pull_request:
+    paths:
+      - 'test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java'
+      - 'm3/docs/qualification/current-api-internality-20261027/**'
+      - '.github/workflows/m3jdk21-canonical-api-internality-20261027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  guard-mechanism-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+            m3/docs/qualification/current-api-internality-20261027/**
+            .github/workflows/m3jdk21-canonical-api-internality-20261027.yml
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile exact target jtreg Java source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/boundary/classes"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/boundary/classes" \
+            test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+          sha256sum test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+      - name: Positive and negative patched java.base fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/boundary"
+          mkdir -p "$root/src/java/lang" "$root/src/jdk/internal/mindex" \
+            "$root/patch" "$root/public-src/java/lang" "$root/public-patch"
+          cat > "$root/src/java/lang/M3String.java" <<'JAVA'
+          package java.lang;
+          final class M3String {}
+          JAVA
+          cat > "$root/src/jdk/internal/mindex/M3Class.java" <<'JAVA'
+          package jdk.internal.mindex;
+          public final class M3Class {}
+          JAVA
+          javac --patch-module java.base="$root/src" -Xlint:all -Werror \
+            -d "$root/patch" "$root/src/java/lang/M3String.java" \
+            "$root/src/jdk/internal/mindex/M3Class.java"
+          java --patch-module java.base="$root/patch" -cp "$root/classes" \
+            M3CanonicalApiBoundaryTest | tee "$root/positive.log"
+          grep -q 'M3JDK_CANONICAL_API_BOUNDARY_PASS' "$root/positive.log"
+          cat > "$root/public-src/java/lang/M3String.java" <<'JAVA'
+          package java.lang;
+          public final class M3String { private M3String() {} }
+          JAVA
+          javac --patch-module java.base="$root/public-src" -Xlint:all -Werror \
+            -d "$root/public-patch" "$root/public-src/java/lang/M3String.java"
+          if java --patch-module java.base="$root/public-patch:$root/patch" \
+            -cp "$root/classes" M3CanonicalApiBoundaryTest >"$root/public.log" 2>&1; then
+            echo 'ERROR: public java.lang.M3String was accepted' >&2
+            exit 1
+          fi
+          grep -q 'M3String must be package-private' "$root/public.log"
+          if java --patch-module java.base="$root/patch" \
+            --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+            -cp "$root/classes" M3CanonicalApiBoundaryTest >"$root/export.log" 2>&1; then
+            echo 'ERROR: exported jdk.internal.mindex was accepted' >&2
+            exit 1
+          fi
+          grep -q 'runtime options exposed the internal class-index package' "$root/export.log"
+          echo 'M3JDK_API_BOUNDARY_MECHANISM_PASS: positive=1 negative=2'
