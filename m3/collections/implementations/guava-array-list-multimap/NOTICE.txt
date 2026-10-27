@@ -7,3 +7,17 @@ licensed under the Apache License, Version 2.0.
 It implements the public API contract of com.google.common.collect.ArrayListMultimap from
 Guava 33.4.8-jre (Copyright (C) The Guava Authors, Apache License, Version 2.0) and links the
 Guava API interfaces ListMultimap, Multimap and Multiset. No Guava implementation code is included.
+
+Standalone source-closed Guava 33.4.8-jre API includes modified original
+Apache-2.0 public interfaces com.google.common.collect.Multimap,
+ListMultimap and Multiset with nested Multiset.Entry. Original Guava Authors
+copyright and Apache License 2.0 headers remain in every source.
+Modified 2026 by Hitesh Soliwal and contributors: compile-only GWT,
+ErrorProne and JSpecify annotations removed; default method helpers
+reimplemented using the JDK; the Multiset source is reused from Synexia's
+canonical Guava Multiset recipe, not independently hand-patched.
+Actual Guava jar is retained ONLY as a test-scope differential oracle and
+is not a downstream runtime dependency of this isolated artifact.
+Other Guava provider modules contain some matching FQCNs; do not co-load
+these individual jars or the upstream Guava jar until they share one
+source-built ABI and a proven JPMS/classloader closure.
