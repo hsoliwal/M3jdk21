@@ -92,8 +92,8 @@ public class M3StringFrozenLexiconIndexTest {
             for (int version : new int[] {1, 2}) {
                 Object lexicon = open(image(words, version));
                 check(rows(lexicon).length > 0, "ordinary fixture uses primitive slots");
-                check(Arrays.stream(rows(lexicon)).anyMatch(row -> row < 0),
-                        "hash/length collision group is marked ambiguous");
+                check(Arrays.stream(rows(lexicon)).allMatch(row -> row >= 0),
+                        "full-content direct rows never carry ambiguity markers");
                 verify(lexicon, words);
                 verify(withoutCoders(lexicon), words);
                 invalidImages(words, version);
@@ -109,8 +109,8 @@ public class M3StringFrozenLexiconIndexTest {
             String[] shared = sorted("alpha", "duplicate", "duplicate", "\u00e9", "\ud800");
             Object arena = open(sharedImage(shared));
             verify(arena, shared);
-            check(Arrays.stream(rows(arena)).anyMatch(row -> row < 0),
-                    "shared duplicate spellings preserve original binary row selection");
+            check(rows(arena).length == 0,
+                    "duplicate shared spellings preserve binary compatibility fallback");
             byte[] corruptArena = sharedImage(shared);
             corruptArena[144] ^= 1;
             reject(corruptArena, "shared payload CRC");
@@ -202,9 +202,9 @@ public class M3StringFrozenLexiconIndexTest {
         Arrays.sort(collisions);
         for (String word : collisions) check(word.hashCode() == collisions[0].hashCode(), "collision fixture");
         Object lexicon = open(image(collisions, 2));
-        check(rows(lexicon).length > 0, "ambiguous key keeps direct address geometry");
-        check(Arrays.stream(rows(lexicon)).anyMatch(row -> row < 0),
-                "ambiguous key marks exact binary authority");
+        check(rows(lexicon).length > 0, "hostile Java-hash collision set keeps direct geometry");
+        check(Arrays.stream(rows(lexicon)).allMatch(row -> row >= 0),
+                "full-content keys remove Java-hash ambiguity markers");
         verify(lexicon, collisions);
     }
 
