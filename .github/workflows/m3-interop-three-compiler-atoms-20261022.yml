@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 three source-sealed Java21 interop compiler fixes
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+      - 'm3/collections/interop/qualification/current-census-superset-20261022/**'
+      - '.github/workflows/m3-interop-three-compiler-atoms-20261022.yml'
+  push:
+    branches:
+      - m3/interop-compiler-atoms-20261022
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  three-source-contract-and-history:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: b1cc8ab32eaef5b01582623b100da80946fd9346
+          path: baseline
+          sparse-checkout: |
+            m3/collections/interop/src/test/java
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse any transformation outside the three compiler/source atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          base = Path('m3/collections/interop/src/test/java/com/m3/collections/interop')
+          original = Path('baseline') / base
+          replacements = {
+              'M3ApacheCollectionsTest.java': (
+                  '    private static final Predicate<Integer> NONNEGATIVE = value -> value != null && value >= 0;',
+                  '    @SuppressWarnings("deprecation") // Apache 4.5 Predicate is part of the compatibility contract.\n'
+                  '    private static final Predicate<Integer> NONNEGATIVE = value -> value != null && value >= 0;'),
+              'M3FiveLibraryKeyRangesTest.java': (
+                  'import java.util.List;\n',
+                  'import java.util.List;\nimport java.util.Map;\n'),
+              'M3FiveProviderFlagSelectionTest.java': (
+                  'M3FiveProviderDirectSdk.springMultiValueMap()',
+                  'M3LibraryCollections.springMultiValueMap()'),
+          }
+          expected = {
+              'M3ApacheCollectionsTest.java': '218516ad3d49f471a20c8b5dcfbdcb88ea8e278b0466dcaf900247ff7398c8d7',
+              'M3FiveLibraryKeyRangesTest.java': 'ef93d9a53e0b9935c6e796b55ce2c47e4d94a732c7ac9f07b5a635eb436cc467',
+              'M3FiveProviderFlagSelectionTest.java': '52289c1c82f43e18d1c661ffc26ee6d640129a9483838cda3199ee99e333cc31',
+          }
+          for name, (before, after) in replacements.items():
+              previous = (original / name).read_text(encoding='utf-8')
+              current = (base / name).read_text(encoding='utf-8')
+              if previous.count(before) != 1 or current != previous.replace(before, after):
+                  raise SystemExit('unadmitted old/new Java atom: ' + name)
+              if hashlib.sha256(current.encode('utf-8')).hexdigest() != expected[name]:
+                  raise SystemExit('Java21 compiler atom SHA-256 mismatch: ' + name)
+              if previous.count('@Test') != current.count('@Test'):
+                  raise SystemExit('JUnit regression method lost: ' + name)
+          print('M3_FIVE_PROVIDER_THREE_COMPILER_ATOMS_SOURCE_PASS')
+          PY
+      - name: Refuse receipt corruption, unadmitted files, and weakened historic census
+        shell: bash
+        run: |
+          set -euo pipefail
+          Q='m3/collections/interop/qualification/current-census-superset-20261022'
+          python3 -m unittest discover -s "$Q" \
+            -p 'test_verify_compiler_atoms.py' -v \
+            2>&1 | tee "$RUNNER_TEMP/three-compiler-negative-tests.log"
+          grep -F 'Ran 6 tests' "$RUNNER_TEMP/three-compiler-negative-tests.log"
