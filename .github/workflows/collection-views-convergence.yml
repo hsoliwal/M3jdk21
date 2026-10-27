@@ -63,7 +63,8 @@ jobs:
             "$P/FilteredIsEmptyDirectTest.java" \
             "$P/FilteredOwnerMembershipTest.java" \
             "$P/StoredRepresentativeOracle.java" \
-            "$P/FilteredListRemoveContractTest.java"
+            "$P/FilteredListRemoveContractTest.java" \
+            "$P/FilteredBulkMutationContractTest.java"
       - name: Run original java.base API and all collection regressions
         shell: bash
         run: |
@@ -82,7 +83,8 @@ jobs:
           "${JDK[@]}" FilteredOwnerMembershipTest
           "${JDK[@]}" StoredRepresentativeOracle
           "${JDK[@]}" FilteredListRemoveContractTest
-          for klass in StoredRepresentativeOracle FilteredListRemoveContractTest; do
+          "${JDK[@]}" FilteredBulkMutationContractTest
+          for klass in StoredRepresentativeOracle FilteredListRemoveContractTest FilteredBulkMutationContractTest; do
             java -Xint --patch-module "java.base=$PATCH_CLASSES" -cp "$TEST_CLASSES" "$klass"
             java -XX:TieredStopAtLevel=1 --patch-module "java.base=$PATCH_CLASSES" -cp "$TEST_CLASSES" "$klass"
             java -XX:-TieredCompilation -Xbatch --patch-module "java.base=$PATCH_CLASSES" -cp "$TEST_CLASSES" "$klass"

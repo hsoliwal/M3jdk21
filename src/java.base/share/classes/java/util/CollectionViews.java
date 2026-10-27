@@ -426,19 +426,33 @@ public final class CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
-            // These exact owners publish bulk changes without mutating snapshot iterators.
-            // Subclasses retain their existing iterator dispatch and override contracts.
-            if (backing.getClass() == java.util.concurrent.CopyOnWriteArrayList.class
-                    || backing.getClass() == java.util.concurrent.CopyOnWriteArraySet.class) {
+            // Snapshot iterators refuse removal even for CopyOnWrite subclasses.
+            // Ask the existing owner to perform its atomic bulk mutation.
+            if (backing instanceof java.util.concurrent.CopyOnWriteArrayList<?>
+                    || backing instanceof java.util.concurrent.CopyOnWriteArraySet<?>) {
                 return backing.removeIf(element -> visible(element) && condition.test(element));
             }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
+            int physical = 0;
             while (iterator.hasNext()) {
                 E element = iterator.next();
                 if (visible(element) && condition.test(element)) {
-                    iterator.remove();
+                    try {
+                        iterator.remove();
+                    } catch (UnsupportedOperationException unsupported) {
+                        // Some Lists permit indexed removal but not iterator removal.
+                        // Rebind the cursor after physical mutation; do not skip
+                        // equal or hidden occurrences that moved into this slot.
+                        if (!(backing instanceof List<?>)) throw unsupported;
+                        @SuppressWarnings("unchecked")
+                        List<E> list = (List<E>) backing;
+                        list.remove(physical);
+                        iterator = list.listIterator(physical);
+                    }
                     changed = true;
+                } else {
+                    physical++;
                 }
             }
             return changed;
