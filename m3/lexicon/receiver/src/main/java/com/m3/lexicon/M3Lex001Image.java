@@ -95,7 +95,7 @@ public final class M3Lex001Image {
         try {
             textEnd = Math.addExact(payload, Math.multiplyExact(2L, units));
         } catch (ArithmeticException malformed) {
-            throw new M3LexiconFormatException("invalid dimensions", malformed);
+            throw new M3LexiconFormatException("invalid dimensions");
         }
         M3LexiconFormatException.require(
                 count >= 0
