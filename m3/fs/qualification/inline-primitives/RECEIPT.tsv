@@ -1,7 +1,7 @@
 schema	m3fs-source-inlined-primitives-1
 canonical_repo	hsoliwal/com.synexia
 canonical_pull_request	https://github.com/hsoliwal/com.synexia/pull/13613
-canonical_commit	7db5720a036457915b61c242c92797e70af6cb19
+canonical_commit	b795f7cdf6502cd2cc89f45a07bcd2ff94dda3a4
 recipe	com.synexia.m3.M3FsInlinePrimitiveVendorAtoms20261027
 recipe_crate	m3-fs-inline-primitive-vendor-atoms-20261027
 source_donor	ASF Commons VFS 2.10.0 Apache-2.0 (headers retained)
@@ -30,11 +30,14 @@ postimage_sha256	path
 previous_receiver_source_build	COMPLETED_SUCCESS_358_JUNIT_12_CTEST_at_685d508a394cd0fd9f5d7f9753d90b2bf74a45db
 previous_naming_gate	FAILED_two_date_bearing_added_paths
 receiver_naming_fix	NAMING_CI_PASSED_ON_DF418EFA
-f5f0a549c9311467fd1e8f373508e25a6dca49ad0b36078219282a96f1b5e507	m3/fs/src/main/java/com/m3/fs/vfs/FileSystemException.java
-2c26c8ff88a8bf473e7f8b4979805183db8f3c6088334aab2309f7b3d6298c3f	m3/fs/src/main/java/com/m3/fs/vfs/filter/AndFileFilter.java
-d08ced7baa7202c7c1e955914910ec8ce9b80803baeec72a3ff78d9ca023dcb4	m3/fs/src/main/java/com/m3/fs/vfs/filter/WildcardFileFilter.java
-84d87f9903e6b93123c00097b955a4e393af7e449f55fe6b54cd138f52212466	m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java
-266c1cf71e54f2eee447d4dc594456e8fbb22bd95f926c45caa7ab0604ab0aa5	m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java
-4dd2664741fb9615da1d609389253e6f7f9afd037d158217ff65b4a4cdac9f94	m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java
-5fcfcee08c6bf887222ada67c669681f04fb3c7349777e0258e06ca24cc989cb	m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java
-fe055f14b6d823d106c0ed9752c11715a19531422c78878920ab908fddf29c38	m3/fs/src/test/java/com/m3/fs/vfs/filter/M3FsInlineCommonsCallsitesTest.java
+fcd74b79cdf1566358a15691e93486993be1e1ca6d6423ac727a3cbdbdfe6223	m3/fs/src/main/java/com/m3/fs/vfs/FileSystemException.java
+52534f188bd9bf1996026696a1060acea2b4a30026417df2298f5e7b4dee6350	m3/fs/src/main/java/com/m3/fs/vfs/filter/AndFileFilter.java
+06e07ed2d9d836f0a3dab5580a70fbacc204f3a6c2c1cd7cf1742c900aa6a357	m3/fs/src/main/java/com/m3/fs/vfs/filter/WildcardFileFilter.java
+3fadef1c6c3b1c0459be0720e5529f28ac8b59a77bd8345bafeac39232e3167a	m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java
+a6c74c47c4ac3c1fc09cc5662c4eb9a3462c0666c50220cf59c9e2d1cc1b6b1e	m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java
+4a5764a45068b86e9e9e36774695aba1e7a02ce55eae336128c64c150f0b9cff	m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java
+40a56e8a2967b407624de2ae102a12192f0831f385c5624170e7edc16c4d629f	m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java
+3a0f4638631755c740b87021dbf161e898cc721e625a6c50b4673f5e00007810	m3/fs/src/test/java/com/m3/fs/vfs/filter/M3FsInlineCommonsCallsitesTest.java
+recomputed_digest_gate	exact checked-out UTF-8 source bytes (prior eight second-wave digests corrected)
+previous_head_digest_ci	FAIL source-hash mismatch (no Maven/JNI results)
+current_head_digest_ci	PENDING
