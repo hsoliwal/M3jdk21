@@ -20,6 +20,14 @@ jobs:
       - name: Historical recipe self-test and fixed point (isolated fixture)
         run: |
           mvn -B -ntp -f m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml verify
+      - name: Compile and install original arrays Maven dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          ARRAYS_JAR="$HOME/.m2/repository/com/m3/m3-arrays/0.1.0-SNAPSHOT/m3-arrays-0.1.0-SNAPSHOT.jar"
+          test -s "$ARRAYS_JAR"
+          jar --describe-module --file "$ARRAYS_JAR" | grep -q '^com.m3.arrays'
       - name: Java owner tests
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongAddressKernelTest,M3LongAddressBoundedTest test
       - name: Current owner compiled address-kernel contract
