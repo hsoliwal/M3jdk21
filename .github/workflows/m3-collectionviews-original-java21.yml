@@ -20,6 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
       - uses: actions/setup-java@v4
@@ -34,7 +35,7 @@ jobs:
           import hashlib
           from pathlib import Path
           expected = {
-              'src/java.base/share/classes/java/util/CollectionViews.java': 'c8820e5bbd7b7c7b4c683f5081ec74b99a4aac6b854f6c8dc79d4e0ee4767ffb',
+              'src/java.base/share/classes/java/util/CollectionViews.java': 'e09db07fb113233e52a67960411608d8b18dc0eedfc5a7f861cdaecc7c1cc1e6',
               'test/jdk/java/util/CollectionViews/BootstrapViewsTest.java': 'a36b48eee0924abd57ce1a356d26ce4e8c6516170e65478cd42cb2d09fbd8a75',
               'test/jdk/java/util/CollectionViews/CollectionViewsContract.java': '9177fd1b1e69f5b0ef05188e4c24aad73ac286a32d7e0abdbeff8db730a94067',
               'test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java': 'f35b8547a5163aa79cee603e0e8bdcbf7361515d435914ac205feb9a037990e2',
