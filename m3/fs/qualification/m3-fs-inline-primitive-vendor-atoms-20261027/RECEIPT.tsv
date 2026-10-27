@@ -1,7 +1,7 @@
 schema	m3fs-source-inlined-primitives-1
 canonical_repo	hsoliwal/com.synexia
 canonical_pull_request	https://github.com/hsoliwal/com.synexia/pull/13613
-canonical_commit	0333cc2b943dbfcb9a92f9ab6ea63c2fdfd59c7c
+canonical_commit	6cfb6e0c0cb0d0eef6b23a5f94c30734d0e8987f
 recipe	com.synexia.m3.M3FsInlinePrimitiveVendorAtoms20261027
 recipe_crate	m3-fs-inline-primitive-vendor-atoms-20261027
 source_donor	ASF Commons VFS 2.10.0 Apache-2.0 (headers retained)
