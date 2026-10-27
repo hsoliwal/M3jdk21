@@ -1,0 +1,83 @@
+{
+  "actual_original_sdk_tests": 5,
+  "actual_receiver_check_apply_replay": [
+    1,
+    1,
+    0
+  ],
+  "additional_alias_admission": {
+    "cases": 84,
+    "checks": 588,
+    "compiler_modes": [
+      "GCC UBSan mixed",
+      "GCC UBSan Xint",
+      "Clang UBSan mixed",
+      "Clang UBSan Xint"
+    ],
+    "source": "proof-extras/M3FrameAdmissionProof.java"
+  },
+  "canonical_evidence_commit": "6c0b31b126c050c1c5b48e7ec51630ef8adef3df",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
+  "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/6c0b31b126c050c1c5b48e7ec51630ef8adef3df/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027/assembled",
+  "canonical_recipe_ref": "cce68668ecdbe699140d87196d035578cb548a99",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "clang_reference_each_mode": {
+    "checks": 35080,
+    "digest": "ed73ef29740c1e87"
+  },
+  "current_target_receiving_receipt_sha256": "2420e3981722754fadd3d9284d261fef1b022611232e997b7b6e533feae37688",
+  "current_target_source_closure_reused_files": 11,
+  "dataset": "vpt-frame-parity-20261027",
+  "decision": "REVIEWABLE_DRAFT_SCOPED_LOCAL_GATES_PASS",
+  "evidence_manifest_sha256": "be001477761e209d3847da6e6361898449b5ffecc71c7d3eb698ba6d11ed3d25",
+  "execution_receipt_sha256": "7e23e50963c9901b869b38b4de7984282ce0b8a25614f05edf55906cb8d71cce",
+  "full_jdk_image": false,
+  "hosted_current_head_ci": "NOT_CLAIMED_BY_LOCAL_EVIDENCE",
+  "installed": {
+    "command_count": 40,
+    "exports": [
+      "Java_com_m3_collections_M3MaskViewportNative_project",
+      "Java_com_m3_collections_M3MaskViewportNative_projectFramePage",
+      "Java_com_m3_collections_M3MaskViewportNative_projectPage"
+    ],
+    "installed_sha256": "aabbe438b8139e902be0752e0379bf1d5ccfb740f0d7b613db8db18966c30af7",
+    "observations": {
+      "java-M3FrameJavaContract": "M3_FRAME_JAVA_PASS checks=35080 digest=ed73ef29740c1e87\n",
+      "java-M3MaskViewportKernelContract": "PASS checks=94442 jni=false\n",
+      "java-M3MaskViewportPageContract": "M3_MASK_VIEWPORT_PAGE_PASS checks=121831 existingJni=false\n",
+      "jni-M3FrameRegionContract": "M3_FRAME_REGION_PASS checks=35080 digest=ed73ef29740c1e87\n",
+      "jni-M3MaskViewportKernelContract": "PASS checks=144449 jni=true\n",
+      "jni-M3MaskViewportPageContract": "M3_MASK_VIEWPORT_PAGE_PASS checks=163640 existingJni=true\n",
+      "jni-M3NativePageDirectContract": "M3_NATIVE_PAGE_DIRECT_PASS checks=123474 digest=1102f3656342aadc\n"
+    },
+    "receipt_sha256": "9f1cbd8e8738ebcbb0748f1f8a6f569e28bad42ba0741dc0a2454ece85a23263",
+    "source_before": {
+      "src/main/c/m3maskviewport.c": "4def819298a7ffd296da9fcc28dd7d218e4a9385c8b8c0cf45c2b761b0f854dd",
+      "src/main/java/com/m3/collections/M3MaskViewportKernel.java": "99e8c061c60c3514ce9ec1b19e3a6afd618a32bd3f6841b36f931ca64383ac0c",
+      "src/main/java/com/m3/collections/M3MaskViewportNative.java": "bbbe3135f17eb8816d197c03c4b499ca9c4837f4defc7971d026e4ad44e46143",
+      "src/test/java/com/m3/collections/M3FrameJavaContract.java": "39dcb95ef2c4edc9f1479d728bfeac0fa7976aeb89ea5923cf4430d5cfb07821",
+      "src/test/java/com/m3/collections/M3MaskViewportKernelContract.java": "f04fa97b5a8183642888842ee7e24ee578632ba842260b891c950a4d1905ba9e",
+      "src/test/java/com/m3/collections/M3MaskViewportPageContract.java": "3a17cb6e0cebabdd77181bf102a558a489642cfc9945b97c6a85950162cc3a25",
+      "viewport-proof/CMakeLists.txt": "42c729b26b2cded8dd1ca723b724648ad8807768637feba738c18f1293db248b",
+      "viewport-proof/fixtures/M3FrameRegionContract.txt": "6a4af0492f6a9332a52eecd798357a328300ae717440118dc5e4556819e2e7d1",
+      "viewport-proof/fixtures/M3NativePageDirectContract.txt": "ccbdb6919a7f89bd95768b93c5f3d82b80edacbae45dbaf1ae24057cb24820e0",
+      "viewport-proof/verify.py": "3ce40980e8f0dc3d968e928d8c5a87e171519a35743e8f08d893985a1911448a",
+      "viewport-proof/verify.sh": "2f5da0701d7a7d35e1bf60518dca44bf2d136caee143dbeb1d7f75f509549930"
+    }
+  },
+  "latest_serial_page_workflow_preserved_git_blob": "341bdd40c944b1b743916d1b135aa2a39cd63a8e",
+  "native_widget_integration": false,
+  "no_new_java_or_native_source_change": true,
+  "original_pom_unchanged": true,
+  "original_receiver_integrity_controls": 9,
+  "performance_measured": false,
+  "postimage_git_blob": "c6ef67def947b292c1504e68209e86469f6fb180",
+  "postimage_sha256": "3ce40980e8f0dc3d968e928d8c5a87e171519a35743e8f08d893985a1911448a",
+  "preimage_git_blob": "9614892a7257c9948716c2b49d80732183fce772",
+  "product_parent": "48492f1609a4acf714676268256c2e99c3497a54",
+  "product_repository": "hsoliwal/M3jdk21",
+  "recipe": "com.synexia.m3.ViewportFrameParity20261027",
+  "schema": "M3_FRAME_PARITY_EXECUTION_V1",
+  "source_epoch_note": "Saved SDK bindings are for immutable cce source epoch. Later parity metadata is not relabelled as executed; emitted output bytes are identical.",
+  "target": "m3/collections/viewport-proof/verify.py"
+}
