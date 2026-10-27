@@ -25,6 +25,7 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-collections4</artifactId>
       <version>4.5.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -106,6 +107,7 @@
             </goals>
             <configuration>
               <dataFile>${m3.jacoco.exec}</dataFile>
+              <excludes><exclude>org/apache/commons/collections4/**</exclude></excludes>
               <rules>
                 <rule>
                   <element>CLASS</element>
