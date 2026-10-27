@@ -38,8 +38,23 @@ jobs:
           echo '67157d62fc8fba6d4efdf80f60c2e5535a581778e2b8bd6b739b967517a50439  m3/fs/src/main/java/com/m3/fs/vfs/util/URIBitSets.java' | sha256sum -c -
           echo '5c014fbb021f6755935385849868244808c7c25ad1cf507c9ab0c4edc20ee984  m3/fs/src/main/java/com/m3/fs/vfs/util/URIUtils.java' | sha256sum -c -
           echo '7d4cf9c4645116d8c32d7bf97a7c95804406f7685a9cd41b69817301ef553379  m3/fs/src/test/java/com/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java' | sha256sum -c -
+          echo 'f5f0a549c9311467fd1e8f373508e25a6dca49ad0b36078219282a96f1b5e507  m3/fs/src/main/java/com/m3/fs/vfs/FileSystemException.java' | sha256sum -c -
+          echo '2c26c8ff88a8bf473e7f8b4979805183db8f3c6088334aab2309f7b3d6298c3f  m3/fs/src/main/java/com/m3/fs/vfs/filter/AndFileFilter.java' | sha256sum -c -
+          echo 'd08ced7baa7202c7c1e955914910ec8ce9b80803baeec72a3ff78d9ca023dcb4  m3/fs/src/main/java/com/m3/fs/vfs/filter/WildcardFileFilter.java' | sha256sum -c -
+          echo '84d87f9903e6b93123c00097b955a4e393af7e449f55fe6b54cd138f52212466  m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java' | sha256sum -c -
+          echo '266c1cf71e54f2eee447d4dc594456e8fbb22bd95f926c45caa7ab0604ab0aa5  m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java' | sha256sum -c -
+          echo '4dd2664741fb9615da1d609389253e6f7f9afd037d158217ff65b4a4cdac9f94  m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java' | sha256sum -c -
+          echo '5fcfcee08c6bf887222ada67c669681f04fb3c7349777e0258e06ca24cc989cb  m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java' | sha256sum -c -
+          echo 'fe055f14b6d823d106c0ed9752c11715a19531422c78878920ab908fddf29c38  m3/fs/src/test/java/com/m3/fs/vfs/filter/M3FsInlineCommonsCallsitesTest.java' | sha256sum -c -
           if grep -En '^import org\.apache\.commons\.lang3' \
-              m3/fs/src/main/java/com/m3/fs/vfs/util/{Messages,RandomAccessMode,URIBitSets,URIUtils}.java; then
+              m3/fs/src/main/java/com/m3/fs/vfs/util/{Messages,RandomAccessMode,URIBitSets,URIUtils}.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/FileSystemException.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/filter/AndFileFilter.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/filter/WildcardFileFilter.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java; then
             echo 'Unexpected Commons Lang import in transformed atoms' >&2
             exit 1
           fi
@@ -50,7 +65,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/fs/pom.xml \
-            -Dtest=M3FsDonorFreePrimitivesTest test \
+            -Dtest=M3FsDonorFreePrimitivesTest,M3FsInlineCommonsCallsitesTest test \
             2>&1 | tee "$RUNNER_TEMP/m3fs-focused.log"
       - name: Full original M3FS Maven/JNI verification
         shell: bash

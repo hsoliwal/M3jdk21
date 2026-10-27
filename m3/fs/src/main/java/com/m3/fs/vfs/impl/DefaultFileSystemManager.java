@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.m3.fs.vfs.CacheStrategy;
@@ -67,6 +66,7 @@ import com.m3.fs.vfs.provider.VfsComponent;
  * The default file system manager implementation.
  */
 public class DefaultFileSystemManager implements FileSystemManager {
+    private static final String[] NO_SCHEMES = {};
 
     /**
      * This is an internal class because it needs access to the private member providers.
@@ -690,7 +690,7 @@ public class DefaultFileSystemManager implements FileSystemManager {
         final List<String> schemes = new ArrayList<>(providers.size() + virtualFileSystemSchemes.size());
         schemes.addAll(providers.keySet());
         schemes.addAll(virtualFileSystemSchemes);
-        return schemes.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return schemes.toArray(NO_SCHEMES);
     }
 
     /**

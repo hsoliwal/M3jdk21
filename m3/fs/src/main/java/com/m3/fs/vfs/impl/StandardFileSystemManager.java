@@ -32,8 +32,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import com.m3.fs.vfs.FileSystemException;
 import com.m3.fs.vfs.VfsLog;
 import com.m3.fs.vfs.operations.FileOperationProvider;
@@ -51,6 +49,7 @@ import org.w3c.dom.NodeList;
  * </p>
  */
 public class StandardFileSystemManager extends DefaultFileSystemManager {
+    private static final String[] EMPTY_DECLARATIONS = {};
     private static final String CONFIG_RESOURCE = "providers.xml";
     private static final String PLUGIN_CONFIG_RESOURCE = "META-INF/m3fs-vfs-providers.xml";
 
@@ -72,7 +71,7 @@ public class StandardFileSystemManager extends DefaultFileSystemManager {
     private void addExtensionMap(final Element map) {
         final String extension = map.getAttribute("extension");
         final String scheme = map.getAttribute("scheme");
-        if (!StringUtils.isEmpty(scheme)) {
+        if ((scheme != null && !scheme.isEmpty())) {
             addExtensionMap(extension, scheme);
         }
     }
@@ -328,11 +327,11 @@ public class StandardFileSystemManager extends DefaultFileSystemManager {
         for (int i = 0; i < count; i++) {
             final Element dep = (Element) deps.item(i);
             final String className = dep.getAttribute("class-name");
-            if (!StringUtils.isEmpty(className)) {
+            if ((className != null && !className.isEmpty())) {
                 classes.add(className);
             }
         }
-        return classes.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return classes.toArray(EMPTY_DECLARATIONS);
     }
 
     /**
@@ -345,11 +344,11 @@ public class StandardFileSystemManager extends DefaultFileSystemManager {
         for (int i = 0; i < count; i++) {
             final Element dep = (Element) deps.item(i);
             final String scheme = dep.getAttribute("scheme");
-            if (!StringUtils.isEmpty(scheme)) {
+            if ((scheme != null && !scheme.isEmpty())) {
                 schemes.add(scheme);
             }
         }
-        return schemes.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return schemes.toArray(EMPTY_DECLARATIONS);
     }
 
     /**
@@ -363,7 +362,7 @@ public class StandardFileSystemManager extends DefaultFileSystemManager {
             final Element scheme = (Element) schemaElements.item(i);
             schemas.add(scheme.getAttribute("name"));
         }
-        return schemas.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return schemas.toArray(EMPTY_DECLARATIONS);
     }
 
     private ClassLoader getValidClassLoader(final Class<?> clazz) {

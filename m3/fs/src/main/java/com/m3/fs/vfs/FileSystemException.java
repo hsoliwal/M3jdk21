@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.ArrayUtils;
 import com.m3.fs.vfs.util.Messages;
 
 /**
@@ -35,6 +34,8 @@ public class FileSystemException extends IOException {
      * serialVersionUID format is YYYYMMDD for the date of the last binary change.
      */
     private static final long serialVersionUID = 20101208L;
+    // Preserve the original shared zero-length array handed out by getInfo().
+    private static final String[] NO_INFO = {};
 
     /** URL pattern */
     private static final Pattern URL_PATTERN = Pattern.compile("[a-z]+://.*");
@@ -167,7 +168,7 @@ public class FileSystemException extends IOException {
         super(code, cause);
 
         if (info == null) {
-            this.info = ArrayUtils.EMPTY_STRING_ARRAY;
+            this.info = NO_INFO;
         } else {
             this.info = new String[info.length];
             for (int i = 0; i < info.length; i++) {
