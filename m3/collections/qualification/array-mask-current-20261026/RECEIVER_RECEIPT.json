@@ -1,0 +1,95 @@
+{
+  "schema": "M3JDK21_SOURCE_PINNED_ARRAY_MASK_RECEIPT_V1",
+  "date": "2026-10-26",
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "base_commit": "55473093e8ef3aba832fa1a00a7e6e8ef8a54221",
+    "integration": "actual JDK21 product source; not an adapter",
+    "java_se_class_or_module_changed": false,
+    "legacy_public_m3_sdk_identity_preserved": true,
+    "serialized_layout_changed": false
+  },
+  "convergence": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3jdk21-array-mask-recipe-current-20261026",
+    "recipe_name": "com.synexia.m3jdk21.CurrentArrayMask20261026",
+    "java_crate": "m3jdk21-current-arraymask-20261026",
+    "text_crate": "m3jdk21-current-arraymask-pom-20261026",
+    "public_product_contains_recipe_source": false
+  },
+  "admission": {
+    "state": "DRAFT_CANDIDATE_ONLY",
+    "requires": "full compiled module + source-built JDK21 public ABI/JNI/GC/JMM/CPU/heap proof",
+    "no_unqualified_promotion": true
+  },
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "role": "single owner dynamic Object[] removeIf mask",
+      "preimage_blob": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e",
+      "postimage_blob": "3c6e1b12a40d5516d8b1ca0c8ed9fc86c99003f1",
+      "preimage_sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
+      "postimage_sha256": "bead2ada2b127060f272c3eb53f3ad92cc9c6244c36cc8fd3d0dd1d145c16abf",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "role": "boundary/identity/callback JDK differential oracle",
+      "preimage_blob": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
+      "postimage_blob": "6c596001a0cb6d56c43c817cc3f20cca1566fb34",
+      "preimage_sha256": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
+      "postimage_sha256": "481975229bd76ba07f9dc28cb637f4fa7f6a4d3f5b1ab0dda3e83c60c581188c",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "path": "m3/arrays/pom.xml",
+      "role": "JUnit test dependency only (published version)",
+      "preimage_blob": "45b090e6c6003a21db08884379678b3ba410754c",
+      "postimage_blob": "668fab1d24bbebd407ed920664487db848db464e",
+      "preimage_sha256": "1448e9b9597df4648c3469ef1c49a57086df58de246e25b946e10b5c04906dd5",
+      "postimage_sha256": "12b02965bdb4058068885e5acd109334d0f1f827ea2176e3d3e111db320a65e7",
+      "license": "Existing project Apache-2.0; no production dependency change"
+    }
+  ],
+  "catalogue": {
+    "path": "m3/collections/algorithm-catalog/current-array-mask-20261026.tsv",
+    "git_blob": "0faf37066cdf3b402fc287a5670a913d11d95832",
+    "categories": 11,
+    "problem_category": "STABLE_BULK_REMOVE_MASK",
+    "donor_imported_code": false
+  },
+  "unchanged_native": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob": "bedd442346de5b7dd9d5f1965c510950e0c45ea1"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+    }
+  ],
+  "invariants": [
+    "single dynamic Object[] parent storage",
+    "primitive 64-bit low/high removal masks for n<=128; original BitSet above",
+    "one predicate call per logical occurrence before outer writes",
+    "stable survivor order, nulls and duplicate references",
+    "same modCount, serialization, iterator and exception identity",
+    "no JNI symbol/API changes, no Java predicate called from native"
+  ],
+  "gates": {
+    "source_git_blob_readback": "PASS",
+    "source_sha256_manifest": "PASS_IN_SOURCE_PINNED_SYNEXIA_FIXTURES_PENDING_CI_REPLAY",
+    "source_builtin_module": "PENDING_TARGET_CI",
+    "Maven_OpenRewrite_fixed_point": "PENDING_SYNEXIA_CI",
+    "existing_JNI_real_native_parity": "PENDING_TARGET_CI",
+    "source_built_M3JDK21_jtreg": "NOT_RUN",
+    "ABI_serialization_reflection": "NOT_RUN_FULL_JDK",
+    "GC_JMM": "NOT_RUN",
+    "CPU_heap_native_benchmarks": "NOT_RUN"
+  },
+  "history": {
+    "old_pr": "https://github.com/hsoliwal/M3jdk21/pull/1881",
+    "old_synexia_pr": "https://github.com/hsoliwal/com.synexia/pull/13222",
+    "reason": "old branches diverged and preimages use older Apache-only file headers; current branch preserves current dual-licensed product source"
+  }
+}

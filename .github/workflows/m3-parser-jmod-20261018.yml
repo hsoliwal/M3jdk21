@@ -38,6 +38,13 @@ jobs:
           python3 m3/compatibility/check_synexia_full_family.py
           python3 m3/compatibility/check_synexia_full_borrow_receiver.py
           python3 m3/runtime-integration/verify-synexia-intake.py
+      - name: Provision the SQLite JDBC driver and slf4j-api the facts contract needs (local Maven repository, sealed by lint)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -q org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact=org.xerial:sqlite-jdbc:3.45.3.0
+          mvn -B -q org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact=org.slf4j:slf4j-api:1.7.36
+          ls "$HOME/.m2/repository/org/xerial/sqlite-jdbc/3.45.3.0/sqlite-jdbc-3.45.3.0.jar" "$HOME/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar"
       - name: Lint source structure and seal inputs
         shell: bash
         run: |

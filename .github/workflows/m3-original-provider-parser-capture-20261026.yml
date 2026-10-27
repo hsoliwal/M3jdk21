@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 original provider to parser single-capture integration
+on:
+  pull_request:
+    paths:
+      - 'm3/file/src/main/java/com/m3/file/**'
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java'
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java'
+      - 'm3/tooling/module-packs/parser/integration/**'
+      - '.github/workflows/m3-original-provider-parser-capture-20261026.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-java21:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile real filesystem provider and parser classes with no module runtime dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-provider-capture"
+          mkdir -p "$classes"
+          file=m3/file/src/main/java/com/m3/file
+          parser=m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser
+          test=m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test
+          javac --release 21 -Xlint:all -Werror -d "$classes" \
+            "$file/M3StreamProgress.java" \
+            "$file/M3ShadowStreams.java" \
+            "$file/M3File.java" \
+            "$parser/M3File.java" \
+            "$parser/M3Utf8SourceMap.java" \
+            "$test/M3ProviderCaptureContract.java"
+          java -cp "$classes" jdk.m3.parser.test.M3ProviderCaptureContract

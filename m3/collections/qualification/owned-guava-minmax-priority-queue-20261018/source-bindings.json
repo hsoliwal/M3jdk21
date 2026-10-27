@@ -1212,8 +1212,8 @@
     },
     {
       "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py",
-      "bytes": 2945,
-      "sha256": "861c2fb3c8156bdb99b468bf2a340f5e4906636af849a2b631e2dbee7a5de98c",
+      "bytes": 4276,
+      "sha256": "a8fd04cc98bf3f21e5f68958eae8f82e0b5fcedbc7c6d88f92ea778828bb980b",
       "role": "NEW_PACKET_SOURCE"
     },
     {
@@ -1272,8 +1272,8 @@
     },
     {
       "path": ".github/workflows/m3-owned-guava-minmax-priority-queue.yml",
-      "bytes": 1593,
-      "sha256": "8a1f7d1e851a75723978e54f993acbcf3199e1256d5a29c86f8f4d012d4f7682",
+      "bytes": 2220,
+      "sha256": "9543ed2e6b8430e6a80888064750beda48e486b005bf125488cc95b513d3d4b9",
       "role": "NEW_PACKET_SOURCE"
     },
     {

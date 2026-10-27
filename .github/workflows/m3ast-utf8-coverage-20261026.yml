@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 AST UTF8 mapping and full syntax source coverage
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java'
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTSyntaxCoverage.java'
+      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3Utf8SourceMapContract.java'
+      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSyntaxCoverageContract.java'
+      - 'm3/tooling/module-packs/parser/build.py'
+      - '.github/workflows/m3ast-utf8-coverage-20261026.yml'
+  workflow_dispatch:
+jobs:
+  real-java21-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile real original M3ASTIndex and M3File with tested atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3ast-utf8-coverage-classes"
+          mkdir -p "$classes"
+          root=m3/tooling/module-packs/parser/src
+          javac --release 21 -Xlint:all -Werror -d "$classes" \
+            "$root/main/java/jdk/m3/parser/M3File.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTIndex.java" \
+            "$root/main/java/jdk/m3/parser/M3Utf8SourceMap.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTSyntaxCoverage.java" \
+            "$root/test/java/jdk/m3/parser/test/M3Utf8SourceMapContract.java" \
+            "$root/test/java/jdk/m3/parser/test/M3ASTSyntaxCoverageContract.java"
+          java -cp "$classes" jdk.m3.parser.test.M3Utf8SourceMapContract
+          java -cp "$classes" jdk.m3.parser.test.M3ASTSyntaxCoverageContract

@@ -14,11 +14,16 @@ public final class M3TreeWindowShiftContract {
         checks++;
         if (!value) throw new AssertionError(why + " at check " + checks);
     }
-    private static void refuses(Runnable action) {
+    private static IllegalArgumentException refuses(Runnable action) {
         checks++;
         try { action.run(); }
-        catch (IllegalArgumentException expected) { return; }
+        catch (IllegalArgumentException expected) { return expected; }
         throw new AssertionError("shift was required to refuse");
+    }
+    private static void refuses(String message, Runnable action) {
+        IllegalArgumentException failure = refuses(action);
+        yes(message.equals(failure.getMessage()),
+                "expected message '" + message + "' but was '" + failure.getMessage() + "'");
     }
     private static M3TreeWindowPlan owner(int parent, int... children) {
         M3TreeWindowPlan p = new M3TreeWindowPlan();
@@ -58,21 +63,34 @@ public final class M3TreeWindowShiftContract {
 
         var overflow = owner(-1, 5, Integer.MAX_VALUE);
         long[] before = keys(overflow);
-        refuses(() -> overflow.shiftSiblings(-1, 5, 1));
+        refuses("shifted child index outside int range", () -> overflow.shiftSiblings(-1, 5, 1));
         yes(Arrays.equals(before, keys(overflow)), "late overflow partially mutated key lane");
         has(overflow, -1, 5, 1); has(overflow, -1, Integer.MAX_VALUE, 2);
-        refuses(() -> overflow.shiftSiblings(-1, 5, Integer.MAX_VALUE));
+        refuses("shifted child index outside int range", () -> overflow.shiftSiblings(-1, 5, Integer.MAX_VALUE));
         yes(Arrays.equals(before, keys(overflow)), "early overflow mutated key lane");
+
+        // The first matching key has a valid final coordinate; a later key is negative.
+        var negative = owner(-1, 9, 2);
+        before = keys(negative);
+        int plannedBefore = negative.plannedCount(), retiredBefore = negative.retiredCount();
+        refuses("negative child index", () -> negative.shiftSiblings(-1, 0, -3));
+        yes(Arrays.equals(before, keys(negative)), "late negative index partially mutated key lane");
+        has(negative, -1, 9, 1); has(negative, -1, 2, 2);
+        yes(negative.size() == 2 && negative.handle(0) == 1 && negative.handle(1) == 2
+                && negative.entryOf(1) == 0 && negative.entryOf(2) == 1,
+                "negative refusal changed native handle ownership");
+        yes(negative.plannedCount() == plannedBefore && negative.retiredCount() == retiredBefore,
+                "negative refusal changed pending plan state");
 
         var collision = owner(-1, 0, 1, 5);
         before = keys(collision);
-        refuses(() -> collision.shiftSiblings(-1, 1, -1));
+        refuses("shift overlaps a resident sibling", () -> collision.shiftSiblings(-1, 1, -1));
         yes(Arrays.equals(before, keys(collision)), "resident sibling collision lost a handle");
-        refuses(() -> collision.shiftSiblings(-1, 1, -2));
+        refuses("negative child index", () -> collision.shiftSiblings(-1, 1, -2));
         yes(Arrays.equals(before, keys(collision)), "negative final index mutated key lane");
         var underflow = owner(-1, -1, 2);
         before = keys(underflow);
-        refuses(() -> underflow.shiftSiblings(-1, -1, Integer.MIN_VALUE));
+        refuses("negative child index", () -> underflow.shiftSiblings(-1, -1, Integer.MIN_VALUE));
         yes(Arrays.equals(before, keys(underflow)), "signed overflow hid an invalid index");
 
         var left = owner(-1, 0, 2, 3, 7);

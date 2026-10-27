@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: registered iterators frozen into a traversal array (array storage), derived from hsoliwal/spring-framework m3/array-storage-20261019 onto the 6.2.0 copy.
 /*
  * Copyright 2002-2018 the original author or authors.
  *
@@ -25,8 +26,8 @@ import java.util.Set;
  * Composite iterator that combines multiple other iterators,
  * as registered via {@link #add(Iterator)}.
  *
- * <p>This implementation maintains a linked set of iterators
- * which are invoked in sequence until all iterators are exhausted.
+ * <p>This implementation registers iterators in insertion order and invokes
+ * them in sequence until all iterators are exhausted.
  *
  * @author Erwin Vervaet
  * @author Juergen Hoeller
@@ -35,7 +36,11 @@ import java.util.Set;
  */
 public class CompositeIterator<E> implements Iterator<E> {
 
-	private final Set<Iterator<E>> iterators = new LinkedHashSet<>();
+	private Set<Iterator<E>> iterators = new LinkedHashSet<>();
+
+	private Iterator<E> [] traversal;
+
+	private int additions;
 
 	private boolean inUse = false;
 
@@ -45,18 +50,40 @@ public class CompositeIterator<E> implements Iterator<E> {
 	 */
 	public void add(Iterator<E> iterator) {
 		Assert.state(!this.inUse, "You can no longer add iterators to a composite iterator that's already in use");
-		if (this.iterators.contains(iterator)) {
-			throw new IllegalArgumentException("You cannot add the same iterator twice");
+		Set<Iterator<E>> pending = this.iterators;
+		Assert.state(pending != null, "Iterator registration is closed");
+		this.additions++;
+		try {
+			if (pending.contains(iterator)) {
+				throw new IllegalArgumentException("You cannot add the same iterator twice");
+			}
+			pending.add(iterator);
 		}
-		this.iterators.add(iterator);
+		finally {
+			this.additions--;
+			freezeIterators();
+		}
 	}
 
 	@Override
 	public boolean hasNext() {
 		this.inUse = true;
-		for (Iterator<E> iterator : this.iterators) {
-			if (iterator.hasNext()) {
-				return true;
+		freezeIterators();
+		Iterator<E>[] children = this.traversal;
+		if (children != null) {
+			for (Iterator<E> iterator : children) {
+				if (iterator.hasNext()) {
+					return true;
+				}
+			}
+		}
+		else {
+			Set<Iterator<E>> pending = this.iterators;
+			Assert.state(pending != null, "Iterator registration is closed");
+			for (Iterator<E> iterator : pending) {
+				if (iterator.hasNext()) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -65,12 +92,38 @@ public class CompositeIterator<E> implements Iterator<E> {
 	@Override
 	public E next() {
 		this.inUse = true;
-		for (Iterator<E> iterator : this.iterators) {
-			if (iterator.hasNext()) {
-				return iterator.next();
+		freezeIterators();
+		Iterator<E>[] children = this.traversal;
+		if (children != null) {
+			for (Iterator<E> iterator : children) {
+				if (iterator.hasNext()) {
+					return iterator.next();
+				}
+			}
+		}
+		else {
+			Set<Iterator<E>> pending = this.iterators;
+			Assert.state(pending != null, "Iterator registration is closed");
+			for (Iterator<E> iterator : pending) {
+				if (iterator.hasNext()) {
+					return iterator.next();
+				}
 			}
 		}
 		throw new NoSuchElementException("All iterators exhausted");
+	}
+
+	/**
+	 * Retain the original set while a hash or equality callback can reenter add.
+	 * Release its nodes once registration is closed and all additions have returned.
+	 */
+	@SuppressWarnings("unchecked")
+	private void freezeIterators() {
+		Set<Iterator<E>> pending = this.iterators;
+		if (this.inUse && this.additions == 0 && pending != null) {
+			this.traversal = pending.toArray(Iterator[]::new);
+			this.iterators = null;
+		}
 	}
 
 	@Override

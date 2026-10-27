@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ArrayStorageCommons450V20261024
+displayName: Exact array storage for the received Commons Collections 4.5.0
+description: Replaces the exact 4.5.0 bodies of SparseBloomFilter, IteratorChain, PermutationIterator, TreeList and CircularFifoQueue in implementations/commons-collections-4.5.0 with their array-storage derivatives and installs the seven array-storage tests; missing/drifted/duplicate preimages are refused.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: array-storage-commons-450
+      lst: false

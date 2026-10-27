@@ -85,11 +85,23 @@ def main():
         run(['python3', owner / 'verify_source.py', jar])
         dependency_proof[module] = {'provenance_sha256': sha(owner / 'PROVENANCE.json'),
                                     'jar_sha256': sha(jar)}
+    # Reuse the existing source-owned com.m3.arrays module (Eclipse/Synexia
+    # collection donor), rather than compiling com.m3.collections as an
+    # unresolved JPMS module or placing arrays classes on the class path.
+    maven(ROOT / 'm3/arrays/pom.xml', '-Dmaven.test.skip=true', 'install')
+    array_jar = ROOT / 'm3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar'
+    if not array_jar.is_file():
+        raise RuntimeError('Source-built com.m3.arrays module jar is absent')
+    with zipfile.ZipFile(array_jar) as archive:
+        if 'module-info.class' not in archive.namelist():
+            raise RuntimeError('com.m3.arrays module descriptor is missing')
+    dependency_proof['com.m3.arrays'] = {'jar_sha256': sha(array_jar)}
     sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
     tests = sorted((MODULE / 'src/test/java').rglob('*.java'))
     (OUT / 'main.args').write_text('\n'.join(map(str, sources)) + '\n')
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror', '-Xpkginfo:always',
-         '-h', OUT / 'headers', '-d', OUT / 'classes', '@' + str(OUT / 'main.args')])
+         '--module-path', array_jar, '-h', OUT / 'headers', '-d', OUT / 'classes',
+         '@' + str(OUT / 'main.args')])
     native = MODULE / 'src/main/native/collections'
     admitted = {native / name for rows in LIBRARIES.values() for name, _ in rows}
     if admitted != set(native.glob('*.c')):
@@ -142,8 +154,11 @@ def main():
         for name in ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'name-mapping.json', 'SYNEXIA-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
             if archive.read('META-INF/' + name) != (MODULE / name).read_bytes():
                 raise RuntimeError('Packaged module legal/provenance bytes differ: ' + name)
-    runtime_modules = subprocess.check_output([JAVA / 'bin/jdeps', '--print-module-deps', jar], text=True).strip()
-    if runtime_modules != 'java.base': raise RuntimeError('Unexpected runtime dependencies: ' + runtime_modules)
+    runtime_modules = subprocess.check_output(
+        [JAVA / 'bin/jdeps', '--module-path', array_jar, '--print-module-deps', jar],
+        text=True).strip()
+    if runtime_modules != 'com.m3.arrays,java.base':
+        raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
     cp = str(MODULE / 'target/classes') + os.pathsep + str(MODULE / 'target/test-classes')
     java = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
     contracts = [('M3MaskWindowSparseContract', ['native']),
