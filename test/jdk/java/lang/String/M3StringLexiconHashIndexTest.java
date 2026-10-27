@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary Exact UTF-16 M3StringPool mapped lexicon hash admission and binary fallback
+ * @summary Full-content M3StringPool direct-address admission and resource fallback
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED M3StringLexiconHashIndexTest
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:-CompactStrings M3StringLexiconHashIndexTest
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xint M3StringLexiconHashIndexTest
@@ -119,9 +119,14 @@ public class M3StringLexiconHashIndexTest {
 
     private static void oracle(Object lexicon, List<String> words, boolean indexed) throws Exception {
         check(((int[]) SLOTS.get(lexicon)) != null, "bounded primitive table prepared");
-        check(indexed ? ((int[]) SLOTS.get(lexicon)).length > 0
-                        : ((int[]) SLOTS.get(lexicon)).length == 0,
+        int[] rows = (int[]) SLOTS.get(lexicon);
+        check(indexed ? rows.length > 0 : rows.length == 0,
                 indexed ? "prepared exact metadata" : "optional exact metadata unavailable");
+        if (indexed) {
+            for (int encoded : rows) {
+                check(encoded >= 0, "production direct rows have no ambiguity marker");
+            }
+        }
         for (int row = 0; row < words.size(); row++) {
             String word = words.get(row);
             check(call(FIND_CHAR, lexicon, word.toCharArray(), 0, word.length()) == row,
