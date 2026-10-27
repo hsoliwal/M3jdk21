@@ -1,0 +1,51 @@
+{
+  "schema": "M3JDK21_VIEWPORT_FRAME_ALLSTATE_RECEIVING_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "f0f28b82a161f94e4227adee0363df15c4d17985",
+  "canonical_dataset": "viewport-frame-allstate-20261027",
+  "canonical_recipe": "com.synexia.m3.ViewportFrameAllState20261027",
+  "target": "m3/collections/src/main/c/m3maskviewport.c",
+  "pre_git_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
+  "post_git_blob": "e7db071a5e1768442ef016fc6516e9dc9e3f9396",
+  "pre_sha256": "388f607244b46432ac632fd05c52c1fe95b74e9561aaf0b9bcb04973b9bc9c9c",
+  "post_sha256": "4def819298a7ffd296da9fcc28dd7d218e4a9385c8b8c0cf45c2b761b0f854dd",
+  "receiving": "EXACT_GIT_BLOB_CANDIDATE_ONLY",
+  "canonical_sdk": {
+    "engine": "M3HashPinnedTextSnapshotRecipe",
+    "junit_tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "source_results": 1,
+    "received": 1,
+    "fixed_point_changes": 0
+  },
+  "canonical_jni": {
+    "checked_jni": true,
+    "ubsan": true,
+    "strict_gcc_clang_c17": true,
+    "frame_checks_per_mode": 35080,
+    "frame_digest": "ed73ef29740c1e87",
+    "other_projection_checks_per_mode": 108891,
+    "page_checks_per_mode": 163640,
+    "exact_exports": 3
+  },
+  "bounded_mock_jni_region_reads": {
+    "input_rows": 1000000,
+    "skip": 999900,
+    "limit": 64,
+    "old_reads": 23439,
+    "new_reads": 7815,
+    "old_copied_ints": 3000000,
+    "new_copied_ints": 1000128,
+    "measurement": "TEST_ONLY_MOCK_JNI_NO_JVM_THROUGHPUT_CLAIM"
+  },
+  "product_java_class": "UNCHANGED_EXISTING_PROJECT_FRAME_PAGE",
+  "product_other_native_exports": "UNCHANGED",
+  "hosted_product_ci": "NOT_YET_VERIFIED_FOR_RECEIVING_HEAD",
+  "source_built_jdk_hotspot_jtreg": "NOT_RUN",
+  "swt_nebula_gef_rwt_runtime": "NOT_RUN",
+  "resource_performance_claim": false,
+  "keep_draft": true
+}

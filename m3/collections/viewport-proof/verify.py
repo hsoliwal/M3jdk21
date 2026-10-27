@@ -74,7 +74,8 @@ def main() -> int:
                *[root / "src/main/java/com/m3/collections" / name for name in
                  ("M3MaskViewportKernel.java", "M3MaskViewportNative.java")],
                *[root / "src/test/java/com/m3/collections" / name for name in
-                 ("M3MaskViewportKernelContract.java", "M3MaskViewportPageContract.java")],
+                 ("M3MaskViewportKernelContract.java", "M3MaskViewportPageContract.java",
+                  "M3FrameJavaContract.java")],
                q / "CMakeLists.txt", q / "verify.sh", q / "verify.py",
                q / "fixtures/M3FrameRegionContract.txt",
                q / "fixtures/M3NativePageDirectContract.txt"]
@@ -136,7 +137,7 @@ def main() -> int:
         classes.mkdir(); headers.mkdir()
         proof.run("java-compile", [str(javac), "--release", "21", "-encoding", "UTF-8",
                   "-Xlint:all", "-Werror", "-h", str(headers), "-d", str(classes),
-                  *map(str, sources[1:5])])
+                  *map(str, sources[1:6])])
         # Exact original-owner Java admission: before receiving, compile the
         # independent test-only declaration; after receiving, compile the
         # already-qualified product Java source with no duplicate method.
@@ -230,6 +231,22 @@ def main() -> int:
                 key = "java-" + name
                 if observations.setdefault(key, result) != result:
                     raise RuntimeError("Java execution-mode mismatch")
+        # Compare the existing Java fallback and JNI frame oracles by their
+        # deterministic source-identical corpus roots, without cloning either oracle.
+        java_frame_observation: str | None = None
+        for interpreted in (False, True):
+            mode = "int" if interpreted else "mixed"
+            observed = proof.run("java-frame-" + mode,
+                [str(java), "-ea", *(["-Xint"] if interpreted else []),
+                 "-cp", str(classes), "com.m3.collections.M3FrameJavaContract"],
+                clean_stderr=True)
+            if not observed.startswith("M3_FRAME_JAVA_PASS checks=35080 digest=ed73ef29740c1e87"):
+                raise RuntimeError("Java frame oracle changed")
+            if java_frame_observation is None:
+                java_frame_observation = observed
+            elif java_frame_observation != observed:
+                raise RuntimeError("Java frame mixed/interpreted mismatch")
+        observations["java-M3FrameJavaContract"] = java_frame_observation
         proof.advance("runtime")
         for kind, binary, gc, interpreted in (
                 ("installed", library, "Serial", False), ("installed", library, "G1", False),
@@ -258,6 +275,10 @@ def main() -> int:
                  "com.m3.collections.M3FrameRegionContract", str(binary)], clean_stderr=True)
             if not frame_result.startswith("M3_FRAME_REGION_PASS checks=35080 digest=ed73ef29740c1e87"):
                 raise RuntimeError("frame JNI reference oracle disagrees")
+            # Both supplied oracles replay the same seeded frames. Their
+            # checks/digests must be identical, not just individually well-formed.
+            if frame_result.partition(" checks=")[2] != java_frame_observation.partition(" checks=")[2]:
+                raise RuntimeError("Java/JNI frame semantics differ")
             if frame_observation is None:
                 frame_observation = frame_result
             elif frame_observation != frame_result:
