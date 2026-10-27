@@ -6,8 +6,8 @@ on:
     paths:
       - 'm3/fs/src/main/java/com/m3/fs/vfs/util/**'
       - 'm3/fs/src/test/java/com/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java'
-      - 'm3/fs/qualification/m3-fs-inline-primitive-vendor-atoms-20261027/**'
-      - '.github/workflows/m3-fs-inline-primitive-vendor-atoms-20261027.yml'
+      - 'm3/fs/qualification/inline-primitives/**'
+      - '.github/workflows/m3fs-inline-primitives.yml'
 permissions:
   contents: read
 jobs:
