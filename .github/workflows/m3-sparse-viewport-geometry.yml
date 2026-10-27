@@ -30,16 +30,24 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$HEAD_SHA"
-          test "$BASE_SHA" = '9dd1df62f3d5406760427cb5e840a36c9e7a59ea'
+          # Branch tips can advance; the historical geometry source cannot drift.
+          test "$(git rev-parse "$BASE_SHA:m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java")" = d35282fb564a0a9231f31781e1a699f7e571f8de
           SOURCE=m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java
           HEAP=m3/collections/src/main/java/com/m3/collections/M3HeapGrowth.java
           WINDOW=m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java
           FIXTURE=m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt
-          test "$(git hash-object "$SOURCE")" = d35282fb564a0a9231f31781e1a699f7e571f8de
+          FENWICK=m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt
+          test "$(git hash-object "$SOURCE")" = ba6b2ebd0fac9f737deb28bce9385fff07164997
           test "$(git hash-object "$HEAP")" = d7a6ce1410499e6b8fa4844bf01ad9d51fdcdbd6
           test "$(git hash-object "$WINDOW")" = d0ce93a6e0afec40def2f84aab9a522e8fcc4e3d
           printf '%s  %s\n' '75e960d7db157ab38f9597317589be1480eadca5eaf5f3fd048f98a540c3fc58' "$FIXTURE" | sha256sum --check -
-          git show "$BASE_SHA:$SOURCE" > "$RUNNER_TEMP/M3SparseExtents-before.java"
+          test "$(git hash-object "$FENWICK")" = dafa004fcbe3fe9e4183f830b2f1159e3c40591f
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3SparseExtentsTest.java)" = 123dd0427a324e0065ade5a59cfa55b076851777
+          git show 9dd1df62f3d5406760427cb5e840a36c9e7a59ea:"$SOURCE" > "$RUNNER_TEMP/M3SparseExtents-before.java"
+          git show "$BASE_SHA:$SOURCE" > "$RUNNER_TEMP/M3SparseExtents-geometry.java"
+          test "$(git hash-object "$RUNNER_TEMP/M3SparseExtents-geometry.java")" = d35282fb564a0a9231f31781e1a699f7e571f8de
+          git cat-file blob 30da24c981af0ec549d3116d96f3b6ad9dc212b7 > "$RUNNER_TEMP/M3SparseExtents-optimized.java"
+          test "$(git hash-object "$RUNNER_TEMP/M3SparseExtents-optimized.java")" = 30da24c981af0ec549d3116d96f3b6ad9dc212b7
           test "$(git hash-object "$RUNNER_TEMP/M3SparseExtents-before.java")" = 650356bcdffa372328e5a79f4f596a887fe5f447
           git diff --check "$BASE_SHA...HEAD"
           echo M3_GEOMETRY_SOURCE_ADMISSION_PASS
@@ -48,7 +56,7 @@ jobs:
         run: |
           set -euo pipefail
           ROOT="$RUNNER_TEMP/m3-geometry"
-          for state in before after; do
+          for state in before geometry optimized after; do
             MODULE="$ROOT/$state"
             mkdir -p "$MODULE/src/main/java/com/m3/collections" "$MODULE/src/test/java/com/m3/collections"
             cp m3/collections/src/main/java/com/m3/collections/M3HeapGrowth.java "$MODULE/src/main/java/com/m3/collections/"
@@ -56,6 +64,10 @@ jobs:
             cp m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt "$MODULE/src/test/java/com/m3/collections/M3ViewportGeometryTest.java"
             if [[ "$state" == before ]]; then
               cp "$RUNNER_TEMP/M3SparseExtents-before.java" "$MODULE/src/main/java/com/m3/collections/M3SparseExtents.java"
+            elif [[ "$state" == geometry ]]; then
+              cp "$RUNNER_TEMP/M3SparseExtents-geometry.java" "$MODULE/src/main/java/com/m3/collections/M3SparseExtents.java"
+            elif [[ "$state" == optimized ]]; then
+              cp "$RUNNER_TEMP/M3SparseExtents-optimized.java" "$MODULE/src/main/java/com/m3/collections/M3SparseExtents.java"
             else
               cp m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java "$MODULE/src/main/java/com/m3/collections/M3SparseExtents.java"
             fi
@@ -80,6 +92,7 @@ jobs:
           </project>
           POM
           done
+          cp m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt "$ROOT/after/src/test/java/com/m3/collections/M3FenwickInverseTest.java"
       - name: Reproduce exact baseline failure and prove candidate twice
         shell: bash
         run: |
@@ -99,6 +112,17 @@ jobs:
           if got!=expected:raise SystemExit('JUnit baseline differs: '+str(got))
           print('M3_GEOMETRY_BASELINE_REJECTED tests=10 failures=3')
           PY
+          for state in geometry optimized; do
+            mvn -B -ntp -f "$ROOT/$state/pom.xml" -Dtest=M3ViewportGeometryTest test | tee "$ROOT/$state.log"
+            python3 - "$ROOT/$state/target/surefire-reports" "$state" <<'PY'
+          import sys,xml.etree.ElementTree as ET
+          from pathlib import Path
+          r=ET.parse(Path(sys.argv[1])/'TEST-com.m3.collections.M3ViewportGeometryTest.xml').getroot()
+          got=tuple(int(r.get(n,'-1')) for n in ('tests','failures','errors','skipped'))
+          if got!=(10,0,0,0):raise SystemExit('historical geometry test mismatch '+str(got))
+          print('M3_GEOMETRY_HISTORICAL_PASS source='+sys.argv[2]+' tests=10')
+          PY
+          done
           mvn -B -ntp -f "$ROOT/after/pom.xml" -Dtest=M3ViewportGeometryTest test | tee "$ROOT/candidate.log"
           python3 - "$ROOT/after/target/surefire-reports" <<'PY'
           import sys,xml.etree.ElementTree as ET
@@ -118,10 +142,26 @@ jobs:
           if got!=(10,0,0,0):raise SystemExit('interpreted JUnit mismatch: '+str(got))
           print('M3_GEOMETRY_JUNIT_PASS tests=10 mode=interpreted')
           PY
+          for mode in mixed interpreted; do
+            opts=(); if [[ "$mode" == interpreted ]]; then opts=(-DargLine=-Xint); fi
+            mvn -B -ntp -f "$ROOT/after/pom.xml" "${opts[@]}" -Dtest=M3FenwickInverseTest test | tee "$ROOT/inverse-$mode.log"
+            python3 - "$ROOT/after/target/surefire-reports" "$mode" <<'PY'
+          import sys,xml.etree.ElementTree as ET
+          from pathlib import Path
+          p=Path(sys.argv[1])/'TEST-com.m3.collections.M3FenwickInverseTest.xml'
+          r=ET.parse(p).getroot()
+          got=tuple(int(r.get(n,'-1')) for n in ('tests','failures','errors','skipped'))
+          if got!=(2,0,0,0):raise SystemExit('inverse JUnit mismatch '+str(got))
+          print('M3_FENWICK_INVERSE_PASS tests=2 mode='+sys.argv[2])
+          PY
+          done
           javap -classpath "$ROOT/before/target/classes" -public -s com.m3.collections.M3SparseExtents > "$ROOT/before-public.txt"
           javap -classpath "$ROOT/after/target/classes" -public -s com.m3.collections.M3SparseExtents > "$ROOT/after-public.txt"
           cmp "$ROOT/before-public.txt" "$ROOT/after-public.txt"
-          echo M3_GEOMETRY_ABI_PASS
+          javap -classpath "$ROOT/optimized/target/classes" -public -s com.m3.collections.M3SparseExtents > "$ROOT/optimized-public.txt"
+          cmp "$ROOT/optimized-public.txt" "$ROOT/after-public.txt"
+          cmp "$ROOT/optimized/target/classes/com/m3/collections/M3SparseExtents.class" "$ROOT/after/target/classes/com/m3/collections/M3SparseExtents.class"
+          echo M3_GEOMETRY_AND_FENWICK_ABI_PASS
       - name: Retain exact source/JUnit/compiler evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -131,3 +171,5 @@ jobs:
           path: |
             ${{ runner.temp }}/m3-geometry/
             ${{ runner.temp }}/M3SparseExtents-before.java
+            ${{ runner.temp }}/M3SparseExtents-geometry.java
+            ${{ runner.temp }}/M3SparseExtents-optimized.java
