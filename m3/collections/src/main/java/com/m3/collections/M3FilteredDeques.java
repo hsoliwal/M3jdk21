@@ -171,6 +171,7 @@ public final class M3FilteredDeques {
         }
 
         @Override public boolean contains(Object item) {
+            if (!backing.contains(item)) return false;
             for (E value : backing) {
                 if (Objects.equals(item, value) && predicate.test(value)) return true;
             }
@@ -178,6 +179,7 @@ public final class M3FilteredDeques {
         }
 
         @Override public boolean remove(Object item) {
+            if (!backing.contains(item)) return false;
             Iterator<E> cursor = backing.iterator();
             while (cursor.hasNext()) {
                 E value = cursor.next();
@@ -194,6 +196,7 @@ public final class M3FilteredDeques {
         }
 
         @Override public boolean removeLastOccurrence(Object item) {
+            if (!backing.contains(item)) return false;
             Iterator<E> cursor = backing.descendingIterator();
             while (cursor.hasNext()) {
                 E value = cursor.next();
