@@ -13,10 +13,10 @@ mkdir -p "$OUT"/{before-src,after-src}/java/util
 cp "$ROOT/src/java.base/share/classes/java/util/CollectionViews.java" "$OUT/after-src/java/util/CollectionViews.java"
 {
   test "$(git -C "$ROOT" hash-object "$OUT/before-src/java/util/CollectionViews.java")" = "2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66"
-  test "$(git -C "$ROOT" hash-object "$OUT/after-src/java/util/CollectionViews.java")" = "540ebf535672a27a90f2a547f2d21aeebebe88aa"
+  test "$(git -C "$ROOT" hash-object "$OUT/after-src/java/util/CollectionViews.java")" = "8840da98c37e2af8da36c63f2cacd6bdaf1cb0a8"
   printf '%s  %s\n' "a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d" "$OUT/before-src/java/util/CollectionViews.java" | sha256sum -c -
   printf '%s  %s\n' "f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6" "$ROOT/test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java" | sha256sum -c -
-  printf '%s  %s\n' "736b9f6df1d50d76dde9cf4333a47ffe7a98b1fe5ac48029bcbcd30e304bd3fa" "$OUT/after-src/java/util/CollectionViews.java" | sha256sum -c -
+  printf '%s  %s\n' "793eb7de2a92ea1cc5c9311ad4e2360bedeeab3c96077146e59d5e16e3f66a65" "$OUT/after-src/java/util/CollectionViews.java" | sha256sum -c -
 } | tee "$OUT/seals.log"
 java -version > "$OUT/java-version.log" 2>&1
 javac -version > "$OUT/javac-version.log" 2>&1
