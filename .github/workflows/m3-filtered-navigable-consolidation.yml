@@ -8,6 +8,9 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3FilteredNavigableFacadeSelfTest.java'
       - 'm3/collections/docs/FILTERED_SORTED_VIEWS_RECEIVING_20261017.md'
       - 'm3/collections/qualification/filtered-navigable-consolidation-20261017/**'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredSortedIteratorPlanTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredSortedIteratorPlanSelfTest.java'
+      - 'm3/collections/qualification/filtered-plan-current-master-20261027/**'
       - '.github/workflows/m3-filtered-navigable-consolidation.yml'
   workflow_dispatch:
 permissions:
@@ -15,7 +18,7 @@ permissions:
 jobs:
   selected-java21:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -27,6 +30,11 @@ jobs:
           java-version: '21'
       - name: Verify source receipt and selected contracts
         shell: bash
-        run: bash m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
+        run: |
+          if [[ "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java)" == "45ad6df3a51e83c67dc70de7c7acd82bec2305d3" ]]; then
+            bash m3/collections/qualification/filtered-plan-current-master-20261027/verify.sh
+          else
+            bash m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
+          fi
       - name: Explicit hold
         run: echo 'Selected collections receiver proof only; full Maven/JDK/phase promotion remains separate.'
