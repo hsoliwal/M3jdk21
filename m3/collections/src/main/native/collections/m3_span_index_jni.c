@@ -5,6 +5,7 @@
  */
 #include <jni.h>
 #include <stddef.h>
+#include <stdint.h>
 
 static jint earliest_covering(jint target, const jint *starts, const jlong *prefix, jsize count) {
     if (target <= 0) return target < 0 ? 0 : target;
@@ -27,6 +28,27 @@ static jint earliest_covering(jint target, const jint *starts, const jlong *pref
  * JNI may internally copy critical arrays, so no zero-copy guarantee is claimed.
  */
 enum { M3_SPAN_QUERY_PAGE = 256 };
+
+/*
+ * LeetCode #34: lower bound of monotone prefix ends.
+ * LeetCode #88: two forward cursors for an already-sorted query page.
+ *
+ * Scanning the entire snapshot can be worse than q binary searches, so
+ * select the sweep only when the primitive query page is nondecreasing
+ * and the owner scan estimate does not exceed q * floor(log2(n) + 1).
+ * This is a comparison-cost gate, not a wall-clock speedup assertion.
+ */
+static int span_use_monotone_sweep(const jint *requested, jsize queries, jsize count) {
+    if (queries < 2 || count == 0) return 0;
+    for (jsize i = 1; i < queries; i++) {
+        if (requested[i] < requested[i - 1]) return 0;
+    }
+    unsigned int levels = 0;
+    for (jsize remaining = count; remaining > 0; remaining >>= 1) levels++;
+    /* uint64_t avoids overflow at the largest legal Java array lengths. */
+    return (uint64_t) (uint32_t) count
+            <= (uint64_t) (uint32_t) queries * (uint64_t) levels;
+}
 static jboolean span_into(JNIEnv *env, jintArray sorted_starts, jlongArray prefix_max,
         jintArray targets, jsize query_from, jsize length,
         jintArray output, jsize output_from, jsize count) {
@@ -44,8 +66,24 @@ static jboolean span_into(JNIEnv *env, jintArray sorted_starts, jlongArray prefi
             (*env)->ReleasePrimitiveArrayCritical(env, sorted_starts, (void *) starts, JNI_ABORT);
             return JNI_FALSE;
         }
-        for (jsize i = 0; i < page; i++) {
-            answers[i] = earliest_covering(requests[i], starts, prefix, count);
+        if (span_use_monotone_sweep(requests, page, count)) {
+            jsize cursor = 0;
+            for (jsize i = 0; i < page; i++) {
+                jint row = requests[i];
+                if (row <= 0) {
+                    answers[i] = row < 0 ? 0 : row;
+                } else if (starts[0] >= row || prefix[count - 1] < (jlong) row) {
+                    answers[i] = row;
+                } else {
+                    /* Nondecreasing rows imply nondecreasing lower-bound indexes. */
+                    while (cursor < count && prefix[cursor] < (jlong) row) cursor++;
+                    answers[i] = starts[cursor] < row ? starts[cursor] : row;
+                }
+            }
+        } else {
+            for (jsize i = 0; i < page; i++) {
+                answers[i] = earliest_covering(requests[i], starts, prefix, count);
+            }
         }
         (*env)->ReleasePrimitiveArrayCritical(env, prefix_max, (void *) prefix, JNI_ABORT);
         (*env)->ReleasePrimitiveArrayCritical(env, sorted_starts, (void *) starts, JNI_ABORT);

@@ -25,6 +25,64 @@ public final class M3SpanBatchIntoContract {
         throw new AssertionError("expected " + kind.getName());
     }
 
+
+    /**
+     * Native LC #88 two-cursor admission and LC #34 fallback, including
+     * monotone 256-element pages, tail fragments and unsorted query vectors.
+     * The unchanged scalar Java method remains the independent oracle.
+     */
+    private static void orderedQueryPageDifferential() {
+        M3SpanIndex indexed = new M3SpanIndex();
+        for (int i = 0; i < 124; i++) {
+            int start = (i * 17) % 241;
+            indexed.add(start, (long) start + (i % 13) + 1L, i % 3 == 0 ? 1 : 3);
+        }
+        M3SpanIndex.Snapshot span = indexed.snapshot(1, 0);
+        final int count = 1057;
+        int[] ascending = new int[count + 5];
+        for (int i = 0; i < count; i++) {
+            ascending[i + 2] = i == 0 ? Integer.MIN_VALUE
+                    : i == 1 ? -1
+                    : i == 2 ? 0
+                    : i == count - 1 ? Integer.MAX_VALUE
+                    : (i - 3) / 3;
+        }
+        int[] original = ascending.clone();
+        for (int pass = 0; pass < 2; pass++) {
+            int[] queries = ascending.clone();
+            if (pass == 1) {
+                // Reverse the actual window only; this forces bisection pages.
+                for (int left = 2, right = count + 1; left < right; left++, right--) {
+                    int value = queries[left];
+                    queries[left] = queries[right];
+                    queries[right] = value;
+                }
+            }
+            int[] javaOut = new int[count + 9];
+            int[] nativeOut = new int[count + 9];
+            Arrays.fill(javaOut, -741);
+            Arrays.fill(nativeOut, -741);
+            span.earliestCoveringInto(queries, 2, count, javaOut, 4, M3SpanIndex.Backend.JAVA);
+            for (int i = 0; i < count; i++) {
+                check(javaOut[i + 4] == span.earliestCovering(queries[2 + i]),
+                        "ordered/fallback page scalar Java oracle pass=" + pass);
+            }
+            check(javaOut[3] == -741 && javaOut[count + 4] == -741,
+                    "caller-owned padding survives");
+            if (M3SpanIndex.nativeAvailable()) {
+                span.earliestCoveringInto(queries, 2, count, nativeOut, 4,
+                        M3SpanIndex.Backend.NATIVE_REQUIRED);
+                check(Arrays.equals(javaOut, nativeOut),
+                        "one JNI transition, 256-slot pages, exact Java parity");
+            } else {
+                expected(UnsatisfiedLinkError.class, () -> span.earliestCoveringInto(
+                        queries, 2, count, nativeOut, 4, M3SpanIndex.Backend.NATIVE_REQUIRED));
+                check(nativeOut[4] == -741, "missing JNI must never write output");
+            }
+        }
+        check(Arrays.equals(ascending, original), "original source query array unchanged");
+    }
+
     public static long runAll() {
         checks = 0;
         M3SpanIndex owner = new M3SpanIndex();
@@ -120,6 +178,7 @@ public final class M3SpanBatchIntoContract {
                 check(Arrays.equals(before, nativeOut), "all windows prevalidated before writes");
             }
         }
+        orderedQueryPageDifferential();
         System.out.println("PASS M3_SPAN_BATCH_INTO checks=" + checks
                 + " native=" + M3SpanIndex.nativeAvailable());
         return checks;
