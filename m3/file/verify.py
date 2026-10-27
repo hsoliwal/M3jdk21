@@ -175,6 +175,8 @@ def main():
             'M3FileSourceContract': 'M3_FILE_SOURCE_PASS',
             'M3FileEditBatchContract': 'M3_FILE_EDIT_BATCH_PASS',
             'M3FileEditFramesContract': 'M3_FILE_EDIT_FRAMES_PASS',
+            'M3FileEncodedEditsContract': 'M3_FILE_ENCODED_EDITS_PASS',
+            'M3FileTextCoordinatesContract': 'M3_FILE_TEXT_COORDINATES_PASS',
             'M3FileMoveCandidatesContract': 'M3_FILE_MOVES_PASS',
             'M3ReactorImpactPlanContract': 'M3_REACTOR_IMPACT_PASS',
             'M3FileStreamsContract': 'M3_FILE_SHADOW_STREAM_PASS',

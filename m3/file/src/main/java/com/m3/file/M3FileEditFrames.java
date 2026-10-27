@@ -98,6 +98,88 @@ public final class M3FileEditFrames {
             throw new IllegalStateException("source generations diverged during edit-frame replay");
         return new M3FileEditFrames(original.sha256(), applied.source().sha256(), frames, work);
     }
+
+    /**
+     * LF-only fast lane for immutable UTF-8 source. Reuses the original source's
+     * indexed line starts, and scans each inserted fragment exactly once.
+     * Unlike {@link #plan(M3FileSource, M3FileEditBatch.Applied, long)}, no
+     * intermediate full-file generations are materialized. All insertion bytes
+     * and old source boundaries must be complete UTF-8 scalars. For CR/CRLF
+     * inputs use {@code plan(...)}: its seam-aware replay remains authoritative.
+     *
+     * <p>The work budget counts original/final byte observations and twice the
+     * inserted byte count (including the bounded validation copy). This method
+     * is an explicit specialized lane, not an implicit fallback or an AST parse.
+     */
+    public static M3FileEditFrames planLinearLf(M3FileSource original,
+            M3FileEditBatch.Applied applied, long maxByteWork) {
+        Objects.requireNonNull(original, "original source");
+        Objects.requireNonNull(applied, "applied edits");
+        if (maxByteWork < 0) throw new IllegalArgumentException("negative work budget");
+        M3FileEditBatch.ChangeMap map = applied.map();
+        map.requireOld(original);
+        map.requireNew(applied.source());
+        if (map.changes() == 0) {
+            return new M3FileEditFrames(original.sha256(), applied.source().sha256(),
+                    new Frame[0], 0);
+        }
+        long work = (long) original.length() + applied.source().length();
+        if (work > maxByteWork)
+            throw new IllegalArgumentException("linear edit observation exceeds byte budget");
+        byte[] before = original.bytes(), after = applied.source().bytes();
+        for (byte b : before) if (b == '\r')
+            throw new IllegalArgumentException("CR/CRLF source requires seam-aware planner");
+        for (byte b : after) if (b == '\r')
+            throw new IllegalArgumentException("CR/CRLF source requires seam-aware planner");
+        original.utf16Length();
+        applied.source().utf16Length();
+        Frame[] frames = new Frame[map.changes()];
+        int oldCursor = 0, newCursor = 0;
+        for (int i = 0; i < map.changes(); i++) {
+            int start = map.oldStart(i), end = map.oldEnd(i);
+            int newStart = map.newStart(i), newEnd = map.newEnd(i);
+            original.utf16AtByte(start);
+            original.utf16AtByte(end);
+            int preserved = start - oldCursor;
+            if (preserved < 0 || newStart - newCursor != preserved
+                    || Arrays.mismatch(before, oldCursor, start, after,
+                            newCursor, newStart) >= 0)
+                throw new IllegalStateException("unchanged source segment differs");
+            int inserted = newEnd - newStart;
+            if (inserted > (maxByteWork - work) / 2)
+                throw new IllegalArgumentException("linear edit validation exceeds byte budget");
+            work += (long) inserted * 2;
+            // Validate inserted scalar boundaries independently of its neighbors:
+            // every intermediate right-to-left edit image remains well-formed.
+            byte[] fragment = Arrays.copyOfRange(after, newStart, newEnd);
+            M3FileSource.fromBytes(fragment).utf16Length();
+            int firstRow = original.lineAtByte(start);
+            int lastRow = original.lineAtByte(end);
+            Point firstPoint = new Point(firstRow, original.columnBytes(start));
+            Point oldEndPoint = new Point(lastRow, original.columnBytes(end));
+            int newRow = firstRow, newColumn = firstPoint.byteColumn();
+            for (byte b : fragment) {
+                if (b == '\n') { newRow = Math.addExact(newRow, 1); newColumn = 0; }
+                else newColumn = Math.addExact(newColumn, 1);
+            }
+            frames[map.changes() - 1 - i] = new Frame(i, start, end,
+                    Math.addExact(start, inserted), firstPoint,
+                    oldEndPoint, new Point(newRow, newColumn));
+            oldCursor = end;
+            newCursor = newEnd;
+        }
+        if (before.length - oldCursor != after.length - newCursor
+                || Arrays.mismatch(before, oldCursor, before.length, after,
+                        newCursor, after.length) >= 0)
+            throw new IllegalStateException("unchanged source tail differs");
+        return new M3FileEditFrames(original.sha256(), applied.source().sha256(), frames, work);
+    }
+
+    /** Conservative planner when no LF-only proof is available. */
+    public static M3FileEditFrames planLinearLf(M3FileSource original,
+            M3FileEditBatch.Applied applied) {
+        return planLinearLf(original, applied, DEFAULT_WORK_BUDGET);
+    }
     public int size() { return reverseFrames.length; }
     /** In the order a parser must apply edits to its previous tree. */
     public Frame frame(int ordinal) { return reverseFrames[Objects.checkIndex(ordinal, size())]; }

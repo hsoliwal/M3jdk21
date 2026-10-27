@@ -70,6 +70,10 @@ public final class M3SyntaxDelta {
         int[] oldMap = new int[prior.size()], newMap = new int[n];
         Arrays.fill(oldMap, -1);
         Arrays.fill(newMap, -1);
+        // A unique new occurrence can still have multiple indistinguishable
+        // OLD occurrences (for example, duplicate zero-width recovery tokens).
+        // Invalidate the first match when a second old occurrence is found.
+        boolean[] ambiguousNew = new boolean[n];
         byte[] oldBytes = prior.sourceBytes(), newBytes = next.sourceBytes();
         int count = 0;
         for (int node = 0; node < oldMap.length; node++) {
@@ -91,10 +95,21 @@ public final class M3SyntaxDelta {
                 if (found >= 0) { found = -2; break; } // multiple equivalent matches: refuse
                 found = candidate;
             }
-            if (found >= 0 && newMap[found] < 0) {
-                oldMap[node] = found;
-                newMap[found] = node;
-                count++;
+            if (found >= 0) {
+                if (ambiguousNew[found]) continue;
+                int previous = newMap[found];
+                if (previous >= 0) {
+                    // Do not guess which old occurrence survived a reparse.
+                    // Both sides remain externally unmatched (-1).
+                    oldMap[previous] = -1;
+                    newMap[found] = -1;
+                    ambiguousNew[found] = true;
+                    count--;
+                } else {
+                    oldMap[node] = found;
+                    newMap[found] = node;
+                    count++;
+                }
             }
         }
         return new M3SyntaxDelta(before, after, oldMap, newMap, count);

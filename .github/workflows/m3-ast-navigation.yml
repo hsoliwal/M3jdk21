@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+name: M3AST source navigation Java21
+on:
+  push:
+    paths:
+      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java'
+      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationTest.java'
+      - 'm3/ast/pom.xml'
+      - '.github/workflows/m3-ast-navigation.yml'
+  pull_request:
+    paths:
+      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java'
+      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationTest.java'
+      - 'm3/ast/pom.xml'
+      - '.github/workflows/m3-ast-navigation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-sealed-navigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile the actual M3AST owner and navigation contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-ast-navigation-classes"
+          mkdir -p "$classes" evidence/m3-ast-navigation
+          javac --release 21 -Xlint:all -Werror -proc:none -d "$classes" \
+            m3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java \
+            m3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java \
+            m3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java
+          java -cp "$classes" com.m3.ast.M3SyntaxNavigationContract \
+            | tee evidence/m3-ast-navigation/normal.txt
+          grep -Fx 'M3_SYNTAX_NAVIGATION_PASS checks=162452' evidence/m3-ast-navigation/normal.txt
+          java -Xint -cp "$classes" com.m3.ast.M3SyntaxNavigationContract \
+            | tee evidence/m3-ast-navigation/interpreted.txt
+          grep -Fx 'M3_SYNTAX_NAVIGATION_PASS checks=162452' evidence/m3-ast-navigation/interpreted.txt
+          sha256sum \
+            m3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java \
+            m3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java \
+            m3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java \
+            > evidence/m3-ast-navigation/sources.sha256
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-ast-navigation-java21
+          path: evidence/m3-ast-navigation/
+          if-no-files-found: warn
+  product-maven-junit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Real Maven/strict compiler/JUnit test on M3AST candidate module
+        run: >-
+          mvn -B -ntp
+          -f m3/ast/pom.xml
+          -Dtest=M3SyntaxNavigationTest
+          -DfailIfNoTests=true
+          test

@@ -35,8 +35,10 @@ jobs:
             -m com.m3.file/com.m3.file.M3ShadowStreamsContract
           java -Xint --module-path build/m3-native-shadow \
             -m com.m3.file/com.m3.file.M3ShadowStreamsContract
-          jmod create --class-path build/m3-native-shadow build/com.m3.file.jmod
-          jlink --module-path "$JAVA_HOME/jmods:build" \
+          mkdir -p build/m3-native-shadow-jmods
+          jmod create --class-path build/m3-native-shadow \
+            build/m3-native-shadow-jmods/com.m3.file.jmod
+          jlink --module-path "$JAVA_HOME/jmods:build/m3-native-shadow-jmods" \
             --add-modules com.m3.file --output build/linked-m3-file
           build/linked-m3-file/bin/java \
             -m com.m3.file/com.m3.file.M3ShadowStreamsContract

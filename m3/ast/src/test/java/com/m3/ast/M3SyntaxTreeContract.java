@@ -5,6 +5,8 @@ package com.m3.ast;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /** Standalone Java 21 contract; Maven/SDK and installed-image proof remain separate. */
 public final class M3SyntaxTreeContract {
@@ -71,6 +73,57 @@ public final class M3SyntaxTreeContract {
         for (int i = 0; i < 5000; i++) deep = new N("nested", "", 0, n, 0, List.of(deep));
         check(M3SyntaxTree.project("deep/fixture", source, deep, ADAPTER).size() == 5001,
                 "iterative deep projection");
+        // Reject cycles before they can exhaust memory in a foreign provider.
+        final class Cyclic {
+            final List<Cyclic> children = new ArrayList<>();
+        }
+        M3SyntaxTree.ForeignNode<Cyclic> cyclicAdapter = new M3SyntaxTree.ForeignNode<>() {
+            public String kind(Cyclic node) { return "cycle"; }
+            public String field(Cyclic node) { return ""; }
+            public int startByte(Cyclic node) { return 0; }
+            public int endByte(Cyclic node) { return n; }
+            public int flags(Cyclic node) { return 0; }
+            public Iterable<Cyclic> children(Cyclic node) { return node.children; }
+        };
+        Cyclic loop = new Cyclic();
+        loop.children.add(loop);
+        rejects(() -> M3SyntaxTree.project("cyclic/fixture", source, loop, cyclicAdapter));
+        rejects(() -> M3SyntaxTree.projectBounded("cyclic/fixture", source,
+                loop, cyclicAdapter, 5, 5));
+        // Bounded import refuses both depth and node count without recursion.
+        try {
+            M3SyntaxTree.projectBounded("tree-sitter/java@fixture", source, root, ADAPTER, 3, 8);
+            throw new AssertionError("node budget accepted");
+        } catch (IllegalStateException expected) { checks++; }
+        try {
+            M3SyntaxTree.projectBounded("tree-sitter/java@fixture", source, root, ADAPTER, 5, 1);
+            throw new AssertionError("depth budget accepted");
+        } catch (IllegalStateException expected) { checks++; }
+        check(M3SyntaxTree.projectBounded("tree-sitter/java@fixture", source,
+                root, ADAPTER, 5, 5).projectionSha256().equals(tree.projectionSha256()),
+                "bounded and default projection are byte-identical");
+        check(M3SyntaxTree.projectFragmentBounded("jdt/fixture", source,
+                fragment, ADAPTER, 1, 1).size() == 2, "fragment wrapper excluded from quota");
+        rejects(() -> M3SyntaxTree.projectBounded("tree-sitter/java@fixture",
+                source, root, ADAPTER, 0, 5));
+        // A provider that never finishes producing children must hit the bound.
+        final class Infinite { }
+        Infinite endless = new Infinite();
+        M3SyntaxTree.ForeignNode<Infinite> infiniteAdapter = new M3SyntaxTree.ForeignNode<>() {
+            public String kind(Infinite item) { return "infinite"; }
+            public String field(Infinite item) { return ""; }
+            public int startByte(Infinite item) { return 0; }
+            public int endByte(Infinite item) { return n; }
+            public int flags(Infinite item) { return 0; }
+            public Iterable<Infinite> children(Infinite item) {
+                return () -> Collections.nCopies(1000, new Infinite()).iterator();
+            }
+        };
+        try {
+            M3SyntaxTree.projectBounded("infinite/fixture", source,
+                    endless, infiniteAdapter, 6, 6);
+            throw new AssertionError("foreign provider quota accepted");
+        } catch (IllegalStateException expected) { checks++; }
         System.out.println("M3_SYNTAX_TREE_PASS checks=" + checks);
     }
 }
