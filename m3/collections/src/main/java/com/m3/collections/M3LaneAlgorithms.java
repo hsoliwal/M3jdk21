@@ -563,6 +563,10 @@ public final class M3LaneAlgorithms {
             if (!Boolean.getBoolean("m3.collections.lane.native")) return false;
             try {
                 System.loadLibrary("m3_collections_address");
+                // A previously installed address library may load but lack these
+                // additive ABI exports. Probe both without changing user data.
+                partition3Long0(new long[0], 0, 0, 0L);
+                partition3Int0(new int[0], 0, 0, 0);
                 return true;
             } catch (UnsatisfiedLinkError | SecurityException unavailable) {
                 return false;

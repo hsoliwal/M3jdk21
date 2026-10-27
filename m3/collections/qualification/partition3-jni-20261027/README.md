@@ -73,3 +73,46 @@ SDK replay, complete existing Java and JNI contracts, native variant and
 source-build checks, JDK image, jtreg/JCK, cross-platform and measured CPU/
 allocation results. Do not merge, deploy or claim full native-JDK replacement
 qualification until all these gates pass. This PR remains DRAFT/HOLD.
+
+## JNI older-address-library ABI admission successor
+
+A review of the additive LC75 optional JNI path identified a compatibility
+trap: a legacy `libm3_collections_address.so` may load successfully while
+having neither new `partition3Long0` nor `partition3Int0` JNI export.
+Availability based only on `System.loadLibrary` would be a false claim until
+a native symbol was actually resolved.
+
+Canonical Synexia #13224 source-sealed Java/CI successor:
+`ed64d9089f685692b4c09fb11354a3c1f23320e0`.
+Existing M3 Java candidate blob `a806a8604efc928053159e5c230b1da4f0f9b6be`
+is the exact SHA-pinned preimage; final reviewed Java blob is
+`9f512b267485bc1b68cf97eacadb42beada78372`.
+Old exact-head workflow blob `f3b9a22953217aad4fb7bd21c44fe361cc218c26`
+is replaced by `95040d48b727f1cd6ea4789271cbd2884d7aed75`.
+The prior canonical recipes and intermediate source images remain in Synexia
+as rejected/intermediate evidence; this product contains only execution
+results, never the OpenRewrite transformation engine.
+
+The new `PartitionNative.load()` probes **both** export symbols using two
+fresh detached zero-length primitive lanes after an opt-in library load.
+A missing symbol raises `UnsatisfiedLinkError`, causing optional use to
+stay entirely on the original Java partition oracle, with no original
+caller array mutation. Explicit native-required requests still throw
+`UnsatisfiedLinkError` if the library or either needed ABI is missing.
+No new JNI C source change or additional JNI export is required; original
+`partition3` entrypoints and swap order are unchanged.
+
+The exact-head workflow now compiles a temporary **legacy** address library
+without either new symbol, runs the current original-module Java oracle
+with `m3.collections.lane.native=true` in both normal and `-Xint` modes,
+and requires Java fallback `native=false` and JNI-required refusal.
+It retains the new-native mandatory parity cases and all original source
+SHA pins. The isolated JDK21 smoke suite passed: Java-only/old-ABI
+**978,782 assertions** and new native **980,599 assertions**, each in
+normal and interpreted modes. JNI is checked with `-Xcheck:jni`;
+the native C kernel is compiled with strict C17 and UBSan.
+
+Actual original full-source GitHub Actions and full M3JDK21 Maven/JNI,
+installed JDK/jtreg/JCK and CPU/heap benchmarks remain pending.
+**DRAFT/HOLD.** No default public API behavior, JNI library ownership,
+original source-manifest, protected branch or release gate was changed.
