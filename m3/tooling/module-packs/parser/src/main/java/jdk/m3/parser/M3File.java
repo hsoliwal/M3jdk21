@@ -546,6 +546,146 @@ public final class M3File implements CharSequence {
         return new Utf8Hunks(positions, changes.rawDigestComparison(), changes.coarse());
     }
 
+    /**
+     * One edit against the tree state immediately before this step, together
+     * with the corresponding insertion range in the immutable target source.
+     * The target range is generation-absolute; the input edit is not.
+     */
+    public record Utf8EditStep(Utf8InputEdit inputEdit,
+                               int currentStartByte, int currentEndByte) {
+        public Utf8EditStep {
+            Objects.requireNonNull(inputEdit, "input edit");
+            if (currentStartByte < 0 || currentEndByte < currentStartByte) {
+                throw new IllegalArgumentException("invalid target source range");
+            }
+            if (inputEdit.newEndByte() - inputEdit.startByte()
+                    != currentEndByte - currentStartByte) {
+                throw new IllegalArgumentException("edit and insertion lengths differ");
+            }
+        }
+    }
+
+    /**
+     * Parent-owned primitive edit lanes, in executable high-to-low source
+     * order. Each step projects a temporary Java value only on demand. This
+     * plan is bound to the two original UTF-8 source observations; it does not
+     * certify that a caller's mutable parser tree represents the previous one.
+     */
+    public static final class Utf8EditScript {
+        private static final int LANES_PER_STEP = 11;
+        private final URI uri;
+        private final String previousByteSha256;
+        private final String currentByteSha256;
+        private final int[] lanes;
+        private final RawDigestComparison raw;
+        private final boolean coarse;
+
+        private Utf8EditScript(URI uri, String previousByteSha256,
+                String currentByteSha256, int[] lanes,
+                RawDigestComparison raw, boolean coarse) {
+            this.uri = uri;
+            this.previousByteSha256 = previousByteSha256;
+            this.currentByteSha256 = currentByteSha256;
+            this.lanes = lanes;
+            this.raw = raw;
+            this.coarse = coarse;
+        }
+
+        public URI uri() { return uri; }
+        public String previousByteSha256() { return previousByteSha256; }
+        public String currentByteSha256() { return currentByteSha256; }
+        public RawDigestComparison rawDigestComparison() { return raw; }
+        public boolean coarse() { return coarse; }
+        public int stepCount() { return lanes.length / LANES_PER_STEP; }
+        public long primitiveBytes() { return (long) lanes.length * Integer.BYTES; }
+
+        /** Step zero edits the greatest original source offset first. */
+        public Utf8EditStep step(int index) {
+            Objects.checkIndex(index, stepCount());
+            int at = index * LANES_PER_STEP;
+            Utf8InputEdit edit = new Utf8InputEdit(lanes[at], lanes[at + 1],
+                    lanes[at + 2], new Utf8Point(lanes[at + 3], lanes[at + 4]),
+                    new Utf8Point(lanes[at + 5], lanes[at + 6]),
+                    new Utf8Point(lanes[at + 7], lanes[at + 8]), raw);
+            return new Utf8EditStep(edit, lanes[at + 9], lanes[at + 10]);
+        }
+    }
+
+    /**
+     * Construct sequential Tree-sitter-shaped edit geometry for a bounded
+     * multi-hunk source change. Reverse original-source order means edits to
+     * greater positions cannot change byte offsets or LF points in the prefix
+     * of the intermediate tree that receives the next edit. Consequently the
+     * start and old-end fields remain original-generation coordinates, while
+     * new-end is computed relative to that intermediate tree: it is NOT the
+     * target generation's absolute end. Each step exposes its separate target
+     * byte slice, for a parser owner to supply the replacement source.
+     *
+     * <p>Both sources must have been independently admitted as strict original
+     * UTF-8, have the same URI, and remain unmodified. Limits cover comparison,
+     * original/target LF rows, intermediate LF rows, and intermediate byte
+     * lengths. A coarse single-envelope fallback remains explicit. The
+     * originating parser must independently verify its old tree, language,
+     * encoding, source generation and lifetime before applying these edits.
+     * This method never invokes native code or mutates a foreign parser.</p>
+     */
+    public Utf8EditScript utf8InputEditScriptSince(M3File previous,
+            long maxComparedUtf16Units, int maxLines, int maxHunks) {
+        if (maxHunks < 1 || maxHunks > Integer.MAX_VALUE / Utf8EditScript.LANES_PER_STEP) {
+            throw new IllegalArgumentException("invalid edit script hunk budget");
+        }
+        Utf8Hunks hunks = utf8ChangeHunksSince(previous,
+                maxComparedUtf16Units, maxLines, maxHunks);
+        Utf8Offsets oldOffsets = previous.utf8Offsets().orElseThrow();
+        Utf8Offsets newOffsets = utf8Offsets().orElseThrow();
+        int[] result = new int[hunks.hunkCount() * Utf8EditScript.LANES_PER_STEP];
+        long intermediateBytes = oldOffsets.byteLength();
+        long intermediateRows = oldOffsets.lfLineCount(maxLines);
+        for (int step = 0; step < hunks.hunkCount(); step++) {
+            Utf8Hunk hunk = hunks.hunk(hunks.hunkCount() - step - 1);
+            int oldStart = hunk.previousStartByte();
+            int oldEnd = hunk.previousEndByte();
+            int targetStart = hunk.currentStartByte();
+            int targetEnd = hunk.currentEndByte();
+            Utf8Point startPoint = oldOffsets.pointAt(oldStart, maxLines);
+            Utf8Point oldEndPoint = oldOffsets.pointAt(oldEnd, maxLines);
+            Utf8Point targetStartPoint = newOffsets.pointAt(targetStart, maxLines);
+            Utf8Point targetEndPoint = newOffsets.pointAt(targetEnd, maxLines);
+            int addedRows = targetEndPoint.row() - targetStartPoint.row();
+            int removedRows = oldEndPoint.row() - startPoint.row();
+            intermediateBytes += (long) (targetEnd - targetStart) - (oldEnd - oldStart);
+            intermediateRows += (long) addedRows - removedRows;
+            if (intermediateBytes < 0 || intermediateBytes > Integer.MAX_VALUE
+                    || intermediateRows < 1 || intermediateRows > maxLines) {
+                throw new IllegalArgumentException("intermediate edit script budget exceeded");
+            }
+            int newEndByte = Math.addExact(oldStart, targetEnd - targetStart);
+            int newEndRow = Math.addExact(startPoint.row(), addedRows);
+            int newEndColumn = addedRows == 0
+                    ? Math.addExact(startPoint.column(), targetEnd - targetStart)
+                    : targetEndPoint.column();
+            int at = step * Utf8EditScript.LANES_PER_STEP;
+            result[at] = oldStart;
+            result[at + 1] = oldEnd;
+            result[at + 2] = newEndByte;
+            result[at + 3] = startPoint.row();
+            result[at + 4] = startPoint.column();
+            result[at + 5] = oldEndPoint.row();
+            result[at + 6] = oldEndPoint.column();
+            result[at + 7] = newEndRow;
+            result[at + 8] = newEndColumn;
+            result[at + 9] = targetStart;
+            result[at + 10] = targetEnd;
+        }
+        if (intermediateBytes != newOffsets.byteLength()
+                || intermediateRows != newOffsets.lfLineCount(maxLines)) {
+            throw new IllegalStateException("source edit script does not conserve target geometry");
+        }
+        return new Utf8EditScript(uri, Objects.requireNonNull(previous.byteSha256),
+                Objects.requireNonNull(byteSha256), result,
+                hunks.rawDigestComparison(), hunks.coarse());
+    }
+
     private static SourceHunks coarseHunks(ChangeEnvelope entire) {
         return new SourceHunks(new int[]{entire.previousStart(), entire.previousEnd(),
                 entire.currentStart(), entire.currentEnd()},
