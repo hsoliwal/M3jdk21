@@ -89,7 +89,7 @@ public final class M3ASTDependencyImpactContract {
         M3File primary = M3File.of(URI.create("memory:/main.java"), "0123456789");
         M3File auxiliary = M3File.of(URI.create("memory:/import.java"), "abcdefghij");
         M3File differentGeneration = M3File.of(auxiliary.uri(), "abcdefghij");
-        var b = M3ASTIndex.builder(primary, M3ASTIndex.Domain.EXTERNAL, 5);
+        var b = M3ASTIndex.externalBuilder(primary, "impact-origin-20261027", 5);
         int root = b.add(-1, "ROOT", 0, 10, M3ASTIndex.EXACT_RANGE);
         int reference = b.add(root, "REF", 1, 4, M3ASTIndex.EXACT_RANGE);
         int expansion = b.add(root, "EXPAND", 4, 7, M3ASTIndex.EXACT_RANGE);
