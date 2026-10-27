@@ -109,8 +109,8 @@ public class M3StringFrozenLexiconIndexTest {
             String[] shared = sorted("alpha", "duplicate", "duplicate", "\u00e9", "\ud800");
             Object arena = open(sharedImage(shared));
             verify(arena, shared);
-            check(rows(arena).length == 0,
-                    "duplicate shared spellings preserve binary compatibility fallback");
+            check(Arrays.stream(rows(arena)).anyMatch(row -> row < 0),
+                    "duplicate shared spellings alone retain binary row authority");
             byte[] corruptArena = sharedImage(shared);
             corruptArena[144] ^= 1;
             reject(corruptArena, "shared payload CRC");
