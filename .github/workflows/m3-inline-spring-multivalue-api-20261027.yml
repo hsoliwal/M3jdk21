@@ -1,0 +1,67 @@
+name: M3 Spring MultiValueMap self-contained runtime closure
+on:
+  push:
+    branches: ['m3/inline-spring-multivalue-api-receiver-20261027']
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/spring-multi-value-map-adapter/**'
+      - '.github/workflows/m3-inline-spring-multivalue-api-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  strict-java21-no-spring-jar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact Synexia-generated Java API/test source hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '3385e98db585d54d58621b38daee12129b8e02e0d67217ce7f65b8c6a8f97896  m3/collections/implementations/spring-multi-value-map-adapter/src/main/java/org/springframework/lang/Nullable.java' | sha256sum -c -
+          echo '723151604d98196f061629bac4ca9be380e72e65e45801e439babf45fe6f0b8c  m3/collections/implementations/spring-multi-value-map-adapter/src/main/java/org/springframework/util/MultiValueMap.java' | sha256sum -c -
+          echo 'ac2cdbf7b1f2f3c3bbf8b92c64f98f0db8b983815b5cd33a67841ae66ebdccc0  m3/collections/implementations/spring-multi-value-map-adapter/src/main/java/org/springframework/util/MultiToSingleValueMapAdapter.java' | sha256sum -c -
+          echo '21710244a6cde40ba87b20bc2fee407d82591da9d415383868a2df0ee59860d4  m3/collections/implementations/spring-multi-value-map-adapter/src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java' | sha256sum -c -
+          echo '09e92f19a8c832a99a45030640b491820a5eb7e01a4866241086b4ef2ef4bd81  m3/collections/implementations/spring-multi-value-map-adapter/src/test/java/com/m3/collections/spring/M3SpringInlineApiBoundaryTest.java' | sha256sum -c -
+      - name: Strict original Java21 compile with ZERO Spring/JSR305 or M3 runtime jars
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          find m3/collections/implementations/spring-multi-value-map-adapter/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/source-only.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/source-only.txt"
+          jar --create --file "$RUNNER_TEMP/m3-spring-standalone.jar" -C "$RUNNER_TEMP/classes" .
+          jdeps --print-module-deps "$RUNNER_TEMP/m3-spring-standalone.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+      - name: Run REAL donor binary differential and owned M3 99-percent coverage JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/spring-multi-value-map-adapter/pom.xml verify
+      - name: Assert the packaged Maven runtime dependency graph has no Spring Core or JSR-305
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/spring-multi-value-map-adapter/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/runtime-deps.txt"
+          cat "$RUNNER_TEMP/runtime-deps.txt"
+          ! grep -E 'org.springframework:spring-core|com.google.code.findbugs:jsr305|org.apache.commons:commons-collections4' "$RUNNER_TEMP/runtime-deps.txt"
+      - name: Preserve exact-head runtime evidence and pending gate diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-spring-inline-no-vendor-runtime-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/jdeps.txt
+            ${{ runner.temp }}/runtime-deps.txt
+            m3/collections/implementations/spring-multi-value-map-adapter/target/surefire-reports/
