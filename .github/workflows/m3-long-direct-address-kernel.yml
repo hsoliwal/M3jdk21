@@ -17,12 +17,49 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Recipe self-test and fixed point
+      - name: Historical recipe self-test and fixed point (isolated fixture)
         run: |
           mvn -B -ntp -f m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml verify
-          java -cp m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/target/classes com.synexia.m3.M3LongDirectAddressKernelRecipe --check .
       - name: Java owner tests
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongAddressKernelTest,M3LongAddressBoundedTest test
+      - name: Current owner compiled address-kernel contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Historical snapshot Recipe.run was already self-tested on frozen inputs.
+          # Current M3LongIndexProjection has since acquired new source atoms;
+          # do not re-apply the historical exact postimage over that product.
+          # Verify the actual current Java21 bytecode still calls every owned
+          # primitive leaf, then retain the normal and checked-JNI owner tests.
+          python3 - <<'PYCODE'
+          import re
+          import subprocess
+          from pathlib import Path
+          code = subprocess.check_output([
+              'javap', '-c', '-p', '-classpath', 'm3/collections/target/classes',
+              'com.m3.collections.M3LongIndexProjection'], text=True)
+          lines = code.splitlines()
+          method = re.compile(r'^  (?:public|private|protected) .+? ([A-Za-z_$][\w$]*)\([^)]*\);$')
+          declarations = [(i, match.group(1)) for i, line in enumerate(lines)
+                          if (match := method.match(line))]
+          bodies = {}
+          for n, (begin, name) in enumerate(declarations):
+              end = declarations[n + 1][0] if n + 1 < len(declarations) else len(lines)
+              bodies.setdefault(name, []).append('\n'.join(lines[begin:end]))
+          required = {
+              'physicalIndex': 'M3LongAddressKernel.addressUnchecked:',
+              'get': 'M3LongAddressKernel.loadUnchecked:',
+              'toArray': 'M3LongAddressKernel.gatherJavaUnchecked:',
+              'alreadyOrdered': 'M3LongAddressKernel.loadPhysicalUnchecked:',
+              'sorted': 'M3LongAddressKernel.loadPhysicalUnchecked:',
+          }
+          for name, invocation in required.items():
+              if not any(invocation in body for body in bodies.get(name, [])):
+                  raise SystemExit('CURRENT_ADDRESS_ATOM_REFUSED: ' + name + ' -> ' + invocation)
+          if not Path('m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java').is_file():
+              raise SystemExit('CURRENT_ADDRESS_ATOM_REFUSED: missing original Java owner')
+          print('CURRENT_ADDRESS_ATOM_PASS compiled_methods=' + str(len(required)))
+          PYCODE
       - name: Build optional JNI batch gather
         shell: bash
         run: |
