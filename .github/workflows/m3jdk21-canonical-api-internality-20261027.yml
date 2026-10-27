@@ -6,6 +6,7 @@ on:
     paths:
       - 'test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java'
       - 'm3/docs/qualification/current-api-internality-20261027/**'
+      - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
       - '.github/workflows/m3jdk21-canonical-api-internality-20261027.yml'
   workflow_dispatch:
 permissions:
@@ -22,6 +23,7 @@ jobs:
           sparse-checkout: |
             test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
             m3/docs/qualification/current-api-internality-20261027/**
+            m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
             .github/workflows/m3jdk21-canonical-api-internality-20261027.yml
       - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
         with:
