@@ -33,6 +33,44 @@ RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
 RECIPE_JAVA = re.compile(r"(?:^|/)(?:rewrite|recipes?)/[^/]*Recipe(?:Test)?\.java$")
 
 
+# Narrow, reviewable exceptions for original immutable DATA evidence only.
+# This list never authorizes a new runtime, workflow, public Java type or recipe.
+# Updates require a fresh Synexia source-sealed correction and negative tests.
+QUALIFICATION_RECEIPT_ROOT = "m3/qualification/collection-convergence-20261024/"
+QUALIFICATION_RECEIPTS = frozenset({
+    "ADJACENT_IMAGE_RECEIPT.json",
+    "BATCH_ADMISSION_RECEIPT.json",
+    "COW_SINGLE_WORD_RECEIPT.json",
+    "DENSE_ORACLE_RECEIPT.json",
+    "INDEXED_SORT_QUALIFICATION_RECEIPT.json",
+    "INDEXED_VIEW_LAZY_DIRECTORY_RECEIPT.json",
+    "MASK_WORD_SURVIVORS_RECEIPT.json",
+    "MASTER_RECONCILIATION_RECEIPT.json",
+    "NATIVE_COUNT_BATCHING_RECEIPT.json",
+    "NATIVE_IMAGE_RECEIPT.json",
+    "PREDICATE_RUN_RECEIPT.json",
+    "RECEIPT.json",
+    "REGEX_COLLECTION_SUPERSET_RECEIPT.json",
+    "REGEX_COMPACT_METADATA_RECEIPT.json",
+    "STRING_SOURCE_CONCAT_RECEIPT.json",
+    "UNICODE_FRONTIER_RECEIPT.json",
+    "VERIFICATION_RECEIPT.json",
+})
+REVIEWED_FULL_BORROW_OBSERVATION = (
+    "m3/synexia-import/current-full-borrow/string-source-observation-v3.tsv"
+)
+
+
+def is_reviewed_historical_data_path(path: str) -> bool:
+    if path == REVIEWED_FULL_BORROW_OBSERVATION:
+        return True
+    if not path.startswith(QUALIFICATION_RECEIPT_ROOT):
+        return False
+    return path[len(QUALIFICATION_RECEIPT_ROOT):] in QUALIFICATION_RECEIPTS
+
+
+
+
 
 @dataclass(frozen=True)
 class Change:
@@ -90,7 +128,8 @@ def problems(change: Change, text: str | None = None) -> list[str]:
         found.append("new transformation recipe source/descriptor belongs in Synexia")
     parts = PurePosixPath(path).parts
     name = parts[-1]
-    if any(DATE.search(seg) or VERSION.search(seg) for seg in parts):
+    if (any(DATE.search(seg) or VERSION.search(seg) for seg in parts)
+            and not is_reviewed_historical_data_path(path)):
         found.append("unstable date/version identifier")
     if path.startswith("m3/docs/name-mapping.d/"):
         found.append("new parallel mapping fragment; update canonical name-mapping.json instead")
