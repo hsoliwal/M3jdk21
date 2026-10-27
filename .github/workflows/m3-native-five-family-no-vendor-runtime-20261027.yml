@@ -28,18 +28,37 @@ jobs:
           set -euo pipefail
           echo '139807457f448108fcc4e7b3f6f4971a177c32f02afaf7c0d14c4b83d08cdd09  m3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java' | sha256sum -c -
           echo 'acf62705791cc5b8c41b19cd6ae5deba13100a0266ef5e9099552ac9977a00cc  m3/collections/src/test/java/com/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java' | sha256sum -c -
-      - name: Compile every actual native M3 core class under strict JDK21
+      - name: Compile complete M3 arrays and collections modules with Java 21 JPMS
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/classes"
+          # The real native core requires the IN-PRODUCT com.m3.arrays module.
+          # Compile source, do not resolve any external third-party runtime JAR.
+          mkdir -p "$RUNNER_TEMP/arrays" "$RUNNER_TEMP/classes"
+          find m3/arrays/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/arrays-sources.txt"
+          test -s "$RUNNER_TEMP/arrays-sources.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d "$RUNNER_TEMP/arrays" @"$RUNNER_TEMP/arrays-sources.txt"
           find m3/collections/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/sources.txt"
           test -s "$RUNNER_TEMP/sources.txt"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            --module-path "$RUNNER_TEMP/arrays" \
             -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/sources.txt"
           jar --create --file "$RUNNER_TEMP/m3-native-core.jar" -C "$RUNNER_TEMP/classes" .
-          jdeps --print-module-deps "$RUNNER_TEMP/m3-native-core.jar" | tee "$RUNNER_TEMP/jdeps.txt"
-          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+          jar --create --file "$RUNNER_TEMP/m3-native-arrays.jar" -C "$RUNNER_TEMP/arrays" .
+          jdeps --module-path "$RUNNER_TEMP/arrays" --print-module-deps \
+            "$RUNNER_TEMP/m3-native-core.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          # Both are in-product Java modules; reject any vendor module.
+          dep_line="$(cat "$RUNNER_TEMP/jdeps.txt")"
+          IFS=',' read -r -a deps <<< "$dep_line"
+          test "${#deps[@]}" -gt 0
+          for dep in "${deps[@]}"; do
+            case "$dep" in
+              java.base|com.m3.arrays) ;;
+              *) echo "Refusing unexpected external/runtime module: $dep" >&2; exit 1 ;;
+            esac
+          done
+          grep -Eq '(^|,)com[.]m3[.]arrays(,|$)' "$RUNNER_TEMP/jdeps.txt"
       - name: Install internal M3 arrays from source (never donor binaries)
         shell: bash
         run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
