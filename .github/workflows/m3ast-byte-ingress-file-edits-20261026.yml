@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 AST byte ingress and M3File edit generations
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3FileEdits.java'
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTByteIngress.java'
+      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileEditsContract.java'
+      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTByteIngressContract.java'
+      - 'm3/tooling/module-packs/parser/build.py'
+      - '.github/workflows/m3ast-byte-ingress-file-edits-20261026.yml'
+  workflow_dispatch:
+jobs:
+  original-java21-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original M3AST and source-edits with strict Java 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-ast-edits"
+          mkdir -p "$classes" "$RUNNER_TEMP/bridge/jdk/m3/parser"
+          cat > "$RUNNER_TEMP/bridge/jdk/m3/parser/M3ASTIngress.java" <<'JAVA'
+          package jdk.m3.parser;
+          public final class M3ASTIngress {
+            private M3ASTIngress() { }
+            public record Limits(int maxSourceUnits, int maxNodes, int maxDepth) {
+              public Limits {
+                if (maxSourceUnits < 1 || maxNodes < 1 || maxNodes > 20000000
+                    || maxDepth < 1 || maxDepth > 100000)
+                  throw new IllegalArgumentException("invalid AST limits");
+              }
+            }
+          }
+          JAVA
+          root=m3/tooling/module-packs/parser/src
+          javac --release 21 -Xlint:all -Werror -d "$classes" \
+            "$root/main/java/jdk/m3/parser/M3File.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTIndex.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTExternalIngress.java" \
+            "$root/main/java/jdk/m3/parser/M3Utf8SourceMap.java" \
+            "$root/main/java/jdk/m3/parser/M3FileEdits.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTByteIngress.java" \
+            "$root/test/java/jdk/m3/parser/test/M3FileEditsContract.java" \
+            "$root/test/java/jdk/m3/parser/test/M3ASTByteIngressContract.java" \
+            "$RUNNER_TEMP/bridge/jdk/m3/parser/M3ASTIngress.java"
+          java -cp "$classes" jdk.m3.parser.test.M3FileEditsContract
+          java -cp "$classes" jdk.m3.parser.test.M3ASTByteIngressContract
