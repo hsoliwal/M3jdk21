@@ -9,6 +9,7 @@ TEST="$ROOT/m3/collections/src/test/java"
 OUTPUT="$(mktemp -d)"
 trap 'rm -rf "$OUTPUT"' EXIT
 python3 "$Q/verify_recipe.py"
+python3 -m unittest discover -s "$Q" -p 'test_lineage.py' -v
 javac --release 21 -proc:none -Xlint:all,-module -Werror \
   -sourcepath "$MAIN:$TEST" -d "$OUTPUT" \
   "$MAIN/com/m3/collections/M3IndexedListSnapshot.java" \
