@@ -18,8 +18,12 @@ fi
 
 [[ "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3FilteredMasterPredicatePlanLifecycleTest.java)" == f6a8b6f3905ad10a5a0405ecb95f588fd83a68e2 ]] || { echo "Predicate lifecycle JUnit source drift" >&2; exit 1; }
 
+[[ "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3ReadOnlyMapDefaultsTest.java)" == 939b06119a6c396e5e0fd9472fdd8423ad712822 ]] || { echo "Contract source drift: M3ReadOnlyMapDefaultsTest.java" >&2; exit 1; }
+[[ "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3FilteredViewsTest.java)" == c0af31bf7a388cc6959a2a9d846191576902b1ab ]] || { echo "Contract source drift: M3FilteredViewsTest.java" >&2; exit 1; }
+[[ "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetTest.java)" == c9f2a3868fd771d7a51120286219e1544a586c47 ]] || { echo "Contract source drift: M3FilteredNavigableSetTest.java" >&2; exit 1; }
+
 mvn -B -ntp -f m3/arrays/pom.xml -Dmaven.test.skip=true install
-mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3FilteredSortedIteratorPlanTest,M3FilteredMasterTreePlanTest,M3FilteredMasterPredicatePlanLifecycleTest test
+mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3FilteredSortedIteratorPlanTest,M3FilteredMasterTreePlanTest,M3FilteredMasterPredicatePlanLifecycleTest,M3ReadOnlyMapDefaultsTest,M3FilteredViewsTest,M3FilteredNavigableSetTest test
 java -cp "m3/collections/target/classes:m3/collections/target/test-classes:m3/arrays/target/classes" \
   com.m3.collections.M3FilteredSortedIteratorPlanSelfTest
 echo "PASS selected current-master filtered predicate plan contracts; full JDK image remains OPEN"
