@@ -1,0 +1,84 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 LC239 sliding maximum Java21 JNI parity
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java'
+      - 'm3/collections/src/main/native/collections/m3_long_address_kernel.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LaneSlidingMaximumContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LaneSlidingMaximumTest.java'
+      - '.github/workflows/m3-lc239-sliding-max-jni-java21.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  java21-native-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Bind exact head and source-sealed original product files
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java)" = '6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = 'b4e698c6ede7297f5e3d6d2af6fdeb25bb7fb8e7'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LaneSlidingMaximumContract.java)" = '84cfbc24efa4884584ac7cd1b71b55d6cba6c834'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LaneSlidingMaximumTest.java)" = '987dde85f0260c1f43801df4d514e52a7e1ffd71'
+      - name: Strict Java 21 original-source compile and JNI header
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3lc239/classes" "$RUNNER_TEMP/m3lc239/headers"
+          javac --release 21 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3lc239/classes" -h "$RUNNER_TEMP/m3lc239/headers" \
+            m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java \
+            m3/collections/src/test/java/com/m3/collections/M3LaneSlidingMaximumContract.java
+      - name: Existing original address JNI library with appended window atom
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fsanitize=undefined \
+            -fno-sanitize-recover=undefined -shared -fPIC \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_address_kernel.c \
+            -o "$RUNNER_TEMP/m3lc239/libm3_collections_address.so"
+      - name: Four normal/interpreted Java/JNI differential executions
+        shell: bash
+        run: |
+          set -euo pipefail
+          CP="$RUNNER_TEMP/m3lc239/classes"
+          MAIN=com.m3.collections.M3LaneSlidingMaximumContract
+          for vm in normal interpreted; do
+            opts=()
+            if [ "$vm" = interpreted ]; then opts+=(-Xint); fi
+            java -Xcheck:jni "${opts[@]}" -cp "$CP" "$MAIN" | tee "$RUNNER_TEMP/m3lc239/java-$vm.txt"
+            grep -Fxq 'PASS M3_LC239_SLIDING_INDEX checks=10215 native=false' "$RUNNER_TEMP/m3lc239/java-$vm.txt"
+            java -Xcheck:jni "${opts[@]}" \
+              -Djava.library.path="$RUNNER_TEMP/m3lc239" \
+              -Dm3.collections.lane.native=true -Dm3.test.native.required=true \
+              -cp "$CP" "$MAIN" | tee "$RUNNER_TEMP/m3lc239/jni-$vm.txt"
+            grep -Fxq 'PASS M3_LC239_SLIDING_INDEX checks=10224 native=true' "$RUNNER_TEMP/m3lc239/jni-$vm.txt"
+          done
+          cmp "$RUNNER_TEMP/m3lc239/java-normal.txt" "$RUNNER_TEMP/m3lc239/java-interpreted.txt"
+          cmp "$RUNNER_TEMP/m3lc239/jni-normal.txt" "$RUNNER_TEMP/m3lc239/jni-interpreted.txt"
+      - name: Preserve exact-head JNI differential receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-lc239-jni-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3lc239/*.txt
+          if-no-files-found: warn
+          retention-days: 14

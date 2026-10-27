@@ -3,6 +3,8 @@
  * Modified 2026-10-17: bounded index chunks and contiguous region reads.
  */
 #include <jni.h>
+#include <stdlib.h>
+#include <stdint.h>
 
 /* Own scratch is fixed: 256 jint indexes and 256 jlong values (3072 bytes).
  * JVM-internal copying is implementation-dependent. Caller keeps input arrays stable.
@@ -167,4 +169,108 @@ Java_com_m3_collections_M3LongAddressKernel_gatherSelectedNative(
         done += count;
     }
     return written;
+}
+
+
+/*
+ * LeetCode #239 sliding maximum; canonical source M3LaneAlgorithms.
+ * Exactly one JNI transition, fixed 256-long input/output pages and a
+ * monotonically nonincreasing primitive circular deque of at most k entries.
+ * The first equal maximum wins: evict strictly less values only.
+ * No Java heap pointer is retained, and no callbacks cross the native ABI.
+ */
+typedef struct m3_max_candidate {
+    jint physical;
+    jlong value;
+} m3_max_candidate;
+
+enum { M3_MAX_PAGE = 256 };
+
+static jsize m3_max_ring_slot(jsize head, jsize offset, jsize capacity) {
+    const jsize remaining = capacity - head;
+    return offset < remaining ? head + offset : offset - remaining;
+}
+
+static void m3_max_throw(JNIEnv *env, const char *kind, const char *message) {
+    jclass type = (*env)->FindClass(env, kind);
+    if (type != NULL) (*env)->ThrowNew(env, type, message);
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
+        JNIEnv *env, jclass unused, jlongArray values,
+        jint from, jint to, jint window, jintArray output, jint output_from) {
+    (void) unused;
+    if (values == NULL || output == NULL) {
+        m3_max_throw(env, "java/lang/NullPointerException", "null sliding max array");
+        return;
+    }
+    const jsize value_size = (*env)->GetArrayLength(env, values);
+    const jsize output_size = (*env)->GetArrayLength(env, output);
+    if (from < 0 || to < from || to > value_size) {
+        m3_max_throw(env, "java/lang/IndexOutOfBoundsException", "sliding max range");
+        return;
+    }
+    const jsize span = to - from;
+    if (window < 1 || window > span) {
+        m3_max_throw(env, "java/lang/IllegalArgumentException", "sliding max window");
+        return;
+    }
+    const jsize expected = span - window + 1;
+    if (output_from < 0 || expected > output_size
+            || output_from > output_size - expected) {
+        m3_max_throw(env, "java/lang/IndexOutOfBoundsException", "sliding max output range");
+        return;
+    }
+    if ((size_t) window > SIZE_MAX / sizeof(m3_max_candidate)) {
+        m3_max_throw(env, "java/lang/OutOfMemoryError", "sliding max deque too large");
+        return;
+    }
+    m3_max_candidate *deque = malloc((size_t) window * sizeof(*deque));
+    if (deque == NULL) {
+        m3_max_throw(env, "java/lang/OutOfMemoryError", "sliding max deque allocation");
+        return;
+    }
+    jsize head = 0, size = 0, produced = 0, chunk_size = 0;
+    jlong input_page[M3_MAX_PAGE];
+    jint output_page[M3_MAX_PAGE];
+    for (jint read = from; read < to;) {
+        jint count = to - read;
+        if (count > M3_MAX_PAGE) count = M3_MAX_PAGE;
+        (*env)->GetLongArrayRegion(env, values, read, count, input_page);
+        if ((*env)->ExceptionCheck(env)) { free(deque); return; }
+        for (jint step = 0; step < count; step++) {
+            const jint index = read + step;
+            const jlong value = input_page[step];
+            if (size != 0 && deque[head].physical <= index - window) {
+                head = (head + 1 == window) ? 0 : head + 1;
+                size--;
+            }
+            while (size != 0) {
+                jsize tail = m3_max_ring_slot(head, size - 1, window);
+                if (deque[tail].value >= value) break;
+                size--;
+            }
+            const jsize slot = m3_max_ring_slot(head, size, window);
+            deque[slot].physical = index;
+            deque[slot].value = value;
+            size++;
+            if (index - from >= window - 1) {
+                output_page[chunk_size++] = deque[head].physical;
+                if (chunk_size == M3_MAX_PAGE) {
+                    (*env)->SetIntArrayRegion(env, output,
+                            output_from + produced, chunk_size, output_page);
+                    if ((*env)->ExceptionCheck(env)) { free(deque); return; }
+                    produced += chunk_size;
+                    chunk_size = 0;
+                }
+            }
+        }
+        read += count;
+    }
+    if (chunk_size != 0) {
+        (*env)->SetIntArrayRegion(env, output, output_from + produced,
+                chunk_size, output_page);
+    }
+    free(deque);
 }

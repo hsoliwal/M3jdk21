@@ -391,4 +391,109 @@ public final class M3LaneAlgorithms {
             throw new IndexOutOfBoundsException("range [" + from + ", " + to + ") outside 0.." + length);
         }
     }
+
+    /**
+     * LeetCode #239: physical index of the maximum in each sliding window.
+     * Equal maxima retain their earliest physical index (strict tail eviction).
+     * The payload is never moved; no per-entry object is retained.
+     */
+    public static int[] slidingMaximumIndices(long[] values, int window) {
+        java.util.Objects.requireNonNull(values, "values");
+        if (window <= 0 || window > values.length) {
+            throw new IllegalArgumentException("window must lie in [1, values.length]");
+        }
+        int[] indices = new int[values.length - window + 1];
+        slidingMaximumIndicesInto(values, 0, values.length, window,
+                indices, 0, false);
+        return indices;
+    }
+
+    /**
+     * Writes absolute physical indexes of maximum elements into a caller-owned
+     * output lane. The complete range/shape is checked before the first write.
+     * JNI is optional; a required-native call never silently falls back.
+     */
+    public static void slidingMaximumIndicesInto(long[] values, int from, int to,
+            int window, int[] output, int outputFrom, boolean nativeRequired) {
+        java.util.Objects.requireNonNull(values, "values");
+        java.util.Objects.requireNonNull(output, "output");
+        java.util.Objects.checkFromToIndex(from, to, values.length);
+        int span = to - from;
+        if (window <= 0 || window > span) {
+            throw new IllegalArgumentException("window must lie in [1, to-from]");
+        }
+        int count = span - window + 1;
+        java.util.Objects.checkFromIndexSize(outputFrom, count, output.length);
+        if (nativeRequired) {
+            if (!SlidingMaximumNative.AVAILABLE) {
+                throw new UnsatisfiedLinkError("M3 sliding-maximum JNI unavailable");
+            }
+            slidingMaximumIndices0(values, from, to, window, output, outputFrom);
+            return;
+        }
+        // JNI amortizes across larger ranges. Small windows avoid the call.
+        if (SlidingMaximumNative.AVAILABLE && !SlidingMaximumNative.ABI_MISSING
+                && span >= 256 && window > 1) {
+            try {
+                slidingMaximumIndices0(values, from, to, window, output, outputFrom);
+                return;
+            } catch (UnsatisfiedLinkError oldNativeImage) {
+                // Native extension absent from an earlier installed image.
+                // Explicit native-required calls above never downgrade.
+                SlidingMaximumNative.ABI_MISSING = true;
+            }
+        }
+        slidingMaximumIndicesJava(values, from, to, window, output, outputFrom);
+    }
+
+    private static void slidingMaximumIndicesJava(long[] values, int from, int to,
+            int window, int[] output, int outputFrom) {
+        // Ring deque stores only physical indexes; at most window entries.
+        int[] deque = new int[window];
+        int head = 0;
+        int size = 0;
+        for (int index = from; index < to; index++) {
+            if (size != 0 && deque[head] <= index - window) {
+                head = (head + 1 == window) ? 0 : head + 1;
+                size--;
+            }
+            // Strict less-than keeps the oldest maximum on ties.
+            while (size != 0 && values[deque[ringSlot(head, size - 1, window)]] < values[index]) {
+                size--;
+            }
+            deque[ringSlot(head, size, window)] = index;
+            size++;
+            if (index - from >= window - 1) {
+                output[outputFrom++] = deque[head];
+            }
+        }
+    }
+
+    /** Overflow-safe ring offset, even for an almost-full maximum-sized lane. */
+    private static int ringSlot(int head, int offset, int capacity) {
+        int remaining = capacity - head;
+        return offset < remaining ? head + offset : offset - remaining;
+    }
+
+    public static boolean slidingMaximumNativeAvailable() {
+        return SlidingMaximumNative.AVAILABLE && !SlidingMaximumNative.ABI_MISSING;
+    }
+
+    private static final class SlidingMaximumNative {
+        static volatile boolean ABI_MISSING;
+        static final boolean AVAILABLE = load();
+
+        private static boolean load() {
+            if (!Boolean.getBoolean("m3.collections.lane.native")) return false;
+            try {
+                System.loadLibrary("m3_collections_address");
+                return true;
+            } catch (UnsatisfiedLinkError | SecurityException unavailable) {
+                return false;
+            }
+        }
+    }
+
+    private static native void slidingMaximumIndices0(long[] values, int from,
+            int to, int window, int[] output, int outputFrom);
 }
