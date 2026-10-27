@@ -6,6 +6,7 @@ import hashlib
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import verify_superset as owner
 
 
@@ -19,7 +20,8 @@ class SupersetContract(unittest.TestCase):
         self.older = {owner.MAIN + f'Old{i:02d}.java' for i in range(18)}
         self.older |= {owner.TEST + f'OldTest{i:02d}.java' for i in range(18)}
         self.paths = sorted([owner.MAIN + f'M3AddMain{i:02d}.java' for i in range(13)]
-                            + [owner.TEST + f'M3AddTest{i:02d}.java' for i in range(27)])
+                            + [owner.TEST + f'M3AddTest{i:02d}.java' for i in range(25)]
+                            + list(owner.COMPILER_TEST_PATHS[1:]))
         self.tracked = self.older | set(self.paths)
         self.rows = []
         for relative in self.paths:
@@ -39,7 +41,11 @@ class SupersetContract(unittest.TestCase):
                 ''.join('\t'.join(row) + '\n' for row in ten), encoding='utf-8')
 
     def check(self):
-        return owner.verify_additions(self.root, self.receipts, self.older, self.tracked)
+        # The 36+40 synthetic fixture exercises source inventory failures only.
+        # Compiler receipt admission has its own six exact-blob negative controls;
+        # production verify_product_checkout always requires the real receipt.
+        with patch.object(owner, 'admitted_compiler_revisions', return_value={}):
+            return owner.verify_additions(self.root, self.receipts, self.older, self.tracked)
 
     def test_exact_36_plus_40(self):
         self.assertEqual(self.paths, self.check())
