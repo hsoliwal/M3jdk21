@@ -125,9 +125,7 @@ final class M3FrozenLexiconIndex {
 
     /** Adds one UTF-16 unit without allocating or changing representation. */
     static long exactHashUnit(long hash, char unit) {
-        long value = unit;
-        hash = (hash ^ (value & 0xffL)) * EXACT_PRIME;
-        return (hash ^ (value >>> 8)) * EXACT_PRIME;
+        return (hash ^ unit) * EXACT_PRIME;
     }
 
     static long exactHashFinish(long hash) {
