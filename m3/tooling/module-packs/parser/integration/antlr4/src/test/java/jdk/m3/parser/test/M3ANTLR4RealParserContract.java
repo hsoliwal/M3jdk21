@@ -18,6 +18,10 @@ import jdk.m3.parser.test.antlr.M3UnicodeTinyLexer;
 import jdk.m3.parser.test.antlr.M3UnicodeTinyParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 
@@ -58,6 +62,89 @@ public final class M3ANTLR4RealParserContract {
             return coordinates.utf16Offset(row.endPoint());
         }
         @Override public int portableFlags(Occurrence row) { return row.tags(); }
+    }
+
+
+    /**
+     * Project the ACTUAL ANTLR-owned ParserRuleContext/TerminalNode tree.
+     * Native parser nodes are visited and then released by M3AST ingress.
+     * Whitespace on ANTLR's hidden channel is deliberately absent here;
+     * only the independent real token-stream CST is full-fidelity.
+     */
+    private static final class NativeParseTreeAdapter implements M3ASTExternalIngress.Nodes<ParseTree> {
+        private final M3UnicodeTinyParser parser;
+        private final M3CodePointSourceMap coordinates;
+
+        NativeParseTreeAdapter(M3UnicodeTinyParser parser, M3CodePointSourceMap coordinates) {
+            this.parser = parser;
+            this.coordinates = coordinates;
+        }
+
+        @Override public String parserId() { return "antlr4-4.13.2:native-rule-context"; }
+
+        @Override public String kind(ParseTree node) {
+            if (node instanceof ParserRuleContext context) {
+                return parser.getRuleNames()[context.getRuleIndex()];
+            }
+            if (node instanceof TerminalNode terminal) {
+                Token token = terminal.getSymbol();
+                if (token.getType() == Token.EOF) return "EOF";
+                String named = parser.getVocabulary().getSymbolicName(token.getType());
+                return named == null ? parser.getVocabulary().getDisplayName(token.getType()) : named;
+            }
+            throw new IllegalArgumentException("unsupported ANTLR parse tree node");
+        }
+
+        @Override public int childCount(ParseTree node) { return node.getChildCount(); }
+
+        @Override public ParseTree child(ParseTree node, int index) { return node.getChild(index); }
+
+        @Override public String childRole(ParseTree parent, int index) {
+            ParseTree child = parent.getChild(index);
+            if (child instanceof ParserRuleContext context)
+                return parser.getRuleNames()[context.getRuleIndex()];
+            return child instanceof ErrorNode ? "error" : "terminal";
+        }
+
+        private Token first(ParseTree node) {
+            if (node instanceof ParserRuleContext context) return context.getStart();
+            if (node instanceof TerminalNode terminal) return terminal.getSymbol();
+            throw new IllegalArgumentException("unsupported ANTLR parse tree node");
+        }
+
+        private Token last(ParseTree node) {
+            if (node instanceof ParserRuleContext context) return context.getStop();
+            if (node instanceof TerminalNode terminal) return terminal.getSymbol();
+            throw new IllegalArgumentException("unsupported ANTLR parse tree node");
+        }
+
+        @Override public int startUtf16(ParseTree node) {
+            Token token = first(node);
+            if (token == null) return -1;
+            int point = token.getType() == Token.EOF
+                    ? coordinates.codePointCount() : token.getStartIndex();
+            return point < 0 ? -1 : coordinates.utf16Offset(point);
+        }
+
+        @Override public int endUtf16(ParseTree node) {
+            Token token = last(node);
+            if (token == null) return -1;
+            int exclusive = token.getType() == Token.EOF
+                    ? coordinates.codePointCount() : token.getStopIndex() + 1;
+            return exclusive < 0 ? -1 : coordinates.utf16Offset(exclusive);
+        }
+
+        @Override public int portableFlags(ParseTree node) {
+            if (node instanceof ParserRuleContext) return M3ASTIndex.NAMED;
+            if (node instanceof TerminalNode terminal && terminal.getSymbol().getType() != Token.EOF)
+                return M3ASTIndex.TOKEN;
+            return 0; // EOF is zero-width, not a fake source-consuming token.
+        }
+
+        @Override public boolean recovered(ParseTree node) {
+            if (node instanceof ParserRuleContext context) return context.exception != null;
+            return node instanceof ErrorNode;
+        }
     }
 
     private static void trial(String text, int sequence) throws Exception {
@@ -131,6 +218,47 @@ public final class M3ANTLR4RealParserContract {
                 && proof.coveredUtf16() == original.length()
                 && proof.utf16Sha256().equals(original.utf16Sha256()),
                 "original M3File full-fidelity ANTLR token/trivia source seal");
+
+        // Native ANTLR parse-tree RULES and TERMINALS are distinct from the
+        // complete lexical token/trivia sequence verified above.
+        M3ASTIndex parseTree = M3ASTExternalIngress.project(
+                original, parsed, new NativeParseTreeAdapter(parser, coordinates),
+                new M3ASTIngress.Limits(Math.max(1, original.length()),
+                        visible * 2 + 2, 12));
+        check(parseTree.nodeCount() == visible * 2 + 2,
+                "original ANTLR parse tree has document, item/token pairs, and EOF");
+        check(parseTree.kind(0).equals("document")
+                && parseTree.domain() == M3ASTIndex.Domain.EXTERNAL
+                && parseTree.parserId().orElseThrow().contains("native-rule-context"),
+                "original rule and native-parser provider remain identifiable");
+        check(parseTree.childCount(0) == visible + 1
+                && parseTree.kind(parseTree.nodeCount() - 1).equals("EOF"),
+                "native rule hierarchy includes every visible item and EOF");
+        check((parseTree.flags(0) & M3ASTIndex.SOURCE_UNVERIFIED) != 0,
+                "native ANTLR parse tree does not falsely certify source binding");
+        int visibleIndex = 0;
+        for (Token token : tokenStream.getTokens()) {
+            if (token.getType() == Token.EOF || token.getChannel() == Token.HIDDEN_CHANNEL)
+                continue;
+            int rule = visibleIndex * 2 + 1;
+            int terminal = rule + 1;
+            check(parseTree.kind(rule).equals("item") && parseTree.parent(rule) == 0
+                    && parseTree.childRole(rule).orElseThrow().equals("item"),
+                    "actual ANTLR rule context remains a native named occurrence");
+            check(parseTree.parent(terminal) == rule
+                    && parseTree.childRole(terminal).orElseThrow().equals("terminal"),
+                    "native TerminalNode is attached to original parse rule");
+            check(parseTree.start(terminal) == coordinates.utf16Offset(token.getStartIndex())
+                    && parseTree.end(terminal) == coordinates.utf16Offset(token.getStopIndex() + 1)
+                    && parseTree.sourceText(terminal).equals(token.getText()),
+                    "original M3AST terminal span equals real ANTLR Unicode token");
+            check((parseTree.portableFlags(terminal) & M3ASTIndex.TOKEN) != 0,
+                    "native ANTLR token flag retained independently of trivia CST");
+            visibleIndex++;
+        }
+        check(visibleIndex == visible && parseTree.source() == original,
+                "native parse tree and complete CST share the same original M3File");
+
     }
 
     public static void main(String[] args) throws Exception {
