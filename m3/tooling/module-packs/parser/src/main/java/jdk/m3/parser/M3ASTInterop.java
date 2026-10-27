@@ -79,10 +79,82 @@ public final class M3ASTInterop {
         default int rolePosition(int ordinal) { return -1; }
     }
 
+    /**
+     * The exact node facts of a Tree-sitter concrete syntax tree. A provider
+     * delegates these operations to its existing TSNode (or equivalent) API;
+     * M3JDK21 does not import a binding, grammar, native library or second AST.
+     * In particular, {@code fieldNameForChild} uses the ALL-child ordinal,
+     * not the named-child ordinal. Named nodes and anonymous punctuation both
+     * remain visible. Parser-owned tree and node lifetimes must cover the
+     * whole synchronous projection.
+     */
+    public interface TreeSitterNodes<N> {
+        String type(N node);
+        int childCount(N node);
+        N child(N node, int ordinal);
+        int startByte(N node);
+        int endByte(N node);
+        boolean isNamed(N node);
+        boolean isMissing(N node);
+        boolean isExtra(N node);
+        boolean isError(N node);
+        boolean hasError(N node);
+
+        /** Grammar field on this ordered edge, or null if none. */
+        default String fieldNameForChild(N parent, int ordinal) { return null; }
+    }
+
     private static final int SURFACE_FLAGS = M3ASTIndex.NAMED | M3ASTIndex.TOKEN
             | M3ASTIndex.TRIVIA | M3ASTIndex.MISSING | M3ASTIndex.ERROR | M3ASTIndex.RECOVERED;
 
     private M3ASTInterop() { }
+
+    /**
+     * Read an original Tree-sitter CST directly into the one M3AST occurrence
+     * index. The caller supplies its exact grammar/version identity, a source
+     * snapshot of the bytes actually parsed and, when available, a parser-
+     * owned generation stamp. The byte digest is mandatory for VERIFIED
+     * ranges. A missing stamp marks the entire projection SOURCE_UNVERIFIED;
+     * it never silently manufactures a source identity from the M3File.
+     *
+     * <p>Tree-sitter's extra flag means a grammar extra, not necessarily all
+     * whitespace; M3 TRIVIA records that limited fact. TOKEN marks terminal
+     * CST leaves, NAMED preserves the grammar distinction, and RECOVERED
+     * also records ancestor nodes whose subtree reports an error. Neither
+     * Tree-sitter grammar fields nor repeated fields prove list membership,
+     * so role positions are deliberately unknown (-1). Semantic bindings,
+     * decoded literals and trivia-inclusive envelopes are not invented.</p>
+     */
+    public static <N> M3ASTIndex treeSitter(M3File source, N root, String grammarIdentity,
+            TreeSitterNodes<N> nodes, SourceStamp stamp, M3ASTIngress.Limits limits) {
+        Objects.requireNonNull(nodes, "Tree-sitter original node operations");
+        Surface<N> surface = new Surface<>() {
+            @Override public String kind(N node) { return nodes.type(node); }
+            @Override public int childCount(N node) { return nodes.childCount(node); }
+            @Override public N child(N node, int ordinal) { return nodes.child(node, ordinal); }
+            @Override public String childRole(N parent, int ordinal) {
+                return nodes.fieldNameForChild(parent, ordinal);
+            }
+            @Override public int start(N node) { return nodes.startByte(node); }
+            @Override public int end(N node) { return nodes.endByte(node); }
+            @Override public int syntaxFlags(N node) {
+                int flags = nodes.isNamed(node) ? M3ASTIndex.NAMED : 0;
+                if (nodes.childCount(node) == 0) flags |= M3ASTIndex.TOKEN;
+                if (nodes.isExtra(node)) flags |= M3ASTIndex.TRIVIA;
+                if (nodes.isMissing(node)) flags |= M3ASTIndex.MISSING;
+                if (nodes.isError(node)) flags |= M3ASTIndex.ERROR;
+                if (nodes.hasError(node)) flags |= M3ASTIndex.RECOVERED;
+                return flags;
+            }
+        };
+        return project(source, root, grammarIdentity, Coordinates.UTF8_BYTES, surface, stamp, limits);
+    }
+
+    /** Conservative unstamped ingress; no exact-source claims. */
+    public static <N> M3ASTIndex treeSitter(M3File source, N root, String grammarIdentity,
+            TreeSitterNodes<N> nodes, M3ASTIngress.Limits limits) {
+        return treeSitter(source, root, grammarIdentity, nodes, null, limits);
+    }
 
     /**
      * Opt-in projection of the original Eclipse JDT DOM tree and its actual
