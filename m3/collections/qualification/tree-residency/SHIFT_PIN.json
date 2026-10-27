@@ -1,0 +1,66 @@
+{
+  "schema": "M3JDK21_TREE_SHIFT_PIN_RECEIVING_V1",
+  "product": "M3JDK21",
+  "product_pr": 1971,
+  "product_parent": "0209c6c74b5fcb0a25e79bf7451cba02e98108c4",
+  "owner": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+  "owner_git_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6",
+  "owner_sha256": "be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082",
+  "workflow": ".github/workflows/m3-tree-shift-20261021.yml",
+  "source_preimage_git_blob": "74ce28ee496da18e787dacb0453fcfc5c0eed277",
+  "sdk_emitted_git_blob": "21c6901be77ce236e1ae90daaccfac3bd86f3f98",
+  "workflow_pre_sha256": "3fa14cad6b730b6721dae430334b70e65ec06fe70a59f051f64792fe0cfc7f5d",
+  "workflow_post_sha256": "9aabe0d84f94de625c296af612ce120418c66f5df418305d915beb49a8d95234",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "pr": 12855,
+    "commit": "d0a145f2cf26b5a60422ee99195ed7084eb47039",
+    "dataset": "vpt-tree-shift-pin-20261026",
+    "named_recipe": "com.synexia.m3.ViewportTreeShiftPin20261026",
+    "original_recipe_engine_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7"
+  },
+  "executed_local": {
+    "java": "21.0.12.1",
+    "maven": "3.9.9",
+    "rewrite": "8.17.1",
+    "actual_engine": "M3HashPinnedTextSnapshotRecipe",
+    "exact_engine_blob_verified": true,
+    "adapted_offline_maven_host": true,
+    "canonical_maven_pom_byte_identical": false,
+    "junit_tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "sdk_result_count": 1,
+    "sdk_output_source_sha256": "9aabe0d84f94de625c296af612ce120418c66f5df418305d915beb49a8d95234",
+    "fixed_point_replay": 0,
+    "drift_missing_duplicate_postscan_template_negative_controls": "PASS",
+    "product_original_workflow_unchanged_during_sdk_test": true
+  },
+  "source_change": {
+    "changes": "only original M3TreeWindowPlan source SHA-256 literal",
+    "old": "bf6fb2f1d5f1c86ee51a94ad7a058537b092d256dc6fa583cbd712e7800b2944",
+    "new": "be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082",
+    "exact_same_original_test_hashes": true,
+    "required_assertions": 2591930,
+    "modes": [
+      "default",
+      "interpreter",
+      "C1",
+      "non-tiered"
+    ]
+  },
+  "historical_ci_failure": {
+    "run_id": 40267841448,
+    "cause": "new source hash fails stale source checksum before javac",
+    "old_tests_had_no_hash_drift": true,
+    "compiler_and_junit_did_not_run": true
+  },
+  "hosted_independent_canonic_sdk": "PENDING",
+  "hosted_original_product_four_mode": "PENDING",
+  "runtime_source_changed": false,
+  "existing_jdk_public_api_changed": false,
+  "native_jni_changed": false,
+  "full_hotspot_jtreg_swt_nebula_gef_rwt": "NOT_RUN",
+  "status": "DRAFT_REVIEW_ONLY"
+}

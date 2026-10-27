@@ -23,6 +23,11 @@
  * questions.
  */
 
+/*
+ * Modified 2026-10-27 by Hitesh Soliwal and contributors:
+ * retain updated entry values after successful backing-map setValue writes.
+ */
+
 package java.util;
 
 /**

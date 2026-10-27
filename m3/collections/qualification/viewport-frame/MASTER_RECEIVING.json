@@ -1,0 +1,62 @@
+{
+  "schema": "M3_VIEWPORT_CURRENT_MASTER_RECEIVING_V1",
+  "product_repository": "hsoliwal/M3jdk21",
+  "exact_master_parent": "75e2bfe3d934bae1535243542b2417570b2bea24",
+  "canonical_workspace": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_head_at_review": "56df899be5c172e41c6bee16f3bdd299bc19a18c",
+  "original_receiving_pr": 1884,
+  "original_receiving_head": "0f4ec5d05aabe8d43642e29dd569f29b3aa59587",
+  "source_receiving": [
+    {
+      "path": "m3/collections/src/main/c/m3maskviewport.c",
+      "master_pre_blob": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",
+      "reviewed_result_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
+      "canonical_mechanism": "serial M3HashPinnedTextSnapshotRecipe results for frame-page, wide-offset and inline path"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java",
+      "master_pre_blob": "760f572442bbd4145a1e24daadae267bffae56df",
+      "reviewed_result_blob": "9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad",
+      "canonical_mechanism": "M3HashPinnedJavaSnapshotRecipe J.CompilationUnit result and JNI generated-header verification"
+    },
+    {
+      "path": "m3/collections/viewport-proof/verify.py",
+      "master_pre_blob": "1f55d3d2292ebf03d2fc6cf5bda77cd455e58aa9",
+      "reviewed_result_blob": "9614892a7257c9948716c2b49d80732183fce772",
+      "canonical_mechanism": "serial M3HashPinnedTextSnapshotRecipe results for exact exports, dual Java states, installed JNI and native page"
+    }
+  ],
+  "test_only_opaque_fixtures": [
+    "M3FrameRegionContract.txt",
+    "M3NativePageDirectContract.txt"
+  ],
+  "receipts": [
+    "RECEIVING.json",
+    "JAVA_RECEIVING.json",
+    "JAVA_STATES.json",
+    "INLINE.json",
+    "WIDE_OFFSET.json",
+    "PARSER_SUPPLY.json"
+  ],
+  "previous_pr_head_ci": {
+    "commit": "0f4ec5d05aabe8d43642e29dd569f29b3aa59587",
+    "M3 Mask Viewport Java JNI": "success",
+    "Public JDK naming contract": "success",
+    "M3 merged recipe atom preservation": "success"
+  },
+  "admission": {
+    "scope": "viewport only",
+    "unrelated_workflow_changes": "NONE",
+    "default_branch_write": false,
+    "rebase": false,
+    "force_push": false,
+    "history_rewrite": false
+  },
+  "independent_new_head_CI": "NOT_YET_EXECUTED",
+  "merge_status": "DRAFT_REVIEW_ONLY",
+  "full_source_built_JDK_HotSpot_jtreg": "NOT_VERIFIED",
+  "native_widgets_SWT_Nebula_GEF_RWT": "NOT_VERIFIED",
+  "cross_platform_IME_accessibility": "NOT_VERIFIED",
+  "latency_RSS_GC_throughput": "NOT_MEASURED"
+}

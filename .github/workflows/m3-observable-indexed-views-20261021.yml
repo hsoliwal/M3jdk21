@@ -4,6 +4,8 @@ name: M3 observable filtered and sorted indexed views Java21
 on:
   pull_request:
     paths:
+      - 'm3/arrays/src/main/java/**'
+      - 'm3/collections/src/main/java/module-info.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3ObservableList.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3ObservableIndexedViewsContract.java'
       - '.github/workflows/m3-observable-indexed-views-20261021.yml'
@@ -28,17 +30,36 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Compile original com.m3.arrays module before dependent collections
+        shell: bash
+        run: |
+          set -euo pipefail
+          modules="$RUNNER_TEMP/m3-observable/modules"
+          mkdir -p "$modules/com.m3.arrays"
+          mapfile -d '' -t array_sources < <(
+            find m3/arrays/src/main/java -type f -name '*.java' -print0 | sort -z
+          )
+          test "${#array_sources[@]}" -ge 2
+          test -f m3/arrays/src/main/java/module-info.java
+          javac --release 21 -Xlint:all,-module -Werror \
+            -d "$modules/com.m3.arrays" "${array_sources[@]}"
+          test -f "$modules/com.m3.arrays/module-info.class"
+          java --module-path "$modules" --describe-module com.m3.arrays
       - name: Compile existing M3 dynamic-array/index-mask owners and contracts
         shell: bash
         run: |
-          mkdir -p "$RUNNER_TEMP/m3-observable"
+          set -euo pipefail
+          modules="$RUNNER_TEMP/m3-observable/modules"
+          test -f "$modules/com.m3.arrays/module-info.class"
+          mkdir -p "$modules/com.m3.collections"
           javac --release 21 -Xlint:all,-module -Werror \
+            --module-path "$modules" \
             -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
-            -d "$RUNNER_TEMP/m3-observable" \
+            -d "$modules/com.m3.collections" \
             m3/collections/src/main/java/module-info.java \
             m3/collections/src/test/java/com/m3/collections/M3ObservableListContract.java \
             m3/collections/src/test/java/com/m3/collections/M3ObservableIndexedViewsContract.java
       - name: Existing observable List contract
-        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable" -m com.m3.collections/com.m3.collections.M3ObservableListContract
+        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable/modules" -m com.m3.collections/com.m3.collections.M3ObservableListContract
       - name: Observable filtered/sorted primitive-index contract
-        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable" -m com.m3.collections/com.m3.collections.M3ObservableIndexedViewsContract
+        run: java -Xcheck:jni --module-path "$RUNNER_TEMP/m3-observable/modules" -m com.m3.collections/com.m3.collections.M3ObservableIndexedViewsContract

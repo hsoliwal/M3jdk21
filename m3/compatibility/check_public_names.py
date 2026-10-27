@@ -61,6 +61,18 @@ def pinned_passive_receipt(path: str, text: str | None) -> bool:
 
 
 
+# Passive source/evidence data is neither a public Java name nor an executable
+# recipe. Strictly scope the historical path exception to existing data lanes.
+DATA_RECEIPT_PREFIXES = ("m3/qualification/", "m3/synexia-import/current-full-borrow/")
+DATA_RECEIPT_EXTENSIONS = (".json", ".tsv")
+
+
+def passive_data_receipt(path: str) -> bool:
+    return (path.startswith(DATA_RECEIPT_PREFIXES)
+            and path.endswith(DATA_RECEIPT_EXTENSIONS))
+
+
+
 @dataclass(frozen=True)
 class Change:
     status: str
@@ -118,6 +130,7 @@ def problems(change: Change, text: str | None = None) -> list[str]:
     parts = PurePosixPath(path).parts
     name = parts[-1]
     if (any(DATE.search(seg) or VERSION.search(seg) for seg in parts)
+            and not passive_data_receipt(path)
             and not pinned_passive_receipt(path, text)):
         found.append("unstable date/version identifier")
     if path.startswith("m3/docs/name-mapping.d/"):

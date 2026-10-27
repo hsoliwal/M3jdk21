@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 parser intake review ledger closure
+on:
+  pull_request:
+    paths:
+      - 'm3/docs/synexia-direct-copy-review.tsv'
+      - '.github/workflows/m3-parser-intake-ledger-20261026.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-review-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run unchanged original upstream-reuse and intake policy checks
+        run: |
+          set -euo pipefail
+          python3 m3/compatibility/check_synexia_full_family.py
+          python3 m3/compatibility/check_synexia_full_borrow_receiver.py
+          python3 m3/runtime-integration/verify-synexia-intake.py
+      - name: Require all 29 independent rights reviews to remain pending
+        run: |
+          python3 - <<'PY'
+          import csv
+          with open('m3/docs/synexia-direct-copy-review.tsv', encoding='utf-8') as stream:
+              rows = list(csv.DictReader(stream, delimiter='\t'))
+          assert len(rows) == len({r['mapping_id'] for r in rows}) == 29
+          assert all(r['review_status'] == 'REVIEW_REQUIRED' for r in rows)
+          for ident in ('m3.build.change-journal-doclint', 'synexia.regex.prepared-utf16-effects.receiver'):
+              row = next(r for r in rows if r['mapping_id'] == ident)
+              assert 'relicense' in row['required_resolution'].lower()
+              assert 'reimplementation' in row['required_resolution'].lower()
+          print('M3_PARSER_INTAKE_LEDGER_PENDING_PASS reviews=29 append=2')
+          PY

@@ -48,6 +48,49 @@ public final class M3File implements CharSequence {
     }
 
     /**
+     * Consume a caller-owned completed raw-byte capture without reading a
+     * provider, retaining its byte[] or creating another text store.
+     * The caller must not mutate the borrowed bytes during the invocation.
+     * This does not establish an atomic filesystem generation.
+     */
+    public static M3File fromCapturedBytes(URI uri, byte[] captured,
+                                          Charset charset, int maxBytes) throws IOException {
+        return fromCaptured(uri, ByteBuffer.wrap(Objects.requireNonNull(captured, "captured")),
+                charset, maxBytes);
+    }
+
+    /**
+     * Consume only the caller's current [position, limit) byte window.
+     * Heap, direct, sliced, and read-only buffers are supported. Neither the
+     * buffer cursor/limit nor its storage is modified or retained.
+     *
+     * <p>Raw SHA-256 covers the exact original byte window, independently of
+     * strict decoded UTF-16 identity. The selected Charset defines BOM
+     * handling. A caller-owned buffer must remain stable until return;
+     * this is not a provider-level atomic snapshot guarantee.
+     */
+    public static M3File fromCaptured(URI uri, ByteBuffer captured,
+                                      Charset charset, int maxBytes) throws IOException {
+        Objects.requireNonNull(uri, "uri");
+        Objects.requireNonNull(captured, "captured");
+        Objects.requireNonNull(charset, "charset");
+        if (maxBytes < 0 || maxBytes > Integer.MAX_VALUE - 8) {
+            throw new IllegalArgumentException("maxBytes outside supported array bounds");
+        }
+        ByteBuffer window = captured.asReadOnlyBuffer();
+        if (window.remaining() > maxBytes) {
+            throw new IOException("source exceeds maxBytes=" + maxBytes + ": " + uri);
+        }
+        String text = charset.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPORT)
+                .onUnmappableCharacter(CodingErrorAction.REPORT)
+                .decode(window.duplicate()).toString();
+        MessageDigest digest = sha256();
+        digest.update(window.duplicate());
+        return new M3File(uri, text, HexFormat.of().formatHex(digest.digest()));
+    }
+
+    /**
      * Read at most maxBytes bytes, refusing malformed/unmappable input and oversized files.
      * The selected charset defines BOM handling. No replacement characters are introduced
      * by error recovery. The stream is closed on success and failure.

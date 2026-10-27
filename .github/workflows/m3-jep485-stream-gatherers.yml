@@ -1,3 +1,6 @@
+# Modified 2026-10-27 by Hitesh Soliwal and contributors:
+# pin JTReg, validate headerless receipt rows, select one JDK image and enforce smoke output.
+
 name: M3 JEP 485 Stream Gatherers admission
 
 on:

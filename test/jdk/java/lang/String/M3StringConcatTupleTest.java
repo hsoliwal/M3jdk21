@@ -51,7 +51,13 @@ public class M3StringConcatTupleTest {
         for (Class<?> type : TYPES) {
             MethodHandle mh = (MethodHandle) stringifier.invoke(null, type);
             if (type == String.class) {
-                check(mh == null, "String needs no stringifier");
+                check(mh != null && mh.type().equals(MethodType.methodType(String.class, String.class)),
+                        "String null conversion retains the exact unboxed parameter type");
+                check("null".equals((String) mh.invokeExact((String) null)),
+                        "typed null String is the JLS null text");
+                String nonNull = new String("typed String");
+                check((String) mh.invokeExact(nonNull) == nonNull,
+                        "non-null String conversion preserves reference identity");
                 continue;
             }
             check(mh.type().returnType() == String.class && mh.type().parameterCount() == 1, "stringifier type " + mh.type());

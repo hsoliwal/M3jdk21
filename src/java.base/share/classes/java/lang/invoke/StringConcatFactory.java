@@ -630,10 +630,11 @@ public final class StringConcatFactory {
     }
 
     // Typed gateways: String.valueOf(primitive) for primitives (byte and short widen to int),
-    // the float/double stringifiers, stringOf for every reference type; null for String itself.
+    // the float/double stringifiers, and stringOf for every reference type.
+    // Modified 2026-10-27: preserve JLS null conversion for typed Strings.
     private static MethodHandle m3Stringifier(Class<?> type) {
         if (type == String.class) {
-            return null;
+            return objectStringifier().asType(methodType(String.class, String.class));
         }
         if (type == int.class || type == long.class || type == char.class || type == boolean.class) {
             return stringValueOf(type);

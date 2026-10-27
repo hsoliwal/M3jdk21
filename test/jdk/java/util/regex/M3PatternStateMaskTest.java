@@ -2,6 +2,11 @@
  * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * GPLv2 with the Classpath exception.
  */
+
+/*
+ * Modified 2026-10-27 by Hitesh Soliwal and contributors:
+ * verify eager immutable scalar and wide ASCII masks and M3 String storage behavior.
+ */
 /*
  * @test
  * @summary Scalar and wide regex masks preserve compiled JDK predicate and UTF-16 semantics
@@ -134,7 +139,7 @@ public class M3PatternStateMaskTest {
                 }
                 return true;
             });
-            for (var future : pool.invokeAll(tasks)) check(future.get(), "concurrent lazy publication");
+            for (var future : pool.invokeAll(tasks)) check(future.get(), "concurrent immutable plan use");
         }
         String[] samples = {"", "a", "aa", "b", "ab", "aab", "\n", "\r\n", "é", "一", "\ud800", "\udc00", "\ud83d\ude00", "a\ud800", "\u0085", "\u2028"};
         for (int count : new int[]{1, 2, 31, 32, 62, 63, 64, 65, 255, 256, 257}) {
