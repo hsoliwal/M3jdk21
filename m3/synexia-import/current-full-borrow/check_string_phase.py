@@ -40,6 +40,17 @@ SUCCESSOR_CHAIN_HEADER = [
     "schema", "target_path", "predecessor_git_blob", "successor_git_blob",
     "synexia_pr", "m3jdk_pr", "state",
 ]
+# Separate exact source observation of a two-parent integration merge.
+# This is not a serial recipe reconstruction or runtime/performance acceptance.
+MERGED_SOURCE_OBSERVATION = Path(__file__).with_name("string-target-merged-source-observation.tsv")
+MERGED_SOURCE_OBSERVATION_HEADER = ["schema","role","target_path","source_commit","git_blob","first_parent_commit","second_parent_commit","synexia_pr","synexia_source_head","canonical_resource_path","canonical_resource_git_blob","canonical_resource_sha256","state","runtime_acceptance"]
+EXPECTED_MERGED_SOURCE_OBSERVATION = (
+    ("M3JDK21_STRING_MERGED_SOURCE_OBSERVATION_V1", "V1_TIP", "src/java.base/share/classes/java/lang/M3String.java", "104978e5118dfb49f7514eb1b0b01631e09a5aa5", "35ed998540e044eed8cb7596e2e2c019ae369bd3", "NOT_APPLICABLE", "NOT_APPLICABLE", "11448", "4f9b2646d74ab39031a54d1f56d6777c52a21852", "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.java.txt", "35ed998540e044eed8cb7596e2e2c019ae369bd3", "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728", "HISTORICAL_V1_TIP_SOURCE_ONLY", "NOT_CLAIMED"),
+    ("M3JDK21_STRING_MERGED_SOURCE_OBSERVATION_V1", "FIRST_PARENT", "src/java.base/share/classes/java/lang/M3String.java", "51f3fa1c0985ecff613ceac5c190ce685c04951f", "1c9574a31bc50013d6d0827f740b4d6fa32d636e", "NOT_APPLICABLE", "NOT_APPLICABLE", "NOT_ESTABLISHED", "NOT_ESTABLISHED", "NOT_ESTABLISHED", "NOT_ESTABLISHED", "NOT_ESTABLISHED", "OBSERVED_PARENT_SOURCE_ONLY", "NOT_CLAIMED"),
+    ("M3JDK21_STRING_MERGED_SOURCE_OBSERVATION_V1", "SECOND_PARENT", "src/java.base/share/classes/java/lang/M3String.java", "4b67f33bdc9c874d602a5ac38b9ec7f9948c9426", "1aea17959495c7fee359d7c13ea4b876f4fb8b31", "NOT_APPLICABLE", "NOT_APPLICABLE", "12774", "415da87f2e14d4a125496aa8e43347a1429e3a6f", "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3regex-adaptive-transfer-20261021/00-M3String.java.txt", "1aea17959495c7fee359d7c13ea4b876f4fb8b31", "1b7ae3bfa1132d8040780c2ba0bd4f55281f51a6c3cc374df4cb45f175d69e78", "OBSERVED_RECIPE_POSTIMAGE_SOURCE_ONLY", "NOT_CLAIMED"),
+    ("M3JDK21_STRING_MERGED_SOURCE_OBSERVATION_V1", "MERGED_RESULT", "src/java.base/share/classes/java/lang/M3String.java", "5eeb841168ed420085223806fefcfca8d1b6b3ca", "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e", "51f3fa1c0985ecff613ceac5c190ce685c04951f", "4b67f33bdc9c874d602a5ac38b9ec7f9948c9426", "12774", "415da87f2e14d4a125496aa8e43347a1429e3a6f", "NOT_RECONSTRUCTED", "NOT_RECONSTRUCTED", "NOT_RECONSTRUCTED", "OBSERVED_MERGED_SOURCE_NOT_RECIPE_RECONSTRUCTED", "NOT_CLAIMED"),
+)
+
 PRECOMPUTE_OBSERVATION = Path(__file__).with_name("m3-string-precompute-observation-v2.tsv")
 PRECOMPUTE_OBSERVATION_HEADER = [
     "schema",
@@ -258,11 +269,27 @@ def approved_successors(mapping_rows: list[dict[str, str]]) -> dict[str, dict[st
     return received
 
 
-def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
-    """Extend approved historical successors using an exact serial proof chain.
+def merged_source_observation(current: dict[str, str], rows: list[dict[str, str]]) -> dict[str, str]:
+    """Validate immutable merge coordinates only; do not claim a proved transform."""
+    if len(rows) != len(EXPECTED_MERGED_SOURCE_OBSERVATION):
+        raise ValueError("merged source observation inventory drift")
+    for index, (step, values) in enumerate(zip(rows, EXPECTED_MERGED_SOURCE_OBSERVATION), start=1):
+        expected = dict(zip(MERGED_SOURCE_OBSERVATION_HEADER, values))
+        if step != expected:
+            raise ValueError(f"unreviewed merged source observation: {index}")
+    if current[M3_STRING_PATH] != rows[0]["git_blob"]:
+        raise ValueError("discontinuous merged source observation")
+    observed = dict(current)
+    observed[M3_STRING_PATH] = rows[-1]["git_blob"]
+    return observed
 
-    These are *candidate source identity* receipts, not runtime or phase acceptance.
-    Wrong source, wrong order, changed PR evidence, missing or extra steps fail closed.
+
+def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
+    """Validate the immutable V1 serial chain, then a separate exact merge observation.
+
+    The merge records observed source coordinates, not a proved serial transform.
+    Wrong source, wrong order, changed provenance, missing or extra rows fail closed.
+    Neither receipt is runtime, whole-image, JNI, JIT/GC or performance acceptance.
     """
     historical = approved_successors(mapping_rows)
     current = {target: row["successor_git_blob"] for target, row in historical.items()}
@@ -284,7 +311,8 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
         if current[M3_STRING_PATH] != before:
             raise ValueError(f"discontinuous String successor chain: {index}")
         current[M3_STRING_PATH] = after
-    return current
+    return merged_source_observation(
+        current, load_tsv(MERGED_SOURCE_OBSERVATION, MERGED_SOURCE_OBSERVATION_HEADER))
 
 
 
