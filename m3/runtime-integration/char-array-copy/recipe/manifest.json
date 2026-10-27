@@ -9,8 +9,22 @@
       ],
       "superseded_by": {
         "path": "src/java.base/share/classes/java/lang/M3String.java",
-        "git_blob": "bcbe4d4da2903dc27ad65155aa5d632c0c57c759"
-      }
+        "git_blob": "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e"
+      },
+      "supersession_history": [
+        {
+          "source_path": "src/java.base/share/classes/java/lang/M3String.java",
+          "git_blob": "bcbe4d4da2903dc27ad65155aa5d632c0c57c759",
+          "source_commit": "4402dca8d07dc7a98eb70bc6d003a78a1f08803f",
+          "review_scope": "PREVIOUS_EXACT_SEAL"
+        },
+        {
+          "source_path": "src/java.base/share/classes/java/lang/M3String.java",
+          "git_blob": "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
+          "source_commit": "5eeb841168ed420085223806fefcfca8d1b6b3ca",
+          "review_scope": "CURRENT_GITCHAIN_ONLY_FULL_JDK_GATE_PENDING"
+        }
+      ]
     },
     "m3/runtime-integration/tests/MIndexStringInvariant.java": {
       "before": "c4623ce4627dffb0b70c9b7d8cc8e429c50300a4fa6ec90ea5c7d1f6bbc4aee1",

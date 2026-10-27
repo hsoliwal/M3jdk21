@@ -39,7 +39,7 @@ A collection is delivered only when its exact target implementation, API/module 
 
 Track source candidate, target adaptation, build, contract tests, packaging, installed-image smoke tests, platform qualification and performance evidence separately. A catalogue row, copied vendor tree, passing donor test or merged PR alone proves none of the later stages. Preserve public APIs, ordering/views, exceptions, overflow, serialization, ownership and applicable concurrency guarantees. Keep cold preparation and warm reuse measurements separate.
 
-Existing `m3/collections` is a separately built module exporting `com.m3.collections`, with no explicitly required module beyond the implicit `java.base` dependency. Its current documentation explicitly does not claim wholesale `java.base` replacement. This scope document does not change that status or certify packaging.
+Existing `m3/collections` is a separately built module exporting `com.m3.collections`; besides the implicit `java.base` dependency, its `module-info` requires `com.m3.arrays`. Its current documentation explicitly does not claim wholesale `java.base` replacement. This scope document does not change that status or certify packaging.
 
 ## Current handoff dispositions
 

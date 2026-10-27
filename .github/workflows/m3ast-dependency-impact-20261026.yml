@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3AST conservative dependency impact source oracle
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTDependencyImpact.java'
+      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDependencyImpactContract.java'
+      - 'm3/tooling/module-packs/parser/build.py'
+      - '.github/workflows/m3ast-dependency-impact-20261026.yml'
+  workflow_dispatch:
+jobs:
+  original-java21:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original M3AST and independently check transitive closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3ast-impact"
+          mkdir -p "$classes"
+          root=m3/tooling/module-packs/parser/src
+          javac --release 21 -Xlint:all -Werror -d "$classes" \
+            "$root/main/java/jdk/m3/parser/M3File.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTIndex.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTFacts.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTSourceOrigins.java" \
+            "$root/main/java/jdk/m3/parser/M3ASTDependencyImpact.java" \
+            "$root/test/java/jdk/m3/parser/test/M3ASTDependencyImpactContract.java"
+          java -cp "$classes" jdk.m3.parser.test.M3ASTDependencyImpactContract

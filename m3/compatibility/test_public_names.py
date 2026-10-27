@@ -34,6 +34,24 @@ class PublicNamesTest(unittest.TestCase):
     def test_new_date_stamped_workflow_refused(self):
         self.assertTrue(self.issue(".github/workflows/m3-collection-20261022.yml"))
 
+    def test_versioned_passive_evidence_is_not_public_api(self):
+        self.assertFalse(self.issue(
+            "m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json"))
+        self.assertFalse(self.issue(
+            "m3/qualification/indexed-sort-image-20261026/SOURCE_RECEIPT.tsv"))
+        self.assertFalse(self.issue(
+            "m3/synexia-import/current-full-borrow/string-target-successor-v4.tsv"))
+
+    def test_recipe_and_code_in_evidence_directory_still_refused(self):
+        self.assertTrue(self.issue(
+            "m3/qualification/collection-convergence-20261024/DangerousRecipe.java"))
+        self.assertTrue(self.issue(
+            "m3/qualification/collection-convergence-20261024/release.sh"))
+        self.assertTrue(self.issue(
+            ".github/workflows/m3-collection-20261024.yml"))
+        self.assertTrue(self.issue(
+            "m3/docs/name-mapping.d/new-20261024.json"))
+
     def test_new_experiment_version_refused(self):
         self.assertTrue(self.issue("m3/runtime-integration/collection-views-v7/README-v2.md"))
 
