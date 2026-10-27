@@ -37,3 +37,24 @@ Do not promote the candidate until this workflow completes, its build and
 jtreg logs are reviewed, and any platform-specific failures are resolved.
 Its default two build jobs limit runner pressure; the full test suite and
 throughput/GC benchmarks still require separate admission.
+
+
+## Current-master receiver execution receipt
+
+[GitHub Actions run #40512534449](https://github.com/hsoliwal/M3jdk21/actions/runs/40512534449)
+**passed for head `59c52e835c3270e462262419e6860ba95b3e3fd3`**.
+The source-gated Java 21 verifier checked the existing `ArrayList` and
+`Vector` M3 compactor callsites, then reported:
+
+```text
+M3CollectionMaskCompactorContract checks=2000865
+M3ArrayListVectorRemoveIfContract checks=143122
+PASS strict Java21 kernel oracle and stock-runtime ArrayList/Vector reference contract
+PASS current-master java.util callsite custody and selected java.base mask contracts
+```
+
+These are real passing results on a patched stock `java.base` for the
+internal compactor and on the unmodified host's public collection behavior
+as a reference oracle. **They do not mean a matched M3JDK21 product-image
+jtreg run was performed**. The manually triggered full-image workflow is
+a declared acceptance gate, not completed evidence.
