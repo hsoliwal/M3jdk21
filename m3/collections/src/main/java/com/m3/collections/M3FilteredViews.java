@@ -173,37 +173,69 @@ public final class M3FilteredViews {
     private static class CollectionView<E> extends AbstractCollection<E> {
         private final Collection<E> source;
         private final Predicate<? super E> predicate;
+        private volatile IterationPlan<E> iterationPlan;
 
         CollectionView(Collection<E> source, Predicate<? super E> predicate) {
             this.source = Objects.requireNonNull(source, "source");
             this.predicate = Objects.requireNonNull(predicate, "predicate");
         }
 
+        /**
+         * Retain only immutable predicate coordinates; never cache element
+         * membership or backing iterators. The backing remains live.
+         */
         @Override public Iterator<E> iterator() {
             if (iterationView(source) == null) return filtered(source.iterator(), predicate);
-            // Immutable wrapper links are read twice without callbacks. One exact
-            // predicate array replaces ArrayList growth and nested iterator frames.
-            CollectionView<E> layer = this;
-            Collection<E> backing;
+            IterationPlan<E> plan = iterationPlan();
+            return filtered(plan.backing.iterator(), value -> {
+                for (Predicate<? super E> filter : plan.filters) {
+                    if (!filter.test(value)) return false;
+                }
+                return true;
+            });
+        }
+
+        private IterationPlan<E> iterationPlan() {
+            IterationPlan<E> current = iterationPlan;
+            if (current != null) return current;
+            synchronized (this) {
+                current = iterationPlan;
+                if (current == null) {
+                    current = flatten(this);
+                    iterationPlan = current;
+                }
+            }
+            return current;
+        }
+
+        private static <E> IterationPlan<E> flatten(CollectionView<E> outer) {
             int depth = 0;
+            CollectionView<E> layer = outer;
+            Collection<E> backing;
             do {
                 depth++;
                 backing = layer.source;
                 layer = iterationView(backing);
             } while (layer != null);
+
             @SuppressWarnings("unchecked")
             Predicate<? super E>[] filters = (Predicate<? super E>[]) new Predicate<?>[depth];
-            layer = this;
-            for (int index = 0; index < filters.length; index++) {
+            layer = outer;
+            for (int index = depth - 1; index >= 0; index--) {
                 filters[index] = layer.predicate;
-                if (index + 1 < filters.length) layer = iterationView(layer.source);
+                layer = iterationView(layer.source);
             }
-            return filtered(backing.iterator(), value -> {
-                for (int index = filters.length - 1; index >= 0; index--) {
-                    if (!filters[index].test(value)) return false;
-                }
-                return true;
-            });
+            return new IterationPlan<>(backing, filters);
+        }
+
+        private static final class IterationPlan<E> {
+            private final Collection<E> backing;
+            private final Predicate<? super E>[] filters;
+
+            private IterationPlan(Collection<E> backing, Predicate<? super E>[] filters) {
+                this.backing = backing;
+                this.filters = filters;
+            }
         }
         @Override public int size() {
             int count = 0;
