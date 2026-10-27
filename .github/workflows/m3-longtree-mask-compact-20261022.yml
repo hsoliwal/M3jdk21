@@ -67,6 +67,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
           mvn -B -ntp -f m3/collections/pom.xml \
             -Dtest=M3LongTreeSetMaskCompactionTest \
             -DskipTests=false -Dmaven.test.skip=false test
