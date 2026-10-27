@@ -10,6 +10,7 @@ on:
       - "test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java"
       - "test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java"
       - "m3/qualification/native-java-base-collection-mask-20261018/**"
+      - "m3/qualification/native-mask-source-succession/**"
       - ".github/workflows/m3jdk-java-base-mask-compaction-20261018.yml"
 permissions:
   contents: read
@@ -25,6 +26,8 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
+      - name: Refuse forged or missing compactor successor before product compilation
+        run: python3 -m unittest discover -s m3/qualification/native-mask-source-succession -p 'test_verify.py' -v
       - name: Fail closed on source drift, missing generated files or unexpected JDK edits
         run: python3 m3/qualification/native-java-base-collection-mask-20261018/verify.py
       - name: Compile actual modified java.base ArrayList Vector and M3 internal mask atom
