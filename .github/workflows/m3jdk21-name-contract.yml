@@ -39,6 +39,9 @@ jobs:
             test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java
             m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java
             m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java
+            m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+            m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java
+            src/java.base/share/classes/java/util/ChangeJournal.java
             .github/workflows/m3jdk21-name-contract.yml
       - name: Canonical name and package mapping gate
         run: python3 m3/tooling/name-contract/check.py
