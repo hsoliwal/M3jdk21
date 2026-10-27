@@ -28,7 +28,40 @@ jobs:
           grep -Fq '<version>5.10.2</version>' m3/collections/pom.xml
           ! grep -Fq '5.10.2-m3-source-1' m3/collections/pom.xml
       - name: Execute original owning M3 collections signal tests
-        run: >
-          mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=M3SignalColumnsTest,M3SignalDimensionsTest,M3SourceSignalImageTest,M3SignalTopKTest
-          test
+        shell: bash
+        run: |
+          set -euo pipefail
+          m3_junit_m2="$(mktemp -d "$RUNNER_TEMP/m3-collections-junit-m2.XXXXXX")"
+          junit_modules=(
+            apiguardian-api opentest4j univocity-parsers
+            junit-platform-commons-1.10.2 junit-platform-engine-1.10.2
+            junit-platform-launcher-1.10.2 junit-jupiter-api-5.10.2
+            junit-jupiter-params-5.10.2 junit-jupiter-engine-5.10.2
+            junit-jupiter-5.10.2
+          )
+          for module in "${junit_modules[@]}"; do
+            python3 "m3/vendor/third_party/$module/verify_source.py"
+          done
+          junit_selection="$(IFS=,; printf '%s' "${junit_modules[*]}")"
+          mvn -B -ntp -Dmaven.repo.local="$m3_junit_m2" \
+            -f m3/vendor/third_party/pom.xml -pl "$junit_selection" -am install
+          python3 - "${junit_modules[@]}" <<'PY'
+          from pathlib import Path
+          import subprocess
+          import sys
+          import xml.etree.ElementTree as ET
+          ns = {"m": "http://maven.apache.org/POM/4.0.0"}
+          for module in sys.argv[1:]:
+              owner = Path("m3/vendor/third_party") / module
+              pom = ET.parse(owner / "pom.xml").getroot()
+              artifact = pom.findtext("m:artifactId", namespaces=ns)
+              version = pom.findtext("m:version", namespaces=ns)
+              jar = owner / "target" / f"{artifact}-{version}.jar"
+              subprocess.run([sys.executable, str(owner / "verify_source.py"), str(jar)], check=True)
+          PY
+          mvn -B -ntp -Dmaven.repo.local="$m3_junit_m2" \
+            -f m3/arrays/pom.xml -DfailIfNoTests=true clean install
+          mvn -B -ntp -Dmaven.repo.local="$m3_junit_m2" \
+            -f m3/collections/pom.xml -DfailIfNoTests=true \
+            -Dtest=M3SignalColumnsTest,M3SignalDimensionsTest,M3SourceSignalImageTest,M3SignalTopKTest \
+            test

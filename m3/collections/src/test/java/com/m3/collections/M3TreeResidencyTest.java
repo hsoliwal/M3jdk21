@@ -156,15 +156,20 @@ public class M3TreeResidencyTest {
 		assertEquals (9, call (residency, "size"));
 		assertEquals (6, call (residency, "paintCount"), "hints are not paint rows");
 		assertEquals (3, call (residency, "rootCount"));
-		assertTrue (z (call (residency, "isHint", 8)));
-		assertEquals (2, call (residency, "parentId", 8));
-		assertEquals (0, call (residency, "childIndex", 8));
-		assertEquals (-2, call (residency, "materializedId", 8));
-		assertEquals (2, call (residency, "depth", 8));
-		assertEquals (5, call (residency, "physicalParent", 8));
+		assertTrue (z (call (residency, "isHint", 6)));
+		assertEquals (2, call (residency, "parentId", 6));
+		assertEquals (0, call (residency, "childIndex", 6));
+		assertEquals (-2, call (residency, "materializedId", 6));
+		assertEquals (2, call (residency, "depth", 6));
+		assertEquals (5, call (residency, "physicalParent", 6));
 		assertEquals (1, call (residency, "childCount", 5));
-		assertEquals (8, call (residency, "physicalChild", 5, 0));
-		assertEquals (-1L, call (residency, "visibleRow", 8));
+		assertEquals (6, call (residency, "physicalChild", 5, 0));
+		assertEquals (-1L, call (residency, "visibleRow", 6));
+		/* Dense preorder inserts the hint after its parent; later cold roots move. */
+		assertFalse (z (call (residency, "isHint", 7)));
+		assertFalse (z (call (residency, "isHint", 8)));
+		assertEquals (7, call (residency, "paintEntry", 4));
+		assertEquals (8, call (residency, "paintEntry", 5));
 		/* id0 and id1 have resident children, id3's count is unknown, cold rows have no id: no hints */
 		callTyped (residency, "addExpanderHints", new Class<?> [] {type ("com.m3.collections.M3TreeTopology")}, topology);
 		assertEquals (9, call (residency, "size"), "the hint child suppresses a second hint");
@@ -179,7 +184,9 @@ public class M3TreeResidencyTest {
 		assertEquals ("facade binding", assertThrows (IllegalArgumentException.class,
 				() -> call (residency, "bindFacade", 2, -1)).getMessage ());
 		callTyped (residency, "addExpanderHints", new Class<?> [] {type ("com.m3.collections.M3TreeTopology")}, topology);
-		assertThrows (IllegalArgumentException.class, () -> call (residency, "bindFacade", 8, 7), "a hint takes no facade");
+		assertThrows (IllegalArgumentException.class, () -> call (residency, "bindFacade", 6, 7), "a hint takes no facade");
+		assertDoesNotThrow (() -> call (residency, "bindFacade", 8, 7), "the shifted cold root still accepts a facade");
+		assertEquals (8, call (residency, "entryForMaterializedId", 7));
 	}
 
 	@Test

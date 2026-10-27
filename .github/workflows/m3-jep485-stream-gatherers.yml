@@ -54,11 +54,11 @@ jobs:
           from pathlib import Path
           path = Path("m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv")
           with path.open(encoding="utf-8", newline="") as handle:
-              reader = csv.reader(handle, delimiter="\t")
-              header = next(reader, None)
-              if header != ["field", "value"]:
-                  raise SystemExit(f"JEP485 workflow receiver header drift: {header}")
-              rows = dict(reader)
+              rows = {}
+              for number, row in enumerate(csv.reader(handle, delimiter="\t"), 1):
+                  if len(row) != 2 or not row[0] or row[0] in rows:
+                      raise SystemExit(f"JEP485 workflow receiver row drift at {number}: {row}")
+                  rows[row[0]] = row[1]
           expected = {
               "canonical_repository": "hsoliwal/com.synexia",
               "canonical_commit": "0f0f9965092955c15f5c32f5eb102137fd0dbf8e",
@@ -190,7 +190,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          JDK_IMAGE="$(find build -path '*/images/jdk' -type d | head -n 1)"
+          mapfile -t JDK_IMAGES < <(find build -mindepth 3 -maxdepth 3 -path '*/images/jdk' -type d -print)
+          if (( ${#JDK_IMAGES[@]} != 1 )); then
+            printf 'Expected one configured JDK image, found %s\n' "${#JDK_IMAGES[@]}" >&2
+            exit 1
+          fi
+          JDK_IMAGE="${JDK_IMAGES[0]}"
+          printf 'JEP485_SMOKE_IMAGE=%s\n' "$JDK_IMAGE"
           test -x "$JDK_IMAGE/bin/java"
           test -x "$JDK_IMAGE/bin/javac"
 
@@ -235,7 +241,9 @@ jobs:
           EOF
 
           "$JDK_IMAGE/bin/javac" -d "$tmp" "$tmp/GatherSmoke.java"
-          test "$("$JDK_IMAGE/bin/java" -cp "$tmp" GatherSmoke)" = "JEP485_SMOKE_OK"
+          smoke_output="$("$JDK_IMAGE/bin/java" -cp "$tmp" GatherSmoke)"
+          printf '%s\n' "$smoke_output"
+          test "$smoke_output" = "JEP485_SMOKE_OK"
 
       - name: Upload focused test report
         if: always()
