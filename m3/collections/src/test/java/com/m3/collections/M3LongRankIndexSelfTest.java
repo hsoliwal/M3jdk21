@@ -87,6 +87,9 @@ public final class M3LongRankIndexSelfTest {
             for (int q = 0; q < queries.length; q++) queries[q] = random.nextInt(101) - 50L;
             int[] batched = index.lowerBounds(queries);
             int[] upper = index.upperBounds(queries);
+            int[] upperInto = new int[queries.length + 4];
+            Arrays.fill(upperInto, -123);
+            index.upperBoundsInto(queries, 0, queries.length, upperInto, 2);
             int[] counts = index.counts(queries);
             int[] into = new int[queries.length + 4];
             Arrays.fill(into, -123);
@@ -94,8 +97,26 @@ public final class M3LongRankIndexSelfTest {
             for (int q = 0; q < queries.length; q++) {
                 equal(index.lowerBound(queries[q]), batched[q]);
                 equal(index.upperBound(queries[q]), upper[q]);
+                equal(upper[q], upperInto[q + 2]);
                 equal(index.count(queries[q]), counts[q]);
                 equal(counts[q], into[q + 2]);
+            }
+            equal(-123, upperInto[0]);
+            equal(-123, upperInto[1]);
+            equal(-123, upperInto[upperInto.length - 1]);
+            equal(-123, upperInto[upperInto.length - 2]);
+            // Validation must refuse before mutating any caller-owned output.
+            try {
+                index.upperBoundsInto(queries, queries.length, 1, upperInto, 2);
+                fail("missing invalid query offset exception");
+            } catch (IndexOutOfBoundsException expected) {
+                equal(-123, upperInto[0]);
+            }
+            try {
+                index.upperBoundsInto(queries, 0, queries.length, upperInto, 5);
+                fail("missing invalid output offset exception");
+            } catch (IndexOutOfBoundsException expected) {
+                equal(-123, upperInto[0]);
             }
             equal(-123, into[0]);
             equal(-123, into[1]);

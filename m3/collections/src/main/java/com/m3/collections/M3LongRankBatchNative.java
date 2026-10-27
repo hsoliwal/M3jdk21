@@ -155,8 +155,19 @@ public final class M3LongRankBatchNative {
     static int[] upperBounds(long[] sorted, long[] queries) {
         Objects.requireNonNull(queries, "queries");
         int[] output = new int[queries.length];
-        boundBatchInto(sorted, queries, 0, queries.length, output, 0, MODE_UPPER);
+        upperBoundsInto(sorted, queries, 0, queries.length, output, 0);
         return output;
+    }
+
+    /**
+     * LeetCode #34: upper insertion positions for a validated primitive query
+     * window, written directly into caller-owned storage. This reuses the
+     * existing Java/JNI MODE_UPPER atom and its batch threshold; it never
+     * materializes entry objects or copies the sorted payload.
+     */
+    static void upperBoundsInto(long[] sorted, long[] queries, int queryFrom,
+            int length, int[] output, int outputFrom) {
+        boundBatchInto(sorted, queries, queryFrom, length, output, outputFrom, MODE_UPPER);
     }
 
     static int[] counts(long[] sorted, long[] queries) {

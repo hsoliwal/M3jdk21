@@ -282,6 +282,17 @@ public final class M3LongRankIndex {
     }
 
     /**
+     * LeetCode #34 upper insertion bounds, batch-written into the caller's
+     * indexed result lane without an intermediate result array.
+     * Input/output windows are checked before the first write.
+     */
+    public void upperBoundsInto(long[] queries, int queryFrom, int length,
+                                int[] output, int outputFrom) {
+        M3LongRankBatchNative.upperBoundsInto(
+                values, queries, queryFrom, length, output, outputFrom);
+    }
+
+    /**
      * Batched occurrence frequency for each query. Equivalent to
      * upperBound(query) - lowerBound(query) with no Long.MAX_VALUE arithmetic.
      */
