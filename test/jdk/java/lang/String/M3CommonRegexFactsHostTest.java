@@ -190,7 +190,7 @@ public final class M3CommonRegexFactsHostTest {
 
     /** Existing one-character refusals must retain the original allocation-free early exit. */
     private static void coldSingleCharacter() throws Exception {
-        Field tables = M3StringRegexDp.class.getDeclaredField("tables");
+        Field tables = M3StringRegexDp.class.getDeclaredField("caches");
         tables.setAccessible(true);
         for (String expression : new String[] {".", "a"}) {
             // Single-threaded test state reset, not a production lifecycle operation.
