@@ -224,7 +224,15 @@ public final class M3SparseExtents {
 		}
 		int first = rowAt (offset);
 		out [0] = first;
-		out [1] = viewport == 0 ? first : rowAt (offset + viewport - 1) + 1;
+		if (viewport == 0) {
+			out [1] = first;
+			return;
+		}
+		// Pixels beyond the signed-long domain still belong to the clamped tail.
+		// Do not let a positive extent wrap the last pixel back before the first.
+		long tail = (long) viewport - 1;
+		long lastPixel = offset > Long.MAX_VALUE - tail ? Long.MAX_VALUE : offset + tail;
+		out [1] = rowAt (lastPixel) + 1;
 	}
 
 	public long maxScrollOffset (int viewport) {
