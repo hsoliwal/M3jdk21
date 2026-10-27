@@ -1,0 +1,2 @@
+capability	donor	classification	fit	license_and_attribution
+Array storage for CompositeIterator and its contract tests	hsoliwal/spring-framework@82005414fafcaf20896d1804dd2d5f927f1b4ea3 (m3/array-storage-20261019) and @70618ad38843112381f9d6c33968a01a18163a51 (m3/object-stream-contracts-20261018)	ADAPT	3-way merge of the fork edit onto the 6.2.0 postimage; tests relocated	Spring Apache-2.0 header kept on CompositeIterator with a contributor line; first-party tests carry the Synexia header (Apache-2.0 OR EPL-2.0)

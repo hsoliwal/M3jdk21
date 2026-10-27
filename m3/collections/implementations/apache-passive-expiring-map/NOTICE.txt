@@ -1,8 +1,14 @@
-M3 collections scaffold: M3PassiveExpiringMap
+M3 collections: M3PassiveExpiringMap
 Copyright 2026 Hitesh Soliwal and contributors
 
 This product includes software developed by Hitesh Soliwal and contributors,
-licensed under the Apache License, Version 2.0.
+licensed under the Apache License, Version 2.0. Source files whose header reads
+"SPDX-License-Identifier: Apache-2.0 OR EPL-2.0" are also available under the
+Eclipse Public License 2.0, at the recipient's option.
 
-The declared public surface mirrors org.apache.commons.collections4.map.PassiveExpiringMap from Apache Commons Collections 4.5.0
-(Apache-2.0) for compatibility. No provider implementation code is included.
+It implements the public API contract of org.apache.commons.collections4.map.PassiveExpiringMap from
+Apache Commons Collections 4.5.0 (Copyright 2001-2025 The Apache Software Foundation, Apache License,
+Version 2.0) and links the Commons Get, IterableGet, IterableMap, Put, MapIterator and ResettableIterator
+interfaces and the PassiveExpiringMap.ExpirationPolicy type. No Commons implementation code is included.
+The module tests also load the unmodified commons-collections4-4.5.0.jar classes as a differential test
+oracle, with one constant-pool class name redirected to a test clock.

@@ -1,7 +1,18 @@
-/*
- * Copyright 2026 Hitesh Soliwal and contributors
- * SPDX-License-Identifier: Apache-2.0
+/*******************************************************************************
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
  *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
+ * Public License 2.0, which are available at
+ * https://www.apache.org/licenses/LICENSE-2.0 and
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ *
+ * Contributors:
+ *     Hitesh Soliwal (Synexia) - initial API and implementation
+ *******************************************************************************/
+/*
  * Derived by recipe (m3/docs/viewport-everywhere/recipe) from hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
  * VirtualTreeVisibleProjection.java; Apache-2.0 elected from its Apache-2.0 OR EPL-2.0 publication
  * (m3/docs/viewport-everywhere/LICENSE_ELECTION.tsv).
@@ -39,6 +50,8 @@ public final class M3TreeProjection {
 		private int [] lastChildren = new int [0], nextSiblings = new int [0];
 		private long [] visibleRows = new long [0];
 		private int [] paintEntries = new int [0];
+		// Old-to-new entry coordinates for bounded, in-place hint expansion.
+		private int [] hintOffsets = new int [0];
 		private int [] pathIds = new int [0], pathEntries = new int [0];
 		private long [] pathVisibleRows = new long [0];
 		private int size, paintCount, rootCount, firstRoot = -1, lastRoot = -1;
@@ -57,14 +70,95 @@ public final class M3TreeProjection {
 
 		/** One non-paint child gives GTK a real expander without advertising N. */
 		public void addExpanderHints (M3TreeTopology topology) {
-			int rows = size;
+			if (size != 0 && sourceGeneration != topology.generation ()) {
+				reconcileSourceGeneration (topology);
+			}
+			int rows = size, hints = 0;
 			for (int entry = 0; entry < rows; entry++) {
-				int id = materializedIds [entry];
-				if (id >= 0 && childCounts [entry] == 0 && topology.childCountKnown (id)
-						&& topology.childCount (id) > 0) {
-					appendEntry (id, 0, -2, depths [entry] + 1, entry, -1);
+				if (needsExpanderHint (topology, entry)) hints++;
+			}
+			if (hints == 0) return;
+			int required = Math.addExact (rows, hints);
+			if (hintOffsets.length < rows) {
+				hintOffsets = new int [capacity (hintOffsets.length, rows)];
+			}
+			ensureCapacity (required);
+			int next = 0;
+			for (int entry = 0; entry < rows; entry++) {
+				hintOffsets [entry] = next++;
+				if (needsExpanderHint (topology, entry)) next++;
+			}
+			// Expand backward once: no unread source lane is overwritten. Each
+			// non-paint hint follows its leaf, keeping every subtree contiguous.
+			for (int entry = rows - 1; entry >= 0; entry--) {
+				int target = hintOffsets [entry];
+				int after = entry + 1 == rows ? required : hintOffsets [entry + 1];
+				parentIds [target] = parentIds [entry];
+				childIndices [target] = childIndices [entry];
+				materializedIds [target] = materializedIds [entry];
+				depths [target] = depths [entry];
+				visibleRows [target] = visibleRows [entry];
+				physicalParents [target] = remapHintEntry (physicalParents [entry]);
+				physicalIndices [target] = physicalIndices [entry];
+				childCounts [target] = childCounts [entry];
+				firstChildren [target] = remapHintEntry (firstChildren [entry]);
+				lastChildren [target] = remapHintEntry (lastChildren [entry]);
+				nextSiblings [target] = remapHintEntry (nextSiblings [entry]);
+				if (after - target == 2) {
+					int hint = target + 1;
+					childCounts [target] = 1;
+					firstChildren [target] = lastChildren [target] = hint;
+					parentIds [hint] = materializedIds [target];
+					childIndices [hint] = physicalIndices [hint] = 0;
+					materializedIds [hint] = -2;
+					depths [hint] = depths [target] + 1;
+					physicalParents [hint] = target;
+					visibleRows [hint] = -1;
+					childCounts [hint] = 0;
+					firstChildren [hint] = lastChildren [hint] = nextSiblings [hint] = -1;
 				}
 			}
+			for (int paint = 0; paint < paintCount; paint++) {
+				paintEntries [paint] = hintOffsets [paintEntries [paint]];
+			}
+			firstRoot = remapHintEntry (firstRoot);
+			lastRoot = remapHintEntry (lastRoot);
+			size = required;
+		}
+
+		private void reconcileSourceGeneration (M3TreeTopology topology) {
+			M3TreeProjection current = new M3TreeProjection (topology);
+			for (int paint = 0; paint < paintCount; paint++) {
+				int entry = paintEntries [paint];
+				int id = materializedIds [entry];
+				if (id >= 0 && (!topology.contains (id)
+						|| topology.parentId (id) != parentIds [entry]
+						|| topology.childIndex (id) != childIndices [entry])) {
+					throw new ConcurrentModificationException ("stale residency identity");
+				}
+				long visible;
+				if (parentIds [entry] == M3TreeTopology.ROOT) {
+					visible = current.visibleIndexOfCoordinate (M3TreeTopology.ROOT, childIndices [entry]);
+				} else {
+					long parent = current.visibleIndexOf (parentIds [entry]);
+					if (parent < 0) throw new ConcurrentModificationException ("stale residency ancestry");
+					visible = current.visibleIndexOfCoordinate (parentIds [entry], childIndices [entry]);
+				}
+				if (visible != visibleRows [entry]) {
+					throw new ConcurrentModificationException ("stale residency geometry");
+				}
+			}
+			sourceGeneration = topology.generation ();
+		}
+
+		private boolean needsExpanderHint (M3TreeTopology topology, int entry) {
+			int id = materializedIds [entry];
+			return id >= 0 && childCounts [entry] == 0 && topology.childCountKnown (id)
+					&& topology.childCount (id) > 0;
+		}
+
+		private int remapHintEntry (int entry) {
+			return entry < 0 ? entry : hintOffsets [entry];
 		}
 
 		public int size () { return size; }

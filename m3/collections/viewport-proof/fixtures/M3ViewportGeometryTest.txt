@@ -1,0 +1,255 @@
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+package com.m3.collections;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.SplittableRandom;
+import org.junit.jupiter.api.Test;
+
+/** Actual original owners; a dense test oracle is not a replacement viewport. */
+public final class M3ViewportGeometryTest {
+    private static final BigInteger ONE = BigInteger.ONE;
+
+    static int referenceAt(long offset, int[] extents) {
+        if (extents.length == 0) return -1;
+        if (offset <= 0) return 0;
+        long total = 0;
+        for (int height : extents) total += height;
+        if (offset >= total) return extents.length - 1;
+        long end = 0;
+        for (int row = 0; row < extents.length; row++) {
+            end += extents[row];
+            if (offset < end) return row;
+        }
+        throw new AssertionError("dense row oracle did not terminate");
+    }
+
+    static int[] referenceRange(long offset, int viewport, int[] heights) {
+        if (heights.length == 0) return new int[] {0, 0};
+        int first = referenceAt(offset, heights);
+        if (viewport == 0) return new int[] {first, first};
+        BigInteger last = BigInteger.valueOf(offset).add(BigInteger.valueOf(viewport)).subtract(ONE);
+        long total = 0;
+        for (int height : heights) total += height;
+        int lastRow = last.signum() <= 0 ? 0
+                : last.compareTo(BigInteger.valueOf(total)) >= 0 ? heights.length - 1
+                : referenceAt(last.longValueExact(), heights);
+        return new int[] {first, lastRow + 1};
+    }
+
+    static M3SparseExtents geometry(int[] heights) {
+        M3SparseExtents actual = new M3SparseExtents(13);
+        actual.reset(heights.length);
+        // Reverse admission deliberately exercises interior insertion, not just append.
+        for (int i = heights.length - 1; i >= 0; i--) actual.setExtent(i, heights[i]);
+        return actual;
+    }
+
+    @Test void positiveEndpointOverflowDoesNotReverseTheRange() {
+        M3SparseExtents actual = geometry(new int[] {10, 20, 30});
+        int[] out = {-7, -7};
+        actual.visibleRange(Long.MAX_VALUE - 1, 4, out);
+        assertArrayEquals(new int[] {2, 3}, out,
+                "positive last-pixel overflow must clamp at the last row, not wrap to row zero");
+    }
+
+    @Test void signedLongBoundaryMatrixUsesIndependentBigIntegerOracle() {
+        long[] offsets = {Long.MIN_VALUE, Long.MIN_VALUE + 1, -100, -1, 0, 1, 13, 63,
+                Integer.MAX_VALUE, Long.MAX_VALUE - Integer.MAX_VALUE,
+                Long.MAX_VALUE - 129, Long.MAX_VALUE - 1, Long.MAX_VALUE};
+        int[] widths = {0, 1, 2, 3, 63, 64, 127, 128, 129, 1000, Integer.MAX_VALUE};
+        for (int n = 0; n <= 64; n++) {
+            int[] heights = new int[n];
+            for (int i = 0; i < n; i++) heights[i] = i % 5 == 0 ? 0 : (i * 37 + n) % 101;
+            M3SparseExtents actual = geometry(heights);
+            for (long offset : offsets) for (int width : widths) {
+                int[] out = {-7, -7, 0x112233};
+                actual.visibleRange(offset, width, out);
+                int[] expected = referenceRange(offset, width, heights);
+                assertEquals(expected[0], out[0]); assertEquals(expected[1], out[1]);
+                assertEquals(0x112233, out[2]);
+                assertTrue(out[0] <= out[1] && out[1] <= n);
+            }
+        }
+    }
+
+    @Test void ordinaryRangesKeepTheEstablishedClampedSemantics() {
+        SplittableRandom random = new SplittableRandom(0x4d3356506cL);
+        for (int trial = 0; trial < 3000; trial++) {
+            int[] heights = new int[random.nextInt(80)];
+            for (int i = 0; i < heights.length; i++) heights[i] = random.nextInt(40);
+            M3SparseExtents actual = geometry(heights);
+            long offset = random.nextLong(-50, actual.totalExtent() + 51);
+            int width = random.nextInt(200);
+            int[] out = new int[2]; actual.visibleRange(offset, width, out);
+            assertArrayEquals(referenceRange(offset, width, heights), out);
+            assertEquals(referenceAt(offset, heights), actual.rowAt(offset));
+        }
+    }
+
+    @Test void measurementsInsertRemoveClearAndEstimatePreserveCoordinates() {
+        SplittableRandom random = new SplittableRandom(0x6d33657874656e74L);
+        M3SparseExtents actual = new M3SparseExtents(17);
+        List<Integer> measured = new ArrayList<>();
+        int estimate = 17;
+        for (int step = 0; step < 6000; step++) {
+            int n = measured.size();
+            switch (step % 7) {
+                case 0 -> {
+                    int at = random.nextInt(n + 1), amount = random.nextInt(4);
+                    actual.insert(at, amount);
+                    for (int i = 0; i < amount; i++) measured.add(at, -1);
+                }
+                case 1 -> {
+                    if (n > 0) {
+                        int at = random.nextInt(n), amount = random.nextInt(n - at + 1);
+                        actual.remove(at, amount); measured.subList(at, at + amount).clear();
+                    }
+                }
+                case 2, 3 -> {
+                    if (n > 0) {
+                        int at = random.nextInt(n), value = random.nextInt(70);
+                        actual.setExtent(at, value); measured.set(at, value);
+                    }
+                }
+                case 4 -> {
+                    estimate = random.nextInt(1, 40); actual.setEstimate(estimate);
+                }
+                case 5 -> {
+                    if (n > 0) { int at = random.nextInt(n); actual.clearExtent(at); measured.set(at, -1); }
+                }
+                default -> {
+                    int at = random.nextInt(n + 1); actual.clearFrom(at);
+                    for (int i = at; i < n; i++) measured.set(i, -1);
+                }
+            }
+            int[] heights = new int[measured.size()];
+            long total = 0; int known = 0;
+            for (int i = 0; i < heights.length; i++) {
+                assertEquals(total, actual.offsetOf(i));
+                heights[i] = measured.get(i) < 0 ? estimate : measured.get(i);
+                known += measured.get(i) < 0 ? 0 : 1;
+                assertEquals(heights[i], actual.extentOf(i));
+                assertEquals(measured.get(i) >= 0, actual.isMeasured(i));
+                total += heights[i];
+            }
+            assertEquals(heights.length, actual.rowCount());
+            assertEquals(known, actual.measuredCount()); assertEquals(total, actual.totalExtent());
+            for (long offset : new long[] {-1, 0, total / 2, total, total + 1}) {
+                int[] out = new int[2]; actual.visibleRange(offset, 31, out);
+                assertArrayEquals(referenceRange(offset, 31, heights), out);
+            }
+        }
+    }
+
+    @Test void zeroViewportHasNoPaintRowsAndDoesNotMeasureAnything() {
+        M3SparseExtents actual = new M3SparseExtents(24); actual.reset(1_000_000);
+        for (long offset : new long[] {Long.MIN_VALUE, 0, 48, 24_000_000L, Long.MAX_VALUE}) {
+            int[] out = new int[2]; actual.visibleRange(offset, 0, out);
+            assertEquals(out[0], out[1]); assertEquals(0, actual.measuredCount());
+        }
+        actual.reset(0);
+        int[] out = {5, 7}; actual.visibleRange(Long.MAX_VALUE, Integer.MAX_VALUE, out);
+        assertArrayEquals(new int[] {0, 0}, out);
+    }
+
+    @Test void invalidArgumentsKeepExceptionAndPartialWriteOrder() {
+        M3SparseExtents actual = geometry(new int[] {10, 20, 30});
+        assertEquals("negative viewport", assertThrows(IllegalArgumentException.class,
+                () -> actual.visibleRange(10, -1, null)).getMessage());
+        assertThrows(NullPointerException.class, () -> actual.visibleRange(10, 1, null));
+        assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> actual.visibleRange(10, 1, new int[0]));
+        int[] one = {-7};
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> actual.visibleRange(10, 1, one));
+        assertEquals(1, one[0]);
+        int[] untouched = {-7, -7};
+        assertThrows(IllegalArgumentException.class, () -> actual.visibleRange(10, -1, untouched));
+        assertArrayEquals(new int[] {-7, -7}, untouched);
+        actual.reset(0); one[0] = -7;
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> actual.visibleRange(0, 0, one));
+        assertEquals(0, one[0]);
+    }
+
+    private static int laneLength(M3SparseExtents owner, String name) throws Exception {
+        Field field = M3SparseExtents.class.getDeclaredField(name);
+        field.setAccessible(true); return Array.getLength(field.get(owner));
+    }
+
+    @Test void hugeLogicalCountKeepsOnlySparseMeasurementBacking() throws Exception {
+        M3SparseExtents actual = new M3SparseExtents(Integer.MAX_VALUE);
+        actual.reset(Integer.MAX_VALUE);
+        assertEquals((long) Integer.MAX_VALUE * Integer.MAX_VALUE, actual.totalExtent());
+        assertEquals(0, laneLength(actual, "rowIds"));
+        assertEquals(0, laneLength(actual, "extents")); assertEquals(1, laneLength(actual, "tree"));
+        for (int row : new int[] {0, Integer.MAX_VALUE / 2, Integer.MAX_VALUE - 1}) actual.setExtent(row, 0);
+        assertEquals(3, actual.measuredCount()); assertTrue(laneLength(actual, "rowIds") <= 8);
+        assertEquals((long) (Integer.MAX_VALUE - 3) * Integer.MAX_VALUE, actual.totalExtent());
+        int[] out = new int[2]; actual.visibleRange(Long.MAX_VALUE, Integer.MAX_VALUE, out);
+        assertArrayEquals(new int[] {Integer.MAX_VALUE - 1, Integer.MAX_VALUE}, out);
+        actual.reset(0); assertEquals(0, laneLength(actual, "rowIds"));
+        assertEquals(0, laneLength(actual, "extents")); assertEquals(1, laneLength(actual, "tree"));
+    }
+
+    @Test void anchoredMetricChangesRetainTheDocumentedDirectionRule() {
+        for (boolean backward : new boolean[] {false, true}) {
+            for (int row = 0; row < 12; row++) for (int height : new int[] {0, 5, 30, 80}) {
+                M3SparseExtents actual = new M3SparseExtents(10); actual.reset(12);
+                long scroll = 55, oldStart = 10L * row;
+                long delta = height - 10L;
+                assertEquals(oldStart < scroll ? delta : 0,
+                        actual.setExtentAnchored(row, height, scroll, backward));
+                long second = actual.setExtentAnchored(row, height + 3, scroll, backward);
+                assertEquals(oldStart + height <= scroll && !backward ? 3 : 0, second);
+            }
+        }
+    }
+
+    @Test void allAlignmentsUseMeasuredCoordinatesWithoutChangingRows() {
+        int[] heights = {0, 1, 100, 0, 17, 25};
+        M3SparseExtents actual = geometry(heights);
+        long start = 0, total = Arrays.stream(heights).asLongStream().sum();
+        for (int row = 0; row < heights.length; row++) {
+            for (int viewport : new int[] {0, 1, 20, 200}) for (long current : new long[] {0, 10, 200}) {
+                long end = start + heights[row];
+                long low = Math.min(start, end - viewport), high = Math.max(start, end - viewport);
+                long center = start + Math.floorDiv(heights[row] - viewport, 2);
+                long[] expected = {current < low ? low : Math.min(current, high), start, center,
+                        end - viewport, current >= low && current <= high ? current : center};
+                for (int align = 0; align < expected.length; align++) {
+                    long clamped = Math.max(0, Math.min(expected[align], Math.max(0, total - viewport)));
+                    assertEquals(clamped, actual.scrollOffsetFor(row, align, current, viewport));
+                }
+            }
+            start += heights[row];
+        }
+        assertEquals(total, actual.totalExtent()); assertEquals(heights.length, actual.measuredCount());
+    }
+
+    @Test void residentWindowMoveInstructionsPreserveEveryOverlappingRow() {
+        M3WindowPlan plan = new M3WindowPlan();
+        SplittableRandom random = new SplittableRandom(0x7a17beadL);
+        List<Integer> resident = new ArrayList<>();
+        for (int round = 0; round < 20_000; round++) {
+            int first = random.nextInt(1000), length = random.nextInt(65);
+            plan.plan(first, length);
+            resident.subList(0, plan.retiredHead()).clear();
+            resident.subList(resident.size() - plan.retiredTail(), resident.size()).clear();
+            for (int i = plan.insertedHead() - 1; i >= 0; i--) resident.add(0, first + i);
+            for (int i = length - plan.insertedTail(); i < length; i++) resident.add(first + i);
+            assertEquals(length, resident.size());
+            plan.commit(); assertEquals(first, plan.first()); assertEquals(length, plan.size());
+            for (int i = 0; i < length; i++) {
+                assertEquals(first + i, resident.get(i));
+                assertEquals(first + i, plan.rowOf(i)); assertEquals(i, plan.entryOf(first + i));
+            }
+            assertEquals(-1, plan.entryOf(first - 1)); assertEquals(-1, plan.entryOf(first + length));
+        }
+    }
+}

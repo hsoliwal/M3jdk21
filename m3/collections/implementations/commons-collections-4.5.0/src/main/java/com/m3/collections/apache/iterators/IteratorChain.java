@@ -14,11 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
+// array-backed pending iterator storage (ArrayDeque).
 package com.m3.collections.apache.iterators;
 
+import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
@@ -57,7 +59,7 @@ import java.util.Queue;
 public class IteratorChain<E> implements Iterator<E> {
 
     /** The chain of iterators */
-    private final Queue<Iterator<? extends E>> iteratorQueue = new LinkedList<>();
+    private final Queue<Iterator<? extends E>> iteratorQueue = new ArrayDeque<>();
 
     /** The current iterator */
     private Iterator<? extends E> currentIterator;
