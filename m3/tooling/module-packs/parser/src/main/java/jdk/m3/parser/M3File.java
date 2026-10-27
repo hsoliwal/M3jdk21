@@ -357,6 +357,338 @@ public final class M3File implements CharSequence {
         return new ChangeEnvelope(prefix, previousEnd, prefix, currentEnd, raw);
     }
 
+    /** One losslessly corresponding half-open range in two immutable source generations. */
+    public record ChangeHunk(int previousStart, int previousEnd,
+                             int currentStart, int currentEnd) {
+        public ChangeHunk {
+            if (previousStart < 0 || currentStart < 0
+                    || previousEnd < previousStart || currentEnd < currentStart
+                    || (previousStart == previousEnd && currentStart == currentEnd)) {
+                throw new IllegalArgumentException("invalid source change hunk");
+            }
+        }
+    }
+
+    /**
+     * Parent-owned four-integer lanes rather than one retained object per
+     * hunk. Each projection is a temporary value. Intervening unchanged
+     * regions are byte-for-byte identical as UTF-16 units; minimality of the
+     * edit script and semantic/ABI equivalence are deliberately not claimed.
+     */
+    public static final class SourceHunks {
+        private final int[] coordinates;
+        private final RawDigestComparison raw;
+        private final boolean coarse;
+
+        private SourceHunks(int[] coordinates, RawDigestComparison raw, boolean coarse) {
+            this.coordinates = coordinates;
+            this.raw = raw;
+            this.coarse = coarse;
+        }
+
+        public int hunkCount() { return coordinates.length / 4; }
+        public long primitiveBytes() { return (long) coordinates.length * Integer.BYTES; }
+        public RawDigestComparison rawDigestComparison() { return raw; }
+        /** True if resource limits forced the original conservative envelope. */
+        public boolean coarse() { return coarse; }
+        public ChangeHunk hunk(int index) {
+            Objects.checkIndex(index, hunkCount());
+            int offset = index * 4;
+            return new ChangeHunk(coordinates[offset], coordinates[offset + 1],
+                    coordinates[offset + 2], coordinates[offset + 3]);
+        }
+    }
+
+    /** Generation-absolute original UTF-8 byte correspondence, not sequential parser edits. */
+    public record Utf8Hunk(int previousStartByte, int previousEndByte,
+                           int currentStartByte, int currentEndByte) {
+        public Utf8Hunk {
+            if (previousStartByte < 0 || currentStartByte < 0
+                    || previousEndByte < previousStartByte
+                    || currentEndByte < currentStartByte
+                    || (previousStartByte == previousEndByte
+                        && currentStartByte == currentEndByte)) {
+                throw new IllegalArgumentException("invalid UTF-8 change hunk");
+            }
+        }
+    }
+
+    /** One packed immutable byte-coordinate lane per original source generation. */
+    public static final class Utf8Hunks {
+        private final int[] coordinates;
+        private final RawDigestComparison raw;
+        private final boolean coarse;
+
+        private Utf8Hunks(int[] coordinates, RawDigestComparison raw, boolean coarse) {
+            this.coordinates = coordinates;
+            this.raw = raw;
+            this.coarse = coarse;
+        }
+
+        public int hunkCount() { return coordinates.length / 4; }
+        public long primitiveBytes() { return (long) coordinates.length * Integer.BYTES; }
+        public RawDigestComparison rawDigestComparison() { return raw; }
+        public boolean coarse() { return coarse; }
+        public Utf8Hunk hunk(int index) {
+            Objects.checkIndex(index, hunkCount());
+            int offset = index * 4;
+            return new Utf8Hunk(coordinates[offset], coordinates[offset + 1],
+                    coordinates[offset + 2], coordinates[offset + 3]);
+        }
+    }
+
+    /**
+     * Find disjoint, deterministic source spans through exact unchanged line
+     * anchors. Anchors must be unique in both generations and strictly
+     * increasing; a collision in the noncryptographic discovery hash can
+     * discard an anchor but can never establish correspondence without an
+     * exact String comparison. Local gap trimming preserves surrogate pairs.
+     *
+     * <p>Bounds apply to both source lengths, the per-source line index, and
+     * retained hunk count. Exhausting anchor search capacity or maxHunks
+     * returns one explicitly coarse envelope from changeSince(), never a
+     * partial optimistic diff. This is a source hint, not permission to
+     * reuse an old parser tree or downstream ABI facts.</p>
+     */
+    public SourceHunks changeHunksSince(M3File previous, long maxComparedUtf16Units,
+            int maxLines, int maxHunks) {
+        ChangeEnvelope entire = changeSince(previous, maxComparedUtf16Units);
+        if (maxLines < 1 || maxHunks < 1 || maxHunks > Integer.MAX_VALUE / 4) {
+            throw new IllegalArgumentException("invalid source hunk resource budget");
+        }
+        if (!entire.textChanged()) {
+            return new SourceHunks(new int[0], entire.rawDigestComparison(), false);
+        }
+        LineIndex oldLines = previous.lineIndex(maxLines);
+        LineIndex newLines = lineIndex(maxLines);
+        UniqueLines old = UniqueLines.build(previous.text, oldLines);
+        UniqueLines current = UniqueLines.build(text, newLines);
+        if (old == null || current == null) return coarseHunks(entire);
+
+        int[] oldCandidates = new int[current.lineCount];
+        int[] newCandidates = new int[current.lineCount];
+        int candidates = 0;
+        for (int line = 0; line < current.lineCount; line++) {
+            if (current.hashes[line] == 0L) continue;
+            int uniquelyCurrent = current.unique(current.hashes[line]);
+            int uniquelyOld = old.unique(current.hashes[line]);
+            if (uniquelyCurrent == -2 || uniquelyOld == -2) return coarseHunks(entire);
+            if (uniquelyCurrent != line || uniquelyOld < 0) continue;
+            int oldStart = old.start(uniquelyOld), oldEnd = old.end(uniquelyOld);
+            int newStart = current.start(line), newEnd = current.end(line);
+            if (oldEnd - oldStart != newEnd - newStart
+                    || !previous.text.regionMatches(oldStart, text, newStart, oldEnd - oldStart)) {
+                continue;
+            }
+            oldCandidates[candidates] = uniquelyOld;
+            newCandidates[candidates] = line;
+            candidates++;
+        }
+
+        // A longest increasing sequence keeps the same exact anchors in
+        // original order without treating moved/reordered lines as unchanged.
+        int[] tails = new int[candidates];
+        int[] predecessors = new int[candidates];
+        int selected = 0;
+        for (int i = 0; i < candidates; i++) {
+            int low = 0, high = selected;
+            while (low < high) {
+                int middle = (low + high) >>> 1;
+                if (oldCandidates[tails[middle]] < oldCandidates[i]) low = middle + 1;
+                else high = middle;
+            }
+            predecessors[i] = low == 0 ? -1 : tails[low - 1];
+            tails[low] = i;
+            if (low == selected) selected++;
+        }
+        int[] ordered = new int[selected];
+        for (int i = selected - 1, at = selected == 0 ? -1 : tails[selected - 1];
+                i >= 0; i--) {
+            ordered[i] = at;
+            at = predecessors[at];
+        }
+        HunkCollector collected = new HunkCollector(maxHunks);
+        int priorAt = 0, currentAt = 0;
+        for (int index : ordered) {
+            int p = oldCandidates[index], c = newCandidates[index];
+            if (!collected.gap(previous.text, text, priorAt, old.start(p),
+                    currentAt, current.start(c))) return coarseHunks(entire);
+            priorAt = old.end(p);
+            currentAt = current.end(c);
+        }
+        if (!collected.gap(previous.text, text, priorAt, previous.text.length(),
+                currentAt, text.length())) return coarseHunks(entire);
+        return new SourceHunks(collected.result(), entire.rawDigestComparison(), false);
+    }
+
+    /**
+     * Project exact multi-hunk correspondence into independent original UTF-8
+     * byte coordinate spaces. These are NOT TSInputEdit instances: applying
+     * multiple edits to one mutable tree requires explicit coordinate/point
+     * rebasing and proof from the original parser owner.
+     */
+    public Utf8Hunks utf8ChangeHunksSince(M3File previous,
+            long maxComparedUtf16Units, int maxLines, int maxHunks) {
+        SourceHunks changes = changeHunksSince(previous, maxComparedUtf16Units, maxLines, maxHunks);
+        Utf8Offsets oldBytes = previous.utf8Offsets().orElseThrow(() ->
+                new IllegalArgumentException("previous source lacks original UTF-8 byte geometry"));
+        Utf8Offsets newBytes = utf8Offsets().orElseThrow(() ->
+                new IllegalArgumentException("current source lacks original UTF-8 byte geometry"));
+        int[] positions = new int[changes.hunkCount() * 4];
+        for (int i = 0; i < changes.hunkCount(); i++) {
+            ChangeHunk unit = changes.hunk(i);
+            int at = i * 4;
+            positions[at] = oldBytes.toByte(unit.previousStart());
+            positions[at + 1] = oldBytes.toByte(unit.previousEnd());
+            positions[at + 2] = newBytes.toByte(unit.currentStart());
+            positions[at + 3] = newBytes.toByte(unit.currentEnd());
+        }
+        return new Utf8Hunks(positions, changes.rawDigestComparison(), changes.coarse());
+    }
+
+    private static SourceHunks coarseHunks(ChangeEnvelope entire) {
+        return new SourceHunks(new int[]{entire.previousStart(), entire.previousEnd(),
+                entire.currentStart(), entire.currentEnd()},
+                entire.rawDigestComparison(), true);
+    }
+
+    /** Temporary primitive discovery table. Hashes nominate; characters certify. */
+    private static final class UniqueLines {
+        private static final int MAX_PROBES = 64;
+        private final String text;
+        private final LineIndex lines;
+        private final long[] hashes;
+        private final long[] keys;
+        private final int[] slots;
+        private final int mask;
+        private final int lineCount;
+
+        private UniqueLines(String text, LineIndex lines, int capacity) {
+            this.text = text;
+            this.lines = lines;
+            this.lineCount = lines.lineCount();
+            this.hashes = new long[lineCount];
+            this.keys = new long[capacity];
+            this.slots = new int[capacity];
+            this.mask = capacity - 1;
+        }
+
+        private static UniqueLines build(String text, LineIndex lines) {
+            int count = lines.lineCount();
+            long requested = 4L * count;
+            if (requested > 1L << 23) return null; // explicit bounded fallback
+            int capacity = 4;
+            while (capacity < requested) capacity <<= 1;
+            UniqueLines result = new UniqueLines(text, lines, capacity);
+            for (int i = 0; i < count; i++) {
+                int start = result.start(i), end = result.end(i);
+                if (start == end) continue; // no zero-width anchors
+                long hash = 0xcbf29ce484222325L;
+                for (int j = start; j < end; j++) {
+                    hash = (hash ^ text.charAt(j)) * 0x100000001b3L;
+                }
+                hash = (hash ^ (end - start)) * 0x100000001b3L;
+                if (hash == 0L) hash = 1L; // sentinel only; exact equality still required
+                result.hashes[i] = hash;
+                if (!result.add(hash, i)) return null;
+            }
+            return result;
+        }
+
+        private int start(int line) { return lines.lineStart(line + 1); }
+        private int end(int line) {
+            return line + 1 < lineCount ? lines.lineStart(line + 2) : text.length();
+        }
+
+        private int slot(long hash) {
+            long mixed = hash ^ (hash >>> 33);
+            mixed *= 0xff51afd7ed558ccdL;
+            mixed ^= mixed >>> 33;
+            return ((int) mixed) & mask;
+        }
+
+        private boolean add(long hash, int line) {
+            int at = slot(hash);
+            for (int probe = 0; probe < MAX_PROBES; probe++, at = (at + 1) & mask) {
+                if (slots[at] == 0) {
+                    keys[at] = hash;
+                    slots[at] = line + 1;
+                    return true;
+                }
+                if (keys[at] == hash) {
+                    slots[at] = -1; // same or colliding line: ambiguous, never an anchor
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /** Nonnegative unique zero-based line; -1 absent/ambiguous; -2 probe refusal. */
+        private int unique(long hash) {
+            int at = slot(hash);
+            for (int probe = 0; probe < MAX_PROBES; probe++, at = (at + 1) & mask) {
+                if (slots[at] == 0) return -1;
+                if (keys[at] == hash) return slots[at] - 1 < 0 ? -1 : slots[at] - 1;
+            }
+            return -2;
+        }
+    }
+
+    /** File-local, primitive-backed hunk emission with a fail-closed count limit. */
+    private static final class HunkCollector {
+        private final int max;
+        private int[] lanes;
+        private int size;
+
+        private HunkCollector(int max) {
+            this.max = max;
+            this.lanes = new int[Math.min(max, 8) * 4];
+        }
+
+        private boolean gap(String before, String after, int oldStart, int oldEnd,
+                int newStart, int newEnd) {
+            while (oldStart < oldEnd && newStart < newEnd
+                    && before.charAt(oldStart) == after.charAt(newStart)) {
+                oldStart++;
+                newStart++;
+            }
+            if (insideSurrogatePair(before, oldStart) || insideSurrogatePair(after, newStart)) {
+                oldStart--;
+                newStart--;
+            }
+            while (oldEnd > oldStart && newEnd > newStart
+                    && before.charAt(oldEnd - 1) == after.charAt(newEnd - 1)) {
+                oldEnd--;
+                newEnd--;
+            }
+            if (insideSurrogatePair(before, oldEnd) || insideSurrogatePair(after, newEnd)) {
+                oldEnd++;
+                newEnd++;
+            }
+            if (oldStart == oldEnd && newStart == newEnd) return true;
+            if (size != 0) {
+                int last = (size - 1) * 4;
+                if (lanes[last + 1] == oldStart && lanes[last + 3] == newStart) {
+                    lanes[last + 1] = oldEnd;
+                    lanes[last + 3] = newEnd;
+                    return true;
+                }
+            }
+            if (size == max) return false;
+            if (size * 4 == lanes.length) {
+                lanes = Arrays.copyOf(lanes, Math.min(max, size * 2) * 4);
+            }
+            int at = size++ * 4;
+            lanes[at] = oldStart;
+            lanes[at + 1] = oldEnd;
+            lanes[at + 2] = newStart;
+            lanes[at + 3] = newEnd;
+            return true;
+        }
+
+        private int[] result() { return Arrays.copyOf(lanes, size * 4); }
+    }
+
     /**
      * Exact original-UTF-8 byte geometry for the same conservative source edit.
      * No original byte buffer is retained or regenerated for diffing; both
