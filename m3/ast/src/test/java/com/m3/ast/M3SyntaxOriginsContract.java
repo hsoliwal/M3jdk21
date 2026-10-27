@@ -70,6 +70,36 @@ public final class M3SyntaxOriginsContract {
         var many = big.freeze();
         ok(many.originRowsAt(0).length == 70 && many.exactOriginalByteAt(0) == -1,
                 "growth and many-overlapping-sources refuse point projection");
+        // Many independent translation units are expected in a generated
+        // source graph. Preserve first-registration dictionary IDs without
+        // an O(unique-files) linear scan on each new provenance record.
+        int sourceCount = 8192;
+        var indexedBuilder = M3SyntaxOrigins.builder(tree);
+        for (int i = 0; i < sourceCount; i++) {
+            indexedBuilder.add(0, 1, "source/generated-" + i, a,
+                    i, i + 1, M3SyntaxOrigins.Relation.EXACT_BYTES);
+        }
+        // Reuse source #12 instead of registering a duplicate dictionary row.
+        indexedBuilder.add(1, 2, "source/generated-12", a, 20000, 20001,
+                M3SyntaxOrigins.Relation.EXACT_BYTES);
+        var indexed = indexedBuilder.freeze();
+        ok(indexed.count() == sourceCount + 1, "indexed source-origin count");
+        for (int i : new int[] {0, 1, 12, 70, 4096, sourceCount - 1}) {
+            var item = indexed.origin(i);
+            ok(item.sourceId().equals("source/generated-" + i)
+                    && item.sha256().equals(a)
+                    && item.startByte() == i && item.endByte() == i + 1,
+                    "stable insertion-order source identity for " + i);
+        }
+        ok(indexed.origin(sourceCount).sourceId().equals("source/generated-12")
+                && indexed.origin(sourceCount).startByte() == 20000,
+                "repeated provenance uses the original indexed source identity");
+        rejects(IllegalArgumentException.class, () -> M3SyntaxOrigins.builder(tree)
+                .add(0, 1, "source/generated-12", a, 0, 1, M3SyntaxOrigins.Relation.EXACT_BYTES)
+                .add(1, 2, "source/generated-12", c, 0, 1, M3SyntaxOrigins.Relation.EXACT_BYTES));
+        ok(indexed.originRowsAt(0).length == sourceCount
+                && indexed.exactOriginalByteAt(0) == -1,
+                "overlapping multi-source origins stay ambiguous");
         System.out.println("M3_SYNTAX_ORIGINS_PASS checks=" + checks);
     }
 }

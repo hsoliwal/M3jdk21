@@ -16,6 +16,9 @@ import java.util.Objects;
  * from different source files. Only a unique, explicitly EXACT, equal-byte-
  * length mapping may translate an individual byte point. Non-affine or
  * overlapping mappings remain discoverable but are never guessed into a point.
+ * Source registration is an indexed, insertion-stable builder operation; a
+ * large number of distinct provenance files does not require a full scan per
+ * origin. The immutable sidecar retains the original flat integer columns.
  */
 public final class M3SyntaxOrigins {
     public enum Relation { EXACT_BYTES, DERIVED, MACRO_EXPANSION, EMBEDDED_LANGUAGE }
@@ -28,11 +31,16 @@ public final class M3SyntaxOrigins {
     private final int[] sourceIndex, from, to, originalStart, originalEnd, maxEndThrough;
     private final byte[] relation;
 
+    // Builder-only directory entry. Finalized origins retain primitive columns
+    // and two parallel identity-string arrays, never per-origin objects.
+    private record SourceIdentity(int index, String sha256) { }
+
     private M3SyntaxOrigins(Builder b) {
         projectionSha256 = b.tree.projectionSha256();
         generatedByteLength = b.tree.sourceLength();
         sourceIds = b.sourceIds.keySet().toArray(String[]::new);
-        sha256s = b.sourceIds.values().toArray(String[]::new);
+        sha256s = b.sourceIds.values().stream().map(SourceIdentity::sha256)
+                .toArray(String[]::new);
         sourceIndex = Arrays.copyOf(b.sourceIndex, b.size);
         from = Arrays.copyOf(b.from, b.size);
         to = Arrays.copyOf(b.to, b.size);
@@ -100,7 +108,7 @@ public final class M3SyntaxOrigins {
     }
     public static final class Builder {
         private final M3SyntaxTree tree;
-        private final Map<String, String> sourceIds = new LinkedHashMap<>();
+        private final Map<String, SourceIdentity> sourceIds = new LinkedHashMap<>();
         private int[] sourceIndex = new int[16], from = new int[16], to = new int[16];
         private int[] originalStart = new int[16], originalEnd = new int[16];
         private byte[] relation = new byte[16];
@@ -125,16 +133,16 @@ public final class M3SyntaxOrigins {
                     || sourceStart < 0 || sourceEnd < sourceStart
                     || (size > 0 && generatedStart < from[size - 1]))
                 throw new IllegalArgumentException("invalid or unordered origin coordinates");
-            String known = sourceIds.putIfAbsent(sourceId, sourceSha256);
-            if (known != null && !known.equals(sourceSha256))
+            SourceIdentity known = sourceIds.get(sourceId);
+            if (known != null && !known.sha256().equals(sourceSha256))
                 throw new IllegalArgumentException("conflicting content generation for source id");
+            // Complete capacity/validation checks before admitting a source ID.
             if (size == from.length) grow();
-            int source = 0;
-            for (String id : sourceIds.keySet()) {
-                if (id.equals(sourceId)) break;
-                source++;
+            if (known == null) {
+                known = new SourceIdentity(sourceIds.size(), sourceSha256);
+                sourceIds.put(sourceId, known);
             }
-            sourceIndex[size] = source;
+            sourceIndex[size] = known.index();
             from[size] = generatedStart; to[size] = generatedEnd;
             originalStart[size] = sourceStart; originalEnd[size] = sourceEnd;
             this.relation[size] = (byte) relation.ordinal();
