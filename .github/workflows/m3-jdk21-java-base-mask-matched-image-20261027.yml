@@ -48,8 +48,13 @@ jobs:
           curl -fsSL --retry 3 \
             'https://builds.shipilev.net/jtreg/SHA1SUMS' \
             -o "$RUNNER_TEMP/jtreg-dist/SHA1SUMS"
-          grep -Fq 'jtreg-7.3.1+1.zip' "$RUNNER_TEMP/jtreg-dist/SHA1SUMS"
-          ( cd "$RUNNER_TEMP/jtreg-dist" && sha1sum -c --ignore-missing SHA1SUMS )
+          # The upstream manifest may also contain a SHA1SUMS self-entry.
+          # Verify exactly one named archive record, not unrelated manifest rows.
+          archive_receipt=$(grep -E \
+            '^[[:xdigit:]]{40} [ *]jtreg-7[.]3[.]1[+]1[.]zip$' \
+            "$RUNNER_TEMP/jtreg-dist/SHA1SUMS")
+          test "$(printf '%s\n' "$archive_receipt" | wc -l)" -eq 1
+          ( cd "$RUNNER_TEMP/jtreg-dist" && printf '%s\n' "$archive_receipt" | sha1sum -c - )
           unzip -q "$RUNNER_TEMP/jtreg-dist/jtreg-7.3.1+1.zip" -d "$RUNNER_TEMP/jtreg-unpacked"
           mapfile -t jtreg_jars < <(find "$RUNNER_TEMP/jtreg-unpacked" \
             -type f -path '*/lib/jtreg.jar' | sort)
