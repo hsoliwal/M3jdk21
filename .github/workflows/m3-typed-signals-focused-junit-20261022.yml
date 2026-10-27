@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 typed signals focused public JUnit Java21 proof
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/typed-signals-junit-20261022/**'
+      - '.github/workflows/m3-typed-signals-focused-junit-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused-maven:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Verify original Maven POM remains unmodified
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/m3/typed-signal-topk-20261022...HEAD
+          git diff --quiet origin/m3/typed-signal-topk-20261022...HEAD -- m3/collections/pom.xml
+      - name: Compile actual typed columns, image/CSR and TopK; run public JUnit suite
+        run: >
+          mvn -B -ntp
+          -f m3/collections/qualification/typed-signals-junit-20261022/pom.xml
+          test
