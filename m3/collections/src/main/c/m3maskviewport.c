@@ -406,7 +406,32 @@ Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclas
     jint *values = scratch + ((size_t) needed * 2U);
     jint left = skipVisible;
     jint written = 0;
-    for (jint start = first; start < end && written < needed;) {
+    if (allStates) {
+        /* All offsets pass the mask. The first pass validated the complete
+         * source; the requested page is now a contiguous physical interval.
+         * Fetch only page offsets and original state words, even for a huge
+         * skipVisible. Do not acquire whole Java arrays or publish early. */
+        const jint pageFirst = first + skipVisible;
+        while (written < needed) {
+            jint take = needed - written;
+            if (take > M3_FRAME_REGION) take = M3_FRAME_REGION;
+            const jint pageStart = pageFirst + written;
+            (*env)->GetIntArrayRegion(env, offsets, pageStart, take, scratch + written);
+            if ((*env)->ExceptionCheck(env)) {
+                if (scratch != small) free(scratch);
+                return 0;
+            }
+            (*env)->GetIntArrayRegion(env, flags, pageStart, take, values + written);
+            if ((*env)->ExceptionCheck(env)) {
+                if (scratch != small) free(scratch);
+                return 0;
+            }
+            for (jint i = 0; i < take; ++i) {
+                ordinals[written + i] = pageStart + i;
+            }
+            written += take;
+        }
+    } else for (jint start = first; start < end && written < needed;) {
         jint take = end - start;
         if (take > M3_FRAME_REGION) take = M3_FRAME_REGION;
         if (!m3_read_frame(env, offsets, flags, start, take, 1, ids, masks)) {
