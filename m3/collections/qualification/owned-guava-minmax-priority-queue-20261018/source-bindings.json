@@ -1086,8 +1086,8 @@
     },
     {
       "path": "m3/collections/implementations/guava-minmax-priority-queue/pom.xml",
-      "bytes": 2012,
-      "sha256": "446ebcba8ec83542c3f925f5dc95b019a399b48c6ada3ff66cf73670062cf01c",
+      "bytes": 4257,
+      "sha256": "fa07a8e4bfa55825bbdfd90d842ff6b3eb06d021bab38ff9a8eac33915750924",
       "role": "NEW_PACKET_SOURCE"
     },
     {
@@ -1128,8 +1128,8 @@
     },
     {
       "path": "m3/collections/receiving/guava-minmax-priority-queue/pom.xml",
-      "bytes": 3058,
-      "sha256": "d9a2259e3463db925ae15f7027e4ec4a2c1319cc11910efc63a8691f10b88919",
+      "bytes": 5663,
+      "sha256": "bd2426bc42c8f4cecb838936f345bad022a8cb5a45154f93aff5f5ed7a9909a3",
       "role": "NEW_PACKET_SOURCE"
     },
     {
