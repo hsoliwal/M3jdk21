@@ -70,7 +70,8 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror \
             --patch-module java.base="$out/patch" -d "$out/test" \
             test/jdk/java/util/CollectionViews/M3CollectionViewsCursorMaskContract.java \
-            test/jdk/java/util/CollectionViews/CollectionViewsContract.java
+            test/jdk/java/util/CollectionViews/CollectionViewsContract.java \
+            test/jdk/java/util/CollectionViews/RunSearchJni.java
           java --patch-module java.base="$out/patch" \
             --add-opens java.base/java.util=ALL-UNNAMED -cp "$out/test" \
             M3CollectionViewsCursorMaskContract
