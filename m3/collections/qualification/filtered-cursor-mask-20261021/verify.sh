@@ -4,7 +4,7 @@
 set -euo pipefail
 export LC_ALL=C
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-manifest="$root/m3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST.tsv"
+manifest="$root/m3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST_20261027.tsv"
 [[ -f "$manifest" ]] || { echo "FAIL absent receiving manifest"; exit 11; }
 count=0
 existing=0
@@ -31,5 +31,5 @@ done < "$manifest"
 [[ "$count" -eq 8 && "$existing" -eq 4 ]] || {
     echo "FAIL expected 8 postimages and 4 modified current owners"; exit 17;
 }
-echo "PASS: eight exact M3JDK21 Java/JNI-preserving cursor source postimages"
+echo "PASS: eight exact current M3JDK21 Java/JNI-preserving cursor source postimages"
 echo "NOTE: source identity is not JVM compilation, JNI, jtreg or SDK_EXECUTION evidence"
