@@ -100,15 +100,7 @@ jobs:
               -Djava.library.path="$oldlib" -cp "$RUNNER_TEMP/m3-partition3/classes" \
               com.m3.collections.M3LanePartition3PreparedContract \
               | tee "$RUNNER_TEMP/m3-partition3-oldabi-$execution.txt"
-            grep -Eq '^PASS M3_LANE_PARTITION3_PREPARED checks=[0-9]+ native=false
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: m3-lane-partition3-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/m3-partition3-*.txt
-          if-no-files-found: error
-          retention-days: 14
- \
+            grep -Eq '^PASS M3_LANE_PARTITION3_PREPARED checks=[0-9]+ native=false$' \
               "$RUNNER_TEMP/m3-partition3-oldabi-$execution.txt"
           done
           cmp "$RUNNER_TEMP/m3-partition3-oldabi-normal.txt" \

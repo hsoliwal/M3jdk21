@@ -116,3 +116,38 @@ Actual original full-source GitHub Actions and full M3JDK21 Maven/JNI,
 installed JDK/jtreg/JCK and CPU/heap benchmarks remain pending.
 **DRAFT/HOLD.** No default public API behavior, JNI library ownership,
 original source-manifest, protected branch or release gate was changed.
+
+## Native workflow YAML syntax correction, 2026-10-27
+
+The first ABI-fallback CI workflow candidate at exact product head
+`cd093b18d59bd34b452463a41631e2fcdc4a1ad2` failed on
+[Actions run 40539147663](https://github.com/hsoliwal/M3jdk21/actions/runs/40539147663)
+**before any job was instantiated**. The source was malformed: a literal
+`$'` in the shell `grep` expression was interpreted by JavaScript
+`String.replace` as a replacement-suffix metasequence while preparing
+the intermediate template. This embedded a duplicate upload-artifact
+YAML block inside the legacy native ABI test's `grep` line.
+
+Canonical **Synexia #13224** fixed-text recipe
+`com.synexia.m3.M3LanePartition3WorkflowSyntax20261027`,
+commit `6d5a69d31ceb3b1f3ba12bdb2f7308d33636dc00`,
+pins and replaces exactly one workflow:
+malformed original Git blob
+`95040d48b727f1cd6ea4789271cbd2884d7aed75`,
+SHA-256 `f54506aa24678a623e1819390e1ddca67f508833a3c66672f286edd64abb5f82`,
+with corrected Git blob `e5d1f2b4a112ba55593baa34aecb3ef8173a4fad`,
+SHA-256 `2ccbb81df480db5dc4505d2932d99946289751252e16be9bdf2b5f44e79b404d`.
+
+The exact corrected workflow preserves **all original Java21/C17/JNI checks**
+and the legacy shared-object fallback, with one complete
+`grep ... native=false` line and precisely one artifact-upload step.
+Synexia retains the malformed source for regression evidence, a Python
+structural/refusal oracle, and a real OpenRewrite Text SDK replay test.
+No Java runtime owner, JNI native source, public API or source-provenance
+manifest was modified in this corrective pass. The original failure was
+YAML validation, **not** a Java/JNI runtime assertion.
+
+**Current-head original-source GitHub workflow, full collection/native
+Maven/JUnit, installed-JDK jtreg/JCK and measured performance remain
+unqualified until their actual run succeeds.** Keep DRAFT/HOLD; do not
+bypass requirements or merge based on isolated harness tests.
