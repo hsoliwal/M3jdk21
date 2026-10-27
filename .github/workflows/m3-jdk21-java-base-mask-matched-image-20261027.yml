@@ -1,8 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 java.base mask source-built image and jtreg
-# Explicitly opt-in: expensive full OpenJDK/HotSpot build, never implied by a passing host-JDK patch.
+# Build the actual M3JDK21 image for changes to this java.base owner.
+# No successful host-JDK --patch-module run substitutes for this acceptance gate.
 on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+      - 'test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java'
+      - 'test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java'
+      - '.github/workflows/m3-jdk21-java-base-mask-matched-image-20261027.yml'
   workflow_dispatch:
+concurrency:
+  group: m3jdk21-mask-full-image-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -14,6 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
