@@ -21,3 +21,18 @@ bash m3/collections/qualification/filtered-plan-current-master-20261027/verify.s
 ```
 
 The outer `java.base` runtime, JNI-native viewport and full source-built JDK image are not touched or qualified by this pass. Retain existing library licenses and donor provenance.
+
+
+## Broader selected atom coverage (2026-10-27)
+
+Added `M3FilteredMasterPredicatePlanLifecycleTest` (four JUnit 5 tests)
+with pinned Git blob `f6a8b6f3905ad10a5a0405ecb95f588fd83a68e2`.
+The selected Maven gate now also runs existing
+`M3ReadOnlyMapDefaultsTest`, `M3FilteredViewsTest` and
+`M3FilteredNavigableSetTest`. These are intentionally rerun against the
+**current** source; their old sealed receipt hashes remain untouched.
+
+See [RECEIPT_RECONCILIATION.md](RECEIPT_RECONCILIATION.md) for evidence
+classification of historical filtered workflows. A new test source or
+product source hash mismatch refuses before test execution. These new
+tests are **committed but not yet claimed passing** at this revision.
