@@ -7,8 +7,10 @@
 package java.lang;
 
 import jdk.internal.mindex.M3DotStarRelations;
+import jdk.internal.mindex.M3RegexDpPlan;
 
 import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReferenceArray;
@@ -20,7 +22,7 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * Tuple children consume one continuous frontier; a component boundary is not a regex boundary.
  * Prepared exact class facts also answer standalone class runs, including supplementary text.
  * Captures, flags, search and unsupported syntax stay with Pattern. The dot/star DP lane
- * continues to refuse surrogate input independently of the prepared class-fact lane.
+ * delegates repeated surrogate input to bounded code-point-correct fragment effects.
  *
  * <p>Synexia MIndexRegexProgram/MIndexRegexEffects supply the finite-state/composition
  * design lineage. This target-owned adaptation uses the existing M3 names and native owners,
@@ -43,7 +45,8 @@ final class M3StringRegexDp {
     private static final int MIN_NATIVE_UNITS = 256;
     private static final int MAX_TREE_DEPTH = 64;
     // Optional allocation is lazy: an allocation failure does not poison class initialization.
-    private static volatile Tables tables;
+    private static volatile SoftReference<Tables> caches;
+    private static volatile boolean preparationSuspended;
     private static volatile boolean nativeUnavailable;
     // Stateless access geometry only; optional allocation stays outside class initialization.
     private static volatile M3DotStarRelations.Access<M3String> RELATION_ACCESS;
@@ -55,6 +58,7 @@ final class M3StringRegexDp {
         int n = regex.length();
         if (n < 1 || n > MAX_PATTERN_UNITS) return UNKNOWN;
         try {
+            if (!heapAllowsPreparation()) return UNKNOWN;
             int prepared = preparedClassMatch(source, regex);
             if (prepared != UNKNOWN) return prepared;
             if (n < 2) return UNKNOWN;
@@ -81,17 +85,130 @@ final class M3StringRegexDp {
                     }
                     if (decision != UNKNOWN) return decision;
                 } catch (OutOfMemoryError unavailable) {
-                    // Relation summaries are optional; keep the existing bit/rolling/native path.
+                    preparationSuspended = true;
+                    releaseCachedMetadata();
+                    // Pressure refusal delegates to the caller's existing Pattern path.
+                    return UNKNOWN;
                 }
             }
-            if (plan.closure == null) return rolling(source, plan);
+            if (plan.closure == null) {
+                int decision = rolling(source, plan);
+                return decision != UNKNOWN ? decision : tryRepeatedUtf16(source, regex);
+            }
             long state = evaluate(source.owner(), source.start(), m,
                     plan, plan.closure[0], cache, 0);
-            return state == UNKNOWN ? UNKNOWN
+            return state == UNKNOWN ? tryRepeatedUtf16(source, regex)
                     : (state & (1L << plan.atoms.length)) != 0 ? MATCH : NO_MATCH;
         } catch (OutOfMemoryError unavailable) {
+            preparationSuspended = true;
+            releaseCachedMetadata();
             // Derived-state allocation is optional; the ordinary JDK path remains authoritative.
             return UNKNOWN;
+        }
+    }
+
+
+    /**
+     * Restore the qualified fragment/power mechanics only after the existing DP lane
+     * declines. Ordinary class-fact, bit, native, relation and rolling decisions keep
+     * their existing selectors. All preparation here is invocation-local and optional;
+     * no additional cache, text payload, owner field or native pointer is retained.
+     *
+     * Synexia's m3jdk21-regex-utf16-20261015 receiver supplies the exact repeated-owner,
+     * UTF-16 seam and power lineage. The current target Plan/native owners remain in use.
+     */
+    private static int tryRepeatedUtf16(M3String source, String regex) {
+        if (source.length() < 128 || !worthPreparingRepeated(source)) return UNKNOWN;
+        M3RegexDpPlan plan = M3RegexDpPlan.prepare(regex);
+        if (plan == null || ((long) source.length() + 1) * plan.stateCount() > MAX_DP_CELLS) {
+            return UNKNOWN;
+        }
+        try {
+            M3RegexDpPlan.Effect effect = repeatedEffect(source, plan, new EffectWork(), 0);
+            return effect == null ? UNKNOWN
+                    : plan.accepts(effect.apply(plan.initialState())) ? MATCH : NO_MATCH;
+        } finally {
+            Reference.reachabilityFence(source);
+        }
+    }
+
+    private static boolean worthPreparingRepeated(M3String source) {
+        int copies = 1;
+        M3String node = source;
+        while (copies < 256 && node.start() == 0 && node.length() == node.owner().length
+                && node.owner() instanceof M3StringTuple tuple
+                && tuple.left.owner() == tuple.right.owner()
+                && tuple.left.coordinate() == tuple.right.coordinate()) {
+            copies <<= 1;
+            node = tuple.left;
+        }
+        return copies >= 256;
+    }
+
+    private static M3RegexDpPlan.Effect repeatedEffect(M3String source, M3RegexDpPlan plan,
+            EffectWork work, int depth) {
+        if (depth > 48 || !work.take(1)) return null;
+        M3StringOwner owner = source.owner();
+        M3String unit = source;
+        int levels = 0;
+        while (depth + levels < 48 && unit.start() == 0 && unit.length() == unit.owner().length
+                && unit.owner() instanceof M3StringTuple tuple
+                && tuple.left.owner() == tuple.right.owner()
+                && tuple.left.coordinate() == tuple.right.coordinate()) {
+            unit = tuple.left;
+            levels++;
+        }
+        if (levels >= 8) {
+            long cost = levels + 2L * plan.stateCount() * (plan.stateCount() + 1) * (levels + 1);
+            if (!work.take(cost)) return null;
+            M3RegexDpPlan.Effect one = repeatedEffect(unit, plan, work, depth + levels);
+            return one == null ? null : one.repeated(1L << levels, null);
+        }
+        if (source.start() == 0 && source.length() == owner.length
+                && owner instanceof M3StringTuple tuple) {
+            M3RegexDpPlan.Effect first = repeatedEffect(tuple.left, plan, work, depth + 1);
+            if (first == null) return null;
+            M3RegexDpPlan.Effect second = repeatedEffect(tuple.right, plan, work, depth + 1);
+            if (second == null || !work.take(2L * plan.stateCount() * (plan.stateCount() + 1))) return null;
+            return first.then(second, null);
+        }
+        if (!work.take((long) source.length() * plan.stateCount())) return null;
+        M3RegexDpPlan.Effect effect = plan.summarize(new EffectCursorView(source), null);
+        if (effect == null) {
+            // Reread only immutable canonical coordinates after legacy surrogate refusal.
+            // Charge both possible UTF-16 relations; a boundary effect never retains text.
+            if (!work.take(2L * source.length() * plan.stateCount())) return null;
+            effect = plan.summarizeUtf16(new EffectCursorView(source), null);
+        }
+        return effect;
+    }
+
+    private static final class EffectWork {
+        private long remaining = 262_144;
+        boolean take(long amount) {
+            if (amount < 0 || amount > remaining) return false;
+            remaining -= amount;
+            return true;
+        }
+    }
+
+    /** Transient cursor only; the resulting effect contains primitive relations. */
+    private static final class EffectCursorView implements CharSequence {
+        private final M3String.CodeUnitCursor cursor;
+        private final int length;
+        EffectCursorView(M3String source) {
+            cursor = new M3String.CodeUnitCursor(source);
+            length = source.length();
+        }
+        @Override public int length() { return length; }
+        @Override public char charAt(int index) {
+            return cursor.at(java.util.Objects.checkIndex(index, length));
+        }
+        @Override public CharSequence subSequence(int start, int end) {
+            throw new UnsupportedOperationException("regex effect traverses the complete view");
+        }
+        @Override public String toString() {
+            throw new UnsupportedOperationException("no regex text shadow");
         }
     }
 
@@ -270,13 +387,46 @@ final class M3StringRegexDp {
     }
 
     private static Tables tables() {
-        Tables current = tables;
+        SoftReference<Tables> reference = caches;
+        Tables current = reference == null ? null : reference.get();
         if (current != null) return current;
         synchronized (M3StringRegexDp.class) {
-            current = tables;
-            if (current == null) tables = current = new Tables();
+            reference = caches;
+            current = reference == null ? null : reference.get();
+            if (current == null) {
+                current = new Tables();
+                caches = new SoftReference<>(current);
+            }
         }
         return current;
+    }
+
+    /** Recomputable metadata only; never clears or closes canonical text owners. */
+    private static void releaseCachedMetadata() {
+        SoftReference<Tables> reference = caches;
+        if (reference != null) reference.clear();
+    }
+
+    /** Advisory heap snapshot, not a reservation or an OS/native-memory measure. */
+    private static boolean heapAllowsPreparation() {
+        Runtime runtime = Runtime.getRuntime();
+        boolean allowed = hasHeapHeadroom(runtime.maxMemory(), runtime.totalMemory(),
+                runtime.freeMemory(), preparationSuspended);
+        preparationSuspended = !allowed;
+        if (!allowed) releaseCachedMetadata();
+        return allowed;
+    }
+
+    /** Overflow-safe normalization and hysteresis; no caller budget or forced GC. */
+    private static boolean hasHeapHeadroom(long maximum, long total, long free,
+            boolean suspended) {
+        if (maximum <= 0) return false;
+        long committed = Math.max(0, Math.min(maximum, total));
+        long unused = Math.max(0, Math.min(committed, free));
+        long headroom = maximum - (committed - unused);
+        long reserve = Math.max(suspended ? 1L << 20 : 1L << 19,
+                maximum >>> (suspended ? 4 : 5));
+        return headroom >= reserve;
     }
 
     private static Plan prepare(String regex, Tables cache) {

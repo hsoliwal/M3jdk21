@@ -22,7 +22,7 @@ import javax.lang.model.element.Modifier;
  * Nodes are occurrence identities within this immutable source generation.
  */
 public final class M3ASTIndex {
-    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON, JAVAC, OPENREWRITE }
+    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON, JAVAC, OPENREWRITE, EXTERNAL }
     public enum LiteralKind { NONE, NULL, BOOLEAN, CHAR, STRING, INT, LONG, FLOAT, DOUBLE }
     private static final LiteralKind[] LITERAL_KINDS = LiteralKind.values();
     public static final String DETAILS_SCHEMA = "M3_AST_DETAILS_V1";
@@ -43,6 +43,12 @@ public final class M3ASTIndex {
     /** The external source owner could not be verified against the original AST. */
     public static final int SOURCE_UNVERIFIED = 4;
     public static final int RECOVERED = 8;
+    /** External concrete-syntax tags, separate from source geometry flags. */
+    public static final int TOKEN = 1, TRIVIA = 2, NAMED = 4, MISSING = 8;
+    private static final int ALL_PORTABLE = TOKEN | TRIVIA | NAMED | MISSING;
+    private final String parserId;
+    private final String[] roleNames;
+    private final int[] roleIds, portableFlags;
     private final M3File source;
     private final Domain domain;
     private final String[] names;
@@ -55,6 +61,10 @@ public final class M3ASTIndex {
     private M3ASTIndex(Builder builder) {
         source = builder.source;
         domain = builder.domain;
+        parserId = builder.parserId;
+        roleNames = Arrays.copyOf(builder.roleNames, builder.roleCount);
+        roleIds = builder.roleIds == null ? null : Arrays.copyOf(builder.roleIds, builder.size);
+        portableFlags = builder.portableFlags == null ? null : Arrays.copyOf(builder.portableFlags, builder.size);
         names = Arrays.copyOf(builder.names, builder.nameCount);
         kinds = Arrays.copyOf(builder.kinds, builder.size);
         parents = Arrays.copyOf(builder.parents, builder.size);
@@ -82,7 +92,22 @@ public final class M3ASTIndex {
     }
 
     public static Builder builder(M3File source, Domain domain, int maxNodes) {
-        return new Builder(source, domain, maxNodes);
+        return new Builder(source, domain, maxNodes, null);
+    }
+    /** Parser identity distinguishes foreign grammars without changing old domains. */
+    public static Builder externalBuilder(M3File source, String parserId, int maxNodes) {
+        return new Builder(source, Domain.EXTERNAL, maxNodes, parserId);
+    }
+    public Optional<String> parserId() { return Optional.ofNullable(parserId); }
+    /** Parser-native field name on the incoming edge, absent on root. */
+    public Optional<String> childRole(int node) {
+        check(node);
+        return roleIds == null || roleIds[node] < 0
+                ? Optional.empty() : Optional.of(roleNames[roleIds[node]]);
+    }
+    public int portableFlags(int node) {
+        check(node);
+        return portableFlags == null ? 0 : portableFlags[node];
     }
     public M3File source() { return source; }
     public Domain domain() { return domain; }
@@ -106,7 +131,10 @@ public final class M3ASTIndex {
     }
     public long primitiveBytes() { return (long) kinds.length * 8L * Integer.BYTES; }
     /** Optional primitive lanes only; excludes references, Strings and object headers. */
-    public long metadataBytes() { return literalKinds == null ? 0L : nodeCount() * 25L; }
+    public long metadataBytes() {
+        return (literalKinds == null ? 0L : nodeCount() * 25L)
+                + (roleIds == null ? 0L : nodeCount() * 8L);
+    }
     public boolean hasDetails(int node) { check(node); return literalKinds != null && literalKinds[node] >= 0; }
     public int startLine(int node) { return hasDetails(node) ? startLines[node] : -1; }
     public int line(int node) { return startLine(node); }
@@ -177,6 +205,10 @@ public final class M3ASTIndex {
         long units = 0;
         for (int row = 0; row < nodeCount(); row++) {
             units += names[kinds[row]].length();
+            if (domain == Domain.EXTERNAL) {
+                units += parserId.length();
+                if (roleIds[row] >= 0) units += roleNames[roleIds[row]].length();
+            }
             if (hasDetails(row)) {
                 if (nodeNames[row] != null) units += nodeNames[row].length();
                 if (literalValues[row] != null) units += literalValues[row].length();
@@ -189,6 +221,11 @@ public final class M3ASTIndex {
             digest.reset();
             putText(digest, STRUCTURAL_HASH_SCHEMA);
             putText(digest, domain.name());
+            if (domain == Domain.EXTERNAL) {
+                putText(digest, parserId);
+                putText(digest, roleIds[row] < 0 ? null : roleNames[roleIds[row]]);
+                putInt(digest, portableFlags[row]);
+            }
             putText(digest, names[kinds[row]]);
             putInt(digest, flags[row] & (SYNTAX_ONLY | RECOVERED));
             digest.update((byte) (hasDetails(row) ? 1 : 0));
@@ -288,6 +325,8 @@ public final class M3ASTIndex {
         boolean aDetails = literalKinds != null && literalKinds[a] >= 0;
         boolean bDetails = literalKinds != null && literalKinds[b] >= 0;
         if (aDetails != bDetails) return false;
+        if (domain == Domain.EXTERNAL
+                && (roleIds[a] != roleIds[b] || portableFlags[a] != portableFlags[b])) return false;
         return !aDetails || (Objects.equals(nodeNames[a], nodeNames[b])
                 && literalKinds[a] == literalKinds[b]
                 && Objects.equals(literalValues[a], literalValues[b])
@@ -301,6 +340,10 @@ public final class M3ASTIndex {
         private final M3File source;
         private final Domain domain;
         private final int maxNodes;
+        private final String parserId;
+        private String[] roleNames = new String[16];
+        private int roleCount;
+        private int[] roleIds, portableFlags;
         private String[] names = new String[16];
         private int nameCount;
         private int[] kinds = new int[32], parents = new int[32], starts = new int[32];
@@ -313,12 +356,23 @@ public final class M3ASTIndex {
         private int size;
         private boolean sealed;
 
-        private Builder(M3File source, Domain domain, int maxNodes) {
+        private Builder(M3File source, Domain domain, int maxNodes, String parserId) {
             this.source = Objects.requireNonNull(source, "source");
             this.domain = Objects.requireNonNull(domain, "domain");
             if (maxNodes < 1 || maxNodes > 20_000_000) {
                 throw new IllegalArgumentException("AST node budget outside 1..20m");
             }
+            if (domain == Domain.EXTERNAL) {
+                if (parserId == null || parserId.isBlank() || parserId.length() > 128) {
+                    throw new IllegalArgumentException("external parser ID required, max 128 UTF-16 units");
+                }
+                roleIds = new int[32];
+                Arrays.fill(roleIds, -2);
+                portableFlags = new int[32];
+            } else if (parserId != null) {
+                throw new IllegalArgumentException("parser ID only valid for EXTERNAL");
+            }
+            this.parserId = parserId;
             this.maxNodes = maxNodes;
         }
 
@@ -364,6 +418,41 @@ public final class M3ASTIndex {
             return row;
         }
 
+        /**
+         * Attach a native parser field and concrete-syntax flags exactly once.
+         * Role IDs -2 and -1 mean unset and intentionally absent, respectively.
+         */
+        public void portable(int node, String role, int tags) {
+            if (sealed) throw new IllegalStateException("index already sealed");
+            Objects.checkIndex(node, size);
+            if (roleIds == null) throw new IllegalStateException("portable tags require EXTERNAL domain");
+            if (roleIds[node] != -2) throw new IllegalStateException("portable tags already assigned");
+            if ((tags & ~ALL_PORTABLE) != 0 || ((tags & TRIVIA) != 0 && (tags & MISSING) != 0)) {
+                throw new IllegalArgumentException("invalid portable syntax tags");
+            }
+            if ((tags & MISSING) != 0 && (starts[node] < 0 || starts[node] != ends[node]
+                    || (flags[node] & EXACT_RANGE) == 0)) {
+                throw new IllegalArgumentException("missing token requires exact zero-width range");
+            }
+            int id = -1;
+            if (role != null) {
+                if (role.isBlank() || role.length() > 256) {
+                    throw new IllegalArgumentException("invalid bounded child role");
+                }
+                for (int i = 0; i < roleCount; i++) {
+                    if (roleNames[i].equals(role)) { id = i; break; }
+                }
+                if (id == -1) {
+                    if (roleCount == 4096) throw new IllegalArgumentException("role vocabulary exceeded");
+                    if (roleCount == roleNames.length) roleNames = Arrays.copyOf(roleNames, roleNames.length * 2);
+                    roleNames[roleCount] = role;
+                    id = roleCount++;
+                }
+            }
+            roleIds[node] = id;
+            portableFlags[node] = tags;
+        }
+
         /** Complete a previously unknown block/source range, before publication. */
         public void completeRange(int node, int start, int end, boolean exact) {
             if (sealed) throw new IllegalStateException("index already sealed");
@@ -391,6 +480,11 @@ public final class M3ASTIndex {
 
         public M3ASTIndex seal() {
             if (sealed || size < 1) throw new IllegalStateException("AST index not open or empty");
+            if (roleIds != null) {
+                for (int row = 0; row < size; row++) {
+                    if (roleIds[row] == -2) throw new IllegalStateException("unclassified external AST occurrence");
+                }
+            }
             sealed = true;
             return new M3ASTIndex(this);
         }
@@ -490,6 +584,11 @@ public final class M3ASTIndex {
             last = Arrays.copyOf(last, cap);
             next = Arrays.copyOf(next, cap);
             childCounts = Arrays.copyOf(childCounts, cap);
+            if (roleIds != null) {
+                roleIds = Arrays.copyOf(roleIds, cap);
+                portableFlags = Arrays.copyOf(portableFlags, cap);
+                Arrays.fill(roleIds, previous, cap, -2);
+            }
             if (literalKinds != null) {
                 startLines = Arrays.copyOf(startLines, cap); endLines = Arrays.copyOf(endLines, cap);
                 enclosingTypes = Arrays.copyOf(enclosingTypes, cap);

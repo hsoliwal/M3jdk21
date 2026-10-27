@@ -34,6 +34,8 @@ final class M3SpringCaseInsensitiveSdkFactoryTest {
         assertEquals("java.util.Map", binding.contractType());
         assertEquals("com.m3.collections.interop.M3SpringCaseInsensitiveMap", binding.adapterType());
         assertEquals("springCaseInsensitiveMap(java.util.Locale)", binding.descriptor());
-        assertEquals(23, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
+        // The canonical SDK table now declares 25 actual first-party factories.
+        assertEquals(25, M3LibraryBindings.all().size());
+        assertEquals(25, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
     }
 }

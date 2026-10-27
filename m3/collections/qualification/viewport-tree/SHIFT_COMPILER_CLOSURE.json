@@ -1,0 +1,60 @@
+{
+  "schema": "M3JDK21_TREE_SHIFT_COMPILER_CLOSURE_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "f737d0ae82ad9ed4bf1b1e32bfd51c3cf1b5df99",
+  "source_recipe": "com.synexia.m3.ViewportTreeShiftClosure20261026",
+  "source_dataset": "vpt-tree-shift-close-20261026",
+  "product_pr": 1950,
+  "workflow_path": ".github/workflows/m3-tree-shift-20261021.yml",
+  "pre_git_blob": "dd71722b0055a1dcc9a01331153fb72edbe81b5d",
+  "post_git_blob": "dd67611ffe762d93b11a23637efdb50ccc6df7da",
+  "pre_sha256": "5ca39139e7a70fa67575ecfb096516a4d4743efdaeaa5a86196fe6aefd6ec511",
+  "post_sha256": "791f5f275f1226116f3a9a29a46ec7ed13bbdc91a94645946028aebb07e98502",
+  "original_compiler_error": {
+    "workflow_run": 40199432899,
+    "job": 121187246952,
+    "missing_existing_types": [
+      "M3LongLongConsumer",
+      "M3LongIterator"
+    ],
+    "source_gate": "PASS",
+    "java21_compile": "FAIL",
+    "runtime": "NOT_RUN"
+  },
+  "local_sdk": {
+    "recipe_engine_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+    "maven": "3.9.9",
+    "jdk": "21.0.12.1",
+    "rewrite": "8.17.1",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "actual_sdk_results": 1,
+    "source_bytes_matched": true,
+    "fixed_point": 0,
+    "negative_admission": "PASS",
+    "local_test_harness": "ADAPTED_EQUIVALENT_NOT_BYTE_IDENTICAL_TO_COMMITTED",
+    "test_report_sha256": "dd1fc6c47f0dc276c366b036e954d6325710ec793d14572e475c1f5b5c08ab94"
+  },
+  "current_receiver": {
+    "received_exact_emitted_blob": true,
+    "source_sha256_matched": true,
+    "product_java_edited": false,
+    "product_native_edited": false
+  },
+  "fresh_product_ci": "PENDING",
+  "shift_contract": {
+    "assertions_per_mode_expected": 2591918,
+    "modes": [
+      "default",
+      "interpreter",
+      "C1",
+      "non-tiered"
+    ],
+    "execution": "PENDING_NEW_PRODUCT_RUN"
+  },
+  "full_jdk_hotspot_jtreg_and_widgets": "NOT_RUN",
+  "throughput_claim": false
+}
