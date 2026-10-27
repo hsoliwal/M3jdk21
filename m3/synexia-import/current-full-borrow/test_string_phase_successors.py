@@ -459,5 +459,80 @@ class StringTargetSuccessorTest(unittest.TestCase):
         self.assertEqual(row["current_target_git_blob"], phase.git_blob(target))
 
 
+    def test_additional_owner_sources_match_separate_exact_receipts(self):
+        mapping = self.mapping()
+        self.assertEqual("088ee2ae6ccc550af768ac17314d7b0d460e9cf3",
+                         phase.git_blob(phase.MAP))
+        self.assertEqual(4, len(phase.current_successor_blobs(mapping)))
+        observed = phase.additional_owner_successors(mapping)
+        self.assertEqual(6, len(observed))
+        self.assertFalse(set(observed) & set(phase.EXPECTED_SUCCESSOR_PATHS))
+        self.assertEqual({
+            path: images[1] for path, images in phase.ADDITIONAL_OWNER_BASES.items()},
+            observed)
+        for target, expected in observed.items():
+            source = phase.ROOT / target
+            self.assertTrue(source.is_file(), target)
+            self.assertEqual(expected, phase.git_blob(source), target)
+        rows = phase.load_tsv(phase.ADDITIONAL_OWNER_SUCCESSORS,
+                              phase.ADDITIONAL_OWNER_HEADER)
+        self.assertEqual(9, len(rows))
+        self.assertTrue(all(row["runtime_acceptance"] == "NOT_ACCEPTED"
+                            and row["state"] == "SOURCE_CUSTODY_ONLY" for row in rows))
+        atom = [row for row in rows if row["owner"] == "M3StringAtom"]
+        self.assertEqual(["CANONICAL_POSTIMAGE_BOUND", "TARGET_SOURCE_OBSERVATION_ONLY"],
+                         [row["edge_custody"] for row in atom])
+        self.assertTrue(all(row["owner_history"] ==
+                            "PARTIAL_FINAL_CANONICAL_EDGE_UNRECONSTRUCTED" for row in atom))
+        self.assertEqual("UNRECONSTRUCTED", atom[-1]["canonical_resource_git_blob"])
+
+    def test_additional_owner_receipt_refuses_all_fields_order_and_discontinuity(self):
+        mapping = self.mapping()
+        good = phase.load_tsv(phase.ADDITIONAL_OWNER_SUCCESSORS,
+                              phase.ADDITIONAL_OWNER_HEADER)
+        cases = [good[:-1], list(reversed(good)), good + [good[-1].copy()]]
+        for row_index in range(len(good)):
+            for field in phase.ADDITIONAL_OWNER_HEADER:
+                changed = [row.copy() for row in good]
+                changed[row_index][field] = (
+                    "ACCEPTED" if field == "runtime_acceptance"
+                    else "RUNTIME_ACCEPTED" if field == "state"
+                    else changed[row_index][field] + "-drift")
+                cases.append(changed)
+        changed = [row.copy() for row in good]
+        changed[0]["unexpected"] = "unsealed"
+        cases.append(changed)
+        for changed in cases:
+            with patch.object(phase, "load_tsv", return_value=changed):
+                with self.assertRaisesRegex(
+                        ValueError, "additional owner successor inventory drift|"
+                        "unreviewed additional owner successor"):
+                    phase.additional_owner_successors(mapping)
+        for index in range(len(good)):
+            changed = [row.copy() for row in good]
+            changed[index]["predecessor_git_blob"] = "0" * 40
+            expected = tuple(tuple(row[field] for field in phase.ADDITIONAL_OWNER_HEADER)
+                             for row in changed)
+            with patch.object(phase, "EXPECTED_ADDITIONAL_OWNER_SUCCESSORS", expected):
+                with patch.object(phase, "load_tsv", return_value=changed):
+                    with self.assertRaisesRegex(
+                            ValueError, "discontinuous additional owner successor"):
+                        phase.additional_owner_successors(mapping)
+
+    def test_additional_owner_receipt_refuses_missing_duplicate_or_changed_historical_map(self):
+        mapping = self.mapping()
+        for target in phase.ADDITIONAL_OWNER_BASES:
+            selected = [row for row in mapping if row["target_path"] == target]
+            self.assertEqual(1, len(selected))
+            missing = [row.copy() for row in mapping if row["target_path"] != target]
+            duplicate = [row.copy() for row in mapping] + [selected[0].copy()]
+            changed = [row.copy() for row in mapping]
+            next(row for row in changed if row["target_path"] == target)["target_git_blob"] = "f" * 40
+            for candidate in (missing, duplicate, changed):
+                with self.assertRaisesRegex(
+                        ValueError, "additional owner historical anchor drift"):
+                    phase.additional_owner_successors(candidate)
+
+
 if __name__ == "__main__":
     unittest.main()
