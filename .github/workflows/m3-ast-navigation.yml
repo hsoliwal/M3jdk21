@@ -72,10 +72,10 @@ jobs:
           grep -Fx 'M3_SYNTAX_ORIGINS_PASS checks=44' evidence/m3-ast-navigation/origins.txt
           java -cp "$classes" com.m3.ast.M3SyntaxOriginsSnapshotContract \
             | tee evidence/m3-ast-navigation/snapshot.txt
-          grep -Fx 'M3_SYNTAX_ORIGINS_SNAPSHOT_PASS checks=1074' evidence/m3-ast-navigation/snapshot.txt
+          grep -Fx 'M3_SYNTAX_ORIGINS_SNAPSHOT_PASS checks=1426' evidence/m3-ast-navigation/snapshot.txt
           java -Xint -cp "$classes" com.m3.ast.M3SyntaxOriginsSnapshotContract \
             | tee evidence/m3-ast-navigation/snapshot-interpreted.txt
-          grep -Fx 'M3_SYNTAX_ORIGINS_SNAPSHOT_PASS checks=1074' evidence/m3-ast-navigation/snapshot-interpreted.txt
+          grep -Fx 'M3_SYNTAX_ORIGINS_SNAPSHOT_PASS checks=1426' evidence/m3-ast-navigation/snapshot-interpreted.txt
           sha256sum \
             m3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java \
             m3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java \
