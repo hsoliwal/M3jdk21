@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 AST codepoint to UTF16 and UTF8 exact source coordinates
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java'
+      - 'm3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3CodePointSourceContract.java'
+      - 'm3/tooling/module-packs/parser/build.py'
+      - '.github/workflows/m3ast-codepoint-coordinates-20261027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-java21:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile exact parser owners and run codepoint, bytes and CST oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3ast-codepoint-coordinate-classes"
+          mkdir -p "$classes"
+          parser=m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser
+          test=m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test
+          javac --release 21 -Xlint:all -Werror -d "$classes" \
+            "$parser/M3File.java" \
+            "$parser/M3Utf8SourceMap.java" \
+            "$parser/M3CodePointSourceMap.java" \
+            "$parser/M3ASTIndex.java" \
+            "$parser/M3ASTIngress.java" \
+            "$parser/M3ASTExternalIngress.java" \
+            "$parser/M3ASTSyntaxCoverage.java" \
+            "$test/M3Utf8SourceMapContract.java" \
+            "$test/M3ASTPortabilityContract.java" \
+            "$test/M3ASTSyntaxCoverageContract.java" \
+            "$test/M3CodePointSourceContract.java"
+          java -cp "$classes" jdk.m3.parser.test.M3Utf8SourceMapContract
+          java -cp "$classes" jdk.m3.parser.test.M3ASTPortabilityContract
+          java -cp "$classes" jdk.m3.parser.test.M3ASTSyntaxCoverageContract
+          java -cp "$classes" jdk.m3.parser.test.M3CodePointSourceContract
