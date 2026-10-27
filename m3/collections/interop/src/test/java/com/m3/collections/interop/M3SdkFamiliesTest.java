@@ -23,7 +23,11 @@ import static org.junit.jupiter.api.Assertions.*;
 /** Actual pinned donors and existing M3 owners are required; no test doubles are permitted here. */
 class M3SdkFamiliesTest {
     @Test void everyFactoryHasExactNamesAndAvailableM3Owners() throws Exception {
-        assertEquals(23, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
+        // Exact 25-row inventory, including the two newer reviewed donor factories.
+        assertEquals(25, M3LibraryBindings.all().size());
+        assertTrue(M3LibraryBindings.all().stream().map(M3LibraryBinding::descriptor).toList()
+                .containsAll(List.of("apacheBidiMap()", "springCaseInsensitiveMap(java.util.Locale)")));
+        assertEquals(25, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
     }
     @Test void apacheBackingOwnersAreM3RatherThanRenamedDonorStorage() throws Exception {
         var list = new M3ApacheListValuedMap<String, Integer>();

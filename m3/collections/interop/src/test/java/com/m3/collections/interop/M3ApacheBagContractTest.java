@@ -47,6 +47,20 @@ final class M3ApacheBagContractTest {
         }
     }
 
+    @Test void overDemandRetainAllMatchesOfficialApacheDonor() {
+        Bag<String> expected = new HashBag<>();
+        Bag<String> actual = new M3ApacheBag<>();
+        expected.add("x", 2); actual.add("x", 2);
+        expected.add("y", 1); actual.add("y", 1);
+        List<String> requested = List.of("x", "x", "x", "y");
+        assertEquals(expected.retainAll(requested), actual.retainAll(requested));
+        assertEquals(expected, actual);
+        assertEquals(expected.size(), actual.size());
+        // Apache's AbstractMapBag retains zero copies if otherCount > ownCount.
+        assertEquals(0, actual.getCount("x"));
+        assertEquals(1, actual.getCount("y"));
+    }
+
     @Test void iteratorLiveUniqueAndRealPrimitiveMaskSelection() {
         M3ApacheBag<String> actual=new M3ApacheBag<>();
         M3CountedBag<String> store=actual.m3Backend();

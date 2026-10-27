@@ -73,6 +73,16 @@ final class M3SpringArrayContractTest {
         assertFalse(actual.containsKey("a"));
     }
 
+    private record Outcome(Object value, Class<? extends RuntimeException> thrown) { }
+
+    private static Outcome result(java.util.function.Supplier<?> command) {
+        try {
+            return new Outcome(command.get(), null);
+        } catch (RuntimeException failure) {
+            return new Outcome(null, failure.getClass());
+        }
+    }
+
     @Test void realSpringSixTwoDifferentialSeeded() {
         MultiValueMap<Integer, Integer> actual = new M3SpringArrayMultiValueMap<>();
         MultiValueMap<Integer, Integer> expected = new MultiValueMapAdapter<>(new LinkedHashMap<>());
@@ -80,39 +90,83 @@ final class M3SpringArrayContractTest {
         for (int step = 0; step < 4500; step++) {
             Integer key = random.nextInt(7) == 0 ? null : random.nextInt(32);
             Integer value = random.nextInt(8) == 0 ? null : random.nextInt(50);
-            switch (random.nextInt(13)) {
-                case 0 -> { actual.add(key, value); expected.add(key, value); }
-                case 1 -> { actual.set(key, value); expected.set(key, value); }
-                case 2 -> { actual.addIfAbsent(key, value); expected.addIfAbsent(key, value); }
-                case 3 -> assertEquals(expected.remove(key), actual.remove(key));
+            java.util.function.Supplier<?> donor;
+            java.util.function.Supplier<?> candidate;
+            int operation = random.nextInt(13);
+            switch (operation) {
+                case 0 -> {
+                    donor = () -> { expected.add(key, value); return null; };
+                    candidate = () -> { actual.add(key, value); return null; };
+                }
+                case 1 -> {
+                    donor = () -> { expected.set(key, value); return null; };
+                    candidate = () -> { actual.set(key, value); return null; };
+                }
+                case 2 -> {
+                    donor = () -> { expected.addIfAbsent(key, value); return null; };
+                    candidate = () -> { actual.addIfAbsent(key, value); return null; };
+                }
+                case 3 -> {
+                    donor = () -> expected.remove(key);
+                    candidate = () -> actual.remove(key);
+                }
                 case 4 -> {
                     List<Integer> input = Arrays.asList(value, value);
-                    actual.addAll(key, input); expected.addAll(key, input);
+                    donor = () -> { expected.addAll(key, input); return null; };
+                    candidate = () -> { actual.addAll(key, input); return null; };
                 }
                 case 5 -> {
-                    List<Integer> a = random.nextInt(6) == 0 ? null : new ArrayList<>(Arrays.asList(value));
-                    List<Integer> b = a == null ? null : new ArrayList<>(a);
-                    assertEquals(expected.put(key, b), actual.put(key, a));
+                    List<Integer> borrowed = random.nextInt(6) == 0
+                            ? null : new ArrayList<>(Arrays.asList(value));
+                    List<Integer> expectedBorrowed = borrowed == null
+                            ? null : new ArrayList<>(borrowed);
+                    donor = () -> expected.put(key, expectedBorrowed);
+                    candidate = () -> actual.put(key, borrowed);
                 }
-                case 6 -> assertEquals(expected.asSingleValueMap().put(key, value),
-                        actual.asSingleValueMap().put(key, value));
-                case 7 -> assertEquals(expected.asSingleValueMap().remove(key),
-                        actual.asSingleValueMap().remove(key));
-                case 8 -> assertEquals(expected.putIfAbsent(key, Arrays.asList(value)),
-                        actual.putIfAbsent(key, Arrays.asList(value)));
-                case 9 -> { actual.setAll(Map.of(5, 9)); expected.setAll(Map.of(5, 9)); }
-                case 10 -> assertEquals(expected.containsKey(key), actual.containsKey(key));
+                case 6 -> {
+                    donor = () -> expected.asSingleValueMap().put(key, value);
+                    candidate = () -> actual.asSingleValueMap().put(key, value);
+                }
+                case 7 -> {
+                    donor = () -> expected.asSingleValueMap().remove(key);
+                    candidate = () -> actual.asSingleValueMap().remove(key);
+                }
+                case 8 -> {
+                    donor = () -> expected.putIfAbsent(key, Arrays.asList(value));
+                    candidate = () -> actual.putIfAbsent(key, Arrays.asList(value));
+                }
+                case 9 -> {
+                    donor = () -> { expected.setAll(Map.of(5, 9)); return null; };
+                    candidate = () -> { actual.setAll(Map.of(5, 9)); return null; };
+                }
+                case 10 -> {
+                    donor = () -> expected.containsKey(key);
+                    candidate = () -> actual.containsKey(key);
+                }
                 case 11 -> {
-                    if (step % 47 == 0) { actual.clear(); expected.clear(); }
+                    boolean doClear = step % 47 == 0;
+                    donor = () -> { if (doClear) expected.clear(); return null; };
+                    candidate = () -> { if (doClear) actual.clear(); return null; };
                 }
                 case 12 -> {
-                    Map<Integer, List<Integer>> copy = new LinkedHashMap<>();
-                    copy.put(key, Arrays.asList(value));
-                    actual.putAll(copy);
-                    expected.putAll(copy);
+                    // Never share the same mutable input list across reference and candidate.
+                    donor = () -> {
+                        Map<Integer, List<Integer>> input = new LinkedHashMap<>();
+                        input.put(key, Arrays.asList(value));
+                        expected.putAll(input);
+                        return null;
+                    };
+                    candidate = () -> {
+                        Map<Integer, List<Integer>> input = new LinkedHashMap<>();
+                        input.put(key, Arrays.asList(value));
+                        actual.putAll(input);
+                        return null;
+                    };
                 }
                 default -> throw new AssertionError();
             }
+            assertEquals(result(donor), result(candidate),
+                    "operation/exception parity step=" + step + " operation=" + operation);
             assertEquals(expected, actual, "step " + step);
             assertEquals(expected.size(), actual.size(), "size step " + step);
             assertEquals(expected.getFirst(key), actual.getFirst(key), "first step " + step);
