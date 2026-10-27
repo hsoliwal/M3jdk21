@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-"""Receiver proof must fail closed on stale Java/Catalogue data and forged gates."""
+"""Receiver proof must fail closed on stale Java identities, canonical references and forged gates."""
 from __future__ import annotations
 
 import copy
@@ -24,7 +24,8 @@ class NativePlanReceivingTests(unittest.TestCase):
     def test_actual_source_tree_receipt_is_exact(self) -> None:
         result = verifier.validate()
         self.assertEqual(result["files"], 2)
-        self.assertEqual(result["categories"], 8)
+        self.assertEqual(result["referenced_categories"], 8)
+        self.assertFalse(result["catalogue_content_validated_here"])
         self.assertFalse(result["runtime_qualified"])
 
     def test_forged_sha1_is_refused(self) -> None:
@@ -68,7 +69,7 @@ class NativePlanReceivingTests(unittest.TestCase):
     def test_forged_catalogue_approval_is_refused(self) -> None:
         path = self.changed_receipt(
             lambda row: row["catalogue"].update(git_blob_sha1="0" * 40))
-        with self.assertRaisesRegex(ValueError, "catalogue drift"):
+        with self.assertRaisesRegex(ValueError, "catalogue reference drift"):
             verifier.validate(receipt=path)
 
     def test_runtime_promotion_without_gates_is_refused(self) -> None:

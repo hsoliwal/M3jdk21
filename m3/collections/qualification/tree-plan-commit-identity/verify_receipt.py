@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-"""Read-only M3JDK21 receiver proof: hash pinned Java postimages and catalogue.
+"""Read-only M3JDK21 receiver proof: hash pinned Java postimages and canonical catalogue reference.
 
 No source modifications, no OpenRewrite implementation and no background work.
 """
 from __future__ import annotations
 
-import csv
 import hashlib
-import io
 import json
 from pathlib import Path
 import re
@@ -24,7 +22,14 @@ EXPECTED = {
     "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
     "m3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java",
 }
-CATALOGUE = "m3/collections/algorithm-catalog/tree-plan-commit-identity-20261027.tsv"
+CANONICAL_CATALOGUE = {
+    "repository": "hsoliwal/com.synexia",
+    "ref": "edea893880b030935da5fd3f1ab35f7ab7cec8d4",
+    "path": "synexia-openrewrite-recipes/crates/m3-tree-plan-commit-identity-20261027/CANDIDATE_CATALOGUE.tsv",
+    "git_blob_sha1": "6f088b752df3c085cc2563ef05ecff803c67515d",
+    "sha256": "6f2cb23cf9a499cf34e32cfbae9fb5ccf183d70adaf694231fa28ac018044323",
+    "problem_categories": 8
+}
 
 
 def refuse(message: str) -> None:
@@ -113,28 +118,15 @@ def validate(root: Path = ROOT, receipt: Path = RECEIPT) -> dict[str, object]:
             refuse("new JUnit oracle was not ABSENT at baseline")
     if seen != EXPECTED:
         refuse("unexpected Java implementation or test scope")
-    if record["catalogue"]["path"] != CATALOGUE:
-        refuse("wrong algorithm decision catalogue")
-    catalogue = source_path(root, CATALOGUE).read_bytes()
-    if git_blob(catalogue) != record["catalogue"]["git_blob_sha1"]:
-        refuse("algorithm donor/cost selection catalogue drift")
-    text = catalogue.decode("utf-8")
-    rows = list(csv.DictReader(io.StringIO(text), delimiter="\t"))
-    if len(rows) != record["catalogue"]["problem_categories"]:
-        refuse("missing algorithm decision rows")
-    categories = [row.get("problem_category") for row in rows]
-    if len(categories) != len(set(categories)):
-        refuse("ambiguous algorithm problem category")
-    if not {"ARRAY_COORDINATE_IDENTITY", "NATIVE_HANDLE_REUSE",
-            "PHYSICAL_PARENT_OFFSET", "JNI_MASK_WINDOW"}.issubset(categories):
-        refuse("lost core array/native problem categories")
-    for row in rows:
-        if not row.get("selection") or not row.get("custody_and_license"):
-            refuse("unreviewed donor algorithm selection")
+    # The canonical body is verified by Synexia before migration; the product
+    # verifies only the exact immutable reference, without loading a mirror.
+    if record.get("catalogue") != CANONICAL_CATALOGUE:
+        refuse("canonical catalogue reference drift")
     return {
         "schema": SCHEMA,
         "files": len(files),
-        "categories": len(rows),
+        "referenced_categories": CANONICAL_CATALOGUE["problem_categories"],
+        "catalogue_content_validated_here": False,
         "digest": hashlib.sha256(receipt.read_bytes()).hexdigest(),
         "runtime_qualified": False,
     }

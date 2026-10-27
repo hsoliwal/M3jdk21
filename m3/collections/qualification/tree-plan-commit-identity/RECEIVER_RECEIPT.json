@@ -17,7 +17,7 @@
     "pr": "https://github.com/hsoliwal/com.synexia/pull/13605",
     "recipe": "com.synexia.rewrite.M3TreePlanCommitIdentityRecipe",
     "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-tree-plan-commit-identity-20261027/manifest.tsv",
-    "receiving_policy": "Product contains executed Java postimages, JUnit test, passive data and read-only verifier; no source transform recipe."
+    "receiving_policy": "Product contains executed Java postimages, target tests, and passive source/recipe/gate references; the exact algorithm decision catalogue remains exclusively in Synexia."
   },
   "files": [
     {
@@ -38,29 +38,12 @@
     }
   ],
   "catalogue": {
-    "path": "m3/collections/algorithm-catalog/tree-plan-commit-identity-20261027.tsv",
+    "repository": "hsoliwal/com.synexia",
+    "ref": "edea893880b030935da5fd3f1ab35f7ab7cec8d4",
+    "path": "synexia-openrewrite-recipes/crates/m3-tree-plan-commit-identity-20261027/CANDIDATE_CATALOGUE.tsv",
     "git_blob_sha1": "6f088b752df3c085cc2563ef05ecff803c67515d",
-    "problem_categories": 8,
-    "licensing": "First-party Apache-2.0 source, no copied donor implementation."
-  },
-  "atom": {
-    "category": "ARRAY_COORDINATE_IDENTITY",
-    "selected": "long[] plannedKeys; reuse previous-sibling scratch int[] as exact physical-parent index; reject changed retained native handles",
-    "complexity": "O(n) admission and O(n) key capacity, no per-native-row objects",
-    "rejected": [
-      "Aggregate fingerprint only, because exact coordinate equivalence cannot be proved in 64 collision-prone bits.",
-      "Per-node TreeMap/boxing, redundant with existing packed primitive-key index.",
-      "Raw binary search on unsorted preorder ordinals.",
-      "JNI callback or persistent native-pointer additions."
-    ],
-    "invariants": [
-      "Preserve existing public method descriptors and current java.util APIs",
-      "Preserve original duplicate key/handle and zero handle exception precedence",
-      "Validate every coordinate and physical parent against the source-ordinal plan before publication",
-      "Retain existing previousSiblings, retired native subtree list and stable JNI handles",
-      "Preserve committed indices on invalid candidate and permit valid retry",
-      "Do not leak M3 structures through exported java.base APIs"
-    ]
+    "sha256": "6f2cb23cf9a499cf34e32cfbae9fb5ccf183d70adaf694231fa28ac018044323",
+    "problem_categories": 8
   },
   "verification": {
     "preimage_git_blob_and_postimage_readback": {
