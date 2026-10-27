@@ -38,6 +38,8 @@ public final class M3TreeWindowPlan {
 	private long [] planned = new long [0], retired = new long [0];
 	private int [] previousSiblings = new int [0];
 	private int [] lastChild = new int [0];
+	/** Stack of still-open physical parents while validating dense preorder. */
+	private int [] preorderAncestors = new int [0];
 	private boolean [] kept = new boolean [0];
 	/* Primitive scratch directory for duplicate-coordinates admission. */
 	private final M3LongLongHashMap planCoordinates = new M3LongLongHashMap ();
@@ -88,6 +90,8 @@ public final class M3TreeWindowPlan {
 		if (count < 0 || parentIds.length < count || childIndices.length < count || physicalParents.length < count) {
 			throw new IllegalArgumentException ("window arrays");
 		}
+		// A backward parent index alone cannot guarantee contiguous DFS preorder.
+		validatePreorder (count, physicalParents);
 		// Validate preorder and coordinate uniqueness before mutating the prepared plan.
 		// No Entry/Node object is allocated per coordinate; the directory is reusable.
 		planCoordinates.clear ();
@@ -115,7 +119,14 @@ public final class M3TreeWindowPlan {
 			previousSiblings [entry] = lastChild [physicalParent + 1];
 			lastChild [physicalParent + 1] = entry;
 			int slot = (int) slotByKey.getOrDefault (key (parentIds [entry], childIndices [entry]), -1L);
-			if (slot >= 0 && !kept [slot]) {
+			// A child cannot retain a native handle when its old physical parent
+			// is being destroyed or its new physical parent has changed.
+			// A native parent deletion destroys the complete old subtree.
+			boolean retainedAncestor = slot >= 0 && (physicalParent == -1
+					? parentSlots [slot] == -1
+					: parentSlots [slot] >= 0
+						&& planned [physicalParent] == handles [parentSlots [slot]]);
+			if (slot >= 0 && !kept [slot] && retainedAncestor) {
 				kept [slot] = true;
 				planned [entry] = handles [slot];
 			} else {
@@ -133,22 +144,51 @@ public final class M3TreeWindowPlan {
 		}
 	}
 
+	/**
+	 * Reusable dense coordinate lanes for the next residency snapshot. Never populate
+	 * the active last* arrays until the new plan has been admitted successfully.
+	 */
+	private static final int [] EMPTY_COORDINATES = new int [0];
+	private int [] bufferedParentIds = EMPTY_COORDINATES;
+	private int [] bufferedChildIndices = EMPTY_COORDINATES;
+	private int [] bufferedPhysicalParents = EMPTY_COORDINATES;
+	private int [] lastParentIds, lastChildIndices, lastPhysicalParents;
+
 	/** Convenience form of {@link #plan(int, int[], int[], int[])} over a residency buffer. */
 	public void plan (M3TreeProjection.Residency next) {
 		int count = next.size ();
-		int [] parentIds = new int [count], childIndices = new int [count], physicalParents = new int [count];
-		for (int entry = 0; entry < count; entry++) {
-			parentIds [entry] = next.parentId (entry);
-			childIndices [entry] = next.childIndex (entry);
-			physicalParents [entry] = next.physicalParent (entry);
+		if (bufferedParentIds.length < count) {
+			int nextCapacity = capacity (bufferedParentIds.length, count);
+			bufferedParentIds = new int [nextCapacity];
+			bufferedChildIndices = new int [nextCapacity];
+			bufferedPhysicalParents = new int [nextCapacity];
 		}
-		plan (count, parentIds, childIndices, physicalParents);
-		lastParentIds = parentIds;
-		lastChildIndices = childIndices;
-		lastPhysicalParents = physicalParents;
+		for (int entry = 0; entry < count; entry++) {
+			bufferedParentIds [entry] = next.parentId (entry);
+			bufferedChildIndices [entry] = next.childIndex (entry);
+			bufferedPhysicalParents [entry] = next.physicalParent (entry);
+		}
+		// Any invalid candidate leaves the prior pending commit lanes untouched.
+		plan (count, bufferedParentIds, bufferedChildIndices, bufferedPhysicalParents);
+		int [] previousParents = lastParentIds, previousChildren = lastChildIndices;
+		int [] previousPhysical = lastPhysicalParents;
+		lastParentIds = bufferedParentIds;
+		lastChildIndices = bufferedChildIndices;
+		lastPhysicalParents = bufferedPhysicalParents;
+		bufferedParentIds = previousParents == null ? EMPTY_COORDINATES : previousParents;
+		bufferedChildIndices = previousChildren == null ? EMPTY_COORDINATES : previousChildren;
+		bufferedPhysicalParents = previousPhysical == null ? EMPTY_COORDINATES : previousPhysical;
 	}
 
-	private int [] lastParentIds, lastChildIndices, lastPhysicalParents;
+	/** Reclaim no-longer-pending primitive lanes after a successful commit or a reset. */
+	private void recyclePendingCoordinates () {
+		if (lastParentIds != null && lastParentIds.length >= bufferedParentIds.length) {
+			bufferedParentIds = lastParentIds;
+			bufferedChildIndices = lastChildIndices;
+			bufferedPhysicalParents = lastPhysicalParents;
+		}
+		lastParentIds = lastChildIndices = lastPhysicalParents = null;
+	}
 
 	public int plannedCount () {
 		return plannedCount;
@@ -187,6 +227,7 @@ public final class M3TreeWindowPlan {
 				|| physicalParents.length < count || nativeHandles.length < count) {
 			throw new IllegalArgumentException ("commit arrays");
 		}
+		validatePreorder (count, physicalParents);
 		planCoordinates.clear ();
 		commitHandleAdmission.clear ();
 		// Commit is publication: validate every native handle and dense-preorder
@@ -223,7 +264,7 @@ public final class M3TreeWindowPlan {
 			slotByHandle.put (handle, entry);
 		}
 		size = count;
-		lastParentIds = lastChildIndices = lastPhysicalParents = null;
+		recyclePendingCoordinates ();
 	}
 
 	/**
@@ -294,7 +335,7 @@ public final class M3TreeWindowPlan {
 			slotByHandle.put (handles [entry], entry);
 		}
 		plannedCount = retiredCount = 0;
-		lastParentIds = lastChildIndices = lastPhysicalParents = null;
+		recyclePendingCoordinates ();
 	}
 
 	/** Forgets the committed window (all native rows were deleted by the caller). */
@@ -302,7 +343,27 @@ public final class M3TreeWindowPlan {
 		size = plannedCount = retiredCount = 0;
 		slotByKey.clear ();
 		slotByHandle.clear ();
-		lastParentIds = lastChildIndices = lastPhysicalParents = null;
+		recyclePendingCoordinates ();
+	}
+
+	/**
+	 * An entry may descend into the previous entry, become a sibling of an
+	 * open ancestor, or start another root. It may never return to a subtree
+	 * already closed by preorder traversal. Only primitive viewport-sized
+	 * scratch is touched, before any pending/committed row publication.
+	 */
+	private void validatePreorder (int count, int [] physicalParents) {
+		if (preorderAncestors.length < count) {
+			preorderAncestors = new int [capacity (preorderAncestors.length, count)];
+		}
+		int depth = 0;
+		for (int entry = 0; entry < count; entry++) {
+			int parent = physicalParents [entry];
+			if (parent < -1 || parent >= entry) throw new IllegalArgumentException ("preorder");
+			while (depth > 0 && preorderAncestors [depth - 1] != parent) depth--;
+			if (parent != -1 && depth == 0) throw new IllegalArgumentException ("preorder");
+			preorderAncestors [depth++] = entry;
+		}
 	}
 
 	private void requireEntry (int entry) {

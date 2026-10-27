@@ -35,6 +35,9 @@ public final class M3TQ {
   private final Op op;
   private final long[] trigrams;
   private final List<M3TQ> subqueries;
+  // Built while Pattern compiles its immutable query. Small monotone programs
+  // use bounded intrinsic searches or one scan, never sorting all subject trigrams.
+  private final ScanPlan scanPlan;
 
   private M3TQ(
       Op op, long[] trigrams, List<M3TQ> subqueries) {
@@ -42,6 +45,7 @@ public final class M3TQ {
     this.trigrams = Objects.requireNonNull(trigrams, "trigrams").clone();
     Arrays.sort(this.trigrams);
     this.subqueries = List.copyOf(Objects.requireNonNull(subqueries, "subqueries"));
+    this.scanPlan = ScanPlan.compile(this);
   }
 
   public static M3TQ all() {
@@ -185,6 +189,181 @@ public final class M3TQ {
         yield false;
       }
     };
+  }
+
+  /** Whether this compiled query has a bounded allocation-free subject scan. */
+  public boolean hasScanPlan() {
+    return scanPlan != null;
+  }
+
+  /**
+   * Evaluate this query's <em>necessary condition</em> directly over UTF-16 units.
+   * Unlike {@link #precompute(CharSequence, int, int, int)}, the bounded plan
+   * retains only required keys. It may return true as soon as any Boolean
+   * alternative is satisfied; a true result is never a regex match proof.
+   * Callers must use an immutable or otherwise stable input and must fall back
+   * to the ordinary facts path when {@link #hasScanPlan()} is false.
+   */
+  public boolean testScanning(CharSequence value, int from, int to, int maxUtf16Units) {
+    Objects.requireNonNull(value, "value");
+    Objects.checkFromToIndex(from, to, value.length());
+    requireFactBudget(to - from, maxUtf16Units);
+    ScanPlan compiled = scanPlan;
+    if (compiled == null) {
+      throw new IllegalStateException("trigram query exceeds streaming plan bounds");
+    }
+    return compiled.test(value, from, to);
+  }
+
+  /**
+   * Bounded DNF of a positive-only compiled Boolean trigram query. A clause
+   * bit means that a required 48-bit key occurred somewhere in the region.
+   * The plan never records multiplicity/order and never grants match authority.
+   */
+  private static final class ScanPlan {
+    private static final int MAX_KEYS = 32;
+    private static final int MAX_CLAUSES = 64;
+    private static final int MAX_DEPTH = 24;
+    private final long[] keys;
+    private final long[] clauses;
+
+    private ScanPlan(long[] keys, long[] clauses) {
+      this.keys = keys;
+      this.clauses = clauses;
+    }
+
+    static ScanPlan compile(M3TQ query) {
+      try {
+        int total = countKeys(query, MAX_KEYS, 0);
+        if (total < 0) return null;
+        long[] keys = new long[total];
+        fillKeys(query, keys, 0);
+        Arrays.sort(keys);
+        keys = compactFactKeys(keys);
+        long[] clauses = dnf(query, keys);
+        return clauses == null ? null : new ScanPlan(keys, compactFactKeysAfterSort(clauses));
+      } catch (OutOfMemoryError optionalMetadataUnavailable) {
+        // The unmodified fact-query path remains the semantic authority.
+        return null;
+      }
+    }
+
+    private static int countKeys(M3TQ query, int remaining, int depth) {
+      if (depth > MAX_DEPTH) return -1;
+      if (query.trigrams.length > remaining) return -1;
+      int count = query.trigrams.length;
+      for (M3TQ child : query.subqueries) {
+        int childCount = countKeys(child, remaining - count, depth + 1);
+        if (childCount < 0) return -1;
+        count += childCount;
+      }
+      return count;
+    }
+
+    private static int fillKeys(M3TQ query, long[] keys, int offset) {
+      System.arraycopy(query.trigrams, 0, keys, offset, query.trigrams.length);
+      offset += query.trigrams.length;
+      for (M3TQ child : query.subqueries) offset = fillKeys(child, keys, offset);
+      return offset;
+    }
+
+    private static long[] dnf(M3TQ query, long[] keys) {
+      if (query.op == Op.ALL) return new long[] { 0L };
+      if (query.op == Op.NONE) return new long[0];
+      if (query.op == Op.AND) {
+        long allKeys = 0L;
+        for (long key : query.trigrams) {
+          allKeys |= 1L << Arrays.binarySearch(keys, key);
+        }
+        long[] clauses = { allKeys };
+        for (M3TQ child : query.subqueries) {
+          long[] next = dnf(child, keys);
+          if (next == null || (long) clauses.length * next.length > MAX_CLAUSES) {
+            return null;
+          }
+          long[] product = new long[clauses.length * next.length];
+          int used = 0;
+          for (long left : clauses) {
+            for (long right : next) product[used++] = left | right;
+          }
+          clauses = product;
+        }
+        return clauses;
+      }
+      long[] clauses = new long[query.trigrams.length];
+      for (int index = 0; index < query.trigrams.length; index++) {
+        clauses[index] = 1L << Arrays.binarySearch(keys, query.trigrams[index]);
+      }
+      for (M3TQ child : query.subqueries) {
+        long[] next = dnf(child, keys);
+        if (next == null || clauses.length + next.length > MAX_CLAUSES) return null;
+        int start = clauses.length;
+        clauses = Arrays.copyOf(clauses, start + next.length);
+        System.arraycopy(next, 0, clauses, start, next.length);
+      }
+      return clauses;
+    }
+
+    private static long[] compactFactKeysAfterSort(long[] clauses) {
+      Arrays.sort(clauses);
+      return compactFactKeys(clauses);
+    }
+
+    boolean test(CharSequence value, int from, int to) {
+      if (clauses.length == 0) return false;
+      if (clauses[0] == 0L) return true;
+      // HotSpot String.indexOf(char) avoids per-position binary search for one
+      // or two required keys. Every search is confined to the exact region.
+      // Reject an AND branch as soon as a checked, absent gram makes all
+      // remaining clauses impossible; accept an OR branch on its first proof.
+      if (value instanceof String string && keys.length <= 2) {
+        long found = 0L;
+        long examined = 0L;
+        for (int keyIndex = 0; keyIndex < keys.length; keyIndex++) {
+          long bit = 1L << keyIndex;
+          examined |= bit;
+          if (containsTrigram(string, from, to, keys[keyIndex])) found |= bit;
+          boolean possible = false;
+          for (long clause : clauses) {
+            if ((found & clause) == clause) return true;
+            if ((clause & examined & ~found) == 0L) possible = true;
+          }
+          if (!possible) return false;
+        }
+        return false;
+      }
+      long found = 0L;
+      long window = 0L;
+      for (int index = from; index < to; index++) {
+        window = ((window << 16) | value.charAt(index)) & 0xffffffffffffL;
+        if (index - from < 2) continue;
+        int position = Arrays.binarySearch(keys, window);
+        if (position < 0) continue;
+        long bit = 1L << position;
+        if ((found & bit) != 0L) continue;
+        found |= bit;
+        for (long clause : clauses) {
+          if ((found & clause) == clause) return true;
+        }
+      }
+      return false;
+    }
+
+    private static boolean containsTrigram(String value, int from, int to, long key) {
+      char first = (char) (key >>> 32);
+      char second = (char) (key >>> 16);
+      char third = (char) key;
+      if (to - from < 3) return false;
+      int endExclusive = to - 2;
+      for (int index = value.indexOf(first, from, endExclusive);
+           index >= 0;
+           index = value.indexOf(first, index + 1, endExclusive)) {
+        if (value.charAt(index + 1) == second && value.charAt(index + 2) == third) {
+          return true;
+        }
+      }
+      return false;
+    }
   }
 
   /**

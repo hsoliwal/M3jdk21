@@ -1,0 +1,57 @@
+{
+  "schema": "M3_VIEWPORT_TREE_PARENT_REVIEW_V1",
+  "status": "DRAFT_PROPOSED_NOT_MERGED",
+  "source_owner": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+  "target_branch_base": "9dd1df62f3d5406760427cb5e840a36c9e7a59ea",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-tree-parent-20261026",
+  "canonical_recipe": "com.synexia.m3.ViewportTreeParentClosure20261026",
+  "source_pre": {
+    "git_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6",
+    "sha256": "be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082"
+  },
+  "source_post": {
+    "git_blob": "81816c58eb280820984162d6050d25a0c8e96932",
+    "sha256": "1e719d48bbaa9fa4c8065b16848c6bd770d13f661d2e823d192e212da65b2478"
+  },
+  "test": {
+    "git_blob": "1140abde95743dd90e9e33a8a85ff0f034ef9321",
+    "sha256": "2d891a6bd14007f003dc34b53dd548bcae55341839c26db400fca5e7c3da29b0"
+  },
+  "java21_parser": {
+    "artifact": "org.openrewrite:rewrite-java-21:8.17.1",
+    "sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "artifact_source": "M3JDK21 GitHub Actions artifact 12623957450, run 40257353519"
+  },
+  "local_sdk": {
+    "status": "PASS",
+    "tests": 5,
+    "failures": 0,
+    "skipped": 0,
+    "canonical_java_recipe_blob": "98138cb6734ad86e3f77b8722fa5ff459842e841",
+    "canonical_scope_blob": "9174dd681f0d75b5086fc19904a71524a03972dc",
+    "canonical_junit_blob": "e69993797978f800a4d1b01b55093dc8dde16514",
+    "real_java_compilation_units": true,
+    "real_sdk_results": 2,
+    "fixed_point": 0,
+    "maven_junit_xml_sha256": "6f5671d109e50e110616437fdeddcfc4d4c7eb6aa43cb4683c86c36c43ecad31",
+    "sdk_results_tsv_sha256": "b4f12d5fe856c0e4b74c3ba71814b5f7680c6fc9bcd8202bab74e5230ad2d535",
+    "sdk_java_diff_sha256": "39219c2ff547b613cff7ce249afad1019fb8e453edeb592d52e7aa259ba3b09e"
+  },
+  "local_owner_contract": {
+    "baseline": "EXPECTED_FAIL child of retired root cannot keep destroyed native handle check=2",
+    "candidate_mixed_checks": 206547,
+    "candidate_interpreted_checks": 206547,
+    "digest": "e4635cc5d317d586",
+    "public_javap_descriptors_match": true,
+    "dependencies": "retained historical 2026-10-22 source fixtures, not full current product dependency graph"
+  },
+  "limitations": [
+    "Local Maven POM and auxiliary input scripts reconstructed; not byte-identical to canonical Synexia checkout",
+    "Unused local M3HashPinnedTextSnapshotRecipe source is historical, not the canonical current hash",
+    "Canonical receive.py was not executed in this reconstructed host",
+    "Full current-product module build and hosted CI not yet qualified",
+    "Actual SWT/Nebula/GEF/RWT native widget handles, UI rendering, platforms/IME/accessibility, JDK/HotSpot/jtreg and representative resource/latency gates not executed",
+    "No automatic merge or performance claims"
+  ]
+}

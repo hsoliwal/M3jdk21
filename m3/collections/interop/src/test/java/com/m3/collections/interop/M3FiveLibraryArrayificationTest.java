@@ -63,7 +63,11 @@ final class M3FiveLibraryArrayificationTest {
         assertThrows(IllegalArgumentException.class,()->left.mergeSortedByKey(
                 M3FiveLibraryIndexViews.capture(keys,values,new int[]{0},flags),Comparator.naturalOrder()));
         var duplicated=left.mergeSortedByKey(left,Comparator.naturalOrder());
-        assertEquals(List.of(0,0,1,1,2,2),duplicated.asJdkList());
+        // The primitive merge is stable LEFT-first on equal comparator keys:
+        // retain every left occurrence before a comparator-equivalent right.
+        assertEquals(List.of(0,1,0,1,2,2),duplicated.asJdkList());
+        assertArrayEquals(new int[]{0,1,0,1,2,2},java.util.stream.IntStream
+                .range(0,duplicated.size()).map(duplicated::physicalIndexAt).toArray());
     }
 
     @Test void randomizedArrayificationAgainstJdkReference() {
