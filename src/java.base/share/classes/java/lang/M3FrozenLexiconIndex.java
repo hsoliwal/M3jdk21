@@ -18,13 +18,16 @@ package java.lang;
 /**
  * Precomputed one-candidate address geometry for an immutable M3 lexicon.
  *
- * <p>The runtime key is the Java String hash plus UTF-16 length that the
- * lexicon lookup already computes. Admission groups equal keys once, places
- * each distinct key into a two-level displacement table, and retains a
- * negative row marker for the rare hash/length-equivalent group. A normal
- * lookup therefore performs one 64-bit mix, one displacement load and one row
- * load; it never walks a collision chain. Exact UTF-16 comparison remains
- * authoritative after candidate selection.</p>
+ * <p>The production lexicon path hashes the complete UTF-16 spelling with a
+ * freeze-time-selected seed and places every unique row into a two-level
+ * displacement table. Runtime address selection is therefore one bounded
+ * spelling scan followed by one 64-bit mix, one displacement load and one row
+ * load. It has no collision chain and no hash/length ambiguity fallback.
+ * Exact UTF-16 comparison remains authoritative after candidate selection.</p>
+ *
+ * <p>The older Java-hash-plus-length builder remains package-private because
+ * historical qualification tests exercise that geometry directly. The actual
+ * M3String lexicon uses {@link #buildExact(int, ExactKeySource)}.</p>
  */
 final class M3FrozenLexiconIndex {
     static final int MAX_SLOTS = 1 << 22;
@@ -34,6 +37,9 @@ final class M3FrozenLexiconIndex {
     private static final int MAX_DISPLACEMENT_ATTEMPTS = 1 << 20;
     private static final long SEED_BASE = 0x243f6a8885a308d3L;
     private static final long SEED_STEP = 0x9e3779b97f4a7c15L;
+    private static final long EXACT_OFFSET = 0xcbf29ce484222325L;
+    private static final long EXACT_PRIME = 0x100000001b3L;
+    private static final long EXACT_DOMAIN = 0x4d33455841435431L; // M3EXACT1
     private static final M3FrozenLexiconIndex EMPTY =
             new M3FrozenLexiconIndex(0L, new int[0], new int[0]);
 
@@ -49,6 +55,73 @@ final class M3FrozenLexiconIndex {
 
     static M3FrozenLexiconIndex empty() {
         return EMPTY;
+    }
+
+    @FunctionalInterface
+    interface ExactKeySource {
+        long key(int row, long seed);
+    }
+
+    /**
+     * Builds the production one-candidate geometry from complete spelling keys.
+     *
+     * <p>The key source is invoked only during immutable lexicon admission. A
+     * different content-hash seed is tried when the two-level placement cannot
+     * be made injective. Runtime lookup uses the retained seed to reproduce the
+     * same full-content key.</p>
+     */
+    static M3FrozenLexiconIndex buildExact(int count, ExactKeySource source) {
+        if (count < 0) throw new IllegalArgumentException("negative M3 frozen index size");
+        if (source == null) throw new NullPointerException("source");
+        if (count == 0 || count > MAX_SLOTS / 2) return EMPTY;
+        try {
+            int slotCount = nextPowerOfTwo(Math.max(2, Math.multiplyExact(count, 2)));
+            if (slotCount > MAX_SLOTS) return EMPTY;
+            int bucketCount =
+                    nextPowerOfTwo(
+                            Math.max(
+                                    1,
+                                    (count + TARGET_BUCKET_SIZE - 1)
+                                            / TARGET_BUCKET_SIZE));
+            long[] keys = new long[count];
+            int[] rowIds = new int[count];
+            for (int row = 0; row < count; row++) rowIds[row] = row + 1;
+            Groups groups = new Groups(keys, rowIds);
+            for (int seedIndex = 0; seedIndex < MAX_SEEDS; seedIndex++) {
+                long contentSeed = seed(seedIndex);
+                for (int row = 0; row < count; row++) {
+                    keys[row] = source.key(row, contentSeed);
+                }
+                M3FrozenLexiconIndex index =
+                        placePrepared(groups, contentSeed, bucketCount, slotCount);
+                if (index != null) return index;
+            }
+            return EMPTY;
+        } catch (ArithmeticException | OutOfMemoryError unavailable) {
+            return EMPTY;
+        }
+    }
+
+    /**
+     * Starts the seeded full-content key. Length is part of the key even for an
+     * empty spelling, so differently sized inputs cannot alias before exact
+     * verification.
+     */
+    static long exactHashStart(long seed, int length) {
+        long hash = EXACT_OFFSET ^ seed ^ EXACT_DOMAIN;
+        hash = (hash ^ Integer.toUnsignedLong(length)) * EXACT_PRIME;
+        return hash;
+    }
+
+    /** Adds one UTF-16 unit without allocating or changing representation. */
+    static long exactHashUnit(long hash, char unit) {
+        long value = unit;
+        hash = (hash ^ (value & 0xffL)) * EXACT_PRIME;
+        return (hash ^ (value >>> 8)) * EXACT_PRIME;
+    }
+
+    static long exactHashFinish(long hash) {
+        return hash;
     }
 
     static M3FrozenLexiconIndex build(int[] hashes, int[] lengths) {
@@ -86,6 +159,22 @@ final class M3FrozenLexiconIndex {
     int candidate(int hash, int length) {
         if (rows.length == 0) return 0;
         long mixed = mix64(key(hash, length) ^ seed);
+        int bucket = ((int) mixed) & (displacements.length - 1);
+        int slot =
+                (((int) (mixed >>> Integer.SIZE)) + displacements[bucket])
+                        & (rows.length - 1);
+        return rows[slot];
+    }
+
+    /**
+     * Production lookup over a seed-specific full-content key.
+     *
+     * <p>Once the caller has inspected the bounded token to compute the key,
+     * this is pure primitive address arithmetic plus two array reads.</p>
+     */
+    int candidateExact(long exactHash) {
+        if (rows.length == 0) return 0;
+        long mixed = mix64(exactHash);
         int bucket = ((int) mixed) & (displacements.length - 1);
         int slot =
                 (((int) (mixed >>> Integer.SIZE)) + displacements[bucket])
