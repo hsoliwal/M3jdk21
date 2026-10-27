@@ -4049,6 +4049,7 @@ public class Collections {
         public V merge(K key, V value,
                 BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
             Objects.requireNonNull(remappingFunction);
+            typeCheck(key, value);
             return m.merge(key, value, (v1, v2) -> {
                 V newValue = remappingFunction.apply(v1, v2);
                 typeCheck(null, newValue);

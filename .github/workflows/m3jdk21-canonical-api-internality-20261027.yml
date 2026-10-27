@@ -1,0 +1,108 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 canonical JDK API and M3 internality boundary
+on:
+  pull_request:
+    paths:
+      - 'test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java'
+      - 'm3/docs/qualification/current-api-internality-20261027/**'
+      - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
+      - '.github/workflows/m3jdk21-canonical-api-internality-20261027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  guard-mechanism-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+            m3/docs/qualification/current-api-internality-20261027/**
+            m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
+            .github/workflows/m3jdk21-canonical-api-internality-20261027.yml
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse target Java source and passive receipt drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(Path(
+              "m3/docs/qualification/current-api-internality-20261027/RECEIVER_RECEIPT.json"
+          ).read_text(encoding="utf-8"))
+          source = Path(receipt["product"]["source_path"])
+          if source.as_posix() != "test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java":
+              raise SystemExit("M3JDK_BOUNDARY_REFUSED: unexpected product owner")
+          data = source.read_bytes()
+          expected = receipt["postimage"]
+          git_blob = hashlib.sha1(
+              b"blob " + str(len(data)).encode("ascii") + b"\0" + data
+          ).hexdigest()
+          if (hashlib.sha256(data).hexdigest() != expected["sha256"]
+                  or git_blob != expected["git_blob_sha1"]
+                  or len(data) != expected["utf8_bytes"]):
+              raise SystemExit("M3JDK_BOUNDARY_REFUSED: source blob or SHA256 drift")
+          if receipt["product"]["product_jdk_classes_modified"] != 0:
+              raise SystemExit("M3JDK_BOUNDARY_REFUSED: source mutation falsely qualified")
+          print("M3JDK_BOUNDARY_RECEIPT_PASS", len(data), expected["sha256"])
+          PY
+      - name: Compile exact target jtreg Java source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/boundary/classes"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/boundary/classes" \
+            test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+          sha256sum test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+      - name: Positive and negative patched java.base fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/boundary"
+          mkdir -p "$root/src/java/lang" "$root/src/jdk/internal/mindex" \
+            "$root/patch" "$root/public-src/java/lang" "$root/public-patch"
+          cat > "$root/src/java/lang/M3String.java" <<'JAVA'
+          package java.lang;
+          final class M3String {}
+          JAVA
+          cat > "$root/src/jdk/internal/mindex/M3Class.java" <<'JAVA'
+          package jdk.internal.mindex;
+          public final class M3Class {}
+          JAVA
+          javac --patch-module java.base="$root/src" -Xlint:all -Werror \
+            -d "$root/patch" "$root/src/java/lang/M3String.java" \
+            "$root/src/jdk/internal/mindex/M3Class.java"
+          java --patch-module java.base="$root/patch" -cp "$root/classes" \
+            M3CanonicalApiBoundaryTest | tee "$root/positive.log"
+          grep -q 'M3JDK_CANONICAL_API_BOUNDARY_PASS' "$root/positive.log"
+          cat > "$root/public-src/java/lang/M3String.java" <<'JAVA'
+          package java.lang;
+          public final class M3String { private M3String() {} }
+          JAVA
+          javac --patch-module java.base="$root/public-src" -Xlint:all -Werror \
+            -d "$root/public-patch" "$root/public-src/java/lang/M3String.java"
+          if java --patch-module java.base="$root/public-patch:$root/patch" \
+            -cp "$root/classes" M3CanonicalApiBoundaryTest >"$root/public.log" 2>&1; then
+            echo 'ERROR: public java.lang.M3String was accepted' >&2
+            exit 1
+          fi
+          grep -q 'M3String must be package-private' "$root/public.log"
+          if java --patch-module java.base="$root/patch" \
+            --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+            -cp "$root/classes" M3CanonicalApiBoundaryTest >"$root/export.log" 2>&1; then
+            echo 'ERROR: exported jdk.internal.mindex was accepted' >&2
+            exit 1
+          fi
+          grep -q 'runtime options exposed the internal class-index package' "$root/export.log"
+          echo 'M3JDK_API_BOUNDARY_MECHANISM_PASS: positive=1 negative=2'

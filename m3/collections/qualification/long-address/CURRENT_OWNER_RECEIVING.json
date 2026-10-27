@@ -1,0 +1,54 @@
+{
+  "schema": "M3_LONG_ADDRESS_CURRENT_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "1a4b37fc14debf9c1ea693396166e7b6e1caa7b6",
+  "recipe": "com.synexia.m3.LongAddressCurrent20261027",
+  "target": ".github/workflows/m3-long-direct-address-kernel.yml",
+  "pre_source_git_blob": "7753da6af91ccc4e1f4310629db9d05f329e3bbc",
+  "post_source_git_blob": "b0bf1b2a1e3121ccb47e74ba72e3f29bb7dca9b9",
+  "pre_source_sha256": "b563da28eca90b0ac41306bf933b984dd2e039be88a244b55c43c5c4ca46ee86",
+  "post_source_sha256": "084f0590fd3ed903042bc544aad7c9f6ad38a6980899d4f498897f42e3e5fc36",
+  "maven_local": {
+    "version": "3.9.9",
+    "java": "21.0.12.1",
+    "openrewrite": "8.17.1",
+    "sdk_junit_tests": 7,
+    "failures": 0,
+    "skipped": 0,
+    "source_results": 1,
+    "received": 1,
+    "zero_change_replay": 0,
+    "negative_controls": [
+      "source drift",
+      "missing input",
+      "duplicate input",
+      "postscan mutation",
+      "corrupt template"
+    ],
+    "surefire_sha256": "613f48996c9582c0a919b4c0712e3dea417e2e97b8e05d2a7beb2c5214a3122f"
+  },
+  "bytecode_test": {
+    "java21_strict_compilation": "PASS",
+    "synthetic_valid_compiled_owner": "PASS",
+    "synthetic_missing_address_call": "EXPECTED_REFUSAL",
+    "actual_current_product_owner": "PENDING_HOSTED"
+  },
+  "prior_product_ci": {
+    "run_id": 40445305859,
+    "job_id": 121995049951,
+    "failure": "REFUSE_DRIFT:m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java"
+  },
+  "scope": {
+    "product_java_source_modified": false,
+    "jni_native_source_modified": false,
+    "existing_historical_recipe_implementation_modified": false,
+    "existing_junit_java_jni_contracts_retained": true,
+    "public_apis_changed": false
+  },
+  "hosted_product_ci": "PENDING",
+  "full_jdk_hotspot_jtreg": "NOT_RUN",
+  "swt_nebula_gef_rwt_native_gui": "NOT_RUN",
+  "performance_claim": false,
+  "merge_status": "DRAFT_REVIEW_ONLY"
+}
