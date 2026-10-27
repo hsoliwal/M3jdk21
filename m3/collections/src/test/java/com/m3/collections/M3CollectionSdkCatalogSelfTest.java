@@ -1,7 +1,9 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 package com.m3.collections;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /** Standalone provider-family registry/contract oracle; needs only Java 21. */
 public final class M3CollectionSdkCatalogSelfTest {
@@ -26,6 +28,7 @@ public final class M3CollectionSdkCatalogSelfTest {
         check(M3CollectionSdkCatalog.size() == entries.size(), "family count");
         int[] vendors = new int[M3CollectionSdkCatalog.Vendor.values().length];
         int optional = 0;
+        var selectedOptional = new HashSet<String>();
         String previous = "";
         for (var family : entries) {
             checks++;
@@ -43,13 +46,30 @@ public final class M3CollectionSdkCatalogSelfTest {
             }
             if (family.disposition() == M3CollectionSdkCatalog.Disposition.OPTIONAL_ADAPTER) {
                 optional++;
+                check(selectedOptional.add(family.upstreamName()),
+                        "optional adapter already counted");
                 check(family.hasExistingM3Owner(), "optional adapter must name a real owner");
                 check(family.existingM3Owner().startsWith("com.m3.collections.interop."),
                         "optional compatibility never pollutes core dependency boundary");
             }
             vendors[family.vendor().ordinal()]++;
         }
-        check(optional == 12, "selected optional adapters must be enumerated exactly");
+        check(optional == 14 && selectedOptional.equals(Set.of(
+                "com.google.common.collect.BiMap",
+                "com.google.common.collect.ClassToInstanceMap",
+                "com.google.common.collect.ListMultimap",
+                "com.google.common.collect.Multimap",
+                "com.google.common.collect.SetMultimap",
+                "com.google.common.collect.SortedSetMultimap",
+                "com.google.common.collect.Table",
+                "org.eclipse.collections.api.list.MutableList",
+                "org.eclipse.collections.api.map.MutableMap",
+                "org.eclipse.collections.api.map.sorted.MutableSortedMap",
+                "org.eclipse.collections.api.set.MutableSet",
+                "org.eclipse.collections.api.set.sorted.MutableSortedSet",
+                "org.springframework.util.AutoPopulatingList",
+                "org.springframework.util.MultiValueMap"
+        )), "selected optional adapters must be enumerated exactly");
         for (var vendor : M3CollectionSdkCatalog.Vendor.values()) {
             check(vendors[vendor.ordinal()] > 0, "vendor coverage: " + vendor);
             check(M3CollectionSdkCatalog.byVendor(vendor).size() == vendors[vendor.ordinal()],
