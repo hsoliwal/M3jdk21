@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 indexed disjoint-set arrays JNI receiver
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3DisjointIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_disjoint_index.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3DisjointIndex*.java'
+      - 'm3/collections/qualification/disjoint-index-20261027.sha256'
+      - '.github/workflows/m3-disjoint-index-jni-20261027.yml'
+  workflow_dispatch:
+jobs:
+  primitive-arrays-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact canonical source output hashes
+        run: sha256sum -c m3/collections/qualification/disjoint-index-20261027.sha256
+      - name: Compile target Java owner and JNI header with warnings as errors
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/disjoint-classes" "$RUNNER_TEMP/disjoint-headers"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/disjoint-headers" -d "$RUNNER_TEMP/disjoint-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3DisjointIndex.java \
+            m3/collections/src/test/java/com/m3/collections/M3DisjointIndexSelfTest.java
+      - name: Compile strict C17 and execute actual checked JNI and Java reference oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=all -shared -fPIC \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_disjoint_index.c \
+            -o "$RUNNER_TEMP/libm3_disjoint_index.so"
+          nm -D "$RUNNER_TEMP/libm3_disjoint_index.so" | grep -q 'Java_com_m3_collections_M3DisjointIndex_connectedNative'
+          java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
+            -cp "$RUNNER_TEMP/disjoint-classes" com.m3.collections.M3DisjointIndexSelfTest --native
+          java -ea -cp "$RUNNER_TEMP/disjoint-classes" com.m3.collections.M3DisjointIndexSelfTest
