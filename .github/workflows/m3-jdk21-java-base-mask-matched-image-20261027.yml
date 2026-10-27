@@ -30,17 +30,37 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Install host compiler and jtreg prerequisites
+      - name: Install complete X11 build headers and required jtreg 7.3.1
         shell: bash
         run: |
           set -euo pipefail
           sudo apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
-            build-essential autoconf zip unzip jtreg \
+            build-essential autoconf zip unzip curl \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+          # Ubuntu 24.04 apt jtreg is 5.1. OpenJDK configure demands >=7.2.
+          # Fetch a named 7.3.1+1 distribution and check the published digest.
+          mkdir -p "$RUNNER_TEMP/jtreg-dist"
+          curl -fsSL --retry 3 \
+            'https://builds.shipilev.net/jtreg/jtreg-7.3.1+1.zip' \
+            -o "$RUNNER_TEMP/jtreg-dist/jtreg-7.3.1+1.zip"
+          curl -fsSL --retry 3 \
+            'https://builds.shipilev.net/jtreg/SHA1SUMS' \
+            -o "$RUNNER_TEMP/jtreg-dist/SHA1SUMS"
+          grep -Fq 'jtreg-7.3.1+1.zip' "$RUNNER_TEMP/jtreg-dist/SHA1SUMS"
+          ( cd "$RUNNER_TEMP/jtreg-dist" && sha1sum -c --ignore-missing SHA1SUMS )
+          unzip -q "$RUNNER_TEMP/jtreg-dist/jtreg-7.3.1+1.zip" -d "$RUNNER_TEMP/jtreg-unpacked"
+          mapfile -t jtreg_jars < <(find "$RUNNER_TEMP/jtreg-unpacked" \
+            -type f -path '*/lib/jtreg.jar' | sort)
+          if [[ "${#jtreg_jars[@]}" -ne 1 ]]; then
+            echo "REFUSAL expected one jtreg.jar, found ${#jtreg_jars[@]}" >&2
+            exit 1
+          fi
+          JT_HOME=$(dirname "$(dirname "${jtreg_jars[0]}")")
+          echo "JT_HOME=$JT_HOME" >> "$GITHUB_ENV"
+          "$JAVA_HOME/bin/java" -jar "$JT_HOME/lib/jtreg.jar" -version
           java -version
-          jtreg -version
       - name: Recheck sealed in-JDK owner and current java.util callers
         shell: bash
         run: bash m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh
