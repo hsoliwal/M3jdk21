@@ -36,3 +36,31 @@ See [RECEIPT_RECONCILIATION.md](RECEIPT_RECONCILIATION.md) for evidence
 classification of historical filtered workflows. A new test source or
 product source hash mismatch refuses before test execution. These new
 tests are **committed but not yet claimed passing** at this revision.
+
+
+## Expanded current-master execution receipt
+
+[GitHub Actions run #40512782665](https://github.com/hsoliwal/M3jdk21/actions/runs/40512782665)
+**passed at Git head `c60bce17bb568a0cb76ba55a5d8f9bdc7b78941c`**.
+The history audit verified all eight original source Git objects and reported
+one expected changed current owner. The actual `m3-arrays` and
+`m3-collections` modules compiled successfully under Java 21, then the
+following selected JUnit 5 classes ran with **zero failures, errors or skips**:
+
+| JUnit class | Tests |
+| --- | ---: |
+| `M3FilteredMasterPredicatePlanLifecycleTest` | 4 |
+| `M3FilteredSortedIteratorPlanTest` | 5 |
+| `M3ReadOnlyMapDefaultsTest` | 1 |
+| `M3FilteredViewsTest` | 4 |
+| `M3FilteredNavigableSetTest` | 4 |
+| `M3FilteredMasterTreePlanTest` | 2 |
+| **Total** | **20** |
+
+The companion standalone filter contract reported
+`M3FilteredSortedIteratorPlanSelfTest checks=29`.
+The action ran all tests on the **selected source revision**; it is not a
+full Java/JNI native parity run, complete JDK image, full jtreg, nor an
+all-atom coverage proof. This receipt applies to the above Git head;
+subsequent documentation-only commits must not be labeled with fresh
+execution evidence without their own run.
