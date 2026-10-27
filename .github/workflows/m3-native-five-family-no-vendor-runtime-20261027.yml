@@ -62,12 +62,24 @@ jobs:
       - name: Install internal M3 arrays from source (never donor binaries)
         shell: bash
         run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
-      - name: Execute exact-head JUnit runtime owner and dependency boundary tests
+      - name: Build and verify the REQUIRED in-product M3 arrays JNI allocator from source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cmake -S m3/arrays/src/main/native \
+            -B "$RUNNER_TEMP/m3-native-arrays-build" \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_STANDARD=17
+          cmake --build "$RUNNER_TEMP/m3-native-arrays-build" --parallel 2
+          ctest --test-dir "$RUNNER_TEMP/m3-native-arrays-build" --output-on-failure
+          test -s "$RUNNER_TEMP/m3-native-arrays-build/libm3_arrays.so"
+      - name: Execute exact-head JUnit runtime owner and dependency boundary tests with checked JNI
         shell: bash
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/collections/pom.xml \
-            -Dtest=M3NativeFiveLibrarySdkNoVendorTest test
+            -Dtest=M3NativeFiveLibrarySdkNoVendorTest \
+            -DargLine="-ea -Xcheck:jni -Dm3.arrays.native.path=$RUNNER_TEMP/m3-native-arrays-build/libm3_arrays.so" \
+            test
       - name: Preserve real source-built proof
         if: always()
         uses: actions/upload-artifact@v4
