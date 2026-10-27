@@ -6,6 +6,7 @@ on:
       - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
       - 'test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java'
       - 'm3/collections/qualification/java-base-mask-20261023/**'
+      - 'm3/collections/qualification/java-base-mask-current-master-20261027/**'
       - '.github/workflows/m3-jdk21-java-base-mask-20261023.yml'
   workflow_dispatch:
 permissions:
@@ -23,4 +24,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify sealed JDK source and actual Java 21 kernel test
-        run: bash m3/collections/qualification/java-base-mask-20261023/verify.sh
+        run: bash m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh
