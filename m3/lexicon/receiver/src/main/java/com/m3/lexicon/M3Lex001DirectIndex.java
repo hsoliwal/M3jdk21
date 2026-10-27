@@ -2,6 +2,7 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 package com.m3.lexicon;
 
+import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Objects;
 
@@ -88,6 +89,17 @@ final class M3Lex001DirectIndex {
         hash = (hash ^ Integer.toUnsignedLong(spelling.length())) * EXACT_PRIME;
         for (int index = 0; index < spelling.length(); index++) {
             hash = (hash ^ spelling.charAt(index)) * EXACT_PRIME;
+        }
+        return hash;
+    }
+
+    static long exactHash(
+            ByteBuffer image, int payload, int offset, int length, long seed) {
+        Objects.requireNonNull(image, "image");
+        long hash = EXACT_OFFSET ^ seed ^ EXACT_DOMAIN;
+        hash = (hash ^ Integer.toUnsignedLong(length)) * EXACT_PRIME;
+        for (int index = 0; index < length; index++) {
+            hash = (hash ^ M3Lex001Image.unit(image, payload, offset + index)) * EXACT_PRIME;
         }
         return hash;
     }
