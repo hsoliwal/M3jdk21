@@ -86,6 +86,22 @@ class StringTargetSuccessorTest(unittest.TestCase):
             with patch.object(phase, "MERGED_SOURCE_OBSERVATION", path):
                 callback()
 
+    def read_facts_rows(self):
+        with phase.FACTS_SUCCESSOR_CHAIN.open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle, delimiter="\t"))
+
+    def with_facts_rows(self, changed, callback):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "string-facts-target-successor-chain.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(
+                    handle, fieldnames=phase.FACTS_SUCCESSOR_CHAIN_HEADER,
+                    delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(changed)
+            with patch.object(phase, "FACTS_SUCCESSOR_CHAIN", path):
+                callback()
+
     def test_serial_chain_preserves_history_and_exact_final_identity(self):
         historical = phase.approved_successors(self.mapping())
         self.assertEqual("70d1d03c109126fdda36c54da21b484bbe368fd9",
@@ -108,6 +124,29 @@ class StringTargetSuccessorTest(unittest.TestCase):
                          observed[-1]["state"])
         self.assertTrue(all(row["runtime_acceptance"] == "NOT_CLAIMED"
                             for row in observed))
+        self.assertEqual("fcd108ab6181fec11d16eda811b29d18298f3fb1",
+                         historical[phase.M3_STRING_FACTS_PATH]["successor_git_blob"])
+        facts = self.read_facts_rows()
+        self.assertEqual(["1", "2", "3", "4"], [row["step"] for row in facts])
+        self.assertEqual([
+            "d8dd7dc30db6a9e3897146572bd4a7755c954ffb",
+            "3e76b8c52eefc3b1983c701a0b9dfc953262a554",
+            "14fc79e035ac7c8fe610b0fc9191ba428b683133",
+            "bd4d7878ceb9d3c74f8f012c05cac4aff392a128"],
+            [row["successor_git_blob"] for row in facts])
+        self.assertTrue(all(row["state"] == "CANONICAL_RECIPE_POSTIMAGE_SOURCE_ONLY"
+                            and row["runtime_acceptance"] == "NOT_CLAIMED"
+                            for row in facts))
+        self.assertEqual("bd4d7878ceb9d3c74f8f012c05cac4aff392a128",
+                         expected[phase.M3_STRING_FACTS_PATH])
+        legacy_coordinates = {
+            path: row["successor_git_blob"] for path, row in historical.items()
+            if path not in (phase.M3_STRING_PATH, phase.M3_STRING_FACTS_PATH)}
+        self.assertEqual(legacy_coordinates, {
+            path: blob for path, blob in expected.items()
+            if path not in (phase.M3_STRING_PATH, phase.M3_STRING_FACTS_PATH)})
+        with self.assertRaisesRegex(ValueError, "discontinuous Facts successor: 1"):
+            phase.facts_successor_observation(dict(expected), facts)
         self.assertEqual(4, len(expected))
 
     def test_chain_refuses_drift_ambiguity_reordering_and_promotion(self):
@@ -151,6 +190,21 @@ class StringTargetSuccessorTest(unittest.TestCase):
             self.with_merged_rows(mutated, lambda: self.assertRaisesRegex(
                 ValueError,
                 "merged source observation inventory drift|unreviewed merged source observation",
+                phase.current_successor_blobs, self.mapping()))
+
+        facts = self.read_facts_rows()
+        facts_cases = [facts[:-1], list(reversed(facts)), facts + [facts[-1].copy()]]
+        for row_index in range(len(facts)):
+            for field in phase.FACTS_SUCCESSOR_CHAIN_HEADER:
+                mutated = [row.copy() for row in facts]
+                mutated[row_index][field] = (
+                    "ACCEPTED" if field == "runtime_acceptance"
+                    else "RUNTIME_ACCEPTED" if field == "state"
+                    else mutated[row_index][field] + "-drift")
+                facts_cases.append(mutated)
+        for mutated in facts_cases:
+            self.with_facts_rows(mutated, lambda: self.assertRaisesRegex(
+                ValueError, "Facts successor inventory drift|unreviewed Facts successor",
                 phase.current_successor_blobs, self.mapping()))
 
     def test_duplicate_successor_refuses(self):

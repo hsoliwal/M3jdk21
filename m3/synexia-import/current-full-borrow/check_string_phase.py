@@ -51,6 +51,18 @@ EXPECTED_MERGED_SOURCE_OBSERVATION = (
     ("M3JDK21_STRING_MERGED_SOURCE_OBSERVATION_V1", "MERGED_RESULT", "src/java.base/share/classes/java/lang/M3String.java", "5eeb841168ed420085223806fefcfca8d1b6b3ca", "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e", "51f3fa1c0985ecff613ceac5c190ce685c04951f", "4b67f33bdc9c874d602a5ac38b9ec7f9948c9426", "12774", "415da87f2e14d4a125496aa8e43347a1429e3a6f", "NOT_RECONSTRUCTED", "NOT_RECONSTRUCTED", "NOT_RECONSTRUCTED", "OBSERVED_MERGED_SOURCE_NOT_RECIPE_RECONSTRUCTED", "NOT_CLAIMED"),
 )
 
+# Exact ordered canonical Facts postimages; historical successor receipts remain immutable.
+# Source custody only: no runtime, whole-image, JNI, JIT/GC or performance admission.
+M3_STRING_FACTS_PATH = "src/java.base/share/classes/java/lang/M3StringFacts.java"
+FACTS_SUCCESSOR_CHAIN = Path(__file__).with_name("string-facts-target-successor-chain.tsv")
+FACTS_SUCCESSOR_CHAIN_HEADER = ["schema","step","target_path","predecessor_git_blob","successor_git_blob","predecessor_sha256","successor_sha256","product_commit","m3jdk_pr","synexia_pr","synexia_source_head","canonical_resource_path","canonical_resource_git_blob","canonical_resource_sha256","state","runtime_acceptance"]
+EXPECTED_FACTS_SUCCESSOR_CHAIN = (
+    ("M3JDK21_STRING_FACTS_SUCCESSOR_SOURCE_V1", "1", "src/java.base/share/classes/java/lang/M3StringFacts.java", "fcd108ab6181fec11d16eda811b29d18298f3fb1", "d8dd7dc30db6a9e3897146572bd4a7755c954ffb", "f1cc0ec9d4fd0bbc15d9c684e80b9907b60321cb15ad4fd7fa39f3cf973fc4cd", "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420", "56d29d32b128de0d998e933f957e090383e8d2dc", "873", "11288", "0b10db35ec0cf1af442077bcd6200cf7f5896eb3", "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-modified-utf8-dp-20261014/00-M3StringFacts.java.txt", "d8dd7dc30db6a9e3897146572bd4a7755c954ffb", "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420", "CANONICAL_RECIPE_POSTIMAGE_SOURCE_ONLY", "NOT_CLAIMED"),
+    ("M3JDK21_STRING_FACTS_SUCCESSOR_SOURCE_V1", "2", "src/java.base/share/classes/java/lang/M3StringFacts.java", "d8dd7dc30db6a9e3897146572bd4a7755c954ffb", "3e76b8c52eefc3b1983c701a0b9dfc953262a554", "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420", "34663f5b64dbd44b566e655a17170b36f55c19f9e0e630c02ed291f78422e267", "433639fbd919181da0724aa77bafd6a58090afc3", "1205", "12189", "e3398abf35da30f13ba7ed626c5391671c5b3dcd", "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-string-utf8-fact-overflow-20261017/M3StringFacts.java.txt", "3e76b8c52eefc3b1983c701a0b9dfc953262a554", "34663f5b64dbd44b566e655a17170b36f55c19f9e0e630c02ed291f78422e267", "CANONICAL_RECIPE_POSTIMAGE_SOURCE_ONLY", "NOT_CLAIMED"),
+    ("M3JDK21_STRING_FACTS_SUCCESSOR_SOURCE_V1", "3", "src/java.base/share/classes/java/lang/M3StringFacts.java", "3e76b8c52eefc3b1983c701a0b9dfc953262a554", "14fc79e035ac7c8fe610b0fc9191ba428b683133", "34663f5b64dbd44b566e655a17170b36f55c19f9e0e630c02ed291f78422e267", "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a", "7f0cd03024155b11f22c88990192f11e1d1014b7", "1320", "12324", "7ca15c181af290f69d3b48fcf73eda6cdae71c41", "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-facts-v2-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0001-M3StringFacts.java.txt", "14fc79e035ac7c8fe610b0fc9191ba428b683133", "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a", "CANONICAL_RECIPE_POSTIMAGE_SOURCE_ONLY", "NOT_CLAIMED"),
+    ("M3JDK21_STRING_FACTS_SUCCESSOR_SOURCE_V1", "4", "src/java.base/share/classes/java/lang/M3StringFacts.java", "14fc79e035ac7c8fe610b0fc9191ba428b683133", "bd4d7878ceb9d3c74f8f012c05cac4aff392a128", "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a", "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a", "ddb44fdbb37163c59b4c6be04dd3affe2dbac1bc", "1829", "12871", "bcecde65aa6ba35fc3c3a908889f3b8af04aba70", "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-combined-c831/0001-M3StringFacts.java.txt", "bd4d7878ceb9d3c74f8f012c05cac4aff392a128", "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a", "CANONICAL_RECIPE_POSTIMAGE_SOURCE_ONLY", "NOT_CLAIMED"),
+)
+
 PRECOMPUTE_OBSERVATION = Path(__file__).with_name("m3-string-precompute-observation-v2.tsv")
 PRECOMPUTE_OBSERVATION_HEADER = [
     "schema",
@@ -284,8 +296,23 @@ def merged_source_observation(current: dict[str, str], rows: list[dict[str, str]
     return observed
 
 
+def facts_successor_observation(current: dict[str, str], rows: list[dict[str, str]]) -> dict[str, str]:
+    """Validate ordered canonical Facts source images without promoting runtime state."""
+    if len(rows) != len(EXPECTED_FACTS_SUCCESSOR_CHAIN):
+        raise ValueError("Facts successor inventory drift")
+    observed = dict(current)
+    for index, (step, values) in enumerate(zip(rows, EXPECTED_FACTS_SUCCESSOR_CHAIN), start=1):
+        expected = dict(zip(FACTS_SUCCESSOR_CHAIN_HEADER, values))
+        if step != expected:
+            raise ValueError(f"unreviewed Facts successor: {index}")
+        if observed[M3_STRING_FACTS_PATH] != step["predecessor_git_blob"]:
+            raise ValueError(f"discontinuous Facts successor: {index}")
+        observed[M3_STRING_FACTS_PATH] = step["successor_git_blob"]
+    return observed
+
+
 def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
-    """Validate the immutable V1 serial chain, then a separate exact merge observation.
+    """Validate V1/String merge source receipts and ordered canonical Facts postimages.
 
     The merge records observed source coordinates, not a proved serial transform.
     Wrong source, wrong order, changed provenance, missing or extra rows fail closed.
@@ -311,8 +338,10 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
         if current[M3_STRING_PATH] != before:
             raise ValueError(f"discontinuous String successor chain: {index}")
         current[M3_STRING_PATH] = after
-    return merged_source_observation(
+    observed = merged_source_observation(
         current, load_tsv(MERGED_SOURCE_OBSERVATION, MERGED_SOURCE_OBSERVATION_HEADER))
+    return facts_successor_observation(
+        observed, load_tsv(FACTS_SUCCESSOR_CHAIN, FACTS_SUCCESSOR_CHAIN_HEADER))
 
 
 
