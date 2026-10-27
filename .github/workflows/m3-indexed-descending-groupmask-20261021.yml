@@ -64,7 +64,13 @@ jobs:
           java-version: '21'
           cache: maven
       - name: Original owner JUnit and adjacent indexed/native regressions
-        run: >
-          mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3IndexedSnapshotPositionTest
-          test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am \
+            -Dsurefire.failIfNoSpecifiedTests=false \
+            -Dtest=M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3IndexedSnapshotPositionTest \
+            test
+          for suite in M3IndexedDescendingGroupMaskTest M3IndexedFilterSortFusionTest M3IndexedSnapshotPositionTest; do
+            test -s "m3/collections/target/surefire-reports/TEST-com.m3.collections.${suite}.xml"
+          done
