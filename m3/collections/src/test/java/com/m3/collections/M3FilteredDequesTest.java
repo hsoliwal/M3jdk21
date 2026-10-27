@@ -15,6 +15,10 @@ final class M3FilteredDequesTest {
         M3FilteredDequeContract.main(new String[0]);
     }
 
+    @Test void backingOwnerMembershipAndPhysicalRemoval() {
+        M3FilteredDequeOwnerMembershipContract.main(new String[0]);
+    }
+
     @Test void existingPackedM3LinkedListIsTheOnlyPayloadOwner() {
         var backing = new M3LinkedList<Integer>();
         backing.addLast(1);
