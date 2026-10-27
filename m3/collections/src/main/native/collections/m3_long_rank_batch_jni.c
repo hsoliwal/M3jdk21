@@ -102,74 +102,76 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
  * an inclusive "last occurrence" there is no target+1 overflow at LONG_MAX.
  * Inputs remain read-only under JNI_ABORT and no callback crosses JNI.
  */
+/*
+ * Legacy LC #34 batch entry point, retained ABI. Query and result pages stay
+ * bounded (256 longs plus 512 ints); never pin or copy an entire query/result
+ * vector just to process it once. Only the sorted payload is pinned, once per
+ * page and with no JNI calls while pinned. Outputs are published page by page.
+ */
 JNIEXPORT void JNICALL
 Java_com_m3_collections_M3LongRankBatchNative_equalRanges0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
         jintArray ranges) {
     (void) ignored;
-    if (sorted == NULL || queries == NULL || ranges == NULL) {
-        jclass error = (*env)->FindClass(env, "java/lang/NullPointerException");
-        if (error != NULL) (*env)->ThrowNew(env, error, "null batch argument");
-        return;
-    }
-    jsize size = (*env)->GetArrayLength(env, sorted);
-    jsize count = (*env)->GetArrayLength(env, queries);
+    if (sorted == NULL || queries == NULL || ranges == NULL) return;
+    const jsize size = (*env)->GetArrayLength(env, sorted);
+    const jsize count = (*env)->GetArrayLength(env, queries);
     if (count > INT_MAX / 2 || (*env)->GetArrayLength(env, ranges) != count * 2) {
         jclass error = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
         if (error != NULL) (*env)->ThrowNew(env, error, "range output length mismatch");
         return;
     }
-    if (count == 0) return;
-
-    const jlong *values = (*env)->GetLongArrayElements(env, sorted, NULL);
-    if (values == NULL) return;
-    const jlong *targets = (*env)->GetLongArrayElements(env, queries, NULL);
-    if (targets == NULL) {
-        (*env)->ReleaseLongArrayElements(env, sorted, (jlong *) values, JNI_ABORT);
-        return;
-    }
-    jint *result = (*env)->GetIntArrayElements(env, ranges, NULL);
-    if (result == NULL) {
-        (*env)->ReleaseLongArrayElements(env, queries, (jlong *) targets, JNI_ABORT);
-        (*env)->ReleaseLongArrayElements(env, sorted, (jlong *) values, JNI_ABORT);
-        return;
-    }
-    if (m3_use_monotone_sweep(targets, count, size, 2U)) {
-        jsize lower = 0;
-        jsize upper = 0;
-        for (jsize i = 0; i < count; i++) {
-            const jlong needle = targets[i];
-            while (lower < size && values[lower] < needle) lower++;
-            if (upper < lower) upper = lower;
-            /* Never use needle + 1: LONG_MAX remains valid without overflow. */
-            while (upper < size && values[upper] <= needle) upper++;
-            result[2 * i] = (jint) lower;
-            result[2 * i + 1] = (jint) upper;
-        }
-    } else {
-        for (jsize i = 0; i < count; ++i) {
-            jlong needle = targets[i];
-            jsize lo = 0;
-            jsize hi = size;
-            while (lo < hi) {
-                jsize mid = lo + (hi - lo) / 2;
-                if (values[mid] < needle) lo = mid + 1;
-                else hi = mid;
+    enum { M3_EQUAL_RANGE_PAGE = 256 };
+    jlong targets[M3_EQUAL_RANGE_PAGE];
+    jint result[M3_EQUAL_RANGE_PAGE * 2];
+    for (jsize done = 0; done < count;) {
+        jsize batch = count - done;
+        if (batch > M3_EQUAL_RANGE_PAGE) batch = M3_EQUAL_RANGE_PAGE;
+        (*env)->GetLongArrayRegion(env, queries, done, batch, targets);
+        if ((*env)->ExceptionCheck(env)) return;
+        if (size == 0) {
+            for (jsize i = 0; i < batch; ++i) {
+                result[2 * i] = 0;
+                result[2 * i + 1] = 0;
             }
-            jint first = (jint) lo;
-            hi = size;
-            while (lo < hi) {
-                jsize mid = lo + (hi - lo) / 2;
-                if (values[mid] <= needle) lo = mid + 1;
-                else hi = mid;
+        } else {
+            const jlong *values = (*env)->GetPrimitiveArrayCritical(env, sorted, NULL);
+            if (values == NULL) return;
+            if (m3_use_monotone_sweep(targets, batch, size, 2U)) {
+                jsize lower = 0, upper = 0;
+                for (jsize i = 0; i < batch; ++i) {
+                    const jlong needle = targets[i];
+                    while (lower < size && values[lower] < needle) lower++;
+                    if (upper < lower) upper = lower;
+                    while (upper < size && values[upper] <= needle) upper++;
+                    result[2 * i] = (jint) lower;
+                    result[2 * i + 1] = (jint) upper;
+                }
+            } else {
+                for (jsize i = 0; i < batch; ++i) {
+                    const jlong needle = targets[i];
+                    jsize lo = 0, hi = size;
+                    while (lo < hi) {
+                        jsize mid = lo + (hi - lo) / 2;
+                        if (values[mid] < needle) lo = mid + 1;
+                        else hi = mid;
+                    }
+                    result[2 * i] = (jint) lo;
+                    hi = size;
+                    while (lo < hi) {
+                        jsize mid = lo + (hi - lo) / 2;
+                        if (values[mid] <= needle) lo = mid + 1;
+                        else hi = mid;
+                    }
+                    result[2 * i + 1] = (jint) lo;
+                }
             }
-            result[2 * i] = first;
-            result[2 * i + 1] = (jint) lo;
+            (*env)->ReleasePrimitiveArrayCritical(env, sorted, (void *) values, JNI_ABORT);
         }
+        (*env)->SetIntArrayRegion(env, ranges, done * 2, batch * 2, result);
+        if ((*env)->ExceptionCheck(env)) return;
+        done += batch;
     }
-    (*env)->ReleaseIntArrayElements(env, ranges, result, 0);
-    (*env)->ReleaseLongArrayElements(env, queries, (jlong *) targets, JNI_ABORT);
-    (*env)->ReleaseLongArrayElements(env, sorted, (jlong *) values, JNI_ABORT);
 }
 
 /* Original LeetCode #34/#35 primitive upper/count-in-window JNI atom. */
