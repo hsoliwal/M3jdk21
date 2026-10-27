@@ -5,6 +5,7 @@ on:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FrameJavaContract.java'
       - 'm3/collections/qualification/mask-viewport-page-20261021/**'
       - '.github/workflows/m3-mask-viewport-page-20261021.yml'
   workflow_dispatch:
@@ -29,7 +30,8 @@ jobs:
         run: |
           printf '%s  %s\n' \
             '99e8c061c60c3514ce9ec1b19e3a6afd618a32bd3f6841b36f931ca64383ac0c' 'm3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java' \
-            '3a17cb6e0cebabdd77181bf102a558a489642cfc9945b97c6a85950162cc3a25' 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java' | sha256sum -c -
+            '3a17cb6e0cebabdd77181bf102a558a489642cfc9945b97c6a85950162cc3a25' 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java' \
+            '39dcb95ef2c4edc9f1479d728bfeac0fa7976aeb89ea5923cf4430d5cfb07821' 'm3/collections/src/test/java/com/m3/collections/M3FrameJavaContract.java' | sha256sum -c -
       - name: Compile source owners and run visible-page oracle
         shell: bash
         run: |
@@ -37,7 +39,12 @@ jobs:
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-page-classes" \
             m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java \
             m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java
+            m3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3FrameJavaContract.java
           java -cp "$RUNNER_TEMP/m3-page-classes" com.m3.collections.M3MaskViewportPageContract \
             | tee "$RUNNER_TEMP/m3-page-oracle.txt"
           grep -Fx 'M3_MASK_VIEWPORT_PAGE_PASS checks=121831 existingJni=false' "$RUNNER_TEMP/m3-page-oracle.txt"
+          java -ea -cp "$RUNNER_TEMP/m3-page-classes" com.m3.collections.M3FrameJavaContract | tee "$RUNNER_TEMP/m3-frame-java-oracle.txt"
+          java -ea -Xint -cp "$RUNNER_TEMP/m3-page-classes" com.m3.collections.M3FrameJavaContract | tee "$RUNNER_TEMP/m3-frame-java-oracle-int.txt"
+          cmp "$RUNNER_TEMP/m3-frame-java-oracle.txt" "$RUNNER_TEMP/m3-frame-java-oracle-int.txt"
+          grep -Fx 'M3_FRAME_JAVA_PASS checks=35080 digest=ed73ef29740c1e87' "$RUNNER_TEMP/m3-frame-java-oracle.txt"
