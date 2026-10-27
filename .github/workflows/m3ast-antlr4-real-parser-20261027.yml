@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3AST real ANTLR4 generated parser Unicode fidelity
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/integration/antlr4/**'
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java'
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTExternalIngress.java'
+      - '.github/workflows/m3ast-antlr4-real-parser-20261027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-codepoint-and-real-antlr4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Generate the real ANTLR 4.13.2 lexer/parser and runtime classpath
+        shell: bash
+        run: |
+          set -euo pipefail
+          pom=m3/tooling/module-packs/parser/integration/antlr4/pom.xml
+          grammar=m3/tooling/module-packs/parser/integration/antlr4
+          mkdir -p "$grammar/src/main/antlr4"
+          cp "$grammar/grammar/M3UnicodeTiny.g4.txt" "$grammar/src/main/antlr4/M3UnicodeTiny.g4"
+          mvn -B -ntp -f "$pom" generate-sources \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath \
+            -Dmdep.outputFile="$RUNNER_TEMP/m3-antlr4-runtime-cp.txt"
+          test -s "$RUNNER_TEMP/m3-antlr4-runtime-cp.txt"
+      - name: Compile original parser classes, generated ANTLR code, and real Unicode contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/tooling/module-packs/parser
+          cpfile="$RUNNER_TEMP/m3-antlr4-runtime-cp.txt"
+          classes="$RUNNER_TEMP/m3-antlr4-real-classes"
+          mkdir -p "$classes"
+          javac --release 21 -Xlint:all -Werror -d "$classes" \
+            "$root/src/main/java/jdk/m3/parser/M3File.java" \
+            "$root/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java" \
+            "$root/src/main/java/jdk/m3/parser/M3CodePointSourceMap.java" \
+            "$root/src/main/java/jdk/m3/parser/M3ASTIndex.java" \
+            "$root/src/main/java/jdk/m3/parser/M3ASTIngress.java" \
+            "$root/src/main/java/jdk/m3/parser/M3ASTExternalIngress.java" \
+            "$root/src/main/java/jdk/m3/parser/M3ASTSyntaxCoverage.java"
+          generated="$root/integration/antlr4/target/generated-sources/antlr4"
+          mapfile -t generated_java < <(find "$generated" -type f -name '*.java' | sort)
+          test "${#generated_java[@]}" -ge 2
+          runtime_cp="$(cat "$cpfile")"
+          javac --release 21 -cp "$runtime_cp:$classes" -d "$classes" "${generated_java[@]}"
+          javac --release 21 -Xlint:all -Werror -cp "$runtime_cp:$classes" -d "$classes" \
+            "$root/integration/antlr4/src/test/java/jdk/m3/parser/test/M3ANTLR4RealParserContract.java"
+          java -cp "$runtime_cp:$classes" jdk.m3.parser.test.M3ANTLR4RealParserContract
