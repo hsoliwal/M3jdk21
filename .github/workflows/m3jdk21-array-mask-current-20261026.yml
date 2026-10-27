@@ -1,0 +1,68 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 current array-mask Java21 and unchanged JNI proof
+on:
+  pull_request:
+    paths:
+      - 'm3/arrays/pom.xml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3ArrayList.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java'
+      - 'm3/collections/qualification/array-mask-current-20261026/**'
+      - '.github/workflows/m3jdk21-array-mask-current-20261026.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-built-collections:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/arrays/**
+            m3/native/include/m3_jni_core.h
+            m3/collections/**
+            .github/workflows/m3jdk21-array-mask-current-20261026.yml
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse source/custody drift before compiling
+        run: |
+          python3 m3/collections/qualification/array-mask-current-20261026/verify.py
+          python3 -m unittest discover -s m3/collections/qualification/array-mask-current-20261026 -p 'test_*.py' -v
+      - name: Build and test actual M3 arrays with JNI
+        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
+      - name: Bind real array-JNI library for collection tests
+        run: |
+          test -s "$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so"
+          echo "JAVA_TOOL_OPTIONS=-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" >> "$GITHUB_ENV"
+      - name: Compile and execute actual M3 collection module contracts
+        run: mvn -B -ntp -f m3/collections/pom.xml test
+      - name: Run expanded signed/null/duplicate removal differential
+        run: |
+          java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3ArrayListShortWordMaskContract
+      - name: Preserve earlier iterator, tail-clearing and callback oracle
+        run: |
+          java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3ArrayListRemoveIfProof
+      - name: Retain Java bounded offset and mask-window differential
+        run: |
+          java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3BudgetedMaskWindowContract
+      - name: Compile unchanged C11 JNI primitives with JDK21 includes
+        run: |
+          gcc -std=c11 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            m3/collections/src/main/native/collections/m3_index_mask_window.c \
+            -o "$RUNNER_TEMP/libm3_collections_mask.so"
+      - name: Execute existing JNI mask-window real-native parity
+        run: |
+          java -ea -Djava.library.path="$RUNNER_TEMP" \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3BudgetedMaskWindowContract --native

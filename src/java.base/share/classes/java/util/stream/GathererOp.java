@@ -22,6 +22,11 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
+
+/*
+ * Modified 2026-10-27 by Hitesh Soliwal and contributors:
+ * report unknown output size because a gatherer may change stream cardinality.
+ */
 package java.util.stream;
 
 import jdk.internal.vm.annotation.ForceInline;

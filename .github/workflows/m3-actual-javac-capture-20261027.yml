@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3AST real javac original captured-source parity
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test/M3ActualJavacCaptureContract.java'
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/**'
+      - 'm3/file/src/main/java/com/m3/file/**'
+      - '.github/workflows/m3-actual-javac-capture-20261027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-javac:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile actual original file provider, JDK parser and integration tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-actual-javac-capture"
+          mkdir -p "$classes"
+          file=m3/file/src/main/java/com/m3/file
+          parser=m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser
+          old=m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test
+          integration=m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test
+          javac --release 21 -Xlint:all -Werror -d "$classes" \
+            "$file/M3StreamProgress.java" \
+            "$file/M3ShadowStreams.java" \
+            "$file/M3File.java" \
+            "$parser/M3File.java" \
+            "$parser/M3Utf8SourceMap.java" \
+            "$parser/M3ASTIndex.java" \
+            "$parser/M3ASTIngress.java" \
+            "$parser/M3ASTExternalIngress.java" \
+            "$old/M3ASTPortabilityContract.java" \
+            "$old/M3CapturedSourceContract.java" \
+            "$integration/M3ProviderCaptureContract.java" \
+            "$integration/M3ActualJavacCaptureContract.java"
+          java -cp "$classes" jdk.m3.parser.test.M3ASTPortabilityContract
+          java -cp "$classes" jdk.m3.parser.test.M3CapturedSourceContract
+          java -cp "$classes" jdk.m3.parser.test.M3ProviderCaptureContract
+          java -cp "$classes" jdk.m3.parser.test.M3ActualJavacCaptureContract

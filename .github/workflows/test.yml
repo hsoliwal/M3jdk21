@@ -23,6 +23,9 @@
 # questions.
 #
 
+# Modified 2026-10-27 by Hitesh Soliwal and contributors:
+# use the pinned supported artifact action while preserving test result names and contents.
+
 name: 'Run tests'
 
 on:
