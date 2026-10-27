@@ -102,6 +102,22 @@ class StringTargetSuccessorTest(unittest.TestCase):
             with patch.object(phase, "FACTS_SUCCESSOR_CHAIN", path):
                 callback()
 
+    def read_pool_rows(self):
+        with phase.POOL_SOURCE_OBSERVATION.open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle, delimiter="\t"))
+
+    def with_pool_rows(self, changed, callback):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "string-pool-source-observation.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(
+                    handle, fieldnames=phase.POOL_SOURCE_OBSERVATION_HEADER,
+                    delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(changed)
+            with patch.object(phase, "POOL_SOURCE_OBSERVATION", path):
+                callback()
+
     def test_serial_chain_preserves_history_and_exact_final_identity(self):
         historical = phase.approved_successors(self.mapping())
         self.assertEqual("70d1d03c109126fdda36c54da21b484bbe368fd9",
@@ -139,12 +155,31 @@ class StringTargetSuccessorTest(unittest.TestCase):
                             for row in facts))
         self.assertEqual("bd4d7878ceb9d3c74f8f012c05cac4aff392a128",
                          expected[phase.M3_STRING_FACTS_PATH])
+        self.assertEqual("514247a2e6c3704e03a9b47682f74e481f66585f",
+                         historical[phase.M3_STRING_POOL_PATH]["successor_git_blob"])
+        pool = self.read_pool_rows()
+        self.assertEqual([
+            "HISTORICAL_TIP", "COMMON_BASE", "CANONICAL_LEAF_POSTIMAGE",
+            "CANONICAL_NATIVE_FORK", "OBSERVED_COMPONENT_INTEGRATION",
+            "ALTERNATIVE_PREDECESSOR", "TARGET_SPECIFIC_RECIPE_POSTIMAGE",
+            "CURRENT_COMMENT_SUCCESSOR"], [row["role"] for row in pool])
+        self.assertEqual("0d47d7e969086262705460c153583f659237c894",
+                         expected[phase.M3_STRING_POOL_PATH])
+        self.assertTrue(all(row["canonical_history"] == "PARTIAL"
+                            and row["history_gap"] == "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED"
+                            and row["runtime_acceptance"] == "NOT_ACCEPTED"
+                            and row["state"] == "SOURCE_OBSERVATION_ONLY"
+                            for row in pool))
+        with self.assertRaisesRegex(ValueError, "discontinuous Pool historical anchor"):
+            phase.pool_source_observation(dict(expected), pool)
         legacy_coordinates = {
             path: row["successor_git_blob"] for path, row in historical.items()
-            if path not in (phase.M3_STRING_PATH, phase.M3_STRING_FACTS_PATH)}
+            if path not in (phase.M3_STRING_PATH, phase.M3_STRING_FACTS_PATH,
+                            phase.M3_STRING_POOL_PATH)}
         self.assertEqual(legacy_coordinates, {
             path: blob for path, blob in expected.items()
-            if path not in (phase.M3_STRING_PATH, phase.M3_STRING_FACTS_PATH)})
+            if path not in (phase.M3_STRING_PATH, phase.M3_STRING_FACTS_PATH,
+                            phase.M3_STRING_POOL_PATH)})
         with self.assertRaisesRegex(ValueError, "discontinuous Facts successor: 1"):
             phase.facts_successor_observation(dict(expected), facts)
         self.assertEqual(4, len(expected))
@@ -205,6 +240,29 @@ class StringTargetSuccessorTest(unittest.TestCase):
         for mutated in facts_cases:
             self.with_facts_rows(mutated, lambda: self.assertRaisesRegex(
                 ValueError, "Facts successor inventory drift|unreviewed Facts successor",
+                phase.current_successor_blobs, self.mapping()))
+
+        pool = self.read_pool_rows()
+        pool_cases = [pool[:-1], list(reversed(pool)), pool + [pool[-1].copy()]]
+        for row_index in range(len(pool)):
+            for field in phase.POOL_SOURCE_OBSERVATION_HEADER:
+                mutated = [row.copy() for row in pool]
+                original = mutated[row_index][field]
+                mutated[row_index][field] = (
+                    "ACCEPTED" if field == "runtime_acceptance"
+                    else "COMPLETE" if field == "canonical_history"
+                    else "RESOLVED" if field == "history_gap"
+                    else "RUNTIME_ACCEPTED" if field == "state"
+                    else str(int(original) + 1) if field == "utf8_bytes"
+                    else ("f" if original[0] != "f" else "0") + original[1:]
+                    if field in ("source_commit", "git_blob", "sha256", "artifact_ref",
+                                 "artifact_git_blob", "producer_git_blob")
+                    and len(original) in (40, 64)
+                    else original + "-drift")
+                pool_cases.append(mutated)
+        for mutated in pool_cases:
+            self.with_pool_rows(mutated, lambda: self.assertRaisesRegex(
+                ValueError, "Pool source observation inventory drift|unreviewed Pool source observation",
                 phase.current_successor_blobs, self.mapping()))
 
     def test_duplicate_successor_refuses(self):

@@ -63,6 +63,22 @@ EXPECTED_FACTS_SUCCESSOR_CHAIN = (
     ("M3JDK21_STRING_FACTS_SUCCESSOR_SOURCE_V1", "4", "src/java.base/share/classes/java/lang/M3StringFacts.java", "14fc79e035ac7c8fe610b0fc9191ba428b683133", "bd4d7878ceb9d3c74f8f012c05cac4aff392a128", "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a", "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a", "ddb44fdbb37163c59b4c6be04dd3affe2dbac1bc", "1829", "12871", "bcecde65aa6ba35fc3c3a908889f3b8af04aba70", "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-combined-c831/0001-M3StringFacts.java.txt", "bd4d7878ceb9d3c74f8f012c05cac4aff392a128", "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a", "CANONICAL_RECIPE_POSTIMAGE_SOURCE_ONLY", "NOT_CLAIMED"),
 )
 
+# Frozen Pool source-DAG observations are not an ordered semantic recipe chain.
+# Historical514 -> common-basee5ab remains unresolved; no runtime acceptance follows.
+M3_STRING_POOL_PATH = "src/java.base/share/classes/java/lang/M3StringPool.java"
+POOL_SOURCE_OBSERVATION = Path(__file__).with_name("string-pool-source-observation.tsv")
+POOL_SOURCE_OBSERVATION_HEADER = ["schema","role","target_path","source_commit","git_blob","sha256","utf8_bytes","artifact_kind","artifact_repository","artifact_ref","artifact_path","artifact_git_blob","producer_class","producer_git_blob","canonical_history","history_gap","runtime_acceptance","state"]
+EXPECTED_POOL_SOURCE_OBSERVATION = (
+    ("M3JDK21_STRING_POOL_FROZEN_DAG_OBSERVATION_V1", "HISTORICAL_TIP", "src/java.base/share/classes/java/lang/M3StringPool.java", "2442a6b242953f4ec8bd63d52ac48708d0383782", "514247a2e6c3704e03a9b47682f74e481f66585f", "f8bac45d1623d25470e1b79beffa276f271db10e297ef5b434d5335c9d4c908b", "58344", "IMMUTABLE_HISTORICAL_RECEIPT", "hsoliwal/M3jdk21", "e854e8596464557917ddd8809637d815420573b1", "m3/synexia-import/current-full-borrow/string-target-successors.tsv", "141806b3119342dfba2efe6487664ba3a0c53158", "com.synexia.rewrite.M3Jdk21StringConcatOverflowCurrentReceive", "NOT_ESTABLISHED", "PARTIAL", "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED", "NOT_ACCEPTED", "SOURCE_OBSERVATION_ONLY"),
+    ("M3JDK21_STRING_POOL_FROZEN_DAG_OBSERVATION_V1", "COMMON_BASE", "src/java.base/share/classes/java/lang/M3StringPool.java", "6ac3d5834844d444979ab1f7b8c85e68982759b7", "e5ab6c95526d9170fc88d9e3ac7c5040606a3367", "09916fd6c69828d5703113ed79e684245a4684a801b573ff2e4f7b973fa75185", "75963", "CANONICAL_MANIFEST_PREIMAGE_AND_OBSERVED_SOURCE", "hsoliwal/com.synexia", "42b5098718732964f711bd34908990cdba58b9ac", "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-leafpath-jni-shadow-20261021/manifest.tsv", "637763bfcacc797f3ca370b572ed05c0ed1c43a2", "com.synexia.m3.Jdk21StringLeafPathJni20261021", "NOT_ESTABLISHED", "PARTIAL", "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED", "NOT_ACCEPTED", "SOURCE_OBSERVATION_ONLY"),
+    ("M3JDK21_STRING_POOL_FROZEN_DAG_OBSERVATION_V1", "CANONICAL_LEAF_POSTIMAGE", "src/java.base/share/classes/java/lang/M3StringPool.java", "52d147a42877434a66f785866135f8b2184bd38c", "1e4b2deee939fdb2840ea3f059a763693f97d545", "8d328737e6f7c6f727f5c25b164bac3cdacad12a99f35a2531c907534b0ff5e0", "77501", "CANONICAL_RESOURCE_POSTIMAGE", "hsoliwal/com.synexia", "42b5098718732964f711bd34908990cdba58b9ac", "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-leafpath-jni-shadow-20261021/M3StringPool.java.txt", "1e4b2deee939fdb2840ea3f059a763693f97d545", "com.synexia.m3.Jdk21StringLeafPathJni20261021", "NOT_ESTABLISHED", "PARTIAL", "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED", "NOT_ACCEPTED", "SOURCE_OBSERVATION_ONLY"),
+    ("M3JDK21_STRING_POOL_FROZEN_DAG_OBSERVATION_V1", "CANONICAL_NATIVE_FORK", "src/java.base/share/classes/java/lang/M3StringPool.java", "33668cff903b7c417932f1b573d2f2974baeeca2", "7cbccf212f7271f299a0b794f4d38d8eff3e2dd8", "aa6470c1ea5f32f840cb1cd91f64c79c14b08b18e0e2a10553f1c59456f120b7", "76888", "CANONICAL_EXACT_EDIT_RULE_AND_OBSERVED_SOURCE", "hsoliwal/com.synexia", "42b5098718732964f711bd34908990cdba58b9ac", "synexia-openrewrite-recipes/recipe-crates/m3-os-interned-jni-concat-20261020/src/main/resources/m3-os-interned-jni/target_patches.json", "9d6dd4a210a885a4410c86b8dc9d4d2c9be758dd", "com.synexia.rewrite.m3jni.M3OsInternedConcatRecipe", "026c24c5c8e82135a85f0ebbb17940f6183217d8", "PARTIAL", "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED", "NOT_ACCEPTED", "SOURCE_OBSERVATION_ONLY"),
+    ("M3JDK21_STRING_POOL_FROZEN_DAG_OBSERVATION_V1", "OBSERVED_COMPONENT_INTEGRATION", "src/java.base/share/classes/java/lang/M3StringPool.java", "78814421aaa2ff8892ce5cbffa1cabf029fd3727", "394af2f062e9d99abf73e5a6f15df015a59b8072", "0b806777f319e48a6519dcac9162d76f37019888c698d8ef519f7a4d2fb7b197", "78426", "EXACT_TARGET_RECIPE_PREIMAGE_AND_SOURCE_COMPOSITION", "hsoliwal/M3jdk21", "e854e8596464557917ddd8809637d815420573b1", "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java", "a29b26e81cc9d06504b9bd13b58a066307330812", "com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipe", "a29b26e81cc9d06504b9bd13b58a066307330812", "PARTIAL", "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED", "NOT_ACCEPTED", "SOURCE_OBSERVATION_ONLY"),
+    ("M3JDK21_STRING_POOL_FROZEN_DAG_OBSERVATION_V1", "ALTERNATIVE_PREDECESSOR", "src/java.base/share/classes/java/lang/M3StringPool.java", "dc8b9a259ba57d950993e293ca20f33279c089f5", "15231ee5a2c48153550c700f98722e15c0f4451c", "4053ede4b66e066742dcc3c8cf4c4185452f1588d5ce6e6f1593fb3b2ccf9972", "71175", "EXACT_ALTERNATIVE_TARGET_RECIPE_PREDECESSOR", "hsoliwal/M3jdk21", "e854e8596464557917ddd8809637d815420573b1", "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java", "a29b26e81cc9d06504b9bd13b58a066307330812", "com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipe", "a29b26e81cc9d06504b9bd13b58a066307330812", "PARTIAL", "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED", "NOT_ACCEPTED", "SOURCE_OBSERVATION_ONLY"),
+    ("M3JDK21_STRING_POOL_FROZEN_DAG_OBSERVATION_V1", "TARGET_SPECIFIC_RECIPE_POSTIMAGE", "src/java.base/share/classes/java/lang/M3StringPool.java", "c76ddb4d5cf125f1a42b298bb57f10cc809b7190", "7c05d6ab0082eb26f39e4e6dc93c422237588cae", "1eaeaec2e526d11cad70a37b67f48df2fcdbe538e10e44079d7437bc889fd2dc", "74102", "JDK_TARGET_SPECIFIC_EXACT_RESOURCE_POSTIMAGE", "hsoliwal/M3jdk21", "e854e8596464557917ddd8809637d815420573b1", "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/m3string-leaf-cursor-20261021/M3StringPool.after.java.txt", "7c05d6ab0082eb26f39e4e6dc93c422237588cae", "com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipe", "a29b26e81cc9d06504b9bd13b58a066307330812", "PARTIAL", "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED", "NOT_ACCEPTED", "SOURCE_OBSERVATION_ONLY"),
+    ("M3JDK21_STRING_POOL_FROZEN_DAG_OBSERVATION_V1", "CURRENT_COMMENT_SUCCESSOR", "src/java.base/share/classes/java/lang/M3StringPool.java", "87b43da97583e30191781a9592a23fc92dd8a8fb", "0d47d7e969086262705460c153583f659237c894", "6d5840c1d44aef8bb1433e79b81c1261fe3f0f6dbc5dc3b44a2cfbafe4d2e138", "74100", "OBSERVED_EXACT_ONE_COMMENT_SUCCESSOR", "hsoliwal/M3jdk21", "e854e8596464557917ddd8809637d815420573b1", "src/java.base/share/classes/java/lang/M3StringPool.java", "0d47d7e969086262705460c153583f659237c894", "EXACT_COMMENT_OPERATION_OBSERVED", "NOT_ESTABLISHED", "PARTIAL", "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED", "NOT_ACCEPTED", "SOURCE_OBSERVATION_ONLY"),
+)
+
 PRECOMPUTE_OBSERVATION = Path(__file__).with_name("m3-string-precompute-observation-v2.tsv")
 PRECOMPUTE_OBSERVATION_HEADER = [
     "schema",
@@ -311,12 +327,28 @@ def facts_successor_observation(current: dict[str, str], rows: list[dict[str, st
     return observed
 
 
-def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
-    """Validate V1/String merge source receipts and ordered canonical Facts postimages.
+def pool_source_observation(current: dict[str, str], rows: list[dict[str, str]]) -> dict[str, str]:
+    """Validate a frozen Pool source DAG only; canonical history remains partial."""
+    if len(rows) != len(EXPECTED_POOL_SOURCE_OBSERVATION):
+        raise ValueError("Pool source observation inventory drift")
+    for index, (step, values) in enumerate(zip(rows, EXPECTED_POOL_SOURCE_OBSERVATION), start=1):
+        expected = dict(zip(POOL_SOURCE_OBSERVATION_HEADER, values))
+        if step != expected:
+            raise ValueError(f"unreviewed Pool source observation: {index}")
+    if current[M3_STRING_POOL_PATH] != rows[0]["git_blob"]:
+        raise ValueError("discontinuous Pool historical anchor")
+    observed = dict(current)
+    observed[M3_STRING_POOL_PATH] = rows[-1]["git_blob"]
+    return observed
 
-    The merge records observed source coordinates, not a proved serial transform.
-    Wrong source, wrong order, changed provenance, missing or extra rows fail closed.
-    Neither receipt is runtime, whole-image, JNI, JIT/GC or performance acceptance.
+
+def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
+    """Validate V1/String/Facts receipts and a separate frozen Pool source DAG.
+
+    Pool observations retain PARTIAL canonical history and its unresolved old gap.
+    Neither merge observation is a proved serial transform. Wrong source, order,
+    provenance, missing or extra rows fail closed. No runtime, whole-image, JNI,
+    JIT/GC or performance acceptance follows from these source coordinates.
     """
     historical = approved_successors(mapping_rows)
     current = {target: row["successor_git_blob"] for target, row in historical.items()}
@@ -340,8 +372,10 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
         current[M3_STRING_PATH] = after
     observed = merged_source_observation(
         current, load_tsv(MERGED_SOURCE_OBSERVATION, MERGED_SOURCE_OBSERVATION_HEADER))
-    return facts_successor_observation(
+    facts = facts_successor_observation(
         observed, load_tsv(FACTS_SUCCESSOR_CHAIN, FACTS_SUCCESSOR_CHAIN_HEADER))
+    return pool_source_observation(
+        facts, load_tsv(POOL_SOURCE_OBSERVATION, POOL_SOURCE_OBSERVATION_HEADER))
 
 
 
