@@ -40,11 +40,11 @@ jobs:
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee "$RUNNER_TEMP/old-proofs.log"
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee "$RUNNER_TEMP/successor-proofs.log"
           grep -F 'Ran 4 tests' "$RUNNER_TEMP/old-proofs.log"
-          grep -F 'Ran 11 tests' "$RUNNER_TEMP/successor-proofs.log"
+          grep -F 'Ran 17 tests' "$RUNNER_TEMP/successor-proofs.log"
           python3 m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py \
             --product . --historical-product historical-product \
             | tee "$RUNNER_TEMP/m3-76-source-epochs.log"
-          grep -F 'M3_FIVE_LIBRARY_SOURCE_SUPERSET_PASS original=36 revised=7 additive=40 total=76' \
+          grep -F 'M3_FIVE_LIBRARY_SOURCE_SUPERSET_PASS original=36 revised=8 additive=40 total=76' \
             "$RUNNER_TEMP/m3-76-source-epochs.log"
       - uses: actions/upload-artifact@v4
         if: always()
