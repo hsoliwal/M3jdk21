@@ -1,0 +1,18 @@
+Unified M3 collection runtime for original Guava public APIs
+Copyright 2026 Hitesh Soliwal and contributors
+License: Apache License, Version 2.0
+
+Contains original first-party M3HashMultiset and M3ArrayListMultimap bodies,
+copied byte-exact from hsoliwal/M3JDK21 owned sources. These implementations
+use dynamic Object[]/primitive arrays and owned hash index/mask methods rather
+than Guava implementation classes.
+
+Contains source-modified Guava 33.4.8-jre public interfaces
+com.google.common.collect.Multiset, Multimap and ListMultimap, with original
+Copyright (C) The Guava Authors, Apache License, Version 2.0 headers.
+Modified 2026 by Hitesh Soliwal and contributors (Synexia): compile-only
+JSpecify/GWT/ErrorProne annotations removed; default method Guava helpers
+replaced with Java21 equivalents while retaining public method descriptors.
+The renamed/conflicting original library is not shipped as runtime code.
+Authentic Guava binaries are Maven TEST scope ONLY for original differential
+tests. The complete Guava library is not included or re-licensed.
