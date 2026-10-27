@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 java.base mask source-built image and jtreg
+# Explicitly opt-in: expensive full OpenJDK/HotSpot build, never implied by a passing host-JDK patch.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  matched-image:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      M3_JOBS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install host compiler and jtreg prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            build-essential autoconf zip unzip jtreg \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+          java -version
+          jtreg -version
+      - name: Recheck sealed in-JDK owner and current java.util callers
+        shell: bash
+        run: bash m3/collections/qualification/java-base-mask-current-master-20261027/verify.sh
+      - name: Build full M3JDK21 fastdebug source image
+        shell: bash
+        run: |
+          set -euo pipefail
+          export M3_BOOT_JDK="$JAVA_HOME"
+          bash m3/build-openjdk.sh
+          mapfile -t images < <(find build -type f -path '*/images/jdk/bin/java' -print | sort)
+          if [[ "${#images[@]}" -ne 1 ]]; then
+            echo "REFUSAL expected exactly one product JDK image, got ${#images[@]}" >&2
+            exit 1
+          fi
+          "${images[0]}" -version
+          printf '%s\n' "${images[0]}" > m3/build/logs/matched-image-java-path.txt
+      - name: Run real product-image jtreg public and internal compaction tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          image=$(cat m3/build/logs/matched-image-java-path.txt)
+          test -x "$image" || { echo "No verified matched-image Java" >&2; exit 1; }
+          make test TEST="test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java"
+      - name: Publish reproducible build and jtreg evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3jdk21-java-base-mask-matched-image
+          path: |
+            m3/build/logs/native-configure.log
+            m3/build/logs/native-build.log
+            m3/build/logs/matched-image-java-path.txt
+            build/*/test-results/**
+          if-no-files-found: warn
+          retention-days: 14
