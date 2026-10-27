@@ -47,7 +47,7 @@ jobs:
           data = source.read_bytes()
           expected = receipt["postimage"]
           git_blob = hashlib.sha1(
-              b"blob " + str(len(data)).encode("ascii") + b"\\0" + data
+              b"blob " + str(len(data)).encode("ascii") + b"\0" + data
           ).hexdigest()
           if (hashlib.sha256(data).hexdigest() != expected["sha256"]
                   or git_blob != expected["git_blob_sha1"]
