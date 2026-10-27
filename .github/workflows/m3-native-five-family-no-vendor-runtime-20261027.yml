@@ -1,0 +1,61 @@
+name: M3 native five-family source-built zero vendor runtime gate
+on:
+  push:
+    branches: ['m3/native-five-family-no-vendor-runtime-20261027']
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java'
+      - 'm3/collections/qualification/no-vendor-runtime-20261027/**'
+      - '.github/workflows/m3-native-five-family-no-vendor-runtime-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  native-core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check exact Synexia postimage SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '139807457f448108fcc4e7b3f6f4971a177c32f02afaf7c0d14c4b83d08cdd09  m3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java' | sha256sum -c -
+          echo 'acf62705791cc5b8c41b19cd6ae5deba13100a0266ef5e9099552ac9977a00cc  m3/collections/src/test/java/com/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java' | sha256sum -c -
+      - name: Compile every actual native M3 core class under strict JDK21
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          find m3/collections/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/sources.txt"
+          test -s "$RUNNER_TEMP/sources.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/sources.txt"
+          jar --create --file "$RUNNER_TEMP/m3-native-core.jar" -C "$RUNNER_TEMP/classes" .
+          jdeps --print-module-deps "$RUNNER_TEMP/m3-native-core.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+      - name: Install internal M3 arrays from source (never donor binaries)
+        shell: bash
+        run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Execute exact-head JUnit runtime owner and dependency boundary tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3NativeFiveLibrarySdkNoVendorTest test
+      - name: Preserve real source-built proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-native-five-dep-free-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/jdeps.txt
+            m3/collections/target/surefire-reports/
