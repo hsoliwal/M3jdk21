@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 public enum M3LexiconFormat {
     /** M3StringPool mmap lexicon; sorted UTF-16LE records, SHA-256, at most 1 GiB. */
-    M3LEX001(0x4d334c4558303031L, ByteOrder.BIG_ENDIAN, 64, 8, 1, 2, "java.lang.M3StringPool.Lexicon"),
+    M3LEX001(0x4d334c4558303031L, ByteOrder.BIG_ENDIAN, 64, 8, 1, 3, "java.lang.M3StringPool.Lexicon"),
     /** SharedArrayPool crash-safe arena; CRC32C, UTF-16BE. */
     SYNARR01(0x53594e4152523031L, ByteOrder.BIG_ENDIAN, 64, 8, 1, 1, "java.lang.M3StringPool.Lexicon"),
     /** IndexWordRowsImage format 3, 128-byte rows. */
