@@ -374,7 +374,8 @@ public final class M3ASTIngress {
                 int units = (Integer) length.invoke(node);
                 int end = start < 0 ? -1 : Math.addExact(start, units);
                 int jdtFlags = (Integer) getFlags.invoke(node);
-                int flags = M3ASTIndex.SYNTAX_ONLY;
+                // Independently supplied JDT syntax nodes cannot seal a separately supplied M3File.
+                int flags = M3ASTIndex.SYNTAX_ONLY | M3ASTIndex.SOURCE_UNVERIFIED;
                 if (start >= 0) flags |= M3ASTIndex.EXACT_RANGE;
                 if ((jdtFlags & (recoveredBit | malformedBit)) != 0) flags |= M3ASTIndex.RECOVERED;
                 String kind = "JDT_" + node.getClass().getSimpleName();
