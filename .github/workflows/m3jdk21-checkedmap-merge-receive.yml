@@ -1,11 +1,12 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-name: Java21 JDK-8292955 CheckedMap result-only receiver trial
+name: Java21 JDK-8292955 CheckedMap result-only receiver
 on:
   pull_request:
     paths:
+      - 'src/java.base/share/classes/java/util/Collections.java'
       - 'test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java'
-      - '.github/workflows/m3jdk21-checkedmap-merge-receive-20261027.yml'
+      - '.github/workflows/m3jdk21-checkedmap-merge-receive.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,37 +27,38 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Source-seal exact public JDK21 preimage and test-only result
+      - name: Verify received Java21 production postimage and reconstruct predecessor
         run: |
           set -euo pipefail
-          test "$(git hash-object src/java.base/share/classes/java/util/Collections.java)" = "874a056d6d1c24f4fbc0f564ba564519c9db71e7"
+          test "$(git hash-object src/java.base/share/classes/java/util/Collections.java)" = "396fc39c98dfa277213c61b1c0cf5a7291e0558d"
           test "$(git hash-object test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java)" = "8d083b3104b860056ba38bd0fbc0496cbb93dbf0"
           python3 - <<'PY'
           import hashlib, os
           from pathlib import Path
-          origin=Path("src/java.base/share/classes/java/util/Collections.java").read_bytes()
+          received=Path("src/java.base/share/classes/java/util/Collections.java").read_bytes()
           test=Path("test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java").read_bytes()
-          if hashlib.sha256(origin).hexdigest() != "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba":
-              raise RuntimeError("original Java21 source drift")
+          if hashlib.sha256(received).hexdigest() != "a6425169f9395d7ee48dccbcf82b708018ac0a92f82d12825df7ec413f101c47":
+              raise RuntimeError("received product source changed from canonical Synexia recipe")
           if hashlib.sha256(test).hexdigest() != "009524fae549ec941bdc14bc1496a3e2ac097f865d233dce9a741d8b849b2940":
-              raise RuntimeError("canonical Synexia test payload changed")
+              raise RuntimeError("canonical jtreg source payload changed")
           old=(b"            Objects.requireNonNull(remappingFunction);\n"
                b"            return m.merge(key, value, (v1, v2) -> {")
           new=(b"            Objects.requireNonNull(remappingFunction);\n"
                b"            typeCheck(key, value);\n"
                b"            return m.merge(key, value, (v1, v2) -> {")
-          if origin.count(old) != 1:
-              raise RuntimeError("canonical CheckedMap.merge atom not unique")
+          if received.count(new) != 1 or received.count(old) != 0:
+              raise RuntimeError("canonical one-atom insertion missing or duplicated")
+          origin=received.replace(new,old)
+          if hashlib.sha256(origin).hexdigest() != "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba":
+              raise RuntimeError("one-atom reversal does not reconstruct exact Java21 predecessor")
           temp=Path(os.environ["RUNNER_TEMP"])/"jdk8292955"
-          for variant,data in (("before",origin),("after",origin.replace(old,new))):
+          for variant,data in (("before",origin),("after",received)):
               out=temp/variant/"src/java/util/Collections.java"
               out.parent.mkdir(parents=True,exist_ok=True)
               out.write_bytes(data)
-          successor=(temp/"after/src/java/util/Collections.java").read_bytes()
-          if hashlib.sha256(successor).hexdigest() != "a6425169f9395d7ee48dccbcf82b708018ac0a92f82d12825df7ec413f101c47":
-              raise RuntimeError("canonical one-atom postimage SHA256 mismatch")
-          print("PASS: source pre/post and GPLv2 jtreg test SHA256; exactly one Java21 validation atom")
+          print("PASS: exact produced Collections.java, inverse Java21 source, GPLv2 jtreg hashes")
           PY
+          test "$(git hash-object "$RUNNER_TEMP/jdk8292955/before/src/java/util/Collections.java")" = "874a056d6d1c24f4fbc0f564ba564519c9db71e7"
           test "$(git hash-object "$RUNNER_TEMP/jdk8292955/after/src/java/util/Collections.java")" = "396fc39c98dfa277213c61b1c0cf5a7291e0558d"
       - name: Compile both complete source versions of java.util.Collections under Java21
         run: |
