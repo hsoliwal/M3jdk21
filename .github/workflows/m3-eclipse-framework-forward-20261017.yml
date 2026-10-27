@@ -47,15 +47,23 @@ jobs:
           assert [row[0] for row in latest] == sorted(row[0] for row in latest)
           replacements = {row[0]:row for row in latest}
           originals = {row[0]:row for row in old}
+          # The historical recipe postimages stay sealed. Admit only this
+          # qualified test-fixture successor after the full-width flags API.
+          successor_tests = {
+              'm3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java': 'ca493e93c4a5c068948af0573563ca091b47e4455d9c7ef46a2dd9f3751d270c',
+              'm3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java': 'a363fa6cca4799cc9ff1866d7848f4a1b7e3d60b9c707fdb035b28a240d1b8ae',
+          }
+          for path, after_hash in successor_tests.items():
+              assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == after_hash, path
           for path, before, expected, template in old:
               assert hashlib.sha256((original/template).read_bytes()).hexdigest() == expected, template
-              if path not in replacements:
+              if path not in replacements and path not in successor_tests:
                   assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected, path
           delta = 'm3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java'
           assert originals[delta][2] == '3e499ab33152d8a79c3171ce96a20ae35968c8e573e1ac48b999ede35a7581ec'
           assert replacements[delta][1] == '94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c'
           identity = Path('m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java')
-          assert hashlib.sha256(identity.read_bytes()).hexdigest() == '2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781'
+          assert hashlib.sha256(identity.read_bytes()).hexdigest() == 'a363fa6cca4799cc9ff1866d7848f4a1b7e3d60b9c707fdb035b28a240d1b8ae'
           for path, before, after, template in latest:
               prior = current/template.replace('.after.txt','.before.txt')
               assert hashlib.sha256(prior.read_bytes()).hexdigest() == before, prior
