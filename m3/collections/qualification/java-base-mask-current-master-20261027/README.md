@@ -58,3 +58,17 @@ internal compactor and on the unmodified host's public collection behavior
 as a reference oracle. **They do not mean a matched M3JDK21 product-image
 jtreg run was performed**. The manually triggered full-image workflow is
 a declared acceptance gate, not completed evidence.
+
+## Matched-image CI diagnosis (2026-10-27)
+
+Workflow run 40517667807 completed its focused stock-JDK mask checks, then
+stopped at OpenJDK configure before building the product image. Missing
+Xrandr development headers caused an X11 prerequisites error. The runner
+also supplied jtreg 5.1, below this fork's declared 7.2 minimum.
+
+Commit 35880b6c3ac10d34592bee3f880202652c2a5156 adds libxrandr-dev
+and an independently versioned jtreg 7.3.1 installation and published
+checksum check. Replacement run 40521048052 was queued at last inspection.
+
+The existing host-JDK checks have passed; the full M3JDK21 source image,
+actual product-image jtreg, GC and performance work **have not**.
