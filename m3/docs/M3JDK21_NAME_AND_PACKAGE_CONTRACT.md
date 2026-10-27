@@ -145,3 +145,37 @@ product mutation from this queue until mapping updates, exact staging receipts
 and independent tests are reviewed. Source-first processing stays serial per
 file; different files may prepare candidates concurrently, and promoted
 results must be proven on the actual JDK image.
+
+
+## Installed-image API and internality jtreg guard
+
+`test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java` is an **owned
+JDK target-side test**, not a Synexia source transformer or an additional
+public `M3*` API. It checks 19 existing JDK public owners; protects
+package-private `java.lang.M3String`; and verifies that the public JVM
+visibility of `jdk.internal.mindex.M3Class` is not mistaken for an
+exported/opened `java.base` API.
+
+The test reads the **actual installed module descriptors** of `java.base`
+and `jdk.compiler`, refusing exported or opened internal M3 implementation
+packages (including qualified exports and modules opened with runtime flags).
+It also inspects the installed `java.base` class resource index and
+public/protected JDK generic signatures, rejecting M3/MIndex/MatIndex types
+or renamed implementation types from `jdk.internal.m3`,
+`jdk.internal.mindex`, `com.sun.tools.javac.m3` or `com.m3.*`.
+No M3 implementation class is initialized simply to inspect its identity.
+
+A portable GitHub Actions mechanism gate compiles this test using Java 21
+and runs one synthetic patched-module **positive** and two deliberately
+invalid **negative** fixtures. This does not qualify the fork image. The
+installed M3JDK21 JDK acceptance command is:
+
+```sh
+make run-test TEST=test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java
+```
+
+The data-only receipt is under
+`m3/docs/qualification/current-api-internality-20261027/RECEIVER_RECEIPT.json`.
+Until the source-built M3JDK21 image runs jtreg, mark that gate **NOT RUN**,
+irrespective of success on a stock JDK patched with stubs. Full
+serialization/JNI/GC/JMM and performance gates remain independent.
