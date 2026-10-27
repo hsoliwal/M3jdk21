@@ -1,0 +1,66 @@
+name: M3 Guava ListMultimap source-closed zero vendor runtime
+on:
+  push:
+    branches: ['m3/inline-guava-listmultimap-api-receiver-20261027']
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/guava-array-list-multimap/**'
+      - '.github/workflows/m3-inline-guava-listmultimap-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  strict-list-multimap-abi:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact source postimage SHA256 seals from Synexia
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '1cf974b8e73c72e0885872a0746e34e187bc020a7e19a4e5074e73ac05d4e973  m3/collections/implementations/guava-array-list-multimap/src/main/java/com/google/common/collect/Multiset.java' | sha256sum -c -
+          echo '833c4cac886b45f434b15f4772b483323f9335eda063f9e760f4074665899f5b  m3/collections/implementations/guava-array-list-multimap/src/main/java/com/google/common/collect/Multimap.java' | sha256sum -c -
+          echo '69d8583bf68cc06c0df761686956f7cca5fd9eb51e8cd5a85e52b84d92462014  m3/collections/implementations/guava-array-list-multimap/src/main/java/com/google/common/collect/ListMultimap.java' | sha256sum -c -
+          echo '9cdfc16e4cc45b4b03d0f09bb4b594649e5c11fc6049f9a421ac7325c9e35b8f  m3/collections/implementations/guava-array-list-multimap/src/test/java/com/m3/collections/guava/M3InlineGuavaListMultimapBoundaryTest.java' | sha256sum -c -
+      - name: Strict JDK21 compile real M3 list-multimap source without Guava runtime JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          find m3/collections/implementations/guava-array-list-multimap/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/api-sources.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/api-sources.txt"
+          jar --create --file "$RUNNER_TEMP/m3-list-multimap.jar" -C "$RUNNER_TEMP/classes" .
+          jdeps --print-module-deps "$RUNNER_TEMP/m3-list-multimap.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+      - name: Execute real Guava differential JUnit and M3 implementation coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/guava-array-list-multimap/pom.xml verify
+      - name: Assert Maven effective runtime has zero vendor dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/guava-array-list-multimap/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/runtime-tree.txt"
+          cat "$RUNNER_TEMP/runtime-tree.txt"
+          ! grep -E 'com.google.guava:guava|org.jspecify:|com.google.errorprone:|org.checkerframework:' "$RUNNER_TEMP/runtime-tree.txt"
+      - name: Save no-runtime contract tests and dependency evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-guava-list-no-runtime-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/jdeps.txt
+            ${{ runner.temp }}/runtime-tree.txt
+            m3/collections/implementations/guava-array-list-multimap/target/surefire-reports/
