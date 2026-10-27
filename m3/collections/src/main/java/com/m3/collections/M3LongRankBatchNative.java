@@ -1388,4 +1388,79 @@ public final class M3LongRankBatchNative {
     /** Existing m3rankbatch shared JNI library; no new native module. */
     private static native void kthPairDistancesInto0(long[] sorted, long[] ranks,
             int rankFrom, int length, long[] output, int outputFrom);
+
+    // LeetCode #167: two distinct sorted coordinates; no per-pair objects.
+    private static final int NATIVE_MIN_TWO_SUM_BATCH = 32;
+    private static final int NATIVE_MIN_TWO_SUM_OWNER = 64;
+    private static volatile boolean TWO_SUM_ABI_MISSING;
+
+    /** Zero-based flattened [left,right] pair indexes, or [-1,-1] when absent. */
+    static int[] pairSumIndices(long[] sorted, long[] targets) {
+        Objects.requireNonNull(targets, "targets");
+        int[] output = new int[Math.multiplyExact(targets.length, 2)];
+        pairSumIndicesInto(sorted, targets, 0, targets.length, output, 0, false);
+        return output;
+    }
+
+    /** Explicit native parity gate: an unavailable or older JNI ABI must fail. */
+    static int[] pairSumIndicesNativeRequired(long[] sorted, long[] targets) {
+        Objects.requireNonNull(targets, "targets");
+        int[] output = new int[Math.multiplyExact(targets.length, 2)];
+        pairSumIndicesInto(sorted, targets, 0, targets.length, output, 0, true);
+        return output;
+    }
+
+    /** Validates both windows entirely before any caller-owned output write. */
+    static void pairSumIndicesInto(long[] sorted, long[] targets, int targetFrom,
+            int length, int[] output, int outputFrom, boolean nativeRequired) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(targets, "targets");
+        Objects.requireNonNull(output, "output");
+        Objects.checkFromIndexSize(targetFrom, length, targets.length);
+        int slots = Math.multiplyExact(length, 2);
+        Objects.checkFromIndexSize(outputFrom, slots, output.length);
+        if (nativeRequired) {
+            if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch pair-sum JNI unavailable");
+            if (length != 0) pairSumIndicesInto0(sorted, targets, targetFrom,
+                    length, output, outputFrom);
+            return;
+        }
+        if (length == 0) return;
+        if (AVAILABLE && !TWO_SUM_ABI_MISSING
+                && length >= NATIVE_MIN_TWO_SUM_BATCH
+                && sorted.length >= NATIVE_MIN_TWO_SUM_OWNER) {
+            try {
+                pairSumIndicesInto0(sorted, targets, targetFrom,
+                        length, output, outputFrom);
+                return;
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                TWO_SUM_ABI_MISSING = true;
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            int left = 0, right = sorted.length - 1;
+            long target = targets[targetFrom + i];
+            while (left < right) {
+                int cmp = pairSumCompare(sorted[left], sorted[right], target);
+                if (cmp == 0) break;
+                if (cmp < 0) left++;
+                else right--;
+            }
+            int at = outputFrom + (i << 1);
+            output[at] = left < right ? left : -1;
+            output[at + 1] = left < right ? right : -1;
+        }
+    }
+
+    /** Mathematical signed-long sum comparison with no overflow or wraparound. */
+    private static int pairSumCompare(long a, long b, long target) {
+        if (b > 0 && a > Long.MAX_VALUE - b) return 1;
+        if (b < 0 && a < Long.MIN_VALUE - b) return -1;
+        return Long.compare(a + b, target);
+    }
+
+    /** Additive export in the existing libm3rankbatch; no JNI callback bridge. */
+    private static native void pairSumIndicesInto0(long[] sorted, long[] targets,
+            int targetFrom, int length, int[] output, int outputFrom);
+
 }

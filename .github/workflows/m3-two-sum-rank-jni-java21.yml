@@ -1,0 +1,97 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical: Synexia m3jdk21-two-sum-batch-20261027; product: original M3JDK21.
+name: M3JDK21 LeetCode 167 sorted two-sum Java 21 JNI
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-two-sum-rank-jni-java21.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchTest.java'
+      - 'm3/collections/qualification/two-sum-jni-20261027/**'
+
+permissions:
+  contents: read
+
+jobs:
+  original-java-and-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Bind exact original PR head and canonical Java/JNI postimages
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '8ba40d4b547f53bcf47ec0fb52eda6085a27efc9'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '77c6f8b98e39d9e22513a9c1cf5108cf82a0e866'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '2afe176456419c5d6f4a29d2bfa2ce8f24eed1c4'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchContract.java)" = '7e6cd5cdef950fda1067451181279510d02ba219'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchTest.java)" = 'e0a03fadb838eb6bc82f1175134fee445150eabe'
+      - name: Compile real M3 rank-owner Java 21 and oracle strictly
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-two-sum/classes"
+          javac --release 21 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-two-sum/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchContract.java
+      - name: Execute Java fallback with JNI unavailable
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xcheck:jni -cp "$RUNNER_TEMP/m3-two-sum/classes" \
+            com.m3.collections.M3SortedTwoSumBatchContract \
+            | tee "$RUNNER_TEMP/m3-two-sum/java-fallback.txt"
+          grep -Eq '^PASS M3_SORTED_TWO_SUM_BATCH checks=[0-9]+ native=false$' \
+            "$RUNNER_TEMP/m3-two-sum/java-fallback.txt"
+      - name: Compile original rank JNI owner using C17 and fatal UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -Wall -Wextra -Werror -O2 \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/m3-two-sum/libm3rankbatch.so"
+      - name: Execute native-required and automatic JNI normal/interpreter contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-two-sum" \
+            -cp "$RUNNER_TEMP/m3-two-sum/classes" \
+            com.m3.collections.M3SortedTwoSumBatchContract \
+            | tee "$RUNNER_TEMP/m3-two-sum/native-normal.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3-two-sum" \
+            -cp "$RUNNER_TEMP/m3-two-sum/classes" \
+            com.m3.collections.M3SortedTwoSumBatchContract \
+            | tee "$RUNNER_TEMP/m3-two-sum/native-interpreter.txt"
+          grep -Eq '^PASS M3_SORTED_TWO_SUM_BATCH checks=[0-9]+ native=true$' \
+            "$RUNNER_TEMP/m3-two-sum/native-normal.txt"
+          cmp "$RUNNER_TEMP/m3-two-sum/native-normal.txt" \
+              "$RUNNER_TEMP/m3-two-sum/native-interpreter.txt"
+      - name: Preserve exact-source standalone parity receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-two-sum-167-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-two-sum/*.txt
+          if-no-files-found: warn
+          retention-days: 14

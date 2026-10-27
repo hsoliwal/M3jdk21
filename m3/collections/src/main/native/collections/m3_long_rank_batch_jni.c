@@ -1809,3 +1809,66 @@ Java_com_m3_collections_M3LongRankBatchNative_kthPairDistancesInto0(
         done += chunk;
     }
 }
+
+/* LeetCode #167 two-pointer sorted two-sum over signed long coordinates.
+ * Reuse existing 2 x 256-long JNI array-region pages: no full-array copy,
+ * critical pin, per-element object, VM pointer retention or callback bridge.
+ * Query/output windows validated before any output write. */
+static int m3_pair_sum_compare(jlong left, jlong right, jlong target) {
+    if (right > 0 && left > INT64_MAX - right) return 1;
+    if (right < 0 && left < INT64_MIN - right) return -1;
+    jlong sum = left + right;
+    return (sum > target) - (sum < target);
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_pairSumIndicesInto0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray targets,
+        jint target_from, jint length, jintArray output, jint output_from) {
+    (void) ignored;
+    if (sorted == NULL || targets == NULL || output == NULL) {
+        m3_pair_distance_throw(env, "java/lang/NullPointerException", "null pair-sum input");
+        return;
+    }
+    jsize size = (*env)->GetArrayLength(env, sorted);
+    jsize queries = (*env)->GetArrayLength(env, targets);
+    jsize capacity = (*env)->GetArrayLength(env, output);
+    if (target_from < 0 || length < 0 || output_from < 0
+            || length > queries || target_from > queries - length
+            || output_from > capacity || length > (capacity - output_from) / 2) {
+        m3_pair_distance_throw(env, "java/lang/IndexOutOfBoundsException",
+                "pair-sum query/output window outside array");
+        return;
+    }
+    if (length == 0) return;
+
+    m3_pair_distance_page left_page = {{0}, -1, 0};
+    m3_pair_distance_page right_page = {{0}, -1, 0};
+    jlong requests[128];
+    jint answers[256];
+    for (jint done = 0; done < length;) {
+        jint amount = length - done;
+        if (amount > 128) amount = 128;
+        (*env)->GetLongArrayRegion(env, targets, target_from + done, amount, requests);
+        if ((*env)->ExceptionCheck(env)) return;
+        for (jint i = 0; i < amount; i++) {
+            jsize lo = 0;
+            jsize hi = size - 1;
+            while (lo < hi) {
+                jlong a, b;
+                if (!m3_pair_distance_read(env, sorted, size, lo, &left_page, &a)
+                        || !m3_pair_distance_read(env, sorted, size, hi, &right_page, &b)) return;
+                int cmp = m3_pair_sum_compare(a, b, requests[i]);
+                if (cmp == 0) break;
+                if (cmp < 0) ++lo;
+                else --hi;
+            }
+            answers[2 * i] = lo < hi ? lo : -1;
+            answers[2 * i + 1] = lo < hi ? hi : -1;
+        }
+        (*env)->SetIntArrayRegion(env, output, output_from + 2 * done,
+                                  2 * amount, answers);
+        if ((*env)->ExceptionCheck(env)) return;
+        done += amount;
+    }
+}

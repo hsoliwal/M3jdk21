@@ -524,6 +524,24 @@ public final class M3LongRankIndex {
                 values, queries, queryFrom, length, k, output, outputFrom, false);
     }
 
+
+    /**
+     * LeetCode #167: sorted two-pointer pair search for many target sums.
+     * Returns zero-based flattened [left,right] physical-index pairs, or
+     * [-1,-1] when absent. Distinct occurrences are required even for ties.
+     * No entry objects, JNI callbacks, or unsafe signed-long addition.
+     */
+    public int[] pairSumIndices(long[] targets) {
+        return M3LongRankBatchNative.pairSumIndices(values, targets);
+    }
+
+    /** Writes the pair coordinates into caller-owned int slots, with full validation. */
+    public void pairSumIndicesInto(long[] targets, int targetFrom, int length,
+            int[] output, int outputFrom) {
+        M3LongRankBatchNative.pairSumIndicesInto(
+                values, targets, targetFrom, length, output, outputFrom, false);
+    }
+
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
     public LongStream longStream() {
         Spliterator.OfLong spliterator = Spliterators.spliterator(
