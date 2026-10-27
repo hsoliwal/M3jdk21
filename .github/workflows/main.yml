@@ -356,7 +356,7 @@ jobs:
       - test-windows-x64
 
     steps:
-      - name: 'Remove only this run's bundle artifacts'
+      - name: 'Remove only this run''s bundle artifacts'
         uses: actions/github-script@v6
         with:
           script: |
