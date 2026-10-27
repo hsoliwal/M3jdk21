@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,6 +48,37 @@ public final class M3File extends SimpleJavaFileObject {
         }
         String source = charset.newDecoder().decode(java.nio.ByteBuffer.wrap(bytes)).toString();
         return new M3File(path.toAbsolutePath().normalize().toUri(), source, sha256(bytes));
+    }
+
+    /**
+     * Admit bytes already captured by the original M3File provider into this javac source.
+     *
+     * <p>No filesystem access occurs here. The remaining bytes of {@code captured} are
+     * defensively copied once, so a later change to the caller's buffer cannot change the
+     * decoded compiler input. The claimed provider digest is checked against those same
+     * bytes before decoding, while sourceSha256() continues to identify the exact UTF-16
+     * characters. This verifies the supplied capture, not an atomic filesystem snapshot.
+     * Only this one content generation may be supplied to the corresponding compiler task.</p>
+     *
+     * @throws IOException if the byte limit, declared digest or strict decoding fails
+     */
+    public static M3File fromCaptured(URI uri, ByteBuffer captured, String expectedByteSha256,
+            Charset charset, int maxBytes) throws IOException {
+        Objects.requireNonNull(uri, "uri");
+        Objects.requireNonNull(captured, "captured");
+        Objects.requireNonNull(charset, "charset");
+        M3FileSourceFacts.requireSha256(expectedByteSha256, "expectedByteSha256");
+        if (maxBytes < 0) throw new IllegalArgumentException("negative source limit");
+        int length = captured.remaining();
+        if (length > maxBytes) throw new IOException("source exceeds byte budget");
+        byte[] bytes = new byte[length];
+        captured.duplicate().get(bytes);
+        String actual = sha256(bytes);
+        if (!actual.equals(expectedByteSha256)) {
+            throw new IOException("captured source byte digest mismatch");
+        }
+        String text = charset.newDecoder().decode(ByteBuffer.wrap(bytes)).toString();
+        return new M3File(uri, text, actual);
     }
 
     @Override public String getCharContent(boolean ignoreEncodingErrors) { return source; }
