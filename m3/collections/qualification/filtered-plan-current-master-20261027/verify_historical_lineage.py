@@ -16,6 +16,19 @@ ROOT = pathlib.Path(__file__).resolve().parents[4]
 MANIFEST = ROOT / "m3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST.tsv"
 
 
+SEALED_MANIFEST_BLOB = "4ca33e23eabc23764f7e43f30cba9b753cbd0b1f"
+
+
+def verify_manifest_identity() -> None:
+    if MANIFEST.is_symlink() or not MANIFEST.is_file():
+        raise ValueError("missing or symbolic historical manifest")
+    actual = subprocess.check_output(
+        ["git", "-C", str(ROOT), "hash-object", str(MANIFEST)], text=True
+    ).strip()
+    if actual != SEALED_MANIFEST_BLOB:
+        raise ValueError(f"historical manifest changed: {actual}")
+
+
 def git_blob(sha: str) -> bytes:
     if len(sha) != 40 or any(c not in "0123456789abcdef" for c in sha):
         raise ValueError("invalid Git object id")
@@ -28,6 +41,7 @@ def git_blob(sha: str) -> bytes:
 
 
 def main() -> int:
+    verify_manifest_identity()
     records = []
     with MANIFEST.open(newline="", encoding="utf-8") as source:
         for row in csv.reader(source, delimiter="\t"):
