@@ -201,6 +201,35 @@ public final class M3IndexedArray<E> {
                 requiredMask, forbiddenMask, true);
     }
 
+    /**
+     * Live fused predicate + state-mask view. The existing selector evaluates
+     * state bits and the predicate in one logical-order pass and stores only
+     * the selected primitive slot indexes. No intermediate collection or
+     * duplicate payload array is materialized.
+     */
+    public List<E> filteredMaskedStates(Predicate<? super E> predicate,
+                                        int requiredMask, int forbiddenMask) {
+        Objects.requireNonNull(predicate, "predicate");
+        checkMasks(requiredMask, forbiddenMask);
+        return new M3IndexedView<>(this, predicate, null,
+                requiredMask, forbiddenMask, true);
+    }
+
+    /**
+     * Live fused predicate + state-mask + stable-sort view. Selection is one
+     * pass over the original array/mask owner; stable ordering is then applied
+     * only to the primitive selected-slot directory.
+     */
+    public List<E> filteredMaskedSortedStates(Predicate<? super E> predicate,
+                                              int requiredMask, int forbiddenMask,
+                                              Comparator<? super E> comparator) {
+        Objects.requireNonNull(predicate, "predicate");
+        Objects.requireNonNull(comparator, "comparator");
+        checkMasks(requiredMask, forbiddenMask);
+        return new M3IndexedView<>(this, predicate, comparator,
+                requiredMask, forbiddenMask, true);
+    }
+
     private static void checkMasks(int requiredMask, int forbiddenMask) {
         if ((requiredMask & forbiddenMask) != 0) {
             throw new IllegalArgumentException("overlapping required/forbidden M3 state bits");
