@@ -1,0 +1,27 @@
+{
+  "status": "GENERATED_MAVEN4_OUTPUTS_APPLIED",
+  "steps": [
+    {
+      "name": "preflight",
+      "files": 7,
+      "writes": 7,
+      "exit": 0
+    },
+    {
+      "name": "apply",
+      "files": 7,
+      "writes": 7,
+      "exit": 0
+    },
+    {
+      "name": "replay",
+      "files": 7,
+      "writes": 0,
+      "exit": 0
+    }
+  ],
+  "source_seals_sha256": "fb401eeb0467c16ffa4d95d8de2a6c539775f096db81a7a7ac4fc717ad6e74b9",
+  "sdk_receipt_sha256": "beca41e77882f29e9d389cbc858ea1b86358ea754395686bbb1697c0a7c5e794",
+  "core_target_commit": "e7c2f67a2e0ea7729ff56feff217d6e15206e84a",
+  "canonical_owner": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021"
+}

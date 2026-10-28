@@ -1,0 +1,1 @@
+{"status": "PASS", "attempt": "sdk-001-offline", "counts": {"tests": 1, "failures": 0, "errors": 0, "skipped": 0}, "duration_seconds": "13.094", "receipt": "/tmp/m3-nlp-current-owner-sdk-001/canonical/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/sdk-001-offline/RESULT.json"}

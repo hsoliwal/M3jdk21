@@ -1,0 +1,54 @@
+{
+  "schema": "SWT_EXISTING_TEST_DISCOVERY_REVIEW/1",
+  "revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "source_read_only": true,
+  "current_default_test": "AllTests",
+  "owning_pom_sha256": "2899464097d8f2163df217f1b56454acad07b6f932b9274b0aab4618f39d9c04",
+  "selector_files": [
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllTests.java",
+      "sha256": "3156425c594d20c299f7f43ed13e0c092f6c5209997f31e128107545fc267ffd",
+      "explicit_Selection": true,
+      "geometry_fixtures_selected": false
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllNonBrowserTests.java",
+      "sha256": "822e13cbf45fa8f58c3b51f514bb9a2197b50724004fc3ac37d8795107c261f2",
+      "explicit_Selection": true,
+      "geometry_fixtures_selected": false
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllWidgetTests.java",
+      "sha256": "7d5d332d1ba3bb34ef840eacca3c710e434a0cf0396a91ebe5a73fac720b235c",
+      "explicit_Selection": true,
+      "geometry_fixtures_selected": false
+    }
+  ],
+  "existing_geometry_fixture": {
+    "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_ViewportScrollBarGeometry.java",
+    "sha256": "83501fc504d65ee63f1dcfec59c34a496433d8c107a9e4fb0870ef34bd6aa000",
+    "junit_test_annotations": 6,
+    "dependency": "Imports actual SWT GeometryDifferential reflection helper; helper also references native Display/Shell/Canvas. No stand-in is admitted."
+  },
+  "stronger_separate_frozen_corpus": [
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_ViewportScrollBarFullRange.java",
+      "sha256": "f223434f090cab2a10c4552d948918a48f6d6e0b6bf366986bc58414f8638c0f",
+      "disposition": "Qualified in separate canonical SWT14test packet; not currently installed or selected by this task"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/ScrollBarFullRangeOracle.java",
+      "sha256": "9ec04f2d7c857f42bbee080e940f40ae7b9fb73f9afb6f5bea4274b117050727",
+      "disposition": "Qualified in separate canonical SWT14test packet; not currently installed or selected by this task"
+    }
+  ],
+  "minimal_successor_outline": [
+    "Pin current geometry unchanged; do not replace the widened final endpoint with the distinct older template.",
+    "Receive the2alreadyqualified additional test files with exact absent-before admission and original notices.",
+    "Use existing org.eclipse.swt.tests Maven test selection to name actual geometry test classes explicitly, or a separately attributed AllTests selector addition; preserve default selectors and existing tests.",
+    "Extend only an existing path-scoped workflow with test-path triggers and owning test execution; no new workflow or native-gate bypass.",
+    "Run actual SWT test compile/owning dependencies; report native/platform gates independently."
+  ],
+  "implemented_by_this_task": false,
+  "boundary": "The7test scrollbar SDK and arithmetic verifier are real separate authorities; this omission does not erase their bounded evidence or qualify the broader SWT suite."
+}

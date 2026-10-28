@@ -1,0 +1,7 @@
+{
+  "schema": "M3_HISTORICAL_SOURCE_CUSTODY/1",
+  "status": "UNKNOWN",
+  "source_versions": [],
+  "known": "Retained failure logs identify setup and syntax errors; exact failed fixture bytes/complete argv were not retained.",
+  "prohibited_inference": "This manifest deliberately supplies no invented before-source hashes. Later qualified sources and logs have independent exact pins."
+}

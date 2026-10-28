@@ -1,0 +1,40 @@
+--- qualified-sdk003/qualify.py
++++ maven4-packet/qualify.py
+@@ -4,7 +4,8 @@
+ """Run and retain this finite task's actual Maven/OpenRewrite qualification.
+ 
+ The existing recipe owners and JUnit harness perform every transformation and
+-refusal check. This wrapper captures a fresh bounded attempt, exact input and
++refusal check. Adapted from qualified integrated SDK003 for this distinct Maven4 packet.
++This wrapper captures a fresh bounded attempt, exact input and
+ compiled-dependency identities, reports, and emitted bytes. It neither modifies
+ the receiving product nor grants runtime admission.
+ """
+@@ -153,16 +154,14 @@
+         tree = ET.parse(report).getroot()
+         suites.append({key: tree.attrib.get(key, '') for key in
+                        ('name', 'tests', 'failures', 'errors', 'skipped', 'time')})
+-    expected_suites = {
+-        'com.synexia.rewrite.M3IntegratedRefinementRecipeTest',
+-        'com.synexia.rewrite.memory.M3CorrectionMemoryConformanceTest'}
++    expected_suites = {'com.synexia.rewrite.M3Maven4EffectiveRecipeTest'}
+     counts = {key: sum(int(suite[key]) for suite in suites) for key in
+               ('tests', 'failures', 'errors', 'skipped')}
+     proof_status = crate / 'target/proof-status.tsv'
+     source_pass = proof_status.is_file() and proof_status.read_text().splitlines()[-1].startswith('PASS\t')
+     passed = (exit_code == 0 and before == after and dependencies == dependencies_after
+               and {suite['name'] for suite in suites} == expected_suites
+-              and counts == {'tests': 2, 'failures': 0, 'errors': 0, 'skipped': 0} and source_pass)
++              and counts == {'tests': 1, 'failures': 0, 'errors': 0, 'skipped': 0} and source_pass)
+     for name in ('recipe-proof.tsv', 'proof-status.tsv', 'named-recipe.yml'):
+         path = crate / 'target' / name
+         if path.is_file():
+@@ -171,7 +170,7 @@
+         path = crate / 'target' / name
+         if passed and path.is_dir():
+             shutil.copytree(path, out / name)
+-    receipt = {'schema': 'M3_INTEGRATED_RECOVERY_SDK_ATTEMPT/1', 'task': TASK,
++    receipt = {'schema': 'M3_MAVEN4_EFFECTIVE_SDK_ATTEMPT/1', 'task': TASK,
+                'status': 'PASS' if passed else 'FAIL', 'scope': 'source-replay-only',
+                'dependency_lane': 'online-artifact-bootstrap' if args.online_bootstrap else 'offline-cached-artifacts',
+                'full_source_vendored_reactor': 'NOT_RUN', 'receiving_runtime_gates': 'SEPARATE',

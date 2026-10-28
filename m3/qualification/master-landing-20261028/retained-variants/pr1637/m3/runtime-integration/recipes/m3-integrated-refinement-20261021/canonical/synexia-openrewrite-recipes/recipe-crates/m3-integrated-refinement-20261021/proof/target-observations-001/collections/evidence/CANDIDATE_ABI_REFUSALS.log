@@ -1,0 +1,13 @@
+test_compactor_only_library_refuses_missing_window_symbols (test_native_abi.NativeAbiRefusalTest.test_compactor_only_library_refuses_missing_window_symbols) ... ok
+test_duplicate_export_refuses (test_native_abi.NativeAbiRefusalTest.test_duplicate_export_refuses) ... ok
+test_existing_owners_and_exact_named_library_union (test_native_abi.NativeAbiRefusalTest.test_existing_owners_and_exact_named_library_union) ... ok
+test_generated_header_names_and_duplicate_refusal (test_native_abi.NativeAbiRefusalTest.test_generated_header_names_and_duplicate_refusal) ... ok
+test_legacy_one_symbol_expectation_refuses_current_compactor (test_native_abi.NativeAbiRefusalTest.test_legacy_one_symbol_expectation_refuses_current_compactor) ... ok
+test_nm_parser_retains_every_java_symbol_for_exact_check (test_native_abi.NativeAbiRefusalTest.test_nm_parser_retains_every_java_symbol_for_exact_check) ... ok
+test_same_count_unknown_export_cannot_replace_required_symbol (test_native_abi.NativeAbiRefusalTest.test_same_count_unknown_export_cannot_replace_required_symbol) ... ok
+test_wrong_owner_header_refuses_even_with_same_arity (test_native_abi.NativeAbiRefusalTest.test_wrong_owner_header_refuses_even_with_same_arity) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK

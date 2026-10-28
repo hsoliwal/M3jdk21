@@ -1,0 +1,196 @@
+{
+  "schema": "SWT_CURRENT_OWNER_RUNTIME_CLOSURE_SDK_ATTEMPT/1",
+  "task": "swt-current-owner-runtime-closure-20261021",
+  "status": "PASS",
+  "scope": "source-replay-only",
+  "dependency_lane": "offline-cached-artifacts",
+  "full_source_vendored_reactor": "NOT_RUN",
+  "receiving_runtime_gates": "SEPARATE",
+  "started_at": "2026-10-21T02:25:26.386069+00:00",
+  "duration_seconds": "6.143",
+  "exit_code": 0,
+  "timed_out": false,
+  "command": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-f",
+    "/tmp/m3-swt-current-owner-sdk-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/pom.xml",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-Dparser.classpath=/tmp/m3-swt-current-owner-attribution-001/classes",
+    "-o",
+    "test"
+  ],
+  "cwd": "/tmp/m3-swt-current-owner-sdk-001/canonical",
+  "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+  "source_inputs_unchanged": true,
+  "compiled_parser_dependencies_unchanged": true,
+  "suites": [
+    {
+      "name": "com.synexia.rewrite.M3SwtCurrentOwnerRuntimeClosureRecipeTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.989"
+    }
+  ],
+  "counts": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "artifacts": [
+    {
+      "path": "PARSER_DEPENDENCIES.json",
+      "sha256": "53cc1ec15a53d4d88ed6a4eb56f1946b8df0ccedbc6414e3c82d2266361dc68f",
+      "bytes": 331
+    },
+    {
+      "path": "PARSER_DEPENDENCIES_AFTER.json",
+      "sha256": "53cc1ec15a53d4d88ed6a4eb56f1946b8df0ccedbc6414e3c82d2266361dc68f",
+      "bytes": 331
+    },
+    {
+      "path": "SOURCE_INPUTS.json",
+      "sha256": "d454a99f5cf874e1d16e6d5eb49366b567129a5a6f7ab791cab3572dacdb20eb",
+      "bytes": 4274
+    },
+    {
+      "path": "SOURCE_INPUTS_AFTER.json",
+      "sha256": "d454a99f5cf874e1d16e6d5eb49366b567129a5a6f7ab791cab3572dacdb20eb",
+      "bytes": 4274
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/SOURCE_SEALS.json",
+      "sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0",
+      "bytes": 1064
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+      "sha256": "0a89bc61f308ab29ea491c8c3a2f9e3c821d3fdda3e0c7ecb9105d2baba8d867",
+      "bytes": 7436
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/attribution/DependencyCustody.java",
+      "sha256": "010233a61746bb7311216b378c96b14e327902149ee7e4725cf5d5bd24ad25ab",
+      "bytes": 345
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/attribution/expected-methods.txt",
+      "sha256": "4ca96d45227d4d283512092b16d54d4b1ebfb39bd7e69a5a69aa967e3868af9e",
+      "bytes": 62
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/phases.tsv",
+      "sha256": "ca905a54589f5efc1a77d7a6268a46ecee56a9a29d8d4df418a8b6a47f2094e5",
+      "bytes": 60
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/pom.xml",
+      "sha256": "d6011102f2ef8bf496f78cec93ea07c576f7ada161c89ac3f01d89833ae859e8",
+      "bytes": 4048
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/preimages/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+      "sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0",
+      "bytes": 2179
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/prepare_packet.py",
+      "sha256": "dd14412c0c7895ae9a7aaedd49ddd2a317ec6dc7fc97c24df4fa1dd99e4a3d90",
+      "bytes": 7062
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py",
+      "sha256": "83ad2b462c00341c609b0ff4324aba3cfb1cb0a4d46702982524e52332187408",
+      "bytes": 9726
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/com/synexia/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
+      "sha256": "bbb57bf96f106e3fa390fd2f2a4067a0b92fd3ab5cb166a305bb43cf4d4c8a7d",
+      "bytes": 31658
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
+      "sha256": "224178459a27f5aeab21cb748a69bc400902230c6b1552a2a735cfe9a0993057",
+      "bytes": 2425
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+      "bytes": 31505
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+      "bytes": 19983
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+      "bytes": 8268
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/swt-current-owner-runtime-closure-20261021.yml",
+      "sha256": "9e4465558960f0c4c623dd55a45f27e6179451460e581616acf435bc7c4e6cdf",
+      "bytes": 485
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/manifest.tsv",
+      "sha256": "39a511dc8f39daa112754e7850db43f451b63b95c072649362f34b1a91a03264",
+      "bytes": 232
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/postimage.txt",
+      "sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+      "bytes": 2296
+    },
+    {
+      "path": "maven.log",
+      "sha256": "2f5c4156b37f51ab103d03a408d50ada59440ff63dfb2481ffb68ec3214cec93",
+      "bytes": 2487
+    },
+    {
+      "path": "named-recipe.yml",
+      "sha256": "9e4465558960f0c4c623dd55a45f27e6179451460e581616acf435bc7c4e6cdf",
+      "bytes": 485
+    },
+    {
+      "path": "phase-receipts/swt-current-owner-runtime-closure-20261021-001.tsv",
+      "sha256": "028be2de13b06587c66b70d326e871880f353bf1163a0b3bbd5b1eef285c3331",
+      "bytes": 448
+    },
+    {
+      "path": "proof-status.tsv",
+      "sha256": "66922ed10caa33e71563a3265ecc384d9900b76de5cbec52dec9d9431cabca4d",
+      "bytes": 90
+    },
+    {
+      "path": "receiver/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+      "sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+      "bytes": 2296
+    },
+    {
+      "path": "recipe-proof.tsv",
+      "sha256": "9da0b557e841e5b67e440b666b8ca8704ffdae4be0c49450563b056408d29e6f",
+      "bytes": 1412
+    },
+    {
+      "path": "surefire-reports/TEST-com.synexia.rewrite.M3SwtCurrentOwnerRuntimeClosureRecipeTest.xml",
+      "sha256": "3f4ef7b1a7edc6d305b49f7a46c7369ca6df33d7f89e3321ef0e3836dee12d46",
+      "bytes": 12676
+    },
+    {
+      "path": "surefire-reports/com.synexia.rewrite.M3SwtCurrentOwnerRuntimeClosureRecipeTest.txt",
+      "sha256": "500967965dfb3c576ca0d7db47b046cfeab26ce6ca6d4c7a33829f05f71cf4d7",
+      "bytes": 372
+    }
+  ]
+}

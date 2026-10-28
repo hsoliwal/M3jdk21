@@ -1,0 +1,28 @@
+{
+  "schema": "M3_NLP_GENERATED_RECEIVER_APPLICATION/1",
+  "status": "GENERATED_NLP_OUTPUTS_APPLIED",
+  "steps": [
+    {
+      "name": "preflight",
+      "files": 2,
+      "writes": 2,
+      "exit": 0
+    },
+    {
+      "name": "apply",
+      "files": 2,
+      "writes": 2,
+      "exit": 0
+    },
+    {
+      "name": "replay",
+      "files": 2,
+      "writes": 0,
+      "exit": 0
+    }
+  ],
+  "source_seals_sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e",
+  "sdk_receipt_sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187",
+  "receiving_base": "8818997cf6c641b6343b18c1f6c103045b167f30",
+  "canonical_owner": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021"
+}

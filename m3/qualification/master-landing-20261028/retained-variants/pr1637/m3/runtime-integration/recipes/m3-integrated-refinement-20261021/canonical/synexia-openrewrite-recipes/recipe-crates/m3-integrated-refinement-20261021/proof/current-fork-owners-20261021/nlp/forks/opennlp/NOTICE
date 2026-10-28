@@ -1,0 +1,178 @@
+Apache OpenNLP
+Copyright 2021-2026 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+============================================================================
+
+The snowball stemmers in
+opennlp-tools/src/main/java/opennlp/tools/stemmer/snowball
+were developed by Martin Porter and Richard Boulton.
+The full snowball package is available from
+http://snowball.tartarus.org/
+
+============================================================================
+
+The bundled stopword lists in
+opennlp-core/opennlp-runtime/src/main/resources/opennlp/tools/stopword
+are derived from Apache Lucene
+(https://github.com/apache/lucene/tree/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis),
+which in turn distributes them under the BSD license from the Snowball project
+(https://snowballstem.org/license.html). The Bulgarian list (bg.txt) is the
+Lucene per-language Bulgarian stopwords file originally created by Jacques
+Savoy (http://members.unine.ch/jacques.savoy/clef/index.html) and also
+distributed under the BSD license. The original upstream license and
+attribution headers are preserved verbatim at the top of each bundled file.
+
+============================================================================
+
+The Wordpiece tokenizer in opennlp-tools/main/java/opennlp/tools/tokenize
+is taken from https://github.com/robrua/easy-bert licensed under
+
+The MIT License (MIT)
+
+Copyright (c) 2019 Rob Rua
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+============================================================================
+
+The SVM-based document categorizer in opennlp-ml-libsvm uses zlibsvm
+(https://github.com/rzo1/zlibsvm), an object-oriented Java binding for
+LIBSVM (https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
+
+zlibsvm is licensed under the Apache License, Version 2.0.
+LIBSVM is licensed under the BSD 3-Clause License.
+
+Copyright (c) 2000-2023 Chih-Chung Chang and Chih-Jen Lin
+
+============================================================================
+
+The spell checker in opennlp-extensions/opennlp-spellcheck is a Java
+re-implementation (port) of the Symmetric Delete spelling correction
+algorithm (SymSpell) by Wolf Garbe, taken from
+https://github.com/wolfgarbe/SymSpell licensed under
+
+MIT License
+
+Copyright (c) 2018 Wolf Garbe
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+============================================================================
+
+This product bundles Unicode Character Database (UCD), Unicode Security
+Mechanisms and Unicode Emoji data in the versions listed below, published
+by Unicode, Inc. (https://www.unicode.org/Public/).
+
+  * opennlp-core/opennlp-runtime/src/main/resources/opennlp/tools/tokenize/uax29/WordBreakProperty.txt
+    is the upstream WordBreakProperty-17.0.0.txt, unmodified except for the
+    file name.
+  * opennlp-core/opennlp-runtime/src/test/resources/opennlp/tools/tokenize/uax29/WordBreakTest.txt
+    is the upstream WordBreakTest-17.0.0.txt, unmodified except for the file
+    name.
+  * opennlp-core/opennlp-runtime/src/main/resources/opennlp/tools/util/normalizer/confusables.txt
+    is the upstream confusables.txt from the Unicode Security Mechanisms
+    (UTS #39), unmodified.
+  * opennlp-core/opennlp-runtime/src/main/resources/opennlp/tools/util/normalizer/CaseFolding.txt
+    is the upstream CaseFolding.txt (version 17.0.0) from the Unicode Character
+    Database (UCD), unmodified.
+  * opennlp-core/opennlp-runtime/src/main/resources/opennlp/tools/tokenize/uax29/ExtendedPictographic.txt
+    is derived from the upstream emoji-data.txt (Emoji Data for UTS #51,
+    version 17.0): it keeps only the lines that assign the
+    Extended_Pictographic property and is renamed accordingly. It is a
+    filtered subset; the upstream file additionally carries the Emoji,
+    Emoji_Presentation, Emoji_Modifier, Emoji_Modifier_Base, and
+    Emoji_Component properties, which are not retained.
+  * opennlp-core/opennlp-runtime/src/main/resources/opennlp/tools/util/normalizer/EmojiSequences.txt
+    is a generated inventory of fully-qualified and minimally-qualified emoji
+    sequences from emoji-test.txt and Emoji_Component ranges from
+    emoji-data.txt, both Unicode Emoji version 17.0.
+
+The original Unicode copyright and license header is preserved verbatim at the
+top of each copied or filtered data file. Generated inventories identify their
+Unicode sources and license in their headers. These files and derived values are
+distributed under the Unicode License V3, the full text of which is reproduced
+in the LICENSE file accompanying this distribution.
+
+The project-authored annotation table
+opennlp-core/opennlp-runtime/src/main/resources/opennlp/tools/util/normalizer/emoji-annotations.txt
+is licensed under the Apache License 2.0, but its name values (the CLDR short
+names) and its entity-type/category derivations are transcribed from the
+upstream emoji-test.txt (Emoji Keyboard/Display Test Data for UTS #51,
+version 17.0), distributed under the Unicode License V3 reproduced in the
+LICENSE file. Its sentiment scores are original project judgments; no
+third-party sentiment data set is included.
+
+Copyright (c) 1991-2025 Unicode, Inc. All rights reserved.
+
+============================================================================
+
+List of third-party dependencies grouped by their license type.
+
+
+    Apache License, Version 2.0
+
+        * Apache Commons Secure XML (org.apache.commons:commons-secure-xml:1.0.0 - https://commons.apache.org/proper/commons-secure-xml/)
+        * Apache Log4j API (org.apache.logging.log4j:log4j-api:2.26.1 - https://logging.apache.org/log4j/2.x/)
+        * Apache Log4j Core (org.apache.logging.log4j:log4j-core:2.26.1 - https://logging.apache.org/log4j/2.x/)
+        * Apache UIMA Base: uimaj-core (org.apache.uima:uimaj-core:3.6.1 - https://uima.apache.org)
+        * HPPC Collections (com.carrotsearch:hppc:0.7.2 - http://labs.carrotsearch.com/hppc.html/hppc)
+        * jcommander (com.beust:jcommander:1.78 - https://jcommander.org)
+        * SLF4J 2 Provider for Log4j API (org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1 - https://logging.apache.org/log4j/2.x/)
+        * zlibsvm-api (de.hs-heilbronn.mi:zlibsvm-api:3.0.0 - https://github.com/rzo1/zlibsvm/zlibsvm-api)
+        * zlibsvm-core (de.hs-heilbronn.mi:zlibsvm-core:3.0.0 - https://github.com/rzo1/zlibsvm/zlibsvm-core)
+
+    BSD 3-Clause License
+
+        * libsvm (tw.edu.ntu.csie:libsvm:3.35 - https://github.com/cjlin1/libsvm)
+
+    BSD License
+
+        * Morfologik Command Line Tools (org.carrot2:morfologik-tools:2.2.0 - http://morfologik.blogspot.com/morfologik-tools/)
+        * Morfologik FSA (Builder) (org.carrot2:morfologik-fsa-builders:2.2.0 - http://morfologik.blogspot.com/morfologik-fsa-builders/)
+        * Morfologik FSA (Traversal) (org.carrot2:morfologik-fsa:2.2.0 - http://morfologik.blogspot.com/morfologik-fsa/)
+        * Morfologik Stemming APIs (org.carrot2:morfologik-stemming:2.2.0 - http://morfologik.blogspot.com/morfologik-stemming/)
+
+    MIT License
+
+        * onnx-runtime (com.microsoft.onnxruntime:onnxruntime_gpu:1.31.0 - https://microsoft.github.io/onnxruntime/)
+        * onnx-runtime (com.microsoft.onnxruntime:onnxruntime:1.31.0 - https://microsoft.github.io/onnxruntime/)
+        * SLF4J API Module (org.slf4j:slf4j-api:2.0.20 - http://www.slf4j.org)
+
+    The MIT License (MIT)
+
+        * ClassGraph (io.github.classgraph:classgraph:4.8.196 - https://github.com/classgraph/classgraph)

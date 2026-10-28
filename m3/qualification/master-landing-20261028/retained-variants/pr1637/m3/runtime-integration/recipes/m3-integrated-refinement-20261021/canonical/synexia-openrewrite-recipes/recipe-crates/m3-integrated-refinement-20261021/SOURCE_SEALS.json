@@ -1,0 +1,433 @@
+{
+  "schema": "M3_INTEGRATED_RECOVERY_SOURCE_SEALS/1",
+  "task": "m3-integrated-refinement-20261021",
+  "recipe": "com.synexia.m3.IntegratedRefinement20261021",
+  "canonical_source_revision": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "files": [
+    {
+      "target_path": ".github/workflows/m3-collections.yml",
+      "before_sha256": "ff90dcce42c80cc940878c8c5dcde0a14a8def69d08dbc7aadb174b9ad2bb649",
+      "after_sha256": "8efc148837d892ccbc146da1bbc5ab34542051986da08b28d6c8695170f4740e",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-001",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "before_sha256": "dbceffdfba2dbaee03e71d6d84ad3f9302620201cf86e20ff0f925dc745ff16a",
+      "after_sha256": "d808a06805622896a543c48b60aa400caa087d699db83dfe158be1487ca9980d",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-049",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": ".github/workflows/m3-object-progress-candidate.yml",
+      "before_sha256": "1b28049139575d9587ad48f72d5dfd5f2be89dd4027f3945daaa628c6bcb80eb",
+      "after_sha256": "4a0fc4a163514ffabae67cf480f2abbc49ce38ceecbdd8685e5aad3714d60cc9",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-003",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/collections/algorithm-catalog/masked-sort-fusion-20261021.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "bd3df31ad31d399fff42bbaaaf74cfd9961f84072cba993f15b9b08dafc55da3",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-004",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/collections/algorithm-catalog/resource-change-20261021.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "9b0d1f536c206f5bb9578ddb97ff012482f620c6bfd218cf5d9d958adca20eb8",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-005",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "before_sha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+      "after_sha256": "2ad6ff2d74671a9888c64c94e998eaf979c9ba49cdea85fd24a841f661b84aff",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-006",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f5f513a0f65e2847767e65766daa39b3b5b33b88ff8376faf1248df01f7e224d",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-007",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "fd332ea4fc69bba91989e53ef3f4eb4a45fe74666cc206fd31c8fcd4b222271e",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-008",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/com/m3/collections/M3CollectionSurfaceProbe.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a451daf423f7ffc382b8fb3df835bec8c9524354cf45a56751e60d67e9b75679",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-009",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/com/m3/collections/M3MaskedSortAllocationProbe.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "5812c70fa0d6260666441d83e5834e051f762d160ceeafaca1d84f151ab811d8",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-010",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "5e0daa896d8e104df5341d5d6c9e6283ea122b293d537f9c59cb4f97bd2fd05f",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-011",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "before_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+      "after_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-012",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "after_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-013",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "before_sha256": "d6f1f6f1ffb2ad2ef43f97426f05d8e4ab202dcec5b51bcc4a3151003d2837b7",
+      "after_sha256": "0e2f79235ef54db17a09f8df597eb97d289962deec2be4a021186309346d4af4",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-014",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-015",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-016",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3MaskedSortFusionContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "3c75fcccb7c0392d926c3ce671ea4ad35d3e4a3d3abca7f3cf6ec2e2a4bf8c11",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-017",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3MaskedSortFusionTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "cda5d9e02c7ebe868c0d1a40ee994c478d21137f6cde6f27c53922f29cacd4a6",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-018",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/algorithm-catalog/jobs-executor-20261021.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "097aa0453736d6b3d13272a5d12e3562a25ec26cc56a5154cbc01195a0cb2ef2",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-019",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/qualification/M3_ECLIPSE_JOBS_20261021.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "b7c7c07a300ed7e2d83aacdc48c9af30eaf89e1c4d61a2bd42d32ab316f3cadd",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-020",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "dc7e2cc6243291c362e135311ca2e50fb9d445db4f0c72cee5508d770526b6dd",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-021",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a9cdf65296a3841a5bdeab909fd24f6f3bbe60773f5d3070c2091a710a00b5a7",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-022",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "89ea9107defabe8f35a3ee8bc5d8559f79c6a13c90e1fa7cbbbf65f3d1c6724f",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-023",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "9897ba5f3f5cf6dae226844ccf56baed776fd552fa0ca74877a3923ee774e1b7",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-024",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "e12bdc3c08aec2d886a403d6f342de3ac0b35a0e063409ad43ae0c8784de19e5",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-025",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/pom.xml",
+      "before_sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
+      "after_sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-026",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/qualification/resource-change-20261021/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "40977e98f0d556cfb2730da4b526ede005412aed774c10adcb29456f865a872b",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-027",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/qualification/resource-change-20261021/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "4cd4ea93da4e1e4cf5930faab3f6476227dc6552629d54500eb6a276a6adcf82",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-028",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+      "before_sha256": "361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea",
+      "after_sha256": "361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-029",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
+      "before_sha256": "4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963",
+      "after_sha256": "4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-030",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "before_sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313",
+      "after_sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-031",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
+      "before_sha256": "94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c",
+      "after_sha256": "6ef8f327a6ed4c7c41be81168778008af094e5b74fb04ba50d893856c9e482ff",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-032",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "before_sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
+      "after_sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-033",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeServices.java",
+      "before_sha256": "f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea",
+      "after_sha256": "f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-034",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
+      "before_sha256": "2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781",
+      "after_sha256": "2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-035",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
+      "before_sha256": "cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51",
+      "after_sha256": "cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-036",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseResourceChangeSnapshotTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "db172e1dd23313bd34ef0752a2d79156e06a37825498ac1d26e0f43db705c39a",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-037",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "before_sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
+      "after_sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-038",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/CATALOGUE.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "470eb027d5842680262d15c56b17b9a78591e713fc0fc4ba9ac89a0aa50629f0",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-039",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a0962ac611bbb03f5c2d5038acf1b1ed2b1871fe7a82fabb3264423c7a819431",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-040",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/SOURCE_PIN.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "813d1c2d6e2641673fd741a1b1231c7b34b20c411439c1fea8f29e0d70c1471d",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-041",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/src/test/java/LegacyScheduledClient.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-042",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "635c8de8abb48adb1263518f837e4820a4dc5dad7c6c3b8aaefb4548e8094c0e",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-043",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/tooling/module-packs/collections/build.py",
+      "before_sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
+      "after_sha256": "0c0ee4048a141da30e8fe101e613c2fa18e91f6cef81ef027ceb5eb9606ce33b",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-044",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/tooling/module-packs/collections/tests/test_native_abi.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ea7d21754b16f2512952f028ef849a49eea0e350cf64579b1a4cea727bf33f68",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-045",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "before_sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "after_sha256": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76",
+      "kind": "text",
+      "phase": "m3-integrated-refinement-20261021-046",
+      "resource": "postimage.txt"
+    },
+    {
+      "target_path": "src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+      "before_sha256": "3a914503908cd93c321c356f215eb3e022a064c1c124331d0dd2edb429bdd7a5",
+      "after_sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-047",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480",
+      "kind": "java",
+      "phase": "m3-integrated-refinement-20261021-048",
+      "resource": "postimage.java.txt"
+    }
+  ],
+  "input_handoffs": [
+    {
+      "name": "HANDOFF.json",
+      "sha256": "ea690cc3d7724e1f44ba333fb825b5fc80833fa2c1499085e8d3da6d9b3e1187"
+    },
+    {
+      "name": "HANDOFF.json",
+      "sha256": "0af116bf45c1874344e3a262651851e817b973e627c798933967099e5a19adef"
+    },
+    {
+      "name": "HANDOFF.json",
+      "sha256": "7bf341eb27981ae332983f42ba4f7a2699414740e20142ca14f9d779455e5965"
+    },
+    {
+      "name": "ECLIPSE_HANDOFF.json",
+      "sha256": "56a8ae82b7def0ece78ce5b8ecadf1752900893311632b7b7b2661cde225be32"
+    },
+    {
+      "name": "WORKFLOW_HANDOFF.json",
+      "sha256": "b07c338fd9c2faf1de24b3b1f01d4d0c9aaad4fae8b0a191fabb45bdad66e91c"
+    },
+    {
+      "name": "workflow-successor/HANDOFF.json",
+      "sha256": "c5b988d4b136537c6703282ddc9e6db619e56f3da451cfd3f5ecca51e846ab84"
+    }
+  ],
+  "qualification": "NOT_RUN for phase049 at seal creation; prior SDK001/002 remain separate immutable attempts",
+  "successor": {
+    "inactive_predecessor_phase": "m3-integrated-refinement-20261021-002",
+    "active_successor_phase": "m3-integrated-refinement-20261021-049",
+    "original_receiving_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+    "required_workflow_preimage": "dbceffdfba2dbaee03e71d6d84ad3f9302620201cf86e20ff0f925dc745ff16a",
+    "first_stage": {
+      "path": "proof/sdk-002-offline/RESULT.json",
+      "sha256": "be10089f40c3b8b1e5da9c0233c8bbd4ab5f2c19e05dfc6756e4f49c5b4ce888"
+    },
+    "reproduction": "From pristine2779, first execute the retained SDK002 input snapshot; then execute this successor. All other47 file phases retain their exact prior manifests.",
+    "runtime_source_changes_since_first_stage": 0
+  }
+}

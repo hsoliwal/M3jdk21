@@ -1,0 +1,401 @@
+{
+  "schema": "M3_CURRENT_FORK_CORRECTION_PUBLICATION_PREIMAGES/1",
+  "repository": "hsoliwal/com.synexia",
+  "base_commit": "3f4c3e1c97ca12b7f0d3efbbc387f40f942fa399",
+  "base_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+  "method": "Exact immutable Git-tree walks, all traversed parents complete and truncated=false.",
+  "paths": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates",
+          "git_tree": "a379010455ebceb276d5e0ff8e03d6c5da6dc764",
+          "entry_count": 298,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-nlp-current-receiver-lock-20261021.yml",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-nlp-current-receiver-lock-20261021.yml",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "cc46ef37704a703a9a962612cb69e240896ece72",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "d287707b58380c91fdd98a373f9a3df2a3200040",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "554d0448228217bc9af42c01dff19d085245d8a8",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF",
+          "git_tree": "7d284c0a382413eb4d7584b6c9a20582b8f6b028",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite",
+          "git_tree": "9b76e7e543aea6e1fcdad614581191fa9b71527b",
+          "entry_count": 1540,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-current-receiver-lock-20261021-001",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-current-receiver-lock-20261021-001",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "cc46ef37704a703a9a962612cb69e240896ece72",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "d287707b58380c91fdd98a373f9a3df2a3200040",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "554d0448228217bc9af42c01dff19d085245d8a8",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "4a7a69c76e9c4b1fafa7c779345d8255cb6b3099",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "20825ca571b0c0927ca8cb533baabcc9acc98ceb",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "0c4103a2217a492f345faf7793a7453a5af667f4",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "cd5a02db37eaceac5b98df013e4750fd96293f3a",
+          "entry_count": 347,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates",
+          "git_tree": "a379010455ebceb276d5e0ff8e03d6c5da6dc764",
+          "entry_count": 298,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/swt-current-owner-runtime-closure-20261021.yml",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/swt-current-owner-runtime-closure-20261021.yml",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "cc46ef37704a703a9a962612cb69e240896ece72",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "d287707b58380c91fdd98a373f9a3df2a3200040",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "554d0448228217bc9af42c01dff19d085245d8a8",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF",
+          "git_tree": "7d284c0a382413eb4d7584b6c9a20582b8f6b028",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite",
+          "git_tree": "9b76e7e543aea6e1fcdad614581191fa9b71527b",
+          "entry_count": 1540,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "cc46ef37704a703a9a962612cb69e240896ece72",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "d287707b58380c91fdd98a373f9a3df2a3200040",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "554d0448228217bc9af42c01dff19d085245d8a8",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "4a7a69c76e9c4b1fafa7c779345d8255cb6b3099",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "20825ca571b0c0927ca8cb533baabcc9acc98ceb",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "0c4103a2217a492f345faf7793a7453a5af667f4",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "cd5a02db37eaceac5b98df013e4750fd96293f3a",
+          "entry_count": 347,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-current-receiver-lock-20261021-001",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-current-receiver-lock-20261021-001",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "cc46ef37704a703a9a962612cb69e240896ece72",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "d287707b58380c91fdd98a373f9a3df2a3200040",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "554d0448228217bc9af42c01dff19d085245d8a8",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "4a7a69c76e9c4b1fafa7c779345d8255cb6b3099",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "20825ca571b0c0927ca8cb533baabcc9acc98ceb",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "0c4103a2217a492f345faf7793a7453a5af667f4",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java",
+          "git_tree": "3fe1de7bef6d6a9738b4724c33d26dce1d00b343",
+          "entry_count": 1048,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-current-receiver-lock-20261021-002",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-current-receiver-lock-20261021-002",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "cc46ef37704a703a9a962612cb69e240896ece72",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "d287707b58380c91fdd98a373f9a3df2a3200040",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "554d0448228217bc9af42c01dff19d085245d8a8",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "4a7a69c76e9c4b1fafa7c779345d8255cb6b3099",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "20825ca571b0c0927ca8cb533baabcc9acc98ceb",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "0c4103a2217a492f345faf7793a7453a5af667f4",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "cd5a02db37eaceac5b98df013e4750fd96293f3a",
+          "entry_count": 347,
+          "truncated": false
+        }
+      ]
+    }
+  ]
+}

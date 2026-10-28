@@ -1,0 +1,54 @@
+{
+  "schema": "M3_MEMORY_PROFILE_INPUTS/1",
+  "profile": "m3-maven4-effective-20261021/1.0",
+  "sources": [
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+      "source_sha256": "e6352756fca8abcea531761b2f32eb76a9e98bf3f259950d558ccc46072a0c32",
+      "path": "memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+      "sha256": "b9e0abe186e412a4a5779b1856ea9841238554436a97f4e6268fb02f06959736",
+      "modification": "Profile identity and dated comment only"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
+      "source_sha256": "4406ab706ba83c9dcd8618358477c6fd9094108c00bc62dd10735c4d181702b1",
+      "path": "memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
+      "sha256": "4406ab706ba83c9dcd8618358477c6fd9094108c00bc62dd10735c4d181702b1",
+      "modification": "Exact unchanged source"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/sealed/SealHash.java",
+      "source_sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a",
+      "path": "memory/tooling/src/com/synexia/rewrite/sealed/SealHash.java",
+      "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a",
+      "modification": "Exact unchanged source"
+    }
+  ],
+  "commands": [
+    [
+      "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "-d",
+      "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes",
+      "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+      "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
+      "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/sealed/SealHash.java"
+    ],
+    [
+      "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-cp",
+      "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "com.synexia.rewrite.memory.M3RecoveryMemoryTest"
+    ]
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+  "jackson_sha256": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb",
+  "sdk_source_inputs_modified": false
+}

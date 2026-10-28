@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "/tmp/m3-swt-current-owner-sdk-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py",
+    "--java-home",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "--maven",
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "--maven-repo",
+    "/tmp/m3-build-m2",
+    "--parser-classpath",
+    "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/parser-classpath.txt",
+    "--attempt",
+    "sdk-001-offline",
+    "--timeout-seconds",
+    "300"
+  ],
+  "cwd": "/tmp/m3-swt-current-owner-sdk-001/canonical",
+  "purpose": "Build exact frozen canonical inputs outside shared workspace build directories"
+}

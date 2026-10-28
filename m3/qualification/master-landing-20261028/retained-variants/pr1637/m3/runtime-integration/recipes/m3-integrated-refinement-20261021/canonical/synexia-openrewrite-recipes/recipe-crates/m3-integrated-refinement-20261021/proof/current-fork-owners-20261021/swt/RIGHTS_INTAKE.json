@@ -1,0 +1,35 @@
+{
+  "schema": "CURRENT_SWT_EXACT_RIGHTS_INTAKE/1",
+  "status": "EXACT_READBACK",
+  "files": [
+    {
+      "repository": "hsoliwal/eclipse.platform.swt",
+      "revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+      "source_path": "LICENSE",
+      "path": "swt/licenses/LICENSE",
+      "bytes": 14198,
+      "sha256": "0becf16567beb77fa252b7664631dd177c8f9a1889e48995b45379c7130e5303",
+      "git_blob": "e23ece2c852415800ac224b74ede6c5849f6f88d"
+    },
+    {
+      "repository": "hsoliwal/eclipse.platform.swt",
+      "revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+      "source_path": "NOTICE",
+      "path": "swt/licenses/NOTICE",
+      "bytes": 1032,
+      "sha256": "a22f2a62bace7fa0fb4b0b1fbf2d05e23afa6293e27dcdba2eb4fa7cefe4760a",
+      "git_blob": "a8ba871c77eca327f6a1b956c8adb03071427aa7"
+    },
+    {
+      "repository": "hsoliwal/eclipse.platform.swt",
+      "revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+      "source_path": "M3-SYNEXIA-RIGHTS.md",
+      "path": "swt/licenses/M3-SYNEXIA-RIGHTS.md",
+      "bytes": 4786,
+      "sha256": "5eea6340d20e48f7e469990b960e1f072c94bf79dcbe21eef0dcce853e582fc5",
+      "git_blob": "e67200aa56d289e7014433882fab8a4d6916b671"
+    }
+  ],
+  "source_identity": "Current SWT owner agent verified these exact blobs against immutable c0ffa6d7; this intake independently verifies complete local bytes against both SHA256 and Git blob identities.",
+  "classification_clarification": "Original AllNonBrowserTests/AllTests/AllWidgetTests retain EPL-2.0. Dual wording applies only where present in the geometry and differential source headers. The received proof POM and recipe tooling retain Apache-2.0; SLF4J API retains MIT. No blanket fixture relicensing."
+}

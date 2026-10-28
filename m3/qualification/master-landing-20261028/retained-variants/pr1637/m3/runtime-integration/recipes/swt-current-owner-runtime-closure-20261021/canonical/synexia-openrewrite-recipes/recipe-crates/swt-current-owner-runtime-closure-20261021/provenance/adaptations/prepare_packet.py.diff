@@ -1,0 +1,45 @@
+--- qualified-sdk003/prepare_packet.py
++++ swt-pom-correction/prepare_packet.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026-10-21 from qualified integrated SDK003 for one SWT proof-POM correction.
+ """Seal this task's reviewed fixtures for the existing canonical snapshot engines.
+ 
+ This preparation step writes only the canonical task resources and immutable
+@@ -16,10 +17,10 @@
+ import re
+ import subprocess
+ 
+-TASK = 'm3-integrated-refinement-20261021'
+-NAMED = 'com.synexia.m3.IntegratedRefinement20261021'
+-SOURCE = '2779aba3f98f31c324be43f731be7914e1a05935'
+-CANONICAL = 'e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07'
++TASK = 'swt-current-owner-runtime-closure-20261021'
++NAMED = 'com.synexia.swt.CurrentOwnerRuntimeClosure20261021'
++SOURCE = 'c0ffa6d76338ed1b06cfe0158b0e04d8930df546'
++CANONICAL = 'a2b50cfe926c5c5f400c7f659a947a5020fb8d4d'
+ HEADER = '# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project\n# SPDX-License-Identifier: Apache-2.0\n'
+ 
+ 
+@@ -111,7 +112,7 @@
+     # All input, source, kind, duplicate and byte checks precede any custody writes.
+     phases = 'id\tkind\n'
+     yaml = HEADER + 'type: specs.openrewrite.org/v1beta/recipe\nname: ' + NAMED
+-    yaml += '\ndisplayName: M3 integrated refinement recovery 20261021\n'
++    yaml += '\ndisplayName: SWT current owner proof runtime closure 20261021\n'
+     yaml += 'description: Apply independently qualified hash-pinned file phases.\nrecipeList:\n'
+     seals = []
+     for row in prepared:
+@@ -128,8 +129,8 @@
+         seals.append({key: value for key, value in row.items() if key not in ('baseline', 'candidate')})
+     put(crate / 'phases.tsv', phases.encode())
+     put(module / 'src/main/resources/META-INF/rewrite' / (TASK + '.yml'), yaml.encode())
+-    record = {'schema': 'M3_INTEGRATED_RECOVERY_SOURCE_SEALS/1', 'task': TASK, 'recipe': NAMED,
+-              'canonical_source_revision': CANONICAL, 'receiving_repository': 'hsoliwal/M3jdk21',
++    record = {'schema': 'SWT_CURRENT_OWNER_RUNTIME_CLOSURE_SOURCE_SEALS/1', 'task': TASK, 'recipe': NAMED,
++              'canonical_source_revision': CANONICAL, 'receiving_repository': 'hsoliwal/eclipse.platform.swt',
+               'receiving_revision': SOURCE, 'files': seals, 'input_handoffs': handoffs,
+               'qualification': 'NOT_RUN; source custody is not recipe or runtime proof'}
+     put(crate / 'SOURCE_SEALS.json', (json.dumps(record, indent=2) + '\n').encode())

@@ -1,0 +1,23 @@
+{
+  "schema": "M3_MAVEN4_SUPPORTED_SUCCESSOR_SELECTION/1",
+  "status": "SELECTED_NOT_QUALIFIED",
+  "selection_script_sha256": "94274bb4ea292e3aec5fbb7032eb2bfcf727c808481c409e9cf2e2a5d86d8801",
+  "failed_sdk_sha256": "9aaef3787c1fa569dfef8c0c9d2691a1d32f3b139774491f2e25d2cfa7c01f92",
+  "predecessor_handoff_sha256": "3e66250f18894ed3704ccd68c9d6227d399ffa8eee787fd7c719ed94e70d7164",
+  "successor_handoff_sha256": "359b2929cce0028a8f15297211159613b599d6db5e2a9767bc18e667f1bc93f6",
+  "predecessor_source_seals_sha256": "a2952be6e6ce39e0a360b1753feac582d4a359f492436eaebf3ac4267173e66b",
+  "successor_source_seals_sha256": "fb401eeb0467c16ffa4d95d8de2a6c539775f096db81a7a7ac4fc717ad6e74b9",
+  "retained_phase_resources": 8,
+  "active_phases": 7,
+  "inactive_phase": "m3-maven4-effective-20261021-002",
+  "historical_csv_target_sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+  "active_candidates_unchanged": true,
+  "engines_changed": false,
+  "target_writes": 0,
+  "catalogue_decisions": {
+    "target_path": "m3/tooling/module-packs/parser/real-providers/maven4/README.md",
+    "section": "Exact donor and ownership decisions",
+    "note": "Already included in the unchanged supported README candidate and linked from real-providers/README.md."
+  },
+  "note": "No predecessor output was applied; all successor preimages remain receiving commit2779."
+}

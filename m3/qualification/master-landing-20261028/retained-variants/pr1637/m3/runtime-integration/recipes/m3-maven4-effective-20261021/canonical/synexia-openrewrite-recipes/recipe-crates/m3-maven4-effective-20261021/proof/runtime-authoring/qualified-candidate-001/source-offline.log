@@ -1,0 +1,1181 @@
+["/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn", "-B", "-ntp", "-Dmaven.repo.local=/tmp/m3-build-m2", "-s", "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml", "-o", "-pl", "impl/maven-impl", "-am", "-Dtest=DefaultModelBuilderTest", "-Dsurefire.failIfNoSpecifiedTests=false", "package"]
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Apache Maven                                                       [pom]
+[INFO] Maven 4 API                                                        [pom]
+[INFO] Maven 4 API :: Meta annotations                                    [jar]
+[INFO] Maven 4 API :: Dependency Injection                                [jar]
+[INFO] Maven 4 API :: XML                                                 [jar]
+[INFO] Maven 4 API :: Model                                               [jar]
+[INFO] Maven 4 API :: Plugin                                              [jar]
+[INFO] Maven 4 API :: Settings                                            [jar]
+[INFO] Maven 4 API :: Toolchain                                           [jar]
+[INFO] Maven 4 API :: Repository Metadata                                 [jar]
+[INFO] Maven 4 API :: Core                                                [jar]
+[INFO] Maven 4 API :: SPI                                                 [jar]
+[INFO] Maven 4 Implementation Modules                                     [pom]
+[INFO] Maven 4 XML Implementation                                         [jar]
+[INFO] Maven 4 Model Support                                              [jar]
+[INFO] Maven 4 Dependency Injection                                       [jar]
+[INFO] Maven 4 JLine integration                                          [jar]
+[INFO] Maven 4 Logging                                                    [jar]
+[INFO] Maven 4 API Implementation                                         [jar]
+[INFO] 
+[INFO] -----------------------< org.apache.maven:maven >-----------------------
+[INFO] Building Apache Maven 4.1.0-SNAPSHOT                              [1/19]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven ---
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven ---
+[INFO] No issues found.
+[INFO] 
+[INFO] ---------------------< org.apache.maven:maven-api >---------------------
+[INFO] Building Maven 4 API 4.1.0-SNAPSHOT                               [2/19]
+[INFO]   from api/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api ---
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api ---
+[INFO] No issues found.
+[INFO] 
+[INFO] ---------------< org.apache.maven:maven-api-annotations >---------------
+[INFO] Building Maven 4 API :: Meta annotations 4.1.0-SNAPSHOT           [3/19]
+[INFO]   from api/maven-api-annotations/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-annotations ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-annotations ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-annotations ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-annotations ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-annotations ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-annotations ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-annotations ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-annotations ---
+[INFO] Spotless.Java is keeping 12 files clean - 0 were changed to be clean, 0 were already clean, 12 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-annotations ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-annotations ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-annotations/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-annotations ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-annotations ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-annotations ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-annotations/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-annotations ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-annotations ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-annotations ---
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-api-di >--------------------
+[INFO] Building Maven 4 API :: Dependency Injection 4.1.0-SNAPSHOT       [4/19]
+[INFO]   from api/maven-api-di/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-di ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-di ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-di ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-di ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-di ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-di ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-di ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-di ---
+[INFO] Spotless.Java is keeping 14 files clean - 0 were changed to be clean, 0 were already clean, 14 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-di ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-di ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-di ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-di ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-di ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-di/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-di ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-di ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-di ---
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-api-xml >-------------------
+[INFO] Building Maven 4 API :: XML 4.1.0-SNAPSHOT                        [5/19]
+[INFO]   from api/maven-api-xml/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-xml ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-xml ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-xml ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-xml ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-xml ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-xml ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-xml ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-xml ---
+[INFO] Spotless.Java is keeping 5 files clean - 0 were changed to be clean, 0 were already clean, 5 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-xml ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-xml ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-xml/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-xml ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-xml ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-xml ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-xml/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-xml ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-xml ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-xml ---
+[INFO] 
+[INFO] ------------------< org.apache.maven:maven-api-model >------------------
+[INFO] Building Maven 4 API :: Model 4.1.0-SNAPSHOT                      [6/19]
+[INFO]   from api/maven-api-model/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-model ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-model ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-model ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-model ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-model ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-model ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello) @ maven-api-model ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/maven.mdo
+[INFO] Generating current version: 4.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello) @ maven-api-model ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/maven.mdo
+[INFO] Generating current version: 4.2.0
+[warn] model class snapshotRepository/org.apache.maven.model.DeploymentRepository with tagName snapshotRepository gets duplicate anchorName class_deployment_repository, conflicting with model class repository/org.apache.maven.model.DeploymentRepository
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello) @ maven-api-model ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/maven.mdo
+[INFO] Generating current version: 4.2.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-model ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-model ---
+[INFO] Spotless.Java is keeping 3 files clean - 0 were changed to be clean, 0 were already clean, 3 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-model ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-model ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-model ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-model ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-model ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-model ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-model ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-model ---
+[INFO] 
+[INFO] --- build-helper:3.6.2:attach-artifact (default) @ maven-api-model ---
+[INFO] 
+[INFO] -----------------< org.apache.maven:maven-api-plugin >------------------
+[INFO] Building Maven 4 API :: Plugin 4.1.0-SNAPSHOT                     [7/19]
+[INFO]   from api/maven-api-plugin/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-plugin ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-plugin ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-plugin ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-plugin ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-plugin ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-plugin ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello-plugin) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/plugin.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello-plugin) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/plugin.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello-plugin) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/plugin.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello-lifecycle) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/lifecycle.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello-lifecycle) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/lifecycle.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello-lifecycle) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/lifecycle.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-plugin ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-plugin ---
+[INFO] Spotless.Java is keeping 4 files clean - 0 were changed to be clean, 0 were already clean, 4 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-plugin ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-plugin ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-plugin ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-plugin ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-plugin ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-plugin ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-plugin ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-plugin ---
+[INFO] 
+[INFO] ----------------< org.apache.maven:maven-api-settings >-----------------
+[INFO] Building Maven 4 API :: Settings 4.1.0-SNAPSHOT                   [8/19]
+[INFO]   from api/maven-api-settings/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-settings ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-settings ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-settings ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-settings ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-settings ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-settings ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello) @ maven-api-settings ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/settings.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-settings ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-settings ---
+[INFO] Spotless.Java is keeping 3 files clean - 0 were changed to be clean, 0 were already clean, 3 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-settings ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello-docs) @ maven-api-settings ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/settings.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello-docs) @ maven-api-settings ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/settings.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-settings ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-settings ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-settings ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-settings ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-settings ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-settings ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-settings ---
+[INFO] 
+[INFO] ----------------< org.apache.maven:maven-api-toolchain >----------------
+[INFO] Building Maven 4 API :: Toolchain 4.1.0-SNAPSHOT                  [9/19]
+[INFO]   from api/maven-api-toolchain/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-toolchain ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-toolchain ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-toolchain ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-toolchain ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-toolchain ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-toolchain ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello) @ maven-api-toolchain ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/toolchains.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-toolchain ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-toolchain ---
+[INFO] Spotless.Java is keeping 2 files clean - 0 were changed to be clean, 0 were already clean, 2 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-toolchain ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello-docs) @ maven-api-toolchain ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/toolchains.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello-docs) @ maven-api-toolchain ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/toolchains.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-toolchain ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-toolchain ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-toolchain ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-toolchain ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-toolchain ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-toolchain ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-toolchain ---
+[INFO] 
+[INFO] ----------------< org.apache.maven:maven-api-metadata >-----------------
+[INFO] Building Maven 4 API :: Repository Metadata 4.1.0-SNAPSHOT       [10/19]
+[INFO]   from api/maven-api-metadata/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-metadata ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-metadata ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-metadata ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-metadata ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-metadata ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-metadata ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello) @ maven-api-metadata ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/metadata.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello) @ maven-api-metadata ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/metadata.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello) @ maven-api-metadata ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/metadata.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-metadata ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-metadata ---
+[INFO] Spotless.Java is keeping 2 files clean - 0 were changed to be clean, 0 were already clean, 2 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-metadata ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-metadata ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-metadata ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-metadata ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-metadata ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-metadata ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-metadata ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-metadata ---
+[INFO] 
+[INFO] ------------------< org.apache.maven:maven-api-core >-------------------
+[INFO] Building Maven 4 API :: Core 4.1.0-SNAPSHOT                      [11/19]
+[INFO]   from api/maven-api-core/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-core ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-core ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-core ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-core ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-core ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-core ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-core ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-core ---
+[INFO] Spotless.Java is keeping 191 files clean - 0 were changed to be clean, 0 were already clean, 191 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-core ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-core ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-core/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-core ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-core ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-core ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-core/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-core ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-core ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-core ---
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-api-spi >-------------------
+[INFO] Building Maven 4 API :: SPI 4.1.0-SNAPSHOT                       [12/19]
+[INFO]   from api/maven-api-spi/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-spi ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-spi ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-spi ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-spi ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-spi ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-spi ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-spi ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-spi ---
+[INFO] Spotless.Java is keeping 38 files clean - 0 were changed to be clean, 0 were already clean, 38 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-spi ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-spi ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-spi/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-spi ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-spi ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-spi ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-spi/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-spi ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-spi ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-spi ---
+[INFO] 
+[INFO] ----------------< org.apache.maven:maven-impl-modules >-----------------
+[INFO] Building Maven 4 Implementation Modules 4.1.0-SNAPSHOT           [13/19]
+[INFO]   from impl/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-impl-modules ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-impl-modules ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-impl-modules ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-impl-modules ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-impl-modules ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-impl-modules ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-impl-modules ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-impl-modules ---
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-impl-modules ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-impl-modules ---
+[INFO] No issues found.
+[INFO] 
+[INFO] ---------------------< org.apache.maven:maven-xml >---------------------
+[INFO] Building Maven 4 XML Implementation 4.1.0-SNAPSHOT               [14/19]
+[INFO]   from impl/maven-xml/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-xml ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-xml ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-xml ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-xml ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-xml ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-xml ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-xml ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-xml ---
+[INFO] Spotless.Java is keeping 16 files clean - 0 were changed to be clean, 0 were already clean, 16 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-xml ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-xml ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-xml ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-xml ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-xml ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-xml ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-xml ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-xml ---
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-support >-------------------
+[INFO] Building Maven 4 Model Support 4.1.0-SNAPSHOT                    [15/19]
+[INFO]   from impl/maven-support/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-support ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-support ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-support ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-support ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-support ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-support ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-lifecycle) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/lifecycle.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-plugin) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/plugin.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-settings) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/settings.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-toolchains) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/toolchains.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-metadata) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/metadata.mdo
+[INFO] Generating current version: 1.1.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (model-v4) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/maven.mdo
+[INFO] Generating current version: 4.2.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-support ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-support ---
+[INFO] Spotless.Java is keeping 2 files clean - 0 were changed to be clean, 0 were already clean, 2 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-support ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-support ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-support ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-support ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-support ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-support ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-support ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-support ---
+[INFO] 
+[INFO] ---------------------< org.apache.maven:maven-di >----------------------
+[INFO] Building Maven 4 Dependency Injection 4.1.0-SNAPSHOT             [16/19]
+[INFO]   from impl/maven-di/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-di ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-di ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-di ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-di ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-di ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-di ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-di ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-di ---
+[INFO] Spotless.Java is keeping 14 files clean - 0 were changed to be clean, 0 were already clean, 14 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-di ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-di ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-di ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-di ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-di ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-di ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-di ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-di ---
+[INFO] 
+[INFO] --------------------< org.apache.maven:maven-jline >--------------------
+[INFO] Building Maven 4 JLine integration 4.1.0-SNAPSHOT                [17/19]
+[INFO]   from impl/maven-jline/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-jline ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-jline ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-jline ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-jline ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-jline ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-jline ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-jline ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-jline ---
+[INFO] Spotless.Java is keeping 6 files clean - 0 were changed to be clean, 0 were already clean, 6 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-jline ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-jline ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-jline ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-jline ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-jline ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-jline ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-jline ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-jline ---
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-logging >-------------------
+[INFO] Building Maven 4 Logging 4.1.0-SNAPSHOT                          [18/19]
+[INFO]   from impl/maven-logging/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-logging ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-logging ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-logging ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-logging ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-logging ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-logging ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-logging ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-logging ---
+[INFO] Spotless.Java is keeping 15 files clean - 0 were changed to be clean, 0 were already clean, 15 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-logging ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-logging ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-logging ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-logging ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-logging ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-logging/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-logging ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-logging ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-logging ---
+[INFO] 
+[INFO] --------------------< org.apache.maven:maven-impl >---------------------
+[INFO] Building Maven 4 API Implementation 4.1.0-SNAPSHOT               [19/19]
+[INFO]   from impl/maven-impl/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-impl ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-impl ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-impl ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-impl ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-impl ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-impl ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-impl ---
+[INFO] There are 2 errors reported by Checkstyle 9.3 with config/maven_checks_nocodestyle.xml ruleset.
+[INFO] Ignored 2 errors, 0 violation remaining.
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-impl ---
+[INFO] Spotless.Java is keeping 245 files clean - 0 were changed to be clean, 0 were already clean, 245 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 0 were already clean, 1 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-impl ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-impl ---
+[INFO] Copying 6 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-impl ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-impl ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-impl ---
+[INFO] Copying 146 resources from src/test/resources to target/test-classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-impl ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-impl ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Apache Maven 4.1.0-SNAPSHOT:
+[INFO] 
+[INFO] Apache Maven ....................................... SUCCESS [  4.205 s]
+[INFO] Maven 4 API ........................................ SUCCESS [  0.149 s]
+[INFO] Maven 4 API :: Meta annotations .................... SUCCESS [  0.556 s]
+[INFO] Maven 4 API :: Dependency Injection ................ SUCCESS [  0.137 s]
+[INFO] Maven 4 API :: XML ................................. SUCCESS [  0.490 s]
+[INFO] Maven 4 API :: Model ............................... SUCCESS [  0.789 s]
+[INFO] Maven 4 API :: Plugin .............................. SUCCESS [  0.262 s]
+[INFO] Maven 4 API :: Settings ............................ SUCCESS [  0.183 s]
+[INFO] Maven 4 API :: Toolchain ........................... SUCCESS [  0.178 s]
+[INFO] Maven 4 API :: Repository Metadata ................. SUCCESS [  0.148 s]
+[INFO] Maven 4 API :: Core ................................ SUCCESS [  1.194 s]
+[INFO] Maven 4 API :: SPI ................................. SUCCESS [  0.274 s]
+[INFO] Maven 4 Implementation Modules ..................... SUCCESS [  0.183 s]
+[INFO] Maven 4 XML Implementation ......................... SUCCESS [  0.513 s]
+[INFO] Maven 4 Model Support .............................. SUCCESS [  0.354 s]
+[INFO] Maven 4 Dependency Injection ....................... SUCCESS [  0.241 s]
+[INFO] Maven 4 JLine integration .......................... SUCCESS [  0.236 s]
+[INFO] Maven 4 Logging .................................... SUCCESS [  0.315 s]
+[INFO] Maven 4 API Implementation ......................... FAILURE [  2.990 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.746 s
+[INFO] Finished at: 2026-10-21T02:42:30+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project maven-impl: 
+[ERROR] 
+[ERROR] See /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] Error creating properties files for forking
+[ERROR] org.apache.maven.surefire.booter.SurefireBooterForkException: Error creating properties files for forking
+[ERROR] 	at org.apache.maven.plugin.surefire.booterclient.ForkStarter.fork(ForkStarter.java:591)
+[ERROR] 	at org.apache.maven.plugin.surefire.booterclient.ForkStarter.fork(ForkStarter.java:523)
+[ERROR] 	at org.apache.maven.plugin.surefire.booterclient.ForkStarter.run(ForkStarter.java:323)
+[ERROR] 	at org.apache.maven.plugin.surefire.booterclient.ForkStarter.run(ForkStarter.java:287)
+[ERROR] 	at org.apache.maven.plugin.surefire.AbstractSurefireMojo.executeProvider(AbstractSurefireMojo.java:1474)
+[ERROR] 	at org.apache.maven.plugin.surefire.AbstractSurefireMojo.executeAfterPreconditionsChecked(AbstractSurefireMojo.java:1246)
+[ERROR] 	at org.apache.maven.plugin.surefire.AbstractSurefireMojo.execute(AbstractSurefireMojo.java:1082)
+[ERROR] 	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:126)
+[ERROR] 	at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2(MojoExecutor.java:328)
+[ERROR] 	at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute(MojoExecutor.java:316)
+[ERROR] 	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:212)
+[ERROR] 	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:174)
+[ERROR] 	at org.apache.maven.lifecycle.internal.MojoExecutor.access$000(MojoExecutor.java:75)
+[ERROR] 	at org.apache.maven.lifecycle.internal.MojoExecutor$1.run(MojoExecutor.java:162)
+[ERROR] 	at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute(DefaultMojosExecutionStrategy.java:39)
+[ERROR] 	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:159)
+[ERROR] 	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:105)
+[ERROR] 	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:73)
+[ERROR] 	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:53)
+[ERROR] 	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:118)
+[ERROR] 	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:261)
+[ERROR] 	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:173)
+[ERROR] 	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:101)
+[ERROR] 	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:906)
+[ERROR] 	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:283)
+[ERROR] 	at org.apache.maven.cli.MavenCli.main(MavenCli.java:206)
+[ERROR] 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+[ERROR] 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+[ERROR] 	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:255)
+[ERROR] 	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:201)
+[ERROR] 	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:361)
+[ERROR] 	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:314)
+[ERROR] Caused by: java.net.SocketException: Operation not permitted
+[ERROR] 	at java.base/sun.nio.ch.Net.socket0(Native Method)
+[ERROR] 	at java.base/sun.nio.ch.Net.serverSocket(Net.java:556)
+[ERROR] 	at java.base/sun.nio.ch.Net.serverSocket(Net.java:550)
+[ERROR] 	at java.base/sun.nio.ch.AsynchronousServerSocketChannelImpl.<init>(AsynchronousServerSocketChannelImpl.java:72)
+[ERROR] 	at java.base/sun.nio.ch.UnixAsynchronousServerSocketChannelImpl.<init>(UnixAsynchronousServerSocketChannelImpl.java:75)
+[ERROR] 	at java.base/sun.nio.ch.LinuxAsynchronousChannelProvider.openAsynchronousServerSocketChannel(LinuxAsynchronousChannelProvider.java:81)
+[ERROR] 	at java.base/java.nio.channels.AsynchronousServerSocketChannel.open(AsynchronousServerSocketChannel.java:150)
+[ERROR] 	at org.apache.maven.plugin.surefire.extensions.SurefireForkChannel.<init>(SurefireForkChannel.java:97)
+[ERROR] 	at org.apache.maven.plugin.surefire.extensions.SurefireForkNodeFactory.createForkChannel(SurefireForkNodeFactory.java:36)
+[ERROR] 	at org.apache.maven.plugin.surefire.booterclient.ForkStarter.fork(ForkStarter.java:558)
+[ERROR] 	... 31 more
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :maven-impl
+
+EXIT 1

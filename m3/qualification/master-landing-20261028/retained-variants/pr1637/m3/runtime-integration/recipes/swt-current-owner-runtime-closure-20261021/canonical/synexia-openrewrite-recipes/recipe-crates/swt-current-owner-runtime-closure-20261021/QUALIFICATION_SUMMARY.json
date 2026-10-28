@@ -1,0 +1,262 @@
+{
+  "schema": "SWT_CURRENT_OWNER_RUNTIME_CLOSURE_QUALIFICATION_SUMMARY/1",
+  "task": "swt-current-owner-runtime-closure-20261021",
+  "status": "PASS_BOUNDED_LOCAL",
+  "recipe": "com.synexia.swt.CurrentOwnerRuntimeClosure20261021",
+  "receiving_repository": "hsoliwal/eclipse.platform.swt",
+  "receiving_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "change": {
+    "target_path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+    "before_sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0",
+    "after_sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+    "description": "One explicit org.slf4j:slf4j-api:2.0.13 dependency in the existing owning recipe proof POM",
+    "production_geometry_changes": 0,
+    "original_test_source_changes": 0,
+    "workflow_or_selector_changes": 0,
+    "shared_engine_changes": 0
+  },
+  "canonical_source_sdk": {
+    "status": "PASS",
+    "authority": "Actual OpenRewrite recipe execution in the inherited inventory-driven JUnit harness",
+    "counts": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_inputs": 18,
+    "active_text_phases": 1,
+    "emitted_target_paths": 1,
+    "source_inputs_unchanged": true,
+    "compiled_owner_attribution": "org.eclipse.swt.widgets.ViewportScrollBarGeometry#thumbLength",
+    "compiled_parser_dependencies_unchanged": true,
+    "dependency_lane": "offline-cached-artifacts",
+    "source_seal_note": "SOURCE_SEALS was frozen before execution; its historical NOT_RUN field is custody metadata, while this distinct SDK receipt records the executed gate.",
+    "receipt": {
+      "path": "proof/sdk-001-offline/RESULT.json",
+      "sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098",
+      "bytes": 8058
+    }
+  },
+  "guarded_receiver_copier": {
+    "status": "PASS",
+    "isolated_first_writes": 1,
+    "isolated_replay_writes": 0,
+    "refusal_trials": 4,
+    "refusal_kinds": [
+      "product-source drift",
+      "symbolic destination",
+      "emitted-source drift",
+      "shared-engine drift"
+    ],
+    "receipt": {
+      "path": "proof/copier-qualification-001/RESULT.json",
+      "sha256": "02b696d2d3615f6b6e0742b8711cff1783b4c80371e6ad82fbbc00b79e9db671",
+      "bytes": 7547
+    }
+  },
+  "actual_receiver_application": {
+    "status": "PASS",
+    "preflight_planned_writes": 1,
+    "applied_writes": 1,
+    "replay_writes": 0,
+    "source_verification": "PASS",
+    "receipt": {
+      "path": "proof/receiver-application-001/RESULT.json",
+      "sha256": "8c3d213e0e99a263111e65523f543a851fa05a2fd7e8538de76a5d3e6e398d1a",
+      "bytes": 743
+    }
+  },
+  "actual_receiver_owning_gate": {
+    "status": "PASS",
+    "authority": "Unchanged seven-test SWT owning SDK and its existing verify.py --receiver, executed against 27 readback-verified files from the actual emitted receiver",
+    "sdk_counts": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "sdk_emitted_pom_consumed": true,
+    "input_files": 27,
+    "all_input_readbacks_unchanged": true,
+    "actual_geometry_sha256": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+    "historical_geometry_sha256": "0b8ede7af0551b7afaa270b9723bb405fad315f4f0ddb6e8dfc4db3267e30b44",
+    "execution_modes": [
+      "tiered",
+      "C1"
+    ],
+    "checks_per_mode_per_geometry_version": 5723783,
+    "current_geometry_mismatches_per_mode": 0,
+    "historical_ordinary_failures_per_mode": 0,
+    "historical_boundary_mismatches_per_mode": {
+      "mulDiv": 0,
+      "hasThumb": 0,
+      "thumbLength": 1156,
+      "thumbStart": 571,
+      "selectionAt": 1771,
+      "hit": 1124782
+    },
+    "counterexample_count_note": "Mismatch categories overlap and are arithmetic probe counts, not unique GUI failures or performance measurements.",
+    "package_public_descriptors": "IDENTICAL",
+    "receipt": {
+      "path": "proof/receiver-runtime-001/RESULT.json",
+      "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285",
+      "bytes": 2509
+    }
+  },
+  "preserved_failure_history": [
+    {
+      "path": "proof/incumbent-offline-001",
+      "kind": "OFFLINE_DEPENDENCY_UNAVAILABLE",
+      "executed_tests": 0,
+      "signature": "maven-clean-plugin:3.2.0 missing from offline cache",
+      "product_source_changed": false
+    },
+    {
+      "path": "proof/incumbent-bootstrap-001",
+      "kind": "OWNING_POM_RUNTIME_CLOSURE",
+      "executed_tests": 7,
+      "counts": {
+        "tests": 7,
+        "failures": 4,
+        "errors": 3,
+        "skipped": 0
+      },
+      "signature": "java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory",
+      "correction": "Add existing qualified org.slf4j:slf4j-api:2.0.13 to the owning proof POM"
+    },
+    {
+      "path": "proof/incumbent-offline-002",
+      "kind": "LOCAL_COMPILED_CLASS_DISCOVERY",
+      "executed_tests": 0,
+      "signature": "Unable to create test class 'com.synexia.rewrite..rsync-tmp.ScrollbarFullRangeRecipeTest'",
+      "correction": "Fresh isolated temporary build directory; no selector, test, engine or production change"
+    }
+  ],
+  "correction_memory": {
+    "status": "PASS",
+    "profile": "swt-current-owner-runtime-closure-20261021/1.0",
+    "events": 3,
+    "event_status": "RECORDED",
+    "admission": "PENDING",
+    "conformance_checks": 129,
+    "control_cases": 32,
+    "actual_event_integrity_checks": 3,
+    "unique_event_artifacts_verified": 25,
+    "scope": "Closed-profile integrity and retrieval; no product, hosted CI or native-platform admission",
+    "receipt": {
+      "path": "memory/FINAL_RESULT.json",
+      "sha256": "889d5a70900dae99b5cea3960fa03e456418f2d6b21dd49162a517794751044f",
+      "bytes": 2015
+    }
+  },
+  "limits": {
+    "hosted_ci": "NOT_RUN",
+    "native_win32_gtk_cocoa_display_and_widgets": "NOT_RUN",
+    "drag_dpi_accessibility_and_widget_lifetime": "NOT_RUN",
+    "swt_tycho_reactor": "NOT_RUN",
+    "full_source_vendored_dependency_reactor": "NOT_RUN",
+    "full_m3jdk21": "NOT_RUN",
+    "performance_and_memory_acceptance": "NOT_RUN",
+    "separately_named_stronger_full_range_oracle": "NOT_RECEIVED_OR_SELECTED_BY_THIS_ONE_FILE_TASK",
+    "existing_suite_discovery": "Explicit AllTests family selectors omit the separately named geometry fixtures; this task neither edits those selectors nor claims their execution.",
+    "historical_canonical_recipe_pr": "Original #12544 is retained as observed unmerged lineage; its absent module is not reconstructed and its branch is not changed."
+  },
+  "primary_receipts": [
+    {
+      "path": "SOURCE_SEALS.json",
+      "sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0",
+      "bytes": 1064
+    },
+    {
+      "path": "provenance/SOURCE_AND_RIGHTS.json",
+      "sha256": "c16fc3301334af0805be9549a3f90ea98611e33000969286ba3b104d0e19cae9",
+      "bytes": 2558
+    },
+    {
+      "path": "provenance/RECIPE_LINEAGE.json",
+      "sha256": "e799f4a1b294fee16eff4182f1b8ee769478ff4e70befc5b46ff37398060705d",
+      "bytes": 6251
+    },
+    {
+      "path": "provenance/BASELINE_FAILURE_CLASSIFICATION.json",
+      "sha256": "515a2a930eae343a38f03d083a0f2059b6c16a018fda30d20c95c3812eb28d59",
+      "bytes": 1751
+    },
+    {
+      "path": "provenance/TEST_DISCOVERY_REVIEW.json",
+      "sha256": "f2a90ede9a81ef54ec0629efade21f703cd98a3e1a8ce56dec25fa9dd2df9382",
+      "bytes": 3215
+    },
+    {
+      "path": "provenance/EVIDENCE_INTAKE.json",
+      "sha256": "464b42216d13a061abda76fcfc4fba56c074015a645bfe138af551030aaba3e7",
+      "bytes": 48877
+    },
+    {
+      "path": "provenance/RECEIVER_EVIDENCE_INTAKE.json",
+      "sha256": "7616915dfef494582749091365bc697c9133063d4a01b1e38d71e74ca5ca2495",
+      "bytes": 11553
+    },
+    {
+      "path": "proof/pom-candidate-001/RESULT.json",
+      "sha256": "3d6a95ec2df502b7ec13ef74e85f6e68e8213675fc3dbdbb42e4464eb58125a1",
+      "bytes": 1837
+    },
+    {
+      "path": "proof/sdk-001-offline/RESULT.json",
+      "sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098",
+      "bytes": 8058
+    },
+    {
+      "path": "proof/sdk-001-offline/recipe-proof.tsv",
+      "sha256": "9da0b557e841e5b67e440b666b8ca8704ffdae4be0c49450563b056408d29e6f",
+      "bytes": 1412
+    },
+    {
+      "path": "proof/copier-qualification-001/RESULT.json",
+      "sha256": "02b696d2d3615f6b6e0742b8711cff1783b4c80371e6ad82fbbc00b79e9db671",
+      "bytes": 7547
+    },
+    {
+      "path": "proof/receiver-application-001/RESULT.json",
+      "sha256": "8c3d213e0e99a263111e65523f543a851fa05a2fd7e8538de76a5d3e6e398d1a",
+      "bytes": 743
+    },
+    {
+      "path": "proof/receiver-runtime-001/RESULT.json",
+      "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285",
+      "bytes": 2509
+    },
+    {
+      "path": "proof/receiver-runtime-001/INPUTS.json",
+      "sha256": "eb71e18eb1d7b690d9e36ccf9b57b1a506729c9fdfd98768d371f4eaff3eaf15",
+      "bytes": 5735
+    },
+    {
+      "path": "proof/receiver-runtime-001/COMMANDS.json",
+      "sha256": "de942b73b77343f524fa8ad6dceeb9c0e2279134812cee3c64dbdd41fc08b910",
+      "bytes": 972
+    },
+    {
+      "path": "proof/receiver-runtime-001/owner-evidence/receipt.json",
+      "sha256": "6020a7ba950632f3bbfa54e09862d95b4d7fa437a8cc772ec7e3fa52ea469556",
+      "bytes": 437
+    },
+    {
+      "path": "memory/FINAL_RESULT.json",
+      "sha256": "889d5a70900dae99b5cea3960fa03e456418f2d6b21dd49162a517794751044f",
+      "bytes": 2015
+    },
+    {
+      "path": "proof/memory-conformance-001/RESULT.json",
+      "sha256": "4cecba20e8faa6c807eb6682afd6c73de0e1c8fab30363a39a750866fd6b0a84",
+      "bytes": 2560
+    },
+    {
+      "path": "proof/memory-integrity-001/RESULT.json",
+      "sha256": "ddff5489e50878ce79b90f1371d81213b1f3ba3a6623ced44e2f5c5df327e33c",
+      "bytes": 6329
+    }
+  ]
+}

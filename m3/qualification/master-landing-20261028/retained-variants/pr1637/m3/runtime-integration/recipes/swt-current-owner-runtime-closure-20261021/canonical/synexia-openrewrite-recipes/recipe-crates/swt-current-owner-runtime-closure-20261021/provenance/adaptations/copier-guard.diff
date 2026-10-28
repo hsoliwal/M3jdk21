@@ -1,0 +1,59 @@
+--- qualified-maven4/copier-guards
++++ swt-pom/copier-guards
+@@ -4,8 +4,8 @@
+ """Exercise the existing proof-checked copier against isolated exact fixtures.
+ 
+ Adapted 2026-10-21 from canonical-work/qualify_receiver.py for the separate
+-Maven4 packet. The seven existing guard trials and their algorithms are retained.
+-The inactive historical catalogue is also required to retain its original bytes.
++SWT POM packet. The seven existing guard trials and their algorithms are retained.
++Only task identity and the selected root for the symbolic-path fixture change.
+ """
+ import hashlib
+ import json
+@@ -14,13 +14,13 @@
+ import subprocess
+ 
+ ROOT = Path('/workspace/scratch/206049dfb270')
+-CRATE = ROOT / 'synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021'
+-SDK = CRATE / 'proof/sdk-002-offline'
+-OUT = ROOT / 'jobs-work/maven4-recipe/receiver-qualification-002'
++CRATE = ROOT / 'synexia/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021'
++SDK = CRATE / 'proof/sdk-001-offline'
++OUT = ROOT / 'jobs-work/swt-owner-closure-20261021/receiver-qualification-001'
+ OUT.mkdir(exist_ok=False)
+ SOURCE = OUT / 'canonical'
+ shutil.copytree(SDK / 'inputs', SOURCE)
+-LOCAL = SOURCE / 'synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021'
++LOCAL = SOURCE / 'synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021'
+ TARGET = LOCAL / 'target'
+ TARGET.mkdir()
+ for name in ('recipe-proof.tsv', 'proof-status.tsv', 'named-recipe.yml'):
+@@ -88,8 +88,8 @@
+ symlinked = baseline('receiving-symbolic')
+ outside = OUT / 'unchanged-symbolic-owner'
+ outside.mkdir()
+-shutil.move(str(symlinked / '.github'), str(outside / '.github'))
+-(symlinked / '.github').symlink_to(outside / '.github', target_is_directory=True)
++shutil.move(str(symlinked / 'docs'), str(outside / 'docs'))
++(symlinked / 'docs').symlink_to(outside / 'docs', target_is_directory=True)
+ external_before = inventory(outside)
+ run('05-symbolic-destination', symlinked, 1, apply=True, signature='symbolic path refused:')
+ assert inventory(outside) == external_before
+@@ -108,14 +108,11 @@
+     signature='qualification input drift: M3EditScope.java')
+ owner.write_bytes(original)
+ 
+-catalogue = 'm3/tooling/module-packs/parser/real-providers/CATALOGUE.csv'
+-assert sha(clean / catalogue) == '6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1'
+-
+-receipt = {'schema': 'M3_MAVEN4_COPIER_QUALIFICATION/1', 'status': 'PASS',
++receipt = {'schema': 'SWT_CURRENT_OWNER_COPIER_QUALIFICATION/1', 'status': 'PASS',
+            'scope': 'isolated exact product-source fixtures; no target repository writes',
+            'sdk_receipt_sha256': sha(SDK / 'RESULT.json'),
+            'script_sha256': sha(Path(__file__)), 'source_seals_sha256': sha(LOCAL / 'SOURCE_SEALS.json'),
+            'target_paths': len(SEALS), 'first_writes': changed, 'replay_writes': 0,
+-           'refusals': 4, 'historical_catalogue_unchanged_sha256': sha(clean / catalogue), 'steps': STEPS}
++           'refusals': 4, 'steps': STEPS}
+ (OUT / 'RESULT.json').write_text(json.dumps(receipt, indent=2) + '\n')
+ print(json.dumps({key: receipt[key] for key in ('status', 'target_paths', 'first_writes', 'replay_writes', 'refusals')}))
