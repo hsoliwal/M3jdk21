@@ -1,0 +1,458 @@
+{
+  "schema": "M3JDK21_COMPOSITE_RUNTIME_QUALIFICATION_V1",
+  "dateUtc": "2026-10-21",
+  "status": "TARGETED_FOLLOWUP_PASSES_OWNING_COLLECTIONS_GATE_FAILS",
+  "overallRepositoryAcceptance": false,
+  "publicImplementationReview": "https://github.com/hsoliwal/M3jdk21/pull/1684",
+  "canonicalRecipeReview": "https://github.com/hsoliwal/com.synexia/pull/12715",
+  "testedSourceBase": "2d37d917b49fe04207948a3a2f174b795b767c8e",
+  "publishedInitialCandidate": "59e3e18170468bc8a031d34a7b32cf28f2a4f540",
+  "publishedFollowupCandidate": "97adad6154a1b819758d0ae6cf4eb7e3ba45b638",
+  "canonicalSourceQualificationCommit": "c22cd2b5efb45eade4ff98377082dd3e51e67ed4",
+  "receivedPathsBeforeThisSummary": 41,
+  "runtimeOwnerPostimages": {
+    "src/java.base/share/classes/java/lang/M3StringImmediate.java": "9360687d536948728c8500aaae168e5bc47a1f51bef9f9bb6dcb2c9d8a6044e8",
+    "src/java.base/share/classes/java/lang/M3String.java": "f878a643ed453b4d4c91dbd1ec62673cfcb1b8308b9146d05233c918f099ac61",
+    "src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java": "1e6f9f3cc98796051627b7da629989727322c29b1615ed91820858222bb0bed3",
+    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "ee57cf7d5c5fab41bf35f1bbf5cfbd84f7f882e919f3bef8bf31b9d042ed9b11",
+    "src/java.base/share/native/libjava/String.c": "44a1b43f07f62439f4ca35aeb674602a25184c7d5c28d5fec74192022fc2f2ce",
+    "src/hotspot/share/prims/jni.cpp": "00ee5dbf5185b930e5f30f7b4532c59b0ef3a47e83c1196f63d10c75db5d5e53"
+  },
+  "sourceComposition": {
+    "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/SOURCE_COMPOSITION.json",
+    "sha256": "62013346d81d6741038ba3b96992465e83745c9e9e58a27d872f070c3c4a270a"
+  },
+  "publishedSuccessorSourceRead": {
+    "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/FOLLOWUP_PUBLICATION_SOURCE_READ.json",
+    "sha256": "324b79639f0b7bd261f0447f1ebbb9fdbc8412469511ec9263a62c13531739c7"
+  },
+  "receivingSourceDatasets": [
+    {
+      "dataset": "m3jdk21-ascii-prereq-20261021",
+      "targetVisits": 1,
+      "baselineRef": "a4415af418a9b0f21a06cd5801d238577fbb6eb7",
+      "datasetDescriptor": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-ascii-prereq-20261021/DATASET.json",
+        "sha256": "2cff7182cd7a0b5f2856633f845c83fc070f5b0d2295020ceb22475dfc574d10"
+      },
+      "qualification": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/composite-views-20261021/m3jdk21-ascii-prereq-20261021/QUALIFICATION.json",
+        "sha256": "2a7c8c4d991685771c412862b00478b3bafeb3fcbd55dd4658d7b8a5713ffd71"
+      }
+    },
+    {
+      "dataset": "m3jdk21-composite-views-20261021",
+      "targetVisits": 17,
+      "baselineRef": "a4415af418a9b0f21a06cd5801d238577fbb6eb7",
+      "datasetDescriptor": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-composite-views-20261021/DATASET.json",
+        "sha256": "9206616f29f5360921211b69abb0536ab8d5f3e561f0fdaadb54be1275bef4f4"
+      },
+      "qualification": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/composite-views-20261021/m3jdk21-composite-views-20261021/QUALIFICATION.json",
+        "sha256": "70e7eeb60820aedde28d421af9064e145bb9af87c1240e7ba2b7f23a6120ece3"
+      }
+    },
+    {
+      "dataset": "m3jdk21-consumers-20261021",
+      "targetVisits": 22,
+      "baselineRef": "2d37d917b49fe04207948a3a2f174b795b767c8e",
+      "datasetDescriptor": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-consumers-20261021/DATASET.json",
+        "sha256": "e32340155ad6953293391875deeb0bb09b2356cf3dc5b9bbac30d82c0aec3512"
+      },
+      "qualification": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/composite-views-20261021/m3jdk21-consumers-20261021/QUALIFICATION.json",
+        "sha256": "06d6138b72e10912901540b6c75420d6a4d397dfd9fd39c4aa55adb148727b49"
+      }
+    },
+    {
+      "dataset": "m3jdk21-first-unit-20261021",
+      "targetVisits": 3,
+      "baselineRef": "59e3e18170468bc8a031d34a7b32cf28f2a4f540",
+      "datasetDescriptor": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-first-unit-20261021/DATASET.json",
+        "sha256": "94693b2a47971e0768f4b18071f4f080195e681007425d27196b4d997c634d08"
+      },
+      "qualification": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/composite-views-20261021/m3jdk21-first-unit-20261021/QUALIFICATION.json",
+        "sha256": "a5fdb997dee96fd28471ad88888c95ff38f708677a8d47f4f55947871e9d7c3a"
+      }
+    }
+  ],
+  "summaryDataset": {
+    "name": "m3jdk21-runtime-20261021",
+    "targets": 3,
+    "sourceChanges": 0,
+    "baselineRef": "97adad6154a1b819758d0ae6cf4eb7e3ba45b638",
+    "qualificationPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/composite-views-20261021/m3jdk21-runtime-20261021/QUALIFICATION.json"
+  },
+  "images": {
+    "baseline": {
+      "buildExit": 0,
+      "sha256": {
+        "bin/java": "19fc0a65405b9079b592a059c5a13e49184b7fb990165f45d3ead8ef68babdf6",
+        "lib/modules": "0c9e37fe4c52acf491befe30333062b725852462f207b2127a0f15912d6c1f36",
+        "lib/libjava.so": "a33e54ee4a93e26d078d52602155d5a7f612bb7872e65cda09d74cc556c79c1d",
+        "lib/server/libjvm.so": "d39c0c9a01466b410703c8afe3f4e1e369ad2c8108d78f9f3c12ae5012c88ddf"
+      },
+      "receipt": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/receiving-runtime-20261021/baseline-build.json",
+        "sha256": "2de7817e4a7602c6b174ff3a729ac15e74a212660b3b2546722b9de7c6c5c0ab"
+      }
+    },
+    "initial": {
+      "buildExit": 0,
+      "sha256": {
+        "bin/java": "19fc0a65405b9079b592a059c5a13e49184b7fb990165f45d3ead8ef68babdf6",
+        "lib/modules": "525580d71eb5b2320058cbe466b4ec0fb418bdc8a6f0eaef6ad052e9cb095f58",
+        "lib/libjava.so": "1829949024f9bc51b99a0480d29dff3dd0b338f53b4c2c9a7d8c98506f5bf513",
+        "lib/server/libjvm.so": "8ffdf90f1157a15a8c03e943ee09885e9c472d7d0d867505a75e5bbf6bf2bbaf"
+      },
+      "receipt": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/receiving-runtime-20261021/candidate-build.json",
+        "sha256": "29be5a79d0e3158bbfa59c6571413cc51608fa0209ad7ee6bbf11f90222e5e6d"
+      }
+    },
+    "followup": {
+      "buildExit": 0,
+      "sha256": {
+        "bin/java": "19fc0a65405b9079b592a059c5a13e49184b7fb990165f45d3ead8ef68babdf6",
+        "lib/modules": "8bee22df34bee82f3c3c02e4c3c5e5bfebb101c44f4e80a3f3981c7af8a871dd",
+        "lib/libjava.so": "1829949024f9bc51b99a0480d29dff3dd0b338f53b4c2c9a7d8c98506f5bf513",
+        "lib/server/libjvm.so": "8ffdf90f1157a15a8c03e943ee09885e9c472d7d0d867505a75e5bbf6bf2bbaf"
+      },
+      "receipt": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-build.json",
+        "sha256": "f279b7434122d8b921b7a8f82b686475373deb88b8d7638edda9624018a9cf44"
+      }
+    }
+  },
+  "baselineSourceQualification": {
+    "differenceFromTestedSourceBase": "Only the exact comment-only M3StringImmediate ASCII prerequisite.",
+    "sourceObservationCorrection": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/receiving-runtime-20261021/baseline-runtime/source-observation-clarification.json",
+      "sha256": "02e98d550416a9b06b0ffe60e7538bd2e701c34d7eb8baea0ec28831726dd029"
+    },
+    "meaning": "Original gate sourceSha256 values were later worktree observations; build inputs are identified by the build receipt and append-only clarification. Executable image pins were correct."
+  },
+  "targetedFollowupFunctional": {
+    "status": "PASS",
+    "invocationsIncludingVersion": 11,
+    "testInvocations": 10,
+    "runtime": "Actual source-built Linux x86_64 fastdebug M3JDK21; enabled M3 string storage uses interpreter execution.",
+    "runs": [
+      {
+        "configuration": "version",
+        "exit": 0,
+        "checks": null,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/version.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "configuration": "keyed-enabled",
+        "exit": 0,
+        "checks": 17577,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/keyed-enabled.stdout.log",
+          "sha256": "37a2d78c787c903e709476e29ad9a0cf5c10fa5aefbe18b0830c8831a32560ba"
+        }
+      },
+      {
+        "configuration": "keyed-noncompact",
+        "exit": 0,
+        "checks": 17577,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/keyed-noncompact.stdout.log",
+          "sha256": "37a2d78c787c903e709476e29ad9a0cf5c10fa5aefbe18b0830c8831a32560ba"
+        }
+      },
+      {
+        "configuration": "keyed-disabled-reference",
+        "exit": 0,
+        "checks": 17575,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/keyed-disabled-reference.stdout.log",
+          "sha256": "2a6f72aedda3fa5b5ba023bd65cac57cb21ed130f1a84e987a4a122877095063"
+        }
+      },
+      {
+        "configuration": "cursor-enabled",
+        "exit": 0,
+        "checks": 113710,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/cursor-enabled.stdout.log",
+          "sha256": "61e29ab817760e8e25af600401a59e21e8fc158f46fa918a615c7e48c22a5749"
+        }
+      },
+      {
+        "configuration": "cursor-noncompact",
+        "exit": 0,
+        "checks": 113710,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/cursor-noncompact.stdout.log",
+          "sha256": "61e29ab817760e8e25af600401a59e21e8fc158f46fa918a615c7e48c22a5749"
+        }
+      },
+      {
+        "configuration": "critical-first-enabled",
+        "exit": 0,
+        "checks": 1523,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/critical-first-enabled.stdout.log",
+          "sha256": "7e568de76221c8d887ea06a760c120b935a2c357e36a7ce14c3664c1b7875b51"
+        }
+      },
+      {
+        "configuration": "critical-first-noncompact",
+        "exit": 0,
+        "checks": 1523,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/critical-first-noncompact.stdout.log",
+          "sha256": "7e568de76221c8d887ea06a760c120b935a2c357e36a7ce14c3664c1b7875b51"
+        }
+      },
+      {
+        "configuration": "critical-first-disabled",
+        "exit": 0,
+        "checks": 1361,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/critical-first-disabled.stdout.log",
+          "sha256": "a680465b87a7338e4ca255b16b1d8c67e1471bb21d9f2aea1d108ab7481d93b6"
+        }
+      },
+      {
+        "configuration": "shadow-enabled",
+        "exit": 0,
+        "checks": 1246,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/shadow-enabled.stdout.log",
+          "sha256": "60880849af831aa92b9912980e42fc25aa34e82dfb4dc062a3a34060c126633e"
+        }
+      },
+      {
+        "configuration": "shadow-noncompact",
+        "exit": 0,
+        "checks": 1246,
+        "stdout": {
+          "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/shadow-noncompact.stdout.log",
+          "sha256": "60880849af831aa92b9912980e42fc25aa34e82dfb4dc062a3a34060c126633e"
+        }
+      }
+    ],
+    "receipt": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-runtime/functional.json",
+      "sha256": "a77982edca048a17bc28ad41edefb7b644c379c35aebcd441feb93c516a293d2"
+    },
+    "retention": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/FOLLOWUP_BUILD_AND_FUNCTIONAL_RETENTION.json",
+      "sha256": "25f1a102fb50fd0b831f18cce8c24973f8e49a7465d47b1df561c703fa0d4cc7"
+    }
+  },
+  "privateMalformedRangeRepair": {
+    "validPublicContractPreserved": true,
+    "allInputEquivalenceClaimed": false,
+    "baselineOutcome": "Expected failure: malformed zero-length private char-shadow range did not throw the required range exception.",
+    "baselineReceipt": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/receiving-runtime-20261021/baseline-runtime/gates.json",
+      "sha256": "c6ebe6b2c6eb7828f8687ef2eb611a365c4c78e9fe63973ce364958b12cd163a"
+    },
+    "baselineFailure": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/receiving-runtime-20261021/baseline-runtime/shadow-zero-range-baseline.stderr.log",
+      "sha256": "793d4c3d3d8ed4bde799d964bb8d8472806d54ffad3d75bfa00465e1f6ac70aa"
+    },
+    "followupChecksPerCompactSetting": 1246
+  },
+  "existingRegressions": {
+    "status": "PASS",
+    "testSources": 6,
+    "configurationsPerImage": 14,
+    "imagesPassed": [
+      "baseline",
+      "initial",
+      "followup"
+    ],
+    "sameFrozenCompiledClasses": true,
+    "jtregExecuted": false,
+    "mode": "DIRECT_MAIN_FULL_SOURCE_BUILT_IMAGE",
+    "harnessDifference": "Every main is a fresh VM, including the original plain main directive",
+    "followupReceipt": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/regression/followup-run/results.json",
+      "sha256": "a522cde95e407171f3c0f71167cc98c6fdb4839dbbec2380deb7c3bdc31b8bd0"
+    },
+    "comparison": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/regression/FOLLOWUP_COMPARISON.json",
+      "sha256": "6b2efc66726fb50d61732a9566e15f4a4343f9639b94b13ed563712ebc215bcf"
+    },
+    "sourceCustodyGateExit": 0,
+    "fullBorrowCompletion": false
+  },
+  "boundedInterfaceObservations": {
+    "publicProtectedJavaDescriptors": {
+      "classes": [
+        "java.lang.String",
+        "java.lang.M3String",
+        "java.lang.M3StringPrecomputeBridge"
+      ],
+      "equalToBaseline": true
+    },
+    "initialNativeExportNameCounts": {
+      "libjava": 265,
+      "libjvm": 244
+    },
+    "initialNativeExportNameSetsEqualToBaseline": true,
+    "followupNativeBinariesIdenticalToInitial": true,
+    "fullAbiOrJckQualificationClaimed": false,
+    "initialReceipt": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/receiving-runtime-20261021/abi/RESULTS.json",
+      "sha256": "23ad317805930b61693c1fb9c312a2d89e061592f922138f847b8b5ec2fc3933"
+    },
+    "followupReceipt": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-abi/RESULTS.json",
+      "sha256": "964dd4a60480952575a5f6e3fd75180b3ae591f611afe6d607cd3bb61a7bce94"
+    }
+  },
+  "owningCollectionsModule": {
+    "status": "FAIL",
+    "runtimeStage": "initial",
+    "runtimeModulesSha256": "525580d71eb5b2320058cbe466b4ec0fb418bdc8a6f0eaef6ad052e9cb095f58",
+    "originalPomUnchanged": true,
+    "sourceBuiltJUnitCoordinatesPreserved": true,
+    "java": {
+      "exit": 1,
+      "suites": 142,
+      "tests": 477,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 2,
+      "receipt": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/owning-maven/java-gate/RESULTS.json",
+        "sha256": "26e80016dbbc1ec09826c2c3c55413535dbf7f71d459dab25c073ee646d6e687"
+      }
+    },
+    "native": {
+      "exit": 1,
+      "suites": 142,
+      "tests": 477,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "receipt": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/owning-maven/native-gate/RESULTS.json",
+        "sha256": "8a7cd05713673ee88fd68cb2ce035b2e9f84c34b42080e5dc27745c76db66e53"
+      }
+    },
+    "failures": [
+      {
+        "class": "com.m3.collections.M3FilteredMergedSequencedTest",
+        "test": "mergedReadOnlyReverseAndSplitContractsCompose",
+        "type": "java.lang.AssertionError",
+        "message": "owner comparator identity on every split"
+      },
+      {
+        "class": "com.m3.collections.M3FilteredNavigationReconciliationTest",
+        "test": "filteredSortedContracts",
+        "type": "java.lang.AssertionError",
+        "message": "strict removeFirst expected=java.lang.UnsupportedOperationException actual=java.util.NoSuchElementException"
+      },
+      {
+        "class": "com.m3.collections.M3StrictFilteredSequencedTest",
+        "test": "strictSortedAndNavigableReversedViews",
+        "type": "java.lang.AssertionError",
+        "message": "hidden sorted removeFirst must refuse even when empty wrong exception: java.util.NoSuchElementException"
+      }
+    ],
+    "baselineAttribution": {
+      "status": "BASELINE_FAILURES_REPRODUCED",
+      "ref": "2d37d917b49fe04207948a3a2f174b795b767c8e",
+      "runtimeStage": "baseline",
+      "selectedClasses": 3,
+      "executedTests": 4,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "sameFailureClassTestTypeAndMessage": {
+        "java": true,
+        "native": true
+      },
+      "wrapperSourceAndTestBytesUnchanged": true,
+      "originalReceiptStatus": "ATTRIBUTION_INCOMPLETE",
+      "correction": "Append-only interpretation corrects selected class count versus executed test count and equivalent local file URI spelling; original receipts and red test outcomes remain unchanged.",
+      "receipt": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/owning-maven/baseline-attribution-gate/RESULTS.json",
+        "sha256": "0a76a15e77867c002aa4110c600913faf81d246cf7fcb13b25899695b6c2d24e"
+      }
+    },
+    "interpretation": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/owning-maven/EVIDENCE_INTERPRETATION.json",
+      "sha256": "26c63918acbadf726790fab4aaa2c52d9de385bf96d2cd3a3c35bbe25e5c431e"
+    },
+    "allRawTextEvidence": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/owning-maven/EVIDENCE_MANIFEST.json",
+      "sha256": "ce13c86ca0343b1357d72bae15a05807a48ceb9b6cc5e38ed6665be8c8eb6097"
+    },
+    "limitation": "These full owning gates use the initial candidate image. Fourteen separate existing-test configurations pass on the follow-up image; no full follow-up owning gate is claimed."
+  },
+  "measurements": {
+    "publicMedianTable": "MEASUREMENTS.tsv",
+    "publicMedianTableSha256": "b41ab1aa21477b134ad0fe98a651d19c650d3290f40d06b6efd1abf9661e3b1e",
+    "publicMedianRows": 72,
+    "resource": {
+      "images": 3,
+      "compactModes": 2,
+      "runs": 6,
+      "checksPerRun": 599,
+      "samples": 252,
+      "followupSamples": 84,
+      "followupZeroAllocatedBytesSamples": 84,
+      "initialTupleAllocationBytesPerOperandPerOperation": 48,
+      "baselineAndFollowupAllocationBytesPerOperationInMeasuredCases": 0,
+      "allocationAndThreadCpuCountersSupportedInEveryRun": true,
+      "sameCompiledProbeClassesInEveryRun": true,
+      "scope": "Per-thread allocation traffic and CPU counters for bounded early mismatch/one-unit fixtures and controls. Not retained heap, native memory, process memory, or release throughput.",
+      "comparison": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-comparison/resources.json",
+        "sha256": "fe9f9a72bbc008cb8b47dd6928b26fa2ae2f6e2f7858cb3406fac8e962077871"
+      }
+    },
+    "wallTime": {
+      "images": 3,
+      "workloads": 16,
+      "samplesPerWorkloadPerImage": 3,
+      "samples": 144,
+      "allSamplesAndControlsRetained": true,
+      "checksumsAgree": true,
+      "scope": "Three-sample, bounded fastdebug/interpreter wall-time diagnostic with materially different host load across runs. No general speedup or isolated timing-regression inference; retain scalar controls and every unfavorable sample.",
+      "loadAverageRangesOneMinute": {
+        "baseline": [
+          1.6728515625,
+          2.06005859375
+        ],
+        "initial": [
+          12.82421875,
+          13.43408203125
+        ],
+        "followup": [
+          1.93896484375,
+          2.1826171875
+        ]
+      },
+      "comparison": {
+        "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/followup-comparison/timing.json",
+        "sha256": "71c39e33263f9fcbd3465f132e225776b0be68b7d6778a8f841ddcecd296e29c"
+      }
+    },
+    "independentReconciliation": {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/final-runtime-20261021/FOLLOWUP_MEASUREMENT_RETENTION.json",
+      "sha256": "0038903e1c2ea96d3f096aff4cef0252470e2b0588147b54387582d6019746c9"
+    }
+  },
+  "limits": [
+    "The owning collections Maven gates remain red; baseline attribution does not waive them.",
+    "No complete repository, all-canonical-owner, full jtreg, JCK, cross-platform, or release/JIT performance qualification.",
+    "The existing SA Immediate decoding, M3ChunkCursor adapter, and extreme-length GetStringCritical allocation expression review gaps remain recorded.",
+    "Current exact source-built dependencies and offline cached recipe authoring do not establish repository-wide vendored/offline dependency closure."
+  ]
+}
