@@ -1,0 +1,124 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 direct filtered sorted cursor masks Java21 JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredCursorState*.java'
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/M3CollectionViewsCursorMaskContract.java'
+      - 'm3/collections/qualification/filtered-cursor-mask-20261021/**'
+      - '.github/workflows/m3-filtered-cursor-mask-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-owner-java21-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact source and Git blob identity, diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check origin/master...HEAD
+          bash m3/collections/qualification/filtered-cursor-mask-20261021/verify.sh
+          bash m3/collections/qualification/descending-groupmask-20261021/verify.sh
+      - name: Strict Java 21 actual M3 List/Deque/Sorted wrappers and existing oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-filtered"
+          mkdir -p "$out/classes" "$out/native" "$out/patch-src/java/util" "$out/patch" "$out/test" "$out/sourcepath/com/m3"
+          test -f m3/collections/src/main/java/com/m3/collections/M3TreeMap.java
+          test -f m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java
+          ln -s "$PWD/m3/collections/src/main/java/com/m3/collections" "$out/sourcepath/com/m3/collections"
+          javac --release 21 -proc:none -Xlint:all -Werror -sourcepath "$out/sourcepath" -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredCursorStateProof.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionProof.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java
+          java -cp "$out/classes" com.m3.collections.M3FilteredCursorStateProof
+          java -cp "$out/classes" com.m3.collections.M3FilteredDequeContract
+          java -cp "$out/classes" com.m3.collections.M3FilteredViewsContract
+          java -cp "$out/classes" com.m3.collections.M3FilteredListsDeepCompositionProof
+          java -Xint -Xss256k -cp "$out/classes" \
+            com.m3.collections.M3FilteredCursorStateProof
+      - name: Compile actual modified java.base CollectionViews, not a facade
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-filtered"
+          cp src/java.base/share/classes/java/util/CollectionViews.java \
+             "$out/patch-src/java/util/CollectionViews.java"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            --patch-module java.base="$out/patch-src" -d "$out/patch" \
+            "$out/patch-src/java/util/CollectionViews.java"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            --patch-module java.base="$out/patch" -d "$out/test" \
+            test/jdk/java/util/CollectionViews/M3CollectionViewsCursorMaskContract.java \
+            test/jdk/java/util/CollectionViews/RunSearchJni.java \
+            test/jdk/java/util/CollectionViews/CollectionViewsContract.java
+          java --patch-module java.base="$out/patch" \
+            --add-opens java.base/java.util=ALL-UNNAMED -cp "$out/test" \
+            M3CollectionViewsCursorMaskContract
+          java --patch-module java.base="$out/patch" \
+            --add-opens java.base/java.util=ALL-UNNAMED -Xss256k \
+            -cp "$out/test" CollectionViewsContract
+      - name: Existing JNI primitive index-mask owner, required JNI parity, no new exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-filtered"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -cp "$out/classes" -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredCursorStateNativeProof.java
+          gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
+            -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$out/native/libm3_collections_mask.so"
+          java -Xcheck:jni -Djava.library.path="$out/native" \
+            -cp "$out/classes" com.m3.collections.M3FilteredCursorStateNativeProof
+
+  owning-maven-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build source-vendored JUnit 5.10.2 dependency closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
+          test -s "$HOME/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.jar"
+      - name: Run owning filtered collection Maven reactor and JUnit contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am \
+            -Dsurefire.failIfNoSpecifiedTests=false \
+            -Dtest=M3FilteredCursorStateTest,M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3FilteredDequesTest,M3FilteredViewsTest,M3FilteredListsTest \
+            test
+          for klass in M3FilteredCursorStateTest M3IndexedDescendingGroupMaskTest M3IndexedFilterSortFusionTest M3FilteredDequesTest M3FilteredViewsTest M3FilteredListsTest; do
+            test -s "m3/collections/target/surefire-reports/TEST-com.m3.collections.${klass}.xml"
+          done
