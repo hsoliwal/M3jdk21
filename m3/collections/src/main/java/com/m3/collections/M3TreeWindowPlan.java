@@ -36,6 +36,8 @@ public final class M3TreeWindowPlan {
 	private final M3LongLongHashMap commitHandleAdmission = new M3LongLongHashMap ();
 
 	private long [] planned = new long [0], retired = new long [0];
+	/** Bounded primitive key snapshot: commit must publish the exact planned coordinates. */
+	private long [] plannedKeys = new long [0];
 	private int [] previousSiblings = new int [0];
 	private int [] lastChild = new int [0];
 	/** Stack of still-open physical parents while validating dense preorder. */
@@ -102,6 +104,9 @@ public final class M3TreeWindowPlan {
 				throw new IllegalArgumentException ("duplicate tree coordinate");
 			}
 		}
+		// Grow once and publish only after the whole candidate plan succeeds.
+		long [] nextPlannedKeys = plannedKeys.length < count
+				? new long [capacity (plannedKeys.length, count)] : plannedKeys;
 		if (planned.length < count) {
 			planned = new long [capacity (planned.length, count)];
 			previousSiblings = new int [planned.length];
@@ -133,7 +138,6 @@ public final class M3TreeWindowPlan {
 				planned [entry] = 0;
 			}
 		}
-		plannedCount = count;
 		retiredCount = 0;
 		for (int slot = 0; slot < size; slot++) {
 			int parent = parentSlots [slot];
@@ -142,6 +146,15 @@ public final class M3TreeWindowPlan {
 				retired [retiredCount++] = handles [slot];
 			}
 		}
+		// lastChild is no longer needed once previousSiblings is constructed.
+		// Reuse this indexed scratch as the exact planned parent-slot directory;
+		// no new per-row parent array, node, box or JNI handle is allocated.
+		for (int entry = 0; entry < count; entry++) {
+			nextPlannedKeys [entry] = key (parentIds [entry], childIndices [entry]);
+			lastChild [entry] = physicalParents [entry];
+		}
+		plannedKeys = nextPlannedKeys;
+		plannedCount = count;
 	}
 
 	/**
@@ -245,6 +258,18 @@ public final class M3TreeWindowPlan {
 			int physicalParent = physicalParents [entry];
 			if (physicalParent < -1 || physicalParent >= entry) {
 				throw new IllegalArgumentException ("preorder");
+			}
+		}
+		// Preserve the previous validation/exception order before checking plan
+		// identity. An otherwise well-formed but different coordinate or physical
+		// parent must not be published as the approved native window.
+		for (int entry = 0; entry < count; entry++) {
+			if (plannedKeys [entry] != key (parentIds [entry], childIndices [entry])
+					|| lastChild [entry] != physicalParents [entry]) {
+				throw new IllegalArgumentException ("commit differs from planned window");
+			}
+			if (planned [entry] != 0 && planned [entry] != nativeHandles [entry]) {
+				throw new IllegalArgumentException ("retained native handle changed");
 			}
 		}
 		if (keys.length < count) {

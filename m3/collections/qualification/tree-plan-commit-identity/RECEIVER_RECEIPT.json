@@ -1,0 +1,83 @@
+{
+  "schema": "M3JDK21_NATIVE_TREE_PLAN_COMMIT_RECEIVER_V1",
+  "date": "2026-10-27",
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseline_branch": "master",
+    "baseline_commit": "05e947be6fe9a25d3ca0b4803777beebfb52876a",
+    "owner": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+    "operation": "plan(int,int[],int[],int[]) then commit(int,int[],int[],int[],long[])",
+    "java_se_public_api_changed": false,
+    "jni_abi_changed": false,
+    "new_public_m3_type": false
+  },
+  "synexia_convergence": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-tree-plan-commit-identity-20261027",
+    "pr": "https://github.com/hsoliwal/com.synexia/pull/13605",
+    "recipe": "com.synexia.rewrite.M3TreePlanCommitIdentityRecipe",
+    "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-tree-plan-commit-identity-20261027/manifest.tsv",
+    "receiving_policy": "Product contains executed Java postimages, target tests, and passive source/recipe/gate references; the exact algorithm decision catalogue remains exclusively in Synexia."
+  },
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+      "preimage_git_blob_sha1": "81816c58eb280820984162d6050d25a0c8e96932",
+      "postimage_git_blob_sha1": "fd425edf2bb7446a0e4446b272a616015b200361",
+      "preimage_sha256": "1e719d48bbaa9fa4c8065b16848c6bd770d13f661d2e823d192e212da65b2478",
+      "postimage_sha256": "ce27f58fa068a61feb6e74d6067a5751241f41688b63e87085ecae34a1eeba6d",
+      "role": "single_existing_impl_owner"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java",
+      "preimage_git_blob_sha1": null,
+      "postimage_git_blob_sha1": "a6e7df64f1850ba54851be44056837d37640a096",
+      "preimage_sha256": null,
+      "postimage_sha256": "011311ca0bdb351e40c431f358475d5c3c23767eca6696c4ac10dad8bb7efd4f",
+      "role": "additive_junit_contract"
+    }
+  ],
+  "catalogue": {
+    "repository": "hsoliwal/com.synexia",
+    "ref": "edea893880b030935da5fd3f1ab35f7ab7cec8d4",
+    "path": "synexia-openrewrite-recipes/crates/m3-tree-plan-commit-identity-20261027/CANDIDATE_CATALOGUE.tsv",
+    "git_blob_sha1": "6f088b752df3c085cc2563ef05ecff803c67515d",
+    "sha256": "6f2cb23cf9a499cf34e32cfbae9fb5ccf183d70adaf694231fa28ac018044323",
+    "problem_categories": 8
+  },
+  "verification": {
+    "preimage_git_blob_and_postimage_readback": {
+      "status": "PASS",
+      "evidence": "Synexia preimage equals M3JDK21 master source Git blob; resulting two target files equal Synexia candidate Git blobs."
+    },
+    "sha256_manifest": {
+      "status": "PASS",
+      "evidence": "Three SHA-256 values derived from GitHub content with self-tested SHA256 routine; manifest binds exact before/after and ABSENT test."
+    },
+    "source_syntax_differential": {
+      "status": "PENDING_CI",
+      "runner": "Python 3 and Java 21 isolated witness builds exact preimage and candidate; baseline must accept invalid commit, candidate must refuse."
+    },
+    "maven_openrewrite_fixed_point": {
+      "status": "PENDING_CI",
+      "runner": "Synexia PR #13605 isolated Maven Java21 crate and six JUnit recipe tests."
+    },
+    "actual_java21_product_module": {
+      "status": "PENDING_CI",
+      "runner": "Real m3-arrays/m3-collections Maven tests including seven product JUnit cases and existing tree-plan coverage."
+    },
+    "actual_jni_mask_window_parity": {
+      "status": "PENDING_INDEPENDENT",
+      "note": "Native C files unchanged; JNI ABI continuity still requires proof."
+    },
+    "installed_m3jdk21_jtreg_gc": {
+      "status": "NOT_RUN"
+    },
+    "resource_cpu_heap_native": {
+      "status": "NOT_RUN",
+      "note": "No performance or memory admission based solely on a correctness patch."
+    }
+  },
+  "decision": "DRAFT_REVIEWABLE_ATOM_NOT_JDK_RUNTIME_PROMOTED",
+  "rollback": "Restore exact pinned baseline Java source; remove additive JUnit test and data-only receipt without changing JNI ABI."
+}

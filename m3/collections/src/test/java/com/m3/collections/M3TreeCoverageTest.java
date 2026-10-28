@@ -321,10 +321,13 @@ public class M3TreeCoverageTest {
 		assertEquals (5, call (plan, "size"));
 		assertEquals (100L, call (plan, "handle", 0));
 		assertEquals (102L, call (plan, "handleOf", 0, 0), "the expanded child is resident");
-		/* a duplicate coordinate in a planned window reuses the handle only once */
-		callTyped (plan, "plan", PLAN, 2, new int [] {ROOT, ROOT}, new int [] {1, 1}, new int [] {-1, -1});
-		assertEquals (101L, call (plan, "plannedHandle", 0));
-		assertEquals (0L, call (plan, "plannedHandle", 1));
+		/* Duplicate logical coordinates are invalid: refuse before changing the resident window. */
+		assertEquals ("duplicate tree coordinate", assertThrows (IllegalArgumentException.class,
+				() -> callTyped (plan, "plan", PLAN, 2, new int [] {ROOT, ROOT},
+						new int [] {1, 1}, new int [] {-1, -1})).getMessage ());
+		assertEquals (count, call (plan, "plannedCount"), "failed plan preserves prior count");
+		assertEquals (101L, call (plan, "handleOf", ROOT, 1), "failed plan preserves root native handle");
+		assertEquals (102L, call (plan, "handleOf", 0, 0), "failed plan preserves child native handle");
 	}
 
 	@Test
