@@ -82,7 +82,7 @@ public final class M3FileEditBatch {
             i++;
         }
         base.copyRangeTo(oldCursor, newBytes, newCursor, base.length() - oldCursor);
-        newCursor += oldBytes.length - oldCursor;
+        newCursor += base.length() - oldCursor;
         if (newCursor != finalLength) throw new AssertionError("incorrect source delta arithmetic");
         M3FileSource next = M3FileSource.fromExclusiveBytes(newBytes);
         return new Applied(next, new ChangeMap(base.sha256(), next.sha256(), base.length(),
