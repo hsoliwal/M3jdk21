@@ -22,14 +22,14 @@
       "note": "OS provides mapped/sharable memory, not a global OS intern API; canonical identities remain M3JDK21 owned; no automatic String hot-path switch before performance qualification"
     },
     {
-        "source": "Synexia MIndexString owner/range interning; tools4j/shortstring primitive-codec technique (MIT, no code copied)",
-        "source_commit": "383d2d17d5d1942673976db34cda3695991ca422",
-        "target": "java.lang.M3StringImmediate with HotSpot java_lang_M3String native char/copy adapter",
-        "status": "DRAFT_FIXED_ARRAY_IMMEDIATE_RECEIVER_NOT_RUNTIME_QUALIFIED",
-        "recipe": "com.synexia.rewrite.m3fixedshort.M3FixedArrayShortStringRecipe",
-        "target_rule": "Fixed long[32] pages own packed immediate words; weak index and slot owners; preserve java.lang.String, existing owner/range/tuple view, Unicode refusal and JNI compatibility",
-        "gates": "Source-sealed, fixed point/refusal fixture, JDK21 patch compile, HotSpot native build, jtreg, GC/CDS and CPU/heap/native evidence required; no runtime promotion before proof",
-        "provenance": "tools4j MIT copyright 2023 tools4j.org (Marco Terzer); target Java/HotSpot licenses unchanged"
+      "source": "Synexia MIndexString owner/range interning; tools4j/shortstring primitive-codec technique (MIT, no code copied)",
+      "source_commit": "383d2d17d5d1942673976db34cda3695991ca422",
+      "target": "java.lang.M3StringImmediate with HotSpot java_lang_M3String native char/copy adapter",
+      "status": "DRAFT_FIXED_ARRAY_IMMEDIATE_RECEIVER_NOT_RUNTIME_QUALIFIED",
+      "recipe": "com.synexia.rewrite.m3fixedshort.M3FixedArrayShortStringRecipe",
+      "target_rule": "Fixed long[32] pages own packed immediate words; weak index and slot owners; preserve java.lang.String, existing owner/range/tuple view, Unicode refusal and JNI compatibility",
+      "gates": "Source-sealed, fixed point/refusal fixture, JDK21 patch compile, HotSpot native build, jtreg, GC/CDS and CPU/heap/native evidence required; no runtime promotion before proof",
+      "provenance": "tools4j MIT copyright 2023 tools4j.org (Marco Terzer); target Java/HotSpot licenses unchanged"
     },
     {
       "source": "com.synexia.indexstring.projection.MIndexDerivativeRegex / MIndexPredicateAlphabet / native derivative power ABI",
@@ -777,6 +777,30 @@
       "source_license": "GPL-2.0-only WITH Classpath-exception-2.0; existing target notices retained",
       "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-lexicon-convergence-20261019/datasets/indexed-views-20261019",
       "scope_limit": "Refines one existing owner; public collection APIs and the current STRING qualification phase remain unchanged."
+    },
+    {
+      "source": "Canonical Synexia MIndex token-path cursors and public Swift Collections rope traversal ideas",
+      "source_role": "Reusable canonical algorithm/recipe in Synexia; public Swift sources are reference-only ideas",
+      "source_git_repo": "hsoliwal/com.synexia",
+      "source_preimage_revision": "140c263a90f9803b9c46103c63355a286e0515f0",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTupleReferences.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexStringTuple.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java"
+      ],
+      "source_revision_receipt": "m3/runtime-integration/rope-navigation-20261018/HANDOFF.json",
+      "reference_repository": "apple/swift-collections",
+      "reference_revision": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+      "target": "java.lang.M3String.CodeUnitCursor",
+      "target_path": "src/java.base/share/classes/java/lang/M3String.java",
+      "internal_optimization_owner": "java.lang.M3String.CodeUnitCursor",
+      "recipe": "com.synexia.rewrite.M3RopeNavigationRecipe",
+      "canonical_recipe_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RopeNavigationRecipe.java",
+      "receiver_test": "test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "receiver_evidence": "m3/runtime-integration/rope-navigation-20261018/README.md",
+      "status": "CANDIDATE: recipe-generated canonical token-path navigation and M3 bidirectional scalar windows; bounded actual-owner Java21 proof; matched JDK/jtreg/HotSpot/JNI and full target promotion gates remain pending",
+      "target_rule": "Preserve exact UTF-16, canonical owner plus packed coordinate, existing tuple/scalar owners and public JDK names. The M3 scalar cache covers the complete visible leaf interval without adding cursor fields or path arrays. Canonical MIndex retains bounded token paths; neither target adds text payload or a new runtime dependency. String qualification phase unchanged.",
+      "license": "Synexia recipe Apache-2.0; existing MIndex traversal retains Apache-2.0 AND BSD-3-Clause notices. M3 target source keeps GPLv2 with Classpath exception and adapts its existing public cursor independently; no mixed Synexia file or Swift source copied. Apple is reference-only (Apache-2.0 WITH Swift-exception)"
     }
   ],
   "imported_donor_sources": [],
