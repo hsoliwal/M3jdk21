@@ -64,14 +64,13 @@ public final class M3FileEditBatch {
         for (Change edit : pending) {
             finalLength = Math.addExact(finalLength - (edit.end - edit.start), edit.inserted.length);
         }
-        byte[] oldBytes = base.bytes();
         byte[] newBytes = new byte[finalLength];
         int oldCursor = 0, newCursor = 0, i = 0;
         int[] oldStarts = new int[pending.size()], oldEnds = new int[pending.size()];
         int[] newStarts = new int[pending.size()], newEnds = new int[pending.size()];
         for (Change edit : pending) {
             int untouched = edit.start - oldCursor;
-            System.arraycopy(oldBytes, oldCursor, newBytes, newCursor, untouched);
+            base.copyRangeTo(oldCursor, newBytes, newCursor, untouched);
             newCursor += untouched;
             oldStarts[i] = edit.start;
             oldEnds[i] = edit.end;
@@ -82,10 +81,10 @@ public final class M3FileEditBatch {
             oldCursor = edit.end;
             i++;
         }
-        System.arraycopy(oldBytes, oldCursor, newBytes, newCursor, oldBytes.length - oldCursor);
+        base.copyRangeTo(oldCursor, newBytes, newCursor, base.length() - oldCursor);
         newCursor += oldBytes.length - oldCursor;
         if (newCursor != finalLength) throw new AssertionError("incorrect source delta arithmetic");
-        M3FileSource next = M3FileSource.fromBytes(newBytes);
+        M3FileSource next = M3FileSource.fromExclusiveBytes(newBytes);
         return new Applied(next, new ChangeMap(base.sha256(), next.sha256(), base.length(),
                 finalLength, oldStarts, oldEnds, newStarts, newEnds));
     }
