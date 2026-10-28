@@ -217,6 +217,11 @@ public final class M3SparseExtents {
 	 */
 	public void visibleRange (long offset, int viewport, int [] out) {
 		if (viewport < 0) throw new IllegalArgumentException ("negative viewport");
+		// Publish both boundaries as a pair, or none: refuse short output lanes before any write.
+		if (out != null && out.length < 2) {
+			throw new ArrayIndexOutOfBoundsException ("Index " + out.length
+					+ " out of bounds for length " + out.length);
+		}
 		if (count == 0) {
 			out [0] = 0;
 			out [1] = 0;
@@ -236,6 +241,7 @@ public final class M3SparseExtents {
 	}
 
 	public long maxScrollOffset (int viewport) {
+		if (viewport < 0) throw new IllegalArgumentException ("negative viewport");
 		return Math.max (0L, totalExtent () - viewport);
 	}
 
