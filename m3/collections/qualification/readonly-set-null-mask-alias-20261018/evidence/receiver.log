@@ -1,0 +1,480 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# PUBLIC RECEIVER EVIDENCE PROJECTION
+# Retained log lines below are exact. Each block identifies its original SHA-256.
+# Command arrays and selected JSON fields are separately labelled projections.
+# No test or benchmark was rerun when assembling this projection.
+
+# BEGIN EXACT LINE PROJECTION 049-sdk-compile.log
+# original_sha256=92153adf3893a55f0aeac0c2b60696bc9a2ca6717c3338bb9996efaeee5e57ad
+# original_line_numbers=16,23,25
+[INFO] Compiling 3 source files with javac [debug release 21] to target/classes
+[INFO] Compiling 2 source files with javac [debug release 21] to target/test-classes
+[INFO] BUILD SUCCESS
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 050-sdk-test.log
+# original_sha256=88648987dd08e5c140036548af9bd11969a1ea1b4787759596b1c17a63294441
+# original_line_numbers=19,117,121,124
+[INFO] Compiling 2 source files with javac [debug release 21] to target/test-classes
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 58.83 s -- in com.synexia.rewrite.NavigationMaskRecipeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 051-sdk-runtime.log
+# original_sha256=65f5422eb25b7906d0584cb943b361aa06112cdae1ff97b63e55948d3809ca75
+# original_line_numbers=17,19,21,23,25,27,28
+PASS SDK_RECEIVER dataset=m3-set-null-oracle-20261018 results=1 replay=0 sha256=e4ffa9331e6dfb74cd91391c4cdc9b9cc8fa1f359e79b6f98f4ccb962b1f6fd9
+PASS SDK_RECEIVER dataset=m3-set-null-junit-20261018 results=1 replay=0 sha256=ba0af20ac2ebc21a88c5283484e02106a656838f85a6568ea15b6268e8aa9c80
+PASS SDK_RECEIVER dataset=m3-mask-oracle-20261018 results=1 replay=0 sha256=3c5528cb59b86a5905c42c4c7e1dd4923772bdb5e2f4918c94466d809ad3344b
+PASS SDK_RECEIVER dataset=m3-mask-junit-20261018 results=1 replay=0 sha256=21524ab83d436650d247964f54ad659bcee754d279e81be2450fc22142e989c3
+PASS SDK_RECEIVER dataset=m3-readonly-set-null-20261018 results=1 replay=0 sha256=3f4c6ec67e0dacf16efaa0d22a1b649790b00c81e4c4f9cd8564851ffef4769b
+PASS SDK_RECEIVER dataset=m3-path-mask-alias-20261018 results=1 replay=0 sha256=772c6edbf3781fcebc373e6ad79d82770112e91eab811b5883d92650dcdfd947
+{"status": "PASS", "actual_sdk_received_files": 6, "second_application_results": 0, "product_sources_written": false}
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 054-fixtures-compile.log
+# original_sha256=80210f268cc5314fc2a2636856df5e606ea5380d98433e30f5967a1b6487e887
+# original_line_numbers=15,22,24
+[INFO] Compiling 134 source files with javac [debug release 21] to target/classes
+[INFO] Compiling 162 source files with javac [debug release 21] to target/test-classes
+[INFO] BUILD SUCCESS
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 055-fixtures-test.log
+# original_sha256=d462761239cae7e6fb5f62e97ae618d77b10188e5a5b3e161650445784c48816
+# original_line_numbers=3
+PASS_COUNTEREXAMPLE_OBSERVATION expected_failures=2 baseline_production=UNCHANGED
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 058-readonly-set-compile.log
+# original_sha256=db6d47dff29eee3daa6a749ea1901554b4ca07663f7aafbcc32d0013f5887c72
+# original_line_numbers=13,20,22
+[INFO] Compiling 134 source files with javac [debug release 21 module-path] to target/classes
+[INFO] Compiling 162 source files with javac [debug release 21] to target/test-classes
+[INFO] BUILD SUCCESS
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 059-readonly-set-test.log
+# original_sha256=b33a681ee90e5c231df2a0fddd63ddd37bada7f294b84459400a73aa4fd5f34a
+# original_line_numbers=27,31,34
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.046 s -- in com.m3.collections.M3FilteredSetNullTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 060-readonly-set-runtime.log
+# original_sha256=a0e69586348640c4bd8fdc87739119362729ea11c331b7f4d8f3887cc525dbf2
+# original_line_numbers=1,2
+PASS readonly-set-null mode=--all checks=6076493
+PASS M3_BOUNDED_FILTERED_NAVIGATION checks=90431
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 063-collections-compile.log
+# original_sha256=8814d2fb9bb8a5d0aa10f583bf37bd87f9fbbd673063be134fde5a53648bacf9
+# original_line_numbers=13,20,22
+[INFO] Compiling 134 source files with javac [debug release 21 module-path] to target/classes
+[INFO] Compiling 162 source files with javac [debug release 21] to target/test-classes
+[INFO] BUILD SUCCESS
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 064-collections-test.log
+# original_sha256=9c9e48b71753f23b6de55a570d956796a110e2f6a50a83a78c2ec64bb2dc1aff
+# original_line_numbers=28,30,32,35,37,40,43,46,49,51,54,57,59,62,65,68,71,73,76,78,81,84,87,89,91,94,97,99,101,103,108,111,113,116,118,121,124,126,128,131,134,136,139,141,143,146,149,151,153,157,159,162,165,168,170,172,175,177,180,182,185,188,191,193,196,198,200,202,205,207,210,214,217,219,221,223,226,228,230,233,237,240
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.124 s -- in com.m3.collections.M3LongIndexProjectionMaskOffsetTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.412 s -- in com.m3.collections.M3LongLongLinkedHashMapTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.328 s -- in com.m3.collections.M3LongTreeSetTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in com.m3.collections.M3IndexedSnapshotPositionTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 s -- in com.m3.collections.M3SpanIndexTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.020 s -- in com.m3.collections.M3IndexPathMasksTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in com.m3.collections.M3SdkRecoveryTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in com.m3.collections.M3IndexPathRankTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.170 s -- in com.m3.collections.M3FilteredViewsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in com.m3.collections.M3ZeroMaskArrayFastPathTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.199 s -- in com.m3.collections.M3MaskAllSelectionReceiverTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.098 s -- in com.m3.collections.M3PrimitiveCollectionDifferentialTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.106 s -- in com.m3.collections.M3IndexedTableTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s -- in com.m3.collections.M3FilteredDequesTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in com.m3.collections.M3ReadOnlyMapDefaultsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s -- in com.m3.collections.M3StateMaskHistogramTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.118 s -- in com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in com.m3.collections.M3LongDagJUnitTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.074 s -- in com.m3.collections.M3AdaptiveEnumLongMapTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 s -- in com.m3.collections.M3LongRangeSetTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.075 s -- in com.m3.collections.M3SignalDimensionsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.053 s -- in com.m3.collections.M3IndexMaskWindowRecoveryTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.257 s -- in com.m3.collections.M3SequenceContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in com.m3.collections.M3LazyObserverRegressionTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.186 s -- in com.m3.collections.M3MutableFilteredViewsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.453 s -- in com.m3.collections.M3NativeIndexRangeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.collections.M3ReceivingRecoveryTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.698 s -- in com.m3.collections.M3MapContractTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.559 s -- in com.m3.collections.M3FilteredListsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.082 s -- in com.m3.collections.M3CountedBagTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.226 s -- in com.m3.collections.M3IntLongHashMapTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.324 s -- in com.m3.collections.M3SdkOwnerFactoryTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in com.m3.collections.M3PathMaskAliasTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in com.m3.collections.M3SignalOrderJUnitTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 s -- in com.m3.collections.M3IndexMaskCompactorTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.305 s -- in com.m3.collections.M3ObjectIdentityTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.152 s -- in com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.390 s -- in com.m3.collections.M3LongSortedAlgebraTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.240 s -- in com.m3.collections.M3GenericArrayListTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.266 s -- in com.m3.collections.M3LongLinkedHashSetTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 s -- in com.m3.collections.M3FilteredNavigableSetRangeTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in com.m3.collections.M3LongStateArrayTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in com.m3.collections.M3ObjectResidencyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.145 s -- in com.m3.collections.M3BitLane28FenwickTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.962 s -- in com.m3.collections.M3PrimitiveFilteredSequencesTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.149 s -- in com.m3.collections.M3JdkCollectionDifferentialTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in com.m3.collections.M3LongArrayDequeTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.256 s -- in com.m3.collections.M3LazyTreeMapTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.m3.collections.M3FactoryContractTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.m3.collections.M3IndexedTableReentrantSortTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.218 s -- in com.m3.collections.M3ProgressAdaptersPercentageTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.m3.collections.M3TombstoneReuseTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.m3.collections.M3ObjectResidencyBorrowTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.320 s -- in com.m3.collections.M3ZeroSlotCapacityTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.119 s -- in com.m3.collections.M3EnumSetTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 s -- in com.m3.collections.M3LongAddressBoundedTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.590 s -- in com.m3.collections.M3IntLanesTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in com.m3.collections.M3FilteredListsDeepCompositionTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in com.m3.collections.M3IndexMaskWindowTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 s -- in com.m3.collections.M3LongRankIndexTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.m3.collections.M3LongArrayListTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.collections.M3LongCompositeLateBindTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.m3.collections.M3FootprintContractTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.090 s -- in com.m3.collections.M3JdkShapedPrimitiveCollectionsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.251 s -- in com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.collections.M3StoredRepresentativeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 s -- in com.m3.collections.M3EnumLongMapTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.m3.collections.M3FilteredListsReadonlyDepthTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s -- in com.m3.collections.M3BagRankIndexTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in com.m3.collections.M3LongAddressKernelTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.637 s -- in com.m3.collections.M3FilteredSetNullTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.134 s -- in com.m3.collections.M3NoRetainedStructuralEntryTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.610 s -- in com.m3.collections.M3ConcurrentContractTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.131 s -- in com.m3.collections.M3ResidencyStateMaskTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.m3.collections.M3ObjectResidencyRuntimePressureTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.m3.collections.M3ObjectSlotIndexTest
+[INFO] Tests run: 234, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION 065-collections-runtime.log
+# original_sha256=727dc0fe922c9c2e442934576241014e341cd55bfee5447478de255e45be61b2
+# original_line_numbers=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30
+{"stage": "TEST-GATE-REQUIRED", "status": "PASS"}
+{"stage": "RUNTIME", "command": "residency-java", "exit_code": 0}
+{"stage": "RUNTIME", "command": "long-path-java", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3IndexMaskCompactorSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3IndexMaskWindowSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3IndexMaskWindowRecoverySelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3BudgetedMaskWindowContract", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3MaskWindowSparseContract", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3NativeIndexRangeSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3MaskNativeParityProof", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3FilteredListsMaskBridgeProof", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3BagRankIndexSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3IndexedSnapshotPositionProof", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3IndexedTableSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3ObjectStateSlots28SelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3SdkRecoverySelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3IndexPathMasksSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3IndexPathMaskWindowSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3IndexPathRankNativeSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3LongAddressBoundedSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3LongAddressKernelSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3LongRankIndexSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3ResidencyStateMaskProof", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3SignalOrderContract", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3SignalDimensionsNativeContract", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3SpanIndexSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "M3StateMaskHistogramSelfTest", "exit_code": 0}
+{"stage": "RUNTIME", "command": "path-alias-native", "exit_code": 0}
+{"stage": "RUNTIME", "command": "path-alias-missing", "exit_code": 0}
+{"stage": "RUNTIME", "status": "PASS"}
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION M3FilteredSetNullContract.log
+# original_sha256=40581c93a441986327e2b4075e9b5d2f702c00cf7c0f914ffff8e30495beadac
+# original_line_numbers=1
+Exception in thread "main" java.lang.AssertionError: interior-null candidate must continue to retained predecessor expected=-1 actual=null
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION M3PathMaskAliasContract.log
+# original_sha256=74edaee8b074e45f07f12c9e2733345f5d7dbc54d526f9dca112305f8c3001e6
+# original_line_numbers=1
+Exception in thread "main" java.lang.AssertionError: required mask alias did not refuse
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION native-prepare/logs/001-javac-version.stdout.log
+# original_sha256=2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a
+# original_line_numbers=1
+javac 21.0.12.1
+# END EXACT LINE PROJECTION
+
+# BEGIN EXACT LINE PROJECTION native-prepare/logs/002-gcc-version.stdout.log
+# original_sha256=cc08f972264fd3ba58abb3ebc6337013b225be267c91d2df9f29f066284fe2b6
+# original_line_numbers=1
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+# END EXACT LINE PROJECTION
+
+# BEGIN NATIVE PREPARE METADATA PROJECTION
+# original_receipt_sha256=467ab1f13464fb4a611ebc322bd10fd656aa091e8994dd8a77498d95d8467be8
+# Recorded argv preserve values except explicitly named local path substitutions.
+# ${JAVA_HOME}: qualification JDK 21.0.12.1; ${M3_RECEIVER_ROOT}: target repository root.
+# ${M3_NATIVE_BUILD}: separate native build output; ${M3_NATIVE_RUNTIME}: separate runtime output.
+{"argv": ["${JAVA_HOME}/bin/javac", "-J-XX:-UsePerfData", "-J-Djava.io.tmpdir=${M3_NATIVE_BUILD}/tmp", "--release", "21", "-proc:none", "-implicit:none", "-Xlint:all,-module", "-Werror", "-sourcepath", "", "-classpath", "${M3_NATIVE_BUILD}/classpath", "-h", "${M3_NATIVE_BUILD}/headers", "-d", "${M3_NATIVE_BUILD}/header-classes", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java", "${M3_RECEIVER_ROOT}/m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "jni-headers", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"argv": ["/usr/bin/gcc", "-std=c17", "-O2", "-g", "-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wsign-conversion", "-Wshadow", "-pedantic", "-fPIC", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-I${JAVA_HOME}/include", "-I${JAVA_HOME}/include/linux", "-I${M3_NATIVE_BUILD}/headers", "-include", "${M3_NATIVE_BUILD}/headers/jni-bindings.h", "-shared", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_index_mask_compactor.c", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_index_mask_window.c", "-o", "${M3_NATIVE_BUILD}/libraries/libm3_collections_mask.so"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "build-m3_collections_mask", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"argv": ["/usr/bin/gcc", "-std=c17", "-O2", "-g", "-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wsign-conversion", "-Wshadow", "-pedantic", "-fPIC", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-I${JAVA_HOME}/include", "-I${JAVA_HOME}/include/linux", "-I${M3_NATIVE_BUILD}/headers", "-include", "${M3_NATIVE_BUILD}/headers/jni-bindings.h", "-shared", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_index_path_masks.c", "-o", "${M3_NATIVE_BUILD}/libraries/libm3_collections_pathmask.so"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "build-m3_collections_pathmask", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"argv": ["/usr/bin/gcc", "-std=c17", "-O2", "-g", "-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wsign-conversion", "-Wshadow", "-pedantic", "-fPIC", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-I${JAVA_HOME}/include", "-I${JAVA_HOME}/include/linux", "-I${M3_NATIVE_BUILD}/headers", "-include", "${M3_NATIVE_BUILD}/headers/jni-bindings.h", "-shared", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_long_address_kernel.c", "-o", "${M3_NATIVE_BUILD}/libraries/libm3_collections_address.so"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "build-m3_collections_address", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"argv": ["/usr/bin/gcc", "-std=c17", "-O2", "-g", "-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wsign-conversion", "-Wshadow", "-pedantic", "-fPIC", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-I${JAVA_HOME}/include", "-I${JAVA_HOME}/include/linux", "-I${M3_NATIVE_BUILD}/headers", "-include", "${M3_NATIVE_BUILD}/headers/jni-bindings.h", "-shared", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c", "-o", "${M3_NATIVE_BUILD}/libraries/libm3rankbatch.so"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "build-m3rankbatch", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"argv": ["/usr/bin/gcc", "-std=c17", "-O2", "-g", "-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wsign-conversion", "-Wshadow", "-pedantic", "-fPIC", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-I${JAVA_HOME}/include", "-I${JAVA_HOME}/include/linux", "-I${M3_NATIVE_BUILD}/headers", "-include", "${M3_NATIVE_BUILD}/headers/jni-bindings.h", "-shared", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_residency_state_mask.c", "-o", "${M3_NATIVE_BUILD}/libraries/libm3_residency_state_mask.so"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "build-m3_residency_state_mask", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"argv": ["/usr/bin/gcc", "-std=c17", "-O2", "-g", "-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wsign-conversion", "-Wshadow", "-pedantic", "-fPIC", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-I${JAVA_HOME}/include", "-I${JAVA_HOME}/include/linux", "-I${M3_NATIVE_BUILD}/headers", "-include", "${M3_NATIVE_BUILD}/headers/jni-bindings.h", "-shared", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_signal_order_jni.c", "-o", "${M3_NATIVE_BUILD}/libraries/libm3signalorder.so"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "build-m3signalorder", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"argv": ["/usr/bin/gcc", "-std=c17", "-O2", "-g", "-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wsign-conversion", "-Wshadow", "-pedantic", "-fPIC", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-I${JAVA_HOME}/include", "-I${JAVA_HOME}/include/linux", "-I${M3_NATIVE_BUILD}/headers", "-include", "${M3_NATIVE_BUILD}/headers/jni-bindings.h", "-shared", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_span_index_jni.c", "-o", "${M3_NATIVE_BUILD}/libraries/libm3_collections_span.so"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "build-m3_collections_span", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"argv": ["/usr/bin/gcc", "-std=c17", "-O2", "-g", "-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wsign-conversion", "-Wshadow", "-pedantic", "-fPIC", "-fsanitize=undefined", "-fno-sanitize-recover=all", "-I${JAVA_HOME}/include", "-I${JAVA_HOME}/include/linux", "-I${M3_NATIVE_BUILD}/headers", "-include", "${M3_NATIVE_BUILD}/headers/jni-bindings.h", "-shared", "${M3_RECEIVER_ROOT}/m3/collections/src/main/native/collections/m3_state_mask_histogram.c", "-o", "${M3_NATIVE_BUILD}/libraries/libm3_collections_statehist.so"], "exit_code": 0, "kind": "PATH_SUBSTITUTED_RECORDED_COMMAND", "label": "build-m3_collections_statehist", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"bytes": 133504, "jni_symbols": ["Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative", "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative", "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative", "Java_com_m3_collections_M3IndexMaskCompactor_selectNative", "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative", "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative", "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative", "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative", "Java_com_m3_collections_M3IndexMaskWindow_scanNative"], "kind": "EXACT_RECEIPT_LIBRARY_FIELD_PROJECTION", "needed_libraries": ["libubsan.so.1", "libc.so.6"], "path": "libraries/libm3_collections_mask.so", "sha256": "2646200041d06f27f2065248eebf546844de38d7a29930068649c173e0184f08"}
+{"bytes": 54264, "jni_symbols": ["Java_com_m3_collections_M3IndexPathMasks_selectNative"], "kind": "EXACT_RECEIPT_LIBRARY_FIELD_PROJECTION", "needed_libraries": ["libubsan.so.1", "libc.so.6"], "path": "libraries/libm3_collections_pathmask.so", "sha256": "0c44cf004d1dd71ed0411104cee184dc08e6c7758ecff4d0e4a1be9c1a53630f"}
+{"bytes": 43264, "jni_symbols": ["Java_com_m3_collections_M3LongAddressKernel_gatherNative"], "kind": "EXACT_RECEIPT_LIBRARY_FIELD_PROJECTION", "needed_libraries": ["libubsan.so.1", "libc.so.6"], "path": "libraries/libm3_collections_address.so", "sha256": "99007725cf3c68c4011c98c360a40bca5251377224c0bf7f7314a1fdf0357ef7"}
+{"bytes": 41008, "jni_symbols": ["Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0"], "kind": "EXACT_RECEIPT_LIBRARY_FIELD_PROJECTION", "needed_libraries": ["libubsan.so.1", "libc.so.6"], "path": "libraries/libm3rankbatch.so", "sha256": "b88ed8a11b48c50fae7a7eef2235c0d008cce5c2f82bb1229d9a046b84429a8a"}
+{"bytes": 56528, "jni_symbols": ["Java_com_m3_collections_M3ResidencyStateMaskIndex_select0"], "kind": "EXACT_RECEIPT_LIBRARY_FIELD_PROJECTION", "needed_libraries": ["libubsan.so.1", "libc.so.6"], "path": "libraries/libm3_residency_state_mask.so", "sha256": "44e953b6cfaabaae2bc5b3646064bd25404912a08dbde64a25736af5efbe6523"}
+{"bytes": 44608, "jni_symbols": ["Java_com_m3_collections_M3SignalOrderNative_sort0"], "kind": "EXACT_RECEIPT_LIBRARY_FIELD_PROJECTION", "needed_libraries": ["libubsan.so.1", "libc.so.6"], "path": "libraries/libm3signalorder.so", "sha256": "479f25420e65b2287d108655bad4222073c90fe4955d99f3345fa4e79fbc38b5"}
+{"bytes": 43432, "jni_symbols": ["Java_com_m3_collections_M3SpanIndex_batchNative"], "kind": "EXACT_RECEIPT_LIBRARY_FIELD_PROJECTION", "needed_libraries": ["libubsan.so.1", "libc.so.6"], "path": "libraries/libm3_collections_span.so", "sha256": "06033405d3aac99aa5f1d90b4ce507270ca7e18041e20357d5b8401ec4397992"}
+{"bytes": 43328, "jni_symbols": ["Java_com_m3_collections_M3StateMaskHistogram_tallyNative"], "kind": "EXACT_RECEIPT_LIBRARY_FIELD_PROJECTION", "needed_libraries": ["libubsan.so.1", "libc.so.6"], "path": "libraries/libm3_collections_statehist.so", "sha256": "a450c4310452f87b26a12636d9bca990990209f4de318618dc2abbc0fd5b57ee"}
+# END NATIVE PREPARE METADATA PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Xmx128m", "-Djava.library.path=${M3_NATIVE_BUILD}/empty-library-path", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3ResidencyStateMaskProof"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "java-only", "label": "residency-java", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/001-residency-java.stdout.log
+# original_sha256=f30416e1895267150f68e6e21bf430fd1a1e7e9cf060d94dc52e9d5a88887b04
+# original_line_numbers=1
+M3_RESIDENCY_STATE_MASK_PASS checks=9627 fingerprint=12197969927824375845 backend=java-only
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/empty-library-path", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3LongIndexPathMasksSelfTest"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "java-only", "label": "long-path-java", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/002-long-path-java.stdout.log
+# original_sha256=22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623
+# original_line_numbers=1
+PASS M3LongIndexPathMasksSelfTest checks=7127 randomized=1500
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3IndexMaskCompactorSelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3IndexMaskCompactorSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/003-M3IndexMaskCompactorSelfTest.stdout.log
+# original_sha256=1c246784742a2e9c6d2ceb0a98f758e059ee1ada3659346ccb104407011d870d
+# original_line_numbers=1
+PASS M3IndexMaskCompactorSelfTest checks=26152 JNI=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3IndexMaskWindowSelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3IndexMaskWindowSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/004-M3IndexMaskWindowSelfTest.stdout.log
+# original_sha256=2ab2a482cf8643ef49edd4db62293a3cdff9b6c6246956d44dcda32536230fd7
+# original_line_numbers=1
+PASS M3_INDEX_MASK_WINDOW checks=30596 native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3IndexMaskWindowRecoverySelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3IndexMaskWindowRecoverySelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/005-M3IndexMaskWindowRecoverySelfTest.stdout.log
+# original_sha256=67234ea01210388ce68d0d5e721fe604f696a24428b046bab79f3f2d62cbd665
+# original_line_numbers=1
+PASS M3IndexMaskWindowRecoverySelfTest checks=10528 JNI=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3BudgetedMaskWindowContract", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3BudgetedMaskWindowContract", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/006-M3BudgetedMaskWindowContract.stdout.log
+# original_sha256=5b344356d50967c756aea71c02cd3c87c876153e0a4637160f7fe2c510ab260d
+# original_line_numbers=1
+BUDGETED_MASK_WINDOW_PASS random=5000 assertions=28914 backend=NATIVE_REQUIRED
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3MaskWindowSparseContract", "native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3MaskWindowSparseContract", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/007-M3MaskWindowSparseContract.stdout.log
+# original_sha256=784a9800a6baf37ea6144e9bc5cf87607d68368e65579e13474f1a6eae400647
+# original_line_numbers=1
+PASS M3MaskWindowSparseContract backend=NATIVE_REQUIRED checks=357095
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3NativeIndexRangeSelfTest", "range", "sharing"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3NativeIndexRangeSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/008-M3NativeIndexRangeSelfTest.stdout.log
+# original_sha256=731dc790540067b52664554d43536df2c2b104d7c8f8f9c0d69d13fa1a2b7df3
+# original_line_numbers=1
+M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3MaskNativeParityProof"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3MaskNativeParityProof", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/009-M3MaskNativeParityProof.stdout.log
+# original_sha256=b5df5e471c6447d1fbf09b1db238720694713d066b440c48966ca2a3b4ca3340
+# original_line_numbers=1
+PASS M3MaskNativeParityProof checks=11520 checkedJNI=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3FilteredListsMaskBridgeProof", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3FilteredListsMaskBridgeProof", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/010-M3FilteredListsMaskBridgeProof.stdout.log
+# original_sha256=f615557aafec0e17016abb9ceabf5d6b57bd006316489721275e918f053d56b7
+# original_line_numbers=1
+PASS M3FilteredListsMaskBridgeProof checks=16241 native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3BagRankIndexSelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3BagRankIndexSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/011-M3BagRankIndexSelfTest.stdout.log
+# original_sha256=6540d8f367720c7455cc28d8b5c349e228c275e5c17f87e63a2a112b01e97a7d
+# original_line_numbers=2
+PASS M3BagRankIndexSelfTest checks=213320 native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3IndexedSnapshotPositionProof", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3IndexedSnapshotPositionProof", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/012-M3IndexedSnapshotPositionProof.stdout.log
+# original_sha256=e3a21e44dba85a4457558f729431912fb869e2da6cee932e5ea203b38892a09d
+# original_line_numbers=1
+PASS M3IndexedSnapshotPositionProof checks=241049 JNI=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3IndexedTableSelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3IndexedTableSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/013-M3IndexedTableSelfTest.stdout.log
+# original_sha256=0a93233962a947a80e69ae92355433f1df4ffb20d80c9c56c53214b290688e03
+# original_line_numbers=1
+PASS M3IndexedTableSelfTest checks=63149 randomized=6000 native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3ObjectStateSlots28SelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3ObjectStateSlots28SelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/014-M3ObjectStateSlots28SelfTest.stdout.log
+# original_sha256=661d6cf90f9009539ca3dd7c2e2b509938bb779ecc40a95f2188d3c8a6cb4496
+# original_line_numbers=1
+PASS M3_OBJECT_STATE_SLOTS_28 checks=1215408 randomized_operations=101376 primitive_state_bytes_per_touched_slot=1
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3SdkRecoverySelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3SdkRecoverySelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/015-M3SdkRecoverySelfTest.stdout.log
+# original_sha256=bad60c85b23e2f73f62fb3d6a34962356691f5a4776a2d38a284b16ed72a0f91
+# original_line_numbers=1
+PASS M3SdkRecoverySelfTest checks=19834 native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3IndexPathMasksSelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3IndexPathMasksSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/016-M3IndexPathMasksSelfTest.stdout.log
+# original_sha256=9b4cc3f2dc97cb3c99aceabf3491549af7b08def00f24cf27ccdb6310887d019
+# original_line_numbers=1
+PASS M3IndexPathMasksSelfTest checks=2324 JNI=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3IndexPathMaskWindowSelfTest", "--native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3IndexPathMaskWindowSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/017-M3IndexPathMaskWindowSelfTest.stdout.log
+# original_sha256=3020972973e12e9eb78b183a49bebfce34999a2de4eac8909107b7f9484b6b6c
+# original_line_numbers=1
+M3_PATH_MASK_WINDOW_PASS checks=22462 backend=NATIVE_REQUIRED nativeAvailable=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3IndexPathRankNativeSelfTest"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3IndexPathRankNativeSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/018-M3IndexPathRankNativeSelfTest.stdout.log
+# original_sha256=f826e04720f1331cee7d9c5376c98f68e94227c8448c5c589b6f18546e0171b1
+# original_line_numbers=1
+PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-Dm3.address.required=true", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3LongAddressBoundedSelfTest"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3LongAddressBoundedSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/019-M3LongAddressBoundedSelfTest.stdout.log
+# original_sha256=150c22b23dfcf673d5fc557e3c1e50e0fe04ef764ebe0e7821fcd8fb17272dcf
+# original_line_numbers=1
+M3_BOUNDED_GATHER_PASS checks=21975732 fingerprint=-8730037866241443045 native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3LongAddressKernelSelfTest"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3LongAddressKernelSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/020-M3LongAddressKernelSelfTest.stdout.log
+# original_sha256=68ff75882fc070a6bcbfdfca066a5cd1c4d9cfcd6406f38b203076addbd70c5b
+# original_line_numbers=1
+PASS M3LongAddressKernelSelfTest checks=384942 native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-Dm3.collections.rank.native=true", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3LongRankIndexSelfTest"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3LongRankIndexSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/021-M3LongRankIndexSelfTest.stdout.log
+# original_sha256=720e876154e023f9a9790dd0f16f292d62a8d7121ea7024c7e785ed4d26a7a1f
+# original_line_numbers=1
+M3LongRankIndexSelfTest PASS native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Xmx128m", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3ResidencyStateMaskProof", "native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3ResidencyStateMaskProof", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/022-M3ResidencyStateMaskProof.stdout.log
+# original_sha256=8f34bea168a03914ba183c6e5adaa65617383dbe9e198f5ebbbd427a80576c96
+# original_line_numbers=1
+M3_RESIDENCY_STATE_MASK_PASS checks=11226 fingerprint=12197969927824375845 backend=jni-enabled
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-Dm3.collections.signal.native=true", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3SignalOrderContract", "native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3SignalOrderContract", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/023-M3SignalOrderContract.stdout.log
+# original_sha256=c23d7efde814a7bb249c15e7188a62aa6fce34fc9228fbed2662ab90f8b62649
+# original_line_numbers=1
+PASS M3SignalOrderContract backend=NATIVE_REQUIRED checks=2010
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-Dm3.collections.signal.native=true", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3SignalDimensionsNativeContract"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3SignalDimensionsNativeContract", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/024-M3SignalDimensionsNativeContract.stdout.log
+# original_sha256=80d30fb7c6dee7220c79408ef21226c289763b0b54857ecd067cc7d47ee3dd9a
+# original_line_numbers=1
+PASS M3SignalDimensionsNativeContract JNI checks=400
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3SpanIndexSelfTest"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3SpanIndexSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/025-M3SpanIndexSelfTest.stdout.log
+# original_sha256=360a176412e752e7a411586fd20548d2dab159a0825fe85286131ec1eaa86dae
+# original_line_numbers=1
+M3SpanIndex Java21/JNI oracle: PASS 128804 assertions, JNI=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3StateMaskHistogramSelfTest"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "M3StateMaskHistogramSelfTest", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/026-M3StateMaskHistogramSelfTest.stdout.log
+# original_sha256=fb24383877561447ae9c40cdf6204e39f7f337c417ef252e01ca5137fdcb2799
+# original_line_numbers=1
+M3StateMaskHistogramSelfTest PASS checks=354665 native=true
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/libraries", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3PathMaskAliasContract", "native"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "native", "label": "path-alias-native", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/027-path-alias-native.stdout.log
+# original_sha256=8f549a37710730e240ec465c52f058e8796a90eb7b36f44567aa5ca8abd33223
+# original_line_numbers=1
+PASS M3_PATH_MASK_ALIAS mode=native checks=34244
+# END EXACT LINE PROJECTION
+
+# RUNTIME COMMAND METADATA PROJECTION; original_receipt_sha256=838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4
+{"argv": ["${JAVA_HOME}/bin/java", "-ea", "-Xcheck:jni", "-XX:-UsePerfData", "-Djava.io.tmpdir=${M3_NATIVE_RUNTIME}/tmp", "-Djava.library.path=${M3_NATIVE_BUILD}/empty-library-path", "-cp", "${M3_RECEIVER_ROOT}/m3/collections/target/classes:${M3_RECEIVER_ROOT}/m3/collections/target/test-classes", "com.m3.collections.M3PathMaskAliasContract", "missing"], "environment_overrides": {"UBSAN_OPTIONS": "halt_on_error=1"}, "exit_code": 0, "kind": "missing-native", "label": "path-alias-missing", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+# BEGIN EXACT LINE PROJECTION native-runtime/logs/028-path-alias-missing.stdout.log
+# original_sha256=853874095a285e1cd4a85bac1f6b70796647e2851624ea1f2d1c0a5317d06940
+# original_line_numbers=1
+PASS M3_PATH_MASK_ALIAS mode=missing checks=50
+# END EXACT LINE PROJECTION
+
+# BEGIN FINAL INTERFACE METADATA PROJECTION
+# original_receipt_sha256=9295f3c50ffb92ad8f155777717f0fd50493f625a13e7c6c01238a17a3c074a9
+# The following is a selected exact-value JSON field projection, not the full original receipt.
+{"admitted_existing_sources": 2, "descriptor_sha256": "0b73ac1a72a8656e746cdb4fe74c77d564fb9344d1dc238923b376e57f9ef574", "module_descriptor_unchanged": true, "new_test_sources": 4, "production_class_files": 321, "public_protected_descriptors_unchanged": true, "public_protected_types": 320, "receiving_phase": "STRING_QUALIFICATION_ACTIVE_NO_PROMOTION", "status": "PASS", "unchanged_baseline_files": 301}
+# END FINAL INTERFACE METADATA PROJECTION
