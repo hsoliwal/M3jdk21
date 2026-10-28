@@ -1,0 +1,38 @@
+{
+  "schema": "M3_VIEWPORT_NATIVE_MASK_SPAN_RECEIVING_V1",
+  "source_master": "92962fbba10cbf13799253a307dc90f4de94b179",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "207b74667af0a46df57d3e6b1ed17ed132f9157e",
+  "canonical_recipe": "com.synexia.m3.ViewportNativeMaskSpan20261028",
+  "canonical_engine_git_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+  "target": ".github/workflows/m3-index-mask-window-20261017.yml",
+  "pre_git_blob": "aec979f493c3dcfe35ce3be5525f78e2223f431a",
+  "post_git_blob": "ea5dd5f5da0a34a5810ac46f382d69e5733efb38",
+  "sdk": {
+    "maven": "3.9.9",
+    "java": "21.0.12.1",
+    "openrewrite": "8.17.1",
+    "junit": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "actual_sdk_results": 1,
+    "zero_change_replay": true,
+    "source_admission_negative_tests": true,
+    "workflow_yaml_parsed": true,
+    "bash_run_blocks_linted": 3
+  },
+  "target_runtime": {
+    "requested": "12000 native-required cases in mixed and interpreted checked-JNI",
+    "native_hosted": "PENDING",
+    "full_all_native_providers": "NOT_RUN",
+    "java_source_changed": false,
+    "jni_c_source_changed": false,
+    "whole_jdk_hotspot_jtreg": "NOT_RUN",
+    "swt_nebula_gef_rwt_native": "NOT_RUN",
+    "performance_measurement": false
+  },
+  "publication": "DRAFT_REVIEW_ONLY"
+}

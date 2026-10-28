@@ -4,8 +4,11 @@ on:
   pull_request:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
       - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
+      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexMaskWindow*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java'
       - 'm3/collections/qualification/m3-index-mask-window-20261017/**'
       - 'm3/collections/pom-m3-index-mask-window-20261017.xml'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-mask-window-20261017/**'
@@ -31,7 +34,8 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
             m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
             m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java
           java -cp "$out/classes" com.m3.collections.M3IndexMaskWindowSelfTest
           gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
@@ -40,6 +44,17 @@ jobs:
             -o "$out/native/libm3_collections_mask.so"
           java -Djava.library.path="$out/native" -cp "$out/classes" \
             com.m3.collections.M3IndexMaskWindowSelfTest --native
+          # The owning 12,000-case mask-span oracle must execute the actual
+          # JNI path (NATIVE_REQUIRED), never a transparent Java fallback.
+          for mode in mixed interpreted; do
+            opts=(); if [[ "$mode" == interpreted ]]; then opts=(-Xint); fi
+            java "${opts[@]}" -ea -Xcheck:jni -Djava.library.path="$out/native" \
+              -cp "$out/classes" com.m3.collections.M3MaskSpansContract native \
+              | tee "$out/mask-spans-$mode.log"
+            grep -qx 'MASK_SPANS_PASS cases=12000 backend=NATIVE_REQUIRED' \
+              "$out/mask-spans-$mode.log"
+          done
+          cmp "$out/mask-spans-mixed.log" "$out/mask-spans-interpreted.log"
       - name: Focused Maven/JUnit and actual OpenRewrite SDK
         shell: bash
         run: |
