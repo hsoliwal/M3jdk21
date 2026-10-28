@@ -1,0 +1,27 @@
+{
+  "schema": "m3-entry-protocol-admission/v1",
+  "rule22_row_sha256": "cda86ce52ccf2dc8bf8ffed8e96da4e66cb7990bf6dcd20dab5102781d83fa0f",
+  "contract_sha256": "77c3cb68cc680dae1880580e705f48a11c74947a6f4b135cefa6ba125c769e7d",
+  "production_scope": [
+    "M3SlotMap",
+    "M3TreeMap",
+    "M3OrderedSlotMap"
+  ],
+  "serial_order": [
+    "M3SlotMap",
+    "M3TreeMap",
+    "M3OrderedSlotMap"
+  ],
+  "status": "ADMITTED_FOR_IMPLEMENTATION_NOT_VALIDATED",
+  "full_Eclipse_owner": "OPEN",
+  "gate": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 25508265984,
+    "logical_bytes": 528662326,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}
