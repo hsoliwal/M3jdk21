@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/converged-oracles-20261018/final-receiver/isolated-rl0t49jw/late-drift/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/converged-oracles-20261018/final-receiver/isolated-rl0t49jw/late-drift/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/converged-oracles-20261018/final-receiver/isolated-rl0t49jw/late-drift/crate/receive.py", line 154, in receive
+    raise ValueError("target source drift: " + relative)
+ValueError: target source drift: m3/collections/src/test/native/m3_mask_window_spans.c

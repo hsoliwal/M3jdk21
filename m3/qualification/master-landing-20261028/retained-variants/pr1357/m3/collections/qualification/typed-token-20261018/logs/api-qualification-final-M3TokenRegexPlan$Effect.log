@@ -1,0 +1,17 @@
+Compiled from "M3TokenRegexPlan.java"
+public final class jdk.internal.mindex.M3TokenRegexPlan$Effect {
+  public long tokenCount();
+    descriptor: ()J
+
+  public long apply(long);
+    descriptor: (J)J
+
+  public boolean matches();
+    descriptor: ()Z
+
+  public jdk.internal.mindex.M3TokenRegexPlan$Effect then(jdk.internal.mindex.M3TokenRegexPlan$Effect, java.lang.Runnable);
+    descriptor: (Ljdk/internal/mindex/M3TokenRegexPlan$Effect;Ljava/lang/Runnable;)Ljdk/internal/mindex/M3TokenRegexPlan$Effect;
+
+  public jdk.internal.mindex.M3TokenRegexPlan$Effect repeated(long, java.lang.Runnable);
+    descriptor: (JLjava/lang/Runnable;)Ljdk/internal/mindex/M3TokenRegexPlan$Effect;
+}

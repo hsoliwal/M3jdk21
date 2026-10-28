@@ -1,0 +1,11 @@
+Exception in thread "main" java.lang.AssertionError: remove before next: unexpected java.lang.IllegalStateException
+	at com.m3.collections.M3WrapperConvergenceContract.failure(M3WrapperConvergenceContract.java:57)
+	at com.m3.collections.M3WrapperConvergenceContract.readOnlyRefusalAndIdentity(M3WrapperConvergenceContract.java:75)
+	at com.m3.collections.M3WrapperConvergenceContract.run(M3WrapperConvergenceContract.java:367)
+	at com.m3.collections.M3WrapperConvergenceContract.main(M3WrapperConvergenceContract.java:383)
+Caused by: java.lang.IllegalStateException
+	at java.base/java.util.AbstractList$Itr.remove(AbstractList.java:385)
+	at com.m3.collections.M3WrapperConvergenceContract.failure(M3WrapperConvergenceContract.java:54)
+	... 3 more
+
+EXIT=1

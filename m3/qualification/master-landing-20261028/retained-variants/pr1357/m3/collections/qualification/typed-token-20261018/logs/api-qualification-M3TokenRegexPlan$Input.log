@@ -1,0 +1,20 @@
+Compiled from "M3TokenRegexPlan.java"
+public final class jdk.internal.mindex.M3TokenRegexPlan$Input {
+  public static jdk.internal.mindex.M3TokenRegexPlan$Input of(java.lang.Object, int[], long[], long[]);
+    descriptor: (Ljava/lang/Object;[I[J[J)Ljdk/internal/mindex/M3TokenRegexPlan$Input;
+
+  public int tokenCount();
+    descriptor: ()I
+
+  public int kindAt(int);
+    descriptor: (I)I
+
+  public long symbolAt(int);
+    descriptor: (I)J
+
+  public long flagsAt(int);
+    descriptor: (I)J
+
+  public jdk.internal.mindex.M3TokenRegexPlan$Input slice(int, int);
+    descriptor: (II)Ljdk/internal/mindex/M3TokenRegexPlan$Input;
+}

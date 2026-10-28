@@ -1,0 +1,7 @@
+Exception in thread "main" java.lang.AssertionError: silent/no-op mutation accepted: empty object direct empty addAll
+	at com.m3.collections.M3IndexedReadOnlyNoopProof.refusal(M3IndexedReadOnlyNoopProof.java:48)
+	at com.m3.collections.M3IndexedReadOnlyNoopProof.verify(M3IndexedReadOnlyNoopProof.java:58)
+	at com.m3.collections.M3IndexedReadOnlyNoopProof.checkOwner(M3IndexedReadOnlyNoopProof.java:132)
+	at com.m3.collections.M3IndexedReadOnlyNoopProof.main(M3IndexedReadOnlyNoopProof.java:150)
+
+EXIT=1

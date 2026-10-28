@@ -1,0 +1,8 @@
+{
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/classes/jdk/internal/mindex/M3RX7.java": "2ca4aaa848ecc56b5844e75dabe363fbd8fe159f79420c20e219c856697d859e",
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/native/libjava/M3RX7.c": "441c6de3577b56d15134f8048c1eeaab3baa982517309ca8d3e7fc9c65006d1a",
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-token/test/jdk/jdk/internal/mindex/M3RX7TokenIndexContract.java": "116483c3fbe411ed8399e578aeedb8a18670d68fb47fee01f5831045d125d877",
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-token/test/jdk/jdk/internal/mindex/M3RX7BoundaryContract.java": "dacafd8a750c6e820cd61eed1ce2585c0a92ab3d7d3887e5a9d2938e27589d8a",
+  "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/native/libM3RX7Boundary.c": "32795e2e753e77554a2ef2dc40289cd8e80763fc6d372d20ed2b0624667b59ea",
+  "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/java/M3RX7ResourceProbe.java": "c766c1ccc68669e7c3accf8cd8bbfb280f147d3ab8c7e4e95d692395cac7db76"
+}

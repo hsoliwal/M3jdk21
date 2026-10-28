@@ -1,0 +1,30 @@
+Compiled from "M3TokenRegexPlan.java"
+public final class jdk.internal.mindex.M3TokenRegexPlan {
+  public static final int KIND;
+    descriptor: I
+  public static final int SYMBOL;
+    descriptor: I
+  public static jdk.internal.mindex.M3TokenRegexPlan compile(java.lang.Object, jdk.internal.mindex.M3TokenRegexPlan$Predicate[], long);
+    descriptor: (Ljava/lang/Object;[Ljdk/internal/mindex/M3TokenRegexPlan$Predicate;J)Ljdk/internal/mindex/M3TokenRegexPlan;
+
+  public int predicateCount();
+    descriptor: ()I
+
+  public long initialState();
+    descriptor: ()J
+
+  public boolean accepts(long);
+    descriptor: (J)Z
+
+  public boolean matches(jdk.internal.mindex.M3TokenRegexPlan$Input);
+    descriptor: (Ljdk/internal/mindex/M3TokenRegexPlan$Input;)Z
+
+  public jdk.internal.mindex.M3TokenRegexPlan$Match find(jdk.internal.mindex.M3TokenRegexPlan$Input);
+    descriptor: (Ljdk/internal/mindex/M3TokenRegexPlan$Input;)Ljdk/internal/mindex/M3TokenRegexPlan$Match;
+
+  public jdk.internal.mindex.M3TokenRegexPlan$Effect summarize(jdk.internal.mindex.M3TokenRegexPlan$Input, java.lang.Runnable);
+    descriptor: (Ljdk/internal/mindex/M3TokenRegexPlan$Input;Ljava/lang/Runnable;)Ljdk/internal/mindex/M3TokenRegexPlan$Effect;
+
+  public jdk.internal.mindex.M3TokenRegexPlan$Effect identity();
+    descriptor: ()Ljdk/internal/mindex/M3TokenRegexPlan$Effect;
+}

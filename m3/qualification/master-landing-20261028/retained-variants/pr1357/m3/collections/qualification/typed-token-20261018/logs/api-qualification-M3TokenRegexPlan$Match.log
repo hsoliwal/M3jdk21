@@ -1,0 +1,20 @@
+Compiled from "M3TokenRegexPlan.java"
+public final class jdk.internal.mindex.M3TokenRegexPlan$Match extends java.lang.Record {
+  public jdk.internal.mindex.M3TokenRegexPlan$Match(int, int);
+    descriptor: (II)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int startToken();
+    descriptor: ()I
+
+  public int endToken();
+    descriptor: ()I
+}

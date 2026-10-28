@@ -1,0 +1,3 @@
+# OpenRewrite SDK Results; no template-copy materialization
+test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java	ABSENT	3477dee9bb0acea3dd322ee8e6f8656b5ec1242fe37c95a186717771c34c52be
+test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java	ABSENT	727380f9e871c1cad71ffefa3898bb444244ecff93c4bca4b9d183f51c820b30
