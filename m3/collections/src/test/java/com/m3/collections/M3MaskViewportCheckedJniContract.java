@@ -175,6 +175,21 @@ public final class M3MaskViewportCheckedJniContract {
         refusal(IndexOutOfBoundsException.class, () ->
                 M3MaskViewportNative.project(new int[]{1, 2}, new int[]{0, 0},
                         0, 2, 0, 0, new int[1], 0));
+        refusal(NullPointerException.class, () ->
+                M3MaskViewportNative.project(null, new int[0], 0, 0,
+                        0, 0, new int[0], 0));
+        refusal(IllegalArgumentException.class, () ->
+                M3MaskViewportNative.project(new int[]{1, 2}, new int[]{0},
+                        0, 1, 0, 0, new int[3], 0));
+        refusal(IndexOutOfBoundsException.class, () ->
+                M3MaskViewportNative.projectPage(new int[]{1, 2}, new int[]{0, 0},
+                        0, 2, 0, 0, -1, 1, output, 0));
+        int[] tooSmall = {SENTINEL};
+        refusal(IndexOutOfBoundsException.class, () ->
+                M3MaskViewportNative.projectFramePage(new int[]{1, 2},
+                        new int[]{0, 0}, 0, 2, 0, 0, 0, 2,
+                        tooSmall, 0, new int[2], 0, new int[2], 0));
+        same(new int[]{SENTINEL}, tooSmall);
     }
 
     private static boolean matches(int value, int required, int forbidden) {
