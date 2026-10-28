@@ -1,0 +1,1234 @@
+{
+  "recorded_utc": "2026-10-20 02:29:21 UTC",
+  "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+  "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1522",
+  "status": "NOT_GREEN",
+  "total": 99,
+  "returned": 99,
+  "counts": {
+    "completed/skipped": 11,
+    "queued/null": 2,
+    "completed/failure": 75,
+    "completed/success": 11
+  },
+  "legacy_state": "pending",
+  "legacy_total": 0,
+  "checks": [
+    {
+      "id": 118419793662,
+      "name": "current-tree-receipt",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658746/job/118419793662",
+      "started_at": "2026-10-20T02:25:08Z",
+      "completed_at": "2026-10-20T02:25:07Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118418623267,
+      "name": "proof summary",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658743/job/118418623267",
+      "started_at": "2026-10-20T02:21:06Z",
+      "completed_at": null,
+      "annotations_count": 0
+    },
+    {
+      "id": 118416268630,
+      "name": "owning-maven-contract",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658722/job/118416268630",
+      "started_at": "2026-10-20T02:13:03Z",
+      "completed_at": "2026-10-20T02:13:03Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118415511745,
+      "name": "Select platforms",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355652327/job/118415511745",
+      "started_at": "2026-10-20T02:10:31Z",
+      "completed_at": null,
+      "annotations_count": 0
+    },
+    {
+      "id": 118414160408,
+      "name": "image",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658775/job/118414160408",
+      "started_at": "2026-10-20T02:05:56Z",
+      "completed_at": "2026-10-20T02:05:55Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118414088526,
+      "name": "current-tree-receipt",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658782/job/118414088526",
+      "started_at": "2026-10-20T02:05:41Z",
+      "completed_at": "2026-10-20T02:05:41Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118414024344,
+      "name": "Java and JNI precompute parity",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658743/job/118414024344",
+      "started_at": "2026-10-20T02:16:21Z",
+      "completed_at": "2026-10-20T02:17:30Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118414024161,
+      "name": "M3 control reactor",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658743/job/118414024161",
+      "started_at": "2026-10-20T02:19:07Z",
+      "completed_at": "2026-10-20T02:21:06Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118414023976,
+      "name": "immutable text foundation",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658743/job/118414023976",
+      "started_at": "2026-10-20T02:19:00Z",
+      "completed_at": "2026-10-20T02:19:46Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118414023753,
+      "name": "release contract and provenance",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658743/job/118414023753",
+      "started_at": "2026-10-20T02:18:57Z",
+      "completed_at": "2026-10-20T02:20:02Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118413567397,
+      "name": "current-tree-receipt",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658567/job/118413567397",
+      "started_at": "2026-10-20T02:03:55Z",
+      "completed_at": "2026-10-20T02:03:55Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118413566691,
+      "name": "jdk-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658567/job/118413566691",
+      "started_at": "2026-10-20T02:03:55Z",
+      "completed_at": "2026-10-20T02:03:55Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118413566454,
+      "name": "recipe-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658567/job/118413566454",
+      "started_at": "2026-10-20T02:03:55Z",
+      "completed_at": "2026-10-20T02:03:55Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118413029919,
+      "name": "image",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658235/job/118413029919",
+      "started_at": "2026-10-20T02:02:05Z",
+      "completed_at": "2026-10-20T02:02:05Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118410116121,
+      "name": "Historical lane recipe with real SDK",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658542/job/118410116121",
+      "started_at": "2026-10-20T02:11:49Z",
+      "completed_at": "2026-10-20T02:12:47Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118410115990,
+      "name": "Full collection Java and JNI at exact head",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658542/job/118410115990",
+      "started_at": "2026-10-20T02:11:45Z",
+      "completed_at": "2026-10-20T02:13:47Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118410115867,
+      "name": "Installed Java 21 collections and JNI",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658542/job/118410115867",
+      "started_at": "2026-10-20T02:11:49Z",
+      "completed_at": "2026-10-20T02:12:40Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118409959033,
+      "name": "sealed-receiver-contract",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658722/job/118409959033",
+      "started_at": "2026-10-20T02:11:35Z",
+      "completed_at": "2026-10-20T02:13:03Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409712647,
+      "name": "jmod-receiving-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658706/job/118409712647",
+      "started_at": "2026-10-20T02:04:21Z",
+      "completed_at": "2026-10-20T02:04:59Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409711134,
+      "name": "canonical-readback",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658746/job/118409711134",
+      "started_at": "2026-10-20T01:50:38Z",
+      "completed_at": "2026-10-20T01:50:37Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118409710959,
+      "name": "canonical-readback",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658782/job/118409710959",
+      "started_at": "2026-10-20T01:50:38Z",
+      "completed_at": "2026-10-20T01:50:37Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118409710801,
+      "name": "canonical-readback",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658567/job/118409710801",
+      "started_at": "2026-10-20T01:50:37Z",
+      "completed_at": "2026-10-20T01:50:37Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118409710529,
+      "name": "jdk21-contract",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658769/job/118409710529",
+      "started_at": "2026-10-20T02:09:14Z",
+      "completed_at": "2026-10-20T02:10:02Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409710354,
+      "name": "inventory",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355659045/job/118409710354",
+      "started_at": "2026-10-20T02:07:08Z",
+      "completed_at": "2026-10-20T02:09:06Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409710313,
+      "name": "java21-real-owner",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658801/job/118409710313",
+      "started_at": "2026-10-20T02:05:43Z",
+      "completed_at": "2026-10-20T02:06:30Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409710231,
+      "name": "verify",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658855/job/118409710231",
+      "started_at": "2026-10-20T02:06:05Z",
+      "completed_at": "2026-10-20T02:07:08Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409710153,
+      "name": "owning-maven",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658801/job/118409710153",
+      "started_at": "2026-10-20T02:03:45Z",
+      "completed_at": "2026-10-20T02:04:39Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409710146,
+      "name": "instance-index-contract",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658792/job/118409710146",
+      "started_at": "2026-10-20T02:05:30Z",
+      "completed_at": "2026-10-20T02:05:41Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409710139,
+      "name": "java21-contract",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658836/job/118409710139",
+      "started_at": "2026-10-20T02:06:24Z",
+      "completed_at": "2026-10-20T02:06:56Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409710131,
+      "name": "inventory-and-file-atoms",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658857/job/118409710131",
+      "started_at": "2026-10-20T02:03:19Z",
+      "completed_at": "2026-10-20T02:05:15Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409710029,
+      "name": "recipe-dag-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658746/job/118409710029",
+      "started_at": "2026-10-20T02:11:29Z",
+      "completed_at": "2026-10-20T02:12:38Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409709980,
+      "name": "receiving",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658703/job/118409709980",
+      "started_at": "2026-10-20T02:09:40Z",
+      "completed_at": "2026-10-20T02:09:50Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709967,
+      "name": "source-and-contract",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658762/job/118409709967",
+      "started_at": "2026-10-20T02:11:25Z",
+      "completed_at": "2026-10-20T02:12:07Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709917,
+      "name": "foundation",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658792/job/118409709917",
+      "started_at": "2026-10-20T02:05:17Z",
+      "completed_at": "2026-10-20T02:06:07Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118409709914,
+      "name": "recipe",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658775/job/118409709914",
+      "started_at": "2026-10-20T02:03:45Z",
+      "completed_at": "2026-10-20T02:05:55Z",
+      "annotations_count": 12
+    },
+    {
+      "id": 118409709881,
+      "name": "sdk-and-native",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658728/job/118409709881",
+      "started_at": "2026-10-20T02:04:56Z",
+      "completed_at": "2026-10-20T02:05:21Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409709874,
+      "name": "qualify",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658789/job/118409709874",
+      "started_at": "2026-10-20T02:04:42Z",
+      "completed_at": "2026-10-20T02:06:03Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118409709804,
+      "name": "java21-contract",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658780/job/118409709804",
+      "started_at": "2026-10-20T02:06:24Z",
+      "completed_at": "2026-10-20T02:07:15Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409709755,
+      "name": "verify",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658782/job/118409709755",
+      "started_at": "2026-10-20T02:03:54Z",
+      "completed_at": "2026-10-20T02:05:40Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409709737,
+      "name": "openjdk-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658746/job/118409709737",
+      "started_at": "2026-10-20T02:11:22Z",
+      "completed_at": "2026-10-20T02:25:07Z",
+      "annotations_count": 12
+    },
+    {
+      "id": 118409709731,
+      "name": "contracts",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658703/job/118409709731",
+      "started_at": "2026-10-20T02:06:10Z",
+      "completed_at": "2026-10-20T02:06:22Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709649,
+      "name": "contracts",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658755/job/118409709649",
+      "started_at": "2026-10-20T02:04:10Z",
+      "completed_at": "2026-10-20T02:04:19Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709597,
+      "name": "openjdk-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658692/job/118409709597",
+      "started_at": "2026-10-20T02:11:17Z",
+      "completed_at": "2026-10-20T02:11:43Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409709587,
+      "name": "owning-module",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658762/job/118409709587",
+      "started_at": "2026-10-20T02:11:15Z",
+      "completed_at": "2026-10-20T02:11:46Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709567,
+      "name": "module",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658703/job/118409709567",
+      "started_at": "2026-10-20T02:06:11Z",
+      "completed_at": "2026-10-20T02:06:22Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709545,
+      "name": "sdk-receiving",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658755/job/118409709545",
+      "started_at": "2026-10-20T02:08:19Z",
+      "completed_at": "2026-10-20T02:08:27Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709452,
+      "name": "original-receiving-contract",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658612/job/118409709452",
+      "started_at": "2026-10-20T02:11:14Z",
+      "completed_at": "2026-10-20T02:11:23Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709386,
+      "name": "full-java-and-module",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658612/job/118409709386",
+      "started_at": "2026-10-20T02:07:43Z",
+      "completed_at": "2026-10-20T02:07:52Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709342,
+      "name": "dependency-gate",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658567/job/118409709342",
+      "started_at": "2026-10-20T02:02:44Z",
+      "completed_at": "2026-10-20T02:03:55Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409709335,
+      "name": "contracts",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658577/job/118409709335",
+      "started_at": "2026-10-20T02:10:32Z",
+      "completed_at": "2026-10-20T02:10:42Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709290,
+      "name": "retained-capabilities",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658656/job/118409709290",
+      "started_at": "2026-10-20T02:05:17Z",
+      "completed_at": "2026-10-20T02:07:37Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118409709274,
+      "name": "receiving",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658577/job/118409709274",
+      "started_at": "2026-10-20T02:09:21Z",
+      "completed_at": "2026-10-20T02:09:33Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709261,
+      "name": "proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658663/job/118409709261",
+      "started_at": "2026-10-20T02:04:43Z",
+      "completed_at": "2026-10-20T02:06:38Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409709254,
+      "name": "primitive-position-parity",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658704/job/118409709254",
+      "started_at": "2026-10-20T02:02:18Z",
+      "completed_at": "2026-10-20T02:03:12Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709233,
+      "name": "verify",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658713/job/118409709233",
+      "started_at": "2026-10-20T02:07:15Z",
+      "completed_at": "2026-10-20T02:10:27Z",
+      "annotations_count": 14
+    },
+    {
+      "id": 118409709205,
+      "name": "openjdk-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658598/job/118409709205",
+      "started_at": "2026-10-20T02:07:30Z",
+      "completed_at": "2026-10-20T02:23:03Z",
+      "annotations_count": 12
+    },
+    {
+      "id": 118409709194,
+      "name": "recipe-dag-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658692/job/118409709194",
+      "started_at": "2026-10-20T02:10:04Z",
+      "completed_at": "2026-10-20T02:11:14Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118409709175,
+      "name": "snapshot-jni-projection",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658612/job/118409709175",
+      "started_at": "2026-10-20T02:02:31Z",
+      "completed_at": "2026-10-20T02:02:41Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709136,
+      "name": "generic-object-list",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658683/job/118409709136",
+      "started_at": "2026-10-20T02:03:11Z",
+      "completed_at": "2026-10-20T02:03:48Z",
+      "annotations_count": 5
+    },
+    {
+      "id": 118409709118,
+      "name": "native-original-jni-parity",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658490/job/118409709118",
+      "started_at": "2026-10-20T02:04:38Z",
+      "completed_at": "2026-10-20T02:05:31Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409709057,
+      "name": "verify",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658616/job/118409709057",
+      "started_at": "2026-10-20T02:03:26Z",
+      "completed_at": "2026-10-20T02:03:46Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409709015,
+      "name": "java21-source-sealed-receiving",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658587/job/118409709015",
+      "started_at": "2026-10-20T02:03:48Z",
+      "completed_at": "2026-10-20T02:05:04Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409709011,
+      "name": "source-and-behavior",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658679/job/118409709011",
+      "started_at": "2026-10-20T02:02:07Z",
+      "completed_at": "2026-10-20T02:02:15Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409708984,
+      "name": "module",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658577/job/118409708984",
+      "started_at": "2026-10-20T02:08:09Z",
+      "completed_at": "2026-10-20T02:08:17Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409708951,
+      "name": "strict-immutable-contracts",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658637/job/118409708951",
+      "started_at": "2026-10-20T02:02:04Z",
+      "completed_at": "2026-10-20T02:02:46Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409708943,
+      "name": "receiver-recipe-and-contracts",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658556/job/118409708943",
+      "started_at": "2026-10-20T01:54:52Z",
+      "completed_at": "2026-10-20T01:55:11Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409708919,
+      "name": "qualify",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658621/job/118409708919",
+      "started_at": "2026-10-20T01:59:14Z",
+      "completed_at": "2026-10-20T01:59:58Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409708871,
+      "name": "synexia-file-convergence",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658498/job/118409708871",
+      "started_at": "2026-10-20T02:03:54Z",
+      "completed_at": "2026-10-20T02:05:04Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409708859,
+      "name": "java21-exact-source-and-red-green",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658490/job/118409708859",
+      "started_at": "2026-10-20T02:02:46Z",
+      "completed_at": "2026-10-20T02:03:52Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409708857,
+      "name": "recipe-and-dag-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658598/job/118409708857",
+      "started_at": "2026-10-20T02:01:45Z",
+      "completed_at": "2026-10-20T02:05:01Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409708845,
+      "name": "recipe-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658498/job/118409708845",
+      "started_at": "2026-10-20T02:03:54Z",
+      "completed_at": "2026-10-20T02:05:14Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409708820,
+      "name": "selected-java21",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658593/job/118409708820",
+      "started_at": "2026-10-20T02:02:56Z",
+      "completed_at": "2026-10-20T02:03:42Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409708802,
+      "name": "generated-packet-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658608/job/118409708802",
+      "started_at": "2026-10-20T02:05:56Z",
+      "completed_at": "2026-10-20T02:10:03Z",
+      "annotations_count": 14
+    },
+    {
+      "id": 118409708787,
+      "name": "verify-recipes",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658330/job/118409708787",
+      "started_at": "2026-10-20T02:07:14Z",
+      "completed_at": "2026-10-20T02:08:08Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409708784,
+      "name": "filtered-owner-and-catalogue",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658534/job/118409708784",
+      "started_at": "2026-10-20T02:04:50Z",
+      "completed_at": "2026-10-20T02:05:37Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409708737,
+      "name": "java21-jni",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658639/job/118409708737",
+      "started_at": "2026-10-20T02:03:23Z",
+      "completed_at": "2026-10-20T02:04:41Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409708718,
+      "name": "dag-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658595/job/118409708718",
+      "started_at": "2026-10-20T02:09:29Z",
+      "completed_at": "2026-10-20T02:12:25Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409708678,
+      "name": "m3-eclipse-progress-receiver",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658554/job/118409708678",
+      "started_at": "2026-10-20T02:11:10Z",
+      "completed_at": "2026-10-20T02:12:28Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409708659,
+      "name": "maven-full-collections",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658490/job/118409708659",
+      "started_at": "2026-10-20T02:02:01Z",
+      "completed_at": "2026-10-20T02:03:17Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409708640,
+      "name": "java21-exact-source-receiving",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658562/job/118409708640",
+      "started_at": "2026-10-20T02:06:32Z",
+      "completed_at": "2026-10-20T02:07:31Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409708594,
+      "name": "indexed-projection",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658444/job/118409708594",
+      "started_at": "2026-10-20T02:01:39Z",
+      "completed_at": "2026-10-20T02:02:38Z",
+      "annotations_count": 5
+    },
+    {
+      "id": 118409708531,
+      "name": "exact-java-native",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658403/job/118409708531",
+      "started_at": "2026-10-20T01:59:19Z",
+      "completed_at": "2026-10-20T02:00:03Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409708525,
+      "name": "jdk-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658498/job/118409708525",
+      "started_at": "2026-10-20T02:03:15Z",
+      "completed_at": "2026-10-20T02:14:24Z",
+      "annotations_count": 10
+    },
+    {
+      "id": 118409708518,
+      "name": "a3-proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658454/job/118409708518",
+      "started_at": "2026-10-20T02:05:08Z",
+      "completed_at": "2026-10-20T02:06:05Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409708475,
+      "name": "proof",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658357/job/118409708475",
+      "started_at": "2026-10-20T02:07:28Z",
+      "completed_at": "2026-10-20T02:08:15Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409708399,
+      "name": "probe",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658399/job/118409708399",
+      "started_at": "2026-10-20T02:03:10Z",
+      "completed_at": "2026-10-20T02:03:17Z",
+      "annotations_count": 0
+    },
+    {
+      "id": 118409708258,
+      "name": "inventory",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658433/job/118409708258",
+      "started_at": "2026-10-20T02:03:20Z",
+      "completed_at": "2026-10-20T02:07:26Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409708226,
+      "name": "java-jni",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658419/job/118409708226",
+      "started_at": "2026-10-20T02:02:22Z",
+      "completed_at": "2026-10-20T02:03:19Z",
+      "annotations_count": 5
+    },
+    {
+      "id": 118409708099,
+      "name": "recipe-and-real-owner",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658401/job/118409708099",
+      "started_at": "2026-10-20T02:01:42Z",
+      "completed_at": "2026-10-20T02:02:59Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409708027,
+      "name": "owning-maven",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658254/job/118409708027",
+      "started_at": "2026-10-20T02:03:54Z",
+      "completed_at": "2026-10-20T02:04:50Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409707949,
+      "name": "inventory-and-file-atoms",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658287/job/118409707949",
+      "started_at": "2026-10-20T02:01:27Z",
+      "completed_at": "2026-10-20T02:03:02Z",
+      "annotations_count": 1
+    },
+    {
+      "id": 118409707929,
+      "name": "source-and-behavior",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658304/job/118409707929",
+      "started_at": "2026-10-20T02:09:35Z",
+      "completed_at": "2026-10-20T02:09:44Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409707928,
+      "name": "recipe",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658348/job/118409707928",
+      "started_at": "2026-10-20T02:09:36Z",
+      "completed_at": "2026-10-20T02:10:38Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409707842,
+      "name": "recipe",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658235/job/118409707842",
+      "started_at": "2026-10-20T02:01:01Z",
+      "completed_at": "2026-10-20T02:02:05Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409707751,
+      "name": "eclipse-framework-forward",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658298/job/118409707751",
+      "started_at": "2026-10-20T02:01:04Z",
+      "completed_at": "2026-10-20T02:01:17Z",
+      "annotations_count": 4
+    },
+    {
+      "id": 118409707724,
+      "name": "qualify",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658234/job/118409707724",
+      "started_at": "2026-10-20T02:00:46Z",
+      "completed_at": "2026-10-20T02:02:02Z",
+      "annotations_count": 2
+    },
+    {
+      "id": 118409707716,
+      "name": "focused-java-jni",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658254/job/118409707716",
+      "started_at": "2026-10-20T02:00:46Z",
+      "completed_at": "2026-10-20T02:01:12Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409707710,
+      "name": "current-owner-java-jni",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658210/job/118409707710",
+      "started_at": "2026-10-20T01:54:50Z",
+      "completed_at": "2026-10-20T01:55:34Z",
+      "annotations_count": 3
+    },
+    {
+      "id": 118409707595,
+      "name": "inventory",
+      "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658228/job/118409707595",
+      "started_at": "2026-10-20T02:07:44Z",
+      "completed_at": "2026-10-20T02:09:53Z",
+      "annotations_count": 1
+    }
+  ],
+  "jobs_inspected": {
+    "full": {
+      "id": 118410115990,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658542/job/118410115990",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Record exact checked-out head",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Prepare pinned Java 21 compiler",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Build source dependencies and run owning Java and all-native contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5
+        },
+        {
+          "name": "Retain actual head proof",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ],
+      "local_log": "full_logs.log",
+      "finding": "Surefire dependency resolution fails before tests: org.junit.platform:junit-platform-launcher:jar:1.10.2-m3-source-1 is absent from Maven Central.",
+      "checked_out_head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+      "log_sha256": "07da40b240af5d40d9905bb07b195c51128f22b9ddd0eb7554d526b0f33649e8",
+      "log_bytes": 137182
+    },
+    "current": {
+      "id": 118409707710,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39355658210/job/118409707710",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify source-sealed exact additive postimages",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 4
+        },
+        {
+          "name": "Strict compile the current M3 collection owners and both direct proofs",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5
+        },
+        {
+          "name": "Strict C17 JNI build and native-required differential",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ],
+      "local_log": "current_logs.log",
+      "finding": "Historical source seal stops at M3IndexedListSnapshot: expected preimage blob217700023c2a6456a505b07b311290f8da8c02e2, actual qualified postimage2caf4faf78ea20ccb41de9a61b08790855b4edd4.",
+      "checked_out_merge": "43be621dd4f524dffa2862de1ec4b66e12e66974",
+      "log_sha256": "58669ff99e3dde048f3302bfeca13a819bc63c56db6489b82533856b3da9da76",
+      "log_bytes": 22620
+    }
+  },
+  "scope": "Only two failed jobs inspected. No assertion failure inferred. Remaining failed checks not attributed."
+}

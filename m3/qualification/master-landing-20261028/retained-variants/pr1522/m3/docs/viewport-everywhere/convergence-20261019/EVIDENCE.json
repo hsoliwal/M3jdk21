@@ -1,0 +1,273 @@
+{
+  "canonical_publication": {
+    "commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+    "head_verified_against_pr": true,
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12528",
+    "repository": "hsoliwal/com.synexia"
+  },
+  "frozen_probe_plan": {
+    "modes": {
+      "java": 5,
+      "missing": 3,
+      "native": 11
+    },
+    "unique_main_classes": [
+      "M3GenericFilteredTerminalProof",
+      "M3IndexMaskCompactorSelfTest",
+      "M3IndexMaskWindowRecoverySelfTest",
+      "M3IndexMaskWindowSelfTest",
+      "M3IndexPathMaskWindowSelfTest",
+      "M3IndexPathMasksAliasContract",
+      "M3IndexPathMasksSelfTest",
+      "M3IndexedFilterSortFusionSelfTest",
+      "M3IndexedSnapshotPositionProof",
+      "M3LinkedListClearRangeProof",
+      "M3MaskSpansContract",
+      "M3NativeIndexRangeSelfTest",
+      "M3PackedPredicateSelectionProof",
+      "M3PrimitiveSequenceCountProof",
+      "M3SnapshotSortIsolationProof"
+    ]
+  },
+  "helpers": [
+    {
+      "bytes": 25575,
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/verify.py.txt",
+      "disposition": "INCLUDE_EXACT_ORIGINAL_SUPPORT_FILE_IN_RECEIVING_OR_EXPLICIT_STACK",
+      "git_blob_sha1": "f03c70f863525f8fb1276ffbd5f7044c9bd4450c",
+      "id": "verify",
+      "receiving_target": "m3/collections/qualification/collection-refinement-20261019/verify.py",
+      "sha256": "fd40d196efbb462243eba6b43d9e78ebc4162c9e2b0f13beeafac804ae8c228e",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/verify.py.txt"
+    },
+    {
+      "bytes": 3237,
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/probe-plan.json.txt",
+      "disposition": "INCLUDE_EXACT_ORIGINAL_SUPPORT_FILE_IN_RECEIVING_OR_EXPLICIT_STACK",
+      "git_blob_sha1": "a6617a5cc9283611260d76dea9e8f139a593712f",
+      "id": "probe-plan",
+      "receiving_target": "m3/collections/qualification/collection-refinement-20261019/probe-plan.json",
+      "sha256": "91b07ee6bec984b2229eaaa1041662e4d93a72a3e222b5111277d6c5da9e7a39",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/probe-plan.json.txt"
+    },
+    {
+      "bytes": 7835,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/proof/verify_all_native.py",
+      "disposition": "INVOKE_CANONICAL_HELPER_UNCHANGED",
+      "git_blob_sha1": "9b31917331c27105c45c63889d5ca7c71ddef929",
+      "id": "all-native-helper",
+      "receiving_target": null,
+      "sha256": "c7d9612fce125813980ce31f7566f0aab28045d95897b6c60690544558c80dfe",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/proof/verify_all_native.py"
+    }
+  ],
+  "junit_console": {
+    "bytes": 2950047,
+    "filename": "junit-platform-console-standalone-1.12.2.jar",
+    "sha256": "329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a"
+  },
+  "manifest": {
+    "bytes": 13432,
+    "changes": 21,
+    "git_blob_sha1": "32617340ce118d80199a3fd426cacc2948beedbb",
+    "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
+    "sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+    "targets": 60,
+    "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv"
+  },
+  "new_qualification_commands_run": false,
+  "not_claimed": [
+    "Qualification of any later M3JDK21 source epoch",
+    "A newly executed test run during metadata recovery",
+    "OpenRewrite JavaLST or full reactor",
+    "Installed M3JDK21/HotSpot build or jtreg/JCK",
+    "Fresh combined resource benchmark",
+    "SWT/Skija host acceptance",
+    "M3MaskViewportNative host implementation",
+    "Android/iOS runtime, package, simulator or device acceptance"
+  ],
+  "original_maven_test_jars": [
+    {
+      "bytes": 15597,
+      "repository_path": "org/apiguardian/apiguardian-api/1.1.2-m3-source-1/apiguardian-api-1.1.2-m3-source-1.jar",
+      "sha256": "094c905c69d1e9bdabbd6a81dec2fbadafa99782093bffbde89ed7926ff07b55"
+    },
+    {
+      "bytes": 227118,
+      "repository_path": "org/junit/jupiter/junit-jupiter-api/5.10.2-m3-source-1/junit-jupiter-api-5.10.2-m3-source-1.jar",
+      "sha256": "b576049849a04ff620ff294a59c068d3e9ba747cf01f8d640ca091d0e2df41bd"
+    },
+    {
+      "bytes": 258712,
+      "repository_path": "org/junit/jupiter/junit-jupiter-engine/5.10.2-m3-source-1/junit-jupiter-engine-5.10.2-m3-source-1.jar",
+      "sha256": "c5c188b0be88938591d6089da78bf66e55c49c73de59b757c02357e6d13028ca"
+    },
+    {
+      "bytes": 615796,
+      "repository_path": "org/junit/jupiter/junit-jupiter-params/5.10.2-m3-source-1/junit-jupiter-params-5.10.2-m3-source-1.jar",
+      "sha256": "58a7f8933bc7a7ae7730282d520aae08ba7ca643f71dae74240fe0e3160d1f87"
+    },
+    {
+      "bytes": 11439,
+      "repository_path": "org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.jar",
+      "sha256": "a91e75f99527f335d935a6985d1758c8692254f64b35bf3ccecfbaf7c86827eb"
+    },
+    {
+      "bytes": 115905,
+      "repository_path": "org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.jar",
+      "sha256": "9726a9443f4fde3ce6314afe2122b049498cb8dad22930226166d9e37bd0109a"
+    },
+    {
+      "bytes": 218670,
+      "repository_path": "org/junit/platform/junit-platform-engine/1.10.2-m3-source-1/junit-platform-engine-1.10.2-m3-source-1.jar",
+      "sha256": "755c1504bba5d0468b4103d7aef0fd1631508aac2630cbd2a095ed8c1da0d404"
+    },
+    {
+      "bytes": 24104,
+      "repository_path": "org/opentest4j/opentest4j/1.3.0-m3-source-1/opentest4j-1.3.0-m3-source-1.jar",
+      "sha256": "aef72997d75ee4f47e9e43e60695af78b6e20ff4ad79a26d4aad7ea86a9f3a39"
+    }
+  ],
+  "original_support_pr": {
+    "base": "2aeaffe6424a2b08d030116b83e1c2580173a3d1",
+    "head": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+    "merged": false,
+    "number": 1480,
+    "repository": "hsoliwal/M3JDK21",
+    "state": "open",
+    "title": "Avoid empty JNI mask row reads and add reproducible collection qualification",
+    "url": "https://github.com/hsoliwal/M3jdk21/pull/1480"
+  },
+  "qualified_source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+  "receipt_pointers": [
+    {
+      "bytes": 1303,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+      "git_blob_sha1": "9140ed440e67f96c2ea1e978f2594cde743ca8ab",
+      "id": "sdk",
+      "scope": "3 passing actual OpenRewrite 8.17.1 PlainText tests; JavaLST and whole reactor NOT_RUN.",
+      "sha256": "2fa15d17940e8e0b8e6afa2b63bb344523704c3b251b8e02d835c86aed8d03b3",
+      "source_epoch": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json"
+    },
+    {
+      "bytes": 93,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/kernel-qualify.log",
+      "git_blob_sha1": "f82da1c6f80aecce7b2c08223bf2d18156acd24a",
+      "id": "kernel",
+      "scope": "7734 passing bounded checks; targets=60, changed=21, exhaustiveSubsets=0. Separate from SDK.",
+      "sha256": "62a66c4969754558b54e7b71652ee9a65bc6467157872cfd23d49f012d1b92b4",
+      "source_epoch": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/kernel-qualify.log"
+    },
+    {
+      "bytes": 38430,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-foundation-validation/attempt02/RECEIPT.json",
+      "git_blob_sha1": "f4df2b9005025a7ec33bce7017342fe204abdd61",
+      "id": "focused",
+      "scope": "14 passing selected tests; six paired actual-owner observations; selected public/protected descriptors and all twelve JNI headers equal.",
+      "sha256": "01c2b1d6078b2b4a8cd45a54ce81f4a07122e541a500995f2bfdfb595cc7f7b3",
+      "source_epoch": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-foundation-validation/attempt02/RECEIPT.json"
+    },
+    {
+      "bytes": 181016,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
+      "git_blob_sha1": "78a8f1e2c7eb5aec2ad6c822bf02d74cc4100631",
+      "id": "full",
+      "scope": "Original Maven and independent console each discover 477 tests; no failures/errors; two native assumptions in each; frozen 19 probes pass.",
+      "sha256": "99813f6c392f0586835b96a3b7ff4f266f7cce16dc999d4d6f82495aa3c24b11",
+      "source_epoch": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json"
+    },
+    {
+      "bytes": 284103,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json",
+      "git_blob_sha1": "59b6d70e92b8719bb6a1f796625384b2945fc67b",
+      "id": "native",
+      "scope": "477/477 native-enabled tests pass with no failures/errors/skips/aborts; eleven C units, ten fatal-UBSan libraries and twenty-one JNI exports.",
+      "sha256": "826e292b21763ce788aaf81c928b91cdbde45db9bf201189e2fa160c87b74261",
+      "source_epoch": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json"
+    },
+    {
+      "bytes": 27776,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/combined-proofs/receipt.json",
+      "git_blob_sha1": "e8d87195b55bc5b6a5c8b7660f40cece128272a8",
+      "id": "combined",
+      "scope": "Seven passing actual-owner runs on complete module classes; WindowPlan native-library environment repeats a Java owner.",
+      "sha256": "7bcc0921c87aee7f13a53894a5adae0400e65d00ba26d87f20ec409fd5c94904",
+      "source_epoch": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/combined-proofs/receipt.json"
+    },
+    {
+      "bytes": 630,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/EMISSION_RECEIPT.json",
+      "git_blob_sha1": "639d8981520fc2a737b1fabce039da06977b51dc",
+      "id": "emission",
+      "scope": "60 targets, 21 changes, 21 first creates and 21 unchanged replays; 657 admitted candidate inputs.",
+      "sha256": "2b00bd16e7d650d38bedbeb49261750b88245b853f4950498021a856d682dde5",
+      "source_epoch": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/EMISSION_RECEIPT.json"
+    },
+    {
+      "bytes": 178612,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/SOURCE_INVENTORY.json",
+      "git_blob_sha1": "8ac78caac8d7e5e787b3333c4740965f880014f1",
+      "id": "source-inventory",
+      "scope": "645 baseline files; all 268 main and 254 baseline test Java files and seven original POM resources admitted.",
+      "sha256": "74b7280f307e852527e585ac6b6ee9c07876760181f80e09d371715574b70860",
+      "source_epoch": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/SOURCE_INVENTORY.json"
+    },
+    {
+      "bytes": 11653,
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/rowtree-resources/attempt02/RECEIPT.json",
+      "git_blob_sha1": "69954db38ee437047572da2c8fbfe9cb47973ee2",
+      "id": "rowtree-resource",
+      "scope": "Earlier resource experiment rejects guard after material control regressions; current selection reverses the merged guard. Fresh combined resource measurement NOT_RUN.",
+      "sha256": "22991183eaec008293fdd487f1afdf3bcfe1a342a040c65e214f6f04ba3268cc",
+      "source_epoch": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/rowtree-resources/attempt02/RECEIPT.json"
+    }
+  ],
+  "recipe": "com.synexia.rewrite.M3CurrentMasterConvergence20261019",
+  "recovered_on": "2026-10-20",
+  "recovery_only": true,
+  "row_tree": {
+    "after": {
+      "bytes": 15384,
+      "path": "m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+      "sha256": "96067f630bcf3288c69410151759fa738fd5968daccf68cd1aed2aeade38fc7b"
+    },
+    "before": {
+      "bytes": 15700,
+      "git_blob_sha1": "5f6ea21614dd532bbfecabcc505bffa53255c4f3",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+      "sha256": "11e448e0f92eb751f8399affda3e5f4d95a5a8856e7719eb69446e35fa037233"
+    },
+    "disposition": "CURRENT_SOURCE_REVERT_OF_RESOURCE_REJECTED_GUARD",
+    "fresh_combined_resource_measurement": "NOT_RUN",
+    "resource_receipt": {
+      "bytes": 11653,
+      "git_blob": "69954db38ee437047572da2c8fbfe9cb47973ee2",
+      "git_blob_sha1": "69954db38ee437047572da2c8fbfe9cb47973ee2",
+      "sha256": "22991183eaec008293fdd487f1afdf3bcfe1a342a040c65e214f6f04ba3268cc"
+    }
+  },
+  "schema": "M3_CURRENT_COLLECTIONS_PUBLISHED_RECEIVING_EVIDENCE_V1",
+  "source_epoch_linkage": {
+    "combined_current_receipt_binds_full_receipt": true,
+    "full_receipt_sha256": "99813f6c392f0586835b96a3b7ff4f266f7cce16dc999d4d6f82495aa3c24b11",
+    "native_receipt_binds_same_full_receipt": true
+  },
+  "source_inputs": {
+    "baseline_files": 645,
+    "baseline_test_java": 254,
+    "candidate_files": 657,
+    "candidate_test_java": 264,
+    "main_java": 268,
+    "original_pom_resources": 7,
+    "scope": "Complete admitted default-POM inputs, not the whole repository or auxiliary profiles."
+  }
+}

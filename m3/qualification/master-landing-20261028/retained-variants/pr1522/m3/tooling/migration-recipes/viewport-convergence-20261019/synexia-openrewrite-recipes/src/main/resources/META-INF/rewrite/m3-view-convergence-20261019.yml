@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ViewConvergence20261019
+displayName: Converge M3JDK21 collection and viewport atoms
+description: Source-sealed current-owner ordering and viewport refinement.
+recipeList:
+  - com.synexia.rewrite.M3ViewConvergence20261019
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SwingConvergence20261019
+displayName: Converge M3JDK21 Swing viewport lifetime
+description: Source-sealed existing binding listener lifetime refinement.
+recipeList:
+  - com.synexia.rewrite.M3SwingConvergence20261019
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SwingUiConvergence20261019
+displayName: Converge existing M3JDK21 Swing list and tree atoms
+description: Exact target-owned default-off list measurement and private tree selection resets.
+recipeList:
+  - com.synexia.rewrite.M3SwingUiConvergence20261019
