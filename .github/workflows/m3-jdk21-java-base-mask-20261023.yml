@@ -5,6 +5,9 @@ on:
     paths:
       - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
       - 'test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java'
+      - 'test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java'
+      - 'test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java'
+      - 'test/jdk/java/util/ArrayList/M3CollectionMaskGcBarrierContract.java'
       - 'm3/collections/qualification/java-base-mask-20261023/**'
       - 'm3/collections/qualification/java-base-mask-current-master-20261027/**'
       - '.github/workflows/m3-jdk21-java-base-mask-20261023.yml'
