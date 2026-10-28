@@ -1,0 +1,9 @@
+M3_MASK_CURRENT mode=java checks=236639 digest=4d79e76f92e079de30d99aff98324657115cb029add55d34d00c5e9562877baf PASS
+M3_MASK_CURRENT mode=native checks=320006 digest=8a4338e94c64996bde776a42c0de8a0eaa6857a31f1beb3eacb60586f01be012 PASS
+NATIVE_SPAN_UNION cases=9712 checks=67784 PASS (actual included C; function-table instrument)
+M3_MASK_CURRENT mode=java checks=236639 digest=4d79e76f92e079de30d99aff98324657115cb029add55d34d00c5e9562877baf PASS
+M3_MASK_CURRENT mode=native checks=320006 digest=8a4338e94c64996bde776a42c0de8a0eaa6857a31f1beb3eacb60586f01be012 PASS
+SORTED_SPLIT_COMPOSITION checks=361273 PASS
+NATIVE_SPAN_UNION cases=9712 checks=67784 PASS (actual included C; function-table instrument)
+COMMON_CORE checks=16777730 PASS
+UNION_REPLAY partialStates=32 fixedPoints=32 refusals=7 API=5 JNI_EXPORTS=9 PASS

@@ -1,0 +1,523 @@
+{
+  "schema": "synexia.coding-agent.recipe-dag-shapes.v1",
+  "compositions": [
+    {
+      "id": "serial-file-refinement",
+      "kind": "COMPOSITION_SHAPE_NOT_A_NEW_EXECUTOR",
+      "nodes": [
+        {
+          "id": "lookup",
+          "requires": [],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "donor-fit",
+          "requires": [
+            "lookup"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "scope-seal",
+          "requires": [
+            "donor-fit"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "candidate",
+          "requires": [
+            "scope-seal"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "compile",
+          "requires": [
+            "candidate"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "contract",
+          "requires": [
+            "compile"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "behavior",
+          "requires": [
+            "contract"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "fixed-point",
+          "requires": [
+            "behavior"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "review",
+          "requires": [
+            "fixed-point"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        }
+      ],
+      "execution": "HOLD_UNBOUND_NODES_AND_REQUIRED_PROOFS"
+    },
+    {
+      "id": "documentation-regex",
+      "kind": "COMPOSITION_SHAPE_NOT_A_NEW_EXECUTOR",
+      "nodes": [
+        {
+          "id": "scope-seal",
+          "requires": [],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "literal-or-regex-find",
+          "requires": [
+            "scope-seal"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "replacement-preview",
+          "requires": [
+            "literal-or-regex-find"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "out-of-scope-check",
+          "requires": [
+            "replacement-preview"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "link-and-example-check",
+          "requires": [
+            "out-of-scope-check"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "fresh-parse-fixed-point",
+          "requires": [
+            "link-and-example-check"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "review",
+          "requires": [
+            "fresh-parse-fixed-point"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        }
+      ],
+      "execution": "HOLD_UNBOUND_NODES_AND_REQUIRED_PROOFS"
+    },
+    {
+      "id": "annotation-contract",
+      "kind": "COMPOSITION_SHAPE_NOT_A_NEW_EXECUTOR",
+      "nodes": [
+        {
+          "id": "scope-seal",
+          "requires": [],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "find-annotation",
+          "requires": [
+            "scope-seal"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "configure-attribute-recipe",
+          "requires": [
+            "find-annotation"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "compile-with-processors",
+          "requires": [
+            "configure-attribute-recipe"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "retention-target-check",
+          "requires": [
+            "compile-with-processors"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "behavior",
+          "requires": [
+            "retention-target-check"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "fixed-point",
+          "requires": [
+            "behavior"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "review",
+          "requires": [
+            "fixed-point"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        }
+      ],
+      "execution": "HOLD_UNBOUND_NODES_AND_REQUIRED_PROOFS"
+    },
+    {
+      "id": "maven-check-fix-recheck",
+      "kind": "COMPOSITION_SHAPE_NOT_A_NEW_EXECUTOR",
+      "nodes": [
+        {
+          "id": "offline-readiness",
+          "requires": [],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "exact-POM-scope",
+          "requires": [
+            "offline-readiness"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "existing-check",
+          "requires": [
+            "exact-POM-scope"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "reviewed-fix-candidate",
+          "requires": [
+            "existing-check"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "existing-recheck",
+          "requires": [
+            "reviewed-fix-candidate"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "effective-model-and-runtime",
+          "requires": [
+            "existing-recheck"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "review",
+          "requires": [
+            "effective-model-and-runtime"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        }
+      ],
+      "execution": "HOLD_UNBOUND_NODES_AND_REQUIRED_PROOFS"
+    },
+    {
+      "id": "scope-widen",
+      "kind": "COMPOSITION_SHAPE_NOT_A_NEW_EXECUTOR",
+      "nodes": [
+        {
+          "id": "prior-proven-scope",
+          "requires": [],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "resolve-expanded-set",
+          "requires": [
+            "prior-proven-scope"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "same-pattern-fit",
+          "requires": [
+            "resolve-expanded-set"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "new-input-seal",
+          "requires": [
+            "same-pattern-fit"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "candidate-per-file",
+          "requires": [
+            "new-input-seal"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "all-expanded-gates",
+          "requires": [
+            "candidate-per-file"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "review",
+          "requires": [
+            "all-expanded-gates"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        }
+      ],
+      "execution": "HOLD_UNBOUND_NODES_AND_REQUIRED_PROOFS"
+    },
+    {
+      "id": "scope-narrow",
+      "kind": "COMPOSITION_SHAPE_NOT_A_NEW_EXECUTOR",
+      "nodes": [
+        {
+          "id": "prior-selected-set",
+          "requires": [],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "resolve-intersection-or-difference",
+          "requires": [
+            "prior-selected-set"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "new-effect-fence",
+          "requires": [
+            "resolve-intersection-or-difference"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "candidate-per-file",
+          "requires": [
+            "new-effect-fence"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "no-outside-effects",
+          "requires": [
+            "candidate-per-file"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "all-narrow-gates",
+          "requires": [
+            "no-outside-effects"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "review",
+          "requires": [
+            "all-narrow-gates"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        }
+      ],
+      "execution": "HOLD_UNBOUND_NODES_AND_REQUIRED_PROOFS"
+    },
+    {
+      "id": "java-jni-refinement",
+      "kind": "COMPOSITION_SHAPE_NOT_A_NEW_EXECUTOR",
+      "nodes": [
+        {
+          "id": "source-seal",
+          "requires": [],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "Java-proof",
+          "requires": [
+            "source-seal"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "JNI-headers",
+          "requires": [
+            "Java-proof"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "native-compile",
+          "requires": [
+            "JNI-headers"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "exports-equal",
+          "requires": [
+            "native-compile"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "fresh-library-load",
+          "requires": [
+            "exports-equal"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "Xcheck:jni",
+          "requires": [
+            "fresh-library-load"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "missing-library-refusal",
+          "requires": [
+            "Xcheck:jni"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "fixed-point",
+          "requires": [
+            "missing-library-refusal"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "review",
+          "requires": [
+            "fixed-point"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        }
+      ],
+      "execution": "HOLD_UNBOUND_NODES_AND_REQUIRED_PROOFS"
+    },
+    {
+      "id": "PR-stack",
+      "kind": "COMPOSITION_SHAPE_NOT_A_NEW_EXECUTOR",
+      "nodes": [
+        {
+          "id": "fresh-stack-heads",
+          "requires": [],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "conflict-inventory",
+          "requires": [
+            "fresh-stack-heads"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "source-bound-recipe-candidate",
+          "requires": [
+            "conflict-inventory"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "PATCH",
+          "requires": [
+            "source-bound-recipe-candidate"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "LINT",
+          "requires": [
+            "PATCH"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "COMPILE",
+          "requires": [
+            "LINT"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "TEST",
+          "requires": [
+            "COMPILE"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "RUNTIME",
+          "requires": [
+            "TEST"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "single-use-permit",
+          "requires": [
+            "RUNTIME"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "fresh-remote-check",
+          "requires": [
+            "single-use-permit"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        },
+        {
+          "id": "promotion-receipt",
+          "requires": [
+            "fresh-remote-check"
+          ],
+          "binding": "REQUIRES_EXACT_EXISTING_BINDING_BEFORE_EXECUTION"
+        }
+      ],
+      "execution": "HOLD_UNBOUND_NODES_AND_REQUIRED_PROOFS"
+    }
+  ],
+  "laws": [
+    "Acyclic dependencies with deterministic ordering",
+    "Overlapping writes execute serially; parallel only independently proven disjoint effects",
+    "Every node binds actual executor/options/source hashes/scope/read-write sets and evidence",
+    "Change any input or scope and invalidate dependent proofs",
+    "Refusal/failure stops dependent nodes; no best-effort promotion",
+    "Bound cycles/fixed-point search and reject oscillation; DAG itself stays acyclic",
+    "At most one serial terminal PROMOTION; planning data grants no execution or remote authority"
+  ],
+  "existing_bindings": [
+    "OpenRewrite YAML recipeList for ordered recipe execution",
+    "M3RecipeDag.parse and M3RecipeDagManifest for structural plans; not generic dispatch",
+    "M3CatalogueDagRecipe sealed template is available but target OpenRewriteRecipeDagPlan is not installed in inspected checkouts",
+    "ai mechanical registry compose only accepts its registered IDs, not arbitrary FQNs"
+  ],
+  "existing_parser_boundary": "The generic shapes above are not M3RecipeDag TSV instances. That existing parser requires exactly one PROMOTION plus required fan-in; satisfy its actual schema when bound. At-most-one is a safety constraint on these unbound shapes, not that parser contract."
+}

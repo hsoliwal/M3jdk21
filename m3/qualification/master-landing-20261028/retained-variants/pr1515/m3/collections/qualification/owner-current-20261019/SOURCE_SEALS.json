@@ -1,0 +1,47 @@
+[
+  {
+    "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+    "after_sha256": "a8bfd9e5d38aa378e7dab73fdbc59ef1512ff2782670100712178bd3c7261c88",
+    "after_git_blob": "a9b2f396ae9e952a5cf54cd99e5689b6a23b9517",
+    "before_sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+    "before_git_blob": "10c4d16cc9cd62d36f22646988718422caa2311e"
+  },
+  {
+    "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "after_sha256": "545fe56e3af30108812d95df90b362a8354617df9562213f9644f30ad3ea906d",
+    "after_git_blob": "4a09a43ee8e963155144f88fa0a44255c373088f",
+    "before_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+    "before_git_blob": "1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f"
+  },
+  {
+    "target": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+    "after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+    "after_git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+    "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+    "before_git_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5"
+  },
+  {
+    "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationProof.java",
+    "after_sha256": "2647764e90666b193426f3985026f25d8fe76e1114239ae6dd52a0036f5f4292",
+    "after_git_blob": "5a1e46a18f753f11dd415894b5961c20942d620a",
+    "before": "ABSENT"
+  },
+  {
+    "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationTest.java",
+    "after_sha256": "ebd9ee4a1cc4f9b602bc7bffd2e2654d3e95a0d3ec10f4ba7b1f24710d6c1207",
+    "after_git_blob": "e024c1606276b21e4696161838aebb9ae43a9cf2",
+    "before": "ABSENT"
+  },
+  {
+    "target": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+    "after_sha256": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
+    "after_git_blob": "411b69ea33c059d4243afedd5a1bc53b6e7f7122",
+    "before": "ABSENT"
+  },
+  {
+    "target": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+    "after_sha256": "69af2677ee57c22da762b275c7b16d6718877159b340a949cc6b5a2d0c2158f8",
+    "after_git_blob": "404ef3a934c21ffd9baf96112602203489ef6680",
+    "before": "ABSENT"
+  }
+]

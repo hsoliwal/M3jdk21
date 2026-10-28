@@ -1,0 +1,18 @@
+{
+  "schema": "synexia.data.address.public-validation-provenance.v1",
+  "repository": "hsoliwal/M3JDK21",
+  "receiving_PR": 1549,
+  "receiving_head_at_qualification": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+  "receiving_base_at_inventory": "a7b83b8dff260cf415016fd7ed5617cc01f028cb",
+  "captured_ref": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+  "historical_receipt_delivery_ref": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+  "source_binding": "Four Java files, native C and hosted workflow have identical Git blobs across captured, historical-delivery and receiving heads; each exact selected file was read at its pinned immutable ref.",
+  "existing_build_owner": ".github/workflows/m3-long-direct-address-kernel.yml",
+  "existing_build_owner_execution": "Linux hosted workflow not run in this Windows packet; its existing C17/required-JNI validation shape was adapted operationally.",
+  "existing_recipe_lineage": "The existing public bounded-gather qualification/RECIPE_PROVENANCE.json pins the earlier recipe derivation. This turn validates the unchanged received owner and does not replay that recipe.",
+  "borrowing": "Existing source and test main only. No Java, JNI, or new transformation-engine architecture generated.",
+  "admission": "Windows standalone source-bound evidence only; global scope/phase unchanged.",
+  "public_artifacts": "Data descriptors and evidence projections only.",
+  "private_workspace_material_published": false,
+  "observed_invocation_projection": "EXECUTION_ARGV_PROJECTION.json maps actual launch claims to typed root tokens and five immutable repository-source bindings; all raw claim hashes retained."
+}
