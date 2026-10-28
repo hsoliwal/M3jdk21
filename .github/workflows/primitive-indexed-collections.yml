@@ -1,0 +1,116 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Primitive indexed collection contracts
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongSequence.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongList.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongStack.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongQueue.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongDeque.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongArrayList.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3StateMaskArraysSelfTest.java'
+      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
+      - '.github/workflows/primitive-indexed-collections.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-primitive-indexes-and-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original primitive index, mask and bitmap owners
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          OUT="$RUNNER_TEMP/primitive-indexed-collections"
+          mkdir -p "$OUT/classes" "$OUT/native"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongCollection.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongSequence.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongList.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongStack.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongQueue.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongDeque.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java \
+            m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3StateMaskArraysSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+      - name: Run Java differential and metamorphic owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/primitive-indexed-collections"
+          run_contracts() {
+          java "$@" -cp "$OUT/classes" com.m3.collections.M3LongIndexProjectionSelfTest > "$OUT/M3LongIndexProjectionSelfTest.log" 2>&1
+          grep -Fq 'PASS M3LongIndexProjectionSelfTest checks=' "$OUT/M3LongIndexProjectionSelfTest.log"
+          cat "$OUT/M3LongIndexProjectionSelfTest.log"
+          java "$@" -cp "$OUT/classes" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest > "$OUT/M3LongBitmapFilteredSnapshotSelfTest.log" 2>&1
+          grep -Fq 'PASS M3LongBitmapFilteredSnapshotSelfTest checks=' "$OUT/M3LongBitmapFilteredSnapshotSelfTest.log"
+          cat "$OUT/M3LongBitmapFilteredSnapshotSelfTest.log"
+          java "$@" -cp "$OUT/classes" com.m3.collections.M3StateMaskArraysSelfTest > "$OUT/M3StateMaskArraysSelfTest.log" 2>&1
+          grep -Fq 'PASS M3StateMaskArrays checks=' "$OUT/M3StateMaskArraysSelfTest.log"
+          cat "$OUT/M3StateMaskArraysSelfTest.log"
+          }
+          run_contracts
+          run_contracts -Xint
+          java -cp "$OUT/classes" com.m3.collections.M3IndexMaskCompactorSelfTest \
+            > "$OUT/M3IndexMaskCompactorSelfTest.log" 2>&1
+          grep -Fq 'PASS M3IndexMaskCompactorSelfTest checks=' "$OUT/M3IndexMaskCompactorSelfTest.log"
+          cat "$OUT/M3IndexMaskCompactorSelfTest.log"
+      - name: Compile and require original JNI mask selection parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/primitive-indexed-collections"
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$OUT/native/libm3_collections_mask.so"
+          test -s "$OUT/native/libm3_collections_mask.so"
+          export LD_LIBRARY_PATH="$OUT/native:${LD_LIBRARY_PATH:-}"
+          for cls in com.m3.collections.M3LongIndexProjectionSelfTest com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest com.m3.collections.M3StateMaskArraysSelfTest; do
+            java -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" "$cls" \
+              > "$OUT/native-${cls##*.}.log" 2>&1
+            grep -Eq 'PASS M3LongIndexProjectionSelfTest checks=|PASS M3LongBitmapFilteredSnapshotSelfTest checks=|PASS M3StateMaskArrays checks=' "$OUT/native-${cls##*.}.log"
+            cat "$OUT/native-${cls##*.}.log"
+          done
+          # The existing first-party oracle requires successful native admission:
+          # a Java-only fallback MUST NOT satisfy this qualification gate.
+          java -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" \
+            com.m3.collections.M3IndexMaskCompactorSelfTest --native \
+            > "$OUT/native-required.log" 2>&1
+          grep -Fq 'PASS M3IndexMaskCompactorSelfTest checks=' "$OUT/native-required.log"
+          cat "$OUT/native-required.log"
