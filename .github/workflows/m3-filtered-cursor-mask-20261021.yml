@@ -50,11 +50,13 @@ jobs:
             m3/collections/src/test/java/com/m3/collections/M3FilteredCursorStateProof.java \
             m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java \
             m3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionProof.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredListsOwnerRemovalContract.java \
             m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java
           java -cp "$out/classes" com.m3.collections.M3FilteredCursorStateProof
           java -cp "$out/classes" com.m3.collections.M3FilteredDequeContract
           java -cp "$out/classes" com.m3.collections.M3FilteredViewsContract
           java -cp "$out/classes" com.m3.collections.M3FilteredListsDeepCompositionProof
+          java -cp "$out/classes" com.m3.collections.M3FilteredListsOwnerRemovalContract
           java -Xint -Xss256k -cp "$out/classes" \
             com.m3.collections.M3FilteredCursorStateProof
       - name: Compile actual modified java.base CollectionViews, not a facade
@@ -117,8 +119,8 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am \
             -Dsurefire.failIfNoSpecifiedTests=false \
-            -Dtest=M3FilteredCursorStateTest,M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3FilteredDequesTest,M3FilteredViewsTest,M3FilteredListsTest \
+            -Dtest=M3FilteredCursorStateTest,M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3FilteredDequesTest,M3FilteredViewsTest,M3FilteredListsTest,M3FilteredListsOwnerRemovalTest \
             test
-          for klass in M3FilteredCursorStateTest M3IndexedDescendingGroupMaskTest M3IndexedFilterSortFusionTest M3FilteredDequesTest M3FilteredViewsTest M3FilteredListsTest; do
+          for klass in M3FilteredCursorStateTest M3IndexedDescendingGroupMaskTest M3IndexedFilterSortFusionTest M3FilteredDequesTest M3FilteredViewsTest M3FilteredListsTest M3FilteredListsOwnerRemovalTest; do
             test -s "m3/collections/target/surefire-reports/TEST-com.m3.collections.${klass}.xml"
           done
