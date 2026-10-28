@@ -1,0 +1,41 @@
+{
+  "schema": "M3_FILE_ONE_COPY_RESULT_RECEIPT_V1",
+  "product": "M3JDK21 original m3/file owner; no runtime overlay",
+  "product_parent_sha": "42a06a4518c46f8f7fa7c30645868678e2510bd1",
+  "canonical_synexia_pr": "https://github.com/hsoliwal/com.synexia/pull/13757",
+  "canonical_recipe_head": "2d6099c90996b31d38211e212e6ba2b427b8c0ab",
+  "recipe_name": "com.synexia.rewrite.M3FileOwnedOneCopy20261028",
+  "algorithm_category": "immutable source generation / exclusive byte ownership / bulk span-copy",
+  "status": "CANDIDATE_HOLD_EXACT_HEAD_MAVEN_AND_MODULE_VERIFICATION",
+  "output_files": [
+    {
+      "path": "m3/file/src/main/java/com/m3/file/M3FileEditBatch.java",
+      "previous_blob": "ecadd7994da754b6515b01a692edec421e34b78b",
+      "output_blob": "aa0c1a218826fa7f53542e64aad1cb21b1e21af5",
+      "previous_sha256": "2b300cef543a0ce469091d948b4e0e3085d4110475a4deea14469ddcc71388b5",
+      "output_sha256": "bcb20428c6b240f1407760da7a1f77087c54f5ffcc2cad70322157bbc1d00603"
+    },
+    {
+      "path": "m3/file/src/main/java/com/m3/file/M3FileSource.java",
+      "previous_blob": "5a235ccf061c1865b44028e6a88faab556bc40ff",
+      "output_blob": "4878fdc20bee59119c1614067ffe81eef0b271aa",
+      "previous_sha256": "b9314fdd18d33192160667067dd7002fa07f6a4d3d2b00b6fa2fad4d1570d28a",
+      "output_sha256": "5a92b032c4a3ec7e5bb884ac5c1b5ad057a255805b0fd97883df1187339d85ce"
+    },
+    {
+      "path": "m3/file/src/test/java/com/m3/file/M3FileEditBatchContract.java",
+      "previous_blob": "f3714a73835039fcd58abe934d13bf0bffe486fa",
+      "output_blob": "bd68ce609ee982c44ea505287582ef7e28513499",
+      "previous_sha256": "dd7fd9dd15b2e23c7fa962625f23146321943f8fe6b44a7daddcafe3f265acf5",
+      "output_sha256": "6a3edb0d1c518ac1a2098c765bd936538c83f5b32b7a6a3977cdf0024d7f5426"
+    }
+  ],
+  "evidence": {
+    "source_before_after_exact_blob_identity": true,
+    "synexia_recipe_maven_sdk": "NOT_RUN",
+    "m3_file_java21_all_16_host_linked_contracts": "NOT_RUN",
+    "full_m3jdk21_image_and_jtreg": "NOT_RUN",
+    "jni_parity": "UNCHANGED_NOT_RUN",
+    "performance_benchmark": "NOT_RUN"
+  }
+}

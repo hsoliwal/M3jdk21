@@ -57,6 +57,25 @@ public final class M3FileEditBatchContract {
         rejects(IllegalStateException.class, edits::apply);
         var empty = M3FileEditBatch.on(base).apply();
         ok(empty.source() == base && empty.map().changes() == 0, "no-op returns original generation");
+        byte[] callerBuffer = bytes("copy boundary");
+        M3FileSource defensive = M3FileSource.fromBytes(callerBuffer);
+        callerBuffer[0] = (byte) 'X';
+        ok(Arrays.equals(defensive.bytes(), bytes("copy boundary")),
+                "public source construction preserves defensive ownership");
+        byte[] copied = new byte[defensive.length()];
+        defensive.copyRangeTo(0, copied, 0, copied.length);
+        ok(Arrays.equals(copied, bytes("copy boundary")), "direct internal source-span copy");
+        rejects(IndexOutOfBoundsException.class,
+                () -> defensive.copyRangeTo(0, new byte[1], 0, 2));
+        var editedSource = M3FileEditBatch.on(defensive)
+                .replaceBytes(2, 4, bytes("ZZ")).apply().source();
+        byte[] returnedCopy = editedSource.bytes();
+        returnedCopy[0] = (byte) 'X';
+        ok(Arrays.equals(editedSource.bytes(), bytes("coZZ boundary")),
+                "exclusive output stays immutable after public byte access");
+        ok(Arrays.equals(defensive.bytes(), bytes("copy boundary")),
+                "previous generation retains identity and original bytes");
+
         var bad = M3FileEditBatch.on(base);
         bad.replaceBytes(1,5,bytes("x"));
         rejects(IllegalArgumentException.class, () -> bad.replaceBytes(4,6,bytes("y")));
