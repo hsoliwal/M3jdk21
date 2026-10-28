@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "canonical_recipe": "com.synexia.m3.ObjectDoopEvents20261018",
+  "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "mode": "ADDITIVE_TARGET_OWNED_CAPABILITY",
+  "receiving_sequence_advanced": false,
+  "roles": [
+    {
+      "target": "java.lang.M3Object",
+      "source_role": "Lazy owner facade and authorized VarHandle coordinates",
+      "relation_to_MIndexObject": "Distinct from immutable structural metadata snapshot; no direct rename"
+    },
+    {
+      "target": "java.lang.ObjectEvent",
+      "source_role": "Coalesced asynchronous invalidation with reference/value/content masks"
+    },
+    {
+      "target": "java.lang.ObjectChangeListener",
+      "source_role": "Typed callback obtained through M3Object adapter capability"
+    },
+    {
+      "target": "java.lang.ObjectSubscription",
+      "source_role": "Explicit observation lifetime, idempotent close"
+    },
+    {
+      "target": "java.lang.M3ObjectRuntime",
+      "source_role": "JDK-owned weak identity registry and dynamic state lanes"
+    },
+    {
+      "target": "M3Object_NotifyContentChanged / M3Object_NotifyFieldChanged",
+      "source_role": "Explicit committed JNI producer bridge"
+    }
+  ],
+  "boundary": "No Synexia runtime dependency; automatic arbitrary VM store capture is not implemented by this producer bridge."
+}
