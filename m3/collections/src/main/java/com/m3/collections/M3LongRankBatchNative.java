@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 public final class M3LongRankBatchNative {
     private static final int NATIVE_MIN_BATCH = 64;
+    private static final int NATIVE_MIN_TRIPLET = 192;
+    private static volatile boolean TRIPLET_ABI_MISSING;
     private static final int NATIVE_MIN_KDIFF = 256;
     private static volatile boolean KDIFF_ABI_MISSING;
     private static final int NATIVE_MIN_PAIR_DISTANCE_BATCH = 64;
@@ -1130,6 +1132,64 @@ public final class M3LongRankBatchNative {
 
     /** Appended primitive JNI ABI in the existing original m3rankbatch owner. */
     private static native void countSmallerRight0(long[] input, int[] output);
+
+    /** LeetCode #15: count unique signed-long value triplets summing to target. */
+    static long distinctTripletSumCount(long[] sorted, long target) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (sorted.length < 3) return 0L;
+        if (AVAILABLE && !TRIPLET_ABI_MISSING && sorted.length >= NATIVE_MIN_TRIPLET) {
+            try {
+                return distinctTripletSumCount0(sorted, target);
+            } catch (UnsatisfiedLinkError oldNativeLibrary) {
+                TRIPLET_ABI_MISSING = true;
+            }
+        }
+        return distinctTripletSumCountJava(sorted, target);
+    }
+
+    /** Explicit JNI proof: never falls back when the native symbol is absent. */
+    static long distinctTripletSumCountNativeRequired(long[] sorted, long target) {
+        Objects.requireNonNull(sorted, "sorted");
+        if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch triplet JNI unavailable");
+        return distinctTripletSumCount0(sorted, target);
+    }
+
+    /** First-party two-pointer implementation; duplicates never create extra triplets. */
+    static long distinctTripletSumCountJava(long[] sorted, long target) {
+        Objects.requireNonNull(sorted, "sorted");
+        long count = 0;
+        for (int i = 0, n = sorted.length; i < n - 2; i++) {
+            if (i != 0 && sorted[i] == sorted[i - 1]) continue;
+            int left = i + 1, right = n - 1;
+            while (left < right) {
+                int comparison = compareTripleSum(sorted[i], sorted[left], sorted[right], target);
+                if (comparison < 0) left++;
+                else if (comparison > 0) right--;
+                else {
+                    count++;
+                    long a = sorted[left], b = sorted[right];
+                    do { left++; } while (left < right && sorted[left] == a);
+                    do { right--; } while (left < right && sorted[right] == b);
+                }
+            }
+        }
+        return count;
+    }
+
+    /** 128-bit signed extension via unsigned carry; no a+b+c overflow. */
+    private static int compareTripleSum(long a, long b, long c, long target) {
+        long ab = a + b;
+        long high = (a >> 63) + (b >> 63)
+                + (Long.compareUnsigned(ab, a) < 0 ? 1 : 0);
+        long sum = ab + c;
+        high += (c >> 63) + (Long.compareUnsigned(sum, ab) < 0 ? 1 : 0);
+        long targetHigh = target >> 63;
+        return high != targetHigh ? Long.compare(high, targetHigh)
+                : Long.compareUnsigned(sum, target);
+    }
+
+    /** Existing libm3rankbatch ABI; native input copied once before quadratic scan. */
+    private static native long distinctTripletSumCount0(long[] sorted, long target);
 
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {

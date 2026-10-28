@@ -1874,3 +1874,72 @@ Java_com_m3_collections_M3LongRankBatchNative_pairSumIndicesInto0(
         done += amount;
     }
 }
+
+/*
+ * LeetCode #15 distinct value triplets on immutable sorted signed-long
+ * arrays. Signed a+b+c may require 66 bits; compare a sign-extended (hi, lo)
+ * two-word sum instead of relying on overflowing signed arithmetic.
+ */
+static int m3_triple_cmp(jlong a, jlong b, jlong c, jlong target) {
+    uint64_t ua = (uint64_t) a, ub = (uint64_t) b, uc = (uint64_t) c;
+    uint64_t ab = ua + ub;
+    int64_t high = (a < 0 ? -1 : 0) + (b < 0 ? -1 : 0) + (ab < ua ? 1 : 0);
+    uint64_t sum = ab + uc;
+    high += (c < 0 ? -1 : 0) + (sum < ab ? 1 : 0);
+    int64_t goal_high = target < 0 ? -1 : 0;
+    if (high < goal_high) return -1;
+    if (high > goal_high) return 1;
+    uint64_t goal = (uint64_t) target;
+    return sum < goal ? -1 : sum > goal ? 1 : 0;
+}
+
+/* One existing m3rankbatch JNI call and no per-triplet allocation or owner
+ * mutation. Copy the immutable input once into native primitive scratch before
+ * O(n^2) work, so no JVM critical pin is held throughout the scan.
+ */
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_distinctTripletSumCount0(
+        JNIEnv *env, jclass unused, jlongArray sorted, jlong target) {
+    (void) unused;
+    if (sorted == NULL) {
+        jclass error = (*env)->FindClass(env, "java/lang/NullPointerException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "sorted");
+        return 0;
+    }
+    jsize size = (*env)->GetArrayLength(env, sorted);
+    if (size < 3) return 0;
+    if ((size_t) size > SIZE_MAX / sizeof(jlong)) {
+        jclass error = (*env)->FindClass(env, "java/lang/OutOfMemoryError");
+        if (error != NULL) (*env)->ThrowNew(env, error, "triplet scratch overflow");
+        return 0;
+    }
+    jlong *values = (jlong *) malloc((size_t) size * sizeof(jlong));
+    if (values == NULL) {
+        jclass error = (*env)->FindClass(env, "java/lang/OutOfMemoryError");
+        if (error != NULL) (*env)->ThrowNew(env, error, "triplet scratch unavailable");
+        return 0;
+    }
+    (*env)->GetLongArrayRegion(env, sorted, 0, size, values);
+    if ((*env)->ExceptionCheck(env)) {
+        free(values);
+        return 0;
+    }
+    jlong count = 0;
+    for (jsize i = 0; i < size - 2; i++) {
+        if (i > 0 && values[i] == values[i - 1]) continue;
+        jsize left = i + 1, right = size - 1;
+        while (left < right) {
+            int comparison = m3_triple_cmp(values[i], values[left], values[right], target);
+            if (comparison < 0) ++left;
+            else if (comparison > 0) --right;
+            else {
+                ++count;
+                jlong a = values[left], b = values[right];
+                do { ++left; } while (left < right && values[left] == a);
+                do { --right; } while (left < right && values[right] == b);
+            }
+        }
+    }
+    free(values);
+    return count;
+}

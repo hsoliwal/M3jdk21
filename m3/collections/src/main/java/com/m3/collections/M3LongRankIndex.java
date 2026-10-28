@@ -453,6 +453,18 @@ public final class M3LongRankIndex {
      * size threshold, with a Java two-pointer oracle and no callback bridge.
      * The result is long to retain a primitive order-statistic contract.</p>
      */
+    /**
+     * LeetCode #15 unique 3Sum value-triplet count on immutable sorted longs.
+     * Duplicated physical occurrences never create duplicate value triples.
+     * Signed overflow is avoided with 128-bit comparison, not saturated sums.
+     * Runtime cost is O(n^2), O(1) Java scratch; optional existing m3rankbatch
+     * JNI copies only one temporary primitive input lane, never owner payload
+     * mutation, Java callbacks, or per-triplet allocation.
+     */
+    public long distinctTripletSumCount(long target) {
+        return M3LongRankBatchNative.distinctTripletSumCount(values, target);
+    }
+
     public long distinctDifferencePairCount(long distance) {
         return M3LongRankBatchNative.distinctDifferencePairCount(values, distance);
     }
