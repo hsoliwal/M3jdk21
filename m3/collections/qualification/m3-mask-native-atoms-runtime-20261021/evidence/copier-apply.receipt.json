@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "mode": "APPLY",
+  "recipe_proof_sha256": "8b96ff9f844e6c238d2105c55af7b4c37f4628737e8232ca8115a5942dd14bd0",
+  "receiver_root": "a9af2623aea50708e6506c43ffb484858d5f1740fa550466ea08307a34c733bf",
+  "repository": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository",
+  "files": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "before_sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074",
+      "after_sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2",
+      "action": "WRITE"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548",
+      "action": "WRITE"
+    }
+  ]
+}

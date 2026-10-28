@@ -1,0 +1,58 @@
+[
+  {
+    "label": "target-direct-probe",
+    "reference": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-first-visible.log",
+    "equal": true,
+    "actual_sha256": "5bae7f48c447d01dd35af73abd072de3cfd84bd636227c88d7bd31e8f8cc0b09",
+    "reference_sha256": "5bae7f48c447d01dd35af73abd072de3cfd84bd636227c88d7bd31e8f8cc0b09"
+  },
+  {
+    "label": "target-junit-callback-tape",
+    "reference": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-first-visible.log",
+    "equal": true,
+    "actual_sha256": "5bae7f48c447d01dd35af73abd072de3cfd84bd636227c88d7bd31e8f8cc0b09",
+    "reference_sha256": "5bae7f48c447d01dd35af73abd072de3cfd84bd636227c88d7bd31e8f8cc0b09"
+  },
+  {
+    "label": "target-navigation-tape",
+    "reference": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-navigation-tape.log",
+    "equal": true,
+    "actual_sha256": "71aa3af0468a06b3fedd6f76a1eb14fcb2ff0ec8b42ac719f512cdb509af8a5f",
+    "reference_sha256": "71aa3af0468a06b3fedd6f76a1eb14fcb2ff0ec8b42ac719f512cdb509af8a5f"
+  },
+  {
+    "label": "target-range-controls",
+    "reference": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-range-controls.log",
+    "equal": true,
+    "actual_sha256": "36cc4388a39b1ec28fed4f22e0ee8b7bff1c6d91cd6369e8615f0933f6ccf4b3",
+    "reference_sha256": "36cc4388a39b1ec28fed4f22e0ee8b7bff1c6d91cd6369e8615f0933f6ccf4b3"
+  },
+  {
+    "label": "target-range-late",
+    "reference": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-range-late.log",
+    "equal": true,
+    "actual_sha256": "88bdc8c6daff2def9e3704653a5d3dcec9178c5e4eba5af23b577957a7c9a881",
+    "reference_sha256": "88bdc8c6daff2def9e3704653a5d3dcec9178c5e4eba5af23b577957a7c9a881"
+  },
+  {
+    "label": "target-range-real",
+    "reference": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-range-real.log",
+    "equal": true,
+    "actual_sha256": "a8f38a03f6109a69970be5eb6e2441199cdc9fe3bfb3dcc0ad8d54ad4fbb8001",
+    "reference_sha256": "a8f38a03f6109a69970be5eb6e2441199cdc9fe3bfb3dcc0ad8d54ad4fbb8001"
+  },
+  {
+    "label": "target-open-comparator-origin",
+    "reference": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-open-comparator-origin.log",
+    "equal": true,
+    "actual_sha256": "baf6c5ccd95f661dfaadad26a8070590ec4e8d54c80a8c056f31ffb0cde15bed",
+    "reference_sha256": "baf6c5ccd95f661dfaadad26a8070590ec4e8d54c80a8c056f31ffb0cde15bed"
+  },
+  {
+    "label": "target-api",
+    "reference": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-api.log",
+    "equal": true,
+    "actual_sha256": "0607cca38d4bef8fd4fe504a750876f28408ec44bbf72227af6604fd5976150e",
+    "reference_sha256": "0607cca38d4bef8fd4fe504a750876f28408ec44bbf72227af6604fd5976150e"
+  }
+]

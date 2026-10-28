@@ -227,9 +227,17 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
         jsize accepted = 0;
-        for (jsize i = 0; i < chunk; i++) {
-            unsigned int flags = mask == 0 ? 0u : (unsigned int)(unsigned char)marks[i];
-            if ((flags & (unsigned int)mask) == (unsigned int)mask) positions[accepted++] = offset + i;
+        if (mask == 0) {
+            /* Identity positions reuse the Java owner's affine fill atom. */
+            accepted = chunk;
+            for (jsize i = 0; i < chunk; i++) positions[i] = offset + i;
+        } else {
+            for (jsize i = 0; i < chunk; i++) {
+                unsigned int flags = (unsigned int)(unsigned char)marks[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) {
+                    positions[accepted++] = offset + i;
+                }
+            }
         }
         if (accepted > kept - written) {
             m3_throw_state_drift(env);
@@ -275,9 +283,11 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
         return (*env)->NewIntArray(env, 0);
     }
 
+    /* The overlap refusal above makes one combined-mask comparison exact. */
+    unsigned int tested_mask = (unsigned int)(required | excluded);
     jbyte marks[M3_CHUNK];
     jint kept = 0;
-    if ((required | excluded) == 0) {
+    if (tested_mask == 0) {
         kept = length;
     } else {
         for (jint offset = 0; offset < length;) {
@@ -287,8 +297,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
             if ((*env)->ExceptionCheck(env)) return NULL;
             for (jsize i = 0; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)required) == (unsigned int)required
-                        && (flags & (unsigned int)excluded) == 0U) {
+                if ((flags & tested_mask) == (unsigned int)required) {
                     kept++;
                 }
             }
@@ -303,17 +312,20 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
     for (jint offset = 0; offset < length;) {
         jint remaining = length - offset;
         jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
-        if ((required | excluded) != 0) {
+        if (tested_mask != 0) {
             (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
         jsize accepted = 0;
-        for (jsize i = 0; i < chunk; i++) {
-            unsigned int flags = (required | excluded) == 0
-                    ? 0U : (unsigned int)(unsigned char)marks[i];
-            if ((flags & (unsigned int)required) == (unsigned int)required
-                    && (flags & (unsigned int)excluded) == 0U) {
-                positions[accepted++] = offset + i;
+        if (tested_mask == 0) {
+            accepted = chunk;
+            for (jsize i = 0; i < chunk; i++) positions[i] = offset + i;
+        } else {
+            for (jsize i = 0; i < chunk; i++) {
+                unsigned int flags = (unsigned int)(unsigned char)marks[i];
+                if ((flags & tested_mask) == (unsigned int)required) {
+                    positions[accepted++] = offset + i;
+                }
             }
         }
         if (accepted > kept - written) {
