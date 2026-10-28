@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3AST real Eclipse JDT source identity
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java'
+      - 'm3/tooling/module-packs/parser/integration/jdt/**'
+      - '.github/workflows/m3ast-real-jdt-20261027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-jdt-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Resolve genuine Eclipse JDT dependency only for test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/module-packs/parser/integration/jdt/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath \
+            -Dmdep.outputFile="$RUNNER_TEMP/m3-jdt-cp.txt"
+          test -s "$RUNNER_TEMP/m3-jdt-cp.txt"
+      - name: Compile original M3AST sources and execute real Eclipse ASTParser
+        shell: bash
+        run: |
+          set -euo pipefail
+          owner=m3/tooling/module-packs/parser
+          classes="$RUNNER_TEMP/m3-jdt-real-classes"
+          mkdir -p "$classes"
+          javac --release 21 -Xlint:all -Werror -d "$classes" \
+            "$owner/src/main/java/jdk/m3/parser/M3File.java" \
+            "$owner/src/main/java/jdk/m3/parser/M3ASTIndex.java" \
+            "$owner/src/main/java/jdk/m3/parser/M3ASTIngress.java"
+          cp="$(cat "$RUNNER_TEMP/m3-jdt-cp.txt")"
+          javac --release 21 -Xlint:all -Werror -cp "$classes:$cp" -d "$classes" \
+            "$owner/integration/jdt/src/test/java/jdk/m3/parser/test/M3JDTRealProvenanceContract.java"
+          java -cp "$classes:$cp" jdk.m3.parser.test.M3JDTRealProvenanceContract
