@@ -12,6 +12,10 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package com.m3.collections;
 
 import java.util.ArrayList;
