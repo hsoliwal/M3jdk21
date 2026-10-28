@@ -1,0 +1,8 @@
+[
+  "/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21/build/m3-p0/jdk/bin/java",
+  "-Xshare:off",
+  "-Xverify:all",
+  "-cp",
+  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/runtime-classes",
+  "M3ObjectBaseVtableContract"
+]

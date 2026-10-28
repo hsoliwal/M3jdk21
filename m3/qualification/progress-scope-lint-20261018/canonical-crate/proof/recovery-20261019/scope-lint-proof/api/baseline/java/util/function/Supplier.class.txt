@@ -1,0 +1,4 @@
+public interface java.util.function.Supplier<T> {
+  public abstract T get();
+  public default T get(java.util.concurrent.ProgressMonitor);
+}

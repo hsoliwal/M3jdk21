@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "stage": "BUILD_PREREQUISITES_BASELINE_POOL",
+  "image": "/workspace/scratch/87fb3604f641/m3-implementation/images/prerequisite-baseline",
+  "image_files": [
+    {
+      "path": "bin/java",
+      "sha256": "76e09ce124093dc9647a2625af88ad008431bebae0e2ab130717b023b07486c6",
+      "bytes": 16320
+    },
+    {
+      "path": "lib/server/libjvm.so",
+      "sha256": "6cc5cb8b0dcce16fda91db158034c51b7eaa55baae7c75e7aa08923689bbdeb2",
+      "bytes": 26468752
+    },
+    {
+      "path": "lib/libjava.so",
+      "sha256": "8895ef28802d10f5cd5a688415bc760f99400e971414048b959b67f31601e90d",
+      "bytes": 197920
+    },
+    {
+      "path": "lib/modules",
+      "sha256": "19d053a6ecbb55d27be4b680eea77746b1ac4f0cc6a4a75b6d80a10fa8017e94",
+      "bytes": 142989941
+    },
+    {
+      "path": "release",
+      "sha256": "994eeaaef4b5df49d84883b83947d60ff268bd7195cb35197ce6e84ce25c1fc6",
+      "bytes": 1223
+    },
+    {
+      "path": "lib/server/classes.jsa",
+      "sha256": "6add638fd5bbeda103c433ac15d0f92b829df506a4c7bd3dbcbfdc78e8e3a968",
+      "bytes": 15011840
+    },
+    {
+      "path": "lib/server/classes_nocoops.jsa",
+      "sha256": "d157dcea1235593d7cf38bee1b7962267359573acd931e5f91fef0e785f2c3c4",
+      "bytes": 15376384
+    }
+  ],
+  "full_images_and_cds": "PASS",
+  "build_command": "make CONF=m3-p0 JOBS=4 ENABLE_JAVAC_SERVER=false images",
+  "environment_repairs": "Installed runtime shared objects restored for temporary sysroot developer links; direct javac used after stale server refused connections",
+  "source_pool_sha256": "b58c82047f795807ff32229146c370c9e596eff19942a92cd0128ce4987d20ca"
+}

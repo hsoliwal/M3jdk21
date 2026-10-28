@@ -429,7 +429,7 @@ public interface ExecutorService extends Executor, AutoCloseable {
     }
 
     /**
-     * Run a checked task with an explicitly borrowed progress monitor.
+     * Submits a checked task with an explicitly borrowed progress monitor.
      * Future cancellation and cooperative monitor cancellation remain distinct.
      * The monitor is bound during execution and is not completed by this task.
      *
@@ -439,6 +439,13 @@ public interface ExecutorService extends Executor, AutoCloseable {
      * @return a future representing pending completion of the task
      * @throws NullPointerException if {@code task} or {@code monitor} is null
      * @throws RejectedExecutionException if the task cannot be scheduled
+     *
+     * @param <T> the result type
+     * @param task the task to submit
+     * @param monitor the borrowed progress monitor
+     * @return the future representing the task result
+     * @throws NullPointerException if either argument is null
+     * @throws RejectedExecutionException if the task cannot be accepted
      */
     default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(task, "task");
