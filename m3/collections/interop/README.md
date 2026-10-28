@@ -107,16 +107,16 @@ direct** closure, not an installed Maven-transitive graph or all five providers.
 
 Until each donor API atom and its notices have been source-vendored/refactored
 onto M3 arrays, offsets, indexes, masks and JNI owners, this module explicitly
-**skips Maven deploy**. Local `mvn install` and `mvn verify` remain available
+**skips ordinary Maven install and deploy**. Local `mvn verify` remains available
 for qualification with the real pinned donor libraries. Do **not** publish this
 interop POM/jar as a zero-third-party dependency offering or remove donor jars
 without preserving exact Java API, serialization, allocation and live-view
-semantics. Deployment quarantine is not source inlining.
+semantics. Install/deploy quarantine is not source inlining. Custom upload, explicit `install:install-file`/`deploy:deploy-file`, and modified plugin settings can bypass it.
 
 The no-download Python regression and declared-dependency census live at
 `m3/collections/verification/no_external_runtime.py` and
 `test_no_external_runtime.py`. They reject direct external core dependencies,
-missing/symlinked POMs, a missing deployment quarantine, profile overrides, and
+missing/symlinked POMs, a missing install/deploy quarantine, profile overrides, and
 `provided`/`optional` scope tricks. This is **not** full transitive Maven
 dependency resolution, class loading/JNI verification, five-provider parity,
 or proof that the four binaries have been eliminated. Those remain HOLD.
