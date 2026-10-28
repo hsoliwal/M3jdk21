@@ -1,98 +1,45 @@
 {
-  "schema": "M3_SPARSE_VIEWPORT_JAVA21_LST_RECEIVING_V1",
-  "target_repo": "hsoliwal/M3jdk21",
-  "target_master_before": "92962fbba10cbf13799253a307dc90f4de94b179",
-  "canonical_repo": "hsoliwal/com.synexia",
-  "canonical_focused_pr": 13788,
-  "canonical_focused_commit": "8f0d62706452a0b2c73c2f44b5560fba2dd88304",
-  "canonical_engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-  "canonical_engine_git_blobs": {
-    "M3EditScope": "274360816db1e44a2f1796a4bc5cdeff6b0ce6db",
-    "M3HashPinnedJavaSnapshotRecipe": "98138cb6734ad86e3f77b8722fa5ff459842e841",
-    "M3HashPinnedTextSnapshotRecipe": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
-    "M3ScopeInference": "9174dd681f0d75b5086fc19904a71524a03972dc",
-    "M3TaskRecipeTest": "e69993797978f800a4d1b01b55093dc8dde16514",
-    "receive_py": "d7f5cda465d8f473f4969d4db15d717af1391745"
+  "schema": "M3_SPARSE_VIEWPORT_CONTRACT_PRESERVING_RECEIVING_V2",
+  "original_product_master": "92962fbba10cbf13799253a307dc90f4de94b179",
+  "accepted_stage": "sparse-viewport-bounds-20261028",
+  "source_pre_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+  "source_post_git_blob": "9c7cc7e265e4aee0dca030957c8d0ac04abfccbb",
+  "accepted_source_sha256": "391e8b5d81ca5c19cc9e325c5e49f28356c713dbbf1fd5530c6f3d5bd91f6e04",
+  "accepted_test_git_blob": "045c89bb5a8cf869e332c73dd557a2193aa93b7f",
+  "source_provenance": "Exact existing canonical Synexia M3HashPinnedJavaSnapshotRecipe and M3TaskRecipeTest Git blobs; authentic pinned OpenRewrite Java21 parser artifact #12733140239, jar SHA256 7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+  "actual_local_sdk": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "source_results": 2,
+    "receiver_changes": 2,
+    "receiver_replay_changes": 0,
+    "parser_real": true
   },
-  "parser": {
-    "artifact_repo": "hsoliwal/M3jdk21",
-    "workflow_run": 40500163711,
-    "artifact_id": 12733140239,
-    "version": "org.openrewrite:rewrite-java-21:8.17.1",
-    "jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
-    "pom_sha256": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7",
-    "java21_parser_class_verified": true
+  "actual_received_source_junit": {
+    "negative_viewport_tests": 3,
+    "historical_geometry_tests": 10,
+    "mixed_total": 13,
+    "mixed_failures": 0,
+    "interpreted_total": 13,
+    "interpreted_failures": 0
   },
-  "maven": {
-    "version": "3.9.9",
-    "java": "21.0.12.1",
-    "execution": "OFFLINE_LOCAL",
-    "harness": "Original canonical engine classes and original M3TaskRecipeTest, local minimal Maven POM with slf4j-api:2.0.9 instead of unavailable slf4j-simple:2.0.13; source SHA-256 identities and actual SDK Result bytes match canonical published manifests",
-    "original_canonical_pom_exact": false
+  "historical_existing_geometry_fixture_sha256": "75e960d7db157ab38f9597317589be1480eadca5eaf5f3fd048f98a540c3fc58",
+  "historical_partial_write_contract": {
+    "one_slot_nonempty": "out[0] receives first row then ArrayIndexOutOfBoundsException",
+    "one_slot_empty": "out[0] receives zero then ArrayIndexOutOfBoundsException",
+    "preserved": true
   },
-  "stages": [
-    {
-      "dataset": "sparse-viewport-bounds-20261028",
-      "sdk_tests": 5,
-      "failures": 0,
-      "errors": 0,
-      "skips": 0,
-      "actual_sdk_results": 2,
-      "receiver_check_changes": 2,
-      "receiver_apply_changes": 2,
-      "receiver_replay_changes": 0,
-      "sdk_results_sha256": "1d18cc58c5d4d4df92e046cc9bf558bedfc46d731dd82288591901a3a7698951",
-      "maven_log_sha256": "0f265d768ff5c91147017869ede266cfce30491cf654da5137b5a84ca62c07dd",
-      "source_pre_sha256": "98a83a0bef698e128baa0a788e122751e12584d0b8983f4df7443850123afeec",
-      "source_post_sha256": "391e8b5d81ca5c19cc9e325c5e49f28356c713dbbf1fd5530c6f3d5bd91f6e04"
-    },
-    {
-      "dataset": "sparse-viewport-pair-20261028",
-      "sdk_tests": 5,
-      "failures": 0,
-      "errors": 0,
-      "skips": 0,
-      "actual_sdk_results": 2,
-      "receiver_check_changes": 2,
-      "receiver_apply_changes": 2,
-      "receiver_replay_changes": 0,
-      "sdk_results_sha256": "70e8369668a27c914d2d105a29c2c6f889816f6cb18ae0ee751943186aecf469",
-      "maven_log_sha256": "5569d6ddd19501ae5ff03181ca5852c71378c318d15c514d24f113453baef23d",
-      "source_pre_sha256": "391e8b5d81ca5c19cc9e325c5e49f28356c713dbbf1fd5530c6f3d5bd91f6e04",
-      "source_post_sha256": "427dc15a209248ec7359ce88000b439b2aafa2241361c5a8f6ea6144ff285c27"
-    }
-  ],
-  "received_files": {
-    "M3SparseExtents.java": {
-      "pre_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
-      "post_git_blob": "a4b8b052f7005e96aaf9dab89410f3383b2ca20d",
-      "sha256": "427dc15a209248ec7359ce88000b439b2aafa2241361c5a8f6ea6144ff285c27"
-    },
-    "M3SparseViewportValidationTest.java": {
-      "pre": "ABSENT",
-      "post_git_blob": "045c89bb5a8cf869e332c73dd557a2193aa93b7f",
-      "sha256": "c726177c9a2191de9d85053db402b6dee7f0ba53cf2d985516f8965c16b633ed"
-    },
-    "M3SparseVisibleRangeAtomicityTest.java": {
-      "pre": "ABSENT",
-      "post_git_blob": "3bfa8cf834b34dcc109ac7da23472df8c79c9108",
-      "sha256": "d1c99ce71cbadb6d4197a086b1fdbe3d38c6708a838a52ec6835e86224347f0a"
-    }
+  "rejected_successor": {
+    "dataset": "sparse-viewport-pair-20261028",
+    "candidate_git_blob": "a4b8b052f7005e96aaf9dab89410f3383b2ca20d",
+    "reason": "Changes deliberately asserted historical partial-write semantics. Original M3ViewportGeometryTest invalidArgumentsKeepExceptionAndPartialWriteOrder fails. Combined 18 tests, 1 failure. Product candidate withdrawn.",
+    "product_applied": false
   },
-  "independent_product_junit": {
-    "normal_tests": 8,
-    "normal_failures": 0,
-    "normal_errors": 0,
-    "interpreted_tests": 8,
-    "interpreted_failures": 0,
-    "interpreted_errors": 0,
-    "normal_log_sha256": "a6ce7226664b5483f230efdfcbe1716e7fff0174bbe4ce701a988d87c0382d23",
-    "interpreted_log_sha256": "2ced147e9c3e16c9f6053da06cc894f6daf74a61a3cbe9840422137dfa1f3015"
-  },
-  "public_descriptors_unchanged": true,
-  "product_workflow_receiving": "PENDING_GITHUB_CI",
+  "local_pom_custody": "Reduced offline Maven POM uses available slf4j-api:2.0.9; engine and test Java source blobs exact, canonical repository POM NOT byte-identical.",
+  "jdk_ci": "PENDING",
   "hotspot_jtreg": "NOT_RUN",
-  "swt_nebula_gef_rwt_ui": "NOT_RUN",
-  "performance_improvement_claim": false,
-  "merge": "BLOCKED_REVIEW"
+  "swt_nebula_gef_rwt": "NOT_RUN",
+  "performance_claim": false,
+  "merge": "DRAFT_REVIEW_ONLY"
 }
