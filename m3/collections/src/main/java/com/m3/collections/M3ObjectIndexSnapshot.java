@@ -349,35 +349,6 @@ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements R
                 from + fromIndex, from + toIndex, order);
     }
 
-    // Read-only means refusal even for empty/no-op calls and Java 21 sequenced mutations.
-    private static UnsupportedOperationException immutable() {
-        return new UnsupportedOperationException("immutable M3 object-slot projection");
-    }
-
-    @Override public E set(int index, E element) { throw immutable(); }
-    @Override public void add(int index, E element) { throw immutable(); }
-    @Override public boolean add(E element) { throw immutable(); }
-    @Override public boolean addAll(java.util.Collection<? extends E> values) {
-        throw immutable();
-    }
-    @Override public boolean addAll(int index, java.util.Collection<? extends E> values) {
-        throw immutable();
-    }
-    @Override public E remove(int index) { throw immutable(); }
-    @Override public boolean remove(Object value) { throw immutable(); }
-    @Override public boolean removeAll(java.util.Collection<?> values) { throw immutable(); }
-    @Override public boolean retainAll(java.util.Collection<?> values) { throw immutable(); }
-    @Override public boolean removeIf(Predicate<? super E> filter) { throw immutable(); }
-    @Override public void replaceAll(java.util.function.UnaryOperator<E> operator) {
-        throw immutable();
-    }
-    @Override public void sort(Comparator<? super E> comparator) { throw immutable(); }
-    @Override public void clear() { throw immutable(); }
-    @Override protected void removeRange(int begin, int end) { throw immutable(); }
-    @Override public void addFirst(E element) { throw immutable(); }
-    @Override public void addLast(E element) { throw immutable(); }
-    @Override public E removeFirst() { throw immutable(); }
-    @Override public E removeLast() { throw immutable(); }
 
     public long retainedPrimitiveBytes() {
         return (long) physicalSlots.length * Integer.BYTES
