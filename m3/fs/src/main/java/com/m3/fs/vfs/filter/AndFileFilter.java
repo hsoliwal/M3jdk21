@@ -26,7 +26,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.lang3.ArrayUtils;
 import com.m3.fs.vfs.FileFilter;
 import com.m3.fs.vfs.FileSelectInfo;
 import com.m3.fs.vfs.FileSystemException;
@@ -61,7 +60,7 @@ public class AndFileFilter implements FileFilter, ConditionalFileFilter, Seriali
      * @param filters array of filters, must not be null or empty
      */
     public AndFileFilter(final FileFilter... filters) {
-        if (ArrayUtils.isEmpty(filters)) {
+        if (filters == null || filters.length == 0) {
             throw new IllegalArgumentException("The filters must not be null or empty");
         }
         for (final FileFilter filter : filters) {

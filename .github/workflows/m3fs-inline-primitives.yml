@@ -1,0 +1,130 @@
+name: M3FS inline Commons Lang primitive atoms — source-built receiver
+on:
+  push:
+    branches: ['m3/fs-inline-primitive-vendor-atoms-20261027']
+  pull_request:
+    paths:
+      - 'm3/fs/src/main/java/com/m3/fs/vfs/util/**'
+      - 'm3/fs/src/test/java/com/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java'
+      - 'm3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java'
+      - 'm3/fs/src/main/java/com/m3/fs/vfs/FileSystemConfigBuilder.java'
+      - 'm3/fs/src/test/java/com/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java'
+      - 'm3/fs/qualification/inline-primitives/**'
+      - '.github/workflows/m3fs-inline-primitives.yml'
+permissions:
+  contents: read
+jobs:
+  original-m3fs-java21-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build prerequisites for original M3FS JNI owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y cmake libsqlite3-dev
+      - name: Verify exact received M3FS source SHA256 postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '7fbfd49c77ee2c20aad4deb8065cfb8e9c37000066972e13a728741149830bcf  m3/fs/src/main/java/com/m3/fs/vfs/util/M3UriMask.java' | sha256sum -c -
+          echo '8b06f68eb3c4b1e710fa15e53b5dd7225780607c5eee8db8afe16c38ec35a3c2  m3/fs/src/main/java/com/m3/fs/vfs/util/Messages.java' | sha256sum -c -
+          echo '6c14e77353396c7bd2498b3ae7af30a3b8201335758b2f344be917b527552f8c  m3/fs/src/main/java/com/m3/fs/vfs/util/RandomAccessMode.java' | sha256sum -c -
+          echo '67157d62fc8fba6d4efdf80f60c2e5535a581778e2b8bd6b739b967517a50439  m3/fs/src/main/java/com/m3/fs/vfs/util/URIBitSets.java' | sha256sum -c -
+          echo '5c014fbb021f6755935385849868244808c7c25ad1cf507c9ab0c4edc20ee984  m3/fs/src/main/java/com/m3/fs/vfs/util/URIUtils.java' | sha256sum -c -
+          echo '7d4cf9c4645116d8c32d7bf97a7c95804406f7685a9cd41b69817301ef553379  m3/fs/src/test/java/com/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java' | sha256sum -c -
+          echo 'fcd74b79cdf1566358a15691e93486993be1e1ca6d6423ac727a3cbdbdfe6223  m3/fs/src/main/java/com/m3/fs/vfs/FileSystemException.java' | sha256sum -c -
+          echo '52534f188bd9bf1996026696a1060acea2b4a30026417df2298f5e7b4dee6350  m3/fs/src/main/java/com/m3/fs/vfs/filter/AndFileFilter.java' | sha256sum -c -
+          echo '06e07ed2d9d836f0a3dab5580a70fbacc204f3a6c2c1cd7cf1742c900aa6a357  m3/fs/src/main/java/com/m3/fs/vfs/filter/WildcardFileFilter.java' | sha256sum -c -
+          echo '3fadef1c6c3b1c0459be0720e5529f28ac8b59a77bd8345bafeac39232e3167a  m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java' | sha256sum -c -
+          echo 'a6c74c47c4ac3c1fc09cc5662c4eb9a3462c0666c50220cf59c9e2d1cc1b6b1e  m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java' | sha256sum -c -
+          echo '4a5764a45068b86e9e9e36774695aba1e7a02ce55eae336128c64c150f0b9cff  m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java' | sha256sum -c -
+          echo '40a56e8a2967b407624de2ae102a12192f0831f385c5624170e7edc16c4d629f  m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java' | sha256sum -c -
+          echo '3a0f4638631755c740b87021dbf161e898cc721e625a6c50b4673f5e00007810  m3/fs/src/test/java/com/m3/fs/vfs/filter/M3FsInlineCommonsCallsitesTest.java' | sha256sum -c -
+          echo '6d0b0739e9d74fcd384504b761c50c440eabc30378fc294767d6731e75e460cd  m3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java' | sha256sum -c -
+          echo 'b166b2e1b60e6af1e72199b9f3e306915823fe0f921d5a3c10b86ea5c3b3ba7e  m3/fs/src/main/java/com/m3/fs/vfs/FileSystemConfigBuilder.java' | sha256sum -c -
+          echo '1392ceaab3cc79b4fbfacc9752b7110dd5107a12768a270c3de4909fbd10c058  m3/fs/src/test/java/com/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java' | sha256sum -c -
+          if grep -En '^import org\.apache\.commons\.lang3' \
+              m3/fs/src/main/java/com/m3/fs/vfs/util/{Messages,RandomAccessMode,URIBitSets,URIUtils}.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/FileSystemException.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/filter/AndFileFilter.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/filter/WildcardFileFilter.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java \
+              m3/fs/src/main/java/com/m3/fs/vfs/FileSystemConfigBuilder.java; then
+            echo 'Unexpected Commons Lang import in transformed atoms' >&2
+            exit 1
+          fi
+      - name: Install original M3File internal owner (not a third-party jar)
+        run: mvn -B -ntp -f m3/file/pom.xml -DskipTests install
+      - name: Execute changed M3FS differential JUnit under checked JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/fs/pom.xml \
+            -Dtest=M3FsDonorFreePrimitivesTest,M3FsInlineCommonsCallsitesTest,M3FsEmbeddedCommonsLoggingTest,M3FsDepthDurationPrimitivesTest test \
+            2>&1 | tee "$RUNNER_TEMP/m3fs-focused.log"
+      - name: Full original M3FS Maven/JNI verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/fs/pom.xml verify \
+            2>&1 | tee "$RUNNER_TEMP/m3fs-full.log"
+      - name: Check source-inlined Commons Logging API and runtime closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          awk -F '\t' '$1 ~ /^m3\/fs\// {print $2 "  " $1}' \
+            m3/fs/qualification/embedded-commons-logging/SOURCE-PROVENANCE.tsv | sha256sum -c -
+          jar --list --file m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar \
+            | grep -qx 'org/apache/commons/logging/Log.class'
+          jar --list --file m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar \
+            | grep -qx 'org/apache/commons/logging/LogFactory.class'
+          jar --list --file m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar \
+            | grep -qx 'org/apache/commons/logging/impl/LogFactoryImpl.class'
+          jar --describe-module --file m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar \
+            | tee "$RUNNER_TEMP/m3fs-logging-module.txt"
+          grep -qx 'requires java.logging' "$RUNNER_TEMP/m3fs-logging-module.txt" \
+            || grep -q 'requires java.logging ' "$RUNNER_TEMP/m3fs-logging-module.txt"
+          if grep -q 'requires commons.logging' "$RUNNER_TEMP/m3fs-logging-module.txt"; then
+            echo 'Forbidden downstream commons.logging JPMS module' >&2
+            exit 1
+          fi
+          mvn -B -ntp -f m3/fs/pom.xml dependency:tree -Dscope=runtime \
+            -DoutputFile="$RUNNER_TEMP/m3fs-logging-runtime-tree.txt"
+          if grep -F 'commons-logging:commons-logging' "$RUNNER_TEMP/m3fs-logging-runtime-tree.txt"; then
+            echo 'Forbidden Commons Logging runtime Maven dependency' >&2
+            exit 1
+          fi
+      - name: Save consumer-visible runtime closure for future inlining
+        if: always()
+        shell: bash
+        run: |
+          mvn -B -ntp -f m3/fs/pom.xml dependency:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/m3fs-runtime-deps.txt" \
+            || true
+      - name: Keep actual proof and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3fs-inline-primitives-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/m3fs-focused.log
+            ${{ runner.temp }}/m3fs-full.log
+            ${{ runner.temp }}/m3fs-runtime-deps.txt
+            m3/fs/target/surefire-reports/
+            ${{ runner.temp }}/m3fs-logging-module.txt
+            ${{ runner.temp }}/m3fs-logging-runtime-tree.txt

@@ -22,7 +22,6 @@ package com.m3.fs.vfs.operations;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.ArrayUtils;
 import com.m3.fs.vfs.FileObject;
 import com.m3.fs.vfs.FileSystemException;
 import com.m3.fs.vfs.FileSystemManager;
@@ -33,6 +32,7 @@ import com.m3.fs.vfs.FileSystemManager;
  * @since 0.1
  */
 public class DefaultFileOperations implements FileOperations {
+    private static final Class<?>[] NO_OPERATION_CLASSES = {};
 
     /**
      */
@@ -101,7 +101,7 @@ public class DefaultFileOperations implements FileOperations {
 
         @SuppressWarnings("unchecked")
         final Class<? extends FileOperation>[] array = (Class<? extends FileOperation>[]) operations
-                .toArray(ArrayUtils.EMPTY_CLASS_ARRAY);
+                .toArray(NO_OPERATION_CLASSES);
         return array;
     }
 

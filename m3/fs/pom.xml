@@ -31,11 +31,8 @@
       <version>0.1.0-SNAPSHOT</version>
     </dependency>
     <!-- Exact qualified m3-vfs-core closure; upstream versions and bounded overrides are recorded in legal/commons-vfs2/CHANGES-M3FS.md. -->
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.2</version>
-    </dependency>
+    <!-- Commons Logging 1.2 original API/JDK backend compiled from pinned Apache source
+         directly into this M3FS artifact. No downstream logging JAR/module. -->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -107,6 +104,7 @@
           </compilerArgs>
           <excludes>
             <exclude>com/m3/fs/vfs/**/*.java</exclude>
+            <exclude>org/apache/commons/logging/**/*.java</exclude>
           </excludes>
         </configuration>
       </plugin>
@@ -219,8 +217,8 @@
               <Bundle-Version>0.1.0</Bundle-Version>
               <Bundle-Name>M3FS</Bundle-Name>
               <Bundle-RequiredExecutionEnvironment>JavaSE-21</Bundle-RequiredExecutionEnvironment>
-              <Export-Package>com.m3.fs;version="0.1.0",com.m3.fs.vfs;version="0.1.0",com.m3.fs.vfs.auth;version="0.1.0",com.m3.fs.vfs.cache;version="0.1.0",com.m3.fs.vfs.events;version="0.1.0",com.m3.fs.vfs.filter;version="0.1.0",com.m3.fs.vfs.function;version="0.1.0",com.m3.fs.vfs.impl;version="0.1.0",com.m3.fs.vfs.operations;version="0.1.0",com.m3.fs.vfs.operations.vcs;version="0.1.0",com.m3.fs.vfs.provider;version="0.1.0",com.m3.fs.vfs.provider.bzip2;version="0.1.0",com.m3.fs.vfs.provider.compressed;version="0.1.0",com.m3.fs.vfs.provider.gzip;version="0.1.0",com.m3.fs.vfs.provider.jar;version="0.1.0",com.m3.fs.vfs.provider.local;version="0.1.0",com.m3.fs.vfs.provider.ram;version="0.1.0",com.m3.fs.vfs.provider.res;version="0.1.0",com.m3.fs.vfs.provider.tar;version="0.1.0",com.m3.fs.vfs.provider.temp;version="0.1.0",com.m3.fs.vfs.provider.url;version="0.1.0",com.m3.fs.vfs.provider.zip;version="0.1.0",com.m3.fs.vfs.util;version="0.1.0"</Export-Package>
-              <Import-Package>javax.crypto,javax.crypto.spec,javax.xml.parsers,org.w3c.dom,org.apache.commons.compress.archivers,org.apache.commons.compress.archivers.tar,org.apache.commons.compress.compressors.bzip2,org.apache.commons.io,org.apache.commons.io.file,org.apache.commons.io.function,org.apache.commons.lang3,org.apache.commons.lang3.concurrent,org.apache.commons.lang3.reflect,org.apache.commons.lang3.time,org.apache.commons.lang3.util,org.apache.commons.logging</Import-Package>
+              <Export-Package>com.m3.fs;version="0.1.0",com.m3.fs.vfs;version="0.1.0",com.m3.fs.vfs.auth;version="0.1.0",com.m3.fs.vfs.cache;version="0.1.0",com.m3.fs.vfs.events;version="0.1.0",com.m3.fs.vfs.filter;version="0.1.0",com.m3.fs.vfs.function;version="0.1.0",com.m3.fs.vfs.impl;version="0.1.0",com.m3.fs.vfs.operations;version="0.1.0",com.m3.fs.vfs.operations.vcs;version="0.1.0",com.m3.fs.vfs.provider;version="0.1.0",com.m3.fs.vfs.provider.bzip2;version="0.1.0",com.m3.fs.vfs.provider.compressed;version="0.1.0",com.m3.fs.vfs.provider.gzip;version="0.1.0",com.m3.fs.vfs.provider.jar;version="0.1.0",com.m3.fs.vfs.provider.local;version="0.1.0",com.m3.fs.vfs.provider.ram;version="0.1.0",com.m3.fs.vfs.provider.res;version="0.1.0",com.m3.fs.vfs.provider.tar;version="0.1.0",com.m3.fs.vfs.provider.temp;version="0.1.0",com.m3.fs.vfs.provider.url;version="0.1.0",com.m3.fs.vfs.provider.zip;version="0.1.0",com.m3.fs.vfs.util;version="0.1.0",org.apache.commons.logging;version="1.2.0",org.apache.commons.logging.impl;version="1.2.0"</Export-Package>
+              <Import-Package>javax.crypto,javax.crypto.spec,javax.xml.parsers,org.w3c.dom,org.apache.commons.compress.archivers,org.apache.commons.compress.archivers.tar,org.apache.commons.compress.compressors.bzip2,org.apache.commons.io,org.apache.commons.io.file,org.apache.commons.io.function,org.apache.commons.lang3,org.apache.commons.lang3.concurrent,org.apache.commons.lang3.reflect,org.apache.commons.lang3.time,org.apache.commons.lang3.util</Import-Package>
             </manifestEntries>
           </archive>
         </configuration>
@@ -244,6 +242,27 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <executions>
+              <!-- Apache Commons Logging 1.2 verified source, no optional backend adapters.
+                   Compile before the VFS providers so their original Log descriptors resolve
+                   to the classes in this same M3FS output directory. -->
+              <execution>
+                <id>compile-inlined-commons-logging</id>
+                <phase>generate-sources</phase>
+                <goals><goal>compile</goal></goals>
+                <configuration>
+                  <includes>
+                    <include>org/apache/commons/logging/**/*.java</include>
+                  </includes>
+                  <excludes combine.self="override"/>
+                  <!-- Preserve original Apache donor diagnostics; the distinct M3-owned
+                       strict -Werror pass remains unchanged. -->
+                  <compilerArgs combine.self="override">
+                    <arg>-Xlint:none</arg>
+                  </compilerArgs>
+                  <failOnWarning>false</failOnWarning>
+                  <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+              </execution>
               <execution>
                 <id>compile-attributed-vfs-core</id>
                 <phase>process-sources</phase>
