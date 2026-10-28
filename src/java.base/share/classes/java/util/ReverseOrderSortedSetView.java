@@ -24,6 +24,7 @@
  * questions.
  */
 
+// Modified 2026 by Hitesh Soliwal and contributors: use the sorted splitting owner.
 package java.util;
 
 import java.util.function.Consumer;
