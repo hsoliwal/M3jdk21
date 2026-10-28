@@ -25,12 +25,13 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>6.2.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
       <version>3.0.2</version>
-      <scope>provided</scope>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -112,6 +113,9 @@
             </goals>
             <configuration>
               <dataFile>${m3.jacoco.exec}</dataFile>
+              <excludes>
+                <exclude>org/springframework/**</exclude>
+              </excludes>
               <rules>
                 <rule>
                   <element>CLASS</element>
