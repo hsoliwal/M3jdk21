@@ -1,0 +1,44 @@
+name: M3 Jackson PR1289 primitive AST core Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3AST*.java'
+      - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTCoreReceiptContract.java'
+      - '.github/workflows/m3-json-pr1289-ast-core-java21.yml'
+  workflow_dispatch:
+jobs:
+  core-java21:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse source drift from historical PR #1289
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson
+          test "$(git hash-object "$root/M3AST.java")" = "8edfc771a04743a507d5f799bd0b41e91180287e"
+          test "$(git hash-object "$root/M3ASTAtom.java")" = "59727364b4d30c55326215b326f5d2763c6cd14f"
+          test "$(git hash-object "$root/M3ASTBuilder.java")" = "0a26b63a780bf303f807e60379864ec905e51f0e"
+          test "$(git hash-object "$root/M3ASTPool.java")" = "66d9bd48d99423dc648dbe72ded5ace2c147c08e"
+          test "$(git hash-object "$root/M3JsonLimits.java")" = "c08f91664245759463c654f244cdf2bfaf19fbb3"
+      - name: Strict Java21 compilation and actual core contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/tooling/module-packs/jackson
+          classes="${RUNNER_TEMP}/m3-ast-core"
+          mkdir -p "$classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \
+            "$root/src/main/java/jdk/m3/jackson/M3JsonLimits.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3AST.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3ASTAtom.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3ASTBuilder.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3ASTPool.java" \
+            "$root/src/test/java/jdk/m3/jackson/M3ASTCoreReceiptContract.java"
+          java -cp "$classes" jdk.m3.jackson.M3ASTCoreReceiptContract
