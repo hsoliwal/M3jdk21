@@ -187,5 +187,13 @@ jobs:
           mvn -B -ntp -f m3/vendor/third_party/pom.xml \
             -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 \
             -am -DskipTests install
+      - name: Compile and install original arrays Maven dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          ARRAYS_JAR="$HOME/.m2/repository/com/m3/m3-arrays/0.1.0-SNAPSHOT/m3-arrays-0.1.0-SNAPSHOT.jar"
+          test -s "$ARRAYS_JAR"
+          jar --describe-module --file "$ARRAYS_JAR" | grep -q '^com.m3.arrays'
       - name: Original owning Maven JUnit gate (must be green before promotion)
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3BoundedFilteredNavigationTest,M3FilteredNavigationReconciliationTest test
