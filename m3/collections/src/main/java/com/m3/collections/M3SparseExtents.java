@@ -236,6 +236,7 @@ public final class M3SparseExtents {
 	}
 
 	public long maxScrollOffset (int viewport) {
+		if (viewport < 0) throw new IllegalArgumentException ("negative viewport");
 		return Math.max (0L, totalExtent () - viewport);
 	}
 
