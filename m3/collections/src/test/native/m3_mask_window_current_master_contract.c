@@ -109,6 +109,78 @@ static void guards(const jint *output, jsize size, jint offset, jint written) {
     }
 }
 
+/* Reproducible C/JNI differential: bounded and full source mask windows, no Java heap. */
+static unsigned long long seed = 0x4D335F4D41534B21ULL;
+
+static unsigned int random_word(void) {
+    seed ^= seed << 13;
+    seed ^= seed >> 7;
+    seed ^= seed << 17;
+    return (unsigned int) (seed >> 17);
+}
+
+static void differential(JNIEnv *env) {
+    enum { CAP = 1024, OUT = 64, CASES = 25000 };
+    jint rows[CAP], output[OUT];
+    jbyte states[CAP];
+    fixture_array r = { CAP, rows }, s = { CAP, states }, o = { OUT, output };
+    for (int trial = 0; trial < CASES; ++trial) {
+        char label[64];
+        (void) snprintf(label, sizeof(label), "differential-%d", trial);
+        reset(label, output, OUT);
+        int n = (int) (random_word() % (CAP + 1));
+        int from = (int) (random_word() % ((unsigned int) n + 1U));
+        int length = n - from;
+        int budget = length ? (int) (random_word() % ((unsigned int) length + 1U)) : 0;
+        int bounded = (int) (random_word() & 1U);
+        int end = bounded ? from + budget : n;
+        int offset = (int) (random_word() % 5U);
+        int limit = (int) (random_word() % ((unsigned int) OUT - (unsigned int) offset + 1U));
+        int required = (int) (random_word() & 255U);
+        int excluded = (int) (random_word() & 255U);
+        if ((trial % 11) == 0) required = excluded = 0;
+        if ((trial % 13) == 0) required = excluded = 128;
+        r.size = s.size = n;
+        for (int i = 0; i < n; ++i) {
+            unsigned int w = random_word();
+            rows[i] = (trial % 7) == 0 ? (jint) 0x80000000U : (jint) (w & 63U);
+            states[i] = (jbyte) (w >> 11);
+        }
+        jint expected[OUT];
+        for (int i = 0; i < OUT; ++i) expected[i] = (jint) 0x74ac013d;
+        int next = from, copied = 0;
+        if (limit != 0) {
+            if ((required & excluded) != 0) {
+                next = end;
+            } else {
+                while (next < end && copied < limit) {
+                    unsigned int marks = (unsigned int) (unsigned char) states[next];
+                    if ((marks & (unsigned int) required) == (unsigned int) required
+                            && (marks & (unsigned int) excluded) == 0U) {
+                        expected[offset + copied++] = rows[next];
+                    }
+                    ++next;
+                }
+            }
+        }
+        jlong actual = bounded
+          ? Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(env, NULL,
+              (jintArray) &r, (jbyteArray) &s, from, end, required, excluded,
+              (jintArray) &o, offset, limit)
+          : Java_com_m3_collections_M3IndexMaskWindow_scanNative(env, NULL,
+              (jintArray) &r, (jbyteArray) &s, from, required, excluded,
+              (jintArray) &o, offset, limit);
+        cursor(actual, next, copied);
+        check(thrown == 0, "unexpected native argument refusal");
+        for (int i = 0; i < OUT; ++i) {
+            check(output[i] == expected[i], "row output mismatch or guard overwrite");
+        }
+        check(row_elements <= (long long) (next - from), "JNI row transfer exceeds inspected window");
+        check(output_elements == copied, "JNI output element count");
+    }
+    printf("M3 JNI RANDOM PASS cases=%d seed=0x4D335F4D41534B21\n", CASES);
+}
+
 int main(void) {
     struct JNINativeInterface_ api = {0};
     api.GetArrayLength = get_length;
@@ -217,6 +289,7 @@ int main(void) {
     check(thrown == 1 && row_calls == 0, "invalid output no transfer");
     guards(output, 64, 2, 0);
 
+    differential(&env);
     printf("M3 JNI CURRENT REGION PASS checks=%d\n", checks);
     return 0;
 }
