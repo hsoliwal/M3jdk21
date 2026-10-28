@@ -368,6 +368,8 @@ public class StringTokenizer implements Enumeration<Object> {
      * @throws    NullPointerException if delim is {@code null}
      */
     public String nextToken(String delim) {
+        Objects.requireNonNull(delim);
+
         delimiters = delim;
 
         /* delimiter string specified, so set the appropriate flag. */
