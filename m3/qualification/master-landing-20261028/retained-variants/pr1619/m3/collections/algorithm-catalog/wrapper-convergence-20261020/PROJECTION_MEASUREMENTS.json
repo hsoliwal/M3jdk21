@@ -1,0 +1,100 @@
+{
+  "schema": "M3_SCOPED_PROJECTION_OBSERVATIONS_V1",
+  "baseline": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "jdk": "Temurin 21.0.12.1+1",
+  "heap_arguments": [
+    "-Xms256m",
+    "-Xmx512m"
+  ],
+  "probe": "m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+  "warmup_operations": 30,
+  "measured_operations": 40,
+  "repetitions_per_owner": 3,
+  "claim_scope": "Known ascending to descending conversion of 262144 signed-long rows with seven equal values per group; no general collection or JNI speedup claim. Heap value follows a GC request and is not a retained-heap proof.",
+  "observations": [
+    {
+      "owner": "baseline",
+      "round": 0,
+      "exit": 0,
+      "observation": {
+        "heapUsedAfterGcRequest": 8610392,
+        "size": 262144,
+        "operations": 40,
+        "allocatedBytes": 83888952,
+        "cpuNanos": 381505485,
+        "wallNanos": 385570305,
+        "scope": "known-direction conversion only"
+      }
+    },
+    {
+      "owner": "candidate",
+      "round": 0,
+      "exit": 0,
+      "observation": {
+        "heapUsedAfterGcRequest": 8610408,
+        "size": 262144,
+        "operations": 40,
+        "allocatedBytes": 41945112,
+        "cpuNanos": 19269731,
+        "wallNanos": 19225442,
+        "scope": "known-direction conversion only"
+      }
+    },
+    {
+      "owner": "candidate",
+      "round": 1,
+      "exit": 0,
+      "observation": {
+        "heapUsedAfterGcRequest": 8610408,
+        "size": 262144,
+        "operations": 40,
+        "allocatedBytes": 41945112,
+        "cpuNanos": 28146167,
+        "wallNanos": 28109580,
+        "scope": "known-direction conversion only"
+      }
+    },
+    {
+      "owner": "baseline",
+      "round": 1,
+      "exit": 0,
+      "observation": {
+        "heapUsedAfterGcRequest": 8610392,
+        "size": 262144,
+        "operations": 40,
+        "allocatedBytes": 83888952,
+        "cpuNanos": 337221083,
+        "wallNanos": 338982796,
+        "scope": "known-direction conversion only"
+      }
+    },
+    {
+      "owner": "baseline",
+      "round": 2,
+      "exit": 0,
+      "observation": {
+        "heapUsedAfterGcRequest": 8608776,
+        "size": 262144,
+        "operations": 40,
+        "allocatedBytes": 83888952,
+        "cpuNanos": 379618988,
+        "wallNanos": 381587856,
+        "scope": "known-direction conversion only"
+      }
+    },
+    {
+      "owner": "candidate",
+      "round": 2,
+      "exit": 0,
+      "observation": {
+        "heapUsedAfterGcRequest": 8610408,
+        "size": 262144,
+        "operations": 40,
+        "allocatedBytes": 41945112,
+        "cpuNanos": 17621919,
+        "wallNanos": 17578900,
+        "scope": "known-direction conversion only"
+      }
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "source_epoch": {
+    "name": "E1",
+    "target_repository": "hsoliwal/M3jdk21",
+    "target_commit": "f35342202149b98465bb4e9e6be807eb0cf3f762",
+    "target_tree": "1f86f1244e4d2c218a3dc29bc101cfbdf89339fc",
+    "target_pr": "https://github.com/hsoliwal/M3jdk21/pull/1657",
+    "target_parent": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+    "target_changed_files": 49,
+    "canonical_repository": "hsoliwal/com.synexia",
+    "canonical_commit": "0ee3e62241cb1252f2d018a33969f64e66c2b2fe",
+    "canonical_tree": "aa4434b052ef8541275cabad86eaf298cd27532c",
+    "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12680",
+    "binding": "E1 source-built image was built from the frozen 49-file target postimages over the named parent; publication commit names that exact source tree. Receiving patches below are separate experiments and are not part of this E1 image."
+  },
+  "command_lines": [
+    "source <TOOLS>/build-env.sh",
+    "make CONF=m3-composed-release images JOBS=4"
+  ],
+  "command_provenance": "Exact successful make command confirmed by executing parent; sourced environment file intentionally not published.",
+  "configure_arguments": [
+    "--with-conf-name=m3-composed-release",
+    "--with-boot-jdk=<TOOLS>/jdk-21.0.12.1+1",
+    "--with-debug-level=release",
+    "--with-jvm-variants=server",
+    "--enable-headless-only",
+    "--disable-javac-server",
+    "--with-freetype=bundled",
+    "--with-cups-include=<TOOLS>/sysroot/usr/include",
+    "--with-fontconfig-include=<TOOLS>/sysroot/usr/include",
+    "--with-alsa-include=<TOOLS>/sysroot/usr/include",
+    "--with-alsa-lib=<TOOLS>/sysroot/usr/lib/x86_64-linux-gnu",
+    "--x-includes=<TOOLS>/sysroot/usr/include",
+    "--x-libraries=<TOOLS>/sysroot/usr/lib/x86_64-linux-gnu",
+    "--with-native-debug-symbols=none"
+  ],
+  "configure_raw_sha256": "5db9214475de2b0b0ee4fdf98c4f23c6e777b4b8d8ef7907c97932e5876d6a0c",
+  "host": {
+    "os": "Linux",
+    "architecture": "amd64",
+    "debug_level": "release",
+    "jvm_variant": "server",
+    "headless_only": true
+  },
+  "tools": {
+    "boot_jdk": "Temurin 21.0.12.1+1",
+    "gcc": "13.3.0",
+    "g++": "13.3.0",
+    "gnu_make": "4.3",
+    "jtreg": "7.5.2 src 1"
+  },
+  "warnings_as_errors": "retained; no configure disable or make override used",
+  "SDK_bootstrap": "default M3 disabled",
+  "successful_builds": [
+    {
+      "name": "images-direct.log",
+      "scope": "successful earlier full images build; intermediate source stage",
+      "exit_status": 0,
+      "exit_provenance": "executing parent confirmed make success; final completion marker preserved",
+      "raw_sha256": "e951fce51edaa6051b70a005256de11b90b0ef203b4decdef11a5abec712d6bd",
+      "normalized_sha256": "e951fce51edaa6051b70a005256de11b90b0ef203b4decdef11a5abec712d6bd",
+      "packet_path": "build/images-direct.log"
+    },
+    {
+      "name": "images-final.log",
+      "scope": "successful final E1 images rebuild from frozen 49-file postimages",
+      "exit_status": 0,
+      "exit_provenance": "executing parent confirmed make success; final completion marker preserved",
+      "raw_sha256": "ae5939461b9f2288afb14d925efe93cb6e33999be611e3a0214cb5752a452ed8",
+      "normalized_sha256": "ae5939461b9f2288afb14d925efe93cb6e33999be611e3a0214cb5752a452ed8",
+      "packet_path": "build/images-final.log"
+    }
+  ],
+  "earlier_failed_builds": [
+    {
+      "name": "images.log",
+      "raw_sha256": "fd98cbca2f8c7369bc2f5a3c62be0f88e2658ffa438e222a8da548ae44299445",
+      "raw_bytes": 5920,
+      "exit_status": 2,
+      "cause": "javac server could not open a socket: Operation not permitted",
+      "resolution": "Build configuration later disables javac server.",
+      "selected_error_lines": [
+        "java.net.SocketException: Operation not permitted",
+        "gmake[2]: *** [make/Main.gmk:86: buildtools-jdk] Error 2",
+        "make[1]: *** [<M3JDK21>/make/Init.gmk:320: main] Error 2",
+        "make: *** [<M3JDK21>/make/Init.gmk:186: images] Error 2"
+      ],
+      "selection_scope": "Compact distinct failure lines; failed logs can include repeated stale failure-log excerpts. Full successful logs are preserved separately."
+    },
+    {
+      "name": "images-permitted.log",
+      "raw_sha256": "33a8c9e80e5bc5b39571f6e937c1bae94bedbc168e50bc7c5d0f5fe1e417a5a6",
+      "raw_bytes": 11783,
+      "exit_status": 2,
+      "cause": "CollectionViews Javadoc @param/@return warnings were errors under -Werror",
+      "resolution": "Source Javadoc correction received; warnings-as-errors retained.",
+      "selected_error_lines": [
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for <E>",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for backing",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for predicate",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @return",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:67: warning: no @param for <E>",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:67: warning: no @param for backing",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:67: warning: no @param for predicate",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:67: warning: no @return",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:75: warning: no @param for <E>",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:75: warning: no @param for backing",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:75: warning: no @param for predicate",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:75: warning: no @return",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:82: warning: no @param for <E>",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:82: warning: no @param for backing",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:82: warning: no @param for predicate",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:82: warning: no @return",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:92: warning: no @param for <E>",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:92: warning: no @param for source",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:92: warning: no @param for comparator",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:92: warning: no @return",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:108: warning: no @param for <E>",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:108: warning: no @param for source",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:108: warning: no @param for predicate",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:108: warning: no @return",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:119: warning: no @param for <E>",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:119: warning: no @param for source",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:119: warning: no @param for predicate",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:119: warning: no @param for comparator",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:119: warning: no @return",
+        "error: warnings found and -Werror specified",
+        "gmake[2]: *** [make/Main.gmk:193: java.base-java] Error 2",
+        "java.net.SocketException: Operation not permitted",
+        "make[1]: *** [<M3JDK21>/make/Init.gmk:320: main] Error 2",
+        "make: *** [<M3JDK21>/make/Init.gmk:186: images] Error 2"
+      ],
+      "selection_scope": "Compact distinct failure lines; failed logs can include repeated stale failure-log excerpts. Full successful logs are preserved separately."
+    },
+    {
+      "name": "images-views.log",
+      "raw_sha256": "55009f89a73c7d438678b55e511e28ae32f4ef0348294588113107bb05cedaee",
+      "raw_bytes": 7721,
+      "exit_status": 2,
+      "cause": "stale javac server connection refused during Java module builds",
+      "resolution": "Reconfigured with --disable-javac-server; direct build succeeded.",
+      "selected_error_lines": [
+        "Connection attempt failed: Connection refused",
+        "IOException caught during compilation: Could not connect to server",
+        "gmake[2]: *** [make/Main.gmk:193: java.compiler-java] Error 2",
+        "gmake[2]: *** [make/Main.gmk:193: java.instrument-java] Error 2",
+        "gmake[2]: *** [make/Main.gmk:193: java.datatransfer-java] Error 2",
+        "gmake[2]: *** [make/Main.gmk:193: java.xml-java] Error 2",
+        "java.net.SocketException: Operation not permitted",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for <E>",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for backing",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for predicate",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @return",
+        "<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:67: warning: no @param for <E>",
+        "make[1]: *** [<M3JDK21>/make/Init.gmk:320: main] Error 2",
+        "make: *** [<M3JDK21>/make/Init.gmk:186: images] Error 2"
+      ],
+      "selection_scope": "Compact distinct failure lines; failed logs can include repeated stale failure-log excerpts. Full successful logs are preserved separately."
+    }
+  ],
+  "exclusions": "No build environment dump, config.log, credentials, or binaries are included. No final E2 build or jtreg result is included in this E1 checkpoint."
+}

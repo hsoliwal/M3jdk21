@@ -1,0 +1,6 @@
+{
+  "base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+  "exit": 1,
+  "failure": "String successor chain length drift",
+  "matches_candidate": true
+}

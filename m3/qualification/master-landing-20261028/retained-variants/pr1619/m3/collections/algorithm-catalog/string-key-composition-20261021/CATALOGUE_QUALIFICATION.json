@@ -1,0 +1,17 @@
+{
+  "schema": "M3_STRING_KEY_CATALOGUE_QUALIFICATION_V1",
+  "inventory_passes": 2,
+  "inventory_replay_identical": true,
+  "existing_output_refused_exit": 2,
+  "query_test_pass1": {
+    "tests": 5,
+    "failures": 1,
+    "reason": "Test expected one identity substring result but case-policy row also refers to policy identity; query correctly returned both. Test narrowed to reference-key operation."
+  },
+  "query_test_pass2": {
+    "tests": 5,
+    "failures": 0
+  },
+  "engine_changes": false,
+  "known_limits": "Lexical source routing signals are not implementation or behavioral proof; old SDK dispositions preserved."
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "path": "java/lang/M3String.java",
+    "baseline_sha256": "36d994c458aeb959beec4581d1b8df52bdbed90b84028cfe106522f3b6cc54ea",
+    "candidate_sha256": "f5f779775ababfe10d6e71e4db8fae0b780df639d91508776874dadbe3d42ac3"
+  },
+  {
+    "path": "java/lang/M3StringAffixPrecompute.java",
+    "baseline_sha256": "4ed050c240c4b5cec7c78f0c9732618df2046ce975cfcc5733fe874468a7aa98",
+    "candidate_sha256": "4ed050c240c4b5cec7c78f0c9732618df2046ce975cfcc5733fe874468a7aa98"
+  },
+  {
+    "path": "java/lang/M3StringAtom.java",
+    "baseline_sha256": "a1226c8ac637fc22b3eba2d95ee65524d12d5f3875cba35cf3c849dcb18c310a",
+    "candidate_sha256": "a1226c8ac637fc22b3eba2d95ee65524d12d5f3875cba35cf3c849dcb18c310a"
+  },
+  {
+    "path": "java/lang/M3StringBuilderLane.java",
+    "baseline_sha256": "4aef46bb8500246f6232e0c618a3c97b8e4301fb16146575be1c71bf45483cc7",
+    "candidate_sha256": "4aef46bb8500246f6232e0c618a3c97b8e4301fb16146575be1c71bf45483cc7"
+  },
+  {
+    "path": "java/lang/M3StringCodePointPrecompute.java",
+    "baseline_sha256": "43f65f6e578dc5b3ad59046a52ea70bffae3bbff855c861bc2ffd24d1f4bf3d2",
+    "candidate_sha256": "43f65f6e578dc5b3ad59046a52ea70bffae3bbff855c861bc2ffd24d1f4bf3d2"
+  },
+  {
+    "path": "java/lang/M3StringFacts.java",
+    "baseline_sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a",
+    "candidate_sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a"
+  },
+  {
+    "path": "java/lang/M3StringImmediate.java",
+    "baseline_sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
+    "candidate_sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21"
+  },
+  {
+    "path": "java/lang/M3StringOwner.java",
+    "baseline_sha256": "ef2a5b69ca7c11154d4a2eede64212fe55f27ddba0f68408ce40750aeb57d20e",
+    "candidate_sha256": "ef2a5b69ca7c11154d4a2eede64212fe55f27ddba0f68408ce40750aeb57d20e"
+  },
+  {
+    "path": "java/lang/M3StringPool.java",
+    "baseline_sha256": "a4fe0b9327d48748083d92e6212f306bc8e039a76ed437afd6ecee57b903aa6e",
+    "candidate_sha256": "a4fe0b9327d48748083d92e6212f306bc8e039a76ed437afd6ecee57b903aa6e"
+  },
+  {
+    "path": "java/lang/M3StringPositionPrecompute.java",
+    "baseline_sha256": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+    "candidate_sha256": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b"
+  },
+  {
+    "path": "java/lang/M3StringPrecomputeBridge.java",
+    "baseline_sha256": "112699ac1f136f295efda67d54a1a7bc96db0f639ea3855c3925a5ca890952bf",
+    "candidate_sha256": "31aac4163520c012e912439fa9cc24f61174653134daaa4a045f28a953b16152"
+  },
+  {
+    "path": "java/lang/M3StringProjection.java",
+    "baseline_sha256": "2cb6695adbd08074142e196fc314d60d50e1eb0d4810c27b12d0f39dfe2a31c4",
+    "candidate_sha256": "2cb6695adbd08074142e196fc314d60d50e1eb0d4810c27b12d0f39dfe2a31c4"
+  },
+  {
+    "path": "java/lang/M3StringRegexDp.java",
+    "baseline_sha256": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
+    "candidate_sha256": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f"
+  },
+  {
+    "path": "java/lang/M3StringRegexRowPrecompute.java",
+    "baseline_sha256": "c36341519d961257ed892c9e35a139258ebf711016bfe09e7c8e0af36c8f5f00",
+    "candidate_sha256": "c36341519d961257ed892c9e35a139258ebf711016bfe09e7c8e0af36c8f5f00"
+  },
+  {
+    "path": "java/lang/M3StringRepresentationPlan.java",
+    "baseline_sha256": "44837a1badc01a11747a7d1b39f28ab241aa3ea5543ed561951e5645f6d47a7e",
+    "candidate_sha256": "44837a1badc01a11747a7d1b39f28ab241aa3ea5543ed561951e5645f6d47a7e"
+  },
+  {
+    "path": "java/lang/M3StringSearchPrecompute.java",
+    "baseline_sha256": "50b9e74dcc509092e40b893b99cd259deee8baf1d63aec2dd1a0881d31dc11a4",
+    "candidate_sha256": "50b9e74dcc509092e40b893b99cd259deee8baf1d63aec2dd1a0881d31dc11a4"
+  },
+  {
+    "path": "java/lang/M3StringTuple.java",
+    "baseline_sha256": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+    "candidate_sha256": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9"
+  },
+  {
+    "path": "java/lang/String.java",
+    "baseline_sha256": "029586cb367a7f3c79edd4039ec05a2a668bb79a84f7db3b7de76a61039d73ef",
+    "candidate_sha256": "029586cb367a7f3c79edd4039ec05a2a668bb79a84f7db3b7de76a61039d73ef"
+  }
+]

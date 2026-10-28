@@ -1,0 +1,956 @@
+[
+  {
+    "size": 256,
+    "case": "shared_equal",
+    "operation": "equals",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 250889,
+          "iterations": 512,
+          "warm_total_ns": 84251934,
+          "warm_ns_per_operation": 164554.55859375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 186071,
+          "iterations": 512,
+          "warm_total_ns": 68109058,
+          "warm_ns_per_operation": 133025.50390625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 175314,
+          "iterations": 512,
+          "warm_total_ns": 74970237,
+          "warm_ns_per_operation": 146426.244140625
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 38538,
+          "iterations": 512,
+          "warm_total_ns": 6940466,
+          "warm_ns_per_operation": 13555.59765625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 40381,
+          "iterations": 512,
+          "warm_total_ns": 6994448,
+          "warm_ns_per_operation": 13661.03125
+        },
+        {
+          "fork": 2,
+          "cold_ns": 50706,
+          "iterations": 512,
+          "warm_total_ns": 7438218,
+          "warm_ns_per_operation": 14527.76953125
+        }
+      ]
+    }
+  },
+  {
+    "size": 256,
+    "case": "shared_equal",
+    "operation": "compareTo",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 151368,
+          "iterations": 512,
+          "warm_total_ns": 67673568,
+          "warm_ns_per_operation": 132174.9375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 159872,
+          "iterations": 512,
+          "warm_total_ns": 82235701,
+          "warm_ns_per_operation": 160616.603515625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 195265,
+          "iterations": 512,
+          "warm_total_ns": 76775707,
+          "warm_ns_per_operation": 149952.552734375
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 34692,
+          "iterations": 512,
+          "warm_total_ns": 7508944,
+          "warm_ns_per_operation": 14665.90625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 37386,
+          "iterations": 512,
+          "warm_total_ns": 7327020,
+          "warm_ns_per_operation": 14310.5859375
+        },
+        {
+          "fork": 2,
+          "cold_ns": 34752,
+          "iterations": 512,
+          "warm_total_ns": 9067938,
+          "warm_ns_per_operation": 17710.81640625
+        }
+      ]
+    }
+  },
+  {
+    "size": 256,
+    "case": "shared_equal",
+    "operation": "startsWith",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 157878,
+          "iterations": 512,
+          "warm_total_ns": 72006869,
+          "warm_ns_per_operation": 140638.416015625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 242215,
+          "iterations": 512,
+          "warm_total_ns": 106413547,
+          "warm_ns_per_operation": 207838.958984375
+        },
+        {
+          "fork": 2,
+          "cold_ns": 179481,
+          "iterations": 512,
+          "warm_total_ns": 66351909,
+          "warm_ns_per_operation": 129593.572265625
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 33401,
+          "iterations": 512,
+          "warm_total_ns": 7201691,
+          "warm_ns_per_operation": 14065.802734375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 29384,
+          "iterations": 512,
+          "warm_total_ns": 6475504,
+          "warm_ns_per_operation": 12647.46875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 38248,
+          "iterations": 512,
+          "warm_total_ns": 12390634,
+          "warm_ns_per_operation": 24200.45703125
+        }
+      ]
+    }
+  },
+  {
+    "size": 256,
+    "case": "shared_late_mismatch",
+    "operation": "equals",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 148865,
+          "iterations": 512,
+          "warm_total_ns": 73540896,
+          "warm_ns_per_operation": 143634.5625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 141564,
+          "iterations": 512,
+          "warm_total_ns": 69738896,
+          "warm_ns_per_operation": 136208.78125
+        },
+        {
+          "fork": 2,
+          "cold_ns": 142345,
+          "iterations": 512,
+          "warm_total_ns": 67786534,
+          "warm_ns_per_operation": 132395.57421875
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 24728,
+          "iterations": 512,
+          "warm_total_ns": 9093996,
+          "warm_ns_per_operation": 17761.7109375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 22785,
+          "iterations": 512,
+          "warm_total_ns": 7695516,
+          "warm_ns_per_operation": 15030.3046875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 29455,
+          "iterations": 512,
+          "warm_total_ns": 11107107,
+          "warm_ns_per_operation": 21693.568359375
+        }
+      ]
+    }
+  },
+  {
+    "size": 256,
+    "case": "shared_late_mismatch",
+    "operation": "compareTo",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 142145,
+          "iterations": 512,
+          "warm_total_ns": 69808530,
+          "warm_ns_per_operation": 136344.78515625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 141894,
+          "iterations": 512,
+          "warm_total_ns": 68317359,
+          "warm_ns_per_operation": 133432.341796875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 141443,
+          "iterations": 512,
+          "warm_total_ns": 67059838,
+          "warm_ns_per_operation": 130976.24609375
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 28463,
+          "iterations": 512,
+          "warm_total_ns": 8519941,
+          "warm_ns_per_operation": 16640.509765625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 21813,
+          "iterations": 512,
+          "warm_total_ns": 7550898,
+          "warm_ns_per_operation": 14747.84765625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 20921,
+          "iterations": 512,
+          "warm_total_ns": 7941629,
+          "warm_ns_per_operation": 15510.994140625
+        }
+      ]
+    }
+  },
+  {
+    "size": 256,
+    "case": "shared_late_mismatch",
+    "operation": "startsWith",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 150117,
+          "iterations": 512,
+          "warm_total_ns": 73063925,
+          "warm_ns_per_operation": 142702.978515625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 146021,
+          "iterations": 512,
+          "warm_total_ns": 79831391,
+          "warm_ns_per_operation": 155920.685546875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 146762,
+          "iterations": 512,
+          "warm_total_ns": 74356682,
+          "warm_ns_per_operation": 145227.89453125
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 21923,
+          "iterations": 512,
+          "warm_total_ns": 9056941,
+          "warm_ns_per_operation": 17689.337890625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 21612,
+          "iterations": 512,
+          "warm_total_ns": 7798922,
+          "warm_ns_per_operation": 15232.26953125
+        },
+        {
+          "fork": 2,
+          "cold_ns": 22013,
+          "iterations": 512,
+          "warm_total_ns": 8023972,
+          "warm_ns_per_operation": 15671.8203125
+        }
+      ]
+    }
+  },
+  {
+    "size": 256,
+    "case": "independent_equal",
+    "operation": "equals",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 150807,
+          "iterations": 512,
+          "warm_total_ns": 66811266,
+          "warm_ns_per_operation": 130490.75390625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 185751,
+          "iterations": 512,
+          "warm_total_ns": 73247982,
+          "warm_ns_per_operation": 143062.46484375
+        },
+        {
+          "fork": 2,
+          "cold_ns": 194213,
+          "iterations": 512,
+          "warm_total_ns": 73633871,
+          "warm_ns_per_operation": 143816.154296875
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 111599,
+          "iterations": 512,
+          "warm_total_ns": 50691737,
+          "warm_ns_per_operation": 99007.298828125
+        },
+        {
+          "fork": 1,
+          "cold_ns": 107071,
+          "iterations": 512,
+          "warm_total_ns": 47739791,
+          "warm_ns_per_operation": 93241.779296875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 108053,
+          "iterations": 512,
+          "warm_total_ns": 48969200,
+          "warm_ns_per_operation": 95642.96875
+        }
+      ]
+    }
+  },
+  {
+    "size": 256,
+    "case": "independent_equal",
+    "operation": "compareTo",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 137328,
+          "iterations": 512,
+          "warm_total_ns": 67596070,
+          "warm_ns_per_operation": 132023.57421875
+        },
+        {
+          "fork": 1,
+          "cold_ns": 137798,
+          "iterations": 512,
+          "warm_total_ns": 68312532,
+          "warm_ns_per_operation": 133422.9140625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 137467,
+          "iterations": 512,
+          "warm_total_ns": 66037525,
+          "warm_ns_per_operation": 128979.541015625
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 102585,
+          "iterations": 512,
+          "warm_total_ns": 52912369,
+          "warm_ns_per_operation": 103344.470703125
+        },
+        {
+          "fork": 1,
+          "cold_ns": 102485,
+          "iterations": 512,
+          "warm_total_ns": 46528262,
+          "warm_ns_per_operation": 90875.51171875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 100031,
+          "iterations": 512,
+          "warm_total_ns": 50632713,
+          "warm_ns_per_operation": 98892.017578125
+        }
+      ]
+    }
+  },
+  {
+    "size": 256,
+    "case": "independent_equal",
+    "operation": "startsWith",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 155815,
+          "iterations": 512,
+          "warm_total_ns": 68071308,
+          "warm_ns_per_operation": 132951.7734375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 145630,
+          "iterations": 512,
+          "warm_total_ns": 85242249,
+          "warm_ns_per_operation": 166488.767578125
+        },
+        {
+          "fork": 2,
+          "cold_ns": 142225,
+          "iterations": 512,
+          "warm_total_ns": 68678722,
+          "warm_ns_per_operation": 134138.12890625
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 107022,
+          "iterations": 512,
+          "warm_total_ns": 53062675,
+          "warm_ns_per_operation": 103638.037109375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 97538,
+          "iterations": 512,
+          "warm_total_ns": 44909890,
+          "warm_ns_per_operation": 87714.62890625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 99310,
+          "iterations": 512,
+          "warm_total_ns": 44586865,
+          "warm_ns_per_operation": 87083.720703125
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "shared_equal",
+    "operation": "equals",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 1992578,
+          "iterations": 128,
+          "warm_total_ns": 267300138,
+          "warm_ns_per_operation": 2088282.328125
+        },
+        {
+          "fork": 1,
+          "cold_ns": 2794920,
+          "iterations": 128,
+          "warm_total_ns": 262036720,
+          "warm_ns_per_operation": 2047161.875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 2037705,
+          "iterations": 128,
+          "warm_total_ns": 279008695,
+          "warm_ns_per_operation": 2179755.4296875
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 68053,
+          "iterations": 128,
+          "warm_total_ns": 3596920,
+          "warm_ns_per_operation": 28100.9375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 42644,
+          "iterations": 128,
+          "warm_total_ns": 3680055,
+          "warm_ns_per_operation": 28750.4296875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 59190,
+          "iterations": 128,
+          "warm_total_ns": 3462848,
+          "warm_ns_per_operation": 27053.5
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "shared_equal",
+    "operation": "compareTo",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 2066319,
+          "iterations": 128,
+          "warm_total_ns": 273891656,
+          "warm_ns_per_operation": 2139778.5625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 2986248,
+          "iterations": 128,
+          "warm_total_ns": 229282206,
+          "warm_ns_per_operation": 1791267.234375
+        },
+        {
+          "fork": 2,
+          "cold_ns": 2301875,
+          "iterations": 128,
+          "warm_total_ns": 244992603,
+          "warm_ns_per_operation": 1914004.7109375
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 34242,
+          "iterations": 128,
+          "warm_total_ns": 3809079,
+          "warm_ns_per_operation": 29758.4296875
+        },
+        {
+          "fork": 1,
+          "cold_ns": 34202,
+          "iterations": 128,
+          "warm_total_ns": 3614987,
+          "warm_ns_per_operation": 28242.0859375
+        },
+        {
+          "fork": 2,
+          "cold_ns": 32769,
+          "iterations": 128,
+          "warm_total_ns": 5700395,
+          "warm_ns_per_operation": 44534.3359375
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "shared_equal",
+    "operation": "startsWith",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 2604782,
+          "iterations": 128,
+          "warm_total_ns": 246234529,
+          "warm_ns_per_operation": 1923707.2578125
+        },
+        {
+          "fork": 1,
+          "cold_ns": 2062894,
+          "iterations": 128,
+          "warm_total_ns": 274829196,
+          "warm_ns_per_operation": 2147103.09375
+        },
+        {
+          "fork": 2,
+          "cold_ns": 2013129,
+          "iterations": 128,
+          "warm_total_ns": 259637596,
+          "warm_ns_per_operation": 2028418.71875
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 34923,
+          "iterations": 128,
+          "warm_total_ns": 3956102,
+          "warm_ns_per_operation": 30907.046875
+        },
+        {
+          "fork": 1,
+          "cold_ns": 32850,
+          "iterations": 128,
+          "warm_total_ns": 3721718,
+          "warm_ns_per_operation": 29075.921875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 32099,
+          "iterations": 128,
+          "warm_total_ns": 3483379,
+          "warm_ns_per_operation": 27213.8984375
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "shared_late_mismatch",
+    "operation": "equals",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 2191908,
+          "iterations": 128,
+          "warm_total_ns": 247133045,
+          "warm_ns_per_operation": 1930726.9140625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 2592253,
+          "iterations": 128,
+          "warm_total_ns": 259639523,
+          "warm_ns_per_operation": 2028433.7734375
+        },
+        {
+          "fork": 2,
+          "cold_ns": 2116404,
+          "iterations": 128,
+          "warm_total_ns": 247803626,
+          "warm_ns_per_operation": 1935965.828125
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 39099,
+          "iterations": 128,
+          "warm_total_ns": 4343476,
+          "warm_ns_per_operation": 33933.40625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 41122,
+          "iterations": 128,
+          "warm_total_ns": 4223294,
+          "warm_ns_per_operation": 32994.484375
+        },
+        {
+          "fork": 2,
+          "cold_ns": 37697,
+          "iterations": 128,
+          "warm_total_ns": 4129814,
+          "warm_ns_per_operation": 32264.171875
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "shared_late_mismatch",
+    "operation": "compareTo",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 2220452,
+          "iterations": 128,
+          "warm_total_ns": 233819650,
+          "warm_ns_per_operation": 1826716.015625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 1993079,
+          "iterations": 128,
+          "warm_total_ns": 253604102,
+          "warm_ns_per_operation": 1981282.046875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 1962602,
+          "iterations": 128,
+          "warm_total_ns": 310645741,
+          "warm_ns_per_operation": 2426919.8515625
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 37897,
+          "iterations": 128,
+          "warm_total_ns": 4254973,
+          "warm_ns_per_operation": 33241.9765625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 37166,
+          "iterations": 128,
+          "warm_total_ns": 4129864,
+          "warm_ns_per_operation": 32264.5625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 36054,
+          "iterations": 128,
+          "warm_total_ns": 3950092,
+          "warm_ns_per_operation": 30860.09375
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "shared_late_mismatch",
+    "operation": "startsWith",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 2023013,
+          "iterations": 128,
+          "warm_total_ns": 244218606,
+          "warm_ns_per_operation": 1907957.859375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 3286121,
+          "iterations": 128,
+          "warm_total_ns": 245093125,
+          "warm_ns_per_operation": 1914790.0390625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 2185208,
+          "iterations": 128,
+          "warm_total_ns": 380127811,
+          "warm_ns_per_operation": 2969748.5234375
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 51168,
+          "iterations": 128,
+          "warm_total_ns": 4192539,
+          "warm_ns_per_operation": 32754.2109375
+        },
+        {
+          "fork": 1,
+          "cold_ns": 37636,
+          "iterations": 128,
+          "warm_total_ns": 4228623,
+          "warm_ns_per_operation": 33036.1171875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 37026,
+          "iterations": 128,
+          "warm_total_ns": 4038937,
+          "warm_ns_per_operation": 31554.1953125
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "independent_equal",
+    "operation": "equals",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 2026459,
+          "iterations": 128,
+          "warm_total_ns": 253183533,
+          "warm_ns_per_operation": 1977996.3515625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 2002513,
+          "iterations": 128,
+          "warm_total_ns": 322515317,
+          "warm_ns_per_operation": 2519650.9140625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 2348044,
+          "iterations": 128,
+          "warm_total_ns": 283915881,
+          "warm_ns_per_operation": 2218092.8203125
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 1471451,
+          "iterations": 128,
+          "warm_total_ns": 166956433,
+          "warm_ns_per_operation": 1304347.1328125
+        },
+        {
+          "fork": 1,
+          "cold_ns": 1558873,
+          "iterations": 128,
+          "warm_total_ns": 152007218,
+          "warm_ns_per_operation": 1187556.390625
+        },
+        {
+          "fork": 2,
+          "cold_ns": 1293452,
+          "iterations": 128,
+          "warm_total_ns": 160431889,
+          "warm_ns_per_operation": 1253374.1328125
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "independent_equal",
+    "operation": "compareTo",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 2104176,
+          "iterations": 128,
+          "warm_total_ns": 244617608,
+          "warm_ns_per_operation": 1911075.0625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 1915411,
+          "iterations": 128,
+          "warm_total_ns": 235862721,
+          "warm_ns_per_operation": 1842677.5078125
+        },
+        {
+          "fork": 2,
+          "cold_ns": 1971136,
+          "iterations": 128,
+          "warm_total_ns": 244792303,
+          "warm_ns_per_operation": 1912439.8671875
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 1243848,
+          "iterations": 128,
+          "warm_total_ns": 159703885,
+          "warm_ns_per_operation": 1247686.6015625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 1270848,
+          "iterations": 128,
+          "warm_total_ns": 152081240,
+          "warm_ns_per_operation": 1188134.6875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 1368165,
+          "iterations": 128,
+          "warm_total_ns": 164459789,
+          "warm_ns_per_operation": 1284842.1015625
+        }
+      ]
+    }
+  },
+  {
+    "size": 4096,
+    "case": "independent_equal",
+    "operation": "startsWith",
+    "arms": {
+      "baseline": [
+        {
+          "fork": 0,
+          "cold_ns": 2097436,
+          "iterations": 128,
+          "warm_total_ns": 257135553,
+          "warm_ns_per_operation": 2008871.5078125
+        },
+        {
+          "fork": 1,
+          "cold_ns": 1976753,
+          "iterations": 128,
+          "warm_total_ns": 245375670,
+          "warm_ns_per_operation": 1916997.421875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 2031737,
+          "iterations": 128,
+          "warm_total_ns": 247985925,
+          "warm_ns_per_operation": 1937390.0390625
+        }
+      ],
+      "candidate": [
+        {
+          "fork": 0,
+          "cold_ns": 1469839,
+          "iterations": 128,
+          "warm_total_ns": 162315156,
+          "warm_ns_per_operation": 1268087.15625
+        },
+        {
+          "fork": 1,
+          "cold_ns": 1308134,
+          "iterations": 128,
+          "warm_total_ns": 154449494,
+          "warm_ns_per_operation": 1206636.671875
+        },
+        {
+          "fork": 2,
+          "cold_ns": 1298570,
+          "iterations": 128,
+          "warm_total_ns": 163735696,
+          "warm_ns_per_operation": 1279185.125
+        }
+      ]
+    }
+  }
+]
