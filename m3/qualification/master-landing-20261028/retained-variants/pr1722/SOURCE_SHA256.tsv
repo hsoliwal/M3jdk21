@@ -1,0 +1,6 @@
+path	sha256	git_blob	mode	pr	note
+m3/lexicon/hf-intake/README.md	2faa74127bfd2dc8f159d83e1f799b12db0f63f215e79fc844be85dedf116aaa	9d248fa7f519220901e9d38052050d97f032f635	100644	1722	PR version, not live
+m3/lexicon/hf-intake/algorithm-catalogue.tsv	59ae727bcdf0c81687bca661a7a1bc54d18ee95cd0ab9986204f8c6920dd5949	27d8379c30cf28373cc55a3e97a0fad75e27d7be	100644	1722	PR version, not live
+m3/lexicon/hf-intake/pom.xml	6f89a4024da095b3eb7f1ab38d8564a10c981ae8d4b736c3e7ef61304f20567a	87b0b3ecb1d8e04e0de29fb954adbdd9c7c7391c	100644	1722	PR version, not live
+m3/lexicon/hf-intake/src/test/java/com/m3/lexicon/hf/M3HfLexiconIntakeProof.java	8e7cae17b93906f10ff8b110faf456db6e99143ee5bb83593fef9e36d96e55b7	a44f902e658ff420cf882c3208b8fa52d370ccf3	100644	1722	PR version, not live
+m3/lexicon/hf-intake/src/test/resources/com/m3/lexicon/hf/language-resource-discovery.tsv	27a65ea5d57f03defb4c58ee3a81961574c5b549970e3bd803f7fdacd2d8e1ee	8d0912acc1b25553d843981cb68684e3fa243d32	100644	1722	PR version, not live
