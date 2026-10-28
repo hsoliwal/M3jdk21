@@ -3,6 +3,14 @@ name: Primitive indexed collection contracts
 on:
   pull_request:
     paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongSequence.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongList.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongStack.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongQueue.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongDeque.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongArrayList.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
@@ -42,6 +50,14 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT/classes" \
             m3/collections/src/main/java/com/m3/collections/M3LongCollection.java \
             m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongSequence.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongList.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongStack.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongQueue.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongDeque.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java \
             m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
             m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java \
             m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
