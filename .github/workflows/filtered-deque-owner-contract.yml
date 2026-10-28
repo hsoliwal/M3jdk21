@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Filtered Deque owner contracts
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredDequeOwnerMembershipContract.java'
+      - '.github/workflows/filtered-deque-owner-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-original-owner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java
+            m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
+            m3/collections/src/test/java/com/m3/collections/M3FilteredDequeOwnerMembershipContract.java
+            .github/workflows/filtered-deque-owner-contract.yml
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Confirm exact old red and new green with original owner and public ABI
+        shell: bash
+        run: |
+          set -euo pipefail
+          d="$RUNNER_TEMP/filtered-deque-owner"
+          mkdir -p "$d/src/com/m3/collections" "$d/old" "$d/new" "$d/test"
+          s=m3/collections/src/main/java/com/m3/collections
+          t=m3/collections/src/test/java/com/m3/collections/M3FilteredDequeOwnerMembershipContract.java
+          printf '%s  %s\n' '0c62d57de198d3ce21524af7a0e86c14eaddc3e3b81dbec9fb8c47552cb79ccd' "$s/M3FilteredDeques.java" | sha256sum -c -
+          printf '%s  %s\n' 'e68ec0cb2098358fd6eaab63e2a476db6c3b16b0fd01df0534791de079aa6809' "$t" | sha256sum -c -
+          git show 51de1f76e8b61f2d808792affc75aa3f69ee4943:$s/M3FilteredDeques.java > "$d/src/com/m3/collections/M3FilteredDeques.java"
+          test "$(git hash-object "$d/src/com/m3/collections/M3FilteredDeques.java")" = '5fcc063d77ebf16efc23a4511d6fa66c00888b61'
+          printf '%s  %s\n' '5f119d62cead081d6e60c847b49c588447b131980a88b5b8a396453beb3a7382' "$d/src/com/m3/collections/M3FilteredDeques.java" | sha256sum -c -
+          javac --release 21 -Xlint:all -Werror -d "$d/old" "$d/src/com/m3/collections/M3FilteredDeques.java" "$s/M3SlotSpliterators.java"
+          javac --release 21 -Xlint:all -Werror -d "$d/new" "$s/M3FilteredDeques.java" "$s/M3SlotSpliterators.java"
+          javap -classpath "$d/old" -public -s com.m3.collections.M3FilteredDeques > "$d/old-abi"
+          javap -classpath "$d/new" -public -s com.m3.collections.M3FilteredDeques > "$d/new-abi"
+          diff -u "$d/old-abi" "$d/new-abi"
+          javac --release 21 -Xlint:all -Werror -cp "$d/new" -d "$d/test" "$t"
+          set +e
+          java -Xint -cp "$d/old:$d/test" com.m3.collections.M3FilteredDequeOwnerMembershipContract > "$d/old-red.log" 2>&1
+          old=$?
+          set -e
+          test "$old" -ne 0
+          grep -Fq 'AssertionError: identity alias absent at check=7' "$d/old-red.log"
+          for mode in default interpreter c1 c2; do
+            flags=()
+            case "$mode" in
+              interpreter) flags=(-Xint) ;;
+              c1) flags=(-XX:TieredStopAtLevel=1) ;;
+              c2) flags=(-XX:-TieredCompilation -Xbatch) ;;
+            esac
+            result=$(java "${flags[@]}" -cp "$d/new:$d/test" com.m3.collections.M3FilteredDequeOwnerMembershipContract)
+            test "$result" = 'M3FilteredDequeOwnerMembershipContract PASS checks=362298'
+            echo "$mode: $result"
+          done

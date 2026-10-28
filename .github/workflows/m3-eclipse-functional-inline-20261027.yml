@@ -1,0 +1,72 @@
+name: M3 Eclipse functional API no third-party runtime
+on:
+  push:
+    branches: ['m3/eclipse-callback-api-standalone-20261027']
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/eclipse-blocks/**'
+      - 'm3/docs/name-mapping.d/m3-eclipse-callback-source-closure-20261027.json'
+      - '.github/workflows/m3-eclipse-functional-inline-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  strict-standalone-eclipse-api:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify byte-exact five original Eclipse EPL/EDL and original M3 source postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '0790ae62b3e9ca7bd0d3248948d66295da64787e68ff8ba37b8e6ab397d0bbaf  m3/collections/implementations/eclipse-blocks/src/main/java/org/eclipse/collections/api/block/function/Function.java' | sha256sum -c -
+          echo 'e5459e2a226be324501b192042e51ad5597bbf1b383e54a9a9722cda747c6f60  m3/collections/implementations/eclipse-blocks/src/main/java/org/eclipse/collections/api/block/function/Function2.java' | sha256sum -c -
+          echo '19eb81ea9c3af8833c154213a8158a5107fc0c11adf4673a274dc4aacd62085d  m3/collections/implementations/eclipse-blocks/src/main/java/org/eclipse/collections/api/block/predicate/Predicate.java' | sha256sum -c -
+          echo 'c9f59d9d17766c15952eac0be0b1ab164cdc7a415112ae475e8f187105e4fea7  m3/collections/implementations/eclipse-blocks/src/main/java/org/eclipse/collections/api/block/predicate/Predicate2.java' | sha256sum -c -
+          echo '4e22825c28990fb415a0e1d5b799466d371c55f586a9e9bc2486af61449152e9  m3/collections/implementations/eclipse-blocks/src/main/java/org/eclipse/collections/api/block/procedure/Procedure.java' | sha256sum -c -
+          echo 'a98a5c39eb2b9930154e2c44371067104bf6ff73e8dc8a16b5a56cae6d1bc761  m3/collections/implementations/eclipse-blocks/src/main/java/com/m3/collections/eclipse/M3EclipseFunctionalAdapters.java' | sha256sum -c -
+          echo '1f453b8918db6878493c11bf1e5501673b43e1050c9b0a54dce0c6a849109b0c  m3/collections/implementations/eclipse-blocks/src/test/java/com/m3/collections/eclipse/M3EclipseFunctionalAdaptersTest.java' | sha256sum -c -
+          test -s m3/collections/implementations/eclipse-blocks/LICENSE-EDL-1.0.txt
+          test -s m3/collections/implementations/eclipse-blocks/LICENSE-EPL-1.0.txt
+      - name: Direct Java21 STRICT compile without any Eclipse/JUnit/provider runtime JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          find m3/collections/implementations/eclipse-blocks/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/eclipse-sources.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/eclipse-sources.txt"
+          jar --create --file "$RUNNER_TEMP/m3-eclipse-callbacks.jar" -C "$RUNNER_TEMP/classes" .
+          jdeps --print-module-deps "$RUNNER_TEMP/m3-eclipse-callbacks.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+      - name: Actual Maven JUnit Eclipse/JDK callback API behavior and source licensing
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/eclipse-blocks/pom.xml verify
+      - name: Assert Maven runtime closure has no Eclipse Collections implementation JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/eclipse-blocks/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/runtime-deps.txt"
+          cat "$RUNNER_TEMP/runtime-deps.txt"
+          ! grep -E 'org.eclipse.collections:|com.google.guava:|org.apache.commons:|org.springframework:' "$RUNNER_TEMP/runtime-deps.txt"
+      - name: Preserve Java21/JUnit and module-closure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-eclipse-api-no-runtime-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/jdeps.txt
+            ${{ runner.temp }}/runtime-deps.txt
+            m3/collections/implementations/eclipse-blocks/target/surefire-reports/

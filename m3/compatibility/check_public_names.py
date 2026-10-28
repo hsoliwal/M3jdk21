@@ -46,6 +46,76 @@ def passive_data_receipt(path: str) -> bool:
 
 
 
+JDK_PRODUCT_SOURCE = re.compile(
+    r"^src/(?!m3[.])[^/]+/(?:share|unix|linux|windows|macosx|bsd)/classes/.+\.java$"
+)
+DONOR_REFERENCE = re.compile(
+    r"(?<![A-Za-z0-9_$.])(?:com\.synexia|com\.m3|com\.google\.common|"
+    r"org\.eclipse\.collections|org\.apache\.commons\.collections4|"
+    r"org\.springframework)(?:\.[A-Za-z_$][\w$]*)+"
+)
+
+
+def code_without_literals(source: str) -> str:
+    """Mask comments, Java strings, char literals and text blocks."""
+    output = []
+    state = "code"
+    position = 0
+    while position < len(source):
+        if state == "code":
+            for prefix, next_state in (("//", "line"), ("/*", "block"), ('"""', "text")):
+                if source.startswith(prefix, position):
+                    output.extend(" " * len(prefix))
+                    position += len(prefix)
+                    state = next_state
+                    break
+            else:
+                character = source[position]
+                if character in ('"', "'"):
+                    output.append(" ")
+                    position += 1
+                    state = "string" if character == '"' else "char"
+                else:
+                    output.append(character)
+                    position += 1
+            continue
+        if state == "line" and source[position] == "\n":
+            output.append("\n")
+            position += 1
+            state = "code"
+            continue
+        if state == "block" and source.startswith("*/", position):
+            output.extend("  ")
+            position += 2
+            state = "code"
+            continue
+        if state == "text" and source.startswith('"""', position):
+            output.extend("   ")
+            position += 3
+            state = "code"
+            continue
+        if state in ("string", "char"):
+            quote = '"' if state == "string" else "'"
+            if source[position] == "\\" and position + 1 < len(source):
+                output.extend("\n" if ch == "\n" else " "
+                              for ch in source[position:position + 2])
+                position += 2
+                continue
+            if source[position] == quote:
+                output.append(" ")
+                position += 1
+                state = "code"
+                continue
+        output.append("\n" if source[position] == "\n" else " ")
+        position += 1
+    return "".join(output)
+
+
+def donor_references(source: str) -> set[str]:
+    """Lexical preflight only; attributed Java/JNI closure remains mandatory."""
+    return set(DONOR_REFERENCE.findall(code_without_literals(source)))
+
+
 @dataclass(frozen=True)
 class Change:
     status: str
@@ -88,16 +158,21 @@ def changes(root: Path, base: str, head: str) -> list[Change]:
     return rows
 
 
-def problems(change: Change, text: str | None = None) -> list[str]:
+def problems(change: Change, text: str | None = None,
+             baseline: str | None = None) -> list[str]:
     path = change.path
     added = change.status.startswith(("A", "C", "R"))
     # Legacy public-repository recipe sources are custody, not a second
     # ongoing convergence workspace. Refuse their modification as well.
     if path.startswith(RECIPE_ROOTS):
         return ["Maven/OpenRewrite recipe sources belong exclusively in Synexia"]
-    if not added:
-        return []  # existing product APIs are separately guarded
     found = []
+    if text is not None and JDK_PRODUCT_SOURCE.fullmatch(path):
+        prior = donor_references(baseline) if baseline is not None else set()
+        for symbol in sorted(donor_references(text) - prior):
+            found.append("new donor namespace reference in JDK source: " + symbol)
+    if not added:
+        return found  # retain original contracts; refuse newly introduced donor references
     if RECIPE_DESCRIPTOR.search(path) or RECIPE_JAVA.search(path):
         found.append("new transformation recipe source/descriptor belongs in Synexia")
     parts = PurePosixPath(path).parts
@@ -132,9 +207,16 @@ def check(root: Path, base: str, head: str) -> tuple[list[Change], list[tuple[st
     violations = []
     for change in delta:
         source = None
-        if change.status.startswith(("A", "C", "R")) and change.path.endswith(".java"):
+        baseline = None
+        product_java = JDK_PRODUCT_SOURCE.fullmatch(change.path) is not None
+        if change.path.endswith(".java") and (
+                product_java or change.status.startswith(("A", "C", "R"))):
             source = git(root, "show", head + ":" + change.path).decode("utf-8")
-        for reason in problems(change, source):
+        if product_java and change.status.startswith(("M", "C", "R")):
+            ancestor = git(root, "merge-base", base, head).decode("ascii").strip()
+            old_path = change.previous or change.path
+            baseline = git(root, "show", ancestor + ":" + old_path).decode("utf-8")
+        for reason in problems(change, source, baseline):
             violations.append((change.path, reason))
     return delta, sorted(violations)
 

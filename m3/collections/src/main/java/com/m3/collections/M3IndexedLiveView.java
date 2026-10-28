@@ -223,7 +223,18 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
             }
             @Override public Spliterator<E> trySplit() { return null; }
             @Override public long estimateSize() { return Long.MAX_VALUE; }
-            @Override public int characteristics() { return Spliterator.ORDERED; }
+            @Override public int characteristics() {
+                // Stable primitive-index sorting permits JDK sorted-stream
+                // optimizations without inventing a sorted payload owner.
+                return Spliterator.ORDERED | (sorted ? Spliterator.SORTED : 0);
+            }
+            @Override public Comparator<? super E> getComparator() {
+                if (!sorted) {
+                    throw new IllegalStateException("unsorted indexed projection");
+                }
+                // null denotes natural order under the Spliterator contract.
+                return comparator;
+            }
         };
     }
 

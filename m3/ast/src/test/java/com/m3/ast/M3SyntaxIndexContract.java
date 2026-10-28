@@ -38,6 +38,10 @@ public final class M3SyntaxIndexContract {
         var t2 = tree("# x:y", 2, "tree-sitter/test", "identifier", "left");
         var t3 = tree("x;y", 0, "tree-sitter/test", "identifier", "left");
         var i1 = new M3SyntaxIndex(t1);
+        ok(i1.subtreeSha256(1).equals("89cf93104399597a1c03ac0827233bb2b2412712f0f66156d6dc6009f0b9eb39")
+                && i1.subtreeSha256(2).equals("90fdf3a005fdc288bbe8024a4501c62eb5211bec1adaef2da3f69f802207d747")
+                && i1.rootSha256().equals("0acc56947aa1d8176851beffb35aece8bc0a67e62ca8b3ffe6bac5aa7490e747"),
+                "V1 exact UTF-16 framed subtree SHA-256 identity");
         var i2 = new M3SyntaxIndex(t2);
         var i3 = new M3SyntaxIndex(t3);
         ok(i1.sameCandidateSubtree(1, i2, 1), "same token survives a text insertion and offset shift");
