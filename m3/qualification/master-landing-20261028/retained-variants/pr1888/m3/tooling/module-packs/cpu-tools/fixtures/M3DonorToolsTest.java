@@ -1,0 +1,1306 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+// Independent contract witnesses for the 16 pinned CPU-tool receiving modules.
+import com.m3.tools.codec.varint.VarInts;
+import com.m3.tools.constraint.interval.Intervals;
+import com.m3.tools.graph.paths.ShortestPaths;
+import com.m3.tools.graph.topology.TopologicalOrder;
+import com.m3.tools.plan.priority.StablePriorityQueue;
+import com.m3.tools.stats.streaming.RunningStatistics;
+import com.m3.tools.text.diff.BoundedDiff;
+import com.m3.tools.text.diff.LineDiff;
+import com.m3.tools.text.diff.LineThreeWayMerge;
+import com.m3.tools.text.diff.TextDelta;
+import com.m3.tools.text.diff.ThreeWayMerge;
+import com.m3.tools.text.frequency.TermFrequency;
+import com.m3.tools.text.index.Bm25Ranker;
+import com.m3.tools.text.index.InvertedIndex;
+import com.m3.tools.text.ngram.NGramIndex;
+import com.m3.tools.text.ngram.NGrams;
+import com.m3.tools.text.normalize.UnicodeNormalizer;
+import com.m3.tools.text.regex.RegexMatcher;
+import com.m3.tools.text.search.AffixIndex;
+import com.m3.tools.text.search.ExactSearch;
+import com.m3.tools.text.search.MultiLiteralSearch;
+import com.m3.tools.text.similarity.EditDistance;
+import com.m3.tools.text.similarity.TextSignatures;
+import com.m3.tools.text.tokenize.WordTokenizer;
+import com.m3.tools.verify.sha256.Sha256;
+import java.math.BigInteger;
+import java.text.BreakIterator;
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.SplittableRandom;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+public final class M3DonorToolsTest {
+    private static long assertions;
+    private static final SplittableRandom RANDOM = new SplittableRandom(20261018);
+    private M3DonorToolsTest() { }
+
+    public static void main(String[] args) throws Exception {
+        text(); ngramIndex(); affixIndex(); multiSearchAndSignatures(); corpusSearch(); regexCorpusSearch(); graphs(); postings(); ranking(); numeric(); priority(); refusals();
+        boundedDiff(); threeWayMerge(); lineIndexedDiff(); lineThreeWayMerge();
+        System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
+                + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
+    }
+
+    private static void check(boolean condition, String message) {
+        assertions++;
+        if (!condition) throw new AssertionError(message);
+    }
+
+    @FunctionalInterface private interface Checked { void run() throws Exception; }
+
+    private static void rejects(Class<? extends Throwable> type, Checked action) throws Exception {
+        try { action.run(); }
+        catch (Throwable failure) {
+            check(type.isInstance(failure), "expected " + type.getName() + ", got " + failure);
+            return;
+        }
+        throw new AssertionError("missing " + type.getName());
+    }
+
+    private static String randomText(int maximum) {
+        char[] alphabet = {'a', 'b', ' ', '\n', '\r', '\0', '\u00e9', '\u0301', '\ud83d', '\ude00'};
+        char[] result = new char[RANDOM.nextInt(maximum + 1)];
+        for (int i = 0; i < result.length; i++) result[i] = alphabet[RANDOM.nextInt(alphabet.length)];
+        return new String(result);
+    }
+
+    private static void text() {
+        String[] corpus = {"", "Hello, 42 world", "e\u0301 \uff21\u030a", "a\r\nb\n",
+                "\ud83d\ude00a\ud83d", "\0ab ab", "alpha beta"};
+        for (String value : corpus) {
+            for (Normalizer.Form form : Normalizer.Form.values())
+                check(UnicodeNormalizer.normalize(value, form).equals(Normalizer.normalize(value, form)), "normalization");
+            check(UnicodeNormalizer.nfkc(value).equals(Normalizer.normalize(value, Normalizer.Form.NFKC)), "NFKC");
+            BreakIterator boundaries = BreakIterator.getWordInstance(Locale.ROOT);
+            boundaries.setText(value);
+            List<String> expected = new ArrayList<>();
+            int start = boundaries.first();
+            for (int end = boundaries.next(); end != BreakIterator.DONE; start = end, end = boundaries.next()) {
+                String token = value.substring(start, end);
+                boolean word = false;
+                for (int at = 0; at < token.length();) {
+                    int point = token.codePointAt(at);
+                    word |= Character.isLetterOrDigit(point); at += Character.charCount(point);
+                }
+                if (word) expected.add(token);
+            }
+            check(WordTokenizer.words(value).equals(expected), "word boundaries");
+            for (String regex : new String[]{"", "a+", "(?=a)", "(ab)|b", "\\X", "[\\s\\S]"}) {
+                for (int limit : new int[]{0, 1, 3, 100}) {
+                    var matcher = Pattern.compile(regex).matcher(value);
+                    var actual = RegexMatcher.find(regex, value, limit);
+                    int count = 0;
+                    while (count < limit && matcher.find()) {
+                        var hit = actual.get(count++);
+                        check(hit.start() == matcher.start() && hit.end() == matcher.end()
+                                && hit.group().equals(matcher.group()), "regex offsets/groups");
+                    }
+                    check(actual.size() == count, "regex limit");
+                }
+            }
+        }
+        for (int trial = 0; trial < 500; trial++) {
+            String left = randomText(24), right = randomText(12);
+            int limit = RANDOM.nextInt(20);
+            List<Integer> positions = new ArrayList<>();
+            for (int at = 0; at <= left.length() && positions.size() < limit; at++)
+                if (left.startsWith(right, at)) positions.add(at);
+            check(Arrays.equals(ExactSearch.positions(left, right, limit),
+                    positions.stream().mapToInt(Integer::intValue).toArray()), "literal positions");
+            for (int bound = 0; bound <= 5; bound++)
+                check(EditDistance.within(left, right, bound) == Math.min(distance(left, right), bound + 1), "Levenshtein");
+            var delta = TextDelta.changedSpan(left, right);
+            String rebuilt = left.substring(0, delta.fromStart()) + right.substring(delta.toStart(), delta.toEnd())
+                    + left.substring(delta.fromEnd());
+            check(rebuilt.equals(right), "delta reconstruction");
+            check(delta.fromStart() == delta.toStart(), "delta prefix coordinates");
+            if (delta.fromStart() < Math.min(left.length(), right.length()))
+                check(left.charAt(delta.fromStart()) != right.charAt(delta.toStart()), "maximal common prefix");
+            for (int n = 1; n <= 5; n++) {
+                Map<String, Integer> expected = new TreeMap<>();
+                for (int at = 0; at + n <= left.length(); at++)
+                    expected.compute(left.substring(at, at + n), (key, count) -> count == null ? 1 : count + 1);
+                check(NGrams.count(left, n).equals(expected), "n-gram counts");
+            }
+            List<String> tokens = Arrays.asList(left.split(" ", -1));
+            Map<String, Long> counts = tokens.stream().collect(java.util.stream.Collectors.groupingBy(
+                    java.util.function.Function.identity(), java.util.stream.Collectors.counting()));
+            var actual = TermFrequency.count(tokens);
+            check(actual.size() == counts.size(), "term cardinality");
+            counts.forEach((term, count) -> check(actual.get(term).longValue() == count, "term count"));
+        }
+        check(Sha256.utf8("").equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"), "empty SHA");
+        check(Sha256.utf8("abc").equals("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"), "abc SHA");
+        check(Sha256.utf8("\ud83d\ude00").equals(Sha256.hex(new byte[]{(byte) 0xf0, (byte) 0x9f,
+                (byte) 0x98, (byte) 0x80})), "UTF8 byte identity");
+    }
+
+    /** Independent LCS dynamic programming proves the bounded script is minimal. */
+    private static void boundedDiff() throws Exception {
+        rejects(NullPointerException.class, () -> BoundedDiff.diff(null, "", 0));
+        rejects(NullPointerException.class, () -> BoundedDiff.diff("", null, 0));
+        rejects(NullPointerException.class, () -> BoundedDiff.diff("", "", 0, null));
+        rejects(IllegalArgumentException.class, () -> BoundedDiff.diff("a", "b", -1));
+        rejects(IllegalArgumentException.class, () -> BoundedDiff.diff("a", "b", BoundedDiff.MAX_EDITS + 1));
+        rejects(IllegalArgumentException.class, () -> BoundedDiff.diff(
+                "a".repeat(BoundedDiff.MAX_INPUT_UTF16 + 1), "", 0));
+        rejects(IllegalArgumentException.class, () -> new BoundedDiff.Change(-1, 0, ""));
+        rejects(IllegalArgumentException.class, () -> new BoundedDiff.Change(1, 0, ""));
+        rejects(IllegalArgumentException.class, () -> new BoundedDiff.Change(0, 0, ""));
+        rejects(NullPointerException.class, () -> new BoundedDiff.Change(0, 1, null));
+        for (String[] pair : new String[][]{
+                {"", ""}, {"a", ""}, {"", "a"}, {"abc", "abc"},
+                {"ab", "ba"}, {"kitten", "sitting"}, {"\ud800", "\udc00"},
+                {"a\r\nb", "a\nb"}, {"aaaa", "bbbb"}, {"a\0\ud83d\ude00", "a\ud83d\ude00"}}) {
+            checkMinimalPatch(pair[0], pair[1], 20);
+        }
+        for (int trial = 0; trial < 1600; trial++) {
+            String before = randomText(18);
+            String after = randomText(18);
+            int budget = RANDOM.nextInt(20);
+            checkMinimalPatch(before, after, budget);
+        }
+        String longPrefix = "x".repeat(140_000);
+        var big = BoundedDiff.diff(longPrefix + "a", longPrefix + "b", 2);
+        check(big.complete() && big.distance() == 2, "long common prefix bounded cost");
+        check(big.changes().size() == 1 && big.apply(longPrefix + "a").equals(longPrefix + "b"),
+                "long input minimal patch");
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> BoundedDiff.diff(longPrefix, longPrefix, 0, () -> {
+            if (checkpoints.incrementAndGet() == 3) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 3, "cooperative preprocessing cancellation");
+    }
+
+    private static void checkMinimalPatch(String before, String after, int budget) throws Exception {
+        int[][] lcs = new int[before.length() + 1][after.length() + 1];
+        for (int i = before.length() - 1; i >= 0; i--) {
+            for (int j = after.length() - 1; j >= 0; j--) {
+                lcs[i][j] = before.charAt(i) == after.charAt(j)
+                        ? 1 + lcs[i + 1][j + 1] : Math.max(lcs[i + 1][j], lcs[i][j + 1]);
+            }
+        }
+        int optimum = before.length() + after.length() - 2 * lcs[0][0];
+        BoundedDiff.Patch actual = BoundedDiff.diff(before, after, budget);
+        check(actual.sourceLength() == before.length() && actual.targetLength() == after.length(),
+                "exact UTF-16 source/target geometry");
+        check(actual.sourceSha256().matches("[0-9a-f]{64}")
+                        && actual.targetSha256().matches("[0-9a-f]{64}"), "source fingerprints");
+        if (optimum > budget) {
+            check(!actual.complete() && actual.distance() == -1 && actual.changes().isEmpty(),
+                    "honest edit-distance budget miss");
+            rejects(IllegalStateException.class, () -> actual.apply(before));
+            return;
+        }
+        check(actual.complete() && actual.distance() == optimum, "Myers edit count equals independent LCS");
+        check(actual.apply(before).equals(after), "minimal patch reconstructs exact target");
+        check(actual.changes().equals(BoundedDiff.diff(before, after, budget).changes()),
+                "tie break produces stable canonical script");
+        int end = 0;
+        int operationCount = 0;
+        for (BoundedDiff.Change change : actual.changes()) {
+            check(change.start() >= end && change.end() <= before.length(), "ordered nonoverlapping source lanes");
+            operationCount += change.end() - change.start() + change.inserted().length();
+            end = change.end();
+        }
+        check(operationCount == optimum, "coalescing preserves minimal distance");
+        if (!before.isEmpty()) rejects(IllegalArgumentException.class, () -> actual.apply(before + "x"));
+    }
+
+    /** Independent disjoint-location construction witnesses additive superset merge. */
+    private static void threeWayMerge() throws Exception {
+        rejects(NullPointerException.class, () -> ThreeWayMerge.merge(null, "", "", 0));
+        rejects(NullPointerException.class, () -> ThreeWayMerge.merge("", null, "", 0));
+        rejects(NullPointerException.class, () -> ThreeWayMerge.merge("", "", null, 0));
+        rejects(NullPointerException.class, () -> ThreeWayMerge.merge("", "", "", 0, null));
+        rejects(IllegalArgumentException.class, () -> ThreeWayMerge.merge("", "", "", -1));
+        rejects(IllegalArgumentException.class, () -> ThreeWayMerge.merge("", "", "", 513));
+        var empty = ThreeWayMerge.merge("", "", "", 0);
+        check(empty.mergeable() && empty.merged().isEmpty() && empty.mergedChanges().isEmpty(),
+                "empty base/side three-way identity");
+        var fastForward = ThreeWayMerge.merge("abcde", "abcde", "abcYde", 1);
+        check(fastForward.mergeable() && fastForward.merged().equals("abcYde"),
+                "one unchanged side preserves the other");
+        var identical = ThreeWayMerge.merge("abcde", "abXde", "abXde", 2);
+        check(identical.mergeable() && identical.merged().equals("abXde")
+                && identical.mergedChanges().size() == 1, "identical edit merged once");
+        var adjacent = ThreeWayMerge.merge("abcde", "aXcde", "abYde", 2);
+        check(adjacent.mergeable() && adjacent.merged().equals("aXYde"),
+                "adjacent independent replacements compose");
+        var overlap = ThreeWayMerge.merge("abcde", "abXde", "abYde", 2);
+        check(overlap.status() == ThreeWayMerge.Status.CONFLICT && overlap.complete()
+                && overlap.conflictCount() > 0 && overlap.conflictsComplete(),
+                "different replacements on the same base range conflict");
+        rejects(IllegalStateException.class, overlap::merged);
+        rejects(UnsupportedOperationException.class, () -> overlap.conflicts().clear());
+        var sameOffset = ThreeWayMerge.merge("abcde", "abXcde", "abYcde", 1);
+        check(sameOffset.status() == ThreeWayMerge.Status.CONFLICT && sameOffset.conflictCount() == 1,
+                "divergent insertions at the same physical offset conflict");
+        var boundary = ThreeWayMerge.merge("abcde", "aXcde", "aYbcde", 2);
+        check(boundary.status() == ThreeWayMerge.Status.CONFLICT,
+                "insertion exactly at changed-range boundary is conservatively ambiguous");
+        var incomplete = ThreeWayMerge.merge("abcde", "abXde", "abcde", 1);
+        check(incomplete.status() == ThreeWayMerge.Status.INCOMPLETE && !incomplete.complete()
+                && incomplete.conflicts().isEmpty(), "insufficient edit budget cannot claim merge success");
+        rejects(IllegalStateException.class, incomplete::merged);
+        var surrogate = ThreeWayMerge.merge("a\ud800b", "aX\ud800b", "a\ud800Yb", 1);
+        check(surrogate.mergeable() && surrogate.merged().equals("aX\ud800Yb"),
+                "lone surrogate and exact UTF-16 indexes retained without UTF-8 lossy conversion");
+        String source = "abcdefghijklmno";
+        for (int trial = 0; trial < 2200; trial++) {
+            int p = RANDOM.nextInt(1, 6), q = RANDOM.nextInt(9, 14);
+            String leftInsert = source.substring(0, p) + "X" + source.substring(p);
+            String rightInsert = source.substring(0, q) + "Y" + source.substring(q);
+            var inserted = ThreeWayMerge.merge(source, leftInsert, rightInsert, 1);
+            check(inserted.mergeable() && inserted.merged().equals(
+                    source.substring(0, p) + "X" + source.substring(p, q) + "Y" + source.substring(q)),
+                    "independent inserted offsets compose in source order");
+            check(inserted.mergedChanges().size() == 2 && inserted.conflictCount() == 0,
+                    "two inserted hunks retained without extra copies");
+
+            String leftReplace = source.substring(0, p) + "X" + source.substring(p + 1);
+            String rightReplace = source.substring(0, q) + "Y" + source.substring(q + 1);
+            var replaced = ThreeWayMerge.merge(source, leftReplace, rightReplace, 2);
+            check(replaced.mergeable() && replaced.merged().equals(
+                    source.substring(0, p) + "X" + source.substring(p + 1, q) + "Y" + source.substring(q + 1)),
+                    "nonoverlapping replacement intervals compose");
+            check(replaced.leftPatch().distance() == 2 && replaced.rightPatch().distance() == 2,
+                    "each source-relative edit distance independently budgeted");
+            var conflicting = ThreeWayMerge.merge(source, leftInsert,
+                    source.substring(0, p) + "Y" + source.substring(p), 1);
+            check(conflicting.status() == ThreeWayMerge.Status.CONFLICT
+                    && conflicting.conflictCount() == 1 && !conflicting.mergeable(),
+                    "ambiguous same-offset insertion never chooses one side");
+        }
+        rejects(UnsupportedOperationException.class, () -> adjacent.mergedChanges().clear());
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> ThreeWayMerge.merge(
+                "z".repeat(100_000), "z".repeat(100_000), "z".repeat(100_000), 0, () -> {
+                    if (checkpoints.incrementAndGet() == 3) throw new IllegalStateException("cancel");
+                }));
+        check(checkpoints.get() == 3, "merge checkpoint cancellation happens during preprocessing");
+    }
+
+    /** Independent line-token LCS validates edit minimality and exact CR/LF boundaries. */
+    private static void lineIndexedDiff() throws Exception {
+        rejects(NullPointerException.class, () -> LineDiff.diff(null, "", 0));
+        rejects(NullPointerException.class, () -> LineDiff.diff("", null, 0));
+        rejects(NullPointerException.class, () -> LineDiff.diff("", "", 0, null));
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff("", "", -1));
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff("", "", 513));
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff(
+                "x".repeat(LineDiff.MAX_SOURCE_UTF16 + 1), "", 0));
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff("x\n".repeat(LineDiff.MAX_LINES + 1), "", 0));
+        rejects(IllegalArgumentException.class, () -> new LineDiff.LineChange(1, 0, 0, 0, 0, ""));
+        rejects(IllegalArgumentException.class, () -> new LineDiff.LineChange(0, 0, 0, 0, 0, ""));
+        rejects(IllegalArgumentException.class, () -> new LineDiff.LineChange(0, 1, 0, 1, 0, "x"));
+        rejects(NullPointerException.class, () -> new LineDiff.LineChange(0, 1, 0, 1, 0, null));
+        for (String[] casePair : new String[][]{
+                {"", ""}, {"a", ""}, {"", "a"}, {"a\r\n", "a\n"},
+                {"a\r\nb\nc\r", "c\ra\r\nb\n"}, {"a\r\n", "a\r\n"},
+                {"\ud800\r\n", "\ud800\r"}, {"a\n\n", "a\n"},
+                {"\0\n\udc00", "\udc00\n\0"}, {"one\ntwo\n", "one\nTHREE\ntwo\n"}}) {
+            checkMinimalLinePatch(casePair[0], casePair[1], 25);
+        }
+        for (int trial = 0; trial < 2_400; trial++) {
+            checkMinimalLinePatch(randomLineDocument(15), randomLineDocument(15), RANDOM.nextInt(19));
+        }
+        String longDocument = "row\r\n".repeat(80_000);
+        check(longDocument.length() > BoundedDiff.MAX_INPUT_UTF16, "long source exceeds code-unit diff limit");
+        var longPatch = LineDiff.diff(longDocument, longDocument + "tail\r\n", 1);
+        check(longPatch.complete() && longPatch.distance() == 1
+                && longPatch.sourceLines() == 80_000 && longPatch.targetLines() == 80_001,
+                "line-indexed script scales beyond the UTF-16 unit bound");
+        check(longPatch.apply(longDocument).equals(longDocument + "tail\r\n"),
+                "large duplicate-line reconstruction remains exact");
+        StringBuilder unique = new StringBuilder();
+        for (int i = 0; i < LineDiff.MAX_UNIQUE_LINES; i++) unique.append("id:").append(i).append('\n');
+        var fullLexicon = LineDiff.diff(unique.toString(), unique.toString(), 0);
+        check(fullLexicon.complete() && fullLexicon.distance() == 0
+                && fullLexicon.sourceLines() == LineDiff.MAX_UNIQUE_LINES,
+                "entire 16-bit ID domain is admitted, including surrogate-valued IDs");
+        rejects(IllegalArgumentException.class, () -> LineDiff.diff(unique + "id:overflow\n", "", 0));
+        var incomplete = LineDiff.diff("a\r\n", "b\r\n", 1);
+        check(!incomplete.complete() && incomplete.distance() == -1 && incomplete.changes().isEmpty(),
+                "line edit budget miss must be explicit");
+        rejects(IllegalStateException.class, () -> incomplete.apply("a\r\n"));
+        rejects(UnsupportedOperationException.class, () -> LineDiff.diff("a", "b", 2).changes().clear());
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> LineDiff.diff("row\n".repeat(30_000), "", 1, () -> {
+            if (checkpoints.incrementAndGet() == 4) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 4, "line hashing/tokenizing checks cancellation");
+    }
+
+    /** Independent line-list edits witness nonoverlap, conflict and exact byte order. */
+    private static void lineThreeWayMerge() throws Exception {
+        rejects(NullPointerException.class, () -> LineThreeWayMerge.merge(null, "", "", 0));
+        rejects(NullPointerException.class, () -> LineThreeWayMerge.merge("", null, "", 0));
+        rejects(NullPointerException.class, () -> LineThreeWayMerge.merge("", "", null, 0));
+        rejects(NullPointerException.class, () -> LineThreeWayMerge.merge("", "", "", 0, null));
+        rejects(IllegalArgumentException.class, () -> LineThreeWayMerge.merge("", "", "", -1));
+        rejects(IllegalArgumentException.class, () -> LineThreeWayMerge.merge("", "", "", 513));
+        var empty = LineThreeWayMerge.merge("", "", "", 0);
+        check(empty.mergeable() && empty.merged().isEmpty() && empty.mergedChanges().isEmpty()
+                && empty.leftPatch().distance() == 0, "empty line merge");
+        var fastForward = LineThreeWayMerge.merge("a\r\nb\n", "a\r\nb\n", "a\r\nB\n", 2);
+        check(fastForward.mergeable() && fastForward.merged().equals("a\r\nB\n"), "line fast-forward");
+        var identical = LineThreeWayMerge.merge("a\r\nb\n", "A\r\nb\n", "A\r\nb\n", 2);
+        check(identical.mergeable() && identical.merged().equals("A\r\nb\n")
+                && identical.mergedChanges().size() == 1, "identical line edit appears only once");
+        var adjacent = LineThreeWayMerge.merge("a\r\nb\nc\n", "A\r\nb\nc\n", "a\r\nB\nc\n", 2);
+        check(adjacent.mergeable() && adjacent.merged().equals("A\r\nB\nc\n")
+                && adjacent.mergedChanges().size() == 2, "adjacent line replacements remain independent");
+        var conflicting = LineThreeWayMerge.merge("a\nb\nc\n", "a\nX\nc\n", "a\nY\nc\n", 2);
+        check(conflicting.status() == ThreeWayMerge.Status.CONFLICT && !conflicting.mergeable()
+                && conflicting.conflictCount() == 1 && conflicting.conflictsComplete()
+                && conflicting.conflicts().size() == 1 && conflicting.mergedChanges().isEmpty(),
+                "same-base-line replacement conflict is explicit");
+        rejects(IllegalStateException.class, conflicting::merged);
+        var samePosition = LineThreeWayMerge.merge("a\nb\n", "a\nx\nb\n", "a\ny\nb\n", 1);
+        check(samePosition.status() == ThreeWayMerge.Status.CONFLICT && samePosition.conflictCount() == 1,
+                "divergent insertions at one line boundary conflict");
+        var beginningBoundary = LineThreeWayMerge.merge("a\nb\nc\n", "a\nx\nb\nc\n", "a\nB\nc\n", 2);
+        var endingBoundary = LineThreeWayMerge.merge("a\nb\nc\n", "a\nb\nx\nc\n", "a\nB\nc\n", 2);
+        check(beginningBoundary.status() == ThreeWayMerge.Status.CONFLICT
+                && endingBoundary.status() == ThreeWayMerge.Status.CONFLICT,
+                "insertion at either replacement boundary requires review");
+        var incomplete = LineThreeWayMerge.merge("a\nb\n", "a\nB\n", "a\nb\n", 1);
+        check(incomplete.status() == ThreeWayMerge.Status.INCOMPLETE && !incomplete.complete()
+                && incomplete.leftPatch().distance() == -1 && incomplete.conflicts().isEmpty()
+                && incomplete.mergedChanges().isEmpty(), "budget miss never becomes a merge");
+        rejects(IllegalStateException.class, incomplete::merged);
+        var surrogate = LineThreeWayMerge.merge("head\r\n\ud800\rbody\r\nend",
+                "HEAD\r\n\ud800\rbody\r\nend", "head\r\n\ud800\rbody\r\nTAIL", 2);
+        check(surrogate.mergeable() && surrogate.merged().equals("HEAD\r\n\ud800\rbody\r\nTAIL"),
+                "unpaired surrogate and mixed endings survive line merge");
+        rejects(UnsupportedOperationException.class, () -> adjacent.mergedChanges().clear());
+        rejects(UnsupportedOperationException.class, () -> conflicting.conflicts().clear());
+
+        for (int trial = 0; trial < 2_400; trial++) {
+            int n = 3 + RANDOM.nextInt(17);
+            List<String> baseLines = new ArrayList<>();
+            for (int i = 0; i < n; i++) baseLines.add("id:" + trial + ":" + i + "\r\n");
+            String base = String.join("", baseLines);
+            int i = RANDOM.nextInt(n), j = RANDOM.nextInt(n - 1);
+            if (j >= i) j++;
+            List<String> left = new ArrayList<>(baseLines), right = new ArrayList<>(baseLines);
+            left.set(i, "left:" + trial + "\r\n");
+            right.set(j, "right:" + trial + "\r\n");
+            StringBuilder expected = new StringBuilder();
+            for (int k = 0; k < n; k++) expected.append(k == i ? left.get(k) : right.get(k));
+            var changed = LineThreeWayMerge.merge(base, String.join("", left),
+                    String.join("", right), 2);
+            check(changed.mergeable() && changed.merged().contentEquals(expected),
+                    "independent line replacements compose exactly");
+            check(changed.leftPatch().distance() == 2 && changed.rightPatch().distance() == 2,
+                    "each replacement has minimal two-line edit distance");
+
+            int insertAt = RANDOM.nextInt(n + 1), otherAt = RANDOM.nextInt(n);
+            if (otherAt >= insertAt) otherAt++;
+            left = new ArrayList<>(baseLines); right = new ArrayList<>(baseLines);
+            left.add(insertAt, "left-insert:" + trial + "\n");
+            right.add(otherAt, "right-insert:" + trial + "\n");
+            expected = new StringBuilder();
+            for (int k = 0; k <= n; k++) {
+                if (k == insertAt) expected.append("left-insert:").append(trial).append('\n');
+                if (k == otherAt) expected.append("right-insert:").append(trial).append('\n');
+                if (k < n) expected.append(baseLines.get(k));
+            }
+            var inserted = LineThreeWayMerge.merge(base, String.join("", left),
+                    String.join("", right), 1);
+            check(inserted.mergeable() && inserted.merged().contentEquals(expected),
+                    "independent line insertions compose exactly");
+            check(inserted.conflictCount() == 0 && inserted.mergedChanges().size() == 2,
+                    "source-relative inserted line coordinates retained");
+        }
+
+        String longBase = "row\r\n".repeat(80_000);
+        var longMerged = LineThreeWayMerge.merge(longBase, "start\n" + longBase,
+                longBase + "tail\r\n", 1);
+        check(longBase.length() > BoundedDiff.MAX_INPUT_UTF16 && longMerged.mergeable()
+                && longMerged.merged().equals("start\n" + longBase + "tail\r\n"),
+                "80k-line three-way merge exceeds code-unit diff limit without losing text");
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> LineThreeWayMerge.merge("a\n".repeat(30_000),
+                "b\n", "c\n", 2, () -> {
+                    if (checkpoints.incrementAndGet() == 4) throw new IllegalStateException("cancel");
+                }));
+        check(checkpoints.get() == 4, "line merge checks cancellation during side indexing");
+    }
+
+    private static String randomLineDocument(int maximumLines) {
+        String[] contents = {"", "a", "b", "é", "\ud800", "\udc00", "a\0b", "\ud83d\ude42"};
+        String[] endings = {"\r", "\n", "\r\n"};
+        int count = RANDOM.nextInt(maximumLines + 1);
+        StringBuilder text = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            text.append(contents[RANDOM.nextInt(contents.length)]);
+            if (i != count - 1 || RANDOM.nextBoolean()) text.append(endings[RANDOM.nextInt(endings.length)]);
+        }
+        return text.toString();
+    }
+
+    private static List<String> oracleLines(String source) {
+        List<String> lines = new ArrayList<>();
+        int at = 0;
+        while (at < source.length()) {
+            int start = at;
+            while (at < source.length() && source.charAt(at) != '\r' && source.charAt(at) != '\n') at++;
+            if (at < source.length()) {
+                char ending = source.charAt(at++);
+                if (ending == '\r' && at < source.length() && source.charAt(at) == '\n') at++;
+            }
+            lines.add(source.substring(start, at));
+        }
+        return lines;
+    }
+
+    private static void checkMinimalLinePatch(String before, String after, int budget) throws Exception {
+        List<String> a = oracleLines(before), b = oracleLines(after);
+        int[][] lcs = new int[a.size() + 1][b.size() + 1];
+        for (int i = a.size() - 1; i >= 0; i--) for (int j = b.size() - 1; j >= 0; j--) {
+            lcs[i][j] = a.get(i).equals(b.get(j)) ? 1 + lcs[i + 1][j + 1]
+                    : Math.max(lcs[i + 1][j], lcs[i][j + 1]);
+        }
+        int minimum = a.size() + b.size() - 2 * lcs[0][0];
+        LineDiff.Patch actual = LineDiff.diff(before, after, budget);
+        check(actual.sourceLines() == a.size() && actual.targetLines() == b.size(), "true line cardinality");
+        check(actual.sourceLength() == before.length() && actual.targetLength() == after.length(),
+                "exact UTF-16 geometry");
+        check(actual.sourceSha256().matches("[0-9a-f]{64}")
+                && actual.targetSha256().matches("[0-9a-f]{64}"), "domain-separated line identities");
+        if (minimum > budget) {
+            check(!actual.complete() && actual.distance() == -1 && actual.changes().isEmpty(),
+                    "honest line-distance miss");
+            rejects(IllegalStateException.class, () -> actual.apply(before));
+            return;
+        }
+        check(actual.complete() && actual.distance() == minimum, "shortest line SES vs independent LCS");
+        check(actual.apply(before).equals(after), "line patch recreates full UTF-16 with endings");
+        check(actual.changes().equals(LineDiff.diff(before, after, budget).changes()),
+                "same line inputs yield same canonical hunks");
+        int cursor = 0, lineCursor = 0, cost = 0;
+        for (LineDiff.LineChange change : actual.changes()) {
+            check(change.startLine() >= lineCursor && change.startUtf16() >= cursor
+                    && change.endUtf16() <= before.length(), "ordered UTF-16/line ranges");
+            int prefix = a.subList(0, change.startLine()).stream().mapToInt(String::length).sum();
+            int suffix = a.subList(0, change.endLine()).stream().mapToInt(String::length).sum();
+            check(change.startUtf16() == prefix && change.endUtf16() == suffix,
+                    "source offsets equal independent full-line boundaries");
+            check(oracleLines(change.inserted()).size() == change.insertedLines(),
+                    "inserted line cardinality matches physical terminators");
+            cost += change.endLine() - change.startLine() + change.insertedLines();
+            lineCursor = change.endLine(); cursor = change.endUtf16();
+        }
+        check(cost == minimum, "line hunk coalescing keeps shortest edit count");
+        if (!before.isEmpty()) rejects(IllegalArgumentException.class, () -> actual.apply(before + "x"));
+    }
+
+    /** Independent substring enumeration proves rolling-hash candidates never decide equality. */
+    private static void ngramIndex() throws Exception {
+        rejects(NullPointerException.class, () -> NGrams.prepare(null, 2));
+        rejects(NullPointerException.class, () -> NGrams.prepare("ab", 2, null));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare("ab", 0));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare("ab", 65));
+        rejects(IllegalArgumentException.class, () -> NGrams.prepare(
+                "a".repeat(NGramIndex.MAX_SOURCE_UTF16 + 1), 2));
+        var empty = NGrams.prepare("", 3);
+        check(empty.windowCount() == 0 && empty.distinctCount() == 0 && empty.counts().isEmpty(),
+                "empty positional index");
+        check(NGrams.overlap(empty, empty).coefficient() == 1.0d, "empty gram multiset");
+        check(NGrams.overlap(NGrams.prepare("abc", 4), NGrams.prepare("", 4)).union() == 0,
+                "short string overlap");
+        rejects(IllegalArgumentException.class,
+                () -> NGrams.overlap(NGrams.prepare("a", 1), NGrams.prepare("a", 2)));
+        rejects(NullPointerException.class, () -> empty.frequency(null));
+        rejects(NullPointerException.class, () -> empty.positions(null));
+        rejects(NullPointerException.class, () -> empty.forEachPosition(0, null));
+        rejects(IndexOutOfBoundsException.class, () -> empty.gramAt(0));
+        rejects(IllegalArgumentException.class,
+                () -> new NGramIndex.Overlap(2, 1));
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> NGrams.prepare("x".repeat(30_000), 1, () -> {
+            if (checkpoints.incrementAndGet() == 2) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 2, "indexed cancellation inside scan");
+        var dense = NGrams.prepare("a".repeat(70_000), 64);
+        check(dense.distinctCount() == 1 && dense.frequency("a".repeat(64)) == 69_937,
+                "single parent-owned dense posting lane");
+        check(dense.positions("a".repeat(64)).length == 69_937, "dense positional visit");
+
+        for (int trial = 0; trial < 1_000; trial++) {
+            String left = randomText(76), right = randomText(76);
+            int n = 1 + RANDOM.nextInt(12);
+            NGramIndex indexed = NGrams.prepare(left, n);
+            NGramIndex other = NGrams.prepare(right, n);
+            Map<String, List<Integer>> positions = new LinkedHashMap<>();
+            for (int i = 0; i + n <= left.length(); i++) {
+                positions.computeIfAbsent(left.substring(i, i + n), key -> new ArrayList<>()).add(i);
+            }
+            Map<String, Integer> expected = new TreeMap<>();
+            positions.forEach((gram, offsets) -> expected.put(gram, offsets.size()));
+            check(indexed.windowCount() == Math.max(0, left.length() - n + 1), "gram window count");
+            check(indexed.distinctCount() == expected.size(), "gram primitive distinct count");
+            check(indexed.counts().equals(expected) && indexed.counts().equals(NGrams.count(left, n)),
+                    "gram legacy-map parity including unpaired surrogates");
+            check(indexed.gramSize() == n && indexed.frequency("too long to be this gram") == 0,
+                    "gram query length contract");
+            for (int id = 0; id < indexed.distinctCount(); id++) {
+                String gram = indexed.gramAt(id);
+                List<Integer> expectedOffsets = positions.get(gram);
+                int[] expectedArray = expectedOffsets.stream().mapToInt(Integer::intValue).toArray();
+                check(indexed.firstOffset(id) == expectedArray[0] && indexed.frequencyAt(id) == expectedArray.length,
+                        "first source offset and physical frequency");
+                check(Arrays.equals(indexed.positions(gram), expectedArray), "collision-checked gram offsets");
+                List<Integer> visited = new ArrayList<>();
+                indexed.forEachPosition(id, visited::add);
+                check(visited.equals(expectedOffsets), "allocation-free visitor order");
+                int[] detached = indexed.positions(gram);
+                detached[0] = Integer.MIN_VALUE;
+                check(indexed.positions(gram)[0] == expectedArray[0], "gram offsets are detached");
+            }
+            rejects(UnsupportedOperationException.class, () -> indexed.counts().put("not-in-index", 42));
+            Map<String, Integer> rightCounts = new TreeMap<>();
+            for (int at = 0; at + n <= right.length(); at++) {
+                rightCounts.merge(right.substring(at, at + n), 1, Integer::sum);
+            }
+            long intersection = 0;
+            for (var entry : expected.entrySet()) {
+                intersection += Math.min(entry.getValue(), rightCounts.getOrDefault(entry.getKey(), 0));
+            }
+            long union = (long) indexed.windowCount() + other.windowCount() - intersection;
+            NGramIndex.Overlap overlap = NGrams.overlap(indexed, other);
+            check(overlap.intersection() == intersection && overlap.union() == union,
+                    "exact multiset overlap oracle");
+            check(Double.compare(overlap.coefficient(), union == 0 ? 1.0d : intersection / (double) union) == 0,
+                    "overlap coefficient contract");
+            check(NGrams.overlap(other, indexed).equals(overlap), "overlap symmetry");
+        }
+    }
+
+    /** Differential UTF-16 prefix/suffix ranges: construction has no retained nodes. */
+    private static void affixIndex() throws Exception {
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(null));
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(List.of(), null));
+        rejects(NullPointerException.class, () -> AffixIndex.prepare(Arrays.asList("a", null)));
+        rejects(IllegalArgumentException.class,
+                () -> AffixIndex.prepare(Collections.nCopies(AffixIndex.MAX_TERMS + 1, "a")));
+        rejects(IllegalArgumentException.class,
+                () -> AffixIndex.prepare(List.of("a".repeat(AffixIndex.MAX_TERM_UTF16 + 1))));
+        rejects(IllegalArgumentException.class, () -> AffixIndex.prepare(
+                Collections.nCopies(129, "a".repeat(AffixIndex.MAX_TERM_UTF16))));
+        var empty = AffixIndex.prepare(List.of());
+        check(empty.distinctCount() == 0 && empty.inputCount() == 0, "empty affix index");
+        check(empty.prefix("", 0).complete() && empty.suffix("", 0).complete(), "empty affix query");
+        rejects(NullPointerException.class, () -> empty.prefix(null, 1));
+        rejects(NullPointerException.class, () -> empty.suffix(null, 1));
+        rejects(NullPointerException.class, () -> empty.contains(null));
+        rejects(IndexOutOfBoundsException.class, () -> empty.wordAt(0));
+        rejects(IllegalArgumentException.class, () -> empty.prefix("", -1));
+        rejects(IllegalArgumentException.class, () -> empty.suffix("", AffixIndex.MAX_TERMS + 1));
+        rejects(IllegalArgumentException.class,
+                () -> empty.prefix("a".repeat(AffixIndex.MAX_TERM_UTF16 + 1), 1));
+
+        var manual = AffixIndex.prepare(List.of("", "a", "ab", "aba", "xaba", "ab", "\ud800", "\ud800a"));
+        check(manual.inputCount() == 8 && manual.distinctCount() == 7, "duplicate terms collapsed");
+        check(manual.countPrefix("a") == 3 && manual.countSuffix("a") == 4, "literal affix cardinalities");
+        check(manual.prefix("", 0).totalMatches() == 7 && !manual.prefix("", 0).complete(),
+                "zero-cap partial result is explicit");
+        check(manual.prefix("absent", 0).complete(), "zero-cap empty result is complete");
+        var capped = manual.suffix("a", 2);
+        check(capped.size() == 2 && capped.totalMatches() == 4 && !capped.complete(), "suffix cap");
+        int[] detached = capped.ordinals();
+        detached[0] = -99;
+        check(capped.ordinalAt(0) >= 0, "suffix IDs detached");
+
+        java.util.concurrent.atomic.AtomicInteger checkpoints = new java.util.concurrent.atomic.AtomicInteger();
+        rejects(IllegalStateException.class, () -> AffixIndex.prepare(List.of("aa", "ab"), () -> {
+            if (checkpoints.incrementAndGet() == 2) throw new IllegalStateException("cancel");
+        }));
+        check(checkpoints.get() == 2, "cancellation during affix admission");
+        rejects(IllegalStateException.class, () -> manual.prefix("a", 2, () -> {
+            throw new IllegalStateException("cancel query");
+        }));
+
+        for (int trial = 0; trial < 1_200; trial++) {
+            List<String> inputs = new ArrayList<>();
+            int length = RANDOM.nextInt(40);
+            for (int i = 0; i < length; i++) inputs.add(randomText(18));
+            AffixIndex index = AffixIndex.prepare(inputs);
+            List<String> canonical = new ArrayList<>(new TreeSet<>(inputs));
+            check(index.inputCount() == inputs.size() && index.distinctCount() == canonical.size(),
+                    "canonical lexicon cardinality");
+            for (int i = 0; i < canonical.size(); i++) {
+                check(index.wordAt(i).equals(canonical.get(i)), "canonical word ID");
+                check(index.contains(canonical.get(i)), "exact membership");
+            }
+            List<String> shuffled = new ArrayList<>(inputs);
+            Collections.reverse(shuffled);
+            check(index.sha256().equals(AffixIndex.prepare(shuffled).sha256()), "stable lexicon fingerprint");
+            for (int q = 0; q < 9; q++) {
+                String query = q == 0 ? "" : q == 1 && !canonical.isEmpty()
+                        ? canonical.get(RANDOM.nextInt(canonical.size())) : randomText(5);
+                int cap = RANDOM.nextInt(8);
+                for (boolean suffix : new boolean[]{false, true}) {
+                    List<String> expected = canonical.stream().filter(suffix
+                            ? word -> word.endsWith(query) : word -> word.startsWith(query)).toList();
+                    if (suffix) expected = expected.stream()
+                            .sorted(Comparator.comparing(M3DonorToolsTest::reverseUtf16)).toList();
+                    var result = suffix ? index.suffix(query, cap) : index.prefix(query, cap);
+                    check(result.totalMatches() == expected.size(), "indexed affix exact total");
+                    check(result.size() == Math.min(cap, expected.size())
+                            && result.complete() == (expected.size() <= cap), "indexed affix completeness");
+                    for (int i = 0; i < result.size(); i++) {
+                        check(index.wordAt(result.ordinalAt(i)).equals(expected.get(i)),
+                                "indexed affix UTF-16 order");
+                    }
+                    check((suffix ? index.countSuffix(query) : index.countPrefix(query)) == expected.size(),
+                            "indexed affix count parity");
+                }
+            }
+        }
+    }
+
+    private static String reverseUtf16(String word) {
+        char[] units = word.toCharArray();
+        for (int i = 0, j = units.length - 1; i < j; i++, j--) {
+            char temp = units[i];
+            units[i] = units[j];
+            units[j] = temp;
+        }
+        return new String(units);
+    }
+
+    private static int distance(String left, String right) {
+        int[][] matrix = new int[left.length() + 1][right.length() + 1];
+        for (int i = 0; i <= left.length(); i++) matrix[i][0] = i;
+        for (int j = 0; j <= right.length(); j++) matrix[0][j] = j;
+        for (int i = 1; i <= left.length(); i++) for (int j = 1; j <= right.length(); j++) {
+            matrix[i][j] = Math.min(matrix[i - 1][j] + 1, Math.min(matrix[i][j - 1] + 1,
+                    matrix[i - 1][j - 1] + (left.charAt(i - 1) == right.charAt(j - 1) ? 0 : 1)));
+        }
+        return matrix[left.length()][right.length()];
+    }
+
+    /** Independent nested-loop matching oracle; never calls the automaton in the witness. */
+    private static List<MultiLiteralSearch.Hit> bruteMulti(String text, List<String> patterns) {
+        List<MultiLiteralSearch.Hit> matches = new ArrayList<>();
+        for (int end = 1; end <= text.length(); end++) {
+            for (int id = 0; id < patterns.size(); id++) {
+                String pattern = patterns.get(id);
+                int start = end - pattern.length();
+                if (start >= 0 && text.startsWith(pattern, start)) {
+                    matches.add(new MultiLiteralSearch.Hit(id, start, end));
+                }
+            }
+        }
+        matches.sort(Comparator.comparingInt(MultiLiteralSearch.Hit::end)
+                .thenComparing(Comparator.comparingInt(
+                        (MultiLiteralSearch.Hit hit) -> patterns.get(hit.patternId()).length()).reversed())
+                .thenComparingInt(MultiLiteralSearch.Hit::patternId));
+        return matches;
+    }
+
+    /** Independent nested-loop oracle for ordered files, boundary reset and one global cap. */
+    private static void corpusSearch() throws Exception {
+        var plan = MultiLiteralSearch.prepare(List.of("aba", "ba", "aba", "\ud800", "\ud83d\ude42"));
+        var files = List.of("", "ab", "a", "aba", "\ud800", "aba\ud83d\ude42");
+        List<MultiLiteralSearch.CorpusHit> oracle = bruteCorpus(files,
+                List.of("aba", "ba", "aba", "\ud800", "\ud83d\ude42"));
+        var all = plan.findCorpus(files, 100);
+        check(all.complete() && all.scannedDocuments() == files.size() && all.hits().equals(oracle),
+                "one prepared multi-pattern automaton searches all files without cross-file hits");
+        rejects(UnsupportedOperationException.class, () -> all.hits().clear());
+        check(plan.findCorpus(List.of("ab", "a"), 10).size() == 0,
+                "a literal spanning adjacent files is never a match");
+        check(plan.findCorpus(List.of(), 0).complete() && plan.findCorpus(List.of(), 0).scannedDocuments() == 0,
+                "zero-document corpus is complete");
+        var zero = plan.findCorpus(List.of("", "aba", "aba"), 0);
+        check(!zero.complete() && zero.size() == 0 && zero.scannedDocuments() == 2,
+                "zero-cap query proves truncation in second file with one extra hit");
+        var one = plan.findCorpus(files, 1);
+        check(!one.complete() && one.scannedDocuments() == 4 && one.size() == 1
+                && one.hit(0).equals(oracle.getFirst()), "global first-hit cap stops at the correct file");
+        check(plan.findCorpus(files, 100).hits().equals(all.hits()), "repeat corpus search deterministic");
+        rejects(NullPointerException.class, () -> plan.findCorpus(null, 1));
+        rejects(NullPointerException.class, () -> plan.findCorpus(List.of("a"), 1, null));
+        rejects(NullPointerException.class, () -> plan.findCorpus(Arrays.asList("a", null), 1));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(List.of("a"), -1));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(List.of("a"),
+                MultiLiteralSearch.MAX_HITS + 1));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(
+                Collections.nCopies(MultiLiteralSearch.MAX_CORPUS_DOCUMENTS + 1, ""), 0));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(
+                List.of("a".repeat(MultiLiteralSearch.MAX_TEXT_UNITS + 1)), 0));
+        String maxInput = "a".repeat(MultiLiteralSearch.MAX_TEXT_UNITS);
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(
+                Collections.nCopies(5, maxInput), 0));
+        rejects(IllegalArgumentException.class, () -> plan.findCorpus(List.of("aba", maxInput), 1,
+                () -> { throw new IllegalArgumentException("cancel early"); }));
+        check(plan.findCorpus(List.of(""), 0).complete(), "empty source with zero cap is complete");
+
+        for (int trial = 0; trial < 1_400; trial++) {
+            int count = RANDOM.nextInt(10);
+            List<String> corpus = new ArrayList<>();
+            for (int i = 0; i < count; i++) corpus.add(randomText(56));
+            List<String> needles = new ArrayList<>();
+            int patterns = RANDOM.nextInt(1, 10);
+            for (int i = 0; i < patterns; i++) {
+                String literal;
+                if (i > 0 && RANDOM.nextInt(4) == 0) literal = needles.get(RANDOM.nextInt(i));
+                else if (!corpus.isEmpty() && !corpus.get(RANDOM.nextInt(corpus.size())).isEmpty()
+                        && RANDOM.nextBoolean()) {
+                    String source = corpus.get(RANDOM.nextInt(corpus.size()));
+                    literal = source.isEmpty() ? "a" : source.substring(0, Math.min(source.length(), 3));
+                } else literal = randomText(4) + "a";
+                needles.add(literal);
+            }
+            MultiLiteralSearch.Prepared prepared = MultiLiteralSearch.prepare(needles);
+            List<MultiLiteralSearch.CorpusHit> expected = bruteCorpus(corpus, needles);
+            for (int cap : new int[]{0, 1, 3, 15, 600}) {
+                var actual = prepared.findCorpus(corpus, cap);
+                check(actual.size() == Math.min(cap, expected.size())
+                        && actual.complete() == (expected.size() <= cap),
+                        "global corpus cap and completeness vs independent nested loops");
+                check(actual.hits().equals(expected.subList(0, Math.min(cap, expected.size()))),
+                        "UTF-16 file/pattern/offset and priority order vs independent oracle");
+                check(actual.scannedDocuments() <= corpus.size()
+                        && (actual.complete() ? actual.scannedDocuments() == corpus.size() : true),
+                        "scanned-file count is exact on full scan and bounded on truncated scan");
+            }
+        }
+    }
+
+    private static List<MultiLiteralSearch.CorpusHit> bruteCorpus(List<String> files, List<String> patterns) {
+        List<MultiLiteralSearch.CorpusHit> hits = new ArrayList<>();
+        for (int documentId = 0; documentId < files.size(); documentId++) {
+            for (MultiLiteralSearch.Hit hit : bruteMulti(files.get(documentId), patterns)) {
+                hits.add(new MultiLiteralSearch.CorpusHit(documentId, hit.patternId(), hit.start(), hit.end()));
+            }
+        }
+        return hits;
+    }
+
+    /** Independent JDK Matcher oracle for a compiled-once pattern and fresh per-file matcher. */
+    private static void regexCorpusSearch() throws Exception {
+        List<String> examples = List.of("", "ab", "a\r\nb", "\ud83d\ude00a\ud800", "aba\na");
+        var anchored = RegexMatcher.prepare("(?m)^a");
+        List<RegexMatcher.CorpusHit> expectedAnchors = oracleRegex(examples, "(?m)^a");
+        check(anchored.findCorpus(examples, 100).hits().equals(expectedAnchors)
+                        && anchored.findCorpus(examples, 100).scannedDocuments() == examples.size(),
+                "one authoritative compiled regex searches fresh matcher regions per file");
+        check(RegexMatcher.prepare("ab").findCorpus(List.of("a", "b"), 99).size() == 0,
+                "regex cannot match through adjacent file boundaries");
+        var end = RegexMatcher.prepare("$").findCorpus(List.of("", "a", ""), 100);
+        check(end.complete() && end.hits().equals(oracleRegex(List.of("", "a", ""), "$")),
+                "end anchor and zero-width groups obey JDK semantics per file");
+        var cap0 = RegexMatcher.prepare("a").findCorpus(List.of("", "a", "b"), 0);
+        check(!cap0.complete() && cap0.size() == 0 && cap0.scannedDocuments() == 2,
+                "zero-cap one-extra-match discovery stops at the precise file");
+        check(RegexMatcher.prepare("a").findCorpus(List.of("", ""), 0).complete(),
+                "zero cap is complete if no regex match exists");
+        check(RegexMatcher.prepare("a").findCorpus(List.of(), 0).complete(), "empty corpus complete");
+        rejects(UnsupportedOperationException.class, () -> end.hits().clear());
+        rejects(NullPointerException.class, () -> RegexMatcher.prepare(null));
+        rejects(PatternSyntaxException.class, () -> RegexMatcher.prepare("["));
+        rejects(NullPointerException.class, () -> anchored.findCorpus(null, 1));
+        rejects(NullPointerException.class, () -> anchored.findCorpus(List.of(""), 1, null));
+        rejects(NullPointerException.class, () -> anchored.findCorpus(Arrays.asList("x", null), 1));
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(List.of(""), -1));
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(List.of(""),
+                RegexMatcher.Prepared.MAX_MATCHES + 1));
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(
+                Collections.nCopies(RegexMatcher.Prepared.MAX_DOCUMENTS + 1, ""), 0));
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(
+                List.of("a".repeat(RegexMatcher.Prepared.MAX_DOCUMENT_UTF16 + 1)), 0));
+        String maximal = "a".repeat(RegexMatcher.Prepared.MAX_DOCUMENT_UTF16);
+        rejects(IllegalArgumentException.class, () -> anchored.findCorpus(
+                Collections.nCopies(5, maximal), 0));
+        rejects(IllegalArgumentException.class, () -> RegexMatcher.prepare(
+                "a".repeat(RegexMatcher.Prepared.MAX_REGEX_UTF16 + 1)).findCorpus(List.of(""), 0));
+        rejects(IllegalStateException.class, () -> anchored.findCorpus(List.of("a"), 1,
+                () -> { throw new IllegalStateException("cancel"); }));
+
+        String[] patterns = {"", "a", "a+", "^", "$", "(?m)^a", "(?=a)", "(?<=a)b",
+                "(ab)|a", "(?s).", "[\\s\\S]", "\\b", "\\X", "(?i)a", "a{0,3}"};
+        for (int trial = 0; trial < 1_100; trial++) {
+            String regex = patterns[RANDOM.nextInt(patterns.length)];
+            RegexMatcher.Prepared prepared = RegexMatcher.prepare(regex);
+            List<String> sources = new ArrayList<>();
+            int count = RANDOM.nextInt(7);
+            for (int i = 0; i < count; i++) sources.add(randomText(42));
+            List<RegexMatcher.CorpusHit> oracle = oracleRegex(sources, regex);
+            for (int maxHits : new int[]{0, 1, 2, 8, 500}) {
+                var actual = prepared.findCorpus(sources, maxHits);
+                check(actual.hits().equals(oracle.subList(0, Math.min(maxHits, oracle.size()))),
+                        "compiled-once corpus result matches fresh standard JDK matchers");
+                check(actual.complete() == (oracle.size() <= maxHits)
+                                && actual.size() == Math.min(maxHits, oracle.size()),
+                        "global match cap and extra-hit completeness match independent oracle");
+                int scanned = oracle.size() <= maxHits ? sources.size()
+                        : oracle.get(maxHits).documentId() + 1;
+                check(actual.scannedDocuments() == scanned, "exact document count at early global stop");
+            }
+        }
+    }
+
+    private static List<RegexMatcher.CorpusHit> oracleRegex(List<String> sources, String regex) {
+        List<RegexMatcher.CorpusHit> result = new ArrayList<>();
+        for (int document = 0; document < sources.size(); document++) {
+            var matcher = Pattern.compile(regex).matcher(sources.get(document));
+            while (matcher.find()) result.add(new RegexMatcher.CorpusHit(document, matcher.start(), matcher.end()));
+        }
+        return result;
+    }
+
+    private static void multiSearchAndSignatures() throws Exception {
+        var empty = MultiLiteralSearch.prepare(List.of());
+        check(empty.stateCount() == 1 && empty.find("ab", 0).complete(), "empty pattern set");
+        var duplicates = MultiLiteralSearch.prepare(List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"));
+        var expected = bruteMulti("aba\ud83d\ude00aba", List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"));
+        check(duplicates.find("aba\ud83d\ude00aba", 100).hits().equals(expected), "duplicate suffix and split surrogate");
+        check(duplicates.sha256().equals(MultiLiteralSearch.prepare(
+                List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00")).sha256()), "plan SHA replay");
+        check(duplicates.sha256().equals(MultiLiteralSearch.prepare(
+                List.of("aba", "ba", "aba", "a", "\ud83d", "\ude00"), () -> { }).sha256()),
+                "checkpointed plan preserves exact automaton fingerprint");
+        int[] preparationChecks = {0};
+        rejects(IllegalStateException.class, () -> MultiLiteralSearch.prepare(
+                List.of("x".repeat(12_000)), () -> {
+                    if (++preparationChecks[0] == 5) throw new IllegalStateException("cancel during trie construction");
+                }));
+        check(preparationChecks[0] == 5, "mid-construction checkpoint executes");
+        rejects(NullPointerException.class, () -> MultiLiteralSearch.prepare(List.of("a"), null));
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(List.of("")));
+        rejects(NullPointerException.class, () -> MultiLiteralSearch.prepare(Arrays.asList("a", null)));
+        rejects(IllegalArgumentException.class, () -> duplicates.find("a", -1));
+        rejects(IllegalArgumentException.class, () -> duplicates.find("a", MultiLiteralSearch.MAX_HITS + 1));
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(
+                java.util.Collections.nCopies(MultiLiteralSearch.MAX_PATTERNS + 1, "a")));
+        rejects(IllegalArgumentException.class, () -> MultiLiteralSearch.prepare(
+                List.of("a".repeat(MultiLiteralSearch.MAX_PATTERN_UNITS + 1))));
+        rejects(IllegalArgumentException.class, () -> empty.find(
+                "a".repeat(MultiLiteralSearch.MAX_TEXT_UNITS + 1), 0));
+        rejects(IllegalStateException.class, () -> duplicates.find("abc", 1, () -> {
+            throw new IllegalStateException("cancelled");
+        }));
+
+        String[] tokens = {"", "a", "b", "Aa", "BB", "\ud83d", "\ude00", "\u00e9", "\u0301"};
+        for (int trial = 0; trial < 450; trial++) {
+            String text = randomText(65);
+            int patternCount = RANDOM.nextInt(1, 12);
+            List<String> patterns = new ArrayList<>();
+            for (int i = 0; i < patternCount; i++) {
+                String pattern;
+                if (i > 0 && RANDOM.nextInt(4) == 0) pattern = patterns.get(RANDOM.nextInt(i));
+                else if (!text.isEmpty() && RANDOM.nextBoolean()) {
+                    int from = RANDOM.nextInt(text.length());
+                    int to = from + 1 + RANDOM.nextInt(Math.min(5, text.length() - from));
+                    pattern = text.substring(from, to);
+                } else pattern = randomText(5) + "a";
+                patterns.add(pattern);
+            }
+            var prepared = MultiLiteralSearch.prepare(patterns);
+            List<MultiLiteralSearch.Hit> oracle = bruteMulti(text, patterns);
+            for (int cap : new int[]{0, 1, 2, 7, 250}) {
+                var result = prepared.find(text, cap);
+                check(result.size() == Math.min(cap, oracle.size()), "multi-literal hit count");
+                check(result.complete() == (oracle.size() <= cap), "multi-literal completeness");
+                check(result.hits().equals(oracle.subList(0, Math.min(cap, oracle.size()))),
+                        "multi-literal independent UTF-16 oracle");
+                for (int i = 0; i < result.size(); i++) check(result.hit(i).equals(oracle.get(i)),
+                        "detached ordinal projection");
+            }
+        }
+
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(List.of("a"), 0));
+        rejects(NullPointerException.class, () -> TextSignatures.compute(List.of("a"), 4, null));
+        int[] hashingChecks = {0};
+        rejects(IllegalStateException.class, () -> TextSignatures.compute(
+                List.of("x".repeat(12_000)), 4, () -> {
+                    if (++hashingChecks[0] == 5) throw new IllegalStateException("cancel during SHA-256");
+                }));
+        check(hashingChecks[0] == 5, "mid-token UTF-16 hashing checkpoint executes");
+        int[] tokenizerChecks = {0};
+        check(WordTokenizer.words("Hello, 42 world", () -> tokenizerChecks[0]++)
+                .equals(WordTokenizer.words("Hello, 42 world")) && tokenizerChecks[0] >= 3,
+                "tokenizer checkpoint preserves BreakIterator semantics");
+        rejects(NullPointerException.class, () -> WordTokenizer.words("ok", null));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(List.of("a"), 129));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(
+                java.util.Collections.nCopies(TextSignatures.MAX_TOKENS + 1, "a"), 1));
+        rejects(NullPointerException.class, () -> TextSignatures.compute(Arrays.asList("a", null), 1));
+        rejects(IllegalArgumentException.class, () -> TextSignatures.compute(
+                List.of("a".repeat(TextSignatures.MAX_TOKEN_UNITS + 1)), 1));
+        var absent = TextSignatures.compute(List.of(), 32);
+        check(absent.tokenCount() == 0 && absent.distinctCount() == 0
+                && absent.simHash64() == 0 && absent.minHash64()[0] == -1L, "empty signatures");
+        check(TextSignatures.estimatedJaccard(absent, absent) == 1.0, "empty set similarity");
+        check(TextSignatures.estimatedJaccard(absent, TextSignatures.compute(List.of("x"), 32)) == 0.0,
+                "empty to nonempty similarity");
+        rejects(IllegalArgumentException.class, () -> TextSignatures.estimatedJaccard(
+                absent, TextSignatures.compute(List.of("x"), 16)));
+
+        for (int trial = 0; trial < 500; trial++) {
+            List<String> words = new ArrayList<>();
+            for (int i = RANDOM.nextInt(60); i > 0; i--) words.add(tokens[RANDOM.nextInt(tokens.length)]);
+            var first = TextSignatures.compute(words, 32);
+            var replay = TextSignatures.compute(words, 32);
+            check(first.tokenCount() == words.size(), "signature token count");
+            check(first.distinctCount() == Set.copyOf(words).size(), "signature distinct count");
+            check(first.simHash64() == replay.simHash64()
+                    && Arrays.equals(first.minHash64(), replay.minHash64()), "signature replay");
+            Collections.reverse(words);
+            var shuffled = TextSignatures.compute(words, 32);
+            check(first.simHash64() == shuffled.simHash64()
+                    && Arrays.equals(first.minHash64(), shuffled.minHash64()), "order independent signatures");
+            var unique = new ArrayList<>(new TreeSet<>(words));
+            check(Arrays.equals(first.minHash64(), TextSignatures.compute(unique, 32).minHash64()),
+                    "MinHash set semantics ignore multiplicity");
+            check(TextSignatures.hamming64(first, replay) == 0
+                    && TextSignatures.estimatedJaccard(first, replay) == 1.0, "identical signal semantics");
+            long[] projected = first.minHash64();
+            projected[0] ^= 1L;
+            check(!Arrays.equals(projected, first.minHash64()), "immutable primitive lanes");
+        }
+    }
+
+    private static void graphs() {
+        for (int vertices = 0; vertices <= 3; vertices++) {
+            for (int mask = 0; mask < (1 << (vertices * vertices)); mask++) {
+                List<TopologicalOrder.Arc> arcs = new ArrayList<>();
+                for (int from = 0; from < vertices; from++) for (int to = 0; to < vertices; to++)
+                    if ((mask & (1 << (from * vertices + to))) != 0) arcs.add(new TopologicalOrder.Arc(from, to));
+                topology(vertices, arcs);
+            }
+        }
+        for (int trial = 0; trial < 600; trial++) {
+            int vertices = 1 + RANDOM.nextInt(10);
+            List<TopologicalOrder.Arc> arcs = new ArrayList<>();
+            List<ShortestPaths.Edge> edges = new ArrayList<>();
+            for (int i = 0, count = RANDOM.nextInt(50); i < count; i++) {
+                int from = RANDOM.nextInt(vertices), to = RANDOM.nextInt(vertices);
+                arcs.add(new TopologicalOrder.Arc(from, to));
+                long weight = switch (RANDOM.nextInt(12)) {
+                    case 0 -> Long.MAX_VALUE;
+                    case 1 -> Long.MAX_VALUE - 1;
+                    default -> RANDOM.nextInt(20);
+                };
+                edges.add(new ShortestPaths.Edge(from, to, weight));
+            }
+            topology(vertices, arcs);
+            int source = RANDOM.nextInt(vertices);
+            check(Arrays.equals(ShortestPaths.distances(vertices, edges, source), bellman(vertices, edges, source)), "Dijkstra");
+            Collections.reverse(arcs); topology(vertices, arcs);
+        }
+        check(Arrays.equals(ShortestPaths.distances(3, List.of(new ShortestPaths.Edge(0, 1, Long.MAX_VALUE - 1),
+                new ShortestPaths.Edge(1, 2, 1)), 0), new long[]{0, Long.MAX_VALUE - 1, Long.MAX_VALUE}), "sentinel");
+        List<TopologicalOrder.Arc> path = new ArrayList<>();
+        for (int i = 0; i < 4095; i++) path.add(new TopologicalOrder.Arc(i, i + 1));
+        int[] order = TopologicalOrder.sort(4096, path);
+        for (int i = 0; i < order.length; i++) check(order[i] == i, "deep iterative topology");
+    }
+
+    private static void topology(int vertices, List<TopologicalOrder.Arc> arcs) {
+        // Independent repeated full edge scans; no CSR, priority queue or shared heap code.
+        boolean[] done = new boolean[vertices]; int[] expected = new int[vertices];
+        int written = 0;
+        while (written < vertices) {
+            int selected = -1;
+            for (int candidate = 0; candidate < vertices; candidate++) {
+                if (done[candidate]) continue;
+                boolean ready = true;
+                for (var arc : arcs) if (arc.to() == candidate && !done[arc.from()]) { ready = false; break; }
+                if (ready) { selected = candidate; break; }
+            }
+            if (selected < 0) break;
+            expected[written++] = selected; done[selected] = true;
+        }
+        try {
+            int[] actual = TopologicalOrder.sort(vertices, arcs);
+            check(written == vertices, "cycle accepted");
+            check(Arrays.equals(actual, expected), "lexicographic Kahn order");
+        } catch (IllegalArgumentException cyclic) {
+            check(written != vertices, "acyclic graph rejected");
+        }
+    }
+
+    private static long[] bellman(int vertices, List<ShortestPaths.Edge> edges, int source) {
+        BigInteger[] distance = new BigInteger[vertices]; distance[source] = BigInteger.ZERO;
+        for (int pass = 0; pass < vertices; pass++) {
+            boolean changed = false;
+            for (var edge : edges) {
+                if (distance[edge.from()] == null) continue;
+                BigInteger candidate = distance[edge.from()].add(BigInteger.valueOf(edge.weight()));
+                if (distance[edge.to()] == null || candidate.compareTo(distance[edge.to()]) < 0) {
+                    distance[edge.to()] = candidate; changed = true;
+                }
+            }
+            if (!changed) break;
+        }
+        long[] result = new long[vertices]; BigInteger maximum = BigInteger.valueOf(Long.MAX_VALUE);
+        for (int i = 0; i < vertices; i++)
+            result[i] = distance[i] == null || distance[i].compareTo(maximum) >= 0 ? Long.MAX_VALUE : distance[i].longValueExact();
+        return result;
+    }
+
+    private static void postings() throws Exception {
+        String[] vocabulary = {"", "a", "b", "Aa", "BB", "\u00e9", "\ud83d\ude00", "\ud83d"};
+        for (int trial = 0; trial < 400; trial++) {
+            List<List<String>> documents = new ArrayList<>();
+            Map<String, TreeSet<Integer>> expected = new TreeMap<>();
+            for (int id = 0, count = RANDOM.nextInt(20); id < count; id++) {
+                List<String> document = new ArrayList<>();
+                for (int j = 0, words = RANDOM.nextInt(30); j < words; j++) {
+                    String term = vocabulary[RANDOM.nextInt(vocabulary.length)];
+                    document.add(term); expected.computeIfAbsent(term, key -> new TreeSet<>()).add(id);
+                }
+                documents.add(document);
+            }
+            InvertedIndex index = InvertedIndex.build(documents);
+            check(index.terms().equals(expected.keySet()), "term set");
+            for (String term : vocabulary) {
+                int[] wanted = expected.getOrDefault(term, new TreeSet<>()).stream().mapToInt(Integer::intValue).toArray();
+                check(Arrays.equals(index.documents(term), wanted), "posting list");
+                int[] wantedFrequency = Arrays.stream(wanted)
+                        .map(id -> Collections.frequency(documents.get(id), term)).toArray();
+                check(Arrays.equals(index.termFrequencies(term), wantedFrequency), "primitive posting frequency");
+                check(index.documentFrequency(term) == wanted.length, "document frequency");
+                Map<Integer, Integer> visited = new TreeMap<>();
+                index.forEachPosting(term, visited::put);
+                for (int at = 0; at < wanted.length; at++) {
+                    check(visited.get(wanted[at]) == wantedFrequency[at], "primitive posting visitor");
+                }
+                int[] returned = index.documents(term);
+                if (returned.length > 0) returned[0] = -1;
+                check(Arrays.equals(index.documents(term), wanted), "detached posting");
+                int[] frequencies = index.termFrequencies(term);
+                if (frequencies.length > 0) frequencies[0] = -1;
+                check(Arrays.equals(index.termFrequencies(term), wantedFrequency), "detached term frequency");
+            }
+            check(index.documentCount() == documents.size(), "document-count lane");
+            check(index.totalTokenCount() == documents.stream().mapToInt(List::size).sum(),
+                    "total token lane");
+            for (int id = 0; id < documents.size(); id++) {
+                check(index.documentLength(id) == documents.get(id).size(), "document-length lane");
+            }
+            for (List<String> document : documents) document.clear();
+            check(index.terms().equals(expected.keySet()), "input containers detached");
+            rejects(UnsupportedOperationException.class, () -> index.terms().remove("missing"));
+            rejects(NullPointerException.class, () -> index.terms().contains(null));
+        }
+        rejects(NullPointerException.class, () -> InvertedIndex.build(List.of(Arrays.asList("a", null))));
+        rejects(UnsupportedOperationException.class, () -> NGrams.count("abc", 1).put("x", 1));
+        rejects(UnsupportedOperationException.class, () -> TermFrequency.count(List.of("a")).clear());
+        check(Arrays.stream(InvertedIndex.class.getDeclaredFields()).noneMatch(
+                field -> Map.class.isAssignableFrom(field.getType())), "no retained map entry structure");
+    }
+
+    /** Oracle uses independent per-document term scans, never the index or its posting lanes. */
+    private static List<Bm25Ranker.Hit> bruteBm25(List<? extends List<String>> documents,
+                                                  List<String> query, Bm25Ranker.Parameters parameters) {
+        int documentCount = documents.size();
+        int tokens = documents.stream().mapToInt(List::size).sum();
+        double average = documentCount == 0 ? 0.0d : tokens / (double) documentCount;
+        double[] scores = new double[documentCount];
+        for (String term : new TreeSet<>(query)) {
+            int df = 0;
+            for (List<String> document : documents) if (document.contains(term)) df++;
+            if (df == 0) continue;
+            double idf = StrictMath.log1p((documentCount - df + 0.5d) / (df + 0.5d));
+            for (int id = 0; id < documentCount; id++) {
+                int frequency = Collections.frequency(documents.get(id), term);
+                if (frequency == 0) continue;
+                double normalized = parameters.k1() * (1.0d - parameters.b()
+                        + parameters.b() * documents.get(id).size() / average);
+                scores[id] += idf * frequency * (parameters.k1() + 1.0d) / (frequency + normalized);
+            }
+        }
+        List<Bm25Ranker.Hit> ranked = new ArrayList<>();
+        for (int id = 0; id < scores.length; id++) {
+            if (scores[id] > 0.0d) ranked.add(new Bm25Ranker.Hit(id, scores[id]));
+        }
+        ranked.sort(Comparator.comparingDouble(Bm25Ranker.Hit::score).reversed()
+                .thenComparingInt(Bm25Ranker.Hit::documentId));
+        return ranked;
+    }
+
+    private static void ranking() throws Exception {
+        Bm25Ranker.Parameters defaults = Bm25Ranker.Parameters.defaults();
+        check(defaults.k1() == 1.2d && defaults.b() == 0.75d, "published BM25 parameters");
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(-0.1d, 0.75d));
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(Double.NaN, 0.75d));
+        rejects(IllegalArgumentException.class, () -> new Bm25Ranker.Parameters(1.2d, 1.01d));
+        rejects(NullPointerException.class, () -> Bm25Ranker.prepare(List.of(Arrays.asList("a", null))));
+        rejects(IllegalArgumentException.class, () -> Bm25Ranker.prepare(
+                Collections.nCopies(Bm25Ranker.MAX_DOCUMENTS + 1, List.of("a"))));
+        var empty = Bm25Ranker.prepare(List.of());
+        check(empty.rank(List.of("a"), 0).complete() && empty.rank(List.of("a"), 10).size() == 0,
+                "empty corpus");
+        var identical = Bm25Ranker.prepare(List.of(List.of("a"), List.of("a")));
+        check(identical.rank(List.of("a"), 2).hits().get(0).documentId() == 0
+                && identical.rank(List.of("a"), 2).hits().get(1).documentId() == 1,
+                "stable equal-score document ordinal");
+        rejects(IllegalArgumentException.class, () -> identical.rank(List.of("a"), -1));
+        rejects(NullPointerException.class, () -> identical.rank(Arrays.asList("a", null), 1));
+        rejects(IllegalStateException.class, () -> Bm25Ranker.prepare(
+                List.of(List.of("a")), defaults, () -> { throw new IllegalStateException("cancel prepare"); }));
+        rejects(IllegalStateException.class, () -> identical.rank(List.of("a"), 1,
+                () -> { throw new IllegalStateException("cancel scoring"); }));
+
+        String[] vocabulary = {"", "a", "b", "beta", "\ud83d\ude00", "\ud83d", "\u0301"};
+        for (int trial = 0; trial < 360; trial++) {
+            List<List<String>> documents = new ArrayList<>();
+            for (int id = 0, count = RANDOM.nextInt(12); id < count; id++) {
+                List<String> document = new ArrayList<>();
+                for (int token = 0, words = RANDOM.nextInt(35); token < words; token++) {
+                    document.add(vocabulary[RANDOM.nextInt(vocabulary.length)]);
+                }
+                documents.add(document);
+            }
+            List<String> query = new ArrayList<>();
+            for (int id = 0, count = RANDOM.nextInt(10); id < count; id++) {
+                query.add(vocabulary[RANDOM.nextInt(vocabulary.length)]);
+            }
+            Bm25Ranker.Parameters parameters = trial % 3 == 0
+                    ? new Bm25Ranker.Parameters(0.0d, 1.0d)
+                    : trial % 3 == 1 ? new Bm25Ranker.Parameters(2.5d, 0.0d) : defaults;
+            Bm25Ranker.Prepared prepared = Bm25Ranker.prepare(documents, parameters);
+            List<Bm25Ranker.Hit> oracle = bruteBm25(documents, query, parameters);
+            check(prepared.sha256().matches("[0-9a-f]{64}"), "exact corpus fingerprint");
+            check(prepared.sha256().equals(Bm25Ranker.prepare(documents, parameters).sha256()),
+                    "deterministic corpus fingerprint");
+            for (int cap : new int[]{0, 1, 3, 10, 100}) {
+                Bm25Ranker.Result ranked = prepared.rank(query, cap);
+                check(ranked.size() == Math.min(cap, oracle.size()), "BM25 bounded top-K size");
+                check(ranked.totalMatches() == oracle.size() && ranked.complete() == (oracle.size() <= cap),
+                        "BM25 exact completeness and total-matches count");
+                for (int id = 0; id < ranked.size(); id++) {
+                    Bm25Ranker.Hit actual = ranked.hit(id), wanted = oracle.get(id);
+                    check(actual.documentId() == wanted.documentId(), "BM25 independent ranking ordinal");
+                    check(Math.abs(actual.score() - wanted.score()) <= 1.0e-11d,
+                            "BM25 independent numeric oracle");
+                }
+            }
+            var stable = prepared.rank(query, 100);
+            Collections.reverse(query);
+            check(stable.hits().equals(prepared.rank(query, 100).hits()),
+                    "BM25 order-independent query set and summation");
+            for (List<String> document : documents) document.clear();
+            check(stable.hits().equals(prepared.rank(query, 100).hits()), "BM25 detached input lists");
+        }
+    }
+
+    private static void numeric() throws Exception {
+        for (long value : new long[]{0, 1, 127, 128, 16383, 16384, Integer.MAX_VALUE, Long.MAX_VALUE}) varint(value);
+        for (int i = 0; i < 10000; i++) varint(RANDOM.nextLong() & Long.MAX_VALUE);
+        for (byte[] bad : new byte[][]{{}, {(byte) 0x80}, {(byte) 0x80, 0}, {0, 1},
+                {(byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80,
+                        (byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80}})
+            rejects(IllegalArgumentException.class, () -> VarInts.decode(bad));
+        for (int trial = 0; trial < 1000; trial++) {
+            long a = RANDOM.nextInt(-15, 16), b = a + RANDOM.nextInt(12);
+            long c = RANDOM.nextInt(-15, 16), d = c + RANDOM.nextInt(12);
+            var first = new Intervals.Span(a, b); var second = new Intervals.Span(c, d);
+            boolean expected = false;
+            for (long point = -15; point < 28; point++) if (a <= point && point < b && c <= point && point < d) expected = true;
+            check(Intervals.intersects(first, second) == expected, "half-open overlap");
+            check(Intervals.conflicting(List.of(first), second).equals(expected ? List.of(0) : List.of()), "conflicts");
+        }
+        check(!Intervals.intersects(new Intervals.Span(Long.MIN_VALUE, 0), new Intervals.Span(0, Long.MAX_VALUE)), "extreme interval");
+        RunningStatistics empty = new RunningStatistics();
+        check(empty.count() == 0 && Double.isNaN(empty.mean()) && Double.isNaN(empty.populationVariance()), "empty statistics");
+        for (int trial = 0; trial < 200; trial++) {
+            double[] samples = new double[1 + RANDOM.nextInt(100)];
+            RunningStatistics statistics = new RunningStatistics();
+            double sum = 0, min = Double.POSITIVE_INFINITY, max = Double.NEGATIVE_INFINITY;
+            for (int i = 0; i < samples.length; i++) {
+                double value = RANDOM.nextInt(-1000, 1001);
+                samples[i] = value; statistics.accept(value); sum += value; min = Math.min(min, value); max = Math.max(max, value);
+            }
+            double mean = sum / samples.length, variance = 0;
+            for (double value : samples) variance += (value - mean) * (value - mean);
+            variance /= samples.length;
+            check(statistics.count() == samples.length && Math.abs(statistics.mean() - mean) < 1e-9, "Welford mean");
+            check(Math.abs(statistics.populationVariance() - variance) < 1e-7, "Welford variance");
+            check(statistics.min() == min && statistics.max() == max, "extrema");
+            long count = statistics.count();
+            rejects(IllegalArgumentException.class, () -> statistics.accept(Double.NaN));
+            check(statistics.count() == count, "rejected sample unchanged");
+        }
+    }
+
+    private static void varint(long value) {
+        byte[] encoded = VarInts.encode(value);
+        check(VarInts.decode(encoded) == value, "varint roundtrip");
+        BigInteger oracle = BigInteger.ZERO;
+        for (int i = 0; i < encoded.length; i++)
+            oracle = oracle.add(BigInteger.valueOf(encoded[i] & 127).shiftLeft(7 * i));
+        check(oracle.equals(BigInteger.valueOf(value)), "LEB128 value");
+        check(encoded.length == Math.max(1, (64 - Long.numberOfLeadingZeros(value) + 6) / 7), "minimal LEB128");
+    }
+
+    private record Offered(Object value, double score, long sequence) { }
+
+    private static void priority() throws Exception {
+        StablePriorityQueue<Object> actual = new StablePriorityQueue<>();
+        PriorityQueue<Offered> oracle = new PriorityQueue<>(Comparator.comparingDouble(Offered::score).thenComparingLong(Offered::sequence));
+        for (int i = 0; i < 30000; i++) {
+            if (oracle.isEmpty() || RANDOM.nextInt(5) < 3) {
+                Object value = new Object();
+                double score = switch (RANDOM.nextInt(12)) {
+                    case 0 -> -0.0;
+                    case 1 -> 0.0;
+                    case 2 -> Double.MAX_VALUE;
+                    case 3 -> -Double.MAX_VALUE;
+                    default -> RANDOM.nextInt(-20, 21);
+                };
+                actual.offer(value, score); oracle.add(new Offered(value, score, i));
+            } else check(actual.poll() == oracle.remove().value(), "stable priority identity");
+            check(actual.size() == oracle.size(), "queue size");
+        }
+        while (!oracle.isEmpty()) check(actual.poll() == oracle.remove().value(), "priority drain");
+        check(actual.poll() == null && actual.size() == 0, "empty priority");
+        rejects(NullPointerException.class, () -> actual.offer(null, 0));
+        rejects(IllegalArgumentException.class, () -> actual.offer(new Object(), Double.NaN));
+        rejects(IllegalArgumentException.class, () -> actual.offer(new Object(), Double.POSITIVE_INFINITY));
+        check(actual.size() == 0, "refused offers atomic");
+        check(Arrays.stream(StablePriorityQueue.class.getDeclaredFields()).noneMatch(
+                field -> java.util.Collection.class.isAssignableFrom(field.getType())), "no retained Entry queue");
+    }
+
+    private static void refusals() throws Exception {
+        rejects(NullPointerException.class, () -> UnicodeNormalizer.nfkc(null));
+        rejects(NullPointerException.class, () -> WordTokenizer.words(null));
+        rejects(PatternSyntaxException.class, () -> RegexMatcher.find("[", "", 0));
+        rejects(IllegalArgumentException.class, () -> RegexMatcher.find("a", "a", -1));
+        rejects(IllegalArgumentException.class, () -> ExactSearch.positions("", "", -1));
+        rejects(IllegalArgumentException.class, () -> NGrams.count("x", 0));
+        rejects(IllegalArgumentException.class, () -> EditDistance.within("", "", -1));
+        rejects(IllegalArgumentException.class, () -> VarInts.encode(-1));
+        rejects(IllegalArgumentException.class, () -> VarInts.decode(null));
+        rejects(IllegalArgumentException.class, () -> TopologicalOrder.sort(-1, List.of()));
+        rejects(IndexOutOfBoundsException.class, () -> TopologicalOrder.sort(1, List.of(new TopologicalOrder.Arc(0, 1))));
+        rejects(IllegalArgumentException.class, () -> ShortestPaths.distances(2, List.of(new ShortestPaths.Edge(0, 1, -1)), 0));
+        rejects(IllegalArgumentException.class, () -> new Intervals.Span(1, 0));
+        rejects(NullPointerException.class, () -> Sha256.hex(null));
+    }
+}
