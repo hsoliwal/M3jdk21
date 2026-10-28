@@ -89,6 +89,13 @@ public final class M3TreeWindowPlan {
 	 * {@link #retired(int)} lists the top-most native rows to delete.
 	 */
 	public void plan (int count, int [] parentIds, int [] childIndices, int [] physicalParents) {
+		preparePlan (count, parentIds, childIndices, physicalParents);
+		// A direct plan has no owned Residency snapshot for commit(long[]).
+		// Invalidate an older binding only after successful admission.
+		recyclePendingCoordinates ();
+	}
+
+	private void preparePlan (int count, int [] parentIds, int [] childIndices, int [] physicalParents) {
 		if (count < 0 || parentIds.length < count || childIndices.length < count || physicalParents.length < count) {
 			throw new IllegalArgumentException ("window arrays");
 		}
@@ -182,7 +189,7 @@ public final class M3TreeWindowPlan {
 			bufferedPhysicalParents [entry] = next.physicalParent (entry);
 		}
 		// Any invalid candidate leaves the prior pending commit lanes untouched.
-		plan (count, bufferedParentIds, bufferedChildIndices, bufferedPhysicalParents);
+		preparePlan (count, bufferedParentIds, bufferedChildIndices, bufferedPhysicalParents);
 		int [] previousParents = lastParentIds, previousChildren = lastChildIndices;
 		int [] previousPhysical = lastPhysicalParents;
 		lastParentIds = bufferedParentIds;
