@@ -1,0 +1,23 @@
+M3 Jackson ObjectMapper JMOD companion
+
+Copyright 2026 Hitesh Soliwal and contributors.
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
+Original author / project lead: Hitesh Soliwal.
+Project stewardship: Synexia.
+
+Independently authored M3/Synexia source and this optional receiving adaptation
+are licensed under Apache License 2.0, supplied in M3-APACHE-2.0.txt.
+The project name identifies stewardship and does not assert assignment of
+contributors' copyright to a separate legal entity.
+
+Adaptations receive existing MIndexAST primitive lanes/ordered hash-consing and
+M3File snapshot/hash atoms from hsoliwal/com.synexia revision
+50f48cbbe11f17fb8dc209bac3812f8940a1e267. The receiver changes package names,
+document lifetime, String coordinates, hash domain and bounded JSON projection.
+See PROVENANCE.json for the exact original sources and excluded capabilities.
+
+Jackson annotations/core/databind and FastDoubleParser retain their original
+licenses, notices and authorship. Those complete notices remain embedded in
+their corresponding source-built modules and are copied beside this notice.
+This companion, recipe, or generated pack does not relicense Jackson,
+FastDoubleParser, OpenJDK, OpenRewrite or other third-party material.
