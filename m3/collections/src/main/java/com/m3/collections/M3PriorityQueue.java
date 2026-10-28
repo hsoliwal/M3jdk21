@@ -61,15 +61,41 @@ public final class M3PriorityQueue<E> extends AbstractQueue<E>
         identities = new long[capacity];
         this.comparator = comparator;
     }
+    /** Like java.util.PriorityQueue: a SortedSet or priority-queue source passes its ordering on. */
     public M3PriorityQueue(Collection<? extends E> items) {
-        this(Objects.requireNonNull(items, "items").size(), null);
+        this(Objects.requireNonNull(items, "items").size(), sourceComparator(items));
         addAll(items);
+    }
+    // Atom ported from the PR #1330 variant (retained under qualification/master-landing-20261028/retained-variants).
+    @SuppressWarnings("unchecked")
+    private static <E> Comparator<? super E> sourceComparator(Collection<? extends E> source) {
+        if (source instanceof java.util.SortedSet<?> sorted) return (Comparator<? super E>) sorted.comparator();
+        if (source instanceof java.util.PriorityQueue<?> queue) return (Comparator<? super E>) queue.comparator();
+        if (source instanceof M3PriorityQueue<?> queue) return (Comparator<? super E>) queue.comparator();
+        return null;
     }
     public Comparator<? super E> comparator() { return comparator; }
     public int capacity() { return heap.length; }
     @Override public int size() { return size; }
     public long occurrenceIdAt(int slot) { return identities[Objects.checkIndex(slot, size)]; }
     public int stateAt(int slot) { return states[Objects.checkIndex(slot, size)] & 255; }
+    /**
+     * Checks the three lanes (test use, package-private): each slot below the size holds a payload, the LIVE flag
+     * and an occurrence identity in 1..sequence, in heap order; every slot from the size on is cleared.
+     */
+    void verifyInvariants() {
+        if (size < 0 || size > heap.length || states.length != heap.length || identities.length != heap.length) {
+            throw new AssertionError("lane lengths");
+        }
+        for (int i = 0; i < heap.length; i++) {
+            boolean live = i < size;
+            if (live != (heap[i] != null) || live != ((states[i] & LIVE) != 0) || (live
+                    ? identities[i] <= 0 || identities[i] > sequence : identities[i] != 0 || states[i] != 0)) {
+                throw new AssertionError("lane state at " + i);
+            }
+            if (live && i > 0 && compare(get((i - 1) >>> 1), get(i)) > 0) throw new AssertionError("heap order at " + i);
+        }
+    }
     private static void userBits(int bits) {
         if ((bits & ~0xfe) != 0) throw new IllegalArgumentException("flags must use bits 1..7");
     }
