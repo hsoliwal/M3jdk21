@@ -1,5 +1,7 @@
 /*
  * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
+ * Modified 2026-10-27: accept both canonical scalar leaf representations as flat
+ * fact oracles; retain tuple rejection and every fact/content comparison.
  *
  * @test
  * @summary Verify every primitive M3StringFacts lane composes exactly across tuples and ranges
@@ -125,7 +127,8 @@ public class M3StringFactsCompositionTest {
         Object flatBody = body(flat);
         Object flatOwner = M3_OWNER.get(flatBody);
         checks++;
-        if (!flatOwner.getClass().getName().equals("java.lang.M3StringAtom")) {
+        if (!flatOwner.getClass().getName().equals("java.lang.M3StringAtom")
+                && !flatOwner.getClass().getName().equals("java.lang.M3StringImmediate")) {
             throw new AssertionError(label + " flat oracle is not a scalar atom: " + flatOwner.getClass());
         }
 
