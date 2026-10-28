@@ -1,0 +1,18 @@
+path	sha256	git_blob	mode	pr	note
+m3/backports/ALGORITHM_CATALOGUE.tsv	b809c397be30235836be6851fd2230101d7b7e41b09cae2c0861f33634806139	18d65118ee2584f7148a35e5b34e5b6d4c334aec	100644	1559	PR version, not live
+m3/docs/m3-runtime-invariants.tsv	d994981c1e458ffadf8b97e6e34d642ef08c25f7a22d35ce52929a5ab6d0fe8e	5f45c3d613fd222e1d7180bacc2614e5aafdc86f	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/DESIGN.md	c0a148b612cb9c190bacb601c67319c095cb89969266886b77d3a87f3ef1c766	666256fecc4c29a7eddad01dcba4ead7154f69b2	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/FOSS_REUSE_DECISIONS.tsv	70b0403bbd96ff2dfbcfff61a4c4b9004811e31e383ba1b7f25056d5d25fc0b3	aaec5d34fceaf53d44cfd13818bc66462667e367	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/build.py	68311969076b5e7989cb1b1f093a70a3d800ea1e1f482811f0813ced6512ae8a	668c7abb048ce864d9ff4ef8dfc735e4ee065ec0	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/real-providers/pom.xml	ecc433ac3c297ec8a59740d3d395595b0565495195eb8dc016d93bf065d58428	7d0cdf096f3e5d990c8f47f5592788746aab1754	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3JdtBinaryScopeContract.java	343445c298bfa7fce2ac1536646896e712eb9c4b38577b2669d7e7a96bc0ebcc	bf1cd9db3868265d5d4291216ecdba2811e7f461	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3JdtRewriteAgent.java	c61bf94775e17e9f78376f141779351c3df82181f0fe042141b5fe0775ae072d	dba7d5176a1ec2d2f8368471f7c0cbbf11d43a41	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3JdtRewriteContract.java	289b2ce549a639ac9bd545f5efb253b0beabfca978eb5dbcb6fc2d13b582e935	e2abcd7c557292f9a48f4488b5a4fedc97bd72ba	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java	6fc053bbcc13d63eb94e1b293a4a1267273a91daf02877733afba25d3035921c	6ec780df5a989fb3f5ef1126818ae9e454846eba	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	aafdafc72b5eed78696ab8ae87498b5f6e0c45da13d337e8f5f5fc5678c000f4	6801f31756f5964fc585e6cf2d0721e1ad13301c	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTIndexOwnershipContract.java	2212ed89f9acb1f09b1b76dde41a0769eb54ed369aa67212467b5e6af4d08319	0563de9abafb72e0edfb998af367dfdd099b9d8c	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTIndexOwnershipProbe.java	d18e9e7829a66d3a9158b562cdc9495d6ce4be49b674dad6ab0f14ae66964a71	9d4a8faeb46a4deb230cb1e093dbd281a1ba0739	100644	1559	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTScopeContract.java	b4b1a446ba3d50007bc1c73d2221b0226ebb526adc2eac46d331d973130e6be8	15be3d59a1daed2a75a25636b3dd2755b14ca6bf	100644	1559	PR version, not live
+src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java	d91f1fb49dfcc9b4f6725fb2e9bbf5a0ba999be9703a1cf49cf0ceef231fe119	a5df1500dd7c377d0414418fb9ae272354132cd0	100644	1559	PR version, not live
+src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java	23872fb74bff7ee78250f0327c62765d95cdf4caa2621e84cff2b286eda52e7e	93d76ff4949809e2351da525eb203db0305a67e4	100644	1559	PR version, not live
+src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java	fd9f06d977c53de98aa5e9330bed0ed2615d511db235554771de64a847b5aa25	282aa1e0596c15c18443ea1d6d7bc44923daa84e	100644	1559	PR version, not live
