@@ -8735,8 +8735,8 @@
       },
       {
         "id": "m3.collections.evicting-queue.owner-naming",
-        "kind": "internal-relocation-proposal",
-        "status": "proposed",
+        "kind": "pending",
+        "status": "pending",
         "reason": "The existing owned Object[] ring and stable long-mask implementation has a third-party-labelled M3 namespace. Review a semantic M3 owner namespace; do not confuse this real implementation with generated throw-only provider scaffolds or with installed Java SE collection integration.",
         "sources": [
           {
@@ -8872,7 +8872,7 @@
         "sync": {
           "source_revision": "4bd27a6fc78ba3f7ca019125c096c33d8a324cee",
           "target_revision": "4bd27a6fc78ba3f7ca019125c096c33d8a324cee",
-          "direction": "same-repository internal name review",
+          "direction": "traceability-only",
           "target_adaptations": [],
           "pending": [
             "Confirm canonical package ownership and public API versus internal implementation designation",
@@ -8886,7 +8886,7 @@
           "previous_targets": [],
           "supersedes": []
         },
-        "source_state": "implemented-proving-module-unpromoted",
+        "source_state": "implemented",
         "observation": "The 20261018 source-bound finite proofs concern existing owner behavior and its own wire identity. Local Maven/CI and installed M3JDK runtime acceptance are outstanding; historical performance report says size-1024 owner was slower on all seven examined workloads."
       },
       {
