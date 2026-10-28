@@ -124,3 +124,12 @@ and linked Resources locations. [CAPABILITIES.md](qualification/port-20261018/CA
 and [QUALIFICATION.md](qualification/port-20261018/QUALIFICATION.md) define the
 functional acceptance scope, exact executed artifacts, and outstanding gates.
 
+
+## Provider defaults and database mounts
+
+[M3FS provider defaults](vfs/PROVIDER_DEFAULTS.md) describes the shared content
+operations, the small VFS template-hook surface, installed NIO `Path` integration,
+and the `m3db:` provider over the existing native SQLite owner. Ordinary local
+paths keep their existing behavior. Nondefault paths borrow their caller-owned
+filesystem. The current compiled provider profile and optional provider admission
+remain explicit; an extension point does not establish remote qualification.

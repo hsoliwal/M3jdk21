@@ -3,6 +3,7 @@
 package com.m3.fs.verification;
 
 import com.m3.fs.M3FS;
+import com.m3.fs.DatabaseFileProvider;
 import com.m3.fs.M3ContentId;
 import com.m3.fs.M3FsProgress;
 import com.m3.fs.M3ObjectKind;
@@ -26,10 +27,13 @@ import com.m3.fs.vfs.provider.GenericURLFileName;
 import com.m3.fs.vfs.provider.url.UrlFileName;
 import com.m3.fs.vfs.provider.url.UrlFileProvider;
 import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.nio.file.FileSystems;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -181,12 +185,35 @@ public final class M3VfsImageProbe {
         require(!core.hasProvider("http") && !core.hasProvider("https"), "temporary URL context escaped into core");
     }
 
+    private static void contentDefaultsAndNioPath() throws Exception {
+        AtomicLong worked = new AtomicLong();
+        MFileContent content = ((MFileContent) () -> new ByteArrayInputStream(PAYLOAD))
+                .progressify(M3FsProgress.of(() -> false, worked::addAndGet));
+        require(Arrays.equals(PAYLOAD, content.readAllBytes(PAYLOAD.length)), "bounded content default");
+        require(worked.get() == PAYLOAD.length, "default preserves configured monitor");
+        var runtime = FileSystems.getFileSystem(URI.create("jrt:/"));
+        Path notice = runtime.getPath("/modules/jdk.m3fs/META-INF/m3fs-legal/commons-vfs2/NOTICE.txt");
+        String source;
+        try (var entries = MFiles.from(notice).stream()) {
+            MFile file = entries.findFirst().orElseThrow();
+            require(file.uri().equals(notice.toUri()), "native NIO URI preserved");
+            require(file.readString(8192, StandardCharsets.UTF_8).contains("Apache Commons VFS"),
+                    "linked-module NIO content");
+            source = file.sourceAddress();
+        }
+        require(runtime.isOpen(), "caller NIO filesystem survives session close");
+        try (var entries = MFiles.from(source).stream()) {
+            require(entries.findFirst().orElseThrow().readString(8192, StandardCharsets.UTF_8)
+                    .contains("Apache Commons VFS"), "NIO source address reopens same live instance");
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         require(args.length == 1, "fixture directory required");
         Path fixtures = Path.of(args[0]);
         for (Class<?> type : new Class<?>[] {M3FS.class, MFiles.class, MFile.class, M3VFS.class,
                 MFileContent.class, MFileStreams.class, MFileObservation.class, MFileDelta.class,
-                MFileChangeSource.class, MFileCapture.class, MFileShadow.class}) {
+                MFileChangeSource.class, MFileCapture.class, MFileShadow.class, DatabaseFileProvider.class}) {
             require("jdk.m3fs".equals(type.getModule().getName()), "module identity: " + type);
         }
         for (String module : Set.of("commons.logging", "org.apache.commons.lang3", "org.apache.commons.io",
@@ -199,7 +226,7 @@ public final class M3VfsImageProbe {
         try {
             ((StandardFileSystemManager) manager).setLogger(LogFactory.getLog(M3VfsImageProbe.class));
             urlNames(manager);
-            for (String scheme : Set.of("file", "ram", "zip", "jar", "gz", "bz2", "tar", "tgz", "tbz2", "tmp", "res", "jrt")) {
+            for (String scheme : Set.of("file", "ram", "zip", "jar", "gz", "bz2", "tar", "tgz", "tbz2", "tmp", "res", "jrt", "m3db")) {
                 require(manager.hasProvider(scheme), "compiled provider not registered: " + scheme);
             }
             for (String scheme : Set.of("ftp", "ftps", "http", "https", "http3", "http3s", "http4", "http4s", "http5", "http5s", "sftp")) {
@@ -235,6 +262,7 @@ public final class M3VfsImageProbe {
                         "content equality evidence must identify full observed bytes");
             }
             selectedArchive(fixtures);
+            contentDefaultsAndNioPath();
         } finally {
             M3VFS.close();
         }
@@ -246,6 +274,8 @@ public final class M3VfsImageProbe {
         System.out.println("COMPOSED_CONTENT_CAPTURE=PASS");
         System.out.println("OBSERVATION_DELTA=PASS");
         System.out.println("SELECTED_ARCHIVE_LAYER=PASS");
+        System.out.println("CONTENT_DEFAULTS_AND_NIO_PATH=PASS");
+        System.out.println("DATABASE_PROVIDER_REGISTRATION=PASS");
         System.out.println("NATIVE_SQLITE_PROBE=NOT_RUN");
         System.out.println("SOURCE_BUILT_M3JDK21=NOT_RUN");
     }
