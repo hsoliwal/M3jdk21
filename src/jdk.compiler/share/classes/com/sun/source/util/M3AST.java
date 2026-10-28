@@ -39,8 +39,10 @@ import javax.lang.model.element.TypeElement;
  * for reusing attributed facts across classpaths, toolchains, or processors.
  * Existing M3 file/AST cache providers own any bounded persistent snapshots.
  * An enabled handle seals the exact character input once per parse, retaining
- * only URI/digest metadata after the parse callbacks; later source requests
- * reject edits made since parsing.
+ * URI/digest metadata and a weak reference to verified immutable text after
+ * the parse callbacks. Later source requests still reread the source and reject
+ * edits made since parsing. Exact equal text may reuse its verified digest;
+ * an expired reference falls back to digest verification.
  *
  * <p>Register all consumers before starting the task. Closing this handle
  * removes its listener and releases compiler references. Task.call() closes

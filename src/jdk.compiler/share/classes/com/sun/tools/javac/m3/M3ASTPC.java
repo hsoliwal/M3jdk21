@@ -60,6 +60,7 @@ import com.sun.tools.javac.util.Names;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.lang.ref.WeakReference;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -762,9 +763,9 @@ public final class M3ASTPC implements Plugin {
         if (session == null || session.closed || text == null) return text;
         try {
             M3AST.Source source = retained(file.toUri(), text.toString());
-            Seal seal = new Seal(source.text().length(), source.utf16Sha256());
+            Seal seal = new Seal(source);
             Seal previous = session.seals.putIfAbsent(source.uri(), seal);
-            if (previous != null && !previous.equals(seal))
+            if (previous != null && !previous.sameSeal(seal))
                 throw new IllegalStateException("M3AST source changed within compilation: " + source.uri());
             session.activeSource = source;
             session.captures++;
@@ -777,7 +778,23 @@ public final class M3ASTPC implements Plugin {
         }
     }
 
-    private record Seal(int length, String digest) { }
+    /** Verified immutable source may be reused without retaining its payload strongly. */
+    private static final class Seal extends WeakReference<String> {
+        private final int length;
+        private final String digest;
+
+        Seal(M3AST.Source source) {
+            super(source.text());
+            length = source.text().length();
+            digest = source.utf16Sha256();
+        }
+
+        int length() { return length; }
+        String digest() { return digest; }
+        boolean sameSeal(Seal other) {
+            return length == other.length && digest.equals(other.digest);
+        }
+    }
 
     private static M3AST.Source retained(URI uri, String text) {
         try {
@@ -1022,10 +1039,16 @@ public final class M3ASTPC implements Plugin {
                         String text = tree.getSourceFile().getCharContent(false).toString();
                         if (text.length() != seal.length())
                             throw new IOException("M3AST source changed since parsing: " + uri);
-                        M3AST.Source candidate = retained(uri, text);
-                        if (!candidate.utf16Sha256().equals(seal.digest()))
-                            throw new IOException("M3AST source changed since parsing: " + uri);
-                        source = candidate;
+                        String verified = seal.get();
+                        if (text.equals(verified)) {
+                            source = new M3AST.Source(uri, text, seal.digest());
+                        } else {
+                            M3AST.Source candidate = retained(uri, text);
+                            if (!candidate.utf16Sha256().equals(seal.digest()))
+                                throw new IOException("M3AST source changed since parsing: " + uri);
+                            session.seals.put(uri, new Seal(candidate));
+                            source = candidate;
+                        }
                     }
                 } catch (IOException failure) {
                     sourceFailure = failure;

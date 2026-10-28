@@ -1,0 +1,46 @@
+{
+  "build/libm3_collections_mask.so": {
+    "bytes": 24616,
+    "sha256": "ed39910b00550798709b42baf4b22c7e0f0c8b35e8f959f578c1254709a94c66"
+  },
+  "build/headers/com_m3_collections_M3IndexMaskCompactor.h": {
+    "bytes": 2620,
+    "sha256": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81"
+  },
+  "build/classes/com/m3/collections/M3IndexMaskCompactor$Backend.class": {
+    "bytes": 1228,
+    "sha256": "ba88b56db816f917e5d868c8b609c99726013335832bfd513f36e196f689c3e2"
+  },
+  "build/classes/com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class": {
+    "bytes": 654,
+    "sha256": "74cdffe45a9e312bbad6508070a0e190dc0a861b39986cede40119b440736691"
+  },
+  "build/classes/com/m3/collections/M3IndexMaskCompactor$NativePositionMasks.class": {
+    "bytes": 667,
+    "sha256": "45af34df0ff8a4630912c44d9a2d44e9132fcd26a341c444f0bab38526df68d1"
+  },
+  "build/classes/com/m3/collections/M3IndexMaskCompactor$NativePositions.class": {
+    "bytes": 654,
+    "sha256": "caff4e3777b9f13e904484e13621a72e825b674bcb63693816fe33f24d6db952"
+  },
+  "build/classes/com/m3/collections/M3IndexMaskCompactor$NativeRange.class": {
+    "bytes": 642,
+    "sha256": "8b852aec3c752f52fae573e5811700d2b477c531f746ec0acaaa23330003cef0"
+  },
+  "build/classes/com/m3/collections/M3IndexMaskCompactor.class": {
+    "bytes": 5753,
+    "sha256": "b575827c4a385f992bc245f553ef44d307f564b8b04f0922ba94d833bb97ce9f"
+  },
+  "build/classes/com/m3/collections/M3IndexMaskRangeNativeTest.class": {
+    "bytes": 6296,
+    "sha256": "ca05d7d303403d0103f8ffc6647b6395dc74e5b627964d51a51c1d857c823efc"
+  },
+  "build/classes/com/m3/collections/M3MaskPositionAtomsTest.class": {
+    "bytes": 7344,
+    "sha256": "debab7331ed7c56651e8d3e07cb8cc036367bd5c62828cff58f7e021068a3e78"
+  },
+  "build/classes/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.class": {
+    "bytes": 2103,
+    "sha256": "5feaad55148329656e5931c108bc7ad8afcbf62f7f38cb904553d5e00f058f06"
+  }
+}
