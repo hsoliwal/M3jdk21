@@ -1,0 +1,31 @@
+{
+  "schema": "M3JDK21_M3FS_NAME_INDEX_V1",
+  "product": "M3JDK21 one integrated Java21/HotSpot/JNI SDK",
+  "base_product_pr": 1824,
+  "original_owner": "com.m3.fs.M3DirectoryTable",
+  "recipe": "com.synexia.m3.M3FsNamePrefixIndex20261022",
+  "data_planes": [
+    "original char[] names",
+    "original int[] offset boundaries",
+    "original state kind flags",
+    "retained int[] sorted physical row indexes"
+  ],
+  "api_additions": [
+    "M3DirectoryTable.nameIndex(int)",
+    "M3DirectoryTable.NameIndex.size/row/rows/entries/rowsWithPrefix/entriesWithPrefix"
+  ],
+  "unchanged": [
+    "M3FS native SQLite JNI row wire",
+    "M3DirectoryTable.decode/fromEntries/stat/entries/selectedRows/rowsBySize",
+    "M3File source SHA capture/scratch and original NIO provider authority"
+  ],
+  "proof": {
+    "exact_source_before_after": true,
+    "isolated_java21_checks": 779223,
+    "owning_junit": "NOT_RUN",
+    "canonical_openrewrite": "NOT_RUN",
+    "jni_ctest": "NOT_RUN",
+    "hotspot": "NOT_RUN",
+    "benchmarks": "NOT_MEASURED"
+  }
+}
