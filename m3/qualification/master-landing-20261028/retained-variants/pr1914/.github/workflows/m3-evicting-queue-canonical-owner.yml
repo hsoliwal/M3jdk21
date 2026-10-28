@@ -1,0 +1,94 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 canonical evicting queue naming candidate
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/evicting-queue/**'
+      - 'm3/tooling/name-contract/receipts/evicting-queue-canonical-owner.json'
+      - '.github/workflows/m3-evicting-queue-canonical-owner.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-abi-and-serialization:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/collections/implementations/evicting-queue/**
+            m3/collections/implementations/guava-evicting-queue/**
+            m3/tooling/name-contract/receipts/evicting-queue-canonical-owner.json
+            .github/workflows/m3-evicting-queue-canonical-owner.yml
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Enforce exact legacy preimage, canonical postimage, and source-only relocation
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java').read_bytes()
+          new = Path('m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java').read_bytes()
+          assert hashlib.sha256(old).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
+          assert hashlib.sha256(new).hexdigest() == 'e4d4f9fa4e260d25df4622aaba2d0b5fb88410828df0b8ef3e046edcc85861e5'
+          normalized = new.replace(
+              b'package com.m3.collections.queue;',
+              b'package com.m3.collections.guava;')
+          normalized = normalized.replace(
+              b'* <p>This is the vendor-neutral M3 owner with its own serialization class identity.\n * The earlier package spelling remains a separate historical compatibility class.',
+              b'* <p>This is a mapped M3 owner, with its own serialization class identity.\n * It is not a subtype of the final Guava concrete class.')
+          old_capacity = b'        int slots = maxSize == Integer.MAX_VALUE ? maxSize : maxSize + 1;'
+          new_capacity = b'        int slots = maxSize >= 15 ? 16 : maxSize + 1;'
+          assert old.count(old_capacity) == 1
+          assert new.count(new_capacity) == 1
+          normalized = normalized.replace(new_capacity, old_capacity)
+          old_render = b'            // The provider renders through a distinct internal owner: outer self is not special.\n            text.append(cursor.next());'
+          new_render = b'            // Preserve direct self-reference rendering per JDK Collection semantics.\n            Object value = cursor.next();\n            text.append(value == this ? "(this Collection)" : value);'
+          assert old.count(old_render) == 1
+          assert new.count(new_render) == 1
+          normalized = normalized.replace(new_render, old_render)
+          old_growth_target = b'        long target = oldLength + jump;'
+          new_growth_target = b'        long target = Math.min(oldLength + jump, (long) maxSize + 1);'
+          old_growth_fallback = b'        return minimum > ARRAY_LIMIT ? Integer.MAX_VALUE : ARRAY_LIMIT;'
+          new_growth_fallback = b'        return (int) Math.min(minimum > ARRAY_LIMIT ? Integer.MAX_VALUE : ARRAY_LIMIT,\n                (long) maxSize + 1);'
+          assert old.count(old_growth_target) == 1 and new.count(new_growth_target) == 1
+          assert old.count(old_growth_fallback) == 1 and new.count(new_growth_fallback) == 1
+          normalized = normalized.replace(new_growth_target, old_growth_target)
+          normalized = normalized.replace(new_growth_fallback, old_growth_fallback)
+          old_jump = b'        long jump = oldLength < 64 ? (long) oldLength + 2 : oldLength / 2L;'
+          new_jump = b'        long jump = oldLength < 64 ? (long) oldLength + 2 : (long) oldLength;'
+          assert old.count(old_jump) == 1 and new.count(new_jump) == 1
+          normalized = normalized.replace(new_jump, old_jump)
+          assert normalized == old
+          print('Sealed canonical implementation differs only by admitted capacity, direct-self, bounded-growth and geometric-growth atoms')
+          PY
+      - name: Build both standalone M3JDK21 Java 21 queue modules
+        run: |
+          mvn -B -ntp -f m3/collections/implementations/guava-evicting-queue/pom.xml test
+          mvn -B -ntp -f m3/collections/implementations/evicting-queue/pom.xml package
+      - name: Preserve legacy wire hash and compare canonical behavior and normalized binary stream
+        run: |
+          OLD=m3/collections/implementations/guava-evicting-queue/target
+          NEW=m3/collections/implementations/evicting-queue/target
+          java -cp "$OLD/classes:$OLD/test-classes" com.m3.collections.guava.M3EvictingQueueContractProbe
+          java -Xmx64m -cp "$OLD/classes:$NEW/classes:$NEW/test-classes" com.m3.collections.queue.M3EvictingQueueCanonicalContractProbe
+          javap -p -classpath "$NEW/classes" com.m3.collections.queue.M3EvictingQueue | python3 -c 'import sys; data=sys.stdin.read(); assert "public final class com.m3.collections.queue.M3EvictingQueue" in data and "private void copyRingInto(java.lang.Object[], int)" in data'
+      - name: Enforce vendor-neutral canonical Maven binary and retained license manifests
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          jar = Path('m3/collections/implementations/evicting-queue/target/m3-evicting-queue-0.1.0-SNAPSHOT.jar')
+          with ZipFile(jar) as archive:
+              names = set(archive.namelist())
+              assert 'com/m3/collections/queue/M3EvictingQueue.class' in names
+              assert not any(name.startswith('com/m3/collections/guava/') for name in names)
+              assert not any(name.startswith('com/google/common/') for name in names)
+              assert {'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/THIRD_PARTY_NOTICES.md'} <= names
+          print('Canonical Maven jar contains only M3 owner and attributed license resources')
+          PY
