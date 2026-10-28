@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: |
           printf '%s  %s\n' \
-            'ce27f58fa068a61feb6e74d6067a5751241f41688b63e87085ecae34a1eeba6d' 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java' \
+            '5b05afa28e4a8ed2d6090b1ac8ff5f1c89a334bb3b93c94ae8038669e72c5fbb' 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java' \
             '346b1b23baf27fdb9e5fcfd0609bf1897c7bdaa8fe4b17cb22732b0602b6babd' 'm3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftContract.java' \
             'c90296c22e121e0d7934bb74ccc30121438cbe47dd498a1f7ae489e6dcb0b679' 'm3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftTest.java' | sha256sum -c -
       - name: Compile actual M3 owner and existing primitive index map
