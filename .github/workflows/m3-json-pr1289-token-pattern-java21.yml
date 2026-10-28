@@ -1,0 +1,46 @@
+name: M3 Jackson PR1289 token pattern Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTTokenPattern.java'
+      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3TokenRegex.java'
+      - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTPatternCoreReceiptContract.java'
+      - '.github/workflows/m3-json-pr1289-token-pattern-java21.yml'
+  workflow_dispatch:
+jobs:
+  strict-java21-patterns:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Original SHA-pinned token matcher sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson
+          test "$(git hash-object "$root/M3ASTTokenPattern.java")" = "67b3222bb46fa34af4467ab5c5afee49596a940e"
+          test "$(git hash-object "$root/M3TokenRegex.java")" = "25cfbcd9b2203a77622c24b20a59c38b45aecefa"
+      - name: Compile original source plus core and run actual matcher contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/tooling/module-packs/jackson
+          classes="${RUNNER_TEMP}/m3-ast-patterns"
+          mkdir -p "$classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \
+            "$root/src/main/java/jdk/m3/jackson/M3JsonLimits.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3AST.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3ASTAtom.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3ASTBuilder.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3ASTPool.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3ASTTokenPattern.java" \
+            "$root/src/main/java/jdk/m3/jackson/M3TokenRegex.java" \
+            "$root/src/test/java/jdk/m3/jackson/M3ASTCoreReceiptContract.java" \
+            "$root/src/test/java/jdk/m3/jackson/M3ASTPatternCoreReceiptContract.java"
+          java -cp "$classes" jdk.m3.jackson.M3ASTCoreReceiptContract
+          java -cp "$classes" jdk.m3.jackson.M3ASTPatternCoreReceiptContract
