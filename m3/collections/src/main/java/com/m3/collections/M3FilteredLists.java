@@ -218,10 +218,27 @@ public final class M3FilteredLists {
 
         @Override public E get(int index) { return backing.get(physical(index, false)); }
 
+        /**
+         * Replace the owner slot through its supported mutation method.
+         * A List may permit ListIterator.set but refuse indexed set(int,E);
+         * a snapshot iterator (such as CopyOnWriteArrayList) needs the
+         * indexed fallback. Neither path retains a payload copy.
+         */
+        private E setPhysical(int physicalIndex, E value) {
+            ListIterator<E> setter = backing.listIterator(physicalIndex);
+            E previous = setter.next();
+            try {
+                setter.set(value);
+                return previous;
+            } catch (UnsupportedOperationException unsupported) {
+                return backing.set(physicalIndex, value);
+            }
+        }
+
         @Override public E set(int index, E value) {
             int sourceIndex = physical(index, false);
             requireAccepted(value);
-            return backing.set(sourceIndex, value);
+            return setPhysical(sourceIndex, value);
         }
 
         @Override public void add(int index, E value) {
@@ -409,7 +426,7 @@ public final class M3FilteredLists {
                 live();
                 if (lastPhysical < 0) throw new IllegalStateException("set without delivered element");
                 requireAccepted(value);
-                backing.set(lastPhysical, value);
+                setPhysical(lastPhysical, value);
                 discardProbes();
             }
 
