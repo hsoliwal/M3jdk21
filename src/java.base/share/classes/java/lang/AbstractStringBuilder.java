@@ -387,7 +387,11 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     @Override
     public char charAt(int index) {
-        m3EnsureFlat();
+        M3StringBuilderLane lane = m3Lane;
+        if (lane != null) {
+            checkIndex(index, count + lane.units);
+            return lane.charAt(value, coder, index);
+        }
         checkIndex(index, count);
         if (isLatin1()) {
             return (char)(value[index] & 0xff);
@@ -417,7 +421,19 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             sequence.
      */
     public int codePointAt(int index) {
-        m3EnsureFlat();
+        M3StringBuilderLane lane = m3Lane;
+        if (lane != null) {
+            int length = count + lane.units;
+            checkIndex(index, length);
+            char first = lane.charAt(value, coder, index);
+            if (Character.isHighSurrogate(first) && index + 1 < length) {
+                char second = lane.charAt(value, coder, index + 1);
+                if (Character.isLowSurrogate(second)) {
+                    return Character.toCodePoint(first, second);
+                }
+            }
+            return first;
+        }
         int count = this.count;
         byte[] value = this.value;
         checkIndex(index, count);
@@ -449,7 +465,19 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *            of this sequence.
      */
     public int codePointBefore(int index) {
-        m3EnsureFlat();
+        M3StringBuilderLane lane = m3Lane;
+        if (lane != null) {
+            int i = index - 1;
+            checkIndex(i, count + lane.units);
+            char second = lane.charAt(value, coder, i);
+            if (Character.isLowSurrogate(second) && i > 0) {
+                char first = lane.charAt(value, coder, i - 1);
+                if (Character.isHighSurrogate(first)) {
+                    return Character.toCodePoint(first, second);
+                }
+            }
+            return second;
+        }
         int i = index - 1;
         checkIndex(i, count);
         if (isLatin1()) {
