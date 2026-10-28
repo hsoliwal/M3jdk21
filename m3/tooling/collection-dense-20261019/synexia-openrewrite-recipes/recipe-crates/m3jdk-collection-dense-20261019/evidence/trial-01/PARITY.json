@@ -1,0 +1,8 @@
+{
+  "scope": "three cumulative production-file passes",
+  "api_identical": true,
+  "jni_header_identical": true,
+  "contract_trace_identical": true,
+  "full_product_image": "PENDING",
+  "other_platforms": "PENDING"
+}

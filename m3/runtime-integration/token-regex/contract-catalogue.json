@@ -1,0 +1,308 @@
+{
+  "schema": "M3_TOKEN_REGEX_CONTRACT_CATALOGUE_V1",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "purpose": "Category evaluation and receiver qualification linked by the canonical M3 algorithm catalogue; no additional source-authority registry.",
+  "canonical_recipe": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/",
+  "target_base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "problem_categories": [
+    "TOKEN_SEQUENCE_CONTROL_FLOW_AND_CAPTURE_REUSE",
+    "TOKEN_SEQUENCE_REGEX_ATTRIBUTE_PREDICATES_AND_CAPTURES",
+    "TOKEN_INDEX_SNAPSHOT_AND_RESULT_STATE",
+    "LEXICAL_TOKEN_RULES_BEFORE_SEQUENCE_MATCHING"
+  ],
+  "pass": "ADDITIVE_STANDARD_JAVA_BASE_UTILITY_OWNERS_EXISTING_CHARACTER_CONTRACTS_UNCHANGED",
+  "owners": [
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenPattern.java",
+      "public_owner": "java.util.regex.TokenPattern<T>",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "category": "TOKEN_SEQUENCE_CONTROL_FLOW_AND_CAPTURE_REUSE",
+      "atoms": "behavioral-atoms.json",
+      "sha256": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+      "public_owner": "java.util.regex.TokenMatcher<T>",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "category": "TOKEN_INDEX_SNAPSHOT_AND_RESULT_STATE",
+      "atoms": "behavioral-atoms.json",
+      "sha256": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate": "square-trex",
+      "problem_category": "TOKEN_SEQUENCE_REGEX_ATTRIBUTE_PREDICATES_AND_CAPTURES",
+      "sources": [
+        {
+          "repository": "square/t-rex",
+          "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+          "path": "README.md",
+          "blob_sha1": "da03223482a4d4c4ee8e83f895839e7b90b27a22",
+          "url": "https://github.com/square/t-rex/blob/c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3/README.md"
+        },
+        {
+          "repository": "square/t-rex",
+          "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+          "path": "src/main/maven/trex-1.0.0.pom",
+          "blob_sha1": "1f7441291252d10d0d1c49a1d3c97e994319a45b",
+          "url": "https://github.com/square/t-rex/blob/c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3/src/main/maven/trex-1.0.0.pom"
+        },
+        {
+          "repository": "square/t-rex",
+          "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+          "path": "src/main/antlr/com/squareup/trex/TRex.g4",
+          "blob_sha1": "a431e7c865739be30e4bdade61fce70ca31d3051",
+          "url": "https://github.com/square/t-rex/blob/c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3/src/main/antlr/com/squareup/trex/TRex.g4"
+        },
+        {
+          "repository": "square/t-rex",
+          "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+          "path": "src/main/java/com/squareup/trex/Pattern.java",
+          "blob_sha1": "ce9b8837f388383e8355ebef5df9e867d64eb233",
+          "url": "https://github.com/square/t-rex/blob/c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3/src/main/java/com/squareup/trex/Pattern.java"
+        },
+        {
+          "repository": "square/t-rex",
+          "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+          "path": "src/main/java/com/squareup/trex/Matcher.java",
+          "blob_sha1": "aa625278e7ba8c8305fda30e75342ed1326f201a",
+          "url": "https://github.com/square/t-rex/blob/c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3/src/main/java/com/squareup/trex/Matcher.java"
+        },
+        {
+          "repository": "square/t-rex",
+          "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+          "path": "src/main/java/com/squareup/trex/TRexInputToken.java",
+          "blob_sha1": "01f7af7369c61b49155a59a00a0b58adc25f7764",
+          "url": "https://github.com/square/t-rex/blob/c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3/src/main/java/com/squareup/trex/TRexInputToken.java"
+        },
+        {
+          "repository": "square/t-rex",
+          "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+          "path": "src/main/java/com/squareup/trex/RegexPattern.java",
+          "blob_sha1": "b41864ee11936852caedf273c6be00cba1f2e24b",
+          "url": "https://github.com/square/t-rex/blob/c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3/src/main/java/com/squareup/trex/RegexPattern.java"
+        },
+        {
+          "repository": "square/t-rex",
+          "commit": "c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3",
+          "path": "src/main/java/com/squareup/trex/SequencePattern.java",
+          "blob_sha1": "4dc911a03dcd70a12cb4252e4bca71ce9ad195b1",
+          "url": "https://github.com/square/t-rex/blob/c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3/src/main/java/com/squareup/trex/SequencePattern.java"
+        }
+      ],
+      "license": "Apache-2.0; README and deployment POM, not MIT",
+      "dependencies": "Java 11 source/target; generated ANTLR parser and antlr4-runtime [4.7,); optional Stanford CoreNLP [1.2.0,)",
+      "contract": "Caller supplies tokens with nullable String-valued attributes. Sequence operators, ordered search/backtracking, alternative and same-span conjunction, greedy/reluctant repetition and captures. Attribute regex calls java.util.regex.Pattern on one attribute. Does not lex source text.",
+      "complexity": "Backtracking endpoint iterators and branch state stack; no demonstrated linear worst-case bound or measured Java 21 throughput. Caller token attribute access can occur repeatedly.",
+      "java21_fit": "No full donor build run. Uses reflection for Pattern.namedGroups; this is public in target Java 21, so do not assert module-access failure. Unbounded ANTLR dependency needs qualification before any convergence build.",
+      "decision": "REFERENCE_ONLY_FOR_GPL_RECEIVER; full grammar is not supplied by existing Synexia glob; choose target-owned Pattern.Node/Matcher for bounded typed token builders, no Apache expression pasted into GPL owner",
+      "qualification": "SOURCE_REVIEWED_NOT_DONOR_RUNTIME_QUALIFIED"
+    },
+    {
+      "candidate": "nltk-token-searcher",
+      "problem_category": "TOKEN_SEQUENCE_REGEX_DELIMITER_ENCODING",
+      "sources": [
+        {
+          "repository": "nltk/nltk",
+          "commit": "323da98f37388421c22e279587cf75e375b99efb",
+          "path": "nltk/text.py",
+          "blob_sha1": "a8805937f97e98e79de6838059ad4995acdeed59",
+          "url": "https://github.com/nltk/nltk/blob/323da98f37388421c22e279587cf75e375b99efb/nltk/text.py"
+        },
+        {
+          "repository": "nltk/nltk",
+          "commit": "323da98f37388421c22e279587cf75e375b99efb",
+          "path": "LICENSE.txt",
+          "blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+          "url": "https://github.com/nltk/nltk/blob/323da98f37388421c22e279587cf75e375b99efb/LICENSE.txt"
+        }
+      ],
+      "license": "Apache-2.0",
+      "contract": "Concatenates angle-bracket token markers without escaping token payload; rewrites token expression then splits reported marker spans. Current pinned source uses redos/third-party regex with compile guards and a timeout, rather than older rendered documentation bare re.findall.",
+      "counterexample": {
+        "tokens_one": [
+          "a><b"
+        ],
+        "tokens_two": [
+          "a",
+          "b"
+        ],
+        "same_encoding": "<a><b>",
+        "implication": "Encoding cannot distinguish one token from two and cannot guarantee arbitrary token boundaries."
+      },
+      "complexity": "Includes serialization allocation plus regex engine work; source timeout is not a proof of a linear bound. No runtime benchmark performed.",
+      "java21_fit": "Python implementation, not a Java or JNI donor",
+      "decision": "REJECT_DELIMITER_ENCODING; retain only problem-category/discovery reference",
+      "qualification": "SOURCE_REVIEWED_ENCODING_COLLISION_PROVED_NO_NLTK_ENGINE_RUN"
+    },
+    {
+      "candidate": "ucalc-tokens",
+      "problem_category": "LEXICAL_TOKEN_RULES_BEFORE_SEQUENCE_MATCHING",
+      "sources": [
+        {
+          "url": "https://www.ucalc.com/doc/license/",
+          "observed_utc": "2026-10-18",
+          "kind": "official EULA"
+        },
+        {
+          "url": "https://www.ucalc.com/doc/reference/patterns/introduction/tokens/",
+          "observed_utc": "2026-10-18",
+          "kind": "official token semantics"
+        },
+        {
+          "url": "https://www.ucalc.com/doc/reference/classes/ucalc-tokens/add/add-string-tokentype-string-int-regexgrammar-int32/",
+          "observed_utc": "2026-10-18",
+          "kind": "official token rule API"
+        }
+      ],
+      "license": "Proprietary SDK EULA with conditional community/commercial eligibility and restrictions on redistribution and competing standalone interfaces; not an open-source code donor",
+      "contract": "Token definitions precede pattern matching and can classify words, numbers, string literals and brackets. Lexical state supplies structural awareness; named captures alone do not.",
+      "decision": "CONCEPT_REFERENCE_ONLY_NO_CODE_PORT_OR_REDISTRIBUTION",
+      "qualification": "OFFICIAL_DOCUMENTATION_REVIEWED_NO_SOURCE_ACCESS_OR_RUNTIME_QUALIFICATION"
+    },
+    {
+      "candidate": "synexia-token-glob",
+      "problem_category": "TOKEN_ID_GLOB_FRONTIER",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "bc49cd7610bf5974f6baa31ba64e6885f4117528",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTokenPattern.java",
+          "blob_sha1": "91c0a202ab84f1ed06bb5d234bc72f6f612bd04a",
+          "url": "https://github.com/hsoliwal/com.synexia/blob/bc49cd7610bf5974f6baa31ba64e6885f4117528/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTokenPattern.java"
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "bc49cd7610bf5974f6baa31ba64e6885f4117528",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTokenizer.java",
+          "blob_sha1": "6f5f0ce85c13562e96cc80a8a575942b6894740d",
+          "url": "https://github.com/hsoliwal/com.synexia/blob/bc49cd7610bf5974f6baa31ba64e6885f4117528/synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTokenizer.java"
+        }
+      ],
+      "license": "Apache-2.0",
+      "contract": "Literal resolver tokens, question mark for exactly one token, star for any token sequence and escaping. Boolean matches/lookingAt/find, resolver identity admission. No capture groups, match spans, arbitrary attribute grammar or Java lexical safety.",
+      "complexity": "Long frontier up to 63 atoms; BitSet correctness path beyond, per-token state iteration. Required token signal can reject candidates; no measured receiver threshold.",
+      "java21_fit": "Existing convergence owner depends on resolver, tokenizer and progress monitor; not a public JDK owner",
+      "decision": "REUSE_VALIDATED_DESIGN_KNOWLEDGE; DO_NOT_RELABEL_AS_FULL_TREX_OR_CHARACTER_PATTERN",
+      "qualification": "SOURCE_REVIEWED_CENSUS_PIN_MATCHED"
+    },
+    {
+      "candidate": "synexia-exact-token-precompute",
+      "problem_category": "EXACT_TOKEN_KMP_DFA_COMPOSITION",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "bc49cd7610bf5974f6baa31ba64e6885f4117528",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexTokenPattern.java",
+          "blob_sha1": "71bc0a094fe5471fc6323a190ae873ccda285eab",
+          "url": "https://github.com/hsoliwal/com.synexia/blob/bc49cd7610bf5974f6baa31ba64e6885f4117528/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexTokenPattern.java"
+        }
+      ],
+      "license": "SPDX Apache-2.0 AND MIT; source credits William Fiset KMP recurrence and references retained donor/license documents",
+      "contract": "Exact long-token matching, compact alphabet/KMP failure/DFA, limits on dense transition table and work, composable summaries and repeated composition. Does not parse regex, normalize text or capture arbitrary regex groups.",
+      "complexity": "Dense state-by-alphabet memory with explicit admission limits; exact-token scans and logarithmic repeated summary composition. No new receiver benchmark here.",
+      "decision": "REFERENCE_FOR_EXACT_TOKEN_SUBPROBLEM; NOT_A_FULL_TOKEN_REGEX_OWNER",
+      "qualification": "SOURCE_REVIEWED_CENSUS_PIN_MATCHED"
+    },
+    {
+      "candidate": "integrated-pattern-node-matcher",
+      "problem_category": "TOKEN_SEQUENCE_CONTROL_FLOW_AND_CAPTURE_REUSE",
+      "sources": [
+        {
+          "repository": "hsoliwal/M3JDK21",
+          "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+          "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+          "blob_sha1": "252e46fb57e824f30688eac3600bae9480511fc8",
+          "sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+          "url": "https://github.com/hsoliwal/M3JDK21/blob/2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49/src/java.base/share/classes/java/util/regex/Pattern.java"
+        },
+        {
+          "repository": "hsoliwal/M3JDK21",
+          "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+          "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+          "blob_sha1": "b31fde7511bbdd3a139b330d85b66cae9a739224",
+          "sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+          "url": "https://github.com/hsoliwal/M3JDK21/blob/2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49/src/java.base/share/classes/java/util/regex/Matcher.java"
+        }
+      ],
+      "license": "Existing target GPL-2.0-only WITH Classpath-exception-2.0 owner",
+      "contract": "One object-predicate consuming transition per token; fresh JDK node graphs own repetition, branches and captures. Snapshot inputs preserve nulls and identity. Visible failed-result validity is separate from engine search positions. Existing character Pattern/Matcher source remains unchanged.",
+      "decision": "SELECTED_AND_IMPLEMENTED_BOUNDED_TYPED_BUILDER_RECEIVER",
+      "qualification": "FRESH_20261019_STRICT_JAVA21_COMPILE_DOCLINT_MIXED_AND_INTERPRETER_PASSED; FULL_FORK_IMAGE_PENDING",
+      "complexity": "O(pattern occurrences) graph per compilation and O(input tokens) snapshot. Existing JDK backtracking time and stack characteristics; possible exponential matching. No performance claim.",
+      "upstream_expression": "Group quantifier orchestration adapted from GPL2+Classpath Pattern.group0 with Oracle notice retained. Existing engine algorithms are called directly."
+    }
+  ],
+  "behavioral_contracts": {
+    "unit": "One input list element, including null. No serialization, lexer or token identity encoding.",
+    "predicate": "Predicate<? super T> receives original token; stable within an operation and may be repeated. Original exceptions propagate; no matcher reentry.",
+    "snapshot": "Defensive shallow input copy; immutable list views retain token identity and nulls. Caller list and shared toArray output cannot mutate the snapshot.",
+    "composition": "Sequence order and ordered alternatives; fresh graph/group/local slots for every occurrence. Empty sequence is allowed; zero alternatives rejected.",
+    "repetition": "Inclusive nonnegative bounds; GREEDY, RELUCTANT, POSSESSIVE; Integer.MAX_VALUE means unbounded. Existing group algorithms own nullable and capture selection.",
+    "captures": "Left-to-right preorder numbering, enclosing before contents, unique ASCII letter/alphanumeric names. Empty participating groups and absent groups distinguished.",
+    "coordinates": "Absolute half-open token indices; absent start/end=-1 and list/span=null.",
+    "state": "Every completed false matching operation invalidates visible captures, including exhausted empty search. Invalid region/find(start) and failed snapshot reset preserve prior state. Reset after callback exceptions.",
+    "search": "Nonoverlapping results; zero-length result advances next start by one token. Explicit find(start) restores full input region.",
+    "scope": "No textual regex parser, lexer, backreference/lookaround builders, complete T-Rex grammar compatibility or new JNI callback path.",
+    "threading": "Independent mutable matchers; shared patterns require thread-safe predicates and literal values."
+  },
+  "counterexample_refinements": [
+    {
+      "witness": "empty().matcher([x]); true@[0,0], true@[1,1], find=false",
+      "finding": "Existing Matcher early exhaustion may retain first while clearing group slots.",
+      "selected_fix": "Independent TokenMatcher.matched validity and requireMatch; engine positions unchanged.",
+      "verification": "Full accessor invalidation, null-name ordering, repeated exhaustion and range-failure preservation."
+    },
+    {
+      "witness": "(a|ab){0,4}b on abb and nested nullable captures",
+      "finding": "Arbitrary branch repetition must retain internal alternative backtracking.",
+      "selected_fix": "Pattern.group0 GroupCurly versus Loop/LazyLoop decisions, Branch optional and Curly possessive.",
+      "verification": "Generated typed-vs-character AST differentials and independent language oracle."
+    },
+    {
+      "witness": [
+        [
+          "a><b"
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      "finding": "Unescaped delimiter serialization conflates different token sequences.",
+      "selected_fix": "Direct predicate on original snapshot element at one token index.",
+      "verification": "Delimiter and supplementary payloads, toString throws and 65537 object identities."
+    }
+  ],
+  "qualification": {
+    "status": "PASSED_ISOLATED_JAVA21_PATCH_MODULE",
+    "execution_date": "2026-10-19",
+    "verifier": "m3/runtime-integration/token-regex/verify.py",
+    "test": "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java",
+    "modes": [
+      "mixed",
+      "-Xint"
+    ],
+    "assertions_per_mode": 522729,
+    "differential_cases_per_mode": 7586,
+    "independent_nonpossessive_language_cases_per_mode": 6867,
+    "strict_compile": "-Xlint:all -Werror",
+    "javadoc": "-Werror -Xdoclint:all,-missing",
+    "source_sha256": {
+      "src/java.base/share/classes/java/util/regex/TokenPattern.java": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a",
+      "src/java.base/share/classes/java/util/regex/TokenMatcher.java": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2",
+      "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java": "6d9a127c3f1159a1323a7ce6129c25d91eb6d4486016bf0ac0dc05d0f43cd56f"
+    },
+    "performance": "NOT_BENCHMARKED_NO_SPEEDUP_CLAIM",
+    "full_fork_image": "PENDING",
+    "recovery": "Product hashes exactly match prior qualification. Test reconstructed and all commands freshly executed after reset; historical raw receipts not reconstructed."
+  },
+  "payload_licenses": {
+    "src/java.base/share/classes/java/util/regex/TokenPattern.java": "GPL-2.0-only WITH Classpath-exception-2.0",
+    "src/java.base/share/classes/java/util/regex/TokenMatcher.java": "GPL-2.0-only WITH Classpath-exception-2.0",
+    "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java": "GPL-2.0-only",
+    "m3/runtime-integration/token-regex/": "Apache-2.0"
+  }
+}

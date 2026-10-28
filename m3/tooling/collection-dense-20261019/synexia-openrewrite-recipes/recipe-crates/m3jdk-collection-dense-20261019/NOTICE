@@ -1,0 +1,20 @@
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
+
+New reusable authoring recipes, documents and proof runners: Apache-2.0.
+Canonical engines are reused unchanged from Synexia revision
+47981356df68c2e12c658d2d6fe3969b695aa2fe. Maven and OpenRewrite remain tooling only.
+
+Product Java and C postimages adapt already-public M3JDK21 source at
+2717d156ad2aba73dfdfcfc6a58b59a82371798e (PR 1435), retaining GPLv2 with the
+Classpath exception and their original notices. Target test sources and derived
+benchmark sources retain GPLv2 test notices. These payloads are not relicensed
+by their inclusion in an Apache-licensed authoring crate.
+
+The new M3CollectionDenseTest is target-specific GPLv2 test code. The unchanged
+Collections.java fixture retains OpenJDK and contributor notices. OpenJDK LICENSE
+is included as LICENSE-OPENJDK; original per-file headers identify applicable exceptions.
+
+LeetCode, HackerRank, GeeksforGeeks and Eclipse/Guava/Apache comparisons reuse the
+prior public catalogue as reference evidence only. No editorial, submission or
+foreign library body is copied. This refinement is maintenance of already-public
+snapshot and mask implementations; it introduces no undisclosed external-source packet.

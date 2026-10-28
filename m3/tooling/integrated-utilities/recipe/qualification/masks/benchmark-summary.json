@@ -1,0 +1,277 @@
+{
+  "schema": 1,
+  "method": "one process per backend, five repetitions per workload; preliminary complete-call probe, not JMH or a dispatch threshold",
+  "default_dispatch": "JAVA",
+  "rows": [
+    {
+      "backend": "java",
+      "bits": 64,
+      "stride": 1,
+      "selected": 62,
+      "rounds": 5,
+      "iterations_per_round": 30000,
+      "median_cpu_ns": 175.219,
+      "median_wall_ns": 262.433,
+      "median_allocated_bytes": 264.0,
+      "cpu_range_ns": [
+        83.915,
+        376.483
+      ]
+    },
+    {
+      "backend": "java",
+      "bits": 64,
+      "stride": 2,
+      "selected": 31,
+      "rounds": 5,
+      "iterations_per_round": 30000,
+      "median_cpu_ns": 85.332,
+      "median_wall_ns": 127.119,
+      "median_allocated_bytes": 144.0,
+      "cpu_range_ns": [
+        67.049,
+        127.441
+      ]
+    },
+    {
+      "backend": "java",
+      "bits": 64,
+      "stride": 64,
+      "selected": 0,
+      "rounds": 5,
+      "iterations_per_round": 30000,
+      "median_cpu_ns": 28.572,
+      "median_wall_ns": 28.444,
+      "median_allocated_bytes": 16.0,
+      "cpu_range_ns": [
+        25.625,
+        40.49
+      ]
+    },
+    {
+      "backend": "java",
+      "bits": 4096,
+      "stride": 1,
+      "selected": 4032,
+      "rounds": 5,
+      "iterations_per_round": 4882,
+      "median_cpu_ns": 7634.769,
+      "median_wall_ns": 8880.747,
+      "median_allocated_bytes": 16144.0,
+      "cpu_range_ns": [
+        6478.202,
+        9193.428
+      ]
+    },
+    {
+      "backend": "java",
+      "bits": 4096,
+      "stride": 2,
+      "selected": 2016,
+      "rounds": 5,
+      "iterations_per_round": 4882,
+      "median_cpu_ns": 3396.187,
+      "median_wall_ns": 3555.607,
+      "median_allocated_bytes": 8080.0,
+      "cpu_range_ns": [
+        3236.854,
+        3529.824
+      ]
+    },
+    {
+      "backend": "java",
+      "bits": 4096,
+      "stride": 64,
+      "selected": 63,
+      "rounds": 5,
+      "iterations_per_round": 4882,
+      "median_cpu_ns": 333.872,
+      "median_wall_ns": 332.421,
+      "median_allocated_bytes": 272.0,
+      "cpu_range_ns": [
+        290.208,
+        445.518
+      ]
+    },
+    {
+      "backend": "java",
+      "bits": 262144,
+      "stride": 1,
+      "selected": 262080,
+      "rounds": 5,
+      "iterations_per_round": 80,
+      "median_cpu_ns": 474848.113,
+      "median_wall_ns": 532899.763,
+      "median_allocated_bytes": 1048336.0,
+      "cpu_range_ns": [
+        389587.063,
+        486732.888
+      ]
+    },
+    {
+      "backend": "java",
+      "bits": 262144,
+      "stride": 2,
+      "selected": 131040,
+      "rounds": 5,
+      "iterations_per_round": 80,
+      "median_cpu_ns": 305145.925,
+      "median_wall_ns": 321873.875,
+      "median_allocated_bytes": 524176.0,
+      "cpu_range_ns": [
+        232710.325,
+        343254.25
+      ]
+    },
+    {
+      "backend": "java",
+      "bits": 262144,
+      "stride": 64,
+      "selected": 4095,
+      "rounds": 5,
+      "iterations_per_round": 80,
+      "median_cpu_ns": 19578.85,
+      "median_wall_ns": 19485.925,
+      "median_allocated_bytes": 16400.0,
+      "cpu_range_ns": [
+        17439.713,
+        36484.138
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 64,
+      "stride": 1,
+      "selected": 62,
+      "rounds": 5,
+      "iterations_per_round": 30000,
+      "median_cpu_ns": 376.935,
+      "median_wall_ns": 454.571,
+      "median_allocated_bytes": 264.0,
+      "cpu_range_ns": [
+        331.127,
+        502.331
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 64,
+      "stride": 2,
+      "selected": 31,
+      "rounds": 5,
+      "iterations_per_round": 30000,
+      "median_cpu_ns": 255.427,
+      "median_wall_ns": 276.88,
+      "median_allocated_bytes": 144.0,
+      "cpu_range_ns": [
+        223.81,
+        277.142
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 64,
+      "stride": 64,
+      "selected": 0,
+      "rounds": 5,
+      "iterations_per_round": 30000,
+      "median_cpu_ns": 233.868,
+      "median_wall_ns": 233.637,
+      "median_allocated_bytes": 16.0,
+      "cpu_range_ns": [
+        161.259,
+        240.09
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 4096,
+      "stride": 1,
+      "selected": 4032,
+      "rounds": 5,
+      "iterations_per_round": 4882,
+      "median_cpu_ns": 9104.588,
+      "median_wall_ns": 10129.083,
+      "median_allocated_bytes": 16144.0,
+      "cpu_range_ns": [
+        7918.7,
+        14660.603
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 4096,
+      "stride": 2,
+      "selected": 2016,
+      "rounds": 5,
+      "iterations_per_round": 4882,
+      "median_cpu_ns": 4542.339,
+      "median_wall_ns": 4690.015,
+      "median_allocated_bytes": 8080.0,
+      "cpu_range_ns": [
+        4181.278,
+        4673.127
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 4096,
+      "stride": 64,
+      "selected": 63,
+      "rounds": 5,
+      "iterations_per_round": 4882,
+      "median_cpu_ns": 723.105,
+      "median_wall_ns": 722.178,
+      "median_allocated_bytes": 272.0,
+      "cpu_range_ns": [
+        564.726,
+        852.769
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 262144,
+      "stride": 1,
+      "selected": 262080,
+      "rounds": 5,
+      "iterations_per_round": 80,
+      "median_cpu_ns": 492262.925,
+      "median_wall_ns": 523272.888,
+      "median_allocated_bytes": 1048336.0,
+      "cpu_range_ns": [
+        481698.213,
+        545876.8
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 262144,
+      "stride": 2,
+      "selected": 131040,
+      "rounds": 5,
+      "iterations_per_round": 80,
+      "median_cpu_ns": 259042.6,
+      "median_wall_ns": 270072.338,
+      "median_allocated_bytes": 524176.0,
+      "cpu_range_ns": [
+        218091.138,
+        281102.075
+      ]
+    },
+    {
+      "backend": "native",
+      "bits": 262144,
+      "stride": 64,
+      "selected": 4095,
+      "rounds": 5,
+      "iterations_per_round": 80,
+      "median_cpu_ns": 28221.388,
+      "median_wall_ns": 28167.4,
+      "median_allocated_bytes": 16400.0,
+      "cpu_range_ns": [
+        25741.088,
+        42917.325
+      ]
+    }
+  ]
+}

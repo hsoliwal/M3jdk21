@@ -1,0 +1,2967 @@
+{
+  "schema": "M3_TOKEN_RECOVERY_ACTUAL_SDK_HANDOFF_V1",
+  "time_utc": "2026-10-19T04:56:29.739564+00:00",
+  "input_core_commit": "2717d156ad2aba73dfdfcfc6a58b59a82371798e",
+  "manifest_sha256": "97e62d3ec5cc0752e6d4bbbbdc06276834ee053147e7d294bee041ff98110b70",
+  "actual_result_receipt_sha256": "35589d10a89b79260e9da8ea5e4e5fbaacfc1624fa76dbfaf3942ae74b3ad821",
+  "actual_openrewrite_results": 13,
+  "actual_second_sdk_run_changes": 0,
+  "sdk_tests": {
+    "tests": 16,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_verifier_refusal_tests": 32,
+  "emitted_source_public_candidates_observed": 6,
+  "manifest_targets": 490,
+  "unchanged_keep_targets": 477,
+  "postimage_hashes_verified": 490,
+  "all483core_input_hashes_rechecked": true,
+  "target_checkout_modified_by_this_runner": false,
+  "runtime_contracts": "SEPARATE_FRESH_TOKEN_RECEIVER_RECEIPT_NOT_RUN_BY_SDK_ENGINE",
+  "receiving_checkout_final_check": "PENDING_PARENT_RECEIVE",
+  "historical_inventory2_receipts": "UNRECOVERED_NOT_RECREATED",
+  "files": [
+    {
+      "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "before_sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "after_sha256": "2aec0ce2f08dccaf2405ba5950e5ce1378de0f44546f000b85a07c675ab0e0ae",
+      "actual_result": true
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
+      "before_sha256": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08",
+      "after_sha256": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08",
+      "actual_result": false
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "before_sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d",
+      "after_sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d",
+      "actual_result": false
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "before_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "after_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "actual_result": false
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "after_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "actual_result": false
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "before_sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+      "after_sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+      "actual_result": false
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "before_sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+      "after_sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+      "actual_result": false
+    },
+    {
+      "path": "m3/compatibility/check_integrated_utility_coverage.py",
+      "before_sha256": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1",
+      "after_sha256": "56bf749b02a394a5981fc80a5b8fc9cee52d7dbf637b3ac4b5244f69b347c483",
+      "actual_result": true
+    },
+    {
+      "path": "m3/compatibility/test_integrated_utility_coverage.py",
+      "before_sha256": "e783a54fcd7430755874e55dd2af19530d217084a76d61d845ab14f3c1069f5f",
+      "after_sha256": "8184270534252daf426b4878795018712fad00a0883c974e9712e50ef5342f3c",
+      "actual_result": true
+    },
+    {
+      "path": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+      "before_sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2",
+      "after_sha256": "dc8213d2136ec4a33c5f66e1e5ea4089f894df18cad07a1ba153811e17fc5db3",
+      "actual_result": true
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "before_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
+      "after_sha256": "1e5c8b03586ff87d1ae1d81a97e667cbcc22710fc7fc3540c25bce11a5c9c159",
+      "actual_result": true
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "before_sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
+      "after_sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
+      "actual_result": false
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
+      "after_sha256": "80094396bd12f77bf90741cd61d9b190b2fbe613ab4a07960669e9652fe9d7fc",
+      "actual_result": true
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
+      "before_sha256": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1",
+      "after_sha256": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/README.md",
+      "before_sha256": "dc79aace9491a7ab1755d52076fdc08844109388405fe10802ba5cb85cbb5287",
+      "after_sha256": "dc79aace9491a7ab1755d52076fdc08844109388405fe10802ba5cb85cbb5287",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/behavioral-atoms.json",
+      "before_sha256": "5e38a593c69884ae4553b4ee40eed774b517c9a48df7a118ef6dbd0514cf4007",
+      "after_sha256": "5e38a593c69884ae4553b4ee40eed774b517c9a48df7a118ef6dbd0514cf4007",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/candidate-receiver.json",
+      "before_sha256": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025",
+      "after_sha256": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/counterexamples.json",
+      "before_sha256": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077",
+      "after_sha256": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/public-api.json",
+      "before_sha256": "aa9eaf8e3e92a1211cff849048169f35e88dd9ebca59d7714d54be6e7f61ad19",
+      "after_sha256": "aa9eaf8e3e92a1211cff849048169f35e88dd9ebca59d7714d54be6e7f61ad19",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/verify.py",
+      "before_sha256": "89540bb2b2deff0d3d8a7f371f1874fb65c96ee397478f1e0254a16eea889726",
+      "after_sha256": "89540bb2b2deff0d3d8a7f371f1874fb65c96ee397478f1e0254a16eea889726",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-utilities/README.md",
+      "before_sha256": "cd8b7985fed714c09893305e585a39b4272e0e54c0fc2b78465a3a1a530d2db1",
+      "after_sha256": "cd8b7985fed714c09893305e585a39b4272e0e54c0fc2b78465a3a1a530d2db1",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
+      "before_sha256": "a3015f30c325ed9e40e73f5416d48616e5411e32db64b0e813796fe5273ae0d8",
+      "after_sha256": "a3015f30c325ed9e40e73f5416d48616e5411e32db64b0e813796fe5273ae0d8",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
+      "before_sha256": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8",
+      "after_sha256": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/integrated-utilities/verify.py",
+      "before_sha256": "b85e062ff6a5d6b227cbd0940dff75737ac52120800c28f16c8273191a324991",
+      "after_sha256": "b85e062ff6a5d6b227cbd0940dff75737ac52120800c28f16c8273191a324991",
+      "actual_result": false
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "695ed953a1b31c3b382dca3cac2901e3d5071fe8328212a8ca166c3072db9a19",
+      "actual_result": true
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/behavioral-atoms.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "97d379a6380173a759275dd55bc5f541ddc9d1771e29b40797556770542cdf20",
+      "actual_result": true
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/contract-catalogue.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "3e1bfbf638ecf134ab2f0d81619ce2cb05472c7e12f1497b41ef54a01fbb16df",
+      "actual_result": true
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "0d605a28b5fd82374dbb19b2ae9f3d1fdc13dddb1dda52ccaed10bd780e39849",
+      "actual_result": true
+    },
+    {
+      "path": "make/modules/java.base/gensrc/GensrcBuffer.gmk",
+      "before_sha256": "4832abc991fcf34672dda8c670c0de8f01178c8ca32bafea05a04204d88961a4",
+      "after_sha256": "4832abc991fcf34672dda8c670c0de8f01178c8ca32bafea05a04204d88961a4",
+      "actual_result": false
+    },
+    {
+      "path": "make/modules/java.base/gensrc/GensrcCharsetCoder.gmk",
+      "before_sha256": "14e59aff235fd58bbb577d6ef2c5dddece4a67456099bcbc811b92cf10224599",
+      "after_sha256": "14e59aff235fd58bbb577d6ef2c5dddece4a67456099bcbc811b92cf10224599",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "before_sha256": "d93e16b7e1c594039ff479b4d5a2ef973e55596b1df574608cf108692edd8623",
+      "after_sha256": "d93e16b7e1c594039ff479b4d5a2ef973e55596b1df574608cf108692edd8623",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/InputStream.java",
+      "before_sha256": "3f2a8698a8e1dd61500508ecd1c6fec873744699aa2d447bb33ec00ce0f26d1d",
+      "after_sha256": "3f2a8698a8e1dd61500508ecd1c6fec873744699aa2d447bb33ec00ce0f26d1d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/ObjectInputFilter.java",
+      "before_sha256": "15d3d8c1178eab5f5d0db9e37b2469ae11344ef246a8e5651b0bb7f94ef23475",
+      "after_sha256": "15d3d8c1178eab5f5d0db9e37b2469ae11344ef246a8e5651b0bb7f94ef23475",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/ObjectStreamClass.java",
+      "before_sha256": "7a2d375dbfd1efa6748cfe4ae858cd5e8b6be04f014df812bde3291dbbb2ae81",
+      "after_sha256": "7a2d375dbfd1efa6748cfe4ae858cd5e8b6be04f014df812bde3291dbbb2ae81",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/OutputStream.java",
+      "before_sha256": "a929163b54781939b622e7c6f111f24bea541aa2f6d68be38d3ea2b0048a90d1",
+      "after_sha256": "a929163b54781939b622e7c6f111f24bea541aa2f6d68be38d3ea2b0048a90d1",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/Reader.java",
+      "before_sha256": "bf7281a2a05e67bad28b9d3e536cf165a3127efd4ddf50d5963b138dbe6b8df9",
+      "after_sha256": "bf7281a2a05e67bad28b9d3e536cf165a3127efd4ddf50d5963b138dbe6b8df9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/Writer.java",
+      "before_sha256": "bfd7e7c4c9443823a23cc53094832ca1b694076778c84dbc2773b67aaabe979e",
+      "after_sha256": "bfd7e7c4c9443823a23cc53094832ca1b694076778c84dbc2773b67aaabe979e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/AutoCloseable.java",
+      "before_sha256": "c3b4b865234a0dfb3c974c0001f706d6e05a4d4987063a795a610c9886147b81",
+      "after_sha256": "c3b4b865234a0dfb3c974c0001f706d6e05a4d4987063a795a610c9886147b81",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Class.java",
+      "before_sha256": "ddf752a34f5a1cb15ffd0e288afa5eef3499c97e0406cb14e4365de69e66bd4a",
+      "after_sha256": "ddf752a34f5a1cb15ffd0e288afa5eef3499c97e0406cb14e4365de69e66bd4a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ClassLoader.java",
+      "before_sha256": "d88839317ca579b3c09de71338b07291e881ef5bb354cf2243aa4bc558299fd7",
+      "after_sha256": "d88839317ca579b3c09de71338b07291e881ef5bb354cf2243aa4bc558299fd7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ClassValue.java",
+      "before_sha256": "df341f99d6a8b6ecc53710d3b3565495a6a53f3d5e805547c3d9f43db228c5f9",
+      "after_sha256": "df341f99d6a8b6ecc53710d3b3565495a6a53f3d5e805547c3d9f43db228c5f9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Double.java",
+      "before_sha256": "67b1cc47b33b99eab0d2f41da98b2d84ebc5e727cac4c09badca043bb5ea2a39",
+      "after_sha256": "67b1cc47b33b99eab0d2f41da98b2d84ebc5e727cac4c09badca043bb5ea2a39",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Float.java",
+      "before_sha256": "cb82e6f79de34e09e62e9be3dfd8c8e180319fce76d34f7769f8689d4920fd24",
+      "after_sha256": "cb82e6f79de34e09e62e9be3dfd8c8e180319fce76d34f7769f8689d4920fd24",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Integer.java",
+      "before_sha256": "92a6457c0a88e90a2c6589f6be556639d7a1c32b24bc41f0c6e49ae70f79d6ea",
+      "after_sha256": "92a6457c0a88e90a2c6589f6be556639d7a1c32b24bc41f0c6e49ae70f79d6ea",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Long.java",
+      "before_sha256": "3a3985f52ff781faafe4fe81ba587d9fc05d02d4b7ce3068eda41f7150724fd8",
+      "after_sha256": "3a3985f52ff781faafe4fe81ba587d9fc05d02d4b7ce3068eda41f7150724fd8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Math.java",
+      "before_sha256": "1264b299cbffe5611764dc9a626f9beb2a02728a1651f3f3fee1e0b767924151",
+      "after_sha256": "1264b299cbffe5611764dc9a626f9beb2a02728a1651f3f3fee1e0b767924151",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Module.java",
+      "before_sha256": "c420e6421c44756f2355d6614c31bfda404533a0c1f4f170f439cd43df424f1e",
+      "after_sha256": "c420e6421c44756f2355d6614c31bfda404533a0c1f4f170f439cd43df424f1e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ModuleLayer.java",
+      "before_sha256": "eff4ab3b69985ec9cccfca39a9c7c6ba3d4944141fd419e632d59cbdf06a6e9a",
+      "after_sha256": "eff4ab3b69985ec9cccfca39a9c7c6ba3d4944141fd419e632d59cbdf06a6e9a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Process.java",
+      "before_sha256": "a11aeac21e10ada8b344ad0fdc5486358a008f89390882bcc1822b1799b2f3ac",
+      "after_sha256": "a11aeac21e10ada8b344ad0fdc5486358a008f89390882bcc1822b1799b2f3ac",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ProcessBuilder.java",
+      "before_sha256": "84c50304cc5ee736def545448b1c31dd5ba4552e04310b40810676f081d21f2c",
+      "after_sha256": "84c50304cc5ee736def545448b1c31dd5ba4552e04310b40810676f081d21f2c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ProcessHandle.java",
+      "before_sha256": "0a54016f3f6ab2735a5c06eec975a6f791e2ab51909ee2f2c2b90e1c0e4e9e95",
+      "after_sha256": "0a54016f3f6ab2735a5c06eec975a6f791e2ab51909ee2f2c2b90e1c0e4e9e95",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/StrictMath.java",
+      "before_sha256": "6be0b4ef1629d664134fd9d2972e8454e8cdbfc7331038b7ab601082a8004f88",
+      "after_sha256": "6be0b4ef1629d664134fd9d2972e8454e8cdbfc7331038b7ab601082a8004f88",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before_sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+      "after_sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Thread.java",
+      "before_sha256": "23a38e9d8deba442c845137d46d6fd8fa74c507e364a697934827b0c783da85e",
+      "after_sha256": "23a38e9d8deba442c845137d46d6fd8fa74c507e364a697934827b0c783da85e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/annotation/Annotation.java",
+      "before_sha256": "8fe3fdabb97848987fe0ca1e1720e1b8d571e0b0d61bf7a17411aa49fe5c6b09",
+      "after_sha256": "8fe3fdabb97848987fe0ca1e1720e1b8d571e0b0d61bf7a17411aa49fe5c6b09",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/constant/ConstantDescs.java",
+      "before_sha256": "2ecf80f698499af80cb466dd69594b147b19e1757b41795630e8ecf2b04ad4d0",
+      "after_sha256": "2ecf80f698499af80cb466dd69594b147b19e1757b41795630e8ecf2b04ad4d0",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/constant/MethodHandleDesc.java",
+      "before_sha256": "e6468d5061945b8ca0cc3e4ec0037619f22b7eb44dc964919b1bd80253c08377",
+      "after_sha256": "e6468d5061945b8ca0cc3e4ec0037619f22b7eb44dc964919b1bd80253c08377",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/Arena.java",
+      "before_sha256": "164218320e7609e43996cd8bfc757c8caafd9ce65c51f03cb572435a3871fc18",
+      "after_sha256": "164218320e7609e43996cd8bfc757c8caafd9ce65c51f03cb572435a3871fc18",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/Linker.java",
+      "before_sha256": "4b95bd9979925882d402ac4dde211f9cb3cb3b5d10c45108611fbfb0bc05d84d",
+      "after_sha256": "4b95bd9979925882d402ac4dde211f9cb3cb3b5d10c45108611fbfb0bc05d84d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/MemoryLayout.java",
+      "before_sha256": "8f97842802a711dfa32c31eb7c14ccb733822f2eb20c94c7903014809cd4b5a9",
+      "after_sha256": "8f97842802a711dfa32c31eb7c14ccb733822f2eb20c94c7903014809cd4b5a9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/MemorySegment.java",
+      "before_sha256": "e5bcb0d649e52336a7dc758b59e567eaa64c4a5feaa7f699d070b6ba5b7955ed",
+      "after_sha256": "e5bcb0d649e52336a7dc758b59e567eaa64c4a5feaa7f699d070b6ba5b7955ed",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/SymbolLookup.java",
+      "before_sha256": "04471e12a3e1a228043431af29c25c14dcef241eae7675d980c7c0216def2a48",
+      "after_sha256": "04471e12a3e1a228043431af29c25c14dcef241eae7675d980c7c0216def2a48",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/ValueLayout.java",
+      "before_sha256": "12f9d5f3dfbf12354c5303368abae21d79431e62366879302501b81d6aad8fe0",
+      "after_sha256": "12f9d5f3dfbf12354c5303368abae21d79431e62366879302501b81d6aad8fe0",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodHandle.java",
+      "before_sha256": "a25deb1980a84a918222a780d30911044ecfd24819b6d95a18023275532b7d98",
+      "after_sha256": "a25deb1980a84a918222a780d30911044ecfd24819b6d95a18023275532b7d98",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodHandles.java",
+      "before_sha256": "3cd6f1229de979b3da578acc4bc49af394dd930e411862255de977d2252b1a0f",
+      "after_sha256": "3cd6f1229de979b3da578acc4bc49af394dd930e411862255de977d2252b1a0f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodType.java",
+      "before_sha256": "4dd95d9a1f71ed1bdc9c4fef9f2d475dff36df05f757687da35a0839e34045e8",
+      "after_sha256": "4dd95d9a1f71ed1bdc9c4fef9f2d475dff36df05f757687da35a0839e34045e8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/VarHandle.java",
+      "before_sha256": "66e4ccafe0851e3544793765e4b32f09e3e20d03f7b8583a18fd81503e30f69d",
+      "after_sha256": "66e4ccafe0851e3544793765e4b32f09e3e20d03f7b8583a18fd81503e30f69d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/module/Configuration.java",
+      "before_sha256": "4a24dcf2a0da50b833c2e8800bd18586c81e84b749fdf3f7ca883c92f1b8c7ec",
+      "after_sha256": "4a24dcf2a0da50b833c2e8800bd18586c81e84b749fdf3f7ca883c92f1b8c7ec",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/module/ModuleDescriptor.java",
+      "before_sha256": "68894193a1dee1dc31b85135f1e45421b43b295f429b10a7a6ca0db9f3014d49",
+      "after_sha256": "68894193a1dee1dc31b85135f1e45421b43b295f429b10a7a6ca0db9f3014d49",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/module/ModuleFinder.java",
+      "before_sha256": "c33839f959c4d597e5d61b89400fee1528cb985ed644d8a177822fb06cb3299f",
+      "after_sha256": "c33839f959c4d597e5d61b89400fee1528cb985ed644d8a177822fb06cb3299f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ref/Cleaner.java",
+      "before_sha256": "25fc86b29476a9a415c4c5e663c7e60ffa2146f824fe35d9f39fed35af1997c2",
+      "after_sha256": "25fc86b29476a9a415c4c5e663c7e60ffa2146f824fe35d9f39fed35af1997c2",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ref/Reference.java",
+      "before_sha256": "cff5aaf74a5b62ffddcf03d60aa35b48fbb4ef0d54dc8a15972f5d04495f95db",
+      "after_sha256": "cff5aaf74a5b62ffddcf03d60aa35b48fbb4ef0d54dc8a15972f5d04495f95db",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/AccessibleObject.java",
+      "before_sha256": "df2e58f887aca1bd7830c8e409d017f90842d982c9b53b4deea76758fb05c108",
+      "after_sha256": "df2e58f887aca1bd7830c8e409d017f90842d982c9b53b4deea76758fb05c108",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Array.java",
+      "before_sha256": "def5b1cf6d5c364afa80b5b9a603eff745dd0b9c7096546af4bdf80b2da5677a",
+      "after_sha256": "def5b1cf6d5c364afa80b5b9a603eff745dd0b9c7096546af4bdf80b2da5677a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Constructor.java",
+      "before_sha256": "9101d8623b2f58584b122e110ccc792c3fc3be73204a8d38613220ea52f17b69",
+      "after_sha256": "9101d8623b2f58584b122e110ccc792c3fc3be73204a8d38613220ea52f17b69",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Field.java",
+      "before_sha256": "d096997b0a053109de2ba8579723f89a9959f11d12a7a8f888f1c84a208d73c9",
+      "after_sha256": "d096997b0a053109de2ba8579723f89a9959f11d12a7a8f888f1c84a208d73c9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Method.java",
+      "before_sha256": "2261e2d25ff86f17e254e7fe67da691585108eefeba39f0426479e43c62ab941",
+      "after_sha256": "2261e2d25ff86f17e254e7fe67da691585108eefeba39f0426479e43c62ab941",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Modifier.java",
+      "before_sha256": "b5c15391094f3ce007f769264e1852e49740098810f849701e341f20789c12a1",
+      "after_sha256": "b5c15391094f3ce007f769264e1852e49740098810f849701e341f20789c12a1",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Proxy.java",
+      "before_sha256": "e51fa79b5f5c9658d0f066e2eee1956d315e82cab60df6c821191f03e9996931",
+      "after_sha256": "e51fa79b5f5c9658d0f066e2eee1956d315e82cab60df6c821191f03e9996931",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "before_sha256": "54b08b0396cd8e749093ae55f74eb5db1b5844605cc5610705471275b5b92883",
+      "after_sha256": "54b08b0396cd8e749093ae55f74eb5db1b5844605cc5610705471275b5b92883",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/runtime/ObjectMethods.java",
+      "before_sha256": "c2cabf5ce476a3dff34caf7480145a80859457c999750ef13e6c509d273a2493",
+      "after_sha256": "c2cabf5ce476a3dff34caf7480145a80859457c999750ef13e6c509d273a2493",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/runtime/SwitchBootstraps.java",
+      "before_sha256": "a395d5d87fad72fdcfc4f6bdb96097f76c1d9eadb1ecea4bff5a9f5c5efc836c",
+      "after_sha256": "a395d5d87fad72fdcfc4f6bdb96097f76c1d9eadb1ecea4bff5a9f5c5efc836c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/math/BigDecimal.java",
+      "before_sha256": "07e291cee99673721f286190c3a365448a5e0ce332189127a925846eddcf80dd",
+      "after_sha256": "07e291cee99673721f286190c3a365448a5e0ce332189127a925846eddcf80dd",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/math/BigInteger.java",
+      "before_sha256": "331393aa99183dcee4123366d9f717001da15250a108a84e82af78c3cdd9192a",
+      "after_sha256": "331393aa99183dcee4123366d9f717001da15250a108a84e82af78c3cdd9192a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/InetAddress.java",
+      "before_sha256": "b8917aa066571118e465f87e01957728e8accaf1bdef76fa91efd4225695f2a5",
+      "after_sha256": "b8917aa066571118e465f87e01957728e8accaf1bdef76fa91efd4225695f2a5",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/URI.java",
+      "before_sha256": "509145f2c522b0395dc3a88952b6549188dc80b3b6e54a4b32c39b867550c056",
+      "after_sha256": "509145f2c522b0395dc3a88952b6549188dc80b3b6e54a4b32c39b867550c056",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/URL.java",
+      "before_sha256": "f37c5f5993cda0cf6de811776fa981fd8cb23c53898402efa92503039d194be4",
+      "after_sha256": "f37c5f5993cda0cf6de811776fa981fd8cb23c53898402efa92503039d194be4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/URLDecoder.java",
+      "before_sha256": "59509b8b234e5fccb3364c6581c30224044c5eb541a02a0b007edb2af0b16f01",
+      "after_sha256": "59509b8b234e5fccb3364c6581c30224044c5eb541a02a0b007edb2af0b16f01",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/URLEncoder.java",
+      "before_sha256": "60330c74a190bc1c25f181def0c5f38da4fb93212e9acb05c980bc6b225113c9",
+      "after_sha256": "60330c74a190bc1c25f181def0c5f38da4fb93212e9acb05c980bc6b225113c9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/Buffer.java",
+      "before_sha256": "99840c098eeb9f828a22d7d162f35aa33fb3ce7cb831fe8934dbeb0a04bdd45c",
+      "after_sha256": "99840c098eeb9f828a22d7d162f35aa33fb3ce7cb831fe8934dbeb0a04bdd45c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/X-Buffer.java.template",
+      "before_sha256": "33daabbb3773baf1fef00b8a2cdb5f9727e0f0e46e107493bc55688d973e8e61",
+      "after_sha256": "33daabbb3773baf1fef00b8a2cdb5f9727e0f0e46e107493bc55688d973e8e61",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/channels/AsynchronousFileChannel.java",
+      "before_sha256": "074430fb691629ba83ee183704526bdbbd390ce504371b09a82863d095bae977",
+      "after_sha256": "074430fb691629ba83ee183704526bdbbd390ce504371b09a82863d095bae977",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/channels/Channels.java",
+      "before_sha256": "db94265a27d5d1a89376b801837a6db81307a0606d7af9d70cb319089a3d40f5",
+      "after_sha256": "db94265a27d5d1a89376b801837a6db81307a0606d7af9d70cb319089a3d40f5",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/channels/FileChannel.java",
+      "before_sha256": "ee6cdf14fc0ac3af2d39c1a70070dd1c32ed8119c7d31780a072022e4259728d",
+      "after_sha256": "ee6cdf14fc0ac3af2d39c1a70070dd1c32ed8119c7d31780a072022e4259728d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/channels/Selector.java",
+      "before_sha256": "6a99a4833a4a469a6a1f68048705a865c44cdee64bfa06e3e7d2e61776d93f9f",
+      "after_sha256": "6a99a4833a4a469a6a1f68048705a865c44cdee64bfa06e3e7d2e61776d93f9f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/charset/Charset-X-Coder.java.template",
+      "before_sha256": "72a089cd644c6a502877a91d035d20cdfcf78ebe168d496c7447a8f72f6c3b45",
+      "after_sha256": "72a089cd644c6a502877a91d035d20cdfcf78ebe168d496c7447a8f72f6c3b45",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/charset/Charset.java",
+      "before_sha256": "d95a4e5322cac971e735b08fc55feaa63a689381490c1fb985ea51ff9343f44b",
+      "after_sha256": "d95a4e5322cac971e735b08fc55feaa63a689381490c1fb985ea51ff9343f44b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/charset/StandardCharsets.java",
+      "before_sha256": "8622b79dc3fde4e6c9608178cea92983d6395e43a11fdf5adcfe27b7c746a1c8",
+      "after_sha256": "8622b79dc3fde4e6c9608178cea92983d6395e43a11fdf5adcfe27b7c746a1c8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/charset/spi/CharsetProvider.java",
+      "before_sha256": "b6ff8e8f3002c7269c069ca98688d40870f5de19d2123af418dacd686507d216",
+      "after_sha256": "b6ff8e8f3002c7269c069ca98688d40870f5de19d2123af418dacd686507d216",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/FileSystems.java",
+      "before_sha256": "88d38041bcdfed28e35c7e1178da50824354e20c172bbf9dc58a2e79352bb506",
+      "after_sha256": "88d38041bcdfed28e35c7e1178da50824354e20c172bbf9dc58a2e79352bb506",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/Files.java",
+      "before_sha256": "f99322d047cf07c49bc08845a170c86142a8d3aee1766f327c5198b3ff324de5",
+      "after_sha256": "f99322d047cf07c49bc08845a170c86142a8d3aee1766f327c5198b3ff324de5",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/Path.java",
+      "before_sha256": "cdaadcfd731405dcdbffe91ebf1b4dec6eae9db5eab6197a925a6e4a7b806ff7",
+      "after_sha256": "cdaadcfd731405dcdbffe91ebf1b4dec6eae9db5eab6197a925a6e4a7b806ff7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/Paths.java",
+      "before_sha256": "e6ae0cb1d81d99b7e2bdf2713ec72d35184ea7d9617eb6f4d135220f8ee1313e",
+      "after_sha256": "e6ae0cb1d81d99b7e2bdf2713ec72d35184ea7d9617eb6f4d135220f8ee1313e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/attribute/AclEntry.java",
+      "before_sha256": "1a0e09bc9c52a1f87800038ebe56b899b2bdb5ade5be815c589ba01bfa05d482",
+      "after_sha256": "1a0e09bc9c52a1f87800038ebe56b899b2bdb5ade5be815c589ba01bfa05d482",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/attribute/FileTime.java",
+      "before_sha256": "ec539f34207ab89f400c050d11eec04bdaae116b8907fdbb5f9b4d827d8042e8",
+      "after_sha256": "ec539f34207ab89f400c050d11eec04bdaae116b8907fdbb5f9b4d827d8042e8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/attribute/PosixFilePermissions.java",
+      "before_sha256": "9690cd41b8c01d5cd838d67a860eb63f0a075bd3ce1f5f5a924f93712cac4f5f",
+      "after_sha256": "9690cd41b8c01d5cd838d67a860eb63f0a075bd3ce1f5f5a924f93712cac4f5f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/spi/FileSystemProvider.java",
+      "before_sha256": "0601f97ecae23fbd2f43409e4f02a72dc94f9ff0250e0777321a4377f8c0d200",
+      "after_sha256": "0601f97ecae23fbd2f43409e4f02a72dc94f9ff0250e0777321a4377f8c0d200",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/AlgorithmParameters.java",
+      "before_sha256": "ece3ae904820f66e53204839d56a78c7289ce04129f43e1c9dbfd378cbda9f03",
+      "after_sha256": "ece3ae904820f66e53204839d56a78c7289ce04129f43e1c9dbfd378cbda9f03",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/KeyFactory.java",
+      "before_sha256": "93be51d8a56c124441b359f311a27f8ed22c97e5ed4717f3e6d0b865b46bca33",
+      "after_sha256": "93be51d8a56c124441b359f311a27f8ed22c97e5ed4717f3e6d0b865b46bca33",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/KeyPairGenerator.java",
+      "before_sha256": "d008515e6bf61cf834cadad3193dffc67c4b1d5bd9c5aa25fe4ababfc49b9a68",
+      "after_sha256": "d008515e6bf61cf834cadad3193dffc67c4b1d5bd9c5aa25fe4ababfc49b9a68",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/KeyStore.java",
+      "before_sha256": "ecc6fef6147ba3dbfdf3db57e0d361a48a36cda8cbf6718beeecc7899bb572a4",
+      "after_sha256": "ecc6fef6147ba3dbfdf3db57e0d361a48a36cda8cbf6718beeecc7899bb572a4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/MessageDigest.java",
+      "before_sha256": "c0ce7245b95a8d716f526eb30715e0d1ee84ed12811d378516fbb4f4b361ef40",
+      "after_sha256": "c0ce7245b95a8d716f526eb30715e0d1ee84ed12811d378516fbb4f4b361ef40",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/Provider.java",
+      "before_sha256": "969321d4372cf2cbf5c7e52f61c5c1217f0f29bdd4a8bba6915524659db6f02f",
+      "after_sha256": "969321d4372cf2cbf5c7e52f61c5c1217f0f29bdd4a8bba6915524659db6f02f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/SecureRandom.java",
+      "before_sha256": "150ab0eb814f71696c3bce63add83795deec506fe407dd170c0f0d7b5c860d6f",
+      "after_sha256": "150ab0eb814f71696c3bce63add83795deec506fe407dd170c0f0d7b5c860d6f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/Security.java",
+      "before_sha256": "0bc30e8aee9bb87d051c5670efc2093f5b2d373b1ead4fb09d02fbdb3e149962",
+      "after_sha256": "0bc30e8aee9bb87d051c5670efc2093f5b2d373b1ead4fb09d02fbdb3e149962",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/Signature.java",
+      "before_sha256": "f91cfd3f9d9ab85459a60259f84cc50bbdb3e62b186c563ac9966b8f6220ca2d",
+      "after_sha256": "f91cfd3f9d9ab85459a60259f84cc50bbdb3e62b186c563ac9966b8f6220ca2d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/cert/CertPathBuilder.java",
+      "before_sha256": "6bb2623ba5cf49656e416ebe4de896c3755d5d6b6cc9f15dd6dbe0e7efa18693",
+      "after_sha256": "6bb2623ba5cf49656e416ebe4de896c3755d5d6b6cc9f15dd6dbe0e7efa18693",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/cert/CertPathValidator.java",
+      "before_sha256": "592a9d6437c999daf974ee4cbbe6bd919312dd15f4854ac9bb31c7a3b6014529",
+      "after_sha256": "592a9d6437c999daf974ee4cbbe6bd919312dd15f4854ac9bb31c7a3b6014529",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/cert/CertStore.java",
+      "before_sha256": "49cdd31bd1b1449b6958224671ed3e3e616645370f21b1a56fa27f52e29a59bb",
+      "after_sha256": "49cdd31bd1b1449b6958224671ed3e3e616645370f21b1a56fa27f52e29a59bb",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/cert/CertificateFactory.java",
+      "before_sha256": "4de20a7f9887edb35f8e186c4aaa4ad609ccb3c0327330eb0e58903419afaa69",
+      "after_sha256": "4de20a7f9887edb35f8e186c4aaa4ad609ccb3c0327330eb0e58903419afaa69",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/AttributedString.java",
+      "before_sha256": "c7ce89ad8efd5bee9f21ffe77bf4bce467379724bb70738087ca87d93bc91a1d",
+      "after_sha256": "c7ce89ad8efd5bee9f21ffe77bf4bce467379724bb70738087ca87d93bc91a1d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/BreakIterator.java",
+      "before_sha256": "47e41ee427597739e2dbdae7d451b0446891df67a67e692f2800310e14c22707",
+      "after_sha256": "47e41ee427597739e2dbdae7d451b0446891df67a67e692f2800310e14c22707",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/ChoiceFormat.java",
+      "before_sha256": "8d88cf035356b25fefa8f107675cbbf9b0e7869ff600aac545e5b2a4631b5dd5",
+      "after_sha256": "8d88cf035356b25fefa8f107675cbbf9b0e7869ff600aac545e5b2a4631b5dd5",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/Collator.java",
+      "before_sha256": "d7aa55e1619d2dc79eb6b13799711300252024f3fc0cc88404640a60c442ecc5",
+      "after_sha256": "d7aa55e1619d2dc79eb6b13799711300252024f3fc0cc88404640a60c442ecc5",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/DateFormat.java",
+      "before_sha256": "edd812f4cb961cd7b0c3b3ae4c571a815bf4009a94b9892def9bcdf002d7662e",
+      "after_sha256": "edd812f4cb961cd7b0c3b3ae4c571a815bf4009a94b9892def9bcdf002d7662e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/MessageFormat.java",
+      "before_sha256": "acb5cef237f331790ace18688848ff019dfadf1c4e6c3a0ae96d40eeed5fa6ba",
+      "after_sha256": "acb5cef237f331790ace18688848ff019dfadf1c4e6c3a0ae96d40eeed5fa6ba",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/Normalizer.java",
+      "before_sha256": "4aa05db90e28d6f26a13bce4c85bee57cb98896634316efbee2437a4f1256610",
+      "after_sha256": "4aa05db90e28d6f26a13bce4c85bee57cb98896634316efbee2437a4f1256610",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/NumberFormat.java",
+      "before_sha256": "8ecfab357e57ba593406a7ab181b862116a0c2275db5ebdba9526638921b5810",
+      "after_sha256": "8ecfab357e57ba593406a7ab181b862116a0c2275db5ebdba9526638921b5810",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/Clock.java",
+      "before_sha256": "d0057da8ab53bfd41450c1504b28f98c0646b5997d977f6cc416f6bf7fd809a4",
+      "after_sha256": "d0057da8ab53bfd41450c1504b28f98c0646b5997d977f6cc416f6bf7fd809a4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/Duration.java",
+      "before_sha256": "6ea3d94e38d6866500b3548f54f526f3d88bd144411c36481da548017c5f643b",
+      "after_sha256": "6ea3d94e38d6866500b3548f54f526f3d88bd144411c36481da548017c5f643b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/Instant.java",
+      "before_sha256": "f29b1c41dedf5e52f3bb00252d0fd896a1a1e2a8ca47d57cb300f901ca2d5d4b",
+      "after_sha256": "f29b1c41dedf5e52f3bb00252d0fd896a1a1e2a8ca47d57cb300f901ca2d5d4b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/LocalDate.java",
+      "before_sha256": "af2ff647d3a2e8523a3e2474509a0b7ff7d9a2f0a799e7fd72a40c31fab76296",
+      "after_sha256": "af2ff647d3a2e8523a3e2474509a0b7ff7d9a2f0a799e7fd72a40c31fab76296",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/format/DateTimeFormatter.java",
+      "before_sha256": "cb76d41cfbdf06fa67a3284199a9770a9e1c676d423a7da06bc947e822af0e2c",
+      "after_sha256": "cb76d41cfbdf06fa67a3284199a9770a9e1c676d423a7da06bc947e822af0e2c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/temporal/TemporalAdjusters.java",
+      "before_sha256": "35868923ea4af3bf3c1c19b6fa665eb932ff42294f1bd2337e483c65223e5438",
+      "after_sha256": "35868923ea4af3bf3c1c19b6fa665eb932ff42294f1bd2337e483c65223e5438",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/AbstractMap.java",
+      "before_sha256": "e253d9c1774d5a05b28caaa49378959b0777a9cd621ed0c4be9f466cecf9ee88",
+      "after_sha256": "e253d9c1774d5a05b28caaa49378959b0777a9cd621ed0c4be9f466cecf9ee88",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/AbstractSet.java",
+      "before_sha256": "2feaeffe82d5f34bd4a9e4b0ac8a21bd6807b6c04ece228c9c039a30637f3aa4",
+      "after_sha256": "2feaeffe82d5f34bd4a9e4b0ac8a21bd6807b6c04ece228c9c039a30637f3aa4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ArrayList.java",
+      "before_sha256": "c7db659273f9130e08b0d4508c34ff655e157b9ed48cdc7f5f5a2146ebb1c137",
+      "after_sha256": "c7db659273f9130e08b0d4508c34ff655e157b9ed48cdc7f5f5a2146ebb1c137",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Arrays.java",
+      "before_sha256": "fb63f716ddcf750357d2c5747896336b45ad343eb4d3c2de329f3212c6bf49ec",
+      "after_sha256": "fb63f716ddcf750357d2c5747896336b45ad343eb4d3c2de329f3212c6bf49ec",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/BitSet.java",
+      "before_sha256": "c5640ef08deab2582948e4cdbd0c1deb7cd83a3e404645ba91835bced5287cfc",
+      "after_sha256": "c5640ef08deab2582948e4cdbd0c1deb7cd83a3e404645ba91835bced5287cfc",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collection.java",
+      "before_sha256": "de833f449dd331f125692ae3dd0ff06d7ab62d9be47d7edb56907ce2dd7988e4",
+      "after_sha256": "de833f449dd331f125692ae3dd0ff06d7ab62d9be47d7edb56907ce2dd7988e4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collections.java",
+      "before_sha256": "4227019cc64ce600908eace9425718d8fe49ec4f4028a638cb70cd17a2f2917a",
+      "after_sha256": "4227019cc64ce600908eace9425718d8fe49ec4f4028a638cb70cd17a2f2917a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Enumeration.java",
+      "before_sha256": "205a0dbd43d32dbd0907507b11ca6568210430ac301d8327df7bc9c91978c42f",
+      "after_sha256": "205a0dbd43d32dbd0907507b11ca6568210430ac301d8327df7bc9c91978c42f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/IdentityHashMap.java",
+      "before_sha256": "e877ef70202fac6014d28dbb6b4f45a4eb0a4725a1e39782a5e52d777e9f0c18",
+      "after_sha256": "e877ef70202fac6014d28dbb6b4f45a4eb0a4725a1e39782a5e52d777e9f0c18",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Iterator.java",
+      "before_sha256": "28f0ab0de8727ee357bd00792b6e490103219d177331e262f257ff0098994a7c",
+      "after_sha256": "28f0ab0de8727ee357bd00792b6e490103219d177331e262f257ff0098994a7c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/LinkedHashMap.java",
+      "before_sha256": "93b36f97d195663c236ed00733a7ca09d0f491bf6ebcd818dbd7bac288805577",
+      "after_sha256": "93b36f97d195663c236ed00733a7ca09d0f491bf6ebcd818dbd7bac288805577",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/List.java",
+      "before_sha256": "bc5d882564a59adcadbe39615ba8213f4c33ad88222b8a3c4e7cdf50c62316b6",
+      "after_sha256": "bc5d882564a59adcadbe39615ba8213f4c33ad88222b8a3c4e7cdf50c62316b6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ListIterator.java",
+      "before_sha256": "5e74ad36f05f09d1f2a4fc37531cab335cea83cf8b2473b0841c88fd7845b348",
+      "after_sha256": "5e74ad36f05f09d1f2a4fc37531cab335cea83cf8b2473b0841c88fd7845b348",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Locale.java",
+      "before_sha256": "6a2fa40e9dbc624061ef4a513b4ba042db15a700df382bf4ba522e294443cbce",
+      "after_sha256": "6a2fa40e9dbc624061ef4a513b4ba042db15a700df382bf4ba522e294443cbce",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "before_sha256": "1337bb1e4c03c974bd4e335f7201c19186ab345548479ba29cebe639310c4017",
+      "after_sha256": "1337bb1e4c03c974bd4e335f7201c19186ab345548479ba29cebe639310c4017",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionViews.java",
+      "before_sha256": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+      "after_sha256": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Map.java",
+      "before_sha256": "c2cb6eebb59d81a35a82827d7ad09b633317e5aa9c640b47c3fd5ebd9204c0a6",
+      "after_sha256": "c2cb6eebb59d81a35a82827d7ad09b633317e5aa9c640b47c3fd5ebd9204c0a6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/NavigableMap.java",
+      "before_sha256": "47758c70e91ba72f7cba7139fe939c27a6ef07a2df085feb8310fcc9d052a8ce",
+      "after_sha256": "47758c70e91ba72f7cba7139fe939c27a6ef07a2df085feb8310fcc9d052a8ce",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/NavigableSet.java",
+      "before_sha256": "c283dfe278a3afd8970100c3486ac8ab15981f678ada127bad8df1f18beca75c",
+      "after_sha256": "c283dfe278a3afd8970100c3486ac8ab15981f678ada127bad8df1f18beca75c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Objects.java",
+      "before_sha256": "e23039ed9dce3bd70565b94657a4e316eb72ff79345c13a4ed58bc0931d34ce5",
+      "after_sha256": "e23039ed9dce3bd70565b94657a4e316eb72ff79345c13a4ed58bc0931d34ce5",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/PrimitiveIterator.java",
+      "before_sha256": "02ba4be245ced47049a679e6cf50229abce50fada7fd8b56874acc2fe29a72ff",
+      "after_sha256": "02ba4be245ced47049a679e6cf50229abce50fada7fd8b56874acc2fe29a72ff",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Random.java",
+      "before_sha256": "cc476abf6c1935983d36a55fba301c526db1debd2b9221f9e65cc1bda54d60be",
+      "after_sha256": "cc476abf6c1935983d36a55fba301c526db1debd2b9221f9e65cc1bda54d60be",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ResourceBundle.java",
+      "before_sha256": "4bd1220f91c3f859c92f67c3017c1bb9d4f0261247fd89676bbceade6fdda5b3",
+      "after_sha256": "4bd1220f91c3f859c92f67c3017c1bb9d4f0261247fd89676bbceade6fdda5b3",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ReverseOrderListView.java",
+      "before_sha256": "83fa94edbe1ef82f88cfe5aba432e3f3144adfaeb222f9743e29263a7ef5ecb7",
+      "after_sha256": "83fa94edbe1ef82f88cfe5aba432e3f3144adfaeb222f9743e29263a7ef5ecb7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ServiceLoader.java",
+      "before_sha256": "37cd04376da849588f095081f85aa6bbf1a3f18027cb5856febf62c9cf953148",
+      "after_sha256": "37cd04376da849588f095081f85aa6bbf1a3f18027cb5856febf62c9cf953148",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Set.java",
+      "before_sha256": "59fde85e92d7c167fe6573a25043c3fbe29eabaefdf84891d32101932f0a0f90",
+      "after_sha256": "59fde85e92d7c167fe6573a25043c3fbe29eabaefdf84891d32101932f0a0f90",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Spliterator.java",
+      "before_sha256": "70d75491a8ca51fe30a1a6935467763b5bdc3753b8624bec055edd4967383596",
+      "after_sha256": "70d75491a8ca51fe30a1a6935467763b5bdc3753b8624bec055edd4967383596",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Spliterators.java",
+      "before_sha256": "7363a624984c81e6a8c0a7ac72e43e360c86f6c92f3ccc9a55c87d43ca987066",
+      "after_sha256": "7363a624984c81e6a8c0a7ac72e43e360c86f6c92f3ccc9a55c87d43ca987066",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/SplittableRandom.java",
+      "before_sha256": "ba2c7b2862725beb52bb9236d8c731a55acec6addb855374ceff7b02f97c7948",
+      "after_sha256": "ba2c7b2862725beb52bb9236d8c731a55acec6addb855374ceff7b02f97c7948",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "before_sha256": "b62532d9b0c77bc5edc07ea87daf58706e68ce4084ec228919d5cf0c28847270",
+      "after_sha256": "b62532d9b0c77bc5edc07ea87daf58706e68ce4084ec228919d5cf0c28847270",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TimSort.java",
+      "before_sha256": "f147bfc6470b811546384b17b7fd3ed278586db806f445d66151a34f617c0d19",
+      "after_sha256": "f147bfc6470b811546384b17b7fd3ed278586db806f445d66151a34f617c0d19",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TreeMap.java",
+      "before_sha256": "d5ab07e7f2438eae6d0a6a969790a7d4d9d07a20265e797a4a20a1e3bcda913c",
+      "after_sha256": "d5ab07e7f2438eae6d0a6a969790a7d4d9d07a20265e797a4a20a1e3bcda913c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TreeSet.java",
+      "before_sha256": "e40f028679f474ed2399425474b5c68cbef96db851d1e8c0c8865108f3f5af75",
+      "after_sha256": "e40f028679f474ed2399425474b5c68cbef96db851d1e8c0c8865108f3f5af75",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/CompletableFuture.java",
+      "before_sha256": "3d350ceb3bc6b5d22edd71065693d742480f01a5640a681d8413cc7c82185db4",
+      "after_sha256": "3d350ceb3bc6b5d22edd71065693d742480f01a5640a681d8413cc7c82185db4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executors.java",
+      "before_sha256": "6937e22e90f3e676948db58d00e0f55de4bb0ff12ac7f0d858e211d72ec74127",
+      "after_sha256": "6937e22e90f3e676948db58d00e0f55de4bb0ff12ac7f0d858e211d72ec74127",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/TimeUnit.java",
+      "before_sha256": "045808c4c1111a261f461d9b7997074ec22c08e53ec83546564121fc8926b604",
+      "after_sha256": "045808c4c1111a261f461d9b7997074ec22c08e53ec83546564121fc8926b604",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/locks/LockSupport.java",
+      "before_sha256": "c97f8ca3d6ee2f835e4410502fe2ec1eadebc6e67c91eddcb64ef9536e6c39c8",
+      "after_sha256": "c97f8ca3d6ee2f835e4410502fe2ec1eadebc6e67c91eddcb64ef9536e6c39c8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/BiFunction.java",
+      "before_sha256": "4cc8916f3529f2d308cd9d04a2debc9bfa823d71f7249ba5ef98d25b8d3f47b2",
+      "after_sha256": "4cc8916f3529f2d308cd9d04a2debc9bfa823d71f7249ba5ef98d25b8d3f47b2",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "before_sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
+      "after_sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "before_sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
+      "after_sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Predicate.java",
+      "before_sha256": "a5f4ddfaa690778a992661d9546b85b87290a7135e1feac1be45aced1beb1970",
+      "after_sha256": "a5f4ddfaa690778a992661d9546b85b87290a7135e1feac1be45aced1beb1970",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "before_sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
+      "after_sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/jar/JarFile.java",
+      "before_sha256": "f4b2b3e7573d957189fe62257845cce64b0e579f433c6ad3e9ade80433a6f32e",
+      "after_sha256": "f4b2b3e7573d957189fe62257845cce64b0e579f433c6ad3e9ade80433a6f32e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/jar/JarOutputStream.java",
+      "before_sha256": "b8c3c4a3aee26d83194a7defa05a334087e2d50a05e2a4fb94e8f09677e79239",
+      "after_sha256": "b8c3c4a3aee26d83194a7defa05a334087e2d50a05e2a4fb94e8f09677e79239",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/random/RandomGenerator.java",
+      "before_sha256": "3c1f26fba2c7563e26b965dc48101361fe60e0382e25a6db42f80f9ff7237c23",
+      "after_sha256": "3c1f26fba2c7563e26b965dc48101361fe60e0382e25a6db42f80f9ff7237c23",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/random/RandomGeneratorFactory.java",
+      "before_sha256": "71143251b9bd04d427794b11bac25f4c1a20c5c846d048954a3871ecd036f2fb",
+      "after_sha256": "71143251b9bd04d427794b11bac25f4c1a20c5c846d048954a3871ecd036f2fb",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "before_sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+      "after_sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "before_sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+      "after_sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2",
+      "actual_result": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenPattern.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a",
+      "actual_result": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/spi/ToolProvider.java",
+      "before_sha256": "3d6fe7fa421c5c7399d7f20039ae35d8e9150a53daf75190fdb08f93e0cbaaaa",
+      "after_sha256": "3d6fe7fa421c5c7399d7f20039ae35d8e9150a53daf75190fdb08f93e0cbaaaa",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Collector.java",
+      "before_sha256": "2c40775adef5c2a04bd0b8c319cd25579743a9bf0aea4cbb964225978edd362c",
+      "after_sha256": "2c40775adef5c2a04bd0b8c319cd25579743a9bf0aea4cbb964225978edd362c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Collectors.java",
+      "before_sha256": "0d0221d083f9c5f1c29fa39c1a4c7fb9faf003f014b38a4a2f2f574a9110b989",
+      "after_sha256": "0d0221d083f9c5f1c29fa39c1a4c7fb9faf003f014b38a4a2f2f574a9110b989",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/DoubleStream.java",
+      "before_sha256": "7cd71556890144560e65eab1b34f116481d5f4b3f15fdd03c1d722f8adf899da",
+      "after_sha256": "7cd71556890144560e65eab1b34f116481d5f4b3f15fdd03c1d722f8adf899da",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/IntStream.java",
+      "before_sha256": "620c46ace2477bfbaa30309bdb0cf15e4a027c15737f10f16be15b66469a4051",
+      "after_sha256": "620c46ace2477bfbaa30309bdb0cf15e4a027c15737f10f16be15b66469a4051",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/LongStream.java",
+      "before_sha256": "c67a6ccaf743642865390785642e7c2b4a8bea9b86f49b5068c4ab1e4633c545",
+      "after_sha256": "c67a6ccaf743642865390785642e7c2b4a8bea9b86f49b5068c4ab1e4633c545",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Stream.java",
+      "before_sha256": "688ef137efe90856360c35f86a000b0ec49d12c66294f7bd0f6cceb2022bab0f",
+      "after_sha256": "688ef137efe90856360c35f86a000b0ec49d12c66294f7bd0f6cceb2022bab0f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/StreamSupport.java",
+      "before_sha256": "5460d4c1f98d9c576c398336f0295cd88fd30f6a23ce6fa48cc9cfe64a714b79",
+      "after_sha256": "5460d4c1f98d9c576c398336f0295cd88fd30f6a23ce6fa48cc9cfe64a714b79",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "before_sha256": "d0726fb7f8615fed0d3c9747f62750569506242b1cc32c806bae0f3c64816355",
+      "after_sha256": "d0726fb7f8615fed0d3c9747f62750569506242b1cc32c806bae0f3c64816355",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/zip/ZipFile.java",
+      "before_sha256": "7ee5939bce88edf5310bd211cdb3115b480b7bd4de4a9e3e9b8b8bd59fc992e2",
+      "after_sha256": "7ee5939bce88edf5310bd211cdb3115b480b7bd4de4a9e3e9b8b8bd59fc992e2",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/zip/ZipInputStream.java",
+      "before_sha256": "425986290b8b2ccc23a28785047e31ec31f1d35a70a59ac486ddfac7a68891ad",
+      "after_sha256": "425986290b8b2ccc23a28785047e31ec31f1d35a70a59ac486ddfac7a68891ad",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/zip/ZipOutputStream.java",
+      "before_sha256": "bc5d9624c7181c3a18f3d8c35c41890deeac61afb909a6ef521de6e854cb4397",
+      "after_sha256": "bc5d9624c7181c3a18f3d8c35c41890deeac61afb909a6ef521de6e854cb4397",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/Cipher.java",
+      "before_sha256": "f313e3e918ec46bcff0027eb5056eef0f0e4836d06477aca9720fc5dc0260a34",
+      "after_sha256": "f313e3e918ec46bcff0027eb5056eef0f0e4836d06477aca9720fc5dc0260a34",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/KeyAgreement.java",
+      "before_sha256": "13e1fc615595712ff267b0fbb9c5a3591d6127b3cf08735810cc75ec0dd64b8f",
+      "after_sha256": "13e1fc615595712ff267b0fbb9c5a3591d6127b3cf08735810cc75ec0dd64b8f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/KeyGenerator.java",
+      "before_sha256": "d7f75b4508778d1f5af81f4ac56de6f45d3fcefb2a49890bc384ad94ae2f729b",
+      "after_sha256": "d7f75b4508778d1f5af81f4ac56de6f45d3fcefb2a49890bc384ad94ae2f729b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/Mac.java",
+      "before_sha256": "06edc836543381b9f7955c6782ac77b1f3ef62be908593c3005fa16971adec69",
+      "after_sha256": "06edc836543381b9f7955c6782ac77b1f3ef62be908593c3005fa16971adec69",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/SecretKeyFactory.java",
+      "before_sha256": "326d059f51de6106d818898bb57ff9715fd120c75ea350f9d64c005c9a7a73c4",
+      "after_sha256": "326d059f51de6106d818898bb57ff9715fd120c75ea350f9d64c005c9a7a73c4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ServerSocketFactory.java",
+      "before_sha256": "78a338db49dd6d06a86d8946093fadf3277e58db087c8ef8fe71df2f26d02225",
+      "after_sha256": "78a338db49dd6d06a86d8946093fadf3277e58db087c8ef8fe71df2f26d02225",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/SocketFactory.java",
+      "before_sha256": "140f92bd3663f199e0f8ad6068499cd76b656835f7323829ccadf19d9a0553c3",
+      "after_sha256": "140f92bd3663f199e0f8ad6068499cd76b656835f7323829ccadf19d9a0553c3",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ssl/HttpsURLConnection.java",
+      "before_sha256": "d74d10e58cca4e942ef74d113b0bd1a170f718804abedfdb8d09439482ec25ed",
+      "after_sha256": "d74d10e58cca4e942ef74d113b0bd1a170f718804abedfdb8d09439482ec25ed",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ssl/KeyManagerFactory.java",
+      "before_sha256": "4ae1d5748b0837c61da2c1e572dc522a38b2d8b80268fe61d73e851bd1371e83",
+      "after_sha256": "4ae1d5748b0837c61da2c1e572dc522a38b2d8b80268fe61d73e851bd1371e83",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ssl/SSLContext.java",
+      "before_sha256": "ed04445d7c82312a2f6bce3225fa2aa8bfe0aa6878b131113086d10c6a48e273",
+      "after_sha256": "ed04445d7c82312a2f6bce3225fa2aa8bfe0aa6878b131113086d10c6a48e273",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ssl/TrustManagerFactory.java",
+      "before_sha256": "79dddaaf633eb1619a70e41c99d0ca5318fc8f4a5fe259b5092fcff129bf2066",
+      "after_sha256": "79dddaaf633eb1619a70e41c99d0ca5318fc8f4a5fe259b5092fcff129bf2066",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/security/auth/Subject.java",
+      "before_sha256": "2b0590c629d6a77ddcdda1dbc38f30e97bb15c0fc98dca822d1c9f1fd2f02f6e",
+      "after_sha256": "2b0590c629d6a77ddcdda1dbc38f30e97bb15c0fc98dca822d1c9f1fd2f02f6e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/security/auth/login/Configuration.java",
+      "before_sha256": "2d4c24d09fd70d5719daa7a8f540c7a165e9165c8ff20bcda71863d424883629",
+      "after_sha256": "2d4c24d09fd70d5719daa7a8f540c7a165e9165c8ff20bcda71863d424883629",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/security/auth/login/LoginContext.java",
+      "before_sha256": "9556c301893298f8e3da225fd33890125e18f59569b86c98d070ce272d55ebc1",
+      "after_sha256": "9556c301893298f8e3da225fd33890125e18f59569b86c98d070ce272d55ebc1",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/javax/security/auth/x500/X500Principal.java",
+      "before_sha256": "8ff8df2cd8da3e56f251aadcd833222f5072db522bc694c0146949be0d1104f6",
+      "after_sha256": "8ff8df2cd8da3e56f251aadcd833222f5072db522bc694c0146949be0d1104f6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/classes/module-info.java",
+      "before_sha256": "7fd7f4b25571bf13fc3e2048b87d730e8346e29102fd4a4159c0144699df55a8",
+      "after_sha256": "7fd7f4b25571bf13fc3e2048b87d730e8346e29102fd4a4159c0144699df55a8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "before_sha256": "7ecac17c362d2bce127b08c930b4beb263d06bd79439fcffcdcc5801ca7718a7",
+      "after_sha256": "7ecac17c362d2bce127b08c930b4beb263d06bd79439fcffcdcc5801ca7718a7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/annotation/processing/AbstractProcessor.java",
+      "before_sha256": "5277fbb7385fef3a09f4a10af898d0615d9184ea7a3ad6e7e9b209e30fc8df85",
+      "after_sha256": "5277fbb7385fef3a09f4a10af898d0615d9184ea7a3ad6e7e9b209e30fc8df85",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/annotation/processing/Processor.java",
+      "before_sha256": "cc5f0f0c0eda8d74afce0277d637a6ca6e3b0d8cdf7b33565fefcde2601c0c94",
+      "after_sha256": "cc5f0f0c0eda8d74afce0277d637a6ca6e3b0d8cdf7b33565fefcde2601c0c94",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/lang/model/SourceVersion.java",
+      "before_sha256": "e692875b5cb20697dd3a458506dc06a68c1ea51a90440af52394de6be2ec8ab3",
+      "after_sha256": "e692875b5cb20697dd3a458506dc06a68c1ea51a90440af52394de6be2ec8ab3",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/lang/model/util/ElementFilter.java",
+      "before_sha256": "2701ca5d259b23815c2ae1e7a9a467f9d69feb4368bbdd080fbf5d578ab2d081",
+      "after_sha256": "2701ca5d259b23815c2ae1e7a9a467f9d69feb4368bbdd080fbf5d578ab2d081",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/lang/model/util/Elements.java",
+      "before_sha256": "493c8a3f4a9feb1cd31e9778177a5c13427cced5d89ddca8cddbdf4d2657a548",
+      "after_sha256": "493c8a3f4a9feb1cd31e9778177a5c13427cced5d89ddca8cddbdf4d2657a548",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/lang/model/util/Types.java",
+      "before_sha256": "a4e685eb8de0ca0ec8ab31fc4ee77944c18e45d39a01dd4b611e1c1a8da9eeaf",
+      "after_sha256": "a4e685eb8de0ca0ec8ab31fc4ee77944c18e45d39a01dd4b611e1c1a8da9eeaf",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/DocumentationTool.java",
+      "before_sha256": "5d3c3e2033b22f7989387aa77bbcf032c971f734f544ec11015bdba3e19c899f",
+      "after_sha256": "5d3c3e2033b22f7989387aa77bbcf032c971f734f544ec11015bdba3e19c899f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/JavaCompiler.java",
+      "before_sha256": "869b3969905c0d620fd5d5a395c5d56d2a3b00bf93a121a412703be169066ff0",
+      "after_sha256": "869b3969905c0d620fd5d5a395c5d56d2a3b00bf93a121a412703be169066ff0",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/StandardJavaFileManager.java",
+      "before_sha256": "a9a4384b2a094c0a204d46a77c4f1b77e43cc76dfe473989cf368cad8f167880",
+      "after_sha256": "a9a4384b2a094c0a204d46a77c4f1b77e43cc76dfe473989cf368cad8f167880",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/Tool.java",
+      "before_sha256": "2083e71344c76ed0cea76c0636f906a7ea6ae20ffd0bb8423bf2632728ffb90b",
+      "after_sha256": "2083e71344c76ed0cea76c0636f906a7ea6ae20ffd0bb8423bf2632728ffb90b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/ToolProvider.java",
+      "before_sha256": "712fdeccf7fb16fdd50a4e98d22eade3c559ce2e18ca8553c98b0e4f685899a3",
+      "after_sha256": "712fdeccf7fb16fdd50a4e98d22eade3c559ce2e18ca8553c98b0e4f685899a3",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.compiler/share/classes/module-info.java",
+      "before_sha256": "2000aabb2636a0cb894ee269a53ef6d3cce80326ef890504af92a6266686ceb6",
+      "after_sha256": "2000aabb2636a0cb894ee269a53ef6d3cce80326ef890504af92a6266686ceb6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/java/awt/datatransfer/Clipboard.java",
+      "before_sha256": "02890c687dd882a99ebe55f8e03204e55e0cf20e8082d58abc852af83f4ef382",
+      "after_sha256": "02890c687dd882a99ebe55f8e03204e55e0cf20e8082d58abc852af83f4ef382",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/java/awt/datatransfer/DataFlavor.java",
+      "before_sha256": "499d61fcf983e61c8b6d9b3fa7f2699dd7d12ce0a68ffdba943d1207e28d0c14",
+      "after_sha256": "499d61fcf983e61c8b6d9b3fa7f2699dd7d12ce0a68ffdba943d1207e28d0c14",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/java/awt/datatransfer/StringSelection.java",
+      "before_sha256": "e4ea174eced1b48fd56b6e9fbf1a799eb386eadadd6458e32d94a6a5c925aa0b",
+      "after_sha256": "e4ea174eced1b48fd56b6e9fbf1a799eb386eadadd6458e32d94a6a5c925aa0b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/java/awt/datatransfer/SystemFlavorMap.java",
+      "before_sha256": "312ada51c58388daca1998b7ed5c2fc6547597b721f1a05223cabd1526167732",
+      "after_sha256": "312ada51c58388daca1998b7ed5c2fc6547597b721f1a05223cabd1526167732",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/module-info.java",
+      "before_sha256": "f75d752048a62762ed33f5a3567829ec7ef738f92b107c6bb1bea3b7f6dadad2",
+      "after_sha256": "f75d752048a62762ed33f5a3567829ec7ef738f92b107c6bb1bea3b7f6dadad2",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/Desktop.java",
+      "before_sha256": "c30c1f0079c395e0330ea05a049480bd8e2f6c9351a50dcaec8c8e1591e332f5",
+      "after_sha256": "c30c1f0079c395e0330ea05a049480bd8e2f6c9351a50dcaec8c8e1591e332f5",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/EventQueue.java",
+      "before_sha256": "7abc2cc893e92610aa03b901473216eb6793f7746f5183a1b6706060a2f61953",
+      "after_sha256": "7abc2cc893e92610aa03b901473216eb6793f7746f5183a1b6706060a2f61953",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/Graphics2D.java",
+      "before_sha256": "aa92e88792fdebea8d48553622c023277ed00259169a2c89ec7911b02dd01f6f",
+      "after_sha256": "aa92e88792fdebea8d48553622c023277ed00259169a2c89ec7911b02dd01f6f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/GraphicsEnvironment.java",
+      "before_sha256": "b9240aea0952ee7b691de9b2cdafe07a5460d6fbe4e9188d9a954a41fc974f7f",
+      "after_sha256": "b9240aea0952ee7b691de9b2cdafe07a5460d6fbe4e9188d9a954a41fc974f7f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/Robot.java",
+      "before_sha256": "db5743e1dce454245f45180d1b63b02524aa8424eaf0562a77f5f2123e841549",
+      "after_sha256": "db5743e1dce454245f45180d1b63b02524aa8424eaf0562a77f5f2123e841549",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/Toolkit.java",
+      "before_sha256": "5109cf43ae3888c2969e825b54baa75c0a8902052048b2837866e7476f1e3086",
+      "after_sha256": "5109cf43ae3888c2969e825b54baa75c0a8902052048b2837866e7476f1e3086",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/color/ColorSpace.java",
+      "before_sha256": "5f23c7cd50ef8c8c55834b7f69833254bac1e584554d67e1a3adbb924fa21119",
+      "after_sha256": "5f23c7cd50ef8c8c55834b7f69833254bac1e584554d67e1a3adbb924fa21119",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/font/FontRenderContext.java",
+      "before_sha256": "88c953478fd4d3b2670347fbbb2c0f02ddc95ed5bd570b7c22d8a9f46a97956d",
+      "after_sha256": "88c953478fd4d3b2670347fbbb2c0f02ddc95ed5bd570b7c22d8a9f46a97956d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/geom/AffineTransform.java",
+      "before_sha256": "8944a08d51888586d1204b0f8d00027e9de06fdec584bae5b6dc43182908dd89",
+      "after_sha256": "8944a08d51888586d1204b0f8d00027e9de06fdec584bae5b6dc43182908dd89",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/image/BufferedImage.java",
+      "before_sha256": "a43353e3abe264b18e4734ae31a62357f8e1561d631ca042ddb8e74d44ce11fa",
+      "after_sha256": "a43353e3abe264b18e4734ae31a62357f8e1561d631ca042ddb8e74d44ce11fa",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/print/PrinterJob.java",
+      "before_sha256": "2e40997a145be04e6cb784d1ccbf2f9d53d34be753f1dfd1589ebd100b27c0a8",
+      "after_sha256": "2e40997a145be04e6cb784d1ccbf2f9d53d34be753f1dfd1589ebd100b27c0a8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/beans/Beans.java",
+      "before_sha256": "b3e6f44d42c2280c8198ebac941e9bc384d906c66a7edd713983b1a19f77c943",
+      "after_sha256": "b3e6f44d42c2280c8198ebac941e9bc384d906c66a7edd713983b1a19f77c943",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/beans/Introspector.java",
+      "before_sha256": "fc874765f00f73e12588f2acc412352441c184a405750d8361b090f90d0e35da",
+      "after_sha256": "fc874765f00f73e12588f2acc412352441c184a405750d8361b090f90d0e35da",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/beans/PropertyChangeSupport.java",
+      "before_sha256": "ffe028dd59d9bd36ea58922bd8ef2177aea74ace728479844cb6c44a72267625",
+      "after_sha256": "ffe028dd59d9bd36ea58922bd8ef2177aea74ace728479844cb6c44a72267625",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/accessibility/AccessibilityProvider.java",
+      "before_sha256": "4cd5fe6b7a2a8419f6dc661cb2a36b53fcf5e2bdda783edc5edb17087beb4546",
+      "after_sha256": "4cd5fe6b7a2a8419f6dc661cb2a36b53fcf5e2bdda783edc5edb17087beb4546",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/ImageIO.java",
+      "before_sha256": "fde1566ad8c6a0a37be442a320950cfd251ffbb265a23a7bd38decf317dac850",
+      "after_sha256": "fde1566ad8c6a0a37be442a320950cfd251ffbb265a23a7bd38decf317dac850",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/ImageReader.java",
+      "before_sha256": "bfebbae14a550bd9268e97779fcbd44597f65c0873672385ffce2dc4cf9be5e6",
+      "after_sha256": "bfebbae14a550bd9268e97779fcbd44597f65c0873672385ffce2dc4cf9be5e6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/ImageWriter.java",
+      "before_sha256": "9ab10ca5312834e56b3c89125a5c1786716029bb3db56498014aaca635d61c20",
+      "after_sha256": "9ab10ca5312834e56b3c89125a5c1786716029bb3db56498014aaca635d61c20",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/metadata/IIOMetadata.java",
+      "before_sha256": "92f586bd66d6a1e20639c3a8923d0f1ff836fea35eb7dac1be7c23281d692887",
+      "after_sha256": "92f586bd66d6a1e20639c3a8923d0f1ff836fea35eb7dac1be7c23281d692887",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/spi/IIORegistry.java",
+      "before_sha256": "3f93086ef5a8503e027195812efdda6800e6dea28f7a81864da3230d64a7fddb",
+      "after_sha256": "3f93086ef5a8503e027195812efdda6800e6dea28f7a81864da3230d64a7fddb",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/print/PrintServiceLookup.java",
+      "before_sha256": "06eb21d8b7c54a7079d1f30ad37d3fe559f63b6cd4212860a12410e4e0cbeed7",
+      "after_sha256": "06eb21d8b7c54a7079d1f30ad37d3fe559f63b6cd4212860a12410e4e0cbeed7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/print/StreamPrintServiceFactory.java",
+      "before_sha256": "6e6d3e1759c25d5caf6149e1c26ea8eadcc79ba5c398fc6513901a102f78dd4e",
+      "after_sha256": "6e6d3e1759c25d5caf6149e1c26ea8eadcc79ba5c398fc6513901a102f78dd4e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/sound/midi/MidiSystem.java",
+      "before_sha256": "83beef97701362381b0fadff22e55843b5233ecfcee7175f5cf753faa7f723aa",
+      "after_sha256": "83beef97701362381b0fadff22e55843b5233ecfcee7175f5cf753faa7f723aa",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/sound/sampled/AudioSystem.java",
+      "before_sha256": "8d45fb36e8f6aa08f4909f0f1d9fcb8ec6ed6dd18413f20757d05eb17822c7b1",
+      "after_sha256": "8d45fb36e8f6aa08f4909f0f1d9fcb8ec6ed6dd18413f20757d05eb17822c7b1",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/BorderFactory.java",
+      "before_sha256": "cad40c26b1745ac68633c14b3cf03c718b63ddadf43dab52175e43d17a0744f8",
+      "after_sha256": "cad40c26b1745ac68633c14b3cf03c718b63ddadf43dab52175e43d17a0744f8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/JOptionPane.java",
+      "before_sha256": "117b01c9d7bbcc1f9fe6b9b5a771fe81d384c4ac9f8290ab29f52240932d07e0",
+      "after_sha256": "117b01c9d7bbcc1f9fe6b9b5a771fe81d384c4ac9f8290ab29f52240932d07e0",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/SwingUtilities.java",
+      "before_sha256": "3566a0e837bb579df5adc60f2f1d520dcbca1c280bf8ca09e50288b9bbeb7d61",
+      "after_sha256": "3566a0e837bb579df5adc60f2f1d520dcbca1c280bf8ca09e50288b9bbeb7d61",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/UIManager.java",
+      "before_sha256": "48e2d79fb7b5e05ca3906c6941403660bd658604ae029dfc7e13af0be50a01b3",
+      "after_sha256": "48e2d79fb7b5e05ca3906c6941403660bd658604ae029dfc7e13af0be50a01b3",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/text/Utilities.java",
+      "before_sha256": "234489c24b321112da19a6258def931ae034cda51b0743e8f1a2e3e388fa1e84",
+      "after_sha256": "234489c24b321112da19a6258def931ae034cda51b0743e8f1a2e3e388fa1e84",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.desktop/share/classes/module-info.java",
+      "before_sha256": "826ee060770beb42bcf762ac84d570f35a4a20c1b3645d0b83e766c8b2667a44",
+      "after_sha256": "826ee060770beb42bcf762ac84d570f35a4a20c1b3645d0b83e766c8b2667a44",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.instrument/share/classes/java/lang/instrument/ClassFileTransformer.java",
+      "before_sha256": "521cb1352fc76a6767eda99a98ddd6ad357c8c24e18a29736761d6f6d6e5bf90",
+      "after_sha256": "521cb1352fc76a6767eda99a98ddd6ad357c8c24e18a29736761d6f6d6e5bf90",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.instrument/share/classes/java/lang/instrument/Instrumentation.java",
+      "before_sha256": "afbeac228887ed016a5ef0794146af659c5e44df3d80b9d8733bd06316d754b2",
+      "after_sha256": "afbeac228887ed016a5ef0794146af659c5e44df3d80b9d8733bd06316d754b2",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.instrument/share/classes/module-info.java",
+      "before_sha256": "696f166120130feaf901ebfe7ece3f80144e2569b4822c1a4ab18066959009a6",
+      "after_sha256": "696f166120130feaf901ebfe7ece3f80144e2569b4822c1a4ab18066959009a6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.logging/share/classes/java/util/logging/Level.java",
+      "before_sha256": "6387ce3377e1300bd8f4efdbea46e6338fb9e58ef55e69404256551cba61e85d",
+      "after_sha256": "6387ce3377e1300bd8f4efdbea46e6338fb9e58ef55e69404256551cba61e85d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.logging/share/classes/java/util/logging/LogManager.java",
+      "before_sha256": "16ae42fe7982de3f4f1c01011491b61a110d0df0dff01e2b5b502344f0cb765e",
+      "after_sha256": "16ae42fe7982de3f4f1c01011491b61a110d0df0dff01e2b5b502344f0cb765e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.logging/share/classes/java/util/logging/Logger.java",
+      "before_sha256": "adec0da6de3b96103e6b174fbb7a6defb50a82d59181e2706d9441aff44fc10c",
+      "after_sha256": "adec0da6de3b96103e6b174fbb7a6defb50a82d59181e2706d9441aff44fc10c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.logging/share/classes/module-info.java",
+      "before_sha256": "84881e743f4235aa6f9774c5f80512c16367b806ef170ef7f2b1611042f56f1b",
+      "after_sha256": "84881e743f4235aa6f9774c5f80512c16367b806ef170ef7f2b1611042f56f1b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management.rmi/share/classes/javax/management/remote/rmi/RMIConnector.java",
+      "before_sha256": "6f2297921149ac38a0b60bd4d00c9ca148895fc345f2177553e9feb6958ce105",
+      "after_sha256": "6f2297921149ac38a0b60bd4d00c9ca148895fc345f2177553e9feb6958ce105",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management.rmi/share/classes/javax/management/remote/rmi/RMIConnectorServer.java",
+      "before_sha256": "05f42499cf461d4c73889da508269ec2d35b3f33d8ab7b47e2640dde9b7bd9e7",
+      "after_sha256": "05f42499cf461d4c73889da508269ec2d35b3f33d8ab7b47e2640dde9b7bd9e7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management.rmi/share/classes/module-info.java",
+      "before_sha256": "5dc10550c5f5d8afbd40e1c5b3380708c8ff88e8381957cf8d1f6bbf3feba173",
+      "after_sha256": "5dc10550c5f5d8afbd40e1c5b3380708c8ff88e8381957cf8d1f6bbf3feba173",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/java/lang/management/ManagementFactory.java",
+      "before_sha256": "347aec96a5efd95cea25f992abf9531a97f79843c1f53bb6333ddb525a0681c8",
+      "after_sha256": "347aec96a5efd95cea25f992abf9531a97f79843c1f53bb6333ddb525a0681c8",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/java/lang/management/MemoryMXBean.java",
+      "before_sha256": "0ce64f3fd12bab0551f00ec1b1683857a133ffb41ca4ab0607c8ecfdfccae372",
+      "after_sha256": "0ce64f3fd12bab0551f00ec1b1683857a133ffb41ca4ab0607c8ecfdfccae372",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/JMX.java",
+      "before_sha256": "0b1fc03c6251a297d7eef1fc6e08cd355af806fb01c3b745703d536da3b8481f",
+      "after_sha256": "0b1fc03c6251a297d7eef1fc6e08cd355af806fb01c3b745703d536da3b8481f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/MBeanServerFactory.java",
+      "before_sha256": "5f22d80a22fcdadadb6072462906737d26b8948bd3417d312cb6580a1a1f8d91",
+      "after_sha256": "5f22d80a22fcdadadb6072462906737d26b8948bd3417d312cb6580a1a1f8d91",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/MBeanServerInvocationHandler.java",
+      "before_sha256": "7a055943fef39444df123cb7c8e5bbce43ba1b322022a456d02b0b764648b2b6",
+      "after_sha256": "7a055943fef39444df123cb7c8e5bbce43ba1b322022a456d02b0b764648b2b6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/ObjectName.java",
+      "before_sha256": "a2b2391de17ff1445160474395191abcb28d145c98aec4bc1813739fae9422ab",
+      "after_sha256": "a2b2391de17ff1445160474395191abcb28d145c98aec4bc1813739fae9422ab",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/openmbean/CompositeDataSupport.java",
+      "before_sha256": "58a71e2b36e56974456662a28e6bb2b798f0ae44a8bb2dfac2bede353c7b68ac",
+      "after_sha256": "58a71e2b36e56974456662a28e6bb2b798f0ae44a8bb2dfac2bede353c7b68ac",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/remote/JMXConnectorFactory.java",
+      "before_sha256": "10b430a99ec9347e72844e4fe0946a7709870412754fc8188a1749e48086fdc5",
+      "after_sha256": "10b430a99ec9347e72844e4fe0946a7709870412754fc8188a1749e48086fdc5",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/remote/JMXConnectorServerFactory.java",
+      "before_sha256": "a35db5c590f46c4dceb0181fcfba4c540b5053efd39818f021c54feb698512ee",
+      "after_sha256": "a35db5c590f46c4dceb0181fcfba4c540b5053efd39818f021c54feb698512ee",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.management/share/classes/module-info.java",
+      "before_sha256": "efdee16def3b209b98d067604d4b58e00e4c661f3cbd5b7c3baa77b9fc92d1b7",
+      "after_sha256": "efdee16def3b209b98d067604d4b58e00e4c661f3cbd5b7c3baa77b9fc92d1b7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/InitialContext.java",
+      "before_sha256": "964acfbdefeab7e0592725f726ba49cc0a94b87623bc794873c7620c2e6e5f7a",
+      "after_sha256": "964acfbdefeab7e0592725f726ba49cc0a94b87623bc794873c7620c2e6e5f7a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/NameParser.java",
+      "before_sha256": "58200cd9d158d809911e1c78639ea31cbf6b7247660d460c15fa4f85de935ad6",
+      "after_sha256": "58200cd9d158d809911e1c78639ea31cbf6b7247660d460c15fa4f85de935ad6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/directory/InitialDirContext.java",
+      "before_sha256": "795ab6abab7e61974be59be485f5aad8ffc4b226fdce934e029fe54db5134d2d",
+      "after_sha256": "795ab6abab7e61974be59be485f5aad8ffc4b226fdce934e029fe54db5134d2d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/ldap/InitialLdapContext.java",
+      "before_sha256": "9b04e0004782eaccdcbcde58692610ee3fad123564440ddabd6c4a8549250f1c",
+      "after_sha256": "9b04e0004782eaccdcbcde58692610ee3fad123564440ddabd6c4a8549250f1c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/ldap/LdapName.java",
+      "before_sha256": "2fee0ace129c6fa7ea0877831d07f9f24e05d7d5a7a3f10e24182d34dedf24b4",
+      "after_sha256": "2fee0ace129c6fa7ea0877831d07f9f24e05d7d5a7a3f10e24182d34dedf24b4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/spi/DirectoryManager.java",
+      "before_sha256": "ce9741e2d9d5a7011cf0e319b8769aa7e8d3ed8166d1e06073bd07c9b1180d3d",
+      "after_sha256": "ce9741e2d9d5a7011cf0e319b8769aa7e8d3ed8166d1e06073bd07c9b1180d3d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/spi/InitialContextFactory.java",
+      "before_sha256": "acc8861c08000279f45e724d386440f784d5340b68a5402b8bee34a21fcf0803",
+      "after_sha256": "acc8861c08000279f45e724d386440f784d5340b68a5402b8bee34a21fcf0803",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/spi/NamingManager.java",
+      "before_sha256": "200bebb88ec338e30973d93313f8e29dda22d4620e1a73ad047f6d1dd5ae9f7f",
+      "after_sha256": "200bebb88ec338e30973d93313f8e29dda22d4620e1a73ad047f6d1dd5ae9f7f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.naming/share/classes/module-info.java",
+      "before_sha256": "7e46da3ff0db86423f4fb1f74c859863e564c8154bd6ea51914de84e27d6dcb6",
+      "after_sha256": "7e46da3ff0db86423f4fb1f74c859863e564c8154bd6ea51914de84e27d6dcb6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.net.http/share/classes/java/net/http/HttpClient.java",
+      "before_sha256": "20bc65f631965c5e15902805e0625143f6756225255ec272141ab354f4cfc38a",
+      "after_sha256": "20bc65f631965c5e15902805e0625143f6756225255ec272141ab354f4cfc38a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.net.http/share/classes/module-info.java",
+      "before_sha256": "0c066f764c771cbbe2db32c1cf7c21bf29bce10f4eaf3d0360851c69d744976c",
+      "after_sha256": "0c066f764c771cbbe2db32c1cf7c21bf29bce10f4eaf3d0360851c69d744976c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.prefs/share/classes/java/util/prefs/Preferences.java",
+      "before_sha256": "206c482648808a5cb4d1c2349bf3a2863899b40f63748aaf86d8667be40840ed",
+      "after_sha256": "206c482648808a5cb4d1c2349bf3a2863899b40f63748aaf86d8667be40840ed",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.prefs/share/classes/java/util/prefs/PreferencesFactory.java",
+      "before_sha256": "c8c0dc70455047d9443fb82233c8d864b21c7d26be4a4d22a56dabebd20919ec",
+      "after_sha256": "c8c0dc70455047d9443fb82233c8d864b21c7d26be4a4d22a56dabebd20919ec",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.prefs/share/classes/module-info.java",
+      "before_sha256": "895e2a5105586c3aa09e5d34f4737e58d916da526aaff81d8536394a28c59bb1",
+      "after_sha256": "895e2a5105586c3aa09e5d34f4737e58d916da526aaff81d8536394a28c59bb1",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.rmi/share/classes/java/rmi/Naming.java",
+      "before_sha256": "ef0106c66bddded745126485165af7ebcb3478fa5ddcf4e940233a88329eeccd",
+      "after_sha256": "ef0106c66bddded745126485165af7ebcb3478fa5ddcf4e940233a88329eeccd",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.rmi/share/classes/java/rmi/Remote.java",
+      "before_sha256": "87f189dea0567da24715101cf76e60230a55ad8006dd07a410501b497893e977",
+      "after_sha256": "87f189dea0567da24715101cf76e60230a55ad8006dd07a410501b497893e977",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.rmi/share/classes/java/rmi/registry/LocateRegistry.java",
+      "before_sha256": "1b7e720eabe85e7526be3ed4760fe2bd3077c6379c204b92f1b4905245342817",
+      "after_sha256": "1b7e720eabe85e7526be3ed4760fe2bd3077c6379c204b92f1b4905245342817",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.rmi/share/classes/java/rmi/server/UnicastRemoteObject.java",
+      "before_sha256": "2bc708edb6104de17c8c490d7bcd18c4c67756d3f38a0618dccc17e4db7993ce",
+      "after_sha256": "2bc708edb6104de17c8c490d7bcd18c4c67756d3f38a0618dccc17e4db7993ce",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.rmi/share/classes/javax/rmi/ssl/SslRMIClientSocketFactory.java",
+      "before_sha256": "c110c7e8dc428f2d2323a71be49bca1cbe1047f6752dd211c8e62376dbdeadd4",
+      "after_sha256": "c110c7e8dc428f2d2323a71be49bca1cbe1047f6752dd211c8e62376dbdeadd4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.rmi/share/classes/module-info.java",
+      "before_sha256": "a587d29b528b3cf600ea8e0167c9540ad4c201cdce6b6d2192eb7dd744fd589d",
+      "after_sha256": "a587d29b528b3cf600ea8e0167c9540ad4c201cdce6b6d2192eb7dd744fd589d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.scripting/share/classes/javax/script/ScriptEngine.java",
+      "before_sha256": "db1eab57963d65daf5980a3902087458ac4dc1183f812e7f7538f8e06f1e82ae",
+      "after_sha256": "db1eab57963d65daf5980a3902087458ac4dc1183f812e7f7538f8e06f1e82ae",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.scripting/share/classes/javax/script/ScriptEngineFactory.java",
+      "before_sha256": "429d8e66d40e573a69cda4f02310eccec26256f2fd6b68898c06fbeac8bdfe7e",
+      "after_sha256": "429d8e66d40e573a69cda4f02310eccec26256f2fd6b68898c06fbeac8bdfe7e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.scripting/share/classes/javax/script/ScriptEngineManager.java",
+      "before_sha256": "f88c51e514de0b8d24f039954526beef8356b50f18e3ca992b4f08c8bdfa901a",
+      "after_sha256": "f88c51e514de0b8d24f039954526beef8356b50f18e3ca992b4f08c8bdfa901a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.scripting/share/classes/javax/script/SimpleBindings.java",
+      "before_sha256": "586664c919e03a6ac740b050687713f00fc825eb9080cd7cffb258b3a8c691ed",
+      "after_sha256": "586664c919e03a6ac740b050687713f00fc825eb9080cd7cffb258b3a8c691ed",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.scripting/share/classes/module-info.java",
+      "before_sha256": "eed9f6333f2c99e670fe800777260b11070fd96e2e2ab8f37063713fdf757da4",
+      "after_sha256": "eed9f6333f2c99e670fe800777260b11070fd96e2e2ab8f37063713fdf757da4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.se/share/classes/module-info.java",
+      "before_sha256": "ff4d7cda5f994f56ee063f0b227c4409c9f9bbfe8b779b7a4b2a08bff8a58629",
+      "after_sha256": "ff4d7cda5f994f56ee063f0b227c4409c9f9bbfe8b779b7a4b2a08bff8a58629",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/javax/security/auth/kerberos/KerberosPrincipal.java",
+      "before_sha256": "0d4379536aac848464c5b5b5f6297266aa351c7d5c4791484a1719c08ee9dc1b",
+      "after_sha256": "0d4379536aac848464c5b5b5f6297266aa351c7d5c4791484a1719c08ee9dc1b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/javax/security/auth/kerberos/KerberosTicket.java",
+      "before_sha256": "282f95763c367c4a6cea80372d109774b9ff31fa98c945c7cf13d91143385cae",
+      "after_sha256": "282f95763c367c4a6cea80372d109774b9ff31fa98c945c7cf13d91143385cae",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/module-info.java",
+      "before_sha256": "452f6e992a6ddf0c79d99b45bb774df59fd8050bc57ada8b6b04b94a61314316",
+      "after_sha256": "452f6e992a6ddf0c79d99b45bb774df59fd8050bc57ada8b6b04b94a61314316",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/org/ietf/jgss/GSSContext.java",
+      "before_sha256": "0d2c7d25798a8a8bdb89ad6b3118a54e3bd991a5131e602fd55a3f90e3c7032f",
+      "after_sha256": "0d2c7d25798a8a8bdb89ad6b3118a54e3bd991a5131e602fd55a3f90e3c7032f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/org/ietf/jgss/GSSManager.java",
+      "before_sha256": "e94fc365fea0c65828084afdfb32d873199433e36fa7cad7156756382ce5d4e4",
+      "after_sha256": "e94fc365fea0c65828084afdfb32d873199433e36fa7cad7156756382ce5d4e4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.sasl/share/classes/javax/security/sasl/Sasl.java",
+      "before_sha256": "f799852eb6e6b87698c54940ac76a80d2978c3d0740cebda6621eefa33160cf7",
+      "after_sha256": "f799852eb6e6b87698c54940ac76a80d2978c3d0740cebda6621eefa33160cf7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.sasl/share/classes/javax/security/sasl/SaslClient.java",
+      "before_sha256": "1611027626f53514ef806d0c7b5e2176a2efcf3284f7b6311abf27eaf17bbd8e",
+      "after_sha256": "1611027626f53514ef806d0c7b5e2176a2efcf3284f7b6311abf27eaf17bbd8e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.sasl/share/classes/javax/security/sasl/SaslServer.java",
+      "before_sha256": "68e1ae16cd98c86edb3e0e5925b1e1f57f17e4d9145215a4bbb6341586f5ab2d",
+      "after_sha256": "68e1ae16cd98c86edb3e0e5925b1e1f57f17e4d9145215a4bbb6341586f5ab2d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.security.sasl/share/classes/module-info.java",
+      "before_sha256": "2edbffe1adbc15c439210415fdb5318703f8ab3825e5d45e3dc7d72dbe6444fe",
+      "after_sha256": "2edbffe1adbc15c439210415fdb5318703f8ab3825e5d45e3dc7d72dbe6444fe",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/javax/smartcardio/CardTerminal.java",
+      "before_sha256": "24e54ff443cbb5a29f99673a901d0c4ebe4675e417a37af692cb2113bb3420c9",
+      "after_sha256": "24e54ff443cbb5a29f99673a901d0c4ebe4675e417a37af692cb2113bb3420c9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/javax/smartcardio/CommandAPDU.java",
+      "before_sha256": "ccbe1f75b6a38a3ef1472d8fa7c47e463e1c5bf2e9ab19207ff2bfa11d531460",
+      "after_sha256": "ccbe1f75b6a38a3ef1472d8fa7c47e463e1c5bf2e9ab19207ff2bfa11d531460",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/javax/smartcardio/ResponseAPDU.java",
+      "before_sha256": "7558eaee29a706975a56be2b0028ea5e8c03a14e7de1b1dc3cc293d6d1b45e7e",
+      "after_sha256": "7558eaee29a706975a56be2b0028ea5e8c03a14e7de1b1dc3cc293d6d1b45e7e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/javax/smartcardio/TerminalFactory.java",
+      "before_sha256": "dea692c8c091a2f114516688c27eb206caa7f92fdff94a27a8487eff6e057458",
+      "after_sha256": "dea692c8c091a2f114516688c27eb206caa7f92fdff94a27a8487eff6e057458",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/module-info.java",
+      "before_sha256": "175418d52ba35baac6648ebb8dc5e26bfc922fc2387c45a03b20001234daa9f6",
+      "after_sha256": "175418d52ba35baac6648ebb8dc5e26bfc922fc2387c45a03b20001234daa9f6",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.sql.rowset/share/classes/javax/sql/rowset/RowSetProvider.java",
+      "before_sha256": "04cbbf426dddca7ec2c23c04fe65cb732107a6697d0fc9f9e717cce3d889647e",
+      "after_sha256": "04cbbf426dddca7ec2c23c04fe65cb732107a6697d0fc9f9e717cce3d889647e",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.sql.rowset/share/classes/module-info.java",
+      "before_sha256": "93a2557f6a661ddc4bbb4883253edc277bc0fb4be86192c03b30cef726635b3b",
+      "after_sha256": "93a2557f6a661ddc4bbb4883253edc277bc0fb4be86192c03b30cef726635b3b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.sql/share/classes/java/sql/Connection.java",
+      "before_sha256": "667a8188b928a266109fd95b0f79e251d4d4a567e50ddfdcf28b4b198f393cf4",
+      "after_sha256": "667a8188b928a266109fd95b0f79e251d4d4a567e50ddfdcf28b4b198f393cf4",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.sql/share/classes/java/sql/DriverManager.java",
+      "before_sha256": "ed7367de864cbf8a5bf7ed025bcfe91582b47eb263ec031d3caf53ad049e0a8a",
+      "after_sha256": "ed7367de864cbf8a5bf7ed025bcfe91582b47eb263ec031d3caf53ad049e0a8a",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.sql/share/classes/java/sql/ResultSet.java",
+      "before_sha256": "9d37235852d9ce6b60157d77c65268ec1a3cb2550735eb61d8235e965842724b",
+      "after_sha256": "9d37235852d9ce6b60157d77c65268ec1a3cb2550735eb61d8235e965842724b",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.sql/share/classes/java/sql/Statement.java",
+      "before_sha256": "a39ef7455400ad8ef34cb6343c4a8ec2ae8332992cd825c5ed6580e85c07fc0d",
+      "after_sha256": "a39ef7455400ad8ef34cb6343c4a8ec2ae8332992cd825c5ed6580e85c07fc0d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.sql/share/classes/module-info.java",
+      "before_sha256": "61aae53c2fce8a2fdcd2d8a0ca74b27297535c9c2e57edf84ecf31a2f2749ee0",
+      "after_sha256": "61aae53c2fce8a2fdcd2d8a0ca74b27297535c9c2e57edf84ecf31a2f2749ee0",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.transaction.xa/share/classes/javax/transaction/xa/XAException.java",
+      "before_sha256": "3d909d832170f5da26cc905684e0ba96c8016bd194dc2a0e5925b2ca423f52d2",
+      "after_sha256": "3d909d832170f5da26cc905684e0ba96c8016bd194dc2a0e5925b2ca423f52d2",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.transaction.xa/share/classes/javax/transaction/xa/XAResource.java",
+      "before_sha256": "2748acec898c07a100bf68cf5d37ee607249792febf0fb524710e138a632ebfa",
+      "after_sha256": "2748acec898c07a100bf68cf5d37ee607249792febf0fb524710e138a632ebfa",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.transaction.xa/share/classes/javax/transaction/xa/Xid.java",
+      "before_sha256": "994e082a24bac07a801756c8f34a5570ea73ffa93ff58a79189e1f1dde3dea3f",
+      "after_sha256": "994e082a24bac07a801756c8f34a5570ea73ffa93ff58a79189e1f1dde3dea3f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.transaction.xa/share/classes/module-info.java",
+      "before_sha256": "69b78361528699b3947d083ad286b6fa3016cdbb06b818b368140db0947c7aa9",
+      "after_sha256": "69b78361528699b3947d083ad286b6fa3016cdbb06b818b368140db0947c7aa9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/javax/xml/crypto/KeySelector.java",
+      "before_sha256": "c54790d76340c33845bc06c855f9de4ef720bceaa0fdc66d01ebe6dc521dffc9",
+      "after_sha256": "c54790d76340c33845bc06c855f9de4ef720bceaa0fdc66d01ebe6dc521dffc9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/javax/xml/crypto/dsig/TransformService.java",
+      "before_sha256": "17db30c1231fe087d598d2c7bc7b5b08f586beda1ca4de7a322beb688e5bb19c",
+      "after_sha256": "17db30c1231fe087d598d2c7bc7b5b08f586beda1ca4de7a322beb688e5bb19c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/javax/xml/crypto/dsig/XMLSignatureFactory.java",
+      "before_sha256": "9c8fb4652e91a565ae1453f152342eff87de226750ae2700bbb0037fdaf073fc",
+      "after_sha256": "9c8fb4652e91a565ae1453f152342eff87de226750ae2700bbb0037fdaf073fc",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/javax/xml/crypto/dsig/keyinfo/KeyInfoFactory.java",
+      "before_sha256": "c8c959deee698a94787cdb10dd72fca458ec98f8972e5e44a5d6baacff9e6305",
+      "after_sha256": "c8c959deee698a94787cdb10dd72fca458ec98f8972e5e44a5d6baacff9e6305",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/module-info.java",
+      "before_sha256": "a80ea6f850e78f4fc0e848f67d76ebaf6fb91f8b54c97e9c870d1688ec8a35db",
+      "after_sha256": "a80ea6f850e78f4fc0e848f67d76ebaf6fb91f8b54c97e9c870d1688ec8a35db",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/XMLConstants.java",
+      "before_sha256": "f59714563fe5b78f150f25e55cc2e81ee50f925a4b0163529995d8a8fadbef27",
+      "after_sha256": "f59714563fe5b78f150f25e55cc2e81ee50f925a4b0163529995d8a8fadbef27",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/catalog/CatalogFeatures.java",
+      "before_sha256": "e210b48160aa6a094ace9b5af8d3a2a25ad1a6af93db16b8d4570ebe935b104d",
+      "after_sha256": "e210b48160aa6a094ace9b5af8d3a2a25ad1a6af93db16b8d4570ebe935b104d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/catalog/CatalogManager.java",
+      "before_sha256": "e0d6cb62db5be25bb223d7e652809ac3b9fb9c728a8f617a97be7b8eebacb4f1",
+      "after_sha256": "e0d6cb62db5be25bb223d7e652809ac3b9fb9c728a8f617a97be7b8eebacb4f1",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/datatype/DatatypeFactory.java",
+      "before_sha256": "3ce3d33505b34cda136acefcd37a740bc6ba851388837a3a1b4ffa7b757959fe",
+      "after_sha256": "3ce3d33505b34cda136acefcd37a740bc6ba851388837a3a1b4ffa7b757959fe",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/namespace/QName.java",
+      "before_sha256": "3cc3949e4bb3c5d0b404e392c2c81d9f91ae2bb77992b07f63e89fc530c7604f",
+      "after_sha256": "3cc3949e4bb3c5d0b404e392c2c81d9f91ae2bb77992b07f63e89fc530c7604f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/parsers/DocumentBuilderFactory.java",
+      "before_sha256": "4c3fe2e9380df8305cf839418cd0508ed85a158ebd72a155d5a2fb36a06dc67f",
+      "after_sha256": "4c3fe2e9380df8305cf839418cd0508ed85a158ebd72a155d5a2fb36a06dc67f",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/parsers/SAXParserFactory.java",
+      "before_sha256": "d205cbae96ccbee92800e44ca38d8624e27c77caf9a47e5712840e76460ec336",
+      "after_sha256": "d205cbae96ccbee92800e44ca38d8624e27c77caf9a47e5712840e76460ec336",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/stream/XMLEventFactory.java",
+      "before_sha256": "23b9e5133143f0264684ccb1a24cf51eae04969bf45fd43612d740af2486a847",
+      "after_sha256": "23b9e5133143f0264684ccb1a24cf51eae04969bf45fd43612d740af2486a847",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/stream/XMLInputFactory.java",
+      "before_sha256": "ac6f224df47d59fd7f10381942e7ae008a755e932b106c3a46bb0fb7bbd36778",
+      "after_sha256": "ac6f224df47d59fd7f10381942e7ae008a755e932b106c3a46bb0fb7bbd36778",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/stream/XMLOutputFactory.java",
+      "before_sha256": "fe890adccdbc35f894a2e823dd2e27162e790de41b79c0029d5294764efefd50",
+      "after_sha256": "fe890adccdbc35f894a2e823dd2e27162e790de41b79c0029d5294764efefd50",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/transform/Transformer.java",
+      "before_sha256": "0f2a0fa20b9959e3d2386053744ec635485f02504720de57df090cbe6a1d189c",
+      "after_sha256": "0f2a0fa20b9959e3d2386053744ec635485f02504720de57df090cbe6a1d189c",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/transform/TransformerFactory.java",
+      "before_sha256": "a30cb1ae0e0715b8bbbe7a6b02ba6dda4c5b4c2807058e22a54e00e02bac7092",
+      "after_sha256": "a30cb1ae0e0715b8bbbe7a6b02ba6dda4c5b4c2807058e22a54e00e02bac7092",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/transform/stream/StreamSource.java",
+      "before_sha256": "79872271e1e2ea9d6808edc55e3b35d30b73efc5924af8fd5d8153968a4e5ea2",
+      "after_sha256": "79872271e1e2ea9d6808edc55e3b35d30b73efc5924af8fd5d8153968a4e5ea2",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/validation/SchemaFactory.java",
+      "before_sha256": "a0ac1446595599cea9450b63620eab193851247e99f4bed858e7b8919fbeb754",
+      "after_sha256": "a0ac1446595599cea9450b63620eab193851247e99f4bed858e7b8919fbeb754",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/xpath/XPath.java",
+      "before_sha256": "e055e2473aeeb31ebff612e9d9c98b2db84fbe6e9ea15c74de110519596e013d",
+      "after_sha256": "e055e2473aeeb31ebff612e9d9c98b2db84fbe6e9ea15c74de110519596e013d",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/xpath/XPathFactory.java",
+      "before_sha256": "41bcf32842a4121e88091c1b6084ca5a629ae0c237da4acacfbaaf06ad568de7",
+      "after_sha256": "41bcf32842a4121e88091c1b6084ca5a629ae0c237da4acacfbaaf06ad568de7",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/module-info.java",
+      "before_sha256": "0a0aef409327731fc53c1fe3cad510bd9ef07714dd036eedb5f40d97f68ab096",
+      "after_sha256": "0a0aef409327731fc53c1fe3cad510bd9ef07714dd036eedb5f40d97f68ab096",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/org/w3c/dom/bootstrap/DOMImplementationRegistry.java",
+      "before_sha256": "e014fd52fe240f83ed6076e9e92a2688cbaccc919c851adbdc9c56cef5729449",
+      "after_sha256": "e014fd52fe240f83ed6076e9e92a2688cbaccc919c851adbdc9c56cef5729449",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/org/xml/sax/helpers/AttributesImpl.java",
+      "before_sha256": "e537868d815b0f7912c4271da3d914f31de4afe7ef98c34dbd1339532991dbf9",
+      "after_sha256": "e537868d815b0f7912c4271da3d914f31de4afe7ef98c34dbd1339532991dbf9",
+      "actual_result": false
+    },
+    {
+      "path": "src/java.xml/share/classes/org/xml/sax/helpers/XMLReaderFactory.java",
+      "before_sha256": "a2d7c2f3eeae16515d4f25a0e069c4b7c73b1407778bc3c22b6ad38a0ab237d0",
+      "after_sha256": "a2d7c2f3eeae16515d4f25a0e069c4b7c73b1407778bc3c22b6ad38a0ab237d0",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.accessibility/share/classes/com/sun/java/accessibility/util/AWTEventMonitor.java",
+      "before_sha256": "0588459ad73b8032870c8bab459557218e59e9422fbb7a37848334eeee8bd62d",
+      "after_sha256": "0588459ad73b8032870c8bab459557218e59e9422fbb7a37848334eeee8bd62d",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.accessibility/share/classes/com/sun/java/accessibility/util/AccessibilityEventMonitor.java",
+      "before_sha256": "1ebbb53d608931535c8b2df25092aec7609d1de4a6759ac95f5f208c4094e902",
+      "after_sha256": "1ebbb53d608931535c8b2df25092aec7609d1de4a6759ac95f5f208c4094e902",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.accessibility/share/classes/com/sun/java/accessibility/util/EventQueueMonitor.java",
+      "before_sha256": "3be31aaeccc2602bcaf7667ff7bbcd4727015f8c3c2ce782efa1cc63a53d655a",
+      "after_sha256": "3be31aaeccc2602bcaf7667ff7bbcd4727015f8c3c2ce782efa1cc63a53d655a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.accessibility/share/classes/module-info.java",
+      "before_sha256": "eb018ccec9d791fea93094d54093adea4ed9d50be845fafcb8c7e867e97d5cda",
+      "after_sha256": "eb018ccec9d791fea93094d54093adea4ed9d50be845fafcb8c7e867e97d5cda",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.attach/share/classes/com/sun/tools/attach/VirtualMachine.java",
+      "before_sha256": "4ac29c42a2ba7bcf07a2ab2003eb5e04180944aaedff1a6571254142da7cc214",
+      "after_sha256": "4ac29c42a2ba7bcf07a2ab2003eb5e04180944aaedff1a6571254142da7cc214",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.attach/share/classes/com/sun/tools/attach/VirtualMachineDescriptor.java",
+      "before_sha256": "78b6c790abebaf40c834f480152a3f765b8e3bdcd19f04657c45b9021c3ca3ef",
+      "after_sha256": "78b6c790abebaf40c834f480152a3f765b8e3bdcd19f04657c45b9021c3ca3ef",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.attach/share/classes/com/sun/tools/attach/spi/AttachProvider.java",
+      "before_sha256": "76bc7bfeb220a5706dac98b30df1a1643611ba68961ea6783fefec5a4d402da3",
+      "after_sha256": "76bc7bfeb220a5706dac98b30df1a1643611ba68961ea6783fefec5a4d402da3",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.attach/share/classes/module-info.java",
+      "before_sha256": "2232cb13bab0512d770e4896bd675fb1f0ffdd7ce4c04a276ee5db2f8d7055f8",
+      "after_sha256": "2232cb13bab0512d770e4896bd675fb1f0ffdd7ce4c04a276ee5db2f8d7055f8",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.charsets/share/classes/module-info.java",
+      "before_sha256": "07511506c16acf2ad8dc5170bbf2344d121532acee38888d1d33dd2023bee668",
+      "after_sha256": "07511506c16acf2ad8dc5170bbf2344d121532acee38888d1d33dd2023bee668",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/tree/Tree.java",
+      "before_sha256": "0d7d045e93711f241ebe9bd4553a805c6afffbd556c15b7416dabc109acbd567",
+      "after_sha256": "0d7d045e93711f241ebe9bd4553a805c6afffbd556c15b7416dabc109acbd567",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/DocTrees.java",
+      "before_sha256": "a1dffad1d4190f275165b3337dbe2192b53a0f59e702c8531603f53229c0ebe8",
+      "after_sha256": "a1dffad1d4190f275165b3337dbe2192b53a0f59e702c8531603f53229c0ebe8",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/JavacTask.java",
+      "before_sha256": "ab2a145864b4dec37b043e55d272f63516ecb2435ca3fe8bf9057e84351eb69a",
+      "after_sha256": "ab2a145864b4dec37b043e55d272f63516ecb2435ca3fe8bf9057e84351eb69a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/TaskListener.java",
+      "before_sha256": "25f2346ae8eb466f55c14421d3496049886cd432f7e3e894e28ee82ab6d2a328",
+      "after_sha256": "25f2346ae8eb466f55c14421d3496049886cd432f7e3e894e28ee82ab6d2a328",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/Trees.java",
+      "before_sha256": "a6970e444ff8e51e8dec36b91d1ef72655793e8621d5807c1bb740945a15242e",
+      "after_sha256": "a6970e444ff8e51e8dec36b91d1ef72655793e8621d5807c1bb740945a15242e",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/Main.java",
+      "before_sha256": "22295bbde40617d1322c9c717775714317afc730ca772d9f4f2573d39e7fff78",
+      "after_sha256": "22295bbde40617d1322c9c717775714317afc730ca772d9f4f2573d39e7fff78",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/module-info.java",
+      "before_sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09",
+      "after_sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.crypto.cryptoki/share/classes/module-info.java",
+      "before_sha256": "ccf625cd3befa640bb06a9127e18b33e6756dc2512317fb1faf15731f2f9d9f3",
+      "after_sha256": "ccf625cd3befa640bb06a9127e18b33e6756dc2512317fb1faf15731f2f9d9f3",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.crypto.ec/share/classes/module-info.java",
+      "before_sha256": "794d8a873ea45b4da3e27f4ec34cbc65602930823be4c593dd959ae447b0b810",
+      "after_sha256": "794d8a873ea45b4da3e27f4ec34cbc65602930823be4c593dd959ae447b0b810",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.crypto.mscapi/windows/classes/module-info.java",
+      "before_sha256": "1ca6fe2577d7c327b3a316b1feacc23b3a8fa638ab895e862abc3bda0fa5ca45",
+      "after_sha256": "1ca6fe2577d7c327b3a316b1feacc23b3a8fa638ab895e862abc3bda0fa5ca45",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/jdk/dynalink/DynamicLinker.java",
+      "before_sha256": "ebf371f22ea4a15d08cccb188d3656ccc03f54d8084fb0f10a0118c5a0c5c327",
+      "after_sha256": "ebf371f22ea4a15d08cccb188d3656ccc03f54d8084fb0f10a0118c5a0c5c327",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/jdk/dynalink/DynamicLinkerFactory.java",
+      "before_sha256": "b9b1d4048381e9eb30aa1be292beb6f04a5aa30b9e416263e0073ae23f50684b",
+      "after_sha256": "b9b1d4048381e9eb30aa1be292beb6f04a5aa30b9e416263e0073ae23f50684b",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/jdk/dynalink/beans/BeansLinker.java",
+      "before_sha256": "5ae9a99f8c284da8238183537a8c06165b597cc3887ee27507f0cf3a88d3ec25",
+      "after_sha256": "5ae9a99f8c284da8238183537a8c06165b597cc3887ee27507f0cf3a88d3ec25",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/jdk/dynalink/linker/support/Lookup.java",
+      "before_sha256": "6d17e1c516618e58fe30eca0bc7a0fcf2838662e417867624efc638af35dd2d1",
+      "after_sha256": "6d17e1c516618e58fe30eca0bc7a0fcf2838662e417867624efc638af35dd2d1",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/module-info.java",
+      "before_sha256": "aa99277ff4851b96da2617fd4c05d99e343a0457e913e56be034eb1f0f3999b7",
+      "after_sha256": "aa99277ff4851b96da2617fd4c05d99e343a0457e913e56be034eb1f0f3999b7",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.editpad/share/classes/module-info.java",
+      "before_sha256": "0353846e5d8e21b52b5e18125406cd1f10012f7a198c3aed190fccff8afdde25",
+      "after_sha256": "0353846e5d8e21b52b5e18125406cd1f10012f7a198c3aed190fccff8afdde25",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.hotspot.agent/share/classes/module-info.java",
+      "before_sha256": "5eea2e8bb32d2ec689e367c03f9dfbf4913edf5192e5ebbfe61cc3fba731cf14",
+      "after_sha256": "5eea2e8bb32d2ec689e367c03f9dfbf4913edf5192e5ebbfe61cc3fba731cf14",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/com/sun/net/httpserver/Headers.java",
+      "before_sha256": "ca49b195b27aa62c38f934e92cdc9bf4360227d6a4cf7a2f2ce453d10bcf0a1b",
+      "after_sha256": "ca49b195b27aa62c38f934e92cdc9bf4360227d6a4cf7a2f2ce453d10bcf0a1b",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/com/sun/net/httpserver/HttpServer.java",
+      "before_sha256": "395bae720146f77f5dfeb1485144357f80ce9c8e4707a04a4284de7f7142dbc9",
+      "after_sha256": "395bae720146f77f5dfeb1485144357f80ce9c8e4707a04a4284de7f7142dbc9",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/com/sun/net/httpserver/HttpsServer.java",
+      "before_sha256": "13d1779a81c014c5f9db798c85cfa996fd78c1e434da903d2ffeb9f0110987c3",
+      "after_sha256": "13d1779a81c014c5f9db798c85cfa996fd78c1e434da903d2ffeb9f0110987c3",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/com/sun/net/httpserver/SimpleFileServer.java",
+      "before_sha256": "b47a2b00f277bc1660a7d66aca7d3d0d1842cbe329e810669eeda84d3e97bd90",
+      "after_sha256": "b47a2b00f277bc1660a7d66aca7d3d0d1842cbe329e810669eeda84d3e97bd90",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/module-info.java",
+      "before_sha256": "16d5115c2cf09b065540027ddf7c99c4baab0c5005c4e5367506acb95741fdbb",
+      "after_sha256": "16d5115c2cf09b065540027ddf7c99c4baab0c5005c4e5367506acb95741fdbb",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/FloatVector.java",
+      "before_sha256": "e660cf10e6356e1b43f649fda84c04803dfd513442468829a0ee1b2b95f193f7",
+      "after_sha256": "e660cf10e6356e1b43f649fda84c04803dfd513442468829a0ee1b2b95f193f7",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/IntVector.java",
+      "before_sha256": "bdcc700c8572dbd0cd5aad4901ae63736442f25bf548562c598ae357b6b2e01b",
+      "after_sha256": "bdcc700c8572dbd0cd5aad4901ae63736442f25bf548562c598ae357b6b2e01b",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/VectorMask.java",
+      "before_sha256": "218876f07d814f53b2348f0465642d8b5f970336563968bc3aa49b81ed14475f",
+      "after_sha256": "218876f07d814f53b2348f0465642d8b5f970336563968bc3aa49b81ed14475f",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/VectorOperators.java",
+      "before_sha256": "14e160488c413437bf98ff26316059a96f5a64a8279b27ed4273beac06e3d187",
+      "after_sha256": "14e160488c413437bf98ff26316059a96f5a64a8279b27ed4273beac06e3d187",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/VectorShuffle.java",
+      "before_sha256": "1e00b3439354289d0d2c73eebd51222311bee432018f9dc1d02d068d76eeffde",
+      "after_sha256": "1e00b3439354289d0d2c73eebd51222311bee432018f9dc1d02d068d76eeffde",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/VectorSpecies.java",
+      "before_sha256": "5299ef8647422679ec5196a6e835e6c1afcb65d939c51622e15c2db7a19529a5",
+      "after_sha256": "5299ef8647422679ec5196a6e835e6c1afcb65d939c51622e15c2db7a19529a5",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/module-info.java",
+      "before_sha256": "9fe050d348698f7846e5c112a6c8d0459189b9eb6d4eb727c65bd5a5b4ebe187",
+      "after_sha256": "9fe050d348698f7846e5c112a6c8d0459189b9eb6d4eb727c65bd5a5b4ebe187",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.internal.ed/share/classes/module-info.java",
+      "before_sha256": "b77d4f96cb4cb33667bddf0f4181d90f2db03f2e9e8849897ee45ac767971e1a",
+      "after_sha256": "b77d4f96cb4cb33667bddf0f4181d90f2db03f2e9e8849897ee45ac767971e1a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.internal.jvmstat/share/classes/module-info.java",
+      "before_sha256": "cf393dab2ee9eb8c25623cfeeb6564f16d032c12ab2120a495a52987ef1b02f7",
+      "after_sha256": "cf393dab2ee9eb8c25623cfeeb6564f16d032c12ab2120a495a52987ef1b02f7",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.internal.le/share/classes/module-info.java",
+      "before_sha256": "b224350f0e41236f76a8d148f7f170dbe8560fd83d429caaa11008873016c587",
+      "after_sha256": "b224350f0e41236f76a8d148f7f170dbe8560fd83d429caaa11008873016c587",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.internal.opt/share/classes/module-info.java",
+      "before_sha256": "8fc2dd0dd6bb80293aa8bb8eb5d9c9f85612fb37e557c9860d0fec1f418c406a",
+      "after_sha256": "8fc2dd0dd6bb80293aa8bb8eb5d9c9f85612fb37e557c9860d0fec1f418c406a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.internal.vm.ci/share/classes/module-info.java",
+      "before_sha256": "62bf87398d5ac34a36100de524c60d4108c06294f05463ce756b3d5ff557fe6e",
+      "after_sha256": "62bf87398d5ac34a36100de524c60d4108c06294f05463ce756b3d5ff557fe6e",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.internal.vm.compiler.management/share/classes/module-info.java",
+      "before_sha256": "abb7d40cbfe11cb568b5801a3812dedbb62957d5a1ebdda205a7a3ba11d68fab",
+      "after_sha256": "abb7d40cbfe11cb568b5801a3812dedbb62957d5a1ebdda205a7a3ba11d68fab",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.internal.vm.compiler/share/classes/module-info.java",
+      "before_sha256": "e6db78d4b15026600d2eab86ebc3d5770d20417c583fca2649ca64e38734ca9a",
+      "after_sha256": "e6db78d4b15026600d2eab86ebc3d5770d20417c583fca2649ca64e38734ca9a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jartool/share/classes/jdk/security/jarsigner/JarSigner.java",
+      "before_sha256": "335825fc88bdd0d13e8a4a94df49f3a0d2e1efec51858948e4097e53748e5b49",
+      "after_sha256": "335825fc88bdd0d13e8a4a94df49f3a0d2e1efec51858948e4097e53748e5b49",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jartool/share/classes/module-info.java",
+      "before_sha256": "ec3a786f2d5b854715fff9910ed8a617da70bfd930a063c874eae0fad1601920",
+      "after_sha256": "ec3a786f2d5b854715fff9910ed8a617da70bfd930a063c874eae0fad1601920",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/jdk/javadoc/doclet/Doclet.java",
+      "before_sha256": "3f4d99d5301c67e87cc46ffdae82db32828a8eb86fb8ee7f13424a9bd918d9b7",
+      "after_sha256": "3f4d99d5301c67e87cc46ffdae82db32828a8eb86fb8ee7f13424a9bd918d9b7",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/jdk/javadoc/doclet/DocletEnvironment.java",
+      "before_sha256": "0c74c5123a7a2f2c52dd2cb9eafbf1d474a89c3d3416c72c8405cd73d5af42a7",
+      "after_sha256": "0c74c5123a7a2f2c52dd2cb9eafbf1d474a89c3d3416c72c8405cd73d5af42a7",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/jdk/javadoc/doclet/Reporter.java",
+      "before_sha256": "bbb5cbac4969b4deb4d254c8f6fad1675ca1f6bf1b845930d15a1486e1530e22",
+      "after_sha256": "bbb5cbac4969b4deb4d254c8f6fad1675ca1f6bf1b845930d15a1486e1530e22",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/jdk/javadoc/doclet/StandardDoclet.java",
+      "before_sha256": "34fe302012804a6492f67037f7f73b40cf58b2c4efa75083a49d91bd2953031a",
+      "after_sha256": "34fe302012804a6492f67037f7f73b40cf58b2c4efa75083a49d91bd2953031a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/module-info.java",
+      "before_sha256": "b5ce470a8720ee499d867b2af31c57d1e5660f5cc126324e4321869b175ad87d",
+      "after_sha256": "b5ce470a8720ee499d867b2af31c57d1e5660f5cc126324e4321869b175ad87d",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jcmd/share/classes/module-info.java",
+      "before_sha256": "785ea2ad63f305c524b439e2fe7b8a905a66e4fec2e303fa9b524e4430113f74",
+      "after_sha256": "785ea2ad63f305c524b439e2fe7b8a905a66e4fec2e303fa9b524e4430113f74",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jconsole/share/classes/com/sun/tools/jconsole/JConsoleContext.java",
+      "before_sha256": "b63b734f9cb16b885ea38a37508453deeea2c7aa346dfb8250190cb00374cfbc",
+      "after_sha256": "b63b734f9cb16b885ea38a37508453deeea2c7aa346dfb8250190cb00374cfbc",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jconsole/share/classes/com/sun/tools/jconsole/JConsolePlugin.java",
+      "before_sha256": "4586c2b32dc2b886afdc9ef2d6adf2b8fb7002c45f4a650679d6c1f7eec9e432",
+      "after_sha256": "4586c2b32dc2b886afdc9ef2d6adf2b8fb7002c45f4a650679d6c1f7eec9e432",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jconsole/share/classes/module-info.java",
+      "before_sha256": "2ca125bba155f1a3e474b87560f8e9f95933e3fb0dae9f459ff4809400463642",
+      "after_sha256": "2ca125bba155f1a3e474b87560f8e9f95933e3fb0dae9f459ff4809400463642",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jdeps/share/classes/module-info.java",
+      "before_sha256": "2ca440125289bc476a1e60264d0a35168c0a860590bfb626eb0c6075424be217",
+      "after_sha256": "2ca440125289bc476a1e60264d0a35168c0a860590bfb626eb0c6075424be217",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jdi/share/classes/com/sun/jdi/Bootstrap.java",
+      "before_sha256": "fe1af30ca272b9c1c0ae40ffa39895946a8f7cecde4d5c145bc74f265df6719c",
+      "after_sha256": "fe1af30ca272b9c1c0ae40ffa39895946a8f7cecde4d5c145bc74f265df6719c",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jdi/share/classes/com/sun/jdi/VirtualMachine.java",
+      "before_sha256": "a285f717545bc1e6de1f5a4f81916bb779057843800fde82a6903fff884fe032",
+      "after_sha256": "a285f717545bc1e6de1f5a4f81916bb779057843800fde82a6903fff884fe032",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jdi/share/classes/com/sun/jdi/VirtualMachineManager.java",
+      "before_sha256": "0481b60e7b1330c53291a390834a238b44b012c4a54af3a8863419d735f475c1",
+      "after_sha256": "0481b60e7b1330c53291a390834a238b44b012c4a54af3a8863419d735f475c1",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jdi/share/classes/module-info.java",
+      "before_sha256": "f35207a92da2dc463f357e34ad010697bc5bd33f4d48d24c717fe0eb2229c4da",
+      "after_sha256": "f35207a92da2dc463f357e34ad010697bc5bd33f4d48d24c717fe0eb2229c4da",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jdwp.agent/share/classes/module-info.java",
+      "before_sha256": "e5ab64cae54ba04ece210a9ad2ec85569eed4f06251ae42276944b12c8386200",
+      "after_sha256": "e5ab64cae54ba04ece210a9ad2ec85569eed4f06251ae42276944b12c8386200",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/Configuration.java",
+      "before_sha256": "491f6ded7c887a0126ff3e463d430ca9a68a164889e44e417ac444e10b1f72b5",
+      "after_sha256": "491f6ded7c887a0126ff3e463d430ca9a68a164889e44e417ac444e10b1f72b5",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/Event.java",
+      "before_sha256": "7af9f7f313a866a7c5af7be4ba8515f583437c92002651cd9bb361e20c3dd55a",
+      "after_sha256": "7af9f7f313a866a7c5af7be4ba8515f583437c92002651cd9bb361e20c3dd55a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/FlightRecorder.java",
+      "before_sha256": "6c4993d9e5f0cf8127ac3e143cc2b5ae218dda7f733f755c11390f2132d294c5",
+      "after_sha256": "6c4993d9e5f0cf8127ac3e143cc2b5ae218dda7f733f755c11390f2132d294c5",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/Recording.java",
+      "before_sha256": "32103137c58e5ef4cc664ee5cbdb53e356f417d2e33f52ab632906e3cf354577",
+      "after_sha256": "32103137c58e5ef4cc664ee5cbdb53e356f417d2e33f52ab632906e3cf354577",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/consumer/EventStream.java",
+      "before_sha256": "22d3688ee1336de79344aa86d44828e485263d75453f92b2eea756591bb32535",
+      "after_sha256": "22d3688ee1336de79344aa86d44828e485263d75453f92b2eea756591bb32535",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/consumer/RecordingFile.java",
+      "before_sha256": "5601aebd7978d4d54ed86bacab0da240f85f46dc1ea7564bbf9f063b4ec4a035",
+      "after_sha256": "5601aebd7978d4d54ed86bacab0da240f85f46dc1ea7564bbf9f063b4ec4a035",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/consumer/RecordingStream.java",
+      "before_sha256": "8416f59b9fd5425a6f3111f8f4c56f88b250aedb59d595ebb005d90b3426655c",
+      "after_sha256": "8416f59b9fd5425a6f3111f8f4c56f88b250aedb59d595ebb005d90b3426655c",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/module-info.java",
+      "before_sha256": "6264c976f8a3e2aca53f5828f7468bf712b5d1c5d205702f5f0c9d5d5227d438",
+      "after_sha256": "6264c976f8a3e2aca53f5828f7468bf712b5d1c5d205702f5f0c9d5d5227d438",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jlink/share/classes/module-info.java",
+      "before_sha256": "667139571b87df496519418c7d93aec67d085b83617476ea1159a5297ce46333",
+      "after_sha256": "667139571b87df496519418c7d93aec67d085b83617476ea1159a5297ce46333",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jpackage/share/classes/module-info.java",
+      "before_sha256": "20be00567c78c206f88e34cc2ea3c6976750122fb18678831aae08cd2b2b4258",
+      "after_sha256": "20be00567c78c206f88e34cc2ea3c6976750122fb18678831aae08cd2b2b4258",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/jdk/jshell/JShell.java",
+      "before_sha256": "d2feb19bf67b155b7017cfba0c616ed8d480bb64601fdd5e84661ef0b59885f0",
+      "after_sha256": "d2feb19bf67b155b7017cfba0c616ed8d480bb64601fdd5e84661ef0b59885f0",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/jdk/jshell/SourceCodeAnalysis.java",
+      "before_sha256": "5cd3d18774eb79d75a7c2e96d87a20682552d872b6f689e9acb6692430f82022",
+      "after_sha256": "5cd3d18774eb79d75a7c2e96d87a20682552d872b6f689e9acb6692430f82022",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/jdk/jshell/execution/Util.java",
+      "before_sha256": "8a6295b88e2d2bafec2a17ea587044f950988a93c53782a564a651bb487fb5fc",
+      "after_sha256": "8a6295b88e2d2bafec2a17ea587044f950988a93c53782a564a651bb487fb5fc",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/jdk/jshell/tool/JavaShellToolBuilder.java",
+      "before_sha256": "f2ad4cc33c106d071b5d451ebcfd0ab126b0ee59eb280873ded42a12d45c957b",
+      "after_sha256": "f2ad4cc33c106d071b5d451ebcfd0ab126b0ee59eb280873ded42a12d45c957b",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/module-info.java",
+      "before_sha256": "4f18715810a4b07efdbf97162aa40aa00faec5beac8fbb0ba6176749786989b5",
+      "after_sha256": "4f18715810a4b07efdbf97162aa40aa00faec5beac8fbb0ba6176749786989b5",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jsobject/share/classes/module-info.java",
+      "before_sha256": "882fe42a2a2b1693b10c806fde00dbc1951bb79b3dc6abb796b409dadcb48e2b",
+      "after_sha256": "882fe42a2a2b1693b10c806fde00dbc1951bb79b3dc6abb796b409dadcb48e2b",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jsobject/share/classes/netscape/javascript/JSObject.java",
+      "before_sha256": "8ecda70b5adc6a395795123fb1221d8368a3bd3b81e04810944389f5267d8a0b",
+      "after_sha256": "8ecda70b5adc6a395795123fb1221d8368a3bd3b81e04810944389f5267d8a0b",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.jstatd/share/classes/module-info.java",
+      "before_sha256": "9ad3a2e4980c8e6fed8fee4b8e6baddc7581b0d228f7b1e12538a09afb505b01",
+      "after_sha256": "9ad3a2e4980c8e6fed8fee4b8e6baddc7581b0d228f7b1e12538a09afb505b01",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.localedata/share/classes/module-info.java",
+      "before_sha256": "7d3f09a3784b19d638f889a62ba17b78c81188eabfef93dfb5a557fc66f308da",
+      "after_sha256": "7d3f09a3784b19d638f889a62ba17b78c81188eabfef93dfb5a557fc66f308da",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.management.agent/share/classes/module-info.java",
+      "before_sha256": "e8b33890e701ff70e7c823611aa470450c790aef0e91652e5f654579fa426237",
+      "after_sha256": "e8b33890e701ff70e7c823611aa470450c790aef0e91652e5f654579fa426237",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.management.jfr/share/classes/jdk/management/jfr/FlightRecorderMXBean.java",
+      "before_sha256": "6af5b2114e5cbef9bd5c8c6d7119ecc02164d1347869e83af478c5a1dd6ca973",
+      "after_sha256": "6af5b2114e5cbef9bd5c8c6d7119ecc02164d1347869e83af478c5a1dd6ca973",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.management.jfr/share/classes/module-info.java",
+      "before_sha256": "3f0553f5c52a062ee868043057f9c22e31de0f72c7eeebd616cf29930f7dc440",
+      "after_sha256": "3f0553f5c52a062ee868043057f9c22e31de0f72c7eeebd616cf29930f7dc440",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.management/share/classes/com/sun/management/HotSpotDiagnosticMXBean.java",
+      "before_sha256": "39321eb90d8bd065c619f8b1d99fde9156591d1a694d26217384c879a3fd69be",
+      "after_sha256": "39321eb90d8bd065c619f8b1d99fde9156591d1a694d26217384c879a3fd69be",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.management/share/classes/com/sun/management/OperatingSystemMXBean.java",
+      "before_sha256": "6e7e162ad25540991602c0e524413884e865b08a4b58abcb7cd7bc5c3398158c",
+      "after_sha256": "6e7e162ad25540991602c0e524413884e865b08a4b58abcb7cd7bc5c3398158c",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.management/share/classes/module-info.java",
+      "before_sha256": "daacd33bf892311e014d5a006f7486c762db5990ebd0c5bd4c9fac94bf39681f",
+      "after_sha256": "daacd33bf892311e014d5a006f7486c762db5990ebd0c5bd4c9fac94bf39681f",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.naming.dns/share/classes/module-info.java",
+      "before_sha256": "10956023381d2ae7d2c735e02ffe7993ba2bafb3d5e313a0f72aa1247c21c814",
+      "after_sha256": "10956023381d2ae7d2c735e02ffe7993ba2bafb3d5e313a0f72aa1247c21c814",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.naming.rmi/share/classes/module-info.java",
+      "before_sha256": "174daff8942a0b17536cd7aeecaf07f7370f3cd75b25fca35463ea871a1a5925",
+      "after_sha256": "174daff8942a0b17536cd7aeecaf07f7370f3cd75b25fca35463ea871a1a5925",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.net/share/classes/jdk/net/ExtendedSocketOptions.java",
+      "before_sha256": "b4edd3aa54fe13e3bd66c6fda10ffe3f502e5fa586e275686b9ce09b6fcb31ef",
+      "after_sha256": "b4edd3aa54fe13e3bd66c6fda10ffe3f502e5fa586e275686b9ce09b6fcb31ef",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.net/share/classes/jdk/net/NetworkPermission.java",
+      "before_sha256": "21358b8d2d65669512f355ea69eed835164dd09cf4f368cc0cf72c2d030da977",
+      "after_sha256": "21358b8d2d65669512f355ea69eed835164dd09cf4f368cc0cf72c2d030da977",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.net/share/classes/jdk/net/UnixDomainPrincipal.java",
+      "before_sha256": "8c801913d2e7a72012f47221bb26ffea292bf1fecd083bbb8c73a46259254ca5",
+      "after_sha256": "8c801913d2e7a72012f47221bb26ffea292bf1fecd083bbb8c73a46259254ca5",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.net/share/classes/jdk/nio/Channels.java",
+      "before_sha256": "c6562dc483a1ccbeb2177918c3f9d3a84c37ba7b37868fa3e01af3da37bb653e",
+      "after_sha256": "c6562dc483a1ccbeb2177918c3f9d3a84c37ba7b37868fa3e01af3da37bb653e",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.net/share/classes/module-info.java",
+      "before_sha256": "8e955054515b7a5694f78a4f3a9ea341da8a9b00ae5710b197135735320473e7",
+      "after_sha256": "8e955054515b7a5694f78a4f3a9ea341da8a9b00ae5710b197135735320473e7",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.nio.mapmode/share/classes/jdk/nio/mapmode/ExtendedMapMode.java",
+      "before_sha256": "a324596d7c0ed60fc0d2ffe7d8f9e702cfdf991fefb9cb82da106c0fbe772487",
+      "after_sha256": "a324596d7c0ed60fc0d2ffe7d8f9e702cfdf991fefb9cb82da106c0fbe772487",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.nio.mapmode/share/classes/module-info.java",
+      "before_sha256": "16a083e41433c882bd7e7e3073f35ef46abb078f202d0d2a0010cfe327a55e20",
+      "after_sha256": "16a083e41433c882bd7e7e3073f35ef46abb078f202d0d2a0010cfe327a55e20",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.random/share/classes/module-info.java",
+      "before_sha256": "d878557975670ada9c84775f4c2322d2e46f1280e5c84c1130d64029e3e786d6",
+      "after_sha256": "d878557975670ada9c84775f4c2322d2e46f1280e5c84c1130d64029e3e786d6",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/com/sun/nio/sctp/SctpChannel.java",
+      "before_sha256": "012b1c4f668387432f041a5b9d4330eb1bb2ca7f47a8a1d72e4eab851bb0b420",
+      "after_sha256": "012b1c4f668387432f041a5b9d4330eb1bb2ca7f47a8a1d72e4eab851bb0b420",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/com/sun/nio/sctp/SctpMultiChannel.java",
+      "before_sha256": "687ac970877821c8d1dbf9d0bc4c6850b9d1cae1fdf9691d64feb1c26789badf",
+      "after_sha256": "687ac970877821c8d1dbf9d0bc4c6850b9d1cae1fdf9691d64feb1c26789badf",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/com/sun/nio/sctp/SctpServerChannel.java",
+      "before_sha256": "a6a796632d0f75e27924dd29da6fc2621aa55bb6233764b1bd4fa25c01261212",
+      "after_sha256": "a6a796632d0f75e27924dd29da6fc2621aa55bb6233764b1bd4fa25c01261212",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/com/sun/nio/sctp/SctpStandardSocketOptions.java",
+      "before_sha256": "3010d426a198d033b66a8309ac019bc9e3cc29400932a6096beb102cc2624661",
+      "after_sha256": "3010d426a198d033b66a8309ac019bc9e3cc29400932a6096beb102cc2624661",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/module-info.java",
+      "before_sha256": "1b35fe2ea51889bca15cf88a201ae4c49bcb3c83999316afda0c9ac4682d3ea2",
+      "after_sha256": "1b35fe2ea51889bca15cf88a201ae4c49bcb3c83999316afda0c9ac4682d3ea2",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.security.auth/share/classes/com/sun/security/auth/UnixNumericUserPrincipal.java",
+      "before_sha256": "c761a0644ffa21548b6eeb6c25f66408b1e099083cb0993060371c0649a6237a",
+      "after_sha256": "c761a0644ffa21548b6eeb6c25f66408b1e099083cb0993060371c0649a6237a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.security.auth/share/classes/com/sun/security/auth/callback/TextCallbackHandler.java",
+      "before_sha256": "7df003c64c045ec7120eaf8f520714da1b0ec4702b8a8e31434753451c3d6b88",
+      "after_sha256": "7df003c64c045ec7120eaf8f520714da1b0ec4702b8a8e31434753451c3d6b88",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.security.auth/share/classes/com/sun/security/auth/module/Krb5LoginModule.java",
+      "before_sha256": "0f0b3aae99f7a4f0baae18482650cae5a6cb396eac2c5765d5e5fba277eef550",
+      "after_sha256": "0f0b3aae99f7a4f0baae18482650cae5a6cb396eac2c5765d5e5fba277eef550",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.security.auth/share/classes/module-info.java",
+      "before_sha256": "a18064c71cc154c8444e386a4e57248c20669b47809d581765ff4d928eec6eea",
+      "after_sha256": "a18064c71cc154c8444e386a4e57248c20669b47809d581765ff4d928eec6eea",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.security.jgss/share/classes/com/sun/security/jgss/ExtendedGSSContext.java",
+      "before_sha256": "903a80ae7e9b7a3a6b7330ca01bb6af9863c1ea9cd4bac1efd63bf7efbab9caa",
+      "after_sha256": "903a80ae7e9b7a3a6b7330ca01bb6af9863c1ea9cd4bac1efd63bf7efbab9caa",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.security.jgss/share/classes/com/sun/security/jgss/ExtendedGSSCredential.java",
+      "before_sha256": "af94e917aea767059bb0325e2646f6866aaf9e9a85481e3147b286d4efeb9843",
+      "after_sha256": "af94e917aea767059bb0325e2646f6866aaf9e9a85481e3147b286d4efeb9843",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.security.jgss/share/classes/com/sun/security/jgss/InquireType.java",
+      "before_sha256": "9425c3b7a3adee97fbf5edf8c7f879336f41dc6aa49461c8a9ce4051651c79c4",
+      "after_sha256": "9425c3b7a3adee97fbf5edf8c7f879336f41dc6aa49461c8a9ce4051651c79c4",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.security.jgss/share/classes/module-info.java",
+      "before_sha256": "590f251357b16be85e4845427dd7e6edffcee2457bf8240a442b71b3792036b3",
+      "after_sha256": "590f251357b16be85e4845427dd7e6edffcee2457bf8240a442b71b3792036b3",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported.desktop/share/classes/jdk/swing/interop/LightweightContentWrapper.java",
+      "before_sha256": "5802c86563fa4c57aae12e8e11f16ad98c4575db09aab60e16276a2e4656642b",
+      "after_sha256": "5802c86563fa4c57aae12e8e11f16ad98c4575db09aab60e16276a2e4656642b",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported.desktop/share/classes/jdk/swing/interop/LightweightFrameWrapper.java",
+      "before_sha256": "49c926ae9ec5f50900795cebbb4924e7ff3e55fde7ec2fe7c9c3a14da0632185",
+      "after_sha256": "49c926ae9ec5f50900795cebbb4924e7ff3e55fde7ec2fe7c9c3a14da0632185",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported.desktop/share/classes/jdk/swing/interop/SwingInterOpUtils.java",
+      "before_sha256": "8a40c3d23b1ad8621ec0e99126a501a06f2f43a89d56e51344a1bf4a4dc22d12",
+      "after_sha256": "8a40c3d23b1ad8621ec0e99126a501a06f2f43a89d56e51344a1bf4a4dc22d12",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported.desktop/share/classes/module-info.java",
+      "before_sha256": "e4b636c69b45d023ee20fe00d22774422187e89ab92e536d8940d95fa15f28c3",
+      "after_sha256": "e4b636c69b45d023ee20fe00d22774422187e89ab92e536d8940d95fa15f28c3",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/com/sun/nio/file/ExtendedCopyOption.java",
+      "before_sha256": "9eaa3aede0927d2c9a94e5b0f59686ca95752b0e0deee75539992fd7d73afb9d",
+      "after_sha256": "9eaa3aede0927d2c9a94e5b0f59686ca95752b0e0deee75539992fd7d73afb9d",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/module-info.java",
+      "before_sha256": "22b01e1b41f6b900bf3a8502d104a747fb3a38dae9eccc10817b11476e9e1d15",
+      "after_sha256": "22b01e1b41f6b900bf3a8502d104a747fb3a38dae9eccc10817b11476e9e1d15",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/sun/misc/Signal.java",
+      "before_sha256": "a5368f1cb519a39109edc9e13ed8d48e4a05c279c9be50b15acb09359c69499a",
+      "after_sha256": "a5368f1cb519a39109edc9e13ed8d48e4a05c279c9be50b15acb09359c69499a",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/sun/misc/Unsafe.java",
+      "before_sha256": "91abb420ce45169c78f4d66ea7e5c85e24a52308172c0797a5c3ce407ba1a06c",
+      "after_sha256": "91abb420ce45169c78f4d66ea7e5c85e24a52308172c0797a5c3ce407ba1a06c",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/sun/reflect/ReflectionFactory.java",
+      "before_sha256": "874ff488c899c0a701f16ae1a06a233fdad5cae72896ab32c1c684d3127c715d",
+      "after_sha256": "874ff488c899c0a701f16ae1a06a233fdad5cae72896ab32c1c684d3127c715d",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/module-info.java",
+      "before_sha256": "58fbbdc75c865e4341add36a8ff05199ce6025a6332132c9e11972c1ecca59d6",
+      "after_sha256": "58fbbdc75c865e4341add36a8ff05199ce6025a6332132c9e11972c1ecca59d6",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/css/CSSStyleDeclaration.java",
+      "before_sha256": "19e0d081c7dbbc33d49a8e3a1697c951acaae71544db32a2c940fd3b8e9e6707",
+      "after_sha256": "19e0d081c7dbbc33d49a8e3a1697c951acaae71544db32a2c940fd3b8e9e6707",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/html/HTMLDocument.java",
+      "before_sha256": "f7c5d78dd256585d1f5ccbf78e511d76229bee1675c1ff5b0a6c56ee1588d365",
+      "after_sha256": "f7c5d78dd256585d1f5ccbf78e511d76229bee1675c1ff5b0a6c56ee1588d365",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/html/HTMLElement.java",
+      "before_sha256": "ac57f49565d9cc56e629b56061062919c8fd33b506208a6f1122c9ddc7bf7c57",
+      "after_sha256": "ac57f49565d9cc56e629b56061062919c8fd33b506208a6f1122c9ddc7bf7c57",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/stylesheets/StyleSheet.java",
+      "before_sha256": "f31ee53bc8c53a89f369a4f938736e3845bba2c52f526f0497f3cc3410ea611f",
+      "after_sha256": "f31ee53bc8c53a89f369a4f938736e3845bba2c52f526f0497f3cc3410ea611f",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/xpath/XPathEvaluator.java",
+      "before_sha256": "5e654ce13fab050cb8892fcc8b76fde95514ad159283faa430e79ca22a7b426b",
+      "after_sha256": "5e654ce13fab050cb8892fcc8b76fde95514ad159283faa430e79ca22a7b426b",
+      "actual_result": false
+    },
+    {
+      "path": "src/jdk.zipfs/share/classes/module-info.java",
+      "before_sha256": "b59b2c03942c4b98bc138d37234e9b1789551f2303033dc1a651b38ca523682f",
+      "after_sha256": "b59b2c03942c4b98bc138d37234e9b1789551f2303033dc1a651b38ca523682f",
+      "actual_result": false
+    },
+    {
+      "path": "test/jdk/java/io/IOUtils/IOUtilsTest.java",
+      "before_sha256": "93642831a11cf08a3b157aebe82bce2f91613369e2bcbc778fd5def1826cf018",
+      "after_sha256": "93642831a11cf08a3b157aebe82bce2f91613369e2bcbc778fd5def1826cf018",
+      "actual_result": false
+    },
+    {
+      "path": "test/jdk/java/lang/reflect/Reflection/ReflectionTest.java",
+      "before_sha256": "4243e53aa979ecc9ff7ff453293dbcd20fde28bdb60bc955674d9967d740aaa8",
+      "after_sha256": "4243e53aa979ecc9ff7ff453293dbcd20fde28bdb60bc955674d9967d740aaa8",
+      "actual_result": false
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionMasksBenchmark.java",
+      "before_sha256": "6e1a76800b296c96a9dd342998d76ae7c014389be394effc8a059302e6811e92",
+      "after_sha256": "6e1a76800b296c96a9dd342998d76ae7c014389be394effc8a059302e6811e92",
+      "actual_result": false
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionMasksTest.java",
+      "before_sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
+      "after_sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
+      "actual_result": false
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionViewsBenchmark.java",
+      "before_sha256": "1ac002cd6862ffbdd1574ec7afc2270c0298e20bf47916ffe3a54e2d53bb742a",
+      "after_sha256": "1ac002cd6862ffbdd1574ec7afc2270c0298e20bf47916ffe3a54e2d53bb742a",
+      "actual_result": false
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionViewsTest.java",
+      "before_sha256": "7a245f98feee1590a6c01cec79b779441c85a72a30838d9bbec949024fed1878",
+      "after_sha256": "7a245f98feee1590a6c01cec79b779441c85a72a30838d9bbec949024fed1878",
+      "actual_result": false
+    },
+    {
+      "path": "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "6d9a127c3f1159a1323a7ce6129c25d91eb6d4486016bf0ac0dc05d0f43cd56f",
+      "actual_result": true
+    },
+    {
+      "path": "test/jdk/java/util/stream/Streams/StreamsTest.java",
+      "before_sha256": "1e2ff81d43c458e62cf5d3fae03c963be525db7e9948cc4d5e3fe910a98ae967",
+      "after_sha256": "1e2ff81d43c458e62cf5d3fae03c963be525db7e9948cc4d5e3fe910a98ae967",
+      "actual_result": false
+    }
+  ]
+}

@@ -1,0 +1,2555 @@
+{
+  "schema": 1,
+  "mapping_authority": "m3/docs/name-mapping.json",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "canonical_policy": "m3/docs/m3jdk21-porting-invariant.md",
+  "scope": "Finite31-family core utility inventory plus a linked exact70-module source-tree ownership index. Neither is universal method/type/algorithm completeness or Java SE conformance.",
+  "source_evidence_semantics": "A source declaration and exported module package prove discoverable ownership at the pinned baseline, not execution, complete behavior, benchmarks or target admission.",
+  "candidate_semantics": "New candidate API names are design/implementation inputs until their exact source, recipe and runtime receipts are recorded. No candidate is marked implemented or qualified by this inventory.",
+  "receiving_sequence_advanced": false,
+  "family_completion": false,
+  "repository_completion": false,
+  "no_companion_runtime": true,
+  "public_existing_jdk_names_unchanged": true,
+  "existing_catalogue": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+  "source_verifier": "m3/compatibility/check_integrated_utility_coverage.py",
+  "coverage_document": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+  "required_family_ids": [
+    "objects",
+    "strings",
+    "arrays",
+    "collections",
+    "iterators",
+    "spliterators",
+    "streams",
+    "collectors",
+    "functions",
+    "reflection",
+    "classes",
+    "handles",
+    "io",
+    "files",
+    "paths",
+    "buffers",
+    "channels",
+    "resources",
+    "charsets",
+    "regex",
+    "numbers",
+    "math",
+    "bits",
+    "time",
+    "concurrency",
+    "processes",
+    "network",
+    "archives",
+    "digests",
+    "jdbc",
+    "modules"
+  ],
+  "families": [
+    {
+      "id": "objects",
+      "family": "Objects",
+      "utility_entry_point": "java.util.Objects",
+      "baseline_functionality": "Null checks, equality/deep equality, hashing and checked index/range helpers have an existing public utility owner.",
+      "remaining_scope": "Preserve overload resolution, lazy exception-message suppliers and exception precedence. A complete donor-method union is not established by this source inventory.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.Objects"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "strings",
+      "family": "Strings",
+      "utility_entry_point": "java.util.Strings",
+      "baseline_functionality": "The integrated public Strings utility already contains null/blank/default, affix, padding, repetition and other String convenience operations; String retains payload and semantic ownership.",
+      "remaining_scope": "Retain the existing merged utility and its source-first recipe. Additional Unicode, regex and donor method coverage needs operation-specific evidence; no replacement String representation is introduced here.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.Strings",
+        "java.lang.String"
+      ],
+      "related_module_owner_refs": [
+        "java.text.Normalizer",
+        "java.text.MessageFormat",
+        "java.text.Collator",
+        "java.text.BreakIterator"
+      ]
+    },
+    {
+      "id": "arrays",
+      "family": "Arrays",
+      "utility_entry_point": "java.util.Arrays",
+      "baseline_functionality": "Existing public sort, search, copy, comparison, mismatch, range, fill and stream entry points operate on ordinary JDK arrays.",
+      "remaining_scope": "Array/index/mask algorithms remain subject to reified component types, ArrayStoreException, overlaps, bounds, stable occurrence order and JNI lifetime rules. Full new utility coverage is not claimed.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.Arrays"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "collections",
+      "family": "Collections",
+      "utility_entry_point": "java.util.Collections",
+      "baseline_functionality": "Existing Collections sorting/searching and checked, unmodifiable, synchronized and sequenced wrappers keep their current contracts.",
+      "remaining_scope": "Live filtered views, explicit stable sorted views and primitive mask selection are new direct-JDK candidates. Existing com.m3 collection views are donor/proving-ground owners, not proof of java.util integration.",
+      "new_candidates": [
+        {
+          "public_api": "java.util.Collections",
+          "target_module": "java.base",
+          "target_path": "src/java.base/share/classes/java/util/Collections.java",
+          "kind": "ADDITIVE_MEMBERS_IN_EXISTING_PUBLIC_OWNER",
+          "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+          "proof": null,
+          "receiving_sequence_advanced": false,
+          "proposed_methods": [
+            "filteredCollection",
+            "filteredList",
+            "filteredSet",
+            "filteredSortedSet",
+            "filteredNavigableSet",
+            "filteredDeque",
+            "filteredMap",
+            "filteredSortedMap",
+            "filteredNavigableMap",
+            "sortedList",
+            "filteredSnapshot",
+            "sortedSnapshot",
+            "filteredSortedSnapshot"
+          ]
+        }
+      ],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.Collections",
+        "java.util.Collection",
+        "java.util.List",
+        "java.util.Set",
+        "java.util.Map",
+        "java.util.ArrayList"
+      ],
+      "related_module_owner_refs": [],
+      "snapshot_algorithm_selection": {
+        "selection": "REUSE_EXISTING_ARRAYS_SORT_ON_CAPTURED_VISIBLE_OBJECT_ARRAY",
+        "retained_snapshot_storage": "Object[] values plus offset, length and reverse window state",
+        "transient_filtering_storage": "long[] mask and selected int[] physical indexes during capture",
+        "rejected_candidate": "CUSTOM_INDIRECT_MERGE_SORT_AND_RETAINED_ORDER_INT_ARRAY",
+        "selected_receiver_source_sha256": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+        "rejected_receiver_source_sha256": "a5f4f146cd60cb726628673dded32d076f70b8d4ad32d0d0cb25ad4dfa308199",
+        "qualification_boundary": "Separate receiving receipts retain the rejected source and whole-call measurements. No general CPU/allocation speedup, default-native promotion or product-image qualification is claimed by this naming catalogue.",
+        "receiving_sequence_advanced": false
+      }
+    },
+    {
+      "id": "iterators",
+      "family": "Iterators",
+      "utility_entry_point": "Distributed protocols; no public java.util.Iterators at the baseline",
+      "baseline_functionality": "Iterator, ListIterator, primitive iterators and Enumeration define traversal, cursor and mutation contracts.",
+      "remaining_scope": "A general Iterators utility entry point is a discoverability gap. Filter/concatenation helpers require explicit lookahead, remove, exhaustion and exception-demand semantics before addition.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.Iterator",
+        "java.util.ListIterator",
+        "java.util.PrimitiveIterator",
+        "java.util.Enumeration"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "spliterators",
+      "family": "Spliterators",
+      "utility_entry_point": "java.util.Spliterators",
+      "baseline_functionality": "Factories adapt arrays, collections and iterators into spliterators and back.",
+      "remaining_scope": "New filtered projections must drop unjustified SIZED/SUBSIZED and preserve only valid encounter-order, comparator, DISTINCT and NONNULL characteristics.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.Spliterators",
+        "java.util.Spliterator"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "streams",
+      "family": "Streams",
+      "utility_entry_point": "Public Stream/primitive Stream factories and StreamSupport; existing Streams class is package-private",
+      "baseline_functionality": "Existing object/primitive pipelines and StreamSupport supply creation and execution ownership.",
+      "remaining_scope": "The proposed public Streams helper must preserve single-use/laziness, short-circuiting, encounter order, close-handler composition and callback failures. Public widening is not inferred from the existing private helper.",
+      "new_candidates": [
+        {
+          "public_api": "java.util.stream.Streams",
+          "target_module": "java.base",
+          "target_path": "src/java.base/share/classes/java/util/stream/Streams.java",
+          "kind": "PUBLIC_VISIBILITY_AND_ADDITIVE_MEMBERS_IN_EXISTING_INTERNAL_OWNER",
+          "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+          "proof": null,
+          "receiving_sequence_advanced": false,
+          "proposed_methods": [
+            "stream",
+            "zip"
+          ]
+        }
+      ],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.stream.Stream",
+        "java.util.stream.IntStream",
+        "java.util.stream.LongStream",
+        "java.util.stream.DoubleStream",
+        "java.util.stream.StreamSupport"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "collectors",
+      "family": "Collectors",
+      "utility_entry_point": "java.util.stream.Collectors",
+      "baseline_functionality": "Existing collector factories define accumulation, combination, finishing and downstream composition.",
+      "remaining_scope": "Temporary/virtual collectors remain separate proposed semantics unless their lifetime, associative combination, characteristics and materialization contracts are specified and tested.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.stream.Collectors",
+        "java.util.stream.Collector"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "functions",
+      "family": "Functions",
+      "utility_entry_point": "Composition methods on functional interfaces; no public java.util.function.Functions at baseline",
+      "baseline_functionality": "The functional interfaces retain identity, compose/andThen and predicate combinator APIs where defined.",
+      "remaining_scope": "A general Functions helper is a discoverability gap. Reuse interface combinators and preserve short-circuit order, capture identity and callback exception propagation.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.function.Function",
+        "java.util.function.BiFunction",
+        "java.util.function.Predicate",
+        "java.util.function.Consumer",
+        "java.util.function.Supplier"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "reflection",
+      "family": "Reflection",
+      "utility_entry_point": "Array/Modifier/Proxy are existing focused utilities; general Reflection helper is a candidate",
+      "baseline_functionality": "Reflection members, array operations, modifier checks and proxy construction remain in java.lang.reflect.",
+      "remaining_scope": "The current Reflection candidate is limited to type and metadata inspection. Member discovery and invocation remain on the existing caller-sensitive owners; no access-check bypass or invocation facade is added. Full metadata contract and product-image qualification still require independent receipts.",
+      "new_candidates": [
+        {
+          "public_api": "java.lang.reflect.Reflection",
+          "target_module": "java.base",
+          "target_path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+          "kind": "NEW_ADDITIVE_PUBLIC_UTILITY",
+          "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+          "proof": null,
+          "receiving_sequence_advanced": false,
+          "proposed_methods": [
+            "hierarchy",
+            "interfaces",
+            "rawType",
+            "componentType",
+            "typeArguments",
+            "upperBounds",
+            "lowerBounds",
+            "annotations",
+            "parameters",
+            "parameterTypes",
+            "exceptionTypes"
+          ]
+        }
+      ],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.lang.reflect.Array",
+        "java.lang.reflect.Modifier",
+        "java.lang.reflect.AccessibleObject",
+        "java.lang.reflect.Method",
+        "java.lang.reflect.Field",
+        "java.lang.reflect.Constructor",
+        "java.lang.reflect.Proxy"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "classes",
+      "family": "Classes",
+      "utility_entry_point": "java.lang.Class and ClassLoader APIs",
+      "baseline_functionality": "Class identity, loading, member discovery and per-class associated values already have JDK owners.",
+      "remaining_scope": "A single Classes convenience entry point is not present. Any future helper must preserve defining-loader identity and avoid accidental initialization or strong-loader retention; related reflection methods belong to the candidate Reflection owner.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.lang.Class",
+        "java.lang.ClassLoader",
+        "java.lang.ClassValue"
+      ],
+      "related_module_owner_refs": [
+        "java.lang.constant.ConstantDescs",
+        "java.lang.constant.MethodHandleDesc"
+      ]
+    },
+    {
+      "id": "handles",
+      "family": "Method and variable handles",
+      "utility_entry_point": "java.lang.invoke.MethodHandles",
+      "baseline_functionality": "Lookup, handle combinators, signatures and variable access-mode contracts have existing public owners.",
+      "remaining_scope": "Preserve Lookup authority, exact/adapted invocation distinction and VarHandle memory modes. A method-by-method donor superset has not been qualified.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.lang.invoke.MethodHandles",
+        "java.lang.invoke.MethodHandle",
+        "java.lang.invoke.MethodType",
+        "java.lang.invoke.VarHandle"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "io",
+      "family": "Input and output",
+      "utility_entry_point": "No general public IOUtils at baseline; candidate java.io.IOUtils",
+      "baseline_functionality": "Stream/reader/writer methods own byte and character transfer, reads, writes, buffering and resource lifecycle.",
+      "remaining_scope": "New IOUtils methods need exact partial-read/EOF, zero-progress, byte-versus-character, charset, checked-exception, flush and close-ownership contracts. Reuse existing transfer owners where possible.",
+      "new_candidates": [
+        {
+          "public_api": "java.io.IOUtils",
+          "target_module": "java.base",
+          "target_path": "src/java.base/share/classes/java/io/IOUtils.java",
+          "kind": "NEW_ADDITIVE_PUBLIC_UTILITY",
+          "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+          "proof": null,
+          "receiving_sequence_advanced": false,
+          "proposed_methods": [
+            "copy",
+            "copyRange",
+            "readFully",
+            "skipFully",
+            "contentEquals",
+            "toString",
+            "write"
+          ]
+        }
+      ],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.io.InputStream",
+        "java.io.OutputStream",
+        "java.io.Reader",
+        "java.io.Writer"
+      ],
+      "related_module_owner_refs": [
+        "java.io.ObjectInputFilter",
+        "java.io.ObjectStreamClass"
+      ]
+    },
+    {
+      "id": "files",
+      "family": "Files",
+      "utility_entry_point": "java.nio.file.Files",
+      "baseline_functionality": "Existing provider-aware file metadata, creation, copying, reading, writing and traversal utilities remain authoritative.",
+      "remaining_scope": "Do not replace provider semantics or silently change link following, atomicity, permissions, stream closure or large-file behavior. Full donor filesystem-utility coverage is not established.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.nio.file.Files",
+        "java.nio.file.FileSystems"
+      ],
+      "related_module_owner_refs": [
+        "java.nio.file.FileSystems",
+        "java.nio.file.attribute.PosixFilePermissions",
+        "java.nio.file.attribute.FileTime"
+      ]
+    },
+    {
+      "id": "paths",
+      "family": "Paths",
+      "utility_entry_point": "java.nio.file.Paths and Path.of",
+      "baseline_functionality": "Path construction and path value operations use the owning filesystem provider.",
+      "remaining_scope": "Preserve platform/provider-specific normalization and URI rules. Path helpers must not treat lexical normalization as filesystem identity or authorization.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.nio.file.Path",
+        "java.nio.file.Paths"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "buffers",
+      "family": "Buffers",
+      "utility_entry_point": "Public buffer factories and methods; no general Buffers utility at baseline",
+      "baseline_functionality": "Existing buffers define position, limit, mark, slicing/duplication, order and direct/read-only storage.",
+      "remaining_scope": "A general buffer utility is a discoverability gap. Bulk helpers must preserve offset, position/limit, read-only and byte-order rules and account for native lifetime.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.nio.Buffer",
+        "java.nio.ByteBuffer",
+        "java.nio.CharBuffer"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "channels",
+      "family": "Channels",
+      "utility_entry_point": "java.nio.channels.Channels",
+      "baseline_functionality": "Channels adapts byte channels and streams/readers/writers; concrete channels own blocking and transfer behavior.",
+      "remaining_scope": "Preserve partial transfer, interruption/asynchronous close, position, blocking and ownership semantics; generic I/O helpers cannot assume every channel always makes progress.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.nio.channels.Channels",
+        "java.nio.channels.FileChannel",
+        "java.nio.channels.AsynchronousFileChannel"
+      ],
+      "related_module_owner_refs": [
+        "java.nio.channels.Selector",
+        "java.nio.channels.AsynchronousFileChannel"
+      ]
+    },
+    {
+      "id": "resources",
+      "family": "Resources",
+      "utility_entry_point": "ResourceBundle and ClassLoader discovery; AutoCloseable lifecycle protocol",
+      "baseline_functionality": "Localized resources, loader resources and scoped closure have existing distinct public owners.",
+      "remaining_scope": "There is no one general resource helper. Resource discovery and I/O lifetime are separate contracts; suppression ordering and caller-owned resources must remain explicit.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.lang.AutoCloseable",
+        "java.util.ResourceBundle",
+        "java.lang.ClassLoader"
+      ],
+      "related_module_owner_refs": [
+        "java.lang.ref.Cleaner",
+        "java.lang.ref.Reference",
+        "java.util.Locale"
+      ]
+    },
+    {
+      "id": "charsets",
+      "family": "Charsets",
+      "utility_entry_point": "java.nio.charset.Charset and StandardCharsets",
+      "baseline_functionality": "Charset lookup/constants and incremental encoders/decoders own text-to-byte semantics.",
+      "remaining_scope": "Preserve replacement/report/ignore policy, stateful encoding and incomplete trailing input. No platform-default charset is silently substituted by new helpers.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.nio.charset.Charset",
+        "java.nio.charset.StandardCharsets",
+        "java.nio.charset.CharsetEncoder",
+        "java.nio.charset.CharsetDecoder"
+      ],
+      "related_module_owner_refs": [
+        "java.nio.charset.spi.CharsetProvider"
+      ]
+    },
+    {
+      "id": "regex",
+      "family": "Regular expressions",
+      "utility_entry_point": "Existing java.util.regex.Pattern/Matcher for characters; additive TokenPattern/TokenMatcher candidates for object-token sequences",
+      "baseline_functionality": "Pattern compilation, quoting, matching, finding, groups and replacement remain canonical regex APIs.",
+      "remaining_scope": "Token builders are a finite object-predicate/capture/repetition API. They do not supply a lexer, textual grammar, backreference/lookaround builders or the full T-Rex language. Existing backtracking and stack costs remain; full fork-image, platforms and performance acceptance are pending.",
+      "new_candidates": [
+        {
+          "public_api": "java.util.regex.TokenPattern",
+          "target_module": "java.base",
+          "target_path": "src/java.base/share/classes/java/util/regex/TokenPattern.java",
+          "kind": "NEW_ADDITIVE_PUBLIC_TOKEN_SEQUENCE_API",
+          "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+          "proof": null,
+          "receiving_sequence_advanced": false,
+          "proposed_methods": [
+            "alternation",
+            "anyToken",
+            "capture",
+            "empty",
+            "groupCount",
+            "literal",
+            "matcher",
+            "namedGroups",
+            "oneOrMore",
+            "optional",
+            "or",
+            "repeat",
+            "sequence",
+            "then",
+            "token",
+            "zeroOrMore"
+          ],
+          "candidate_source_sha256": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a",
+          "declaration_tokens": [
+            "public final class TokenPattern<T>",
+            "public enum Quantifier",
+            "public static <T> TokenPattern<T> token(Predicate<? super T> predicate)",
+            "public static <T> TokenPattern<T> sequence(TokenPattern<? super T>... expressions)",
+            "public TokenPattern<T> repeat(int minimum, int maximum, Quantifier quantifier)",
+            "public TokenPattern<T> capture(String name)",
+            "public TokenMatcher<T> matcher(List<? extends T> input)"
+          ]
+        },
+        {
+          "public_api": "java.util.regex.TokenMatcher",
+          "target_module": "java.base",
+          "target_path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+          "kind": "NEW_ADDITIVE_PUBLIC_TOKEN_SEQUENCE_API",
+          "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+          "proof": null,
+          "receiving_sequence_advanced": false,
+          "proposed_methods": [
+            "end",
+            "find",
+            "group",
+            "groupCount",
+            "hasMatch",
+            "input",
+            "lookingAt",
+            "matches",
+            "namedGroups",
+            "pattern",
+            "region",
+            "regionEnd",
+            "regionStart",
+            "reset",
+            "span",
+            "start"
+          ],
+          "candidate_source_sha256": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2",
+          "declaration_tokens": [
+            "public final class TokenMatcher<T>",
+            "public boolean find()",
+            "public boolean find(int start)",
+            "public TokenMatcher<T> reset(List<? extends T> tokens)",
+            "public TokenMatcher<T> region(int start, int end)",
+            "public List<T> group(String name)",
+            "public Span span(String name)",
+            "public record Span(int start, int end)"
+          ]
+        }
+      ],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.regex.Pattern",
+        "java.util.regex.Matcher"
+      ],
+      "related_module_owner_refs": [],
+      "pending_extension_slots": [],
+      "token_sequence_extension": {
+        "aspect": "TOKEN_SEQUENCE_MATCHING",
+        "target_module": "java.base",
+        "target_package": "java.util.regex",
+        "public_owners": [
+          "java.util.regex.TokenPattern",
+          "java.util.regex.TokenMatcher"
+        ],
+        "engine_owner_sources": [
+          "java.util.regex.Pattern",
+          "java.util.regex.Matcher"
+        ],
+        "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+        "proof": null,
+        "runtime_qualified": false,
+        "performance_qualified": false,
+        "receiving_sequence_advanced": false,
+        "existing_character_owners_unchanged": true,
+        "named_character_groups_are_token_aware": false,
+        "unit": "ONE_LIST_ELEMENT_NO_STRING_SERIALIZATION",
+        "span_positions": "ABSOLUTE_HALF_OPEN_TOKEN_INDICES",
+        "nested_types": [
+          "java.util.regex.TokenPattern.Quantifier",
+          "java.util.regex.TokenMatcher.Span"
+        ],
+        "features": [
+          "object predicates",
+          "literal and any token",
+          "empty expression",
+          "sequence",
+          "ordered alternative",
+          "greedy/reluctant/possessive bounded and unbounded repetition",
+          "numbered and named captures",
+          "defensive shallow input snapshot",
+          "token-index region and search"
+        ],
+        "excluded": [
+          "lexer",
+          "textual grammar/parser",
+          "backreference/lookaround builders",
+          "full T-Rex grammar",
+          "linear-time guarantee",
+          "token JNI acceleration"
+        ],
+        "canonical_contract_catalogue": "m3/runtime-integration/token-regex/contract-catalogue.json",
+        "behavioral_atom_seal": "m3/runtime-integration/token-regex/behavioral-atoms.json",
+        "source_evidence": "Exact frozen product SHA and declaration tokens; executed contracts remain in a separate source-bound receiver packet."
+      }
+    },
+    {
+      "id": "numbers",
+      "family": "Numbers",
+      "utility_entry_point": "Numeric type factories and static helpers; no general Numbers utility at baseline",
+      "baseline_functionality": "Parsing, formatting, exact big-number arithmetic and floating-point classification have existing typed owners.",
+      "remaining_scope": "A general Numbers helper is a discoverability gap. Overflow, precision, scale, signed zero, NaN and unsigned interpretation need explicit per-operation contracts.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.lang.Integer",
+        "java.lang.Long",
+        "java.lang.Double",
+        "java.lang.Float",
+        "java.math.BigInteger",
+        "java.math.BigDecimal"
+      ],
+      "related_module_owner_refs": [
+        "java.text.NumberFormat",
+        "java.util.random.RandomGeneratorFactory"
+      ]
+    },
+    {
+      "id": "math",
+      "family": "Mathematics",
+      "utility_entry_point": "java.lang.Math and StrictMath",
+      "baseline_functionality": "Existing numeric functions, exact integer operations and floating-point utilities remain public owners.",
+      "remaining_scope": "Do not conflate Math and StrictMath reproducibility guarantees; additional algorithms require accuracy/domain and overflow proof.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.lang.Math",
+        "java.lang.StrictMath"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "bits",
+      "family": "Bits and masks",
+      "utility_entry_point": "BitSet plus Integer/Long bit utilities",
+      "baseline_functionality": "Existing bit vectors, shifts, masks, population counts and zero-bit operations provide reusable primitive machinery.",
+      "remaining_scope": "A single Bits utility is not present. New indexed-mask operations must define logical bounds, unused high bits, signed shifts, aliases and mutation transaction boundaries.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.BitSet",
+        "java.lang.Integer",
+        "java.lang.Long"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "time",
+      "family": "Date and time",
+      "utility_entry_point": "Focused java.time factories, TemporalAdjusters and DateTimeFormatter",
+      "baseline_functionality": "Clock, timeline, calendar, duration, adjustment and formatting owners remain distinct.",
+      "remaining_scope": "A single Time/DateTimes utility is not present; preserve zone/DST, chronology, parsing/resolution and injected-clock semantics rather than flattening them into one rule.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.time.Clock",
+        "java.time.Instant",
+        "java.time.Duration",
+        "java.time.LocalDate",
+        "java.time.temporal.TemporalAdjusters",
+        "java.time.format.DateTimeFormatter"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "concurrency",
+      "family": "Concurrency",
+      "utility_entry_point": "Executors, CompletableFuture, TimeUnit and LockSupport",
+      "baseline_functionality": "Executor factories, asynchronous stages, timing, parking and threads have existing public owners.",
+      "remaining_scope": "New convenience functions need cancellation/interruption, publication, ordering and progress guarantees. Source inventory does not prove linearizability, lock freedom or safe parallel collection mutation.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.concurrent.Executors",
+        "java.util.concurrent.CompletableFuture",
+        "java.util.concurrent.TimeUnit",
+        "java.util.concurrent.locks.LockSupport",
+        "java.lang.Thread"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "processes",
+      "family": "Processes",
+      "utility_entry_point": "ProcessBuilder and ProcessHandle factories",
+      "baseline_functionality": "Process construction, handles, descendants, streams and exit observation retain existing ownership.",
+      "remaining_scope": "A Processes helper is a discoverability gap. Preserve argument boundaries, environment handling, stream draining, cancellation and process lifecycle; do not introduce shell interpolation.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.lang.Process",
+        "java.lang.ProcessBuilder",
+        "java.lang.ProcessHandle"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "network",
+      "family": "Networking",
+      "utility_entry_point": "Existing URI/URL/encoding/address APIs and java.net.http.HttpClient",
+      "baseline_functionality": "Protocol-independent addressing and HTTP client operations already span their owning JDK modules.",
+      "remaining_scope": "A general network helper is not present. Keep URI escaping distinct from form encoding; preserve redirects, timeouts, DNS, TLS and resource ownership. HttpClient stays in java.net.http, not java.base.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base",
+        "java.net.http"
+      ],
+      "source_evidence": [
+        "java.net.URI",
+        "java.net.URL",
+        "java.net.URLEncoder",
+        "java.net.URLDecoder",
+        "java.net.InetAddress",
+        "java.net.http.HttpClient"
+      ],
+      "related_module_owner_refs": [
+        "javax.net.SocketFactory",
+        "javax.net.ssl.SSLContext",
+        "javax.net.ssl.KeyManagerFactory",
+        "javax.net.ssl.TrustManagerFactory"
+      ]
+    },
+    {
+      "id": "archives",
+      "family": "Archives",
+      "utility_entry_point": "Existing ZIP/JAR owners; no general Archives utility at baseline",
+      "baseline_functionality": "Archive reading/writing and JAR metadata have existing stream/file owners.",
+      "remaining_scope": "A general archive utility is a discoverability gap. Define entry-name handling, duplicates, sizes, CRC, random versus sequential access, ownership and extraction limits before implementation.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.util.zip.ZipFile",
+        "java.util.zip.ZipInputStream",
+        "java.util.zip.ZipOutputStream",
+        "java.util.jar.JarFile",
+        "java.util.jar.JarOutputStream"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "digests",
+      "family": "Digests and message authentication",
+      "utility_entry_point": "java.security.MessageDigest and javax.crypto.Mac factories",
+      "baseline_functionality": "Provider-selected digest and MAC implementations retain their own state and algorithm identities.",
+      "remaining_scope": "A digest convenience helper is not present. Preserve algorithm/provider choice, byte encoding, key ownership and mutable-instance confinement; hashing is not encryption.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.security.MessageDigest",
+        "javax.crypto.Mac"
+      ],
+      "related_module_owner_refs": [
+        "java.security.Security",
+        "java.security.Provider",
+        "java.security.Signature",
+        "javax.crypto.Cipher",
+        "javax.crypto.KeyAgreement"
+      ]
+    },
+    {
+      "id": "jdbc",
+      "family": "JDBC",
+      "utility_entry_point": "DriverManager and RowSetProvider factories with JDBC interfaces",
+      "baseline_functionality": "JDBC connection/statement/result ownership remains in java.sql and RowSetProvider in java.sql.rowset.",
+      "remaining_scope": "A general JDBC helper is not present. Transactions, resource closure, parameter binding, batching and driver behavior need explicit contracts; no database implementation belongs in java.base.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.sql",
+        "java.sql.rowset"
+      ],
+      "source_evidence": [
+        "java.sql.DriverManager",
+        "java.sql.Connection",
+        "java.sql.Statement",
+        "java.sql.ResultSet",
+        "javax.sql.rowset.RowSetProvider"
+      ],
+      "related_module_owner_refs": []
+    },
+    {
+      "id": "modules",
+      "family": "Modules and services",
+      "utility_entry_point": "ModuleFinder/ModuleDescriptor/Configuration and ServiceLoader",
+      "baseline_functionality": "Module resolution, layers, descriptors and service discovery remain JDK-owned.",
+      "remaining_scope": "A general Modules helper is not present. Preserve readability/exports/opens, defining layers, caller authority and service-loading effects; do not infer permission from metadata.",
+      "new_candidates": [],
+      "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
+      "family_completion": false,
+      "owning_modules": [
+        "java.base"
+      ],
+      "source_evidence": [
+        "java.lang.Module",
+        "java.lang.ModuleLayer",
+        "java.lang.module.ModuleFinder",
+        "java.lang.module.ModuleDescriptor",
+        "java.lang.module.Configuration",
+        "java.util.ServiceLoader"
+      ],
+      "related_module_owner_refs": [
+        "java.util.spi.ToolProvider"
+      ]
+    }
+  ],
+  "public_api_sources": [
+    {
+      "public_api": "java.io.InputStream",
+      "module": "java.base",
+      "package": "java.io",
+      "path": "src/java.base/share/classes/java/io/InputStream.java",
+      "git_blob": "736b6ebd90435cdbaada40b8982e1f53b14281f1",
+      "sha256": "3f2a8698a8e1dd61500508ecd1c6fec873744699aa2d447bb33ec00ce0f26d1d",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.io.OutputStream",
+      "module": "java.base",
+      "package": "java.io",
+      "path": "src/java.base/share/classes/java/io/OutputStream.java",
+      "git_blob": "71c62013c08519e9ea86673e46ea1c209b493c97",
+      "sha256": "a929163b54781939b622e7c6f111f24bea541aa2f6d68be38d3ea2b0048a90d1",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.io.Reader",
+      "module": "java.base",
+      "package": "java.io",
+      "path": "src/java.base/share/classes/java/io/Reader.java",
+      "git_blob": "b29a8c05f970bfc7d7455b8f079aeda440f4a908",
+      "sha256": "bf7281a2a05e67bad28b9d3e536cf165a3127efd4ddf50d5963b138dbe6b8df9",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.io.Writer",
+      "module": "java.base",
+      "package": "java.io",
+      "path": "src/java.base/share/classes/java/io/Writer.java",
+      "git_blob": "4ec95d84a7682d369df6bd2163d19256d4244766",
+      "sha256": "bfd7e7c4c9443823a23cc53094832ca1b694076778c84dbc2773b67aaabe979e",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.AutoCloseable",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/AutoCloseable.java",
+      "git_blob": "afb52f124c60e96e055e87c3ece6c43ba2425265",
+      "sha256": "c3b4b865234a0dfb3c974c0001f706d6e05a4d4987063a795a610c9886147b81",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Class",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Class.java",
+      "git_blob": "ddc5a55f0b2f51809d00e7b9985668a53740e006",
+      "sha256": "ddf752a34f5a1cb15ffd0e288afa5eef3499c97e0406cb14e4365de69e66bd4a",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.ClassLoader",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/ClassLoader.java",
+      "git_blob": "079a40accdeb6935ab2d4ec1d63d034a723305b1",
+      "sha256": "d88839317ca579b3c09de71338b07291e881ef5bb354cf2243aa4bc558299fd7",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.ClassValue",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/ClassValue.java",
+      "git_blob": "1ce1c4be0aab2218779ddccee2027c4344b53e73",
+      "sha256": "df341f99d6a8b6ecc53710d3b3565495a6a53f3d5e805547c3d9f43db228c5f9",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Double",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Double.java",
+      "git_blob": "01a0fadaad1f901b23c6ede74fe3cab68f125598",
+      "sha256": "67b1cc47b33b99eab0d2f41da98b2d84ebc5e727cac4c09badca043bb5ea2a39",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Float",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Float.java",
+      "git_blob": "7eb7cc58771ba0a77e2eb0c085c12ac1e2a8fe5b",
+      "sha256": "cb82e6f79de34e09e62e9be3dfd8c8e180319fce76d34f7769f8689d4920fd24",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Integer",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Integer.java",
+      "git_blob": "1e136cdde0cae015de1b4d44285fcc2d1f7319df",
+      "sha256": "92a6457c0a88e90a2c6589f6be556639d7a1c32b24bc41f0c6e49ae70f79d6ea",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Long",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Long.java",
+      "git_blob": "6db8f8a96c1d7cef9623190845d490df446dd4db",
+      "sha256": "3a3985f52ff781faafe4fe81ba587d9fc05d02d4b7ce3068eda41f7150724fd8",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Math",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Math.java",
+      "git_blob": "fd5c8bb0491e6bfd894e3517e73c96f4661b5c06",
+      "sha256": "1264b299cbffe5611764dc9a626f9beb2a02728a1651f3f3fee1e0b767924151",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Module",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Module.java",
+      "git_blob": "84da07638c76320f1e3c3016a5ba1e7813a9f50b",
+      "sha256": "c420e6421c44756f2355d6614c31bfda404533a0c1f4f170f439cd43df424f1e",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.ModuleLayer",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/ModuleLayer.java",
+      "git_blob": "444f8cdeb82f4efef049955454f7c2bc66615837",
+      "sha256": "eff4ab3b69985ec9cccfca39a9c7c6ba3d4944141fd419e632d59cbdf06a6e9a",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Process",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Process.java",
+      "git_blob": "5b926e35729487d593d4a775f581cf914f39980a",
+      "sha256": "a11aeac21e10ada8b344ad0fdc5486358a008f89390882bcc1822b1799b2f3ac",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.ProcessBuilder",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/ProcessBuilder.java",
+      "git_blob": "e7d5d9debef69484c3bff52c2769a85a2133e324",
+      "sha256": "84c50304cc5ee736def545448b1c31dd5ba4552e04310b40810676f081d21f2c",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.ProcessHandle",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/ProcessHandle.java",
+      "git_blob": "1704a6da37a509465cd6671c4f8713a93c26e34f",
+      "sha256": "0a54016f3f6ab2735a5c06eec975a6f791e2ab51909ee2f2c2b90e1c0e4e9e95",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.StrictMath",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/StrictMath.java",
+      "git_blob": "741aa5865982a476027b7ddea80ca341efe467a4",
+      "sha256": "6be0b4ef1629d664134fd9d2972e8454e8cdbfc7331038b7ab601082a8004f88",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.String",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "git_blob": "db3fd603765644fffe9edd92511624b944914068",
+      "sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.Thread",
+      "module": "java.base",
+      "package": "java.lang",
+      "path": "src/java.base/share/classes/java/lang/Thread.java",
+      "git_blob": "97a7d2df1b6404d46131b7fc01c601501864535c",
+      "sha256": "23a38e9d8deba442c845137d46d6fd8fa74c507e364a697934827b0c783da85e",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.invoke.MethodHandle",
+      "module": "java.base",
+      "package": "java.lang.invoke",
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodHandle.java",
+      "git_blob": "3dfd9c061bfd63bbe649f40769926a862a6fa3ca",
+      "sha256": "a25deb1980a84a918222a780d30911044ecfd24819b6d95a18023275532b7d98",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.invoke.MethodHandles",
+      "module": "java.base",
+      "package": "java.lang.invoke",
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodHandles.java",
+      "git_blob": "65da1cc9e744bff088a4e80731e5eb80af5d4c1d",
+      "sha256": "3cd6f1229de979b3da578acc4bc49af394dd930e411862255de977d2252b1a0f",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.invoke.MethodType",
+      "module": "java.base",
+      "package": "java.lang.invoke",
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodType.java",
+      "git_blob": "951d209b69f81489a5f669d213c798f41cc9c5b9",
+      "sha256": "4dd95d9a1f71ed1bdc9c4fef9f2d475dff36df05f757687da35a0839e34045e8",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.invoke.VarHandle",
+      "module": "java.base",
+      "package": "java.lang.invoke",
+      "path": "src/java.base/share/classes/java/lang/invoke/VarHandle.java",
+      "git_blob": "2ffa75cf12bed4902e507a1cb41944bea0218b71",
+      "sha256": "66e4ccafe0851e3544793765e4b32f09e3e20d03f7b8583a18fd81503e30f69d",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.module.Configuration",
+      "module": "java.base",
+      "package": "java.lang.module",
+      "path": "src/java.base/share/classes/java/lang/module/Configuration.java",
+      "git_blob": "6cbcd41278e6347937ebd9a6c697792bc6ff4a16",
+      "sha256": "4a24dcf2a0da50b833c2e8800bd18586c81e84b749fdf3f7ca883c92f1b8c7ec",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.module.ModuleDescriptor",
+      "module": "java.base",
+      "package": "java.lang.module",
+      "path": "src/java.base/share/classes/java/lang/module/ModuleDescriptor.java",
+      "git_blob": "3972084eca2b8f55e9386e57d9c817088b0586d6",
+      "sha256": "68894193a1dee1dc31b85135f1e45421b43b295f429b10a7a6ca0db9f3014d49",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.module.ModuleFinder",
+      "module": "java.base",
+      "package": "java.lang.module",
+      "path": "src/java.base/share/classes/java/lang/module/ModuleFinder.java",
+      "git_blob": "049486774932b703120cdbfb63dbf9e6a18c46dc",
+      "sha256": "c33839f959c4d597e5d61b89400fee1528cb985ed644d8a177822fb06cb3299f",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.reflect.AccessibleObject",
+      "module": "java.base",
+      "package": "java.lang.reflect",
+      "path": "src/java.base/share/classes/java/lang/reflect/AccessibleObject.java",
+      "git_blob": "8c0f74a29c5a6755457debdf64373dd05d8c8630",
+      "sha256": "df2e58f887aca1bd7830c8e409d017f90842d982c9b53b4deea76758fb05c108",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.reflect.Array",
+      "module": "java.base",
+      "package": "java.lang.reflect",
+      "path": "src/java.base/share/classes/java/lang/reflect/Array.java",
+      "git_blob": "16f5477af255906a6793c6cb22b165f194969547",
+      "sha256": "def5b1cf6d5c364afa80b5b9a603eff745dd0b9c7096546af4bdf80b2da5677a",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.reflect.Constructor",
+      "module": "java.base",
+      "package": "java.lang.reflect",
+      "path": "src/java.base/share/classes/java/lang/reflect/Constructor.java",
+      "git_blob": "50695304082559e9259c3f3a2b8f2e3cfba353b9",
+      "sha256": "9101d8623b2f58584b122e110ccc792c3fc3be73204a8d38613220ea52f17b69",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.reflect.Field",
+      "module": "java.base",
+      "package": "java.lang.reflect",
+      "path": "src/java.base/share/classes/java/lang/reflect/Field.java",
+      "git_blob": "3e9d02d55095c4af15396d747c073e72ec1dcda3",
+      "sha256": "d096997b0a053109de2ba8579723f89a9959f11d12a7a8f888f1c84a208d73c9",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.reflect.Method",
+      "module": "java.base",
+      "package": "java.lang.reflect",
+      "path": "src/java.base/share/classes/java/lang/reflect/Method.java",
+      "git_blob": "028577c229cf4f43b6666455622a12f7e70ab57b",
+      "sha256": "2261e2d25ff86f17e254e7fe67da691585108eefeba39f0426479e43c62ab941",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.reflect.Modifier",
+      "module": "java.base",
+      "package": "java.lang.reflect",
+      "path": "src/java.base/share/classes/java/lang/reflect/Modifier.java",
+      "git_blob": "e0f60d5851104e47b750be47d86c090ae0c8b984",
+      "sha256": "b5c15391094f3ce007f769264e1852e49740098810f849701e341f20789c12a1",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.lang.reflect.Proxy",
+      "module": "java.base",
+      "package": "java.lang.reflect",
+      "path": "src/java.base/share/classes/java/lang/reflect/Proxy.java",
+      "git_blob": "858d3b3968113ce539d6ca541e439f80ed07b263",
+      "sha256": "e51fa79b5f5c9658d0f066e2eee1956d315e82cab60df6c821191f03e9996931",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.math.BigDecimal",
+      "module": "java.base",
+      "package": "java.math",
+      "path": "src/java.base/share/classes/java/math/BigDecimal.java",
+      "git_blob": "094c48bc02fbed4d5b7e371aaade9cd9b3ea0fd7",
+      "sha256": "07e291cee99673721f286190c3a365448a5e0ce332189127a925846eddcf80dd",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.math.BigInteger",
+      "module": "java.base",
+      "package": "java.math",
+      "path": "src/java.base/share/classes/java/math/BigInteger.java",
+      "git_blob": "d678a0f76a618cc21e3b69c64e8afce4f9c6def5",
+      "sha256": "331393aa99183dcee4123366d9f717001da15250a108a84e82af78c3cdd9192a",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.net.InetAddress",
+      "module": "java.base",
+      "package": "java.net",
+      "path": "src/java.base/share/classes/java/net/InetAddress.java",
+      "git_blob": "fcc2e27002692600b561478fcefe1b3d57a98546",
+      "sha256": "b8917aa066571118e465f87e01957728e8accaf1bdef76fa91efd4225695f2a5",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.net.URI",
+      "module": "java.base",
+      "package": "java.net",
+      "path": "src/java.base/share/classes/java/net/URI.java",
+      "git_blob": "2e01b0cf32b7ae32cbbb721d3ae9513c279a6c8d",
+      "sha256": "509145f2c522b0395dc3a88952b6549188dc80b3b6e54a4b32c39b867550c056",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.net.URL",
+      "module": "java.base",
+      "package": "java.net",
+      "path": "src/java.base/share/classes/java/net/URL.java",
+      "git_blob": "833eef7ef228b86cbcea9644d8c61df288be95d7",
+      "sha256": "f37c5f5993cda0cf6de811776fa981fd8cb23c53898402efa92503039d194be4",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.net.URLDecoder",
+      "module": "java.base",
+      "package": "java.net",
+      "path": "src/java.base/share/classes/java/net/URLDecoder.java",
+      "git_blob": "fc7f1d51ef0f415b1f292d640628ec095da826b7",
+      "sha256": "59509b8b234e5fccb3364c6581c30224044c5eb541a02a0b007edb2af0b16f01",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.net.URLEncoder",
+      "module": "java.base",
+      "package": "java.net",
+      "path": "src/java.base/share/classes/java/net/URLEncoder.java",
+      "git_blob": "1b5ff1cae26d2d265daa762ea7b90cf2440c047a",
+      "sha256": "60330c74a190bc1c25f181def0c5f38da4fb93212e9acb05c980bc6b225113c9",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.net.http.HttpClient",
+      "module": "java.net.http",
+      "package": "java.net.http",
+      "path": "src/java.net.http/share/classes/java/net/http/HttpClient.java",
+      "git_blob": "44d9a41c80381284b27c2a6134d46f8fb0d71fab",
+      "sha256": "20bc65f631965c5e15902805e0625143f6756225255ec272141ab354f4cfc38a",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.Buffer",
+      "module": "java.base",
+      "package": "java.nio",
+      "path": "src/java.base/share/classes/java/nio/Buffer.java",
+      "git_blob": "7bfcbea9639d7a510d1b74626d015a04a872c71f",
+      "sha256": "99840c098eeb9f828a22d7d162f35aa33fb3ce7cb831fe8934dbeb0a04bdd45c",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.ByteBuffer",
+      "module": "java.base",
+      "package": "java.nio",
+      "path": "src/java.base/share/classes/java/nio/X-Buffer.java.template",
+      "git_blob": "0120ed421c5df8dd4d58a5d155bbbb465ceb748a",
+      "sha256": "33daabbb3773baf1fef00b8a2cdb5f9727e0f0e46e107493bc55688d973e8e61",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_TEMPLATE_AND_MODULE_EXPORT",
+      "source_kind": "GENERATED_TYPE_TEMPLATE",
+      "template_substitutions": {
+        "$Type$": "Byte"
+      },
+      "generation_owner": "make/modules/java.base/gensrc/GensrcBuffer.gmk"
+    },
+    {
+      "public_api": "java.nio.CharBuffer",
+      "module": "java.base",
+      "package": "java.nio",
+      "path": "src/java.base/share/classes/java/nio/X-Buffer.java.template",
+      "git_blob": "0120ed421c5df8dd4d58a5d155bbbb465ceb748a",
+      "sha256": "33daabbb3773baf1fef00b8a2cdb5f9727e0f0e46e107493bc55688d973e8e61",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_TEMPLATE_AND_MODULE_EXPORT",
+      "source_kind": "GENERATED_TYPE_TEMPLATE",
+      "template_substitutions": {
+        "$Type$": "Char"
+      },
+      "generation_owner": "make/modules/java.base/gensrc/GensrcBuffer.gmk"
+    },
+    {
+      "public_api": "java.nio.channels.AsynchronousFileChannel",
+      "module": "java.base",
+      "package": "java.nio.channels",
+      "path": "src/java.base/share/classes/java/nio/channels/AsynchronousFileChannel.java",
+      "git_blob": "a84d655ace9e10a246f40cbf13857d1e1c05fbaf",
+      "sha256": "074430fb691629ba83ee183704526bdbbd390ce504371b09a82863d095bae977",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.channels.Channels",
+      "module": "java.base",
+      "package": "java.nio.channels",
+      "path": "src/java.base/share/classes/java/nio/channels/Channels.java",
+      "git_blob": "df8d2d45eecad0bf64604af5338ca44aa3523d05",
+      "sha256": "db94265a27d5d1a89376b801837a6db81307a0606d7af9d70cb319089a3d40f5",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.channels.FileChannel",
+      "module": "java.base",
+      "package": "java.nio.channels",
+      "path": "src/java.base/share/classes/java/nio/channels/FileChannel.java",
+      "git_blob": "bdc392c59a8954ed2cb3be444f3e389f21398b98",
+      "sha256": "ee6cdf14fc0ac3af2d39c1a70070dd1c32ed8119c7d31780a072022e4259728d",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.charset.Charset",
+      "module": "java.base",
+      "package": "java.nio.charset",
+      "path": "src/java.base/share/classes/java/nio/charset/Charset.java",
+      "git_blob": "b87dfc1643679f3e45f9ee646562fe7d50c7840a",
+      "sha256": "d95a4e5322cac971e735b08fc55feaa63a689381490c1fb985ea51ff9343f44b",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.charset.CharsetDecoder",
+      "module": "java.base",
+      "package": "java.nio.charset",
+      "path": "src/java.base/share/classes/java/nio/charset/Charset-X-Coder.java.template",
+      "git_blob": "d3d0f0e17c9f08c5dbbc892ce190c8683a3bbfd0",
+      "sha256": "72a089cd644c6a502877a91d035d20cdfcf78ebe168d496c7447a8f72f6c3b45",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_TEMPLATE_AND_MODULE_EXPORT",
+      "source_kind": "GENERATED_TYPE_TEMPLATE",
+      "template_substitutions": {
+        "$Coder$": "Decoder"
+      },
+      "generation_owner": "make/modules/java.base/gensrc/GensrcCharsetCoder.gmk"
+    },
+    {
+      "public_api": "java.nio.charset.CharsetEncoder",
+      "module": "java.base",
+      "package": "java.nio.charset",
+      "path": "src/java.base/share/classes/java/nio/charset/Charset-X-Coder.java.template",
+      "git_blob": "d3d0f0e17c9f08c5dbbc892ce190c8683a3bbfd0",
+      "sha256": "72a089cd644c6a502877a91d035d20cdfcf78ebe168d496c7447a8f72f6c3b45",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_TEMPLATE_AND_MODULE_EXPORT",
+      "source_kind": "GENERATED_TYPE_TEMPLATE",
+      "template_substitutions": {
+        "$Coder$": "Encoder"
+      },
+      "generation_owner": "make/modules/java.base/gensrc/GensrcCharsetCoder.gmk"
+    },
+    {
+      "public_api": "java.nio.charset.StandardCharsets",
+      "module": "java.base",
+      "package": "java.nio.charset",
+      "path": "src/java.base/share/classes/java/nio/charset/StandardCharsets.java",
+      "git_blob": "31bc454dbe6a47223adce9c38d39e2b22e28264c",
+      "sha256": "8622b79dc3fde4e6c9608178cea92983d6395e43a11fdf5adcfe27b7c746a1c8",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.file.FileSystems",
+      "module": "java.base",
+      "package": "java.nio.file",
+      "path": "src/java.base/share/classes/java/nio/file/FileSystems.java",
+      "git_blob": "6a691502551470bd1df879dc8979369e8248f243",
+      "sha256": "88d38041bcdfed28e35c7e1178da50824354e20c172bbf9dc58a2e79352bb506",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.file.Files",
+      "module": "java.base",
+      "package": "java.nio.file",
+      "path": "src/java.base/share/classes/java/nio/file/Files.java",
+      "git_blob": "2ff8819af1010139b00edc21944a1483eaffd145",
+      "sha256": "f99322d047cf07c49bc08845a170c86142a8d3aee1766f327c5198b3ff324de5",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.file.Path",
+      "module": "java.base",
+      "package": "java.nio.file",
+      "path": "src/java.base/share/classes/java/nio/file/Path.java",
+      "git_blob": "d121f438a4ffb4f20d88f03a56405a987771a20a",
+      "sha256": "cdaadcfd731405dcdbffe91ebf1b4dec6eae9db5eab6197a925a6e4a7b806ff7",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.nio.file.Paths",
+      "module": "java.base",
+      "package": "java.nio.file",
+      "path": "src/java.base/share/classes/java/nio/file/Paths.java",
+      "git_blob": "216fef4ae99038768872c5352f6b0e14613d6507",
+      "sha256": "e6ae0cb1d81d99b7e2bdf2713ec72d35184ea7d9617eb6f4d135220f8ee1313e",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.security.MessageDigest",
+      "module": "java.base",
+      "package": "java.security",
+      "path": "src/java.base/share/classes/java/security/MessageDigest.java",
+      "git_blob": "36c92df556e072d922e0e635964f71132bc1f0b3",
+      "sha256": "c0ce7245b95a8d716f526eb30715e0d1ee84ed12811d378516fbb4f4b361ef40",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.sql.Connection",
+      "module": "java.sql",
+      "package": "java.sql",
+      "path": "src/java.sql/share/classes/java/sql/Connection.java",
+      "git_blob": "f2d1d48f6d3cfca77a396ed3b7a2095a1d709b7d",
+      "sha256": "667a8188b928a266109fd95b0f79e251d4d4a567e50ddfdcf28b4b198f393cf4",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.sql.DriverManager",
+      "module": "java.sql",
+      "package": "java.sql",
+      "path": "src/java.sql/share/classes/java/sql/DriverManager.java",
+      "git_blob": "7b171b2e52ca83963df585e7561b77dab5a2785b",
+      "sha256": "ed7367de864cbf8a5bf7ed025bcfe91582b47eb263ec031d3caf53ad049e0a8a",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.sql.ResultSet",
+      "module": "java.sql",
+      "package": "java.sql",
+      "path": "src/java.sql/share/classes/java/sql/ResultSet.java",
+      "git_blob": "46ea73c19512107022fc10bd60b58240e855bbf3",
+      "sha256": "9d37235852d9ce6b60157d77c65268ec1a3cb2550735eb61d8235e965842724b",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.sql.Statement",
+      "module": "java.sql",
+      "package": "java.sql",
+      "path": "src/java.sql/share/classes/java/sql/Statement.java",
+      "git_blob": "bb5a5cfd64d963379652b1f03dff3f5d143639c9",
+      "sha256": "a39ef7455400ad8ef34cb6343c4a8ec2ae8332992cd825c5ed6580e85c07fc0d",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.time.Clock",
+      "module": "java.base",
+      "package": "java.time",
+      "path": "src/java.base/share/classes/java/time/Clock.java",
+      "git_blob": "df9dd709ea6f05a8bb201ea312ad74bd215e4605",
+      "sha256": "d0057da8ab53bfd41450c1504b28f98c0646b5997d977f6cc416f6bf7fd809a4",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.time.Duration",
+      "module": "java.base",
+      "package": "java.time",
+      "path": "src/java.base/share/classes/java/time/Duration.java",
+      "git_blob": "c1894e2db5a7c15641004579d807fc899025ff23",
+      "sha256": "6ea3d94e38d6866500b3548f54f526f3d88bd144411c36481da548017c5f643b",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.time.Instant",
+      "module": "java.base",
+      "package": "java.time",
+      "path": "src/java.base/share/classes/java/time/Instant.java",
+      "git_blob": "37dd9f8d2ace0d6e7d0e7d36d4adb72de27274a6",
+      "sha256": "f29b1c41dedf5e52f3bb00252d0fd896a1a1e2a8ca47d57cb300f901ca2d5d4b",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.time.LocalDate",
+      "module": "java.base",
+      "package": "java.time",
+      "path": "src/java.base/share/classes/java/time/LocalDate.java",
+      "git_blob": "2649c098a5b434a5e8a85dcdda2002a6870f326c",
+      "sha256": "af2ff647d3a2e8523a3e2474509a0b7ff7d9a2f0a799e7fd72a40c31fab76296",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.time.format.DateTimeFormatter",
+      "module": "java.base",
+      "package": "java.time.format",
+      "path": "src/java.base/share/classes/java/time/format/DateTimeFormatter.java",
+      "git_blob": "3346de707edb2354bd4f3adaaf9631acf120703d",
+      "sha256": "cb76d41cfbdf06fa67a3284199a9770a9e1c676d423a7da06bc947e822af0e2c",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.time.temporal.TemporalAdjusters",
+      "module": "java.base",
+      "package": "java.time.temporal",
+      "path": "src/java.base/share/classes/java/time/temporal/TemporalAdjusters.java",
+      "git_blob": "5da2569ee1ccb710ca913eeb9fc0086106a06c74",
+      "sha256": "35868923ea4af3bf3c1c19b6fa665eb932ff42294f1bd2337e483c65223e5438",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.ArrayList",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/ArrayList.java",
+      "git_blob": "d136f7affce3632866d5b1b46a88d1e2803530af",
+      "sha256": "c7db659273f9130e08b0d4508c34ff655e157b9ed48cdc7f5f5a2146ebb1c137",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Arrays",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Arrays.java",
+      "git_blob": "9d1034e6fef6c8ecf9fe4b5b4032fbd2622fc79b",
+      "sha256": "fb63f716ddcf750357d2c5747896336b45ad343eb4d3c2de329f3212c6bf49ec",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.BitSet",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/BitSet.java",
+      "git_blob": "e0dc042bce69ca41af4b47dd256c9f9cc6d741fa",
+      "sha256": "c5640ef08deab2582948e4cdbd0c1deb7cd83a3e404645ba91835bced5287cfc",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Collection",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Collection.java",
+      "git_blob": "0f63f0b26a46b6a9e309818241ac7663aad52f1f",
+      "sha256": "de833f449dd331f125692ae3dd0ff06d7ab62d9be47d7edb56907ce2dd7988e4",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Collections",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Collections.java",
+      "git_blob": "874a056d6d1c24f4fbc0f564ba564519c9db71e7",
+      "sha256": "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Enumeration",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Enumeration.java",
+      "git_blob": "23b4648d90d088fe251e885dbe14f17fe2c6e30e",
+      "sha256": "205a0dbd43d32dbd0907507b11ca6568210430ac301d8327df7bc9c91978c42f",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Iterator",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Iterator.java",
+      "git_blob": "aaf6a0497f458a6f8527a5d8a3974240f28af60a",
+      "sha256": "28f0ab0de8727ee357bd00792b6e490103219d177331e262f257ff0098994a7c",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.List",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/List.java",
+      "git_blob": "17cf635aa7ac02459f6985e43cf7de76b4750bdc",
+      "sha256": "bc5d882564a59adcadbe39615ba8213f4c33ad88222b8a3c4e7cdf50c62316b6",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.ListIterator",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/ListIterator.java",
+      "git_blob": "2cebebf685fc67729ef66b61dc4adcef3d03500c",
+      "sha256": "5e74ad36f05f09d1f2a4fc37531cab335cea83cf8b2473b0841c88fd7845b348",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Map",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Map.java",
+      "git_blob": "a36b818710666b092b0bf60eda706294f8b42409",
+      "sha256": "c2cb6eebb59d81a35a82827d7ad09b633317e5aa9c640b47c3fd5ebd9204c0a6",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Objects",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Objects.java",
+      "git_blob": "066c20d6551850efe91adb278298e2b25e46faf8",
+      "sha256": "e23039ed9dce3bd70565b94657a4e316eb72ff79345c13a4ed58bc0931d34ce5",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.PrimitiveIterator",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/PrimitiveIterator.java",
+      "git_blob": "b0e07ef6e5acc0e15ef8988a2d52420566ffa838",
+      "sha256": "02ba4be245ced47049a679e6cf50229abce50fada7fd8b56874acc2fe29a72ff",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.ResourceBundle",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/ResourceBundle.java",
+      "git_blob": "b9a2dca88d56429ddee212ffa9bca103857d7875",
+      "sha256": "4bd1220f91c3f859c92f67c3017c1bb9d4f0261247fd89676bbceade6fdda5b3",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.ServiceLoader",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/ServiceLoader.java",
+      "git_blob": "531ffa3f09c785a5b6a8bef9fa1f8f3c14a2f99b",
+      "sha256": "37cd04376da849588f095081f85aa6bbf1a3f18027cb5856febf62c9cf953148",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Set",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Set.java",
+      "git_blob": "5ce3bf04c7c48c1cdad1f60fba260c3b2048524d",
+      "sha256": "59fde85e92d7c167fe6573a25043c3fbe29eabaefdf84891d32101932f0a0f90",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Spliterator",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Spliterator.java",
+      "git_blob": "517d71c191b784af8e75c109431234b3f9e45b91",
+      "sha256": "70d75491a8ca51fe30a1a6935467763b5bdc3753b8624bec055edd4967383596",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Spliterators",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Spliterators.java",
+      "git_blob": "c047d96ab49072caefdc9c949e5c75d8b92d4fba",
+      "sha256": "7363a624984c81e6a8c0a7ac72e43e360c86f6c92f3ccc9a55c87d43ca987066",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.Strings",
+      "module": "java.base",
+      "package": "java.util",
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
+      "sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.concurrent.CompletableFuture",
+      "module": "java.base",
+      "package": "java.util.concurrent",
+      "path": "src/java.base/share/classes/java/util/concurrent/CompletableFuture.java",
+      "git_blob": "a664365fe29dc9a2db2090b398e576405e0491a3",
+      "sha256": "3d350ceb3bc6b5d22edd71065693d742480f01a5640a681d8413cc7c82185db4",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.concurrent.Executors",
+      "module": "java.base",
+      "package": "java.util.concurrent",
+      "path": "src/java.base/share/classes/java/util/concurrent/Executors.java",
+      "git_blob": "24aa3f0a08c6e171eef17e512b34a5d767d01526",
+      "sha256": "6937e22e90f3e676948db58d00e0f55de4bb0ff12ac7f0d858e211d72ec74127",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.concurrent.TimeUnit",
+      "module": "java.base",
+      "package": "java.util.concurrent",
+      "path": "src/java.base/share/classes/java/util/concurrent/TimeUnit.java",
+      "git_blob": "f02aa9f5931921a976c932507c807a6f6ef918bb",
+      "sha256": "045808c4c1111a261f461d9b7997074ec22c08e53ec83546564121fc8926b604",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.concurrent.locks.LockSupport",
+      "module": "java.base",
+      "package": "java.util.concurrent.locks",
+      "path": "src/java.base/share/classes/java/util/concurrent/locks/LockSupport.java",
+      "git_blob": "28fe0d4dca3d67ae83242624306bbb89fb614297",
+      "sha256": "c97f8ca3d6ee2f835e4410502fe2ec1eadebc6e67c91eddcb64ef9536e6c39c8",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.function.BiFunction",
+      "module": "java.base",
+      "package": "java.util.function",
+      "path": "src/java.base/share/classes/java/util/function/BiFunction.java",
+      "git_blob": "ef75901fb3461e0556e1ddaa45ffc52b05a5233f",
+      "sha256": "4cc8916f3529f2d308cd9d04a2debc9bfa823d71f7249ba5ef98d25b8d3f47b2",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.function.Consumer",
+      "module": "java.base",
+      "package": "java.util.function",
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "git_blob": "3df6f12a3a442c3a9f0d47ed5fc8aa725e634ccb",
+      "sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.function.Function",
+      "module": "java.base",
+      "package": "java.util.function",
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "git_blob": "76a20ef10fa1fbb701adb544ff6b7eb152f4303c",
+      "sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.function.Predicate",
+      "module": "java.base",
+      "package": "java.util.function",
+      "path": "src/java.base/share/classes/java/util/function/Predicate.java",
+      "git_blob": "b34febbd61364df25da00ccae925c55a5184fac5",
+      "sha256": "a5f4ddfaa690778a992661d9546b85b87290a7135e1feac1be45aced1beb1970",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.function.Supplier",
+      "module": "java.base",
+      "package": "java.util.function",
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "git_blob": "ae9a9fd8a0158cb396d36304a607709cd875903c",
+      "sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.jar.JarFile",
+      "module": "java.base",
+      "package": "java.util.jar",
+      "path": "src/java.base/share/classes/java/util/jar/JarFile.java",
+      "git_blob": "c8fcac4bda0cee2edd7474c2ac9d215f628e7cae",
+      "sha256": "f4b2b3e7573d957189fe62257845cce64b0e579f433c6ad3e9ade80433a6f32e",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.jar.JarOutputStream",
+      "module": "java.base",
+      "package": "java.util.jar",
+      "path": "src/java.base/share/classes/java/util/jar/JarOutputStream.java",
+      "git_blob": "57cd3dd4bbf3b5fa5a7997b8a57074f12a8ea02c",
+      "sha256": "b8c3c4a3aee26d83194a7defa05a334087e2d50a05e2a4fb94e8f09677e79239",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.regex.Matcher",
+      "module": "java.base",
+      "package": "java.util.regex",
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "git_blob": "b31fde7511bbdd3a139b330d85b66cae9a739224",
+      "sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.regex.Pattern",
+      "module": "java.base",
+      "package": "java.util.regex",
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "git_blob": "252e46fb57e824f30688eac3600bae9480511fc8",
+      "sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.stream.Collector",
+      "module": "java.base",
+      "package": "java.util.stream",
+      "path": "src/java.base/share/classes/java/util/stream/Collector.java",
+      "git_blob": "9ef656790833362a78f5e2ece909925ba4610822",
+      "sha256": "2c40775adef5c2a04bd0b8c319cd25579743a9bf0aea4cbb964225978edd362c",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.stream.Collectors",
+      "module": "java.base",
+      "package": "java.util.stream",
+      "path": "src/java.base/share/classes/java/util/stream/Collectors.java",
+      "git_blob": "54d1d4acd732d3cdda59fec9edfdcecff998c27c",
+      "sha256": "0d0221d083f9c5f1c29fa39c1a4c7fb9faf003f014b38a4a2f2f574a9110b989",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.stream.DoubleStream",
+      "module": "java.base",
+      "package": "java.util.stream",
+      "path": "src/java.base/share/classes/java/util/stream/DoubleStream.java",
+      "git_blob": "fde242cd383dd0fe356c1b9ad75d1f401728f273",
+      "sha256": "7cd71556890144560e65eab1b34f116481d5f4b3f15fdd03c1d722f8adf899da",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.stream.IntStream",
+      "module": "java.base",
+      "package": "java.util.stream",
+      "path": "src/java.base/share/classes/java/util/stream/IntStream.java",
+      "git_blob": "74c4814558991217710f2113bfcb010b691507f7",
+      "sha256": "620c46ace2477bfbaa30309bdb0cf15e4a027c15737f10f16be15b66469a4051",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.stream.LongStream",
+      "module": "java.base",
+      "package": "java.util.stream",
+      "path": "src/java.base/share/classes/java/util/stream/LongStream.java",
+      "git_blob": "8e20326db45bd2b19d6a3d4fd91154c1486673c1",
+      "sha256": "c67a6ccaf743642865390785642e7c2b4a8bea9b86f49b5068c4ab1e4633c545",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.stream.Stream",
+      "module": "java.base",
+      "package": "java.util.stream",
+      "path": "src/java.base/share/classes/java/util/stream/Stream.java",
+      "git_blob": "a04e52cdc3598a0f371baba936b4b6d27748bbb1",
+      "sha256": "688ef137efe90856360c35f86a000b0ec49d12c66294f7bd0f6cceb2022bab0f",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.stream.StreamSupport",
+      "module": "java.base",
+      "package": "java.util.stream",
+      "path": "src/java.base/share/classes/java/util/stream/StreamSupport.java",
+      "git_blob": "9a1820cca281106b0be68efb42f40024e89c4a31",
+      "sha256": "5460d4c1f98d9c576c398336f0295cd88fd30f6a23ce6fa48cc9cfe64a714b79",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.zip.ZipFile",
+      "module": "java.base",
+      "package": "java.util.zip",
+      "path": "src/java.base/share/classes/java/util/zip/ZipFile.java",
+      "git_blob": "52d975005e05f564fac97fd9b51f5b0e274febf5",
+      "sha256": "7ee5939bce88edf5310bd211cdb3115b480b7bd4de4a9e3e9b8b8bd59fc992e2",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.zip.ZipInputStream",
+      "module": "java.base",
+      "package": "java.util.zip",
+      "path": "src/java.base/share/classes/java/util/zip/ZipInputStream.java",
+      "git_blob": "9e265fd668edc6223be70815517dbbec94176221",
+      "sha256": "425986290b8b2ccc23a28785047e31ec31f1d35a70a59ac486ddfac7a68891ad",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "java.util.zip.ZipOutputStream",
+      "module": "java.base",
+      "package": "java.util.zip",
+      "path": "src/java.base/share/classes/java/util/zip/ZipOutputStream.java",
+      "git_blob": "84174ea3380b1ea38ca381e55ada91efeca4a706",
+      "sha256": "bc5d9624c7181c3a18f3d8c35c41890deeac61afb909a6ef521de6e854cb4397",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "javax.crypto.Mac",
+      "module": "java.base",
+      "package": "javax.crypto",
+      "path": "src/java.base/share/classes/javax/crypto/Mac.java",
+      "git_blob": "a8ab43177c11d0d64e760ac0ccc8830c784e8691",
+      "sha256": "06edc836543381b9f7955c6782ac77b1f3ef62be908593c3005fa16971adec69",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    },
+    {
+      "public_api": "javax.sql.rowset.RowSetProvider",
+      "module": "java.sql.rowset",
+      "package": "javax.sql.rowset",
+      "path": "src/java.sql.rowset/share/classes/javax/sql/rowset/RowSetProvider.java",
+      "git_blob": "f69ece6e469d395d4c899d214fad445727010013",
+      "sha256": "04cbbf426dddca7ec2c23c04fe65cb732107a6697d0fc9f9e717cce3d889647e",
+      "visibility": "PUBLIC",
+      "evidence_level": "BASELINE_SOURCE_DECLARATION_AND_MODULE_EXPORT",
+      "source_kind": "JAVA_SOURCE",
+      "template_substitutions": {},
+      "generation_owner": null
+    }
+  ],
+  "module_sources": [
+    {
+      "path": "src/java.base/share/classes/module-info.java",
+      "git_blob": "5488cfd8ba37d96ffef7be0b313b4e91a0cb063d",
+      "sha256": "7fd7f4b25571bf13fc3e2048b87d730e8346e29102fd4a4159c0144699df55a8",
+      "module": "java.base"
+    },
+    {
+      "path": "src/java.net.http/share/classes/module-info.java",
+      "git_blob": "cf9d07bdf328f77f9760381dca55f794ea0f3a52",
+      "sha256": "0c066f764c771cbbe2db32c1cf7c21bf29bce10f4eaf3d0360851c69d744976c",
+      "module": "java.net.http"
+    },
+    {
+      "path": "src/java.sql/share/classes/module-info.java",
+      "git_blob": "0ae1131297c373f197e675d5a679f441e9ae6f70",
+      "sha256": "61aae53c2fce8a2fdcd2d8a0ca74b27297535c9c2e57edf84ecf31a2f2749ee0",
+      "module": "java.sql"
+    },
+    {
+      "path": "src/java.sql.rowset/share/classes/module-info.java",
+      "git_blob": "6c09c98cca52f259050024b5308c76ada3ffd0a1",
+      "sha256": "93a2557f6a661ddc4bbb4883253edc277bc0fb4be86192c03b30cef726635b3b",
+      "module": "java.sql.rowset"
+    }
+  ],
+  "reuse_sources": [
+    {
+      "path": "make/modules/java.base/gensrc/GensrcBuffer.gmk",
+      "git_blob": "ce22230a8e18444ccd597555c71c4a3225f44f75",
+      "sha256": "4832abc991fcf34672dda8c670c0de8f01178c8ca32bafea05a04204d88961a4"
+    },
+    {
+      "path": "make/modules/java.base/gensrc/GensrcCharsetCoder.gmk",
+      "git_blob": "2940ba4231931a797d68972fdd92daeda42c9993",
+      "sha256": "14e59aff235fd58bbb577d6ef2c5dddece4a67456099bcbc811b92cf10224599"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "git_blob": "1b2d7e5c98cd7db229b00cdd80e5a43f078e93e2",
+      "sha256": "8b385ad8883b73423c90a2c3132700f3669dfe145916a8c38a4a93702ff379de"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TimSort.java",
+      "git_blob": "7cce1cc450cb2894506f6f56140f4bdc938b703b",
+      "sha256": "f147bfc6470b811546384b17b7fd3ed278586db806f445d66151a34f617c0d19"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "git_blob": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
+      "sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "git_blob": "e094fdde4a153eab2d1a125785bc55c68187bbd1",
+      "sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "git_blob": "af9a82214a62eff0f9194d6a95179829b6f57b4e",
+      "sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "git_blob": "134fb98f8a39969c43fd75338ecb233c5fe49446",
+      "sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob": "aaa74686949de59b44b363741ef1c414fe3e95d0",
+      "sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
+      "git_blob": "3bdbe421e0954db6f75b019b8c2196f74305c2d2",
+      "sha256": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ReverseOrderListView.java",
+      "git_blob": "42b57e2d8b9fde251a4b2dc3a824c870e8458194",
+      "sha256": "83fa94edbe1ef82f88cfe5aba432e3f3144adfaeb222f9743e29263a7ef5ecb7",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/IdentityHashMap.java",
+      "git_blob": "77f06fb94100bd43d16ad9ba418a716c4e43778e",
+      "sha256": "e877ef70202fac6014d28dbb6b4f45a4eb0a4725a1e39782a5e52d777e9f0c18",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/LinkedHashMap.java",
+      "git_blob": "90ddd94153bc9180644e5c7818e850788e3516ea",
+      "sha256": "93b36f97d195663c236ed00733a7ca09d0f491bf6ebcd818dbd7bac288805577",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TreeMap.java",
+      "git_blob": "a91a56a5900c8acb8d268eac16744abf7cad1134",
+      "sha256": "d5ab07e7f2438eae6d0a6a969790a7d4d9d07a20265e797a4a20a1e3bcda913c",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TreeSet.java",
+      "git_blob": "a68c157283eba3699104c3e05234caebca243279",
+      "sha256": "e40f028679f474ed2399425474b5c68cbef96db851d1e8c0c8865108f3f5af75",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/AbstractMap.java",
+      "git_blob": "7a5d92bda52ffc29235c4c6941fb643b4b38d7ab",
+      "sha256": "e253d9c1774d5a05b28caaa49378959b0777a9cd621ed0c4be9f466cecf9ee88",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/AbstractSet.java",
+      "git_blob": "80d4c5e91d267b3e6d31c08f3198f63941d1b311",
+      "sha256": "2feaeffe82d5f34bd4a9e4b0ac8a21bd6807b6c04ece228c9c039a30637f3aa4",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/NavigableSet.java",
+      "git_blob": "8d7da4eddd32e426e517b741f3b360304d5a7ce8",
+      "sha256": "c283dfe278a3afd8970100c3486ac8ab15981f678ada127bad8df1f18beca75c",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/NavigableMap.java",
+      "git_blob": "92abc278dd8beaba253e59633bea3ff0ed328be9",
+      "sha256": "47758c70e91ba72f7cba7139fe939c27a6ef07a2df085feb8310fcc9d052a8ce",
+      "role": "EXISTING_JDK_COLLECTION_CONTRACT_OWNER_FOR_REVIEW_CORRECTIONS"
+    }
+  ],
+  "qualification": {
+    "baseline_source_inventory": "CHECKED_BY_SOURCE_VERIFIER_ONLY",
+    "new_runtime_candidates": "PENDING_EXACT_SOURCE_RECIPE_AND_RUNTIME_RECEIPTS",
+    "full_jdk_image_jtreg_jck_native_platforms": "NOT_ESTABLISHED_BY_THIS_CATALOGUE",
+    "performance": "NO_MEASURED_SPEEDUP_CLAIM",
+    "phase_rule": "Preserve the existing String -> arrays -> collections -> AST/compiler -> remaining families qualification plan.",
+    "module_wide_source_inventory": "EXACT_PINNED_TREE_MODULE_DECLARATIONS_AND_REPRESENTATIVE_PUBLIC_OWNERS_ONLY"
+  },
+  "internal_receiving_candidates": [
+    {
+      "owner": "java.util.M3CollectionViews",
+      "target_module": "java.base",
+      "target_path": "src/java.base/share/classes/java/util/M3CollectionViews.java",
+      "visibility": "PACKAGE_PRIVATE",
+      "kind": "TARGET_OWNED_COLLECTION_IMPLEMENTATION",
+      "public_entry_point": "java.util.Collections",
+      "contract": "Live filtered wrappers and sorted projections. Detached snapshots retain one captured visible Object[] with offset/reverse windows; sorting reuses Arrays.sort. Primitive masks and selected physical indexes are construction intermediates, not a permanent redundant permutation. No public companion type.",
+      "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+      "proof": null,
+      "receiving_sequence_advanced": false
+    },
+    {
+      "owner": "java.util.M3CollectionMasks",
+      "target_module": "java.base",
+      "target_path": "src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "visibility": "PACKAGE_PRIVATE",
+      "kind": "TARGET_OWNED_PRIMITIVE_MASK_SELECTION",
+      "public_entry_point": "java.util.Collections",
+      "contract": "Two-pass clipped long[] mask selection produces detached ascending int[] physical positions. Java remains default; diagnostic native startup opt-in may fall back on missing symbol.",
+      "native_declaration": "static native int[] selected0(long[] words, int fromInclusive, int toExclusive);",
+      "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+      "proof": null,
+      "receiving_sequence_advanced": false
+    },
+    {
+      "owner": "java.util.M3CollectionMasks.selected0",
+      "target_module": "java.base",
+      "target_path": "src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "visibility": "JNI_IMPLEMENTATION_ONLY",
+      "kind": "TARGET_OWNED_JNI_MASK_KERNEL",
+      "jni_symbol": "Java_java_util_M3CollectionMasks_selected0",
+      "contract": "Exact Java half-open range semantics, bounded GetLongArrayRegion and SetIntArrayRegion, no callbacks or retained input. Stock-JDK patched-module plus exact C testing does not qualify a built product image or platforms.",
+      "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+      "proof": null,
+      "receiving_sequence_advanced": false
+    }
+  ],
+  "source_verifier_tests": "m3/compatibility/test_integrated_utility_coverage.py",
+  "module_wide_index": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json"
+}

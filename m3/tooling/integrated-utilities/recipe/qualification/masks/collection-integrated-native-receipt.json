@@ -1,0 +1,37 @@
+{
+  "command": [
+    "/usr/bin/time",
+    "-v",
+    "-o",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-native-resource.txt",
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+    "-Xms32m",
+    "-Xmx128m",
+    "--add-modules",
+    "java.management,jdk.management",
+    "--add-reads",
+    "java.base=java.management",
+    "--add-reads",
+    "java.base=jdk.management",
+    "--patch-module",
+    "java.base=/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-classes:/dev/shm/m3jdk21-work/collection-classes",
+    "-Djdk.m3.collectionMasks.native=true",
+    "-Dtest.m3.masks.native.library=/tmp/m3jdk21-integrated-native/libM3CollectionMasksQualification.so",
+    "-Xlog:jni+resolve=debug:file=/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-native-jni.log",
+    "java.util.M3CollectionViewsBenchmark",
+    "integrated"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.90387,
+  "stdout_file": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-native.jsonl",
+  "stderr": "",
+  "resource_file": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-native-resource.txt",
+  "native_resolution": [
+    "[0.370s][debug][jni,resolve] [Dynamic-linking native method java.util.M3CollectionMasks.selected0 ... JNI]"
+  ],
+  "patch_class_hashes": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-patch-classes.json",
+  "benchmark_source_sha256": "1ac002cd6862ffbdd1574ec7afc2270c0298e20bf47916ffe3a54e2d53bb742a",
+  "receiver_source_sha256": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+  "algorithm": "EXISTING_ARRAYS_SORT_ON_CAPTURED_VISIBLE_VALUES",
+  "qualification_utc": "2026-10-18T13:31:59.525710+00:00"
+}

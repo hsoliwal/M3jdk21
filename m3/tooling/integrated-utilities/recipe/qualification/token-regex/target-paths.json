@@ -1,0 +1,9 @@
+[
+  "m3/runtime-integration/token-regex/README.md",
+  "m3/runtime-integration/token-regex/behavioral-atoms.json",
+  "m3/runtime-integration/token-regex/contract-catalogue.json",
+  "m3/runtime-integration/token-regex/verify.py",
+  "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+  "src/java.base/share/classes/java/util/regex/TokenPattern.java",
+  "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java"
+]

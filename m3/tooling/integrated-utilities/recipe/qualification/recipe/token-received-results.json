@@ -1,0 +1,81 @@
+{
+  "schema": "M3_TOKEN_ACTUAL_SDK_RESULT_RECEIVE_V1",
+  "input_commit": "2717d156ad2aba73dfdfcfc6a58b59a82371798e",
+  "handoff_sha256": "d6a8a17ff4a28fa8dc0aa266c7c64b790632410b0270ea008f4a4d8707978fc4",
+  "source_inventory_sha256": "bd4b3ebb81f82034caab8fec0829e7e77f3099da781dd714c2becce81962d8b0",
+  "manifest_sha256": "97e62d3ec5cc0752e6d4bbbbdc06276834ee053147e7d294bee041ff98110b70",
+  "actual_result_receipt_sha256": "35589d10a89b79260e9da8ea5e4e5fbaacfc1624fa76dbfaf3942ae74b3ad821",
+  "canonical_source_files_authenticated": 209,
+  "received_actual_results": 13,
+  "verified_postimages": 490,
+  "unchanged_keep_files": 477,
+  "source_authoring": "NONE; exact SDK Result bytes copied in manifest order",
+  "files": [
+    {
+      "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "before_sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "after_sha256": "2aec0ce2f08dccaf2405ba5950e5ce1378de0f44546f000b85a07c675ab0e0ae"
+    },
+    {
+      "path": "m3/compatibility/check_integrated_utility_coverage.py",
+      "before_sha256": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1",
+      "after_sha256": "56bf749b02a394a5981fc80a5b8fc9cee52d7dbf637b3ac4b5244f69b347c483"
+    },
+    {
+      "path": "m3/compatibility/test_integrated_utility_coverage.py",
+      "before_sha256": "e783a54fcd7430755874e55dd2af19530d217084a76d61d845ab14f3c1069f5f",
+      "after_sha256": "8184270534252daf426b4878795018712fad00a0883c974e9712e50ef5342f3c"
+    },
+    {
+      "path": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+      "before_sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2",
+      "after_sha256": "dc8213d2136ec4a33c5f66e1e5ea4089f894df18cad07a1ba153811e17fc5db3"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "before_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
+      "after_sha256": "1e5c8b03586ff87d1ae1d81a97e667cbcc22710fc7fc3540c25bce11a5c9c159"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
+      "after_sha256": "80094396bd12f77bf90741cd61d9b190b2fbe613ab4a07960669e9652fe9d7fc"
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "695ed953a1b31c3b382dca3cac2901e3d5071fe8328212a8ca166c3072db9a19"
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/behavioral-atoms.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "97d379a6380173a759275dd55bc5f541ddc9d1771e29b40797556770542cdf20"
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/contract-catalogue.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "3e1bfbf638ecf134ab2f0d81619ce2cb05472c7e12f1497b41ef54a01fbb16df"
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "0d605a28b5fd82374dbb19b2ae9f3d1fdc13dddb1dda52ccaed10bd780e39849"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenPattern.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a"
+    },
+    {
+      "path": "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "6d9a127c3f1159a1323a7ce6129c25d91eb6d4486016bf0ac0dc05d0f43cd56f"
+    }
+  ],
+  "status": "PASSED"
+}

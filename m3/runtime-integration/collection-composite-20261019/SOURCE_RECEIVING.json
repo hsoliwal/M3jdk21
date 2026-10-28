@@ -1,0 +1,242 @@
+{
+  "schema": 1,
+  "target_repository": "hsoliwal/M3JDK21",
+  "target_parent": "b64dd675a79c146aefdd441bbf18041bdaeadc1a",
+  "source_tip": "070d268422f7a2838caa7ac2c3ea52a81c65345e",
+  "canonical_revision": "5e972536d98ac7f4aab37fb66333ed4696584bdd",
+  "canonical_recipe": "com.synexia.m3.CollectionComposite20261019",
+  "effect": "SERIAL_EXACT_GIT_BLOB_RECEIVING",
+  "source_audit": [
+    {
+      "path": "m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
+      "before": "ABSENT",
+      "after": "f9984077d684c918f1c1d7d218449be635e6f4cd",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/MaskWindowConvergence.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
+      "after": "a5f22ba8a49c0bf570f2da7c25d86be2bed5dc36",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3FilteredViews.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "before": "a5fe77001be04ca123593908fb68ca008935d543",
+      "after": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3LongBitmapFilteredSnapshot.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "before": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "after": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3LongIndexProjection.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "before": "b3df27bfafad8508c85d77ba24a4b8a4622a7878",
+      "after": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-collection-composite-20261019/m3_index_mask_window.c.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+      "before": "b49b0ef89dfdd07f51730a7034aef0b84516082a",
+      "after": "f7099d5e06db8c76fe5d6549f8d167f965569c35",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-collection-composite-20261019/m3_state_mask_histogram.c.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
+      "before": "246745524719dffdd0396166282a3382f1759bf3",
+      "after": "a714930c92090556127fa2559c2d91f58fdae434",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3LongBitmapFilteredSnapshotSelfTest.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java",
+      "before": "e5dc5194c885c5adbf2d243fff70a3a551935c47",
+      "after": "78808f3a52ddb2171a60225ce89fca0a5bc6a959",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3StateMaskHistogramSelfTest.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
+      "before": "ABSENT",
+      "after": "71395196b1d4244c7c435addd69d0d4b5c7df2bd",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3FilteredNullNavigationProbe.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
+      "before": "ABSENT",
+      "after": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3ProjectionRefinementProbe.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
+      "before": "3719852e2a5b44d9cba2f368d0e1f8ee90cd9844",
+      "after": "01d38f18b25227da791a656c70b6bb5bf5fac173",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/ReverseOrderSortedSetView.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/SortedSet.java",
+      "before": "3b4612457c6e4cc247601a6d1e0b64a1a7f720d2",
+      "after": "ad3ee89d40de8c0ca344863bb6fc4469cec97a09",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/SortedSet.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    },
+    {
+      "path": "test/jdk/java/util/SortedSet/SortedSetSplitOrder.java",
+      "before": "ABSENT",
+      "after": "f02816b296c00e3d0a0e8b25de7381d360876382",
+      "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/SortedSetSplitOrder.java.txt",
+      "admission": "EXACT_BLOB_MATCH"
+    }
+  ],
+  "passes": [
+    {
+      "pass": 1,
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "parent": "b64dd675a79c146aefdd441bbf18041bdaeadc1a",
+      "commit": "d0ae508c2286a2923c40886be74d5e02797cfcbd",
+      "tree": "503b402ae83399279f0cdb9b4a7830f644d0ff5f",
+      "before_blob": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
+      "after_blob": "a5f22ba8a49c0bf570f2da7c25d86be2bed5dc36",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 2,
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "parent": "d0ae508c2286a2923c40886be74d5e02797cfcbd",
+      "commit": "13c505d47c12870bc5a219c98c2aa5030f4e1277",
+      "tree": "a34d802cb1cb86e8eb54a0d555a4997e7d99bf55",
+      "before_blob": "a5fe77001be04ca123593908fb68ca008935d543",
+      "after_blob": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 3,
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "parent": "13c505d47c12870bc5a219c98c2aa5030f4e1277",
+      "commit": "8a9333f4d20cd5c3a7d62c8db0ac278ec96d0979",
+      "tree": "0744c5e1b1c588558c2dc90d2341da2f9441fcaa",
+      "before_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "after_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 4,
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "parent": "8a9333f4d20cd5c3a7d62c8db0ac278ec96d0979",
+      "commit": "4621b54f5af3ebe8c9f1c9db570aa0b362c2f175",
+      "tree": "ef10674106afcb8adb289f857ec3ec8678f13b8e",
+      "before_blob": "b3df27bfafad8508c85d77ba24a4b8a4622a7878",
+      "after_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 5,
+      "path": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+      "parent": "4621b54f5af3ebe8c9f1c9db570aa0b362c2f175",
+      "commit": "68735918a76846ff135ba656a42e5f7c86aa35dc",
+      "tree": "99a233a872f468b019a7fde3528671cda5dfb57f",
+      "before_blob": "b49b0ef89dfdd07f51730a7034aef0b84516082a",
+      "after_blob": "f7099d5e06db8c76fe5d6549f8d167f965569c35",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 6,
+      "path": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
+      "parent": "68735918a76846ff135ba656a42e5f7c86aa35dc",
+      "commit": "df14b028f9a388ab795f38c5e74be091ddc87f2d",
+      "tree": "c88c63a1e726aa1177a2c0218aaeddc1a75663b3",
+      "before_blob": "3719852e2a5b44d9cba2f368d0e1f8ee90cd9844",
+      "after_blob": "01d38f18b25227da791a656c70b6bb5bf5fac173",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 7,
+      "path": "src/java.base/share/classes/java/util/SortedSet.java",
+      "parent": "df14b028f9a388ab795f38c5e74be091ddc87f2d",
+      "commit": "d5f9c1598a862959c3394e204fe7285409aae61f",
+      "tree": "399e3ddca8314ea57c3f3b97f3d853bee1bd0e49",
+      "before_blob": "3b4612457c6e4cc247601a6d1e0b64a1a7f720d2",
+      "after_blob": "ad3ee89d40de8c0ca344863bb6fc4469cec97a09",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 8,
+      "path": "m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
+      "parent": "d5f9c1598a862959c3394e204fe7285409aae61f",
+      "commit": "147a6090c398eb0ce060d56d6f8f43218897fa50",
+      "tree": "02785bae1108c6c0226afcf0720e2e77dca32708",
+      "before_blob": "ABSENT",
+      "after_blob": "f9984077d684c918f1c1d7d218449be635e6f4cd",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 9,
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
+      "parent": "147a6090c398eb0ce060d56d6f8f43218897fa50",
+      "commit": "121cd79474d8a7c495477f90111532b099e3afa5",
+      "tree": "47757cd66987aeda7d51d83382b9a55c787379ff",
+      "before_blob": "246745524719dffdd0396166282a3382f1759bf3",
+      "after_blob": "a714930c92090556127fa2559c2d91f58fdae434",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 10,
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java",
+      "parent": "121cd79474d8a7c495477f90111532b099e3afa5",
+      "commit": "78a9d1598119c815e5ea7a0185aa7b7ecc8929a1",
+      "tree": "ce0e0cb929d2dd317e84862ba424f27c269e3c56",
+      "before_blob": "e5dc5194c885c5adbf2d243fff70a3a551935c47",
+      "after_blob": "78808f3a52ddb2171a60225ce89fca0a5bc6a959",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 11,
+      "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
+      "parent": "78a9d1598119c815e5ea7a0185aa7b7ecc8929a1",
+      "commit": "e6eab186b11a0d6518719532c8a4a555492bc42d",
+      "tree": "272ad2bf5aefca0a4a19fc4368683350e13fbeb7",
+      "before_blob": "ABSENT",
+      "after_blob": "71395196b1d4244c7c435addd69d0d4b5c7df2bd",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 12,
+      "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
+      "parent": "e6eab186b11a0d6518719532c8a4a555492bc42d",
+      "commit": "770de5132a6634b2df26d5769ebb170133ff4643",
+      "tree": "be70c1a5d1f6a64aec57698333fb425935e9e353",
+      "before_blob": "ABSENT",
+      "after_blob": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    },
+    {
+      "pass": 13,
+      "path": "test/jdk/java/util/SortedSet/SortedSetSplitOrder.java",
+      "parent": "770de5132a6634b2df26d5769ebb170133ff4643",
+      "commit": "070d268422f7a2838caa7ac2c3ea52a81c65345e",
+      "tree": "eb112873f6b9b163ab4a04885522077f909ef808",
+      "before_blob": "ABSENT",
+      "after_blob": "f02816b296c00e3d0a0e8b25de7381d360876382",
+      "status": "SOURCE_RECEIVED_UNQUALIFIED"
+    }
+  ],
+  "source_files_received": 13,
+  "production_files": 7,
+  "test_files": 6,
+  "semantic_admission": false,
+  "new_composite_sdk_execution": false,
+  "compiler_behavior_jni_abi": "NOT_RUN",
+  "full_request_complete": false,
+  "local_output_bytes": 0
+}
