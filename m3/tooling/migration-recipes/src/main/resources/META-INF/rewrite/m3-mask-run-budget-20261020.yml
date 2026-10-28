@@ -1,0 +1,9 @@
+# M3JDK21 product-source receipt: exact pre/post images; no public API changes.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3MaskRunBudget20261020
+displayName: M3JDK21 bounded deletion-mask fragmentation scan
+description: Qualified, source-pinned Java 21 compaction atom and its differential test.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-mask-run-budget-20261020
+      lst: true

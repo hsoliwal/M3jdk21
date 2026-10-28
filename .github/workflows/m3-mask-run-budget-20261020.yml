@@ -1,0 +1,22 @@
+name: M3JDK21 java.base mask-run budget proof
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+      - 'm3/qualification/mask-run-budget-20261020/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mask-run-budget-20261020/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-mask-run-budget-20261020.yml'
+      - '.github/workflows/m3-mask-run-budget-20261020.yml'
+jobs:
+  java21-sealed-product-atom:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Validate canonical source and differential contracts
+        run: bash m3/qualification/mask-run-budget-20261020/verify.sh
