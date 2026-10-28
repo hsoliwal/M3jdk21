@@ -1,0 +1,13 @@
+{
+  "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+  "dataset": "m3jdk21-wrappers-r2-20261018",
+  "repository": "hsoliwal/M3jdk21",
+  "baseline_ref": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "crate_name": "m3-collections-contract-refinement-20261017-m3jdk21-wrappers-r2-20261018",
+  "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "targets": 28,
+  "java_targets": 27,
+  "text_targets": 1,
+  "product_sources_written": false,
+  "engine_changes_from_origin": []
+}

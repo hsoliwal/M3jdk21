@@ -1,0 +1,3 @@
+PASS M3StateMaskArrays checks=157638 JNI=true
+
+EXIT=0

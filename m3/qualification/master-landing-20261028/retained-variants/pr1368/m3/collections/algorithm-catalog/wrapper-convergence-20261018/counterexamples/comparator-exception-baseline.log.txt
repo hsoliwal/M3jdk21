@@ -1,0 +1,4 @@
+readSet.lower(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:2]
+mutableSet.lower(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:99]
+readMap.lowerEntry(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:99]
+mutableSet.lower(opaque_range_failure) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[head:2:false]

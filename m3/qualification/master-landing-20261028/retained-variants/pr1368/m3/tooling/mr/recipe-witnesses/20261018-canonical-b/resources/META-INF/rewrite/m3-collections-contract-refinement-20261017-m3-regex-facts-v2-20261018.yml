@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.CollectionsContractRefinement20261017
+displayName: Reuse prepared String trigram facts before Matcher regional preparation
+description: Adapts existing immutable metadata and the canonical internal access bridge while retaining exact regional verification.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018

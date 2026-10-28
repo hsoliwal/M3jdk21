@@ -1,0 +1,22 @@
+{
+  "added": [
+    {
+      "class": "com.m3.collections.M3FilteredNavigableSet",
+      "member": "public E removeFirst(); descriptor: ()Ljava/lang/Object;"
+    },
+    {
+      "class": "com.m3.collections.M3FilteredNavigableSet",
+      "member": "public E removeLast(); descriptor: ()Ljava/lang/Object;"
+    },
+    {
+      "class": "com.m3.collections.M3IndexPathMasks",
+      "member": "public static long[] selectLong(long[], int[], int[][], int[], int[], int, int, int, com.m3.collections.M3IndexPathMasks$Backend); descriptor: ([J[I[[I[I[IIIILcom/m3/collections/M3IndexPathMasks$Backend;)[J"
+    },
+    {
+      "class": "com.m3.collections.M3LongIndexProjection",
+      "member": "public com.m3.collections.M3LongIndexProjection filteredPathMasks(int[][], int[], int[], int, int, int, com.m3.collections.M3IndexPathMasks$Backend); descriptor: ([[I[I[IIIILcom/m3/collections/M3IndexPathMasks$Backend;)Lcom/m3/collections/M3LongIndexProjection;"
+    }
+  ],
+  "added_types": [],
+  "removed_or_changed": []
+}
