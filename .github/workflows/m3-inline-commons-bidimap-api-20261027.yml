@@ -1,0 +1,70 @@
+name: M3 Commons BidiMap zero vendor runtime source gates
+on:
+  push:
+    branches: ['m3/inline-commons-bidimap-api-receiver-20261027']
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/apache-dual-linked-hash-bidi-map/**'
+      - '.github/workflows/m3-inline-commons-bidimap-api-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  strict-commons-bidimap-no-jar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Validate seven unchanged source-original ASF API hashes and real M3 JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '1ad2101c3ca8c6a238cb02f74b4accac3c20897c56faf8f06a4b8d11805470f3  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/BidiMap.java' | sha256sum -c -
+          echo '1e15c2dede080a46402375d4b18c52ce1c0fdae0c90ea56afe75808defcbd29f  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/IterableMap.java' | sha256sum -c -
+          echo 'b02754d00ccdabab46179c0b2d6fc3b0b57d8e3db54e6313ef0742b4c898728f  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/Put.java' | sha256sum -c -
+          echo 'ef3cfa93017517e97786499eb608e9202f37e11f1fbf73031fa6e366e5f5821f  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/IterableGet.java' | sha256sum -c -
+          echo '8e5c8a2bab648e55e21fda90607616650e79a7e9369a9aad696601bdb57f7477  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/Get.java' | sha256sum -c -
+          echo 'd19832ab166d80ea284a9033877609178eb655231f54bc76bce3e5332dae2e99  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/MapIterator.java' | sha256sum -c -
+          echo 'b960e71679833b83c14d11ce92091ae10377ebccb2b52bec09592ab484e8e3e0  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/ResettableIterator.java' | sha256sum -c -
+          echo '75b7b8b1208e2335d8e345e0e320a9f988f3d76aa153432699a6612dde1e81e8  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/test/java/com/m3/collections/apache/M3InlineCommonsBidiMapBoundaryTest.java' | sha256sum -c -
+      - name: Strict direct source compile with ONLY Java21 and no Commons jar
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          find m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/sources.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/sources.txt"
+          jar --create --file "$RUNNER_TEMP/m3-commons-bidimap.jar" -C "$RUNNER_TEMP/classes" .
+          jdeps --print-module-deps "$RUNNER_TEMP/m3-commons-bidimap.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+      - name: Actual original Apache 4.5.0 differential and first-party JaCoCo
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/apache-dual-linked-hash-bidi-map/pom.xml verify
+      - name: Refuse any transitive Commons runtime JAR in Maven production dependency tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/apache-dual-linked-hash-bidi-map/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/runtime-deps.txt"
+          cat "$RUNNER_TEMP/runtime-deps.txt"
+          ! grep -E 'org.apache.commons:commons-collections4|com.google.guava:|org.eclipse.collections:|org.springframework:' "$RUNNER_TEMP/runtime-deps.txt"
+      - name: Preserve zero dependency and actual seeded real Commons regressions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: commons-bidimap-no-runtime-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/jdeps.txt
+            ${{ runner.temp }}/runtime-deps.txt
+            m3/collections/implementations/apache-dual-linked-hash-bidi-map/target/surefire-reports/

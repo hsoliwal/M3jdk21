@@ -88,6 +88,16 @@ class HandoffLineageTests(TestCase):
         with self.assertRaisesRegex(verifier.HandoffRefusal, "missing or symlinked"):
             verifier.verify(self.root)
 
+    def test_refuses_symlinked_parent_inside_checkout(self):
+        # This alias used to pass because the final Java file was not a
+        # symlink and still resolved *within* root to byte-identical content.
+        owner = self.root / "m3/file"
+        physical = self.root / "file-owner-physical"
+        owner.rename(physical)
+        owner.symlink_to(physical, target_is_directory=True)
+        with self.assertRaisesRegex(verifier.HandoffRefusal, "symlinked custody"):
+            verifier.verify(self.root)
+
     def test_refuses_symlinked_original_owner(self):
         path = self.root / self.sources[0]
         path.unlink()

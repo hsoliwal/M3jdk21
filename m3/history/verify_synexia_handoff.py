@@ -37,7 +37,15 @@ def checked_path(root: Path, relative: str) -> Path:
             or path.as_posix() != relative):
         raise HandoffRefusal("unsafe custody path: " + relative)
     candidate = root.joinpath(*path.parts)
-    if (candidate.is_symlink() or not candidate.is_file()
+    # A lexical path with an in-tree symlinked ancestor is still an alias:
+    # checking only the final filename would admit a missing physical owner.
+    # No source/custody path component may be a symlink.
+    ancestor = root
+    for part in path.parts:
+        ancestor = ancestor / part
+        if ancestor.is_symlink():
+            raise HandoffRefusal("missing or symlinked custody input: " + relative)
+    if (not candidate.is_file()
             or not candidate.resolve().is_relative_to(root)):
         raise HandoffRefusal("missing or symlinked custody input: " + relative)
     return candidate

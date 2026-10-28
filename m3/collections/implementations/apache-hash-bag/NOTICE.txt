@@ -7,3 +7,13 @@ licensed under the Apache License, Version 2.0.
 It implements the public API contract of org.apache.commons.collections4.bag.HashBag from
 Apache Commons Collections 4.5.0 (Copyright 2001-2025 The Apache Software Foundation, Apache License,
 Version 2.0) and links the Commons Bag interface. No Commons implementation code is included.
+
+This standalone artifact also incorporates the UNMODIFIED upstream public
+org.apache.commons.collections4.Bag interface from Apache Commons Collections
+tag rel/commons-collections-4.5.0, source
+src/main/java/org/apache/commons/collections4/Bag.java.
+Copyright 2001-2025 The Apache Software Foundation and contributors.
+The upstream source license is Apache License, Version 2.0 (retained in Bag.java).
+The Bag API is inlined as source; Apache Commons implementations are NOT copied.
+The commons-collections4 JAR is retained exclusively as an optional test oracle,
+not a production, transitive, or runtime dependency.

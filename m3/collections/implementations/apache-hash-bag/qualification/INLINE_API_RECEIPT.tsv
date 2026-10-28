@@ -1,0 +1,15 @@
+schema	m3-commons-bag-api-inline-1
+recipe	com.synexia.m3.InlineCommonsBagApi20261027
+canonical	hsoliwal/com.synexia:m3/inline-commons-bag-contract-recipe-20261027
+target	hsoliwal/M3jdk21:m3/inline-commons-bag-contract-receiver-20261027
+original_api_source	apache/commons-collections:rel/commons-collections-4.5.0/src/main/java/org/apache/commons/collections4/Bag.java
+original_api_license	Apache-2.0/ASF-notices-preserved
+api_source_sha256	041c252eb54d502e2a1edd94242fbbf74e948ae6fbdc537b188ac0f64ea22003
+test_source_sha256	73d12e03851fefe19f3a04ade5838e3bf79cf78406ca3c36cad4a90a10cf0b73
+pom_scoped_maven_recipe	org.openrewrite.maven.ChangeDependencyScope(org.apache.commons:commons-collections4 -> test)
+pom_preimage_blob	2fd06f942e77478aace3f8219bbe0e26f3a925df
+module_java21_compile	PENDING_CI
+module_jdeps	PENDING_CI
+donor_runtime_dependency	NONE_FOR_THIS_MODULE
+donor_binary_for_tests	TEST_ONLY
+five_provider_full_coverage	NOT_QUALIFIED

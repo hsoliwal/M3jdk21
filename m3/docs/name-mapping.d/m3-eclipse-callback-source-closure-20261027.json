@@ -1,0 +1,22 @@
+{
+  "schema": "m3-optional-library-name-mapping-20261027",
+  "source_repository": "eclipse-collections/eclipse-collections",
+  "source_tag": "11.1.0",
+  "source_module": "eclipse-collections-api",
+  "source_api": [
+    "org.eclipse.collections.api.block.function.Function",
+    "org.eclipse.collections.api.block.function.Function2",
+    "org.eclipse.collections.api.block.predicate.Predicate",
+    "org.eclipse.collections.api.block.predicate.Predicate2",
+    "org.eclipse.collections.api.block.procedure.Procedure"
+  ],
+  "target_module": "m3-owned-eclipse-callbacks",
+  "target_first_party_owner": "com.m3.collections.eclipse.M3EclipseFunctionalAdapters",
+  "algorithm_owner": "M3JDK21 Java21 built-in function/predicate/consumer atoms",
+  "canonical_recipe": "com.synexia.m3.InlineEclipseFunctionalApi20261027",
+  "recipe_repository": "hsoliwal/com.synexia",
+  "licensing": "upstream API originals EPL-1.0 and EDL-1.0; adapter original Apache-2.0",
+  "intake_mode": "INDEPENDENT_LICENSED_API_SOURCE",
+  "external_runtime_dependencies": [],
+  "admission": "pending verified exact-head CI; full Eclipse API closure not claimed"
+}

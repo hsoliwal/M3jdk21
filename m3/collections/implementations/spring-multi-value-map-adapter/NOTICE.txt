@@ -6,4 +6,16 @@ licensed under the Apache License, Version 2.0.
 
 It implements the public API contract of org.springframework.util.MultiValueMapAdapter from
 Spring Framework core 6.2.0 (Copyright 2002-2024 the original author or authors, Apache License,
-Version 2.0) and links the Spring MultiValueMap interface. No Spring implementation code is included.
+Version 2.0) and now INLINES the API and the two package-private conversion helper sources, while retaining the independent M3 implementation body.
+
+The module includes Apache License 2.0 source originating from Spring Framework
+v6.2.0 by the original Spring authors (Copyright 2002-2024): the public
+org.springframework.util.MultiValueMap, package-private MultiToSingleValueMapAdapter
+and SingleToMultiValueMapAdapter, and org.springframework.lang.Nullable.
+Modified 2026 by Hitesh Soliwal and contributors: Spring Assert and
+CollectionUtils helpers replaced with JDK checks; the fromMultiValue factory
+uses the first-party M3MultiValueMapAdapter; the runtime Nullable marker
+omits JSR-305 qualifier alias meta-annotations. Each file retains its original
+upstream copyright/license block and carries the modification notice.
+The Spring Core and JSR-305 JARs are test-only donor verification inputs,
+not production/runtime dependencies. Whole Spring Core source is not included.
