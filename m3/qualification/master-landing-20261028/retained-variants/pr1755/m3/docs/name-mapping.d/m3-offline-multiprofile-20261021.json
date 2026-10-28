@@ -1,0 +1,31 @@
+{
+  "schema": "M3JDK21_OFFLINE_MULTIPROFILE_SOURCE_MAPPING_V1",
+  "owner": "M3JDK21 one integrated Java21/HotSpot/JNI SDK",
+  "canonical_file": "com.m3.file.M3File",
+  "scan": "com.m3.fs.M3OfflineProjectScan",
+  "native_sqlite": "com.m3.fs.M3FS",
+  "store": "com.m3.fs.M3BuildStateStore",
+  "old_profile_slot": "/m3-build/offline-scan",
+  "new_profile_slots": "/m3-build/offline-<SHA256(context)>",
+  "compiler_facts_slot": "/m3-build/state",
+  "changed": [
+    {
+      "source": "M3BuildStateStore.java",
+      "contract": "additive context-keyed readOffline/publishOffline, preserve legacy"
+    },
+    {
+      "source": "M3OfflineProjectScan.java",
+      "contract": "source/policy/context-scoped checkpoint; nested reactor pom"
+    },
+    {
+      "source": "M3OfflineProjectScanTest.java",
+      "contract": "multi-context, legacy, POM and restart contracts"
+    }
+  ],
+  "parent_head_sha": "cc367db1e42a9627641db52efa5d146a6e8a4e04",
+  "recipe_repo": "hsoliwal/com.synexia",
+  "recipe_pr": 12807,
+  "new_stage": "com.synexia.m3.OfflineMultiProfile20261021",
+  "master_v2_merge_blocker": "M3BuildState V2 + M3BuildStateStore observed/successful must be forwarded, not overwritten",
+  "gates": "SOURCE_SEALED_ONLY_FULL_MAVEN_JNI_JTREG_NOT_RUN"
+}

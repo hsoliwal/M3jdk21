@@ -1,0 +1,15 @@
+path	sha256	git_blob	mode	pr	note
+m3/docs/name-mapping.d/m3-offline-multiprofile-20261021.json	f352656b856ea3bce68c035341497ace34b4f7e8fa165e20c238cca86f88e74e	871a9ef4f106b3d19f815cc58329e0cdb57a8aeb	100644	1755	PR version, not live
+m3/docs/name-mapping.d/m3-offline-project-scan-20261021.json	03c8aeeb1683350650bbdf918e68a2206aba048eb2b9b4320f4944c2232b346a	5f158034a4be870f437c8f9c7816f4ff90eab7c5	100644	1755	PR version, not live
+m3/fs/pom.xml	bebd4fdb0b95e15d28bfc301c392c72ae19286d316241e878d39c2a2ae494d8d	bcd16b71df6a4c8f5dbb45d07d44005ebf1ec7ad	100644	1755	PR version, not live
+m3/fs/qualification/offline-multiprofile-20261021/GATES.tsv	b966da5e22272398872c14e3d942f517dfa3649671501a0da93bc68c81c2540a	3bb4e9a0a9b70d6a197f2c759f7bd4ed65b31f47	100644	1755	PR version, not live
+m3/fs/qualification/offline-multiprofile-20261021/README.md	15471bc1ac6a13064b8129a9bb2eeafec56849383557b0651950a7365f759fbf	cf3ba80b1e73fd8491e10545bd2d8cd9c38a28f9	100644	1755	PR version, not live
+m3/fs/qualification/offline-project-20261021/GATES.tsv	6271ac310a470bafd0fd0deb3636f692ead96a21f85e24aa5aa6704b68f3764b	c666c3dabad34c870d75d77e1bdafb8cec9e727f	100644	1755	PR version, not live
+m3/fs/qualification/offline-project-20261021/README.md	4fdd114a46dbfd802d23ed0053e9150761553217846e6b27190ac65b814adea0	1cc6e7da89ca7a02a87539298bae2aab5c7ad73a	100644	1755	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3BuildState.java	5066011454de1433f7b45e66c031a4927e6a45b3c131645edf4636d69b131e5b	3b933d3ba3de41b8acc0a7013049de84338069d6	100644	1755	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3BuildStateStore.java	91f757997226a57de080e049347a71ab0b164a6e071b256b2eaa8b8751d5c6ae	2dc5678c1bc3f8e5d9672b1ef932f34603937b53	100644	1755	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3OfflineProjectScan.java	60d1a0d9efdcf9df09ec1f9046ddae6753091ebe015f79f0775d47e2c17e6309	eec4e61de8eaa28d13cace936d447a0e1332459b	100644	1755	PR version, not live
+m3/fs/src/main/module/module-info.java	07b89e158bed3e132a6c8df709cfec9b1b4017dc4f3bbfc6dc235a0747010e86	317335326327223b4bb28c992906ab767c6fb06b	100644	1755	PR version, not live
+m3/fs/src/test/java/com/m3/fs/M3BuildStateContract.java	16e9de784115354493c342988d0dffcff3a56280d7e1ec48c97a6b2f583bc15d	d7d9601fc868c25dcf2fbe93443f3ef28a02130a	100644	1755	PR version, not live
+m3/fs/src/test/java/com/m3/fs/M3BuildStateTest.java	1c9184f941869b0d56f7cad988673150caba30398291470713e9d6cba27cd099	f5fe245821cf932ab01ba01769e3e26c99eba243	100644	1755	PR version, not live
+m3/fs/src/test/java/com/m3/fs/M3OfflineProjectScanTest.java	05356abb86e661979d9566d6d4873faa155ea13dedad6f7023cfe841b5234079	535ba782595492b5c349251d20ecc588a54cf102	100644	1755	PR version, not live
