@@ -85,7 +85,7 @@ jobs:
               line=(root/("filtered-"+name+".log")).read_text().strip()
               prefix,value=line.split(" ",1)
               item=json.loads(value)
-              if prefix!="M3_AST_BUILD_RECEIVER_PASS" or item["changes"]!=count \
+              if prefix!="M3_COLLECTIONS_RECEIVER_PASS" or item["changes"]!=count \
                       or item["targets"]!=9 or item["mode"]!=mode or not item["actual_sdk_results"]:
                   raise SystemExit("historical receiver contract drift: "+name)
           print("HISTORICAL_SDK_RECEIVING_PASS check=9 apply=9 replay=0")
