@@ -1,0 +1,160 @@
+{
+  "schema": "M3_REGEX_MIXED_ASCII_RECEIPT_V1",
+  "status": "SCOPED_EXECUTION_PASS_WITH_OPEN_LIMITATIONS",
+  "owner": "java.util.regex.M3PatternQuery.BooleanPlan",
+  "catalogue_capability_id": "m3.regex.pattern-boolean-unicode",
+  "source": {
+    "before_revision": "df6d055de1bcdddc6b8a01afab500f4f497e6cb3",
+    "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+    "before_sha256": "190d541c497c344ba5015f38edadf6d6fb359e10010afbb88729905e04b1c1d7",
+    "after_sha256": "d5e7a907f2a58ed9ba5773ca6e4ac7fa7bbe119a661b71c5322540a3429abe6e",
+    "target_test_path": "test/jdk/java/util/regex/M3PatternMixedAsciiTest.java",
+    "target_test_before": "ABSENT",
+    "target_test_sha256": "f4b0f8feddc9d2f22f12a6fb6d9bded395a53c31cae70ac1737ae0f703bc47cc"
+  },
+  "algorithm": {
+    "reuse": "Existing constructor-eager immutable scalar/wide ASCII masks and invocation-owned prefix frontiers; original rolling UTF16 method entries/body retained.",
+    "selection": {
+      "minimum_atoms": 8,
+      "minimum_ASCII_run_units": 8,
+      "predicate_free_routing_horizon_units": 64
+    },
+    "limits": "This selects an optimization, not a semantic admission cap. Opportunities after a long initial Unicode prefix may remain in original rolling execution. Existing compiled-node admission, maximum256atoms, flags, BMP/codepoint/surrogate and unsupported-graph fallback are unchanged.",
+    "storage": "No new field, persistent cache, canonical payload owner, public API, native symbol or module dependency."
+  },
+  "canonical_recipe": {
+    "name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "code_revision": "4b5338ac4be741908d29c87983281cc45314c904",
+    "dataset": "m3-regex-mixed-ascii-20261026",
+    "input_dataset_revision_at_invocation": "UNPUBLISHED_AT_INVOCATION",
+    "input_dataset_content_snapshot_sha256": "2a1dab1c1875e5b8aad304ff60a27d8de56de9c30abe6fa4be107173a56a8dac",
+    "SDK_qualification_sha256": "00aa4cafe9cac5a3912b0eb1198a3d8e4aa414ebba9f52bb4329d361fc73d112",
+    "SDK_INPUTS_sha256": "74e399041f7d22de5efb75014a0c8c8619a82e57c0ea81bb5ec8b3e01af074e1",
+    "SDK_RESULTS_sha256": "893e36a209c6fa53f1ce76aa0b2208f3e732b6d7f619f85527252b55538828a4",
+    "actual_SDK_tests": 5,
+    "sealing_tests": 10,
+    "receiver_cases": 9,
+    "receiving_check_apply_replay": [
+      2,
+      2,
+      0
+    ]
+  },
+  "built_source": {
+    "actual_local_head": "4aa626b26615cfe25bd962968e9d4a67c8f6c5d7",
+    "actual_tree": "c603d03ab0af5ca54f66c22610ffdc90e7a60b7e",
+    "public_equal_tree_commit": "38a246c38694ef3cd962c94cbe0d3924ce949875",
+    "actual_receiving_sha256": "55159caeafa07370f822fb483010371e56ca208c49a761834c26d87b9337e399",
+    "strict_headful_release_server_images_exit": 0,
+    "physical_source_files_verified": 43406
+  },
+  "installed_images": {
+    "baseline": {
+      "actual_built_local_head": "8f2c5939ff7bc5a4cdcf1af7aa23110e7135627f",
+      "actual_tree": "0d231985f97b109a06a42daa9c7e797464132b7c",
+      "public_equal_tree_commit": "741c53a92956d1c97e5c060887b7929dee72e2f4",
+      "modules_sha256": "305f0acb1f731b3691ac53f7160f94d1d445d4dc39988c7ff0491e34c89797ce",
+      "libjvm_sha256": "a64bdc6d7f736d73952f252a1f9b20d703bbea32b6841e7ac2f5af4b23a8f6a1"
+    },
+    "candidate": {
+      "modules_sha256": "0c283ce1f8fe5ff64a18e1c4533b2c40eb8a7e7acb4ecf8b854a20d09f8b3d7a",
+      "libjvm_sha256": "af48bb0f1188e2f9333fcfffe1fd38d31955c4a687082985e948a5786922c51a",
+      "regular_files": 394,
+      "symlinks": 1,
+      "JMODs": 69
+    }
+  },
+  "behavior": {
+    "baseline_RED": "Target reuse assertion observes8255ASCII suffix predicate calls after correct semantic result; independent exact-preimage control rejects missing mask reuse.",
+    "candidate_reuse_ASCII_suffix_predicate_calls": 0,
+    "target_pairs_per_run": 12313,
+    "target_checks_flat_M3": [
+      48911,
+      48913
+    ],
+    "target_pairs_scope": "General/small plus targeted cases; not all use the new mixed route.",
+    "independent_routed_pairs_per_run": 16675,
+    "independent_late_rolling_pairs_per_run": 4160,
+    "independent_Matcher_controls_per_run": 2359,
+    "independent_checks_flat_M3": [
+      106993,
+      106995
+    ],
+    "independent_M3_tuples_per_run": 20835,
+    "independent_M3_split_surrogate_pairs": 7,
+    "direct_modes": [
+      "default",
+      "checked-JNI/Serial",
+      "interpreter",
+      "compiled-flat",
+      "interpreted-M3-compact",
+      "interpreted-M3-noncompact"
+    ],
+    "direct_status": "Each passed with original mode flags. Three initial concurrent failures passed individually on unchanged image with original unbounded-heap flags and extended wall-clock budget. Counts are per run, not additive unique totals.",
+    "selected_jtreg_passed": {
+      "gatherers": 8,
+      "native": 1,
+      "regex": 8,
+      "stream": 2,
+      "views": 4
+    },
+    "jtreg_heap_domain": "Sequential cohorts with harness/test-Xmx256m; 23 selected files passed.",
+    "framework_cases": {
+      "regex_TestNG": 124,
+      "Gatherer_JUnit": 644,
+      "stream_TestNG": 390
+    }
+  },
+  "compatibility": {
+    "public_protected_descriptors_identical": true,
+    "existing_internal_fields_identical": true,
+    "new_private_helpers": [
+      "matchesMixed",
+      "matchesMixedRolling",
+      "advanceAsciiRun"
+    ],
+    "native_libraries": 40,
+    "native_export_rows": 2413,
+    "native_exports_identical": true,
+    "native_binaries_byte_identical": 39,
+    "libjvm_difference": "Executable/data/data.rel.ro/eh_frame sections match; four rodata build-timestamp bytes plus build-id/debuglink differ after reconfiguration. No entire-libjvm binary identity claim.",
+    "flat_CDS_exit_both": 0,
+    "explicit_M3_CDS_refusal_exit_both": 1
+  },
+  "resources": {
+    "SDK_packet_receipt_sha256": "eab910c8bdae4873f0772a50c9224847e91ecff9b6a267ee90a98dd74f7abc5b",
+    "stronger_warmup_addendum_sha256": "9c779b6201e652f760758151c32842335bc93903f2aa0564aced5848fc4da7f3",
+    "isolated_successful_JVM_forks": 40,
+    "warmup_minimum_ms": 750,
+    "steady_C2_candidate_over_baseline_CPU_median": {
+      "asciiControl128": 1.0144,
+      "latePrefix128": 1.0845,
+      "mixed128": 0.1823,
+      "surrogate": 0.9417
+    },
+    "default_candidate_over_baseline_CPU_median": {
+      "asciiControl128": 0.9724,
+      "latePrefix128": 0.892,
+      "mixed128": 0.1737,
+      "surrogate": 1.0825
+    },
+    "limitations": "Finite workload-specific observations. Late-prefix steady-C2 cost regression persists. Allocation is nearly equal; mixed-case VmRSS is about20MiB higher despite lower retained Java heap. No universal speedup, zero-allocation or total-memory improvement claim."
+  },
+  "open_failure_history": {
+    "initial_concurrent_SIGBUS": "Cause unresolved. Initial logs/exits retained; source and installed-image hashes remained sealed. Later bounded two-JTReg baseline/candidate control passed six files each without reproducing it. No blanket concurrent-stress safety claim.",
+    "configure_retry": "Initial strict make rejected refreshed autoconf timestamps. Exact same strict configuration reran successfully. Original first log was overwritten; observed diagnostic reconstruction and distinct exit are labelled honestly."
+  },
+  "naming_disposition": {
+    "state": "REVIEWED_EXCLUSION_EXISTING_INTERNAL_OWNER_REFINEMENT",
+    "migration_record_id": null,
+    "reason": "Existing package-private owner and existing public Pattern/Matcher spelling retained; no rename, new exported type, backend admission or queue promotion."
+  },
+  "rights_and_scope": {
+    "rights": "Existing GPLv2+Classpath target notices retained. Canonical recipes and correction memory remain exclusively in Synexia. Challenge sites are category references; no solution bodies copied.",
+    "active_phase": "STRING",
+    "phase_advanced": false,
+    "full_JCK_full_jtreg_provider_family_platform_completion": false,
+    "hosted_Gatherer_bootstrap_fix": "PENDING; local selected runtime tests do not repair missing hosted jtreg setup.",
+    "metadata_transport": "Qualified separately and bound externally; this payload does not contain its own transport receipt hash."
+  }
+}
