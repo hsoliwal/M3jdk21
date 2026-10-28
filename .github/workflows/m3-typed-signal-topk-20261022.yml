@@ -55,6 +55,7 @@ jobs:
             -pl junit-jupiter-5.10.2 -am -DskipTests install
           python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py \
             m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
       - name: Owning M3JDK21 collection JUnit suites
         run: >
           mvn -B -ntp -f m3/collections/pom.xml
@@ -75,6 +76,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
           mvn -B -ntp \
             -f m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
             -Dtest=M3SignalTopKTest,M3SignalColumnsTest test
