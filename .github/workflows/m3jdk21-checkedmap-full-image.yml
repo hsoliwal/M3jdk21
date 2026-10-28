@@ -1,0 +1,131 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 JDK-8292955 actual image and jtreg acceptance
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk21-checkedmap-full-image.yml'
+      - 'src/java.base/share/classes/java/util/Collections.java'
+      - 'test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-source-image:
+    # This workflow is intentionally separate from the already-qualified
+    # source A/B proof: a real compiled JDK image is required.
+    # Do not mark skipped, zero-step, or timed-out runs as release evidence.
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    steps:
+      - name: Checkout exact public M3JDK21 source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify production source and jtreg are the qualified recipe postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          source=src/java.base/share/classes/java/util/Collections.java
+          jtreg=test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java
+          test "$(git hash-object "$source")" = "396fc39c98dfa277213c61b1c0cf5a7291e0558d"
+          test "$(git hash-object "$jtreg")" = "8d083b3104b860056ba38bd0fbc0496cbb93dbf0"
+          printf '%s  %s\n' "a6425169f9395d7ee48dccbcf82b708018ac0a92f82d12825df7ec413f101c47" "$source" | sha256sum --check -
+          printf '%s  %s\n' "009524fae549ec941bdc14bc1496a3e2ac097f865d233dce9a741d8b849b2940" "$jtreg" | sha256sum --check -
+          echo "PASS immutable Java21 JDK-8292955 source and jtreg custody"
+
+      - name: Prepare Java 17 for the repository's pinned jtreg builder
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Use the repository's canonical BootJDK action
+        uses: ./.github/actions/get-bootjdk
+        with:
+          platform: linux-x64
+
+      - name: Use the repository's canonical jtreg action
+        uses: ./.github/actions/get-jtreg
+
+      - name: Install supported Linux JDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gcc-10 g++-10 make autoconf zip unzip \
+            libxrandr-dev libxtst-dev libcups2-dev libasound2-dev \
+            libfreetype6-dev libffi-dev zlib1g-dev
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 \
+            --slave /usr/bin/g++ g++ /usr/bin/g++-10
+          gcc --version | head -1
+
+      - name: Configure actual integrated M3JDK21 source image
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -x bootjdk/jdk/bin/java
+          test -x jtreg/installed/bin/jtreg
+          bash configure \
+            --with-conf-name=m3jdk21-checkedmap \
+            --with-boot-jdk=bootjdk/jdk \
+            --with-jtreg=jtreg/installed \
+            --with-debug-level=release \
+            --with-zlib=system \
+            --with-jobs=2
+
+      - name: Build real java.base, HotSpot and all JDK image modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          make CONF=m3jdk21-checkedmap JOBS=2 LOG=info images
+          image=build/m3jdk21-checkedmap/images/jdk
+          test -x "$image/bin/java"
+          test -x "$image/bin/javac"
+          "$image/bin/java" -XshowSettings:properties -version > "$RUNNER_TEMP/m3jdk21-built-version.log" 2>&1
+          grep -Eq 'java.class.version = 65([.]0)?' "$RUNNER_TEMP/m3jdk21-built-version.log"
+          cat "$RUNNER_TEMP/m3jdk21-built-version.log"
+
+      - name: Execute JDK-8292955 official jtreg on the source-built M3JDK21 image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make CONF=m3jdk21-checkedmap JOBS=2 LOG=info test \
+            TEST="test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java"
+
+      - name: Independently replay four JVM modes on the built M3JDK21 java and javac
+        shell: bash
+        run: |
+          set -euo pipefail
+          image="$GITHUB_WORKSPACE/build/m3jdk21-checkedmap/images/jdk"
+          out="$RUNNER_TEMP/m3jdk21-checkedmap-runtime"
+          mkdir -p "$out/classes"
+          "$image/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
+            -d "$out/classes" test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java
+          for mode in default -Xint -XX:+CompactStrings -XX:-CompactStrings; do
+            options=()
+            if [ "$mode" != default ]; then options=("$mode"); fi
+            "$image/bin/java" "${options[@]}" -XX:-OmitStackTraceInFastThrow \
+              -cp "$out/classes" CheckedMapMerge8292955Test > "$out/$mode.log"
+            grep -qx 'PASS JDK-8292955 checked-map jtreg assertions=84' "$out/$mode.log"
+            printf '%s: ' "$mode"
+            cat "$out/$mode.log"
+          done
+
+      - name: Preserve build logs and jtreg receipts, not a purported release
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk21-checkedmap-full-image-receipts
+          path: |
+            build/m3jdk21-checkedmap/configure.log
+            build/m3jdk21-checkedmap/build.log
+            build/m3jdk21-checkedmap/test-results/
+            build/m3jdk21-checkedmap/test-support/
+          retention-days: 7
+          if-no-files-found: warn

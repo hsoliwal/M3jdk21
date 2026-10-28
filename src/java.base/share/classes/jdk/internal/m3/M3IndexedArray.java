@@ -280,13 +280,22 @@ public final class M3IndexedArray<E> {
             }
         }
         final int newLength = (int) Math.min(MAX_ARRAY_SIZE, proposed);
-        values = Arrays.copyOf(values, newLength);
-        states = Arrays.copyOf(states, newLength);
-        generations = Arrays.copyOf(generations, newLength);
-        leaseCounts = Arrays.copyOf(leaseCounts, newLength);
-        freeLinks = Arrays.copyOf(freeLinks, newLength);
-        positions = Arrays.copyOf(positions, newLength);
-        order = Arrays.copyOf(order, newLength);
+        // A later allocation failure must not publish differently sized planes.
+        final Object[] newValues = Arrays.copyOf(values, newLength);
+        final int[] newStates = Arrays.copyOf(states, newLength);
+        final int[] newGenerations = Arrays.copyOf(generations, newLength);
+        final int[] newLeaseCounts = Arrays.copyOf(leaseCounts, newLength);
+        final int[] newFreeLinks = Arrays.copyOf(freeLinks, newLength);
+        final int[] newPositions = Arrays.copyOf(positions, newLength);
+        final int[] newOrder = Arrays.copyOf(order, newLength);
+
+        values = newValues;
+        states = newStates;
+        generations = newGenerations;
+        leaseCounts = newLeaseCounts;
+        freeLinks = newFreeLinks;
+        positions = newPositions;
+        order = newOrder;
     }
 
     private int validSlot(long handle) {

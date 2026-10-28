@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.Objects;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public final class M3File implements CharSequence {
     private final String text;
     private final String utf16Sha256;
     private final String byteSha256;
+    private volatile int[] lineStarts;
 
     private M3File(URI uri, String text, String byteSha256) {
         this.uri = Objects.requireNonNull(uri, "uri");
@@ -43,6 +45,49 @@ public final class M3File implements CharSequence {
     public static M3File of(URI uri, CharSequence text) {
         Objects.requireNonNull(text, "text");
         return new M3File(uri, text instanceof String value ? value : text.toString(), null);
+    }
+
+    /**
+     * Consume a caller-owned completed raw-byte capture without reading a
+     * provider, retaining its byte[] or creating another text store.
+     * The caller must not mutate the borrowed bytes during the invocation.
+     * This does not establish an atomic filesystem generation.
+     */
+    public static M3File fromCapturedBytes(URI uri, byte[] captured,
+                                          Charset charset, int maxBytes) throws IOException {
+        return fromCaptured(uri, ByteBuffer.wrap(Objects.requireNonNull(captured, "captured")),
+                charset, maxBytes);
+    }
+
+    /**
+     * Consume only the caller's current [position, limit) byte window.
+     * Heap, direct, sliced, and read-only buffers are supported. Neither the
+     * buffer cursor/limit nor its storage is modified or retained.
+     *
+     * <p>Raw SHA-256 covers the exact original byte window, independently of
+     * strict decoded UTF-16 identity. The selected Charset defines BOM
+     * handling. A caller-owned buffer must remain stable until return;
+     * this is not a provider-level atomic snapshot guarantee.
+     */
+    public static M3File fromCaptured(URI uri, ByteBuffer captured,
+                                      Charset charset, int maxBytes) throws IOException {
+        Objects.requireNonNull(uri, "uri");
+        Objects.requireNonNull(captured, "captured");
+        Objects.requireNonNull(charset, "charset");
+        if (maxBytes < 0 || maxBytes > Integer.MAX_VALUE - 8) {
+            throw new IllegalArgumentException("maxBytes outside supported array bounds");
+        }
+        ByteBuffer window = captured.asReadOnlyBuffer();
+        if (window.remaining() > maxBytes) {
+            throw new IOException("source exceeds maxBytes=" + maxBytes + ": " + uri);
+        }
+        String text = charset.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPORT)
+                .onUnmappableCharacter(CodingErrorAction.REPORT)
+                .decode(window.duplicate()).toString();
+        MessageDigest digest = sha256();
+        digest.update(window.duplicate());
+        return new M3File(uri, text, HexFormat.of().formatHex(digest.digest()));
     }
 
     /**
@@ -145,6 +190,57 @@ public final class M3File implements CharSequence {
     }
 
     @Override public String toString() { return text; }
+
+    /** One-based logical line and zero-based UTF-16 code-unit column. */
+    public record LinePosition(int line, int column) { }
+
+    /** Immutable source, lazily cached primitive offsets; CRLF is one break. */
+    public int lineCount() { return lineStarts().length; }
+
+    /** EOF is addressable; the LF part of CRLF belongs to the old line. */
+    public LinePosition linePosition(int utf16Offset) {
+        if (utf16Offset < 0 || utf16Offset > text.length()) {
+            throw new IndexOutOfBoundsException("UTF-16 source offset");
+        }
+        int[] starts = lineStarts();
+        int at = Arrays.binarySearch(starts, utf16Offset);
+        int lineIndex = at >= 0 ? at : -at - 2;
+        return new LinePosition(lineIndex + 1, utf16Offset - starts[lineIndex]);
+    }
+
+    /** Strict inverse for coordinates in the current immutable source generation. */
+    public int offsetAt(int oneBasedLine, int utf16Column) {
+        int[] starts = lineStarts();
+        int row = Objects.checkIndex(oneBasedLine - 1, starts.length);
+        int begin = starts[row];
+        int max = row + 1 == starts.length
+                ? text.length() - begin : starts[row + 1] - begin - 1;
+        if (utf16Column < 0 || utf16Column > max) {
+            throw new IndexOutOfBoundsException("UTF-16 source column");
+        }
+        return begin + utf16Column;
+    }
+
+    private int[] lineStarts() {
+        int[] result = lineStarts;
+        if (result != null) return result;
+        synchronized (this) {
+            result = lineStarts;
+            if (result != null) return result;
+            int[] starts = new int[16];
+            int used = 1;
+            for (int offset = 0; offset < text.length(); offset++) {
+                char c = text.charAt(offset);
+                if (c != '\r' && c != '\n') continue;
+                if (c == '\r' && offset + 1 < text.length() && text.charAt(offset + 1) == '\n') offset++;
+                if (used == starts.length) starts = Arrays.copyOf(starts, starts.length * 2);
+                starts[used++] = offset + 1;
+            }
+            result = Arrays.copyOf(starts, used);
+            lineStarts = result;
+            return result;
+        }
+    }
 
     private static String hashUtf16(String value) {
         MessageDigest digest = sha256();

@@ -34,6 +34,24 @@ class PublicNamesTest(unittest.TestCase):
     def test_new_date_stamped_workflow_refused(self):
         self.assertTrue(self.issue(".github/workflows/m3-collection-20261022.yml"))
 
+    def test_versioned_passive_evidence_is_not_public_api(self):
+        self.assertFalse(self.issue(
+            "m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json"))
+        self.assertFalse(self.issue(
+            "m3/qualification/indexed-sort-image-20261026/SOURCE_RECEIPT.tsv"))
+        self.assertFalse(self.issue(
+            "m3/synexia-import/current-full-borrow/string-target-successor-v4.tsv"))
+
+    def test_recipe_and_code_in_evidence_directory_still_refused(self):
+        self.assertTrue(self.issue(
+            "m3/qualification/collection-convergence-20261024/DangerousRecipe.java"))
+        self.assertTrue(self.issue(
+            "m3/qualification/collection-convergence-20261024/release.sh"))
+        self.assertTrue(self.issue(
+            ".github/workflows/m3-collection-20261024.yml"))
+        self.assertTrue(self.issue(
+            "m3/docs/name-mapping.d/new-20261024.json"))
+
     def test_new_experiment_version_refused(self):
         self.assertTrue(self.issue("m3/runtime-integration/collection-views-v7/README-v2.md"))
 
@@ -126,6 +144,71 @@ class PublicNamesTest(unittest.TestCase):
             self.assertEqual(GATE.main(["--base", base, "--head", head, "--repo", str(root)]), 0)
             self.assertEqual(GATE.main(["--base", "HEAD", "--head", head, "--repo", str(root)]), 2)
 
+
+    def test_new_donor_imports_in_jdk_owner_refused(self):
+        path = "src/java.base/share/classes/java/util/CollectionViews.java"
+        self.assertTrue(self.issue(
+            path, "package java.util;\nimport com.synexia.indexstring.MIndexString;\n"
+                  "class CollectionViews {}"))
+        self.assertTrue(self.issue(
+            path, "package java.util;\nimport org.eclipse.collections.api.list.MutableList;\n"
+                  "class CollectionViews {}"))
+
+    def test_fully_qualified_donor_reference_refused(self):
+        path = "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java"
+        self.assertTrue(self.issue(
+            path, "package jdk.internal.mindex; class M3Bits {"
+                  " Object o = com.google.common.collect.ImmutableList.of(); }"))
+        self.assertTrue(self.issue(
+            path, "import org.apache.commons.collections4.Bag; class M3Bits {}"))
+
+    def test_lexical_guard_ignores_comments_and_text_blocks(self):
+        path = "src/java.base/share/classes/java/util/CollectionViews.java"
+        program = ('package java.util;\n// import com.synexia.X;\n'
+                   '/* org.eclipse.collections.Y */\n'
+                   'class CollectionViews { String s = """\n'
+                   'com.google.common.collect.ImmutableList\n"""; }\n')
+        self.assertFalse(self.issue(path, program))
+
+    def test_old_only_reference_grandfathered_and_new_reference_rejected(self):
+        path = "src/java.base/share/classes/java/util/CollectionViews.java"
+        old = "package java.util;\nimport com.m3.text.M3String;\nclass CollectionViews {}\n"
+        self.assertFalse(GATE.problems(GATE.Change("M", path), old, old))
+        self.assertTrue(GATE.problems(
+            GATE.Change("M", path), old + "\nimport org.springframework.context.X;", old))
+
+    def test_ordinary_jdk_names_and_m3_proving_ground_unaffected(self):
+        self.assertFalse(self.issue(
+            "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/X.java",
+            "package com.sun.org.apache.xalan.internal; class X {}"))
+        self.assertFalse(self.issue(
+            "m3/core/src/com/m3/text/M3String.java",
+            "package com.m3.text; class M3String {}"))
+
+    def test_real_git_modified_jdk_source_rejects_donor_name(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+            git("init", "-q")
+            git("config", "user.name", "M3 Tests")
+            git("config", "user.email", "tests@example.invalid")
+            path = root / "src/java.base/share/classes/java/util/Foo.java"
+            path.parent.mkdir(parents=True)
+            path.write_text("package java.util; class Foo {}\n", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "baseline")
+            base = git("rev-parse", "HEAD")
+            path.write_text(
+                "package java.util;\nimport org.apache.commons.collections4.Bag;\n"
+                "class Foo {}\n", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "import external donor")
+            head = git("rev-parse", "HEAD")
+            changed, failures = GATE.check(root, base, head)
+            self.assertEqual(len(changed), 1)
+            self.assertEqual(len(failures), 1)
+            self.assertIn("org.apache.commons.collections4.Bag", failures[0][1])
 
 if __name__ == "__main__":
     unittest.main()

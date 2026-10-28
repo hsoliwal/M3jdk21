@@ -1,7 +1,18 @@
-/*
- * Copyright 2026 Hitesh Soliwal and contributors
- * SPDX-License-Identifier: Apache-2.0
+/*******************************************************************************
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
  *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
+ * Public License 2.0, which are available at
+ * https://www.apache.org/licenses/LICENSE-2.0 and
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ *
+ * Contributors:
+ *     Hitesh Soliwal (Synexia) - initial API and implementation
+ *******************************************************************************/
+/*
  * Derived by recipe (m3/docs/viewport-everywhere/recipe) from hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
  * VirtualRowExtents.java; Apache-2.0 elected from its Apache-2.0 OR EPL-2.0 publication
  * (m3/docs/viewport-everywhere/LICENSE_ELECTION.tsv).
@@ -213,7 +224,15 @@ public final class M3SparseExtents {
 		}
 		int first = rowAt (offset);
 		out [0] = first;
-		out [1] = viewport == 0 ? first : rowAt (offset + viewport - 1) + 1;
+		if (viewport == 0) {
+			out [1] = first;
+			return;
+		}
+		// Pixels beyond the signed-long domain still belong to the clamped tail.
+		// Do not let a positive extent wrap the last pixel back before the first.
+		long tail = (long) viewport - 1;
+		long lastPixel = offset > Long.MAX_VALUE - tail ? Long.MAX_VALUE : offset + tail;
+		out [1] = rowAt (lastPixel) + 1;
 	}
 
 	public long maxScrollOffset (int viewport) {

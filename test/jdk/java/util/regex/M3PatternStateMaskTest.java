@@ -81,7 +81,7 @@ public class M3PatternStateMaskTest {
                 }
                 return true;
             });
-            for (var future : pool.invokeAll(tasks)) check(future.get(), "concurrent lazy publication");
+            for (var future : pool.invokeAll(tasks)) check(future.get(), "concurrent immutable plan use");
         }
         String[] samples = {"", "a", "aa", "b", "ab", "aab", "\n", "\r\n", "é", "一", "\ud800", "\udc00", "\ud83d\ude00", "a\ud800", "\u0085", "\u2028"};
         for (int count : new int[]{1, 2, 31, 32, 62, 63, 64, 65, 255, 256, 257}) {
@@ -89,9 +89,35 @@ public class M3PatternStateMaskTest {
             Object plan = read(repeated, "m3BooleanPlan");
             check((plan != null) == (count <= 256), "DP admission " + count);
             if (candidate && plan != null) {
-                check(read(plan, "wordPlan") == null, "no table at compile " + count);
+                long[] masks = (long[]) read(plan, "ascii");
+                check(masks != null, "compiled ASCII mask " + count);
+                int words = (count >>> 6) + 1;
+                check(masks.length == (count <= 63 ? 136 : 137 * words),
+                        "ASCII mask shape " + count);
+                long repeatedStates = (Long) read(plan, "repeatedStates");
+                if (count <= 63) {
+                    long expectedStars = count == 63 ? ~1L : (1L << (count + 1)) - 2L;
+                    check(repeatedStates == expectedStars, "scalar repetitions " + count);
+                    check(masks[134] == (expectedStars | 1L), "scalar epsilon " + count);
+                    check(masks[135] == (1L << count), "scalar terminal " + count);
+                    check(masks['a'] == expectedStars && masks['b'] == 0L,
+                            "scalar ASCII predicate " + count);
+                } else {
+                    check(repeatedStates == 0L, "wide repetition scalar flag " + count);
+                    int terminal = count >>> 6;
+                    long bit = 1L << (count & 63);
+                    check(masks[135 * words + terminal] == bit, "wide terminal " + count);
+                    check((masks[134 * words + terminal] & bit) != 0L,
+                            "wide epsilon " + count);
+                    for (int word = 0; word < words; word++) {
+                        check(masks['b' * words + word] == 0L,
+                                "wide ASCII exclusion " + count);
+                    }
+                }
+                long[] snapshot = masks.clone();
                 for (int use = 0; use < 40; use++) repeated.asMatchPredicate().test("a");
-                check((read(plan, "wordPlan") != null) == (count <= 63), "word admission " + count);
+                check(read(plan, "ascii") == masks, "compiled table identity " + count);
+                check(java.util.Arrays.equals(masks, snapshot), "immutable compiled table " + count);
             }
             for (String text : samples) pair(repeated, text);
             Pattern tail = Pattern.compile("a".repeat(count - 1) + "b*");

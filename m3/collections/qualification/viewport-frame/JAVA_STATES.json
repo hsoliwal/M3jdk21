@@ -1,0 +1,61 @@
+{
+  "schema": "M3JDK21_VIEWPORT_JAVA_STATES_RECEIVING_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "0469c6482f184040a1cadf345a16b2b98476c888",
+  "dataset": "viewport-frame-tristate-20261024",
+  "recipe": "com.synexia.m3.ViewportFrameTriState20261024",
+  "product_parent": "b2f9fdb4d4624c8afa332f7fad9ac00c5ddefb3c",
+  "targets": [
+    {
+      "path": "m3/collections/viewport-proof/verify.py",
+      "pre_git_blob": "2e845c3abd88269274ed7093b1c5d84064117ae0",
+      "received_git_blob": "1283f0c4ba8e6f38fafa1a2ec9674850939988cf",
+      "pre_sha256": "ffd2da77cebd7aa6c6dd1ee8b6ad639b2d4a7ef9791e247dbe611f36d26b09a2",
+      "post_sha256": "f5839542fc9bb86631519bdf2ce04992eaf84c584c23c6bb91950176840e8cea"
+    },
+    {
+      "path": "m3/collections/viewport-proof/fixtures/M3NativePageDirectContract.txt",
+      "pre_git_blob": "ABSENT",
+      "received_git_blob": "fc61136966adfc5c8d839854230296ede6992db6",
+      "post_sha256": "ccbdb6919a7f89bd95768b93c5f3d82b80edacbae45dbaf1ae24057cb24820e0"
+    }
+  ],
+  "executed_offline_text_sdk": {
+    "engine": "M3HashPinnedTextSnapshotRecipe",
+    "maven": "3.9.9",
+    "openrewrite": "8.17.1",
+    "jdk": "21.0.12.1",
+    "junit_pass": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "results": 2,
+    "zero_change_replay": 0
+  },
+  "executed_native_states": {
+    "original": {
+      "commands_pass": 32,
+      "java_frame_wired": false,
+      "java_page_wired": false
+    },
+    "frame": {
+      "commands_pass": 32,
+      "java_frame_wired": true,
+      "java_page_wired": false
+    },
+    "page": {
+      "commands_pass": 38,
+      "java_frame_wired": true,
+      "java_page_wired": true,
+      "page_checks": 123474,
+      "page_digest": "1102f3656342aadc"
+    }
+  },
+  "unchanged_native_c_sha256": "10e8892a4a9b07a4e7fb3f53a2a1a3a4154648e4f1e013da3a0a4f600873d021",
+  "identical_installed_binary_sha256": "08282bdb85aa1439fba48d41eced621229d349630db75b35492c124af145d5f6",
+  "product_java_class_changed": false,
+  "actual_java_lST_sdk_receiving": "NOT_RUN",
+  "product_source_built_hotspot_jtreg": "NOT_RUN",
+  "native_widgets_platform_resource": "NOT_RUN",
+  "status": "DRAFT_REVIEW_NOT_MERGED"
+}

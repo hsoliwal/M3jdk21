@@ -1,0 +1,66 @@
+{
+  "schema": "M3JDK21_VIEWPORT_FRAME_WIDE_OFFSET_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_commit": "42f6416eb9257da01f43ebf1d0277131c25eb50a",
+  "canonical_dataset": "viewport-frame-wide-20261023",
+  "recipe": "com.synexia.m3.ViewportFrameWideOffset20261023",
+  "source_path": "m3/collections/src/main/c/m3maskviewport.c",
+  "pre_sha256": "7a9001af6f285c005003f8e4cdfbc8b8521f1641418c4bb6f1769eeaf1c8c485",
+  "post_sha256": "10e8892a4a9b07a4e7fb3f53a2a1a3a4154648e4f1e013da3a0a4f600873d021",
+  "pre_git_blob": "96c4c094667bcfbedf280bac2d223752bc3a1187",
+  "sdk_result_git_blob": "3a0a4e8f789962f6682f6d7ba19fc335bc910528",
+  "source_mutation": "jint *values = scratch + ((size_t) needed * 2U);",
+  "source_lines_changed": 1,
+  "tests": {
+    "actual_maven_openrewrite_junit": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "results": 1,
+      "receiver_replay_changes": 0
+    },
+    "strict_c17": [
+      "GCC14.2",
+      "Clang"
+    ],
+    "signed_overflow_model": {
+      "pre": "UBSAN_EXPECTED_FAIL_INT_MAX_TIMES_2",
+      "post": "PASS_4294967294",
+      "large_java_heap_run": false
+    },
+    "original_owner_native": {
+      "before_java_frame_receiving": {
+        "status": "PASS",
+        "commands": 32,
+        "java_frame_wired": false,
+        "frame_test_only": true
+      },
+      "after_java_frame_receiving": {
+        "status": "PASS",
+        "commands": 32,
+        "java_frame_wired": true,
+        "frame_test_only": false
+      },
+      "observations_equal": true,
+      "installs_identical": true,
+      "installed_library_sha256": "08282bdb85aa1439fba48d41eced621229d349630db75b35492c124af145d5f6",
+      "frame_result": "M3_FRAME_REGION_PASS checks=35080 digest=ed73ef29740c1e87",
+      "original_kernel_native_checks": 144449,
+      "original_page_native_checks": 163640,
+      "exports": [
+        "Java_com_m3_collections_M3MaskViewportNative_project",
+        "Java_com_m3_collections_M3MaskViewportNative_projectFramePage",
+        "Java_com_m3_collections_M3MaskViewportNative_projectPage"
+      ]
+    }
+  },
+  "remaining": {
+    "product_java_frame_declaration": "NOT_RECEIVED",
+    "actual_jdk_bootstrap_hotspot_jtreg": "NOT_RUN",
+    "native_ui_SWT_Nebula_GEF_RWT": "NOT_RUN",
+    "whole_application_performance": "NOT_MEASURED",
+    "updated_pr_ci": "PENDING"
+  },
+  "merge_status": "DRAFT_NOT_MERGED"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "m3.capability-receiver/1",
+  "status": "DRAFT_UNQUALIFIED_KNOWN_JDK21_FIXTURE",
+  "recipe_owner": "hsoliwal/com.synexia",
+  "recipe_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/portable-ast-file-20261025",
+  "recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/13397",
+  "source_epoch": "882ebe18891c719c0e26b6ee42558e50e96fe33e",
+  "capabilities": [
+    {
+      "id": "m3.ast.portable-syntax-occurrences.v1",
+      "package": "com.m3.ast",
+      "class": "M3SyntaxTree",
+      "changesPublicJdkApi": false,
+      "role": "immutable primitive occurrence plane; provider-neutral projection",
+      "contracts": "source bytes/byte spans/grammar kinds/fields/error recovery"
+    },
+    {
+      "id": "m3.file.immutable-source-generations.v1",
+      "package": "com.m3.file",
+      "class": "M3FileSource",
+      "changesPublicJdkApi": false,
+      "role": "bounded immutable image from existing M3File; sparse UTF-8/UTF-16 coordinates",
+      "contracts": "checked M3File provider; raw bytes; immutable generations"
+    }
+  ],
+  "gates": {
+    "jdk21_standalone_with_shim": "PASSED",
+    "kernel_replay_fixture": "PASSED",
+    "openrewrite_sdk": "NOT_RUN",
+    "target_maven": "NOT_RUN",
+    "installed_jdk": "NOT_RUN",
+    "real_provider_adapters": "NOT_RUN",
+    "native_jni": "NOT_APPLICABLE_THIS_CHANGE",
+    "jdk21_javac_real_ast_fixture": "PASSED_16_CHECKS",
+    "sealed_postimages": 7,
+    "source_seal_drift_refusal": "PASSED_KERNEL_REPLAY_FIXTURE_NOT_SDK"
+  }
+}
