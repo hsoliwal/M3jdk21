@@ -36,7 +36,7 @@ final class M3MaskViewportKernel {
      * Zero required bits means "any state"; forbidden bits are always excluded.
      * The signed high bit is treated exactly like any other bit. Preflight checks
      * all offsets and destination capacity before writing any output. Input and
-     * destination may alias; only that uncommon case allocates a scratch array.
+     * destination may alias; only overlapping windows allocate a scratch array.
      *
      * @return number of output logical offsets
      */
@@ -60,8 +60,11 @@ final class M3MaskViewportKernel {
             return 0;
         }
         // A caller may reuse one primitive array for source, state and output.
-        // All reads must complete before that array is changed.
-        if (target == logicalOffsets || target == states) {
+        // Only overlapping physical windows require all reads before writing.
+        // Both ends are overflow-safe after preflight and capacity validation.
+        final boolean overlaps = targetOffset < first + length
+                && first < targetOffset + needed;
+        if (overlaps && (target == logicalOffsets || target == states)) {
             final int[] scratch = new int[needed];
             copy(logicalOffsets, states, first, length, requiredBits, forbiddenBits,
                     scratch, 0);
