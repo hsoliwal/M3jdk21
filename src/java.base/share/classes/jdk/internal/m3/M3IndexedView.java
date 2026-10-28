@@ -370,7 +370,16 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
 
         @Override
         public int characteristics() {
-            return Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED;
+            return Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED
+                    | (comparator != null ? Spliterator.SORTED : 0);
+        }
+
+        @Override
+        public Comparator<? super E> getComparator() {
+            if (comparator == null) {
+                throw new IllegalStateException("M3 indexed view is not sorted");
+            }
+            return comparator;
         }
     }
 

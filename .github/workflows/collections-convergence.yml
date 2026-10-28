@@ -5,6 +5,8 @@ on:
   pull_request:
     paths:
       - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'test/jdk/jdk/internal/m3/IndexedViewSortedSpliteratorTest.java'
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java'
       - 'test/jdk/java/util/CollectionViews/**'
@@ -65,6 +67,13 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror             --patch-module java.base="$out/patch:test/jdk/jdk/internal/m3"             -d "$out/patch"             test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java
           java --patch-module java.base="$out/patch"             jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
           java -Xint --patch-module java.base="$out/patch"             jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            --patch-module "java.base=$out/patch:test/jdk/jdk/internal/m3" -d "$out/patch" \
+            test/jdk/jdk/internal/m3/IndexedViewSortedSpliteratorTest.java
+          java --patch-module java.base="$out/patch" jdk.internal.m3.IndexedViewSortedSpliteratorTest
+          java -Xint --patch-module java.base="$out/patch" jdk.internal.m3.IndexedViewSortedSpliteratorTest
+          java -XX:TieredStopAtLevel=1 --patch-module java.base="$out/patch" jdk.internal.m3.IndexedViewSortedSpliteratorTest
+          java -XX:-TieredCompilation -Xbatch --patch-module java.base="$out/patch" jdk.internal.m3.IndexedViewSortedSpliteratorTest
           P=test/jdk/java/util/CollectionViews
           javac --release 21 -proc:none -Xlint:all -Werror             --patch-module java.base="$out/patch" --add-modules jdk.management             -d "$out/tests"             "$P/RunSearchJni.java"             "$P/CollectionViewsContract.java"             "$P/FilteredBulkMutationContractTest.java"             "$P/FilteredCopyOnWriteBulkTest.java"             "$P/FilteredIsEmptyDirectTest.java"             "$P/FilteredListRemoveContractTest.java"             "$P/FilteredOwnerMembershipTest.java"             "$P/FilteredRepresentativeContractTest.java"             "$P/FilteredSortedSpliteratorMetadataTest.java"
           for klass in             FilteredBulkMutationContractTest             FilteredCopyOnWriteBulkTest             FilteredIsEmptyDirectTest             FilteredListRemoveContractTest             FilteredOwnerMembershipTest             FilteredRepresentativeContractTest             FilteredSortedSpliteratorMetadataTest             CollectionViewsContract; do
