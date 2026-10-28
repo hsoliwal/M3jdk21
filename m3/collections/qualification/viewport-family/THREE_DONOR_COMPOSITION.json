@@ -36,9 +36,37 @@
   },
   "admission_observed": {
     "donor_expected_paths": 28,
-    "original_frame_tree_drift_or_absent": 7,
+    "original_frame_tree_drift_or_absent": 6,
     "matched_after_fenwick_overlay": 28,
-    "overlap_between_frame_tree_and_fenwick": 0
+    "overlap_between_frame_tree_and_fenwick": 0,
+    "original_frame_tree_missing": 4,
+    "original_frame_tree_evolved": 2,
+    "details": [
+      {
+        "path": "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt",
+        "kind": "ABSENT"
+      },
+      {
+        "path": "m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json",
+        "kind": "ABSENT"
+      },
+      {
+        "path": "m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json",
+        "kind": "ABSENT"
+      },
+      {
+        "path": "m3/collections/qualification/viewport-fenwick/RECEIVING.json",
+        "kind": "ABSENT"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
+        "kind": "EVOLVED"
+      },
+      {
+        "path": ".github/workflows/m3-sparse-viewport-geometry.yml",
+        "kind": "EVOLVED"
+      }
+    ]
   },
   "expected_review_diff": {
     "source_modified_or_added": 37,
