@@ -1,0 +1,9 @@
+category	first_party_owner	candidate_or_reference	decision	cost_or_reason	license_and_evidence
+JNI_MASKED_VIEWPORT	M3MaskViewportNative.java + m3maskviewport.c	Existing #1765 projectPage plus #1766 projectFramePage	COMBINE	O(n) input preflight, native result staging proportional to selected page; 3 JNI exports retained	M3JDK21 Apache-2.0, 240315 union and 150556 page checks locally
+STABLE_ARRAY_FILTER	M3MaskViewportKernel.java	LeetCode #283 stable array compaction	PATTERN_NOT_COPY	Caller-shared input arrays and bit masks must not be changed; no per-row object	Challenge pattern reference only, not copied
+SORTED_INDEX	M3LaneSearch.java	LeetCode #34 lower/upper bound	REUSE_WHEN_MONOTONIC	O(log n) only for sorted keys, not arbitrary unsorted mask states	Original M3JDK21 owned search
+RANK_DONOR	M3IndexPathRank.java	HackerRank Climbing the Leaderboard	CATEGORY_ONLY	Ranked data must be indexed in advance; preserve input occurrence order	No external solution copied
+WINDOW_DONOR	M3StateMaskArrays.java	GeeksforGeeks move zeroes to end	CATEGORY_ONLY	Stable compaction pattern, rejected for unchanged source arrays	No external source copied
+JNI_REGION_INPUT	M3MaskViewportNative original C owner	PR #1759 fixed-size GetIntArrayRegion candidate	DEFER_PERFORMANCE	Actual GetIntArrayElements may pin/copy entire input despite O(page) explicit scratch	Not a performance claim; needs separate native error/alias benchmarks
+FILTERED_SORTED	M3IndexedListSnapshot + M3LongSortedViews	PR #1766 original indexed/sorted page implementations	PRESERVE_BASE	No extra Object[] store, stable sorted indices, no Java predicate crossing JNI	Inherited unchanged from stacked base
+GPU_UI_VIEWPORT	M3WindowRuntime / SWT Nebula GEF RWT	Separate GPU or browser model storage	REJECT	CPU model owns state, GPU/DOM consumes bounded visible generation	Native/UI contracts require separate differential/pixel qualification
