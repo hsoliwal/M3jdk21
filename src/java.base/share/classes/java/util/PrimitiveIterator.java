@@ -93,6 +93,22 @@ public interface PrimitiveIterator<T, T_CONS> extends Iterator<T> {
      */
     @SuppressWarnings("overloads")
     public static interface OfInt extends PrimitiveIterator<Integer, IntConsumer> {
+        /**
+         * Primitive iterator traversal with a borrowed monitor and no boxing.
+         * One unit is credited after each completed consumer invocation.
+         */
+        default void forEachRemainingIntMonitored(IntConsumer action, java.util.concurrent.ProgressMonitor monitor) {
+            Objects.requireNonNull(action);
+            Objects.requireNonNull(monitor);
+            while (true) {
+                monitor.checkCancelled();
+                if (!hasNext()) break;
+                action.accept(nextInt());
+                monitor.worked(1);
+            }
+            monitor.checkCancelled();
+        }
+
 
         /**
          * Returns the next {@code int} element in the iteration.
@@ -161,6 +177,22 @@ public interface PrimitiveIterator<T, T_CONS> extends Iterator<T> {
      */
     @SuppressWarnings("overloads")
     public static interface OfLong extends PrimitiveIterator<Long, LongConsumer> {
+        /**
+         * Primitive iterator traversal with a borrowed monitor and no boxing.
+         * One unit is credited after each completed consumer invocation.
+         */
+        default void forEachRemainingLongMonitored(LongConsumer action, java.util.concurrent.ProgressMonitor monitor) {
+            Objects.requireNonNull(action);
+            Objects.requireNonNull(monitor);
+            while (true) {
+                monitor.checkCancelled();
+                if (!hasNext()) break;
+                action.accept(nextLong());
+                monitor.worked(1);
+            }
+            monitor.checkCancelled();
+        }
+
 
         /**
          * Returns the next {@code long} element in the iteration.
@@ -228,6 +260,22 @@ public interface PrimitiveIterator<T, T_CONS> extends Iterator<T> {
      */
     @SuppressWarnings("overloads")
     public static interface OfDouble extends PrimitiveIterator<Double, DoubleConsumer> {
+        /**
+         * Primitive iterator traversal with a borrowed monitor and no boxing.
+         * One unit is credited after each completed consumer invocation.
+         */
+        default void forEachRemainingDoubleMonitored(DoubleConsumer action, java.util.concurrent.ProgressMonitor monitor) {
+            Objects.requireNonNull(action);
+            Objects.requireNonNull(monitor);
+            while (true) {
+                monitor.checkCancelled();
+                if (!hasNext()) break;
+                action.accept(nextDouble());
+                monitor.worked(1);
+            }
+            monitor.checkCancelled();
+        }
+
 
         /**
          * Returns the next {@code double} element in the iteration.
