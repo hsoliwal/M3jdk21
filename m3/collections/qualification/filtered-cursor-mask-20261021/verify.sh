@@ -4,7 +4,7 @@
 set -euo pipefail
 export LC_ALL=C
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-manifest="$root/m3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST_20261027.tsv"
+manifest="$root/m3/collections/qualification/current-wrapper-arraymask-convergence/SOURCE_MANIFEST.tsv"
 [[ -f "$manifest" ]] || { echo "FAIL absent receiving manifest"; exit 11; }
 count=0
 existing=0

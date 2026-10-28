@@ -10,7 +10,7 @@ on:
       - 'm3/collections/qualification/filtered-navigable-consolidation-20261017/**'
       - 'm3/collections/src/test/java/com/m3/collections/M3FilteredSortedIteratorPlanTest.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3FilteredSortedIteratorPlanSelfTest.java'
-      - 'm3/collections/qualification/filtered-plan-current-master-20261027/**'
+      - 'm3/collections/qualification/filtered-plan/**'
       - '.github/workflows/m3-filtered-navigable-consolidation.yml'
   workflow_dispatch:
 permissions:
@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           if [[ "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java)" == "45ad6df3a51e83c67dc70de7c7acd82bec2305d3" ]]; then
-            bash m3/collections/qualification/filtered-plan-current-master-20261027/verify.sh
+            bash m3/collections/qualification/filtered-plan/verify.sh
           else
             bash m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
           fi

@@ -7,7 +7,7 @@ on:
       - 'm3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java'
       - 'm3/collections/qualification/no-vendor-runtime-20261027/**'
-      - '.github/workflows/m3-native-five-family-no-vendor-runtime-20261027.yml'
+      - '.github/workflows/native-five-family-contract.yml'
 permissions:
   contents: read
 jobs:
@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 50
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
           distribution: temurin
           java-version: '21'
@@ -59,6 +59,9 @@ jobs:
             esac
           done
           grep -Eq '(^|,)com[.]m3[.]arrays(,|$)' "$RUNNER_TEMP/jdeps.txt"
+      - name: Install source-vendored JUnit build prerequisites
+        shell: bash
+        run: mvn -B -ntp -f m3/vendor/third_party/pom.xml -pl junit-jupiter-5.10.2 -am -DskipTests install
       - name: Install internal M3 arrays from source (never donor binaries)
         shell: bash
         run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install

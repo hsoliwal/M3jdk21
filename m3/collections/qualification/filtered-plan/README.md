@@ -17,7 +17,7 @@ This is a *fresh current-master* refinement. The predecessor [PR #1497](https://
 Execute from the repository checkout:
 
 ```sh
-bash m3/collections/qualification/filtered-plan-current-master-20261027/verify.sh
+bash m3/collections/qualification/filtered-plan/verify.sh
 ```
 
 The outer `java.base` runtime, JNI-native viewport and full source-built JDK image are not touched or qualified by this pass. Retain existing library licenses and donor provenance.

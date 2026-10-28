@@ -38,7 +38,7 @@ classified here and remain open; do not infer every red check is harmless.
 ## New current-head qualification scope
 
 Current verification script:
-`m3/collections/qualification/filtered-plan-current-master-20261027/verify.sh`.
+`m3/collections/qualification/filtered-plan/verify.sh`.
 
 It pins the M3JDK21 target source and test-source Git blobs, installs the
 real first-party `m3-arrays` module, compiles the actual `m3-collections`

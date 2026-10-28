@@ -14,9 +14,9 @@ on:
       - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java'
       - 'm3/collections/src/test/java/com/m3/collections/**'
-      - 'm3/collections/qualification/current-wrapper-arraymask-convergence-20261027/**'
-      - 'm3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST_20261027.tsv'
-      - '.github/workflows/m3-current-collections-convergence-20261027.yml'
+      - 'm3/collections/qualification/current-wrapper-arraymask-convergence/**'
+      - 'm3/collections/qualification/current-wrapper-arraymask-convergence/SOURCE_MANIFEST.tsv'
+      - '.github/workflows/collections-convergence.yml'
   workflow_dispatch:
 
 permissions:
@@ -29,6 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
@@ -52,8 +53,15 @@ jobs:
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/m3-current-convergence"
-          mkdir -p "$out/patch" "$out/tests"
-          javac --release 21 -proc:none -Xlint:all -Werror             --patch-module java.base=src/java.base/share/classes             -d "$out/patch"             src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java             src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java             src/java.base/share/classes/java/util/CollectionViews.java
+          mkdir -p "$out/patch" "$out/tests" "$out/patch-src/jdk/internal/m3" "$out/patch-src/java/util"
+          cp src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java "$out/patch-src/jdk/internal/m3/"
+          cp src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java "$out/patch-src/jdk/internal/m3/"
+          cp src/java.base/share/classes/java/util/CollectionViews.java "$out/patch-src/java/util/"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            --patch-module java.base="$out/patch-src" -d "$out/patch" \
+            "$out/patch-src/jdk/internal/m3/M3IndexedArray.java" \
+            "$out/patch-src/jdk/internal/m3/M3IndexedView.java" \
+            "$out/patch-src/java/util/CollectionViews.java"
           javac --release 21 -proc:none -Xlint:all -Werror             --patch-module java.base="$out/patch:test/jdk/jdk/internal/m3"             -d "$out/patch"             test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java
           java --patch-module java.base="$out/patch"             jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
           java -Xint --patch-module java.base="$out/patch"             jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
@@ -68,6 +76,8 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
           distribution: temurin
@@ -92,6 +102,8 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
           distribution: temurin
@@ -100,6 +112,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml -pl junit-jupiter-5.10.2 -am -DskipTests install
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
           cmake -S m3/arrays/src/main/native             -B "$RUNNER_TEMP/m3-arrays-native"             -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_STANDARD=17
           cmake --build "$RUNNER_TEMP/m3-arrays-native" --parallel 2
