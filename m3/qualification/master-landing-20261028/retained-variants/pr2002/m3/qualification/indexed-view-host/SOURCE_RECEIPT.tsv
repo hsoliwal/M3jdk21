@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Source receipt only; no full JDK/JNI or release result is claimed.
+path	identity_kind	before_identity	after_identity	canonical_donor	qualification
+.github/workflows/m3-state-masked-indexed-views-20261019.yml	SHA-256	c0d55f5805644bf1f815d29f69da1936e430ad7c7460ab957221bd1a6c7574aa	aa5a0d904c9c230d13ce2d83031aaf981f27fa4705670386b932f5e9788c6c40	hsoliwal/com.synexia:m3-intrinsic-view-native-proof-20261027	SOURCE_SEALED_HOST_AND_INTERPRETER_PENDING
+src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java	Git-blob-SHA1	e6059aeb9b2e7f332fb0baea2684395c268a5414	e6059aeb9b2e7f332fb0baea2684395c268a5414	M3JDK21#1908	PRESERVE_ORIGINAL_JDK_OWNER
+src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java	Git-blob-SHA1	1dec3dbe282a53f20c3c70458d949ac3f7df53b5	1dec3dbe282a53f20c3c70458d949ac3f7df53b5	M3JDK21#1908;Synexia#13301	PRESERVE_NEWER_LAZY_INDEX_DIRECTORY
+test/jdk/jdk/internal/m3/M3IndexedArrayTest.java	Git-blob-SHA1	c5812eb14bb62f3e97ef8f5af6dce09ab97fe991	c5812eb14bb62f3e97ef8f5af6dce09ab97fe991	M3JDK21#1908	PRESERVE_ORIGINAL_CONTRACT
+test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java	Git-blob-SHA1	6fde07fb59b9871458aaf2af34ef2fae9be17a6d	6fde07fb59b9871458aaf2af34ef2fae9be17a6d	M3JDK21-original-history	PRESERVE_EPOCH_CONTRACT
+test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java	Git-blob-SHA1	254743ec34301e46ca09071bb62ee4ab97955c66	254743ec34301e46ca09071bb62ee4ab97955c66	M3JDK21#1908	PRESERVE_STATE_MASK_CONTRACT
+test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java	Git-blob-SHA1	18c5a8e29de56b00b22ce1fe7dd9aae56e2a03ec	18c5a8e29de56b00b22ce1fe7dd9aae56e2a03ec	M3JDK21#1908;Synexia#13301	REUSE_LAZY_FIRST_USE_REGRESSION
