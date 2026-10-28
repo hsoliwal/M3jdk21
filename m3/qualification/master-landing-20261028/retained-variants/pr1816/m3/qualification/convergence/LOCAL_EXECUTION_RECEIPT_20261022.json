@@ -1,0 +1,29 @@
+{
+  "schema": "synexia.m3.local-source-sealed-execution.v1",
+  "authority": "convergence-workspace-only",
+  "emitter_git_blob": "9d3b60963a38bd84fa25624d4c37e1ba1b873d29",
+  "recipe_id": "com.synexia.m3jdk.ProductOutputOnly20261022",
+  "engine": "synexia-source-sealed-text",
+  "executions": 2,
+  "first_pass_changed_paths": 2,
+  "second_pass_changed_paths": 0,
+  "fixed_point": true,
+  "local_python_tests_passed": 5,
+  "maven_openrewrite_executed": false,
+  "authenticated_github_actions_proof": false,
+  "outputs": [
+    {
+      "path": ".github/workflows/m3-synexia-output-only-20261022.yml",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f289d44519462ed294c5d63775705efdcef70f0e819bf4c13891e3113f657e5f",
+      "git_blob": "af40bafa1e7c0134460760911944adb5514e4c87"
+    },
+    {
+      "path": "m3/qualification/convergence/SYNEXIA_RECEIVER_POLICY.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "fd6a5980d39695354dca946d75199c46290b076f0b1a0f8e12ee116e48f64302",
+      "git_blob": "eade048f1a0612e30c574e425fb7a55650f3ea52"
+    }
+  ],
+  "note": "Local deterministic output generation and Python test execution only. No claim of Maven/OpenRewrite, private artifact, full Java/JNI or renderer qualification."
+}

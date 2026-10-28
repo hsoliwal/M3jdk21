@@ -1,0 +1,36 @@
+{
+  "schema": "synexia.m3.local-execution-candidate.v1",
+  "producer_repository": "hsoliwal/com.synexia",
+  "producer_recipe": "com.synexia.m3jdk.ProductOutputSuccessor20261022",
+  "producer_recipe_commit": "dc718bf6b4e2623a90a8d28ae33055dd76f701db",
+  "result_repository": "hsoliwal/M3jdk21",
+  "result_branch": "m3/receive-synexia-executed-results-only-20261022",
+  "execution": {
+    "location": "isolated Synexia mechanical source-sealed executor",
+    "engine": "synexia-source-sealed-text",
+    "first_pass_changed_paths": 2,
+    "second_pass_changed_paths": 0,
+    "local_python_unittests_passed": 4,
+    "source_hashes_verified": true,
+    "maven_openrewrite_recipe_run": "NOT_VERIFIED",
+    "authenticated_github_actions_artifact": "NOT_AVAILABLE",
+    "release_promotion_allowed": false
+  },
+  "outputs": [
+    {
+      "path": ".github/workflows/m3-synexia-output-only-20261022.yml",
+      "before_sha256": "f289d44519462ed294c5d63775705efdcef70f0e819bf4c13891e3113f657e5f",
+      "after_sha256": "ec1bc2ec70fec256ac7acfb102cc7b7d7731544e42ad76fd00650cc5c409db39",
+      "before_git_blob": "af40bafa1e7c0134460760911944adb5514e4c87",
+      "after_git_blob": "7a94d8fca38c97a6e181bfd429a850dc7e370e28"
+    },
+    {
+      "path": "m3/qualification/convergence/SYNEXIA_RECEIVER_POLICY.md",
+      "before_sha256": "fd6a5980d39695354dca946d75199c46290b076f0b1a0f8e12ee116e48f64302",
+      "after_sha256": "b101849633ab04b2f922ef43a3b40f6a119c8ee9fd43177f7fc64b2091477172",
+      "before_git_blob": "eade048f1a0612e30c574e425fb7a55650f3ea52",
+      "after_git_blob": "9158673825150478e9935e5e1a9ac59ba2f568f1"
+    }
+  ],
+  "notes": "This records a real local deterministic source-recipe execution and refusal tests, not a successful Maven/OpenRewrite CI run or authenticated GitHub production execution. Keep both PRs draft."
+}
