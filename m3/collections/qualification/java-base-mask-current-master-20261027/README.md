@@ -99,3 +99,26 @@ was queued at the time of this receipt. No current-head product GC/jtreg
 result is claimed until the run finishes. These checks do not constitute
 exhaustive remembered-set/card-barrier testing, collector stress suites,
 or allocation/performance evidence.
+
+
+## Additional G1/Serial reference-liveness oracle (2026-10-28)
+
+New `test/jdk/java/util/ArrayList/M3CollectionMaskGcBarrierContract.java`,
+Git blob `5bb6fb3ee9e7a3e3ce73bdbf2439eb209e126302`, complements the existing
+`M3ArrayListVectorGcMutationContract`. Both use public Java collection
+semantics, not a replacement M3 runtime layer.
+
+The new oracle exercises lengths 511/512/513/1024/3072, six deletion-mask
+patterns, duplicate object references, null elements, stable identity/order,
+predicate callback indices, both ArrayList and Vector, and heap churn/full GC
+after compaction. It is wired to jtreg under **both G1 and Serial** with 96 MiB
+heap constraints. Unlike the prior GC mutation test, it specifically tests
+null/shared survivors and allocation pressure after compaction.
+
+Locally on OpenJDK 21.0.12.1 this exact **Git-blob-matched** source compiled
+with `javac --release 21 -Xlint:all -Werror` and reported
+`112174` checks under G1 and `112174` under Serial. These are **stock-JDK
+reference-oracle runs only**; neither is a matched M3JDK21 image receipt.
+The new `make test` selection must pass on the current product source head
+before this GC coverage can be promoted. Forced `System.gc()` and retained
+survivor identity are not a complete collector write-barrier/card-table proof.
