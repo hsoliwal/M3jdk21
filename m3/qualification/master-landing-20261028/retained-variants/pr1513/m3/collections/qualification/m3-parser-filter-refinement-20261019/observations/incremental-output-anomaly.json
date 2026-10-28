@@ -1,0 +1,15 @@
+{
+  "observation": "Incremental Maven class lacks reversed/removeFirst/removeLast present in sealed source; direct javac emits these methods. Root cause not established. Fresh forked build required.",
+  "artifacts": [
+    {
+      "path": "continuation/after/m3/collections/target/classes/com/m3/collections/M3FilteredViews$SortedSetView.class",
+      "sha256": "1514403d21dc1446e888d34d6d1d416694e47a3a5e048bfb39c24a1e9eedc40e",
+      "bytes": 3643
+    },
+    {
+      "path": "continuation/direct-filter/com/m3/collections/M3FilteredViews$SortedSetView.class",
+      "sha256": "4eeada4cde7c3337420fbbdc4fa8445b25bc05275c2c9e7504ba778fbe42a554",
+      "bytes": 3239
+    }
+  ]
+}

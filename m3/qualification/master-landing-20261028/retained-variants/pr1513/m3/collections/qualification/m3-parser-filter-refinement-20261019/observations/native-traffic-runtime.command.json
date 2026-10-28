@@ -1,0 +1,7 @@
+{
+  "command": [
+    "/workspace/scratch/a20ebe6f78bb/continuation/native-after/sparse-test"
+  ],
+  "cwd": "/workspace/scratch/a20ebe6f78bb",
+  "jdk": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1"
+}
