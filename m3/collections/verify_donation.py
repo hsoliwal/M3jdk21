@@ -167,6 +167,65 @@ def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
         extra.append((path, after))
     return [*historical_rows, *extra]
 
+# Exact successor of the four unchanged historical receiving receipts.
+_TOOLS4J_RECEIPT = HERE / 'qualification/tools4j-unix-source-successor-20261019.tsv'
+_TOOLS4J_RECEIPT_SHA256 = 'a802b36b031d2280c72e148baf93e0977a422ef1f07525f349526a2e2b31e46b'
+_TOOLS4J_PREDECESSOR_SHA256 = '104bd2f6582f4ce496ff13524a7a8f33e7f4c10fb18981ae9e3229c6da5ba7b9'
+
+
+def include_tools4j_refinement_successor(previous_rows, receipt=_TOOLS4J_RECEIPT):
+    """Reconcile only the sealed current inventory and qualified source refinements.
+
+    Each row keeps the inherited manifest hash, exact pinned-master preimage,
+    and final received hash distinct. Historical receipts remain unchanged.
+    """
+    prior = list(previous_rows)
+    if (len(prior) != 113 or any(len(row) != 2 for row in prior)
+            or len({row[0] for row in prior}) != len(prior)):
+        raise SystemExit('Tools4j predecessor rows missing, duplicate or malformed')
+    predecessor = ''.join(path + '\t' + expected + '\n' for path, expected in prior)
+    if hashlib.sha256(predecessor.encode('utf-8')).hexdigest() != _TOOLS4J_PREDECESSOR_SHA256:
+        raise SystemExit('Tools4j predecessor receipt chain drift')
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _TOOLS4J_RECEIPT_SHA256:
+        raise SystemExit('Tools4j successor receipt missing, aliased or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != 418:
+        raise SystemExit('Tools4j successor must declare exactly418 source transitions')
+    current = dict(prior)
+    extra = []
+    seen = set()
+    for cells in entries:
+        if len(cells) != 4:
+            raise SystemExit('Tools4j malformed source transition')
+        path, inherited, master, after = cells
+        relative = Path(path)
+        java_source = path.endswith('.java') and path.startswith((
+            'm3/collections/src/main/java/', 'm3/collections/src/test/java/'))
+        native_source = path == 'm3/collections/src/main/native/collections/m3_long_address_kernel.c'
+        if (relative.is_absolute() or '..' in relative.parts or '\\' in path
+                or not (java_source or native_source) or path in seen):
+            raise SystemExit('Tools4j duplicate or out-of-scope source: ' + path)
+        seen.add(path)
+        hashes = (master, after) if inherited == 'ABSENT' else (inherited, master, after)
+        if any(len(value) != 64 or any(c not in '0123456789abcdef' for c in value) for value in hashes):
+            raise SystemExit('Tools4j invalid source hash: ' + path)
+        if inherited == after:
+            raise SystemExit('Tools4j unchanged source is not a transition: ' + path)
+        if inherited == 'ABSENT':
+            if path in current:
+                raise SystemExit('Tools4j occupied source admission: ' + path)
+            extra.append((path, after))
+        else:
+            if current.get(path) != inherited:
+                raise SystemExit('Tools4j inherited source preimage drift: ' + path)
+            current[path] = after
+    result = [(path, current[path]) for path, _ in prior] + extra
+    source_java = {path for path, _ in result if path.endswith('.java') and '/src/' in path}
+    if len(result) != 510 or len(source_java) != 503:
+        raise SystemExit('Tools4j exact current source membership drift')
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -211,6 +270,7 @@ def main():
             if line and not line.startswith('#')]
     rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
     rows = include_object_state_offset_successor(rows)
+    rows = include_tools4j_refinement_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
