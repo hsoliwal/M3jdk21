@@ -92,3 +92,31 @@ remain unqualified. A compatible factory interface does not qualify every concre
 class or serialized form. All unlisted APIs remain unqualified. Pinned dependency versions
 are compatibility inputs, not latest-version or production-security endorsements. Existing
 M3 and upstream licenses and attribution remain intact.
+
+## Direct-runtime dependency boundary (2026-10-28, source-vendoring HOLD)
+
+This **optional research/compatibility artifact is not the zero-dependency M3
+consumer artifact**. Its original direct Maven compile graph still includes
+`com.google.guava:guava`, `org.eclipse.collections:eclipse-collections`,
+`org.springframework:spring-core` and `org.apache.commons:commons-collections4`.
+Their public types appear in the existing mapped provider factories, so
+rewriting them as `provided` or `optional` is not runtime/source equivalence.
+The first-party `m3-arrays` and `m3-collections` core POMs retain only
+first-party compile dependencies; the core dependency test proves **declared
+direct** closure, not an installed Maven-transitive graph or all five providers.
+
+Until each donor API atom and its notices have been source-vendored/refactored
+onto M3 arrays, offsets, indexes, masks and JNI owners, this module explicitly
+**skips Maven deploy**. Local `mvn install` and `mvn verify` remain available
+for qualification with the real pinned donor libraries. Do **not** publish this
+interop POM/jar as a zero-third-party dependency offering or remove donor jars
+without preserving exact Java API, serialization, allocation and live-view
+semantics. Deployment quarantine is not source inlining.
+
+The no-download Python regression and declared-dependency census live at
+`m3/collections/verification/no_external_runtime.py` and
+`test_no_external_runtime.py`. They reject direct external core dependencies,
+missing/symlinked POMs, a missing deployment quarantine, profile overrides, and
+`provided`/`optional` scope tricks. This is **not** full transitive Maven
+dependency resolution, class loading/JNI verification, five-provider parity,
+or proof that the four binaries have been eliminated. Those remain HOLD.
