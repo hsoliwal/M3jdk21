@@ -1,0 +1,10 @@
+{
+  "command": [
+    "javap",
+    "-public",
+    "-s",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/baseline/classes/java/util/Collections.class"
+  ],
+  "exit": 0,
+  "log_sha256": "f2d85ecb4bb48e4e47212f1622a862a4ab6cfc0e465ef447ff44b87b20bfafed"
+}

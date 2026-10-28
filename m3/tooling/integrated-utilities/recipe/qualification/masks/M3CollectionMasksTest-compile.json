@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+    "-Xlint:all",
+    "-Werror",
+    "--patch-module",
+    "java.base=/dev/shm/m3jdk21-work/collection-classes:/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections",
+    "-d",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-classes",
+    "/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections/M3CollectionMasksTest.java"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "source_sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17"
+}

@@ -1,0 +1,6 @@
+{
+  "decision": "REJECTED_INDIRECT_PERMUTATION_OWNER",
+  "reason": "Extra index sorting and snapshot permutation duplicated existing Arrays.sort and showed CPU/allocation regressions. Preserve all prior pilot and full-call observations.",
+  "replacement": "Existing Arrays.sort over private captured visible Object[].",
+  "changed_benchmark_source": false
+}

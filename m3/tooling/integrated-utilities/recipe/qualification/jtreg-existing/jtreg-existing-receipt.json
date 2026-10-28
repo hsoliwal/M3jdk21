@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+    "-Xmx256m",
+    "-jar",
+    "/tmp/m3-toolchain/jtreg/lib/jtreg.jar",
+    "-jdk:/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "-agentvm",
+    "-concurrency:2",
+    "-Xmx128m",
+    "--patch-module",
+    "java.base=/dev/shm/m3jdk21-work/collection-classes",
+    "-w:/dev/shm/m3jdk21-work/jtreg-existing-work-2",
+    "-r:/dev/shm/m3jdk21-work/jtreg-existing-report-2",
+    "test/jdk/java/util/Collections"
+  ],
+  "exit_code": 0,
+  "scope": "EXISTING_COLLECTIONS_JTREG_WITH_CANDIDATE_JAVA_BASE_PATCH",
+  "full_product_image": false,
+  "log": "/dev/shm/m3jdk21-work/jtreg-existing-run.log"
+}

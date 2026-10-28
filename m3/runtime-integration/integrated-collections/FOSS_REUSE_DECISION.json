@@ -1,0 +1,29 @@
+{
+  "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "target_owner": "java.util.Collections",
+  "internal_owner": "java.util.M3CollectionViews",
+  "intake_mode": "TARGET_OWNED_PORT",
+  "source_reuse": [
+    "OpenJDK AbstractCollection/AbstractList/AbstractSet/AbstractMap and unmodifiable wrappers",
+    "OpenJDK ReverseOrderListView for exact reverse-list insertion and iterator behavior; Arrays.sort/TimSort for private captured snapshot storage",
+    "OpenJDK ArrayList two-phase mask compaction and BitSet word scanning",
+    "Existing Synexia/M3 filtered-list composition, backing ownership, stable selected-index snapshot contracts as algorithm references"
+  ],
+  "donor_contract_references": [
+    "Guava Collections2.filter / Sets.filter: live backing and visible-only mutation",
+    "LeetCode 283 stable compaction; 34 lower/upper bounds",
+    "HackerRank Java BitSet; Array Manipulation (batch-only)",
+    "GeeksforGeeks stable corresponding-rank and sparse-set category"
+  ],
+  "rejections": [
+    "No pasted Apache-2.0 donor source into GPL java.util",
+    "No eager in-place compaction during predicate callbacks",
+    "No durable mask or sorted permutation over arbitrary mutable live predicates",
+    "No per-element retained Entry/Node/Pair for storage",
+    "No sorted positional insertion that silently moves the requested index",
+    "Redundant detached snapshot int[] permutation/indirect mergesort: whole-call CPU regressed3/6 and allocation5/6 measured workloads; replaced with existing JDK stable object sorter."
+  ],
+  "recipe": "com.synexia.rewrite.M3IntegratedUtilitiesRecipe",
+  "status": "FOSS_REUSE_DECISION_RECORDED_BEFORE_CANDIDATE_GENERATION",
+  "refinement": "The initial donor/category decision preceded candidate generation; later measured/refused candidates remain in counterexamples and qualification/rejected."
+}

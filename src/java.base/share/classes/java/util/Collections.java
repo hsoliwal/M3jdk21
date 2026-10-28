@@ -87,6 +87,304 @@ public class Collections {
     private Collections() {
     }
 
+    /**
+     * Returns a live filtered view of the supplied collection. Reads reevaluate
+     * the predicate over stored elements; changes to the backing collection or
+     * predicate state are visible to subsequent operations. The predicate must
+     * not modify the backing collection and must remain stable during each
+     * operation or traversal. This view adds no synchronization.
+     *
+     * <p>Additions must satisfy the predicate or throw {@code IllegalArgumentException}.
+     * A set-backed view rejects an addition that collides with a hidden existing
+     * representative. Bulk additions capture and validate the input before backing writes.
+     * Removals and {@code clear} affect only visible elements. Mutations also
+     * require the corresponding backing operation to be supported. Iterator
+     * removal is unsupported; use the view's removal methods. Spliterators
+     * retain applicable ordering and comparator information but do not claim an
+     * exact filtered size. No per-element membership cache is retained.
+     *
+     * @param <E> element type
+     * @param source the backing collection
+     * @param predicate the visibility and admission predicate
+     * @return the live view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <E> Collection<E> filteredCollection(Collection<E> source,
+            java.util.function.Predicate<? super E> predicate) {
+        return new M3CollectionViews.FilteredCollection<>(source, predicate);
+    }
+
+    /**
+     * Returns a live, encounter-ordered filtered list. Indices count visible
+     * elements. Insertion before a visible index uses that element's physical
+     * position; appending uses the backing end. Hidden elements are preserved.
+     * The predicate requirements of {@link #filteredCollection} apply.
+     *
+     * <p>Indexed access scans the backing list. List iterators support the
+     * backing list's mutation operations and preserve the last returned
+     * occurrence across lookahead. A sublist is a live filter over the physical
+     * backing span determined by its visible bounds at creation; ordinary
+     * backing-sublist restrictions on external structural changes apply.
+     * Nested filters preserve predicate order without recursive evaluation.
+     *
+     * @param <E> element type
+     * @param source the backing list
+     * @param predicate the visibility and admission predicate
+     * @return the live list view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <E> List<E> filteredList(List<E> source,
+            java.util.function.Predicate<? super E> predicate) {
+        return new M3CollectionViews.FilteredList<>(source, predicate);
+    }
+
+    /**
+     * Returns a live filtered set. The backing set must use equality consistent
+     * with {@code equals}; the filtered-collection predicate, mutation and
+     * iterator rules apply. Use {@link #filteredSortedSet} or
+     * {@link #filteredNavigableSet} to retain comparator-based membership.
+     *
+     * @param <E> element type
+     * @param source backing set
+     * @param predicate visibility and admission predicate
+     * @return live set view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <E> Set<E> filteredSet(Set<E> source,
+            java.util.function.Predicate<? super E> predicate) {
+        return new M3CollectionViews.FilteredSet<>(source, predicate);
+    }
+
+    /**
+     * Returns a live filtered sorted set retaining the backing comparator and
+     * backed range restrictions. Membership evaluates the stored representative
+     * of a comparator-equivalent query. First and last operations skip hidden
+     * elements, including when null is an allowed element. The predicate and
+     * mutation rules of {@link #filteredCollection} apply.
+     *
+     * @param <E> element type
+     * @param source backing sorted set
+     * @param predicate visibility and admission predicate
+     * @return live sorted set view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <E> SortedSet<E> filteredSortedSet(SortedSet<E> source,
+            java.util.function.Predicate<? super E> predicate) {
+        return new M3CollectionViews.FilteredSortedSet<>(source, predicate);
+    }
+
+    /**
+     * Returns a live filtered navigable set. Navigation, polling, descending
+     * views and inclusive/exclusive ranges operate on visible elements while
+     * retaining the backing comparator and parent range restrictions. Polling
+     * removes the eligible endpoint only. The predicate and mutation rules of
+     * {@link #filteredCollection} apply.
+     *
+     * @param <E> element type
+     * @param source backing navigable set
+     * @param predicate visibility and admission predicate
+     * @return live navigable view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <E> NavigableSet<E> filteredNavigableSet(NavigableSet<E> source,
+            java.util.function.Predicate<? super E> predicate) {
+        return new M3CollectionViews.FilteredNavigableSet<>(source, predicate);
+    }
+
+    /**
+     * Returns a live filtered deque. Endpoint operations skip hidden elements;
+     * accepted insertions use the corresponding backing endpoint. Occurrence
+     * removals affect the first or last visible matching occurrence. The
+     * predicate, iterator and synchronization rules of {@link #filteredCollection}
+     * apply. As with the backing deque, null results from peek/poll can be
+     * ambiguous when null elements are permitted.
+     *
+     * @param <E> element type
+     * @param source backing deque
+     * @param predicate visibility and admission predicate
+     * @return live deque view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <E> Deque<E> filteredDeque(Deque<E> source,
+            java.util.function.Predicate<? super E> predicate) {
+        return new M3CollectionViews.FilteredDeque<>(source, predicate);
+    }
+
+    /**
+     * Returns a live filtered map. The predicate receives key and value; it
+     * must be consistent with the backing map's key equivalence, must not
+     * mutate the backing map, and must remain stable during an operation or
+     * traversal. Subsequent operations reevaluate visibility. The view adds
+     * no synchronization or atomicity for compound operations. Successful visible
+     * {@code get} and {@code getOrDefault} calls delegate to the backing getter,
+     * including access-order updates; reads of hidden mappings do not access them.
+     * Identity equality and hashing are retained for {@link IdentityHashMap} and
+     * its standard {@code Collections} unmodifiable, checked and synchronized
+     * wrappers. Other custom map implementations must obey the ordinary
+     * {@code Map} equality and hash-code contracts.
+     *
+     * <p>Puts and entry {@code setValue} reject ineligible results before
+     * backing writes. Bulk puts capture and validate input before writes.
+     * An eligible put can replace a hidden mapping; its returned previous
+     * value is null because that mapping was absent from the filtered view.
+     * Entry/key/value removals and clear preserve hidden mappings. Mutations
+     * require backing support. Entry/key/value iterator removal is unsupported;
+     * their explicit removal methods remain available.
+     *
+     * @param <K> key type
+     * @param <V> value type
+     * @param source backing map
+     * @param predicate visibility and admission predicate
+     * @return live map view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <K,V> Map<K,V> filteredMap(Map<K,V> source,
+            java.util.function.BiPredicate<? super K,? super V> predicate) {
+        return new M3CollectionViews.FilteredMap<>(source, predicate);
+    }
+
+    /**
+     * Returns a live filtered sorted map preserving its comparator, stored
+     * key representatives and backed range restrictions. The requirements and
+     * mutation behavior of {@link #filteredMap} apply.
+     *
+     * @param <K> key type
+     * @param <V> value type
+     * @param source backing sorted map
+     * @param predicate visibility and admission predicate
+     * @return live sorted map view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <K,V> SortedMap<K,V> filteredSortedMap(SortedMap<K,V> source,
+            java.util.function.BiPredicate<? super K,? super V> predicate) {
+        return new M3CollectionViews.FilteredSortedMap<>(source, predicate);
+    }
+
+    /**
+     * Returns a live filtered navigable map. Navigation and polling skip
+     * hidden entries. Navigation returns detached entries that reject
+     * {@code setValue}; entry-set traversal provides checked write-through
+     * entries. Descending maps and key sets remain backed views. The
+     * requirements of {@link #filteredMap} apply.
+     *
+     * @param <K> key type
+     * @param <V> value type
+     * @param source backing navigable map
+     * @param predicate visibility and admission predicate
+     * @return live navigable map view
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <K,V> NavigableMap<K,V> filteredNavigableMap(NavigableMap<K,V> source,
+            java.util.function.BiPredicate<? super K,? super V> predicate) {
+        return new M3CollectionViews.FilteredNavigableMap<>(source, predicate);
+    }
+
+    /**
+     * Returns an unmodifiable, live sorted list projection without rearranging
+     * the backing list. Each element observation, iterator, spliterator or
+     * array conversion prepares a stable ordering of the current source
+     * references. An iterator traverses its own captured observation. Comparator
+     * ties preserve backing encounter order. A null comparator uses natural
+     * ordering; the comparator must not modify the source during preparation.
+     *
+     * <p>The view retains only the backing list and comparator. Each observation
+     * costs O(n log n) comparisons and O(n) temporary reference/index storage;
+     * it makes no constant-time indexed-access claim. Subsequent observations
+     * reflect backing replacement and comparator-relevant element changes.
+     * Sublists retain their sorted rank interval; as for ordinary sublists,
+     * external structural backing changes make their subsequent behavior
+     * unspecified. Reversed views remain live and preserve reversed tie order.
+     *
+     * @param <E> element type
+     * @param source backing list
+     * @param comparator comparison order, or null for natural order
+     * @return unmodifiable live sorted projection
+     * @throws NullPointerException if source is null
+     * @since 21
+     */
+    public static <E> List<E> sortedList(List<? extends E> source, Comparator<? super E> comparator) {
+        return unmodifiableList(new M3CollectionViews.SortedList<>(source, comparator));
+    }
+
+    /**
+     * Captures an unmodifiable, encounter-ordered structural snapshot of the
+     * eligible elements. The predicate runs once per captured element before
+     * primitive mask compaction. Later backing and predicate changes do not
+     * change membership. Element objects themselves are not cloned. Hidden
+     * references are not retained by the returned snapshot. Slices and reversed
+     * views share its owned reference array and offsets.
+     *
+     * @param <E> element type
+     * @param source elements to capture
+     * @param predicate selection predicate
+     * @return unmodifiable detached snapshot
+     * @throws NullPointerException if either argument is null
+     * @since 21
+     */
+    public static <E> List<E> filteredSnapshot(Collection<? extends E> source,
+            java.util.function.Predicate<? super E> predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        return M3CollectionViews.snapshot(source, predicate, null, false);
+    }
+
+    /**
+     * Captures an unmodifiable stable sorted snapshot. Sorting moves primitive
+     * indices over one owned reference array and does not mutate source order.
+     * Ties retain source encounter order; a null comparator uses natural order.
+     * Later source changes do not change the captured references or ordering.
+     * Element objects themselves are not cloned.
+     *
+     * @param <E> element type
+     * @param source elements to capture
+     * @param comparator comparison order, or null for natural order
+     * @return unmodifiable detached sorted snapshot
+     * @throws NullPointerException if source is null
+     * @since 21
+     */
+    public static <E> List<E> sortedSnapshot(Collection<? extends E> source,
+            Comparator<? super E> comparator) {
+        return M3CollectionViews.snapshot(source, null, comparator, true);
+    }
+
+    /**
+     * Captures eligible references once, compacts their selection mask, then
+     * stably sorts their primitive index permutation. It combines the
+     * structural isolation of {@link #filteredSnapshot} and ordering of
+     * {@link #sortedSnapshot}; no live membership or payload clone is implied.
+     *
+     * @param <E> element type
+     * @param source elements to capture
+     * @param predicate selection predicate
+     * @param comparator comparison order, or null for natural order
+     * @return unmodifiable detached filtered and sorted snapshot
+     * @throws NullPointerException if source or predicate is null
+     * @since 21
+     */
+    public static <E> List<E> filteredSortedSnapshot(Collection<? extends E> source,
+            java.util.function.Predicate<? super E> predicate, Comparator<? super E> comparator) {
+        Objects.requireNonNull(predicate, "predicate");
+        return M3CollectionViews.snapshot(source, predicate, comparator, true);
+    }
+
+    /* Recognize only the JDK-owned identity domain; retain the original wrapper for operations. */
+    static boolean m3IdentityKeys(Map<?,?> source) {
+        for (;;) {
+            if (source instanceof UnmodifiableMap<?,?> wrapper) source = wrapper.m;
+            else if (source instanceof SynchronizedMap<?,?> wrapper) source = wrapper.m;
+            else if (source instanceof CheckedMap<?,?> wrapper) source = wrapper.m;
+            else return source instanceof IdentityHashMap<?,?>;
+        }
+    }
+
     // Algorithms
 
     /*

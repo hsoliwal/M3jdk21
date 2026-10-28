@@ -1,0 +1,14 @@
+{
+  "schema": "M3_TOKEN_RECOVERY_BASELINE_OBJECT_REFUSAL_V1",
+  "classification": "SOURCE_OBJECT_ADMISSION_FAILURE_BEFORE_RUNTIME_QUALIFICATION",
+  "git_blob": "874a056d6d1c24f4fbc0f564ba564519c9db71e7",
+  "reason": "Partial clone requested an immutable baseline promisor object; non-escalated proxy connection was unavailable.",
+  "initial_test_exit_code": 1,
+  "initial_reported_tests": 32,
+  "initial_errors": 26,
+  "subsequent_action": "Read-only baseline object hydration under authorized network execution, then rerun",
+  "subsequent_source_tests": 32,
+  "subsequent_result": "PASS",
+  "raw_refusal_log_sha256": "9e6f20fba11c8d64fe8ad1b7c55cd0900789d9c4f5414e42dcd92c15f07f8cc4",
+  "successful_log_sha256": "e4e6f453ff4b99c84868e778821c6cc45fa904fbb0f495d68f4971eb56ed7c83"
+}

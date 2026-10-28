@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "candidate_root": "/dev/shm/m3jdk21-work/mask-candidates",
+  "files": [
+    {
+      "target_path": "src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "candidate_path": "/dev/shm/m3jdk21-work/mask-candidates/src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "target_preimage": "ABSENT",
+      "postimage_sha256": "1337bb1e4c03c974bd4e335f7201c19186ab345548479ba29cebe639310c4017",
+      "bytes": 6028,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "intake_mode": "TARGET_OWNED_PORT"
+    },
+    {
+      "target_path": "src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "candidate_path": "/dev/shm/m3jdk21-work/mask-candidates/src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "target_preimage": "ABSENT",
+      "postimage_sha256": "7ecac17c362d2bce127b08c930b4beb263d06bd79439fcffcdcc5801ca7718a7",
+      "bytes": 6735,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "intake_mode": "TARGET_OWNED_PORT"
+    },
+    {
+      "target_path": "test/jdk/java/util/Collections/M3CollectionMasksTest.java",
+      "candidate_path": "/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections/M3CollectionMasksTest.java",
+      "target_preimage": "ABSENT",
+      "postimage_sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
+      "bytes": 12490,
+      "license": "GPL-2.0-only",
+      "intake_mode": "TARGET_OWNED_PORT"
+    },
+    {
+      "target_path": "test/jdk/java/util/Collections/M3CollectionMasksBenchmark.java",
+      "candidate_path": "/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections/M3CollectionMasksBenchmark.java",
+      "target_preimage": "ABSENT",
+      "postimage_sha256": "6e1a76800b296c96a9dd342998d76ae7c014389be394effc8a059302e6811e92",
+      "bytes": 7616,
+      "license": "GPL-2.0-only",
+      "intake_mode": "TARGET_OWNED_PORT"
+    },
+    {
+      "target_path": "test/jdk/java/util/Collections/M3CollectionViewsBenchmark.java",
+      "candidate_path": "/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections/M3CollectionViewsBenchmark.java",
+      "target_preimage": "ABSENT",
+      "postimage_sha256": "1ac002cd6862ffbdd1574ec7afc2270c0298e20bf47916ffe3a54e2d53bb742a",
+      "bytes": 11684,
+      "license": "GPL-2.0-only",
+      "intake_mode": "TARGET_OWNED_PORT"
+    }
+  ],
+  "recipe_application": "ROOT_CANONICAL_RECIPE_REQUIRED; no checkout targets edited by this subtask",
+  "runtime_owner": "java.util.M3CollectionMasks, package-private, consumed by integrated Collections snapshots",
+  "dispatch": "Java default; cached saved-startup property jdk.m3.collectionMasks.native=true enables target libjava path with missing-symbol fallback; explicit selectedNative/selected0 require native",
+  "reference_mode": "OpenJDK BitSet word/zero-count concepts and Synexia M3IndexMaskCompactor projection design; no Apache source expression copied into GPL targets",
+  "qualification": {
+    "java_compiler": "21.0.12.1+1",
+    "native_compiler": "cc -O3 -std=c11 -Wall -Wextra -Werror",
+    "differential_cases": 50266,
+    "consumer_cases_each": 12667,
+    "consumer_modes": [
+      "java-default",
+      "native-enabled-loaded",
+      "native-enabled-missing-symbol-fallback"
+    ],
+    "large_capacity_cases": 8,
+    "jni_checking": "-Xcheck:jni; required native symbol resolution observed only in native-enabled consumer",
+    "benchmark": "/dev/shm/m3jdk21-work/mask-candidates/qualification/benchmark-summary.json",
+    "process_memory": "separate /usr/bin/time -v records for Java/native probes; isolated large window test",
+    "pending": [
+      "full product libjava/JDK image build",
+      "actual jtreg invocation against product image",
+      "Windows/macOS native build and runtime",
+      "JMH multifork statistical performance qualification",
+      "Broader consumer workload and multifork performance qualification beyond the six recorded shapes"
+    ],
+    "collection_benchmark": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-summary.json",
+    "public_snapshot_consumer_additional_checks_per_mode": 134,
+    "combined_snapshot_receipt": "/dev/shm/m3jdk21-work/mask-candidates/qualification/combined-snapshot-test-receipt.json",
+    "independent_collection_correction_receipt": "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/correction-receipt.json",
+    "collection_algorithm": "Existing Arrays.sort on private captured visible Object[], rejected redundant index permutation owner",
+    "collection_receiver_sha256": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+    "collection_benchmark_previous": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-benchmark-summary.json",
+    "collection_benchmark_frozen": true,
+    "collection_benchmark_limit": "One bounded JVM per variant; six workloads, no statistical or default-native dispatch conclusion"
+  }
+}
