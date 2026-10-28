@@ -201,6 +201,32 @@ public final class M3IndexedArray<E> {
                 requiredMask, forbiddenMask, true);
     }
 
+    /**
+     * Live fused predicate + state-mask view over the original array owner.
+     * Selection stores only primitive physical slot indexes.
+     */
+    public List<E> filteredMaskedStates(Predicate<? super E> predicate,
+                                        int requiredMask, int forbiddenMask) {
+        Objects.requireNonNull(predicate, "predicate");
+        checkMasks(requiredMask, forbiddenMask);
+        return new M3IndexedView<>(this, predicate, null,
+                requiredMask, forbiddenMask, true);
+    }
+
+    /**
+     * Live fused predicate + state-mask + stable-sort view.
+     * Predicate/state selection is one pass; sorting refines only int[] slots.
+     */
+    public List<E> filteredMaskedSortedStates(Predicate<? super E> predicate,
+                                              int requiredMask, int forbiddenMask,
+                                              Comparator<? super E> comparator) {
+        Objects.requireNonNull(predicate, "predicate");
+        Objects.requireNonNull(comparator, "comparator");
+        checkMasks(requiredMask, forbiddenMask);
+        return new M3IndexedView<>(this, predicate, comparator,
+                requiredMask, forbiddenMask, true);
+    }
+
     private static void checkMasks(int requiredMask, int forbiddenMask) {
         if ((requiredMask & forbiddenMask) != 0) {
             throw new IllegalArgumentException("overlapping required/forbidden M3 state bits");
@@ -341,6 +367,7 @@ public final class M3IndexedArray<E> {
         if (count < 2) {
             return;
         }
+        final int bulkCopyThreshold = 16;
         int[] source = indexes;
         int[] target = new int[count];
         for (long width = 1; width < count; width *= 2) {
@@ -356,11 +383,19 @@ public final class M3IndexedArray<E> {
                     rejectReentrantMutation(initialVersion, stateAware);
                     target[output++] = ordering <= 0 ? source[l++] : source[r++];
                 }
-                // An unopposed tail needs no comparator calls or epoch checks.
-                if (l < leftEnd) {
+                // The qualified scalar/bulk split avoids tiny arraycopy overhead
+                // while retaining comparator and epoch behavior for contested pairs.
+                if (leftEnd - l >= bulkCopyThreshold) {
                     System.arraycopy(source, l, target, output, leftEnd - l);
-                } else if (r < rightEnd) {
+                } else if (rightEnd - r >= bulkCopyThreshold) {
                     System.arraycopy(source, r, target, output, rightEnd - r);
+                } else {
+                    while (l < leftEnd) {
+                        target[output++] = source[l++];
+                    }
+                    while (r < rightEnd) {
+                        target[output++] = source[r++];
+                    }
                 }
             }
             final int[] previousSource = source;
