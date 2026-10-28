@@ -8,6 +8,7 @@ on:
       - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
       - 'test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java'
       - 'test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java'
+      - 'test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java'
       - '.github/workflows/m3-jdk21-java-base-mask-matched-image-20261027.yml'
   workflow_dispatch:
 concurrency:
@@ -88,7 +89,7 @@ jobs:
           set -euo pipefail
           image=$(cat m3/build/logs/matched-image-java-path.txt)
           test -x "$image" || { echo "No verified matched-image Java" >&2; exit 1; }
-          make test TEST="test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java"
+          make test TEST="test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java"
       - name: Publish reproducible build and jtreg evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
