@@ -1,0 +1,31 @@
+name: M3 #1294 source-exact historical catalogue proof
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/algorithm-catalog/wrapper-convergence-20261018/**'
+      - '.github/workflows/m3-pr1294-historical-catalogue.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check-custody:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact Git blob, mode, length and JSON parsing
+        shell: bash
+        run: |
+          set -euo pipefail
+          file=m3/collections/algorithm-catalog/wrapper-convergence-20261018/SOURCE_CUSTODY_20261028.tsv
+          test "$(wc -l < "$file")" -eq 24
+          while IFS=$'\t' read -r path sha mode bytes; do
+            [[ "$path" == \#* ]] && continue
+            test -f "$path"
+            test "$(git hash-object "$path")" = "$sha"
+            test "$(git ls-files -s -- "$path" | awk '{print $1}')" = "$mode"
+            test "$(wc -c < "$path" | tr -d ' ')" = "$bytes"
+            case "$path" in
+              *.json) python3 -m json.tool "$path" >/dev/null ;;
+            esac
+          done < "$file"
+          git diff --check HEAD^1 HEAD
