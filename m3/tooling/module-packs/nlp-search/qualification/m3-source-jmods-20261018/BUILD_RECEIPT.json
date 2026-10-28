@@ -1,0 +1,42 @@
+{
+  "executed_probes": [
+    "ToolsProbe",
+    "M3SourceSearchChecks",
+    "SyntheticModelsProbe",
+    "M3ASTSearchChecks"
+  ],
+  "jdk_release_sha256": "2d6b79bc1885eb9a5466dd27056428a25034cba0c1a1bac88cc719966e688335",
+  "jmod_sha256": {
+    "jdk.m3.search.compiler.jmod": "412fb78684b4625ed2b38b7a68a63ad9f1dd5f389f97188add6e0aa4757ef125",
+    "jdk.m3.search.jmod": "df7c77b213d272ed4ef613af4190bd04310e13939b0d400a3446f56c62f805c4",
+    "org.apache.lucene.analysis.common.jmod": "ed18b875d9463b0131cb4807c7ae479d62f6e8f0ab5dfa56cc7e68f7574557d3",
+    "org.apache.lucene.analysis.opennlp.jmod": "6ede12fffb940a4be6a98d5275c515446d629765c9a628ea5ae80ea83be64610",
+    "org.apache.lucene.core.jmod": "f614e07e706732550feed53c8724fcc8f8e8db7c88c602428724a07e7c31f451",
+    "org.apache.lucene.queries.jmod": "36928fde8918294042c0739e59b432d7e7899bdae2d246ee56d46e656a7c6f87",
+    "org.apache.lucene.queryparser.jmod": "6d69b564cc1e400c47dfdac873d218fbe0be7ab3afcd233216086ad78004fc6b",
+    "org.apache.lucene.sandbox.jmod": "23e999ec10ea730cb89605dce82f061c81c24d50ddb60de6bbe55ff0d9d8fca7",
+    "org.apache.opennlp.tools.jmod": "a5719578b96276eee1c4ccfd4b4d70b9d97352d91b63048abb1756f4750eff28",
+    "org.slf4j.jmod": "86e0810aceca92c3a6fca7115765ae696a353c0b9259763f8ccd1cda0b2b1284",
+    "org.slf4j.simple.jmod": "ca3e8dd77821c1223a6dde2347e3b0e427d00ae7afe5aa18b1c7157324a5d7b5"
+  },
+  "library_modules": 9,
+  "m3ast_enabled": true,
+  "runtime_dependency_on_synexia": false,
+  "schema": "M3_NLP_SOURCE_JMOD_PROOF_1",
+  "scope": "selected source modules on the supplied JDK; no whole-M3JDK VM or performance claim",
+  "sdk_modules": 2,
+  "source_inputs": {
+    "compiler-src/jdk.m3.search.compiler/jdk/m3/search/compiler/M3ASTSearch.java": "5bc9430b952089f2de980dff48859023ee524cf9f46b6a8f74d53ef0d3b7c3ff",
+    "compiler-src/jdk.m3.search.compiler/module-info.java": "3d9824739a7f60839eedda318fb4cde2d009fffbdd8dc5adad10b0674102c290",
+    "fixtures/src/test/java/M3ASTSearchChecks.java": "03881ca7ad91608330bc7f4721c53945e9bfe28ed0f1b9e5d2a2c7a1c576c448",
+    "fixtures/src/test/java/M3SourceSearchChecks.java": "a72c8fff35fc04763be548d1af19bb107bb96f34646ac7ea7b39c5a20927016e",
+    "fixtures/src/test/java/OpenNlpCompositeIntegrationChecks.java": "040bb64d9ef124055c8a4f7283f150c42313ee8b5319afc94b409cddb9187c85",
+    "fixtures/src/test/java/SyntheticModelsProbe.java": "aa7adf521a7e7a3fae7d602dc0fd712d8080083a075221ae0dec7345d71d0a47",
+    "fixtures/src/test/java/ToolsProbe.java": "715cb6fd86acf622ce69ae2fbbe3392b1e37ab54eb3f2018fb3f2f7d4d844e73",
+    "src/jdk.m3.search/jdk/m3/search/M3File.java": "8aac8a2357fd7c4d742f723b89ad9dfcac1f63a2af52062ae3a07312664f808a",
+    "src/jdk.m3.search/jdk/m3/search/M3FileSourceFacts.java": "90f1ae0e2dcbcfe1adaeeb8da719faffa108e3e126e51612e6a76b3957737bf6",
+    "src/jdk.m3.search/jdk/m3/search/M3Search.java": "74e4829f2b307eb556a33fa17d8143e09ca172481afc075d272b9128bfc074a7",
+    "src/jdk.m3.search/module-info.java": "5cf34f802dc4006b744789713722f37ebd221e98f66f0f29184baf4d5b4dbe65",
+    "src/org.apache.opennlp.tools/module-info.java": "8f6daaf624f5c6a5daaef081702d0df126a5f6338a63e012a4a80471c8aeb62a"
+  }
+}
