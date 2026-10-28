@@ -72,3 +72,30 @@ checksum check. Replacement run 40521048052 was queued at last inspection.
 
 The existing host-JDK checks have passed; the full M3JDK21 source image,
 actual product-image jtreg, GC and performance work **have not**.
+
+
+## Bounded G1/SerialGC reference stress (2026-10-28)
+
+Added `test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java`
+with Git blob `46eef59604fc52dae7dea11de615dffc5e90d943`.
+It exercises the same Java `ArrayList` and `Vector` mask-removal contracts
+across the 511/512/513 dispatch boundary, 1024/2049/4096 element windows,
+and no-op/full/alternating/range/sparse deletion patterns. Each case preserves
+and checks object **reference identity**, stable survivor position, payload
+integrity, invocation count, and iterator fail-fast behavior before and after
+explicit GC. The test executes twice, under G1 and Serial GC.
+
+The exact committed test was independently compiled with
+`javac --release 21 -Xlint:all -Werror` and executed with
+`-XX:+UseG1GC -Xmx128m` and `-XX:+UseSerialGC -Xmx128m` on
+stock OpenJDK 21.0.12.1. Both runs passed **399,890 checks** each.
+These are stock-JDK **reference** results, not yet M3JDK21 product-image
+results.
+
+The full M3JDK21 fastdebug GitHub Actions workflow has been expanded to run
+this new jtreg test under the product image alongside the previously passing
+two cases. New source-built [run #40620188480](https://github.com/hsoliwal/M3jdk21/actions/runs/40620188480)
+was queued at the time of this receipt. No current-head product GC/jtreg
+result is claimed until the run finishes. These checks do not constitute
+exhaustive remembered-set/card-barrier testing, collector stress suites,
+or allocation/performance evidence.
