@@ -1,0 +1,56 @@
+{
+  "schema": "M3_EXACT_TASK_INPUTS_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "recipe": "com.synexia.m3.GvasLookupIndex20261018",
+  "files": [
+    {
+      "path": ".github/workflows/m3-gvas-literal-precompute.yml",
+      "before": "fd4f45b223492bec7258118ed57039261916d42b01df8679f8b3652111b73b85",
+      "after": "3ff5512f94b6300731c3056a2943cf2edbb8626718258d805d55612867d1a95f",
+      "bytes": 1280
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+      "before": "f3ed3fd91d7e60220ba22e717f6fec41dc7759e5a221ef1dba65251d0028f8d7",
+      "after": "ac3e0cab92111e7b1af138b1f246a56083e81528dd1c951a21c2bb07d7778073",
+      "bytes": 10470
+    },
+    {
+      "path": "m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java",
+      "before": "ABSENT",
+      "after": "6e387bbd278c1cfa8891e9b19f235c22e478e9965c71f1b028f7ca9668106dd3",
+      "bytes": 7226
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-gvas-lookup-index-20261018.json",
+      "before": "ABSENT",
+      "after": "6bdfc479597ef2bcaabc659b4b749d82cdf577aa68c412b4343d426bb909d3e8",
+      "bytes": 1568
+    },
+    {
+      "path": "m3/qualification/string-index-reverse-20261018/gvas/CONTRACT.md",
+      "before": "ABSENT",
+      "after": "bf75e56f736318b635d75812e6debd043d579e022959685c6d2ed6766a6b544c",
+      "bytes": 4211
+    },
+    {
+      "path": "m3/tests/test_gvas_literal_process_identity.py",
+      "before": "ABSENT",
+      "after": "51c9d4f98125522c2cc50a0af2cad1e2b48c9d47743626f6970dd0f975b3e14d",
+      "bytes": 11193
+    },
+    {
+      "path": "m3/verify-gvas-literal-precompute.py",
+      "before": "3f68054a4bb60c573af6d0c640fe44ff5ec9630527b9e6561ee521bd18574982",
+      "after": "e940ff340cc72582e0433c012bd39837f483a9d0d1561ae01dceb449c98e64c5",
+      "bytes": 10219
+    },
+    {
+      "path": "m3/verify-gvas-lookup-index.py",
+      "before": "ABSENT",
+      "after": "338106efc7721b170c64ffcb2d37c7c91c3942d17a4c4a269dc6f70a5c91f99b",
+      "bytes": 1924
+    }
+  ]
+}
