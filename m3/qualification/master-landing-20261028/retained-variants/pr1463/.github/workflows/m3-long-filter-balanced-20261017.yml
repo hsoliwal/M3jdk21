@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 balanced primitive filtered/sorted views Java21
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongPredicates.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java'
+      - 'm3/collections/qualification/long-predicate-balance-20261017/**'
+      - '.github/workflows/m3-long-filter-balanced-20261017.yml'
+permissions:
+  contents: read
+
+jobs:
+  primitive-view-parity:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The test compiles only these original owner paths. Do not checkout
+          # unrelated deep recipe-custody paths that exceed Windows path limits.
+          sparse-checkout: |
+            m3/collections/src/main/java/com/m3/collections
+            m3/collections/src/test/java/com/m3/collections
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile only exact primitive collection owners with fatal warnings
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/collections/src/main/java/com/m3/collections
+          test=m3/collections/src/test/java/com/m3/collections
+          mkdir -p m3/collections/target/filter-balance
+          javac --release 21 -proc:none -Xlint:all -Werror             -d m3/collections/target/filter-balance             "$root/M3LongIterator.java" "$root/M3LongCollection.java"             "$root/M3LongSortedSet.java" "$root/M3LongFilteredView.java"             "$root/M3LongSortedViews.java" "$root/M3LongPredicates.java"             "$test/M3LongDeepFilterSelfTest.java"
+      - name: Deep predicate and sorted live-wrapper oracle
+        shell: bash
+        run: >
+          java -Xss256k -cp m3/collections/target/filter-balance
+          com.m3.collections.M3LongDeepFilterSelfTest
+      - name: Verify interpreter without JIT masking stack hazards
+        shell: bash
+        run: >
+          java -Xint -Xss256k -cp m3/collections/target/filter-balance
+          com.m3.collections.M3LongDeepFilterSelfTest

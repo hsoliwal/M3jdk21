@@ -1,0 +1,34 @@
+[OUTPUT] 
+Internal ctest changing into directory: /tmp/m3fs-native-work/build
+
+[HANDLER_OUTPUT] 
+Test project /tmp/m3fs-native-work/build
+
+      Start 12: m3fs-checked-io-test
+      Start  5: m3fs-hotpath-test
+      Start  3: m3fs-snapshot-test
+      Start  2: m3fs-indexed-test
+ 1/12 Test  #3: m3fs-snapshot-test ...............   Passed    0.44 sec
+      Start  6: m3fs-scrub-test
+ 2/12 Test  #2: m3fs-indexed-test ................   Passed    0.59 sec
+      Start  1: m3fs-core-test
+ 3/12 Test  #6: m3fs-scrub-test ..................   Passed    0.16 sec
+      Start  8: m3fs-sparse-test
+ 4/12 Test  #1: m3fs-core-test ...................   Passed    0.19 sec
+      Start  4: m3fs-snapshot-loss-test
+ 5/12 Test  #8: m3fs-sparse-test .................   Passed    0.27 sec
+      Start 10: m3fs-replace-test
+ 6/12 Test  #4: m3fs-snapshot-loss-test ..........   Passed    0.17 sec
+      Start 11: m3fs-inode-identity-test
+ 7/12 Test #10: m3fs-replace-test ................   Passed    0.17 sec
+      Start  7: m3fs-semantic-test
+ 8/12 Test #11: m3fs-inode-identity-test .........   Passed    0.12 sec
+      Start  9: m3fs-metadata-test
+ 9/12 Test  #5: m3fs-hotpath-test ................   Passed    1.12 sec
+10/12 Test  #9: m3fs-metadata-test ...............   Passed    0.10 sec
+11/12 Test  #7: m3fs-semantic-test ...............   Passed    0.15 sec
+12/12 Test #12: m3fs-checked-io-test .............   Passed    4.02 sec
+
+100% tests passed, 0 tests failed out of 12
+
+Total Test time (real) =   4.02 sec

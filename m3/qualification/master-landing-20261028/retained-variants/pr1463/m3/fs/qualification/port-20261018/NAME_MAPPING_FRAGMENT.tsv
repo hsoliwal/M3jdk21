@@ -1,0 +1,10 @@
+source_owner	target_owner	disposition
+com.synexia.indexstring.fs.MIndexFileSystem	com.m3.fs.M3FS	M3JDK21_RUNTIME_OWNER
+com.synexia.indexstring.fs.MIndexFsNative	com.m3.fs.M3FsNative	JNI_OWNER_AND_SYMBOL_ADAPTATION
+com.synexia.indexstring.fs.MIndexSnapshotStore	com.m3.fs.M3SnapshotStore	DURABLE_SNAPSHOT_OWNER
+com.synexia.indexstring.fs.MIndexFsMIndexImage	com.m3.fs.M3FsIndexImage	PRESERVE_MINDEX_IMAGE_FORMAT
+com.synexia.indexstring.fs.MIndexFsFeature	com.m3.fs.M3FsFeature	ADDITIVE_CAPABILITY_SUPERSET
+com.synexia.indexstring.fs.M3*	com.m3.fs.M3*	SOURCE_ADAPTATION_WITH_ARRAY_METADATA
+com.synexia.indexstring.file.*	com.m3.fs.M3File*	PREPARED_IMAGE_SOURCE_FACTS_AND_RANGE_ADAPTATION
+mindexfs_* / native MIndexFS JNI symbols	m3fs_* / com_m3_fs JNI symbols	ABI1_SCHEMA1_AND_SERIALIZED_MAGIC_RETAINED
+Eclipse org.eclipse.core.resources / org.eclipse.core.filesystem	com.m3.eclipse.filesystem	EFS_CONSUMER_NO_CORE_FORK

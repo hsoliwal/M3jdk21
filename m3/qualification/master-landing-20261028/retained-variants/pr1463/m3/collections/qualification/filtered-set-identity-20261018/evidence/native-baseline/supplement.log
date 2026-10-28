@@ -1,0 +1,7 @@
+09-capability-probe-compile: PASS
+10-actual-native-capabilities: PASS
+rangeAbiNative=1
+positionsAbiNative=1
+PASS native owner availability=8, actual ABI version checks=2
+11-path-mask-window-native: PASS
+M3_PATH_MASK_WINDOW_PASS checks=22462 backend=NATIVE_REQUIRED nativeAvailable=true
