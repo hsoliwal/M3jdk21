@@ -49,6 +49,9 @@ public final class M3CollectionMaskCompactor {
         long statistics = maskStatistics(deleted, length);
         int runs = (int) (statistics >>> 32);
         int removed = (int) statistics;
+        // A complete run inventory also identifies no-op masks without writing
+        // the same references back or introducing unnecessary GC card marks.
+        if (removed == 0) return to;
         if (runs <= Math.max(4, length >>> 7)) {
             return compactRuns(values, from, length, deleted);
         }
@@ -62,7 +65,10 @@ public final class M3CollectionMaskCompactor {
         int write = from;
         for (int read = 0; read < length; read++) {
             if ((deleted[read >>> 6] & (1L << (read & 63))) == 0) {
-                values[write++] = values[from + read];
+                // The untouched prefix is already in place; preserve every
+                // reference without writing it again.
+                if (write != from + read) values[write] = values[from + read];
+                write++;
             }
         }
         return write;
