@@ -1,0 +1,6 @@
+{
+  "expected_observations_sha256": "a6d0de0b5d74beb8cbefd5c99be759882c36ad85841f9d52cf4e5ba66932d84b",
+  "original_stdout_sha256": "61a36c63a74fbbc892ad0a8cee2a8b93af8f7361a9812d277522cd3b46105aaa",
+  "status": "FROZEN_ORACLE_BEFORE_TARGET_EXECUTION",
+  "fixture_sha256": "bb780f79bf22bafb48495014854fed92e9bf75227e756922451ae473bdcfddfa"
+}

@@ -1,0 +1,4 @@
+capability	donor	identity	classification	license	selected_surface	gap
+all-case-empty-default-diagnostic	EmptyTreeDefaultsProof.java	Original204 fixture frozen by qualification-defaults-v1/FROZEN_ORACLE_V1.json	ADAPT	Existing project Apache2 fixture	Exact scenarios/outcomes/callback/root-state and reference digest unchanged	Accumulate mismatches instead of first throw; print FAIL and exit1 when any mismatch
+public-reference	java.util.TreeMap	JDK21 runtime; no JDK source copied	DIRECT_IMPORT	Runtime API use, not donor source relicensing	Same public reference behavior as canonical204 fixture	Run diagnostic oracle first and fsync sealed digest before three pinned target classpaths
+bounded-process	Existing M3 owned run.py	815464a4b2b759a3b7d5e47ca82d6ed6d09fa5eddacb0e24fcf5ee6646796679	DIRECT_IMPORT	Existing qualified helper	stdin-gated WindowsJob, bounded logs/time/capacity	131072B task, native S, full shared gate15s; no new process architecture
