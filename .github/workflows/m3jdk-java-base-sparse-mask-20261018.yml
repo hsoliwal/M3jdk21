@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 java.base sparse mask refinement (canonical recipe)
+on:
+  pull_request:
+    paths:
+      - "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java"
+      - "m3/qualification/java-base-sparse-mask-20261018/**"
+      - ".github/workflows/m3jdk-java-base-sparse-mask-20261018.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  jdk-direct-sparse-mask:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Run actual Maven and OpenRewrite source-sealed recipe tests
+        run: mvn -B -ntp -f m3/qualification/java-base-sparse-mask-20261018/recipe/pom.xml test
+      - name: Verify exact original and emitted JDK files
+        run: python3 m3/qualification/java-base-sparse-mask-20261018/verify.py
+      - name: Compile product java.base classes together with incumbent ArrayList/Vector
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE="$RUNNER_TEMP/m3-jdk-source"
+          CLASSES="$RUNNER_TEMP/m3-jdk-patch"
+          mkdir -p "$SOURCE/java/util" "$SOURCE/jdk/internal/mindex" "$CLASSES"
+          cp src/java.base/share/classes/java/util/ArrayList.java "$SOURCE/java/util/ArrayList.java"
+          cp src/java.base/share/classes/java/util/Vector.java "$SOURCE/java/util/Vector.java"
+          cp src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java "$SOURCE/jdk/internal/mindex/M3CollectionMaskCompactor.java"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            --patch-module java.base="$SOURCE" -d "$CLASSES" \
+            "$SOURCE/jdk/internal/mindex/M3CollectionMaskCompactor.java" \
+            "$SOURCE/java/util/ArrayList.java" "$SOURCE/java/util/Vector.java"
+          echo "M3_PATCH_CLASSES=$CLASSES" >> "$GITHUB_ENV"
+      - name: Compile and execute inherited JDK ArrayList Vector identity and callback tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          TESTS="$RUNNER_TEMP/m3-jdk-tests"
+          mkdir -p "$TESTS"
+          javac -proc:none -Xlint:all,-module -Werror \
+            --patch-module java.base="$M3_PATCH_CLASSES" \
+            --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+            -d "$TESTS" \
+            test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java \
+            test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java
+          java -ea -Xcheck:jni --patch-module java.base="$M3_PATCH_CLASSES" \
+            --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+            -cp "$TESTS" M3MaskCompactionDifferential
+          java -ea -Xcheck:jni --patch-module java.base="$M3_PATCH_CLASSES" \
+            -cp "$TESTS" M3JdkRemoveIfMaskContracts
+      - name: Compare original public API signatures
+        run: |
+          javap -public "$M3_PATCH_CLASSES/java/util/ArrayList.class" > "$RUNNER_TEMP/after-list"
+          javap -public java.util.ArrayList > "$RUNNER_TEMP/before-list"
+          diff -u "$RUNNER_TEMP/before-list" "$RUNNER_TEMP/after-list"
+          javap -public "$M3_PATCH_CLASSES/java/util/Vector.class" > "$RUNNER_TEMP/after-vector"
+          javap -public java.util.Vector > "$RUNNER_TEMP/before-vector"
+          diff -u "$RUNNER_TEMP/before-vector" "$RUNNER_TEMP/after-vector"
