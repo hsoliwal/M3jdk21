@@ -9,6 +9,7 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportKernelContract.java'
       - 'm3/collections/viewport-proof/**'
       - '.github/workflows/m3-mask-viewport-jni.yml'
+      - '.github/workflows/m3-viewport-family-composed.yml'
   workflow_dispatch:
 jobs:
   java-jni-parity:
