@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original javac signal graph quality binding
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3SourceSignalQualityFactory.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SourceSignalQualityFactorySelfTest.java'
+      - 'm3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java'
+      - '.github/workflows/m3-source-signal-recorded-graph-20261024.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-original-javac-image-binding:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original source image, typed quality, and recorded graph owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-recorded-binding"
+          mkdir -p "$out/classes" "$out/plugin/META-INF/services" "$out/fixture-classes" "$out/demo"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java \
+            m3/collections/src/main/java/com/m3/collections/M3SourceSignalQualityFactory.java \
+            m3/collections/src/test/java/com/m3/collections/M3SourceSignalQualityFactorySelfTest.java
+          java -cp "$out/classes" com.m3.collections.M3SourceSignalQualityFactorySelfTest
+          java -Xint -cp "$out/classes" com.m3.collections.M3SourceSignalQualityFactorySelfTest
+      - name: Execute original javac M3SourceSignals plugin and parse real S/T/E evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-recorded-binding"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out/plugin" \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java \
+            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java
+          cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
+            "$out/plugin/META-INF/services/com.sun.source.util.Plugin"
+          cat > "$out/demo/Example.java" <<'JAVA'
+          package demo;
+          class Example {
+              static void run() { new Target().run(); }
+          }
+          class Target { void run() { } }
+          JAVA
+          javac --release 21 -proc:none -processorpath "$out/plugin" \
+            "-Xplugin:M3SourceSignals out=$out/facts.tsv include=all" \
+            -d "$out/fixture-classes" "$out/demo/Example.java"
+          test -s "$out/facts.tsv"
+          java -cp "$out/classes" com.m3.collections.M3SourceSignalQualityFactorySelfTest "$out/facts.tsv"
+          java -Xint -cp "$out/classes" com.m3.collections.M3SourceSignalQualityFactorySelfTest "$out/facts.tsv"
+  original-owning-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Compile original source-vendored JUnit artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
+      - name: Build original array dependency, retaining owning collections tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3SourceSignalQualityFactoryTest test

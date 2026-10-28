@@ -130,6 +130,28 @@ public final class M3SignalColumns {
         return column(column).present(row);
     }
 
+    /** Exact package-private primitive coordinates; keep original owned payload arrays. */
+    private Column exactCoordinate(int dimension, int row, Kind required) {
+        Column lane = column(dimension);
+        Objects.checkIndex(row, rows);
+        if (lane.kind != required || !lane.present(row)) {
+            throw new IllegalArgumentException("wrong signal kind or missing coordinate");
+        }
+        return lane;
+    }
+
+    int exactIntAt(int dimension, int row) {
+        return exactCoordinate(dimension, row, Kind.INTEGER).integers[row];
+    }
+
+    long exactLongAt(int dimension, int row) {
+        return exactCoordinate(dimension, row, Kind.LONG).longs[row];
+    }
+
+    double exactDoubleAt(int dimension, int row) {
+        return exactCoordinate(dimension, row, Kind.DOUBLE).doubles[row];
+    }
+
     /**
      * Source-validated numeric coordinate for the *existing* progressive L1 engine.
      * Reject missing/nonfinite facts and long values whose conversion to double could

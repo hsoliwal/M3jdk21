@@ -44,6 +44,50 @@ public final class M3SignalTopK {
     }
 
     /**
+     * Rank one exact bitmap produced by the existing primitive Boolean signal query.
+     * Bits refer to physical rows, not mutable objects, hashes or heuristic identity.
+     * The caller owns the input mask, which must not change during this invocation.
+     * Signed full-width int/long, Double.compare and missing-last precedence remain
+     * authoritative in the original M3SignalColumns.orderAt implementation.
+     *
+     * <p>Validate the entire bitmap before allocating a bounded primitive heap.
+     * Invalid padding bits are rejected rather than silently admitting phantom rows.
+     * Ties preserve ascending original physical row (bitmap encounter) order.</p>
+     */
+    public int[] topKByMask(long[] membership, int k) {
+        Objects.requireNonNull(membership, "membership");
+        int physicalRows = signals.rowCount();
+        int words = (int) (((long) physicalRows + 63L) >>> 6);
+        if (k < 0 || membership.length != words) {
+            throw new IllegalArgumentException("invalid result limit or physical mask width");
+        }
+        int tail = physicalRows & 63;
+        if (tail != 0 && (membership[words - 1] >>> tail) != 0L) {
+            throw new IllegalArgumentException("bits outside original physical row count");
+        }
+        int selected = 0;
+        for (long bits : membership) selected = Math.addExact(selected, Long.bitCount(bits));
+        int capacity = Math.min(k, selected);
+        if (capacity == 0) return new int[0];
+        // Two primitive int[] heap lanes; refuse pressure instead of silent OOME.
+        long budget = Math.min(64L * 1024 * 1024,
+                Runtime.getRuntime().maxMemory() / 16L);
+        if ((long) capacity * (2L * Integer.BYTES) > budget) {
+            throw new IllegalStateException("signal Top-K heap exceeds memory budget");
+        }
+        Heap heap = new Heap(capacity);
+        int ordinal = 0;
+        for (int word = 0; word < membership.length; word++) {
+            long bits = membership[word];
+            while (bits != 0L) {
+                heap.admit((word << 6) + Long.numberOfTrailingZeros(bits), ordinal++);
+                bits &= bits - 1L;
+            }
+        }
+        return heap.sorted();
+    }
+
+    /**
      * At most k best eligible source rows, in physical encounter order for ties.
      * Unlike selectedByState + full sort, does not allocate an n-length selected row lane.
      */
