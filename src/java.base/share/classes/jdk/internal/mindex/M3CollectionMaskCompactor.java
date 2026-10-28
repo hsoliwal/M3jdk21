@@ -42,22 +42,33 @@ public final class M3CollectionMaskCompactor {
         if (length == 0) return from;
         int words = ((length - 1) >>> 6) + 1;
         if (deleted.length < words) throw new IllegalArgumentException("mask too short");
-        // A complete run inventory also identifies no-op masks without writing
-        // the same references back or introducing unnecessary GC card marks.
-        int runs = length < 512 ? -1 : removalRuns(deleted, length);
-        if (runs == 0) return to;
-        if (length < 512 || runs > Math.max(4, length >>> 7)) {
-            int write = from;
-            for (int read = 0; read < length; read++) {
-                if ((deleted[read >>> 6] & (1L << (read & 63))) == 0) {
-                    // The untouched prefix is already in place; preserve every
-                    // reference without writing it again.
-                    if (write != from + read) values[write] = values[from + read];
-                    write++;
-                }
-            }
-            return write;
+        // Preserve the old hot scalar and long-run paths.  Word-based copying
+        // is admitted only for sparse (or nearly all) deletion states, after the
+        // callback phase has already prepared a complete immutable mask.
+        if (length < 512) return compactScalar(values, from, length, deleted);
+        long statistics = maskStatistics(deleted, length);
+        int runs = (int) (statistics >>> 32);
+        int removed = (int) statistics;
+        if (runs <= Math.max(4, length >>> 7)) {
+            return compactRuns(values, from, length, deleted);
         }
+        if (removed <= length / 8 || removed >= length - length / 64) {
+            return compactWords(values, from, length, deleted);
+        }
+        return compactScalar(values, from, length, deleted);
+    }
+
+    private static int compactScalar(Object[] values, int from, int length, long[] deleted) {
+        int write = from;
+        for (int read = 0; read < length; read++) {
+            if ((deleted[read >>> 6] & (1L << (read & 63))) == 0) {
+                values[write++] = values[from + read];
+            }
+        }
+        return write;
+    }
+
+    private static int compactRuns(Object[] values, int from, int length, long[] deleted) {
         int read = 0;
         int write = from;
         while (read < length) {
@@ -74,11 +85,52 @@ public final class M3CollectionMaskCompactor {
         return write;
     }
 
-    /** Count runs across word boundaries only until the scalar dispatch is decided. */
-    private static int removalRuns(long[] deleted, int length) {
+    /** 64-bit rejection-word compaction; no extra Java payload array or JNI calls. */
+    private static int compactWords(Object[] values, int from, int length, long[] deleted) {
+        int write = from;
+        for (int base = 0; base < length; ) {
+            int chunk = Math.min(64, length - base);
+            long full = -1L >>> (64 - chunk);
+            long mask = deleted[base >>> 6] & full;
+            int start = from + base;
+            if (mask == 0L) {
+                System.arraycopy(values, start, values, write, chunk);
+                write += chunk;
+            } else if (mask != full && Long.bitCount(mask) <= 4) {
+                int consumed = 0;
+                do {
+                    int lost = Long.numberOfTrailingZeros(mask);
+                    int run = lost - consumed;
+                    if (run != 0) {
+                        System.arraycopy(values, start + consumed, values, write, run);
+                        write += run;
+                    }
+                    consumed = lost + 1;
+                    mask &= mask - 1;
+                } while (mask != 0L);
+                int remaining = chunk - consumed;
+                if (remaining != 0) {
+                    System.arraycopy(values, start + consumed, values, write, remaining);
+                    write += remaining;
+                }
+            } else {
+                for (int bit = 0; bit < chunk; bit++) {
+                    if ((mask & (1L << bit)) == 0L) {
+                        values[write++] = values[start + bit];
+                    }
+                }
+            }
+            base += chunk;
+        }
+        return write;
+    }
+
+    /** Count deletion runs, including ones crossing the 64-bit boundary. */
+    private static long maskStatistics(long[] deleted, int length) {
         int words = ((length - 1) >>> 6) + 1;
         int count = 0;
         int threshold = Math.max(4, length >>> 7);
+        int removed = 0;
         long preceding = 0L;
         for (int word = 0; word < words; word++) {
             long bits = deleted[word];
@@ -87,9 +139,10 @@ public final class M3CollectionMaskCompactor {
             count += Long.bitCount(bits & ~((bits << 1) | preceding));
             // This count is used only for the threshold decision in compact().
             if (count > threshold) return count;
+            removed += Long.bitCount(bits);
             preceding = bits >>> 63;
         }
-        return count;
+        return ((long) count << 32) | Integer.toUnsignedLong(removed);
     }
 
     /** Find next removed/retained bit, skipping complete mask words. */
