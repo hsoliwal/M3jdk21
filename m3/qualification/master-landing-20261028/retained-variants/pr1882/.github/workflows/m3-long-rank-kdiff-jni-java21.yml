@@ -1,0 +1,92 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original JNI K-difference pairs Java 21
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankKDiffContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankKDiffTest.java'
+      - '.github/workflows/m3-long-rank-kdiff-jni-java21.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  original-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact source template blobs and checked-out PR head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '3915c02d735d128b74f5857edc81864fa05048bc'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = 'b1992bbe965c2f42500b02b5bb687dbb7153638b'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '32753502cfa1e9f7e5e4a4833b22e495fe679f79'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankKDiffContract.java)" = 'd8e0ea51792e73ce6d83294cb67e66c3715a48a2'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankKDiffTest.java)" = '7fbf910912740e6ecfe7e4e403a9db4b118475f7'
+      - name: Strict compile of original rank batch owner and standalone contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3rank-kdiff/classes" "$RUNNER_TEMP/m3rank-kdiff/headers" "$RUNNER_TEMP/m3rank-kdiff/native"
+          javac --release 21 -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/m3rank-kdiff/headers" \
+            -d "$RUNNER_TEMP/m3rank-kdiff/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankKDiffContract.java
+      - name: Build actual C17 JNI library with fatal undefined behavior sanitizer
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -shared m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/m3rank-kdiff/native/libm3rankbatch.so"
+          nm -D "$RUNNER_TEMP/m3rank-kdiff/native/libm3rankbatch.so" \
+            > "$RUNNER_TEMP/m3rank-kdiff/symbols.txt"
+          grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_distinctDifferencePairCount0' \
+            "$RUNNER_TEMP/m3rank-kdiff/symbols.txt"
+      - name: Execute Java reference, JNI and interpreted JNI with strict requirements
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp="$RUNNER_TEMP/m3rank-kdiff/classes"
+          native="$RUNNER_TEMP/m3rank-kdiff/native"
+          java -cp "$cp" com.m3.collections.M3LongRankKDiffContract \
+            | tee "$RUNNER_TEMP/m3rank-kdiff/java.txt"
+          java -Xint -cp "$cp" com.m3.collections.M3LongRankKDiffContract \
+            | tee "$RUNNER_TEMP/m3rank-kdiff/java-interpreter.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true -Djava.library.path="$native" \
+            -cp "$cp" com.m3.collections.M3LongRankKDiffContract --native-required \
+            | tee "$RUNNER_TEMP/m3rank-kdiff/jni.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true -Djava.library.path="$native" \
+            -cp "$cp" com.m3.collections.M3LongRankKDiffContract --native-required \
+            | tee "$RUNNER_TEMP/m3rank-kdiff/jni-interpreter.txt"
+          grep -Eq '^PASS M3_LONG_RANK_KDIFF checks=[0-9]+ native=false$' "$RUNNER_TEMP/m3rank-kdiff/java.txt"
+          grep -Eq '^PASS M3_LONG_RANK_KDIFF checks=[0-9]+ native=true$' "$RUNNER_TEMP/m3rank-kdiff/jni.txt"
+          cmp "$RUNNER_TEMP/m3rank-kdiff/java.txt" "$RUNNER_TEMP/m3rank-kdiff/java-interpreter.txt"
+          cmp "$RUNNER_TEMP/m3rank-kdiff/jni.txt" "$RUNNER_TEMP/m3rank-kdiff/jni-interpreter.txt"
+      - name: Preserve executed original Java and C JNI receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-kdiff-jni-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3rank-kdiff/*.txt
+          if-no-files-found: warn
+          retention-days: 14

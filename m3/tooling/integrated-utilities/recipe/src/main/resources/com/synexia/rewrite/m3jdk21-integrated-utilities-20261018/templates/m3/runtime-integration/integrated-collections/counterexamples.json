@@ -1,0 +1,61 @@
+{
+  "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "recipe": "com.synexia.rewrite.M3IntegratedUtilitiesRecipe",
+  "status": "COUNTEREXAMPLES_RETAINED_AS_POSITIVE_CONTRACT_REGRESSIONS",
+  "entries": [
+    {
+      "category": "reverse-list-offsets",
+      "rejected_atom": "filtering the already reversed physical backing",
+      "fixture": "listIterators: backing [1,3,5,16,7], view.reversed().addFirst(18)",
+      "observed": "expected [1,3,5,16,7,18], actual [1,3,5,16,18,7]",
+      "replacement": "Reuse existing java.util.ReverseOrderListView.of(filteredList,true)",
+      "regression": "M3CollectionViewsTest.listIterators"
+    },
+    {
+      "category": "bounded-sorted-navigation",
+      "rejected_atom": "headSet/tailSet or headMap/tailMap construction from arbitrary navigation query",
+      "fixture": "parent [2,5), lower(99), ceiling(-1), contains(-1)",
+      "observed": "range constructors throw IllegalArgumentException for legal outside-range navigation/membership queries",
+      "replacement": "Backing contains before representative lookup; set comparator traversal; native backing-map Entry navigation chain",
+      "regression": "M3CollectionViewsTest.boundedNavigation"
+    },
+    {
+      "category": "identity-equivalence",
+      "rejected_atom": "AbstractMap equals and AbstractSet key hash defaults over identity entries",
+      "fixture": "same key reference, distinct equal String values; identical identity key sets",
+      "observed": "asymmetric map equals; equal key sets with unequal hashes",
+      "replacement": "Preserve exact IdentityHashMap domain through owning JDK wrappers; retain original wrappers for all operations",
+      "regression": "M3CollectionViewsTest.maps"
+    },
+    {
+      "category": "access-order-reads",
+      "rejected_atom": "getNode/entry.getValue as public filtered get result",
+      "fixture": "access-order LinkedHashMap keys a,b; get(a)",
+      "observed": "backing encounter order remained a,b",
+      "replacement": "After visibility check, delegate successful read to backing get; contains and hidden reads remain nonaccessing",
+      "regression": "M3CollectionViewsTest.maps"
+    },
+    {
+      "category": "set-admission",
+      "rejected_atom": "validate only incoming candidate before source Set.add",
+      "fixture": "case-insensitive set contains hidden bravo; uppercase-only filter; add BRAVO",
+      "observed": "returns false while added equivalent remains absent from view",
+      "replacement": "Reject hidden existing representative before individual/bulk set writes",
+      "regression": "M3CollectionViewsTest.sets"
+    }
+  ],
+  "oracle_fixture_corrections": [
+    {
+      "issue": "List.of(4).contains(null) intentionally throws NullPointerException",
+      "correction": "Use null-tolerant Arrays.asList(4) for nullable retainAll fixture; preserve optional null-query exception contract."
+    },
+    {
+      "issue": "Descending TreeSet spliterator does not advertise SORTED",
+      "correction": "Assert source characteristic preservation; require comparator only when source advertises SORTED."
+    }
+  ],
+  "execution_mode_correction": {
+    "issue": "Compiling flat package candidates and unnamed-package tests in one javac invocation produced duplicate class diagnostic",
+    "correction": "Separate source and test compilation; final verifier uses package-correct isolated sources."
+  }
+}

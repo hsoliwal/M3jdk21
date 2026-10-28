@@ -1,0 +1,64 @@
+name: M3 Guava Multiset zero downstream runtime dependency gate
+on:
+  push:
+    branches: ['m3/inline-guava-multiset-api-receiver-20261027']
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/guava-hash-multiset/**'
+      - '.github/workflows/m3-inline-guava-multiset-api-20261027.yml'
+permissions:
+  contents: read
+jobs:
+  no-guava-runtime-oracle:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify SHA256 of original-licensed transformed API and its JUnit source
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '1cf974b8e73c72e0885872a0746e34e187bc020a7e19a4e5074e73ac05d4e973  m3/collections/implementations/guava-hash-multiset/src/main/java/com/google/common/collect/Multiset.java' | sha256sum -c -
+          echo '15f5c810429b33a04838739da469632929e99cbfff95f9c9eedd01e0d286dad3  m3/collections/implementations/guava-hash-multiset/src/test/java/com/m3/collections/guava/M3InlineGuavaMultisetBoundaryTest.java' | sha256sum -c -
+      - name: STRICT javac original source and M3 implementation with NO Guava or other JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          find m3/collections/implementations/guava-hash-multiset/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/native-sources.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d "$RUNNER_TEMP/classes" @"$RUNNER_TEMP/native-sources.txt"
+          jar --create --file "$RUNNER_TEMP/m3-guava-multiset.jar" -C "$RUNNER_TEMP/classes" .
+          jdeps --print-module-deps "$RUNNER_TEMP/m3-guava-multiset.jar" | tee "$RUNNER_TEMP/jdeps.txt"
+          test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
+      - name: Full authentic Guava 33.4.8-jre differential and first-party JaCoCo 99 percent
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/guava-hash-multiset/pom.xml verify
+      - name: Validate effective Maven RUNTIME graph contains no Guava or third-party APIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/implementations/guava-hash-multiset/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree \
+            -Dscope=runtime -DoutputFile="$RUNNER_TEMP/runtime-tree.txt"
+          cat "$RUNNER_TEMP/runtime-tree.txt"
+          ! grep -E 'com.google.guava:guava|org.jspecify:jspecify|com.google.errorprone:|org.checkerframework:' "$RUNNER_TEMP/runtime-tree.txt"
+      - name: Preserve compiled proof and full seeded donor reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: guava-multiset-runtime-zero-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/jdeps.txt
+            ${{ runner.temp }}/runtime-tree.txt
+            m3/collections/implementations/guava-hash-multiset/target/surefire-reports/

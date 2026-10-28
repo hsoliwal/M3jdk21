@@ -12,8 +12,15 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
+// Modified 2026 by Hitesh Soliwal and contributors: reuse direct first-match selection without private iterator adapters.
 // Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+// Reconciled 2026: retain the qualified guarded reverse atom after additive merge.
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: interior-null navigation through bounded ordered cursors.
+ */
 package com.m3.collections;
 
 import java.util.AbstractCollection;
@@ -173,37 +180,69 @@ public final class M3FilteredViews {
     private static class CollectionView<E> extends AbstractCollection<E> {
         private final Collection<E> source;
         private final Predicate<? super E> predicate;
+        private volatile IterationPlan<E> iterationPlan;
 
         CollectionView(Collection<E> source, Predicate<? super E> predicate) {
             this.source = Objects.requireNonNull(source, "source");
             this.predicate = Objects.requireNonNull(predicate, "predicate");
         }
 
+        /**
+         * Retain only immutable predicate coordinates; never cache element
+         * membership or backing iterators. The backing remains live.
+         */
         @Override public Iterator<E> iterator() {
             if (iterationView(source) == null) return filtered(source.iterator(), predicate);
-            // Immutable wrapper links are read twice without callbacks. One exact
-            // predicate array replaces ArrayList growth and nested iterator frames.
-            CollectionView<E> layer = this;
-            Collection<E> backing;
+            IterationPlan<E> plan = iterationPlan();
+            return filtered(plan.backing.iterator(), value -> {
+                for (Predicate<? super E> filter : plan.filters) {
+                    if (!filter.test(value)) return false;
+                }
+                return true;
+            });
+        }
+
+        private IterationPlan<E> iterationPlan() {
+            IterationPlan<E> current = iterationPlan;
+            if (current != null) return current;
+            synchronized (this) {
+                current = iterationPlan;
+                if (current == null) {
+                    current = flatten(this);
+                    iterationPlan = current;
+                }
+            }
+            return current;
+        }
+
+        private static <E> IterationPlan<E> flatten(CollectionView<E> outer) {
             int depth = 0;
+            CollectionView<E> layer = outer;
+            Collection<E> backing;
             do {
                 depth++;
                 backing = layer.source;
                 layer = iterationView(backing);
             } while (layer != null);
+
             @SuppressWarnings("unchecked")
             Predicate<? super E>[] filters = (Predicate<? super E>[]) new Predicate<?>[depth];
-            layer = this;
-            for (int index = 0; index < filters.length; index++) {
+            layer = outer;
+            for (int index = depth - 1; index >= 0; index--) {
                 filters[index] = layer.predicate;
-                if (index + 1 < filters.length) layer = iterationView(layer.source);
+                layer = iterationView(layer.source);
             }
-            return filtered(backing.iterator(), value -> {
-                for (int index = filters.length - 1; index >= 0; index--) {
-                    if (!filters[index].test(value)) return false;
-                }
-                return true;
-            });
+            return new IterationPlan<>(backing, filters);
+        }
+
+        private static final class IterationPlan<E> {
+            private final Collection<E> backing;
+            private final Predicate<? super E>[] filters;
+
+            private IterationPlan(Collection<E> backing, Predicate<? super E>[] filters) {
+                this.backing = backing;
+                this.filters = filters;
+            }
         }
         @Override public int size() {
             int count = 0;
@@ -339,9 +378,8 @@ public final class M3FilteredViews {
         @Override public SortedSet<E> tailSet(E from) {
             return new SortedSetView<>(sorted.tailSet(from), predicate);
         }
-        // A direct backed reversal keeps the existing predicate and source owner.
         @Override public SortedSet<E> reversed() {
-            return new SortedSetView<>(sorted.reversed(), predicate);
+            return readOnlySortedSet(SortedSet.super.reversed());
         }
         // An explicit read-only boundary refuses even empty endpoint mutations.
         @Override public void addFirst(E value) { throw readonly(); }
@@ -371,31 +409,39 @@ public final class M3FilteredViews {
             return predicate.test(nav.ceiling(alias));
         }
         /**
-         * Bounded views admit navigation queries outside their own endpoints,
-         * whereas subSet/headSet/tailSet may reject those same query endpoints.
-         * Start from the backing JDK navigational result, never the query alias.
-         * A null result can also designate a real comparator-admitted null member.
+         * Disambiguate a null navigation result using iterator presence. An owner's
+         * comparator may place null anywhere, including between two non-null values.
+         * Reuse the ordered-cursor range rule from M3CollectionViews: construct a
+         * tail range only inside actual member bounds, then skip rejected values.
+         * This preserves bounded-view queries and O(log n + rejected) tree work.
          */
-        private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
-            Comparator<? super E> order = nav.comparator();
-            if (order == null || nav.isEmpty()) return false;
-            // Retain the former first/last lookup order. A null member need not
-            // be an extreme: the opposite stored boundary proves whether a
-            // navigational candidate exists, even when that candidate is null.
-            // Compare only a stored value; do not fabricate an unsupported null.
-            E first = nav.first();
-            E last = first == null ? null : nav.last();
-            E boundary = first == null || last == null ? null : (forward ? last : first);
-            int direction = order.compare(boundary, query);
-            return forward ? (inclusive ? direction >= 0 : direction > 0)
-                    : (inclusive ? direction <= 0 : direction < 0);
+        private E nullCandidate(E query, boolean forward, boolean inclusive) {
+            // Natural order cannot admit a null member. Preserve its no-result
+            // path without extra Comparable callbacks, including reversed views.
+            if (nav.comparator() == null) return null;
+            NavigableSet<E> reverse = nav.descendingSet();
+            if (reverse.comparator() == null) return null;
+            NavigableSet<E> ordered = forward ? nav : reverse;
+            Iterator<E> cursor = ordered.iterator();
+            if (!cursor.hasNext()) return null;
+            Comparator<? super E> order = ordered.comparator();
+            int fromFirst = compareStored(query, cursor.next(), order);
+            if (fromFirst < 0 || (fromFirst == 0 && inclusive)) {
+                return firstVisible(ordered.iterator());
+            }
+            int fromLast = compareStored(query, ordered.last(), order);
+            if (fromLast > 0 || (fromLast == 0 && !inclusive)) return null;
+            return firstVisible(ordered.tailSet(query, inclusive).iterator());
         }
         private E firstVisible(Iterator<E> cursor) {
-            Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
-            return selected.hasNext() ? selected.next() : null;
+            while (cursor.hasNext()) {
+                E candidate = cursor.next();
+                if (predicate.test(candidate)) return candidate;
+            }
+            return null;
         }
         private E navigate(E candidate, E query, boolean forward, boolean inclusive) {
-            if (candidate == null && !nullIsCandidate(query, forward, inclusive)) return null;
+            if (candidate == null) return nullCandidate(query, forward, inclusive);
             if (predicate.test(candidate)) return candidate;
             // The candidate is an actual member within this backing range; strict
             // successor/predecessor views are therefore legal even on nested subSets.
@@ -427,10 +473,10 @@ public final class M3FilteredViews {
         }
         @Override public E pollFirst() { throw readonly(); }
         @Override public E pollLast() { throw readonly(); }
-        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
+        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public Iterator<E> descendingIterator() {
             return filtered(nav.descendingSet().iterator(), predicate);
         }
@@ -566,9 +612,13 @@ public final class M3FilteredViews {
          * entries are then skipped by iterator advancement instead of repeated lookup.
          */
         private Entry<K, V> firstVisible(Iterator<Entry<K, V>> cursor) {
-            Iterator<Entry<K, V>> selected = M3FilteredViews.filtered(cursor,
-                    entry -> predicate.test(entry.getKey(), entry.getValue()));
-            return selected.hasNext() ? new SimpleImmutableEntry<>(selected.next()) : null;
+            while (cursor.hasNext()) {
+                Entry<K, V> candidate = cursor.next();
+                if (predicate.test(candidate.getKey(), candidate.getValue())) {
+                    return new SimpleImmutableEntry<>(candidate);
+                }
+            }
+            return null;
         }
         /**
          * Do not turn an out-of-range query on a live bounded map into a
@@ -582,11 +632,21 @@ public final class M3FilteredViews {
                 range = owner.rangeOrNull(query, forward, inclusive);
                 if (range == null) return boundedFallback(query, forward, inclusive);
             } else {
-                try {
-                    range = forward ? nav.tailMap(query, inclusive) : nav.headMap(query, inclusive);
-                } catch (IllegalArgumentException outOfRange) {
-                    return boundedFallback(query, forward, inclusive);
+                // A navigation query is legal outside a bounded JDK map. Calling
+                // the owner's near-entry primitive also preserves user comparator
+                // exceptions; catching every IllegalArgumentException from a
+                // headMap/tailMap construction would silently swallow those.
+                Entry<K, V> nearest = forward
+                        ? (inclusive ? nav.ceilingEntry(query) : nav.higherEntry(query))
+                        : (inclusive ? nav.floorEntry(query) : nav.lowerEntry(query));
+                if (nearest == null) return null;
+                if (predicate.test(nearest.getKey(), nearest.getValue())) {
+                    return new SimpleImmutableEntry<>(nearest);
                 }
+                // The stored representative is already inside the bounded view.
+                // Skip it and scan the remaining range in encounter order.
+                range = forward ? nav.tailMap(nearest.getKey(), false)
+                        : nav.headMap(nearest.getKey(), false);
             }
             Iterator<Entry<K, V>> cursor = forward ? range.entrySet().iterator()
                     : range.descendingMap().entrySet().iterator();
@@ -669,4 +729,3 @@ public final class M3FilteredViews {
         @Override public NavigableMap<K, V> tailMap(K from) { return tailMap(from, true); }
     }
 }
-

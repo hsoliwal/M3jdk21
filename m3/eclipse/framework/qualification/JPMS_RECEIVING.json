@@ -1,0 +1,45 @@
+{
+  "schema": "M3_ECLIPSE_JPMS_MODULE_RECEIVING_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "55d70dcc4d9350634050fbbb1449f0065606d2d1",
+  "dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-eclipse-modpath-20261026",
+  "recipe": "com.synexia.m3.ViewportEclipseModule20261026",
+  "original_product_head": "c9a1106c27e9413582a68e5d5786d9b3b42bb476",
+  "original_git_blob": "56ad9d845f580d2982b2324b1a92748313eeaa0f",
+  "sdk_result_git_blob": "75b8ad4dd44fdab11aa75f2fa053a012d8fd161c",
+  "original_sha256": "cbe4562f6fe0623a4c25fcda59229de866f2425689d172a3e0a11ab233ffe40d",
+  "result_sha256": "c7446f7b60d5785e4d64df1692bd9818c6e7440ed18aa79ef98164c19518164b",
+  "actual_sdk": {
+    "maven": "3.9.9",
+    "java": "21.0.12.1",
+    "rewrite_core": "8.17.1",
+    "junit_tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "results": 1,
+    "fixed_point_changes": 0,
+    "surefire_xml_sha256": "15bdcf4e1d6f252abfbedcf661c4cd80f9ee224f34e16e55af514114c1fda43a"
+  },
+  "original_hosted_ci": {
+    "run": "https://github.com/hsoliwal/M3jdk21/actions/runs/40177948413",
+    "recipe_tests_pass": "4 plus 3",
+    "failure": "module not found: com.m3.arrays",
+    "failed_step": "Compile existing M3 collections and install exact jar"
+  },
+  "local_mock_jpms": {
+    "baseline_refuses": true,
+    "arrays_module_compiles": true,
+    "collections_modulepath_compiles": true,
+    "missing_module_refuses": true
+  },
+  "source_edits": [
+    ".github/workflows/m3-eclipse-framework-forward-20261017.yml"
+  ],
+  "source_module_info_changed": false,
+  "source_api_changed": false,
+  "actual_full_arrays_and_collections_compile": "PENDING_HOSTED",
+  "real_framework_11_JUnit": "PENDING_HOSTED",
+  "native_toolkits_and_jdk_hotspot": "NOT_RUN",
+  "merge_authority": false
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "source_builder_tests": {
+    "tests": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_built_fork_jars": 16,
+  "results": {
+    "baseline": "M3_MAVEN4_BASELINE_GAP checks=13",
+    "candidate": "M3_MAVEN4_REAL_PROVIDER_PASS checks=102"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "M3_SCHEDULING_PR_REVIEW_NOTES_V1",
+  "notes": "/workspace/scratch/206049dfb270/jobs-work/final-review/TARGET_PR_SCHEDULING_REVIEW_NOTES.md",
+  "notes_sha256": "6d72872b984bfdcd880f5bde8d97952aa168255ed1924538e15af7a7274e7af4",
+  "receipts": [
+    {
+      "path": "/workspace/scratch/206049dfb270/jobs-work/emitted-target-proof-01/RESULT.json",
+      "sha256": "d3d012bf73991c9b1bd1dfcd5f2227cd02e090dc199b0bfc43b217e108cda1d8"
+    },
+    {
+      "path": "/workspace/scratch/206049dfb270/jobs-work/emitted-eclipse-owning-01/RESULT.json",
+      "sha256": "f117fa9737bb59dcc6d138afbe5a543260ac2b04d507e7c5c6bd0b8b1b592e5a"
+    },
+    {
+      "path": "/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-01/RESULT.json",
+      "sha256": "7c1d2ca6f429f549f4fdf2ef7315861bd42fa92261624c5fa3dce2702d3861c1"
+    },
+    {
+      "path": "/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-plus-core-02/RESULT.json",
+      "sha256": "51d546bbdca192faa2472a2de8758b0d6bda925060b915183ff84bbba24a17fe"
+    },
+    {
+      "path": "/workspace/scratch/206049dfb270/jobs-work/final-review/workflow-successor/HANDOFF.json",
+      "sha256": "c5b988d4b136537c6703282ddc9e6db619e56f3da451cfd3f5ecca51e846ab84"
+    }
+  ]
+}

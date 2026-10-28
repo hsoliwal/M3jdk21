@@ -1,0 +1,2767 @@
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java b/m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java
+new file mode 100644
+index 0000000..5d6e820
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java
+@@ -0,0 +1,88 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
++package com.m3.collections;
++
++import static org.junit.jupiter.api.Assertions.*;
++import java.util.ConcurrentModificationException;
++import org.junit.jupiter.api.Test;
++
++/** Public-contract oracle, frozen against the pre-change deque before recipe application. */
++final class M3DequeSpanCopyTest {
++    private static long value(int i) {
++        return switch (i & 7) {
++            case 0 -> Long.MIN_VALUE;
++            case 1 -> Long.MAX_VALUE;
++            case 2 -> 0L;
++            case 3 -> -1L;
++            default -> 0x9e3779b97f4a7c15L * i;
++        };
++    }
++
++    private static M3LongArrayDeque ring(int capacity, int head, int size) {
++        var deque = new M3LongArrayDeque(capacity - 1);
++        assertEquals(capacity, deque.capacity());
++        for (int i = 0; i < head; i++) { deque.addLast(-7L); deque.removeFirstLong(); }
++        for (int i = 0; i < size; i++) deque.addLast(value(i));
++        return deque;
++    }
++
++    @Test void exportsEveryHeadAndSizeWithoutMutationOrAliasing() {
++        int layouts = 0;
++        for (int capacity : new int[]{8, 16, 32, 64}) {
++            for (int head = 0; head < capacity; head++) {
++                for (int size = 0; size <= capacity; size++) {
++                    var deque = ring(capacity, head, size);
++                    var forward = deque.iterator();
++                    var backward = deque.descendingIterator();
++                    long[] expected = new long[size];
++                    for (int i = 0; i < size; i++) expected[i] = value(i);
++                    long[] first = deque.toArray();
++                    long[] second = deque.toArray();
++                    assertNotSame(first, second, "each export owns its array, including empty exports");
++                    assertArrayEquals(expected, first);
++                    assertArrayEquals(expected, second);
++                    assertEquals(size, deque.size());
++                    assertEquals(capacity, deque.capacity());
++                    if (size != 0) first[0] ^= -1L;
++                    assertArrayEquals(expected, deque.toArray());
++                    for (int i = 0; i < size; i++) {
++                        assertTrue(forward.hasNext()); assertEquals(expected[i], forward.nextLong());
++                        assertTrue(backward.hasNext()); assertEquals(expected[size - 1 - i], backward.nextLong());
++                    }
++                    assertFalse(forward.hasNext()); assertFalse(backward.hasNext());
++                    deque.addLast(19L);
++                    assertArrayEquals(expected, second, "later deque mutation cannot change an export");
++                    layouts++;
++                }
++            }
++        }
++        assertEquals(5560, layouts, "bounded exhaustive head/size spectrum");
++    }
++
++    @Test void growsAtEitherEndFromEveryHeadAndPreservesIteratorEpochs() {
++        int layouts = 0;
++        for (int capacity : new int[]{8, 16, 32, 64, 128, 256}) {
++            for (int head = 0; head < capacity; head++) {
++                for (boolean atFront : new boolean[]{false, true}) {
++                    var deque = ring(capacity, head, capacity);
++                    var forward = deque.iterator();
++                    var backward = deque.descendingIterator();
++                    long[] expected = new long[capacity + 1];
++                    for (int i = 0; i < capacity; i++) expected[i + (atFront ? 1 : 0)] = value(i);
++                    expected[atFront ? 0 : capacity] = 37L;
++                    if (atFront) deque.addFirst(37L); else deque.addLast(37L);
++                    assertEquals(capacity * 2, deque.capacity());
++                    assertEquals(capacity + 1, deque.size());
++                    assertArrayEquals(expected, deque.toArray());
++                    assertThrows(ConcurrentModificationException.class, forward::hasNext);
++                    assertThrows(ConcurrentModificationException.class, backward::nextLong);
++                    for (int i = 0; i < expected.length; i++) assertEquals(expected[i], deque.get(i));
++                    for (long item : expected) assertEquals(item, deque.removeFirstLong());
++                    assertEquals(0, deque.size());
++                    assertArrayEquals(new long[0], deque.toArray());
++                    layouts++;
++                }
++            }
++        }
++        assertEquals(1008, layouts, "both growth ends at every bounded head");
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java
+new file mode 100644
+index 0000000..dcc512d
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java
+@@ -0,0 +1,390 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import java.nio.charset.StandardCharsets;
++import java.security.MessageDigest;
++import java.security.NoSuchAlgorithmException;
++import java.util.AbstractMap;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collection;
++import java.util.Collections;
++import java.util.Comparator;
++import java.util.HexFormat;
++import java.util.Iterator;
++import java.util.LinkedHashSet;
++import java.util.List;
++import java.util.Map;
++import java.util.NavigableMap;
++import java.util.NavigableSet;
++import java.util.Objects;
++import java.util.Set;
++import java.util.SortedMap;
++import java.util.SortedSet;
++import java.util.TreeMap;
++import java.util.TreeSet;
++import java.util.function.Predicate;
++
++/** Independent JDK-owner differential and historical-contract reconciliation proof. */
++public final class M3FilteredNavigationReconciliationContract {
++    private static long checks;
++    private static long failures;
++    private static String first;
++    private static String scopeFirst;
++
++    private M3FilteredNavigationReconciliationContract() { }
++
++    public static void main(String[] args) {
++        String selected = args.length == 0 ? "all" : args[0];
++        if ("tape".equals(selected)) {
++            System.out.println("stable-read-tape-sha256=" + digest(stableReadTape()));
++            return;
++        }
++        run(selected, "navigation", M3FilteredNavigationReconciliationContract::navigation);
++        run(selected, "entries", M3FilteredNavigationReconciliationContract::entryMembership);
++        run(selected, "readonly", M3FilteredNavigationReconciliationContract::readOnlyEndpoints);
++        run(selected, "depth", M3FilteredNavigationReconciliationContract::deepFilters);
++        System.out.println("TOTAL checks=" + checks + " failures=" + failures);
++        if (failures != 0) throw new AssertionError(first);
++    }
++
++    private static void run(String selected, String scope, Runnable proof) {
++        if (!"all".equals(selected) && !scope.equals(selected)) return;
++        long beginChecks = checks;
++        long beginFailures = failures;
++        scopeFirst = null;
++        try { proof.run(); }
++        catch (RuntimeException | Error error) { fail(scope + " threw " + error.getClass().getName()); }
++        System.out.println(scope + " checks=" + (checks - beginChecks)
++                + " failures=" + (failures - beginFailures) + " first=" + scopeFirst);
++    }
++
++    private static void navigation() {
++        for (int rank = -5; rank <= 5; rank++) {
++            final int nullRank = rank;
++            Comparator<Integer> order = (a, b) -> Integer.compare(
++                    a == null ? nullRank : a, b == null ? nullRank : b);
++            NavigableSet<Integer> source = new TreeSet<>(order);
++            for (int value = -4; value <= 4; value++) if (value != rank) source.add(value);
++            source.add(null);
++            List<Integer> before = new ArrayList<>(source);
++            List<NavigableSet<Integer>> owners = List.of(source, source.descendingSet(),
++                    source.subSet(-3, true, 3, true), source.subSet(-3, true, 3, true).descendingSet(),
++                    source.headSet(2, false), source.tailSet(-2, false),
++                    source.subSet(-3, true, 3, true).headSet(2, false).tailSet(-2, false));
++            for (int mask = 0; mask < 16; mask++) {
++                final int flags = mask;
++                Predicate<Integer> visible = value -> value == null ? (flags & 8) != 0
++                        : (flags & (1 << Math.floorMod(value, 3))) != 0;
++                for (int position = 0; position < owners.size(); position++) {
++                    NavigableSet<Integer> owner = owners.get(position);
++                    NavigableSet<Integer> view = M3FilteredViews.filter(owner, visible);
++                    NavigableSet<Integer> oracle = new TreeSet<>(owner.comparator());
++                    for (Integer value : owner) if (visible.test(value)) oracle.add(value);
++                    List<Integer> queries = new ArrayList<>();
++                    for (int query = -6; query <= 6; query++) queries.add(query);
++                    queries.add(null);
++                    for (Integer query : queries) {
++                        String context = "rank=" + rank + " owner=" + position + " mask=" + mask + " query=" + query;
++                        neighbors(oracle, view, query, context);
++                    }
++                    same(new ArrayList<>(oracle), new ArrayList<>(view), "navigation encounter order");
++                    same(oracle.size(), view.size(), "navigation size");
++                    same(oracle.isEmpty(), view.isEmpty(), "navigation emptiness");
++                    NavigableSet<Integer> nested = M3FilteredViews.filter(view, value -> value == null || value != -1);
++                    NavigableSet<Integer> nestedOracle = new TreeSet<>(oracle.comparator());
++                    for (Integer value : oracle) if (value == null || value != -1) nestedOracle.add(value);
++                    for (Integer query : queries) neighbors(nestedOracle, nested, query, "nested navigation");
++                }
++            }
++            same(before, new ArrayList<>(source), "navigation source untouched");
++        }
++        for (Comparator<Integer> order : Arrays.<Comparator<Integer>>asList(null, Comparator.naturalOrder(),
++                Comparator.reverseOrder(), (a, b) -> Integer.compare(Objects.requireNonNull(a), Objects.requireNonNull(b)))) {
++            NavigableSet<Integer> source = new TreeSet<>(order);
++            source.addAll(List.of(-2, -1, 0, 1, 2));
++            NavigableSet<Integer> filtered = M3FilteredViews.filter(source, value -> {
++                if (value == null) throw new AssertionError("fabricated predicate null");
++                return value != 0;
++            });
++            NavigableSet<Integer> oracle = new TreeSet<>(order);
++            oracle.addAll(List.of(-2, -1, 1, 2));
++            for (int query = -4; query <= 4; query++) neighbors(oracle, filtered, query, "nonnull comparator");
++            expect(NullPointerException.class, () -> filtered.higher(null), "owner null refusal");
++        }
++        RuntimeException token = new IllegalStateException("predicate identity");
++        NavigableSet<Integer> source = new TreeSet<>(Comparator.nullsFirst(Comparator.naturalOrder()));
++        source.addAll(Arrays.asList(null, 1));
++        NavigableSet<Integer> view = M3FilteredViews.filter(source, value -> { throw token; });
++        identicalThrow(token, () -> view.ceiling(null), "nullable predicate throwable");
++    }
++
++    private static void neighbors(NavigableSet<Integer> oracle, NavigableSet<Integer> view,
++            Integer query, String context) {
++        same(oracle.lower(query), view.lower(query), context + " lower");
++        same(oracle.floor(query), view.floor(query), context + " floor");
++        same(oracle.ceiling(query), view.ceiling(query), context + " ceiling");
++        same(oracle.higher(query), view.higher(query), context + " higher");
++    }
++
++    private static void entryMembership() {
++        Comparator<String> nullMiddle = (a, b) -> String.CASE_INSENSITIVE_ORDER.compare(
++                a == null ? "Beta" : a, b == null ? "Beta" : b);
++        List<Comparator<String>> orders = List.of(String.CASE_INSENSITIVE_ORDER,
++                Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER),
++                Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER), nullMiddle);
++        for (int orderIndex = 0; orderIndex < orders.size(); orderIndex++) {
++            NavigableMap<String, Object> source = new TreeMap<>(orders.get(orderIndex));
++            String alpha = new String("Alpha");
++            source.put(alpha, "visible");
++            source.put("Gamma", null);
++            source.put("Delta", "hidden");
++            if (orderIndex != 0) source.put(null, "nullable");
++            List<NavigableMap<String, Object>> owners = List.of(source, source.descendingMap(),
++                    source.subMap("Alpha", true, "Gamma", true), source.headMap("Gamma", false),
++                    source.tailMap("Alpha", false));
++            for (NavigableMap<String, Object> owner : owners) {
++                for (boolean acceptNullKey : List.of(false, true)) {
++                    List<String> observedKeys = new ArrayList<>();
++                    java.util.function.BiPredicate<String, Object> filter = (key, value) -> {
++                        observedKeys.add(key);
++                        return (acceptNullKey || key != null) && !"hidden".equals(value);
++                    };
++                    NavigableMap<String, Object> oracle = new TreeMap<>(owner.comparator());
++                    for (Map.Entry<String, Object> entry : owner.entrySet())
++                        if ((acceptNullKey || entry.getKey() != null) && !"hidden".equals(entry.getValue()))
++                            oracle.put(entry.getKey(), entry.getValue());
++                    SortedMap<String, Object> sortedOnly = Collections.unmodifiableSortedMap(owner);
++                    List<SortedMap<String, Object>> views = List.of(M3FilteredViews.filterEntries(owner, filter),
++                            M3FilteredViews.filterEntries(sortedOnly, filter));
++                    for (SortedMap<String, Object> view : views) {
++                        for (String key : Arrays.asList("Alpha", "ALPHA", "alpha", "GAMMA", "gamma", "DELTA", "missing", "BETA", null)) {
++                            if (key == null && orderIndex == 0) continue;
++                            for (Object value : Arrays.asList("visible", new String("visible"), "hidden", "nullable", null, 7)) {
++                                Map.Entry<String, Object> probe = new AbstractMap.SimpleImmutableEntry<>(key, value);
++                                observedKeys.clear();
++                                boolean expected = oracle.entrySet().contains(probe);
++                                same(expected, view.entrySet().contains(probe), "entry comparator membership");
++                                if (owner.containsKey(key)) {
++                                    String stored = owner.floorEntry(key).getKey();
++                                    same(1, observedKeys.size(), "one stored membership predicate");
++                                    if (!observedKeys.isEmpty()) check(observedKeys.getFirst() == stored, "predicate sees stored key identity");
++                                } else same(0, observedKeys.size(), "absent key does not invoke predicate");
++                            }
++                        }
++                        same(false, view.entrySet().contains("not an entry"), "non-entry probe");
++                        same(false, view.entrySet().contains(null), "null entry probe");
++                        same(new ArrayList<>(oracle.entrySet()), new ArrayList<>(view.entrySet()), "stored iteration unchanged");
++                    }
++                }
++            }
++            NavigableMap<String, Object> live = M3FilteredViews.filterEntries(source, (key, value) -> !"hidden".equals(value));
++            source.put("ALPHA", "hidden");
++            same(false, live.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("alpha", "hidden")), "live hidden replacement");
++            source.put("alpha", null);
++            same(true, live.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("ALPHA", null)), "live nullable replacement");
++            source.remove("ALPHA");
++            same(false, live.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("alpha", null)), "live absence distinct from null");
++        }
++        NavigableMap<String, Object> source = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
++        String stored = new String("Alpha");
++        source.put(stored, "value");
++        List<String> effects = new ArrayList<>();
++        NavigableMap<String, Object> view = M3FilteredViews.filterEntries(source, (key, value) -> {
++            check(key == stored, "entry predicate stored reference");
++            effects.add("predicate");
++            return true;
++        });
++        Map.Entry<String, Object> probe = new AbstractMap.SimpleImmutableEntry<>("ALPHA", "value") {
++            private static final long serialVersionUID = 1L;
++            @Override public String getKey() { effects.add("key"); return super.getKey(); }
++            @Override public Object getValue() { effects.add("value"); return super.getValue(); }
++        };
++        same(true, view.entrySet().contains(probe), "adversarial entry accepted");
++        same(List.of("key", "predicate", "value"), effects, "entry callback order and demand");
++        RuntimeException token = new IllegalStateException("entry predicate identity");
++        NavigableMap<String, Object> failing = M3FilteredViews.filterEntries(source, (key, value) -> { throw token; });
++        identicalThrow(token, () -> failing.entrySet().contains(probe), "entry predicate throwable");
++        check(source.firstKey() == stored, "entry lookup retains source key identity");
++        Map.Entry<String, Object> throwingValue = new AbstractMap.SimpleImmutableEntry<>("ALPHA", "value") {
++            private static final long serialVersionUID = 1L;
++            @Override public Object getValue() { throw token; }
++        };
++        identicalThrow(token, () -> view.entrySet().contains(throwingValue), "entry value getter throwable");
++        NavigableMap<String, Object> hidden = M3FilteredViews.filterEntries(source, (key, value) -> false);
++        same(false, hidden.entrySet().contains(throwingValue), "hidden entry skips value getter");
++        NavigableMap<String, Object> empty = M3FilteredViews.filterEntries(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), (key, value) -> { throw token; });
++        same(false, empty.entrySet().contains(throwingValue), "absent entry skips predicate and value getter");
++        Map.Entry<String, Object> throwingKey = new AbstractMap.SimpleImmutableEntry<>("ALPHA", "value") {
++            private static final long serialVersionUID = 1L;
++            @Override public String getKey() { throw token; }
++        };
++        identicalThrow(token, () -> view.entrySet().contains(throwingKey), "entry key getter throwable");
++        NavigableMap<String, Object> comparatorOwner = new TreeMap<>((a, b) -> {
++            if ("explode".equals(a) || "explode".equals(b)) throw token;
++            return String.CASE_INSENSITIVE_ORDER.compare(a, b);
++        });
++        comparatorOwner.put("Alpha", "value");
++        NavigableMap<String, Object> comparatorView = M3FilteredViews.filterEntries(comparatorOwner, (key, value) -> true);
++        identicalThrow(token, () -> comparatorView.entrySet().contains(Map.entry("explode", "value")), "owner comparator throwable");
++    }
++
++    private static void readOnlyEndpoints() {
++        for (boolean populated : List.of(false, true)) {
++            NavigableSet<Integer> source = new TreeSet<>();
++            if (populated) source.addAll(List.of(1, 2, 3));
++            for (boolean visible : List.of(false, true)) {
++                long[] callbacks = {0};
++                Predicate<Integer> predicate = value -> { callbacks[0]++; return visible; };
++                SortedSet<Integer> sorted = M3FilteredViews.filter(Collections.unmodifiableSortedSet(source), predicate);
++                NavigableSet<Integer> nav = M3FilteredViews.filter(source, predicate);
++                List<SortedSet<Integer>> views = List.of(sorted, sorted.reversed(), sorted.reversed().reversed(),
++                        sorted.headSet(3), sorted.tailSet(1), sorted.subSet(1, 3),
++                        sorted.reversed().headSet(1), sorted.reversed().tailSet(3), sorted.reversed().subSet(3, 1),
++                        nav, nav.descendingSet(), nav.reversed(), nav.headSet(3, false), nav.tailSet(1, true),
++                        nav.subSet(1, true, 3, false), nav.descendingSet().subSet(3, true, 1, false));
++                List<Integer> before = new ArrayList<>(source);
++                for (SortedSet<Integer> view : views) {
++                    callbacks[0] = 0;
++                    expect(UnsupportedOperationException.class, view::removeFirst, "strict removeFirst");
++                    expect(UnsupportedOperationException.class, view::removeLast, "strict removeLast");
++                    expect(UnsupportedOperationException.class, () -> view.addFirst(9), "strict addFirst");
++                    expect(UnsupportedOperationException.class, () -> view.addLast(9), "strict addLast");
++                    expect(UnsupportedOperationException.class, () -> view.add(9), "strict add");
++                    expect(UnsupportedOperationException.class, () -> view.remove(99), "strict absent remove");
++                    expect(UnsupportedOperationException.class, () -> view.addAll(List.of()), "strict empty addAll");
++                    expect(UnsupportedOperationException.class, () -> view.removeAll(List.of()), "strict empty removeAll");
++                    expect(UnsupportedOperationException.class, () -> view.retainAll(List.of()), "strict retainAll");
++                    expect(UnsupportedOperationException.class, () -> view.removeIf(value -> { throw new AssertionError("mutation callback"); }), "strict removeIf");
++                    expect(UnsupportedOperationException.class, view::clear, "strict clear");
++                    expect(UnsupportedOperationException.class, () -> view.iterator().remove(), "strict iterator remove");
++                    same(0L, callbacks[0], "readonly refusal precedes predicate");
++                    same(before, new ArrayList<>(source), "readonly source untouched");
++                }
++                expect(UnsupportedOperationException.class, nav::pollFirst, "strict pollFirst");
++                expect(UnsupportedOperationException.class, nav::pollLast, "strict pollLast");
++            }
++        }
++    }
++
++    private static void deepFilters() {
++        final int depth = 65_536;
++        for (int family = 0; family < 4; family++) {
++            long[] calls = {0};
++            Predicate<Integer> predicate = value -> { calls[0]++; return true; };
++            Collection<Integer> view;
++            if (family == 0) {
++                view = new ArrayList<>(List.of(1));
++                for (int i = 0; i < depth; i++) view = M3FilteredViews.filter(view, predicate);
++            } else if (family == 1) {
++                Set<Integer> set = new LinkedHashSet<>(List.of(1));
++                for (int i = 0; i < depth; i++) set = M3FilteredViews.filter(set, predicate);
++                view = set;
++            } else if (family == 2) {
++                SortedSet<Integer> set = new TreeSet<>(List.of(1));
++                for (int i = 0; i < depth; i++) set = M3FilteredViews.filter(set, predicate);
++                view = set;
++            } else {
++                NavigableSet<Integer> set = new TreeSet<>(List.of(1));
++                for (int i = 0; i < depth; i++) set = M3FilteredViews.filter(set, predicate);
++                view = set;
++            }
++            same(1, view.iterator().next(), "deep traversal family=" + family);
++            same((long) depth, calls[0], "deep predicate order/demand");
++            calls[0] = 0;
++            same(1, view.size(), "deep size");
++            same((long) depth, calls[0], "deep size demand");
++            calls[0] = 0;
++            same(false, view.isEmpty(), "deep emptiness");
++            same((long) depth, calls[0], "deep empty demand");
++            if (family < 2) {
++                calls[0] = 0;
++                same(false, view.contains(2), "deep absent membership");
++                same(0L, calls[0], "deep absence demand");
++            }
++        }
++        for (boolean set : List.of(false, true)) {
++            for (int depthAtRead : List.of(1, 2, 8, 64, 512)) {
++                long[] calls = {0};
++                Collection<Integer> view = set ? new LinkedHashSet<>(List.of(1)) : new ArrayList<>(List.of(1));
++                for (int i = 0; i < depthAtRead; i++) {
++                    Predicate<Integer> predicate = value -> { calls[0]++; return true; };
++                    view = set ? M3FilteredViews.filter((Set<Integer>) view, predicate) : M3FilteredViews.filter(view, predicate);
++                }
++                same(true, view.contains(1), "deep present membership");
++                same((long) depthAtRead * (depthAtRead + 1) / 2, calls[0], "historical triangular membership demand");
++            }
++        }
++    }
++
++    /** Emit independently on old/new owners; equality proves unchanged ordinary callback traces. */
++    private static String stableReadTape() {
++        StringBuilder tape = new StringBuilder();
++        for (boolean set : List.of(false, true)) {
++            Collection<Integer> view = set ? new LinkedHashSet<>(List.of(1, 2, 3, 4)) : new ArrayList<>(List.of(1, 2, 3, 4));
++            for (int index = 0; index < 6; index++) {
++                final int layer = index;
++                Predicate<Integer> predicate = value -> {
++                    tape.append('P').append(layer).append(':').append(value).append(';');
++                    return layer != 2 || value != 2;
++                };
++                view = set ? M3FilteredViews.filter((Set<Integer>) view, predicate) : M3FilteredViews.filter(view, predicate);
++            }
++            tape.append(view.size()).append(view.isEmpty()).append(view.contains(1)).append(view.contains(2));
++            tape.append(Arrays.toString(view.toArray()));
++            view.forEach(value -> tape.append('V').append(value));
++            Iterator<Integer> cursor = view.iterator();
++            tape.append(cursor.hasNext()).append(cursor.hasNext()).append(cursor.next());
++        }
++        SortedSet<Integer> backing = Collections.unmodifiableSortedSet(new TreeSet<>(List.of(1, 2, 3, 4)));
++        SortedSet<Integer> view = M3FilteredViews.filter(backing, value -> {
++            tape.append('S').append(value).append(';');
++            return value % 2 == 1;
++        }).reversed();
++        tape.append(view.size()).append(view.isEmpty()).append(view.contains(3)).append(view.first()).append(view.last());
++        tape.append(Arrays.toString(view.toArray())).append(Arrays.toString(view.toArray(Integer[]::new)));
++        tape.append(view.containsAll(List.of(3, 1))).append(view.hashCode()).append(view.toString());
++        view.forEach(value -> tape.append('F').append(value));
++        tape.append(view.headSet(1).size()).append(view.tailSet(3).size()).append(view.subSet(3, 1).size());
++        view.spliterator().forEachRemaining(value -> tape.append('R').append(value));
++        return tape.toString();
++    }
++
++    private static String digest(String value) {
++        try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8))); }
++        catch (NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
++    }
++
++    private static void expect(Class<? extends Throwable> type, Runnable action, String context) {
++        checks++;
++        try { action.run(); fail(context + " returned normally"); }
++        catch (RuntimeException | Error error) {
++            if (!type.isInstance(error)) fail(context + " expected=" + type.getName() + " actual=" + error.getClass().getName());
++        }
++    }
++
++    private static void identicalThrow(Throwable expected, Runnable action, String context) {
++        checks++;
++        try { action.run(); fail(context + " returned normally"); }
++        catch (RuntimeException | Error error) { if (error != expected) fail(context + " changed throwable identity"); }
++    }
++
++    private static void same(Object expected, Object actual, String context) {
++        checks++;
++        if (!Objects.equals(expected, actual)) fail(context + " expected=" + expected + " actual=" + actual);
++    }
++
++    private static void check(boolean condition, String context) {
++        checks++;
++        if (!condition) fail(context);
++    }
++
++    private static void fail(String message) {
++        failures++;
++        if (first == null) first = message;
++        if (scopeFirst == null) scopeFirst = message;
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java
+new file mode 100644
+index 0000000..6197b82
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java
+@@ -0,0 +1,21 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++/** Owning-module entry points for the independent wrapper and mask contracts. */
++final class M3FilteredNavigationReconciliationTest {
++    @Test
++    void filteredSortedContracts() {
++        M3FilteredNavigationReconciliationContract.main(new String[0]);
++    }
++
++    @Test
++    void maskAliasesRefuseBeforeEitherBackendWrites() {
++        M3IndexPathMasksAliasContract.main(M3IndexPathMasks.nativeAvailable()
++                ? new String[] {"--native"} : new String[0]);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java
+new file mode 100644
+index 0000000..daef307
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java
+@@ -0,0 +1,515 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Comparator;
++import java.util.Iterator;
++import java.util.List;
++import java.util.NavigableSet;
++import java.util.NoSuchElementException;
++import java.util.Objects;
++import java.util.TreeSet;
++import java.util.function.Predicate;
++
++/**
++ * Independent finite oracle for the readonly set interior-null navigation atom.
++ *
++ * <p>The expected contents and navigation results come from separately populated
++ * JDK sets. Membership masks, comparators, ranges, directions and predicates are
++ * enumerated deterministically. The compatibility facade and a readonly filter
++ * over the existing composition view are included without changing their owners.
++ * Map navigation and mutable-view algorithms are outside this acceptance scope.
++ * The broader rejected navigation oracle remains in canonical research evidence.</p>
++ */
++public final class M3FilteredSetNullContract {
++    private enum Surface { READONLY, FACADE, OVER_COMPOSITION }
++
++    private static final Integer[] VALUES = {null, -3, -1, 0, 1, 3};
++    private static final Comparator<Integer> MIDDLE =
++            Comparator.comparingInt(value -> value == null ? 2 : value);
++    private static long checks;
++
++    private M3FilteredSetNullContract() { }
++
++    private static void equal(Object expected, Object actual, String label) {
++        checks++;
++        if (!Objects.equals(expected, actual)) {
++            throw new AssertionError(label + " expected=" + expected + " actual=" + actual);
++        }
++    }
++
++    private static void identical(Object expected, Object actual, String label) {
++        checks++;
++        if (expected != actual) throw new AssertionError(label + " changed reference identity");
++    }
++
++    private static void throwsSame(Throwable expected, Runnable action, String label) {
++        checks++;
++        try {
++            action.run();
++        } catch (Throwable actual) {
++            if (actual == expected) return;
++            throw new AssertionError(label + " changed throwable identity", actual);
++        }
++        throw new AssertionError(label + " swallowed " + expected.getClass().getSimpleName());
++    }
++
++    private static void throwsType(Class<? extends Throwable> type, Runnable action, String label) {
++        checks++;
++        try {
++            action.run();
++        } catch (Throwable actual) {
++            if (type.isInstance(actual)) return;
++            throw new AssertionError(label + " wrong throwable type", actual);
++        }
++        throw new AssertionError(label + " did not throw " + type.getSimpleName());
++    }
++
++    private static <E> NavigableSet<E> owner(Surface surface, NavigableSet<E> source) {
++        return surface == Surface.OVER_COMPOSITION
++                ? M3CollectionViews.filtered(source, value -> true) : source;
++    }
++
++    private static <E> NavigableSet<E> view(Surface surface, NavigableSet<E> source,
++            Predicate<? super E> predicate) {
++        NavigableSet<E> backing = owner(surface, source);
++        return surface == Surface.FACADE ? M3FilteredNavigableSet.view(backing, predicate)
++                : M3FilteredViews.filter(backing, predicate);
++    }
++
++    private static List<Comparator<Integer>> orders() {
++        return Arrays.asList(null, Comparator.reverseOrder(),
++                Comparator.nullsFirst(Comparator.naturalOrder()),
++                Comparator.nullsLast(Comparator.naturalOrder()),
++                Comparator.nullsFirst(Comparator.reverseOrder()),
++                Comparator.nullsLast(Comparator.reverseOrder()), MIDDLE, MIDDLE.reversed());
++    }
++
++    private static List<Integer> probes(boolean nullable) {
++        ArrayList<Integer> values = new ArrayList<>(List.of(-9, -3, -2, -1, 0, 1, 2, 3, 9));
++        if (nullable) values.add(null);
++        return values;
++    }
++
++    private static Predicate<Integer> predicate(int kind) {
++        return switch (kind) {
++            case 0 -> value -> true;
++            case 1 -> Objects::nonNull;
++            case 2 -> value -> value == null || (value & 1) == 0;
++            case 3 -> value -> value != null && value > 0;
++            case 4 -> value -> false;
++            default -> throw new IllegalArgumentException("predicate kind");
++        };
++    }
++
++    private static int compare(Comparator<? super Integer> order, int left, int right) {
++        return order == null ? Integer.compare(left, right) : order.compare(left, right);
++    }
++
++    private static NavigableSet<Integer> range(NavigableSet<Integer> source, int kind) {
++        boolean ascending = compare(source.comparator(), -2, 2) < 0;
++        int from = ascending ? -2 : 2;
++        int to = ascending ? 2 : -2;
++        return switch (kind) {
++            case 0 -> source;
++            case 1 -> source.subSet(from, false, to, true);
++            case 2 -> source.subSet(from, true, to, false);
++            case 3 -> source.subSet(from, true, to, true).headSet(0, true).tailSet(from, false);
++            case 4 -> source.headSet(0, false);
++            case 5 -> source.tailSet(0, true);
++            case 6 -> source.subSet(0, false, 0, false);
++            case 7 -> source.subSet(0, true, 0, true);
++            default -> throw new IllegalArgumentException("range kind");
++        };
++    }
++
++    private static <E> E navigate(NavigableSet<E> set, E key, int relation) {
++        return switch (relation) {
++            case 0 -> set.lower(key);
++            case 1 -> set.floor(key);
++            case 2 -> set.ceiling(key);
++            case 3 -> set.higher(key);
++            default -> throw new IllegalArgumentException("navigation relation");
++        };
++    }
++
++    private static void checkSet(NavigableSet<Integer> source, NavigableSet<Integer> actual,
++            Predicate<Integer> predicate, boolean nullable, String label) {
++        NavigableSet<Integer> expected = new TreeSet<>(source.comparator());
++        for (Integer stored : source) if (predicate.test(stored)) expected.add(stored);
++        identical(source.comparator(), actual.comparator(), label + " comparator");
++        equal(new ArrayList<>(expected), new ArrayList<>(actual), label + " values");
++        equal(new ArrayList<>(expected.descendingSet()),
++                new ArrayList<>(actual.descendingSet()), label + " descending values");
++        equal(expected.size(), actual.size(), label + " size");
++        equal(expected.isEmpty(), actual.isEmpty(), label + " empty");
++        for (Integer probe : probes(nullable)) {
++            equal(expected.contains(probe), actual.contains(probe), label + " membership " + probe);
++            for (int relation = 0; relation < 4; relation++) {
++                equal(navigate(expected, probe, relation), navigate(actual, probe, relation),
++                        label + " relation=" + relation + " probe=" + probe);
++            }
++        }
++        if (expected.isEmpty()) {
++            throwsType(NoSuchElementException.class, actual::first, label + " empty first");
++            throwsType(NoSuchElementException.class, actual::last, label + " empty last");
++        } else {
++            equal(expected.first(), actual.first(), label + " first");
++            equal(expected.last(), actual.last(), label + " last");
++        }
++    }
++
++    private static void setMatrix() {
++        List<Comparator<Integer>> orders = orders();
++        for (Surface surface : Surface.values()) {
++            for (int orderIndex = 0; orderIndex < orders.size(); orderIndex++) {
++                boolean nullable = orderIndex >= 2;
++                for (int membership = 0; membership < (1 << VALUES.length); membership++) {
++                    if (!nullable && (membership & 1) != 0) continue;
++                    NavigableSet<Integer> root = new TreeSet<>(orders.get(orderIndex));
++                    for (int index = 0; index < VALUES.length; index++) {
++                        if ((membership & (1 << index)) != 0) root.add(VALUES[index]);
++                    }
++                    List<Integer> unchanged = new ArrayList<>(root);
++                    for (int bounds = 0; bounds < 8; bounds++) {
++                        NavigableSet<Integer> bounded = range(root, bounds);
++                        for (int direction = 0; direction < 2; direction++) {
++                            NavigableSet<Integer> source = direction == 0
++                                    ? bounded : bounded.descendingSet();
++                            for (int selection = 0; selection < 5; selection++) {
++                                Predicate<Integer> predicate = predicate(selection);
++                                String label = surface + "/" + orderIndex + "/" + membership
++                                        + "/" + bounds + "/" + direction + "/" + selection;
++                                checkSet(source, view(surface, source, predicate), predicate, nullable, label);
++                            }
++                        }
++                    }
++                    equal(unchanged, new ArrayList<>(root), surface + " owner unchanged");
++                }
++            }
++        }
++    }
++
++    private static void nestedAndLiveViews() {
++        for (Surface surface : Surface.values()) {
++            for (Comparator<Integer> order : orders().subList(2, orders().size())) {
++                NavigableSet<Integer> root = new TreeSet<>(order);
++                root.addAll(Arrays.asList(-3, -1, null, 1, 3));
++                for (int bounds = 0; bounds < 8; bounds++) {
++                    NavigableSet<Integer> source = range(root, bounds);
++                    for (int direction = 0; direction < 2; direction++) {
++                        NavigableSet<Integer> ordered = direction == 0
++                                ? source : source.descendingSet();
++                        Predicate<Integer> first = value -> value == null || value >= -1;
++                        Predicate<Integer> second = value -> value == null || value <= 1;
++                        NavigableSet<Integer> nested = view(surface, view(surface, ordered, first), second);
++                        checkSet(ordered, nested, first.and(second), true, "nested " + surface);
++                    }
++                }
++                NavigableSet<Integer> source = range(root, 1).descendingSet();
++                Predicate<Integer> selection = Objects::nonNull;
++                NavigableSet<Integer> selected = view(surface, source, selection);
++                checkSet(source, selected, selection, true, "live before");
++                root.remove(null);
++                root.add(2);
++                checkSet(source, selected, selection, true, "live null replaced by equivalent value");
++                root.remove(-1);
++                root.add(0);
++                checkSet(source, selected, selection, true, "live owner change");
++                root.clear();
++                checkSet(source, selected, selection, true, "live cleared bounded owner");
++            }
++        }
++    }
++
++    private static final class ObservedSet extends TreeSet<Integer> {
++        private static final long serialVersionUID = 1L;
++        private final ArrayList<String> observations = new ArrayList<>();
++
++        ObservedSet(Comparator<Integer> order, List<Integer> values) {
++            super(order);
++            addAll(values);
++        }
++
++        @Override public boolean isEmpty() { observations.add("isEmpty"); return super.isEmpty(); }
++        @Override public Integer first() { observations.add("first"); return super.first(); }
++        @Override public Integer last() { observations.add("last"); return super.last(); }
++    }
++
++    private static void historicalExtremeProbes() {
++        Comparator<Integer> rejectNull = (left, right) -> {
++            if (left == null || right == null) throw new AssertionError("fabricated null comparison");
++            return Integer.compare(left, right);
++        };
++        for (Surface surface : List.of(Surface.READONLY, Surface.FACADE)) {
++            ObservedSet firstNull = new ObservedSet(Comparator.nullsFirst(Comparator.naturalOrder()),
++                    Arrays.asList(null, 1, 3));
++            equal(null, view(surface, firstNull, value -> true).ceiling(9), "first-null absence");
++            equal(List.of("isEmpty", "first"), firstNull.observations, "first-null probe order");
++            ObservedSet lastNull = new ObservedSet(Comparator.nullsLast(Comparator.naturalOrder()),
++                    Arrays.asList(1, 3, null));
++            equal(null, view(surface, lastNull, value -> true).floor(-9), "last-null absence");
++            equal(List.of("isEmpty", "first", "last"), lastNull.observations, "last-null probe order");
++            ObservedSet middleNull = new ObservedSet(MIDDLE, Arrays.asList(-1, null, 3));
++            equal(-1, view(surface, middleNull, Objects::nonNull).floor(2), "interior-null continuation");
++            equal(List.of("isEmpty", "first", "last"), middleNull.observations,
++                    "interior-null retains extreme probe order");
++            ObservedSet nonNull = new ObservedSet(rejectNull, List.of(1, 3));
++            equal(null, view(surface, nonNull, value -> true).higher(9), "null-rejecting absence");
++            equal(List.of("isEmpty", "first", "last"), nonNull.observations,
++                    "nonnull absence retains extreme probe order");
++            ObservedSet empty = new ObservedSet(rejectNull, List.of());
++            equal(null, view(surface, empty, value -> true).lower(0), "empty source");
++            equal(List.of("isEmpty"), empty.observations, "empty guard short-circuits extrema");
++        }
++    }
++
++    private static void predicateFailures() {
++        for (Surface surface : List.of(Surface.READONLY, Surface.FACADE)) {
++            for (int direction = 0; direction < 2; direction++) {
++                NavigableSet<Integer> root = new TreeSet<>(List.of(1, 3, 5));
++                List<Integer> seen = new ArrayList<>();
++                IllegalArgumentException failure = new IllegalArgumentException("predicate");
++                Predicate<Integer> selection = key -> {
++                    seen.add(key);
++                    if (key == 3) throw failure;
++                    return false;
++                };
++                NavigableSet<Integer> selected = view(surface, root.subSet(1, true, 5, true), selection);
++                int relation = direction == 0 ? 2 : 1;
++                int probe = direction == 0 ? -9 : 9;
++                List<Integer> expected = direction == 0 ? List.of(1, 3) : List.of(5, 3);
++                throwsSame(failure, () -> navigate(selected, probe, relation), "predicate identity");
++                equal(expected, seen, "predicate directional encounter order");
++                seen.clear();
++                NavigableSet<Integer> nested = view(surface, selected,
++                        key -> { throw new AssertionError("outer predicate after inner failure"); });
++                throwsSame(failure, () -> navigate(nested, probe, relation), "nested predicate identity");
++                equal(expected, seen, "nested predicate directional encounter order");
++            }
++            NavigableSet<Integer> source = new TreeSet<>(List.of(1, 3, 5));
++            List<Integer> seen = new ArrayList<>();
++            NavigableSet<Integer> inner = view(surface, source, key -> {
++                seen.add(key);
++                throw new AssertionError("predicate outside natural strict query range");
++            });
++            NavigableSet<Integer> outer = view(surface, inner,
++                    key -> { throw new AssertionError("outer predicate without a candidate"); });
++            equal(null, outer.lower(0), "nested natural lower outside range");
++            equal(null, outer.lower(1), "nested natural lower excludes query key");
++            equal(List.of(), seen, "no new natural-order empty-domain predicate probes");
++
++            IllegalArgumentException nullFailure = new IllegalArgumentException("retained null predicate");
++            NavigableSet<Integer> nullable = new TreeSet<>(MIDDLE);
++            nullable.addAll(Arrays.asList(-1, null, 3));
++            NavigableSet<Integer> selected = view(surface, nullable, value -> {
++                if (value == null) throw nullFailure;
++                return true;
++            });
++            throwsSame(nullFailure, () -> selected.floor(2), "interior-null predicate identity");
++            throwsSame(nullFailure, () -> selected.ceiling(2), "interior-null predicate identity forward");
++        }
++    }
++
++    private static final class FaultOrder implements Comparator<Integer> {
++        private final IllegalArgumentException failure;
++        private int comparisons;
++        private int failAt;
++
++        FaultOrder(IllegalArgumentException failure) { this.failure = failure; }
++        void arm(int target) { comparisons = 0; failAt = target; }
++
++        @Override public int compare(Integer left, Integer right) {
++            if (++comparisons == failAt) throw failure;
++            return MIDDLE.compare(left, right);
++        }
++    }
++
++    private record FaultFixture(FaultOrder order, NavigableSet<Integer> selected) { }
++
++    private static FaultFixture faultFixture(Surface surface, IllegalArgumentException failure) {
++        FaultOrder order = new FaultOrder(failure);
++        NavigableSet<Integer> source = new TreeSet<>(order);
++        source.addAll(Arrays.asList(-1, null, 3));
++        NavigableSet<Integer> selected = view(surface, source, Objects::nonNull);
++        order.arm(0);
++        return new FaultFixture(order, selected);
++    }
++
++    private static void comparatorFailures() {
++        for (Surface surface : List.of(Surface.READONLY, Surface.FACADE)) {
++            for (Integer probe : probes(true)) {
++                for (int relation = 0; relation < 4; relation++) {
++                    IllegalArgumentException failure = new IllegalArgumentException("comparator");
++                    FaultFixture control = faultFixture(surface, failure);
++                    NavigableSet<Integer> expected = new TreeSet<>(MIDDLE);
++                    expected.addAll(List.of(-1, 3));
++                    equal(navigate(expected, probe, relation), navigate(control.selected(), probe, relation),
++                            "fault control independent result");
++                    int comparisons = control.order().comparisons;
++                    int selectedRelation = relation;
++                    for (int call = 1; call <= comparisons; call++) {
++                        FaultFixture fault = faultFixture(surface, failure);
++                        fault.order().arm(call);
++                        throwsSame(failure, () -> navigate(fault.selected(), probe, selectedRelation),
++                                "comparator failure at consumed call " + call);
++                    }
++                }
++            }
++        }
++    }
++
++    private static final class PoisonedSet extends TreeSet<Integer> {
++        private static final long serialVersionUID = 1L;
++        private final IllegalArgumentException failure;
++        PoisonedSet(Comparator<? super Integer> order, IllegalArgumentException failure) {
++            super(order);
++            this.failure = failure;
++        }
++        @Override public Iterator<Integer> iterator() { throw failure; }
++        @Override public Iterator<Integer> descendingIterator() { throw failure; }
++    }
++
++    private static final class FaultingRangeSet extends TreeSet<Integer> {
++        private static final long serialVersionUID = 1L;
++        private final IllegalArgumentException failure;
++        FaultingRangeSet(IllegalArgumentException failure) {
++            super(MIDDLE);
++            this.failure = failure;
++            addAll(Arrays.asList(-1, null, 3));
++        }
++        @Override public NavigableSet<Integer> headSet(Integer to, boolean inclusive) {
++            super.headSet(to, inclusive);
++            return new PoisonedSet(comparator(), failure);
++        }
++        @Override public NavigableSet<Integer> tailSet(Integer from, boolean inclusive) {
++            super.tailSet(from, inclusive);
++            return new PoisonedSet(comparator(), failure);
++        }
++    }
++
++    private static void continuationIteratorFailures() {
++        for (Surface surface : List.of(Surface.READONLY, Surface.FACADE)) {
++            IllegalArgumentException failure = new IllegalArgumentException("continuation iterator");
++            NavigableSet<Integer> selected = view(surface, new FaultingRangeSet(failure), Objects::nonNull);
++            throwsSame(failure, () -> selected.floor(2), "backward interior-null iterator identity");
++            throwsSame(failure, () -> selected.ceiling(2), "forward interior-null iterator identity");
++        }
++    }
++
++    private record Item(int rank, String label) { }
++
++    private static void representativesAndMutationRefusal() {
++        for (Surface surface : Surface.values()) {
++            Comparator<Item> order = Comparator.comparingInt(Item::rank);
++            Item retained = new Item(2, "retained");
++            Item alias = new Item(2, "alias");
++            Item hidden = new Item(1, "hidden");
++            NavigableSet<Item> source = new TreeSet<>(order);
++            source.addAll(List.of(hidden, retained));
++            List<Item> seen = new ArrayList<>();
++            NavigableSet<Item> selected = view(surface, source, item -> {
++                seen.add(item);
++                return item == retained;
++            });
++            for (int relation : new int[] {1, 2}) {
++                seen.clear();
++                identical(retained, navigate(selected, alias, relation), "retained representative");
++                equal(List.of(retained), seen, "stored candidate tested once");
++            }
++            for (boolean empty : List.of(false, true)) {
++                NavigableSet<Integer> root = new TreeSet<>(MIDDLE);
++                if (!empty) root.addAll(Arrays.asList(-1, null, 3));
++                NavigableSet<Integer> readonly = view(surface, root, value -> true);
++                List<Integer> before = new ArrayList<>(root);
++                throwsType(UnsupportedOperationException.class, () -> readonly.add(9), "add refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.remove(9), "absent remove refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.addAll(List.of()), "empty addAll refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.removeAll(List.of()), "empty removeAll refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.retainAll(List.of()), "retainAll refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.removeIf(value -> false), "removeIf refuses");
++                throwsType(UnsupportedOperationException.class, readonly::clear, "clear refuses");
++                throwsType(UnsupportedOperationException.class, readonly::pollFirst, "pollFirst refuses");
++                throwsType(UnsupportedOperationException.class, readonly::pollLast, "pollLast refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.iterator().remove(), "iterator removal refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.descendingIterator().remove(),
++                        "descending iterator removal refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.descendingSet().clear(),
++                        "descending clear refuses");
++                throwsType(UnsupportedOperationException.class, () -> readonly.headSet(3, true).clear(),
++                        "range clear refuses");
++                equal(before, new ArrayList<>(root), "mutation refusals preserve owner");
++            }
++        }
++    }
++
++    private record Outcome(Object value, Class<? extends Throwable> failure) { }
++
++    @SuppressWarnings({"rawtypes", "unchecked"})
++    private static Outcome rawOutcome(NavigableSet source, Object query, int relation) {
++        try {
++            return new Outcome(navigate(source, query, relation), null);
++        } catch (Throwable failure) {
++            return new Outcome(null, failure.getClass());
++        }
++    }
++
++    private static void unchangedEmptyAdmission() {
++        List<Comparator<Integer>> orders = Arrays.asList(null, Comparator.naturalOrder(),
++                Comparator.nullsFirst(Comparator.naturalOrder()), MIDDLE);
++        for (Surface surface : Surface.values()) {
++            for (Comparator<Integer> order : orders) {
++                NavigableSet<Integer> root = new TreeSet<>(order);
++                List<NavigableSet<Integer>> ranges = List.of(root, root.headSet(10, false),
++                        root.tailSet(-10, true), root.subSet(-10, true, 10, false));
++                for (NavigableSet<Integer> bounded : ranges) {
++                    for (int direction = 0; direction < 2; direction++) {
++                        NavigableSet<Integer> source = direction == 0 ? bounded : bounded.descendingSet();
++                        NavigableSet<Integer> admissionOwner = owner(surface, source);
++                        NavigableSet<Integer> selected = view(surface, source,
++                                value -> { throw new AssertionError("predicate on an empty owner"); });
++                        for (Object query : Arrays.asList(null, new Object(), "wrong-comparable", -99, 0, 99)) {
++                            for (int relation = 0; relation < 4; relation++) {
++                                equal(rawOutcome(admissionOwner, query, relation),
++                                        rawOutcome(selected, query, relation), "unchanged empty admission");
++                            }
++                        }
++                    }
++                }
++            }
++        }
++    }
++
++    private static void baselineInteriorNull() {
++        NavigableSet<Integer> source = new TreeSet<>(MIDDLE);
++        source.addAll(Arrays.asList(-1, null, 3));
++        equal(-1, M3FilteredViews.filter(source, Objects::nonNull).floor(2),
++                "interior-null candidate must continue to retained predecessor");
++    }
++
++    public static void runAll() {
++        baselineInteriorNull();
++        setMatrix();
++        nestedAndLiveViews();
++        historicalExtremeProbes();
++        predicateFailures();
++        comparatorFailures();
++        continuationIteratorFailures();
++        representativesAndMutationRefusal();
++        unchangedEmptyAdmission();
++    }
++
++    public static void main(String[] args) {
++        String mode = args.length == 0 ? "--all" : args[0];
++        switch (mode) {
++            case "--all" -> runAll();
++            case "--baseline-interior-null" -> baselineInteriorNull();
++            default -> throw new IllegalArgumentException("--all or --baseline-interior-null required");
++        }
++        System.out.println("PASS readonly-set-null mode=" + mode + " checks=" + checks);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java
+new file mode 100644
+index 0000000..1df4e7a
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java
+@@ -0,0 +1,14 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++/** JUnit adapter for the independent readonly set interior-null oracle. */
++final class M3FilteredSetNullTest {
++    @Test void readonlySetNullContract() {
++        M3FilteredSetNullContract.runAll();
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java
+new file mode 100644
+index 0000000..5a5d3be
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java
+@@ -0,0 +1,152 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
++package com.m3.collections;
++
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Comparator;
++import java.util.ConcurrentModificationException;
++import java.util.List;
++import java.util.NavigableSet;
++import java.util.SortedSet;
++import java.util.Spliterator;
++import java.util.Spliterators;
++import java.util.TreeMap;
++import java.util.TreeSet;
++import java.util.function.Predicate;
++import java.util.stream.StreamSupport;
++
++/** Recursive split oracle, live-view checks and callback-order compatibility. */
++public final class M3FilteredSplitContract {
++    private static int checks;
++    private M3FilteredSplitContract() { }
++    private static final class CountingSet extends TreeSet<Integer> {
++        private static final long serialVersionUID = 1L;
++        private int getterCalls;
++        private boolean failGetter;
++        CountingSet() { super(Comparator.reverseOrder()); }
++        @Override public Comparator<? super Integer> comparator() {
++            getterCalls++;
++            if (failGetter) throw new IllegalStateException("comparator getter");
++            return super.comparator();
++        }
++    }
++    private static void check(boolean value, String description) {
++        checks++;
++        if (!value) throw new AssertionError(description);
++    }
++    private static SortedSet<Integer> view(int mode, NavigableSet<Integer> source,
++                                          Predicate<Integer> predicate) {
++        return switch (mode) {
++            case 0 -> M3FilteredViews.filter((SortedSet<Integer>) source, predicate);
++            case 1 -> M3FilteredViews.filter(source, predicate);
++            case 2 -> M3FilteredNavigableSet.view(source, predicate);
++            case 3 -> M3MutableFilteredViews.filter(source, predicate);
++            case 4 -> {
++                TreeMap<Integer, Integer> map = new TreeMap<>(source.comparator());
++                for (Integer value : source) map.put(value, value);
++                yield M3MutableFilteredViews.filterEntries(map, (k, v) -> predicate.test(k)).navigableKeySet();
++            }
++            default -> throw new AssertionError(mode);
++        };
++    }
++    private static <E> void collect(Spliterator<E> split, Comparator<? super E> comparator,
++                                   List<E> output, int depth) {
++        check(depth < 32, "bounded split depth");
++        check(split.hasCharacteristics(Spliterator.SORTED | Spliterator.ORDERED | Spliterator.DISTINCT),
++                "sorted characteristics retained");
++        check(split.getComparator() == comparator, "split comparator identity");
++        Spliterator<E> prefix = split.trySplit();
++        if (prefix != null) collect(prefix, comparator, output, depth + 1);
++        split.forEachRemaining(output::add);
++    }
++    private static void shapes() {
++        List<Comparator<Integer>> orders = Arrays.asList(null, Comparator.reverseOrder(),
++                Comparator.nullsFirst(Comparator.naturalOrder()),
++                Comparator.nullsLast(Comparator.reverseOrder()));
++        for (Comparator<Integer> order : orders) {
++            for (int mode = 0; mode < 5; mode++) {
++                for (int length : new int[] {0, 1, 17, 127, 1025, 4097}) {
++                    TreeSet<Integer> source = new TreeSet<>(order);
++                    for (int i = 0; i < length; i++) source.add(i - length / 2);
++                    if (order != null && order != Comparator.<Integer>reverseOrder()) source.add(null);
++                    SortedSet<Integer> filtered = view(mode, source, x -> x == null || (x & 1) == 0);
++                    List<Integer> expected = new ArrayList<>(filtered);
++                    List<Integer> actual = new ArrayList<>();
++                    collect(filtered.spliterator(), filtered.comparator(), actual, 0);
++                    check(actual.equals(expected), "split order, membership, nulls and duplicates");
++                    check(filtered.parallelStream().toList().equals(expected), "parallel stream order");
++                    Spliterator<Integer> child = filtered.spliterator().trySplit();
++                    if (child != null && !expected.contains(null)) {
++                        List<Integer> sorted = StreamSupport.stream(child, false).sorted().toList();
++                        // Natural sorted() must not elide work for a reverse-order child.
++                        List<Integer> want = new ArrayList<>(expected.subList(0, sorted.size()));
++                        want.sort(null);
++                        check(sorted.equals(want), "natural stream sort over split");
++                    }
++                    if (filtered instanceof NavigableSet<Integer> nav) {
++                        NavigableSet<Integer> descending = nav.descendingSet();
++                        actual.clear(); collect(descending.spliterator(), descending.comparator(), actual, 0);
++                        check(actual.equals(new ArrayList<>(descending)), "descending recursive split");
++                        if (!expected.isEmpty()) {
++                            SortedSet<Integer> range = filtered.tailSet(expected.get(expected.size() / 2));
++                            actual.clear(); collect(range.spliterator(), range.comparator(), actual, 0);
++                            check(actual.equals(new ArrayList<>(range)), "range recursive split");
++                        }
++                    }
++                }
++            }
++        }
++    }
++    private static void effects() {
++        for (int mode = 0; mode < 4; mode++) {
++            TreeSet<Integer> source = new TreeSet<>(Comparator.reverseOrder());
++            source.addAll(List.of(1, 2, 3, 4));
++            List<Integer> effects = new ArrayList<>();
++            SortedSet<Integer> filtered = view(mode, source, x -> { effects.add(x); return x % 2 == 0; });
++            Spliterator<Integer> split = filtered.spliterator();
++            check(effects.isEmpty(), "construction is lazy");
++            source.add(6);
++            List<Integer> values = new ArrayList<>();
++            split.tryAdvance(values::add);
++            List<Integer> actualEffects = List.copyOf(effects);
++            effects.clear();
++            Spliterator<Integer> old = Spliterators.spliterator(filtered,
++                    Spliterator.ORDERED | Spliterator.SORTED | Spliterator.DISTINCT);
++            old.tryAdvance(x -> { });
++            check(effects.equals(actualEffects), "same iterator/size callback order");
++            check(values.equals(List.of(6)), "late binding sees preceding backing change");
++            int before = effects.size();
++            try { filtered.spliterator().tryAdvance(null); throw new AssertionError("null action accepted"); }
++            catch (NullPointerException expected) { check(effects.size() == before, "null action before callbacks"); }
++            if (mode < 3) {
++                source.add(8);
++                try { split.tryAdvance(x -> { }); throw new AssertionError("lost fail fast"); }
++                catch (ConcurrentModificationException expected) { checks++; }
++                try { filtered.clear(); throw new AssertionError("readonly mutation accepted"); }
++                catch (UnsupportedOperationException expected) { checks++; }
++            }
++        }
++        for (int mode = 0; mode < 4; mode++) {
++            CountingSet source = new CountingSet(); source.addAll(List.of(1, 2, 3, 4));
++            SortedSet<Integer> filtered = view(mode, source, x -> true);
++            source.getterCalls = 0;
++            Spliterator<Integer> split = filtered.spliterator();
++            check(source.getterCalls == 0, "comparator getter remains lazy");
++            check(split.getComparator() == Comparator.<Integer>reverseOrder(), "owner comparator");
++            check(source.getterCalls == 1, "root delegates one getter call");
++            Spliterator<Integer> child = split.trySplit();
++            check(child != null, "nonempty child");
++            int before = source.getterCalls;
++            child.getComparator();
++            check(source.getterCalls == before + 1, "child delegates one getter call");
++            source.failGetter = true;
++            Spliterator<Integer> lazy = filtered.spliterator();
++            try { lazy.getComparator(); throw new AssertionError("getter exception lost"); }
++            catch (IllegalStateException expected) { checks++; }
++        }
++    }
++    public static void main(String[] args) {
++        shapes(); effects();
++        System.out.println("FILTERED_SPLITS_PASS checks=" + checks);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java
+new file mode 100644
+index 0000000..d31bc74
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java
+@@ -0,0 +1,31 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++final class M3FilteredSplitsMaskSpansTest {
++    @Test void filteredRecursiveSplits() { M3FilteredSplitContract.main(new String[0]); }
++    @Test void maskSpanJavaOracle() { M3MaskSpansContract.main(new String[0]); }
++    @Test void maskSpanCheckedJniOracle() {
++        org.junit.jupiter.api.Assumptions.assumeTrue(Boolean.getBoolean("m3.mask.spans.native.required"),
++                "native proof requires the explicit checked-JNI runner");
++        M3MaskSpansContract.main(new String[] {"native"});
++    }
++    @Test void allNativeBackendsAreRequiredByTheFullLane() {
++        org.junit.jupiter.api.Assumptions.assumeTrue(Boolean.getBoolean("m3.collections.all.native.required"),
++                "all-native qualification is an explicit, isolated lane");
++        org.junit.jupiter.api.Assertions.assertAll(
++                () -> org.junit.jupiter.api.Assertions.assertTrue(M3IndexMaskCompactor.nativeAvailable(), "mask"),
++                () -> org.junit.jupiter.api.Assertions.assertTrue(M3IndexPathMasks.nativeAvailable(), "pathmask"),
++                () -> org.junit.jupiter.api.Assertions.assertTrue(M3LongAddressKernel.nativeAvailable(), "address"),
++                () -> org.junit.jupiter.api.Assertions.assertTrue(M3SpanIndex.nativeAvailable(), "span"),
++                () -> org.junit.jupiter.api.Assertions.assertTrue(M3StateMaskHistogram.nativeAvailable(), "statehist"),
++                () -> org.junit.jupiter.api.Assertions.assertTrue(M3LongRankBatchNative.nativeAvailable(), "rank"),
++                () -> org.junit.jupiter.api.Assertions.assertTrue(M3SignalOrderNative.available(), "signal"),
++                () -> org.junit.jupiter.api.Assertions.assertTrue(M3ResidencyStateMaskIndex.nativeAvailable(), "residency"));
++        System.loadLibrary("m3bitlane");
++        M3BitLane28 lane = new M3BitLane28();
++        lane.set(0); lane.set(63); lane.set(4096);
++        org.junit.jupiter.api.Assertions.assertEquals(lane.cardinality(0, 4097), lane.cardinalityNative(0, 4097));
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java b/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java
+new file mode 100644
+index 0000000..932f0ca
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java
+@@ -0,0 +1,230 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * Copyright 2026 Hitesh Soliwal and contributors
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import java.util.Arrays;
++
++/** Regressions for source/output mask-vector aliases across the Java and actual JNI paths. */
++public final class M3IndexPathMasksAliasContract {
++    private static int checks;
++    private static boolean nativeRun;
++
++    private M3IndexPathMasksAliasContract() { }
++
++    private record Inputs(int[] rows, int[] offsets, int[][] planes,
++                          int[] required, int[] forbidden) { }
++
++    private static Inputs inputs(int masks) {
++        int[] required = masks == 0 ? new int[] {1, 0} : new int[] {0, 0};
++        int[] forbidden = new int[] {0, 0};
++        if (masks == 2) { required[0] = 1; forbidden[0] = 1; }
++        return new Inputs(new int[] {3, 17, 3, Integer.MIN_VALUE, Integer.MAX_VALUE, -9},
++                new int[] {0, 1, 2, 3, 4, 5},
++                new int[][] {{1, 1, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 0}},
++                required, forbidden);
++    }
++
++    private static int[] alias(Inputs input, int category) {
++        return switch (category) {
++            case 0 -> input.rows();
++            case 1 -> input.offsets();
++            case 2 -> input.planes()[0];
++            case 3 -> input.planes()[1];
++            case 4 -> input.required();
++            case 5 -> input.forbidden();
++            default -> throw new AssertionError("unknown alias category");
++        };
++    }
++
++    private static Inputs copy(Inputs input) {
++        int[][] planes = new int[input.planes().length][];
++        for (int i = 0; i < planes.length; i++) {
++            planes[i] = input.planes()[i] == null ? null : input.planes()[i].clone();
++        }
++        return new Inputs(input.rows().clone(), input.offsets().clone(), planes,
++                input.required().clone(), input.forbidden().clone());
++    }
++
++    private static void same(int[] expected, int[] actual, String what) {
++        checks++;
++        if (!Arrays.equals(expected, actual)) {
++            throw new AssertionError(what + ": " + Arrays.toString(expected)
++                    + " != " + Arrays.toString(actual));
++        }
++    }
++
++    private static void unchanged(Inputs before, Inputs input) {
++        same(before.rows(), input.rows(), "rows changed");
++        same(before.offsets(), input.offsets(), "offsets changed");
++        for (int i = 0; i < before.planes().length; i++) {
++            same(before.planes()[i], input.planes()[i], "state plane changed");
++        }
++        same(before.required(), input.required(), "required masks changed");
++        same(before.forbidden(), input.forbidden(), "forbidden masks changed");
++    }
++
++    private static long scan(Inputs input, int first, int count, int stride, int next,
++            int[] output, int outputOffset, int limit, M3IndexPathMasks.Backend backend) {
++        return M3IndexPathMasks.scanWindow(input.rows(), input.offsets(), input.planes(),
++                input.required(), input.forbidden(), first, count, stride, next,
++                output, outputOffset, limit, backend);
++    }
++
++    private static void refuses(Inputs input, int[] output, int first, int count,
++            int stride, int next, int offset, int limit, M3IndexPathMasks.Backend backend,
++            Class<? extends RuntimeException> expected, String message) {
++        Inputs before = copy(input);
++        int[] outputBefore = output.clone();
++        checks++;
++        try {
++            scan(input, first, count, stride, next, output, offset, limit, backend);
++            throw new AssertionError("did not reject " + expected.getSimpleName() + " " + backend);
++        } catch (RuntimeException failure) {
++            if (!expected.isInstance(failure)) {
++                throw new AssertionError("wrong refusal " + backend, failure);
++            }
++            if (message != null && !failure.getMessage().contains(message)) {
++                throw new AssertionError("validation order changed: " + failure, failure);
++            }
++        }
++        unchanged(before, input);
++        same(outputBefore, output, "output changed before refusal");
++    }
++
++    private static void aliasesBeforeAnyWrite() {
++        for (M3IndexPathMasks.Backend backend : M3IndexPathMasks.Backend.values()) {
++            for (int masks = 0; masks < 3; masks++) {
++                for (int category = 0; category < 6; category++) {
++                    for (int variant = 0; variant < 7; variant++) {
++                        Inputs input = inputs(masks);
++                        int[] output = alias(input, category);
++                        int first = 0, count = 6, stride = 1, next = 0, offset = 0, limit = 2;
++                        switch (variant) {
++                            case 1 -> { first = 5; stride = -1; }
++                            case 2 -> { next = 3; offset = 1; limit = 1; }
++                            case 3 -> { first = 6; count = 0; limit = 0; }
++                            case 4 -> { first = 6; count = 0; }
++                            case 5 -> { offset = output.length; limit = 0; }
++                            case 6 -> next = count;
++                            default -> { }
++                        }
++                        refuses(input, output, first, count, stride, next, offset, limit,
++                                backend, IllegalArgumentException.class, "alias");
++                    }
++                }
++            }
++        }
++    }
++
++    private static void sharedMasksAndEmptyInputs() {
++        for (M3IndexPathMasks.Backend backend : M3IndexPathMasks.Backend.values()) {
++            for (int limit : new int[] {0, 1, 2}) {
++                Inputs normal = inputs(0);
++                int[] masks = {1, 0};
++                Inputs shared = new Inputs(normal.rows(), normal.offsets(), normal.planes(), masks, masks);
++                refuses(shared, masks, 0, 6, 1, 0, 0, limit, backend,
++                        IllegalArgumentException.class, "alias");
++            }
++            for (int category = 0; category < 6; category++) {
++                Inputs empty = new Inputs(new int[0], new int[0],
++                        new int[][] {new int[0], new int[0]}, new int[] {1, 0}, new int[2]);
++                refuses(empty, alias(empty, category), 0, 0, 1, 0, 0, 0,
++                        backend, IllegalArgumentException.class, "alias");
++            }
++            // Zero stages is invalid independently of aliases and empty path/limit.
++            int[] masks = new int[0];
++            Inputs noStages = new Inputs(new int[0], new int[0], new int[0][], masks, masks);
++            refuses(noStages, masks, 0, 0, 1, 0, 0, 0, backend,
++                    IllegalArgumentException.class, "aligned mask stages");
++        }
++    }
++
++    private static void validationOrder() {
++        for (M3IndexPathMasks.Backend backend : M3IndexPathMasks.Backend.values()) {
++            Inputs input = inputs(0);
++            refuses(input, input.required(), 0, 6, 1, -1, 0, 1, backend,
++                    IndexOutOfBoundsException.class, "path ordinal");
++            refuses(input, input.required(), 0, 6, 1, 0, 0, -1, backend,
++                    IllegalArgumentException.class, "bounded window");
++            refuses(input, input.forbidden(), 0, 6, 1, 0, 0, M3IndexPathMasks.MAX_WINDOW + 1,
++                    backend, IllegalArgumentException.class, "bounded window");
++            refuses(input, input.required(), 0, 6, 1, 0, 3, 0, backend,
++                    IndexOutOfBoundsException.class, null);
++            refuses(input, input.required(), 0, 6, 0, 0, 0, 1, backend,
++                    IndexOutOfBoundsException.class, "offset/count/stride");
++            Inputs nullPlane = inputs(0);
++            nullPlane.planes()[1] = null;
++            refuses(nullPlane, nullPlane.required(), 0, 6, 1, 0, 0, 1,
++                    backend, NullPointerException.class, "statePlanes");
++        }
++    }
++
++    private static void result(long packed, int next, int written) {
++        checks++;
++        if (M3IndexPathMasks.nextOrdinal(packed) != next || M3IndexPathMasks.written(packed) != written) {
++            throw new AssertionError("wrong cursor or selected count");
++        }
++    }
++
++    private static void validSeparateOutput(M3IndexPathMasks.Backend backend) {
++        Inputs input = new Inputs(new int[] {9, 9, 9, 7, -1, Integer.MIN_VALUE},
++                new int[] {5, 4, 3, 2, 1, 0},
++                new int[][] {{1, 0, 3, 1, 1, 1}, {0, 0, 0, 2, 0, 0}},
++                new int[] {1, 0}, new int[] {0, 2});
++        Inputs before = copy(input);
++        int[] output = {101, 101, 101, 101};
++        result(scan(input, 0, 6, 1, 0, output, 1, 2, backend), 2, 2);
++        same(new int[] {101, 9, 9, 101}, output, "forward duplicate rows");
++        result(scan(input, 0, 6, 1, 2, output, 1, 2, backend), 6, 2);
++        same(new int[] {101, 7, Integer.MIN_VALUE, 101}, output, "forward resume");
++        result(scan(input, 5, 6, -1, 0, output, 1, 2, backend), 3, 2);
++        same(new int[] {101, Integer.MIN_VALUE, 7, 101}, output, "reverse order");
++        result(scan(input, 5, 6, -1, 3, output, 1, 2, backend), 6, 2);
++        same(new int[] {101, 9, 9, 101}, output, "reverse resume");
++        result(scan(input, 0, 6, 1, 3, output, output.length, 0, backend), 3, 0);
++        result(scan(input, 6, 0, 1, 0, output, 1, 2, backend), 0, 0);
++        same(new int[] {101, 9, 9, 101}, output, "empty windows changed output");
++        unchanged(before, input);
++
++        int[] sharedMasks = {1, 0};
++        Inputs shared = new Inputs(input.rows(), input.offsets(), input.planes(), sharedMasks, sharedMasks);
++        Inputs sharedBefore = copy(shared);
++        result(scan(shared, 0, 6, 1, 0, output, 1, 2, backend), 6, 0);
++        same(new int[] {101, 9, 9, 101}, output, "overlapping masks changed output");
++        unchanged(sharedBefore, shared);
++
++        int[] commonMetadata = {0, 1};
++        Inputs inputAliases = new Inputs(new int[] {7, 8}, commonMetadata,
++                new int[][] {commonMetadata}, new int[] {0}, new int[] {0});
++        Inputs inputAliasesBefore = copy(inputAliases);
++        result(scan(inputAliases, 0, 2, 1, 0, output, 1, 2, backend), 2, 2);
++        same(new int[] {101, 7, 8, 101}, output, "safe input/input alias");
++        unchanged(inputAliasesBefore, inputAliases);
++    }
++
++    public static void main(String[] args) {
++        nativeRun = args.length != 0 && args[0].equals("--native");
++        if (nativeRun != M3IndexPathMasks.nativeAvailable()) {
++            throw new AssertionError("requested native availability does not match actual library");
++        }
++        aliasesBeforeAnyWrite();
++        sharedMasksAndEmptyInputs();
++        validationOrder();
++        validSeparateOutput(M3IndexPathMasks.Backend.JAVA);
++        if (nativeRun) validSeparateOutput(M3IndexPathMasks.Backend.NATIVE_REQUIRED);
++        else {
++            Inputs input = inputs(0);
++            int[] output = {101, 101};
++            checks++;
++            try {
++                scan(input, 0, 6, 1, 0, output, 0, 2, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
++                throw new AssertionError("missing native library was not refused");
++            } catch (UnsatisfiedLinkError expected) {
++                same(new int[] {101, 101}, output, "missing native wrote output");
++            }
++        }
++        System.out.println("M3_PATH_MASK_ALIAS_PASS checks=" + checks + " actualJNI=" + nativeRun);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java b/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java
+new file mode 100644
+index 0000000..b2027fe
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java
+@@ -0,0 +1,163 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * Copyright 2026 Hitesh Soliwal and contributors
++ * SPDX-License-Identifier: Apache-2.0
++ * Source-sealed Synexia JDK21 no-op read-only collection contract proof.
++ */
++package com.m3.collections;
++
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collection;
++import java.util.Comparator;
++import java.util.Iterator;
++import java.util.List;
++import java.util.ListIterator;
++import java.util.Objects;
++import java.util.Random;
++import java.util.concurrent.atomic.AtomicInteger;
++
++/** The same immutable contract must hold for direct, filtered, sorted, sliced
++ * and JDK21 reversed indexed-array views, regardless of logical size.
++ */
++public final class M3IndexedReadOnlyNoopProof {
++    private static long checks;
++    private static final Comparator<Integer> ORDER =
++            Comparator.nullsFirst(Comparator.naturalOrder());
++
++    private M3IndexedReadOnlyNoopProof() { }
++
++    private static void check(boolean good, String why) {
++        checks++;
++        if (!good) throw new AssertionError(why + " check=" + checks);
++    }
++
++    private static void equal(Object expected, Object actual, String why) {
++        checks++;
++        if (!Objects.equals(expected, actual)) {
++            throw new AssertionError(why + " expected=" + expected + " actual=" + actual);
++        }
++    }
++
++    private static void refusal(Runnable mutation, String label) {
++        checks++;
++        try {
++            mutation.run();
++        } catch (UnsupportedOperationException refused) {
++            return;
++        }
++        throw new AssertionError("silent/no-op mutation accepted: " + label);
++    }
++
++    private static void verify(List<Integer> readOnly, String name) {
++        List<Integer> original = new ArrayList<>(readOnly);
++        Object[] referenceArray = readOnly.toArray();
++        check(readOnly instanceof java.util.RandomAccess, name + " random access");
++        refusal(() -> readOnly.set(0, 9), name + " set");
++        refusal(() -> readOnly.add(0, 9), name + " add at index");
++        refusal(() -> readOnly.add(9), name + " add");
++        refusal(() -> readOnly.addAll(List.of()), name + " empty addAll");
++        refusal(() -> readOnly.addAll(0, List.of()), name + " empty indexed addAll");
++        refusal(() -> readOnly.remove(0), name + " remove at index");
++        refusal(() -> readOnly.remove(Integer.valueOf(999)), name + " remove absent");
++        refusal(() -> readOnly.removeAll(List.of(999)), name + " removeAll absent");
++        refusal(() -> readOnly.retainAll(new ArrayList<>(readOnly)), name + " retain all");
++        AtomicInteger predicateCalls = new AtomicInteger();
++        refusal(() -> readOnly.removeIf(x -> {
++            predicateCalls.incrementAndGet();
++            return false;
++        }), name + " removeIf false");
++        equal(0, predicateCalls.get(), name + " refuse before predicate");
++        AtomicInteger functionCalls = new AtomicInteger();
++        refusal(() -> readOnly.replaceAll(x -> {
++            functionCalls.incrementAndGet();
++            return x;
++        }), name + " replaceAll identity");
++        equal(0, functionCalls.get(), name + " refuse before unary operator");
++        refusal(() -> readOnly.sort((a, b) -> {
++            functionCalls.incrementAndGet();
++            return 0;
++        }), name + " sort comparator");
++        equal(0, functionCalls.get(), name + " refuse before comparator");
++        refusal(readOnly::clear, name + " clear");
++        refusal(() -> readOnly.addFirst(9), name + " addFirst");
++        refusal(() -> readOnly.addLast(9), name + " addLast");
++
++        // On an empty JDK reverse view removeFirst/removeLast can be specified as
++        // NoSuchElementException. The owner itself intentionally refuses always.
++        if (readOnly instanceof M3ObjectIndexSnapshot<?>
++                || readOnly instanceof M3IndexedListSnapshot<?>) {
++            refusal(readOnly::removeFirst, name + " removeFirst");
++            refusal(readOnly::removeLast, name + " removeLast");
++        }
++        List<Integer> reverse = readOnly.reversed();
++        equal(new ArrayList<>(readOnly.reversed()), new ArrayList<>(reverse),
++                name + " JDK21 reverse encounter order");
++        refusal(reverse::clear, name + " reverse empty clear");
++        refusal(() -> reverse.removeIf(x -> false), name + " reverse removeIf false");
++        refusal(() -> reverse.addAll(List.of()), name + " reverse empty addAll");
++        refusal(() -> reverse.removeAll(List.of(999)), name + " reverse remove absent");
++        refusal(() -> reverse.retainAll(new ArrayList<>(reverse)),
++                name + " reverse retain all");
++        refusal(() -> reverse.reversed().clear(), name + " double reverse empty clear");
++        refusal(() -> readOnly.subList(0, 0).clear(), name + " empty subList clear");
++        refusal(() -> readOnly.subList(0, 0).removeIf(x -> false),
++                name + " empty subList removeIf");
++        Iterator<Integer> cursor = readOnly.iterator();
++        if (cursor.hasNext()) {
++            Integer first = cursor.next();
++            equal(original.get(0), first, name + " iterator original first");
++            refusal(cursor::remove, name + " iterator remove");
++            ListIterator<Integer> listCursor = readOnly.listIterator();
++            listCursor.next();
++            refusal(() -> listCursor.set(99), name + " list iterator set");
++            refusal(() -> listCursor.add(99), name + " list iterator add");
++        }
++        equal(original, readOnly, name + " unchanged contents");
++        check(Arrays.equals(referenceArray, readOnly.toArray()), name + " unchanged array");
++    }
++
++    private static M3ObjectIndexSnapshot<Integer> objectSnapshot(Integer[] input) {
++        Object[] owned = Arrays.copyOf(input, input.length, Object[].class);
++        int[] slots = new int[input.length];
++        byte[] flags = new byte[input.length];
++        for (int i = 0; i < input.length; i++) {
++            slots[i] = i;
++            flags[i] = (byte) ((i % 3 == 0) ? 1 : 0);
++        }
++        return M3ObjectIndexSnapshot.capture(owned, slots, flags);
++    }
++
++    private static void checkOwner(Integer[] input, String name) {
++        M3ObjectIndexSnapshot<Integer> object = objectSnapshot(input);
++        verify(object, name + " object direct");
++        verify(object.filtered(x -> x == null || x >= 0), name + " object filtered");
++        verify(object.filteredByState(1, 0), name + " object state mask");
++        verify(object.sorted(ORDER), name + " object sorted");
++        verify(object.subList(0, object.size()), name + " object slice");
++        M3IndexedListSnapshot<Integer> indexed = M3IndexedListSnapshot.copyOf(input);
++        verify(indexed, name + " indexed direct");
++        verify(indexed.filtered(x -> x == null || x >= 0), name + " indexed filtered");
++        verify(indexed.sorted(ORDER), name + " indexed sorted");
++        verify(indexed.subList(0, indexed.size()), name + " indexed slice");
++        if (input.length != 0) {
++            verify(object.subList(1, object.size()), name + " object suffix slice");
++            verify(indexed.subList(1, indexed.size()), name + " indexed suffix slice");
++        }
++    }
++
++    public static void main(String[] args) {
++        if (args.length != 0) throw new IllegalArgumentException("no arguments");
++        checkOwner(new Integer[0], "empty");
++        checkOwner(new Integer[] {null}, "null only");
++        checkOwner(new Integer[] {4, 4, null, -3, -3, 0, 7}, "duplicates/null");
++        Random random = new Random(0x4d33494d4d555441L);
++        for (int round = 0; round < 175; round++) {
++            Integer[] input = new Integer[random.nextInt(32)];
++            for (int i = 0; i < input.length; i++) {
++                input[i] = random.nextInt(7) == 0 ? null : random.nextInt(31) - 15;
++            }
++            checkOwner(input, "random " + round);
++        }
++        System.out.println("PASS M3IndexedReadOnlyNoopProof checks=" + checks);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java b/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java
+new file mode 100644
+index 0000000..e4a1517
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java
+@@ -0,0 +1,13 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * Copyright 2026 Hitesh Soliwal and contributors
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++import org.junit.jupiter.api.Test;
++
++/** JUnit delegates to the exact Java21 standalone immutable indexed-view oracle. */
++final class M3IndexedReadOnlyNoopTest {
++    @Test void strictlyReadOnlySnapshots() {
++        M3IndexedReadOnlyNoopProof.main(new String[0]);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekProof.java b/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekProof.java
+new file mode 100644
+index 0000000..f366673
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekProof.java
+@@ -0,0 +1,117 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import java.util.Arrays;
++import java.util.NavigableSet;
++import java.util.Random;
++import java.util.TreeSet;
++
++/** Independent JDK21 signed-long navigation oracle for real M3TreeSet storage. */
++public final class M3IndexedSetAlgebraSeekProof {
++    private static long checks;
++    private static final long[] FALLBACKS = {Long.MIN_VALUE, Long.MAX_VALUE, 0L, -987654321L};
++    private M3IndexedSetAlgebraSeekProof() { }
++
++    private static void equal(long want, long got, String label) {
++        checks++;
++        if (want != got) throw new AssertionError(label + " expected=" + want + " got=" + got);
++    }
++    private static void equal(long[] want, long[] got) {
++        checks++;
++        if (!Arrays.equals(want, got)) throw new AssertionError("sorted rows differ");
++    }
++    private static TreeSet<Long> expected(TreeSet<Long> a, TreeSet<Long> b, int op) {
++        TreeSet<Long> output = new TreeSet<>(a);
++        switch (op) {
++            case 0 -> output.retainAll(b);
++            case 1 -> output.removeAll(b);
++            case 2 -> {
++                TreeSet<Long> common = new TreeSet<>(a);
++                common.retainAll(b);
++                output.addAll(b);
++                output.removeAll(common);
++            }
++            default -> throw new AssertionError(op);
++        }
++        return output;
++    }
++    private static M3LongSortedSet actual(M3LongSortedSet a, M3LongSortedSet b, int op) {
++        return switch (op) {
++            case 0 -> M3LongCompositeViews.sortedIntersection(a, b);
++            case 1 -> M3LongCompositeViews.sortedDifference(a, b);
++            case 2 -> M3LongCompositeViews.sortedSymmetricDifference(a, b);
++            default -> throw new AssertionError(op);
++        };
++    }
++    private static void compare(M3LongSortedSet got, NavigableSet<Long> want, long[] probes) {
++        long[] values = new long[want.size()];
++        int i = 0;
++        for (Long value : want) values[i++] = value;
++        equal(values, got.toArray());
++        for (long query : probes) for (long fallback : FALLBACKS) {
++            Long x = want.lower(query);
++            equal(x == null ? fallback : x, got.lower(query, fallback), "lower");
++            x = want.floor(query);
++            equal(x == null ? fallback : x, got.floor(query, fallback), "floor");
++            x = want.ceiling(query);
++            equal(x == null ? fallback : x, got.ceiling(query, fallback), "ceiling");
++            x = want.higher(query);
++            equal(x == null ? fallback : x, got.higher(query, fallback), "higher");
++        }
++    }
++    private static void run() {
++        Random random = new Random(0x4d334c4f4e47494eL);
++        for (int seed = 0; seed < 80; seed++) {
++            M3LongTreeSet a = new M3LongTreeSet(), b = new M3LongTreeSet();
++            TreeSet<Long> jdkA = new TreeSet<>(), jdkB = new TreeSet<>();
++            for (int phase = 0; phase < 5; phase++) {
++                for (int i = 0; i < 48; i++) {
++                    long key = switch (random.nextInt(20)) {
++                        case 0 -> Long.MIN_VALUE;
++                        case 1 -> Long.MAX_VALUE;
++                        case 2 -> 0L;
++                        default -> random.nextInt(161) - 80L;
++                    };
++                    boolean first = random.nextBoolean();
++                    boolean add = random.nextInt(3) != 0;
++                    M3LongTreeSet owner = first ? a : b;
++                    TreeSet<Long> oracle = first ? jdkA : jdkB;
++                    boolean expected = add ? oracle.add(key) : oracle.remove(key);
++                    boolean actual = add ? owner.add(key) : owner.remove(key);
++                    equal(expected ? 1 : 0, actual ? 1 : 0, "mutation");
++                }
++                long[] probes = {Long.MIN_VALUE, Long.MIN_VALUE + 1L, -81, -1,
++                        0, 1, 81, Long.MAX_VALUE - 1L, Long.MAX_VALUE,
++                        random.nextInt(191) - 95L};
++                for (int op = 0; op < 3; op++) {
++                    compare(actual(a, b, op), expected(jdkA, jdkB, op), probes);
++                }
++                TreeSet<Long> positive = new TreeSet<>(jdkA);
++                positive.removeIf(x -> x < 0L);
++                compare(actual(M3LongSortedViews.filter(a, x -> x >= 0L), b, 0),
++                        expected(positive, jdkB, 0), probes);
++            }
++        }
++        M3LongTreeSet a = new M3LongTreeSet(), b = new M3LongTreeSet();
++        TreeSet<Long> jdkA = new TreeSet<>(), jdkB = new TreeSet<>();
++        for (int i = 0; i < 4096; i++) {
++            long x = Long.MIN_VALUE + (long) i * 997L;
++            a.add(x); jdkA.add(x);
++            if (i % 3 == 0) { b.add(x); jdkB.add(x); }
++            if (i % 7 == 0) { b.add(x + 1L); jdkB.add(x + 1L); }
++        }
++        a.add(Long.MAX_VALUE); b.add(Long.MAX_VALUE);
++        jdkA.add(Long.MAX_VALUE); jdkB.add(Long.MAX_VALUE);
++        long[] probes = {Long.MIN_VALUE, Long.MIN_VALUE + 1L,
++                Long.MIN_VALUE + 4095L * 997L, Long.MAX_VALUE - 1L, Long.MAX_VALUE};
++        for (int op = 0; op < 3; op++) {
++            compare(actual(a, b, op), expected(jdkA, jdkB, op), probes);
++        }
++    }
++
++    public static void main(String[] args) {
++        if (args.length != 0) throw new IllegalArgumentException("unexpected arguments");
++        run();
++        System.out.println("PASS M3IndexedSetAlgebraSeekProof checks=" + checks);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java b/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java
+new file mode 100644
+index 0000000..ceb20d5
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java
+@@ -0,0 +1,11 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++/** Test the same signed-long JDK21 oracle in the original Maven/JUnit module. */
++final class M3IndexedSetAlgebraSeekTest {
++    @Test void boundedNativeOwnerNavigation() {
++        M3IndexedSetAlgebraSeekProof.main(new String[0]);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java b/m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java
+new file mode 100644
+index 0000000..fa45d7b
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java
+@@ -0,0 +1,45 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
++package com.m3.collections;
++
++import java.util.Arrays;
++import java.util.Random;
++
++/** Independent scalar oracle for span edges, offset guards and resumable bounded windows. */
++public final class M3MaskSpansContract {
++    private M3MaskSpansContract() { }
++    public static void main(String[] args) {
++        var backend = args.length == 0 ? M3IndexMaskCompactor.Backend.JAVA
++                : M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
++        if (args.length != 0 && !M3IndexMaskCompactor.nativeAvailable()) throw new AssertionError("JNI unavailable");
++        Random random = new Random(0x3a18L);
++        int checks = 0;
++        for (int iteration = 0; iteration < 12000; iteration++) {
++            int length = random.nextInt(600);
++            int[] rows = new int[length]; byte[] states = new byte[length];
++            for (int i = 0; i < length; i++) {
++                rows[i] = random.nextInt();
++                states[i] = (byte) (iteration % 2 == 0 ? (i % 128 == iteration % 128 ? 128 : 0) : random.nextInt(256));
++            }
++            int first = random.nextInt(length + 1), budget = random.nextInt(700);
++            int cap = iteration % 131, offset = iteration % 7;
++            int required = iteration % 2 == 0 ? 128 : random.nextInt(256);
++            int excluded = iteration % 2 == 0 ? 0 : random.nextInt(256);
++            int[] actual = new int[offset + cap + 9]; Arrays.fill(actual, 0x3a18);
++            int[] expected = actual.clone(), frozenRows = rows.clone(); byte[] frozenStates = states.clone();
++            int next = first, count = 0, end = Math.min(length, first + budget);
++            while (next < end && count < cap) {
++                int flags = states[next] & 255;
++                if ((flags & required) == required && (flags & excluded) == 0) expected[offset + count++] = rows[next];
++                next++;
++            }
++            long result = M3IndexMaskWindow.scanBounded(rows, states, first, budget,
++                    required, excluded, actual, offset, cap, backend);
++            if (result != (((long) next << 32) | count) || !Arrays.equals(actual, expected)
++                    || !Arrays.equals(rows, frozenRows) || !Arrays.equals(states, frozenStates)) {
++                throw new AssertionError("span oracle seed=0x3a18 iteration=" + iteration);
++            }
++            checks++;
++        }
++        System.out.println("MASK_SPANS_PASS cases=" + checks + " backend=" + backend);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java b/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java
+new file mode 100644
+index 0000000..ea3860e
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java
+@@ -0,0 +1,213 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import java.util.Arrays;
++import java.util.Objects;
++
++/** Independent alias, geometry and resumable full-32-bit selection oracle. */
++public final class M3PathMaskAliasContract {
++    private static long checks;
++
++    private M3PathMaskAliasContract() { }
++
++    private static void check(boolean value, String label) {
++        checks++;
++        if (!value) throw new AssertionError(label);
++    }
++
++    private static void equal(int expected, int actual, String label) {
++        check(expected == actual, label + " expected=" + expected + " actual=" + actual);
++    }
++
++    private static void refuses(Class<? extends Throwable> type, Runnable action, String label) {
++        checks++;
++        try {
++            action.run();
++        } catch (Throwable failure) {
++            if (failure.getClass() == type) return;
++            throw new AssertionError(label + " wrong failure " + failure, failure);
++        }
++        throw new AssertionError(label + " did not refuse");
++    }
++
++    /** Permanently retained original failure: output overwrites borrowed mask parameters. */
++    public static void witness() {
++        int[] rows = {42, 43};
++        int[] offsets = {0, 1};
++        int[][] states = {{1, 1}};
++        int[] required = {1};
++        int[] forbidden = {0};
++        refuses(IllegalArgumentException.class, () -> M3IndexPathMasks.scanWindow(
++                rows, offsets, states, required, forbidden, 0, 2, 1, 0,
++                required, 0, 1, M3IndexPathMasks.Backend.JAVA), "required mask alias");
++        equal(1, required[0], "required mask unchanged");
++    }
++
++    private static void aliases(M3IndexPathMasks.Backend backend) {
++        for (boolean aliasRequired : new boolean[] {false, true}) {
++            for (int shape = 0; shape < 4; shape++) {
++                int[] rows = {42, 43};
++                int[] offsets = {0, 1};
++                int[][] states = {{1, 1}, {-1, -1}};
++                int[] required = {1, Integer.MIN_VALUE};
++                int[] forbidden = {0, 0};
++                int[] output = aliasRequired ? required : forbidden;
++                int[] before = output.clone();
++                int count = shape == 2 ? 0 : rows.length;
++                int next = shape == 3 ? count : 0;
++                int limit = shape == 1 ? 0 : 2;
++                refuses(IllegalArgumentException.class, () -> M3IndexPathMasks.scanWindow(
++                        rows, offsets, states, required, forbidden, 0, count, 1, next,
++                        output, 0, limit, backend), "mask alias shape " + shape);
++                check(Arrays.equals(before, output), "alias refusal precedes writes");
++                check(Arrays.equals(rows, new int[] {42, 43}), "rows unchanged");
++                check(Arrays.equals(offsets, new int[] {0, 1}), "offsets unchanged");
++                check(Arrays.deepEquals(states, new int[][] {{1, 1}, {-1, -1}}), "states unchanged");
++            }
++        }
++        int[] rows = {2, 3};
++        int[] offsets = {0, 1};
++        int[][] states = {{1, 1}};
++        int[] required = {1};
++        int[] forbidden = {0};
++        for (int[] output : new int[][] {rows, offsets, states[0]}) {
++            int[] before = output.clone();
++            refuses(IllegalArgumentException.class, () -> M3IndexPathMasks.scanWindow(
++                    rows, offsets, states, required, forbidden, 0, 2, 1, 0,
++                    output, 0, 1, backend), "existing metadata alias");
++            check(Arrays.equals(before, output), "existing alias remains untouched");
++        }
++        // Validation order: malformed shape and output geometry precede alias admission.
++        refuses(IllegalArgumentException.class, () -> M3IndexPathMasks.scanWindow(
++                rows, new int[0], states, required, forbidden, 0, 2, 1, 0,
++                required, 0, 1, backend), "shape before alias");
++        refuses(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.scanWindow(
++                rows, offsets, states, required, forbidden, 0, 2, 1, 0,
++                required, 0, 2, backend), "output bounds before alias");
++    }
++
++    /** Test each bit separately; this intentionally differs from the production word test. */
++    private static boolean accepted(int[][] planes, int[] required, int[] forbidden, int slot) {
++        for (int stage = 0; stage < planes.length; stage++) {
++            for (int bit = 0; bit < Integer.SIZE; bit++) {
++                boolean present = ((planes[stage][slot] >>> bit) & 1) != 0;
++                if (((required[stage] >>> bit) & 1) != 0 && !present) return false;
++                if (((forbidden[stage] >>> bit) & 1) != 0 && present) return false;
++            }
++        }
++        return true;
++    }
++
++    private static void spectrum(M3IndexPathMasks.Backend backend) {
++        int[] words = {0, 1, 2, 3, -1, Integer.MIN_VALUE, Integer.MAX_VALUE,
++                0x5555_5555, 0xaaaa_aaaa, 0x8000_0001};
++        for (int length : new int[] {0, 1, 2, 7, 17, 65}) {
++            for (int stride : new int[] {-3, -1, 1, 3}) {
++                for (int stages : new int[] {1, 2, 4}) {
++                    for (int selection = 0; selection < words.length; selection++) {
++                        int[] rows = new int[length];
++                        int[] offsets = new int[length];
++                        int[][] planes = new int[stages][length + 2];
++                        int[] required = new int[stages];
++                        int[] forbidden = new int[stages];
++                        for (int i = 0; i < length; i++) {
++                            rows[i] = switch (i % 5) {
++                                case 0 -> Integer.MIN_VALUE;
++                                case 1 -> Integer.MAX_VALUE;
++                                case 2 -> 0;
++                                default -> i % 3;
++                            };
++                            offsets[i] = length - i;
++                        }
++                        for (int stage = 0; stage < stages; stage++) {
++                            required[stage] = words[(selection + stage) % words.length];
++                            forbidden[stage] = words[(selection * 3 + stage * 2) % words.length];
++                            for (int i = 0; i < planes[stage].length; i++) {
++                                planes[stage][i] = words[(i + stage * 3) % words.length];
++                            }
++                        }
++                        int first = stride < 0 && length != 0 ? length - 1 : 0;
++                        int count = length == 0 ? 0 : (length - 1) / Math.abs(stride) + 1;
++                        int[] expected = new int[count];
++                        int expectedSize = 0;
++                        for (int ordinal = 0; ordinal < count; ordinal++) {
++                            int at = first + ordinal * stride;
++                            if (accepted(planes, required, forbidden, offsets[at])) {
++                                expected[expectedSize++] = rows[at];
++                            }
++                        }
++                        expected = Arrays.copyOf(expected, expectedSize);
++                        check(Arrays.equals(expected, M3IndexPathMasks.select(rows, offsets,
++                                planes, required, forbidden, first, count, stride, backend)), "detached selection");
++                        int[] rowsBefore = rows.clone();
++                        int[] offsetsBefore = offsets.clone();
++                        int[] requiredBefore = required.clone();
++                        int[] forbiddenBefore = forbidden.clone();
++                        for (int limit : new int[] {1, 3, 8}) {
++                            int next = 0;
++                            int emitted = 0;
++                            do {
++                                int[] output = new int[limit + 4];
++                                Arrays.fill(output, 0x1234_5678);
++                                long result = M3IndexPathMasks.scanWindow(rows, offsets, planes,
++                                        required, forbidden, first, count, stride, next,
++                                        output, 2, limit, backend);
++                                int stop = M3IndexPathMasks.nextOrdinal(result);
++                                int written = M3IndexPathMasks.written(result);
++                                check(stop >= next && stop <= count, "next ordinal bounds");
++                                check(count == 0 || stop > next, "positive-limit progress");
++                                check(written >= 0 && written <= limit, "written bounds");
++                                for (int j = 0; j < written; j++) {
++                                    check(emitted < expected.length, "no excess row");
++                                    equal(expected[emitted++], output[2 + j], "stable path occurrence");
++                                }
++                                for (int j = 0; j < output.length; j++) {
++                                    if (j < 2 || j >= 2 + written) {
++                                        equal(0x1234_5678, output[j], "buffer outside written range");
++                                    }
++                                }
++                                next = stop;
++                            } while (next < count);
++                            equal(expected.length, emitted, "all selected rows emitted");
++                        }
++                        check(Arrays.equals(rowsBefore, rows), "borrowed rows unchanged");
++                        check(Arrays.equals(offsetsBefore, offsets), "borrowed offsets unchanged");
++                        check(Arrays.equals(requiredBefore, required), "borrowed required unchanged");
++                        check(Arrays.equals(forbiddenBefore, forbidden), "borrowed forbidden unchanged");
++                    }
++                }
++            }
++        }
++    }
++
++    public static void run(M3IndexPathMasks.Backend backend) {
++        Objects.requireNonNull(backend, "backend");
++        aliases(backend);
++        spectrum(backend);
++    }
++
++    public static void main(String[] args) {
++        String mode = args.length == 0 ? "java" : args[0];
++        switch (mode) {
++            case "witness" -> witness();
++            case "java" -> run(M3IndexPathMasks.Backend.JAVA);
++            case "native" -> {
++                check(M3IndexPathMasks.nativeAvailable(), "actual native backend required");
++                run(M3IndexPathMasks.Backend.NATIVE_REQUIRED);
++            }
++            case "missing" -> {
++                check(!M3IndexPathMasks.nativeAvailable(), "library must be absent in this JVM");
++                aliases(M3IndexPathMasks.Backend.NATIVE_REQUIRED);
++                refuses(UnsatisfiedLinkError.class, () -> M3IndexPathMasks.scanWindow(
++                        new int[] {1}, new int[] {0}, new int[][] {{1}}, new int[] {1},
++                        new int[] {0}, 0, 1, 1, 0, new int[1], 0, 1,
++                        M3IndexPathMasks.Backend.NATIVE_REQUIRED), "explicit native unavailable");
++            }
++            default -> throw new IllegalArgumentException("java|native|missing|witness required");
++        }
++        System.out.println("PASS M3_PATH_MASK_ALIAS mode=" + mode + " checks=" + checks);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java b/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java
+new file mode 100644
+index 0000000..1b35be6
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java
+@@ -0,0 +1,10 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project. SPDX-License-Identifier: Apache-2.0 */
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++class M3PathMaskAliasTest {
++    @Test void maskInputsRemainBorrowedAndWindowsRemainStable() {
++        M3PathMaskAliasContract.run(M3IndexPathMasks.Backend.JAVA);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java b/m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java
+index 85dcf68..5335fdf 100644
+--- a/m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java
++++ b/m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java
+@@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Modified 2026 by Hitesh Soliwal and contributors: qualify loaded and missing JNI independently.
+ /*
+  * Copyright 2026 Hitesh Soliwal and contributors
+  * SPDX-License-Identifier: Apache-2.0
+@@ -167,10 +168,16 @@
+                 () -> M3SignalDimensions.project(-1, row -> "x",
+                         List.of((ToDoubleFunction<String>) x -> 3.0), new boolean[] {false},
+                         null, 0, 0, M3SignalOrder.Backend.JAVA), "negative rows");
+-        rejects(UnsatisfiedLinkError.class,
+-                () -> M3SignalDimensions.order(new double[][] {{3, 1}},
+-                        new boolean[] {false}, M3SignalOrder.Backend.NATIVE_REQUIRED),
+-                "JNI cannot silently fall back");
++        if (M3SignalOrderNative.available()) {
++            same(new int[] {1, 0}, M3SignalDimensions.order(new double[][] {{3, 1}},
++                    new boolean[] {false}, M3SignalOrder.Backend.NATIVE_REQUIRED),
++                    "loaded JNI produces the exact ascending order");
++        } else {
++            rejects(UnsatisfiedLinkError.class,
++                    () -> M3SignalDimensions.order(new double[][] {{3, 1}},
++                            new boolean[] {false}, M3SignalOrder.Backend.NATIVE_REQUIRED),
++                    "JNI cannot silently fall back");
++        }
+     }
+ 
+     private static int[] oracle(double[][] columns, boolean[] descending,
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java b/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java
+index 5dfe903..dacd7a5 100644
+--- a/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java
++++ b/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java
+@@ -1,9 +1,11 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ /*
+  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+  * SPDX-License-Identifier: Apache-2.0
++ * Modified 2026 by Hitesh Soliwal and contributors: freeze sorted-map entry membership contracts.
+  */
+ package com.m3.collections;
+ 
++import java.util.AbstractMap;
+ import java.util.ArrayList;
+ import java.util.Arrays;
+ import java.util.Collection;
+@@ -21,6 +23,7 @@
+ import java.util.SortedSet;
+ import java.util.TreeMap;
+ import java.util.TreeSet;
++import java.util.function.BiPredicate;
+ 
+ /**
+  * Standalone Java21 before/after oracle for stored-reference and comparator-key
+@@ -126,6 +129,188 @@
+         yes(view.headMap("z", true).containsKey("ADMIN"), "bounded representative lookup");
+     }
+ 
++    /** Frozen counterexample: the JDK owner admits a comparator-equivalent entry key. */
++    private static void readOnlyMapEntryBaseline() {
++        NavigableMap<String, Integer> owner = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
++        owner.put("Alpha", 7);
++        NavigableMap<String, Integer> view =
++                M3FilteredViews.filterEntries(owner, (key, value) -> true);
++        Map.Entry<String, Integer> probe = Map.entry("ALPHA", 7);
++        yes(owner.entrySet().contains(probe), "JDK comparator-key entry membership oracle");
++        yes(view.entrySet().contains(probe), "filtered comparator-key entry membership");
++    }
++
++    /** Build the oracle only in test code; the live product view keeps its owner. */
++    private static void entryMembershipOracle(SortedMap<String, Integer> source,
++            SortedMap<String, Integer> view, BiPredicate<String, Integer> selection,
++            boolean nullable, String label) {
++        TreeMap<String, Integer> expected = new TreeMap<>(source.comparator());
++        for (Map.Entry<String, Integer> entry : source.entrySet()) {
++            if (selection.test(entry.getKey(), entry.getValue())) {
++                expected.put(entry.getKey(), entry.getValue());
++            }
++        }
++        ArrayList<String> keys = new ArrayList<>(Arrays.asList(
++                "Alpha", "ALPHA", "alpha", "BETA", "beta", "GAMMA", "gamma",
++                "OMEGA", "omega", "missing"));
++        if (nullable) keys.add(null);
++        for (String key : keys) {
++            for (Integer value : Arrays.asList(null, -1, 3, 7, 8, 11, 19, 23)) {
++                Map.Entry<String, Integer> probe =
++                        new AbstractMap.SimpleImmutableEntry<>(key, value);
++                eq(expected.entrySet().contains(probe), view.entrySet().contains(probe),
++                        label + " entry=" + probe);
++            }
++        }
++        no(view.entrySet().contains(null), label + " null candidate is not an entry");
++        no(view.entrySet().contains("not an entry"), label + " non-entry candidate");
++        eq(new ArrayList<>(expected.entrySet()), new ArrayList<>(view.entrySet()),
++                label + " iteration retains original key/value representatives");
++    }
++
++    private static void readOnlyMapEntryMembership() {
++        NavigableMap<String, Integer> source = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
++        source.put("alpha", 7);
++        source.put("BETA", 8);
++        source.put("gamma", null);
++        source.put("omega", 19);
++        BiPredicate<String, Integer> selected = (key, value) -> lowercase(key);
++        NavigableMap<String, Integer> view = M3FilteredViews.filterEntries(source, selected);
++        SortedMap<String, Integer> sortedSource = Collections.unmodifiableSortedMap(source);
++        SortedMap<String, Integer> sorted = M3FilteredViews.filterEntries(sortedSource, selected);
++        entryMembershipOracle(source, view, selected, false, "navigable");
++        entryMembershipOracle(sortedSource, sorted, selected, false, "sorted-only");
++        entryMembershipOracle(source.descendingMap(), view.descendingMap(), selected,
++                false, "descending");
++        entryMembershipOracle(source.subMap("ALPHA", true, "OMEGA", false),
++                view.subMap("ALPHA", true, "OMEGA", false), selected, false, "bounded");
++        entryMembershipOracle(source.tailMap("BETA", false).descendingMap(),
++                view.tailMap("BETA", false).descendingMap(), selected, false, "bounded descending");
++        entryMembershipOracle(sortedSource.headMap("OMEGA"), sorted.headMap("OMEGA"),
++                selected, false, "sorted head");
++        entryMembershipOracle(sortedSource.tailMap("BETA"), sorted.tailMap("BETA"),
++                selected, false, "sorted tail");
++        BiPredicate<String, Integer> nestedSelection =
++                (key, value) -> selected.test(key, value) && !"omega".equals(key);
++        NavigableMap<String, Integer> nested = M3FilteredViews.filterEntries(
++                view, (key, value) -> !"omega".equals(key));
++        entryMembershipOracle(source, nested, nestedSelection, false, "nested");
++        yes(view.entrySet().containsAll(Arrays.asList(Map.entry("ALPHA", 7),
++                new AbstractMap.SimpleImmutableEntry<>("GAMMA", null))),
++                "containsAll uses comparator-key membership including null values");
++
++        source.put("ALPHA", 23);
++        source.remove("gamma");
++        entryMembershipOracle(source, view, selected, false, "live replace and remove");
++        entryMembershipOracle(sortedSource, sorted, selected, false, "sorted live replace and remove");
++        source.put("GAMMA", null);
++        no(view.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("gamma", null)),
++                "accepted probe must not expose a hidden newly stored representative");
++        source.remove("GAMMA");
++        source.put("gamma", null);
++        yes(view.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("GAMMA", null)),
++                "reinserted visible stored representative is live");
++
++        NavigableMap<String, Integer> natural = new TreeMap<>();
++        natural.putAll(source);
++        entryMembershipOracle(natural, M3FilteredViews.filterEntries(natural, selected),
++                selected, false, "natural order");
++        NavigableMap<String, Integer> empty = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
++        entryMembershipOracle(empty, M3FilteredViews.filterEntries(empty, selected),
++                selected, false, "empty");
++
++        List<Comparator<String>> orders = List.of(
++                Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER),
++                Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER),
++                Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER).reversed());
++        for (int index = 0; index < orders.size(); index++) {
++            NavigableMap<String, Integer> nullable = new TreeMap<>(orders.get(index));
++            nullable.put(null, null);
++            nullable.put("alpha", 7);
++            nullable.put("BETA", 8);
++            NavigableMap<String, Integer> live = M3FilteredViews.filterEntries(nullable, selected);
++            entryMembershipOracle(nullable, live, selected, true, "nullable " + index);
++            entryMembershipOracle(nullable.descendingMap(), live.descendingMap(), selected,
++                    true, "nullable descending " + index);
++            entryMembershipOracle(nullable.headMap(null, true), live.headMap(null, true),
++                    selected, true, "nullable bounded " + index);
++            SortedMap<String, Integer> only = Collections.unmodifiableSortedMap(nullable);
++            SortedMap<String, Integer> filtered = M3FilteredViews.filterEntries(only, selected);
++            entryMembershipOracle(only, filtered, selected, true, "nullable sorted " + index);
++            entryMembershipOracle(only.headMap(null), filtered.headMap(null), selected,
++                    true, "nullable sorted bounded " + index);
++        }
++    }
++
++    private static void entryFailureIdentity(SortedMap<String, Integer> view,
++            Map.Entry<String, Integer> probe, RuntimeException failure, String label) {
++        try {
++            view.entrySet().contains(probe);
++        } catch (RuntimeException observed) {
++            yes(observed == failure, label + " preserves throwable identity");
++            return;
++        }
++        throw new AssertionError(label + ": must propagate the failure");
++    }
++
++    private static void readOnlyMapEntryCallbacks() {
++        String visible = new String("alpha");
++        String hidden = new String("BETA");
++        NavigableMap<String, Integer> source = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
++        source.put(visible, 7);
++        source.put(hidden, 8);
++        ArrayList<String> observed = new ArrayList<>();
++        NavigableMap<String, Integer> view = M3FilteredViews.filterEntries(source,
++                (key, value) -> { observed.add(key); return lowercase(key); });
++        yes(view.entrySet().contains(Map.entry("ALPHA", 7)), "visible comparator alias");
++        eq(1, observed.size(), "membership tests one matched representative");
++        yes(observed.get(0) == visible, "predicate receives the exact retained visible reference");
++        observed.clear();
++        no(view.entrySet().contains(Map.entry("beta", 8)), "hidden comparator alias");
++        eq(1, observed.size(), "hidden membership tests one matched representative");
++        yes(observed.get(0) == hidden, "predicate receives the exact retained hidden reference");
++        observed.clear();
++        no(view.entrySet().contains(Map.entry("missing", 7)), "absent comparator key");
++        yes(observed.isEmpty(), "absent key does not evaluate visibility of unrelated entries");
++
++        RuntimeException predicateFailure = new IllegalStateException("entry predicate sentinel");
++        NavigableMap<String, Integer> throwing = M3FilteredViews.filterEntries(source,
++                (key, value) -> { throw predicateFailure; });
++        entryFailureIdentity(throwing, Map.entry("ALPHA", 7), predicateFailure, "predicate failure");
++        RuntimeException comparatorFailure = new IllegalArgumentException("entry comparator sentinel");
++        Comparator<String> comparator = (left, right) -> {
++            if ("boom".equals(left) || "boom".equals(right)) throw comparatorFailure;
++            return String.CASE_INSENSITIVE_ORDER.compare(left, right);
++        };
++        NavigableMap<String, Integer> comparatorOwner = new TreeMap<>(comparator);
++        comparatorOwner.put("alpha", 7);
++        entryFailureIdentity(M3FilteredViews.filterEntries(comparatorOwner, (key, value) -> true),
++                Map.entry("boom", 7), comparatorFailure, "comparator failure");
++        refuses(NullPointerException.class,
++                () -> view.entrySet().contains(new AbstractMap.SimpleImmutableEntry<String, Integer>(null, 7)),
++                "owner-rejected null entry key");
++        refuses(ClassCastException.class,
++                () -> view.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>(42, 7)),
++                "owner-rejected entry key type");
++
++        Map.Entry<String, Integer> snapshot = view.entrySet().iterator().next();
++        refuses(UnsupportedOperationException.class, () -> snapshot.setValue(23),
++                "entry remains immutable after membership repair");
++        refuses(UnsupportedOperationException.class, () -> view.entrySet().remove(Map.entry("ALPHA", 7)),
++                "read-only entry removal still refuses comparator aliases");
++        refuses(UnsupportedOperationException.class, () -> view.entrySet().removeAll(List.of()),
++                "read-only no-op entry removal still refuses");
++        refuses(UnsupportedOperationException.class, () -> view.entrySet().removeIf(entry -> {
++            throw new AssertionError("read-only entry removal must not call the predicate");
++        }), "read-only callback refusal");
++        eq(7, source.get("alpha"), "refused writes retain the owner value");
++        source.put("ALPHA", 23);
++        eq(7, snapshot.getValue(), "previous entry projection stays detached after owner update");
++        no(view.entrySet().contains(snapshot), "old snapshot value is no longer a live member");
++        yes(view.entrySet().contains(Map.entry("ALPHA", 23)), "membership sees live replacement");
++        yes(source.firstKey() == visible, "alias update preserves retained key identity");
++    }
++
+     private static void mutableSet() {
+         NavigableSet<String> source = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+         source.add("ADMIN");
+@@ -259,8 +444,11 @@
+             verifyOldSourceIsIncorrect();
+             return;
+         }
++        readOnlyMapEntryBaseline();
+         readOnlySet();
+         readOnlyMap();
++        readOnlyMapEntryMembership();
++        readOnlyMapEntryCallbacks();
+         mutableSet();
+         mutableMap();
+         collidingNewBulkKeys();
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java b/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java
+new file mode 100644
+index 0000000..b551b7b
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java
+@@ -0,0 +1,384 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import java.util.AbstractList;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Comparator;
++import java.util.ConcurrentModificationException;
++import java.util.Iterator;
++import java.util.LinkedList;
++import java.util.List;
++import java.util.Map;
++import java.util.NavigableMap;
++import java.util.NavigableSet;
++import java.util.Objects;
++import java.util.TreeMap;
++import java.util.TreeSet;
++import java.util.concurrent.atomic.AtomicInteger;
++import java.util.function.Predicate;
++import java.util.function.Supplier;
++
++/**
++ * Frozen Java 21 wrapper counterexamples and contract checks.
++ * Modes isolate admitted leaves from explicitly pending source findings.
++ * No mode establishes full collection or JDK runtime qualification.
++ */
++public final class M3WrapperConvergenceContract {
++    private static int checks;
++
++    private M3WrapperConvergenceContract() { }
++
++    private static void equal(Object expected, Object actual, String label) {
++        checks++;
++        if (!Objects.equals(expected, actual)) {
++            throw new AssertionError(label + ": expected=" + expected + " actual=" + actual);
++        }
++    }
++
++    private static void same(Object expected, Object actual, String label) {
++        checks++;
++        if (expected != actual) throw new AssertionError(label + ": reference identity differs");
++    }
++
++    private static void require(boolean accepted, String label) {
++        checks++;
++        if (!accepted) throw new AssertionError(label);
++    }
++
++    private static Throwable failure(Class<? extends Throwable> type,
++            Runnable operation, String label) {
++        checks++;
++        try {
++            operation.run();
++        } catch (Throwable caught) {
++            if (type.isInstance(caught)) return caught;
++            throw new AssertionError(label + ": unexpected " + caught, caught);
++        }
++        throw new AssertionError(label + ": missing " + type.getSimpleName());
++    }
++
++    /** The ordinary iterator must use the same read-only boundary as listIterator. */
++    private static void readOnlyRefusalAndIdentity() {
++        String first = new String("equal");
++        String second = new String("equal");
++        List<String> owner = new ArrayList<>(Arrays.asList("hidden", null, first, second));
++        AtomicInteger calls = new AtomicInteger();
++        List<String> selected = M3FilteredLists.readOnlyFiltered(owner, value -> {
++            calls.incrementAndGet();
++            return value == null || value == first || value == second;
++        });
++        equal(0, calls.get(), "factory remains predicate-lazy");
++        Iterator<String> cursor = selected.iterator();
++        int preparedCalls = calls.get();
++        failure(UnsupportedOperationException.class, cursor::remove, "remove before next");
++        equal(preparedCalls, calls.get(), "read-only remove does not call predicates");
++        equal(true, cursor.hasNext(), "null candidate exists");
++        equal(true, cursor.hasNext(), "repeated lookahead");
++        same(null, cursor.next(), "stored null");
++        failure(UnsupportedOperationException.class, cursor::remove, "remove after null");
++        same(first, cursor.next(), "first equal stored reference");
++        same(second, cursor.next(), "second equal stored reference");
++        equal(false, cursor.hasNext(), "iterator exhaustion");
++        failure(UnsupportedOperationException.class, cursor::remove, "remove after exhaustion");
++        equal(4, owner.size(), "owner unchanged by all refusals");
++        same(first, owner.get(2), "first owner identity retained");
++        same(second, owner.get(3), "second owner identity retained");
++
++        List<Integer> empty = M3FilteredLists.readOnlyFiltered(new ArrayList<>(), value -> true);
++        failure(UnsupportedOperationException.class, empty.iterator()::remove,
++                "empty ordinary iterator removal");
++        failure(UnsupportedOperationException.class, empty.reversed().iterator()::remove,
++                "empty reversed ordinary iterator removal");
++        failure(UnsupportedOperationException.class, empty.subList(0, 0).iterator()::remove,
++                "empty ranged ordinary iterator removal");
++    }
++
++    /** Predicate counts bound traversal work without substituting a timing benchmark. */
++    private static void readOnlyLinearTraversal() {
++        int length = 1024;
++        ArrayList<Integer> owner = new ArrayList<>();
++        ArrayList<Integer> expected = new ArrayList<>();
++        for (int index = 0; index < length; index++) {
++            owner.add(index);
++            if ((index & 1) == 0) expected.add(index);
++        }
++        AtomicInteger calls = new AtomicInteger();
++        List<Integer> selected = M3FilteredLists.readOnlyFiltered(owner, value -> {
++            calls.incrementAndGet();
++            return (value & 1) == 0;
++        });
++        ArrayList<Integer> actual = new ArrayList<>();
++        Iterator<Integer> cursor = selected.iterator();
++        while (cursor.hasNext()) actual.add(cursor.next());
++        equal(expected, actual, "ordinary iterator encounter order");
++        require(calls.get() <= 2 * length + 2,
++                "ordinary iterator predicate work must be linear, actual=" + calls.get());
++
++        calls.set(0);
++        actual.clear();
++        selected.forEach(actual::add);
++        equal(expected, actual, "forEach encounter order");
++        require(calls.get() <= 2 * length + 2,
++                "forEach predicate work must be linear, actual=" + calls.get());
++
++        calls.set(0);
++        equal(expected, Arrays.asList(selected.toArray()), "toArray encounter order");
++        require(calls.get() <= 3 * length + 2,
++                "toArray permits size preflight plus linear traversal, actual=" + calls.get());
++
++        List<Integer> linked = M3FilteredLists.readOnlyFiltered(
++                new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), value -> (value & 1) == 0);
++        equal(List.of(2, 4, 6), collect(linked.iterator()), "linked owner iterator");
++        equal(List.of(6, 4, 2), collect(linked.reversed().iterator()), "reversed iterator");
++        equal(List.of(4, 6), collect(linked.subList(1, 3).iterator()), "physical range iterator");
++    }
++
++    private static <E> List<E> collect(Iterator<E> cursor) {
++        ArrayList<E> result = new ArrayList<>();
++        cursor.forEachRemaining(result::add);
++        return result;
++    }
++
++    /**
++     * Freeze the old AbstractList read path using its unchanged filtered delegate.
++     * The baseline intentionally has no iterator override; it is independent of
++     * the new guard and does not import any proposed traversal optimization.
++     */
++    private static <E> List<E> baselineReadOnly(List<E> delegate) {
++        return new AbstractList<>() {
++            @Override public int size() { return delegate.size(); }
++            @Override public E get(int index) { return delegate.get(index); }
++        };
++    }
++
++    private static List<Object> readTrace(boolean candidate, boolean linked) {
++        List<Integer> owner = linked
++                ? new LinkedList<>(Arrays.asList(1, 2, null, 4, 5, 6))
++                : new ArrayList<>(Arrays.asList(1, 2, null, 4, 5, 6));
++        ArrayList<Integer> calls = new ArrayList<>();
++        Predicate<Integer> predicate = value -> {
++            calls.add(value);
++            return value == null || (value & 1) == 0;
++        };
++        List<Integer> selected = candidate ? M3FilteredLists.readOnlyFiltered(owner, predicate)
++                : baselineReadOnly(M3FilteredLists.filtered(owner, predicate));
++        ArrayList<Object> trace = new ArrayList<>();
++        Iterator<Integer> cursor = selected.iterator();
++        trace.add(calls.size());
++        failure(NullPointerException.class, () -> cursor.forEachRemaining(null),
++                "forEachRemaining null action");
++        trace.add(calls.size());
++        trace.add(cursor.hasNext());
++        trace.add(calls.size());
++        trace.add(cursor.hasNext());
++        trace.add(calls.size());
++        trace.add(cursor.next());
++        trace.add(calls.size());
++        trace.add(cursor.hasNext());
++        trace.add(calls.size());
++        trace.add(cursor.next());
++        trace.add(calls.size());
++        ArrayList<Integer> remaining = new ArrayList<>();
++        cursor.forEachRemaining(remaining::add);
++        trace.add(remaining);
++        trace.add(calls.size());
++        trace.add(cursor.hasNext());
++        trace.add(calls.size());
++        trace.add(new ArrayList<>(calls));
++        return trace;
++    }
++
++    private static Object outcome(Supplier<?> operation) {
++        try { return operation.get(); }
++        catch (RuntimeException | Error caught) { return caught; }
++    }
++
++    private static List<Object> predicateFailureTrace(boolean candidate,
++            IllegalStateException marker) {
++        ArrayList<Integer> owner = new ArrayList<>(List.of(1, 2, 4, 6));
++        ArrayList<Integer> calls = new ArrayList<>();
++        Predicate<Integer> predicate = value -> {
++            calls.add(value);
++            if (value == 4) throw marker;
++            return (value & 1) == 0;
++        };
++        List<Integer> selected = candidate ? M3FilteredLists.readOnlyFiltered(owner, predicate)
++                : baselineReadOnly(M3FilteredLists.filtered(owner, predicate));
++        ArrayList<Object> trace = new ArrayList<>();
++        Iterator<Integer> cursor = selected.iterator();
++        trace.add(calls.size());
++        trace.add(outcome(cursor::hasNext));
++        trace.add(calls.size());
++        trace.add(outcome(cursor::hasNext));
++        trace.add(calls.size());
++        // A failed size scan must not silently poison the original indexed cursor.
++        trace.add(outcome(cursor::next));
++        trace.add(calls.size());
++        trace.add(outcome(cursor::hasNext));
++        trace.add(calls.size());
++        trace.add(outcome(cursor::next));
++        trace.add(calls.size());
++        trace.add(outcome(cursor::next));
++        trace.add(calls.size());
++        trace.add(new ArrayList<>(calls));
++        return trace;
++    }
++
++    private static void readOnlyPreservedReadEffects() {
++        for (boolean linked : new boolean[] {false, true}) {
++            equal(readTrace(false, linked), readTrace(true, linked),
++                    "ordinary read callback tape, linked=" + linked);
++        }
++        IllegalStateException marker = new IllegalStateException("same predicate-owned failure");
++        List<Object> expected = predicateFailureTrace(false, marker);
++        List<Object> actual = predicateFailureTrace(true, marker);
++        equal(expected, actual, "predicate callback order, failure identity and retry behavior");
++        require(expected.contains(marker) && actual.contains(marker),
++                "same caller exception occurs in both read paths");
++    }
++
++    private static void readOnlyFailureContracts() {
++        ArrayList<Integer> owner = new ArrayList<>(List.of(1, 2, 3, 4));
++        List<Integer> selected = M3FilteredLists.readOnlyFiltered(owner, value -> (value & 1) == 0);
++        Iterator<Integer> cursor = selected.iterator();
++        equal(2, cursor.next(), "fail-fast first member");
++        owner.add(6);
++        failure(ConcurrentModificationException.class, cursor::next,
++                "ordinary read-only iterator retains backing fail-fast detection");
++        failure(UnsupportedOperationException.class, cursor::remove,
++                "read-only refusal remains authoritative after backing failure");
++
++        IllegalStateException marker = new IllegalStateException("stable predicate failure");
++        ArrayList<Integer> tape = new ArrayList<>();
++        List<Integer> failed = M3FilteredLists.readOnlyFiltered(
++                new ArrayList<>(List.of(1, 2, 4, 6)), value -> {
++                    tape.add(value);
++                    if (value == 4) throw marker;
++                    return (value & 1) == 0;
++                });
++        Iterator<Integer> failureCursor = failed.iterator();
++        equal(2, failureCursor.next(), "member preceding failure");
++        same(marker, failure(IllegalStateException.class, failureCursor::hasNext,
++                "predicate failure identity"), "same thrown predicate object");
++        require(!tape.contains(6), "no callback after the failing member");
++        failure(IllegalStateException.class, failureCursor::next,
++                "backing filtered cursor is poisoned after its predicate fails");
++        failure(UnsupportedOperationException.class, failureCursor::remove,
++                "poisoned read-only cursor still refuses removal");
++    }
++
++    /** Retained current failure semantics; historical blanket IAE catches must not swallow this. */
++    private static void comparatorFailureIdentity() {
++        IllegalArgumentException marker = new IllegalArgumentException("comparator-owned failure");
++        ArrayList<String> tape = new ArrayList<>();
++        boolean[] armed = {false};
++        Comparator<Integer> order = (left, right) -> {
++            if (armed[0]) {
++                tape.add(left + ":" + right);
++                if (left == 5 && right == 2) throw marker;
++            }
++            return Integer.compare(left, right);
++        };
++        TreeMap<Integer, Integer> map = new TreeMap<>(order);
++        for (int key : new int[] {2, 4, 6, 8}) map.put(key, key);
++        NavigableMap<Integer, Integer> boundedMap = map.subMap(2, true, 8, false);
++        NavigableMap<Integer, Integer> readOnlyMap = M3FilteredViews.filterEntries(
++                boundedMap, (key, value) -> true);
++        NavigableSet<Integer> mutableSet = M3MutableFilteredViews.filter(
++                boundedMap.navigableKeySet(), value -> true);
++        armed[0] = true;
++        same(marker, failure(IllegalArgumentException.class, () -> readOnlyMap.floorEntry(5),
++                "read-only map comparator failure"), "read-only map same failure");
++        equal(List.of("5:2"), tape, "map comparator callback tape stops at original failure");
++        tape.clear();
++        same(marker, failure(IllegalArgumentException.class, () -> mutableSet.floor(5),
++                "mutable set comparator failure"), "mutable set same failure");
++        equal(List.of("5:2"), tape, "set comparator callback tape stops at original failure");
++    }
++
++    /** Pending baseline counterexample until an exception-safe bounded atom is admitted. */
++    private static void boundedMapNavigation() {
++        TreeMap<Integer, Integer> owner = new TreeMap<>();
++        for (int key = 1; key <= 9; key++) owner.put(key, key);
++        NavigableMap<Integer, Integer> backing = owner.subMap(2, true, 8, false);
++        for (boolean descending : new boolean[] {false, true}) {
++            NavigableMap<Integer, Integer> source = descending ? backing.descendingMap() : backing;
++            NavigableMap<Integer, Integer> view = M3FilteredViews.filterEntries(
++                    source, (key, value) -> (key & 1) == 0);
++            TreeMap<Integer, Integer> expected = new TreeMap<>(source.comparator());
++            source.forEach((key, value) -> { if ((key & 1) == 0) expected.put(key, value); });
++            for (int query : new int[] {-100, 0, 2, 3, 6, 7, 8, 100}) {
++                equal(expected.floorEntry(query), view.floorEntry(query), "bounded map floor " + query);
++                equal(expected.lowerEntry(query), view.lowerEntry(query), "bounded map lower " + query);
++                equal(expected.ceilingEntry(query), view.ceilingEntry(query), "bounded map ceiling " + query);
++                equal(expected.higherEntry(query), view.higherEntry(query), "bounded map higher " + query);
++            }
++        }
++    }
++
++    /** Pending baseline counterexample; mutable maps expose this same SetView through key sets. */
++    private static void boundedMutableSetNavigation() {
++        TreeSet<Integer> owner = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
++        NavigableSet<Integer> backing = owner.subSet(2, true, 8, false);
++        for (boolean descending : new boolean[] {false, true}) {
++            NavigableSet<Integer> source = descending ? backing.descendingSet() : backing;
++            NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> (value & 1) == 0);
++            TreeSet<Integer> expected = new TreeSet<>(source.comparator());
++            for (int value : source) if ((value & 1) == 0) expected.add(value);
++            for (int query : new int[] {-100, 0, 2, 3, 6, 7, 8, 100}) {
++                equal(expected.floor(query), view.floor(query), "bounded mutable floor " + query);
++                equal(expected.lower(query), view.lower(query), "bounded mutable lower " + query);
++                equal(expected.ceiling(query), view.ceiling(query), "bounded mutable ceiling " + query);
++                equal(expected.higher(query), view.higher(query), "bounded mutable higher " + query);
++            }
++        }
++    }
++
++    /** A total order puts null strictly between nonpositive and positive integers. */
++    private static void interiorNullNavigation() {
++        Comparator<Integer> order = (left, right) -> {
++            if (left == right) return 0;
++            if (left == null) return right <= 0 ? 1 : -1;
++            if (right == null) return left <= 0 ? -1 : 1;
++            return Integer.compare(left, right);
++        };
++        TreeSet<Integer> source = new TreeSet<>(order);
++        source.addAll(Arrays.asList(-2, null, 2));
++        NavigableSet<Integer> view = M3FilteredViews.filter(source, Objects::nonNull);
++        equal(-2, view.floor(null), "interior-null floor skips hidden null");
++        equal(2, view.ceiling(null), "interior-null ceiling skips hidden null");
++        equal(2, view.higher(0), "interior-null higher skips hidden null");
++        equal(-2, view.lower(1), "interior-null lower skips hidden null");
++        equal(2, view.descendingSet().floor(null), "descending interior-null floor");
++        equal(-2, view.descendingSet().ceiling(null), "descending interior-null ceiling");
++    }
++
++    /** Only admitted leaves are called by the JUnit wrapper; pending modes remain reproducible. */
++    public static void run(String mode) {
++        checks = 0;
++        switch (mode) {
++            case "readonly-policy" -> {
++                readOnlyRefusalAndIdentity();
++                readOnlyPreservedReadEffects();
++            }
++            case "readonly" -> {
++                readOnlyRefusalAndIdentity();
++                readOnlyPreservedReadEffects();
++                comparatorFailureIdentity();
++            }
++            case "readonly-effects" -> readOnlyPreservedReadEffects();
++            case "readonly-linear" -> readOnlyLinearTraversal();
++            case "readonly-failfast" -> readOnlyFailureContracts();
++            case "comparator-failure" -> comparatorFailureIdentity();
++            case "bounded-map" -> boundedMapNavigation();
++            case "bounded-set" -> boundedMutableSetNavigation();
++            case "interior-null" -> interiorNullNavigation();
++            default -> throw new IllegalArgumentException("unknown wrapper contract mode: " + mode);
++        }
++        System.out.println("PASS M3WrapperConvergenceContract mode=" + mode + " checks=" + checks);
++    }
++
++    public static void main(String[] args) { run(args.length == 0 ? "readonly" : args[0]); }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java b/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java
+new file mode 100644
+index 0000000..0a6e1b0
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java
+@@ -0,0 +1,13 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++/** Calls the same frozen standalone contract used by the target runtime gate. */
++class M3WrapperConvergenceTest {
++    @Test
++    void strictReadOnlyListIterationAndRetainedFailureContracts() {
++        M3WrapperConvergenceContract.run("readonly-policy");
++    }
++}

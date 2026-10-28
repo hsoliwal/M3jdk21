@@ -1,0 +1,27 @@
+{
+  "schema": "M3_COLLECTION_VIEW_REFINEMENT_MAPPING_V1",
+  "phase": "STRING",
+  "scope": "maintenance of existing integrated M3JDK21 receiving owners; no family promotion",
+  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "dataset": "collection-final-20261021",
+  "canonical_owner": "hsoliwal/com.synexia",
+  "product_owner": "hsoliwal/M3jdk21",
+  "entries": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "sha256": "bad3171e5467243bf94fe9408da99ccc7406f8d4821b5f6312e7129c91693f25",
+      "action": "restore frozen read-only sequenced contract with existing default/guard atoms"
+    },
+    {
+      "path": "m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveIndexView.java",
+      "sha256": "29e2482c5c944e011b07d6d6dfd10c13bb5fb8c2523274cdb267e7f5558b93be",
+      "action": "packed logical-occurrence decisions and immutable index reuse; public contract unchanged"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/build.py",
+      "sha256": "b4f34c3a8741bccbdaa915bcf81420fe5456612d944f591f55e09a0e9ff78f48",
+      "action": "complete generated JNI ABI and source-built linked-image qualification"
+    }
+  ],
+  "qualification": "m3/docs/collection-views-qualification-20261021.json"
+}

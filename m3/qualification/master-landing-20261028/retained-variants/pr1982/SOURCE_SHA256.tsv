@@ -1,0 +1,3 @@
+path	sha256	git_blob	mode	pr	note
+m3/compatibility/check_public_names.py	8e8d42b4ac580cbf0f2964fc939596956f4d6722da06fd45242f88db2f5d0586	bc17ba8681bb23cd1ec38a93d7d1ffdad7848e73	100644	1982	PR version, not live
+m3/compatibility/test_public_names.py	c2ba7f7d142405151821ca235ebd7b8f5dd54fac34a6109d5daa462e1a30a18b	81036cccad523684eb24e6175a77d2253f869646	100644	1982	PR version, not live

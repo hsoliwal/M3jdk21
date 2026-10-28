@@ -1,0 +1,14 @@
+[
+  {
+    "packet": "m3-view-convergence-20261019",
+    "targets": 20,
+    "changes": 8,
+    "manifest_sha256": "20d2db81622af802f034253915d90c08a43886d99cfb7e19c4cba3dbd3bc8036"
+  },
+  {
+    "packet": "m3-swing-convergence-20261019",
+    "targets": 7,
+    "changes": 3,
+    "manifest_sha256": "11f3d4890741deaa42323a11069c8c2287613dbf1f57db450e80cd8404d3781f"
+  }
+]

@@ -1,0 +1,70 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 array-backed removeIf dual-word receiving gate
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3ArrayList.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java'
+      - 'm3/collections/algorithm-catalog/arraylist-dual-word-mask-20261023.tsv'
+      - 'm3/collections/qualification/arraylist-dual-word-20261023/**'
+      - '.github/workflows/m3jdk21-arraylist-dual-word-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-built-collections:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/arrays/**
+            m3/native/include/m3_jni_core.h
+            m3/collections/**
+            .github/workflows/m3jdk21-arraylist-dual-word-20261023.yml
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source-sealed postimages and unchanged JNI source custody
+        run: |
+          python3 m3/collections/qualification/arraylist-dual-word-20261023/verify_receiver.py
+          python3 -m unittest discover \
+            -s m3/collections/qualification/arraylist-dual-word-20261023 \
+            -p 'test_verify_receiver.py' -v
+      - name: Build, native-check and install actual M3 array/JNI substrate
+        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
+      - name: Expose proven M3 array JNI to all subsequent JVM test processes
+        run: |
+          test -s "$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so"
+          echo "JAVA_TOOL_OPTIONS=-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" >> "$GITHUB_ENV"
+      - name: Compile and test actual M3 collections module
+        run: mvn -B -ntp -f m3/collections/pom.xml test
+      - name: Run full Java21 M3ArrayList differential contract
+        run: |
+          java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3ArrayListShortWordMaskContract
+      - name: Run existing reference identity/fail-fast/serialization oracle
+        run: |
+          java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3ArrayListRemoveIfProof
+      - name: Run bounded state-mask Java differential, unchanged kernel
+        run: |
+          java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3BudgetedMaskWindowContract
+      - name: Compile the unchanged JNI mask selector with JDK21 headers
+        run: |
+          gcc -std=c11 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            m3/collections/src/main/native/collections/m3_index_mask_window.c \
+            -o "$RUNNER_TEMP/libm3_collections_mask.so"
+      - name: Run actual JNI bounded mask-window differential, no Java callbacks in C
+        run: |
+          java -ea -Djava.library.path="$RUNNER_TEMP" \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3BudgetedMaskWindowContract --native

@@ -22,14 +22,14 @@
       "note": "OS provides mapped/sharable memory, not a global OS intern API; canonical identities remain M3JDK21 owned; no automatic String hot-path switch before performance qualification"
     },
     {
-        "source": "Synexia MIndexString owner/range interning; tools4j/shortstring primitive-codec technique (MIT, no code copied)",
-        "source_commit": "383d2d17d5d1942673976db34cda3695991ca422",
-        "target": "java.lang.M3StringImmediate with HotSpot java_lang_M3String native char/copy adapter",
-        "status": "DRAFT_FIXED_ARRAY_IMMEDIATE_RECEIVER_NOT_RUNTIME_QUALIFIED",
-        "recipe": "com.synexia.rewrite.m3fixedshort.M3FixedArrayShortStringRecipe",
-        "target_rule": "Fixed long[32] pages own packed immediate words; weak index and slot owners; preserve java.lang.String, existing owner/range/tuple view, Unicode refusal and JNI compatibility",
-        "gates": "Source-sealed, fixed point/refusal fixture, JDK21 patch compile, HotSpot native build, jtreg, GC/CDS and CPU/heap/native evidence required; no runtime promotion before proof",
-        "provenance": "tools4j MIT copyright 2023 tools4j.org (Marco Terzer); target Java/HotSpot licenses unchanged"
+      "source": "Synexia MIndexString owner/range interning; tools4j/shortstring primitive-codec technique (MIT, no code copied)",
+      "source_commit": "383d2d17d5d1942673976db34cda3695991ca422",
+      "target": "java.lang.M3StringImmediate with HotSpot java_lang_M3String native char/copy adapter",
+      "status": "DRAFT_FIXED_ARRAY_IMMEDIATE_RECEIVER_NOT_RUNTIME_QUALIFIED",
+      "recipe": "com.synexia.rewrite.m3fixedshort.M3FixedArrayShortStringRecipe",
+      "target_rule": "Fixed long[32] pages own packed immediate words; weak index and slot owners; preserve java.lang.String, existing owner/range/tuple view, Unicode refusal and JNI compatibility",
+      "gates": "Source-sealed, fixed point/refusal fixture, JDK21 patch compile, HotSpot native build, jtreg, GC/CDS and CPU/heap/native evidence required; no runtime promotion before proof",
+      "provenance": "tools4j MIT copyright 2023 tools4j.org (Marco Terzer); target Java/HotSpot licenses unchanged"
     },
     {
       "source": "com.synexia.indexstring.projection.MIndexDerivativeRegex / MIndexPredicateAlphabet / native derivative power ABI",
@@ -460,15 +460,6 @@
       "target_rule": "plain-literal index/equality facts are exact and JDK-Pattern-verified; all general-regex features are candidate evidence only"
     },
     {
-      "source": "com.synexia.rewrite.M3RegexStringNativeSignals",
-      "source_commit": "6f6fafa01ce78b6f6187d50305b3e9c2829a7eca",
-      "source_blob_sha1": "2ca773507503bf59c6921f59faa5099ca041662d",
-      "target": "com.m3.precompute.M3CodeTextSignalBatchNative",
-      "status": "no direct port; reuse existing target native owner",
-      "source_role": "Synexia dedicated recipe-mastery regex/String static-signal JNI ABI",
-      "target_rule": "do not introduce a second M3 native ABI; reuse existing M3 code-text signal JNI provider and retain JDK Pattern regex semantics on Java side"
-    },
-    {
       "source": "com.synexia.indexstring.shared.SharedArrayNative.compare / hash32 / metrics / copyTo; SharedSegments.preparedBuffers",
       "source_commit": "857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8",
       "source_blob_sha1": "SharedArrayNative.java:62c2e6e089b6a203b22d5aae4e15a834876f08d1;SharedSegments.java:2912e2afbc13a981ed6f6ef704b8b17047481fea;shared_arrays.cpp:8b85031cfbe1d64f43c93a1453f8670cc65dbafe;shared_string_compare.cpp:c0bf741d48304dceb73fddd0352ab510d1f2265f",
@@ -777,6 +768,88 @@
       "source_license": "GPL-2.0-only WITH Classpath-exception-2.0; existing target notices retained",
       "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-lexicon-convergence-20261019/datasets/indexed-views-20261019",
       "scope_limit": "Refines one existing owner; public collection APIs and the current STRING qualification phase remain unchanged."
+    },
+    {
+      "source": "Canonical Synexia MIndex token-path cursors and public Swift Collections rope traversal ideas",
+      "source_role": "Reusable canonical algorithm/recipe in Synexia; public Swift sources are reference-only ideas",
+      "source_git_repo": "hsoliwal/com.synexia",
+      "source_preimage_revision": "140c263a90f9803b9c46103c63355a286e0515f0",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTupleReferences.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexStringTuple.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java"
+      ],
+      "source_revision_receipt": "m3/runtime-integration/rope-navigation-20261018/HANDOFF.json",
+      "reference_repository": "apple/swift-collections",
+      "reference_revision": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+      "target": "java.lang.M3String.CodeUnitCursor",
+      "target_path": "src/java.base/share/classes/java/lang/M3String.java",
+      "internal_optimization_owner": "java.lang.M3String.CodeUnitCursor",
+      "recipe": "com.synexia.rewrite.M3RopeNavigationRecipe",
+      "canonical_recipe_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RopeNavigationRecipe.java",
+      "receiver_test": "test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "receiver_evidence": "m3/runtime-integration/rope-navigation-20261018/README.md",
+      "status": "CANDIDATE: recipe-generated canonical token-path navigation and M3 bidirectional scalar windows; bounded actual-owner Java21 proof; matched JDK/jtreg/HotSpot/JNI and full target promotion gates remain pending",
+      "target_rule": "Preserve exact UTF-16, canonical owner plus packed coordinate, existing tuple/scalar owners and public JDK names. The M3 scalar cache covers the complete visible leaf interval without adding cursor fields or path arrays. Canonical MIndex retains bounded token paths; neither target adds text payload or a new runtime dependency. String qualification phase unchanged.",
+      "license": "Synexia recipe Apache-2.0; existing MIndex traversal retains Apache-2.0 AND BSD-3-Clause notices. M3 target source keeps GPLv2 with Classpath exception and adapts its existing public cursor independently; no mixed Synexia file or Swift source copied. Apple is reference-only (Apache-2.0 WITH Swift-exception)"
+    },
+    {
+      "source": "com.synexia.rewrite.M3Jdk21ObjectPhysicalSlotProjection (Synexia recipe and candidate contract)",
+      "source_commit": "96bc482c0be6eb5ead933bf538b02912ed3cb58b",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_license": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors",
+      "target": "com.m3.collections.M3ObjectIndexSnapshot.filteredByPhysicalStatePlane",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "target_module": "m3/collections",
+      "target_owner": "M3ObjectIndexSnapshot and existing M3IndexPathMasks; no second payload or native ABI",
+      "source_preimage_sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+      "target_postimage_sha256": "db9e91e59fab8ef1166ee42d2936db0e23a6b59b34165273bfcac5b73382fa7a",
+      "recipe": "com.synexia.rewrite.M3Jdk21ObjectPhysicalSlotProjection",
+      "recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-object-physical-slot-projection-20261018",
+      "receiver_test": "m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java",
+      "status": "ISOLATED_COLLECTION_CANDIDATE; STRING -> arrays -> collections phase not advanced",
+      "gates": "source-sealed OpenRewrite fixed point; Java21 -Xlint Werror; full-int mask sort/slice/immutability; existing C17 JNI native-required parity; later jtreg/JCK/runtime image and cost gates pending",
+      "attribution": "No external donor source copied; LeetCode/HackerRank/GeeksforGeeks used for problem-category comparison only"
+    },
+    {
+      "source": "Apache NetBeans OffsetGapList and FlyOffsetGapList occurrence-coordinate and binary-search concepts",
+      "source_repository": "apache/netbeans",
+      "source_commit": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+      "source_paths": [
+        "ide/editor.util/src/org/netbeans/lib/editor/util/OffsetGapList.java",
+        "ide/editor.util/src/org/netbeans/lib/editor/util/FlyOffsetGapList.java"
+      ],
+      "source_role": "EVIDENCE_ONLY; no Apache NetBeans source body copied",
+      "target": "java.lang.M3StringBuilderLane and existing AbstractStringBuilder indexed UTF-16 readers",
+      "target_paths": [
+        "src/java.base/share/classes/java/lang/M3StringBuilderLane.java",
+        "src/java.base/share/classes/java/lang/AbstractStringBuilder.java"
+      ],
+      "public_api": "java.lang.StringBuilder and java.lang.StringBuffer retain their names, descriptors and synchronization boundaries",
+      "target_module": "java.base",
+      "intake_mode": "TARGET_OWNED_PORT",
+      "copied_code": false,
+      "target_license": "Preserve existing GPL/OpenJDK headers; recipe licensing does not relicense generated source",
+      "existing_owner_revision": "677437be295b23f7ccf7409be287008944d0e8b0",
+      "recipe": "com.synexia.m3.CompositeBuilderIndexedRead",
+      "canonical_recipe_repository": "hsoliwal/com.synexia",
+      "canonical_recipe_path": "synexia-openrewrite-recipes/crates/m3-string-consumers/composite-builder",
+      "historical_recipe_revision": "4a33bee229d35f45ffb11e51310c05ae61592928",
+      "adaptation": "Add one primitive cumulative piece-end index to the existing parallel lanes; locate charAt and code-point reads without flattening or copying retained String pieces; publish descriptor growth only after all array copies succeed",
+      "receiver_test": "test/jdk/java/lang/StringBuilder/M3CompositeBuilderIndexedReadTest.java",
+      "proof_receipt": "m3/compatibility/netbeans-composite-builder-indexed-read/receipt.json",
+      "status": "GENERATED_STRING_REFINEMENT_PENDING_MATCHED_RUNTIME_QUALIFICATION",
+      "phase_rule": "String qualification remains active; no receiving-family or phase completion is claimed",
+      "gates": "Exact-source baseline and candidate behavior, public/protected ABI, named OpenRewrite SDK execution/fixed point/refusal, bounded CPU/allocation/retention observations; matched source-built image, enabled M3 storage and native-owner lifetime remain separately reported"
+    },
+    {
+      "source": "com.synexia.rewrite.M3RegexStringNativeSignals",
+      "source_commit": "6f6fafa01ce78b6f6187d50305b3e9c2829a7eca",
+      "source_blob_sha1": "2ca773507503bf59c6921f59faa5099ca041662d",
+      "target": "com.m3.precompute.M3CodeTextSignalBatchNative",
+      "status": "no direct port; reuse existing target native owner",
+      "source_role": "Synexia dedicated recipe-mastery regex/String static-signal JNI ABI",
+      "target_rule": "retain this separate-module provider and its existing ABI; the java.base receiver has a target-owned libjava batch candidate recorded as m3.code-text-signal-batch. No external module loader enters java.base; retain JDK Pattern regex semantics on Java side"
     }
   ],
   "imported_donor_sources": [],
@@ -3960,116 +4033,6 @@
           }
         ],
         "owner": "jdk.internal.mindex.M3ASTPC",
-        "identity": {
-          "namespace": "Preserve defining owner, exact raw spelling and loader identity; no global class identity.",
-          "generation": "Implementation/context revision is distinct from release label, class-file version and epoch."
-        },
-        "contract": {
-          "differences": [],
-          "compatibility_obligations": [
-            "Public JDK types and behavior remain unchanged.",
-            "No blanket prefix rename or class-loading-by-name."
-          ],
-          "public_surface": [
-            "Internal non-exported API only; no java.base exports added."
-          ]
-        },
-        "format": {
-          "schema": null,
-          "abi": null,
-          "bootstrap": "Module/bootstrap placement pending proof."
-        },
-        "dependencies": [
-          {
-            "id": "java.base",
-            "resolution": "pending",
-            "reason": "Full owner closure must be inlined or reused before port."
-          }
-        ],
-        "materialization": {
-          "admission": "Pending exact owner review.",
-          "joins": "No payload join or dictionary introduced.",
-          "outputs": "Pending exact output contract.",
-          "cached_facts": "Pending budget and lifetime contract."
-        },
-        "recipe": {
-          "id": null,
-          "version": null,
-          "path": null,
-          "sha256": null,
-          "preconditions": [
-            "Close source, dependency and runtime contract review."
-          ],
-          "rollback": "No target code emitted."
-        },
-        "tests": [],
-        "provenance": {
-          "license": "Apache-2.0 for copied Synexia code; original per-file donor obligations retained.",
-          "publication": "User explicitly requested inlining relevant Synexia code under Apache-2.0 into M3jdk21.",
-          "copied_code": false
-        },
-        "sync": {
-          "source_revision": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-          "target_revision": "81f1aeb9b88408a763601982806f9c46f917ba82",
-          "direction": "source-to-target",
-          "target_adaptations": [
-            "Reserved concise name only"
-          ],
-          "pending": [
-            "Full matched configure/make JDK build and jtreg integration",
-            "Runtime consumer, loader/AST/JIT context admission where applicable",
-            "Full repository/dependency/semantic inventory; no whole-family completion"
-          ],
-          "conflicts": []
-        },
-        "lineage": {
-          "previous_sources": [],
-          "previous_targets": [],
-          "supersedes": []
-        },
-        "source_state": "experimental",
-        "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
-      },
-      {
-        "id": "synexia.counterpart.MIndexCompilerASTPrecompute",
-        "kind": "pending",
-        "status": "pending",
-        "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
-        "sources": [
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/MIndexCompilerASTPrecompute.java",
-            "symbol": "com.synexia.mindex.compiler.MIndexCompilerASTPrecompute",
-            "signatures": [
-              "com.synexia.mindex.compiler.MIndexCompilerASTPrecompute"
-            ],
-            "sha256": null,
-            "git_blob_sha1": "1ac623b8fa822f4f8ce9ed9c3bb8c9a5194184b6",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
-          }
-        ],
-        "targets": [
-          {
-            "repo": "hsoliwal/M3jdk21",
-            "commit": null,
-            "module": "jdk.compiler",
-            "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
-            "symbol": "com.sun.tools.javac.m3.M3ASTPC",
-            "signatures": [
-              "com.sun.tools.javac.m3.M3ASTPC"
-            ],
-            "sha256": null,
-            "git_blob_sha1": null,
-            "fingerprint": null,
-            "revision_role": "candidate",
-            "tracking_ref": null
-          }
-        ],
-        "owner": "com.sun.tools.javac.m3.M3ASTPC",
         "identity": {
           "namespace": "Preserve defining owner, exact raw spelling and loader identity; no global class identity.",
           "generation": "Implementation/context revision is distinct from release label, class-file version and epoch."
@@ -8772,8 +8735,8 @@
       },
       {
         "id": "m3.collections.evicting-queue.owner-naming",
-        "kind": "internal-relocation-proposal",
-        "status": "proposed",
+        "kind": "pending",
+        "status": "pending",
         "reason": "The existing owned Object[] ring and stable long-mask implementation has a third-party-labelled M3 namespace. Review a semantic M3 owner namespace; do not confuse this real implementation with generated throw-only provider scaffolds or with installed Java SE collection integration.",
         "sources": [
           {
@@ -8815,9 +8778,29 @@
             "git_blob_sha1": "12eb65d7d4f01624ed34dae6bcad59c14657c46c",
             "fingerprint": null,
             "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections/implementations/evicting-queue",
+            "path": "m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java",
+            "symbol": "com.m3.collections.queue.M3EvictingQueue",
+            "signatures": [
+              "public final class M3EvictingQueue<E> extends AbstractCollection<E> implements Queue<E>, Serializable",
+              "public static <E> M3EvictingQueue<E> create(int)",
+              "public int remainingCapacity()",
+              "public boolean add(E)",
+              "public boolean offer(E)",
+              "public int size()"
+            ],
+            "sha256": "77ba9ea62487377c2cab36d147e38bbd5f4cfc9ca03dd68b4a614a851c168317",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/m3/evicting-queue-canonical-owner-candidate"
           }
         ],
-        "owner": "Existing proving-ground owner com.m3.collections.guava.M3EvictingQueue; proposed semantic name com.m3.collections.queue.M3EvictingQueue is not an approved target or published alias.",
+        "owner": "Historical public Serializable owner com.m3.collections.guava.M3EvictingQueue remains exact. A vendor-neutral com.m3.collections.queue.M3EvictingQueue implementation is staged as an additive draft candidate, not an approved installed JDK owner or automatic binary/serialization alias.",
         "identity": {
           "namespace": "Current nominal and binary owner identity is com.m3.collections.guava.M3EvictingQueue; serialVersionUID=0L. A future move changes serialized class descriptor even when the UID is unchanged.",
           "generation": "Queue instances own an Object[] dynamic ring, primitive head/tail indexes, a state bit and long[] removal masks; no generated scaffold is promoted."
@@ -8856,7 +8839,7 @@
         "materialization": {
           "admission": "Retain existing Object[] dynamic ring and primitive coordinate/state/mask owners; package-only candidate cannot create a replacement collection implementation.",
           "joins": "No new array copying, native queue storage or compatibility facade is authorized by this queued mapping.",
-          "outputs": "No production output in this PR; old Java class and bytecode remain untouched.",
+          "outputs": "Draft PR #1886 adds a separate vendor-neutral implementation/class and standalone candidate module; the legacy Java source, binary identity and serialized data remain unchanged. No java.base promotion is authorized.",
           "cached_facts": "Existing mask and ring-state facts stay implementation-local; no new global index."
         },
         "recipe": {
@@ -8883,13 +8866,13 @@
         ],
         "provenance": {
           "license": "Apache-2.0 owner; retain ASF/Guava contributor notices, original per-file headers and third-party attribution.",
-          "publication": "Target mapping/queue review only. Historical proof summaries are not rename/ABI/JNI/installed image evidence.",
+          "publication": "Additive canonical namespace candidate in draft PR #1886 and recipe draft PR #13228; historical proof summaries alone do not establish installed JDK or repo-wide compatibility.",
           "copied_code": false
         },
         "sync": {
           "source_revision": "4bd27a6fc78ba3f7ca019125c096c33d8a324cee",
           "target_revision": "4bd27a6fc78ba3f7ca019125c096c33d8a324cee",
-          "direction": "same-repository internal name review",
+          "direction": "traceability-only",
           "target_adaptations": [],
           "pending": [
             "Confirm canonical package ownership and public API versus internal implementation designation",
@@ -8903,7 +8886,7 @@
           "previous_targets": [],
           "supersedes": []
         },
-        "source_state": "implemented-proving-module-unpromoted",
+        "source_state": "implemented",
         "observation": "The 20261018 source-bound finite proofs concern existing owner behavior and its own wire identity. Local Maven/CI and installed M3JDK runtime acceptance are outstanding; historical performance report says size-1024 owner was slower on all seven examined workloads."
       },
       {
@@ -9486,6 +9469,514 @@
         },
         "source_state": "partial",
         "observation": "New stable identity in the existing authority; pending status is deliberate. Earlier map records and queue candidates remain unchanged."
+      },
+      {
+        "id": "m3.fs.provider-defaults",
+        "kind": "adapter",
+        "status": "implemented-tested",
+        "reason": "Source-sealed filesystem provider extensions with executed Java/JNI and linked-module receipts; this record does not promote a Java SE backend or qualify the whole M3JDK21 SDK.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/DatabaseFileProvider.java.template",
+            "symbol": "com.m3.fs.DatabaseFileProvider",
+            "signatures": [
+              "DatabaseFileProvider()",
+              "FileSystemOptions options(boolean)"
+            ],
+            "sha256": "3fe0054c721ca6ed2e0668eb0b668c31d94a66c8b004926e02de1b8672370e29",
+            "git_blob_sha1": "a673ea0c4e645ac9177f4c54a1ad5eafaa8a59ba",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/DatabaseFileSystem.java.template",
+            "symbol": "com.m3.fs.DatabaseFileSystem",
+            "signatures": [
+              "DatabaseFileSystem(AbstractFileName,FileObject,Path,FileSystemOptions)"
+            ],
+            "sha256": "c7b9298701e15c8c0694ddda200f12a7f0b55eb0bbb6d80c5f8a43caa018b43e",
+            "git_blob_sha1": "0133155070d77095cea5d5c8dd4cb3df484467c3",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/DatabaseFileObject.java.template",
+            "symbol": "com.m3.fs.DatabaseFileObject",
+            "signatures": [
+              "DatabaseFileObject(AbstractFileName,DatabaseFileSystem)"
+            ],
+            "sha256": "8270e4e57542b037628d1f57e7890af30782488a88175641d4e9e02ca0ea7a9f",
+            "git_blob_sha1": "bf26ee7e4ed3208e63e4ada693a75867d02c9811",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/DatabaseFileName.java.template",
+            "symbol": "com.m3.fs.DatabaseFileName",
+            "signatures": [
+              "DatabaseFileName(String,FileName,String,FileType)"
+            ],
+            "sha256": "b623496d5986e5f3a304754ea5946f4a1ab17f0c97d0eb0048d2439f70286abc",
+            "git_blob_sha1": "8bc4506aa2edb01346b61dd2e22fa120479916c3",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3fs-provider-defaults-20261021/NioFileProvider.java.template",
+            "symbol": "com.m3.fs.NioFileProvider",
+            "signatures": [
+              "FileObject resolve(Path)"
+            ],
+            "sha256": "ef843e6be00b15e201f1f2fc03b8f5143d1028288f100c8db4d230b391f231a6",
+            "git_blob_sha1": "bc66dec75a86a548a8e2c0f0d3f27f6c4a61a751",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/DatabaseFileProvider.java",
+            "symbol": "com.m3.fs.DatabaseFileProvider",
+            "signatures": [
+              "DatabaseFileProvider()",
+              "FileSystemOptions options(boolean)"
+            ],
+            "sha256": "3fe0054c721ca6ed2e0668eb0b668c31d94a66c8b004926e02de1b8672370e29",
+            "git_blob_sha1": "a673ea0c4e645ac9177f4c54a1ad5eafaa8a59ba",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "public"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/DatabaseFileSystem.java",
+            "symbol": "com.m3.fs.DatabaseFileSystem",
+            "signatures": [
+              "DatabaseFileSystem(AbstractFileName,FileObject,Path,FileSystemOptions)"
+            ],
+            "sha256": "c7b9298701e15c8c0694ddda200f12a7f0b55eb0bbb6d80c5f8a43caa018b43e",
+            "git_blob_sha1": "0133155070d77095cea5d5c8dd4cb3df484467c3",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/DatabaseFileObject.java",
+            "symbol": "com.m3.fs.DatabaseFileObject",
+            "signatures": [
+              "DatabaseFileObject(AbstractFileName,DatabaseFileSystem)"
+            ],
+            "sha256": "8270e4e57542b037628d1f57e7890af30782488a88175641d4e9e02ca0ea7a9f",
+            "git_blob_sha1": "bf26ee7e4ed3208e63e4ada693a75867d02c9811",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/DatabaseFileName.java",
+            "symbol": "com.m3.fs.DatabaseFileName",
+            "signatures": [
+              "DatabaseFileName(String,FileName,String,FileType)"
+            ],
+            "sha256": "b623496d5986e5f3a304754ea5946f4a1ab17f0c97d0eb0048d2439f70286abc",
+            "git_blob_sha1": "8bc4506aa2edb01346b61dd2e22fa120479916c3",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/NioFileProvider.java",
+            "symbol": "com.m3.fs.NioFileProvider",
+            "signatures": [
+              "FileObject resolve(Path)"
+            ],
+            "sha256": "ef843e6be00b15e201f1f2fc03b8f5143d1028288f100c8db4d230b391f231a6",
+            "git_blob_sha1": "bc66dec75a86a548a8e2c0f0d3f27f6c4a61a751",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "visibility": "package-private"
+          }
+        ],
+        "owner": "M3JDK21 jdk.m3fs owns the delivered provider API; the existing M3FS native SQLite owner retains database payload/namespace authority and each caller retains its borrowed NIO FileSystem.",
+        "identity": {
+          "namespace": "Database names use the existing mounted native namespace and inode identity. NIO addresses identify the exact live borrowed FileSystem instance in the same JVM; they do not create a second namespace.",
+          "generation": "Database transfers retain their opened owner/path/inode and use existing checked-inode JNI. NIO bindings are weak identities; the traversal owns its content streams and never closes or remounts the caller filesystem."
+        },
+        "contract": {
+          "differences": [
+            "Add public com.m3.fs.DatabaseFileProvider for the m3db layered URI and internal NioFileProvider for MFiles nondefault Path inputs; preserve existing Java SE classes and provider interfaces.",
+            "Keep DatabaseFileSystem, DatabaseFileObject, DatabaseFileName and NioFileProvider package-private within the existing com.m3.fs owner. Existing jdk.m3fs exports suffice; no new module or export is introduced.",
+            "The package keeps provider hooks beside the existing M3FS/MFiles owners while reusing attributed com.m3.fs.vfs base classes; it does not add a competing abstract filesystem or JNI store."
+          ],
+          "compatibility_obligations": [
+            "Preserve the public Java SE java.nio.file.FileSystem/Path contracts and existing MFiles/MFileContent entry points; source adapters do not replace those classes or require a Synexia runtime.",
+            "Database backing is an existing regular local M3FS database. Read-only mounts reject mutations, native mode bits remain metadata, VFS timestamps use milliseconds, and symbolic-link content is not dereferenced.",
+            "Database moves require the same mount except harmless same-inode no-ops; NIO file moves require the same borrowed filesystem instance. Source existence, roots and overlapping paths are checked before inherited destination mutation.",
+            "Inherit FileSystem.executeM3Batch through AbstractFileSystem.doExecuteM3Batch unchanged. The fallback is ordered/nontransactional and refuses atomic batches before provider I/O; individual provider safeguards remain in force.",
+            "Preserve caller stream/monitor ownership, progress, shadows, capture and checked native lifetime; no full-remote-provider, performance, snapshot, permission-enforcement or atomic-generic-move claim is added."
+          ],
+          "public_surface": [
+            "com.m3.fs.DatabaseFileProvider() and DatabaseFileProvider.options(boolean) extend the existing VFS provider API in jdk.m3fs.",
+            "DatabaseFileSystem, DatabaseFileObject, DatabaseFileName and NioFileProvider are internal package-private implementation types.",
+            "Existing MFiles.from(Path), MFiles.from(String), Plan.withProvider and MFileContent default operations remain the user entry points."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing jdk.m3fs package/module and native M3FS ABI. m3db layered addresses use the existing VFS parser; m3nio addresses require the same live in-JVM NIO binding. No java.base, HotSpot or JNI symbol change."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Reuse the existing M3FS SQLite/JNI owner, M3DirectoryTable, VFS AbstractFileSystem/AbstractFileObject/DefaultFileContent and MFiles/MFileStreams owners.",
+          "joins": "Provider-required path/name projections and stream buffering only; no JDBC store, copied database, remounted NIO filesystem or duplicate retained per-file payload.",
+          "outputs": "VFS file/content projections, existing observations/captures and bounded caller-requested byte/string materializations.",
+          "cached_facts": "Existing VFS cache and refresh semantics remain; NIO registry retains weak instance identities, not a parallel file index."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.M3FsProviderDefaults20261021",
+          "version": "20261021",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021",
+          "preconditions": [
+            "Apply the existing canonical hash-pinned Java/text snapshot owners to the exact manifest preimages; refuse drift and preserve unknown main-map fields and all prior capability IDs.",
+            "Per-file Java postimages are sealed above; recipe manifests seal the mapping and documentation without a circular self-hash.",
+            "Use recorded source/target publication receipts for exact candidate commits; null commit fields are not claims that an uncommitted candidate is merged."
+          ],
+          "rollback": "Restore only the exact manifest-owned preimages through a reviewed source-sealed recipe; preserve unrelated or subsequently modified files."
+        },
+        "tests": [
+          {
+            "id": "m3fs-provider-defaults-native",
+            "receipt": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021/evidence/product-verification.json"
+          },
+          {
+            "id": "m3fs-provider-defaults-dbfs",
+            "receipt": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021/evidence/dbfs-green.log"
+          },
+          {
+            "id": "m3fs-provider-defaults-nio",
+            "receipt": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021/evidence/nio-verification.json"
+          },
+          {
+            "id": "m3fs-provider-defaults-linked-module",
+            "receipt": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021/evidence/linked-native/runtime-proof.json"
+          }
+        ],
+        "provenance": {
+          "license": "Copyright 2026 Hitesh Soliwal and contributors; Apache-2.0 for the canonical source/templates. Existing Apache VFS notices and OpenJDK rights remain unchanged.",
+          "publication": "Canonical source, manifests and exact qualification receipts remain in hsoliwal/com.synexia; M3JDK21 owns the generated runtime sources and target acceptance.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": "5eeb841168ed420085223806fefcfca8d1b6b3ca",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Existing integrated M3JDK21 jdk.m3fs module and com.m3.fs export; package-private provider helpers preserve owner/package closure.",
+            "Inherited bulk hook compatibility reviewed at b7ef4cacece061414e56e231f98c76f6932140ca; the batch fallback does not change provider transaction contracts."
+          ],
+          "pending": [
+            "Exact-current-candidate source-built M3JDK21 image and whole-JDK JNI/GC/VM acceptance remain separate from linked supplied-JDK module receipts.",
+            "Comparative CPU/retained-heap/native-memory and excluded remote/backend qualification are not claimed by this capability record."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "This stable naming record admits filesystem-provider names and preserves the String -> arrays -> collections receiving order; it does not advance a whole-JDK receiving phase. The companion name-mapping.d file is supporting detail, not a second authority."
+      },
+      {
+        "id": "synexia.counterpart.MIndexCompilerASTPrecompute",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "Historical Synexia counterpart migration remains pending. The existing target compiler owner and the separately qualified method-fact extension are recorded below without promoting the whole counterpart.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+            "module": "synexia-mindex",
+            "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/MIndexCompilerASTPrecompute.java",
+            "symbol": "com.synexia.mindex.compiler.MIndexCompilerASTPrecompute",
+            "signatures": [
+              "com.synexia.mindex.compiler.MIndexCompilerASTPrecompute"
+            ],
+            "sha256": null,
+            "git_blob_sha1": "1ac623b8fa822f4f8ce9ed9c3bb8c9a5194184b6",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.compiler",
+            "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
+            "symbol": "com.sun.tools.javac.m3.M3ASTPC",
+            "signatures": [
+              "com.sun.tools.javac.m3.M3ASTPC"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": null
+          }
+        ],
+        "owner": "com.sun.tools.javac.m3.M3ASTPC",
+        "identity": {
+          "namespace": "Preserve defining owner, exact raw spelling and loader identity; no global class identity.",
+          "generation": "Implementation/context revision is distinct from release label, class-file version and epoch."
+        },
+        "contract": {
+          "differences": [],
+          "compatibility_obligations": [
+            "Public JDK types and behavior remain unchanged.",
+            "No blanket prefix rename or class-loading-by-name."
+          ],
+          "public_surface": [
+            "Internal non-exported API only; no java.base exports added."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Module/bootstrap placement pending proof."
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "pending",
+            "reason": "Full owner closure must be inlined or reused before port."
+          }
+        ],
+        "materialization": {
+          "admission": "Pending exact owner review.",
+          "joins": "No payload join or dictionary introduced.",
+          "outputs": "Pending exact output contract.",
+          "cached_facts": "Pending budget and lifetime contract."
+        },
+        "recipe": {
+          "id": null,
+          "version": null,
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Close source, dependency and runtime contract review."
+          ],
+          "rollback": "No target code emitted."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0 for copied Synexia code; original per-file donor obligations retained.",
+          "publication": "User explicitly requested inlining relevant Synexia code under Apache-2.0 into M3jdk21.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+          "target_revision": "81f1aeb9b88408a763601982806f9c46f917ba82",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Reserved concise name only"
+          ],
+          "pending": [
+            "Full matched configure/make JDK build and jtreg integration",
+            "Runtime consumer, loader/AST/JIT context admission where applicable",
+            "Full repository/dependency/semantic inventory; no whole-family completion"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental",
+        "observation": "The existing public M3AST/M3ASTPC owner already captures original javac events. The 20261022 receiving extension adds detached method facts in that owner; it does not implement the entire historical Synexia counterpart or a complete build/call graph.",
+        "receiving_observations": [
+          {
+            "date": "2026-10-22",
+            "state": "SOURCE_COMPONENT_CANDIDATE",
+            "target_base": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+            "owner": "com.sun.source.util.M3AST / com.sun.tools.javac.m3.M3ASTPC",
+            "schema": "M3AST_METHOD_FACTS_V1",
+            "columns": 24,
+            "relations": [
+              "CALL",
+              "FIELD_READ",
+              "FIELD_WRITE",
+              "MEMBER_REFERENCE"
+            ],
+            "recipe_id": "com.synexia.m3.M3JdkSignalManufacture20261022",
+            "recipe_version": "20261022",
+            "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk-signal-manufacture-20261022",
+            "java_manifest_sha256": "70d841bbc9b4405874bafc49eee2d37f04018149f90f054bcc104dd317878cbc",
+            "context_rule": "Original ANALYZED event, exact source seal and opaque per-task identity; no portable classpath/toolchain fingerprint.",
+            "contract_rule": "Existing API declarations/descriptors retained; additive typed method-fact API. No retained compiler state, second parse, global graph or implied optimization authority.",
+            "evidence": "m3/docs/signal-manufacture-20261022.md and linked canonical receiving packet",
+            "remaining_gates": [
+              "full installed M3JDK21 configure/build",
+              "real jtreg/JCK and wider compiler suites",
+              "cross-platform/runtime integration",
+              "comparative performance and retained-memory qualification"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "m3.code-text-signal-batch",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Extend the existing internal java.base lexical receiver with an explicit equivalent libjava batch entry; component proof is separate from installed SDK admission.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java",
+            "symbol": "java.lang.M3CodeTextSignalBatch",
+            "signatures": [
+              "analyze(char[], int[], int[], Limits)",
+              "pack(char[], int, int)"
+            ],
+            "sha256": "955c3490c1869fb38492a067be93916c8a2358ef824d3de7d83d95a698578668",
+            "git_blob_sha1": "99d084a47b36a2588bd79c850d7d647ffd98bd7f",
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java",
+            "symbol": "java.lang.M3CodeTextSignalBatch",
+            "signatures": [
+              "analyze(char[], int[], int[], Limits)",
+              "analyze(char[], int[], int[], Limits, Backend)"
+            ],
+            "sha256": "6ef55adb2e93f94c1ee57f3795fea1fc069a421230f25b4937ff52cebac26503",
+            "git_blob_sha1": "06fc5d79c230b778914409429d2efe9b18ed2033",
+            "revision_role": "candidate",
+            "tracking_ref": null
+          }
+        ],
+        "owner": "java.lang.M3CodeTextSignalBatch",
+        "identity": {
+          "namespace": "Internal java.base lexical batch; separate com.m3.precompute module API remains unchanged.",
+          "generation": "Packed schema preserves all 16 flag bits and six saturated byte lanes."
+        },
+        "contract": {
+          "differences": [
+            "Add explicit package-private backend overload and private batch JNI entry."
+          ],
+          "compatibility_obligations": [
+            "Existing Java analyze, Limits, validate and pack source remains unchanged.",
+            "Complete native geometry checks before result publication.",
+            "Caller does not mutate input arrays during the call.",
+            "Required native ABI absence throws UnsatisfiedLinkError even for empty batches."
+          ],
+          "public_surface": [
+            "No exported class, new public java.* type, production loader hook or Synexia runtime dependency."
+          ]
+        },
+        "format": {
+          "schema": "existing M3CodeTextFacts packed long",
+          "abi": "Java_java_lang_M3CodeTextSignalBatch_analyzeNative ([C[I[IJJI)[J",
+          "bootstrap": "src/java.base/share/native/libjava/M3CodeTextSignalBatch.c; existing libjava source discovery"
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "existing-owner",
+            "reason": "Uses exact existing Facts/Batch contract and generated JNI header."
+          }
+        ],
+        "materialization": {
+          "admission": "Explicit JAVA or NATIVE_REQUIRED; no automatic profitability threshold.",
+          "joins": "Primitive arrays, offsets and lengths only.",
+          "outputs": "Caller-owned long[] result; rows may overlap or repeat.",
+          "cached_facts": "No retained text, results, native heap allocation, global JNI references or heap pins."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.M3JdkSignalManufacture20261022",
+          "version": "20261022",
+          "path": "synexia-openrewrite-recipes/recipes/m3jdk-signal-manufacture-20261022",
+          "sha256": "70d841bbc9b4405874bafc49eee2d37f04018149f90f054bcc104dd317878cbc",
+          "preconditions": [
+            "Exact b985 source preimage or fixed-point postimage; new C/test paths absent."
+          ],
+          "rollback": "Restore sealed Java preimage and remove only the newly received C/test files in a reviewed revert."
+        },
+        "tests": [
+          "test/jdk/java/lang/String/M3CodeTextSignalBatchNativeTest.java",
+          "Strict Java21, javac-h, C11/C17, Xcheck:jni and UBSan component parity in canonical packet."
+        ],
+        "provenance": {
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0 for target source; Apache-2.0 for canonical orchestration.",
+          "publication": "User explicitly requested integrated Java/JNI implementation and reviewable M3JDK21 PRs.",
+          "copied_code": false,
+          "donor_boundary": "New C derives from exact existing GPL Java atom; inspected Apache native providers are architectural references only."
+        },
+        "sync": {
+          "source_revision": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
+          "target_revision": null,
+          "direction": "canonical-recipe-to-target",
+          "target_adaptations": [
+            "Place equivalent lexical JNI kernel in libjava; retain existing external proving-ground provider unchanged."
+          ],
+          "pending": [
+            "Full installed image and real jtreg",
+            "Other platforms/architectures and broad runtime suites",
+            "Comparative cold/warm performance and memory evidence"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "target-owned",
+        "observation": "Lexical routing facts do not prove regex validity, program semantics or a native speedup."
       }
     ]
   },
@@ -9899,6 +10390,28 @@
         "source_license": "Apache-2.0",
         "target_license_rule": "Preserve per-file OpenJDK and third-party rights; no Synexia runtime dependency."
       }
+    },
+    {
+      "source_family": "Existing public JDK utility owners and source-qualified utility/view candidate atoms",
+      "target_family": "Integrated utility families in their owning JDK modules",
+      "public_api": "Existing JDK names plus the explicit additive candidates recorded in the referenced fragment; no M3 companion public API",
+      "target_owners": [
+        "java.util.Objects",
+        "java.util.Strings",
+        "java.util.Arrays",
+        "java.util.Collections",
+        "java.util.stream.Collectors",
+        "java.util.stream.Streams",
+        "java.io.IOUtils",
+        "java.lang.reflect.Reflection",
+        "java.util.regex.TokenPattern",
+        "java.util.regex.TokenMatcher"
+      ],
+      "mapping": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "module_wide_mapping": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "rule": "Reuse existing JDK owners and source-bound contracts; distinguish baseline source presence from new candidate and executed target qualification. Preserve all earlier mappings and receiving phase states.",
+      "receiving_sequence_advanced": false,
+      "family_completion": false
     }
   ],
   "recipe_authority": {
@@ -9999,6 +10512,16 @@
       "optional_exported_packages": [
         "org.m3jdk.tools.search"
       ]
+    },
+    {
+      "module": "jdk.m3.search",
+      "optional_compiler_module": "jdk.m3.search.compiler",
+      "mapping": "m3/docs/name-mapping.d/m3-nlp-source-jmods-20261018.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.rewrite.M3NlpSearchSourceJmodsRecipe",
+      "target_proof": "m3/tooling/module-packs/nlp-search/build.py",
+      "original_library_modules": "org.apache.lucene.* and org.apache.opennlp.tools"
     }
   ]
 }

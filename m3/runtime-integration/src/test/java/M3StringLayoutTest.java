@@ -32,6 +32,26 @@ final class M3StringLayoutTest {
 
     public static void main(String[] args) throws Exception {
         accept(GOOD);
+        // A static projection owns its arrays; retaining it on the canonical value is forbidden.
+        String tokenProjection = GOOD.replace(FIELDS, FIELDS
+                + " static final class TokenSnapshot { final byte[] packedAscii;"
+                + " final int[] offsets; final int[] lengths; final int[] sequence; }");
+        M3StringLayout.check(tokenProjection);
+        int tokenProjectionRefusals = 0;
+        for (String field : List.of(
+                "private final byte[] packedAscii;", "private final int[] offsets;",
+                "private final int[] lengths;", "private final int[] sequence;",
+                "private final TokenSnapshot retainedProjection;")) {
+            try {
+                M3StringLayout.check(tokenProjection.replace(FIELDS, FIELDS + field));
+            } catch (IllegalStateException expected) {
+                tokenProjectionRefusals++;
+                continue;
+            }
+            throw new AssertionError("retained canonical token projection accepted: " + field);
+        }
+        if (tokenProjectionRefusals != 5) throw new AssertionError("token projection refusal inventory");
+        System.out.println("M3_STRING_TOKEN_PROJECTION_LAYOUT_OK accepted=1 refused=5");
         // Exercise placement and combinations; braces and code in payloads remain opaque.
         var payloads = List.of(
                 "/* } private final byte[] cache; class M3String { */",

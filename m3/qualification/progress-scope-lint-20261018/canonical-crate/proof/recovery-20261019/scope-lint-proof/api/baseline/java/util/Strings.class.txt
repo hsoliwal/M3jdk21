@@ -1,0 +1,29 @@
+public final class java.util.Strings {
+  public static boolean isNullOrEmpty(java.lang.CharSequence);
+  public static java.lang.String nullToEmpty(java.lang.String);
+  public static java.lang.String emptyToNull(java.lang.String);
+  public static boolean isNullOrBlank(java.lang.CharSequence);
+  public static boolean hasText(java.lang.CharSequence);
+  public static java.lang.String defaultIfEmpty(java.lang.String, java.lang.String);
+  public static java.lang.String defaultIfBlank(java.lang.String, java.lang.String);
+  public static java.lang.String repeat(java.lang.String, int);
+  public static java.lang.String padStart(java.lang.String, int, char);
+  public static java.lang.String padEnd(java.lang.String, int, char);
+  public static java.lang.String commonPrefix(java.lang.String, java.lang.String);
+  public static java.lang.String commonSuffix(java.lang.String, java.lang.String);
+  public static java.lang.String removePrefix(java.lang.String, java.lang.String);
+  public static java.lang.String removeSuffix(java.lang.String, java.lang.String);
+  public static java.lang.String substringBefore(java.lang.String, java.lang.String);
+  public static java.lang.String substringAfter(java.lang.String, java.lang.String);
+  public static java.lang.String substringBeforeLast(java.lang.String, java.lang.String);
+  public static java.lang.String substringAfterLast(java.lang.String, java.lang.String);
+  public static int countOccurrences(java.lang.String, java.lang.String);
+  public static boolean startsWithIgnoreCase(java.lang.String, java.lang.String);
+  public static boolean endsWithIgnoreCase(java.lang.String, java.lang.String);
+  public static int indexOfIgnoreCase(java.lang.String, java.lang.String, int);
+  public static int indexOfIgnoreCase(java.lang.String, java.lang.String);
+  public static boolean containsIgnoreCase(java.lang.String, java.lang.String);
+  public static java.lang.String reverse(java.lang.String);
+  public static java.lang.String stripToNull(java.lang.String);
+  public static java.lang.String stripToEmpty(java.lang.String);
+}

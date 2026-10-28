@@ -28,6 +28,7 @@ package com.sun.tools.javac.m3;
 /*
  * Modified 2026-10-21 by Synexia (Hitesh Soliwal and contributors): added
  * shared partial build facts and bounded receipt transport in this javac owner.
+ * Modified 2026-10-22: added the memoized typed method-facts projection.
  */
 
 import com.sun.source.tree.CompilationUnitTree;
@@ -40,11 +41,14 @@ import com.sun.source.util.Trees;
 import com.sun.tools.javac.api.BasicJavacTask;
 import com.sun.tools.javac.api.MultiTaskListener;
 import com.sun.tools.javac.code.Kinds;
+import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.code.TypeTag;
+import com.sun.tools.javac.code.Types;
 import com.sun.tools.javac.tree.JCTree;
+import com.sun.tools.javac.tree.TreeInfo;
 import com.sun.tools.javac.tree.TreeScanner;
 import com.sun.tools.javac.main.Arguments;
 import com.sun.tools.javac.processing.JavacProcessingEnvironment;
@@ -52,9 +56,11 @@ import com.sun.tools.javac.util.Context;
 import com.sun.tools.javac.util.ClientCodeException;
 import com.sun.tools.javac.util.Log;
 import com.sun.tools.javac.util.Options;
+import com.sun.tools.javac.util.Names;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.lang.ref.WeakReference;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -77,11 +83,15 @@ import java.util.Objects;
 import java.util.UUID;
 import javax.lang.model.element.TypeElement;
 
+import static com.sun.source.util.M3AST.MethodFacts.*;
+
 /** The existing javac task owns M3 capture; no global parser or AST cache. */
 public final class M3ASTPC implements Plugin {
     private static final Context.Key<Session> KEY = new Context.Key<>();
     private static final M3AST.Projection<M3AST.BuildFacts> BUILD_FACTS =
             new M3AST.Projection<>("javac-build-facts-v1", M3ASTPC::captureBuildFacts);
+    private static final M3AST.Projection<M3AST.MethodFacts> METHOD_FACTS =
+            new M3AST.Projection<>("javac-method-facts-v1", M3ASTPC::captureMethodFacts);
 
     public M3ASTPC() { }
 
@@ -230,6 +240,411 @@ public final class M3ASTPC implements Plugin {
         return null;
     }
 
+    /** Public API delegation through the existing event-owned projection cache. */
+    public static M3AST.MethodFacts methodFacts(M3AST.Unit unit) throws Exception {
+        if (!(unit instanceof LiveUnit live))
+            throw new IllegalArgumentException("foreign M3AST unit implementation");
+        live.check();
+        if (live.phase != M3AST.Phase.ANALYZED)
+            throw new IllegalStateException("M3AST method facts require an ANALYZED event");
+        return unit.project(METHOD_FACTS);
+    }
+
+    private static M3AST.MethodFacts captureMethodFacts(M3AST.Unit unit) throws IOException {
+        LiveUnit live = (LiveUnit) unit;
+        live.check();
+        JCTree.JCClassDecl declaration = analyzedDeclaration(live);
+        if (declaration == null || !(live.tree instanceof JCTree.JCCompilationUnit compilation))
+            throw new IOException("M3AST method facts require an analyzed top-level declaration");
+        URI uri = compilation.sourcefile.toUri();
+        Seal seal = live.session.seals.get(uri);
+        if (seal == null) throw new IOException("M3AST parsed-source seal unavailable: " + uri);
+        MethodCollector collector = new MethodCollector(compilation, seal.length(),
+                Types.instance(live.session.context), Names.instance(live.session.context));
+        collector.scan(declaration);
+        if (live.session.methodFactsContextId == null)
+            live.session.methodFactsContextId = UUID.randomUUID().toString();
+        return collector.finish(uri, seal.digest(), live.session.methodFactsContextId,
+                declaration.sym.flatName().toString());
+    }
+
+    /**
+     * Event-local columns and site lanes. Compiler objects stay in this
+     * temporary scanner; the detached result contains only identities and
+     * primitive lanes. No Trees lookup, parser, or second attribution is used.
+     */
+    private static final class MethodCollector extends TreeScanner {
+        private static final int MAX_METHODS = 65_536;
+        private static final int MAX_RELATIONS = 1_048_576;
+        private static final int MAX_ID_CHARACTERS = 8_388_608;
+        private final JCTree.JCCompilationUnit compilation;
+        private final int sourceLength;
+        private final Types types;
+        private final Names names;
+        private final BuildNames dictionary = new BuildNames();
+        private int identityCharacters;
+        private int rows;
+        private long[] flags = new long[16];
+        private long[] masks = new long[16];
+        private int[][] columns = new int[COLUMN_COUNT - 1][16];
+        private String[] methodNames = new String[16];
+        private String[] ownerNames = new String[16];
+        private final int[] edgeCounts = new int[RELATION_COUNT];
+        private final int[][] edgeRows = new int[RELATION_COUNT][16];
+        private final String[][] edgeNames = new String[RELATION_COUNT][16];
+        private final String[][] edgeOwners = new String[RELATION_COUNT][16];
+        private int totalEdges;
+
+        MethodCollector(JCTree.JCCompilationUnit compilation, int sourceLength,
+                        Types types, Names names) {
+            this.compilation = compilation;
+            this.sourceLength = sourceLength;
+            this.types = types;
+            this.names = names;
+        }
+
+        @Override public void visitMethodDef(JCTree.JCMethodDecl tree) {
+            long compilerFlags = tree.mods.flags | (tree.sym == null ? 0 : tree.sym.flags_field);
+            if (tree.pos >= 0 && (compilerFlags
+                    & (Flags.SYNTHETIC | Flags.GENERATEDCONSTR | Flags.GENERATED_MEMBER)) == 0) {
+                int row = addRow();
+                flags[row] = compilerFlags & (FLAG_PUBLIC | FLAG_PRIVATE | FLAG_PROTECTED
+                        | FLAG_STATIC | FLAG_FINAL | FLAG_SYNCHRONIZED | FLAG_NATIVE
+                        | FLAG_ABSTRACT | FLAG_STRICTFP);
+                if ((compilerFlags & Flags.VARARGS) != 0) flags[row] |= FLAG_VARARGS;
+                if ((compilerFlags & Flags.DEFAULT) != 0) flags[row] |= FLAG_DEFAULT;
+                masks[row] = 1L << DECLARATION_FLAGS;
+                put(row, PARAMETER_COUNT, tree.params.size());
+                put(row, DECLARED_THROWS_COUNT, tree.thrown.size());
+                put(row, UNRESOLVED, 0);
+                position(row, SOURCE_START, TreeInfo.getStartPos(tree));
+                position(row, SOURCE_END, end(tree));
+                methodNames[row] = methodIdentity(tree.sym);
+                ownerNames[row] = ownerIdentity(tree.sym);
+                if (methodNames[row] == null || ownerNames[row] == null) unresolved(row);
+
+                // Declaration types and annotations are inspected only for
+                // unresolved attribution; they are not body effect sites.
+                TreeScanner signature = new TreeScanner() {
+                    @Override public void scan(JCTree value) {
+                        if (value != null && value.type != null && value.type.isErroneous()) unresolved(row);
+                        super.scan(value);
+                    }
+                };
+                signature.scan(tree.mods);
+                signature.scan(tree.typarams);
+                signature.scan(tree.restype);
+                signature.scan(tree.recvparam);
+                signature.scan(tree.params);
+                signature.scan(tree.thrown);
+                signature.scan(tree.defaultValue);
+                if (tree.body != null) {
+                    position(row, BODY_START, TreeInfo.getStartPos(tree.body));
+                    position(row, BODY_END, end(tree.body));
+                    if (sourceSite(tree.body)) {
+                        for (int column = IF_COUNT; column <= MEMBER_REFERENCE_COUNT; column++) put(row, column, 0);
+                        new MethodBody(row).scan(tree.body);
+                    }
+                }
+            }
+            // This independent declaration traversal discovers explicit
+            // methods in nested classes, including classes inside lambdas.
+            super.visitMethodDef(tree);
+        }
+
+        private int addRow() {
+            if (rows == MAX_METHODS) throw new IllegalStateException("M3AST method fact row budget exceeded");
+            if (rows == flags.length) {
+                int capacity = Math.min(MAX_METHODS, flags.length << 1);
+                flags = Arrays.copyOf(flags, capacity);
+                masks = Arrays.copyOf(masks, capacity);
+                methodNames = Arrays.copyOf(methodNames, capacity);
+                ownerNames = Arrays.copyOf(ownerNames, capacity);
+                for (int column = 0; column < columns.length; column++)
+                    columns[column] = Arrays.copyOf(columns[column], capacity);
+            }
+            return rows++;
+        }
+
+        private void put(int row, int column, int value) {
+            columns[column - 1][row] = value;
+            masks[row] |= 1L << column;
+        }
+
+        private void increment(int row, int column) {
+            columns[column - 1][row] = Math.incrementExact(columns[column - 1][row]);
+        }
+
+        private void unresolved(int row) { put(row, UNRESOLVED, 1); }
+
+        private void position(int row, int column, int position) {
+            if (position >= 0 && position <= sourceLength) put(row, column, position);
+        }
+
+        private int end(JCTree tree) {
+            // TreeInfo derives ends for source nodes such as if, compound
+            // assignment and prefix increment from their original children.
+            return TreeInfo.getEndPos(tree, compilation.endPositions);
+        }
+
+        private boolean sourceSite(JCTree tree) {
+            int start = TreeInfo.getStartPos(tree), end = end(tree);
+            return start >= 0 && end > start && end <= sourceLength;
+        }
+
+        private String identity(String name) {
+            int count = dictionary.count;
+            dictionary.add(name);
+            if (dictionary.count != count) {
+                if (name.length() > MAX_ID_CHARACTERS - identityCharacters)
+                    throw new IllegalStateException("M3AST method fact identity-text budget exceeded");
+                identityCharacters += name.length();
+            }
+            return dictionary.entries[BuildNames.slot(name, dictionary.entries)];
+        }
+
+        private String ownerIdentity(Symbol symbol) {
+            if (symbol == null || !(symbol.owner instanceof ClassSymbol owner)
+                    || !(owner.type instanceof Type.ClassType) || !owner.type.hasTag(TypeTag.CLASS)
+                    || owner.owner == null || owner.owner.kind == Kinds.Kind.NIL)
+                return null;
+            String name = owner.flatName().toString();
+            return name.isEmpty() ? null : identity(name);
+        }
+
+        private String methodIdentity(Symbol symbol) {
+            if (!(symbol instanceof Symbol.MethodSymbol) || symbol.kind != Kinds.Kind.MTH
+                    || symbol.type == null || symbol.type.isErroneous()) return null;
+            String owner = ownerIdentity(symbol);
+            if (owner == null) return null;
+            Type erased = types.erasure(symbol.type);
+            if (!(erased instanceof Type.MethodType method)) return null;
+            StringBuilder value = new StringBuilder(owner).append('#').append(symbol.name).append('(');
+            for (Type parameter : method.argtypes) if (!descriptor(parameter, value, false)) return null;
+            value.append(')');
+            if (!descriptor(method.restype, value, true)) return null;
+            return identity(value.toString());
+        }
+
+        private String fieldIdentity(Symbol.VarSymbol symbol, String owner) {
+            if (symbol.type == null || symbol.type.isErroneous()) return null;
+            StringBuilder value = new StringBuilder(owner).append('#').append(symbol.name).append(':');
+            return descriptor(types.erasure(symbol.type), value, false) ? identity(value.toString()) : null;
+        }
+
+        private boolean descriptor(Type type, StringBuilder value, boolean allowVoid) {
+            if (type == null || type.isErroneous()) return false;
+            while (type.hasTag(TypeTag.ARRAY)) {
+                value.append('[');
+                type = ((Type.ArrayType) type).elemtype;
+                allowVoid = false;
+            }
+            switch (type.getTag()) {
+                case BYTE -> value.append('B');
+                case CHAR -> value.append('C');
+                case SHORT -> value.append('S');
+                case INT -> value.append('I');
+                case LONG -> value.append('J');
+                case FLOAT -> value.append('F');
+                case DOUBLE -> value.append('D');
+                case BOOLEAN -> value.append('Z');
+                case VOID -> { if (!allowVoid) return false; value.append('V'); }
+                case CLASS -> {
+                    if (!(type.tsym instanceof ClassSymbol owner) || owner.flatName().isEmpty()) return false;
+                    value.append('L').append(owner.flatName().toString().replace('.', '/')).append(';');
+                }
+                default -> { return false; }
+            }
+            return true;
+        }
+
+        private void edge(int row, int relation, String target, String owner) {
+            if (target == null || owner == null) { unresolved(row); return; }
+            if (totalEdges == MAX_RELATIONS)
+                throw new IllegalStateException("M3AST method fact relation budget exceeded");
+            int used = edgeCounts[relation];
+            if (used == edgeRows[relation].length) {
+                int capacity = Math.min(MAX_RELATIONS, used << 1);
+                edgeRows[relation] = Arrays.copyOf(edgeRows[relation], capacity);
+                edgeNames[relation] = Arrays.copyOf(edgeNames[relation], capacity);
+                edgeOwners[relation] = Arrays.copyOf(edgeOwners[relation], capacity);
+            }
+            edgeRows[relation][used] = row;
+            edgeNames[relation][used] = target;
+            edgeOwners[relation][used] = owner;
+            edgeCounts[relation]++;
+            totalEdges++;
+        }
+
+        private M3AST.MethodFacts finish(URI uri, String digest, String contextId, String analyzed) {
+            String[] ids = dictionary.sorted();
+            for (int row = 0; row < rows; row++) {
+                if (methodNames[row] != null) put(row, METHOD_ID, Arrays.binarySearch(ids, methodNames[row]));
+                if (ownerNames[row] != null) put(row, OWNER_ID, Arrays.binarySearch(ids, ownerNames[row]));
+            }
+            int[][] integers = new int[COLUMN_COUNT - 1][];
+            for (int column = 0; column < integers.length; column++)
+                integers[column] = Arrays.copyOf(columns[column], rows);
+            int[][] offsets = new int[RELATION_COUNT][];
+            int[][] targets = new int[RELATION_COUNT][];
+            int[][] owners = new int[RELATION_COUNT][];
+            for (int relation = 0; relation < RELATION_COUNT; relation++) {
+                int count = edgeCounts[relation];
+                offsets[relation] = new int[rows + 1];
+                targets[relation] = new int[count];
+                owners[relation] = new int[count];
+                for (int site = 0; site < count; site++) offsets[relation][edgeRows[relation][site] + 1]++;
+                for (int row = 0; row < rows; row++) offsets[relation][row + 1] += offsets[relation][row];
+                int[] next = offsets[relation].clone();
+                for (int site = 0; site < count; site++) {
+                    int index = next[edgeRows[relation][site]]++;
+                    targets[relation][index] = Arrays.binarySearch(ids, edgeNames[relation][site]);
+                    owners[relation][index] = Arrays.binarySearch(ids, edgeOwners[relation][site]);
+                }
+            }
+            return new M3AST.MethodFacts(uri, sourceLength, digest, contextId, analyzed, ids,
+                    Arrays.copyOf(flags, rows), integers, Arrays.copyOf(masks, rows), offsets, targets, owners);
+        }
+
+        /** One body's source-site scan; nested executable bodies are boundaries. */
+        private final class MethodBody extends TreeScanner {
+            private static final int READ = 1, WRITE = 2;
+            private final int row;
+            private int depth;
+
+            MethodBody(int row) { this.row = row; }
+
+            @Override public void scan(JCTree tree) {
+                if (tree == null) return;
+                if (tree.type != null && tree.type.isErroneous()) unresolved(row);
+                super.scan(tree);
+            }
+
+            private void count(JCTree tree, int column) {
+                if (sourceSite(tree)) increment(row, column);
+            }
+
+            private void observed(Symbol symbol) {
+                if (symbol == null || symbol.kind == Kinds.Kind.ERR
+                        || (symbol.type != null && symbol.type.isErroneous())) unresolved(row);
+            }
+
+            private void field(JCTree site, Symbol symbol, int mode) {
+                observed(symbol);
+                if (!sourceSite(site) || !(symbol instanceof Symbol.VarSymbol variable)
+                        || symbol.name == names._this || symbol.name == names._super
+                        || symbol.name == names._class) return;
+                String owner = ownerIdentity(symbol);
+                // Local variables and javac's array-length pseudo-field have
+                // no binary declaring class and are not source field sites.
+                if (owner == null) return;
+                String target = fieldIdentity(variable, owner);
+                if (target == null) { unresolved(row); return; }
+                if ((mode & READ) != 0) { increment(row, FIELD_READ_COUNT); edge(row, FIELD_READ, target, owner); }
+                if ((mode & WRITE) != 0) { increment(row, FIELD_WRITE_COUNT); edge(row, FIELD_WRITE, target, owner); }
+            }
+
+            private void target(JCTree tree, int mode) {
+                if (tree instanceof JCTree.JCParens parens) target(parens.expr, mode);
+                else if (tree instanceof JCTree.JCIdent ident) field(ident, ident.sym, mode);
+                else if (tree instanceof JCTree.JCFieldAccess select) {
+                    field(select, select.sym, mode);
+                    scan(select.selected);
+                } else {
+                    // For array-element stores the array expression and its
+                    // index are evaluated reads, not a write to an array field.
+                    scan(tree);
+                }
+            }
+
+            @Override public void visitClassDef(JCTree.JCClassDecl tree) { }
+            @Override public void visitMethodDef(JCTree.JCMethodDecl tree) { }
+            @Override public void visitAnnotation(JCTree.JCAnnotation tree) { }
+            @Override public void visitVarDef(JCTree.JCVariableDecl tree) { scan(tree.init); }
+            @Override public void visitLambda(JCTree.JCLambda tree) { count(tree, LAMBDA_COUNT); }
+
+            @Override public void visitBlock(JCTree.JCBlock tree) {
+                boolean source = sourceSite(tree);
+                if (source) {
+                    depth++;
+                    columns[MAX_BLOCK_DEPTH - 1][row] = Math.max(columns[MAX_BLOCK_DEPTH - 1][row], depth);
+                }
+                try { super.visitBlock(tree); }
+                finally { if (source) depth--; }
+            }
+
+            @Override public void visitIf(JCTree.JCIf tree) { count(tree, IF_COUNT); super.visitIf(tree); }
+            @Override public void visitConditional(JCTree.JCConditional tree) {
+                count(tree, CONDITIONAL_COUNT); super.visitConditional(tree);
+            }
+            @Override public void visitSwitch(JCTree.JCSwitch tree) { count(tree, SWITCH_COUNT); super.visitSwitch(tree); }
+            @Override public void visitSwitchExpression(JCTree.JCSwitchExpression tree) {
+                count(tree, SWITCH_COUNT); super.visitSwitchExpression(tree);
+            }
+            @Override public void visitForLoop(JCTree.JCForLoop tree) { count(tree, LOOP_COUNT); super.visitForLoop(tree); }
+            @Override public void visitForeachLoop(JCTree.JCEnhancedForLoop tree) {
+                count(tree, LOOP_COUNT); super.visitForeachLoop(tree);
+            }
+            @Override public void visitWhileLoop(JCTree.JCWhileLoop tree) { count(tree, LOOP_COUNT); super.visitWhileLoop(tree); }
+            @Override public void visitDoLoop(JCTree.JCDoWhileLoop tree) { count(tree, LOOP_COUNT); super.visitDoLoop(tree); }
+            @Override public void visitThrow(JCTree.JCThrow tree) { count(tree, THROW_COUNT); super.visitThrow(tree); }
+            @Override public void visitSynchronized(JCTree.JCSynchronized tree) {
+                count(tree, SYNCHRONIZED_COUNT); super.visitSynchronized(tree);
+            }
+
+            @Override public void visitApply(JCTree.JCMethodInvocation tree) {
+                // In particular, javac's inserted implicit super() has no
+                // parser end position and must not become a source call.
+                if (!sourceSite(tree)) return;
+                increment(row, INVOCATION_COUNT);
+                Symbol symbol = TreeInfo.symbol(tree.meth);
+                edge(row, CALL, methodIdentity(symbol), ownerIdentity(symbol));
+                super.visitApply(tree);
+            }
+
+            @Override public void visitNewClass(JCTree.JCNewClass tree) {
+                if (sourceSite(tree)) {
+                    increment(row, NEW_CLASS_COUNT);
+                    edge(row, CALL, methodIdentity(tree.constructor), ownerIdentity(tree.constructor));
+                }
+                scan(tree.encl);
+                scan(tree.typeargs);
+                scan(tree.clazz);
+                scan(tree.args);
+                // tree.def belongs to an anonymous class, not this body.
+            }
+
+            @Override public void visitNewArray(JCTree.JCNewArray tree) {
+                count(tree, NEW_ARRAY_COUNT);
+                scan(tree.dims);
+                scan(tree.elems);
+            }
+
+            @Override public void visitReference(JCTree.JCMemberReference tree) {
+                if (sourceSite(tree)) {
+                    increment(row, MEMBER_REFERENCE_COUNT);
+                    edge(row, MEMBER_REFERENCE, methodIdentity(tree.sym), ownerIdentity(tree.sym));
+                }
+                scan(tree.expr);
+            }
+
+            @Override public void visitIdent(JCTree.JCIdent tree) { field(tree, tree.sym, READ); }
+            @Override public void visitSelect(JCTree.JCFieldAccess tree) {
+                field(tree, tree.sym, READ);
+                scan(tree.selected);
+            }
+            @Override public void visitAssign(JCTree.JCAssign tree) { target(tree.lhs, WRITE); scan(tree.rhs); }
+            @Override public void visitAssignop(JCTree.JCAssignOp tree) { target(tree.lhs, READ | WRITE); scan(tree.rhs); }
+            @Override public void visitUnary(JCTree.JCUnary tree) {
+                switch (tree.getTag()) {
+                    case PREINC, PREDEC, POSTINC, POSTDEC -> target(tree.arg, READ | WRITE);
+                    default -> super.visitUnary(tree);
+                }
+            }
+            @Override public void visitErroneous(JCTree.JCErroneous tree) { unresolved(row); }
+        }
+    }
+
     /** Read already-attributed symbols directly: no lazy Trees attribution or second frontend. */
     private static final class BuildCollector extends TreeScanner {
         private final BuildNames declared = new BuildNames();
@@ -348,9 +763,9 @@ public final class M3ASTPC implements Plugin {
         if (session == null || session.closed || text == null) return text;
         try {
             M3AST.Source source = retained(file.toUri(), text.toString());
-            Seal seal = new Seal(source.text().length(), source.utf16Sha256());
+            Seal seal = new Seal(source);
             Seal previous = session.seals.putIfAbsent(source.uri(), seal);
-            if (previous != null && !previous.equals(seal))
+            if (previous != null && !previous.sameSeal(seal))
                 throw new IllegalStateException("M3AST source changed within compilation: " + source.uri());
             session.activeSource = source;
             session.captures++;
@@ -363,7 +778,23 @@ public final class M3ASTPC implements Plugin {
         }
     }
 
-    private record Seal(int length, String digest) { }
+    /** Verified immutable source may be reused without retaining its payload strongly. */
+    private static final class Seal extends WeakReference<String> {
+        private final int length;
+        private final String digest;
+
+        Seal(M3AST.Source source) {
+            super(source.text());
+            length = source.text().length();
+            digest = source.utf16Sha256();
+        }
+
+        int length() { return length; }
+        String digest() { return digest; }
+        boolean sameSeal(Seal other) {
+            return length == other.length && digest.equals(other.digest);
+        }
+    }
 
     private static M3AST.Source retained(URI uri, String text) {
         try {
@@ -426,6 +857,7 @@ public final class M3ASTPC implements Plugin {
         private long parsed, analyzed, captures, reads, computations, hits;
         private final HashMap<URI, Seal> seals = new HashMap<>();
         private M3AST.Source activeSource;
+        private String methodFactsContextId;
         private FactsReceipt factsReceipt;
         private int errors;
         private boolean started, completed, closed, failed, syntaxRetained;
@@ -520,6 +952,7 @@ public final class M3ASTPC implements Plugin {
             context = null;
             seals.clear();
             activeSource = null;
+            methodFactsContextId = null;
             Throwable first = null;
             try {
                 for (M3AST.Consumer consumer : consumers) {
@@ -606,10 +1039,16 @@ public final class M3ASTPC implements Plugin {
                         String text = tree.getSourceFile().getCharContent(false).toString();
                         if (text.length() != seal.length())
                             throw new IOException("M3AST source changed since parsing: " + uri);
-                        M3AST.Source candidate = retained(uri, text);
-                        if (!candidate.utf16Sha256().equals(seal.digest()))
-                            throw new IOException("M3AST source changed since parsing: " + uri);
-                        source = candidate;
+                        String verified = seal.get();
+                        if (text.equals(verified)) {
+                            source = new M3AST.Source(uri, text, seal.digest());
+                        } else {
+                            M3AST.Source candidate = retained(uri, text);
+                            if (!candidate.utf16Sha256().equals(seal.digest()))
+                                throw new IOException("M3AST source changed since parsing: " + uri);
+                            session.seals.put(uri, new Seal(candidate));
+                            source = candidate;
+                        }
                     }
                 } catch (IOException failure) {
                     sourceFailure = failure;

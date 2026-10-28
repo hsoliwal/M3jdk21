@@ -1,0 +1,15 @@
+gate	status	evidence
+SOURCE_CUSTODY	PASS	Seven source/readback Git blobs equal canonical Synexia templates
+STRICT_MODULE_CENSUS	STATIC_PASS	13 exact Java module Contract test stems match verify.py
+M3FILE_CAPTURE_SCRATCH	PRESERVED_SOURCE	Existing M3File.captureBytes and 64KiB inventory scratch unaffected
+NATIVE_SQLITE_PROVIDER	PRESERVED_SOURCE	Existing m3db M3FS native JNI WAL + ZIP/JRT providers
+RANGE_JAVA21_DONOR	HISTORICAL_SCOPED_ONLY	#1815 1200/22168 on equivalent range code, not original target
+DIRECTORY_JAVA21_DONOR	HISTORICAL_SCOPED_ONLY	#1793 520/3134 equivalent directory code, not full owner
+CANONICAL_OPENREWRITE	NOT_RUN	Recipe.run, source drift, idempotence and missing-target tests
+M3_FILE_HOST_LINKED_IMAGE	NOT_RUN	Original m3/file/verify.py exact 13 executable entry points
+M3_FS_NATIVE_SQLITE_JNI	NOT_RUN	Maven/JUnit/CTest/real JNI and SQLite WAL
+JDK_HOTSPOT_JTREG	NOT_RUN	Full M3JDK21 java.base/libjava/JMOD/jtreg/JCK
+PLATFORM_PROVIDER	NOT_RUN	ZIP/JRT native/local/remote OS provider contracts
+END_TO_END_MAVEN_GRADLE	NOT_RUN	Successful build promotion vs observed source facts
+FILTERED_SORTED_PARITY	NOT_RUN	JDK/Guava/Eclipse Collections/Commons/Spring
+PERFORMANCE	NOT_MEASURED	CPU/heap/native-memory and bytes-read comparison

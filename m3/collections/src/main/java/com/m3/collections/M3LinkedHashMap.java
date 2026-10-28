@@ -27,6 +27,9 @@ import java.util.Objects;
  * Backing arrays are allocated on first insertion; empty owners share zero-length lanes.
  * Erasure back-shifts hash-index coordinates without relocating payload slots;
  * lookup avoids tombstones while deletion scans the affected probe run.
+ * Erasure back-shifts hash-index coordinates, not payload slots, so lookup never
+ * traverses dead tombstones; this favors lookup-heavy churn at the cost of
+ * scanning the affected probe run on a deletion.
  */
 public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     private final Table table;

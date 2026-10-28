@@ -15,6 +15,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
+    <!-- Real first-party module required by original collections/module-info.java. -->
+    <dependency>
+      <groupId>com.m3</groupId>
+      <artifactId>m3-arrays</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -38,6 +44,7 @@
             <arg>-Werror</arg>
           </compilerArgs>
           <includes>
+            <include>module-info.java</include>
             <include>com/m3/collections/M3SignalColumns.java</include>
             <include>com/m3/collections/M3ProgressiveSignalEvidence.java</include>
             <include>com/m3/collections/M3SignalRelations.java</include>

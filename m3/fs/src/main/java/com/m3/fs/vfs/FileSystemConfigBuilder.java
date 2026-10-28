@@ -23,8 +23,6 @@ import java.time.Duration;
 import java.util.Objects;
 import java.util.function.Function;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DurationUtils;
 
 /**
  * Abstracts configuring {@link FileSystemOptions}s.
@@ -183,7 +181,7 @@ public abstract class FileSystemConfigBuilder {
         Character value = getParam(fileSystemOptions, name);
         if (value == null) {
             final String str = getProperty(name);
-            if (StringUtils.isEmpty(str)) {
+            if ((str == null || str.isEmpty())) {
                 return defaultValue;
             }
             value = Character.valueOf(str.charAt(0));
@@ -292,7 +290,23 @@ public abstract class FileSystemConfigBuilder {
      */
     protected Integer getDurationInteger(final FileSystemOptions fileSystemOptions, final String name,
         final Duration defaultValue) {
-        return DurationUtils.toMillisInt(getParam(fileSystemOptions, name, defaultValue, Duration::parse));
+        return m3MillisInt(getParam(fileSystemOptions, name, defaultValue, Duration::parse));
+    }
+
+    /**
+     * Saturating millisecond projection, equivalent to Commons Lang 3.18.0
+     * DurationUtils.toMillisInt for negative values, overflow and null.
+     * Keeps only one primitive long and one primitive int; no Range allocation.
+     */
+    static int m3MillisInt(final Duration duration) {
+        final long milliseconds = Objects.requireNonNull(duration, "duration").toMillis();
+        if (milliseconds < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+        if (milliseconds > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        return (int) milliseconds;
     }
 
     /**

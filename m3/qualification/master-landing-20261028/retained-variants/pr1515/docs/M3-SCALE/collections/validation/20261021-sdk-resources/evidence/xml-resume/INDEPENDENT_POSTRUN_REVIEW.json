@@ -1,0 +1,90 @@
+{
+  "schema": "synexia.independent.xml-recipe-pending-phase-postrun.v1",
+  "status": "PASS_INDEPENDENT_XML_PENDING_PHASES_WITH_PRIOR_INSTALL",
+  "reviewer": "/root/realm_closure",
+  "reviewed_utc": "2026-10-21T02:13:28.386512+00:00",
+  "plan": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-prep-k-v1\\PLAN.json",
+    "bytes": 33285,
+    "sha256": "438f28f65c89395d82aca62eb8d49ae7551c6facff70c37a3b8b8463c5d0e704"
+  },
+  "result": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\RESULT.json",
+    "bytes": 6542,
+    "sha256": "97efd6debad36ccaa5a4fda4553f9f5a41e2494a42dcbc96cdf6c78eecf13be9"
+  },
+  "phase_evidence": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\PHASE_EVIDENCE.json",
+    "bytes": 2136,
+    "sha256": "dc830686f2f25f8584aa02b0a0cb4b17bf670ca06244a4a99725e695cece4935"
+  },
+  "new_native_receipts": [
+    {
+      "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\dryrun.NATIVE.json",
+      "bytes": 452,
+      "sha256": "f30de552d1e17b765d3615108a292a3288acf03bae941ff4c7e38b748c1ad904"
+    },
+    {
+      "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\apply.NATIVE.json",
+      "bytes": 451,
+      "sha256": "27673fc0b40f4f431cbef5564eb672bdab2860c58b2a1c8ba1c6ed6bbf156203"
+    },
+    {
+      "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\fixedpoint.NATIVE.json",
+      "bytes": 452,
+      "sha256": "b777874994dfde6544a039c2a3cbb7ec89fc304a2c5dddca4847790e5bd74112"
+    },
+    {
+      "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\drift.NATIVE.json",
+      "bytes": 452,
+      "sha256": "cbdb37f31cfe07f6616658d5a50d9629ed97bb4409fbcfe9869459396fcf288b"
+    }
+  ],
+  "raw_v1_HOLD": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-proof-k-v1\\RESULT.json",
+    "bytes": 1006,
+    "sha256": "17787650f0d75062a46c1df804e20802d8e8170aef4f8b1724880c16ccdd8b52"
+  },
+  "raw_v1_status": "FAILED_OR_HOLD",
+  "verified_input_pins": 432,
+  "canonical_input_sha256": "a4c15fa6d9697390341e978461288a037f4f81d84b8a64660c4b2df8e8780335",
+  "immutable_cohorts_verified": 6,
+  "cohort_rows_sha256": [
+    "129f6e5a070d69516b0aee4023701c1f9a7b4af8292b3c6a8ad57e96dbd1da17",
+    "c40e65027455900d6351d643f0d73ce82e4b22cbdb96c5ba5f6ad336ba22a511",
+    "e46be0ebefb8387ac4a5ebd7761ef030ac96a492d8a6020febbde032f9ffc947",
+    "74005e23d83789bad06b0d6cac58cb1dec8b16e49a39d019430cd43b1e3f552f",
+    "fc3b617d72cf4213843f33e19bb5bf55f58b3e9915331c39f23ebd9c30bc2f24",
+    "d1fd61d54649bcfbc1901e1cd687db10e514792820cc671f27d0e795d6a783e8"
+  ],
+  "observed": {
+    "native_exitcodes": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "realm_entries_each": 117,
+    "project_graph_lines_each": 44,
+    "controls_and_carriers_unchanged": true,
+    "fresh_fixedpoint_zero_patch": true,
+    "intrinsic_source_drift_refused": true,
+    "old_installer_not_replayed": true,
+    "prior_install_repository_wholly_unchanged": true,
+    "physical_closure_and_own_lock_retirement": true
+  },
+  "postimage": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\project\\m3\\collections\\pom.xml",
+    "bytes": 12031,
+    "sha256": "31b3f083fd171e698ef3f4e07ad2e2fcca82250b157971afe7e5388c8bcd0923"
+  },
+  "dryrun_patch": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\dryrun-before.patch",
+    "bytes": 993,
+    "sha256": "9179f829858b30efdbca82379f88c0d8d61cfb56baa114f54f211de8217f6dfb"
+  },
+  "mode_observation": "Raw Windows formatter index header says100755; source Git mode100644 is unchanged and publication must use100644. No Git mode change is qualified.",
+  "policy_id": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
+  "scope": "Recipe materialization only. No functional module/SDK/JNI/package/full-superset/live-stack admission. Original failure and memory HOLD stay immutable.",
+  "next_permitted": "Fresh reviewed owning-module default Maven test and existing SDK main from this exact generated POM; no historical replay."
+}

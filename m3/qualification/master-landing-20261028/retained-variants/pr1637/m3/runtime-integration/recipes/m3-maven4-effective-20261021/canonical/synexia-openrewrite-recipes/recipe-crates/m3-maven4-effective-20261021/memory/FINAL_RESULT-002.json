@@ -1,0 +1,42 @@
+{
+  "schema": "M3_MAVEN4_CORRECTION_MEMORY_FINAL/1",
+  "status": "PASS",
+  "profile": "m3-maven4-effective-20261021/1.0",
+  "events": [
+    "95505b69dac37f6285deded64ef70e9e5431ea502fca5712f35c8d6569ae6cb9",
+    "55ef022ea03a13e03640ebdb4005cf9ff1e397204258c03c26c59f337ab1711e"
+  ],
+  "event_count": 2,
+  "conformance_checks": 129,
+  "control_cases": 32,
+  "actual_event_integrity_checks": 2,
+  "unique_event_artifacts_verified": 27,
+  "admission": "PENDING",
+  "predecessor_checkpoint": {
+    "path": "memory/FINAL_RESULT.json",
+    "sha256": "a2503d6a070d1d1feb2ca40fcc31b1a4a8ecefc6ef6b18ad8585ac2017101a12"
+  },
+  "profile_receipt": {
+    "path": "memory/PROFILE.md",
+    "sha256": "90a077b6bac1967f69c1513c066b8e196383ca11c7b80d3840dd8478c578949a"
+  },
+  "retrieval": {
+    "path": "memory/LESSONS-002.md",
+    "sha256": "edfa7ef3cf36e73e3cfacf710fdb4581296590d188c9c8f0a5e8d90d9954ccb1"
+  },
+  "index": {
+    "path": "memory/INDEX-002.json",
+    "sha256": "0b19e0d9b9fd29290a6cc698809a0bceae90c357153b013f1ee23308419cab29"
+  },
+  "verification": [
+    {
+      "path": "proof/memory-conformance-001/RESULT.json",
+      "sha256": "bf55930b10f9f063c6a48d08336818fe9dcc115127ca3216916799828f1fd629"
+    },
+    {
+      "path": "proof/memory-integrity-002/RESULT.json",
+      "sha256": "40599cfce2dc0efe3d878794e3a9a70b3dbc258cb766183d1ec7f7bde82dc7fe"
+    }
+  ],
+  "scope": "Two fresh Maven4 task events; historical unknowns explicit; malformed authoring draft retained as refused; no inherited integrated events or runtime admission."
+}

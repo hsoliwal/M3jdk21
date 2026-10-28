@@ -117,6 +117,8 @@ final class M3PatternQuery {
         private final boolean[] repeated;
         private final boolean[] codePoint;
         private final boolean[] empty;
+        // Minimum UTF-16 input length of the admitted mandatory atoms.
+        private final int minimumLength;
         // Optional derived metadata belongs to this plan, never to M3String or its backing.
         // Scalar: 136 longs. Wide: 137 planes of <=5 words; at most 5,480 payload bytes.
         private final long[] ascii;
@@ -128,6 +130,11 @@ final class M3PatternQuery {
             this.repeated = repeated;
             this.codePoint = codePoint;
             this.empty = empty;
+            int requiredUnits = 0;
+            for (boolean star : repeated) {
+                if (!star) requiredUnits++;
+            }
+            this.minimumLength = requiredUnits;
             long stars = 0L;
             if (atoms.length <= 63) {
                 for (int i = 0; i < atoms.length; i++) {
@@ -174,6 +181,9 @@ final class M3PatternQuery {
 
         /** Returns the Boolean full-match result for the admitted compiled-node chain. */
         int matches(String input) {
+            // A mandatory character atom consumes at least one UTF-16 unit.
+            // This rejection is valid for both the ASCII and rolling Unicode paths.
+            if (input.length() < minimumLength) return 0;
             long[] masks = ascii;
             if (masks == null) return matchesRolling(input);
             if (atoms.length > 63) return matchesWideAscii(input, masks);
@@ -196,6 +206,8 @@ final class M3PatternQuery {
                 state |= (state << 8) & masks[131];
                 state |= (state << 16) & masks[132];
                 state |= (state << 32) & masks[133];
+                // No consuming or epsilon edge can revive a dead prefix frontier.
+                if (state == 0L) return 0;
             }
             return (state & masks[135]) != 0L ? 1 : 0;
         }
@@ -253,6 +265,7 @@ final class M3PatternQuery {
                 }
                 long oldCarry = 0L;
                 long closedCarry = 0L;
+                long live = 0L;
                 for (int word = 0; word < words; word++) {
                     long before = state[word];
                     long stars = masks[136 * words + word];
@@ -267,9 +280,12 @@ final class M3PatternQuery {
                     next |= (next << 16) & masks[132 * words + word];
                     next |= (next << 32) & masks[133 * words + word];
                     state[word] = next;
+                    live |= next;
                     oldCarry = before >>> 63;
                     closedCarry = next >>> 63;
                 }
+                // Cross-word carries require testing the complete frontier, not one word.
+                if (live == 0L) return 0;
             }
             int last = atoms.length >>> 6;
             return (state[last] & masks[135 * words + last]) != 0L ? 1 : 0;

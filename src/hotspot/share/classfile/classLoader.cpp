@@ -22,6 +22,12 @@
  *
  */
 
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: GPL-2.0-only
+ * M3 modification (2026-10-18): reserve the Object.toAdapter virtual entry.
+ */
+
 #include "precompiled.hpp"
 #include "cds/cds_globals.hpp"
 #include "cds/filemap.hpp"

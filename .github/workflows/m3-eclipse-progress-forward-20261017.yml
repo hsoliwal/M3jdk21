@@ -68,18 +68,33 @@ jobs:
         run: |
           set -euxo pipefail
           mvn -B -ntp -f m3/eclipse/core-runtime/recipe/pom.xml test 2>&1 | tee proof/recipe.txt
-      - name: Compile unchanged M3 collections and install runtime dependency
+      - name: Compile original arrays and collections as named Java 21 modules
         shell: bash
         run: |
           set -euxo pipefail
-          mkdir -p proof/classes
+          mkdir -p proof/arrays-classes proof/classes
+          find m3/arrays/src/main/java -name '*.java' | sort > proof/m3-arrays-sources.txt
+          test -s proof/m3-arrays-sources.txt
+          javac --release 21 -Xlint:all,-module -Werror \
+            -d proof/arrays-classes @proof/m3-arrays-sources.txt 2>&1 | tee proof/m3-arrays-compile.txt
+          test -f proof/arrays-classes/module-info.class
+          jar --create --file proof/m3-arrays.jar -C proof/arrays-classes .
+          jar --describe-module --file proof/m3-arrays.jar > proof/arrays-module-describe.txt
+          grep -q '^com.m3.arrays' proof/arrays-module-describe.txt
           find m3/collections/src/main/java -name '*.java' | sort > proof/m3-sources.txt
-          javac --release 21 -Xlint:all,-module -Werror -d proof/classes @proof/m3-sources.txt 2>&1 | tee proof/m3-compile.txt
+          test -s proof/m3-sources.txt
+          javac --release 21 --module-path proof/m3-arrays.jar -Xlint:all,-module -Werror \
+            -d proof/classes @proof/m3-sources.txt 2>&1 | tee proof/m3-compile.txt
+          test -f proof/classes/module-info.class
           jar --create --file proof/m3-collections.jar -C proof/classes .
+          jar --describe-module --file proof/m3-collections.jar > proof/collections-module-describe.txt
+          grep -q '^com.m3.collections' proof/collections-module-describe.txt
+          mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
+            -Dfile="$GITHUB_WORKSPACE/proof/m3-arrays.jar" \
+            -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml" -Dpackaging=jar
           mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$GITHUB_WORKSPACE/proof/m3-collections.jar" \
-            -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT \
-            -Dpackaging=jar -DgeneratePom=true
+            -DpomFile="$GITHUB_WORKSPACE/m3/collections/pom.xml" -Dpackaging=jar
       - name: Compile and test real Eclipse API forwarding
         shell: bash
         run: |

@@ -1,0 +1,671 @@
+{
+  "schema": "synexia.m3jdk21.existing-seal-replay-result.v1",
+  "status": "PASS_EXISTING_SEAL_REPLAY_EXACT_IMAGES_AND_REFUSAL",
+  "approved_plan_sha256": "5a7863ad6db359e285505752705b4ea55b0d7ac43fc51c5a67c467364fe21841",
+  "storage_protection": "ACTIVE",
+  "product_worktree_mutation": false,
+  "new_Java_C_test_or_POM": false,
+  "OpenRewrite_Maven_SDK_execution": false,
+  "performance_admission": false,
+  "full_JDK_or_global_phase_admission": false,
+  "own_jvm_lock_released": true,
+  "process_log_streams": "COMBINED_STDOUT_STDERR",
+  "actual_manifest_kernel_executed": true,
+  "actions": [
+    {
+      "id": "compile",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "current-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "2379f2602eced4342d74d19ee7894e5748df264dce5c14c614401e52da9bdb1e",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "baseline-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "88d2ff71df4f50332d31675f2a7024ebfb9ebefac4590a23e0e37ff323e02348",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "baseline-apply",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "af54442786c0de919e7929ea788b7beb00158f2ec779d733dcaf60961dccf128",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "baseline-fixed-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "2379f2602eced4342d74d19ee7894e5748df264dce5c14c614401e52da9bdb1e",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "baseline-fixed-apply",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "fbe51a8faca822fb19029f5f332caa21037f4e78bffb98e05d7c6d294f9dcf87",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "drift-refusal-apply",
+      "expected_exitcode": 1,
+      "actual_exitcode": 1,
+      "log": {
+        "bytes": 408,
+        "sha256": "018edfe63a1b9cbfa3e1efc758a630c07dd9391e057ad5c0c6a75c508e1c306e",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": true
+    },
+    {
+      "id": "java-before-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "ba23564a5f11687dd296c4ff87b5eb1cec4e3c844936f2ee4ab15aa45d004d73",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "java-before-apply",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "bae830b1736b212283196bd4d14f80a8bd29a7976e3b51d01bb52a0914ec5c53",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "java-before-fixed-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "2379f2602eced4342d74d19ee7894e5748df264dce5c14c614401e52da9bdb1e",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "c-before-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "ba23564a5f11687dd296c4ff87b5eb1cec4e3c844936f2ee4ab15aa45d004d73",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "c-before-apply",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "bae830b1736b212283196bd4d14f80a8bd29a7976e3b51d01bb52a0914ec5c53",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "c-before-fixed-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "2379f2602eced4342d74d19ee7894e5748df264dce5c14c614401e52da9bdb1e",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "proof-absent-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "ba23564a5f11687dd296c4ff87b5eb1cec4e3c844936f2ee4ab15aa45d004d73",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "proof-absent-apply",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "bae830b1736b212283196bd4d14f80a8bd29a7976e3b51d01bb52a0914ec5c53",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    },
+    {
+      "id": "proof-absent-fixed-check",
+      "expected_exitcode": 0,
+      "actual_exitcode": 0,
+      "log": {
+        "bytes": 41,
+        "sha256": "2379f2602eced4342d74d19ee7894e5748df264dce5c14c614401e52da9bdb1e",
+        "stream_kind": "COMBINED_STDOUT_STDERR"
+      },
+      "all_image_states_verified": true,
+      "expected_source_drift_refusal": false
+    }
+  ],
+  "expected_nonzero_refusals": 1,
+  "final_image_states": {
+    "current": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+      }
+    ],
+    "baseline": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+      }
+    ],
+    "drift": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 18371,
+        "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 16831,
+        "sha256": "c9170a1c070d3cae4b9ff698c2bc9c6d2feb81506ffadc5dc39080f8d2f47bdb"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": null,
+        "sha256": "ABSENT"
+      }
+    ],
+    "java-before": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+      }
+    ],
+    "c-before": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+      }
+    ],
+    "proof-absent": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+      }
+    ]
+  },
+  "final_capacity": {
+    "k_free_bytes": 9069928448,
+    "fixture_logical_bytes": 631886,
+    "physical_free_bytes": 2532511744,
+    "commit_free_bytes": 13480742912,
+    "combined_logical_bytes": 5252324
+  },
+  "owned_processes_terminal": true,
+  "native_outcomes": [
+    {
+      "pid": 28612,
+      "creation_FILETIME": "134369548035889639",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 12072,
+      "creation_FILETIME": "134369548046589425",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 22704,
+      "creation_FILETIME": "134369548052509252",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 46920,
+      "creation_FILETIME": "134369548060432478",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 51328,
+      "creation_FILETIME": "134369548068843396",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 31300,
+      "creation_FILETIME": "134369548075442265",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 16708,
+      "creation_FILETIME": "134369548081430054",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 1,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 15180,
+      "creation_FILETIME": "134369548087276865",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 43300,
+      "creation_FILETIME": "134369548094942376",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 38764,
+      "creation_FILETIME": "134369548102978065",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 42560,
+      "creation_FILETIME": "134369548113127032",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 12040,
+      "creation_FILETIME": "134369548119243809",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 50280,
+      "creation_FILETIME": "134369548126480909",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 50460,
+      "creation_FILETIME": "134369548132694034",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 32860,
+      "creation_FILETIME": "134369548139534462",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 38880,
+      "creation_FILETIME": "134369548146960912",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    }
+  ]
+}

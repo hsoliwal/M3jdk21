@@ -349,6 +349,7 @@ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements R
                 from + fromIndex, from + toIndex, order);
     }
 
+
     public long retainedPrimitiveBytes() {
         return (long) physicalSlots.length * Integer.BYTES
                 + states.length

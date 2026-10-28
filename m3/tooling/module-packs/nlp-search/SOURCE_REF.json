@@ -150,5 +150,25 @@
       "git_blob": "e65dc6621efbedc64c76f4eaba8511342ad56f51"
     }
   },
-  "historical_handoff_scope": "These older identities preserve source restoration history. The integration above has its own exact donor, input and execution receipts."
+  "historical_handoff_scope": "These older identities preserve source restoration history. The integration above has its own exact donor, input and execution receipts.",
+  "source_jmod_successor": {
+    "canonical_repository": "hsoliwal/com.synexia",
+    "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search/m3-source-jmods-20261018",
+    "recipe": "com.synexia.rewrite.M3NlpSearchSourceJmodsRecipe",
+    "source_base": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+    "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "fork_sources": {
+      "hsoliwal/lucene": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+      "hsoliwal/opennlp": "368337311ad94b665fd178f8d3ced005a73b2370"
+    },
+    "library_modules": 9,
+    "sdk_modules": [
+      "jdk.m3.search",
+      "jdk.m3.search.compiler (optional actual M3AST)"
+    ],
+    "source_lock": "M3_SOURCE_LOCK.json",
+    "proof": "SOURCE_INTEGRATION.json in each fresh build output",
+    "current_source_versions": "Existing Lucene9.10/OpenNLP2.4 + exact fork adapters and complete fork Lucene analysis.opennlp module",
+    "phase_advanced": false
+  }
 }

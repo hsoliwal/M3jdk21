@@ -1,0 +1,151 @@
+[
+  {
+    "name": "integrated-java-version",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-version"
+    ],
+    "exit": 0,
+    "seconds": 0.351
+  },
+  {
+    "name": "integrated-module-source",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
+      "--module-path",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+      "--patch-module",
+      "com.m3.collections=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes",
+      "--show-module-resolution",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3LongIndexProjectionSelfTest"
+    ],
+    "exit": 0,
+    "seconds": 1.251
+  },
+  {
+    "name": "integrated-M3IndexOrderWindowContract",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
+      "--module-path",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+      "--patch-module",
+      "com.m3.collections=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3IndexOrderWindowContract",
+      "--native"
+    ],
+    "exit": 0,
+    "seconds": 8.524
+  },
+  {
+    "name": "integrated-M3NativeIndexRangeSelfTest",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
+      "--module-path",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+      "--patch-module",
+      "com.m3.collections=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3NativeIndexRangeSelfTest",
+      "native"
+    ],
+    "exit": 0,
+    "seconds": 2.976
+  },
+  {
+    "name": "integrated-M3FilteredListsMaskBridgeProof",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
+      "--module-path",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+      "--patch-module",
+      "com.m3.collections=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3FilteredListsMaskBridgeProof",
+      "--native"
+    ],
+    "exit": 0,
+    "seconds": 1.539
+  },
+  {
+    "name": "integrated-M3IndexedMultiValueOccurrenceSelfTest",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
+      "--module-path",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+      "--patch-module",
+      "com.m3.collections=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest"
+    ],
+    "exit": 0,
+    "seconds": 2.397
+  },
+  {
+    "name": "integrated-M3StrictFilteredSequencedContract",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
+      "--module-path",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+      "--patch-module",
+      "com.m3.collections=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3StrictFilteredSequencedContract"
+    ],
+    "exit": 0,
+    "seconds": 0.942
+  },
+  {
+    "name": "integrated-M3FilteredMergedSequencedContract",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
+      "--module-path",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+      "--patch-module",
+      "com.m3.collections=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3FilteredMergedSequencedContract"
+    ],
+    "exit": 0,
+    "seconds": 1.831
+  },
+  {
+    "name": "integrated-M3FilteredListMutationProof",
+    "command": [
+      "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
+      "--module-path",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+      "--patch-module",
+      "com.m3.collections=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3FilteredListMutationProof"
+    ],
+    "exit": 0,
+    "seconds": 5.538
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "schema": "m3-jdk21-doop-port-review-v1",
+  "sourceCustodyPr": 1325,
+  "runtimeReviewPr": 1330,
+  "target": "M3JDK21",
+  "sourceCount": 59,
+  "newOwners": [
+    "M3HashMap",
+    "M3HashSet",
+    "M3ArrayDeque",
+    "M3PriorityQueue"
+  ],
+  "sourceFilesUnchanged": true,
+  "implementationPrinciple": "No physically stored Map.Entry/Node. Parallel arrays, logical-to-physical offsets, primitive masks.",
+  "gcPolicy": "Tracing GC authoritative; M3LFU must not discard live collection data; evict only validated recreatable auxiliary state.",
+  "recipePhase": "INITIAL_RUNTIME_OWNERS_UNQUALIFIED",
+  "jdkRuntimeAdmission": "NOT_ADMITTED",
+  "mavenTestResults": "PENDING_RUNNER_EVIDENCE",
+  "sourceBuiltJdkResults": "NOT_RUN",
+  "nativeJniResults": "NOT_RUN",
+  "full59TypePort": "NOT_COMPLETE",
+  "requiredNext": [
+    "Per-file qualified Maven/OpenRewrite recipe",
+    "Exact public JDK API and ABI comparisons",
+    "Oracle tests for all collection operations, including concurrent JMM",
+    "Source-built java.base and jtreg",
+    "Allocation, memory-pressure, GC and native lifetime proof"
+  ]
+}

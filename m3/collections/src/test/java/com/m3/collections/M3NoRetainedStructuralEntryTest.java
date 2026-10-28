@@ -1,11 +1,13 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: align API projection identity checks with the existing bounded facade cache.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Array;
@@ -21,8 +23,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Mechanical LEAN guard: logical collection entries are not retained as structural objects.
  *
- * <p>Map.Entry is permitted only as a transient Java API projection. Canonical packed storage must
- * remain payload lanes plus primitive slot/index/topology state.</p>
+ * <p>Live Map.Entry projections may be reused by the bounded API facade cache. Canonical packed
+ * storage must remain payload lanes plus primitive slot/index/topology state; navigation snapshots
+ * remain fresh and detached.</p>
  */
 final class M3NoRetainedStructuralEntryTest {
     private static final String PACKAGE = "com.m3.collections.";
@@ -58,20 +61,19 @@ final class M3NoRetainedStructuralEntryTest {
     }
 
     @Test
-    void returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage() {
+    void liveEntriesAreReusedOutsideCanonicalStorageAndSnapshotsRemainFresh() {
         var hash = new M3LinkedHashMap<Integer, Integer>();
         hash.put(1, 10);
         hash.put(2, 20);
         Map.Entry<Integer, Integer> hashEntry = hash.entrySet().iterator().next();
         Map.Entry<Integer, Integer> hashEntryAgain = hash.entrySet().iterator().next();
+        assertSame(hashEntry, hashEntryAgain, "hash live API projection is reused while cached");
+        Object hashStorage = canonicalStorage(hash, "table");
         assertFalse(
-                hashEntry == hashEntryAgain,
-                "PackedHashMap reused/cached an API Entry object");
-        assertFalse(
-                retainsIdentity(hash, hashEntry),
+                retainsIdentity(hashStorage, hashEntry),
                 "PackedHashMap retained an entry API projection as canonical storage");
         assertFalse(
-                retainsIdentity(hash, hashEntryAgain),
+                retainsIdentity(hashStorage, hashEntryAgain),
                 "PackedHashMap retained a repeated entry API projection");
 
         var tree = new M3TreeMap<Integer, Integer>();
@@ -79,14 +81,13 @@ final class M3NoRetainedStructuralEntryTest {
         tree.put(2, 20);
         Map.Entry<Integer, Integer> treeEntry = tree.entrySet().iterator().next();
         Map.Entry<Integer, Integer> treeEntryAgain = tree.entrySet().iterator().next();
+        assertSame(treeEntry, treeEntryAgain, "tree live API projection is reused while cached");
+        Object treeStorage = canonicalStorage(tree, "tree");
         assertFalse(
-                treeEntry == treeEntryAgain,
-                "PackedTreeMap reused/cached an API Entry object");
-        assertFalse(
-                retainsIdentity(tree, treeEntry),
+                retainsIdentity(treeStorage, treeEntry),
                 "PackedTreeMap retained an entry API projection as canonical storage");
         assertFalse(
-                retainsIdentity(tree, treeEntryAgain),
+                retainsIdentity(treeStorage, treeEntryAgain),
                 "PackedTreeMap retained a repeated entry API projection");
 
         hashEntry.setValue(11);
@@ -96,10 +97,10 @@ final class M3NoRetainedStructuralEntryTest {
 
         assertFreshBurst(hash::firstEntry, "hash firstEntry");
         assertFreshBurst(tree::firstEntry, "tree firstEntry");
-        assertFreshBurst(
+        assertReusedBurst(
                 () -> hash.entrySet().iterator().next(),
                 "hash entrySet iterator projection");
-        assertFreshBurst(
+        assertReusedBurst(
                 () -> tree.entrySet().iterator().next(),
                 "tree entrySet iterator projection");
     }
@@ -116,6 +117,24 @@ final class M3NoRetainedStructuralEntryTest {
                         label + " reused/pool-cycled an Entry identity at " + iteration);
             }
             seen[iteration] = current;
+        }
+    }
+
+    private static void assertReusedBurst(
+            Supplier<? extends Map.Entry<?, ?>> supplier, String label) {
+        Map.Entry<?, ?> cached = supplier.get();
+        for (int iteration = 0; iteration < 1_024; iteration++) {
+            assertSame(cached, supplier.get(), label + " lost its cached identity at " + iteration);
+        }
+    }
+
+    private static Object canonicalStorage(Object map, String fieldName) {
+        try {
+            Field storage = map.getClass().getDeclaredField(fieldName);
+            assertTrue(storage.trySetAccessible(), () -> "cannot inspect canonical " + fieldName);
+            return storage.get(map);
+        } catch (ReflectiveOperationException impossible) {
+            throw new AssertionError(impossible);
         }
     }
 

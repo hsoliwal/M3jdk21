@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Source syntax and custody ONLY; matched-image java.base/jtreg/JNI acceptance remains pending.
+name: M3JDK21 regex frontier short-circuit source gate
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/regex/M3PatternQuery.java'
+      - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
+      - 'm3/qualification/regex-frontier-short-circuit/**'
+      - '.github/workflows/m3-regex-frontier-short-circuit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-seal-and-java21-jtreg-syntax:
+    if: github.repository == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact reviewed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Java 21 toolchain
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify canonical source seals
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          sealed = {
+              "src/java.base/share/classes/java/util/regex/M3PatternQuery.java":
+                  "b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147",
+              "test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java":
+                  "b5463d8e126b9a70dc874f181674f79f2484f6677fb30b864654d9b62fa25614",
+          }
+          for path, expected in sealed.items():
+              source = Path(path)
+              if not source.is_file() or source.is_symlink():
+                  raise SystemExit(f"MISSING_OR_LINKED_SOURCE: {path}")
+              actual = hashlib.sha256(source.read_bytes()).hexdigest()
+              if actual != expected:
+                  raise SystemExit(f"SOURCE_SHA256_DRIFT: {path}: {actual}")
+              print(f"SOURCE_SEAL_OK {path}")
+          PY
+      - name: Compile unchanged-public-API jtreg oracle on stock Java 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-regex-frontier-jtreg-classes"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-regex-frontier-jtreg-classes" \
+            test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java
+          echo "JTREG_SYNTAX_COMPILED; NOT_A_MODIFIED_JDK_OR_JTREG_RUNTIME_PASS"

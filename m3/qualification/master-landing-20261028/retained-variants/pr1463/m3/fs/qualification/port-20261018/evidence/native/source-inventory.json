@@ -1,0 +1,127 @@
+[
+  {
+    "path": "m3/fs/native/CMakeLists.txt",
+    "size": 2672,
+    "sha256": "d98a9ed9c808e0132149a0614149587831dd7889b819fbed0f4e41183d108cf3"
+  },
+  {
+    "path": "m3/fs/native/include/m3fs.h",
+    "size": 10757,
+    "sha256": "bb7edb98a2a36433f92ab8b126a4957f6355e327166ce3f1c2c96b1748471936"
+  },
+  {
+    "path": "m3/fs/native/include/m3fs_semantic.h",
+    "size": 2526,
+    "sha256": "ac5db52d6ee531294db43f7204e865d49ffd5cac0a686c8488fe45f9776edee6"
+  },
+  {
+    "path": "m3/fs/native/src/m3_fs_jni.c",
+    "size": 9543,
+    "sha256": "ea56331efaac72f68543a4c9ac1e39bf6cc6a1af05cc6a130ddb9222d2aa1b78"
+  },
+  {
+    "path": "m3/fs/native/src/m3fs.c",
+    "size": 88170,
+    "sha256": "3ba4e6f7553aa58bda8ee23be051f8c82bbd2fc2f9b7e1bfcdac9cf68310443b"
+  },
+  {
+    "path": "m3/fs/native/src/m3fs_fuse.c",
+    "size": 8761,
+    "sha256": "5077e2e601fcfe1ccdaca938eb89cadefcebe4c0a6e560e620a6c7e988c94f18"
+  },
+  {
+    "path": "m3/fs/native/src/m3fs_internal.h",
+    "size": 509,
+    "sha256": "fb901750b5ed7fb3646a5196ef7c6b41344861c988bb94b4b779e22b5fc61dc8"
+  },
+  {
+    "path": "m3/fs/native/src/m3fs_jni.c",
+    "size": 56022,
+    "sha256": "529094daabc23688e0d06632828d2e5823d5cc31bb759094178dbfe19aa8a5b9"
+  },
+  {
+    "path": "m3/fs/native/src/m3fs_semantic.c",
+    "size": 7754,
+    "sha256": "fd2dc59fd9cb025c18511dc9a80d7af85f8c9af5346c634067aabcffc6f247cc"
+  },
+  {
+    "path": "m3/fs/native/src/m3fs_tool.c",
+    "size": 10506,
+    "sha256": "3e144d7e41cf4cf6416025a6cc98f91de6065d7d1e6aa0926c0e0cbcabedd43d"
+  },
+  {
+    "path": "m3/fs/native/src/m3index_semantic_core.c",
+    "size": 28198,
+    "sha256": "231de487243d7b3c529be49c1227334383716169c4ec7ed2456aaa078d9fdb47"
+  },
+  {
+    "path": "m3/fs/native/src/m3index_semantic_core.h",
+    "size": 3967,
+    "sha256": "9433b5e5cd6d8c93b175644c9ae1759b6023003de4454b53f8daed0cb98a394e"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_checked_io_test.c",
+    "size": 4959,
+    "sha256": "f0cc15696821307f5432cba21dd8e400324d4e26cdcd695ff87af29e6aa3608e"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_core_test.c",
+    "size": 13074,
+    "sha256": "bb768ea92bf603a5d098470c52d7a526b36f63e1ae01feb48de75c36f6e7c40e"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_hotpath_test.c",
+    "size": 10292,
+    "sha256": "d44524a89b4088aaa96ff3b18b5c1f685f386828710f1d7c77b9ab79c20e11ec"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_indexed_test.c",
+    "size": 5652,
+    "sha256": "d3ce8ab95337ca4178010eb924ad5d16c37396b748c1fa102e30010f9f4db8da"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_inode_identity_test.c",
+    "size": 1886,
+    "sha256": "56f55a732a695bbecf8e12798dcb57935100dcfac70157e5e2de0468f8f8c7e2"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_metadata_test.c",
+    "size": 2276,
+    "sha256": "57692a3abd4dbc8ec2524ca9c51d44f529edbc373a2bb804a18120d13bb26453"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_replace_test.c",
+    "size": 2486,
+    "sha256": "cfdbd5bb8e0edb8f8c7d20efbf4ef6ef26d25b2c9b349df8488d880ac697be10"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_scrub_test.c",
+    "size": 4628,
+    "sha256": "aaf9081ca5c7f6c08da281e56cebfd65c17f08410db58ae35a326c22f1e0fe75"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_semantic_test.c",
+    "size": 8320,
+    "sha256": "a0178b82d4a278d83a4c880379b10a2b09c9f96938886c77ed04b232368aec32"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_snapshot_loss_test.c",
+    "size": 3779,
+    "sha256": "cca14af4c5b48db2b0dbe6ce8912c3aa6cb3964d5d4b0d6edae785362ffc3221"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_snapshot_test.c",
+    "size": 6627,
+    "sha256": "cf5959a4d86d0e1ae1c011a08a6bdad21e01b1d404aaab2c42f7139f1e5b8f52"
+  },
+  {
+    "path": "m3/fs/native/tests/m3fs_sparse_test.c",
+    "size": 5446,
+    "sha256": "4f4c51510dfb8ad4f25b36b52b9d0e7bcd7713c5c0892302300576cfba4c2888"
+  },
+  {
+    "path": "m3/fs/native/tests/run_indexed_test.cmake",
+    "size": 286,
+    "sha256": "ab4afc62a77f480d3f0237d5702dccfb3cde61efb55c6e54f237a8e1d27a1176"
+  }
+]

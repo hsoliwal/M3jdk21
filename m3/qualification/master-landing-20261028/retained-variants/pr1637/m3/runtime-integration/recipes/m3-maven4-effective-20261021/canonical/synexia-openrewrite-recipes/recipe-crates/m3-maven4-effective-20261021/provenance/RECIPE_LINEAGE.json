@@ -1,0 +1,101 @@
+{
+  "schema": "M3_MAVEN4_EFFECTIVE_RECIPE_LINEAGE_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_engine_revision": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_origin": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "task": "m3-maven4-effective-20261021",
+  "recipe": "com.synexia.m3.Maven4Effective20261021",
+  "donor_qualification": {
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/RESULT.json",
+    "sha256": "72ea68db76198ff1f8d4e55f7df9bd6c5a40c1cc075abbfb851a7a343ff9e0ff",
+    "status": "PASS",
+    "scope": "Inherited harness lineage only; not this new packet proof"
+  },
+  "adaptations": [
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml",
+      "source_sha256": "934fb8b8fdad025d77f41166306de9f1148fd786a81db811da85b301c6af0bd1",
+      "source_bytes": 4045,
+      "snapshot": "provenance/donors/integrated-sdk-003/pom.xml",
+      "target_path": "pom.xml",
+      "after_sha256": "377ceffb36caeb059c2d0e96fff7b6550c8b03b996e639160fc461b44da7ebf3",
+      "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
+      "contract": "New task identity, suite inventory and attribution fixtures; scheduler/refusal/replay algorithms unchanged"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/prepare_packet.py",
+      "source_sha256": "dcdefc9ff189c05f10c7e9f82122b9d70d1bdd0e7fb8cf9c721695e046df407c",
+      "source_bytes": 6927,
+      "snapshot": "provenance/donors/integrated-sdk-003/prepare_packet.py",
+      "target_path": "prepare_packet.py",
+      "after_sha256": "48ecd1465168482fe2962670ca4e19a50e7a4395e53fe147b716f525debc66bc",
+      "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
+      "contract": "New task identity, suite inventory and attribution fixtures; scheduler/refusal/replay algorithms unchanged"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/qualify.py",
+      "source_sha256": "cf391b32516c288a75c35acf3017e6adeee80c583b832075265c42347ebf53a8",
+      "source_bytes": 9709,
+      "snapshot": "provenance/donors/integrated-sdk-003/qualify.py",
+      "target_path": "qualify.py",
+      "after_sha256": "521844a8a5ee3cfab206cdfdb3bd12736a3f60f1d7e61fa8ffa0b360acbf1082",
+      "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
+      "contract": "New task identity, suite inventory and attribution fixtures; scheduler/refusal/replay algorithms unchanged"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/apply_receiver.py",
+      "source_sha256": "4547d44e180aba8678a86df1d4c562316c3c0a32c936f1df248d075397132c56",
+      "source_bytes": 7338,
+      "snapshot": "provenance/donors/integrated-sdk-003/apply_receiver.py",
+      "target_path": "apply_receiver.py",
+      "after_sha256": "c26286a6e3a0d03e07533e4b8944a8a1e2858034b7c6060ae70370587901cdfb",
+      "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
+      "contract": "New task identity, suite inventory and attribution fixtures; scheduler/refusal/replay algorithms unchanged"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
+      "source_sha256": "134c0914bf4673b3504386a7d1a5ea90c52fe4e9ed2c430400dd824457b8df8c",
+      "source_bytes": 2324,
+      "snapshot": "provenance/donors/integrated-sdk-003/verify_sources.py",
+      "target_path": "verify_sources.py",
+      "after_sha256": "44237b6c04c3687b053a7a433f6b963ad739dedfc8e12de7f17855b3a41c2036",
+      "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
+      "contract": "New task identity, suite inventory and attribution fixtures; scheduler/refusal/replay algorithms unchanged"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
+      "source_sha256": "962c606476db666f95d87c56c2bb9b147da42e7e4ab9551b84182a0897eda774",
+      "source_bytes": 31463,
+      "snapshot": "provenance/donors/integrated-sdk-003/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
+      "target_path": "src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java",
+      "after_sha256": "a6a53bafef02ea8f8b5547036ea9f6177861352fbe15cc8d77a85e877b1d4c5e",
+      "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
+      "contract": "New task identity, suite inventory and attribution fixtures; scheduler/refusal/replay algorithms unchanged"
+    }
+  ],
+  "unchanged_shared_engines": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+      "disposition": "UNCHANGED_SHARED_CANONICAL_OWNER"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+      "disposition": "UNCHANGED_SHARED_CANONICAL_OWNER"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "disposition": "UNCHANGED_SHARED_CANONICAL_OWNER"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+      "disposition": "UNCHANGED_SHARED_CANONICAL_OWNER"
+    }
+  ],
+  "memory": "Core correction events are not Maven4 events. Exact Maven4 failures remain separately retained; shared correction-memory intake is pending.",
+  "publication": "No global registry, provenance ledger, branch or target mutation by this authoring step"
+}

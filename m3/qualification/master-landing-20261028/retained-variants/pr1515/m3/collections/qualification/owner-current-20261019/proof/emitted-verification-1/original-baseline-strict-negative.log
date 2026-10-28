@@ -1,0 +1,11 @@
+Exception in thread "main" java.lang.AssertionError: hidden sorted removeFirst must refuse even when empty wrong exception: java.util.NoSuchElementException
+	at com.m3.collections.M3StrictFilteredSequencedContract.refuses(M3StrictFilteredSequencedContract.java:44)
+	at com.m3.collections.M3StrictFilteredSequencedContract.strictSequenced(M3StrictFilteredSequencedContract.java:50)
+	at com.m3.collections.M3StrictFilteredSequencedContract.emptySortedRefusesWithoutCallbacks(M3StrictFilteredSequencedContract.java:72)
+	at com.m3.collections.M3StrictFilteredSequencedContract.main(M3StrictFilteredSequencedContract.java:148)
+Caused by: java.util.NoSuchElementException
+	at com.m3.collections.M3FilteredViews$1.next(M3FilteredViews.java:99)
+	at com.m3.collections.M3FilteredViews$SortedSetView.first(M3FilteredViews.java:319)
+	at java.base/java.util.SortedSet.removeFirst(SortedSet.java:336)
+	at com.m3.collections.M3StrictFilteredSequencedContract.refuses(M3StrictFilteredSequencedContract.java:41)
+	... 3 more

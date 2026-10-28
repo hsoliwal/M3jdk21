@@ -13,6 +13,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 RECEIPT_PATH = ROOT / "m3/compatibility/synexia-string-phase-checker-successor-20261013.json"
 RECEIPT_V2_PATH = ROOT / "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json"
+RECEIPT_V3_PATH = ROOT / "m3/compatibility/synexia-string-phase-checker-successor-20261028-v3.json"
 TARGET_PATH = ROOT / "m3/synexia-import/current-full-borrow/check_string_phase.py"
 
 OLD_MARKER = "M3StringTuple tuple = new M3StringTuple(left, right);"
@@ -68,6 +69,49 @@ EXPECTED_RECEIPT_V2 = json.loads(r'''{
 
 
 
+EXPECTED_RECEIPT_V3 = json.loads(r'''{
+  "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V3",
+  "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
+  "predecessor": {
+    "receiptPath": "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json",
+    "receiptGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f",
+    "receiptSha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2",
+    "targetAfterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "targetAfterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 13719,
+    "headAtCapture": "842be10c3989ca74b51f43c17bc3e1c0f3728e19",
+    "stateAtCapture": "OPEN_DRAFT",
+    "recipe": "com.synexia.rewrite.M3Jdk21StringAdditionalOwnerSuccessors20261027",
+    "manifestPath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-additional-owner-successors-20261027/manifest.tsv",
+    "manifestGitBlob": "42d80eb260aa972654053eb79bd58e58f885eff4",
+    "manifestSha256": "29a06353c8f603f522ab3048cca155c0d74be5b1bf316be687772c25dff43efd",
+    "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-additional-owner-successors-20261027/check_string_phase.py.after.txt",
+    "sourceResourceGitBlob": "02a0276a37f7e44fb520b82e79a5b0e2553d9a5b",
+    "sourceResourceSha256": "492b862c07eb39809c8dd3ac7dddcba5cbf9ad73b82a9cf52740d0df53441dda"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "observedHead": "8ce34942adce886e402a395f015760be200e31ed",
+    "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+    "afterGitBlob": "02a0276a37f7e44fb520b82e79a5b0e2553d9a5b",
+    "afterSha256": "492b862c07eb39809c8dd3ac7dddcba5cbf9ad73b82a9cf52740d0df53441dda"
+  },
+  "change": {
+    "relation": "QUALIFIED_CANONICAL_CURRENT_SOURCE_RECEIPT",
+    "v1AndV2HistoryPreserved": true,
+    "earlierV2ToRecipeEpochHistory": "SOURCE_EPOCH_OBSERVED_NOT_SEMANTICALLY_RECONSTRUCTED",
+    "runtimeProductFilesChanged": false,
+    "runtimePromotionAuthorized": false,
+    "runtimeAcceptance": "NOT_ACCEPTED",
+    "performanceEvidence": "NOT_MEASURED"
+  }
+}
+''')
+
+
 def git_blob(data: bytes) -> str:
     header = b"blob " + str(len(data)).encode("ascii") + b"\0"
     return hashlib.sha1(header + data).hexdigest()
@@ -87,6 +131,23 @@ def validate_target_v2(data: bytes) -> None:
         raise ValueError("checker SHA-256 differs from pinned Synexia V2 postimage")
     if git_blob(data) != EXPECTED_RECEIPT_V2["target"]["afterGitBlob"]:
         raise ValueError("checker Git blob differs from pinned Synexia V2 postimage")
+
+
+def validate_receipt_v3(receipt: dict, predecessor: bytes) -> None:
+    if receipt != EXPECTED_RECEIPT_V3:
+        raise ValueError("unreviewed checker V3 receipt")
+    expected = receipt["predecessor"]
+    if (hashlib.sha256(predecessor).hexdigest() != expected["receiptSha256"]
+            or git_blob(predecessor) != expected["receiptGitBlob"]):
+        raise ValueError("checker V3 predecessor receipt drift")
+
+
+def validate_target_v3(data: bytes, receipt: dict, predecessor: bytes) -> None:
+    validate_receipt_v3(receipt, predecessor)
+    if hashlib.sha256(data).hexdigest() != receipt["target"]["afterSha256"]:
+        raise ValueError("checker SHA-256 differs from pinned Synexia V3 postimage")
+    if git_blob(data) != receipt["target"]["afterGitBlob"]:
+        raise ValueError("checker Git blob differs from pinned Synexia V3 postimage")
 
 
 class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
@@ -139,7 +200,9 @@ class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
         self.assertEqual([expected_row], rows)
 
     def test_target_matches_synexia_postimage(self):
-        validate_target_v2(TARGET_PATH.read_bytes())
+        validate_target_v3(TARGET_PATH.read_bytes(),
+                           json.loads(RECEIPT_V3_PATH.read_text(encoding="utf-8")),
+                           RECEIPT_V2_PATH.read_bytes())
 
     def test_checker_drift_fails_closed(self):
         data = TARGET_PATH.read_bytes()
@@ -147,7 +210,58 @@ class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
                                b"EXPECTED_PRECOMPUTE_OBSERVATION_DRIFT", 1)
         self.assertNotEqual(data, changed)
         with self.assertRaisesRegex(ValueError, "SHA-256 differs"):
-            validate_target_v2(changed)
+            validate_target_v3(changed,
+                               json.loads(RECEIPT_V3_PATH.read_text(encoding="utf-8")),
+                               RECEIPT_V2_PATH.read_bytes())
+
+    def test_v3_receipt_extends_exact_v2_without_runtime_promotion(self):
+        predecessor = RECEIPT_V2_PATH.read_bytes()
+        receipt = json.loads(RECEIPT_V3_PATH.read_text(encoding="utf-8"))
+        validate_receipt_v3(receipt, predecessor)
+        v2 = json.loads(predecessor)
+        self.assertEqual(EXPECTED_RECEIPT_V2, v2)
+        self.assertEqual(v2["target"]["afterGitBlob"],
+                         receipt["predecessor"]["targetAfterGitBlob"])
+        self.assertEqual(v2["target"]["afterSha256"],
+                         receipt["predecessor"]["targetAfterSha256"])
+        self.assertEqual(receipt["source"]["sourceResourceGitBlob"],
+                         receipt["target"]["afterGitBlob"])
+        self.assertEqual(receipt["source"]["sourceResourceSha256"],
+                         receipt["target"]["afterSha256"])
+        self.assertFalse(receipt["change"]["runtimeProductFilesChanged"])
+        self.assertFalse(receipt["change"]["runtimePromotionAuthorized"])
+        self.assertEqual("NOT_ACCEPTED", receipt["change"]["runtimeAcceptance"])
+        self.assertEqual("NOT_MEASURED", receipt["change"]["performanceEvidence"])
+        self.assertEqual("SOURCE_EPOCH_OBSERVED_NOT_SEMANTICALLY_RECONSTRUCTED",
+                         receipt["change"]["earlierV2ToRecipeEpochHistory"])
+
+    def test_v3_receipt_field_and_predecessor_drift_refuse(self):
+        predecessor = RECEIPT_V2_PATH.read_bytes()
+        good = json.loads(RECEIPT_V3_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(EXPECTED_RECEIPT_V3, good)
+        def leaves(value, path=()):
+            for key, item in value.items():
+                if isinstance(item, dict):
+                    yield from leaves(item, path + (key,))
+                else:
+                    yield path + (key,), item
+        for path, value in leaves(good):
+            changed = json.loads(json.dumps(good))
+            owner = changed
+            for key in path[:-1]:
+                owner = owner[key]
+            owner[path[-1]] = (not value if isinstance(value, bool)
+                               else value + 1 if isinstance(value, int)
+                               else value + "-drift")
+            with self.subTest(path=path):
+                with self.assertRaisesRegex(ValueError, "unreviewed checker V3 receipt"):
+                    validate_receipt_v3(changed, predecessor)
+        for changed in ({}, {**good, "unexpected": "unsealed"}):
+            with self.assertRaisesRegex(ValueError, "unreviewed checker V3 receipt"):
+                validate_receipt_v3(changed, predecessor)
+        with self.assertRaisesRegex(ValueError, "checker V3 predecessor receipt drift"):
+            validate_receipt_v3(good, predecessor + b"\n")
+
 
 
 if __name__ == "__main__":

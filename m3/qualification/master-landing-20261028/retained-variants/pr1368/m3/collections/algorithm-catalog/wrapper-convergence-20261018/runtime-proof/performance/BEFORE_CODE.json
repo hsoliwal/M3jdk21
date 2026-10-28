@@ -1,0 +1,84 @@
+{
+  "schema": "M3_BEFORE_CODE_FOSS_REUSE_V1",
+  "phase": "BEFORE_CODE",
+  "recorded_utc": "2026-10-18T05:49:41.344616+00:00",
+  "task": "m3-order-window-allocation-20261018",
+  "problem_category": "dynamic-arrays/stable-order-reversal/allocation-observation",
+  "decision": "REUSE_EXISTING_PROOF_UNCHANGED",
+  "foss_evaluation": {
+    "selected_owner": "M3OrderWindowProof allocation mode",
+    "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-wrappers-r2-20261018/0023-M3OrderWindowProof.java.txt",
+    "source_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+    "license": "Apache-2.0; existing source header retained",
+    "new_benchmark_engine": false,
+    "new_product_source": false,
+    "donor_implementation_code_copied": false,
+    "why_selected": "Existing exact proof already observes thread allocation for the relevant sortedDescending workload and is sealed in the qualified wrapper dataset. Reuse avoids changing workload or inventing an alternate benchmark engine.",
+    "alternatives": [
+      {
+        "candidate": "New JMH suite",
+        "decision": "NOT_SELECTED",
+        "reason": "Additional infrastructure and a different workload are unnecessary for the requested narrow matched observation."
+      },
+      {
+        "candidate": "Timing the existing correctness suite",
+        "decision": "REJECTED",
+        "reason": "It mixes unrelated operations and would not establish allocation for sortedDescending."
+      }
+    ]
+  },
+  "baseline": {
+    "repository": "hsoliwal/M3JDK21",
+    "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "source_root": "audit/collections-latest-baseline",
+    "all_main_classes": "audit/collections-latest-baseline-build/m3/collections/target/classes",
+    "projection_source_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545"
+  },
+  "receiver": {
+    "base_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "source_root": "audit/collections-latest-receiver",
+    "changes": "qualified m3jdk21-wrappers-r2-20261018 outputs; root receives final qualified long-bridge before complete module build",
+    "projection_source_sha256": "17137b236421ad3ad4f079acc0ba98a10ad4d419b717abd1f9192f42b18260a8"
+  },
+  "predeclared_measurement": {
+    "mode": "allocation",
+    "jvms_per_lane": 3,
+    "samples_per_jvm": 3,
+    "operations_per_sample": 100,
+    "projection_units": 32750,
+    "warmup_operations": 100,
+    "order": [
+      "baseline-1",
+      "receiver-1",
+      "baseline-2",
+      "receiver-2",
+      "baseline-3",
+      "receiver-3"
+    ],
+    "jvm_flags": [
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2"
+    ],
+    "linux_cpu_affinity": [
+      0,
+      1
+    ],
+    "metric": "com.sun.management.ThreadMXBean.getThreadAllocatedBytes for the invoking thread",
+    "report": [
+      "raw bytes per100operations",
+      "bytes peroperation",
+      "median of each three-sample JVM",
+      "range and median across all nine samples per lane"
+    ],
+    "statistics_limit": "Three samples in a JVM share VM state; no independence or confidence interval is claimed.",
+    "claims_excluded": [
+      "elapsed-time speedup",
+      "CPU efficiency",
+      "JNI speedup",
+      "all collection operations",
+      "retained heap or GC improvement"
+    ]
+  },
+  "hypothesis_before_measurement": "The existing opposite-order group-reversal atom removes one int scratch array relative to the baseline merge-sort path; quantify allocation only and retain unexpected results."
+}

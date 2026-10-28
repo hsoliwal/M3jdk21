@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3ArrayMaskSparse20261018
+displayName: Native M3JDK21 sparse bitmap-run refactoring
+description: Source-sealed Java 21 internal compactor retaining public JDK contracts.
+recipeList:
+  - com.synexia.rewrite.M3ArrayMaskSparseRecipe

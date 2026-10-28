@@ -1,0 +1,115 @@
+# SPDX-License-Identifier: Apache-2.0
+# Source-changing Java/C recipes and the donor catalogue live in Synexia.
+name: M3JDK21 original primitive partition3 Java21 JNI proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java'
+      - 'm3/collections/src/main/native/collections/m3_long_address_kernel.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedTest.java'
+      - 'm3/collections/qualification/partition3-jni-20261027/**'
+      - '.github/workflows/m3-lane-partition3-java21-jni.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-owner-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact source custody at the invoking PR head
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java)" = '9f512b267485bc1b68cf97eacadb42beada78372'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = '37c75d4f2532003b36381597d38d2a4af4812c0c'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedContract.java)" = '43abd6148088186fbdb901d94232e1b2ecde444e'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedTest.java)" = '6c25241f09af6a91563ba54d8962f3c2c8134795'
+      - name: Compile original Java21 owner and generate exact JNI header
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-partition3/classes" "$RUNNER_TEMP/m3-partition3/headers" "$RUNNER_TEMP/m3-partition3/native"
+          javac --release 21 -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/m3-partition3/headers" \
+            -d "$RUNNER_TEMP/m3-partition3/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java \
+            m3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedContract.java
+      - name: Compile existing original JNI library including the new partition exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -shared -fPIC -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$RUNNER_TEMP/m3-partition3/headers/com_m3_collections_M3LaneAlgorithms.h" \
+            m3/collections/src/main/native/collections/m3_long_address_kernel.c \
+            -o "$RUNNER_TEMP/m3-partition3/native/libm3_collections_address.so"
+      - name: Original Java and forced JNI exact mutation differential in normal and -Xint modes
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-partition3/classes"
+          native="$RUNNER_TEMP/m3-partition3/native"
+          for mode in java native; do
+            opts=()
+            expected=false
+            if [ "$mode" = native ]; then
+              opts+=(-Dm3.collections.lane.native=true -Dm3.collections.partition3.native.required=true)
+              expected=true
+            fi
+            for execution in normal interpreter; do
+              interpreted=()
+              if [ "$execution" = interpreter ]; then interpreted=(-Xint); fi
+              java -Xcheck:jni "${opts[@]}" "${interpreted[@]}" \
+                -Djava.library.path="$native" -cp "$classes" \
+                com.m3.collections.M3LanePartition3PreparedContract \
+                | tee "$RUNNER_TEMP/m3-partition3-$mode-$execution.txt"
+              grep -Eq "^PASS M3_LANE_PARTITION3_PREPARED checks=[0-9]+ native=$expected$" \
+                "$RUNNER_TEMP/m3-partition3-$mode-$execution.txt"
+            done
+            cmp "$RUNNER_TEMP/m3-partition3-$mode-normal.txt" \
+                "$RUNNER_TEMP/m3-partition3-$mode-interpreter.txt"
+          done
+      - name: Old address-library ABI falls back to Java without hiding native-required errors
+        shell: bash
+        run: |
+          set -euo pipefail
+          oldlib="$RUNNER_TEMP/m3-partition3/oldlib"
+          mkdir -p "$oldlib"
+          printf 'int m3_old_address_export(void) { return 1; }\n' \
+            | gcc -std=c17 -shared -fPIC -Wall -Wextra -Werror -x c - \
+                -o "$oldlib/libm3_collections_address.so"
+          for execution in normal interpreter; do
+            interpreted=()
+            if [ "$execution" = interpreter ]; then interpreted=(-Xint); fi
+            java -Xcheck:jni "${interpreted[@]}" -Dm3.collections.lane.native=true \
+              -Djava.library.path="$oldlib" -cp "$RUNNER_TEMP/m3-partition3/classes" \
+              com.m3.collections.M3LanePartition3PreparedContract \
+              | tee "$RUNNER_TEMP/m3-partition3-oldabi-$execution.txt"
+            grep -Eq '^PASS M3_LANE_PARTITION3_PREPARED checks=[0-9]+ native=false$' \
+              "$RUNNER_TEMP/m3-partition3-oldabi-$execution.txt"
+          done
+          cmp "$RUNNER_TEMP/m3-partition3-oldabi-normal.txt" \
+              "$RUNNER_TEMP/m3-partition3-oldabi-interpreter.txt"
+      - name: Preserve JNI and Java21 exact oracle receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-lane-partition3-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-partition3-*.txt
+          if-no-files-found: error
+          retention-days: 14

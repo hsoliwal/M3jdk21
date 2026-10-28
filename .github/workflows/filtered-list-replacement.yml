@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Filtered List replacement contracts
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsOwnerSetContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsOwnerSetTest.java'
+      - '.github/workflows/filtered-list-replacement.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-owner-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original complete List owner and test sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '843267dce03f5909c357e1caeae5a2aa82bdae3e55323e1f46e0fb0789341a17  m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java' | sha256sum -c -
+          echo '362935756c566b697c7a93072756f33b2852988622c6518ada9982381b34e578  m3/collections/src/test/java/com/m3/collections/M3FilteredListsOwnerSetContract.java' | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/filtered-list-classes"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/filtered-list-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredListsOwnerSetContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredListsContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredListsEdges.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredListsWorkProof.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionProof.java
+      - name: Run indexed/iterator replacement and existing List contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          CP="$RUNNER_TEMP/filtered-list-classes"
+          for klass in M3FilteredListsContract M3FilteredListsEdges M3FilteredListsWorkProof M3FilteredListsDeepCompositionProof; do
+            java -cp "$CP" "com.m3.collections.$klass"
+          done
+          for mode in default interpreter c1 c2; do
+            flags=()
+            case "$mode" in
+              interpreter) flags=(-Xint) ;;
+              c1) flags=(-XX:TieredStopAtLevel=1) ;;
+              c2) flags=(-XX:-TieredCompilation -Xbatch) ;;
+            esac
+            result=$(java "${flags[@]}" -cp "$CP" com.m3.collections.M3FilteredListsOwnerSetContract)
+            test "$result" = 'M3FilteredListsOwnerSetContract PASS checks=348324'
+            echo "$mode $result"
+          done

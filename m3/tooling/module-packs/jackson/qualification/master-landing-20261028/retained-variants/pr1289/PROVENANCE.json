@@ -1,0 +1,178 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "files": [
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAST.java",
+      "blob_sha1": "244a07b7e5f8c80a715528b03025bc73c6926336",
+      "sha256": "19006b499b7fc8672de398e5be141160c0a6bd49c9959cf23944ba9ee9c432c0",
+      "bytes": 2132,
+      "before": "ABSENT"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexASTPool.java",
+      "blob_sha1": "017106170dd8f50866a361000f581b48133c3abf",
+      "sha256": "75723f6e80e06127dd3840a3fc33fff5933eb64c1496bf5dbd68ab4507a888ce",
+      "bytes": 9350,
+      "before": "ABSENT"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexASTBuilder.java",
+      "blob_sha1": "3928298a736422dc91173e7ccd1da952b8d727eb",
+      "sha256": "4582fdf30b11c8cca0ed3ea513566b8a1eca976b7192ce309bb6f0bfd5931792",
+      "bytes": 1777,
+      "before": "ABSENT"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexASTAtom.java",
+      "blob_sha1": "963d04e2a8b2fc944b784a9ff5116b704f381548",
+      "sha256": "460e7d7253140d2b75e656110ca8a033556c8178cefc21d2c2083332b626b5da",
+      "bytes": 2403,
+      "before": "ABSENT"
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFile.java",
+      "blob_sha1": "0c30aaa8b9f88a829c87e46ef82a0ea96c0d68a3",
+      "sha256": "611b7a1b2426940c323ce21755c3ffb80b035b1d0030b4926960091b5ecf1a40",
+      "bytes": 26706,
+      "before": "ABSENT"
+    },
+    {
+      "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3File.java",
+      "blob_sha1": "d5ffd41d9f87e80d4db436560fe56d3b9c763ba2",
+      "sha256": "2dda8ef7a912ce662e85731351cf19104d61b1adea0675d2d43805f1f0b85f90",
+      "bytes": 2771,
+      "before": "ABSENT"
+    },
+    {
+      "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3FileSourceFacts.java",
+      "blob_sha1": "faf588b250f0fc3fcc2a91bf78d1c7d5f06b0589",
+      "sha256": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+      "bytes": 5441,
+      "before": "ABSENT"
+    }
+  ],
+  "schema": "M3_JACKSON_SOURCE_PROVENANCE_1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "canonical_recipe": "com.synexia.m3jdk.JacksonJmod20261018",
+  "canonical_crate": "synexia-openrewrite-recipes/recipes/m3-jackson-jmod-20261018",
+  "legal_copies": [
+    {
+      "source": "M3jdk21/m3/tooling/shared-frontend/recipe-custody/LICENSE.txt",
+      "target": "legal/M3-APACHE-2.0.txt",
+      "before": "ABSENT",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-annotations-2.19.2/src/main/resources/META-INF/LICENSE",
+      "target": "legal/jackson-annotations-2.19.2/LICENSE.txt",
+      "before": "ABSENT",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-annotations-2.19.2/src/main/resources/META-INF/NOTICE",
+      "target": "legal/jackson-annotations-2.19.2/NOTICE.txt",
+      "before": "ABSENT",
+      "sha256": "612b14bc77c944ce229cbba0d14919162cfea8ed802cbf06a8e865e032d03201",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-core-2.19.2/src/main/resources/META-INF/FastDoubleParser-LICENSE",
+      "target": "legal/jackson-core-2.19.2/FastDoubleParser-LICENSE.txt",
+      "before": "ABSENT",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-core-2.19.2/src/main/resources/META-INF/FastDoubleParser-NOTICE",
+      "target": "legal/jackson-core-2.19.2/FastDoubleParser-NOTICE.txt",
+      "before": "ABSENT",
+      "sha256": "aa057961a9ac52f1a63a8ae5ae437aa8355a69a0876aa8b5d1ecd6e35944be3c",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-core-2.19.2/src/main/resources/META-INF/LICENSE",
+      "target": "legal/jackson-core-2.19.2/LICENSE.txt",
+      "before": "ABSENT",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-core-2.19.2/src/main/resources/META-INF/NOTICE",
+      "target": "legal/jackson-core-2.19.2/NOTICE.txt",
+      "before": "ABSENT",
+      "sha256": "0a0042db627fe915c6a1d9ef74927af5081446063e8888494be6718d692dd2b8",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-core-2.19.2/src/main/resources/META-INF/jackson-core-LICENSE",
+      "target": "legal/jackson-core-2.19.2/jackson-core-LICENSE.txt",
+      "before": "ABSENT",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-core-2.19.2/src/main/resources/META-INF/jackson-core-NOTICE",
+      "target": "legal/jackson-core-2.19.2/jackson-core-NOTICE.txt",
+      "before": "ABSENT",
+      "sha256": "0a0042db627fe915c6a1d9ef74927af5081446063e8888494be6718d692dd2b8",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-core-2.19.2/src/main/resources/META-INF/thirdparty-LICENSE",
+      "target": "legal/jackson-core-2.19.2/thirdparty-LICENSE.txt",
+      "before": "ABSENT",
+      "sha256": "6e0e5b6e6389568c1669163fdf40cee2143be58960be0a4e2f1428805505170d",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-databind-2.19.2/src/main/resources/META-INF/LICENSE",
+      "target": "legal/jackson-databind-2.19.2/LICENSE.txt",
+      "before": "ABSENT",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/jackson-databind-2.19.2/src/main/resources/META-INF/NOTICE",
+      "target": "legal/jackson-databind-2.19.2/NOTICE.txt",
+      "before": "ABSENT",
+      "sha256": "612b14bc77c944ce229cbba0d14919162cfea8ed802cbf06a8e865e032d03201",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/resources/META-INF/LICENSE",
+      "target": "legal/fastdoubleparser-1.0.90/LICENSE.txt",
+      "before": "ABSENT",
+      "sha256": "81d823fe15b2f9dc51ae0fd8b19a77cea1e0ca3abf7b0252a2de410521fff05e",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/resources/META-INF/NOTICE",
+      "target": "legal/fastdoubleparser-1.0.90/NOTICE.txt",
+      "before": "ABSENT",
+      "sha256": "aa057961a9ac52f1a63a8ae5ae437aa8355a69a0876aa8b5d1ecd6e35944be3c",
+      "exact_copy": true
+    },
+    {
+      "source": "M3jdk21/m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/resources/META-INF/thirdparty-LICENSE",
+      "target": "legal/fastdoubleparser-1.0.90/thirdparty-LICENSE.txt",
+      "before": "ABSENT",
+      "sha256": "6e0e5b6e6389568c1669163fdf40cee2143be58960be0a4e2f1428805505170d",
+      "exact_copy": true
+    }
+  ],
+  "receiving_contract": "README.md; m3/docs/name-mapping.d/m3-jackson-jmod.json",
+  "dispositions": {
+    "MIndexAST": "adapted four-file primitive-lane and exact hash-consing mechanism; per-document lifetime and receiving String/hash domain",
+    "M3File": "bounded immutable snapshot and strict decoder/source-hash atoms",
+    "MIndexFile": "exact text ingress boundary only; token lexicon/postings/offsets/codec excluded",
+    "M3String": "existing public java.lang.String target owner; actual modified M3JDK runtime remains separate qualification",
+    "ObjectMapper": "original complete Jackson 2.19.2 sources unchanged; source build retains shaded FDP 1.0.90",
+    "compiler_M3AST": "distinct compiler SPI, not modified"
+  }
+}

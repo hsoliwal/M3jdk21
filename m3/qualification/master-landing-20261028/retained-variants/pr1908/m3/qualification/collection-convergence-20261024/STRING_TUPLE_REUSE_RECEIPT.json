@@ -1,0 +1,190 @@
+{
+  "schema": "M3JDK21_STRING_TUPLE_REUSE_RECEIPT_V1",
+  "status": "SCOPED_TUPLE_REUSE_PASS_FULL_STRING_HOLD",
+  "product_parent": "061a4e2e3765e97ae6e2c49b057b1794e6fdde71",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "8588ffe637f63a4617d874f14e5082d7652bed77",
+  "canonical_pull_request": 13301,
+  "product_pull_request": 1908,
+  "recipe": "m3-string-tuple-reuse-20261026",
+  "canonical_records": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-tuple-reuse-20261026/SOURCE_MANIFEST.json",
+      "sha256": "e518273068b443a3e742fb7cc9b40a0b6d846d7c3ed45574b8e4eb183853185b"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-tuple-reuse-20261026/TEXT_MANIFEST.json",
+      "sha256": "94314f6e87cb270b057baba9abf6481235b5e9bc9ee11f937e15acff6b1f568c"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-tuple-reuse-20261026/EVIDENCE.json",
+      "sha256": "65e40db0f1407da42bdb8aa0119c8742db57970c6946e81866f2f99d425835ce"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-tuple-reuse-20261026/CORRECTION_MEMORY.json",
+      "sha256": "637ff9b43e68e1a035fe10dd4bbed61eb39f969ee4717f72563633309815d3b4"
+    }
+  ],
+  "final_product_outputs": [
+    {
+      "path": ".github/workflows/m3-regex-collection-superset.yml",
+      "sha256": "c42dfc4a602b4f1975c34c40d966819b7d3e3c3fa2b0a6524d329e88c100135d",
+      "git_blob": "07d1e9532301cfd4697961de00840f16e35fbe3e"
+    },
+    {
+      "path": ".github/workflows/mindex-string-backing.yml",
+      "sha256": "3015c720ae6bb76d88ea88ec181f9bb87c534fdf567faea7da16be4d64ebc5c0",
+      "git_blob": "57fd10e99acd838c996d6cbf8d0bcc0a001397c0"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3string-concat-overflow-current.py",
+      "sha256": "0ac75d3249fd2f75c992c2a7b23e0bdec979e339a8090a5cb91e3a650ba5337b",
+      "git_blob": "4d4ecf2d2db05b12326a585825459cfa4c51e05d"
+    },
+    {
+      "path": "m3/runtime-integration/test_m3string_concat_overflow_current.py",
+      "sha256": "15b1784c9c0169434cb2053262528304f3098bac4949e6bf1cf6aa38816732e1",
+      "git_blob": "11b9d17b2f26a65772a4c0fa1b426a06c0102abb"
+    },
+    {
+      "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "sha256": "6b023c965da2c2a51569a5068c3a63fde929d535f6818dc41bc797a562aae08a",
+      "git_blob": "5cdc529896fd1e78a8f10b7686b60f6fd7a86bb5"
+    },
+    {
+      "path": "m3/synexia-import/current-full-borrow/string-target-successor-v4.tsv",
+      "sha256": "e41a4a4ced290b6634201884cb3fed9191736d83dfe541d33cd57eabdb378c54",
+      "git_blob": "116823934f9e84cd2e3a37030b37e68fc8de5dde"
+    },
+    {
+      "path": "m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+      "sha256": "66e90c49b3f7941cba37a08e95eecafac3b3b014d0498580383721a2d940722d",
+      "git_blob": "49a0b29f8a063b18388d1490a7a71c4284ddb6e4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "sha256": "2c5a1c67416bff7c17dacae68b3d9c6cd5fc0154ab016a71ad35357ebfcee9af",
+      "git_blob": "ad93c50bb9c5695644005afc654344b0d7385f21"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringTupleReuseTest.java",
+      "sha256": "4b00512c7c7e0280f8935314d134f00224ba9fbd891651278a05d6684b5ae012",
+      "git_blob": "a9796bfc98d6e506d84b56908cf9bd85f00713cb"
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3TokenRegexTest.java",
+      "sha256": "375c1aec980efa8828a4535967f9a5e96562f8ff4d920e4b381439d8e50d03c0",
+      "git_blob": "e2d6f551f08bf8b15a4295efa20878a1b76b4189"
+    }
+  ],
+  "qualification": {
+    "openrewrite_tests": 13,
+    "successor_python_tests": 35,
+    "overflow_refusal_python_tests": 10,
+    "strict_source_image_build": true,
+    "tuple_overflow_workflow_invocations_with_jni_checks": 8,
+    "token_fixture_invocations": 1,
+    "all_member_signature_owners_equal": 3,
+    "native_libjava_libjvm_equal": true,
+    "source_zip_only_change": "java.base/java/lang/M3StringPool.java",
+    "installed_pool_classes_exact": true,
+    "runtime": {
+      "baseline": {
+        "selected": 58,
+        "passed": 49,
+        "failed": 8,
+        "error": 1
+      },
+      "candidate": {
+        "selected": 59,
+        "passed": 52,
+        "failed": 7,
+        "error": 0
+      },
+      "same_58_selection": {
+        "passed": 51,
+        "failed": 7,
+        "error": 0
+      },
+      "improved": [
+        {
+          "path": "jdk/internal/mindex/M3TokenRegexTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: symbolic kind regex row",
+          "after": "Passed. Execution successful"
+        },
+        {
+          "path": "java/lang/String/M3StringConcatLengthOverflowTest.java",
+          "before": "Error. Program `/workspace/scratch/abdb4b1178cf/m3-pass15/build/m3-reconciliation-20261026/images/jdk-string-null-concat/bin/java' timed out (timeout set to 240000ms, elapsed time including timeout handling was 250599ms).",
+          "after": "Passed. Execution successful"
+        }
+      ],
+      "new_passing_tests": [
+        "java/lang/String/M3StringTupleReuseTest.java"
+      ],
+      "new_failures": [],
+      "remaining": [
+        {
+          "path": "java/lang/String/M3StringRegexSplitCurrentTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: non-empty split result lost M3 storage",
+          "after": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: non-empty split result lost M3 storage"
+        },
+        {
+          "path": "java/lang/String/M3StringPoolMetadataBoundsTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Latin-1 admission refused",
+          "after": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Latin-1 admission refused"
+        },
+        {
+          "path": "java/lang/String/M3StringFactsCompositionTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate",
+          "after": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate"
+        },
+        {
+          "path": "java/lang/String/M3StringPoolBoundsTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched",
+          "after": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched"
+        },
+        {
+          "path": "java/lang/String/M3StringTokenRegexTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: large token source native-candidate lane",
+          "after": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: large token source native-candidate lane"
+        },
+        {
+          "path": "java/lang/String/M3TQSparseContainmentTest.java",
+          "before": "Failed. Compilation failed: Compilation failed",
+          "after": "Failed. Compilation failed: Compilation failed"
+        },
+        {
+          "path": "java/lang/String/M3StringInternTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: valueOf/scalar canonical unit owner identity",
+          "after": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: valueOf/scalar canonical unit owner identity"
+        }
+      ],
+      "qualification": "SCOPED_TUPLE_REUSE_PASS_FULL_STRING_HOLD"
+    },
+    "resource_probe_processes": 24,
+    "resource_scope": "Finite paired Linux probes; broad performance acceptance remains held",
+    "independent_review": "No Critical/Important findings; draft only",
+    "scoped_private_provenance": {
+      "paths": 231,
+      "original_33_members_preserved": true
+    }
+  },
+  "oracle_correction": "Kind-only IDENT assertion independently reconciled with four hand-authored fixture positions; token predicate runtime unchanged",
+  "disclosure_scope": "Maintenance of existing public owners/gates and receiving tests. Private recipes and fixtures stay canonical; original source grants retained.",
+  "phase_promotion": false,
+  "merge_authorized_by_receipt": false,
+  "whole_programme_complete": false,
+  "remaining_gates": [
+    "Full JDK/JCK/platform validation",
+    "Complete private Maven reactor and historical provenance member closure",
+    "Universal performance/resource acceptance; prior Pass9/10/13 holds remain held",
+    "Hosted validation on the new commit is distinct from local execution",
+    "Seven preexisting broader String failures remain; no waiver.",
+    "Three existing adjacent source gates remain failed; no waiver."
+  ],
+  "remaining_source_gate_failures": [
+    "check-m3string-invariants.py",
+    "check-m3string-precompute-bridge.py",
+    "check-m3string-mixed-literal-replace.py"
+  ]
+}

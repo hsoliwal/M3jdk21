@@ -1,0 +1,2649 @@
+{
+  "schema": "M3_CANONICAL_PUBLICATION_PREIMAGES/1",
+  "authoring_base": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "publication_base": "ad85831eda771cbd050124c806b45c050e545984",
+  "publication_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+  "rows": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "recipe-crates",
+          "found": true
+        },
+        {
+          "parent_tree": "7dfb78f8c3862c636dd6cef4d4cc2ba7c50ffdda",
+          "segment": "m3-integrated-refinement-20261021",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-integrated-refinement-20261021.yml",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "META-INF",
+          "found": true
+        },
+        {
+          "parent_tree": "175ec1f780230559789edc4719445b40efd44ed0",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "112ea60b82735a58306f22785313697848cb6864",
+          "segment": "m3-integrated-refinement-20261021.yml",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
+      "status": "PRESENT",
+      "git_blob": "0b052cee19b36697ba3b941f6a253a3e3e3bc62e",
+      "mode": "100644",
+      "type": "blob",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "CANONICAL_RECIPE_HOME.tsv",
+          "found": true
+        }
+      ]
+    },
+    {
+      "path": "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
+      "status": "PRESENT",
+      "git_blob": "cf9b0dfa921dd92149a6a4df11eb6fe5a9d82cf6",
+      "mode": "100644",
+      "type": "blob",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "docs",
+          "found": true
+        },
+        {
+          "parent_tree": "dd85e1aa797e2544d8a67373459061f2911ba883",
+          "segment": "M3-SCALE",
+          "found": true
+        },
+        {
+          "parent_tree": "74b3c02bd4bea455bce338ba4acb17c361f620f9",
+          "segment": "provenance",
+          "found": true
+        },
+        {
+          "parent_tree": "3eba06b193fc19beda0f08c76d3b20fc13e92aa6",
+          "segment": "M3_FILE_PROVENANCE.tsv",
+          "found": true
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-001",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-002",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-002",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-003",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-003",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-004",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-004",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-005",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-005",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-006",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-006",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-007",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-007",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-008",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-009",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-009",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-010",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-010",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-011",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-011",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-012",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-012",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-013",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-013",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-014",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-014",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-015",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-015",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-016",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-016",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-017",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-017",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-018",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-018",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-019",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-019",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-020",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-020",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-021",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-021",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-022",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-022",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-023",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-023",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-024",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-024",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-025",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-025",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-026",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-026",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-027",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-027",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-028",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-028",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-029",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-029",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-030",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-030",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-031",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-031",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-032",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-032",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-033",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-033",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-034",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-034",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-035",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-035",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-036",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-036",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-037",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-037",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-038",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-038",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-039",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-039",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-040",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-040",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-041",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-041",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-042",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-042",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-043",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-043",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-044",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-044",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-045",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-045",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-046",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-text",
+          "found": true
+        },
+        {
+          "parent_tree": "b9437f337a5d417268689e87dcae8248e6c7de55",
+          "segment": "m3-integrated-refinement-20261021-046",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-047",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-047",
+          "found": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-048",
+      "status": "ABSENT",
+      "traversed": [
+        {
+          "parent_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+          "segment": "synexia-openrewrite-recipes",
+          "found": true
+        },
+        {
+          "parent_tree": "95e82f676479852579cff1b6deac91920b642c6d",
+          "segment": "src",
+          "found": true
+        },
+        {
+          "parent_tree": "c041f44d89562bf5d250d371f16c4bc66172de93",
+          "segment": "main",
+          "found": true
+        },
+        {
+          "parent_tree": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+          "segment": "resources",
+          "found": true
+        },
+        {
+          "parent_tree": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+          "segment": "com",
+          "found": true
+        },
+        {
+          "parent_tree": "b8b91559e47be9581361f9034193a3e1faed2921",
+          "segment": "synexia",
+          "found": true
+        },
+        {
+          "parent_tree": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+          "segment": "rewrite",
+          "found": true
+        },
+        {
+          "parent_tree": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+          "segment": "hash-pinned-java",
+          "found": true
+        },
+        {
+          "parent_tree": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+          "segment": "m3-integrated-refinement-20261021-048",
+          "found": false
+        }
+      ]
+    }
+  ],
+  "read_trees": [
+    {
+      "sha": "ccc786139978c5d70d700850be0ac35835e53795",
+      "truncated": false,
+      "entries": 360
+    },
+    {
+      "sha": "95e82f676479852579cff1b6deac91920b642c6d",
+      "truncated": false,
+      "entries": 130
+    },
+    {
+      "sha": "7dfb78f8c3862c636dd6cef4d4cc2ba7c50ffdda",
+      "truncated": false,
+      "entries": 296
+    },
+    {
+      "sha": "c041f44d89562bf5d250d371f16c4bc66172de93",
+      "truncated": false,
+      "entries": 4
+    },
+    {
+      "sha": "d39b2c2e217c829999b5f75308b34d25f80bc0a2",
+      "truncated": false,
+      "entries": 3
+    },
+    {
+      "sha": "828195ea9f81521fa90ccf3d1547e928b4dfc9f9",
+      "truncated": false,
+      "entries": 5
+    },
+    {
+      "sha": "175ec1f780230559789edc4719445b40efd44ed0",
+      "truncated": false,
+      "entries": 3
+    },
+    {
+      "sha": "112ea60b82735a58306f22785313697848cb6864",
+      "truncated": false,
+      "entries": 1537
+    },
+    {
+      "sha": "dd85e1aa797e2544d8a67373459061f2911ba883",
+      "truncated": false,
+      "entries": 425
+    },
+    {
+      "sha": "74b3c02bd4bea455bce338ba4acb17c361f620f9",
+      "truncated": false,
+      "entries": 278
+    },
+    {
+      "sha": "3eba06b193fc19beda0f08c76d3b20fc13e92aa6",
+      "truncated": false,
+      "entries": 3
+    },
+    {
+      "sha": "b8b91559e47be9581361f9034193a3e1faed2921",
+      "truncated": false,
+      "entries": 1
+    },
+    {
+      "sha": "276b6377ff35bd741f5d1c5ea2b78a8100573611",
+      "truncated": false,
+      "entries": 2
+    },
+    {
+      "sha": "9d3dfad3972f53b7adc57ddeda785772b2c29fba",
+      "truncated": false,
+      "entries": 801
+    },
+    {
+      "sha": "b9437f337a5d417268689e87dcae8248e6c7de55",
+      "truncated": false,
+      "entries": 319
+    },
+    {
+      "sha": "9ccf8d3ec749acd2e074df0a3409d3a19b7635ff",
+      "truncated": false,
+      "entries": 1018
+    }
+  ],
+  "scope": "Complete Git tree directory reads for new-prefix absence and exact append-owner preimages."
+}

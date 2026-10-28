@@ -1,0 +1,171 @@
+{
+  "schema": "M3_NLP_CURRENT_FORK_OWNER_QUALIFICATION/1",
+  "status": "EXACT_DONOR_GATES_PASS_COMBINED_RECEIVER_REFUSED",
+  "source_snapshot_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "source_roles": {
+    "lucene": {
+      "repository": "hsoliwal/lucene",
+      "input_commit": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+      "implementation_commit": "873b6167603c69101d626ddffd8d733340300fea"
+    },
+    "opennlp": {
+      "repository": "hsoliwal/opennlp",
+      "input_commit": "368337311ad94b665fd178f8d3ced005a73b2370",
+      "implementation_commit": "8b647d1d389736952e43fb46865c874747f7acde"
+    }
+  },
+  "source_identity_note": "Recorded companion implementation commits were checked out cleanly. Original donor/input identities in existing BUILD/source-lock metadata remain distinct and unchanged. No moving latest-branch claim.",
+  "opennlp": {
+    "status": "PASS",
+    "version": "3.0.0-SNAPSHOT",
+    "core_java_sources": 923,
+    "built_extension_java_sources": 77,
+    "built_java_sources": 1000,
+    "source_built_named_modules": 4,
+    "all_named_modules": 17,
+    "external_locked_archives": 14,
+    "original_runtime_probes": [
+      "CustomProviderProbe",
+      "CoreProbe",
+      "ImmutableTextProbe",
+      "ExtensionProbe"
+    ],
+    "immutable_text_cases": 2000,
+    "newline_modes": 2,
+    "behavior": [
+      "actual tokenizer model training",
+      "model serialization and reload",
+      "span and probability parity",
+      "custom named-module services",
+      "extension checks",
+      "original CLI providers",
+      "module validation"
+    ],
+    "scope": "Pinned existing Java21 staged donor owner and its linked image; not complete original Maven reactor"
+  },
+  "lucene": {
+    "status": "PASS",
+    "production_modules": 29,
+    "built_java_sources": 3626,
+    "all_named_modules": 59,
+    "previously_qualified_opennlp_named_modules": 17,
+    "additional_external_named_modules": 13,
+    "external_locked_archives": 16,
+    "source_recipe_changed_files": 176,
+    "source_recipe_fixed_point_changes": 0,
+    "source_recipe_drift_duplicate_missing_refusals": [
+      1,
+      1,
+      1
+    ],
+    "descriptor_recipe_changed_files": 8,
+    "descriptor_recipe_fixed_point_changes": 0,
+    "descriptor_recipe_drift_duplicate_refusals": [
+      1,
+      1
+    ],
+    "runtime_modes": [
+      "module-path",
+      "linked-image"
+    ],
+    "original_probes_per_mode": [
+      "Jdk21ProviderCheck",
+      "Jdk21ExpressionsCheck",
+      "M3LuceneJmodCheck"
+    ],
+    "runtime_launches": 6,
+    "behavior": [
+      "Java21 core vector fallback",
+      "real ClassFile expression compiler arithmetic/variables/functions/errors",
+      "disk index search and mutation",
+      "Unicode and services"
+    ],
+    "scope": "Pinned current-fork Java21 staging route with explicit preview; original Gradle25 randomized full suite remains separate"
+  },
+  "shared_dependency_scope": {
+    "unique_external_archives": 27,
+    "source_built_modules_in_lucene_image": 33,
+    "external_modules_in_lucene_image": 26,
+    "note": "14 OpenNLP and16 Lucene locked-archive lists share3 exact artifacts. Two zlibsvm archives form one external named module. External archives and OpenRewrite build dependencies are not claimed source-built."
+  },
+  "staging_sdk": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "mode": "offline cached Maven/OpenRewrite artifacts; unchanged original source"
+  },
+  "readbacks": {
+    "opennlp_source_and_dependency_inputs_unchanged": true,
+    "lucene_source_recipe_and_dependency_inputs_unchanged": true,
+    "both_actual_fork_checkouts_clean": true,
+    "source_snapshot_packager_bytes_equal_actual_product": true
+  },
+  "combined_receiver": {
+    "status": "REFUSED",
+    "output_created": false,
+    "changed_hash_paths": [
+      "m3/core/src/com/m3/text/M3GvasLiteralImage.java"
+    ],
+    "additional_source_paths": [
+      "m3/core/src/com/m3/text/M3BigString.java",
+      "m3/core/src/com/m3/text/M3RopeTextIndex.java"
+    ],
+    "admission_waived": false,
+    "source_lock_modified": false,
+    "lineage_and_owning_test_review": "Separate review by /root/jobs_resources; no source refresh performed by these gates"
+  },
+  "observed_runtime_limit": "Lucene linked-image probes report missing optional jdk.management readability for JVM internal sizing/optimization; probes still pass through existing fallbacks. Logs retained; no optimization or performance promotion.",
+  "not_claimed": [
+    "Combined M3 text/File/AST source integration image",
+    "Original Java25 fork output lane",
+    "Legacy vendored Lucene9.10/OpenNLP2.4 source build in this new run",
+    "Complete upstream randomized/Maven reactor suites",
+    "Faiss native implementation, DL/GPU or optional external models",
+    "Full String/array prerequisite admission, M3JDK/HotSpot rebuild or cross-platform acceptance",
+    "Measured speed, heap or native-memory improvement",
+    "Exact-head GitHub CI"
+  ],
+  "primary_receipts": [
+    {
+      "path": "evidence/SOURCE_HYDRATION.json",
+      "bytes": 1561,
+      "sha256": "08a0e038642709ddcd39fedeb44892b0524abf644878c2e0368bd2ebac40628e"
+    },
+    {
+      "path": "evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
+      "bytes": 2552,
+      "sha256": "77e200b5ce35d939bd013b51c4d397e24afca576713d5cf370bac84a75f402a1"
+    },
+    {
+      "path": "evidence/CURRENT_RECIPE_001.json",
+      "bytes": 170972,
+      "sha256": "e11e19f338cb6d2fd312e1e05565c2520cfc930a20ceebf48268d3e007739507"
+    },
+    {
+      "path": "evidence/OPENNLP_OWNER_001.json",
+      "bytes": 2082,
+      "sha256": "422f9ee85eb0e9dabcfef6a432ff2a32a5fe47c5457ac723532286170edced5c"
+    },
+    {
+      "path": "evidence/OPENNLP_INSTALLED_ARTIFACTS.json",
+      "bytes": 7021,
+      "sha256": "1127e5721c5e2ae0a7406cd00042af84851a64f6c9bcc370bc22df7f70d01fbe"
+    },
+    {
+      "path": "evidence/LUCENE_OWNER_001.json",
+      "bytes": 5371,
+      "sha256": "e64793f43586ad6dfb27df426c37f4ae1ba0f7205cc3f0be1ee92a5a50d7ee34"
+    },
+    {
+      "path": "evidence/LUCENE_INSTALLED_ARTIFACTS.json",
+      "bytes": 23251,
+      "sha256": "040ed67671d693c2d51515d86dd284aa2bdc6212acdb3fc95b367431b7f563d1"
+    },
+    {
+      "path": "evidence/CURRENT_RECEIVER_001.json",
+      "bytes": 1993,
+      "sha256": "c74725aa452de9bbe804da3d137897550e733b8911e1f988a86f178ac2967def"
+    }
+  ]
+}

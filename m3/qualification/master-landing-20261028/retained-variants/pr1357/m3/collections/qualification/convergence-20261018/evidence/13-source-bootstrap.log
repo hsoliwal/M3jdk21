@@ -1,0 +1,632 @@
+SOURCE MODULE apiguardian-api
+{"coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "277a7a4315412817beb6655b324dc7276621e95ebff00b8bf65e17a27b685e2d"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.apiguardian:apiguardian-api >-------------------
+[INFO] Building apiguardian-api 1.1.2 - unchanged upstream source build for M3jdk21 1.1.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ apiguardian-api ---
+[INFO] Copying 1 resource from src/main/resources/META-INF to target/classes/META-INF/third-party/apiguardian-api
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from  to target/classes/META-INF/third-party/apiguardian-api
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ apiguardian-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ apiguardian-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ apiguardian-api ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ apiguardian-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ apiguardian-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ apiguardian-api ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ apiguardian-api ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/apiguardian/apiguardian-api/1.1.2-m3-source-1/apiguardian-api-1.1.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/apiguardian/apiguardian-api/1.1.2-m3-source-1/apiguardian-api-1.1.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.203 s
+[INFO] Finished at: 2026-10-18T16:01:52+04:00
+[INFO] ------------------------------------------------------------------------
+SOURCE MODULE opentest4j
+{"coordinate": "org.opentest4j:opentest4j:1.3.0-m3-source-1", "exact_files": 16, "exact_production_files": 8, "sources_jar_sha256": "724a24e3a68267d5ebac9411389a15638a71e50c62448ffa58f59c34d5c1ebb2"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< org.opentest4j:opentest4j >----------------------
+[INFO] Building opentest4j 1.3.0 - unchanged upstream source build for M3jdk21 1.3.0-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ opentest4j ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/opentest4j
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ opentest4j ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 8 source files with javac [debug release 8] to target/classes
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/AssertionFailedError.java:[88,21] possible 'this' escape before subclass is fully initialized
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/AssertionFailedError.java:[110,34] previous possible 'this' escape happens here via invocation
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/AssertionFailedError.java:[102,21] possible 'this' escape before subclass is fully initialized
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/AssertionFailedError.java:[110,34] previous possible 'this' escape happens here via invocation
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/MultipleFailuresError.java:[40,39] non-transient instance field of a serializable class declared with a non-serializable type
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ opentest4j ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ opentest4j ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ opentest4j ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ opentest4j ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar
+[INFO] 
+[INFO] --- moditect:1.2.2.Final:add-module-info (add-module-info-root) @ opentest4j ---
+[WARNING]  Parameter 'version' is read-only, must not be used in configuration
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ opentest4j ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/opentest4j/opentest4j/1.3.0-m3-source-1/opentest4j-1.3.0-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/opentest4j/opentest4j/1.3.0-m3-source-1/opentest4j-1.3.0-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.852 s
+[INFO] Finished at: 2026-10-18T16:02:12+04:00
+[INFO] ------------------------------------------------------------------------
+SOURCE MODULE univocity-parsers
+{"coordinate": "com.univocity:univocity-parsers:2.9.1-m3-source-1", "exact_files": 221, "exact_production_files": 216, "sources_jar_sha256": "484a48fa4a9587a47893f4a332cbe09c2902091b7a647c5d04258a46166c891b"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.univocity:univocity-parsers >-------------------
+[INFO] Building univocity-parsers 2.9.1 - unchanged upstream source build for M3jdk21 2.9.1-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ univocity-parsers ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/resources
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/univocity-parsers
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ univocity-parsers ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 216 source files with javac [debug release 8] to target/classes
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/Copy.java:[75,9] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/Nested.java:[38,9] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/Validate.java:[84,25] found raw type: com.univocity.parsers.conversions.Validator
+  missing type arguments for generic class com.univocity.parsers.conversions.Validator<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[93,66] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[93,23] found raw type: com.univocity.parsers.conversions.EnumConversion
+  missing type arguments for generic class com.univocity.parsers.conversions.EnumConversion<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[94,17] found raw type: java.lang.Enum
+  missing type arguments for generic class java.lang.Enum<E>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[94,76] unchecked method invocation: method valueOf in class java.lang.Enum is applied to given types
+  required: java.lang.Class<T>,java.lang.String
+  found:    java.lang.Class,java.lang.String
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[94,77] unchecked conversion
+  required: java.lang.Class<T>
+  found:    java.lang.Class
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[95,28] found raw type: com.univocity.parsers.conversions.EnumConversion
+  missing type arguments for generic class com.univocity.parsers.conversions.EnumConversion<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[95,24] unchecked call to EnumConversion(java.lang.Class<T>,T,java.lang.String,java.lang.String,com.univocity.parsers.conversions.EnumSelector...) as a member of the raw type com.univocity.parsers.conversions.EnumConversion
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[296,41] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[297,45] unchecked call to isAssignableFrom(java.lang.Class<?>) as a member of the raw type java.lang.Class
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[301,25] found raw type: java.lang.reflect.Constructor
+  missing type arguments for generic class java.lang.reflect.Constructor<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[302,59] unchecked cast
+  required: T
+  found:    java.lang.Object
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[726,33] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[757,64] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[788,65] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[875,17] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[961,17] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[996,36] unchecked cast
+  required: A
+  found:    java.lang.annotation.Annotation
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1017,41] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1033,41] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1034,95] unchecked method invocation: method findAnnotationMethodType in class com.univocity.parsers.annotations.helpers.AnnotationHelper is applied to given types
+  required: java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.String
+  found:    java.lang.Class,java.lang.String
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1034,96] unchecked conversion
+  required: java.lang.Class<? extends java.lang.annotation.Annotation>
+  found:    java.lang.Class
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1044,75] unchecked method invocation: method findAnnotation in class com.univocity.parsers.annotations.helpers.AnnotationHelper is applied to given types
+  required: java.lang.reflect.AnnotatedElement,java.lang.Class<A>,java.util.Set<java.lang.annotation.Annotation>,java.util.Stack<java.lang.annotation.Annotation>
+  found:    java.lang.reflect.AnnotatedElement,java.lang.Class,java.util.HashSet<java.lang.annotation.Annotation>,java.util.Stack<java.lang.annotation.Annotation>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1044,94] unchecked conversion
+  required: java.lang.Class<A>
+  found:    java.lang.Class
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1044,75] unchecked cast
+  required: A
+  found:    java.lang.Object
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1082,44] unchecked cast
+  required: A
+  found:    java.lang.annotation.Annotation
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1099,34] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1099,79] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1100,34] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1100,77] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1103,17] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1154,61] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/conversions/EnumConversion.java:[182,40] found raw type: java.util.Map
+  missing type arguments for generic class java.util.Map<K,V>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/conversions/EnumConversion.java:[255,68] unchecked cast
+  required: T
+  found:    java.lang.Object
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationRegistry.java:[67,28] unchecked cast
+  required: T
+  found:    java.lang.Object
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationRegistry.java:[125,33] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationRegistry.java:[126,33] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/FieldMapping.java:[32,23] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/FieldMapping.java:[43,17] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/FieldMapping.java:[67,17] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/FieldMapping.java:[300,58] unchecked call to isAssignableFrom(java.lang.Class<?>) as a member of the raw type java.lang.Class
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ArgumentUtils.java:[48,48] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ArgumentUtils.java:[64,47] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ArgumentUtils.java:[530,27] unchecked cast
+  required: T
+  found:    java.lang.Throwable
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ArgumentUtils.java:[572,60] unchecked cast
+  required: T[]
+  found:    java.lang.Object
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[61,19] found raw type: com.univocity.parsers.common.processor.core.Processor
+  missing type arguments for generic class com.univocity.parsers.common.processor.core.Processor<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[64,23] found raw type: com.univocity.parsers.common.ProcessorErrorHandler
+  missing type arguments for generic class com.univocity.parsers.common.ProcessorErrorHandler<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[283,41] unchecked call to processStarted(T) as a member of the raw type com.univocity.parsers.common.processor.core.Processor
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[288,25] found raw type: com.univocity.parsers.common.processor.core.Processor
+  missing type arguments for generic class com.univocity.parsers.common.processor.core.Processor<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[446,71] unchecked call to processEnded(T) as a member of the raw type com.univocity.parsers.common.processor.core.Processor
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[716,33] unchecked method invocation: method process in class com.univocity.parsers.common.Internal is applied to given types
+  required: java.lang.String[],com.univocity.parsers.common.processor.core.Processor<C>,C,com.univocity.parsers.common.ProcessorErrorHandler<C>
+  found:    java.lang.String[],com.univocity.parsers.common.processor.core.Processor,com.univocity.parsers.common.ParsingContext,com.univocity.parsers.common.ProcessorErrorHandler
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[716,39] unchecked conversion
+  required: com.univocity.parsers.common.processor.core.Processor<C>
+  found:    com.univocity.parsers.common.processor.core.Processor
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[716,59] unchecked conversion
+  required: com.univocity.parsers.common.ProcessorErrorHandler<C>
+  found:    com.univocity.parsers.common.ProcessorErrorHandler
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/iterators/ParserIterator.java:[32,25] found raw type: com.univocity.parsers.common.AbstractParser
+  missing type arguments for generic class com.univocity.parsers.common.AbstractParser<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/iterators/ParserIterator.java:[39,34] found raw type: com.univocity.parsers.common.AbstractParser
+  missing type arguments for generic class com.univocity.parsers.common.AbstractParser<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/iterators/RowIterator.java:[30,28] found raw type: com.univocity.parsers.common.AbstractParser
+  missing type arguments for generic class com.univocity.parsers.common.AbstractParser<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/iterators/RecordIterator.java:[31,31] found raw type: com.univocity.parsers.common.AbstractParser
+  missing type arguments for generic class com.univocity.parsers.common.AbstractParser<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[91,48] possible 'this' escape before subclass is fully initialized
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[229,44] non-varargs call of varargs method with inexact argument type for last parameter;
+  cast to java.lang.String for a varargs call
+  cast to java.lang.String[] for a non-varargs call and to suppress this warning
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[426,57] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[517,72] unchecked conversion
+  required: com.univocity.parsers.common.ProcessorErrorHandler<T>
+  found:    com.univocity.parsers.common.ProcessorErrorHandler
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[517,111] unchecked cast
+  required: com.univocity.parsers.common.ProcessorErrorHandler<T>
+  found:    com.univocity.parsers.common.ProcessorErrorHandler<capture#1 of ? extends com.univocity.parsers.common.Context>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[690,19] found raw type: com.univocity.parsers.common.CommonSettings
+  missing type arguments for generic class com.univocity.parsers.common.CommonSettings<F>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[692,25] found raw type: com.univocity.parsers.common.CommonSettings
+  missing type arguments for generic class com.univocity.parsers.common.CommonSettings<F>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[694,36] unchecked assignment to variable format as member of raw type com.univocity.parsers.common.CommonSettings
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[712,19] found raw type: com.univocity.parsers.common.CommonSettings
+  missing type arguments for generic class com.univocity.parsers.common.CommonSettings<F>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[183,45] unchecked conversion
+  required: com.univocity.parsers.common.processor.core.Processor<T>
+  found:    com.univocity.parsers.common.processor.core.Processor
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[185,39] unchecked cast
+  required: com.univocity.parsers.common.processor.core.Processor<T>
+  found:    com.univocity.parsers.common.processor.core.Processor<capture#2 of ? extends com.univocity.parsers.common.Context>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[421,25] found raw type: java.lang.Class
+  missing type arguments for generic class java.lang.Class<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[472,19] found raw type: com.univocity.parsers.common.CommonParserSettings
+  missing type arguments for generic class com.univocity.parsers.common.CommonParserSettings<F>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[477,19] found raw type: com.univocity.parsers.common.CommonParserSettings
+  missing type arguments for generic class com.univocity.parsers.common.CommonParserSettings<F>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[86,26] possible 'this' escape before subclass is fully initialized
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ParserOutput.java:[126,42] possible 'this' escape before subclass is fully initialized
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/TextParsingException.java:[43,27] possible 'this' escape before subclass is fully initialized
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/record/Record.java:[1222,63] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/record/Record.java:[1253,71] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/record/Record.java:[1288,69] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/record/Record.java:[1325,77] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[74,37] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[88,37] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[140,40] Possible heap pollution from parameterized vararg type T
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[178,25] found raw type: com.univocity.parsers.common.fields.FieldSet
+  missing type arguments for generic class com.univocity.parsers.common.fields.FieldSet<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[179,28] unchecked assignment to variable fields as member of raw type com.univocity.parsers.common.fields.FieldSet
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[182,36] unchecked assignment to variable wrappedFieldSets as member of raw type com.univocity.parsers.common.fields.FieldSet
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[184,65] unchecked call to add(E) as a member of the raw type java.util.List
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[187,32] unchecked conversion
+  required: com.univocity.parsers.common.fields.FieldSet<T>
+  found:    com.univocity.parsers.common.fields.FieldSet
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[56,52] possible 'this' escape before subclass is fully initialized
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/DataProcessingException.java:[268,41] found raw type: com.univocity.parsers.common.ProcessorErrorHandler
+  missing type arguments for generic class com.univocity.parsers.common.ProcessorErrorHandler<T>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/DataProcessingException.java:[35,26] non-transient instance field of a serializable class declared with an array having a non-serializable base component type java.lang.Object
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/DataProcessingException.java:[36,24] non-transient instance field of a serializable class declared with a non-serializable type
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/DataProcessingException.java:[37,37] non-transient instance field of a serializable class declared with a non-serializable type
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1773,40] unchecked method invocation: method writeRowToString in class com.univocity.parsers.common.AbstractWriter is applied to given types
+  required: java.util.Map<K,java.lang.String>,java.util.Map<K,?>
+  found:    <nulltype>,java.util.Map
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1773,47] unchecked conversion
+  required: java.util.Map<K,?>
+  found:    java.util.Map
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1784,25] unchecked method invocation: method writeRow in class com.univocity.parsers.common.AbstractWriter is applied to given types
+  required: java.util.Map<K,java.lang.String>,java.util.Map<K,?>
+  found:    <nulltype>,java.util.Map
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1784,32] unchecked conversion
+  required: java.util.Map<K,?>
+  found:    java.util.Map
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1920,25] found raw type: java.util.Iterator
+  missing type arguments for generic class java.util.Iterator<E>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1920,52] found raw type: java.util.Iterator
+  missing type arguments for generic class java.util.Iterator<E>
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1960,70] unchecked method invocation: method processRecord in class com.univocity.parsers.common.AbstractWriter is applied to given types
+  required: java.util.Map<K,java.lang.String>,java.util.Map<K,?>
+  found:    java.util.Map,java.util.Map
+[INFO] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/routine/AbstractRoutines.java: Some input files additionally use or override a deprecated API.
+[INFO] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java: Some input files additionally use unchecked or unsafe operations.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ univocity-parsers ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ univocity-parsers ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ univocity-parsers ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ univocity-parsers ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ univocity-parsers ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/com/univocity/univocity-parsers/2.9.1-m3-source-1/univocity-parsers-2.9.1-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/com/univocity/univocity-parsers/2.9.1-m3-source-1/univocity-parsers-2.9.1-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.482 s
+[INFO] Finished at: 2026-10-18T16:02:16+04:00
+[INFO] ------------------------------------------------------------------------
+SOURCE MODULE junit-platform-commons-1.10.2
+{"coordinate": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1", "exact_files": 50, "exact_production_files": 41, "sources_jar_sha256": "e1435cf8f4843619a16c2c1393d39a5170db1376af048a76cdcd7bf9aad72ad6"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< org.junit.platform:junit-platform-commons >--------------
+[INFO] Building junit-platform-commons 1.10.2 - unchanged upstream source build for M3jdk21 1.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-platform-commons ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-platform-commons-1.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-platform-commons ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 41 source files with javac [debug release 8] to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (multi-release-9) @ junit-platform-commons ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 9] to target/classes/META-INF/versions/9
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-platform-commons ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[25,42] module not found: org.junit.jupiter.api
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[26,42] module not found: org.junit.jupiter.engine
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[27,42] module not found: org.junit.jupiter.migrationsupport
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[28,42] module not found: org.junit.jupiter.params
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[29,43] module not found: org.junit.platform.console
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[30,43] module not found: org.junit.platform.engine
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[31,43] module not found: org.junit.platform.launcher
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[32,43] module not found: org.junit.platform.reporting
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[33,43] module not found: org.junit.platform.runner
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[34,49] module not found: org.junit.platform.suite.api
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[35,49] module not found: org.junit.platform.suite.engine
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[36,43] module not found: org.junit.platform.testkit
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[37,42] module not found: org.junit.vintage.engine
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[40,42] module not found: org.junit.jupiter.api
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[41,42] module not found: org.junit.jupiter.engine
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[42,42] module not found: org.junit.jupiter.migrationsupport
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[43,42] module not found: org.junit.jupiter.params
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[44,43] module not found: org.junit.platform.console
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[45,43] module not found: org.junit.platform.engine
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[46,43] module not found: org.junit.platform.launcher
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[47,43] module not found: org.junit.platform.reporting
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[48,43] module not found: org.junit.platform.runner
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[49,49] module not found: org.junit.platform.suite.api
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[50,49] module not found: org.junit.platform.suite.commons
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[51,49] module not found: org.junit.platform.suite.engine
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[52,43] module not found: org.junit.platform.testkit
+[WARNING] /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[53,42] module not found: org.junit.vintage.engine
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-platform-commons ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-platform-commons ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-platform-commons ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-platform-commons ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-platform-commons ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.621 s
+[INFO] Finished at: 2026-10-18T16:02:20+04:00
+[INFO] ------------------------------------------------------------------------
+SOURCE MODULE junit-platform-engine-1.10.2
+{"coordinate": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1", "exact_files": 104, "exact_production_files": 97, "sources_jar_sha256": "17ac74964fcd82c57130623afe72a99105ca107fc96cb53f169b3a8c9c444c83"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< org.junit.platform:junit-platform-engine >--------------
+[INFO] Building junit-platform-engine 1.10.2 - unchanged upstream source build for M3jdk21 1.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-platform-engine ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-platform-engine-1.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-platform-engine ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 97 source files with javac [debug release 8] to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-platform-engine ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-platform-engine ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-platform-engine ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-platform-engine ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-platform-engine ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-platform-engine ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-engine/1.10.2-m3-source-1/junit-platform-engine-1.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-engine/1.10.2-m3-source-1/junit-platform-engine-1.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.770 s
+[INFO] Finished at: 2026-10-18T16:02:24+04:00
+[INFO] ------------------------------------------------------------------------
+SOURCE MODULE junit-jupiter-api-5.10.2
+{"coordinate": "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1", "exact_files": 157, "exact_production_files": 148, "sources_jar_sha256": "551e054c2e84b79d087f0410c8e6e3dd3e83ae54129593380d48550da441b5ef"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< org.junit.jupiter:junit-jupiter-api >-----------------
+[INFO] Building junit-jupiter-api 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- kotlin:1.8.22:compile (kotlin-compile) @ junit-jupiter-api ---
+[WARNING] Language version 1.3 is deprecated and its support will be removed in a future version of Kotlin
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-jupiter-api ---
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-jupiter-api-5.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-api ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 148 source files with javac [debug release 8] to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-jupiter-api ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-jupiter-api ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-api ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-jupiter-api ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2-m3-source-1/junit-jupiter-api-5.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2-m3-source-1/junit-jupiter-api-5.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  33.106 s
+[INFO] Finished at: 2026-10-18T16:02:58+04:00
+[INFO] ------------------------------------------------------------------------
+SOURCE MODULE junit-jupiter-params-5.10.2
+{"coordinate": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1", "exact_files": 70, "exact_production_files": 60, "sources_jar_sha256": "532dce2ef436152405567ea75f076dc908c4d21641224ecc53913c9f09bfb131"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< org.junit.jupiter:junit-jupiter-params >---------------
+[INFO] Building junit-jupiter-params 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- kotlin:1.8.22:compile (kotlin-compile) @ junit-jupiter-params ---
+[WARNING] Language version 1.3 is deprecated and its support will be removed in a future version of Kotlin
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-jupiter-params ---
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-jupiter-params-5.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-params ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 60 source files with javac [debug release 8] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-jupiter-params ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-params ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-params ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-params ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- shade:3.6.0:shade (default) @ junit-jupiter-params ---
+[INFO] Including com.univocity:univocity-parsers:jar:2.9.1-m3-source-1 in the shaded jar.
+[INFO] Excluding org.apiguardian:apiguardian-api:jar:1.1.2-m3-source-1 from the shaded jar.
+[INFO] Excluding org.junit.jupiter:junit-jupiter-api:jar:5.10.2-m3-source-1 from the shaded jar.
+[INFO] Excluding org.opentest4j:opentest4j:jar:1.3.0-m3-source-1 from the shaded jar.
+[INFO] Excluding org.junit.platform:junit-platform-commons:jar:1.10.2-m3-source-1 from the shaded jar.
+[INFO] Dependency-reduced POM written at: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/dependency-reduced-pom.xml
+[WARNING] junit-jupiter-params-5.10.2-m3-source-1.jar, univocity-parsers-2.9.1-m3-source-1.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar with /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1-shaded.jar
+[INFO] 
+[INFO] --- moditect:1.2.2.Final:add-module-info (add-module-info-root) @ junit-jupiter-params ---
+[WARNING]  Parameter 'version' is read-only, must not be used in configuration
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-jupiter-params ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/dependency-reduced-pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2-m3-source-1/junit-jupiter-params-5.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2-m3-source-1/junit-jupiter-params-5.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  21.484 s
+[INFO] Finished at: 2026-10-18T16:03:21+04:00
+[INFO] ------------------------------------------------------------------------
+SOURCE MODULE junit-jupiter-engine-5.10.2
+{"coordinate": "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1", "exact_files": 108, "exact_production_files": 100, "sources_jar_sha256": "00ffb37a2d4a1f5ab224c4cf44b2d050b3d132ca650e9c4251605daf9cd6da9b"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< org.junit.jupiter:junit-jupiter-engine >---------------
+[INFO] Building junit-jupiter-engine 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-jupiter-engine ---
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-jupiter-engine-5.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-engine ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 100 source files with javac [debug release 8] to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-jupiter-engine ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-jupiter-engine ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-engine ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-engine ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-engine ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-jupiter-engine ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2-m3-source-1/junit-jupiter-engine-5.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2-m3-source-1/junit-jupiter-engine-5.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.209 s
+[INFO] Finished at: 2026-10-18T16:03:26+04:00
+[INFO] ------------------------------------------------------------------------
+SOURCE MODULE junit-jupiter-5.10.2
+{"coordinate": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "bd628b06b83b0d8830b53747b7f466beebca12d4808f117660ac06e47af99d1c"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.junit.jupiter:junit-jupiter >-------------------
+[INFO] Building junit-jupiter 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-jupiter ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-jupiter-5.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-jupiter ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-jupiter ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.652 s
+[INFO] Finished at: 2026-10-18T16:03:28+04:00
+[INFO] ------------------------------------------------------------------------
+PASS: all source dependency modules verified and installed

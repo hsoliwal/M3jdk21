@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py", line 145, in <module>
+    main()
+  File "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py", line 108, in main
+    destination = safe(root, path)
+                  ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py", line 40, in safe
+    raise ValueError('symbolic path refused: ' + str(member))
+ValueError: symbolic path refused: /workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-symbolic/docs

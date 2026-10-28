@@ -100,4 +100,23 @@ public interface Iterable<T> {
     default Spliterator<T> spliterator() {
         return Spliterators.spliteratorUnknownSize(iterator(), 0);
     }
+
+    /**
+     * Cooperative, caller-monitored operation. The monitor is borrowed and
+     * never begun, finished or cancelled by this method. One unit is credited
+     * after each successfully completed element/callback operation.
+     * Cancellation is checked at delegate boundaries only.
+     */
+    default void forEachMonitored(Consumer<? super T> action, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(action);
+        Objects.requireNonNull(monitor);
+        Iterator<T> each = iterator();
+        while (true) {
+            monitor.checkCancelled();
+            if (!each.hasNext()) break;
+            action.accept(each.next());
+            monitor.worked(1);
+        }
+        monitor.checkCancelled();
+    }
 }

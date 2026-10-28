@@ -1,0 +1,631 @@
+{
+  "status": "REFUSAL_PRESERVED_SUCCESSOR_SDK_PASS",
+  "handoff": "maven-work/HANDOFF-002.json",
+  "handoff_sha256": "359b2929cce0028a8f15297211159613b599d6db5e2a9767bc18e667f1bc93f6",
+  "correction": "Seven unchanged admitted candidate paths selected; historical CSV remains baseline. No text-engine admission widening.",
+  "evidence": [
+    {
+      "path": "synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/RESULT.json",
+      "bytes": 22338,
+      "sha256": "9aaef3787c1fa569dfef8c0c9d2691a1d32f3b139774491f2e25d2cfa7c01f92",
+      "result": {
+        "schema": "M3_MAVEN4_EFFECTIVE_SDK_ATTEMPT/1",
+        "task": "m3-maven4-effective-20261021",
+        "status": "FAIL",
+        "scope": "source-replay-only",
+        "dependency_lane": "offline-cached-artifacts",
+        "full_source_vendored_reactor": "NOT_RUN",
+        "receiving_runtime_gates": "SEPARATE",
+        "started_at": "2026-10-21T01:48:04.799375+00:00",
+        "duration_seconds": "5.516",
+        "exit_code": 1,
+        "timed_out": false,
+        "command": [
+          "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+          "-B",
+          "-ntp",
+          "-f",
+          "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/pom.xml",
+          "-Dmaven.repo.local=/tmp/m3-build-m2",
+          "-Dparser.classpath=/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/classes:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/000-maven-impl-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/001-maven-api-core-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/002-maven-api-plugin-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/003-maven-api-spi-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/004-maven-api-metadata-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/005-maven-api-xml-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/006-maven-api-toolchain-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/007-maven-api-di-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/008-maven-api-annotations-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/009-maven-api-model-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/010-maven-api-settings-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/011-maven-di-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/012-maven-support-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/013-maven-resolver-api-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/014-maven-resolver-spi-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/015-gson-2.14.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/016-maven-resolver-util-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/017-maven-xml-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/018-woodstox-core-7.3.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/019-stax2-api-4.3.2.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/020-slf4j-api-2.0.20.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/021-maven-resolver-impl-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/022-maven-resolver-named-locks-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/023-maven-resolver-connector-basic-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/024-plexus-sec-dispatcher-4.2.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/025-junit-jupiter-api-6.1.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/026-opentest4j-1.3.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/027-junit-platform-commons-6.1.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/028-apiguardian-api-1.1.2.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/029-jspecify-1.0.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/030-junit-jupiter-params-6.1.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/031-maven-logging-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/032-maven-jline-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/033-jline-reader-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/034-jline-style-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/035-jline-builtins-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/036-jline-console-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/037-jline-shell-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/038-jline-console-ui-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/039-jline-terminal-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/040-jline-native-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/041-jline-terminal-jni-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/042-jansi-core-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/043-mockito-core-5.24.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/044-byte-buddy-1.18.14.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/045-byte-buddy-agent-1.17.7.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/046-objenesis-3.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/047-mockito-junit-jupiter-5.24.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/048-maven-resolver-transport-file-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/049-maven-resolver-transport-apache-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/050-httpclient-4.5.14.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/051-httpcore-4.4.16.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/052-commons-codec-1.22.1.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/053-jcl-over-slf4j-2.0.19.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/054-jimfs-1.3.2.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/055-guava-33.7.2-jre.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/056-failureaccess-1.0.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/057-jmh-core-1.37.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/058-jopt-simple-5.0.4.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/059-commons-math3-3.6.1.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/060-jmh-generator-annprocess-1.37.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/061-xmlunit-core-2.14.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/062-maven-model-builder-3.9.11.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/063-plexus-interpolation-1.28.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/064-javax.inject-1.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/065-maven-model-3.9.11.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/066-plexus-utils-3.6.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/067-maven-artifact-3.9.11.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/068-maven-builder-support-3.9.11.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/069-org.eclipse.sisu.inject-0.9.0.M4.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/070-asm-9.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/071-org.eclipse.jdt.core-3.40.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/072-org.eclipse.core.resources-3.22.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/073-org.eclipse.core.expressions-3.9.400.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/074-jna-5.15.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/075-org.eclipse.osgi-3.22.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/076-org.eclipse.core.runtime-3.32.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/077-org.eclipse.equinox.common-3.19.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/078-org.eclipse.core.jobs-3.15.400.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/079-org.eclipse.equinox.registry-3.12.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/080-org.eclipse.equinox.preferences-3.11.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/081-org.osgi.service.prefs-1.1.2.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/082-osgi.annotation-8.0.1.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/083-org.eclipse.core.contenttype-3.9.600.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/084-org.eclipse.equinox.app-1.7.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/085-org.eclipse.core.filesystem-1.11.100.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/086-jna-platform-5.15.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/087-org.eclipse.text-3.14.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/088-org.eclipse.core.commands-3.12.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/089-ecj-3.40.0.jar",
+          "-o",
+          "test"
+        ],
+        "cwd": "/workspace/scratch/206049dfb270/synexia",
+        "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+        "source_inputs_unchanged": true,
+        "compiled_parser_dependencies_unchanged": true,
+        "suites": [
+          {
+            "name": "com.synexia.rewrite.M3Maven4EffectiveRecipeTest",
+            "tests": "1",
+            "failures": "1",
+            "errors": "0",
+            "skipped": "0",
+            "time": "1.878"
+          }
+        ],
+        "counts": {
+          "tests": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "artifacts": [
+          {
+            "path": "PARSER_DEPENDENCIES.json",
+            "sha256": "ee8c2bc7b338d398b417703717d9262caef4f7ee9dfa31ac864758e20b49ac34",
+            "bytes": 25069
+          },
+          {
+            "path": "PARSER_DEPENDENCIES_AFTER.json",
+            "sha256": "ee8c2bc7b338d398b417703717d9262caef4f7ee9dfa31ac864758e20b49ac34",
+            "bytes": 25069
+          },
+          {
+            "path": "SOURCE_INPUTS.json",
+            "sha256": "4c6cb16977144c52df0ef9d939c625777880aa0d2551763f6710abfe41acfe99",
+            "bytes": 8421
+          },
+          {
+            "path": "SOURCE_INPUTS_AFTER.json",
+            "sha256": "4c6cb16977144c52df0ef9d939c625777880aa0d2551763f6710abfe41acfe99",
+            "bytes": 8421
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/SOURCE_SEALS.json",
+            "sha256": "a2952be6e6ce39e0a360b1753feac582d4a359f492436eaebf3ac4267173e66b",
+            "bytes": 3517
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+            "sha256": "c26286a6e3a0d03e07533e4b8944a8a1e2858034b7c6060ae70370587901cdfb",
+            "bytes": 7420
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/DependencyCustody.java",
+            "sha256": "33ac6edbd9c0f7f7989d172040c60783bb3df8786178be22370340f10c7576b7",
+            "bytes": 1273
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/expected-methods.txt",
+            "sha256": "802de98865bc229f9ed97f92d812bd3dadaeda16d5a4fdbbe1cb161d413b1c49",
+            "bytes": 473
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/phases.tsv",
+            "sha256": "6900f9db5b96253a6a9de6600ae433996aa26dbabd13dc3c1cc863decfd0348c",
+            "bytes": 312
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/pom.xml",
+            "sha256": "377ceffb36caeb059c2d0e96fff7b6550c8b03b996e639160fc461b44da7ebf3",
+            "bytes": 4028
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/.github/workflows/m3-ast-real-providers-20261019.yml",
+            "sha256": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+            "bytes": 5413
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+            "sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+            "bytes": 995
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/README.md",
+            "sha256": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+            "bytes": 4633
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+            "sha256": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3",
+            "bytes": 17438
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/prepare_packet.py",
+            "sha256": "48ecd1465168482fe2962670ca4e19a50e7a4395e53fe147b716f525debc66bc",
+            "bytes": 7004
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/qualify.py",
+            "sha256": "521844a8a5ee3cfab206cdfdb3bd12736a3f60f1d7e61fa8ffa0b360acbf1082",
+            "bytes": 9694
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java",
+            "sha256": "a6a53bafef02ea8f8b5547036ea9f6177861352fbe15cc8d77a85e877b1d4c5e",
+            "bytes": 31607
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/verify_sources.py",
+            "sha256": "44237b6c04c3687b053a7a433f6b963ad739dedfc8e12de7f17855b3a41c2036",
+            "bytes": 2408
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+            "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+            "bytes": 1052
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+            "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+            "bytes": 31505
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+            "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+            "bytes": 19983
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+            "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+            "bytes": 8268
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
+            "sha256": "696e7d8324d15afb39a78b19ee37f942a0318d0fad4976f399ffb8fa821b4c50",
+            "bytes": 1198
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/manifest.tsv",
+            "sha256": "0a5687725d0627798ebef5daa51948a97b8829226bcf3cecb79cb8d8b3938bf4",
+            "bytes": 201
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/postimage.java.txt",
+            "sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+            "bytes": 19825
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/manifest.tsv",
+            "sha256": "26298e8581ff2a0ed6cb376840fd1efad22109c16f566a2674618c80e00fcb69",
+            "bytes": 238
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/postimage.java.txt",
+            "sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+            "bytes": 19565
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/manifest.tsv",
+            "sha256": "5e9a9e11fcc86458f57729ceebc8370fb1e46bd70d44db78911565fbfabf19bd",
+            "bytes": 197
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/postimage.txt",
+            "sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+            "bytes": 7337
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/manifest.tsv",
+            "sha256": "1ef6ac604abbd183ce744f59e853ef4bd82e1c7cd2aed05b37404fea53eb6b46",
+            "bytes": 204
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/postimage.txt",
+            "sha256": "3a214a73da26b90972b9ca1c2088ee173dd8575dc2a82660f6c0ef3fa1945d7c",
+            "bytes": 1164
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/manifest.tsv",
+            "sha256": "4e0b3b38f2374c5c28b125e0fb99539b09fc834cc0708cb86a9af116269b19b7",
+            "bytes": 200
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/postimage.txt",
+            "sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+            "bytes": 5445
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/manifest.tsv",
+            "sha256": "0ad64ff6bdcf4f4bc4631efc8b4a3861196cfd811c19fc55f0737e074bd3b7ce",
+            "bytes": 149
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/postimage.txt",
+            "sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+            "bytes": 6683
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/manifest.tsv",
+            "sha256": "8599caa731b0398dcef3929fab6d57eb363f922dfb4851eddbf6d44c7e5c8919",
+            "bytes": 147
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/postimage.txt",
+            "sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+            "bytes": 907
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/manifest.tsv",
+            "sha256": "9b65488abb00a94e747be53bd9b62d0067134e9c789a5bc65ccf9a4f1c266af7",
+            "bytes": 149
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/postimage.txt",
+            "sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+            "bytes": 13171
+          },
+          {
+            "path": "maven.log",
+            "sha256": "2baeea05a008e31f0e7504819b0df6e91014ddff948dbdd68ca90a61d03115a4",
+            "bytes": 4871
+          },
+          {
+            "path": "proof-status.tsv",
+            "sha256": "d5b0eeec50b2c52cbae2cd551b9845acb853fb4859095981e709334e3bb4544d",
+            "bytes": 36
+          },
+          {
+            "path": "surefire-reports/TEST-com.synexia.rewrite.M3Maven4EffectiveRecipeTest.xml",
+            "sha256": "deded114a9b58031d9dde762a52c439b36b75a1fd09fae1dd90ffa54694c4612",
+            "bytes": 24598
+          },
+          {
+            "path": "surefire-reports/com.synexia.rewrite.M3Maven4EffectiveRecipeTest.txt",
+            "sha256": "d19acb93103babf5ef153794f765b0886cbe603bcd9df9c34ea5d7dbbc6951de",
+            "bytes": 1656
+          }
+        ]
+      }
+    },
+    {
+      "path": "synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/maven.log",
+      "bytes": 4871,
+      "sha256": "2baeea05a008e31f0e7504819b0df6e91014ddff948dbdd68ca90a61d03115a4"
+    },
+    {
+      "path": "synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/RESULT.json",
+      "bytes": 25676,
+      "sha256": "beca41e77882f29e9d389cbc858ea1b86358ea754395686bbb1697c0a7c5e794",
+      "result": {
+        "schema": "M3_MAVEN4_EFFECTIVE_SDK_ATTEMPT/1",
+        "task": "m3-maven4-effective-20261021",
+        "status": "PASS",
+        "scope": "source-replay-only",
+        "dependency_lane": "offline-cached-artifacts",
+        "full_source_vendored_reactor": "NOT_RUN",
+        "receiving_runtime_gates": "SEPARATE",
+        "started_at": "2026-10-21T01:57:33.079115+00:00",
+        "duration_seconds": "19.664",
+        "exit_code": 0,
+        "timed_out": false,
+        "command": [
+          "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+          "-B",
+          "-ntp",
+          "-f",
+          "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/pom.xml",
+          "-Dmaven.repo.local=/tmp/m3-build-m2",
+          "-Dparser.classpath=/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/classes:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/000-maven-impl-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/001-maven-api-core-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/002-maven-api-plugin-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/003-maven-api-spi-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/004-maven-api-metadata-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/005-maven-api-xml-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/006-maven-api-toolchain-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/007-maven-api-di-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/008-maven-api-annotations-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/009-maven-api-model-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/010-maven-api-settings-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/011-maven-di-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/012-maven-support-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/013-maven-resolver-api-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/014-maven-resolver-spi-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/015-gson-2.14.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/016-maven-resolver-util-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/017-maven-xml-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/018-woodstox-core-7.3.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/019-stax2-api-4.3.2.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/020-slf4j-api-2.0.20.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/021-maven-resolver-impl-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/022-maven-resolver-named-locks-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/023-maven-resolver-connector-basic-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/024-plexus-sec-dispatcher-4.2.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/025-junit-jupiter-api-6.1.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/026-opentest4j-1.3.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/027-junit-platform-commons-6.1.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/028-apiguardian-api-1.1.2.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/029-jspecify-1.0.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/030-junit-jupiter-params-6.1.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/031-maven-logging-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/032-maven-jline-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/033-jline-reader-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/034-jline-style-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/035-jline-builtins-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/036-jline-console-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/037-jline-shell-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/038-jline-console-ui-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/039-jline-terminal-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/040-jline-native-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/041-jline-terminal-jni-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/042-jansi-core-4.4.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/043-mockito-core-5.24.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/044-byte-buddy-1.18.14.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/045-byte-buddy-agent-1.17.7.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/046-objenesis-3.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/047-mockito-junit-jupiter-5.24.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/048-maven-resolver-transport-file-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/049-maven-resolver-transport-apache-2.0.24.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/050-httpclient-4.5.14.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/051-httpcore-4.4.16.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/052-commons-codec-1.22.1.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/053-jcl-over-slf4j-2.0.19.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/054-jimfs-1.3.2.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/055-guava-33.7.2-jre.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/056-failureaccess-1.0.3.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/057-jmh-core-1.37.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/058-jopt-simple-5.0.4.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/059-commons-math3-3.6.1.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/060-jmh-generator-annprocess-1.37.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/061-xmlunit-core-2.14.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/062-maven-model-builder-3.9.11.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/063-plexus-interpolation-1.28.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/064-javax.inject-1.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/065-maven-model-3.9.11.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/066-plexus-utils-3.6.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/067-maven-artifact-3.9.11.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/068-maven-builder-support-3.9.11.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/069-org.eclipse.sisu.inject-0.9.0.M4.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/070-asm-9.8.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/071-org.eclipse.jdt.core-3.40.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/072-org.eclipse.core.resources-3.22.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/073-org.eclipse.core.expressions-3.9.400.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/074-jna-5.15.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/075-org.eclipse.osgi-3.22.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/076-org.eclipse.core.runtime-3.32.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/077-org.eclipse.equinox.common-3.19.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/078-org.eclipse.core.jobs-3.15.400.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/079-org.eclipse.equinox.registry-3.12.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/080-org.eclipse.equinox.preferences-3.11.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/081-org.osgi.service.prefs-1.1.2.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/082-osgi.annotation-8.0.1.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/083-org.eclipse.core.contenttype-3.9.600.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/084-org.eclipse.equinox.app-1.7.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/085-org.eclipse.core.filesystem-1.11.100.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/086-jna-platform-5.15.0.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/087-org.eclipse.text-3.14.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/088-org.eclipse.core.commands-3.12.200.jar:/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/jars/089-ecj-3.40.0.jar",
+          "-o",
+          "test"
+        ],
+        "cwd": "/workspace/scratch/206049dfb270/synexia",
+        "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+        "source_inputs_unchanged": true,
+        "compiled_parser_dependencies_unchanged": true,
+        "suites": [
+          {
+            "name": "com.synexia.rewrite.M3Maven4EffectiveRecipeTest",
+            "tests": "1",
+            "failures": "0",
+            "errors": "0",
+            "skipped": "0",
+            "time": "16.685"
+          }
+        ],
+        "counts": {
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "artifacts": [
+          {
+            "path": "PARSER_DEPENDENCIES.json",
+            "sha256": "ee8c2bc7b338d398b417703717d9262caef4f7ee9dfa31ac864758e20b49ac34",
+            "bytes": 25069
+          },
+          {
+            "path": "PARSER_DEPENDENCIES_AFTER.json",
+            "sha256": "ee8c2bc7b338d398b417703717d9262caef4f7ee9dfa31ac864758e20b49ac34",
+            "bytes": 25069
+          },
+          {
+            "path": "SOURCE_INPUTS.json",
+            "sha256": "b395ab9559850e1bb5f265f947d3217f0658e2788c88c7fa68b34603bb3104a6",
+            "bytes": 8646
+          },
+          {
+            "path": "SOURCE_INPUTS_AFTER.json",
+            "sha256": "b395ab9559850e1bb5f265f947d3217f0658e2788c88c7fa68b34603bb3104a6",
+            "bytes": 8646
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/SOURCE_SEALS.json",
+            "sha256": "fb401eeb0467c16ffa4d95d8de2a6c539775f096db81a7a7ac4fc717ad6e74b9",
+            "bytes": 4316
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+            "sha256": "c26286a6e3a0d03e07533e4b8944a8a1e2858034b7c6060ae70370587901cdfb",
+            "bytes": 7420
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/DependencyCustody.java",
+            "sha256": "33ac6edbd9c0f7f7989d172040c60783bb3df8786178be22370340f10c7576b7",
+            "bytes": 1273
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/expected-methods.txt",
+            "sha256": "802de98865bc229f9ed97f92d812bd3dadaeda16d5a4fdbbe1cb161d413b1c49",
+            "bytes": 473
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/phases.tsv",
+            "sha256": "ffe6296cc10ad0e2a8ce31f512c4bcf57fca91ca9baf291b0987d5b8b23bf18a",
+            "bytes": 274
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/pom.xml",
+            "sha256": "377ceffb36caeb059c2d0e96fff7b6550c8b03b996e639160fc461b44da7ebf3",
+            "bytes": 4028
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/.github/workflows/m3-ast-real-providers-20261019.yml",
+            "sha256": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+            "bytes": 5413
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+            "sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+            "bytes": 995
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/README.md",
+            "sha256": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+            "bytes": 4633
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+            "sha256": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3",
+            "bytes": 17438
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/prepare_packet.py",
+            "sha256": "48ecd1465168482fe2962670ca4e19a50e7a4395e53fe147b716f525debc66bc",
+            "bytes": 7004
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/qualify.py",
+            "sha256": "e9327fe50cc7abf4d213cce26831af9872a1eec7df9bbe2e4b1c858475f2f392",
+            "bytes": 9727
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/select_supported_successor.py",
+            "sha256": "94274bb4ea292e3aec5fbb7032eb2bfcf727c808481c409e9cf2e2a5d86d8801",
+            "bytes": 8327
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java",
+            "sha256": "6513ecf7b36c320b22c474c0381646703e1e03a729ff78765765d407585066af",
+            "bytes": 32207
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/verify_sources.py",
+            "sha256": "44237b6c04c3687b053a7a433f6b963ad739dedfc8e12de7f17855b3a41c2036",
+            "bytes": 2408
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+            "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+            "bytes": 1052
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+            "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+            "bytes": 31505
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+            "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+            "bytes": 19983
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+            "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+            "bytes": 8268
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
+            "sha256": "4d630abf8c74d5c0c2e0136346777a121f3ece5895960becb8319e5a5d814d07",
+            "bytes": 1092
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/manifest.tsv",
+            "sha256": "0a5687725d0627798ebef5daa51948a97b8829226bcf3cecb79cb8d8b3938bf4",
+            "bytes": 201
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/postimage.java.txt",
+            "sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+            "bytes": 19825
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/manifest.tsv",
+            "sha256": "26298e8581ff2a0ed6cb376840fd1efad22109c16f566a2674618c80e00fcb69",
+            "bytes": 238
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/postimage.java.txt",
+            "sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+            "bytes": 19565
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/manifest.tsv",
+            "sha256": "5e9a9e11fcc86458f57729ceebc8370fb1e46bd70d44db78911565fbfabf19bd",
+            "bytes": 197
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/postimage.txt",
+            "sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+            "bytes": 7337
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/manifest.tsv",
+            "sha256": "1ef6ac604abbd183ce744f59e853ef4bd82e1c7cd2aed05b37404fea53eb6b46",
+            "bytes": 204
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/postimage.txt",
+            "sha256": "3a214a73da26b90972b9ca1c2088ee173dd8575dc2a82660f6c0ef3fa1945d7c",
+            "bytes": 1164
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/manifest.tsv",
+            "sha256": "4e0b3b38f2374c5c28b125e0fb99539b09fc834cc0708cb86a9af116269b19b7",
+            "bytes": 200
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/postimage.txt",
+            "sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+            "bytes": 5445
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/manifest.tsv",
+            "sha256": "0ad64ff6bdcf4f4bc4631efc8b4a3861196cfd811c19fc55f0737e074bd3b7ce",
+            "bytes": 149
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/postimage.txt",
+            "sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+            "bytes": 6683
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/manifest.tsv",
+            "sha256": "8599caa731b0398dcef3929fab6d57eb363f922dfb4851eddbf6d44c7e5c8919",
+            "bytes": 147
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/postimage.txt",
+            "sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+            "bytes": 907
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/manifest.tsv",
+            "sha256": "9b65488abb00a94e747be53bd9b62d0067134e9c789a5bc65ccf9a4f1c266af7",
+            "bytes": 149
+          },
+          {
+            "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/postimage.txt",
+            "sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+            "bytes": 13171
+          },
+          {
+            "path": "maven.log",
+            "sha256": "03bc85ec6c1b58a4fe2810ad40c2a2b1dbc1bd031defddbeccdb3afc1cb6388f",
+            "bytes": 2256
+          },
+          {
+            "path": "named-recipe.yml",
+            "sha256": "4d630abf8c74d5c0c2e0136346777a121f3ece5895960becb8319e5a5d814d07",
+            "bytes": 1092
+          },
+          {
+            "path": "phase-receipts/m3-maven4-effective-20261021-001.tsv",
+            "sha256": "1c58646c626c73c5dfa060c0dcf2925b4e93de7289507ab090a0b5d7c2ad343c",
+            "bytes": 434
+          },
+          {
+            "path": "phase-receipts/m3-maven4-effective-20261021-003.tsv",
+            "sha256": "44f79c82b4e2de18030d5e1dc0aae37debe8411dd0cc5b856c4a5b6ec64aa59c",
+            "bytes": 434
+          },
+          {
+            "path": "phase-receipts/m3-maven4-effective-20261021-004.tsv",
+            "sha256": "e0d4fc5429d672a88cddd4bc55cff6ad99850c2fca12e0c0765ce52611c05e85",
+            "bytes": 434
+          },
+          {
+            "path": "phase-receipts/m3-maven4-effective-20261021-005.tsv",
+            "sha256": "7fbace05c9f4864d139e566595c0f6a811758e38839f05bd13e335f587035a22",
+            "bytes": 434
+          },
+          {
+            "path": "phase-receipts/m3-maven4-effective-20261021-006.tsv",
+            "sha256": "dbf4bcaf7d06a7eba9b1bdd2f7755b87341120ad6532e0f702e46d9ccf0ce565",
+            "bytes": 434
+          },
+          {
+            "path": "phase-receipts/m3-maven4-effective-20261021-007.tsv",
+            "sha256": "84f2b12b4735526b52e711a0d0a3ee4557b1a5ebc7145452cbf8a24c50a66557",
+            "bytes": 434
+          },
+          {
+            "path": "phase-receipts/m3-maven4-effective-20261021-008.tsv",
+            "sha256": "bfc40df45833c4584f8a287fbff6236d6b839e6202fa56d5beb4b470c8310614",
+            "bytes": 434
+          },
+          {
+            "path": "proof-status.tsv",
+            "sha256": "b06e722bf02d5e94e6405ae5ba499a2e62030e12475d83a0e204ed095f03cf96",
+            "bytes": 90
+          },
+          {
+            "path": "receiver/.github/workflows/m3-ast-real-providers-20261019.yml",
+            "sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+            "bytes": 7337
+          },
+          {
+            "path": "receiver/m3/tooling/module-packs/parser/real-providers/README.md",
+            "sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+            "bytes": 5445
+          },
+          {
+            "path": "receiver/m3/tooling/module-packs/parser/real-providers/maven4/README.md",
+            "sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+            "bytes": 6683
+          },
+          {
+            "path": "receiver/m3/tooling/module-packs/parser/real-providers/maven4/pom.xml",
+            "sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+            "bytes": 907
+          },
+          {
+            "path": "receiver/m3/tooling/module-packs/parser/real-providers/maven4/verify.py",
+            "sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+            "bytes": 13171
+          },
+          {
+            "path": "receiver/m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java",
+            "sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+            "bytes": 19825
+          },
+          {
+            "path": "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+            "sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+            "bytes": 19565
+          },
+          {
+            "path": "recipe-proof.tsv",
+            "sha256": "8675c41844c4731ab75b124ccdcd6c1e1897c43417e28f9e9d2850550f13b772",
+            "bytes": 2200
+          },
+          {
+            "path": "surefire-reports/TEST-com.synexia.rewrite.M3Maven4EffectiveRecipeTest.xml",
+            "sha256": "83eabce837e4e654da7899d9b3ed840d73a947abf8e546985dc1a29f7c331441",
+            "bytes": 23132
+          },
+          {
+            "path": "surefire-reports/com.synexia.rewrite.M3Maven4EffectiveRecipeTest.txt",
+            "sha256": "e1b42c05f8a9f3c53a998f1b14fe9cf8c88a50160dec48c467eb5af79d4fd4b6",
+            "bytes": 344
+          }
+        ]
+      }
+    }
+  ],
+  "actual_receiver": "not yet materialized or tested"
+}

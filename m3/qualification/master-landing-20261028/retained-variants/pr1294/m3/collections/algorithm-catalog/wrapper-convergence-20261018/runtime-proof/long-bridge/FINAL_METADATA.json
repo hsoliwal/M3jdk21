@@ -1,0 +1,30 @@
+{
+  "dataset": "m3jdk21-long-bridge-20261018",
+  "candidate_sha256": "77a99d047931c70c7a45a067c081748bae499b7f3002bfc08f7b2f47a01adf84",
+  "records": [
+    {
+      "path": "SOURCE_BINDINGS.json",
+      "sha256": "42a67a6f491166bd2397c87ace14287b72834843392cb069f37912c9d7b3987d"
+    },
+    {
+      "path": "README.md",
+      "sha256": "0a66b8228a201bb8d0d5f0414c0156e8dcfff1534aac8bda28819dd78369da97"
+    },
+    {
+      "path": "CATALOGUE.tsv",
+      "sha256": "42a550a6146f89fe6287923b156d6d70e31f504f9c275373a01f0b4e489cb02a"
+    },
+    {
+      "path": "proof/GATES.json",
+      "sha256": "94613591105dbbd3ed0d804f70b834df9a0cf081b44827376fef7a1bd09ca83d"
+    },
+    {
+      "path": "proof/SDK_BINDINGS.json",
+      "sha256": "d98f01bcd3a6404450440c076fd84f44a679a51ea5d2a529df4cb8c284a066da"
+    },
+    {
+      "path": "proof/SDK_EXECUTION.json",
+      "sha256": "06e787513825a02fed28f8f3b3a010d56ff69dad3c3031373c9a951f21fb282c"
+    }
+  ]
+}

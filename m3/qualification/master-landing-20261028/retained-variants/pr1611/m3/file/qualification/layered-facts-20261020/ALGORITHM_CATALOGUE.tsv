@@ -1,0 +1,5 @@
+category	problem_shape	selected	complexity	category_reference
+fact-canonicalization	canonical named fixed-width receipts	sort then exact-deduplicate	O(n log n)	JDK Arrays.sort; set/dedup category
+fact-lookup	named immutable lookup	binary search	O(log n)	JDK Arrays.binarySearch; LeetCode binary-search category
+fact-delta	difference between two sorted receipt tables	two-pointer merge	O(n+m)	LeetCode/HackerRank/GFG merge-sorted-sequences category only
+stream-aggregation	one byte stream drives source plus parser/index receipts	shadow observer fan-out	O(bytes * observers)	Apache Commons IO tee shape reference only

@@ -1,0 +1,27 @@
+{
+  "schema": "TASK_OBSERVATIONS_NOT_CANONICAL_MEMORY_ADMISSION",
+  "observations": [
+    {
+      "id": "standalone_security_mode",
+      "log": "evidence/baseline-real-provider-001.log",
+      "log_sha256": "5bb026256538d647e8333679cbfae8705def9ea42f86503fbe85164ce476ce4f",
+      "classification": "The test selected ApiRunner.SecurityMode.NONE; real pinned DefaultSettingsBuilder required a Dispatcher map. The test now uses original REQUIRED mode with the real security library and isolated offline settings. No fork source, security mechanism, adapter, or model factory was altered."
+    },
+    {
+      "id": "modern_pom_namespace",
+      "log": "evidence/candidate-real-provider-002.log",
+      "log_sha256": "fb3bc78e12f5b4708fbe5d88fddeea62f304dad323ac1579119da6454cebf6b3",
+      "classification": "The authored Maven4.1 fixture omitted its required Maven namespace. The original Maven parser rejected it before the model projection. The fixture now uses the actual supported namespace; no parser or validation bypass."
+    },
+    {
+      "id": "surefire_socket_transport",
+      "log": "qualified-candidate-001/source-offline.log",
+      "log_sha256": "943e3b82bbcceead6f7985b3bd3dd7f50536e4f5ac8bd283b53448c6ae91c280",
+      "classification": "The default tool sandbox denied creating the original upstream Surefire local socket. Zero model-builder tests ran in this attempt. The exact same source and qualifier later passed under authorized escalation with offline dependencies and the existing test transport; no test skip or POM edit."
+    }
+  ],
+  "passing_successor_receipt": {
+    "path": "qualified-candidate-002/PROOF.json",
+    "sha256": "8a65e3bb65b4fc1401cd57f8af308f46ac580a085e05b51a8e2678fd84310fb3"
+  }
+}

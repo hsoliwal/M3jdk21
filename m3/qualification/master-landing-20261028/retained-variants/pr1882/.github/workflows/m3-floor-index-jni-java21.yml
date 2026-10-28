@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 floor-index actual Java21 JNI parity
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongFloorIndicesContract.java'
+      - '.github/workflows/m3-floor-index-jni-java21.yml'
+permissions:
+  contents: read
+jobs:
+  java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Require original sources and exact PR head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          printf '%s  %s\n' \
+            3a09c83be04f58a4b98d8b157c985fa432a7d8aecd140bab24cd1f97e8a64002 m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            b1aed675418eea8fbe384084ad62f788cbd730af619e4d6b83edf883326a0712 m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            3e8a0d5d4020e6312814b4cd5617b822df11ed18c5b59ad1d04d45c86a3ff940 m3/collections/src/test/java/com/m3/collections/M3LongFloorIndicesContract.java \
+            | sha256sum --check
+      - name: Compile original Java and native owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-floor-java" "$RUNNER_TEMP/m3-floor-native"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-floor-java" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongFloorIndicesContract.java
+          cc -std=c17 -Wall -Wextra -Werror -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/m3-floor-native/libm3rankbatch.so"
+      - name: Compare fallback and required JNI in normal and interpreted modes
+        shell: bash
+        run: |
+          set -euo pipefail
+          for vm in normal interpreter; do
+            args=()
+            if [ "$vm" = interpreter ]; then args=(-Xint); fi
+            java "${args[@]}" -cp "$RUNNER_TEMP/m3-floor-java" \
+              com.m3.collections.M3LongFloorIndicesContract
+            java "${args[@]}" -Xcheck:jni \
+              -Dm3.collections.rank.native=true \
+              -Djava.library.path="$RUNNER_TEMP/m3-floor-native" \
+              -cp "$RUNNER_TEMP/m3-floor-java" \
+              com.m3.collections.M3LongFloorIndicesContract --native
+          done

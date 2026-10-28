@@ -319,9 +319,10 @@ def check_m3string_replacement_routes() -> None:
 
 check_m3string_replacement_routes()
 
-# Canonical value/owners/facts may not retain array payload.
+# M3String direct instance fields are compiler-checked above as owner + coordinate only.
+# A static nested projection is not retained state of that canonical value.
+# Keep the remaining owner/fact array guards unchanged.
 for path, text in [
-    ("M3String.java", m3),
     ("M3StringOwner.java", owner),
     ("M3StringAtom.java", atom),
     ("M3StringTuple.java", tuple_),

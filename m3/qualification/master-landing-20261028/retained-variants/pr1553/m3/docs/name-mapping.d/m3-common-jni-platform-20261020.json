@@ -1,0 +1,40 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Additive proposal following existing fragment schema; root name-mapping.json and receiving_sequence remain unchanged. Canonical recipe identifiers must be bound by the receiving workflow.",
+  "mappings": [
+    {
+      "source": "Existing M3JDK21 M3RegexDpPlan.fail, M3StringPool.mapping_error and matching exception atoms across thirteen incumbent C owners",
+      "source_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "source_blob": "a64bceb4379d14fa668d1b247b8ad12181d0cffd",
+      "target": "src/java.base/share/native/libjava/m3_jni_util.h :: m3_jni_throw_by_name",
+      "module": "java.base existing native libjava owner; existing independent collection native consumers",
+      "status": "TARGET_OWNED_PORT_CANDIDATE; scoped model and Linux native evidence; installed image pending",
+      "recipe": "com.synexia.m3.CommonJniPlatform20261020",
+      "target_rule": "Preserve existing public JDK names, 27 JNI declarations, exception classes/messages/sentinels, validation order and owner lifetimes; no new runtime layer or exported helper symbol. The helper is internal compiled support, not a new public SDK API, external integration layer, installable runtime family or payload owner. Eighteen matching throw sites are consolidated; four owners without explicit DeleteLocalRef remain unchanged and are recorded in provenance.",
+      "license": "Existing target GPLv2 with Classpath exception retained for the extracted helper; first-party header attributes no Oracle grant. Every incumbent notice stays byte-identical, including Apache-2.0 M3BitLane28.c and M3StateRelation.c under libjava; this does not resolve historical direct-copy intake status.",
+      "gates": "Canonical source-sealed recipe execution/fixed point; all touched owner regressions; actual target platform builds; installed image and applicable jtreg; performance/native-memory claims require measurements"
+    },
+    {
+      "source": "Existing HotSpot BSD anon_mmap/pd_attempt_reserve_memory_at safety pattern; target M3StringPool mapping owner",
+      "source_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "source_blob": "a2a9a26e8e5cac1a4f676294e3b1a080a6e57af3",
+      "target": "src/java.base/share/native/libjava/M3StringPool.c :: mapLexicon0 / unmapLexicon0",
+      "module": "java.base",
+      "status": "TARGET_OWNED_PORT_CANDIDATE; Apple source extension model-qualified only",
+      "recipe": "com.synexia.m3.CommonJniPlatform20261020",
+      "target_rule": "Retain Linux MAP_FIXED_NOREPLACE when available and existing Windows mapping; Apple/Linux-without-macro use non-fixed MAP_SHARED hint then exact-address acceptance or cleanup/refusal. No ordinary MAP_FIXED and no relocation fallback.",
+      "license": "BSD donor is evidence-only; no C++ body copied. Target C file retains its GPLv2-with-Classpath license and original copyright.",
+      "gates": "Apple SDK/macOS/iOS actual execution pending; Android/other target qualification pending; source-built installed M3JDK21 pending"
+    },
+    {
+      "source": "Existing seven collection compactor, integer/long path, mask-window, residency, histogram and segmented-bit-lane JNI owners",
+      "source_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "target": "m3/collections/src/main/native/collections existing seven C units",
+      "status": "INDEPENDENT_APACHE_MODULE_SUPPORT_REFINEMENT_CANDIDATE; no collection-family promotion",
+      "recipe": "com.synexia.m3.CommonJniPlatform20261020",
+      "target_rule": "Retain existing algorithms, primitive regions, validation, output ownership, native-required refusal and typed exported methods; share the internal exception support atom through the integrated source layout. The residency-state caller retains its existing ExceptionCheck guard before the shared throw atom.",
+      "license": "Apache-2.0 caller notices unchanged; separately identified GPL-with-Classpath target helper and applicable notices travel with integrated sources.",
+      "gates": "Exact source/ABI and actual owner Java/JNI proof required; full collection, mobile and installed-image acceptance remain distinct"
+    }
+  ]
+}

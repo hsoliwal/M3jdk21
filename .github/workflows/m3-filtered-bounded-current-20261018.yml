@@ -32,23 +32,131 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Replay real OpenRewrite SDK and all input/receiver contracts
+      - name: Replay exact historical OpenRewrite SDK in an isolated preimage root
         run: |
-          set -eu
+          set -euo pipefail
           Q=m3/collections/qualification/m3-filtered-navigation-20261018
           mvn -B -ntp -f "$Q/recipe/pom.xml" \
             -Dm3.dataset=filtered-navigation-20261018 \
             -Drecipe.owner.root="$PWD/$Q/recipe/sdk-owner" -Pcontract verify
-          python3 "$Q/recipe/receive.py" --dataset filtered-navigation-20261018 --target "$PWD" --check
-          awk -F '\t' '!/^#/ && NF == 3 {print $3 "  " $1}' \
-            "$Q/recipe/target/filtered-navigation-20261018/candidate/SDK_RESULTS.tsv" | sha256sum -c -
-      - name: Preserve historical receipt and unchanged predecessor outputs
+          python3 - <<'PY'
+          import hashlib, os
+          from pathlib import Path, PurePosixPath
+          base=Path("m3/collections/qualification/m3-filtered-navigation-20261018/recipe")
+          dataset=base/"datasets/filtered-navigation-20261018"
+          crate="m3-collections-contract-refinement-20261017-filtered-navigation-20261018"
+          sandbox=Path(os.environ["RUNNER_TEMP"])/"m3-filtered-historical-preimages"
+          sandbox.mkdir(exist_ok=False)
+          sha=lambda data:hashlib.sha256(data).hexdigest()
+          total=0
+          for kind in ("java","text"):
+              lane=dataset/"resources/com/synexia/rewrite"/("hash-pinned-"+kind)/crate
+              manifest=lane/"manifest.tsv"
+              for line in manifest.read_text().splitlines():
+                  if not line or line.startswith("#"):continue
+                  path,before,after,filename=line.split("\t")
+                  part=PurePosixPath(path)
+                  if part.is_absolute() or ".." in part.parts or ".git" in part.parts:
+                      raise SystemExit("historical manifest path refused")
+                  if sha((lane/filename).read_bytes())!=after:
+                      raise SystemExit("historical recipe template drift: "+path)
+                  if before!="ABSENT":
+                      data=(lane/"pre"/filename).read_bytes()
+                      if sha(data)!=before:raise SystemExit("historical preimage drift: "+path)
+                      target=sandbox/path
+                      target.parent.mkdir(parents=True,exist_ok=True)
+                      target.write_bytes(data)
+                  total+=1
+          if total!=9:raise SystemExit("historical target count drift")
+          print("HISTORICAL_PREIMAGES_PASS targets=9 original_source_unmodified=true")
+          PY
+          H="$RUNNER_TEMP/m3-filtered-historical-preimages"
+          python3 "$Q/recipe/receive.py" --dataset filtered-navigation-20261018 \
+            --target "$H" --check | tee "$RUNNER_TEMP/filtered-check.log"
+          python3 "$Q/recipe/receive.py" --dataset filtered-navigation-20261018 \
+            --target "$H" | tee "$RUNNER_TEMP/filtered-apply.log"
+          python3 "$Q/recipe/receive.py" --dataset filtered-navigation-20261018 \
+            --target "$H" | tee "$RUNNER_TEMP/filtered-replay.log"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])
+          for name,count,mode in (("check",9,"check"),("apply",9,"apply"),("replay",0,"apply")):
+              line=(root/("filtered-"+name+".log")).read_text().strip()
+              prefix,value=line.split(" ",1)
+              item=json.loads(value)
+              if prefix!="M3_COLLECTIONS_RECEIVER_PASS" or item["changes"]!=count \
+                      or item["targets"]!=9 or item["mode"]!=mode or not item["actual_sdk_results"]:
+                  raise SystemExit("historical receiver contract drift: "+name)
+          print("HISTORICAL_SDK_RECEIVING_PASS check=9 apply=9 replay=0")
+          PY
+          python3 - <<'PY'
+          import hashlib,subprocess
+          from pathlib import Path
+          dataset=Path("m3/collections/qualification/m3-filtered-navigation-20261018/recipe/datasets/filtered-navigation-20261018")
+          crate="m3-collections-contract-refinement-20261017-filtered-navigation-20261018"
+          # These are reviewed current supersets, not snapshots interchangeable
+          # with the historical source. Exact Git object identity is mandatory.
+          evolved={
+              "m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml":"ea72015355e7fdc7534775192af94c22ea468c64",
+              "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java":"25e1ba23e0269cd6226e9f0b76fd9a43c6bb1d59",
+              "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java":"8c7c19eac9338bbc1a6f82a9e339cfb4952ad0c6",
+          }
+          workflow=".github/workflows/m3-filtered-bounded-current-20261018.yml"
+          total=kept=reviewed=0
+          for kind in ("java","text"):
+              lane=dataset/"resources/com/synexia/rewrite"/("hash-pinned-"+kind)/crate
+              for line in (lane/"manifest.tsv").read_text().splitlines():
+                  if not line or line.startswith("#"):continue
+                  path,original,post,filename=line.split("\t")
+                  total+=1
+                  if path==workflow:
+                      # The checked-out workflow is itself the reviewed receiver.
+                      # Its historical postimage is intentionally not reapplied.
+                      if not Path(path).is_file():raise SystemExit("current workflow missing")
+                  elif path in evolved:
+                      actual=subprocess.check_output(["git","hash-object","--",path],text=True).strip()
+                      if actual!=evolved[path]:
+                          raise SystemExit("unreviewed successor source: "+path)
+                      reviewed+=1
+                  else:
+                      actual=hashlib.sha256(Path(path).read_bytes()).hexdigest()
+                      if actual!=post:raise SystemExit("preserved source drift: "+path)
+                      kept+=1
+          if total!=9 or kept!=5 or reviewed!=3:
+              raise SystemExit("current source closure incomplete")
+          print("CURRENT_EPOCH_CUSTODY_PASS historical=9 exact_current=5 reviewed_successors=3 workflow_owner=1")
+          PY
+      - name: Preserve bounded-filtered donor receipts and admit evolved owner
         run: |
-          set -eu
+          set -euo pipefail
           Q=m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe
           awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
-          awk -F '\t' '$1 != "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java" {print $3 "  " $1}' \
-            "$Q/manifest.tsv" | sha256sum -c -
+          python3 - <<'PY'
+          import hashlib,subprocess
+          from pathlib import Path
+          root=Path("m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe")
+          manifest=root/"manifest.tsv"
+          reviewed={
+              "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java":"25e1ba23e0269cd6226e9f0b76fd9a43c6bb1d59",
+              "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java":"ac193ba399e9b4709999d629874e56909b75da8d"
+          }
+          total=kept=evolved=0
+          for line in manifest.read_text().splitlines():
+              if not line or line.startswith("#"):continue
+              path,before,after,template=line.split("\t")
+              total+=1
+              if path in reviewed:
+                  actual=subprocess.check_output(["git","hash-object","--",path],text=True).strip()
+                  if actual!=reviewed[path]:raise SystemExit("filtered owner drift: "+path)
+                  evolved+=1
+              elif hashlib.sha256(Path(path).read_bytes()).hexdigest()==after:
+                  kept+=1
+              else:
+                  raise SystemExit("historical bounded regression disappeared: "+path)
+          if (total,kept,evolved)!=(4,2,2):raise SystemExit("bounded donor closure mismatch")
+          print("BOUNDED_DONOR_CUSTODY_PASS templates=4 current_tests=2 reviewed_owner_supersets=2")
+          PY
       - name: Current full core and focused Java/JNI runtime closure
         run: python3 m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
       - uses: actions/upload-artifact@v4
@@ -79,5 +187,13 @@ jobs:
           mvn -B -ntp -f m3/vendor/third_party/pom.xml \
             -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 \
             -am -DskipTests install
+      - name: Compile and install original arrays Maven dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          ARRAYS_JAR="$HOME/.m2/repository/com/m3/m3-arrays/0.1.0-SNAPSHOT/m3-arrays-0.1.0-SNAPSHOT.jar"
+          test -s "$ARRAYS_JAR"
+          jar --describe-module --file "$ARRAYS_JAR" | grep -q '^com.m3.arrays'
       - name: Original owning Maven JUnit gate (must be green before promotion)
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3BoundedFilteredNavigationTest,M3FilteredNavigationReconciliationTest test

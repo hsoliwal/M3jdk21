@@ -1,0 +1,32 @@
+{
+  "schema": "M3_LFU_JNI_LANES_DELIVERY_V1",
+  "policy": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "7e70e5b22ee98834e6bb87e2b68f3029bd08e2b5",
+  "canonical_packet": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/lfu-native-lanes-v1/",
+  "recipe": "Current M3HashPinnedJavaSnapshotRecipe + context manifest m3-lfu-native-lanes-v1-20261023; exact canonical trio4170473b archived unchanged",
+  "base_revision": "9360755ec2988370a1bd77c5d66ba659a73af37c",
+  "production_path": "m3/collections/src/main/java/com/m3/collections/M3LFUCache.java",
+  "before_sha256": "afd60b853a623137245ae7ef4e4c56170c6de94d1edc58ef62a5b9ca3f174166",
+  "after_sha256": "4c9956096b1d92cfe9ba2db5293104e38d622c4273c3ab491345925a7779a417",
+  "after_blob": "1a5ec22386269ad33fe4ffcfca95f890255d4119",
+  "scope": "Only five constructor array allocations use existing M3ArrayNative required typed API; all other LFU bytes and public APIs unchanged; current bridge/C/POM/module retained",
+  "SDK_tests": 5,
+  "runtime_checks": 197325,
+  "matching_trace": "51204e91d697be7f16e38e3470869fffb2e2520bb5eb9ce0e78c90e8d165edd9",
+  "proof_matrix_sha256": "880869442d5c5bbe1a2599026b6076b240b338e0130da4957ea927363e099655",
+  "known_clock_wrap": "OPEN; zero-minimum timestamps with clock Long.MAX_VALUE wrap to Long.MIN_VALUE before and after. Next serial same-owner fix required before API projections.",
+  "formal_review": "NO_VERDICT: configured autoreview --no-tools rejected before engine startup; advisory clear for scoped draft publication",
+  "pending": [
+    "zero-minimum stamp wrap",
+    "LFU APIprojection ownership/liveness",
+    "nth-allocation failure",
+    "full reactor/jtreg/installed image/C++20",
+    "full API family superset/Unicode/concurrency/serialization",
+    "BOTH regex scope"
+  ],
+  "full_goal": "ACTIVE_UNFINISHED",
+  "license": "Existing Apache-2.0 headers retained",
+  "prior_delivery": "M3jdk21 PR1739 merged externally; this is a fresh constructor-only topic",
+  "storage": "No new local scratch output.105MiB task cap unchanged. Preserve all source/proof variants."
+}

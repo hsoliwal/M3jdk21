@@ -1,0 +1,149 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 tokenizer source-built image and jtreg
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk21-tokenizer-full-image.yml'
+      - 'src/java.base/share/classes/java/util/StringTokenizer.java'
+      - 'test/jdk/java/util/StringTokenizer/**'
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/m3jdk21-tokenizer-full-image.yml'
+      - 'src/java.base/share/classes/java/util/StringTokenizer.java'
+      - 'test/jdk/java/util/StringTokenizer/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrated-image:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        debug: [release, fastdebug]
+    env:
+      CONF: m3jdk21-tokenizer-${{ matrix.debug }}
+      PR_HEAD: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: Checkout integration tree without retained credentials
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Require exact qualified production and jtreg outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/tokenizer-receipts"
+          {
+            printf 'checkout='; git rev-parse HEAD
+            printf 'event_head=%s\n' "$PR_HEAD"
+            printf 'configuration=%s\n' "$CONF"
+          } | tee "$RUNNER_TEMP/tokenizer-receipts/source.txt"
+          source=src/java.base/share/classes/java/util/StringTokenizer.java
+          test_source=test/jdk/java/util/StringTokenizer/NullDelimiterState8360045.java
+          test "$(git hash-object "$source")" = c469e81420702a5feedcbc255cec938aefd966ea
+          test "$(git hash-object "$test_source")" = 80fe4bf5c8db7b10d236506ab6d49bcd754657a4
+          printf '%s  %s\n' f91ec29b40359a419bada579efed57cdcf63043e1f0b11d5c22da92d3ccf301f "$source" | sha256sum --check -
+          printf '%s  %s\n' dcde80e8d253d2b9f74e14da70d0a9887301a2ea1e9c4fb9710ee6b16db432bd "$test_source" | sha256sum --check -
+          test "$(git hash-object test/jdk/java/util/StringTokenizer/FormFeed.java)" = 09b3d9cd983b0cd92095a0f43a93efbba4aae54c
+          test "$(git hash-object test/jdk/java/util/StringTokenizer/ResetPos.java)" = cfd051c9f15db79f1b8fa7e6b302731f13da7196
+          test "$(git hash-object test/jdk/java/util/StringTokenizer/Supplementary.java)" = 7e9f00095b0856f5425c4630fdb098de08482cc9
+
+      - name: Prepare repository jtreg builder
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Reuse canonical BootJDK action
+        uses: ./.github/actions/get-bootjdk
+        with:
+          platform: linux-x64
+
+      - name: Reuse canonical jtreg action
+        uses: ./.github/actions/get-jtreg
+
+      - name: Install Linux JDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gcc-10 g++-10 make autoconf zip unzip \
+            libxrandr-dev libxtst-dev libcups2-dev libasound2-dev \
+            libfreetype6-dev libffi-dev zlib1g-dev
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 \
+            --slave /usr/bin/g++ g++ /usr/bin/g++-10
+
+      - name: Configure actual integrated M3JDK21
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS
+          test -x bootjdk/jdk/bin/java
+          test -x jtreg/installed/bin/jtreg
+          bash configure --with-conf-name="$CONF" \
+            --with-boot-jdk=bootjdk/jdk --with-jtreg=jtreg/installed \
+            --with-debug-level='${{ matrix.debug }}' --with-zlib=system --with-jobs=2
+
+      - name: Build actual java.base, HotSpot and complete JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS
+          make CONF="$CONF" JOBS=2 LOG=info images
+          image="build/$CONF/images/jdk"
+          test -x "$image/bin/java"
+          test -x "$image/bin/javac"
+          "$image/bin/java" -XshowSettings:properties -version > "$RUNNER_TEMP/tokenizer-receipts/version.txt" 2>&1
+          grep -Eq 'java.class.version = 65([.]0)?' "$RUNNER_TEMP/tokenizer-receipts/version.txt"
+          cat "$RUNNER_TEMP/tokenizer-receipts/version.txt"
+
+      - name: Run all tokenizer jtreg and preserved CheckedMap regression on product image
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS
+          make CONF="$CONF" JOBS=2 LOG=info test \
+            TEST="test/jdk/java/util/StringTokenizer test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java"
+
+      - name: Replay exact emitted oracle with image java and javac
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS
+          image="$GITHUB_WORKSPACE/build/$CONF/images/jdk"
+          out="$RUNNER_TEMP/tokenizer-receipts"
+          mkdir -p "$out/classes"
+          "$image/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
+            -d "$out/classes" test/jdk/java/util/StringTokenizer/NullDelimiterState8360045.java
+          for mode in default -Xint -XX:+CompactStrings -XX:-CompactStrings -XX:+UseG1GC -XX:+UseSerialGC; do
+            options=()
+            if [ "$mode" != default ]; then options=("$mode"); fi
+            "$image/bin/java" "${options[@]}" -Xcheck:jni -Xverify:all \
+              -XX:-OmitStackTraceInFastThrow -cp "$out/classes" \
+              NullDelimiterState8360045 --candidate > "$out/$mode.log"
+            grep -qx 'PASS --candidate checks=47675' "$out/$mode.log"
+            cat "$out/$mode.log"
+          done
+
+      - name: Retain actual source, build and jtreg evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk21-tokenizer-${{ matrix.debug }}-image-receipts
+          path: |
+            build/${{ env.CONF }}/configure.log
+            build/${{ env.CONF }}/build.log
+            build/${{ env.CONF }}/test-results/
+            build/${{ env.CONF }}/test-support/
+            ${{ runner.temp }}/tokenizer-receipts/
+          retention-days: 14
+          if-no-files-found: error

@@ -1,0 +1,59 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "source_repository": "hsoliwal/com.synexia",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "dataset": "file-delta-20261020",
+  "source_revision_disposition": "The engine and frozen source/class delta contract are pinned above. The qualified dataset revision and result hashes are recorded in the publication handoff.",
+  "status": "BOUNDED_EXISTING_OWNER_EXTENSION",
+  "receiving_sequence_advanced": false,
+  "note": "Extend existing file/source/compiler owners. This fragment does not advance the String, array, collection, AST/compiler or remaining-family receiving phase.",
+  "mappings": [
+    {
+      "source": "Existing immutable parser-source owner and canonical file-delta-20261020 recipe",
+      "target": "jdk.m3.parser.M3File",
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
+      "status": "existing-owner-source-delta",
+      "target_rule": "Add changesFrom(M3File), SourceDelta and ByteChange to report exact UTF-16 replacement windows, URI identity and independently known raw-byte seals. Preserve the original immutable String payload, source hashes, decoding, bounds and module identity. No syntax or ABI equivalence is inferred."
+    },
+    {
+      "source": "Existing provider-owned NIO file boundary and canonical file-delta-20261020 recipe",
+      "target": "com.m3.file.M3File",
+      "path": "m3/file/src/main/java/com/m3/file/M3File.java",
+      "status": "existing-owner-content-fingerprint",
+      "target_rule": "Add bounded fingerprint(long) and metadata-only Fingerprint(size,sha256) through the existing regular-file/no-follow read owner. Hash actual raw source/class/archive/resource bytes without a timestamp shortcut, retained payload store, class parser or ABI-equivalence claim. Preserve the java.base-only module graph."
+    },
+    {
+      "source": "Existing detached source/context facts and canonical file-delta-20261020 recipe",
+      "target": "com.m3.compiletime.ast.M3FileSourceFacts",
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java",
+      "status": "existing-owner-identity-change-mask",
+      "target_rule": "Add independent source-URI, source-content, context, provider, schema and phase change bits and changesFrom(M3FileSourceFacts). Preserve all existing record components and digest framing. Equal stored context does not certify complete environment capture or valid build outputs."
+    },
+    {
+      "source": "Existing compiler-owned M3AST event projection and canonical file-delta-20261020 recipe",
+      "target": "jdk.m3.parser.M3JavacParser",
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java",
+      "status": "existing-owner-shared-source-projection",
+      "target_rule": "Add sourceProjection() and changesFrom(M3AST.Unit,M3File). Reuse one operation identity in the existing event-local M3AST memoizer, retain and verify the original PARSED source seal, and share that M3File with existing tree projections while preserving each tree projection's node budget and arrays. No disk reread, second parser, global source cache, cross-task semantic reuse or task skipping."
+    }
+  ],
+  "proof_entrypoints": [
+    "m3/tooling/module-packs/build-tools/delta/verify.py",
+    "m3/tooling/module-packs/parser/build.py"
+  ],
+  "public_jdk_contracts_renamed": false,
+  "new_payload_store": false,
+  "synexia_runtime_dependency_added": false,
+  "native_symbols_added": false,
+  "abi_equivalence_claimed": false,
+  "build_task_skipping_implemented": false,
+  "whole_family_phase_advanced": false,
+  "recipe_name": "com.synexia.m3jdk.AstBuildReverse20261017",
+  "recipe_engine_revision": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "contract_revision": "f35e7eb0c6a50c41858e290f8641ab263273510d"
+}

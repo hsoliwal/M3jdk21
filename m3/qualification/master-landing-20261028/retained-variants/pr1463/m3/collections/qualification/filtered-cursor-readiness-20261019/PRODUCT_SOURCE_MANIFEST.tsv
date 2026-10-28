@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	7e1f1088630892b8b5c6cca2edc4c64465d1b9dc7d37b56464edb8ab87ee97f6	4adb02e497a1fd4a8c4551c6207743d0e6b61fa91667f8b8463adf020be4ac87	M3FilteredViews.java.txt
+m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	19d1a58c8fec4a96862419857ade15d681ecea8726df77dbe89036f4609934b4	224cb085c8cb0e7de9da10be7d13866dcdcc3708c3588047427b63b36b619a9b	M3MutableFilteredViews.java.txt
+m3/collections/src/test/java/com/m3/collections/M3FilteredCursorReadinessSelfTest.java	ABSENT	72d5ee69747bd5d0a45a28854c56e9e97871a1a7b996f6d08f5ec9fdc59948c0	M3FilteredCursorReadinessSelfTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3FilteredCursorReadinessTest.java	ABSENT	61079fafd9987b5445ab8bbb003a728be56947fd430491f4af9c0ea3cb6ccc31	M3FilteredCursorReadinessTest.java.txt

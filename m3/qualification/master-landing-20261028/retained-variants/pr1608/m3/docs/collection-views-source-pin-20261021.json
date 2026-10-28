@@ -1,0 +1,18 @@
+{
+  "schema": "M3_COLLECTION_VIEW_SOURCE_PIN_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_implementation_commit": "8c2e3cb92b629c016bd79a06d8c7b071745a7120",
+  "canonical_tree": "853da00909d31193c63c8a01df538381a3cdf140",
+  "canonical_host_tree": "83e1a015b76d3898136e80052f781c2e02a6a310",
+  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_dataset": "collection-final-20261021",
+  "sealed_files": {
+    "datasets/collection-final-20261021/ENGINE_EFFECTIVE.tsv": "483bb7d5a3fd59e2858bc7c22bec3f0e616e70fe08c4c07813d95f5c75351984",
+    "datasets/collection-final-20261021/DATASET.json": "7f46dbe479cbddbc4ae64a0b40e2d4aba0d3e80f9368a191d749935529a7ca1e",
+    "datasets/collection-final-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-collection-final-20261021/manifest.tsv": "a7c13e94dd2ef9f520623d7c4beac06c1309ae0efcc4c9f7bf5449ec251d3d3a",
+    "datasets/collection-final-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-collection-final-20261021/manifest.tsv": "cfe57719f2d72d270d62957c2296d6032f3fb5ad4edc490eeb0084baabe8225c"
+  },
+  "receiver_base": "477ae612ef1a7f3b5f069456153a482989d60c4f",
+  "receipt": "m3/docs/collection-views-qualification-20261021.json",
+  "scope": "exact immutable recipe and generated target-source custody; no global phase advancement"
+}

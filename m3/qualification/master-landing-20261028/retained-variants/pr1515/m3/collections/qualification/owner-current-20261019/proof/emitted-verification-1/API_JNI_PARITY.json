@@ -1,0 +1,103 @@
+{
+  "status": "IDENTICAL",
+  "method": "Index derived from retained existing executed outputs; no compile or test rerun for packaging",
+  "api_owners": [
+    {
+      "owner": "M3FilteredLists",
+      "control_sha256": "501a138684ef77a5590ed2b691e2b16d67dbadb3e82aacdcc1b6d74c8b454477",
+      "emitted_sha256": "501a138684ef77a5590ed2b691e2b16d67dbadb3e82aacdcc1b6d74c8b454477"
+    },
+    {
+      "owner": "M3FilteredViews",
+      "control_sha256": "e6858fc71e688b3fad7ec770d716124a0b451092c793b5c446d998ec310266f1",
+      "emitted_sha256": "e6858fc71e688b3fad7ec770d716124a0b451092c793b5c446d998ec310266f1"
+    },
+    {
+      "owner": "M3LongIndexProjection",
+      "control_sha256": "84744f6573753e03ea8ecf1b5a9bc437e3078c1142e34cb11d0ab1ceb09d3d90",
+      "emitted_sha256": "84744f6573753e03ea8ecf1b5a9bc437e3078c1142e34cb11d0ab1ceb09d3d90"
+    },
+    {
+      "owner": "M3SlotMap",
+      "control_sha256": "75510e3028ac1194046897db81ff6eb4427fa478199b0306f6e72f4e877abb06",
+      "emitted_sha256": "75510e3028ac1194046897db81ff6eb4427fa478199b0306f6e72f4e877abb06"
+    },
+    {
+      "owner": "M3LinkedHashMap",
+      "control_sha256": "a8175bc0aef1313eef61a1c9a9bc06c27453f3d31642b7178a6dbe42e0ed0ed0",
+      "emitted_sha256": "a8175bc0aef1313eef61a1c9a9bc06c27453f3d31642b7178a6dbe42e0ed0ed0"
+    },
+    {
+      "owner": "M3TreeMap",
+      "control_sha256": "447bf9a43e76360146ceef38a5a7a8fecfef163394e53241021c87bdebbd1cd1",
+      "emitted_sha256": "447bf9a43e76360146ceef38a5a7a8fecfef163394e53241021c87bdebbd1cd1"
+    },
+    {
+      "owner": "M3WeakHashMap",
+      "control_sha256": "332520d57184ec62b61e5deffe8016b8bc2a6f51221bde7dfe8f4da6d016c221",
+      "emitted_sha256": "332520d57184ec62b61e5deffe8016b8bc2a6f51221bde7dfe8f4da6d016c221"
+    }
+  ],
+  "jni_headers": [
+    {
+      "header": "com_m3_collections_M3BitLane28.h",
+      "control_sha256": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
+      "emitted_sha256": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1"
+    },
+    {
+      "header": "com_m3_collections_M3IndexMaskCompactor.h",
+      "control_sha256": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
+      "emitted_sha256": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81"
+    },
+    {
+      "header": "com_m3_collections_M3IndexMaskWindow.h",
+      "control_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+      "emitted_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866"
+    },
+    {
+      "header": "com_m3_collections_M3IndexPathMasks.h",
+      "control_sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+      "emitted_sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50"
+    },
+    {
+      "header": "com_m3_collections_M3LongAddressKernel.h",
+      "control_sha256": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7",
+      "emitted_sha256": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+    },
+    {
+      "header": "com_m3_collections_M3LongIndexPathMasksJNI.h",
+      "control_sha256": "68dd32b3203baa60ac10eed61030f7c770664eec42ac3689666b042c11f48758",
+      "emitted_sha256": "68dd32b3203baa60ac10eed61030f7c770664eec42ac3689666b042c11f48758"
+    },
+    {
+      "header": "com_m3_collections_M3LongRankBatchNative.h",
+      "control_sha256": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641",
+      "emitted_sha256": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641"
+    },
+    {
+      "header": "com_m3_collections_M3MaskViewportNative.h",
+      "control_sha256": "790520041126b8e8ecd678c6dbb5fe6ca1c389cf7e0b89480b375402d25ce91e",
+      "emitted_sha256": "790520041126b8e8ecd678c6dbb5fe6ca1c389cf7e0b89480b375402d25ce91e"
+    },
+    {
+      "header": "com_m3_collections_M3ResidencyStateMaskIndex.h",
+      "control_sha256": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
+      "emitted_sha256": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff"
+    },
+    {
+      "header": "com_m3_collections_M3SignalOrderNative.h",
+      "control_sha256": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96",
+      "emitted_sha256": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96"
+    },
+    {
+      "header": "com_m3_collections_M3SpanIndex.h",
+      "control_sha256": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf",
+      "emitted_sha256": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf"
+    },
+    {
+      "header": "com_m3_collections_M3StateMaskHistogram.h",
+      "control_sha256": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4",
+      "emitted_sha256": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4"
+    }
+  ]
+}

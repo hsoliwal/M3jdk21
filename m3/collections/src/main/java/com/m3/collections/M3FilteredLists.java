@@ -218,10 +218,27 @@ public final class M3FilteredLists {
 
         @Override public E get(int index) { return backing.get(physical(index, false)); }
 
+        /**
+         * Replace the owner slot through its supported mutation method.
+         * A List may permit ListIterator.set but refuse indexed set(int,E);
+         * a snapshot iterator (such as CopyOnWriteArrayList) needs the
+         * indexed fallback. Neither path retains a payload copy.
+         */
+        private E setPhysical(int physicalIndex, E value) {
+            ListIterator<E> setter = backing.listIterator(physicalIndex);
+            E previous = setter.next();
+            try {
+                setter.set(value);
+                return previous;
+            } catch (UnsupportedOperationException unsupported) {
+                return backing.set(physicalIndex, value);
+            }
+        }
+
         @Override public E set(int index, E value) {
             int sourceIndex = physical(index, false);
             requireAccepted(value);
-            return backing.set(sourceIndex, value);
+            return setPhysical(sourceIndex, value);
         }
 
         @Override public void add(int index, E value) {
@@ -246,8 +263,26 @@ public final class M3FilteredLists {
             return addAll(size(), elements);
         }
 
+        /**
+         * Delete the selected owner slot by its supported mutation.
+         * Iterator-only Lists can refuse indexed remove(int); snapshot iterators
+         * such as CopyOnWriteArrayList require the indexed fallback.
+         * No detached elements, Entry objects or new JNI owner are retained.
+         */
+        private E removePhysical(int physicalIndex) {
+            Iterator<E> removing = backing.iterator();
+            for (int i = 0; i < physicalIndex; i++) removing.next();
+            E value = removing.next();
+            try {
+                removing.remove();
+            } catch (UnsupportedOperationException unsupported) {
+                return backing.remove(physicalIndex);
+            }
+            return value;
+        }
+
         @Override public E remove(int index) {
-            E old = backing.remove(physical(index, false));
+            E old = removePhysical(physical(index, false));
             modCount++;
             return old;
         }
@@ -378,7 +413,7 @@ public final class M3FilteredLists {
                 if (lastPhysical < 0) throw new IllegalStateException("remove without delivered element");
                 int target = lastPhysical;
                 int position = iterator.nextIndex();
-                backing.remove(target);
+                removePhysical(target);
                 if (target < position) position--;
                 iterator = backing.listIterator(position);
                 if ((state & LAST_WAS_NEXT) != 0) logical--;
@@ -391,7 +426,7 @@ public final class M3FilteredLists {
                 live();
                 if (lastPhysical < 0) throw new IllegalStateException("set without delivered element");
                 requireAccepted(value);
-                backing.set(lastPhysical, value);
+                setPhysical(lastPhysical, value);
                 discardProbes();
             }
 

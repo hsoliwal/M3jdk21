@@ -1,0 +1,3 @@
+PASS M3LongAddressKernelSelfTest checks=384942 native=true
+
+EXIT=0

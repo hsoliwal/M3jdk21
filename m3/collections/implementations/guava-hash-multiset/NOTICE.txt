@@ -7,3 +7,15 @@ licensed under the Apache License, Version 2.0.
 It implements the public API contract of com.google.common.collect.HashMultiset from
 Guava 33.4.8-jre (Copyright (C) The Guava Authors, Apache License, Version 2.0) and links the
 Guava API interface Multiset. No Guava implementation code is included.
+
+The Apache-2.0 original Guava interface com.google.common.collect.Multiset
+from google/guava v33.4.8 (guava/src/com/google/common/collect/Multiset.java)
+is now included here as modified version-pinned source. Copyright (C)
+The Guava Authors; source file retains upstream Apache License 2.0 notice.
+Modified 2026 by Hitesh Soliwal and contributors: Guava-only default
+helper calls now use java.util, and GWT/ErrorProne/JSpecify compile-time
+annotations are omitted. The Guava runtime dependency has been removed.
+The actual Guava 33.4.8-jre library remains in the Maven TEST scope solely
+for authoritative differential tests. This artifact is not the complete
+Guava implementation and does not guarantee standalone coexistence with
+other copies of the com.google.common.collect package.

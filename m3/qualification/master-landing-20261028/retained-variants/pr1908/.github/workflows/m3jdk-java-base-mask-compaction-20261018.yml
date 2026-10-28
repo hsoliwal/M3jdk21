@@ -1,0 +1,81 @@
+name: M3JDK21 native java.base ArrayList/Vector bitmap compaction
+on:
+  push:
+    branches: [m3jdk/java-base-arraylist-vector-mask-receiver-20261018]
+  pull_request:
+    paths:
+      - "src/java.base/share/classes/java/util/ArrayList.java"
+      - "src/java.base/share/classes/java/util/Vector.java"
+      - "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java"
+      - "test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java"
+      - "test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java"
+      - "m3/qualification/native-java-base-collection-mask-20261018/**"
+      - "m3/qualification/native-mask-source-succession/**"
+      - ".github/workflows/m3jdk-java-base-mask-compaction-20261018.yml"
+permissions:
+  contents: read
+jobs:
+  product-java21-module-patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Refuse forged or missing compactor successor before product compilation
+        run: python3 -m unittest discover -s m3/qualification/native-mask-source-succession -p 'test_verify.py' -v
+      - name: Fail closed on source drift, missing generated files or unexpected JDK edits
+        run: python3 m3/qualification/native-java-base-collection-mask-20261018/verify.py
+      - name: Compile actual modified java.base ArrayList Vector and M3 internal mask atom
+        shell: bash
+        run: |
+          set -euo pipefail
+          patch="$RUNNER_TEMP/m3jdk-patch-source"
+          target="$RUNNER_TEMP/m3jdk-patch-classes"
+          mkdir -p "$patch/java/util" "$patch/jdk/internal/mindex" "$target"
+          cp src/java.base/share/classes/java/util/ArrayList.java "$patch/java/util/ArrayList.java"
+          cp src/java.base/share/classes/java/util/Vector.java "$patch/java/util/Vector.java"
+          cp src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java "$patch/jdk/internal/mindex/M3CollectionMaskCompactor.java"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+              --patch-module java.base="$patch" -d "$target" \
+              "$patch/jdk/internal/mindex/M3CollectionMaskCompactor.java" \
+              "$patch/java/util/ArrayList.java" "$patch/java/util/Vector.java"
+          echo "M3_JDK_PATCH_CLASSES=$target" >> "$GITHUB_ENV"
+      - name: Compile committed jtreg-style module differential contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3jdk-tests"
+          javac -proc:none -Xlint:all,-module -Werror \
+              --patch-module java.base="$M3_JDK_PATCH_CLASSES" \
+              --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+              -d "$RUNNER_TEMP/m3jdk-tests" \
+              test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java \
+              test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java
+          echo "M3_JDK_TEST_CLASSES=$RUNNER_TEMP/m3jdk-tests" >> "$GITHUB_ENV"
+      - name: Execute exact Object reference identity and deletion-mask oracle
+        run: |
+          java -ea -Xcheck:jni --patch-module java.base="$M3_JDK_PATCH_CLASSES" \
+            --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+            -cp "$M3_JDK_TEST_CLASSES" M3MaskCompactionDifferential
+      - name: Execute ArrayList nested sublist and Vector fail-fast/exception oracle
+        run: |
+          java -ea -Xcheck:jni --patch-module java.base="$M3_JDK_PATCH_CLASSES" \
+            -cp "$M3_JDK_TEST_CLASSES" M3JdkRemoveIfMaskContracts
+      - name: Ensure JDK public API shape did not change
+        shell: bash
+        run: |
+          # Read the actual patched classfile path. javap with only a class
+          # name can resolve the bootstrap JDK class even when -classpath
+          # points at a java.base patch, silently invalidating the API gate.
+          javap -public "$M3_JDK_PATCH_CLASSES/java/util/ArrayList.class" > "$RUNNER_TEMP/after-list.txt"
+          javap -public java.util.ArrayList > "$RUNNER_TEMP/before-list.txt"
+          diff -u "$RUNNER_TEMP/before-list.txt" "$RUNNER_TEMP/after-list.txt"
+          javap -public "$M3_JDK_PATCH_CLASSES/java/util/Vector.class" > "$RUNNER_TEMP/after-vector.txt"
+          javap -public java.util.Vector > "$RUNNER_TEMP/before-vector.txt"
+          diff -u "$RUNNER_TEMP/before-vector.txt" "$RUNNER_TEMP/after-vector.txt"
+      # This does not substitute for a full M3JDK21 source build, JCK/jtreg suite or JMH A/B.

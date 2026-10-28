@@ -1,0 +1,9 @@
+category	selected_or_rejected	complexity	contract_or_evidence	source_license
+TWO_POINTER_STABLE_DELETE	REUSE original scalar Java for mixed-dense	O(n) time, O(1) extra after mask	unchanged JDK observable removal semantics	M3JDK21 GPL2+Classpath
+BITMASK_WORD_RUNS	ADMIT sparse 64-bit word offsets at <=1/8 deletion	O(n) time, O(1) extra after mask	1954952 local Java21 assertion comparisons; hosted jtreg pending	first-party generated JDK
+LONG_DELETION_RUNS	REUSE existing contiguous-run System.arraycopy	O(n) scan; O(runs) copies	incumbent helper, caller source identity preserved	M3JDK21 GPL2+Classpath
+DENSE_NOOP	KEEP incumbent for 12.5-98.4 percent except preserved long runs	O(n) time	mixed-density benchmark showed no universal improvement	M3JDK21 GPL2+Classpath
+LEETCODE_ARRAY	Reference LeetCode #27 Remove Element	comparison only	no challenge solution copied	reference only
+HACKERRANK_BIT	Reference HackerRank Bit Manipulation	comparison only	no challenge solution copied	reference only
+GFG_BITMASK	Reference GeeksforGeeks BitSet and bitwise arrays	comparison only	no challenge source copied	reference only
+JNI_REFERENCE	REJECT native raw Object[] pointers	GC safety	use HotSpot System.arraycopy barriers, JNI stays primitive-only	JDK/HotSpot

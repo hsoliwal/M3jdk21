@@ -1,0 +1,20 @@
+QUALIFY 01-baseline-compile
+QUALIFY 02-candidate-compile
+QUALIFY 03-tests-compile
+QUALIFY 04-native-lint
+QUALIFY 05-native-link
+QUALIFY 06-symbols
+QUALIFY 07-baseline-character
+QUALIFY 08-candidate-character
+QUALIFY 09-java-token
+QUALIFY 10-javac-lexical
+QUALIFY 11-native-token
+QUALIFY 12-native-interpreter
+QUALIFY api-old-M3RegexDpPlan
+QUALIFY api-new-M3RegexDpPlan
+QUALIFY api-old-M3RegexDpPlan-Effect
+QUALIFY api-new-M3RegexDpPlan-Effect
+QUALIFY resource-0
+QUALIFY resource-1
+QUALIFY resource-2
+TYPED_TOKEN_COMPONENT_PASS; host patch-module qualification, not full product acceptance

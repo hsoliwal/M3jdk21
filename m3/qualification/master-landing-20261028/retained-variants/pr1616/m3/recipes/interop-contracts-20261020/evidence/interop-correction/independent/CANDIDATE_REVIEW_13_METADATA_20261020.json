@@ -1,0 +1,131 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "reviewer": "/root/correction_memory/interop_semantics",
+  "created_utc": "2026-10-20T14:48:11.196163+00:00",
+  "kind": "read-only independent metadata follow-up review; ordinary JSON evidence, no serializer-profile claim",
+  "result": "SOURCE_REVIEW_PASS_RUNTIME_REQUALIFICATION_PENDING",
+  "candidate_count": 13,
+  "candidate_set_sha256": "05f397c6181992c354c6113aca7e2f9039bb8c835bef8e5c14a286ec526176eb",
+  "files": [
+    {
+      "path": "m3/collections/interop/SDK_FAMILIES.md",
+      "before_sha256": "f890d4cf68278ef02d2e7014b34cc77895d4040c84a32fb7c77181002993401c",
+      "after_sha256": "da19139c66d6f3e221a91f8d66315a58c7f8d887740c310e6ae3cd8b89b0c73a"
+    },
+    {
+      "path": "m3/collections/interop/sdk-family-bindings.tsv",
+      "before_sha256": "bb59939f0ee98635455ee4543a8d6df606f0b5325ac320c6b93f583b1b440900",
+      "after_sha256": "95075c5fd971af4d7272f6aa40ab90acfdb2fbd274bde4f0ebd8d6deb9fdb4d8"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java",
+      "before_sha256": "737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a",
+      "after_sha256": "64337fe0166e6542f8146d77e526e4614a144484bd0a3f1cb0547761193218fc"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java",
+      "before_sha256": "ede37d37ca4373ac7888da6542f7447730be822829f789ed82caaaf99dc2ec53",
+      "after_sha256": "17be67dda9f2365dfc68659838bb9a9c7f70749466d4e33ef89fb8d39123db09"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java",
+      "before_sha256": "43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d",
+      "after_sha256": "2144a65349ce395a48f6a3bad490ee7a6827f358fbf2e152d5898f999c5e7674"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java",
+      "before_sha256": "f2f8adcccfee3366007330f84a630ddfb1f093e99cdac060952dddb59dda486d",
+      "after_sha256": "ef93d9a53e0b9935c6e796b55ce2c47e4d94a732c7ac9f07b5a635eb436cc467"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java",
+      "before_sha256": "511c42a8f8cf2119770931307ef4c29f35e0fdbbc1ba438e170aa151905ca76e",
+      "after_sha256": "52289c1c82f43e18d1c661ffc26ee6d640129a9483838cda3199ee99e333cc31"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java",
+      "before_sha256": "32dfc1e0441589ccc809364d7832287b2748c5925a2625fbb51e9c6f273c6748",
+      "after_sha256": "59afee8356d265bb72ac13d2bd07226f2e595b93921410e4c0081c91115ae627"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java",
+      "before_sha256": "fc2bfa001fa2e7867ba4134e6e4b53ace7ec46c101432cc45a0a758bb6231857",
+      "after_sha256": "7211db3940ab181400b3cff8607b0f0e73b685eed4827f5aa8ec984fe716ac6c"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java",
+      "before_sha256": "5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40",
+      "after_sha256": "29691e36f212ae79c31a06a597a58e76c7e51280787c46db6d7264b30fd567e0"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java",
+      "before_sha256": "9b84b5d1c5d8b6f40e125cd458f5fa737e0cb84d742359105e332643929701fc",
+      "after_sha256": "84159857d13f31dc7d1fe49a4d04356c40906cb7c6dfe1b9b0a206da6a6d4f7d"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java",
+      "before_sha256": "a8b537381b64899e263eb481a95a83ae40a9b7ed8109fe401f2329c750419267",
+      "after_sha256": "a0810a10a35d0e23660ce3109dd260bd8bba0495e71268d988b5694bf71dd054"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java",
+      "before_sha256": "4ae299915a2d3a0d0b93ed74943d03f9298134f5b54878c6533ab8f4f3ad1d30",
+      "after_sha256": "192e287a4b98241c59c0c4a3de07cec2505d867d4cb52ed949c7e6ca31b429f0"
+    }
+  ],
+  "unchanged_previously_reviewed_java_count": 11,
+  "prior_review_evidence": {
+    "CANDIDATE_REVIEW_20261020.json": "57898926a9822f3367891bd142f58a68909545916b37aca11b67bf3a6e4642b1",
+    "CANDIDATE_REVIEW_20261020.md": "11eee71d1ba93ae7904920c28990f888880538737e1dd2518dace6ecf6793b74"
+  },
+  "prior_candidate_set_sha256": "d2ca682f4a4a66c0bd2f6d0ddd2b456c3ab8038f4c8985caf3af59b4452dc8a8",
+  "source_witness": {
+    "path": "work-interop-fix-20261020/evidence/attempt-08-metadata/SOURCE_WITNESS.json",
+    "sha256": "f93fb9a6bc97f5bfa864d348858e1fa0c7752551c3f84100dfef4522778c8de7"
+  },
+  "exact_tsv_cell_changes": [
+    {
+      "data_row": 7,
+      "family": "GUAVA",
+      "factory": "guavaListMultimap",
+      "field": "m3_owners",
+      "before": "com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedList",
+      "after": "com.m3.collections.M3LinkedHashMap;com.m3.collections.M3ArrayList"
+    }
+  ],
+  "overview_change": "The one guavaListMultimap M3LinkedList-to-M3ArrayList owner replacement exactly reconstructs the previously sealed overview when reversed; no other changes since the 12-file review.",
+  "family_counts": {
+    "APACHE_COMMONS_COLLECTIONS": 3,
+    "ECLIPSE_COLLECTIONS": 5,
+    "GUAVA": 7,
+    "JDK": 6,
+    "SPRING_FRAMEWORK": 4
+  },
+  "source_verification": [
+    {
+      "role": "factory",
+      "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+      "sha256": "bdd58a73f64875bc7f523901f72be318d1c9a63bab1a98f01d07d38597733b02",
+      "source_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "pinned_isolated_and_current_equal": true
+    },
+    {
+      "role": "metadata_loader",
+      "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBindings.java",
+      "sha256": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd",
+      "source_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "pinned_isolated_and_current_equal": true
+    }
+  ],
+  "existing_resource_packaging": {
+    "path": "work-interop-fix-20261020/isolated/m3/collections/interop/pom.xml",
+    "sha256": "b1e7dd0817690de77ad1af8898d39e4edcab2ee005aeec709f39151d5981e9a3",
+    "source": "${project.basedir}/sdk-family-bindings.tsv",
+    "target": "META-INF/m3/sdk-family-bindings.tsv",
+    "production_loader_matches": true
+  },
+  "prior_observation_resolution": "The previously reported Guava list-multimap owner metadata discrepancy is corrected in both the overview and searchable TSV.",
+  "execution_performed_this_review": false,
+  "qualification_limit": "Parent is executing fresh Java/native owning tests and standalone binding checks. This static review neither predicts their outcome nor advances target admission."
+}

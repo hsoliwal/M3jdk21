@@ -1,0 +1,721 @@
+Compiled from "M3ApacheBagContractTest.java"
+final class com.m3.collections.interop.M3ApacheBagContractTest {
+  com.m3.collections.interop.M3ApacheBagContractTest();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+    LineNumberTable:
+      line 18: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       5     0  this   Lcom/m3/collections/interop/M3ApacheBagContractTest;
+
+  void randomizedBagContractAndPinnedDonor();
+    Code:
+       0: new           #7                  // class org/apache/commons/collections4/bag/HashBag
+       3: dup
+       4: invokespecial #9                  // Method org/apache/commons/collections4/bag/HashBag."<init>":()V
+       7: astore_1
+       8: new           #10                 // class com/m3/collections/interop/M3ApacheBag
+      11: dup
+      12: invokespecial #12                 // Method com/m3/collections/interop/M3ApacheBag."<init>":()V
+      15: astore_2
+      16: new           #13                 // class java/util/Random
+      19: dup
+      20: ldc2_w        #15                 // long 20261018l
+      23: invokespecial #17                 // Method java/util/Random."<init>":(J)V
+      26: astore_3
+      27: iconst_0
+      28: istore        4
+      30: iload         4
+      32: sipush        6000
+      35: if_icmpge     678
+      38: aload_3
+      39: bipush        17
+      41: invokevirtual #20                 // Method java/util/Random.nextInt:(I)I
+      44: ifne          51
+      47: aconst_null
+      48: goto          63
+      51: aload_3
+      52: bipush        43
+      54: invokevirtual #20                 // Method java/util/Random.nextInt:(I)I
+      57: bipush        21
+      59: isub
+      60: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      63: astore        5
+      65: aload_3
+      66: bipush        6
+      68: invokevirtual #20                 // Method java/util/Random.nextInt:(I)I
+      71: istore        6
+      73: aload_3
+      74: bipush        6
+      76: invokevirtual #20                 // Method java/util/Random.nextInt:(I)I
+      79: tableswitch   { // 0 to 4
+                     0: 112
+                     1: 144
+                     2: 176
+                     3: 204
+                     4: 263
+               default: 322
+          }
+     112: aload_1
+     113: aload         5
+     115: iload         6
+     117: invokeinterface #30,  3           // InterfaceMethod org/apache/commons/collections4/Bag.add:(Ljava/lang/Object;I)Z
+     122: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     125: aload_2
+     126: aload         5
+     128: iload         6
+     130: invokeinterface #30,  3           // InterfaceMethod org/apache/commons/collections4/Bag.add:(Ljava/lang/Object;I)Z
+     135: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     138: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     141: goto          540
+     144: aload_1
+     145: aload         5
+     147: iload         6
+     149: invokeinterface #47,  3           // InterfaceMethod org/apache/commons/collections4/Bag.remove:(Ljava/lang/Object;I)Z
+     154: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     157: aload_2
+     158: aload         5
+     160: iload         6
+     162: invokeinterface #47,  3           // InterfaceMethod org/apache/commons/collections4/Bag.remove:(Ljava/lang/Object;I)Z
+     167: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     170: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     173: goto          540
+     176: aload_1
+     177: aload         5
+     179: invokeinterface #50,  2           // InterfaceMethod org/apache/commons/collections4/Bag.remove:(Ljava/lang/Object;)Z
+     184: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     187: aload_2
+     188: aload         5
+     190: invokeinterface #50,  2           // InterfaceMethod org/apache/commons/collections4/Bag.remove:(Ljava/lang/Object;)Z
+     195: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     198: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     201: goto          540
+     204: iconst_3
+     205: anewarray     #25                 // class java/lang/Integer
+     208: dup
+     209: iconst_0
+     210: aload         5
+     212: aastore
+     213: dup
+     214: iconst_1
+     215: aload         5
+     217: aastore
+     218: dup
+     219: iconst_2
+     220: aload_3
+     221: bipush        11
+     223: invokevirtual #20                 // Method java/util/Random.nextInt:(I)I
+     226: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     229: aastore
+     230: invokestatic  #53                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     233: astore        7
+     235: aload_1
+     236: aload         7
+     238: invokeinterface #59,  2           // InterfaceMethod org/apache/commons/collections4/Bag.addAll:(Ljava/util/Collection;)Z
+     243: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     246: aload_2
+     247: aload         7
+     249: invokeinterface #59,  2           // InterfaceMethod org/apache/commons/collections4/Bag.addAll:(Ljava/util/Collection;)Z
+     254: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     257: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     260: goto          540
+     263: iconst_3
+     264: anewarray     #25                 // class java/lang/Integer
+     267: dup
+     268: iconst_0
+     269: aload         5
+     271: aastore
+     272: dup
+     273: iconst_1
+     274: aload         5
+     276: aastore
+     277: dup
+     278: iconst_2
+     279: aload_3
+     280: bipush        11
+     282: invokevirtual #20                 // Method java/util/Random.nextInt:(I)I
+     285: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     288: aastore
+     289: invokestatic  #53                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     292: astore        7
+     294: aload_1
+     295: aload         7
+     297: invokeinterface #63,  2           // InterfaceMethod org/apache/commons/collections4/Bag.removeAll:(Ljava/util/Collection;)Z
+     302: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     305: aload_2
+     306: aload         7
+     308: invokeinterface #63,  2           // InterfaceMethod org/apache/commons/collections4/Bag.removeAll:(Ljava/util/Collection;)Z
+     313: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     316: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     319: goto          540
+     322: iconst_3
+     323: anewarray     #25                 // class java/lang/Integer
+     326: dup
+     327: iconst_0
+     328: aload         5
+     330: aastore
+     331: dup
+     332: iconst_1
+     333: aload         5
+     335: aastore
+     336: dup
+     337: iconst_2
+     338: aload_3
+     339: bipush        11
+     341: invokevirtual #20                 // Method java/util/Random.nextInt:(I)I
+     344: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     347: aastore
+     348: invokestatic  #53                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     351: astore        7
+     353: new           #66                 // class java/util/ArrayList
+     356: dup
+     357: aload_1
+     358: invokespecial #68                 // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     361: astore        8
+     363: new           #66                 // class java/util/ArrayList
+     366: dup
+     367: aload         7
+     369: invokespecial #68                 // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     372: astore        9
+     374: aload         8
+     376: aload         9
+     378: invokedynamic #71,  0             // InvokeDynamic #0:test:(Ljava/util/List;)Ljava/util/function/Predicate;
+     383: invokeinterface #75,  2           // InterfaceMethod java/util/List.removeIf:(Ljava/util/function/Predicate;)Z
+     388: istore        10
+     390: iload         10
+     392: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     395: aload_2
+     396: aload         7
+     398: invokeinterface #81,  2           // InterfaceMethod org/apache/commons/collections4/Bag.retainAll:(Ljava/util/Collection;)Z
+     403: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     406: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     409: new           #7                  // class org/apache/commons/collections4/bag/HashBag
+     412: dup
+     413: aload_1
+     414: invokespecial #84                 // Method org/apache/commons/collections4/bag/HashBag."<init>":(Ljava/util/Collection;)V
+     417: astore        11
+     419: iconst_1
+     420: istore        12
+     422: aload_1
+     423: invokeinterface #85,  1           // InterfaceMethod org/apache/commons/collections4/Bag.uniqueSet:()Ljava/util/Set;
+     428: invokeinterface #89,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+     433: astore        13
+     435: aload         13
+     437: invokeinterface #95,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     442: ifeq          481
+     445: aload         13
+     447: invokeinterface #101,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     452: checkcast     #25                 // class java/lang/Integer
+     455: astore        14
+     457: aload         7
+     459: aload         14
+     461: invokestatic  #105                // Method java/util/Collections.frequency:(Ljava/util/Collection;Ljava/lang/Object;)I
+     464: aload_1
+     465: aload         14
+     467: invokeinterface #111,  2          // InterfaceMethod org/apache/commons/collections4/Bag.getCount:(Ljava/lang/Object;)I
+     472: if_icmple     478
+     475: iconst_0
+     476: istore        12
+     478: goto          435
+     481: aload         11
+     483: aload         7
+     485: invokeinterface #81,  2           // InterfaceMethod org/apache/commons/collections4/Bag.retainAll:(Ljava/util/Collection;)Z
+     490: istore        13
+     492: new           #7                  // class org/apache/commons/collections4/bag/HashBag
+     495: dup
+     496: aload         8
+     498: invokespecial #84                 // Method org/apache/commons/collections4/bag/HashBag."<init>":(Ljava/util/Collection;)V
+     501: astore_1
+     502: iload         12
+     504: ifeq          540
+     507: iload         10
+     509: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     512: iload         13
+     514: invokestatic  #36                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     517: iload         4
+     519: invokedynamic #115,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+     524: invokestatic  #119                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     527: aload_1
+     528: aload         11
+     530: iload         4
+     532: invokedynamic #122,  0            // InvokeDynamic #2:makeConcatWithConstants:(I)Ljava/lang/String;
+     537: invokestatic  #119                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     540: aload_1
+     541: invokeinterface #123,  1          // InterfaceMethod org/apache/commons/collections4/Bag.size:()I
+     546: aload_2
+     547: invokeinterface #123,  1          // InterfaceMethod org/apache/commons/collections4/Bag.size:()I
+     552: iload         4
+     554: invokedynamic #127,  0            // InvokeDynamic #3:makeConcatWithConstants:(I)Ljava/lang/String;
+     559: invokestatic  #128                // Method org/junit/jupiter/api/Assertions.assertEquals:(IILjava/lang/String;)V
+     562: aload_1
+     563: invokeinterface #85,  1           // InterfaceMethod org/apache/commons/collections4/Bag.uniqueSet:()Ljava/util/Set;
+     568: aload_2
+     569: invokeinterface #85,  1           // InterfaceMethod org/apache/commons/collections4/Bag.uniqueSet:()Ljava/util/Set;
+     574: iload         4
+     576: invokedynamic #131,  0            // InvokeDynamic #4:makeConcatWithConstants:(I)Ljava/lang/String;
+     581: invokestatic  #119                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     584: aload_1
+     585: invokeinterface #85,  1           // InterfaceMethod org/apache/commons/collections4/Bag.uniqueSet:()Ljava/util/Set;
+     590: invokeinterface #89,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+     595: astore        7
+     597: aload         7
+     599: invokeinterface #95,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     604: ifeq          638
+     607: aload         7
+     609: invokeinterface #101,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     614: astore        8
+     616: aload_1
+     617: aload         8
+     619: invokeinterface #111,  2          // InterfaceMethod org/apache/commons/collections4/Bag.getCount:(Ljava/lang/Object;)I
+     624: aload_2
+     625: aload         8
+     627: invokeinterface #111,  2          // InterfaceMethod org/apache/commons/collections4/Bag.getCount:(Ljava/lang/Object;)I
+     632: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     635: goto          597
+     638: aload_1
+     639: aload_2
+     640: iload         4
+     642: invokedynamic #135,  0            // InvokeDynamic #5:makeConcatWithConstants:(I)Ljava/lang/String;
+     647: invokestatic  #119                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     650: aload_1
+     651: invokeinterface #136,  1          // InterfaceMethod org/apache/commons/collections4/Bag.hashCode:()I
+     656: aload_2
+     657: invokeinterface #136,  1          // InterfaceMethod org/apache/commons/collections4/Bag.hashCode:()I
+     662: iload         4
+     664: invokedynamic #139,  0            // InvokeDynamic #6:makeConcatWithConstants:(I)Ljava/lang/String;
+     669: invokestatic  #128                // Method org/junit/jupiter/api/Assertions.assertEquals:(IILjava/lang/String;)V
+     672: iinc          4, 1
+     675: goto          30
+     678: return
+    LineNumberTable:
+      line 20: 0
+      line 21: 8
+      line 22: 16
+      line 23: 27
+      line 24: 38
+      line 25: 65
+      line 26: 73
+      line 27: 112
+      line 28: 144
+      line 29: 176
+      line 31: 204
+      line 32: 235
+      line 33: 260
+      line 35: 263
+      line 36: 294
+      line 37: 319
+      line 39: 322
+      line 41: 353
+      line 42: 363
+      line 43: 374
+      line 44: 390
+      line 45: 409
+      line 46: 419
+      line 47: 422
+      line 48: 457
+      line 49: 478
+      line 50: 481
+      line 51: 492
+      line 54: 502
+      line 55: 507
+      line 56: 527
+      line 60: 540
+      line 61: 562
+      line 62: 584
+      line 63: 638
+      line 64: 650
+      line 23: 672
+      line 66: 678
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+        235      25     7 source   Ljava/util/List;
+        294      25     7 source   Ljava/util/List;
+        457      21    14  item   Ljava/lang/Integer;
+        353     187     7 source   Ljava/util/List;
+        363     177     8 retained   Ljava/util/List;
+        374     166     9 budget   Ljava/util/List;
+        390     150    10 changed   Z
+        419     121    11 donor   Lorg/apache/commons/collections4/Bag;
+        422     118    12 equivalentDomain   Z
+        492      48    13 donorChanged   Z
+        616      19     8  item   Ljava/lang/Object;
+         65     607     5   key   Ljava/lang/Integer;
+         73     599     6 count   I
+         30     648     4  step   I
+          0     679     0  this   Lcom/m3/collections/interop/M3ApacheBagContractTest;
+          8     671     1 expected   Lorg/apache/commons/collections4/Bag;
+         16     663     2 actual   Lorg/apache/commons/collections4/Bag;
+         27     652     3 random   Ljava/util/Random;
+
+  void oversizedRetentionPreservesContractAndPinsDonorDivergence();
+    Code:
+       0: new           #10                 // class com/m3/collections/interop/M3ApacheBag
+       3: dup
+       4: invokespecial #12                 // Method com/m3/collections/interop/M3ApacheBag."<init>":()V
+       7: astore_1
+       8: new           #7                  // class org/apache/commons/collections4/bag/HashBag
+      11: dup
+      12: invokespecial #9                  // Method org/apache/commons/collections4/bag/HashBag."<init>":()V
+      15: astore_2
+      16: aload_1
+      17: bipush        6
+      19: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      22: iconst_2
+      23: invokeinterface #30,  3           // InterfaceMethod org/apache/commons/collections4/Bag.add:(Ljava/lang/Object;I)Z
+      28: pop
+      29: aload_2
+      30: bipush        6
+      32: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      35: iconst_2
+      36: invokeinterface #30,  3           // InterfaceMethod org/apache/commons/collections4/Bag.add:(Ljava/lang/Object;I)Z
+      41: pop
+      42: bipush        6
+      44: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      47: bipush        6
+      49: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      52: bipush        6
+      54: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      57: invokestatic  #140                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      60: astore_3
+      61: aload_1
+      62: aload_3
+      63: invokeinterface #81,  2           // InterfaceMethod org/apache/commons/collections4/Bag.retainAll:(Ljava/util/Collection;)Z
+      68: invokestatic  #144                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+      71: iconst_2
+      72: aload_1
+      73: bipush        6
+      75: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      78: invokeinterface #111,  2          // InterfaceMethod org/apache/commons/collections4/Bag.getCount:(Ljava/lang/Object;)I
+      83: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+      86: iconst_2
+      87: aload_1
+      88: invokeinterface #123,  1          // InterfaceMethod org/apache/commons/collections4/Bag.size:()I
+      93: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+      96: aload_2
+      97: aload_3
+      98: invokeinterface #81,  2           // InterfaceMethod org/apache/commons/collections4/Bag.retainAll:(Ljava/util/Collection;)Z
+     103: invokestatic  #148                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+     106: iconst_0
+     107: aload_2
+     108: bipush        6
+     110: invokestatic  #24                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     113: invokeinterface #111,  2          // InterfaceMethod org/apache/commons/collections4/Bag.getCount:(Ljava/lang/Object;)I
+     118: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     121: aload_2
+     122: invokeinterface #151,  1          // InterfaceMethod org/apache/commons/collections4/Bag.isEmpty:()Z
+     127: invokestatic  #148                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+     130: return
+    LineNumberTable:
+      line 69: 0
+      line 70: 8
+      line 71: 16
+      line 72: 29
+      line 73: 42
+      line 74: 61
+      line 75: 71
+      line 76: 86
+      line 78: 96
+      line 79: 106
+      line 80: 121
+      line 81: 130
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0     131     0  this   Lcom/m3/collections/interop/M3ApacheBagContractTest;
+          8     123     1 actual   Lorg/apache/commons/collections4/Bag;
+         16     115     2 donor   Lorg/apache/commons/collections4/Bag;
+         61      70     3 input   Ljava/util/List;
+
+  void iteratorLiveUniqueAndRealPrimitiveMaskSelection();
+    Code:
+       0: new           #10                 // class com/m3/collections/interop/M3ApacheBag
+       3: dup
+       4: invokespecial #12                 // Method com/m3/collections/interop/M3ApacheBag."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: invokevirtual #154                // Method com/m3/collections/interop/M3ApacheBag.m3Backend:()Lcom/m3/collections/M3CountedBag;
+      12: astore_2
+      13: aload_1
+      14: ldc           #158                // String a
+      16: iconst_3
+      17: invokevirtual #160                // Method com/m3/collections/interop/M3ApacheBag.add:(Ljava/lang/Object;I)Z
+      20: pop
+      21: aload_1
+      22: ldc           #161                // String b
+      24: iconst_2
+      25: invokevirtual #160                // Method com/m3/collections/interop/M3ApacheBag.add:(Ljava/lang/Object;I)Z
+      28: pop
+      29: aload_1
+      30: invokevirtual #163                // Method com/m3/collections/interop/M3ApacheBag.uniqueSet:()Ljava/util/Set;
+      33: astore_3
+      34: ldc           #164                // class java/lang/UnsupportedOperationException
+      36: aload_3
+      37: invokedynamic #166,  0            // InvokeDynamic #7:execute:(Ljava/util/Set;)Lorg/junit/jupiter/api/function/Executable;
+      42: invokestatic  #170                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+      45: pop
+      46: iconst_2
+      47: aload_3
+      48: invokeinterface #174,  1          // InterfaceMethod java/util/Set.size:()I
+      53: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+      56: aload_1
+      57: ldc           #161                // String b
+      59: invokevirtual #175                // Method com/m3/collections/interop/M3ApacheBag.remove:(Ljava/lang/Object;)Z
+      62: pop
+      63: iconst_1
+      64: aload_3
+      65: invokeinterface #174,  1          // InterfaceMethod java/util/Set.size:()I
+      70: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+      73: iconst_1
+      74: newarray       byte
+      76: dup
+      77: iconst_0
+      78: iconst_1
+      79: bastore
+      80: astore        4
+      82: aload_2
+      83: aload         4
+      85: iconst_1
+      86: getstatic     #176                // Field com/m3/collections/M3IndexMaskCompactor$Backend.JAVA:Lcom/m3/collections/M3IndexMaskCompactor$Backend;
+      89: invokevirtual #182                // Method com/m3/collections/M3CountedBag.selectedDistinct:([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)Lcom/m3/collections/M3CountedBag;
+      92: astore        5
+      94: iconst_3
+      95: aload         5
+      97: ldc           #158                // String a
+      99: invokevirtual #188                // Method com/m3/collections/M3CountedBag.count:(Ljava/lang/Object;)I
+     102: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     105: invokestatic  #191                // Method com/m3/collections/M3IndexMaskCompactor.nativeAvailable:()Z
+     108: ifeq          133
+     111: iconst_3
+     112: aload_2
+     113: aload         4
+     115: iconst_1
+     116: getstatic     #196                // Field com/m3/collections/M3IndexMaskCompactor$Backend.NATIVE_REQUIRED:Lcom/m3/collections/M3IndexMaskCompactor$Backend;
+     119: invokevirtual #182                // Method com/m3/collections/M3CountedBag.selectedDistinct:([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)Lcom/m3/collections/M3CountedBag;
+     122: ldc           #158                // String a
+     124: invokevirtual #188                // Method com/m3/collections/M3CountedBag.count:(Ljava/lang/Object;)I
+     127: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     130: goto          147
+     133: ldc           #199                // class java/lang/UnsatisfiedLinkError
+     135: aload_2
+     136: aload         4
+     138: invokedynamic #201,  0            // InvokeDynamic #8:execute:(Lcom/m3/collections/M3CountedBag;[B)Lorg/junit/jupiter/api/function/Executable;
+     143: invokestatic  #170                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+     146: pop
+     147: aload_1
+     148: invokevirtual #204                // Method com/m3/collections/interop/M3ApacheBag.clear:()V
+     151: aload_3
+     152: invokeinterface #207,  1          // InterfaceMethod java/util/Set.isEmpty:()Z
+     157: invokestatic  #148                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+     160: return
+    LineNumberTable:
+      line 84: 0
+      line 85: 8
+      line 86: 13
+      line 87: 21
+      line 88: 29
+      line 89: 34
+      line 90: 46
+      line 91: 56
+      line 92: 63
+      line 93: 73
+      line 94: 82
+      line 95: 94
+      line 96: 105
+      line 97: 111
+      line 99: 133
+      line 101: 147
+      line 102: 151
+      line 103: 160
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0     161     0  this   Lcom/m3/collections/interop/M3ApacheBagContractTest;
+          8     153     1 actual   Lcom/m3/collections/interop/M3ApacheBag;
+         13     148     2 store   Lcom/m3/collections/M3CountedBag;
+         34     127     3 unique   Ljava/util/Set;
+         82      79     4 accepted   [B
+         94      67     5 selected   Lcom/m3/collections/M3CountedBag;
+
+  void allFiveProviderContractsUseM3Owners();
+    Code:
+       0: invokestatic  #208                // Method com/m3/collections/interop/M3LibraryCollections.jdkList:()Ljava/util/List;
+       3: astore_1
+       4: invokestatic  #214                // Method com/m3/collections/interop/M3LibraryCollections.guavaListMultimap:()Lcom/google/common/collect/ListMultimap;
+       7: astore_2
+       8: new           #218                // class com/m3/collections/interop/M3EclipseBag
+      11: dup
+      12: invokespecial #220                // Method com/m3/collections/interop/M3EclipseBag."<init>":()V
+      15: astore_3
+      16: new           #10                 // class com/m3/collections/interop/M3ApacheBag
+      19: dup
+      20: invokespecial #12                 // Method com/m3/collections/interop/M3ApacheBag."<init>":()V
+      23: astore        4
+      25: invokestatic  #221                // Method com/m3/collections/interop/M3LibraryCollections.springMultiValueMap:()Lorg/springframework/util/MultiValueMap;
+      28: astore        5
+      30: ldc           #158                // String a
+      32: ldc           #158                // String a
+      34: ldc           #161                // String b
+      36: invokestatic  #140                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      39: invokeinterface #225,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      44: astore        6
+      46: aload         6
+      48: invokeinterface #95,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      53: ifeq          117
+      56: aload         6
+      58: invokeinterface #101,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      63: checkcast     #226                // class java/lang/String
+      66: astore        7
+      68: aload_1
+      69: aload         7
+      71: invokeinterface #228,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      76: pop
+      77: aload_2
+      78: ldc           #230                // String group
+      80: aload         7
+      82: invokeinterface #232,  3          // InterfaceMethod com/google/common/collect/ListMultimap.put:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      87: pop
+      88: aload_3
+      89: aload         7
+      91: invokevirtual #238                // Method com/m3/collections/interop/M3EclipseBag.add:(Ljava/lang/Object;)Z
+      94: pop
+      95: aload         4
+      97: aload         7
+      99: invokevirtual #239                // Method com/m3/collections/interop/M3ApacheBag.add:(Ljava/lang/Object;)Z
+     102: pop
+     103: aload         5
+     105: ldc           #230                // String group
+     107: aload         7
+     109: invokeinterface #240,  3          // InterfaceMethod org/springframework/util/MultiValueMap.add:(Ljava/lang/Object;Ljava/lang/Object;)V
+     114: goto          46
+     117: ldc           #158                // String a
+     119: ldc           #158                // String a
+     121: ldc           #161                // String b
+     123: invokestatic  #140                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     126: aload_1
+     127: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     130: ldc           #158                // String a
+     132: ldc           #158                // String a
+     134: ldc           #161                // String b
+     136: invokestatic  #140                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     139: new           #66                 // class java/util/ArrayList
+     142: dup
+     143: aload_2
+     144: ldc           #230                // String group
+     146: invokeinterface #244,  2          // InterfaceMethod com/google/common/collect/ListMultimap.get:(Ljava/lang/Object;)Ljava/util/List;
+     151: invokespecial #68                 // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     154: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     157: iconst_3
+     158: aload_2
+     159: invokeinterface #248,  1          // InterfaceMethod com/google/common/collect/ListMultimap.size:()I
+     164: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     167: iconst_3
+     168: aload_3
+     169: invokevirtual #249                // Method com/m3/collections/interop/M3EclipseBag.size:()I
+     172: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     175: iconst_2
+     176: aload_3
+     177: ldc           #158                // String a
+     179: invokevirtual #250                // Method com/m3/collections/interop/M3EclipseBag.occurrencesOf:(Ljava/lang/Object;)I
+     182: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     185: iconst_3
+     186: aload         4
+     188: invokevirtual #253                // Method com/m3/collections/interop/M3ApacheBag.size:()I
+     191: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     194: iconst_2
+     195: aload         4
+     197: ldc           #158                // String a
+     199: invokevirtual #254                // Method com/m3/collections/interop/M3ApacheBag.getCount:(Ljava/lang/Object;)I
+     202: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     205: iconst_1
+     206: aload         5
+     208: invokeinterface #255,  1          // InterfaceMethod org/springframework/util/MultiValueMap.size:()I
+     213: invokestatic  #132                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+     216: ldc           #158                // String a
+     218: ldc           #158                // String a
+     220: ldc           #161                // String b
+     222: invokestatic  #140                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     225: aload         5
+     227: ldc           #230                // String group
+     229: invokeinterface #256,  2          // InterfaceMethod org/springframework/util/MultiValueMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     234: invokestatic  #41                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+     237: return
+    LineNumberTable:
+      line 106: 0
+      line 107: 4
+      line 108: 8
+      line 109: 16
+      line 110: 25
+      line 111: 30
+      line 112: 68
+      line 113: 77
+      line 114: 88
+      line 115: 95
+      line 116: 103
+      line 117: 114
+      line 118: 117
+      line 119: 130
+      line 120: 157
+      line 121: 167
+      line 122: 175
+      line 123: 185
+      line 124: 194
+      line 125: 205
+      line 126: 216
+      line 127: 237
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+         68      46     7 value   Ljava/lang/String;
+          0     238     0  this   Lcom/m3/collections/interop/M3ApacheBagContractTest;
+          4     234     1   jdk   Ljava/util/List;
+          8     230     2 guava   Lcom/google/common/collect/ListMultimap;
+         16     222     3 eclipse   Lcom/m3/collections/interop/M3EclipseBag;
+         25     213     4 apache   Lcom/m3/collections/interop/M3ApacheBag;
+         30     208     5 spring   Lorg/springframework/util/MultiValueMap;
+
+  private static void lambda$iteratorLiveUniqueAndRealPrimitiveMaskSelection$2(com.m3.collections.M3CountedBag, byte[]) throws java.lang.Throwable;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iconst_1
+       3: getstatic     #196                // Field com/m3/collections/M3IndexMaskCompactor$Backend.NATIVE_REQUIRED:Lcom/m3/collections/M3IndexMaskCompactor$Backend;
+       6: invokevirtual #182                // Method com/m3/collections/M3CountedBag.selectedDistinct:([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)Lcom/m3/collections/M3CountedBag;
+       9: pop
+      10: return
+    LineNumberTable:
+      line 99: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      11     0 store   Lcom/m3/collections/M3CountedBag;
+          0      11     1 accepted   [B
+
+  private static void lambda$iteratorLiveUniqueAndRealPrimitiveMaskSelection$1(java.util.Set) throws java.lang.Throwable;
+    Code:
+       0: aload_0
+       1: ldc           #158                // String a
+       3: invokeinterface #259,  2          // InterfaceMethod java/util/Set.remove:(Ljava/lang/Object;)Z
+       8: pop
+       9: return
+    LineNumberTable:
+      line 89: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      10     0 unique   Ljava/util/Set;
+
+  private static boolean lambda$randomizedBagContractAndPinnedDonor$0(java.util.List, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokeinterface #260,  2          // InterfaceMethod java/util/List.remove:(Ljava/lang/Object;)Z
+       7: ifne          14
+      10: iconst_1
+      11: goto          15
+      14: iconst_0
+      15: ireturn
+    LineNumberTable:
+      line 43: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      16     0 budget   Ljava/util/List;
+          0      16     1  item   Ljava/lang/Integer;
+}

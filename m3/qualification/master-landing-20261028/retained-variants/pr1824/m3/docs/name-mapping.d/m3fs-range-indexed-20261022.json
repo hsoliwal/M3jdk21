@@ -1,0 +1,43 @@
+{
+  "schema": "M3JDK21_FS_RANGE_INDEXED_V1",
+  "product": "M3JDK21 one integrated Java 21/JDK/HotSpot/JNI SDK",
+  "stacked_on_pr": 1823,
+  "canonical_recipe_pr": 13012,
+  "original_owners": [
+    {
+      "owner": "com.m3.file.M3File",
+      "contribution": "physical byte-range SHA256, preserving capture and borrowed scratch"
+    },
+    {
+      "owner": "com.m3.fs.MFileStreams",
+      "contribution": "one sequential provider read with selected byte ranges"
+    },
+    {
+      "owner": "com.m3.fs.M3DirectoryTable",
+      "contribution": "filtered/sorted physical row projection of native directory arrays"
+    },
+    {
+      "owner": "m3/file/verify.py",
+      "contribution": "strict source census for all 13 original executable module contracts"
+    }
+  ],
+  "retained_runtime_authority": [
+    "original NIO Path/provider",
+    "M3FS JNI SQLite WAL",
+    "parent-owned primitive/reference arrays",
+    "existing ABI/AST/compile owners"
+  ],
+  "artifacts": {
+    "proof": "m3/qualification/fs-range-indexed-20261022/",
+    "java_files": 6,
+    "text_files": 1
+  },
+  "execution": {
+    "source_receipt": "PASS",
+    "verifier_census": "STATIC_PASS",
+    "maven": "NOT_RUN",
+    "native_jni": "NOT_RUN",
+    "full_image": "NOT_RUN",
+    "performance": "NOT_MEASURED"
+  }
+}

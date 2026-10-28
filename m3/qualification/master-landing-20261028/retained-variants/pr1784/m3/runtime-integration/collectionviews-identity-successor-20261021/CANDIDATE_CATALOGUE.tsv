@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+category	candidate	comparison_source	implementation_owner	complexity	decision	license_and_proof
+filtered-set-identity	Set.contains admission + stored == candidate priority	Synexia #12866; M3JDK21 #1770/#1773; JDK Set contracts	java.util.CollectionViews.FilteredCollection	O(n) worst-case, O(1) temporary references	SELECT_BOUNDED_ATOM	First-party donor; exact Java21 test pending
+filtered-set-removal	Remove exact resident Set member; fallback to first owner-equal value	Synexia #12866; java.util.Set/IdentityHashMap	java.util.CollectionViews.FilteredCollection	O(n) scan + owner remove	SELECT_BOUNDED_ATOM	No new JNI or retained Entry object
+physical-list-removal	index-tracked selected occurrence	LeetCode 27 Remove Element (category only); existing owner code	java.util.CollectionViews.FilteredCollection	O(n) scan plus List removal	KEEP_PARENT	No third-party solution imported
+sorted-comparator-representative	backed comparator navigation and stored representative	LeetCode 34 Find First and Last Position (adjacent search category only); current owner	java.util.CollectionViews.FilteredSortedSet	owner-dependent	KEEP_PARENT	No new sort tree or wrapper
+reentrant-filtered-cursor	preserve enclosing action + delivered flags	M3JDK21 #1770; Synexia #12865	java.util.CollectionViews.SelectionSpliterator	O(1) stack state	KEEP_PARENT	No new state storage/JNI
+indexed-native-mask-selection	byte state masks and bounded JNI window	M3JDK21 M3IndexMaskWindow + libjava	jdk.internal.m3/java.base	bounded JNI copies	UNCHANGED	JNI correctness not requalified by this source-only fix

@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Synexia execution results only
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-source-receipt-admission:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch pinned Synexia verification owner (never a receiver recipe)
+        uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/com.synexia
+          ref: 4cf4440bbdfd785976e59d9abedc52626d42e519
+          path: .synexia-convergence
+          persist-credentials: false
+          token: ${{ secrets.SYNEXIA_READER_TOKEN }}
+      - name: Refuse receiver recipe source or unexecuted Java/JNI output
+        shell: bash
+        env:
+          SYNEXIA_READER_TOKEN: ${{ secrets.SYNEXIA_READER_TOKEN }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          if [ -z "${PR_BASE_SHA:-}" ]; then
+            echo 'A pull request base SHA is required; manual dispatch is not admission.' >&2
+            exit 2
+          fi
+          python3 .synexia-convergence/synexia-openrewrite-recipes/recipe-crates/m3jdk-product-output-only-20261022/verify_receiver_results.py \
+            --repo . --base "$PR_BASE_SHA" \
+            --receipts m3/qualification/synexia-executed-results

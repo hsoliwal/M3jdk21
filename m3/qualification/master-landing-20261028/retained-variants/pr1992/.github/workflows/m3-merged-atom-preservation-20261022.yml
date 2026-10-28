@@ -1,0 +1,78 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 merged recipe atom preservation
+
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/history/**'
+      - 'm3/docs/synexia-m3jdk21-source-successions.tsv'
+      - '.github/workflows/**'
+  push:
+    branches:
+      - master
+      - m3/restore-merged-atoms-ci-20261022
+    paths:
+      - 'm3/file/**'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/history/**'
+      - 'm3/docs/synexia-m3jdk21-source-successions.tsv'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  require-merged-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Exercise missing, drifted and forged-recipe negative oracles
+        run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
+      - name: Reject disappearing merged product atoms
+        run: python3 m3/history/verify-merged-atoms-preservation-20261022.py --root .
+      - name: Verify unchanged historical receipts and exactly reviewed successor
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s m3/history -p 'test_synexia_handoff.py' -v
+          python3 m3/history/verify_synexia_handoff.py --root .
+      - name: Reject new transformation recipe sources in the downstream product
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Compare against the canonical current product trunk, never an
+          # event-supplied stale base SHA from an old stacked PR target.
+          # Single-commit fetch is sufficient for two Git tree snapshots.
+          git fetch --no-tags --depth=1 origin refs/heads/master
+          git diff --diff-filter=AMRT --name-only -z FETCH_HEAD HEAD > "$RUNNER_TEMP/m3-product-changes.z"
+          python3 - "$RUNNER_TEMP/m3-product-changes.z" <<'PYRECIPE'
+          from pathlib import Path
+          import re
+          import sys
+          raw = Path(sys.argv[1]).read_bytes()
+          if not raw.endswith(b"\0") and raw:
+              raise SystemExit("M3_PRODUCT_RECIPE_SCOPE_UNTERMINATED")
+          paths = raw.rstrip(b"\0").split(b"\0") if raw else []
+          forbidden = re.compile(rb"(^m3/recipes/|^m3/tooling/migration-recipes/|/recipes?/)")
+          bad = []
+          for path in paths:
+              if (not path or b"\\" in path or any(ch < 32 or ch == 127 for ch in path)
+                      or path.startswith(b"/") or b".." in path.split(b"/")):
+                  raise SystemExit("M3_PRODUCT_RECIPE_SCOPE_INVALID_PATH")
+              if forbidden.search(path):
+                  bad.append(path.decode("utf-8", errors="backslashreplace"))
+          if bad:
+              for path in bad:
+                  print("M3_PRODUCT_NEW_OR_MODIFIED_RECIPE_REFUSED", path)
+              raise SystemExit("executable transformation recipes belong in private Synexia")
+          print(f"M3_PRODUCT_RECIPE_DELTA_PASS checked={len(paths)} canonical=master inherited=NOT_CERTIFIED")
+          PYRECIPE

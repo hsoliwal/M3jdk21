@@ -24,8 +24,6 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.util.FluentBitSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.m3.fs.vfs.provider.GenericURLFileName;
@@ -78,7 +76,7 @@ public class URIUtils {
                 throw new IllegalArgumentException("data may not be null");
             }
 
-            if (StringUtils.isEmpty(charsetName)) {
+            if ((charsetName == null || charsetName.isEmpty())) {
                 throw new IllegalArgumentException("charset may not be null or empty");
             }
 
@@ -117,7 +115,7 @@ public class URIUtils {
         private static final int UNSIGNED_BYTE_MASK = 0xF;
 
         // @formatter:off
-        private static final FluentBitSet WWW_FORM_URL_SAFE = URIBitSets.bitSet()
+        private static final M3UriMask WWW_FORM_URL_SAFE = URIBitSets.bitSet()
             // alpha characters
             .setInclusive('a', 'z')
             .setInclusive('A', 'Z')
@@ -134,7 +132,7 @@ public class URIUtils {
          */
         private static final int RADIX = 16;
 
-        static byte[] encodeUrl(FluentBitSet urlsafe, final byte[] bytes) {
+        static byte[] encodeUrl(M3UriMask urlsafe, final byte[] bytes) {
             if (bytes == null) {
                 return null;
             }
@@ -179,7 +177,7 @@ public class URIUtils {
      */
     private static final String DEFAULT_PROTOCOL_CHARSET = StandardCharsets.UTF_8.name();
 
-    private static String encode(final String unescaped, final FluentBitSet allowed, final String charset) {
+    private static String encode(final String unescaped, final M3UriMask allowed, final String charset) {
         final byte[] rawdata = URLCodecUtils.encodeUrl(allowed, EncodingUtils.getBytes(unescaped, charset));
         return EncodingUtils.getAsciiString(rawdata, 0, rawdata.length);
     }

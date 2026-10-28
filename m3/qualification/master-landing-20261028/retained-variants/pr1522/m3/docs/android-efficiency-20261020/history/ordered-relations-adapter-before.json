@@ -1,0 +1,219 @@
+{
+  "contract": {
+    "compatibility_obligations": [
+      "Preserve ordered composition, bounded state masks, zero-repeat identity, alias-safe C outputs and JNI validation/error behavior.",
+      "Refusal/unsupported/surrogate/budget cases return UNKNOWN rather than a false regex answer; a helper result is not a complete Pattern implementation.",
+      "No exported Java SE API, canonical text ownership, interning or lifecycle change.",
+      "Matched custom JVM, JNI/platform, retention and differential runtime evidence remain unqualified."
+    ],
+    "differences": [
+      "MIndexDotStarRelations becomes internal M3DotStarRelations; IProgressMonitor is mapped to an optional Runnable checkpoint.",
+      "M3StateRelation retains only package-private primitive composition and two JNI entry points. Source Domain, Backend, RangeIndex, loader, progress and public relation object lifecycle are not ported.",
+      "C/header/JNI names become M3-owned identifiers; ordered numeric algebra is retained."
+    ],
+    "public_surface": [
+      "Internal jdk.internal.mindex adapter only; no claim of source MIndexStateRelation public API equivalence."
+    ]
+  },
+  "dependencies": [],
+  "format": {
+    "abi": null,
+    "bootstrap": "Internal java.base owners and existing JNI identifiers only; Maven/OpenRewrite remains tool-only.",
+    "schema": null
+  },
+  "id": "synexia.regex.ordered-relations.adapter",
+  "identity": {
+    "generation": "Caller keeps borrowed owners stable and reachable for the operation; recomputable metadata does not own or close canonical text.",
+    "namespace": "Reuse existing immutable owner, generation and UTF-16 range identities; no new intern namespace or target ABI."
+  },
+  "kind": "adapter",
+  "lineage": {
+    "previous_sources": [],
+    "previous_targets": [],
+    "supersedes": []
+  },
+  "materialization": {
+    "admission": "Borrow exact immutable owner/range DAG and already compiled ASCII dot/star atoms under explicit node/work bounds.",
+    "cached_facts": "Helper summaries are operation-local; their existence does not prove integration into String matching.",
+    "joins": "Compose ordered primitive state rows; optional numeric JNI receives no text owner or pointer.",
+    "outputs": "Per-invocation decision/counters and primitive relation summaries; no payload flattening."
+  },
+  "observation": "Four actual public receiving artifacts are pinned; no source candidate fixture is represented as an applied runtime owner.",
+  "owner": "jdk.internal.mindex.M3DotStarRelations ordered algebra; M3StateRelation primitive representation; existing text owners retain payload authority",
+  "provenance": {
+    "copied_code": true,
+    "license": "Apache-2.0 Synexia Java/C/header bodies; retain original per-file notices. Existing GPLv2-with-Classpath-exception String owners are separate.",
+    "publication": "User-authorized Synexia-to-M3 naming/adaptation; public receiving files are observed at the exact pinned commit."
+  },
+  "reason": "Observed source-to-target package/type/JNI adaptation exists at the pinned receiving revision. This is a partial ordered-relation numeric adapter, not the complete MIndexStateRelation API or production dispatch qualification.",
+  "recipe": {
+    "id": null,
+    "path": null,
+    "preconditions": [
+      "Observed current receiving source custody only; no matching receiving application receipt is claimed."
+    ],
+    "rollback": "This record does not mutate runtime owners. Any future receiving change requires an exact-preimage recipe and separately sealed restoration; refuse foreign edits.",
+    "sha256": null,
+    "version": null
+  },
+  "source_state": "partial",
+  "sources": [
+    {
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "fingerprint": null,
+      "git_blob_sha1": "9b75e3370bcec6de914954490cc355b9573f7505",
+      "module": "synexia-indexstring",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexDotStarRelations.java",
+      "repo": "hsoliwal/com.synexia",
+      "revision_role": "pinned",
+      "sha256": "1eeaef102a313396a000538f2f8b1c04cd1dbfd5553d7fa81b4d97a131fb1573",
+      "signatures": [
+        "<T> Result evaluate(T,Access<T>,int[],int,int,long,Join,IProgressMonitor)",
+        "Object Access.owner(T)",
+        "long Access.coordinate(T)",
+        "int Access.length(T)",
+        "int Access.codeUnitAt(T,int)",
+        "T Access.first(T)",
+        "T Access.second(T)",
+        "long[] Join.compose(long[],long[])"
+      ],
+      "symbol": "com.synexia.indexstring.MIndexDotStarRelations"
+    },
+    {
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "fingerprint": null,
+      "git_blob_sha1": "bc5eb2bf64eaacb85011c50749f8b02b7608f4f4",
+      "module": "synexia-indexstring",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStateRelation.java",
+      "repo": "hsoliwal/com.synexia",
+      "revision_role": "pinned",
+      "sha256": "b74e54410a6ece719ec38e88fa725271ec2ad0fe6a2a9a3446580e54d6c323d4",
+      "signatures": [
+        "void compose(long[],int,long[],int,long[],int,int)",
+        "native long[] composeNative(long[],long[])",
+        "native long[] repeatNative(long[],long)"
+      ],
+      "symbol": "com.synexia.indexstring.MIndexStateRelation"
+    },
+    {
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "fingerprint": null,
+      "git_blob_sha1": "37cb952c9d9aea30de6f34e8dd6d5a5a571e46cd",
+      "module": "synexia-indexstring/native",
+      "path": "synexia-indexstring/native/src/mindex_state_relation_jni.c",
+      "repo": "hsoliwal/com.synexia",
+      "revision_role": "pinned",
+      "sha256": "7210ecac2b72d411870889233957ce8213ec3cd0028b4f0a034a48b989f6d9f1",
+      "signatures": [
+        "int mindex_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+        "int mindex_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+        "jlongArray Java_com_synexia_indexstring_MIndexStateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+        "jlongArray Java_com_synexia_indexstring_MIndexStateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+      ],
+      "symbol": "mindex_state_relation_compose / mindex_state_relation_repeat"
+    },
+    {
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "fingerprint": null,
+      "git_blob_sha1": "8ceee90e2e3b3665b433b410f81c4057b7e1de72",
+      "module": "synexia-indexstring/native",
+      "path": "synexia-indexstring/native/include/mindex_state_relation.h",
+      "repo": "hsoliwal/com.synexia",
+      "revision_role": "pinned",
+      "sha256": "fcf42319350f44cb82b76f0cd4a8b71af87b474d643452e27cb07d3e163d021c",
+      "signatures": [
+        "int mindex_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+        "int mindex_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
+      ],
+      "symbol": "mindex_state_relation_compose / mindex_state_relation_repeat"
+    }
+  ],
+  "status": "implemented-unverified",
+  "sync": {
+    "conflicts": [],
+    "direction": "source-to-target",
+    "pending": [
+      "Complete source API/dependency inventory and remaining Domain/RangeIndex/lifecycle surfaces",
+      "Production dispatch, matched-image JNI/differential/platform/retention/performance qualification"
+    ],
+    "source_revision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+    "target_adaptations": [
+      "Internal M3 names and packages",
+      "Runnable checkpoint replaces source IProgressMonitor",
+      "Numeric-only M3StateRelation subset and renamed JNI/header symbols"
+    ],
+    "target_revision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c"
+  },
+  "targets": [
+    {
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "fingerprint": null,
+      "git_blob_sha1": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
+      "repo": "hsoliwal/M3jdk21",
+      "revision_role": "pinned",
+      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
+      "signatures": [
+        "<T> Result evaluate(T,Access<T>,int[],int,int,long,Join,Runnable)",
+        "Object Access.owner(T)",
+        "long Access.coordinate(T)",
+        "int Access.length(T)",
+        "int Access.codeUnitAt(T,int)",
+        "T Access.first(T)",
+        "T Access.second(T)",
+        "long[] Join.compose(long[],long[])"
+      ],
+      "symbol": "jdk.internal.mindex.M3DotStarRelations"
+    },
+    {
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "fingerprint": null,
+      "git_blob_sha1": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
+      "repo": "hsoliwal/M3jdk21",
+      "revision_role": "pinned",
+      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+      "signatures": [
+        "void compose(long[],int,long[],int,long[],int,int)",
+        "native long[] composeNative(long[],long[])",
+        "native long[] repeatNative(long[],long)"
+      ],
+      "symbol": "jdk.internal.mindex.M3StateRelation"
+    },
+    {
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "fingerprint": null,
+      "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "module": "java.base",
+      "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+      "repo": "hsoliwal/M3jdk21",
+      "revision_role": "pinned",
+      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+      "signatures": [
+        "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+        "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+        "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+        "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+      ],
+      "symbol": "m3_state_relation_compose / m3_state_relation_repeat"
+    },
+    {
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "fingerprint": null,
+      "git_blob_sha1": "18a02e228129827da486edc5b316790af6135310",
+      "module": "java.base",
+      "path": "src/java.base/share/native/libjava/m3_state_relation.h",
+      "repo": "hsoliwal/M3jdk21",
+      "revision_role": "pinned",
+      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+      "signatures": [
+        "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+        "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
+      ],
+      "symbol": "m3_state_relation_compose / m3_state_relation_repeat"
+    }
+  ],
+  "tests": []
+}

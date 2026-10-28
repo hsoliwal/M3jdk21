@@ -1,0 +1,33 @@
+{
+  "schema": "synexia-m3-recipe-observation-v1",
+  "event_id": "interop-contracts-20261020-received13",
+  "captured_utc": "2026-10-20T15:00:03.133368+00:00",
+  "canonical_recipe": "com.synexia.m3jdk.InteropContracts20261020",
+  "candidate_set_sha256": "05f397c6181992c354c6113aca7e2f9039bb8c835bef8e5c14a286ec526176eb",
+  "observation": "ROOT_RECEIVED_CHECKOUT_INTEROP_PASS_BOTH_MODES",
+  "executed_by": "/root",
+  "reviewed_by": "/root/final_review",
+  "source_receipt": "evidence/receiving-20261020/RECEIPT.json",
+  "source_receipt_sha256": "1ccaa6c9aaf45553834ca1bd75b027581fc42d3cb235ab7a804606c7a1241b30",
+  "java": {
+    "tests": 159,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "native": {
+    "tests": 159,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "bindings_checks": 152,
+  "bindings_families": 5,
+  "bindings_entries": 25,
+  "final_receiver_targets": 13,
+  "final_receiver_changes": 0,
+  "original_capture_events_rewritten": false,
+  "phase_promotion": false,
+  "performance_claim": false,
+  "hosted_gate": "Existing main-PR hosted engine-pin refusal remains separate and unresolved; evidence/hosted/HOSTED_WORKFLOW_BLOCKER.json"
+}

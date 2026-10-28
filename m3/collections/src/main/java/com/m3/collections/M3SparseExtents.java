@@ -35,7 +35,7 @@ import java.util.*;
  * backing. Sorted primitive row IDs and measured extents carry only measured rows;
  * the existing Fenwick algorithm indexes their signed deltas from the estimate.
  * With m measured rows, offset and repeat measurement are O(log m), row lookup is
- * O(log squared m), and sequential first measurements append in O(log m). A first
+ * O(log m), and sequential first measurements append in O(log m). A first
  * measurement inserted in the middle, deletion of measurements, or an estimate
  * change is O(m). This is a sparse-residency tradeoff, not a universal speedup.
  * No Item/proxy or per-row object is created. Reset drops all measurement backing.
@@ -196,18 +196,27 @@ public final class M3SparseExtents {
 		if (count == 0) return -1;
 		if (offset <= 0) return 0;
 		if (offset >= totalExtent ()) return count - 1;
-		// Upper bound of measured-row ends; zero-height runs remain half-open.
-		int low = 0, high = measured;
-		while (low < high) {
-			int mid = (low + high) >>> 1;
-			long end = ((long) rowIds [mid] + 1) * estimate + deltaPrefix (mid + 1);
-			if (end <= offset) low = mid + 1;
-			else high = mid;
+		// Fenwick binary lifting finds the last measured row whose end is
+		// <= offset in O(log measured), rather than recomputing each tested
+		// prefix through another Fenwick walk (O(log^2 measured)).
+		// End offsets are monotone even when some measured rows have zero height.
+		int before = 0;
+		long delta = 0;
+		for (int bit = Integer.highestOneBit (measured); bit != 0; bit >>>= 1) {
+			int candidate = before + bit;
+			if (candidate <= measured) {
+				long nextDelta = delta + tree [candidate];
+				long end = ((long) rowIds [candidate - 1] + 1) * estimate + nextDelta;
+				if (end <= offset) {
+					before = candidate;
+					delta = nextDelta;
+				}
+			}
 		}
-		int first = low == 0 ? 0 : rowIds [low - 1] + 1;
-		long start = (long) first * estimate + deltaPrefix (low);
+		int first = before == 0 ? 0 : rowIds [before - 1] + 1;
+		long start = (long) first * estimate + delta;
 		long inGap = first + (offset - start) / estimate;
-		int limit = low == measured ? count - 1 : rowIds [low];
+		int limit = before == measured ? count - 1 : rowIds [before];
 		return (int) Math.min (inGap, limit);
 	}
 
@@ -236,6 +245,7 @@ public final class M3SparseExtents {
 	}
 
 	public long maxScrollOffset (int viewport) {
+		if (viewport < 0) throw new IllegalArgumentException ("negative viewport");
 		return Math.max (0L, totalExtent () - viewport);
 	}
 

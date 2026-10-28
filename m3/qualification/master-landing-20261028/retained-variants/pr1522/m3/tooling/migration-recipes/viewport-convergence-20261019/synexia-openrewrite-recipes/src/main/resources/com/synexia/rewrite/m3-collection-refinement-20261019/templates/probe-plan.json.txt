@@ -1,0 +1,135 @@
+{
+  "schema": "M3_COLLECTION_REFINEMENT_PROBES_V1",
+  "java": [
+    {
+      "class": "M3LinkedListClearRangeProof",
+      "args": [],
+      "stdout_lines": [
+        "PASS M3LinkedListClearRangeProof checks=1079300"
+      ]
+    },
+    {
+      "class": "M3GenericFilteredTerminalProof",
+      "args": [],
+      "stdout_lines": [
+        "GENERIC_FILTERED_TERMINAL_PASS checks=463 tape_sha256=a9db0131ee83ee966dba30edeb8cc02176860b4f0df0a3902868a40c048d0601 tape_chars=30814"
+      ]
+    },
+    {
+      "class": "M3PrimitiveSequenceCountProof",
+      "args": [],
+      "stdout_lines": [
+        "PRIMITIVE_SEQUENCE_COUNT_PASS checks=2176 tape_sha256=b8b87452b4771ef1d3d19f0dd5f77f794695beac45ca1c4e65378a9e9b258a5c tape_chars=483728"
+      ]
+    },
+    {
+      "class": "M3SnapshotSortIsolationProof",
+      "args": [],
+      "stdout_lines": [
+        "SNAPSHOT_SORT_ISOLATION_PASS checks=122246 tape_sha256=b3703117c7ae3102b9cef6ef33495288e60b2d1b31ce637b32b2cf441b2b4cb3 tape_chars=702368"
+      ]
+    },
+    {
+      "class": "M3PackedPredicateSelectionProof",
+      "args": [],
+      "stdout_lines": [
+        "PACKED_PREDICATE_SELECTION_PASS mode=java checks=468997 trace_sha256=cbc5e2b9d614ef53777bfda3ea8d559d7ce5baec99c3973e54576e98a9a605e4 trace_chars=1310752"
+      ]
+    }
+  ],
+  "missing": [
+    {
+      "class": "M3PackedPredicateSelectionProof",
+      "args": [
+        "missing"
+      ],
+      "stdout_lines": [
+        "PACKED_PREDICATE_SELECTION_PASS mode=missing checks=97 trace_sha256=adcc345a32029b89522daccd89c37ace13ddcb2a5c35fe858edfe329caedd5d4 trace_chars=820"
+      ]
+    },
+    {
+      "class": "M3NativeIndexRangeSelfTest",
+      "args": [
+        "none"
+      ]
+    },
+    {
+      "class": "M3IndexPathMasksAliasContract",
+      "args": []
+    }
+  ],
+  "native": [
+    {
+      "class": "M3IndexMaskCompactorSelfTest",
+      "args": [
+        "--native"
+      ]
+    },
+    {
+      "class": "M3IndexedFilterSortFusionSelfTest",
+      "args": [
+        "--native"
+      ]
+    },
+    {
+      "class": "M3IndexedSnapshotPositionProof",
+      "args": [
+        "--native"
+      ]
+    },
+    {
+      "class": "M3PackedPredicateSelectionProof",
+      "args": [
+        "--native"
+      ],
+      "stdout_lines": [
+        "PACKED_PREDICATE_SELECTION_PASS mode=native checks=468997 trace_sha256=cbc5e2b9d614ef53777bfda3ea8d559d7ce5baec99c3973e54576e98a9a605e4 trace_chars=1310752"
+      ]
+    },
+    {
+      "class": "M3IndexPathMasksSelfTest",
+      "args": [
+        "--native"
+      ]
+    },
+    {
+      "class": "M3IndexPathMaskWindowSelfTest",
+      "args": [
+        "--native"
+      ]
+    },
+    {
+      "class": "M3IndexPathMasksAliasContract",
+      "args": [
+        "--native"
+      ]
+    },
+    {
+      "class": "M3NativeIndexRangeSelfTest",
+      "args": [
+        "native"
+      ]
+    },
+    {
+      "class": "com.m3.collections.M3MaskSpansContract",
+      "args": [
+        "native"
+      ],
+      "stdout_lines": [
+        "MASK_SPANS_PASS cases=12000 backend=NATIVE_REQUIRED"
+      ]
+    },
+    {
+      "class": "M3IndexMaskWindowSelfTest",
+      "args": [
+        "--native"
+      ]
+    },
+    {
+      "class": "M3IndexMaskWindowRecoverySelfTest",
+      "args": [
+        "--native"
+      ]
+    }
+  ]
+}

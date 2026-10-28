@@ -1,0 +1,13 @@
+target_path	operation	preimage_git_sha	postimage_git_sha	intake
+.github/workflows/m3-gvas-literal-precompute.yml	UPDATE	b12dc6aff907c8978afb975d5ad00a79950c95f7	92171ca36f514c03789fde459b8690fe70b2eb74	pinned_exact
+m3/core/src/com/m3/text/M3GvasLiteralImage.java	UPDATE	32f506b95688b6cdc11fdf6573a6baaa9ee608c8	80f4b1091324cbcea30d26412c26e8f6b33f7493	pinned_exact
+m3/verify-gvas-literal-precompute.py	UPDATE	f7333576f7edcf2198b0b27869ea74d69f9089d2	66d7d1c9559dd943b12e1521e3ce5b17c97471f3	pinned_exact
+m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java	CREATE	ABSENT	ab1710ee5bfe824c0f88d5db48dd46322fcfdc62	pinned_exact
+m3/docs/name-mapping.d/m3-gvas-lookup-index-20261018.json	CREATE	ABSENT	a00e3063fd963d08bef66c70225e8648c774f8e9	pinned_exact
+m3/qualification/string-index-reverse-20261018/gvas/CONTRACT.md	CREATE	ABSENT	e5d9fc41773e3c58c1aab3f9cfc01bf11ff6dec6	pinned_exact
+m3/qualification/string-index-reverse-20261018/gvas/RECIPE_RECEIPT.json	CREATE	ABSENT	22d7dc4d1ce978ec550522de8cf801a3443412ff	pinned_exact
+m3/qualification/string-index-reverse-20261018/gvas/SOURCE_SEALS.json	CREATE	ABSENT	51a36665aef83cb0eceaa9b5594e4dcdb55e6971	pinned_exact
+m3/qualification/string-index-reverse-20261018/gvas/evidence/RECEIVER_POSTIMAGE_READBACK.json	CREATE	ABSENT	82ae098da87d2fc9b33022161a55f2e80881fae9	pinned_exact
+m3/qualification/string-index-reverse-20261018/gvas/evidence/SDK_RESULTS.tsv	CREATE	ABSENT	76026130e30835be7c6e6168fa6d7f7dcddca435	pinned_exact
+m3/tests/test_gvas_literal_process_identity.py	CREATE	ABSENT	b267fd96e46c7db60235374a4ccb8f4b1a128f25	pinned_exact
+m3/verify-gvas-lookup-index.py	CREATE	ABSENT	c012dcf82a5a560bc2a711acfee7642ae2e2463f	pinned_exact

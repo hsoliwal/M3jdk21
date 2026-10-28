@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Intrinsic Masked Views — OpenRewrite and jtreg contracts
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java'
+      - 'test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java'
+      - '.github/workflows/m3-state-masked-indexed-views-20261019.yml'
+  workflow_dispatch:
+jobs:
+  exact-product-recipe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            .github/workflows/m3-state-masked-indexed-views-20261019.yml
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java
+            test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java
+            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+            test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      # The named Maven/OpenRewrite source-changing recipe is qualified only in
+      # Synexia. Here the real original JDK owner and executable contracts are
+      # checked directly; no historic public recipe dataset is executed.
+      - name: Refuse changed original indexed owners or contract sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          while read -r expected path; do
+            test -f "$path" && test ! -L "$path"
+            actual="$(git hash-object "$path")"
+            if [ "$expected" != "$actual" ]; then
+              echo "M3_INDEXED_OWNER_DRIFT $path $actual expected=$expected" >&2
+              exit 1
+            fi
+            echo "M3_INDEXED_ORIGINAL_OWNER_OK $path"
+          done <<'SOURCE'
+          e6059aeb9b2e7f332fb0baea2684395c268a5414 src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
+          1dec3dbe282a53f20c3c70458d949ac3f7df53b5 src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+          c5812eb14bb62f3e97ef8f5af6dce09ab97fe991 test/jdk/jdk/internal/m3/M3IndexedArrayTest.java
+          6fde07fb59b9871458aaf2af34ef2fae9be17a6d test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java
+          254743ec34301e46ca09071bb62ee4ab97955c66 test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+          18c5a8e29de56b00b22ce1fe7dd9aae56e2a03ec test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java
+          SOURCE
+      - name: Compile M3JDK21 java.base product sources and contract probes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/m3-state-views/classes out/m3-state-views/tests
+          javac -Xlint:all,-serial -Werror \
+            --patch-module java.base=src/java.base/share/classes \
+            -d out/m3-state-views/classes \
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java \
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+          javac -Xlint:all,-serial -Werror \
+            --patch-module java.base=out/m3-state-views/classes \
+            --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+            -d out/m3-state-views/tests \
+            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
+            test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java \
+            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java \
+            test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java
+      - name: Run historical behavior and new state-mask oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          for mode in normal interpreted; do
+            jvm_flags=()
+            if [ "$mode" = interpreted ]; then jvm_flags=(-Xint); fi
+            for test in M3IndexedArrayTest M3IndexedViewEpochTest M3StateMaskedIndexedViewTest M3IndexedViewLifecycleTest; do
+              java "${jvm_flags[@]}" --patch-module java.base=out/m3-state-views/classes \
+                --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+                -cp out/m3-state-views/tests "$test"
+            done
+          done
+          echo 'M3_ORIGINAL_INDEXED_VIEWS_HOST_AND_XINT_PASS'

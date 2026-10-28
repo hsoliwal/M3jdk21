@@ -1,0 +1,1141 @@
+Compiled from "M3GuavaListMultimapContract.java"
+public final class com.m3.collections.interop.M3GuavaListMultimapContract {
+  private static long checks;
+
+  private com.m3.collections.interop.M3GuavaListMultimapContract();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+    LineNumberTable:
+      line 23: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       5     0  this   Lcom/m3/collections/interop/M3GuavaListMultimapContract;
+
+  private static void check(boolean, java.lang.String);
+    Code:
+       0: getstatic     #7                  // Field checks:J
+       3: lconst_1
+       4: ladd
+       5: putstatic     #7                  // Field checks:J
+       8: iload_0
+       9: ifne          21
+      12: new           #13                 // class java/lang/AssertionError
+      15: dup
+      16: aload_1
+      17: invokespecial #15                 // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+      20: athrow
+      21: return
+    LineNumberTable:
+      line 25: 0
+      line 26: 8
+      line 27: 21
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      22     0 condition   Z
+          0      22     1 label   Ljava/lang/String;
+
+  private static void equal(java.lang.Object, java.lang.Object, java.lang.String);
+    Code:
+       0: getstatic     #7                  // Field checks:J
+       3: lconst_1
+       4: ladd
+       5: putstatic     #7                  // Field checks:J
+       8: aload_0
+       9: aload_1
+      10: invokestatic  #18                 // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      13: ifne          38
+      16: new           #13                 // class java/lang/AssertionError
+      19: dup
+      20: aload_2
+      21: aload_0
+      22: invokestatic  #24                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      25: aload_1
+      26: invokestatic  #24                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      29: invokedynamic #30,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      34: invokespecial #15                 // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+      37: athrow
+      38: return
+    LineNumberTable:
+      line 29: 0
+      line 30: 8
+      line 31: 16
+      line 33: 38
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      39     0 expected   Ljava/lang/Object;
+          0      39     1 actual   Ljava/lang/Object;
+          0      39     2 label   Ljava/lang/String;
+
+  private static int pairs(java.util.LinkedHashMap<java.lang.Integer, java.util.List<java.lang.Integer>>);
+    Code:
+       0: aload_0
+       1: invokevirtual #34                 // Method java/util/LinkedHashMap.values:()Ljava/util/Collection;
+       4: invokeinterface #40,  1           // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+       9: invokedynamic #46,  0             // InvokeDynamic #1:applyAsInt:()Ljava/util/function/ToIntFunction;
+      14: invokeinterface #50,  2           // InterfaceMethod java/util/stream/Stream.mapToInt:(Ljava/util/function/ToIntFunction;)Ljava/util/stream/IntStream;
+      19: invokeinterface #56,  1           // InterfaceMethod java/util/stream/IntStream.sum:()I
+      24: ireturn
+    LineNumberTable:
+      line 35: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      25     0 oracle   Ljava/util/LinkedHashMap;
+
+  private static java.util.List<java.util.Map$Entry<java.lang.Integer, java.lang.Integer>> flatten(java.util.Map<java.lang.Integer, java.util.List<java.lang.Integer>>);
+    Code:
+       0: new           #62                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #64                 // Method java/util/ArrayList."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: aload_1
+      10: invokedynamic #65,  0             // InvokeDynamic #2:accept:(Ljava/util/List;)Ljava/util/function/BiConsumer;
+      15: invokeinterface #69,  2           // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      20: aload_1
+      21: areturn
+    LineNumberTable:
+      line 38: 0
+      line 39: 8
+      line 40: 20
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      22     0 source   Ljava/util/Map;
+          8      14     1 output   Ljava/util/List;
+
+  private static void checkState(com.m3.collections.interop.M3GuavaListMultimap<java.lang.Integer, java.lang.Integer>, java.util.LinkedHashMap<java.lang.Integer, java.util.List<java.lang.Integer>>, java.lang.String);
+    Code:
+       0: aload_1
+       1: invokestatic  #75                 // Method pairs:(Ljava/util/LinkedHashMap;)I
+       4: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       7: aload_0
+       8: invokevirtual #84                 // Method com/m3/collections/interop/M3GuavaListMultimap.size:()I
+      11: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      14: aload_2
+      15: invokedynamic #89,  0             // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      20: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      23: aload_1
+      24: invokevirtual #96                 // Method java/util/LinkedHashMap.isEmpty:()Z
+      27: invokestatic  #100                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      30: aload_0
+      31: invokevirtual #105                // Method com/m3/collections/interop/M3GuavaListMultimap.isEmpty:()Z
+      34: invokestatic  #100                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      37: aload_2
+      38: invokedynamic #106,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      43: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      46: aload_1
+      47: aload_0
+      48: invokevirtual #107                // Method com/m3/collections/interop/M3GuavaListMultimap.asMap:()Ljava/util/Map;
+      51: aload_2
+      52: invokedynamic #111,  0            // InvokeDynamic #5:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      57: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      60: aload_1
+      61: invokevirtual #112                // Method java/util/LinkedHashMap.keySet:()Ljava/util/Set;
+      64: aload_0
+      65: invokevirtual #116                // Method com/m3/collections/interop/M3GuavaListMultimap.keySet:()Ljava/util/Set;
+      68: aload_2
+      69: invokedynamic #117,  0            // InvokeDynamic #6:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      74: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      77: aload_1
+      78: invokestatic  #118                // Method flatten:(Ljava/util/Map;)Ljava/util/List;
+      81: new           #62                 // class java/util/ArrayList
+      84: dup
+      85: aload_0
+      86: invokevirtual #122                // Method com/m3/collections/interop/M3GuavaListMultimap.entries:()Ljava/util/Collection;
+      89: invokespecial #125                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+      92: aload_2
+      93: invokedynamic #128,  0            // InvokeDynamic #7:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      98: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     101: aload_1
+     102: invokestatic  #118                // Method flatten:(Ljava/util/Map;)Ljava/util/List;
+     105: invokeinterface #129,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     110: invokedynamic #132,  0            // InvokeDynamic #8:apply:()Ljava/util/function/Function;
+     115: invokeinterface #136,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     120: invokeinterface #140,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+     125: new           #62                 // class java/util/ArrayList
+     128: dup
+     129: aload_0
+     130: invokevirtual #144                // Method com/m3/collections/interop/M3GuavaListMultimap.values:()Ljava/util/Collection;
+     133: invokespecial #125                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     136: aload_2
+     137: invokedynamic #145,  0            // InvokeDynamic #9:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     142: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     145: aload_1
+     146: invokestatic  #118                // Method flatten:(Ljava/util/Map;)Ljava/util/List;
+     149: invokeinterface #129,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     154: invokedynamic #146,  0            // InvokeDynamic #10:apply:()Ljava/util/function/Function;
+     159: invokeinterface #136,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     164: invokeinterface #140,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+     169: new           #62                 // class java/util/ArrayList
+     172: dup
+     173: aload_0
+     174: invokevirtual #147                // Method com/m3/collections/interop/M3GuavaListMultimap.keys:()Lcom/google/common/collect/Multiset;
+     177: invokespecial #125                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     180: aload_2
+     181: invokedynamic #151,  0            // InvokeDynamic #11:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     186: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     189: bipush        -8
+     191: istore_3
+     192: iload_3
+     193: bipush        8
+     195: if_icmpgt     317
+     198: aload_1
+     199: iload_3
+     200: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     203: invokestatic  #152                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     206: invokevirtual #155                // Method java/util/LinkedHashMap.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     209: checkcast     #130                // class java/util/List
+     212: invokeinterface #159,  1          // InterfaceMethod java/util/List.size:()I
+     217: istore        4
+     219: iload         4
+     221: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     224: aload_0
+     225: invokevirtual #147                // Method com/m3/collections/interop/M3GuavaListMultimap.keys:()Lcom/google/common/collect/Multiset;
+     228: iload_3
+     229: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     232: invokeinterface #160,  2          // InterfaceMethod com/google/common/collect/Multiset.count:(Ljava/lang/Object;)I
+     237: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     240: aload_2
+     241: iload_3
+     242: invokedynamic #166,  0            // InvokeDynamic #12:makeConcatWithConstants:(Ljava/lang/String;I)Ljava/lang/String;
+     247: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     250: aload_1
+     251: iload_3
+     252: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     255: invokevirtual #169                // Method java/util/LinkedHashMap.containsKey:(Ljava/lang/Object;)Z
+     258: invokestatic  #100                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     261: aload_0
+     262: iload_3
+     263: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     266: invokevirtual #173                // Method com/m3/collections/interop/M3GuavaListMultimap.containsKey:(Ljava/lang/Object;)Z
+     269: invokestatic  #100                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     272: aload_2
+     273: iload_3
+     274: invokedynamic #174,  0            // InvokeDynamic #13:makeConcatWithConstants:(Ljava/lang/String;I)Ljava/lang/String;
+     279: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     282: aload_1
+     283: iload_3
+     284: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     287: invokestatic  #152                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     290: invokevirtual #155                // Method java/util/LinkedHashMap.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     293: aload_0
+     294: iload_3
+     295: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     298: invokevirtual #175                // Method com/m3/collections/interop/M3GuavaListMultimap.get:(Ljava/lang/Object;)Ljava/util/List;
+     301: aload_2
+     302: iload_3
+     303: invokedynamic #179,  0            // InvokeDynamic #14:makeConcatWithConstants:(Ljava/lang/String;I)Ljava/lang/String;
+     308: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     311: iinc          3, 1
+     314: goto          192
+     317: aload_1
+     318: invokevirtual #180                // Method java/util/LinkedHashMap.entrySet:()Ljava/util/Set;
+     321: invokeinterface #183,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+     326: astore_3
+     327: aload_3
+     328: invokeinterface #189,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     333: ifeq          414
+     336: aload_3
+     337: invokeinterface #194,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     342: checkcast     #198                // class java/util/Map$Entry
+     345: astore        4
+     347: aload         4
+     349: invokeinterface #200,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     354: checkcast     #130                // class java/util/List
+     357: invokeinterface #203,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     362: astore        5
+     364: aload         5
+     366: invokeinterface #189,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     371: ifeq          411
+     374: aload         5
+     376: invokeinterface #194,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     381: checkcast     #80                 // class java/lang/Integer
+     384: astore        6
+     386: aload_0
+     387: aload         4
+     389: invokeinterface #204,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     394: aload         6
+     396: invokevirtual #207                // Method com/m3/collections/interop/M3GuavaListMultimap.containsEntry:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     399: aload_2
+     400: invokedynamic #210,  0            // InvokeDynamic #15:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     405: invokestatic  #211                // Method check:(ZLjava/lang/String;)V
+     408: goto          364
+     411: goto          327
+     414: return
+    LineNumberTable:
+      line 44: 0
+      line 45: 23
+      line 46: 46
+      line 47: 60
+      line 48: 77
+      line 49: 101
+      line 50: 130
+      line 49: 142
+      line 51: 145
+      line 52: 174
+      line 51: 186
+      line 53: 189
+      line 54: 198
+      line 55: 219
+      line 56: 250
+      line 57: 282
+      line 53: 311
+      line 59: 317
+      line 60: 347
+      line 61: 411
+      line 62: 414
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+        219      92     4     n   I
+        192     125     3   key   I
+        386      22     6     v   Ljava/lang/Integer;
+        347      64     4     e   Ljava/util/Map$Entry;
+          0     415     0 actual   Lcom/m3/collections/interop/M3GuavaListMultimap;
+          0     415     1 expected   Ljava/util/LinkedHashMap;
+          0     415     2 label   Ljava/lang/String;
+
+  private static void append(java.util.Map<java.lang.Integer, java.util.List<java.lang.Integer>>, java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #215,  0            // InvokeDynamic #16:apply:()Ljava/util/function/Function;
+       7: invokeinterface #216,  3          // InterfaceMethod java/util/Map.computeIfAbsent:(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
+      12: checkcast     #130                // class java/util/List
+      15: aload_2
+      16: invokeinterface #220,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      21: pop
+      22: return
+    LineNumberTable:
+      line 64: 0
+      line 65: 22
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      23     0 oracle   Ljava/util/Map;
+          0      23     1   key   Ljava/lang/Integer;
+          0      23     2 value   Ljava/lang/Integer;
+
+  private static void replace(java.util.Map<java.lang.Integer, java.util.List<java.lang.Integer>>, java.lang.Integer, java.util.List<java.lang.Integer>);
+    Code:
+       0: aload_2
+       1: invokeinterface #223,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+       6: ifeq          20
+       9: aload_0
+      10: aload_1
+      11: invokeinterface #224,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      16: pop
+      17: goto          74
+      20: aload_0
+      21: aload_1
+      22: invokeinterface #228,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      27: ifeq          58
+      30: aload_0
+      31: aload_1
+      32: invokeinterface #229,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      37: checkcast     #130                // class java/util/List
+      40: astore_3
+      41: aload_3
+      42: invokeinterface #231,  1          // InterfaceMethod java/util/List.clear:()V
+      47: aload_3
+      48: aload_2
+      49: invokeinterface #234,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+      54: pop
+      55: goto          74
+      58: aload_0
+      59: aload_1
+      60: new           #62                 // class java/util/ArrayList
+      63: dup
+      64: aload_2
+      65: invokespecial #125                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+      68: invokeinterface #238,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      73: pop
+      74: return
+    LineNumberTable:
+      line 67: 0
+      line 68: 20
+      line 69: 58
+      line 70: 74
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+         41      14     3  data   Ljava/util/List;
+          0      75     0 oracle   Ljava/util/Map;
+          0      75     1   key   Ljava/lang/Integer;
+          0      75     2 values   Ljava/util/List;
+
+  private static void removePair(java.util.Map<java.lang.Integer, java.util.List<java.lang.Integer>>, java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokeinterface #229,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       7: checkcast     #130                // class java/util/List
+      10: astore_3
+      11: aload_3
+      12: ifnull        42
+      15: aload_3
+      16: aload_2
+      17: invokeinterface #241,  2          // InterfaceMethod java/util/List.remove:(Ljava/lang/Object;)Z
+      22: ifeq          42
+      25: aload_3
+      26: invokeinterface #223,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      31: ifeq          42
+      34: aload_0
+      35: aload_1
+      36: invokeinterface #224,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      41: pop
+      42: return
+    LineNumberTable:
+      line 72: 0
+      line 73: 11
+      line 74: 42
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      43     0 oracle   Ljava/util/Map;
+          0      43     1   key   Ljava/lang/Integer;
+          0      43     2 value   Ljava/lang/Integer;
+         11      32     3  data   Ljava/util/List;
+
+  public static void run();
+    Code:
+       0: lconst_0
+       1: putstatic     #7                  // Field checks:J
+       4: new           #243                // class java/util/Random
+       7: dup
+       8: ldc2_w        #245                // long 1590160759l
+      11: invokespecial #247                // Method java/util/Random."<init>":(J)V
+      14: astore_0
+      15: new           #85                 // class com/m3/collections/interop/M3GuavaListMultimap
+      18: dup
+      19: invokespecial #250                // Method com/m3/collections/interop/M3GuavaListMultimap."<init>":()V
+      22: astore_1
+      23: new           #35                 // class java/util/LinkedHashMap
+      26: dup
+      27: invokespecial #251                // Method java/util/LinkedHashMap."<init>":()V
+      30: astore_2
+      31: iconst_0
+      32: istore_3
+      33: iload_3
+      34: sipush        6400
+      37: if_icmpge     1031
+      40: aload_0
+      41: bipush        9
+      43: invokevirtual #252                // Method java/util/Random.nextInt:(I)I
+      46: ifne          53
+      49: aconst_null
+      50: goto          65
+      53: aload_0
+      54: bipush        17
+      56: invokevirtual #252                // Method java/util/Random.nextInt:(I)I
+      59: bipush        8
+      61: isub
+      62: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      65: astore        4
+      67: aload_0
+      68: bipush        13
+      70: invokevirtual #252                // Method java/util/Random.nextInt:(I)I
+      73: ifne          80
+      76: aconst_null
+      77: goto          92
+      80: aload_0
+      81: bipush        19
+      83: invokevirtual #252                // Method java/util/Random.nextInt:(I)I
+      86: bipush        9
+      88: isub
+      89: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      92: astore        5
+      94: aload_0
+      95: bipush        15
+      97: invokevirtual #252                // Method java/util/Random.nextInt:(I)I
+     100: istore        6
+     102: iload         6
+     104: tableswitch   { // 0 to 14
+                     0: 180
+                     1: 180
+                     2: 180
+                     3: 205
+                     4: 273
+                     5: 312
+                     6: 391
+                     7: 430
+                     8: 499
+                     9: 588
+                    10: 705
+                    11: 756
+                    12: 789
+                    13: 841
+                    14: 910
+               default: 999
+          }
+     180: aload_1
+     181: aload         4
+     183: aload         5
+     185: invokevirtual #256                // Method com/m3/collections/interop/M3GuavaListMultimap.put:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     188: ldc_w         #258                // String put
+     191: invokestatic  #211                // Method check:(ZLjava/lang/String;)V
+     194: aload_2
+     195: aload         4
+     197: aload         5
+     199: invokestatic  #259                // Method append:(Ljava/util/Map;Ljava/lang/Integer;Ljava/lang/Integer;)V
+     202: goto          1007
+     205: aload_2
+     206: aload         4
+     208: invokevirtual #169                // Method java/util/LinkedHashMap.containsKey:(Ljava/lang/Object;)Z
+     211: ifeq          237
+     214: aload_2
+     215: aload         4
+     217: invokevirtual #263                // Method java/util/LinkedHashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     220: checkcast     #130                // class java/util/List
+     223: aload         5
+     225: invokeinterface #264,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+     230: ifeq          237
+     233: iconst_1
+     234: goto          238
+     237: iconst_0
+     238: istore        7
+     240: iload         7
+     242: invokestatic  #100                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     245: aload_1
+     246: aload         4
+     248: aload         5
+     250: invokevirtual #267                // Method com/m3/collections/interop/M3GuavaListMultimap.remove:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     253: invokestatic  #100                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     256: ldc_w         #269                // String remove pair
+     259: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     262: aload_2
+     263: aload         4
+     265: aload         5
+     267: invokestatic  #271                // Method removePair:(Ljava/util/Map;Ljava/lang/Integer;Ljava/lang/Integer;)V
+     270: goto          1007
+     273: aload_2
+     274: aload         4
+     276: invokevirtual #274                // Method java/util/LinkedHashMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     279: checkcast     #130                // class java/util/List
+     282: astore        7
+     284: aload         7
+     286: ifnonnull     295
+     289: invokestatic  #152                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     292: goto          297
+     295: aload         7
+     297: aload_1
+     298: aload         4
+     300: invokevirtual #275                // Method com/m3/collections/interop/M3GuavaListMultimap.removeAll:(Ljava/lang/Object;)Ljava/util/List;
+     303: ldc_w         #278                // String removeAll
+     306: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     309: goto          1007
+     312: iconst_3
+     313: anewarray     #80                 // class java/lang/Integer
+     316: dup
+     317: iconst_0
+     318: aload         5
+     320: aastore
+     321: dup
+     322: iconst_1
+     323: aload         5
+     325: aastore
+     326: dup
+     327: iconst_2
+     328: aconst_null
+     329: aastore
+     330: invokestatic  #279                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     333: astore        7
+     335: aload_2
+     336: aload         4
+     338: invokevirtual #263                // Method java/util/LinkedHashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     341: checkcast     #130                // class java/util/List
+     344: astore        8
+     346: aload         8
+     348: ifnonnull     357
+     351: invokestatic  #152                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     354: goto          366
+     357: new           #62                 // class java/util/ArrayList
+     360: dup
+     361: aload         8
+     363: invokespecial #125                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     366: aload_1
+     367: aload         4
+     369: aload         7
+     371: invokevirtual #285                // Method com/m3/collections/interop/M3GuavaListMultimap.replaceValues:(Ljava/lang/Object;Ljava/lang/Iterable;)Ljava/util/List;
+     374: ldc_w         #289                // String replace
+     377: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     380: aload_2
+     381: aload         4
+     383: aload         7
+     385: invokestatic  #291                // Method replace:(Ljava/util/Map;Ljava/lang/Integer;Ljava/util/List;)V
+     388: goto          1007
+     391: aload_1
+     392: aload         4
+     394: invokevirtual #175                // Method com/m3/collections/interop/M3GuavaListMultimap.get:(Ljava/lang/Object;)Ljava/util/List;
+     397: astore        7
+     399: aload         7
+     401: invokeinterface #159,  1          // InterfaceMethod java/util/List.size:()I
+     406: istore        8
+     408: aload         7
+     410: iload         8
+     412: aload         5
+     414: invokeinterface #294,  3          // InterfaceMethod java/util/List.add:(ILjava/lang/Object;)V
+     419: aload_2
+     420: aload         4
+     422: aload         5
+     424: invokestatic  #259                // Method append:(Ljava/util/Map;Ljava/lang/Integer;Ljava/lang/Integer;)V
+     427: goto          1007
+     430: aload_1
+     431: aload         4
+     433: invokevirtual #175                // Method com/m3/collections/interop/M3GuavaListMultimap.get:(Ljava/lang/Object;)Ljava/util/List;
+     436: astore        7
+     438: aload         7
+     440: invokeinterface #223,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     445: ifne          496
+     448: aload_0
+     449: aload         7
+     451: invokeinterface #159,  1          // InterfaceMethod java/util/List.size:()I
+     456: invokevirtual #252                // Method java/util/Random.nextInt:(I)I
+     459: istore        8
+     461: aload_2
+     462: aload         4
+     464: invokevirtual #263                // Method java/util/LinkedHashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     467: checkcast     #130                // class java/util/List
+     470: iload         8
+     472: aload         5
+     474: invokeinterface #297,  3          // InterfaceMethod java/util/List.set:(ILjava/lang/Object;)Ljava/lang/Object;
+     479: aload         7
+     481: iload         8
+     483: aload         5
+     485: invokeinterface #297,  3          // InterfaceMethod java/util/List.set:(ILjava/lang/Object;)Ljava/lang/Object;
+     490: ldc_w         #301                // String list set
+     493: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     496: goto          1007
+     499: aload_1
+     500: aload         4
+     502: invokevirtual #175                // Method com/m3/collections/interop/M3GuavaListMultimap.get:(Ljava/lang/Object;)Ljava/util/List;
+     505: astore        7
+     507: aload         7
+     509: invokeinterface #223,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     514: ifne          585
+     517: aload_0
+     518: aload         7
+     520: invokeinterface #159,  1          // InterfaceMethod java/util/List.size:()I
+     525: invokevirtual #252                // Method java/util/Random.nextInt:(I)I
+     528: istore        8
+     530: aload_2
+     531: aload         4
+     533: invokevirtual #263                // Method java/util/LinkedHashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     536: checkcast     #130                // class java/util/List
+     539: iload         8
+     541: invokeinterface #303,  2          // InterfaceMethod java/util/List.remove:(I)Ljava/lang/Object;
+     546: aload         7
+     548: iload         8
+     550: invokeinterface #303,  2          // InterfaceMethod java/util/List.remove:(I)Ljava/lang/Object;
+     555: ldc_w         #306                // String list remove
+     558: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     561: aload_2
+     562: aload         4
+     564: invokevirtual #263                // Method java/util/LinkedHashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     567: checkcast     #130                // class java/util/List
+     570: invokeinterface #223,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     575: ifeq          585
+     578: aload_2
+     579: aload         4
+     581: invokevirtual #274                // Method java/util/LinkedHashMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     584: pop
+     585: goto          1007
+     588: aload_2
+     589: aload         4
+     591: invokestatic  #152                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     594: invokevirtual #155                // Method java/util/LinkedHashMap.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     597: checkcast     #130                // class java/util/List
+     600: invokeinterface #159,  1          // InterfaceMethod java/util/List.size:()I
+     605: istore        7
+     607: aload_0
+     608: iload         7
+     610: iconst_3
+     611: iadd
+     612: invokevirtual #252                // Method java/util/Random.nextInt:(I)I
+     615: istore        8
+     617: iload         7
+     619: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     622: aload_1
+     623: invokevirtual #147                // Method com/m3/collections/interop/M3GuavaListMultimap.keys:()Lcom/google/common/collect/Multiset;
+     626: aload         4
+     628: iload         8
+     630: invokeinterface #308,  3          // InterfaceMethod com/google/common/collect/Multiset.remove:(Ljava/lang/Object;I)I
+     635: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     638: ldc_w         #311                // String keys remove previous
+     641: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     644: iload         7
+     646: ifle          702
+     649: iload         8
+     651: ifle          702
+     654: aload_2
+     655: aload         4
+     657: invokevirtual #263                // Method java/util/LinkedHashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     660: checkcast     #130                // class java/util/List
+     663: astore        9
+     665: aload         9
+     667: iconst_0
+     668: iload         7
+     670: iload         8
+     672: invokestatic  #313                // Method java/lang/Math.min:(II)I
+     675: invokeinterface #319,  3          // InterfaceMethod java/util/List.subList:(II)Ljava/util/List;
+     680: invokeinterface #231,  1          // InterfaceMethod java/util/List.clear:()V
+     685: aload         9
+     687: invokeinterface #223,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     692: ifeq          702
+     695: aload_2
+     696: aload         4
+     698: invokevirtual #274                // Method java/util/LinkedHashMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     701: pop
+     702: goto          1007
+     705: aload_1
+     706: aload         4
+     708: invokevirtual #175                // Method com/m3/collections/interop/M3GuavaListMultimap.get:(Ljava/lang/Object;)Ljava/util/List;
+     711: astore        7
+     713: aload_2
+     714: aload         4
+     716: invokevirtual #263                // Method java/util/LinkedHashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     719: checkcast     #130                // class java/util/List
+     722: astore        8
+     724: aload         8
+     726: ifnull        746
+     729: aload         7
+     731: invokeinterface #231,  1          // InterfaceMethod java/util/List.clear:()V
+     736: aload_2
+     737: aload         4
+     739: invokevirtual #274                // Method java/util/LinkedHashMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     742: pop
+     743: goto          753
+     746: aload         7
+     748: invokeinterface #231,  1          // InterfaceMethod java/util/List.clear:()V
+     753: goto          1007
+     756: aload_2
+     757: aload         4
+     759: invokevirtual #274                // Method java/util/LinkedHashMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     762: checkcast     #130                // class java/util/List
+     765: astore        7
+     767: aload         7
+     769: aload_1
+     770: invokevirtual #107                // Method com/m3/collections/interop/M3GuavaListMultimap.asMap:()Ljava/util/Map;
+     773: aload         4
+     775: invokeinterface #224,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     780: ldc_w         #323                // String asMap remove
+     783: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     786: goto          1007
+     789: iconst_2
+     790: anewarray     #80                 // class java/lang/Integer
+     793: dup
+     794: iconst_0
+     795: aload         5
+     797: aastore
+     798: dup
+     799: iconst_1
+     800: aload         5
+     802: aastore
+     803: invokestatic  #279                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     806: astore        7
+     808: aload_1
+     809: aload         4
+     811: aload         7
+     813: invokevirtual #325                // Method com/m3/collections/interop/M3GuavaListMultimap.putAll:(Ljava/lang/Object;Ljava/lang/Iterable;)Z
+     816: ldc_w         #329                // String putAll
+     819: invokestatic  #211                // Method check:(ZLjava/lang/String;)V
+     822: aload_2
+     823: aload         4
+     825: aload         5
+     827: invokestatic  #259                // Method append:(Ljava/util/Map;Ljava/lang/Integer;Ljava/lang/Integer;)V
+     830: aload_2
+     831: aload         4
+     833: aload         5
+     835: invokestatic  #259                // Method append:(Ljava/util/Map;Ljava/lang/Integer;Ljava/lang/Integer;)V
+     838: goto          1007
+     841: aload_2
+     842: invokevirtual #96                 // Method java/util/LinkedHashMap.isEmpty:()Z
+     845: ifne          1007
+     848: aload_2
+     849: invokevirtual #112                // Method java/util/LinkedHashMap.keySet:()Ljava/util/Set;
+     852: invokeinterface #183,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+     857: invokeinterface #194,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     862: checkcast     #80                 // class java/lang/Integer
+     865: astore        7
+     867: aload_1
+     868: invokevirtual #116                // Method com/m3/collections/interop/M3GuavaListMultimap.keySet:()Ljava/util/Set;
+     871: invokeinterface #183,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+     876: astore        8
+     878: aload         7
+     880: aload         8
+     882: invokeinterface #194,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     887: ldc_w         #330                // String keys iterator
+     890: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     893: aload         8
+     895: invokeinterface #332,  1          // InterfaceMethod java/util/Iterator.remove:()V
+     900: aload_2
+     901: aload         7
+     903: invokevirtual #274                // Method java/util/LinkedHashMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     906: pop
+     907: goto          1007
+     910: aload_2
+     911: invokevirtual #96                 // Method java/util/LinkedHashMap.isEmpty:()Z
+     914: ifne          1007
+     917: aload_1
+     918: invokevirtual #122                // Method com/m3/collections/interop/M3GuavaListMultimap.entries:()Ljava/util/Collection;
+     921: invokeinterface #334,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+     926: astore        7
+     928: aload         7
+     930: invokeinterface #194,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     935: checkcast     #198                // class java/util/Map$Entry
+     938: astore        8
+     940: aload_2
+     941: invokestatic  #118                // Method flatten:(Ljava/util/Map;)Ljava/util/List;
+     944: iconst_0
+     945: invokeinterface #335,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     950: checkcast     #198                // class java/util/Map$Entry
+     953: astore        9
+     955: aload         9
+     957: aload         8
+     959: ldc_w         #337                // String entry iterator
+     962: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+     965: aload         7
+     967: invokeinterface #332,  1          // InterfaceMethod java/util/Iterator.remove:()V
+     972: aload_2
+     973: aload         9
+     975: invokeinterface #204,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     980: checkcast     #80                 // class java/lang/Integer
+     983: aload         9
+     985: invokeinterface #200,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     990: checkcast     #80                 // class java/lang/Integer
+     993: invokestatic  #271                // Method removePair:(Ljava/util/Map;Ljava/lang/Integer;Ljava/lang/Integer;)V
+     996: goto          1007
+     999: new           #13                 // class java/lang/AssertionError
+    1002: dup
+    1003: invokespecial #339                // Method java/lang/AssertionError."<init>":()V
+    1006: athrow
+    1007: iload_3
+    1008: bipush        23
+    1010: irem
+    1011: ifne          1025
+    1014: aload_1
+    1015: aload_2
+    1016: iload_3
+    1017: invokedynamic #340,  0            // InvokeDynamic #17:makeConcatWithConstants:(I)Ljava/lang/String;
+    1022: invokestatic  #343                // Method checkState:(Lcom/m3/collections/interop/M3GuavaListMultimap;Ljava/util/LinkedHashMap;Ljava/lang/String;)V
+    1025: iinc          3, 1
+    1028: goto          33
+    1031: aload_1
+    1032: aload_2
+    1033: ldc_w         #347                // String final
+    1036: invokestatic  #343                // Method checkState:(Lcom/m3/collections/interop/M3GuavaListMultimap;Ljava/util/LinkedHashMap;Ljava/lang/String;)V
+    1039: aload_1
+    1040: invokevirtual #84                 // Method com/m3/collections/interop/M3GuavaListMultimap.size:()I
+    1043: istore_3
+    1044: iload_3
+    1045: newarray       int
+    1047: astore        4
+    1049: new           #62                 // class java/util/ArrayList
+    1052: dup
+    1053: aload_1
+    1054: invokevirtual #122                // Method com/m3/collections/interop/M3GuavaListMultimap.entries:()Ljava/util/Collection;
+    1057: invokespecial #125                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+    1060: astore        5
+    1062: iconst_0
+    1063: istore        6
+    1065: iload         6
+    1067: iload_3
+    1068: if_icmpge     1109
+    1071: aload         4
+    1073: iload         6
+    1075: iload         6
+    1077: iconst_3
+    1078: irem
+    1079: ifne          1088
+    1082: ldc_w         #349                // int -2147483648
+    1085: goto          1089
+    1088: iconst_0
+    1089: iload         6
+    1091: iconst_2
+    1092: irem
+    1093: ifne          1100
+    1096: iconst_4
+    1097: goto          1101
+    1100: iconst_0
+    1101: ior
+    1102: iastore
+    1103: iinc          6, 1
+    1106: goto          1065
+    1109: aload_1
+    1110: aload         4
+    1112: ldc_w         #349                // int -2147483648
+    1115: iconst_4
+    1116: getstatic     #350                // Field com/m3/collections/M3IndexPathMasks$Backend.JAVA:Lcom/m3/collections/M3IndexPathMasks$Backend;
+    1119: invokevirtual #356                // Method com/m3/collections/interop/M3GuavaListMultimap.selectedByStates:([IIILcom/m3/collections/M3IndexPathMasks$Backend;)Lcom/m3/collections/interop/M3GuavaListMultimap;
+    1122: astore        6
+    1124: new           #62                 // class java/util/ArrayList
+    1127: dup
+    1128: invokespecial #64                 // Method java/util/ArrayList."<init>":()V
+    1131: astore        7
+    1133: iconst_0
+    1134: istore        8
+    1136: iload         8
+    1138: iload_3
+    1139: if_icmpge     1190
+    1142: aload         4
+    1144: iload         8
+    1146: iaload
+    1147: ldc_w         #349                // int -2147483648
+    1150: iand
+    1151: ifeq          1184
+    1154: aload         4
+    1156: iload         8
+    1158: iaload
+    1159: iconst_4
+    1160: iand
+    1161: ifne          1184
+    1164: aload         7
+    1166: aload         5
+    1168: iload         8
+    1170: invokeinterface #335,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+    1175: checkcast     #198                // class java/util/Map$Entry
+    1178: invokeinterface #220,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+    1183: pop
+    1184: iinc          8, 1
+    1187: goto          1136
+    1190: aload         7
+    1192: new           #62                 // class java/util/ArrayList
+    1195: dup
+    1196: aload         6
+    1198: invokevirtual #122                // Method com/m3/collections/interop/M3GuavaListMultimap.entries:()Ljava/util/Collection;
+    1201: invokespecial #125                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+    1204: ldc_w         #360                // String indexed full 32-bit selection
+    1207: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+    1210: aload         6
+    1212: bipush        -100
+    1214: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1217: bipush        123
+    1219: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1222: invokevirtual #256                // Method com/m3/collections/interop/M3GuavaListMultimap.put:(Ljava/lang/Object;Ljava/lang/Object;)Z
+    1225: pop
+    1226: aload_1
+    1227: bipush        -100
+    1229: invokestatic  #79                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1232: invokevirtual #173                // Method com/m3/collections/interop/M3GuavaListMultimap.containsKey:(Ljava/lang/Object;)Z
+    1235: ifne          1242
+    1238: iconst_1
+    1239: goto          1243
+    1242: iconst_0
+    1243: ldc_w         #362                // String selection detached from source
+    1246: invokestatic  #211                // Method check:(ZLjava/lang/String;)V
+    1249: iconst_0
+    1250: istore        8
+    1252: aload_1
+    1253: iload_3
+    1254: iconst_1
+    1255: iadd
+    1256: newarray       int
+    1258: iconst_0
+    1259: iconst_0
+    1260: getstatic     #350                // Field com/m3/collections/M3IndexPathMasks$Backend.JAVA:Lcom/m3/collections/M3IndexPathMasks$Backend;
+    1263: invokevirtual #356                // Method com/m3/collections/interop/M3GuavaListMultimap.selectedByStates:([IIILcom/m3/collections/M3IndexPathMasks$Backend;)Lcom/m3/collections/interop/M3GuavaListMultimap;
+    1266: pop
+    1267: goto          1275
+    1270: astore        9
+    1272: iconst_1
+    1273: istore        8
+    1275: iload         8
+    1277: ldc_w         #366                // String unaligned full-width state refusal
+    1280: invokestatic  #211                // Method check:(ZLjava/lang/String;)V
+    1283: iconst_0
+    1284: istore        8
+    1286: aload_1
+    1287: aload         4
+    1289: iconst_0
+    1290: iconst_0
+    1291: getstatic     #368                // Field com/m3/collections/M3IndexPathMasks$Backend.NATIVE_REQUIRED:Lcom/m3/collections/M3IndexPathMasks$Backend;
+    1294: invokevirtual #356                // Method com/m3/collections/interop/M3GuavaListMultimap.selectedByStates:([IIILcom/m3/collections/M3IndexPathMasks$Backend;)Lcom/m3/collections/interop/M3GuavaListMultimap;
+    1297: pop
+    1298: goto          1306
+    1301: astore        9
+    1303: iconst_1
+    1304: istore        8
+    1306: iload         8
+    1308: ldc_w         #373                // String native required fail closed when absent
+    1311: invokestatic  #211                // Method check:(ZLjava/lang/String;)V
+    1314: invokestatic  #375                // Method java/util/Collections.emptyList:()Ljava/util/List;
+    1317: new           #85                 // class com/m3/collections/interop/M3GuavaListMultimap
+    1320: dup
+    1321: invokespecial #250                // Method com/m3/collections/interop/M3GuavaListMultimap."<init>":()V
+    1324: ldc_w         #380                // String absent
+    1327: invokevirtual #275                // Method com/m3/collections/interop/M3GuavaListMultimap.removeAll:(Ljava/lang/Object;)Ljava/util/List;
+    1330: ldc_w         #382                // String absent removal
+    1333: invokestatic  #92                 // Method equal:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+    1336: getstatic     #384                // Field java/lang/System.out:Ljava/io/PrintStream;
+    1339: getstatic     #7                  // Field checks:J
+    1342: invokedynamic #390,  0            // InvokeDynamic #18:makeConcatWithConstants:(J)Ljava/lang/String;
+    1347: invokevirtual #393                // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+    1350: return
+    Exception table:
+       from    to  target type
+        1252  1267  1270   Class java/lang/IllegalArgumentException
+        1286  1298  1301   Class java/lang/UnsatisfiedLinkError
+    LineNumberTable:
+      line 76: 0
+      line 77: 4
+      line 78: 15
+      line 79: 23
+      line 80: 31
+      line 81: 40
+      line 82: 67
+      line 83: 94
+      line 84: 102
+      line 85: 180
+      line 86: 205
+      line 87: 240
+      line 88: 273
+      line 89: 284
+      line 90: 312
+      line 91: 335
+      line 92: 346
+      line 93: 380
+      line 94: 391
+      line 95: 408
+      line 96: 430
+      line 97: 448
+      line 98: 461
+      line 99: 499
+      line 100: 517
+      line 101: 530
+      line 102: 561
+      line 103: 588
+      line 104: 607
+      line 105: 617
+      line 106: 644
+      line 107: 665
+      line 108: 705
+      line 109: 724
+      line 110: 756
+      line 111: 767
+      line 112: 789
+      line 113: 808
+      line 114: 841
+      line 115: 848
+      line 116: 867
+      line 117: 893
+      line 118: 910
+      line 119: 917
+      line 120: 940
+      line 121: 955
+      line 122: 999
+      line 124: 1007
+      line 80: 1025
+      line 126: 1031
+      line 129: 1039
+      line 130: 1044
+      line 131: 1049
+      line 132: 1062
+      line 133: 1109
+      line 134: 1124
+      line 135: 1133
+      line 136: 1190
+      line 137: 1210
+      line 138: 1226
+      line 139: 1249
+      line 140: 1275
+      line 141: 1283
+      line 142: 1306
+      line 143: 1314
+      line 144: 1336
+      line 145: 1350
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+        240      30     7   was   Z
+        284      25     7 expected   Ljava/util/List;
+        335      53     7 values   Ljava/util/List;
+        346      42     8 prior   Ljava/util/List;
+        399      28     7 valueList   Ljava/util/List;
+        408      19     8   idx   I
+        461      35     8   idx   I
+        438      58     7 valueList   Ljava/util/List;
+        530      55     8   idx   I
+        507      78     7 valueList   Ljava/util/List;
+        665      37     9  list   Ljava/util/List;
+        607      95     7   was   I
+        617      85     8     n   I
+        713      40     7     v   Ljava/util/List;
+        724      29     8  data   Ljava/util/List;
+        767      19     7  data   Ljava/util/List;
+        808      30     7     p   Ljava/util/List;
+        867      40     7 keyToRemove   Ljava/lang/Integer;
+        878      29     8  iter   Ljava/util/Iterator;
+        928      68     7  iter   Ljava/util/Iterator;
+        940      56     8 first   Ljava/util/Map$Entry;
+        955      41     9   ref   Ljava/util/Map$Entry;
+         67     958     4   key   Ljava/lang/Integer;
+         94     931     5 value   Ljava/lang/Integer;
+        102     923     6    op   I
+         33     998     3  step   I
+       1065      44     6     i   I
+       1136      54     8     i   I
+       1272       3     9    ex   Ljava/lang/IllegalArgumentException;
+       1303       3     9    ex   Ljava/lang/UnsatisfiedLinkError;
+         15    1336     0   rnd   Ljava/util/Random;
+         23    1328     1 actual   Lcom/m3/collections/interop/M3GuavaListMultimap;
+         31    1320     2 oracle   Ljava/util/LinkedHashMap;
+       1044     307     3 count   I
+       1049     302     4 states   [I
+       1062     289     5 entries   Ljava/util/List;
+       1124     227     6 selected   Lcom/m3/collections/interop/M3GuavaListMultimap;
+       1133     218     7 expected   Ljava/util/List;
+       1252      99     8 failed   Z
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: invokestatic  #399                // Method run:()V
+       3: return
+    LineNumberTable:
+      line 146: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       4     0  args   [Ljava/lang/String;
+
+  private static java.util.List lambda$append$2(java.lang.Integer);
+    Code:
+       0: new           #62                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #64                 // Method java/util/ArrayList."<init>":()V
+       7: areturn
+    LineNumberTable:
+      line 64: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       8     0 ignore   Ljava/lang/Integer;
+
+  private static void lambda$flatten$1(java.util.List, java.lang.Integer, java.util.List);
+    Code:
+       0: aload_2
+       1: aload_0
+       2: aload_1
+       3: invokedynamic #402,  0            // InvokeDynamic #19:accept:(Ljava/util/List;Ljava/lang/Integer;)Ljava/util/function/Consumer;
+       8: invokeinterface #405,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      13: return
+    LineNumberTable:
+      line 39: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      14     0 output   Ljava/util/List;
+          0      14     1   key   Ljava/lang/Integer;
+          0      14     2 values   Ljava/util/List;
+
+  private static void lambda$flatten$0(java.util.List, java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: new           #408                // class java/util/AbstractMap$SimpleImmutableEntry
+       4: dup
+       5: aload_1
+       6: aload_2
+       7: invokespecial #410                // Method java/util/AbstractMap$SimpleImmutableEntry."<init>":(Ljava/lang/Object;Ljava/lang/Object;)V
+      10: invokeinterface #220,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      15: pop
+      16: return
+    LineNumberTable:
+      line 39: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      17     0 output   Ljava/util/List;
+          0      17     1   key   Ljava/lang/Integer;
+          0      17     2     v   Ljava/lang/Integer;
+}

@@ -1,0 +1,95 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original Java21 JNI LeetCode 350 multiset proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankIntersectionContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankIntersectionTest.java'
+      - '.github/workflows/m3-jni-leetcode350-java21.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  original-java-jni-multiset:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact Java, JNI and JUnit original product postimages
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = 'fe4bd1751126d1a5c21c359bf9f028013d380a4f'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = 'f9de7b74124cd1e2f6f32c4e9a34af4178c1d787'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '496e04bc57c00ba66895379229f3dc4e4dc0aa2c'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankIntersectionContract.java)" = '6285beb025d699b8739c75b51ce39b3d3dc5498e'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankIntersectionTest.java)" = '715deec71b1b08ea4beae17a554e187e2b380ee7'
+      - name: Strict Java 21 compilation from existing collection owners and JNI header generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/collections/src/main/java/com/m3/collections
+          mkdir -p "$RUNNER_TEMP/leetcode350/classes" "$RUNNER_TEMP/leetcode350/headers"
+          javac --release 21 -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/leetcode350/headers" \
+            -d "$RUNNER_TEMP/leetcode350/classes" \
+            "$root/M3LongCollection.java" \
+            "$root/M3LongIterator.java" \
+            "$root/M3LaneSearch.java" \
+            "$root/M3LongRankBatchNative.java" \
+            "$root/M3LongRankIndex.java" \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankIntersectionContract.java
+      - name: Compile the existing m3rankbatch JNI owner under C17, Werror and UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -Wall -Wextra -Werror -O2 -fsanitize=undefined \
+            -fno-sanitize-recover=undefined -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$RUNNER_TEMP/leetcode350/headers/com_m3_collections_M3LongRankBatchNative.h" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/leetcode350/libm3rankbatch.so"
+          nm -D "$RUNNER_TEMP/leetcode350/libm3rankbatch.so" \
+            | grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_intersectionCount0'
+      - name: Prove Java-only, checked JNI and interpreted JNI against independent frequency oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          folder="$RUNNER_TEMP/leetcode350"
+          java -ea -cp "$folder/classes" \
+            com.m3.collections.M3LongRankIntersectionContract --java \
+            | tee "$folder/java.txt"
+          java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$folder" -cp "$folder/classes" \
+            com.m3.collections.M3LongRankIntersectionContract --native \
+            | tee "$folder/jni.txt"
+          java -ea -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$folder" -cp "$folder/classes" \
+            com.m3.collections.M3LongRankIntersectionContract --native \
+            | tee "$folder/jni-int.txt"
+          grep -Eq '^PASS M3_LEETCODE350_JNI checks=[1-9][0-9]*$' "$folder/java.txt"
+          cmp "$folder/java.txt" "$folder/jni.txt"
+          cmp "$folder/java.txt" "$folder/jni-int.txt"
+      - name: Preserve bounded original-source qualification receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-jni-leetcode350-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/leetcode350/*.txt
+          if-no-files-found: warn
+          retention-days: 14

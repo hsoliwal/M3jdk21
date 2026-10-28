@@ -1,0 +1,293 @@
+{
+  "schema": "M3JDK21_COLLECTION_ATOM_RECEIVER_V1",
+  "date": "2026-10-23",
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseline_commit": "b032048eece51c897d8623fd7a69f7f16eac5a57",
+    "kind": "JDK_SOURCE_TREE_STANDALONE_PROVING_OWNER",
+    "public_jdk_api_mutated": false
+  },
+  "convergence": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-arraylist-mask-register-20261023",
+    "pr": "https://github.com/hsoliwal/com.synexia/pull/13222",
+    "recipe": "com.synexia.rewrite.M3ArrayListDualWordMaskRecipe",
+    "atom": "M3ArrayList.removeIf decision mask",
+    "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-arraylist-dual-word-20261023/manifest.tsv",
+    "build_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-junit-resolve-20261023.yml",
+    "syntax_bootstrap_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-longtree-seed-syntax-20261023.yml",
+    "tree_recipe": "com.synexia.rewrite.M3TreeWindowShiftBoundaryRecipe",
+    "tree_crate": "m3-tree-window-shift-boundary-20261023",
+    "ci_pin_recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-collection-ci-pins-20261024.yml",
+    "tree_commit_recipe": "com.synexia.rewrite.M3TreeCommitAtomicityRecipe",
+    "tree_commit_source_parent": "bb41516a28fc653c9b2f42d26b991cfeaaf34999"
+  },
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "preimage_git_blob_sha1": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e",
+      "postimage_git_blob_sha1": "b1135dc23d04d4654cedab2e8b62684e1e7d4471",
+      "preimage_sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
+      "postimage_sha256": "2168db105fe700ea1a8022ad362ee41d8f181180deba8404ea87d9c70f46d134",
+      "role": "implementation_postimage",
+      "previous_20261023": {
+        "preimage_git_blob_sha1": "eaada4ef3f198e780dd2a792ec76dddabb8d3616",
+        "postimage_git_blob_sha1": "b1315351aafdad389a065f6d5776923b535224cc",
+        "preimage_sha256": "9833b3d8d36287fe38025d9b7c38fb09e495f94f27c611af85433130f1e72ac2",
+        "postimage_sha256": "adf2bcbf3c596d7a682d82babe8c56965948321f38133247be622cf8bc3e00ff",
+        "documented_in": "hsoliwal/com.synexia#13222",
+        "historical_pins_immutable": true
+      },
+      "copyright_header_disposition": "CURRENT_MASTER_HEADER_UNCHANGED_APACHE_2_0_OR_EPL_2_0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "preimage_git_blob_sha1": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
+      "postimage_git_blob_sha1": "e87326da9e8d59e36cd84fd1413a0f55087200aa",
+      "preimage_sha256": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
+      "postimage_sha256": "aadabb968ad9d9483d02aa67a353d9a6fec402d90c9522325342a8ca8d1d07f1",
+      "role": "differential_oracle_postimage",
+      "previous_20261023": {
+        "preimage_git_blob_sha1": "298b2cf45e30959af08d676f862de3921c9dbf33",
+        "postimage_git_blob_sha1": "054be11f5ba9bdacbc3e6aa4ca01c43b81526239",
+        "preimage_sha256": "7beb39be4f5686b6f08b230f8a49dbadc5d82a5c8bfe23356fe5932504bf414b",
+        "postimage_sha256": "d8c109e3f7a5bc3fc836109d01ba7754ea523549dc2703b557edd90f0b8c6230",
+        "documented_in": "hsoliwal/com.synexia#13222",
+        "historical_pins_immutable": true
+      },
+      "copyright_header_disposition": "CURRENT_MASTER_HEADER_UNCHANGED_APACHE_2_0_OR_EPL_2_0"
+    },
+    {
+      "path": "m3/arrays/pom.xml",
+      "preimage_git_blob_sha1": "45b090e6c6003a21db08884379678b3ba410754c",
+      "postimage_git_blob_sha1": "668fab1d24bbebd407ed920664487db848db464e",
+      "preimage_sha256": "1448e9b9597df4648c3469ef1c49a57086df58de246e25b946e10b5c04906dd5",
+      "postimage_sha256": "12b02965bdb4058068885e5acd109334d0f1f827ea2176e3d3e111db320a65e7",
+      "role": "test_only_maven_dependency_postimage"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionContract.java",
+      "preimage_git_blob_sha1": "74369df9ef10241fb748b710ab50ec1075edbee6",
+      "postimage_git_blob_sha1": "8a33b08f52ef2da14354499d577090b099e2c515",
+      "preimage_sha256": "7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25",
+      "postimage_sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
+      "role": "one_character_java21_test_syntax_postimage"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+      "preimage_git_blob_sha1": "f4f064f370a38bd8363b1e6309e4b151fb987b1c",
+      "postimage_git_blob_sha1": "01b301c99ebb114fa69d3d341d27823250ee8429",
+      "preimage_sha256": "837aeb592e797902f9c50bcdbf4f85db3f9dbf97ee7537b5d6e85a9fa4a4e41a",
+      "postimage_sha256": "e580548398c8c9632c639c9dd94b4f8dc9bcd00d7e676f980d65a2b38aebffb0",
+      "role": "atomic_tree_sibling_key_validation_postimage",
+      "previous_20261025": {
+        "git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+        "sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
+        "receipt_role": "atomic_tree_sibling_key_validation_postimage",
+        "source_recipe": "m3-tree-window-shift-boundary-20261023",
+        "historical_pin_retained": true
+      },
+      "previous_candidate_20261025": {
+        "git_blob_sha1": "4e5089656f7187773054026e93d82f08ced148db",
+        "sha256": "c3fef0d10353861799e84ae8dbbfd45939232301bf203d6bfe038e547779e173",
+        "disposition": "superseded draft version with incorrect mixed-invalid exception priority",
+        "historical_pin_retained": true
+      }
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java",
+      "preimage_git_blob_sha1": "d2e744e0016822506a427fad0105be02951d8e69",
+      "postimage_git_blob_sha1": "88a36942955e1e915bd52cf8b28d305cab905f17",
+      "preimage_sha256": "5866b20f6f1d0d1cf123d15489f6c195c96c54f1480d14e46fdcb411856c068d",
+      "postimage_sha256": "9ef4178d8f7632d27382c900558274b560c079e7c663cddd756e29be1de82008",
+      "role": "negative_and_overflow_atomic_refusal_regression",
+      "previous_20261023": {
+        "preimage_git_blob_sha1": "6733286d3153899ab2566b7ab0396e9de391720c",
+        "postimage_git_blob_sha1": "9aa583324d9ba144c6b3692dcb4dfc423b9174fc",
+        "preimage_sha256": "7d856bb61fc64be86ab5442e21c5f60d77526e6e7059d10863ff3d3e3c1eecc1",
+        "postimage_sha256": "91aff0d97913138fd0b60e482c98ab052fff695d4581aa8c480da7a7698303a7",
+        "documented_in": "hsoliwal/com.synexia#13222",
+        "historical_pins_immutable": true
+      },
+      "copyright_header_disposition": "CURRENT_MASTER_HEADER_UNCHANGED_APACHE_2_0_OR_EPL_2_0"
+    }
+  ],
+  "algorithm": {
+    "problem_category": "STABLE_BULK_REMOVE_MASK",
+    "chosen": "two primitive long bitmasks for logical indices 0..127; incumbent BitSet above",
+    "timing_complexity": "O(n) predicate pass + O(n) stable compaction",
+    "additional_space": "2 primitive mask words at n<=128; BitSet O(ceil(n/64)) beyond",
+    "limitations": "128 is one candidate threshold, not a universal performance winner"
+  },
+  "invariants": [
+    "single Object[] owning element references",
+    "stable retained-reference ordering and duplicate/null identities",
+    "exactly one predicate evaluation per original logical occurrence",
+    "all callback exceptions propagated before outer compaction",
+    "same modCount semantics and fail-fast iterator boundaries",
+    "clear vacated tail references",
+    "no new API, serialization format, JNI method, Java callback into JNI, or new wrapper"
+  ],
+  "verification": {
+    "isolated_java21_atom": {
+      "status": "PASSED",
+      "checks": 714400,
+      "command": "javac -Xlint:all -Werror DualWordMaskAtomProof.java && java DualWordMaskAtomProof",
+      "scope": "small standalone atom; not a full JDK source build"
+    },
+    "exact_preimage_and_target_blob_readback": {
+      "status": "PASSED",
+      "scope": "source Git blobs match Synexia preimage fixtures and receiving postimage templates"
+    },
+    "expanded_target_oracle": {
+      "status": "PASSED_IN_TARGET_CI",
+      "command": "java -cp <compiled-real-M3-collections> com.m3.collections.M3ArrayListShortWordMaskContract",
+      "github_run_id": 39971879002,
+      "assertions": 585423
+    },
+    "maven_openrewrite_replay": {
+      "status": "PENDING_CI",
+      "command": "mvn -B -ntp -f synexia-openrewrite-recipes/crates/m3-arraylist-dual-word-20261023/pom.xml test"
+    },
+    "source_built_jdk_jtreg_abi": {
+      "status": "NOT_RUN"
+    },
+    "jni_gc_jmm": {
+      "status": "JNI_MASK_WINDOW_PARITY_PASSED_OTHER_GC_JMM_GATES_OPEN",
+      "github_run_id": 39971879002
+    },
+    "cpu_benchmark_jmh": {
+      "status": "NOT_RUN",
+      "note": "Illustrative local mask-only comparison is not a qualification"
+    },
+    "allocation_heap_native": {
+      "status": "NOT_RUN"
+    },
+    "licensing": {
+      "status": "FIRST_PARTY_APACHE_2_0",
+      "note": "Challenge links are problem taxonomy only; no external solution implementation copied"
+    },
+    "mask_window_java_native_ci": {
+      "status": "PASSED_IN_TARGET_CI",
+      "contract": "M3BudgetedMaskWindowContract in Java and --native modes",
+      "native_library": "m3_collections_mask",
+      "jni_abi_changed": false,
+      "github_run_id": 39971879002,
+      "java_assertions": 28889,
+      "native_assertions": 28914,
+      "native_binary_compilation": "PASSED_WITH_WALL_WEXTRA_WERROR"
+    },
+    "junit_artifact_resolution": {
+      "status": "PASSED_IN_TARGET_CI",
+      "previous_failure": "Maven Central lacks test-only junit-jupiter 5.10.2-m3-source-1",
+      "corrective_postimage": "use released 5.10.2 already in m3/collections module",
+      "release_scope": "TEST_ONLY",
+      "production_bytecode_api_change": false,
+      "github_run_id": 39971879002
+    },
+    "longtree_seed_compilation": {
+      "previous_failure": "testCompile at M3LongTreeSetMaskCompactionContract.java:12 integer number too large",
+      "corrected_token": "0x4D33534F52544C -> 0x4D33534F52544CL",
+      "status": "PASSED_IN_TARGET_CI",
+      "semantics": "same positive integral value; no algorithm mutation",
+      "github_run_id": 39971879002
+    },
+    "full_collections_maven": {
+      "baseline_ci_run": "39962398436",
+      "status": "PASSED_IN_TARGET_CI",
+      "tests_run": 601,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "description": "Java21 M3 collection module source built and 601 JUnit tests completed successfully in target CI; full installed-JDK jtreg/ABI not covered",
+      "requalification": "PASSED_M3_COLLECTIONS_MODULE_ONLY",
+      "baseline_previous_status": "FAILED_ONE_CONTRACT_TEST",
+      "baseline_previous_run": "39962398436",
+      "github_run_id": 39971879002
+    },
+    "tree_window_index_shift": {
+      "status": "PASSED_IN_MAVEN_JUNIT_ONLY",
+      "preserves": [
+        "preflight all affected keys before mutation",
+        "same native row handles on rejected negative shift",
+        "same native row handles on rejected positive overflow",
+        "unchanged public signatures and JNI symbols"
+      ],
+      "scope": "One implementation and one existing JUnit coverage test, exact SHA-256/Git blob postimages",
+      "github_run_id": 39971879002,
+      "standalone_tree_shift_gate": "PENDING_CI_AFTER_SOURCE_PIN_RECONCILIATION"
+    },
+    "tree_commit_failure_atomicity": {
+      "status": "PENDING_REAL_MODULE_CI",
+      "methods": 5,
+      "description": "check old key/handle maps remain intact for late-zero/short-coordinate source preflight",
+      "source_preimage_sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
+      "postimage_sha256": "e580548398c8c9632c639c9dd94b4f8dc9bcd00d7e676f980d65a2b38aebffb0",
+      "isolated_exception_priority_checks": 2000,
+      "isolated_exception_priority_status": "PASSED_LOCAL_JAVA21_MODEL_NOT_REAL_PRODUCT_MODULE"
+    }
+  },
+  "admission": {
+    "state": "DRAFT_REVIEW_CANDIDATE_NOT_CANONICAL_JDK_PROMOTION",
+    "legacy_public_m3arraylist": "still exposed standalone SDK; closure tracked separately in naming PR #1868",
+    "rollback": "Restore pinned source preimages; no binary-layout schema or JNI symbol changes"
+  },
+  "donor_urls": [
+    "https://leetcode.com/problems/move-zeroes/",
+    "https://leetcode.com/problems/remove-element/",
+    "https://www.hackerrank.com/challenges/countingsort4/problem",
+    "https://www.hackerrank.com/challenges/dynamic-array/problem",
+    "https://www.geeksforgeeks.org/dsa/check-whether-k-th-bit-set-not/",
+    "https://github.com/RoaringBitmap/RoaringBitmap"
+  ],
+  "catalogue": {
+    "path": "m3/collections/algorithm-catalog/arraylist-dual-word-mask-20261023.tsv",
+    "git_blob_sha1": "75db7ab053383308a57ade18e1ea9ea38467ddbf",
+    "category_count": 11,
+    "source_owner_sha256_corrected": true
+  },
+  "unchanged_native_sources": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob_sha1": "bedd442346de5b7dd9d5f1965c510950e0c45ea1"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "git_blob_sha1": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+    }
+  ],
+  "ci_pin_postimages": [
+    {
+      "path": ".github/workflows/m3-longtree-mask-compact-20261022.yml",
+      "before_git_blob_sha1": "13b7a035b361f041a0598471146f0ea7e7d609de",
+      "after_git_blob_sha1": "a1a0a4a5c7188426e4baaa933f9a0ee7c37151bb",
+      "before_sha256": "946837499a0e436027c7e9e7e4cd070c8a8994e64733f125349a99fff7350245",
+      "after_sha256": "5587a23e6560dcfbab32457117ea053381df6c3773d3fc7e5ea301e0d8027bc9",
+      "only_token_changed": "7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25 -> e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
+      "source_owner_postimage_proof": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-arraylist-longtree-seed-syntax-20261023/manifest.tsv",
+      "standalone_gate": "PENDING_CI"
+    },
+    {
+      "path": ".github/workflows/m3-tree-shift-20261021.yml",
+      "before_git_blob_sha1": "7a1f39266a006f06f7527a060f74554171e13669",
+      "after_git_blob_sha1": "2e0bf821f4e76bd60f888152697667fc321cb737",
+      "before_sha256": "49efb9b63399a50ae50e47fcabc8e25f2cc4c1622c7e8846857f8b045902ff44",
+      "after_sha256": "b6dcf7cdd8c0dbd3fd3d2b4398b719ea40f5d737566e02bf572915829eea200e",
+      "only_token_changed": "837aeb592e797902f9c50bcdbf4f85db3f9dbf97ee7537b5d6e85a9fa4a4e41a -> 888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
+      "source_owner_postimage_proof": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-tree-window-shift-boundary-20261023/manifest.tsv",
+      "standalone_gate": "PENDING_CI"
+    }
+  ],
+  "current_master_license_reconciliation": {
+    "schema": "M3JDK21_SOURCE_PREIMAGE_SUCCESSION_20261025",
+    "source_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/13319",
+    "current_master_source": "b35759a36ecdfc299855a5e53b4d1a05f9f3884d",
+    "scope": "three original classes; prior candidate method/test bodies, exact master license header",
+    "staged_source_postimages": 3,
+    "original_20261023_receipts_preserved_per_file": true,
+    "status": "PENDING_CURRENT_HEAD_CI",
+    "public_api_modified": false,
+    "jni_export_modified": false,
+    "copyright": "Apache-2.0 OR EPL-2.0 for these three files"
+  }
+}

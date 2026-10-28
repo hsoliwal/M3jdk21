@@ -1,0 +1,20 @@
+ProgressMonitors.java:27:35: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:33:55: compiler.warn.proc.messager: no @param for provider
+ProgressMonitors.java:33:55: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:38:24: compiler.warn.proc.messager: no comment
+ProgressMonitors.java:41:35: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:47:25: compiler.warn.proc.messager: no @param for monitor
+ProgressMonitors.java:47:25: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:54:24: compiler.warn.proc.messager: no comment
+ProgressMonitors.java:63:25: compiler.warn.proc.messager: no comment
+ProgressMonitors.java:73:35: compiler.warn.proc.messager: no comment
+Consumer.java:69:18: compiler.warn.proc.messager: no @param for value
+Consumer.java:69:18: compiler.warn.proc.messager: no @param for monitor
+Function.java:102:15: compiler.warn.proc.messager: no @param for value
+Function.java:102:15: compiler.warn.proc.messager: no @param for monitor
+Function.java:102:15: compiler.warn.proc.messager: no @return
+Supplier.java:51:15: compiler.warn.proc.messager: no @param for monitor
+Supplier.java:51:15: compiler.warn.proc.messager: no @return
+- compiler.err.warnings.and.werror
+1 error
+17 warnings

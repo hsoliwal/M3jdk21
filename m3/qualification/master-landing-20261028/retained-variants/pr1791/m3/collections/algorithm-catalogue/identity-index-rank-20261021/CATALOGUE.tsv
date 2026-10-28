@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors.
+category	candidate	source	license	complexity	contract_fit	decision	rationale
+IDENTITY_ARRAY_INDEX	Current M3IndexPathRank explicit identity rows	M3JDK21 master	First-party Apache-2.0	O(n) row copy + O(n/64) bitmap	REFERENCE	BASELINE	Snapshot owns int[n] identities and cloned int[n] rows; same integer ordinal appears twice
+IDENTITY_ARRAY_INDEX	Implicit ordinal + compact word bitmap	M3JDK21 source-sealed recipe	First-party Apache-2.0	O(n) bitmap build + O(n/64) retained words	EXACT_BOUNDED	SELECT	Remove both retained redundant identity int arrays; preserve selection and windows
+IMMUTABLE_RANK_SELECT	Existing M3IndexPathRank wordPrefix	M3JDK21 master	First-party Apache-2.0	O(1) rank + O(log(n/64)+64) select	EXACT	REUSE	No new Fenwick tree or per-entry objects
+JNI_MASK_SELECTOR	Existing M3IndexPathMasks JNI	M3JDK21 product C/Java	First-party Apache-2.0	O(n) JNI primitive mask compaction	UNCHANGED	REUSE	Construct JNI identity IDs only when native is explicitly requested; compare Java oracle
+PREFIX_SUM	LeetCode 303	https://leetcode.com/problems/range-sum-query-immutable/	Reference only	O(n) prep + O(1) queries	ANALOGY	CATALOGUE_ONLY	Concept supports existing immutable word-prefix counts; no copied challenge code
+BINARY_SEARCH	LeetCode 34	https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/	Reference only	O(log n)	ANALOGY	CATALOGUE_ONLY	Already used in rank-to-word selection; no import
+SPARSE_COUNTS	HackerRank Sparse Arrays	https://www.hackerrank.com/challenges/sparse-arrays/problem	Reference only	Unrelated string count	NOT_APPLICABLE	REJECT	Not an occurrence rank and bitmap ownership contract
+BIT_VECTOR	GeeksforGeeks rightmost set bit	https://www.geeksforgeeks.org/dsa/position-of-rightmost-set-bit/	Reference only	O(1) word bit operations	PARTIAL	CATALOGUE_ONLY	Existing Java Long.numberOfTrailingZeros and bitCount cover this
+BITSET	OpenJDK java.util.BitSet	https://github.com/openjdk/jdk/blob/jdk-21%2B35/src/java.base/share/classes/java/util/BitSet.java	GPLv2 with Classpath exception	O(n/64) state	ALGORITHM_REFERENCE	NO_COPY	No GPL source transplanted and no different bitmap owner
+DYNAMIC_RANK	LeetCode 307	https://leetcode.com/problems/range-sum-query-mutable/	Reference only	O(log n) update	NOT_APPLICABLE	REJECT	The target rank is an immutable snapshot

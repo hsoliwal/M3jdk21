@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+# Configuration examples using pinned existing OpenRewrite 8.17.1 Recipes.
+# SOURCE_INSPECTED_NOT_RUN. Synthetic paths only. No target-code generation.
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.agent.DocumentationFieldRegex20261020
+displayName: Normalize a field in one selected documentation fixture
+description: Demonstrates an exact-file scoped Java-regex replacement with existing options.
+recipeList:
+  - org.openrewrite.text.FindAndReplace:
+      find: '^OLD_LABEL: (.*)$'
+      replace: 'LABEL: $1'
+      regex: true
+      caseSensitive: true
+      multiline: true
+      dotAll: false
+      filePattern: agent-recipe-fixtures/README.md
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.agent.DocumentationFolderSearch20261020
+displayName: Find TODO markers under a selected documentation fixture folder
+description: Demonstrates a folder glob using the existing text search recipe.
+recipeList:
+  - org.openrewrite.text.Find:
+      find: 'TODO\([^)]*\)'
+      regex: true
+      caseSensitive: true
+      multiline: false
+      dotAll: false
+      filePattern: agent-recipe-fixtures/docs/**
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.agent.AnnotationAttributeFixture20261020
+displayName: Update one selected annotation attribute fixture
+description: Demonstrates an ordinary edit-visitor file precondition and actual annotation options.
+preconditions:
+  - org.openrewrite.FindSourceFiles:
+      filePattern: agent-recipe-fixtures/java/Example.java
+recipeList:
+  - org.openrewrite.java.AddOrUpdateAnnotationAttribute:
+      annotationType: com.example.ExampleAnnotation
+      attributeName: value
+      attributeValue: replacement
+      addOnly: false
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.agent.JavaCleanupFixture20261020
+displayName: Clean imports and format a selected Java fixture folder
+description: Demonstrates ordered AST composition with an ordinary edit-visitor file fence.
+preconditions:
+  - org.openrewrite.FindSourceFiles:
+      filePattern: agent-recipe-fixtures/java/**
+recipeList:
+  - org.openrewrite.java.RemoveUnusedImports
+  - org.openrewrite.java.OrderImports:
+      removeUnused: true
+  - org.openrewrite.java.format.AutoFormat

@@ -23,7 +23,6 @@ import java.nio.file.AccessMode;
 import java.util.Arrays;
 import java.util.Objects;
 
-import org.apache.commons.lang3.ArraySorter;
 
 /**
  * An enumerated type representing the modes of a random access content.
@@ -76,11 +75,16 @@ public enum RandomAccessMode {
         if (accessModes.length == 0) {
             throw new IllegalArgumentException("Empty AccessMode[].");
         }
-        final AccessMode[] modes = ArraySorter.sort(accessModes.clone());
-        if (Arrays.binarySearch(modes, AccessMode.WRITE) >= 0) {
+        // Original sorted search semantics with no sort and no cloned payload.
+        // Null elements still fail before selection, and EXECUTE alone is rejected.
+        int modeMask = 0;
+        for (final AccessMode mode : accessModes) {
+            modeMask |= 1 << mode.ordinal();
+        }
+        if ((modeMask & (1 << AccessMode.WRITE.ordinal())) != 0) {
             return READWRITE;
         }
-        if (Arrays.binarySearch(modes, AccessMode.READ) >= 0) {
+        if ((modeMask & (1 << AccessMode.READ.ordinal())) != 0) {
             return READ;
         }
         throw new IllegalArgumentException(Arrays.toString(accessModes));

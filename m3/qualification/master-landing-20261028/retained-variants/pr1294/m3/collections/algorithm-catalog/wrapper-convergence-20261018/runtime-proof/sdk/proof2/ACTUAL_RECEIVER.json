@@ -1,0 +1,24 @@
+{
+  "receiver_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "check": {
+    "dataset": "m3jdk21-wrapper-proof2-20261018",
+    "targets": 3,
+    "changes": 3,
+    "mode": "check",
+    "actual_sdk_results": true
+  },
+  "first": {
+    "dataset": "m3jdk21-wrapper-proof2-20261018",
+    "targets": 3,
+    "changes": 3,
+    "mode": "apply",
+    "actual_sdk_results": true
+  },
+  "fixed_point": {
+    "dataset": "m3jdk21-wrapper-proof2-20261018",
+    "targets": 3,
+    "changes": 0,
+    "mode": "apply",
+    "actual_sdk_results": true
+  }
+}

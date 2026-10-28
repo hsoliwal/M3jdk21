@@ -1,0 +1,194 @@
+{
+  "status": "PASS_INDEPENDENT_RECIPE_REPAIRED_DEFAULT_TEST_AND_SDK_MAIN_JAVA_ONLY",
+  "RESULT": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\RESULT.json",
+    "bytes": 47104,
+    "sha256": "28d9b59798332fd8d405aadf90f22bd59d5353fbd037de5e46dbb120d39c53ae"
+  },
+  "PLAN": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-execution-prep-k-v1\\PLAN.json",
+    "bytes": 36076,
+    "sha256": "7332b0ef72cd3487659681942ecf3bda60211f885cafa1f761ee9ac62224ff3f"
+  },
+  "runner": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-execution-prep-k-v1\\run_repaired.py",
+    "bytes": 33364,
+    "sha256": "9b24a4043f87b31e0a83cd29a40a76f47b8eebfd44dab6854997e41ed1d17757"
+  },
+  "sources": {
+    "files": 553,
+    "bytes": 3870608,
+    "unchanged_non_POM": 552,
+    "POM_added_bytes": 62,
+    "qualified_POM": {
+      "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\pom.xml",
+      "bytes": 12031,
+      "sha256": "31b3f083fd171e698ef3f4e07ad2e2fcca82250b157971afe7e5388c8bcd0923"
+    }
+  },
+  "target": {
+    "files": 1181,
+    "bytes": 8713911,
+    "classes": 888,
+    "rows_sha256": "113ec7f05e173392494e49601669285be032abacde056c32d8bda76de09c8276"
+  },
+  "major65_classes": {
+    "main": 507,
+    "test": 381
+  },
+  "resources_columns": [
+    "path",
+    "bytes",
+    "sha256"
+  ],
+  "Maven_resources": [
+    [
+      "target/classes/META-INF/LICENSE",
+      11358,
+      "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    ],
+    [
+      "target/classes/META-INF/NOTICE",
+      423,
+      "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb"
+    ],
+    [
+      "target/classes/META-INF/provenance.json",
+      15745,
+      "f9cca1ebfcd08a85e1099d536b59bf917ff5b95080daecf441eb9f14a5f38936"
+    ],
+    [
+      "target/classes/META-INF/synexia-donation.json",
+      65725,
+      "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964"
+    ],
+    [
+      "target/classes/META-INF/name-mapping.json",
+      62659,
+      "da59070b84c0603e48ac2f2538b8b94ed64b1738e9e6a5f41647839e3fe66985"
+    ],
+    [
+      "target/classes/META-INF/SYNEXIA-DONATION-NOTICE.txt",
+      1831,
+      "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556"
+    ],
+    [
+      "target/classes/META-INF/NETBEANS-NOTICE.txt",
+      1028,
+      "88b6f1f16df90583111f75cb4cda5e3431b8797e59f09d2dd299e0ee1de9fa54"
+    ],
+    [
+      "target/classes/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
+      11184,
+      "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313"
+    ]
+  ],
+  "historical_cohorts_verified": [
+    {
+      "role": "entire_source_and_retained_target",
+      "rows_sha256": "129f6e5a070d69516b0aee4023701c1f9a7b4af8292b3c6a8ad57e96dbd1da17"
+    },
+    {
+      "role": "original_module_proof_receipts",
+      "rows_sha256": "74005e23d83789bad06b0d6cac58cb1dec8b16e49a39d019430cd43b1e3f552f"
+    },
+    {
+      "role": "original_failed_SDK_main_proof",
+      "rows_sha256": "fc3b617d72cf4213843f33e19bb5bf55f58b3e9915331c39f23ebd9c30bc2f24"
+    }
+  ],
+  "reports": {
+    "XML": 139,
+    "bytehashes_verified": 139,
+    "tests": {
+      "tests": 467,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "executed": 465
+    },
+    "exact_existing_JNI_assumption_cases": [
+      [
+        "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "allNativeBackendsAreRequiredByTheFullLane",
+        "org.opentest4j.TestAbortedException"
+      ],
+      [
+        "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "maskSpanCheckedJniOracle",
+        "org.opentest4j.TestAbortedException"
+      ]
+    ]
+  },
+  "native_jobs": [
+    {
+      "phase": "properties",
+      "pid": 45624,
+      "birth": "134370226352638031",
+      "exitcode": 0,
+      "physical_closed": true,
+      "receipt_sha256": "72bfcd8805f888c39dab463d45540977d8f72f05b513395b6ebe6fef085c4cb2",
+      "receipt_bytes": 452
+    },
+    {
+      "phase": "test",
+      "pid": 43196,
+      "birth": "134370226420940074",
+      "exitcode": 0,
+      "physical_closed": true,
+      "receipt_sha256": "a22e90e3c07f676e20b0dd01cf4760f038546d28d12d198079854c6f8239fe7e",
+      "receipt_bytes": 452
+    },
+    {
+      "phase": "main",
+      "pid": 22832,
+      "birth": "134370227441080050",
+      "exitcode": 0,
+      "physical_closed": true,
+      "receipt_sha256": "a2dcdc402d78308efc82301b2c261a5b4ccb4ae8351410437a600cf7842742cb",
+      "receipt_bytes": 452
+    }
+  ],
+  "SDK_main": {
+    "checks": 42897,
+    "actual_JNI": false,
+    "log_bytes": 3386,
+    "log_sha256": "27a974b9624ff9e743e5e973df39b37b33b8b087672f2e67234e1c5d7fc1630b",
+    "actual_classpath": [
+      "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\target\\test-classes",
+      "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\target\\classes"
+    ]
+  },
+  "compilation_log_lines": [
+    "[INFO] Compiling 268 source files with javac [debug release 21] to target\\classes",
+    "[INFO] Compiling 259 source files with javac [debug release 21] to target\\test-classes"
+  ],
+  "global_SDK_JNI_or_JAR_admission": false,
+  "policy_inputs": [
+    {
+      "path": "C:\\Users\\hsoliwal\\.codex\\M3_COLLECTION_JNI_ARRAY_STORAGE.md",
+      "bytes": 8025,
+      "sha256": "bf65ac8ff88658be235cb39cb3cbc34bbbdaf2a20d681a656989a8a28ba2989a"
+    },
+    {
+      "path": "K:\\codex-work\\DEVELOPMENT_CONTROL.md",
+      "bytes": 5067,
+      "sha256": "343970ba4da568a4f4335924f2fdf02fe2bdf225d359bcba93392f9f525ab8fb"
+    }
+  ],
+  "policy_id": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
+  "native_search_scope": "Same default paths in stock probe,139XML and SDK main; ten named DLL candidates absent only in bounded allowed directories.",
+  "actual_project_graph_sha256": "9454713dab5a7ef06029b3e46952b71ddca84dc490322adaa7ff534bd123eb0e",
+  "actual_default_plugin_realms": 3,
+  "provider_test_classpaths_and_actual_Surefire_fork_bound": true,
+  "raw_earlier_HOLD_and_SDK_negative_preserved": true,
+  "tests_or_jobs_replayed": 0,
+  "limits": [
+    "Finite Java-only default lifecycle and existing SDK main; no package/distributed JAR built.",
+    "Unconnected Java-only backing paths and JNI allocation/overflow/GC ownership integration remain pending.",
+    "M3LFUCache API projections still need donor ownership,identity,mutability,liveness proof; no blanket cache ban.",
+    "No fullSDK/superset/GUI/performance/live-merge/String-phase admission or wholeOS write audit."
+  ],
+  "global_bytes_before_final_review": 81392078,
+  "runtime_root_bytes": 13197723
+}

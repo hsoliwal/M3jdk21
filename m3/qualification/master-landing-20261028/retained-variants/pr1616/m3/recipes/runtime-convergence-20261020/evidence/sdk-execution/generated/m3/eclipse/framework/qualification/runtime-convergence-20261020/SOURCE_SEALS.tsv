@@ -1,0 +1,12 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+# target_java_path	sha256
+m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseBundleSnapshot.java	361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea
+m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseExtensionSnapshot.java	4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963
+m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseIndexedSnapshot.java	fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313
+m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java	94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c
+m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java	1c9b9dd3132e06ccb16c8a4a5e976517581d373581bc3c112b58e5f9bed5fbef
+m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeServices.java	f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea
+m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java	2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781
+m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseEquinoxLifecycleTest.java	a1979168639d7e87d96f63b92d8a741f92449090d10b27cbb0b9785a8595a5ef
+m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java	cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51
+m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java	dec1b59d74df3b42663a6d381cee0e0f8aeb4fc1ec0c5a3b261739f6402381eb

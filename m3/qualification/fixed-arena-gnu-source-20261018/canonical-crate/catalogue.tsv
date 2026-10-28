@@ -1,0 +1,3 @@
+problem_category	candidate	decision	correctness	compatibility	complexity	performance	license_and_attribution
+C-feature-macro-build	Conditional _GNU_SOURCE definition on the existing native owner	SELECT	Six SDK groups and strict whole-owner macro matrix; three byte-identical objects	Same translation unit and JNI signatures; warning gates retained	Preprocessing-only O(1) guard	No runtime instruction change in qualified configurations	Existing M3JDK21 GPL-2.0-only WITH Classpath-exception-2.0 owner; Apache-2.0 recipe/tooling
+C-feature-macro-build	Disable macro-redefinition warnings or remove Werror	REJECT	Would conceal an avoidable build defect	Changes the build acceptance contract	Not applicable	No runtime benefit	No donor source copied

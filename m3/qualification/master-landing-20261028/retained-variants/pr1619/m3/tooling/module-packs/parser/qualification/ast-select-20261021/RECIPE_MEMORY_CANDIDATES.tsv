@@ -1,0 +1,3 @@
+trigger	observed	atom	guard	lesson	status
+review	A naïve global integer interval would include siblings because original AST nodes can be appended under an earlier parent after unrelated rows	M3ASTIndex.selectedSubtree	M3ASTSelectionContract#directed	Use original first/next/parent coordinates, not an arbitrary numeric range; preserve original subtree order	CANDIDATE_HOSTED_GATE_PENDING
+review	Repeated parser-specific AST node filtering can retain copied node-object lists	M3ASTIndex.selectedNodes	M3ASTSelectionContract#randomized	Use primitive read-only streams or direct IntConsumer on the original indexed source generation	CANDIDATE_HOSTED_GATE_PENDING

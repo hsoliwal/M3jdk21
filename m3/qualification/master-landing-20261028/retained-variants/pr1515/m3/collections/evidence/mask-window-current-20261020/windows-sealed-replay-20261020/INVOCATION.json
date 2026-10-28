@@ -1,0 +1,104 @@
+{
+  "schema": "synexia.m3jdk21.sealed-replay.invocation.v1",
+  "role": "Selection/evidence sidecar, not a new registered executor",
+  "owner": "com.synexia.rewrite.SealReplay",
+  "args": [
+    "check|apply",
+    "SOURCE_ROOT",
+    "RESOURCE_DIRECTORY"
+  ],
+  "options": {},
+  "scope": "Exactly five source-sealed manifest paths; no independent file/folder flag.",
+  "source_commit": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+  "canonical_source_commit": "f188e2af9117f0a0126b70aec3f87bb4489cbf42",
+  "proof_status": "PASS_EXISTING_SEAL_REPLAY_EXACT_IMAGES_AND_REFUSAL",
+  "result_sha256": "8cfb2705c7d4766bf25120a64058fefc22f1bc55e1c1940fc561adbc1e8e0704",
+  "actions": [
+    {
+      "id": "compile",
+      "plan_pointer": "/commands/0",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "current-check",
+      "plan_pointer": "/commands/1",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "baseline-check",
+      "plan_pointer": "/commands/2",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "baseline-apply",
+      "plan_pointer": "/commands/3",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "baseline-fixed-check",
+      "plan_pointer": "/commands/4",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "baseline-fixed-apply",
+      "plan_pointer": "/commands/5",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "drift-refusal-apply",
+      "plan_pointer": "/commands/6",
+      "expected_exitcode": 1
+    },
+    {
+      "id": "java-before-check",
+      "plan_pointer": "/commands/7",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "java-before-apply",
+      "plan_pointer": "/commands/8",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "java-before-fixed-check",
+      "plan_pointer": "/commands/9",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "c-before-check",
+      "plan_pointer": "/commands/10",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "c-before-apply",
+      "plan_pointer": "/commands/11",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "c-before-fixed-check",
+      "plan_pointer": "/commands/12",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "proof-absent-check",
+      "plan_pointer": "/commands/13",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "proof-absent-apply",
+      "plan_pointer": "/commands/14",
+      "expected_exitcode": 0
+    },
+    {
+      "id": "proof-absent-fixed-check",
+      "plan_pointer": "/commands/15",
+      "expected_exitcode": 0
+    }
+  ],
+  "limitations": [
+    "No OpenRewrite/Maven SDK run",
+    "No general scope/DAG dispatcher",
+    "No full-JDK or performance admission",
+    "Global STRING phase unchanged"
+  ]
+}

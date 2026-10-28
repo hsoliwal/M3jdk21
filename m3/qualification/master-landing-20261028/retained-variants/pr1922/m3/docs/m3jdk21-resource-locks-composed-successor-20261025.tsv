@@ -1,0 +1,2 @@
+# source-path	historical-sha256	composed-current-sha256	original-recipe-PR	additive-donor-PR	merged-product-PR	composed-receiving-recipe	status
+m3/file/src/main/java/com/m3/file/M3ResourceLocks.java	18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599	eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718	hsoliwal/com.synexia#12951	hsoliwal/com.synexia#12842	hsoliwal/M3jdk21#1821	com.synexia.rewrite.M3Jdk21ResourceLocksComposedSuccessor	PENDING_RECIPE_AND_PRODUCT_CI

@@ -1,0 +1,24 @@
+$ ["/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn", "-B", "-ntp", "-s", "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml", "-U", "-Dmaven.repo.local=/tmp/m3-build-m2", "-f", "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/apiguardian-api/pom.xml", "-DskipTests", "install"]
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.apiguardian:apiguardian-api >-------------------
+[INFO] Building apiguardian-api 1.1.2 - unchanged upstream source build for M3jdk21 1.1.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.496 s
+[INFO] Finished at: 2026-10-21T02:01:52+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Plugin org.apache.maven.plugins:maven-compiler-plugin:3.15.0 or one of its dependencies could not be resolved:
+[ERROR] 	The following artifacts could not be resolved: org.apache.maven.plugins:maven-compiler-plugin:pom:3.15.0 (absent): Could not transfer artifact org.apache.maven.plugins:maven-compiler-plugin:pom:3.15.0 from/to central (https://repo.maven.apache.org/maven2): (certificate_unknown) PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException
+
+EXIT 1

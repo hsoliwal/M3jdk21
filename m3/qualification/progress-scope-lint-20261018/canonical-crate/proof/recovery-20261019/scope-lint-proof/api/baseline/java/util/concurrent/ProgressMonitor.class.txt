@@ -1,0 +1,12 @@
+public interface java.util.concurrent.ProgressMonitor {
+  public static final long UNKNOWN_WORK;
+  public static final java.util.concurrent.ProgressMonitor NONE;
+  public default void begin(java.lang.String, long);
+  public default void worked(long);
+  public default void message(java.lang.String);
+  public default boolean isCancelled();
+  public default void cancel();
+  public default void done();
+  public default void checkCancelled();
+  public default java.util.concurrent.ProgressMonitor child(java.lang.String, long, long);
+}

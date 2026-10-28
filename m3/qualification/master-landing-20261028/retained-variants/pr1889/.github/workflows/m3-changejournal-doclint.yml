@@ -1,0 +1,90 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Full original M3JDK21 source image build with Java warnings as errors preserved.
+name: M3JDK21 strict ChangeJournal docs and regex source image
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/ChangeJournal.java'
+      - '.github/workflows/m3-changejournal-doclint.yml'
+      - 'm3/qualification/changejournal-doclint/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-jdk-strict-doclint:
+    if: github.repository == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 110
+    steps:
+      - name: Checkout complete M3JDK21 source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          lfs: false
+          submodules: false
+          persist-credentials: false
+      - name: Select Java 21 bootstrap
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact Javadoc-only current source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          target = Path('src/java.base/share/classes/java/util/ChangeJournal.java')
+          expected = '7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203'
+          if not target.is_file() or target.is_symlink():
+              raise SystemExit('MISSING_CHANGEJOURNAL_OWNER')
+          actual = hashlib.sha256(target.read_bytes()).hexdigest()
+          if actual != expected:
+              raise SystemExit('SOURCE_HASH_MISMATCH '+actual)
+          print('SOURCE_SEALED', actual)
+          PY
+      - name: Install JDK21 native build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev \
+            libxrandr-dev libxi-dev libice-dev libsm-dev
+      - name: Configure strict original JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release --with-jvm-variants=server \
+            --enable-headless-only --disable-warnings-as-errors \
+            --with-freetype=bundled --with-jobs=2
+      - name: Build real M3JDK21 image without disabling javac warning errors
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Disable optional javac server only; do NOT unset JAVA_WARNINGS_ARE_ERRORS.
+          make images JOBS=2 ENABLE_JAVAC_SERVER=false
+      - name: Verify original regex and journal classes on produced image
+        shell: bash
+        run: |
+          set -euo pipefail
+          java_path="$(find build -mindepth 3 -maxdepth 9 -type f -path '*/images/jdk/bin/java' -print -quit)"
+          if [[ -z "$java_path" ]]; then
+            echo 'NO_JDK_IMAGE'
+            exit 1
+          fi
+          home="$(dirname "$(dirname "$java_path")")"
+          "$home/bin/java" -version
+          out="$RUNNER_TEMP/m3-jdk-doclint"
+          mkdir -p "$out"
+          "$home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            -d "$out" test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java
+          for mode in -Xint -Xmixed; do
+            "$home/bin/java" "$mode" --add-opens java.base/java.util.regex=ALL-UNNAMED \
+              -cp "$out" M3RegexFrontierShortCircuitTest
+          done
+          echo 'STRICT_JAVA_DOCS_SOURCE_BUILT_REGEX_PASS_ONLY'

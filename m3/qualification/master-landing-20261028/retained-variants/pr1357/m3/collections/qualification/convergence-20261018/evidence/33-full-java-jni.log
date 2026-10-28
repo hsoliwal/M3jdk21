@@ -1,0 +1,1085 @@
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/verify_source.py
+{"coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "277a7a4315412817beb6655b324dc7276621e95ebff00b8bf65e17a27b685e2d"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.apiguardian:apiguardian-api >-------------------
+[INFO] Building apiguardian-api 1.1.2 - unchanged upstream source build for M3jdk21 1.1.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ apiguardian-api ---
+[INFO] Copying 1 resource from src/main/resources/META-INF to target/classes/META-INF/third-party/apiguardian-api
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from  to target/classes/META-INF/third-party/apiguardian-api
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ apiguardian-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ apiguardian-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ apiguardian-api ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ apiguardian-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ apiguardian-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ apiguardian-api ---
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ apiguardian-api ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/apiguardian/apiguardian-api/1.1.2-m3-source-1/apiguardian-api-1.1.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/apiguardian/apiguardian-api/1.1.2-m3-source-1/apiguardian-api-1.1.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.102 s
+[INFO] Finished at: 2026-10-18T16:15:49+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar
+{"artifact_sha256": "ba7c3e7d95190d0c71e20f4a144db0193b5f60b8ee5b6f3a52ea98dfee81f5cd", "coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "277a7a4315412817beb6655b324dc7276621e95ebff00b8bf65e17a27b685e2d"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/verify_source.py
+{"coordinate": "org.opentest4j:opentest4j:1.3.0-m3-source-1", "exact_files": 16, "exact_production_files": 8, "sources_jar_sha256": "724a24e3a68267d5ebac9411389a15638a71e50c62448ffa58f59c34d5c1ebb2"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< org.opentest4j:opentest4j >----------------------
+[INFO] Building opentest4j 1.3.0 - unchanged upstream source build for M3jdk21 1.3.0-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ opentest4j ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/opentest4j
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ opentest4j ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ opentest4j ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ opentest4j ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ opentest4j ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ opentest4j ---
+[INFO] 
+[INFO] --- moditect:1.2.2.Final:add-module-info (add-module-info-root) @ opentest4j ---
+[WARNING]  Parameter 'version' is read-only, must not be used in configuration
+[WARNING] File opentest4j-1.3.0-m3-source-1.jar is already modular
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ opentest4j ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/opentest4j/opentest4j/1.3.0-m3-source-1/opentest4j-1.3.0-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/opentest4j/opentest4j/1.3.0-m3-source-1/opentest4j-1.3.0-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.919 s
+[INFO] Finished at: 2026-10-18T16:15:52+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar
+{"artifact_sha256": "66a7c8806da979b5e67cd2d417f7742aca2c5c3ee5e4be13f492699852c9232a", "coordinate": "org.opentest4j:opentest4j:1.3.0-m3-source-1", "exact_files": 16, "exact_production_files": 8, "sources_jar_sha256": "724a24e3a68267d5ebac9411389a15638a71e50c62448ffa58f59c34d5c1ebb2"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/verify_source.py
+{"coordinate": "com.univocity:univocity-parsers:2.9.1-m3-source-1", "exact_files": 221, "exact_production_files": 216, "sources_jar_sha256": "484a48fa4a9587a47893f4a332cbe09c2902091b7a647c5d04258a46166c891b"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.univocity:univocity-parsers >-------------------
+[INFO] Building univocity-parsers 2.9.1 - unchanged upstream source build for M3jdk21 2.9.1-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ univocity-parsers ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/resources
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/univocity-parsers
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ univocity-parsers ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ univocity-parsers ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ univocity-parsers ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ univocity-parsers ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ univocity-parsers ---
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ univocity-parsers ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/com/univocity/univocity-parsers/2.9.1-m3-source-1/univocity-parsers-2.9.1-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/com/univocity/univocity-parsers/2.9.1-m3-source-1/univocity-parsers-2.9.1-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.031 s
+[INFO] Finished at: 2026-10-18T16:15:54+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar
+{"artifact_sha256": "ee2bb8eeedac6ae8c9a3276015be4ce39f8d92889926dc38bf538e2fc3c413f2", "coordinate": "com.univocity:univocity-parsers:2.9.1-m3-source-1", "exact_files": 221, "exact_production_files": 216, "sources_jar_sha256": "484a48fa4a9587a47893f4a332cbe09c2902091b7a647c5d04258a46166c891b"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py
+{"coordinate": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1", "exact_files": 50, "exact_production_files": 41, "sources_jar_sha256": "e1435cf8f4843619a16c2c1393d39a5170db1376af048a76cdcd7bf9aad72ad6"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< org.junit.platform:junit-platform-commons >--------------
+[INFO] Building junit-platform-commons 1.10.2 - unchanged upstream source build for M3jdk21 1.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-platform-commons ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-platform-commons-1.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-platform-commons ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (multi-release-9) @ junit-platform-commons ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-platform-commons ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-platform-commons ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-platform-commons ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-platform-commons ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-platform-commons ---
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-platform-commons ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.068 s
+[INFO] Finished at: 2026-10-18T16:15:56+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar
+{"artifact_sha256": "af305e9f7a9b0ecc194a7da61fee67adb6f47cb126c54d4677b7c5832253718e", "coordinate": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1", "exact_files": 50, "exact_production_files": 41, "sources_jar_sha256": "e1435cf8f4843619a16c2c1393d39a5170db1376af048a76cdcd7bf9aad72ad6"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py
+{"coordinate": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1", "exact_files": 104, "exact_production_files": 97, "sources_jar_sha256": "17ac74964fcd82c57130623afe72a99105ca107fc96cb53f169b3a8c9c444c83"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< org.junit.platform:junit-platform-engine >--------------
+[INFO] Building junit-platform-engine 1.10.2 - unchanged upstream source build for M3jdk21 1.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-platform-engine ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-platform-engine-1.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-platform-engine ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-platform-engine ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-platform-engine ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-platform-engine ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-platform-engine ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-platform-engine ---
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-platform-engine ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-engine/1.10.2-m3-source-1/junit-platform-engine-1.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-engine/1.10.2-m3-source-1/junit-platform-engine-1.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.095 s
+[INFO] Finished at: 2026-10-18T16:15:59+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar
+{"artifact_sha256": "343be4788be179a6fd99467dc36f7e5c398b90a931be13bc78aacf6a7acf065d", "coordinate": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1", "exact_files": 104, "exact_production_files": 97, "sources_jar_sha256": "17ac74964fcd82c57130623afe72a99105ca107fc96cb53f169b3a8c9c444c83"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py
+{"coordinate": "org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1", "exact_files": 88, "exact_production_files": 80, "sources_jar_sha256": "d3c84fbec86b224e0d2bd49e9335978bdeb6aead9f17cbee4f0e2e8885c7ab89"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-launcher-1.10.2/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< org.junit.platform:junit-platform-launcher >-------------
+[INFO] Building junit-platform-launcher 1.10.2 - unchanged upstream source build for M3jdk21 1.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-platform-launcher ---
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-platform-launcher-1.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-platform-launcher ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 80 source files with javac [debug release 8] to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-platform-launcher ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-platform-launcher ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-launcher-1.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-platform-launcher ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-platform-launcher ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-platform-launcher ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-launcher-1.10.2/target/junit-platform-launcher-1.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-platform-launcher ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-launcher-1.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-launcher/1.10.2-m3-source-1/junit-platform-launcher-1.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-launcher-1.10.2/target/junit-platform-launcher-1.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/platform/junit-platform-launcher/1.10.2-m3-source-1/junit-platform-launcher-1.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.895 s
+[INFO] Finished at: 2026-10-18T16:16:03+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-platform-launcher-1.10.2/target/junit-platform-launcher-1.10.2-m3-source-1.jar
+{"artifact_sha256": "e45378f173bd4c46f1f6025b94d2e931e3439b621b6429344c3883e508e4ce3c", "coordinate": "org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1", "exact_files": 88, "exact_production_files": 80, "sources_jar_sha256": "d3c84fbec86b224e0d2bd49e9335978bdeb6aead9f17cbee4f0e2e8885c7ab89"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py
+{"coordinate": "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1", "exact_files": 157, "exact_production_files": 148, "sources_jar_sha256": "551e054c2e84b79d087f0410c8e6e3dd3e83ae54129593380d48550da441b5ef"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< org.junit.jupiter:junit-jupiter-api >-----------------
+[INFO] Building junit-jupiter-api 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- kotlin:1.8.22:compile (kotlin-compile) @ junit-jupiter-api ---
+[WARNING] Language version 1.3 is deprecated and its support will be removed in a future version of Kotlin
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-jupiter-api ---
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-jupiter-api-5.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-jupiter-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-jupiter-api ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-api ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-jupiter-api ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2-m3-source-1/junit-jupiter-api-5.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2-m3-source-1/junit-jupiter-api-5.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.927 s
+[INFO] Finished at: 2026-10-18T16:16:11+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar
+{"artifact_sha256": "ea4eb4009b729ada63b9e7205ff61dc8e9d05d434b1ef8c1f8bc7e2747f6d45e", "coordinate": "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1", "exact_files": 157, "exact_production_files": 148, "sources_jar_sha256": "551e054c2e84b79d087f0410c8e6e3dd3e83ae54129593380d48550da441b5ef"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py
+{"coordinate": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1", "exact_files": 70, "exact_production_files": 60, "sources_jar_sha256": "532dce2ef436152405567ea75f076dc908c4d21641224ecc53913c9f09bfb131"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< org.junit.jupiter:junit-jupiter-params >---------------
+[INFO] Building junit-jupiter-params 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- kotlin:1.8.22:compile (kotlin-compile) @ junit-jupiter-params ---
+[WARNING] Language version 1.3 is deprecated and its support will be removed in a future version of Kotlin
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-jupiter-params ---
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-jupiter-params-5.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-params ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-jupiter-params ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-params ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-params ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-params ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- shade:3.6.0:shade (default) @ junit-jupiter-params ---
+[INFO] Including com.univocity:univocity-parsers:jar:2.9.1-m3-source-1 in the shaded jar.
+[INFO] Excluding org.apiguardian:apiguardian-api:jar:1.1.2-m3-source-1 from the shaded jar.
+[INFO] Excluding org.junit.jupiter:junit-jupiter-api:jar:5.10.2-m3-source-1 from the shaded jar.
+[INFO] Excluding org.opentest4j:opentest4j:jar:1.3.0-m3-source-1 from the shaded jar.
+[INFO] Excluding org.junit.platform:junit-platform-commons:jar:1.10.2-m3-source-1 from the shaded jar.
+[INFO] Dependency-reduced POM written at: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/dependency-reduced-pom.xml
+[WARNING] junit-jupiter-params-5.10.2-m3-source-1.jar, univocity-parsers-2.9.1-m3-source-1.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar with /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1-shaded.jar
+[INFO] 
+[INFO] --- moditect:1.2.2.Final:add-module-info (add-module-info-root) @ junit-jupiter-params ---
+[WARNING]  Parameter 'version' is read-only, must not be used in configuration
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-jupiter-params ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/dependency-reduced-pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2-m3-source-1/junit-jupiter-params-5.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2-m3-source-1/junit-jupiter-params-5.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.900 s
+[INFO] Finished at: 2026-10-18T16:16:24+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar
+{"artifact_sha256": "d40b8dd864ba63f30d85cf769e429d78b4e82f335dfaf4df51ce3b93058c32ec", "coordinate": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1", "exact_files": 70, "exact_production_files": 60, "sources_jar_sha256": "532dce2ef436152405567ea75f076dc908c4d21641224ecc53913c9f09bfb131"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py
+{"coordinate": "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1", "exact_files": 108, "exact_production_files": 100, "sources_jar_sha256": "00ffb37a2d4a1f5ab224c4cf44b2d050b3d132ca650e9c4251605daf9cd6da9b"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< org.junit.jupiter:junit-jupiter-engine >---------------
+[INFO] Building junit-jupiter-engine 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-jupiter-engine ---
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-jupiter-engine-5.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-engine ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-jupiter-engine ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-jupiter-engine ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-engine ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-engine ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-engine ---
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-jupiter-engine ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2-m3-source-1/junit-jupiter-engine-5.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2-m3-source-1/junit-jupiter-engine-5.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.394 s
+[INFO] Finished at: 2026-10-18T16:16:30+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar
+{"artifact_sha256": "b206e68c27ca6357fa5fa5325fb2f7bf232a089ee7e953450f000a0ae6730fb0", "coordinate": "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1", "exact_files": 108, "exact_production_files": 100, "sources_jar_sha256": "00ffb37a2d4a1f5ab224c4cf44b2d050b3d132ca650e9c4251605daf9cd6da9b"}
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+{"coordinate": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "bd628b06b83b0d8830b53747b7f466beebca12d4808f117660ac06e47af99d1c"}
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/pom.xml -DskipTests install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.junit.jupiter:junit-jupiter >-------------------
+[INFO] Building junit-jupiter 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-jupiter ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-jupiter-5.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-jupiter ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter ---
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ junit-jupiter ---
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/pom.xml to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar to /workspace/scratch/8cbeab1c181e/tooling/maven-repository/org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.324 s
+[INFO] Finished at: 2026-10-18T16:16:34+04:00
+[INFO] ------------------------------------------------------------------------
++ python3 /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py /workspace/scratch/8cbeab1c181e/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+{"artifact_sha256": "63ecd9ac1a7028852138acad2a097316fd57eb7bc3ac989d57e695ce3aea73df", "coordinate": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "bd628b06b83b0d8830b53747b7f466beebca12d4808f117660ac06e47af99d1c"}
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac --release 21 -Xlint:all,-module -Werror -Xpkginfo:always -h /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -d /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/classes @/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/main.args
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskCompactor.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_mask_compactor.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskWindow.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_window.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_mask_window.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_mask_compactor.c.o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_mask_window.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_mask.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexPathMasks.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_index_path_masks.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_path_masks.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_path_masks.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_pathmask.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongAddressKernel.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_long_address_kernel.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_address_kernel.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_address_kernel.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_address.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3SpanIndex.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_span_index_jni.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_span_index_jni.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_span_index_jni.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_span.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3StateMaskHistogram.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_state_mask_histogram.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_state_mask_histogram.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_state_mask_histogram.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_statehist.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongRankBatchNative.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_rank_batch_jni.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_rank_batch_jni.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3rankbatch.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3SignalOrderNative.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_signal_order_jni.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_signal_order_jni.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_signal_order_jni.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3signalorder.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3ResidencyStateMaskIndex.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_residency_state_mask.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_residency_state_mask.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/m3_residency_state_mask.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3_residency_state_mask.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3BitLane28.h -c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/segmented_bit_lane.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/segmented_bit_lane.c.o
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/segmented_bit_lane.c.o -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3bitlane.so
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac --release 21 -Xlint:all,-module -Werror -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/classes -h /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -d /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/fixture-classes /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/test/java/com/m3/collections/M3BitLaneJumpProof.java
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers -shared -fPIC -include /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3BitLaneJumpProof.h /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/test/native/m3_bitlane_jump_jni.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3_bitlane_jump_test.so
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_window.c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/test/native/m3_mask_window_spans.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/spans
++ /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/spans
+JNI_SPANS_PASS single=1/128 dense_limit1=1/128 cross_chunk=130/300 faults=3
++ cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include -I/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux -I/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/headers /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_window.c /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/test/native/m3_mask_window_regions.c -o /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/regions
++ /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/regions
+PASS JNI region work: rejected=0/8 row reads; sparse=1/8; contradictory=0; all=1
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/pom.xml -DargLine=-Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/missing -Dm3.mask.spans.native.required=false -Dm3.collections.all.native.required=false -DfailIfNoTests=true verify
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.m3:m3-collections >------------------------
+[INFO] Building M3 collection lanes 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collections ---
+[INFO] Copying 6 resources from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collections ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collections ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collections ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collections ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.collections.M3FilteredDequesTest
+PASS checks=140595
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.123 s -- in com.m3.collections.M3FilteredDequesTest
+[INFO] Running com.m3.collections.M3ZeroSlotCapacityTest
+PASS M3ZeroSlotCapacityContract checks=656464 operations=196611 physical=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.348 s -- in com.m3.collections.M3ZeroSlotCapacityTest
+[INFO] Running com.m3.collections.M3FilteredViewsTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.186 s -- in com.m3.collections.M3FilteredViewsTest
+[INFO] Running com.m3.collections.M3WrapperConvergenceTest
+PASS M3WrapperConvergenceContract mode=readonly-policy checks=25
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.collections.M3WrapperConvergenceTest
+[INFO] Running com.m3.collections.M3LongAddressKernelTest
+PASS M3LongAddressKernelSelfTest checks=321298 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in com.m3.collections.M3LongAddressKernelTest
+[INFO] Running com.m3.collections.M3PrimitiveFilteredSequencesTest
+PASS checks=164104
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.656 s -- in com.m3.collections.M3PrimitiveFilteredSequencesTest
+[INFO] Running com.m3.collections.M3SignalDimensionsTest
+PASS M3SignalDimensions checks=1474
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.070 s -- in com.m3.collections.M3SignalDimensionsTest
+[INFO] Running com.m3.collections.M3IntLanesTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.471 s -- in com.m3.collections.M3IntLanesTest
+[INFO] Running com.m3.collections.M3LongLongLinkedHashMapTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.559 s -- in com.m3.collections.M3LongLongLinkedHashMapTest
+[INFO] Running com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Running com.m3.collections.M3MutableFilteredViewsTest
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.147 s -- in com.m3.collections.M3MutableFilteredViewsTest
+[INFO] Running com.m3.collections.M3AdaptiveEnumLongMapTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.104 s -- in com.m3.collections.M3AdaptiveEnumLongMapTest
+[INFO] Running com.m3.collections.M3FootprintContractTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.m3.collections.M3FootprintContractTest
+[INFO] Running com.m3.collections.M3FilteredListsDeepCompositionTest
+M3_FILTERED_LIST_DEEP_PLAN_PASS checks=189
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in com.m3.collections.M3FilteredListsDeepCompositionTest
+[INFO] Running com.m3.collections.M3MaskAllSelectionReceiverTest
+PASS M3MaskDenseSelectionProof checks=52564 nativeAvailable=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.186 s -- in com.m3.collections.M3MaskAllSelectionReceiverTest
+[INFO] Running com.m3.collections.M3FilteredNavigationReconciliationTest
+M3_PATH_MASK_ALIAS_PASS checks=2302 actualJNI=false
+navigation checks=141840 failures=0 first=null
+entries checks=11447 failures=0 first=null
+readonly checks=904 failures=0 first=null
+depth checks=48 failures=0 first=null
+TOTAL checks=154239 failures=0
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.274 s -- in com.m3.collections.M3FilteredNavigationReconciliationTest
+[INFO] Running com.m3.collections.M3IndexMaskWindowTest
+PASS M3_INDEX_MASK_WINDOW checks=15298 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in com.m3.collections.M3IndexMaskWindowTest
+[INFO] Running com.m3.collections.M3TombstoneReuseTest
+PASS M3TombstoneReuseSelfTest checks=142438 saved_set_array_payload_bytes=72 saved_map_array_payload_bytes=136
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.m3.collections.M3TombstoneReuseTest
+[INFO] Running com.m3.collections.M3ReceivingRecoveryTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.m3.collections.M3ReceivingRecoveryTest
+[INFO] Running com.m3.collections.M3ObjectSlotIndexTest
+PASS M3_OBJECT_SLOT_INDEX checks=39
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in com.m3.collections.M3ObjectSlotIndexTest
+[INFO] Running com.m3.collections.M3LazyObserverRegressionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.m3.collections.M3LazyObserverRegressionTest
+[INFO] Running com.m3.collections.M3SdkOwnerFactoryTest
+PASS M3_SDK_OWNER_FACTORY checks=10224
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.216 s -- in com.m3.collections.M3SdkOwnerFactoryTest
+[INFO] Running com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.256 s -- in com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Running com.m3.collections.M3FilteredListsReadonlyDepthTest
+M3_READONLY_FILTER_DEPTH_PASS checks=64
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in com.m3.collections.M3FilteredListsReadonlyDepthTest
+[INFO] Running com.m3.collections.M3NoRetainedStructuralEntryTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 s -- in com.m3.collections.M3NoRetainedStructuralEntryTest
+[INFO] Running com.m3.collections.M3LongStateArrayTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in com.m3.collections.M3LongStateArrayTest
+[INFO] Running com.m3.collections.M3MapContractTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.996 s -- in com.m3.collections.M3MapContractTest
+[INFO] Running com.m3.collections.M3IndexedSetAlgebraSeekTest
+PASS M3IndexedSetAlgebraSeekProof checks=277043
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.146 s -- in com.m3.collections.M3IndexedSetAlgebraSeekTest
+[INFO] Running com.m3.collections.M3IndexMaskWindowRecoveryTest
+PASS M3IndexMaskWindowRecoverySelfTest checks=7526 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.m3.collections.M3IndexMaskWindowRecoveryTest
+[INFO] Running com.m3.collections.M3LongArrayDequeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 s -- in com.m3.collections.M3LongArrayDequeTest
+[INFO] Running com.m3.collections.M3IndexPathRankTest
+PASS M3IndexPathRank Java21 deterministic differential: 36476 rank checks; 900 randomized paths
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in com.m3.collections.M3IndexPathRankTest
+[INFO] Running com.m3.collections.M3EnumSetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.239 s -- in com.m3.collections.M3EnumSetTest
+[INFO] Running com.m3.collections.M3LongRangeSetTest
+PASS M3LongRangeSetSelfTest oracleChecks=411913
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.066 s -- in com.m3.collections.M3LongRangeSetTest
+[INFO] Running com.m3.collections.M3FilteredListsTest
+PASS M3FilteredListsEdges checks=40
+PASS M3FilteredListsContract operations=32452 checks=755754
+PASS M3FilteredListsWorkProof rows=65537 predicate_calls=65537 split_payload=0
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.549 s -- in com.m3.collections.M3FilteredListsTest
+[INFO] Running com.m3.collections.M3SdkRecoveryTest
+PASS M3SdkRecoverySelfTest checks=19834 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in com.m3.collections.M3SdkRecoveryTest
+[INFO] Running com.m3.collections.M3SignalOrderJUnitTest
+PASS M3SignalOrderContract backend=JAVA checks=2009
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.m3.collections.M3SignalOrderJUnitTest
+[INFO] Running com.m3.collections.M3LongLinkedHashSetTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.253 s -- in com.m3.collections.M3LongLinkedHashSetTest
+[INFO] Running com.m3.collections.M3BagRankIndexTest
+M3BagRankIndex randomized scenarios=1200
+PASS M3BagRankIndexSelfTest checks=213230 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s -- in com.m3.collections.M3BagRankIndexTest
+[INFO] Running com.m3.collections.M3NativeIndexRangeTest
+M3NativeIndexRangeSelfTest mode=none checks=529306 seededCases=2048
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.485 s -- in com.m3.collections.M3NativeIndexRangeTest
+[INFO] Running com.m3.collections.M3LongIndexProjectionMaskOffsetTest
+M3_MASK_OFFSET_PROJECTION_PASS checks=28615 seed=5562870565234366513
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.061 s -- in com.m3.collections.M3LongIndexProjectionMaskOffsetTest
+[INFO] Running com.m3.collections.M3IndexedTableReentrantSortTest
+PASS M3IndexedTableReentrantSortContract checks=18
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.m3.collections.M3IndexedTableReentrantSortTest
+[INFO] Running com.m3.collections.M3SequenceContractTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.585 s -- in com.m3.collections.M3SequenceContractTest
+[INFO] Running com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.075 s -- in com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Running com.m3.collections.M3IntLongHashMapTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.182 s -- in com.m3.collections.M3IntLongHashMapTest
+[INFO] Running com.m3.collections.M3LongRankIndexTest
+M3LongRankIndexSelfTest PASS native=false
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.195 s -- in com.m3.collections.M3LongRankIndexTest
+[INFO] Running com.m3.collections.M3SpanIndexTest
+M3SpanIndex Java21/JNI oracle: PASS 128804 assertions, JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.073 s -- in com.m3.collections.M3SpanIndexTest
+[INFO] Running com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.220 s -- in com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] Running com.m3.collections.M3ConcurrentContractTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.617 s -- in com.m3.collections.M3ConcurrentContractTest
+[INFO] Running com.m3.collections.M3ZeroMaskArrayFastPathTest
+M3_ZERO_MASK_ARRAY_FAST_PATH_PASS checks=6176
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in com.m3.collections.M3ZeroMaskArrayFastPathTest
+[INFO] Running com.m3.collections.M3IndexPathMasksTest
+PASS M3IndexPathMasksSelfTest checks=1554 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.m3.collections.M3IndexPathMasksTest
+[INFO] Running com.m3.collections.M3LongSortedAlgebraTest
+PASS M3LongSortedAlgebraSelfTest checks=508836
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.474 s -- in com.m3.collections.M3LongSortedAlgebraTest
+[INFO] Running com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Running com.m3.collections.M3FilteredSetNullTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.573 s -- in com.m3.collections.M3FilteredSetNullTest
+[INFO] Running com.m3.collections.M3FilteredSplitsMaskSpansTest
+MASK_SPANS_PASS cases=12000 backend=JAVA
+FILTERED_SPLITS_PASS checks=6324
+[WARNING] Tests run: 4, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.409 s -- in com.m3.collections.M3FilteredSplitsMaskSpansTest
+[INFO] Running com.m3.collections.M3LongTreeSetTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.310 s -- in com.m3.collections.M3LongTreeSetTest
+[INFO] Running com.m3.collections.M3JdkCollectionDifferentialTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.131 s -- in com.m3.collections.M3JdkCollectionDifferentialTest
+[INFO] Running com.m3.collections.M3LazyTreeMapTest
+PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress
+PACKED_LAZY_TREE_OK eager/lazy AVL differential=20000 views/entries/flags/progress/events
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.230 s -- in com.m3.collections.M3LazyTreeMapTest
+[INFO] Running com.m3.collections.M3EnumLongMapTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.m3.collections.M3EnumLongMapTest
+[INFO] Running com.m3.collections.M3FilteredNavigableSetRangeTest
+PASS M3FilteredNavigableSetRangeContract checks=110325
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s -- in com.m3.collections.M3FilteredNavigableSetRangeTest
+[INFO] Running com.m3.collections.M3BitLane28FenwickTest
+PASS M3BitLane28FenwickSelfTest checks=21298 mutations=15000
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.131 s -- in com.m3.collections.M3BitLane28FenwickTest
+[INFO] Running com.m3.collections.M3CountedBagTest
+PASS M3CountedBagSelfTest checks=165184
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.069 s -- in com.m3.collections.M3CountedBagTest
+[INFO] Running com.m3.collections.M3JdkShapedPrimitiveCollectionsTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.142 s -- in com.m3.collections.M3JdkShapedPrimitiveCollectionsTest
+[INFO] Running com.m3.collections.M3IndexedTableTest
+PASS M3IndexedTableSelfTest checks=62986 randomized=6000 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.100 s -- in com.m3.collections.M3IndexedTableTest
+[INFO] Running com.m3.collections.M3ObjectResidencyRuntimePressureTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.m3.collections.M3ObjectResidencyRuntimePressureTest
+[INFO] Running com.m3.collections.M3IndexedReadOnlyNoopTest
+PASS M3IndexedReadOnlyNoopProof checks=70132
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.463 s -- in com.m3.collections.M3IndexedReadOnlyNoopTest
+[INFO] Running com.m3.collections.M3LongCompositeLateBindTest
+PASS M3LongCompositeLateBindSelfTest checks=535
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.m3.collections.M3LongCompositeLateBindTest
+[INFO] Running com.m3.collections.M3ResidencyStateMaskTest
+M3_RESIDENCY_STATE_MASK_PASS checks=9627 fingerprint=12197969927824375845 backend=java-only
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.201 s -- in com.m3.collections.M3ResidencyStateMaskTest
+[INFO] Running com.m3.collections.M3PathMaskAliasTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.m3.collections.M3PathMaskAliasTest
+[INFO] Running com.m3.collections.M3ProgressAdaptersPercentageTest
+PROGRESS_PERCENT_WITNESS worked=9223372036854775807 total=9223372036854775807 expected=100 actual=100
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.174 s -- in com.m3.collections.M3ProgressAdaptersPercentageTest
+[INFO] Running com.m3.collections.M3LongAddressBoundedTest
+M3_BOUNDED_GATHER_PASS checks=11020139 fingerprint=-9036386136120340114 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.186 s -- in com.m3.collections.M3LongAddressBoundedTest
+[INFO] Running com.m3.collections.M3StoredRepresentativeTest
+M3_STORED_REPRESENTATIVE_CONTRACT_PASS assertions=2454
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in com.m3.collections.M3StoredRepresentativeTest
+[INFO] Running com.m3.collections.M3StateMaskHistogramTest
+M3StateMaskHistogramSelfTest PASS checks=342070 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.098 s -- in com.m3.collections.M3StateMaskHistogramTest
+[INFO] Running com.m3.collections.M3ObjectIdentityTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.282 s -- in com.m3.collections.M3ObjectIdentityTest
+[INFO] Running com.m3.collections.M3LongArrayListTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 s -- in com.m3.collections.M3LongArrayListTest
+[INFO] Running com.m3.collections.M3ObjectResidencyBorrowTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.m3.collections.M3ObjectResidencyBorrowTest
+[INFO] Running com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Running com.m3.collections.M3LongDagJUnitTest
+M3_LONG_DAG_CHECKS=291 RESULT=PASS
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in com.m3.collections.M3LongDagJUnitTest
+[INFO] Running com.m3.collections.M3IndexedSnapshotPositionTest
+PASS M3IndexedSnapshotPositionProof checks=114888 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in com.m3.collections.M3IndexedSnapshotPositionTest
+[INFO] Running com.m3.collections.M3PrimitiveCollectionDifferentialTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.m3.collections.M3PrimitiveCollectionDifferentialTest
+[INFO] Running com.m3.collections.M3ObjectResidencyTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in com.m3.collections.M3ObjectResidencyTest
+[INFO] Running com.m3.collections.M3ReadOnlyMapDefaultsTest
+PASS M3ReadOnlyMapDefaultsContract checks=5600
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 s -- in com.m3.collections.M3ReadOnlyMapDefaultsTest
+[INFO] Running com.m3.collections.M3GenericArrayListTest
+PASS M3GenericArrayListSelfTest checks=960955 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.126 s -- in com.m3.collections.M3GenericArrayListTest
+[INFO] Running com.m3.collections.M3IndexMaskCompactorTest
+PASS M3IndexMaskCompactorSelfTest checks=17226 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 s -- in com.m3.collections.M3IndexMaskCompactorTest
+[INFO] Running com.m3.collections.M3FactoryContractTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.m3.collections.M3FactoryContractTest
+[INFO] Running com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Running com.m3.collections.M3DequeSpanCopyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.054 s -- in com.m3.collections.M3DequeSpanCopyTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 245, Failures: 0, Errors: 0, Skipped: 2
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.3.0:jar (default-jar) @ m3-collections ---
+[INFO] Building jar: /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/m3-collections-0.1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18.820 s
+[INFO] Finished at: 2026-10-18T16:17:02+04:00
+[INFO] ------------------------------------------------------------------------
++ /workspace/scratch/8cbeab1c181e/tooling/mvn -B -ntp -Dmaven.repo.local=/workspace/scratch/8cbeab1c181e/tooling/maven-repository -f /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/pom.xml -DargLine=-Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -Dm3.mask.spans.native.required=true -Dm3.collections.all.native.required=true -DfailIfNoTests=true verify
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.m3:m3-collections >------------------------
+[INFO] Building M3 collection lanes 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collections ---
+[INFO] Copying 6 resources from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collections ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collections ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collections ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collections ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.collections.M3FilteredDequesTest
+PASS checks=140595
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.122 s -- in com.m3.collections.M3FilteredDequesTest
+[INFO] Running com.m3.collections.M3ZeroSlotCapacityTest
+PASS M3ZeroSlotCapacityContract checks=656464 operations=196611 physical=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.339 s -- in com.m3.collections.M3ZeroSlotCapacityTest
+[INFO] Running com.m3.collections.M3FilteredViewsTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.149 s -- in com.m3.collections.M3FilteredViewsTest
+[INFO] Running com.m3.collections.M3WrapperConvergenceTest
+PASS M3WrapperConvergenceContract mode=readonly-policy checks=25
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.m3.collections.M3WrapperConvergenceTest
+[INFO] Running com.m3.collections.M3LongAddressKernelTest
+PASS M3LongAddressKernelSelfTest checks=384942 native=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.m3.collections.M3LongAddressKernelTest
+[INFO] Running com.m3.collections.M3PrimitiveFilteredSequencesTest
+PASS checks=164104
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.652 s -- in com.m3.collections.M3PrimitiveFilteredSequencesTest
+[INFO] Running com.m3.collections.M3SignalDimensionsTest
+PASS M3SignalDimensions checks=1474
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.077 s -- in com.m3.collections.M3SignalDimensionsTest
+[INFO] Running com.m3.collections.M3IntLanesTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.471 s -- in com.m3.collections.M3IntLanesTest
+[INFO] Running com.m3.collections.M3LongLongLinkedHashMapTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.445 s -- in com.m3.collections.M3LongLongLinkedHashMapTest
+[INFO] Running com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Running com.m3.collections.M3MutableFilteredViewsTest
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.128 s -- in com.m3.collections.M3MutableFilteredViewsTest
+[INFO] Running com.m3.collections.M3AdaptiveEnumLongMapTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s -- in com.m3.collections.M3AdaptiveEnumLongMapTest
+[INFO] Running com.m3.collections.M3FootprintContractTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.m3.collections.M3FootprintContractTest
+[INFO] Running com.m3.collections.M3FilteredListsDeepCompositionTest
+M3_FILTERED_LIST_DEEP_PLAN_PASS checks=189
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.m3.collections.M3FilteredListsDeepCompositionTest
+[INFO] Running com.m3.collections.M3MaskAllSelectionReceiverTest
+PASS M3MaskDenseSelectionProof checks=52563 nativeAvailable=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.193 s -- in com.m3.collections.M3MaskAllSelectionReceiverTest
+[INFO] Running com.m3.collections.M3FilteredNavigationReconciliationTest
+M3_PATH_MASK_ALIAS_PASS checks=2332 actualJNI=true
+navigation checks=141840 failures=0 first=null
+entries checks=11447 failures=0 first=null
+readonly checks=904 failures=0 first=null
+depth checks=48 failures=0 first=null
+TOTAL checks=154239 failures=0
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.285 s -- in com.m3.collections.M3FilteredNavigationReconciliationTest
+[INFO] Running com.m3.collections.M3IndexMaskWindowTest
+PASS M3_INDEX_MASK_WINDOW checks=15298 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in com.m3.collections.M3IndexMaskWindowTest
+[INFO] Running com.m3.collections.M3TombstoneReuseTest
+PASS M3TombstoneReuseSelfTest checks=142438 saved_set_array_payload_bytes=72 saved_map_array_payload_bytes=136
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 s -- in com.m3.collections.M3TombstoneReuseTest
+[INFO] Running com.m3.collections.M3ReceivingRecoveryTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.m3.collections.M3ReceivingRecoveryTest
+[INFO] Running com.m3.collections.M3ObjectSlotIndexTest
+PASS M3_OBJECT_SLOT_INDEX checks=40
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in com.m3.collections.M3ObjectSlotIndexTest
+[INFO] Running com.m3.collections.M3LazyObserverRegressionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.m3.collections.M3LazyObserverRegressionTest
+[INFO] Running com.m3.collections.M3SdkOwnerFactoryTest
+PASS M3_SDK_OWNER_FACTORY checks=10224
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.225 s -- in com.m3.collections.M3SdkOwnerFactoryTest
+[INFO] Running com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.189 s -- in com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Running com.m3.collections.M3FilteredListsReadonlyDepthTest
+M3_READONLY_FILTER_DEPTH_PASS checks=64
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in com.m3.collections.M3FilteredListsReadonlyDepthTest
+[INFO] Running com.m3.collections.M3NoRetainedStructuralEntryTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.172 s -- in com.m3.collections.M3NoRetainedStructuralEntryTest
+[INFO] Running com.m3.collections.M3LongStateArrayTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.m3.collections.M3LongStateArrayTest
+[INFO] Running com.m3.collections.M3MapContractTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.125 s -- in com.m3.collections.M3MapContractTest
+[INFO] Running com.m3.collections.M3IndexedSetAlgebraSeekTest
+PASS M3IndexedSetAlgebraSeekProof checks=277043
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.144 s -- in com.m3.collections.M3IndexedSetAlgebraSeekTest
+[INFO] Running com.m3.collections.M3IndexMaskWindowRecoveryTest
+PASS M3IndexMaskWindowRecoverySelfTest checks=7524 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in com.m3.collections.M3IndexMaskWindowRecoveryTest
+[INFO] Running com.m3.collections.M3LongArrayDequeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s -- in com.m3.collections.M3LongArrayDequeTest
+[INFO] Running com.m3.collections.M3IndexPathRankTest
+PASS M3IndexPathRank Java21 deterministic differential: 36476 rank checks; 900 randomized paths
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in com.m3.collections.M3IndexPathRankTest
+[INFO] Running com.m3.collections.M3EnumSetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.240 s -- in com.m3.collections.M3EnumSetTest
+[INFO] Running com.m3.collections.M3LongRangeSetTest
+PASS M3LongRangeSetSelfTest oracleChecks=411913
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.053 s -- in com.m3.collections.M3LongRangeSetTest
+[INFO] Running com.m3.collections.M3FilteredListsTest
+PASS M3FilteredListsEdges checks=40
+PASS M3FilteredListsContract operations=32452 checks=755754
+PASS M3FilteredListsWorkProof rows=65537 predicate_calls=65537 split_payload=0
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.540 s -- in com.m3.collections.M3FilteredListsTest
+[INFO] Running com.m3.collections.M3SdkRecoveryTest
+PASS M3SdkRecoverySelfTest checks=19834 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.m3.collections.M3SdkRecoveryTest
+[INFO] Running com.m3.collections.M3SignalOrderJUnitTest
+PASS M3SignalOrderContract backend=JAVA checks=2009
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.m3.collections.M3SignalOrderJUnitTest
+[INFO] Running com.m3.collections.M3LongLinkedHashSetTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.194 s -- in com.m3.collections.M3LongLinkedHashSetTest
+[INFO] Running com.m3.collections.M3BagRankIndexTest
+M3BagRankIndex randomized scenarios=1200
+PASS M3BagRankIndexSelfTest checks=213230 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.080 s -- in com.m3.collections.M3BagRankIndexTest
+[INFO] Running com.m3.collections.M3NativeIndexRangeTest
+M3NativeIndexRangeSelfTest mode=legacy checks=638439 seededCases=2048
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.569 s -- in com.m3.collections.M3NativeIndexRangeTest
+[INFO] Running com.m3.collections.M3LongIndexProjectionMaskOffsetTest
+M3_MASK_OFFSET_PROJECTION_PASS checks=28615 seed=5562870565234366513
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 s -- in com.m3.collections.M3LongIndexProjectionMaskOffsetTest
+[INFO] Running com.m3.collections.M3IndexedTableReentrantSortTest
+PASS M3IndexedTableReentrantSortContract checks=18
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.m3.collections.M3IndexedTableReentrantSortTest
+[INFO] Running com.m3.collections.M3SequenceContractTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.387 s -- in com.m3.collections.M3SequenceContractTest
+[INFO] Running com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.110 s -- in com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Running com.m3.collections.M3IntLongHashMapTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.146 s -- in com.m3.collections.M3IntLongHashMapTest
+[INFO] Running com.m3.collections.M3LongRankIndexTest
+M3LongRankIndexSelfTest PASS native=true
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.155 s -- in com.m3.collections.M3LongRankIndexTest
+[INFO] Running com.m3.collections.M3SpanIndexTest
+M3SpanIndex Java21/JNI oracle: PASS 128804 assertions, JNI=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in com.m3.collections.M3SpanIndexTest
+[INFO] Running com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.158 s -- in com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] Running com.m3.collections.M3ConcurrentContractTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.402 s -- in com.m3.collections.M3ConcurrentContractTest
+[INFO] Running com.m3.collections.M3ZeroMaskArrayFastPathTest
+M3_ZERO_MASK_ARRAY_FAST_PATH_PASS checks=6176
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in com.m3.collections.M3ZeroMaskArrayFastPathTest
+[INFO] Running com.m3.collections.M3IndexPathMasksTest
+PASS M3IndexPathMasksSelfTest checks=1554 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.m3.collections.M3IndexPathMasksTest
+[INFO] Running com.m3.collections.M3LongSortedAlgebraTest
+PASS M3LongSortedAlgebraSelfTest checks=508836
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.440 s -- in com.m3.collections.M3LongSortedAlgebraTest
+[INFO] Running com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Running com.m3.collections.M3FilteredSetNullTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.821 s -- in com.m3.collections.M3FilteredSetNullTest
+[INFO] Running com.m3.collections.M3FilteredSplitsMaskSpansTest
+MASK_SPANS_PASS cases=12000 backend=JAVA
+MASK_SPANS_PASS cases=12000 backend=NATIVE_REQUIRED
+FILTERED_SPLITS_PASS checks=6324
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.343 s -- in com.m3.collections.M3FilteredSplitsMaskSpansTest
+[INFO] Running com.m3.collections.M3LongTreeSetTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.278 s -- in com.m3.collections.M3LongTreeSetTest
+[INFO] Running com.m3.collections.M3JdkCollectionDifferentialTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.092 s -- in com.m3.collections.M3JdkCollectionDifferentialTest
+[INFO] Running com.m3.collections.M3LazyTreeMapTest
+PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress
+PACKED_LAZY_TREE_OK eager/lazy AVL differential=20000 views/entries/flags/progress/events
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.234 s -- in com.m3.collections.M3LazyTreeMapTest
+[INFO] Running com.m3.collections.M3EnumLongMapTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in com.m3.collections.M3EnumLongMapTest
+[INFO] Running com.m3.collections.M3FilteredNavigableSetRangeTest
+PASS M3FilteredNavigableSetRangeContract checks=110325
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s -- in com.m3.collections.M3FilteredNavigableSetRangeTest
+[INFO] Running com.m3.collections.M3BitLane28FenwickTest
+PASS M3BitLane28FenwickSelfTest checks=21298 mutations=15000
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.115 s -- in com.m3.collections.M3BitLane28FenwickTest
+[INFO] Running com.m3.collections.M3CountedBagTest
+PASS M3CountedBagSelfTest checks=165184
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 s -- in com.m3.collections.M3CountedBagTest
+[INFO] Running com.m3.collections.M3JdkShapedPrimitiveCollectionsTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.127 s -- in com.m3.collections.M3JdkShapedPrimitiveCollectionsTest
+[INFO] Running com.m3.collections.M3IndexedTableTest
+PASS M3IndexedTableSelfTest checks=62985 randomized=6000 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.072 s -- in com.m3.collections.M3IndexedTableTest
+[INFO] Running com.m3.collections.M3ObjectResidencyRuntimePressureTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.m3.collections.M3ObjectResidencyRuntimePressureTest
+[INFO] Running com.m3.collections.M3IndexedReadOnlyNoopTest
+PASS M3IndexedReadOnlyNoopProof checks=70132
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.416 s -- in com.m3.collections.M3IndexedReadOnlyNoopTest
+[INFO] Running com.m3.collections.M3LongCompositeLateBindTest
+PASS M3LongCompositeLateBindSelfTest checks=535
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.collections.M3LongCompositeLateBindTest
+[INFO] Running com.m3.collections.M3ResidencyStateMaskTest
+M3_RESIDENCY_STATE_MASK_PASS checks=11226 fingerprint=12197969927824375845 backend=jni-enabled
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.137 s -- in com.m3.collections.M3ResidencyStateMaskTest
+[INFO] Running com.m3.collections.M3PathMaskAliasTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.m3.collections.M3PathMaskAliasTest
+[INFO] Running com.m3.collections.M3ProgressAdaptersPercentageTest
+PROGRESS_PERCENT_WITNESS worked=9223372036854775807 total=9223372036854775807 expected=100 actual=100
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.099 s -- in com.m3.collections.M3ProgressAdaptersPercentageTest
+[INFO] Running com.m3.collections.M3LongAddressBoundedTest
+M3_BOUNDED_GATHER_PASS checks=21975732 fingerprint=-8730037866241443045 native=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.353 s -- in com.m3.collections.M3LongAddressBoundedTest
+[INFO] Running com.m3.collections.M3StoredRepresentativeTest
+M3_STORED_REPRESENTATIVE_CONTRACT_PASS assertions=2454
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in com.m3.collections.M3StoredRepresentativeTest
+[INFO] Running com.m3.collections.M3StateMaskHistogramTest
+M3StateMaskHistogramSelfTest PASS checks=354665 native=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.115 s -- in com.m3.collections.M3StateMaskHistogramTest
+[INFO] Running com.m3.collections.M3ObjectIdentityTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.187 s -- in com.m3.collections.M3ObjectIdentityTest
+[INFO] Running com.m3.collections.M3LongArrayListTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in com.m3.collections.M3LongArrayListTest
+[INFO] Running com.m3.collections.M3ObjectResidencyBorrowTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.m3.collections.M3ObjectResidencyBorrowTest
+[INFO] Running com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Running com.m3.collections.M3LongDagJUnitTest
+M3_LONG_DAG_CHECKS=291 RESULT=PASS
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in com.m3.collections.M3LongDagJUnitTest
+[INFO] Running com.m3.collections.M3IndexedSnapshotPositionTest
+PASS M3IndexedSnapshotPositionProof checks=114886 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in com.m3.collections.M3IndexedSnapshotPositionTest
+[INFO] Running com.m3.collections.M3PrimitiveCollectionDifferentialTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in com.m3.collections.M3PrimitiveCollectionDifferentialTest
+[INFO] Running com.m3.collections.M3ObjectResidencyTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.m3.collections.M3ObjectResidencyTest
+[INFO] Running com.m3.collections.M3ReadOnlyMapDefaultsTest
+PASS M3ReadOnlyMapDefaultsContract checks=5600
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 s -- in com.m3.collections.M3ReadOnlyMapDefaultsTest
+[INFO] Running com.m3.collections.M3GenericArrayListTest
+PASS M3GenericArrayListSelfTest checks=960583 native=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.135 s -- in com.m3.collections.M3GenericArrayListTest
+[INFO] Running com.m3.collections.M3IndexMaskCompactorTest
+PASS M3IndexMaskCompactorSelfTest checks=17188 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s -- in com.m3.collections.M3IndexMaskCompactorTest
+[INFO] Running com.m3.collections.M3FactoryContractTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.collections.M3FactoryContractTest
+[INFO] Running com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Running com.m3.collections.M3DequeSpanCopyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.m3.collections.M3DequeSpanCopyTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 245, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.3.0:jar (default-jar) @ m3-collections ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.024 s
+[INFO] Finished at: 2026-10-18T16:17:20+04:00
+[INFO] ------------------------------------------------------------------------
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3MaskWindowSparseContract native
+PASS M3MaskWindowSparseContract backend=NATIVE_REQUIRED checks=357095
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3BudgetedMaskWindowContract --native
+BUDGETED_MASK_WINDOW_PASS random=5000 assertions=28914 backend=NATIVE_REQUIRED
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3IndexMaskWindowSelfTest --native
+PASS M3_INDEX_MASK_WINDOW checks=30596 native=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3IndexMaskWindowRecoverySelfTest --native
+PASS M3IndexMaskWindowRecoverySelfTest checks=10528 JNI=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3IndexMaskCompactorSelfTest --native
+PASS M3IndexMaskCompactorSelfTest checks=26152 JNI=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3IndexPathMasksSelfTest --native
+PASS M3IndexPathMasksSelfTest checks=2324 JNI=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3IndexPathMaskWindowSelfTest --native
+M3_PATH_MASK_WINDOW_PASS checks=22462 backend=NATIVE_REQUIRED nativeAvailable=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3IndexPathRankNativeSelfTest
+PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3NativeIndexRangeSelfTest range sharing
+M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3ObjectStateSlots28SelfTest --native
+PASS M3_OBJECT_STATE_SLOTS_28 checks=1215408 randomized_operations=101376 primitive_state_bytes_per_touched_slot=1
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3IndexedTableSelfTest --native
+PASS M3IndexedTableSelfTest checks=63149 randomized=6000 native=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3BagRankIndexSelfTest --native
+M3BagRankIndex randomized scenarios=1200
+PASS M3BagRankIndexSelfTest checks=213320 native=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3SdkRecoverySelfTest --native
+PASS M3SdkRecoverySelfTest checks=19834 native=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3SignalOrderContract native
+PASS M3SignalOrderContract backend=NATIVE_REQUIRED checks=2010
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3SignalDimensionsNativeContract
+PASS M3SignalDimensionsNativeContract JNI checks=400
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3ResidencyStateMaskProof native
+M3_RESIDENCY_STATE_MASK_PASS checks=11226 fingerprint=12197969927824375845 backend=jni-enabled
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3BitLaneJumpProof /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/native/libm3_bitlane_jump_test.so
+M3_BITLANE_JUMP_PASS assertions=68034 native=true
++ /tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/full-java-jni/missing -cp /workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/classes:/workspace/scratch/8cbeab1c181e/M3jdk21/m3/collections/target/test-classes com.m3.collections.M3BudgetedMaskWindowContract --missing
+EXPLICIT_NATIVE_REFUSAL_PASS --missing assertions=2
+{
+  "status": "PASS_OWNING_COLLECTION_JAVA_AND_JNI",
+  "head_sha": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "junit": {
+    "java": {
+      "tests": 245,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    "native": {
+      "tests": 245,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "native_libraries": [
+    "m3_collections_address",
+    "m3_collections_mask",
+    "m3_collections_pathmask",
+    "m3_collections_span",
+    "m3_collections_statehist",
+    "m3_residency_state_mask",
+    "m3bitlane",
+    "m3rankbatch",
+    "m3signalorder"
+  ]
+}

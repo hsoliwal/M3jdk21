@@ -1,0 +1,15 @@
+{
+  "command": [
+    "jar",
+    "--create",
+    "--file",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/memory/agent.jar",
+    "--manifest",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/memory/MANIFEST.MF",
+    "-C",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/memory",
+    "proof/MemoryAgent.class"
+  ],
+  "exit": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

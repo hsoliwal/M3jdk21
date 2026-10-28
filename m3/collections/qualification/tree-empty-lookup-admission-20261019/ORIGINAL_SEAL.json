@@ -1,0 +1,29 @@
+{
+  "status": "ORIGINAL_FROZEN_640",
+  "sourceSha256": "66bee1e712eb5053ca4414b8b756191f9c1e134be3c6183ab93663fc40d2cd1f",
+  "inputsSha256": "35646004d4701e2c78b056da446fa65058f3f0defea88121a120dbceb0480339",
+  "rawStdoutSha256": "5279d4d09a1cdb48482047950f92e8504ce84056eb4c55f8fd2db5f4565f4b3c",
+  "gzipSha256": "5f639255f431ead16f1f3711fbd576570a3594f3cfe4a1867ca393ad60d646dd",
+  "caseCount": 640,
+  "candidateExecuted": false,
+  "runtime": {
+    "kind": "identity",
+    "provider": "java.util.TreeMap",
+    "origin": "jrt:/java.base",
+    "classSha256": "1bbb94b566de21fa9aff705f169097207a184b4a9cb60ad9c5fb78ae0d1b25c5",
+    "javaHome": "C:\\Program Files\\Java\\jdk-21",
+    "javaVersion": "21.0.9",
+    "temp": "S:\\codex-work\\m3-collections-next-20261018\\temp",
+    "arguments": [
+      "-XX:-UsePerfData",
+      "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+      "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-admission-20261019\\home",
+      "-Xmx128m",
+      "-Xss512k",
+      "-XX:ActiveProcessorCount=2",
+      "-DexpectedJavaHome=C:\\Program Files\\Java\\jdk-21",
+      "-DexpectedProviderOrigin=jrt:/java.base"
+    ]
+  },
+  "emptyNaturalComparableComparisonEvents": 0
+}

@@ -46,6 +46,20 @@ public final class M3FileSource {
     }
 
     /**
+     * Transfer a fresh, unaliased byte buffer into one immutable source generation.
+     * Internal callers must not publish or subsequently mutate the supplied array.
+     * Public {@link #fromBytes(byte[])} always keeps its defensive copy.
+     */
+    static M3FileSource fromExclusiveBytes(byte[] exclusive) {
+        return new M3FileSource(Objects.requireNonNull(exclusive, "exclusive"));
+    }
+
+    /** Copy original bytes directly into an exclusively owned result buffer. */
+    void copyRangeTo(int from, byte[] result, int offset, int length) {
+        System.arraycopy(bytes, from, result, offset, length);
+    }
+
+    /**
      * One bounded M3File observation: content is copied out of the ephemeral
      * callback before its scratch page is reused. The original observer checks
      * post-read size, mtime and file key and supplies the already-computed hash.

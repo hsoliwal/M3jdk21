@@ -1,0 +1,132 @@
+{
+  "schema": "synexia.m3jdk21.static-jdk-action-selection.v1",
+  "id": "m3.mask-window.current.windows-java-jni.20261020",
+  "action": "QUALIFY_FIXED_JAVA_JNI_SOURCE_SET",
+  "record_kind": "STATIC_SELECTION_DATA",
+  "registered_dispatcher_or_MCP_tool": false,
+  "parameters_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false
+  },
+  "selection_example_is_executable_API": false,
+  "repository": "hsoliwal/M3jdk21",
+  "source_head": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+  "scope": {
+    "kind": "EXACT_FIVE_FILE_VALIDATION_ACTION",
+    "source_transformation": false,
+    "files": [
+      {
+        "path": "src/com/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
+        "git_blob": "daea60beeb202d9e996f9a018fe5974738a43523"
+      },
+      {
+        "path": "src/com/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+        "git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb"
+      },
+      {
+        "path": "src/com/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+        "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66"
+      },
+      {
+        "path": "src/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3",
+        "git_blob": "636ceb1c9324c6cfd4fa9aa0077f8ffc2be8228d"
+      },
+      {
+        "path": "native-src/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026",
+        "git_blob": "a94368898d0c5d9b0dbedb9dcd56d4d2e39a1414"
+      }
+    ],
+    "widening_parameters": [],
+    "enforcement_observed": "Reviewed wrapper checked plan, source, tool and output bindings; four explicit Java inputs and one C input, isolated K outputs, empty missing-library directory and observed exact fresh DLL load."
+  },
+  "command_manifest": {
+    "path": "../evidence/mask-window-current-20261020/windows-host-20261020/PLAN.json",
+    "sha256": "ccd04ed4f435f51e431e0b846a75c0bc944af357db2a62079b0ead40d0d4f3e8",
+    "commands": [
+      {
+        "id": "compile_java",
+        "argv_json_pointer": "/commands/0/argv",
+        "deadline_seconds": 180
+      },
+      {
+        "id": "compile_native",
+        "argv_json_pointer": "/commands/1/argv",
+        "deadline_seconds": 120
+      },
+      {
+        "id": "native_exports",
+        "argv_json_pointer": "/commands/2/argv",
+        "deadline_seconds": 30
+      },
+      {
+        "id": "java",
+        "argv_json_pointer": "/commands/3/argv",
+        "deadline_seconds": 180
+      },
+      {
+        "id": "native",
+        "argv_json_pointer": "/commands/4/argv",
+        "deadline_seconds": 180
+      },
+      {
+        "id": "missing",
+        "argv_json_pointer": "/commands/5/argv",
+        "deadline_seconds": 180
+      }
+    ]
+  },
+  "observed_result": {
+    "path": "../evidence/mask-window-current-20261020/windows-host-20261020/RESULT.json",
+    "bytes": 5343,
+    "sha256": "c6165bc15606af09f84ea2d221c505137740323e668b5b2c650df1a74a25f080",
+    "git_blob": "ab28ce03661908d3297c95aac207955d23e01f9b",
+    "status": "PASS_EXACT_WINDOWS_JAVA_JNI_MISSING_AND_EXPORTS",
+    "java_checks": 236639,
+    "native_checks": 320006,
+    "missing_library_checks": 21,
+    "nine_header_symbols_equal_DLL_exports": true
+  },
+  "canonical_source_action": {
+    "owner_repository": "hsoliwal/com.synexia",
+    "source_commit": "f188e2af9117f0a0126b70aec3f87bb4489cbf42",
+    "packet_tree": "34febf76a5471c984bb255daafbe9f5bb468f2c5",
+    "main_class": "com.synexia.rewrite.SealReplay",
+    "arguments": [
+      "check|apply",
+      "source-root",
+      "recipe-resource-directory"
+    ],
+    "scope": "Fixed sealed manifest: modify selector Java and C; create proof; KEEP projection and address helper",
+    "check_semantics": "Exit0 alone does not establish a fixed point; require M3_SEALED_REPLAY action=check changes=0",
+    "not_an_OpenRewrite_Recipe": true,
+    "execution_in_this_proof": false
+  },
+  "preconditions": [
+    "Fresh reviewed output root; do not replay completed jobs.",
+    "Exact source/tool/plan pins, verified K temp and 8GiB after-output reserve.",
+    "Combined80MiB output cap, owned native jobs and global JVM lock.",
+    "Run existing JDK/GCC tools using the recorded argv; no executor is supplied by this static record."
+  ],
+  "pending_gates": [
+    "Canonical Maven/OpenRewrite SDK and full owning module.",
+    "Legacy ABI fixture and sibling PR1538/1547 union.",
+    "Windows UBSan, other architectures/OS, full M3JDK21 image/jtreg/JCK, live-wrapper and representative performance.",
+    "No global receiving phase advancement or merge admission."
+  ],
+  "attribution": {
+    "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+    "spdx_license_identifier": "Apache-2.0",
+    "notice": "First-party proof and selection data; existing OpenJDK and third-party source rights are unchanged."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "m3-put-validation-observation-adjudication/v1",
+  "classification": "SOURCE_AWARE_SCOPE_ADJUDICATION_NOT_A_NORMALIZED_TEST",
+  "changedOwner": "M3TreeMap.put ordinary eager forward unbounded nonempty roots only",
+  "jdk36": {
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-independent36-20261019\\RESULT.json",
+    "bytes": 48639,
+    "sha256": "0dfe859a530734124cf2f07eef97315fdfcffb16abc8f9588528e11df390873e"
+  },
+  "ec58": {
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\ec-current-owner-public-delta-put-v2-independent-20261019\\RESULT.json",
+    "bytes": 14253,
+    "sha256": "372d132781f87d869a1551f950f0bcb8c3a5207c5a4ed4305e549c5ed47901a3"
+  },
+  "frozen36StrictStatus": "DIFFERENCES_FROZEN_36 retained unchanged",
+  "rootCases": {
+    "exactJdkMatches": 29,
+    "cases": 30,
+    "remainingCase": "NATURAL_INVALID/EMPTY_NULL",
+    "remainingPath": "/message",
+    "originalJdkMessage": "Cannot invoke \"java.lang.Comparable.compareTo(Object)\" because \"k1\" is null",
+    "baselineMessage": null,
+    "candidateMessage": null,
+    "decision": "INHERITED_UNCHANGED: the empty-root admission path is outside this diff and is retained. No exception-message rewriting."
+  },
+  "boundedControls": {
+    "cases": 6,
+    "fullCaseBaselineCandidateDifferences": "Retained: all six include changed seedCmp from ordinary root construction",
+    "boundedOperationDifferenceCount": 0,
+    "decision": "Bounded view construction, put phase, exception/result and state retain incumbent behavior. Root seed callback changes are the intended insertion change; full records remain unmodified."
+  },
+  "ec58Decision": "All 58 complete body records and the full trace match the frozen current-owner reference; prior 54/58 failure retained. Received11.1 hierarchy only.",
+  "sdkProof": "Strict Java21, unchanged88 API rows, frozen132 entry/113 bulk and exhaustive/random invariant corpus pass; prewritten source-aware orchestration is distinct from independent source-blind36/58 validators.",
+  "scopeAdmission": "Ready for source-aware review of this one core atom; no full Eclipse/library/build/JNI admission and no measured throughput claim.",
+  "fixturesChanged": false,
+  "expectationsChanged": false,
+  "rawMessagesSuppressed": false
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "M3_RESOURCE_MONITOR_OBSERVATION_V1",
+  "time_utc": "2026-10-18T13:00:36Z",
+  "first_java_base_attempts_rss_telemetry": "UNAVAILABLE_NOT_ZERO_USAGE",
+  "reason": "The kernel omits /proc/<pid>/task/<pid>/children, so original monitoring could not resolve the process group ID. Global shared-memory and MemAvailable guards remained active; compiler/build flags were unchanged.",
+  "followup_monitor_fix": "Resolve the direct child process group through PPid fields in /proc/<pid>/stat. Validated with an owned sleep process sample.",
+  "original_supervisor_sha256": "82a2dfde0e75fca0e6f26e38d964c51c1f183de68a016c726fd7910597687685",
+  "followup_supervisor_sha256": "b52a18e7db574da0ed4f5b3b045c06bda1e44ef266d2d8fad23cd21f4f44668a",
+  "source_changes": false
+}

@@ -19,7 +19,6 @@
 // Relocated Apache Commons VFS 2.10.0 to the M3FS namespace.
 package com.m3.fs.vfs.provider;
 
-import org.apache.commons.lang3.StringUtils;
 import com.m3.fs.vfs.FileName;
 import com.m3.fs.vfs.FileSystemException;
 import com.m3.fs.vfs.FileType;
@@ -105,7 +104,7 @@ public abstract class AbstractFileName implements FileName {
         rootUri = null;
         this.scheme = scheme;
         this.type = type;
-        if (StringUtils.isEmpty(absolutePath)) {
+        if ((absolutePath == null || absolutePath.isEmpty())) {
             this.absolutePath = ROOT_PATH;
         } else if (absolutePath.length() > 1 && absolutePath.endsWith("/")) {
             this.absolutePath = absolutePath.substring(0, absolutePath.length() - 1);
@@ -446,7 +445,7 @@ public abstract class AbstractFileName implements FileName {
     }
 
     private String handleURISpecialCharacters(String uri) {
-        if (!StringUtils.isEmpty(uri)) {
+        if ((uri != null && !uri.isEmpty())) {
             try {
                 // VFS-325: Handle URI special characters in file name
                 // Decode the base URI and re-encode with URI special characters

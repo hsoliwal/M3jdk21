@@ -1,0 +1,181 @@
+{
+  "id": "synexia.counterpart.MIndexClassIndex",
+  "kind": "adapter",
+  "status": "implemented-unverified",
+  "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
+  "sources": [
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+      "module": "synexia-mindex",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassIndex.java",
+      "symbol": "com.synexia.mindex.classindex.MIndexClassIndex",
+      "signatures": [
+        "com.synexia.mindex.classindex.MIndexClassIndex"
+      ],
+      "sha256": "047eb00e579a0bed899419373e19514f0e06876efec39b9cfa2bca2d391196aa",
+      "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/develop"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+      "module": "synexia-mindex",
+      "path": "synexia-mindex/foundation/src/main/java/com/synexia/mindex/foundation/MIndexAlgorithm.java",
+      "symbol": "com.synexia.mindex.foundation.MIndexAlgorithm",
+      "signatures": [
+        "lowerBound(int[],int,int,int)",
+        "upperBound(int[],int,int,int)"
+      ],
+      "sha256": "993c38054e42c14efe27b52fa0b1e4d322aa17a2f8bdf7e8a460d4adbabe9e35",
+      "git_blob_sha1": "44975a54d368ecaf774683ab5d64bd14bb070209",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/develop"
+    }
+  ],
+  "targets": [
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": null,
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+      "symbol": "jdk.internal.mindex.M3CI",
+      "signatures": [
+        "jdk.internal.mindex.M3CI"
+      ],
+      "sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "git_blob_sha1": null,
+      "fingerprint": null,
+      "revision_role": "candidate",
+      "tracking_ref": null
+    }
+  ],
+  "owner": "jdk.internal.mindex.M3CI",
+  "identity": {
+    "namespace": "Preserve defining owner, exact raw spelling and loader identity; no global class identity.",
+    "generation": "Implementation/context revision is distinct from release label, class-file version and epoch."
+  },
+  "contract": {
+    "differences": [
+      "JDK String references and M3VI.Progress boundary; no application artifact dependency.",
+      "Snapshot-local primitive symbol IDs; fingerprint includes exact UTF-16 spellings.",
+      "Declared releases are provenance, not verified byte identity or compilation admission."
+    ],
+    "compatibility_obligations": [
+      "Public JDK types and behavior remain unchanged.",
+      "No blanket prefix rename or class-loading-by-name."
+    ],
+    "public_surface": [
+      "Internal non-exported API only; no java.base exports added."
+    ]
+  },
+  "format": {
+    "schema": null,
+    "abi": null,
+    "bootstrap": "java.base internal only; no automatic Class/ClassLoader hook."
+  },
+  "dependencies": [
+    {
+      "id": "java.base",
+      "resolution": "resolved",
+      "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
+    },
+    {
+      "id": "synexia.counterpart.MIndexVersionTable",
+      "resolution": "resolved",
+      "reason": "Retained exact M3VI Progress boundary."
+    },
+    {
+      "id": "synexia.counterpart.MIndexLibraryRelease",
+      "resolution": "resolved",
+      "reason": "Retained exact M3Release value."
+    }
+  ],
+  "materialization": {
+    "admission": "Budgeted caller-owned reflection snapshot; lifecycle owner must invalidate before definition/access changes.",
+    "joins": "References existing immutable JDK Strings; no payload copy/interner or retained collection Entry per row.",
+    "outputs": "On-demand owner/row class and member views; weak runtime resolution can become unavailable.",
+    "cached_facts": "Primitive class/member/CSR lanes; caller-scoped declarations and precompute context; no persistent or cross-VM cache."
+  },
+  "recipe": {
+    "id": "m3-cb",
+    "version": "1",
+    "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+    "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+    "preconditions": [
+      "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
+    ],
+    "rollback": "Retained sealed installer restores exact matching preimages; integration packet rolled back before source packet."
+  },
+  "tests": [
+    {
+      "id": "cb-module-runtime",
+      "receipt": "m3/tooling/cb/evidence/receipt.json"
+    }
+  ],
+  "provenance": {
+    "license": "Apache-2.0 for copied Synexia code; original per-file donor obligations retained.",
+    "publication": "User explicitly requested inlining relevant Synexia code under Apache-2.0 into M3jdk21.",
+    "copied_code": true
+  },
+  "sync": {
+    "source_revision": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+    "target_revision": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+    "direction": "source-to-target",
+    "target_adaptations": [
+      "Concise JDK counterpart names",
+      "Weak defining-loader identity",
+      "Counterpart-row effective declared release",
+      "Exact VM-local precompute context",
+      "No application dependency"
+    ],
+    "pending": [
+      "Automatic Class/ClassLoader consumer and lifecycle hooks, module/agent/CDS/JNI/JIT admission",
+      "Full family and non-prefix dependency inventory",
+      "AST/compiler consumers and performance measurements"
+    ],
+    "conflicts": []
+  },
+  "lineage": {
+    "previous_sources": [
+      {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+        "module": "synexia-mindex",
+        "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassIndex.java",
+        "symbol": "com.synexia.mindex.classindex.MIndexClassIndex",
+        "signatures": [
+          "com.synexia.mindex.classindex.MIndexClassIndex"
+        ],
+        "sha256": null,
+        "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+        "fingerprint": null,
+        "revision_role": "pinned",
+        "tracking_ref": "refs/heads/develop"
+      }
+    ],
+    "previous_targets": [
+      {
+        "repo": "hsoliwal/M3jdk21",
+        "commit": null,
+        "module": "java.base",
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+        "symbol": "jdk.internal.mindex.M3CI",
+        "signatures": [
+          "jdk.internal.mindex.M3CI"
+        ],
+        "sha256": null,
+        "git_blob_sha1": null,
+        "fingerprint": null,
+        "revision_role": "candidate",
+        "tracking_ref": null
+      }
+    ],
+    "supersedes": []
+  },
+  "source_state": "experimental",
+  "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+}

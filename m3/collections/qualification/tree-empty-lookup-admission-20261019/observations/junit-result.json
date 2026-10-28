@@ -1,0 +1,88 @@
+{
+  "schema": "m3-empty-lookup-junit-regression/v1",
+  "status": "PASS_4_JUPITER_TESTS",
+  "sourceSha256": "9441094d8265dac0f247491154b3aa22e3c0732d6e7f87a7e0e62466955ceb52",
+  "compileApiVersion": "5.10.2-m3-source-1",
+  "runtimeConsoleEngineVersion": "1.11.4",
+  "testsSuccessful": 4,
+  "testsFailed": 0,
+  "frozenOracleExpectedCasesAltered": false,
+  "fullMavenReactorExecuted": false,
+  "inputsUnchanged": true,
+  "commands": [
+    {
+      "label": "strict-junit-compile",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "--release",
+        "21",
+        "-g",
+        "-proc:none",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-sourcepath",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-regression-20261019\\empty-sourcepath",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-admission-20261019\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2-m3-source-1\\junit-jupiter-api-5.10.2-m3-source-1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.11.4\\junit-platform-console-standalone-1.11.4.jar",
+        "-d",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-regression-20261019\\classes",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-regression-20261019\\M3TreeMapEmptyLookupTest.java"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 23180,
+      "capturedBytes": 216,
+      "combinedLogLimitBytes": 8192,
+      "capacityChecks": 5,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 1.031
+    },
+    {
+      "label": "junit",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.11.4\\junit-platform-console-standalone-1.11.4.jar",
+        "execute",
+        "--class-path",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-regression-20261019\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-admission-20261019\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "--select-class",
+        "com.m3.collections.M3TreeMapEmptyLookupTest",
+        "--details=summary",
+        "--disable-banner",
+        "--disable-ansi-colors"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 70476,
+      "capturedBytes": 695,
+      "combinedLogLimitBytes": 8192,
+      "capacityChecks": 5,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 1.031
+    }
+  ],
+  "junitStdout": "\nTest run finished after 90 ms\n[         4 containers found      ]\n[         0 containers skipped    ]\n[         4 containers started    ]\n[         0 containers aborted    ]\n[         4 containers successful ]\n[         0 containers failed     ]\n[         4 tests found           ]\n[         0 tests skipped         ]\n[         4 tests started         ]\n[         0 tests aborted         ]\n[         4 tests successful      ]\n[         0 tests failed          ]\n\n",
+  "sourceInputs": {
+    "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-regression-20261019\\M3TreeMapEmptyLookupTest.java": "9441094d8265dac0f247491154b3aa22e3c0732d6e7f87a7e0e62466955ceb52",
+    "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2-m3-source-1\\junit-jupiter-api-5.10.2-m3-source-1.jar": "9e6f84384d3d4cf015148637f4025ef9a3cb6626fd585c23da67ccd474b252c8",
+    "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.11.4\\junit-platform-console-standalone-1.11.4.jar": "b016ef6b1c3454d6d7c2c88ce081dabf289699686af6622d6e4e2e1b54b4a2fc",
+    "S:\\codex-work\\m3-collections-next-20261018\\guava-minmax-priority-queue\\public-stage-v1\\m3\\collections\\qualification\\owned-guava-minmax-priority-queue-20261018\\run.py": "815464a4b2b759a3b7d5e47ca82d6ed6d09fa5eddacb0e24fcf5ee6646796679"
+  },
+  "classPathDigest": "cef77b3b22490de6f29ab1964719ce75194c22f268fd37a10ff1ede08c8a37e4",
+  "candidateClasses": [
+    {
+      "path": "classes\\com\\m3\\collections\\M3TreeMapEmptyLookupTest$Probe.class",
+      "sha256": "64e57a80bc442c9e610a530138e224ba3ee0cbcddd6ca54d25bbe20a495435f6"
+    },
+    {
+      "path": "classes\\com\\m3\\collections\\M3TreeMapEmptyLookupTest.class",
+      "sha256": "a7e8d66309b868f5425154d9d7dfd6936bc9816adb5db6dbe24742d339743889"
+    }
+  ]
+}

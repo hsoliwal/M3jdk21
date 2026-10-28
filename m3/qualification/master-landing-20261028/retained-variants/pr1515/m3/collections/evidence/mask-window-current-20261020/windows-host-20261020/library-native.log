@@ -1,0 +1,16 @@
+[0.069s][info][library] Failed to find _JNI_OnLoad_m3_collections_mask@8 in library with handle 0x00007ff69da70000
+[0.069s][info][library] Failed to find JNI_OnLoad_m3_collections_mask in library with handle 0x00007ff69da70000
+[0.069s][info][library] Failed to find _JNI_OnLoad_m3_collections_mask@8 in library with handle 0x00007ff69da70000
+[0.069s][info][library] Failed to find JNI_OnLoad_m3_collections_mask in library with handle 0x00007ff69da70000
+[0.070s][info][library] Loaded library K:\codex-work\m3jdk21-recipe-pass-20261020\index-mask-jni-v1\native\m3_collections_mask.dll, handle 0x00007ff9d6b10000
+[0.070s][info][library] Failed to find _JNI_OnLoad@8 in library with handle 0x00007ff9d6b10000
+[0.070s][info][library] Failed to find JNI_OnLoad in library with handle 0x00007ff9d6b10000
+[0.073s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative in library with handle 0x00007ff9d6b10000
+[0.073s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative in library with handle 0x00007ff9d6b10000
+[0.075s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative in library with handle 0x00007ff9d6b10000
+[0.075s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative in library with handle 0x00007ff9d6b10000
+[0.168s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative in library with handle 0x00007ff9d6b10000
+[0.168s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative in library with handle 0x00007ff9d6b10000
+[0.169s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative in library with handle 0x00007ff9d6b10000
+[0.169s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative in library with handle 0x00007ff9d6b10000
+[0.169s][info][library] Found Java_com_m3_collections_M3IndexMaskCompactor_selectNative in library with handle 0x00007ff9d6b10000

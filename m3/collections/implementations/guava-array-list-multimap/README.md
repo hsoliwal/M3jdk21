@@ -23,3 +23,30 @@ differential run applies 96,000 operations to the real Guava provider and this c
 comparisons; JaCoCo line and branch coverage are 100% for every class, gated at 99%. The steady-state
 allocation probe measures 0 bytes for put/containsEntry/containsKey/keys().count/remove/forEach.
 See `m3/collections/qualification/owned-guava-array-list-multimap-20261018/`.
+
+## 2026-10-27 Guava public Multimap API source closure
+
+Now ships modified Apache-2.0 Guava 33.4.8-jre `Multimap`,
+`ListMultimap` and `Multiset` with nested `Multiset.Entry`
+as source under exact original Guava names. The independent already-owned
+`M3ArrayListMultimap` implements all storage and protocol details through
+arrays/primitive keys/counts/index masks; no Guava implementation bodies
+and no added Entry/Node store. Real Guava is retained in TEST scope for
+the existing 96,000 seeded operation differential test suite.
+
+Canonical Synexia source/Maven recipe:
+`com.synexia.m3.InlineGuavaListMultimapApi20261027`, and byte-exact
+`Multiset` API source reused from the Synexia Guava HashMultiset recipe.
+Target receives generated Java/test sources and data-only receipts only.
+Actual external runtime dependency on `com.google.guava:guava` is removed
+from this isolated product module; `jdeps` and Maven runtime-tree gates
+must pass at exact head before promotion. First-party M3 Java class
+JaCoCo coverage still requires 99%; original vendored API interfaces
+are excluded from that first-party implementation denominator only.
+
+**Cross-jar constraint:** Another standalone M3 Guava HashMultiset module
+contains the same `com.google.common.collect.Multiset` name. Until a
+single source-built module owns and packages the complete Guava API
+graph, do NOT distribute these two jars together on one classloader or
+combine them with stock Guava. JSpecify/GWT annotation and default
+spliterator metadata are not byte-for-byte equivalent; those gates HOLD.

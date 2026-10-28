@@ -1,0 +1,29 @@
+{
+  "kind": "local diagnostic microbenchmark; not JMH",
+  "work": "each timed operation restores Object[] with arraycopy, compacts, consumes result/last survivor identity",
+  "warmup": "4 fixed batches + adaptive calibration per shape; 5 samples near50ms",
+  "forks_per_variant": 5,
+  "order": "baseline/candidate then candidate/baseline alternating",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "java": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\n",
+  "flags": [
+    "-Xms512m",
+    "-Xmx512m",
+    "-XX:+UseG1GC"
+  ],
+  "acceptance": "Recommend only if repeatable material benefit (>=3% median on fragmented workloads) without repeatable >5% control regression. Otherwise refuse promotion; disclose noisy bounds.",
+  "excluded_forks": {
+    "0": "Overlapped functional integration run; retained but excluded from statistical summary."
+  },
+  "included_forks": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "cpu_count": 9,
+  "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+  "limits": "Shared host, no CPU pinning; broad fork variability. Initial overlapped fork0 excluded and retained. Does not establish universal speedups or regression."
+}

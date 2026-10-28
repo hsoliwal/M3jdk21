@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.ObjectBaseVtable20261018
+displayName: Match the Object bootstrap vtable to its shipped virtual methods
+description: Preserve the overridable M3 Object adapter and reserve all six base slots before array metadata is allocated.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-object-base-vtable-20261018

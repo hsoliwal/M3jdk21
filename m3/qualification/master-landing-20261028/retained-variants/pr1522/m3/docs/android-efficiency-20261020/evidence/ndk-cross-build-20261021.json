@@ -1,0 +1,1182 @@
+{
+  "schema": "M3_ANDROID_NDK_RECEIVING_RECEIPT_20261021_V1",
+  "kind": "EVIDENCE_ONLY_HISTORICAL_NATIVE_QUALIFICATION",
+  "canonical_proof": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "a137faea542c97fcdc1c8867a6b49565e358b45b",
+    "path": "synexia-openrewrite-recipes/recipes/m3-android-ndk-20261021",
+    "url": "https://github.com/hsoliwal/com.synexia/tree/a137faea542c97fcdc1c8867a6b49565e358b45b/synexia-openrewrite-recipes/recipes/m3-android-ndk-20261021",
+    "original_packet_files": 337,
+    "original_packet_manifest_sha256": "8766c652e364db81cb8dcfda2db1b16272e5be2afb0fa7d8dc6d7d99e3a8e235",
+    "qualification_sha256": "b69637c64431629da430d033b790e76c1680820f2dead786ff626a570732a9fd",
+    "source_build_manifest_sha256": "4b31629f75ed734b9d914a926b43f599c996faae0e6f8646724db8c86b7fdca7",
+    "build_summary_sha256": "b03c6ed5f2699192dc1897d1724d4e66751ef4c51e360f0b8084ba9370dfa95a",
+    "layout_comparison_sha256": "74c5980c08c7f7646ede4fa3ab70fb9098ea6d1beaf45b73bb2a248aae684fd3",
+    "guard_tests_summary_sha256": "52740d986d8b91584d60b51aac3eb2f754a06f8cce7c9fd8c8a3b5c50104554f",
+    "supplements": "Canonical commit also retains independent review and provenance correction history; the 337-file manifest describes the unchanged original proof packet."
+  },
+  "source_scope": {
+    "native_execution_source_revision": "9441d86e6e0a699504ede20c0fd1df9a2febe033",
+    "prepared_receiving_base": "bbde385ab8890b2148fc1cb0deb35c59f19db959",
+    "receiving_base_admission": "Independent complete-body audit passed for all nine source bindings at the prepared receiving base. This historical receipt is not a fresh native run at that later revision; final receiving tree preservation remains required.",
+    "receiving_base_audit_sha256": "72914512f89fd3abd082479e80010c15006538361d654f14d9765b7882c5b8cb",
+    "receiving_base_audit_status": "PASS_9_COMPLETE_REMOTE_SOURCE_BODIES",
+    "source_bindings_sha256": "b28843f6e45798d5989ce9c251f038dfa414afd885dd3395a218eb87efca3a9f",
+    "source_bindings": [
+      {
+        "path": "m3/arrays/src/main/native/CMakeLists.txt",
+        "git_blob": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+        "bytes": 1631,
+        "sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7"
+      },
+      {
+        "path": "m3/arrays/src/main/native/m3_arrays.c",
+        "git_blob": "8fce5f1273472b8a2faeb24f43350b006f0356b0",
+        "bytes": 470,
+        "sha256": "0c7be7f8176ca235c40d88aad2cefab15e7ce7363d7fc648bafba4fdb535695d"
+      },
+      {
+        "path": "m3/arrays/src/main/native/m3_arrays_jni.c",
+        "git_blob": "78bb0a19eb8afd0abfd02f30b42063723312cbbf",
+        "bytes": 3926,
+        "sha256": "d5dd8f71a86e5f527941886a5358eeec5596a0f6a5735c82db8c10b72a129d1a"
+      },
+      {
+        "path": "m3/arrays/src/main/native/include/m3_arrays.h",
+        "git_blob": "e4f8b49082eb7111b39b48a1d551230187fac3df",
+        "bytes": 342,
+        "sha256": "f2eec872591c7af40c13af75012fb20efb8376cdb29209c9e8151fd9775d758d"
+      },
+      {
+        "path": "m3/arrays/src/main/native/tests/m3_arrays_checks.c",
+        "git_blob": "fc96f2412d41efd8eab4dae68b7b095c3eada39b",
+        "bytes": 8376,
+        "sha256": "5bbaf29b0b184fdd97f6765843910fde094f7ebe416e7276578290afef036977"
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+        "git_blob": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+        "bytes": 7673,
+        "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f"
+      },
+      {
+        "path": "src/java.base/share/native/libjava/m3_state_relation.h",
+        "git_blob": "18a02e228129827da486edc5b316790af6135310",
+        "bytes": 1021,
+        "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
+      },
+      {
+        "path": "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+        "git_blob": "440694e15ba340e0e98d669269beed32f09c31da",
+        "bytes": 2381,
+        "sha256": "54e15c58f4467d2e27155b521e49e1bfe81d0bce1459e2c804c38ade5fcd4eec"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
+        "git_blob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+        "bytes": 2138,
+        "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      }
+    ],
+    "java_plaintext_targets": [],
+    "runtime_mutations": 0
+  },
+  "toolchain": {
+    "ndk": "r28c / 28.2.13676358",
+    "android_api": 21,
+    "abis": [
+      "armeabi-v7a",
+      "arm64-v8a",
+      "x86",
+      "x86_64"
+    ],
+    "ndk_archive_sha256": "dfb20d396df28ca02a8c708314b814a4d961dc9074f9a161932746f815aa552f",
+    "cmake": "3.28.3",
+    "java_for_generated_headers": "OpenJDK 21.0.2",
+    "language": "C17",
+    "support_interpretation": "Pinned historical comparison toolchain; no latest-NDK support claim."
+  },
+  "native_qualification": {
+    "schema": "m3-android-ndk-qualification-1",
+    "status": "PASS_SCOPED_NDK_COMPILE_LINK_HEADER_EXPORT_ELF",
+    "production_source_mutations": 0,
+    "receiving_revision": "9441d86e6e0a699504ede20c0fd1df9a2febe033",
+    "baseline_revision": "8e868958f017482cfd6c5085869263c92a011cf6",
+    "canonical_prior_revision": "517d49739dca95ba5caad4a3f14f94171a984b71",
+    "manifest_sha256": "4b31629f75ed734b9d914a926b43f599c996faae0e6f8646724db8c86b7fdca7",
+    "final_summary_sha256": "b03c6ed5f2699192dc1897d1724d4e66751ef4c51e360f0b8084ba9370dfa95a",
+    "layout_comparison_sha256": "74c5980c08c7f7646ede4fa3ab70fb9098ea6d1beaf45b73bb2a248aae684fd3",
+    "guard_tests_summary_sha256": "52740d986d8b91584d60b51aac3eb2f754a06f8cce7c9fd8c8a3b5c50104554f",
+    "actual_current_arrays_builds": 4,
+    "baseline_arrays_builds": 4,
+    "standalone_state_relation_proof_libraries": 12,
+    "shared_objects": 20,
+    "pt_load_segments": 52,
+    "current_and_explicit_relation_objects_meeting_16k_layout": 16,
+    "build_commands": 92,
+    "inspection_commands": 24,
+    "guard_tests": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "binary_mutants": 7
+    },
+    "original_artifacts_unchanged": true,
+    "all_declared_source_tool_inputs_unchanged": true,
+    "baseline_jni": "All four actual modern CMake FindJNI runs select NDK jni.h and build; no observed JNI-discovery failure.",
+    "baseline_layout": "32-bit LOAD alignment is4KiB;64-bit LOAD alignment is16KiB. Baseline RELRO ends are measured layout properties, not inferred device failures.",
+    "arrays_stripped_bytes_unchanged": true,
+    "arrays_pt_load_memsz_sum_delta_bytes_each": 12288,
+    "memory_interpretation": "ELF-declared layout padding; not measured resident memory or performance.",
+    "not_run": [
+      "Android device/emulator/VM/native tests",
+      "Full Android libjava or M3JDK21/HotSpot image",
+      "APK/AAB ZIP alignment and installation/signing",
+      "4KiB/16KiB device behavior",
+      "Mobile CPU/RSS/startup measurements",
+      "jtreg/JCK",
+      "iOS VM/JNI/device",
+      "SWT/Swing/Skija phone peers"
+    ],
+    "phase": "STRING / QUALIFICATION_REQUIRED",
+    "repeated_runs": "Not summed as unique cases",
+    "preserved_history": [
+      "attempt-1 missing official support libraries",
+      "attempt-2 incorrect baseline16KiB comparison threshold",
+      "attempt-3 completed build followed by two artifact rewrites during later inspection",
+      "layout-attempt-1 unjustified linked-text equality and objcopy implicit output"
+    ],
+    "evidence_root": "evidence/final"
+  },
+  "artifact_metadata_sha256": "391f3f70a6fe806db3597dc2d1a34da15837c0c6ab8490421d8a4e5ca08acd04",
+  "artifacts": [
+    {
+      "bytes": 28368,
+      "class": "ELF32",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16",
+        "m3_compare_utf16"
+      ],
+      "label": "armeabi-v7a-arrays-baseline",
+      "loads": [
+        {
+          "alignment": 4096,
+          "file_bytes": 2576,
+          "flags": "RE",
+          "memory_bytes": 2576,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 4096,
+          "file_bytes": 252,
+          "flags": "RW",
+          "memory_bytes": 1520,
+          "offset": 2576,
+          "virtual_address": 6672
+        }
+      ],
+      "machine": "ARM",
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": false,
+      "path": "build/armeabi-v7a/arrays-baseline/libm3_arrays.so",
+      "relro": [
+        {
+          "end": 8192,
+          "memory_bytes": 1520,
+          "virtual_address": 6672
+        }
+      ],
+      "required_alignment": 4096,
+      "sha256": "eb183654229260438e116cd160bcc591e8492e1c99e35ef646b919431a9921d7"
+    },
+    {
+      "bytes": 28272,
+      "class": "ELF32",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16",
+        "m3_compare_utf16"
+      ],
+      "label": "armeabi-v7a-arrays-current",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 2576,
+          "flags": "RE",
+          "memory_bytes": 2576,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 252,
+          "flags": "RW",
+          "memory_bytes": 13808,
+          "offset": 2576,
+          "virtual_address": 18960
+        }
+      ],
+      "machine": "ARM",
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/armeabi-v7a/arrays-current/libm3_arrays.so",
+      "relro": [
+        {
+          "end": 32768,
+          "memory_bytes": 13808,
+          "virtual_address": 18960
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "9bacc5695a70b833b573b5029f9188043f200f306f9794d387fbf0b01fc8a650"
+    },
+    {
+      "bytes": 7280,
+      "class": "ELF32",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "armeabi-v7a-relation-baseline",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 1279,
+          "flags": "R",
+          "memory_bytes": 1279,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 2976,
+          "flags": "RE",
+          "memory_bytes": 2976,
+          "offset": 1280,
+          "virtual_address": 17664
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 236,
+          "flags": "RW",
+          "memory_bytes": 12128,
+          "offset": 4256,
+          "virtual_address": 37024
+        }
+      ],
+      "machine": "ARM",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/armeabi-v7a/libm3_state_relation_baseline.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 12128,
+          "virtual_address": 37024
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "12bc872e0896536c043f16403440188788082107d4a18abffe2ff0d2ef99f314"
+    },
+    {
+      "bytes": 7376,
+      "class": "ELF32",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "armeabi-v7a-relation-current",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 1279,
+          "flags": "R",
+          "memory_bytes": 1279,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 3072,
+          "flags": "RE",
+          "memory_bytes": 3072,
+          "offset": 1280,
+          "virtual_address": 17664
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 236,
+          "flags": "RW",
+          "memory_bytes": 12032,
+          "offset": 4352,
+          "virtual_address": 37120
+        }
+      ],
+      "machine": "ARM",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/armeabi-v7a/libm3_state_relation_current.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 12032,
+          "virtual_address": 37120
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "e2b2aa59d90317198249bd3d4dedfb8239caffb64b8947d96ca0efd8168935d4"
+    },
+    {
+      "bytes": 7280,
+      "class": "ELF32",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "armeabi-v7a-relation-portable",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 1279,
+          "flags": "R",
+          "memory_bytes": 1279,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 2976,
+          "flags": "RE",
+          "memory_bytes": 2976,
+          "offset": 1280,
+          "virtual_address": 17664
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 236,
+          "flags": "RW",
+          "memory_bytes": 12128,
+          "offset": 4256,
+          "virtual_address": 37024
+        }
+      ],
+      "machine": "ARM",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/armeabi-v7a/libm3_state_relation_portable.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 12128,
+          "virtual_address": 37024
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "12bc872e0896536c043f16403440188788082107d4a18abffe2ff0d2ef99f314"
+    },
+    {
+      "bytes": 33168,
+      "class": "ELF64",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16",
+        "m3_compare_utf16"
+      ],
+      "label": "arm64-v8a-arrays-baseline",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 3600,
+          "flags": "RE",
+          "memory_bytes": 3600,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 496,
+          "flags": "RW",
+          "memory_bytes": 496,
+          "offset": 3600,
+          "virtual_address": 19984
+        }
+      ],
+      "machine": "AArch64",
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": false,
+      "path": "build/arm64-v8a/arrays-baseline/libm3_arrays.so",
+      "relro": [
+        {
+          "end": 20480,
+          "memory_bytes": 496,
+          "virtual_address": 19984
+        }
+      ],
+      "required_alignment": 4096,
+      "sha256": "5d5080509e27a72b372d5ff4f261da80e5bf6a22036c92dd30caefdbdadf20d6"
+    },
+    {
+      "bytes": 33088,
+      "class": "ELF64",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16",
+        "m3_compare_utf16"
+      ],
+      "label": "arm64-v8a-arrays-current",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 3600,
+          "flags": "RE",
+          "memory_bytes": 3600,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 496,
+          "flags": "RW",
+          "memory_bytes": 12784,
+          "offset": 3600,
+          "virtual_address": 19984
+        }
+      ],
+      "machine": "AArch64",
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/arm64-v8a/arrays-current/libm3_arrays.so",
+      "relro": [
+        {
+          "end": 32768,
+          "memory_bytes": 12784,
+          "virtual_address": 19984
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "f4ed6f7ad656f0c6db943fbbdd0e4d233d8be6d9be58516d2305bde9056d87c7"
+    },
+    {
+      "bytes": 8376,
+      "class": "ELF64",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "arm64-v8a-relation-baseline",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 2184,
+          "flags": "R",
+          "memory_bytes": 2184,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 2344,
+          "flags": "RE",
+          "memory_bytes": 2344,
+          "offset": 2184,
+          "virtual_address": 18568
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 472,
+          "flags": "RW",
+          "memory_bytes": 11856,
+          "offset": 4528,
+          "virtual_address": 37296
+        }
+      ],
+      "machine": "AArch64",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/arm64-v8a/libm3_state_relation_baseline.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11856,
+          "virtual_address": 37296
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "a7cfc9f319ef72affd0634e163c0d15c0a71e0a747c3d02e7d3b8054b9ff9f08"
+    },
+    {
+      "bytes": 8376,
+      "class": "ELF64",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "arm64-v8a-relation-current",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 2184,
+          "flags": "R",
+          "memory_bytes": 2184,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 2344,
+          "flags": "RE",
+          "memory_bytes": 2344,
+          "offset": 2184,
+          "virtual_address": 18568
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 472,
+          "flags": "RW",
+          "memory_bytes": 11856,
+          "offset": 4528,
+          "virtual_address": 37296
+        }
+      ],
+      "machine": "AArch64",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/arm64-v8a/libm3_state_relation_current.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11856,
+          "virtual_address": 37296
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "7fc81d766c6adee8167b0eb6d1a5213d9d5d63971141f142b045bd009c898d66"
+    },
+    {
+      "bytes": 8376,
+      "class": "ELF64",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "arm64-v8a-relation-portable",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 2184,
+          "flags": "R",
+          "memory_bytes": 2184,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 2344,
+          "flags": "RE",
+          "memory_bytes": 2344,
+          "offset": 2184,
+          "virtual_address": 18568
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 472,
+          "flags": "RW",
+          "memory_bytes": 11856,
+          "offset": 4528,
+          "virtual_address": 37296
+        }
+      ],
+      "machine": "AArch64",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/arm64-v8a/libm3_state_relation_portable.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11856,
+          "virtual_address": 37296
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "a7cfc9f319ef72affd0634e163c0d15c0a71e0a747c3d02e7d3b8054b9ff9f08"
+    },
+    {
+      "bytes": 28160,
+      "class": "ELF32",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16",
+        "m3_compare_utf16"
+      ],
+      "label": "x86-arrays-baseline",
+      "loads": [
+        {
+          "alignment": 4096,
+          "file_bytes": 3408,
+          "flags": "RE",
+          "memory_bytes": 3408,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 4096,
+          "file_bytes": 248,
+          "flags": "RW",
+          "memory_bytes": 688,
+          "offset": 3408,
+          "virtual_address": 7504
+        }
+      ],
+      "machine": "Intel 80386",
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": false,
+      "path": "build/x86/arrays-baseline/libm3_arrays.so",
+      "relro": [
+        {
+          "end": 8192,
+          "memory_bytes": 688,
+          "virtual_address": 7504
+        }
+      ],
+      "required_alignment": 4096,
+      "sha256": "09df3f72b3a25f12438326d94514d666ffed2c858bdef23738076124d1cea205"
+    },
+    {
+      "bytes": 28116,
+      "class": "ELF32",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16",
+        "m3_compare_utf16"
+      ],
+      "label": "x86-arrays-current",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 3408,
+          "flags": "RE",
+          "memory_bytes": 3408,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 248,
+          "flags": "RW",
+          "memory_bytes": 12976,
+          "offset": 3408,
+          "virtual_address": 19792
+        }
+      ],
+      "machine": "Intel 80386",
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/x86/arrays-current/libm3_arrays.so",
+      "relro": [
+        {
+          "end": 32768,
+          "memory_bytes": 12976,
+          "virtual_address": 19792
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "1905a4425f1686b2969485b8812c09cc8e8b397cc6afab4f2aac9bb95b57f887"
+    },
+    {
+      "bytes": 7316,
+      "class": "ELF32",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "x86-relation-baseline",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 1696,
+          "flags": "R",
+          "memory_bytes": 1696,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 3104,
+          "flags": "RE",
+          "memory_bytes": 3104,
+          "offset": 1696,
+          "virtual_address": 18080
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 236,
+          "flags": "RW",
+          "memory_bytes": 11584,
+          "offset": 4800,
+          "virtual_address": 37568
+        }
+      ],
+      "machine": "Intel 80386",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/x86/libm3_state_relation_baseline.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11584,
+          "virtual_address": 37568
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "fd39a3e2f1c274dce8120379a6b91f4a37920649b3812e476d35382b1d445f16"
+    },
+    {
+      "bytes": 7572,
+      "class": "ELF32",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "x86-relation-current",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 1696,
+          "flags": "R",
+          "memory_bytes": 1696,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 3360,
+          "flags": "RE",
+          "memory_bytes": 3360,
+          "offset": 1696,
+          "virtual_address": 18080
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 236,
+          "flags": "RW",
+          "memory_bytes": 11328,
+          "offset": 5056,
+          "virtual_address": 37824
+        }
+      ],
+      "machine": "Intel 80386",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/x86/libm3_state_relation_current.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11328,
+          "virtual_address": 37824
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "0e9da34f14f32915f353c71eed02424bd30e4763d7f89c711d48919906160839"
+    },
+    {
+      "bytes": 7316,
+      "class": "ELF32",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "x86-relation-portable",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 1696,
+          "flags": "R",
+          "memory_bytes": 1696,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 3104,
+          "flags": "RE",
+          "memory_bytes": 3104,
+          "offset": 1696,
+          "virtual_address": 18080
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 236,
+          "flags": "RW",
+          "memory_bytes": 11584,
+          "offset": 4800,
+          "virtual_address": 37568
+        }
+      ],
+      "machine": "Intel 80386",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/x86/libm3_state_relation_portable.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11584,
+          "virtual_address": 37568
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "fd39a3e2f1c274dce8120379a6b91f4a37920649b3812e476d35382b1d445f16"
+    },
+    {
+      "bytes": 32696,
+      "class": "ELF64",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16",
+        "m3_compare_utf16"
+      ],
+      "label": "x86_64-arrays-baseline",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 3568,
+          "flags": "RE",
+          "memory_bytes": 3568,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 496,
+          "flags": "RW",
+          "memory_bytes": 528,
+          "offset": 3568,
+          "virtual_address": 19952
+        }
+      ],
+      "machine": "Advanced Micro Devices X86-64",
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": false,
+      "path": "build/x86_64/arrays-baseline/libm3_arrays.so",
+      "relro": [
+        {
+          "end": 20480,
+          "memory_bytes": 528,
+          "virtual_address": 19952
+        }
+      ],
+      "required_alignment": 4096,
+      "sha256": "dfac21c9b63b7c95af6f2a7c87ed5b79e2899ae59133165262a25203a9a5702f"
+    },
+    {
+      "bytes": 32640,
+      "class": "ELF64",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16",
+        "m3_compare_utf16"
+      ],
+      "label": "x86_64-arrays-current",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 3568,
+          "flags": "RE",
+          "memory_bytes": 3568,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 496,
+          "flags": "RW",
+          "memory_bytes": 12816,
+          "offset": 3568,
+          "virtual_address": 19952
+        }
+      ],
+      "machine": "Advanced Micro Devices X86-64",
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/x86_64/arrays-current/libm3_arrays.so",
+      "relro": [
+        {
+          "end": 32768,
+          "memory_bytes": 12816,
+          "virtual_address": 19952
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "c0f9f97a5576ca24f4711d4cca7eae2f3fc7ab11a251ab873fce6c7fb6330411"
+    },
+    {
+      "bytes": 7912,
+      "class": "ELF64",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "x86_64-relation-baseline",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 2100,
+          "flags": "R",
+          "memory_bytes": 2100,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 2304,
+          "flags": "RE",
+          "memory_bytes": 2304,
+          "offset": 2112,
+          "virtual_address": 18496
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 472,
+          "flags": "RW",
+          "memory_bytes": 11968,
+          "offset": 4416,
+          "virtual_address": 37184
+        }
+      ],
+      "machine": "Advanced Micro Devices X86-64",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/x86_64/libm3_state_relation_baseline.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11968,
+          "virtual_address": 37184
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "d99855ca8b4cb7b5cd927ea7d17b91ff43c81a70a280c643c9c391b5a728a785"
+    },
+    {
+      "bytes": 7896,
+      "class": "ELF64",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "x86_64-relation-current",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 2108,
+          "flags": "R",
+          "memory_bytes": 2108,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 2288,
+          "flags": "RE",
+          "memory_bytes": 2288,
+          "offset": 2112,
+          "virtual_address": 18496
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 472,
+          "flags": "RW",
+          "memory_bytes": 11984,
+          "offset": 4400,
+          "virtual_address": 37168
+        }
+      ],
+      "machine": "Advanced Micro Devices X86-64",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/x86_64/libm3_state_relation_current.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11984,
+          "virtual_address": 37168
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "6b73a3bcd8e38bc83766eb0c100cf1a32f41916082b1c5159c8c1bb58a1fe2c3"
+    },
+    {
+      "bytes": 7912,
+      "class": "ELF64",
+      "exports": [
+        "Java_jdk_internal_mindex_M3StateRelation_composeNative",
+        "Java_jdk_internal_mindex_M3StateRelation_repeatNative",
+        "m3_state_relation_compose",
+        "m3_state_relation_repeat"
+      ],
+      "label": "x86_64-relation-portable",
+      "loads": [
+        {
+          "alignment": 16384,
+          "file_bytes": 2100,
+          "flags": "R",
+          "memory_bytes": 2100,
+          "offset": 0,
+          "virtual_address": 0
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 2304,
+          "flags": "RE",
+          "memory_bytes": 2304,
+          "offset": 2112,
+          "virtual_address": 18496
+        },
+        {
+          "alignment": 16384,
+          "file_bytes": 472,
+          "flags": "RW",
+          "memory_bytes": 11968,
+          "offset": 4416,
+          "virtual_address": 37184
+        }
+      ],
+      "machine": "Advanced Micro Devices X86-64",
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "non_executable_stack": true,
+      "observed_16k_alignment": true,
+      "path": "build/x86_64/libm3_state_relation_portable.so",
+      "relro": [
+        {
+          "end": 49152,
+          "memory_bytes": 11968,
+          "virtual_address": 37184
+        }
+      ],
+      "required_alignment": 16384,
+      "sha256": "d99855ca8b4cb7b5cd927ea7d17b91ff43c81a70a280c643c9c391b5a728a785"
+    }
+  ],
+  "delivery": {
+    "recipe": "com.synexia.m3.AndroidNdkReceipt20261021",
+    "unchanged_engine": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+    "changed_documentation_paths": [
+      "m3/docs/android-efficiency-20261020/COMMON_JNI.md",
+      "m3/docs/android-efficiency-20261020/NDK_QUALIFICATION_20261021.md",
+      "m3/docs/android-efficiency-20261020/evidence/ndk-cross-build-20261021.json"
+    ],
+    "meaning": "The recipe delivers these exact evidence bytes. Its SDK tests qualify documentation delivery, not native runtime behavior."
+  },
+  "phase": "STRING / QUALIFICATION_REQUIRED"
+}

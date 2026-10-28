@@ -1,0 +1,22 @@
+{
+  "schema": "M3_PUBLICATION_METADATA_CORRECTION/1",
+  "state": "RETAINED_FAILED_METADATA_CHECK_AND_BOUNDED_CORRECTION",
+  "failed_check": {
+    "path": "PUBLICATION_PROVENANCE_CHECK.json",
+    "sha256": "67db121631ffc557d023cbe4876009903b16866eb0fca7720c1e671e5b8d06b2",
+    "violation_count": 26,
+    "only_code": "UPSTREAM_DISPOSITION"
+  },
+  "original_sealer": {
+    "path": "seal_publication.py",
+    "sha256": "0846a54afa1325357f03d27f7a056afcc1e32354347a16305b770c64bb992eff"
+  },
+  "corrected_sealer": {
+    "path": "seal_publication-002.py",
+    "sha256": "30e4c4f3dffa9687a8ffe2e69f27ad99f1ccb84d9f6c8b33b967fe9fedfe858b"
+  },
+  "correction": "Use exact existing allowed ADAPTED_UPSTREAM disposition for UPSTREAM_MODIFIED rows. Retain exact lineage detail in the existing source/rights and recipe/helper lineage records. Existing checker unchanged. The first failed attempt stopped before writing either canonical append owner.",
+  "followup_receipt": "PUBLICATION_PROVENANCE_CHECK-002.json",
+  "custody": "Failure observed in actual exec_command; its generated complete violation receipt and original script are retained. No separate raw shell log was saved.",
+  "limits": "Metadata-only; no source, recipe, test, runtime, engine, policy or admission change."
+}

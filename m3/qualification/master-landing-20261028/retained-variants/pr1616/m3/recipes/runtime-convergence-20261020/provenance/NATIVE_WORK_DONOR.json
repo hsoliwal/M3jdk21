@@ -1,0 +1,12 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "source": {
+    "target": "m3/collections/src/test/native/m3_mask_compactor_work.c",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "source_path": "m3/collections/recipes/mask-window-core-20261018/current-20261020/probes/native_work_probe.c",
+    "git_blob": "f2d5157773b9971955232823551e2775292e6858",
+    "sha256": "a508d1cfe2050bce7b5669726c03fddc4aa80d8e328046082cef8a4956d96186",
+    "license": "Apache-2.0"
+  },
+  "disposition": "EXACT_UNCHANGED_PUBLIC_SOURCE_COPY_TO_NEW_TEST_OWNER"
+}

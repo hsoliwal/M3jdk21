@@ -1,0 +1,44 @@
+{
+  "status": "PASS_FRESH_INSTALLED_NATIVE_ORIGINS",
+  "libraries": {
+    "libm3_collections_address.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_address.so"
+    ],
+    "libm3_collections_long_path_masks.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_long_path_masks.so"
+    ],
+    "libm3_collections_mask.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_mask.so"
+    ],
+    "libm3_collections_pathmask.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_pathmask.so"
+    ],
+    "libm3_collections_span.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_span.so"
+    ],
+    "libm3_collections_statehist.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_statehist.so"
+    ],
+    "libm3_residency_state_mask.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_residency_state_mask.so"
+    ],
+    "libm3bitlane.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3bitlane.so"
+    ],
+    "libm3rankbatch.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3rankbatch.so"
+    ],
+    "libm3signalorder.so": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3signalorder.so"
+    ]
+  },
+  "logs": {
+    "logs/filtered-cursor-trace-libraries.log": "d9cebd633608daa8f3c262fd07eb7b26d55322892ea845507228c2fe7a82e546",
+    "logs/filtered-donor-proof-libraries.log": "b409a5f03e8f65d754f593262b47de32747269afeedb0121710c29c21c0ec204",
+    "logs/filtered-expanded-contract-libraries.log": "a786ce03086727b5792f844b322fe4cd11cddaceae9babdd116979db43349f80",
+    "logs/linked-junit-libraries-430.log": "700da0377219a633e824876c38c1761fce6fff2424e05e2788278fa232f8cc59",
+    "logs/mask-compactor-native-libraries.log": "ef085d6da522219ddf1645306fdb70fb275568ff67ce6ba236d36fe28dbc1095",
+    "logs/tree-composed-compact-libraries.log": "bd057e2b9cfc82f9d01e0850738bd91fd7fd0c8813588fc76bf1265570034755",
+    "logs/tree-composed-wide-libraries.log": "3c3f78ffdb5d813b03327e461517a11d862a47725b6ba3e2dd50e2bfae3d9984"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "phase": "FULL_BACKEND_STAGING_ACCEPTANCE",
+  "mode": "normal",
+  "started_utc": "2026-10-19T01:38:00.086621+00:00",
+  "input_sha256": {
+    "/tmp/m3fs-eclipse-work/m2/com/m3/m3-fs/0.1.0-SNAPSHOT/m3-fs-0.1.0-SNAPSHOT.jar": "d26696e0b79b81cbc51d8c07e0e19c574111e6603b930c15006a01c8d8c69970",
+    "/tmp/m3fs-root-work/qualification/m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar": "d26696e0b79b81cbc51d8c07e0e19c574111e6603b930c15006a01c8d8c69970",
+    "/tmp/m3fs-root-work/qualification/m3/fs/target/native/libm3fs.so": "fb2e70989a90f1ff151519ad875c09f82a3812ec7e2d7cfc932c2a001eccfcdf",
+    "/tmp/m3fs-native-work/deps/usr/lib/x86_64-linux-gnu/libsqlite3.so.0": "2e6eef9a727f081f0d453b4e5e6cbd8b9ef8b6f86cbf7681cbad444d3b0b55c8"
+  },
+  "source_sha256": {
+    "m3/eclipse/filesystem/README.md": "2c425ab6eae55c6a2b4851d51c38a3d127c88877e2b910113dd15d9b830913fb",
+    "m3/eclipse/filesystem/osgi/MANIFEST.MF": "0036c4971ec731ee04e8e6f48548570d2506bb739b1cc2ae354fe71d50e3435f",
+    "m3/eclipse/filesystem/osgi/TEST-MANIFEST.MF": "9a0d1611f8707d596d2a98e2e7f64b72720c11ce45a46157775d3a50b3e0540e",
+    "m3/eclipse/filesystem/pom.xml": "6d4a89f8bdbb32ba87bb3d1e803de350b9e14474a369cafe100e5aba6ce0c271",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3EclipseActivator.java": "60723a27ba55745b93649bb49c21fd186674cdda71820e7354cb927bef063085",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3EclipseFileStore.java": "308188cd75b590996a552a42de493d98cb38b6e9161c7ae140dc8d54fd3d5757",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3EclipseFileSystem.java": "ef0f328a2f34c2d2961280333cab2a487886d2a157810ed862b6a1ecd854e01b",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3Mounts.java": "a5ae919ec1dc513e79beb9d13051e3f1e6845cea3b177ad5cdcde234c3ed11d3",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3Paths.java": "832db79becea5b5e9da22fffb2ab203fcca230d91578e3904c546ac9c55831db",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3Streams.java": "ada55988de8fbb3732e99b009efd81aaeea71a68e4a526f568354f7af5d60e6e",
+    "m3/eclipse/filesystem/src/main/resources/plugin.xml": "05f451b3f5f6f4843eae8e15891016aea3d3f01847116393902b141e556e1f03",
+    "m3/eclipse/filesystem/src/test/java/com/m3/eclipse/filesystem/M3EclipseFileSystemTest.java": "8def3d952445e2d64bb251c5857962a49455e5f103cb3880c87ff7dc849819c2",
+    "m3/eclipse/filesystem/src/test/java/com/m3/eclipse/filesystem/it/M3WorkspaceScenario.java": "f5f95252f6f1307d8ffc5c07bb23c236e91dc4059b4f7a51362396f840c0f61c",
+    "m3/eclipse/filesystem/src/test/java/com/m3/eclipse/filesystem/launcher/M3ResourcesIT.java": "6b0cd1670123f0a7222fff209cb02a74a2fc9fb180a83fcc03adafb2cde1360e",
+    "m3/fs/README.md": "b89de894adc3e81acc698902b5881e769dce593ed5d1dbcc7a4a95dc89f31f44",
+    "m3/fs/qualification/port-20261018/CAPABILITIES.md": "53ea9ab072cc9ccf1d4ed09b869d66f846dbd6dbb081efd023a69e3e9136659a"
+  },
+  "cleared_environment_names": [
+    "LD_PRELOAD",
+    "DYLD_INSERT_LIBRARIES",
+    "DYLD_LIBRARY_PATH",
+    "JAVA_TOOL_OPTIONS",
+    "_JAVA_OPTIONS",
+    "JDK_JAVA_OPTIONS",
+    "CLASSPATH",
+    "MAVEN_OPTS",
+    "MAVEN_ARGS"
+  ],
+  "LD_LIBRARY_PATH": "/tmp/m3fs-native-work/deps/usr/lib/x86_64-linux-gnu",
+  "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "MAVEN_SKIP_RC": "1",
+  "receipt_schema": "m3.fs.eclipse.full-backend-staging.v1",
+  "original_receipt_sha256": "e20b5ef7fdf3cda7fe5a24db94fcf1d52f75d3234b5f1c3002b0994cc7228efe"
+}

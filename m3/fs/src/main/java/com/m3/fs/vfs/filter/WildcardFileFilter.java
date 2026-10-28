@@ -25,8 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import com.m3.fs.vfs.FileFilter;
 import com.m3.fs.vfs.FileSelectInfo;
 
@@ -61,6 +59,7 @@ import com.m3.fs.vfs.FileSelectInfo;
  * @since 2.4
  */
 public class WildcardFileFilter implements FileFilter, Serializable {
+    private static final String[] NO_TOKENS = {};
 
     private static final long serialVersionUID = 1L;
 
@@ -85,7 +84,7 @@ public class WildcardFileFilter implements FileFilter, Serializable {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
             if (array[i] == '?' || array[i] == '*') {
-                if (StringUtils.isNotEmpty(builder)) {
+                if (builder.length() > 0) {
                     list.add(builder.toString());
                     builder.setLength(0);
                 }
@@ -98,11 +97,11 @@ public class WildcardFileFilter implements FileFilter, Serializable {
                 builder.append(array[i]);
             }
         }
-        if (StringUtils.isNotEmpty(builder)) {
+        if (builder.length() > 0) {
             list.add(builder.toString());
         }
 
-        return list.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return list.toArray(NO_TOKENS);
     }
 
     /**

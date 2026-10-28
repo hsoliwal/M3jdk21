@@ -1,8 +1,10 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 /* Copyright 2026 Hitesh Soliwal and contributors.
  * Modified 2026-10-17: bounded index chunks and contiguous region reads.
+ * Modified 2026-10-19: Java physical-bounds exception class and diagnostic parity.
  */
 #include <jni.h>
+#include <stdio.h>
 
 /* Own scratch is fixed: 256 jint indexes and 256 jlong values (3072 bytes).
  * JVM-internal copying is implementation-dependent. Caller keeps input arrays stable.
@@ -65,8 +67,13 @@ Java_com_m3_collections_M3LongAddressKernel_gatherNative(
         }
         if (valid != count) {
             /* Publish exactly the valid prefix, including the current partial chunk. */
-            jclass error = (*env)->FindClass(env, "java/lang/IndexOutOfBoundsException");
-            if (error != NULL) (*env)->ThrowNew(env, error, "physical address outside payload");
+            jclass error = (*env)->FindClass(env, "java/lang/ArrayIndexOutOfBoundsException");
+            if (error != NULL) {
+                char message[96];
+                (void) snprintf(message, sizeof(message), "Index %d out of bounds for length %d",
+                        (int) index[valid], (int) payload_length);
+                (*env)->ThrowNew(env, error, message);
+            }
             return;
         }
         done += count;

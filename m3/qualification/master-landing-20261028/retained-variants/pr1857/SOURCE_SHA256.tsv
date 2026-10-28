@@ -1,0 +1,6 @@
+path	sha256	git_blob	mode	pr	note
+m3/collections/interop/qualification/current-census-superset-20261022/README.md	f508167212bdf35da8a18899bf8bdf23295e28b147ba11ea7142aa567fbcadb6	fd50332d228c03a27569fd60f1c94e15d62bcab2	100644	1857	PR version, not live
+m3/collections/interop/qualification/current-census-superset-20261022/receipts/changed-native-01.tsv	ae0fc91c8493d97fc0ccad0c49e3886e5545ffcd943d608377da4dda51be1e31	12f32398df4920c82887e1c805cdd173fff4f373	100644	1857	PR version, not live
+m3/collections/interop/qualification/current-census-superset-20261022/test_native_mode_transition.py	146ffecc6db2d4e20bc467cc506e482aa026d3bbddb12019d4a2e603ed1a6744	1ba940c99e41284357a54e9edb4d9f203f2b267a	100644	1857	PR version, not live
+m3/collections/interop/qualification/current-census-superset-20261022/verify_superset.py	ca0aa3c8d60d9ab2b8d98c6cc3f3d3ffe18d7826b56b3c6f26ccb66b817605d1	feba678dadcf2682a8c70cd0bdda8d51c55bb868	100644	1857	PR version, not live
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java	ac2ff0dc5d6d395cf235e9e45218b4c0493915734d02d9f4fb7e4a5bded9cc34	b027c0bf647afe8bf6703f2789cad80cbcbd025b	100644	1857	PR version, not live

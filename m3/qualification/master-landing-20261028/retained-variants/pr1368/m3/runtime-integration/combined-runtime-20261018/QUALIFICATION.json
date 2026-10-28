@@ -1,0 +1,68 @@
+{
+  "schema": "M3_COMBINED_RUNTIME_QUALIFICATION_V2",
+  "canonical_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12370",
+  "observed_local_source_head": "e7257347bc3d473bd9fcab7f5003489e7fec38c5",
+  "qualified_direct_runtime_datasets": 20,
+  "direct_serial_target_applications": 207,
+  "separate_sealed_mapping_apply": 54,
+  "separate_sealed_mapping_replay": 0,
+  "selected_canonical_cohort": {
+    "datasets": 30,
+    "sdk": 150,
+    "sealing": 240,
+    "receiver": 270,
+    "all_maven_exits": 0,
+    "two_compat_profile_datasets": true,
+    "stock_provider_datasets": 28,
+    "hosted_whole_workflow": "NOT_CLAIMED"
+  },
+  "source_built_collection_junit": 264,
+  "selected_checked_jni_executions": 12,
+  "source_bootstrap_modules": 57,
+  "hotspot_fastdebug_compile": "PASS_1207_SOURCES",
+  "strict_java_base_compile": "PASS_3565_SOURCES",
+  "actual_make_images": "PASS",
+  "matched_image_priority_jtreg": {
+    "tests": 5,
+    "passed": 5
+  },
+  "matched_image_Object_progress_jtreg": {
+    "tests": 2,
+    "passed": 2
+  },
+  "Object_override_array_clone_smoke": {
+    "modes": 3,
+    "assertions_per_mode": 50040,
+    "result": "PASS"
+  },
+  "image_integrity": {
+    "files": 516,
+    "bytes": 496335813,
+    "all_hashes_unchanged_after_tests": true
+  },
+  "TQ_successor": {
+    "normal": 21,
+    "ubsan": 21,
+    "sync": 3,
+    "fresh_final_mapping_epoch_TQ": 21,
+    "fresh_final_mapping_epoch_sync": 3,
+    "counts_do_not_add_repeated_cases": true
+  },
+  "current_TQ_and_Sync_custody": "PASS_UNCHANGED_VERIFIERS",
+  "full_migration_structural_validate": "PASS_ZERO_ERRORS",
+  "migration_complete": {
+    "exit": 2,
+    "unchanged_holds": 147,
+    "statuses_unchanged": 56,
+    "gates_unchanged": 20
+  },
+  "native_index_recipe": "Historical full Maven/Java/JNI PASS; current five tests PASS then historical source manifest correctly refuses evolved runtime input",
+  "performance_memory": {
+    "actual_regex_warm_modes": 3,
+    "warm_alloc_bytes_per_query_each": 32,
+    "TQ_warm_payload_reads": 0,
+    "broad_speedup_or_retained_memory_acceptance": false
+  },
+  "migration_dag": "PRIOR_442_TEST_RUN_31_FAILURES_8_ERRORS_REMAIN",
+  "promotion_authority": false
+}

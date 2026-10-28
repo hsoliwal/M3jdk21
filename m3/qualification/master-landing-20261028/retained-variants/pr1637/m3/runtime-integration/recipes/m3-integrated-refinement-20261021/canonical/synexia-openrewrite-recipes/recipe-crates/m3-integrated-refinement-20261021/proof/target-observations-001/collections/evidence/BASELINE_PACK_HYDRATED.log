@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/tooling/module-packs/collections/build.py", line 171, in <module>
+    main()
+  File "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/tooling/module-packs/collections/build.py", line 125, in main
+    raise ValueError("unexpected JNI export set: " + repr(exported_jni))
+ValueError: unexpected JNI export set: {'Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative', 'Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative', 'Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative', 'Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative', 'Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative', 'Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative', 'Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative', 'Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative', 'Java_com_m3_collections_M3IndexMaskCompactor_selectNative'}

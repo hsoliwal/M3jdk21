@@ -1,0 +1,70 @@
+Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData
+[main] INFO opennlp.tools.cmdline.CLI - OpenNLP 3.0.0-SNAPSHOT.
+[main] INFO opennlp.tools.cmdline.CLI - Usage: opennlp TOOL
+[main] INFO opennlp.tools.cmdline.CLI - where TOOL is one of: 
+
+  Doccat                            Learned document categorizer
+  DoccatTrainer                     Trainer for the learnable document categorizer
+  DoccatEvaluator                   Measures the performance of the Doccat model with the reference data
+  DoccatCrossValidator              K-fold cross validator for the learnable Document Categorizer
+  DoccatConverter                   Converts 20newsgroup data format to native OpenNLP format
+  DoccatSVM                         SVM-based document categorizer
+  DoccatSVMTrainer                  Trainer for the SVM-based document categorizer
+  DoccatSVMEvaluator                Measures the performance of the SVM Doccat model with the reference data
+  LanguageDetector                  Learned language detector
+  LanguageDetectorTrainer           Trainer for the learnable language detector
+  LanguageDetectorConverter         Converts leipzig data format to native OpenNLP format
+  LanguageDetectorCrossValidator    K-fold cross validator for the learnable Language Detector
+  LanguageDetectorEvaluator         Measures the performance of the Language Detector model with the reference data
+  DictionaryBuilder                 Builds a new dictionary
+  SimpleTokenizer                   Character class tokenizer
+  TokenizerME                       Learnable tokenizer
+  TokenizerTrainer                  Trainer for the learnable tokenizer
+  TokenizerMEEvaluator              Measures the performance of the learnable tokenizer
+  TokenizerCrossValidator           K-fold cross validator for the learnable tokenizer
+  TokenizerConverter                Converts external data formats (irishsentencebank,ad,pos,masc,conllx,namefinder,parse,conllu) to native OpenNLP format
+  DictionaryDetokenizer             Normalizes tokenized text according to rules defined in a detokenizer dictionary
+  StopwordFilter                    filters stop words from tokens read on stdin
+  SentenceDetector                  Learnable sentence detector
+  SentenceDetectorTrainer           Trainer for the learnable sentence detector
+  SentenceDetectorEvaluator         Measures the performance of the learnable sentence detector
+  SentenceDetectorCrossValidator    K-fold cross validator for the learnable sentence detector
+  SentenceDetectorConverter         Converts external data formats (nkjp,irishsentencebank,ad,pos,masc,conllx,namefinder,parse,moses,conllu,letsmt) to native OpenNLP format
+  TokenNameFinder                   Learnable name finder
+  TokenNameFinderTrainer            Trainer for the learnable name finder
+  TokenNameFinderEvaluator          Measures the performance of the NameFinder model with the reference data
+  TokenNameFinderCrossValidator     K-fold cross validator for the learnable Name Finder
+  TokenNameFinderConverter          Converts external data formats (evalita,ad,conll03,bionlp2004,conll02,germeval2014,masc,muc6,ontonotes,brat) to native OpenNLP format
+  CensusDictionaryCreator           Converts 1990 US Census names into a dictionary
+  POSTagger                         Learnable part of speech tagger
+  POSTaggerTrainer                  Trains a model for the part-of-speech tagger
+  POSTaggerEvaluator                Measures the performance of the POS tagger model with the reference data
+  POSTaggerCrossValidator           K-fold cross validator for the learnable POS tagger
+  POSTaggerConverter                Converts external data formats (ad,masc,conllx,parse,ontonotes,conllu) to native OpenNLP format
+  LemmatizerME                      Learnable lemmatizer
+  LemmatizerTrainerME               Trainer for the learnable lemmatizer
+  LemmatizerEvaluator               Measures the performance of the Lemmatizer model with the reference data
+  DependencyParserTrainerME         Trains a dependency parser from CoNLL-U samples
+  DependencyParserEvaluator         Measures dependency parser attachment scores
+  DependencyParserCrossValidator    Cross validates a dependency parser
+  DependencyParserME                Parses dependency trees from POS-tagged sentences
+  ChunkerME                         Learnable chunker
+  ChunkerTrainerME                  Trainer for the learnable chunker
+  ChunkerEvaluator                  Measures the performance of the Chunker model with the reference data
+  ChunkerCrossValidator             K-fold cross validator for the chunker
+  ChunkerConverter                  Converts ad data format to native OpenNLP format
+  Parser                            Performs full syntactic parsing
+  ParserTrainer                     Trains the learnable parser
+  ParserEvaluator                   Measures the performance of the Parser model with the reference data
+  ParserConverter                   Converts external data formats (ontonotes,frenchtreebank) to native OpenNLP format
+  BuildModelUpdater                 Trains and updates the build model in a parser model
+  CheckModelUpdater                 Trains and updates the check model in a parser model
+  TaggerModelReplacer               Replaces the tagger model in a parser model
+  EntityLinker                      Links an entity to an external data set
+  SentimentTrainer                  learnable sentiment analysis
+  SentimentEvaluator                Measures the performance of the Sentiment model with the reference data
+  SentimentCrossValidator           K-fold cross validator for the learnable Sentiment Analysis Parser
+  NGramLanguageModel                Gives the probability and most probable next token(s) of a sequence of tokens in a language model
+
+[main] INFO opennlp.tools.cmdline.CLI - All tools print help when invoked with help parameter
+[main] INFO opennlp.tools.cmdline.CLI - Example: opennlp SimpleTokenizer help

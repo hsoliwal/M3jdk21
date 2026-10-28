@@ -1,0 +1,69 @@
+diff --git a/src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java b/src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java
+index 2a11ebe..9f5e4fd 100644
+--- a/src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java
++++ b/src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java
+@@ -2,6 +2,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ // Copyright 2026 Hitesh Soliwal and contributors
+ package jdk.internal.mindex;
+ 
++import java.util.Arrays;
+ import java.util.Objects;
+ 
+ /**
+@@ -123,20 +124,48 @@
+         return accepts(frontier);
+     }
+ 
+-    /** Earliest start, then shortest accepted end. Worst-case O(tokens squared * predicates). */
++    /**
++     * Earliest start, then shortest accepted end. Keep only the earliest origin for each
++     * active state: future transitions depend on the state, so an earlier origin dominates
++     * every later origin at that same state. Work is O(tokens * predicates squared), with
++     * two bounded primitive origin rows; token count never creates a quadratic restart scan.
++     */
+     public Match find(Input input) {
+         requireDomain(input);
+         long initial = initialState();
+         if (accepts(initial)) return new Match(0, 0);
+-        for (int start = 0; start < input.length; start++) {
+-            long frontier = initial;
+-            for (int end = start; end < input.length; end++) {
+-                frontier = states.advanceTokenMask(frontier, matchingMask(input, end));
+-                if (accepts(frontier)) return new Match(start, end + 1);
+-                if (frontier == 0) break;
++        int[] origins = new int[states.stateCount()];
++        int[] next = new int[origins.length];
++        Arrays.fill(origins, Integer.MAX_VALUE);
++        int bestStart = Integer.MAX_VALUE, bestEnd = -1;
++        for (int token = 0; token < input.length; token++) {
++            for (long active = initial; active != 0; active &= active - 1) {
++                int state = Long.numberOfTrailingZeros(active);
++                origins[state] = Math.min(origins[state], token);
+             }
++            Arrays.fill(next, Integer.MAX_VALUE);
++            long matched = matchingMask(input, token);
++            for (int state = 0; state < origins.length; state++) {
++                int origin = origins[state];
++                if (origin == Integer.MAX_VALUE) continue;
++                long destinations = states.advanceTokenMask(1L << state, matched);
++                while (destinations != 0) {
++                    int destination = Long.numberOfTrailingZeros(destinations);
++                    next[destination] = Math.min(next[destination], origin);
++                    destinations &= destinations - 1;
++                }
++            }
++            int accepted = next[kinds.length];
++            if (accepted < bestStart) {
++                bestStart = accepted;
++                bestEnd = token + 1;
++                if (bestStart == 0) return new Match(bestStart, bestEnd);
++            }
++            int[] swap = origins;
++            origins = next;
++            next = swap;
+         }
+-        return null;
++        return bestEnd < 0 ? null : new Match(bestStart, bestEnd);
+     }
+ 
+     /** Token predicates are evaluated once per slot; effects retain no input or token payload. */

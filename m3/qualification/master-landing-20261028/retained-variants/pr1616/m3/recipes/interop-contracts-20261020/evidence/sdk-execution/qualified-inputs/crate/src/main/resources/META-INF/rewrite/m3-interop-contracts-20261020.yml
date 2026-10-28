@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-20: independent test-contract successor; exact existing engine owners.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.InteropContracts20261020
+displayName: Preserve interop contracts while repairing qualification fixtures
+description: >-
+  Receive twelve exact-source test and documentation repairs against current
+  provider owners, preserving production Java/JNI and original seeded workloads.
+  Target acceptance remains separate from this OpenRewrite SDK source proof.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-interop-contracts-20261020
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-interop-contracts-20261020

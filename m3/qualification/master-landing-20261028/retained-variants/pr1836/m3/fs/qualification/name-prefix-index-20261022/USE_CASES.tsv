@@ -1,0 +1,18 @@
+category	use_case	original_runtime_owner	implementation_source	status	remaining_proof
+FILE_ONE_READ	Compiler/IDE full source bytes and matching SHA256	com.m3.file.M3File.captureBytes	#1814 and #1823	PRESERVED_PRODUCT_SOURCE	Actual module Maven/JUnit/linked image
+FILE_SHARED_BUFFER	Millions of offline source observations without per-file scratch allocation	com.m3.file.M3File.observe scratch and M3HostFileInventory	#1817 and #1823	PRESERVED_PRODUCT_SOURCE	Original Maven/JNI and allocation benchmark
+FILE_RANGE_SHA	Known record/chunk byte regions in one seekable file channel	com.m3.file.M3File.fingerprintRanges	#1815 and #1824	SOURCE_RECEIVED	Original host/linked verify.py and file provider matrix
+FILE_OFFLINE_DELTA	Offline Maven/Gradle change discovery without active watcher	com.m3.fs.M3HostFileInventory and M3BuildState V2	#1758 #1782	STACKED_PRODUCT_SOURCE	Original JNI M3FS successful-vs-observed checkpoint tests
+FILE_SHADOW_LAYERS	Same consumed source bytes for digest and AST/grammar/progress	com.m3.file.M3File and M3ShadowStreams	#1782 #1811	SOURCE_PRESERVED	Source-built multi-consumer cancellation/error propagation
+FILE_SOURCE_STABILITY	Generic filesystem concurrent change checking	com.m3.file.M3File checked attributes and SHA256	Existing original source	CONSERVATIVE_SUPPORTED	Provider-guaranteed immutable generations still needed
+FS_PROVIDER_NIO	ZIP/JRT and nondefault NIO path identity/lifetime	com.m3.fs.NioFileProvider and MFiles	#1747 #1814	PRESERVED_PRODUCT_SOURCE	Native/linked image/provider platform tests
+FS_PROVIDER_DB	M3FS m3db native SQLite provider	com.m3.fs.DatabaseFileProvider and M3FS	#1747 #1814	PRESERVED_PRODUCT_SOURCE	Full C/JNI SQLite WAL/CTest across platforms
+FS_SEQUENTIAL_RANGES	Selected byte transfers from compressed/archive/remote streams	com.m3.fs.MFileStreams.transferRanges	#1815 #1824	SOURCE_RECEIVED	End-to-end native provider/cancellation/JUnit/transfer parity
+FS_DIRECTORY_FILTER	Filter source entries by original physical state kinds	com.m3.fs.M3DirectoryTable.selectedRows and selectedMaskWords	#1793 #1824	SOURCE_RECEIVED	Actual M3FS native row decode and Maven JUnit
+FS_DIRECTORY_SIZE_SORT	Stable primitive row-index sort by source size	com.m3.fs.M3DirectoryTable.rowsBySize	#1793 #1824	SOURCE_RECEIVED	Actual native SQLite/JUnit and large-scale performance
+FS_DIRECTORY_NAME_INDEX	Stable name ordering without String/DirEntry sort materialization	com.m3.fs.M3DirectoryTable.nameIndex	#1836 / Synexia #13054	SOURCE_RECEIVED	Actual module JUnit/native SQLite and benchmark
+FS_DIRECTORY_PREFIX	Repeated UTF16 prefix search via binary ranges on one int[] page	com.m3.fs.M3DirectoryTable.NameIndex.rowsWithPrefix	#1836 / Synexia #13054	SCOPED_JAVA21_MIRROR_PASS	Original-owner JUnit plus platform/case behavior
+FS_RESOURCE_LOCKS	Eclipse-style nested path scheduling in Java	com.m3.file.M3ResourceLocks	Merged #1731	MASTER_AVAILABLE	In-process locks are not OS cross-process locks
+BUILD_SEMANTIC_IMPACT	Compile/plugin task reuse from attributed ABI and dependencies	jdk.m3.parser M3AST and M3BuildState	#1758 and open Maven/Gradle work	OPEN_COMPILER_GATE	No safe skip from content hashes alone
+JDK_COLLECTIONS	Filtered/sorted parent-owned Object[]/primitive arrays and JNI masks	Original M3 collections/java.base classes	#1797 and active independent PRs	STACKED_SEPARATE	Full API/JNI/5-library contracts and performance
+JNI_NATIVE_BULK	SIMD/primitive mask/rank transfers inside original SDK	Original libjava/JNI M3 native kernels	#1761 #1797	QUALIFIED_DONOR_NOT_FULL_IMAGE	Complete HotSpot/JMOD/JTReg/GC/platform gates

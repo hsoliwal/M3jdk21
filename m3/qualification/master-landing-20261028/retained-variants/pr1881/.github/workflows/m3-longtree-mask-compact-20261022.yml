@@ -1,0 +1,88 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original long-tree packed-mask compaction
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompaction*.java'
+      - '.github/workflows/m3-longtree-mask-compact-20261022.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-java21-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Source-sealed JDK21 direct owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          pinned = {
+              'm3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java':
+                  '2e8510d8abe6b9e65b9bf47e0e4548c7a351c5dfb5e70d4d9bd6975284f9f638',
+              'm3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionContract.java':
+                  'e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe',
+              'm3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionTest.java':
+                  '78daa6148900e6645b7b824df4a50ce8ab40ca073d5679aae6e59fd0c52968ec',
+          }
+          for p, expected in pinned.items():
+              actual = hashlib.sha256(Path(p).read_bytes()).hexdigest()
+              if actual != expected:
+                  raise SystemExit(f'HOLD: source drift {p}: {actual}')
+              print('SHA256_PASS', p, actual)
+          PY
+          git diff --check
+      - name: Strict compile the actual original M3JDK21 collection owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          core='m3/collections/src/main/java/com/m3/collections'
+          test='m3/collections/src/test/java/com/m3/collections'
+          mkdir -p build/m3-longtree-mask
+          javac --release 21 -proc:none -Xlint:all -Werror -implicit:none -d build/m3-longtree-mask \
+            "$core/M3LongIterator.java" \
+            "$core/M3LongCollection.java" \
+            "$core/M3LongSortedSet.java" \
+            "$core/M3LaneSearch.java" \
+            "$core/M3LongTreeSet.java" \
+            "$test/M3LongTreeSetMaskCompactionContract.java"
+          java -ea -cp build/m3-longtree-mask com.m3.collections.M3LongTreeSetMaskCompactionContract
+          java -Xint -ea -cp build/m3-longtree-mask com.m3.collections.M3LongTreeSetMaskCompactionContract
+      - name: Full original Maven/JUnit module gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3LongTreeSetMaskCompactionTest \
+            -DskipTests=false -Dmaven.test.skip=false test
+      - name: Require actual non-skipped JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          p = Path('m3/collections/target/surefire-reports/TEST-com.m3.collections.M3LongTreeSetMaskCompactionTest.xml')
+          if not p.is_file():
+              raise SystemExit('NOT_RUN: real Maven/JUnit result absent')
+          vals = ET.parse(p).getroot().attrib
+          if int(vals.get('tests','0')) != 1 or any(int(vals.get(k,'0')) for k in ('failures','errors','skipped')):
+              raise SystemExit('HOLD: the exact JUnit test did not pass')
+          print('M3_LONGTREE_JUNIT_PASS', vals)
+          PY

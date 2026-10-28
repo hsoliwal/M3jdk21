@@ -1,0 +1,53 @@
+schema	m3fs-source-inlined-primitives-1
+canonical_repo	hsoliwal/com.synexia
+canonical_pull_request	https://github.com/hsoliwal/com.synexia/pull/13613
+canonical_commit	b795f7cdf6502cd2cc89f45a07bcd2ff94dda3a4
+recipe	com.synexia.m3.M3FsInlinePrimitiveVendorAtoms20261027
+recipe_crate	m3-fs-inline-primitive-vendor-atoms-20261027
+source_donor	ASF Commons VFS 2.10.0 Apache-2.0 (headers retained)
+thirdparty_commons_lang_code_copied	NO
+product_preimages	11 exact
+product_additions	3 exact
+local_standalone_java21_oracle	PASS 2581845 checks (modes + 256-bit mask)
+canonical_maven_openrewrite	NOT_EXECUTED_IN_THIS_SESSION
+target_original_m3fs_compiler	NOT_EXECUTED_IN_THIS_SESSION
+target_native_jni_jtreg	NOT_EXECUTED_IN_THIS_SESSION
+installed_image_dependency_closure	NOT_QUALIFIED
+runtime_external_dependencies	STILL_PRESENT_OTHER_M3FS_PATHS
+merge_gate	HOLD
+second_wave_recipe	com.synexia.m3.M3FsInlineCommonsLangCallers
+second_wave_source_preimages	7 exact
+second_wave_source_additions	1
+second_wave_java21_maven_junit	PENDING_CURRENT_HEAD
+second_wave_external_runtime_dependencies	STILL_PRESENT
+postimage_sha256	path
+7fbfd49c77ee2c20aad4deb8065cfb8e9c37000066972e13a728741149830bcf	m3/fs/src/main/java/com/m3/fs/vfs/util/M3UriMask.java
+8b06f68eb3c4b1e710fa15e53b5dd7225780607c5eee8db8afe16c38ec35a3c2	m3/fs/src/main/java/com/m3/fs/vfs/util/Messages.java
+6c14e77353396c7bd2498b3ae7af30a3b8201335758b2f344be917b527552f8c	m3/fs/src/main/java/com/m3/fs/vfs/util/RandomAccessMode.java
+67157d62fc8fba6d4efdf80f60c2e5535a581778e2b8bd6b739b967517a50439	m3/fs/src/main/java/com/m3/fs/vfs/util/URIBitSets.java
+5c014fbb021f6755935385849868244808c7c25ad1cf507c9ab0c4edc20ee984	m3/fs/src/main/java/com/m3/fs/vfs/util/URIUtils.java
+7d4cf9c4645116d8c32d7bf97a7c95804406f7685a9cd41b69817301ef553379	m3/fs/src/test/java/com/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java
+previous_receiver_source_build	COMPLETED_SUCCESS_358_JUNIT_12_CTEST_at_685d508a394cd0fd9f5d7f9753d90b2bf74a45db
+previous_naming_gate	FAILED_two_date_bearing_added_paths
+receiver_naming_fix	NAMING_CI_PASSED_ON_DF418EFA
+fcd74b79cdf1566358a15691e93486993be1e1ca6d6423ac727a3cbdbdfe6223	m3/fs/src/main/java/com/m3/fs/vfs/FileSystemException.java
+52534f188bd9bf1996026696a1060acea2b4a30026417df2298f5e7b4dee6350	m3/fs/src/main/java/com/m3/fs/vfs/filter/AndFileFilter.java
+06e07ed2d9d836f0a3dab5580a70fbacc204f3a6c2c1cd7cf1742c900aa6a357	m3/fs/src/main/java/com/m3/fs/vfs/filter/WildcardFileFilter.java
+3fadef1c6c3b1c0459be0720e5529f28ac8b59a77bd8345bafeac39232e3167a	m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java
+a6c74c47c4ac3c1fc09cc5662c4eb9a3462c0666c50220cf59c9e2d1cc1b6b1e	m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java
+4a5764a45068b86e9e9e36774695aba1e7a02ce55eae336128c64c150f0b9cff	m3/fs/src/main/java/com/m3/fs/vfs/operations/DefaultFileOperations.java
+40a56e8a2967b407624de2ae102a12192f0831f385c5624170e7edc16c4d629f	m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileName.java
+3a0f4638631755c740b87021dbf161e898cc721e625a6c50b4673f5e00007810	m3/fs/src/test/java/com/m3/fs/vfs/filter/M3FsInlineCommonsCallsitesTest.java
+recomputed_digest_gate	exact checked-out UTF-8 source bytes (prior eight second-wave digests corrected)
+previous_head_digest_ci	FAIL source-hash mismatch (no Maven/JNI results)
+current_head_digest_ci	PENDING
+
+fourth_wave_recipe	com.synexia.m3.M3FsInlineDepthDuration
+fourth_wave_canonical_commit	c23fa15903beab57dc152e3e51de8610a2020d6f
+fourth_wave_preimages	2 exact
+fourth_wave_additive_tests	1
+fourth_wave_java21_maven	NOT_EXECUTED_AT_RECEPTION
+fourth_wave_installed_image	HOLD_OTHER_VENDOR_RUNTIME_CLOSURES
+6d0b0739e9d74fcd384504b761c50c440eabc30378fc294767d6731e75e460cd	m3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java
+b166b2e1b60e6af1e72199b9f3e306915823fe0f921d5a3c10b86ea5c3b3ba7e	m3/fs/src/main/java/com/m3/fs/vfs/FileSystemConfigBuilder.java
+1392ceaab3cc79b4fbfacc9752b7110dd5107a12768a270c3de4909fbd10c058	m3/fs/src/test/java/com/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java

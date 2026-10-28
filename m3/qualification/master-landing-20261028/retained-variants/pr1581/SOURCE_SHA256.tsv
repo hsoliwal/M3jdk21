@@ -1,0 +1,9 @@
+path	sha256	git_blob	mode	pr	note
+m3/docs/name-mapping.d/m3-file-deltas-20261020.json	b0990de34b8e9b1b93fc003d79ac97c55d2c19258ec16ea59014e389ae6a36c2	abc37761502a4bd7337abc2226288c53c79c23b9	100644	1581	PR version, not live
+m3/file/README.md	88f7f09dd5143f924fd7f24e72137525fa0016363da3342ca89382f10ccd3270	0e354d51bad3e1d8e19cfcba0482842dc081ce0e	100644	1581	PR version, not live
+m3/file/pom.xml	3230fb6506194471e08dcc8dfad866d8043c8df06c150a75f6324b1a9e69de5d	ab1fb4082009939cdc2b9c0408bc01b5f7c8630e	100644	1581	PR version, not live
+m3/file/src/main/java/com/m3/file/M3File.java	8f346c48cc86492d500fe3b1b320124afe87859bc3512ee96fe8d45659c78e33	526aa8eee5a9b58342aa52d090c57bf6ddeb3a43	100644	1581	PR version, not live
+m3/file/src/main/java/com/m3/file/M3FileSnapshot.java	be341991cace569b484c450e2c0f852fd43e7762050e802eea8b4d9197324397	5b62fe4feed72bf54dd136c83564e59c681f1b53	100644	1581	PR version, not live
+m3/file/src/test/java/M3FileModuleProbe.java	f362ca00f3d7980a61f27ca7ad13022cfccd0c9885c85d41b2fe8ac7651ed354	61069666996d03c01224b3a33911d602323e3c31	100644	1581	PR version, not live
+m3/file/src/test/java/com/m3/file/M3FileObservationProviderTest.java	80b78b09fd6e397c327c2ac8c81c9dd2e0ec2f43b7adbf7b3162249830cad2cd	4fb73c76b2110441794aa0d33166c80975f63c04	100644	1581	PR version, not live
+m3/file/src/test/java/com/m3/file/M3FileSnapshotTest.java	917195a25b7cf3c359b79243be57dd74a34541ec368827d7565f8219ce6fa095	fed2a24116370f8d26001f3c3990e6cf73f28d27	100644	1581	PR version, not live

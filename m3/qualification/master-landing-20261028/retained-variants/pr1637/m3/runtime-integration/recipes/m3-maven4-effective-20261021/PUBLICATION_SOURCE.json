@@ -1,0 +1,17 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "base": "a5a7eaa644138ee62f6756f0d8e9b3957302a2d9",
+  "base_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+  "tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+  "commit": "3f4c3e1c97ca12b7f0d3efbbc387f40f942fa399",
+  "branch": "codex/m3-maven4-recipes-20261021",
+  "pr": "https://github.com/hsoliwal/com.synexia/pull/12657",
+  "number": 12657,
+  "draft": true,
+  "files": 329,
+  "schema": "M3_CANONICAL_PUBLICATION_SOURCE/1",
+  "runtime_repository": "hsoliwal/M3JDK21",
+  "runtime_base": "e7c2f67a2e0ea7729ff56feff217d6e15206e84a",
+  "source_seals_sha256": "fb401eeb0467c16ffa4d95d8de2a6c539775f096db81a7a7ac4fc717ad6e74b9",
+  "classification": "Generated publication receipt; canonical recipe ownership stays in com.synexia."
+}

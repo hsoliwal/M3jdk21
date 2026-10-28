@@ -1,0 +1,553 @@
+{
+  "schema": "M3_UTILITY_BEHAVIORAL_ATOMS_V1",
+  "parser": "JDK21_JAVAC_COMPILER_TREE_API",
+  "offset_unit": "UTF16_CODE_UNITS",
+  "hash_encoding": "UTF8",
+  "files": [
+    {
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "sha256": "d93e16b7e1c594039ff479b4d5a2ef973e55596b1df574608cf108692edd8623"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "sha256": "d0726fb7f8615fed0d3c9747f62750569506242b1cc32c806bae0f3c64816355"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "sha256": "54b08b0396cd8e749093ae55f74eb5db1b5844605cc5610705471275b5b92883"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "sha256": "b62532d9b0c77bc5edc07ea87daf58706e68ce4084ec228919d5cf0c28847270"
+    }
+  ],
+  "atoms": [
+    {
+      "name": "io.construct",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#<init>()",
+      "start_utf16": 2012,
+      "end_utf16_exclusive": 2087,
+      "start_line": 47,
+      "end_line": 49,
+      "sha256": "a73b27ad22183003b5e86f131f2b75768000ee703e9f1294b3bbd6c3fea25c7d"
+    },
+    {
+      "name": "io.copy.bytes.owner",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#copy(InputStream,OutputStream)",
+      "start_utf16": 2558,
+      "end_utf16_exclusive": 2787,
+      "start_line": 61,
+      "end_line": 65,
+      "sha256": "99a3156f9aff4861255667eee955ffbc708387bded76ba8adc9ee7b75fee5d5f"
+    },
+    {
+      "name": "io.copy.chars.owner",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#copy(Reader,Writer)",
+      "start_utf16": 3260,
+      "end_utf16_exclusive": 3478,
+      "start_line": 78,
+      "end_line": 82,
+      "sha256": "b5196bc63cea1a105eb5da7e12f44e9300a7567b6f88de4464f921e38981c34b"
+    },
+    {
+      "name": "io.copy.bytes.bounded",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#copy(InputStream,OutputStream,long)",
+      "start_utf16": 4061,
+      "end_utf16_exclusive": 4756,
+      "start_line": 96,
+      "end_line": 112,
+      "sha256": "5dfc19899c74ae531b799ac9ba304ead5d169504170ba5996a40f9d58b4cad83"
+    },
+    {
+      "name": "io.copy.chars.bounded",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#copy(Reader,Writer,long)",
+      "start_utf16": 5349,
+      "end_utf16_exclusive": 6021,
+      "start_line": 126,
+      "end_line": 141,
+      "sha256": "3b42544f5be56982678f27d730d40d778afef102430b3c1bd09f573ba14ad519"
+    },
+    {
+      "name": "io.range.bytes",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#copyRange(InputStream,OutputStream,long,long)",
+      "start_utf16": 6926,
+      "end_utf16_exclusive": 7379,
+      "start_line": 160,
+      "end_line": 169,
+      "sha256": "0212792ef4972244971791e7a5c70ca88508647608e3028bf8d9f85f6013d7fc"
+    },
+    {
+      "name": "io.range.chars",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#copyRange(Reader,Writer,long,long)",
+      "start_utf16": 8244,
+      "end_utf16_exclusive": 8665,
+      "start_line": 187,
+      "end_line": 196,
+      "sha256": "531bc20aca83a2b0720f9ef682628dff4f24792b5067f0168787fbea9c17385a"
+    },
+    {
+      "name": "io.fill.bytes.array",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#readFully(InputStream,byte[])",
+      "start_utf16": 8996,
+      "end_utf16_exclusive": 9171,
+      "start_line": 207,
+      "end_line": 209,
+      "sha256": "9053503ced7a79a097508a0dd0eb8143c57661a8c24c400ee0d6c3b84d541842"
+    },
+    {
+      "name": "io.fill.bytes.range",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#readFully(InputStream,byte[],int,int)",
+      "start_utf16": 9868,
+      "end_utf16_exclusive": 10198,
+      "start_line": 225,
+      "end_line": 230,
+      "sha256": "4a6e3bcdf2bacc07c07f2a35459ebef5093c1fa4e79a02c3cef82b997aae098a"
+    },
+    {
+      "name": "io.fill.chars.array",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#readFully(Reader,char[])",
+      "start_utf16": 10528,
+      "end_utf16_exclusive": 10698,
+      "start_line": 241,
+      "end_line": 243,
+      "sha256": "268608a3865b87063b2026c440bccf42c4125fb83f30dd2d9b78359e9c97cedb"
+    },
+    {
+      "name": "io.fill.chars.range",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#readFully(Reader,char[],int,int)",
+      "start_utf16": 11386,
+      "end_utf16_exclusive": 11711,
+      "start_line": 259,
+      "end_line": 264,
+      "sha256": "fe367b6e67485502e13cf2a5023c85dea8483361ca78e5d97874c91bf6182514"
+    },
+    {
+      "name": "io.skip.bytes",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#skipFully(InputStream,long)",
+      "start_utf16": 12299,
+      "end_utf16_exclusive": 12524,
+      "start_line": 278,
+      "end_line": 282,
+      "sha256": "fa8ca06fcbe82c25c2660745243060ba3a8a6c06eaedaca448c98df55bd6ed70"
+    },
+    {
+      "name": "io.skip.chars",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#skipFully(Reader,long)",
+      "start_utf16": 13176,
+      "end_utf16_exclusive": 13796,
+      "start_line": 297,
+      "end_line": 312,
+      "sha256": "eb020f0eb34c40ebacead71bb56836c2b2aa5949c6863c80d96ae9c955da9c33"
+    },
+    {
+      "name": "io.equal.bytes",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#contentEquals(InputStream,InputStream)",
+      "start_utf16": 14446,
+      "end_utf16_exclusive": 15079,
+      "start_line": 327,
+      "end_line": 340,
+      "sha256": "9c3decfdec0133e9d736076f70e68ef9f64b52399c3ad9848eb549a90b7f8367"
+    },
+    {
+      "name": "io.equal.chars",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#contentEquals(Reader,Reader)",
+      "start_utf16": 15650,
+      "end_utf16_exclusive": 16261,
+      "start_line": 354,
+      "end_line": 366,
+      "sha256": "12f141267868763bf13d144936299799dd83840984d3dd10a2909a1ad187b068"
+    },
+    {
+      "name": "io.decode",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#toString(InputStream,Charset)",
+      "start_utf16": 16868,
+      "end_utf16_exclusive": 17118,
+      "start_line": 381,
+      "end_line": 385,
+      "sha256": "f60c7663a56a7f4f12cc23ebc89108120a2d0e4432dad1a42bd5a4834771b090"
+    },
+    {
+      "name": "io.encode",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#write(CharSequence,OutputStream,Charset)",
+      "start_utf16": 17706,
+      "end_utf16_exclusive": 18031,
+      "start_line": 400,
+      "end_line": 406,
+      "sha256": "65a96d485e1e1b99f09b60fe3b426b17e03b43ee57aa4ad4e34cdc6fd7cb4221"
+    },
+    {
+      "name": "io.count.check",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#checkNonNegative(long,String)",
+      "start_utf16": 18037,
+      "end_utf16_exclusive": 18180,
+      "start_line": 408,
+      "end_line": 410,
+      "sha256": "694cb462aa7d1f37a707620a3b8243281da975d7f5a5abfa7140fe7497ca30fe"
+    },
+    {
+      "name": "io.progress.bytes",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#readChunk(InputStream,byte[],int,int)",
+      "start_utf16": 18267,
+      "end_utf16_exclusive": 18614,
+      "start_line": 413,
+      "end_line": 421,
+      "sha256": "80b7786e755a289aada100d899d1fb92acada83a7c41697eb10d46b94efb03a4"
+    },
+    {
+      "name": "io.progress.chars",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#readChunk(Reader,char[],int,int)",
+      "start_utf16": 18620,
+      "end_utf16_exclusive": 18962,
+      "start_line": 423,
+      "end_line": 431,
+      "sha256": "914fd71f42ba946de8a001098fa5eb384dad6f67689f8e2cd30dcf2057fd0def"
+    },
+    {
+      "name": "io.block.bytes",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#readBlock(InputStream,byte[],int,int)",
+      "start_utf16": 18968,
+      "end_utf16_exclusive": 19325,
+      "start_line": 433,
+      "end_line": 442,
+      "sha256": "6519e99fc5d6491ba56939f7e910ea99ed36778584d47c0ae26427172cfc6711"
+    },
+    {
+      "name": "io.block.chars",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "signature": "java.io.IOUtils#readBlock(Reader,char[],int,int)",
+      "start_utf16": 19331,
+      "end_utf16_exclusive": 19683,
+      "start_line": 444,
+      "end_line": 453,
+      "sha256": "3526a43dbbc7684e34fec34f26d4afa81bd06cb24f858bcf3a1512f33d06cc24"
+    },
+    {
+      "name": "stream.source.iterable",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams#stream(Iterable<T>)",
+      "start_utf16": 2867,
+      "end_utf16_exclusive": 2967,
+      "start_line": 72,
+      "end_line": 74,
+      "sha256": "9bbe0d9a3e5c6b7399317f4f08281b63ef491fe4d7f1125d60c80b31a2eb0353"
+    },
+    {
+      "name": "stream.source.iterable.mode",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams#stream(Iterable<T>,boolean)",
+      "start_utf16": 3495,
+      "end_utf16_exclusive": 3694,
+      "start_line": 89,
+      "end_line": 92,
+      "sha256": "75fa57f46a50fb750d99a3b82c0526ea8b970ba7246f70567d6335e4457c3d20"
+    },
+    {
+      "name": "stream.source.iterator",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams#stream(Iterator<? extends T>)",
+      "start_utf16": 4177,
+      "end_utf16_exclusive": 4287,
+      "start_line": 106,
+      "end_line": 108,
+      "sha256": "718a61c8367814ed26c4594165252ee32f8159974fe0e73c072905d694eea542"
+    },
+    {
+      "name": "stream.source.iterator.mode",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams#stream(Iterator<? extends T>,boolean)",
+      "start_utf16": 4980,
+      "end_utf16_exclusive": 5250,
+      "start_line": 125,
+      "end_line": 129,
+      "sha256": "43ff497218031303353400ded6b81e7eccd37f1c66699b79e2520d406c34f22d"
+    },
+    {
+      "name": "stream.source.enumeration",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams#stream(Enumeration<? extends T>)",
+      "start_utf16": 5685,
+      "end_utf16_exclusive": 5838,
+      "start_line": 142,
+      "end_line": 144,
+      "sha256": "f0f35784b13a32f8113e932fd80dc1aae6ec0d45a0136ae447ffcaa512ad0e14"
+    },
+    {
+      "name": "stream.zip",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams#zip(Stream<? extends A>,Stream<? extends B>,BiFunction<? super A, ? super B, ? extends R>)",
+      "start_utf16": 7809,
+      "end_utf16_exclusive": 8499,
+      "start_line": 180,
+      "end_line": 190,
+      "sha256": "b453f1cd8879f677617b618deaf8665337516f08aa9389e5fd3b083068e94a9e"
+    },
+    {
+      "name": "stream.pair.state",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams.ZipSpliterator#<init>(Spliterator<? extends A>,Spliterator<? extends B>,BiFunction<? super A, ? super B, ? extends R>)",
+      "start_utf16": 9039,
+      "end_utf16_exclusive": 9610,
+      "start_line": 202,
+      "end_line": 210,
+      "sha256": "3ccbeca9d0a03a1c4eb80001800e372532844183328151d03a9ab9b018ccad58"
+    },
+    {
+      "name": "stream.pair.tryAdvance",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams.ZipSpliterator#tryAdvance(Consumer<? super R>)",
+      "start_utf16": 9620,
+      "end_utf16_exclusive": 10238,
+      "start_line": 212,
+      "end_line": 227,
+      "sha256": "cae75dc9c4312a366f2e75c83ef8e44801044cc7b37bb1f153361c5bc84b869b"
+    },
+    {
+      "name": "stream.pair.trySplit",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams.ZipSpliterator#trySplit()",
+      "start_utf16": 10248,
+      "end_utf16_exclusive": 10335,
+      "start_line": 229,
+      "end_line": 232,
+      "sha256": "152a2d3eea6fea5e20b343590cb1aa05882a793e3206b4d5a55cead06e596ea2"
+    },
+    {
+      "name": "stream.pair.estimateSize",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams.ZipSpliterator#estimateSize()",
+      "start_utf16": 10345,
+      "end_utf16_exclusive": 10430,
+      "start_line": 234,
+      "end_line": 237,
+      "sha256": "ffb34bf726cfb70b7f49b796d094a0c1894c861715b79fb6bde1fcf3b706a8d8"
+    },
+    {
+      "name": "stream.pair.characteristics",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "signature": "java.util.stream.Streams.ZipSpliterator#characteristics()",
+      "start_utf16": 10440,
+      "end_utf16_exclusive": 10534,
+      "start_line": 239,
+      "end_line": 242,
+      "sha256": "6d9438ce89672d5e131173d0b9e58d0b4821c86840f85cd3e38677d46baa20c0"
+    },
+    {
+      "name": "reflect.construct",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#<init>()",
+      "start_utf16": 2311,
+      "end_utf16_exclusive": 2389,
+      "start_line": 54,
+      "end_line": 56,
+      "sha256": "81c6c73ea221bebac39815f4fa11a1e50a72a30668e2ba8acedf1f49ce1bb204"
+    },
+    {
+      "name": "reflect.hierarchy",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#hierarchy(Class<?>)",
+      "start_utf16": 2803,
+      "end_utf16_exclusive": 2999,
+      "start_line": 67,
+      "end_line": 70,
+      "sha256": "4271f45ba16825e8676ecf9db9e195937e3dbf0601ac63501d737dad4ccc9aca"
+    },
+    {
+      "name": "reflect.interfaces",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#interfaces(Class<?>)",
+      "start_utf16": 3759,
+      "end_utf16_exclusive": 4375,
+      "start_line": 86,
+      "end_line": 98,
+      "sha256": "e1b57adb3339c770411378016bad7797945d61ddb754515eb22a73beb56278f1"
+    },
+    {
+      "name": "reflect.rawType",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#rawType(Type)",
+      "start_utf16": 5129,
+      "end_utf16_exclusive": 6064,
+      "start_line": 113,
+      "end_line": 132,
+      "sha256": "cf546a636189693f9cf5614f703a3706cdb234bfec380b3dd59357aefdbd3f41"
+    },
+    {
+      "name": "reflect.componentType",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#componentType(Type)",
+      "start_utf16": 6431,
+      "end_utf16_exclusive": 6818,
+      "start_line": 142,
+      "end_line": 149,
+      "sha256": "f76c836ec6530b1b389feefb6345d536d00905b9443f211d68bdda79e786d557"
+    },
+    {
+      "name": "reflect.typeArguments",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#typeArguments(Type)",
+      "start_utf16": 7133,
+      "end_utf16_exclusive": 7391,
+      "start_line": 159,
+      "end_line": 163,
+      "sha256": "23d695df8edc6235ed61f31f1e9ae2f6e0655003fa507f97ac30ad801dd28022"
+    },
+    {
+      "name": "reflect.upperBounds",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#upperBounds(Type)",
+      "start_utf16": 7699,
+      "end_utf16_exclusive": 8031,
+      "start_line": 173,
+      "end_line": 178,
+      "sha256": "596250bcca8c57dbf109c21cc9ac98ed1eeb2817ff604a2597266913cbc1c0ee"
+    },
+    {
+      "name": "reflect.lowerBounds",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#lowerBounds(Type)",
+      "start_utf16": 8282,
+      "end_utf16_exclusive": 8515,
+      "start_line": 187,
+      "end_line": 191,
+      "sha256": "7fccaa0369179936b4729b8c34059199331c8a51ac1cd5d96fcd484edec6dba6"
+    },
+    {
+      "name": "reflect.annotations",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#annotations(AnnotatedElement)",
+      "start_utf16": 8914,
+      "end_utf16_exclusive": 9083,
+      "start_line": 202,
+      "end_line": 204,
+      "sha256": "c2aa3276e4e5e8d2172c9ff8aa5197aec3b4f526106497dc215e58585979f522"
+    },
+    {
+      "name": "reflect.annotations.typed",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#annotations(AnnotatedElement,Class<A>)",
+      "start_utf16": 9569,
+      "end_utf16_exclusive": 9893,
+      "start_line": 217,
+      "end_line": 222,
+      "sha256": "e39b95a9e4c8700decaed4d4bc6fc0c34b4f65a7a5070a28563fab83d9de67e1"
+    },
+    {
+      "name": "reflect.parameters",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#parameters(Executable)",
+      "start_utf16": 10280,
+      "end_utf16_exclusive": 10449,
+      "start_line": 233,
+      "end_line": 235,
+      "sha256": "774a3c29b1ee87d5f7d3f5cfb78e044c4a141eeae18f6d7a0ca591e4c7233aef"
+    },
+    {
+      "name": "reflect.parameterTypes",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#parameterTypes(Executable)",
+      "start_utf16": 10755,
+      "end_utf16_exclusive": 10951,
+      "start_line": 245,
+      "end_line": 248,
+      "sha256": "b197dac31531c4984cbbecfca82b4aba4f34db617f41ca0b2282d80d09c4928c"
+    },
+    {
+      "name": "reflect.exceptionTypes",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "signature": "java.lang.reflect.Reflection#exceptionTypes(Executable)",
+      "start_utf16": 11204,
+      "end_utf16_exclusive": 11400,
+      "start_line": 257,
+      "end_line": 260,
+      "sha256": "0e1fa5f7a801959038040a706ea484e6eb3b7a20a4d936ea7081b0a471e3a9a5"
+    },
+    {
+      "name": "strings.blank.body",
+      "kind": "METHOD",
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "signature": "java.util.Strings#isNullOrBlank(CharSequence)",
+      "start_utf16": 1791,
+      "end_utf16_exclusive": 2144,
+      "start_line": 43,
+      "end_line": 51,
+      "sha256": "45cf462d3654a1a56730f3c3eaf27293e817348e48835bccd6ed107780e0aa3d"
+    },
+    {
+      "name": "strings.blank.doc",
+      "kind": "JAVADOC",
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "start_utf16": 1597,
+      "end_utf16_exclusive": 1786,
+      "start_line": 39,
+      "end_line": 42,
+      "sha256": "e0b3a24dd2f90ce5cf186b1a9f9301723e44e66adbed4ed1f456fcad8de54a6e"
+    }
+  ]
+}
