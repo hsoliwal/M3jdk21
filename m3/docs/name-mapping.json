@@ -819,6 +819,37 @@
       "status": "ISOLATED_COLLECTION_CANDIDATE; STRING -> arrays -> collections phase not advanced",
       "gates": "source-sealed OpenRewrite fixed point; Java21 -Xlint Werror; full-int mask sort/slice/immutability; existing C17 JNI native-required parity; later jtreg/JCK/runtime image and cost gates pending",
       "attribution": "No external donor source copied; LeetCode/HackerRank/GeeksforGeeks used for problem-category comparison only"
+    },
+    {
+      "source": "Apache NetBeans OffsetGapList and FlyOffsetGapList occurrence-coordinate and binary-search concepts",
+      "source_repository": "apache/netbeans",
+      "source_commit": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+      "source_paths": [
+        "ide/editor.util/src/org/netbeans/lib/editor/util/OffsetGapList.java",
+        "ide/editor.util/src/org/netbeans/lib/editor/util/FlyOffsetGapList.java"
+      ],
+      "source_role": "EVIDENCE_ONLY; no Apache NetBeans source body copied",
+      "target": "java.lang.M3StringBuilderLane and existing AbstractStringBuilder indexed UTF-16 readers",
+      "target_paths": [
+        "src/java.base/share/classes/java/lang/M3StringBuilderLane.java",
+        "src/java.base/share/classes/java/lang/AbstractStringBuilder.java"
+      ],
+      "public_api": "java.lang.StringBuilder and java.lang.StringBuffer retain their names, descriptors and synchronization boundaries",
+      "target_module": "java.base",
+      "intake_mode": "TARGET_OWNED_PORT",
+      "copied_code": false,
+      "target_license": "Preserve existing GPL/OpenJDK headers; recipe licensing does not relicense generated source",
+      "existing_owner_revision": "677437be295b23f7ccf7409be287008944d0e8b0",
+      "recipe": "com.synexia.m3.CompositeBuilderIndexedRead",
+      "canonical_recipe_repository": "hsoliwal/com.synexia",
+      "canonical_recipe_path": "synexia-openrewrite-recipes/crates/m3-string-consumers/composite-builder",
+      "historical_recipe_revision": "4a33bee229d35f45ffb11e51310c05ae61592928",
+      "adaptation": "Add one primitive cumulative piece-end index to the existing parallel lanes; locate charAt and code-point reads without flattening or copying retained String pieces; publish descriptor growth only after all array copies succeed",
+      "receiver_test": "test/jdk/java/lang/StringBuilder/M3CompositeBuilderIndexedReadTest.java",
+      "proof_receipt": "m3/compatibility/netbeans-composite-builder-indexed-read/receipt.json",
+      "status": "GENERATED_STRING_REFINEMENT_PENDING_MATCHED_RUNTIME_QUALIFICATION",
+      "phase_rule": "String qualification remains active; no receiving-family or phase completion is claimed",
+      "gates": "Exact-source baseline and candidate behavior, public/protected ABI, named OpenRewrite SDK execution/fixed point/refusal, bounded CPU/allocation/retention observations; matched source-built image, enabled M3 storage and native-owner lifetime remain separately reported"
     }
   ],
   "imported_donor_sources": [],

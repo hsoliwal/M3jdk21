@@ -1,0 +1,736 @@
+{
+  "schema": "M3JDK21_COMPOSITE_BUILDER_INDEXED_READ_RECEIVING_PROOF_V1",
+  "spdx_license_identifier": "Apache-2.0",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "recorded_utc": "2026-10-19T11:54:21.143686+00:00",
+  "status": "EXACT_SDK_OUTPUTS_PRESENT_JAVA_QUALIFIED_PRODUCT_IMAGE_BLOCKED",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "e8702ffa7591ffb89027a97d44a09588d6276dd9",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12496",
+  "canonical_qualification_url": "https://github.com/hsoliwal/com.synexia/blob/e8702ffa7591ffb89027a97d44a09588d6276dd9/synexia-openrewrite-recipes/crates/m3-string-consumers/composite-builder/indexed-read/QUALIFICATION.md",
+  "canonical_evidence_base_url": "https://github.com/hsoliwal/com.synexia/blob/e8702ffa7591ffb89027a97d44a09588d6276dd9/synexia-openrewrite-recipes/crates/m3-string-consumers/composite-builder/indexed-read/",
+  "publication_binding": "VERIFIED_CANONICAL_PUBLICATION_BOUND_TO_EXACT_COMMIT_AND_PR",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base_revision": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "target_readback_head": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "receiving_proof_files": [
+    "m3/compatibility/netbeans-composite-builder-indexed-read/README.md",
+    "m3/compatibility/netbeans-composite-builder-indexed-read/receipt.json"
+  ],
+  "recipe": {
+    "name": "com.synexia.m3.CompositeBuilderIndexedRead",
+    "evidence_kind": "SDK_EXECUTION",
+    "status": "PASS",
+    "maven_exit_code": 0,
+    "tests": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "name": "com.synexia.rewrite.M3CompositeBuilderRecipeTest",
+        "skipped": 0,
+        "tests": 3
+      },
+      {
+        "errors": 0,
+        "failures": 0,
+        "name": "com.synexia.rewrite.M3CompositeBuilderIndexedReadRecipeTest",
+        "skipped": 0,
+        "tests": 8
+      }
+    ],
+    "ordered_stages": [
+      "Java: lane and additive fixture",
+      "Text: AbstractStringBuilder and naming map"
+    ],
+    "named_first_run_changed_files": 4,
+    "named_second_run_changed_files": 0,
+    "each_stage_fixed_point": true,
+    "serial_stages_equal_named_recipe": true,
+    "sdk_run_sha256": "09cdaacc8ddb74a9722ff1afc612f0ab4c6e1cdfbe0c4326cd500d83aef05a6c",
+    "sdk_execution_target_application_field": "NOT_PERFORMED",
+    "application_scope_note": "The SDK receipt describes staged execution. The four receiving-tree readbacks below independently match its emitted postimages."
+  },
+  "target_outputs": [
+    {
+      "kind": "text",
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "63b28070e1a3657cc3e7bda16661eaf85c2baba2eef8ec57b0f945a787fb6c9f",
+      "after_sha256": "8fe79a773eb0e840a57c32d690c2e1716d4425e5355a8fd573c27882b02bd48a",
+      "receiving_tree_sha256": "8fe79a773eb0e840a57c32d690c2e1716d4425e5355a8fd573c27882b02bd48a",
+      "readback_status": "EXACT_SDK_OUTPUT_PRESENT"
+    },
+    {
+      "kind": "text",
+      "path": "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+      "before_sha256": "31f00f49bec8a8d2cf04d58f19a2b43e5f8c4cb53ae3b9d6d5e5b419efc87347",
+      "after_sha256": "dc7c4c1a69111f976d8ce5a48894e50a8b06620588253501f849bd39fea5625d",
+      "receiving_tree_sha256": "dc7c4c1a69111f976d8ce5a48894e50a8b06620588253501f849bd39fea5625d",
+      "readback_status": "EXACT_SDK_OUTPUT_PRESENT"
+    },
+    {
+      "kind": "java",
+      "path": "src/java.base/share/classes/java/lang/M3StringBuilderLane.java",
+      "before_sha256": "fbeb04143bc19c23f57126d917fb4bea1f99f9bb3e7d8d814b3f23fbd577d39c",
+      "after_sha256": "b16ef39397aacc602915ed455134ee67a6972b390ee212a089980418a784352f",
+      "receiving_tree_sha256": "b16ef39397aacc602915ed455134ee67a6972b390ee212a089980418a784352f",
+      "readback_status": "EXACT_SDK_OUTPUT_PRESENT"
+    },
+    {
+      "kind": "java",
+      "path": "test/jdk/java/lang/StringBuilder/M3CompositeBuilderIndexedReadTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "01254851082575227843e9c0dc02eef516c3e20383c7315302ec36ca0d2b67ae",
+      "receiving_tree_sha256": "01254851082575227843e9c0dc02eef516c3e20383c7315302ec36ca0d2b67ae",
+      "readback_status": "EXACT_SDK_OUTPUT_PRESENT"
+    }
+  ],
+  "donor_reference": {
+    "repository": "apache/netbeans",
+    "revision": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+    "disposition": "EVIDENCE_ONLY",
+    "source_body_copied": false,
+    "runtime_dependency_added": false,
+    "purpose": "Occurrence-coordinate and offset-list reference for the existing builder owner."
+  },
+  "java_qualification": {
+    "status": "PASS",
+    "scope": "Exact pinned Java sources compiled and executed on stock Temurin 21.0.12.1+1-LTS with M3 storage disabled.",
+    "mechanism": "--patch-module used only for source qualification; M3JDK21 remains the integrated SDK product.",
+    "source_count_per_composition": 28,
+    "class_count_per_composition": 77,
+    "compiler_options": [
+      "--release",
+      "21",
+      "-Xlint:all,-module",
+      "-Werror",
+      "-implicit:none"
+    ],
+    "compositions": [
+      {
+        "stage": "BASELINE",
+        "strict_compile": "PASS",
+        "original_oracle_modes": [
+          "default"
+        ]
+      },
+      {
+        "stage": "SDK_JAVA_STAGE",
+        "strict_compile": "PASS",
+        "original_oracle_modes": [
+          "default"
+        ],
+        "composition": "Actual SDK-emitted lane plus unchanged baseline AbstractStringBuilder."
+      },
+      {
+        "stage": "FINAL_SDK_CANDIDATE",
+        "strict_compile": "PASS",
+        "original_oracle_modes": [
+          "interpreter",
+          "C1",
+          "C2"
+        ]
+      }
+    ],
+    "original_oracle": {
+      "source_sha256": "f97f22a0957e2efb700c7036ed644c624ad24326f9cddb56ad0ee03555064f8e",
+      "unchanged": true,
+      "scripts_per_successful_execution": 40000,
+      "checks_per_successful_execution": 1310550
+    },
+    "original_interpreter_attempts": [
+      {
+        "external_bound_seconds": 600,
+        "status": "INCOMPLETE_EXTERNAL_TIMEOUT",
+        "elapsed_seconds": 601.596927,
+        "exit_code": null
+      },
+      {
+        "external_bound_seconds": 1800,
+        "status": "PASS",
+        "elapsed_seconds": 504.228257,
+        "exit_code": 0,
+        "same_original_classes_and_VM_behavior_flags": true
+      }
+    ],
+    "public_protected_abi": {
+      "status": "PASS_UNCHANGED_ACROSS_ALL_THREE_COMPOSITIONS",
+      "owners": [
+        "StringBuilder",
+        "StringBuffer",
+        "AbstractStringBuilder"
+      ]
+    },
+    "actual_compiler_coverage": {
+      "c1": {
+        "observed": [
+          "java.lang.AbstractStringBuilder.charAt",
+          "java.lang.AbstractStringBuilder.codePointAt",
+          "java.lang.AbstractStringBuilder.codePointBefore",
+          "java.lang.M3StringBuilderLane.charAt",
+          "java.lang.StringBuffer.charAt",
+          "java.lang.StringBuffer.codePointAt",
+          "java.lang.StringBuffer.codePointBefore"
+        ],
+        "missing": []
+      },
+      "c2": {
+        "observed": [
+          "java.lang.AbstractStringBuilder.charAt",
+          "java.lang.AbstractStringBuilder.codePointAt",
+          "java.lang.AbstractStringBuilder.codePointBefore",
+          "java.lang.M3StringBuilderLane.charAt",
+          "java.lang.StringBuffer.charAt",
+          "java.lang.StringBuffer.codePointAt",
+          "java.lang.StringBuffer.codePointBefore"
+        ],
+        "missing": []
+      }
+    },
+    "fixture": {
+      "source_sha256": "01254851082575227843e9c0dc02eef516c3e20383c7315302ec36ca0d2b67ae",
+      "same_final_bytes_in_baseline_candidate_and_jtreg": true,
+      "baseline_negative": "initial nonempty lane/first: indexed read detached lane",
+      "candidate_status": "PASS",
+      "scripts_per_action": 192,
+      "reads_per_action": 643372,
+      "checks_per_action": 3518447,
+      "coverage": [
+        "UTF-16 seams and paired/unpaired surrogates",
+        "empty pieces and growth",
+        "exact bounds exception classes and messages",
+        "retained lane, flat backing, count, coder, capacity and occurrence arrays",
+        "subsequent appends and edits",
+        "StringBuffer synchronized entrypoints",
+        "weak-owner retained-payload assertions with three explicit GC rounds per builder"
+      ]
+    },
+    "jtreg": {
+      "status": "PASS",
+      "exit_code": 0,
+      "selected_test_ids": 13,
+      "unchanged_stock_test_ids": 12,
+      "generated_test_id": "flagOff",
+      "generated_actions": [
+        "default",
+        "interpreter",
+        "C1",
+        "C2",
+        "CompactStrings disabled",
+        "Serial GC"
+      ],
+      "counting_note": "Six executions of the same generated corpus; counts are not disjoint-case totals.",
+      "flagOn_executed": false
+    },
+    "qualification_sha256": "6afb579c2f4526ec00ae5c8662793597a3baee8aa12353c60bac9bb3726d037a",
+    "bundle_manifest_sha256": "c1e38a9e289d28cf3cb88f4af481421a5e62444d9c7aafb1c6571a3b47e46204"
+  },
+  "measurement": {
+    "classification": "BOUNDED_FORCED_PIECE_STOCK_JDK_EXPLORATORY_MEASUREMENT",
+    "source_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
+    "compiled_class_paths_per_variant": 77,
+    "identical_class_files": 75,
+    "changed_class_files": [
+      "java/lang/AbstractStringBuilder.class",
+      "java/lang/M3StringBuilderLane.class"
+    ],
+    "vm_count": 4,
+    "forks_per_variant": 2,
+    "execution_order": [
+      "baseline",
+      "candidate",
+      "candidate",
+      "baseline"
+    ],
+    "all_exit_codes_zero": true,
+    "read_case_rows_per_VM": 48,
+    "all_corresponding_checksums_agree": true,
+    "builders": [
+      "StringBuilder",
+      "StringBuffer"
+    ],
+    "piece_counts": [
+      4,
+      1024
+    ],
+    "piece_utf16_units": 128,
+    "source_model": "Shared ordinary immutable String payloads; forced existing private piece append; M3 storage disabled.",
+    "seed": "21729963145446744",
+    "cold_small_samples": 128,
+    "cold_many_samples": 32,
+    "repeated_rounds": 5,
+    "repeated_reads_per_round": 200000,
+    "warmup_reads": 100000,
+    "observations_by_shape": [
+      {
+        "pieces": 4,
+        "coder": "LATIN1",
+        "baseline": {
+          "first_read_allocation_bytes": 544,
+          "first_read_sample_min_max_identical": true,
+          "repeated_read_allocation_bytes_per_operation": 0,
+          "minimum_construction_allocation_bytes": 232,
+          "index_array_shallow_bytes_after_read": 0,
+          "attached_shallow_storage_bytes_after_read": 544,
+          "logical_utf16_length": 516,
+          "public_capacity": 526,
+          "first_read_median_range_ns": [
+            237.0,
+            1882.0
+          ],
+          "repeated_read_median_range_ns_per_operation": [
+            6.113,
+            309.29
+          ]
+        },
+        "candidate": {
+          "first_read_allocation_bytes": 0,
+          "first_read_sample_min_max_identical": true,
+          "repeated_read_allocation_bytes_per_operation": 0,
+          "minimum_construction_allocation_bytes": 264,
+          "index_array_shallow_bytes_after_read": 32,
+          "attached_shallow_storage_bytes_after_read": 232,
+          "logical_utf16_length": 516,
+          "public_capacity": 526,
+          "first_read_median_range_ns": [
+            58.0,
+            187.0
+          ],
+          "repeated_read_median_range_ns_per_operation": [
+            82.753,
+            598.338
+          ]
+        },
+        "minimum_construction_increase_bytes": 32,
+        "paired_mean_construction_increase_range_bytes": [
+          23.687,
+          32.0
+        ]
+      },
+      {
+        "pieces": 4,
+        "coder": "UTF16",
+        "baseline": {
+          "first_read_allocation_bytes": 1072,
+          "first_read_sample_min_max_identical": true,
+          "repeated_read_allocation_bytes_per_operation": 0,
+          "minimum_construction_allocation_bytes": 280,
+          "index_array_shallow_bytes_after_read": 0,
+          "attached_shallow_storage_bytes_after_read": 1072,
+          "logical_utf16_length": 516,
+          "public_capacity": 526,
+          "first_read_median_range_ns": [
+            331.0,
+            962.0
+          ],
+          "repeated_read_median_range_ns_per_operation": [
+            7.702,
+            1379.259
+          ]
+        },
+        "candidate": {
+          "first_read_allocation_bytes": 0,
+          "first_read_sample_min_max_identical": true,
+          "repeated_read_allocation_bytes_per_operation": 0,
+          "minimum_construction_allocation_bytes": 312,
+          "index_array_shallow_bytes_after_read": 32,
+          "attached_shallow_storage_bytes_after_read": 248,
+          "logical_utf16_length": 516,
+          "public_capacity": 526,
+          "first_read_median_range_ns": [
+            51.0,
+            238.0
+          ],
+          "repeated_read_median_range_ns_per_operation": [
+            60.038,
+            458.445
+          ]
+        },
+        "minimum_construction_increase_bytes": 32,
+        "paired_mean_construction_increase_range_bytes": [
+          32.0,
+          32.0
+        ]
+      },
+      {
+        "pieces": 1024,
+        "coder": "LATIN1",
+        "baseline": {
+          "first_read_allocation_bytes": 135184,
+          "first_read_sample_min_max_identical": true,
+          "repeated_read_allocation_bytes_per_operation": 0,
+          "minimum_construction_allocation_bytes": 34456,
+          "index_array_shallow_bytes_after_read": 0,
+          "attached_shallow_storage_bytes_after_read": 135184,
+          "logical_utf16_length": 131416,
+          "public_capacity": 135166,
+          "first_read_median_range_ns": [
+            31140.0,
+            1570799.0
+          ],
+          "repeated_read_median_range_ns_per_operation": [
+            4.907,
+            836.108
+          ]
+        },
+        "candidate": {
+          "first_read_allocation_bytes": 0,
+          "first_read_sample_min_max_identical": true,
+          "repeated_read_allocation_bytes_per_operation": 0,
+          "minimum_construction_allocation_bytes": 42776,
+          "index_array_shallow_bytes_after_read": 4112,
+          "attached_shallow_storage_bytes_after_read": 21192,
+          "logical_utf16_length": 131416,
+          "public_capacity": 135166,
+          "first_read_median_range_ns": [
+            141.0,
+            740.0
+          ],
+          "repeated_read_median_range_ns_per_operation": [
+            314.726,
+            2745.01
+          ]
+        },
+        "minimum_construction_increase_bytes": 8320,
+        "paired_mean_construction_increase_range_bytes": [
+          8320.0,
+          8325.75
+        ]
+      },
+      {
+        "pieces": 1024,
+        "coder": "UTF16",
+        "baseline": {
+          "first_read_allocation_bytes": 270352,
+          "first_read_sample_min_max_identical": true,
+          "repeated_read_allocation_bytes_per_operation": 0,
+          "minimum_construction_allocation_bytes": 35616,
+          "index_array_shallow_bytes_after_read": 0,
+          "attached_shallow_storage_bytes_after_read": 270352,
+          "logical_utf16_length": 131416,
+          "public_capacity": 135166,
+          "first_read_median_range_ns": [
+            45526.0,
+            215569.0
+          ],
+          "repeated_read_median_range_ns_per_operation": [
+            3.975,
+            346.489
+          ]
+        },
+        "candidate": {
+          "first_read_allocation_bytes": 0,
+          "first_read_sample_min_max_identical": true,
+          "repeated_read_allocation_bytes_per_operation": 0,
+          "minimum_construction_allocation_bytes": 43936,
+          "index_array_shallow_bytes_after_read": 4112,
+          "attached_shallow_storage_bytes_after_read": 21768,
+          "logical_utf16_length": 131416,
+          "public_capacity": 135166,
+          "first_read_median_range_ns": [
+            156.0,
+            453.0
+          ],
+          "repeated_read_median_range_ns_per_operation": [
+            379.476,
+            2685.207
+          ]
+        },
+        "minimum_construction_increase_bytes": 8320,
+        "paired_mean_construction_increase_range_bytes": [
+          8314.25,
+          8320.0
+        ]
+      }
+    ],
+    "lane_shallow_bytes_in_both_variants": 56,
+    "index_layout": [
+      {
+        "capacity": 4,
+        "primitive_payload_bytes": 16,
+        "array_shallow_bytes": 32
+      },
+      {
+        "capacity": 1024,
+        "primitive_payload_bytes": 4096,
+        "array_shallow_bytes": 4112
+      }
+    ],
+    "attached_storage_scope": "Lane plus descriptor arrays plus flat byte array only; excludes builder object and shared source String payloads. Not transitive retained heap.",
+    "retention_tradeoff": "Candidate retains existing source owners and descriptors after reads; application-specific source lifetimes are not measured.",
+    "construction_tradeoff": "The extra index is allocated during construction; growth allocation exceeds the final retained index size for 1024 pieces.",
+    "timing_pair_counts": {
+      "first_read_candidate_lower": 48,
+      "first_read_total_pairs": 48,
+      "repeated_many_piece_candidate_higher": 24,
+      "repeated_many_piece_total_pairs": 24,
+      "repeated_small_piece_candidate_higher": 14,
+      "repeated_small_piece_total_pairs": 24
+    },
+    "timer_pair_median_ns_range": [
+      48,
+      50
+    ],
+    "VM_wall_seconds": [
+      {
+        "fork": 0,
+        "variant": "baseline",
+        "wall_seconds": 18.813487527997495
+      },
+      {
+        "fork": 0,
+        "variant": "candidate",
+        "wall_seconds": 22.508082622000074
+      },
+      {
+        "fork": 1,
+        "variant": "candidate",
+        "wall_seconds": 47.24508654799865
+      },
+      {
+        "fork": 1,
+        "variant": "baseline",
+        "wall_seconds": 8.677230314999179
+      }
+    ],
+    "own_build_and_correctness_load_stopped_for_probe_window": true,
+    "unrelated_shared_host_load_possible": true,
+    "performance_conclusion": "First-read allocation avoided in these cases; repeated many-piece reads were slower in every paired timing. No universal speed factor, JMH qualification or production ranking.",
+    "process_RSS_PSS": {
+      "status": "UNAVAILABLE",
+      "samples_per_VM": 0,
+      "reason": "Mounted /proc cannot provide the verified direct-child identity required across the PID namespace boundary; no unsafe lookup values were used."
+    },
+    "native_memory_tracking": {
+      "complete_summaries": 4,
+      "scope": "VM-exit tracked totals include Java heap; not per-builder native retention, process RSS or a native-memory ranking."
+    }
+  },
+  "product_image": {
+    "status": "BLOCKED",
+    "all_recorded_attempts_closed": true,
+    "successful_product_image": false,
+    "attempts": [
+      {
+        "name": "DEFAULT_ASCII",
+        "status": "ASCII_COMPILER_FAILED_REMAINING_NATIVE_WORK_INTERRUPTED_FOR_UTF8_RETRY",
+        "command": [
+          "make",
+          "CONF=netbeans-builder-review",
+          "images",
+          "JOBS=2"
+        ],
+        "observed_compiler_errors": 63,
+        "wrapper_exit_code": 130,
+        "disposition": "Existing Unicode comments rejected under the default ASCII compiler encoding; remaining native work interrupted for supported UTF-8 retry."
+      },
+      {
+        "name": "SUPPORTED_UTF8_RETRY",
+        "status": "JAVA_BASE_WERROR_FAILED_REMAINING_BUILD_EXTERNALLY_INTERRUPTED",
+        "command": [
+          "make",
+          "CONF=netbeans-builder-review",
+          "images",
+          "JOBS=2",
+          "JAVAC_FLAGS=-encoding UTF-8"
+        ],
+        "observed_compiler_batch_exit_code": 1,
+        "observed_module_make_exit_code": 2,
+        "observed_executor_session_exit_code": 1,
+        "make_terminal_exit_code": null,
+        "supervisor_stop": "Explicit Ctrl-C via executor session62860 after recorded java.base failure; executor terminated the session before Python could write its terminal receipt. This supervisor receipt preserves the observed compiler failure; it does not infer a completed make exit."
+      }
+    ],
+    "blocker": {
+      "warning_policy": "-Werror retained",
+      "compiler_reported_warnings": 288,
+      "displayed_warnings": 100,
+      "displayed_warning_kinds": {
+        "no @return": 11,
+        "no @param": 89
+      },
+      "displayed_warning_sources": [
+        {
+          "path": "src/java.base/share/classes/java/util/SortAlgorithm.java",
+          "displayed_warnings": 3,
+          "git_blob": "af0a6704a335483bc35407e766b0d9f7737ded60",
+          "base_git_blob": "af0a6704a335483bc35407e766b0d9f7737ded60",
+          "unchanged_from_base": true
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/Sorts.java",
+          "displayed_warnings": 97,
+          "git_blob": "6587c0631c11ef9759b5bf9aa6fbcc5ccb23c8d4",
+          "base_git_blob": "6587c0631c11ef9759b5bf9aa6fbcc5ccb23c8d4",
+          "unchanged_from_base": true
+        }
+      ],
+      "attribution_limit": "Only the 100 displayed warnings are attributed here; the compiler-reported total is 288.",
+      "source_or_warning_policy_changed_to_bypass": false
+    },
+    "candidate_outputs_unchanged_by_build": true,
+    "flagOn_executed": false,
+    "native_storage_OS_interning_JNI_lifetime_qualified": false
+  },
+  "remaining_gates": [
+    {
+      "gate": "MATCHED_INTEGRATED_M3JDK21_IMAGE",
+      "status": "BLOCKED",
+      "reason": "Recorded java.base warning gate under unchanged -Werror policy."
+    },
+    {
+      "gate": "GENERATED_JTREG_FLAG_ON",
+      "status": "PENDING_NOT_EXECUTED",
+      "requires": "Matched M3 HotSpot and public-append admitted pieces with UseM3StringStorage."
+    },
+    {
+      "gate": "NATIVE_STORAGE_OS_INTERNING_JNI_GC_LIFETIME",
+      "status": "PENDING_NOT_QUALIFIED"
+    },
+    {
+      "gate": "FULL_APPLICABLE_MAVEN_REACTOR_AND_REPOSITORY_ADMISSION",
+      "status": "PENDING"
+    },
+    {
+      "gate": "PUBLISHED_CANDIDATE_CI",
+      "status": "PENDING",
+      "zero_job_or_unexecuted_run_is_pass": false
+    },
+    {
+      "gate": "FINAL_TARGET_PROMOTION",
+      "status": "PENDING_TARGET_ACCEPTANCE"
+    }
+  ],
+  "enabled_storage_VM_scope": "The inventoried M3 HotSpot forces interpreter execution when UseM3StringStorage is enabled; flag-off C1/C2 proof does not qualify enabled storage.",
+  "receiving_sequence": {
+    "active_phase": "STRING",
+    "order": [
+      "STRING",
+      "ARRAYS",
+      "COLLECTIONS",
+      "AST_COMPILER",
+      "REMAINING_FAMILIES"
+    ],
+    "phase_advanced": false,
+    "family_completion": false,
+    "repository_completion": false
+  },
+  "rights": {
+    "new_receiving_proof": "Apache-2.0, canonical first-party SPDX attribution",
+    "runtime_postimages": "Existing OpenJDK and target per-file copyright/license/NOTICE retained; recipe licensing does not relicense embedded bodies.",
+    "ownership": "Synexia owns reusable recipe, fixtures, tooling and evidence. M3JDK21 owns the integrated runtime and receiving acceptance.",
+    "Synexia_runtime_dependency_added": false,
+    "JNI_symbols_added": false
+  },
+  "artifacts": {
+    "sdk_run": {
+      "relative_to_canonical_qualification": "evidence/sdk/SDK_RUN.json",
+      "sha256": "09cdaacc8ddb74a9722ff1afc612f0ab4c6e1cdfbe0c4326cd500d83aef05a6c",
+      "bytes": 3020
+    },
+    "sdk_results": {
+      "relative_to_canonical_qualification": "evidence/sdk/SDK_RESULTS.tsv",
+      "sha256": "793167593081a4130f251ed0da9c428bc884a956c5f4bf1b8bdb383995a06412",
+      "bytes": 946
+    },
+    "sdk_canonical_inputs": {
+      "relative_to_canonical_qualification": "evidence/sdk/SDK_INPUTS.tsv",
+      "sha256": "6d8be153b57d9b199ba1ac3379f641e95b496f7fb210fcce713cf3b646fc0fad",
+      "bytes": 4671
+    },
+    "sdk_recipient_inputs": {
+      "relative_to_canonical_qualification": "evidence/sdk/SDK_TARGET_INPUTS.tsv",
+      "sha256": "9f679beeaa03779f9d43375a258d35f5556801c4c5129a9b07206a3c3c3a186f",
+      "bytes": 811
+    },
+    "java_qualification": {
+      "relative_to_canonical_qualification": "evidence/java/qualification.json",
+      "sha256": "6afb579c2f4526ec00ae5c8662793597a3baee8aa12353c60bac9bb3726d037a",
+      "bytes": 11202
+    },
+    "java_bundle_manifest": {
+      "relative_to_canonical_qualification": "evidence/java/BUNDLE_MANIFEST.json",
+      "sha256": "c1e38a9e289d28cf3cb88f4af481421a5e62444d9c7aafb1c6571a3b47e46204",
+      "bytes": 42994
+    },
+    "compiler_evidence": {
+      "relative_to_canonical_qualification": "evidence/java/compiler-evidence.json",
+      "sha256": "965b1810123a43180862b0243d65879b7cc545b989f862efc16ba71eb20e2b47",
+      "bytes": 30607
+    },
+    "jtreg": {
+      "relative_to_canonical_qualification": "evidence/java/candidate-jtreg/receipt.json",
+      "sha256": "7ba8aaf48c1823f25890b4c558b1babcca3d91106c874d1194715d9c9259e23e",
+      "bytes": 21474
+    },
+    "baseline_negative": {
+      "relative_to_canonical_qualification": "evidence/java/baseline-final-indexed-negative/receipt.json",
+      "sha256": "584ebdb485fa363b9121400298f57bf802ce7b9b379c9163e0405b4e21e2cd29",
+      "bytes": 12326
+    },
+    "original_interpreter_timeout": {
+      "relative_to_canonical_qualification": "evidence/java/candidate-existing-int/receipt.json",
+      "sha256": "29d2cc74f4197c6468f54c203f9abb0a902de74bae281b9249dd18b345eec826",
+      "bytes": 12442
+    },
+    "original_interpreter_pass": {
+      "relative_to_canonical_qualification": "evidence/java/candidate-existing-int-1800/receipt.json",
+      "sha256": "9c0f7c11acf11449481b0e1622ad59fbbc7c6c4a6de0933e9aeb3816f2192739",
+      "bytes": 12680
+    },
+    "measurement_context": {
+      "relative_to_canonical_qualification": "evidence/measurement/RUN_CONTEXT.json",
+      "sha256": "96430fddfeb0bdcbda94970f8b6dbea230bf674aa4fd0609951de7ffb60a3349",
+      "bytes": 8549
+    },
+    "measurement_results": {
+      "relative_to_canonical_qualification": "evidence/measurement/results.json",
+      "sha256": "47b9d570e5c45b4f2c1a8f3429db6f69715b6349741f01b225f313ea1bcc6589",
+      "bytes": 265172
+    },
+    "measurement_analysis": {
+      "relative_to_canonical_qualification": "evidence/measurement/ANALYSIS.md",
+      "sha256": "b48e0477a15c3641c0aa72d7f47cee059a22e2855afe46fefbaec2c3ab99d4cc",
+      "bytes": 9866
+    },
+    "measurement_construction": {
+      "relative_to_canonical_qualification": "evidence/measurement/builds.tsv",
+      "sha256": "f742ac7badbfac92298c0c371da986f41ff2231fa323423a6aafc2324a9698b4",
+      "bytes": 8250
+    },
+    "measurement_layout": {
+      "relative_to_canonical_qualification": "evidence/measurement/layouts.tsv",
+      "sha256": "75c60278dc8c3276ebb6ef39f2663c180035e1e194dcc4c75d41df8efbfd3d25",
+      "bytes": 21138
+    },
+    "measurement_paired_reads": {
+      "relative_to_canonical_qualification": "evidence/measurement/paired-read-observations.tsv",
+      "sha256": "39d4e246eafda24acc50ebd32bfbcac6045bcc53935b1142b745eee89b9c8b2b",
+      "bytes": 9567
+    },
+    "measurement_copy_manifest": {
+      "relative_to_canonical_qualification": "evidence/measurement/COPY_MANIFEST.tsv",
+      "sha256": "b190f6b733530efffaa3cd93ce6a10f8aec796b3068366185e49cc33bb9146b0",
+      "bytes": 3137
+    },
+    "initial_image_attempt": {
+      "relative_to_canonical_qualification": "evidence/runtime-build/images-receipt.json",
+      "sha256": "0e8196bc10365f6593b55cff3620316f53bd85e09eb443804bf8b17a00df15bb",
+      "bytes": 2225
+    },
+    "utf8_image_attempt": {
+      "relative_to_canonical_qualification": "evidence/runtime-build/utf8/receipt.json",
+      "sha256": "e8a71fddf4fdc35c5defddf1804d00515a7b2d3694cfeeadc3a6d25b4567d5f7",
+      "bytes": 2962
+    },
+    "warning_attribution": {
+      "relative_to_canonical_qualification": "evidence/runtime-build/utf8/warning-attribution.json",
+      "sha256": "7bbee00d65933be78f06f134224925191bbc87e968f8be2e369b839a062a5b14",
+      "bytes": 959
+    },
+    "utf8_image_log": {
+      "relative_to_canonical_qualification": "evidence/runtime-build/utf8/build.log",
+      "sha256": "3dd70fd04b63da99c6d94b45bef12a15482e9afa7a07816e9a99f55b9968d9a7",
+      "bytes": 26526
+    }
+  }
+}
