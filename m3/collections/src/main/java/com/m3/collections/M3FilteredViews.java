@@ -14,6 +14,11 @@
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+// Reconciled 2026: retain the qualified guarded reverse atom after additive merge.
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package com.m3.collections;
 
 import java.util.AbstractCollection;
@@ -711,4 +716,3 @@ public final class M3FilteredViews {
         @Override public NavigableMap<K, V> tailMap(K from) { return tailMap(from, true); }
     }
 }
-
