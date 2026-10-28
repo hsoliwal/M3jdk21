@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2026, Hitesh Soliwal and contributors.
  * GPLv2 with the Classpath exception (OpenJDK java.base native destination).
- * M3JDK21 DFA token transition precompute: bounded primitive array arithmetic only.
+ * M3JDK21 DFA token transition precompute and composition: primitive arrays only.
  */
 #include <jni.h>
 #include <stdint.h>
@@ -64,6 +64,10 @@ JNIEXPORT void JNICALL Java_jdk_internal_mindex_M3RX7_buildPacked0(
     if (dfaArray == NULL || packedArray == NULL || startArray == NULL
             || lengthArray == NULL || outArray == NULL) {
         invalid(env, "missing DFA token arrays");
+        return;
+    }
+    if ((*env)->IsSameObject(env, dfaArray, outArray)) {
+        invalid(env, "DFA token output aliases input");
         return;
     }
     size = (*env)->GetArrayLength(env, dfaArray);
