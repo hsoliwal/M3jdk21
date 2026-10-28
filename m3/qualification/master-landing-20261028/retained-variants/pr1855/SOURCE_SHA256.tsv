@@ -1,0 +1,8 @@
+path	sha256	git_blob	mode	pr	note
+.github/workflows/m3-collections-interop-receiving.yml	ae36efc79551e2193fa8ceb49525c86885fd1dcc5b3432a8bdd79e7a264d8ce0	4deea2ac8cd231ab693f6f06021d83f13f0f115b	100644	1855	PR version, not live
+.github/workflows/m3-five-provider-current-census-20261017.yml	da955ae8839c7909176e2f035890915354ea8adae9e05efd2dd4233e3d1b8a56	4c305c5943f93ff9061f007d75fe1ae1ec1e1b4d	100644	1855	PR version, not live
+m3/collections/interop/qualification/apache-bag-450-successor-20261022/README.md	f89889be2f300154a442c7a3356674125cd5940ae7f234d609b2ec39bafa2d64	3ecc207c5f9b67bd42bd5d8020b94711a638ced7	100644	1855	PR version, not live
+m3/collections/interop/qualification/apache-bag-450-successor-20261022/receipts/changed-bag-01.tsv	83a3b9636ca57cfb42c3d5c5fe79b4c05484fd619fce7aba235162f1f09cf906	3e370931e20681edd5196e8c83873263376790be	100644	1855	PR version, not live
+m3/collections/interop/qualification/apache-bag-450-successor-20261022/test_apache_bag_successor.py	ee8a73385be6541e840e1231dba83234019250f4885c2c5526360591f1956a08	b6bb8e71351aeb04c9e8566bde361b68963e05b4	100644	1855	PR version, not live
+m3/collections/interop/qualification/apache-bag-450-successor-20261022/verify_apache_bag_successor.py	7c9f407c737d0858b0fa23d4388a4a6756d74db76580ac734ba737d3c1f892d5	b42bb3036434a810d0c6bca9df3bca8a09a82b11	100644	1855	PR version, not live
+m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	2044c8d98a76056270092b01d95c0784e97752105b6bc3be4698048764b56f7e	39dba81e4c34b54eaeca309d1b1740868853128d	100644	1855	PR version, not live
