@@ -1,0 +1,13 @@
+schema	m3-native-five-core-jni-workflow-successor-2
+canonical	hsoliwal/com.synexia:m3/native-five-core-jpms-ci-recipe-20261027
+recipe	com.synexia.rewrite.M3NativeFiveCoreJpmsWorkflowRecipe
+source_workflow	.github/workflows/m3-native-five-family-no-vendor-runtime-20261027.yml
+preimage_sha256	c4f4aea3d9d27a4765b198036ecb074275191b076838d978a8ccad131ec15f2f
+postimage_sha256	6da4804aeb7c4e57fa533af59f39407b49077c1ab0b36d5dc3ba2b44a54c8154
+source_scope	WORKFLOW_ONLY
+in_product_modules	java.base;com.m3.arrays;com.m3.collections
+native_library	m3/arrays/src/main/native/libm3_arrays.so
+native_compile	CMAKE_JNI_SOURCE_BUILT
+test_invocation	-Xcheck:jni_m3.arrays.native.path
+external_vendor_runtime_dependency	NONE_ADDED
+product_CI	PENDING_EXACT_HEAD
