@@ -1,0 +1,94 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical Synexia rank-batch execution result, not a migration recipe.
+name: M3JDK21 JNI rank batch LeetCode Java21
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-jni-rank-batch-20261025.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankIndexSelfTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3RankBatchIntoContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3RankBatchIntoTest.java'
+      - 'm3/collections/qualification/jni-rank-batch-20261025/**'
+permissions:
+  contents: read
+jobs:
+  actual-java-and-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check exact product HEAD and received Java/JNI source hashes
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = 'fa87b9bf25dff5cb858caeee962dfb1bd12a607a'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '45f608496420cd2f555c0f69b26f572667be6690'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '714d89c8fcb3e63e9f721af2acd5664f40bb8c30'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankIndexSelfTest.java)" = 'b2de41ebb3ee281e18c7062c5580bc25bcbad6f0'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3RankBatchIntoContract.java)" = 'e4e15d78dfa68cff935c3e26ccee7f954800be24'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3RankBatchIntoTest.java)" = 'e430a06d3a056971c6aee6701326ce3cabbc8c20'
+      - name: Strict Java21 compile and original JNI headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/rank/classes" "$RUNNER_TEMP/rank/headers" "$RUNNER_TEMP/rank/native" "$RUNNER_TEMP/rank/missing"
+          javac --release 21 -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/rank/headers" -d "$RUNNER_TEMP/rank/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3RankBatchIntoContract.java
+          grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_boundBatchInto0' "$RUNNER_TEMP/rank/headers/com_m3_collections_M3LongRankBatchNative.h"
+      - name: Prove Java fallback, interpreter and missing-library path
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xcheck:jni -cp "$RUNNER_TEMP/rank/classes" com.m3.collections.M3RankBatchIntoContract | tee "$RUNNER_TEMP/rank/java.txt"
+          java -Xint -Xcheck:jni -cp "$RUNNER_TEMP/rank/classes" com.m3.collections.M3RankBatchIntoContract | tee "$RUNNER_TEMP/rank/java-int.txt"
+          grep -Fxq 'PASS M3_RANK_BATCH_INTO checks=79775 native=false' "$RUNNER_TEMP/rank/java.txt"
+          cmp "$RUNNER_TEMP/rank/java.txt" "$RUNNER_TEMP/rank/java-int.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true -Djava.library.path="$RUNNER_TEMP/rank/missing" \
+            -cp "$RUNNER_TEMP/rank/classes" com.m3.collections.M3RankBatchIntoContract | tee "$RUNNER_TEMP/rank/missing.txt"
+          grep -Fq 'native=false' "$RUNNER_TEMP/rank/missing.txt"
+      - name: Compile actual complete JNI C owner with strict C17 and UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$RUNNER_TEMP/rank/headers/com_m3_collections_M3LongRankBatchNative.h" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/rank/native/libm3rankbatch.so"
+      - name: Prove JNI in normal and interpreted JVM with Xcheck:jni
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.test.native.required=true \
+            -Djava.library.path="$RUNNER_TEMP/rank/native" -cp "$RUNNER_TEMP/rank/classes" \
+            com.m3.collections.M3RankBatchIntoContract | tee "$RUNNER_TEMP/rank/jni.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.test.native.required=true \
+            -Djava.library.path="$RUNNER_TEMP/rank/native" -cp "$RUNNER_TEMP/rank/classes" \
+            com.m3.collections.M3RankBatchIntoContract | tee "$RUNNER_TEMP/rank/jni-int.txt"
+          grep -Fxq 'PASS M3_RANK_BATCH_INTO checks=79781 native=true' "$RUNNER_TEMP/rank/jni.txt"
+          cmp "$RUNNER_TEMP/rank/jni.txt" "$RUNNER_TEMP/rank/jni-int.txt"
+      - name: Preserve source-owner execution receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-jni-rank-batch-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/rank/*.txt
+          if-no-files-found: warn
+          retention-days: 14

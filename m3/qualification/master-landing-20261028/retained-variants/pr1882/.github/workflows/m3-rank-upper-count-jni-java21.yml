@@ -1,0 +1,79 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original JNI long rank upper-count Java 21
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankUpperCountSweepContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankUpperCountSweepTest.java'
+      - '.github/workflows/m3-rank-upper-count-jni-java21.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  actual-jni-primitive-rank:
+    name: Original C17 JNI and Java21 differential, no mock/native stub
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Pin current PR head and exact canonical native/test outputs
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'ac7f123549b2b7e0a3788fe9176bb56dee8efe85'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankUpperCountSweepContract.java)" = '41883b5b1bee07503ab506aa9bd9e9068727a882'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankUpperCountSweepTest.java)" = '7a24fb7c7a5ce623021d7d367c3186bb178c31e8'
+      - name: Compile real Java receiver, generated JNI header and original C kernel
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/m3-jni-rank"
+          mkdir -p "$dir/classes" "$dir/headers" "$dir/native"
+          javac --release 21 -Xlint:all -Werror -h "$dir/headers" -d "$dir/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankUpperCountSweepContract.java
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$dir/headers/com_m3_collections_M3LongRankBatchNative.h" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$dir/native/libm3rankbatch.so"
+      - name: Strict Java fallback and mandatory real JNI in normal and interpreted modes
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/m3-jni-rank"
+          java -cp "$dir/classes" com.m3.collections.M3LongRankUpperCountSweepContract \
+            | tee "$dir/fallback.txt"
+          grep -Fxq 'PASS M3_LONG_RANK_UPPER_COUNT_SWEEP backend=java checks=849784' "$dir/fallback.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$dir/native" -cp "$dir/classes" \
+            com.m3.collections.M3LongRankUpperCountSweepContract --native \
+            | tee "$dir/native.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$dir/native" -cp "$dir/classes" \
+            com.m3.collections.M3LongRankUpperCountSweepContract --native \
+            | tee "$dir/interpreter.txt"
+          grep -Fxq 'PASS M3_LONG_RANK_UPPER_COUNT_SWEEP backend=native checks=849784' "$dir/native.txt"
+          cmp "$dir/native.txt" "$dir/interpreter.txt"
+      - name: Preserve true native/fallback test receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-rank-jni-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-jni-rank/*.txt
+          if-no-files-found: warn
+          retention-days: 14
