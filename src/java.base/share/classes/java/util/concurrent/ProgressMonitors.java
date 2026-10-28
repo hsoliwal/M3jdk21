@@ -91,7 +91,8 @@ public final class ProgressMonitors {
     @SuppressWarnings("try")
     public static void run(Runnable task, ProgressMonitor monitor) {
         Objects.requireNonNull(task, "task");
-        try (Scope ignored = bind(monitor)) {
+        final Scope scope = bind(monitor);
+        try (scope) {
             monitor.checkCancelled();
             task.run();
             monitor.checkCancelled();
@@ -115,7 +116,8 @@ public final class ProgressMonitors {
     @SuppressWarnings("try")
     public static <T> T call(Callable<T> task, ProgressMonitor monitor) throws Exception {
         Objects.requireNonNull(task, "task");
-        try (Scope ignored = bind(monitor)) {
+        final Scope scope = bind(monitor);
+        try (scope) {
             monitor.checkCancelled();
             T result = task.call();
             monitor.checkCancelled();
