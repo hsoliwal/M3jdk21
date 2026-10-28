@@ -30,7 +30,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$HEAD_SHA"
-          test "$BASE_SHA" = '9dd1df62f3d5406760427cb5e840a36c9e7a59ea'
+          git cat-file -e '9dd1df62f3d5406760427cb5e840a36c9e7a59ea^{commit}'
           SOURCE=m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java
           HEAP=m3/collections/src/main/java/com/m3/collections/M3HeapGrowth.java
           WINDOW=m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java
@@ -39,7 +39,7 @@ jobs:
           test "$(git hash-object "$HEAP")" = d7a6ce1410499e6b8fa4844bf01ad9d51fdcdbd6
           test "$(git hash-object "$WINDOW")" = d0ce93a6e0afec40def2f84aab9a522e8fcc4e3d
           printf '%s  %s\n' '75e960d7db157ab38f9597317589be1480eadca5eaf5f3fd048f98a540c3fc58' "$FIXTURE" | sha256sum --check -
-          git show "$BASE_SHA:$SOURCE" > "$RUNNER_TEMP/M3SparseExtents-before.java"
+          git show '9dd1df62f3d5406760427cb5e840a36c9e7a59ea:'"$SOURCE" > "$RUNNER_TEMP/M3SparseExtents-before.java"
           test "$(git hash-object "$RUNNER_TEMP/M3SparseExtents-before.java")" = 650356bcdffa372328e5a79f4f596a887fe5f447
           git diff --check "$BASE_SHA...HEAD"
           echo M3_GEOMETRY_SOURCE_ADMISSION_PASS

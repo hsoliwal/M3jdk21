@@ -46,10 +46,13 @@ class M3EclipseRuntimeActivatorTest {
         assertSame(bundle, activator.bundles().byId(0L));
         IResourceDelta root = proxy(IResourceDelta.class, (instance, method, args) -> switch (method.getName()) {
             case "getKind" -> IResourceDelta.ADDED;
+            case "getFlags" -> 0;
             case "getAffectedChildren" -> new IResourceDelta[0];
             default -> throw new AssertionError(method.getName());
         });
-        assertEquals(1, activator.resourceDelta(root, 1).size());
+        M3EclipseResourceDeltaSnapshot deltas = activator.resourceDelta(root, 1);
+        assertEquals(1, deltas.size());
+        assertEquals(0, deltas.capturedFlags(0));
         activator.stop(context);
         activator.stop(context);
         assertEquals(1, unregistered.get());

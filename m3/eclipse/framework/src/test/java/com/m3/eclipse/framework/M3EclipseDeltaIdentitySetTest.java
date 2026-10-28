@@ -20,6 +20,9 @@ class M3EclipseDeltaIdentitySetTest {
         IResourceDelta root = delta(IResourceDelta.NO_CHANGE, first, second);
         M3EclipseResourceDeltaSnapshot snapshot = M3EclipseResourceDeltaSnapshot.capture(root, 3);
         assertEquals(3, snapshot.size());
+        assertEquals(0, snapshot.capturedFlags(0));
+        assertEquals(0, snapshot.capturedFlags(1));
+        assertEquals(0, snapshot.capturedFlags(2));
         assertSame(root, snapshot.at(0));
         assertSame(first, snapshot.at(1));
         assertSame(second, snapshot.at(2));
@@ -76,6 +79,7 @@ class M3EclipseDeltaIdentitySetTest {
                 IResourceDelta.class.getClassLoader(), new Class<?>[] {IResourceDelta.class},
                 (proxy, method, args) -> switch (method.getName()) {
                     case "getKind" -> kind;
+                    case "getFlags" -> 0; // A no-flags delta still has the real Eclipse API.
                     case "getAffectedChildren" -> children.get().clone();
                     case "equals", "hashCode" ->
                             throw new AssertionError("Eclipse delta identity must never call "

@@ -19,6 +19,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
+            m3/arrays
             m3/eclipse/framework
             m3/collections
             m3/tooling/migration-recipes
@@ -46,15 +47,23 @@ jobs:
           assert [row[0] for row in latest] == sorted(row[0] for row in latest)
           replacements = {row[0]:row for row in latest}
           originals = {row[0]:row for row in old}
+          # The historical recipe postimages stay sealed. Admit only this
+          # qualified test-fixture successor after the full-width flags API.
+          successor_tests = {
+              'm3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java': 'ca493e93c4a5c068948af0573563ca091b47e4455d9c7ef46a2dd9f3751d270c',
+              'm3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java': 'a363fa6cca4799cc9ff1866d7848f4a1b7e3d60b9c707fdb035b28a240d1b8ae',
+          }
+          for path, after_hash in successor_tests.items():
+              assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == after_hash, path
           for path, before, expected, template in old:
               assert hashlib.sha256((original/template).read_bytes()).hexdigest() == expected, template
-              if path not in replacements:
+              if path not in replacements and path not in successor_tests:
                   assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected, path
           delta = 'm3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java'
           assert originals[delta][2] == '3e499ab33152d8a79c3171ce96a20ae35968c8e573e1ac48b999ede35a7581ec'
           assert replacements[delta][1] == '94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c'
           identity = Path('m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java')
-          assert hashlib.sha256(identity.read_bytes()).hexdigest() == '2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781'
+          assert hashlib.sha256(identity.read_bytes()).hexdigest() == 'a363fa6cca4799cc9ff1866d7848f4a1b7e3d60b9c707fdb035b28a240d1b8ae'
           for path, before, after, template in latest:
               prior = current/template.replace('.after.txt','.before.txt')
               assert hashlib.sha256(prior.read_bytes()).hexdigest() == before, prior
@@ -69,19 +78,33 @@ jobs:
           set -euxo pipefail
           mvn -B -ntp -f m3/eclipse/framework/recipe/pom.xml test 2>&1 | tee proof/recipe.txt
           mvn -B -ntp -f m3/eclipse/framework/recipe/flags-20261020/pom.xml test 2>&1 | tee proof/delta-flags-recipe.txt
-      - name: Compile existing M3 collections and install exact jar
+      - name: Compile original M3 arrays then collections with their real JPMS dependency
         run: |
           set -euxo pipefail
-          mkdir -p proof/classes
+          mkdir -p proof/arrays-classes proof/classes
+          find m3/arrays/src/main/java -name '*.java' | sort > proof/m3-arrays-sources.txt
+          test -s proof/m3-arrays-sources.txt
+          javac --release 21 -Xlint:all,-module -Werror \
+            -d proof/arrays-classes @proof/m3-arrays-sources.txt 2>&1 | tee proof/m3-arrays-compile.txt
+          test -f proof/arrays-classes/module-info.class
+          jar --create --file proof/m3-arrays.jar -C proof/arrays-classes .
+          jar --describe-module --file proof/m3-arrays.jar > proof/arrays-module-describe.txt
+          grep -q '^com.m3.arrays' proof/arrays-module-describe.txt
           find m3/collections/src/main/java -name '*.java' | sort > proof/m3-sources.txt
-          javac --release 21 -Xlint:all,-module -Werror -d proof/classes @proof/m3-sources.txt 2>&1 | tee proof/m3-core-compile.txt
+          test -s proof/m3-sources.txt
+          javac --release 21 --module-path proof/m3-arrays.jar -Xlint:all,-module -Werror \
+            -d proof/classes @proof/m3-sources.txt 2>&1 | tee proof/m3-core-compile.txt
+          test -f proof/classes/module-info.class
           jar --create --file proof/m3-collections.jar -C proof/classes .
           jar --create --file proof/m3-collections-osgi.jar --manifest m3/eclipse/framework/osgi/m3-collections.MF -C proof/classes .
-          jar --describe-module --file proof/m3-collections-osgi.jar > proof/core-module-describe.txt
+          jar --describe-module --file proof/m3-collections.jar > proof/core-module-describe.txt
+          grep -q '^com.m3.collections' proof/core-module-describe.txt
+          mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
+            -Dfile="$GITHUB_WORKSPACE/proof/m3-arrays.jar" \
+            -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml" -Dpackaging=jar
           mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$GITHUB_WORKSPACE/proof/m3-collections.jar" \
-            -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT \
-            -Dpackaging=jar -DgeneratePom=true
+            -DpomFile="$GITHUB_WORKSPACE/m3/collections/pom.xml" -Dpackaging=jar
       - name: Compile and execute real Eclipse API tests
         run: |
           set -euxo pipefail

@@ -4,8 +4,11 @@ on:
   pull_request:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
       - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
+      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexMaskWindow*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java'
       - 'm3/collections/qualification/m3-index-mask-window-20261017/**'
       - 'm3/collections/pom-m3-index-mask-window-20261017.xml'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-mask-window-20261017/**'
@@ -20,8 +23,43 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Verify pinned source replay
-        run: python3 m3/collections/qualification/m3-index-mask-window-20261017/verify.py
+      - name: Admit current product source and replay historical recipe in isolation
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The historical ADD-only recipe is immutable. Its original templates
+          # differ from the subsequently optimized product files; do not weaken
+          # its source drift guard or overwrite the current production sources.
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          import subprocess
+          expected = {
+              'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java': '9060424b921bac10dc382ba277a3aa840ea59529',
+              'm3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java': 'df724aaa10cda92fa65a34dbc9cedf8d0aedd760',
+              'm3/collections/src/main/native/collections/m3_index_mask_compactor.c': 'bedd442346de5b7dd9d5f1965c510950e0c45ea1',
+              'm3/collections/src/main/native/collections/m3_index_mask_window.c': 'bd300c90d54ede9b7f238efe8a18c918d2fcef9e',
+              'm3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java': '213d6199ce47e2393bdf11cf91897a285738de57',
+              'm3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowTest.java': '87249673f68836685cc6191b2aad8d5a44bbf6bf',
+              'm3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java': '389be01b9ac61f91619549d010857460efdda009',
+          }
+          for source, pinned in sorted(expected.items()):
+              path = Path(source)
+              if not path.is_file() or path.is_symlink():
+                  raise SystemExit('M3_CURRENT_OWNER_REFUSED missing or symlink: ' + source)
+              result = subprocess.run(['git', 'hash-object', '--', source],
+                                      check=True, stdout=subprocess.PIPE, text=True)
+              if result.stdout.strip() != pinned:
+                  raise SystemExit('M3_CURRENT_OWNER_REFUSED source drift: ' + source)
+          print('M3_CURRENT_OWNER_PASS owners=7 historical_recipe=separate')
+          PYCODE
+          historical="$(mktemp -d "$RUNNER_TEMP/m3-mask-replay.XXXXXX")"
+          trap 'rm -rf "$historical"' EXIT
+          # Verify original additions and fixed point in a fresh disjoint tree.
+          # The existing verifier also proves tampered source refusal.
+          python3 m3/collections/qualification/m3-index-mask-window-20261017/verify.py \
+            --apply --workspace "$historical"
+          python3 m3/collections/qualification/m3-index-mask-window-20261017/verify.py \
+            --workspace "$historical"
       - name: Compile and execute strict Java21 and native differential
         shell: bash
         run: |
@@ -31,7 +69,8 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
             m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
             m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java
           java -cp "$out/classes" com.m3.collections.M3IndexMaskWindowSelfTest
           gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
@@ -40,6 +79,17 @@ jobs:
             -o "$out/native/libm3_collections_mask.so"
           java -Djava.library.path="$out/native" -cp "$out/classes" \
             com.m3.collections.M3IndexMaskWindowSelfTest --native
+          # The owning 12,000-case mask-span oracle must execute the actual
+          # JNI path (NATIVE_REQUIRED), never a transparent Java fallback.
+          for mode in mixed interpreted; do
+            opts=(); if [[ "$mode" == interpreted ]]; then opts=(-Xint); fi
+            java "${opts[@]}" -ea -Xcheck:jni -Djava.library.path="$out/native" \
+              -cp "$out/classes" com.m3.collections.M3MaskSpansContract native \
+              | tee "$out/mask-spans-$mode.log"
+            grep -qx 'MASK_SPANS_PASS cases=12000 backend=NATIVE_REQUIRED' \
+              "$out/mask-spans-$mode.log"
+          done
+          cmp "$out/mask-spans-mixed.log" "$out/mask-spans-interpreted.log"
       - name: Focused Maven/JUnit and actual OpenRewrite SDK
         shell: bash
         run: |
