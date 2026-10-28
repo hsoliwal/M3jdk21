@@ -78,8 +78,9 @@ public interface Consumer<T> {
     @SuppressWarnings("try")
     default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(monitor, "monitor");
-        try (java.util.concurrent.ProgressMonitors.Scope ignored =
-                     java.util.concurrent.ProgressMonitors.bind(monitor)) {
+        final java.util.concurrent.ProgressMonitors.Scope scope =
+                java.util.concurrent.ProgressMonitors.bind(monitor);
+        try (scope) {
             monitor.checkCancelled();
             accept(value);
             monitor.checkCancelled();
