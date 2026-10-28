@@ -1,0 +1,2441 @@
+{
+  "schema": "m3-wrapper-verification/v1",
+  "provenance": {
+    "receiver_repository": "hsoliwal/M3jdk21",
+    "receiver_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "canonical_repository": "hsoliwal/com.synexia",
+    "canonical_engine_baseline": "69b5cc602485bd2a7354e1f1b364bd4af06ee241",
+    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "dataset": "m3jdk21-wrappers-r2-20261018",
+    "dataset_metadata_sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7",
+    "effective_engines_sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+    "publication_custody": "The companion SOURCE_PIN.json binds the immutable canonical commit without making this manifest self-referential.",
+    "license": "Apache-2.0",
+    "verification_dataset": "m3jdk21-wrapper-proof2-20261018",
+    "baseline_source_closure_sha256": "1be885b83eb2b852cee7faf517e662339f5a21e6e75d45bf2dc8b23b5ec9b5d1",
+    "baseline_source_inventory_sha256": "2db7261fb4b6d2a28c0690ec52e9a7a69668286cec1d670d68cd75cd186533e5",
+    "baseline_module_inputs": 313,
+    "scope": "Exact2f module input closure plus qualified wrapper and long-bridge SDK outputs; unchanged runner and README reused.",
+    "source_datasets": [
+      {
+        "dataset": "m3jdk21-wrappers-r2-20261018",
+        "targets": 28,
+        "dataset_metadata_sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7",
+        "effective_engines_sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+        "sealed_baseline_ref": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+        "latest_preimages_match": true,
+        "sdk_inputs_sha256": "e256cbb767211ce5d41417dd3fa9a90682dbec07afcd4b5607c4bb7538bdc13e",
+        "sdk_results_sha256": "9d3dfa387f6f2d3240223e26cfd1108aa78dcca9f4f3abc17cd446fb4f751ad8"
+      },
+      {
+        "dataset": "m3jdk21-long-bridge-20261018",
+        "targets": 1,
+        "dataset_metadata_sha256": "94d49b12e2ba8460832f7c62fffc4e1d228c4695a35217a619723b8888b1e9d5",
+        "effective_engines_sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+        "sealed_baseline_ref": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+        "latest_preimages_match": true,
+        "sdk_inputs_sha256": "243710c8bc02df0e20d2035867b7c7ad28a6361b50076d8457a841110835a185",
+        "sdk_results_sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9"
+      }
+    ],
+    "baseline_transition_recheck_sha256": "d1b85fab851f61a6ec52c802b4c0243a6baf60db3081cd7105d62d5346d903eb",
+    "runner_reuse": {
+      "dataset": "m3jdk21-wrapper-proof-20261018",
+      "sdk_inputs_sha256": "2c0e0d6784bedb84c7e1a957a31d3b209849993aeedd8f7706ca15681ab8cbd2",
+      "sdk_results_sha256": "8c4fa5b61b1b3f56956a7d1f64eeae7825493c8c51fbe377d33bd818c911eb0f",
+      "changed_files": [
+        "SOURCE_MANIFEST.json"
+      ],
+      "verify_py_unchanged": true,
+      "readme_unchanged": true
+    }
+  },
+  "files": [
+    {
+      "path": "m3/collections/LICENSE",
+      "before_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "after_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "role": "baseline_module_input",
+      "before_git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "m3/collections/NOTICE",
+      "before_sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "after_sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "role": "baseline_module_input",
+      "before_git_blob": "c35cf82657474282058afc7ffbcb98c46fd865e3"
+    },
+    {
+      "path": "m3/collections/SYNEXIA-DONATION-NOTICE.txt",
+      "before_sha256": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
+      "after_sha256": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
+      "role": "baseline_module_input",
+      "before_git_blob": "dba49be9546695ec85f0f05fc073752e9950a95a"
+    },
+    {
+      "path": "m3/collections/name-mapping.json",
+      "before_sha256": "320f47e9a8381350cd641a3444119513e5fd32b961369c98338846d7735d03f4",
+      "after_sha256": "320f47e9a8381350cd641a3444119513e5fd32b961369c98338846d7735d03f4",
+      "role": "baseline_module_input",
+      "before_git_blob": "9d1a1fe53aff80cbf2d5928b4ae099b5ed604287"
+    },
+    {
+      "path": "m3/collections/pom.xml",
+      "before_sha256": "d216e3da4ac02615ef46f8b48803174e24c11939ad5b826be9ca9d7df6bbebf6",
+      "after_sha256": "d216e3da4ac02615ef46f8b48803174e24c11939ad5b826be9ca9d7df6bbebf6",
+      "role": "baseline_module_input",
+      "before_git_blob": "3c408446a3841282754f06d82819c285a23acd8a"
+    },
+    {
+      "path": "m3/collections/provenance.json",
+      "before_sha256": "b5f4029a3b44a064d848f23ed513882e58d5e04b23f2a123ea268a18705fa9c0",
+      "after_sha256": "b5f4029a3b44a064d848f23ed513882e58d5e04b23f2a123ea268a18705fa9c0",
+      "role": "baseline_module_input",
+      "before_git_blob": "e7cea52684a439c9a090d700279894150e04215a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+      "before_sha256": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3",
+      "after_sha256": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3",
+      "role": "baseline_module_input",
+      "before_git_blob": "67a1bf136c21ab2b347f0a33ec4784e17c0eb245"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Address28.java",
+      "before_sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
+      "after_sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
+      "role": "baseline_module_input",
+      "before_git_blob": "2dda612d7cfdc39d8138c17a85308dc9d084b28b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "before_sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
+      "after_sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
+      "role": "baseline_module_input",
+      "before_git_blob": "250905f67429fbedfb4d6f652ea6e90a516cb59c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java",
+      "before_sha256": "a8686254c2439bcdd1472bdddbefd5bfa7c4b2efce24aa89b6c1453e208515a5",
+      "after_sha256": "a8686254c2439bcdd1472bdddbefd5bfa7c4b2efce24aa89b6c1453e208515a5",
+      "role": "baseline_module_input",
+      "before_git_blob": "13c50466868ba40928465d44abb6f2f83f419ac6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+      "before_sha256": "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6",
+      "after_sha256": "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6",
+      "role": "baseline_module_input",
+      "before_git_blob": "3185f2fd33894797d012bb21e62dac4422275ea1"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java",
+      "before_sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577",
+      "after_sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577",
+      "role": "baseline_module_input",
+      "before_git_blob": "b2c730f6d666a81fb1ea1bd2a8f220820c1dfa35"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
+      "before_sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680",
+      "after_sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680",
+      "role": "baseline_module_input",
+      "before_git_blob": "44a791db2fac00214479e7020ec3c509f70d7ef2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
+      "before_sha256": "f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452",
+      "after_sha256": "f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452",
+      "role": "baseline_module_input",
+      "before_git_blob": "4f3a64d070b361cd6a25269184370a7ab486c0a5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java",
+      "before_sha256": "54c84bf0bc957d7fe6156f8b2df1017918947e58f430b5ce220d0b19d2678b4f",
+      "after_sha256": "54c84bf0bc957d7fe6156f8b2df1017918947e58f430b5ce220d0b19d2678b4f",
+      "role": "baseline_module_input",
+      "before_git_blob": "f94ae73c9c16d3a0574b1aba97f09001f83dfbce"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkNames.java",
+      "before_sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee",
+      "after_sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee",
+      "role": "baseline_module_input",
+      "before_git_blob": "b85cce7dabd0e8bcd0779fbf50f111173a1ad48a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "before_sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d",
+      "after_sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d",
+      "role": "baseline_module_input",
+      "before_git_blob": "af9a82214a62eff0f9194d6a95179829b6f57b4e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Collections.java",
+      "before_sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926",
+      "after_sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926",
+      "role": "baseline_module_input",
+      "before_git_blob": "3d2f5aa53bda55293b3254bed3d526b896cbd044"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java",
+      "before_sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5",
+      "after_sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5",
+      "role": "baseline_module_input",
+      "before_git_blob": "feb93280cbc1481c40c52156ffc50e2be5e35b54"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java",
+      "before_sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573",
+      "after_sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573",
+      "role": "baseline_module_input",
+      "before_git_blob": "bc2004e2c4802c3338c0099d537b94fb49dc4363"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java",
+      "before_sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea",
+      "after_sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea",
+      "role": "baseline_module_input",
+      "before_git_blob": "176991710420d96aace2774c59fe0137d2b1ba4e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java",
+      "before_sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698",
+      "after_sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698",
+      "role": "baseline_module_input",
+      "before_git_blob": "bbe25dfd008fe143806c8c3aefac6d33e413aec2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java",
+      "before_sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6",
+      "after_sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6",
+      "role": "baseline_module_input",
+      "before_git_blob": "1dd5331b42efa855a51ba31d40380b0064231983"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CountedBag.java",
+      "before_sha256": "2334edd988b5512c9ef6b7092a8ab5ac99e36df09629661ae3779f7090c5bc54",
+      "after_sha256": "2334edd988b5512c9ef6b7092a8ab5ac99e36df09629661ae3779f7090c5bc54",
+      "role": "baseline_module_input",
+      "before_git_blob": "121a45e12151ba92292331bf538443cf99cc4283"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java",
+      "before_sha256": "dc6ff845c49c4a5691e17c362085eaf8721332613f4523a8ff0317f35ec54611",
+      "after_sha256": "dc6ff845c49c4a5691e17c362085eaf8721332613f4523a8ff0317f35ec54611",
+      "role": "baseline_module_input",
+      "before_git_blob": "1c30981aefab6171675c4e31dfd37bdae416691b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
+      "before_sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64",
+      "after_sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64",
+      "role": "baseline_module_input",
+      "before_git_blob": "2c5f52b913ed7d4207645871f522ad63c2bf57df"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+      "before_sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966",
+      "after_sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966",
+      "role": "baseline_module_input",
+      "before_git_blob": "43623113339ffff197d682f2c497b0f07abd4b25"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+      "before_sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c",
+      "after_sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c",
+      "role": "baseline_module_input",
+      "before_git_blob": "3b9cd8179549116524b7f9252a29ba185c22fc98"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+      "before_sha256": "6342d1acb4f406dc5b3c086d2db18966d7a5fc7f2b2a14c680ca520133165f0a",
+      "after_sha256": "6342d1acb4f406dc5b3c086d2db18966d7a5fc7f2b2a14c680ca520133165f0a",
+      "role": "baseline_module_input",
+      "before_git_blob": "d6ac51e7632a5e6ca8d51c9bfcc94c27d4463f25"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "before_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "after_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "role": "baseline_module_input",
+      "before_git_blob": "e094fdde4a153eab2d1a125785bc55c68187bbd1"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "before_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
+      "after_sha256": "3302f213fd0b47ca43331da86236c7a8df3e8855ffd4712c123e986693e5ba27",
+      "role": "runtime_refinement",
+      "before_git_blob": "ccf65b212b756fe2147b68d3c1d6655e87bb3103",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "after_sha256": "e61f94f0262878726b5c7255ebc3aa655a7808c4d1544a8bd0ee3fd1bc49f1a7",
+      "role": "runtime_refinement",
+      "before_git_blob": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3GenericCollections.java",
+      "before_sha256": "7f44e22663f67a7e69108fd097807c36bcf0e62a421481a16dc0fbfd28435f6a",
+      "after_sha256": "7f44e22663f67a7e69108fd097807c36bcf0e62a421481a16dc0fbfd28435f6a",
+      "role": "baseline_module_input",
+      "before_git_blob": "6aaff3e0e7f410b69e511a957c1aa4390ab9ff4d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "before_sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+      "after_sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+      "role": "baseline_module_input",
+      "before_git_blob": "134fb98f8a39969c43fd75338ecb233c5fe49446"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "before_sha256": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1",
+      "after_sha256": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1",
+      "role": "baseline_module_input",
+      "before_git_blob": "0be72190789c7248a3093480b23b0c119a3243a4"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java",
+      "before_sha256": "2a00103d91c5a5236be6fa863cc85538af827d9aae57fa6eb7e55052f3f2524d",
+      "after_sha256": "2a00103d91c5a5236be6fa863cc85538af827d9aae57fa6eb7e55052f3f2524d",
+      "role": "baseline_module_input",
+      "before_git_blob": "d5ea82c59c406322d745e0894b5bfd74dbb2437d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "before_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+      "after_sha256": "e91152a0bb34178995835266ff7c52ae22d87ec6324d171415aed28e293794d1",
+      "role": "runtime_refinement",
+      "before_git_blob": "ef0fac5c1e71f8493baab365c8af64bb22cb6171",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+      "before_sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
+      "after_sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
+      "role": "baseline_module_input",
+      "before_git_blob": "6bc439b69f739608141acf6ee3800e5b5b0163c3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "before_sha256": "0e201b871ca85fa0af306530b6e52cd7fbcdb47207ea0554456abb25e003a61d",
+      "after_sha256": "0e201b871ca85fa0af306530b6e52cd7fbcdb47207ea0554456abb25e003a61d",
+      "role": "baseline_module_input",
+      "before_git_blob": "c1c0bead12632dd42a30961ccf63193de0773c64"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java",
+      "before_sha256": "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82",
+      "after_sha256": "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82",
+      "role": "baseline_module_input",
+      "before_git_blob": "9035b651c5aab1f5850009372e2432ef196efc79"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+      "before_sha256": "3af737a20b7d75273dfe4ee29a34400902e0ad015535c05321898b1f5526aebc",
+      "after_sha256": "3af737a20b7d75273dfe4ee29a34400902e0ad015535c05321898b1f5526aebc",
+      "role": "baseline_module_input",
+      "before_git_blob": "ef65261a642da8e473763d57905297d3e0dc5c2c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+      "before_sha256": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81",
+      "after_sha256": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81",
+      "role": "baseline_module_input",
+      "before_git_blob": "bd6aff905cf47e64ccd76bc19acc899ef93742af"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+      "before_sha256": "055f45cbba3ff22d206cd1d805859c20ee2688cef5443323838ed6d3c061db14",
+      "after_sha256": "055f45cbba3ff22d206cd1d805859c20ee2688cef5443323838ed6d3c061db14",
+      "role": "baseline_module_input",
+      "before_git_blob": "f4c5e217feb953f4314e1f5e23221f59ceec2ead"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+      "before_sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484",
+      "after_sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484",
+      "role": "baseline_module_input",
+      "before_git_blob": "f1329b55c234a65faad61be2a1a557b2a9b2dcd8"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+      "before_sha256": "b77352f6502182caf4caca55eda1073b74c2c0b1094e07d9c8c3fbabb8cc8418",
+      "after_sha256": "b77352f6502182caf4caca55eda1073b74c2c0b1094e07d9c8c3fbabb8cc8418",
+      "role": "baseline_module_input",
+      "before_git_blob": "b050603ae26a5e3c177eb9e97f052ff8e94e103b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+      "before_sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63",
+      "after_sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63",
+      "role": "baseline_module_input",
+      "before_git_blob": "366f92e9da842e00e346872f386ecfede38c5cb6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLane28.java",
+      "before_sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18",
+      "after_sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18",
+      "role": "baseline_module_input",
+      "before_git_blob": "4e1e7eb7f2212493eecd544c3e7174ac1ca33232"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+      "before_sha256": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92",
+      "after_sha256": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92",
+      "role": "baseline_module_input",
+      "before_git_blob": "49404c6e9b450da64228ddb4af958770f9060382"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+      "before_sha256": "d713f4cd75b49becf6ed478cb5b9d5d971eadbebd90ead8a67c83722cb96eae1",
+      "after_sha256": "d713f4cd75b49becf6ed478cb5b9d5d971eadbebd90ead8a67c83722cb96eae1",
+      "role": "baseline_module_input",
+      "before_git_blob": "f490cc55f75eec77d1e4f427675b61dde11ff409"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+      "before_sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59",
+      "after_sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59",
+      "role": "baseline_module_input",
+      "before_git_blob": "3ee7233f27105d326832e212b01b8da17142569e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventBits.java",
+      "before_sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f",
+      "after_sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f",
+      "role": "baseline_module_input",
+      "before_git_blob": "e0605534823bd2933b9a3f92f2481a1fef794b33"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventGranularity.java",
+      "before_sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020",
+      "after_sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020",
+      "role": "baseline_module_input",
+      "before_git_blob": "7e031ea2e06900aa6326d6d587ad66f290911d6a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventPolicy.java",
+      "before_sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f",
+      "after_sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f",
+      "role": "baseline_module_input",
+      "before_git_blob": "aa79f1cc24bc83a5c2db5f7427a3a461715af380"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventSink.java",
+      "before_sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d",
+      "after_sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d",
+      "role": "baseline_module_input",
+      "before_git_blob": "f0085ec59bbedda0ca18d752996ad489ec976d5c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventSource.java",
+      "before_sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27",
+      "after_sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27",
+      "role": "baseline_module_input",
+      "before_git_blob": "a21d4701650880ae5db7c569427ff64ec2195b92"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEvents.java",
+      "before_sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d",
+      "after_sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d",
+      "role": "baseline_module_input",
+      "before_git_blob": "c2a0aa479a4aa89b029ab9d99e22a3a27557b392"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyOperation.java",
+      "before_sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667",
+      "after_sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667",
+      "role": "baseline_module_input",
+      "before_git_blob": "9d8939d6d768c3c1861a532d185e8c27afa35994"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyValueProvider.java",
+      "before_sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66",
+      "after_sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66",
+      "role": "baseline_module_input",
+      "before_git_blob": "5bb4a035f57206bb82dc6b19657a0f39dc2d5fe8"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyValueState.java",
+      "before_sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4",
+      "after_sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4",
+      "role": "baseline_module_input",
+      "before_git_blob": "d13625a82d623a5aa99fee498e7b5afe793f504a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "before_sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "after_sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "role": "baseline_module_input",
+      "before_git_blob": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java",
+      "before_sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757",
+      "after_sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757",
+      "role": "baseline_module_input",
+      "before_git_blob": "e1ac806d1ebe8aac1b9efe7bcfbaa3f675e7d0d6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "before_sha256": "1f9a2315db0f9a695402b47a7f6f1e124ed08e186e3460f9ce9757b324bd43c0",
+      "after_sha256": "1f9a2315db0f9a695402b47a7f6f1e124ed08e186e3460f9ce9757b324bd43c0",
+      "role": "baseline_module_input",
+      "before_git_blob": "744d1c488b8342c98e49d2cfd3465c0f558b199d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedMap.java",
+      "before_sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca",
+      "after_sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca",
+      "role": "baseline_module_input",
+      "before_git_blob": "17cdc6d3bba0093fba9f598f74219c90706f05be"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedTreeMap.java",
+      "before_sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9",
+      "after_sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9",
+      "role": "baseline_module_input",
+      "before_git_blob": "374960e9edfd4c1bbcc0951c4592d3ffd1b31f70"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedTreeSet.java",
+      "before_sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09",
+      "after_sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09",
+      "role": "baseline_module_input",
+      "before_git_blob": "fb472120f4e93fcf8ca474e390c89aaef63fc9a6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "before_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "after_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "role": "baseline_module_input",
+      "before_git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArena28.java",
+      "before_sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60",
+      "after_sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60",
+      "role": "baseline_module_input",
+      "before_git_blob": "b265551ff952606326e25c0361bc6f35c72adedf"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "before_sha256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
+      "after_sha256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
+      "role": "baseline_module_input",
+      "before_git_blob": "73d90117f3a3b4f1a5a670fb34f5326765627d2c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+      "before_sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd",
+      "after_sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd",
+      "role": "baseline_module_input",
+      "before_git_blob": "543e4d99ba6cc07a949141640588fd6437203635"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBag.java",
+      "before_sha256": "636cf505cca2f0d0bbfdd93c815717c21b0edba9344b245cc58f3fd27dc2faed",
+      "after_sha256": "636cf505cca2f0d0bbfdd93c815717c21b0edba9344b245cc58f3fd27dc2faed",
+      "role": "baseline_module_input",
+      "before_git_blob": "a3aa54e2b3f01f4341efdf7c3f6683828b116eba"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilterPlan.java",
+      "before_sha256": "bd7969cfc42e26171b9904c65eb12f3321b2fbffe77a34f6d76f4db15c11c1d3",
+      "after_sha256": "bd7969cfc42e26171b9904c65eb12f3321b2fbffe77a34f6d76f4db15c11c1d3",
+      "role": "baseline_module_input",
+      "before_git_blob": "9145aedc0ef0fe0ef76f2d7ec9cf20df7c95bc4d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "before_sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
+      "after_sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
+      "role": "baseline_module_input",
+      "before_git_blob": "a5fe77001be04ca123593908fb68ca008935d543"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+      "before_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+      "after_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+      "role": "baseline_module_input",
+      "before_git_blob": "d0b389681ade738e97426d950b6291c746912cf0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+      "before_sha256": "041c6afc3ed04671e9e9fa1a30c0ea7df7fe09aefdff405a3612afffee441ecb",
+      "after_sha256": "041c6afc3ed04671e9e9fa1a30c0ea7df7fe09aefdff405a3612afffee441ecb",
+      "role": "baseline_module_input",
+      "before_git_blob": "7d4a3b83e13eb24940c3d72aac860fa5a419a08f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongDag.java",
+      "before_sha256": "0962be0f81f1e83cd3b2686a22e24cc245d5db14e26a27cb681530215f76be47",
+      "after_sha256": "0962be0f81f1e83cd3b2686a22e24cc245d5db14e26a27cb681530215f76be47",
+      "role": "baseline_module_input",
+      "before_git_blob": "b9c3d3119fffde726a5d4b0bb9de7ed99cbdaf9b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+      "before_sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272",
+      "after_sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272",
+      "role": "baseline_module_input",
+      "before_git_blob": "7fb1dc4bcd5275c703a19f36062ae5c66b3d2f43"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+      "before_sha256": "345f3a25aff7c18cd01643a87976570231870949b95ae4a758d486cf22087e3d",
+      "after_sha256": "345f3a25aff7c18cd01643a87976570231870949b95ae4a758d486cf22087e3d",
+      "role": "baseline_module_input",
+      "before_git_blob": "07fdbb60e1a7272272c1f462e5102435392bacef"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "before_sha256": "7274e4b0ab7a65be73e2a59d92e5b419a91261c954917428eba85f2dfccf03e6",
+      "after_sha256": "7274e4b0ab7a65be73e2a59d92e5b419a91261c954917428eba85f2dfccf03e6",
+      "role": "baseline_module_input",
+      "before_git_blob": "c2f04bb08698169862180e3759146e31c60d84b5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
+      "before_sha256": "c7692b6d8d6f6ea6b586580b351747165e4a9a7d9bb7b37979dd737d4ea258e9",
+      "after_sha256": "77a99d047931c70c7a45a067c081748bae499b7f3002bfc08f7b2f47a01adf84",
+      "role": "runtime_refinement",
+      "before_git_blob": "dd918fb13360408d71fc3577ee5c7bd255205340",
+      "recipe_dataset": "m3jdk21-long-bridge-20261018"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "after_sha256": "17137b236421ad3ad4f079acc0ba98a10ad4d419b717abd1f9192f42b18260a8",
+      "role": "runtime_refinement",
+      "before_git_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "before_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "after_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "role": "baseline_module_input",
+      "before_git_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLane28.java",
+      "before_sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960",
+      "after_sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960",
+      "role": "baseline_module_input",
+      "before_git_blob": "8616ab397be434e947a3148ea7b02e946c710e99"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java",
+      "before_sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1",
+      "after_sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1",
+      "role": "baseline_module_input",
+      "before_git_blob": "bc67c1f6d4da60c330c2d130cfa69b9c05d5b814"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+      "before_sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+      "after_sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+      "role": "baseline_module_input",
+      "before_git_blob": "28c864a69a384dbfe6fbc499eff7da4015264a3f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java",
+      "before_sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2",
+      "after_sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2",
+      "role": "baseline_module_input",
+      "before_git_blob": "f92fd3b564b53ee7bee422db4ce7b6b63a0860eb"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+      "before_sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd",
+      "after_sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd",
+      "role": "baseline_module_input",
+      "before_git_blob": "df2d2741b67987d93deefcd75f139d5648eb4dc2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
+      "before_sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003",
+      "after_sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003",
+      "role": "baseline_module_input",
+      "before_git_blob": "a1a620d464f7b29bb8a5e801e51a1ce9592d3f7f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java",
+      "before_sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c",
+      "after_sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c",
+      "role": "baseline_module_input",
+      "before_git_blob": "b1c01d1afacc76bd338179398ab42835e16992fa"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "before_sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3",
+      "after_sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3",
+      "role": "baseline_module_input",
+      "before_git_blob": "9dc8bdda1fbf81d2be4d2fff72c83c303b7bb981"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongLinkedHashMap.java",
+      "before_sha256": "c2f74a1336ec435d7fbd031797a485ded70f21283bb8ace10aca09ed68fe9846",
+      "after_sha256": "c2f74a1336ec435d7fbd031797a485ded70f21283bb8ace10aca09ed68fe9846",
+      "role": "baseline_module_input",
+      "before_git_blob": "befc032498ca830b5598bd447ccca0796bc6f446"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongPredicates.java",
+      "before_sha256": "e5d9d7fca94c4eef0843bb7eb7929c2baba05892207f9336a6da3a089bc882ad",
+      "after_sha256": "e5d9d7fca94c4eef0843bb7eb7929c2baba05892207f9336a6da3a089bc882ad",
+      "role": "baseline_module_input",
+      "before_git_blob": "2367a2e5f7437ffe340d800a1a5c949cef54adc4"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
+      "before_sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+      "after_sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+      "role": "baseline_module_input",
+      "before_git_blob": "2fb403549f2baf0afe5b04743647c26ebd4cce80"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+      "before_sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8",
+      "after_sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8",
+      "role": "baseline_module_input",
+      "before_git_blob": "8fcb61bd6a8a5077008ac0102f44f28035096bec"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "before_sha256": "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8",
+      "after_sha256": "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8",
+      "role": "baseline_module_input",
+      "before_git_blob": "5dbc2ec9317c79d801bb4c312f2c0b7ffad6ffbd"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+      "before_sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82",
+      "after_sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82",
+      "role": "baseline_module_input",
+      "before_git_blob": "2bc0c445bf525b442d9b80b8a03ad4208b52c782"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java",
+      "before_sha256": "d1011f31158fa96c23722e6df2fd7ec9e9c1592fba860580330c42fb3f25f4f9",
+      "after_sha256": "d1011f31158fa96c23722e6df2fd7ec9e9c1592fba860580330c42fb3f25f4f9",
+      "role": "baseline_module_input",
+      "before_git_blob": "48b1cb131c60b84e381ec6ff6425f356dad0bd04"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSequence.java",
+      "before_sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb",
+      "after_sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb",
+      "role": "baseline_module_input",
+      "before_git_blob": "26ca657bd372e3a70ed4ee84a216e9a78b95dba0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+      "before_sha256": "257a69f75483df729add39767532718f96ac3c9917bdadbe9a4be08f32caf933",
+      "after_sha256": "257a69f75483df729add39767532718f96ac3c9917bdadbe9a4be08f32caf933",
+      "role": "baseline_module_input",
+      "before_git_blob": "c613bf12e479d1b206ee0b4a290c6f10f263547e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java",
+      "before_sha256": "37ce5651596e7b44bb2512d2bdc6ee8bba40bf95320c5c377162077032c69975",
+      "after_sha256": "37ce5651596e7b44bb2512d2bdc6ee8bba40bf95320c5c377162077032c69975",
+      "role": "baseline_module_input",
+      "before_git_blob": "2b58886676ea78db055041290683bebf8714c373"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+      "before_sha256": "7a42630fbffd2c5875d8a7e4258540454879117a52bd6fe52c3cde4ce07b4d99",
+      "after_sha256": "7a42630fbffd2c5875d8a7e4258540454879117a52bd6fe52c3cde4ce07b4d99",
+      "role": "baseline_module_input",
+      "before_git_blob": "ef918bc7c3b41911d7bc0ad6e3110026cad87720"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+      "before_sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36",
+      "after_sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36",
+      "role": "baseline_module_input",
+      "before_git_blob": "94ff060e1294197863e3676632e9809cfc6d8593"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java",
+      "before_sha256": "a59da36533c6ef9b82c478432953674603e0734a2471698b5410a8bbde92f8c5",
+      "after_sha256": "a59da36533c6ef9b82c478432953674603e0734a2471698b5410a8bbde92f8c5",
+      "role": "baseline_module_input",
+      "before_git_blob": "3495bc323b8be60c7c2929f53fb9747583b9d1c6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java",
+      "before_sha256": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42",
+      "after_sha256": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42",
+      "role": "baseline_module_input",
+      "before_git_blob": "310e7e1b6083d6cd11c8ceafa889c8af8ecbad10"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "before_sha256": "66442108ee67cb8395f9e4cb7d26990583a33d2e2775347da15acb5cb3d5b62d",
+      "after_sha256": "51188863415920856a0f5e69ea8a54735e8502d7c0bcf8ca42fcf3a84bf1c6ec",
+      "role": "runtime_refinement",
+      "before_git_blob": "ef1a9538212a04dc513cde0ccf0b3fe4507438d1",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java",
+      "before_sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3",
+      "after_sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3",
+      "role": "baseline_module_input",
+      "before_git_blob": "18f9277389f7fa5ab8ddbff9971bb0f941659750"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java",
+      "before_sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d",
+      "after_sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d",
+      "role": "baseline_module_input",
+      "before_git_blob": "6f20a64f8d7e9dc6bbc9880396c502349e2e3d7a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "before_sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+      "after_sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+      "role": "baseline_module_input",
+      "before_git_blob": "a212ea57297199900add9e1cc3aef1088abc9d1c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "before_sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5",
+      "after_sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5",
+      "role": "baseline_module_input",
+      "before_git_blob": "d3132cdc31d450926d29f7c4f9d3c47d03ad2363"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java",
+      "before_sha256": "f8c19b2dd04c6198f5061685d7fb7890531620970510fe666ce5338b115d3b12",
+      "after_sha256": "f8c19b2dd04c6198f5061685d7fb7890531620970510fe666ce5338b115d3b12",
+      "role": "baseline_module_input",
+      "before_git_blob": "42a33b9af05d9ec4e1e9c1833a27fa5dd008564b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectStateBatch28.java",
+      "before_sha256": "aa4f2c277fa8e36f217b1e93533fe0e78a98e6e7e6b9f7fa6d31c60f36c314d9",
+      "after_sha256": "aa4f2c277fa8e36f217b1e93533fe0e78a98e6e7e6b9f7fa6d31c60f36c314d9",
+      "role": "baseline_module_input",
+      "before_git_blob": "8bd65f67c13377d1e48cca1849bbcbc8c822ef7e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java",
+      "before_sha256": "0b4f3600af352d2b22b35a520f98540a446c0a3494a9253cb0ef6c309a5f7bcb",
+      "after_sha256": "0b4f3600af352d2b22b35a520f98540a446c0a3494a9253cb0ef6c309a5f7bcb",
+      "role": "baseline_module_input",
+      "before_git_blob": "1ee69a4f8596691f888362ed46ca786163a0f3f5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+      "before_sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357",
+      "after_sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357",
+      "role": "baseline_module_input",
+      "before_git_blob": "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "before_sha256": "b9411d0e1f1efc9130adabf89a76ba161cf717b0ca4021390d8fc862d3aefa04",
+      "after_sha256": "b9411d0e1f1efc9130adabf89a76ba161cf717b0ca4021390d8fc862d3aefa04",
+      "role": "baseline_module_input",
+      "before_git_blob": "8d3e2ed80e74d10b039b7b704bcc24a40dd48d82"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Progress.java",
+      "before_sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d",
+      "after_sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d",
+      "role": "baseline_module_input",
+      "before_git_blob": "5728ff52b138121791fd2b12c923a883d52327bc"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+      "before_sha256": "87a4782840b9862cf2252f2cf53191d7eb6fa4a6b96a180f949aa59d05160231",
+      "after_sha256": "87a4782840b9862cf2252f2cf53191d7eb6fa4a6b96a180f949aa59d05160231",
+      "role": "baseline_module_input",
+      "before_git_blob": "331e3e74bea6c366455cfe151a652e6386fbab48"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
+      "before_sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24",
+      "after_sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24",
+      "role": "baseline_module_input",
+      "before_git_blob": "fbaaf21bb7f013bebbc32d0d43dbf71e47b90059"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
+      "before_sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b",
+      "after_sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b",
+      "role": "baseline_module_input",
+      "before_git_blob": "591223844f3cfd50fdf5431deb3bc2b1c9d7b5f0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
+      "before_sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d",
+      "after_sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d",
+      "role": "baseline_module_input",
+      "before_git_blob": "23e877a0862e2b9a9a83f247e6b0b499a0757d9e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressiveSignalEvidence.java",
+      "before_sha256": "b1b2e03bfc5c6e93b805521a18f749da864f43aa5a56c4bfddfaa8360e3eb0d2",
+      "after_sha256": "b1b2e03bfc5c6e93b805521a18f749da864f43aa5a56c4bfddfaa8360e3eb0d2",
+      "role": "baseline_module_input",
+      "before_git_blob": "128b6af337da7efb6519195f2c1ec31005ab8249"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Residency.java",
+      "before_sha256": "240f63bf1cc6d1ce2681c338f8715e301913eeaf8a3cd69baebc5971b9cdaf67",
+      "after_sha256": "240f63bf1cc6d1ce2681c338f8715e301913eeaf8a3cd69baebc5971b9cdaf67",
+      "role": "baseline_module_input",
+      "before_git_blob": "34c18f45632096c3bd4f0df199fe99a1a59c2f16"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
+      "before_sha256": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc",
+      "after_sha256": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc",
+      "role": "baseline_module_input",
+      "before_git_blob": "58c65f69e3b457b979983d81e393e6ed9aad77da"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalDimensions.java",
+      "before_sha256": "c9bc4dc17e68606be0321e42d1c88c404a4dd7f68d7b90c266e446e19d4fa9ba",
+      "after_sha256": "c9bc4dc17e68606be0321e42d1c88c404a4dd7f68d7b90c266e446e19d4fa9ba",
+      "role": "baseline_module_input",
+      "before_git_blob": "dbda28df5bb16211e03516e8142d10bbc9047bad"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "before_sha256": "da761a6b4f10d9a3c9a61979a4ee238fd6d26492d1ba0e6daacdf371f6561058",
+      "after_sha256": "da761a6b4f10d9a3c9a61979a4ee238fd6d26492d1ba0e6daacdf371f6561058",
+      "role": "baseline_module_input",
+      "before_git_blob": "f7f6e1f4ea9763b4b4238998ffb7377f4f871e6f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+      "before_sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8",
+      "after_sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8",
+      "role": "baseline_module_input",
+      "before_git_blob": "7e5bc5fb1c1a25e00452f2dc0f58d4c90900bffe"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java",
+      "before_sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7",
+      "after_sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7",
+      "role": "baseline_module_input",
+      "before_git_blob": "3aa639f8fa88c948babfacb5b34511dd2f18442d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+      "before_sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518",
+      "after_sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518",
+      "role": "baseline_module_input",
+      "before_git_blob": "e337c69710c871f8caa77a1afe53149f1fd705cc"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "before_sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
+      "after_sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
+      "role": "baseline_module_input",
+      "before_git_blob": "a7d20300717661c26897f0b69e1e5a83400a62ad"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "before_sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+      "after_sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+      "role": "baseline_module_input",
+      "before_git_blob": "30cf137538353ac8e91514fff7c5db3903da8819"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "before_sha256": "cf76dacccd055f5a21338c09ae7ce77efc0fe21fb756ad6c2e7015f9831d650b",
+      "after_sha256": "cf76dacccd055f5a21338c09ae7ce77efc0fe21fb756ad6c2e7015f9831d650b",
+      "role": "baseline_module_input",
+      "before_git_blob": "2f3099248a67b636a9f926747dd6a8d2b4c21baf"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java",
+      "before_sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc",
+      "after_sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc",
+      "role": "baseline_module_input",
+      "before_git_blob": "06dc86a44df0e962613273011ff7d653f20d6ea9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java",
+      "before_sha256": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42",
+      "after_sha256": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42",
+      "role": "baseline_module_input",
+      "before_git_blob": "5988d568c52bc959e760a51a280b78c1d41f8519"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
+      "before_sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b",
+      "after_sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b",
+      "role": "baseline_module_input",
+      "before_git_blob": "66984feed7d22b8e047f69de0862b7ade9083ede"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java",
+      "before_sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7",
+      "after_sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7",
+      "role": "baseline_module_input",
+      "before_git_blob": "54c577fcbd5d43959b748e734603f40370d98e78"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+      "before_sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8",
+      "after_sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8",
+      "role": "baseline_module_input",
+      "before_git_blob": "8a85b86c027bc031ef096ad94de2747b8fd28f9c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeSet.java",
+      "before_sha256": "e55e48d581412955c468b8263d9f2b15bfb03b659f3b70f1187697853aeebc5c",
+      "after_sha256": "e55e48d581412955c468b8263d9f2b15bfb03b659f3b70f1187697853aeebc5c",
+      "role": "baseline_module_input",
+      "before_git_blob": "e414f679a341392770fb482377a51fe2f5e6518f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3VirtualAccumulator.java",
+      "before_sha256": "27c5ffc37302dc173e00a82134cc57be64ba3721aafe42d1d854d4cdba3fb257",
+      "after_sha256": "27c5ffc37302dc173e00a82134cc57be64ba3721aafe42d1d854d4cdba3fb257",
+      "role": "baseline_module_input",
+      "before_git_blob": "82071a3aa36ae3626283cc4a4fba155028ad8995"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3VirtualCollector.java",
+      "before_sha256": "2e74d033a06247ba6ffa0beae2a7c5b1ddb838bfa50499678755934eeda7e086",
+      "after_sha256": "2e74d033a06247ba6ffa0beae2a7c5b1ddb838bfa50499678755934eeda7e086",
+      "role": "baseline_module_input",
+      "before_git_blob": "6d274db8885dd1d1b3c846529f8b30db2e64eb74"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java",
+      "before_sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a",
+      "after_sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a",
+      "role": "baseline_module_input",
+      "before_git_blob": "5d7eb065aeca2cecc1d939532d154c87bbb01c2c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/package-info.java",
+      "before_sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc",
+      "after_sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc",
+      "role": "baseline_module_input",
+      "before_git_blob": "3998c9f78a8617aa3b593c353f7d7ac48e93a52b"
+    },
+    {
+      "path": "m3/collections/src/main/java/module-info.java",
+      "before_sha256": "e531b318ea4cbc6ca09bb3e52cb1a70ee4539ccf78d8b61b0f73bcf3027db557",
+      "after_sha256": "e531b318ea4cbc6ca09bb3e52cb1a70ee4539ccf78d8b61b0f73bcf3027db557",
+      "role": "baseline_module_input",
+      "before_git_blob": "e6ca30e5a04a0b7c0f1ada4f0659342cd863d78d"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "before_sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+      "after_sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+      "role": "baseline_module_input",
+      "before_git_blob": "aaa74686949de59b44b363741ef1c414fe3e95d0"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "before_sha256": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
+      "after_sha256": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
+      "role": "baseline_module_input",
+      "before_git_blob": "b3df27bfafad8508c85d77ba24a4b8a4622a7878"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "before_sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+      "after_sha256": "1480656507ad1c0cb425904e9e73b94c207a64f8eac961461d383265fcfce121",
+      "role": "runtime_refinement",
+      "before_git_blob": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "before_sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+      "after_sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+      "role": "baseline_module_input",
+      "before_git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c",
+      "before_sha256": "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388",
+      "after_sha256": "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388",
+      "role": "baseline_module_input",
+      "before_git_blob": "f5660370d94503888d31adfb9b6f04796ebc426f"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_residency_state_mask.c",
+      "before_sha256": "07076627c4cdca856ead90d400c467d7259b65a7970dfbea114ffd66a9bb54e4",
+      "after_sha256": "07076627c4cdca856ead90d400c467d7259b65a7970dfbea114ffd66a9bb54e4",
+      "role": "baseline_module_input",
+      "before_git_blob": "f6015cf4f9d760a649d37124d9d5219d6052164b"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+      "before_sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+      "after_sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+      "role": "baseline_module_input",
+      "before_git_blob": "46b578b94710d804dd4eb198a8c235fb3db92547"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_span_index_jni.c",
+      "before_sha256": "f33781ca270dda25553986da350d4d5fc3808c483363c93a7bad64717effaf3c",
+      "after_sha256": "f33781ca270dda25553986da350d4d5fc3808c483363c93a7bad64717effaf3c",
+      "role": "baseline_module_input",
+      "before_git_blob": "5664098cc69800fc83140a84db48cac98625232f"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+      "before_sha256": "2a426399b299fac7b21de78ab5938197e2b2e628b54158642c3631ee3a986033",
+      "after_sha256": "2a426399b299fac7b21de78ab5938197e2b2e628b54158642c3631ee3a986033",
+      "role": "baseline_module_input",
+      "before_git_blob": "b49b0ef89dfdd07f51730a7034aef0b84516082a"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/segmented_bit_lane.c",
+      "before_sha256": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+      "after_sha256": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+      "role": "baseline_module_input",
+      "before_git_blob": "011b847f0d22ea96e4b136547083904ac50b1440"
+    },
+    {
+      "path": "m3/collections/src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
+      "before_sha256": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313",
+      "after_sha256": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313",
+      "role": "baseline_module_input",
+      "before_git_blob": "fc2bae136d4a9641ebddd95736581abc69ace48e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/FilteredBatchContracts.java",
+      "before_sha256": "4cc262d5bb4ddf476c59285f630de1b55808e4530d418ed0d0d4d989c8d25575",
+      "after_sha256": "4cc262d5bb4ddf476c59285f630de1b55808e4530d418ed0d0d4d989c8d25575",
+      "role": "baseline_module_input",
+      "before_git_blob": "5845c9fe28333e22b51b810bf412b3a5dcaa9e34"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java",
+      "before_sha256": "7c86957b387dd1afa83384b1fbf05ff1c5d0807bb3255f31ffcd9dfd4b5ec140",
+      "after_sha256": "7c86957b387dd1afa83384b1fbf05ff1c5d0807bb3255f31ffcd9dfd4b5ec140",
+      "role": "baseline_module_input",
+      "before_git_blob": "e38554da2e95f11f1ab7206ace574fe75bdf207c"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3AllocationProbe.java",
+      "before_sha256": "47c94f4de1f02dd6544342481e1e44b159b6895767d53e238659424f4a709f6d",
+      "after_sha256": "47c94f4de1f02dd6544342481e1e44b159b6895767d53e238659424f4a709f6d",
+      "role": "baseline_module_input",
+      "before_git_blob": "2e3699b04417b7c97aa66828f941d69e1f63a48b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexSelfTest.java",
+      "before_sha256": "9f79cf7605c30bd1766878312af6ac2e880d2faf03f790c579146aee951704ec",
+      "after_sha256": "9f79cf7605c30bd1766878312af6ac2e880d2faf03f790c579146aee951704ec",
+      "role": "baseline_module_input",
+      "before_git_blob": "dd5c28a0b34426db562efc9e47fc52004df4c936"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexTest.java",
+      "before_sha256": "58709c47d26fb7819d314fd2793caf85bd24edf84242f7db27a774b058abe827",
+      "after_sha256": "58709c47d26fb7819d314fd2793caf85bd24edf84242f7db27a774b058abe827",
+      "role": "baseline_module_input",
+      "before_git_blob": "a7b9afa14749034c793f3077bd3ce9a79a57a2fa"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BitLane28FenwickSelfTest.java",
+      "before_sha256": "a82291d6dfc65546369804db2ad31b773c0d35bddb46ae998f98e586fefb54c3",
+      "after_sha256": "a82291d6dfc65546369804db2ad31b773c0d35bddb46ae998f98e586fefb54c3",
+      "role": "baseline_module_input",
+      "before_git_blob": "59505cc0bb33c0a8364dfb9f6ece7e71c1b3fa50"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BitLane28FenwickTest.java",
+      "before_sha256": "b221c981c9cabacadeea694a311fd7a76025a161a5e3cb01860b311b35311e3c",
+      "after_sha256": "b221c981c9cabacadeea694a311fd7a76025a161a5e3cb01860b311b35311e3c",
+      "role": "baseline_module_input",
+      "before_git_blob": "956b0ac50e3907f33dc93700c44c86db589bee59"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BitLaneJumpProof.java",
+      "before_sha256": "1a6b291f5c5e079afbfe02adf6faf2dc6de997263e24507e85ee6333365bab24",
+      "after_sha256": "1a6b291f5c5e079afbfe02adf6faf2dc6de997263e24507e85ee6333365bab24",
+      "role": "baseline_module_input",
+      "before_git_blob": "ea326cbc0cab9df5c816378fd6772c656931701c"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
+      "before_sha256": "f37ead5e6647b1f0ec7cf0d0723c2662508d1991bf0c967b298f2be737fd7c8d",
+      "after_sha256": "f37ead5e6647b1f0ec7cf0d0723c2662508d1991bf0c967b298f2be737fd7c8d",
+      "role": "baseline_module_input",
+      "before_git_blob": "a8073b064f222e6c95451107f3a274572d6bdbd6"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationTest.java",
+      "before_sha256": "96233e8fbdd4679d4e6a4e028581d84b3cdbf0bcf187c3beb5db4ed7645f3a8b",
+      "after_sha256": "96233e8fbdd4679d4e6a4e028581d84b3cdbf0bcf187c3beb5db4ed7645f3a8b",
+      "role": "baseline_module_input",
+      "before_git_blob": "3ea185662e21e86f03414b391e18e70d8e1edd27"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BudgetedMaskWindowContract.java",
+      "before_sha256": "ca9b23828d50b18e3b15d567b6ad284eb49b03f1cd3aa08b3c79bbc074951ed5",
+      "after_sha256": "ca9b23828d50b18e3b15d567b6ad284eb49b03f1cd3aa08b3c79bbc074951ed5",
+      "role": "baseline_module_input",
+      "before_git_blob": "aa1b1c3e54584faa3638da9ca6feadc145e434a1"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BulkCaptureContract.java",
+      "before_sha256": "f8ab9fce28e488fc5ff4f62996164a1939a7b0b1b96d9db473c75ced36eb470f",
+      "after_sha256": "f8ab9fce28e488fc5ff4f62996164a1939a7b0b1b96d9db473c75ced36eb470f",
+      "role": "baseline_module_input",
+      "before_git_blob": "140b5ca23be1e3fc2b2dc886ebc2939c2ec21497"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionCostProbe.java",
+      "before_sha256": "c3b7fe8f9b10dd1607af7b5da7b657138934a1b5cf0d449960c50c2a219d35a8",
+      "after_sha256": "c3b7fe8f9b10dd1607af7b5da7b657138934a1b5cf0d449960c50c2a219d35a8",
+      "role": "baseline_module_input",
+      "before_git_blob": "13c39fb6ac06b43d2bd88b66759cfebc5b197e1d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java",
+      "before_sha256": "b28c7bea13e62b546cfc77b518126b1cbae52a3449bc264230ace523a10e3dc1",
+      "after_sha256": "b28c7bea13e62b546cfc77b518126b1cbae52a3449bc264230ace523a10e3dc1",
+      "role": "baseline_module_input",
+      "before_git_blob": "cc9f45ee01ff53db4fa41f9263ace89f42466400"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkContractSelfTest.java",
+      "before_sha256": "7d15455b3253291c7756b8d5e3abf33426885ba66600a63aba4e26109cba257d",
+      "after_sha256": "7d15455b3253291c7756b8d5e3abf33426885ba66600a63aba4e26109cba257d",
+      "role": "baseline_module_input",
+      "before_git_blob": "690b7e4f0780bde29b5c13f5f397a7623f850328"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSelfTest.java",
+      "before_sha256": "0d8dc0e0072d0b84440dcdf2a0e0599f284fc96d2e9ec1a507a232c6b4fec2bd",
+      "after_sha256": "0d8dc0e0072d0b84440dcdf2a0e0599f284fc96d2e9ec1a507a232c6b4fec2bd",
+      "role": "baseline_module_input",
+      "before_git_blob": "8d01cb9fbefb76f65a70759d93153cfc20a20008"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSortedFactorySelfTest.java",
+      "before_sha256": "0cacf15250f8879952e96bbf57e7188072918b9bfce346c82f52f0fd060244bd",
+      "after_sha256": "0cacf15250f8879952e96bbf57e7188072918b9bfce346c82f52f0fd060244bd",
+      "role": "baseline_module_input",
+      "before_git_blob": "a918d54f8714c71ce20d496ada9869424c1f3ef5"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ConcurrentContractTest.java",
+      "before_sha256": "9aea61d2c674b81f0b8b84f053b82449ec0d97ae7e69264efd3561edef808872",
+      "after_sha256": "9aea61d2c674b81f0b8b84f053b82449ec0d97ae7e69264efd3561edef808872",
+      "role": "baseline_module_input",
+      "before_git_blob": "a9e57f112d5ca4e224d3776fc49e4afdf3a62df1"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ConcurrentLaneContractTest.java",
+      "before_sha256": "4a72dcca1648cbd3cf9f2d9bbec526de13fb50464d6b2ed19b101182541f7e5a",
+      "after_sha256": "4a72dcca1648cbd3cf9f2d9bbec526de13fb50464d6b2ed19b101182541f7e5a",
+      "role": "baseline_module_input",
+      "before_git_blob": "86f5ae48e363b14a00e62ed6fd6d74fe572cc2c3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CountedBagSelfTest.java",
+      "before_sha256": "2dc6452230f5b760e97076aaec10319c83b183887d05a0e4ff65172c809a5087",
+      "after_sha256": "2dc6452230f5b760e97076aaec10319c83b183887d05a0e4ff65172c809a5087",
+      "role": "baseline_module_input",
+      "before_git_blob": "bbe01fc1cc62f5b6ac1f18c37e02a9c30af2657f"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CountedBagTest.java",
+      "before_sha256": "545b01cbf5bcfcf2eb316a4b4b0992d8b8cd53b660bf07640b723db58aa2b7b1",
+      "after_sha256": "545b01cbf5bcfcf2eb316a4b4b0992d8b8cd53b660bf07640b723db58aa2b7b1",
+      "role": "baseline_module_input",
+      "before_git_blob": "5e479c441d2da2a90b2044d386aa5491ce7f6b83"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CpuMaskRunsSelfTest.java",
+      "before_sha256": "2498673e941fffccbc0a25fdc8a0dec75b3fc602b69bacf6696d854b1b1a49ad",
+      "after_sha256": "2498673e941fffccbc0a25fdc8a0dec75b3fc602b69bacf6696d854b1b1a49ad",
+      "role": "baseline_module_input",
+      "before_git_blob": "e0e0910fded452f32c4ed63a3c978a868f1b1374"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3EnumLongMapTest.java",
+      "before_sha256": "cd93ecad156634537dbb42acf199558689ff91c113db26803cfc2cf235377531",
+      "after_sha256": "cd93ecad156634537dbb42acf199558689ff91c113db26803cfc2cf235377531",
+      "role": "baseline_module_input",
+      "before_git_blob": "efc6ba35e448278c6e3bc055b2496fbd8ed42771"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3EnumSetTest.java",
+      "before_sha256": "334ec881ecaf3fa7807bf912ff3d758cf8ac9eeb162ff7e261738e73890e81c9",
+      "after_sha256": "334ec881ecaf3fa7807bf912ff3d758cf8ac9eeb162ff7e261738e73890e81c9",
+      "role": "baseline_module_input",
+      "before_git_blob": "44c0fe435803776df38a4f493869dfa08fcb7bc1"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java",
+      "before_sha256": "62bd5948000dcd9cf7625ab0b80fd2f43b9b2f1aad351e90e04017344e556436",
+      "after_sha256": "62bd5948000dcd9cf7625ab0b80fd2f43b9b2f1aad351e90e04017344e556436",
+      "role": "baseline_module_input",
+      "before_git_blob": "e7e156e6d73d178b1bf6f2ee32deb1db5bc046c6"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java",
+      "before_sha256": "0aa372f430f3ab3614adf33bf4e33729e6f874404a6834fd13996bdee71c73fb",
+      "after_sha256": "0aa372f430f3ab3614adf33bf4e33729e6f874404a6834fd13996bdee71c73fb",
+      "role": "baseline_module_input",
+      "before_git_blob": "62a4dad21383e8459aaf2a374280cbc268032e3c"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredDequesTest.java",
+      "before_sha256": "20181cfd949e79df23a8757d23fe256430372a5a7cfd5f2b0d56b21937875233",
+      "after_sha256": "20181cfd949e79df23a8757d23fe256430372a5a7cfd5f2b0d56b21937875233",
+      "role": "baseline_module_input",
+      "before_git_blob": "208a8be5fe8d301e46d94b6fe05c63e43bdd5d15"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsContract.java",
+      "before_sha256": "e5addee9657a66a731ca8acf79c0682e96a1ad4d7dbab251f5196ab706b9826a",
+      "after_sha256": "e5addee9657a66a731ca8acf79c0682e96a1ad4d7dbab251f5196ab706b9826a",
+      "role": "baseline_module_input",
+      "before_git_blob": "5601e7d810519d4af86e2e140cff172b8386ba23"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionProof.java",
+      "before_sha256": "7226c2622ffe49bbf4d6299a9c79bf284f849a6d44cfb966f0082038b765a89c",
+      "after_sha256": "7226c2622ffe49bbf4d6299a9c79bf284f849a6d44cfb966f0082038b765a89c",
+      "role": "baseline_module_input",
+      "before_git_blob": "544d0f667235834c50d3b0bbef7d5fc032da8482"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionTest.java",
+      "before_sha256": "6fd5e3956d5a0b1dc443d48b5f0691cff213c5a5f67f128be6a8080e6a6bd32e",
+      "after_sha256": "6fd5e3956d5a0b1dc443d48b5f0691cff213c5a5f67f128be6a8080e6a6bd32e",
+      "role": "baseline_module_input",
+      "before_git_blob": "0589739cd193d139c90fef9a2ff1a78b43a5dbec"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsEdges.java",
+      "before_sha256": "3310337caf4552892d3dc8a944e749b479f73c381903565f1322542e192d2b0a",
+      "after_sha256": "3310337caf4552892d3dc8a944e749b479f73c381903565f1322542e192d2b0a",
+      "role": "baseline_module_input",
+      "before_git_blob": "4776f67c9b1276906e1a4ac7ea9b8a4b60aea31e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsMaskBridgeProof.java",
+      "before_sha256": "02d4463f758ed57c9d5ca27c8892f5fe5776e034a0f03bae8767fde8d61a6363",
+      "after_sha256": "02d4463f758ed57c9d5ca27c8892f5fe5776e034a0f03bae8767fde8d61a6363",
+      "role": "baseline_module_input",
+      "before_git_blob": "057c2410f7f2a2370de2be1a1db1d02f99cba70e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsReadonlyDepthProof.java",
+      "before_sha256": "7476bd46c9bbd465d54237e3dd106d71725e8d8ba74a73d2001878b53bb22f5c",
+      "after_sha256": "7476bd46c9bbd465d54237e3dd106d71725e8d8ba74a73d2001878b53bb22f5c",
+      "role": "baseline_module_input",
+      "before_git_blob": "bb579fb1922f810990fa402c75329113b6e8f65a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsReadonlyDepthTest.java",
+      "before_sha256": "4c443dfe22e908747b6cc1267c25e42fa9252b4936d47e27a8b55d3d50bf5e8b",
+      "after_sha256": "4c443dfe22e908747b6cc1267c25e42fa9252b4936d47e27a8b55d3d50bf5e8b",
+      "role": "baseline_module_input",
+      "before_git_blob": "9146b75e5e73fe730a7b384c65926f32faccd17d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsSortedInteropTest.java",
+      "before_sha256": "a43047f07d8cf421e286fa511daeb44c6487a89107900843d526ea20bcb6a539",
+      "after_sha256": "a43047f07d8cf421e286fa511daeb44c6487a89107900843d526ea20bcb6a539",
+      "role": "baseline_module_input",
+      "before_git_blob": "b5481ee1ebb5bbbe1869f46cfa2e398646d2e86f"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsTest.java",
+      "before_sha256": "589a2f683a5465c0491104993a5647fc7f861048b9d1ed50281bd64621ad405c",
+      "after_sha256": "589a2f683a5465c0491104993a5647fc7f861048b9d1ed50281bd64621ad405c",
+      "role": "baseline_module_input",
+      "before_git_blob": "172013519413dbb883223dd46b8e86699509884f"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListsWorkProof.java",
+      "before_sha256": "37a55f9c6c577984fafb867bf59ea1c210bf835c5cef4d08880da48c0daf7aa6",
+      "after_sha256": "37a55f9c6c577984fafb867bf59ea1c210bf835c5cef4d08880da48c0daf7aa6",
+      "role": "baseline_module_input",
+      "before_git_blob": "3fc7fddcbd5f2bfbb1e4d997c0c67f96fe7c9131"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableFacadeSelfTest.java",
+      "before_sha256": "2a21873201c6f3bce733f75be1140ca66a5f5ddd19865203016a6bf4e66c4c21",
+      "after_sha256": "2a21873201c6f3bce733f75be1140ca66a5f5ddd19865203016a6bf4e66c4c21",
+      "role": "baseline_module_input",
+      "before_git_blob": "a2adc60332d2983d5a830bdcd07ceb2c34984691"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetRangeContract.java",
+      "before_sha256": "029bfb06d64141be10804b7d303a5ab9a6014766f0c57437a5fa591899647ad5",
+      "after_sha256": "029bfb06d64141be10804b7d303a5ab9a6014766f0c57437a5fa591899647ad5",
+      "role": "baseline_module_input",
+      "before_git_blob": "4cf11bc14d21dea5460d914a6cb1e69874ba237a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetRangeTest.java",
+      "before_sha256": "bbd58091c3bfe9c03baf675159c87aade4d781a857bb9cbaf648c723d463e499",
+      "after_sha256": "bbd58091c3bfe9c03baf675159c87aade4d781a857bb9cbaf648c723d463e499",
+      "role": "baseline_module_input",
+      "before_git_blob": "a8efc7d2bbcf9b03ec045e858d68c4b333d99514"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetTest.java",
+      "before_sha256": "1ae5663d68320ff9d223f717bdda3a88fb08ce7994061281d22b931808473f76",
+      "after_sha256": "1ae5663d68320ff9d223f717bdda3a88fb08ce7994061281d22b931808473f76",
+      "role": "baseline_module_input",
+      "before_git_blob": "c9f2a3868fd771d7a51120286219e1544a586c47"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "374742c695f4ebdc742519dd93c79496729b3ce94ffb2c761cc2c8a9781e26ee",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalProof.java",
+      "before_sha256": "ac19bb4c85d096a74b5ddfb793227a2be07e27b7d0a53f681243a2d2a3633560",
+      "after_sha256": "ac19bb4c85d096a74b5ddfb793227a2be07e27b7d0a53f681243a2d2a3633560",
+      "role": "baseline_module_input",
+      "before_git_blob": "ca2e109f9a4acf597d5cbc0ea6ca373fd1bf23ea"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java",
+      "before_sha256": "fe7960369b1e3fab45dec3eadfadaa13f088e46e9c139de671faccac9fda4575",
+      "after_sha256": "fe7960369b1e3fab45dec3eadfadaa13f088e46e9c139de671faccac9fda4575",
+      "role": "baseline_module_input",
+      "before_git_blob": "0c7d8364dc84140509bd71ca3538f814926fbc55"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredViewsTest.java",
+      "before_sha256": "5f17bb2a2f2abfd4584b144ff398f6b2359b97cb605fa06e0bbaa8001b81131e",
+      "after_sha256": "5f17bb2a2f2abfd4584b144ff398f6b2359b97cb605fa06e0bbaa8001b81131e",
+      "role": "baseline_module_input",
+      "before_git_blob": "c0af31bf7a388cc6959a2a9d846191576902b1ab"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java",
+      "before_sha256": "e369e66b2f95179383ef1e1b2a9cef28f439f762fcd3478e6df2113e3d1f8957",
+      "after_sha256": "e369e66b2f95179383ef1e1b2a9cef28f439f762fcd3478e6df2113e3d1f8957",
+      "role": "baseline_module_input",
+      "before_git_blob": "92183e11d643a12cc797d3d3eb674793d538005a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3GenericArrayListSelfTest.java",
+      "before_sha256": "3ef322ba4992a0fd4c60e5e96c34f99c68137f5879e809e46d773b472f652035",
+      "after_sha256": "3ef322ba4992a0fd4c60e5e96c34f99c68137f5879e809e46d773b472f652035",
+      "role": "baseline_module_input",
+      "before_git_blob": "18bae5f0107260905892c6e84236e6bfec7cfbf1"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3GenericArrayListTest.java",
+      "before_sha256": "b3c599bbb1e1300517ee269c9024f07a591f5cc3178abbb665c555bb5a96bf02",
+      "after_sha256": "b3c599bbb1e1300517ee269c9024f07a591f5cc3178abbb665c555bb5a96bf02",
+      "role": "baseline_module_input",
+      "before_git_blob": "05484e175c3f7b531cda9c103eef1dba06046902"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+      "before_sha256": "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f",
+      "after_sha256": "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f",
+      "role": "baseline_module_input",
+      "before_git_blob": "7b04a77cc113a81b4a09d6004666cada79c8c088"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java",
+      "before_sha256": "2d4273ec51e75d07e9f551d64e3059bb325253a41edbdb7eba5564040d1da3c0",
+      "after_sha256": "2d4273ec51e75d07e9f551d64e3059bb325253a41edbdb7eba5564040d1da3c0",
+      "role": "baseline_module_input",
+      "before_git_blob": "e9342d8064a19bb44ce31d470b33b1fd0c3777ff"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowRecoverySelfTest.java",
+      "before_sha256": "fb5d6b2baddeb5a48b00b4082eb109b298624e5988430d78fc3c932cf4c382d9",
+      "after_sha256": "fb5d6b2baddeb5a48b00b4082eb109b298624e5988430d78fc3c932cf4c382d9",
+      "role": "baseline_module_input",
+      "before_git_blob": "f5c2b3c11d1d8428e240c112ac0ff79cf60c1c41"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowRecoveryTest.java",
+      "before_sha256": "adf6909182c6f44fa143c7734d894b642789dfdfb99ab1d1b2ada53b665a1da5",
+      "after_sha256": "adf6909182c6f44fa143c7734d894b642789dfdfb99ab1d1b2ada53b665a1da5",
+      "role": "baseline_module_input",
+      "before_git_blob": "af5e4eccebc35ba06d8ca89be9b07e431d5acaed"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java",
+      "before_sha256": "4b63050b62de64aacd89a4ec744d0ed489e95a05fbfad2167783105f3e30c9f6",
+      "after_sha256": "4b63050b62de64aacd89a4ec744d0ed489e95a05fbfad2167783105f3e30c9f6",
+      "role": "baseline_module_input",
+      "before_git_blob": "213d6199ce47e2393bdf11cf91897a285738de57"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowTest.java",
+      "before_sha256": "7bc19b1d266016a0a76c8a6186be573c1e698c704ab1d56407b1717b19fc4823",
+      "after_sha256": "7bc19b1d266016a0a76c8a6186be573c1e698c704ab1d56407b1717b19fc4823",
+      "role": "baseline_module_input",
+      "before_git_blob": "87249673f68836685cc6191b2aad8d5a44bbf6bf"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "27ee8c3942e18a6fada7e4fad1cd66f163aa6eccb01d8f99cfe6c3e3bd5ecf3a",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "61f686be147e9b940dee3c3b385f6fea0c20deb3c81c03972aae3d10dea572b1",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMaskAliasSelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "0b4cc8de0c702db168f4ff0ea236950000c3453aad8d49da45d010964c4417e7",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMaskWindowSelfTest.java",
+      "before_sha256": "9cdfb6292703fa6a48c7d21da919b6d544d59879c1477af8ed3170f1cb5f391f",
+      "after_sha256": "9cdfb6292703fa6a48c7d21da919b6d544d59879c1477af8ed3170f1cb5f391f",
+      "role": "baseline_module_input",
+      "before_git_blob": "5715b5418b5ed3d629fea482864a9dfdcbdf875e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongSelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "36bc8afd1da83e2b4b60d928016e42c20eba0fa376dc9a2a59eb1acc9e0f5dec",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "53e4f8b8efd81cbaaf7b6cd49efe67ac627607910e5bfced41a2a71d24f7f63b",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java",
+      "before_sha256": "86157abd29f46ab8f33111382dc5442cc235b45634205be2d39c552fd57e4639",
+      "after_sha256": "86157abd29f46ab8f33111382dc5442cc235b45634205be2d39c552fd57e4639",
+      "role": "baseline_module_input",
+      "before_git_blob": "aed4e5840458e5659e35be46070e83c55f34ad5f"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksTest.java",
+      "before_sha256": "5cf617e4dec3d22d042ce4d201a42dc8779f5fbe572bf3e62ba6ab48c3ec83ad",
+      "after_sha256": "5cf617e4dec3d22d042ce4d201a42dc8779f5fbe572bf3e62ba6ab48c3ec83ad",
+      "role": "baseline_module_input",
+      "before_git_blob": "df037017a671d3d2fd3395774385d43e9b3d7dc8"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java",
+      "before_sha256": "d3f8eb5c51ab0a60bf69ea22a1d27600f908b4df9a164e0b85c3046bbd8eb7ed",
+      "after_sha256": "d3f8eb5c51ab0a60bf69ea22a1d27600f908b4df9a164e0b85c3046bbd8eb7ed",
+      "role": "baseline_module_input",
+      "before_git_blob": "d5dd696fd029bf206e7b0b2247bee6cbda802dd2"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java",
+      "before_sha256": "d354516b794666bb594d91acb1da0128172b88771b48a899e4c456da947759d2",
+      "after_sha256": "d354516b794666bb594d91acb1da0128172b88771b48a899e4c456da947759d2",
+      "role": "baseline_module_input",
+      "before_git_blob": "0a95152c8b7345fc73901e850bde66bb1fcd390b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankTest.java",
+      "before_sha256": "55380e5f05f815fc77b6730482614b0de2a11b1cbf38c46da509d35e7746ca20",
+      "after_sha256": "55380e5f05f815fc77b6730482614b0de2a11b1cbf38c46da509d35e7746ca20",
+      "role": "baseline_module_input",
+      "before_git_blob": "ab82a3f1f1a35e012fa31a2503259d7e2e3b4c0c"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesSelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "3e53be1799c78795cb5bc45ba0b3857116464566eda05b65a7a6d0649e97d303",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "9bcfb70ef5a5553031f44bca89ac372799ee3330c7d9adf134117f165189ea6b",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "250cfb09472d8b71b1b936987b7944c37fc6252c3a2789a615220f55f7c0c243",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "b2f06d23a69e2928ca8465010a99089f38852f6ecda3a8bd954178da7d856db8",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotPositionProof.java",
+      "before_sha256": "5c2821993f60a6a68f166638ec476ad8716674f833854253b54081fc82ee36da",
+      "after_sha256": "5c2821993f60a6a68f166638ec476ad8716674f833854253b54081fc82ee36da",
+      "role": "baseline_module_input",
+      "before_git_blob": "1627ffe370e2fe75774aee4a175f1435485dc54b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotPositionTest.java",
+      "before_sha256": "57b78669c0140bd07982d3508533e999098a4f200514ed9161b9b42c01376d3d",
+      "after_sha256": "57b78669c0140bd07982d3508533e999098a4f200514ed9161b9b42c01376d3d",
+      "role": "baseline_module_input",
+      "before_git_blob": "7ac312c414e3d2ada9d3843b674bb7ad7cd70398"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedTableReentrantSortContract.java",
+      "before_sha256": "5a8257a366761022f7b267c318c11afe51272640dc72b39ce7e38610c39c8f35",
+      "after_sha256": "5a8257a366761022f7b267c318c11afe51272640dc72b39ce7e38610c39c8f35",
+      "role": "baseline_module_input",
+      "before_git_blob": "48cad9e238cc551c0f5361355ef9ac2e7aa2f25f"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedTableReentrantSortTest.java",
+      "before_sha256": "c642aa8cc97c099bb52b7b31f7ef0aff0ac64f031bf6e5adc4f13ca8d272c20d",
+      "after_sha256": "c642aa8cc97c099bb52b7b31f7ef0aff0ac64f031bf6e5adc4f13ca8d272c20d",
+      "role": "baseline_module_input",
+      "before_git_blob": "035330a03dcb806ed6c53f6849e0dbda114b0822"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedTableSelfTest.java",
+      "before_sha256": "b6a5ea9b9105b15856af1833026cbe665bc060faccefe7a63973a306de7980ca",
+      "after_sha256": "b6a5ea9b9105b15856af1833026cbe665bc060faccefe7a63973a306de7980ca",
+      "role": "baseline_module_input",
+      "before_git_blob": "318671b723ed360c28c3751921bcbb9aad5bbedf"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedTableTest.java",
+      "before_sha256": "136b8859525e7a10e10e9fd5184fb6e02f056eb8b85f41a04867079aa1c4ee11",
+      "after_sha256": "136b8859525e7a10e10e9fd5184fb6e02f056eb8b85f41a04867079aa1c4ee11",
+      "role": "baseline_module_input",
+      "before_git_blob": "4473e3853248123d9bc7799d7f3a4559471e1381"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java",
+      "before_sha256": "0ddd123adba9511aac147c3fce715734ec5080395d7dd681ca89f95fb2ca0c4d",
+      "after_sha256": "0ddd123adba9511aac147c3fce715734ec5080395d7dd681ca89f95fb2ca0c4d",
+      "role": "baseline_module_input",
+      "before_git_blob": "b617f579eecc6f48078076c642be33438eea9481"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java",
+      "before_sha256": "59fbd569f900826bead33b3297528aedc94f22b24366039cfd41d584a527ff17",
+      "after_sha256": "59fbd569f900826bead33b3297528aedc94f22b24366039cfd41d584a527ff17",
+      "role": "baseline_module_input",
+      "before_git_blob": "2d0561fb85f6d62947b4914fd0077b049f36cc58"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3JdkCollectionDifferentialTest.java",
+      "before_sha256": "e0b52a315dc95583093a4aa96b757f74728a42f40c0a5b390d2b1b8fe84edb9b",
+      "after_sha256": "e0b52a315dc95583093a4aa96b757f74728a42f40c0a5b390d2b1b8fe84edb9b",
+      "role": "baseline_module_input",
+      "before_git_blob": "0ca5ef64c7a3fbbc8f869e96affca5dcd8672003"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java",
+      "before_sha256": "d5ea4fdcde6280a43041b6fd105a65dbbac0e138ab353475a8801282a910f1f7",
+      "after_sha256": "d5ea4fdcde6280a43041b6fd105a65dbbac0e138ab353475a8801282a910f1f7",
+      "role": "baseline_module_input",
+      "before_git_blob": "9a6710e2985676613778895dd42c8bb9d08e8534"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LazyObserverRegressionTest.java",
+      "before_sha256": "a9422f722a5e0009683d5dbaedca42e66b5df781ac7d9cb40b5b98db96333004",
+      "after_sha256": "a9422f722a5e0009683d5dbaedca42e66b5df781ac7d9cb40b5b98db96333004",
+      "role": "baseline_module_input",
+      "before_git_blob": "7d4a21d41dab5a06d52edf8f54689f3118198963"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java",
+      "before_sha256": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "after_sha256": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "role": "baseline_module_input",
+      "before_git_blob": "9f076ba1d21747e412904b2042510b0ca1e460cd"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapTest.java",
+      "before_sha256": "fee5f625022c58e0774380121ce5a653fea936334e0fe4be0a2e81a7fdf5f99a",
+      "after_sha256": "fee5f625022c58e0774380121ce5a653fea936334e0fe4be0a2e81a7fdf5f99a",
+      "role": "baseline_module_input",
+      "before_git_blob": "b101de05ae69a578f273f4e455b796224a2ecf0a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LazyValueStateSelfTest.java",
+      "before_sha256": "e367a234f8dbb0c628443e3afec7446553f2168c50b515da96b7afa43246b7d2",
+      "after_sha256": "e367a234f8dbb0c628443e3afec7446553f2168c50b515da96b7afa43246b7d2",
+      "role": "baseline_module_input",
+      "before_git_blob": "4c3ce5c828630c7001b9945a1555f5be63c6193f"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedListLiveMaskContract.java",
+      "before_sha256": "56253c26a1f4e13c7c314642f328ea754d8135e9839606f9a71a55eecbf75919",
+      "after_sha256": "56253c26a1f4e13c7c314642f328ea754d8135e9839606f9a71a55eecbf75919",
+      "role": "baseline_module_input",
+      "before_git_blob": "0715136520d7a032b9f5c324d2561c12211bbf3a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "before_sha256": "0e590e67416010c433b82eb263ddc55f162c099eed13b7fb1606b2c868d83c5d",
+      "after_sha256": "0e590e67416010c433b82eb263ddc55f162c099eed13b7fb1606b2c868d83c5d",
+      "role": "baseline_module_input",
+      "before_git_blob": "0018546ee8ae7a4b60daba3c3bd0fc02a8ce5345"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedTest.java",
+      "before_sha256": "c7a5abb5a7e205bda31271c52c4aea121fdc4e36ba2498c6ad86c2668c718306",
+      "after_sha256": "c7a5abb5a7e205bda31271c52c4aea121fdc4e36ba2498c6ad86c2668c718306",
+      "role": "baseline_module_input",
+      "before_git_blob": "0a3fc57abed47a567d2071731d899cfd304882b9"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongAddressKernelSelfTest.java",
+      "before_sha256": "250b900897c8ca5829b033f643c88420bf0526a597426f27195c497d79cdddfa",
+      "after_sha256": "250b900897c8ca5829b033f643c88420bf0526a597426f27195c497d79cdddfa",
+      "role": "baseline_module_input",
+      "before_git_blob": "bd2be3d47e3c39fae1340fd0f212297c84a754c3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongAddressKernelTest.java",
+      "before_sha256": "ffc5a62d913a7b6d0fdceea7c4f479cb17486cd7babc2b14600bf033d099f057",
+      "after_sha256": "ffc5a62d913a7b6d0fdceea7c4f479cb17486cd7babc2b14600bf033d099f057",
+      "role": "baseline_module_input",
+      "before_git_blob": "197eb6aac85d404a435d1420dfc68d3d39b3eec1"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongArrayDequeTest.java",
+      "before_sha256": "5cd23d6177bf98fde595d722512bf1be7b48d9ac1e3536a66a066062be8cd19e",
+      "after_sha256": "5cd23d6177bf98fde595d722512bf1be7b48d9ac1e3536a66a066062be8cd19e",
+      "role": "baseline_module_input",
+      "before_git_blob": "8d3b4c32dab74e0654ec4b4a843c02b40ea7c1a0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongArrayListTest.java",
+      "before_sha256": "95b3dd51206674dbae0336c64bc329e7bfba67c1a8ea60bc5db68fe61931b6c1",
+      "after_sha256": "95b3dd51206674dbae0336c64bc329e7bfba67c1a8ea60bc5db68fe61931b6c1",
+      "role": "baseline_module_input",
+      "before_git_blob": "3a1eacc0057d748135764a43a51eee627aeda2ee"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilterPlanSelfTest.java",
+      "before_sha256": "fa87bbf51b5a58b6b1562b909c3c16d0b670168165db57e6bb4430158de11fd7",
+      "after_sha256": "fa87bbf51b5a58b6b1562b909c3c16d0b670168165db57e6bb4430158de11fd7",
+      "role": "baseline_module_input",
+      "before_git_blob": "965b7841f40f57feb067a24f82d9421d700019bf"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
+      "before_sha256": "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37",
+      "after_sha256": "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37",
+      "role": "baseline_module_input",
+      "before_git_blob": "246745524719dffdd0396166282a3382f1759bf3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongCompositeLateBindSelfTest.java",
+      "before_sha256": "7bb0737775d59b0d1517667c545b7f4c8a962934fad548b25fe1370a4634ef68",
+      "after_sha256": "7bb0737775d59b0d1517667c545b7f4c8a962934fad548b25fe1370a4634ef68",
+      "role": "baseline_module_input",
+      "before_git_blob": "af3c8b8e45a3f876c0692458cd73d4623753123d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongCompositeLateBindTest.java",
+      "before_sha256": "8b43222c35faacffdf10d6a907b1faaf5fb8e3fb8b3e9c7d594c7f0360bc7300",
+      "after_sha256": "8b43222c35faacffdf10d6a907b1faaf5fb8e3fb8b3e9c7d594c7f0360bc7300",
+      "role": "baseline_module_input",
+      "before_git_blob": "6b90d6d70265232116c0e65324d496fdb9d885b4"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongDagContract.java",
+      "before_sha256": "06c25e107fbb0f9f431543137a93d36c76736acd3d75c54891691b4b4fe2fe3f",
+      "after_sha256": "06c25e107fbb0f9f431543137a93d36c76736acd3d75c54891691b4b4fe2fe3f",
+      "role": "baseline_module_input",
+      "before_git_blob": "f1790feb91eb3da50f922907a917e54d856b6fbe"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongDagJUnitTest.java",
+      "before_sha256": "02b675021d118b0f68cb8bfa093f35299f4d508cba25f4100fba0c080f6d5425",
+      "after_sha256": "02b675021d118b0f68cb8bfa093f35299f4d508cba25f4100fba0c080f6d5425",
+      "role": "baseline_module_input",
+      "before_git_blob": "e6c2c6270f4ef491990d8cf40f17a08bddcd51f0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java",
+      "before_sha256": "a5df095ddaf792e8dacdb93d674e1dd90294786684af5ca5851951d9d0a9fd6a",
+      "after_sha256": "a5df095ddaf792e8dacdb93d674e1dd90294786684af5ca5851951d9d0a9fd6a",
+      "role": "baseline_module_input",
+      "before_git_blob": "7e0567a9cbd4adeaf7a458fad20174079a22606e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewContractTest.java",
+      "before_sha256": "3cefdce84f9f78cbd77a8ac42626b6b54a15930dcc4becb0802c87491f725044",
+      "after_sha256": "3cefdce84f9f78cbd77a8ac42626b6b54a15930dcc4becb0802c87491f725044",
+      "role": "baseline_module_input",
+      "before_git_blob": "5b1bafe39ad6a9752dd94eb737e05bd0b5a5ccd9"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java",
+      "before_sha256": "a7afd8a3162ce5def1b67bbc2b106d1f9d8a1c71c7780fd11a02a747eb1e151b",
+      "after_sha256": "a7afd8a3162ce5def1b67bbc2b106d1f9d8a1c71c7780fd11a02a747eb1e151b",
+      "role": "baseline_module_input",
+      "before_git_blob": "a15207bc37fe332937dbe35cd8da7c6cba0f0873"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetProof.java",
+      "before_sha256": "1d554f7e18523f363279e0670abc572a3f430b0a8db65850aaf57e82b15e309a",
+      "after_sha256": "1d554f7e18523f363279e0670abc572a3f430b0a8db65850aaf57e82b15e309a",
+      "role": "baseline_module_input",
+      "before_git_blob": "402a8a0f2c806b1ba4837d7d70a5b72ca74a916d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetTest.java",
+      "before_sha256": "e3401ec86e0ac9d227039983e93ca00ca4fe2bd59330deb1911ec2388b51f37f",
+      "after_sha256": "e3401ec86e0ac9d227039983e93ca00ca4fe2bd59330deb1911ec2388b51f37f",
+      "role": "baseline_module_input",
+      "before_git_blob": "6f85d52cfe0f9db5dddfa0010cd9d8cfdfab9c58"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionPathMasksTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "239c6662ba7f91c786df60a9faa19633844b20408c972f88f381a7a241a49847",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java",
+      "before_sha256": "e611a47ae6362c7dc86557db99593b9242ea4cf3e94169138c4b4a45208e48cd",
+      "after_sha256": "e611a47ae6362c7dc86557db99593b9242ea4cf3e94169138c4b4a45208e48cd",
+      "role": "baseline_module_input",
+      "before_git_blob": "74737bc11eaaa0ea6d474e84c611c65dac81e69c"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java",
+      "before_sha256": "f33e703397f639a47228e450a2c587bcea47e9c5d0b347099d91a9c91fa047ec",
+      "after_sha256": "f33e703397f639a47228e450a2c587bcea47e9c5d0b347099d91a9c91fa047ec",
+      "role": "baseline_module_input",
+      "before_git_blob": "a4202b54eeb03aa662101a8c3d3c57e0c9a96e2e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongLinkedHashMapTest.java",
+      "before_sha256": "c6674d52066a686aca441c3a1ca72461c0e3481985a47f219d12dab2f1e56e6a",
+      "after_sha256": "c6674d52066a686aca441c3a1ca72461c0e3481985a47f219d12dab2f1e56e6a",
+      "role": "baseline_module_input",
+      "before_git_blob": "38758c3e94e76bde62489c11fb94acccffd0d015"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java",
+      "before_sha256": "3b4ba4e2542ebbc607710f183f231d7c1bbe3e94ef4aa4fe6de49f0f9242ac29",
+      "after_sha256": "3b4ba4e2542ebbc607710f183f231d7c1bbe3e94ef4aa4fe6de49f0f9242ac29",
+      "role": "baseline_module_input",
+      "before_git_blob": "f18a4d01b263a7e8471ecba2720e027b2a119abe"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongRangeSetTest.java",
+      "before_sha256": "1768a8be759b46ae24678ce089cdf328ef6c83f335bd3f5582cda813819261a5",
+      "after_sha256": "1768a8be759b46ae24678ce089cdf328ef6c83f335bd3f5582cda813819261a5",
+      "role": "baseline_module_input",
+      "before_git_blob": "592004d8776f5122914a214566e33a84ad5cdfdf"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongRankIndexSelfTest.java",
+      "before_sha256": "63fd0c55d60419a6ca3669bc5f877357566f06072cfdad553e9824767836e3d1",
+      "after_sha256": "63fd0c55d60419a6ca3669bc5f877357566f06072cfdad553e9824767836e3d1",
+      "role": "baseline_module_input",
+      "before_git_blob": "02cc3028c4c8e4be78b29fff37b888ab6b9bc9b2"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongRankIndexTest.java",
+      "before_sha256": "b204714a64abb5a6e73c23cf91c1399096c7a2246a714d7bc783568ede131b39",
+      "after_sha256": "b204714a64abb5a6e73c23cf91c1399096c7a2246a714d7bc783568ede131b39",
+      "role": "baseline_module_input",
+      "before_git_blob": "ba98833fc2f1729a5c42da0bf100b94a667b46c2"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongSortedAlgebraSelfTest.java",
+      "before_sha256": "03804c6d86d4591462390242145956660c9b477a83435d990ad5d418fe6d2efc",
+      "after_sha256": "03804c6d86d4591462390242145956660c9b477a83435d990ad5d418fe6d2efc",
+      "role": "baseline_module_input",
+      "before_git_blob": "e7e9c6e3970adb0c5d7d482b78d22b3e49ab1621"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongSortedAlgebraTest.java",
+      "before_sha256": "c24537bf64defb7d7a114006722cd859b8daa1fd9c7528e51a70736d0607ad62",
+      "after_sha256": "c24537bf64defb7d7a114006722cd859b8daa1fd9c7528e51a70736d0607ad62",
+      "role": "baseline_module_input",
+      "before_git_blob": "8b648ac7da24d144ab82e335c2ce8589ef6c956e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java",
+      "before_sha256": "08c2300967209a4bac3f010b882b4b549b8a263517adf745a245c081840721e1",
+      "after_sha256": "08c2300967209a4bac3f010b882b4b549b8a263517adf745a245c081840721e1",
+      "role": "baseline_module_input",
+      "before_git_blob": "7dc59e6b9914b25161f3acddd225f1052ab83736"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongSortedSnapshotSelfTest.java",
+      "before_sha256": "21c566242b95e24ab50a3f3dc611203c2bb63e1bbaa663d5ccc783e7fcb10748",
+      "after_sha256": "21c566242b95e24ab50a3f3dc611203c2bb63e1bbaa663d5ccc783e7fcb10748",
+      "role": "baseline_module_input",
+      "before_git_blob": "35014fe744e1af9c17ef01c8c01eaa5b1523a375"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongStateArrayTest.java",
+      "before_sha256": "7ab6fbdb6c3d910161e9fafb4626fc12cd9890e3709f90af9f92bd57cb441638",
+      "after_sha256": "7ab6fbdb6c3d910161e9fafb4626fc12cd9890e3709f90af9f92bd57cb441638",
+      "role": "baseline_module_input",
+      "before_git_blob": "ff562b567eef4fca979d8656903057b2cd636c70"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java",
+      "before_sha256": "088e41d28929b3916e5c6da9a12a2ebbae258116d11508235d44771a6c1b2471",
+      "after_sha256": "088e41d28929b3916e5c6da9a12a2ebbae258116d11508235d44771a6c1b2471",
+      "role": "baseline_module_input",
+      "before_git_blob": "c43f89052e14dfb77013d5ad58d5eaf531f247e8"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MapContractTest.java",
+      "before_sha256": "9c94e112c9f40731ad4d05273605e6efc3f369f79f578c67cf2fed7445071cd2",
+      "after_sha256": "9c94e112c9f40731ad4d05273605e6efc3f369f79f578c67cf2fed7445071cd2",
+      "role": "baseline_module_input",
+      "before_git_blob": "d40c88ec184b90eb057dd859d840c915e4f93df8"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskAllSelectionReceiverTest.java",
+      "before_sha256": "dbc455b32e173b4930b7863f0433ecef78b502be3f0f617835b35549fa94b70e",
+      "after_sha256": "dbc455b32e173b4930b7863f0433ecef78b502be3f0f617835b35549fa94b70e",
+      "role": "baseline_module_input",
+      "before_git_blob": "acd6301460f4bbc5d12cca6d2a9b42f86069cc9e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskDenseSelectionProof.java",
+      "before_sha256": "2fde4bb73609bbd0e086b10c9371f69ad212aa7c961bb1f346c78d9ddb2127da",
+      "after_sha256": "2fde4bb73609bbd0e086b10c9371f69ad212aa7c961bb1f346c78d9ddb2127da",
+      "role": "baseline_module_input",
+      "before_git_blob": "41bdfebc8e77b37ef295ef0f8d68aa578366ff65"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskNativeParityProof.java",
+      "before_sha256": "11b5d661119a2a2027520f0b1ef3e77d5068e1ce79fd6a61f1f8348dc3c8d374",
+      "after_sha256": "11b5d661119a2a2027520f0b1ef3e77d5068e1ce79fd6a61f1f8348dc3c8d374",
+      "role": "baseline_module_input",
+      "before_git_blob": "39abaadec5451ec4000e01e772e1b4d6bb7543e0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowSparseContract.java",
+      "before_sha256": "4972f1e06aecc9608a1d1fcb1d464a0057f8b9c4e7cfae958e4b01cddd1fd582",
+      "after_sha256": "4972f1e06aecc9608a1d1fcb1d464a0057f8b9c4e7cfae958e4b01cddd1fd582",
+      "role": "baseline_module_input",
+      "before_git_blob": "376bc9504fefc3505ac08a3a4d42818cf36f7eb3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsContract.java",
+      "before_sha256": "042f476e027b877b717c9cb6a0877049a1c70ef8425a7fc65f61176f9c372781",
+      "after_sha256": "042f476e027b877b717c9cb6a0877049a1c70ef8425a7fc65f61176f9c372781",
+      "role": "baseline_module_input",
+      "before_git_blob": "ae2eb58abc98072565a6682879c93692c43c59fa"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsTest.java",
+      "before_sha256": "5c9eed13cdf8afc36d74fcf738ffe8cc1fc4724d3f273880df79cf6ac84d0e28",
+      "after_sha256": "5c9eed13cdf8afc36d74fcf738ffe8cc1fc4724d3f273880df79cf6ac84d0e28",
+      "role": "baseline_module_input",
+      "before_git_blob": "f7e60414647a86b64e6e3d7eb3ea5e02a2134e7a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NativeIndexRangeSelfTest.java",
+      "before_sha256": "6350e1da0ca13de67a2406c73823e4297c8cc51c0c68c5e5a8973d0fb778b821",
+      "after_sha256": "6350e1da0ca13de67a2406c73823e4297c8cc51c0c68c5e5a8973d0fb778b821",
+      "role": "baseline_module_input",
+      "before_git_blob": "9f812fc1376970c77914c261f89c6904f48f47ac"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NativeIndexRangeTest.java",
+      "before_sha256": "d427b506139f11b5c6a638f5436724f50b5795342d2f5b9bfc1b0ebb1c705f62",
+      "after_sha256": "d427b506139f11b5c6a638f5436724f50b5795342d2f5b9bfc1b0ebb1c705f62",
+      "role": "baseline_module_input",
+      "before_git_blob": "b414a96bb3dd13f30ac289c030b11f3d5a951978"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NavigationFailureContract.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "f37ed8a30cba5e2622abe335a38d834b8c8adb582d088f32b57c616ddf46445c",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NavigationFailureTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "5481954464d7f93635112014243a0563677d1528455949f0cc89171f82857fa6",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java",
+      "before_sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "after_sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "role": "baseline_module_input",
+      "before_git_blob": "9e64f4c57ab840b0da744bcff43b9f703fe033f8"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectIdentityTest.java",
+      "before_sha256": "9d7a4f6d385ef013f868f5a1984f28e73537952eacc81f5854611ecaafc98746",
+      "after_sha256": "9d7a4f6d385ef013f868f5a1984f28e73537952eacc81f5854611ecaafc98746",
+      "role": "baseline_module_input",
+      "before_git_blob": "a2ea451fd5724e212df4c43e20776d3882d13254"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyBorrowTest.java",
+      "before_sha256": "04c8fab7bac66b214428f2cc80476e01d9d55c69a7ab5d0f2332b0b3947ff1f6",
+      "after_sha256": "04c8fab7bac66b214428f2cc80476e01d9d55c69a7ab5d0f2332b0b3947ff1f6",
+      "role": "baseline_module_input",
+      "before_git_blob": "a34ad79e869c5069545d00934f12c5292e00888b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java",
+      "before_sha256": "bf05ea2b323a83f5c1569bc88d0d5417093df8d1e7f88c00f6831e27e276a4b5",
+      "after_sha256": "bf05ea2b323a83f5c1569bc88d0d5417093df8d1e7f88c00f6831e27e276a4b5",
+      "role": "baseline_module_input",
+      "before_git_blob": "19cad07982d1a1222f52cc61fd2168e50ce1f55b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyTest.java",
+      "before_sha256": "6ee2da4009928feb40d5854bfedb716c904e0d2b83ed92f9ad311bbb9bdb8240",
+      "after_sha256": "6ee2da4009928feb40d5854bfedb716c904e0d2b83ed92f9ad311bbb9bdb8240",
+      "role": "baseline_module_input",
+      "before_git_blob": "0deb35e3e8b8a8e44b94b3aab03cac0085dd4c07"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectSlotIndexSelfTest.java",
+      "before_sha256": "745156bdcd632c0d664dcc9f42f19f47879fd4cfca05ecd69da4e03b60fad049",
+      "after_sha256": "745156bdcd632c0d664dcc9f42f19f47879fd4cfca05ecd69da4e03b60fad049",
+      "role": "baseline_module_input",
+      "before_git_blob": "b57580a60c3692d64c34cadab43e6be82d24331d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectSlotIndexTest.java",
+      "before_sha256": "eec9b203115a9896ebcc074926e4817b5ebcbdeab4e259c68d3c34b773b46ed0",
+      "after_sha256": "eec9b203115a9896ebcc074926e4817b5ebcbdeab4e259c68d3c34b773b46ed0",
+      "role": "baseline_module_input",
+      "before_git_blob": "c2eba295f79b0db87e55703d73324323237165b3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectStateBatch28SelfTest.java",
+      "before_sha256": "0dc77f56bb4515a8e058e0ffd95a6647f8704a28dc1b49969e2f035312b76910",
+      "after_sha256": "0dc77f56bb4515a8e058e0ffd95a6647f8704a28dc1b49969e2f035312b76910",
+      "role": "baseline_module_input",
+      "before_git_blob": "901e70d227b2584619ded4ec6b346023015afe27"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectStateSlots28SelfTest.java",
+      "before_sha256": "d2e750f4b3102c4269038ebd78318efc68f721ead906522f225a915c62808c26",
+      "after_sha256": "d2e750f4b3102c4269038ebd78318efc68f721ead906522f225a915c62808c26",
+      "role": "baseline_module_input",
+      "before_git_blob": "0a6855014433169cb66e185c8348c77066aa1f91"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3OrderWindowProof.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3OrderWindowTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "6b91d025a4e9701659f906f3fc649ba947cf734769764b13db7682e5d75d6030",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveCollectionDifferentialTest.java",
+      "before_sha256": "25b1899b492eb4b4830316f92a7d9d4eacacacd7fc496db145acd0be67991a1c",
+      "after_sha256": "25b1899b492eb4b4830316f92a7d9d4eacacacd7fc496db145acd0be67991a1c",
+      "role": "baseline_module_input",
+      "before_git_blob": "7c641d69f04cebbdca2e7fdb6226396a2e98a736"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveFilteredSequencesRuntimeContract.java",
+      "before_sha256": "cd8cee77835a5e3c8359d2b4996c5af0c2f89e05e0e276ce1f5cf21781674132",
+      "after_sha256": "cd8cee77835a5e3c8359d2b4996c5af0c2f89e05e0e276ce1f5cf21781674132",
+      "role": "baseline_module_input",
+      "before_git_blob": "b9ce33761b5cb764e018cc4051c8d44dd28072d2"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveFilteredSequencesTest.java",
+      "before_sha256": "bd4474cdfa3556f9597ff544464a673507d9d7f2265c14120d43cfacbfa663b5",
+      "after_sha256": "bd4474cdfa3556f9597ff544464a673507d9d7f2265c14120d43cfacbfa663b5",
+      "role": "baseline_module_input",
+      "before_git_blob": "0b6c65653b7dcf954bb4d8163eea68456f8aa8af"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageSelfTest.java",
+      "before_sha256": "34de1893e04bce2cea90608fe1b6b507375228451573510139fe919a6ae46bb6",
+      "after_sha256": "34de1893e04bce2cea90608fe1b6b507375228451573510139fe919a6ae46bb6",
+      "role": "baseline_module_input",
+      "before_git_blob": "ee6513eb60f2e2a6e691e98be82c6883086468f9"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageTest.java",
+      "before_sha256": "aca7937f27206488236daf3cd06a6e48666ac534d4ac3f396328bcfdd8e09248",
+      "after_sha256": "aca7937f27206488236daf3cd06a6e48666ac534d4ac3f396328bcfdd8e09248",
+      "role": "baseline_module_input",
+      "before_git_blob": "88d7386ed1d76859f554f391d21fa32daa967af7"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ProgressiveSignalEvidenceContract.java",
+      "before_sha256": "441ba25b5891962e5af5c2958266b4a1fcaf16e21f9c570ef4c37a1c80307d3e",
+      "after_sha256": "441ba25b5891962e5af5c2958266b4a1fcaf16e21f9c570ef4c37a1c80307d3e",
+      "role": "baseline_module_input",
+      "before_git_blob": "19340f87349c0dfdc0c58f0afbf9af44e09f3791"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyMapDefaultsContract.java",
+      "before_sha256": "9a457bc5418155dcf9ac49e548749e635a17ec94a9ec6761b26b5b3df8a41351",
+      "after_sha256": "9a457bc5418155dcf9ac49e548749e635a17ec94a9ec6761b26b5b3df8a41351",
+      "role": "baseline_module_input",
+      "before_git_blob": "1dd964336af94e4e44ceffbcf9b72bf160aa6cb1"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyMapDefaultsTest.java",
+      "before_sha256": "7b1779ac790a72d80b555fb7d03d1c79c06e88f08589c6f7e024f8ba46e63783",
+      "after_sha256": "7b1779ac790a72d80b555fb7d03d1c79c06e88f08589c6f7e024f8ba46e63783",
+      "role": "baseline_module_input",
+      "before_git_blob": "939b06119a6c396e5e0fd9472fdd8423ad712822"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReceivingRecoveryTest.java",
+      "before_sha256": "a21de6be9297f6c4c97cb7e34b1636d35ee438cd1e5267cdbf30fec40da0ae19",
+      "after_sha256": "a21de6be9297f6c4c97cb7e34b1636d35ee438cd1e5267cdbf30fec40da0ae19",
+      "role": "baseline_module_input",
+      "before_git_blob": "1c5f24f32807b408de25e73080640cdb5fef5206"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ResidencyStateMaskProof.java",
+      "before_sha256": "7052168df353463174c88114f83df098791e8ebcabfd936cfa9c1032870bd86a",
+      "after_sha256": "7052168df353463174c88114f83df098791e8ebcabfd936cfa9c1032870bd86a",
+      "role": "baseline_module_input",
+      "before_git_blob": "687dd3918f65fd357402d897af31625b9df3aab2"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ResidencyStateMaskTest.java",
+      "before_sha256": "859345773db669a006cd45b792be2016f6d09fc8ff590e998f193f5d4a5c0d30",
+      "after_sha256": "859345773db669a006cd45b792be2016f6d09fc8ff590e998f193f5d4a5c0d30",
+      "role": "baseline_module_input",
+      "before_git_blob": "0d3689d9d3e9ee4fe9b3808988b8aee842e5bbe6"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SdkOwnerFactorySelfTest.java",
+      "before_sha256": "649e3b7b79cfe765ad97c039be179f20242b60783ae79bea559cbb615bcf572a",
+      "after_sha256": "649e3b7b79cfe765ad97c039be179f20242b60783ae79bea559cbb615bcf572a",
+      "role": "baseline_module_input",
+      "before_git_blob": "c236ccdce4eb13e54cb2bfa8aebdca692666dfef"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SdkOwnerFactoryTest.java",
+      "before_sha256": "cef44fd1f918f49f3bba9546c78b379bdb5ca9440d3e24f820e3633920584a50",
+      "after_sha256": "cef44fd1f918f49f3bba9546c78b379bdb5ca9440d3e24f820e3633920584a50",
+      "role": "baseline_module_input",
+      "before_git_blob": "86af7afa835079670c83f1fee130b0ac11a3fd90"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SdkRecoverySelfTest.java",
+      "before_sha256": "f60ce5e7c505df49de50fc8358b494d30901e49c97490200543b42c231a4f5f7",
+      "after_sha256": "f60ce5e7c505df49de50fc8358b494d30901e49c97490200543b42c231a4f5f7",
+      "role": "baseline_module_input",
+      "before_git_blob": "ec4cf4655231cc5eb1d794ad25d19e7c5128b513"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SdkRecoveryTest.java",
+      "before_sha256": "e8c2a8450d92ef164830d5d48c5f3e001c6f0b0d519aa75fbd40fbf0ba93a317",
+      "after_sha256": "e8c2a8450d92ef164830d5d48c5f3e001c6f0b0d519aa75fbd40fbf0ba93a317",
+      "role": "baseline_module_input",
+      "before_git_blob": "0f5577e4a66ce129841bdac493f701fe0ce2f36a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SequenceContractTest.java",
+      "before_sha256": "665e431f88c277545a2b49cfa58d964afb02583a558f7ef886a5e744e5343d72",
+      "after_sha256": "665e431f88c277545a2b49cfa58d964afb02583a558f7ef886a5e744e5343d72",
+      "role": "baseline_module_input",
+      "before_git_blob": "02ba3c683428a02855517093edbaece60ba7444e"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java",
+      "before_sha256": "372a5be9ccd7bba8aae5083e63aaca59805f4b8ed17aca5854f6ea387aa49190",
+      "after_sha256": "372a5be9ccd7bba8aae5083e63aaca59805f4b8ed17aca5854f6ea387aa49190",
+      "role": "baseline_module_input",
+      "before_git_blob": "85dcf68f15ffd864cd14031849e7a3a65f43f8a3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsNativeContract.java",
+      "before_sha256": "c0812f809f09c7ae389c5a9bbf7f6b3904619cb102eae41815f78be34adc58f3",
+      "after_sha256": "c0812f809f09c7ae389c5a9bbf7f6b3904619cb102eae41815f78be34adc58f3",
+      "role": "baseline_module_input",
+      "before_git_blob": "3735a5c02c44db6d3b7e693972318351101e6ac0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsTest.java",
+      "before_sha256": "32036f5d67de908b70e63ed4294b0ca00dfbbf22bdd5a4b4aaaaef79154375ef",
+      "after_sha256": "32036f5d67de908b70e63ed4294b0ca00dfbbf22bdd5a4b4aaaaef79154375ef",
+      "role": "baseline_module_input",
+      "before_git_blob": "93f78fc322a20d6aa77ea4cc5bd9c2a1d9c85fc1"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalOrderContract.java",
+      "before_sha256": "f603fc581b38e1b1f31ff484ce58c00f1fb73072ea5c3b8aa6a7e4ba82b3d4d2",
+      "after_sha256": "f603fc581b38e1b1f31ff484ce58c00f1fb73072ea5c3b8aa6a7e4ba82b3d4d2",
+      "role": "baseline_module_input",
+      "before_git_blob": "37d83e246a778c26c4bea50ff4b4237c70d80e72"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalOrderJUnitTest.java",
+      "before_sha256": "c3060de2f68af16bd4964c8ce303bfc33e82e838f1d7c6a4834a3ae9042f1ead",
+      "after_sha256": "c3060de2f68af16bd4964c8ce303bfc33e82e838f1d7c6a4834a3ae9042f1ead",
+      "role": "baseline_module_input",
+      "before_git_blob": "62f9b9eeb5da03ff6cb0a6d0c1a10098e76fe75c"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SpanIndexSelfTest.java",
+      "before_sha256": "38a577aaa1857878b095e2a89f8a7c60868f471ff3c125cbfb839b56e7842cf6",
+      "after_sha256": "38a577aaa1857878b095e2a89f8a7c60868f471ff3c125cbfb839b56e7842cf6",
+      "role": "baseline_module_input",
+      "before_git_blob": "2def1962e7db62293ef4c21d6b5206b7563b3b8f"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SpanIndexTest.java",
+      "before_sha256": "fc92c4b6d1dc47519a6613ce1773331741ffd2e6deaf8dd97e35dc98a02b2cef",
+      "after_sha256": "fc92c4b6d1dc47519a6613ce1773331741ffd2e6deaf8dd97e35dc98a02b2cef",
+      "role": "baseline_module_input",
+      "before_git_blob": "74bd6f61e69dfb6b78edee67e4f73b11630ef02b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StateMaskArraysSelfTest.java",
+      "before_sha256": "7608a36e5f06d2c1595bc8f251a9734270e68eb7573de84277fb459d790821b0",
+      "after_sha256": "7608a36e5f06d2c1595bc8f251a9734270e68eb7573de84277fb459d790821b0",
+      "role": "baseline_module_input",
+      "before_git_blob": "2f9a76ffd7ebaed6826a3a0a28bfa6948b8bd9a5"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java",
+      "before_sha256": "11dbbb4682fbe085b35f3dbccc11e78039c0700b47794ad0bbc244723ec6473d",
+      "after_sha256": "11dbbb4682fbe085b35f3dbccc11e78039c0700b47794ad0bbc244723ec6473d",
+      "role": "baseline_module_input",
+      "before_git_blob": "e5dc5194c885c5adbf2d243fff70a3a551935c47"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramTest.java",
+      "before_sha256": "cb985d05c187d8e4949b3bcb9e29f839f645cfccc9a7d9474edbcc4a00b259c9",
+      "after_sha256": "cb985d05c187d8e4949b3bcb9e29f839f645cfccc9a7d9474edbcc4a00b259c9",
+      "role": "baseline_module_input",
+      "before_git_blob": "f51da8488067193c6e4b3c4ce8d24f5c69bc0e73"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java",
+      "before_sha256": "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b",
+      "after_sha256": "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b",
+      "role": "baseline_module_input",
+      "before_git_blob": "5dfe9035322a30a99a185d2431f2363065fa7824"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeTest.java",
+      "before_sha256": "b948aca5ae6f14b80027429e6b820800927d3013bebb972fa92b712383af55f3",
+      "after_sha256": "b948aca5ae6f14b80027429e6b820800927d3013bebb972fa92b712383af55f3",
+      "role": "baseline_module_input",
+      "before_git_blob": "8fc2a8df509597d5b0dafc2ee0d83187efa71b1b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TombstoneReuseSelfTest.java",
+      "before_sha256": "14b75e79847792541a692be288846b05c23c3603053e33218b5938d1edbda654",
+      "after_sha256": "14b75e79847792541a692be288846b05c23c3603053e33218b5938d1edbda654",
+      "role": "baseline_module_input",
+      "before_git_blob": "e5b62529b3227ee42da5070b0e0478f8b4fedbdc"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TombstoneReuseTest.java",
+      "before_sha256": "c1bf34d9cd29780e449867731d8289d190bfdd31fd8c0ac7af8c17e716960537",
+      "after_sha256": "c1bf34d9cd29780e449867731d8289d190bfdd31fd8c0ac7af8c17e716960537",
+      "role": "baseline_module_input",
+      "before_git_blob": "7d7727d1a79759b3e57fa37bced96201f68d2623"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceSelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "74486558694c8c4c8687231959f11deb0fdee8b12f0f7a6583c7b9c5c88f4eec",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": "ABSENT",
+      "after_sha256": "5ddaf76d0fe4573e705dbda9748d605c6eef434f6fe66f7334e617ab81631050",
+      "role": "regression_test",
+      "recipe_dataset": "m3jdk21-wrappers-r2-20261018"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathProof.java",
+      "before_sha256": "edb173ca45a1d7b0194b95cdef00b1690307e43b8cb4bf0855d3b4e8377c1ffd",
+      "after_sha256": "edb173ca45a1d7b0194b95cdef00b1690307e43b8cb4bf0855d3b4e8377c1ffd",
+      "role": "baseline_module_input",
+      "before_git_blob": "123141671f4fa0dad39c3b5049a5e0e07aba3699"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathTest.java",
+      "before_sha256": "2235c5a6a917b4a1550bf98f3eb0b23bb96ad0f50bf295aee0253c85c92ed2b3",
+      "after_sha256": "2235c5a6a917b4a1550bf98f3eb0b23bb96ad0f50bf295aee0253c85c92ed2b3",
+      "role": "baseline_module_input",
+      "before_git_blob": "9bed98d06a94682d2a45516ffadb814c6af17423"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ZeroSlotCapacityContract.java",
+      "before_sha256": "0b473cb13772f0cacbcb657ad944c2bd467edcc22d0917ff65bd454e387cfbc8",
+      "after_sha256": "0b473cb13772f0cacbcb657ad944c2bd467edcc22d0917ff65bd454e387cfbc8",
+      "role": "baseline_module_input",
+      "before_git_blob": "c697d9f1f4a5115243d78b7cee2c5b74e0971643"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ZeroSlotCapacityTest.java",
+      "before_sha256": "a33821a411b712f2fafada5c9453c60a61b86e6fcf2f072d87ff730dc471a2a7",
+      "after_sha256": "a33821a411b712f2fafada5c9453c60a61b86e6fcf2f072d87ff730dc471a2a7",
+      "role": "baseline_module_input",
+      "before_git_blob": "a0a6949a6792b18286da8c7ddb2aa31764a512c8"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/SegmentedLaneBulkContractTest.java",
+      "before_sha256": "f2ea51cf92b35489ca0bc3c6555850ff9ceee45a1459eb0af06f19feaff810ce",
+      "after_sha256": "f2ea51cf92b35489ca0bc3c6555850ff9ceee45a1459eb0af06f19feaff810ce",
+      "role": "baseline_module_input",
+      "before_git_blob": "050fea92fd02950e5cdc653d55234e829d0a7ab3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/SegmentedPrimitiveStorageTest.java",
+      "before_sha256": "b202adb68518e47c49ceddc4f21e52c7bb48c387b3f1ee08baceaf8a930eb44c",
+      "after_sha256": "b202adb68518e47c49ceddc4f21e52c7bb48c387b3f1ee08baceaf8a930eb44c",
+      "role": "baseline_module_input",
+      "before_git_blob": "fd14c6e5e0e56b634592a3eb0ef46e3136091c4a"
+    },
+    {
+      "path": "m3/collections/src/test/native/collections/m3_bimap_consumer.c",
+      "before_sha256": "c6a073b211459f278d2674336ddc84ac28fe19324a0c3cbc30a44193eec84d1e",
+      "after_sha256": "c6a073b211459f278d2674336ddc84ac28fe19324a0c3cbc30a44193eec84d1e",
+      "role": "baseline_module_input",
+      "before_git_blob": "fc9f43c59e600e13f60a996a00214eeda3521b1a"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_bitlane_jump_jni.c",
+      "before_sha256": "6a81bde570bbef1ad25786e225667fd0918bfdde563356865e38255eaf1aab0c",
+      "after_sha256": "6a81bde570bbef1ad25786e225667fd0918bfdde563356865e38255eaf1aab0c",
+      "role": "baseline_module_input",
+      "before_git_blob": "029820143651623f8c37dca7d7e82480bfd94d2b"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+      "before_sha256": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab",
+      "after_sha256": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab",
+      "role": "baseline_module_input",
+      "before_git_blob": "52d4e5b20fade6ab7aa3f63d5d92a6b210e437bd"
+    },
+    {
+      "path": "m3/collections/synexia-donation.json",
+      "before_sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+      "after_sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+      "role": "baseline_module_input",
+      "before_git_blob": "a6339fc2f901cd3aef071c731bb71fb8ab715d1e"
+    },
+    {
+      "path": "m3/collections/verification/wrapper-convergence-20261018/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "d39d34f3da572db2902308095048cb1430b9fa0b3c94c82248c25edc69f2621a",
+      "role": "verification_runner"
+    },
+    {
+      "path": "m3/collections/verification/wrapper-convergence-20261018/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "5af1979df6d91ae252d66a66375903c8c58b3f8b1028fa9dcf6e38ca59869391",
+      "role": "verification_runner"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+Compiled from "M3LongIndexPathMasks.java"
+public final class com.m3.collections.M3LongIndexPathMasks {
+  public static final int MAX_WINDOW = 4096;
+    descriptor: I
+  public static long[] select(long[], int[], int[][], int[], int[], int, int, int);
+    descriptor: ([J[I[[I[I[IIII)[J
+
+  public static int nextOrdinal(long);
+    descriptor: (J)I
+
+  public static int written(long);
+    descriptor: (J)I
+
+  public static long scanWindow(long[], int[], int[][], int[], int[], int, int, int, int, long[], int, int);
+    descriptor: ([J[I[[I[I[IIIII[JII)J
+}

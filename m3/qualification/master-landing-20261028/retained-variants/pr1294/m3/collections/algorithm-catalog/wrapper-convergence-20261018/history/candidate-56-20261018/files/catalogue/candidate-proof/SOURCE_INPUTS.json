@@ -1,0 +1,840 @@
+{
+  "baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "inputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+      "sha256": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3",
+      "baseline_sha256": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Address28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3Address28.java",
+      "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
+      "baseline_sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
+      "baseline_sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+      "sha256": "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6",
+      "baseline_sha256": "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java",
+      "sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577",
+      "baseline_sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
+      "sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680",
+      "baseline_sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
+      "sha256": "f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452",
+      "baseline_sha256": "f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java",
+      "sha256": "54c84bf0bc957d7fe6156f8b2df1017918947e58f430b5ce220d0b19d2678b4f",
+      "baseline_sha256": "54c84bf0bc957d7fe6156f8b2df1017918947e58f430b5ce220d0b19d2678b4f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkNames.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3CollectionSdkNames.java",
+      "sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee",
+      "baseline_sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Collections.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3Collections.java",
+      "sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926",
+      "baseline_sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java",
+      "sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5",
+      "baseline_sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java",
+      "sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573",
+      "baseline_sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java",
+      "sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea",
+      "baseline_sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java",
+      "sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698",
+      "baseline_sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java",
+      "sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6",
+      "baseline_sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CountedBag.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3CountedBag.java",
+      "sha256": "2334edd988b5512c9ef6b7092a8ab5ac99e36df09629661ae3779f7090c5bc54",
+      "baseline_sha256": "2334edd988b5512c9ef6b7092a8ab5ac99e36df09629661ae3779f7090c5bc54"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java",
+      "sha256": "dc6ff845c49c4a5691e17c362085eaf8721332613f4523a8ff0317f35ec54611",
+      "baseline_sha256": "dc6ff845c49c4a5691e17c362085eaf8721332613f4523a8ff0317f35ec54611"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
+      "sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64",
+      "baseline_sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+      "sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966",
+      "baseline_sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+      "sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c",
+      "baseline_sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+      "sha256": "6342d1acb4f406dc5b3c086d2db18966d7a5fc7f2b2a14c680ca520133165f0a",
+      "baseline_sha256": "6342d1acb4f406dc5b3c086d2db18966d7a5fc7f2b2a14c680ca520133165f0a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "baseline_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "sha256": "3302f213fd0b47ca43331da86236c7a8df3e8855ffd4712c123e986693e5ba27",
+      "baseline_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "sha256": "e61f94f0262878726b5c7255ebc3aa655a7808c4d1544a8bd0ee3fd1bc49f1a7",
+      "baseline_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3GenericCollections.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3GenericCollections.java",
+      "sha256": "7f44e22663f67a7e69108fd097807c36bcf0e62a421481a16dc0fbfd28435f6a",
+      "baseline_sha256": "7f44e22663f67a7e69108fd097807c36bcf0e62a421481a16dc0fbfd28435f6a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+      "baseline_sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "sha256": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1",
+      "baseline_sha256": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java",
+      "sha256": "2a00103d91c5a5236be6fa863cc85538af827d9aae57fa6eb7e55052f3f2524d",
+      "baseline_sha256": "2a00103d91c5a5236be6fa863cc85538af827d9aae57fa6eb7e55052f3f2524d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "sha256": "e91152a0bb34178995835266ff7c52ae22d87ec6324d171415aed28e293794d1",
+      "baseline_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+      "sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
+      "baseline_sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "sha256": "0f0939615884c4d8bbfe2a3c9bbc5072d49faa6c20636c2eadac3104269aefaa",
+      "baseline_sha256": "0f0939615884c4d8bbfe2a3c9bbc5072d49faa6c20636c2eadac3104269aefaa"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java",
+      "sha256": "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82",
+      "baseline_sha256": "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+      "sha256": "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c",
+      "baseline_sha256": "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+      "sha256": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81",
+      "baseline_sha256": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+      "sha256": "055f45cbba3ff22d206cd1d805859c20ee2688cef5443323838ed6d3c061db14",
+      "baseline_sha256": "055f45cbba3ff22d206cd1d805859c20ee2688cef5443323838ed6d3c061db14"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+      "sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484",
+      "baseline_sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+      "sha256": "b77352f6502182caf4caca55eda1073b74c2c0b1094e07d9c8c3fbabb8cc8418",
+      "baseline_sha256": "b77352f6502182caf4caca55eda1073b74c2c0b1094e07d9c8c3fbabb8cc8418"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+      "sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63",
+      "baseline_sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLane28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntLane28.java",
+      "sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18",
+      "baseline_sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+      "sha256": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92",
+      "baseline_sha256": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+      "sha256": "d713f4cd75b49becf6ed478cb5b9d5d971eadbebd90ead8a67c83722cb96eae1",
+      "baseline_sha256": "d713f4cd75b49becf6ed478cb5b9d5d971eadbebd90ead8a67c83722cb96eae1"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+      "sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59",
+      "baseline_sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventBits.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyEventBits.java",
+      "sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f",
+      "baseline_sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventGranularity.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyEventGranularity.java",
+      "sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020",
+      "baseline_sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventPolicy.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyEventPolicy.java",
+      "sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f",
+      "baseline_sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventSink.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyEventSink.java",
+      "sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d",
+      "baseline_sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventSource.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyEventSource.java",
+      "sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27",
+      "baseline_sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEvents.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyEvents.java",
+      "sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d",
+      "baseline_sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyOperation.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyOperation.java",
+      "sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667",
+      "baseline_sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyValueProvider.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyValueProvider.java",
+      "sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66",
+      "baseline_sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyValueState.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LazyValueState.java",
+      "sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4",
+      "baseline_sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "baseline_sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java",
+      "sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757",
+      "baseline_sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "sha256": "1f9a2315db0f9a695402b47a7f6f1e124ed08e186e3460f9ce9757b324bd43c0",
+      "baseline_sha256": "1f9a2315db0f9a695402b47a7f6f1e124ed08e186e3460f9ce9757b324bd43c0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LockedMap.java",
+      "sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca",
+      "baseline_sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedTreeMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LockedTreeMap.java",
+      "sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9",
+      "baseline_sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedTreeSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LockedTreeSet.java",
+      "sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09",
+      "baseline_sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "baseline_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArena28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongArena28.java",
+      "sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60",
+      "baseline_sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
+      "baseline_sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+      "sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd",
+      "baseline_sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBag.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongBag.java",
+      "sha256": "636cf505cca2f0d0bbfdd93c815717c21b0edba9344b245cc58f3fd27dc2faed",
+      "baseline_sha256": "636cf505cca2f0d0bbfdd93c815717c21b0edba9344b245cc58f3fd27dc2faed"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilterPlan.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilterPlan.java",
+      "sha256": "bd7969cfc42e26171b9904c65eb12f3321b2fbffe77a34f6d76f4db15c11c1d3",
+      "baseline_sha256": "bd7969cfc42e26171b9904c65eb12f3321b2fbffe77a34f6d76f4db15c11c1d3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
+      "baseline_sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+      "sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+      "baseline_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+      "sha256": "041c6afc3ed04671e9e9fa1a30c0ea7df7fe09aefdff405a3612afffee441ecb",
+      "baseline_sha256": "041c6afc3ed04671e9e9fa1a30c0ea7df7fe09aefdff405a3612afffee441ecb"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongDag.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongDag.java",
+      "sha256": "0962be0f81f1e83cd3b2686a22e24cc245d5db14e26a27cb681530215f76be47",
+      "baseline_sha256": "0962be0f81f1e83cd3b2686a22e24cc245d5db14e26a27cb681530215f76be47"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+      "sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272",
+      "baseline_sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+      "sha256": "345f3a25aff7c18cd01643a87976570231870949b95ae4a758d486cf22087e3d",
+      "baseline_sha256": "345f3a25aff7c18cd01643a87976570231870949b95ae4a758d486cf22087e3d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "sha256": "7274e4b0ab7a65be73e2a59d92e5b419a91261c954917428eba85f2dfccf03e6",
+      "baseline_sha256": "7274e4b0ab7a65be73e2a59d92e5b419a91261c954917428eba85f2dfccf03e6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "sha256": "17137b236421ad3ad4f079acc0ba98a10ad4d419b717abd1f9192f42b18260a8",
+      "baseline_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "baseline_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLane28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongLane28.java",
+      "sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960",
+      "baseline_sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java",
+      "sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1",
+      "baseline_sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+      "sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+      "baseline_sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java",
+      "sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2",
+      "baseline_sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+      "sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd",
+      "baseline_sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
+      "sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003",
+      "baseline_sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java",
+      "sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c",
+      "baseline_sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3",
+      "baseline_sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongLinkedHashMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongLongLinkedHashMap.java",
+      "sha256": "c2f74a1336ec435d7fbd031797a485ded70f21283bb8ace10aca09ed68fe9846",
+      "baseline_sha256": "c2f74a1336ec435d7fbd031797a485ded70f21283bb8ace10aca09ed68fe9846"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongPredicates.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongPredicates.java",
+      "sha256": "e5d9d7fca94c4eef0843bb7eb7929c2baba05892207f9336a6da3a089bc882ad",
+      "baseline_sha256": "e5d9d7fca94c4eef0843bb7eb7929c2baba05892207f9336a6da3a089bc882ad"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
+      "sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+      "baseline_sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+      "sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8",
+      "baseline_sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "sha256": "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8",
+      "baseline_sha256": "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+      "sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82",
+      "baseline_sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java",
+      "sha256": "d1011f31158fa96c23722e6df2fd7ec9e9c1592fba860580330c42fb3f25f4f9",
+      "baseline_sha256": "d1011f31158fa96c23722e6df2fd7ec9e9c1592fba860580330c42fb3f25f4f9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSequence.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongSequence.java",
+      "sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb",
+      "baseline_sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+      "sha256": "257a69f75483df729add39767532718f96ac3c9917bdadbe9a4be08f32caf933",
+      "baseline_sha256": "257a69f75483df729add39767532718f96ac3c9917bdadbe9a4be08f32caf933"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java",
+      "sha256": "37ce5651596e7b44bb2512d2bdc6ee8bba40bf95320c5c377162077032c69975",
+      "baseline_sha256": "37ce5651596e7b44bb2512d2bdc6ee8bba40bf95320c5c377162077032c69975"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+      "sha256": "7a42630fbffd2c5875d8a7e4258540454879117a52bd6fe52c3cde4ce07b4d99",
+      "baseline_sha256": "7a42630fbffd2c5875d8a7e4258540454879117a52bd6fe52c3cde4ce07b4d99"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+      "sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36",
+      "baseline_sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java",
+      "sha256": "a59da36533c6ef9b82c478432953674603e0734a2471698b5410a8bbde92f8c5",
+      "baseline_sha256": "a59da36533c6ef9b82c478432953674603e0734a2471698b5410a8bbde92f8c5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java",
+      "sha256": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42",
+      "baseline_sha256": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "sha256": "51188863415920856a0f5e69ea8a54735e8502d7c0bcf8ca42fcf3a84bf1c6ec",
+      "baseline_sha256": "66442108ee67cb8395f9e4cb7d26990583a33d2e2775347da15acb5cb3d5b62d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java",
+      "sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3",
+      "baseline_sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java",
+      "sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d",
+      "baseline_sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+      "baseline_sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5",
+      "baseline_sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java",
+      "sha256": "f8c19b2dd04c6198f5061685d7fb7890531620970510fe666ce5338b115d3b12",
+      "baseline_sha256": "f8c19b2dd04c6198f5061685d7fb7890531620970510fe666ce5338b115d3b12"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectStateBatch28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ObjectStateBatch28.java",
+      "sha256": "aa4f2c277fa8e36f217b1e93533fe0e78a98e6e7e6b9f7fa6d31c60f36c314d9",
+      "baseline_sha256": "aa4f2c277fa8e36f217b1e93533fe0e78a98e6e7e6b9f7fa6d31c60f36c314d9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java",
+      "sha256": "0b4f3600af352d2b22b35a520f98540a446c0a3494a9253cb0ef6c309a5f7bcb",
+      "baseline_sha256": "0b4f3600af352d2b22b35a520f98540a446c0a3494a9253cb0ef6c309a5f7bcb"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+      "sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357",
+      "baseline_sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "sha256": "b9411d0e1f1efc9130adabf89a76ba161cf717b0ca4021390d8fc862d3aefa04",
+      "baseline_sha256": "b9411d0e1f1efc9130adabf89a76ba161cf717b0ca4021390d8fc862d3aefa04"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Progress.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3Progress.java",
+      "sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d",
+      "baseline_sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+      "sha256": "87a4782840b9862cf2252f2cf53191d7eb6fa4a6b96a180f949aa59d05160231",
+      "baseline_sha256": "87a4782840b9862cf2252f2cf53191d7eb6fa4a6b96a180f949aa59d05160231"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
+      "sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24",
+      "baseline_sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
+      "sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b",
+      "baseline_sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
+      "sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d",
+      "baseline_sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressiveSignalEvidence.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ProgressiveSignalEvidence.java",
+      "sha256": "b1b2e03bfc5c6e93b805521a18f749da864f43aa5a56c4bfddfaa8360e3eb0d2",
+      "baseline_sha256": "b1b2e03bfc5c6e93b805521a18f749da864f43aa5a56c4bfddfaa8360e3eb0d2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Residency.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3Residency.java",
+      "sha256": "240f63bf1cc6d1ce2681c338f8715e301913eeaf8a3cd69baebc5971b9cdaf67",
+      "baseline_sha256": "240f63bf1cc6d1ce2681c338f8715e301913eeaf8a3cd69baebc5971b9cdaf67"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
+      "sha256": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc",
+      "baseline_sha256": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "sha256": "da761a6b4f10d9a3c9a61979a4ee238fd6d26492d1ba0e6daacdf371f6561058",
+      "baseline_sha256": "da761a6b4f10d9a3c9a61979a4ee238fd6d26492d1ba0e6daacdf371f6561058"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+      "sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8",
+      "baseline_sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java",
+      "sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7",
+      "baseline_sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+      "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518",
+      "baseline_sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
+      "baseline_sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+      "baseline_sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "sha256": "cf76dacccd055f5a21338c09ae7ce77efc0fe21fb756ad6c2e7015f9831d650b",
+      "baseline_sha256": "cf76dacccd055f5a21338c09ae7ce77efc0fe21fb756ad6c2e7015f9831d650b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java",
+      "sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc",
+      "baseline_sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java",
+      "sha256": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42",
+      "baseline_sha256": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
+      "sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b",
+      "baseline_sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java",
+      "sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7",
+      "baseline_sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+      "sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8",
+      "baseline_sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeSet.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3TreeSet.java",
+      "sha256": "e55e48d581412955c468b8263d9f2b15bfb03b659f3b70f1187697853aeebc5c",
+      "baseline_sha256": "e55e48d581412955c468b8263d9f2b15bfb03b659f3b70f1187697853aeebc5c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3VirtualAccumulator.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3VirtualAccumulator.java",
+      "sha256": "27c5ffc37302dc173e00a82134cc57be64ba3721aafe42d1d854d4cdba3fb257",
+      "baseline_sha256": "27c5ffc37302dc173e00a82134cc57be64ba3721aafe42d1d854d4cdba3fb257"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3VirtualCollector.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3VirtualCollector.java",
+      "sha256": "2e74d033a06247ba6ffa0beae2a7c5b1ddb838bfa50499678755934eeda7e086",
+      "baseline_sha256": "2e74d033a06247ba6ffa0beae2a7c5b1ddb838bfa50499678755934eeda7e086"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java",
+      "sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a",
+      "baseline_sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/package-info.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/main/java/com/m3/collections/package-info.java",
+      "sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc",
+      "baseline_sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+      "sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+      "sha256": "374742c695f4ebdc742519dd93c79496729b3ce94ffb2c761cc2c8a9781e26ee"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java",
+      "sha256": "27ee8c3942e18a6fada7e4fad1cd66f163aa6eccb01d8f99cfe6c3e3bd5ecf3a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMaskAliasSelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathMaskAliasSelfTest.java",
+      "sha256": "0b4cc8de0c702db168f4ff0ea236950000c3453aad8d49da45d010964c4417e7"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongSelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongSelfTest.java",
+      "sha256": "36bc8afd1da83e2b4b60d928016e42c20eba0fa376dc9a2a59eb1acc9e0f5dec"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesSelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesSelfTest.java",
+      "sha256": "3e53be1799c78795cb5bc45ba0b3857116464566eda05b65a7a6d0649e97d303"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java",
+      "sha256": "250cfb09472d8b71b1b936987b7944c37fc6252c3a2789a615220f55f7c0c243"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NavigationFailureContract.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3NavigationFailureContract.java",
+      "sha256": "f37ed8a30cba5e2622abe335a38d834b8c8adb582d088f32b57c616ddf46445c"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3OrderWindowProof.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3OrderWindowProof.java",
+      "sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
+      "sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceSelfTest.java",
+      "source": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceSelfTest.java",
+      "sha256": "74486558694c8c4c8687231959f11deb0fdee8b12f0f7a6583c7b9c5c88f4eec"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
+      "source": "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
+      "sha256": "f37ead5e6647b1f0ec7cf0d0723c2662508d1991bf0c967b298f2be737fd7c8d",
+      "unchanged_existing_contract": true
+    }
+  ]
+}
