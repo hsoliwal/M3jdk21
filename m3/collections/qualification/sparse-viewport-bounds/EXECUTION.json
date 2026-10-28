@@ -1,0 +1,95 @@
+{
+  "schema": "M3_SPARSE_VIEWPORT_BOUNDS_EXECUTION_V1",
+  "date": "2026-10-28",
+  "canonical": {
+    "repo": "hsoliwal/com.synexia",
+    "pr": 12855,
+    "dataset": "sparse-viewport-bounds-20261028",
+    "recipe": "com.synexia.m3.SparseViewportBounds20261028",
+    "source_commit": "99d5ca5217d8065da8c288fafbc122f51c0f32dd"
+  },
+  "source": {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
+    "pre_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+    "post_git_blob": "9c7cc7e265e4aee0dca030957c8d0ac04abfccbb",
+    "pre_sha256": "98a83a0bef698e128baa0a788e122751e12584d0b8983f4df7443850123afeec",
+    "post_sha256": "391e8b5d81ca5c19cc9e325c5e49f28356c713dbbf1fd5530c6f3d5bd91f6e04",
+    "api_descriptors_sha256": "021477848d8d90710f5c70c0275ed3ee93c420db0e859f44051308749ee14706",
+    "api_descriptors_unchanged": true
+  },
+  "test": {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3SparseViewportValidationTest.java",
+    "before": "ABSENT",
+    "post_git_blob": "045c89bb5a8cf869e332c73dd557a2193aa93b7f",
+    "sha256": "c726177c9a2191de9d85053db402b6dee7f0ba53cf2d985516f8965c16b633ed"
+  },
+  "java21_parser": {
+    "artifact_id": 12790475505,
+    "github_run": 40619349382,
+    "artifact_sha256": "cc19b86dc501a926a8699fb3061e7e1ac5251e922b261fa74fc72f18e741d499",
+    "jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "pom_sha256": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7",
+    "class": "org/openrewrite/java/Java21Parser.class",
+    "authentic": true
+  },
+  "sdk": {
+    "maven_version": "3.9.9",
+    "jdk_version": "21.0.12.1",
+    "openrewrite_version": "8.17.1",
+    "original_engine_git_blobs": [
+      "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "98138cb6734ad86e3f77b8722fa5ff459842e841",
+      "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+      "9174dd681f0d75b5086fc19904a71524a03972dc"
+    ],
+    "original_harness_git_blob": "e69993797978f800a4d1b01b55093dc8dde16514",
+    "original_receiver_git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745",
+    "junit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "actual_results": 2,
+    "receiver_check": 2,
+    "receiver_apply": 2,
+    "receiver_replay": 0,
+    "java_lst_lossless": true,
+    "source_hashes_match_canonical": true,
+    "bounded_template_drifts_refused": true,
+    "build_pom": "ISOLATED_OFFLINE_DEPENDENCY_ADAPTER",
+    "source_epoch": "current_original_java_and_test_match",
+    "original_canonical_pom_executed": false
+  },
+  "product_junit": {
+    "baseline": {
+      "tests": 3,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "candidate_mixed": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "candidate_interpreted": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "status": {
+    "branch_only": true,
+    "draft_review": true,
+    "original_full_m3jdk21_reactor": "NOT_RUN",
+    "hosted_ci_on_receiving_commit": "NOT_RUN",
+    "full_jdk_hotspot_jtreg": "NOT_RUN",
+    "swt_nebula_gef_rwt_native": "NOT_RUN",
+    "cross_platform": "NOT_RUN",
+    "performance_claim": false
+  },
+  "note": "The original four engine source files, JUnit harness and receiver were executed unchanged; the local Maven POM and some dataset metadata used an explicitly named offline adapter, not the complete unchanged canonical reactor POM. Product pre/post Java outputs are exact current canonical Git blobs. No claim of a full source-built JDK or GUI release."
+}
