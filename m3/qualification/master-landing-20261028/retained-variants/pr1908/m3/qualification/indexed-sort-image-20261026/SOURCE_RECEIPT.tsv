@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# File-local source/CI acceptance; no runtime Java/JNI owner modified by this receiver.
+path	identity_kind	before_identity	after_identity	canonical_origin	qualification
+.github/workflows/m3-regex-collection-superset.yml	SHA-256	370cb71f8ca81d5ea761ad5f981aca2d50fadff9da5f91f447d414d7ab5c320e	23ef8b8a120e391e0d1befd1cfe221e5a619bb0de7fa8a6ceb7b903562b3bc1e	hsoliwal/com.synexia:m3-indexed-sort-image-gate-20261026	SOURCE_SEALED_IMAGE_PENDING
+test/jdk/jdk/internal/m3/M3IndexedSortWorkspaceTest.java	Git-blob-SHA1	0b180a383e42fd413e1a935af7a3041c417a7c8e	0b180a383e42fd413e1a935af7a3041c417a7c8e	hsoliwal/M3jdk21#1908;hsoliwal/com.synexia#13301	REUSE_IDENTICAL_TEST_DO_NOT_REPLACE
+m3/qualification/collection-convergence-20261024/INDEXED_SORT_QUALIFICATION_RECEIPT.json	Git-blob-SHA1	7dc12123941099640c94c280b57a4a13299f7def	7dc12123941099640c94c280b57a4a13299f7def	hsoliwal/M3jdk21#1908;hsoliwal/com.synexia#13301	RETAIN_ORIGINAL_PARENT_EVIDENCE
