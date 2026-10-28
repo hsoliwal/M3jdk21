@@ -17,6 +17,7 @@ verify_blob() {
 # A change to either current java.util owner requires its own reviewed pass.
 verify_blob 885d891b0f817080824622d592691a27cf8ffa26 src/java.base/share/classes/java/util/ArrayList.java
 verify_blob a79a77ce8700dc494d02d906b2a7765670629eee src/java.base/share/classes/java/util/Vector.java
+verify_blob 46eef59604fc52dae7dea11de615dffc5e90d943 test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java
 for owner in ArrayList Vector; do
   source="src/java.base/share/classes/java/util/$owner.java"
   grep -Fq 'import jdk.internal.mindex.M3CollectionMaskCompactor;' "$source"
