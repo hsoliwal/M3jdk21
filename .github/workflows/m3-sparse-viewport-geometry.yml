@@ -5,6 +5,7 @@ on:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3SparseExtents.java'
       - 'm3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SparseViewportValidationTest.java'
       - '.github/workflows/m3-sparse-viewport-geometry.yml'
 permissions:
   contents: read
@@ -30,16 +31,17 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$HEAD_SHA"
-          test "$BASE_SHA" = '9dd1df62f3d5406760427cb5e840a36c9e7a59ea'
+          test "$BASE_SHA" = '92962fbba10cbf13799253a307dc90f4de94b179'
           SOURCE=m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java
           HEAP=m3/collections/src/main/java/com/m3/collections/M3HeapGrowth.java
           WINDOW=m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java
           FIXTURE=m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt
-          test "$(git hash-object "$SOURCE")" = d35282fb564a0a9231f31781e1a699f7e571f8de
+          test "$(git hash-object "$SOURCE")" = 9c7cc7e265e4aee0dca030957c8d0ac04abfccbb
           test "$(git hash-object "$HEAP")" = d7a6ce1410499e6b8fa4844bf01ad9d51fdcdbd6
           test "$(git hash-object "$WINDOW")" = d0ce93a6e0afec40def2f84aab9a522e8fcc4e3d
           printf '%s  %s\n' '75e960d7db157ab38f9597317589be1480eadca5eaf5f3fd048f98a540c3fc58' "$FIXTURE" | sha256sum --check -
-          git show "$BASE_SHA:$SOURCE" > "$RUNNER_TEMP/M3SparseExtents-before.java"
+          git show 9dd1df62f3d5406760427cb5e840a36c9e7a59ea:"$SOURCE" > "$RUNNER_TEMP/M3SparseExtents-before.java"
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3SparseViewportValidationTest.java)" = 045c89bb5a8cf869e332c73dd557a2193aa93b7f
           test "$(git hash-object "$RUNNER_TEMP/M3SparseExtents-before.java")" = 650356bcdffa372328e5a79f4f596a887fe5f447
           git diff --check "$BASE_SHA...HEAD"
           echo M3_GEOMETRY_SOURCE_ADMISSION_PASS
@@ -54,6 +56,9 @@ jobs:
             cp m3/collections/src/main/java/com/m3/collections/M3HeapGrowth.java "$MODULE/src/main/java/com/m3/collections/"
             cp m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java "$MODULE/src/main/java/com/m3/collections/"
             cp m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt "$MODULE/src/test/java/com/m3/collections/M3ViewportGeometryTest.java"
+            if [[ "$state" == after ]]; then
+              cp m3/collections/src/test/java/com/m3/collections/M3SparseViewportValidationTest.java "$MODULE/src/test/java/com/m3/collections/"
+            fi
             if [[ "$state" == before ]]; then
               cp "$RUNNER_TEMP/M3SparseExtents-before.java" "$MODULE/src/main/java/com/m3/collections/M3SparseExtents.java"
             else
@@ -122,6 +127,15 @@ jobs:
           javap -classpath "$ROOT/after/target/classes" -public -s com.m3.collections.M3SparseExtents > "$ROOT/after-public.txt"
           cmp "$ROOT/before-public.txt" "$ROOT/after-public.txt"
           echo M3_GEOMETRY_ABI_PASS
+          mvn -B -ntp -f "$ROOT/after/pom.xml" -Dtest=M3SparseViewportValidationTest test | tee "$ROOT/sparse-negative-mixed.log"
+          mvn -B -ntp -f "$ROOT/after/pom.xml" -DargLine=-Xint -Dtest=M3SparseViewportValidationTest test | tee "$ROOT/sparse-negative-interpreted.log"
+          python3 - "$ROOT/after/target/surefire-reports/TEST-com.m3.collections.M3SparseViewportValidationTest.xml" <<'PY'
+          import sys,xml.etree.ElementTree as ET
+          root=ET.parse(sys.argv[1]).getroot()
+          result=tuple(int(root.get(key,'-1')) for key in ('tests','failures','errors','skipped'))
+          if result!=(3,0,0,0):raise SystemExit('negative viewport regression mismatch: '+str(result))
+          print('M3_SPARSE_VIEWPORT_NEGATIVE_JUNIT_PASS tests=3 modes=mixed,interpreted')
+          PY
       - name: Retain exact source/JUnit/compiler evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
