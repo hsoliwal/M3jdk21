@@ -1,0 +1,56 @@
+{
+  "schema": "M3_VIEWPORT_THREE_DONOR_COMPOSITION_V1",
+  "status": "EXACT_SOURCE_COMPOSITION_ONLY",
+  "receiving_product": "hsoliwal/M3jdk21",
+  "review_pr": 2062,
+  "base_commit": "92962fbba10cbf13799253a307dc90f4de94b179",
+  "frame_source": {
+    "pr": 1884,
+    "head": "464e1fe147fce6e03a20d6724492860ef1f4ce73",
+    "changed_files": 19
+  },
+  "tree_source": {
+    "pr": 2013,
+    "head": "684e0806d89f8460baece2a1b16ec4dc994a00d5",
+    "changed_files": 12
+  },
+  "fenwick_source": {
+    "pr": 2021,
+    "head": "a1ac210a18fd19def727980c7fdafd3d793d5b2f",
+    "changed_files": 6
+  },
+  "fenwick_exact_blobs": {
+    "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java": "ba6b2ebd0fac9f737deb28bce9385fff07164997",
+    ".github/workflows/m3-sparse-viewport-geometry.yml": "bc5a1a4e0e2d3ec2049caf2cf360c0a64c1ec30c",
+    "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt": "dafa004fcbe3fe9e4183f830b2f1159e3c40591f",
+    "m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json": "f56c52907bc52b2188b2ebdaab015c70161faafe",
+    "m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json": "1938fb005d19fb85a1f68130dff6342fbe50e3cc",
+    "m3/collections/qualification/viewport-fenwick/RECEIVING.json": "7ffd1552c957bb613e7ca004857472c696a63778"
+  },
+  "combined_workflow": {
+    "source_pr": 2047,
+    "source_commit": "7c41f2fc002ec6c26ba9d68381f4ce5733c95df7",
+    "git_blob": "46aaae839ed91bc65fc4fa3c2af0554a0d94f8b5",
+    "historical_success_run": 40538731130,
+    "historical_success_valid_only_for_source_epoch": true
+  },
+  "admission_observed": {
+    "donor_expected_paths": 28,
+    "original_frame_tree_drift_or_absent": 7,
+    "matched_after_fenwick_overlay": 28,
+    "overlap_between_frame_tree_and_fenwick": 0
+  },
+  "expected_review_diff": {
+    "source_modified_or_added": 37,
+    "workflow_added": 1,
+    "metadata_receipt_added": 1,
+    "total": 39
+  },
+  "current_composed_runtime": "NOT_RUN",
+  "current_composed_junit": "NOT_RUN",
+  "current_composed_jni": "NOT_RUN",
+  "full_jdk_hotspot_jtreg": "NOT_RUN",
+  "swt_nebula_gef_rwt_native_widgets": "NOT_RUN",
+  "performance_claim": false,
+  "may_merge": false
+}
