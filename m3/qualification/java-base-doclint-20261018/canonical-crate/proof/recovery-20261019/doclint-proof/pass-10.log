@@ -1,0 +1,8 @@
+Function.java:102:15: compiler.warn.proc.messager: no @param for value
+Function.java:102:15: compiler.warn.proc.messager: no @param for monitor
+Function.java:102:15: compiler.warn.proc.messager: no @return
+Supplier.java:51:15: compiler.warn.proc.messager: no @param for monitor
+Supplier.java:51:15: compiler.warn.proc.messager: no @return
+- compiler.err.warnings.and.werror
+1 error
+5 warnings

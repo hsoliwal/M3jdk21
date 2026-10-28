@@ -12,11 +12,15 @@ package java.util.concurrent;
  */
 public interface ProgressMonitor {
     /** Indicates that the total amount of work is not known. */
+    /**
+     * The sentinel indicating that the total amount of work is unknown.
+     */
     long UNKNOWN_WORK = -1L;
     /**
      * A monitor with no progress state and no local cancellation state.
      * Its inherited {@link #checkCancelled()} still observes interruption
      * of the calling thread.
+     * A monitor whose lifecycle, work, and cancellation methods use the no-op defaults.
      */
     ProgressMonitor NONE = new ProgressMonitor() { };
 
@@ -26,6 +30,10 @@ public interface ProgressMonitor {
      *
      * @param task the task description
      * @param totalWork the estimated work, or {@link #UNKNOWN_WORK}
+     * Begins a task. The default implementation does nothing.
+     *
+     * @param task the task description
+     * @param totalWork the total work, or {@link #UNKNOWN_WORK} if unknown
      */
     default void begin(String task, long totalWork) { }
     /**
@@ -33,25 +41,38 @@ public interface ProgressMonitor {
      *
      * @param units the additional work units, with validation defined by the
      *              implementation
+     * Reports completed work. The default implementation does nothing.
+     *
+     * @param units the amount of newly completed work
      */
     default void worked(long units) { }
     /**
      * Reports a progress message. The default implementation does nothing.
      *
      * @param text the progress message
+     * Reports a message. The default implementation does nothing.
+     *
+     * @param text the message to report
      */
     default void message(String text) { }
     /**
      * Reports cooperative cancellation state. The default returns {@code false}.
      *
      * @return whether this monitor reports cancellation
+     * Reports whether cancellation has been requested.
+     *
+     * @return false in the default implementation
      */
     default boolean isCancelled() { return false; }
     /** Requests cooperative cancellation. The default implementation does nothing. */
+    /**
+     * Requests cancellation. The default implementation does nothing.
+     */
     default void cancel() { }
     /**
      * Completes work owned by this monitor. The default implementation does
      * nothing. A task must not complete a monitor borrowed from its caller.
+     * Completes this monitor. The default implementation does nothing.
      */
     default void done() { }
 
@@ -61,6 +82,9 @@ public interface ProgressMonitor {
      *
      * @throws CancellationException if {@link #isCancelled()} is true or
      *         the calling thread is interrupted
+     * Checks this monitor and the current thread for cancellation without clearing interruption.
+     *
+     * @throws CancellationException if this monitor is cancelled or the current thread is interrupted
      */
     default void checkCancelled() {
         if (isCancelled() || Thread.currentThread().isInterrupted()) {

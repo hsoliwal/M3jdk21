@@ -48,6 +48,9 @@ public final class ProgressMonitors {
     }
 
     /** Restores the global provider that supplies {@link ProgressMonitor#NONE}. */
+    /**
+     * Resets the process fallback supplier to one that returns {@link ProgressMonitor#NONE}.
+     */
     public static void resetSystem() { SYSTEM.set(NONE); }
 
     /**
@@ -87,6 +90,13 @@ public final class ProgressMonitors {
      * @throws NullPointerException if {@code task} or {@code monitor} is null
      * @throws CancellationException if cancellation is observed before or
      *         after the task
+     * Runs a task under a borrowed monitor without completing the monitor.
+     * Cancellation is checked before the task and after its normal completion.
+     *
+     * @param task the task to run
+     * @param monitor the borrowed monitor
+     * @throws NullPointerException if either argument is null
+     * @throws CancellationException if cancellation is detected
      */
     @SuppressWarnings("try")
     public static void run(Runnable task, ProgressMonitor monitor) {
@@ -112,6 +122,16 @@ public final class ProgressMonitors {
      * @throws CancellationException if cancellation is observed before or
      *         after the task
      * @throws Exception if the task cannot compute a result
+     * Calls a task under a borrowed monitor without completing the monitor.
+     * Cancellation is checked before the task and after its normal completion.
+     *
+     * @param <T> the task result type
+     * @param task the task to call
+     * @param monitor the borrowed monitor
+     * @return the task result
+     * @throws Exception if the task fails
+     * @throws NullPointerException if either argument is null
+     * @throws CancellationException if cancellation is detected
      */
     @SuppressWarnings("try")
     public static <T> T call(Callable<T> task, ProgressMonitor monitor) throws Exception {
@@ -144,6 +164,15 @@ public final class ProgressMonitors {
      * @throws NullPointerException if {@code parent} is {@code null}
      * @throws IllegalArgumentException if {@code parentTicks} is negative or
      *         {@code totalWork} is neither positive nor {@code UNKNOWN_WORK}
+     * Creates a weighted child that credits work to the parent without completing it.
+     *
+     * @param parent the parent monitor
+     * @param name the child task name; null is treated as an empty name
+     * @param parentTicks the nonnegative number of parent units reserved for the child
+     * @param totalWork the positive total child work, or {@link ProgressMonitor#UNKNOWN_WORK}
+     * @return the weighted child, or {@link ProgressMonitor#NONE} for a no-op parent
+     * @throws NullPointerException if parent is null
+     * @throws IllegalArgumentException if parentTicks is negative, or totalWork is zero or below UNKNOWN_WORK
      */
     public static ProgressMonitor child(
             ProgressMonitor parent, String name, long parentTicks, long totalWork) {

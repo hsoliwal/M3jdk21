@@ -1,0 +1,50 @@
+Callable.java:68:15: compiler.warn.proc.messager: no @param for monitor
+Callable.java:68:15: compiler.warn.proc.messager: no @return
+Callable.java:68:15: compiler.warn.proc.messager: no @throws for java.lang.Exception
+Executor.java:142:18: compiler.warn.proc.messager: no @param for command
+Executor.java:142:18: compiler.warn.proc.messager: no @param for monitor
+Executor.java:149:18: compiler.warn.proc.messager: no @param for command
+ExecutorService.java:435:27: compiler.warn.proc.messager: no @param for <T>
+ExecutorService.java:435:27: compiler.warn.proc.messager: no @param for task
+ExecutorService.java:435:27: compiler.warn.proc.messager: no @param for monitor
+ExecutorService.java:435:27: compiler.warn.proc.messager: no @return
+ExecutorService.java:442:23: compiler.warn.proc.messager: no @param for task
+ExecutorService.java:442:23: compiler.warn.proc.messager: no @param for monitor
+ExecutorService.java:442:23: compiler.warn.proc.messager: no @return
+MonitoredCallable.java:16:7: compiler.warn.proc.messager: no @param for monitor
+MonitoredCallable.java:16:7: compiler.warn.proc.messager: no @return
+MonitoredCallable.java:16:7: compiler.warn.proc.messager: no @throws for java.lang.Exception
+MonitoredRunnable.java:15:10: compiler.warn.proc.messager: no @param for monitor
+ProgressMonitor.java:14:10: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:15:21: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:17:18: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:18:18: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:19:18: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:20:21: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:21:18: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:22:18: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:24:18: compiler.warn.proc.messager: no comment
+ProgressMonitor.java:31:29: compiler.warn.proc.messager: no @param for name
+ProgressMonitor.java:31:29: compiler.warn.proc.messager: no @param for parentTicks
+ProgressMonitor.java:31:29: compiler.warn.proc.messager: no @param for totalWork
+ProgressMonitor.java:31:29: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:27:35: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:33:55: compiler.warn.proc.messager: no @param for provider
+ProgressMonitors.java:33:55: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:38:24: compiler.warn.proc.messager: no comment
+ProgressMonitors.java:41:35: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:47:25: compiler.warn.proc.messager: no @param for monitor
+ProgressMonitors.java:47:25: compiler.warn.proc.messager: no @return
+ProgressMonitors.java:54:24: compiler.warn.proc.messager: no comment
+ProgressMonitors.java:63:25: compiler.warn.proc.messager: no comment
+ProgressMonitors.java:73:35: compiler.warn.proc.messager: no comment
+Consumer.java:69:18: compiler.warn.proc.messager: no @param for value
+Consumer.java:69:18: compiler.warn.proc.messager: no @param for monitor
+Function.java:102:15: compiler.warn.proc.messager: no @param for value
+Function.java:102:15: compiler.warn.proc.messager: no @param for monitor
+Function.java:102:15: compiler.warn.proc.messager: no @return
+Supplier.java:51:15: compiler.warn.proc.messager: no @param for monitor
+Supplier.java:51:15: compiler.warn.proc.messager: no @return
+- compiler.err.warnings.and.werror
+1 error
+47 warnings

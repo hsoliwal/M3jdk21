@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "scope": "WHOLE_C_OWNER_GCC_STRICT_MACRO_DEFINITION_PARITY",
+  "beforeSha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
+  "afterSha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
+  "matchingObjects": 3,
+  "objectSha256": "064d09ab67efc97cb7853888fa8ac4ceeed57743b458272e68470ac93af309ca",
+  "commands": [
+    {
+      "name": "before-defined",
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-O3",
+        "-g0",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include",
+        "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include/linux",
+        "-D_GNU_SOURCE",
+        "-c",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-defined/M3PrimitiveFixedArena.c",
+        "-o",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-defined/M3PrimitiveFixedArena.o"
+      ],
+      "exit": 1,
+      "expectedCompilerPass": false
+    },
+    {
+      "name": "before-undefined",
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-O3",
+        "-g0",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include",
+        "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include/linux",
+        "-c",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-undefined/M3PrimitiveFixedArena.c",
+        "-o",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-undefined/M3PrimitiveFixedArena.o"
+      ],
+      "exit": 0,
+      "expectedCompilerPass": true
+    },
+    {
+      "name": "after-defined",
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-O3",
+        "-g0",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include",
+        "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include/linux",
+        "-D_GNU_SOURCE",
+        "-c",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-defined/M3PrimitiveFixedArena.c",
+        "-o",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-defined/M3PrimitiveFixedArena.o"
+      ],
+      "exit": 0,
+      "expectedCompilerPass": true
+    },
+    {
+      "name": "after-undefined",
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-O3",
+        "-g0",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include",
+        "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include/linux",
+        "-c",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-undefined/M3PrimitiveFixedArena.c",
+        "-o",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-undefined/M3PrimitiveFixedArena.o"
+      ],
+      "exit": 0,
+      "expectedCompilerPass": true
+    }
+  ],
+  "fullImageGate": "SEPARATE_TARGET_BUILD"
+}

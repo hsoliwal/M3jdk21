@@ -1,0 +1,5 @@
+public interface java.util.concurrent.Executor {
+  public abstract void execute(java.lang.Runnable);
+  public default void execute(java.lang.Runnable, java.util.concurrent.ProgressMonitor);
+  public default void executeWithProgress(java.lang.Runnable);
+}

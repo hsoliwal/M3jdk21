@@ -1,0 +1,5 @@
+public interface java.lang.Runnable {
+  public abstract void run();
+  public default java.util.concurrent.ProgressMonitor progressMonitor();
+  public default void run(java.util.concurrent.ProgressMonitor);
+}

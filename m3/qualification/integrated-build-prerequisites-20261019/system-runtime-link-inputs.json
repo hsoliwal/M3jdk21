@@ -1,0 +1,162 @@
+[
+  {
+    "name": "libICE.so.6.3.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libICE.so.6.3.0",
+    "sha256": "899ff245d50d4f1a7bb114d13b6200f42f93696ad93f38020c6ed7c84a5a943e"
+  },
+  {
+    "name": "libLerc.so.4",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libLerc.so.4",
+    "sha256": "a0ee52df526738293bdd232ddaefbb0d1d9c2da775a82fc6730e7cd394da560c"
+  },
+  {
+    "name": "libSM.so.6.0.1",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libSM.so.6.0.1",
+    "sha256": "c9301f0ff852c0edcfc766f91c5df4f73b1b300c0303ac188524154588892fd0"
+  },
+  {
+    "name": "libX11.so.6.4.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libX11.so.6.4.0",
+    "sha256": "c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879"
+  },
+  {
+    "name": "libXau.so.6.0.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libXau.so.6.0.0",
+    "sha256": "8040da3f8516c1acfe39f04ff022480cdb273705ba5e7a4ca70bbdb1527cd67a"
+  },
+  {
+    "name": "libXdmcp.so.6.0.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0",
+    "sha256": "667d97d6da16016400ab10de9f83ef4ab209ceb6adf68ff9650225ec13e723b0"
+  },
+  {
+    "name": "libXext.so.6.4.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libXext.so.6.4.0",
+    "sha256": "2907e6a996465de5b32a0dd10534d4416b87f1dee5670aaa7b19301a1fc93f44"
+  },
+  {
+    "name": "libXfixes.so.3.1.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0",
+    "sha256": "89e5897f438456013d2297850a7558cd28c9ad1f6978447197568949fb6a0fd9"
+  },
+  {
+    "name": "libXi.so.6.1.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libXi.so.6.1.0",
+    "sha256": "a51348c921ce1a35123fa7c99dc59bfd3e815be6829874fe15ae55172901d3e4"
+  },
+  {
+    "name": "libXrandr.so.2.2.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libXrandr.so.2.2.0",
+    "sha256": "bc6120a734d52e7f5e3611334e9f3cff0b3ce1b129bb20b6412ce8f0f62c049d"
+  },
+  {
+    "name": "libXrender.so.1.3.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0",
+    "sha256": "250977e0e004b6c0556144c3e683487063b4582dc83d205196ec3aa65d54e2c6"
+  },
+  {
+    "name": "libXt.so.6.0.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libXt.so.6.0.0",
+    "sha256": "267143b6258b866a522e9cff8db1e11ed95acb4fe23c56d9224e71afe617b0b8"
+  },
+  {
+    "name": "libasound.so.2.0.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libasound.so.2.0.0",
+    "sha256": "ff4c69ef420f2d0ab92c813d2222d097c6a7eafe3b13952aed069e2bb0204f55"
+  },
+  {
+    "name": "libbrotlicommon.so.1",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1",
+    "sha256": "a91ead095d2c80520c55a89057bbe10b031a075340442e63f44b310f93883a1b"
+  },
+  {
+    "name": "libbrotlidec.so.1",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libbrotlidec.so.1",
+    "sha256": "64d8a5019d4c294b89fde1193343ea324bbd8603652554e5545f0a01595fa2c5"
+  },
+  {
+    "name": "libbrotlienc.so.1",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libbrotlienc.so.1",
+    "sha256": "6e59301f6c3a05815ecc6cd8c56714280367da1f6737e9f077f5847d86c509f2"
+  },
+  {
+    "name": "libbz2.so.1.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libbz2.so.1.0",
+    "sha256": "218c4abdabce31161f3c2778762986d1fe06633705c7eb004a740946a5ccdfff"
+  },
+  {
+    "name": "libcups.so.2",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libcups.so.2",
+    "sha256": "df3aa37f2995344a4e0b09d0ee9d98241dadb3e282fe11054899bbb7bcc57eaa"
+  },
+  {
+    "name": "libdeflate.so.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libdeflate.so.0",
+    "sha256": "608c8d7e4345a9ff4b57aa853ce0c355cf2e1d5ec11b8bee86fb4760bba8a15f"
+  },
+  {
+    "name": "libfontconfig.so.1.12.1",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.1",
+    "sha256": "a94b4059b27766f563894c8f7e61762b6f6b2e25c59ef36b730164d4b75c6c98"
+  },
+  {
+    "name": "libfreetype.so.6.20.1",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libfreetype.so.6.20.1",
+    "sha256": "c14c53c5baff12afafb610c6312fb879e9bb77e80dd42e27504d52d6d8bcd059"
+  },
+  {
+    "name": "libjbig.so.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libjbig.so.0",
+    "sha256": "6fea8a26ef5e0d2a36d296d7d0ec0c1f0894bf796b5824317bea88c090833a62"
+  },
+  {
+    "name": "libjpeg.so.8",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libjpeg.so.8",
+    "sha256": "ac09f2cd6f8a3b8e3cb123999ce275f9bcbe31c6cf9e20212c8f297772591d15"
+  },
+  {
+    "name": "libpng16.so.16.43.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libpng16.so.16.43.0",
+    "sha256": "eac265b3506df0d9110dd9143e1d0503e2daabafe1d98b23fac8ca17b71d1f6b"
+  },
+  {
+    "name": "libsharpyuv.so.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libsharpyuv.so.0",
+    "sha256": "b2e62799e5dbd783a0671d53be99f7c6489567a5332a1e8f471e6bb250f294dc"
+  },
+  {
+    "name": "libtiff.so.6.0.1",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libtiff.so.6.0.1",
+    "sha256": "aad9b47982a23560b6f6657adcd70a1141d0971bd4f2eb5b3753745f3e8feee4"
+  },
+  {
+    "name": "libuuid.so.1.3.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libuuid.so.1.3.0",
+    "sha256": "a0fe32d24d125186cf332570770ae749822b5b529d4d4f59222e1aedbc63b58d"
+  },
+  {
+    "name": "libwebp.so.7",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libwebp.so.7",
+    "sha256": "9664db51ec65209078abbb8bc7b699888a43ecc2f3c74ce8dd4e497175aa5bf0"
+  },
+  {
+    "name": "libwebpdemux.so.2",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libwebpdemux.so.2",
+    "sha256": "f31bf01638c352533e18720676db66fcb190a622db5bf617558a49bc445d0b83"
+  },
+  {
+    "name": "libwebpmux.so.3",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libwebpmux.so.3",
+    "sha256": "97e04dbba80ea27d0258584452efda0fa41bfa598bbca52eb4e120fcb6300962"
+  },
+  {
+    "name": "libxcb.so.1.1.0",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0",
+    "sha256": "7958a0136b121bdc4c708968569ad152a9ed208ab026e2537b1005dde64ca440"
+  },
+  {
+    "name": "libzstd.so.1.5.5",
+    "system_source": "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5",
+    "sha256": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb"
+  }
+]

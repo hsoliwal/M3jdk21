@@ -43,10 +43,11 @@ public interface Runnable {
     void run();
 
     /**
-     * The ambient, never-null M3 progress monitor for this execution thread.
+     * Returns the ambient, never-null M3 progress monitor for this execution thread.
      * A pool must bind it explicitly when dispatching work asynchronously.
      *
      * @return the current progress monitor, never {@code null}
+     * @return the current lexical monitor, or the process fallback
      */
     default java.util.concurrent.ProgressMonitor progressMonitor() {
         return java.util.concurrent.ProgressMonitors.current();
