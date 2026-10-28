@@ -1,0 +1,19 @@
+{
+  "schema": "m3jdk21-capability-mapping/1",
+  "capability": "M3JDK21_SOURCE_CLASS_BUILD_DELTA",
+  "canonical_recipe": "com.synexia.m3.M3Jdk21BuildDelta20261020",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "product_repository": "hsoliwal/M3jdk21",
+  "product_module": "com.m3.file",
+  "target_owners": ["com.m3.file.M3File", "com.m3.file.M3FileDelta", "com.m3.file.M3FileDeltaCli"],
+  "existing_compiler_owner": "M3JDK21 M3AST/javac",
+  "existing_persistent_store": "M3JDK21 M3FS",
+  "public_jdk_api": "unchanged",
+  "maven_public_contract": "unchanged; integration pending",
+  "gradle_public_contract": "unchanged; integration pending",
+  "jni_symbols": "unchanged",
+  "receiving_phase": "STRING_ACTIVE_UNCHANGED",
+  "product_disposition": "ADDITIVE_SDK_SOURCE_CANDIDATE_PENDING_INSTALLED_IMAGE_AND_TOOL_FORK_GATES",
+  "evidence_rule": "SHA256 and ABI attestations are candidate-only; compiler/build-system gates control execution and cache reuse",
+  "license": "Apache-2.0 first-party; upstream OpenJDK and third-party terms unchanged"
+}
