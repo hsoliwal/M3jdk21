@@ -1,0 +1,48 @@
+{
+  "schema": "m3-interop-contracts-source-provenance-v1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_home": "synexia-openrewrite-recipes/recipe-crates/m3-interop-contracts-20261020",
+  "named_recipe": "com.synexia.m3jdk.InteropContracts20261020",
+  "engine_revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "engine_identity_manifest": "ENGINE_SOURCES.tsv",
+  "host_source_tree": "0d116e78f354b13e72e0f9a55d3d8fe75f36ed58",
+  "host_sources": [
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/pom.xml",
+      "git_blob": "69aae091198ef3df9d9077c490b390e9db37dcd5",
+      "sha256": "34ad1632fb9f2ac5e77102b9478fb121d21646af6613584211e583cb6534c1ed"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/receive.py",
+      "git_blob": "7b441c78df78c5c0dcc2f8a3526d588981880037",
+      "sha256": "24ce6011c0bc7d89fc863f8f809740b24d943cb40c5aaf9aba03adf0f222dadf"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "git_blob": "3ff7e6f49fd75a34d0991ced8d069b956da0ee49",
+      "sha256": "015e2f8257c6e2b5573cecb32929cfbc8a41766a2bac4446172ccfab28b7ebb3"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/src/main/resources/META-INF/rewrite/m3-runtime-convergence-20261020.yml",
+      "git_blob": "192062b78bf98b51709d3b13a5486236b2a0b895",
+      "sha256": "d5a4cbda1bd9a9530cc365d9930cdd728d0a4043a03b073893bb8ebb36080da6"
+    }
+  ],
+  "receiver_and_test_source_ancestry": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "target_repository": "hsoliwal/M3JDK21",
+  "source_preimage_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 first-party; donor API and binary rights unchanged",
+  "scope": "12 existing test/documentation paths; no production owner, JNI ABI, or runtime behavior change",
+  "target_count": 12,
+  "promotion": false,
+  "changes": [
+    "POM/descriptor identity and removal of unrelated main-runtime contract profile",
+    "Four canonical SDK engine files, qualification test and receiver reused byte-exact",
+    "Exact sealed test/documentation successors; target acceptance is separate"
+  ],
+  "host_source_revision": "2fc0a939882de871a2d64120df1183da330f6846",
+  "host_source_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12616",
+  "intended_target_parent_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+  "target_parent_pull_request": "https://github.com/hsoliwal/M3JDK21/pull/1616"
+}

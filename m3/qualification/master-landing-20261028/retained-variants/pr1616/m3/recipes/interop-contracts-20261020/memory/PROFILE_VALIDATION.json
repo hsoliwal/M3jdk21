@@ -1,0 +1,173 @@
+{
+  "schema": "m3-interop-memory-profile-validation/1",
+  "recorded_utc": "2026-10-20T15:06:14Z",
+  "result": "PASS",
+  "event_count": 13,
+  "checks": [
+    {
+      "name": "all32 control codepoints use six-character lowercase escapes",
+      "result": "PASS"
+    },
+    {
+      "name": "quote backslash escaped; solidus literal",
+      "result": "PASS"
+    },
+    {
+      "name": "Unicode scalars retained without normalization",
+      "result": "PASS"
+    },
+    {
+      "name": "signed64 extremes accepted",
+      "result": "PASS"
+    },
+    {
+      "name": "reject high surrogate",
+      "result": "PASS"
+    },
+    {
+      "name": "reject low surrogate",
+      "result": "PASS"
+    },
+    {
+      "name": "reject int64 overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "reject int64 underflow",
+      "result": "PASS"
+    },
+    {
+      "name": "reject float",
+      "result": "PASS"
+    },
+    {
+      "name": "reject NaN",
+      "result": "PASS"
+    },
+    {
+      "name": "reject infinity",
+      "result": "PASS"
+    },
+    {
+      "name": "reject nonASCII key",
+      "result": "PASS"
+    },
+    {
+      "name": "recursive ASCII key ordering",
+      "result": "PASS"
+    },
+    {
+      "name": "duplicate key parse refused",
+      "result": "PASS"
+    },
+    {
+      "name": "negative zero is noncanonical on readback",
+      "result": "PASS"
+    },
+    {
+      "name": "short control escape is noncanonical on readback",
+      "result": "PASS"
+    },
+    {
+      "name": "BOM refused",
+      "result": "PASS"
+    },
+    {
+      "name": "all13 event schema/canonical bytes/hash/known links/artifact seals/literal triggers",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unknown top-level field",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unknown nested field",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unknown event version",
+      "result": "PASS"
+    },
+    {
+      "name": "reject missing parent",
+      "result": "PASS"
+    },
+    {
+      "name": "reject duplicate parents",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsorted parents",
+      "result": "PASS"
+    },
+    {
+      "name": "reject duplicate supersedes",
+      "result": "PASS"
+    },
+    {
+      "name": "reject artifact tampering",
+      "result": "PASS"
+    }
+  ],
+  "events": [
+    {
+      "attempt_id": "I01",
+      "sha256": "ee071b4132782516cdd5ee304bc869f299cb52cfa881ec9c8f0beac83e16d072"
+    },
+    {
+      "attempt_id": "I02",
+      "sha256": "24786c8b590bde6fe94dcb865e78fd4242f322c44b985bd50a3efda3a7ee1a09"
+    },
+    {
+      "attempt_id": "I03",
+      "sha256": "f7b209f68864cdd7417cfeeec0b0901c88db14903c622eac40bb16136892935a"
+    },
+    {
+      "attempt_id": "I04",
+      "sha256": "f77b630374999e2d50c9a49939e961dd7cdf09dde34707ec110443ba2e809d23"
+    },
+    {
+      "attempt_id": "I05",
+      "sha256": "1065322ea5b699008100f642ac18dd8df0b83ffc0f5543241ccbd4207f95cc16"
+    },
+    {
+      "attempt_id": "I06",
+      "sha256": "cca3fb58337b1ac29879a1af19196da2da0a1c9d2a2b5df7f5301f3d7b153a4c"
+    },
+    {
+      "attempt_id": "I07",
+      "sha256": "16a2d3f22742d2b42770033a3cbdceccf972869fbeda533566f36c28127ed311"
+    },
+    {
+      "attempt_id": "I08",
+      "sha256": "e8a398c2bb8b7cf896582c3161f55b55aa534d80bf047492833aacb9e428cc22"
+    },
+    {
+      "attempt_id": "I09",
+      "sha256": "0d7e6963d17810602eb1e2e28b4713294281cd2a7837b006957bcaedd6762d6b"
+    },
+    {
+      "attempt_id": "I10",
+      "sha256": "466fe49c5acfd687b4bd1c4ff2fcc4307c090e06e6effee91a6d89de963789ce"
+    },
+    {
+      "attempt_id": "I11",
+      "sha256": "57fdf2fd940bdafb762fffc4256cc8adbdba6f8314a85c4c4db916e24dd3e2b4"
+    },
+    {
+      "attempt_id": "I12",
+      "sha256": "f4166594d561051d0e47cd8f85e23785ad7300c0cee0f997664dd6835da0f003"
+    },
+    {
+      "attempt_id": "I13",
+      "sha256": "670bfcaa612ce3ca81d23be02b7c3701fd4695857e3d5410209222dd4f806ab0"
+    }
+  ],
+  "serializer_scope": "Existing bounded one-off authoring helpers applied to this immutable packet; no deployed generic serializer",
+  "schema_sha256": "2e162589dbc1e2c3efb2f69d91cd00f575de797963b3d3fafc57dc855f068a93",
+  "profile_reference_sha256": "421c6daef60a77526143a0488d13e4e890bab56c256d3b71686a15ae0f479fbb",
+  "target_count": 13,
+  "candidate_set_sha256": "05f397c6181992c354c6113aca7e2f9039bb8c835bef8e5c14a286ec526176eb",
+  "admission_granted": false,
+  "phase_promotion": false
+}

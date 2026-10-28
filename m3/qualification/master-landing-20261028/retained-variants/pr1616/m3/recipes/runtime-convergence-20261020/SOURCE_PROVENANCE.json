@@ -1,0 +1,59 @@
+{
+  "schema": "m3-runtime-convergence-source-provenance-v1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 first-party; embedded target and donor rights unchanged",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_base_revision": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "upstream_host": "synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017",
+  "host_sources": [
+    {
+      "path": "pom.xml",
+      "git_blob": "be7c8e672367ed3be485168ae3637e57b78ba1cd"
+    },
+    {
+      "path": "receive.py",
+      "git_blob": "7b441c78df78c5c0dcc2f8a3526d588981880037"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "git_blob": "3ff7e6f49fd75a34d0991ced8d069b956da0ee49"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-deep-filter-list-20261017.yml",
+      "git_blob": "9b8911eb63500fbc121092cc858e294a0c8c5c93"
+    },
+    {
+      "path": "NOTICE.md",
+      "git_blob": "c6daa46cc49ded9a53a2fb07eb2f89ecf7bef13d"
+    }
+  ],
+  "engine_revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "engine_identity_manifest": "ENGINE_SOURCES.tsv",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base_revision": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "task_crate": "m3-runtime-convergence-20261020",
+  "changes": [
+    "POM: new crate/artifact/recipe identity; remove predecessor-specific contract profile",
+    "YAML: new name and bounded task description; unchanged canonical engine composition",
+    "test and receiver: exact upstream bytes",
+    "sdk-owner: exact pinned canonical engine sources",
+    "Exact in-crate SDK owner is the canonical and receiving default; current shared sources have evolved",
+    "Received-owner Maven contract profile with fresh owning compiler output",
+    "29 reviewed source-sealed targets,19 Java and10 native/text, with per-file donor and coverage records"
+  ],
+  "source_status": "SDK_EXECUTION_PASS_TARGET_QUALIFICATION_PENDING",
+  "promotion": false,
+  "manifest_target_count": 29,
+  "disclosure_record": "provenance/PUBLICATION_SCOPE.md",
+  "receiving_git_parent": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+  "source_preimage_revision": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "upstream_advance": {
+    "status": "PRESERVED_THREE_DOCUMENT_ONLY_CHANGES",
+    "paths": [
+      "m3/docs/common-jni-platform-contract.md",
+      "m3/docs/mobile-inplace-swt-swing-skija-20261019.md",
+      "m3/docs/native-build.md"
+    ],
+    "all_recipe_preimages_unchanged": true
+  }
+}

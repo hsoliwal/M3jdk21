@@ -1,0 +1,2225 @@
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+index 10c4d16..2e51db7 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+@@ -7,6 +7,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ import java.util.Collection;
+ import java.util.Collections;
+ import java.util.Comparator;
++import java.util.ConcurrentModificationException;
+ import java.util.Iterator;
+ import java.util.List;
+ import java.util.ListIterator;
+@@ -370,9 +371,40 @@
+             @Override public int nextIndex() { live(); return logical; }
+             @Override public int previousIndex() { live(); return logical - 1; }
+ 
++            /** Validate the original cursor without changing its physical position.
++             * Keep writes on the backing List: a writable list may expose an
++             * unmodifiable/snapshot iterator. A bounded provider can refuse next()
++             * at its end before checking structural generation, so probe the reverse
++             * direction as well. Return true only when neither direction has an element.
++             */
++            private boolean checkForComodification() {
++                try {
++                    try {
++                        iterator.next();
++                    } catch (NoSuchElementException exhausted) {
++                        try {
++                            iterator.previous();
++                        } catch (NoSuchElementException empty) {
++                            if (lastPhysical >= 0) {
++                                throw new ConcurrentModificationException("delivered element disappeared");
++                            }
++                            return true;
++                        }
++                        iterator.next();
++                        return false;
++                    }
++                    iterator.previous();
++                    return false;
++                } catch (RuntimeException | Error failure) {
++                    failed = true;
++                    throw failure;
++                }
++            }
++
+             @Override public void remove() {
+                 live();
+                 if (lastPhysical < 0) throw new IllegalStateException("remove without delivered element");
++                checkForComodification();
+                 int target = lastPhysical;
+                 int position = iterator.nextIndex();
+                 backing.remove(target);
+@@ -388,6 +420,7 @@
+                 live();
+                 if (lastPhysical < 0) throw new IllegalStateException("set without delivered element");
+                 requireAccepted(value);
++                checkForComodification();
+                 backing.set(lastPhysical, value);
+                 discardProbes();
+             }
+@@ -395,8 +428,23 @@
+             @Override public void add(E value) {
+                 live();
+                 requireAccepted(value);
++                boolean empty = checkForComodification();
+                 int position = iterator.nextIndex();
+-                backing.add(position, value);
++                if (empty) {
++                    // Empty bounded iterators may bypass generation checks in both
++                    // traversal directions. Let their own insertion validate and write.
++                    // Snapshot iterators can forbid writes on an editable backing list.
++                    try {
++                        iterator.add(value);
++                    } catch (UnsupportedOperationException unsupported) {
++                        backing.add(position, value);
++                    } catch (ConcurrentModificationException invalidated) {
++                        failed = true;
++                        throw invalidated;
++                    }
++                } else {
++                    backing.add(position, value);
++                }
+                 iterator = backing.listIterator(position + 1);
+                 logical++;
+                 lastPhysical = -1;
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
+index d84e5ab..63c44f6 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
+@@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Modified 2026 by Hitesh Soliwal and contributors: restore strict sequenced refusal and original backed reversal.
+ // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+ // SPDX-License-Identifier: Apache-2.0
+ package com.m3.collections;
+@@ -98,6 +99,8 @@
+     @Override public boolean retainAll(Collection<?> values) { throw readonly(); }
+     @Override public boolean removeIf(Predicate<? super E> predicate) { throw readonly(); }
+     @Override public void clear() { throw readonly(); }
++    @Override public E removeFirst() { throw readonly(); }
++    @Override public E removeLast() { throw readonly(); }
+     @Override public E pollFirst() { throw readonly(); }
+     @Override public E pollLast() { throw readonly(); }
+ }
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+index 1a31827..b9eb9c7 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+@@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Modified 2026 by Hitesh Soliwal and contributors: restore strict sequenced refusal and original backed reversal.
+ // Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
+ // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+ /*
+@@ -313,9 +314,14 @@
+         @Override public SortedSet<E> tailSet(E from) {
+             return new SortedSetView<>(sorted.tailSet(from), predicate);
+         }
++        @Override public SortedSet<E> reversed() {
++            return readOnlySortedSet(SortedSet.super.reversed());
++        }
+         // An explicit read-only boundary refuses even empty endpoint mutations.
+         @Override public void addFirst(E value) { throw readonly(); }
+         @Override public void addLast(E value) { throw readonly(); }
++        @Override public E removeFirst() { throw readonly(); }
++        @Override public E removeLast() { throw readonly(); }
+         @Override public E first() { return iterator().next(); }
+         @Override public E last() {
+             Iterator<E> iterator = iterator();
+@@ -395,6 +401,7 @@
+         }
+         @Override public E pollFirst() { throw readonly(); }
+         @Override public E pollLast() { throw readonly(); }
++        @Override public NavigableSet<E> reversed() { return descendingSet(); }
+         @Override public NavigableSet<E> descendingSet() {
+             return new NavigableSetView<>(nav.descendingSet(), predicate);
+         }
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java b/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+index b81b069..daea60b 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+@@ -141,23 +141,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+     public static long[] selectLong(long[] orderedRows, byte[] rowStates, int requiredMask) {
+         Objects.requireNonNull(orderedRows, "orderedRows");
+         validate(rowStates, orderedRows.length, requiredMask);
+-        int selectedCount = countSelected(rowStates, requiredMask);
+-        // Every row is selected: one defensive primitive copy, no second mask scan.
+-        if (selectedCount == orderedRows.length) return orderedRows.clone();
+-        long[] selected = new long[selectedCount];
+-        int written = 0;
+-        for (int i = 0; i < orderedRows.length; i++) {
+-            if (matches(rowStates[i], requiredMask)) {
+-                if (written == selected.length) {
+-                    throw new ConcurrentModificationException("aligned selection states changed");
+-                }
+-                selected[written++] = orderedRows[i];
+-            }
+-        }
+-        if (written != selected.length) {
+-            throw new ConcurrentModificationException("aligned selection states changed");
+-        }
+-        return selected;
++        return selectLongWindowJava(orderedRows, 0, rowStates, 0, orderedRows.length, requiredMask);
+     }
+ 
+     /** Validate before an in-place primitive owner writes a single resident slot. */
+@@ -202,23 +186,7 @@
+      * or per-element object. Caller must keep both input arrays stable during use.
+      */
+     static int[] selectJava(int[] orderedRows, byte[] rowStates, int requiredMask) {
+-        int selectedCount = countSelected(rowStates, requiredMask);
+-        // Retain output isolation even when the mask selects every source index.
+-        if (selectedCount == orderedRows.length) return orderedRows.clone();
+-        int[] selected = new int[selectedCount];
+-        int written = 0;
+-        for (int i = 0; i < orderedRows.length; i++) {
+-            if (matches(rowStates[i], requiredMask)) {
+-                if (written == selected.length) {
+-                    throw new ConcurrentModificationException("aligned selection states changed");
+-                }
+-                selected[written++] = orderedRows[i];
+-            }
+-        }
+-        if (written != selected.length) {
+-            throw new ConcurrentModificationException("aligned selection states changed");
+-        }
+-        return selected;
++        return selectIntWindowJava(orderedRows, 0, rowStates, 0, orderedRows.length, requiredMask);
+     }
+ 
+     /** Exact-sized logical-position selection; no O(n) identity input scratch. */
+@@ -273,6 +241,32 @@
+             return selectWindowNative(orderedRows, rowOffset, states, stateOffset,
+                     length, requiredMask);
+         }
++        return selectIntWindowJava(orderedRows, rowOffset, states, stateOffset, length, requiredMask);
++    }
++
++    /** Primitive-long counterpart, preserving signed extremes and duplicates. */
++    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
++                                          byte[] states, int stateOffset, int length,
++                                          int requiredMask, Backend backend) {
++        Objects.requireNonNull(orderedRows, "orderedRows");
++        Objects.requireNonNull(states, "states");
++        Objects.requireNonNull(backend, "backend");
++        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
++        Objects.checkFromIndexSize(stateOffset, length, states.length);
++        requireMask(requiredMask);
++        if (backend == Backend.NATIVE_REQUIRED) {
++            if (!NativeLibrary.AVAILABLE) {
++                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
++            }
++            return selectLongWindowNative(orderedRows, rowOffset, states, stateOffset,
++                    length, requiredMask);
++        }
++        return selectLongWindowJava(orderedRows, rowOffset, states, stateOffset, length, requiredMask);
++    }
++
++    /** Stable int emission shared by existing checked callers; no retained input. */
++    private static int[] selectIntWindowJava(int[] orderedRows, int rowOffset,
++            byte[] states, int stateOffset, int length, int requiredMask) {
+         int kept = countWindow(states, stateOffset, length, requiredMask);
+         if (kept == length) {
+             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
+@@ -293,23 +287,9 @@
+         return selected;
+     }
+ 
+-    /** Primitive-long counterpart, preserving signed extremes and duplicates. */
+-    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
+-                                          byte[] states, int stateOffset, int length,
+-                                          int requiredMask, Backend backend) {
+-        Objects.requireNonNull(orderedRows, "orderedRows");
+-        Objects.requireNonNull(states, "states");
+-        Objects.requireNonNull(backend, "backend");
+-        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+-        Objects.checkFromIndexSize(stateOffset, length, states.length);
+-        requireMask(requiredMask);
+-        if (backend == Backend.NATIVE_REQUIRED) {
+-            if (!NativeLibrary.AVAILABLE) {
+-                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+-            }
+-            return selectLongWindowNative(orderedRows, rowOffset, states, stateOffset,
+-                    length, requiredMask);
+-        }
++    /** Stable long emission shared by existing checked callers; no retained input. */
++    private static long[] selectLongWindowJava(long[] orderedRows, int rowOffset,
++            byte[] states, int stateOffset, int length, int requiredMask) {
+         int kept = countWindow(states, stateOffset, length, requiredMask);
+         if (kept == length) {
+             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java b/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
+index 317136e..4191858 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
+@@ -21,7 +21,8 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+  * <p>Unlike M3's live collection wrappers this class is a detached snapshot.
+  * Its methods never refresh when a mutable source changes. It does not replace
+  * {@code java.util} or claim compatible serialized concrete class identity.
+- * Reordering is O(n log n) time and O(n) index scratch; indexed reads O(1).
++ * Unordered sorting is O(n log n) with O(n) index scratch; reversing a known
++ * sorted direction is O(n) with one final index array. Indexed reads are O(1).
+  * Native mask selection is opt-in via the existing M3IndexMaskCompactor JNI.</p>
+  */
+ public final class M3LongIndexProjection {
+@@ -142,6 +143,24 @@
+             // immutable directory already in the requested order or copy its window.
+             return new M3LongIndexProjection(values, indices, from, to, requested);
+         }
++        if (order != Order.ENCOUNTER) {
++            // Reverse the ORDER OF EQUAL-VALUE RUNS, not the occurrences in a run.
++            // The immutable window is already sorted in the opposite direction.
++            // One final index array, O(n) work and no merge scratch or payload copy.
++            int[] reversed = new int[size()];
++            int write = 0;
++            for (int end = to; end > from;) {
++                int begin = end - 1;
++                long value = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[begin]);
++                while (begin > from && M3LongAddressKernel.loadPhysicalUnchecked(
++                        values, indices[begin - 1]) == value) begin--;
++                int count = end - begin;
++                System.arraycopy(indices, begin, reversed, write, count);
++                write += count;
++                end = begin;
++            }
++            return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
++        }
+         int[] current = physicalIndices();
+         int size = current.length;
+         if (size < 2) {
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java
+new file mode 100644
+index 0000000..0801984
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java
+@@ -0,0 +1,130 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * Copyright 2026 Hitesh Soliwal and contributors.
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import java.util.ArrayList;
++import java.util.Collections;
++import java.util.Comparator;
++import java.util.List;
++import java.util.NavigableSet;
++import java.util.Objects;
++import java.util.SortedSet;
++import java.util.TreeSet;
++import java.util.concurrent.atomic.AtomicInteger;
++import java.util.function.Predicate;
++
++/**
++ * Original-owner regression for the historical strict read-only endpoint contract.
++ * Inherited JDK defaults inspect emptiness before refusing, which both exposes a
++ * callback and produces the wrong exception for an empty filtered result.
++ * The public compatibility type, private sorted owner, and private navigable owner
++ * must all refuse before inspecting the source. No payload or native bridge is mocked.
++ */
++public final class M3FilteredEndpointRestorationContract {
++    private static int checks;
++
++    private M3FilteredEndpointRestorationContract() { }
++
++    private static void equal(Object expected, Object actual, String label) {
++        checks++;
++        if (!Objects.equals(expected, actual)) {
++            throw new AssertionError(label + ": expected=" + expected + " actual=" + actual);
++        }
++    }
++
++    private static void refuse(Runnable operation, AtomicInteger predicates,
++            AtomicInteger comparisons, String label) {
++        predicates.set(0);
++        comparisons.set(0);
++        checks++;
++        try {
++            operation.run();
++            throw new AssertionError(label + " accepted a strict read-only mutation");
++        } catch (UnsupportedOperationException expected) {
++            equal(0, predicates.get(), label + " predicate demand");
++            equal(0, comparisons.get(), label + " comparator demand");
++        }
++    }
++
++    private static SortedSet<Integer> filter(int family, TreeSet<Integer> source,
++            Predicate<Integer> predicate) {
++        return switch (family) {
++            case 0 -> M3FilteredViews.filter(Collections.unmodifiableSortedSet(source), predicate);
++            case 1 -> M3FilteredViews.filter((NavigableSet<Integer>) source, predicate);
++            case 2 -> M3FilteredNavigableSet.view(source, predicate);
++            default -> throw new AssertionError("unknown owner family");
++        };
++    }
++
++    private static void strictEndpoints(int firstFamily, int lastFamily) {
++        for (int family = firstFamily; family <= lastFamily; family++) {
++            for (boolean populated : List.of(false, true)) {
++                for (boolean accept : List.of(false, true)) {
++                    AtomicInteger predicates = new AtomicInteger();
++                    AtomicInteger comparisons = new AtomicInteger();
++                    Comparator<Integer> order = (left, right) -> {
++                        comparisons.incrementAndGet();
++                        return Integer.compare(left, right);
++                    };
++                    TreeSet<Integer> source = new TreeSet<>(order);
++                    if (populated) source.addAll(List.of(1, 2, 3, 4));
++                    Predicate<Integer> predicate = value -> {
++                        predicates.incrementAndGet();
++                        return accept;
++                    };
++                    SortedSet<Integer> view = filter(family, source, predicate);
++                    SortedSet<Integer> reverse = view.reversed();
++                    List<SortedSet<Integer>> forms = List.of(view, reverse,
++                            reverse.reversed(), view.headSet(3), view.tailSet(1),
++                            view.subSet(1, 3), reverse.headSet(1), reverse.tailSet(3),
++                            reverse.subSet(3, 1));
++                    List<Integer> before = new ArrayList<>(source);
++                    for (int index = 0; index < forms.size(); index++) {
++                        SortedSet<Integer> form = forms.get(index);
++                        String label = "family=" + family + " populated=" + populated
++                                + " accept=" + accept + " form=" + index;
++                        refuse(form::removeFirst, predicates, comparisons, label + " removeFirst");
++                        refuse(form::removeLast, predicates, comparisons, label + " removeLast");
++                        refuse(() -> form.addFirst(99), predicates, comparisons, label + " addFirst");
++                        refuse(() -> form.addLast(99), predicates, comparisons, label + " addLast");
++                        if (form instanceof NavigableSet<Integer> nav) {
++                            refuse(nav::pollFirst, predicates, comparisons, label + " pollFirst");
++                            refuse(nav::pollLast, predicates, comparisons, label + " pollLast");
++                        }
++                        equal(before, new ArrayList<>(source), label + " owner unchanged");
++                    }
++                }
++            }
++        }
++    }
++
++    private static void facadeRemainsLive() {
++        TreeSet<Integer> source = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6));
++        NavigableSet<Integer> view = M3FilteredNavigableSet.view(source, value -> (value & 1) == 0);
++        NavigableSet<Integer> reverse = view.reversed();
++        NavigableSet<Integer> range = view.subSet(2, true, 8, true);
++        equal(true, reverse instanceof M3FilteredNavigableSet<?>, "reverse retains established type");
++        equal(true, range instanceof M3FilteredNavigableSet<?>, "range retains established type");
++        equal(List.of(6, 4, 2), new ArrayList<>(reverse), "reverse selected order");
++        source.add(8);
++        source.remove(4);
++        equal(List.of(8, 6, 2), new ArrayList<>(reverse), "reverse sees owner mutations");
++        equal(List.of(2, 6, 8), new ArrayList<>(range), "range sees owner mutations");
++        equal(Integer.valueOf(6), view.floor(7), "floor retains owner navigation");
++        equal(Integer.valueOf(8), view.ceiling(7), "ceiling retains owner navigation");
++    }
++
++    public static void main(String[] args) {
++        String mode = args.length == 0 ? "all" : args[0];
++        if (args.length > 1) throw new IllegalArgumentException("one optional mode");
++        switch (mode) {
++            case "all" -> { strictEndpoints(0, 2); facadeRemainsLive(); }
++            case "private" -> strictEndpoints(0, 1);
++            case "facade" -> { strictEndpoints(2, 2); facadeRemainsLive(); }
++            default -> throw new IllegalArgumentException("unknown mode " + mode);
++        }
++        System.out.println("PASS M3FilteredEndpointRestorationContract mode=" + mode + " checks=" + checks);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java
+new file mode 100644
+index 0000000..e144a52
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java
+@@ -0,0 +1,14 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * Copyright 2026 Hitesh Soliwal and contributors.
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++/** Owning-module entry point for the original-owner endpoint regression corpus. */
++final class M3FilteredEndpointRestorationTest {
++    @Test void restoresStrictEndpointsAcrossPrivateAndPublicOwners() {
++        M3FilteredEndpointRestorationContract.main(new String[0]);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationProof.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationProof.java
+new file mode 100644
+index 0000000..5a1e46a
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationProof.java
+@@ -0,0 +1,173 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collections;
++import java.util.ConcurrentModificationException;
++import java.util.LinkedList;
++import java.util.List;
++import java.util.ListIterator;
++import java.util.Objects;
++import java.util.Random;
++import java.util.concurrent.CopyOnWriteArrayList;
++import java.util.function.Predicate;
++
++/** Same-thread fail-fast, optional-write and physical-occurrence regression oracle. */
++public final class M3FilteredListMutationProof {
++    private static int checks;
++    private M3FilteredListMutationProof() { }
++    private static void check(boolean condition, String message) {
++        checks++;
++        if (!condition) throw new AssertionError(message);
++    }
++    private static void equal(Object actual, Object expected, String message) {
++        check(Objects.equals(actual, expected), message + ": " + actual + " != " + expected);
++    }
++    private static void expect(Class<? extends Throwable> type, Runnable operation) {
++        checks++;
++        try { operation.run(); }
++        catch (Throwable failure) {
++            if (type.isInstance(failure)) return;
++            throw new AssertionError("expected " + type + ", got " + failure, failure);
++        }
++        throw new AssertionError("missing " + type.getSimpleName() + " before mutation");
++    }
++    private static List<Integer> list(int kind, List<Integer> values) {
++        return switch (kind) {
++            case 0 -> new ArrayList<>(values);
++            case 1 -> new LinkedList<>(values);
++            case 2 -> Collections.synchronizedList(new ArrayList<>(values));
++            default -> throw new AssertionError(kind);
++        };
++    }
++    private static void mutate(ListIterator<Integer> cursor, int operation) {
++        switch (operation) {
++            case 0 -> cursor.remove();
++            case 1 -> cursor.set(80);
++            case 2 -> cursor.add(80);
++            default -> throw new AssertionError(operation);
++        }
++    }
++    private static void invalidation() {
++        for (int kind = 0; kind < 3; kind++) {
++            for (int direction = 0; direction < 2; direction++) {
++                for (int probing = 0; probing < 4; probing++) {
++                    for (int operation = 0; operation < 3; operation++) {
++                        List<Integer> backing = list(kind, List.of(1, 2, 3, 4, 5));
++                        List<Integer> filtered = M3FilteredLists.filtered(backing, n -> n % 2 == 0);
++                        ListIterator<Integer> cursor = filtered.listIterator(direction == 0 ? 0 : 2);
++                        equal(direction == 0 ? cursor.next() : cursor.previous(), direction == 0 ? 2 : 4, "delivered");
++                        if ((probing & 1) != 0) cursor.hasNext();
++                        if ((probing & 2) != 0) cursor.hasPrevious();
++                        backing.add(0, 6);
++                        List<Integer> unchanged = new ArrayList<>(backing);
++                        final int op = operation;
++                        expect(ConcurrentModificationException.class, () -> mutate(cursor, op));
++                        equal(backing, unchanged, "invalidated mutation must not write");
++                    }
++                }
++            }
++            // Exhausted and empty cursors still require the original owner's check.
++            for (int size : new int[]{0, 1, 3}) {
++                List<Integer> backing = list(kind, Collections.nCopies(size, 2));
++                ListIterator<Integer> cursor = M3FilteredLists.filtered(backing, n -> true).listIterator(size);
++                backing.add(2);
++                backing.remove(backing.size() - 1); // same size, different structural generation
++                expect(ConcurrentModificationException.class, () -> cursor.add(8));
++                equal(backing.size(), size, "exhausted cursor nonmutation");
++            }
++        }
++    }
++    private static void optionalWrites() {
++        List<Integer> fixed = Arrays.asList(1, 2, 3, 4);
++        ListIterator<Integer> cursor = M3FilteredLists.filtered(fixed, n -> n % 2 == 0).listIterator();
++        equal(cursor.next(), 2, "fixed list next");
++        cursor.hasNext(); cursor.hasPrevious(); cursor.set(6);
++        equal(fixed, List.of(1, 6, 3, 4), "fixed list set");
++        expect(UnsupportedOperationException.class, cursor::remove);
++        ListIterator<Integer> fixedCursor = cursor;
++        expect(UnsupportedOperationException.class, () -> fixedCursor.add(8));
++        // Its iterator forbids writes, but existing M3 backing-list mutation is supported.
++        List<Integer> copyOnWrite = new CopyOnWriteArrayList<>(List.of(1, 2, 3, 4));
++        cursor = M3FilteredLists.filtered(copyOnWrite, n -> n % 2 == 0).listIterator();
++        equal(cursor.next(), 2, "snapshot owner next");
++        cursor.hasNext(); cursor.set(6); cursor.remove(); cursor.add(8);
++        equal(copyOnWrite, List.of(1, 8, 3, 4), "backing write support retained");
++        List<Integer> protectedList = M3FilteredLists.readOnlyFiltered(new ArrayList<>(List.of(2)), n -> true);
++        ListIterator<Integer> readOnly = protectedList.listIterator();
++        readOnly.next();
++        expect(UnsupportedOperationException.class, readOnly::remove);
++        expect(UnsupportedOperationException.class, () -> readOnly.set(4));
++        expect(UnsupportedOperationException.class, () -> readOnly.add(4));
++    }
++    private static boolean accepted(Integer value) { return value == null || (value & 1) == 0; }
++    private static List<Integer> selected(List<Integer> values) {
++        List<Integer> result = new ArrayList<>();
++        for (Integer value : values) if (accepted(value)) result.add(value);
++        return result;
++    }
++    private static void randomized() {
++        for (int kind = 0; kind < 2; kind++) for (int seed = 0; seed < 96; seed++) {
++            Random random = new Random(seed * 71L + kind);
++            List<Integer> model = new ArrayList<>(Arrays.asList(1, 2, null, 3, 4, 5, 2));
++            List<Integer> backing = list(kind, model);
++            int[] callbacks = {0};
++            Predicate<Integer> predicate = n -> { callbacks[0]++; return accepted(n); };
++            List<Integer> view = M3FilteredLists.filtered(backing, predicate);
++            ListIterator<Integer> cursor = view.listIterator();
++            int position = 1, last = -1, logical = 0;
++            boolean lastNext = false;
++            for (int step = 0; step < 600; step++) {
++                int next = position, previous = position - 1;
++                while (next < model.size() && !accepted(model.get(next))) next++;
++                while (previous >= 0 && !accepted(model.get(previous))) previous--;
++                equal(cursor.hasNext(), next < model.size(), "hasNext");
++                equal(cursor.hasPrevious(), previous >= 0, "hasPrevious");
++                int op = random.nextInt(5);
++                if (op == 0 && next < model.size()) {
++                    equal(cursor.next(), model.get(next), "next occurrence");
++                    last = next; position = next + 1; logical++; lastNext = true;
++                } else if (op == 1 && previous >= 0) {
++                    equal(cursor.previous(), model.get(previous), "previous occurrence");
++                    last = previous; position = previous; logical--; lastNext = false;
++                } else if (op == 2 && last >= 0) {
++                    int before = callbacks[0]; cursor.remove();
++                    equal(callbacks[0], before, "guard must not invoke predicate on remove");
++                    model.remove(last); if (last < position) position--;
++                    if (lastNext) logical--; last = -1;
++                } else if (op == 3 && last >= 0) {
++                    Integer value = random.nextInt(6) == 0 ? null : random.nextInt(8) * 2;
++                    int before = callbacks[0]; cursor.set(value);
++                    equal(callbacks[0], before + 1, "one accepted-write predicate");
++                    model.set(last, value);
++                } else if (op == 4) {
++                    Integer value = random.nextInt(6) == 0 ? null : random.nextInt(8) * 2;
++                    int before = callbacks[0]; cursor.add(value);
++                    equal(callbacks[0], before + 1, "one insertion predicate");
++                    model.add(position++, value); logical++; last = -1;
++                }
++                equal(backing, model, "physical sequence and hidden occurrences");
++                equal(cursor.nextIndex(), logical, "next logical index");
++                equal(cursor.previousIndex(), logical - 1, "previous logical index");
++                equal(view, selected(model), "live view sequence");
++            }
++        }
++    }
++    private static void boundedAndSorted() {
++        List<Integer> owner = new ArrayList<>(List.of(9, 8, 7, 6, 5, 4, 3, 2, 1));
++        List<Integer> span = owner.subList(1, 8);
++        List<Integer> filtered = M3FilteredLists.filtered(span, n -> (n & 1) == 0);
++        filtered.sort(null);
++        equal(owner, List.of(9, 2, 7, 4, 5, 6, 3, 8, 1), "sort only selected physical occurrences");
++        ListIterator<Integer> reverse = filtered.reversed().listIterator();
++        equal(reverse.next(), 8, "reversed next");
++        reverse.hasNext(); reverse.hasPrevious(); reverse.set(10); reverse.remove(); reverse.add(12);
++        equal(filtered.reversed(), List.of(12, 6, 4, 2), "reversed cursor edits");
++    }
++    public static void main(String[] args) {
++        invalidation(); optionalWrites(); randomized(); boundedAndSorted();
++        System.out.println("M3_FILTERED_LIST_MUTATION_PASS checks=" + checks);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationTest.java
+new file mode 100644
+index 0000000..e024c16
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationTest.java
+@@ -0,0 +1,11 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++final class M3FilteredListMutationTest {
++    @Test void cursorMutationContract() {
++        M3FilteredListMutationProof.main(new String[0]);
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredListProviderInvalidationTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredListProviderInvalidationTest.java
+new file mode 100644
+index 0000000..4e22f9c
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredListProviderInvalidationTest.java
+@@ -0,0 +1,159 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
++
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collections;
++import java.util.ConcurrentModificationException;
++import java.util.LinkedList;
++import java.util.List;
++import java.util.ListIterator;
++import java.util.concurrent.CopyOnWriteArrayList;
++import org.junit.jupiter.api.Test;
++
++/** The original provider iterator owns structural invalidation, including bounded ends. */
++class M3FilteredListProviderInvalidationTest {
++    @Test
++    void exhaustedNonemptySublistMutationsMatchOriginalProviderRefusal() {
++        for (boolean nested : List.of(false, true)) {
++            for (int operation = 0; operation < 3; operation++) {
++                List<Integer> owner = new LinkedList<>(List.of(0, 2, 4, 6));
++                List<Integer> span = span(owner, nested, false);
++                ListIterator<Integer> raw = span.listIterator();
++                ListIterator<Integer> filtered = M3FilteredLists.filtered(span, x -> true).listIterator();
++                assertEquals(raw.next(), filtered.next());
++                assertEquals(raw.next(), filtered.next());
++                span.add(0, 8);
++                span.remove(2);
++                List<Integer> before = new ArrayList<>(owner);
++                int selected = operation;
++                assertThrows(ConcurrentModificationException.class, () -> mutate(raw, selected));
++                assertThrows(ConcurrentModificationException.class, () -> mutate(filtered, selected));
++                assertEquals(before, owner, "invalidated writes must not target a replacement occurrence");
++            }
++        }
++    }
++
++    @Test
++    void emptySublistAddMatchesOriginalProviderGenerationCheck() {
++        for (boolean nested : List.of(false, true)) {
++            List<Integer> owner = new LinkedList<>(List.of(0, 6));
++            List<Integer> span = span(owner, nested, true);
++            ListIterator<Integer> raw = span.listIterator();
++            ListIterator<Integer> filtered = M3FilteredLists.filtered(span, x -> true).listIterator();
++            span.add(8);
++            span.remove(0);
++            List<Integer> before = new ArrayList<>(owner);
++            assertThrows(ConcurrentModificationException.class, () -> raw.add(10));
++            assertThrows(ConcurrentModificationException.class, () -> filtered.add(10));
++            assertEquals(before, owner);
++        }
++    }
++
++    @Test
++    void clearedDeliveredSpanRefusesMutationsFromEitherDirection() {
++        for (boolean nested : List.of(false, true)) {
++            for (boolean reverse : List.of(false, true)) {
++                for (int operation = 0; operation < 3; operation++) {
++                    List<Integer> owner = new LinkedList<>(List.of(0, 2, 4, 6));
++                    List<Integer> span = span(owner, nested, false);
++                    int position = reverse ? span.size() : 0;
++                    ListIterator<Integer> raw = span.listIterator(position);
++                    ListIterator<Integer> filtered = M3FilteredLists.filtered(span, x -> true).listIterator(position);
++                    assertEquals(reverse ? raw.previous() : raw.next(),
++                            reverse ? filtered.previous() : filtered.next());
++                    span.clear();
++                    List<Integer> before = new ArrayList<>(owner);
++                    int selected = operation;
++                    assertThrows(ConcurrentModificationException.class, () -> mutate(raw, selected));
++                    assertThrows(ConcurrentModificationException.class, () -> mutate(filtered, selected));
++                    assertEquals(before, owner);
++                }
++            }
++        }
++    }
++
++    @Test
++    void wholeLinkedListEndRemainsFailFastAndUnchanged() {
++        for (int operation = 0; operation < 3; operation++) {
++            List<Integer> owner = new LinkedList<>(List.of(2, 4));
++            ListIterator<Integer> raw = owner.listIterator();
++            ListIterator<Integer> filtered = M3FilteredLists.filtered(owner, x -> true).listIterator();
++            raw.next(); raw.next(); filtered.next(); filtered.next();
++            owner.add(0, 8);
++            owner.remove(2);
++            List<Integer> before = new ArrayList<>(owner);
++            int selected = operation;
++            assertThrows(ConcurrentModificationException.class, () -> mutate(raw, selected));
++            assertThrows(ConcurrentModificationException.class, () -> mutate(filtered, selected));
++            assertEquals(before, owner);
++        }
++    }
++
++    @Test
++    void validEmptyProviderWritesKeepCursorIndexesAndInsertOnce() {
++        for (List<Integer> owner : List.<List<Integer>>of(new LinkedList<>(),
++                new ArrayList<>(), new CopyOnWriteArrayList<>())) {
++            ListIterator<Integer> filtered = M3FilteredLists.filtered(owner, x -> x % 2 == 0).listIterator();
++            filtered.add(2);
++            assertEquals(List.of(2), owner);
++            assertEquals(1, filtered.nextIndex());
++            assertEquals(0, filtered.previousIndex());
++            assertThrows(IllegalStateException.class, filtered::remove);
++            assertEquals(2, filtered.previous());
++            filtered.set(4);
++            assertEquals(List.of(4), owner);
++            filtered.remove();
++            assertEquals(List.of(), owner);
++            assertEquals(0, filtered.nextIndex());
++            filtered.add(6);
++            assertEquals(List.of(6), owner);
++        }
++    }
++
++    @Test
++    void fixedSizeAndUnmodifiableEmptyProvidersStillRefuseInsertion() {
++        for (List<Integer> owner : List.of(Arrays.<Integer>asList(),
++                Collections.<Integer>emptyList(),
++                Collections.unmodifiableList(new LinkedList<Integer>()))) {
++            ListIterator<Integer> cursor = M3FilteredLists.filtered(owner, x -> true).listIterator();
++            assertThrows(UnsupportedOperationException.class, () -> cursor.add(2));
++            assertEquals(List.of(), owner);
++            assertEquals(0, cursor.nextIndex());
++        }
++    }
++
++    @Test
++    void validNonemptyWritesRetainSnapshotAndFixedSizeProviderPolicies() {
++        List<Integer> fixed = Arrays.asList(1, 2, 3);
++        ListIterator<Integer> fixedCursor = M3FilteredLists.filtered(fixed, x -> x % 2 == 0).listIterator();
++        assertEquals(2, fixedCursor.next());
++        fixedCursor.set(4);
++        assertEquals(List.of(1, 4, 3), fixed);
++        assertThrows(UnsupportedOperationException.class, fixedCursor::remove);
++        List<Integer> copyOnWrite = new CopyOnWriteArrayList<>(List.of(1, 2, 3));
++        ListIterator<Integer> snapshot = M3FilteredLists.filtered(copyOnWrite, x -> x % 2 == 0).listIterator();
++        assertEquals(2, snapshot.next());
++        snapshot.set(4);
++        snapshot.remove();
++        snapshot.add(6);
++        assertEquals(List.of(1, 6, 3), copyOnWrite);
++    }
++
++    private static List<Integer> span(List<Integer> owner, boolean nested, boolean empty) {
++        List<Integer> result = empty ? owner.subList(1, 1) : owner.subList(1, 3);
++        return nested ? result.subList(0, result.size()) : result;
++    }
++
++    private static void mutate(ListIterator<Integer> iterator, int operation) {
++        switch (operation) {
++            case 0 -> iterator.remove();
++            case 1 -> iterator.set(10);
++            case 2 -> iterator.add(10);
++            default -> throw new AssertionError(operation);
++        }
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java b/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java
+new file mode 100644
+index 0000000..411b69e
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java
+@@ -0,0 +1,416 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++package com.m3.collections;
++
++import java.lang.reflect.Field;
++import java.lang.reflect.InvocationTargetException;
++import java.lang.reflect.Method;
++import java.security.MessageDigest;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.HexFormat;
++import java.util.List;
++
++/** Deterministic oracle over the actual projection, mask-window and JNI owners. */
++public final class M3IndexOrderWindowContract {
++    private static final int CANARY = 0x74ac013d;
++    private static final Field INDEX = field("indices");
++    private static final Field PAYLOAD = field("values");
++    private static long checks;
++    private static long windows;
++    private static boolean nativeMode;
++    private static MessageDigest observations;
++
++    private M3IndexOrderWindowContract() { }
++
++    private static Field field(String name) {
++        try {
++            Field value = M3LongIndexProjection.class.getDeclaredField(name);
++            value.setAccessible(true);
++            return value;
++        } catch (ReflectiveOperationException failure) {
++            throw new ExceptionInInitializerError(failure);
++        }
++    }
++
++    private static Object metadata(Field field, M3LongIndexProjection view) {
++        try { return field.get(view); }
++        catch (IllegalAccessException failure) { throw new AssertionError(failure); }
++    }
++
++    private static void check(boolean valid, String message) {
++        checks++;
++        if (!valid) throw new AssertionError(message);
++    }
++
++    private static void observe(long value) {
++        for (int shift = 56; shift >= 0; shift -= 8)
++            observations.update((byte) (value >>> shift));
++    }
++
++    private static void same(int[] expected, int[] actual, String message) {
++        check(Arrays.equals(expected, actual), message);
++    }
++
++    private static int[] stable(int[] order, long[] payload, boolean descending) {
++        Integer[] boxed = Arrays.stream(order).boxed().toArray(Integer[]::new);
++        Arrays.sort(boxed, (a, b) -> descending
++                ? Long.compare(payload[b], payload[a]) : Long.compare(payload[a], payload[b]));
++        return Arrays.stream(boxed).mapToInt(Integer::intValue).toArray();
++    }
++
++    private static int[] selected(int[] order, byte[] states, int required) {
++        List<Integer> expected = new ArrayList<>();
++        for (int i = 0; i < order.length; i++) {
++            int flags = Byte.toUnsignedInt(states[i]);
++            if ((flags | required) == flags) expected.add(order[i]);
++        }
++        return expected.stream().mapToInt(Integer::intValue).toArray();
++    }
++
++    private static M3LongIndexProjection sorted(M3LongIndexProjection view, boolean descending) {
++        return descending ? view.sortedDescending() : view.sortedAscending();
++    }
++
++    private static M3LongIndexProjection.Order direction(boolean descending) {
++        return descending ? M3LongIndexProjection.Order.DESCENDING
++                : M3LongIndexProjection.Order.ASCENDING;
++    }
++
++    private static void projection(M3LongIndexProjection actual, int[] ids, long[] payload,
++            M3LongIndexProjection.Order order) {
++        check(actual.size() == ids.length && actual.isEmpty() == (ids.length == 0), "view size");
++        check(actual.order() == order, "order metadata");
++        int[] exported = actual.physicalIndices();
++        same(ids, exported, "exact stable physical occurrence order");
++        long[] values = actual.toArray();
++        check(values.length == ids.length, "materialized length");
++        observe(order.ordinal()); observe(ids.length);
++        for (int i = 0; i < ids.length; i++) {
++            check(actual.physicalIndex(i) == ids[i], "logical-to-physical address");
++            check(actual.get(i) == payload[ids[i]] && values[i] == payload[ids[i]], "payload value");
++            observe(ids[i]); observe(values[i]);
++        }
++        if (ids.length != 0) {
++            exported[0] = -1; values[0] = ~values[0];
++            check(actual.physicalIndex(0) == ids[0] && actual.get(0) == payload[ids[0]],
++                    "public materialization is detached");
++        }
++    }
++
++    private static void projectionCase(long[] input, int shape) {
++        long[] payload = input.clone();
++        M3LongIndexProjection snapshot = M3LongIndexProjection.snapshot(input);
++        Arrays.fill(input, Long.MIN_VALUE);
++        int[] identity = new int[payload.length];
++        for (int i = 0; i < identity.length; i++) identity[i] = i;
++        projection(snapshot, identity, payload, M3LongIndexProjection.Order.ENCOUNTER);
++        for (boolean descending : new boolean[] {false, true}) {
++            int[] order = stable(identity, payload, descending);
++            M3LongIndexProjection ordered = sorted(snapshot, descending);
++            projection(ordered, order, payload, direction(descending));
++            check(metadata(PAYLOAD, ordered) == metadata(PAYLOAD, snapshot), "sort keeps payload owner");
++            for (int first = 0; first <= order.length; first++) {
++                for (int length = 0; length <= order.length - first; length++) {
++                    int[] sliceIds = Arrays.copyOfRange(order, first, first + length);
++                    M3LongIndexProjection slice = ordered.slice(first, length);
++                    check(metadata(INDEX, slice) == metadata(INDEX, ordered), "slice shares index owner");
++                    M3LongIndexProjection repeated = sorted(slice, descending);
++                    check(repeated != slice, "same-order sort returns a distinct descriptor");
++                    check(metadata(INDEX, repeated) == metadata(INDEX, slice), "same-order index reuse");
++                    int[] reversedIds = stable(sliceIds, payload, !descending);
++                    M3LongIndexProjection reversed = sorted(slice, !descending);
++                    projection(reversed, reversedIds, payload, direction(!descending));
++                    check(metadata(PAYLOAD, reversed) == metadata(PAYLOAD, snapshot), "reversal keeps payload owner");
++                    projection(sorted(reversed, descending), sliceIds, payload, direction(descending));
++                    projection(slice, sliceIds, payload, direction(descending));
++
++                    byte[] states = new byte[length];
++                    for (int i = 0; i < length; i++) states[i] = switch ((i + shape) & 3) {
++                        case 0 -> 0; case 1 -> 1; case 2 -> (byte) 128; default -> (byte) 255;
++                    };
++                    byte[] originalStates = states.clone();
++                    int required = new int[] {0, 1, 128, 129, 255}[shape % 5];
++                    int[] filteredIds = selected(reversedIds, states, required);
++                    M3LongIndexProjection filtered = reversed.filtered(states, required,
++                            M3IndexMaskCompactor.Backend.JAVA);
++                    projection(filtered, filteredIds, payload, direction(!descending));
++                    check(metadata(PAYLOAD, filtered) == metadata(PAYLOAD, snapshot), "filter keeps payload owner");
++                    if (filteredIds.length == length)
++                        check(metadata(INDEX, filtered) == metadata(INDEX, reversed), "all-selected Java index reuse");
++                    int cut = filteredIds.length / 3;
++                    int kept = filteredIds.length - cut - (filteredIds.length > 1 ? 1 : 0);
++                    int[] nestedIds = Arrays.copyOfRange(filteredIds, cut, cut + kept);
++                    projection(sorted(filtered.slice(cut, kept), descending),
++                            stable(nestedIds, payload, descending), payload, direction(descending));
++                    if (nativeMode && (shape + first + length) % 17 == 0) {
++                        M3LongIndexProjection nativeFiltered = slice.filtered(states, required,
++                                M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
++                        same(selected(sliceIds, states, required), nativeFiltered.physicalIndices(),
++                                "native selection reads the actual offset index window");
++                        check(nativeFiltered.order() == slice.order(), "native filter retains direction");
++                        check(metadata(PAYLOAD, nativeFiltered) == metadata(PAYLOAD, snapshot), "native payload owner");
++                    }
++                    check(Arrays.equals(states, originalStates), "selection states remain unchanged");
++                }
++            }
++        }
++        projection(snapshot, identity, payload, M3LongIndexProjection.Order.ENCOUNTER);
++    }
++
++    private static void projections() {
++        int shapes = 1;
++        for (int length = 0; length <= 6; length++) {
++            for (int code = 0; code < shapes; code++) {
++                long[] values = new long[length]; int digits = code;
++                for (int i = 0; i < length; i++) { values[i] = digits % 3 - 1; digits /= 3; }
++                projectionCase(values, code);
++            }
++            shapes *= 3;
++        }
++        projectionCase(new long[] {Long.MAX_VALUE, Long.MIN_VALUE, 0, Long.MIN_VALUE,
++                Long.MAX_VALUE, -1, 1, Long.MIN_VALUE}, 257);
++        projectionCase(new long[] {2, 1, 2, 1, 2, 0, 1}, 129);
++    }
++
++    private static long reference(int[] rows, byte[] states, int first, int budget,
++            int required, int excluded, int[] output, int offset, int limit) {
++        int next = first, written = 0;
++        long end = Math.min((long) rows.length, (long) first + budget);
++        while (next < end && written < limit) {
++            int flags = Byte.toUnsignedInt(states[next]);
++            if ((flags | required) == flags && (flags & excluded) == 0)
++                output[offset + written++] = rows[next];
++            next++;
++        }
++        return ((long) next << 32) | Integer.toUnsignedLong(written);
++    }
++
++    private static long window(int[] rows, byte[] states, int first, int budget,
++            int required, int excluded, int offset, int limit) {
++        windows++;
++        int[] originalRows = rows.clone(); byte[] originalStates = states.clone();
++        int[] expected = new int[offset + limit + 4]; Arrays.fill(expected, CANARY);
++        int[] actual = expected.clone();
++        long want = reference(rows, states, first, budget, required, excluded, expected, offset, limit);
++        long got = M3IndexMaskWindow.scanBounded(rows, states, first, budget, required, excluded,
++                actual, offset, limit, M3IndexMaskCompactor.Backend.JAVA);
++        check(got == want, "exact bounded Java cursor/count");
++        same(expected, actual, "bounded Java ordered output and guards");
++        observe(got); for (int value : actual) observe(value);
++        if (budget == Integer.MAX_VALUE) {
++            Arrays.fill(actual, CANARY);
++            got = M3IndexMaskWindow.scan(rows, states, first, required, excluded, actual,
++                    offset, limit, M3IndexMaskCompactor.Backend.JAVA);
++            check(got == want, "legacy Java cursor/count");
++            same(expected, actual, "legacy Java full-remainder parity");
++        }
++        if (nativeMode) {
++            Arrays.fill(actual, CANARY);
++            got = M3IndexMaskWindow.scanBounded(rows, states, first, budget, required, excluded,
++                    actual, offset, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
++            check(got == want, "exact bounded JNI cursor/count");
++            same(expected, actual, "bounded JNI ordered output and guards");
++            if (budget == Integer.MAX_VALUE) {
++                Arrays.fill(actual, CANARY);
++                got = M3IndexMaskWindow.scan(rows, states, first, required, excluded, actual,
++                        offset, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
++                check(got == want, "legacy JNI cursor/count");
++                same(expected, actual, "legacy JNI full-remainder parity");
++            }
++        }
++        same(originalRows, rows, "row source unchanged");
++        check(Arrays.equals(originalStates, states), "state source unchanged");
++        return want;
++    }
++
++    private static void maskPairs() {
++        int[] rows = new int[257]; byte[] states = new byte[257];
++        for (int i = 0; i < rows.length; i++) { rows[i] = i % 7 - 3; states[i] = (byte) i; }
++        rows[0] = Integer.MIN_VALUE; rows[256] = Integer.MAX_VALUE;
++        for (int required = 0; required < 256; required++)
++            for (int excluded = 0; excluded < 256; excluded++)
++                window(rows, states, 0, Integer.MAX_VALUE, required, excluded, 3, 257);
++    }
++
++    private static void boundaries() {
++        int[] limits = {0, 1, 2, 63, 64, 65, 127, 128, 129, 4096};
++        int[] budgets = {0, 1, 63, 64, 65, 127, 128, 129, 4096, Integer.MAX_VALUE};
++        int[][] masks = {{0, 0}, {128, 0}, {128, 1}, {1, 128}, {129, 0}, {128, 128}, {255, 0}};
++        for (int length : new int[] {0, 1, 2, 63, 64, 65, 127, 128, 129, 255, 256, 257, 4095, 4096, 4097}) {
++            int[] rows = new int[length]; byte[] states = new byte[length];
++            for (int i = 0; i < length; i++) rows[i] = switch (i % 5) {
++                case 0 -> Integer.MIN_VALUE; case 1 -> Integer.MAX_VALUE; default -> i % 9 - 4;
++            };
++            for (int pattern = 0; pattern < 5; pattern++) {
++                for (int i = 0; i < length; i++) states[i] = switch (pattern) {
++                    case 0 -> 0; case 1 -> (byte) 129;
++                    case 2 -> (byte) (i % 128 == 127 ? 129 : 0);
++                    case 3 -> (byte) (i * 37 + 11);
++                    default -> (byte) (i % 128 >= 62 && i % 128 <= 65 ? 255 : 0);
++                };
++                for (int first : new int[] {0, length / 2, length}) {
++                    for (int i = 0; i < budgets.length; i++) {
++                        int[] mask = masks[(i + pattern) % masks.length];
++                        window(rows, states, first, budgets[i], mask[0], mask[1],
++                                (i + first) % 4, limits[(i + pattern) % limits.length]);
++                    }
++                }
++            }
++        }
++        int[] rows = new int[1025]; byte[] states = new byte[1025];
++        for (int i = 0; i < rows.length; i++) rows[i] = i - 512;
++        for (int hit : new int[] {63, 64, 65, 127, 128, 129, 255, 256, 1024}) states[hit] = (byte) 128;
++        for (int first : new int[] {0, 1, 63, 64, 65, 127, 128, 129})
++            for (int budget : new int[] {1, 63, 64, 65, 127, 128, 129, Integer.MAX_VALUE})
++                for (int limit : new int[] {1, 2}) window(rows, states, first, budget, 128, 0, 2, limit);
++    }
++
++    private static void resumes() {
++        int[] rows = new int[8201]; byte[] states = new byte[8201];
++        List<Integer> expected = new ArrayList<>();
++        for (int i = 0; i < rows.length; i++) {
++            rows[i] = i % 13 - 6;
++            if (i % 128 == 127 || i == rows.length - 1) { states[i] = (byte) 128; expected.add(rows[i]); }
++        }
++        M3IndexMaskCompactor.Backend backend = nativeMode
++                ? M3IndexMaskCompactor.Backend.NATIVE_REQUIRED : M3IndexMaskCompactor.Backend.JAVA;
++        for (int budget : new int[] {1, 63, 64, 65, 127, 128, 129, 513, Integer.MAX_VALUE}) {
++            for (int limit : new int[] {1, 2, 7, 129}) {
++                int cursor = 0; List<Integer> emitted = new ArrayList<>();
++                int[] out = new int[limit + 4], oracle = new int[out.length];
++                while (cursor < rows.length) {
++                    Arrays.fill(out, CANARY); Arrays.fill(oracle, CANARY);
++                    long want = reference(rows, states, cursor, budget, 128, 0, oracle, 2, limit);
++                    long got = M3IndexMaskWindow.scanBounded(rows, states, cursor, budget, 128, 0,
++                            out, 2, limit, backend);
++                    check(got == want, "resumed exact cursor/count");
++                    same(oracle, out, "resumed output guards");
++                    int next = M3IndexMaskWindow.nextIndex(got);
++                    check(next > cursor && next <= rows.length && (long) next - cursor <= budget,
++                            "positive budgets make bounded progress");
++                    for (int i = 0; i < M3IndexMaskWindow.written(got); i++) emitted.add(out[i + 2]);
++                    observe(got); cursor = next;
++                }
++                check(expected.equals(emitted), "resumption preserves every duplicate occurrence exactly once");
++            }
++        }
++    }
++
++    private static void refusal(Class<? extends Throwable> type, Runnable call, int[] output) {
++        int[] before = output.clone();
++        try { call.run(); }
++        catch (RuntimeException | LinkageError failure) {
++            check(type.isInstance(failure), "wrong refusal: " + failure);
++            same(before, output, "refused call wrote output");
++            return;
++        }
++        throw new AssertionError("missing refusal " + type.getSimpleName());
++    }
++
++    private static void failures(M3IndexMaskCompactor.Backend backend) {
++        int[] rows = {3, 3, -1}, out = {CANARY, CANARY, CANARY}; byte[] states = {1, 2, 3};
++        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(null, states, -1, -1, -1, -1, out, -1, -1, backend), out);
++        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(rows, null, 0, 0, 0, 0, out, 0, 0, backend), out);
++        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, 0, 0, null), out);
++        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, rows, 0, 0, backend), rows);
++        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, new byte[0], -1, -1, -1, -1, out, -1, -1, backend), out);
++        for (int bad : new int[] {-1, 256, Integer.MIN_VALUE, Integer.MAX_VALUE}) {
++            refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, -1, -1, bad, 0, out, 0, 0, backend), out);
++            refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, bad, out, 0, 0, backend), out);
++        }
++        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, -1, -1, 0, 0, out, 0, 0, backend), out);
++        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 4, 0, 0, 0, out, 0, 0, backend), out);
++        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, -1, 0, 0, out, 0, 0, backend), out);
++        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, 0, 4097, backend), out);
++        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, -1, 0, 0, out, -1, 0, backend), out);
++        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, Integer.MAX_VALUE, 1, backend), out);
++        M3LongIndexProjection view = M3LongIndexProjection.snapshot(new long[] {3, 2, 1});
++        refusal(IndexOutOfBoundsException.class, () -> view.slice(1, Integer.MAX_VALUE), out);
++        refusal(IndexOutOfBoundsException.class, () -> view.get(-1), out);
++        refusal(IllegalArgumentException.class, () -> view.filtered(new byte[2], 0, backend), out);
++        refusal(IllegalArgumentException.class, () -> view.filtered(new byte[3], 256, backend), out);
++        refusal(NullPointerException.class, () -> view.filtered(null, 0, backend), out);
++    }
++
++    private static void rawRefusals() throws Exception {
++        Method legacy = M3IndexMaskWindow.class.getDeclaredMethod("scanNative", int[].class,
++                byte[].class, int.class, int.class, int.class, int[].class, int.class, int.class);
++        Method bounded = M3IndexMaskWindow.class.getDeclaredMethod("scanBoundedNative", int[].class,
++                byte[].class, int.class, int.class, int.class, int.class, int[].class, int.class, int.class);
++        legacy.setAccessible(true); bounded.setAccessible(true);
++        int[] rows = {7, 7, -1}, out = {CANARY, CANARY, CANARY}; byte[] states = {1, 1, 1};
++        Object[][] legacyArgs = {
++            {null, states, 0, 0, 0, out, 0, 0}, {rows, null, 0, 0, 0, out, 0, 0},
++            {rows, states, 0, 0, 0, null, 0, 0}, {rows, states, -1, 0, 0, out, 0, 0},
++            {rows, states, 4, 0, 0, out, 0, 0}, {rows, states, 0, 256, 0, out, 0, 0},
++            {rows, states, 0, 0, -1, out, 0, 0}, {rows, states, 0, 0, 0, rows, 0, 0},
++            {rows, new byte[0], 0, 0, 0, out, 0, 0}, {rows, states, 0, 0, 0, out, 0, 4097},
++            {rows, states, 0, 0, 0, out, Integer.MAX_VALUE, 1}
++        };
++        Object[][] boundedArgs = {
++            {null, states, 0, 2, 0, 0, out, 0, 0}, {rows, null, 0, 2, 0, 0, out, 0, 0},
++            {rows, states, 0, 2, 0, 0, null, 0, 0}, {rows, states, -1, 2, 0, 0, out, 0, 0},
++            {rows, states, 0, 4, 0, 0, out, 0, 0}, {rows, states, 2, 1, 0, 0, out, 0, 0},
++            {rows, states, 0, 2, 256, 0, out, 0, 0}, {rows, states, 0, 2, 0, -1, out, 0, 0},
++            {rows, states, 0, 2, 0, 0, rows, 0, 0}, {rows, new byte[0], 0, 2, 0, 0, out, 0, 0},
++            {rows, states, 0, 2, 0, 0, out, 0, 4097}, {rows, states, 0, 2, 0, 0, out, Integer.MAX_VALUE, 1}
++        };
++        for (int abi = 0; abi < 2; abi++) {
++            Method method = abi == 0 ? legacy : bounded;
++            for (Object[] arguments : abi == 0 ? legacyArgs : boundedArgs) {
++                int[] beforeRows = rows.clone(), beforeOut = out.clone();
++                try { method.invoke(null, arguments); throw new AssertionError("raw JNI boundary accepted invalid geometry"); }
++                catch (InvocationTargetException failure) {
++                    check(failure.getCause() instanceof IllegalArgumentException, "raw JNI refusal type");
++                }
++                same(beforeRows, rows, "raw JNI refused call changed source");
++                same(beforeOut, out, "raw JNI refused call changed output");
++            }
++        }
++    }
++
++    private static void unavailable(boolean oldBinary) {
++        check(M3IndexMaskCompactor.nativeAvailable() == oldBinary, "requested isolated native-library mode");
++        int[] rows = {7}, out = {CANARY}; byte[] states = {(byte) 128};
++        var backend = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
++        refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scanBounded(rows, states,
++                0, 1, 128, 0, out, 0, 1, backend), out);
++        if (oldBinary) {
++            long got = M3IndexMaskWindow.scan(rows, states, 0, 128, 0, out, 0, 1, backend);
++            check(got == ((1L << 32) | 1) && out[0] == 7, "legacy JNI symbol remains usable");
++            check(M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 128, 0, out, 0, 1, backend) == 0,
++                    "old binary preserves public zero-work shortcut after library availability");
++        } else {
++            for (int limit : new int[] {0, 1}) {
++                refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scan(rows, states,
++                        0, 128, 128, out, 0, limit, backend), out);
++                refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scanBounded(rows, states,
++                        0, 0, 128, 128, out, 0, limit, backend), out);
++            }
++            refusal(UnsatisfiedLinkError.class, () -> M3LongIndexProjection.snapshot(new long[] {1})
++                    .filtered(new byte[] {1}, 1, backend), out);
++        }
++        System.out.println("INDEX_ORDER_WINDOW_NATIVE_REFUSAL_PASS oldBinary=" + oldBinary + " checks=" + checks);
++    }
++
++    public static void main(String[] args) throws Exception {
++        if (args.length > 1) throw new IllegalArgumentException("--java | --native | --missing | --old-native");
++        String mode = args.length == 0 ? "--java" : args[0];
++        if (mode.equals("--missing") || mode.equals("--old-native")) {
++            unavailable(mode.equals("--old-native")); return;
++        }
++        if (!mode.equals("--java") && !mode.equals("--native"))
++            throw new IllegalArgumentException("--java | --native | --missing | --old-native");
++        nativeMode = mode.equals("--native");
++        if (nativeMode) check(M3IndexMaskCompactor.nativeAvailable(), "real native library required");
++        observations = MessageDigest.getInstance("SHA-256");
++        projections(); maskPairs(); boundaries(); resumes();
++        failures(M3IndexMaskCompactor.Backend.JAVA);
++        if (nativeMode) { failures(M3IndexMaskCompactor.Backend.NATIVE_REQUIRED); rawRefusals(); }
++        System.out.println("INDEX_ORDER_WINDOW_PASS native=" + nativeMode + " maskPairs=65536 windows="
++                + windows + " checks=" + checks + " observations=" + HexFormat.of().formatHex(observations.digest()));
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java b/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java
+new file mode 100644
+index 0000000..404ef3a
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java
+@@ -0,0 +1,11 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++final class M3IndexOrderWindowTest {
++    @Test void stableOrderAndBoundedWindowContract() throws Exception {
++        M3IndexOrderWindowContract.main(new String[] {"--java"});
++    }
++}
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java b/m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java
+new file mode 100644
+index 0000000..636ceb1
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java
+@@ -0,0 +1,189 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import java.nio.ByteBuffer;
++import java.security.MessageDigest;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Comparator;
++import java.util.HexFormat;
++import java.util.List;
++import java.util.Random;
++import java.util.concurrent.Callable;
++import java.util.concurrent.Executors;
++
++/** Original synthetic oracle; executes actual collection and JNI owners, never API stand-ins. */
++public final class M3MaskWindowCurrentProof {
++    private static long checks;
++    private static final MessageDigest DIGEST = digest();
++    private static final M3IndexMaskCompactor.Backend JAVA = M3IndexMaskCompactor.Backend.JAVA;
++    private static final M3IndexMaskCompactor.Backend NATIVE = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
++    private M3MaskWindowCurrentProof() { }
++
++    public static void main(String[] args) throws Exception {
++        if (args.length != 1 || !List.of("java", "native", "missing", "legacy").contains(args[0])) {
++            throw new IllegalArgumentException("java|native|missing|legacy");
++        }
++        boolean nativeMode = args[0].equals("native") || args[0].equals("legacy");
++        if (nativeMode) yes(M3IndexMaskCompactor.nativeAvailable(), "required binary missing");
++        if (args[0].equals("missing")) {
++            yes(!M3IndexMaskCompactor.nativeAvailable(), "unexpected native binary");
++            for (int mask : new int[]{0, 1, 128, 255}) {
++                refuse(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.select(new int[0], new byte[0], mask, NATIVE));
++                refuse(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.selectWindow(new int[0], 0, new byte[0], 0, 0, mask, NATIVE));
++                refuse(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.selectLongWindow(new long[0], 0, new byte[0], 0, 0, mask, NATIVE));
++                refuse(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.selectPositions(new byte[0], mask, 128, NATIVE));
++                refuse(UnsatisfiedLinkError.class, () -> M3LongIndexProjection.snapshot(new long[0]).filtered(new byte[0], mask, NATIVE));
++            }
++            System.out.println("M3_MISSING_NATIVE checks=" + checks + " PASS"); return;
++        }
++        boolean legacy = args[0].equals("legacy");
++        masks(nativeMode && !legacy);
++        windows(nativeMode);
++        projections(nativeMode);
++        invalid(nativeMode);
++        parallel(nativeMode);
++        if (legacy) {
++            // Existing binary lacks only the additive excluded-mask methods. No Java fallback.
++            refuse(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.selectPositions(new byte[]{1}, 1, 2, NATIVE));
++            refuse(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.selectPositions(new byte[0], 1, 1, NATIVE));
++            same(new int[]{0}, M3IndexMaskCompactor.selectPositions(new byte[]{1}, 1, 0, NATIVE));
++        }
++        System.out.println("M3_MASK_CURRENT mode=" + args[0] + " checks=" + checks
++                + " digest=" + HexFormat.of().formatHex(DIGEST.digest()) + " PASS");
++    }
++
++    private static void masks(boolean nativeMode) {
++        byte[] states = new byte[256];
++        for (int i = 0; i < 256; i++) states[i] = (byte)i;
++        for (int required = 0; required < 256; required++) {
++            for (int excluded = 0; excluded < 256; excluded++) {
++                int[] expected = positions(states, required, excluded);
++                same(expected, M3IndexMaskCompactor.selectPositions(states, required, excluded, JAVA));
++                yes(expected.length == M3IndexMaskCompactor.selectedCount(states, required, excluded), "count");
++                if (nativeMode) same(expected, M3IndexMaskCompactor.selectPositions(states, required, excluded, NATIVE));
++            }
++        }
++        for (int i = 0; i < 256; i++) yes(states[i] == (byte)i, "state input mutation");
++    }
++
++    private static void windows(boolean nativeMode) {
++        Random rng = new Random(20261020);
++        for (int size : new int[]{0,1,2,63,64,65,255,256,257,511,512,513,1024,1025,4097}) {
++            int[] rows = new int[size + 17]; long[] longs = new long[rows.length];
++            byte[] states = new byte[size + 31]; rng.nextBytes(states);
++            for (int i = 0; i < rows.length; i++) {
++                rows[i] = i % 7 == 0 ? Integer.MIN_VALUE : i % 11 == 0 ? Integer.MAX_VALUE : (i % 19) - 9;
++                longs[i] = i % 7 == 0 ? Long.MIN_VALUE : i % 11 == 0 ? Long.MAX_VALUE : ((long)rows[i] << 35);
++            }
++            for (int mask = 0; mask < 256; mask++) {
++                int ro = mask % 18, so = mask % 32;
++                byte[] marks = Arrays.copyOfRange(states, so, so + size);
++                int[] selection = positions(marks, mask, 0);
++                int[] expected = new int[selection.length]; long[] expectedLong = new long[selection.length];
++                for (int i = 0; i < selection.length; i++) {
++                    expected[i] = rows[ro + selection[i]]; expectedLong[i] = longs[ro + selection[i]];
++                }
++                same(expected, M3IndexMaskCompactor.selectWindow(rows, ro, states, so, size, mask, JAVA));
++                same(expectedLong, M3IndexMaskCompactor.selectLongWindow(longs, ro, states, so, size, mask, JAVA));
++                same(expected, M3IndexMaskCompactor.select(Arrays.copyOfRange(rows,ro,ro+size), marks, mask, JAVA));
++                same(expectedLong, M3IndexMaskCompactor.selectLong(Arrays.copyOfRange(longs,ro,ro+size), marks, mask));
++                if (nativeMode) {
++                    same(expected, M3IndexMaskCompactor.selectWindow(rows, ro, states, so, size, mask, NATIVE));
++                    same(expectedLong, M3IndexMaskCompactor.selectLongWindow(longs, ro, states, so, size, mask, NATIVE));
++                    same(expected, M3IndexMaskCompactor.selectNativeRange(rows, ro, size, marks, mask));
++                    same(expected, M3IndexMaskCompactor.select(Arrays.copyOfRange(rows,ro,ro+size), marks, mask, NATIVE));
++                }
++            }
++            // Empty, all, and last-row-only selection at native page seams.
++            for (int density = 0; density < 3; density++) {
++                byte[] marks = new byte[size];
++                if (density == 1) Arrays.fill(marks, (byte)128);
++                if (density == 2 && size > 0) marks[size - 1] = (byte)128;
++                int[] expected = Arrays.stream(positions(marks,128,0)).map(i -> rows[i]).toArray();
++                same(expected, M3IndexMaskCompactor.selectWindow(rows,0,marks,0,size,128,JAVA));
++                if (nativeMode) same(expected,M3IndexMaskCompactor.selectWindow(rows,0,marks,0,size,128,NATIVE));
++            }
++        }
++        int[] rows = {4,4,-1}; byte[] marks = {1,1,1}; long[] values = {4,4,-1};
++        for (var backend : nativeMode ? new M3IndexMaskCompactor.Backend[]{JAVA,NATIVE} : new M3IndexMaskCompactor.Backend[]{JAVA}) {
++            int[] got=M3IndexMaskCompactor.select(rows,marks,0,backend); yes(got!=rows,"detached identity"); got[0]=99;yes(rows[0]==4,"input alias");
++            long[] out=M3IndexMaskCompactor.selectLongWindow(values,0,marks,0,3,1,backend);yes(out!=values,"detached long");out[0]=99;yes(values[0]==4,"long alias");
++        }
++    }
++
++    private static void projections(boolean nativeMode) {
++        Random random = new Random(12012026);
++        for (int scenario=0;scenario<400;scenario++) {
++            long[] values=new long[scenario%129];
++            for(int i=0;i<values.length;i++) values[i]=i%29==0?Long.MIN_VALUE:i%31==0?Long.MAX_VALUE:random.nextInt(17)-8;
++            M3LongIndexProjection actual=M3LongIndexProjection.snapshot(values);
++            List<Integer> model=new ArrayList<>();for(int i=0;i<values.length;i++)model.add(i);
++            for(int pass=0;pass<12;pass++) {
++                switch(pass%4) {
++                    case 0 -> {actual=actual.sortedAscending();model.sort(Comparator.comparingLong(i->values[i]));}
++                    case 1 -> {actual=actual.sortedDescending();model.sort((a,b)->Long.compare(values[b],values[a]));}
++                    case 2 -> {
++                        int offset=random.nextInt(actual.size()+1);int length=random.nextInt(actual.size()-offset+1);
++                        actual=actual.slice(offset,length);model=new ArrayList<>(model.subList(offset,offset+length));
++                    }
++                    default -> {
++                        byte[] marks=new byte[actual.size()];random.nextBytes(marks);int mask=pass%3==0?0:128;
++                        M3LongIndexProjection javaView=actual.filtered(marks,mask,JAVA);
++                        if(nativeMode) {
++                            M3LongIndexProjection nativeView=actual.filtered(marks,mask,NATIVE);
++                            same(javaView.physicalIndices(),nativeView.physicalIndices());same(javaView.toArray(),nativeView.toArray());
++                        }
++                        actual=javaView;List<Integer> selected=new ArrayList<>();
++                        for(int i=0;i<marks.length;i++)if(((marks[i]&255)&mask)==mask)selected.add(model.get(i));
++                        model=selected;
++                    }
++                }
++                same(model.stream().mapToInt(Integer::intValue).toArray(),actual.physicalIndices());
++                long[] expected=new long[model.size()];for(int i=0;i<expected.length;i++)expected[i]=values[model.get(i)];
++                same(expected,actual.toArray());
++                for(int i=0;i<expected.length;i++)yes(actual.get(i)==expected[i] && actual.physicalIndex(i)==model.get(i),"indexed access");
++            }
++        }
++    }
++
++    private static void invalid(boolean nativeMode) {
++        for(var b:nativeMode?new M3IndexMaskCompactor.Backend[]{JAVA,NATIVE}:new M3IndexMaskCompactor.Backend[]{JAVA}) {
++            refuse(NullPointerException.class,()->M3IndexMaskCompactor.select(null,null,-1,b));
++            refuse(NullPointerException.class,()->M3IndexMaskCompactor.select(new int[0],null,-1,b));
++            refuse(IllegalArgumentException.class,()->M3IndexMaskCompactor.select(new int[1],new byte[0],0,b));
++            for(int invalid:new int[]{-1,256,Integer.MIN_VALUE,Integer.MAX_VALUE}) {
++                refuse(IllegalArgumentException.class,()->M3IndexMaskCompactor.select(new int[0],new byte[0],invalid,b));
++                refuse(IllegalArgumentException.class,()->M3IndexMaskCompactor.selectPositions(new byte[0],0,invalid,b));
++                refuse(IndexOutOfBoundsException.class,()->M3IndexMaskCompactor.selectWindow(new int[1],invalid,new byte[1],0,1,invalid,b));
++                refuse(IndexOutOfBoundsException.class,()->M3IndexMaskCompactor.selectLongWindow(new long[1],0,new byte[1],invalid,1,0,b));
++            }
++            refuse(IndexOutOfBoundsException.class,()->M3IndexMaskCompactor.selectWindow(new int[1],1,new byte[1],0,Integer.MAX_VALUE,0,b));
++            refuse(NullPointerException.class,()->M3IndexMaskCompactor.selectPositions(new byte[0],0,null));
++        }
++    }
++
++    private static void parallel(boolean nativeMode) throws Exception {
++        try(var executor=Executors.newFixedThreadPool(4)) {
++            var tasks=new ArrayList<Callable<Boolean>>();
++            for(int task=0;task<16;task++)tasks.add(()->{
++                int[] rows={7,-2,7,9};byte[] states={1,0,1,(byte)128};
++                for(int i=0;i<500;i++) {
++                    if(!Arrays.equals(new int[]{7,7},M3IndexMaskCompactor.select(rows,states,1,JAVA)))return false;
++                    if(nativeMode && !Arrays.equals(new int[]{9},M3IndexMaskCompactor.select(rows,states,128,NATIVE)))return false;
++                }return true;
++            });
++            for(var future:executor.invokeAll(tasks))yes(future.get(),"concurrent independent calls");
++        }
++    }
++    private static int[] positions(byte[] states,int required,int excluded) {
++        int[] tmp=new int[states.length];int n=0;
++        for(int i=0;i<states.length;i++){int bits=states[i]&255;if((bits&required)==required&&(bits&excluded)==0)tmp[n++]=i;}
++        return Arrays.copyOf(tmp,n);
++    }
++    private static void same(int[] a,int[] b){checks++;if(!Arrays.equals(a,b))throw new AssertionError("int sequence");for(int v:b)DIGEST.update(ByteBuffer.allocate(4).putInt(v).array());}
++    private static void same(long[] a,long[] b){checks++;if(!Arrays.equals(a,b))throw new AssertionError("long sequence");for(long v:b)DIGEST.update(ByteBuffer.allocate(8).putLong(v).array());}
++    private static void yes(boolean ok,String message){checks++;if(!ok)throw new AssertionError(message);}
++    private static void refuse(Class<? extends Throwable> type,Runnable action){checks++;try{action.run();}catch(Throwable failure){if(type.isInstance(failure))return;throw new AssertionError(failure);}throw new AssertionError("missing refusal "+type);}
++    private static MessageDigest digest(){try{return MessageDigest.getInstance("SHA-256");}catch(java.security.NoSuchAlgorithmException e){throw new AssertionError(e);}}
++}
+diff --git a/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java b/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java
+index e45f8c2..306fcb8 100644
+--- a/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java
++++ b/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java
+@@ -18,14 +18,23 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+  * <p>{@code internalWorked(double)} preserves fractional credit across calls. Invalid,
+  * negative and non-finite progress is ignored, like other Eclipse monitor adapters. Work
+  * is forwarded in integral chunks because the existing M3 monitor SPI is long-based.
+- * Calls are serialized per facade; the M3 backing owner determines observer semantics.</p>
++ * Calls are serialized per facade; the M3 backing owner determines observer semantics.
++ * Synchronous owner callbacks may reenter this facade. An active begin cannot begin
++ * again, and an active completion suppresses recursive completion and further work.
++ * Lifecycle callback failures propagate unchanged and leave that operation retryable.
++ * Fractional accounting is published before delivering work to the owner. On a
++ * delivery failure, the previous fraction is restored only if no reentrant fractional
++ * update occurred; nested updates and external owner effects cannot be rolled back.</p>
+  */
+ public final class M3EclipseProgressMonitor implements IProgressMonitor {
+     private final M3ProgressMonitor owner;
+     private final boolean ownsLifecycle;
+     private boolean begun;
+     private boolean finished;
++    private boolean beginning;
++    private boolean finishing;
+     private double fractionalWork;
++    private long fractionalRevision;
+ 
+     private M3EclipseProgressMonitor(M3ProgressMonitor owner, boolean ownsLifecycle) {
+         this.owner = Objects.requireNonNull(owner, "owner");
+@@ -49,40 +58,64 @@
+             owner.subTask(name);
+             return;
+         }
+-        if (begun || finished) {
++        if (begun || finished || beginning || finishing) {
+             throw new IllegalStateException("Eclipse monitor lifecycle already started or completed");
+         }
+         if (totalWork < UNKNOWN) {
+             throw new IllegalArgumentException("invalid Eclipse totalWork");
+         }
+-        owner.beginTask(name, totalWork);
+-        begun = true;
++        beginning = true;
++        try {
++            owner.beginTask(name, totalWork);
++            begun = true;
++        } finally {
++            beginning = false;
++        }
+     }
+ 
+     @Override
+     public synchronized void done() {
+-        if (!ownsLifecycle || finished) return;
+-        owner.done();
+-        finished = true;
++        if (!ownsLifecycle || finished || finishing) return;
++        finishing = true;
++        try {
++            owner.done();
++            finished = true;
++        } finally {
++            finishing = false;
++        }
+     }
+ 
+     @Override
+     public synchronized void internalWorked(double work) {
+-        if (finished || !(work > 0.0d) || !Double.isFinite(work)) return;
++        if (finished || finishing || !(work > 0.0d) || !Double.isFinite(work)) return;
+         double pending = fractionalWork + work;
+         if (!Double.isFinite(pending) || pending >= Long.MAX_VALUE) {
+-            owner.worked(Long.MAX_VALUE);
+-            fractionalWork = 0.0d;
++            forwardWork(Long.MAX_VALUE, 0.0d);
+             return;
+         }
+         long integral = (long) pending;
+-        if (integral != 0L) owner.worked(integral);
+-        fractionalWork = pending - integral;
++        forwardWork(integral, pending - integral);
++    }
++
++    private void forwardWork(long integral, double remainder) {
++        double previous = fractionalWork;
++        long previousRevision = fractionalRevision;
++        long revision = ++fractionalRevision;
++        fractionalWork = remainder;
++        try {
++            if (integral != 0L) owner.worked(integral);
++        } catch (RuntimeException | Error failure) {
++            if (fractionalRevision == revision) {
++                fractionalWork = previous;
++                fractionalRevision = previousRevision;
++            }
++            throw failure;
++        }
+     }
+ 
+     @Override
+     public synchronized void worked(int work) {
+-        if (!finished && work > 0) owner.worked(work);
++        if (!finished && !finishing && work > 0) owner.worked(work);
+     }
+ 
+     @Override
+diff --git a/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java b/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java
+index 0ea2881..cefb1d9 100644
+--- a/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java
++++ b/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java
+@@ -9,11 +9,260 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ import static org.junit.jupiter.api.Assertions.assertTrue;
+ 
+ import com.m3.collections.M3DefaultProgressMonitor;
++import com.m3.collections.M3ProgressMonitor;
++import com.m3.collections.M3ProgressState;
++import java.util.concurrent.CountDownLatch;
++import java.util.concurrent.Executors;
++import java.util.concurrent.TimeUnit;
++import java.util.function.LongConsumer;
+ import org.eclipse.core.runtime.IProgressMonitor;
++import org.eclipse.core.runtime.SubMonitor;
+ import org.junit.jupiter.api.Test;
+ 
+ class M3EclipseProgressMonitorTest {
+     @Test
++    void rejectsReentrantBeginWithoutBeginningTheOwnerTwice() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(owner);
++        owner.onBegin = () -> assertThrows(IllegalStateException.class,
++                () -> eclipse.beginTask("nested", 5));
++        eclipse.beginTask("outer", 10);
++        assertEquals(1, owner.begins);
++        assertEquals("outer", owner.state().taskName());
++    }
++
++    @Test
++    void reentrantCompletionDoesNotCompleteTwiceOrAcceptMoreWork() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(owner);
++        eclipse.beginTask("outer", 10);
++        owner.onDone = () -> {
++            eclipse.done();
++            eclipse.worked(2);
++            eclipse.internalWorked(2.5d);
++        };
++        eclipse.done();
++        assertEquals(1, owner.completions);
++        assertEquals(0L, owner.state().worked());
++        assertTrue(owner.state().done());
++    }
++
++    @Test
++    void publishesFractionalRemainderBeforeReentrantWork() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.borrowed(owner);
++        eclipse.internalWorked(0.75d);
++        owner.onWorked = ignored -> eclipse.internalWorked(0.5d);
++        eclipse.internalWorked(0.5d);
++        assertEquals(1L, owner.state().worked(), "1.75 total input credits one whole unit");
++        eclipse.internalWorked(0.25d);
++        assertEquals(2L, owner.state().worked());
++    }
++
++    @Test
++    void lifecycleOwnerExceptionsPropagateAndPermitRetry() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(owner);
++        IllegalStateException beginFailure = new IllegalStateException("begin marker");
++        owner.onBegin = () -> { throw beginFailure; };
++        assertSame(beginFailure, assertThrows(IllegalStateException.class,
++                () -> eclipse.beginTask("failed", 10)));
++        eclipse.beginTask("retry", 10);
++        assertEquals(2, owner.begins);
++        IllegalStateException doneFailure = new IllegalStateException("done marker");
++        owner.onDone = () -> { throw doneFailure; };
++        assertSame(doneFailure, assertThrows(IllegalStateException.class, eclipse::done));
++        assertFalse(owner.state().done());
++        eclipse.worked(2);
++        eclipse.done();
++        eclipse.done();
++        assertEquals(2, owner.completions);
++        assertEquals(2L, owner.state().worked());
++    }
++
++    @Test
++    void ordinaryWorkFailureRestoresFractionForRetry() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.borrowed(owner);
++        eclipse.internalWorked(0.75d);
++        IllegalStateException failure = new IllegalStateException("work marker");
++        owner.onWorked = ignored -> { throw failure; };
++        assertSame(failure, assertThrows(IllegalStateException.class,
++                () -> eclipse.internalWorked(0.5d)));
++        assertEquals(0L, owner.state().worked());
++        eclipse.internalWorked(0.25d);
++        assertEquals(1L, owner.state().worked(), "failed delivery retains the original fraction");
++    }
++
++    @Test
++    void reentrantWorkFailureDoesNotDiscardNestedFraction() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.borrowed(owner);
++        eclipse.internalWorked(0.75d);
++        IllegalStateException failure = new IllegalStateException("nested work marker");
++        owner.onWorked = ignored -> {
++            eclipse.internalWorked(0.5d);
++            throw failure;
++        };
++        assertSame(failure, assertThrows(IllegalStateException.class,
++                () -> eclipse.internalWorked(0.5d)));
++        assertEquals(0L, owner.state().worked());
++        eclipse.internalWorked(0.25d);
++        assertEquals(1L, owner.state().worked(), "nested updates survive the outer callback failure");
++    }
++
++    @Test
++    void fullyFailedNestedDeliveryRestoresOuterFractionForRetry() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.borrowed(owner);
++        eclipse.internalWorked(0.75d);
++        IllegalStateException failure = new IllegalStateException("nested delivery failed");
++        owner.onWorked = ignored -> {
++            owner.onWorked = nested -> { throw failure; };
++            eclipse.internalWorked(1.0d);
++        };
++        assertSame(failure, assertThrows(IllegalStateException.class,
++                () -> eclipse.internalWorked(0.5d)));
++        assertEquals(0L, owner.state().worked(), "neither failed callback accepted work");
++        eclipse.internalWorked(0.25d);
++        assertEquals(1L, owner.state().worked(), "both failed updates restore the original fraction");
++    }
++
++    @Test
++    void saturatedDeliveryPublishesItsResetBeforeNestedFractions() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.borrowed(owner);
++        eclipse.internalWorked(0.75d);
++        owner.onWorked = ignored -> eclipse.internalWorked(0.5d);
++        eclipse.internalWorked(Double.MAX_VALUE);
++        assertEquals(1, owner.deliveries, "nested half must not consume the old fraction");
++        assertEquals(Long.MAX_VALUE, owner.state().worked());
++        eclipse.internalWorked(0.5d);
++        assertEquals(2, owner.deliveries, "the nested half remains available for the next report");
++    }
++
++    @Test
++    void workErrorPropagatesUnchangedAndRestoresOrdinaryFraction() {
++        CallbackOwner owner = new CallbackOwner();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.borrowed(owner);
++        eclipse.internalWorked(0.75d);
++        AssertionError failure = new AssertionError("work error marker");
++        owner.onWorked = ignored -> { throw failure; };
++        assertSame(failure, assertThrows(AssertionError.class,
++                () -> eclipse.internalWorked(0.5d)));
++        eclipse.internalWorked(0.25d);
++        assertEquals(1L, owner.state().worked());
++    }
++
++    @Test
++    void realSubMonitorSequentialChildrenPreserveBudgetAndBorrowedCompletion() {
++        M3DefaultProgressMonitor owner = new M3DefaultProgressMonitor();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(owner);
++        SubMonitor root = SubMonitor.convert(eclipse, "compile", 10);
++        long parentBudget = owner.state().totalWork();
++        SubMonitor parse = root.split(3);
++        parse.beginTask("parse", 6);
++        parse.worked(3);
++        SubMonitor link = root.split(7);
++        assertEquals(parentBudget * 3L / 10L, owner.state().worked());
++        link.beginTask("link", 7);
++        link.worked(7);
++        root.done();
++        assertEquals(parentBudget, owner.state().worked());
++        assertFalse(owner.state().done(), "SubMonitor does not own the original monitor");
++        eclipse.done();
++        assertTrue(owner.state().done());
++    }
++
++    @Test
++    void realSlicesReportParallelWorkAndKeepCancellationLocal() throws Exception {
++        M3DefaultProgressMonitor owner = new M3DefaultProgressMonitor();
++        IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(owner);
++        eclipse.beginTask("parallel", 100);
++        IProgressMonitor first = eclipse.slice(30);
++        IProgressMonitor second = eclipse.slice(70);
++        CountDownLatch ready = new CountDownLatch(2);
++        CountDownLatch start = new CountDownLatch(1);
++        try (var executor = Executors.newFixedThreadPool(2)) {
++            var left = executor.submit(() -> {
++                ready.countDown();
++                assertTrue(start.await(10, TimeUnit.SECONDS));
++                completeSlice(first, 300);
++                return null;
++            });
++            var right = executor.submit(() -> {
++                ready.countDown();
++                assertTrue(start.await(10, TimeUnit.SECONDS));
++                completeSlice(second, 700);
++                return null;
++            });
++            try {
++                assertTrue(ready.await(10, TimeUnit.SECONDS));
++            } finally {
++                start.countDown();
++            }
++            left.get(10, TimeUnit.SECONDS);
++            right.get(10, TimeUnit.SECONDS);
++        }
++        assertEquals(100L, owner.state().worked());
++        assertFalse(owner.state().done());
++        first.setCanceled(true);
++        assertFalse(owner.isCanceled(), "slice cancellation does not cancel its parent");
++        eclipse.setCanceled(true);
++        assertTrue(second.isCanceled());
++        eclipse.done();
++        assertTrue(owner.state().done());
++    }
++
++    private static void completeSlice(IProgressMonitor monitor, int work) {
++        monitor.beginTask("branch", work);
++        try {
++            for (int i = 0; i < work; i++) monitor.worked(1);
++        } finally {
++            monitor.done();
++        }
++    }
++
++    /** Real SPI delegate with one-shot synchronous observer callbacks. */
++    private static final class CallbackOwner implements M3ProgressMonitor {
++        private final M3DefaultProgressMonitor delegate = new M3DefaultProgressMonitor();
++        private Runnable onBegin;
++        private Runnable onDone;
++        private LongConsumer onWorked;
++        private int begins;
++        private int completions;
++        private int deliveries;
++
++        @Override public void beginTask(String name, long work) {
++            begins++;
++            Runnable callback = onBegin;
++            onBegin = null;
++            if (callback != null) callback.run();
++            delegate.beginTask(name, work);
++        }
++        @Override public void done() {
++            completions++;
++            Runnable callback = onDone;
++            onDone = null;
++            if (callback != null) callback.run();
++            delegate.done();
++        }
++        @Override public void worked(long work) {
++            deliveries++;
++            LongConsumer callback = onWorked;
++            onWorked = null;
++            if (callback != null) callback.accept(work);
++            delegate.worked(work);
++        }
++        @Override public void setProgress(long work, long total) { delegate.setProgress(work, total); }
++        @Override public void setTaskName(String name) { delegate.setTaskName(name); }
++        @Override public void subTask(String name) { delegate.subTask(name); }
++        @Override public boolean isCanceled() { return delegate.isCanceled(); }
++        @Override public void setCanceled(boolean value) { delegate.setCanceled(value); }
++        @Override public M3ProgressState state() { return delegate.state(); }
++    }
++
++    @Test
+     void ownedModePreservesEclipseLifecycleAndFractionalProgress() {
+         M3DefaultProgressMonitor m3 = new M3DefaultProgressMonitor();
+         IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(m3);
+diff --git a/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java b/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java
+index e78aaf9..b6da692 100644
+--- a/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java
++++ b/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java
+@@ -19,31 +19,76 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ public final class M3EclipseRuntimeActivator
+         implements BundleActivator, M3EclipseRuntimeServices {
+     private volatile BundleContext context;
+-    private volatile ServiceRegistration<M3EclipseRuntimeServices> service;
++    private ServiceRegistration<M3EclipseRuntimeServices> service;
++    private enum Lifecycle { STOPPED, STARTING, ACTIVE, STOPPING }
++    private Lifecycle lifecycle = Lifecycle.STOPPED;
++    private boolean stopRequested;
+ 
+     public M3EclipseRuntimeActivator() { }
+ 
+     @Override
+-    public synchronized void start(BundleContext newContext) {
++    public void start(BundleContext newContext) {
+         Objects.requireNonNull(newContext, "context");
+-        if (context != null || service != null) {
+-            throw new IllegalStateException("M3 Eclipse forwarder already started");
++        synchronized (this) {
++            if (lifecycle != Lifecycle.STOPPED) {
++                throw new IllegalStateException("M3 Eclipse forwarder already started");
++            }
++            lifecycle = Lifecycle.STARTING;
++            context = newContext;
+         }
+-        ServiceRegistration<M3EclipseRuntimeServices> registered =
+-                newContext.registerService(M3EclipseRuntimeServices.class, this, null);
+-        if (registered == null) {
+-            throw new IllegalStateException("OSGi returned no service registration");
++        ServiceRegistration<M3EclipseRuntimeServices> registered;
++        try {
++            // REGISTERED is synchronous: publish usable context before the framework call.
++            // Never hold our monitor across framework callbacks.
++            registered = newContext.registerService(M3EclipseRuntimeServices.class, this, null);
++            if (registered == null) {
++                throw new IllegalStateException("OSGi returned no service registration");
++            }
++        } catch (RuntimeException | Error failure) {
++            synchronized (this) {
++                context = null;
++                stopRequested = false;
++                lifecycle = Lifecycle.STOPPED;
++            }
++            throw failure;
+         }
+-        context = newContext;
+-        service = registered;
++        boolean stopAfterRegistration;
++        synchronized (this) {
++            service = registered;
++            stopAfterRegistration = stopRequested;
++            lifecycle = stopAfterRegistration ? Lifecycle.STOPPING : Lifecycle.ACTIVE;
++            stopRequested = false;
++        }
++        // A REGISTERED callback may stop us before registerService returns its handle.
++        if (stopAfterRegistration) unregister(registered);
+     }
+ 
+     @Override
+-    public synchronized void stop(BundleContext stoppedContext) {
+-        ServiceRegistration<M3EclipseRuntimeServices> registered = service;
+-        service = null;
+-        context = null;
+-        if (registered != null) registered.unregister();
++    public void stop(BundleContext stoppedContext) {
++        ServiceRegistration<M3EclipseRuntimeServices> registered;
++        synchronized (this) {
++            if (lifecycle == Lifecycle.STARTING) {
++                stopRequested = true;
++                return;
++            }
++            if (lifecycle != Lifecycle.ACTIVE) return;
++            lifecycle = Lifecycle.STOPPING;
++            registered = service;
++        }
++        unregister(registered);
++    }
++
++    private void unregister(ServiceRegistration<M3EclipseRuntimeServices> registered) {
++        try {
++            // UNREGISTERING callbacks may still obtain and use this service.
++            registered.unregister();
++        } finally {
++            synchronized (this) {
++                service = null;
++                context = null;
++                lifecycle = Lifecycle.STOPPED;
++            }
++        }
+     }
+ 
+     @Override
+diff --git a/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseEquinoxLifecycleTest.java b/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseEquinoxLifecycleTest.java
+new file mode 100644
+index 0000000..5d39b1a
+--- /dev/null
++++ b/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseEquinoxLifecycleTest.java
+@@ -0,0 +1,72 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.eclipse.framework;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertNull;
++import static org.junit.jupiter.api.Assertions.assertThrows;
++
++import java.nio.file.Path;
++import java.util.Map;
++import java.util.concurrent.atomic.AtomicInteger;
++import java.util.concurrent.atomic.AtomicReference;
++import org.eclipse.osgi.launch.EquinoxFactory;
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.io.TempDir;
++import org.osgi.framework.BundleContext;
++import org.osgi.framework.Constants;
++import org.osgi.framework.FrameworkEvent;
++import org.osgi.framework.ServiceEvent;
++import org.osgi.framework.ServiceListener;
++import org.osgi.framework.launch.Framework;
++
++/** Actual pinned Equinox service event delivery, independent of proxy callback fixtures. */
++class M3EclipseEquinoxLifecycleTest {
++    @TempDir Path storage;
++
++    @Test void serviceRemainsUsableInsideSynchronousLifecycleEvents() throws Exception {
++        Framework framework = new EquinoxFactory().newFramework(Map.of(
++                Constants.FRAMEWORK_STORAGE, storage.toString(),
++                Constants.FRAMEWORK_STORAGE_CLEAN, Constants.FRAMEWORK_STORAGE_CLEAN_ONFIRSTINIT));
++        framework.init();
++        framework.start();
++        try {
++            BundleContext context = framework.getBundleContext();
++            AtomicInteger registered = new AtomicInteger();
++            AtomicInteger unregistering = new AtomicInteger();
++            AtomicReference<Throwable> callbackFailure = new AtomicReference<>();
++            ServiceListener listener = event -> {
++                if (event.getType() != ServiceEvent.REGISTERED
++                        && event.getType() != ServiceEvent.UNREGISTERING) return;
++                Object service = context.getService(event.getServiceReference());
++                try {
++                    M3EclipseRuntimeServices published = (M3EclipseRuntimeServices) service;
++                    assertEquals(context.getBundles().length, published.bundles().size());
++                    if (event.getType() == ServiceEvent.REGISTERED) registered.incrementAndGet();
++                    else unregistering.incrementAndGet();
++                } catch (Throwable failure) {
++                    callbackFailure.compareAndSet(null, failure);
++                } finally {
++                    context.ungetService(event.getServiceReference());
++                }
++            };
++            context.addServiceListener(listener, "(objectClass=" + M3EclipseRuntimeServices.class.getName() + ")");
++            M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++            try {
++                activator.start(context);
++                assertNull(callbackFailure.get(), "REGISTERED service was unusable");
++                assertEquals(1, registered.get());
++                activator.stop(context);
++                assertNull(callbackFailure.get(), "UNREGISTERING service was unusable");
++                assertEquals(1, unregistering.get());
++                assertThrows(IllegalStateException.class, activator::bundles);
++            } finally {
++                activator.stop(context);
++                context.removeServiceListener(listener);
++            }
++        } finally {
++            framework.stop();
++            assertEquals(FrameworkEvent.STOPPED, framework.waitForStop(10000).getType());
++        }
++    }
++}
+diff --git a/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java b/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java
+index baa2351..6838c5e 100644
+--- a/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java
++++ b/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java
+@@ -57,6 +57,125 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+         assertThrows(IllegalStateException.class, () -> activator.resourceDelta(root, 1));
+     }
+ 
++    @Test void registeredCallbackCanUsePublishedService() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        BundleContext context = context(activator, () -> assertEquals(0, activator.bundles().size()), () -> {});
++        activator.start(context);
++        activator.stop(context);
++    }
++
++    @Test void unregisteringCallbackCanUsePublishedService() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        BundleContext context = context(activator, () -> {}, () -> assertEquals(0, activator.bundles().size()));
++        activator.start(context);
++        activator.stop(context);
++        assertThrows(IllegalStateException.class, activator::bundles);
++    }
++
++    @Test void failedRegistrationCanBeRetried() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        BundleContext failed = context(activator, () -> { throw new IllegalArgumentException("denied"); }, () -> {});
++        assertThrows(IllegalArgumentException.class, () -> activator.start(failed));
++        assertThrows(IllegalStateException.class, activator::bundles);
++        BundleContext valid = context(activator, () -> {}, () -> {});
++        activator.start(valid);
++        activator.stop(valid);
++    }
++
++    @Test void reentrantStopDuringRegistrationUnregistersExactlyOnce() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        AtomicInteger removals = new AtomicInteger();
++        BundleContext context = context(activator, () -> activator.stop(null), removals::incrementAndGet);
++        activator.start(context);
++        assertThrows(IllegalStateException.class, activator::bundles);
++        activator.stop(context);
++        assertEquals(1, removals.get());
++    }
++
++    @Test void reentrantStartDuringRegistrationIsRefused() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        BundleContext nested = context(activator, () -> {}, () -> {});
++        BundleContext context = context(activator,
++                () -> assertThrows(IllegalStateException.class, () -> activator.start(nested)), () -> {});
++        activator.start(context);
++        activator.stop(context);
++    }
++
++    @Test void reentrantStopDuringUnregistrationIsIdempotent() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        AtomicInteger removals = new AtomicInteger();
++        BundleContext context = context(activator, () -> {}, () -> {
++            removals.incrementAndGet();
++            activator.stop(null);
++            assertEquals(0, activator.bundles().size());
++        });
++        activator.start(context);
++        activator.stop(context);
++        assertEquals(1, removals.get());
++    }
++
++    @Test void registrationCallbackDoesNotHoldLifecycleMonitor() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        BundleContext context = context(activator, () ->
++                org.junit.jupiter.api.Assertions.assertDoesNotThrow(() ->
++                    java.util.concurrent.CompletableFuture.runAsync(() -> activator.stop(null))
++                        .get(2, java.util.concurrent.TimeUnit.SECONDS)), () -> {});
++        activator.start(context);
++        assertThrows(IllegalStateException.class, activator::bundles);
++    }
++
++    @Test void nullRegistrationRollsBackAndPermitsRetry() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        BundleContext missing = proxy(BundleContext.class, (instance, method, args) -> {
++            if (method.getName().equals("registerService")) return null;
++            throw new AssertionError(method.getName());
++        });
++        assertThrows(IllegalStateException.class, () -> activator.start(missing));
++        assertThrows(IllegalStateException.class, activator::bundles);
++        BundleContext valid = context(activator, () -> {}, () -> {});
++        activator.start(valid);
++        activator.stop(valid);
++    }
++
++    @Test void unregisterFailureStillClearsLocalLifecycle() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        IllegalArgumentException expected = new IllegalArgumentException("unregister failed");
++        BundleContext broken = context(activator, () -> {}, () -> { throw expected; });
++        activator.start(broken);
++        assertSame(expected, assertThrows(IllegalArgumentException.class, () -> activator.stop(broken)));
++        assertThrows(IllegalStateException.class, activator::bundles);
++        activator.stop(broken);
++        BundleContext valid = context(activator, () -> {}, () -> {});
++        activator.start(valid);
++        activator.stop(valid);
++    }
++
++    @Test void reentrantStartDuringUnregistrationIsRefused() {
++        M3EclipseRuntimeActivator activator = new M3EclipseRuntimeActivator();
++        BundleContext nested = context(activator, () -> {}, () -> {});
++        BundleContext context = context(activator, () -> {}, () ->
++                assertThrows(IllegalStateException.class, () -> activator.start(nested)));
++        activator.start(context);
++        activator.stop(context);
++    }
++
++    private static BundleContext context(M3EclipseRuntimeActivator activator,
++            Runnable registering, Runnable unregistering) {
++        ServiceRegistration<?> service = proxy(ServiceRegistration.class, (instance, method, args) -> {
++            if (method.getName().equals("unregister")) { unregistering.run(); return null; }
++            throw new AssertionError(method.getName());
++        });
++        return proxy(BundleContext.class, (instance, method, args) -> {
++            if (method.getName().equals("registerService")) {
++                assertSame(activator, args[1]);
++                registering.run();
++                return service;
++            }
++            if (method.getName().equals("getBundles")) return new Bundle[0];
++            throw new AssertionError(method.getName());
++        });
++    }
++
+     @SuppressWarnings("unchecked")
+     private static <T> T proxy(Class<T> type, java.lang.reflect.InvocationHandler handler) {
+         return (T) Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[]{type}, handler);
+diff --git a/test/jdk/java/util/ArrayList/M3MaskThresholdContracts.java b/test/jdk/java/util/ArrayList/M3MaskThresholdContracts.java
+new file mode 100644
+index 0000000..c639d7f
+--- /dev/null
++++ b/test/jdk/java/util/ArrayList/M3MaskThresholdContracts.java
+@@ -0,0 +1,104 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
++ * Licensed under GPL version 2, with the Classpath exception.
++ *
++ * @test
++ * @summary Threshold-selection maintenance preserves exact stable Object[] compaction
++ * @modules java.base/jdk.internal.mindex
++ * @run main/othervm --add-exports=java.base/jdk.internal.mindex=ALL-UNNAMED M3MaskThresholdContracts
++ */
++import java.util.Arrays;
++import java.util.Random;
++import jdk.internal.mindex.M3CollectionMaskCompactor;
++
++public final class M3MaskThresholdContracts {
++    private static final Object[] ITEMS = new Object[131100];
++    private static long cases;
++    static { for (int i = 0; i < ITEMS.length; i++) ITEMS[i] = i % 19 == 0 ? null : new Object(); }
++
++    private static void verify(boolean[] removed, int from, boolean noisyTail) {
++        int length = removed.length, to = from + length;
++        Object[] source = Arrays.copyOf(ITEMS, to + 7);
++        Object[] expected = source.clone(), actual = source.clone();
++        int end = from;
++        long[] mask = new long[((length + 63) >>> 6) + 2];
++        for (int i = 0; i < length; i++) {
++            if (removed[i]) mask[i >>> 6] |= 1L << (i & 63);
++            else expected[end++] = source[from + i];
++        }
++        if (noisyTail) {
++            if ((length & 63) != 0) mask[length >>> 6] |= -1L << (length & 63);
++            mask[mask.length - 1] = -1L;
++        }
++        long[] before = mask.clone();
++        int result = M3CollectionMaskCompactor.compact(actual, from, to, mask);
++        if (result != end) throw new AssertionError("survivor end " + cases);
++        for (int i = 0; i < actual.length; i++) {
++            if (actual[i] != expected[i]) throw new AssertionError("identity/window/discarded tail " + cases + ":" + i);
++        }
++        if (!Arrays.equals(mask, before)) throw new AssertionError("mask mutated");
++        cases++;
++    }
++
++    private static void refuses(Class<? extends Throwable> type, String message, Runnable work) {
++        try { work.run(); throw new AssertionError("missing " + type); }
++        catch (Throwable failure) {
++            if (failure.getClass() != type) throw new AssertionError("wrong exception", failure);
++            if (message != null && !message.equals(failure.getMessage())) throw new AssertionError("wrong message", failure);
++        }
++    }
++
++    public static void main(String[] args) {
++        for (int length = 0; length <= 16; length++) {
++            for (int bits = 0; bits < (1 << length); bits++) {
++                boolean[] removed = new boolean[length];
++                for (int i = 0; i < length; i++) removed[i] = (bits & (1 << i)) != 0;
++                verify(removed, (bits & 1) == 0 ? 0 : 5, true);
++            }
++        }
++        // Exhaust all sixteen-bit patterns on the >=512 strategy-selection path.
++        for (int bits = 0; bits < 65536; bits++) {
++            boolean[] removed = new boolean[513];
++            for (int i = 0; i < 16; i++) removed[60 + i] = (bits & (1 << i)) != 0;
++            removed[512] = (bits & 1) != 0;
++            verify(removed, 3, true);
++        }
++        Random random = new Random(20261020);
++        int[] lengths = {511,512,513,575,576,639,640,1023,1024,1025,4095,4096,4097,65535,65536,65537,131071};
++        for (int length : lengths) {
++            int limit = Math.max(4, length >>> 7);
++            for (int runs = Math.max(0, limit - 1); runs <= limit + 1; runs++) {
++                boolean[] removed = new boolean[length];
++                for (int i = 0; i < runs; i++) removed[(i * 2 + 63) % length] = true;
++                verify(removed, 7, true);
++            }
++            for (int pattern = 0; pattern < 8; pattern++) {
++                boolean[] removed = new boolean[length];
++                for (int i = 0; i < length; i++) removed[i] = switch (pattern) {
++                    case 0 -> false;
++                    case 1 -> true;
++                    case 2 -> (i & 1) == 0;
++                    case 3 -> i >= 63 && i < 129;
++                    case 4 -> i % 128 == 0;
++                    case 5 -> random.nextBoolean();
++                    case 6 -> random.nextInt(64) == 0;
++                    default -> random.nextInt(64) != 0;
++                };
++                verify(removed, pattern, true);
++            }
++        }
++        for (int trial = 0; trial < 2500; trial++) {
++            int length = trial % 9 == 0 ? 32768 + random.nextInt(32769) : 512 + random.nextInt(4096);
++            boolean[] removed = new boolean[length];
++            int chance = 1 + random.nextInt(99);
++            for (int i = 0; i < length; i++) removed[i] = random.nextInt(100) < chance;
++            verify(removed, random.nextInt(8), true);
++        }
++        refuses(NullPointerException.class,"values", () -> M3CollectionMaskCompactor.compact(null,-1,2,null));
++        refuses(NullPointerException.class,"deleted", () -> M3CollectionMaskCompactor.compact(new Object[1],-1,2,null));
++        refuses(IndexOutOfBoundsException.class,null, () -> M3CollectionMaskCompactor.compact(new Object[1],-1,2,new long[0]));
++        refuses(IllegalArgumentException.class,"mask too short", () -> M3CollectionMaskCompactor.compact(new Object[513],0,513,new long[8]));
++        if (M3CollectionMaskCompactor.compact(new Object[1],1,1,new long[0]) != 1) throw new AssertionError("empty window");
++        System.out.println("M3_MASK_THRESHOLD_CONTRACT_PASS cases=" + cases);
++    }
++}

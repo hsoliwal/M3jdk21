@@ -1,0 +1,32 @@
+{
+  "observed_date": "2026-10-20",
+  "sources": [
+    {
+      "repository": "apache/commons-collections",
+      "release": "rel/commons-collections-4.5.0",
+      "commit": "7f7fb0244abc940a2e9dd28b67508c0483a58c3e",
+      "path": "src/main/java/org/apache/commons/collections4/Bag.java",
+      "blob_sha": "b06061a016d4a4f1dc43e0ba0803e42ca94b6506",
+      "license": "Apache-2.0",
+      "use": "API contract inspection; no donor source copied"
+    },
+    {
+      "repository": "apache/commons-collections",
+      "release": "rel/commons-collections-4.5.0",
+      "commit": "7f7fb0244abc940a2e9dd28b67508c0483a58c3e",
+      "path": "src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java",
+      "blob_sha": "9da508f625f5ab6050c56b2da465e8aac4e448e2",
+      "license": "Apache-2.0",
+      "use": "Exact donor branch inspection; no donor source copied"
+    },
+    {
+      "repository": "spring-projects/spring-framework",
+      "release": "v6.2.0",
+      "commit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+      "path": "spring-core/src/main/java/org/springframework/util/MultiValueMapAdapter.java",
+      "blob_sha": "4c7c2f1d133cccef1eab060524a71cd3de4b45a9",
+      "license": "Apache-2.0",
+      "use": "Borrowed-list behavior inspection; no donor source copied"
+    }
+  ]
+}

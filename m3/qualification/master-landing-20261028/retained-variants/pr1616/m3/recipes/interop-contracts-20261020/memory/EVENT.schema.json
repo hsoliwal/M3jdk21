@@ -1,0 +1,622 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "admission",
+    "atoms",
+    "attempt_id",
+    "authors",
+    "canonical_path",
+    "change",
+    "correction_utc",
+    "correction_utc_status",
+    "documentation",
+    "event_schema",
+    "event_type",
+    "lesson",
+    "license",
+    "parents",
+    "pattern",
+    "publication_commit",
+    "publication_status",
+    "recipe_id",
+    "recipe_versions",
+    "recorded_utc",
+    "regression_fixtures",
+    "rejected_approaches",
+    "replay",
+    "repository",
+    "root_cause",
+    "schema",
+    "source_diff",
+    "supersedes",
+    "target_repository",
+    "target_source_revision",
+    "trigger",
+    "verification"
+  ],
+  "properties": {
+    "admission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "merge_authority",
+        "pending_gates",
+        "phase_promotion",
+        "scope",
+        "status"
+      ],
+      "properties": {
+        "merge_authority": {
+          "type": "boolean"
+        },
+        "pending_gates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phase_promotion": {
+          "type": "boolean"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "atoms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "after",
+          "atom_id",
+          "before",
+          "contract",
+          "dependencies",
+          "owner"
+        ],
+        "properties": {
+          "after": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "purpose",
+              "sha256",
+              "status"
+            ],
+            "properties": {
+              "path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          },
+          "atom_id": {
+            "type": "string"
+          },
+          "before": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "purpose",
+              "sha256",
+              "status"
+            ],
+            "properties": {
+              "path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          },
+          "contract": {
+            "type": "string"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "owner": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "attempt_id": {
+      "type": "string"
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "canonical_path": {
+      "type": "string"
+    },
+    "change": {
+      "type": "string"
+    },
+    "correction_utc": {
+      "type": "null"
+    },
+    "correction_utc_status": {
+      "type": "string"
+    },
+    "documentation": {
+      "type": "string"
+    },
+    "event_schema": {
+      "type": "string",
+      "const": "m3-interop-contracts-correction-event/1"
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "lesson": {
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "parents": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      },
+      "uniqueItems": true
+    },
+    "pattern": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalogue",
+        "category",
+        "exclusions",
+        "matching",
+        "refusal"
+      ],
+      "properties": {
+        "catalogue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "category": {
+          "type": "string"
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matching": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "refusal": {
+          "type": "string"
+        }
+      }
+    },
+    "publication_commit": {
+      "type": "null"
+    },
+    "publication_status": {
+      "type": "string"
+    },
+    "recipe_id": {
+      "type": "string"
+    },
+    "recipe_versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "after",
+        "after_version",
+        "before",
+        "dependency_artifacts"
+      ],
+      "properties": {
+        "after": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "purpose",
+            "sha256",
+            "status"
+          ],
+          "properties": {
+            "path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "type": "string"
+            }
+          }
+        },
+        "after_version": {
+          "type": "string"
+        },
+        "before": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "purpose",
+            "sha256",
+            "status"
+          ],
+          "properties": {
+            "path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "type": "string"
+            }
+          }
+        },
+        "dependency_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "purpose",
+              "sha256",
+              "status"
+            ],
+            "properties": {
+              "path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "recorded_utc": {
+      "type": "string"
+    },
+    "regression_fixtures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "purpose",
+          "sha256",
+          "status"
+        ],
+        "properties": {
+          "path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rejected_approaches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "approach",
+          "reason"
+        ],
+        "properties": {
+          "approach": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "replay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commands",
+        "limitations",
+        "status"
+      ],
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "repository": {
+      "type": "string"
+    },
+    "root_cause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "explanation",
+        "status"
+      ],
+      "properties": {
+        "explanation": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "schema": {
+      "type": "string",
+      "const": "MOP-RCM/1.0"
+    },
+    "source_diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "purpose",
+        "sha256",
+        "status"
+      ],
+      "properties": {
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      },
+      "uniqueItems": true
+    },
+    "target_repository": {
+      "type": "string"
+    },
+    "target_source_revision": {
+      "type": "string"
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact",
+        "expected",
+        "observation_scope",
+        "observed_line"
+      ],
+      "properties": {
+        "artifact": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "purpose",
+            "sha256",
+            "status"
+          ],
+          "properties": {
+            "path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "type": "string"
+            }
+          }
+        },
+        "expected": {
+          "type": "string"
+        },
+        "observation_scope": {
+          "type": "string"
+        },
+        "observed_line": {
+          "type": "string"
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commands",
+        "environment",
+        "evidence",
+        "outcome",
+        "status"
+      ],
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "purpose",
+              "sha256",
+              "status"
+            ],
+            "properties": {
+              "path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:synexia:m3-interop-contracts-correction-event:1",
+  "title": "Bounded interop recipe correction event"
+}

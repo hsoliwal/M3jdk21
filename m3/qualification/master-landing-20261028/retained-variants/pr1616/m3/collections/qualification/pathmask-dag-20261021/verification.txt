@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java: OK
+m3/collections/src/main/native/collections/m3_index_path_masks.c: OK
+m3/collections/src/test/java/com/m3/collections/M3PathMaskChunkProof.java: OK
+PASS backend=JAVA cases=1620 checks=1906217 digest=5d4c79f751930178
+PASS missing checks=2
+PASS backend=NATIVE_REQUIRED cases=1620 checks=1906217 digest=5d4c79f751930178
+PASS defensive=null checks=2
+PASS defensive=offset checks=2
+PASS backend=NATIVE_REQUIRED cases=1620 checks=1906217 digest=5d4c79f751930178
+/mnt/data/m3-work/received-proof/public-api.txt: OK
+PASS exact received product-kernel proof; full collection/JDK/Windows qualification NOT_RUN

@@ -1,0 +1,41 @@
+{
+  "schema": "m3-interop-inherited-sources-v1",
+  "sources": [
+    {
+      "path": "upstream-host/NOTICE.md",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "2fc0a939882de871a2d64120df1183da330f6846",
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/NOTICE.md",
+      "sha256": "bab2ebb9b20d46d60ed367472e4610085c2151f0fa644f9cdc71879232c9884b",
+      "git_blob": "70d0417d6e64b98cc847cf0f3662c9ac61f5f96c",
+      "disposition": "Byte-exact inheritance; original scope and historical statuses retained"
+    },
+    {
+      "path": "provenance/inherited/PUBLIC_ENGINE_PREEXISTENCE.json",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "2fc0a939882de871a2d64120df1183da330f6846",
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/provenance/PUBLIC_ENGINE_PREEXISTENCE.json",
+      "sha256": "112a5be772cf92c9b5b219e6a6f5aa211ee57dcf217590bdcaaf1adb674f8cf1",
+      "git_blob": "0a99b0b8861c41844d8fd5bd1dfdcd13c917dbf4",
+      "disposition": "Byte-exact inheritance; original scope and historical statuses retained"
+    },
+    {
+      "path": "catalogue/inherited/PROBLEMS_20261020.tsv",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "2fc0a939882de871a2d64120df1183da330f6846",
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/catalogue/PROBLEMS_20261020.tsv",
+      "sha256": "08fd0118e0a3f1225846e52ac07d1c0ef1bce99704806af791f8dc165d020ea9",
+      "git_blob": "13aa28535e6a03f2415c9b0ab70c7b6231480b8e",
+      "disposition": "Byte-exact inheritance; original scope and historical statuses retained"
+    },
+    {
+      "path": "catalogue/inherited/INHERITED_LOOKUP_PROVENANCE.tsv",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "2fc0a939882de871a2d64120df1183da330f6846",
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/catalogue/INHERITED_LOOKUP_PROVENANCE.tsv",
+      "sha256": "e50ed945f9d64519744945895af73b0df57039d3079d603d59f4929c963997cf",
+      "git_blob": "517250be217a44040c9f7a7638a1b17657088f09",
+      "disposition": "Byte-exact inheritance; original scope and historical statuses retained"
+    }
+  ]
+}

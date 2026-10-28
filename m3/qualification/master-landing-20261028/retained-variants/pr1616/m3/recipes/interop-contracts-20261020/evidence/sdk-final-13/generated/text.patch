@@ -1,0 +1,55 @@
+diff --git a/m3/collections/interop/SDK_FAMILIES.md b/m3/collections/interop/SDK_FAMILIES.md
+index 117b2e3..93ca612 100644
+--- a/m3/collections/interop/SDK_FAMILIES.md
++++ b/m3/collections/interop/SDK_FAMILIES.md
+@@ -1,3 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
++<!-- SPDX-License-Identifier: Apache-2.0 -->
++
+ # M3 collection SDK: five correctly identified contract families
+ 
+ This is an **additive SDK surface**, not a renamed donor class library. Preserve JDK,
+@@ -10,7 +13,8 @@
+ The historical `name-mapping.json` remains the source-migration authority. The accompanying
+ `sdk-family-bindings.tsv` maps **this factory surface** to exact API names and physical
+ owners; it does not replace that migration history or the accumulated algorithm catalogue.
+-There are 23 mapped factories, not 22 complete donor libraries or an exhaustive API census.
++There are 25 mapped factories, including the existing Guava BiMap and Apache BidiMap
++entries. This is a bounded factory inventory, not an exhaustive API census.
+ All other APIs remain outside this packet's qualification boundary.
+ 
+ ## Names and storage
+@@ -23,10 +27,11 @@
+ | JDK | `jdkDeque` | `java.util.Deque` | `com.m3.collections.M3LinkedList` |
+ | JDK | `jdkSortedMap` | `java.util.NavigableMap` | `com.m3.collections.M3TreeMap` |
+ | JDK | `jdkSortedSet` | `java.util.NavigableSet` | `com.m3.collections.M3TreeSet` |
+-| GUAVA | `guavaListMultimap` | `com.google.common.collect.ListMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedList` |
++| GUAVA | `guavaListMultimap` | `com.google.common.collect.ListMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3ArrayList` |
+ | GUAVA | `guavaSetMultimap` | `com.google.common.collect.SetMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedHashSet` |
+ | GUAVA | `guavaSortedSetMultimap` | `com.google.common.collect.SortedSetMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3TreeSet` |
+ | GUAVA | `guavaTable` | `com.google.common.collect.Table` | `com.m3.collections.M3LinkedHashMap` |
++| GUAVA | `guavaBiMap` | `com.google.common.collect.BiMap` | `com.m3.collections.M3LinkedHashMap` |
+ | ECLIPSE_COLLECTIONS | `eclipseMap` | `org.eclipse.collections.api.map.MutableMap` | `com.m3.collections.M3LinkedHashMap` |
+ | ECLIPSE_COLLECTIONS | `eclipseList` | `org.eclipse.collections.api.list.MutableList` | `com.m3.collections.M3LinkedList` |
+ | ECLIPSE_COLLECTIONS | `eclipseSet` | `org.eclipse.collections.api.set.MutableSet` | `com.m3.collections.M3LinkedHashSet` |
+@@ -38,6 +43,7 @@
+ | SPRING_FRAMEWORK | `springCaseInsensitiveMap` | `java.util.Map` | `com.m3.collections.M3LinkedHashMap` (original payload owner plus folded-key index) |
+ | APACHE_COMMONS_COLLECTIONS | `apacheListValuedMap` | `org.apache.commons.collections4.ListValuedMap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedList` |
+ | APACHE_COMMONS_COLLECTIONS | `apacheSetValuedMap` | `org.apache.commons.collections4.SetValuedMap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedHashSet` |
++| APACHE_COMMONS_COLLECTIONS | `apacheBidiMap` | `org.apache.commons.collections4.BidiMap` | `com.m3.collections.M3LinkedHashMap` |
+ | GUAVA | `guavaFilteredCollection` | `java.util.Collection` | `com.m3.collections.M3LinkedList` |
+ | GUAVA | `guavaFilteredNavigableSet` | `java.util.NavigableSet` | `com.m3.collections.M3TreeSet` |
+ 
+diff --git a/m3/collections/interop/sdk-family-bindings.tsv b/m3/collections/interop/sdk-family-bindings.tsv
+index 9d3f8f1..f8432b0 100644
+--- a/m3/collections/interop/sdk-family-bindings.tsv
++++ b/m3/collections/interop/sdk-family-bindings.tsv
+@@ -5,7 +5,7 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ JDK	jdkDeque		java.util.Deque	com.m3.collections.M3LinkedList	com.m3.collections.M3LinkedList	M3_CREATED	21
+ JDK	jdkSortedMap	java.util.Comparator	java.util.NavigableMap	com.m3.collections.M3TreeMap	com.m3.collections.M3TreeMap	M3_CREATED	21
+ JDK	jdkSortedSet	java.util.Comparator	java.util.NavigableSet	com.m3.collections.M3TreeSet	com.m3.collections.M3TreeSet	M3_CREATED	21
+-GUAVA	guavaListMultimap		com.google.common.collect.ListMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedList	M3_CREATED	33.4.8-jre
++GUAVA	guavaListMultimap		com.google.common.collect.ListMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3ArrayList	M3_CREATED	33.4.8-jre
+ GUAVA	guavaSetMultimap		com.google.common.collect.SetMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedHashSet	M3_CREATED	33.4.8-jre
+ GUAVA	guavaSortedSetMultimap	java.util.Comparator	com.google.common.collect.SortedSetMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3TreeSet	M3_CREATED	33.4.8-jre
+ GUAVA	guavaTable		com.google.common.collect.Table	com.google.common.collect.Tables	com.m3.collections.M3LinkedHashMap	M3_CREATED	33.4.8-jre
