@@ -1,0 +1,6 @@
+path	sha256	git_blob	mode	pr	note
+.github/workflows/m3-collections-interop-receiving.yml	91883cf015d6e0364788062609fe830d2b0baf5f0345be0bb6861a19b64c83a9	358eb560f0006c8a35c304a4adec4013eee0acc7	100644	1952	PR version, not live
+m3/collections/interop/qualification/native-required-workflow-20261025/SOURCE_RECEIPT.tsv	0f7107ed3186d53a6dbfe3a72c9cfa7e56d4dab8cfa5c8b0b49f3b2dbd8c45b3	2a79391f05bf23db4b5d439af6260173b8910f68	100644	1952	PR version, not live
+m3/collections/interop/qualification/native-sparse-closure-20261025/SOURCE_CLOSURE_RECEIPT.tsv	dde7477460911a5a53272f34c64a133dfc58698c497dca0d037b7f63cb173320	cf373dcd62ec6c5dee68b201a3f6f79291866e9b	100644	1952	PR version, not live
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java	29691e36f212ae79c31a06a597a58e76c7e51280787c46db6d7264b30fd567e0	879c1560e47f028195bdada4f8b4cca2382cfd52	100644	1952	PR version, not live
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java	3282d28c0bf4272e8a426baccfbca383a89a05fae7b624e1a2340d1864135dd1	dc2090392322557e021d7b27508dc95680f6e601	100644	1952	PR version, not live
