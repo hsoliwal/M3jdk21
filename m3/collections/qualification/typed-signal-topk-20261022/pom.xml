@@ -49,6 +49,7 @@
             <arg>-Werror</arg>
           </compilerArgs>
           <includes>
+            <include>module-info.java</include>
             <include>com/m3/collections/M3SignalColumns.java</include>
             <include>com/m3/collections/M3SignalTopK.java</include>
           </includes>

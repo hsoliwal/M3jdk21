@@ -44,6 +44,7 @@
           <proc>none</proc>
           <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
           <includes>
+            <include>module-info.java</include>
             <include>com/m3/collections/M3SignalColumns.java</include>
             <include>com/m3/collections/M3SignalTopK.java</include>
             <include>com/m3/collections/M3SignalRelations.java</include>
