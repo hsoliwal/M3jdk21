@@ -1,0 +1,329 @@
+{
+  "schema": "M3_JDT_SOURCE_CLOSURE_V1",
+  "sources": [
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/AstProjection.java",
+      "sha256": "b86c4006a3de0e65d5939051342a7b332121c7bcebf95a9458f579fd4dcfd434",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/AstProjection.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/BindingEnvironment.java",
+      "sha256": "c335beb7dfb3fc88f000d580f4deb1a70c838bfe0d51439d7ec4780018cbda3d",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/BindingEnvironment.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/Diagnostic.java",
+      "sha256": "fba86c42246661614cd8189124b755b860a574705cb025b461d9edb15481a3ee",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/Diagnostic.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/InventorySelection.java",
+      "sha256": "c4a879d00d67b5babe7b734af29b223561699cd27e9e7a82f23ed915a707153b",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/InventorySelection.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/NodeFact.java",
+      "sha256": "1336c8695dec40f251626a3459dfa76c31f8e49bf8d4d760b679dec2cb6b4c40",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/NodeFact.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/ParseProfile.java",
+      "sha256": "2a12bed415c123db67a765b52e20f49c39be3fba16188d0a752cd811cadfdae5",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/ParseProfile.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/ParseRequest.java",
+      "sha256": "61bf84c0c3dd9d6d8d77e60b2266f037ba79c20ef07303130efd59f07add4964",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/ParseRequest.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/ParseScope.java",
+      "sha256": "95f21f47d27c757b7ab91bc2dcab0544458cd94ea26ea2f6d10afec4ed660534",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/ParseScope.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/Range.java",
+      "sha256": "f65402cfa4ed0cc880557367d3a469b287e3ec8ee5620d150d7751121ec9f8d2",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/Range.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/SelectiveParser.java",
+      "sha256": "393b3260f380bb8c457fa981b2c6285e745666a55a22801f752eef81460162b6",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/SelectiveParser.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/SourceEdit.java",
+      "sha256": "f8452a535dafe3c8cf65c4a1eb71c0145c27b0bbf20189d33c40c7a0350372a1",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/SourceEdit.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/api/src/main/java/com/synexia/cognix/eclipse/selective/api/Verification.java",
+      "sha256": "4d0c1afd32007ccb0a7c30d2d0008dfeee6035d385fe15702d1a306dbcebec1e",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/api/Verification.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/bridge-jdt/src/main/java/com/synexia/cognix/eclipse/selective/bridge/JdtBoundedSyntax.java",
+      "sha256": "1bb7b9e35d9f789ae8eb7ace1166550c4f27a90d555901809a811186fce9ea33",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/bridge/JdtBoundedSyntax.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/bridge-jdt/src/main/java/com/synexia/cognix/eclipse/selective/bridge/JdtProgressAdapter.java",
+      "sha256": "c3887a51f241d70e1e9f3bf8bcdc801a09817d1847db7629a69b993ae1a194ab",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/bridge/JdtProgressAdapter.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/bridge-jdt/src/main/java/com/synexia/cognix/eclipse/selective/bridge/JdtRewritePlanner.java",
+      "sha256": "c2e22917c92fa1d0d2410bc820770b99ed9cf85c08f9b9a055986435e659327a",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/bridge/JdtRewritePlanner.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/bridge-jdt/src/main/java/com/synexia/cognix/eclipse/selective/bridge/JdtSelectiveParser.java",
+      "sha256": "24d3f2454c3e5bbe821873627d66af9f6f7b61bb6b038aefc0470a769fd4a0f4",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/bridge/JdtSelectiveParser.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/bridge-jdt/src/main/java/com/synexia/cognix/eclipse/selective/bridge/RewriteRecipe.java",
+      "sha256": "0c6b28861c63cf9f568ccf75b13bc02c616376ab3cf298283f51d2626bd71078",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/bridge/RewriteRecipe.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/main/java/com/synexia/cognix/eclipse/selective/core/JdkCompileGate.java",
+      "sha256": "3f2e8280aefc9bf9d3000e5006aefb30ab5a5195f6a998a47b59e76c19c81ab1",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/core/JdkCompileGate.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/main/java/com/synexia/cognix/eclipse/selective/core/Preview.java",
+      "sha256": "4cf4513920ed2b53cdaccc5cc78537edb531c51900f9c40d7a41bd03a606fde3",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/core/Preview.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/main/java/com/synexia/cognix/eclipse/selective/core/ProgressChecks.java",
+      "sha256": "582f219e1bbd9f7f45cd810f17aff6639b96422f638688ca8c804f53a2290cb2",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/core/ProgressChecks.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/main/java/com/synexia/cognix/eclipse/selective/core/ProjectionCache.java",
+      "sha256": "be23077d94fbd421a400ea2a84caadfa65e9a7683e49d61df052c1d45abaf29e",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/core/ProjectionCache.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/main/java/com/synexia/cognix/eclipse/selective/core/SelectiveAstPipeline.java",
+      "sha256": "4b973b044e0e790573bc6dd4527dcfa55ba746148a75df94233ce8c8aa937a92",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/core/SelectiveAstPipeline.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/main/java/com/synexia/cognix/eclipse/selective/core/Utf8Snapshot.java",
+      "sha256": "1e190fb70d4ef91c0af18cb9977bb9eaa073f53d986b0c2dba4416745f6e5925",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/core/Utf8Snapshot.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/main/java/com/synexia/cognix/eclipse/selective/core/VerificationRun.java",
+      "sha256": "93ef037bd8a44dc5e51e6a8e1423a75fe1e0d9ab56473eec33855f866b5a5e7b",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/cognix/eclipse/selective/core/VerificationRun.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java",
+      "sha256": "397bcfc5e8eaa4d516f6fccd1d3c238be4432f6f6a49f77a425ae21fd7d969ff",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/common/progress/ChildProgressMonitor.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java",
+      "sha256": "a6ea4f264fd771e52bfe575baa35b96de8d06abec723dab7eac712d5843524de",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/common/progress/ProgressMonitor.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java",
+      "sha256": "29cde61a192e454dd2ffde25e5a142cdc2a25e806ce91f7f01e6d5d7f6bf6960",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/common/progress/ProgressState.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "synexia-job/src/main/java/com/synexia/job/ChildProgressMonitor.java",
+      "sha256": "1fdd7db84f80b6e171669a3d60d5e8ec5e4971fde6c105d906b87dbf6fd2a913",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/job/ChildProgressMonitor.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java",
+      "sha256": "1dea7f0324c0106d993e6688e221d1f9755c35e6c70d292c2b75eb4fd28cc00e",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/job/IProgressMonitor.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "synexia-job/src/main/java/com/synexia/job/ProgressSnapshot.java",
+      "sha256": "9aea76a6dfbf7fb954ffd03081520a11e2e8ef515c0d3e556a735408187f1267",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/job/ProgressSnapshot.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java",
+      "sha256": "7a5f950efde91f07e8df46a092bb34408b49532807be361a6c1da19ac3b3bf45",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/synexia/job/utils/ProgressCalculationUtils.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/bridge-jdt/src/test/java/com/synexia/cognix/eclipse/selective/bridge/JdtContractTest.java",
+      "sha256": "b58cf1fae341cb6cffe91847764787212dcff46846884d058e2ee6d8f5cc342f",
+      "license": "Apache-2.0",
+      "role": "test",
+      "destination": "com/synexia/cognix/eclipse/selective/bridge/JdtContractTest.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/bridge-jdt/src/test/java/com/synexia/cognix/eclipse/selective/bridge/JdtRewriteNormalizationTest.java",
+      "sha256": "9bb6c5a6677f147c3150d6680ea4f7325824f4dbc1cac791a0b74e1113c0fb01",
+      "license": "Apache-2.0",
+      "role": "test",
+      "destination": "com/synexia/cognix/eclipse/selective/bridge/JdtRewriteNormalizationTest.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/test/java/com/synexia/cognix/eclipse/selective/core/CoreContractTest.java",
+      "sha256": "440251a917d3fad2535592d73ea7d24b07035c0b45538c4e88774f3e938bead7",
+      "license": "Apache-2.0",
+      "role": "test",
+      "destination": "com/synexia/cognix/eclipse/selective/core/CoreContractTest.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "08e84ed4430894e07dea272758401fd7202d2187",
+      "path": "cognix-eclipse-mechanics-adapters/selective-ast/core/src/test/java/com/synexia/cognix/eclipse/selective/core/JdkGateContractTest.java",
+      "sha256": "5ea98016c3030437badd9a93b3bc5af02ab6691ddcc09412e4b48f0d7c50fc88",
+      "license": "Apache-2.0",
+      "role": "test",
+      "destination": "com/synexia/cognix/eclipse/selective/core/JdkGateContractTest.java"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "677437be295b23f7ccf7409be287008944d0e8b0",
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java",
+      "sha256": "0daf29ca1e035d8facfaea0ef86f0f91158320f0d343f51b12dd6fc81a4f9428",
+      "license": "Apache-2.0",
+      "role": "main",
+      "destination": "com/m3/compiletime/M3ASTLeafIndex.java"
+    }
+  ]
+}
