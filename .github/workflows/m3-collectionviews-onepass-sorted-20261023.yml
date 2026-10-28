@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 java.base CollectionViews Original-Owner Superset
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/**'
+      - 'm3/collections/receiving/collectionviews-*'
+      - '.github/workflows/m3-collectionviews-onepass-sorted-20261023.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  patched-java21-owner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source-sealed exact product postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          test "$(sha256sum src/java.base/share/classes/java/util/CollectionViews.java | cut -d' ' -f1)" = 4fc81eda7a7b1831f36abc20fca52f9ba898fa7a767f2c1b62f8eab872ec056f
+          test "$(sha256sum test/jdk/java/util/CollectionViews/FilteredOnePassCowSupersetTest.java | cut -d' ' -f1)" = a948973df45ca9247c3811f6aad7dbbc5969091602e93a7fae2c2c9248c8113f
+          test "$(sha256sum test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java | cut -d' ' -f1)" = e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad
+      - name: Compile real java.base class via patched Java21
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-views/source/java/util" "$RUNNER_TEMP/m3-views/patch" "$RUNNER_TEMP/m3-views/tests"
+          cp src/java.base/share/classes/java/util/CollectionViews.java "$RUNNER_TEMP/m3-views/source/java/util/CollectionViews.java"
+          javac --release 21 -proc:none -Xlint:all -Werror             --patch-module java.base="$RUNNER_TEMP/m3-views/source"             -d "$RUNNER_TEMP/m3-views/patch"             "$RUNNER_TEMP/m3-views/source/java/util/CollectionViews.java"
+      - name: Compile and run new and historical contract oracles on patched java.base
+        shell: bash
+        run: |
+          set -euo pipefail
+          javac --release 21 -proc:none -Xlint:all -Werror             --patch-module java.base="$RUNNER_TEMP/m3-views/patch"             -d "$RUNNER_TEMP/m3-views/tests"             test/jdk/java/util/CollectionViews/FilteredOnePassCowSupersetTest.java             test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java             test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java             test/jdk/java/util/CollectionViews/M3CollectionViewsCursorMaskContract.java             test/jdk/java/util/CollectionViews/CollectionViewsContract.java
+          for test in FilteredOnePassCowSupersetTest FilteredSortedSpliteratorMetadataTest               FilteredSpliteratorReentrantTest M3CollectionViewsCursorMaskContract CollectionViewsContract; do
+            java --patch-module java.base="$RUNNER_TEMP/m3-views/patch"               --add-opens java.base/java.util=ALL-UNNAMED               -Xss256k -cp "$RUNNER_TEMP/m3-views/tests" "$test"
+          done
+      - name: Receiver authority boundary (no new JNI symbols)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -E '(^|[[:space:]])native[[:space:]]' src/java.base/share/classes/java/util/CollectionViews.java
+          test -f m3/collections/receiving/collectionviews-onepass-cow-20261023.json
+          test -f m3/collections/receiving/collectionviews-sorted-meta-20261023.json
