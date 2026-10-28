@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.ast;
 
+import java.security.DigestException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -35,8 +36,9 @@ public final class M3SyntaxIndex {
         int size = tree.size();
         this.digests = new byte[Math.multiplyExact(size, HASH_BYTES)];
         byte[] source = tree.sourceBytes(); // one transient source read; no retained duplicate
+        MessageDigest hash = sha256(); // builder-confined cursor, one digest for every row
         for (int node = size - 1; node >= 0; node--) {
-            MessageDigest hash = sha256();
+            hash.reset();
             text(hash, "m3.syntax.subtree/1");
             text(hash, tree.grammar());
             text(hash, tree.kind(node));
@@ -57,8 +59,12 @@ public final class M3SyntaxIndex {
             }
             chunk(hash, source, cursor, tree.endByte(node));
             integer(hash, count);
-            byte[] computed = hash.digest();
-            System.arraycopy(computed, 0, digests, HASH_BYTES * node, HASH_BYTES);
+            // Write the exact V1 digest into its existing primitive sidecar; no per-node byte[32].
+            try {
+                hash.digest(digests, HASH_BYTES * node, HASH_BYTES);
+            } catch (DigestException impossible) {
+                throw new AssertionError(impossible);
+            }
         }
     }
 

@@ -7,3 +7,17 @@ licensed under the Apache License, Version 2.0.
 It implements the public API contract of org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap from
 Apache Commons Collections 4.5.0 (Copyright 2001-2025 The Apache Software Foundation, Apache License,
 Version 2.0) and links the Commons BidiMap, MapIterator and ResettableIterator interfaces. No Commons implementation code is included.
+
+This standalone module now includes UNMODIFIED public Apache Commons Collections
+4.5.0 API source files org.apache.commons.collections4.BidiMap,
+IterableMap, Put, IterableGet, Get, MapIterator and ResettableIterator
+from apache/commons-collections tag rel/commons-collections-4.5.0.
+All original Apache Software Foundation copyright/license headers (Apache
+License, Version 2.0) remain unchanged in each imported file. No external
+Apache Commons implementation source is copied, and the existing
+M3DualLinkedHashBidiMap stays independently owned by Hitesh Soliwal
+and contributors under Apache-2.0 with dynamic arrays/primitive offsets.
+The Commons 4.5.0 JAR remains ONLY a test-scope differential oracle and
+is no longer a runtime/transitive dependency of this standalone artifact.
+Do not combine this module or its public Apache names with full Commons
+on one classloader until duplicate/split-package qualification.

@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3SyntaxTree ten-plane atomic growth Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3Syntax*Growth*.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxTreeAtomic*Contract.java'
+      - '.github/workflows/m3-syntax-tree-atomic-growth-java21.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-java21-ast:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java21 source-owner compilation and deterministic faults
+        shell: bash
+        run: |
+          set -euo pipefail
+          work="$RUNNER_TEMP/m3-atomic-ast"
+          mkdir -p "$work/classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$work/classes" \
+            m3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java \
+            m3/ast/src/test/java/com/m3/ast/M3SyntaxTreeContract.java \
+            m3/ast/src/test/java/com/m3/ast/M3SyntaxTreeAtomicGrowthContract.java \
+            m3/ast/src/test/java/com/m3/ast/M3SyntaxGrowthFault.java
+          javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED \
+            -cp "$work/classes" -d "$work/classes" \
+            m3/ast/src/test/java/com/m3/ast/M3SyntaxGrowthAgent.java \
+            m3/ast/src/test/java/com/m3/ast/M3SyntaxTreeAtomicFailureContract.java
+          printf 'Premain-Class: com.m3.ast.M3SyntaxGrowthAgent\n\n' > "$work/manifest.mf"
+          jar cfm "$work/agent.jar" "$work/manifest.mf" -C "$work/classes" com/m3/ast
+          for mode in default interpreted; do
+            vm=()
+            if [ "$mode" = interpreted ]; then vm=(-Xint); fi
+            java "${vm[@]}" -cp "$work/classes" com.m3.ast.M3SyntaxTreeContract
+            java "${vm[@]}" -cp "$work/classes" com.m3.ast.M3SyntaxTreeAtomicGrowthContract
+            java "${vm[@]}" \
+              --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED \
+              -javaagent:"$work/agent.jar" -cp "$work/classes" \
+              com.m3.ast.M3SyntaxTreeAtomicFailureContract
+          done

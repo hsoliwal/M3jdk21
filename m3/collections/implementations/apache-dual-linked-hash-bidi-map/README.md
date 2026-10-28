@@ -91,3 +91,29 @@ Relation to `implementations/apache` `M3BidiMap` (the owner of the DualHashBidiM
 - It excludes serialization and post-mutation entries and iterators from its qualification boundary.
 - This class embeds the same table pattern with birth stamps so that those cases are exact.
 - Merging the two owners is a proposal only.
+
+## Source-closed Apache Commons BidiMap public API (2026-10-27)
+
+This module ships 7 UNMODIFIED original Apache Software Foundation
+Apache-2.0 public interfaces: `BidiMap`, `IterableMap`, `Put`,
+`IterableGet`, `Get`, `MapIterator`, `ResettableIterator`.
+Their source is pinned to Commons Collections 4.5.0; the existing
+`M3DualLinkedHashBidiMap` remains the first-party actual implementation
+with two `Object[] keys/values`/primitive `int[]` position, hash,
+generation, order-link and mask lanes.
+
+The Commons JAR is now Maven **test scope only** for the true 96,000
+operation differential suite. New JUnit checks exact public method
+descriptors, live forward/inverse state/iterator semantics and production
+Maven dependency scopes. Strict exact-head CI compiles source without
+external Commons classes, checks `jdeps java.base` and invokes Maven
+JUnit + first-party M3 JaCoCo 99% owned classes. Inlined original ASF
+interface files are excluded only from this first-party coverage threshold,
+not compilation/tests.
+
+The canonical immutable Java/OpenRewrite/Maven transformation recipe is
+`com.synexia.m3.InlineCommonsBidiMapApi20261027` exclusively in
+`hsoliwal/com.synexia`. This product fork receives postimages, notices
+and a data-only receipt—not recipe projects. The full Apache Commons SDK
+and wider five-provider collection ABI remain HOLD, as do JPMS split
+packages and duplicate named APIs when combining standalone modules.

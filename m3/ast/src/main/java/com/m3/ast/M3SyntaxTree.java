@@ -248,11 +248,28 @@ public final class M3SyntaxTree {
         private void grow() {
             if (size < kind.length) return;
             int n = Math.addExact(kind.length, (kind.length >>> 1) + 1);
-            kind = Arrays.copyOf(kind, n); field = Arrays.copyOf(field, n);
-            flags = Arrays.copyOf(flags, n); parent = Arrays.copyOf(parent, n);
-            firstChild = Arrays.copyOf(firstChild, n); nextSibling = Arrays.copyOf(nextSibling, n);
-            lastChild = Arrays.copyOf(lastChild, n); lastEnd = Arrays.copyOf(lastEnd, n);
-            start = Arrays.copyOf(start, n); end = Arrays.copyOf(end, n);
+            // Stage every original lane before publishing any replacement. If
+            // allocation fails, all ten field references and lengths survive.
+            int[] newKind = Arrays.copyOf(kind, n);
+            int[] newField = Arrays.copyOf(field, n);
+            int[] newFlags = Arrays.copyOf(flags, n);
+            int[] newParent = Arrays.copyOf(parent, n);
+            int[] newFirstChild = Arrays.copyOf(firstChild, n);
+            int[] newNextSibling = Arrays.copyOf(nextSibling, n);
+            int[] newLastChild = Arrays.copyOf(lastChild, n);
+            int[] newLastEnd = Arrays.copyOf(lastEnd, n);
+            int[] newStart = Arrays.copyOf(start, n);
+            int[] newEnd = Arrays.copyOf(end, n);
+            kind = newKind;
+            field = newField;
+            flags = newFlags;
+            parent = newParent;
+            firstChild = newFirstChild;
+            nextSibling = newNextSibling;
+            lastChild = newLastChild;
+            lastEnd = newLastEnd;
+            start = newStart;
+            end = newEnd;
         }
     }
     private static String name(String s, String description) {

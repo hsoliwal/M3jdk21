@@ -1,0 +1,71 @@
+{
+  "schema": "M3JDK21_CANONICAL_API_INTERNALITY_RECEIPT_V1",
+  "date": "2026-10-27",
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "base_branch": "master",
+    "base_commit": "4848f0f6f9c16ceada6a1de5d9281660cbf9e8f6",
+    "source_path": "test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java",
+    "product_jdk_classes_modified": 0,
+    "public_JDK_API_changed": false,
+    "modules_or_export_directives_modified": false
+  },
+  "reuse": {
+    "source": "existing tested target jtreg candidate in hsoliwal/M3jdk21 PR #1868",
+    "prior_source_git_blob_sha1": "b3a6f4e20817989a436839a61950c5b256229aaa",
+    "convergence_owner": "hsoliwal/com.synexia",
+    "recipe_code_shipped_to_product": false
+  },
+  "postimage": {
+    "git_blob_sha1": "7a61d18385d0ea635e38cc47b3d8016974de7e00",
+    "sha256": "f303615f51b7276130d8bff5c17ad48713c7d0f2ce1b24e8398caa2b34380033",
+    "utf8_bytes": 11623,
+    "java_release": 21,
+    "license": "GPLv2 with Classpath exception (first-party OpenJDK jtreg target source)"
+  },
+  "coverage": {
+    "canonical_JDK_classes": 19,
+    "required_internal_owners": [
+      "java.lang.M3String",
+      "jdk.internal.mindex.M3Class"
+    ],
+    "module_descriptors": [
+      "java.base",
+      "jdk.compiler"
+    ],
+    "permanent_internal_namespace_prefixes": [
+      "jdk.internal.m3",
+      "jdk.internal.mindex",
+      "com.sun.tools.javac.m3"
+    ],
+    "legacy_standalone_apis_out_of_scope": [
+      "com.m3.collections.M3ArrayList",
+      "com.m3.file.M3File"
+    ],
+    "guarantees": [
+      "public/protected canonical JDK type signatures cannot expose M3 names or qualified internal package identities",
+      "module M3-owned packages must not be exported/opened, including qualified directives",
+      "java.lang.M3String package-private in java.base",
+      "jdk.internal.mindex remains unexported and unopened",
+      "JDK class initialization avoided by Class.forName(false) on scanned M3 classes",
+      "compiled java.base ModuleReader checks top-level M3-named types in all module-exposed packages"
+    ]
+  },
+  "local_proof": {
+    "host_jdk": "OpenJDK 21.0.12.1",
+    "compile_command": "javac -Xlint:all -Werror -d classes test/M3CanonicalApiBoundaryTest.java",
+    "compile": "PASS",
+    "positive": "PASS M3JDK_CANONICAL_API_BOUNDARY_PASS 19 canonical owners, 2 required internal owners; isolated java.base patch with first-party stubs",
+    "negative_public_M3String": "PASS: deliberate violation refused with AssertionError",
+    "negative_runtime_export": "PASS: --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED refused",
+    "code_blob_matches_target_readback": true
+  },
+  "pending": {
+    "source_built_M3JDK21_image_jtreg": "NOT_RUN",
+    "suggested_command": "make run-test TEST=test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java",
+    "abi_serialization_JNI_GC_JMM": "NOT_RUN",
+    "heap_native_CPU_performance": "NOT_RUN",
+    "complete_platform_support": "NOT_RUN"
+  },
+  "admission": "DRAFT_JTREG_ADDITION_ONLY_NOT_PRODUCT_RUNTIME_PROMOTION"
+}
