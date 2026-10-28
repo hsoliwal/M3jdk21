@@ -1086,8 +1086,8 @@
     },
     {
       "path": "m3/collections/implementations/guava-minmax-priority-queue/pom.xml",
-      "bytes": 2012,
-      "sha256": "446ebcba8ec83542c3f925f5dc95b019a399b48c6ada3ff66cf73670062cf01c",
+      "bytes": 4257,
+      "sha256": "fa07a8e4bfa55825bbdfd90d842ff6b3eb06d021bab38ff9a8eac33915750924",
       "role": "NEW_PACKET_SOURCE"
     },
     {
@@ -1128,8 +1128,8 @@
     },
     {
       "path": "m3/collections/receiving/guava-minmax-priority-queue/pom.xml",
-      "bytes": 3058,
-      "sha256": "d9a2259e3463db925ae15f7027e4ec4a2c1319cc11910efc63a8691f10b88919",
+      "bytes": 5663,
+      "sha256": "bd2426bc42c8f4cecb838936f345bad022a8cb5a45154f93aff5f5ed7a9909a3",
       "role": "NEW_PACKET_SOURCE"
     },
     {
@@ -1283,5 +1283,37 @@
       "role": "NEW_PACKET_SOURCE"
     }
   ],
-  "limits": "Referenced130Java+native selected core context; no source-tree copy, no core root Maven/privateJUnit claim; selected temporary classjar keeps canonical license/notice"
+  "limits": "Referenced130Java+native selected core context; no source-tree copy, no core root Maven/privateJUnit claim; selected temporary classjar keeps canonical license/notice",
+  "pomEvolution": {
+    "policy": "TWO_EXACT_FIRST_PARTY_BOOT_PROFILE_POMS",
+    "historicalPacketBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "installerCommit": "49791e92b1c063a2cb65875831976cc9c599e8e0",
+    "historicalBindingBlob": "356134f42596b265c2a1427fe98f2530f6c27192",
+    "historicalBindingSHA256": "4150f45782713174bd17d41695f41931fa07834b5ce78575c59ea3f3876d5aaa",
+    "changed": [
+      {
+        "path": "m3/collections/implementations/guava-minmax-priority-queue/pom.xml",
+        "originalPacketBytes": 2012,
+        "originalPacketSHA256": "446ebcba8ec83542c3f925f5dc95b019a399b48c6ada3ff66cf73670062cf01c",
+        "originalGitBlob": "5991de3a144b881543f02c333adcf15403378c89",
+        "currentBytes": 4257,
+        "currentSHA256": "fa07a8e4bfa55825bbdfd90d842ff6b3eb06d021bab38ff9a8eac33915750924",
+        "currentGitBlob": "f2cae80fd58e52483f94c15fd6e245750aa4c15a",
+        "installerCommit": "49791e92b1c063a2cb65875831976cc9c599e8e0",
+        "semanticDiff": "ONLY_OPT_IN_M3_RECIPE_BOOT_PROFILE_AND_XML_WHITESPACE"
+      },
+      {
+        "path": "m3/collections/receiving/guava-minmax-priority-queue/pom.xml",
+        "originalPacketBytes": 3058,
+        "originalPacketSHA256": "d9a2259e3463db925ae15f7027e4ec4a2c1319cc11910efc63a8691f10b88919",
+        "originalGitBlob": "8f7450ae1af1f68732835c51434f6c9970c45cf4",
+        "currentBytes": 5663,
+        "currentSHA256": "bd2426bc42c8f4cecb838936f345bad022a8cb5a45154f93aff5f5ed7a9909a3",
+        "currentGitBlob": "77e03aa0633143395d7b8631aa86e3b109779098",
+        "installerCommit": "49791e92b1c063a2cb65875831976cc9c599e8e0",
+        "semanticDiff": "ONLY_OPT_IN_M3_RECIPE_BOOT_PROFILE_AND_XML_WHITESPACE"
+      }
+    ],
+    "qualification": "SOURCE_SEALED_PENDING_MAVEN_AND_JDK_TESTS"
+  }
 }
