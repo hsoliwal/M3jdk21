@@ -1,0 +1,27 @@
+name: M3 AST String source spans Java21
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ast/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/**m3-ast-source-spans-20261020**'
+      - '.github/workflows/m3-ast-string-source-spans-20261020.yml'
+  push:
+    branches:
+      - 'm3/ast-string-source-spans-20261020'
+
+permissions:
+  contents: read
+
+jobs:
+  source-spans-java21:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact recipe and strict Java 21 contract
+        run: python3 m3/ast/qualification/ast-string-source-spans-20261020/verify.py
