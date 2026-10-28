@@ -1,0 +1,34 @@
+name: PR1292 current JNI mask-window source oracle
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
+      - 'm3/collections/src/test/native/m3_mask_window_current_master_contract.c'
+      - '.github/workflows/m3-pr1292-current-mask-window-native.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-source-and-regions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict C17 native ABI/region test against source-sealed current owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/collections/src
+          source="$root/main/native/collections/m3_index_mask_window.c"
+          testfile="$root/test/native/m3_mask_window_current_master_contract.c"
+          test "$(git hash-object "$source")" = "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+          test "$(git hash-object "$testfile")" = "6711b9edeeba1ed1a4de3cfdc118ac939b92bd5d"
+          flags=(-std=c17 -Wall -Wextra -Werror -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux")
+          cc "${flags[@]}" -O2 "$source" "$testfile" -o "${RUNNER_TEMP}/region_contract"
+          "${RUNNER_TEMP}/region_contract"
+          cc "${flags[@]}" -O1 -g -fsanitize=undefined -fno-sanitize-recover=all \
+             "$source" "$testfile" -o "${RUNNER_TEMP}/region_contract_ubsan"
+          "${RUNNER_TEMP}/region_contract_ubsan"
