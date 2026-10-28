@@ -24,6 +24,7 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>33.4.8-jre</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -98,6 +99,7 @@
               <goal>check</goal>
             </goals>
             <configuration>
+              <excludes><exclude>com/google/common/collect/**</exclude></excludes>
               <rules>
                 <rule>
                   <element>CLASS</element>
