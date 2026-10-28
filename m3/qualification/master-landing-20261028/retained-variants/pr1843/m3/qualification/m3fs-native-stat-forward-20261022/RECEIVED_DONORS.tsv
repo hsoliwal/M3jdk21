@@ -1,0 +1,6 @@
+# path	before_git_blob	candidate_git_blob	donor_pr	canonical_synexia_pr	problem_category
+m3/fs/native/src/m3fs_jni.c	7a61719ada663bf8918724debeee270ac34a1dc0	e63128f8c26c0f556d89a81789b5a54731191d26	1740	13073	ORIGINAL_NATIVE_SQLITE_JNI_STAT_BATCH
+m3/fs/src/main/java/com/m3/fs/M3FS.java	5b6ee04a001f6523c20f3b98d22db00bd0bea949	69162f305e9d6457a1d98c1d7e4cc70cc0618c70	1740	13073	FORWARD_ONLY_M3FS_SOURCE_METHOD
+m3/fs/src/main/java/com/m3/fs/M3FsNative.java	f6d07841c9623a7141cd219d64179758f18fb88b	637d015e0017f4fe5d2d34eaec8125a2540351a3	1740	13073	NATIVE_JAVA_JNI_SYMBOL
+m3/fs/src/main/java/com/m3/fs/M3FsStatBatch.java	ABSENT	f7ceb982ebd0007fd9abadd71d9b280d0baedb07	1740	13073	PRIMITIVE_STAT_STATUS_AND_INDEX_LANES
+m3/fs/src/test/java/com/m3/fs/M3FsStatBatchTest.java	ABSENT	589395873bc095f1eb89c8a12a0b6f241e4a2c5a	1740	13073	NATIVE_JNI_BATCH_CONTRACT
