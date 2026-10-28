@@ -28,3 +28,19 @@ Validation (`mvn -f pom.xml test`, Java 21, `-Xlint:all -Werror`): 16 JUnit test
 run applies 96,000 operations to the real Commons provider and this class and makes 768,082 comparisons.
 JaCoCo line and branch coverage is 100% (251/251 lines, 166/166 branches over 4 classes), gated at 99% per
 class. The steady-state allocation probe measures 0 bytes.
+
+## Standalone Commons Bag API delivery (2026-10-27)
+
+The original Apache Commons Collections 4.5.0 `org.apache.commons.collections4.Bag`
+interface now ships as unchanged Apache-2.0 source in this module. The underlying
+`M3HashBag` remains first-party M3 dense dynamic arrays, primitive counters and
+open-addressed physical-index masks. Runtime depends only on `java.base`;
+`commons-collections4` is scoped to **test** for authentic donor differential
+checks and is not published as a downstream runtime dependency.
+
+The source-first generator and scoped Maven dependency recipe are exclusively
+in hsoliwal/com.synexia as `com.synexia.m3.InlineCommonsBagApi20261027`.
+Target is a postimage receiver and carries only compiled/testable Java, notices,
+and a data-only receipt. Do not confuse this module-slice closure with the full
+Apache Commons API or all five providers. A co-loaded upstream Commons library
+contains the same FQCN and needs isolation/collision qualification before release.
