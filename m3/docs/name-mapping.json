@@ -10061,6 +10061,16 @@
       "optional_exported_packages": [
         "org.m3jdk.tools.search"
       ]
+    },
+    {
+      "module": "jdk.m3.search",
+      "optional_compiler_module": "jdk.m3.search.compiler",
+      "mapping": "m3/docs/name-mapping.d/m3-nlp-source-jmods-20261018.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.rewrite.M3NlpSearchSourceJmodsRecipe",
+      "target_proof": "m3/tooling/module-packs/nlp-search/build.py",
+      "original_library_modules": "org.apache.lucene.* and org.apache.opennlp.tools"
     }
   ]
 }
