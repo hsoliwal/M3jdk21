@@ -8,6 +8,7 @@ on:
       - 'src/java.base/share/classes/java/util/M3CollectionViews.java'
       - 'src/java.base/share/classes/java/util/M3CollectionMasks.java'
       - 'test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java'
+      - 'test/jdk/java/util/Collections/M3CollectionViewsTest.java'
       - '.github/workflows/m3jdk21-checkedmap-additive-receive.yml'
   workflow_dispatch:
 permissions:
@@ -25,6 +26,7 @@ jobs:
             src/java.base/share/classes/java/util/M3CollectionViews.java
             src/java.base/share/classes/java/util/M3CollectionMasks.java
             test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java
+            test/jdk/java/util/Collections/M3CollectionViewsTest.java
           sparse-checkout-cone-mode: false
       - uses: actions/setup-java@v5
         with:
@@ -90,6 +92,11 @@ jobs:
             "$src/Collections.java" "$src/M3CollectionViews.java" "$src/M3CollectionMasks.java"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$scratch/tests" \
             test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java
+          # These M3 APIs are new Java21 source additions, so compile their
+          # original jtreg source against the patched java.base, not stock javac.
+          javac -g --source 21 --target 21 -Xlint:all -Werror \
+            --patch-module java.base="$scratch/classes" -d "$scratch/tests" \
+            test/jdk/java/util/Collections/M3CollectionViewsTest.java
       - name: Run the original received 84-assert CheckedMap test across four JVM modes
         run: |
           set -euo pipefail
@@ -102,4 +109,19 @@ jobs:
               -cp "$scratch/tests" CheckedMapMerge8292955Test > "$scratch/$mode.out"
             grep -qx 'PASS JDK-8292955 checked-map jtreg assertions=84' "$scratch/$mode.out"
             cat "$scratch/$mode.out"
+          done
+      - name: Exercise additive filtered and sorted collection view contracts
+        run: |
+          set -euo pipefail
+          scratch="${RUNNER_TEMP}/m3checkedmap-superset"
+          # Use both interpreter and JIT so the added APIs are exercised,
+          # not merely type-checked or inferred from source signatures.
+          for mode in default -Xint; do
+            flags=()
+            if [ "$mode" != default ]; then flags=("$mode"); fi
+            java "${flags[@]}" -XX:-OmitStackTraceInFastThrow \
+              --patch-module java.base="$scratch/classes" \
+              -cp "$scratch/tests" M3CollectionViewsTest > "$scratch/views-$mode.out"
+            grep -Eq '^M3CollectionViewsTest checks=[0-9]+$' "$scratch/views-$mode.out"
+            cat "$scratch/views-$mode.out"
           done
