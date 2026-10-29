@@ -1,6 +1,8 @@
 #
 # Copyright (c) 2022, Oracle and/or its affiliates. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+# Modifications Copyright (c) 2026 Hitesh Soliwal and contributors.
+# Modified 2026: repair desktop runner, toolchain, and action runtime selection.
 #
 # This code is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 2 only, as
@@ -227,7 +229,7 @@ jobs:
     uses: ./.github/workflows/build-macos.yml
     with:
       platform: macos-x64
-      xcode-toolset-version: '12.5.1'
+      xcode-toolset-version: '16.4'
       configure-arguments: ${{ github.event.inputs.configure-arguments }}
       make-arguments: ${{ github.event.inputs.make-arguments }}
     if: needs.select.outputs.macos-x64 == 'true'
@@ -238,7 +240,7 @@ jobs:
     uses: ./.github/workflows/build-macos.yml
     with:
       platform: macos-aarch64
-      xcode-toolset-version: '12.5.1'
+      xcode-toolset-version: '16.4'
       extra-conf-options: '--openjdk-target=aarch64-apple-darwin'
       configure-arguments: ${{ github.event.inputs.configure-arguments }}
       make-arguments: ${{ github.event.inputs.make-arguments }}
@@ -250,7 +252,7 @@ jobs:
     uses: ./.github/workflows/build-windows.yml
     with:
       platform: windows-x64
-      msvc-toolset-version: '14.29'
+      msvc-toolset-version: '14.44'
       msvc-toolset-architecture: 'x86.x64'
       configure-arguments: ${{ github.event.inputs.configure-arguments }}
       make-arguments: ${{ github.event.inputs.make-arguments }}
@@ -262,7 +264,7 @@ jobs:
     uses: ./.github/workflows/build-windows.yml
     with:
       platform: windows-aarch64
-      msvc-toolset-version: '14.29'
+      msvc-toolset-version: '14.44'
       msvc-toolset-architecture: 'arm64'
       make-target: 'hotspot'
       extra-conf-options: '--openjdk-target=aarch64-unknown-cygwin'
@@ -318,7 +320,8 @@ jobs:
     with:
       platform: macos-x64
       bootjdk-platform: macos-x64
-      runs-on: macos-11
+      runs-on: macos-15-intel
+      xcode-toolset-version: '16.4'
 
   test-windows-x64:
     name: windows-x64
@@ -328,7 +331,7 @@ jobs:
     with:
       platform: windows-x64
       bootjdk-platform: windows-x64
-      runs-on: windows-2019
+      runs-on: windows-2022
 
   # Remove bundles so they are not misconstrued as binary distributions from the JDK project
   remove-bundles:
@@ -357,7 +360,7 @@ jobs:
 
     steps:
       - name: 'Remove only this run''s bundle artifacts'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v8
         with:
           script: |
             // Uploads use artifact API v4. Never delete published test results.
