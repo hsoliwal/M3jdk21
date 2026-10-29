@@ -18,9 +18,19 @@ import java.util.regex.Pattern;
 public final class TextTools {
     private TextTools() { }
 
+    /** Reports whether the installed native text library has been loaded. */
+    public static boolean nativeTextAvailable() { return NativeLineOps.available(); }
+
     /** Stable UTF-16 lexical order, independent of the host locale. */
     public static TextFrame sort(TextFrame input, boolean reverse, Limits limits) {
         limits.check(input);
+        if (NativeLineOps.available()) {
+            List<TextLine> inputLines = input.lines();
+            int[] indices = NativeLineOps.sortOrder(inputLines, reverse);
+            List<TextLine> ordered = new ArrayList<>(indices.length);
+            for (int index : indices) ordered.add(inputLines.get(index));
+            return reorder(ordered, limits);
+        }
         List<TextLine> lines = new ArrayList<>(input.lines());
         Comparator<TextLine> order = Comparator.comparing(TextLine::content);
         lines.sort(reverse ? order.reversed() : order);
@@ -31,6 +41,14 @@ public final class TextTools {
     public static TextFrame uniq(TextFrame input, Limits limits) {
         limits.check(input);
         FrameCollector output = new FrameCollector(limits);
+        if (NativeLineOps.available()) {
+            List<TextLine> lines = input.lines();
+            long[] keep = NativeLineOps.adjacentKeep(lines);
+            for (int i = 0; i < lines.size(); i++) {
+                if ((keep[i >>> 6] & (1L << (i & 63))) != 0) output.accept(lines.get(i));
+            }
+            return output.frame();
+        }
         String previous = null;
         for (TextLine line : input.lines()) {
             if (!line.content().equals(previous)) output.accept(line);
