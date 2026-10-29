@@ -39,6 +39,29 @@ public final class TextTools {
         return output.frame();
     }
 
+    /** Literal UTF-16 line selection; JNI is an optional data-plane acceleration only. */
+    public static TextFrame grepLiteral(TextFrame input, String literal, Limits limits) {
+        limits.check(input);
+        Canonical.validUnicode(literal);
+        int count = input.lines().size();
+        long[] selected = new long[(count + 63) >>> 6];
+        for (int i = 0; i < count; i++) {
+            if (NativeUtf16Literal.contains(input.lines().get(i).content(), literal))
+                selected[i >>> 6] |= 1L << (i & 63);
+        }
+        FrameCollector output = new FrameCollector(limits);
+        for (int i = 0; i < count; i++) {
+            if ((selected[i >>> 6] & (1L << (i & 63))) != 0)
+                output.accept(input.lines().get(i));
+        }
+        return output.frame();
+    }
+
+    /** Direct immutable M3StringPiece-compatible UTF-16 literal membership, without flattening. */
+    public static boolean containsLiteral(CharSequence text, CharSequence literal) {
+        return NativeUtf16Literal.contains(text, literal);
+    }
+
     public record Comparison(TextFrame leftOnly, TextFrame common, TextFrame rightOnly) { }
 
     /** Sorted multiset merge: duplicate occurrences are paired one-for-one. */

@@ -26,6 +26,19 @@ public final class M3TextSmoke {
     }
     public static void main(String[] args) throws Exception {
         same("a\nb\n", TextTools.sort(text("b\na"), false, LIMITS).text());
+        same("abc\r\nabc\n", TextTools.grepLiteral(text("xxx\nabc\r\nabc\n"), "bc", LIMITS).text());
+        CharSequence m3View = new CharSequence() {
+            @Override public int length() { return 3; }
+            @Override public char charAt(int index) { return "a\0b".charAt(index); }
+            @Override public CharSequence subSequence(int start, int end) {
+                throw new AssertionError("unexpected materialization");
+            }
+            @Override public String toString() {
+                throw new AssertionError("M3 UTF-16 view must never flatten");
+            }
+        };
+        same(true, TextTools.containsLiteral(m3View, "\0b"));
+
         same("a\nb\n", TextTools.uniq(text("a\na\nb\n"), LIMITS).text());
         same("a\n", TextTools.comm(text("a\nb\n"), text("a\nc\n"), LIMITS).common().text());
         same("a\tleft\tright\n", TextTools.join(text("a\tleft\n"), text("a\tright\n"), LIMITS).text());
