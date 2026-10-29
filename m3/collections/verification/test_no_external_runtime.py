@@ -27,10 +27,13 @@ def dep(group, artifact="library", scope="compile", optional=""):
             + ("<optional>true</optional>" if optional else "") + "</dependency>")
 
 
-QUARANTINE = ("<plugin><groupId>org.apache.maven.plugins</groupId>"
-              "<artifactId>maven-deploy-plugin</artifactId><version>3.1.3</version>"
-              "<configuration><skip>true</skip></configuration></plugin>")
-
+INSTALL_QUARANTINE = ("<plugin><groupId>org.apache.maven.plugins</groupId>"
+                      "<artifactId>maven-install-plugin</artifactId><version>3.1.3</version>"
+                      "<configuration><skip>true</skip></configuration></plugin>")
+DEPLOY_QUARANTINE = ("<plugin><groupId>org.apache.maven.plugins</groupId>"
+                     "<artifactId>maven-deploy-plugin</artifactId><version>3.1.3</version>"
+                     "<configuration><skip>true</skip></configuration></plugin>")
+QUARANTINE = INSTALL_QUARANTINE + DEPLOY_QUARANTINE
 
 class DependencyBoundaryTests(TestCase):
     def test_core_only_test_libraries(self):
@@ -46,14 +49,49 @@ class DependencyBoundaryTests(TestCase):
             inspect_pom(pom(dep("com.google.guava")), "core.xml", "core")
 
     def test_provider_dependency_without_quarantine_fails(self):
-        with self.assertRaisesRegex(DependencyBoundaryError, "deploy-quarantined"):
+        with self.assertRaisesRegex(DependencyBoundaryError, "install/deploy-quarantined"):
             inspect_pom(pom(dep("org.springframework")), "interop.xml", "optional-interop")
 
     def test_quarantined_provider_remains_explicit_hold(self):
         result = inspect_pom(pom(dep("org.springframework"), QUARANTINE),
                              "interop.xml", "optional-interop")
-        self.assertEqual(result.status, "PROVIDER_SOURCE_VENDING_HOLD_DEPLOY_QUARANTINED")
+        self.assertEqual(result.status, "PROVIDER_SOURCE_VENDING_HOLD_INSTALL_DEPLOY_QUARANTINED")
         self.assertEqual(len(result.external), 1)
+
+    def test_install_missing_refuses_deploy_only(self):
+        with self.assertRaisesRegex(DependencyBoundaryError, "install/deploy-quarantined"):
+            inspect_pom(pom(dep("org.springframework"), DEPLOY_QUARANTINE),
+                        "interop.xml", "optional-interop")
+
+    def test_install_false_or_property_is_not_quarantine(self):
+        for state in ("false", "${maven.install.skip}"):
+            wrong = INSTALL_QUARANTINE.replace("<skip>true</skip>", "<skip>" + state + "</skip>")
+            with self.assertRaisesRegex(DependencyBoundaryError, "install/deploy-quarantined"):
+                inspect_pom(pom(dep("org.springframework"), wrong + DEPLOY_QUARANTINE),
+                            "interop.xml", "optional-interop")
+
+    def test_duplicate_install_plugin_refused(self):
+        with self.assertRaisesRegex(DependencyBoundaryError, "install/deploy-quarantined"):
+            inspect_pom(pom(dep("org.springframework"), INSTALL_QUARANTINE + QUARANTINE),
+                        "interop.xml", "optional-interop")
+
+    def test_install_profile_override_refused(self):
+        override = ("<profile><id>force-install</id><build><plugins><plugin>"
+                    "<artifactId>maven-install-plugin</artifactId>"
+                    "<configuration><skip>false</skip></configuration>"
+                    "</plugin></plugins></build></profile>")
+        with self.assertRaisesRegex(DependencyBoundaryError, "install/deploy-quarantined"):
+            inspect_pom(pom(dep("org.springframework"), QUARANTINE, override),
+                        "interop.xml", "optional-interop")
+
+    def test_install_plugin_management_override_refused(self):
+        managed = ("<pluginManagement><plugins><plugin>"
+                   "<artifactId>maven-install-plugin</artifactId>"
+                   "<configuration><skip>false</skip></configuration>"
+                   "</plugin></plugins></pluginManagement>")
+        source = pom(dep("org.springframework"), QUARANTINE).replace("</build>", managed + "</build>")
+        with self.assertRaisesRegex(DependencyBoundaryError, "install/deploy-quarantined"):
+            inspect_pom(source, "interop.xml", "optional-interop")
 
     def test_provided_is_not_dependency_closure(self):
         with self.assertRaisesRegex(DependencyBoundaryError, "external dependency"):
@@ -74,7 +112,7 @@ class DependencyBoundaryTests(TestCase):
                     "<artifactId>maven-deploy-plugin</artifactId>"
                     "<configuration><skip>false</skip></configuration>"
                     "</plugin></plugins></build></profile>")
-        with self.assertRaisesRegex(DependencyBoundaryError, "deploy-quarantined"):
+        with self.assertRaisesRegex(DependencyBoundaryError, "install/deploy-quarantined"):
             inspect_pom(pom(dep("org.springframework"), QUARANTINE, override),
                         "interop.xml", "optional-interop")
 

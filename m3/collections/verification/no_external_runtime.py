@@ -4,7 +4,7 @@
 """Fail-closed Maven *declared dependency* census for current M3 consumer modules.
 
 This does NOT assert the full transitive Maven graph, API parity or binary source inlining.
-Provider-dependent interop remains blocked from Maven deploy until source-vendored.
+Provider-dependent interop remains blocked from ordinary Maven install and deploy until source-vendored.
 """
 from __future__ import annotations
 
@@ -71,28 +71,42 @@ def dependencies(project: ET.Element) -> tuple[Dependency, ...]:
     return tuple(out)
 
 
-def deploy_quarantined(project: ET.Element) -> bool:
+def publication_quarantined(project: ET.Element) -> bool:
+    """Require literal, nonduplicated ordinary Maven install and deploy skips.
+
+    This does not prevent manual install-file/deploy-file, custom upload or
+    full effective/transitive Maven changes; those remain separate release gates.
+    """
     build = project.find(NS + "build")
     if build is None:
         return False
     plugins = build.find(NS + "plugins")
     if plugins is None:
         return False
-    found = []
+    required = {"maven-install-plugin", "maven-deploy-plugin"}
+    seen: dict[str, str] = {}
     for plugin in plugins.findall(NS + "plugin"):
-        if (child_text(plugin, "groupId", "org.apache.maven.plugins") == "org.apache.maven.plugins"
-                and child_text(plugin, "artifactId") == "maven-deploy-plugin"):
-            config = plugin.find(NS + "configuration")
-            found.append(child_text(config, "skip") if config is not None else "")
-    # No profile may re-enable deploy while unresolved direct provider deps exist.
+        artifact = child_text(plugin, "artifactId")
+        if artifact not in required:
+            continue
+        if artifact in seen or child_text(plugin, "groupId", "org.apache.maven.plugins") != "org.apache.maven.plugins":
+            return False
+        config = plugin.find(NS + "configuration")
+        seen[artifact] = child_text(config, "skip") if config is not None else ""
+    if seen != {name: "true" for name in required}:
+        return False
+    management = build.find(NS + "pluginManagement")
+    if management is not None:
+        for plugin in management.findall("./" + NS + "plugins/" + NS + "plugin"):
+            if child_text(plugin, "artifactId") in required:
+                return False
     profiles = project.find(NS + "profiles")
     if profiles is not None:
         for profile in profiles.findall(NS + "profile"):
             for plugin in profile.findall("./" + NS + "build/" + NS + "plugins/" + NS + "plugin"):
-                if child_text(plugin, "artifactId") == "maven-deploy-plugin":
+                if child_text(plugin, "artifactId") in required:
                     return False
-    return found == ["true"]
-
+    return True
 
 def inspect_pom(source: str, path: str, role: str) -> Result:
     try:
@@ -111,11 +125,11 @@ def inspect_pom(source: str, path: str, role: str) -> Result:
                                          + " -> " + ",".join(d.gav for d in external))
         return Result(path, "CORE_DECLARED_DIRECT_CLOSURE_PASS", ())
     if role == "optional-interop":
-        if external and not deploy_quarantined(root):
-            raise DependencyBoundaryError("provider-dependent interop must be deploy-quarantined: "
+        if external and not publication_quarantined(root):
+            raise DependencyBoundaryError("provider-dependent interop must be install/deploy-quarantined: "
                                          + path + " -> " + ",".join(d.gav for d in external))
         if external:
-            return Result(path, "PROVIDER_SOURCE_VENDING_HOLD_DEPLOY_QUARANTINED", external)
+            return Result(path, "PROVIDER_SOURCE_VENDING_HOLD_INSTALL_DEPLOY_QUARANTINED", external)
         return Result(path, "PROVIDER_DECLARED_DIRECT_CLOSURE_PASS", ())
     raise DependencyBoundaryError("unknown consumer role: " + role)
 
