@@ -1,0 +1,19 @@
+gate	expect	pattern	rc	verdict	log
+G1_base_release21_werror	nonzero	module not found: jdk.internal.le	1	PASS	G1_base_release21_werror.log
+G1_cand_release21_werror	nonzero	module not found: jdk.internal.le	1	PASS	G1_cand_release21_werror.log
+G1_delta_no_new_diagnostics	0	-	0	PASS	G1_delta_no_new_diagnostics.log
+G2_base_release21_make_lint	0	-	0	PASS	G2_base_release21_make_lint.log
+G2_cand_release21_make_lint	0	-	0	PASS	G2_cand_release21_make_lint.log
+G3_base_system_make_lint	0	-	0	PASS	G3_base_system_make_lint.log
+G3_cand_system_make_lint	0	-	0	PASS	G3_cand_system_make_lint.log
+G3d_doclint_no_new_diagnostics	0	-	0	PASS	G3d_doclint_no_new_diagnostics.log
+G4_export_to_absent_module	nonzero	module not found: jdk\.m3\.text	1	PASS	G4_export_to_absent_module.log
+G4c_export_module_lint_off	0	-	0	PASS	G4c_export_module_lint_off.log
+O1_component_javac	0	-	0	PASS	O1_component_javac.log
+O1_component_run	0	M3_LEAF_RANGES_PASS mode=component stringLayout=stock	0	PASS	O1_component_run.log
+M1_start_plus_one_javac	0	-	0	PASS	M1_start_plus_one_javac.log
+M1_start_plus_one_run	nonzero	java\.lang\.AssertionError	1	PASS	M1_start_plus_one_run.log
+M2_byte_order_swapped_javac	0	-	0	PASS	M2_byte_order_swapped_javac.log
+M2_byte_order_swapped_run	nonzero	java\.lang\.AssertionError	1	PASS	M2_byte_order_swapped_run.log
+M3_inline_off_by_one_javac	0	-	0	PASS	M3_inline_off_by_one_javac.log
+M3_inline_off_by_one_run	nonzero	java\.lang\.AssertionError	1	PASS	M3_inline_off_by_one_run.log

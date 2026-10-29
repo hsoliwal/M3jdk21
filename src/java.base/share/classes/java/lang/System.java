@@ -2561,6 +2561,11 @@ public final class System {
                         snapshot.packedAscii, snapshot.offsets, snapshot.lengths, snapshot.sequence);
             }
 
+            public int stringM3LeafRanges(String text, long[] lanes) {
+                String checked = Objects.requireNonNull(text, "text");
+                return M3StringLeafRanges.fill(checked.m3(), lanes);
+            }
+
             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
             public long stringConcatCoder(char value) {
                 return StringConcatHelper.coder(value);
