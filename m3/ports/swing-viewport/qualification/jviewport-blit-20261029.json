@@ -1,0 +1,93 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema": "M3_UI_CONTRACT_PRODUCT_RECEIPT_V1",
+  "status": "BOUNDED_CODE_QUALIFICATION_FOR_DRAFT_REVIEW",
+  "target_repository": "hsoliwal/M3jdk21",
+  "product_baseline": {
+    "ref": "master",
+    "sha": "669a949d192345acefcfc5e9bb0b3724174d270c",
+    "parent_pr": null
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "code_qualification_commit": "8e6a01014c5217a4582d419f7ad1a9eaf7509f17",
+    "canonical_recipe_engine_commit": "8e6a01014c5217a4582d419f7ad1a9eaf7509f17",
+    "code_proof_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/jdk-blit-current-20261029",
+    "execution_evidence": [
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/blit/SDK_INPUTS.tsv",
+        "sha256": "d5ffa258a55a488709989073684f115bd18a53ffd9255e4a64b1fe52751c7ad0",
+        "git_blob": "93c64e96f3611e971fc4601e61277336f80fd524",
+        "bytes": 3095
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/blit/SDK_RESULTS.tsv",
+        "sha256": "34249f8c463018078e1c9e05618fcb75e4c56191083347ac7bbc9bb9004f4d2d",
+        "git_blob": "29127c8a828b787c41a10b2f2cc8df3f5c09229f",
+        "bytes": 380
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/blit/sdk-surefire/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+        "sha256": "a43d0a02b929e7d88efbef1dfdc30485c38a529e3f5ed898fbf1afb756f4e58e",
+        "git_blob": "58d63b80d1bdc4757b862c5332f3f1ce1a2c0cf4",
+        "bytes": 15929
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/blit/receiver-contract/evidence/RECEIVER_RECEIPT.json",
+        "sha256": "2356922b60bd461dbb19c39f66b5c9b79846b50abc4a78b7c99f30309a81b2ec",
+        "git_blob": "27995c4cb657c567ad9d3e69663a9e4129b9caab",
+        "bytes": 2528
+      }
+    ],
+    "final_seal_replay_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/blit"
+  },
+  "files": [
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/JViewport.java",
+      "before_sha256": "1317f510fce11b48d1ab3a289b4e13b22e2cc63e823048f385454ef9bd1bb5cb",
+      "after_sha256": "e6e3ae3b05e0d9e65331ab7ed8a51e39e0f2f6aa89d303b82264976aa8b175b4",
+      "git_blob": "3e8b1e4a82f134c4d3d98732d3a9ecbb7ab16de9",
+      "dataset": "jdk-blit-current-20261029",
+      "kind": "GENERATED_SOURCE"
+    },
+    {
+      "path": "test/jdk/javax/swing/JViewport/ComputeBlitMinimumDelta.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "9d1f1a4814b5c6a5d5a78fdfac73f57357374c7a699febaf686c511c61998fe8",
+      "git_blob": "0e25fc38ccee6d8de3d077bb418ec657808a27f0",
+      "dataset": "jdk-blit-current-20261029",
+      "kind": "GENERATED_TEST"
+    }
+  ],
+  "validation": {
+    "geometries_per_mode": 3602,
+    "observations_per_mode": 21624,
+    "modes": [
+      "mixed",
+      "-Xint"
+    ],
+    "retained_junit_per_mode": 4,
+    "original_bug6953396": "PASS",
+    "canonical_14008_receiver_tests": 10,
+    "named_descriptor_test": 1,
+    "api_descriptors_equal": true,
+    "serialization_uid_equal": true,
+    "jtreg_harness_executed": false
+  },
+  "limitations": [
+    "Tests execute full compiled generated JViewport through --patch-module java.desktop on stock Java21.0.2.",
+    "The jtreg-form main is compiled and invoked directly; the actual jtreg harness is not installed and was not run.",
+    "Full source-built M3JDK21, make-based java.desktop, JCK, headful/platform/native/GC and performance qualification not run."
+  ],
+  "receipt_generation": {
+    "dataset": "ui-blit-receipt-20261029",
+    "recipe_identity": "com.synexia.m3jdk.AstBuildReverse20261017",
+    "target_path": "m3/ports/swing-viewport/qualification/jviewport-blit-20261029.json",
+    "execution_lane": "MAVEN_OPENREWRITE_SDK",
+    "template_and_execution_evidence": "successor additions to the immutable code qualification commit; their content is not asserted to be present in that earlier commit",
+    "successor_commit": "resolved by the private publication that records these artifacts; deliberately no self-referential hash",
+    "proof_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-public-receipts-20261029/blit"
+  },
+  "promotion": "Draft review only; bounded evidence does not constitute full platform or release qualification."
+}
