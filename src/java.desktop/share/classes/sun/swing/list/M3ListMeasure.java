@@ -35,6 +35,12 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.BorderUIResource;
+import javax.swing.plaf.LabelUI;
+import javax.swing.plaf.basic.BasicLabelUI;
+import javax.swing.plaf.metal.MetalLabelUI;
 
 /**
  * The M3 measurement path of {@code BasicListUI.updateLayoutState} ({@code -Dm3.swing.viewport=true},
@@ -47,12 +53,12 @@ import javax.swing.ListModel;
  * set sizes, measures every row as the stock method does.
  * <p>
  * Only {@code DefaultListCellRenderer} and its {@code UIResource} take this path: their size
- * depends on the value, the list's font and orientation and the renderer's own properties, not on
- * the row index. Vertical layout, variable row heights, an enabled list and a UI class in
- * {@code java.desktop} are required; everything else keeps the stock loop. The one known
- * difference from stock is a value changed without a list data event (a {@code ListModel}
- * contract violation): stock re-measures it at the next layout after any later change, this path
- * only when its row gets an event or every row is re-measured. Design and proof:
+ * is reused only with the exact basic or Metal label delegate and a known empty border. Custom
+ * delegates and borders may derive sizes from other rows or application state, so they measure
+ * every row. Vertical layout, variable row heights, an enabled list and a UI class in
+ * {@code java.desktop} are required; everything else keeps the stock loop. Cached sizes also
+ * require immutable simple text model values: icons and other objects can change their dimensions
+ * or text independently of list data events, so they are remeasured. Design and proof:
  * m3/docs/swing-viewport/DESIGN.md section 10.
  */
 //FLLDCIM: M3 swing-viewport leaf 4 - JList measures only the rows that list data events touched
@@ -66,6 +72,7 @@ public final class M3ListMeasure {
 
     private final M3RowPieces pieces = new M3RowPieces();
     private boolean valid;
+    private boolean stableValues;
     private int[] heights = NONE;
     private int[] widths = NONE;
     private int cellWidth;
@@ -182,8 +189,9 @@ public final class M3ListMeasure {
             CellRendererPane pane, int n) {
         int[] h = new int[n];
         int[] w = new int[n];
+        stableValues = true;
         for (int i = 0; i < n; i++) {
-            Dimension d = size(list, m, r, pane, i);
+            Dimension d = size(list, m, r, pane, i, false);
             w[i] = d.width;
             h[i] = d.height;
         }
@@ -219,7 +227,10 @@ public final class M3ListMeasure {
         for (int i = 0, row = 0; i < pieces.count(); row += pieces.length(i), i++) {
             if (pieces.start(i) == M3RowPieces.NEW) {
                 for (int j = row; j < row + pieces.length(i); j++) {
-                    Dimension d = size(list, m, r, pane, j);
+                    Dimension d = size(list, m, r, pane, j, true);
+                    if (d == null) {
+                        return false;
+                    }
                     w[j] = d.width;
                     h[j] = d.height;
                 }
@@ -230,22 +241,34 @@ public final class M3ListMeasure {
             fullMeasuresOnDeltas++;
             return false;
         }
+        if (!stableValues || !supportsIncrementalSizing(r)) {
+            return false;
+        }
         remeasured = count + (probe == n - 1 ? 1 : 0);
         keep(list, r, h, w, n);
         return true;
     }
 
     /** Whether row {@code row} still measures as recorded in {@code h} and {@code w}. */
-    private static boolean same(JList<Object> list, ListModel<Object> m, DefaultListCellRenderer r,
+    private boolean same(JList<Object> list, ListModel<Object> m, DefaultListCellRenderer r,
             CellRendererPane pane, int row, int[] h, int[] w) {
-        Dimension d = size(list, m, r, pane, row);
-        return d.width == w[row] && d.height == h[row];
+        Dimension d = size(list, m, r, pane, row, true);
+        return d != null && supportsIncrementalSizing(r) && d.width == w[row] && d.height == h[row];
     }
 
-    /** The stock measurement of one row. */
-    private static Dimension size(JList<Object> list, ListModel<Object> m, DefaultListCellRenderer r,
-            CellRendererPane pane, int row) {
+    /**
+     * Measures one row, or declines an unknown incremental value before configuring the renderer.
+     * Full measurement must visit such callbacks in stock row order; restarting after an unknown
+     * value's toString or icon method ran could change the sizes of earlier retained rows.
+     */
+    private Dimension size(JList<Object> list, ListModel<Object> m, DefaultListCellRenderer r,
+            CellRendererPane pane, int row, boolean incremental) {
         Object value = m.getElementAt(row);
+        boolean stable = isStableValue(value);
+        if (incremental && !stable) {
+            return null;
+        }
+        stableValues &= stable;
         Component c = r.getListCellRendererComponent(list, value, row, false, false);
         pane.add(c);
         return c.getPreferredSize();
@@ -268,9 +291,33 @@ public final class M3ListMeasure {
         valid = true;
     }
 
+    /** Values whose default renderer text cannot change independently of model events. */
+    private static boolean isStableValue(Object value) {
+        return value == null || value instanceof String || value instanceof Boolean
+                || value instanceof Character || value instanceof Byte || value instanceof Short
+                || value instanceof Integer || value instanceof Long || value instanceof Float
+                || value instanceof Double;
+    }
+
+    /**
+     * The delegates and borders whose row-local sizing is known here. Application delegates and
+     * borders may depend on other model rows, so one unchanged probe cannot validate their cache.
+     * Check again after configuring the probe because renderer setup may install a new border.
+     */
+    private static boolean supportsIncrementalSizing(DefaultListCellRenderer r) {
+        LabelUI ui = r.getUI();
+        if (ui == null || ui.getClass() != BasicLabelUI.class && ui.getClass() != MetalLabelUI.class) {
+            return false;
+        }
+        Border border = r.getBorder();
+        return border == null || border.getClass() == EmptyBorder.class
+                || border.getClass() == BorderUIResource.EmptyBorderUIResource.class;
+    }
+
     /** Whether everything besides the values that sets the size of a row is as at the last layout. */
     private boolean sameInputs(JList<Object> list, DefaultListCellRenderer r) {
-        return model == list.getModel() && renderer == r && font == list.getFont()
+        return stableValues && supportsIncrementalSizing(r) && model == list.getModel()
+                && renderer == r && font == list.getFont()
                 && orientation == list.getComponentOrientation()
                 && htmlDisable == r.getClientProperty("html.disable") && labelUI == r.getUI()
                 && java.util.Objects.equals(preferred, r.isPreferredSizeSet() ? r.getPreferredSize() : null)
