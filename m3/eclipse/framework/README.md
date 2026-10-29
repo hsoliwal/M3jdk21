@@ -2,8 +2,8 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Eclipse framework indexed forwarding into M3JDK21
 
-This is an **additive, read-only indexed forwarding layer**, not a full rewrite of the Eclipse
-framework. Original Eclipse extension/OSGi/resources services retain authority, identity,
+This M3JDK21 module provides read-only indexed snapshots for Eclipse services.
+Original Eclipse extension/OSGi/resources services retain authority, identity,
 extension execution, notifications, classloaders, bundle lifecycle, and workspace semantics.
 
 The existing `com.m3.collections` owners provide the implementation mechanics:
@@ -42,7 +42,9 @@ build and OSGi runtime proof are separate, mandatory gates**; no unexecuted
 GitHub Actions job establishes qualification.
 
 ## Provenance and upstream contracts
-**OSGi integration:** `M3EclipseRuntimeActivator` registers an `M3EclipseRuntimeServices` implementation through BundleContext and unregisters it once at stop. The host supplies Eclipse services and controls bundle lifetimes. The generated OSGi manifest imports `com.m3.collections`, so that package must be exported by a separately installed M3 collections bundle; the exact-head workflow builds a manifest-wrapped OSGi candidate for that dependency. Source/JUnit tests do not establish actual Equinox resolution or plugin activation.\n\nOriginal Synexia core Eclipse mechanics and pluginify adapter are donor evidence.
+**OSGi integration:** `M3EclipseRuntimeActivator` registers an `M3EclipseRuntimeServices` implementation through BundleContext and unregisters it once at stop. The host supplies Eclipse services and controls bundle lifetimes. The generated OSGi manifest imports `com.m3.collections`, so that package must be exported by a separately installed M3 collections bundle; the exact-head workflow builds a manifest-wrapped OSGi candidate for that dependency. Source/JUnit tests do not establish actual Equinox resolution or plugin activation.
+
+Original Synexia core Eclipse mechanics and pluginify adapter are donor evidence.
 Synexia first-party recipe/source is Apache-2.0; Eclipse supplied APIs remain
 EPL-2.0 and OSGi interfaces retain their original Apache-2.0 licensing.
 No Eclipse source has been copied into the generated adapter. JDK API surface
@@ -53,3 +55,21 @@ JFace/Workbench event loops, real Equinox resolver/activation qualification, JDT
 refactoring internals, EMF notifications/proxy semantics or PDE launch.
 See `ECLIPSE_FORWARDING_COVERAGE.tsv`, and keep unqualified subsystems
 explicitly marked instead of claiming total Eclipse coverage.
+
+## Direct state-slot selection refinement (2026-10-21)
+
+The internal snapshot selects directly through the existing M3 physical-slot and
+state-mask owner. Dense append-only slot ordinals make the temporary handle-array
+copy unnecessary. Empty and all-selected results reuse the existing immutable
+boundaries. Public service methods, captured states, generation handles, original
+object references and their order remain unchanged.
+
+Canonical recipe: `com.synexia.m3jdk.EclipseStructures20261021.snapshot`, owned in
+`hsoliwal/com.synexia`. The receiving catalogue is
+`m3/collections/algorithm-catalog/eclipse-snapshot-20261021.tsv`; qualification is
+under `m3/eclipse/framework/qualification/eclipse-structures-20261021/`.
+The scalar candidate reduced measured allocation in all30 tested workloads; CPU
+medians improved in22 of30, with the remaining regressions retained in the raw
+comparison. This is a scoped tradeoff, not a universal performance claim. The
+corresponding real Eclipse marker-order work uses M3SparseExtents inside its
+original owning class and has separate source/build/runtime receipts.
