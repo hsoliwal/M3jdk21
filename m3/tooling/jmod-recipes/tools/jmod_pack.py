@@ -197,9 +197,11 @@ def main(argv=None):
     ap.add_argument("--add-modules", default="java.se")
     ap.add_argument("--release", type=int, default=21,
                     help="Effective JAR release view and generated descriptor target (default: 21)")
-    ap.add_argument("--date", help="Optional ISO-8601 timestamp for reproducible JMOD entries")
+    ap.add_argument("--date", "--d", help="Optional ISO-8601 timestamp for reproducible JMOD entries")
     ap.add_argument("--jmods-only", action="store_true",
                     help="Package JMODs without linking or executing an image")
+    ap.add_argument("--do-not-resolve-by-default", action="store_true", default=False,
+                    help="Mark packaged modules for explicit activation instead of default root resolution")
     ap.add_argument("--root-module", action="append", default=[], metavar="MODULE",
                     help="Opt-in runtime roots; repeat to select a closure instead of all candidates")
     ap.add_argument("--native-library", action="append", default=[], metavar="MODULE=DIRECTORY")
@@ -217,6 +219,7 @@ def main(argv=None):
     if version is None or int(version.group(1)) < a.release:
         raise ValueError("JDK is older than requested JMOD release: " + str(a.release))
     date = ["--date", a.date] if a.date else []
+    resolution = ["--do-not-resolve-by-default"] if a.do_not_resolve_by_default else []
     native = {}
     for value in a.native_library:
         module, separator, directory = value.partition("=")
@@ -251,7 +254,7 @@ def main(argv=None):
         flat = a.out / "flat" / name
         mr = flatten_release(r["jar"], flat, release=a.release)
         libs = ["--libs", native[name]] if name in native else []
-        res = run(jdk / "bin/jmod", "create", *date, "--class-path", flat if mr else r["jar"], *libs, *legal, jmods / (name + ".jmod"))
+        res = run(jdk / "bin/jmod", "create", *date, *resolution, "--class-path", flat if mr else r["jar"], *libs, *legal, jmods / (name + ".jmod"))
         report.append((name, "published", "JMOD" if res.returncode == 0 else "JMOD_FAILED " + res.stderr.strip()[:160]))
         mods.append(name) if res.returncode == 0 else None
     mp = os.pathsep.join([r["jar"] for r in named.values()] + [x["unit_jars"] for x in rows])
@@ -266,7 +269,7 @@ def main(argv=None):
             report.append((mod, "m3-descriptor-for-jmod", "JAVAC_FAILED " + (res.stdout + res.stderr).strip().splitlines()[0][:200])); continue
         shutil.copyfile(a.out / "descriptor-classes" / mod / "module-info.class", classes / "module-info.class")
         libs = ["--libs", native[mod]] if mod in native else []
-        res = run(jdk / "bin/jmod", "create", *date, "--class-path", classes, *libs, *legal, jmods / (mod + ".jmod"))
+        res = run(jdk / "bin/jmod", "create", *date, *resolution, "--class-path", classes, *libs, *legal, jmods / (mod + ".jmod"))
         report.append((mod, "m3-descriptor-for-jmod", "JMOD" if res.returncode == 0 else "JMOD_FAILED " + res.stderr.strip()[:160]))
         mods.append(mod) if res.returncode == 0 else None
     if set(native) - set(mods) or len(mods) != len(named) + len(rows):

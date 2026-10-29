@@ -10130,6 +10130,583 @@
           "target_symbol": "com.m3.arrays.M3Arrays",
           "form": "STATIC_OPERATIONS"
         }
+      },
+      {
+        "id": "m3.arrays.packed.signed",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Scoped non-Java-SE capability in the existing com.m3.arrays module; exact target SDK execution, installed-module/JNI/runtime and compatibility gates are recorded independently and do not advance the global receiving sequence.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/packed/PackedCodec.java",
+            "symbol": "com.synexia.packed.PackedCodec",
+            "signatures": [
+              "com.synexia.packed.PackedCodec"
+            ],
+            "sha256": "0c953b140cf247ab804a8b79ebbde90a7a3f1ab61fdc17ec3e581c9f4a09a636",
+            "git_blob_sha1": "bb03739ebaa9dded11e4248d764b14dea03c0ed2",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/packed/PackedIntArray.java",
+            "symbol": "com.synexia.packed.PackedIntArray",
+            "signatures": [
+              "com.synexia.packed.PackedIntArray"
+            ],
+            "sha256": "fb30010804e8f5e48d4194d2628e670de42704cd0570e677724bdb68eda7c195",
+            "git_blob_sha1": "7452f212451964cc2da30dc5ddd5122f3c120698",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/packed/Int40Array.java",
+            "symbol": "com.synexia.packed.Int40Array",
+            "signatures": [
+              "com.synexia.packed.Int40Array"
+            ],
+            "sha256": "b3d389aaf7375027ed47ba0055e7a3727fc6fcf820aed2580408862584f0b55a",
+            "git_blob_sha1": "07c7e3739581478e5d5bd97cb9636820dba12a4b",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/packed/Int48Array.java",
+            "symbol": "com.synexia.packed.Int48Array",
+            "signatures": [
+              "com.synexia.packed.Int48Array"
+            ],
+            "sha256": "7e12bfeaa2619e235206d6ba60734d3ca30c8a0fcce57b7ca9b49881d618d952",
+            "git_blob_sha1": "6d744f1b0ae86d662ac42d11e90b2a60e39bda4a",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/packed/Int56Array.java",
+            "symbol": "com.synexia.packed.Int56Array",
+            "signatures": [
+              "com.synexia.packed.Int56Array"
+            ],
+            "sha256": "82ff070afb2c10b1da101d6bff350c8f91f617080bda6003ddf6f7a034163ee0",
+            "git_blob_sha1": "ca73e808afbace95cacbe51fc7eff48fd7737cb9",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/packed/PackedCodec.java",
+            "symbol": "com.m3.arrays.packed.PackedCodec",
+            "signatures": [
+              "com.m3.arrays.packed.PackedCodec"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/packed/PackedIntArray.java",
+            "symbol": "com.m3.arrays.packed.PackedIntArray",
+            "signatures": [
+              "com.m3.arrays.packed.PackedIntArray"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/packed/Int40Array.java",
+            "symbol": "com.m3.arrays.packed.Int40Array",
+            "signatures": [
+              "com.m3.arrays.packed.Int40Array"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/packed/Int48Array.java",
+            "symbol": "com.m3.arrays.packed.Int48Array",
+            "signatures": [
+              "com.m3.arrays.packed.Int48Array"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/packed/Int56Array.java",
+            "symbol": "com.m3.arrays.packed.Int56Array",
+            "signatures": [
+              "com.m3.arrays.packed.Int56Array"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.arrays.packed.PackedIntArray and its Int40Array/Int48Array/Int56Array owners",
+        "identity": {
+          "namespace": "Caller-owned arrays and existing module/native owners; no global identity or retained per-element wrapper.",
+          "generation": "Fixed-length mutable packed storage or detached codec outputs; no shared or mapped generation is introduced."
+        },
+        "contract": {
+          "differences": [
+            "Attributed package relocation into the existing independent Apache-2.0 M3 array module."
+          ],
+          "compatibility_obligations": [
+            "Exactly 5, 6 or 7 little-endian two's-complement bytes per signed 40-, 48- or 56-bit logical value, using long carriers.",
+            "Preserve signed bounds, null/range/overflow failures, defensive copies, validation before mutation and overlapping same-width copies.",
+            "Storage is mutable, fixed-length and not thread-safe; existing immutable views retain their original contracts.",
+            "No changes to Java primitive keywords, bytecode descriptors, ordinary array layout, VM array identity or existing M3 APIs."
+          ],
+          "public_surface": [
+            "Deliberately exported non-Java-SE package com.m3.arrays.packed; PackedCodec remains internal."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing Java SE and M3 array APIs/JNI exports retained; only the explicitly named extension declarations and symbols are additive.",
+          "bootstrap": "Existing com.m3.arrays module and m3_arrays native library; no Synexia runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Allocate one packed byte[] for the declared fixed length; imported bytes are defensively copied.",
+          "joins": "No join/share contract or mutable alias is introduced; same-width copyTo preserves overlap semantics.",
+          "outputs": "toByteArray, toLongArray and getAll explicitly materialize caller-owned ordinary arrays.",
+          "cached_facts": "No secondary long[] payload or per-value wrapper retained."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3JdkPackedIntegersRecipe",
+          "version": "m3jdk-packed-integers-20261029",
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3JdkPackedIntegersRecipe.java",
+          "sha256": null,
+          "preconditions": [
+            "Execute the canonical Synexia Maven/OpenRewrite recipe against the exact sealed target preimages at 0ab28ea86ccb2b7c1997e662d1555ece229c05de.",
+            "Require all-input admission, target drift and occupied-new-path refusal, deterministic replay and a complete zero-change fixed point.",
+            "Source hashes, final target postimages and actual gate outcomes are bound by the separate canonical execution and result-only receiving receipts; null candidate commit/hash fields do not claim a published target identity."
+          ],
+          "rollback": "Use a separately reviewed source-sealed restoration from the exact received postimage; preserve unrelated changes and historical evidence."
+        },
+        "tests": [
+          {
+            "id": "packed-signed-contract",
+            "receipt": "m3/arrays/PACKED_ACCEPTANCE.json"
+          },
+          {
+            "id": "packed-resource-observations",
+            "receipt": "m3/arrays/PACKED_ACCEPTANCE.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0; retain original Synexia copyright and module LICENSE/NOTICE. PACKED_NOTICES.md records exact source lineage and target adaptations.",
+          "publication": "Existing published packed-width and canonical base-128/ZigZag algorithms; no challenge-site statement, editorial or solution body copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Target package com.m3.arrays.packed; primitive Java/JVM types and arrays retain their existing representation.",
+            "Native operations use the existing target-owned M3ArrayNative facade, loader and m3_arrays library; donor loader/progress/encode63/delta machinery is excluded."
+          ],
+          "pending": [
+            "Target build, differential/API/JNI/failure-path and source-built installed-image evidence must name the exact executed candidate.",
+            "Cross-platform, whole-JDK/JCK and whole-family qualification remain outside this bounded component claim.",
+            "The active STRING qualification stage and every receiving phase retain their previous states."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Additive stable capability identity. Existing mappings, queue operations and all global receiving authority remain unchanged; implemented-unverified is not acceptance or phase promotion."
+      },
+      {
+        "id": "m3.arrays.packed.vint64",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Scoped non-Java-SE capability in the existing com.m3.arrays module; exact target SDK execution, installed-module/JNI/runtime and compatibility gates are recorded independently and do not advance the global receiving sequence.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/packed/VInt.java",
+            "symbol": "com.synexia.packed.VInt",
+            "signatures": [
+              "com.synexia.packed.VInt"
+            ],
+            "sha256": "a5d297f7735fd962426ad82089f658f4272531ec26192c218b7a71d342085291",
+            "git_blob_sha1": "a2d89c7984c5396715338732b67748e83f30f09e",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/packed/VInt.java",
+            "symbol": "com.m3.arrays.packed.VInt",
+            "signatures": [
+              "byte[] encodeUnsigned64(long[])",
+              "long[] decodeUnsigned64(byte[])",
+              "byte[] encodeZigZag64(long[])",
+              "long[] decodeZigZag64(byte[])"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.arrays.packed.VInt",
+        "identity": {
+          "namespace": "Caller-owned arrays and existing module/native owners; no global identity or retained per-element wrapper.",
+          "generation": "Fixed-length mutable packed storage or detached codec outputs; no shared or mapped generation is introduced."
+        },
+        "contract": {
+          "differences": [
+            "Attributed package relocation; sequence codec remains independent of native availability."
+          ],
+          "compatibility_obligations": [
+            "Canonical base-128 unsigned64 and ZigZag64 encodings use 1 to 10 bytes per long value.",
+            "Negative unsigned long carriers retain all 64 bits; ten-byte unsigned values are valid when canonical.",
+            "Reject truncated, overflowing and nonminimal inputs; preserve exact empty/null/bounds behavior.",
+            "Outputs are detached arrays; no promise of indexed in-place variable-width updates or savings for every input distribution."
+          ],
+          "public_surface": [
+            "Four static codec methods in exported non-Java-SE com.m3.arrays.packed.VInt."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing Java SE and M3 array APIs/JNI exports retained; only the explicitly named extension declarations and symbols are additive.",
+          "bootstrap": "Existing com.m3.arrays module and m3_arrays native library; no Synexia runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Read stable caller arrays; size the complete result with checked Java capacity before publication.",
+          "joins": "A sequence codec, with no retained cursor, index or shared buffer owner.",
+          "outputs": "Fresh GC-managed byte[] or long[] results; full Java array capacity remains independent of the native batch bound.",
+          "cached_facts": "No retained native or Java payload cache."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3JdkPackedIntegersRecipe",
+          "version": "m3jdk-packed-integers-20261029",
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3JdkPackedIntegersRecipe.java",
+          "sha256": null,
+          "preconditions": [
+            "Execute the canonical Synexia Maven/OpenRewrite recipe against the exact sealed target preimages at 0ab28ea86ccb2b7c1997e662d1555ece229c05de.",
+            "Require all-input admission, target drift and occupied-new-path refusal, deterministic replay and a complete zero-change fixed point.",
+            "Source hashes, final target postimages and actual gate outcomes are bound by the separate canonical execution and result-only receiving receipts; null candidate commit/hash fields do not claim a published target identity."
+          ],
+          "rollback": "Use a separately reviewed source-sealed restoration from the exact received postimage; preserve unrelated changes and historical evidence."
+        },
+        "tests": [
+          {
+            "id": "vint64-contract",
+            "receipt": "m3/arrays/PACKED_ACCEPTANCE.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0; retain original Synexia copyright and module LICENSE/NOTICE. PACKED_NOTICES.md records exact source lineage and target adaptations.",
+          "publication": "Existing published packed-width and canonical base-128/ZigZag algorithms; no challenge-site statement, editorial or solution body copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Target package com.m3.arrays.packed; primitive Java/JVM types and arrays retain their existing representation.",
+            "Native operations use the existing target-owned M3ArrayNative facade, loader and m3_arrays library; donor loader/progress/encode63/delta machinery is excluded."
+          ],
+          "pending": [
+            "Target build, differential/API/JNI/failure-path and source-built installed-image evidence must name the exact executed candidate.",
+            "Cross-platform, whole-JDK/JCK and whole-family qualification remain outside this bounded component claim.",
+            "The active STRING qualification stage and every receiving phase retain their previous states."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Additive stable capability identity. Existing mappings, queue operations and all global receiving authority remain unchanged; implemented-unverified is not acceptance or phase promotion."
+      },
+      {
+        "id": "m3.arrays.packed.native",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Scoped non-Java-SE capability in the existing com.m3.arrays module; exact target SDK execution, installed-module/JNI/runtime and compatibility gates are recorded independently and do not advance the global receiving sequence.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-classic-tools-jni",
+            "path": "synexia-classic-tools-jni/src/main/c/synexia_cpu_codec.c",
+            "symbol": "six signed-packed/unsigned64/ZigZag64 C kernels",
+            "signatures": [
+              "six signed-packed/unsigned64/ZigZag64 C kernels"
+            ],
+            "sha256": "c6bd9da6c9ede861bc481c4a8bf84e6114eeda159f1af6d4c9a27d5400a2682a",
+            "git_blob_sha1": "4b4a62f2dc1ea41962a212ca5b4ebe6417d23800",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-classic-tools-jni",
+            "path": "synexia-classic-tools-jni/src/main/c/synexia_cpu_codec.h",
+            "symbol": "packed/unsigned64/ZigZag64 kernel declarations",
+            "signatures": [
+              "packed/unsigned64/ZigZag64 kernel declarations"
+            ],
+            "sha256": "54e248ac99d11aa3d5742ffb882915804c2dd3527ca23c033bd315ffc7c38dcb",
+            "git_blob_sha1": "eda23177e6c4e3f2caed4a483c27fc6e83e8b077",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-classic-tools-jni",
+            "path": "synexia-classic-tools-jni/src/main/c/synexia_cpu_codec_jni.c",
+            "symbol": "bounded primitive-region JNI codec boundary",
+            "signatures": [
+              "bounded primitive-region JNI codec boundary"
+            ],
+            "sha256": "e9f840dbe9af3b7798f5ad909b01bc65ab60199090406d95401a0c3cc659cad6",
+            "git_blob_sha1": "6ae48430f7b49d0ca5467115bf5a409f127f0141",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+            "module": "synexia-classic-tools-jni",
+            "path": "synexia-classic-tools-jni/src/main/java/com/synexia/classictools/jni/NativeCpuCodec.java",
+            "symbol": "com.synexia.classictools.jni.NativeCpuCodec",
+            "signatures": [
+              "com.synexia.classictools.jni.NativeCpuCodec"
+            ],
+            "sha256": "69cd26eac769e56a5c43ab310803d263d2fc596d0f9479f93cddf9b2ea358c82",
+            "git_blob_sha1": "6c2d7fc520d7c59845c578d056d0a46d71fbfaf5",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+            "symbol": "com.m3.arrays.M3ArrayNative",
+            "signatures": [
+              "byte[] encodePackedRequired(long[],int)",
+              "long[] decodePackedRequired(byte[],int)",
+              "byte[] encodeUnsigned64Required(long[])",
+              "long[] decodeUnsigned64Required(byte[])",
+              "byte[] encodeZigZag64Required(long[])",
+              "long[] decodeZigZag64Required(byte[])"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/native/m3_packed_codec.c",
+            "symbol": "target-owned signed-packed/unsigned64/ZigZag64 kernels",
+            "signatures": [
+              "target-owned signed-packed/unsigned64/ZigZag64 kernels"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/native/m3_packed_codec_jni.c",
+            "symbol": "M3ArrayNative packed/VInt JNI exports",
+            "signatures": [
+              "M3ArrayNative packed/VInt JNI exports"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/native/include/m3_packed_codec.h",
+            "symbol": "target-owned packed codec declarations",
+            "signatures": [
+              "target-owned packed codec declarations"
+            ],
+            "sha256": null,
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.arrays.M3ArrayNative; existing m3_arrays library",
+        "identity": {
+          "namespace": "Caller-owned arrays and existing module/native owners; no global identity or retained per-element wrapper.",
+          "generation": "Fixed-length mutable packed storage or detached codec outputs; no shared or mapped generation is introduced."
+        },
+        "contract": {
+          "differences": [
+            "Extract only the six relevant donor codec kernels into target-owned translation units; retain Apache-2.0 lineage.",
+            "Add six explicit Required operations and MAX_CODEC_ITEMS=4096 to the existing facade; reuse its loader and m3.arrays.native.path."
+          ],
+          "compatibility_obligations": [
+            "Both input and output element/byte counts must fit 4096; width is exactly 40, 48 or 56.",
+            "Check null and obvious geometry before loading, then validate all arguments again natively; validate fully before stores and report zero written on failure.",
+            "Preserve original six native exports, UTF-16 optional fallback and required-native behavior; new Required operations never silently substitute Java.",
+            "Detached result arrays; OutOfMemoryError for silent allocation failure; no retained Java heap pointers, global references or critical-array pins.",
+            "JNI callers keep input arrays stable for the call; standalone C input/output buffers are disjoint."
+          ],
+          "public_surface": [
+            "byte[] encodePackedRequired(long[],int)",
+            "long[] decodePackedRequired(byte[],int)",
+            "byte[] encodeUnsigned64Required(long[])",
+            "long[] decodeUnsigned64Required(byte[])",
+            "byte[] encodeZigZag64Required(long[])",
+            "long[] decodeZigZag64Required(byte[])",
+            "int MAX_CODEC_ITEMS = 4096"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing Java SE and M3 array APIs/JNI exports retained; only the explicitly named extension declarations and symbols are additive.",
+          "bootstrap": "Existing com.m3.arrays module and m3_arrays native library; no Synexia runtime dependency."
+        },
+        "dependencies": [
+          {
+            "id": "m3.arrays.packed.signed",
+            "resolution": "resolved",
+            "reason": "Target differential proof compares the exact signed fixed-width Java contract."
+          },
+          {
+            "id": "m3.arrays.packed.vint64",
+            "resolution": "resolved",
+            "reason": "Target differential proof compares canonical unsigned64 and ZigZag64 Java contracts."
+          }
+        ],
+        "materialization": {
+          "admission": "Bounded JNI primitive-array region copies and target-owned exception helpers; no per-element JNI transitions.",
+          "joins": "Batch operations only; no persisted native state or cross-call buffer owner.",
+          "outputs": "Detached ordinary GC-managed byte[]/long[]; native scratch released before return.",
+          "cached_facts": "No retained native allocation or hidden mutable payload."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3JdkPackedIntegersRecipe",
+          "version": "m3jdk-packed-integers-20261029",
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3JdkPackedIntegersRecipe.java",
+          "sha256": null,
+          "preconditions": [
+            "Execute the canonical Synexia Maven/OpenRewrite recipe against the exact sealed target preimages at 0ab28ea86ccb2b7c1997e662d1555ece229c05de.",
+            "Require all-input admission, target drift and occupied-new-path refusal, deterministic replay and a complete zero-change fixed point.",
+            "Source hashes, final target postimages and actual gate outcomes are bound by the separate canonical execution and result-only receiving receipts; null candidate commit/hash fields do not claim a published target identity."
+          ],
+          "rollback": "Use a separately reviewed source-sealed restoration from the exact received postimage; preserve unrelated changes and historical evidence."
+        },
+        "tests": [
+          {
+            "id": "packed-native-parity",
+            "receipt": "m3/arrays/PACKED_ACCEPTANCE.json"
+          },
+          {
+            "id": "packed-native-kernels",
+            "receipt": "m3/arrays/PACKED_ACCEPTANCE.json"
+          },
+          {
+            "id": "packed-jni-failures",
+            "receipt": "m3/arrays/PACKED_ACCEPTANCE.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0; retain original Synexia copyright and module LICENSE/NOTICE. PACKED_NOTICES.md records exact source lineage and target adaptations.",
+          "publication": "Existing published packed-width and canonical base-128/ZigZag algorithms; no challenge-site statement, editorial or solution body copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6f878f9e5d6c5044eda15efb9e743594e70ce7f7",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Target package com.m3.arrays.packed; primitive Java/JVM types and arrays retain their existing representation.",
+            "Native operations use the existing target-owned M3ArrayNative facade, loader and m3_arrays library; donor loader/progress/encode63/delta machinery is excluded."
+          ],
+          "pending": [
+            "Target build, differential/API/JNI/failure-path and source-built installed-image evidence must name the exact executed candidate.",
+            "Cross-platform, whole-JDK/JCK and whole-family qualification remain outside this bounded component claim.",
+            "The active STRING qualification stage and every receiving phase retain their previous states."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Additive stable capability identity. Existing mappings, queue operations and all global receiving authority remain unchanged; implemented-unverified is not acceptance or phase promotion."
       }
     ]
   },

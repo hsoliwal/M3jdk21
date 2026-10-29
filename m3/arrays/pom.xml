@@ -7,8 +7,8 @@
   <groupId>com.m3</groupId>
   <artifactId>m3-arrays</artifactId>
   <version>0.1.0-SNAPSHOT</version>
-  <name>M3 immutable array substrate</name>
-  <description>Immutable snapshot/range/join owners and explicit Java/JNI materialization boundaries.</description>
+  <name>M3 array substrate</name>
+  <description>Immutable snapshot/range/join owners, compact integer storage and explicit Java/JNI materialization boundaries.</description>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -35,6 +35,7 @@
         <includes>
           <include>LICENSE</include>
           <include>NOTICE</include>
+          <include>PACKED_NOTICES.md</include>
           <include>provenance.json</include>
         </includes>
       </resource>
@@ -50,6 +51,14 @@
             <arg>-Werror</arg>
           </compilerArgs>
         </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <useModulePath>false</useModulePath>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
