@@ -45,6 +45,12 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git hash-object src/java.base/share/classes/java/util/Collections.java)" = "26453d5c751859435b9b0489a68f64ba157026e3"
+          # All compiled first-party owners and exact original jtreg sources
+          # are source-sealed, not just the public Collections.java facade.
+          test "$(git hash-object src/java.base/share/classes/java/util/M3CollectionViews.java)" = "4fd29f319edebb0fa8238aaf17be050633a990d9"
+          test "$(git hash-object src/java.base/share/classes/java/util/M3CollectionMasks.java)" = "2a9c79e70de992742e235cacff0f230f209b3ed6"
+          test "$(git hash-object test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java)" = "8d083b3104b860056ba38bd0fbc0496cbb93dbf0"
+          test "$(git hash-object test/jdk/java/util/Collections/M3CollectionViewsTest.java)" = "c7367d43f5d36f24abee1ec644932c16f4150eaa"
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
