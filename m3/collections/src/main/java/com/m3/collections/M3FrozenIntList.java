@@ -4,6 +4,11 @@
  */
 package com.m3.collections;
 
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.PrimitiveIterator;
+
 /**
  * M3 five-library superset scaffold {@code M3FrozenIntList}: API group {@code FROZEN_INT_LIST} over arrays and state masks.
  *
@@ -14,22 +19,29 @@ package com.m3.collections;
  *
  * <p>DOOP mapping: lane kind INT; lanes {@code int[] valueLane}; offset scheme ordinal slot (dense 0..size); state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Status: M3-specific immutable primitive-array candidate. Inputs are copied on admission; 
+ * returned arrays are detached snapshots. This is not a replacement for {@code java.util} APIs.
+ * Original provider contracts remain independently qualified before target promotion.
  */
 public final class M3FrozenIntList {
+    private static final int[] EMPTY = new int[0];
+    private static final long[] EMPTY_MASK = new long[0];
     /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
 
     /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private int[] valueLane = new int[0];
+    private final int[] valueLane;
     /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
+    private final long[] stateMaskWords = EMPTY_MASK;
     /** Live slot count. */
-    private int size;
+    private final int size;
 
     /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public M3FrozenIntList() {
+    public M3FrozenIntList() { this(EMPTY); }
+
+    private M3FrozenIntList(int[] frozen) {
+        valueLane = frozen;
+        size = frozen.length;
     }
 
     /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
@@ -37,43 +49,54 @@ public final class M3FrozenIntList {
         return "M3FrozenIntList|FROZEN_INT_LIST|INT|FROZEN|int[] valueLane";
     }
 
-    /** JDK List.copyOf (int lane) (scaffold: not yet received). */
+    /** JDK List.copyOf (int lane) (immutable primitive implementation candidate). */
     public static M3FrozenIntList copyOf(int[] source) {
-        throw new M3NotYetReceived("M3FrozenIntList.copyOf");
+        Objects.requireNonNull(source, "source");
+        return new M3FrozenIntList(source.clone());
     }
 
-    /** List.size (scaffold: not yet received). */
+    /** List.size (immutable primitive implementation candidate). */
     public int size() {
-        throw new M3NotYetReceived("M3FrozenIntList.size");
+        return size;
     }
 
-    /** List.get (primitive) (scaffold: not yet received). */
+    /** List.get (primitive) (immutable primitive implementation candidate). */
     public int get(int index) {
-        throw new M3NotYetReceived("M3FrozenIntList.get");
+        return valueLane[Objects.checkIndex(index, size)];
     }
 
-    /** List.indexOf (scaffold: not yet received). */
+    /** List.indexOf (immutable primitive implementation candidate). */
     public int indexOf(int value) {
-        throw new M3NotYetReceived("M3FrozenIntList.indexOf");
+        for (int i = 0; i < size; i++) if (valueLane[i] == value) return i;
+        return -1;
     }
 
-    /** List.toArray (defensive copy) (scaffold: not yet received). */
+    /** List.toArray (defensive copy) (immutable primitive implementation candidate). */
     public int[] toArray() {
-        throw new M3NotYetReceived("M3FrozenIntList.toArray");
+        return valueLane.clone();
     }
 
-    /** Iterable.forEach (scaffold: not yet received). */
+    /** Iterable.forEach (immutable primitive implementation candidate). */
     public void forEach(java.util.function.IntConsumer action) {
-        throw new M3NotYetReceived("M3FrozenIntList.forEach");
+        Objects.requireNonNull(action, "action");
+        for (int i = 0; i < size; i++) action.accept(valueLane[i]);
     }
 
-    /** List.iterator (scaffold: not yet received). */
+    /** List.iterator (immutable primitive implementation candidate). */
     public java.util.PrimitiveIterator.OfInt iterator() {
-        throw new M3NotYetReceived("M3FrozenIntList.iterator");
+        final int[] values = valueLane;
+        return new PrimitiveIterator.OfInt() {
+            private int cursor;
+            @Override public boolean hasNext() { return cursor < values.length; }
+            @Override public int nextInt() {
+                if (cursor >= values.length) throw new NoSuchElementException();
+                return values[cursor++];
+            }
+        };
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
+    /** UOE contract once received (JEP269) (immutable primitive implementation candidate). */
     public boolean add(int value) {
-        throw new M3NotYetReceived("M3FrozenIntList.add");
+        throw new UnsupportedOperationException();
     }
 }
