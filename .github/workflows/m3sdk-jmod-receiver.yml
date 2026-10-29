@@ -174,7 +174,7 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '21.0.8+9'
+          java-version: '21.0.8+9.0.LTS'
       - name: Record exact source revision
         run: |
           set -euo pipefail
