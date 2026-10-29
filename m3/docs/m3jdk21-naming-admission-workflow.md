@@ -139,11 +139,35 @@ From this target root, inventory authoritative mapping IDs:
 python3 -c 'import json; print("\n".join(x["id"] for x in json.load(open("m3/docs/name-mapping.json", encoding="utf-8"))["migration"]["records"]))'
 ```
 
-Each production candidate still needs its own pinned crate, source/fixed-point tests,
-`mvn -B -ntp -f m3/pom.xml clean verify`, and relevant OpenJDK `configure`/`make`/
-jtreg/native/VM and comparative performance proofs. Use the same exact candidate commit,
-actual installed image, JDK/OS/arch/flags and recorded outputs.
+Each production candidate still needs its own pinned canonical Synexia task and
+source/fixed-point tests, followed by Maven verification of that task in
+`hsoliwal/com.synexia`. Compile and test each directly owned product module with
+historical target-local recipe profiles disabled. Relevant OpenJDK
+`configure`/`make`/jtreg/native/VM and comparative performance proofs must use the
+same exact candidate commit, matched installed image, JDK/OS/arch/flags and
+recorded outputs. The target recipe reactor is retained migration debt and is
+not an execution entrypoint.
 
 **This documentation/receiver increment changes no `java.*` class, ABI or JNI implementation.**
 Policy source compiles and isolated fixtures compile under Java 21; absence of an executed
 whole-Maven/JDK test must remain `NOT_RUN` in PR evidence, not PASS.
+
+## Release review and visible intermediate output
+
+Run the existing map checker before changing package, class or method names.
+The stable mapping IDs and [name-plan.json](../tooling/name-contract/name-plan.json)
+remain authoritative; the release queue projects their status without creating a
+second rename registry. A `QUEUED` row is an excluded candidate, not an applied
+rename or a reason to rewrite a public Java API.
+
+| Change | Required naming work |
+| --- | --- |
+| Internal package/class move | Resolve the mapped destination and typed caller closure, then update source paths, imports, module/service resources and JNI names as applicable |
+| Method rename | Match the exact owner and overload; retain public, override, reflection, serialization and native contracts |
+| Documentation update | Describe the current mapped owner and exact scope; distinguish an existing implementation from installed-image qualification |
+| Intermediate output | Put release reports under `m3/release/queue/current/`; retain failures and incomplete gates in the report and publish the report as a CI artifact |
+
+See [the release queue](../release/queue/README.md) for the commands and the
+current evidence requirements. Public JDK names stay `String`, `Class`,
+`HashMap`, `Pattern` and their existing method signatures. This documentation
+update does not promote the queued class or package proposals.
