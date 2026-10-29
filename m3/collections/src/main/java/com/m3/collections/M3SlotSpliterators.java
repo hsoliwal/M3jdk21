@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*******************************************************************************
  * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
  *
@@ -13,6 +14,10 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and contributors: retain lazy comparator lookup for filtered split children.
+||||||| merged common ancestors
+=======
+// Modified 2026 by Hitesh Soliwal and contributors: retain lazy comparator lookup for filtered split children.
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: late-binding collection adapters and comparator-preserving splits.
 package com.m3.collections;

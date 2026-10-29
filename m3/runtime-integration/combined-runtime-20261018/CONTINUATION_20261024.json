@@ -1,0 +1,206 @@
+{
+  "schema": "M3_RUNTIME_MAINTAINED_WITNESSES_20261024_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0; generated metadata only; target/donor per-file rights unchanged",
+  "product_owner": "hsoliwal/M3JDK21",
+  "canonical_recipe_owner": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+  "previous_runtime_publication": "38a251f419c8236c8818f5670bebe651be6f31a2",
+  "received_source_head": "28e34762d10d67a86f52c40cea7eb47c76ff3a01",
+  "java_base_image_source_epoch": "22c70a28966e2470352af34abf914d6917d941d5",
+  "java_base_and_make_sources_unchanged": true,
+  "public_callable_interfaces_and_JNI_unchanged": true,
+  "source_outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredDescendingDepthContract.java",
+      "sha256": "cf469a67b1dcd56da25d6dd385da05c763a8671f81c5ec674465655618284700"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListIteratorGuardContract.java",
+      "sha256": "1a90960d9959ed2853ab555d58bd9d0f141d4d4d4a3d161b8e8ba13cb74c1fe3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListIteratorGuardTest.java",
+      "sha256": "3f22124b03e2a8750e3f61ac6d546a388fcdb4e3e34afef69a872c62fda9ec64"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java",
+      "sha256": "a44de1d2177d7b7aac2d3c0ff71a2193ea626a343d0389cfbf13bdf8af6a29eb"
+    }
+  ],
+  "receiving": [
+    {
+      "dataset": "m3-regression-witnesses-20261024",
+      "observed_input_head": "7236d45d412d23a658e27ad6e279e6e41f20bbd7",
+      "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualification_sha256": "8534abb13996bbe65d5969642ac914a71d56bec69ddd2f32e8017e867b7d3a05",
+      "check": {
+        "dataset": "m3-regression-witnesses-20261024",
+        "targets": 2,
+        "changes": 2,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-regression-witnesses-20261024",
+        "targets": 2,
+        "changes": 2,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-regression-witnesses-20261024",
+        "targets": 2,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "observed_output_head": "41db68d28ada879e84e0f401a9c576acbc4e1c0b",
+      "tree": "443df490a5a8d0707785dec840f25b2b863bf653"
+    },
+    {
+      "dataset": "m3-list-iterator-guard-20261024",
+      "observed_input_head": "41db68d28ada879e84e0f401a9c576acbc4e1c0b",
+      "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualification_sha256": "635f4d46b8f3be80988e2afd37fde8dd88c1b2d1862e29fe8512aae56710b7b6",
+      "check": {
+        "dataset": "m3-list-iterator-guard-20261024",
+        "targets": 3,
+        "changes": 3,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-list-iterator-guard-20261024",
+        "targets": 3,
+        "changes": 3,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-list-iterator-guard-20261024",
+        "targets": 3,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "observed_output_head": "28e34762d10d67a86f52c40cea7eb47c76ff3a01",
+      "tree": "03b5981fda5d39d0dae406dd03752dda1f7f1b87"
+    }
+  ],
+  "qualified_datasets": [
+    {
+      "dataset": "m3-regression-witnesses-20261024",
+      "targets": 2,
+      "manifest_sha256": "e500578a5d45e41a8b3c12a7c2a758c46bdc1f2d302465a54f48d3b86432bf96",
+      "actual_SDK_tests": 5,
+      "sealing_tests": 8,
+      "receiver_cases": 9
+    },
+    {
+      "dataset": "m3-list-iterator-guard-20261024",
+      "targets": 3,
+      "manifest_sha256": "a897ab6407dc633bc74702af4e3a93a5b072fef4b0624dbe9fb09f0801b2d7d7",
+      "actual_SDK_tests": 5,
+      "sealing_tests": 8,
+      "receiver_cases": 9
+    }
+  ],
+  "strict_readonly_correction": {
+    "canonical_donor": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
+    "public_target_history": "hsoliwal/M3JDK21#1291@eb89c4695da54118c45ccb2fdb46737eba1dc48f",
+    "whole_file_equals_qualified_donor": true,
+    "behavior": "iterator.remove unconditionally rejects with UnsupportedOperationException; before-next IllegalStateException corrected to documented strict read-only boundary",
+    "preserved": "inherited indexed cursor reads, callback demand/order, stored references, nulls, failure identity and retry behavior",
+    "private_surface_change": "StrictReadOnlyList.iterator override and anonymous iterator implementation; iterator.getClass/private reflection changes",
+    "resource_change": "one iterator wrapper allocation; no performance improvement claimed"
+  },
+  "maintained_witnesses": {
+    "hierarchy_original_cases": 12297,
+    "hierarchy_route_cases": 39,
+    "separate_helper_cases": 4,
+    "public_and_direct_route_observation": true,
+    "original_test_surviving_mutants_killed": [
+      "disabled 33-63 atom selector",
+      "removed String.matches dispatch",
+      "duplicate null predicate callback"
+    ],
+    "filtered_bounded_checks": 188,
+    "filtered_deep_checks": 196622,
+    "independent_review_findings": {
+      "Critical": 0,
+      "Important": 0,
+      "Minor": 0
+    }
+  },
+  "current_validation": {
+    "real_jtreg": {
+      "unique_fixtures": 13,
+      "unique_main_actions": 31,
+      "composition": "12 unchanged baseline fixtures/29 actions plus newly executed installed hierarchy/2 actions; historical hierarchy excluded from current counts",
+      "full_jtreg_suite": false
+    },
+    "owning_module_Maven": {
+      "tests": 287,
+      "suites": 100,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "M3_storage_enabled": false,
+      "required_native_flags": true
+    },
+    "enabled_M3_focused_Maven": {
+      "tests": 3,
+      "suites": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "checked_JNI": true,
+      "interpreter_restriction_retained": true
+    },
+    "linked_module_image": {
+      "modules": 2,
+      "JNI_exports": 9,
+      "host_and_image_native_oracles": true,
+      "linked_contract_runs": 6,
+      "production_patch_override": false
+    },
+    "proofs": {
+      "owning_module_default": {
+        "sha256": "c7814ef2b34213b2dc2ffe89438a4c39c2bd4679296c86d5836d623719681492",
+        "private_task_relative_evidence": "owning-module/PROOF.json"
+      },
+      "owning_module_enabled_focus": {
+        "sha256": "14149e53eed6586c959318d17a2f83bc086b98312e4514ad6c5152e6e56182a9",
+        "private_task_relative_evidence": "owning-module-enabled-focus/PROOF.json"
+      },
+      "linked_module_image": {
+        "sha256": "52dd17e29cd637d1e3a497be6983d09e923234417b5aabd06418c4fb533e2016",
+        "private_task_relative_evidence": "linked-pack-proof/PROOF.json"
+      },
+      "real_jtreg_current_cohort": {
+        "sha256": "c2c32cfe41b7d900f8618420e9ecde985bbd14044c5fb6ae2b50fa6f68ec91cd",
+        "private_task_relative_evidence": "jtreg/current-cohort/safe-receipt.json"
+      }
+    }
+  },
+  "historical_evidence": "Original CURRENT_EXECUTION/FINAL_EXECUTION/RECEIVING receipts, missing-RC HOLD, timeout, failed epoch and old metadata source guards remain byte-exact and retain original source epochs.",
+  "disclosure_classification": "routine maintenance of already disclosed runtime/test algorithms; exact historical public target donor retained",
+  "pending": [
+    "hosted exact-head workflow and full canonical provenance loader",
+    "existing runtime PR merge conflict",
+    "complete jtreg/platform/JIT/resource/performance and full-family admission",
+    "current full owning-module enabled-M3 suite not rerun; prior286 whole-suite evidence retains its older source epoch",
+    "deeper sorted/set/map and snapshot findings; richer UTF16/power regex donor receiver integration"
+  ],
+  "receiving_phase": "STRING",
+  "phase_advanced": false,
+  "full_migration_complete": false,
+  "raw_XML_or_environment_payloads_published": false
+}

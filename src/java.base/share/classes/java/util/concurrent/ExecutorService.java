@@ -431,6 +431,7 @@ public interface ExecutorService extends Executor, AutoCloseable {
     /**
      * Run a checked task with an explicitly borrowed progress monitor.
      * Future cancellation and cooperative monitor cancellation remain distinct.
+<<<<<<< HEAD
      * The monitor is bound during execution and is not completed by this task.
      *
      * @param <T> the task's result type
@@ -439,6 +440,16 @@ public interface ExecutorService extends Executor, AutoCloseable {
      * @return a future representing pending completion of the task
      * @throws NullPointerException if {@code task} or {@code monitor} is null
      * @throws RejectedExecutionException if the task cannot be scheduled
+||||||| merged common ancestors
+=======
+     *
+     * @param <T> the type of the task's result
+     * @param task the non-null task to submit
+     * @param monitor the non-null monitor borrowed while the task runs
+     * @return a future representing the pending task result
+     * @throws NullPointerException if {@code task} or {@code monitor} is null
+     * @throws RejectedExecutionException if the task cannot be scheduled
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
      */
     default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(task, "task");
@@ -446,6 +457,7 @@ public interface ExecutorService extends Executor, AutoCloseable {
         return submit((Callable<T>) () -> ProgressMonitors.call(task, monitor));
     }
 
+<<<<<<< HEAD
     /**
      * Submits a runnable with a borrowed monitor scoped to its execution.
      * Avoids overloading {@code submit(Runnable,T)}, which would change
@@ -457,6 +469,20 @@ public interface ExecutorService extends Executor, AutoCloseable {
      * @throws NullPointerException if {@code task} or {@code monitor} is null
      * @throws RejectedExecutionException if the task cannot be scheduled
      */
+||||||| merged common ancestors
+    /** Avoids overloading submit(Runnable,T), which would change overload resolution. */
+=======
+    /**
+     * Submits a task with a borrowed monitor without overloading
+     * {@code submit(Runnable, T)}, which would change overload resolution.
+     *
+     * @param task the non-null task to submit
+     * @param monitor the non-null monitor borrowed while the task runs
+     * @return a future representing task completion, returning null on success
+     * @throws NullPointerException if {@code task} or {@code monitor} is null
+     * @throws RejectedExecutionException if the task cannot be scheduled
+     */
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(task, "task");
         java.util.Objects.requireNonNull(monitor, "monitor");

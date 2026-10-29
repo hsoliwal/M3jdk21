@@ -1,0 +1,97 @@
+[
+  {
+    "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+    "bytes": 5081
+  },
+  {
+    "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+    "bytes": 2451
+  },
+  {
+    "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+    "bytes": 1242
+  },
+  {
+    "path": "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da",
+    "bytes": 392
+  },
+  {
+    "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+    "bytes": 453
+  },
+  {
+    "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+    "state": "NOT_PRESENT_IN_PINNED_TARGET_TREE_NO_HYDRATION",
+    "detail": "fatal: path 'synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv' does not exist in 'ab6cc64eddd17ea81242bf58a7a19cb130a58c77'"
+  },
+  {
+    "path": "m3/algorithms/test/PrefixZContractTest.java",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 7818,
+    "sha256": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448"
+  },
+  {
+    "path": "m3/algorithms/test/ViewInteropContractTest.java",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 3808,
+    "sha256": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7"
+  },
+  {
+    "path": "m3/tooling/lane28/plan.json",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 8501,
+    "sha256": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b"
+  },
+  {
+    "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/manifest.tsv",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 1603,
+    "sha256": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b"
+  },
+  {
+    "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 280877,
+    "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+  },
+  {
+    "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 242226,
+    "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+  },
+  {
+    "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/workflow.yml.txt",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 5105,
+    "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
+  },
+  {
+    "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 2302,
+    "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5"
+  },
+  {
+    "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 1526,
+    "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462"
+  },
+  {
+    "path": "m3/tooling/lane28/check-log.py",
+    "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
+    "bytes": 2478,
+    "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
+  }
+]

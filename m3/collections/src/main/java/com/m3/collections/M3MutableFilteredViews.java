@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*******************************************************************************
  * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
  *
@@ -13,6 +14,20 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+||||||| merged common ancestors
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+=======
+// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026-10-18: reuse reviewed bounded navigation without reopening
+ * captured bulk inputs or changing their admitted occurrence sequence.
+ */
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
 package com.m3.collections;
 
 import java.util.AbstractMap;
@@ -62,19 +77,14 @@ public final class M3MutableFilteredViews {
         return new MapView<>(source, predicate);
     }
 
-    /** Shared comparator ordering atom for bounded mutable-set recovery. */
     @SuppressWarnings("unchecked")
-    private static <T> int compareStored(T stored, T query, Comparator<? super T> comparator) {
-        return comparator != null ? comparator.compare(stored, query)
-                : ((Comparable<? super T>) stored).compareTo(query);
+    static <E> NavigableSet<E> navigationOwner(NavigableSet<E> source) {
+        return source instanceof SetView<?> view ? ((SetView<E>) view).source : source;
     }
 
-    private static <E> E firstMatch(Iterator<E> cursor, Predicate<? super E> visible) {
-        while (cursor.hasNext()) {
-            E candidate = cursor.next();
-            if (visible.test(candidate)) return candidate;
-        }
-        return null;
+    @SuppressWarnings("unchecked")
+    static <K, V> NavigableMap<K, V> navigationOwner(NavigableMap<K, V> source) {
+        return source instanceof MapView<?, ?> view ? ((MapView<K, V>) view).source : source;
     }
 
     private static final class SetView<E> extends AbstractSet<E> implements NavigableSet<E> {
@@ -216,9 +226,10 @@ public final class M3MutableFilteredViews {
             };
         }
 
-        private E seek(Iterator<E> sourceCursor) {
-            return firstMatch(sourceCursor, predicate);
+        @Override public E lower(E value) {
+            return M3FilteredViews.seek(source, predicate, value, false, true);
         }
+<<<<<<< HEAD
 
         /** One-seek normal path; recover only invalid bounded-range construction. */
         private E bounded(E query, boolean forward, boolean inclusive) {
@@ -235,7 +246,41 @@ public final class M3MutableFilteredViews {
             }
             Iterator<E> cursor = forward ? range.iterator() : range.descendingIterator();
             return seek(cursor);
+||||||| merged common ancestors
+
+        /** One-seek normal path; recover only invalid bounded-range construction. */
+        private E bounded(E query, boolean forward, boolean inclusive) {
+            Iterator<E> cursor;
+            try {
+                cursor = forward ? source.tailSet(query, inclusive).iterator()
+                        : source.headSet(query, inclusive).descendingIterator();
+            } catch (IllegalArgumentException outOfRange) {
+                Iterator<E> bounded = forward ? source.iterator() : source.descendingIterator();
+                Comparator<? super E> comparator = source.comparator();
+                while (bounded.hasNext()) {
+                    E stored = bounded.next();
+                    int relation = compareStored(stored, query, comparator);
+                    if ((forward ? relation > 0 || (inclusive && relation == 0)
+                            : relation < 0 || (inclusive && relation == 0))
+                            && predicate.test(stored)) {
+                        return stored;
+                    }
+                }
+                return null;
+            }
+            return seek(cursor);
+=======
+        @Override public E floor(E value) {
+            return M3FilteredViews.seek(source, predicate, value, true, true);
         }
+        @Override public E ceiling(E value) {
+            return M3FilteredViews.seek(source, predicate, value, true, false);
+        }
+        @Override public E higher(E value) {
+            return M3FilteredViews.seek(source, predicate, value, false, false);
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
+        }
+<<<<<<< HEAD
 
         private E boundedFallback(E query, boolean forward, boolean inclusive) {
             Iterator<E> bounded = forward ? source.iterator() : source.descendingIterator();
@@ -256,6 +301,14 @@ public final class M3MutableFilteredViews {
         @Override public E floor(E value) { return bounded(value, false, true); }
         @Override public E ceiling(E value) { return bounded(value, true, true); }
         @Override public E higher(E value) { return bounded(value, true, false); }
+||||||| merged common ancestors
+
+        @Override public E lower(E value) { return bounded(value, false, false); }
+        @Override public E floor(E value) { return bounded(value, false, true); }
+        @Override public E ceiling(E value) { return bounded(value, true, true); }
+        @Override public E higher(E value) { return bounded(value, true, false); }
+=======
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
         @Override public E first() {
             Iterator<E> cursor = iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();

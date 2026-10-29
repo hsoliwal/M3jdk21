@@ -45,8 +45,14 @@ public interface Runnable {
     /**
      * The ambient, never-null M3 progress monitor for this execution thread.
      * A pool must bind it explicitly when dispatching work asynchronously.
+<<<<<<< HEAD
      *
      * @return the current progress monitor, never {@code null}
+||||||| merged common ancestors
+=======
+     *
+     * @return the current lexical monitor, or the process fallback monitor
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
      */
     default java.util.concurrent.ProgressMonitor progressMonitor() {
         return java.util.concurrent.ProgressMonitors.current();
@@ -55,11 +61,18 @@ public interface Runnable {
     /**
      * Run under a borrowed monitor without completing its parent.
      * Existing run() remains the sole abstract method.
+<<<<<<< HEAD
      *
      * @param monitor the borrowed monitor to bind during this operation
      * @throws NullPointerException if {@code monitor} is {@code null}
      * @throws java.util.concurrent.CancellationException if cancellation is
      *         observed before or after this operation
+||||||| merged common ancestors
+=======
+     *
+     * @param monitor the non-null monitor borrowed for this invocation
+     * @throws NullPointerException if {@code monitor} is null
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
      */
     default void run(java.util.concurrent.ProgressMonitor monitor) {
         java.util.concurrent.ProgressMonitors.run(this, monitor);

@@ -1,0 +1,131 @@
+{
+  "schema": "M3JDK21_SPARSE_CANONICAL_SOURCE_WITNESS_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "metadata_license": "Apache-2.0",
+  "state": "READ_ONLY_IMMUTABLE_SOURCE_ACQUISITION_NO_TARGET_MUTATION",
+  "promotion_authority": false,
+  "observed_target_head": "19fc2c988ae7358b24e68e090eba214340d66452",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72",
+  "canonical_pr": {
+    "number": 9726,
+    "state": "closed",
+    "merged": true,
+    "head": "f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72",
+    "base": "2ddd629bcc5f037e26afe75a7655773abc79a138",
+    "merge": "0b91fa7d02b4e92af4201b87a936d109e4c6b114",
+    "title": "Qualify adaptive sparse M3TQ lookup with the existing recipe engine",
+    "url": "https://github.com/hsoliwal/com.synexia/pull/9726",
+    "body": "A one-key warm containment query currently scans 32,766 prepared source keys. This packet uses the existing hash-pinned Java engine to produce an adaptive sparse lookup candidate, retaining the dense merge and exact set-inclusion semantics.\n\nValidation: 3 OpenRewrite SDK execution/fixed-point/refusal tests pass. Exact uninstrumented kernels pass 31,011 new and 308,649 existing JNI-backed checks in mixed, interpreter, C1 and C2 modes. The deterministic instrumented work probe falls from 32,766 source-key reads to 16. Three-fork host-kernel smoke timings, controls and raw evidence are included; early-hit overhead is disclosed.\n\nCanonical tooling/templates stay in Synexia; M3jdk21 receives generated source/test and a thin receipt. Full custom JVM image/jtreg, end-to-end String/JMH, retained-memory and older receiving-snapshot reconciliation remain pending. Keep this draft paired with the target candidate until receiving gates are resolved. Existing develop history and canonical engine are preserved.\n\nPaired receiving candidate: [M3jdk21 #366](https://github.com/hsoliwal/M3jdk21/pull/366). The unchanged baseline and candidate share the pre-existing `HOLD_MATCHER_STATE_GAP` admission failure; target receipts retain both outputs."
+  },
+  "files": [
+    {
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+      "saved_path": "exact-source/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+      "git_blob_sha1": "2fdaa30d27463bb9e9bff5064cbd4015571d3aa9",
+      "sha256": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2",
+      "bytes": 395
+    },
+    {
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQ.java.txt",
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQ.java.txt",
+      "saved_path": "exact-source/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQ.java.txt",
+      "git_blob_sha1": "533a07b77061e757d476627557413f6df1067d34",
+      "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "bytes": 17919
+    },
+    {
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQSparseContainmentTest.java.txt",
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQSparseContainmentTest.java.txt",
+      "saved_path": "exact-source/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQSparseContainmentTest.java.txt",
+      "git_blob_sha1": "5ab8efc87034af87166c6ba9164c5444b60876da",
+      "sha256": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790",
+      "bytes": 4159
+    },
+    {
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
+      "saved_path": "exact-source/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
+      "git_blob_sha1": "fce015cae3b4729490fcd07f17c1e949e3a50747",
+      "sha256": "6d6cce9b0c7a7abb4030eb24959bb4fd3c84195c3367eb00fcebfa1bdae0776e",
+      "bytes": 416
+    },
+    {
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/provenance.json",
+      "source_path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/provenance.json",
+      "saved_path": "exact-source/synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/provenance.json",
+      "git_blob_sha1": "0bddd8b68819c12904c305feef8ff3bcff021a9f",
+      "sha256": "a772adfd15ead47935199c80f78756a3b261312d0c15ce459e95dae42aec9a68",
+      "bytes": 735
+    },
+    {
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/src/test/java/com/synexia/rewrite/SparseLookupRecipeTest.java",
+      "source_path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/src/test/java/com/synexia/rewrite/SparseLookupRecipeTest.java",
+      "saved_path": "exact-source/synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/src/test/java/com/synexia/rewrite/SparseLookupRecipeTest.java",
+      "git_blob_sha1": "44998cee80d25a58bdd18815db5f718c5fdad392",
+      "sha256": "69ba82055b5642d01356ae919a9282c5ad2e95aabc6389bb399b2838a105d517",
+      "bytes": 2861
+    },
+    {
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/fixtures/M3TQ.java.before",
+      "source_path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/fixtures/M3TQ.java.before",
+      "saved_path": "exact-source/synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/fixtures/M3TQ.java.before",
+      "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+      "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "bytes": 16998
+    },
+    {
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/evidence/sdk-execution.txt",
+      "source_path": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/evidence/sdk-execution.txt",
+      "saved_path": "exact-source/synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup/evidence/sdk-execution.txt",
+      "git_blob_sha1": "98722d8ab851b48fb979bea19c5a03fa528943d2",
+      "sha256": "4278aee4a0b3bea4dfc1f90ea75555329720c7ec9e3e7b0a4a448e8bca874884",
+      "bytes": 334
+    }
+  ],
+  "verified_manifest_rows": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "before_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "after_sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "target_bytes_equal_exact_canonical_template": true
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3TQSparseContainmentTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790",
+      "target_bytes_equal_exact_canonical_template": true
+    }
+  ],
+  "target_recipe_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+  "target_recipe_path_currently_exists": false,
+  "target_local_receipt": {
+    "path": "m3/tooling/tq/evidence/sparse-lookup-20261007/receipt.json",
+    "sha256": "87d3a69575a94a0ce07396e57a47a3ace62c7b6b533e853fc662bd84764d861d",
+    "canonical_commit_matches": true,
+    "both_output_transition_triples_match_canonical_manifest": true,
+    "contains_exact_manifest_bytes": false,
+    "disposition": "Thin target-local metadata corroborates the real canonical manifest, but is not an exact manifest mirror. The referenced canonical manifest is real and now acquired; its absence from target is the locator failure."
+  },
+  "recipe_descriptor": {
+    "implementation": "Declarative YAML, not a missing Java class",
+    "name": "com.synexia.rewrite.M3Jdk21TqSparseLookup",
+    "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "crateName": "m3jdk21-tq-sparse-lookup",
+    "engine_git_blob_from_exact_provenance": "18c43e7a2e59e9cc6ca79268863d4aa92af9286a"
+  },
+  "historical_sdk_evidence": {
+    "source": "exact original evidence/sdk-execution.txt",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "new_execution_performed": false
+  },
+  "bounds": [
+    "No root files, mapping locators, statuses, verifier, workflows or PRs changed.",
+    "Acquisition and byte identity establish source custody, not new SDK execution, matched-image, performance, retained-memory or complete-family acceptance.",
+    "Existing original Apache-2.0 source/header bytes retained unchanged; this metadata does not relicense any other source."
+  ]
+}

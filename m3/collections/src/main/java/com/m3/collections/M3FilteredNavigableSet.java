@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Modified 2026 by Hitesh Soliwal and Synexia contributors: read-only filtered NavigableSet facade over M3FilteredViews; preserve comparator metadata across filtered splits.
 /*
  * Copyright (C) 2010 The Guava Authors
@@ -14,7 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+||||||| merged common ancestors
+=======
+// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
 // SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors
+// Modified 2026-10-18: recover reviewed navigation ownership and strict endpoints.
 package com.m3.collections;
 
 import java.util.AbstractSet;
@@ -58,6 +65,8 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
     private static <E> NavigableSet<E> wrap(NavigableSet<E> view) {
         return new M3FilteredNavigableSet<>(view);
     }
+
+    NavigableSet<E> navigationOwner() { return delegate; }
 
     @Override public Comparator<? super E> comparator() { return delegate.comparator(); }
     @Override public Iterator<E> iterator() { return delegate.iterator(); }
@@ -113,6 +122,8 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
     @Override public boolean retainAll(Collection<?> values) { throw readonly(); }
     @Override public boolean removeIf(Predicate<? super E> predicate) { throw readonly(); }
     @Override public void clear() { throw readonly(); }
+    @Override public E removeFirst() { throw readonly(); }
+    @Override public E removeLast() { throw readonly(); }
     @Override public E pollFirst() { throw readonly(); }
     @Override public E pollLast() { throw readonly(); }
     @Override public E removeFirst() { throw readonly(); }

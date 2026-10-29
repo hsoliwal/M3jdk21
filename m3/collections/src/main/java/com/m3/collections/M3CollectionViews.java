@@ -735,8 +735,14 @@ public final class M3CollectionViews {
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+<<<<<<< HEAD
             Consumer<? super E> enclosingAction = action;
             boolean enclosingDelivered = delivered;
+||||||| merged common ancestors
+=======
+            Consumer<? super E> previousAction = action;
+            boolean previousDelivered = delivered;
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
             action = consumer;
             delivered = false;
             try {
@@ -745,8 +751,15 @@ public final class M3CollectionViews {
                 }
                 return delivered;
             } finally {
+<<<<<<< HEAD
                 action = enclosingAction;
                 delivered = enclosingDelivered;
+||||||| merged common ancestors
+                action = null;
+=======
+                action = previousAction;
+                delivered = previousDelivered;
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
             }
         }
 

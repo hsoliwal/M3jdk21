@@ -48,14 +48,26 @@ runs:
   steps:
     - name: 'Download bundles artifact'
       id: download-bundles
+<<<<<<< HEAD
       uses: actions/download-artifact@v4
+||||||| merged common ancestors
+      uses: actions/download-artifact@v3
+=======
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
       with:
         name: bundles-${{ inputs.platform }}${{ inputs.debug-suffix }}
         path: bundles
       continue-on-error: true
 
     - name: 'Download bundles artifact (retry)'
+<<<<<<< HEAD
       uses: actions/download-artifact@v4
+||||||| merged common ancestors
+      uses: actions/download-artifact@v3
+=======
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
       with:
         name: bundles-${{ inputs.platform }}${{ inputs.debug-suffix }}
         path: bundles

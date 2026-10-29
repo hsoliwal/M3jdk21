@@ -14,6 +14,7 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReferenceArray;
+import jdk.internal.mindex.M3DotStarRelations;
 
 /**
  * Bounded Boolean full-match specialization behind String's unchanged Pattern fallback.
@@ -40,7 +41,7 @@ final class M3StringRegexDp {
     private static final long MAX_DP_CELLS = 1_000_000L;
     private static final int MAX_BIT_ATOMS = 32;
     private static final int PLAN_SLOTS = 64;
-    private static final int EFFECT_SLOTS = 256;
+    private static final int EFFECT_SLOTS = 128;
     private static final int MIN_EFFECT_UNITS = 16;
     private static final int MIN_NATIVE_UNITS = 256;
     private static final int MAX_TREE_DEPTH = 64;
@@ -58,17 +59,23 @@ final class M3StringRegexDp {
         int n = regex.length();
         if (n < 1 || n > MAX_PATTERN_UNITS) return UNKNOWN;
         try {
+<<<<<<< HEAD
             if (!heapAllowsPreparation()) return UNKNOWN;
             int prepared = preparedClassMatch(source, regex);
             if (prepared != UNKNOWN) return prepared;
             if (n < 2) return UNKNOWN;
             int m = source.length();
             if (m > MAX_TEXT_UNITS) return UNKNOWN;
+||||||| merged common ancestors
+=======
+            if (!heapAllowsPreparation()) return UNKNOWN;
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
             Tables cache = tables();
             Plan plan = prepare(regex, cache);
             if (plan == null || ((long) m + 1) * (plan.atoms.length + 1) > MAX_DP_CELLS) {
                 return UNKNOWN;
             }
+<<<<<<< HEAD
             // Existing ordered relation algebra can reuse an entire immutable owner/range
             // independently of its incoming frontier. Refusal retains every current lane below.
             if (plan.closure == null && m >= 256 && plan.atoms.length < Long.SIZE
@@ -95,6 +102,28 @@ final class M3StringRegexDp {
                 int decision = rolling(source, plan);
                 return decision != UNKNOWN ? decision : tryRepeatedUtf16(source, regex);
             }
+||||||| merged common ancestors
+            if (plan.closure == null) return rolling(source, plan);
+=======
+            if (plan.closure == null) {
+                // Restore the bounded receiver for the existing ordered relation algebra.
+                // The current <=32-atom frontier and native kernels remain selected below.
+                if (m >= 256 && plan.atoms.length < Long.SIZE
+                        && source.owner() instanceof M3StringTuple) {
+                    int decision;
+                    try {
+                        decision = M3DotStarRelations.evaluate(source, relationAccess(),
+                                plan.atoms, plan.atoms.length, 128,
+                                Math.min(MAX_DP_CELLS, (long) m * (plan.atoms.length + 1)),
+                                null, null).decision();
+                    } finally {
+                        Reference.reachabilityFence(source);
+                    }
+                    if (decision != UNKNOWN) return decision;
+                }
+                return rolling(source, plan);
+            }
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
             long state = evaluate(source.owner(), source.start(), m,
                     plan, plan.closure[0], cache, 0);
             return state == UNKNOWN ? tryRepeatedUtf16(source, regex)
@@ -517,6 +546,21 @@ final class M3StringRegexDp {
 
     private static long advanceJava(M3StringOwner owner, int start, int length,
             Plan plan, long state) {
+        // Physical byte storage cannot hide a surrogate after a dead frontier.
+        if (owner instanceof M3StringAtom atom && atom.storageWidth == 1) {
+            for (int offset = 0; offset < length && state != 0L;) {
+                int fence = offset + Math.min(64, length - offset);
+                for (; offset < fence; offset++) {
+                    char unit = owner.charAt(start + offset);
+                    long accepts = unit < 128 ? plan.ascii[unit]
+                            : isJdkLineTerminator(unit) ? 0L : plan.dot;
+                    long live = state & accepts;
+                    long destinations = (live & plan.star) | ((live & ~plan.star) << 1);
+                    state = close(destinations, plan.star);
+                }
+            }
+            return state;
+        }
         for (int offset = 0; offset < length; offset++) {
             char unit = owner.charAt(start + offset);
             // Do not early-return for an empty state: a later surrogate must still refuse.

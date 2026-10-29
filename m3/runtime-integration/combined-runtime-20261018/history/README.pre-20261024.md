@@ -1,0 +1,19 @@
+<!--
+SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+SPDX-License-Identifier: Apache-2.0
+-->
+# Combined M3JDK21 runtime refinement
+
+Prepared String trigram facts are reused directly by the existing java.base Matcher cache-miss path. The immutable facts owner and field-only String peek reuse a conservative negative; missing or positive facts retain regional preparation and exact verification. String, regex, JNI and inherited Object contracts are preserved. The runtime changes live in M3JDK21's Java, JNI and HotSpot sources.
+
+The branch combines the collection wrapper, dynamic-array, index, offset, mask and Java/JNI budget refinements with their original PR ancestry. Twenty source-qualified canonical datasets produced 207 serial target applications, including catalogue and custody metadata; these are stage instances, not unique files. Every stage had immediate zero-change replay. A separate unchanged sealed owner applied 54 mapping metadata outputs and replayed with zero changes. RECEIVING.json records both authorities and exact observed local heads. SOURCE_CLOSURE.tsv binds 60 changed source/test files.
+
+Strict HotSpot and java.base compilation and actual `make images` pass. The image passes all five priority String/regex/TQ jtreg tests and both Object progress jtreg tests. A separate override, array and clone diagnostic passes 50,040 assertions in each of three CDS modes. All 516 image files retain identical hashes after validation. The HotSpot Object vtable reservation is corrected for its existing overridable `toAdapter(Class)` method; the strict vtable consistency check remains active. The sparse jtreg metadata exports and opens its internal test package through the established `:+open` syntax.
+
+The existing collection verifier passed 41 commands, including 264 source-built Maven tests, strict compilation, API retention, generated JNI headers/exports and UBSan; twelve selected checked-JNI executions also pass. The collection production source tree remains byte-identical to that tested epoch. TQ successor execution passes 21 normal and 21 UBSan tests plus three sync tests; the current mapping epoch passes 21 TQ and three sync tests. These repeat bounded cases and are not summed as additional coverage.
+
+Both unchanged current TQ custody verifiers and full migration structural validation pass. All 148 current tested mapping source paths match this source epoch. The complete-phase command still exits 2 with the same 147 holds, 56 statuses and 20 gates. The native-index Maven source-boundary repair passes its historical complete Java/JNI proof; its current five tests pass and its historical source manifest correctly refuses evolved runtime inputs. Historical failures, refused alternatives and earlier observations remain preserved.
+
+The canonical 30-dataset cohort passes 150 SDK, 240 sealing and 270 receiver cases. The four original source owners and pinned common POM remain unchanged. Only two datasets use the source-built Java21 Javadoc compatibility provider; all others use stock 8.17.1. The complete hosted workflow is a separate observation. Recipes, donor licensing, attribution, counterexamples and exact source/test archives are in [Synexia's convergence PR](https://github.com/hsoliwal/com.synexia/pull/12370). Existing source notices are retained; Apache metadata does not relicense runtime payloads.
+
+Actual regex cost probes pass in three modes and allocate 32 bytes per warmed query in each mode. TQ probes report zero warmed payload reads. These finite observations establish no broad speedup, zero allocation, retained-heap improvement or native-memory acceptance. Full migration-DAG failures, JDK family/backend admission and complete platform/performance coverage remain held; no phase or family is promoted. Earlier receipts remain under `history/`; current image raw evidence and summaries are under `image-20261018/`.

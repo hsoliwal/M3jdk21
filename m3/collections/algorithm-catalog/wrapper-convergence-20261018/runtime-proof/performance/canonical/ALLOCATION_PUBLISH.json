@@ -1,0 +1,253 @@
+{
+  "schema": "M3_ORDER_WINDOW_ALLOCATION_PUBLISH_V1",
+  "repository": "hsoliwal/com.synexia",
+  "status": "PASS_NARROW_ALLOCATION_OBSERVATION",
+  "product_sources": [],
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/ALGORITHM_CATALOGUE.tsv",
+      "sha256": "9f1c71a48845ca3b0b6cfa9ccf2fb5e76ef56096faf8c6deaeab3dd506bc13c4",
+      "bytes": 1713
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/BEFORE_CODE.json",
+      "sha256": "da28c2b276c7c69a7e26d9a42043feabadfdcad4514c3922a7391b4d442c8aa9",
+      "bytes": 3724
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/BINDINGS.json",
+      "sha256": "be07f8453bee1d00b04dd88e273a18d8cf9fe63b23be7bb4fa91363fceaa2846",
+      "bytes": 1634
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/EVIDENCE_SHA256.tsv",
+      "sha256": "2768b5cb3ec33c269cd02fee84d2e6a57c7688680c2db22e6f3ed0caaef9bbe5",
+      "bytes": 4390
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/PROTOCOL.md",
+      "sha256": "0b0e89f92b6ee808eb31c3558b4de1323de1951079e6f0f694e6ff606437a636",
+      "bytes": 1954
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/README.md",
+      "sha256": "d64209fc39e6cc2aaaff7e927e9051e7e21880fe558b42eaabb3fd4947ec7e04",
+      "bytes": 5943
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/BASELINE_GIT_SOURCES.json",
+      "sha256": "2db7261fb4b6d2a28c0690ec52e9a7a69668286cec1d670d68cd75cd186533e5",
+      "bytes": 94748
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/BASELINE_MODULE_RECEIPT.json",
+      "sha256": "afab493816659b3ff4cb334599ce47611b95768c7588001851ffc7c683b11968",
+      "bytes": 3878
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/BEFORE_CODE.json",
+      "sha256": "da28c2b276c7c69a7e26d9a42043feabadfdcad4514c3922a7391b4d442c8aa9",
+      "bytes": 3724
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/COMMANDS.json",
+      "sha256": "89a18126630cd5b1a961a5580babcde8b1be5984cc39e96a5b797c7049ea455c",
+      "bytes": 8467
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/ENVIRONMENT.json",
+      "sha256": "4fe7367564dc4b4c5d58c4d4457935f56c4ca6cf87a60af70fc1f233c01c3a34",
+      "bytes": 1566
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/LONG_BRIDGE_SDK_RESULTS.tsv",
+      "sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9",
+      "bytes": 264
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/M3OrderWindowProof.java",
+      "sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+      "bytes": 17595
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/PROOF_CUSTODY.json",
+      "sha256": "2326b81e31719f97ee355c4bbe40682cd42dd35e512c87e1caf901a4701c422a",
+      "bytes": 591
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/R2_SDK_RESULTS.tsv",
+      "sha256": "9d3dfa387f6f2d3240223e26cfd1108aa78dcca9f4f3abc17cd446fb4f751ad8",
+      "bytes": 4650
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/RAW_SAMPLES.json",
+      "sha256": "f7795a61612ab282aae36b419ed8e87d3bedc3068ede8a50d5af36a2e1f05149",
+      "bytes": 2991
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/RECEIVER_RUNTIME_RECEIPT.json",
+      "sha256": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568",
+      "bytes": 381707
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/RESULTS.json",
+      "sha256": "af6d762f4d6235cb6db2dbed75c61e9cc4cffd175596081d0d4bd5c922b28a61",
+      "bytes": 2491
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/baseline/MAIN_CLASSES.json",
+      "sha256": "9ba0a0ea4c7d26b902cf78f7466292d52f6596e69130d808916f73603ac31967",
+      "bytes": 52113
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/baseline/MAIN_SOURCES.json",
+      "sha256": "39adc626d250a66c623a7e9b13953f802ec3d83158e6188d5c5f001514f118ad",
+      "bytes": 20563
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/baseline/PROOF_CLASSES.json",
+      "sha256": "949fd7af6c75f18a811104246e623a3d2b2efde631fc4d568578e14ed229963b",
+      "bytes": 324
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/baseline/compile-proof.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/baseline/compile-proof.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/baseline/createdFiles.lst",
+      "sha256": "f405b496781d4671ad20aab82afd35097646e60719647649f494edae91e441e1",
+      "bytes": 15352
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/baseline/inputFiles.lst",
+      "sha256": "d4498d5155b07c01266852bfacdb344ca51031aaa658be97e0a06b2f32a7a36d",
+      "bytes": 19058
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/environment/java.stderr.txt",
+      "sha256": "fac45862e9fb8a96293a4a5723128a99d3b8707f901814ee363f4f53bde722bc",
+      "bytes": 314
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/environment/java.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/environment/javac.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/environment/javac.stdout.txt",
+      "sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+      "bytes": 16
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/receiver/MAIN_CLASSES.json",
+      "sha256": "8b7f0821f4ec5ef7d10772bb916e749dd816bca699dd4a300d2dedb0db2f9c7f",
+      "bytes": 52457
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/receiver/MAIN_SOURCES.json",
+      "sha256": "d38a5befd51bfd6e429b277465abeb73c151aad8c83764e514f32e9edf948a40",
+      "bytes": 20564
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/receiver/PROOF_CLASSES.json",
+      "sha256": "949fd7af6c75f18a811104246e623a3d2b2efde631fc4d568578e14ed229963b",
+      "bytes": 324
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/receiver/compile-proof.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/receiver/compile-proof.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/receiver/createdFiles.lst",
+      "sha256": "add8d6c1ea84e3151000e588fc9237155c603dc2eaef0c395420730adc4a752b",
+      "bytes": 15470
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/receiver/inputFiles.lst",
+      "sha256": "bf36d70420a5e4d6e7cbad51bd7e9d8a24f6890425cd62cb20d7e5f6efd76921",
+      "bytes": 19862
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/baseline-1.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/baseline-1.stdout.txt",
+      "sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+      "bytes": 201
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/baseline-2.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/baseline-2.stdout.txt",
+      "sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+      "bytes": 201
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/baseline-3.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/baseline-3.stdout.txt",
+      "sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+      "bytes": 201
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/receiver-1.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/receiver-1.stdout.txt",
+      "sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+      "bytes": 201
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/receiver-2.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/receiver-2.stdout.txt",
+      "sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+      "bytes": 201
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/receiver-3.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/runs/receiver-3.stdout.txt",
+      "sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+      "bytes": 201
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/observe.py",
+      "sha256": "63c63dda6543a1106f07669a28f573a71d5db19aa17da677483046622cad2877",
+      "bytes": 11062
+    }
+  ]
+}

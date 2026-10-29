@@ -112,6 +112,68 @@ JNIEXPORT jlong JNICALL Java_java_lang_M3StringRegexDp_advance0(
     }
     begin = (uintptr_t) raw_address + (uintptr_t) skip;
     text = (const unsigned char *) begin;
+    /* Physical byte storage cannot hide a surrogate after a dead frontier. */
+    if (width == 1) {
+        /* Keep the historical small-plan loop: bit-index dispatch costs more at this size. */
+        if (count < 8) {
+            for (i = 0; i < length && state != UINT64_C(0);) {
+                int fence = length - i < 64 ? length : i + 64;
+                for (; i < fence; i++) {
+                    uint32_t unit = (uint32_t) text[(size_t) i];
+                    uint64_t next = 0;
+                    int token;
+                    for (token = 0; token < (int) count; token++) {
+                        uint32_t atom = (uint32_t) atoms[token];
+                        uint32_t required = atom & UINT32_C(65535);
+                        int accepts = required == (uint32_t) '.' ? !line_terminator(unit) : required == unit;
+                        if (accepts && (state & (UINT64_C(1) << (unsigned int) token)) != 0) {
+                            int destination = (atom & M3_REGEX_STAR) != 0 ? token : token + 1;
+                            next |= (uint64_t) closure[destination];
+                        }
+                    }
+                    state = next;
+                }
+            }
+            return (jlong) state;
+        }
+        for (i = 0; i < length && state != UINT64_C(0);) {
+            int fence = length - i < 64 ? length : i + 64;
+            for (; i < fence; i++) {
+                uint32_t unit = (uint32_t) text[(size_t) i];
+                uint64_t next = 0;
+                int token;
+                uint64_t active = state & (valid >> 1U); /* Exclude the accepting state. */
+                uint64_t rest = active & (active - UINT64_C(1));
+                if (active != 0U && (rest & (rest - UINT64_C(1))) == 0U) {
+                    /* At most two consuming states: inspect only those tokens. */
+                    do {
+                        unsigned int sparse = lowest_token((uint32_t) active);
+                        uint32_t atom = (uint32_t) atoms[sparse];
+                        uint32_t required = atom & UINT32_C(65535);
+                        int accepts = required == (uint32_t) '.' ? !line_terminator(unit) : required == unit;
+                        if (accepts) {
+                            unsigned int destination = (atom & M3_REGEX_STAR) != 0 ? sparse : sparse + 1U;
+                            next |= (uint64_t) closure[destination];
+                        }
+                        active &= active - UINT64_C(1);
+                    } while (active != 0U);
+                } else if (active != 0U) {
+                    /* Dense frontiers retain the original bounded token scan. */
+                    for (token = 0; token < (int) count; token++) {
+                        uint32_t atom = (uint32_t) atoms[token];
+                        uint32_t required = atom & UINT32_C(65535);
+                        int accepts = required == (uint32_t) '.' ? !line_terminator(unit) : required == unit;
+                        if (accepts && (state & (UINT64_C(1) << (unsigned int) token)) != 0) {
+                            int destination = (atom & M3_REGEX_STAR) != 0 ? token : token + 1;
+                            next |= (uint64_t) closure[destination];
+                        }
+                    }
+                }
+                state = next;
+            }
+        }
+        return (jlong) state;
+    }
     /* Keep the historical small-plan loop: bit-index dispatch costs more at this size. */
     if (count < 8) {
         for (i = 0; i < length; i++) {

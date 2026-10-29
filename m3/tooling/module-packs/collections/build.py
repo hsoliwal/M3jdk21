@@ -50,6 +50,21 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def jni_header_symbols(header):
+    """Read exact JNI declarations from this owner's generated javac -h header."""
+    source = header.read_text(encoding="utf-8")
+    declarations = re.sub(r"/\*[\s\S]*?\*/|//[^\n]*", "", source)
+    names = re.findall(
+        r"\bJNIEXPORT\s+[A-Za-z_][A-Za-z0-9_]*\s+JNICALL\s+"
+        r"(Java_[A-Za-z0-9_]+)\s*\(", declarations)
+    expected = set(names)
+    if len(names) != len(re.findall(r"\bJNIEXPORT\b", declarations)):
+        raise ValueError("malformed generated JNI declaration")
+    if len(names) != len(expected) or NATIVE_SYMBOL not in expected:
+        raise ValueError("generated JNI owner contract is missing or duplicated")
+    return expected
+
+
 def qualify(java, javac, modules, pack, repo, output, native, linked):
     label = "image" if linked else "host"
     patch = output / (label + "-contracts")
@@ -69,17 +84,38 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
         command(output / (label + "-" + name.rsplit(".", 1)[1] + ".log"), java,
                 "-Xcheck:jni", *common, "--patch-module", "jdk.m3.collections=" + str(patch),
                 "-m", "jdk.m3.collections/" + name, expected="PASS")
+<<<<<<< HEAD
     mask_test = repo / "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
     native_tests = [mask_test,
                     mask_test.with_name("M3IndexMaskWindowRecoverySelfTest.java"),
                     mask_test.with_name("M3BudgetedMaskWindowContract.java")]
+||||||| merged common ancestors
+    mask_test = repo / "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+=======
+    mask_tests = repo / "m3/collections/src/test/java/com/m3/collections"
+    native_contracts = (
+        ("M3IndexMaskCompactorSelfTest", "native-oracle", "JNI=true"),
+        ("M3IndexMaskWindowSelfTest", "native-window-oracle", "native=true"),
+        ("M3BudgetedMaskWindowContract", "native-budget-oracle", "backend=NATIVE_REQUIRED"),
+    )
+    tests = [mask_tests / (name + ".java") for name, _, _ in native_contracts]
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     native_patch = output / (label + "-native-contracts")
     native_patch.mkdir()
     command(output / (label + "-native-oracle-javac.log"), javac,
             "-source", "21", "-target", "21", "-Xlint:all,-module", "-Werror", "-proc:none",
+<<<<<<< HEAD
             *common, "--patch-module", "com.m3.collections=" + str(mask_test.parent),
             "-d", native_patch, *native_tests)
+||||||| merged common ancestors
+            *common, "--patch-module", "com.m3.collections=" + str(mask_test.parent),
+            "-d", native_patch, mask_test)
+=======
+            *common, "--patch-module", "com.m3.collections=" + str(mask_tests),
+            "-d", native_patch, *tests)
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     library_path = [] if linked else ["-Djava.library.path=" + str(native)]
+<<<<<<< HEAD
     for name, log_name, marker in (
             ("M3IndexMaskCompactorSelfTest", "native-oracle", "JNI=true"),
             ("M3IndexMaskWindowRecoverySelfTest", "native-window-recovery", "JNI=true"),
@@ -88,6 +124,18 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
                 *common, "--patch-module", "com.m3.collections=" + str(native_patch),
                 "-m", "com.m3.collections/com.m3.collections." + name,
                 "--native", expected=marker)
+||||||| merged common ancestors
+    command(output / (label + "-native-oracle.log"), java, "-Xcheck:jni", *library_path,
+            *common, "--patch-module", "com.m3.collections=" + str(native_patch),
+            "-m", "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest",
+            "--native", expected="JNI=true")
+=======
+    for name, log_name, marker in native_contracts:
+        command(output / (label + "-" + log_name + ".log"), java, "-Xcheck:jni", *library_path,
+                *common, "--patch-module", "com.m3.collections=" + str(native_patch),
+                "-m", "com.m3.collections/com.m3.collections." + name,
+                "--native", expected=marker)
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
 
 
 def main():
@@ -131,21 +179,50 @@ def main():
         command(output / (name + "-javac.log"), home / "bin/javac", "--release", "21",
                 "-Xlint:all,-module", "-Werror", "-proc:none", "-h", headers,
                 "-d", modules / name, *sources)
+<<<<<<< HEAD
     header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
     window_header = headers / "com_m3_collections_M3IndexMaskWindow.h"
     header_source = header.read_text() + "\n" + window_header.read_text()
     if not all(symbol in header_source for symbol in NATIVE_SYMBOLS):
         raise ValueError("existing JNI header contract is missing")
+||||||| merged common ancestors
+    header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
+    if NATIVE_SYMBOL not in header.read_text():
+        raise ValueError("existing JNI header contract is missing")
+=======
+    # Preserve each javac-generated owner header and qualify their complete union.
+    owner_headers = [headers / name for name in (
+        "com_m3_collections_M3IndexMaskCompactor.h", "com_m3_collections_M3IndexMaskWindow.h")]
+    header = headers / "m3_collections_mask_jni.h"
+    header.write_bytes(b"\n".join(owner.read_bytes() for owner in owner_headers))
+    expected_jni = jni_header_symbols(header)
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     library = native / "libm3_collections_mask.so"
     command(output / "native-compile.log", os.environ.get("CC", "cc"), "-std=c17", "-O2",
             "-fPIC", "-shared", "-Wall", "-Wextra", "-Werror",
             "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
+<<<<<<< HEAD
             "-include", header, "-include", window_header, "-o", library, *native_sources)
+||||||| merged common ancestors
+            "-include", header, "-o", library, native_source)
+=======
+            "-include", header, "-o", library, *native_sources)
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     symbols = command(output / "native-symbols.log", "nm", "-D", "--defined-only", library)
     exported_jni = {line.split()[-1] for line in symbols.splitlines()
                     if line.split() and line.split()[-1].startswith("Java_")}
+<<<<<<< HEAD
     if exported_jni != NATIVE_SYMBOLS:
         raise ValueError("unexpected JNI export set: " + repr(exported_jni))
+||||||| merged common ancestors
+    if exported_jni != {NATIVE_SYMBOL}:
+        raise ValueError("unexpected JNI export set: " + repr(exported_jni))
+=======
+    if exported_jni != expected_jni:
+        raise ValueError("JNI export/header mismatch: missing="
+                         + repr(sorted(expected_jni - exported_jni))
+                         + " extra=" + repr(sorted(exported_jni - expected_jni)))
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     qualify(home / "bin/java", home / "bin/javac", modules, pack, repo, output, native, False)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
     for module in ("com.m3.collections", "jdk.m3.collections"):
@@ -179,7 +256,10 @@ def main():
     receipt = {"status": "PASS", "modules": ["com.m3.collections", "jdk.m3.collections"],
                "existing_collection_source_files": len(collection_sources),
                "optional_projection_source_files": len(view_sources),
-               "native_symbol": NATIVE_SYMBOL, "native_sha256": digest(library),
+               "native_symbol": NATIVE_SYMBOL, "native_symbols": sorted(expected_jni),
+               "native_owner_headers": [str(path.relative_to(output)) for path in owner_headers],
+               "native_window_contracts_on_host_and_image": True,
+               "native_sha256": digest(library),
                "linked_native_sha256": digest(linked_library),
                "native_packaging_transform": "objcopy --strip-debug reference; exact linked byte parity",
                "native_required_on_host_and_image": True, "jdk_home": str(home),

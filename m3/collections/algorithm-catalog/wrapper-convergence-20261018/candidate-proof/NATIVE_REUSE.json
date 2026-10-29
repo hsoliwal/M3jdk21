@@ -1,0 +1,11 @@
+{
+  "scope": "Exact unchanged local donor C library reused by five required-JNI candidate runs",
+  "source_id": "FINAL28_R2",
+  "target_path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
+  "source_sha256": "1480656507ad1c0cb425904e9e73b94c207a64f8eac961461d383265fcfce121",
+  "library_sha256": "716dfb2c606860baa9ef1940c0c4e34cfdaa631d68246f80fc3ba95639433347",
+  "build_log": "native-compile.log",
+  "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "actual_sdk_receiver_native_status": "PENDING_ROOT_RECEIPT",
+  "limits": "Local Linux candidate qualification only; native ABI/header and receiver proof remain separate gates"
+}

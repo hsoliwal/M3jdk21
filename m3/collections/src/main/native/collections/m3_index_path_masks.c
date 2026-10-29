@@ -51,6 +51,7 @@ static int m3_matches(JNIEnv *env, jobjectArray planes,
     return 1;
 }
 
+<<<<<<< HEAD
 /* ART-friendly bounded metadata cache: no heap allocation or pinned Java pointers.
  * Stage count above the bound follows the unchanged original JNI reference kernel.
  * All local references are released on every normal/exceptional exit.
@@ -168,9 +169,15 @@ failure:
 
 JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNative(
         JNIEnv *env, jclass owner, jintArray rows, jintArray offsets,
+||||||| merged common ancestors
+JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNative(
+        JNIEnv *env, jclass owner, jintArray rows, jintArray offsets,
+=======
+/** Shared exact two-pass selection core for int[] and long[] row IDs. */
+static jarray m3_select(JNIEnv *env, jarray rows, jintArray offsets,
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
         jobjectArray planes, jintArray required, jintArray forbidden,
-        jint first, jint count, jint stride) {
-    (void)owner;
+        jint first, jint count, jint stride, int long_rows) {
     if (rows == NULL || offsets == NULL || planes == NULL || required == NULL || forbidden == NULL) {
         m3_throw(env, "java/lang/NullPointerException", "null native mask path argument");
         return NULL;
@@ -206,11 +213,11 @@ JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNativ
     }
     jsize matching = 0;
     for (jint pass = 0; pass < 2; ++pass) {
-        /* Output allocation is deferred until after exact counting. */
-        jintArray result = NULL;
+        jarray output = NULL;
         if (pass == 1) {
-            result = (*env)->NewIntArray(env, matching);
-            if (result == NULL) return NULL;
+            output = long_rows ? (jarray)(*env)->NewLongArray(env, matching)
+                               : (jarray)(*env)->NewIntArray(env, matching);
+            if (output == NULL) return NULL;
         }
         jsize written = 0;
         jlong at = (jlong)first;
@@ -225,23 +232,51 @@ JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNativ
                 ++matching;
             } else {
                 if (written >= matching) {
-                    m3_throw(env, "java/util/ConcurrentModificationException", "mask stages changed during JNI selection");
+                    m3_throw(env, "java/util/ConcurrentModificationException",
+                             "mask stages changed during JNI selection");
                     return NULL;
                 }
-                jint row = 0;
-                (*env)->GetIntArrayRegion(env, rows, (jsize)at, 1, &row);
+                if (long_rows) {
+                    jlong row = 0;
+                    (*env)->GetLongArrayRegion(env, (jlongArray)rows, (jsize)at, 1, &row);
+                    if ((*env)->ExceptionCheck(env)) return NULL;
+                    (*env)->SetLongArrayRegion(env, (jlongArray)output, written, 1, &row);
+                } else {
+                    jint row = 0;
+                    (*env)->GetIntArrayRegion(env, (jintArray)rows, (jsize)at, 1, &row);
+                    if ((*env)->ExceptionCheck(env)) return NULL;
+                    (*env)->SetIntArrayRegion(env, (jintArray)output, written, 1, &row);
+                }
                 if ((*env)->ExceptionCheck(env)) return NULL;
-                (*env)->SetIntArrayRegion(env, result, written++, 1, &row);
-                if ((*env)->ExceptionCheck(env)) return NULL;
+                ++written;
             }
         }
         if (pass == 1) {
             if (written != matching) {
-                m3_throw(env, "java/util/ConcurrentModificationException", "mask stages changed during JNI selection");
+                m3_throw(env, "java/util/ConcurrentModificationException",
+                         "mask stages changed during JNI selection");
                 return NULL;
             }
-            return result;
+            return output;
         }
     }
     return NULL;
+}
+
+JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNative(
+        JNIEnv *env, jclass owner, jintArray rows, jintArray offsets,
+        jobjectArray planes, jintArray required, jintArray forbidden,
+        jint first, jint count, jint stride) {
+    (void)owner;
+    return (jintArray)m3_select(env, (jarray)rows, offsets, planes, required,
+                                  forbidden, first, count, stride, 0);
+}
+
+JNIEXPORT jlongArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectLongNative(
+        JNIEnv *env, jclass owner, jlongArray rows, jintArray offsets,
+        jobjectArray planes, jintArray required, jintArray forbidden,
+        jint first, jint count, jint stride) {
+    (void)owner;
+    return (jlongArray)m3_select(env, (jarray)rows, offsets, planes, required,
+                                   forbidden, first, count, stride, 1);
 }

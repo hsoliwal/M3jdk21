@@ -33,7 +33,8 @@ final class TQTest {
     private static final Path ROOT = Path.of(System.getProperty("m3.root")).toAbsolutePath().normalize();
     private static final Path CRATE = Path.of(System.getProperty("m3.crate")).toAbsolutePath().normalize();
     private static final Path OUT = CRATE.resolve("target");
-    private static final Path GENERATED = OUT.resolve("generated");
+    private static final Path GENERATED = OUT.resolve("legacy-generated");
+    private static final Path CURRENT_GENERATED = OUT.resolve("generated");
     private static final Path PATCH = OUT.resolve("patch");
     private static final Path PROBES = OUT.resolve("probes");
     private static final Path CURRENT_PATCH = OUT.resolve("current-patch");
@@ -42,12 +43,14 @@ final class TQTest {
     private static final String KERNEL = PRODUCT + "jdk/internal/mindex/M3TQ.java";
     private static final String TEST = "test/jdk/java/lang/String/";
     private static final String JAVA_RES = "com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/";
+    private static final String CURRENT_JAVA_RES = "com/m3/rewrite/backport/jdk21-hash-pinned/m3-tq-current-20261018/";
     private static final String TEXT_RES = "com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/";
     private static final String JAVAC = Path.of(System.getProperty("java.home"),"bin/javac").toString();
     private static final String JAVA = Path.of(System.getProperty("java.home"),"bin/java").toString();
     private static final String JAVAP = Path.of(System.getProperty("java.home"),"bin/javap").toString();
     private static List<SourceFile> javaAfter;
     private static List<SourceFile> textAfter;
+    private static List<SourceFile> currentJavaAfter;
 
     private static InMemoryExecutionContext context() {
         return new InMemoryExecutionContext(error -> { throw new IllegalStateException(error); });
@@ -92,7 +95,21 @@ final class TQTest {
                 ROOT.resolve(TEST+"M3MappedStringBackingTest.java").toString(),ROOT.resolve(TEST+"MapFactsTest.java").toString()));
         execute(javac,"compile-probes.log",true);
         compileNative(OUT,false,"compile-native.log");
-        compileProduct(CURRENT_PATCH,ROOT.resolve(KERNEL),"compile-current-product.log");
+        // Upgrade the retained typed Java kernel through its existing Java recipe owner.
+        currentJavaAfter = apply(new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018"),
+                javaAfter.stream().filter(file->file.getSourcePath().toString().equals(KERNEL)).toList());
+        assertEquals(1,currentJavaAfter.size());
+        assertEquals(KERNEL,currentJavaAfter.getFirst().getSourcePath().toString());
+        var currentFiles = new ArrayList<>(currentJavaAfter);
+        currentFiles.addAll(javaAfter.stream().filter(file->!file.getSourcePath().toString().equals(KERNEL)).toList());
+        currentFiles.addAll(textAfter);
+        for (SourceFile file : currentFiles) {
+            Path target = CURRENT_GENERATED.resolve(file.getSourcePath()).normalize();
+            assertTrue(target.startsWith(CURRENT_GENERATED));
+            Files.createDirectories(target.getParent()); Files.writeString(target,file.printAll());
+        }
+        assertArrayEquals(Files.readAllBytes(ROOT.resolve(KERNEL)),Files.readAllBytes(CURRENT_GENERATED.resolve(KERNEL)));
+        compileProduct(CURRENT_PATCH,CURRENT_GENERATED.resolve(KERNEL),"compile-current-product.log");
         Files.createDirectories(CURRENT_PROBES);
         // Reuse the exact existing JNI probe and its generated header/library.
         assertArrayEquals(Files.readAllBytes(GENERATED.resolve(TEST+"M3TQTest.java")),
@@ -101,10 +118,38 @@ final class TQTest {
                 "--patch-module","java.base="+CURRENT_PATCH,
                 "--add-exports","java.base/jdk.internal.mindex=ALL-UNNAMED",
                 "-d",CURRENT_PROBES.toString(),
-                ROOT.resolve(TEST+"M3TQTest.java").toString(),
+                CURRENT_GENERATED.resolve(TEST+"M3TQTest.java").toString(),
                 ROOT.resolve(TEST+"M3TQSparseContainmentTest.java").toString(),
                 ROOT.resolve(TEST+"M3MappedStringBackingTest.java").toString(),
                 ROOT.resolve(TEST+"MapFactsTest.java").toString()),"compile-current-probes.log",true);
+    }
+
+    @Test void currentRecipeUpgradeAndFixedPoint() {
+        assertEquals(List.of(KERNEL),new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018").targetPaths());
+        assertTrue(apply(new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018"),currentJavaAfter).isEmpty());
+        var unrelated = JavaParser.fromJavaVersion().build().parse("class Unrelated { int value() { return 42; } }")
+                .findFirst().orElseThrow().withSourcePath(Path.of("src/other/Unrelated.java"));
+        var input = new ArrayList<>(javaAfter); input.add(unrelated);
+        var result = apply(new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018"),input);
+        assertEquals(1,result.size()); assertEquals(KERNEL,result.getFirst().getSourcePath().toString());
+    }
+
+    @Test void currentRecipeRefusesMissingDriftWrongParserDuplicateAndTampering() throws Exception {
+        assertThrows(RuntimeException.class,()->apply(new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018"),List.of()));
+        var drift = JavaParser.fromJavaVersion().build().parse("class Conflict {}")
+                .findFirst().orElseThrow().withSourcePath(Path.of(KERNEL));
+        assertThrows(RuntimeException.class,()->apply(new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018"),List.of(drift)));
+        var plain = PlainText.builder().sourcePath(Path.of(KERNEL)).text(currentJavaAfter.getFirst().printAll()).build();
+        assertThrows(RuntimeException.class,()->apply(new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018"),List.of(plain)));
+        assertThrows(RuntimeException.class,()->apply(new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018"),
+                List.of(currentJavaAfter.getFirst(),currentJavaAfter.getFirst())));
+        Path bad = OUT.resolve("test-classes/com/m3/rewrite/backport/jdk21-hash-pinned/m3-tq-current-20261018-bad");
+        Files.createDirectories(bad);
+        try (var files=Files.list(CRATE.resolve("src/main/resources/"+CURRENT_JAVA_RES))) {
+            for (Path file:files.toList()) Files.writeString(bad.resolve(file.getFileName()),Files.readString(file)
+                    +(file.toString().endsWith(".java.txt")?"// drift\n":""));
+        }
+        assertThrows(IllegalStateException.class,()->new M3Jdk21HashPinnedSnapshotRecipe("m3-tq-current-20261018-bad").getInitialValue(context()));
     }
 
     @Test void exactRecipeAndFixedPoint() {

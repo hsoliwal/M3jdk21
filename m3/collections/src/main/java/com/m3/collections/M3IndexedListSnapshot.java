@@ -187,6 +187,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
         return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
     }
 
+<<<<<<< HEAD
     /**
      * Pack transient predicate decisions by logical occurrence, not object identity.
      * Evaluate once, then enumerate set bits in encounter order into exact index storage.
@@ -335,6 +336,44 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
         return selected;
     }
 
+||||||| merged common ancestors
+=======
+    /**
+     * Pack transient predicate decisions by logical occurrence, not object identity.
+     * Evaluate once, then enumerate set bits in encounter order into exact index storage.
+     * Scratch is 8 * ceil(size / 64) bytes instead of one byte per candidate; no
+     * payload or persistent membership lane is copied. Native ABI remains unchanged.
+     */
+    private M3IndexedListSnapshot<E> filteredJava(Predicate<? super E> predicate) {
+        int length = size();
+        long[] selected = new long[(int) (((long) length + 63) >>> 6)];
+        int count = 0;
+        for (int i = 0; i < length; i++) {
+            if (predicate.test(get(i))) {
+                selected[i >>> 6] |= 1L << (i & 63);
+                count++;
+            }
+        }
+        if (count == length) {
+            // Reuse a complete immutable directory; do not retain a larger sliced one.
+            int[] all = from == 0 && to == positions.length ? positions
+                    : Arrays.copyOfRange(positions, from, to);
+            return new M3IndexedListSnapshot<>(values, all, 0, length, physicalMembership);
+        }
+        int[] admitted = new int[count];
+        int written = 0;
+        for (int word = 0; word < selected.length; word++) {
+            long bits = selected[word];
+            while (bits != 0) {
+                int logical = (word << 6) + Long.numberOfTrailingZeros(bits);
+                admitted[written++] = positions[from + logical];
+                bits &= bits - 1;
+            }
+        }
+        return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
+    }
+
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     public M3IndexedListSnapshot<E> sorted(Comparator<? super E> comparator) {
         int[] current = physicalIndices();
         sortPositions(current, comparator);

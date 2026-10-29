@@ -1,0 +1,39 @@
+
+import java.util.*;
+import java.util.function.*;
+import com.m3.collections.*;
+public class M3ComparatorFailureProbe {
+    static final IllegalArgumentException SENTINEL = new IllegalArgumentException("owner comparator marker");
+    static final List<String> CALLS = new ArrayList<>();
+    static final Comparator<Integer> ORDER = (a,b)-> {
+        CALLS.add(a+":"+b);
+        if(a==99 || b==99) throw SENTINEL;
+        return Integer.compare(a,b);
+    };
+    static final class FaultingRangeSet extends TreeSet<Integer> {
+        private static final long serialVersionUID = 1L;
+        FaultingRangeSet(){super(List.of(1,2,3));}
+        @Override public NavigableSet<Integer> headSet(Integer key, boolean inclusive) {
+            CALLS.add("head:"+key+":"+inclusive);
+            if(key==2)throw SENTINEL;
+            return super.headSet(key,inclusive);
+        }
+    }
+    static void observe(String label,Supplier<?> operation) {
+        CALLS.clear();
+        try {System.out.println(label+" RESULT="+operation.get()+" CALLS="+CALLS);}
+        catch(Throwable failure) {System.out.println(label+" ERROR="+failure.getClass().getSimpleName()+" SAME_SENTINEL="+(failure==SENTINEL)+" CALLS="+CALLS);}
+    }
+    public static void main(String[] args) {
+        var set=new TreeSet<Integer>(ORDER);set.addAll(List.of(1,2,3));
+        var map=new TreeMap<Integer,Integer>(ORDER);map.put(1,1);map.put(2,2);map.put(3,3);
+        var readSet=M3FilteredViews.filter(set,x->true);
+        var writeSet=M3MutableFilteredViews.filter(set,x->true);
+        var readMap=M3FilteredViews.filterEntries(map,(k,v)->true);
+        observe("readSet.lower(rejected)",()->readSet.lower(99));
+        observe("mutableSet.lower(rejected)",()->writeSet.lower(99));
+        observe("readMap.lowerEntry(rejected)",()->readMap.lowerEntry(99));
+        var faulty=M3MutableFilteredViews.filter(new FaultingRangeSet(),x->true);
+        observe("mutableSet.lower(opaque_range_failure)",()->faulty.lower(2));
+    }
+}

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
 <!-- SPDX-License-Identifier: Apache-2.0; focused public-SDK gate, not the full custom JDK reactor. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -14,6 +15,7 @@
   <maven.deploy.skip>true</maven.deploy.skip>
  </properties>
  <dependencies>
+<<<<<<< HEAD
   <dependency>
    <groupId>org.openrewrite</groupId>
    <artifactId>rewrite-core</artifactId>
@@ -25,7 +27,18 @@
    <version>5.10.2</version>
    <scope>test</scope>
   </dependency>
+||||||| merged common ancestors
+  <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+  <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+=======
+  <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+  <!-- Compile metadata already present in the rewrite-core 8.17.1 runtime dependency graph. -->
+  <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0</version><scope>compile</scope></dependency>
+  <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>2.0.13</version><scope>test</scope></dependency>
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
  </dependencies>
+<<<<<<< HEAD
  <build>
   <testSourceDirectory>${project.basedir}/sdk</testSourceDirectory>
   <plugins>
@@ -172,4 +185,59 @@
    </build>
   </profile>
  </profiles>
+||||||| merged common ancestors
+ <build><testSourceDirectory>${project.basedir}/sdk</testSourceDirectory><plugins>
+  <plugin><groupId>org.codehaus.mojo</groupId><artifactId>build-helper-maven-plugin</artifactId><version>3.6.1</version><executions>
+   <execution><id>actual-product-sources</id><phase>generate-sources</phase><goals><goal>add-source</goal></goals><configuration><sources><source>${m3.repo.root}/m3/collections/src/main/java</source></sources></configuration></execution>
+   <execution><id>actual-product-tests</id><phase>generate-test-sources</phase><goals><goal>add-test-source</goal></goals><configuration><sources><source>${m3.repo.root}/m3/collections/src/test/java</source></sources></configuration></execution>
+  </executions></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration>
+   <release>21</release><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+   <includes><include>com/synexia/rewrite/*.java</include><include>com/m3/collections/M3IndexMaskCompactor.java</include><include>com/m3/collections/M3LongIndexProjection.java</include></includes>
+   <testIncludes><testInclude>**/NativeIndexRangeSdkTest.java</testInclude><testInclude>**/M3NativeIndexRangeSelfTest.java</testInclude><testInclude>**/M3NativeIndexRangeTest.java</testInclude></testIncludes>
+  </configuration></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration>
+   <useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests>
+   <includes><include>**/NativeIndexRangeSdkTest.java</include><include>**/M3NativeIndexRangeTest.java</include></includes>
+   <systemPropertyVariables><m3.repo.root>${m3.repo.root}</m3.repo.root><m3.task.root>${project.basedir}</m3.task.root></systemPropertyVariables>
+  </configuration></plugin>
+  <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version><executions>
+   <execution><id>serial-java-jni-qualification</id><phase>verify</phase><goals><goal>exec</goal></goals><configuration>
+    <executable>python3</executable><arguments><argument>${project.basedir}/verify.py</argument></arguments>
+   </configuration></execution>
+  </executions></plugin>
+ </plugins></build>
+=======
+ <build><testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory><plugins>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version><executions>
+   <execution><id>copy-actual-product-sources</id><phase>generate-sources</phase><goals><goal>copy-resources</goal></goals><configuration>
+    <!-- Select actual product bytes without exposing the product module descriptor to this recipe compiler. -->
+    <outputDirectory>${project.build.directory}/generated-sources/m3-index-product</outputDirectory><overwrite>true</overwrite>
+    <resources><resource><directory>${m3.repo.root}/m3/collections/src/main/java</directory><filtering>false</filtering><includes>
+     <include>com/m3/collections/M3IndexMaskCompactor.java</include><include>com/m3/collections/M3LongIndexProjection.java</include>
+     <include>com/m3/collections/M3LongAddressKernel.java</include><include>com/m3/collections/M3IndexPathMasks.java</include>
+    </includes></resource></resources>
+   </configuration></execution>
+  </executions></plugin>
+  <plugin><groupId>org.codehaus.mojo</groupId><artifactId>build-helper-maven-plugin</artifactId><version>3.6.1</version><executions>
+   <execution><id>actual-product-sources</id><phase>generate-sources</phase><goals><goal>add-source</goal></goals><configuration><sources><source>${project.build.directory}/generated-sources/m3-index-product</source></sources></configuration></execution>
+   <execution><id>actual-product-tests</id><phase>generate-test-sources</phase><goals><goal>add-test-source</goal></goals><configuration><sources><source>${m3.repo.root}/m3/collections/src/test/java</source></sources></configuration></execution>
+  </executions></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration>
+   <release>21</release><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+   <includes><include>com/synexia/rewrite/*.java</include><include>com/m3/collections/M3IndexMaskCompactor.java</include><include>com/m3/collections/M3LongIndexProjection.java</include></includes>
+   <testIncludes><testInclude>**/NativeIndexRangeSdkTest.java</testInclude><testInclude>**/M3NativeIndexRangeSelfTest.java</testInclude><testInclude>**/M3NativeIndexRangeTest.java</testInclude></testIncludes>
+  </configuration></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration>
+   <useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests>
+   <includes><include>**/NativeIndexRangeSdkTest.java</include><include>**/M3NativeIndexRangeTest.java</include></includes>
+   <systemPropertyVariables><m3.repo.root>${m3.repo.root}</m3.repo.root><m3.task.root>${project.basedir}</m3.task.root></systemPropertyVariables>
+  </configuration></plugin>
+  <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version><executions>
+   <execution><id>serial-java-jni-qualification</id><phase>verify</phase><goals><goal>exec</goal></goals><configuration>
+    <executable>python3</executable><arguments><argument>${project.basedir}/verify.py</argument></arguments>
+   </configuration></execution>
+  </executions></plugin>
+ </plugins></build>
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
 </project>

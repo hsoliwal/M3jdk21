@@ -13,7 +13,16 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 /*
+<<<<<<< HEAD
  * Modified 2026: refuse output aliasing mask vectors before selection or JNI dispatch.
+||||||| merged common ancestors
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+=======
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026-10-18: converge long-row and constant-stage donors; refuse mask aliases.
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
  */
 package com.m3.collections;
 
@@ -73,6 +82,32 @@ public final class M3IndexPathMasks {
     }
 
     /**
+     * Select signed 64-bit row IDs through the existing logical-to-physical index
+     * path and full 32-bit required/forbidden stage masks. No 32-bit truncation:
+     * row IDs may include Long.MIN_VALUE and Long.MAX_VALUE. Duplicates and
+     * encounter order are retained; the returned long[] is detached. JAVA is
+     * the default reference; NATIVE_REQUIRED preserves explicit load failure.
+     * All caller-owned input arrays must remain stable during the operation.
+     */
+    public static long[] selectLong(long[] orderedRows, int[] physicalOffsets,
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
+            int first, int count, int stride, Backend backend) {
+        Objects.requireNonNull(backend, "backend");
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        validateGeometry(orderedRows.length, physicalOffsets, statePlanes,
+                requiredMasks, forbiddenMasks, first, count, stride);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_collections_pathmask JNI library unavailable");
+            }
+            return selectLongNative(orderedRows, physicalOffsets, statePlanes,
+                    requiredMasks, forbiddenMasks, first, count, stride);
+        }
+        return selectLongJava(orderedRows, physicalOffsets, statePlanes,
+                requiredMasks, forbiddenMasks, first, count, stride);
+    }
+
+    /**
      * First matching logical encounter index, or -1. Does not allocate an
      * output array; filters stop at the first passing row.
      */
@@ -81,6 +116,13 @@ public final class M3IndexPathMasks {
             int first, int count, int stride) {
         validate(orderedRows, physicalOffsets, statePlanes, requiredMasks,
                 forbiddenMasks, first, count, stride);
+        if (count == 0) return -1;
+        // Original validate() already checked every path coordinate, even when
+        // one state plane requires and forbids the same bit.
+        if (anyStageImpossible(requiredMasks, forbiddenMasks)) return -1;
+        // Full geometry and every physical state offset were already validated.
+        // Zero required AND forbidden masks admit the first path occurrence.
+        if (allStagesAdmit(requiredMasks, forbiddenMasks)) return first;
         long at = first;
         for (int n = 0; n < count; n++, at += stride) {
             int index = (int) at;
@@ -153,6 +195,25 @@ public final class M3IndexPathMasks {
             throw new UnsatisfiedLinkError("m3_collections_pathmask JNI library unavailable");
         }
         if (limit == 0 || next == count) return packWindow(next, 0);
+
+        // An identity expression admits all inspected path occurrences. Retain
+        // the original complete per-window physical-offset validation before writes.
+        // The JNI-required path continues through the unchanged original selector.
+        if (backend == Backend.JAVA && allStagesAdmit(requiredMasks, forbiddenMasks)) {
+            int admitted = Math.min(limit, count - next);
+            long logical = (long) first + (long) next * stride;
+            for (int i = 0; i < admitted; i++, logical += stride) {
+                int slot = physicalOffsets[(int) logical];
+                if (slot < 0 || slot >= capacity) {
+                    throw new IndexOutOfBoundsException("physical offset outside a state plane");
+                }
+            }
+            logical = (long) first + (long) next * stride;
+            for (int i = 0; i < admitted; i++, logical += stride) {
+                output[outputOffset + i] = orderedRows[(int) logical];
+            }
+            return packWindow(next + admitted, admitted);
+        }
 
         // Read-only preflight over precisely the elements this call will consume.
         // No output cell changes on invalid physical geometry.
@@ -238,7 +299,15 @@ public final class M3IndexPathMasks {
     private static void validate(int[] rows, int[] positions,
             int[][] planes, int[] required, int[] forbidden,
             int first, int count, int stride) {
-        int physicalCapacity = validateShape(rows, positions, planes, required,
+        Objects.requireNonNull(rows, "orderedRows");
+        validateGeometry(rows.length, positions, planes, required, forbidden,
+                first, count, stride);
+    }
+
+    private static void validateGeometry(int rowSize, int[] positions,
+            int[][] planes, int[] required, int[] forbidden,
+            int first, int count, int stride) {
+        int physicalCapacity = validateShape(rowSize, positions, planes, required,
                 forbidden, first, count, stride);
         long at = first;
         for (int n = 0; n < count; n++, at += stride) {
@@ -254,11 +323,18 @@ public final class M3IndexPathMasks {
             int[][] planes, int[] required, int[] forbidden,
             int first, int count, int stride) {
         Objects.requireNonNull(rows, "orderedRows");
+        return validateShape(rows.length, positions, planes, required, forbidden,
+                first, count, stride);
+    }
+
+    private static int validateShape(int rowSize, int[] positions,
+            int[][] planes, int[] required, int[] forbidden,
+            int first, int count, int stride) {
         Objects.requireNonNull(positions, "physicalOffsets");
         Objects.requireNonNull(planes, "statePlanes");
         Objects.requireNonNull(required, "requiredMasks");
         Objects.requireNonNull(forbidden, "forbiddenMasks");
-        if (rows.length != positions.length) {
+        if (rowSize != positions.length) {
             throw new IllegalArgumentException("unaligned row IDs and physical offsets");
         }
         if (planes.length == 0 || planes.length != required.length
@@ -270,12 +346,12 @@ public final class M3IndexPathMasks {
             int[] plane = Objects.requireNonNull(planes[i], "statePlanes[" + i + "]");
             physicalCapacity = Math.min(physicalCapacity, plane.length);
         }
-        if (stride == 0 || count < 0 || first < 0 || first > rows.length) {
+        if (stride == 0 || count < 0 || first < 0 || first > rowSize) {
             throw new IndexOutOfBoundsException("invalid path offset/count/stride");
         }
         if (count != 0) {
             long last = (long) first + (long) (count - 1) * stride;
-            if (first == rows.length || last < 0 || last >= rows.length) {
+            if (first == rowSize || last < 0 || last >= rowSize) {
                 throw new IndexOutOfBoundsException("path leaves logical row domain");
             }
         }
@@ -292,8 +368,25 @@ public final class M3IndexPathMasks {
         return true;
     }
 
+    /** Contradiction is per stage, never across independent state planes. */
+    private static boolean anyStageImpossible(int[] required, int[] forbidden) {
+        for (int stage = 0; stage < required.length; stage++) {
+            if ((required[stage] & forbidden[stage]) != 0) return true;
+        }
+        return false;
+    }
+
+    /** True only for the identity expression in every full-width stage. */
+    private static boolean allStagesAdmit(int[] required, int[] forbidden) {
+        for (int stage = 0; stage < required.length; stage++) {
+            if (required[stage] != 0 || forbidden[stage] != 0) return false;
+        }
+        return true;
+    }
+
     static int[] selectJava(int[] rows, int[] offsets, int[][] planes,
             int[] required, int[] forbidden, int first, int count, int stride) {
+<<<<<<< HEAD
         // Public selection has already checked complete logical/physical geometry.
         // Do not pay a mask-classification pass for tiny scans.
         if (count >= 8) {
@@ -319,12 +412,62 @@ public final class M3IndexPathMasks {
                 return selected;
             }
         }
+||||||| merged common ancestors
+=======
+        if (count == 0) return new int[0];
+        // After public validation, any required/forbidden overlap in ONE stage
+        // proves no candidate can match. Return a fresh detached empty array.
+        if (anyStageImpossible(required, forbidden)) return new int[0];
+        // Java-only identity selection over a prevalidated strided index path:
+        // return detached row IDs without a second metadata/state-plane scan.
+        if (allStagesAdmit(required, forbidden)) {
+            int[] selected = new int[count];
+            long at = first;
+            for (int i = 0; i < count; i++, at += stride) {
+                selected[i] = rows[(int) at];
+            }
+            return selected;
+        }
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
         int kept = 0;
         long at = first;
         for (int n = 0; n < count; n++, at += stride) {
             if (matches(planes, required, forbidden, offsets[(int) at])) kept++;
         }
         int[] selected = new int[kept];
+        int written = 0;
+        at = first;
+        for (int n = 0; n < count; n++, at += stride) {
+            int index = (int) at;
+            if (matches(planes, required, forbidden, offsets[index])) {
+                if (written == kept) {
+                    throw new ConcurrentModificationException("mask stages changed during selection");
+                }
+                selected[written++] = rows[index];
+            }
+        }
+        if (written != kept) {
+            throw new ConcurrentModificationException("mask stages changed during selection");
+        }
+        return selected;
+    }
+
+    /** Long-row reference kernel: two scans, one exact output, no row objects. */
+    static long[] selectLongJava(long[] rows, int[] offsets, int[][] planes,
+            int[] required, int[] forbidden, int first, int count, int stride) {
+        if (count == 0 || anyStageImpossible(required, forbidden)) return new long[0];
+        if (allStagesAdmit(required, forbidden)) {
+            long[] selected = new long[count];
+            long at = first;
+            for (int i = 0; i < count; i++, at += stride) selected[i] = rows[(int) at];
+            return selected;
+        }
+        int kept = 0;
+        long at = first;
+        for (int n = 0; n < count; n++, at += stride) {
+            if (matches(planes, required, forbidden, offsets[(int) at])) kept++;
+        }
+        long[] selected = new long[kept];
         int written = 0;
         at = first;
         for (int n = 0; n < count; n++, at += stride) {
@@ -357,6 +500,9 @@ public final class M3IndexPathMasks {
     }
 
     private static native int[] selectNative(int[] orderedRows, int[] physicalOffsets,
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
+            int first, int count, int stride);
+    private static native long[] selectLongNative(long[] orderedRows, int[] physicalOffsets,
             int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
             int first, int count, int stride);
 }

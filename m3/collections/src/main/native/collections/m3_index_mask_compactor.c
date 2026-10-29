@@ -16,6 +16,7 @@ static void m3_throw_state_drift(JNIEnv *env) {
     }
 }
 
+<<<<<<< HEAD
 static jint m3_count_window(JNIEnv *env, jbyteArray states,
         jint state_offset, jint length, jint mask) {
     if (mask == 0) return length;
@@ -48,6 +49,28 @@ static jsize m3_first_selected(const jbyte *marks, jsize size, jint mask) {
 }
 
 /* One core for legacy whole-index and independent-offset windows. Bounds are validated by exports.
+||||||| merged common ancestors
+/* One core for legacy whole-index and offset windows. All bounds validated by exports.
+=======
+/* Reuse the existing count atom for zero-result verification before reading rows.
+ * The second state pass preserves the existing count/emit drift diagnostic.
+ */
+static jint m3_count_window(JNIEnv *env, jbyteArray states,
+        jint state_offset, jint length, jint mask);
+
+static int m3_verify_empty(JNIEnv *env, jbyteArray states,
+        jint state_offset, jint length, jint mask) {
+    jint observed = m3_count_window(env, states, state_offset, length, mask);
+    if (observed < 0) return 0;
+    if (observed != 0) {
+        m3_throw_state_drift(env);
+        return 0;
+    }
+    return 1;
+}
+
+/* One core for legacy whole-index and offset windows. All bounds validated by exports.
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
  * Prefix compaction is safe in row_ids: accepted never exceeds the current input slot.
  */
 static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
@@ -58,6 +81,9 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
     if (count < 0) return NULL;
     jintArray result = (*env)->NewIntArray(env, count);
     if (result == NULL) return NULL;
+    if (count == 0) {
+        return m3_verify_empty(env, states, 0, n, required_mask) ? result : NULL;
+    }
     jsize written = 0;
     for (jsize offset = 0; offset < n;) {
         jsize chunk = n - offset < M3_CHUNK ? n - offset : M3_CHUNK;
@@ -342,7 +368,98 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
     if (!m3_window_valid(env, rows, states, row_offset, state_offset, length, mask)) {
         return NULL;
     }
+<<<<<<< HEAD
     return m3_select_range(env, rows, states, row_offset, state_offset, length, mask);
+||||||| merged common ancestors
+    jint kept = m3_count_window(env, states, state_offset, length, mask);
+    if (kept < 0) return NULL;
+    jintArray result = (*env)->NewIntArray(env, kept);
+    if (result == NULL) return NULL;
+    jbyte marks[M3_CHUNK];
+    jint values[M3_CHUNK];
+    jint accepted[M3_CHUNK];
+    jint written = 0;
+    for (jint position = 0; position < length;) {
+        jint remaining = length - position;
+        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+        if (mask != 0) {
+            (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
+        (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
+        if ((*env)->ExceptionCheck(env)) return NULL;
+        jsize batch = chunk;
+        if (mask != 0) {
+            batch = 0;
+            for (jsize i = 0; i < chunk; i++) {
+                unsigned int flags = (unsigned int)(unsigned char)marks[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+            }
+        }
+        if (batch > kept - written) {
+            m3_throw_state_drift(env);
+            return NULL;
+        }
+        if (batch > 0) {
+            /* Zero-mask identity copies the row chunk without reading aligned states. */
+            (*env)->SetIntArrayRegion(env, result, written, batch, mask == 0 ? values : accepted);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            written += batch;
+        }
+        position += chunk;
+    }
+    if (written != kept) {
+        m3_throw_state_drift(env);
+        return NULL;
+    }
+    return result;
+=======
+    jint kept = m3_count_window(env, states, state_offset, length, mask);
+    if (kept < 0) return NULL;
+    jintArray result = (*env)->NewIntArray(env, kept);
+    if (result == NULL) return NULL;
+    if (kept == 0) {
+        return m3_verify_empty(env, states, state_offset, length, mask) ? result : NULL;
+    }
+    jbyte marks[M3_CHUNK];
+    jint values[M3_CHUNK];
+    jint written = 0;
+    for (jint position = 0; position < length;) {
+        jint remaining = length - position;
+        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+        if (mask != 0) {
+            (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
+        (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
+        if ((*env)->ExceptionCheck(env)) return NULL;
+        jsize batch = chunk;
+        if (mask != 0) {
+            batch = 0;
+            for (jsize i = 0; i < chunk; i++) {
+                unsigned int flags = (unsigned int)(unsigned char)marks[i];
+                /* The accepted prefix never overtakes this input ordinal. */
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+            }
+        }
+        if (batch > kept - written) {
+            m3_throw_state_drift(env);
+            return NULL;
+        }
+        if (batch > 0) {
+            /* Zero-mask identity copies the row chunk without reading aligned states. */
+            (*env)->SetIntArrayRegion(env, result, written, batch, values);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            written += batch;
+        }
+        position += chunk;
+    }
+    if (written != kept) {
+        m3_throw_state_drift(env);
+        return NULL;
+    }
+    return result;
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
 }
 
 JNIEXPORT jlongArray JNICALL
@@ -357,6 +474,9 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
     if (kept < 0) return NULL;
     jlongArray result = (*env)->NewLongArray(env, kept);
     if (result == NULL) return NULL;
+    if (kept == 0) {
+        return m3_verify_empty(env, states, state_offset, length, mask) ? result : NULL;
+    }
     jbyte marks[M3_CHUNK];
     jlong values[M3_CHUNK];
     jint written = 0;
@@ -381,7 +501,14 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             /* Prefix compaction cannot overwrite an unread row: batch <= i. */
             for (jsize i = begin; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
+<<<<<<< HEAD
                 if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+||||||| merged common ancestors
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+=======
+                /* The accepted prefix never overtakes this input ordinal. */
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
             }
         }
         if (batch > kept - written) {

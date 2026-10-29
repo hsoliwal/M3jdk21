@@ -1,0 +1,32 @@
+{
+  "dataset": "m3jdk21-long-bridge-20261018",
+  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "status": "PASSED_ACTUAL_SDK_5_SEALING_8_ISOLATED_RECEIVER_9",
+  "target_count": 1,
+  "actual_output_sha256": "77a99d047931c70c7a45a067c081748bae499b7f3002bfc08f7b2f47a01adf84",
+  "actual_output": "target/m3jdk21-long-bridge-20261018/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
+  "engine_changes_from_origin": [],
+  "retained_receipts": [
+    {
+      "origin": "target/m3jdk21-long-bridge-20261018/candidate/SDK_INPUTS.tsv",
+      "retained": "proof/SDK_INPUTS.tsv",
+      "sha256": "243710c8bc02df0e20d2035867b7c7ad28a6361b50076d8457a841110835a185"
+    },
+    {
+      "origin": "target/m3jdk21-long-bridge-20261018/candidate/SDK_RESULTS.tsv",
+      "retained": "proof/SDK_RESULTS.tsv",
+      "sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9"
+    },
+    {
+      "origin": "target/m3jdk21-long-bridge-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json",
+      "retained": "proof/SDK_RECEIVER_RECEIPT.json",
+      "sha256": "9490590f42d2e8b3fa4954bdca307bfda90376633ba93b1abaffc5ec83f16504"
+    },
+    {
+      "origin": "target/m3jdk21-long-bridge-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "retained": "proof/SDK_TEST_REPORT.xml",
+      "sha256": "dc908f2b40609672873ae8a2a756400aa3e08a4c3be13969c749d77f5fdf4e0b"
+    }
+  ],
+  "root_integrated_receiver_status": "PENDING_ROOT_MODULE_AND_JNI_RECEIPTS"
+}

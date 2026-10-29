@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 /*******************************************************************************
  * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+||||||| merged common ancestors
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+=======
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026-10-18: restore staged physical-mask paths and stable group reversal over current address owners.
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
  *
  * This program and the accompanying materials are made available under the
  * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
@@ -142,6 +153,7 @@ public final class M3LongIndexProjection {
         return new M3LongIndexProjection(values, selected, 0, selected.length, order);
     }
 
+<<<<<<< HEAD
     /**
      * Compose a signed-stride path over this view with precomputed full-width state masks.
      *
@@ -206,12 +218,62 @@ public final class M3LongIndexProjection {
         return new M3LongIndexProjection(values, selectedIndices, 0, selectedCount, order);
     }
 
+||||||| merged common ancestors
+=======
+    /**
+     * Compose a signed-stride path over this view with precomputed full-width state masks.
+     *
+     * <p>Each mask plane is addressed by the original physical slot in the
+     * privately owned value array, rather than by this view's logical ordinal.
+     * The ordered index lane therefore also serves as the physical-offset lane:
+     * sorting, slicing and previous filtering do not create a redundant offset
+     * array. Repeated values remain distinct physical occurrences.
+     *
+     * <p>Filters are pure, precomputed 32-bit metadata stages, not callbacks.
+     * The caller must keep the mask planes unchanged for this entire call.
+     * {@code first/count/stride} are relative to this logical view. A negative
+     * stride reverses sorted direction without claiming stable reverse ties.
+     * The result is detached, with no retained caller mask or native pointer.
+     * A required JNI backend never silently falls back to Java.
+     *
+     * @throws IndexOutOfBoundsException for invalid relative traversal geometry
+     */
+    public M3LongIndexProjection filteredPathMasks(
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
+            int first, int count, int stride, M3IndexPathMasks.Backend backend) {
+        Objects.requireNonNull(backend, "backend");
+        int length = size();
+        if (first < 0 || first > length || count < 0 || stride == 0) {
+            throw new IndexOutOfBoundsException("invalid projection path");
+        }
+        if (count != 0) {
+            long last = (long) first + (long) (count - 1) * stride;
+            if (first == length || last < 0 || last >= length) {
+                throw new IndexOutOfBoundsException("path leaves projection window");
+            }
+        }
+        int[] selected = M3IndexPathMasks.select(
+                indices, indices, statePlanes, requiredMasks, forbiddenMasks,
+                from + first, count, stride, backend);
+        Order resultOrder = order;
+        if (stride < 0) {
+            resultOrder = switch (order) {
+                case ASCENDING -> Order.DESCENDING;
+                case DESCENDING -> Order.ASCENDING;
+                case ENCOUNTER -> Order.ENCOUNTER;
+            };
+        }
+        return new M3LongIndexProjection(values, selected, 0, selected.length, resultOrder);
+    }
+
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     /** Stable signed-long sort; only the primitive index vector is permuted. */
     public M3LongIndexProjection sortedAscending() { return sorted(false); }
 
     /** Stable signed-long descending sort; exact ties retain encounter order. */
     public M3LongIndexProjection sortedDescending() { return sorted(true); }
 
+<<<<<<< HEAD
     /**
      * Reverse equal-value groups without reversing occurrences inside a group.
      * The immutable index window is already sorted. Copy each group forward,
@@ -253,6 +315,31 @@ public final class M3LongIndexProjection {
         return true;
     }
 
+||||||| merged common ancestors
+=======
+    /**
+     * Reverse the order of equal-value groups, not the occurrences within a group.
+     * The existing immutable window is already sorted: no comparisons across unrelated
+     * payloads, second index scratch, or per-row objects are needed. A sliced tie group
+     * is bounded by this view's [from,to), including after earlier mask selection.
+     */
+    private int[] reverseValueGroups() {
+        int[] reversed = new int[size()];
+        int write = 0;
+        for (int end = to; end > from;) {
+            int start = end - 1;
+            long value = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[start]);
+            while (start > from && M3LongAddressKernel.loadPhysicalUnchecked(
+                    values, indices[start - 1]) == value) start--;
+            int count = end - start;
+            System.arraycopy(indices, start, reversed, write, count);
+            write += count;
+            end = start;
+        }
+        return reversed;
+    }
+
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
     private M3LongIndexProjection sorted(boolean descending) {
         Order requested = descending ? Order.DESCENDING : Order.ASCENDING;
         if (order == requested || size() < 2) {
@@ -260,6 +347,7 @@ public final class M3LongIndexProjection {
             // immutable directory already in the requested order or copy its window.
             return new M3LongIndexProjection(values, indices, from, to, requested);
         }
+<<<<<<< HEAD
         if (order != Order.ENCOUNTER) {
             int[] reversed = reverseValueGroups();
             return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
@@ -269,6 +357,13 @@ public final class M3LongIndexProjection {
             // nor the scratch array / merge passes. Caller observes a new view.
             return new M3LongIndexProjection(values, indices, from, to, requested);
         }
+||||||| merged common ancestors
+=======
+        if (order != Order.ENCOUNTER) {
+            int[] reversed = reverseValueGroups();
+            return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
+        }
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
         int[] current = physicalIndices();
         int size = current.length;
         if (size < 2) {

@@ -69,9 +69,16 @@ runs:
       shell: bash
 
     - name: 'Upload bundles artifact'
+<<<<<<< HEAD
       uses: actions/upload-artifact@v4
+||||||| merged common ancestors
+      uses: actions/upload-artifact@v3
+=======
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
       with:
         name: bundles-${{ inputs.platform }}${{ inputs.debug-suffix }}
         path: bundles
+        include-hidden-files: true
         retention-days: 1
       if: steps.bundles.outputs.bundles-found == 'true'

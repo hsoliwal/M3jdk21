@@ -1,0 +1,743 @@
+{
+  "schema": "M3_LATEST_RUNTIME_SOURCE_AND_GATE_CATALOGUE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "metadata_license": "Apache-2.0",
+  "observation_head": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "historical_entries_preserved": true,
+  "purpose": "Add exact compiler, resource-lifetime, C feature, Object bootstrap and TQ custody dispositions to the existing catalogue; no runtime integration layer.",
+  "serial_actual_receiving": [
+    {
+      "dataset": "m3-api-doclint-20261018",
+      "input_head": "edd96c2a0fc2fb41486ca8ed1afa4712ac4b6723",
+      "output_head": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+      "actual_sdk_tests": 5,
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "first_receiving_changes": 12,
+      "repeat_receiving_changes": 0,
+      "evidence": {
+        "serial_receiving": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/SERIAL_RECEIVING.json",
+          "sha256": "b9e48ea7169e0542b40b81077e6c9cdb9aa3170df162893d54922726915f149c",
+          "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-api-doclint-20261018.json"
+        },
+        "receiver_cases": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/RECEIVER_RECEIPT.json",
+          "sha256": "de25361ff77c87ed295466c6e9296b1339494175298b76134c5645955f97b821",
+          "original_locator": "/dev/shm/m3-doclint-f8287/proof/receiver-evidence/RECEIVER_RECEIPT.json"
+        },
+        "sdk_report": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/SDK_REPORT.xml.txt",
+          "sha256": "515412afb70954d282e0056cbc117e0def6f0c9b5bc048302e8d4060c71283a2",
+          "original_locator": "/dev/shm/m3-doclint-f8287/proof/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        },
+        "source_targets": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/TARGETS.tsv",
+          "sha256": "2029c778c86071e78b60e5c97af953525f0151d42c18c811b723bbe249b9b7aa",
+          "original_locator": "/dev/shm/m3-doclint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-api-doclint-20261018/TARGETS.tsv"
+        },
+        "sdk_qualification": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/SDK_QUALIFICATION.json",
+          "sha256": "7dd1976b6195562235d1bfff53a0b606800eebdd53e6b5e32dfbf448a1a9f492",
+          "original_locator": "/dev/shm/m3-doclint-f8287/proof/SDK_QUALIFICATION.json"
+        }
+      },
+      "targets": [
+        {
+          "path": "src/java.base/share/classes/java/lang/Runnable.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "1d8275948a6e638bfe814f41f0afac82663ff2ca",
+          "before_sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
+          "after_sha256": "48106d8800144cc8c2f3a0007d8cd698690a9d6b026fbad3427998e65e455dc4",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/Strings.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
+          "before_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
+          "after_sha256": "aa0f890c40a97a51fb035ebe9675d623905dfdb23afb97c3433210809bb384d1",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "8210cfb6a6fdf942b9553e80c303a4b8c9f2671f",
+          "before_sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
+          "after_sha256": "c92cbecd8551fffd06599d4e931661e3e524313ed128f7b6857fe5b7b27a2a1b",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "802c00832d217a77bb1245c1ba473479df4c3096",
+          "before_sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
+          "after_sha256": "38d4826d3a8688b3350384e3644ae7a783a177b52286fa8a7dd270a0898650a2",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "a599ad8915eda2ace1454d59cc64c739ffc9cf66",
+          "before_sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
+          "after_sha256": "7d117badc4c65db61b7acc1c82a25b96e8af9226ba6eb034cb8dcd379161a25e",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "157cce905a828a8cc34fc977f0fa42dc8362aa03",
+          "before_sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
+          "after_sha256": "c072f232c94002eb75e66ff0119c09737c43c4168620a57ce097be59400b32e7",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "1a8d02bf7ea449018cae69aae5b784a65a172e66",
+          "before_sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
+          "after_sha256": "7d731b60e546e31eb92799fe332d108a84d44851c21783407846e8882c5fce43",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "2c90932ecb19c138a62f9860232162002f87c012",
+          "before_sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
+          "after_sha256": "c890414a2aad632f9fb78b62f0ad1a7dbe9683e761f6fc63ba479c8c7bf555ea",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "a634db13a764d22fc55ad75ae35cc4952d3b20f6",
+          "before_sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
+          "after_sha256": "154083cc3d8d8801d7705a09a7b2d7427dcabb560511d8869d95cc44392793df",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "3df6f12a3a442c3a9f0d47ed5fc8aa725e634ccb",
+          "before_sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
+          "after_sha256": "8097153ca83eeb7a61e577f481294be6a54c81101335cfa40e7c61b6e7a941b6",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/function/Function.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "76a20ef10fa1fbb701adb544ff6b7eb152f4303c",
+          "before_sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
+          "after_sha256": "17880c4e228c19b8f2f3da3ab6251e724a23236720cf7172ba451c2c260252ec",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+          "source_revision": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+          "source_git_blob": "ae9a9fd8a0158cb396d36304a607709cd875903c",
+          "before_sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
+          "after_sha256": "73ff551b2ab612379d9d03fa9b2c0fd6a06145183ec449e6a0b23158d2c72739",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        }
+      ]
+    },
+    {
+      "dataset": "m3-progress-scope-lint-20261018",
+      "input_head": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+      "output_head": "2e9508c90952b8d66d6c3ee4855e1e4d8fd856fe",
+      "actual_sdk_tests": 5,
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "first_receiving_changes": 4,
+      "repeat_receiving_changes": 0,
+      "evidence": {
+        "serial_receiving": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/SERIAL_RECEIVING.json",
+          "sha256": "75e63253d6d18056e87385797ea54c73ed95c0e7fba6daf59322c76a23500363",
+          "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-progress-scope-lint-20261018.json"
+        },
+        "receiver_cases": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/RECEIVER_RECEIPT.json",
+          "sha256": "ced37b2c565977b8cf92c00314e06dff0bc9f21c56b2a1198d50cc8b97b6814c",
+          "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/proof/receiver-evidence/RECEIVER_RECEIPT.json"
+        },
+        "sdk_report": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/SDK_REPORT.xml.txt",
+          "sha256": "efeeab634d22e9179ace331bb688d96b7ec1f13a26851c0fc58630405eaf5202",
+          "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/proof/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        },
+        "source_targets": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/TARGETS.tsv",
+          "sha256": "63b83c859723fb8ad0685c404006ddba843f4ff4f559f874d80e559ad36eec98",
+          "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-progress-scope-lint-20261018/TARGETS.tsv"
+        },
+        "sdk_qualification": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/SDK_QUALIFICATION.json",
+          "sha256": "0fdc63e19c00d7db7f2f91b9c4879a27f597cd59d1e3487a7403cf0a738dfb4f",
+          "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/proof/SDK_QUALIFICATION.json"
+        }
+      },
+      "targets": [
+        {
+          "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "8897990fed0988638d4be5450a34f0cfb3957d46",
+          "before_sha256": "154083cc3d8d8801d7705a09a7b2d7427dcabb560511d8869d95cc44392793df",
+          "after_sha256": "f6c7ede21050d192af4685ada1eff8e4f06ae7f7bcbbbfb4c2bf5b857abb2245",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "fa5ea2b99ed323aa76b2cc838f8749315b1f1113",
+          "before_sha256": "8097153ca83eeb7a61e577f481294be6a54c81101335cfa40e7c61b6e7a941b6",
+          "after_sha256": "740d91d3938b745f02ca38b0e0bebbf86ba91fc9a31d7dc97bc82b86978be66f",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/function/Function.java",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "96e3fe1b778977120bc3831075989593df2ceade",
+          "before_sha256": "17880c4e228c19b8f2f3da3ab6251e724a23236720cf7172ba451c2c260252ec",
+          "after_sha256": "e78c8eeb289ef53a9042da65b970b97a5008f4b43a79c358121ea07bdb433046",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        },
+        {
+          "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "8e8dc3daadd040e18acca3ef7d509391d70d8d39",
+          "before_sha256": "73ff551b2ab612379d9d03fa9b2c0fd6a06145183ec449e6a0b23158d2c72739",
+          "after_sha256": "6479f488e8749ec24a3bab3d27f5649363a109ddb97ad591272d9f4b2a0bc3a0",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        }
+      ]
+    },
+    {
+      "dataset": "m3-tq-custody-v2-20261018",
+      "input_head": "2e9508c90952b8d66d6c3ee4855e1e4d8fd856fe",
+      "output_head": "5c9229c23b1ac9abdfebff3bc4b8e6449f59deae",
+      "actual_sdk_tests": 5,
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "first_receiving_changes": 14,
+      "repeat_receiving_changes": 0,
+      "evidence": {
+        "serial_receiving": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/SERIAL_RECEIVING.json",
+          "sha256": "b19226ae900a2e2e2cc775d9d816459dd56435769c9a5a6efa897546416686e8",
+          "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-tq-custody-v2-20261018.json"
+        },
+        "receiver_cases": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/RECEIVER_RECEIPT.json",
+          "sha256": "c93f94bddb3559f80992228aee15e884e17b47ddc3924fd55adbdfe307b6b5c8",
+          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-tq-custody-v2-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json"
+        },
+        "sdk_report": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/SDK_REPORT.xml.txt",
+          "sha256": "a6f261b4653890875a420011516190ae062326f91b52ed2fcd5d8fbd60a0b670",
+          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-tq-custody-v2-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        },
+        "source_targets": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/TARGETS.tsv",
+          "sha256": "f6aa70a7899d48b48edc3117d74d5c7b22a3d3b7166d023eb6eca8d73b3c6675",
+          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-tq-custody-v2-20261018/TARGETS.tsv"
+        },
+        "sdk_log": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/SDK_LOG.txt",
+          "sha256": "824feb3f041520cf08f0f0906f7e24012359cf24a45de4b03679a4fd36e3bdb3",
+          "original_locator": "/dev/shm/m3-tq-successor-f8287/sdk.log"
+        }
+      },
+      "targets": [
+        {
+          "path": "m3/tooling/tq-sync/plan.json",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "0372f06b467f44fd9472a4bd573b43f8a86a45ef",
+          "before_sha256": "c8b14018f99a859d2ab9258a27f53643b7aaf74e2073380a1c8dbf6cee60e37e",
+          "after_sha256": "651ffe3803188a9bf6aba81bf9fb50ef2027b8cafe816017542ee4d4f5d9c2f8",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "762bd2fee3d4f22a4bd8551fcff6d7db3c393eb2",
+          "before_sha256": "806d6393832ec0d6b355fba3a01bf847441c36aca2642347d08bb94d4921d8e8",
+          "after_sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/20-TQTest.java.txt",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "0e5cf27d3d268f485d4befe27d26da4df381b477",
+          "before_sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c",
+          "after_sha256": "bbd76de79fdfdfd016880ada18abdb372f8d160bc4ae0f21ccb203e381652e44",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "6593116f55789124d4d72fd07626e507b714004c",
+          "before_sha256": "b3b984e1bcb74194b524850064cbce01805eff41595e50aae3947f78e5373772",
+          "after_sha256": "6aeb3e02fca5dd93a2b515d92fdd52b722499509f904a80b861bfeaab4ed297c",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/CURRENT_CUSTODY_20261018.md",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "ABSENT",
+          "before_sha256": "ABSENT",
+          "after_sha256": "3e37344c8249065d233c73247cae704abe6dc0a78f0b9961e2e5f097793f0479",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/current-20261018-plan.json",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "ABSENT",
+          "before_sha256": "ABSENT",
+          "after_sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/history/20261018-pre-current-custody/README.md",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "ABSENT",
+          "before_sha256": "ABSENT",
+          "after_sha256": "960eceb49acaff30fd7dbd981e9c33f49889407d4114c690d38d36d16270aef7",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/history/20261018-pre-current-custody/RESOURCES.json",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "ABSENT",
+          "before_sha256": "ABSENT",
+          "after_sha256": "eeb42263820a0f26e3658b2093c9f6e6598be901da84c77f12109b1ecabe2905",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/history/20261018-pre-current-custody/plan.json",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "ABSENT",
+          "before_sha256": "ABSENT",
+          "after_sha256": "806d6393832ec0d6b355fba3a01bf847441c36aca2642347d08bb94d4921d8e8",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/history/20261018-pre-current-custody/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "ABSENT",
+          "before_sha256": "ABSENT",
+          "after_sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/plan.json",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "762bd2fee3d4f22a4bd8551fcff6d7db3c393eb2",
+          "before_sha256": "806d6393832ec0d6b355fba3a01bf847441c36aca2642347d08bb94d4921d8e8",
+          "after_sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-tq-current-20261018/M3TQ.java.txt",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "ABSENT",
+          "before_sha256": "ABSENT",
+          "after_sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-tq-current-20261018/manifest.tsv",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "ABSENT",
+          "before_sha256": "ABSENT",
+          "after_sha256": "cac30c16f176f9c269f9c910b4d5079d54496691486e7cc0d2db67b74760b511",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java",
+          "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+          "source_git_blob": "0e5cf27d3d268f485d4befe27d26da4df381b477",
+          "before_sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c",
+          "after_sha256": "bbd76de79fdfdfd016880ada18abdb372f8d160bc4ae0f21ccb203e381652e44",
+          "mode": "0644",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "dataset": "m3-native-feature-guard-20261018",
+      "input_head": "5c9229c23b1ac9abdfebff3bc4b8e6449f59deae",
+      "output_head": "19fc2c988ae7358b24e68e090eba214340d66452",
+      "actual_sdk_tests": 5,
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "first_receiving_changes": 1,
+      "repeat_receiving_changes": 0,
+      "evidence": {
+        "serial_receiving": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/SERIAL_RECEIVING.json",
+          "sha256": "51002025d395e032fa24ae7d4da686e32fc307a8010d072481b858c857a230ce",
+          "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-native-feature-guard-20261018.json"
+        },
+        "receiver_cases": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/RECEIVER_RECEIPT.json",
+          "sha256": "3cdb10a7d06549b05a1353e86e80aa1c28ee0d8d08c45b738446441350638701",
+          "original_locator": "/dev/shm/m3-native-feature-guard-f8287/publication-proof/receiver-evidence/RECEIVER_RECEIPT.json"
+        },
+        "sdk_report": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/SDK_REPORT.xml.txt",
+          "sha256": "42a272a2d3dcf00eed8c12ee70af8f34577fee31e209223157b4239f659ce3bf",
+          "original_locator": "/dev/shm/m3-native-feature-guard-f8287/publication-proof/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        },
+        "source_targets": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/TARGETS.tsv",
+          "sha256": "d4d1a13e4ff46b820486d77e1c7f12fa7251461f532f28778fe3afd0f422e052",
+          "original_locator": "/dev/shm/m3-native-feature-guard-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-native-feature-guard-20261018/TARGETS.tsv"
+        },
+        "sdk_qualification": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/SDK_QUALIFICATION.json",
+          "sha256": "75163203cf2dd17aa232ddee64b3d542d1f889ef75d32c622945bbddcdc4d0a4",
+          "original_locator": "/dev/shm/m3-native-feature-guard-f8287/publication-proof/SDK_QUALIFICATION.json"
+        }
+      },
+      "targets": [
+        {
+          "path": "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+          "source_revision": "5c9229c23b1ac9abdfebff3bc4b8e6449f59deae",
+          "source_git_blob": "15354f8cef8ae6f5a051ec2ad490cce1ac9023f1",
+          "before_sha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
+          "after_sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
+          "mode": "0644",
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        }
+      ]
+    },
+    {
+      "dataset": "m3-object-vtable-20261018",
+      "input_head": "19fc2c988ae7358b24e68e090eba214340d66452",
+      "output_head": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+      "actual_sdk_tests": 5,
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "first_receiving_changes": 1,
+      "repeat_receiving_changes": 0,
+      "evidence": {
+        "serial_receiving": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SERIAL_RECEIVING.json",
+          "sha256": "a2e394c7d13468d51c402771b7bf3c41f7302c04f5989cb9a0b5d270c088c969",
+          "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-object-vtable-20261018.json"
+        },
+        "receiver_cases": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/RECEIVER_RECEIPT.json",
+          "sha256": "80fce2cf32e6611aa10ad947b3e8de50476263edb53fbe3645c67173f7b38db6",
+          "original_locator": "/dev/shm/m3-object-vtable-f8287/proof/receiver-evidence/RECEIVER_RECEIPT.json"
+        },
+        "sdk_report": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_REPORT.xml.txt",
+          "sha256": "03484c1179fb857a544b14117c6d054e3f5f665e420ac92de3866c2d104f2270",
+          "original_locator": "/dev/shm/m3-object-vtable-f8287/proof/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        },
+        "source_targets": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/TARGETS.tsv",
+          "sha256": "4910f0bef2eab32079ceccfd4935a2b4610d34a5109af37f578efd16e2e94f81",
+          "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-object-vtable-20261018/TARGETS.tsv"
+        },
+        "sdk_qualification": {
+          "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_QUALIFICATION.json",
+          "sha256": "abc1db8c7bf466d92b20b31de7fff9728c7c2f2773f2c535b68e49e3210549fd",
+          "original_locator": "/dev/shm/m3-object-vtable-f8287/proof/SDK_QUALIFICATION.json"
+        }
+      },
+      "targets": [
+        {
+          "path": "src/hotspot/share/classfile/classLoader.cpp",
+          "source_revision": "19fc2c988ae7358b24e68e090eba214340d66452",
+          "source_git_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
+          "before_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
+          "after_sha256": "5f8555b02497a2a1a416244dc6bbd2b6fcbc51b7ac3dde34e76fba2de52bfac6",
+          "mode": "0644",
+          "license": "GPL-2.0-only"
+        }
+      ]
+    }
+  ],
+  "tq_runtime": [
+    {
+      "lane": "tq-normal",
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "report": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/tq-normal-REPORT.xml.txt",
+      "report_sha256": "fc6360e39e2964909af7ed92a9e7a65e4fd4de3afa8d203abc007cf783b8d905",
+      "original_archive_sha256": "b9852dc6a97e8d7254e82f2ad48fb5d1047c8167bf8200e03cdd2e1505b8eb06",
+      "original_member": "target/surefire-reports/TEST-com.m3.tq.TQTest.xml"
+    },
+    {
+      "lane": "tq-sync",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "report": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/tq-sync-REPORT.xml.txt",
+      "report_sha256": "5018bfd97311922e990d429a6aa7e5da69e37929be69ee26abc9666116b5b4ed",
+      "original_archive_sha256": "bc48aa993ab36b323713be0417d7153fb1b086c78ad40c6458f483dbffbe61f9",
+      "original_member": "target/surefire-reports/TEST-com.m3.tq.TQSyncTest.xml"
+    },
+    {
+      "lane": "tq-ubsan",
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "report": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/tq-ubsan-REPORT.xml.txt",
+      "report_sha256": "afa8804ea93bd6c34c4b6096722c7a1d8a553df6126c8f4f7ed3f6fc00e75135",
+      "original_archive_sha256": "3863ef240f34a4482cd1dd6055cc626d50f45284418092e52df14c4d7d368558",
+      "original_member": "target/surefire-reports/TEST-com.m3.tq.TQTest.xml"
+    }
+  ],
+  "tq_replay": {
+    "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/CUSTODY_REPLAY.json",
+    "sha256": "d0a88cf84b340215b79fc073260950c8c8025f1b76666cf5ca28ac8e0787ca7f",
+    "original_locator": "/dev/shm/m3-tq-successor-f8287/CUSTODY_REPLAY.json"
+  },
+  "compiler_and_image_evidence": {
+    "java-base-after-scope-recipe-result.json": {
+      "path": "runtime-proof/latest-runtime-20261018/java-base-after-scope-recipe-result.json",
+      "sha256": "36451b3cef96a87848fb297a6a130f54115d7a3f7f85d2d90a9d69f1862f9205",
+      "original_locator": "/workspace/scratch/f8287c652798/combine/image-evidence/java-base-after-scope-recipe-result.json"
+    },
+    "images-after-native-guard-result.json": {
+      "path": "runtime-proof/latest-runtime-20261018/images-after-native-guard-result.json",
+      "sha256": "619f6a74660e5f366a43acc4a189139b8edfdd779df85d34e6bd7dfd6ee6b4e9",
+      "original_locator": "/workspace/scratch/f8287c652798/combine/image-evidence/images-after-native-guard-result.json"
+    },
+    "object-vtable-independent-review.json": {
+      "path": "runtime-proof/latest-runtime-20261018/object-vtable-independent-review.json",
+      "sha256": "3c2745c2e731a25fac385b1a9ebc8e55ba4ccb5af737042930882cf3f83ac4d7",
+      "original_locator": "/workspace/scratch/f8287c652798/combine/image-evidence/object-vtable-independent-review.json"
+    },
+    "object_candidate_boundary": {
+      "path": "runtime-proof/latest-runtime-20261018/OBJECT_VTABLE_SOURCE_BOUNDARY.json",
+      "sha256": "9f63f15b0f3f5760b9de876ff074f7d261c489c51bdaec5000e8943ba1c8e8da",
+      "original_locator": "/dev/shm/m3-object-vtable-f8287/SOURCE_BOUNDARY.json"
+    }
+  },
+  "latest_matched_image_observation": {
+    "images": {
+      "original_locator": "/workspace/scratch/f8287c652798/combine/image-evidence/images-after-object-vtable-result.json",
+      "sha256": "d74947c08f0415d5249b8a1d19a1eaffbdee6cc78db016a3fea511dc2e5645aa",
+      "receipt": {
+        "schema": "M3_COMBINED_MATCHED_IMAGE_STEP_V1",
+        "source_head": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+        "source_tree": "f30bf4ae784f4c6c7b461d245e63d3299b053931",
+        "hotspot_git_tree": "7a1892921ebd3e3888192fa89dfba90184942254",
+        "step": "images-after-object-vtable",
+        "command": [
+          "make",
+          "images",
+          "JOBS=4",
+          "MAX_JOBS=4"
+        ],
+        "build_root": "/dev/shm/m3-combined-image-f8287/build",
+        "start_utc": "2026-10-18T13:50:21Z",
+        "resource_limits": {
+          "shm_min_free_bytes": 314572800,
+          "memory_min_available_bytes": 629145600,
+          "process_group_max_rss_bytes": 3221225472
+        },
+        "warnings_as_errors": true,
+        "exit_code": 0,
+        "stop_reason": null,
+        "end_utc": "2026-10-18T13:52:04Z",
+        "console_sha256": "f3c8147f57aa5337ffd1bd9b36c68de9fc52be7c6489d44a4f041c78318abc45",
+        "lowest_shm_free_bytes": 460464128,
+        "lowest_memory_available_bytes": 3123134464,
+        "peak_process_group_rss_bytes": 1475833856,
+        "source_head_after": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+        "source_tree_after": "f30bf4ae784f4c6c7b461d245e63d3299b053931"
+      }
+    },
+    "boot_probes": {
+      "original_locator": "/workspace/scratch/f8287c652798/combine/image-evidence/matched-image-boot-probes.json",
+      "sha256": "6ce396d1367339878b8343546afd4c6367257d85069cb76096ef7f3bc76647e1",
+      "receipt": {
+        "schema": "M3_SOURCE_BUILT_VM_BOOT_PROBES_V1",
+        "source_epoch": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+        "source_tree": "f30bf4ae784f4c6c7b461d245e63d3299b053931",
+        "src_tree": "90475252a619e7fc5cb70a27e81f185da3b0077d",
+        "hotspot_tree": "7a1892921ebd3e3888192fa89dfba90184942254",
+        "image_make_receipt": "images-after-object-vtable-result.json",
+        "probes": [
+          {
+            "mode": "default",
+            "command": [
+              "/dev/shm/m3-combined-image-f8287/build/images/jdk/bin/java",
+              "-version"
+            ],
+            "exit_code": 0,
+            "output": "openjdk version \"21-internal\" 2023-09-19\nOpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.runtime)\nOpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.runtime, mixed mode, sharing)\n"
+          },
+          {
+            "mode": "sharing-on",
+            "command": [
+              "/dev/shm/m3-combined-image-f8287/build/images/jdk/bin/java",
+              "-Xshare:on",
+              "-version"
+            ],
+            "exit_code": 0,
+            "output": "openjdk version \"21-internal\" 2023-09-19\nOpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.runtime)\nOpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.runtime, mixed mode, sharing)\n"
+          },
+          {
+            "mode": "sharing-off",
+            "command": [
+              "/dev/shm/m3-combined-image-f8287/build/images/jdk/bin/java",
+              "-Xshare:off",
+              "-version"
+            ],
+            "exit_code": 0,
+            "output": "openjdk version \"21-internal\" 2023-09-19\nOpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.runtime)\nOpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.runtime, mixed mode)\n"
+          }
+        ],
+        "scope": "VM initialization and built CDS archive only; no semantic test execution implied."
+      }
+    },
+    "jtreg_preexecution_refusal": {
+      "original_locator": "/workspace/scratch/f8287c652798/combine/image-evidence/jtreg-five-after-object-vtable-result.json",
+      "sha256": "89ca23b9e6e90dd022fbbcf9993133d35b42d9fabe8c13b06cde730afcb14ab3",
+      "receipt": {
+        "schema": "M3_COMBINED_MATCHED_IMAGE_STEP_V1",
+        "source_head": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+        "source_tree": "f30bf4ae784f4c6c7b461d245e63d3299b053931",
+        "hotspot_git_tree": "7a1892921ebd3e3888192fa89dfba90184942254",
+        "step": "jtreg-five-after-object-vtable",
+        "command": [
+          "make",
+          "test",
+          "TEST=test/jdk/java/util/regex/M3RegexReuseTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/lang/String/M3TQTest.java test/jdk/java/lang/String/M3TQSparseContainmentTest.java",
+          "JT_HOME=/dev/shm/m3-combined-image-f8287/jtreg-7.2+1",
+          "JTREG=JOBS=1;TIMEOUT_FACTOR=4",
+          "JOBS=4",
+          "MAX_JOBS=4"
+        ],
+        "build_root": "/dev/shm/m3-combined-image-f8287/build",
+        "start_utc": "2026-10-18T13:52:05Z",
+        "resource_limits": {
+          "shm_min_free_bytes": 314572800,
+          "memory_min_available_bytes": 629145600,
+          "process_group_max_rss_bytes": 3221225472
+        },
+        "warnings_as_errors": true,
+        "exit_code": 2,
+        "stop_reason": null,
+        "end_utc": "2026-10-18T13:52:21Z",
+        "console_sha256": "df474fea4e6f6432d0dfd6a70de7004cc964d71ba08d1b5c652cd467536c5830",
+        "lowest_shm_free_bytes": 420331520,
+        "lowest_memory_available_bytes": 4056481792,
+        "peak_process_group_rss_bytes": 160874496,
+        "source_head_after": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+        "source_tree_after": "f30bf4ae784f4c6c7b461d245e63d3299b053931"
+      },
+      "execution_state": "NOT_RUN_PREEXECUTION_SPARSE_GROUP_FILE_REFUSAL"
+    },
+    "interpretation": "Actual image assembly and default/CDS-on/CDS-off bootstrap pass on this source epoch; targeted jtreg semantics remain NOT_RUN after the retained preexecution group-file refusal."
+  },
+  "native_independent_proof": {
+    "path": "runtime-proof/latest-runtime-20261018/NATIVE_FEATURE_INDEPENDENT_PROOF.json",
+    "sha256": "cb7deeaf41806699f171bded5d06eb16d75ce4088d3da9153edd9f97f3bc50ba",
+    "original_locator": "/workspace/scratch/f8287c652798/combine/image-evidence/native-feature-guard-independent-proof.json"
+  },
+  "scope_independent_review": {
+    "path": "runtime-proof/latest-runtime-20261018/PROGRESS_SCOPE_INDEPENDENT_REVIEW.json",
+    "sha256": "da43ac351a878799d2d25f55dd6aa1e36aedd822a4facf43f01a232b43996caf",
+    "original_locator": "/workspace/scratch/f8287c652798/combine/image-evidence/progress-scope-independent-review.json"
+  },
+  "documentation_token_proof": {
+    "path": "runtime-proof/latest-runtime-20261018/DOC_TOKEN_EQUALITY.json",
+    "sha256": "f1a1f54c2f72cabc7ab929320b843416e45e097e18a175ebb1b7fa55de83d3b9",
+    "original_locator": "/dev/shm/m3-doclint-f8287/proof/TOKEN_EQUALITY.json"
+  },
+  "object_vtable_candidate": {
+    "dataset": "m3-object-vtable-20261018",
+    "source": {
+      "path": "runtime-proof/latest-runtime-20261018/OBJECT_VTABLE_SOURCE_BOUNDARY.json",
+      "sha256": "9f63f15b0f3f5760b9de876ff074f7d261c489c51bdaec5000e8943ba1c8e8da",
+      "original_locator": "/dev/shm/m3-object-vtable-f8287/SOURCE_BOUNDARY.json"
+    },
+    "state": "ACTUAL_SDK5_SEALING8_ISOLATED_RECEIVER9_AND_SERIAL_PRODUCT_RECEIVING_PASS_IMAGE_AND_BOOT_PASS_JTREG_NOT_RUN",
+    "finite_sdk_evidence": {
+      "tests": 5,
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "sdk_report": {
+        "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_REPORT.xml.txt",
+        "sha256": "03484c1179fb857a544b14117c6d054e3f5f665e420ac92de3866c2d104f2270",
+        "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-object-vtable-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      },
+      "receiver_receipt": {
+        "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/RECEIVER_RECEIPT.json",
+        "sha256": "80fce2cf32e6611aa10ad947b3e8de50476263edb53fbe3645c67173f7b38db6",
+        "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-object-vtable-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json"
+      },
+      "sdk_log": {
+        "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_LOG.txt",
+        "sha256": "f7c5141498e08c98bdaa0a04cee9716e223d6cedc11834a9c24a8f925dd35d9f",
+        "original_locator": "/dev/shm/m3-object-vtable-f8287/proof/sdk-first.log"
+      }
+    },
+    "candidate_sha256": "5f8555b02497a2a1a416244dc6bbd2b6fcbc51b7ac3dde34e76fba2de52bfac6",
+    "strict_root_guard_unchanged": true,
+    "public_overridable_toAdapter_unchanged": true
+  },
+  "authority": {
+    "canonical_reusable_recipe_owner": "hsoliwal/com.synexia",
+    "runtime_product_owner": "hsoliwal/M3jdk21 existing Java/HotSpot/JNI owners",
+    "runtime_dependency_added": false,
+    "catalogue_engine_added": false,
+    "promotion_authority": false,
+    "sdk_pom_sha256": "71a903b5cb082d74b05fb36b2f2171a51451eee10e9380857cee9572e1d0d99a"
+  },
+  "remaining": [
+    "Resolve the targeted jtreg preexecution sparse-group refusal through exact source/tool custody, then execute suites on the built image; boot probes do not prove semantic suites.",
+    "Preserve the three exact mapping holds: current M3TQ target hash, new Matcher target hash, and absent canonical sparse-lookup manifest path.",
+    "Execute matched-image prepared-String/Matcher, full relevant String/Object and JNI suites; retain interpreter/C1/C2, compact/noncompact, disabled-storage and CDS boundaries.",
+    "Broader migration DAG, historical donation guards, complete SDK/JDK/JCK/platform acceptance remain independent.",
+    "Cold/warm CPU, allocation, retained heap and native/process-memory measurements remain required; no new speedup claim."
+  ],
+  "custody_limits": [
+    "Actual SDK5/sealing8/receiver9 apply separately to each named sealed dataset and exact source epoch.",
+    "The TQ current eight-output sealed plan is a composite replay fixture, not an installed legacy-tree upgrade.",
+    "The separate typed Java recipe proves d7c3-to-78aa transition; the received fourteen-target packet does not rewrite the already-current runtime kernel.",
+    "Historical oracle resources, all nineteen original test/helper bodies, verifiers, source guards and mapping authority are retained.",
+    "These catalogue additions are source candidates and require their own canonical SDK/receiver qualification before product receipt."
+  ]
+}

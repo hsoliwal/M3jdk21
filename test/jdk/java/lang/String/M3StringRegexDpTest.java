@@ -179,11 +179,25 @@ public final class M3StringRegexDpTest {
 
     private static int decision(String text, String regex) throws Exception {
         Object owner = STRING_M3.get(text);
+<<<<<<< HEAD
         if (owner == null && text.isEmpty()) {
             // Empty public Strings may keep flat storage; direct DP still receives
             // the actual canonical empty descriptor rather than skipping the case.
             owner = EMPTY.invoke(null);
         }
+||||||| merged common ancestors
+=======
+        if (owner == null && text.isEmpty()) {
+            Method empty = STRING_M3.getType().getDeclaredMethod("empty");
+            empty.setAccessible(true);
+            owner = empty.invoke(null);
+        } else if (owner == null) {
+            // String.join with one element may return a bootstrap literal unchanged.
+            // Keep that public-String parity case and use real char[] ingress for the
+            // separate direct-owner decision; never substitute a fixture text owner.
+            owner = STRING_M3.get(new String(text.toCharArray()));
+        }
+>>>>>>> d46d46ab7f20a4cf782e72d353a105f634e10692
         if (owner == null) {
             throw new AssertionError("expected canonical M3 storage: " + text);
         }
