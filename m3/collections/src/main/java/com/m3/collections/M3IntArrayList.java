@@ -94,8 +94,11 @@ public final class M3IntArrayList implements M3IntList {
     /** Caller must have sorted ascending first; duplicates removed in stable encounter order. */
     @Override public int deduplicateSorted() {
         if (size < 2) return 0;
-        int write = 1, previous = size;
-        for (int read = 1; read < previous; read++) {
+        int previous = size, write = 1;
+        // The distinct prefix is already in its final position.
+        while (write < previous && data[write] != data[write - 1]) write++;
+        if (write == previous) return 0;
+        for (int read = write + 1; read < previous; read++) {
             if (data[read] != data[write - 1]) data[write++] = data[read];
         }
         if (write == previous) return 0;
@@ -133,7 +136,11 @@ public final class M3IntArrayList implements M3IntList {
         if ((requiredBits & ~0xff) != 0) throw new IllegalArgumentException("invalid state mask");
         if (requiredBits == 0) return 0;
         int original = size, write = 0;
-        for (int read = 0; read < original; read++) {
+        // Preserve the already-retained prefix without rewriting its payload.
+        while (write < original
+                && ((alignedStates[write] & 0xff) & requiredBits) == requiredBits) write++;
+        if (write == original) return 0;
+        for (int read = write + 1; read < original; read++) {
             if (((alignedStates[read] & 0xff) & requiredBits) == requiredBits) {
                 data[write++] = data[read];
             }

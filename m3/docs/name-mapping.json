@@ -9977,6 +9977,200 @@
         },
         "source_state": "target-owned",
         "observation": "Lexical routing facts do not prove regex validity, program semantics or a native speedup."
+      },
+      {
+        "id": "m3.collections.primitive-array-list.prefix-compaction",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Refine existing primitive-list compaction through executed source-sealed recipes; preserve public names and existing capabilities. Scoped Java proof passes, but broad performance/non-regression and installed-JDK gates remain open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "5ad45707c5eb62e2f69e9bc3640e1beb736091a5",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/primitive-prefix-jdk-20261029/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-primitive-prefix-jdk-20261029.yml",
+            "symbol": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+            "signatures": [],
+            "sha256": "253acee53ac9cc7547fbddb79705fe16ff760bbbb5286d560359880a5914c4e0",
+            "git_blob_sha1": "e7c6aaa19ac5f043ff80c4453fbdb2fe97cb07b5",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": null
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "a98b35939019f080cc069f3bcfbd7439b8fb0b4c",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongList.java",
+            "symbol": "com.synexia.common.collections.PackedLongList",
+            "signatures": [],
+            "sha256": "71b81584b5f0548dc004ea45d8bd189e6c053bd9088a4d150b791a20212f63a9",
+            "git_blob_sha1": "9a4aa73350c40714b29b2ae10a8a9334fbceb503",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": null
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3IntArrayList.java",
+            "symbol": "com.m3.collections.M3IntArrayList",
+            "signatures": [],
+            "sha256": "f9322cbd13fc6fc1353a02dc294c6d2127e85a9f2ff5dd7da77033041a81f54a",
+            "git_blob_sha1": "925f3a0a22a7f8564c936cc889359d4a544f1806",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": null
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+            "symbol": "com.m3.collections.M3LongArrayList",
+            "signatures": [],
+            "sha256": "693260d951058ab3617b07cc5c82f533cc197e0ee943f035d90d7a0321410e43",
+            "git_blob_sha1": "d541ef2527d8632973fe7cb66e3463f29e4ec9a6",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": null
+          }
+        ],
+        "owner": "Existing com.m3.collections.M3IntArrayList and M3LongArrayList proving owners; no java.util replacement",
+        "identity": {
+          "namespace": "Existing primitive collection owners and original backing arrays; no new identity or representation.",
+          "generation": "Preserve current structural modification/iterator epochs, no-op behavior and capacity."
+        },
+        "contract": {
+          "differences": [
+            "Skip unchanged unique/retained prefixes before existing stable in-place compaction.",
+            "No new API, class/package move, primitive boxing, payload allocation or global promotion."
+          ],
+          "compatibility_obligations": [
+            "Preserve signed primitive values, stable order, removed-count returns and repeat-operation behavior.",
+            "Preserve size/capacity/backing identity, zero-cleared removed tails, spare payload and iterator invalidation.",
+            "Preserve aligned-state original coordinates, caller state array, validation ordering and exception messages.",
+            "Do not extend the shortcut to callback-driven filters without reentrant-mutation proof."
+          ],
+          "public_surface": [
+            "Existing com.m3.collections API/descriptors unchanged.",
+            "Public JDK java.util names remain unchanged; standalone proving owners are not installed JDK backends."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing m3/collections module; no new JNI/native entry point, exported JDK type or Synexia runtime dependency."
+        },
+        "dependencies": [
+          {
+            "id": "m3/collections-existing-array-owners",
+            "resolution": "resolved",
+            "reason": "317 exact public Java21 collection/array source files compiled in the focused proof; full reactor and installed image remain separate."
+          }
+        ],
+        "materialization": {
+          "admission": "Exact source preimage or identical qualified postimage; drift refused before serial receiving.",
+          "joins": "No joins, payload copies or new backing representation.",
+          "outputs": "Mutate existing primitive arrays only after first compaction hole; clear the removed tail as before.",
+          "cached_facts": "O(1) local read/write cursors; no cache or retained external state."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "primitive-prefix-jdk-20261029",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/primitive-prefix-jdk-20261029",
+          "sha256": "253acee53ac9cc7547fbddb79705fe16ff760bbbb5286d560359880a5914c4e0",
+          "preconditions": [
+            "Canonical source commit 5ad45707c5eb62e2f69e9bc3640e1beb736091a5; exact descriptor and Java source manifests.",
+            "Public baseline 669a949d192345acefcfc5e9bb0b3724174d270c; no unreviewed source drift.",
+            "All5 actual SDK tests pass; guarded receiver validates exact qualified outputs and refuses changed input/result seals."
+          ],
+          "rollback": "Reviewed revert restores sealed preimages and removes only the new owned test/receipt, while preserving independent later changes."
+        },
+        "tests": [
+          {
+            "id": "scoped-sdk5-receiver9-runtime27-xint9-api",
+            "receipt": "m3/tooling/refinement-proofs/primitive-prefix-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "serial-int-then-long-and-existing-proof-programs",
+            "receipt": "m3/tooling/refinement-proofs/primitive-prefix-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "targeted-jmh-performance-hold",
+            "receipt": "m3/tooling/refinement-proofs/primitive-prefix-20261029/RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Existing first-party Apache-2.0 file notices retained; JDK licensing unchanged.",
+          "publication": "Only executed product/test output and passive mapping/receipt metadata; reusable recipes and raw convergence evidence stay in private Synexia.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "5ad45707c5eb62e2f69e9bc3640e1beb736091a5",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Refine the existing int/long owners independently without renaming or replacing their public contracts."
+          ],
+          "pending": [
+            "Full source-built dependency and Maven/JPMS reactor closure.",
+            "Installed M3JDK image/jtreg and applicable JNI/JIT/GC/platform gates.",
+            "Resolve repeated slower unchanged-long dedup and dense-int-mask point estimates; broad non-regression acceptance remains HOLD."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "a98b35939019f080cc069f3bcfbd7439b8fb0b4c",
+              "module": "synexia-common",
+              "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongList.java",
+              "symbol": "com.synexia.common.collections.PackedLongList",
+              "signatures": [],
+              "sha256": "71b81584b5f0548dc004ea45d8bd189e6c053bd9088a4d150b791a20212f63a9",
+              "git_blob_sha1": "9a4aa73350c40714b29b2ae10a8a9334fbceb503",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+              "module": "m3/collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3IntArrayList.java",
+              "symbol": "com.m3.collections.M3IntArrayList",
+              "signatures": [],
+              "sha256": "ba4a2f428ad628b6c54d13b3cf63429e87cf8f8ecaa4da8ae39bff4e12433efe",
+              "git_blob_sha1": "b7b229b9ba88f359a63f98d07e274fe57a7929c0",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+              "module": "m3/collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+              "symbol": "com.m3.collections.M3LongArrayList",
+              "signatures": [],
+              "sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd",
+              "git_blob_sha1": "543e4d99ba6cc07a949141640588fd6437203635",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "experimental",
+        "observation": "Additive pending capability, preserving all67 prior records and all72 legacy mappings. Historical long-list union fragment m3/docs/name-mapping.d/m3-long-array-list-union.json (blob5209435610c94085f933c5ec5bbe74c8738127e9) and receipt e24eb522501ce98e857e3a616b5826b7f9242bc3 remain unchanged; Synexia #9795 lineage is retained. No PackedFrozenLongSet/PackedLongArrayOps migration is claimed."
       }
     ]
   },

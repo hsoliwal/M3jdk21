@@ -180,7 +180,10 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
             return 0;
         }
         int write = 1;
-        for (int read = 1; read < size; read++) {
+        // The distinct prefix is already in its final position.
+        while (write < size && elements[write] != elements[write - 1]) write++;
+        if (write == size) return 0;
+        for (int read = write + 1; read < size; read++) {
             if (elements[read] != elements[write - 1]) {
                 elements[write++] = elements[read];
             }
@@ -209,7 +212,11 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         if (requiredMask == 0) return 0;
         int previous = size;
         int kept = 0;
-        for (int read = 0; read < previous; read++) {
+        // Preserve the already-retained prefix without rewriting its payload.
+        while (kept < previous
+                && M3IndexMaskCompactor.matches(alignedStates[kept], requiredMask)) kept++;
+        if (kept == previous) return 0;
+        for (int read = kept + 1; read < previous; read++) {
             if (M3IndexMaskCompactor.matches(alignedStates[read], requiredMask)) {
                 elements[kept++] = elements[read];
             }
