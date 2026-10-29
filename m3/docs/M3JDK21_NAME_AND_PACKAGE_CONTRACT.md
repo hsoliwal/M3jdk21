@@ -13,6 +13,18 @@ method descriptors, superclass/interface shape and supported compatibility contr
 Internal M3 array/index/mask, facts, JNI and ownership helpers remain behind those APIs.
 Candidate code is **never promoted merely for being faster on one workload**.
 
+
+## M3 API companions
+
+Every Java API can have a canonical M3 companion under
+[M3-API-COMPANION-1](counterpart-naming.md#every-java-api-can-have-an-m3-companion-m3-api-companion-1).
+This permits internal companion implementation and explicitly qualified,
+additive public M3 capabilities. Existing Java operations retain their original
+owners and contracts; existing internal M3 types retain their registered
+visibility. The companion relationship, target module/package and capability
+qualification use the existing `name-mapping.json` authority. A public extension
+requires its own source/binary compatibility, export and behavioral review.
+
 ## Authoritative mapping and file placement
 
 For every source change, start with
