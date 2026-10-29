@@ -1,0 +1,20 @@
+--- job-111763397210.log: lines 138-156 (original timestamp/ANSI text retained) ---
+2026-10-05T12:34:10.7409579Z [ERROR] COMPILATION ERROR : 
+2026-10-05T12:34:10.7435952Z [INFO] -------------------------------------------------------------
+2026-10-05T12:34:10.7481429Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
+2026-10-05T12:34:10.7496086Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
+2026-10-05T12:34:10.7498381Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
+2026-10-05T12:34:10.7514266Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
+2026-10-05T12:34:10.7515501Z [INFO] 4 errors 
+2026-10-05T12:34:10.7516173Z [INFO] -------------------------------------------------------------
+2026-10-05T12:34:10.7516870Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:10.7517906Z [INFO] BUILD FAILURE
+2026-10-05T12:34:10.7518449Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:10.7519095Z [INFO] Total time:  10.445 s
+2026-10-05T12:34:10.7519538Z [INFO] Finished at: 2026-10-05T12:34:10Z
+2026-10-05T12:34:10.7520141Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:10.7521685Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project migration-recipes: Compilation failure: Compilation failure: 
+2026-10-05T12:34:10.7523325Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
+2026-10-05T12:34:10.7525133Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
+2026-10-05T12:34:10.7526326Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
+2026-10-05T12:34:10.7527446Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
