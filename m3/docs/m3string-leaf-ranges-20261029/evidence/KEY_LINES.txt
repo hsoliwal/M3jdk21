@@ -1,0 +1,30 @@
+== G1_cand_release21_werror
+module-info.java:172: warning: [module] module not found: jdk.internal.le
+module-info.java:229: warning: [module] module not found: jdk.internal.vm.ci
+module-info.java:241: warning: [module] module not found: jdk.internal.jvmstat
+module-info.java:254: warning: [module] module not found: jdk.internal.vm.ci
+module-info.java:258: warning: [module] module not found: jdk.internal.jvmstat
+module-info.java:261: warning: [module] module not found: jdk.internal.vm.ci
+module-info.java:264: warning: [module] module not found: jdk.internal.vm.ci
+module-info.java:275: warning: [module] module not found: jdk.random
+error: warnings found and -Werror specified
+1 error
+8 warnings
+== G4_export_to_absent_module
+module-info.java:167: warning: [module] module not found: jdk.m3.text
+error: warnings found and -Werror specified
+1 error
+1 warning
+== O1_component_run
+M3_LEAF_RANGES_PASS mode=component stringLayout=stock checks=353136 leaves=27105 atomLeaves=18317 inlineLeaves=8788 startMutantsKilled=17739/17739 byteOrderMutantsKilled=13484/13484
+== M1_start_plus_one_run
+Exception in thread "main" java.lang.AssertionError: latin1-local-atom unit mismatch at 0
+== M2_byte_order_swapped_run
+Exception in thread "main" java.lang.AssertionError: utf16-local-atom-big-endian unit mismatch at 0
+== M3_inline_off_by_one_run
+Exception in thread "main" java.lang.AssertionError: immediate-latin1 inline head padding
+== G1.base.diags vs G1.cand.diags
+identical
+== G3d doclint diag count base/cand
+41
+41

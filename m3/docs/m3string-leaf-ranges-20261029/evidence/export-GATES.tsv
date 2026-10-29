@@ -1,0 +1,15 @@
+gate	expect	pattern	rc	verdict	log
+E0_module_name_lint	nonzero	avoid terminal digits	1	PASS	E0_module_name_lint.log
+E1_javac_without_export	nonzero	package jdk\.internal\.access is not visible	1	PASS	E1_javac_without_export.log
+E2_javac_with_export	0	-	0	PASS	E2_javac_with_export.log
+E3_run_without_export	nonzero	does not export jdk\.internal\.access to module jdk\.m3\.text	1	PASS	E3_run_without_export.log
+E4_run_with_export	0	PROBE_OK countPositives=2	0	PASS	E4_run_with_export.log
+E5_jlink_add_options	0	-	0	PASS	E5_jlink_add_options.log
+E6_image_run_baked_export	0	PROBE_OK countPositives=2	0	PASS	E6_image_run_baked_export.log
+E7_image_validate_modules	0	-	0	PASS	E7_image_validate_modules.log
+E8_unnamed_javac	0	-	0	PASS	E8_unnamed_javac.log
+E9_image_unnamed_denied	nonzero	does not export jdk\.internal\.access to unnamed module	1	PASS	E9_image_unnamed_denied.log
+E10_qualified_export_javac	0	-	0	PASS	E10_qualified_export_javac.log
+E11_jlink_target_absent	0	-	0	PASS	E11_jlink_target_absent.log
+E12_validate_target_absent	0	-	0	PASS	E12_validate_target_absent.log
+E13_describe_target_absent	0	qualified exports probe\.base\.internal to jdk\.m3\.text	0	PASS	E13_describe_target_absent.log

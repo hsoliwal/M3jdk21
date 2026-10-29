@@ -83,6 +83,42 @@ public interface JavaLangAccess {
     }
 
     /**
+     * Lane layout of {@link JavaLangAccess#stringM3LeafRanges(String, long[])}. Each leaf occupies
+     * {@link #STRIDE} consecutive longs; no per-leaf object exists.
+     *
+     * <pre>
+     *   lanes[STRIDE * i + ADDRESS]     ATOM leaf:   address of the leaf's first UTF-16 unit
+     *                                   INLINE leaf: units 0..7, unit k in bits 8k..8k+7
+     *   lanes[STRIDE * i + DESCRIPTOR]  bits  0..31  unit count (UTF-16 code units, at least 1)
+     *                                   bits 32..39  bytes per unit: 1 (Latin-1) or 2 (UTF-16)
+     *                                   bit  40      BIG_ENDIAN: set only for big-endian width 2
+     *                                   bit  41      INLINE: the units are carried in the lanes
+     *                                   bits 48..63  INLINE leaf: unit 8 + j in bits 48 + 8j..55 + 8j
+     * </pre>
+     *
+     * <p>An INLINE leaf has width 1, at most {@link #INLINE_MAX_UNITS} units and no address.
+     * An ATOM address has no alignment guarantee; native readers load bytes.</p>
+     */
+    //FLLDCIM: DOOP - leaf ranges as packed primitive lanes; constants are the C-kernel ABI
+    final class M3StringLeafLanes {
+        /** Result for a String without M3 storage (stock layout or storage not admitted). */
+        public static final int NOT_M3 = -1;
+        public static final int STRIDE = 2;
+        public static final int ADDRESS = 0;
+        public static final int DESCRIPTOR = 1;
+        public static final long UNITS_MASK = 0xffff_ffffL;
+        public static final int WIDTH_SHIFT = 32;
+        public static final long WIDTH_MASK = 0xffL;
+        public static final long BIG_ENDIAN = 1L << 40;
+        public static final long INLINE = 1L << 41;
+        public static final int INLINE_HEAD_UNITS = 8;
+        public static final int INLINE_TAIL_SHIFT = 48;
+        public static final int INLINE_MAX_UNITS = 10;
+
+        private M3StringLeafLanes() {}
+    }
+
+    /**
      * Returns the list of {@code Method} objects for the declared public
      * methods of this class or interface that have the specified method name
      * and parameter types.
@@ -475,6 +511,36 @@ public interface JavaLangAccess {
     M3StringTokenSnapshot m3StringAsciiTokens(
             String value, int maxSequence, int maxVocabulary,
             int maxTokenLength, int maxPackedBytes);
+
+    /**
+     * Writes the leaf ranges of an M3-backed String into caller-owned primitive lanes, in the
+     * layout of {@link M3StringLeafLanes}.
+     *
+     * <p>Leaves are the scalar owner ranges of the String's canonical M3 DAG in logical order:
+     * tuple nodes are flattened left to right and adjacent ranges of one owner are coalesced.
+     * An ATOM leaf reports the address of its first visible unit (owner address plus start times
+     * width), its unit count, width and byte order. An IMMEDIATE owner has no native payload; its
+     * leaf is INLINE and carries its decoded Latin-1 units in the lanes themselves.</p>
+     *
+     * <p>Returns {@link M3StringLeafLanes#NOT_M3} when the String has no M3 storage, and otherwise
+     * the total leaf count {@code n} ({@code 0} for empty text). Only the first
+     * {@code min(n, lanes.length / STRIDE)} leaves are written and no other element is touched;
+     * a caller whose lanes were too small retries with {@code STRIDE * n} longs. The call never
+     * admits storage, copies text or allocates per leaf.</p>
+     *
+     * <p>Lifetime: an address is valid only while {@code text} is strongly reachable. The caller
+     * keeps {@code text} reachable for as long as it uses any returned address, for example with
+     * {@link java.lang.ref.Reference#reachabilityFence(Object)} after the last native read.
+     * Addresses are read-only: they name shared canonical storage (mapped lexicon pages or
+     * interned VM-local blocks), and a write is undefined behavior that may fault or corrupt
+     * every String sharing that owner.</p>
+     *
+     * @param text  the String whose M3 leaves are reported
+     * @param lanes caller-owned output lanes
+     * @return the total leaf count, or {@link M3StringLeafLanes#NOT_M3}
+     * @throws NullPointerException if {@code text} or {@code lanes} is null
+     */
+    int stringM3LeafRanges(String text, long[] lanes);
 
    /**
     * Get the coder for the supplied character.
