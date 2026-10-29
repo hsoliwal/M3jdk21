@@ -57,7 +57,19 @@ runs:
     - name: 'Build JTReg'
       run: |
         # Build JTReg and move files to the proper locations
-        bash make/build.sh --jdk "$JAVA_HOME_17_X64"
+        # Hosted Apple Silicon/Linux ARM64 runners expose the matching Java 17
+        # bootstrap under JAVA_HOME_17_ARM64, not necessarily JAVA_HOME_17_X64.
+        # Prefer an architecture-matched toolchain and refuse a missing JDK.
+        if [[ "${RUNNER_ARCH:-}" == ARM64 ]]; then
+          build_jdk="${JAVA_HOME_17_ARM64:-${JAVA_HOME_17_X64:-}}"
+        else
+          build_jdk="${JAVA_HOME_17_X64:-${JAVA_HOME_17_ARM64:-}}"
+        fi
+        if [[ -z "$build_jdk" || ! -x "$build_jdk/bin/java" ]]; then
+          echo 'No installed Java 17 toolchain available for jtreg source build' >&2
+          exit 1
+        fi
+        bash make/build.sh --jdk "$build_jdk"
         mkdir ../installed
         mv build/images/jtreg/* ../installed
       working-directory: jtreg/src
