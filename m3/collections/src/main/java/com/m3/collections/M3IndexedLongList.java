@@ -252,12 +252,16 @@ public final class M3IndexedLongList {
         freeHead = slot;
     }
 
+    /** Pure capacity atom: widen before addition, then cap before allocating lanes. */
+    private static int expandedCapacity(int previous) {
+        if (previous >= MAX_CAPACITY) throw new OutOfMemoryError("indexed long list exhausted");
+        long proposed = previous == -1 ? 8 : Math.max(8L, (long) previous + (previous >> 1) + 1L);
+        return (int) Math.min(MAX_CAPACITY, proposed);
+    }
+
     /** Stage every aligned lane before committing the new capacity. */
     private void grow() {
-        int previous = valueLane.length - 1;
-        if (previous >= MAX_CAPACITY) throw new OutOfMemoryError("indexed long list exhausted");
-        long proposed = previous == -1 ? 8 : Math.max(8L, previous + (previous >> 1) + 1L);
-        int next = (int) Math.min(MAX_CAPACITY, proposed);
+        int next = expandedCapacity(valueLane.length - 1);
         long[] newValues = Arrays.copyOf(valueLane, next + 1);
         int[] newLeft = Arrays.copyOf(leftLane, next + 1);
         int[] newRight = Arrays.copyOf(rightLane, next + 1);

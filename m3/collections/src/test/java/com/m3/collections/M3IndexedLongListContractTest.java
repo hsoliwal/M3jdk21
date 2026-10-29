@@ -4,6 +4,9 @@ package com.m3.collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +16,70 @@ import org.junit.jupiter.api.Test;
 
 /** Differential and physical-lane proofs for the M3-only indexed long sequence. */
 final class M3IndexedLongListContractTest {
+    private static Method capacityAtom() throws Exception {
+        Method method = M3IndexedLongList.class.getDeclaredMethod("expandedCapacity", int.class);
+        method.setAccessible(true);
+        return method;
+    }
+
+    private static int capacityLimit() throws Exception {
+        Field field = M3IndexedLongList.class.getDeclaredField("MAX_CAPACITY");
+        field.setAccessible(true);
+        return field.getInt(null);
+    }
+
+    private static void capacityMatchesUnboundedOracle(Method atom, int previous, int limit)
+            throws Exception {
+        BigInteger value = BigInteger.valueOf(previous);
+        int expected = previous == -1 ? 8 : value.add(value.shiftRight(1))
+                .add(BigInteger.ONE).max(BigInteger.valueOf(8))
+                .min(BigInteger.valueOf(limit)).intValueExact();
+        int actual = (Integer) atom.invoke(null, previous);
+        assertEquals(expected, actual, "capacity after " + previous);
+        assertTrue(actual > previous, "growth must never truncate existing lanes");
+        assertTrue(actual <= limit, "capacity ceiling");
+        assertTrue((long) actual + 1 <= Integer.MAX_VALUE, "slot-zero array padding");
+    }
+
+    @Test void capacityGrowthWidensBeforeAdditionAtIntegerBoundary() throws Exception {
+        Method atom = capacityAtom();
+        int limit = capacityLimit();
+        // Includes both sides of the first int-add overflow and the reachable failure.
+        for (int previous : new int[] {-1, 0, 1, 7, 8, 1_431_655_758, 1_431_655_759,
+                1_431_655_760, 1_431_655_764, 1_431_655_765, 1_431_655_766,
+                1_431_655_767, 1_796_357_450, limit - 1}) {
+            capacityMatchesUnboundedOracle(atom, previous, limit);
+        }
+        Random random = new Random(0x4d334341504143L);
+        for (int i = 0; i < 20_000; i++) {
+            capacityMatchesUnboundedOracle(atom, random.nextInt(limit), limit);
+        }
+    }
+
+    @Test void capacityGrowthReachesCeilingWithoutShrinkingOrAllocatingHugeLanes()
+            throws Exception {
+        Method atom = capacityAtom();
+        int limit = capacityLimit();
+        int previous = -1;
+        int steps = 0;
+        while (previous < limit) {
+            capacityMatchesUnboundedOracle(atom, previous, limit);
+            previous = (Integer) atom.invoke(null, previous);
+            assertTrue(++steps < 64, "growth must converge at the ceiling");
+        }
+        assertEquals(limit, previous);
+    }
+
+    @Test void capacityCeilingRefusesFurtherGrowth() throws Exception {
+        Method atom = capacityAtom();
+        for (int previous : new int[] {capacityLimit(), Integer.MAX_VALUE}) {
+            InvocationTargetException failure = assertThrows(InvocationTargetException.class,
+                    () -> atom.invoke(null, previous));
+            assertInstanceOf(OutOfMemoryError.class, failure.getCause());
+            assertEquals("indexed long list exhausted", failure.getCause().getMessage());
+        }
+    }
+
     private static int integer(Object owner, String field) throws Exception {
         Field f = owner.getClass().getDeclaredField(field);
         f.setAccessible(true);
