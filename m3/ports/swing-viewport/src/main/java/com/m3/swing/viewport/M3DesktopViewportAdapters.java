@@ -139,6 +139,80 @@ public final class M3DesktopViewportAdapters {
         return n;
     }
 
+    /**
+     * Project the horizontal viewport into ascending JTable view-column indices.
+     * The same operation covers SwingX JXTable and JXTreeTable column models.
+     * Hidden columns removed by the column model are absent; zero-width columns
+     * cannot establish an edge but may lie inside the contiguous window.
+     * Overscan is measured in view columns, including zero-width entries.
+     *
+     * <p>The column model owns order, widths and model identity. Measured widths
+     * are accumulated with long arithmetic, using JTable's right edge for RTL.
+     * No column state, renderer, listener or native resource is retained. This
+     * projection is independent of the row count so empty tables can still
+     * request visible column headers. Call on the EDT without reentrant model
+     * mutation, as for the row projections.</p>
+     */
+    public static void fromTableColumns(JTable table, int overscan, int[] output, int offset) {
+        requireEdt();
+        if (table == null) throw new NullPointerException("table");
+        int count = table.getColumnCount();
+        if (!table.isShowing() || count == 0) {
+            M3ViewportIndexWindow.project(count, 0, 0, overscan, output, offset);
+            return;
+        }
+        Rectangle clip = table.getVisibleRect();
+        if (clip.isEmpty()) {
+            M3ViewportIndexWindow.project(count, 0, 0, overscan, output, offset);
+            return;
+        }
+        long clipLeft = clip.x;
+        long clipRight = clipLeft + clip.width;
+        boolean leftToRight = table.getComponentOrientation().isLeftToRight();
+        long edge = leftToRight ? 0 : table.getWidth();
+        int first = -1;
+        int end = 0;
+        for (int column = 0; column < count; ++column) {
+            int width = table.getColumnModel().getColumn(column).getWidth();
+            long left = leftToRight ? edge : edge - width;
+            long right = leftToRight ? edge + width : edge;
+            if (width > 0 && left < clipRight && right > clipLeft) {
+                if (first < 0) first = column;
+                end = column + 1;
+            }
+            edge = leftToRight ? right : left;
+        }
+        fromMeasuredRows(count, Math.max(0, first), end, overscan, output, offset);
+    }
+
+    /**
+     * Copy a column window's existing view-to-model permutation into an int lane.
+     * Column reordering and SwingX hidden columns stay owned by the column model.
+     * The window and destination bounds are validated before any output write.
+     * Caller guarantees no reentrant model mutation while copying on the EDT.
+     */
+    public static int copyTableModelColumns(JTable table, int[] window, int windowOffset,
+                                            int[] output, int offset) {
+        requireEdt();
+        if (table == null || window == null || output == null) throw new NullPointerException();
+        if (windowOffset < 0 || windowOffset > window.length - 4) {
+            throw new IndexOutOfBoundsException("window");
+        }
+        int from = window[windowOffset + M3ViewportIndexWindow.FIRST_VISIBLE];
+        int to = window[windowOffset + M3ViewportIndexWindow.END_VISIBLE];
+        if (from < 0 || to < from || to > table.getColumnCount()) {
+            throw new IndexOutOfBoundsException("visible columns");
+        }
+        int n = to - from;
+        if (offset < 0 || offset > output.length - n) {
+            throw new IndexOutOfBoundsException("model indices");
+        }
+        for (int column = from; column < to; ++column) {
+            output[offset + column - from] = table.convertColumnIndexToModel(column);
+        }
+        return n;
+    }
+
     private static void requireEdt() {
         if (!SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("Swing event dispatch thread required");

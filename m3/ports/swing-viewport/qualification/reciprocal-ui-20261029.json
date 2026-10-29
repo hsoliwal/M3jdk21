@@ -1,0 +1,84 @@
+{
+  "schema": "SYNEXIA_PASSIVE_QUALIFICATION_RECEIPT_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "qualified_target_base": "669a949d192345acefcfc5e9bb0b3724174d270c",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "73c2f572db2100926ba3b63e6de93f0015fb8d4b",
+  "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/73c2f572db2100926ba3b63e6de93f0015fb8d4b/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs",
+  "canonical_engine_commit": "3cda7fa7fb30c9d4d75089265e73bbef3417bba7",
+  "datasets": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-current-20261029",
+      "manifests": [
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-current-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-current-20261029/manifest.tsv",
+          "sha256": "89477cd6916f09db8d3cb1b876559c95d3a91b5eb42c64293f9e82403683905f"
+        }
+      ],
+      "actual_sdk_tests": 5,
+      "input_sealing_tests": 12,
+      "receiver_integrity_cases": 15,
+      "receiver_fixed_point_changes": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-columns-current-20261029",
+      "manifests": [
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-columns-current-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-columns-current-20261029/manifest.tsv",
+          "sha256": "12a91a63f20260e92751e0e72bb75eed7e443744bde0ea2db1f7f1789881dacb"
+        }
+      ],
+      "actual_sdk_tests": 5,
+      "input_sealing_tests": 12,
+      "receiver_integrity_cases": 15,
+      "receiver_fixed_point_changes": 0
+    }
+  ],
+  "generated_results": [
+    {
+      "path": "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3DesktopViewportAdapters.java",
+      "pre_sha256": "ef5048e82742c9ac79da400411a45e86c05bcc06bb37974d803cc089f6c74736",
+      "sha256": "624d8cf045a2060f78b695f10de8c48a7276bb6aa8f362b08999f85ab3353708"
+    },
+    {
+      "path": "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java",
+      "pre_sha256": "3f1de78a3128d0aeba6ca0c13efb40e4c90a7cf04df54e5a00f063624bcffffe",
+      "sha256": "51238e60cd6bad56f28b3c4b798f565e6d7d7954f6c63c03054443aa51fae2a5"
+    },
+    {
+      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportColumnsTest.java",
+      "pre_sha256": "ABSENT",
+      "sha256": "a76800ad141c2c7623e3a8325284f50323025221fb89e414822663b644985ec1"
+    },
+    {
+      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3SwingXColumnProof.java",
+      "pre_sha256": "ABSENT",
+      "sha256": "de8be133a84c030f5559a97815069a737daa13931cb9b5a56269d346c0f80f82"
+    },
+    {
+      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3ViewportBindingGeometryTest.java",
+      "pre_sha256": "ABSENT",
+      "sha256": "451ef29a7407bf1a073f78ecaeae37f2761df985448fa59ded677d0ad2454323"
+    },
+    {
+      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3ViewportBindingMeasuredTest.java",
+      "pre_sha256": "ABSENT",
+      "sha256": "6ac12ff3abfde39800d058bdc9326f5cadeb66a4ee6b825ccb69f37227357830"
+    }
+  ],
+  "product_gate": {
+    "combined_maven_tests": 56,
+    "actual_swingx_checks": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "public_api_preservation": "Existing public JVM descriptors retained; additions recorded in canonical proof",
+  "scope": "Qualified component increment; complete toolkit parity and full distribution release are not claimed",
+  "remaining_gates": [
+    "full owning distribution and installed-image integration",
+    "Windows/Cocoa and cross-platform pixel acceptance",
+    "performance and memory benchmarks"
+  ],
+  "passive": true
+}
