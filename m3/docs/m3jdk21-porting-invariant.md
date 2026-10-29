@@ -129,15 +129,18 @@ MIndexMappedStringBacking           -> jdk.internal.mindex.M3MappedStringBacking
 
 The public Java API remains `java.lang.String`. `M3String` is the target-owned internal value
 representation. Donor `MIndex*` names are provenance and migration evidence, not names to copy
-blindly into the target.
+blindly into the target. An optional public `com.m3.*` companion may add operations on the
+original String or a contracted owner-sharing view without exporting `M3String` or its storage.
 
-Apply that same pattern to the rest of the port.
+Apply that same implementation-ownership pattern to the rest of the port, with additive
+companions governed by the same naming authority below.
 
 ## Naming laws
 
 1. **Public JDK contracts keep their JDK names.** `String`, `ArrayList`, `HashMap`,
    `ConcurrentHashMap`, `Pattern`, `Matcher`, `Class`, javac APIs and other standard
-   surfaces do not become public `M3*` or `MIndex*` APIs.
+   surfaces retain their identities and contracts. Every standard Java API may additionally
+   have an optional public `com.m3.*` companion; the standard surface is not renamed.
 2. **Internal replacement owners use the established M3JDK21 M3 vocabulary.** Reuse an existing
    M3 owner before creating a new one.
 3. **Do not mechanically rename `MIndexFoo -> M3Foo`.** Map capability and ownership, not prefix.
@@ -157,6 +160,30 @@ Apply that same pattern to the rest of the port.
    an explicit reviewed exclusion/defer disposition.
 10. **Reverse feedback is allowed, ownership reversal is not.** M3JDK21 may propose optimizations
     back to Synexia, but target naming/ABI remains target-owned.
+
+## Additive companions in the same naming authority
+
+A companion adds useful static operations on original Java APIs or typed views sharing an
+admitted owner. It need not subclass the Java type, reproduce every method or create one class
+per API. Existing final/sealed restrictions, standard names, signatures and compatibility
+contracts remain intact. Keep `java.lang.M3String`, canonical storage and implementation
+precompute internal, and reuse the existing array/index/mask and checked JNI owners.
+
+The authoritative relation is the optional `migration.records[].companion_of` object in
+`name-mapping.json` and its existing schema:
+`{java_api: {module, symbol, path}, target_symbol, form}`. `form` is `STATIC_OPERATIONS`
+or `TYPED_VIEW`; `target_symbol` identifies a target artifact in the same record. Retain
+stable capability IDs, source/target seals, prior lineage, status and gate receipts. This
+relation is not another registry, a proof of full Java-API parity or runtime admission.
+
+Review nulls, exception behavior, equality/hash, order, identity, mutation, backed views and
+concurrency for the added surface. A view's descriptor may retain an owner and coordinates;
+it does not silently acquire its owner's monitor or identity. Explicit snapshots/materializations
+remain separately contracted boundaries, not a second hidden canonical payload mirror.
+
+This policy authorizes additive companion scope across Java APIs without advancing the ordered
+runtime receiving sequence. String qualification stays active. Native/platform acceptance and
+the established Java fallback or explicit-unavailable behavior remain separately evidenced.
 
 ## String and precompute family
 
@@ -180,10 +207,16 @@ regex or compiler semantics.
 
 Java arrays remain Java arrays. Public/runtime contracts for `byte[]`, `char[]`, primitive
 arrays and reference arrays are never renamed to M3 types and are not globally interned. M3 array
-owners are **internal immutable/snapshot/range/composition values** used only behind a concrete
-owner whose contract permits them.
+owners may be internal implementation values or separately admitted public `com.m3.*` companion
+operations/views, with explicit immutable/snapshot/range/composition ownership contracts.
 
-The first target-owned proving surface is `m3/arrays`:
+The first source-inventoried companion example is the existing `com.m3.arrays.M3Arrays` in
+module `com.m3.arrays`, at `m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java`, with descriptor
+`m3/arrays/src/main/java/module-info.java`. Its `STATIC_OPERATIONS` relation names the original
+`java.base` / `java.util.Arrays` / `src/java.base/share/classes/java/util/Arrays.java` API.
+Its current factories snapshot mutable inputs; existing slices/joins share immutable owners.
+This source example adds no runtime code, claims no full Arrays parity and advances no phase.
+The existing target-owned proving surface remains `m3/arrays`:
 
 | Donor responsibility | M3JDK21 owner |
 | --- | --- |
@@ -256,7 +289,14 @@ Choose the target by the consumer:
 - `jdk.compiler` / `com.sun.tools.javac.m3`: compiler-only M3 state.
 - `m3/collections`: separately built Apache-2.0 collection/storage proving ground; promotion into
   JDK owners still needs JDK contract proof.
+- existing `com.m3.*` companion modules/packages: expose only the reviewed additive surface;
+  retain their actual module descriptors, source ownership and installed-image gates.
 - other JDK modules: keep module boundaries; do not drag Synexia dependencies into the runtime.
+
+`java.base` cannot depend on a companion module. Shared kernels required by base classes stay
+in their admitted `java.base` owner; a companion may depend downward through reviewed module
+access. Package placement or a public companion does not expose private/package-private state
+or authorize exports of internal M3String/storage packages.
 
 ## Port acceptance sequence
 
@@ -404,7 +444,9 @@ capabilities merely to impose the new order.
 This order supersedes the earlier AST-before-collections plan. Immutable historical receipts stay
 unchanged as evidence. The current receiving plan does not erase pending rows or turn a catalogue,
 licence, copied vendor snapshot, recipe execution or merge into runtime acceptance. No new global
-parser, recipe engine, scheduler, payload store or public M3 replacement API is authorized.
+parser, recipe engine, scheduler or duplicate payload store is authorized. Optional additive
+public M3 companions follow the relation and contracts above; they do not rename standard Java
+APIs, replace their identity or bypass this runtime receiving order.
 
 For every file/semantic atom: inspect existing catalogue and history, seal its public/protected
 interfaces, behavior, exceptions and effects, select a licensed donor or first-party owner, improve

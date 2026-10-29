@@ -132,6 +132,35 @@ Do not shorten arbitrary words into unexplained initials.
 
 
 
+### Optional public companions for standard Java APIs
+
+Every standard Java API may have an optional additive public M3 companion in an existing
+`com.m3.*` owner. Prefer useful static operations on original Java values or typed views
+sharing an admitted owner. This does not require subclassing, one class per Java API, a
+copy of every method or renamed `java.*` types. Standard implementations keep their original
+contracts; internal storage and `java.lang.M3String` remain internal.
+
+Use the optional `migration.records[].companion_of` relation in the same `name-mapping.json`
+and schema: `{java_api: {module, symbol, path}, target_symbol, form}`. `form` is
+`STATIC_OPERATIONS` or `TYPED_VIEW`, and `target_symbol` identifies a target artifact of that
+record. Preserve the stable capability ID, exact source/target lineage, status and evidence.
+An optional relation is not a new registry or a declaration of full API/runtime parity.
+
+The first source-inventoried example is `com.m3.arrays.M3Arrays`, module `com.m3.arrays`, in
+`m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java` with
+`m3/arrays/src/main/java/module-info.java`. Its static factory/composition operations may be
+related to `java.base` / `java.util.Arrays` /
+`src/java.base/share/classes/java/util/Arrays.java` as `STATIC_OPERATIONS`. Preserve explicit
+mutable-input snapshots and existing immutable owner-sharing slice/join semantics. Recording
+this example adds or qualifies no runtime source and does not claim all Arrays operations.
+
+Companion contracts must specify nulls, equality/hash, order, identity, mutation, backed views,
+concurrency and lifetime. Retain canonical payload owners and checked JNI selectors. Keep
+`java.base` independent of companion modules; shared base kernels stay in their existing base
+owner, and deliberate companion exports do not open implementation packages. String remains
+the active stage of **String -> arrays -> collections -> AST/compiler -> remaining families**.
+Native platform qualification and Java fallback or explicit-unavailable behavior stay separate.
+
 ### String/precompute naming invariant
 
 Synexia names are provenance and donor names, not M3JDK ABI names. The String donor relation is `MIndexString -> M3String`. The target must preserve the donor's canonical owner/coordinate semantics while using the M3JDK name.
