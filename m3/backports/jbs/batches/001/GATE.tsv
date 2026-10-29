@@ -1,0 +1,10 @@
+gate	command	scope	result	evidence
+apply_check	git apply --cached --check (diff-tree c^ c, no renames) on master 3569c790d5c	50 upstream commits, standalone	CLEAN 50/50	CLASSIFY_22_27.tsv class CLEAN
+cherry_pick	merge-tree --write-tree --merge-base=c^ <tip> c; commit-tree, upstream author/date, -x line	50 commits oldest first on master 3569c790d5c	PICKED 50/50, CONFLICT_ON_TIP 0	PICKS.tsv
+patch_identity	sha256 of +/- lines, upstream diff vs picked diff	50 commits	SAME 50/50	gate_identity.sh
+javac_patch_module	javac 21.0.9 --release 21 --patch-module <module>=<share;windows sources> (jrt21 mode for jdk.attach, jdk.compiler, jdk.crypto.mscapi, jdk.internal.vm.ci, jdk.javadoc); other changed modules patched as sources; baseline = same files at master	248 changed .java files in 22 modules	PASS: base 11 error keys, tip 11, new 0, sentinels 0 (baseline keys: M3 String symbols in System.java, com.sun.tools.javac.m3 in JavaCompiler.java, CKey constructor in CPublicKey.java vs the 21.0.9 image)	gate_javac.sh, JAVAC_BASE_KEYS.tsv
+javac_other_platform	-	1 file under src/*/{unix,linux,macosx,aix}/classes	NOT_RUN (Windows host)	-
+jtreg	-	21 test files	NOT_RUN (no jtreg + built image on this host)	-
+hotspot_native_build	make images	no HotSpot or native file in this batch	NOT_RUN (no local HotSpot build)	-
+jdk21u_overlap	JBS id in openjdk/jdk21u-dev history	50 commits	0 overlap (all CANDIDATE, none IN_JDK21U)	BACKLOG_22_27.tsv
+csr_filter	JBS issuelinks type CSR	batch selection	CSR-linked issues excluded (e.g. JDK-8309196 Remove Thread.countStackFrames)	CSR_LANE.tsv
