@@ -185,19 +185,55 @@ def main():
             'M3ResourceLocksContract': 'M3_RESOURCE_LOCKS_PASS',
             'M3ResourceLocksTimedContract': 'M3_TIMED_RESOURCE_LOCKS_PASS',
         }
-        if {path.stem for path in test_sources} != set(contracts):
+        # Source categories are disjoint. JUnit owns its wrapper, whereas
+        # the standalone delta contracts have real main() entrypoints.
+        # The byte-compiler fixture must stay on the host JDK: a linked
+        # runtime image does not provide java.home/bin/javac.
+        image_delta_contracts = {
+            'M3FileDeltaContractSelfTest': 'M3FILE_DELTA_CONTRACT_PASS',
+        }
+        host_compiler_contracts = {
+            'M3FileDeltaSelfTest': 'M3FILE_DELTA_SELFTEST_PASS',
+        }
+        maven_junit_sources = {'M3FileDeltaTest'}
+        all_entrypoints = (set(contracts) | set(image_delta_contracts)
+                           | set(host_compiler_contracts) | maven_junit_sources)
+        if ({path.stem for path in test_sources} != all_entrypoints
+                or len(test_sources) != len(all_entrypoints)):
             raise RuntimeError('module contract inventory changed; review each executable contract')
+        test_by_stem = {path.stem: path for path in test_sources}
+        for name, marker in {**contracts, **image_delta_contracts,
+                             **host_compiler_contracts}.items():
+            if marker not in test_by_stem[name].read_text(encoding='utf-8'):
+                raise RuntimeError('missing executable module contract marker: ' + name)
+        junit_source = test_by_stem['M3FileDeltaTest'].read_text(encoding='utf-8')
+        if not all(token in junit_source for token in
+                   ('org.junit.jupiter.api.Test', 'M3FileDeltaSelfTest.main(',
+                    'M3FileDeltaContractSelfTest.main(')):
+            raise RuntimeError('Maven/JUnit delta wrapper changed; review its execution gate')
+        module_contract_sources = [path for path in test_sources
+                                   if path.stem not in maven_junit_sources]
+        receipt['contract_inventory'] = {
+            'source_count': len(test_sources),
+            'host_and_image': sorted(set(contracts) | set(image_delta_contracts)),
+            'host_javac_only': sorted(host_compiler_contracts),
+            'maven_junit_separate_gate': sorted(maven_junit_sources),
+        }
+        write_receipt()
         run('compile-module-contracts', [tool('javac'), '--release', '21', '-Xlint:all,-module', '-Werror',
                 '--module-path', module_jar, '--patch-module', 'com.m3.file=' + str(root / 'src/test/java'),
-                '-d', module_tests, *test_sources])
+                '-d', module_tests, *module_contract_sources])
         module_test_hashes = class_hashes(module_tests)
         receipt['module_contract_class_files'] = module_test_hashes
         temporary_tests = output / 'runtime-temporary'
         temporary_tests.mkdir(exist_ok=True)
 
-        def module_contracts(java, lane, module_path):
+        def module_contracts(java, lane, module_path, *, host_has_javac=False):
             outputs = {}
-            for name, marker in contracts.items():
+            candidates = {**contracts, **image_delta_contracts}
+            if host_has_javac:
+                candidates.update(host_compiler_contracts)
+            for name, marker in candidates.items():
                 command = [java, '-Djava.io.tmpdir=' + str(temporary_tests)]
                 if module_path:
                     command += ['--module-path', module_path]
@@ -209,7 +245,8 @@ def main():
                 outputs[name] = text.strip()
             return outputs
 
-        receipt['host_module_contracts'] = module_contracts(tool('java'), 'host', module_jar)
+        receipt['host_module_contracts'] = module_contracts(
+            tool('java'), 'host', module_jar, host_has_javac=True)
         write_receipt()
         image = output / 'image'
         if image.exists():
