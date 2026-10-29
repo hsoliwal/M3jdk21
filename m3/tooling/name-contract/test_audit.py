@@ -167,6 +167,17 @@ class WorkflowCoverageTest(unittest.TestCase):
         records = json.loads((root / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
         targets = {target["path"] for record in records for target in record.get("targets", [])
                    if isinstance(target, dict) and target.get("path") and target.get("symbol")}
+        for record in records:
+            relation = record.get("companion_of")
+            if relation is None:
+                continue
+            api = relation["java_api"]
+            targets.add(api["path"])
+            targets.add("src/" + api["module"] + "/share/classes/module-info.java")
+            companion = next(target for target in record["targets"]
+                             if target["symbol"] == relation["target_symbol"])
+            targets.add(companion["path"].split("com/m3/", 1)[0] + "module-info.java")
+            targets.add("m3/compatibility/check_public_names.py")
         # The workflow uses exact paths and explicit recursive owner subtrees.
         # Actual Git sparse-checkout behavior is also qualified in the recipe receipt.
         uncovered = sorted(path for path in targets

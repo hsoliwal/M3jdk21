@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
+  "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only; every Java API is eligible for an explicitly mapped additive public M3 companion",
   "mappings": [
     {
       "source": "M3JDK21 java.lang.String standard byte[] shape + canonical OS-interned M3String owner/range",
@@ -9977,6 +9977,159 @@
         },
         "source_state": "target-owned",
         "observation": "Lexical routing facts do not prove regex validity, program semantics or a native speedup."
+      },
+      {
+        "id": "m3.arrays.api-companion",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Source-inventoried existing static companion; this relationship changes no runtime source and does not qualify Arrays parity or advance the arrays phase.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/Arrays.java",
+            "symbol": "java.util.Arrays",
+            "signatures": [
+              "java.util.Arrays"
+            ],
+            "sha256": "e81e711d52fee23756fd0bf8e48c27ff0fe971419f4bb1c25ec1aa5ebc203a88",
+            "git_blob_sha1": "2347e48700de1d26f630b348554ea9db3b4db25b",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+            "symbol": "com.m3.arrays.M3Arrays",
+            "signatures": [
+              "bytes(byte[])",
+              "chars(char[])",
+              "chars(CharSequence)",
+              "ints(int[])",
+              "longs(long[])",
+              "join(M3ByteArrayView...)",
+              "join(M3Utf16ArrayView...)",
+              "join(M3IntArrayView...)",
+              "join(M3LongArrayView...)"
+            ],
+            "sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
+            "git_blob_sha1": "ffece349f5ef3f1c48191fb54a8b037f8e635d63",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+            "module": "com.m3.arrays",
+            "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+            "symbol": "com.m3.arrays.M3Arrays",
+            "signatures": [
+              "bytes(byte[])",
+              "chars(char[])",
+              "chars(CharSequence)",
+              "ints(int[])",
+              "longs(long[])",
+              "join(M3ByteArrayView...)",
+              "join(M3Utf16ArrayView...)",
+              "join(M3IntArrayView...)",
+              "join(M3LongArrayView...)"
+            ],
+            "sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
+            "git_blob_sha1": "ffece349f5ef3f1c48191fb54a8b037f8e635d63",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "com.m3.arrays.M3Arrays",
+        "identity": {
+          "namespace": "Existing com.m3.arrays module and array-view owners.",
+          "generation": "Existing immutable snapshot/view identity; no new registry or payload."
+        },
+        "contract": {
+          "differences": [
+            "M3Arrays supplies immutable byte/UTF-16/int/long view factories and composition; it is not a replacement or complete mirror of java.util.Arrays.",
+            "Mutable-array ingress is an explicit snapshot copy; slices and joins retain existing immutable owners rather than aliasing the caller's mutable array."
+          ],
+          "compatibility_obligations": [
+            "Keep java.util.Arrays and ordinary Java array identity, fixed length, component type and operations unchanged.",
+            "Preserve the existing M3Arrays null, range, overflow, snapshot and encounter-order semantics.",
+            "Keep canonical storage/JNI owners internal; companion visibility does not admit internal precompute or native pointers.",
+            "Preserve downward module dependencies; java.base does not require com.m3.arrays."
+          ],
+          "public_surface": [
+            "Existing public final com.m3.arrays.M3Arrays; existing com.m3.arrays export; no new runtime declarations."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing com.m3.arrays signatures/module export unchanged.",
+          "bootstrap": "This is a relationship inventory, not an installed-JDK packaging or bootstrap qualification."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Preserve explicit mutable-input snapshot copies already implemented by M3Arrays.",
+          "joins": "Existing immutable owner/view composition; this metadata adds no elements or storage.",
+          "outputs": "Preserve existing explicit materialization boundaries; no zero-copy caller-array claim.",
+          "cached_facts": "Existing facts remain attached to existing view owners; no new cache or parallel payload."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.Jdk21ApiCompanionsTarget20261029",
+          "version": "20261029",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/resources/META-INF/rewrite/m3jdk21-api-companions-target-20261029.yml",
+          "sha256": null,
+          "preconditions": [
+            "Exact target base 669a949d192345acefcfc5e9bb0b3724174d270c and checked source/module pins.",
+            "Source-sealed named Maven/OpenRewrite replay; fixed point and drift/missing/duplicate refusal.",
+            "Recipe/source revision and output seals are bound in the passive receiver receipt, avoiding a self-referential mapping hash."
+          ],
+          "rollback": "Revert the generated mapping/schema/checker/policy outputs as one reviewed unit; retain prior mapping records and refuse unrelated drift."
+        },
+        "tests": [
+          {
+            "id": "companion-relation-receiver",
+            "receipt": "m3/qualification/api-companions-20261029/RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Relationship metadata Apache-2.0; existing M3Arrays Apache-2.0 and Arrays OpenJDK GPLv2 with Classpath exception retain their own rights.",
+          "publication": "User explicitly permits a companion M3 class for every Java API. Source paths are references; no Arrays or donor body is copied into a new runtime class.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "669a949d192345acefcfc5e9bb0b3724174d270c",
+          "target_revision": "669a949d192345acefcfc5e9bb0b3724174d270c",
+          "direction": "traceability-only",
+          "target_adaptations": [
+            "Register the already-present M3Arrays companion without renaming or changing its module/API."
+          ],
+          "pending": [
+            "String remains the active receiving phase; arrays remains waiting for its predecessor.",
+            "Installed M3JDK module/API, full view/storage closure and native/platform admission are independent and not run by this relationship check.",
+            "No complete java.util.Arrays method coverage, runtime speedup or Android/iOS availability is claimed."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "M3Arrays and its module descriptor were read at the exact target revision; this task validates companion eligibility and mapping, not runtime implementation equivalence.",
+        "companion_of": {
+          "java_api": {
+            "module": "java.base",
+            "symbol": "java.util.Arrays",
+            "path": "src/java.base/share/classes/java/util/Arrays.java"
+          },
+          "target_symbol": "com.m3.arrays.M3Arrays",
+          "form": "STATIC_OPERATIONS"
+        }
       }
     ]
   },
@@ -10002,7 +10155,8 @@
       "The whole qualified Synexia workspace is a candidate donor universe: source, native code, recipes, generated postimages, tests, fixtures, docs, schemas, proof crates, algorithms and independently reimplemented ideas.",
       "License and NOTICE lineage follows every copied/adapted artifact; third-party material is never relicensed merely by transit through Synexia.",
       "Every admitted port updates this mapping and is materialized through a reviewed recipe crate.",
-      "Synexia success is donor evidence only; target compiler, JUnit/jtreg, JNI/native and image gates decide M3JDK21 admission."
+      "Synexia success is donor evidence only; target compiler, JUnit/jtreg, JNI/native and image gates decide M3JDK21 admission.",
+      "Every Java API may have an additive public com.m3 companion recorded by optional migration.records[].companion_of; preserve the original Java API, internal storage, module direction and independent implementation/platform admission gates."
     ],
     "canonical_document": "m3/docs/m3jdk21-porting-invariant.md",
     "receiving_sequence": {
@@ -10394,7 +10548,7 @@
     {
       "source_family": "Existing public JDK utility owners and source-qualified utility/view candidate atoms",
       "target_family": "Integrated utility families in their owning JDK modules",
-      "public_api": "Existing JDK names plus the explicit additive candidates recorded in the referenced fragment; no M3 companion public API",
+      "public_api": "Existing JDK names plus the explicit additive candidates recorded in the referenced fragment; optional additive M3 companions require explicit companion_of admission",
       "target_owners": [
         "java.util.Objects",
         "java.util.Strings",

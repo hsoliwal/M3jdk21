@@ -5,8 +5,10 @@
 **M3JDK21 is the JDK product**, not a `M3 + JDK` facade. The original
 `java.lang`, `java.util`, `java.util.concurrent`, `java.nio`, Java desktop,
 compiler and other public JDK types retain Java/JDK names and contracts.
-A selected faster implementation is admitted *inside* the original class,
-not shipped as a competing `M3HashMap`, `M3String`, or `FooV7` public type.
+A selected faster implementation is admitted *inside* the original class. Every
+standard Java API may also have an optional additive M3 companion in an explicitly
+mapped `com.m3.*` module/package. The original API and its contracts remain intact;
+internal implementation owners do not become public merely by adding this relation.
 
 ## Placement and names
 
@@ -18,9 +20,14 @@ not shipped as a competing `M3HashMap`, `M3String`, or `FooV7` public type.
   retain names needed for compatibility. Their visibility is not silently
   enlarged. Reuse these owners rather than building duplicate Entry/Node
   storage or a competing public API hierarchy.
-- **Proving-ground classes:** existing `com.m3.*` source families have their
-  own internal admission path. They do not become JDK public APIs by renaming
-  a package or copying a class. Keep experimental code and recipes in Synexia.
+- **Public M3 companions:** use existing `com.m3.*` owners for useful static
+  operations or explicitly contracted typed views. Record `companion_of` in the
+  existing `migration.records[]` authority and preserve source/module/export evidence.
+  One companion may serve multiple Java APIs; an empty class per API is not required.
+  See [the naming contract](M3JDK21_NAME_AND_PACKAGE_CONTRACT.md).
+- **Proving-ground classes:** source presence alone does not qualify a public companion
+  or a JDK backend. Installed-image/module, behavior and platform gates remain separate.
+  Keep experimental code and recipes in Synexia.
 - **Tests and CI:** descriptive JDK-style Java test names and stable,
   purpose-based workflow paths. No new date/version suffixes such as
   `-20261022`, `V7`, or `-v2`; chronological history belongs to Git commits,
