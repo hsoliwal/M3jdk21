@@ -352,13 +352,20 @@ public final class CollectionViews {
         public boolean remove(Object candidate) {
             if (!backing.contains(candidate)) return false;
             if (backing instanceof List<?>) {
-                // Remove the selected physical occurrence, not an earlier
-                // equal occurrence that was hidden by the filter.
+                // Prefer the owner's iterator mutation for the visible physical
+                // occurrence. Snapshot iterators (e.g. CopyOnWriteArrayList)
+                // require indexed removal instead.
                 List<E> list = (List<E>) backing;
+                Iterator<E> iterator = list.iterator();
                 int physical = 0;
-                for (E stored : list) {
+                while (iterator.hasNext()) {
+                    E stored = iterator.next();
                     if (Objects.equals(candidate, stored) && visible(stored)) {
-                        list.remove(physical);
+                        try {
+                            iterator.remove();
+                        } catch (UnsupportedOperationException unsupported) {
+                            list.remove(physical);
+                        }
                         return true;
                     }
                     physical++;
@@ -421,20 +428,41 @@ public final class CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
+<<<<<<< HEAD
             // Direct COW owners have snapshot iterators without remove(). Delegate the
             // selected operation to that same owner's atomic bulk mutation contract.
             // Preserve the established iterator path for every other implementation.
             if (backing.getClass() == java.util.concurrent.CopyOnWriteArrayList.class
                     || backing.getClass() == java.util.concurrent.CopyOnWriteArraySet.class) {
+=======
+            // Snapshot iterators refuse removal even for CopyOnWrite subclasses.
+            // Ask the existing owner to perform its atomic bulk mutation.
+            if (backing instanceof java.util.concurrent.CopyOnWriteArrayList<?>
+                    || backing instanceof java.util.concurrent.CopyOnWriteArraySet<?>) {
+>>>>>>> merge(collections): receive CollectionViews.java convergence output
                 return backing.removeIf(element -> visible(element) && condition.test(element));
             }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
+            int physical = 0;
             while (iterator.hasNext()) {
                 E element = iterator.next();
                 if (visible(element) && condition.test(element)) {
-                    iterator.remove();
+                    try {
+                        iterator.remove();
+                    } catch (UnsupportedOperationException unsupported) {
+                        // Some Lists permit indexed removal but not iterator removal.
+                        // Rebind the cursor after physical mutation; do not skip
+                        // equal or hidden occurrences that moved into this slot.
+                        if (!(backing instanceof List<?>)) throw unsupported;
+                        @SuppressWarnings("unchecked")
+                        List<E> list = (List<E>) backing;
+                        list.remove(physical);
+                        iterator = list.listIterator(physical);
+                    }
                     changed = true;
+                } else {
+                    physical++;
                 }
             }
             return changed;
@@ -445,6 +473,46 @@ public final class CollectionViews {
     private static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
         private FilteredSet(Set<E> source, Predicate<? super E> predicate) {
             super(source, predicate);
+        }
+
+        /**
+         * Preserve owner membership before resolving stored visibility. Identity
+         * sets may retain equals-equal references, so an exact reference wins.
+         */
+        @Override
+        public boolean contains(Object candidate) {
+            if (!backing.contains(candidate)) return false;
+            for (E stored : backing) {
+                if (stored == candidate) return predicate.test(stored);
+            }
+            return super.contains(candidate);
+        }
+
+        @Override
+        public boolean remove(Object candidate) {
+            if (!backing.contains(candidate)) return false;
+            Iterator<E> cursor = backing.iterator();
+            while (cursor.hasNext()) {
+                E stored = cursor.next();
+                if (stored == candidate) {
+                    if (!predicate.test(stored)) return false;
+                    try {
+                        cursor.remove();
+                        return true;
+                    } catch (UnsupportedOperationException unsupported) {
+                        // Preserve the existing Set owner fallback, including
+                        // CopyOnWriteArraySet's read-only traversal cursors.
+                        return backing.remove(stored);
+                    }
+                }
+            }
+            return super.remove(candidate);
+        }
+
+        @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(backing.spliterator(), predicate,
+                    Spliterator.DISTINCT, null);
         }
 
         @Override
@@ -521,6 +589,14 @@ public final class CollectionViews {
         @Override
         public Comparator<? super E> comparator() {
             return sorted.comparator();
+        }
+
+        /** Owner order is authoritative, including bounded and descending views. */
+        @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(sorted.spliterator(), super.predicate,
+                    Spliterator.DISTINCT | Spliterator.SORTED | Spliterator.ORDERED,
+                    sorted.comparator());
         }
 
         @Override
@@ -746,8 +822,12 @@ public final class CollectionViews {
         @Override
         public Spliterator<E> trySplit() {
             Spliterator<E> prefix = source.trySplit();
+<<<<<<< HEAD
             return prefix == null ? null
                     : new SelectionSpliterator<>(prefix, predicate, guaranteed, ownerComparator);
+=======
+            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate, guaranteed, ownerComparator);
+>>>>>>> merge(collections): receive CollectionViews.java convergence output
         }
 
         @Override
@@ -757,8 +837,12 @@ public final class CollectionViews {
 
         @Override
         public int characteristics() {
+<<<<<<< HEAD
             return (source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE))
                     | guaranteed;
+=======
+            return (source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE)) | guaranteed;
+>>>>>>> merge(collections): receive CollectionViews.java convergence output
         }
 
         @Override
