@@ -61,6 +61,57 @@ static int m3_compare_slots(JNIEnv *env, jobjectArray strings,
     return ok;
 }
 
+/* A compact manufactured lexical signal: the first eight UTF-16 units plus
+ * the full length. Most comparisons never re-enter JNI to examine text. */
+typedef struct {
+    uint64_t high;
+    uint64_t low;
+    jsize length;
+} M3Prefix;
+
+static int m3_prefixes(JNIEnv *env, jobjectArray strings, M3Prefix *keys, size_t n) {
+    for (size_t i = 0; i < n; i++) {
+        jstring text = (jstring)(*env)->GetObjectArrayElement(env, strings, (jsize)i);
+        if ((*env)->ExceptionCheck(env)) return 0;
+        if (text == NULL) {
+            m3_throw(env, "java/lang/NullPointerException", "null text line");
+            return 0;
+        }
+        jsize length = (*env)->GetStringLength(env, text);
+        if ((*env)->ExceptionCheck(env)) { (*env)->DeleteLocalRef(env, text); return 0; }
+        jchar region[8] = {0};
+        jsize take = length < 8 ? length : 8;
+        if (take != 0) (*env)->GetStringRegion(env, text, 0, take, region);
+        (*env)->DeleteLocalRef(env, text);
+        if ((*env)->ExceptionCheck(env)) return 0;
+        uint64_t high = 0, low = 0;
+        for (int j = 0; j < 4; j++) high = (high << 16) | region[j];
+        for (int j = 4; j < 8; j++) low = (low << 16) | region[j];
+        keys[i].high = high;
+        keys[i].low = low;
+        keys[i].length = length;
+    }
+    return 1;
+}
+
+static int m3_key_compare(JNIEnv *env, jobjectArray strings,
+                          M3Prefix *keys, jint a, jint b, int *out) {
+    if (keys[a].high != keys[b].high) {
+        *out = keys[a].high < keys[b].high ? -1 : 1;
+        return 1;
+    }
+    if (keys[a].low != keys[b].low) {
+        *out = keys[a].low < keys[b].low ? -1 : 1;
+        return 1;
+    }
+    if (keys[a].length <= 8 || keys[b].length <= 8) {
+        *out = keys[a].length < keys[b].length ? -1 :
+               keys[a].length > keys[b].length ? 1 : 0;
+        return 1;
+    }
+    return m3_compare_slots(env, strings, a, b, out);
+}
+
 /* Stable bottom-up mergesort of offsets. No Java payloads are copied or interned. */
 JNIEXPORT void JNICALL Java_jdk_m3_text_NativeLineOps_sort0
   (JNIEnv *env, jclass owner, jobjectArray strings, jintArray result, jboolean reverse) {
@@ -76,15 +127,20 @@ JNIEXPORT void JNICALL Java_jdk_m3_text_NativeLineOps_sort0
     }
     size_t n = (size_t)length;
     if (n == 0) return;
-    if (n > SIZE_MAX / sizeof(jint)) {
+    if (n > SIZE_MAX / sizeof(jint) || n > SIZE_MAX / sizeof(M3Prefix)) {
         m3_throw(env, "java/lang/OutOfMemoryError", "sort index allocation overflow");
         return;
     }
     jint *order = (jint *)malloc(n * sizeof(jint));
     jint *scratch = (jint *)malloc(n * sizeof(jint));
-    if (order == NULL || scratch == NULL) {
-        free(order); free(scratch);
+    M3Prefix *keys = (M3Prefix *)malloc(n * sizeof(M3Prefix));
+    if (order == NULL || scratch == NULL || keys == NULL) {
+        free(order); free(scratch); free(keys);
         m3_throw(env, "java/lang/OutOfMemoryError", "native sort index allocation");
+        return;
+    }
+    if (!m3_prefixes(env, strings, keys, n)) {
+        free(order); free(scratch); free(keys);
         return;
     }
     for (size_t i = 0; i < n; i++) order[i] = (jint)i;
@@ -95,8 +151,8 @@ JNIEXPORT void JNICALL Java_jdk_m3_text_NativeLineOps_sort0
             size_t i = first, j = middle, k = first;
             while (i < middle && j < last) {
                 int comparison;
-                if (!m3_compare_slots(env, strings, order[i], order[j], &comparison)) {
-                    free(order); free(scratch);
+                if (!m3_key_compare(env, strings, keys, order[i], order[j], &comparison)) {
+                    free(order); free(scratch); free(keys);
                     return;
                 }
                 if (reverse == JNI_TRUE) comparison = -comparison;
@@ -111,7 +167,7 @@ JNIEXPORT void JNICALL Java_jdk_m3_text_NativeLineOps_sort0
         width *= 2;
     }
     (*env)->SetIntArrayRegion(env, result, 0, length, order);
-    free(order); free(scratch);
+    free(order); free(scratch); free(keys);
 }
 
 /* One bit per retained line; adjacent equality only (not global deduplication). */
