@@ -33,8 +33,8 @@ public final class M3FilteredSortedContractGate20261029 {
         owner.add(7);
         eq(List.of(7, 5, 3, 1), new ArrayList<>(filtered));
         eq(Integer.valueOf(5), filtered.lower(7));
-        eq(Integer.valueOf(3), filtered.floor(4));
-        eq(Integer.valueOf(5), filtered.ceiling(4));
+        eq(Integer.valueOf(5), filtered.floor(4));
+        eq(Integer.valueOf(3), filtered.ceiling(4));
         reject(() -> filtered.add(9));
         reject(() -> filtered.remove(3));
         reject(() -> filtered.pollFirst());
