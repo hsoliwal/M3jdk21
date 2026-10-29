@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Long index gather Java and JNI contracts
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
+      - 'm3/collections/src/main/native/collections/m3_long_address_kernel.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongAddressKernelPreflightContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongAddressKernelTest.java'
+      - '.github/workflows/long-index-gather-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-c17-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact source, expected old failure, API identity, JNI parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-gather"
+          mkdir -p "$out/old-src/com/m3/collections" "$out/old-classes" "$out/classes" "$out/native"
+          owner=m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java
+          mask=m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+          test=m3/collections/src/test/java/com/m3/collections/M3LongAddressKernelPreflightContract.java
+          csrc=m3/collections/src/main/native/collections/m3_long_address_kernel.c
+          echo 'f8df2c473725cc41920ee21f37242b2376b16fbd74483b5d052cf5a949aedf10' " $owner" | sha256sum -c
+          echo 'c038d19b9566200a16dba6e62727f0c7492b40eca843ef1869e97c9958e7d6a2' " $test" | sha256sum -c
+          echo '3922adc4aee464fdfedff2fcea15b8017258814d31c241eb7b6b196576373753' ' m3/collections/src/test/java/com/m3/collections/M3LongAddressKernelTest.java' | sha256sum -c
+          test "$(git hash-object "$csrc")" = '58853890a9043f8f4284544a8f7caca9ce8218cb'
+          git show '3569c790d5cc3f9bc871ab0ecd025dab0fd5cafc':"$owner" > "$out/old-src/com/m3/collections/M3LongAddressKernel.java"
+          test "$(git hash-object "$out/old-src/com/m3/collections/M3LongAddressKernel.java")" = '9ac6c5a1e121affd28e6503d922927f6c91c3a66'
+          javac --release 21 -Xlint:all -Werror -d "$out/old-classes" "$mask" "$out/old-src/com/m3/collections/M3LongAddressKernel.java" "$test"
+          javac --release 21 -Xlint:all -Werror -d "$out/classes" "$mask" "$owner" "$test"
+          javap -public -s -classpath "$out/old-classes" com.m3.collections.M3LongAddressKernel > "$out/api-before.txt"
+          javap -public -s -classpath "$out/classes" com.m3.collections.M3LongAddressKernel > "$out/api-after.txt"
+          diff -u "$out/api-before.txt" "$out/api-after.txt"
+          if java -Xmx128m -cp "$out/old-classes" com.m3.collections.M3LongAddressKernelPreflightContract > "$out/old-red.log" 2>&1; then
+            echo 'Original invalid allocation did not reproduce' >&2
+            exit 1
+          fi
+          grep -Fq 'OutOfMemoryError: Requested array size exceeds VM limit' "$out/old-red.log"
+          gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared \
+            -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" "$csrc" \
+            -o "$out/native/libm3_collections_address.so"
+          nm -D --defined-only "$out/native/libm3_collections_address.so" | grep -q 'Java_com_m3_collections_M3LongAddressKernel_gatherNative'
+          for mode in default interpreter c1 c2; do
+            flags=()
+            case "$mode" in
+              interpreter) flags=(-Xint) ;;
+              c1) flags=(-XX:TieredStopAtLevel=1) ;;
+              c2) flags=(-XX:-TieredCompilation -Xbatch) ;;
+            esac
+            java_output=$(java -Xmx256m "${flags[@]}" -Djava.library.path="$out/unavailable" \
+              -cp "$out/classes" com.m3.collections.M3LongAddressKernelPreflightContract)
+            test "$java_output" = 'M3LongAddressKernelPreflightContract PASS checks=847364 native=false'
+            printf '%s java=%s\n' "$mode" "$java_output"
+            native_output=$(java -Xmx256m -Xcheck:jni "${flags[@]}" -Djava.library.path="$out/native" \
+              -cp "$out/classes" com.m3.collections.M3LongAddressKernelPreflightContract)
+            test "$native_output" = 'M3LongAddressKernelPreflightContract PASS checks=847396 native=true'
+            printf '%s JNI=%s\n' "$mode" "$native_output"
+          done
+          echo 'M3_LONG_ADDRESS_GATHER_JAVA21_C17_JNI_PASS source=exact jvm_modes=4'
