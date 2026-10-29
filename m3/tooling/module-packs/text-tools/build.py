@@ -49,6 +49,8 @@ def main():
             "-Werror", "--module-source-path", sources, "-d", classes, *sorted(sources.rglob("*.java")))
     command(output / "native.log", os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra", "-Werror",
             "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
+            # m3textio.c reuses the shared m3/native/include/m3_jni_core.h window/exception atoms.
+            "-I" + str(Path(__file__).resolve().parents[3] / "native/include"),
             "-o", native / "libm3textio.so", native_source)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
     for module in ("jdk.m3.text", "jdk.m3.io", "jdk.m3.structured"):
