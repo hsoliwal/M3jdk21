@@ -13,6 +13,8 @@ set -u
 export MSYS_NO_PATHCONV=1
 JDK=$(cygpath -m "$1" 2>/dev/null || echo "$1")
 OUT=$(cygpath -m "$2" 2>/dev/null || echo "$2")
+# JDK tool paths use the platform path-list separator, including MSYS/Cygwin.
+SEP=';'; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) ;; *) SEP=':';; esac
 EXPORT=java.base/jdk.internal.access=jdk.m3.text
 mkdir "$OUT" || { echo "output dir must be fresh: $OUT"; exit 2; }
 GATES="$OUT/GATES.tsv"
@@ -73,7 +75,7 @@ gate E4_run_with_export 0 'PROBE_OK countPositives=2' "$J/java" --add-exports "$
     --module-path "$OUT/mods" -m jdk.m3.text/jdk.m3.text.Probe
 # jlink rejects a plugin value that starts with "--" ("no value given for --add-options"); the
 # leading space keeps the same VM option string.
-gate E5_jlink_add_options 0 - "$J/jlink" --module-path "$JDK/jmods;$OUT/mods" \
+gate E5_jlink_add_options 0 - "$J/jlink" --module-path "$JDK/jmods$SEP$OUT/mods" \
     --add-modules jdk.m3.text --add-options " --add-exports=$EXPORT" --output "$OUT/image" \
     --no-header-files --no-man-pages --strip-debug
 gate E6_image_run_baked_export 0 'PROBE_OK countPositives=2' "$OUT/image/bin/java" \
@@ -91,7 +93,7 @@ printf 'package probe.base.internal;\n\npublic final class Hidden {\n    private
     > "$OUT/q/probe.base/probe/base/internal/Hidden.java"
 gate E10_qualified_export_javac 0 - "$J/javac" "$PACK_LINT" -Werror --module-source-path "$OUT/q" \
     -d "$OUT/qmods" --module probe.base
-gate E11_jlink_target_absent 0 - "$J/jlink" --module-path "$JDK/jmods;$OUT/qmods" \
+gate E11_jlink_target_absent 0 - "$J/jlink" --module-path "$JDK/jmods$SEP$OUT/qmods" \
     --add-modules probe.base --output "$OUT/qimage" --no-header-files --no-man-pages --strip-debug
 gate E12_validate_target_absent 0 - "$OUT/qimage/bin/java" --validate-modules
 gate E13_describe_target_absent 0 'qualified exports probe\.base\.internal to jdk\.m3\.text' \
@@ -99,4 +101,31 @@ gate E13_describe_target_absent 0 'qualified exports probe\.base\.internal to jd
 rm -rf "$OUT/qimage"
 grep -h -E 'PROBE_OK|IllegalAccess|not visible|does not export|UNNAMED_REACHED|qualified exports' \
     "$OUT"/E*.log | sort -u
-cat "$GATES"
+# Report success only for the complete, uniquely named set of passing gates.
+# Expected-failure commands remain successful gates only when their exit and ERE match.
+verify_gate_results() {
+    local expected="E0_module_name_lint E1_javac_without_export E2_javac_with_export E3_run_without_export E4_run_with_export E5_jlink_add_options E6_image_run_baked_export E7_image_validate_modules E8_unnamed_javac E9_image_unnamed_denied E10_qualified_export_javac E11_jlink_target_absent E12_validate_target_absent E13_describe_target_absent"
+    cat "$GATES" || return 1
+    awk -F '\t' -v expected="$expected" '
+        BEGIN {
+            count = split(expected, names, " ")
+            for (i = 1; i <= count; i++) required[names[i]] = 1
+        }
+        NR == 1 {
+            if ($0 != "gate\texpect\tpattern\trc\tverdict\tlog") bad = 1
+            next
+        }
+        {
+            if (NF != 6 || !($1 in required) || seen[$1]++ || $5 != "PASS") bad = 1
+        }
+        END {
+            for (name in required) if (seen[name] != 1) bad = 1
+            if (bad || NR != count + 1) {
+                print "M3_LEAF_EXPORT_FAILED incomplete, duplicate or non-PASS gates" > "/dev/stderr"
+                exit 1
+            }
+            print "M3_LEAF_EXPORT_PASS gates=" count
+        }
+    ' "$GATES"
+}
+verify_gate_results
