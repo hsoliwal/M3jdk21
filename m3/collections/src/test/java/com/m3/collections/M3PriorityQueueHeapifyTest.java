@@ -54,16 +54,20 @@ final class M3PriorityQueueHeapifyTest {
             assertArrayEquals(incrementalInts.toSortedArray(), bulkInts.toSortedArray());
             assertArrayEquals(incrementalLongs.toSortedArray(), bulkLongs.toSortedArray());
             for (int i = 0; i < length; i++) {
-                assertEquals(jdkInts.remove().intValue(), bulkInts.removeFirstInt());
-                assertEquals(jdkLongs.remove().longValue(), bulkLongs.removeFirstLong());
+                int expectedInt = jdkInts.remove();
+                long expectedLong = jdkLongs.remove();
+                assertEquals(expectedInt, bulkInts.removeFirstInt());
+                assertEquals(expectedLong, bulkLongs.removeFirstLong());
+                assertEquals(expectedInt, incrementalInts.removeFirstInt());
+                assertEquals(expectedLong, incrementalLongs.removeFirstLong());
                 assertEquals(jdkInts.isEmpty(), bulkInts.isEmpty());
                 assertEquals(jdkLongs.isEmpty(), bulkLongs.isEmpty());
-                assertEquals(bulkInts.isEmpty() ? 0 : bulkInts.firstInt(),
-                        incrementalInts.isEmpty() ? 0 : incrementalInts.firstInt());
-                assertEquals(bulkLongs.isEmpty() ? 0L : bulkLongs.firstLong(),
-                        incrementalLongs.isEmpty() ? 0L : incrementalLongs.firstLong());
-                if (!incrementalInts.isEmpty()) incrementalInts.removeFirstInt();
-                if (!incrementalLongs.isEmpty()) incrementalLongs.removeFirstLong();
+                if (!jdkInts.isEmpty()) {
+                    assertEquals(jdkInts.peek().intValue(), bulkInts.firstInt());
+                }
+                if (!jdkLongs.isEmpty()) {
+                    assertEquals(jdkLongs.peek().longValue(), bulkLongs.firstLong());
+                }
             }
             assertTrue(bulkInts.isEmpty());
             assertTrue(bulkLongs.isEmpty());
@@ -92,9 +96,9 @@ final class M3PriorityQueueHeapifyTest {
         qi.offer(-4000);
         ql.offer(-4000);
         assertEquals(-4000, qi.removeFirstInt());
-        assertEquals(-4000L, ql.removeFirstLong());
+        assertEquals(Long.MIN_VALUE, ql.removeFirstLong());
         assertArrayEquals(new int[] {-1, -1, 0, 9, Integer.MAX_VALUE}, qi.toSortedArray());
-        assertArrayEquals(new long[] {Long.MIN_VALUE, -1, -1, 0, 9}, ql.toSortedArray());
+        assertArrayEquals(new long[] {-4000, -1, -1, 0, 9}, ql.toSortedArray());
     }
 
     @Test void nullAndEmptyConstructionAreDefined() {
