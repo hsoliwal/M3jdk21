@@ -35,6 +35,7 @@ import java.util.Locale;
 
 import sun.security.pkcs.NamedPKCS8Key;
 import sun.security.rsa.RSAUtil;
+import sun.security.util.KeyUtil;
 import jdk.internal.access.SharedSecrets;
 import sun.security.x509.AlgorithmId;
 
@@ -198,7 +199,7 @@ public class SignatureUtil {
         static {
             try {
                 sha512 = new AlgorithmId(ObjectIdentifier.of(KnownOIDs.SHA_512));
-                shake256 = new AlgorithmId(ObjectIdentifier.of(KnownOIDs.SHAKE256));
+                shake256 = new AlgorithmId(ObjectIdentifier.of(KnownOIDs.SHAKE256_512));
                 shake256$512 = new AlgorithmId(
                         ObjectIdentifier.of(KnownOIDs.SHAKE256_LEN),
                         new DerValue((byte) 2, new byte[]{2, 0})); // int 512
@@ -387,11 +388,8 @@ public class SignatureUtil {
     public static AlgorithmId fromSignature(Signature sigEngine, PrivateKey key)
             throws SignatureException {
         try {
-            if (key instanceof NamedPKCS8Key n8k) {
-                return AlgorithmId.get(n8k.getParams().getName());
-            }
-            if (key instanceof EdECKey) {
-                return AlgorithmId.get(((EdECKey) key).getParams().getName());
+            if (KeyUtil.getParams(key) instanceof NamedParameterSpec nps) {
+                return AlgorithmId.get(nps.getName());
             }
 
             AlgorithmParameters params = null;
@@ -503,7 +501,7 @@ public class SignatureUtil {
                     ? ((EdECPrivateKey) k).getParams().getName()
                     : kAlg;
             case "RSASSA-PSS", "ED25519", "ED448" -> kAlg;
-            default -> kAlg.contains("KEM") ? null : kAlg;
+            default -> null;
         };
     }
 

@@ -42,6 +42,7 @@
 #include "compiler/oopMap.inline.hpp"
 #include "gc/shared/barrierSet.hpp"
 #include "gc/shared/barrierSetNMethod.hpp"
+#include "gc/shared/classUnloadingContext.hpp"
 #include "gc/shared/collectedHeap.hpp"
 #include "interpreter/bytecode.hpp"
 #include "jvm.h"
@@ -394,6 +395,7 @@ PcDesc* PcDescCache::find_pc_desc(int pc_offset, bool approximate) {
 }
 
 void PcDescCache::add_pc_desc(PcDesc* pc_desc) {
+  MACOS_AARCH64_ONLY(ThreadWXEnable wx(WXWrite, Thread::current());)
   NOT_PRODUCT(++pc_nmethod_stats.pc_desc_adds);
   // Update the LRU cache by shifting pc_desc forward.
   for (int i = 0; i < cache_size; i++)  {
@@ -638,7 +640,7 @@ nmethod::nmethod(
   ByteSize basic_lock_sp_offset,
   OopMapSet* oop_maps )
   : CompiledMethod(method, "native nmethod", type, nmethod_size, sizeof(nmethod), code_buffer, offsets->value(CodeOffsets::Frame_Complete), frame_size, oop_maps, false, true),
-  _unlinked_next(nullptr),
+  _is_unlinked(false),
   _native_receiver_sp_offset(basic_lock_owner_sp_offset),
   _native_basic_lock_sp_offset(basic_lock_sp_offset),
   _is_unloading_state(0)
@@ -654,6 +656,7 @@ nmethod::nmethod(
     init_defaults();
     _comp_level              = CompLevel_none;
     _entry_bci               = InvocationEntryBci;
+    _num_stack_arg_slots     = _method->constMethod()->num_stack_arg_slots();
     // We have no exception handler or deopt handler make the
     // values something that will never match a pc like the nmethod vtable entry
     _exception_offset        = 0;
@@ -782,7 +785,7 @@ nmethod::nmethod(
 #endif
   )
   : CompiledMethod(method, "nmethod", type, nmethod_size, sizeof(nmethod), code_buffer, offsets->value(CodeOffsets::Frame_Complete), frame_size, oop_maps, false, true),
-  _unlinked_next(nullptr),
+  _is_unlinked(false),
   _native_receiver_sp_offset(in_ByteSize(-1)),
   _native_basic_lock_sp_offset(in_ByteSize(-1)),
   _is_unloading_state(0)
@@ -797,6 +800,7 @@ nmethod::nmethod(
 
     init_defaults();
     _entry_bci               = entry_bci;
+    _num_stack_arg_slots     = entry_bci != InvocationEntryBci ? 0 : _method->constMethod()->num_stack_arg_slots();
     _compile_id              = compile_id;
     _comp_level              = comp_level;
     _orig_pc_offset          = orig_pc_offset;
@@ -1385,7 +1389,7 @@ bool nmethod::make_not_entrant() {
   } // leave critical region under CompiledMethod_lock
 
 #if INCLUDE_JVMCI
-  // Invalidate can't occur while holding the Patching lock
+  // Invalidate can't occur while holding the NMethodState_lock
   JVMCINMethodData* nmethod_data = jvmci_nmethod_data();
   if (nmethod_data != nullptr) {
     nmethod_data->invalidate_nmethod_mirror(this);
@@ -1405,7 +1409,7 @@ bool nmethod::make_not_entrant() {
 
 // For concurrent GCs, there must be a handshake between unlink and flush
 void nmethod::unlink() {
-  if (_unlinked_next != nullptr) {
+  if (_is_unlinked) {
     // Already unlinked. It can be invoked twice because concurrent code cache
     // unloading might need to restart when inline cache cleaning fails due to
     // running out of ICStubs, which can only be refilled at safepoints
@@ -1439,14 +1443,16 @@ void nmethod::unlink() {
   // Register for flushing when it is safe. For concurrent class unloading,
   // that would be after the unloading handshake, and for STW class unloading
   // that would be when getting back to the VM thread.
-  CodeCache::register_unlinked(this);
+  ClassUnloadingContext::context()->register_unlinked_nmethod(this);
 }
 
-void nmethod::flush() {
+void nmethod::purge(bool free_code_cache_data, bool unregister_nmethod) {
+  assert(!free_code_cache_data, "must only call not freeing code cache data");
+
   MutexLocker ml(CodeCache_lock, Mutex::_no_safepoint_check_flag);
 
   // completely deallocate this method
-  Events::log(Thread::current(), "flushing nmethod " INTPTR_FORMAT, p2i(this));
+  Events::log_nmethod_flush(Thread::current(), "flushing %s nmethod " INTPTR_FORMAT, is_osr_method() ? "osr" : "", p2i(this));
   log_debug(codecache)("*flushing %s nmethod %3d/" INTPTR_FORMAT ". Live blobs:" UINT32_FORMAT
                        "/Free CodeCache:" SIZE_FORMAT "Kb",
                        is_osr_method() ? "osr" : "",_compile_id, p2i(this), CodeCache::blob_count(),
@@ -1462,11 +1468,13 @@ void nmethod::flush() {
     ec = next;
   }
 
-  Universe::heap()->unregister_nmethod(this);
+  if (unregister_nmethod) {
+    Universe::heap()->unregister_nmethod(this);
+  }
+
   CodeCache::unregister_old_nmethod(this);
 
-  CodeBlob::flush();
-  CodeCache::free(this);
+  CodeBlob::purge(free_code_cache_data, unregister_nmethod);
 }
 
 oop nmethod::oop_at(int index) const {
@@ -1699,7 +1707,7 @@ public:
 };
 
 bool nmethod::is_unloading() {
-  uint8_t state = RawAccess<MO_RELAXED>::load(&_is_unloading_state);
+  uint8_t state = Atomic::load(&_is_unloading_state);
   bool state_is_unloading = IsUnloadingState::is_unloading(state);
   if (state_is_unloading) {
     return true;
@@ -1735,7 +1743,7 @@ bool nmethod::is_unloading() {
 
 void nmethod::clear_unloading_state() {
   uint8_t state = IsUnloadingState::create(false, CodeCache::unloading_cycle());
-  RawAccess<MO_RELAXED>::store(&_is_unloading_state, state);
+  Atomic::store(&_is_unloading_state, state);
 }
 
 
@@ -2751,9 +2759,6 @@ void nmethod::decode2(outputStream* ost) const {
                                                                   AbstractDisassembler::show_block_comment());
 #endif
 
-  // Decoding an nmethod can write to a PcDescCache (see PcDescCache::add_pc_desc)
-  MACOS_AARCH64_ONLY(ThreadWXEnable wx(WXWrite, Thread::current());)
-
   st->cr();
   this->print(st);
   st->cr();
@@ -3061,7 +3066,7 @@ void nmethod::print_nmethod_labels(outputStream* stream, address block_begin, bo
         assert(sig_index == sizeargs, "");
       }
       const char* spname = "sp"; // make arch-specific?
-      intptr_t out_preserve = SharedRuntime::java_calling_convention(sig_bt, regs, sizeargs);
+      SharedRuntime::java_calling_convention(sig_bt, regs, sizeargs);
       int stack_slot_offset = this->frame_size() * wordSize;
       int tab1 = 14, tab2 = 24;
       int sig_index = 0;
@@ -3379,6 +3384,46 @@ void nmethod::print_value_on(outputStream* st) const {
   print_on(st, nullptr);
 }
 #endif
+
+void nmethod::print_code_snippet(outputStream* st, address addr) const {
+  if (entry_point() <= addr && addr < code_end()) {
+    // Pointing into the nmethod's code. Try to disassemble some instructions around addr.
+    // Determine conservative start and end points.
+    address start;
+    if (frame_complete_offset() != CodeOffsets::frame_never_safe &&
+        addr >= code_begin() + frame_complete_offset()) {
+      start = code_begin() + frame_complete_offset();
+    } else {
+      start = (addr < verified_entry_point()) ? entry_point() : verified_entry_point();
+    }
+    address start_for_hex_dump = start; // We can choose a different starting point for hex dump, below.
+    address end = code_end();
+
+    // Try using relocations to find closer instruction start and end points.
+    // (Some platforms have variable length instructions and can only
+    // disassemble correctly at instruction start addresses.)
+    RelocIterator iter((nmethod*)this, start);
+    while (iter.next() && iter.addr() < addr) { // find relocation before addr
+      // Note: There's a relocation which doesn't point to an instruction start:
+      // ZBarrierRelocationFormatStoreGoodAfterMov with ZGC on x86_64
+      // We could detect and skip it, but hex dump is still usable when
+      // disassembler produces garbage in such a very rare case.
+      start = iter.addr();
+      // We want at least 64 Bytes ahead in hex dump.
+      if (iter.addr() <= (addr - 64)) start_for_hex_dump = iter.addr();
+    }
+    if (iter.has_current()) {
+      if (iter.addr() == addr) iter.next(); // find relocation after addr
+      if (iter.has_current()) end = iter.addr();
+    }
+
+    // Always print hex. Disassembler may still have problems when hitting an incorrect instruction start.
+    os::print_hex_dump(st, start_for_hex_dump, end, 1, /* print_ascii=*/false);
+    if (!Disassembler::is_abstract()) {
+      Disassembler::decode(start, end, st);
+    }
+  }
+}
 
 #ifndef PRODUCT
 

@@ -1124,6 +1124,7 @@ void VM_Version::get_processor_features() {
     FLAG_SET_DEFAULT(UseGHASHIntrinsics, false);
   }
 
+#ifdef _LP64
   // ChaCha20 Intrinsics
   // As long as the system supports AVX as a baseline we can do a
   // SIMD-enabled block function.  StubGenerator makes the determination
@@ -1138,6 +1139,41 @@ void VM_Version::get_processor_features() {
           warning("ChaCha20 intrinsic requires AVX instructions");
       }
       FLAG_SET_DEFAULT(UseChaCha20Intrinsics, false);
+  }
+#else
+  // No support currently for ChaCha20 intrinsics on 32-bit platforms
+  if (UseChaCha20Intrinsics) {
+      warning("ChaCha20 intrinsics are not available on this CPU.");
+      FLAG_SET_DEFAULT(UseChaCha20Intrinsics, false);
+  }
+#endif // _LP64
+
+  // Kyber Intrinsics
+  // Currently we only have them for AVX512
+#ifdef _LP64
+  if (supports_evex() && supports_avx512bw()) {
+      if (FLAG_IS_DEFAULT(UseKyberIntrinsics)) {
+          UseKyberIntrinsics = true;
+      }
+  } else
+#endif
+  if (UseKyberIntrinsics) {
+     warning("Intrinsics for ML-KEM are not available on this CPU.");
+     FLAG_SET_DEFAULT(UseKyberIntrinsics, false);
+  }
+
+  // Dilithium Intrinsics
+  // Currently we only have them for AVX512
+#ifdef _LP64
+  if (supports_evex() && supports_avx512bw()) {
+      if (FLAG_IS_DEFAULT(UseDilithiumIntrinsics)) {
+          UseDilithiumIntrinsics = true;
+      }
+  } else
+#endif
+   if (UseDilithiumIntrinsics) {
+      warning("Intrinsics for ML-DSA are not available on this CPU.");
+      FLAG_SET_DEFAULT(UseDilithiumIntrinsics, false);
   }
 
   // Base64 Intrinsics (Check the condition for which the intrinsic will be active)
@@ -1204,9 +1240,16 @@ void VM_Version::get_processor_features() {
     FLAG_SET_DEFAULT(UseSHA512Intrinsics, false);
   }
 
-  if (UseSHA3Intrinsics) {
-    warning("Intrinsics for SHA3-224, SHA3-256, SHA3-384 and SHA3-512 crypto hash functions not available on this CPU.");
-    FLAG_SET_DEFAULT(UseSHA3Intrinsics, false);
+#ifdef _LP64
+  if (supports_evex() && supports_avx512bw()) {
+      if (FLAG_IS_DEFAULT(UseSHA3Intrinsics)) {
+          UseSHA3Intrinsics = true;
+      }
+  } else
+#endif
+   if (UseSHA3Intrinsics) {
+      warning("Intrinsics for SHA3-224, SHA3-256, SHA3-384 and SHA3-512 crypto hash functions not available on this CPU.");
+      FLAG_SET_DEFAULT(UseSHA3Intrinsics, false);
   }
 
   if (!(UseSHA1Intrinsics || UseSHA256Intrinsics || UseSHA512Intrinsics)) {
@@ -3137,8 +3180,8 @@ uint VM_Version::threads_per_core() {
   return (result == 0 ? 1 : result);
 }
 
-intx VM_Version::L1_line_size() {
-  intx result = 0;
+uint VM_Version::L1_line_size() {
+  uint result = 0;
   if (is_intel()) {
     result = (_cpuid_info.dcp_cpuid4_ebx.bits.L1_line_size + 1);
   } else if (is_amd_family()) {

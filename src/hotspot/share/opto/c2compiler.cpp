@@ -113,6 +113,7 @@ void C2Compiler::compile_method(ciEnv* env, ciMethod* target, int entry_bci, boo
   bool do_locks_coarsening = EliminateLocks;
 
   while (!env->failing()) {
+    ResourceMark rm;
     // Attempt to compile while subsuming loads into machine instructions.
     Options options(subsume_loads, do_escape_analysis, do_iterative_escape_analysis, eliminate_boxing, do_locks_coarsening, install_code);
     Compile C(env, target, entry_bci, options, directive);
@@ -705,7 +706,7 @@ bool C2Compiler::is_intrinsic_supported(const methodHandle& method) {
   case vmIntrinsics::_doubleToRawLongBits:
   case vmIntrinsics::_doubleToLongBits:
   case vmIntrinsics::_longBitsToDouble:
-  case vmIntrinsics::_Reference_get:
+  case vmIntrinsics::_Reference_get0:
   case vmIntrinsics::_Reference_refersTo0:
   case vmIntrinsics::_PhantomReference_refersTo0:
   case vmIntrinsics::_Class_cast:
@@ -722,6 +723,7 @@ bool C2Compiler::is_intrinsic_supported(const methodHandle& method) {
   case vmIntrinsics::_sha2_implCompress:
   case vmIntrinsics::_sha5_implCompress:
   case vmIntrinsics::_sha3_implCompress:
+  case vmIntrinsics::_double_keccak:
   case vmIntrinsics::_digestBase_implCompressMB:
   case vmIntrinsics::_multiplyToLen:
   case vmIntrinsics::_squareToLen:
@@ -733,6 +735,18 @@ bool C2Compiler::is_intrinsic_supported(const methodHandle& method) {
   case vmIntrinsics::_vectorizedMismatch:
   case vmIntrinsics::_ghash_processBlocks:
   case vmIntrinsics::_chacha20Block:
+  case vmIntrinsics::_kyberNtt:
+  case vmIntrinsics::_kyberInverseNtt:
+  case vmIntrinsics::_kyberNttMult:
+  case vmIntrinsics::_kyberAddPoly_2:
+  case vmIntrinsics::_kyberAddPoly_3:
+  case vmIntrinsics::_kyber12To16:
+  case vmIntrinsics::_kyberBarrettReduce:
+  case vmIntrinsics::_dilithiumAlmostNtt:
+  case vmIntrinsics::_dilithiumAlmostInverseNtt:
+  case vmIntrinsics::_dilithiumNttMult:
+  case vmIntrinsics::_dilithiumMontMulByConstant:
+  case vmIntrinsics::_dilithiumDecomposePoly:
   case vmIntrinsics::_base64_encodeBlock:
   case vmIntrinsics::_base64_decodeBlock:
   case vmIntrinsics::_poly1305_processBlocks:

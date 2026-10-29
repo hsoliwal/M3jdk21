@@ -112,7 +112,9 @@ NO_TRANSITION_END
 NO_TRANSITION(void, jfr_set_enabled(JNIEnv* env, jobject jvm, jlong event_type_id, jboolean enabled))
   JfrEventSetting::set_enabled(event_type_id, JNI_TRUE == enabled);
   if (EventOldObjectSample::eventId == event_type_id) {
-    ThreadInVMfromNative transition(JavaThread::thread_from_jni_environment(env));
+    JavaThread* thread = JavaThread::thread_from_jni_environment(env);
+    MACOS_AARCH64_ONLY(ThreadWXEnable __wx(WXWrite, thread));
+    ThreadInVMfromNative transition(thread);
     if (JNI_TRUE == enabled) {
       LeakProfiler::start(JfrOptionSet::old_object_queue_size());
     } else {
@@ -400,9 +402,9 @@ JVM_ENTRY_NO_ENV(jlong, jfr_host_total_memory(JNIEnv* env, jobject jvm))
 #ifdef LINUX
   // We want the host memory, not the container limit.
   // os::physical_memory() would return the container limit.
-  return os::Linux::physical_memory();
+  return static_cast<jlong>(os::Linux::physical_memory());
 #else
-  return os::physical_memory();
+  return static_cast<jlong>(os::physical_memory());
 #endif
 JVM_END
 

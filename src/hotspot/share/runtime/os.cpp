@@ -42,6 +42,7 @@
 #include "oops/compressedOops.inline.hpp"
 #include "oops/oop.inline.hpp"
 #include "prims/jvmtiAgent.hpp"
+#include "prims/jvmtiAgentList.hpp"
 #include "prims/jvm_misc.hpp"
 #include "runtime/arguments.hpp"
 #include "runtime/atomic.hpp"
@@ -73,6 +74,7 @@
 #include "utilities/count_trailing_zeros.hpp"
 #include "utilities/defaultStream.hpp"
 #include "utilities/events.hpp"
+#include "utilities/macros.hpp"
 #include "utilities/powerOfTwo.hpp"
 
 #ifndef _WINDOWS
@@ -196,9 +198,9 @@ char* os::iso8601_time(jlong milliseconds_since_19700101, char* buffer, size_t b
     abs_local_to_UTC = -(abs_local_to_UTC);
   }
   // Convert time zone offset seconds to hours and minutes.
-  const time_t zone_hours = (abs_local_to_UTC / seconds_per_hour);
-  const time_t zone_min =
-    ((abs_local_to_UTC % seconds_per_hour) / seconds_per_minute);
+  const int zone_hours = static_cast<int>(abs_local_to_UTC / seconds_per_hour);
+  const int zone_min =
+    static_cast<int>((abs_local_to_UTC % seconds_per_hour) / seconds_per_minute);
 
   // Print an ISO 8601 date and time stamp into the buffer
   const int year = 1900 + time_struct.tm_year;
@@ -928,50 +930,133 @@ bool os::print_function_and_library_name(outputStream* st,
   return have_function_name || have_library_name;
 }
 
-ATTRIBUTE_NO_ASAN static void print_hex_readable_pointer(outputStream* st, address p,
-                                                         int unitsize) {
-  switch (unitsize) {
-    case 1: st->print("%02x", *(u1*)p); break;
-    case 2: st->print("%04x", *(u2*)p); break;
-    case 4: st->print("%08x", *(u4*)p); break;
-    case 8: st->print("%016" FORMAT64_MODIFIER "x", *(u8*)p); break;
+ATTRIBUTE_NO_ASAN static bool read_safely_from(const uintptr_t* p, uintptr_t* result) {
+  DEBUG_ONLY(*result = 0xAAAA;)
+  const uintptr_t errval = 0x1717;
+  uintptr_t i = (uintptr_t)SafeFetchN((intptr_t*)p, errval);
+  if (i == errval) {
+    i = (uintptr_t)SafeFetchN((intptr_t*)p, ~errval);
+    if (i == ~errval) {
+      return false;
+    }
+  }
+  (*result) = (uintptr_t)i;
+  return true;
+}
+
+// Helper for os::print_hex_dump
+static void print_ascii_form(stringStream& ascii_form, uint64_t value, int unitsize) {
+  union {
+    uint64_t v;
+    uint8_t c[sizeof(v)];
+  } u = { value };
+  for (int i = 0; i < unitsize; i++) {
+    const int idx = LITTLE_ENDIAN_ONLY(i) BIG_ENDIAN_ONLY(sizeof(u.v) - unitsize + i);
+    const uint8_t c = u.c[idx];
+    ascii_form.put(isprint(c) && isascii(c) ? c : '.');
   }
 }
 
-void os::print_hex_dump(outputStream* st, address start, address end, int unitsize,
-                        int bytes_per_line, address logical_start) {
+// Helper for os::print_hex_dump
+static void print_hex_location(outputStream* st, const_address p, int unitsize, stringStream& ascii_form) {
+  assert(is_aligned(p, unitsize), "Unaligned");
+  const uintptr_t* pa = (const uintptr_t*) align_down(p, sizeof(intptr_t));
+#ifndef _LP64
+  // Special handling for printing qwords on 32-bit platforms
+  if (unitsize == 8) {
+    uintptr_t i1 = 0, i2 = 0;
+    if (read_safely_from(pa, &i1) &&
+        read_safely_from(pa + 1, &i2)) {
+      const uint64_t value =
+        LITTLE_ENDIAN_ONLY((((uint64_t)i2) << 32) | i1)
+        BIG_ENDIAN_ONLY((((uint64_t)i1) << 32) | i2);
+      st->print("%016" FORMAT64_MODIFIER "x", value);
+      print_ascii_form(ascii_form, value, unitsize);
+    } else {
+      st->print_raw("????????????????");
+    }
+    return;
+  }
+#endif // 32-bit, qwords
+  uintptr_t i = 0;
+  if (read_safely_from(pa, &i)) {
+    // bytes:   CA FE BA BE DE AD C0 DE
+    // bytoff:   0  1  2  3  4  5  6  7
+    // LE bits:  0  8 16 24 32 40 48 56
+    // BE bits: 56 48 40 32 24 16  8  0
+    const int offset = (int)(p - (const_address)pa);
+    const int bitoffset =
+      LITTLE_ENDIAN_ONLY(offset * BitsPerByte)
+      BIG_ENDIAN_ONLY((int)((sizeof(intptr_t) - unitsize - offset) * BitsPerByte));
+    const int bitfieldsize = unitsize * BitsPerByte;
+    uintptr_t value = bitfield(i, bitoffset, bitfieldsize);
+    switch (unitsize) {
+      case 1: st->print("%02x", (u1)value); break;
+      case 2: st->print("%04x", (u2)value); break;
+      case 4: st->print("%08x", (u4)value); break;
+      case 8: st->print("%016" FORMAT64_MODIFIER "x", (u8)value); break;
+    }
+    print_ascii_form(ascii_form, value, unitsize);
+  } else {
+    switch (unitsize) {
+      case 1: st->print_raw("??"); break;
+      case 2: st->print_raw("????"); break;
+      case 4: st->print_raw("????????"); break;
+      case 8: st->print_raw("????????????????"); break;
+    }
+  }
+}
+
+void os::print_hex_dump(outputStream* st, const_address start, const_address end, int unitsize,
+                        bool print_ascii, int bytes_per_line, const_address logical_start) {
+  constexpr int max_bytes_per_line = 64;
   assert(unitsize == 1 || unitsize == 2 || unitsize == 4 || unitsize == 8, "just checking");
+  assert(bytes_per_line > 0 && bytes_per_line <= max_bytes_per_line &&
+         is_power_of_2(bytes_per_line), "invalid bytes_per_line");
 
   start = align_down(start, unitsize);
   logical_start = align_down(logical_start, unitsize);
   bytes_per_line = align_up(bytes_per_line, 8);
 
   int cols = 0;
-  int cols_per_line = bytes_per_line / unitsize;
+  const int cols_per_line = bytes_per_line / unitsize;
 
-  address p = start;
-  address logical_p = logical_start;
+  const_address p = start;
+  const_address logical_p = logical_start;
+
+  stringStream ascii_form;
 
   // Print out the addresses as if we were starting from logical_start.
-  st->print(PTR_FORMAT ":   ", p2i(logical_p));
   while (p < end) {
-    if (is_readable_pointer(p)) {
-      print_hex_readable_pointer(st, p, unitsize);
-    } else {
-      st->print("%*.*s", 2*unitsize, 2*unitsize, "????????????????");
+    if (cols == 0) {
+      st->print(PTR_FORMAT ":   ", p2i(logical_p));
     }
+    print_hex_location(st, p, unitsize, ascii_form);
     p += unitsize;
     logical_p += unitsize;
     cols++;
-    if (cols >= cols_per_line && p < end) {
-       cols = 0;
+    if (cols >= cols_per_line) {
+       if (print_ascii && !ascii_form.is_empty()) {
+         st->print("   %s", ascii_form.base());
+       }
+       ascii_form.reset();
        st->cr();
-       st->print(PTR_FORMAT ":   ", p2i(logical_p));
+       cols = 0;
     } else {
        st->print(" ");
     }
   }
-  st->cr();
+
+  if (cols > 0) { // did not print a full line
+    if (print_ascii) {
+      // indent last ascii part to match that of full lines
+      const int size_of_printed_unit = unitsize * 2;
+      const int space_left = (cols_per_line - cols) * (size_of_printed_unit + 1);
+      st->sp(space_left);
+      st->print("  %s", ascii_form.base());
+    }
+    st->cr();
+  }
 }
 
 void os::print_dhm(outputStream* st, const char* startStr, long sec) {
@@ -982,6 +1067,26 @@ void os::print_dhm(outputStream* st, const char* startStr, long sec) {
   st->print_cr("%s %ld days %ld:%02ld hours", startStr, days, hours, minutes);
 }
 
+void os::print_tos_pc(outputStream* st, const void* context) {
+  if (context == nullptr) return;
+
+  // First of all, carefully determine sp without inspecting memory near pc.
+  // See comment below.
+  intptr_t* sp = nullptr;
+  fetch_frame_from_context(context, &sp, nullptr);
+  print_tos(st, (address)sp);
+  st->cr();
+
+  // Note: it may be unsafe to inspect memory near pc. For example, pc may
+  // point to garbage if entry point in an nmethod is corrupted. Leave
+  // this at the end, and hope for the best.
+  // This version of fetch_frame_from_context finds the caller pc if the actual
+  // one is bad.
+  address pc = fetch_frame_from_context(context).pc();
+  print_instructions(st, pc);
+  st->cr();
+}
+
 void os::print_tos(outputStream* st, address sp) {
   st->print_cr("Top of Stack: (sp=" PTR_FORMAT ")", p2i(sp));
   print_hex_dump(st, sp, sp + 512, sizeof(intptr_t));
@@ -989,7 +1094,7 @@ void os::print_tos(outputStream* st, address sp) {
 
 void os::print_instructions(outputStream* st, address pc, int unitsize) {
   st->print_cr("Instructions: (pc=" PTR_FORMAT ")", p2i(pc));
-  print_hex_dump(st, pc - 256, pc + 256, unitsize);
+  print_hex_dump(st, pc - 256, pc + 256, unitsize, /* print_ascii=*/false);
 }
 
 void os::print_environment_variables(outputStream* st, const char** env_list) {
@@ -1007,6 +1112,31 @@ void os::print_environment_variables(outputStream* st, const char** env_list) {
       }
     }
   }
+}
+
+void os::print_jvmti_agent_info(outputStream* st) {
+#if INCLUDE_JVMTI
+  const JvmtiAgentList::Iterator it = JvmtiAgentList::all();
+  if (it.has_next()) {
+    st->print_cr("JVMTI agents:");
+  } else {
+    st->print_cr("JVMTI agents: none");
+  }
+  while (it.has_next()) {
+    const JvmtiAgent* agent = it.next();
+    if (agent != nullptr) {
+      const char* dyninfo = agent->is_dynamic() ? "dynamic " : "";
+      const char* instrumentinfo = agent->is_instrument_lib() ? "instrumentlib " : "";
+      const char* loadinfo = agent->is_loaded() ? "loaded" : "not loaded";
+      const char* initinfo = agent->is_initialized() ? "initialized" : "not initialized";
+      const char* optionsinfo = agent->options();
+      const char* pathinfo = agent->os_lib_path();
+      if (optionsinfo == nullptr) optionsinfo = "none";
+      if (pathinfo == nullptr) pathinfo = "none";
+      st->print_cr("%s path:%s, %s, %s, %s%soptions:%s", agent->name(), pathinfo, loadinfo, initinfo, dyninfo, instrumentinfo, optionsinfo);
+    }
+  }
+#endif
 }
 
 void os::print_register_info(outputStream* st, const void* context) {
@@ -1044,12 +1174,13 @@ void os::print_summary_info(outputStream* st, char* buf, size_t buflen) {
 #endif // PRODUCT
   get_summary_cpu_info(buf, buflen);
   st->print("%s, ", buf);
-  size_t mem = physical_memory()/G;
+  physical_memory_size_type phys_mem = physical_memory();
+  physical_memory_size_type mem = phys_mem/G;
   if (mem == 0) {  // for low memory systems
-    mem = physical_memory()/M;
-    st->print("%d cores, " SIZE_FORMAT "M, ", processor_count(), mem);
+    mem = phys_mem/M;
+    st->print("%d cores, " PHYS_MEM_TYPE_FORMAT "M, ", processor_count(), mem);
   } else {
-    st->print("%d cores, " SIZE_FORMAT "G, ", processor_count(), mem);
+    st->print("%d cores, " PHYS_MEM_TYPE_FORMAT "G, ", processor_count(), mem);
   }
   get_summary_os_info(buf, buflen);
   st->print_raw(buf);
@@ -1074,8 +1205,7 @@ void os::print_date_and_time(outputStream *st, char* buf, size_t buflen) {
   if (localtime_pd(&tloc, &tz) != nullptr) {
     wchar_t w_buf[80];
     size_t n = ::wcsftime(w_buf, 80, L"%Z", &tz);
-    if (n > 0) {
-      ::wcstombs(buf, w_buf, buflen);
+    if (n > 0 && ::wcstombs(buf, w_buf, buflen) != (size_t)-1) {
       st->print("Time: %s %s", timestring, buf);
     } else {
       st->print("Time: %s", timestring);
@@ -1143,6 +1273,8 @@ void os::print_location(outputStream* st, intptr_t x, bool verbose) {
   if (Universe::heap()->print_location(st, addr)) {
     return;
   }
+
+#if !INCLUDE_ASAN
 
   bool accessible = is_readable_pointer(addr);
 
@@ -1230,7 +1362,10 @@ void os::print_location(outputStream* st, intptr_t x, bool verbose) {
     return;
   }
 
+#endif // !INCLUDE_ASAN
+
   st->print_cr(INTPTR_FORMAT " is an unknown value", p2i(addr));
+
 }
 
 bool is_pointer_bad(intptr_t* ptr) {
@@ -1375,6 +1510,56 @@ bool os::set_boot_path(char fileSep, char pathSep) {
   return false;
 }
 
+static char* _image_release_file_content = nullptr;
+
+void os::read_image_release_file() {
+  assert(_image_release_file_content == nullptr, "release file content must not be already set");
+  const char* home = Arguments::get_java_home();
+  stringStream ss;
+  ss.print("%s/release", home);
+
+  FILE* file = fopen(ss.base(), "rb");
+  if (file == nullptr) {
+    return;
+  }
+  fseek(file, 0, SEEK_END);
+  long sz = ftell(file);
+  if (sz == -1) {
+    return;
+  }
+  fseek(file, 0, SEEK_SET);
+
+  char* tmp = (char*) os::malloc(sz + 1, mtInternal);
+  if (tmp == nullptr) {
+    fclose(file);
+    return;
+  }
+
+  size_t elements_read = fread(tmp, 1, sz, file);
+  if (elements_read < (size_t)sz) {
+    tmp[elements_read] = '\0';
+  } else {
+    tmp[sz] = '\0';
+  }
+  // issues with \r in line endings on Windows, so better replace those
+  for (size_t i = 0; i < elements_read; i++) {
+    if (tmp[i] == '\r') {
+      tmp[i] = ' ';
+    }
+  }
+  Atomic::release_store(&_image_release_file_content, tmp);
+  fclose(file);
+}
+
+void os::print_image_release_file(outputStream* st) {
+  char* ifrc = Atomic::load_acquire(&_image_release_file_content);
+  if (ifrc != nullptr) {
+    st->print_cr("%s", ifrc);
+  } else {
+    st->print_cr("<release file has not been read>");
+  }
+}
+
 bool os::file_exists(const char* filename) {
   struct stat statbuf;
   if (filename == nullptr || strlen(filename) == 0) {
@@ -1391,7 +1576,7 @@ bool os::write(int fd, const void *buf, size_t nBytes) {
     if (res == OS_ERR) {
       return false;
     }
-    buf = (void *)((char *)buf + nBytes);
+    buf = (void *)((char *)buf + res);
     nBytes -= res;
   }
 
@@ -1716,17 +1901,17 @@ bool os::is_server_class_machine() {
     return true;
   }
   // Then actually look at the machine
-  bool         result            = false;
-  const unsigned int    server_processors = 2;
-  const julong server_memory     = 2UL * G;
+  bool  result                                    = false;
+  const unsigned int server_processors            = 2;
+  const physical_memory_size_type server_memory   = 2UL * G;
   // We seem not to get our full complement of memory.
   //     We allow some part (1/8?) of the memory to be "missing",
   //     based on the sizes of DIMMs, and maybe graphics cards.
-  const julong missing_memory   = 256UL * M;
-
+  const physical_memory_size_type missing_memory  = 256UL * M;
+  physical_memory_size_type phys_mem              = os::physical_memory();
   /* Is this a server class machine? */
   if ((os::active_processor_count() >= (int)server_processors) &&
-      (os::physical_memory() >= (server_memory - missing_memory))) {
+      (phys_mem >= server_memory - missing_memory)) {
     const unsigned int logical_processors =
       VM_Version::logical_processors_per_package();
     if (logical_processors > 1) {
@@ -1864,14 +2049,18 @@ void os::pretouch_memory(void* start, void* end, size_t page_size) {
     // We're doing concurrent-safe touch and memory state has page
     // granularity, so we can touch anywhere in a page.  Touch at the
     // beginning of each page to simplify iteration.
-    char* cur = static_cast<char*>(align_down(start, page_size));
+    void* first = align_down(start, page_size);
     void* last = align_down(static_cast<char*>(end) - 1, page_size);
-    assert(cur <= last, "invariant");
-    // Iterate from first page through last (inclusive), being careful to
-    // avoid overflow if the last page abuts the end of the address range.
-    for ( ; true; cur += page_size) {
-      Atomic::add(reinterpret_cast<int*>(cur), 0, memory_order_relaxed);
-      if (cur >= last) break;
+    assert(first <= last, "invariant");
+    const size_t pd_page_size = pd_pretouch_memory(first, last, page_size);
+    if (pd_page_size > 0) {
+      // Iterate from first page through last (inclusive), being careful to
+      // avoid overflow if the last page abuts the end of the address range.
+      last = align_down(static_cast<char*>(end) - 1, pd_page_size);
+      for (char* cur = static_cast<char*>(first); /* break */; cur += pd_page_size) {
+        Atomic::add(reinterpret_cast<int*>(cur), 0, memory_order_relaxed);
+        if (cur >= last) break;
+      }
     }
   }
 }

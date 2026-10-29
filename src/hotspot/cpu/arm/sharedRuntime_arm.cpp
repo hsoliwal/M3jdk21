@@ -71,7 +71,7 @@ public:
 
 
   enum RegisterLayout {
-    fpu_save_size = FloatRegisterImpl::number_of_registers,
+    fpu_save_size = FloatRegister::number_of_registers,
 #ifndef __SOFTFP__
     D0_offset = 0,
 #endif
@@ -140,8 +140,8 @@ OopMap* RegisterSaver::save_live_registers(MacroAssembler* masm,
     if (VM_Version::has_vfp3_32()) {
       __ fpush(FloatRegisterSet(D16, 16));
     } else {
-      if (FloatRegisterImpl::number_of_registers > 32) {
-        assert(FloatRegisterImpl::number_of_registers == 64, "nb fp registers should be 64");
+      if (FloatRegister::number_of_registers > 32) {
+        assert(FloatRegister::number_of_registers == 64, "nb fp registers should be 64");
         __ sub(SP, SP, 32 * wordSize);
       }
     }
@@ -183,8 +183,8 @@ void RegisterSaver::restore_live_registers(MacroAssembler* masm, bool restore_lr
     if (VM_Version::has_vfp3_32()) {
       __ fpop(FloatRegisterSet(D16, 16));
     } else {
-      if (FloatRegisterImpl::number_of_registers > 32) {
-        assert(FloatRegisterImpl::number_of_registers == 64, "nb fp registers should be 64");
+      if (FloatRegister::number_of_registers > 32) {
+        assert(FloatRegister::number_of_registers == 64, "nb fp registers should be 64");
         __ add(SP, SP, 32 * wordSize);
       }
     }
@@ -444,7 +444,6 @@ int SharedRuntime::java_calling_convention(const BasicType *sig_bt,
     }
   }
 
-  if (slot & 1) slot++;
   return slot;
 }
 
@@ -1155,8 +1154,8 @@ nmethod* SharedRuntime::generate_native_wrapper(MacroAssembler* masm,
 
     if (LockingMode == LM_LIGHTWEIGHT) {
       log_trace(fastlock)("SharedRuntime lock fast");
-      __ fast_lock_2(sync_obj /* object */, disp_hdr /* t1 */, tmp /* t2 */, Rtemp /* t3 */,
-                     0x7 /* savemask */, slow_lock);
+      __ lightweight_lock(sync_obj /* object */, disp_hdr /* t1 */, tmp /* t2 */, Rtemp /* t3 */,
+                          0x7 /* savemask */, slow_lock);
       // Fall through to lock_done
     } else if (LockingMode == LM_LEGACY) {
       const Register mark = tmp;
@@ -1242,8 +1241,8 @@ nmethod* SharedRuntime::generate_native_wrapper(MacroAssembler* masm,
   if (method->is_synchronized()) {
     if (LockingMode == LM_LIGHTWEIGHT) {
       log_trace(fastlock)("SharedRuntime unlock fast");
-      __ fast_unlock_2(sync_obj, R2 /* t1 */, tmp /* t2 */, Rtemp /* t3 */,
-                       7 /* savemask */, slow_unlock);
+      __ lightweight_unlock(sync_obj, R2 /* t1 */, tmp /* t2 */, Rtemp /* t3 */,
+                            7 /* savemask */, slow_unlock);
       // Fall through
     } else if (LockingMode == LM_LEGACY) {
       // See C1_MacroAssembler::unlock_object() for more comments

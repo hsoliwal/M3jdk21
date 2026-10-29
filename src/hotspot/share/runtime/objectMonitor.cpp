@@ -53,6 +53,7 @@
 #include "runtime/sharedRuntime.hpp"
 #include "services/threadService.hpp"
 #include "utilities/dtrace.hpp"
+#include "utilities/globalCounter.inline.hpp"
 #include "utilities/macros.hpp"
 #include "utilities/preserveException.hpp"
 #if INCLUDE_JFR
@@ -276,24 +277,15 @@ ObjectMonitor::ObjectMonitor(oop object) :
 { }
 
 ObjectMonitor::~ObjectMonitor() {
-  if (!_object.is_null()) {
-    // Release object's oop storage if it hasn't already been done.
-    release_object();
-  }
+  _object.release(_oop_storage);
 }
 
 oop ObjectMonitor::object() const {
   check_object_context();
-  if (_object.is_null()) {
-    return nullptr;
-  }
   return _object.resolve();
 }
 
 oop ObjectMonitor::object_peek() const {
-  if (_object.is_null()) {
-    return nullptr;
-  }
   return _object.peek();
 }
 
@@ -518,16 +510,6 @@ bool ObjectMonitor::deflate_monitor() {
     return false;
   }
 
-  if (ObjectSynchronizer::is_final_audit() && owner_is_DEFLATER_MARKER()) {
-    // The final audit can see an already deflated ObjectMonitor on the
-    // in-use list because MonitorList::unlink_deflated() might have
-    // blocked for the final safepoint before unlinking all the deflated
-    // monitors.
-    assert(contentions() < 0, "must be negative: contentions=%d", contentions());
-    // Already returned 'true' when it was originally deflated.
-    return false;
-  }
-
   const oop obj = object_peek();
 
   if (obj == nullptr) {
@@ -597,9 +579,6 @@ bool ObjectMonitor::deflate_monitor() {
     // Install the old mark word if nobody else has already done it.
     install_displaced_markword_in_object(obj);
   }
-
-  // Release object's oop storage since the ObjectMonitor has been deflated:
-  release_object();
 
   // We leave owner == DEFLATER_MARKER and contentions < 0
   // to force any racing threads to retry.
@@ -850,9 +829,9 @@ void ObjectMonitor::EnterI(JavaThread* current) {
     // That is by design - we trade "lossy" counters which are exposed to
     // races during updates for a lower probe effect.
 
-    // This PerfData object can be used in parallel with a safepoint.
-    // See the work around in PerfDataManager::destroy().
-    OM_PERFDATA_OP(FutileWakeups, inc());
+    // We are in safepoint safe state, so shutdown can remove the counter
+    // under our feet. Make sure we make this access safely.
+    OM_PERFDATA_SAFE_OP(FutileWakeups, inc());
     ++nWakeups;
 
     // Assuming this is not a spurious wakeup we'll normally find _succ == current.
@@ -993,8 +972,6 @@ void ObjectMonitor::ReenterI(JavaThread* current, ObjectWaiter* currentNode) {
     // *must* retry  _owner before parking.
     OrderAccess::fence();
 
-    // This PerfData object can be used in parallel with a safepoint.
-    // See the work around in PerfDataManager::destroy().
     OM_PERFDATA_OP(FutileWakeups, inc());
   }
 

@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.net.URISyntaxException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -205,7 +205,10 @@ public class ResolverDirectHTTP extends ResourceResolverSpi {
      * @param context
      * @return true if can be resolved
      */
+    @Override
     public boolean engineCanResolveURI(ResourceResolverContext context) {
+        LOG.debug("I was asked whether I can resolve {}", context.uriToResolve);
+
         if (context.uriToResolve == null) {
             LOG.debug("quick fail, uri == null");
             return false;
@@ -216,11 +219,15 @@ public class ResolverDirectHTTP extends ResourceResolverSpi {
             return false;
         }
 
-        LOG.debug("I was asked whether I can resolve {}", context.uriToResolve);
+        String uriToResolveScheme = scheme(context.uriToResolve);
 
-        if (context.uriToResolve.startsWith("http:") ||
-            context.uriToResolve.startsWith("https:") ||
-            context.baseUri != null && (context.baseUri.startsWith("http:") || context.baseUri.startsWith("https:"))) {
+        if (uriToResolveScheme == null) {
+            String baseUriScheme = scheme(context.baseUri);
+            if ("http".equals(baseUriScheme) || "https".equals(baseUriScheme)) {
+                LOG.debug("I state that I can resolve {}", context.uriToResolve);
+                return true;
+            }
+        } else if (uriToResolveScheme.equals("http") || uriToResolveScheme.equals("https")) {
             LOG.debug("I state that I can resolve {}", context.uriToResolve);
             return true;
         }

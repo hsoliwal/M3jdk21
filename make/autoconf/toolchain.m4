@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2011, 2023, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2011, 2024, Oracle and/or its affiliates. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 #
 # This code is free software; you can redistribute it and/or modify it
@@ -380,7 +380,7 @@ AC_DEFUN_ONCE([TOOLCHAIN_POST_DETECTION],
 [
   # Restore old path, except for the microsoft toolchain, which requires the
   # toolchain path to remain in place. Otherwise the compiler will not work in
-  # some siutations in later configure checks.
+  # some situations in later configure checks.
   if test "x$TOOLCHAIN_TYPE" != "xmicrosoft"; then
     PATH="$OLD_PATH"
   fi
@@ -445,6 +445,11 @@ AC_DEFUN([TOOLCHAIN_EXTRACT_COMPILER_VERSION],
     #     Copyright (C) 2013 Free Software Foundation, Inc.
     #     This is free software; see the source for copying conditions.  There is NO
     #     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    # or look like
+    #     gcc (GCC) 10.2.1 20200825 (Alibaba 10.2.1-3.8 2.32)
+    #     Copyright (C) 2020 Free Software Foundation, Inc.
+    #     This is free software; see the source for copying conditions.  There is NO
+    #     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     COMPILER_VERSION_OUTPUT=`$COMPILER --version 2>&1`
     # Check that this is likely to be GCC.
     $ECHO "$COMPILER_VERSION_OUTPUT" | $GREP "Free Software Foundation" > /dev/null
@@ -458,7 +463,8 @@ AC_DEFUN([TOOLCHAIN_EXTRACT_COMPILER_VERSION],
     COMPILER_VERSION_STRING=`$ECHO $COMPILER_VERSION_OUTPUT | \
         $SED -e 's/ *Copyright .*//'`
     COMPILER_VERSION_NUMBER=`$ECHO $COMPILER_VERSION_OUTPUT | \
-        $SED -e 's/^.* \(@<:@1-9@:>@<:@0-9@:>@*\.@<:@0-9.@:>@*\)@<:@^0-9.@:>@.*$/\1/'`
+        $AWK -F ')' '{print [$]2}' | \
+        $AWK '{print [$]1}'`
   elif test  "x$TOOLCHAIN_TYPE" = xclang; then
     # clang --version output typically looks like
     #    Apple LLVM version 5.0 (clang-500.2.79) (based on LLVM 3.3svn)
@@ -804,7 +810,11 @@ AC_DEFUN_ONCE([TOOLCHAIN_DETECT_TOOLCHAIN_EXTRA],
 
   case $TOOLCHAIN_TYPE in
     gcc|clang)
-      UTIL_REQUIRE_TOOLCHAIN_PROGS(CXXFILT, c++filt)
+      if test "x$OPENJDK_TARGET_OS" = xaix; then
+        UTIL_REQUIRE_TOOLCHAIN_PROGS(CXXFILT, ibm-llvm-cxxfilt)
+      else
+        UTIL_REQUIRE_TOOLCHAIN_PROGS(CXXFILT, c++filt)
+      fi
       ;;
   esac
 ])

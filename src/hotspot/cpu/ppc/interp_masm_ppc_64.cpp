@@ -451,10 +451,18 @@ void InterpreterMacroAssembler::get_cache_index_at_bcp(Register Rdst, int bcp_of
 }
 
 void InterpreterMacroAssembler::get_cache_and_index_at_bcp(Register cache, int bcp_offset,
-                                                           size_t index_size) {
+                                                           size_t index_size, bool for_fast_bytecode) {
   get_cache_index_at_bcp(cache, bcp_offset, index_size);
   sldi(cache, cache, exact_log2(in_words(ConstantPoolCacheEntry::size()) * BytesPerWord));
   add(cache, R27_constPoolCache, cache);
+
+  if (for_fast_bytecode) {
+    // Prevent speculative loading from ConstantPoolCacheEntry as it can miss the info written by another thread.
+    // TemplateTable::patch_bytecode uses release-store.
+    // We reached here via control dependency (Bytecode dispatch has used the rewritten Bytecode).
+    // So, we can use control-isync based ordering.
+    isync();
+  }
 }
 
 // Load 4-byte signed or unsigned integer in Java format (that is, big-endian format)
@@ -887,6 +895,12 @@ void InterpreterMacroAssembler::remove_activation(TosState state,
     // Test if reserved zone needs to be enabled.
     Label no_reserved_zone_enabling;
 
+    // check if already enabled - if so no re-enabling needed
+    assert(sizeof(StackOverflow::StackGuardState) == 4, "unexpected size");
+    lwz(R0, in_bytes(JavaThread::stack_guard_state_offset()), R16_thread);
+    cmpwi(CCR0, R0, StackOverflow::stack_guard_enabled);
+    beq_predict_taken(CCR0, no_reserved_zone_enabling);
+
     // Compare frame pointers. There is no good stack pointer, as with stack
     // frame compression we can get different SPs when we do calls. A subsequent
     // call could have a smaller SP, so that this compare succeeds for an
@@ -961,7 +975,7 @@ void InterpreterMacroAssembler::lock_object(Register monitor, Register object) {
     }
 
     if (LockingMode == LM_LIGHTWEIGHT) {
-      fast_lock(object, /* mark word */ header, tmp, slow_case);
+      lightweight_lock(object, /* mark word */ header, tmp, slow_case);
       b(count_locking);
     } else if (LockingMode == LM_LEGACY) {
 
@@ -1111,7 +1125,7 @@ void InterpreterMacroAssembler::unlock_object(Register monitor) {
       ld(header, oopDesc::mark_offset_in_bytes(), object);
       andi_(R0, header, markWord::monitor_value);
       bne(CCR0, slow_case);
-      fast_unlock(object, header, slow_case);
+      lightweight_unlock(object, header, slow_case);
     } else {
       addi(object_mark_addr, object, oopDesc::mark_offset_in_bytes());
 
@@ -1254,11 +1268,11 @@ void InterpreterMacroAssembler::verify_method_data_pointer() {
   lhz(R11_scratch1, in_bytes(DataLayout::bci_offset()), R28_mdx);
   ld(R12_scratch2, in_bytes(Method::const_offset()), R19_method);
   addi(R11_scratch1, R11_scratch1, in_bytes(ConstMethod::codes_offset()));
-  add(R11_scratch1, R12_scratch2, R12_scratch2);
+  add(R11_scratch1, R11_scratch1, R12_scratch2);
   cmpd(CCR0, R11_scratch1, R14_bcp);
   beq(CCR0, verify_continue);
 
-  call_VM_leaf(CAST_FROM_FN_PTR(address, InterpreterRuntime::verify_mdp ), R19_method, R14_bcp, R28_mdx);
+  call_VM_leaf(CAST_FROM_FN_PTR(address, InterpreterRuntime::verify_mdp), R19_method, R14_bcp, R28_mdx);
 
   bind(verify_continue);
 #endif
@@ -1777,7 +1791,7 @@ void InterpreterMacroAssembler::profile_obj_type(Register obj, Register mdo_addr
   // Klass seen before, nothing to do (regardless of unknown bit).
   //beq(CCR1, do_nothing);
 
-  andi_(R0, klass, TypeEntries::type_unknown);
+  andi_(R0, tmp, TypeEntries::type_unknown);
   // Already unknown. Nothing to do anymore.
   //bne(CCR0, do_nothing);
   crorc(CCR0, Assembler::equal, CCR1, Assembler::equal); // cr0 eq = cr1 eq or cr0 ne
@@ -1976,7 +1990,7 @@ void InterpreterMacroAssembler::profile_parameters_type(Register tmp1, Register 
   }
 }
 
-// Add a InterpMonitorElem to stack (see frame_sparc.hpp).
+// Add a monitor (see frame_ppc.hpp).
 void InterpreterMacroAssembler::add_monitor_to_stack(bool stack_is_empty, Register Rtemp1, Register Rtemp2) {
 
   // Very-local scratch registers.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2025, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -387,13 +387,17 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     @Override
     public char charAt(int index) {
-        M3StringBuilderLane lane = m3Lane;
+        byte coder = this.coder;
+        byte[] value = this.value;
+        // Ensure count is less than or equal to capacity (racy reads and writes can produce inconsistent values)
+        int count = Math.min(this.count, value.length >> coder);
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: MERGE-21U — 8351000 snapshot first, then the R5-BUILDER lane
         if (lane != null) {
             checkIndex(index, count + lane.units);
             return lane.charAt(value, coder, index);
         }
         checkIndex(index, count);
-        if (isLatin1()) {
+        if (coder == LATIN1) {
             return (char)(value[index] & 0xff);
         }
         return StringUTF16.getChar(value, index);
@@ -465,7 +469,8 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *            of this sequence.
      */
     public int codePointBefore(int index) {
-        M3StringBuilderLane lane = m3Lane;
+        byte[] value = this.value;
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: MERGE-21U — 8351000 snapshot first, then the R5-BUILDER lane
         if (lane != null) {
             int i = index - 1;
             checkIndex(i, count + lane.units);
@@ -1436,8 +1441,8 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         ensureCapacityInternal(count + len);
         shift(dstOffset, len);
         count += len;
-        if (s instanceof String) {
-            putStringAt(dstOffset, (String) s, start, end);
+        if (s instanceof String str && str.length() == len) {
+            putStringAt(dstOffset, str);
         } else {
             putCharsAt(dstOffset, s, start, end);
         }
@@ -1824,11 +1829,10 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
     void initBytes(char[] value, int off, int len) {
         this.m3Lane = null;
         if (String.COMPACT_STRINGS) {
-            this.value = StringUTF16.compress(value, off, len);
-            if (this.value != null) {
-                this.coder = LATIN1;
-                return;
-            }
+            byte[] val = StringUTF16.compress(value, off, len);
+            this.coder = StringUTF16.coderFromArrayLen(val, len);
+            this.value = val;
+            return;
         }
         this.coder = UTF16;
         this.value = StringUTF16.toBytes(value, off, len);
@@ -1869,6 +1873,9 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                     val[j++] = (byte)c;
                 } else {
                     inflate();
+                    // store c to make sure it has a UTF16 char
+                    StringUTF16.putCharSB(this.value, j++, c);
+                    i++;
                     StringUTF16.putCharsSB(this.value, j, s, i, end);
                     return;
                 }
@@ -1898,11 +1905,6 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         if (COMPACT_STRINGS && (coder != inputCoder)) {
             inflate();
         }
-    }
-
-    private void putStringAt(int index, String str, int off, int end) {
-        inflateIfNeededFor(str);
-        str.getBytes(value, off, index, coder, end - off);
     }
 
     private void putStringAt(int index, String str) {
@@ -2001,6 +2003,10 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                 } else {
                     count = j;
                     inflate();
+                    // Store c to make sure sb has a UTF16 char
+                    StringUTF16.putCharSB(this.value, j++, c);
+                    count = j;
+                    i++;
                     StringUTF16.putCharsSB(this.value, j, s, i, end);
                     count += end - i;
                     return;
@@ -2114,6 +2120,10 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * <p>
      * If {@code cs} is {@code null}, then the four characters
      * {@code "null"} are repeated into this sequence.
+     * <p>
+     * The contents are unspecified if the {@code CharSequence}
+     * is modified during the method call or an exception is thrown
+     * when accessing the {@code CharSequence}.
      *
      * @param cs     a {@code CharSequence}
      * @param count  number of times to copy

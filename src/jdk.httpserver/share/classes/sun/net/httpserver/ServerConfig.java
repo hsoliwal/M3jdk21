@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2026, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -49,6 +49,7 @@ class ServerConfig {
     // timing out request/response if max request/response time is configured
     private static final long DEFAULT_REQ_RSP_TIMER_TASK_SCHEDULE_MILLIS = 1000;
     private static final int  DEFAULT_MAX_REQ_HEADERS = 200;
+    private static final int  DEFAULT_MAX_REQ_HEADER_SIZE = 380 * 1024;
     private static final long DEFAULT_DRAIN_AMOUNT = 64 * 1024;
 
     private static long idleTimerScheduleMillis;
@@ -62,6 +63,9 @@ class ServerConfig {
     private static int maxIdleConnections;
     // The maximum number of request headers allowable
     private static int maxReqHeaders;
+    // a maximum value for the header list size. This is the
+    // names size + values size + 32 bytes per field line
+    private static int maxReqHeadersSize;
     // max time a request or response is allowed to take
     private static long maxReqTime;
     private static long maxRspTime;
@@ -70,6 +74,7 @@ class ServerConfig {
 
     // the value of the TCP_NODELAY socket-level option
     private static boolean noDelay;
+    private static boolean hostValidationDisabled;
 
     static {
         java.security.AccessController.doPrivileged(
@@ -107,6 +112,14 @@ class ServerConfig {
                         maxReqHeaders = DEFAULT_MAX_REQ_HEADERS;
                     }
 
+                    // a value <= 0 means unlimited
+                    maxReqHeadersSize = Integer.getInteger(
+                            "sun.net.httpserver.maxReqHeaderSize",
+                            DEFAULT_MAX_REQ_HEADER_SIZE);
+                    if (maxReqHeadersSize <= 0) {
+                        maxReqHeadersSize = 0;
+                    }
+
                     maxReqTime = Long.getLong("sun.net.httpserver.maxReqTime",
                             DEFAULT_MAX_REQ_TIME);
 
@@ -124,6 +137,7 @@ class ServerConfig {
                     debug = Boolean.getBoolean("sun.net.httpserver.debug");
 
                     noDelay = Boolean.getBoolean("sun.net.httpserver.nodelay");
+                    hostValidationDisabled = Boolean.getBoolean("sun.net.httpserver.disableHostValidation");
 
                     return null;
                 }
@@ -215,6 +229,10 @@ class ServerConfig {
         return maxReqHeaders;
     }
 
+    static int getMaxReqHeaderSize() {
+        return maxReqHeadersSize;
+    }
+
     /**
      * @return Returns the maximum amount of time the server will wait for the request to be read
      * completely. This method can return a value of 0 or negative to imply no maximum limit has
@@ -243,5 +261,9 @@ class ServerConfig {
 
     static boolean noDelay() {
         return noDelay;
+    }
+
+    static boolean isHostValidationDisabled() {
+        return hostValidationDisabled;
     }
 }

@@ -27,6 +27,7 @@
  * @summary Class-Path: attribute in MANIFEST file
  * @requires vm.cds
  * @library /test/lib
+ * @compile test-classes/Hello.java
  * @run driver/timeout=240 ClassPathAttr
  */
 
@@ -44,6 +45,7 @@ public class ClassPathAttr {
   public static void main(String[] args) throws Exception {
     testNormalOps();
     testNonExistentJars();
+    testClassPathAttrJarOnCP();
   }
 
   static void testNormalOps() throws Exception {
@@ -55,9 +57,10 @@ public class ClassPathAttr {
         "CpAttr2", "CpAttr3", "CpAttr4", "CpAttr5");
     buildCpAttr("cpattr5_123456789_223456789_323456789_423456789_523456789_623456789", "cpattr5_extra_long.mf", "CpAttr5", "CpAttr5");
 
+    String[] classlist = { "CpAttr1", "CpAttr2", "CpAttr3", "CpAttr4", "CpAttr5"};
+    String jar4 = TestCommon.getTestJar("cpattr4.jar");
     for (int i=1; i<=2; i++) {
       String jar1 = TestCommon.getTestJar("cpattr1.jar");
-      String jar4 = TestCommon.getTestJar("cpattr4.jar");
       if (i == 2) {
         // Test case #2 -- same as #1, except we use cpattr1_long.jar, which has a super-long
         // Class-Path: attribute.
@@ -65,11 +68,7 @@ public class ClassPathAttr {
       }
       String cp = jar1 + File.pathSeparator + jar4;
 
-      TestCommon.testDump(cp, TestCommon.list("CpAttr1",
-                                                          "CpAttr2",
-                                                          "CpAttr3",
-                                                          "CpAttr4",
-                                                          "CpAttr5"));
+      TestCommon.testDump(cp, classlist);
 
       TestCommon.run(
           "-cp", cp,
@@ -86,6 +85,16 @@ public class ClassPathAttr {
             output.shouldMatch("checking shared classpath entry: .*cpattr3.jar");
           });
     }
+
+    // test duplicate jars in the "Class-path" attribute in the jar manifest
+    buildCpAttr("cpattr_dup", "cpattr_dup.mf", "CpAttr1", "CpAttr1");
+    String cp = TestCommon.getTestJar("cpattr_dup.jar") + File.pathSeparator + jar4;
+    TestCommon.testDump(cp, classlist);
+
+    TestCommon.run(
+        "-cp", cp,
+        "CpAttr1")
+      .assertNormalExit();
   }
 
   static void testNonExistentJars() throws Exception {
@@ -117,6 +126,62 @@ public class ClassPathAttr {
       .assertNormalExit(output -> {
           output.shouldMatch("Archived non-system classes are disabled because the file .*cpattrX.jar exists");
         });
+  }
+
+  static void testClassPathAttrJarOnCP() throws Exception {
+    String helloJar = JarBuilder.getOrCreateHelloJar();
+    String jar1 = TestCommon.getTestJar("cpattr1.jar");
+    String cp = jar1 + File.pathSeparator + helloJar;
+
+    // The cpattr1.jar contains "Class-Path: cpattr2.jar".
+    // The cpattr2.jar contains "Class-Path: cpattr3.jar cpattr5_123456789_223456789_323456789_42345678.jar".
+    // With -cp cpattr1:hello.jar, the following shared paths should be stored in the CDS archive:
+    // cpattr1.jar:cpattr2.jar:cpattr3.jar:cpattr5_123456789_223456789_323456789_42345678.jari:hello.jar
+    TestCommon.testDump(cp, TestCommon.list("Hello"), "-Xlog:class+path");
+
+    // Run with the same -cp apattr1.jar:hello.jar. The Hello class should be
+    // loaded from the archive.
+    TestCommon.run("-Xlog:class+path,class+load",
+                   "-cp", cp,
+                   "Hello")
+              .assertNormalExit(output -> {
+                  output.shouldContain("Hello source: shared objects file");
+                });
+
+    // Run with -cp apattr1.jar:cpattr2.jar:hello.jar. App classpath mismatch should be detected.
+    String jar2 = TestCommon.getTestJar("cpattr2.jar");
+    cp = jar1 + File.pathSeparator + jar2 + File.pathSeparator + helloJar;
+    TestCommon.run("-Xlog:class+path,class+load",
+                   "-cp", cp,
+                   "Hello")
+              .assertAbnormalExit(output -> {
+                  output.shouldMatch(".*APP classpath mismatch, actual: -Djava.class.path=.*cpattr1.jar.*cpattr2.jar.*hello.jar")
+              .shouldContain("Unable to use shared archive.");
+                });
+
+    // Run with different -cp cpattr2.jar:hello.jar. App classpath mismatch should be detected.
+    cp = jar2 + File.pathSeparator + helloJar;
+    TestCommon.run("-Xlog:class+path,class+load",
+                   "-cp", cp,
+                   "Hello")
+              .assertAbnormalExit(output -> {
+                  output.shouldMatch(".*APP classpath mismatch, actual: -Djava.class.path=.*cpattr2.jar.*hello.jar")
+              .shouldContain("Unable to use shared archive.");
+                });
+
+    // Dumping with -cp cpattr1.jar:cpattr2.jar:hello.jar
+    // The cpattr2.jar is from the Class-Path: attribute of cpattr1.jar.
+    cp = jar1 + File.pathSeparator + jar2 + File.pathSeparator + helloJar;
+    TestCommon.testDump(cp, TestCommon.list("Hello"), "-Xlog:class+path");
+
+    // Run with the same -cp as dump time. The Hello class should be loaded from the archive.
+    TestCommon.run("-Xlog:class+path,class+load",
+                   "-cp", cp,
+                   "Hello")
+              .assertNormalExit(output -> {
+                  output.shouldContain("Hello source: shared objects file");
+                });
+
   }
 
   private static void buildCpAttr(String jarName, String manifest, String enclosingClassName, String ...testClassNames) throws Exception {

@@ -68,6 +68,7 @@ import java.util.function.Supplier;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
+import jdk.internal.logger.LoggerFinderLoader.TemporaryLoggerFinder;
 import jdk.internal.misc.CarrierThreadLocal;
 import jdk.internal.misc.Unsafe;
 import jdk.internal.util.StaticProperty;
@@ -286,10 +287,11 @@ public final class System {
     private static volatile Console cons;
 
     /**
-     * Returns the unique {@link java.io.Console Console} object associated
+     * Returns the unique {@link Console Console} object associated
      * with the current Java virtual machine, if any.
      *
      * @return  The system console, if any, otherwise {@code null}.
+     * @see Console
      *
      * @since   1.6
      */
@@ -1766,13 +1768,16 @@ public final class System {
             // We do not need to synchronize: LoggerFinderLoader will
             // always return the same instance, so if we don't have it,
             // just fetch it again.
-            if (service == null) {
+            LoggerFinder finder = service;
+            if (finder == null) {
                 PrivilegedAction<LoggerFinder> pa =
                         () -> LoggerFinderLoader.getLoggerFinder();
-                service = AccessController.doPrivileged(pa, null,
+                finder = AccessController.doPrivileged(pa, null,
                         LOGGERFINDER_PERMISSION);
+                if (finder instanceof TemporaryLoggerFinder) return finder;
+                service = finder;
             }
-            return service;
+            return finder;
         }
 
     }
@@ -2706,7 +2711,12 @@ public final class System {
             }
 
             public String getLoaderNameID(ClassLoader loader) {
-                return loader.nameAndId();
+                return loader != null ? loader.nameAndId() : "null";
+            }
+
+            @Override
+            public boolean allowSecurityManager() {
+                return System.allowSecurityManager();
             }
         });
     }

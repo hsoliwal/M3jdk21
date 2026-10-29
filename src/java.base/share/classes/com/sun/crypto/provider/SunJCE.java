@@ -149,6 +149,12 @@ public final class SunJCE extends Provider {
     void putEntries() {
         // reuse attribute map and reset before each reuse
         HashMap<String, String> attrs = new HashMap<>(3);
+        attrs.put("SupportedKeyClasses",
+                "java.security.interfaces.RSAPublicKey" +
+                "|java.security.interfaces.RSAPrivateKey");
+        ps("Signature", "NONEwithRSA",
+                "com.sun.crypto.provider.RSACipherAdaptor", null, attrs);
+        // continue adding cipher specific attributes
         attrs.put("SupportedModes", "ECB");
         attrs.put("SupportedPaddings", "NOPADDING|PKCS1PADDING|OAEPPADDING"
                 + "|OAEPWITHMD5ANDMGF1PADDING"
@@ -160,9 +166,6 @@ public final class SunJCE extends Provider {
                 + "|OAEPWITHSHA-512ANDMGF1PADDING"
                 + "|OAEPWITHSHA-512/224ANDMGF1PADDING"
                 + "|OAEPWITHSHA-512/256ANDMGF1PADDING");
-        attrs.put("SupportedKeyClasses",
-                "java.security.interfaces.RSAPublicKey" +
-                "|java.security.interfaces.RSAPrivateKey");
         ps("Cipher", "RSA",
                 "com.sun.crypto.provider.RSACipher", null, attrs);
 
@@ -763,25 +766,17 @@ public final class SunJCE extends Provider {
         ps("KEM", "ML-KEM", "com.sun.crypto.provider.ML_KEM_Impls$K", null, attrs);
         psA("KEM", "ML-KEM-512", "com.sun.crypto.provider.ML_KEM_Impls$K2", attrs);
         psA("KEM", "ML-KEM-768", "com.sun.crypto.provider.ML_KEM_Impls$K3", attrs);
-        psA("KEM", "ML-KEM-1024", "com.sun.crypto.provider.ML_KEM_Impls$K5", attrs);
+        psA("KEM", "ML-KEM-1024", "com.sun.crypto.provider.ML_KEM_Impls$K5",attrs);
 
-        ps("KeyPairGenerator", "ML-KEM",
-                "com.sun.crypto.provider.ML_KEM_Impls$KPG", null, attrs);
-        psA("KeyPairGenerator", "ML-KEM-512",
-                "com.sun.crypto.provider.ML_KEM_Impls$KPG2", attrs);
-        psA("KeyPairGenerator", "ML-KEM-768",
-                "com.sun.crypto.provider.ML_KEM_Impls$KPG3", attrs);
-        psA("KeyPairGenerator", "ML-KEM-1024",
-                "com.sun.crypto.provider.ML_KEM_Impls$KPG5", attrs);
+        ps("KeyPairGenerator", "ML-KEM", "com.sun.crypto.provider.ML_KEM_Impls$KPG", null, attrs);
+        psA("KeyPairGenerator", "ML-KEM-512", "com.sun.crypto.provider.ML_KEM_Impls$KPG2", attrs);
+        psA("KeyPairGenerator", "ML-KEM-768", "com.sun.crypto.provider.ML_KEM_Impls$KPG3", attrs);
+        psA("KeyPairGenerator", "ML-KEM-1024", "com.sun.crypto.provider.ML_KEM_Impls$KPG5", attrs);
 
-        ps("KeyFactory", "ML-KEM",
-                "com.sun.crypto.provider.ML_KEM_Impls$KF", null, attrs);
-        psA("KeyFactory", "ML-KEM-512",
-                "com.sun.crypto.provider.ML_KEM_Impls$KF2", attrs);
-        psA("KeyFactory", "ML-KEM-768",
-                "com.sun.crypto.provider.ML_KEM_Impls$KF3", attrs);
-        psA("KeyFactory", "ML-KEM-1024",
-                "com.sun.crypto.provider.ML_KEM_Impls$KF5", attrs);
+        ps("KeyFactory", "ML-KEM", "com.sun.crypto.provider.ML_KEM_Impls$KF", null, attrs);
+        psA("KeyFactory", "ML-KEM-512", "com.sun.crypto.provider.ML_KEM_Impls$KF2", attrs);
+        psA("KeyFactory", "ML-KEM-768", "com.sun.crypto.provider.ML_KEM_Impls$KF3", attrs);
+        psA("KeyFactory", "ML-KEM-1024", "com.sun.crypto.provider.ML_KEM_Impls$KF5", attrs);
 
         /*
          * SSL/TLS mechanisms

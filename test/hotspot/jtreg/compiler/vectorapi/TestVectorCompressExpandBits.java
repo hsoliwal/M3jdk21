@@ -38,6 +38,7 @@ import jdk.test.lib.Utils;
 /**
  * @test
  * @bug 8301012
+ * @key randomness
  * @library /test/lib /
  * @requires os.arch == "aarch64" & vm.cpu.features ~= ".*sve2.*" & vm.cpu.features ~= ".*svebitperm.*"
  * @summary [vectorapi]: Intrinsify CompressBitsV/ExpandBitsV and add the AArch64 SVE backend implementation
@@ -77,7 +78,7 @@ public class TestVectorCompressExpandBits {
 
     // Test for vectorized Integer.compress operation in SVE2
     @Test
-    @IR(counts = {IRNode.COMPRESS_BITSV, "> 0"})
+    @IR(counts = {IRNode.COMPRESS_BITS_VI, "> 0"})
     public static void testIntCompress() {
         for (int i = 0; i < LENGTH; i += I_SPECIES.length()) {
             IntVector av = IntVector.fromArray(I_SPECIES, ia, i);
@@ -96,7 +97,7 @@ public class TestVectorCompressExpandBits {
 
     // Test for vectorized Integer.expand operation in SVE2
     @Test
-    @IR(counts = {IRNode.EXPAND_BITSV, "> 0"})
+    @IR(counts = {IRNode.EXPAND_BITS_VI, "> 0"})
     public static void testIntExpand() {
         for (int i = 0; i < LENGTH; i += I_SPECIES.length()) {
             IntVector av = IntVector.fromArray(I_SPECIES, ia, i);
@@ -115,7 +116,7 @@ public class TestVectorCompressExpandBits {
 
     // Test for vectorized Long.compress operation in SVE2
     @Test
-    @IR(counts = {IRNode.COMPRESS_BITSV, "> 0"})
+    @IR(counts = {IRNode.COMPRESS_BITS_VL, "> 0"})
     public static void testLongCompress() {
         for (int i = 0; i < LENGTH; i += L_SPECIES.length()) {
             LongVector av = LongVector.fromArray(L_SPECIES, la, i);
@@ -134,7 +135,7 @@ public class TestVectorCompressExpandBits {
 
     // Test for vectorized Long.expand operation in SVE2
     @Test
-    @IR(counts = {IRNode.EXPAND_BITSV, "> 0"})
+    @IR(counts = {IRNode.EXPAND_BITS_VL, "> 0"})
     public static void testLongExpand() {
         for (int i = 0; i < LENGTH; i += L_SPECIES.length()) {
             LongVector av = LongVector.fromArray(L_SPECIES, la, i);

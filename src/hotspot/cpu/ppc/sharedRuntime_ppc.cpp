@@ -105,7 +105,7 @@ class RegisterSaver {
 
   // During deoptimization only the result registers need to be restored
   // all the other values have already been extracted.
-  static void restore_result_registers(MacroAssembler* masm, int frame_size_in_bytes);
+  static void restore_result_registers(MacroAssembler* masm, int frame_size_in_bytes, bool save_vectors);
 
   // Constants and data structures:
 
@@ -355,6 +355,7 @@ OopMap* RegisterSaver::push_frame_reg_args_and_save_live_registers(MacroAssemble
     __ li(R30, offset);
     __ stxvd2x(as_VectorSRegister(reg_num), R30, R1_SP);
 
+    // RegisterMap::pd_location only uses the first VMReg for each VectorRegister.
     if (generate_oop_map) {
       map->set_callee_saved(VMRegImpl::stack2reg(offset>>2),
                             RegisterSaver_LiveVSRegs[i].vmreg);
@@ -528,10 +529,14 @@ void RegisterSaver::restore_argument_registers_and_pop_frame(MacroAssembler*masm
 }
 
 // Restore the registers that might be holding a result.
-void RegisterSaver::restore_result_registers(MacroAssembler* masm, int frame_size_in_bytes) {
+void RegisterSaver::restore_result_registers(MacroAssembler* masm, int frame_size_in_bytes, bool save_vectors) {
   const int regstosave_num       = sizeof(RegisterSaver_LiveRegs) /
                                    sizeof(RegisterSaver::LiveRegType);
-  const int register_save_size   = regstosave_num * reg_size; // VS registers not relevant here.
+  const int vecregstosave_num    = save_vectors ? (sizeof(RegisterSaver_LiveVSRegs) /
+                                                   sizeof(RegisterSaver::LiveRegType))
+                                                : 0;
+  const int register_save_size   = regstosave_num * reg_size + vecregstosave_num * vs_reg_size;
+
   const int register_save_offset = frame_size_in_bytes - register_save_size;
 
   // restore all result registers (ints and floats)
@@ -560,7 +565,7 @@ void RegisterSaver::restore_result_registers(MacroAssembler* masm, int frame_siz
     offset += reg_size;
   }
 
-  assert(offset == frame_size_in_bytes, "consistency check");
+  assert(offset == frame_size_in_bytes - (save_vectors ? vecregstosave_num * vs_reg_size : 0), "consistency check");
 }
 
 // Is vector's size (in bytes) bigger than a size saved by default?
@@ -734,7 +739,7 @@ int SharedRuntime::java_calling_convention(const BasicType *sig_bt,
       ShouldNotReachHere();
     }
   }
-  return align_up(stk, 2);
+  return stk;
 }
 
 #if defined(COMPILER1) || defined(COMPILER2)
@@ -2457,7 +2462,6 @@ nmethod *SharedRuntime::generate_native_wrapper(MacroAssembler *masm,
   // --------------------------------------------------------------------------
 
   if (method->is_synchronized()) {
-    ConditionRegister r_flag = CCR1;
     Register          r_oop  = r_temp_4;
     const Register    r_box  = r_temp_5;
     Label             done, locked;
@@ -2472,8 +2476,8 @@ nmethod *SharedRuntime::generate_native_wrapper(MacroAssembler *masm,
 
     // Try fastpath for locking.
     // fast_lock kills r_temp_1, r_temp_2, r_temp_3.
-    __ compiler_fast_lock_object(r_flag, r_oop, r_box, r_temp_1, r_temp_2, r_temp_3);
-    __ beq(r_flag, locked);
+    __ compiler_fast_lock_object(CCR0, r_oop, r_box, r_temp_1, r_temp_2, r_temp_3);
+    __ beq(CCR0, locked);
 
     // None of the above fast optimizations worked so we have to get into the
     // slow case of monitor enter. Inline a special case of call_VM that
@@ -2666,8 +2670,6 @@ nmethod *SharedRuntime::generate_native_wrapper(MacroAssembler *masm,
   // --------------------------------------------------------------------------
 
   if (method->is_synchronized()) {
-
-    ConditionRegister r_flag   = CCR1;
     const Register r_oop       = r_temp_4;
     const Register r_box       = r_temp_5;
     const Register r_exception = r_temp_6;
@@ -2684,8 +2686,8 @@ nmethod *SharedRuntime::generate_native_wrapper(MacroAssembler *masm,
     __ addi(r_box, R1_SP, lock_offset);
 
     // Try fastpath for unlocking.
-    __ compiler_fast_unlock_object(r_flag, r_oop, r_box, r_temp_1, r_temp_2, r_temp_3);
-    __ beq(r_flag, done);
+    __ compiler_fast_unlock_object(CCR0, r_oop, r_box, r_temp_1, r_temp_2, r_temp_3);
+    __ beq(CCR0, done);
 
     // Save and restore any potential method result value around the unlocking operation.
     save_native_result(masm, ret_type, workspace_slot_offset);
@@ -2987,7 +2989,8 @@ void SharedRuntime::generate_deopt_blob() {
                                                                    &first_frame_size_in_bytes,
                                                                    /*generate_oop_map=*/ true,
                                                                    return_pc_adjustment_no_exception,
-                                                                   RegisterSaver::return_pc_is_lr);
+                                                                   RegisterSaver::return_pc_is_lr,
+                                                                   /*save_vectors*/ SuperwordUseVSX);
   assert(map != nullptr, "OopMap must have been created");
 
   __ li(exec_mode_reg, Deoptimization::Unpack_deopt);
@@ -3022,7 +3025,8 @@ void SharedRuntime::generate_deopt_blob() {
                                                              &first_frame_size_in_bytes,
                                                              /*generate_oop_map=*/ false,
                                                              /*return_pc_adjustment_exception=*/ 0,
-                                                             RegisterSaver::return_pc_is_pre_saved);
+                                                             RegisterSaver::return_pc_is_pre_saved,
+                                                             /*save_vectors*/ SuperwordUseVSX);
 
   // Deopt during an exception. Save exec mode for unpack_frames.
   __ li(exec_mode_reg, Deoptimization::Unpack_exception);
@@ -3040,7 +3044,8 @@ void SharedRuntime::generate_deopt_blob() {
                                                              &first_frame_size_in_bytes,
                                                              /*generate_oop_map=*/ false,
                                                              /*return_pc_adjustment_reexecute=*/ 0,
-                                                             RegisterSaver::return_pc_is_pre_saved);
+                                                             RegisterSaver::return_pc_is_pre_saved,
+                                                             /*save_vectors*/ SuperwordUseVSX);
   __ li(exec_mode_reg, Deoptimization::Unpack_reexecute);
 #endif
 
@@ -3066,7 +3071,7 @@ void SharedRuntime::generate_deopt_blob() {
 
   // Restore only the result registers that have been saved
   // by save_volatile_registers(...).
-  RegisterSaver::restore_result_registers(masm, first_frame_size_in_bytes);
+  RegisterSaver::restore_result_registers(masm, first_frame_size_in_bytes, /*save_vectors*/ SuperwordUseVSX);
 
   // reload the exec mode from the UnrollBlock (it might have changed)
   __ lwz(exec_mode_reg, in_bytes(Deoptimization::UnrollBlock::unpack_kind_offset()), unroll_block_reg);

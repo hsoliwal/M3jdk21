@@ -406,7 +406,7 @@ void InterpreterMacroAssembler::pop_i(Register r) {
 
 void InterpreterMacroAssembler::pop_l(Register lo, Register hi) {
   assert_different_registers(lo, hi);
-  assert(lo < hi, "lo must be < hi");
+  assert(lo->encoding() < hi->encoding(), "lo must be < hi");
   pop(RegisterSet(lo) | RegisterSet(hi));
 }
 
@@ -456,7 +456,7 @@ void InterpreterMacroAssembler::push_i(Register r) {
 
 void InterpreterMacroAssembler::push_l(Register lo, Register hi) {
   assert_different_registers(lo, hi);
-  assert(lo < hi, "lo must be < hi");
+  assert(lo->encoding() < hi->encoding(), "lo must be < hi");
   push(RegisterSet(lo) | RegisterSet(hi));
 }
 
@@ -814,7 +814,7 @@ void InterpreterMacroAssembler::remove_activation(TosState state, Register ret_a
   {
     Label loop;
 
-    const int entry_size = frame::interpreter_frame_monitor_size() * wordSize;
+    const int entry_size = frame::interpreter_frame_monitor_size_in_bytes();
     const Register Rbottom = R3;
     const Register Rcur_obj = Rtemp;
 
@@ -911,7 +911,7 @@ void InterpreterMacroAssembler::lock_object(Register Rlock) {
     }
 
     if (LockingMode == LM_LIGHTWEIGHT) {
-      fast_lock_2(Robj, R0 /* t1 */, Rmark /* t2 */, Rtemp /* t3 */, 0 /* savemask */, slow_case);
+      lightweight_lock(Robj, R0 /* t1 */, Rmark /* t2 */, Rtemp /* t3 */, 0 /* savemask */, slow_case);
       b(done);
     } else if (LockingMode == LM_LEGACY) {
       // On MP platforms the next load could return a 'stale' value if the memory location has been modified by another thread.
@@ -1033,8 +1033,8 @@ void InterpreterMacroAssembler::unlock_object(Register Rlock) {
       cmpoop(Rtemp, Robj);
       b(slow_case, ne);
 
-      fast_unlock_2(Robj /* obj */, Rlock /* t1 */, Rmark /* t2 */, Rtemp /* t3 */,
-                    1 /* savemask (save t1) */, slow_case);
+      lightweight_unlock(Robj /* obj */, Rlock /* t1 */, Rmark /* t2 */, Rtemp /* t3 */,
+                         1 /* savemask (save t1) */, slow_case);
 
       b(done);
 

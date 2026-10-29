@@ -49,9 +49,12 @@ public class JdkConsoleProviderImpl implements JdkConsoleProvider {
      */
     @Override
     public JdkConsole console(boolean isTTY, Charset charset) {
+        if (!isTTY) return null;
         try {
             Terminal terminal = TerminalBuilder.builder().encoding(charset)
-                                               .exec(false).build();
+                                               .exec(false)
+                                               .nativeSignals(false)
+                                               .build();
             return new JdkConsoleImpl(terminal);
         } catch (IllegalStateException ise) {
             //cannot create a non-dumb, non-exec terminal,
@@ -67,6 +70,9 @@ public class JdkConsoleProviderImpl implements JdkConsoleProvider {
      * public Console class.
      */
     private static class JdkConsoleImpl implements JdkConsole {
+        private final Terminal terminal;
+        private volatile LineReader jline;
+
         @Override
         public PrintWriter writer() {
             return terminal.writer();
@@ -108,6 +114,8 @@ public class JdkConsoleProviderImpl implements JdkConsoleProvider {
                 return jline.readLine(fmt.formatted(args), '\0').toCharArray();
             } catch (EndOfFileException eofe) {
                 return null;
+            } finally {
+                jline.zeroOut();
             }
         }
 
@@ -125,9 +133,6 @@ public class JdkConsoleProviderImpl implements JdkConsoleProvider {
         public Charset charset() {
             return terminal.encoding();
         }
-
-        private final LineReader jline;
-        private final Terminal terminal;
 
         public JdkConsoleImpl(Terminal terminal) {
             this.terminal = terminal;

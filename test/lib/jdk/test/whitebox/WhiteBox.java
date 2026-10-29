@@ -24,7 +24,11 @@
 package jdk.test.whitebox;
 
 import java.lang.management.MemoryUsage;
+import java.lang.ref.Reference;
 import java.lang.reflect.Executable;
+import java.lang.reflect.InaccessibleObjectException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -138,6 +142,12 @@ public class WhiteBox {
   public         int getConstantPoolCacheLength(Class<?> aClass) {
     Objects.requireNonNull(aClass);
     return getConstantPoolCacheLength0(aClass);
+  }
+
+  private native Object[] getResolvedReferences0(Class<?> aClass);
+  public         Object[] getResolvedReferences(Class<?> aClass) {
+    Objects.requireNonNull(aClass);
+    return getResolvedReferences0(aClass);
   }
 
   private native int remapInstructionOperandFromCPCache0(Class<?> aClass, int index);
@@ -288,6 +298,10 @@ public class WhiteBox {
   public native long NMTNewArena(long initSize);
   public native void NMTFreeArena(long arena);
   public native void NMTArenaMalloc(long arena, long size);
+
+  // Sanitizers
+  public native boolean isAsanEnabled();
+  public native boolean isUbsanEnabled();
 
   // Compiler
   public native boolean isC2OrJVMCIIncluded();
@@ -487,6 +501,8 @@ public class WhiteBox {
   public native long metaspaceCapacityUntilGC();
   public native long metaspaceSharedRegionAlignment();
 
+  public native void cleanMetaspaces();
+
   // Metaspace Arena Tests
   public native long createMetaspaceTestContext(long commit_limit, long reserve_limit);
   public native void destroyMetaspaceTestContext(long context);
@@ -513,6 +529,53 @@ public class WhiteBox {
 
   // Force Full GC
   public native void fullGC();
+
+  // Infrastructure for waitForReferenceProcessing()
+  private static volatile Method waitForReferenceProcessingMethod = null;
+
+  private static Method getWaitForReferenceProcessingMethod() {
+    Method wfrp = waitForReferenceProcessingMethod;
+    if (wfrp == null) {
+      try {
+        wfrp = Reference.class.getDeclaredMethod("waitForReferenceProcessing");
+        wfrp.setAccessible(true);
+        assert wfrp.getReturnType().equals(boolean.class);
+        Class<?>[] ev = wfrp.getExceptionTypes();
+        assert ev.length == 1;
+        assert ev[0] == InterruptedException.class;
+        waitForReferenceProcessingMethod = wfrp;
+      } catch (InaccessibleObjectException e) {
+        throw new RuntimeException("Need to add @modules java.base/java.lang.ref:open to test?", e);
+      } catch (NoSuchMethodException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return wfrp;
+  }
+
+  /**
+   * Wait for reference processing, via Reference.waitForReferenceProcessing().
+   * Callers of this method will need the
+   * @modules java.base/java.lang.ref:open
+   * jtreg tag.
+   *
+   * This method should usually be called after a call to WhiteBox.fullGC().
+   */
+  public boolean waitForReferenceProcessing() throws InterruptedException {
+    try {
+      Method wfrp = getWaitForReferenceProcessingMethod();
+      return (Boolean) wfrp.invoke(null);
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException("Shouldn't happen, we call setAccessible()", e);
+    } catch (InvocationTargetException e) {
+      Throwable cause = e.getCause();
+      if (cause instanceof InterruptedException) {
+        throw (InterruptedException) cause;
+      } else {
+        throw new RuntimeException(e);
+      }
+    }
+  }
 
   // Returns true if the current GC supports concurrent collection control.
   public native boolean supportsConcurrentGCBreakpoints();
@@ -715,12 +778,14 @@ public class WhiteBox {
 
   // Container testing
   public native boolean isContainerized();
-  public native int validateCgroup(String procCgroups,
+  public native int validateCgroup(boolean cgroupsV2Enabled,
+                                   String controllersFile,
                                    String procSelfCgroup,
                                    String procSelfMountinfo);
   public native void printOsInfo();
   public native long hostPhysicalMemory();
   public native long hostPhysicalSwap();
+  public native int hostCPUs();
 
   // Decoder
   public native void disableElfSectionCache();
@@ -751,4 +816,6 @@ public class WhiteBox {
   public native void unlockCritical();
 
   public native boolean setVirtualThreadsNotifyJvmtiMode(boolean enabled);
+
+  public native void preTouchMemory(long addr, long size);
 }
