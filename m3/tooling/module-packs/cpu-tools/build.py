@@ -36,7 +36,8 @@ TOOL_SUFFIXES = (
 )
 CPU_MODULES = tuple("com.m3.tools." + value for value in TOOL_SUFFIXES) + ("com.m3.tools.cpu",)
 MODULES = tuple(sorted(TEXT_MODULES + CPU_MODULES))
-FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest")
+FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest",
+            "M3StructuredAtomsContract", "M3EvidenceMathContract")
 FIXED_JAR_DATE = "2026-01-01T00:00:00Z"
 COMMAND_SECONDS = 115
 CLEANUP_SECONDS = 5
