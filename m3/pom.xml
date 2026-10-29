@@ -13,6 +13,7 @@
   <modules>
     <module>indexdb</module>
     <module>fs</module>
+    <module>llm</module>
     <module>synexia-import</module>
     <module>synexia-import/pure-int-recipe-custody</module>
     <module>tooling/migration-recipes</module>

@@ -9977,6 +9977,848 @@
         },
         "source_state": "target-owned",
         "observation": "Lexical routing facts do not prove regex validity, program semantics or a native speedup."
+      },
+      {
+        "id": "m3.llm.chrome-summary",
+        "kind": "module",
+        "status": "implemented-unverified",
+        "reason": "Receive existing first-party text/Chrome capabilities as an independently Apache-licensed M3JDK-owned module; installed SDK admission remains separate.",
+        "owner": "com.m3.llm",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeBuiltInAiAdapters.java",
+            "sha256": "594a64f9441ffe7022121fb92c8aeb102ed596aec84542b75404508b6ed2334e",
+            "git_blob_sha1": "c2cebc73dd526bfaef43de73a3ab79d49138fbe7",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlAdmissionPolicy.java",
+            "sha256": "88275bc25ac4b1a8d81701a0ca5039bafbd94cbb2136defcb2ce2057e6686a02",
+            "git_blob_sha1": "e3b490b218425d9d61885aeedc4bd2be61b8115f",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlBackend.java",
+            "sha256": "70af72254428a319328d3afed2f9257378f7a148d82a012e17c0122e2decbdc5",
+            "git_blob_sha1": "159fb9bfbff4f0b4c23fed845dc85abcb7c053eb",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlBoundedCapture.java",
+            "sha256": "244fefac1718d2d08f22aa6fb274c086a145a31acb8c4010017d2993f03527a5",
+            "git_blob_sha1": "d86fd06f29636527c6ce1784ea2b377838b4e544",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlContextAdvisor.java",
+            "sha256": "983c35ee3e304f0b74072125e8057f078d099faaf7eb21e372a886eaf1114451",
+            "git_blob_sha1": "8ccbffd240b8159f2e6a5fa23f4b105b7469363f",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlContextPacket.java",
+            "sha256": "e2f47a6c1fe8175c33fe521c5d5bf94dddce8ff1433966d0cef21866e09d364b",
+            "git_blob_sha1": "199343ac8e90d8ea2c6869245aef2e9ae82e9c6a",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlPathPolicy.java",
+            "sha256": "4643ccce29234f38cd4713155fd90402ef0afd76c2af83cced7a1788dabe1e70",
+            "git_blob_sha1": "f280058ac0c7d0a31348ef11f21e57f14d276963",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlProcessRunner.java",
+            "sha256": "b34c47e8f136cfadf06184353149cc68ea370f7fac10ef27de1ea0f9f2711901",
+            "git_blob_sha1": "f35e5561a9e7b37e26a0097f40d7a2db5b1958c1",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlProductionConfig.java",
+            "sha256": "ffb84ead5fa530824def62e4503ad54ea99106cee18c4c838e5a1fd6f6c8d231",
+            "git_blob_sha1": "7cc764f04be37c6c7f2eb6bdcd80a98b131216b9",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlRequestException.java",
+            "sha256": "e37db393f0bd753d66e913499628e2c97eac14ca36fb35bb5431be8f765a957d",
+            "git_blob_sha1": "c111a5a0627ca31730b35b0a50ee8d67018dab06",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlRunner.java",
+            "sha256": "2b7475a1671523faf8306d3f51801f989655065ceafe45b545983dd4542bb3e1",
+            "git_blob_sha1": "07b6e4eb691432ea167f894cafdcdc258f95228e",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlRunnerOutputParser.java",
+            "sha256": "1de2df3f158ec3e886749a111a1acb05fbb9776f89e63ce1c30c91a1d3928436",
+            "git_blob_sha1": "3b5336ec81c69b8f64da8617a85077459a404de5",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlRunnerRequest.java",
+            "sha256": "e20395e9ed19baa2f04aedc388a9c9df83849a31270407b8291ff0bda3d5225c",
+            "git_blob_sha1": "ebdd7c92d4621ed6cf93bfa147afecc021903234",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlRunnerResult.java",
+            "sha256": "00c8b02ff40c8a0aad14dd047af8adb1cfb44a1e35f33bf0669ed12be3bdb4fb",
+            "git_blob_sha1": "7e07d46a98dbe8540bf4025353230b2705ec3a11",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlRuntimeDoctor.java",
+            "sha256": "e897c794199606e01938ad2a61b1bc924cd112975f6cf37530349f4104d12d2c",
+            "git_blob_sha1": "5f9be07b2ef0dd66be6366e4b548d54935ef93bc",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlRuntimeLayout.java",
+            "sha256": "f3ddf3d6ecb3d7ede05799ea494c109e8d9b0a11e99edfad445ba495e4b218d7",
+            "git_blob_sha1": "4bb1796cb28a4f467a4481d1285969d4ad4afbda",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlRuntimeProbe.java",
+            "sha256": "ca36b92e9da8c5f7961a2a44a23b02521d0b395b74ab72887f0d189f98b75a4e",
+            "git_blob_sha1": "d653614fca7897089359a111ed3895a3e96cfeab",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/ChromeMlTaskService.java",
+            "sha256": "2db4268fe843eec2f4456a98f8adc277bcef26a2a3168a0840c90f3a132b46ec",
+            "git_blob_sha1": "083ab3ca17b968494a4f698bb802f85584ac21c6",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/aix/AiXChromeMlMultipass.java",
+            "sha256": "394ec4726436b81490801ba759a4c29d44b1ad8bf896820659634fc67d808666",
+            "git_blob_sha1": "ea739ff7d77c394f8c4b6f6e675d03d8ece12bbe",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/aix/AiXMechanicalPlan.java",
+            "sha256": "7e7cf35d70fa0b69eee43c7a98cad218e95c5e4266b8559d2c6837d90f0ee210",
+            "git_blob_sha1": "4774b55d62a7de94f67b77f101b3b64abfb9af74",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-chromeml-api/src/main/java/com/synexia/chromeml/api/aix/AiXSourceSnapshot.java",
+            "sha256": "4243c6929c314c82e91ca86f406c29a0ddc7ba93c369eccd31b1d1cb2b53d827",
+            "git_blob_sha1": "b0e6287ff27ce2651c83af0ffedb7784011b6958",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/convergence/BrowserSummaryTreeCandidateProvider.java",
+            "sha256": "b313536d82e7cb0359a39f23ee1c208a79fccb5cec7d4772c1318acff32e7712",
+            "git_blob_sha1": "f20c04b88ba6e67299daa1d583bdbe30f7117db6",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/convergence/ChromeBrowserSummarizerCandidateProvider.java",
+            "sha256": "601a1e86bc28316e51d98c2b1e86a3688be568dc8f112505781f9335736b6047",
+            "git_blob_sha1": "35782e6b58a26b299ec0d4d9a5e999584666b335",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/convergence/MixedModeSummaryConsolidator.java",
+            "sha256": "4124f9458488540597ebc6d12a4d61ff6c4bb7fcddfef734a3f6f13dbf53ab96",
+            "git_blob_sha1": "e2cee9ef068ea741ccea234c21de4714b15447a2",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/convergence/SourceAnchoredSummary.java",
+            "sha256": "a9a6770cef53534427cb5ebc6ad49904d0165ed5e822ce3b2e11bb713a13517c",
+            "git_blob_sha1": "4691f308fe57afcffc3ad5840c93542ea17b1d35",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-classic-intelligence/src/main/java/com/synexia/classic/text/ExtractiveSummarizer.java",
+            "sha256": "4b706304c68515ca50e7b1364831f426a2fd9f7adeb3a346e2b8caa30962fe89",
+            "git_blob_sha1": "703f0f26672197c21b021c793fd9192f29247582",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/m3/CanonicalJson.java",
+            "sha256": "98bba0e423df7d6050f855c2286aaa464d6654acfc7cb3cd1a9dec29bee9b6c7",
+            "git_blob_sha1": "871b65039ac05bc36293045c4b39ba1a3a80cc98",
+            "revision_role": "pinned",
+            "derivation": "EXECUTED_CANONICAL_JSON_CORRECTION_WITH_COPYRIGHT_METADATA"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/m3/LuhnSummarizer.java",
+            "sha256": "c8f9a46562a74745593e7d3d74eef46501b08a80a92a6b1ffcf80dac495ad134",
+            "git_blob_sha1": "2edddb5a23e267e668603a65bcd96062c2e1e8ff",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/m3/M3ContractException.java",
+            "sha256": "7cfc630226c26b7cd0c157224779debb940d95efa2d551e1f30d38d87ea77b33",
+            "git_blob_sha1": "4090fdb1742d6f84e68e28de628cc8695bf0ae15",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-dictlang/src/main/java/com/dictlang/plan/PlanHash.java",
+            "sha256": "6a492a012632ffc68e3e56cf91472f6fbc6f137d22ac391972a4b7b6fa9ca45f",
+            "git_blob_sha1": "f13cfaebb17c4735d7aa421dca9c1eaa45d45c62",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/m3/Sha256.java",
+            "sha256": "0132e11553e7207f53c2bafc9a6f2ba8fc62db597259bdbeea45a5e0798dca04",
+            "git_blob_sha1": "e1d3b6e4e5cc93eb215f3b8c696645b615be6dd4",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "tools/m3-superset/java/com/synexia/m3/superset/ForgeJson.java",
+            "sha256": "6fe80e0bbcca8e6c4d4b74c4d89929c1c46d178764fd26032628c6aed0187a60",
+            "git_blob_sha1": "5e555d3d8b2fcd7f2106c1988ac6618fcc673f64",
+            "revision_role": "pinned",
+            "derivation": "PINNED_JSON_HELPER_ATOM_EXTRACTION"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "tools/m3-superset/java/com/synexia/m3/superset/PinnedGitObjects.java",
+            "sha256": "1c6d830dc5486885299e90377b6d8f4b0ea2566596352464918b9c6c15f15965",
+            "git_blob_sha1": "34d19610badd383f85deb8e626ddf5c1dc4a2489",
+            "revision_role": "pinned",
+            "derivation": "PINNED_JSON_HELPER_ATOM_EXTRACTION"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "tools/m3-superset/java/com/synexia/m3/superset/RecoveryJson.java",
+            "sha256": "f2fb363d0d758c9bdd1a02932c7571d04b5823790708bd2b0e3de611e78cdf55",
+            "git_blob_sha1": "7c4bff61bbc6b6dcabba70ae30ff8345bb038954",
+            "revision_role": "pinned",
+            "derivation": "PINNED_JSON_HELPER_ATOM_EXTRACTION"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/structuredentropy/BloomHint.java",
+            "sha256": "0ba815b4ec7822e6eddaeef4def222a0a2e862727310cd0514c1858ce3d368d5",
+            "git_blob_sha1": "e2ddd880ec1da11ce997e36dd950fe161482d87f",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/structuredentropy/Bm25Index.java",
+            "sha256": "d92e525ded6cb04b8b3e0e4a97dd5803bbe50d744de135ed83dd8e27b3c98afd",
+            "git_blob_sha1": "bdf5590655191f594a98ecdfc8fe3dc4cdce06bd",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/structuredentropy/CellKey.java",
+            "sha256": "a8831f1084af109bc07b61735bf5392866361d524fee82fd44c5e1e44c26e909",
+            "git_blob_sha1": "46eb48941d78aa361caa327b16ea14027f290ba1",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/structuredentropy/EntropyValues.java",
+            "sha256": "aa8425d23444fc2df4a562b409c273a8fd764307303b04af7fca973f9fffd5f0",
+            "git_blob_sha1": "948b29f75c471d117390f3399e24c2aaaacb9bd2",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/structuredentropy/ExtractiveConsolidator.java",
+            "sha256": "a3a20624c9cab57c6773fdb928e8c7acf4580eabf919d3e5286104f67f94fd8d",
+            "git_blob_sha1": "0e12a639893bb76aefdc43066c6d65555acea51c",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/structuredentropy/InventorySnapshot.java",
+            "sha256": "23cd7956f37bb0ca00583b9e4897462fa74d50e79586e8efae4fb73a81280f1b",
+            "git_blob_sha1": "db4059727f92782eadc7b49357be4f952af931be",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/structuredentropy/SnapshotCodec.java",
+            "sha256": "9620a8d4d3900b3ee236e980c0125fcbee9ce2fc2daa22d45cc1b92bafdc0fd0",
+            "git_blob_sha1": "cc4169cc9ca0a84865e93511bf8e8910298d8b9d",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "synexia-cpullm/src/main/java/com/synexia/cpullm/structuredentropy/TextInventoryCell.java",
+            "sha256": "b4e5c128bd7f44a3bc08836ef35418616164a9b07ead083824989180118e330a",
+            "git_blob_sha1": "562b9fbe0c8964f1b4c445ffac326fdce29ff5df",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "path": "cpullm-java/skill-dag/src/main/java/com/synexia/cpullm/skilldag/LuhnSummary.java",
+            "sha256": "8538771e7bb4a062b11966497b545f172e5a3d2d6a4467a56f99a96a69b5a19c",
+            "git_blob_sha1": "735d35b6801fc5161dc53277ab1870816923736c",
+            "revision_role": "pinned",
+            "derivation": "EXACT_DONOR"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeBuiltInAiAdapters.java",
+            "symbol": "com.m3.llm.chrome.ChromeBuiltInAiAdapters",
+            "sha256": "f597d910a1ec52b45f8d1b247ea54bfefb798530a08ef8d82c3a5f9cfac2fead",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlAdmissionPolicy.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlAdmissionPolicy",
+            "sha256": "1b0c2aebd1f630d4b91661244d5b304b1c3aa9abda79e62bde55da9cbb86343c",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlBackend.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlBackend",
+            "sha256": "ce10cdc73ff1693c8c0f078f7687c3c74644dbfb5f27c80d873f8ca8de13e482",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlBoundedCapture.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlBoundedCapture",
+            "sha256": "74d4fc5dd0257a6bb20b6cae4d87903a5761f99a6458a1fa34a539bcc81172f0",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlContextAdvisor.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlContextAdvisor",
+            "sha256": "d811b7ac806873087d319718f39f8fe1930ca01e33f8e628621f15c6ba935eb9",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlContextPacket.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlContextPacket",
+            "sha256": "04eba837a90af46c4834800a2200f13eb41599ad1d7b400073212d383603abf4",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlPathPolicy.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlPathPolicy",
+            "sha256": "b1d238271ca6f7db4aa4d0cd433b2059b032f3ae9ac48e5324963001a8936c14",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlProcessRunner.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlProcessRunner",
+            "sha256": "268822c0a0d663cdc8483d7d03475c44e755362457065ef61adafb7d4a3446f7",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlProductionConfig.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlProductionConfig",
+            "sha256": "de317c12ae70948890893f12aa39e6c046961a4772ca90dbf27b6ce1db053dca",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlRequestException.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlRequestException",
+            "sha256": "bc398ed553d627c36535f68b142918271bb72ce1d8c5a9209187928ade6f452a",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlRunner.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlRunner",
+            "sha256": "a48c8432f973bf9329ea0932483064f3b4eec7664ee74fb6b7b7b6623fc4707d",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlRunnerOutputParser.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlRunnerOutputParser",
+            "sha256": "d04752f0b9767fa32fdfb8ee9107ee568bdfccd8d10c3d2caf19dc9939dad5d4",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlRunnerRequest.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlRunnerRequest",
+            "sha256": "95cee947e2ca5cd12806b2116aa943d7b13a26e4540a68a2b2b361a5a9cb2802",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlRunnerResult.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlRunnerResult",
+            "sha256": "8c54f6af390ae27118c4a635ae05b9236c4bdd093cb844570e1ecaebdcd43985",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlRuntimeDoctor.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlRuntimeDoctor",
+            "sha256": "40e317e5031e99be7bd384832979090a83e92deecd728c10df23cdd00dde20e9",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlRuntimeLayout.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlRuntimeLayout",
+            "sha256": "9ab0134e901179e29ae0208f6cf106acd82f0cf2213a6d2917d20313ba91b4a3",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlRuntimeProbe.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlRuntimeProbe",
+            "sha256": "26f996c1b214506e4480922d5c1de89932b7b349bae9361ec628d73ee4a9790a",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/ChromeMlTaskService.java",
+            "symbol": "com.m3.llm.chrome.ChromeMlTaskService",
+            "sha256": "e8b3e90d735a7311cf49011573a2eb9570d547beb493009c5a7e5fdf472d20d3",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/aix/AiXChromeMlMultipass.java",
+            "symbol": "com.m3.llm.chrome.aix.AiXChromeMlMultipass",
+            "sha256": "f56dbf18a6016ccba5a5a80b53bccf811913c56956fd350a3a34afb217a2d0af",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/aix/AiXMechanicalPlan.java",
+            "symbol": "com.m3.llm.chrome.aix.AiXMechanicalPlan",
+            "sha256": "ca0ef8c776cb01f14691e7c18ed5e4ad3c12ab6e8c484327c607f4c6a812e1b7",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/chrome/aix/AiXSourceSnapshot.java",
+            "symbol": "com.m3.llm.chrome.aix.AiXSourceSnapshot",
+            "sha256": "9aef3df3f1a75e10248fe01bd790438afd79c3617a23ebf6cd11daf5035a06c9",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/evidence/BrowserSummaryTreeCandidateProvider.java",
+            "symbol": "com.m3.llm.evidence.BrowserSummaryTreeCandidateProvider",
+            "sha256": "b56739cedbba80e98a4a92076fb713268103d28b7bc7b2570b0b3090756239cc",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/evidence/ChromeBrowserSummarizerCandidateProvider.java",
+            "symbol": "com.m3.llm.evidence.ChromeBrowserSummarizerCandidateProvider",
+            "sha256": "7c33479c79107a22bc347eeee5d5cd2aa69f7b21857b1a52ad719239da5793f1",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/evidence/MixedModeSummaryConsolidator.java",
+            "symbol": "com.m3.llm.evidence.MixedModeSummaryConsolidator",
+            "sha256": "742bd75d47ae8f412a9f13c72d2e4a3c42864a9de97d79a9eb7157257476bdb0",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/evidence/SourceAnchoredSummary.java",
+            "symbol": "com.m3.llm.evidence.SourceAnchoredSummary",
+            "sha256": "9b130f2f34aaea19d88e05739942a26ede2420f7520d70c73f47b6029f060754",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/extract/ExtractiveSummarizer.java",
+            "symbol": "com.m3.llm.extract.ExtractiveSummarizer",
+            "sha256": "3eac535d5725c388d5897e7b0402af108da88d314054f9a8cf671f0088a11027",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/internal/CanonicalJson.java",
+            "symbol": "com.m3.llm.internal.CanonicalJson",
+            "sha256": "a3c46cff8879ac05e71699a905e1c95520322439593c89a3a3db5961f432c76b",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/internal/LuhnSummarizer.java",
+            "symbol": "com.m3.llm.internal.LuhnSummarizer",
+            "sha256": "53555ec96988a1f740ce7e8ced03891f24eac53691c72299fc7c1a8fa50045e0",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/internal/M3ContractException.java",
+            "symbol": "com.m3.llm.internal.M3ContractException",
+            "sha256": "003cdd039da26bef1e74d7fc5082f0787f363fa7b6b0d50e3f2748fc23e28245",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/internal/PlanHash.java",
+            "symbol": "com.m3.llm.internal.PlanHash",
+            "sha256": "c9caf84cf204b9e57e2b5829fd32061e31f87ee5755039ccf7b2317a45f4f044",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/internal/Sha256.java",
+            "symbol": "com.m3.llm.internal.Sha256",
+            "sha256": "b6399830a9dbb4501ac51f8d8ed164593fb781adade0c7a73382d67d0a0fc35a",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/internal/json/ForgeJson.java",
+            "symbol": "com.m3.llm.internal.json.ForgeJson",
+            "sha256": "f4cf51923ada3e3b05d7593d188bc2f370db6dbc5754808bef6fcad9ffaa0e7a",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/internal/json/JsonSupport.java",
+            "symbol": "com.m3.llm.internal.json.JsonSupport",
+            "sha256": "3e0f773cd35b1e60048b2a5a9e1e6efe3e087eda921d5a387f76d4e8d335f0ca",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/internal/json/RecoveryJson.java",
+            "symbol": "com.m3.llm.internal.json.RecoveryJson",
+            "sha256": "9bc575a72c4f47f969ee9d2303e709fa72560f47f00c05a7c3718dfaf2340585",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/projection/BloomHint.java",
+            "symbol": "com.m3.llm.projection.BloomHint",
+            "sha256": "dcb21fffb2c0487a5efe314577648fce9d9663ecbc4e17780b5ab2700ac86200",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/projection/Bm25Index.java",
+            "symbol": "com.m3.llm.projection.Bm25Index",
+            "sha256": "18451cb56eff80e5bb75dbb75a0b73e289642930f8a5489cecd9ea0a17a16a17",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/projection/CellKey.java",
+            "symbol": "com.m3.llm.projection.CellKey",
+            "sha256": "0e0b6b08001f8b46b7f50b1a5b69262a72b0b60d761e48f0a95d8b486dab8cc5",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/projection/EntropyValues.java",
+            "symbol": "com.m3.llm.projection.EntropyValues",
+            "sha256": "0d608de45fd1b2cb3d6932e6a44162ec3e68321149fe73fe9aba2a0950c4f3de",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/projection/ExtractiveConsolidator.java",
+            "symbol": "com.m3.llm.projection.ExtractiveConsolidator",
+            "sha256": "2ab98cca1a7c309bcd935a5098cead35dbbb911759870e7a9747c1508444a6e2",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/projection/InventorySnapshot.java",
+            "symbol": "com.m3.llm.projection.InventorySnapshot",
+            "sha256": "499f6c0efc23d3823d920d5935df6768509a6a1cbeb749235b0c3fbefbca5bd9",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/projection/SnapshotCodec.java",
+            "symbol": "com.m3.llm.projection.SnapshotCodec",
+            "sha256": "ec413245f4a6cc99f5db3427fa53b4cdc5457791fafb0e47b30913032c036a7d",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/projection/TextInventoryCell.java",
+            "symbol": "com.m3.llm.projection.TextInventoryCell",
+            "sha256": "784ed0a03cc2f1d598b41e4449acab1c595e0f502575c42d71bb00bf8dda0b1e",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.llm",
+            "path": "m3/llm/src/main/java/com/m3/llm/summary/LuhnSummary.java",
+            "symbol": "com.m3.llm.summary.LuhnSummary",
+            "sha256": "c9386aede54570a64506fdbe2c640b96059f45953eae3ae79223c67df430c521",
+            "revision_role": "candidate"
+          }
+        ],
+        "contract": {
+          "public_surface": "Additive com.m3.llm packages; existing Java SE and Synexia APIs unchanged.",
+          "differences": [
+            "Typed package relocation",
+            "Minimal exact JSON helper extraction",
+            "Two CanonicalJson rejection corrections plus attribution metadata",
+            "Explicit equivalent ExtractiveSummarizer default constructor"
+          ]
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "JDK-platform"
+          },
+          {
+            "id": "jdk.httpserver",
+            "resolution": "JDK-platform"
+          }
+        ],
+        "recipe": {
+          "id": "m3jdk-llm-summary-20261029",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk-llm-summary-20261029",
+          "source_repository": "hsoliwal/com.synexia",
+          "engines": [
+            "org.openrewrite.java.ChangePackage",
+            "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+            "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe"
+          ],
+          "version": "OpenRewrite 8.17.1",
+          "preconditions": [
+            "Exact pinned existing metadata or absent target paths",
+            "Fixed-point output accepted; source drift refuses"
+          ]
+        },
+        "tests": [
+          "m3/llm/src/test/java",
+          "m3/llm/browser/tests",
+          "m3/llm/RECEIVER_RECEIPT.json"
+        ],
+        "provenance": {
+          "license": "Apache-2.0",
+          "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+          "inventory": "m3/llm/SOURCE_PROVENANCE.tsv",
+          "source_custody": "Canonical recipes, templates and failure memory remain private in Synexia"
+        },
+        "sync": {
+          "source_revision": "2ab439480ecb0643615e85b42def954dbf3b5627",
+          "target_base": "4bd7f5b2b1414d1f607ceab28a498e3889020701",
+          "direction": "canonical-recipe-to-target",
+          "pending": [
+            "Full source-built M3JDK image and jtreg",
+            "Live browser/native model execution",
+            "Windows/GPU and performance qualification"
+          ],
+          "conflicts": []
+        },
+        "phase": "Component candidate; String -> arrays -> collections -> AST/compiler receiving order unchanged"
       }
     ]
   },
