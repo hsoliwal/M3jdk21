@@ -25,8 +25,15 @@ public final class M3TextSmoke {
         if (!expected.equals(actual)) throw new AssertionError(expected + " != " + actual);
     }
     public static void main(String[] args) throws Exception {
+        same(true, TextTools.nativeTextAvailable()); // fail if the linked image silently uses Java fallback
         same("a\nb\n", TextTools.sort(text("b\na"), false, LIMITS).text());
         same("a\nb\n", TextTools.uniq(text("a\na\nb\n"), LIMITS).text());
+        same("A\né\n😀\n", TextTools.sort(text("😀\né\nA\n"), false, LIMITS).text());
+        same("😀\n😀\né\nA\n", TextTools.sort(text("A\n😀\n😀\né\n"), true, LIMITS).text());
+        same("😀\r\nx\n", TextTools.uniq(text("😀\r\n😀\nx\n"), LIMITS).text());
+        StringBuilder nativeUniqueInput = new StringBuilder();
+        for (int i = 0; i < 130; i++) nativeUnqiueInput.append(i / 2).append('\n');
+        same(65, TextTools.uniq(text(nativeUnqiueInput.toString()), LIMITS).lines().size());
         same("a\n", TextTools.comm(text("a\nb\n"), text("a\nc\n"), LIMITS).common().text());
         same("a\tleft\tright\n", TextTools.join(text("a\tleft\n"), text("a\tright\n"), LIMITS).text());
         same("😀\n", TextTools.cut(text("a😀b\n"), 1, 2, LIMITS).text());
