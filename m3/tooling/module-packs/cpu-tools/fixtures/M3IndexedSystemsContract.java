@@ -150,6 +150,13 @@ public final class M3IndexedSystemsContract {
         refuses(() -> M3PairwiseCases.cover(new int[]{4}, 20));
         refuses(() -> M3PairwiseCases.cover(new int[]{5,5}, 24));
         refuses(() -> M3PairwiseCases.cover(new int[]{0,4}, 50));
+        M3PairwiseCases.Cases shape = M3PairwiseCases.cover(new int[]{2,3}, 16);
+        for (int[] coordinate : new int[][]{{-1,0},{0,-1},{shape.rows(),0},{0,shape.parameters()},{1,-1}}) {
+            try {
+                shape.at(coordinate[0], coordinate[1]);
+                throw new AssertionError("pairwise coordinate must refuse");
+            } catch (IndexOutOfBoundsException expected) { checks++; }
+        }
     }
 
     private static void acl(Random r) {

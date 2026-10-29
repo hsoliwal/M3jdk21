@@ -18,6 +18,8 @@ public final class M3PairwiseCases {
         @Override public int[] values() { return values.clone(); }
         public int rows() { return values.length / parameters; }
         public int at(int row, int column) {
+            if (row < 0 || row >= rows() || column < 0 || column >= parameters)
+                throw new IndexOutOfBoundsException("pairwise row/column");
             return values[Math.addExact(Math.multiplyExact(row, parameters), column)];
         }
     }
