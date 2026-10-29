@@ -49,9 +49,9 @@ diags() { grep -E ': (warning|error):' "$1" | sed -E 's#^.*[\\/]##; s/:[0-9]+:/:
 
 # Baseline overlay: HEAD versions of the two changed owners, ahead of the sparse sources.
 mkdir -p "$OUT/base/java/lang" "$OUT/base/jdk/internal/access"
-git -C "$ROOT" show HEAD:src/java.base/share/classes/java/lang/System.java > "$OUT/base/java/lang/System.java"
+git -C "$ROOT" show HEAD:src/java.base/share/classes/java/lang/System.java > "$OUT/base/java/lang/System.java" || exit 1
 git -C "$ROOT" show HEAD:src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java \
-    > "$OUT/base/jdk/internal/access/JavaLangAccess.java"
+    > "$OUT/base/jdk/internal/access/JavaLangAccess.java" || exit 1
 BASE=("$OUT/base/java/lang/System.java" "$OUT/base/jdk/internal/access/JavaLangAccess.java")
 BASEPATH="java.base=$OUT/base$SEP$SRC"
 JAVAC="$JDK/bin/javac"
@@ -76,29 +76,35 @@ gate G3_base_system_make_lint 0 - "$JAVAC" "$LINT" -Werror --patch-module "$BASE
 gate G3_cand_system_make_lint 0 - "$JAVAC" "$LINT" -Werror --patch-module "java.base=$SRC" \
     -d "$OUT/c-g3" "${CHANGED[@]}"
 # G3d: make's doclint options; the candidate may add no doclint diagnostic to the baseline set.
+doclint_compile_ok=1
 DOCLINT=(-Xdoclint:all/protected '-Xdoclint/package:java.*,javax.*')
 "$JAVAC" "$LINT" "${DOCLINT[@]}" --patch-module "$BASEPATH" -d "$OUT/c-g3db" "${BASE[@]}" \
-    > "$OUT/G3d.base.log" 2>&1
+    > "$OUT/G3d.base.log" 2>&1 || doclint_compile_ok=0
 "$JAVAC" "$LINT" "${DOCLINT[@]}" --patch-module "java.base=$SRC" -d "$OUT/c-g3d" "${CHANGED[@]}" \
-    > "$OUT/G3d.cand.log" 2>&1
+    > "$OUT/G3d.cand.log" 2>&1 || doclint_compile_ok=0
 diags "$OUT/G3d.base.log" > "$OUT/G3d.base.diags"
 diags "$OUT/G3d.cand.log" > "$OUT/G3d.cand.diags"
-gate G3d_doclint_no_new_diagnostics 0 - diff "$OUT/G3d.base.diags" "$OUT/G3d.cand.diags"
+if [ "$doclint_compile_ok" = 1 ]; then
+    gate G3d_doclint_no_new_diagnostics 0 - diff "$OUT/G3d.base.diags" "$OUT/G3d.cand.diags"
+else
+    gate G3d_doclint_no_new_diagnostics 0 - false
+fi
 # G4: qualified-export probe. java.base's module-info (picked up from the patch path) exports
 # jdk.internal.access to a module absent at compile time; module lint must reject it under
 # make's -Werror, and only module lint (G4c control).
 mkdir -p "$OUT/export"
 sed '/^    exports jdk\.internal\.access to$/,/;$/ s/^        jdk\.crypto\.cryptoki;$/        jdk.crypto.cryptoki,\n        jdk.m3.text;/' \
-    "$SRC/module-info.java" > "$OUT/export/module-info.java"
+    "$SRC/module-info.java" > "$OUT/export/module-info.java" || exit 1
 [ "$(grep -c '^        jdk.m3.text;$' "$OUT/export/module-info.java")" = 1 ] \
-    || echo "export probe edit did not apply exactly once"
+    || { echo "export probe edit did not apply exactly once" >&2; exit 1; }
 gate G4_export_to_absent_module nonzero 'module not found: jdk\.m3\.text' "$JAVAC" "$LINT" -Werror \
     --patch-module "java.base=$OUT/export$SEP$SRC" -d "$OUT/c-g4" "${CHANGED[@]}"
 gate G4c_export_module_lint_off 0 - "$JAVAC" "$LINT,-module" -Werror \
     --patch-module "java.base=$OUT/export$SEP$SRC" -d "$OUT/c-g4c" "${CHANGED[@]}"
 
 # Oracle: compile, then patch in only classes absent from the stock java.base image.
-"$JDK/bin/jimage" list "$JDK/lib/modules" | tr -d '\r' \
+"$JDK/bin/jimage" list "$JDK/lib/modules" > "$OUT/stock-image-list.txt" || exit 1
+tr -d '\r' < "$OUT/stock-image-list.txt" \
     | awk '/^Module: /{m=$2; next} m=="java.base" && /\.class$/{gsub(/^ +/,""); print}' \
     | sort -u > "$OUT/stock-java-base.txt"
 oracle() { # oracle <name> <0|nonzero> <run pattern> <overlay dir or ->
@@ -136,4 +142,31 @@ mutant M1_start_plus_one 's/((long) start << (width - LATIN1_WIDTH))/((long) (st
 mutant M2_byte_order_swapped 's/if (width == UTF16_WIDTH \&\& atom.bigEndian)/if (width == UTF16_WIDTH \&\& !atom.bigEndian)/'
 mutant M3_inline_off_by_one 's/head |= (long) unit << (index \* BYTE_BITS);/head |= (long) unit << ((index + 1) * BYTE_BITS);/'
 hb done
-cat "$GATES"
+# Report success only for the complete, uniquely named set of passing gates.
+# Expected-failure commands remain successful gates only when their exit and ERE match.
+verify_gate_results() {
+    local expected="G1_base_release21_werror G1_cand_release21_werror G1_delta_no_new_diagnostics G2_base_release21_make_lint G2_cand_release21_make_lint G3_base_system_make_lint G3_cand_system_make_lint G3d_doclint_no_new_diagnostics G4_export_to_absent_module G4c_export_module_lint_off O1_component_javac O1_component_run M1_start_plus_one_javac M1_start_plus_one_run M2_byte_order_swapped_javac M2_byte_order_swapped_run M3_inline_off_by_one_javac M3_inline_off_by_one_run"
+    cat "$GATES" || return 1
+    awk -F '\t' -v expected="$expected" '
+        BEGIN {
+            count = split(expected, names, " ")
+            for (i = 1; i <= count; i++) required[names[i]] = 1
+        }
+        NR == 1 {
+            if ($0 != "gate\texpect\tpattern\trc\tverdict\tlog") bad = 1
+            next
+        }
+        {
+            if (NF != 6 || !($1 in required) || seen[$1]++ || $5 != "PASS") bad = 1
+        }
+        END {
+            for (name in required) if (seen[name] != 1) bad = 1
+            if (bad || NR != count + 1) {
+                print "M3_LEAF_VERIFY_FAILED incomplete, duplicate or non-PASS gates" > "/dev/stderr"
+                exit 1
+            }
+            print "M3_LEAF_VERIFY_PASS gates=" count
+        }
+    ' "$GATES"
+}
+verify_gate_results
