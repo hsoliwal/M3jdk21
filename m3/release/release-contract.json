@@ -6,8 +6,9 @@
     "upstream_repository": "openjdk/jdk21",
     "upstream_baseline": "890adb6410dab4606a4f26a942aed02fb2f55387",
     "release_branch": "release/first-clean-boundary-20261007",
-    "single_fork_commit_required": true,
-    "released_history_immutable_after_tag": true
+    "single_fork_commit_required": false,
+    "released_history_immutable_after_tag": true,
+    "append_only_history_required": true
   },
   "priority_order": [
     "M3_STRING",
@@ -113,5 +114,15 @@
       "receiving_sequence_advanced": false,
       "performance_superiority": "NOT_CLAIMED"
     }
+  },
+  "release_evidence": {
+    "schema": "M3_RELEASE_EVIDENCE_V1",
+    "scope": "ONE_EXACT_SOURCE_TREE_AND_PLATFORM",
+    "mandatory_gate_receipts_required": true,
+    "nonempty_product_artifacts_required": true,
+    "raw_proof_sha256_required": true,
+    "zero_test_gate_is_failure": true,
+    "local_integrity_is_remote_attestation": false,
+    "development_source_check_is_release_admission": false
   }
 }

@@ -23,6 +23,8 @@
 # questions.
 #
 
+# Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
+# Modified to retain candidate JDK bundles; original licensing and job contracts remain.
 name: 'OpenJDK GHA Sanity Checks'
 
 on:
@@ -330,9 +332,9 @@ jobs:
       bootjdk-platform: windows-x64
       runs-on: windows-2019
 
-  # Remove bundles so they are not misconstrued as binary distributions from the JDK project
+  # Retain candidate bundles for download; artifact availability is not release admission.
   remove-bundles:
-    name: 'Remove bundle artifacts'
+    name: 'Retain bundle artifacts'
     runs-on: ubuntu-22.04
     if: always()
     permissions:
@@ -356,11 +358,11 @@ jobs:
       - test-windows-x64
 
     steps:
-      - name: 'Remove only this run''s bundle artifacts'
+      - name: 'Report this run''s retained bundle artifacts'
         uses: actions/github-script@v6
         with:
           script: |
-            // Uploads use artifact API v4. Never delete published test results.
+            // Candidate bundles expire under the uploader's 14-day retention policy.
             const { owner, repo } = context.repo;
             const artifacts = await github.paginate(
               github.rest.actions.listWorkflowRunArtifacts,
@@ -369,8 +371,6 @@ jobs:
               if (!artifact.name.startsWith('bundles-')) {
                 continue;
               }
-              await github.rest.actions.deleteArtifact({
-                owner, repo, artifact_id: artifact.id
-              });
-              core.info(`Removed bundle ${artifact.name} (${artifact.id})`);
+              core.info(`Retained candidate bundle ${artifact.name} (${artifact.id}); expires ${artifact.expires_at}`);
+              core.info(`Download: https://github.com/${owner}/${repo}/actions/runs/${context.runId}/artifacts/${artifact.id}`);
             }

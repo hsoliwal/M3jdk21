@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # M3 vCPU native layer: HAL core + built-in CPU backend (m3vcpu), OpenCL backend (m3vcpu_opencl,
 # OpenCL.dll loaded at run time), JNI glue (m3vcpu_jni), ctest gates.
 # Template: M3jdk21 m3/ports/precompute/src/main/native (C11 core + _jni.c glue, -Werror, path file).
@@ -6,6 +7,8 @@ cmake_minimum_required(VERSION 3.20)
 project(m3vcpu VERSION 0.1.0 LANGUAGES C)
 
 option(M3VCPU_BUILD_JNI "Build the JNI glue (needs JNI headers)" ON)
+set(M3VCPU_JNI_INCLUDES "" CACHE STRING
+    "Explicit target JNI include directories; cross builds must not use host JAVA_HOME headers")
 option(M3VCPU_BUILD_OPENCL "Build the OpenCL backend (no SDK needed)" ON)
 option(M3VCPU_ENABLE_AVX512 "Build the AVX-512 (x86-64-v4) CPU kernel variant" ON)
 option(M3VCPU_BUILD_WEBGPU "Build the WebGPU backend (webgpu.h; statically links Dawn from M3VCPU_DAWN_DIR)" OFF)
@@ -163,20 +166,72 @@ if(M3VCPU_BUILD_WEBGPU)
 endif()
 
 # ---- m3vcpu_jni: thin JNI glue ------------------------------------------------------------
+# Headers are a target ABI input. This library does not link libjvm or libjawt.
+function(m3vcpu_require_jni_headers)
+  if(NOT M3VCPU_JNI_INCLUDES)
+    if(ANDROID)
+      # The NDK supplies standalone jni.h in the target sysroot. Prove it below.
+    elseif(CMAKE_CROSSCOMPILING OR CMAKE_SYSTEM_NAME MATCHES "^(iOS|tvOS|watchOS|visionOS)$")
+      message(FATAL_ERROR
+        "Cross-target JNI requires explicit M3VCPU_JNI_INCLUDES; host JAVA_HOME is not a target JNI adapter")
+    else()
+      find_package(JNI QUIET)
+      if(EXISTS "${JAVA_INCLUDE_PATH}/jni.h")
+        set(M3VCPU_JNI_INCLUDES "${JAVA_INCLUDE_PATH}")
+        if(EXISTS "${JAVA_INCLUDE_PATH2}/jni_md.h" OR EXISTS "${JAVA_INCLUDE_PATH2}/jniport.h")
+          list(APPEND M3VCPU_JNI_INCLUDES "${JAVA_INCLUDE_PATH2}")
+        endif()
+      else()
+        set(m3vcpu_java_home "${JAVA_HOME}")
+        if(NOT m3vcpu_java_home AND DEFINED ENV{JAVA_HOME})
+          set(m3vcpu_java_home "$ENV{JAVA_HOME}")
+        endif()
+        if(m3vcpu_java_home AND EXISTS "${m3vcpu_java_home}/include/jni.h")
+          if(WIN32)
+            set(m3vcpu_jni_platform win32)
+          elseif(APPLE)
+            set(m3vcpu_jni_platform darwin)
+          else()
+            string(TOLOWER "${CMAKE_SYSTEM_NAME}" m3vcpu_jni_platform)
+          endif()
+          set(M3VCPU_JNI_INCLUDES "${m3vcpu_java_home}/include"
+              "${m3vcpu_java_home}/include/${m3vcpu_jni_platform}")
+        endif()
+      endif()
+    endif()
+  endif()
+  include(CheckCSourceCompiles)
+  include(CMakePushCheckState)
+  cmake_push_check_state(RESET)
+  set(CMAKE_REQUIRED_INCLUDES ${M3VCPU_JNI_INCLUDES})
+  set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
+  # Do not reuse a successful cached probe after the toolchain/header selection changes.
+  unset(M3VCPU_JNI_HEADERS_COMPILE CACHE)
+  check_c_source_compiles("#include <jni.h>\nint main(void) { JNIEnv *env = 0; (void)env; return 0; }"
+                         M3VCPU_JNI_HEADERS_COMPILE)
+  cmake_pop_check_state()
+  if(NOT M3VCPU_JNI_HEADERS_COMPILE)
+    message(FATAL_ERROR "Target JNI headers do not compile; set M3VCPU_JNI_INCLUDES to the target JNI header directories")
+  endif()
+  set(M3VCPU_JNI_INCLUDES "${M3VCPU_JNI_INCLUDES}" PARENT_SCOPE)
+endfunction()
+
 set(M3VCPU_JNI_TARGET "")
 if(M3VCPU_BUILD_JNI)
-  find_package(JNI)
-  set(M3VCPU_JNI_INCLUDES ${JNI_INCLUDE_DIRS})
-  if(NOT M3VCPU_JNI_INCLUDES AND DEFINED ENV{JAVA_HOME})
-    set(M3VCPU_JNI_INCLUDES "$ENV{JAVA_HOME}/include" "$ENV{JAVA_HOME}/include/win32" "$ENV{JAVA_HOME}/include/linux")
-  endif()
+  m3vcpu_require_jni_headers()
   add_library(m3vcpu_jni SHARED src/common/m3vcpu_sys.c src/jni/m3vcpu_jni.c)
   target_include_directories(m3vcpu_jni SYSTEM PRIVATE ${M3VCPU_JNI_INCLUDES})
   target_include_directories(m3vcpu_jni PRIVATE ${M3VCPU_COMMON})
   target_link_libraries(m3vcpu_jni PRIVATE m3vcpu)
   if(NOT WIN32)
     target_link_libraries(m3vcpu_jni PRIVATE Threads::Threads)
-    set_target_properties(m3vcpu_jni PROPERTIES BUILD_RPATH "$ORIGIN" INSTALL_RPATH "$ORIGIN")
+    if(APPLE)
+      set_target_properties(m3vcpu PROPERTIES MACOSX_RPATH TRUE INSTALL_NAME_DIR "@rpath")
+      set_target_properties(m3vcpu_jni PROPERTIES BUILD_RPATH "@loader_path" INSTALL_RPATH "@loader_path")
+    else()
+      set_target_properties(m3vcpu_jni PROPERTIES BUILD_RPATH "$ORIGIN" INSTALL_RPATH "$ORIGIN"
+                            BUILD_RPATH_USE_ORIGIN TRUE)
+    endif()
   endif()
   m3vcpu_strict(m3vcpu_jni)
   set(M3VCPU_JNI_TARGET m3vcpu_jni)
@@ -219,31 +274,52 @@ if(BUILD_TESTING)
     string(APPEND M3VCPU_GATE_FILES "|$<TARGET_FILE:m3vcpu_jni>")
   endif()
   if(WIN32)
+    set(M3VCPU_IMPORT_FORMAT COFF)
     find_program(M3VCPU_READOBJ NAMES llvm-readobj)
+  elseif(APPLE)
+    set(M3VCPU_IMPORT_FORMAT MACHO)
+    find_program(M3VCPU_READOBJ NAMES otool llvm-otool)
   else()
+    set(M3VCPU_IMPORT_FORMAT ELF)
     find_program(M3VCPU_READOBJ NAMES readelf llvm-readelf)
   endif()
   if(M3VCPU_READOBJ)
     add_test(NAME m3vcpu_import_table
-             COMMAND ${CMAKE_COMMAND} -DTOOL=${M3VCPU_READOBJ} "-DFILES=${M3VCPU_GATE_FILES}"
+             COMMAND ${CMAKE_COMMAND} -DTOOL=${M3VCPU_READOBJ} -DFORMAT=${M3VCPU_IMPORT_FORMAT}
+                     "-DFILES=${M3VCPU_GATE_FILES}"
                      -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/m3vcpu_check_imports.cmake)
     if(TARGET m3vcpu_webgpu)
       # Statically linked Dawn adds exactly these OS / C++ CRT DLLs (Dawn c943ea32, MSVC 14.44):
       # USER32, MSVCP140, MSVCP140_ATOMIC_WAIT, api-ms-win-core-handle / -registry. Vendor
       # runtimes (d3d12, dxgi, dxcompiler, dxil, vulkan-1) must still be absent from the table.
       add_test(NAME m3vcpu_import_table_webgpu
-               COMMAND ${CMAKE_COMMAND} -DTOOL=${M3VCPU_READOBJ} "-DFILES=$<TARGET_FILE:m3vcpu_webgpu>"
+               COMMAND ${CMAKE_COMMAND} -DTOOL=${M3VCPU_READOBJ} -DFORMAT=${M3VCPU_IMPORT_FORMAT}
+                       "-DFILES=$<TARGET_FILE:m3vcpu_webgpu>"
                        "-DEXTRA_ALLOWED=^user32\\.dll$|^msvcp140\\.dll$|^msvcp140_atomic_wait\\.dll$|^api-ms-win-core-handle-l1-1-[0-9]\\.dll$|^api-ms-win-core-registry-l1-1-[0-9]\\.dll$"
                        -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/m3vcpu_check_imports.cmake)
     endif()
   else()
-    message(WARNING "llvm-readobj/readelf not found: import-table gate not registered")
+    message(FATAL_ERROR "BUILD_TESTING requires an import inspector for ${M3VCPU_IMPORT_FORMAT}; set M3VCPU_READOBJ")
   endif()
+
+  # Exercise the import parser with synthetic tool output, independently of host object format.
+  add_executable(m3vcpu_test_import_tool tests/import_tool_fixture.c)
+  m3vcpu_strict(m3vcpu_test_import_tool)
+  add_test(NAME m3vcpu_import_parser
+           COMMAND ${CMAKE_COMMAND} -DTOOL=$<TARGET_FILE:m3vcpu_test_import_tool>
+                   -DCHECKER=${CMAKE_CURRENT_SOURCE_DIR}/cmake/m3vcpu_check_imports.cmake
+                   -DOUT=${CMAKE_BINARY_DIR}/import-parser-fixtures
+                   -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/cmake/test_imports.cmake)
+  set_tests_properties(m3vcpu_import_parser PROPERTIES TIMEOUT 60)
 
   # JNI end to end: compile NativeVcpu.java + tests, run against the built library.
   if(TARGET m3vcpu_jni)
-    find_package(Java 21 COMPONENTS Development Runtime)
-    if(Java_JAVAC_EXECUTABLE AND Java_JAVA_EXECUTABLE)
+    if(CMAKE_CROSSCOMPILING OR ANDROID OR CMAKE_SYSTEM_NAME MATCHES "^(iOS|tvOS|watchOS|visionOS)$")
+      message(FATAL_ERROR
+        "BUILD_TESTING with JNI needs a target JVM runner; use BUILD_TESTING=OFF for an explicitly build-only cross target")
+    endif()
+    find_package(Java 21 REQUIRED COMPONENTS Development Runtime)
+    if(Java_FOUND AND Java_JAVAC_EXECUTABLE AND Java_JAVA_EXECUTABLE)
       set(M3VCPU_JAVA_SRC ${CMAKE_CURRENT_SOURCE_DIR}/../src/main/java/com/m3/vcpu/internal/NativeVcpu.java)
       add_test(NAME m3vcpu_jni_smoke
                COMMAND ${CMAKE_COMMAND} -DJAVAC=${Java_JAVAC_EXECUTABLE} -DJAVA=${Java_JAVA_EXECUTABLE}
@@ -276,7 +352,7 @@ if(BUILD_TESTING)
         endif()
       endif()
     else()
-      message(WARNING "JDK 21 javac/java not found: JNI ctests not registered")
+      message(FATAL_ERROR "BUILD_TESTING with JNI requires Java 21 javac and java; JNI ctests cannot be omitted")
     endif()
   endif()
 endif()

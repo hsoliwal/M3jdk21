@@ -23,6 +23,8 @@
 # questions.
 #
 
+# Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
+# Modified to retain candidate JDK bundles; original licensing and job contracts remain.
 name: 'Upload bundles'
 description: 'Upload resulting JDK bundles'
 inputs:
@@ -73,5 +75,5 @@ runs:
       with:
         name: bundles-${{ inputs.platform }}${{ inputs.debug-suffix }}
         path: bundles
-        retention-days: 1
+        retention-days: 14
       if: steps.bundles.outputs.bundles-found == 'true'

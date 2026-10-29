@@ -1,3 +1,5 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 evidence-first release pack
 
 The first public M3JDK21 release is admitted by evidence, not by repository size, PR count, donor
@@ -109,9 +111,10 @@ seal cache keys by owner/snapshot/options/version, and test invalidation/corrupt
 
 ## Release immutability
 
-Before the first public tag, unreleased history may be consolidated while preserving the current
-tree and upstream ancestry. Once a release/tag is published, that released history is immutable.
-Subsequent work starts after the release.
+Release preparation preserves append-only history and the upstream baseline. A release does not
+require a squash, rebase, or a single fork commit. Published release tags remain immutable. The
+local ancestry check establishes that the baseline is an ancestor; it cannot establish that an
+external branch has never been rewritten.
 
 See:
 
@@ -120,3 +123,49 @@ See:
 - `verify_release_admission.py`
 - `../../M3-SYNEXIA-NOTICE.md`
 - `../../M3-SYNEXIA-RIGHTS.md`
+
+## Platform-specific admission
+
+Source validation and release admission are separate results. The ordinary verifier reports
+`source_admissible`; it always reports `release_ready: false` without explicit release mode and a
+complete proof pack. Invalid source checks now return a nonzero exit code in either mode.
+
+Run release admission only after the trusted build/test producer has assembled the complete pack:
+
+```sh
+python3 m3/release/verify_release_admission.py --root . --release \
+  --platform linux-x64 --evidence /path/to/proof-pack/evidence.json \
+  --json-out /path/to/proof-pack/admission.json
+```
+
+The `M3_RELEASE_EVIDENCE_V1` JSON object contains exactly these fields:
+
+- `schema`, `source_commit`, `source_tree`, `platform`: the schema and exact checkout/platform identity;
+- `artifacts`: one to sixteen `{ "path": "images/product.tar.gz", "sha256": "..." }` receipts;
+- `gates`: exactly one receipt for every name in `mandatory_release_gates`.
+
+Each gate receipt contains `name`, `status` (`PASS`), `exit_code` (integer zero), `tests_run`
+(a positive integer for a test gate), `command` (the executed argument list), `environment`
+(a nonempty string-to-string mapping), and `proofs` (one to sixteen path/SHA-256 receipts for
+raw logs or reports). A skipped, missing, duplicate, unknown, failed, or zero-test gate cannot
+admit a release. All referenced files are nonempty regular files under the manifest directory;
+absolute paths, traversal, symlinks, duplicate entries, oversized files, and changed hashes are
+refused. Receipt commands are data and are never executed by the verifier.
+
+A passing result applies only to the requested platform and exact isolated source tree.
+Release mode refuses all untracked files, including ignored files; keep build output and proof
+packs outside the source checkout. Required boundary inputs must be regular tracked files with
+bytes matching their Git blobs, without symlink components. Use a checkout with canonical byte
+line endings, and run the exact verifier from that source revision. JSON/checksum output files
+must be new, distinct paths; release outputs must be outside the source checkout. Existing files
+and aliases are never overwritten. Choose new output names when repeating admission.
+Linux evidence cannot admit macOS, Windows, Android, or iOS. JNI/native gates remain mandatory;
+an unavailable runner is pending work and must not be recorded as a pass. The verifier checks
+local evidence structure and byte integrity. It trusts the build/test producer's recorded outcomes;
+it does not authenticate a remote CI run, interpret arbitrary log text, establish a complete JDK
+compatibility result, or publish artifacts. Trusted CI generation and independent review remain
+required before a release is published. Synthetic unit-test packs are never release evidence.
+
+The current first-release workflow supplies only a subset of the required proof pack. Until a
+trusted producer supplies all mandatory platform receipts, release-mode admission intentionally
+fails closed. A successful development workflow is a source/test result, not product availability.
