@@ -7,6 +7,7 @@ on:
       - 'm3/collections/src/main/native/collections/m3_state_mask_histogram.c'
       - 'm3/collections/src/test/java/com/m3/collections/M3StateMaskHistogram*'
       - 'm3/collections/recipe/state-mask-histogram-20261017/**'
+      - 'm3/collections/qualification/array-mask-successor-20261019/**'
       - 'm3/collections/algorithm-catalog/state-mask-histogram-20261017.tsv'
       - '.github/workflows/m3-state-mask-histogram-20261017.yml'
   push:

@@ -96,6 +96,7 @@ final class M3StringPool {
 
     private M3StringPool() {}
 
+<<<<<<< HEAD
     /** Admission only: ordinary String lookup never crosses JNI. */
     private static native ByteBuffer mapLexicon0(
             int descriptor, long handle, long address, long length) throws IOException;
@@ -123,6 +124,20 @@ final class M3StringPool {
         return VM.initLevel() >= 1 ? VM.getSavedProperty(name) : null;
     }
 
+||||||| merged common ancestors
+=======
+    /** Admission only: ordinary String lookup never crosses JNI. */
+    private static native ByteBuffer mapLexicon0(
+            int descriptor, long handle, long address, long length) throws IOException;
+
+    /** Only an unpublished mapping owned by this admission may be released. */
+    private static native boolean unmapLexicon0(long address, long length);
+
+    private static String savedProperty(String name) {
+        return VM.initLevel() >= 1 ? VM.getSavedProperty(name) : null;
+    }
+
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
     static void initializeLexicon(String file) {
         if (file == null || file.isEmpty() || lexicon != null) return;
         synchronized (M3StringPool.class) {
@@ -1026,6 +1041,7 @@ final class M3StringPool {
             this.offsets = offsets;
             this.lengths = lengths;
             this.javaHashes = javaHashes;
+<<<<<<< HEAD
             this.coders = coders;
             this.atoms = atoms;
             this.bigEndian = bigEndian;
@@ -1033,6 +1049,14 @@ final class M3StringPool {
                     M3FrozenLexiconIndex.buildExact(
                             offsets.length, this::exactKeyForRow, this::sameExactRows);
             this.exactRows = exactIndex.rows();
+||||||| merged common ancestors
+            this.atoms = new M3StringAtom[offsets.length];
+=======
+            this.coders = coders;
+            this.atoms = atoms;
+            this.exactIndex = M3FrozenLexiconIndex.build(javaHashes, lengths);
+            this.exactRows = exactIndex.rows();
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
             this.generation64 = generation64;
             this.available = true;
         }
@@ -1202,6 +1226,7 @@ final class M3StringPool {
         }
 
         int findUnit(char unit) {
+<<<<<<< HEAD
             if (exactRows.length == 0) return findUnitBinary(unit);
             int hash = unit;
             long exact = M3FrozenLexiconIndex.exactHashStart(exactIndex.seed(), 1);
@@ -1216,6 +1241,20 @@ final class M3StringPool {
         }
 
         private int findUnitBinary(char unit) {
+||||||| merged common ancestors
+=======
+            if (exactRows.length == 0) return findUnitBinary(unit);
+            int hash = unit;
+            int encoded = exactIndex.candidate(hash, 1);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != 1) return -1;
+            if (encoded < 0) return findUnitBinary(unit);
+            return mappedUnit(offsets[row], 0) == unit ? row : -1;
+        }
+
+        private int findUnitBinary(char unit) {
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1240,6 +1279,7 @@ final class M3StringPool {
             return -1;
         }
 
+<<<<<<< HEAD
         int findCodePoints(int[] value, int offset, int count, int utf16Length) {
             if (exactRows.length == 0) {
                 return findCodePointsBinary(value, offset, count, utf16Length);
@@ -1283,6 +1323,37 @@ final class M3StringPool {
         }
 
         private int findCodePointsBinary(
+||||||| merged common ancestors
+        int findCodePoints(
+=======
+        int findCodePoints(int[] value, int offset, int count, int utf16Length) {
+            if (exactRows.length == 0) return findCodePointsBinary(value, offset, count, utf16Length);
+            int hash = 0;
+            for (int index = 0; index < count; index++) {
+                int point = value[offset + index];
+                if (Character.isBmpCodePoint(point)) {
+                    hash = 31 * hash + (char) point;
+                } else {
+                    hash = 31 * hash + Character.highSurrogate(point);
+                    hash = 31 * hash + Character.lowSurrogate(point);
+                }
+            }
+            int encoded = exactIndex.candidate(hash, utf16Length);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != utf16Length) return -1;
+            if (encoded < 0) {
+                return findCodePointsBinary(value, offset, count, utf16Length);
+            }
+            return compareCodePoints(
+                            value, offset, count, utf16Length, offsets[row], lengths[row])
+                            == 0
+                    ? row
+                    : -1;
+        }
+
+        private int findCodePointsBinary(
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
                 int[] value, int offset, int count, int utf16Length) {
             int low = 0;
             int high = offsets.length - 1;
@@ -1338,6 +1409,7 @@ final class M3StringPool {
             return utf16Length - mappedLength;
         }
 
+<<<<<<< HEAD
         int findCompactBytes(byte[] value, int sourceOffset, int logicalLength, byte sourceCoder) {
             if (exactRows.length == 0) {
                 return findCompactBytesBinary(value, sourceOffset, logicalLength, sourceCoder);
@@ -1368,6 +1440,34 @@ final class M3StringPool {
         }
 
         private int findCompactBytesBinary(
+||||||| merged common ancestors
+        int findCompactBytes(
+=======
+        int findCompactBytes(byte[] value, int sourceOffset, int logicalLength, byte sourceCoder) {
+            if (exactRows.length == 0) return findCompactBytesBinary(value, sourceOffset, logicalLength, sourceCoder);
+            int hash = 0;
+            for (int index = 0; index < logicalLength; index++) {
+                char unit = sourceCoder == String.LATIN1
+                        ? (char) (value[sourceOffset + index] & 0xff)
+                        : StringUTF16.charAt(value, sourceOffset + index);
+                hash = 31 * hash + unit;
+            }
+            int encoded = exactIndex.candidate(hash, logicalLength);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
+            if (encoded < 0) {
+                return findCompactBytesBinary(
+                        value, sourceOffset, logicalLength, sourceCoder);
+            }
+            return equalsCompactBytes(
+                            value, sourceOffset, logicalLength, sourceCoder, offsets[row])
+                    ? row
+                    : -1;
+        }
+
+        private int findCompactBytesBinary(
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
                 byte[] value, int sourceOffset, int logicalLength, byte sourceCoder) {
             int low = 0;
             int high = offsets.length - 1;
@@ -1392,12 +1492,33 @@ final class M3StringPool {
         }
 
         int findLatin1Bytes(byte[] value, int offset, int logicalLength) {
+<<<<<<< HEAD
             // The exact compact-string atom handles the same Latin-1 source shape;
             // reuse its primitive hash probe and its original binary fallback.
             return findCompactBytes(value, offset, logicalLength, String.LATIN1);
         }
 
         private int findLatin1BytesBinary(byte[] value, int offset, int logicalLength) {
+||||||| merged common ancestors
+=======
+            if (exactRows.length == 0) return findLatin1BytesBinary(value, offset, logicalLength);
+            int hash = 0;
+            for (int index = 0; index < logicalLength; index++) {
+                hash = 31 * hash + (value[offset + index] & 0xff);
+            }
+            int encoded = exactIndex.candidate(hash, logicalLength);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
+            if (encoded < 0) return findLatin1BytesBinary(value, offset, logicalLength);
+            return equalsCompactBytes(
+                            value, offset, logicalLength, String.LATIN1, offsets[row])
+                    ? row
+                    : -1;
+        }
+
+        private int findLatin1BytesBinary(byte[] value, int offset, int logicalLength) {
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1424,6 +1545,7 @@ final class M3StringPool {
         }
 
         int find(char[] value, int offset, int logicalLength) {
+<<<<<<< HEAD
             if (exactRows.length == 0) return findBinary(value, offset, logicalLength);
             int hash = 0;
             long exact =
@@ -1445,6 +1567,23 @@ final class M3StringPool {
         }
 
         private int findBinary(char[] value, int offset, int logicalLength) {
+||||||| merged common ancestors
+=======
+            if (exactRows.length == 0) return findBinary(value, offset, logicalLength);
+            int hash = 0;
+            for (int index = 0; index < logicalLength; index++) {
+                hash = 31 * hash + value[offset + index];
+            }
+            int encoded = exactIndex.candidate(hash, logicalLength);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
+            if (encoded < 0) return findBinary(value, offset, logicalLength);
+            return equalsChars(value, offset, logicalLength, offsets[row]) ? row : -1;
+        }
+
+        private int findBinary(char[] value, int offset, int logicalLength) {
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1634,12 +1773,24 @@ final class M3StringPool {
                 return Integer.compare(a[1],b[1]);
             });
             int n=records.size();int[] offsets=new int[n],lengths=new int[n],hashes=new int[n],ids=new int[n];
+<<<<<<< HEAD
             M3StringAtom[] atoms = new M3StringAtom[n];
             byte[] coders = allocateCoders(n);
             for(int i=0;i<n;i++){int[] r=records.get(i);offsets[i]=r[0];lengths[i]=r[1];hashes[i]=r[2];ids[i]=r[3]&Integer.MAX_VALUE;if(coders!=null)coders[i]=String.COMPACT_STRINGS&&r[3]<0?String.LATIN1:String.UTF16;}
             Lexicon result=new Lexicon(map,0,offsets,lengths,hashes,atoms,coders,
                     map.getLong(16)^map.getLong(24),true);
             result.namespaceHigh=map.getLong(16);result.namespaceLow=map.getLong(24);
+||||||| merged common ancestors
+            for(int i=0;i<n;i++){int[] r=records.get(i);offsets[i]=r[0];lengths[i]=r[1];hashes[i]=r[2];ids[i]=r[3];}
+            Lexicon result=new Lexicon(map,0,offsets,lengths,hashes,map.getLong(16)^map.getLong(24));
+            result.bigEndian=true;result.namespaceHigh=map.getLong(16);result.namespaceLow=map.getLong(24);
+=======
+            M3StringAtom[] atoms = new M3StringAtom[n];
+            byte[] coders = allocateCoders(n);
+            for(int i=0;i<n;i++){int[] r=records.get(i);offsets[i]=r[0];lengths[i]=r[1];hashes[i]=r[2];ids[i]=r[3]&Integer.MAX_VALUE;if(coders!=null)coders[i]=String.COMPACT_STRINGS&&r[3]<0?String.LATIN1:String.UTF16;}
+            Lexicon result=new Lexicon(map,0,offsets,lengths,hashes,atoms,coders,map.getLong(16)^map.getLong(24));
+            result.bigEndian=true;result.namespaceHigh=map.getLong(16);result.namespaceLow=map.getLong(24);
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
             result.recordOffsets=ids;return result;
         }
 

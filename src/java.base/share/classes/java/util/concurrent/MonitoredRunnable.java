@@ -11,11 +11,21 @@ package java.util.concurrent;
  */
 @FunctionalInterface
 public interface MonitoredRunnable extends Runnable {
+<<<<<<< HEAD
     /**
      * Runs the task body using the supplied borrowed progress monitor.
      *
      * @param monitor the monitor bound by the template run
      */
+||||||| merged common ancestors
+    /** Replaceable task body; implementations report progress through monitor. */
+=======
+    /**
+     * Performs the replaceable task body with the selected progress monitor.
+     *
+     * @param monitor the progress monitor supplied to the task body
+     */
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
     void runMonitored(ProgressMonitor monitor);
 
     /**

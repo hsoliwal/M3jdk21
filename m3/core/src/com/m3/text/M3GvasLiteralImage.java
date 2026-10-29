@@ -22,20 +22,34 @@ public final class M3GvasLiteralImage {
     private static final String MAGIC = "M3GVAS01";
     private static final int HEADER_BYTES = 64;
     private static final int ROW_BYTES = 32;
+    // Optional derived metadata only; rows/payload addresses remain in the mapped image.
+    private static final int LOOKUP_SLOT_LIMIT = 1 << 22;
+    private static final int LOOKUP_PROBE_LIMIT = 64;
+    private static final int LOOKUP_MIN_ROWS = 32;
     private final M3FixedAddressMapping.Image mapped;
     private final ByteBuffer data;
     private final int count;
     private final int payloadStart;
+<<<<<<< HEAD
     /** Immutable, optional primitive row+1 hash directory; never owns spelling payload. */
     private final int[] hashSlots;
+||||||| merged common ancestors
+=======
+    private final int[] lookupRows;
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
 
     private M3GvasLiteralImage(M3FixedAddressMapping.Image mapped) {
         this.mapped = mapped;
         this.data = mapped.readOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
         this.count = data.getInt(16);
         this.payloadStart = data.getInt(28);
+<<<<<<< HEAD
         // open() validates the complete immutable native image before building this index.
         this.hashSlots = buildHashSlots(data, count);
+||||||| merged common ancestors
+=======
+        this.lookupRows = prepareLookup(data, count);
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
     }
 
     /** Admit the exact backing image only after native exact-address admission succeeded. */
@@ -205,6 +219,7 @@ public final class M3GvasLiteralImage {
     /** Returns a zero-allocation row index, or {@code -1}; Unicode comparison is UTF-16 exact. */
     public int findRow(String spelling) {
         Objects.requireNonNull(spelling, "spelling");
+<<<<<<< HEAD
         int[] slots = hashSlots;
         if (slots != null) {
             int mask = slots.length - 1;
@@ -222,6 +237,28 @@ public final class M3GvasLiteralImage {
     }
 
     private int findRowBinary(String spelling) {
+||||||| merged common ancestors
+=======
+        if (lookupRows != null) {
+            int hash = spelling.hashCode();
+            int length = spelling.length();
+            int mask = lookupRows.length - 1;
+            int slot = lookupSlot(hash, length, mask);
+            for (int probe = 0; probe < LOOKUP_PROBE_LIMIT; probe++) {
+                int encoded = lookupRows[slot];
+                if (encoded == 0) return -1;
+                int row = encoded - 1;
+                int at = HEADER_BYTES + row * ROW_BYTES;
+                if (data.getInt(at + 4) == length && data.getInt(at + 8) == hash
+                        && compare(spelling, row) == 0) return row;
+                slot = (slot + 1) & mask;
+            }
+        }
+        return findRowBinary(spelling);
+    }
+
+    private int findRowBinary(String spelling) {
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
         int lo = 0, hi = count;
         while (lo < hi) {
             int middle = (lo + hi) >>> 1;
@@ -231,6 +268,43 @@ public final class M3GvasLiteralImage {
             else lo = middle + 1;
         }
         return -1;
+    }
+
+    /** Build from validated facts; refusal affects lookup cost, never image admission. */
+    private static int[] prepareLookup(ByteBuffer image, int rows) {
+        if (rows < LOOKUP_MIN_ROWS || rows > LOOKUP_SLOT_LIMIT / 2) return null;
+        int capacity = 1;
+        while (capacity < rows * 2) capacity <<= 1;
+        int[] slots;
+        try {
+            slots = new int[capacity];
+        } catch (OutOfMemoryError unavailable) {
+            return null;
+        }
+        int mask = capacity - 1;
+        for (int row = 0; row < rows; row++) {
+            int at = HEADER_BYTES + row * ROW_BYTES;
+            int slot = lookupSlot(image.getInt(at + 8), image.getInt(at + 4), mask);
+            int probe = 0;
+            while (slots[slot] != 0 && probe < LOOKUP_PROBE_LIMIT) {
+                slot = (slot + 1) & mask;
+                probe++;
+            }
+            if (probe == LOOKUP_PROBE_LIMIT) return null;
+            slots[slot] = row + 1;
+        }
+        return slots;
+    }
+
+    private static int lookupSlot(int hash, int length, int mask) {
+        // Integer mixing only chooses a candidate. Exact UTF-16 comparison proves identity.
+        long mixed = (Integer.toUnsignedLong(hash) << 32) | Integer.toUnsignedLong(length);
+        mixed ^= mixed >>> 33;
+        mixed *= 0xff51afd7ed558ccdL;
+        mixed ^= mixed >>> 33;
+        mixed *= 0xc4ceb9fe1a85ec53L;
+        mixed ^= mixed >>> 33;
+        return (int) mixed & mask;
     }
 
     /** Exact numeric pointer to the canonical code-unit payload, or zero when absent. */

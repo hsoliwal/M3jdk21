@@ -1491,10 +1491,24 @@ jlong ClassLoader::class_link_time_ms() {
 }
 
 int ClassLoader::compute_Object_vtable() {
+<<<<<<< HEAD
   // Object declares five legacy virtual methods and M3's non-final toAdapter.
   // This count must match java.lang.Object before array klasses are created.
   const int Object_vtable_size = 6;
   return Object_vtable_size * vtableEntry::size();
+||||||| merged common ancestors
+  // hardwired for JDK1.2 -- would need to duplicate class file parsing
+  // code to determine actual value from file
+  // Would be value '11' if finals were in vtable
+  int JDK_1_2_Object_vtable_size = 5;
+  return JDK_1_2_Object_vtable_size * vtableEntry::size();
+=======
+  // M3JDK21 Object has six non-final instance methods: hashCode, equals,
+  // clone, toString, finalize, and toAdapter. Reserve their slots before
+  // Object is loaded so early array klass metadata has the same vtable size.
+  const int M3_Object_vtable_size = 6;
+  return M3_Object_vtable_size * vtableEntry::size();
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
 }
 
 

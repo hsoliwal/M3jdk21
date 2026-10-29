@@ -64,6 +64,7 @@ Java_com_m3_collections_M3StateMaskHistogram_tallyNative(
             if ((*env)->ExceptionCheck(env)) return;
             buckets[(unsigned char) state]++;
         }
+<<<<<<< HEAD
     } else {
         /* Batch selected points into the existing bounded scratch region. Cast before
          * negation so even INT_MIN strides are safe for empty/singleton paths. */
@@ -174,6 +175,29 @@ Java_com_m3_collections_M3StateMaskHistogram_tallyIndexedNative(
             buckets[(unsigned char) state_region[(jsize) (physical - cached_page)]]++;
         }
         processed += take;
+||||||| merged common ancestors
+=======
+    } else {
+        /* Batch selected points into the existing bounded scratch region. Cast before
+         * negation so even INT_MIN strides are safe for empty/singleton paths. */
+        jlong magnitude = stride > 0 ? (jlong) stride : -(jlong) stride;
+        jint batch_limit = (jint) (INT64_C(1) + (M3_STATE_CHUNK - 1) / magnitude);
+        for (jint offset = 0; offset < count;) {
+            jint take = count - offset;
+            if (take > batch_limit) take = batch_limit;
+            jlong span = INT64_C(1) + ((jlong) take - INT64_C(1)) * magnitude;
+            jlong at = (jlong) first + (jlong) offset * (jlong) stride;
+            jlong begin = stride > 0 ? at : at - (span - INT64_C(1));
+            (*env)->GetByteArrayRegion(env, source, (jsize) begin, (jsize) span, chunk);
+            if ((*env)->ExceptionCheck(env)) return;
+            for (jint i = 0; i < take; i++) {
+                jlong cell = stride > 0 ? (jlong) i * magnitude
+                        : span - INT64_C(1) - (jlong) i * magnitude;
+                buckets[(unsigned char) chunk[(jsize) cell]]++;
+            }
+            offset += take;
+        }
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
     }
     (*env)->SetIntArrayRegion(env, result, 0, M3_STATE_COUNT, buckets);
 }

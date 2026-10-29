@@ -65,6 +65,7 @@ public interface Consumer<T> {
         return (T t) -> { accept(t); after.accept(t); };
     }
 
+<<<<<<< HEAD
     /**
      * Performs this operation with a borrowed monitor scoped to the call.
      * The previous binding is restored on exit and the monitor is not completed.
@@ -76,6 +77,21 @@ public interface Consumer<T> {
      *         observed before or after this operation
      */
     @SuppressWarnings("try")
+||||||| merged common ancestors
+    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
+=======
+    /**
+     * Consumes the value under an explicit borrowed monitor without completing it.
+     * The original functional method remains the sole abstract method.
+     * Cancellation is checked before and after normal completion.
+     *
+     * @param value the input value
+     * @param monitor the borrowed progress monitor
+     * @throws NullPointerException if monitor is null
+     * @throws java.util.concurrent.CancellationException if cancellation is detected
+     */
+    @SuppressWarnings("try")
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
     default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(monitor, "monitor");
         final java.util.concurrent.ProgressMonitors.Scope scope =

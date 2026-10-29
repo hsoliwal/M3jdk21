@@ -64,6 +64,7 @@ public interface Callable<V> {
      */
     V call() throws Exception;
 
+<<<<<<< HEAD
     /**
      * Computes this task's result with a borrowed monitor scoped to this call.
      * The no-argument {@link #call()} remains the sole abstract method.
@@ -75,6 +76,21 @@ public interface Callable<V> {
      *         after this call
      * @throws Exception if this task cannot compute a result
      */
+||||||| merged common ancestors
+    /** A borrowed monitor is scoped for this call; call() remains abstract. */
+=======
+    /**
+     * Calls this task under a borrowed monitor without completing it.
+     * The original {@code call()} remains the sole abstract method.
+     * Cancellation is checked before and after normal completion.
+     *
+     * @param monitor the borrowed progress monitor
+     * @return the result of the task
+     * @throws Exception if the task fails
+     * @throws NullPointerException if monitor is null
+     * @throws CancellationException if cancellation is detected
+     */
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
     default V call(ProgressMonitor monitor) throws Exception {
         return ProgressMonitors.call(this, monitor);
     }

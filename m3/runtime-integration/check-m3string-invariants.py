@@ -1454,6 +1454,7 @@ for call in release_calls:
 if canonical_release_calls != 5 or queued_release_calls != 1:
     fail("VM-local M3 owner-to-bucket release paths changed")
 
+<<<<<<< HEAD
 # The frozen index is optional metadata over exact UTF-16 payloads. Check code tokens,
 # not comments, and keep the previous native-owner lifecycle checks above intact.
 def check_pool_precompute(source: str, frozen_index_source: str) -> None:
@@ -1626,6 +1627,185 @@ def check_pool_precompute(source: str, frozen_index_source: str) -> None:
 check_pool_precompute(pool, frozen_index)
 
 
+||||||| merged common ancestors
+=======
+# The frozen index is optional metadata over exact UTF-16 payloads. Check code tokens,
+# not comments, and keep the previous native-owner lifecycle checks above intact.
+def check_pool_precompute(source: str) -> None:
+    code = java_mask_non_code(source)
+    compact = re.sub(r"\s+", "", code)
+
+    def require(fragment: str, label: str) -> None:
+        if fragment not in compact:
+            fail("M3 pool precompute invariant: " + label)
+
+    def body(signature: str) -> str:
+        start = code.find(signature)
+        if start < 0 or code.find(signature, start + len(signature)) >= 0:
+            fail("M3 pool precompute method missing or duplicated: " + signature)
+        opening = code.find("{", start)
+        closing = java_block_end(code, opening)
+        if opening < 0 or closing < 0:
+            fail("M3 pool precompute method scope invalid: " + signature)
+        return code[opening + 1:closing]
+
+    def normalized(signature: str) -> str:
+        return re.sub(r"\s+", "", body(signature))
+
+    local_helper = normalized("private static void retireEmptyLocalBucket(")
+    if local_helper != (
+            "if(bucket.values.isEmpty()&&LOCAL.remove(fingerprint,bucket)){bucket.retired=true;}"):
+        fail("M3 empty local bucket must retire under exact bucket identity")
+    tuple_helper = normalized("private static void retireEmptyTupleBucket(")
+    if tuple_helper != (
+            "if(bucket.values.isEmpty()&&TUPLES.remove(routeKey,bucket)){bucket.retired=true;}"):
+        fail("M3 empty tuple bucket must retire under exact bucket identity")
+    require("retireEmptyTupleBucket(LongrouteKey,TupleBucketbucket)",
+            "tuple cleanup reuses its existing boxed map key")
+    require("LongrouteKey=tupleRouteKey(left,right,javaHash,totalLength,coder);",
+            "tuple map key is boxed once before retries and cleanup")
+
+    for signature, retirement in [
+        ("static M3String internCodePoints(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internCompactBytes(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internLatin1Bytes(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internChars(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internUnit(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("private static M3String internTuple(", "retireEmptyTupleBucket(routeKey,bucket);"),
+    ]:
+        method = body(signature)
+        monitors = list(re.finditer(r"\bsynchronized\s*\(\s*bucket\s*\)\s*\{", method))
+        if len(monitors) != 1:
+            fail("M3 pool admission monitor changed: " + signature)
+        opening = method.find("{", monitors[0].start())
+        closing = java_block_end(method, opening)
+        monitor = method[opening + 1:closing]
+        if not re.match(r"\s*if\s*\(bucket\.retired\)\s*continue;\s*try\s*\{", monitor):
+            fail("M3 empty bucket retirement must retain the guarded retry before try")
+        try_open = monitor.find("{", monitor.find("try"))
+        try_close = java_block_end(monitor, try_open)
+        remainder = re.sub(r"\s+", "", monitor[try_close + 1:])
+        if remainder != "finally{" + retirement + "}":
+            fail("M3 empty bucket retirement must be unconditional inside the owner monitor")
+    if compact.count("retireEmptyLocalBucket(fingerprint,bucket);") != 5:
+        fail("M3 empty local bucket retirement call paths changed")
+    if compact.count("retireEmptyTupleBucket(routeKey,bucket);") != 1:
+        fail("M3 empty tuple bucket retirement call paths changed")
+
+    for fragment, label in [
+        ("privatestaticfinalintMAX_EXACT_INDEX_SLOTS=1<<22;", "slot allocation cap"),
+        ("privatestaticfinalintMAX_EXACT_PROBES=64;", "probe budget"),
+        ("privatefinalint[]exactRows;", "immutable primitive slots"),
+        ("privatefinalbyte[]coders;", "immutable coder rows"),
+        ("this.exactRows=buildExactIndex(javaHashes,lengths);", "validated primitive hash reuse"),
+        ("privatestaticfinallongLATIN1_GEOMETRY=1L<<Integer.SIZE;", "coder geometry bit"),
+    ]:
+        require(fragment, label)
+
+    index = normalized("private static int[] buildExactIndex(")
+    for fragment in [
+        "if(count==0||count>MAX_EXACT_INDEX_SLOTS/2)returnNO_EXACT_INDEX;",
+        "while(capacity<count*2)capacity<<=1;",
+        "try{rows=newint[capacity];}catch(OutOfMemoryErrorunavailable){returnNO_EXACT_INDEX;}",
+        "while(probe<MAX_EXACT_PROBES&&rows[slot]!=0){",
+        "intexisting=(rows[slot]&Integer.MAX_VALUE)-1;",
+        "if(hashes[existing]==hashes[row]&&lengths[existing]==lengths[row]){"
+        "rows[slot]|=Integer.MIN_VALUE;ambiguous=true;}",
+        "slot=(slot+1)&mask;probe++;",
+        "if(probe==MAX_EXACT_PROBES)returnNO_EXACT_INDEX;",
+        "rows[slot]=(row+1)|(ambiguous?Integer.MIN_VALUE:0);",
+    ]:
+        if fragment not in index:
+            fail("M3 frozen index bounded construction or ambiguity preservation changed: " + fragment)
+    if normalized("private static byte[] allocateCoders(") != (
+            "try{returnnewbyte[count];}catch(OutOfMemoryErrorunavailable){returnnull;}"):
+        fail("M3 coder metadata allocation must retain exact fallback on optional allocation failure")
+    if normalized("private static byte coderFromGeometry(") != (
+            "returnString.COMPACT_STRINGS&&(geometry&LATIN1_GEOMETRY)!=0L?String.LATIN1:String.UTF16;"):
+        fail("M3 prepared coder must honor CompactStrings and validated Latin-1 geometry")
+    if normalized("private static boolean mappedLatin1(") != (
+            "for(intindex=0;index<length;index++){longat=address+((long)index<<1);"
+            "intfirst=UNSAFE.getByte(at)&0xff;intsecond=UNSAFE.getByte(at+1L)&0xff;"
+            "charunit=bigEndian?(char)((first<<8)|second):(char)(first|(second<<8));"
+            "if(unit>0xff)returnfalse;}returntrue;"):
+        fail("M3 cold mapped coder fallback must preserve endian and exact Latin-1 eligibility")
+    geometry = normalized("private static long scanMappedGeometry(")
+    for fragment in [
+        "intat=byteOffset+(index<<1);",
+        "intfirst=mapped.get(at)&0xff;intsecond=mapped.get(at+1)&0xff;",
+        "charunit=bigEndian?(char)((first<<8)|second):(char)(first|(second<<8));",
+        "hash=31*hash+unit;latin1&=unit<=0xff;",
+        "returnInteger.toUnsignedLong(hash)|(latin1?LATIN1_GEOMETRY:0L);",
+    ]:
+        if fragment not in geometry:
+            fail("M3 mapped coder/hash validation changed: " + fragment)
+    require("longgeometry=scanMappedGeometry(mapped,(int)payload+(offset<<1),length,false);",
+            "M3LEX validated little-endian geometry")
+    require("longgeometry=scanMappedGeometry(map,position+80,units,true);",
+            "SYNARR validated big-endian geometry")
+    require("javaHashes[row]=version==2?mapped.getInt(entry+8):actualHash;",
+            "existing image Java hash authority")
+    require("if(coders!=null)coders[row]=coderFromGeometry(geometry);", "validated coder publication")
+    require("records.add(newint[]{position+80,units,hash,packedRecord});",
+            "shared sorted row coder travels with its record")
+    require("intpackedRecord=position|((geometry&LATIN1_GEOMETRY)!=0L?Integer.MIN_VALUE:0);",
+            "shared record offset packs only validated Latin-1 eligibility")
+    require("ids[i]=r[3]&Integer.MAX_VALUE;", "shared published record identity excludes geometry bit")
+    require("if(coders!=null)coders[i]=String.COMPACT_STRINGS&&r[3]<0?String.LATIN1:String.UTF16;",
+            "shared sorted row coder publication")
+    require("M3StringAtom[]atoms=newM3StringAtom[count];byte[]coders=allocateCoders(count);",
+            "normal mandatory atom lane precedes optional coder allocation")
+    require("M3StringAtom[]atoms=newM3StringAtom[n];byte[]coders=allocateCoders(n);",
+            "shared mandatory atom lane precedes optional coder allocation")
+    require("this.atoms=atoms;this.exactRows=buildExactIndex(javaHashes,lengths);",
+            "mandatory atom lane precedes optional slot allocation")
+    atom_body = normalized("M3StringAtom atom(int row)")
+    if ("coders!=null?coders[row]:String.COMPACT_STRINGS"
+            "&&mappedLatin1(address,lengths[row],bigEndian)?String.LATIN1:String.UTF16") not in atom_body:
+        fail("M3 reverse lookup must use prepared coder or exact CompactStrings-aware scan")
+
+    for signature, fallback, length, exact in [
+        ("int findUnit(char unit)", "findUnitBinary(unit)", "1", "mappedUnit(offsets[row],0)==unit"),
+        ("int findCodePoints(int[] value", "findCodePointsBinary(value,offset,count,utf16Length)",
+         "utf16Length", "compareCodePoints(value,offset,count,utf16Length,offsets[row],lengths[row])==0"),
+        ("int findCompactBytes(byte[] value", "findCompactBytesBinary(value,sourceOffset,logicalLength,sourceCoder)",
+         "logicalLength", "equalsCompactBytes(value,sourceOffset,logicalLength,sourceCoder,offsets[row])"),
+        ("int findLatin1Bytes(byte[] value", "findLatin1BytesBinary(value,offset,logicalLength)",
+         "logicalLength", "equalsCompactBytes(value,offset,logicalLength,String.LATIN1,offsets[row])"),
+        ("int find(char[] value", "findBinary(value,offset,logicalLength)",
+         "logicalLength", "equalsChars(value,offset,logicalLength,offsets[row])"),
+    ]:
+        find = normalized(signature)
+        if not find.startswith("if(exactRows.length==0)return" + fallback + ";"):
+            fail("M3 frozen lookup lost exact no-index fallback: " + signature)
+        for fragment in [
+            "intslot=exactSlot(hash," + length + ",mask);",
+            "for(intprobe=0;probe<MAX_EXACT_PROBES;probe++){",
+            "intencoded=exactRows[slot];if(encoded==0)return-1;",
+            "introw=(encoded&Integer.MAX_VALUE)-1;",
+            "if(javaHashes[row]==hash&&lengths[row]==" + length + "){"
+            "if(encoded<0)return" + fallback + ";if(" + exact + ")returnrow;}",
+            "slot=(slot+1)&mask;",
+        ]:
+            if fragment not in find:
+                fail("M3 frozen exact candidate/budget/ambiguity guard changed: " + signature)
+        if not find.endswith("return" + fallback + ";"):
+            fail("M3 frozen lookup lost exact exhausted-probe fallback: " + signature)
+    if normalized("private boolean equalsChars(") != (
+            "for(intindex=0;index<length;index++){"
+            "if(value[offset+index]!=mappedUnit(mappedOffset,index))returnfalse;}returntrue;"):
+        fail("M3 frozen char candidate must compare every exact UTF-16 unit")
+    if normalized("private boolean equalsCompactBytes(") != (
+            "for(intindex=0;index<length;index++){charunit=coder==String.LATIN1?"
+            "(char)(value[offset+index]&0xff):StringUTF16.charAt(value,offset+index);"
+            "if(unit!=mappedUnit(mappedOffset,index))returnfalse;}returntrue;"):
+        fail("M3 frozen compact candidate must compare every exact UTF-16 unit")
+
+
+check_pool_precompute(pool)
+
+
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
 for required_mechanical_name_mapping in [
     '"source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts"',
     '"source": "com.synexia.indexstring.precompute.MIndexLucenePostingPlan"',
@@ -1637,6 +1817,7 @@ for required_mechanical_name_mapping in [
     if required_mechanical_name_mapping not in mapping:
         fail(f"mechanical donor name mapping missing: {required_mechanical_name_mapping}")
 
+<<<<<<< HEAD
 # Frozen cursor/bridge refinements keep the original search and String contracts.
 # Bind complete small control-flow atoms after masking non-code; a stale spelling, comment,
 # detached method or fast-path name alone cannot satisfy the refined invariant.
@@ -1762,6 +1943,472 @@ def check_critical_surface_refinements(m3: str, string: str, precompute_bridge: 
 check_critical_surface_refinements(m3, string, precompute_bridge)
 
 
+||||||| merged common ancestors
+=======
+# Frozen cursor/bridge refinements keep the original search and String contracts.
+# Bind complete small control-flow atoms after masking non-code; a stale spelling, comment,
+# detached method or fast-path name alone cannot satisfy the refined invariant.
+def check_cursor_refinements(m3: str, search_precompute: str, string: str,
+                             precompute_bridge: str) -> None:
+    sources = {
+        "m3": java_mask_non_code(m3),
+        "search_precompute": java_mask_non_code(search_precompute),
+        "string": java_mask_non_code(string, allow_non_code_unicode=True),
+        "precompute_bridge": java_mask_non_code(precompute_bridge),
+    }
+    compact = {name: re.sub(r"\s+", "", code) for name, code in sources.items()}
+
+    def require_atom(owner: str, signature: str, expected: str, label: str) -> None:
+        code = compact[owner]
+        declaration = re.sub(r"\s+", "", signature)
+        if code.count(declaration) != 1:
+            fail("M3 cursor refinement lost unique owner declaration: " + label)
+        opening = code.find(declaration) + len(declaration)
+        if opening >= len(code) or code[opening] != "{":
+            fail("M3 cursor refinement changed declaration boundary: " + label)
+        closing = java_block_end(code, opening)
+        if closing < 0 or code[opening + 1:closing] != re.sub(r"\s+", "", expected):
+            fail("M3 cursor refinement control flow changed: " + label)
+
+    require_atom('m3', 'static final class CodeUnitCursor', """
+        private final M3String source;
+        private M3StringOwner scalar;
+        private int logicalBegin;
+        private int logicalEnd;
+        private int scalarOffset;
+        CodeUnitCursor(M3String source) {
+            this.source = source;
+        }
+        char at(int index) {
+            Objects.checkIndex(index, source.length());
+            if (scalar == null || index < logicalBegin || index >= logicalEnd) {
+                seek(index);
+            }
+            return scalar.charAt(scalarOffset + index - logicalBegin);
+        }
+        private void seek(int index) {
+            int position = source.start() + index;
+            M3StringOwner current = source.owner();
+            int remaining = source.length() - index;
+            while (current instanceof M3StringTuple tuple) {
+                int leftLength = tuple.left.length();
+                M3String child;
+                int childIndex;
+                if (position < leftLength) {
+                    child = tuple.left;
+                    childIndex = position;
+                } else {
+                    child = tuple.right;
+                    childIndex = position - leftLength;
+                }
+                remaining = Math.min(remaining, child.length() - childIndex);
+                position = child.start() + childIndex;
+                current = child.owner();
+            }
+            scalar = current;
+            logicalBegin = index;
+            logicalEnd = index + remaining;
+            scalarOffset = position;
+        }
+    """, 'logical cursor bounds and tuple coordinate descent')
+
+    require_atom('search_precompute', 'static Plan prepare(M3String pattern)', """
+        int length = pattern.length();
+        if (length < 2 || length > MAX_PATTERN_UNITS) return null;
+        try {
+            return prepareAllocated(pattern, length);
+        } catch (OutOfMemoryError unavailable) {
+            return null;
+        }
+    """, 'optional bounded pattern admission')
+
+    require_atom('search_precompute', 'private static Plan prepareAllocated(M3String pattern, int length)', """
+        M3StringOwner owner = pattern.owner();
+        long coordinate = pattern.coordinate();
+        int slot = slot(owner, coordinate);
+        Entry entry = CACHE.get(slot);
+        if (entry != null
+                && entry.owner.get() == owner
+                && entry.coordinate == coordinate
+                && entry.plan.patternLength == length) {
+            return entry.plan;
+        }
+        M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(pattern);
+        int[] prefix = new int[length];
+        for (int index = 1; index < length; index++) {
+            int matched = prefix[index - 1];
+            char unit = units.at(index);
+            while (matched > 0 && unit != units.at(matched)) {
+                matched = prefix[matched - 1];
+            }
+            if (unit == units.at(matched)) matched++;
+            prefix[index] = matched;
+        }
+        int[] reversePrefix = new int[length];
+        for (int index = 1; index < length; index++) {
+            int matched = reversePrefix[index - 1];
+            char unit = units.at(length - 1 - index);
+            while (matched > 0 && unit != units.at(length - 1 - matched)) {
+                matched = reversePrefix[matched - 1];
+            }
+            if (unit == units.at(length - 1 - matched)) matched++;
+            reversePrefix[index] = matched;
+        }
+        int[] skip256 = new int[256];
+        Arrays.fill(skip256, Math.max(1, length));
+        for (int index = 0; index < length - 1; index++) {
+            skip256[units.at(index) & 255] = length - 1 - index;
+        }
+        M3TQ.Facts trigrams =
+                length >= 3 ? precomputeTrigrams(pattern, MAX_PATTERN_UNITS) : null;
+        Plan plan = new Plan(length, prefix, reversePrefix, skip256, trigrams);
+        CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, plan));
+        return plan;
+    """, 'pattern cursor, exact prefix metadata and conservative BMH table')
+
+    require_atom('search_precompute', 'static boolean mayContain(M3String source, Plan plan)', """
+        if (plan.trigrams == null
+                || source.length() < MIN_TRIGRAM_SOURCE_UNITS
+                || source.length() > MAX_TRIGRAM_SOURCE_UNITS) {
+            return true;
+        }
+        try {
+            return sourceFacts(source).containsAll(plan.trigrams);
+        } catch (OutOfMemoryError unavailable) {
+            return true;
+        }
+    """, 'optional bounded source trigram filter')
+
+    require_atom('search_precompute', 'private static M3TQ.Facts sourceFacts(M3String source)', """
+        M3StringOwner owner = source.owner();
+        long coordinate = source.coordinate();
+        int slot = sourceSlot(owner, coordinate);
+        SourceEntry entry = SOURCE_CACHE.get(slot);
+        if (entry != null
+                && entry.owner.get() == owner
+                && entry.coordinate == coordinate
+                && entry.utf16Length == source.length()) {
+            return entry.facts;
+        }
+        M3TQ.Facts facts = precomputeTrigrams(source, MAX_TRIGRAM_SOURCE_UNITS);
+        SOURCE_CACHE.set(
+                slot,
+                new SourceEntry(
+                        new WeakReference<>(owner),
+                        coordinate,
+                        source.length(),
+                        facts));
+        return facts;
+    """, 'capped source dispatch and weak coordinate cache')
+
+    require_atom('search_precompute', 'private static M3TQ.Facts precomputeTrigrams(M3String value, int maxUtf16Units)', """
+        return M3TQ.precompute(new CursorCharSequence(value), maxUtf16Units);
+    """, 'trigram cursor view and unchanged caller cap')
+
+    require_atom('search_precompute', 'private static final class CursorCharSequence implements CharSequence', """
+        private final M3String.CodeUnitCursor cursor;
+        private final int start;
+        private final int length;
+        private CursorCharSequence(M3String value) {
+            this(new M3String.CodeUnitCursor(value), 0, value.length());
+        }
+        private CursorCharSequence(M3String.CodeUnitCursor cursor, int start, int length) {
+            this.cursor = cursor;
+            this.start = start;
+            this.length = length;
+        }
+        @Override
+        public int length() {
+            return length;
+        }
+        @Override
+        public char charAt(int index) {
+            Objects.checkIndex(index, length);
+            return cursor.at(start + index);
+        }
+        @Override
+        public CharSequence subSequence(int beginIndex, int endIndex) {
+            Objects.checkFromToIndex(beginIndex, endIndex, length);
+            return new CursorCharSequence(cursor, start + beginIndex, endIndex - beginIndex);
+        }
+        @Override
+        public String toString() {
+            StringBuilder text = new StringBuilder(length);
+            for (int index = 0; index < length; index++) text.append(charAt(index));
+            return text.toString();
+        }
+    """, 'temporary cursor view with exact nested offset bounds')
+
+    require_atom('string', 'public int compareTo(String anotherString)', """
+        M3String leftM3 = m3();
+        M3String rightM3 = anotherString.m3();
+        if (leftM3 != null || rightM3 != null) {
+            return M3StringPrecomputeBridge.compareTo(
+                    this, anotherString, leftM3, rightM3);
+        }
+        byte[] v1 = value();
+        byte[] v2 = anotherString.value();
+        byte coder = coder();
+        if (coder == anotherString.coder()) {
+            return coder == LATIN1 ? StringLatin1.compareTo(v1, v2)
+                                   : StringUTF16.compareTo(v1, v2);
+        }
+        return coder == LATIN1 ? StringLatin1.compareToUTF16(v1, v2)
+                               : StringUTF16.compareToLatin1(v1, v2);
+    """, 'String receiver binding and original flat fallback')
+
+    require_atom('precompute_bridge', 'static int compareTo( String left, String right, M3String leftStorage, M3String rightStorage)', """
+        if (leftStorage != null && leftStorage.sameCoordinate(rightStorage)) return 0;
+        int length1 = left.length();
+        int length2 = right.length();
+        int limit = Math.min(length1, length2);
+        for (int index = 0; index < limit; index++) {
+            int difference = left.charAt(index) - right.charAt(index);
+            if (difference != 0) return difference;
+        }
+        return length1 - length2;
+    """, 'coordinate shortcut followed by exact UTF-16 comparison and length fallback')
+
+    require_atom('m3', 'private static final class CodePointsSpliterator implements Spliterator.OfInt', """
+        private final M3String source;
+        private final CodeUnitCursor units;
+        private int index;
+        private final int fence;
+        CodePointsSpliterator(M3String source, int index, int fence) {
+            this.source = Objects.requireNonNull(source,         );
+            this.units = new CodeUnitCursor(this.source);
+            this.index = index;
+            this.fence = fence;
+        }
+        @Override
+        public OfInt trySplit() {
+            int lo = index;
+            int mid = (lo + fence) >>> 1;
+            if (mid <= lo) return null;
+            if (mid < fence
+                    && mid > lo
+                    && Character.isLowSurrogate(units.at(mid))
+                    && Character.isHighSurrogate(units.at(mid - 1))) {
+                mid--;
+            }
+            if (mid <= lo) return null;
+            index = mid;
+            return new CodePointsSpliterator(source, lo, mid);
+        }
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action,         );
+            if (index >= fence) return false;
+            char first = units.at(index++);
+            if (Character.isHighSurrogate(first) && index < fence) {
+                char second = units.at(index);
+                if (Character.isLowSurrogate(second)) {
+                    index++;
+                    action.accept(Character.toCodePoint(first, second));
+                    return true;
+                }
+            }
+            action.accept(first);
+            return true;
+        }
+        @Override
+        public void forEachRemaining(IntConsumer action) {
+            Objects.requireNonNull(action,         );
+            while (tryAdvance(action)) {
+            }
+        }
+        @Override
+        public long estimateSize() {
+            return fence - index;
+        }
+        @Override
+        public int characteristics() {
+            return Spliterator.ORDERED | Spliterator.IMMUTABLE;
+        }
+    """, 'both surrogate split guards, midpoint repair and exact traversal')
+
+
+check_cursor_refinements(m3, search_precompute, string, precompute_bridge)
+
+
+# The remaining critical surfaces dispatch through the same existing internal bridge.
+# Keep both complete caller and callee contracts; an unrelated route mention cannot qualify.
+def check_critical_surface_refinements(m3: str, string: str, precompute_bridge: str) -> None:
+    sources = {"m3": m3, "string": string, "precompute_bridge": precompute_bridge}
+    masked = {name: java_mask_non_code(source, allow_non_code_unicode=(name == "string"))
+              for name, source in sources.items()}
+
+    def require_atom(owner: str, signature: str, expected: str, empty_returns: int, label: str) -> None:
+        code = masked[owner]
+        declaration = r"\s*".join(re.escape(token) for token in signature.split())
+        matches = list(re.finditer(declaration, code))
+        if len(matches) != 1:
+            fail("M3 critical surface lost unique owner declaration: " + label)
+        opening = code.find("{", matches[0].end())
+        if opening < 0 or code[matches[0].end():opening].strip():
+            fail("M3 critical surface changed declaration boundary: " + label)
+        closing = java_block_end(code, opening)
+        if closing < 0:
+            fail("M3 critical surface lost complete owner body: " + label)
+        body = code[opening + 1:closing]
+        if re.sub(r"\s+", "", body) != re.sub(r"\s+", "", expected):
+            fail("M3 critical surface control flow changed: " + label)
+        # Masked literals alone cannot distinguish an empty result from another String.
+        # Bind every sole-literal return slot to its raw empty literal in this same body.
+        returns = list(re.finditer(r"\breturn(?P<literal>\s+);", body))
+        if len(returns) != empty_returns:
+            fail("M3 critical surface empty-result return slots changed: " + label)
+        raw_body = sources[owner][opening + 1:closing]
+        for result in returns:
+            literal = raw_body[result.start("literal"):result.end("literal")]
+            if not re.fullmatch(r'\s*""\s*', literal):
+                fail("M3 critical surface changed the exact empty String result: " + label)
+
+    require_atom('string', 'static void checkBoundsBeginEnd(int begin, int end, int length)', """
+        Preconditions.checkFromToIndex(begin, end, length, Preconditions.SIOOBE_FORMATTER);
+    """, 0, 'String bounds exception authority')
+
+    require_atom('m3', 'M3String slice(int beginIndex, int endIndex)', """
+        Objects.checkFromToIndex(beginIndex, endIndex, length());
+        if (beginIndex == 0 && endIndex == length()) return this;
+        int length = endIndex - beginIndex;
+        return range(owner, Math.addExact(start(), beginIndex), length);
+    """, 0, 'logical slice bounds and checked owner-relative origin')
+
+    require_atom('string', 'public int indexOf(String str, int beginIndex, int endIndex)', """
+        if (str.length() == 1) {
+            return indexOf(str.charAt(0), beginIndex, endIndex);
+        }
+        checkBoundsBeginEnd(beginIndex, endIndex, length());
+        M3String sourceM3 = m3();
+        if (sourceM3 != null) {
+            return M3StringPrecomputeBridge.indexOf(
+                    sourceM3, str, beginIndex, endIndex);
+        }
+        return indexOf(value(), coder(), endIndex, str, beginIndex);
+    """, 0, 'bounded forward search caller and original flat fallback')
+
+    require_atom('precompute_bridge', 'static int indexOf(M3String source, String target, int fromIndex, int endIndex)', """
+        int end = Math.min(source.length(), endIndex);
+        int from = Math.clamp(fromIndex, 0, source.length());
+        M3String targetStorage = target.m3();
+        if (targetStorage != null) {
+            return source.indexOf(targetStorage, from, end);
+        }
+        int targetLength = target.length();
+        if (targetLength == 0) return Math.min(from, end);
+        if (from > end - targetLength) return -1;
+        M3StringFacts prepared = source.factsIfPrepared();
+        if (prepared != null && !prepared.mayContain(target)) return -1;
+        int limit = end - targetLength;
+        char first = target.charAt(0);
+        for (int start = from; start <= limit; start++) {
+            if (source.charAt(start) != first) continue;
+            int index = 1;
+            while (index < targetLength
+                    && source.charAt(start + index) == target.charAt(index)) {
+                index++;
+            }
+            if (index == targetLength) return start;
+        }
+        return -1;
+    """, 0, 'bounded forward search exact canonical and mixed routes')
+
+    require_atom('string', 'public int lastIndexOf(String str, int fromIndex)', """
+        Objects.requireNonNull(str,      );
+        M3String storage = m3();
+        if (storage != null) {
+            return M3StringPrecomputeBridge.lastIndexOf(storage, str, fromIndex);
+        }
+        return lastIndexOf(value(), coder(), length(), str, fromIndex);
+    """, 0, 'reverse search null contract and receiver binding')
+
+    require_atom('precompute_bridge', 'static int lastIndexOf(M3String source, String target, int fromIndex)', """
+        int targetLength = target.length();
+        int start = Math.min(fromIndex, source.length() - targetLength);
+        if (start < 0) return -1;
+        if (targetLength == 0) return start;
+        M3String targetStorage = target.m3();
+        if (targetStorage != null) {
+            return source.lastIndexOf(targetStorage, fromIndex);
+        }
+        M3StringFacts prepared = source.factsIfPrepared();
+        if (prepared != null && !prepared.mayContain(target)) return -1;
+        for (int candidate = start; candidate >= 0; candidate--) {
+            int index = 0;
+            while (index < targetLength
+                    && source.charAt(candidate + index) == target.charAt(index)) {
+                index++;
+            }
+            if (index == targetLength) return candidate;
+        }
+        return -1;
+    """, 0, 'reverse bounds, empty target, exact candidate and canonical reuse')
+
+    require_atom('string', 'public String substring(int beginIndex, int endIndex)', """
+        int length = length();
+        checkBoundsBeginEnd(beginIndex, endIndex, length);
+        if (beginIndex == 0 && endIndex == length) {
+            return this;
+        }
+        int subLen = endIndex - beginIndex;
+        if (subLen == 0) {
+            return   ;
+        }
+        M3String storage = m3();
+        if (storage != null) {
+            return M3StringPrecomputeBridge.substring(storage, beginIndex, endIndex);
+        }
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.newString(currentValue, beginIndex, subLen)
+                          : StringUTF16.newString(currentValue, beginIndex, subLen);
+    """, 1, 'substring bounds, whole identity, empty result and flat fallback')
+
+    require_atom('precompute_bridge', 'static String substring(M3String source, int beginIndex, int endIndex)', """
+        return new String(source.slice(beginIndex, endIndex));
+    """, 0, 'substring unchanged canonical slice projection')
+
+    require_atom('string', 'public String trim()', """
+        M3String storage = m3();
+        if (storage != null) {
+            return M3StringPrecomputeBridge.trim(this, storage);
+        }
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.trim(currentValue)
+                                : StringUTF16.trim(currentValue);
+        return ret == null ? this : ret;
+    """, 0, 'trim receiver binding and original flat fallback')
+
+    require_atom('precompute_bridge', 'static String trim(String original, M3String source)', """
+        M3StringFacts facts = source.facts();
+        if (facts.trimStart == 0 && facts.trimEnd == source.length()) return original;
+        if (facts.trimStart == source.length()) return   ;
+        return new String(source.slice(facts.trimStart, facts.trimEnd));
+    """, 1, 'trim geometry, unchanged identity and empty result')
+
+    require_atom('string', 'public String strip()', """
+        M3String storage = m3();
+        if (storage != null) {
+            return M3StringPrecomputeBridge.strip(this, storage);
+        }
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.strip(currentValue)
+                                : StringUTF16.strip(currentValue);
+        return ret == null ? this : ret;
+    """, 0, 'strip receiver binding and original flat fallback')
+
+    require_atom('precompute_bridge', 'static String strip(String original, M3String source)', """
+        M3StringFacts facts = source.facts();
+        if (facts.stripStart == 0 && facts.stripEnd == source.length()) return original;
+        if (facts.stripStart == source.length()) return   ;
+        return new String(source.slice(facts.stripStart, facts.stripEnd));
+    """, 1, 'Unicode whitespace geometry, unchanged identity and empty result')
+
+
+check_critical_surface_refinements(m3, string, precompute_bridge)
+
+
+>>>>>>> 9b155e730c19162ea2f2fa97ba003a880ee2c5cf
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
     '"source": "com.synexia.indexstring.MIndexString"',

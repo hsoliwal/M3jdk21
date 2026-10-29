@@ -27,6 +27,13 @@ import java.util.Spliterator;
 public final class M3TreeSet<E> extends AbstractSet<E> implements NavigableSet<E> {
     private final M3TreeMap<E, ?> map;
     private final boolean insertable;
+
+    /**
+     * Original array-backed AVL owner, for sibling M3 filtered/sorted view
+     * algorithms only. This does not expose or duplicate any entry storage.
+     * View bounds and descending order are already encoded in this map.
+     */
+    M3TreeMap<E, ?> indexedOwner() { return map; }
     /** Natural ordering. */
     public M3TreeSet() { this(null); }
     /** Comparator ordering. */
