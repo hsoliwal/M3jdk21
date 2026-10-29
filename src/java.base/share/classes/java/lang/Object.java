@@ -1,5 +1,8 @@
 /*
  * Copyright (c) 1994, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Modified 2026-10-18 by Hitesh Soliwal and Contributors to the Synexia Project:
+ * add the exact lazy M3Object toAdapter capability.
+ *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -45,21 +48,30 @@ public class Object {
     public Object() {}
 
     /**
-     * Adapt this object to a requested Java type without allocation or conversion.
-     * The default returns this object for assignable types, otherwise null.
-     * Capability-bearing subclasses may override this method; no new resident
+     * Adapt this object to a requested Java type or M3JDK object capability.
+     * Assignable types return this receiver without allocation or conversion.
+     * An exact request for {@link M3Object} returns its lazy capability; unsupported
+     * types return null. Creating that capability does not read fields, index an
+     * object graph, or start observation delivery. Retain the capability or its
+     * subscription for the required observation lifetime.
+     *
+     * <p>Capability-bearing subclasses may override this method. No resident
      * state is added to Object, and a nonmatching type is never cast unsafely.
      *
      * @param clazz the requested type
      * @param <T> requested result type
-     * @return this instance when assignable, otherwise null
+     * @return this instance when assignable, its M3Object capability for that
+     *         exact type, otherwise null
      * @throws NullPointerException if clazz is null
      */
     public <T> T toAdapter(Class<T> clazz) {
         if (clazz == null) {
             throw new NullPointerException("clazz");
         }
-        return clazz.isInstance(this) ? clazz.cast(this) : null;
+        if (clazz.isInstance(this)) {
+            return clazz.cast(this);
+        }
+        return clazz == M3Object.class ? clazz.cast(M3Object.of(this)) : null;
     }
 
 

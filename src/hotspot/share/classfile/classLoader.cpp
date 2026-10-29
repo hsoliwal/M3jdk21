@@ -22,6 +22,12 @@
  *
  */
 
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: GPL-2.0-only
+ * M3 modification (2026-10-18): reserve the Object.toAdapter virtual entry.
+ */
+
 #include "precompiled.hpp"
 #include "cds/cds_globals.hpp"
 #include "cds/filemap.hpp"
@@ -1491,10 +1497,23 @@ jlong ClassLoader::class_link_time_ms() {
 }
 
 int ClassLoader::compute_Object_vtable() {
+<<<<<<< HEAD
   // Object declares five legacy virtual methods and M3's non-final toAdapter.
   // This count must match java.lang.Object before array klasses are created.
   const int Object_vtable_size = 6;
   return Object_vtable_size * vtableEntry::size();
+||||||| 2f2beb2eff7
+  // hardwired for JDK1.2 -- would need to duplicate class file parsing
+  // code to determine actual value from file
+  // Would be value '11' if finals were in vtable
+  int JDK_1_2_Object_vtable_size = 5;
+  return JDK_1_2_Object_vtable_size * vtableEntry::size();
+=======
+  // This count is needed before parsing Object, to create array klasses.
+  // M3 has the five standard entries plus non-final Object.toAdapter(Class).
+  int M3_Object_vtable_size = 6;
+  return M3_Object_vtable_size * vtableEntry::size();
+>>>>>>> 331c452b4b1dddabac9a55fe21d302a079ad7286
 }
 
 
