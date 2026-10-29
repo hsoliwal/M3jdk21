@@ -68,10 +68,36 @@ runs:
         fi
       shell: bash
 
+    - name: 'Record development preview identity'
+      if: steps.bundles.outputs.bundles-found == 'true'
+      env:
+        M3_PREVIEW_REPOSITORY: ${{ github.repository }}
+        M3_PREVIEW_REVISION: ${{ github.sha }}
+        M3_PREVIEW_RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        M3_PREVIEW_PLATFORM: ${{ inputs.platform }}
+        M3_PREVIEW_SUFFIX: ${{ inputs.debug-suffix }}
+      run: |
+        # Digest the actual build archives before upload, on each build host.
+        (
+          cd bundles
+          for bundle in *.zip *.tar.gz; do
+            [[ -f "$bundle" ]] || continue
+            if command -v sha256sum >/dev/null 2>&1; then
+              sha256sum "$bundle"
+            else
+              shasum -a 256 "$bundle"
+            fi
+          done > SHA256SUMS
+        )
+        printf 'M3JDK21 DEVELOPMENT BUILD PREVIEW\nRepository: %s\nRevision: %s\nWorkflow: %s\nPlatform: %s\nDebug suffix: %s\nQualification: BUILD OUTPUT ONLY; inspect the linked tests and release-contract gates.\n' \
+          "$M3_PREVIEW_REPOSITORY" "$M3_PREVIEW_REVISION" "$M3_PREVIEW_RUN" \
+          "$M3_PREVIEW_PLATFORM" "$M3_PREVIEW_SUFFIX" > bundles/BUILD-PREVIEW.txt
+      shell: bash
+
     - name: 'Upload bundles artifact'
       uses: actions/upload-artifact@v4
       with:
         name: bundles-${{ inputs.platform }}${{ inputs.debug-suffix }}
         path: bundles
-        retention-days: 1
+        retention-days: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.keep-bundles == 'true' && 14 || 1 }}
       if: steps.bundles.outputs.bundles-found == 'true'

@@ -36,6 +36,11 @@ on:
         description: 'Platform(s) to execute on (comma separated, e.g. "linux-x64, macos, aarch64")'
         required: true
         default: 'linux-x64, linux-x86, linux-x64-variants, linux-cross-compile, macos-x64, macos-aarch64, windows-x64, windows-aarch64, docs'
+      keep-bundles:
+        description: 'Retain development preview bundles for 14 days; tests and release gates still apply'
+        required: false
+        type: boolean
+        default: false
       configure-arguments:
         description: 'Additional configure arguments'
         required: false
@@ -227,7 +232,9 @@ jobs:
     uses: ./.github/workflows/build-macos.yml
     with:
       platform: macos-x64
-      xcode-toolset-version: '12.5.1'
+      runs-on: macos-15-intel
+      bootjdk-platform: macos-x64
+      xcode-toolset-version: '16.4'
       configure-arguments: ${{ github.event.inputs.configure-arguments }}
       make-arguments: ${{ github.event.inputs.make-arguments }}
     if: needs.select.outputs.macos-x64 == 'true'
@@ -238,8 +245,9 @@ jobs:
     uses: ./.github/workflows/build-macos.yml
     with:
       platform: macos-aarch64
-      xcode-toolset-version: '12.5.1'
-      extra-conf-options: '--openjdk-target=aarch64-apple-darwin'
+      runs-on: macos-15
+      bootjdk-platform: macos-aarch64
+      xcode-toolset-version: '16.4'
       configure-arguments: ${{ github.event.inputs.configure-arguments }}
       make-arguments: ${{ github.event.inputs.make-arguments }}
     if: needs.select.outputs.macos-aarch64 == 'true'
@@ -318,7 +326,19 @@ jobs:
     with:
       platform: macos-x64
       bootjdk-platform: macos-x64
-      runs-on: macos-11
+      runs-on: macos-15-intel
+      xcode-toolset-version: '16.4'
+
+  test-macos-aarch64:
+    name: macos-aarch64
+    needs:
+      - build-macos-aarch64
+    uses: ./.github/workflows/test.yml
+    with:
+      platform: macos-aarch64
+      bootjdk-platform: macos-aarch64
+      runs-on: macos-15
+      xcode-toolset-version: '16.4'
 
   test-windows-x64:
     name: windows-x64
@@ -328,13 +348,14 @@ jobs:
     with:
       platform: windows-x64
       bootjdk-platform: windows-x64
-      runs-on: windows-2019
+      runs-on: windows-2022
 
-  # Remove bundles so they are not misconstrued as binary distributions from the JDK project
+  # Retained manual M3JDK21 previews are build outputs, not OpenJDK releases or release qualification.
+  # Ordinary runs retain the upstream cleanup policy.
   remove-bundles:
     name: 'Remove bundle artifacts'
     runs-on: ubuntu-22.04
-    if: always()
+    if: ${{ always() && !(github.event_name == 'workflow_dispatch' && github.event.inputs.keep-bundles == 'true') }}
     permissions:
       contents: read
       actions: write
@@ -353,11 +374,12 @@ jobs:
       - test-linux-x64
       - test-linux-x86
       - test-macos-x64
+      - test-macos-aarch64
       - test-windows-x64
 
     steps:
       - name: 'Remove only this run''s bundle artifacts'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v8
         with:
           script: |
             // Uploads use artifact API v4. Never delete published test results.
