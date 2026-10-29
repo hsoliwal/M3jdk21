@@ -1,12 +1,21 @@
-# M3 immutable array substrate
+# M3 array substrate and compact integers
 
-Status: first bounded array receiving slice for M3JDK21.
+Status: additive packed-integer and VInt capabilities have passed the recorded
+Linux Java/JNI, full SDK composition, installed-runtime and legacy-client checks.
+[PACKED_ACCEPTANCE.json](PACKED_ACCEPTANCE.json) records the exact inputs and
+outcomes, including an unchanged pre-existing JDK API-boundary failure. Global
+receiving stages and whole-JDK acceptance remain unpromoted.
 
 This separately built Apache-2.0 module adapts qualified Synexia MIndex/MatIndex
 array mechanics into canonical M3 naming. It does **not** alter Java array
 language, verifier, reflection, JNI, identity, covariance or mutable element
 semantics. Ordinary `byte[]`, `char[]`, `int[]`, `long[]` and `T[]`
-remain authoritative public/JVM values.
+remain authoritative public/JVM values. The exported `com.m3.arrays.packed`
+package adds deliberate non-Java-SE compact storage and codec APIs to this
+same `com.m3.arrays` module, with no Synexia runtime dependency.
+The installed extension is opt-in: use `--add-modules com.m3.arrays`, or declare
+`requires com.m3.arrays;` in a named application module. Ordinary classpath
+launches preserve their existing class lookup behavior.
 
 ## First slice
 
@@ -33,10 +42,81 @@ materialization boundaries.
 M3String demonstrated that target-internal ownership can change while the public
 JDK contract remains stable. Arrays need an even stricter boundary because Java
 arrays are inherently mutable, covariant reference values with VM-visible
-layout and identity. This module therefore provides immutable internal values
-only. A future JDK owner may use these behind a proven contract, but this module
-must never make two ordinary arrays share mutable payload or change array store,
-clone, reflection, serialization, Unsafe/VarHandle, JNI or GC semantics.
+layout and identity. The existing view owners therefore provide immutable
+internal values. The packed extension has its own explicit mutable,
+caller-owned container contract; it does not alias caller arrays or replace
+VM arrays. A future JDK owner may use these capabilities behind a proven
+contract, but this module must never change array store, clone, reflection,
+serialization, Unsafe/VarHandle, JNI or GC semantics.
+
+## Packed integers and VInt
+
+`Int40Array`, `Int48Array` and `Int56Array` store signed values in one packed
+`byte[]`, with a `long` carrier at their method boundary. Their base class
+`PackedIntArray` supplies checked indexing, fills, bulk transfer and overlap-safe
+same-width copies. They are fixed-length, mutable and not thread-safe. Imported
+and exported byte arrays are defensive copies; no retained `long[]` or per-value
+wrapper is used. Out-of-range values fail before mutation.
+
+| Type | Signed value range | Bytes per element | Payload for 10 million values |
+| --- | --- | --- | --- |
+| `Int40Array` | -549,755,813,888 to 549,755,813,887 | 5 | 50 MB |
+| `Int48Array` | -140,737,488,355,328 to 140,737,488,355,327 | 6 | 60 MB |
+| `Int56Array` | -36,028,797,018,963,968 to 36,028,797,018,963,967 | 7 | 70 MB |
+
+MB above means 1,000,000 bytes of payload. Object and array headers, alignment,
+caller-owned materializations and runtime overhead are additional. The encoded
+fixed-width format is little-endian two's complement.
+
+```java
+import com.m3.arrays.packed.Int40Array;
+import com.m3.arrays.packed.VInt;
+
+Int40Array values = new Int40Array(3);
+values.setAll(0, new long[] { 1, -2, 1L << 35 }, 0, 3);
+byte[] fixed = values.toByteArray();
+Int40Array restored = Int40Array.fromByteArray(fixed);
+byte[] variable = VInt.encodeZigZag64(restored.toLongArray());
+long[] decoded = VInt.decodeZigZag64(variable);
+```
+
+`VInt` is a sequence codec, not a new primitive keyword or an indexed mutable
+array. `encodeUnsigned64` / `decodeUnsigned64` preserve every 64-bit `long`
+bit pattern as an unsigned carrier; negative carriers require ten bytes.
+`encodeZigZag64` / `decodeZigZag64` map signed values before the same canonical
+base-128 encoding. Encodings use 1 to 10 bytes per value. Decoders reject
+truncation, overflow and nonminimal encodings. Results are detached arrays.
+Variable-width encoding can use more space than fixed-width storage for large
+values; no distribution-independent memory saving or speedup is claimed.
+
+The portable APIs do not need a native library and use ordinary Java array
+capacity. The existing `M3ArrayNative` facade adds explicit required-native
+batch operations:
+
+- `encodePackedRequired(long[], int)` / `decodePackedRequired(byte[], int)`;
+- `encodeUnsigned64Required(long[])` / `decodeUnsigned64Required(byte[])`;
+- `encodeZigZag64Required(long[])` / `decodeZigZag64Required(byte[])`.
+
+The fixed-width argument is exactly 40, 48 or 56. `MAX_CODEC_ITEMS` is 4096:
+both input and output element/byte counts must fit that bound. These operations
+reuse the existing `m3_arrays` library loader and `m3.arrays.native.path`
+configuration, and do not silently fall back to Java. Callers must keep input
+arrays stable until the call returns. JNI uses bounded primitive-array region
+copies and detached results, with no retained Java heap pointers, critical-array
+pins or per-element JNI calls. Existing UTF-16 optional-fallback operations and
+their original native exports retain their contracts.
+
+The stable naming records are `m3.arrays.packed.signed`,
+`m3.arrays.packed.vint64` and `m3.arrays.packed.native` in the existing
+`m3/docs/name-mapping.json`. They retain `implemented-unverified` because the
+global String -> arrays -> collections receiving sequence is separate from this
+bounded component result. The candidate passed all 34 Java tests and three native
+tests on the matched source JDK. The linked SDK separately passed 104 legacy-client
+checks and the 30-million-value storage verification.
+Five selected JDK regression cases pass on both images; the sixth fails on both
+with the same pre-existing `java.lang.M3Object` export diagnostic. No failing JDK
+test was changed. Build and install the full SDK using [SDK_IMAGE.md](SDK_IMAGE.md);
+exact donor lineage is in [PACKED_NOTICES.md](PACKED_NOTICES.md).
 
 ## Relationship to collections
 
@@ -66,16 +146,20 @@ native proof itself must execute before claiming JNI parity.
 
 ## Recipe custody
 
-Canonical materialization is the target-specific declarative recipe
-`com.m3.M3ArraySubstrate` in `m3/tooling/migration-recipes`. It composes the
-canonical Synexia `M3HashPinnedJavaSnapshotRecipe` with M3JDK21's existing
-text/native snapshot owner using crate `m3-array-substrate-v1`.
+Synexia (`hsoliwal/com.synexia`) exclusively owns and executes the reusable
+Maven/OpenRewrite recipes, templates and mastery evidence. This target receives
+only executed product source/test/build outputs and passive provenance receipts.
+Historical `m3-array-substrate-v1` records remain provenance; they do not authorize
+new target-local recipe code or runners.
 
-The crate pins every implementation/test postimage and the current-master
-preimages of modified canonical mapping/invariant documents. Replay must be a
-fixed point and source drift is refused. Future array changes must evolve a new
-reviewed recipe crate rather than treating these files as manually mutable
-authority.
+The packed extension uses canonical recipe
+`com.synexia.rewrite.M3JdkPackedIntegersRecipe` and Synexia task crate
+`synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029`.
+It composes the existing attributed package adapter and hash-pinned Java/text
+owners. Exact preimages/postimages, source-drift refusal and a complete fixed
+point are required before receiving. Corrections return to this Synexia owner;
+M3JDK21 independently owns compiler, API/ABI, JNI, module/image and runtime
+acceptance. A recipe identity or template alone is not execution evidence.
 
 ## Port order
 

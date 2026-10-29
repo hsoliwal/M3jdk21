@@ -5,6 +5,13 @@ on:
   pull_request:
     paths:
       - 'm3/arrays/**'
+      - 'm3/native/include/m3_jni_core.h'
+      - 'm3/tooling/module-packs/build_pack.py'
+      - 'm3/tooling/module-packs/test_sdk_profile.py'
+      - 'm3/tooling/module-packs/developer_tools.py'
+      - 'm3/tooling/module-packs/tool_packs.py'
+      - 'm3/tooling/jmod-recipes/tools/jmod_pack.py'
+      - 'm3/tooling/jmod-recipes/tools/test_jmod_resolution.py'
       - 'm3/docs/m3jdk21-porting-invariant.md'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/synexia-array-port-map.tsv'
@@ -19,21 +26,18 @@ permissions:
   contents: read
 
 jobs:
-  recipe:
+  receiving:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-      - name: Recipe fixed point and refusal
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3ArraySubstrateRecipeTest
-          test
+      - name: Target naming and intake contracts
+        run: |
+          python3 m3/tooling/name-contract/check.py
+          python3 m3/tooling/name-contract/audit.py --strict
+          python3 m3/runtime-integration/verify-synexia-intake.py
+      # Canonical Maven/OpenRewrite execution is qualified in com.synexia.
+      # This public receiver runs only target-authoritative product gates.
 
   java:
     runs-on: ubuntu-24.04
@@ -45,8 +49,12 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Immutable array contracts
+      - name: Existing immutable and new packed array contracts
         run: mvn -B -ntp -f m3/arrays/pom.xml test
+      - name: SDK asset and default-root compatibility contracts
+        run: |
+          python3 -m unittest discover -s m3/tooling/module-packs -p test_sdk_profile.py -v
+          JAVA_HOME21="$JAVA_HOME" PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s m3/tooling/jmod-recipes/tools -p test_jmod_resolution.py -v
       - name: Mapping JSON syntax
         run: python3 -m json.tool m3/docs/name-mapping.json >/dev/null
       - name: Provenance JSON syntax
@@ -63,4 +71,4 @@ jobs:
           java-version: '21'
           cache: maven
       - name: JNI and C11 parity
-        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux test
+        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DargLine=-Xcheck:jni test

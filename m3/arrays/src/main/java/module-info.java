@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
-/** Independently built Apache-2.0 immutable M3 array/value substrate. */
+/** Apache-2.0 M3 array substrate: immutable views and caller-owned packed integer storage. */
 module com.m3.arrays {
     exports com.m3.arrays;
+    exports com.m3.arrays.packed;
 }
