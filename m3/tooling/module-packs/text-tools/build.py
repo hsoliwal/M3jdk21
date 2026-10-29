@@ -80,11 +80,15 @@ def main():
     # --release 21 selects standard ct.sym APIs, excluding the new SDK modules.
     command(output / "image-javac.log", image / "bin/javac", "-source", "21", "-target", "21",
             "-Xlint:all", "-Werror", "--add-modules", "jdk.m3.text,jdk.m3.io,jdk.m3.structured",
-            "-d", smoke_classes, smoke)
+            "-d", smoke_classes, smoke, smoke.with_name("M3NativeTextDifferential.java").resolve(strict=True))
     command(output / "image-runtime.log", image / "bin/java", "-Xcheck:jni", "--add-modules",
             "jdk.m3.text,jdk.m3.io", "-cp", smoke_classes, "M3TextSmoke", output / "image-files")
     if "M3_TEXT_IMAGE_PASS tools=24" not in (output / "image-runtime.log").read_text():
         raise ValueError("missing image runtime proof")
+    command(output / "image-native-parity.log", image / "bin/java", "-Xcheck:jni",
+            "--add-modules", "jdk.m3.text", "-cp", smoke_classes, "M3NativeTextDifferential")
+    if "M3_NATIVE_TEXT_PARITY_PASS runs=450" not in (output / "image-native-parity.log").read_text():
+        raise ValueError("missing native text parity proof")
     print("M3_TEXT_PACK_PASS modules=3 tools=24")
 
 
