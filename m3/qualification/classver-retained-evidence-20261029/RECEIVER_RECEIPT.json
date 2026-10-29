@@ -1,0 +1,105 @@
+{
+  "spdx_license": "Apache-2.0",
+  "kind": "passive result-only qualification receipt",
+  "canonical_source_repository": "hsoliwal/com.synexia",
+  "canonical_source_pr": 14010,
+  "canonical_source_commit": "35f80674fa4ff503a3f641110caa362217eb55c4",
+  "canonical_qualification_path": "synexia-openrewrite-recipes/crates/m3jdk21-classver-naming/qualification",
+  "canonical_engine_blob": "0412b030789100bfabb36806fdcc32dc9f983ab9",
+  "receiver_original_head": "9883aec70eddb568d0904a0e9720ea368a4a7076",
+  "original_authority": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "8891dd43632cf6e5e7b174c5badd5c0d532f9541",
+    "tree": "90ff0bbaea96b14dc65806ee10b587deee7eaffc"
+  },
+  "unchanged_ledger_blob": "32768c4e15b693f3800c62b0fbf0bf80aac9b460",
+  "original_files": 60,
+  "original_bytes": 575146,
+  "materialized_sdk_outputs": {
+    "m3/compatibility/check_public_names.py": {
+      "bytes": 13666,
+      "git_blob": "300adbb590484efc9070bc1f2bb549f0ff7e2346",
+      "sha256": "f4a8ae919e0c32790981bc1c2ad7709fe52c50d0767494800aaa00086442b7c7"
+    },
+    "m3/compatibility/test_public_names.py": {
+      "bytes": 14546,
+      "git_blob": "c2ddde266c3602915f4c720ee2068c3eac56d65e",
+      "sha256": "9067283415c80efc3bd7848e3d08a7f98234c0b9dd567cbcd1f59a311bba2656"
+    }
+  },
+  "executed": {
+    "maven_openrewrite_junit": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "generated_python_naming_suite": {
+      "tests": 34,
+      "failures": 0
+    },
+    "original_python_classver_suite": {
+      "tests": 14,
+      "failures": 0
+    },
+    "authenticated_historical_files": 60,
+    "authenticated_original_bytes": 575146,
+    "real_git_closed_ledger_fixture": "PASS",
+    "working_evidence_drift": "REFUSED",
+    "unlisted_date_path": "REFUSED",
+    "byte_stable_sdk_replay": "PASS",
+    "source_missing_drift_duplicate_refusals": "PASS"
+  },
+  "boundary": "Local real-Git fixture with exact remote control and historical evidence bytes. Its 63-path delta includes 60 historical files, 2 naming sources and the unchanged original ClassVer test fixture. Remote complete target-tree/hosted workflow not executed.",
+  "unchanged_history": "All original 60 files remain at original paths with exact hashes/modes/bytes; no historical receipt edits, path relocation or executable recipe import",
+  "full_jdk_jtreg_jni_platform_performance": "NOT_RUN",
+  "admission": "Only the date-name diagnostic for exact added members of the sealed ledger is admitted after the existing ClassVer verifier authenticates all original controls and evidence. All ordinary naming rules and unlisted-path refusals remain intact.",
+  "original_qualification": {
+    "recipe_definition_commit": "2e3d72e082c21ce15e6c507a084ee2c2690bd031",
+    "engine_blob": "67c0c8f3376cd92ae087ddcd7afd5abd68fa29cc",
+    "receipt_sha256": "402f74e76ced5d86e2bc13e3d136e682d8a4e5a48d740cbe5c61f166d7fe15c3",
+    "receipt_git_blob": "65af44143a8f862ea9672b52a7b7b15491f7642c",
+    "executed": {
+      "maven_openrewrite_junit": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "generated_python_naming_suite": {
+        "tests": 34,
+        "failures": 0
+      },
+      "original_python_classver_suite": {
+        "tests": 14,
+        "failures": 0
+      },
+      "authenticated_historical_files": 60,
+      "authenticated_original_bytes": 575146,
+      "real_git_closed_ledger_fixture": "PASS",
+      "working_evidence_drift": "REFUSED",
+      "unlisted_date_path": "REFUSED",
+      "byte_stable_sdk_replay": "PASS",
+      "source_missing_drift_duplicate_refusals": "PASS"
+    },
+    "retention": "The unchanged original private target payload and qualification reports remain retained; this successor only binds the passive receiving receipt."
+  },
+  "current_engine_replay": {
+    "execution_source_ref": "5e4e20982d9bb401f7be57f0e828cec557a42d7f",
+    "recipe_definition_commit": "2e3d72e082c21ce15e6c507a084ee2c2690bd031",
+    "engine_blob": "0412b030789100bfabb36806fdcc32dc9f983ab9",
+    "qualified_receipt_path": "synexia-openrewrite-recipes/crates/m3jdk21-classver-naming/qualification/current-develop-5e4e2098/RECEIPT.json",
+    "qualified_receipt_sha256": "ba992636f1d911201b1ab851a4436792ce22436e16a21e6bb9a65b4502f65914",
+    "qualified_receipt_git_blob": "150adb08af8ebb6e1102ad3471dd60adfb95b52b",
+    "actual_sdk": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "exact_same_materialized_outputs": true,
+    "preparation_failure_retained": true,
+    "scope": "The exact original ClassVer recipe/test and unchanged two target postimages replayed against the engine from execution_source_ref. The combined source commit publishes those unchanged definitions and both proof sets; no execution against a future commit is claimed."
+  },
+  "execution_interpretation": "The executed field preserves the original bounded proof. Its eight SDK tests also passed in the separately identified current-engine replay. The generated Python, original ClassVer and real-Git fixture results remain the original unchanged-postimage qualification, not a new remote or full-JDK execution."
+}

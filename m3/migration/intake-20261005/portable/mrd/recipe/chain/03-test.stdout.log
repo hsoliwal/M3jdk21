@@ -1,0 +1,28 @@
+{"stage": "test", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< com.synexia.verification:mrd-current-bootstrap-20261005 >-------
+[INFO] Building Mrd exact parser dependency candidate bootstrap 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-cli) @ mrd-current-bootstrap-20261005 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.MrdTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.867 s -- in com.synexia.rewrite.MrdTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.114 s
+[INFO] Finished at: 2026-10-05T10:52:01+02:00
+[INFO] ------------------------------------------------------------------------
+{"status": "ACTUAL_SUREFIRE_REPORTS", "totals": {"tests": 3, "failures": 0, "errors": 0, "skipped": 0}, "suites": {"com.synexia.rewrite.MrdTest": {"counts": {"tests": 3, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.MrdTest.xml", "sha256": "df2fa9f44af871985e5ec1bb19973ef126def8de35e2188d618d689e4563a01c"}}}

@@ -10,6 +10,7 @@ recipe names, candidate inventories, and chronological evidence.
 from __future__ import annotations
 
 import argparse
+import json
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 import re
@@ -158,6 +159,65 @@ def changes(root: Path, base: str, head: str) -> list[Change]:
     return rows
 
 
+CLASSVER_EVIDENCE_PREFIX = "m3/migration/intake-20261005/"
+CLASSVER_AUTHENTICATED = {
+    "m3/migration/classver.py": "4cec8da0a4feba829161e6afbc0ad9272ed4263b",
+    "m3/migration/recipe.py": "02f88f9f8b1eb8930fff59684c81bb30819800ad",
+    "m3/migration/classver-evidence.json": "32768c4e15b693f3800c62b0fbf0bf80aac9b460",
+}
+CLASSVER_ADMITTED_BYTES = 575146
+
+
+def _sealed_classver_paths(root: Path, head: str) -> frozenset[str]:
+    """Reuse the verified ClassVer evidence owner; never trust a dated path by appearance.
+
+    The original ClassVer verifier checks all 60 Git objects, their SHA-256 and
+    working bytes; this guard pins its executable, helper and ledger before use.
+    """
+    root = root.resolve(strict=True)
+    if git(root, "rev-parse", "--verify", "HEAD").decode("ascii").strip() != head:
+        raise ValueError("ClassVer evidence checkout does not match the reviewed head")
+    for path, blob in CLASSVER_AUTHENTICATED.items():
+        actual = git(root, "rev-parse", "--verify", head + ":" + path).decode("ascii").strip()
+        if actual != blob:
+            raise ValueError("ClassVer control source identity drift: " + path)
+        target = root
+        for piece in PurePosixPath(path).parts:
+            target = target / piece
+            if target.is_symlink():
+                raise ValueError("ClassVer control source symlink refused: " + path)
+        if not target.is_file() or target.read_bytes() != git(root, "show", head + ":" + path):
+            raise ValueError("ClassVer control source checkout drift: " + path)
+
+    result = subprocess.run(
+        [sys.executable, "-S", "m3/migration/classver.py"],
+        cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
+    )
+    if result.returncode:
+        raise ValueError("closed ClassVer evidence refused: "
+                         + result.stderr.decode("utf-8", "replace")[-1200:])
+    try:
+        receipt = json.loads(result.stdout)
+    except (UnicodeError, json.JSONDecodeError) as error:
+        raise ValueError("closed ClassVer evidence returned invalid proof") from error
+    if (receipt.get("status") != "PASS_CLASSVER_EVIDENCE_DIFF"
+            or receipt.get("head") != head
+            or receipt.get("admittedEvidence") != 60
+            or receipt.get("admittedEvidenceBytes") != CLASSVER_ADMITTED_BYTES
+            or receipt.get("gitDiffCheckExit") != 0
+            or receipt.get("evidenceWrites") != 0):
+        raise ValueError("closed ClassVer proof identity or scope mismatch")
+    ledger = json.loads(git(root, "show", head + ":m3/migration/classver-evidence.json"))
+    rows = ledger["files"]
+    paths = tuple(row["path"] for row in rows)
+    if (len(paths) != 60 or paths != tuple(sorted(set(paths)))
+            or any(not isinstance(path, str)
+                   or not path.startswith(CLASSVER_EVIDENCE_PREFIX)
+                   or path.endswith("/") for path in paths)):
+        raise ValueError("closed ClassVer ledger path membership drift")
+    return frozenset(paths)
+
+
 def problems(change: Change, text: str | None = None,
              baseline: str | None = None) -> list[str]:
     path = change.path
@@ -204,6 +264,9 @@ def problems(change: Change, text: str | None = None,
 
 def check(root: Path, base: str, head: str) -> tuple[list[Change], list[tuple[str, str]]]:
     delta = changes(root, base, head)
+    sealed = (_sealed_classver_paths(root, head)
+              if any(item.path.startswith(CLASSVER_EVIDENCE_PREFIX) for item in delta)
+              else frozenset())
     violations = []
     for change in delta:
         source = None
@@ -217,6 +280,9 @@ def check(root: Path, base: str, head: str) -> tuple[list[Change], list[tuple[st
             old_path = change.previous or change.path
             baseline = git(root, "show", ancestor + ":" + old_path).decode("utf-8")
         for reason in problems(change, source, baseline):
+            if (reason == "unstable date/version identifier"
+                    and change.status == "A" and change.path in sealed):
+                continue  # exact ClassVer authority only; no new public-name exemption
             violations.append((change.path, reason))
     return delta, sorted(violations)
 

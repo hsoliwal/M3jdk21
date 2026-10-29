@@ -1,0 +1,103 @@
+--- prepare_receiver_whitelist_v3.py
++++ prepare_receiver_whitelist_v4.py
+@@ -7,7 +7,10 @@
+ 
+ R = Path(__file__).resolve().parents[1]
+ TASK = 'm3/migration/intake-20261005/current-752-ci'
+-MANIFEST_SHA = 'f25a39ea2c764a5a9f2a84b43915aa4480aa4302718bc098bd4bfaa39727f7b3'
++MANIFEST_SHA = '8c3d4e6a28d4314a1de4c3a15c3616a371e04ac2eaf6357852c6ce28c1642db4'
++JCC_CRATE = 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005'
++ADDED_TARGETS = {'m3/migration/test/test_jcc_handoff_current_context.py', JCC_CRATE+'/plan-intake-752-ci.json', JCC_CRATE+'/pom-before-752.xml'}
++PRIOR569_EXCEPTIONS = {'m3/migration/test/test_jcc_handoff_context_profiles.py', 'm3/migration/test/test_jcc_handoff_packet.py'}
+ PORTABLE = {
+     'producer-portable-v1': '4682c5402aeb13219555a8bf2addd286f5088eb8055c8b887523a68a624f2847',
+     'cir-producer-portable-v1': 'cf090e7f50ba798f7983d8a2bb0d3a0f9377c15864e7d50a258d61900f07e889',
+@@ -39,12 +42,14 @@
+     parser.add_argument('--package', type=Path, required=True)
+     parser.add_argument('--cic-mapping', type=Path, required=True)
+     parser.add_argument('--cic-mapping-sha', required=True)
++    parser.add_argument('--cih-mapping', type=Path, required=True)
++    parser.add_argument('--cih-mapping-sha', required=True)
+     parser.add_argument('--coverage', type=Path, required=True)
+     parser.add_argument('--coverage-sha', required=True)
+     parser.add_argument('--output', type=Path, required=True)
+     args = parser.parse_args()
+-    proof = R / 'evidence/consumer-v4'
+-    manifest_path = R / 'consumer-manifest-v4.json'
++    proof = R / 'evidence/consumer-v5'
++    manifest_path = R / 'consumer-manifest-v5.json'
+     require(sha(manifest_path.read_bytes()) == MANIFEST_SHA, 'exact final manifest')
+     manifest = load(manifest_path)
+     result_path = proof / 'RESULT.json'
+@@ -80,7 +85,12 @@
+             rows[path] = row
+ 
+     targets = {entry['path']: entry for entry in manifest['producerOutputs']}
+-    require(len(targets) == manifest['provenance']['declaredOutputCount'] == 19, 'nineteen exact outputs')
++    require(len(targets) == manifest['provenance']['declaredOutputCount'] == 24, 'twenty-four exact outputs')
++    require(manifest['provenance']['addedTargetPaths'] == sorted(ADDED_TARGETS)
++            and manifest['provenance']['outputOperations'] == {path: 'ADD' if path in ADDED_TARGETS else 'REPLACE' for path in targets},
++            'exact three ABSENT additions and twenty-one replacements')
++    require({entry['path'] for entry in manifest['provenance']['historical569ActiveExceptions']} == PRIOR569_EXCEPTIONS,
++            'only two qualified replacements of the prior569 active paths')
+     qualified = []
+     for entry in manifest['files']:
+         path = entry['path']
+@@ -104,6 +114,14 @@
+         require(entry['path'].startswith(TASK + '/cic-producer-portable/'), 'Cic portable scope')
+         add(entry['path'], entry['file'], 'provenance-addition', entry, entry['mode'])
+     add(TASK + '/delivery-mappings/cic-producer-portable-v1.json', args.cic_mapping, 'provenance-addition')
++    require(sha(args.cih_mapping.read_bytes()) == args.cih_mapping_sha, 'Cih mapping seal')
++    cih_mapping = load(args.cih_mapping)
++    require(cih_mapping['producerResultSHA256'] == manifest['provenance']['cihProducerResultSHA256'],
++            'actual selected Cih producer mapping')
++    for entry in cih_mapping['files']:
++        require(entry['path'].startswith(TASK + '/cih-producer-portable/'), 'Cih portable scope')
++        add(entry['path'], entry['file'], 'provenance-addition', entry, entry['mode'])
++    add(TASK + '/delivery-mappings/cih-producer-portable-v1.json', args.cih_mapping, 'provenance-addition')
+     require(sha(args.coverage.read_bytes()) == args.coverage_sha, 'source coverage mapping seal')
+     coverage = load(args.coverage)
+     for entry in coverage['publicationAdditions']:
+@@ -117,20 +135,22 @@
+         'consumer-v2': {'resultSHA256': 'd8591a5652baf9c92902e6b1475b773fec4a1f498c1dbd6fe55dcffc002038d7', 'state': 'STOPPED'},
+         'consumer-v3': {'resultSHA256': '0d50bac3af04f4c1b498ca34c3b6c57ad76bf97aa3b51fbba1dc926d4b52d2a7', 'state': 'STOPPED'},
+         'receiving-python-v1': {'resultSHA256': 'be337d009319bab7c528f4ab6e61ada6ef5f407a33d070729e8d5cd68937a63e', 'state': 'PASS_BOUNDED_PYTHON_RECEIVING_COMPONENTS'},
+-        'consumer-v4': {'resultSHA256': args.result_sha, 'state': 'PASS_BOUNDED_CURRENT_CONSUMERS'},
++        'consumer-v4': {'resultSHA256': '65ad6376f5e88ca2bd1e33e549c262a50bc58952ede7af8c17c9b0beed05ed73', 'state': 'STOPPED'},
++        'receiving-python-v2': {'resultSHA256': '687eed40f8cfd7c93a663dbce1bb9fbf7a80626d798fa2f502e73c1a4bbab0cc', 'state': 'PASS_BOUNDED_PYTHON_RECEIVING_COMPONENTS'},
++        'consumer-v5': {'resultSHA256': args.result_sha, 'state': 'PASS_BOUNDED_CURRENT_CONSUMERS'},
+     }
+     custody = load(package / 'staged/COPY-CUSTODY.json')
+     plan_path = package / 'staged/package-plan.json'
+     package_plan = load(plan_path)
+     require(custody['terminalResults'] == package_plan['terminalResults'] == expected_results,
+-            'exact original five terminal consumer dispositions')
++            'exact original seven terminal consumer dispositions')
+     require(set(package_plan['laneSelection']['required']) == set(expected_results)
+             and package_plan['laneSelection']['additional'] == []
+             and package_plan['laneSelection']['allowNotExecuted'] == []
+             and package_plan['laneSelection']['includeAllExisting'] is False,
+             'exact package lane selection')
+-    require(sha((package / 'staged/evidence/consumer-v4/RESULT.json').read_bytes()) == args.result_sha
+-            and sha((package / 'staged/evidence/consumer-v4/authority/manifest.json').read_bytes()) == MANIFEST_SHA,
++    require(sha((package / 'staged/evidence/consumer-v5/RESULT.json').read_bytes()) == args.result_sha
++            and sha((package / 'staged/evidence/consumer-v5/authority/manifest.json').read_bytes()) == MANIFEST_SHA,
+             'exact copied final result and manifest')
+     bundle_path = package / 'evidence-bundle/BUNDLE.json'
+     bundle = load(bundle_path)
+@@ -196,12 +216,14 @@
+             add(TASK + '/consumer-portable/openjdk-752-attribution/' + file.relative_to(package / 'staged/openjdk-752-attribution').as_posix(), file, 'provenance-addition')
+     for name in ('RESULT.json', 'PATCH.json', 'lint-report.json', 'compile-report.json', 'test-report.json', 'runtime-report.json'):
+         add(TASK + '/consumer-portable/final/' + name, proof / name, 'provenance-addition')
+-    add(TASK + '/consumer-portable/prepare_receiver_whitelist_v3.py', Path(__file__), 'provenance-addition')
++    add(TASK + '/consumer-portable/prepare_receiver_whitelist_v4.py', Path(__file__), 'provenance-addition')
+     write(args.output, {
+         'schema': 'm3.current-receiver-publication-whitelist/1',
+         'state': 'EXACT_QUALIFIED_CONTEXT_AND_SEPARATE_PROVENANCE',
+         'consumerResultSHA256': args.result_sha, 'consumerManifestSHA256': MANIFEST_SHA,
+         'sourceDeliveryCoverageSHA256': args.coverage_sha,
++        'addedTargetPaths': manifest['provenance']['addedTargetPaths'],
++        'historical569ActiveExceptions': manifest['provenance']['historical569ActiveExceptions'],
+         'consumerBundleSHA256': sha((package / 'evidence-bundle/BUNDLE.json').read_bytes()),
+         'qualifiedPaths': sorted(qualified), 'files': [rows[path] for path in sorted(rows)],
+         'qualifiedFileCount': len(qualified), 'fileCount': len(rows),

@@ -1,0 +1,315 @@
+﻿2026-10-05T12:32:56.6562522Z Current runner version: '2.337.0'
+2026-10-05T12:32:56.6587084Z ##[group]Runner Image Provisioner
+2026-10-05T12:32:56.6587853Z Hosted Compute Agent
+2026-10-05T12:32:56.6588451Z Version: 20260901.588
+2026-10-05T12:32:56.6589034Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-05T12:32:56.6589740Z Build Date: 2026-09-01T19:56:44Z
+2026-10-05T12:32:56.6590653Z Worker ID: {5bb5e31d-2456-4509-a392-2ba1db09c600}
+2026-10-05T12:32:56.6591287Z Azure Region: westus3
+2026-10-05T12:32:56.6591857Z ##[endgroup]
+2026-10-05T12:32:56.6593284Z ##[group]Operating System
+2026-10-05T12:32:56.6593871Z Ubuntu
+2026-10-05T12:32:56.6594354Z 22.04.5
+2026-10-05T12:32:56.6594806Z LTS
+2026-10-05T12:32:56.6595287Z ##[endgroup]
+2026-10-05T12:32:56.6595768Z ##[group]Runner Image
+2026-10-05T12:32:56.6596325Z Image: ubuntu-22.04
+2026-10-05T12:32:56.6596849Z Version: 20260927.309.1
+2026-10-05T12:32:56.6597975Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20260927.309/images/ubuntu/Ubuntu2204-Readme.md
+2026-10-05T12:32:56.6599324Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20260927.309
+2026-10-05T12:32:56.6600334Z ##[endgroup]
+2026-10-05T12:32:56.6601329Z ##[group]GITHUB_TOKEN Permissions
+2026-10-05T12:32:56.6603254Z Contents: read
+2026-10-05T12:32:56.6603789Z Metadata: read
+2026-10-05T12:32:56.6604301Z ##[endgroup]
+2026-10-05T12:32:56.6606690Z Secret source: Actions
+2026-10-05T12:32:56.6607548Z Cache mode: write
+2026-10-05T12:32:56.6608266Z Prepare workflow directory
+2026-10-05T12:32:56.6980454Z Prepare all required actions
+2026-10-05T12:32:56.7029881Z Getting action download info
+2026-10-05T12:32:57.0918600Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-05T12:32:57.2651669Z Complete job name: foundation
+2026-10-05T12:32:57.3358404Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-10-05T12:32:57.3359518Z with:
+2026-10-05T12:32:57.3360016Z   persist-credentials: false
+2026-10-05T12:32:57.3360823Z   repository: hsoliwal/M3jdk21
+2026-10-05T12:32:57.3364312Z   token: ***
+2026-10-05T12:32:57.3364767Z   ssh-strict: true
+2026-10-05T12:32:57.3365243Z   ssh-user: git
+2026-10-05T12:32:57.3365750Z   clean: true
+2026-10-05T12:32:57.3366204Z   sparse-checkout-cone-mode: true
+2026-10-05T12:32:57.3366785Z   fetch-depth: 1
+2026-10-05T12:32:57.3367246Z   fetch-tags: false
+2026-10-05T12:32:57.3367729Z   show-progress: true
+2026-10-05T12:32:57.3368219Z   lfs: false
+2026-10-05T12:32:57.3368655Z   submodules: false
+2026-10-05T12:32:57.3369154Z   set-safe-directory: true
+2026-10-05T12:32:57.3369689Z   allow-unsafe-pr-checkout: false
+2026-10-05T12:32:57.3370832Z ##[endgroup]
+2026-10-05T12:32:57.4507948Z Syncing repository: hsoliwal/M3jdk21
+2026-10-05T12:32:57.4509658Z ##[group]Getting Git version info
+2026-10-05T12:32:57.4510669Z Working directory is '/home/runner/work/M3jdk21/M3jdk21'
+2026-10-05T12:32:57.4511656Z [command]/usr/bin/git version
+2026-10-05T12:32:57.4557567Z git version 2.55.0
+2026-10-05T12:32:57.4578702Z ##[endgroup]
+2026-10-05T12:32:57.4595246Z Temporarily overriding HOME='/home/runner/work/_temp/2fdf297d-1a42-4b96-913d-370844699313' before making global git config changes
+2026-10-05T12:32:57.4597820Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-05T12:32:57.4601096Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+2026-10-05T12:32:57.4641654Z Deleting the contents of '/home/runner/work/M3jdk21/M3jdk21'
+2026-10-05T12:32:57.4666159Z ##[group]Initializing the repository
+2026-10-05T12:32:57.4670047Z [command]/usr/bin/git init /home/runner/work/M3jdk21/M3jdk21
+2026-10-05T12:32:57.4747983Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-05T12:32:57.4750396Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-05T12:32:57.4755220Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-05T12:32:57.4760388Z hint: call:
+2026-10-05T12:32:57.4761292Z hint:
+2026-10-05T12:32:57.4762698Z hint: 	git config --global init.defaultBranch <name>
+2026-10-05T12:32:57.4763744Z hint:
+2026-10-05T12:32:57.4764360Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-05T12:32:57.4765234Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-05T12:32:57.4765900Z hint:
+2026-10-05T12:32:57.4766283Z hint: 	git branch -m <name>
+2026-10-05T12:32:57.4766717Z hint:
+2026-10-05T12:32:57.4767282Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-05T12:32:57.4768175Z Initialized empty Git repository in /home/runner/work/M3jdk21/M3jdk21/.git/
+2026-10-05T12:32:57.4769739Z [command]/usr/bin/git remote add origin https://github.com/hsoliwal/M3jdk21
+2026-10-05T12:32:57.4806616Z ##[endgroup]
+2026-10-05T12:32:57.4808093Z ##[group]Disabling automatic garbage collection
+2026-10-05T12:32:57.4810247Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-05T12:32:57.4839358Z ##[endgroup]
+2026-10-05T12:32:57.4841025Z ##[group]Setting up auth
+2026-10-05T12:32:57.4847130Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-05T12:32:57.4875798Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-05T12:32:57.5196816Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-05T12:32:57.5232116Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-05T12:32:57.5458708Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-05T12:32:57.5480679Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-05T12:32:57.5666902Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-05T12:32:57.5700456Z ##[endgroup]
+2026-10-05T12:32:57.5701178Z ##[group]Fetching the repository
+2026-10-05T12:32:57.5709376Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +adf60d204f33cf0d7108ec1a9a454729278db3e0:refs/remotes/pull/148/merge
+2026-10-05T12:33:27.5949427Z From https://github.com/hsoliwal/M3jdk21
+2026-10-05T12:33:27.5950525Z  * [new ref]             adf60d204f33cf0d7108ec1a9a454729278db3e0 -> pull/148/merge
+2026-10-05T12:33:27.5954204Z ##[endgroup]
+2026-10-05T12:33:27.5955143Z ##[group]Determining the checkout info
+2026-10-05T12:33:27.5956395Z ##[endgroup]
+2026-10-05T12:33:27.5961654Z [command]/usr/bin/git sparse-checkout disable
+2026-10-05T12:33:27.6012031Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-05T12:33:27.6038869Z ##[group]Checking out the ref
+2026-10-05T12:33:27.6042594Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/148/merge
+2026-10-05T12:33:28.7084344Z Updating files:  18% (12726/70184)
+2026-10-05T12:33:28.7580012Z Updating files:  19% (13335/70184)
+2026-10-05T12:33:28.7987401Z Updating files:  20% (14037/70184)
+2026-10-05T12:33:28.8429115Z Updating files:  21% (14739/70184)
+2026-10-05T12:33:28.8939666Z Updating files:  22% (15441/70184)
+2026-10-05T12:33:28.9498925Z Updating files:  23% (16143/70184)
+2026-10-05T12:33:29.0108762Z Updating files:  24% (16845/70184)
+2026-10-05T12:33:29.0543168Z Updating files:  25% (17546/70184)
+2026-10-05T12:33:29.0967108Z Updating files:  26% (18248/70184)
+2026-10-05T12:33:29.1414626Z Updating files:  27% (18950/70184)
+2026-10-05T12:33:29.1783901Z Updating files:  28% (19652/70184)
+2026-10-05T12:33:29.2276294Z Updating files:  29% (20354/70184)
+2026-10-05T12:33:29.2674805Z Updating files:  30% (21056/70184)
+2026-10-05T12:33:29.3390635Z Updating files:  31% (21758/70184)
+2026-10-05T12:33:29.3711688Z Updating files:  32% (22459/70184)
+2026-10-05T12:33:29.3974072Z Updating files:  33% (23161/70184)
+2026-10-05T12:33:29.4645997Z Updating files:  34% (23863/70184)
+2026-10-05T12:33:29.5041601Z Updating files:  35% (24565/70184)
+2026-10-05T12:33:29.5372588Z Updating files:  36% (25267/70184)
+2026-10-05T12:33:29.5729245Z Updating files:  37% (25969/70184)
+2026-10-05T12:33:29.6061062Z Updating files:  38% (26670/70184)
+2026-10-05T12:33:29.6374656Z Updating files:  39% (27372/70184)
+2026-10-05T12:33:29.6733834Z Updating files:  40% (28074/70184)
+2026-10-05T12:33:29.6742460Z Updating files:  40% (28760/70184)
+2026-10-05T12:33:29.7035423Z Updating files:  41% (28776/70184)
+2026-10-05T12:33:29.7352765Z Updating files:  42% (29478/70184)
+2026-10-05T12:33:29.7630252Z Updating files:  43% (30180/70184)
+2026-10-05T12:33:29.7889966Z Updating files:  44% (30881/70184)
+2026-10-05T12:33:29.8222645Z Updating files:  45% (31583/70184)
+2026-10-05T12:33:29.8485635Z Updating files:  46% (32285/70184)
+2026-10-05T12:33:29.8752845Z Updating files:  47% (32987/70184)
+2026-10-05T12:33:29.9144660Z Updating files:  48% (33689/70184)
+2026-10-05T12:33:29.9444108Z Updating files:  49% (34391/70184)
+2026-10-05T12:33:29.9732379Z Updating files:  50% (35092/70184)
+2026-10-05T12:33:30.0026383Z Updating files:  51% (35794/70184)
+2026-10-05T12:33:30.0295386Z Updating files:  52% (36496/70184)
+2026-10-05T12:33:30.0582555Z Updating files:  53% (37198/70184)
+2026-10-05T12:33:30.0821420Z Updating files:  54% (37900/70184)
+2026-10-05T12:33:30.1057630Z Updating files:  55% (38602/70184)
+2026-10-05T12:33:30.1304870Z Updating files:  56% (39304/70184)
+2026-10-05T12:33:30.1559209Z Updating files:  57% (40005/70184)
+2026-10-05T12:33:30.1863145Z Updating files:  58% (40707/70184)
+2026-10-05T12:33:30.2155424Z Updating files:  59% (41409/70184)
+2026-10-05T12:33:30.2407969Z Updating files:  60% (42111/70184)
+2026-10-05T12:33:30.2696993Z Updating files:  61% (42813/70184)
+2026-10-05T12:33:30.3026546Z Updating files:  62% (43515/70184)
+2026-10-05T12:33:30.3336144Z Updating files:  63% (44216/70184)
+2026-10-05T12:33:30.3681390Z Updating files:  64% (44918/70184)
+2026-10-05T12:33:30.4005814Z Updating files:  65% (45620/70184)
+2026-10-05T12:33:30.4460378Z Updating files:  66% (46322/70184)
+2026-10-05T12:33:30.4767062Z Updating files:  67% (47024/70184)
+2026-10-05T12:33:30.5117395Z Updating files:  68% (47726/70184)
+2026-10-05T12:33:30.5544079Z Updating files:  69% (48427/70184)
+2026-10-05T12:33:30.5877902Z Updating files:  70% (49129/70184)
+2026-10-05T12:33:30.6170026Z Updating files:  71% (49831/70184)
+2026-10-05T12:33:30.6431430Z Updating files:  72% (50533/70184)
+2026-10-05T12:33:30.6731867Z Updating files:  73% (51235/70184)
+2026-10-05T12:33:30.6897627Z Updating files:  73% (51589/70184)
+2026-10-05T12:33:30.8479668Z Updating files:  74% (51937/70184)
+2026-10-05T12:33:30.8824188Z Updating files:  75% (52638/70184)
+2026-10-05T12:33:30.9135012Z Updating files:  76% (53340/70184)
+2026-10-05T12:33:30.9411992Z Updating files:  77% (54042/70184)
+2026-10-05T12:33:30.9699308Z Updating files:  78% (54744/70184)
+2026-10-05T12:33:31.0022508Z Updating files:  79% (55446/70184)
+2026-10-05T12:33:31.0392908Z Updating files:  80% (56148/70184)
+2026-10-05T12:33:31.0647112Z Updating files:  81% (56850/70184)
+2026-10-05T12:33:31.1029393Z Updating files:  82% (57551/70184)
+2026-10-05T12:33:31.2213798Z Updating files:  83% (58253/70184)
+2026-10-05T12:33:31.2592492Z Updating files:  84% (58955/70184)
+2026-10-05T12:33:31.2905652Z Updating files:  85% (59657/70184)
+2026-10-05T12:33:31.3234112Z Updating files:  86% (60359/70184)
+2026-10-05T12:33:31.3493190Z Updating files:  87% (61061/70184)
+2026-10-05T12:33:31.4449095Z Updating files:  88% (61762/70184)
+2026-10-05T12:33:31.4666346Z Updating files:  89% (62464/70184)
+2026-10-05T12:33:31.4869519Z Updating files:  90% (63166/70184)
+2026-10-05T12:33:31.5092059Z Updating files:  91% (63868/70184)
+2026-10-05T12:33:31.5301110Z Updating files:  92% (64570/70184)
+2026-10-05T12:33:31.5493646Z Updating files:  93% (65272/70184)
+2026-10-05T12:33:31.5679602Z Updating files:  94% (65973/70184)
+2026-10-05T12:33:31.5869681Z Updating files:  95% (66675/70184)
+2026-10-05T12:33:31.6114675Z Updating files:  96% (67377/70184)
+2026-10-05T12:33:31.6338656Z Updating files:  97% (68079/70184)
+2026-10-05T12:33:31.6587581Z Updating files:  98% (68781/70184)
+2026-10-05T12:33:31.6730049Z Updating files:  99% (69483/70184)
+2026-10-05T12:33:31.6862658Z Updating files:  99% (69855/70184)
+2026-10-05T12:33:31.6863401Z Updating files: 100% (70184/70184)
+2026-10-05T12:33:31.6863781Z Updating files: 100% (70184/70184), done.
+2026-10-05T12:33:31.7837818Z Note: switching to 'refs/remotes/pull/148/merge'.
+2026-10-05T12:33:31.7838163Z 
+2026-10-05T12:33:31.7838395Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-05T12:33:31.7838977Z changes and commit them, and you can discard any commits you make in this
+2026-10-05T12:33:31.7839503Z state without impacting any branches by switching back to a branch.
+2026-10-05T12:33:31.7839824Z 
+2026-10-05T12:33:31.7840035Z If you want to create a new branch to retain commits you create, you may
+2026-10-05T12:33:31.7841699Z do so (now or later) by using -c with the switch command. Example:
+2026-10-05T12:33:31.7841983Z 
+2026-10-05T12:33:31.7842113Z   git switch -c <new-branch-name>
+2026-10-05T12:33:31.7842309Z 
+2026-10-05T12:33:31.7842434Z Or undo this operation with:
+2026-10-05T12:33:31.7842617Z 
+2026-10-05T12:33:31.7842710Z   git switch -
+2026-10-05T12:33:31.7842850Z 
+2026-10-05T12:33:31.7843086Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-05T12:33:31.7843423Z 
+2026-10-05T12:33:31.7843816Z HEAD is now at adf60d204 Merge 5c1ee9490e76943dfdb3ca27fade0d093d017226 into 7652e327eccb9df658cbfaf2f6373a01c562b260
+2026-10-05T12:33:31.7899193Z ##[endgroup]
+2026-10-05T12:33:31.7941481Z [command]/usr/bin/git log -1 --format=%H
+2026-10-05T12:33:31.7968489Z adf60d204f33cf0d7108ec1a9a454729278db3e0
+2026-10-05T12:33:31.7976775Z ##[group]Removing auth
+2026-10-05T12:33:31.7980495Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-05T12:33:31.8006725Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-05T12:33:31.8302180Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-05T12:33:31.8325030Z http.https://github.com/.extraheader
+2026-10-05T12:33:31.8331985Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-05T12:33:31.8360273Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-05T12:33:31.8680620Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-05T12:33:31.8706745Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-05T12:33:31.8996546Z ##[endgroup]
+2026-10-05T12:33:31.9187816Z ##[group]Run curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"
+2026-10-05T12:33:31.9189420Z [36;1mcurl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"[0m
+2026-10-05T12:33:31.9190767Z [36;1mprintf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -[0m
+2026-10-05T12:33:31.9191419Z [36;1mtar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"[0m
+2026-10-05T12:33:31.9191806Z [36;1mecho "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"[0m
+2026-10-05T12:33:31.9431968Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-05T12:33:31.9432344Z ##[endgroup]
+2026-10-05T12:33:31.9575465Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-10-05T12:33:31.9576285Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-10-05T12:33:31.9576710Z 
+2026-10-05T12:33:32.2781764Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T12:33:32.2782552Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T12:33:32.5072402Z 
+2026-10-05T12:33:33.5318016Z   0  198M    0  703k    0     0  1278k      0  0:02:38 --:--:--  0:02:38 1278k
+2026-10-05T12:33:34.3531748Z  40  198M   40 80.0M    0     0  50.8M      0  0:00:03  0:00:01  0:00:02 77.5M
+2026-10-05T12:33:34.3532658Z 100  198M  100  198M    0     0  82.7M      0  0:00:02  0:00:02 --:--:--  107M
+2026-10-05T12:33:35.2921865Z /home/runner/work/_temp/jdk21.tar.gz: OK
+2026-10-05T12:33:37.5541201Z ##[group]Run python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
+2026-10-05T12:33:37.5541847Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/apply.py --check[0m
+2026-10-05T12:33:37.5542351Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/test_recipe.py[0m
+2026-10-05T12:33:37.5542868Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/apply.py --reverse[0m
+2026-10-05T12:33:37.5543441Z [36;1mtrap 'python3 m3/runtime-integration/char-array-copy/recipe/apply.py >/dev/null' EXIT[0m
+2026-10-05T12:33:37.5543956Z [36;1mpython3 m3/runtime-integration/recipe/apply.py --check[0m
+2026-10-05T12:33:37.5544355Z [36;1mpython3 m3/runtime-integration/recipe/test_recipe.py[0m
+2026-10-05T12:33:37.5544774Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/apply.py[0m
+2026-10-05T12:33:37.5545122Z [36;1mtrap - EXIT[0m
+2026-10-05T12:33:37.5545499Z [36;1mpython3 m3/runtime-integration/char-array-copy/recipe/apply.py --check[0m
+2026-10-05T12:33:37.5586137Z shell: /usr/bin/bash -e {0}
+2026-10-05T12:33:37.5586411Z env:
+2026-10-05T12:33:37.5586633Z   M3_JDK: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:33:37.5586909Z ##[endgroup]
+2026-10-05T12:33:37.5912766Z M3_CHAR_ARRAY_COPY_RECIPE state=superseded
+2026-10-05T12:33:37.6578393Z .....
+2026-10-05T12:33:37.6578975Z ----------------------------------------------------------------------
+2026-10-05T12:33:37.6579590Z Ran 5 tests in 0.006s
+2026-10-05T12:33:37.6579789Z 
+2026-10-05T12:33:37.6579880Z OK
+2026-10-05T12:33:37.6903071Z M3_CHAR_ARRAY_COPY_RECIPE state=superseded
+2026-10-05T12:33:37.7261819Z MINDEX_INTEGRATION_RECIPE_PASS state=superseded
+2026-10-05T12:33:37.8965741Z ......
+2026-10-05T12:33:37.8966708Z ----------------------------------------------------------------------
+2026-10-05T12:33:37.8967511Z Ran 6 tests in 0.126s
+2026-10-05T12:33:37.8967943Z 
+2026-10-05T12:33:37.8968311Z OK
+2026-10-05T12:33:37.9291098Z M3_CHAR_ARRAY_COPY_RECIPE state=superseded
+2026-10-05T12:33:37.9591069Z M3_CHAR_ARRAY_COPY_RECIPE state=superseded
+2026-10-05T12:33:37.9664196Z ##[group]Run mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+2026-10-05T12:33:37.9665052Z [36;1mmvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify[0m
+2026-10-05T12:33:37.9703294Z shell: /usr/bin/bash -e {0}
+2026-10-05T12:33:37.9703564Z env:
+2026-10-05T12:33:37.9703790Z   M3_JDK: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:33:37.9704068Z ##[endgroup]
+2026-10-05T12:33:41.9161576Z [INFO] Scanning for projects...
+2026-10-05T12:33:42.0111128Z [INFO] 
+2026-10-05T12:33:42.0121583Z [INFO] ------------------< com.m3.tooling:migration-recipes >------------------
+2026-10-05T12:33:42.0122636Z [INFO] Building migration-recipes 0.1.0-SNAPSHOT
+2026-10-05T12:33:42.0131447Z [INFO]   from pom.xml
+2026-10-05T12:33:42.0132560Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:33:47.5291085Z [INFO] 
+2026-10-05T12:33:47.5293953Z [INFO] --- clean:3.2.0:clean (default-clean) @ migration-recipes ---
+2026-10-05T12:33:47.8805848Z [INFO] 
+2026-10-05T12:33:47.8806913Z [INFO] --- jacoco:0.8.15:prepare-agent (m3-coverage-agent) @ migration-recipes ---
+2026-10-05T12:33:48.7484099Z [INFO] argLine set to -javaagent:/home/runner/.m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/target/jacoco.exec
+2026-10-05T12:33:48.7485492Z [INFO] 
+2026-10-05T12:33:48.7486029Z [INFO] --- resources:3.4.0:resources (default-resources) @ migration-recipes ---
+2026-10-05T12:33:49.6781721Z [INFO] Copying 384 resources from src/main/resources to target/classes
+2026-10-05T12:33:49.7471307Z [INFO] 
+2026-10-05T12:33:49.7471951Z [INFO] --- compiler:3.13.0:compile (default-compile) @ migration-recipes ---
+2026-10-05T12:33:50.7162481Z [INFO] Recompiling the module because of changed source code.
+2026-10-05T12:33:50.7317998Z [INFO] Compiling 34 source files with javac [debug release 21] to target/classes
+2026-10-05T12:33:51.0093492Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:51.0093894Z [INFO] BUILD FAILURE
+2026-10-05T12:33:51.0094191Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:51.0105086Z [INFO] Total time:  9.138 s
+2026-10-05T12:33:51.0106263Z [INFO] Finished at: 2026-10-05T12:33:51Z
+2026-10-05T12:33:51.0106626Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:51.0116943Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project migration-recipes: Fatal error compiling: error: release version 21 not supported -> [Help 1]
+2026-10-05T12:33:51.0117988Z [ERROR] 
+2026-10-05T12:33:51.0118344Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+2026-10-05T12:33:51.0118953Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+2026-10-05T12:33:51.0119365Z [ERROR] 
+2026-10-05T12:33:51.0119799Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+2026-10-05T12:33:51.0120632Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+2026-10-05T12:33:51.0293248Z ##[error]Process completed with exit code 1.
+2026-10-05T12:33:51.0432066Z Post job cleanup.
+2026-10-05T12:33:51.1337037Z [command]/usr/bin/git version
+2026-10-05T12:33:51.1376588Z git version 2.55.0
+2026-10-05T12:33:51.1422980Z Temporarily overriding HOME='/home/runner/work/_temp/feda79c9-92ab-44b4-9ceb-1e0e57660567' before making global git config changes
+2026-10-05T12:33:51.1424237Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-05T12:33:51.1427134Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+2026-10-05T12:33:51.1465124Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-05T12:33:51.1500318Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-05T12:33:51.1866745Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-05T12:33:51.1905326Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-05T12:33:51.2250413Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-05T12:33:51.2287462Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-05T12:33:51.2744783Z Cleaning up orphan processes
+2026-10-05T12:33:51.2981143Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
