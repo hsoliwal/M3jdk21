@@ -9977,6 +9977,682 @@
         },
         "source_state": "target-owned",
         "observation": "Lexical routing facts do not prove regex validity, program semantics or a native speedup."
+      },
+      {
+        "id": "synexia.chrome-summary.module",
+        "kind": "adapter",
+        "status": "pending",
+        "reason": "Source-sealed Chrome protocol, deterministic hierarchical summarization, faceted evidence and document projection receiving candidate. Target qualification is recorded in the module receipt; live Chrome inference and complete M3JDK21 product acceptance remain independent gates.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/CheckpointRepository.java",
+            "symbol": "com.synexia.cpullm.chrome.CheckpointRepository",
+            "sha256": "cb80d52813ab810edc04f71a72c1673a7e87f59940c6790bbf116e368a3079d9",
+            "git_blob_sha1": "aad4c5454946d2e31aa4fa82f744b34090ca7ab1",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/ChromeProtocol.java",
+            "symbol": "com.synexia.cpullm.chrome.ChromeProtocol",
+            "sha256": "6d495e8120c174e5d0e61dd5528b83c4e0567d1a1ed4f865def16d36ceefd388",
+            "git_blob_sha1": "c2fe625a2a6db8aea93ee41b0c999a177104484f",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/ChromeSummarizerPort.java",
+            "symbol": "com.synexia.cpullm.chrome.ChromeSummarizerPort",
+            "sha256": "b657806bad90df34a2c28a9979328502c9dd7d6c51ee1cf6c9c4a7d9e7ee4152",
+            "git_blob_sha1": "813797a9d0fdd16247d2ba7d34814a8e130e9bd7",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/DeterministicChromeSummarizerPort.java",
+            "symbol": "com.synexia.cpullm.chrome.DeterministicChromeSummarizerPort",
+            "sha256": "775c87831c9b1c3705a04979de4ddf011d63875ce6639d8ace34face56490539",
+            "git_blob_sha1": "e7eca5ebe370a07d18096c10dedb4041fc524057",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/EntropyTrajectory.java",
+            "symbol": "com.synexia.cpullm.chrome.EntropyTrajectory",
+            "sha256": "b6cfaea9084ab3f6ff04846c67f4f7730740198acc670d745ab1852e4a744e41",
+            "git_blob_sha1": "8dc95d3efb871563e0800bb9aa2232cde00e93ce",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/EvidencePattern.java",
+            "symbol": "com.synexia.cpullm.chrome.EvidencePattern",
+            "sha256": "a19f3a55e2988a33540d5e8554aef7858e4d84551a1450b1d233c4d8287c19ac",
+            "git_blob_sha1": "e94b7a3d5d188921f90c6ea51ebacdb8cc6d4c5c",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/FileCheckpointRepository.java",
+            "symbol": "com.synexia.cpullm.chrome.FileCheckpointRepository",
+            "sha256": "731d50360b62b81d291a15ec1533d9d09f563116d1fcfb4b28b393992b4786f5",
+            "git_blob_sha1": "d578d9338ae060f5241c9476d61ae52ed7c7fa6d",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/Hashing.java",
+            "symbol": "com.synexia.cpullm.chrome.Hashing",
+            "sha256": "8b30847dbf0cb24d95cdca5b4c39d0f5dd1d9e638b9870b3143a14fc770c39dc",
+            "git_blob_sha1": "d7036f7a2e43b840f0947387c6c18f679ad35970",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/JavaChromeAiMechanicalPipeline.java",
+            "symbol": "com.synexia.cpullm.chrome.JavaChromeAiMechanicalPipeline",
+            "sha256": "a76528df6ed22eeb84b796a8bfc73711cb8e114e10b5c319e679bc843fbf4692",
+            "git_blob_sha1": "12c23ac3926a68fa689ec19e4b37237d7412c132",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/MechanicalModel.java",
+            "symbol": "com.synexia.cpullm.chrome.MechanicalModel",
+            "sha256": "8abb1a7ffb106383d6817329cd36483dbc6b545465d63d083d9aa4dcdaa01ecc",
+            "git_blob_sha1": "d11f2ba0be17643fb38c321aeb7b9c82b5cbefa6",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/MechanicalPatternCatalog.java",
+            "symbol": "com.synexia.cpullm.chrome.MechanicalPatternCatalog",
+            "sha256": "a82ab4ed25f77cf3e2bdc7021d69b7c1bc6ecf3e7cd0ec3d6af58fe94d55567d",
+            "git_blob_sha1": "bb8f71a0332638d378e0e4edd14f89e15f6ecaad",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/MechanicalSupersetConsolidator.java",
+            "symbol": "com.synexia.cpullm.chrome.MechanicalSupersetConsolidator",
+            "sha256": "b1ef3ce5edfec522d360315e40e2aaa82379d63aa88cf6712d00687a87a1c776",
+            "git_blob_sha1": "82712e8bd4fcac8e3051520cbf537486b0235098",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/OmissionRepair.java",
+            "symbol": "com.synexia.cpullm.chrome.OmissionRepair",
+            "sha256": "3ff44f6cdd3794fba629235aefa1f061a2e810f6e70560de2fdab6c2e31fefb2",
+            "git_blob_sha1": "c5c4bd1f838819c903c347672280198c3f324d22",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/StructuredPromptPort.java",
+            "symbol": "com.synexia.cpullm.chrome.StructuredPromptPort",
+            "sha256": "10c1a105e85dbd53c0d9952c704b6cecdc060d86b629f97ac7af16be771a93ef",
+            "git_blob_sha1": "aafacb00bf31acb0e5236c57433f6c7f1cc6709a",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/SummaryTreeExecutor.java",
+            "symbol": "com.synexia.cpullm.chrome.SummaryTreeExecutor",
+            "sha256": "bc50679d443f3f97fedccb66fb6f2980e3e915c7a1ba7bd679b723a30cf738bc",
+            "git_blob_sha1": "d44b90fe0c96e2c47a1920f727e362de01559e30",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-opdag",
+            "path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/SummaryTreePlanner.java",
+            "symbol": "com.synexia.cpullm.chrome.SummaryTreePlanner",
+            "sha256": "80a1269bfab8707e423936ea7b6aec01e01452bee2e0a8bc08a812969b78ddb5",
+            "git_blob_sha1": "414ec6a89b468ccdc02352432a6a521d4839d21b",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/app/Summary.java",
+            "symbol": "com.synexia.cpullm.app.Summary",
+            "sha256": "56687f68c76d529112c6be91648cfe4ad6974ef6763977e5292bda4f27ab80eb",
+            "git_blob_sha1": "725a4e5038a2336c3f40de6768939889b734939a",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/app/Data.java",
+            "symbol": "com.synexia.cpullm.app.Data",
+            "sha256": "adcee648adca5dd67c808143e59dc718cce66cffabd4c49db3eab40258a92651",
+            "git_blob_sha1": "a92aafbd083e16b86e07da78deb5d00de9e81996",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/Json.java",
+            "symbol": "com.synexia.cpullm.Json",
+            "sha256": "63aa217180ccff55522b174c3d038c9f9f155689024459ba4f17650c8ff0fa19",
+            "git_blob_sha1": "0c7c20cd4f49a1f888d7b9b4079fddcbf97f91c6",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/Py.java",
+            "symbol": "com.synexia.cpullm.Py",
+            "sha256": "03894bc899cd09f23766d1a28dbb30b02e2fb3a7327ee4c86122b38107c4539e",
+            "git_blob_sha1": "801d39ef2fb57dc36339615719d81797a1dbddb3",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/StringOps.java",
+            "symbol": "com.synexia.cpullm.StringOps",
+            "sha256": "c56e97bcd164334e0ae0c63272d0017b8b0b7572bd0a7681fb87884988fe874b",
+            "git_blob_sha1": "ed8440bc38043d54312236970e599a6ed7b25f3e",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetCorpus.java",
+            "symbol": "com.synexia.cpullm.facets.FacetCorpus",
+            "sha256": "ca3a1d5030d122bf3fc7e56f4eea1131d0df99bd554afc34d0f35af858626d21",
+            "git_blob_sha1": "1c4721e09065d2958204fa2f45f9a5aeaee5575c",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetNode.java",
+            "symbol": "com.synexia.cpullm.facets.FacetNode",
+            "sha256": "4a0756dff77b5fd341f682412eb9376560a302f1c3ff60c61591903057deda10",
+            "git_blob_sha1": "5cdb5d42ef4b59c6380821bfc0b281affa58e1f6",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetProjection.java",
+            "symbol": "com.synexia.cpullm.facets.FacetProjection",
+            "sha256": "16baf9ad0d6d6baef2b9dc505810170d2ccf90d609ccec50403b754cecc517d4",
+            "git_blob_sha1": "d76d9ee8818e76cb9a4b6f512e781bf8db33a5ff",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetKernels.java",
+            "symbol": "com.synexia.cpullm.facets.FacetKernels",
+            "sha256": "64fe257f8197e887a4bb62bfff0e8f5aaf3bc1e30244269a8bffb8930391f33d",
+            "git_blob_sha1": "971045665295d25c84b2fcb7b371c56d58fa432a",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/LegacySummaryFacets.java",
+            "symbol": "com.synexia.cpullm.facets.LegacySummaryFacets",
+            "sha256": "3a80f98dbc01dc176a44b1311e9c6ecfcef50268a9a73cb2889df86489169802",
+            "git_blob_sha1": "74a2e48a3e5ee4ef054177223065feda598462f1",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetExactCoverage.java",
+            "symbol": "com.synexia.cpullm.facets.FacetExactCoverage",
+            "sha256": "3dd7cdbd98f207ee3949b7dec60587dac1f3ad96034d2875309f28e23b42871b",
+            "git_blob_sha1": "0c4dc1e8d15e51e2debe47418b28d4769a1bccbd",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "cpullm-java",
+            "path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetSnapshot.java",
+            "symbol": "com.synexia.cpullm.facets.FacetSnapshot",
+            "sha256": "32eb674dd9d0e6abd2a064b312416a0c82c5915bd3b296695a576bd829d63ba5",
+            "git_blob_sha1": "39dfd31dbedf9352a60b76ff8cd3ac1976bee0b1",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "synexia-flldcim",
+            "path": "synexia-flldcim/tools/m3-text-pipeline/src/main/java/com/synexia/flldcim/tools/Desm.java",
+            "symbol": "com.synexia.flldcim.tools.Desm",
+            "sha256": "5f2b222b5083ecfb580281ff48552a328b3a2ec295fb3793599320de53f2cd8a",
+            "git_blob_sha1": "ddec00f5209451e7fd3669938e4855f43da56d47",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "synexia-flldcim",
+            "path": "synexia-flldcim/tools/m3-text-pipeline/src/main/java/com/synexia/flldcim/tools/Lexical.java",
+            "symbol": "com.synexia.flldcim.tools.Lexical",
+            "sha256": "3ee1fcd81511ea4ea2a928d7ada6a556ffc5ba487e7bd9909d1546e8ed8891e1",
+            "git_blob_sha1": "cf2fc4834eb95f021eb3cae3af089a2fef8e0889",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "synexia-flldcim",
+            "path": "synexia-flldcim/tools/m3-text-pipeline/src/main/java/com/synexia/flldcim/tools/TreeNode.java",
+            "symbol": "com.synexia.flldcim.tools.TreeNode",
+            "sha256": "b3260d1987d791f6f45017bff258ed1a66c782394daeaa203771f9275d3c4c13",
+            "git_blob_sha1": "72e8cbc50303673dcc15c38c7bc92471c384f00c",
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "2ab439480ecb0643615e85b42def954dbf3b5627",
+            "module": "synexia-flldcim",
+            "path": "synexia-flldcim/tools/m3-text-pipeline/src/main/java/com/synexia/flldcim/tools/Hashes.java",
+            "symbol": "com.synexia.flldcim.tools.Hashes",
+            "sha256": "832f66c310bbd34a5403aaeb9690972cc858b4b35e9d1d98eb4a2dc0fe0a34e3",
+            "git_blob_sha1": "2b947fb7c094767d4ba4346b38b6bf28ed268d92",
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/CheckpointRepository.java",
+            "symbol": "jdk.m3.llm.chrome.CheckpointRepository",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/ChromeProtocol.java",
+            "symbol": "jdk.m3.llm.chrome.ChromeProtocol",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/ChromeSummarizerPort.java",
+            "symbol": "jdk.m3.llm.chrome.ChromeSummarizerPort",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/DeterministicChromeSummarizerPort.java",
+            "symbol": "jdk.m3.llm.chrome.DeterministicChromeSummarizerPort",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/EntropyTrajectory.java",
+            "symbol": "jdk.m3.llm.chrome.EntropyTrajectory",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/EvidencePattern.java",
+            "symbol": "jdk.m3.llm.chrome.EvidencePattern",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/FileCheckpointRepository.java",
+            "symbol": "jdk.m3.llm.chrome.FileCheckpointRepository",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/Hashing.java",
+            "symbol": "jdk.m3.llm.chrome.Hashing",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/JavaChromeAiMechanicalPipeline.java",
+            "symbol": "jdk.m3.llm.chrome.JavaChromeAiMechanicalPipeline",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/MechanicalModel.java",
+            "symbol": "jdk.m3.llm.chrome.MechanicalModel",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/MechanicalPatternCatalog.java",
+            "symbol": "jdk.m3.llm.chrome.MechanicalPatternCatalog",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/MechanicalSupersetConsolidator.java",
+            "symbol": "jdk.m3.llm.chrome.MechanicalSupersetConsolidator",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/OmissionRepair.java",
+            "symbol": "jdk.m3.llm.chrome.OmissionRepair",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/StructuredPromptPort.java",
+            "symbol": "jdk.m3.llm.chrome.StructuredPromptPort",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/SummaryTreeExecutor.java",
+            "symbol": "jdk.m3.llm.chrome.SummaryTreeExecutor",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/SummaryTreePlanner.java",
+            "symbol": "jdk.m3.llm.chrome.SummaryTreePlanner",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Summary.java",
+            "symbol": "jdk.m3.llm.summary.Summary",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Data.java",
+            "symbol": "jdk.m3.llm.summary.Data",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/Json.java",
+            "symbol": "jdk.m3.llm.internal.Json",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/Py.java",
+            "symbol": "jdk.m3.llm.internal.Py",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/StringOps.java",
+            "symbol": "jdk.m3.llm.internal.StringOps",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetCorpus.java",
+            "symbol": "jdk.m3.llm.facets.FacetCorpus",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetNode.java",
+            "symbol": "jdk.m3.llm.facets.FacetNode",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetProjection.java",
+            "symbol": "jdk.m3.llm.facets.FacetProjection",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetKernels.java",
+            "symbol": "jdk.m3.llm.facets.FacetKernels",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/LegacySummaryFacets.java",
+            "symbol": "jdk.m3.llm.facets.LegacySummaryFacets",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetExactCoverage.java",
+            "symbol": "jdk.m3.llm.facets.FacetExactCoverage",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetSnapshot.java",
+            "symbol": "jdk.m3.llm.facets.FacetSnapshot",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Desm.java",
+            "symbol": "jdk.m3.llm.document.Desm",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Lexical.java",
+            "symbol": "jdk.m3.llm.document.Lexical",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/TreeNode.java",
+            "symbol": "jdk.m3.llm.document.TreeNode",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Hashes.java",
+            "symbol": "jdk.m3.llm.document.Hashes",
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Summaries.java",
+            "symbol": "jdk.m3.llm.summary.Summaries",
+            "revision_role": "candidate",
+            "source_authority": "com.synexia.m3jdk.ChromeSummary20261029",
+            "source_role": "New target-owned public SDK API composing the pinned existing donor implementations"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.llm",
+            "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/ChromeBrowserPort.java",
+            "symbol": "jdk.m3.llm.chrome.ChromeBrowserPort",
+            "revision_role": "candidate",
+            "source_authority": "com.synexia.m3jdk.ChromeSummary20261029",
+            "source_role": "New target-owned public SDK API composing the pinned existing donor implementations"
+          }
+        ],
+        "owner": "M3JDK21 optional SDK module jdk.m3.llm; original source and recipes remain canonical in Synexia.",
+        "contract": {
+          "public_surface": [
+            "jdk.m3.llm.chrome",
+            "jdk.m3.llm.summary",
+            "jdk.m3.llm.facets",
+            "jdk.m3.llm.document"
+          ],
+          "differences": [
+            "Explicit package relocation to an M3JDK-owned namespace; jdk.m3.llm.internal remains unexported.",
+            "Qualified recipe corrections preserve valid donor semantics and document refused malformed/budget-violating inputs."
+          ],
+          "compatibility_obligations": [
+            "Preserve source evidence roots, candidate/model authority separation, citation identity and deterministic CPU results.",
+            "No automatic browser or remote-model invocation from ordinary JDK text, String, collection or file operations.",
+            "M3 ProgressMonitor overloads reuse the existing java.base progress owner; borrowed monitors are not completed.",
+            "Browser/model availability, user-activation, model download and capability failures remain explicit."
+          ]
+        },
+        "format": {
+          "module": "jdk.m3.llm",
+          "runtime_dependencies": [
+            "java.base"
+          ],
+          "intake_mode": "INDEPENDENT_APACHE_MODULE",
+          "receiving_sequence_advanced": false
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.ChromeSummary20261029",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029",
+          "dataset": "current-20261029",
+          "manifest_crate_name": "m3-chrome-summary-20261029-current",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "preconditions": [
+            "Exact pinned source and target preimages; serial per-file source application; absent destination or exact known postimage only.",
+            "Execute fixed-point and source-drift refusal gates in Synexia before receipt."
+          ]
+        },
+        "tests": [
+          {
+            "id": "named-module-image",
+            "receipt": "m3/tooling/module-packs/chrome-llm/RECEIVER_RECEIPT.json",
+            "status": "PENDING"
+          },
+          {
+            "id": "live-chrome-nano",
+            "status": "NOT_RUN"
+          },
+          {
+            "id": "complete-m3jdk21-product-build-jtreg",
+            "status": "NOT_RUN"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 first-party Synexia postimages; retain Copyright 2026 Hitesh Soliwal and contributors and original notices.",
+          "copied_code": true,
+          "runtime_dependency_on_synexia": false
+        },
+        "sync": {
+          "source_revision": "2ab439480ecb0643615e85b42def954dbf3b5627",
+          "target_revision": "4bd7f5b2b1414d1f607ceab28a498e3889020701",
+          "direction": "source-to-target",
+          "pending": [
+            "Exact target recipe application and qualification receipt",
+            "Real Chrome/Gemini Nano inference in supported environment",
+            "Full M3JDK21 product build/jtreg and platform/performance admission"
+          ]
+        },
+        "source_state": "implemented",
+        "observation": "This receiving mapping does not advance the ordered String/array/collection runtime sequence or declare Chrome/model execution."
       }
     ]
   },
@@ -10522,6 +11198,21 @@
       "canonical_recipe": "com.synexia.rewrite.M3NlpSearchSourceJmodsRecipe",
       "target_proof": "m3/tooling/module-packs/nlp-search/build.py",
       "original_library_modules": "org.apache.lucene.* and org.apache.opennlp.tools"
+    },
+    {
+      "module": "jdk.m3.llm",
+      "mapping": "m3/docs/name-mapping.d/m3-chrome-summary-20261029.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.m3jdk.ChromeSummary20261029",
+      "target_proof": "m3/tooling/module-packs/chrome-llm/build.py",
+      "optional_exported_packages": [
+        "jdk.m3.llm.chrome",
+        "jdk.m3.llm.summary",
+        "jdk.m3.llm.facets",
+        "jdk.m3.llm.document"
+      ],
+      "runtime_dependency_on_synexia": false
     }
   ]
 }
