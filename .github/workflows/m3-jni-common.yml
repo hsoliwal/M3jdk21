@@ -13,6 +13,14 @@ permissions:
   contents: read
 
 jobs:
+  platform-workflow-contract:
+    name: Platform workflow guard (source-only)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify target and runtime claims are kept distinct
+        run: python3 -m unittest discover -s m3/native -p 'test_platform_ci_workflow.py' -v
+
   host-contract:
     name: C11 JNI contract (${{ matrix.os }})
     strategy:
