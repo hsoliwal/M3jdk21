@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -49,6 +50,44 @@ public final class M3LongRankBatchNative {
         return results;
     }
 
+    /**
+     * One primitive output lane: [lower(q0),upper(q0),lower(q1),upper(q1),...].
+     * Upper-bound bisection begins at lower-bound, preserving signed long order.
+     * No per-query object allocation or JNI callback is ever required.
+     */
+    static int[] lowerUpperBounds(long[] sorted, long[] queries) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(queries, "queries");
+        int[] pairs = new int[Math.multiplyExact(queries.length, 2)];
+        lowerUpperBoundsInto(sorted, queries, pairs);
+        return pairs;
+    }
+
+    /** Reuses a caller-owned pair lane, requiring exactly twice the query length. */
+    static void lowerUpperBoundsInto(long[] sorted, long[] queries, int[] pairs) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.requireNonNull(queries, "queries");
+        Objects.requireNonNull(pairs, "pairs");
+        if (queries.length > Integer.MAX_VALUE / 2
+                || pairs.length != queries.length * 2) {
+            throw new IllegalArgumentException("pair lane must contain two slots per query");
+        }
+        if (sorted.length == 0 || queries.length == 0) {
+            Arrays.fill(pairs, 0);
+            return;
+        }
+        if (AVAILABLE && queries.length >= NATIVE_MIN_BATCH) {
+            lowerUpperBounds0(sorted, queries, pairs);
+            return;
+        }
+        for (int i = 0; i < queries.length; i++) {
+            int lo = M3LaneSearch.lowerBound(sorted, 0, sorted.length, queries[i]);
+            int hi = M3LaneSearch.upperBound(sorted, lo, sorted.length, queries[i]);
+            pairs[i << 1] = lo;
+            pairs[(i << 1) + 1] = hi;
+        }
+    }
+
     private static boolean loadOptIn() {
         if (!Boolean.getBoolean("m3.collections.rank.native")) {
             return false;
@@ -62,4 +101,6 @@ public final class M3LongRankBatchNative {
     }
 
     private static native void lowerBounds0(long[] sorted, long[] queries, int[] results);
+
+    private static native void lowerUpperBounds0(long[] sorted, long[] queries, int[] pairs);
 }
