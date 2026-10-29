@@ -55,7 +55,46 @@ jobs:
           git rev-parse 'HEAD^{tree}' | tee target/m3-release-proof/TREE
           git status --porcelain=v1 --untracked-files=no | tee target/m3-release-proof/WORKTREE
           test ! -s target/m3-release-proof/WORKTREE
+      - name: Export canonical naming and retained source queues
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-release-proof
+          python3 m3/tooling/name-contract/check.py | tee target/m3-release-proof/name-check.txt
+          python3 m3/tooling/name-contract/audit.py > target/m3-release-proof/name-census.tsv
+          queue_mode=()
+          if [[ "${GITHUB_REF}" == refs/heads/release/* ]]; then
+            queue_mode=(--strict)
+          fi
+          python3 m3/release/retained_source_queue.py --root . \
+            --tsv-out target/m3-release-proof/retained-source-queue.tsv \
+            --summary-out target/m3-release-proof/retained-source-summary.json \
+            "${queue_mode[@]}"
+      - name: Show retained-source review queue
+        if: always()
+        shell: bash
+        run: |
+          if test -f target/m3-release-proof/retained-source-summary.json; then
+            python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          info = json.loads(Path('target/m3-release-proof/retained-source-summary.json').read_text(encoding='utf-8'))
+          print('## M3JDK21 archived-source review queue')
+          print()
+          print('Exact HEAD: `' + info['tree_head'] + '`')
+          print()
+          print('| Source path disposition | Number of rows |')
+          print('| --- | ---: |')
+          for state, total in sorted(info['states'].items()):
+              print('| ' + state + ' | ' + str(total) + ' |')
+          print('| **Review required** | **' + str(info['unresolved_rows']) + '** |')
+          print()
+          print('Full original paths, PR numbers, Git blob identities and modes are in the uploaded TSV and JSON artifacts.')
+          print('Path equality is not API, compiler, JNI or runtime acceptance; no automatic merge is authorized.')
+          PY
+          fi
       - name: Upload contract evidence
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: m3-release-contract-${{ github.sha }}
