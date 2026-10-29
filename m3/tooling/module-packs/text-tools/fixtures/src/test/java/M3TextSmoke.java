@@ -45,8 +45,8 @@ public final class M3TextSmoke {
         same("😀\n😀\né\nA\n", TextTools.sort(text("A\n😀\n😀\né\n"), true, LIMITS).text());
         same("😀\r\nx\n", TextTools.uniq(text("😀\r\n😀\nx\n"), LIMITS).text());
         StringBuilder nativeUniqueInput = new StringBuilder();
-        for (int i = 0; i < 130; i++) nativeUnqiueInput.append(i / 2).append('\n');
-        same(65, TextTools.uniq(text(nativeUnqiueInput.toString()), LIMITS).lines().size());
+        for (int i = 0; i < 130; i++) nativeUniqueInput.append(i / 2).append('\n');
+        same(65, TextTools.uniq(text(nativeUniqueInput.toString()), LIMITS).lines().size());
         same("a\n", TextTools.comm(text("a\nb\n"), text("a\nc\n"), LIMITS).common().text());
         same("a\tleft\tright\n", TextTools.join(text("a\tleft\n"), text("a\tright\n"), LIMITS).text());
         same("😀\n", TextTools.cut(text("a😀b\n"), 1, 2, LIMITS).text());
