@@ -4,33 +4,50 @@
  */
 package com.m3.collections;
 
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.PrimitiveIterator;
+
 /**
- * M3 five-library superset scaffold {@code M3FrozenLongList}: API group {@code FROZEN_LONG_LIST} over arrays and state masks.
+ * Immutable list of long values in encounter order over a private primitive array.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-synexia-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK List.of/Set.of/Map.of: JEP269 immutable; UOE mutate; null-hostile; dup-reject [license GPLv2+CPE; NEW_OWNER (LS1); priority P1; matrix owner PROPOSED:M3FrozenLongList/Set/Map]</li>
- *   <li>GUAVA ImmutableList: frozen list; subList views; asList everywhere [license Apache-2.0; NEW_OWNER (LS1 family); priority P1; matrix owner PROPOSED:M3FrozenLongList]</li>
- * </ul>
+ * <p>Admission copies the caller's array and preserves duplicate values. Reads and
+ * primitive traversal do not box elements. Array exports are detached mutable copies;
+ * mutators always throw {@link UnsupportedOperationException}. These M3-specific APIs
+ * preserve the selected JDK immutable-list operation contracts, without implementing
+ * the boxed {@code java.util.List} interface.
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] valueLane}; offset scheme ordinal slot (dense 0..size); state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
+ * <p>Storage is one dense long lane and a shared owner state word, with no retained
+ * per-element nodes or entries. First-party Synexia implementation, Apache-2.0;
+ * JDK and Guava are behavioral references, with no donor implementation source copied.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Nonempty sublists share the immutable lane through checked offsets. Proper empty
+ * slices use the empty lane, so they do not retain a larger parent array. Invalid-range
+ * exception precedence follows the JDK 21 {@code List.copyOf} implementation; Guava's
+ * reversed-range exception differs and is not claimed as equivalent.
  */
 public final class M3FrozenLongList {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
+    private static final long[] EMPTY = new long[0];
+    /** Owner state: every element is immutable. */
     static final long STATE_FROZEN = 1L << 0;
+    private static final long[] FROZEN_STATE = {STATE_FROZEN};
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private long[] valueLane = new long[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
+    /** Immutable payload lane; never exposed to callers. */
+    private final long[] valueLane;
+    /** Shared immutable owner state; dense occupancy needs no per-slot mask. */
+    private final long[] stateMaskWords = FROZEN_STATE;
     /** Live slot count. */
-    private int size;
+    private final int size;
+    private final int offset;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public M3FrozenLongList() {
+    /** Creates an empty immutable list. */
+    public M3FrozenLongList() { this(EMPTY, 0, 0); }
+
+    private M3FrozenLongList(long[] frozen, int from, int length) {
+        valueLane = frozen;
+        offset = from;
+        size = length;
     }
 
     /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
@@ -38,63 +55,80 @@ public final class M3FrozenLongList {
         return "M3FrozenLongList|FROZEN_LONG_LIST|LONG|FROZEN|long[] valueLane";
     }
 
-    /** JDK List.copyOf / Guava ImmutableList.copyOf (scaffold: not yet received). */
+    /** JDK List.copyOf / Guava ImmutableList.copyOf. */
     public static M3FrozenLongList copyOf(long[] source) {
-        throw new M3NotYetReceived("M3FrozenLongList.copyOf");
+        Objects.requireNonNull(source, "source");
+        return new M3FrozenLongList(source.clone(), 0, source.length);
     }
 
-    /** List.size (scaffold: not yet received). */
+    /** List.size. */
     public int size() {
-        throw new M3NotYetReceived("M3FrozenLongList.size");
+        return size;
     }
 
-    /** List.isEmpty (scaffold: not yet received). */
+    /** List.isEmpty. */
     public boolean isEmpty() {
-        throw new M3NotYetReceived("M3FrozenLongList.isEmpty");
+        return size == 0;
     }
 
-    /** List.get (primitive) (scaffold: not yet received). */
+    /** List.get (primitive). */
     public long get(int index) {
-        throw new M3NotYetReceived("M3FrozenLongList.get");
+        return valueLane[offset + Objects.checkIndex(index, size)];
     }
 
-    /** List.indexOf (scaffold: not yet received). */
+    /** List.indexOf. */
     public int indexOf(long value) {
-        throw new M3NotYetReceived("M3FrozenLongList.indexOf");
+        for (int i = 0; i < size; i++) if (valueLane[offset + i] == value) return i;
+        return -1;
     }
 
-    /** List.contains (scaffold: not yet received). */
+    /** List.contains. */
     public boolean contains(long value) {
-        throw new M3NotYetReceived("M3FrozenLongList.contains");
+        return indexOf(value) >= 0;
     }
 
-    /** List.toArray (defensive copy) (scaffold: not yet received). */
+    /** List.toArray (defensive copy). */
     public long[] toArray() {
-        throw new M3NotYetReceived("M3FrozenLongList.toArray");
+        return Arrays.copyOfRange(valueLane, offset, offset + size);
     }
 
-    /** List.subList (frozen view) (scaffold: not yet received). */
+    /** List.subList (frozen view). */
     public M3FrozenLongList subList(int fromIndex, int toIndex) {
-        throw new M3NotYetReceived("M3FrozenLongList.subList");
+        if (fromIndex < 0) throw new IndexOutOfBoundsException("fromIndex: " + fromIndex);
+        if (toIndex > size) throw new IndexOutOfBoundsException("toIndex: " + toIndex);
+        if (fromIndex > toIndex) throw new IllegalArgumentException("fromIndex > toIndex");
+        if (fromIndex == 0 && toIndex == size) return this;
+        if (fromIndex == toIndex) return new M3FrozenLongList(EMPTY, 0, 0);
+        return new M3FrozenLongList(valueLane, offset + fromIndex, toIndex - fromIndex);
     }
 
-    /** Iterable.forEach (scaffold: not yet received). */
+    /** Iterable.forEach. */
     public void forEach(java.util.function.LongConsumer action) {
-        throw new M3NotYetReceived("M3FrozenLongList.forEach");
+        Objects.requireNonNull(action, "action");
+        for (int i = 0; i < size; i++) action.accept(valueLane[offset + i]);
     }
 
-    /** List.iterator (scaffold: not yet received). */
+    /** List.iterator. */
     public java.util.PrimitiveIterator.OfLong iterator() {
-        throw new M3NotYetReceived("M3FrozenLongList.iterator");
+        final long[] values = valueLane;
+        final int from = offset, end = offset + size;
+        return new PrimitiveIterator.OfLong() {
+            private int cursor = from;
+            @Override public boolean hasNext() { return cursor < end; }
+            @Override public long nextLong() {
+                if (cursor >= end) throw new NoSuchElementException();
+                return values[cursor++];
+            }
+        };
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
+    /** Immutable: always throws {@link UnsupportedOperationException}. */
     public boolean add(long value) {
-        throw new M3NotYetReceived("M3FrozenLongList.add");
+        throw new UnsupportedOperationException();
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
+    /** Immutable: always throws {@link UnsupportedOperationException}. */
     public long set(int index, long value) {
-        throw new M3NotYetReceived("M3FrozenLongList.set");
+        throw new UnsupportedOperationException();
     }
 }

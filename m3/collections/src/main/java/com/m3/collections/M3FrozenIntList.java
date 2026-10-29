@@ -4,32 +4,42 @@
  */
 package com.m3.collections;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.PrimitiveIterator;
+
 /**
- * M3 five-library superset scaffold {@code M3FrozenIntList}: API group {@code FROZEN_INT_LIST} over arrays and state masks.
+ * Immutable list of int values in encounter order over a private primitive array.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-synexia-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK List.of/Set.of/Map.of: JEP269 immutable; UOE mutate; null-hostile; dup-reject [license GPLv2+CPE; NEW_OWNER (LS1); priority P1; matrix owner PROPOSED:M3FrozenLongList/Set/Map]</li>
- * </ul>
+ * <p>Admission copies the caller's array and preserves duplicate values. Reads and
+ * primitive traversal do not box elements. Array exports are detached mutable copies;
+ * mutators always throw {@link UnsupportedOperationException}. These M3-specific APIs
+ * preserve the selected JDK immutable-list operation contracts, without implementing
+ * the boxed {@code java.util.List} interface.
  *
- * <p>DOOP mapping: lane kind INT; lanes {@code int[] valueLane}; offset scheme ordinal slot (dense 0..size); state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Storage is one dense int lane and a shared owner state word, with no retained
+ * per-element nodes or entries. First-party Synexia implementation, Apache-2.0;
+ * JDK and Guava are behavioral references, with no donor implementation source copied.
  */
 public final class M3FrozenIntList {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
+    private static final int[] EMPTY = new int[0];
+    /** Owner state: every element is immutable. */
     static final long STATE_FROZEN = 1L << 0;
+    private static final long[] FROZEN_STATE = {STATE_FROZEN};
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private int[] valueLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
+    /** Immutable payload lane; never exposed to callers. */
+    private final int[] valueLane;
+    /** Shared immutable owner state; dense occupancy needs no per-slot mask. */
+    private final long[] stateMaskWords = FROZEN_STATE;
     /** Live slot count. */
-    private int size;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public M3FrozenIntList() {
+    /** Creates an empty immutable list. */
+    public M3FrozenIntList() { this(EMPTY); }
+
+    private M3FrozenIntList(int[] frozen) {
+        valueLane = frozen;
+        size = frozen.length;
     }
 
     /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
@@ -37,43 +47,54 @@ public final class M3FrozenIntList {
         return "M3FrozenIntList|FROZEN_INT_LIST|INT|FROZEN|int[] valueLane";
     }
 
-    /** JDK List.copyOf (int lane) (scaffold: not yet received). */
+    /** JDK List.copyOf (int lane). */
     public static M3FrozenIntList copyOf(int[] source) {
-        throw new M3NotYetReceived("M3FrozenIntList.copyOf");
+        Objects.requireNonNull(source, "source");
+        return new M3FrozenIntList(source.clone());
     }
 
-    /** List.size (scaffold: not yet received). */
+    /** List.size. */
     public int size() {
-        throw new M3NotYetReceived("M3FrozenIntList.size");
+        return size;
     }
 
-    /** List.get (primitive) (scaffold: not yet received). */
+    /** List.get (primitive). */
     public int get(int index) {
-        throw new M3NotYetReceived("M3FrozenIntList.get");
+        return valueLane[Objects.checkIndex(index, size)];
     }
 
-    /** List.indexOf (scaffold: not yet received). */
+    /** List.indexOf. */
     public int indexOf(int value) {
-        throw new M3NotYetReceived("M3FrozenIntList.indexOf");
+        for (int i = 0; i < size; i++) if (valueLane[i] == value) return i;
+        return -1;
     }
 
-    /** List.toArray (defensive copy) (scaffold: not yet received). */
+    /** List.toArray (defensive copy). */
     public int[] toArray() {
-        throw new M3NotYetReceived("M3FrozenIntList.toArray");
+        return valueLane.clone();
     }
 
-    /** Iterable.forEach (scaffold: not yet received). */
+    /** Iterable.forEach. */
     public void forEach(java.util.function.IntConsumer action) {
-        throw new M3NotYetReceived("M3FrozenIntList.forEach");
+        Objects.requireNonNull(action, "action");
+        for (int i = 0; i < size; i++) action.accept(valueLane[i]);
     }
 
-    /** List.iterator (scaffold: not yet received). */
+    /** List.iterator. */
     public java.util.PrimitiveIterator.OfInt iterator() {
-        throw new M3NotYetReceived("M3FrozenIntList.iterator");
+        final int[] values = valueLane;
+        return new PrimitiveIterator.OfInt() {
+            private int cursor;
+            @Override public boolean hasNext() { return cursor < values.length; }
+            @Override public int nextInt() {
+                if (cursor >= values.length) throw new NoSuchElementException();
+                return values[cursor++];
+            }
+        };
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
+    /** Immutable: always throws {@link UnsupportedOperationException}. */
     public boolean add(int value) {
-        throw new M3NotYetReceived("M3FrozenIntList.add");
+        throw new UnsupportedOperationException();
     }
 }

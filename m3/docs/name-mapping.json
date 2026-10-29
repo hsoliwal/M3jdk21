@@ -10130,6 +10130,759 @@
           "target_symbol": "com.m3.arrays.M3Arrays",
           "form": "STATIC_OPERATIONS"
         }
+      },
+      {
+        "id": "collections.superset.ls1-frozen-int-list",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Register the implemented immutable primitive list candidate under its existing canonical M3 owner; exact source-sealed recipe execution and target evidence are bound separately from pending installed-image admission.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenIntList.java",
+            "symbol": "com.m3.collections.M3FrozenIntList",
+            "signatures": [
+              "public M3FrozenIntList()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenIntList copyOf(int[] source)",
+              "public int size()",
+              "public int get(int index)",
+              "public int indexOf(int value)",
+              "public int[] toArray()",
+              "public void forEach(java.util.function.IntConsumer action)",
+              "public java.util.PrimitiveIterator.OfInt iterator()",
+              "public boolean add(int value)"
+            ],
+            "sha256": "d2087220e85b57f671375c8529fefa1bccc87030c079fd98bf34274a4ff287e4",
+            "git_blob_sha1": "57aaabec56571cb2d52eabbda20ecf0543cda678",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/M3FrozenIntList.java.txt",
+            "symbol": "com.m3.collections.M3FrozenIntList",
+            "signatures": [
+              "public M3FrozenIntList()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenIntList copyOf(int[] source)",
+              "public int size()",
+              "public int get(int index)",
+              "public int indexOf(int value)",
+              "public int[] toArray()",
+              "public void forEach(java.util.function.IntConsumer action)",
+              "public java.util.PrimitiveIterator.OfInt iterator()",
+              "public boolean add(int value)"
+            ],
+            "sha256": "e60570fa0e97b22afe3380de635224ce008a4ed24b363f0cd8b274a75bfbd0e8",
+            "git_blob_sha1": "bbdc846e85193ed3afa5409642b87753679566df",
+            "fingerprint": "Uncommitted candidate template; exact bytes are sealed by synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/manifest.tsv SHA-256 016e78421b32b1d32db6c423bc472b6d56f5c0c940242250c9e78b31adb3a440. The receiving receipt must bind the actual published Synexia revision; no new commit is inferred.",
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/work/m3jdk21-frozen-primitive-20261029"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenIntList.java",
+            "symbol": "com.m3.collections.M3FrozenIntList",
+            "signatures": [
+              "public M3FrozenIntList()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenIntList copyOf(int[] source)",
+              "public int size()",
+              "public int get(int index)",
+              "public int indexOf(int value)",
+              "public int[] toArray()",
+              "public void forEach(java.util.function.IntConsumer action)",
+              "public java.util.PrimitiveIterator.OfInt iterator()",
+              "public boolean add(int value)"
+            ],
+            "sha256": "e60570fa0e97b22afe3380de635224ce008a4ed24b363f0cd8b274a75bfbd0e8",
+            "git_blob_sha1": "bbdc846e85193ed3afa5409642b87753679566df",
+            "fingerprint": "Exact candidate postimage from com.synexia.m3jdk.FrozenPrimitive20261029; bind the executed recipe, actual Synexia revision, target revision and these bytes in m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json.",
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.collections.M3FrozenIntList",
+        "identity": {
+          "namespace": "Existing exported com.m3.collections.M3FrozenIntList in JPMS module com.m3.collections; class, package, module and Java SE public names remain unchanged.",
+          "generation": "An immutable object owns one canonical primitive payload lane; range coordinates or frozen-state metadata do not own a second payload. Candidate revision is bound by exact template/postimage hashes and the receiving receipt."
+        },
+        "contract": {
+          "differences": [
+            "Complete the throw-only current owner through the canonical Synexia recipe while retaining its existing com.m3.collections class, package, module, constructor and primitive method signatures; no rename or new public JDK owner.",
+            "This is an M3-specific primitive class, not an implementation or replacement of java.util.List or java.util.Set. Provider oracles compare selected operations, not universal cross-provider contracts.",
+            "Admit an independently cloned int[] lane; preserve input order, duplicates and first-occurrence indexOf, and return an independent mutable array from toArray.",
+            "Retain Object identity equality and the existing scaffoldDescriptor() string; mutating add always throws UnsupportedOperationException."
+          ],
+          "compatibility_obligations": [
+            "Preserve every current public constructor and primitive method signature, and retain or explicitly restore the documented historical contracts; do not infer java.util interface implementation or serialization support.",
+            "Keep source/export array ownership, null callbacks, bounds and exception precedence, duplicate/order policy, primitive iterator exhaustion/removal behavior and immutable mutation responses explicit in target tests.",
+            "Do not retain an Entry/Node/Bucket/Cell per logical element, a boxed mirror or a second payload store; immutable parent-lane sharing is allowed only for the specified nonempty long-list ranges.",
+            "Keep the reusable Java/text recipes, templates and qualification harnesses in Synexia; the product receives executed source/test/metadata postimages and passive receipts only.",
+            "Use the selected JDK/Guava/Eclipse provider versions only within the recorded oracle scope and retain original per-file licenses; introduce no Synexia or provider runtime dependency."
+          ],
+          "public_surface": [
+            "public M3FrozenIntList()",
+            "public static String scaffoldDescriptor()",
+            "public static M3FrozenIntList copyOf(int[] source)",
+            "public int size()",
+            "public int get(int index)",
+            "public int indexOf(int value)",
+            "public int[] toArray()",
+            "public void forEach(java.util.function.IntConsumer action)",
+            "public java.util.PrimitiveIterator.OfInt iterator()",
+            "public boolean add(int value)"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing public final primitive class in com.m3.collections; no java.util interface or Serializable contract is introduced. Historical set Object overrides are restored where applicable.",
+          "bootstrap": "Standalone existing com.m3.collections Maven/JPMS owner. This registration does not install a java.base backend or qualify a modified JDK image."
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "resolved",
+            "reason": "The frozen owner implementation uses primitive arrays and existing java.lang/java.util/function APIs; no copied JDK implementation is introduced."
+          },
+          {
+            "id": "com.m3.arrays",
+            "resolution": "resolved",
+            "reason": "The existing com.m3.collections module descriptor already requires com.m3.arrays; this recipe does not add or remove that module edge."
+          },
+          {
+            "id": "m3jdk21.installed-image-qualification",
+            "resolution": "pending",
+            "reason": "The source-built installed JDK and applicable target runtime/platform gates remain independent of this candidate registration."
+          }
+        ],
+        "materialization": {
+          "admission": "copyOf clones caller-owned primitive input before immutable publication; the recovered set additionally sorts and deduplicates its private construction lane.",
+          "joins": "No parallel join store or retained per-element wrapper is introduced; iteration and lookup traverse the canonical primitive lane.",
+          "outputs": "toArray returns a detached mutable compatibility array; primitive iterators and callbacks observe the documented owner/range. No result-only receipt is a runtime payload owner.",
+          "cached_facts": "Only owner-local size/range/frozen-state metadata is retained. No global cache, boxed mirror, second identity store or speculative precompute is added."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.FrozenPrimitive20261029",
+          "version": "20261029",
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/manifest.tsv",
+          "sha256": "016e78421b32b1d32db6c423bc472b6d56f5c0c940242250c9e78b31adb3a440",
+          "preconditions": [
+            "Exact current product source is 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2 at m3/collections/src/main/java/com/m3/collections/M3FrozenIntList.java; preimage SHA-256 d2087220e85b57f671375c8529fefa1bccc87030c079fd98bf34274a4ff287e4.",
+            "Exact candidate postimage SHA-256 e60570fa0e97b22afe3380de635224ce008a4ed24b363f0cd8b274a75bfbd0e8 and all Java manifest rows must match; stale, missing or duplicate inputs and template drift must refuse.",
+            "Canonical Synexia Maven/OpenRewrite execution, deterministic replay/fixed point and drift-refusal receipts must bind the complete Java plus naming-metadata recipe; do not substitute template copying or a stored hash for execution.",
+            "The naming metadata before-images are the exact authority and queued plan from 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2; preserve all existing records, gates and queued operations.",
+            "The current STRING qualification phase remains active; no later-family installed-image promotion is authorized by this entry."
+          ],
+          "rollback": "Any rollback requires a separately reviewed recipe sealed to these exact postimages and current target state; refuse drift and preserve independently evolved owners, historical capability evidence and passive receipts."
+        },
+        "tests": [
+          {
+            "id": "M3FrozenPrimitiveContractTest",
+            "receipt": "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "M3FrozenPrimitiveOwnershipTest",
+            "receipt": "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 for the three first-party owner/template files; preserve existing Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project notices. The unchanged module descriptor separately retains Apache-2.0 OR EPL-2.0. JDK/Guava/Eclipse oracle names do not relicense or imply copying their implementations.",
+          "publication": "Canonical recipe/template custody remains hsoliwal/com.synexia, with candidate lineage PR #14092. Product acceptance receives executed postimages and m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json only; the actual new publication/target revisions are pending receipt binding.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Admit an independently cloned int[] lane; preserve input order, duplicates and first-occurrence indexOf, and return an independent mutable array from toArray.",
+            "Retain Object identity equality and the existing scaffoldDescriptor() string; mutating add always throws UnsupportedOperationException."
+          ],
+          "pending": [
+            "Bind the actual Synexia publication revision and exact recipe-execution/postimage receipt; commit:null denotes a candidate and is not a fabricated or accepted revision.",
+            "Record exact target Maven/JUnit and public/protected API, reflection, ownership, exception and concurrency results in m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json; the registration itself does not authenticate a test run.",
+            "Installed source-built M3JDK21 image, applicable jtreg/JMM/GC/native/platform acceptance and deployment remain pending; standalone module or donor proofs do not close them.",
+            "Comparative CPU, cold/warm work, retained heap and process/native memory remain unqualified; no universal speed or allocation improvement is asserted.",
+            "Preserve the current STRING active phase and String -> arrays -> collections -> AST/compiler -> remaining families order; this bounded candidate does not advance any phase or claim family/repository completion."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Implemented candidate bytes and exact source provenance are registered; status intentionally remains implemented-unverified. The current product baseline is 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2. Candidate commit identities are unset until an actual publication/receipt binds them. Current STRING phase, all earlier records and all four QUEUED naming operations are unchanged."
+      },
+      {
+        "id": "collections.superset.ls1-frozen-long-list",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Register the implemented immutable primitive list candidate under its existing canonical M3 owner; exact source-sealed recipe execution and target evidence are bound separately from pending installed-image admission.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongList.java",
+            "symbol": "com.m3.collections.M3FrozenLongList",
+            "signatures": [
+              "public M3FrozenLongList()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenLongList copyOf(long[] source)",
+              "public int size()",
+              "public boolean isEmpty()",
+              "public long get(int index)",
+              "public int indexOf(long value)",
+              "public boolean contains(long value)",
+              "public long[] toArray()",
+              "public M3FrozenLongList subList(int fromIndex, int toIndex)",
+              "public void forEach(java.util.function.LongConsumer action)",
+              "public java.util.PrimitiveIterator.OfLong iterator()",
+              "public boolean add(long value)",
+              "public long set(int index, long value)"
+            ],
+            "sha256": "fd94bab1614606e96562d1f48e126c72cd0f121d84aed36fb9a5bcac352a747f",
+            "git_blob_sha1": "7ef0cb732473c95518e5126b7020a4d114fcd6dc",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/M3FrozenLongList.java.txt",
+            "symbol": "com.m3.collections.M3FrozenLongList",
+            "signatures": [
+              "public M3FrozenLongList()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenLongList copyOf(long[] source)",
+              "public int size()",
+              "public boolean isEmpty()",
+              "public long get(int index)",
+              "public int indexOf(long value)",
+              "public boolean contains(long value)",
+              "public long[] toArray()",
+              "public M3FrozenLongList subList(int fromIndex, int toIndex)",
+              "public void forEach(java.util.function.LongConsumer action)",
+              "public java.util.PrimitiveIterator.OfLong iterator()",
+              "public boolean add(long value)",
+              "public long set(int index, long value)"
+            ],
+            "sha256": "053252e3ff24af828430d6f7c6a56b3ad86eba275237375057bbaaa85b7b8173",
+            "git_blob_sha1": "e207ff8611af07e729b8482b855fbb36a9faafc5",
+            "fingerprint": "Uncommitted candidate template; exact bytes are sealed by synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/manifest.tsv SHA-256 016e78421b32b1d32db6c423bc472b6d56f5c0c940242250c9e78b31adb3a440. The receiving receipt must bind the actual published Synexia revision; no new commit is inferred.",
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/work/m3jdk21-frozen-primitive-20261029"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongList.java",
+            "symbol": "com.m3.collections.M3FrozenLongList",
+            "signatures": [
+              "public M3FrozenLongList()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenLongList copyOf(long[] source)",
+              "public int size()",
+              "public boolean isEmpty()",
+              "public long get(int index)",
+              "public int indexOf(long value)",
+              "public boolean contains(long value)",
+              "public long[] toArray()",
+              "public M3FrozenLongList subList(int fromIndex, int toIndex)",
+              "public void forEach(java.util.function.LongConsumer action)",
+              "public java.util.PrimitiveIterator.OfLong iterator()",
+              "public boolean add(long value)",
+              "public long set(int index, long value)"
+            ],
+            "sha256": "053252e3ff24af828430d6f7c6a56b3ad86eba275237375057bbaaa85b7b8173",
+            "git_blob_sha1": "e207ff8611af07e729b8482b855fbb36a9faafc5",
+            "fingerprint": "Exact candidate postimage from com.synexia.m3jdk.FrozenPrimitive20261029; bind the executed recipe, actual Synexia revision, target revision and these bytes in m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json.",
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.collections.M3FrozenLongList",
+        "identity": {
+          "namespace": "Existing exported com.m3.collections.M3FrozenLongList in JPMS module com.m3.collections; class, package, module and Java SE public names remain unchanged.",
+          "generation": "An immutable object owns one canonical primitive payload lane; range coordinates or frozen-state metadata do not own a second payload. Candidate revision is bound by exact template/postimage hashes and the receiving receipt."
+        },
+        "contract": {
+          "differences": [
+            "Complete the throw-only current owner through the canonical Synexia recipe while retaining its existing com.m3.collections class, package, module, constructor and primitive method signatures; no rename or new public JDK owner.",
+            "This is an M3-specific primitive class, not an implementation or replacement of java.util.List or java.util.Set. Provider oracles compare selected operations, not universal cross-provider contracts.",
+            "Admit an independently cloned long[] lane; preserve order, duplicates and first-occurrence indexOf. Nonempty subList views reuse the same immutable parent lane with range coordinates, and a full-range slice returns the same owner.",
+            "Choose the actual JDK 21 List.copyOf implementation as the subList invalid-bounds oracle: negative fromIndex is checked first, then toIndex above size, then a reversed range; the first two throw IndexOutOfBoundsException and the otherwise reversed range throws IllegalArgumentException. This is a selected concrete-provider contract, not a claim about every List provider.",
+            "Proper empty slices use the shared zero-length lane and offset zero so they do not retain a larger parent payload; toArray remains an independent mutable export.",
+            "Retain Object identity equality and the existing scaffoldDescriptor() string; add and set always throw UnsupportedOperationException."
+          ],
+          "compatibility_obligations": [
+            "Preserve every current public constructor and primitive method signature, and retain or explicitly restore the documented historical contracts; do not infer java.util interface implementation or serialization support.",
+            "Keep source/export array ownership, null callbacks, bounds and exception precedence, duplicate/order policy, primitive iterator exhaustion/removal behavior and immutable mutation responses explicit in target tests.",
+            "Do not retain an Entry/Node/Bucket/Cell per logical element, a boxed mirror or a second payload store; immutable parent-lane sharing is allowed only for the specified nonempty long-list ranges.",
+            "Keep the reusable Java/text recipes, templates and qualification harnesses in Synexia; the product receives executed source/test/metadata postimages and passive receipts only.",
+            "Use the selected JDK/Guava/Eclipse provider versions only within the recorded oracle scope and retain original per-file licenses; introduce no Synexia or provider runtime dependency."
+          ],
+          "public_surface": [
+            "public M3FrozenLongList()",
+            "public static String scaffoldDescriptor()",
+            "public static M3FrozenLongList copyOf(long[] source)",
+            "public int size()",
+            "public boolean isEmpty()",
+            "public long get(int index)",
+            "public int indexOf(long value)",
+            "public boolean contains(long value)",
+            "public long[] toArray()",
+            "public M3FrozenLongList subList(int fromIndex, int toIndex)",
+            "public void forEach(java.util.function.LongConsumer action)",
+            "public java.util.PrimitiveIterator.OfLong iterator()",
+            "public boolean add(long value)",
+            "public long set(int index, long value)"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing public final primitive class in com.m3.collections; no java.util interface or Serializable contract is introduced. Historical set Object overrides are restored where applicable.",
+          "bootstrap": "Standalone existing com.m3.collections Maven/JPMS owner. This registration does not install a java.base backend or qualify a modified JDK image."
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "resolved",
+            "reason": "The frozen owner implementation uses primitive arrays and existing java.lang/java.util/function APIs; no copied JDK implementation is introduced."
+          },
+          {
+            "id": "com.m3.arrays",
+            "resolution": "resolved",
+            "reason": "The existing com.m3.collections module descriptor already requires com.m3.arrays; this recipe does not add or remove that module edge."
+          },
+          {
+            "id": "m3jdk21.installed-image-qualification",
+            "resolution": "pending",
+            "reason": "The source-built installed JDK and applicable target runtime/platform gates remain independent of this candidate registration."
+          }
+        ],
+        "materialization": {
+          "admission": "copyOf clones caller-owned primitive input before immutable publication; the recovered set additionally sorts and deduplicates its private construction lane.",
+          "joins": "Nonempty long-list subList reuses the canonical immutable lane and offsets; a proper empty slice uses the zero-length lane and full-range slicing returns the same owner.",
+          "outputs": "toArray returns a detached mutable compatibility array; primitive iterators and callbacks observe the documented owner/range. No result-only receipt is a runtime payload owner.",
+          "cached_facts": "Only owner-local size/range/frozen-state metadata is retained. No global cache, boxed mirror, second identity store or speculative precompute is added."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.FrozenPrimitive20261029",
+          "version": "20261029",
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/manifest.tsv",
+          "sha256": "016e78421b32b1d32db6c423bc472b6d56f5c0c940242250c9e78b31adb3a440",
+          "preconditions": [
+            "Exact current product source is 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2 at m3/collections/src/main/java/com/m3/collections/M3FrozenLongList.java; preimage SHA-256 fd94bab1614606e96562d1f48e126c72cd0f121d84aed36fb9a5bcac352a747f.",
+            "Exact candidate postimage SHA-256 053252e3ff24af828430d6f7c6a56b3ad86eba275237375057bbaaa85b7b8173 and all Java manifest rows must match; stale, missing or duplicate inputs and template drift must refuse.",
+            "Canonical Synexia Maven/OpenRewrite execution, deterministic replay/fixed point and drift-refusal receipts must bind the complete Java plus naming-metadata recipe; do not substitute template copying or a stored hash for execution.",
+            "The naming metadata before-images are the exact authority and queued plan from 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2; preserve all existing records, gates and queued operations.",
+            "The current STRING qualification phase remains active; no later-family installed-image promotion is authorized by this entry."
+          ],
+          "rollback": "Any rollback requires a separately reviewed recipe sealed to these exact postimages and current target state; refuse drift and preserve independently evolved owners, historical capability evidence and passive receipts."
+        },
+        "tests": [
+          {
+            "id": "M3FrozenPrimitiveContractTest",
+            "receipt": "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "M3FrozenPrimitiveOwnershipTest",
+            "receipt": "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 for the three first-party owner/template files; preserve existing Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project notices. The unchanged module descriptor separately retains Apache-2.0 OR EPL-2.0. JDK/Guava/Eclipse oracle names do not relicense or imply copying their implementations.",
+          "publication": "Canonical recipe/template custody remains hsoliwal/com.synexia, with candidate lineage PR #14092. Product acceptance receives executed postimages and m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json only; the actual new publication/target revisions are pending receipt binding.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Admit an independently cloned long[] lane; preserve order, duplicates and first-occurrence indexOf. Nonempty subList views reuse the same immutable parent lane with range coordinates, and a full-range slice returns the same owner.",
+            "Choose the actual JDK 21 List.copyOf implementation as the subList invalid-bounds oracle: negative fromIndex is checked first, then toIndex above size, then a reversed range; the first two throw IndexOutOfBoundsException and the otherwise reversed range throws IllegalArgumentException. This is a selected concrete-provider contract, not a claim about every List provider.",
+            "Proper empty slices use the shared zero-length lane and offset zero so they do not retain a larger parent payload; toArray remains an independent mutable export.",
+            "Retain Object identity equality and the existing scaffoldDescriptor() string; add and set always throw UnsupportedOperationException."
+          ],
+          "pending": [
+            "Bind the actual Synexia publication revision and exact recipe-execution/postimage receipt; commit:null denotes a candidate and is not a fabricated or accepted revision.",
+            "Record exact target Maven/JUnit and public/protected API, reflection, ownership, exception and concurrency results in m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json; the registration itself does not authenticate a test run.",
+            "Installed source-built M3JDK21 image, applicable jtreg/JMM/GC/native/platform acceptance and deployment remain pending; standalone module or donor proofs do not close them.",
+            "Comparative CPU, cold/warm work, retained heap and process/native memory remain unqualified; no universal speed or allocation improvement is asserted.",
+            "Preserve the current STRING active phase and String -> arrays -> collections -> AST/compiler -> remaining families order; this bounded candidate does not advance any phase or claim family/repository completion."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Implemented candidate bytes and exact source provenance are registered; status intentionally remains implemented-unverified. The current product baseline is 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2. Candidate commit identities are unset until an actual publication/receipt binds them. Current STRING phase, all earlier records and all four QUEUED naming operations are unchanged."
+      },
+      {
+        "id": "collections.superset.ls1-frozen-long-set",
+        "kind": "consolidation",
+        "status": "implemented-unverified",
+        "reason": "Restore the historical frozen long set capability under its existing stable capability ID and current M3 owner, preserving known source and tests while installed-image admission remains pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java",
+            "symbol": "com.m3.collections.M3FrozenLongSet",
+            "signatures": [
+              "public M3FrozenLongSet()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenLongSet copyOf(long[] source)",
+              "public int size()",
+              "public boolean isEmpty()",
+              "public boolean contains(long value)",
+              "public long get(int ordinal)",
+              "public long first()",
+              "public long last()",
+              "public int rank(long value)",
+              "public long[] toArray()",
+              "public void forEach(java.util.function.LongConsumer action)",
+              "public java.util.PrimitiveIterator.OfLong iterator()",
+              "public boolean add(long value)",
+              "public boolean remove(long value)"
+            ],
+            "sha256": "4fc3c4898115c784d695bee275a1c9ae4e7d4ba7a5cd4b8968e8286747608715",
+            "git_blob_sha1": "70e0e56648494cd48f610dc520e1a2de7368a426",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/M3FrozenLongSet.java.txt",
+            "symbol": "com.m3.collections.M3FrozenLongSet",
+            "signatures": [
+              "public M3FrozenLongSet()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenLongSet copyOf(long[] source)",
+              "public int size()",
+              "public boolean isEmpty()",
+              "public boolean contains(long value)",
+              "public long get(int ordinal)",
+              "public long first()",
+              "public long last()",
+              "public int rank(long value)",
+              "public long[] toArray()",
+              "public void forEach(java.util.function.LongConsumer action)",
+              "public java.util.PrimitiveIterator.OfLong iterator()",
+              "public boolean add(long value)",
+              "public boolean remove(long value)",
+              "public boolean equals(Object other)",
+              "public int hashCode()",
+              "public String toString()"
+            ],
+            "sha256": "4dba2e4d1b386bf1c50cf8c7b21f630a5fb48084e0752187dc182ffcc41c47a7",
+            "git_blob_sha1": "2c49e80f8befddc4e7fa4c8141cef06af72f5cb7",
+            "fingerprint": "Uncommitted candidate template; exact bytes are sealed by synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/manifest.tsv SHA-256 016e78421b32b1d32db6c423bc472b6d56f5c0c940242250c9e78b31adb3a440. The receiving receipt must bind the actual published Synexia revision; no new commit is inferred.",
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/work/m3jdk21-frozen-primitive-20261029"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3f81c8256faef45caeed85cc360d61acbe5a2274",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-frozen-long-set/00-M3FrozenLongSet.java.txt",
+            "symbol": "com.m3.collections.M3FrozenLongSet",
+            "signatures": [
+              "public M3FrozenLongSet()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenLongSet copyOf(long[] source)",
+              "public int size()",
+              "public boolean isEmpty()",
+              "public boolean contains(long value)",
+              "public long get(int ordinal)",
+              "public long first()",
+              "public long last()",
+              "public int rank(long value)",
+              "public long[] toArray()",
+              "public void forEach(java.util.function.LongConsumer action)",
+              "public java.util.PrimitiveIterator.OfLong iterator()",
+              "public boolean add(long value)",
+              "public boolean remove(long value)",
+              "public boolean equals(Object other)",
+              "public int hashCode()",
+              "public String toString()"
+            ],
+            "sha256": "e27ea26caab4549e1cd364b96e62022d6716848233844ad714664a45b1875d79",
+            "git_blob_sha1": "52a1dafcc628f1bc237245482e985acb5f2d8c2a",
+            "fingerprint": "Exact canonical source snapshot from merged PR #12400, stable capability collections.superset.ls1-frozen-long-set; merged commit f5e098af81b06add1690abeeb72db425a0d83537.",
+            "revision_role": "pinned",
+            "tracking_ref": "refs/pull/12400/head"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java",
+            "symbol": "com.m3.collections.M3FrozenLongSet",
+            "signatures": [
+              "public M3FrozenLongSet()",
+              "public static String scaffoldDescriptor()",
+              "public static M3FrozenLongSet copyOf(long[] source)",
+              "public int size()",
+              "public boolean isEmpty()",
+              "public boolean contains(long value)",
+              "public long get(int ordinal)",
+              "public long first()",
+              "public long last()",
+              "public int rank(long value)",
+              "public long[] toArray()",
+              "public void forEach(java.util.function.LongConsumer action)",
+              "public java.util.PrimitiveIterator.OfLong iterator()",
+              "public boolean add(long value)",
+              "public boolean remove(long value)",
+              "public boolean equals(Object other)",
+              "public int hashCode()",
+              "public String toString()"
+            ],
+            "sha256": "4dba2e4d1b386bf1c50cf8c7b21f630a5fb48084e0752187dc182ffcc41c47a7",
+            "git_blob_sha1": "2c49e80f8befddc4e7fa4c8141cef06af72f5cb7",
+            "fingerprint": "Exact candidate postimage from com.synexia.m3jdk.FrozenPrimitive20261029; bind the executed recipe, actual Synexia revision, target revision and these bytes in m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json.",
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.collections.M3FrozenLongSet",
+        "identity": {
+          "namespace": "Existing exported com.m3.collections.M3FrozenLongSet in JPMS module com.m3.collections; class, package, module and Java SE public names remain unchanged.",
+          "generation": "An immutable object owns one canonical primitive payload lane; range coordinates or frozen-state metadata do not own a second payload. Candidate revision is bound by exact template/postimage hashes and the receiving receipt."
+        },
+        "contract": {
+          "differences": [
+            "Complete the throw-only current owner through the canonical Synexia recipe while retaining its existing com.m3.collections class, package, module, constructor and primitive method signatures; no rename or new public JDK owner.",
+            "This is an M3-specific primitive class, not an implementation or replacement of java.util.List or java.util.Set. Provider oracles compare selected operations, not universal cross-provider contracts.",
+            "Recover the best-known received set from M3JDK21 PR #1409 and canonical Synexia PR #12400 instead of preserving the regressed throw-only scaffold: cloned, sorted, deduplicated primitive payload; signed-long membership/rank and ascending traversal.",
+            "Restore public equals(Object), hashCode() and toString(): equality compares members only with another M3FrozenLongSet, hashCode sums Long.hashCode over distinct members, and toString renders the sorted values. Cross-implementation java.util.Set equality is not claimed.",
+            "Restore the shared copyOf(empty) singleton, shared frozen-state marker, package-private stateWord() test seam and historical scaffoldDescriptor() suffix |RECEIVED. These are explicit historical recovery differences from current master.",
+            "The candidate set executable body matches the recovered historical owner; two Javadoc corrections clarify same-type equality and final retained lane ownership. No historical behavior or provider test is dropped."
+          ],
+          "compatibility_obligations": [
+            "Preserve every current public constructor and primitive method signature, and retain or explicitly restore the documented historical contracts; do not infer java.util interface implementation or serialization support.",
+            "Keep source/export array ownership, null callbacks, bounds and exception precedence, duplicate/order policy, primitive iterator exhaustion/removal behavior and immutable mutation responses explicit in target tests.",
+            "Do not retain an Entry/Node/Bucket/Cell per logical element, a boxed mirror or a second payload store; immutable parent-lane sharing is allowed only for the specified nonempty long-list ranges.",
+            "Keep the reusable Java/text recipes, templates and qualification harnesses in Synexia; the product receives executed source/test/metadata postimages and passive receipts only.",
+            "Use the selected JDK/Guava/Eclipse provider versions only within the recorded oracle scope and retain original per-file licenses; introduce no Synexia or provider runtime dependency."
+          ],
+          "public_surface": [
+            "public M3FrozenLongSet()",
+            "public static String scaffoldDescriptor()",
+            "public static M3FrozenLongSet copyOf(long[] source)",
+            "public int size()",
+            "public boolean isEmpty()",
+            "public boolean contains(long value)",
+            "public long get(int ordinal)",
+            "public long first()",
+            "public long last()",
+            "public int rank(long value)",
+            "public long[] toArray()",
+            "public void forEach(java.util.function.LongConsumer action)",
+            "public java.util.PrimitiveIterator.OfLong iterator()",
+            "public boolean add(long value)",
+            "public boolean remove(long value)",
+            "public boolean equals(Object other)",
+            "public int hashCode()",
+            "public String toString()"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing public final primitive class in com.m3.collections; no java.util interface or Serializable contract is introduced. Historical set Object overrides are restored where applicable.",
+          "bootstrap": "Standalone existing com.m3.collections Maven/JPMS owner. This registration does not install a java.base backend or qualify a modified JDK image."
+        },
+        "dependencies": [
+          {
+            "id": "java.base",
+            "resolution": "resolved",
+            "reason": "The frozen owner implementation uses primitive arrays and existing java.lang/java.util/function APIs; no copied JDK implementation is introduced."
+          },
+          {
+            "id": "com.m3.arrays",
+            "resolution": "resolved",
+            "reason": "The existing com.m3.collections module descriptor already requires com.m3.arrays; this recipe does not add or remove that module edge."
+          },
+          {
+            "id": "m3jdk21.installed-image-qualification",
+            "resolution": "pending",
+            "reason": "The source-built installed JDK and applicable target runtime/platform gates remain independent of this candidate registration."
+          }
+        ],
+        "materialization": {
+          "admission": "copyOf clones caller-owned primitive input before immutable publication; the recovered set additionally sorts and deduplicates its private construction lane.",
+          "joins": "No parallel join store or retained per-element wrapper is introduced; iteration and lookup traverse the canonical primitive lane.",
+          "outputs": "toArray returns a detached mutable compatibility array; primitive iterators and callbacks observe the documented owner/range. No result-only receipt is a runtime payload owner.",
+          "cached_facts": "Only owner-local size/range/frozen-state metadata is retained. No global cache, boxed mirror, second identity store or speculative precompute is added."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.FrozenPrimitive20261029",
+          "version": "20261029",
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/manifest.tsv",
+          "sha256": "016e78421b32b1d32db6c423bc472b6d56f5c0c940242250c9e78b31adb3a440",
+          "preconditions": [
+            "Exact current product source is 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2 at m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java; preimage SHA-256 4fc3c4898115c784d695bee275a1c9ae4e7d4ba7a5cd4b8968e8286747608715.",
+            "Exact candidate postimage SHA-256 4dba2e4d1b386bf1c50cf8c7b21f630a5fb48084e0752187dc182ffcc41c47a7 and all Java manifest rows must match; stale, missing or duplicate inputs and template drift must refuse.",
+            "Canonical Synexia Maven/OpenRewrite execution, deterministic replay/fixed point and drift-refusal receipts must bind the complete Java plus naming-metadata recipe; do not substitute template copying or a stored hash for execution.",
+            "The naming metadata before-images are the exact authority and queued plan from 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2; preserve all existing records, gates and queued operations.",
+            "The current STRING qualification phase remains active; no later-family installed-image promotion is authorized by this entry."
+          ],
+          "rollback": "Any rollback requires a separately reviewed recipe sealed to these exact postimages and current target state; refuse drift and preserve independently evolved owners, historical capability evidence and passive receipts."
+        },
+        "tests": [
+          {
+            "id": "M3FrozenPrimitiveContractTest",
+            "receipt": "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "M3FrozenPrimitiveOwnershipTest",
+            "receipt": "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "M3FrozenLongSetTest-historical-contract-recovery",
+            "receipt": "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "M3FrozenLongSetProviderTest-Guava-Eclipse-oracles",
+            "receipt": "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 for the three first-party owner/template files; preserve existing Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project notices. The unchanged module descriptor separately retains Apache-2.0 OR EPL-2.0. JDK/Guava/Eclipse oracle names do not relicense or imply copying their implementations.",
+          "publication": "Canonical recipe/template custody remains hsoliwal/com.synexia, with candidate lineage PR #14092; recover source/template/test lineage from M3JDK21 PR #1409 and Synexia PR #12400. Product acceptance receives executed postimages and m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json only; the actual new publication/target revisions are pending receipt binding.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Recover the best-known received set from M3JDK21 PR #1409 and canonical Synexia PR #12400 instead of preserving the regressed throw-only scaffold: cloned, sorted, deduplicated primitive payload; signed-long membership/rank and ascending traversal.",
+            "Restore public equals(Object), hashCode() and toString(): equality compares members only with another M3FrozenLongSet, hashCode sums Long.hashCode over distinct members, and toString renders the sorted values. Cross-implementation java.util.Set equality is not claimed.",
+            "Restore the shared copyOf(empty) singleton, shared frozen-state marker, package-private stateWord() test seam and historical scaffoldDescriptor() suffix |RECEIVED. These are explicit historical recovery differences from current master.",
+            "The candidate set executable body matches the recovered historical owner; two Javadoc corrections clarify same-type equality and final retained lane ownership. No historical behavior or provider test is dropped."
+          ],
+          "pending": [
+            "Bind the actual Synexia publication revision and exact recipe-execution/postimage receipt; commit:null denotes a candidate and is not a fabricated or accepted revision.",
+            "Record exact target Maven/JUnit and public/protected API, reflection, ownership, exception and concurrency results in m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json; the registration itself does not authenticate a test run.",
+            "Installed source-built M3JDK21 image, applicable jtreg/JMM/GC/native/platform acceptance and deployment remain pending; standalone module or donor proofs do not close them.",
+            "Comparative CPU, cold/warm work, retained heap and process/native memory remain unqualified; no universal speed or allocation improvement is asserted.",
+            "Preserve the current STRING active phase and String -> arrays -> collections -> AST/compiler -> remaining families order; this bounded candidate does not advance any phase or claim family/repository completion."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "3f81c8256faef45caeed85cc360d61acbe5a2274",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-frozen-long-set/00-M3FrozenLongSet.java.txt",
+              "symbol": "com.m3.collections.M3FrozenLongSet",
+              "signatures": [
+                "public M3FrozenLongSet()",
+                "public static String scaffoldDescriptor()",
+                "public static M3FrozenLongSet copyOf(long[] source)",
+                "public int size()",
+                "public boolean isEmpty()",
+                "public boolean contains(long value)",
+                "public long get(int ordinal)",
+                "public long first()",
+                "public long last()",
+                "public int rank(long value)",
+                "public long[] toArray()",
+                "public void forEach(java.util.function.LongConsumer action)",
+                "public java.util.PrimitiveIterator.OfLong iterator()",
+                "public boolean add(long value)",
+                "public boolean remove(long value)",
+                "public boolean equals(Object other)",
+                "public int hashCode()",
+                "public String toString()"
+              ],
+              "sha256": "e27ea26caab4549e1cd364b96e62022d6716848233844ad714664a45b1875d79",
+              "git_blob_sha1": "52a1dafcc628f1bc237245482e985acb5f2d8c2a",
+              "fingerprint": "Exact canonical source snapshot from merged PR #12400, stable capability collections.superset.ls1-frozen-long-set; merged commit f5e098af81b06add1690abeeb72db425a0d83537.",
+              "revision_role": "pinned",
+              "tracking_ref": "refs/pull/12400/head"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "11c94feb18155a53cc213708c353791132edc4a7",
+              "module": "synexia-common",
+              "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFrozenLongSet.java",
+              "symbol": "com.synexia.common.collections.PackedFrozenLongSet",
+              "signatures": [],
+              "sha256": "74be3b8b9a56ee7cd55079430a228cc7c35ec6c16ee1883208931d2d325f8530",
+              "git_blob_sha1": "e2efeecf9c033c0d726eee62ab155fa6863df982",
+              "fingerprint": "Original Apache-2.0 first-party packed primitive set donor. The received owner is self-contained and does not require this donor type or LongReadOnlySet at runtime.",
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "cdfb190413dcf926105ad30bb6e082ffec1b6ec0",
+              "module": "com.m3.collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java",
+              "symbol": "com.m3.collections.M3FrozenLongSet",
+              "signatures": [
+                "public M3FrozenLongSet()",
+                "public static String scaffoldDescriptor()",
+                "public static M3FrozenLongSet copyOf(long[] source)",
+                "public int size()",
+                "public boolean isEmpty()",
+                "public boolean contains(long value)",
+                "public long get(int ordinal)",
+                "public long first()",
+                "public long last()",
+                "public int rank(long value)",
+                "public long[] toArray()",
+                "public void forEach(java.util.function.LongConsumer action)",
+                "public java.util.PrimitiveIterator.OfLong iterator()",
+                "public boolean add(long value)",
+                "public boolean remove(long value)",
+                "public boolean equals(Object other)",
+                "public int hashCode()",
+                "public String toString()"
+              ],
+              "sha256": "e27ea26caab4549e1cd364b96e62022d6716848233844ad714664a45b1875d79",
+              "git_blob_sha1": "52a1dafcc628f1bc237245482e985acb5f2d8c2a",
+              "fingerprint": "Exact historical received owner from merged PR #1409; merged commit bc6d4d8f4ecb17c928f1bef6196028707effe338.",
+              "revision_role": "pinned",
+              "tracking_ref": "refs/pull/1409/head"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Implemented candidate bytes and exact source provenance are registered; status intentionally remains implemented-unverified. The current product baseline is 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2. Candidate commit identities are unset until an actual publication/receipt binds them. Current STRING phase, all earlier records and all four QUEUED naming operations are unchanged."
       }
     ]
   },

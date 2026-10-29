@@ -1,0 +1,105 @@
+{
+  "schema" : "M3_FROZEN_PRIMITIVE_RECEIVER_V1",
+  "scope" : "PUBLISHED_SOURCE_PIN_PENDING_PRODUCT_GATES",
+  "target_repository" : "hsoliwal/M3jdk21",
+  "target_receipt_path" : "m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json",
+  "product_baseline_commit" : "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+  "product_observed_master_at_source_review" : "052ebcf7a26352c0285251eb671ee6c3640fd3ff",
+  "synexia_repository" : "hsoliwal/com.synexia",
+  "synexia_commit" : "ba63bead89c3549840e49fae51ce89b5e3ebf226",
+  "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveReceipt20261029",
+  "execution_lane" : "MAVEN_OPENREWRITE_SDK",
+  "receiver_phase" : "STRING",
+  "phase_advanced" : false,
+  "installed_image_qualified" : false,
+  "whole_core_suite_passed" : false,
+  "whole_collection_family_complete" : false,
+  "repository_complete" : false,
+  "performance_qualified" : false,
+  "copyright" : "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license" : "Apache-2.0; preserve existing per-file upstream notices and licenses",
+  "source_manifests" : [ {
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
+    "path" : "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-frozen-primitive-20261029/manifest.tsv",
+    "sha256" : "016e78421b32b1d32db6c423bc472b6d56f5c0c940242250c9e78b31adb3a440"
+  }, {
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
+    "path" : "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-frozen-primitive-naming-20261029/manifest.tsv",
+    "sha256" : "282326aaf84325ef6bb8cc97ebf70a113d3916cc3d962ceb59fed5b8d6b346b8"
+  } ],
+  "historical_set_recovery" : {
+    "stable_capability" : "collections.superset.ls1-frozen-long-set",
+    "product_pr" : "hsoliwal/M3jdk21#1409",
+    "product_commit" : "cdfb190413dcf926105ad30bb6e082ffec1b6ec0",
+    "recipe_pr" : "hsoliwal/com.synexia#12400",
+    "recipe_commit" : "3f81c8256faef45caeed85cc360d61acbe5a2274"
+  },
+  "owning_core_suite" : {
+    "status" : "HOLD",
+    "known_baseline_failures" : 1,
+    "reason" : "The pre-existing gather-spans exception-type assertion remains unresolved; this receipt does not assert a complete core-suite pass."
+  },
+  "pending_gates" : [ "Resolve the retained baseline core-suite failure and independently qualify the final owning-module tree.", "Source-built installed M3JDK21 image and applicable jtreg/JMM/GC/JNI/native/platform acceptance.", "Comparative CPU, cold/warm work, retained heap and process/native memory; no universal speedup claim.", "Ordered String -> arrays -> collections -> AST/compiler -> remaining families acceptance; no phase advancement." ],
+  "evidence_boundary" : "The exact ten postimage bindings below are source correspondence, not a claim that this receipt-only test executed their Java or naming recipes or their product tests. Their separate SDK executions and target evidence must bind the same published Synexia commit. This receipt is itself emitted by the canonical text SDK and bound externally by its execution receipt.",
+  "outputs" : [ {
+    "target_path" : ".github/workflows/m3jdk21-name-contract.yml",
+    "before_sha256" : "8851fea17f460c39da730b192feddf5523f2c4d6d03e9591174fc754ffbf09d8",
+    "after_sha256" : "c0c2bb43a1d045e79bf5cf46f324114e7a0279fe4f095dcc87db811ab0f213c7",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
+    "kind" : "GENERATED_BUILD"
+  }, {
+    "target_path" : "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FrozenLongSetProviderTest.java",
+    "before_sha256" : "ABSENT",
+    "after_sha256" : "80e0b77589a102a71ba81cbf7e4556a453601a388129f7525385300e1dca9a7a",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
+    "kind" : "GENERATED_TEST"
+  }, {
+    "target_path" : "m3/collections/src/main/java/com/m3/collections/M3FrozenIntList.java",
+    "before_sha256" : "d2087220e85b57f671375c8529fefa1bccc87030c079fd98bf34274a4ff287e4",
+    "after_sha256" : "e60570fa0e97b22afe3380de635224ce008a4ed24b363f0cd8b274a75bfbd0e8",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
+    "kind" : "GENERATED_SOURCE"
+  }, {
+    "target_path" : "m3/collections/src/main/java/com/m3/collections/M3FrozenLongList.java",
+    "before_sha256" : "fd94bab1614606e96562d1f48e126c72cd0f121d84aed36fb9a5bcac352a747f",
+    "after_sha256" : "053252e3ff24af828430d6f7c6a56b3ad86eba275237375057bbaaa85b7b8173",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
+    "kind" : "GENERATED_SOURCE"
+  }, {
+    "target_path" : "m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java",
+    "before_sha256" : "4fc3c4898115c784d695bee275a1c9ae4e7d4ba7a5cd4b8968e8286747608715",
+    "after_sha256" : "4dba2e4d1b386bf1c50cf8c7b21f630a5fb48084e0752187dc182ffcc41c47a7",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
+    "kind" : "GENERATED_SOURCE"
+  }, {
+    "target_path" : "m3/collections/src/test/java/com/m3/collections/M3FrozenLongSetTest.java",
+    "before_sha256" : "ABSENT",
+    "after_sha256" : "fbfc1efa44622a644d627276625e061db1c861e91ab32b86c2455ea14b1630fc",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
+    "kind" : "GENERATED_TEST"
+  }, {
+    "target_path" : "m3/collections/src/test/java/com/m3/collections/M3FrozenPrimitiveContractTest.java",
+    "before_sha256" : "ABSENT",
+    "after_sha256" : "22af5ec723a4c8e4eb8cecf115a296b351667e19ecf013bb36886fad96ad0c57",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
+    "kind" : "GENERATED_TEST"
+  }, {
+    "target_path" : "m3/collections/src/test/java/com/m3/collections/M3FrozenPrimitiveOwnershipTest.java",
+    "before_sha256" : "ABSENT",
+    "after_sha256" : "f8b7bccde94e0cf7e60e1b6aeb34d03edac90169890c7a498f52ca399936e83f",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
+    "kind" : "GENERATED_TEST"
+  }, {
+    "target_path" : "m3/docs/name-mapping.json",
+    "before_sha256" : "145dec24eb11847b3915e6fb2e0e80fa4a773879833a3ac64e76101fab67500f",
+    "after_sha256" : "1b609236af2e75078133903c5d87521542f857fbe553c18063c28e43a7dc7ce6",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
+    "kind" : "GENERATED_BUILD"
+  }, {
+    "target_path" : "m3/tooling/name-contract/name-plan.json",
+    "before_sha256" : "0bfb1c234cd9e8e65702a0797124619fc365d7842b7be74591fabd142dfb78b9",
+    "after_sha256" : "99de12317004c16fdd40578485de328c3328c3179205def9d233adff4da48d84",
+    "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
+    "kind" : "GENERATED_BUILD"
+  } ]
+}
