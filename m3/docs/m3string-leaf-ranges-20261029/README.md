@@ -1,8 +1,10 @@
 # M3String leaf ranges for native kernels (unix4j native, leaf 1b)
 
-Status: **implemented, compile-proven, component oracle PASS on stock JDK 21 (Windows and
-Linux)**. `make images` and jtreg on an M3JDK21 image: **NOT_RUN** (no local build toolchain or
-M3 image). Base: `master` 7f7accdd54e2. Branch: `m3/m3string-leaf-ranges-20261029`.
+Status: **implemented and qualified on a source-built M3JDK21 image (Linux x86_64)**.
+`make images`, all three prescribed jtreg runtime actions, and all 14 export gates passed
+on 2026-10-29. The source base is `3569c790d5cc3f9bc871ab0ecd025dab0fd5cafc` plus the
+19 qualified Javadoc/import postimages recorded in [m3-image-qualification.json](m3-image-qualification.json).
+The earlier stock JDK 21 component results for Windows and Linux remain recorded below.
 
 Leaf 1 (the `wc` C kernel and Java facade in `m3/tooling/module-packs/text-tools`, branch
 `m3/unix4j-native-wc-20261029`) consumes this contract. This leaf changes java.base only; the
@@ -188,8 +190,9 @@ Commands are in `evidence/COMMANDS.tsv`; verdicts in `evidence/verify-GATES.tsv`
 | M2 | mutant: `BIG_ENDIAN` from `!atom.bigEndian` | AssertionError | PASS | `AssertionError: utf16-local-atom-big-endian unit mismatch at 0` (Windows and Linux) |
 | M3 | mutant: inline head unit k at bit `8(k+1)` | AssertionError | PASS | `AssertionError: immediate-latin1 inline head padding` |
 | E0-E13 | export probe (`verify_export.sh`) | per gate | PASS (14/14) | see Export mechanism |
-| jtreg `M3StringLeafRangesDriver` (`m3`, `m3 -XX:-CompactStrings`, `stock`) | M3JDK21 image | - | NOT_RUN | no M3 image locally |
-| `make images` | full OpenJDK build | - | NOT_RUN | no local toolchain or disk |
+| jtreg `M3StringLeafRangesDriver` (`m3`, `m3 -XX:-CompactStrings`, `stock`) | source-built M3JDK21 image | 0 | PASS (3 actions) | checks: 376903, 376903, 353338; every start-offset and byte-order mutant killed |
+| `make images` | full M3JDK21 server release build, Linux x86_64 | 0 | PASS | original warnings-as-errors and doclint flags retained; 530 image files sealed |
+| E0-E13 on M3 image | original export probe, host and linked image | per gate | PASS (14/14) | qualified export granted; unnamed access denied |
 
 The oracle covers: empty; Latin-1 and UTF-16 local atoms (big-endian); mapped UTF-16
 little-endian, mapped big-endian at an odd address, mapped Latin-1 with either flag; LATIN1 and
@@ -198,11 +201,14 @@ one owner, non-adjacent ranges of one owner; every slice `[b, e)` of a six-leaf 
 independently computed leaf count; 300 pool-built DAGs (`M3StringPool.internChars` +
 `M3StringPool.concat`) and slices; capacity 0..n+1 (prefix equal, rest untouched); NOT_M3 and
 null handling. Each leaf is decoded independently of the producer and compared with `charAt` at
-every index. The JavaLangAccess path (`System.java`) is compile-proven only: on a stock JDK the
-String has no `m3` field (`stringLayout=stock`), so the stock `NOT_M3` case runs as
-`fill(null, ...)`; the driver's `m3` and `stock` modes exercise the JavaLangAccess path on an M3
-image (NOT_RUN).
+every index. The JavaLangAccess path (`System.java`) passed on the source-built M3 image
+in the driver's `m3`, compact-strings-disabled `m3`, and `stock` modes. All three report
+`stringLayout=m3`. The earlier component-only stock JDK run has no String `m3` field
+(`stringLayout=stock`) and exercises `NOT_M3` as `fill(null, ...)`. Exact runtime flags,
+check counts, mutant counts, image hashes, and source postimages are retained in
+[m3-image-qualification.json](m3-image-qualification.json).
 
 Reproduce: `bash verify.sh <jdk-21-home> <checkout root> <fresh dir>` and
-`bash verify_export.sh <jdk-21-home> <fresh dir>`. Corrections made after failing gates are in
-`RECIPE_MEMORY.tsv`.
+`bash verify_export.sh <jdk-21-home> <fresh dir>`. Recipe correction history is retained by the
+[canonical Synexia owner](https://github.com/hsoliwal/com.synexia/blob/dcb281239d56a7046eb658436bcd46f485e53768/synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/hsoliwal/M3jdk21/m3/docs/m3string-leaf-ranges-20261029/RECIPE_MEMORY.tsv).
+The local [custody receipt](recipe-custody-receipt.json) records the exact source and recipe identities.
