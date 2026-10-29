@@ -6,6 +6,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest import mock
 
 SCRIPT = Path(__file__).with_name("check_public_names.py")
 SPEC = importlib.util.spec_from_file_location("public_names", SCRIPT)
@@ -209,6 +210,72 @@ class PublicNamesTest(unittest.TestCase):
             self.assertEqual(len(changed), 1)
             self.assertEqual(len(failures), 1)
             self.assertIn("org.apache.commons.collections4.Bag", failures[0][1])
+
+
+    def test_historical_classver_paths_remain_refused_without_verified_evidence(self):
+        sealed = "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log"
+        self.assertIn("unstable date/version identifier", self.issue(sealed))
+        self.assertIn("unstable date/version identifier", self.issue(sealed, status="R"))
+        self.assertIn("unstable date/version identifier",
+                      self.issue("m3/migration/intake-20261005/unlisted.log"))
+
+    def test_verified_closed_classver_skips_only_listed_added_history(self):
+        known = "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log"
+        unknown = "m3/migration/intake-20261005/forged.log"
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+            git("init", "-q")
+            git("config", "user.email", "classver@example.invalid")
+            git("config", "user.name", "M3 Evidence Gate Test")
+            (root / "README.md").write_text("base\n")
+            git("add", ".")
+            git("commit", "-qm", "base")
+            base = git("rev-parse", "HEAD")
+            for relative in (known, unknown):
+                candidate = root / relative
+                candidate.parent.mkdir(parents=True, exist_ok=True)
+                candidate.write_text("historic fixture\n")
+            git("add", ".")
+            git("commit", "-qm", "candidate")
+            head = git("rev-parse", "HEAD")
+            with mock.patch.object(GATE, "_sealed_classver_paths",
+                                   return_value=frozenset({known})) as proof:
+                changed, failures = GATE.check(root, base, head)
+            self.assertEqual(2, len(changed))
+            self.assertEqual([(unknown, "unstable date/version identifier")], failures)
+            proof.assert_called_once_with(root, head)
+
+    def test_missing_classver_proof_refuses_all_dated_evidence(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+            git("init", "-q")
+            git("config", "user.email", "classver@example.invalid")
+            git("config", "user.name", "M3 Evidence Gate Test")
+            (root / "README.md").write_text("base\n")
+            git("add", ".")
+            git("commit", "-qm", "base")
+            base = git("rev-parse", "HEAD")
+            name = "m3/migration/intake-20261005/forged.log"
+            candidate = root / name
+            candidate.parent.mkdir(parents=True, exist_ok=True)
+            candidate.write_text("forged\n")
+            git("add", ".")
+            git("commit", "-qm", "candidate")
+            head = git("rev-parse", "HEAD")
+            with mock.patch.object(GATE, "_sealed_classver_paths",
+                                   side_effect=ValueError("closed ClassVer evidence refused")):
+                with self.assertRaisesRegex(ValueError, "closed ClassVer evidence refused"):
+                    GATE.check(root, base, head)
+
+    def test_unlisted_dated_source_still_refuses_even_with_classver_evidence(self):
+        self.assertIn("unstable date/version identifier",
+                      self.issue(".github/workflows/m3-new-20261029.yml"))
+        self.assertTrue(self.issue("m3/qualification/fake-20261029/UnknownRecipe.java"))
+        self.assertTrue(self.issue("m3/docs/name-mapping.d/unlisted-20261029.json"))
 
 if __name__ == "__main__":
     unittest.main()
