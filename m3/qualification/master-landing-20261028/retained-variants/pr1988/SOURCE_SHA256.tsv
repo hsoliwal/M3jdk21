@@ -1,0 +1,3 @@
+path	sha256	git_blob	mode	pr	note
+m3/collections/qualification/viewport-geometry/RECEIVING.json	b83b004d0e55ce48467932e0952fd25d0370b2ab5df2b487c9f8e138ccd80fd6	a29677973dfa767d8d9a3c4f2a99735374e3a3b4	100644	1988	PR version, not live
+m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java	98a83a0bef698e128baa0a788e122751e12584d0b8983f4df7443850123afeec	d35282fb564a0a9231f31781e1a699f7e571f8de	100644	1988	PR version, not live
