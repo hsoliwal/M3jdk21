@@ -1,0 +1,17 @@
+path	sha256	git_blob	mode	pr	note
+m3/docs/name-mapping.d/m3-unix4j-native-wc-20261029.json	03b27c734c8dd05f0ff7df86dd571e1e78360b638d1f028975ab9e95f422d612	e8f745de88178b89368fc71abeee98962c6e998e	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/ATOMS.tsv	e7875fbf19aa7b1f6d2842066a21376cadf627d7808210c69bf9c88769ccf024	5f72ca08f89762b5ee01d2d90c856f7733071a3a	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/FOSS_REUSE_DECISION.tsv	cd2b22ea10eab89c4aa8d505fb7c1f041a97ceb1023fd7b2a797bcdb31cc10e4	a51c13018530c2866cd7b170ef21d2a63cbfe4d9	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/PATTERNS.tsv	28c275453054ba627b5e395c7fd04d14f3a17fd5fb22cfbfe1776ede64a81edc	c967d0fbd91e581b47879a652609d920c29da955	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/README.md	626bb5e4f27354fd91891d06303e541a96fe66aab25e9cc32108d46c105d719e	aa5e737ca9bc5dbbbc123ea7eb464d66eb290f15	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/RECIPE_MEMORY.tsv	b67fd9ce133d0986d713d5559598cff0e9bb67d992f2197fb8215a90c7aad12a	a2ccc90c218d72b9f44f5672cb5b0ce8706aa0f9	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/build.py	dd7f9ce1181adab55602310357b65fad9a14381152224edfa829eb8aa0271379	c85cc794a83ea5a70ec5e183afbe25ea1441dacd	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/docs/LEAF_1B_M3STRING_ACCESSOR.md	bc245edb385402d16cd151d66c5ae55d1853ca26a495f00092d1b628098206cf	61c35693252aa163ff8746b8d3734e1cd37acbc0	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3WcNativeSelfTest.java	a9e709ac5cd59c87314435e58537461909ca29c5ff9a7ab03a9f59134022928a	80adb5942dadf2e851938ca193e8bc4b50c30abc	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/legal/NOTICE.txt	452dcbe14a9a38372dbf5e710228fd66bfb3cd0985cca752af892518ee4fcc58	3a9c2bab9dfd170dae7242df092f2c718cc2ec5d	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/native/generator/M3TextioWhitespaceTableGenerator.java	cf83730345c03fffa1df321c52fcd6bd6935831719b5c4f879299ee13365458c	bc6589a8a31e1cd7e43c56794a1a5a3d63cd6ec4	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/native/m3textio.c	7b630a065c7e2080cbe43f43382d5e9e1180074ca28a67bdab5e02ac2097a3c8	9f06d01fbf55fd2523351c3fef6601a86079165f	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/native/m3textio_whitespace.h	4eac62fc2abd175497a1cea4b9514c4ee6db4e205566fccbe6d90a02abac47cf	fd33d0a837c3e5517d7ac9ce414fc49d67c2dc7c	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/scripts/verify-wc-native.sh	612ae4a10137b4a7f3b850a530101f42e9ca7bbcbff12a0a98265bf49b54474d	dfbd0702ab4bbfee63091395424a9c604d663696	100755	2084	PR version, not live
+m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Wc.java	56c395b64a7dd8db94e4ee14fce088ebef1b93d1b47f0d566ee3b3dbea319933	0ae104c06b9d15a4561e3bd70813759cdfaea1aa	100644	2084	PR version, not live
+m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/WcNative.java	75db79d61120b24273fcf24fb1096c26654f1f2b882d2696630b6bee268b64d7	c20133eb79d90d63e0bb3d790745fbff8d19a183	100644	2084	PR version, not live
