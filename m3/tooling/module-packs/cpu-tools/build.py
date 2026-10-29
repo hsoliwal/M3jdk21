@@ -37,7 +37,8 @@ TOOL_SUFFIXES = (
 CPU_MODULES = tuple("com.m3.tools." + value for value in TOOL_SUFFIXES) + ("com.m3.tools.cpu",)
 MODULES = tuple(sorted(TEXT_MODULES + CPU_MODULES))
 FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest",
-            "M3StructuredAtomsContract", "M3EvidenceMathContract")
+            "M3StructuredAtomsContract", "M3EvidenceMathContract",
+            "M3LogicFlowContract", "M3IndexedDataContract")
 FIXED_JAR_DATE = "2026-01-01T00:00:00Z"
 COMMAND_SECONDS = 115
 CLEANUP_SECONDS = 5
@@ -509,7 +510,7 @@ def qualify(args):
     finally:
         receipt["commands_sha256"] = sha256(output / "COMMANDS.json") if (output / "COMMANDS.json").exists() else None
         write_json(output / "BUILD_RECEIPT.json", receipt)
-    print("M3_CPU_TOOLS_PACK_PASS modules=20 fixtures=4 jni=existing_owner replay=exact")
+    print("M3_CPU_TOOLS_PACK_PASS modules=20 fixtures=" + str(len(FIXTURES)) + " jni=existing_owner replay=exact")
 
 
 def main():
