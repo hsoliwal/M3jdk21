@@ -9879,7 +9879,8 @@
             "sha256": "955c3490c1869fb38492a067be93916c8a2358ef824d3de7d83d95a698578668",
             "git_blob_sha1": "99d084a47b36a2588bd79c850d7d647ffd98bd7f",
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/master"
+            "tracking_ref": "refs/heads/master",
+            "fingerprint": null
           }
         ],
         "targets": [
@@ -9896,7 +9897,8 @@
             "sha256": "6ef55adb2e93f94c1ee57f3795fea1fc069a421230f25b4937ff52cebac26503",
             "git_blob_sha1": "06fc5d79c230b778914409429d2efe9b18ed2033",
             "revision_role": "candidate",
-            "tracking_ref": null
+            "tracking_ref": null,
+            "fingerprint": null
           }
         ],
         "owner": "java.lang.M3CodeTextSignalBatch",
@@ -9926,8 +9928,8 @@
         "dependencies": [
           {
             "id": "java.base",
-            "resolution": "existing-owner",
-            "reason": "Uses exact existing Facts/Batch contract and generated JNI header."
+            "resolution": "resolved",
+            "reason": "Uses exact existing Facts/Batch contract and generated JNI header. Historical resolution label: existing-owner. This records reuse of the exact existing dependency owner, not installed-runtime qualification."
           }
         ],
         "materialization": {
@@ -9939,17 +9941,16 @@
         "recipe": {
           "id": "com.synexia.m3.M3JdkSignalManufacture20261022",
           "version": "20261022",
-          "path": "synexia-openrewrite-recipes/recipes/m3jdk-signal-manufacture-20261022",
-          "sha256": "70d841bbc9b4405874bafc49eee2d37f04018149f90f054bcc104dd317878cbc",
+          "path": null,
+          "sha256": null,
           "preconditions": [
             "Exact b985 source preimage or fixed-point postimage; new C/test paths absent."
           ],
-          "rollback": "Restore sealed Java preimage and remove only the newly received C/test files in a reviewed revert."
+          "rollback": "Restore sealed Java preimage and remove only the newly received C/test files in a reviewed revert.",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk-signal-manufacture-20261022"
         },
-        "tests": [
-          "test/jdk/java/lang/String/M3CodeTextSignalBatchNativeTest.java",
-          "Strict Java21, javac-h, C11/C17, Xcheck:jni and UBSan component parity in canonical packet."
-        ],
+        "tests": [],
         "provenance": {
           "license": "GPL-2.0-only WITH Classpath-exception-2.0 for target source; Apache-2.0 for canonical orchestration.",
           "publication": "User explicitly requested integrated Java/JNI implementation and reviewable M3JDK21 PRs.",
@@ -9959,14 +9960,16 @@
         "sync": {
           "source_revision": "b9855672fe95fdaa7a9dccc23c2ef01014606504",
           "target_revision": null,
-          "direction": "canonical-recipe-to-target",
+          "direction": "source-to-target",
           "target_adaptations": [
-            "Place equivalent lexical JNI kernel in libjava; retain existing external proving-ground provider unchanged."
+            "Place equivalent lexical JNI kernel in libjava; retain existing external proving-ground provider unchanged.",
+            "Historical direction label: canonical-recipe-to-target. Canonical Synexia recipe execution produces the target postimage from the recorded target-owned Java source atom."
           ],
           "pending": [
             "Full installed image and real jtreg",
             "Other platforms/architectures and broad runtime suites",
-            "Comparative cold/warm performance and memory evidence"
+            "Comparative cold/warm performance and memory evidence",
+            "The historical test_descriptions are references/descriptions only; no original canonical executed receipt was located. Receive and validate exact-candidate receipt objects before claiming tested runtime admission."
           ],
           "conflicts": []
         },
@@ -9975,8 +9978,12 @@
           "previous_targets": [],
           "supersedes": []
         },
-        "source_state": "target-owned",
-        "observation": "Lexical routing facts do not prove regex validity, program semantics or a native speedup."
+        "source_state": "implemented",
+        "observation": "Lexical routing facts do not prove regex validity, program semantics or a native speedup. Historical source_state label: target-owned; this records source ownership, not installed-runtime admission. Historical recipe.sha256: 70d841bbc9b4405874bafc49eee2d37f04018149f90f054bcc104dd317878cbc. The paired AST receiving observation labels that same digest java_manifest_sha256; it is retained as a historical manifest assertion, not a verified directory or recipe-file digest. The canonical recipe locator and test descriptions remain historical references; no original executed receipt was located during this schema repair.",
+        "test_descriptions": [
+          "test/jdk/java/lang/String/M3CodeTextSignalBatchNativeTest.java",
+          "Strict Java21, javac-h, C11/C17, Xcheck:jni and UBSan component parity in canonical packet."
+        ]
       },
       {
         "id": "m3.arrays.api-companion",
@@ -10080,14 +10087,16 @@
         "recipe": {
           "id": "com.synexia.m3.Jdk21ApiCompanionsTarget20261029",
           "version": "20261029",
-          "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/resources/META-INF/rewrite/m3jdk21-api-companions-target-20261029.yml",
+          "path": null,
           "sha256": null,
           "preconditions": [
             "Exact target base 669a949d192345acefcfc5e9bb0b3724174d270c and checked source/module pins.",
             "Source-sealed named Maven/OpenRewrite replay; fixed point and drift/missing/duplicate refusal.",
             "Recipe/source revision and output seals are bound in the passive receiver receipt, avoiding a self-referential mapping hash."
           ],
-          "rollback": "Revert the generated mapping/schema/checker/policy outputs as one reviewed unit; retain prior mapping records and refuse unrelated drift."
+          "rollback": "Revert the generated mapping/schema/checker/policy outputs as one reviewed unit; retain prior mapping records and refuse unrelated drift.",
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/resources/META-INF/rewrite/m3jdk21-api-companions-target-20261029.yml"
         },
         "tests": [
           {

@@ -167,6 +167,7 @@ class WorkflowCoverageTest(unittest.TestCase):
         records = json.loads((root / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
         targets = {target["path"] for record in records for target in record.get("targets", [])
                    if isinstance(target, dict) and target.get("path") and target.get("symbol")}
+        targets.update(("m3/docs/name-mapping.schema.json", "m3/migration/requirements.txt"))
         for record in records:
             relation = record.get("companion_of")
             if relation is None:
