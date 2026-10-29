@@ -59,6 +59,9 @@ The two current native algorithms are:
 
 - `sort`: stable bottom-up mergesort of primitive `int` line offsets,
   comparing unsigned UTF-16 code units exactly as `String.compareTo` does.
+  Two packed 64-bit lexical prefix signals and the original length are
+  manufactured once per line. Native comparison uses those primitive keys
+  first, consulting bounded JNI regions only for long colliding prefixes.
   Ascending and descending order preserve equal-line stability. Java owns
   the original `TextLine` instances and the existing line-ending repair.
 - `uniq`: adjacent (not global) duplicate detection into a packed `long[]`
