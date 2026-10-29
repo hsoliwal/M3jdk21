@@ -4,76 +4,84 @@
  */
 package com.m3.collections;
 
+import java.util.Objects;
+
 /**
- * M3 five-library superset scaffold {@code M3FixedSizeLongListView}: API group {@code FIXED_SIZE_LONG_LIST} over arrays and state masks.
+ * A fixed-size, writable primitive-long view backed by the caller's array.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-synexia-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK Arrays.asList: fixed-size writable array view [license GPLv2+CPE; SUPERSET_VIEW VIEW_OF:M3LongCompositeViews; priority P2; matrix owner M3LongCompositeViews]</li>
- * </ul>
+ * <p>Like {@link java.util.Arrays#asList(Object...)}, the view exposes writes in
+ * both directions and refuses attempts to change its length. Unlike the JDK
+ * generic list, it stores primitive {@code long} values without boxing or
+ * per-element objects. The array is never copied on construction; only an
+ * explicit {@link #toArray()} makes a detached copy. Not thread-safe.</p>
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] valueLane}; offset scheme identity offsets over caller array; state-mask bits FIXED_SIZE; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: direct lane view; identity offsets / FIXED_SIZE flag.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>This M3-specific type does not replace {@code java.util.List} or modify
+ * any public JDK 21 contract. The original M3 public signatures and catalogue
+ * descriptor remain unchanged.</p>
  */
 public final class M3FixedSizeLongListView {
-    /** State-mask bit {@code FIXED_SIZE} (per-slot state word, bit 0). */
+    /** The view always has a fixed logical length. */
     static final long STATE_FIXED_SIZE = 1L << 0;
+    private static final long[] EMPTY = new long[0];
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private long[] valueLane = new long[0];
-    /** Per-slot state words (FIXED_SIZE); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    /** Authoritative caller-owned storage, with logical index = array offset. */
+    private final long[] valueLane;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Empty fixed-size view. */
     public M3FixedSizeLongListView() {
+        valueLane = EMPTY;
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private M3FixedSizeLongListView(long[] backing) {
+        valueLane = Objects.requireNonNull(backing, "backing");
+    }
+
+    /** Preserve the original public provider/owner catalogue identity. */
     public static String scaffoldDescriptor() {
         return "M3FixedSizeLongListView|FIXED_SIZE_LONG_LIST|LONG|FIXED_SIZE|long[] valueLane";
     }
 
-    /** Arrays.asList (fixed-size writable view) (scaffold: not yet received). */
+    /** Retain the actual array; external writes are immediately visible. */
     public static M3FixedSizeLongListView of(long[] backing) {
-        throw new M3NotYetReceived("M3FixedSizeLongListView.of");
+        return new M3FixedSizeLongListView(backing);
     }
 
-    /** List.get (scaffold: not yet received). */
+    /** O(1) indexed read; out-of-range access throws before reading storage. */
     public long get(int index) {
-        throw new M3NotYetReceived("M3FixedSizeLongListView.get");
+        return valueLane[Objects.checkIndex(index, valueLane.length)];
     }
 
-    /** List.set (writes through to backing array) (scaffold: not yet received). */
+    /** O(1) indexed write-through returning the previous primitive value. */
     public long set(int index, long value) {
-        throw new M3NotYetReceived("M3FixedSizeLongListView.set");
+        int checked = Objects.checkIndex(index, valueLane.length);
+        long previous = valueLane[checked];
+        valueLane[checked] = value;
+        return previous;
     }
 
-    /** List.indexOf (scaffold: not yet received). */
+    /** First occurrence under signed primitive-long equality, or {@code -1}. */
     public int indexOf(long value) {
-        throw new M3NotYetReceived("M3FixedSizeLongListView.indexOf");
+        for (int i = 0; i < valueLane.length; i++) {
+            if (valueLane[i] == value) return i;
+        }
+        return -1;
     }
 
-    /** List.contains (scaffold: not yet received). */
     public boolean contains(long value) {
-        throw new M3NotYetReceived("M3FixedSizeLongListView.contains");
+        return indexOf(value) >= 0;
     }
 
-    /** List.toArray (copy) (scaffold: not yet received). */
+    /** Detached copy; mutating the result never changes the backing array. */
     public long[] toArray() {
-        throw new M3NotYetReceived("M3FixedSizeLongListView.toArray");
+        return valueLane.clone();
     }
 
-    /** List.size (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3FixedSizeLongListView.size");
+        return valueLane.length;
     }
 
-    /** UOE contract once received (fixed size) (scaffold: not yet received). */
+    /** Fixed-size contract: append is forbidden even when the view is empty. */
     public boolean add(long value) {
-        throw new M3NotYetReceived("M3FixedSizeLongListView.add");
+        throw new UnsupportedOperationException("fixed-size long array view");
     }
 }
