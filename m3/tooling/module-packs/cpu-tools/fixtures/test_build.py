@@ -251,6 +251,26 @@ public class JavaTmpProbe {
                 with self.assertRaisesRegex(ValueError, message):
                     build.verify_jmod_native(self.native_archive(name, members), expected)
 
+    def test_native_text_binding_retains_exact_member_and_drift_refusals(self):
+        original = self.root / "text-owner.so"
+        original.write_bytes(b"exact independent compiled native text owner")
+        expected = build.sha256(original)
+        member = "lib/libm3textops.so"
+        valid = self.native_archive("valid-text.jmod", [(member, original.read_bytes())])
+        self.assertEqual(expected, build.verify_jmod_native(valid, expected, member))
+        with self.assertRaisesRegex(ValueError, "missing or duplicate"):
+            build.verify_jmod_native(valid, expected)
+        cases = (
+            ("text-missing.jmod", [], "missing or duplicate"),
+            ("text-wrong-owner.jmod", [("lib/libm3textio.so", original.read_bytes())], "missing or duplicate"),
+            ("text-duplicate.jmod", [(member, original.read_bytes()), (member, original.read_bytes())], "missing or duplicate"),
+            ("text-changed.jmod", [(member, b"different compiled owner")], "bytes differ"),
+        )
+        for name, members, message in cases:
+            with self.subTest(name=name):
+                with self.assertRaisesRegex(ValueError, message):
+                    build.verify_jmod_native(self.native_archive(name, members), expected, member)
+
     @unittest.skipUnless(sys.platform.startswith("linux") and shutil.which("cc") and shutil.which("objcopy"),
                          "Linux C compiler and objcopy are required for real ELF provenance")
     def test_real_elf_stripping_accepts_expected_and_refuses_unstripped_or_drift(self):

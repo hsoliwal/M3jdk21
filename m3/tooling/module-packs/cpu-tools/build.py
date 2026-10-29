@@ -37,7 +37,8 @@ TOOL_SUFFIXES = (
 CPU_MODULES = tuple("com.m3.tools." + value for value in TOOL_SUFFIXES) + ("com.m3.tools.cpu",)
 MODULES = tuple(sorted(TEXT_MODULES + CPU_MODULES))
 FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest",
-            "M3StructuredAtomsContract", "M3EvidenceMathContract")
+            "M3StructuredAtomsContract", "M3EvidenceMathContract",
+            "M3LogicFlowContract", "M3IndexedDataContract")
 FIXED_JAR_DATE = "2026-01-01T00:00:00Z"
 COMMAND_SECONDS = 115
 CLEANUP_SECONDS = 5
@@ -88,9 +89,8 @@ def verify_native_tool_identity(before, search_path, cwd):
     return after
 
 
-def verify_jmod_native(jmod, compiled_sha256):
+def verify_jmod_native(jmod, compiled_sha256, member="lib/libm3textio.so"):
     """Require one exact original JNI member before any jlink transformation."""
-    member = "lib/libm3textio.so"
     with zipfile.ZipFile(jmod) as archive:
         if archive.namelist().count(member) != 1:
             raise ValueError("missing or duplicate JMOD native member: " + member)
@@ -279,6 +279,7 @@ def qualify(args):
     existing = repo / "m3/tooling/module-packs/text-tools"
     source_roots = (existing / "src", owner / "src")
     native_source = required_file(existing / "native/m3textio.c")
+    native_text_source = required_file(existing / "native/m3textops.c")
     legal_roots = (("text-tools", existing / "legal"), ("cpu-tools", owner / "legal"))
     notices = []
     for label, directory in legal_roots:
@@ -323,7 +324,8 @@ def qualify(args):
     output = fresh_output(args.out, (jdk, *source_roots, *(path for _, path in legal_roots), owner / "fixtures",
                                     existing / "native", existing / "fixtures"))
     output.mkdir(parents=True, exist_ok=False)
-    for name in ("logs", "modules", "native", "native-expected", "jars", "legal", "java-tmp", "test-classes", "test-work"):
+    for name in ("logs", "modules", "native", "native-expected", "native-text", "native-text-expected",
+                 "jars", "legal", "java-tmp", "test-classes", "test-work"):
         (output / name).mkdir()
     command = Commands(output, repo, jdk)
     # jlink invokes the name objcopy. Keep its exact preflight PATH for every
@@ -339,7 +341,7 @@ def qualify(args):
                "packager": packager.relative_to(repo).as_posix()}
     write_json(output / "BUILD_RECEIPT.json", receipt)
     try:
-        inputs = sorted(set(files + notices + fixture_files + (native_source, packager,
+        inputs = sorted(set(files + notices + fixture_files + (native_source, native_text_source, packager,
                             packager_support, existing_smoke, required_file(owner / "build.py"),
                             required_file(owner / "pom.xml"), required_file(owner / "fixtures/test_build.py"))))
         source_seals = {path: sha256(path) for path in inputs}
@@ -397,6 +399,21 @@ def qualify(args):
         shutil.copyfile(compiled_native, expected_native)
         command.run("native-strip-expected", objcopy, "-g", expected_native)
         native_receipt["expected_stripped_sha256"] = sha256(expected_native)
+        # Reuse the existing text-tools runner's original text JNI owner and module binding.
+        command.run("native-text-compile", compiler, "-std=c11", "-Wall", "-Wextra", "-Werror",
+                    "-shared", "-fPIC", "-I" + str(jdk / "include"),
+                    "-I" + str(jdk / "include/linux"), "-o", output / "native-text/libm3textops.so", native_text_source)
+        compiled_text_native = output / "native-text/libm3textops.so"
+        expected_text_native = output / "native-text-expected/libm3textops.so"
+        native_text_receipt = {"source": native_text_source.relative_to(repo).as_posix(),
+                               "compiled": "native-text/libm3textops.so", "compiled_sha256": sha256(compiled_text_native),
+                               "expected_stripped": "native-text-expected/libm3textops.so",
+                               "jmod": "pack/jmods/jdk.m3.text.jmod", "jmod_member": "lib/libm3textops.so",
+                               "linked": "pack/image/lib/libm3textops.so", "transformation": "objcopy -g"}
+        receipt["native_text_provenance"] = native_text_receipt
+        shutil.copyfile(compiled_text_native, expected_text_native)
+        command.run("native-text-strip-expected", objcopy, "-g", expected_text_native)
+        native_text_receipt["expected_stripped_sha256"] = sha256(expected_text_native)
         rows = [("artifact", "version", "jar", "module", "requires", "disposition")]
         artifact_rows = []
         for module in MODULES:
@@ -422,6 +439,7 @@ def qualify(args):
                     "--image-tsv", image_tsv, "--manifest", manifest, "--layer-root", repo,
                     "--out", output / "pack", "--legal-notices", output / "legal",
                     "--native-library", "jdk.m3.io=" + str(output / "native"),
+                    "--native-library", "jdk.m3.text=" + str(output / "native-text"),
                     "--add-modules", "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps",
                     java_tmp_dir=output / "java-tmp")
         jmods = output / "pack/jmods"
@@ -437,6 +455,9 @@ def qualify(args):
             if module == "jdk.m3.io":
                 native_receipt["jmod_member_sha256"] = verify_jmod_native(
                     jmod, native_receipt["compiled_sha256"])
+            if module == "jdk.m3.text":
+                native_text_receipt["jmod_member_sha256"] = verify_jmod_native(
+                    jmod, native_text_receipt["compiled_sha256"], native_text_receipt["jmod_member"])
             artifact.update({"jmod": jmod.relative_to(output).as_posix(), "jmod_sha256": sha256(jmod),
                              "legal_readback": "EXACT_HASH_MATCH"})
         write_json(output / "MODULE_ARTIFACTS.json", artifact_rows)
@@ -454,6 +475,9 @@ def qualify(args):
         bundled_native = image / "lib/libm3textio.so"
         native_receipt["linked_sha256"] = verify_linked_native(
             bundled_native, native_receipt["expected_stripped_sha256"])
+        bundled_text_native = image / "lib/libm3textops.so"
+        native_text_receipt["linked_sha256"] = verify_linked_native(
+            bundled_text_native, native_text_receipt["expected_stripped_sha256"])
         command.run("image-fixtures-javac", image / "bin/javac", "-source", "21", "-target", "21",
                     "-Xlint:all,-module", "-Werror", "--add-modules", ",".join(MODULES),
                     "-d", output / "test-classes", *fixture_files, existing_smoke)
@@ -493,6 +517,14 @@ def qualify(args):
             raise ValueError("JMOD native identity changed during qualification")
         verify_linked_native(bundled_native, native_receipt["expected_stripped_sha256"])
         native_receipt["before_after"] = "EXACT_COMPILED_JMOD_EXPECTED_LINKED_HASH_MATCH"
+        if (sha256(compiled_text_native) != native_text_receipt["compiled_sha256"]
+                or sha256(expected_text_native) != native_text_receipt["expected_stripped_sha256"]):
+            raise ValueError("native text provenance input changed during qualification")
+        if verify_jmod_native(jmods / "jdk.m3.text.jmod", native_text_receipt["compiled_sha256"],
+                              native_text_receipt["jmod_member"]) != native_text_receipt["jmod_member_sha256"]:
+            raise ValueError("JMOD native text identity changed during qualification")
+        verify_linked_native(bundled_text_native, native_text_receipt["expected_stripped_sha256"])
+        native_text_receipt["before_after"] = "EXACT_COMPILED_JMOD_EXPECTED_LINKED_HASH_MATCH"
         receipt["native_tools_before_after"] = "EXACT_PATH_RESOLUTION_AND_EXECUTABLE_HASH_MATCH"
         receipt["native_path_sha256_after"] = hashlib.sha256(command.environment["PATH"].encode("utf-8")).hexdigest()
         receipt.update({"status": "PASS", "fixture_classes": list(FIXTURES) + ["M3TextSmoke"],
@@ -500,6 +532,8 @@ def qualify(args):
                         "legal_notice_sha256": legal_seals, "legal_jmod_and_image_readback": "EXACT_HASH_MATCH_ALL_20_MODULES",
                         "m3_string_storage_enabled_fixtures": ["M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"],
                         "jni_owner": native_source.relative_to(repo).as_posix(),
+                        "jni_text_owner": native_text_source.relative_to(repo).as_posix(),
+                        "jni_text_sha256": sha256(bundled_text_native),
                         "jni_sha256": sha256(bundled_native), "image_module_count": len(actual),
                         "module_artifacts_sha256": sha256(output / "MODULE_ARTIFACTS.json"),
                         "linked_image": "pack/image", "cli_replay": "EXACT_OUTPUT_MATCH"})
@@ -509,7 +543,7 @@ def qualify(args):
     finally:
         receipt["commands_sha256"] = sha256(output / "COMMANDS.json") if (output / "COMMANDS.json").exists() else None
         write_json(output / "BUILD_RECEIPT.json", receipt)
-    print("M3_CPU_TOOLS_PACK_PASS modules=20 fixtures=4 jni=existing_owner replay=exact")
+    print("M3_CPU_TOOLS_PACK_PASS modules=20 fixtures=" + str(len(FIXTURES)) + " jni=existing_owner replay=exact")
 
 
 def main():
