@@ -1,0 +1,105 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Collections additive JDK8292955 Java21 acceptance
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/Collections.java'
+      - 'src/java.base/share/classes/java/util/M3CollectionViews.java'
+      - 'src/java.base/share/classes/java/util/M3CollectionMasks.java'
+      - 'test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java'
+      - '.github/workflows/m3jdk21-checkedmap-additive-receive.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-additive-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            src/java.base/share/classes/java/util/Collections.java
+            src/java.base/share/classes/java/util/M3CollectionViews.java
+            src/java.base/share/classes/java/util/M3CollectionMasks.java
+            test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: c5e042336c7ddd6532528266d7c15db20825f75a
+          path: .jdk8292955-received
+          persist-credentials: false
+          sparse-checkout: |
+            src/java.base/share/classes/java/util/Collections.java
+          sparse-checkout-cone-mode: false
+      - name: Prove 8292955 postimage retained through one exact additive M3 source atom
+        run: |
+          set -euo pipefail
+          test "$(git hash-object src/java.base/share/classes/java/util/Collections.java)" = "26453d5c751859435b9b0489a68f64ba157026e3"
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+
+          source = Path("src/java.base/share/classes/java/util/Collections.java").read_bytes()
+          prior = Path(".jdk8292955-received/src/java.base/share/classes/java/util/Collections.java").read_bytes()
+          digest = lambda data: hashlib.sha256(data).hexdigest()
+          if digest(prior) != "a6425169f9395d7ee48dccbcf82b708018ac0a92f82d12825df7ec413f101c47":
+              raise AssertionError("JDK-8292955 received postimage baseline drift")
+          if digest(source) != "cc408e4606352b8ccca3b6f8e3dc688b13684506722e818ef5fe301b6ff0687e":
+              raise AssertionError("unreviewed new M3 Collections source drift")
+          atom = (
+              b"            Objects.requireNonNull(remappingFunction);\n"
+              b"            typeCheck(key, value);\n"
+              b"            return m.merge(key, value, (v1, v2) -> {"
+          )
+          if prior.count(atom) != 1 or source.count(atom) != 1:
+              raise AssertionError("type-checking JDK-8292955 behavioral atom lost or duplicated")
+          start = 0
+          while start < len(prior) and prior[start] == source[start]:
+              start += 1
+          suffix = 0
+          while suffix < len(prior) - start and prior[-1-suffix] == source[-1-suffix]:
+              suffix += 1
+          if start + suffix != len(prior):
+              raise AssertionError("non-additive source drift; historical JDK source modified")
+          added = source[start:len(source)-suffix]
+          if start != 3833 or len(added) != 14532 or digest(added) != "1869494d1848d0c6114c52a11dacc63b63fc474214f923042e48057605d61eb7":
+              raise AssertionError("M3 collection views/identity addition not qualified")
+          if source[:start] + source[start+len(added):] != prior:
+              raise AssertionError("old Collections body not fully reconstructed")
+          if added.count(b"M3CollectionViews") < 10 or b"static boolean m3IdentityKeys" not in added:
+              raise AssertionError("M3 collection-view capability loss")
+          print("PASS: 8292955 source and the exact 14532-byte M3 additive superset")
+          PY
+      - name: Compile the evolved java.base collections owners with strict Java21 javac
+        run: |
+          set -euo pipefail
+          src=src/java.base/share/classes/java/util
+          scratch="${RUNNER_TEMP}/m3checkedmap-superset"
+          mkdir -p "$scratch/classes" "$scratch/tests"
+          javac -g --source 21 --target 21 -Xlint:all -Werror \
+            --patch-module java.base=src/java.base/share/classes \
+            -d "$scratch/classes" \
+            "$src/Collections.java" "$src/M3CollectionViews.java" "$src/M3CollectionMasks.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$scratch/tests" \
+            test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java
+      - name: Run the original received 84-assert CheckedMap test across four JVM modes
+        run: |
+          set -euo pipefail
+          scratch="${RUNNER_TEMP}/m3checkedmap-superset"
+          for mode in default -Xint -XX:+CompactStrings -XX:-CompactStrings; do
+            flags=()
+            if [ "$mode" != default ]; then flags=("$mode"); fi
+            java "${flags[@]}" -XX:-OmitStackTraceInFastThrow \
+              --patch-module java.base="$scratch/classes" \
+              -cp "$scratch/tests" CheckedMapMerge8292955Test > "$scratch/$mode.out"
+            grep -qx 'PASS JDK-8292955 checked-map jtreg assertions=84' "$scratch/$mode.out"
+            cat "$scratch/$mode.out"
+          done
