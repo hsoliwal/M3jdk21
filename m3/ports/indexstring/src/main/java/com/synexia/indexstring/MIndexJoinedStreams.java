@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package com.synexia.indexstring;
 
 import java.io.IOException;
@@ -31,7 +32,22 @@ final class MIndexJoinedStreams {
     private int markedRemaining;
 
     Cursor(Buffer[] segments, int length) {
-      this.segments = segments;
+      if (length < 0) throw new IllegalArgumentException("negative joined length");
+      Buffer[] checked = Objects.requireNonNull(segments, "segments");
+      Buffer[] snapshot = new Buffer[checked.length];
+      long available = 0;
+      for (int i = 0; i < checked.length; i++) {
+        Buffer part = Objects.requireNonNull(checked[i], "segment");
+        // Snapshot descriptor geometry, retain the same immutable payload, and normalize reset.
+        snapshot[i] = part instanceof ByteBuffer bytes
+            ? bytes.slice().asReadOnlyBuffer()
+            : ((CharBuffer) part).slice().asReadOnlyBuffer();
+        available += snapshot[i].remaining();
+      }
+      if (available < length) {
+        throw new IllegalStateException("joined buffers do not cover their declared length");
+      }
+      this.segments = snapshot;
       remaining = length;
       markedRemaining = length;
     }
@@ -84,6 +100,7 @@ final class MIndexJoinedStreams {
 
     @Override public synchronized int read() throws IOException {
       cursor.requireOpen();
+      if (cursor.remaining == 0) return -1;
       ByteBuffer part = (ByteBuffer) cursor.current();
       if (part == null) return -1;
       cursor.remaining--;
@@ -128,6 +145,7 @@ final class MIndexJoinedStreams {
 
     @Override public synchronized int read() throws IOException {
       cursor.requireOpen();
+      if (cursor.remaining == 0) return -1;
       CharBuffer part = (CharBuffer) cursor.current();
       if (part == null) return -1;
       cursor.remaining--;
