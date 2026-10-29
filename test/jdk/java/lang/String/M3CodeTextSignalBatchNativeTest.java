@@ -77,6 +77,7 @@ public final class M3CodeTextSignalBatchNativeTest {
         saturation();
         randomized();
         sequentialMutation();
+        repeatedRows();
         concurrentBatches();
         System.out.println("PASS lexical JNI parity: checks=" + checks
                 + " comparedRows=" + comparedRows + " batches=" + batches
@@ -302,6 +303,44 @@ public final class M3CodeTextSignalBatchNativeTest {
         check(units, offsets, lengths);
         lengths[0] = 1;
         check(units, offsets, lengths);
+    }
+
+    private static void repeatedRows() throws Exception {
+        char[] units = (";::->\u1680\uD800{}()" + "x".repeat(1013)).repeat(5).toCharArray();
+        for (int rows : new int[] {0, 1, 2, 127, 128, 129, 255, 256, 257, 513}) {
+            int[] offsets = new int[rows];
+            int[] lengths = new int[rows];
+            for (int width : new int[] {1, 2, 3, 127, 128, 129, 513}) {
+                for (int row = 0; row < rows; row++) {
+                    int group = row / width;
+                    offsets[row] = switch (group % 5) {
+                        case 0, 1 -> 0;
+                        case 2, 3 -> 1023;
+                        default -> units.length;
+                    };
+                    lengths[row] = switch (group % 5) {
+                        case 0, 2 -> 1025;
+                        case 1, 3 -> 1;
+                        default -> 0;
+                    };
+                }
+                check(units, offsets, lengths);
+                // The same coordinates in another call must observe fresh input bytes.
+                char previous = units[0];
+                units[0] = previous == ';' ? 'x' : ';';
+                check(units, offsets, lengths);
+                units[0] = previous;
+            }
+        }
+        // Duplicates never suppress admission of a malformed final row.
+        int[] offsets = new int[257];
+        int[] lengths = new int[257];
+        Arrays.fill(lengths, 1);
+        offsets[256] = units.length;
+        expect(IllegalArgumentException.class,
+                () -> explicit(units, offsets, lengths, LIMITS, javaBackend));
+        expect(IllegalArgumentException.class,
+                () -> explicit(units, offsets, lengths, LIMITS, nativeBackend));
     }
 
     private static void concurrentBatches() throws Exception {
