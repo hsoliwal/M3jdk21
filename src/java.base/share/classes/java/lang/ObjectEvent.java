@@ -56,32 +56,56 @@ public final class ObjectEvent {
         this.coalesced = coalesced;
     }
 
-    /** Returns the receiving payload owner, never an inaccessible descendant. */
+    /**
+     * Returns the receiving payload owner, never an inaccessible descendant.
+     *
+     * @return the receiving payload owner
+     */
     public Object source() {
         return source;
     }
 
-    /** Returns this subscriber's authorized field, or null for a root subscription. */
+    /**
+     * Returns this subscriber's authorized field, or null for a root subscription.
+     *
+     * @return the authorized field, or null for a root subscription
+     */
     public M3Object.Field field() {
         return field;
     }
 
-    /** Returns the subscribed invalidation bits included in this delivery. */
+    /**
+     * Returns the subscribed invalidation bits included in this delivery.
+     *
+     * @return the subscribed invalidation bits included in this delivery
+     */
     public int mask() {
         return mask;
     }
 
-    /** Returns the first included publication sequence at the receiving owner. */
+    /**
+     * Returns the first included publication sequence at the receiving owner.
+     *
+     * @return the first included publication sequence at the receiving owner
+     */
     public long firstSequence() {
         return firstSequence;
     }
 
-    /** Returns the last included publication sequence at the receiving owner. */
+    /**
+     * Returns the last included publication sequence at the receiving owner.
+     *
+     * @return the last included publication sequence at the receiving owner
+     */
     public long sequence() {
         return sequence;
     }
 
-    /** Returns the selected binding generation, or zero for a root event. */
+    /**
+     * Returns the selected binding generation, or zero for a root event.
+     *
+     * @return the selected binding generation, or zero for a root event
+     */
     public long generation() {
         return generation;
     }
@@ -90,6 +114,8 @@ public final class ObjectEvent {
      * Returns an opaque originating observation identity, or zero when multiple
      * originating owners were coalesced. It is not an address, object reference
      * or stable identifier across observation lifetimes or VMs.
+     *
+     * @return the originating observation identity, or zero for coalesced origins
      */
     public long originId() {
         return originId;
@@ -98,12 +124,18 @@ public final class ObjectEvent {
     /**
      * Returns the last included originating sequence, or zero when originId is
      * zero. No historical originating object is retained by this envelope.
+     *
+     * @return the last originating sequence, or zero when the origin identity is unknown
      */
     public long originSequence() {
         return originSequence;
     }
 
-    /** Returns whether more than one publication was combined for this subscriber. */
+    /**
+     * Returns whether more than one publication was combined for this subscriber.
+     *
+     * @return whether more than one publication was combined for this subscriber
+     */
     public boolean coalesced() {
         return coalesced;
     }
@@ -112,6 +144,8 @@ public final class ObjectEvent {
      * Reads the latest selected field through the subscriber's authority, or
      * returns source for a root event. The value can differ from its value at
      * publication or from another read of this same event.
+     *
+     * @return the latest selected field value, or the source for a root event
      */
     public Object currentValue() {
         return field == null ? source : field.get();

@@ -96,6 +96,9 @@ public interface PrimitiveIterator<T, T_CONS> extends Iterator<T> {
         /**
          * Primitive iterator traversal with a borrowed monitor and no boxing.
          * One unit is credited after each completed consumer invocation.
+         *
+         * @param action the action to perform for each remaining element
+         * @param monitor the borrowed progress and cancellation monitor
          */
         default void forEachRemainingIntMonitored(IntConsumer action, java.util.concurrent.ProgressMonitor monitor) {
             Objects.requireNonNull(action);
@@ -180,6 +183,9 @@ public interface PrimitiveIterator<T, T_CONS> extends Iterator<T> {
         /**
          * Primitive iterator traversal with a borrowed monitor and no boxing.
          * One unit is credited after each completed consumer invocation.
+         *
+         * @param action the action to perform for each remaining element
+         * @param monitor the borrowed progress and cancellation monitor
          */
         default void forEachRemainingLongMonitored(LongConsumer action, java.util.concurrent.ProgressMonitor monitor) {
             Objects.requireNonNull(action);
@@ -263,6 +269,9 @@ public interface PrimitiveIterator<T, T_CONS> extends Iterator<T> {
         /**
          * Primitive iterator traversal with a borrowed monitor and no boxing.
          * One unit is credited after each completed consumer invocation.
+         *
+         * @param action the action to perform for each remaining element
+         * @param monitor the borrowed progress and cancellation monitor
          */
         default void forEachRemainingDoubleMonitored(DoubleConsumer action, java.util.concurrent.ProgressMonitor monitor) {
             Objects.requireNonNull(action);

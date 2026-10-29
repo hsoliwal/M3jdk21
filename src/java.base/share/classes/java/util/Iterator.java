@@ -138,6 +138,9 @@ public interface Iterator<E> {
      * never begun, finished or cancelled by this method. One unit is credited
      * after each successfully completed element/callback operation.
      * Cancellation is checked at delegate boundaries only.
+     *
+     * @param action the action to perform for each remaining element
+     * @param monitor the borrowed progress and cancellation monitor
      */
     default void forEachRemainingMonitored(Consumer<? super E> action, java.util.concurrent.ProgressMonitor monitor) {
         Objects.requireNonNull(action);

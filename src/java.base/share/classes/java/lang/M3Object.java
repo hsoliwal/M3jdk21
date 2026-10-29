@@ -58,7 +58,11 @@ public final class M3Object {
         return M3ObjectRuntime.of(Objects.requireNonNull(source, "source"));
     }
 
-    /** Returns the original payload owner. */
+    /**
+     * Returns the original payload owner.
+     *
+     * @return the original payload owner
+     */
     public Object source() {
         return source;
     }
@@ -120,6 +124,8 @@ public final class M3Object {
     /**
      * Returns the lazily read startup observation policy. Changes to system
      * properties after VM startup do not enable or disable this policy.
+     *
+     * @return whether object observation is enabled by the startup policy
      */
     public static boolean observationEnabled() {
         return M3ObjectRuntime.enabled();
@@ -135,22 +141,38 @@ public final class M3Object {
             this.plan = plan;
         }
 
-        /** Returns the original field receiver. */
+        /**
+         * Returns the original field receiver.
+         *
+         * @return the original field receiver
+         */
         public Object source() {
             return owner.source;
         }
 
-        /** Returns the declared field owner. */
+        /**
+         * Returns the declared field owner.
+         *
+         * @return the class declaring the field
+         */
         public Class<?> declaringType() {
             return plan.declaringType;
         }
 
-        /** Returns the field name. */
+        /**
+         * Returns the field name.
+         *
+         * @return the field name
+         */
         public String name() {
             return plan.name;
         }
 
-        /** Returns the exact field type. */
+        /**
+         * Returns the exact field type.
+         *
+         * @return the exact field type
+         */
         public Class<?> type() {
             return plan.type;
         }
@@ -167,6 +189,7 @@ public final class M3Object {
          * Reads the latest value with volatile VarHandle semantics. Primitive
          * values are boxed at this explicit materialization boundary.
          *
+         * @return the latest field value, boxed if the field has a primitive type
          * @throws IllegalArgumentException if the field cannot be resolved;
          *         the cause is the lookup failure
          * @throws ClassCastException if the Lookup restricts this receiver

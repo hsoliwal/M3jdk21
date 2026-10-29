@@ -371,11 +371,6 @@ public final class Strings {
      * @param source the string to search
      * @param needle the text to find
      * @return the first matching UTF-16 index, or -1 if no match exists
-     * Finds the first case-insensitive occurrence, starting at index zero.
-     *
-     * @param source the string to search
-     * @param needle the literal string to find
-     * @return the first matching index, or -1 if no occurrence exists
      * @throws NullPointerException if either argument is null
      */
     public static int indexOfIgnoreCase(String source, String needle) {
@@ -389,11 +384,6 @@ public final class Strings {
      * @param source the string to search
      * @param needle the text to find
      * @return true if a match exists
-     * Tests whether the source contains the needle without regard to case.
-     *
-     * @param source the string to search
-     * @param needle the literal string to find
-     * @return true if a case-insensitive occurrence exists
      * @throws NullPointerException if either argument is null
      */
     public static boolean containsIgnoreCase(String source, String needle) {

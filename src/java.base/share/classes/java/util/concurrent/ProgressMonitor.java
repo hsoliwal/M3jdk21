@@ -30,10 +30,6 @@ public interface ProgressMonitor {
      *
      * @param task the task description
      * @param totalWork the estimated work, or {@link #UNKNOWN_WORK}
-     * Begins a task. The default implementation does nothing.
-     *
-     * @param task the task description
-     * @param totalWork the total work, or {@link #UNKNOWN_WORK} if unknown
      */
     default void begin(String task, long totalWork) { }
     /**
@@ -41,27 +37,18 @@ public interface ProgressMonitor {
      *
      * @param units the additional work units, with validation defined by the
      *              implementation
-     * Reports completed work. The default implementation does nothing.
-     *
-     * @param units the amount of newly completed work
      */
     default void worked(long units) { }
     /**
      * Reports a progress message. The default implementation does nothing.
      *
      * @param text the progress message
-     * Reports a message. The default implementation does nothing.
-     *
-     * @param text the message to report
      */
     default void message(String text) { }
     /**
      * Reports cooperative cancellation state. The default returns {@code false}.
      *
      * @return whether this monitor reports cancellation
-     * Reports whether cancellation has been requested.
-     *
-     * @return false in the default implementation
      */
     default boolean isCancelled() { return false; }
     /** Requests cooperative cancellation. The default implementation does nothing. */
