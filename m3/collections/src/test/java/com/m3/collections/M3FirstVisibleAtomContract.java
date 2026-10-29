@@ -21,7 +21,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
-/** Exact caller-boundary traces and failure prefixes for private first-visible selection. */
+/** Independent selection/predicate oracles and exact failure prefixes for first-visible selection. */
 public final class M3FirstVisibleAtomContract {
     private M3FirstVisibleAtomContract() { }
 
@@ -177,6 +177,41 @@ public final class M3FirstVisibleAtomContract {
         };
     }
 
+    /** The JDK owner defines the legal directional candidates independently of wrapper dispatch. */
+    private static List<String> expectedPredicates(NavigableMap<Integer, String> owner,
+            boolean map, int selector, int operation) {
+        NavigableMap<Integer, String> candidates;
+        if (map) {
+            candidates = switch (operation) {
+                case 0 -> owner;
+                case 1 -> owner.descendingMap();
+                case 2 -> owner.headMap(7, false).descendingMap();
+                case 3 -> owner.tailMap(3, true);
+                default -> throw new AssertionError("operation");
+            };
+        } else {
+            candidates = switch (operation) {
+                case 0 -> owner.headMap(7, false).descendingMap();
+                case 1 -> owner.headMap(7, true).descendingMap();
+                case 2 -> owner.tailMap(3, true);
+                case 3 -> owner.tailMap(3, false);
+                default -> throw new AssertionError("operation");
+            };
+        }
+        List<String> expected = new ArrayList<>();
+        for (Map.Entry<Integer, String> entry : candidates.entrySet()) {
+            expected.add("predicate(" + entry.getKey() + (map ? "," + entry.getValue() : "") + ")");
+            if (visible(selector, entry.getKey())) break;
+        }
+        return expected;
+    }
+
+    private static void predicatePrefix(Trace trace, List<String> expected) {
+        List<String> observed = trace.tape.stream().filter(event -> event.startsWith("predicate(")).toList();
+        require(expected.equals(observed), "only directional stored candidates through first acceptance: "
+                + "expected=" + expected + " observed=" + observed);
+    }
+
     private static Object exercise(boolean map, boolean descending, int selector, int operation, Trace trace) {
         Comparator<Integer> order = Comparator.nullsFirst(Comparator.naturalOrder());
         TreeMap<Integer, String> owner = new TreeMap<>(order);
@@ -195,9 +230,16 @@ public final class M3FirstVisibleAtomContract {
             Map.Entry<Integer, String> result = mapOperation(filtered, operation);
             Map.Entry<Integer, String> oracle = mapOperation(expected, operation);
             require(Objects.equals(oracle, result), "map selection result");
+            predicatePrefix(trace, expectedPredicates(backing, true, selector, operation));
             if (result != null) {
                 require(result.getKey() == oracle.getKey(), "map key identity");
                 require(result.getValue() == oracle.getValue(), "map value identity");
+                try {
+                    result.setValue("forbidden");
+                    throw new AssertionError("navigation entry must remain immutable");
+                } catch (UnsupportedOperationException expectedFailure) {
+                    require(Objects.equals(oracle, result), "refused entry mutation preserves snapshot");
+                }
             }
             return result;
         }
@@ -210,6 +252,7 @@ public final class M3FirstVisibleAtomContract {
         Integer result = setOperation(filtered, operation);
         require(Objects.equals(setOperation(expected.navigableKeySet(), operation), result),
                 "set selection result");
+        predicatePrefix(trace, expectedPredicates(backing, false, selector, operation));
         return result;
     }
 
@@ -217,8 +260,10 @@ public final class M3FirstVisibleAtomContract {
         if (!condition) throw new AssertionError(message);
     }
 
-    /** Returns the complete deterministic transcript digest for the owning JUnit adapter. */
-    public static String verify() {
+    /** Diagnostic transcript identity accompanies semantic and failure-injection coverage. */
+    public record Verification(int normalCases, int failureProbes, String transcriptSha256) { }
+
+    public static Verification verifyContracts() {
         StringBuilder transcript = new StringBuilder();
         int normalCases = 0;
         int failureCases = 0;
@@ -257,8 +302,13 @@ public final class M3FirstVisibleAtomContract {
         } catch (NoSuchAlgorithmException failure) { throw new AssertionError(failure); }
         System.out.println("PASS first-visible normal=" + normalCases + " failureProbes=" + failureCases
                 + " tape=" + hash);
-        return hash;
+        require(normalCases == 64, "all declared selection scenarios executed");
+        require(failureCases > normalCases, "runtime/error injection covers observed caller boundaries");
+        return new Verification(normalCases, failureCases, hash);
     }
+
+    /** Retained diagnostic entrypoint; dispatch changes do not define collection semantics. */
+    public static String verify() { return verifyContracts().transcriptSha256(); }
 
     public static void main(String[] args) { verify(); }
 }

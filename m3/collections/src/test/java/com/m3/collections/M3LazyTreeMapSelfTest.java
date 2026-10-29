@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: cancellation fixture setup limited to the first provider attempt.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: align repeated live-entry identity with the existing view-local facade cache.
+// Modified 2026-10-29: assert fresh caller-owned live entries and stale iterator/projection behavior.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
@@ -80,12 +81,30 @@ public final class M3LazyTreeMapSelfTest {
         Object replaced = new Object(); same(identity, view.put(6, replaced));
         same(identity, snapshot.getValue()); same(replaced, map.get(6));
         Map.Entry<Integer, Object> repeated = view.entrySet().iterator().next();
-        require(live == repeated, "same view reuses its cached live entry projection");
+        require(live != repeated, "each request creates a fresh caller-owned live entry projection");
+        equal(live.getKey(), repeated.getKey()); same(identity, repeated.getValue()); equal(2, calls[0]);
         Object explicit = new Object(); same(identity, live.setValue(explicit)); same(explicit, map.get(7));
+        same(explicit, repeated.getValue());
+        Object second = new Object(); same(explicit, repeated.setValue(second));
+        same(second, live.getValue()); same(second, map.get(7)); equal(2, calls[0]);
+        Iterator<Map.Entry<Integer, Object>> entries = view.entrySet().iterator();
+        Map.Entry<Integer, Object> heldFirst = entries.next();
+        Map.Entry<Integer, Object> heldSecond = entries.next();
+        require(heldFirst != heldSecond && heldFirst != live && heldFirst != repeated,
+                "iterator movement never recycles a caller-held projection");
+        equal(7, heldFirst.getKey()); equal(6, heldSecond.getKey());
+        same(second, heldFirst.getValue()); same(replaced, heldSecond.getValue());
         M3Progress progress = M3Progress.of(5); view.preload(progress);
         equal(5, calls[0]); require(progress.isDone(), "bounded preload complete");
         equal(5, progress.getWorkedSoFar()); require(!map.isValueLoaded(2) && !map.isValueLoaded(8), "outside stays lazy");
         view.clear(); equal(5, calls[0]); equal(7, map.size()); map.verifyInvariants();
+        failure(ConcurrentModificationException.class, entries::hasNext);
+        failure(ConcurrentModificationException.class, entries::next);
+        equal(7, live.getKey()); equal(7, repeated.getKey());
+        equal(null, live.getValue()); equal(null, repeated.getValue());
+        failure(IllegalStateException.class, () -> live.setValue(explicit));
+        failure(IllegalStateException.class, () -> repeated.setValue(second));
+        equal(7, map.size()); equal(5, calls[0]);
         for (int i = 3; i < 8; i++) { map.defer(i); }
         require(!map.isValueLoaded(6), "free-slot flags reset");
         same(identity, map.get(6)); equal(6, calls[0]); map.verifyInvariants();

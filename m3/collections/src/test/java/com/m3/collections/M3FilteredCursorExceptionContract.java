@@ -104,7 +104,10 @@ public final class M3FilteredCursorExceptionContract {
                 TreeMap<Integer, Integer> tree = new TreeMap<>();
                 for (int i = 0; i < 7; i++) tree.put(i, i * 10);
                 NavigableMap<Integer, Integer> source = proxy(NavigableMap.class, tree, trace, "owner");
-                NavigableMap<Integer, Integer> view = M3FilteredViews.filterEntries(source, (key, value) -> true);
+                // The qualified near-entry dispatch returns immediately when the
+                // first candidate is visible. Reject it so this fixture actually
+                // reaches the bounded cursor factory whose failure is under test.
+                NavigableMap<Integer, Integer> view = M3FilteredViews.filterEntries(source, (key, value) -> false);
                 trace.failAt = failAt;
                 expectIdentity(trace, () -> navigate(view, 3, op));
             }
@@ -119,9 +122,25 @@ public final class M3FilteredCursorExceptionContract {
             TreeMap<Integer, Integer> comparatorMap = new TreeMap<>(mapComparator.comparator());
             for (int i = 0; i < 7; i++) comparatorMap.put(i, i);
             NavigableMap<Integer, Integer> wrappedMap = proxy(NavigableMap.class, comparatorMap, mapComparator, "owner");
-            NavigableMap<Integer, Integer> filteredMap = M3FilteredViews.filterEntries(wrappedMap, (key, value) -> true);
+            NavigableMap<Integer, Integer> filteredMap = M3FilteredViews.filterEntries(wrappedMap, (key, value) -> false);
             mapComparator.events.clear(); mapComparator.armComparator = true;
             expectIdentity(mapComparator, () -> navigate(filteredMap, 3, op));
+            require(mapComparator.events.stream().anyMatch(event -> event.startsWith("range.entries.iterator")),
+                    "late comparator witness reaches its armed range cursor");
+
+            // A user comparator can also fail in the first navigation lookup.
+            // Its original exception must escape before any visibility callback.
+            Trace firstComparator = new Trace();
+            TreeMap<Integer, Integer> firstOwner = new TreeMap<>(firstComparator.comparator());
+            for (int i = 0; i < 7; i++) firstOwner.put(i, i);
+            NavigableMap<Integer, Integer> firstSource = proxy(NavigableMap.class, firstOwner, firstComparator, "owner");
+            NavigableMap<Integer, Integer> firstView = M3FilteredViews.filterEntries(firstSource, (key, value) -> {
+                throw new AssertionError("visibility callback after comparator failure");
+            });
+            firstComparator.events.clear(); firstComparator.armed = true;
+            expectIdentity(firstComparator, () -> navigate(firstView, 3, op));
+            require(firstComparator.events.stream().noneMatch(event -> event.startsWith("range.")),
+                    "first-navigation failure terminates before range construction");
 
             Trace setComparator = new Trace();
             TreeSet<Integer> comparatorSet = new TreeSet<>(setComparator.comparator());
