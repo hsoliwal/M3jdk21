@@ -61,7 +61,14 @@ public final class M3LongRankBoundsContract {
     public static long contracts() {
         checks = 0;
         boolean expectedNative = Boolean.getBoolean("m3.rank.requireNative");
-        check(!expectedNative || M3LongRankBatchNative.nativeAvailable(), "JNI was required");
+        check(!expectedNative || M3LongRankBatchNative.fusedNativeAvailable(),
+                "fused JNI was required");
+        if (Boolean.getBoolean("m3.rank.expectLegacy")) {
+            if (!M3LongRankBatchNative.nativeAvailable()
+                    || M3LongRankBatchNative.fusedNativeAvailable()) {
+                throw new AssertionError("legacy native ABI capability mismatch");
+            }
+        }
         throwsType(NullPointerException.class, () ->
                 M3LongRankBatchNative.lowerUpperBounds(null, new long[0]));
         throwsType(NullPointerException.class, () ->

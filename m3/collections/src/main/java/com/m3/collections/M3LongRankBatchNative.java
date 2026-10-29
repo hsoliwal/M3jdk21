@@ -15,11 +15,19 @@ import java.util.Objects;
 public final class M3LongRankBatchNative {
     private static final int NATIVE_MIN_BATCH = 64;
     private static final boolean AVAILABLE = loadOptIn();
+    // A previously installed m3rankbatch can implement lowerBounds0 without
+    // the later fused-bounds JNI ABI. Keep that original native route usable.
+    private static final boolean FUSED_AVAILABLE = detectFusedCapability();
 
     private M3LongRankBatchNative() { }
 
     public static boolean nativeAvailable() {
         return AVAILABLE;
+    }
+
+    /** Whether this loaded library implements the fused rank-bounds ABI. */
+    public static boolean fusedNativeAvailable() {
+        return FUSED_AVAILABLE;
     }
 
     static int[] lowerBounds(long[] sorted, long[] queries) {
@@ -76,7 +84,7 @@ public final class M3LongRankBatchNative {
             Arrays.fill(pairs, 0);
             return;
         }
-        if (AVAILABLE && queries.length >= NATIVE_MIN_BATCH) {
+        if (FUSED_AVAILABLE && queries.length >= NATIVE_MIN_BATCH) {
             lowerUpperBounds0(sorted, queries, pairs);
             return;
         }
@@ -85,6 +93,19 @@ public final class M3LongRankBatchNative {
             int hi = M3LaneSearch.upperBound(sorted, lo, sorted.length, queries[i]);
             pairs[i << 1] = lo;
             pairs[(i << 1) + 1] = hi;
+        }
+    }
+
+    // Resolve a feature bit once, before any large input crosses JNI.
+    // Old libraries without capabilities0 remain valid for lowerBounds0.
+    private static boolean detectFusedCapability() {
+        if (!AVAILABLE) {
+            return false;
+        }
+        try {
+            return (capabilities0() & 1) != 0;
+        } catch (UnsatisfiedLinkError | SecurityException legacyLibrary) {
+            return false;
         }
     }
 
@@ -101,6 +122,9 @@ public final class M3LongRankBatchNative {
     }
 
     private static native void lowerBounds0(long[] sorted, long[] queries, int[] results);
+
+    /** Capability bit 0 signals the fused signed-long pair operation. */
+    private static native int capabilities0();
 
     private static native void lowerUpperBounds0(long[] sorted, long[] queries, int[] pairs);
 }

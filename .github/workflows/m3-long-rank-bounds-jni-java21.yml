@@ -35,10 +35,10 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = 'd100fe7c269ec40ed8cdcac1d9f7985422f0ca54'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = 'dd39cdbc0cbea5b44b0755837844aa068c3902f4'
           test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = 'acb4ab5ee856de814ec5dab5c134b9bf27b15f37'
-          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '52b2d518351ceabd87499c840d06d23d79e72439'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankBoundsContract.java)" = 'bcd12bca84aa58879536be2e3dd92e332af17b41'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '3596c0a98e615ae4ce1d4902d769ba7cef42af4f'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankBoundsContract.java)" = '6f009b204147d86a560599cce959f84822e53287'
           test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankBoundsTest.java)" = 'd52d3fc06ad65ab9861233c5142a139e3298caad'
       - name: Compile real original Java21 bisection owner and emit JNI header
         shell: bash
@@ -51,6 +51,8 @@ jobs:
             m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
             m3/collections/src/test/java/com/m3/collections/M3LongRankBoundsContract.java
           grep -Fq Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0 \
+            "$out/headers/com_m3_collections_M3LongRankBatchNative.h"
+          grep -Fq Java_com_m3_collections_M3LongRankBatchNative_capabilities0 \
             "$out/headers/com_m3_collections_M3LongRankBatchNative.h"
       - name: Build original C17 JNI library from generated headers
         shell: bash
@@ -65,6 +67,23 @@ jobs:
             -o "$out/native/libm3rankbatch.so"
           nm -D "$out/native/libm3rankbatch.so" | grep -Fq Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0
           nm -D "$out/native/libm3rankbatch.so" | grep -Fq Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0
+          nm -D "$out/native/libm3rankbatch.so" | grep -Fq Java_com_m3_collections_M3LongRankBatchNative_capabilities0
+          # Build the same original C owner in legacy ABI mode: old lowerBounds0
+          # remains available, newer fused symbols are deliberately absent.
+          mkdir -p "$out/legacy"
+          cc -DM3_RANK_LEGACY_ABI_TEST -std=c17 -Wall -Wextra -Werror -O2 -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$out/headers/com_m3_collections_M3LongRankBatchNative.h" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$out/legacy/libm3rankbatch.so"
+          nm -D "$out/legacy/libm3rankbatch.so" | grep -Fq Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0
+          if nm -D "$out/legacy/libm3rankbatch.so" | grep -Fq Java_com_m3_collections_M3LongRankBatchNative_capabilities0; then
+            echo 'Legacy ABI unexpectedly exports capabilities0' >&2; exit 1
+          fi
+          if nm -D "$out/legacy/libm3rankbatch.so" | grep -Fq Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0; then
+            echo 'Legacy ABI unexpectedly exports fused bounds' >&2; exit 1
+          fi
       - name: Real Java fallback and checked JNI in JIT and interpreter
         shell: bash
         run: |
@@ -76,6 +95,12 @@ jobs:
             -Djava.library.path="$out/missing" -cp "$out/classes" \
             com.m3.collections.M3LongRankBoundsContract | tee "$out/missing-native-fallback.txt"
           java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Dm3.rank.expectLegacy=true -Djava.library.path="$out/legacy" \
+            -cp "$out/classes" com.m3.collections.M3LongRankBoundsContract | tee "$out/legacy-jit.txt"
+          java -ea -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Dm3.rank.expectLegacy=true -Djava.library.path="$out/legacy" \
+            -cp "$out/classes" com.m3.collections.M3LongRankBoundsContract | tee "$out/legacy-int.txt"
+          java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
             -Dm3.rank.requireNative=true -Djava.library.path="$out/native" \
             -cp "$out/classes" com.m3.collections.M3LongRankBoundsContract | tee "$out/native-jit.txt"
           java -ea -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
@@ -83,6 +108,8 @@ jobs:
             -cp "$out/classes" com.m3.collections.M3LongRankBoundsContract | tee "$out/native-int.txt"
           grep -Fxq 'PASS M3_LONG_RANK_BOUNDS checks=56973' "$out/fallback.txt"
           cmp "$out/fallback.txt" "$out/missing-native-fallback.txt"
+          cmp "$out/fallback.txt" "$out/legacy-jit.txt"
+          cmp "$out/fallback.txt" "$out/legacy-int.txt"
           cmp "$out/fallback.txt" "$out/native-jit.txt"
           cmp "$out/fallback.txt" "$out/native-int.txt"
       - name: Preserve actual Java/JNI proof
