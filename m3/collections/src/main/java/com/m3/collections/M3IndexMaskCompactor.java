@@ -128,6 +128,36 @@ public final class M3IndexMaskCompactor {
         return countSelected(rowStates, requiredMask);
     }
 
+    /**
+     * Explicit backend for count-only state-mask queries; no row-ID array or
+     * selected-position array is materialized.
+     *
+     * <p>The two-argument {@link #selectedCount(byte[], int)} remains the
+     * Java-only compatibility API. A required native backend never falls back
+     * silently: a library built before this additive JNI entry point fails
+     * with an explicit ABI diagnostic while older selector calls still work.
+     * The state lane must remain unchanged during this operation.
+     */
+    public static int selectedCount(byte[] rowStates, int requiredMask, Backend backend) {
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(backend, "backend");
+        requireMask(requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            try {
+                return selectedCountNative(rowStates, requiredMask);
+            } catch (UnsatisfiedLinkError olderBinary) {
+                UnsatisfiedLinkError failure = new UnsatisfiedLinkError(
+                        "m3_collections_mask native count ABI unavailable");
+                failure.initCause(olderBinary);
+                throw failure;
+            }
+        }
+        return countSelected(rowStates, requiredMask);
+    }
+
     /** Count required/excluded matches without allocating an index array. */
     public static int selectedCount(byte[] rowStates, int requiredMask, int excludedMask) {
         Objects.requireNonNull(rowStates, "rowStates");
@@ -555,6 +585,8 @@ public final class M3IndexMaskCompactor {
 
     private static native int[] selectRangeNative(int[] orderedRows, byte[] rowStates,
             int first, int length, int requiredMask);
+
+    private static native int selectedCountNative(byte[] states, int requiredMask);
 
     private static native int[] selectNative(int[] orderedRows, byte[] rowStates,
                                               int requiredMask);

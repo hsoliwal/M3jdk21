@@ -35,6 +35,28 @@ static jint m3_count_window(JNIEnv *env, jbyteArray states,
     return kept;
 }
 
+/* Additive count-only JNI ABI borrowed as a concept from the Synexia
+ * M3IndexMaskCompactor donor. Reuse the target's existing bounded count kernel.
+ * Preserve all existing exports and never allocate output row/index arrays.
+ */
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3IndexMaskCompactor_selectedCountNative(
+        JNIEnv *env, jclass owner, jbyteArray states, jint required_mask) {
+    (void)owner;
+    if (states == NULL || required_mask < 0 || required_mask > 255) {
+        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+        if (type != NULL) {
+            (*env)->ThrowNew(env, type, "invalid primitive count inputs");
+            (*env)->DeleteLocalRef(env, type);
+        }
+        return 0;
+    }
+    jsize length = (*env)->GetArrayLength(env, states);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    jint result = m3_count_window(env, states, 0, length, required_mask);
+    return result < 0 ? 0 : result;
+}
+
 /* First retained ordinal in one bounded marks page. Zero-mask never reads marks. */
 static jsize m3_first_selected(const jbyte *marks, jsize size, jint mask) {
     if (mask == 0) return 0;
