@@ -1283,11 +1283,12 @@ public class JViewport extends JComponent implements Accessible
         Dimension blitSize,
         Rectangle blitPaint)
     {
+        // MIN_VALUE has no positive int magnitude and cannot describe a reusable blit.
         int dxAbs = Math.abs(dx);
         int dyAbs = Math.abs(dy);
         Dimension extentSize = getExtentSize();
 
-        if ((dx == 0) && (dy != 0) && (dyAbs < extentSize.height)) {
+        if ((dx == 0) && (dy != 0) && (dyAbs >= 0) && (dyAbs < extentSize.height)) {
             if (dy < 0) {
                 blitFrom.y = -dy;
                 blitTo.y = 0;
@@ -1310,7 +1311,7 @@ public class JViewport extends JComponent implements Accessible
             return true;
         }
 
-        else if ((dy == 0) && (dx != 0) && (dxAbs < extentSize.width)) {
+        else if ((dy == 0) && (dx != 0) && (dxAbs >= 0) && (dxAbs < extentSize.width)) {
             if (dx < 0) {
                 blitFrom.x = -dx;
                 blitTo.x = 0;
