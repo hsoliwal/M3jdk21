@@ -1,0 +1,30 @@
+path	conflict	side_m3	side_jdk21u	proposed_rule	m3_blob_origin
+.github/actions/do-build/action.yml	content	b461969b4b2	3e223dd01c9	keep M3 (fork CI/readme), port 21u workflow bumps only if CI needs them	-
+.github/actions/get-bundles/action.yml	content	3301d44bf0d	3e223dd01c9	keep M3 (fork CI/readme), port 21u workflow bumps only if CI needs them	-
+.github/actions/upload-bundles/action.yml	content	040c59a61be	3e223dd01c9	keep M3 (fork CI/readme), port 21u workflow bumps only if CI needs them	-
+.github/workflows/build-cross-compile.yml	content	6aa67d17700	3e223dd01c9	keep M3 (fork CI/readme), port 21u workflow bumps only if CI needs them	-
+.github/workflows/main.yml	content	02b5c0c8104	3e223dd01c9	keep M3 (fork CI/readme), port 21u workflow bumps only if CI needs them	-
+.github/workflows/test.yml	content	d291abd44a0	3e223dd01c9	keep M3 (fork CI/readme), port 21u workflow bumps only if CI needs them	-
+README.md	content	0dbe789907c	22d5e0d1f88	keep M3 (fork CI/readme), port 21u workflow bumps only if CI needs them	-
+src/hotspot/os/bsd/os_bsd.cpp	content	13868fa5e46	ad98f6cea04	hunk-level; HotSpot build NOT_RUN locally	-
+src/hotspot/os/linux/os_linux.cpp	content	2edaaa0d8d4	820ea47c86c	hunk-level; HotSpot build NOT_RUN locally	-
+src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	mainline 13987b42446
+src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	mainline 13987b42446
+src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java	content	26320a320fe	6de158a4cc3	hunk-level; javac gate	-
+src/java.base/share/classes/java/lang/AbstractStringBuilder.java	content	997ee2a304a	9f0c5be77fe	hunk-level: keep M3 String owner changes and apply 21u fixes; javac gate	-
+src/java.base/share/classes/java/lang/String.java	content	7a048dfcff1	fbc9fad823f	hunk-level: keep M3 String owner changes and apply 21u fixes; javac gate	-
+src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	not a mainline blob (M3-adapted)
+src/java.base/share/classes/sun/security/provider/ML_DSA.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	mainline f904480a496
+src/java.base/share/classes/sun/security/provider/ML_DSA_Impls.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	mainline fb95a539441
+src/java.base/share/classes/sun/security/provider/NamedKEM.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	mainline 3f53d571343
+src/java.base/share/classes/sun/security/provider/NamedKeyFactory.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	not a mainline blob (M3-adapted)
+src/java.base/share/classes/sun/security/provider/NamedKeyPairGenerator.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	mainline 3f53d571343
+src/java.base/share/classes/sun/security/provider/NamedSignature.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	mainline 3f53d571343
+src/java.base/share/classes/sun/security/provider/SHA3.java	content	26320a320fe	c68365aaa0d	hunk-level; javac gate	-
+src/java.base/share/classes/sun/security/provider/SHA3Parallel.java	add/add	26320a320fe	80b91394c9e	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	mainline 13987b42446
+src/java.base/share/classes/sun/security/provider/SunEntries.java	content	26320a320fe	c68365aaa0d	hunk-level; javac gate	-
+src/java.base/share/classes/sun/security/util/KeyUtil.java	content	26320a320fe	dce356baeb6	hunk-level; javac gate	-
+src/java.base/share/classes/sun/security/util/SignatureUtil.java	content	26320a320fe	43d7c0e0e2d	hunk-level; javac gate	-
+src/java.base/share/classes/sun/security/x509/NamedX509Key.java	add/add	26320a320fe	1e68f118235	add/add: compare M3 JEP 496/497 backport with 21u official backport; prefer 21u text, keep M3 deltas as follow-up	not a mainline blob (M3-adapted)
+src/java.base/share/conf/security/java.security	content	26320a320fe	5adb1609d17	hunk-level; javac gate	-
+src/java.desktop/macosx/classes/sun/lwawt/macosx/CAccessibility.java	content	623a0d67c0a	e57fbd42eb8	hunk-level; javac gate	-

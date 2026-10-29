@@ -1,0 +1,211 @@
+jbs_id	area	upstream_commit	title
+JDK-8309196	java-only	b2a5271e7451a7546a8293fc4bc4ccfaa1ffb0d7	Remove Thread.countStackFrames
+JDK-8282797	hotspot	c052756154603a9d3a13200fa407a2dc124437f3	`CompileCommand` Parsing Errors Should Exit VM
+JDK-8305104	hotspot	9bfe415f66cc169249d83fc161c9c4496fe239f6	Remove the old core reflection implementation
+JDK-8285368	java-only	3e0bbd290c534b0f9729c54cd45308d505907797	Overhaul doc-comment inheritance
+JDK-8309964	java-only	cf8d0b05372838db345ff373950e71b7b3b76de7	Use directed inheritDoc for javax.lang.model API
+JDK-8310460	java-only	556831d1bf80a919330d9ca5330b4deef16592e2	Remove jdeps -profile option
+JDK-8222329	java-only	58bb6555e783e4627f57c3c8281183c474d581c9	Readable read(CharBuffer) does not specify that 0 is returned when there is no remaining space in buffer
+JDK-8047998	hotspot	8abb9f590f844d098b156b719499bb0447f99759	Abort the vm if MaxNewSize is not the same as NewSize when MaxHeapSize is the same as InitialHeapSize
+JDK-8310047	java-only	00c7f914c665a77842d32eb8f760dcbbbda66554	Add UTF-32 based Charsets into StandardCharsets
+JDK-8155902	java-only	ed9337e6656e9f2f6d891deb26495a79324d37c6	DataOuputStream should clarify that it might write primitive types as multiple byte groups
+JDK-6361826	java-only	19691fab48657174a4e9768d33da2fdd532271c9	(reflect) provide method for mapping strings to class object for primitive types
+JDK-8310157	java-only	69a46c25cc87d9d5495d0bb975c44f38cbb1fe13	Allow void-returning filters for MethodHandles::collectCoordinates
+JDK-8311968	java-only	6a09992dbd957daac2d5197a9ef8ab4975ddeaa4	Clarify Three-letter time zone IDs in java.util.TimeZone
+JDK-8291065	java-only	201e3bcf52cac64510d50fbdfcd522638d1d0442	Creating a VarHandle for a static field triggers class initialization
+JDK-8312072	hotspot	8ec136e6f0fa684255274181d09c86251ef5428f	Deprecate for removal the -Xnoagent option
+JDK-6211202	java-only	7d9f5afea12e3d1a901a95ee8bf5d2d743893970	ColorSpace.getInstance(int): IAE is not specified
+JDK-6211126	java-only	e31df3a7748fc36a8afe6e060917de1247bbd39b	ICC_ColorSpace.toCIEXYZ(float[]): NPE is not specified
+JDK-8312203	java-only	e5ecbff69eeb83abbe70421b7f1540a5c382441a	Improve specification of Array.newInstance
+JDK-8302987	java-only	14cf035681460e8c93d6afcaaf20aa61c8a6e3a8	Add uniform and spatially equidistributed bounded double streams to RandomGenerator
+JDK-6983726	hotspot	5d57b5c2f0ef77f994fbc8c4f09e66f217f06f85	Reimplement MethodHandleProxies.asInterfaceInstance
+JDK-8305506	hotspot	37c756a7be87153693c919f22d55189f3108ea2e	Add support for fractional values of SafepointTimeoutDelay
+JDK-8308591	java-only	bae224793812cb0a0aa67e399062498d3b13fdb3	JLine as the default Console provider
+JDK-8262742	java-only	2bdfa836adbeba3319bee4ee61017907d6d84d58	(fs) Add Path::resolve with varargs string
+JDK-4800398	java-only	74121930e33686d2452170554776c0901f622d3e	(ch spec) Clarify Channels.newChannel(InputStream) spec
+JDK-8159527	java-only	b2add96c353f15b91524e10207e49841298bed01	Collections mutator methods should all be marked as optional operations
+JDK-8311517	java-only	b463c6d3b0f27c8f124b5733cb9e7677542abe37	Add performance information to ArrayList javadoc
+JDK-8307184	java-only	c307391ab1f071b1473cd5f4c12437b8d5e0ca93	Incorrect/inconsistent specification and implementation for Elements.getDocComment
+JDK-8313239	java-only	0cb9ab04f4c408bce7c4bc0e028fa9d4959abd79	InetAddress.getCanonicalHostName may return ip address if reverse lookup fails
+JDK-8314076	java-only	b78f5a1068224d8b3cfe9e8fb38307ca07de741d	ICC_ColorSpace#minVal/maxVal have the opposite description
+JDK-8314280	java-only	ed585d16b9069a678bb8633239ca87f64c956fdd	StructuredTaskScope.shutdown should document that the state of completing subtasks is not defined
+JDK-8310815	java-only	50a2ce01f4d1d42d7a537b48a669b5a75a583df5	Clarify the name of the main class, services and provider classes in module descriptor
+JDK-8314449	java-only	50a2ce01f4d1d42d7a537b48a669b5a75a583df5	Clarify the name of the declaring class of StackTraceElement
+JDK-8214248	java-only	2eae13c669d8ec383b8303079a06abd7aa2b1c7f	(fs) Files:mismatch spec clarifications
+JDK-8175874	java-only	9435cd19165c9ffc3f19fd423f3706b1e37212d8	Update Security.insertProviderAt to specify behavior when requested position is out of range.
+JDK-8315061	hotspot	3eac8905aee6edecbebcc12a41300d3ce176fbff	Make LockingMode a product flag
+JDK-6333341	java-only	d5973bdb986a1dd823b6a761ff719de005c549f6	[BI] Doc: java.text.BreakIterator class specification is unclear
+JDK-8314925	java-only	7754ac05062c698b8601048ae447849d982c8dbe	ChoiceFormat does not specify IllegalArgumentExceptions
+JDK-8314604	java-only	86a18f5e2e0825dddb77656b2f43f64684f1464c	j.text.DecimalFormat behavior regarding patterns is not clear
+JDK-8306632	java-only	dccf6704925715e62dcbf84ac11930298913e173	Add a JDK Property for specifying DTD support
+JDK-8312418	java-only	578ded4645a6ef32e9174ae973fe4c3aa6d5baab	Add Elements.getEnumConstantBody
+JDK-8315410	java-only	9b0da4891527cb426093266d53e1c4e80a48376d	Undocumented exceptions in java.text.StringCharacterIterator
+JDK-8041488	build	d0be73a78038faf9509623bc4ba71eb4385cd645	Locale-Dependent List Patterns
+JDK-8315938	java-only	d08258f735053142e43896c16cf7c6155cd9c35f	Deprecate for removal Unsafe methods that have standard APIs for many releases
+JDK-8315946	java-only	dde11551e26dedd28168d2d4528e9dd66ed82999	DecimalFormat and CompactNumberFormat do allow U+FFFE and U+FFFF in the pattern
+JDK-8316160	java-only	25f32f353830fddd4883f0fd191303b9dd9898c7	Remove sun.misc.Unsafe.{shouldBeInitialized,ensureClassInitialized}
+JDK-8296246	build	7c991cc567bfe8cfa56774c545de689ee20f699a	Update Unicode Data Files to 15.1.0
+JDK-8316688	java-only	b66ded9a5b699e4936db25b58944587432e64f46	Widen allowable error bound of Math.hypot
+JDK-8304956	java-only	53516aed38c63df6e9722d65ce54acddd9735636	Update KeyStore.getDefaultType​() specification to return pkcs12 as fallback
+JDK-8301639	java-only	9aaac2eee34613c34b2800ddb4d42f5bbeba1837	JDI and JDWP specs should clarify potential deadlock issues with method invocation
+JDK-8316000	java-only	49376e445210d5ebe3a99a4e647deecec51f0784	File.setExecutable silently fails if file does not exist
+JDK-8316971	build	0d4de8a71f063e44618f43ddd862a91aed647f48	Add Lint warning for restricted method calls
+JDK-8314896	java-only	3f6d01687c06211f49ce6b238d8a7aa6876262cd	additional clarifications to reversed() default methods' implementation requirements
+JDK-7061097	java-only	4dfa3799a60cb11092b699db5bc0cc1f44d24484	[Doc] Inconsistenency between the spec and the implementation for DateFormat.Field
+JDK-8318027	build	bd22d2381fa3f21b113d5b8ef95fe15cec50b066	Support alternative name to jdk.internal.vm.compiler
+JDK-8318160	java-only	e2720987b921b95fd8010cea60d2d6e436e5ebaa	javac does not reject private method reference with type-variable receiver
+JDK-8272215	java-only	77fe0fd9e6f1e1f775a5191640411c37eb51b415	Add InetAddress methods for parsing IP address literals
+JDK-8318096	java-only	9123961aaa47aa58ec436640590d2cceedb8cbb1	Introduce AsymmetricKey interface with a getParams method
+JDK-8316996	java-only	96bec3584ced3ea1e75cc40bb402f571aba78b09	Catalog API Enhancement: add a factory method
+JDK-8311596	java-only	0064cf90ff7d575f3500a05e234dd795b15240b2	Add separate system properties for TLS server and client for maximum chain length
+JDK-8318466	java-only	ea6a88a0aa4e8a365a94e71078e67a4452f40945	Improve spec of NumberFormat's methods with unsupported operations
+JDK-4365952	java-only	96e6e670b5e2f95b6222091611cd8922022ec4b1	Cannot disable JFileChooser
+JDK-8318678	java-only	74f1889b58c6ad1cdc7401e7cbb9f614acf0c171	Vector access on heap MemorySegments only works for byte[]
+JDK-8319378	java-only	cc4b0d9217ed27a9555dc82f0a4247bf9b703f2b	Spec for j.util.Timer::purge and j.util.Timer::cancel could be improved
+JDK-8319753	java-only	965ae7296459bb25ef8f0d1ba4955f1ed7260ab3	Duration javadoc has "period" instead of "duration" in several places
+JDK-8287843	java-only	12fce4b715f2c8b0091f5c229fcc3e3707290489	File::getCanonicalFile doesn't work for \\?\C:\ style paths DOS device paths
+JDK-8319628	java-only	d5abe49670d81b9c4749ce777ed6bf2886228f2f	DateFormat does not mention IllegalArgumentException for invalid style args
+JDK-8187591	java-only	53eb6f126b1a56bc651cf1078a27ec697e2dcf37	-Werror turns incubator module warning to an error
+JDK-8317742	java-only	61d81d6496a38e43a6039abc041b67626f06f5c9	ISO Standard Date Format implementation consistency on DateTimeFormatter and String.format
+JDK-8320335	hotspot	2c31ca525b1cd70c3dfcb0463c8c984bdd7c886a	Deprecate `RegisterFinalizersAtInit` option and code
+JDK-8314243	hotspot	28026434f74726d72857e781b8f1c3d12aba9125	Make VM_Exit::wait_for_threads_in_native_to_block wait for user threads time configurable
+JDK-8319311	java-only	2fae07f53f84b71df80ff95d858e8bbef281672f	JShell Process Builder should be configurable
+JDK-8316734	java-only	48960df7bcb307a3b3353a1d513ddd4b3c0284ce	URLEncoder should specify that replacement bytes will be used in case of coding error
+JDK-8319417	java-only	a2c5f1fc914ef5c28d044b75598f895cf6097138	(dc) DatagramChannel.connect undocumented behavior
+JDK-8320716	java-only	2476be4590f9ece654d16bf7b94f108f18a86061	ResolvedModule::reads includes self when configuration contains two or more automatic modules
+JDK-8320941	java-only	1839433bff5587f6a9bede3c765100ae4737fd2e	Discuss receiver type handling
+JDK-8320652	java-only	4fbf22b002dab3c6e7e20ed9c7fa4551b6350082	ThreadInfo.isInNative needs to be updated to say what executing native code means
+JDK-8314327	java-only	640d7f31b22adde0926521bea4d616b570c21f2e	Issues with JShell when using "local" execution engine
+JDK-8308715	java-only	430564cf8882e9acf86a193eb76030c6254f798c	Create a mechanism for Implicitly Declared Class javadoc
+JDK-8321958	java-only	87ef73329f66e898d85eecea94a4104a13b3a2db,57d97b52c9d3e92318c9f74cb257efb95bafa3ed	@param/@return descriptions of ZoneRules#isDaylightSavings() are incorrect
+JDK-8322027	java-only	5852f3eafe4509a064c727371962ff249886e115	One XMLStreamException constructor fails to initialize cause
+JDK-8321404	hotspot	1cf9335b24639938aa64250d6862d9636f8605f8	Limit the number of heap dumps triggered by HeapDumpBeforeFullGC/AfterFullGC
+JDK-8319626	java-only	15cf8f853105050ec356756d5affa153f79894fa	Override toString() for ZipFile
+JDK-8320919	java-only	376051a9be95e0e4acf3c59d0eba3e9ef8727d79,46b1b1ae8ddc9466bda5af5ba2e917ded3352f4d	Clarify Locale related system properties
+JDK-7057369	java-only	475306b7576356ca8e5b93fa7fe1be6c4d15065e	(fs spec) FileStore getUsableSpace and getUnallocatedSpace could be clearer
+JDK-8322878	java-only	525063be90bc67257e5d9301a4270179c03ada9d	Including sealing information Class.toGenericString()
+JDK-8320788	java-only	3bd9042054116365323912ed5867b70936fe85c4,6951987b65e50143ee3f1f79f7731159a0310223	The system properties page is missing some properties
+JDK-8321561	java-only	19287eeeb2c10ea5562c2fe43d8bd16814ddf8dd	(fs) Clarify non-atomic behavior of Files.move
+JDK-6503196	java-only	3d32c460eb60aa95f27c96bbefdf784f6a7663f7	API doc for DecimalFormat::getMaximumIntegerDigits is unclear
+JDK-8313739	java-only	f613e13397c7890bdc9fcfb068531b3aa03ce122	ZipOutputStream.close() should always close the wrapped stream
+JDK-8324665	java-only	96eb0390d69ed2e0c3e59f77fb65fbb79615a11c	Loose matching of space separators in the lenient date/time parsing mode
+JDK-8325152	java-only	4b1e367edabb3c12359abc2d7815559b9ece9fe3	Clarify specification of java.io.RandomAccessFile.setLength
+JDK-8325304	java-only	1fb9e3d674229a2f1b464a09986ad055191966fe	Several classes in java.util.jar and java.util.zip don't specify the behaviour for null arguments
+JDK-8303866	java-only	628cd8a489fd54db18204c3bbaf4339d7ab5e9d6	Allow ZipInputStream.readEnd to parse small Zip64 ZIP files
+JDK-8318966	java-only	9c852df6aa019f63d6fae733d7a73521b7151dd0	Some methods make promises about Java array element alignment that are too strong
+JDK-8325687	java-only	3b76372254aa638f5dcae1d54b963cd43bca7102	SimpleJavaFileObject specification would benefit from implSpec
+JDK-8326530	java-only	63f6a563a3987d74ef673718d5209cc7c469751c	Widen allowable error bound of Math.tan
+JDK-8321156	java-only	20c71ceacdcb791f5b70cda456bdc47bdd9acf6c	Improve the handling of invalid UTF-8 byte sequences for ZipInputStream::getNextEntry and ZipFile::getComment
+JDK-8326096	java-only	d0d4912c3bbc06e9a9c5273308d5f4ef7bac1b24	Deprecate getTotalIn, getTotalOut methods of java.util.zip.Inflater, java.util.zip.Deflater
+JDK-8326908	java-only	6efdaf8ddf2940bcd5f96e114fe05b951ace313b	DecimalFormat::toPattern throws OutOfMemoryError when pattern is empty string
+JDK-8327167	java-only	87b40c6ad2b0fa972fa6c5699a52045e82e0c7ef	Clarify the handling of Leap year by Calendar
+JDK-8256314	hotspot	33aa4b26b190927241a81fd1cba6fe262a5b1da0	JVM TI GetCurrentContendedMonitor is implemented incorrectly
+JDK-8326578	java-only	f2b5ffdb8ea3c766f14bab1dfd7c3865cffa2ce8	Clean up networking properties documentation
+JDK-8327991	java-only	2725405ac9d93761e26812d010d315a48f86071c	Improve HttpClient documentation with regard to reclaiming resources
+JDK-8326627	java-only	8a0ef811ed4daaa611c9578db0b7fcbcfb57643d	Document Double/Float.valueOf(String) behavior for numeric strings with non-ASCII digits
+JDK-8329637	java-only	4276d5c0048558381c5372ff94db78d956a964d1	Apparent typo in java.security file property jdk.tls.keyLimits
+JDK-8327640	java-only	941bee197ff679e9b8755cad117f5172e3508ef2	Allow NumberFormat strict parsing
+JDK-8212895	java-only	89129e3f672d8af9613ad2a72e64322661836c96	ChronoField.INSTANT_SECONDS's range doesn't match the range of Instant
+JDK-8329805	java-only	4dfaa9b5bd4f9733e5a67d7c5b55eaa5ad4e27e4	Deprecate for removal ObjectOutputStream.PutField.write
+JDK-8309881	java-only	ffd850f17efc88dddfeab629f829a03ad22dc49d	Qualified name of a type element depends on its origin (source vs class)
+JDK-8330077	java-only	a8b3f194e811eed6b20bce71c752705c7cd50d24	Allow max number of events to be buffered to be configurable to avoid OVERFLOW_EVENT
+JDK-8330005	java-only	7f299043a99406dbd666d4f7f30445d26f3eae82	RandomGeneratorFactory.getDefault() throws exception when the runtime image only has java.base module
+JDK-8331202	java-only	259915168d6656b1b8ddad03c377082d6a5224e5	Support for Duration until another Instant
+JDK-8314480	java-only	2cae9a0397f4e46c6faec0a998ecad1c7015564d	Memory ordering spec updates in java.lang.ref
+JDK-8206447	java-only	d7d1afb0a84e771870e9f43e08c4a63c8fdccdd9	InflaterInputStream.skip receives long but it's limited to Integer.MAX_VALUE
+JDK-8333599	java-only	bb7ef03077fb91169b5505e3500093b848aece0f	Improve description of \b matcher in j.u.r.Pattern
+JDK-8332314	java-only	08ace27da1d9cd215c77471eabf41417ff6282d2	Add window size configuration option to JavaShellToolBuilder interface
+JDK-8327793	java-only	9f8de221d7f0186718411ab3f5217e3883237e84	Deprecate jstatd for removal
+JDK-8334580	java-only	e527e1c32fcc7b2560cec540bcde930075ac284a,ae491829852f59d42d8b074eee255dcb170a83d4	Deprecate no-arg constructor BasicSliderUI() for removal
+JDK-8248981	java-only	75a2afacc8f5fdec53350b1cb66076cdfeae12f0	Specify list of standard message digest and mgf algorithms for RSASSA-PSS signature
+JDK-8336479	java-only	c1c9704268e9e651cd82c8550913d8ac60aa494a	Provide Process.waitFor(Duration)
+JDK-8335638	hotspot	9fe6e2316aef8fd125a7905cff2a2d9ae5d26109	Calling VarHandle.{access-mode} methods reflectively throws wrong exception
+JDK-4966250	java-only	f1fa64b6b67f2eef916b8d92eb522ccb19035e12	SSLSessionContext.setSessionTimeout() documentation could be updated
+JDK-6426678	java-only	fef1ef7dfe1aed7729b182b2fc8d0dda7d546a56	(spec) File.createTempFile(prefix, suffix, dir) needs clarification for illegal symbols in suffix
+JDK-8334870	java-only	5e822c24bb42e9027c8d9090d498bca7125d1963	javac does not accept classfiles with certain permitted RuntimeVisibleParameterAnnotations and RuntimeInvisibleParameterAnnotations attributes
+JDK-8334165	java-only	3c40afa59c93860150960d478a9d2ffe33d4ce32	Remove serialVersionUID compatibility logic from JMX
+JDK-8321935	java-only	89759c8b02ec73de0d734d10b16382109c7a8b45	Define the term 'standard doclet'
+JDK-8336895	java-only	aeaa4f78ebd634c2020d0f0dd100fcb55d5130af	BufferedReader doesn't read full \r\n line ending when it doesn't fit in buffer
+JDK-8336843	java-only	7a1e832ea997f9984eb5fc18474a8f1650ddb1bf	Deprecate java.util.zip.ZipError for removal
+JDK-8341134	java-only	7a16906ed0dce716bc9516cb75b6450725fe9dbb	Deprecate for removal the jrunscript tool
+JDK-8340488	java-only	078401134a97a13a96e12aa23e3481c59f3669ed	Clarify LocaleServiceProvider deployment on application module path
+JDK-8326949	java-only	01b681c80d5f7c76013ab6274b9f4a3dcf2f4c39	Authorization header is removed when a proxy Authenticator is set on HttpClient
+JDK-8341445	java-only	c61d2c5a3403ad5f48daad22bdfb031f42bc3dd5	DecimalFormatSymbols setters should throw NPE
+JDK-8250659	java-only	158ae51be0fa5e8f90ad534df3e4f07745a443dc	Clarify in ParameterizedType.getRawType() doc that only Class is returned
+JDK-8343236	java-only	ea110c35f5429f1e1de57a301e2256f508a4c324	Use @apiNote and @implSpec in j.util.Currency
+JDK-8343433	java-only	d26412e657a15460cdf77c0fef4666292e070ef6	Update net.properties and java.net.http module-info.java after 8326949
+JDK-8341408	java-only	6811a11e278118b8b2781f1eaf45d363a3d2db49	Implement JEP 488: Primitive Types in Patterns, instanceof, and switch (Second Preview)
+JDK-8321997	hotspot	592a48b163ed582872b686e7a606cf8b96fcbcbc	Increase upper limit of LoopOptsCount flag
+JDK-8339190	java-only	4244682309e7ae1be892280dfd6a6f70ccecc760	Parameter arrays that are capped during annotation processing report incorrect length
+JDK-8341176	java-only	5ca6698ba418e82ff93471fbb495759850f26f63	Permit access to diagnostics for transient snippets
+JDK-8341260	java-only	dbf23466aff902836838f06bcbbf3c9e7c5e9c6a	Add Float16 to jdk.incubator.vector
+JDK-8344327	java-only	ded01e4316a46d4c4a74d494db61d03f8591fd67	SM cleanup in jdk.unsupported ReflectionFactory
+JDK-8343823	java-only	aaf3df7bb80d84d3870d8840c2935d4567f83f3c	(fs) Files.createLink: inconsistent behavior when creating link to symbolic link
+JDK-8344652	java-only	9769ee86978584a65703712c1a845fe4f5fffe29	Remove access control context text from SSLEngine and SSLSession APIs
+JDK-8344894	java-only	43603ac2f9cb0b74b7baa61c14a29959970c7769	Obsolete reference to checking permissions in java.awt.Composite
+JDK-8344949	java-only	86d527f987a27c22fae784812aad9d8f370d2e9c	javax.security.auth.Subject.SecureSet.writeObject does not do a security check anymore
+JDK-8345001	java-only	8ad0b2afe3c6f574b0cd3e31c10946c19045a308	java/awt/doc-files/FocusSpec.html has SecurityManager references
+JDK-7038838	java-only	24983dd4c107f11032969e3c079fd0ee07098583	Unspecified NPE in java.net.IDN methods
+JDK-8235786	java-only	40ae4699622cca72830acd146b7b5c4efd5a43ec	Javadoc for com/sun/net/httpserver/HttpExchange.java#setAttribute is unclear
+JDK-8340359	java-only	8d19a560d013440340d1c3ba6aeebe5727c2c9c1	Remove javax.naming.Context.APPLET
+JDK-8175709	java-only	9702accdd9a25e05628d470bf248edd5d80c0c4d	DateTimeFormatterBuilder.appendZoneId() has misleading JavaDoc
+JDK-8345144	java-only	df28cec6e98f45ae535a35f97710710415522f99	Robot does not specify all causes of IllegalThreadStateException
+JDK-8343510	java-only	1bf2f5c8a92b30eabb530737158f57c63a81fef6,1399f253b03c0deef862eb1ef3ffb16eb0a56717	JFR: Remove AccessControlContext from FlightRecorder::addListener specification
+JDK-8347842	java-only	5ec1aae21e80d86c55df28a86935f50ae77f7b41	ThreadPoolExecutor specification discusses RuntimePermission
+JDK-8138614	java-only	08bc59da9b66c6504a2d2712feebf37cc5eb2d3e	(spec str) StringBuffer and StringBuilder methods improperly require "new" String to be returned
+JDK-8319192	java-only	aa047ee02472c65297cc8a153458e634c5e4f350	Remove javax.swing.plaf.synth.SynthLookAndFeel.load(URL url)
+JDK-8352277	java-only	7a2e198e9fec54158020a49165c1f4a4518e28d8	java.security documentation: incorrect regex syntax describing "usage" algorithm constraint
+JDK-8338675	java-only	bd74922157230c866802b4c5269da81e872525aa	javac shouldn't silently change .jar files on the classpath
+JDK-8354111	java-only	c7b70a138ff592fdf1cd4f1d063103491a8aa7db	JavaDoc states that Iterator.remove() is linear in the LinkedBlockingDeque
+JDK-8350542	java-only	44374a572096fc98b390ab2cb9063d832e110020	Optional.orElseThrow(Supplier) does not specify behavior when supplier returns null
+JDK-8355992	java-only	64a858c7b832447c3dcf4a39a2b0929bc4d70c39	Add unsignedMultiplyExact and *powExact methods to Math and StrictMath
+JDK-8356395	java-only	a8d8ffa8ad63f8f6308e2da224894fb2aded5d5c	Spec needs to be clarified for InterfaceAddress class level API documentation and getBroadcast() method
+JDK-8357179	java-only	74fc4e4ee7f2e44d9c8339ff6665d4171d298f8f	Deprecate VFORK launch mechanism from Process implementation (linux)
+JDK-8343580	java-only	02995887b2a2554631f3d2bce03f8e3af6d0bafc	Type error with inner classes of generic classes in functions generic by outer
+JDK-7046003	java-only	f825a51198137799f00a0ec2cefa1daa59542f68	Default value of Authenticator.getRequestingURL() is not specified
+JDK-8358015	java-only	ef47635d5a27b003937d865ad9067dbd151db888	Fix SequencedMap sequenced view method specifications
+JDK-8358449	java-only	8a79ac88639c35a6938f82a391c4b5d77e6eda32	Locale.getISOCountries does not specify the returned set is unmodifiable
+JDK-8358970	java-only	523a4efe1ce2231edd7019043a49f7bf0a0f6aef	CounterMonitorMBean.getDerivedGaugeTimeStamp() JavaDoc incorrectly documents null
+JDK-8347114	java-only	9652ae9a8d48924a90d25e9daffcdb7f582ff503	JMXServiceURL should require an explicit protocol
+JDK-8338140	java-only	06d804a0f004f9403c7c12e1a9f2ca8775c639f7,5bcea92eaa278f632be1fd7de91b57bce46e6680	(str) Add notes to String.trim and String.isEmpty pointing to newer APIs
+JDK-8358526	java-only	81985d422d3a433c1248deec18e4fd9b9f780c2c,fe9efb75b0521ea3eeadcbf4a80fa8797226344f	Clarify behavior of java.awt.HeadlessException constructed with no-args
+JDK-8351983	java-only	116b8543b04bfcf542af0ba03ac547a744600b7c	HttpCookie Parser Incorrectly Handles Cookies with Expires Attribute
+JDK-8294226	java-only	54acadbe668f6feced6eb9c28bcf46d1b3986eec	Document missing UnsupportedTemporalTypeException
+JDK-6955128	java-only	bc828c8fb6693760c153a75188f96b1c9d201c8a	Spec for javax.swing.plaf.basic.BasicTextUI.getVisibleEditorRect contains inappropriate wording
+JDK-8353925	test-only	5fd2b7d61af073e0fa1f7702b71988371372b598	Remove Sun Microsystems JCE Code Signing Root CA
+JDK-8357653	java-only	5e4a2ead714814cb4eb90ca88debc226f9c75864	Inner classes of type parameters emitted as raw types in signatures
+JDK-8309399	hotspot	a65d9532ed454a0f70b1009181a25b23a38ccd4b	JVMTI spec needs to clarify when OPAQUE_FRAME is thrown for reasons other than a native method
+JDK-8362882	java-only	f79bd54bbb9f5748e437346d34702608f7b67019,3db8262445070440e0ac45f523813fd6ce983cc4	Update SubmissionPublisher() specification to reflect use of ForkJoinPool.asyncCommonPool()
+JDK-8209992	java-only	6c52b73465b0d0daeafc54c3c6cec3062bf490c5	Align SSLSocket and SSLEngine Javadocs
+JDK-8365198	java-only	b69a3849b21b4bb1e21ad276633de45da6200168	Remove unnecessary mention of finalize in ImageIO reader/writer docs
+JDK-8358618	java-only	bd4c0f4a7da9122527dd25df74797c42deaced3c	UnsupportedOperationException constructors javadoc is not clear
+JDK-8365898	java-only	b8cdf31a2e52df857df2badb4f365454443dd89d	Specification of java.lang.module.ModuleDescriptor.packages() method can be improved
+JDK-8365676	java-only	85996572b61e789d7e45bd26b23d233a0a41e158	javac incorrectly allows calling interface static method via type variable
+JDK-8356995	java-only	48d394a245e7d16423b3829efa326fe72605c8ee	Provide default methods min(T, T) and max(T, T) in Comparator interface
+JDK-8360463	java-only	5c596e2a9599e1e0eb9ec845f1b6e0e7b59f186a	Ambiguity in Cipher.getInstance() specification between NoSuchAlgorithmException and NoSuchPaddingException
+JDK-8366002	java-only	6bfd018beaf187940ebafc71885045b4aabca673	Beans.instantiate needs to describe the lookup procedure
+JDK-8362637	java-only	95380e1ea5c3f531f82fb7c4b2f75726f3cd2fc2	Convert java.nio.ByteOrder to an enum
+JDK-8369854	java-only	a1be29791156645fdcad69a4b7ab770a05f0fe0e	(ch) Refine specification of behavior of {Gathering,Writable}ByteChannel.write
+JDK-8366829	java-only	ec13c283c48c37e80d6c9c2753b09b31f4d14734	Add java.time.Duration constants MIN and MAX
+JDK-6453640	java-only	a4eaeb47c9c42d8da4e3814c80247f40236a03a2	BandedSampleModel.createCompatibleSampleModel() API docs are wrong
+JDK-8368856	java-only	2758c6fda2f774d98ef0c24535a7f7e9fc722379	Add a method that performs saturating addition of a Duration to an Instant
+JDK-8370719	java-only	984c87cf767a46a2c1000a4030dfd91a62b03b4d	[Linux] Use /etc/os-release values for font configuration file names
+JDK-8368576	java-only	5a37374dcaae0d3939570b33418f772a901df21a	PrintJob.getGraphics() does not specify behavior after PrintJob.end()
+JDK-8366577	java-only	866faa9d40ab336e4c4861a55edc4c91d8aa0c74	Deprecate java.net.Socket::setPerformancePreferences
+JDK-8368729	java-only	4233178af20f07ade32322fad931c68e1c4251cf	Add appropriate checks in java.awt.image.Kernel constructor
+JDK-8370467	java-only	bc66d3e65d208edc69e8ae334d23b38f2b78a440	BorderFactory.createBevelBorder and createSoftBevelBorder throws NPE for null highlight and shadow
+JDK-8150564	java-only	e067038796e2798132e07aa47b695f3c21b87e79	Migrate useful ExtendedRobot methods into awt.Robot
+JDK-8213762	hotspot	0bff5f3dbe69ab2a59db771af1020b04c0132954	Deprecate Xmaxjitcodesize
+JDK-8357728	java-only	f0afd89f66c0b42ff06fbb76378a5b2028b76a10	Avoid caching synthesized names in synthesized parameters
+JDK-8369129	java-only	3a45e615973727446c9081b5affbbe7ffe7c3bea	Raster createPackedRaster methods specification clean up
+JDK-6185110	java-only	ac0e6af8f90ba77375b2841a5c8aa05743884a1e	Undefined behaviour of SampleModel for width, height < 0
+JDK-4690476	java-only	aff25f135af20ec89c7a68f2a0a0ede7eb1491a6	NegativeArraySizeException from AffineTransformOp with shear
+JDK-8371748	java-only	f3dd8daaa92896be51254e5abf3e0ec5b1ff5173	Remove the (empty) ThreadPoolExecutor.finalize() method
+JDK-4197755	java-only	a98d3a76a5d44096321aa02ed86e865066c89bdc	Arc2D.getBounds() returns an unnecessarily large bounding box
+JDK-8379156	java-only	ea4a1512456d29d05a634c14bb2beb65152ba1f4	Specify behavior of Types.asElement() on array types
+JDK-8381681	java-only	67f590d8ba580d5cebbd041a30fef85c13d21e3b	Clarify locale usage in Javadoc for the Locale display methods
+JDK-8380450	java-only	9df6054d432157284bc5f099a73be538aef61711	(zipfs) ZipFileSystem::getPath and ZipPath::resolve throw unspecified IllegalArgumentException for unmappable names
+JDK-8377568	java-only	b48572985910136c6dc803228420b88b59e523e5	DataBuffer constructors and methods do not specify required exceptions
+JDK-8364121	java-only	ffc16bd40da6d70d451cf17032cac180a9f7b2f3	DES[ede]KeySpec do not consistently check for valid parameters
+JDK-8381843	java-only	0b0a5a71a35cda74a2eebf6c4694f812602094b0	FileDialog:setFile() specification needs to be enhanced w.r.to file selection
+JDK-8381007	java-only	c09e403385d0e436d7af77511ad3b2d09ba7dead	MultiPixelPackedSampleModel can throw ArithmeticException
