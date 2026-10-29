@@ -85,7 +85,8 @@ public final class M3FrozenLongSet {
 
     /** Set.contains: binary search over the sorted lane. */
     public boolean contains(long value) {
-        return Arrays.binarySearch(valueLane, 0, size, value) >= 0;
+        int index = M3LaneSearch.lowerBound(valueLane, 0, size, value);
+        return index < size && valueLane[index] == value;
     }
 
     /** ImmutableSortedSet.asList().get: value at the ascending ordinal. */
@@ -107,8 +108,8 @@ public final class M3FrozenLongSet {
 
     /** ImmutableSortedSet.asList().indexOf: ascending ordinal of the value, or -1 when absent. */
     public int rank(long value) {
-        int index = Arrays.binarySearch(valueLane, 0, size, value);
-        return index >= 0 ? index : -1;
+        int index = M3LaneSearch.lowerBound(valueLane, 0, size, value);
+        return index < size && valueLane[index] == value ? index : -1;
     }
 
     /** Set.toArray: ascending defensive copy. */
