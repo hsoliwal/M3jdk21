@@ -47,6 +47,7 @@ public interface Supplier<T> {
      */
     T get();
 
+<<<<<<< HEAD
     /**
      * Gets a result with a borrowed monitor scoped to the call.
      * The previous binding is restored on exit and the monitor is not completed.
@@ -58,6 +59,21 @@ public interface Supplier<T> {
      *         observed before or after this operation
      */
     @SuppressWarnings("try")
+||||||| 2f2beb2eff7
+    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
+=======
+    /**
+     * Obtains a result under an explicit borrowed monitor without completing it.
+     * The original functional method remains the sole abstract method.
+     * Cancellation is checked before and after normal completion.
+     *
+     * @param monitor the borrowed progress monitor
+     * @return the supplied result
+     * @throws NullPointerException if monitor is null
+     * @throws java.util.concurrent.CancellationException if cancellation is detected
+     */
+    @SuppressWarnings("try")
+>>>>>>> 7e9fe6c851d317be04e69c6d5ca3fe5d16a41352
     default T get(java.util.concurrent.ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(monitor, "monitor");
         final java.util.concurrent.ProgressMonitors.Scope scope =

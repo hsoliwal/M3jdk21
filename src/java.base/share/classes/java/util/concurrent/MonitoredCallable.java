@@ -12,6 +12,7 @@ package java.util.concurrent;
  */
 @FunctionalInterface
 public interface MonitoredCallable<V> extends Callable<V> {
+<<<<<<< HEAD
     /**
      * Computes a result using the supplied borrowed progress monitor.
      * This body does not own completion of the monitor.
@@ -20,6 +21,17 @@ public interface MonitoredCallable<V> extends Callable<V> {
      * @return the computed result
      * @throws Exception if the body cannot compute a result
      */
+||||||| 2f2beb2eff7
+    /** Replaceable checked body, with no ownership over monitor completion. */
+=======
+    /**
+     * Performs the replaceable task body with the selected progress monitor.
+     *
+     * @param monitor the progress monitor supplied to the task body
+     * @return the computed result
+     * @throws Exception if the task cannot compute a result
+     */
+>>>>>>> 7e9fe6c851d317be04e69c6d5ca3fe5d16a41352
     V callMonitored(ProgressMonitor monitor) throws Exception;
 
     /**

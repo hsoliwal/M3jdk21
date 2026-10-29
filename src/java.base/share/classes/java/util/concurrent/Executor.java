@@ -136,6 +136,7 @@ public interface Executor {
     void execute(Runnable command);
 
     /**
+<<<<<<< HEAD
      * An overload for monitored dispatch. Captures the caller-selected monitor
      * before switching threads. Existing execute(Runnable) is unchanged.
      * The monitor is borrowed and is not completed by the dispatched task.
@@ -144,6 +145,18 @@ public interface Executor {
      * @param monitor the monitor to bind while the task runs
      * @throws NullPointerException if {@code command} or {@code monitor} is null
      * @throws RejectedExecutionException if this task cannot be accepted
+||||||| 2f2beb2eff7
+     * An overload for monitored dispatch. Captures the caller-selected monitor
+     * before switching threads. Existing execute(Runnable) is unchanged.
+=======
+     * Dispatches a task with the caller-selected borrowed monitor.
+     * The monitor is captured before switching threads and is not completed by this overload.
+     *
+     * @param command the task to dispatch
+     * @param monitor the borrowed progress monitor
+     * @throws NullPointerException if either argument is null
+     * @throws RejectedExecutionException if the task cannot be accepted
+>>>>>>> 7e9fe6c851d317be04e69c6d5ca3fe5d16a41352
      */
     default void execute(Runnable command, ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(command, "command");
@@ -151,6 +164,7 @@ public interface Executor {
         execute(() -> ProgressMonitors.run(command, monitor));
     }
 
+<<<<<<< HEAD
     /**
      * Captures the current lexical or process-wide monitor at submission.
      *
@@ -158,6 +172,17 @@ public interface Executor {
      * @throws NullPointerException if {@code command} is {@code null}
      * @throws RejectedExecutionException if this task cannot be accepted
      */
+||||||| 2f2beb2eff7
+    /** Capture the current lexical or process-wide monitor at submission. */
+=======
+    /**
+     * Captures the current lexical or process monitor at submission and dispatches the task.
+     *
+     * @param command the task to dispatch
+     * @throws NullPointerException if command is null
+     * @throws RejectedExecutionException if the task cannot be accepted
+     */
+>>>>>>> 7e9fe6c851d317be04e69c6d5ca3fe5d16a41352
     default void executeWithProgress(Runnable command) {
         execute(command, ProgressMonitors.current());
     }

@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "owners": 4,
+  "annotations": 5,
+  "context_sources": 12,
+  "source_retention_verified": true,
+  "byte_identical_classes": 15,
+  "public_protected_apis_equal": 15,
+  "candidate_warnings": 0,
+  "baseline_werror_omission": "Witness-only to obtain original classfiles; exactly five try warnings required. Final candidate retains -Werror.",
+  "javac_sha256": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+  "stages": [
+    {
+      "stage": "baseline",
+      "strict": false,
+      "warning_count": 5,
+      "class_count": 15
+    },
+    {
+      "stage": "candidate",
+      "strict": true,
+      "warning_count": 0,
+      "class_count": 15
+    }
+  ],
+  "classes": [
+    {
+      "path": "java/lang/Runnable.class",
+      "class_sha256": "a3c47d0dbc99da8ff74b8734ee0c0dd1d677ff572fff0dd74c3159d196f5edb6",
+      "public_protected_api_sha256": "22e190b2fbe9169c3e373c8f776f14ccdb052519d6e80c29fc2afd560d1b7c3a"
+    },
+    {
+      "path": "java/util/Strings.class",
+      "class_sha256": "c5227f8ff9964eded8f53974f25af389ad19555d814b449b3e679407302381c6",
+      "public_protected_api_sha256": "6a3c58d4211b1040410c14a994a57f8e16614ecd94703812a3ed3b1ad9715afb"
+    },
+    {
+      "path": "java/util/concurrent/Callable.class",
+      "class_sha256": "5ac1e87b943f3d3045e0e6ece11994485933f0ca33661deb6418983041a28ebd",
+      "public_protected_api_sha256": "9708a5fbdf6c87c450f8ffb66a7d8e46a4bdef3f9fafab38fd735d1f9b457084"
+    },
+    {
+      "path": "java/util/concurrent/Executor.class",
+      "class_sha256": "ee7296da0cb8603f093c4827ecbbb418b7f692c85ddf329825b8403a55cbf57d",
+      "public_protected_api_sha256": "7cb6c16e6d6abc1d95243223d432dc9cf57701e965dfef2abacca3a61a7133dd"
+    },
+    {
+      "path": "java/util/concurrent/ExecutorService.class",
+      "class_sha256": "c504116b00af515cc2c2871be67983a0f6d0d28426e85c44c373af705a0f4c09",
+      "public_protected_api_sha256": "dcedcfc03a905aceb33b7c817badab30709498a05ce65e37d2ac7a674b4fec61"
+    },
+    {
+      "path": "java/util/concurrent/MonitoredCallable.class",
+      "class_sha256": "3a7ff2956aba374ddd427588a80092bddcb50d95171a894aadc3a74adb1a88e3",
+      "public_protected_api_sha256": "7d4625088649a1eb400856cfd49bbaca7c628e98e78b38e7b5f3ab436d4c020b"
+    },
+    {
+      "path": "java/util/concurrent/MonitoredRunnable.class",
+      "class_sha256": "10a4faf061453941d357159c9f9ce63863a063441c79630fc0ce746240b70d38",
+      "public_protected_api_sha256": "a9d70a0dd6f4597d5ba02dfaccf70a4c65703d05997cab724d892bcf8b35b712"
+    },
+    {
+      "path": "java/util/concurrent/ProgressMonitor$1.class",
+      "class_sha256": "3edef0c3e30502fd7c8b55abbc47724403e6d93ddb7b70a350c7fca7bf8a83bf",
+      "public_protected_api_sha256": "2ebc22df9f42058ac114312e221574490183d657c3f3fd4be932d3c4275459e8"
+    },
+    {
+      "path": "java/util/concurrent/ProgressMonitor.class",
+      "class_sha256": "7785729a2d0d46e2f8e24a963c100c9d88860687e89d19c8c5f7917df63e9864",
+      "public_protected_api_sha256": "6456fe83cf9abd3e5da39e627830552a19d94a747a9a82d3f3224ddd548a297b"
+    },
+    {
+      "path": "java/util/concurrent/ProgressMonitors$Scope.class",
+      "class_sha256": "171b77e3be613e89818cdd483fb1ca1c3c5228103405d616ba1ab3764520b884",
+      "public_protected_api_sha256": "352686b111fda9b2cb0dd60f2c95e9bedfa6bb77305f6c27eada161798ed3410"
+    },
+    {
+      "path": "java/util/concurrent/ProgressMonitors$WeightedChild.class",
+      "class_sha256": "70a54463e757bc69559a0b3a63f48cfce186019648d36953b6323a4ca48b66cf",
+      "public_protected_api_sha256": "38adc5db44682bb6322bc64e1caba9f62acd9cb92aaeab423c9025780d62d5b4"
+    },
+    {
+      "path": "java/util/concurrent/ProgressMonitors.class",
+      "class_sha256": "fbec0395fe48c01f73a62234d5f7f4dd9b9a521eae9ee629bdaaafe7609ba5fd",
+      "public_protected_api_sha256": "6025da49aae8a71f8704601d7bdc93f132c3dbb3e677d5f375ea8a6e500e4152"
+    },
+    {
+      "path": "java/util/function/Consumer.class",
+      "class_sha256": "0e201f52757683694d276b2f6494f1aa5338276f4c022a8c5a419dee966cdb29",
+      "public_protected_api_sha256": "03b5aaa16912a556afbb6194e25b458bc2e2d6270be46f709860062548dfa94d"
+    },
+    {
+      "path": "java/util/function/Function.class",
+      "class_sha256": "fce28dd32a16ab7ed414582e2e2f1028e24696525974357ae63f8e5cb1efa61e",
+      "public_protected_api_sha256": "1cc97dd7340d59d486e849fe64aa892117c9bc372231ffc1cc2c9b00b605f61f"
+    },
+    {
+      "path": "java/util/function/Supplier.class",
+      "class_sha256": "0e84954a830e2d9660e3c6c8a9152a8d6594886e3f50a59ce5067cff3dafc6e6",
+      "public_protected_api_sha256": "7b6056b62f3c22df712bbce9251aa3dd2599623a175c1cf83a4a9c5ede13abbb"
+    }
+  ]
+}

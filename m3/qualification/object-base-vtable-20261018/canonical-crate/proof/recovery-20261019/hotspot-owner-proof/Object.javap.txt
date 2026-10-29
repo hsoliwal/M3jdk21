@@ -1,0 +1,44 @@
+Compiled from "Object.java"
+public class java.lang.Object {
+  public java.lang.Object();
+    descriptor: ()V
+
+  public <T> T toAdapter(java.lang.Class<T>);
+    descriptor: (Ljava/lang/Class;)Ljava/lang/Object;
+
+  public final native java.lang.Class<?> getClass();
+    descriptor: ()Ljava/lang/Class;
+
+  public native int hashCode();
+    descriptor: ()I
+
+  public boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  protected native java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+    descriptor: ()Ljava/lang/Object;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final native void notify();
+    descriptor: ()V
+
+  public final native void notifyAll();
+    descriptor: ()V
+
+  public final void wait() throws java.lang.InterruptedException;
+    descriptor: ()V
+
+  public final void wait(long) throws java.lang.InterruptedException;
+    descriptor: (J)V
+
+  private final native void wait0(long) throws java.lang.InterruptedException;
+    descriptor: (J)V
+
+  public final void wait(long, int) throws java.lang.InterruptedException;
+    descriptor: (JI)V
+
+  protected void finalize() throws java.lang.Throwable;
+    descriptor: ()V
+}
