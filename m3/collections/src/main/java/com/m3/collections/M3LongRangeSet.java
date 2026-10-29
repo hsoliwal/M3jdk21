@@ -75,17 +75,14 @@ public final class M3LongRangeSet {
     public void add(long fromInclusive, long toExclusive) {
         valid(fromInclusive, toExclusive);
         if (fromInclusive == toExclusive) return;
-        int first = 0;
-        while (first < size && ends[first] < fromInclusive) first++;
-        int last = first;
-        long start = fromInclusive;
-        long end = toExclusive;
-        while (last < size && starts[last] <= end) {
-            start = Math.min(start, starts[last]);
-            end = Math.max(end, ends[last]);
-            last++;
-        }
+        // Binary boundary search reuses the existing signed primitive-lane kernel.
+        // Disjoint, nonadjacent ranges guarantee that only the outer endpoints
+        // can expand the union; no scan of the covered ranges is necessary.
+        int first = M3LaneSearch.lowerBound(ends, 0, size, fromInclusive);
+        int last = M3LaneSearch.upperBound(starts, first, size, toExclusive);
         int removed = last - first;
+        long start = removed == 0 ? fromInclusive : Math.min(fromInclusive, starts[first]);
+        long end = removed == 0 ? toExclusive : Math.max(toExclusive, ends[last - 1]);
         if (removed == 1 && start == starts[first] && end == ends[first]) return;
         int resulting = size - removed + 1;
         reserve(resulting);
@@ -102,8 +99,7 @@ public final class M3LongRangeSet {
         valid(fromInclusive, toExclusive);
         if (fromInclusive == toExclusive || size == 0) return;
         int first = firstEndingAfter(fromInclusive);
-        int last = first;
-        while (last < size && starts[last] < toExclusive) last++;
+        int last = M3LaneSearch.lowerBound(starts, first, size, toExclusive);
         if (first == last) return;
         long oldStart = starts[first];
         long oldEnd = ends[last - 1];
