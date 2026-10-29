@@ -1,9 +1,12 @@
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: bind extrema and failure probes to the admitted ordered-cursor null-navigation successor.
  */
 package com.m3.collections;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -240,7 +243,7 @@ public final class M3FilteredSetNullContract {
         @Override public Integer last() { observations.add("last"); return super.last(); }
     }
 
-    private static void historicalExtremeProbes() {
+    private static void boundedCursorExtremeProbes() {
         Comparator<Integer> rejectNull = (left, right) -> {
             if (left == null || right == null) throw new AssertionError("fabricated null comparison");
             return Integer.compare(left, right);
@@ -249,22 +252,22 @@ public final class M3FilteredSetNullContract {
             ObservedSet firstNull = new ObservedSet(Comparator.nullsFirst(Comparator.naturalOrder()),
                     Arrays.asList(null, 1, 3));
             equal(null, view(surface, firstNull, value -> true).ceiling(9), "first-null absence");
-            equal(List.of("isEmpty", "first"), firstNull.observations, "first-null probe order");
+            equal(List.of("last"), firstNull.observations, "forward cursor uses its stored last boundary");
             ObservedSet lastNull = new ObservedSet(Comparator.nullsLast(Comparator.naturalOrder()),
                     Arrays.asList(1, 3, null));
             equal(null, view(surface, lastNull, value -> true).floor(-9), "last-null absence");
-            equal(List.of("isEmpty", "first", "last"), lastNull.observations, "last-null probe order");
+            equal(List.of(), lastNull.observations, "reverse cursor has no root extrema probes");
             ObservedSet middleNull = new ObservedSet(MIDDLE, Arrays.asList(-1, null, 3));
             equal(-1, view(surface, middleNull, Objects::nonNull).floor(2), "interior-null continuation");
-            equal(List.of("isEmpty", "first", "last"), middleNull.observations,
-                    "interior-null retains extreme probe order");
+            equal(List.of(), middleNull.observations,
+                    "interior-null continuation uses reverse ordered members");
             ObservedSet nonNull = new ObservedSet(rejectNull, List.of(1, 3));
             equal(null, view(surface, nonNull, value -> true).higher(9), "null-rejecting absence");
-            equal(List.of("isEmpty", "first", "last"), nonNull.observations,
-                    "nonnull absence retains extreme probe order");
+            equal(List.of("last"), nonNull.observations,
+                    "nonnull absence compares only stored cursor boundaries");
             ObservedSet empty = new ObservedSet(rejectNull, List.of());
             equal(null, view(surface, empty, value -> true).lower(0), "empty source");
-            equal(List.of("isEmpty"), empty.observations, "empty guard short-circuits extrema");
+            equal(List.of(), empty.observations, "empty iterator short-circuits extrema");
         }
     }
 
@@ -374,28 +377,32 @@ public final class M3FilteredSetNullContract {
         @Override public Iterator<Integer> descendingIterator() { throw failure; }
     }
 
-    private static final class FaultingRangeSet extends TreeSet<Integer> {
-        private static final long serialVersionUID = 1L;
-        private final IllegalArgumentException failure;
-        FaultingRangeSet(IllegalArgumentException failure) {
-            super(MIDDLE);
-            this.failure = failure;
-            addAll(Arrays.asList(-1, null, 3));
-        }
-        @Override public NavigableSet<Integer> headSet(Integer to, boolean inclusive) {
-            super.headSet(to, inclusive);
-            return new PoisonedSet(comparator(), failure);
-        }
-        @Override public NavigableSet<Integer> tailSet(Integer from, boolean inclusive) {
-            super.tailSet(from, inclusive);
-            return new PoisonedSet(comparator(), failure);
-        }
+    /** Preserve the real source views while arming every ordered continuation range. */
+    @SuppressWarnings("unchecked")
+    private static NavigableSet<Integer> faultingRanges(NavigableSet<Integer> source,
+            IllegalArgumentException failure) {
+        return (NavigableSet<Integer>) Proxy.newProxyInstance(NavigableSet.class.getClassLoader(),
+                new Class<?>[] {NavigableSet.class}, (proxy, method, arguments) -> {
+                    Object result;
+                    try { result = method.invoke(source, arguments); }
+                    catch (InvocationTargetException thrown) { throw thrown.getCause(); }
+                    if (method.getName().equals("headSet") || method.getName().equals("tailSet")) {
+                        NavigableSet<Integer> range = (NavigableSet<Integer>) result;
+                        return new PoisonedSet(range.comparator(), failure);
+                    }
+                    if (result instanceof NavigableSet<?> set) {
+                        return faultingRanges((NavigableSet<Integer>) set, failure);
+                    }
+                    return result;
+                });
     }
 
     private static void continuationIteratorFailures() {
         for (Surface surface : List.of(Surface.READONLY, Surface.FACADE)) {
             IllegalArgumentException failure = new IllegalArgumentException("continuation iterator");
-            NavigableSet<Integer> selected = view(surface, new FaultingRangeSet(failure), Objects::nonNull);
+            NavigableSet<Integer> source = new TreeSet<>(MIDDLE);
+            source.addAll(Arrays.asList(-1, null, 3));
+            NavigableSet<Integer> selected = view(surface, faultingRanges(source, failure), Objects::nonNull);
             throwsSame(failure, () -> selected.floor(2), "backward interior-null iterator identity");
             throwsSame(failure, () -> selected.ceiling(2), "forward interior-null iterator identity");
         }
@@ -495,7 +502,7 @@ public final class M3FilteredSetNullContract {
         baselineInteriorNull();
         setMatrix();
         nestedAndLiveViews();
-        historicalExtremeProbes();
+        boundedCursorExtremeProbes();
         predicateFailures();
         comparatorFailures();
         continuationIteratorFailures();

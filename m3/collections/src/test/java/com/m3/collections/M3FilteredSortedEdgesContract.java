@@ -1,6 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: reconcile comparator-entry acceptance with the qualified stored-representative contract.
  */
 package com.m3.collections;
 
@@ -51,8 +52,8 @@ public final class M3FilteredSortedEdgesContract {
     }
 
     /**
-     * A known HOLD witness, excluded from admission: correcting comparator aliases
-     * also changes the frozen entry-equality and callback-visitation contract.
+     * Minimized comparator-alias witness admitted by the stored-representative successor.
+     * Entry membership uses the owner's comparator and tests only its matched representative.
      */
     public static void entryWitness() {
         NavigableMap<String, String> source = new TreeMap<>(Comparator.comparingInt(String::length));
@@ -169,6 +170,27 @@ public final class M3FilteredSortedEdgesContract {
         }
     }
 
+    /** Linear independent oracle: owner admission, then the comparator-matched stored entry. */
+    private static boolean expectedEntryMembership(SortedMap<String, String> source,
+            BiPredicate<String, String> visible, Object candidate) {
+        if (!(candidate instanceof Map.Entry<?, ?> probe)) return false;
+        Object query = probe.getKey();
+        // Preserve the source's null/type/comparator exception contract even when every
+        // stored mapping is filtered out; an empty copied map has a different admission path.
+        if (!source.containsKey(query)) return false;
+        String key = (String) query;
+        Comparator<? super String> order = source.comparator();
+        for (Map.Entry<String, String> stored : source.entrySet()) {
+            boolean sameKey = order == null ? Objects.equals(key, stored.getKey())
+                    : order.compare(key, stored.getKey()) == 0;
+            if (sameKey) {
+                return visible.test(stored.getKey(), stored.getValue())
+                        && Objects.equals(stored.getValue(), probe.getValue());
+            }
+        }
+        throw new AssertionError("owner admitted a key without a stored representative");
+    }
+
     private static void checkEntries(SortedMap<String, String> source,
             BiPredicate<String, String> visible) {
         SortedMap<String, String> expected = new TreeMap<>(source.comparator());
@@ -181,21 +203,22 @@ public final class M3FilteredSortedEdgesContract {
         for (String key : keys) {
             for (String value : Arrays.asList(null, "v1", "v2", "v4", "v5", "absent")) {
                 Map.Entry<String, String> probe = new SimpleImmutableEntry<>(key, value);
-                // The admitted source contract scans visible entries with query
-                // equality. A detached list preserves that distinct set contract.
-                equal(outcome(() -> new ArrayList<>(expected.entrySet()).contains(probe)),
+                equal(outcome(() -> expectedEntryMembership(source, visible, probe)),
                         outcome(() -> actual.entrySet().contains(probe)), "entry membership " + probe);
             }
         }
         equal(false, actual.entrySet().contains(null), "null is not an entry");
         equal(false, actual.entrySet().contains("a"), "non-entry membership");
-        equal(false, actual.entrySet().contains(new SimpleImmutableEntry<>(42, "v1")),
-                "incompatible key remains a false equality probe");
+        Map.Entry<Integer, String> incompatible = new SimpleImmutableEntry<>(42, "v1");
+        equal(outcome(() -> expectedEntryMembership(source, visible, incompatible)),
+                outcome(() -> actual.entrySet().contains(incompatible)),
+                "incompatible entry key preserves owner admission");
         equal(new ArrayList<>(expected.entrySet()), new ArrayList<>(actual.entrySet()), "entry projection");
     }
 
-    /** Freezes visible-entry equality, including null/incompatible keys and a SortedMap facade. */
+    /** Comparator membership, owner admission, stored representatives and SortedMap facades. */
     public static void membershipMatrix() {
+        entryWitness();
         Comparator<String> length = Comparator.comparingInt(String::length);
         Comparator<String> interior = Comparator.comparingInt(key -> key == null ? 5 : key.length() * 2);
         List<Comparator<String>> comparators = List.of(length, String.CASE_INSENSITIVE_ORDER,
@@ -230,8 +253,8 @@ public final class M3FilteredSortedEdgesContract {
             calls[0]++;
             return true;
         });
-        equal(false, view.entrySet().contains(new SimpleImmutableEntry<>("zz", null)),
-                "comparator alias entry correction held for callback compatibility");
+        equal(true, view.entrySet().contains(new SimpleImmutableEntry<>("zz", null)),
+                "comparator alias uses the stored nullable mapping");
         equal(1, calls[0], "one visibility evaluation for entry membership");
         IllegalArgumentException failure = new IllegalArgumentException("predicate failure");
         NavigableMap<String, String> raising = M3FilteredViews.filterEntries(source,
@@ -276,7 +299,7 @@ public final class M3FilteredSortedEdgesContract {
             trace.add("predicate:" + key);
             return !key.equals("bb");
         });
-        for (String query : Arrays.asList("aaa", "zz", null)) {
+        for (String query : Arrays.asList("aaa", "zzz", "zz", "xxxx", null)) {
             trace.clear();
             comparisons[0] = 0;
             Map.Entry<String, String> probe = new SimpleImmutableEntry<>(query, "v3") {
@@ -288,26 +311,37 @@ public final class M3FilteredSortedEdgesContract {
                     return super.equals(other);
                 }
             };
-            equal(Objects.equals(query, "aaa"), view.entrySet().contains(probe),
-                    "entry callback result " + query);
-            List<String> expectedTrace = new ArrayList<>(List.of("predicate:a", "query-key",
-                    "predicate:bb", "predicate:aaa", "query-key"));
-            if (Objects.equals(query, "aaa")) expectedTrace.add("query-value");
-            equal(expectedTrace, trace, "original predicate and query access sequence " + query);
-            equal(0, comparisons[0], "entry equality must not add comparator callbacks " + query);
+            boolean admitted = Objects.equals(query, "aaa") || Objects.equals(query, "zzz");
+            equal(query == null ? NullPointerException.class : admitted,
+                    outcome(() -> view.entrySet().contains(probe)), "entry callback result " + query);
+            List<String> expectedTrace = new ArrayList<>(List.of("query-key"));
+            if (admitted) expectedTrace.addAll(List.of("predicate:aaa", "query-value"));
+            else if (Objects.equals(query, "zz")) expectedTrace.add("predicate:bb");
+            equal(expectedTrace, trace, "stored representative and query accessor sequence " + query);
+            int expectedComparisons = query == null ? 1 : admitted ? 6 : query.equals("zz") ? 3 : 2;
+            equal(expectedComparisons, comparisons[0], "bounded owner comparator demand " + query);
             System.out.println("ENTRY_TRACE query=" + query + " events=" + trace);
         }
+        AssertionError valueFailure = new AssertionError("stored value equality sentinel");
         Object effectfulValue = new Object() {
             @Override public boolean equals(Object other) {
-                throw new AssertionError("comparator alias must not introduce a value callback");
+                throw valueFailure;
             }
             @Override public int hashCode() { return 0; }
         };
         NavigableMap<String, Object> values = new TreeMap<>(Comparator.comparingInt(String::length));
         values.put("aa", effectfulValue);
         NavigableMap<String, Object> selected = M3FilteredViews.filterEntries(values, (key, value) -> true);
-        equal(false, selected.entrySet().contains(new SimpleImmutableEntry<>("zz", new Object())),
-                "false alias value probe has no additional value callback");
+        boolean observedFailure = false;
+        try { selected.entrySet().contains(new SimpleImmutableEntry<>("zz", new Object())); }
+        catch (AssertionError observed) {
+            require(observed == valueFailure, "stored value equality exception identity");
+            observedFailure = true;
+        }
+        require(observedFailure, "visible comparator alias evaluates stored value equality");
+        NavigableMap<String, Object> hidden = M3FilteredViews.filterEntries(values, (key, value) -> false);
+        equal(false, hidden.entrySet().contains(new SimpleImmutableEntry<>("zz", new Object())),
+                "rejected representative does not evaluate value equality");
     }
 
     /** Operation counts detect a replacement that scans the entire owner for an ordinary seek. */

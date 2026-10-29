@@ -12,6 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
+// Modified 2026: exercise actual nearest-entry and rejected-candidate cursor failure paths.
 package com.m3.collections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -77,6 +78,7 @@ public final class M3FilteredCursorExceptionContract {
             if (result instanceof NavigableSet<?>) return proxy(NavigableSet.class, result, trace, nextLabel);
             if (result instanceof Set<?> && name.equals("entrySet")) return proxy(Set.class, result, trace, nextLabel + ".entries");
             if (result instanceof Iterator<?>) return proxy(Iterator.class, result, trace, nextLabel + ".cursor");
+            if (result instanceof Map.Entry<?, ?>) return proxy(Map.Entry.class, result, trace, nextLabel + ".entry");
             return result;
         });
     }
@@ -98,20 +100,26 @@ public final class M3FilteredCursorExceptionContract {
     private static void cursorFailures() {
         for (int operation = 0; operation < 4; operation++) {
             final int op = operation;
-            for (String failAt : List.of("range.entrySet", "range.entries.iterator", "range.descendingMap")) {
+            String near = List.of("lowerEntry", "floorEntry", "ceilingEntry", "higherEntry").get(operation);
+            String rangeFactory = operation < 2 ? "headMap" : "tailMap";
+            for (String failAt : List.of("owner." + near, "owner.entry.getKey", "owner.entry.getValue",
+                    "owner." + rangeFactory, "range.entrySet", "range.entries.iterator",
+                    "range.descendingMap", "range.entries.cursor.entry.getKey",
+                    "range.entries.cursor.entry.getValue")) {
                 if (operation >= 2 && failAt.equals("range.descendingMap")) continue;
                 Trace trace = new Trace();
                 TreeMap<Integer, Integer> tree = new TreeMap<>();
                 for (int i = 0; i < 7; i++) tree.put(i, i * 10);
                 NavigableMap<Integer, Integer> source = proxy(NavigableMap.class, tree, trace, "owner");
-                NavigableMap<Integer, Integer> view = M3FilteredViews.filterEntries(source, (key, value) -> true);
+                // Reject the nearest entry so range-factory and iterator failures are reachable.
+                NavigableMap<Integer, Integer> view = M3FilteredViews.filterEntries(source, (key, value) -> false);
                 trace.failAt = failAt;
                 expectIdentity(trace, () -> navigate(view, 3, op));
             }
             Trace trace = new Trace();
             TreeSet<Integer> tree = new TreeSet<>(List.of(0, 1, 2, 3, 4, 5, 6));
             NavigableSet<Integer> source = proxy(NavigableSet.class, tree, trace, "owner");
-            NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> true);
+            NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> false);
             trace.failAt = operation < 2 ? "range.descendingIterator" : "range.iterator";
             expectIdentity(trace, () -> navigate(view, 3, op));
 
@@ -119,15 +127,18 @@ public final class M3FilteredCursorExceptionContract {
             TreeMap<Integer, Integer> comparatorMap = new TreeMap<>(mapComparator.comparator());
             for (int i = 0; i < 7; i++) comparatorMap.put(i, i);
             NavigableMap<Integer, Integer> wrappedMap = proxy(NavigableMap.class, comparatorMap, mapComparator, "owner");
-            NavigableMap<Integer, Integer> filteredMap = M3FilteredViews.filterEntries(wrappedMap, (key, value) -> true);
+            NavigableMap<Integer, Integer> filteredMap = M3FilteredViews.filterEntries(wrappedMap, (key, value) -> false);
             mapComparator.events.clear(); mapComparator.armComparator = true;
+            expectIdentity(mapComparator, () -> navigate(filteredMap, 3, op));
+            // The initial source navigation has its own comparator-failure boundary.
+            mapComparator.events.clear(); mapComparator.armed = true;
             expectIdentity(mapComparator, () -> navigate(filteredMap, 3, op));
 
             Trace setComparator = new Trace();
             TreeSet<Integer> comparatorSet = new TreeSet<>(setComparator.comparator());
             comparatorSet.addAll(List.of(0, 1, 2, 3, 4, 5, 6));
             NavigableSet<Integer> wrappedSet = proxy(NavigableSet.class, comparatorSet, setComparator, "owner");
-            NavigableSet<Integer> filteredSet = M3MutableFilteredViews.filter(wrappedSet, value -> true);
+            NavigableSet<Integer> filteredSet = M3MutableFilteredViews.filter(wrappedSet, value -> false);
             setComparator.events.clear(); setComparator.armComparator = true;
             expectIdentity(setComparator, () -> navigate(filteredSet, 3, op));
         }

@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026: trace direct navigation-entry getters with the existing exception and Error spectrum.
 package com.m3.collections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -97,6 +98,11 @@ public final class M3FirstVisibleAtomContract {
                                 };
                             }
                         };
+                    }
+                    if (result instanceof Map.Entry<?, ?> entry) {
+                        // Near-entry navigation now returns a representative directly. Keep
+                        // its key/value accessors inside the same exception/Error spectrum.
+                        return tracedEntry((Map.Entry<Integer, String>) entry, trace, next);
                     }
                     return result;
                 });

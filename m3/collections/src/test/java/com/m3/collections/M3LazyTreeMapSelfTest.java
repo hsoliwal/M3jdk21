@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: cancellation fixture setup limited to the first provider attempt.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: align repeated live-entry identity with the existing view-local facade cache.
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: restore fresh live projections with shared lazy-value and immutable-snapshot checks.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
@@ -79,9 +80,15 @@ public final class M3LazyTreeMapSelfTest {
         same(identity, snapshot.getValue()); equal(2, calls[0]);
         Object replaced = new Object(); same(identity, view.put(6, replaced));
         same(identity, snapshot.getValue()); same(replaced, map.get(6));
+        failure(UnsupportedOperationException.class, () -> snapshot.setValue(new Object()));
         Map.Entry<Integer, Object> repeated = view.entrySet().iterator().next();
-        require(live == repeated, "same view reuses its cached live entry projection");
+        require(live != repeated, "each request creates a fresh caller-owned live projection");
+        equal(live.getKey(), repeated.getKey()); equal(2, calls[0]);
+        same(identity, repeated.getValue()); equal(2, calls[0]);
         Object explicit = new Object(); same(identity, live.setValue(explicit)); same(explicit, map.get(7));
+        same(explicit, repeated.getValue());
+        Object updated = new Object(); same(explicit, repeated.setValue(updated));
+        same(updated, live.getValue()); same(updated, map.get(7)); equal(2, calls[0]);
         M3Progress progress = M3Progress.of(5); view.preload(progress);
         equal(5, calls[0]); require(progress.isDone(), "bounded preload complete");
         equal(5, progress.getWorkedSoFar()); require(!map.isValueLoaded(2) && !map.isValueLoaded(8), "outside stays lazy");

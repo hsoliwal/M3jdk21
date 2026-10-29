@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+# Modified 2026: qualify explicit required array storage and consume the actual source-JUnit closure.
 """Build the source-JUnit closure, owning collection module and every collection JNI library."""
 import hashlib
 import json
@@ -12,11 +13,13 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[4]
 MODULE = ROOT / 'm3/collections'
+ARRAYS = ROOT / 'm3/arrays'
 OUT = MODULE / 'target/full-java-jni'
 JAVA = Path(os.environ['JAVA_HOME'])
 VENDOR = ROOT / 'm3/vendor/third_party'
 DEPENDENCIES = ('apiguardian-api', 'opentest4j', 'univocity-parsers',
                 'junit-platform-commons-1.10.2', 'junit-platform-engine-1.10.2',
+                'junit-platform-launcher-1.10.2',
                 'junit-jupiter-api-5.10.2', 'junit-jupiter-params-5.10.2',
                 'junit-jupiter-engine-5.10.2', 'junit-jupiter-5.10.2')
 # Existing library names and generated JNI headers; no second native owner.
@@ -48,8 +51,8 @@ def maven(pom, *args):
     if os.environ.get('M2_REPO'): command.append('-Dmaven.repo.local=' + os.environ['M2_REPO'])
     run(command + ['-f', pom, *args])
 
-def reports(mode):
-    source = MODULE / 'target/surefire-reports'
+def reports(mode, module=MODULE):
+    source = module / 'target/surefire-reports'
     destination = OUT / (mode + '-reports')
     if destination.exists(): shutil.rmtree(destination)
     shutil.copytree(source, destination)
@@ -59,9 +62,60 @@ def reports(mode):
         for key in totals: totals[key] += int(suite.get(key, '0'))
     if not totals['tests'] or totals['failures'] or totals['errors']:
         raise RuntimeError('Owning suite did not pass: ' + str(totals))
-    if mode == 'native' and totals['skipped']:
+    if mode in ('native', 'arrays-native') and totals['skipped']:
         raise RuntimeError('Required-native suite skipped tests: ' + str(totals))
     return totals
+
+def clean_module_outputs(module):
+    """Discard generated Maven classes and metadata without touching source or OUT."""
+    target = module / 'target'
+    for name in ('classes', 'test-classes', 'maven-status', 'generated-sources',
+                 'generated-test-sources', 'surefire-reports', 'maven-archiver'):
+        path = target / name
+        if path.exists(): shutil.rmtree(path)
+    for jar in target.glob('*.jar'):
+        jar.unlink()
+
+def qualify_arrays(junit_args):
+    """Reuse the existing array module and its CMake owner; preserve its Java-only lane."""
+    clean_module_outputs(ARRAYS)
+    maven(ARRAYS / 'pom.xml', *junit_args, '-Dmaven.test.skip=true', 'install')
+    array_jar = ARRAYS / 'target/m3-arrays-0.1.0-SNAPSHOT.jar'
+    if not array_jar.is_file():
+        raise RuntimeError('Source-built com.m3.arrays module jar is absent')
+    with zipfile.ZipFile(array_jar) as archive:
+        if 'module-info.class' not in archive.namelist():
+            raise RuntimeError('com.m3.arrays module descriptor is missing')
+    native = OUT / 'arrays-native'
+    if native.exists(): shutil.rmtree(native)
+    run(['cmake', '-S', ARRAYS / 'src/main/native', '-B', native,
+         '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_C_STANDARD=17', '-DCMAKE_C_EXTENSIONS=OFF',
+         '-DCMAKE_C_FLAGS=-fsanitize=undefined -fno-sanitize-recover=undefined'])
+    run(['cmake', '--build', native, '--parallel', '2'])
+    run(['ctest', '--test-dir', native, '--output-on-failure'])
+    library = native / 'libm3_arrays.so'
+    if not library.is_file():
+        raise RuntimeError('Required source-built array JNI library is absent')
+    base_vm = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni']
+    result = {}
+    for mode in ('java', 'native'):
+        vm = base_vm + ['-Djava.library.path=' + str(OUT / 'missing')]
+        if mode == 'native':
+            vm += ['-Dm3.arrays.native.path=' + str(library), '-Dm3.arrays.native.required=true']
+        else:
+            vm += ['-Dm3.arrays.native.path=', '-Dm3.arrays.native.required=false']
+        old_reports = ARRAYS / 'target/surefire-reports'
+        if old_reports.exists(): shutil.rmtree(old_reports)
+        maven(ARRAYS / 'pom.xml', *junit_args, '-DargLine=' + ' '.join(vm),
+              '-DfailIfNoTests=true', 'verify')
+        result[mode] = reports('arrays-' + mode, ARRAYS)
+    cp = os.pathsep.join(str(ARRAYS / name) for name in ('target/classes', 'target/test-classes'))
+    # This existing main explicitly checks unloaded Java versus actually loaded JNI state.
+    for arguments in ([], [str(library)]):
+        run([JAVA / 'bin/java', *base_vm, '-Dm3.arrays.native.path=',
+             '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
+             'com.m3.arrays.M3ArrayEmptySegmentsSelfTest', *arguments])
+    return array_jar, library, result
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
@@ -86,17 +140,17 @@ def main():
         run(['python3', owner / 'verify_source.py', jar])
         dependency_proof[module] = {'provenance_sha256': sha(owner / 'PROVENANCE.json'),
                                     'jar_sha256': sha(jar)}
-    # Reuse the existing source-owned com.m3.arrays module (Eclipse/Synexia
-    # collection donor), rather than compiling com.m3.collections as an
-    # unresolved JPMS module or placing arrays classes on the class path.
-    maven(ROOT / 'm3/arrays/pom.xml', '-Dmaven.test.skip=true', 'install')
-    array_jar = ROOT / 'm3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar'
-    if not array_jar.is_file():
-        raise RuntimeError('Source-built com.m3.arrays module jar is absent')
-    with zipfile.ZipFile(array_jar) as archive:
-        if 'module-info.class' not in archive.namelist():
-            raise RuntimeError('com.m3.arrays module descriptor is missing')
-    dependency_proof['com.m3.arrays'] = {'jar_sha256': sha(array_jar)}
+    # Donor modules publish their actual source coordinates. Consumers retain the
+    # ordinary default outside this strict source-prerequisite owning gate.
+    ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
+    junit_pom = ET.parse(VENDOR / 'junit-jupiter-5.10.2/pom.xml').getroot()
+    junit_version = junit_pom.findtext('m:version', namespaces=ns)
+    if not junit_version:
+        raise RuntimeError('Source JUnit coordinate is absent')
+    junit_args = ['-Dm3.junit.version=' + junit_version]
+    array_jar, array_library, array_results = qualify_arrays(junit_args)
+    dependency_proof['com.m3.arrays'] = {
+        'jar_sha256': sha(array_jar), 'native_sha256': sha(array_library)}
     sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
     tests = sorted((MODULE / 'src/test/java').rglob('*.java'))
     (OUT / 'main.args').write_text('\n'.join(map(str, sources)) + '\n')
@@ -140,7 +194,9 @@ def main():
               '-o', gather_fixture])
     run([gather_fixture])
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni',
-              '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
+              '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true',
+              '-Dm3.arrays.native.path=' + str(array_library)]
+    clean_module_outputs(MODULE)
     results = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
         library = OUT / ('native' if mode == 'native' else 'missing')
@@ -149,7 +205,8 @@ def main():
                        '-Dm3.collections.all.native.required=' + required]
         old_reports = MODULE / 'target/surefire-reports'
         if old_reports.exists(): shutil.rmtree(old_reports)
-        maven(MODULE / 'pom.xml', '-DargLine=' + ' '.join(vm), '-DfailIfNoTests=true', 'verify')
+        maven(MODULE / 'pom.xml', *junit_args, '-DargLine=' + ' '.join(vm),
+              '-DfailIfNoTests=true', 'verify')
         results[mode] = reports(mode)
     jar = MODULE / 'target/m3-collections-0.1.0-SNAPSHOT.jar'
     with zipfile.ZipFile(jar) as archive:
@@ -164,7 +221,7 @@ def main():
         text=True).strip()
     if runtime_modules != 'com.m3.arrays,java.base':
         raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
-    cp = str(MODULE / 'target/classes') + os.pathsep + str(MODULE / 'target/test-classes')
+    cp = os.pathsep.join(map(str, (MODULE / 'target/classes', MODULE / 'target/test-classes', array_jar)))
     java = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
     contracts = [('M3MaskWindowSparseContract', ['native']),
                  ('M3BudgetedMaskWindowContract', ['--native']),
@@ -196,16 +253,24 @@ def main():
          'com.m3.collections.M3LongIndexPathMasksJNISelfTest'])
     native_fixtures = [MODULE / 'src/test/native' / name for name in
                        ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c')]
+    array_sources = sorted(path for path in (ARRAYS / 'src').rglob('*') if path.is_file())
+    build_inputs = [Path(__file__), ARRAYS / 'pom.xml', MODULE / 'pom.xml']
+    build_inputs += sorted((ROOT / 'm3/native/include').glob('*.h'))
+    build_inputs += [VENDOR / module / 'pom.xml' for module in DEPENDENCIES]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
              'scope': 'independent m3/collections; no JDK phase or challenge-corpus promotion',
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,
+             'array_junit': array_results, 'source_junit_version': junit_version,
+             'array_storage': 'explicit m3.arrays.native.path; required for both collection kernel modes',
+             'java_lane': 'array suite truly unloaded; collection kernels Java with required native array allocation',
              'source_dependencies': dependency_proof, 'native_libraries': sorted(LIBRARIES),
              'explicit_native_contracts': [name for name, _ in contracts],
              'native': 'generated headers; C17 strict; fatal UBSan; actual -Xcheck:jni',
-             'source_sha256': {str(p.relative_to(ROOT)): sha(p) for p in sources + tests + sorted(admitted) + native_fixtures}}
+             'source_sha256': {str(p.relative_to(ROOT)): sha(p) for p in
+                               sources + tests + sorted(admitted) + native_fixtures + array_sources + build_inputs}}
     (OUT / 'PROOF.json').write_text(json.dumps(proof, indent=2) + '\n')
-    print(json.dumps({k: proof[k] for k in ('status', 'head_sha', 'junit', 'native_libraries')}, indent=2))
+    print(json.dumps({k: proof[k] for k in ('status', 'head_sha', 'junit', 'array_junit', 'native_libraries')}, indent=2))
 
 if __name__ == '__main__': main()
