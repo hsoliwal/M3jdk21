@@ -127,12 +127,27 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
         int nextCapacity = M3SlotArrays.grow(values.length);
         Object[] nextValues = new Object[nextCapacity];
         byte[] nextStates = new byte[nextCapacity];
-        for (int i = 0; i < size; i++) {
-            int slot = position(i);
-            nextValues[i] = values[slot];
-            nextStates[i] = states[slot];
-        }
+        copyValuesInto(nextValues);
+        copyStatesInto(nextStates);
         values = nextValues; states = nextStates; head = 0;
+    }
+    /** Copy logical order from the ring's at most two contiguous payload spans. */
+    private void copyValuesInto(Object[] destination) {
+        if (size == 0) return;
+        int firstLength = Math.min(size, values.length - head);
+        System.arraycopy(values, head, destination, 0, firstLength);
+        if (firstLength < size) {
+            System.arraycopy(values, 0, destination, firstLength, size - firstLength);
+        }
+    }
+    /** Keep occurrence flags aligned with the independently staged payload lane. */
+    private void copyStatesInto(byte[] destination) {
+        if (size == 0) return;
+        int firstLength = Math.min(size, states.length - head);
+        System.arraycopy(states, head, destination, 0, firstLength);
+        if (firstLength < size) {
+            System.arraycopy(states, 0, destination, firstLength, size - firstLength);
+        }
     }
     @Override public void addFirst(E item) {
         Objects.requireNonNull(item, "item");
@@ -274,7 +289,7 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
     @Override public Iterator<E> descendingIterator() { return new Cursor(true); }
     @Override public Object[] toArray() {
         Object[] copy = new Object[size];
-        for (int i = 0; i < size; i++) copy[i] = at(i);
+        copyValuesInto(copy);
         return copy;
     }
     @SuppressWarnings("unchecked")
@@ -282,16 +297,14 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
         Objects.requireNonNull(target, "target");
         T[] output = target.length >= size ? target
                 : (T[]) java.lang.reflect.Array.newInstance(target.getClass().getComponentType(), size);
-        for (int i = 0; i < size; i++) output[i] = (T) at(i);
+        copyValuesInto(output);
         if (output.length > size) output[size] = null;
         return output;
     }
     @Override public M3ArrayDeque<E> clone() {
         M3ArrayDeque<E> result = new M3ArrayDeque<>(size);
-        for (int i = 0; i < size; i++) {
-            int slot = position(i);
-            result.values[i] = values[slot]; result.states[i] = states[slot];
-        }
+        copyValuesInto(result.values);
+        copyStatesInto(result.states);
         result.size = size;
         return result;
     }

@@ -2,6 +2,20 @@
 #include <jni.h>
 #include <stddef.h>
 
+/* Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project.
+ * Adapted from the existing Synexia packed-selection JNI acquisition guard.
+ * A NULL acquisition may have no pending exception; report it after cleanup.
+ */
+static void m3_rank_acquisition_failed(JNIEnv *env) {
+    if (!(*env)->ExceptionCheck(env)) {
+        jclass error = (*env)->FindClass(env, "java/lang/OutOfMemoryError");
+        if (error != NULL) {
+            (void) (*env)->ThrowNew(env, error, "JNI array acquisition");
+            (*env)->DeleteLocalRef(env, error);
+        }
+    }
+}
+
 /*
  * One JNI transition per batch, signed jlong order matching Java Long.compare.
  * Get/ReleaseArrayElements respects moving GC: no object addresses are retained.
@@ -27,16 +41,21 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
     if (count == 0) return;
 
     jlong *values = (*env)->GetLongArrayElements(env, sorted, NULL);
-    if (values == NULL) return;
+    if (values == NULL) {
+        m3_rank_acquisition_failed(env);
+        return;
+    }
     jlong *targets = (*env)->GetLongArrayElements(env, queries, NULL);
     if (targets == NULL) {
         (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        m3_rank_acquisition_failed(env);
         return;
     }
     jint *positions = (*env)->GetIntArrayElements(env, results, NULL);
     if (positions == NULL) {
         (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
         (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        m3_rank_acquisition_failed(env);
         return;
     }
 
@@ -97,16 +116,21 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0(
     if (count == 0) return;
 
     jlong *values = (*env)->GetLongArrayElements(env, sorted, NULL);
-    if (values == NULL) return;
+    if (values == NULL) {
+        m3_rank_acquisition_failed(env);
+        return;
+    }
     jlong *targets = (*env)->GetLongArrayElements(env, queries, NULL);
     if (targets == NULL) {
         (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        m3_rank_acquisition_failed(env);
         return;
     }
     jint *out = (*env)->GetIntArrayElements(env, pairs, NULL);
     if (out == NULL) {
         (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
         (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        m3_rank_acquisition_failed(env);
         return;
     }
 

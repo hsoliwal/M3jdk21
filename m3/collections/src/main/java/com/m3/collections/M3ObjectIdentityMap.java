@@ -111,7 +111,14 @@ public final class M3ObjectIdentityMap<K, V> {
                 size++;
                 modCount++;
                 if (size > threshold) {
-                    rehash(keys.length << 1);
+                    try {
+                        rehash(keys.length << 1);
+                    } catch (OutOfMemoryError | IllegalStateException failure) {
+                        hasNullKey = false;
+                        size--;
+                        modCount--;
+                        throw failure;
+                    }
                 }
             }
             nullValue = value;
@@ -132,7 +139,15 @@ public final class M3ObjectIdentityMap<K, V> {
         size++;
         modCount++;
         if (size > threshold) {
-            rehash(keys.length << 1);
+            try {
+                rehash(keys.length << 1);
+            } catch (OutOfMemoryError | IllegalStateException failure) {
+                keys[index] = null;
+                values[index] = null;
+                size--;
+                modCount--;
+                throw failure;
+            }
         }
         return null;
     }
@@ -268,21 +283,24 @@ public final class M3ObjectIdentityMap<K, V> {
         }
         Object[] oldKeys = keys;
         Object[] oldValues = values;
-        keys = new Object[newCapacity];
-        values = new Object[newCapacity];
-        mask = newCapacity - 1;
-        threshold = thresholdFor(newCapacity);
+        Object[] nextKeys = new Object[newCapacity];
+        Object[] nextValues = new Object[newCapacity];
+        int nextMask = newCapacity - 1;
         for (int i = 0; i < oldKeys.length; i++) {
             Object key = oldKeys[i];
             if (key != null) {
-                int index = hash(key) & mask;
-                while (keys[index] != null) {
-                    index = (index + 1) & mask;
+                int index = hash(key) & nextMask;
+                while (nextKeys[index] != null) {
+                    index = (index + 1) & nextMask;
                 }
-                keys[index] = key;
-                values[index] = oldValues[i];
+                nextKeys[index] = key;
+                nextValues[index] = oldValues[i];
             }
         }
+        keys = nextKeys;
+        values = nextValues;
+        mask = nextMask;
+        threshold = thresholdFor(newCapacity);
     }
 
     private static int capacityFor(int expectedSize) {

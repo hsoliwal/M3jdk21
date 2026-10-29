@@ -80,14 +80,7 @@ public final class M3IntLongHashMap {
             }
             pos = (pos + 1) & mask;
         }
-        keys[pos] = key;
-        values[pos] = value;
-        size++;
-        modCount++;
-        // Count only keys actually retained in the primitive probe lane.
-        if (size - (hasZero ? 1 : 0) > threshold) {
-            rehash(keys.length << 1);
-        }
+        insertAbsent(pos, key, value);
         return true;
     }
 
@@ -134,9 +127,19 @@ public final class M3IntLongHashMap {
 
     /** Adds {@code delta} to the mapping (absent counts as zero) and returns the new value. */
     public long addTo(int key, long delta) {
-        long next = getOrDefault(key, 0L) + delta;
-        put(key, next);
-        return next;
+        if (key == 0) {
+            long next = (hasZero ? zeroValue : 0L) + delta;
+            put(0, next);
+            return next;
+        }
+        int pos = mix(key) & mask;
+        int current;
+        while ((current = keys[pos]) != 0) {
+            if (current == key) return values[pos] += delta;
+            pos = (pos + 1) & mask;
+        }
+        insertAbsent(pos, key, delta);
+        return delta;
     }
 
     public boolean remove(int key) {
@@ -259,6 +262,25 @@ public final class M3IntLongHashMap {
         return result;
     }
 
+    /** Reuses the discovered empty slot and restores it if staged growth fails. */
+    private void insertAbsent(int pos, int key, long value) {
+        keys[pos] = key;
+        values[pos] = value;
+        size++;
+        modCount++;
+        if (size - (hasZero ? 1 : 0) > threshold) {
+            try {
+                rehash(keys.length << 1);
+            } catch (OutOfMemoryError | IllegalStateException failure) {
+                keys[pos] = 0;
+                values[pos] = 0L;
+                size--;
+                modCount--;
+                throw failure;
+            }
+        }
+    }
+
     private int find(int key) {
         int pos = mix(key) & mask;
         int current;
@@ -299,21 +321,24 @@ public final class M3IntLongHashMap {
         }
         int[] oldKeys = keys;
         long[] oldValues = values;
-        keys = new int[newCapacity];
-        values = new long[newCapacity];
-        mask = newCapacity - 1;
-        threshold = thresholdFor(newCapacity);
+        int[] nextKeys = new int[newCapacity];
+        long[] nextValues = new long[newCapacity];
+        int nextMask = newCapacity - 1;
         for (int i = 0; i < oldKeys.length; i++) {
             int key = oldKeys[i];
             if (key != 0) {
-                int pos = mix(key) & mask;
-                while (keys[pos] != 0) {
-                    pos = (pos + 1) & mask;
+                int pos = mix(key) & nextMask;
+                while (nextKeys[pos] != 0) {
+                    pos = (pos + 1) & nextMask;
                 }
-                keys[pos] = key;
-                values[pos] = oldValues[i];
+                nextKeys[pos] = key;
+                nextValues[pos] = oldValues[i];
             }
         }
+        keys = nextKeys;
+        values = nextValues;
+        mask = nextMask;
+        threshold = thresholdFor(newCapacity);
     }
 
     private static int capacityFor(int expectedSize) {
