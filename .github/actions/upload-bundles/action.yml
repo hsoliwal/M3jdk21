@@ -1,6 +1,8 @@
 #
 # Copyright (c) 2022, Oracle and/or its affiliates. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+# Modifications Copyright (c) 2026 Hitesh Soliwal and contributors.
+# Modified 2026: update CI action runtimes and MSYS2 installation selection.
 #
 # This code is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 2 only, as
@@ -69,7 +71,7 @@ runs:
       shell: bash
 
     - name: 'Upload bundles artifact'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: bundles-${{ inputs.platform }}${{ inputs.debug-suffix }}
         path: bundles
