@@ -10,6 +10,8 @@ package jdk.m3.jackson;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,12 +42,66 @@ public final class M3File implements CharSequence {
     private final Source source;
     private final int start;
     private final int length;
+    private final URI sourceUri;
+    private final String byteSha256;
+    private static final URI MEMORY_SOURCE = URI.create("m3:memory");
 
     private M3File(Source source, int start, int length) {
+        this(source, start, length, MEMORY_SOURCE, null);
+    }
+
+    private M3File(Source source, int start, int length, URI sourceUri, String byteSha256) {
         this.source = source;
         this.start = start;
         this.length = length;
+        this.sourceUri = Objects.requireNonNull(sourceUri, "sourceUri");
+        this.byteSha256 = byteSha256;
     }
+
+    /**
+     * Snapshot mutable characters once and attach source identity to the existing
+     * immutable index. An indexed input shares its owner instead of flattening it.
+     */
+    public static M3File of(URI sourceUri, CharSequence characters) {
+        Objects.requireNonNull(sourceUri, "sourceUri");
+        Objects.requireNonNull(characters, "source");
+        M3File content = characters instanceof M3File file ? file : of(characters.toString());
+        return new M3File(content.source, content.start, content.length, sourceUri, null);
+    }
+
+    /**
+     * Explicit byte-bounded snapshot, distinct from the existing UTF-16-bounded
+     * {@link #read(Path, Charset, int)} contract. Invalid byte sequences are refused.
+     */
+    public static M3File readBytes(Path path, Charset charset, int maxBytes) throws IOException {
+        Objects.requireNonNull(path, "path");
+        Objects.requireNonNull(charset, "charset");
+        if (maxBytes < 0) throw new IllegalArgumentException("negative source byte limit");
+        byte[] bytes;
+        try (var input = Files.newInputStream(path)) {
+            bytes = input.readNBytes(maxBytes);
+            if (input.read() != -1) throw new IOException("source exceeds byte budget");
+        }
+        String decoded = charset.newDecoder().decode(ByteBuffer.wrap(bytes)).toString();
+        M3File content = of(decoded);
+        return new M3File(content.source, 0, content.length,
+                path.toAbsolutePath().normalize().toUri(), M3SourceHash.bytes(bytes));
+    }
+
+    /** Source label; ordinary indexed inputs use the non-filesystem m3:memory URI. */
+    public URI sourceUri() { return sourceUri; }
+
+    /** Explicit String export of this view; no second spelling is retained. */
+    public String source() { return toString(); }
+
+    /** Exact domain-separated UTF-16 identity of this view, computed on request. */
+    public String sourceSha256() { return M3SourceHash.utf16(source()); }
+
+    /** Null for character-only input or a derived slice without original encoded bytes. */
+    public String byteSha256() { return byteSha256; }
+
+    /** Independent forward reader over the same immutable indexed owner. */
+    public Reader openReader() { return reader(); }
 
     /**
      * Snapshots the supplied sequence and deduplicates equal String references locally.
@@ -174,7 +230,7 @@ public final class M3File implements CharSequence {
     public M3File subSequence(int from, int to) {
         Objects.checkFromToIndex(from, to, length);
         if (from == 0 && to == length) return this;
-        return new M3File(source, start + from, to - from);
+        return new M3File(source, start + from, to - from, sourceUri, null);
     }
 
     /** Equivalent to {@link #subSequence(int, int)}. */

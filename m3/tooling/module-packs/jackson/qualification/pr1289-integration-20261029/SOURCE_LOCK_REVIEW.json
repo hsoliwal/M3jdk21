@@ -1,0 +1,37 @@
+{
+  "target_revision": "649a735e23a79a4df46e6c61bfcd2fadf156d90d",
+  "predecessor_revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "files": [
+    {
+      "path": "m3/vendor/third_party/fastdoubleparser-1.0.90/pom.xml",
+      "before_sha256": "1b3e9129c572501c11a133f35796262327d0c20b8a432229940f3f1a58b66987",
+      "after_sha256": "24d4dd90d4c55f57a6221707a8593c2d6fe4c6c3cfefa66f048474fe9527ce16",
+      "decision": "Same Maven build model after excluding added opt-in recipe-boot profile; runtime/library/legal source bytes unchanged."
+    },
+    {
+      "path": "m3/vendor/third_party/jackson-annotations-2.19.2/pom.xml",
+      "before_sha256": "940d979d2956b7895bec78acd1d68edc96244bf6658d1f7d72562d1507c11689",
+      "after_sha256": "61823edc0808f5c6fa19dfef49e593aba852938a9d555a2f83ab9550b61cc5bd",
+      "decision": "Same Maven build model after excluding added opt-in recipe-boot profile; runtime/library/legal source bytes unchanged."
+    },
+    {
+      "path": "m3/vendor/third_party/jackson-core-2.19.2/pom.xml",
+      "before_sha256": "bcd3135eaabf1ed79bf0353736f9b5b95153be0c5009c6140ffaa7b592556531",
+      "after_sha256": "642778199b7a3471ab4423a8fa8c67c0b9ccb64a72c51fd7ae278dd91bcc848a",
+      "decision": "Same Maven build model after excluding added opt-in recipe-boot profile; runtime/library/legal source bytes unchanged."
+    },
+    {
+      "path": "m3/vendor/third_party/jackson-databind-2.19.2/pom.xml",
+      "before_sha256": "23753b6646f2ded160ff7e566a88fb651471046854a9bb45ca274ab44bf96a9b",
+      "after_sha256": "580bdbb752b6af9e251bf9694cbf4261ee4ed842aea199f462601f2aae3b354f",
+      "decision": "Same Maven build model after excluding added opt-in recipe-boot profile; runtime/library/legal source bytes unchanged."
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "before_sha256": "a2c1f69f6aaea0de7d5047c14f6f7530fe3231dca97fffdc4defee506daeb454",
+      "after_sha256": "8acdc46eaa0cac0861384d6caf252d1a2f763c80d09b68932177e1dac598bfaf",
+      "decision": "Existing owner adds strict ZIP/class/module admission plus release/date/jmods-only options. Existing Jackson runtime CLI remains valid; actual source-built JMOD and linked-image acceptance is required."
+    }
+  ],
+  "admission": "Source comparison only. Fresh full build and runtime gates remain mandatory."
+}

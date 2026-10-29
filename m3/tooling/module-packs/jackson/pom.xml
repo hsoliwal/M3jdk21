@@ -25,6 +25,7 @@
     <m3.jackson.maven.offline>true</m3.jackson.maven.offline>
     <m3.jackson.repo.root>${project.basedir}/../../../..</m3.jackson.repo.root>
     <m3.jackson.out>${project.build.directory}/pack</m3.jackson.out>
+    <m3.jackson.stage>runtime</m3.jackson.stage>
   </properties>
   <build>
     <plugins>
@@ -53,6 +54,8 @@
                 <argument>${m3.jackson.maven.offline}</argument>
                 <argument>--repo-root</argument>
                 <argument>${m3.jackson.repo.root}</argument>
+                <argument>--stage</argument>
+                <argument>${m3.jackson.stage}</argument>
                 <argument>--out</argument>
                 <argument>${m3.jackson.out}</argument>
               </arguments>
