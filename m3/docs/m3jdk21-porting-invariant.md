@@ -29,9 +29,12 @@ artificially restrict intake to runtime algorithms. Candidate donor material inc
 - algorithms, architecture patterns and ideas that are independently reimplemented inside the
   JDK under target ownership.
 
-Recipes are first-class donor code. They may be copied/adapted into M3JDK21 authoring/proof
-tooling when their licensing and provenance permit it. They do **not** become a Synexia runtime
-dependency merely because they generated or verified an admitted target postimage.
+Recipes are first-class donor code owned, stored and executed exclusively in Synexia.
+M3JDK21 receives their exact executed product postimages, target-authoritative tests and
+data-only provenance/acceptance receipts. Do not copy recipe source, execution machinery,
+mastery fixtures or improvement memory into this public target. Historical recipe directories
+are migration residue: preserve exact bytes and dependencies in Synexia before a reviewed
+cleanup. Track custody and caller closure in the [release queue](../release/QUEUE.md).
 
 ## License boundary for public M3JDK21 code
 
@@ -62,8 +65,9 @@ The machine-readable authority is `m3/docs/synexia-intake-policy.tsv`. The repos
 `ADDITIONAL_LICENSE_INFO` explicitly distinguishes independently licensed Apache-2.0 programs
 from copying incompatible-license code into GPLv2 source files. Therefore:
 
-- `EXTERNAL_RECIPE_TOOL` — Synexia Maven/OpenRewrite recipes may be executed as authoring/proof
-  tooling. They never become a JDK runtime dependency.
+- `EXTERNAL_RECIPE_TOOL` — Synexia Maven/OpenRewrite recipes execute in the Synexia
+  workspace only. Target receiving retains data-only execution references and exact
+  postimages; no target-local recipe execution or JDK runtime dependency is authorized.
 - `INDEPENDENT_APACHE_MODULE` — separately built `m3/**` modules may remain Apache-2.0 when
   their LICENSE/NOTICE and module boundary are preserved.
 - `DATA_OR_METADATA_EXPORT` — immutable images, sidecars, facts and manifests cross the boundary
@@ -96,7 +100,7 @@ exact Apache-2.0 custody snapshot, but the snapshot is not a second canonical im
 | vendored AST/compiler | `com.synexia:synexia-m3index-compiler` | pinned custody |
 | vendored data structures | `com.synexia:synexia-m3index-data-structure` | pinned custody |
 | vendored precompute API | `com.synexia:synexia-m3index-precompute-api` | pinned custody |
-| reusable Maven/OpenRewrite recipes | `synexia-openrewrite-recipes` | apply/verify; do not fork |
+| reusable Maven/OpenRewrite recipes | `synexia-openrewrite-recipes` | author/execute in Synexia only; receive data-only evidence |
 | `m3/runtime-integration`, OpenJDK/HotSpot/JNI receivers | M3JDK21 | target-specific |
 
 The receiver map is `m3/synexia-import/m3index-family-receiver.tsv`. Automatic vendor intake
@@ -150,7 +154,7 @@ Apply that same pattern to the rest of the port.
    target consumer and normally stay outside `java.lang` / `java.util`.
 6. **JNI/native code follows target ownership and ABI.** Synexia JNI is donor/reference code. A
    target port generates/adapts target symbols, headers, lifetime rules and tests.
-7. **Maven/OpenRewrite recipes are first-class donor artifacts and authoring/proof tooling, not JDK runtime dependencies.**
+7. **Maven/OpenRewrite recipes remain exclusively in Synexia; M3JDK21 receives executed product postimages and data-only receipts.**
 8. **Every port is recipe-first.** Exact donor revision + target preimage -> reviewed postimage;
    compile/test/runtime proof -> fixed point; rollback/refusal remains available.
 9. **Every port updates the naming/migration map.** No implementation lands without a mapping row or
@@ -264,7 +268,7 @@ For every source atom/module:
 
 1. pin Synexia commit/blob/license and all non-prefix dependencies;
 2. resolve the canonical M3JDK21 owner/name from `name-mapping.json`;
-3. add/update the Maven/OpenRewrite recipe crate before manual target edits;
+3. add/update and execute the Maven/OpenRewrite recipe crate in Synexia against the exact target preimage;
 4. materialize only exact admitted postimages;
 5. run compiler/JUnit/jtreg/native/JNI and relevant interpreter/C1/C2/image gates;
 6. prove source/API/behavior and failure-contract parity;
@@ -286,27 +290,27 @@ M3JDK21 subsystem, the thread must end with one of:
 Do not leave target-ready runtime work only in Synexia and call the migration complete.
 
 
-## Apache-2.0 reuse includes recipes
+## Licensing and recipe custody are separate obligations
 
-M3JDK21 may copy, adapt and redistribute eligible Synexia-owned Apache-2.0 contributions,
-including Java/JNI/native code, Maven/OpenRewrite recipe implementations and definitions,
-atomizer/patternizer compositions, fixtures, catalogues and proof tooling. There is no additional
-Synexia-specific permission gate for rights already granted by Apache License 2.0. Synexia's
-[convergence/delivery model](https://github.com/hsoliwal/com.synexia/blob/develop/SYNEXIA_CONVERGENCE_MODEL.md)
-extends the same reuse to SWT, Nebula and other delivery targets.
+Eligible Synexia-owned contributions retain their applicable Apache-2.0 rights,
+notices and attribution. The license is not changed by this repository's custody
+policy: canonical recipes, atomizer/patternizer compositions, mastery fixtures,
+execution tools and improvement memory stay in Synexia. Product repositories
+receive executed source postimages, target-only tests and data-only evidence.
+The same authoring/receiving split applies to SWT, Nebula and other public targets.
 
-For each intake, retain the exact donor commit/path/hash, Apache-2.0 license, applicable NOTICE,
-attribution and modification notices. Inventory embedded third-party sources and recipe payloads
-separately: the recipe license does not relicense upstream source or generated target postimages.
-OpenJDK source keeps its existing licensing; independent Apache-2.0 material keeps its scoped
-license. Reuse is subject to those existing terms and the target's integration requirements.
+For each intake, retain the exact donor commit/path/hash, applicable LICENSE/NOTICE,
+attribution and modification notices. Inventory embedded third-party material
+separately; the recipe license does not relicense its inputs or generated output.
+OpenJDK and donor files keep their actual licensing. No Synexia runtime service
+or package dependency enters Java/HotSpot/JNI.
 
-Use the existing Maven/OpenRewrite control plane and naming/migration map. Import the needed
-source and qualified recipes into the target's existing owners; do not add a Synexia runtime
-service or package dependency to Java/HotSpot/JNI. Carry compiler, behavior, replay, fixed-point
-and refusal receipts with each candidate. Resource-sensitive ports also carry CPU, retained-heap
-and native/process-memory evidence with exact workloads and environments. Target tests and pending
-platform gates remain explicit; a reusable donor recipe alone does not establish target acceptance.
+Execute the canonical Maven/OpenRewrite recipe in Synexia against source-sealed
+preimages; receive only its verified postimages into the existing target owners.
+Carry compiler, behavior, replay, fixed-point and refusal evidence by reference.
+Resource-sensitive ports additionally require exact-workload CPU, retained-heap
+and native/process-memory evidence. Keep missing target/platform gates visible.
+Do not move old recipe folders inside M3JDK21 and call that custody migration.
 
 
 ## Full-family machine pin

@@ -6,8 +6,11 @@
     "upstream_repository": "openjdk/jdk21",
     "upstream_baseline": "890adb6410dab4606a4f26a942aed02fb2f55387",
     "release_branch": "release/first-clean-boundary-20261007",
-    "single_fork_commit_required": true,
-    "released_history_immutable_after_tag": true
+    "single_fork_commit_required": false,
+    "released_history_immutable_after_tag": true,
+    "history_policy": "APPEND_ONLY",
+    "development_history_immutable": true,
+    "release_branch_status": "HISTORICAL_CANDIDATE_REQUIRES_CURRENT_QUALIFICATION"
   },
   "priority_order": [
     "M3_STRING",
@@ -113,5 +116,17 @@
       "receiving_sequence_advanced": false,
       "performance_superiority": "NOT_CLAIMED"
     }
+  },
+  "proof_pack_schema": "M3_RELEASE_PROOF_PACK_V1",
+  "gate_receipt_schema": "M3_RELEASE_GATE_RECEIPT_V1",
+  "trusted_gate_producers": {},
+  "trusted_gate_producer_status": "PENDING_INDEPENDENT_WORKFLOW_QUALIFICATION",
+  "queue": {
+    "index": "m3/release/QUEUE.md",
+    "plan": "m3/release/queue.json",
+    "run_root": "m3/release/queue/runs",
+    "historical_receipts": "PRESERVE_IN_PLACE",
+    "naming_authority": "m3/docs/name-mapping.json",
+    "naming_plan": "m3/tooling/name-contract/name-plan.json"
   }
 }

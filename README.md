@@ -11,7 +11,7 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 [![M3 project](https://img.shields.io/badge/M%C2%B3-research%20%26%20engineering-5b55b2?style=flat-square)](#project-goals-and-plan)
 [![Proof first](https://img.shields.io/badge/principle-contracts%20%2B%20evidence-247a55?style=flat-square)](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md)
 
-**[Start here](#start-here)** · **[Architecture](#architecture-at-a-glance)** · **[Eclipse ecosystem](#the-eclipse-desktop-lab)** · **[Open invitation](#an-open-technical-invitation)** · **[Roadmap](#project-goals-and-plan)**
+**[Start here](#start-here)** · **[Release queue](m3/release/QUEUE.md)** · **[Architecture](#architecture-at-a-glance)** · **[Eclipse ecosystem](#the-eclipse-desktop-lab)** · **[Open invitation](#an-open-technical-invitation)** · **[Roadmap](#project-goals-and-plan)**
 
 </div>
 
@@ -31,7 +31,7 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 | **M3 String** — canonical text, views and compositions; String/JNI integration target | [M3 String migration and lineage](m3/docs/m3string-synexia-lineage.md) · [String porting invariant](m3/docs/M3JDK21_PORTING_INVARIANT.md) |
 | **Regex and precompute** — planned reusable indexes, caches and bounded metadata | [Regex and text contracts](m3/docs/string-text-replacement-spec.md) · [Compatibility/benchmark spec](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md) |
 | **Collections and arrays** — lean storage, indexed signals and mechanical improvement | [Collections workstream](m3/collections/) · [Array workstream](m3/arrays/) |
-| **Recipes and convergence** — reusable transformations, source mapping and acceptance gates | [Recipes](m3/recipes/) · [Synexia model](m3/docs/SYNEXIA_CONVERGENCE_MODEL.md) |
+| **Recipes and convergence** — reusable transformations, source mapping and acceptance gates | [Canonical Synexia recipes](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes) · [Receiving boundary](AGENTS.md#hard-boundary-postimages-only-never-recipes) |
 | **The actual runtime** — OpenJDK-derived Java 21 sources and M3 integration areas | [JDK sources](src/) · [M3 runtime integration](m3/runtime-integration/) |
 | **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](m3/release/README.md) · [Machine-readable contract](m3/release/release-contract.json) |
 
@@ -39,7 +39,9 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 ## A first experiment: learn the representation before the runtime
 
 This fork starts from [OpenJDK 21](https://github.com/openjdk/jdk21), then adds
-M3-specific libraries, runtime candidates, recipes and evidence. The independent
+M3-specific libraries, executed runtime candidates and receiving evidence.
+Canonical recipes are authored and executed only in Synexia; target-local recipe
+directories are historical migration residue tracked in the [release queue](m3/release/QUEUE.md). The independent
 text module is the smallest entry point: you can inspect its ownership model
 without installing a replacement JDK or changing your system Java.
 
@@ -100,8 +102,8 @@ The comments are source-derived expectations, not captured output from this docu
 | Question | Command or route | What to read in the result |
 | --- | --- | --- |
 | Which checkout is this? | `git rev-parse HEAD` | Record the exact revision with every result |
-| Does the foundation manifest match? | `python3 m3/recipes/apply.py --check` | Investigate refusals; do not weaken hash guards |
-| Does the control-plane reactor verify? | `mvn -B -ntp -f m3/pom.xml clean verify` | Recipe/admission evidence, with Maven and its pinned dependencies |
+| Do current names match the canonical map? | `python3 m3/tooling/name-contract/check.py` | This read-only queue check does not promote a candidate |
+| What blocks release qualification? | `python3 m3/release/verify_release_admission.py --queue-out m3/release/queue/runs/local/queue.tsv` | Visible pending/blocked evidence; `boundary_ready` is separate from `release_ready` |
 | How do I build the runtime? | [Native build guide](m3/docs/native-build.md) | Host prerequisites, boot JDK and matched-image output |
 | What has actually been admitted? | [Release contract](m3/release/release-contract.json) and [current String phase](m3/synexia-import/current-full-borrow/STRING_PHASE.md) | Exact scope and still-open gates |
 
@@ -236,7 +238,7 @@ intended capability with the tests and measurements needed to evaluate it.
 | **P0.3 — Qualify runtime benefits** | Produce reproducible compatibility and benchmark evidence for String, regex, and precompute. | Compare with stated JDK baselines on repeated and one-off workloads; publish CPU time, allocation, retained memory, startup/construction costs, benefits, regressions, and limitations. |
 | **P1 — Lean, fast collections** | Reuse qualified runtime capabilities and indexed signals for collection/search operations through converged recipes. | Collection contracts and differential tests pass; representative benchmarks substantiate reduced work or allocation and disclose tradeoffs. |
 | **P2 — SWT and Eclipse IDE** | Integrate qualified runtime/collection improvements into [SWT](https://github.com/hsoliwal/eclipse.platform.swt), [Eclipse Platform](https://github.com/hsoliwal/eclipse.platform), [Platform UI](https://github.com/hsoliwal/eclipse.platform.ui), and relevant [Nebula](https://github.com/hsoliwal/nebula)/[GEF](https://github.com/hsoliwal/gef-classic) targets through bounded adapters and recipes. | Target builds, integration tests, and representative UI responsiveness/resource measurements pass; upstream boundaries remain explicit. |
-| **First-release freeze** | Select qualified scope, generate the final evidence pack, and consolidate each unreleased public fork delta for release. | Final tree preserved; exactly one fork-specific release commit above the documented upstream base; notices/provenance retained; branch/tag protection checked; release claims match the machine-readable contract. |
+| **First-release freeze** | Select qualified scope and generate the final evidence pack from an append-only candidate history. | Preserve upstream ancestry and development commits; verify every mandatory gate against the exact source and qualified producer; retain notices, raw results and immutable released tags. |
 
 **Ownership:** Synexia owns the canonical recipe/convergence/provenance workspace.
 M3JDK21 owns the product/runtime integration and all String precompute inside

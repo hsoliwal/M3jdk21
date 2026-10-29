@@ -37,29 +37,32 @@ jobs:
       - name: Diff hygiene
         run: git diff --check
       - name: Unit-test the release verifier
-        run: python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+        run: python3 -B -m unittest discover -s m3/release -p 'test_*.py' -v
       - name: Validate release claims and boundaries
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p target/m3-release-proof
+          report_root="m3/release/queue/runs/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${GITHUB_SHA}/contract"
+          mkdir -p "$report_root"
           mode=()
           if [[ "${GITHUB_REF}" == refs/heads/release/* ]]; then
             mode=(--release)
           fi
           python3 m3/release/verify_release_admission.py \
             --root . "${mode[@]}" \
-            --json-out target/m3-release-proof/admission.json \
-            --sha256-out target/m3-release-proof/SHA256SUMS
-          git rev-parse HEAD | tee target/m3-release-proof/HEAD
-          git rev-parse 'HEAD^{tree}' | tee target/m3-release-proof/TREE
-          git status --porcelain=v1 --untracked-files=no | tee target/m3-release-proof/WORKTREE
-          test ! -s target/m3-release-proof/WORKTREE
+            --json-out "$report_root/admission.json" \
+            --queue-out "$report_root/queue.tsv" \
+            --sha256-out "$report_root/SHA256SUMS"
+          git rev-parse HEAD | tee "$report_root/HEAD"
+          git rev-parse 'HEAD^{tree}' | tee "$report_root/TREE"
+          git status --porcelain=v1 --untracked-files=no | tee "$report_root/WORKTREE"
+          test ! -s "$report_root/WORKTREE"
       - name: Upload contract evidence
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: m3-release-contract-${{ github.sha }}
-          path: target/m3-release-proof
+          path: m3/release/queue/runs/${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}/contract
           retention-days: 90
           if-no-files-found: error
 
@@ -85,6 +88,18 @@ jobs:
           echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           echo "JAVA_HOME=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Build and test P0 immutable text foundation
+        run: bash ./m3/build.sh
+      - name: Enforce Synexia recipe custody before legacy execution
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          report_root="m3/release/queue/runs/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${GITHUB_SHA}/foundation"
+          python3 m3/release/verify_release_admission.py --root . \
+            --custody-check foundation \
+            --json-out "$report_root/admission.json" \
+            --queue-out "$report_root/queue.tsv"
       - name: Verify source-bound recipes
         run: |
           set -euo pipefail
@@ -92,12 +107,19 @@ jobs:
           python3 m3/runtime-integration/char-array-copy/recipe/test_recipe.py
           python3 m3/runtime-integration/recipe/apply.py --check
           python3 m3/runtime-integration/recipe/test_recipe.py
-      - name: Build and test P0 immutable text foundation
-        run: bash ./m3/build.sh
       - name: Verify Synexia compatibility and shared mapping
         run: |
           python3 m3/compatibility/check-synexia.py
           python3 m3/verify-shared-mapping.py
+
+      - name: Retain visible custody queue and failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-release-foundation-queue-${{ github.sha }}
+          path: m3/release/queue/runs/${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}/foundation
+          retention-days: 90
+          if-no-files-found: error
 
   precompute:
     name: Java and JNI precompute parity
@@ -112,6 +134,15 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Enforce Synexia recipe custody before legacy execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          report_root="m3/release/queue/runs/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${GITHUB_SHA}/precompute"
+          python3 m3/release/verify_release_admission.py --root . \
+            --custody-check precompute \
+            --json-out "$report_root/admission.json" \
+            --queue-out "$report_root/queue.tsv"
       - name: Qualify exact UTF8 receiving SDK
         shell: bash
         run: |
@@ -148,6 +179,15 @@ jobs:
       - name: JNI/native parity proof
         run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
 
+      - name: Retain visible custody queue and failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-release-precompute-queue-${{ github.sha }}
+          path: m3/release/queue/runs/${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}/precompute
+          retention-days: 90
+          if-no-files-found: error
+
   control-reactor:
     name: M3 control reactor
     runs-on: ubuntu-22.04
@@ -164,6 +204,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Enforce Synexia recipe custody before legacy execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          report_root="m3/release/queue/runs/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${GITHUB_SHA}/control-reactor"
+          python3 m3/release/verify_release_admission.py --root . \
+            --custody-check control-reactor \
+            --json-out "$report_root/admission.json" \
+            --queue-out "$report_root/queue.tsv"
       - name: Full M3 Maven verification
         run: mvn -B -ntp -fae -f m3/pom.xml clean verify
       - name: Full-family and receiving-policy verification
@@ -172,6 +221,15 @@ jobs:
             python3 m3/compatibility/check_synexia_full_family.py
             python3 -m unittest -v m3/compatibility/test_synexia_full_family.py
           fi
+
+      - name: Retain visible custody queue and failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-release-control-reactor-queue-${{ github.sha }}
+          path: m3/release/queue/runs/${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}/control-reactor
+          retention-days: 90
+          if-no-files-found: error
 
   release-proof-summary:
     name: proof summary
@@ -197,6 +255,8 @@ jobs:
             echo "| M3 control reactor | ${{ needs.control-reactor.result }} |"
             echo
             echo 'The existing OpenJDK GHA sanity workflow remains the product-build/platform matrix.'
+            echo 'Current recipe residue fails its custody preflight before target-local recipe execution; inspect the uploaded visible queue.'
+            echo 'Metadata/receipt integrity and job summaries do not establish release_ready. Release also requires qualified producer policy and fresh official GitHub run/job/step verification.'
             echo 'A passing proof summary does not upgrade any claim marked NOT_CLAIMED in release-contract.json.'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Fail if any mandatory M3 gate failed
