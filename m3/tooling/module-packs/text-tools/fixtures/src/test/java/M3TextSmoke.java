@@ -25,8 +25,28 @@ public final class M3TextSmoke {
         if (!expected.equals(actual)) throw new AssertionError(expected + " != " + actual);
     }
     public static void main(String[] args) throws Exception {
+        same(true, TextTools.nativeTextAvailable()); // fail if the linked image silently uses Java fallback
         same("a\nb\n", TextTools.sort(text("b\na"), false, LIMITS).text());
+        same("abc\r\nabc\n", TextTools.grepLiteral(text("xxx\nabc\r\nabc\n"), "bc", LIMITS).text());
+        CharSequence m3View = new CharSequence() {
+            @Override public int length() { return 3; }
+            @Override public char charAt(int index) { return "a\0b".charAt(index); }
+            @Override public CharSequence subSequence(int start, int end) {
+                throw new AssertionError("unexpected materialization");
+            }
+            @Override public String toString() {
+                throw new AssertionError("M3 UTF-16 view must never flatten");
+            }
+        };
+        same(true, TextTools.containsLiteral(m3View, "\0b"));
+
         same("a\nb\n", TextTools.uniq(text("a\na\nb\n"), LIMITS).text());
+        same("A\né\n😀\n", TextTools.sort(text("😀\né\nA\n"), false, LIMITS).text());
+        same("😀\n😀\né\nA\n", TextTools.sort(text("A\n😀\n😀\né\n"), true, LIMITS).text());
+        same("😀\r\nx\n", TextTools.uniq(text("😀\r\n😀\nx\n"), LIMITS).text());
+        StringBuilder nativeUniqueInput = new StringBuilder();
+        for (int i = 0; i < 130; i++) nativeUnqiueInput.append(i / 2).append('\n');
+        same(65, TextTools.uniq(text(nativeUnqiueInput.toString()), LIMITS).lines().size());
         same("a\n", TextTools.comm(text("a\nb\n"), text("a\nc\n"), LIMITS).common().text());
         same("a\tleft\tright\n", TextTools.join(text("a\tleft\n"), text("a\tright\n"), LIMITS).text());
         same("😀\n", TextTools.cut(text("a😀b\n"), 1, 2, LIMITS).text());

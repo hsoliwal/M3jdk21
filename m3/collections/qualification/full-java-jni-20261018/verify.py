@@ -31,6 +31,7 @@ LIBRARIES = {
     'm3rankbatch': [('m3_long_rank_batch_jni.c', 'M3LongRankBatchNative')],
     'm3signalorder': [('m3_signal_order_jni.c', 'M3SignalOrderNative')],
     'm3_residency_state_mask': [('m3_residency_state_mask.c', 'M3ResidencyStateMaskIndex')],
+    'm3_disjoint_index': [('m3_disjoint_index.c', 'M3DisjointIndex')],
     'm3bitlane': [('segmented_bit_lane.c', 'M3BitLane28')],
 }
 
@@ -104,8 +105,12 @@ def main():
          '@' + str(OUT / 'main.args')])
     native = MODULE / 'src/main/native/collections'
     admitted = {native / name for rows in LIBRARIES.values() for name, _ in rows}
-    if admitted != set(native.glob('*.c')):
-        raise RuntimeError('Native source inventory changed; review library mapping before qualification')
+    actual = set(native.glob('*.c'))
+    if admitted != actual:
+        missing = sorted(str(path.relative_to(ROOT)) for path in admitted - actual)
+        unexpected = sorted(str(path.relative_to(ROOT)) for path in actual - admitted)
+        raise RuntimeError('Native source inventory changed; missing=' + repr(missing)
+                           + '; unexpected=' + repr(unexpected))
     cc = [os.environ.get('CC', 'cc'), '-std=c17', '-Wall', '-Wextra', '-Werror',
           '-fsanitize=undefined', '-fno-sanitize-recover=undefined', '-O2',
           '-I' + str(JAVA / 'include'), '-I' + str(JAVA / 'include/linux'),
@@ -179,8 +184,12 @@ def main():
                  ('M3SignalOrderContract', ['native']),
                  ('M3SignalDimensionsNativeContract', []),
                  ('M3ResidencyStateMaskProof', ['native']),
-                 ('M3BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')])]
+                 ('M3BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')]),
+                 ('M3DisjointIndexSelfTest', ['--native'])]
     for name, args in contracts: run(java + ['com.m3.collections.' + name, *args])
+    # Exercise the same existing selftest's explicit pure-Java fallback without loading JNI.
+    run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
+         'com.m3.collections.M3DisjointIndexSelfTest'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
          'com.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,

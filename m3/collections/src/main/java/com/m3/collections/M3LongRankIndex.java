@@ -208,6 +208,24 @@ public final class M3LongRankIndex {
         return M3LongRankBatchNative.lowerBounds(values, queries);
     }
 
+    /**
+     * Batched signed-long first/last insertion bounds, interleaved as
+     * [lower(q0), upper(q0), lower(q1), upper(q1), ...].
+     * For any query, frequency is upper - lower. LeetCode 34/35 category.
+     * The returned primitive array is detached from this immutable snapshot.
+     */
+    public int[] lowerUpperBounds(long[] queries) {
+        return M3LongRankBatchNative.lowerUpperBounds(values, queries);
+    }
+
+    /**
+     * Writes the same pairs into a reusable caller-owned int[] of length
+     * exactly 2 * queries.length, avoiding a fresh output allocation.
+     */
+    public void fillLowerUpperBounds(long[] queries, int[] outputPairs) {
+        M3LongRankBatchNative.lowerUpperBoundsInto(values, queries, outputPairs);
+    }
+
     public long[] toArray() {
         return values.clone();
     }

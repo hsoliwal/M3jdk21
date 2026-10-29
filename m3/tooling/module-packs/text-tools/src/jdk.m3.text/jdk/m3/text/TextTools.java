@@ -18,9 +18,19 @@ import java.util.regex.Pattern;
 public final class TextTools {
     private TextTools() { }
 
+    /** Reports whether the installed native text library has been loaded. */
+    public static boolean nativeTextAvailable() { return NativeLineOps.available(); }
+
     /** Stable UTF-16 lexical order, independent of the host locale. */
     public static TextFrame sort(TextFrame input, boolean reverse, Limits limits) {
         limits.check(input);
+        if (NativeLineOps.available()) {
+            List<TextLine> inputLines = input.lines();
+            int[] indices = NativeLineOps.sortOrder(inputLines, reverse);
+            List<TextLine> ordered = new ArrayList<>(indices.length);
+            for (int index : indices) ordered.add(inputLines.get(index));
+            return reorder(ordered, limits);
+        }
         List<TextLine> lines = new ArrayList<>(input.lines());
         Comparator<TextLine> order = Comparator.comparing(TextLine::content);
         lines.sort(reverse ? order.reversed() : order);
@@ -31,12 +41,44 @@ public final class TextTools {
     public static TextFrame uniq(TextFrame input, Limits limits) {
         limits.check(input);
         FrameCollector output = new FrameCollector(limits);
+        if (NativeLineOps.available()) {
+            List<TextLine> lines = input.lines();
+            long[] keep = NativeLineOps.adjacentKeep(lines);
+            for (int i = 0; i < lines.size(); i++) {
+                if ((keep[i >>> 6] & (1L << (i & 63))) != 0) output.accept(lines.get(i));
+            }
+            return output.frame();
+        }
         String previous = null;
         for (TextLine line : input.lines()) {
             if (!line.content().equals(previous)) output.accept(line);
             previous = line.content();
         }
         return output.frame();
+    }
+
+    /** Literal UTF-16 line selection; JNI is an optional data-plane acceleration only. */
+    public static TextFrame grepLiteral(TextFrame input, String literal, Limits limits) {
+        limits.check(input);
+        Canonical.validUnicode(literal);
+        int count = input.lines().size();
+        NativeUtf16Literal.Compiled compiled = NativeUtf16Literal.compile(literal);
+        long[] selected = new long[(count + 63) >>> 6];
+        for (int i = 0; i < count; i++) {
+            if (compiled.contains(input.lines().get(i).content()))
+                selected[i >>> 6] |= 1L << (i & 63);
+        }
+        FrameCollector output = new FrameCollector(limits);
+        for (int i = 0; i < count; i++) {
+            if ((selected[i >>> 6] & (1L << (i & 63))) != 0)
+                output.accept(input.lines().get(i));
+        }
+        return output.frame();
+    }
+
+    /** Direct immutable M3StringPiece-compatible UTF-16 literal membership, without flattening. */
+    public static boolean containsLiteral(CharSequence text, CharSequence literal) {
+        return NativeUtf16Literal.contains(text, literal);
     }
 
     public record Comparison(TextFrame leftOnly, TextFrame common, TextFrame rightOnly) { }

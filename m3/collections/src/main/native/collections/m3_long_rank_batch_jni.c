@@ -55,3 +55,68 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
     (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
     (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
 }
+
+/*
+ * LeetCode 34 / 35 batch primitive: [lower0,upper0,...] in one JNI transition.
+ * The upper-bound search starts at the lower bound (never left of it).
+ * No JNI callbacks or Java object allocations in the search loop.
+ * Moving-GC-safe Get/ReleaseArrayElements; inputs always JNI_ABORT.
+ */
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
+        jintArray pairs) {
+    (void) ignored;
+    if (sorted == NULL || queries == NULL || pairs == NULL) {
+        jclass error = (*env)->FindClass(env, "java/lang/NullPointerException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "null pair argument");
+        return;
+    }
+    const jsize size = (*env)->GetArrayLength(env, sorted);
+    const jsize count = (*env)->GetArrayLength(env, queries);
+    const jsize output_size = (*env)->GetArrayLength(env, pairs);
+    if ((jlong) count * 2 != (jlong) output_size) {
+        jclass error = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "pair lane length mismatch");
+        return;
+    }
+    if (count == 0) return;
+
+    jlong *values = (*env)->GetLongArrayElements(env, sorted, NULL);
+    if (values == NULL) return;
+    jlong *targets = (*env)->GetLongArrayElements(env, queries, NULL);
+    if (targets == NULL) {
+        (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        return;
+    }
+    jint *out = (*env)->GetIntArrayElements(env, pairs, NULL);
+    if (out == NULL) {
+        (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
+        (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        return;
+    }
+
+    for (jsize i = 0; i < count; ++i) {
+        const jlong target = targets[i];
+        jsize lo = 0, hi = size;
+        while (lo < hi) {
+            const jsize mid = lo + ((hi - lo) >> 1);
+            if (values[mid] < target) lo = mid + 1;
+            else hi = mid;
+        }
+        const jsize lower = lo;
+        hi = size;
+        while (lo < hi) {
+            const jsize mid = lo + ((hi - lo) >> 1);
+            if (values[mid] <= target) lo = mid + 1;
+            else hi = mid;
+        }
+        const size_t offset = (size_t) i * 2;
+        out[offset] = (jint) lower;
+        out[offset + 1] = (jint) lo;
+    }
+
+    (*env)->ReleaseIntArrayElements(env, pairs, out, 0);
+    (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
+    (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+}

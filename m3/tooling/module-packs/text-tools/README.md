@@ -43,3 +43,46 @@ The target's canonical name map records the module mappings. Reusable recipe
 changes go back to Synexia; target tooling mirrors are not a second source authority.
 Local linked-image qualification is separate from full M3JDK21 product build/jtreg,
 full source reactor admission, cross-platform behavior and performance qualification.
+
+## JNI-backed Unix4j line kernels (2026-10-29)
+
+The existing `jdk.m3.text.TextTools` remains the single receiving owner; this
+change does **not** introduce an alternative Unix4j runtime or string interner.
+On an M3JDK21 image the `java.lang.String` facade represents the canonical
+M3 String payload. JNI accepts those references as `jstring` and accesses at
+most 256 UTF-16 code units per `GetStringRegion` call. It does not request
+`GetStringChars` or `GetStringCritical`, store a native string copy, or
+cross the boundary with native-owned text objects. JVM implementation-specific
+flattening during a region read has not been independently ruled out.
+
+The two current native algorithms are:
+
+- `sort`: stable bottom-up mergesort of primitive `int` line offsets,
+  comparing unsigned UTF-16 code units exactly as `String.compareTo` does.
+  Two packed 64-bit lexical prefix signals and the original length are
+  manufactured once per line. Native comparison uses those primitive keys
+  first, consulting bounded JNI regions only for long colliding prefixes.
+  Ascending and descending order preserve equal-line stability. Java owns
+  the original `TextLine` instances and the existing line-ending repair.
+- `uniq`: adjacent (not global) duplicate detection into a packed `long[]`
+  retention mask. Java retains the first original line and its ending.
+
+`libm3textops` is installed in `jdk.m3.text`; `libm3textio` remains in
+`jdk.m3.io`. Native failures after successful loading propagate, without
+silent fallback. Plain Java 21 executions with no installed library use the
+existing identical Java algorithms. Linked-image smoke tests require
+`TextTools.nativeTextAvailable()` to return true and run 450 seeded
+differential cases under `-Xcheck:jni`, covering lengths around 64/128/256,
+BMP/supplementary Unicode, embedded NUL, long prefixes, stable ordering and
+reverse ordering. The separate local C/JNI harness passed all 450 cases with
+GCC 14.2 and OpenJDK 21.0.12.1; this is not a whole-product or JMOD-image pass.
+
+Memory: primitive merge indices require O(n) native space and the returned
+permutation requires O(n) Java integers; the unique mask uses O(n/64)
+64-bit words. No performance speedup is claimed: repeated JNI string-region
+comparisons can be slower than Java's intrinsic comparator. It must be
+benchmarked under both the M3 image and a stock Java 21 baseline before an
+optimization claim. The remainder of Unix4j's 14-command API and POSIX option
+dialects are **not** represented as native by this first JNI implementation.
+Upstream `tools4j/unix4j` (MIT) is a semantic reference only; no upstream
+implementation code was copied.

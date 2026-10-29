@@ -42,6 +42,9 @@ def main():
     classes, native, jars = (output / name for name in ("modules", "native", "jars"))
     for path in (classes, native, jars):
         path.mkdir()
+    io_native, text_native = native / "io", native / "text"
+    io_native.mkdir()
+    text_native.mkdir()
     command(output / "m3-progress-api.log", home / "bin/javap", "-public",
             "java.util.concurrent.ProgressMonitor", "java.util.concurrent.ProgressMonitors")
     # M3File uses the M3 java.base progress APIs; standard ct.sym omits them.
@@ -49,7 +52,10 @@ def main():
             "-Werror", "--module-source-path", sources, "-d", classes, *sorted(sources.rglob("*.java")))
     command(output / "native.log", os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra", "-Werror",
             "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
-            "-o", native / "libm3textio.so", native_source)
+            "-o", io_native / "libm3textio.so", native_source)
+    command(output / "native-text.log", os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra", "-Werror",
+            "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
+            "-o", text_native / "libm3textops.so", native_source.with_name("m3textops.c").resolve(strict=True))
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
     for module in ("jdk.m3.text", "jdk.m3.io", "jdk.m3.structured"):
         jar = jars / (module + ".jar")
@@ -62,7 +68,8 @@ def main():
     manifest.write_text("module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated\n")
     command(output / "jmod-pack.log", sys.executable, packager, "--jdk-home", home,
             "--image-tsv", image_tsv, "--manifest", manifest, "--layer-root", sources,
-            "--out", output / "pack", "--legal-notices", args.legal_notices.resolve(strict=True), "--native-library", "jdk.m3.io=" + str(native),
+            "--out", output / "pack", "--legal-notices", args.legal_notices.resolve(strict=True), "--native-library", "jdk.m3.io=" + str(io_native),
+            "--native-library", "jdk.m3.text=" + str(text_native),
             "--add-modules", "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps,jdk.jpackage")
     image = output / "pack/image"
     for tool in ("java", "javac", "jar", "jmod", "jlink", "jdeps", "jpackage"):
@@ -73,11 +80,15 @@ def main():
     # --release 21 selects standard ct.sym APIs, excluding the new SDK modules.
     command(output / "image-javac.log", image / "bin/javac", "-source", "21", "-target", "21",
             "-Xlint:all", "-Werror", "--add-modules", "jdk.m3.text,jdk.m3.io,jdk.m3.structured",
-            "-d", smoke_classes, smoke)
+            "-d", smoke_classes, smoke, smoke.with_name("M3NativeTextDifferential.java").resolve(strict=True))
     command(output / "image-runtime.log", image / "bin/java", "-Xcheck:jni", "--add-modules",
             "jdk.m3.text,jdk.m3.io", "-cp", smoke_classes, "M3TextSmoke", output / "image-files")
     if "M3_TEXT_IMAGE_PASS tools=24" not in (output / "image-runtime.log").read_text():
         raise ValueError("missing image runtime proof")
+    command(output / "image-native-parity.log", image / "bin/java", "-Xcheck:jni",
+            "--add-modules", "jdk.m3.text", "-cp", smoke_classes, "M3NativeTextDifferential")
+    if "M3_NATIVE_TEXT_PARITY_PASS runs=450" not in (output / "image-native-parity.log").read_text():
+        raise ValueError("missing native text parity proof")
     print("M3_TEXT_PACK_PASS modules=3 tools=24")
 
 
