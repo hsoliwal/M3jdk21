@@ -25,6 +25,42 @@ jobs:
           java-version: '21'
       - name: Verify module and linked-image source/class contract
         run: mvn -B -ntp -f m3/file/pom.xml verify
+      - name: Require executed JUnit and original host/linked image proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          import xml.etree.ElementTree as ET
+
+          report = Path("m3/file/target/surefire-reports/TEST-com.m3.file.M3FileDeltaTest.xml")
+          if not report.is_file() or not report.stat().st_size:
+              raise SystemExit("missing actual JUnit file-delta report")
+          suite = ET.parse(report).getroot()
+          if (suite.tag != "testsuite" or int(suite.get("tests", "0")) < 1
+                  or any(int(suite.get(name, "0")) for name in ("errors", "failures", "skipped"))
+                  or not any(test.get("name") == "fullSourceClassAndCliContract"
+                             for test in suite.iter("testcase"))):
+              raise SystemExit("file-delta JUnit did not execute and pass its actual test")
+          receipt = Path("m3/file/target/delta-check/receipt.json")
+          if not receipt.is_file():
+              raise SystemExit("missing file module host/image receipt")
+          result = json.loads(receipt.read_text(encoding="utf-8"))
+          inventory = result.get("contract_inventory", {})
+          host = result.get("host_module_contracts", {})
+          image = result.get("image_module_contracts", {})
+          if (result.get("state") != "PASSED"
+                  or inventory.get("source_count") != 19
+                  or inventory.get("host_javac_only") != ["M3FileDeltaSelfTest"]
+                  or inventory.get("maven_junit_separate_gate") != ["M3FileDeltaTest"]
+                  or len(host) != 18 or len(image) != 17
+                  or "M3FILE_DELTA_SELFTEST_PASS" not in host.get("M3FileDeltaSelfTest", "")
+                  or "M3FileDeltaSelfTest" in image
+                  or "M3FILE_DELTA_CONTRACT_PASS" not in image.get("M3FileDeltaContractSelfTest", "")):
+              raise SystemExit("incomplete file module host/image/JUnit source qualification")
+          print("M3_FILE_DELTA_JUNIT_AND_IMAGE_PROOF_PASS tests=1 host=18 image=17 sources=19")
+          PY
       - name: Retain actual commands and results
         if: always()
         uses: actions/upload-artifact@v4
