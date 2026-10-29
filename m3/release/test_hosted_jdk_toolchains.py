@@ -60,6 +60,10 @@ class HostedJdkToolchainContract(unittest.TestCase):
                       read(".github/actions/get-gtest/action.yml"))
         self.assertIn("actions/cache@v5",
                       read(".github/actions/get-jtreg/action.yml"))
+        self.assertIn("JAVA_HOME_17_ARM64",
+                      read(".github/actions/get-jtreg/action.yml"))
+        self.assertIn("RUNNER_ARCH",
+                      read(".github/actions/get-jtreg/action.yml"))
 
 if __name__ == "__main__":
     unittest.main()
