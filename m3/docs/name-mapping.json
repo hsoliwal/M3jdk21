@@ -10130,6 +10130,306 @@
           "target_symbol": "com.m3.arrays.M3Arrays",
           "form": "STATIC_OPERATIONS"
         }
+      },
+      {
+        "id": "m3.collections.range-rank-consolidation",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Recover historical detached half-open range algebra into the existing current range owner, and consolidate three sorted-lane searches on the existing M3LaneSearch owner. Preserve current target capabilities and naming; bounded source and host proofs do not establish installed-image or whole-family admission.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/range-rank-recovery-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-range-rank-recovery-20261029/0003-M3LongRangeSet.java.txt",
+            "symbol": "com.m3.collections.M3LongRangeSet",
+            "signatures": [
+              "void add(long,long)",
+              "M3LongRangeSet union(M3LongRangeSet)",
+              "M3LongRangeSet intersection(M3LongRangeSet)",
+              "M3LongRangeSet difference(M3LongRangeSet)"
+            ],
+            "sha256": "058859f6a8ffb9a94378d5707ea51b127217508ce725f313b56855f5e8e6962a",
+            "git_blob_sha1": "fc00c8e8af318f368f4f99211a51c6ffe1d73786",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/range-rank-recovery-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-range-rank-recovery-20261029/0001-M3BagRankIndex.java.txt",
+            "symbol": "com.m3.collections.M3BagRankIndex",
+            "signatures": [
+              "E occurrenceAt(long)"
+            ],
+            "sha256": "269307ca34ecfded1642b49acf22ac76a4e4f3725cade3120d154e20de26232b",
+            "git_blob_sha1": "492f803a9acc2c5149043375760f6867ebad1335",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/range-rank-recovery-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-range-rank-recovery-20261029/0002-M3IndexPathRank.java.txt",
+            "symbol": "com.m3.collections.M3IndexPathRank",
+            "signatures": [
+              "int selectedSourceOrdinal(int)"
+            ],
+            "sha256": "be62cee87aec64557e253893b0f189bb04a00bb9b0146d7467c1064bffa1b9be",
+            "git_blob_sha1": "8332dad90e805ed269a8e49ceb42c71f6c976683",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3LaneSearch.java",
+            "symbol": "com.m3.collections.M3LaneSearch",
+            "signatures": [
+              "int lowerBound(long[],int,int,long)",
+              "int upperBound(long[],int,int,long)",
+              "int upperBound(int[],int,int,int)"
+            ],
+            "sha256": "3aa83290ab10ded0b26d10051958a7895f4621033d6dc4bc23b1346c85f30158",
+            "git_blob_sha1": "cf0395b89a6eb875a866982f8de390957c239406",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": null,
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+            "symbol": "com.m3.collections.M3LongRangeSet",
+            "signatures": [
+              "void add(long,long)",
+              "M3LongRangeSet union(M3LongRangeSet)",
+              "M3LongRangeSet intersection(M3LongRangeSet)",
+              "M3LongRangeSet difference(M3LongRangeSet)"
+            ],
+            "sha256": "058859f6a8ffb9a94378d5707ea51b127217508ce725f313b56855f5e8e6962a",
+            "git_blob_sha1": "fc00c8e8af318f368f4f99211a51c6ffe1d73786",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": null,
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java",
+            "symbol": "com.m3.collections.M3BagRankIndex",
+            "signatures": [
+              "E occurrenceAt(long)"
+            ],
+            "sha256": "269307ca34ecfded1642b49acf22ac76a4e4f3725cade3120d154e20de26232b",
+            "git_blob_sha1": "492f803a9acc2c5149043375760f6867ebad1335",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": null,
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+            "symbol": "com.m3.collections.M3IndexPathRank",
+            "signatures": [
+              "int selectedSourceOrdinal(int)"
+            ],
+            "sha256": "be62cee87aec64557e253893b0f189bb04a00bb9b0146d7467c1064bffa1b9be",
+            "git_blob_sha1": "8332dad90e805ed269a8e49ceb42c71f6c976683",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "Existing com.m3.collections.M3LongRangeSet, M3BagRankIndex and M3IndexPathRank in module com.m3.collections; shared search remains com.m3.collections.M3LaneSearch.",
+        "identity": {
+          "namespace": "Retain all existing class names, packages, module placement, payload/index identities and public JDK owners.",
+          "generation": "Detached range results own their primitive lanes; bag and bitmap rank queries retain their existing captured owners and occurrence identity. No retained per-entry object owner or new identity domain."
+        },
+        "contract": {
+          "differences": [
+            "Add detached mutable M3LongRangeSet union, intersection and difference using ordered interval scans; retain both inputs and current capabilities.",
+            "Find the first add-overlap candidate with M3LaneSearch.lowerBound over occupied range ends, retaining equality so touching ranges coalesce.",
+            "Replace the bag occurrence and bitmap word-prefix private bisections with M3LaneSearch.upperBound, preserving their existing strict-prefix selection semantics."
+          ],
+          "compatibility_obligations": [
+            "Preserve half-open intervals, touching-range coalescence, empty/self/null behavior, detached result mutation and signed long endpoint handling without endpoint arithmetic.",
+            "Preserve current add/remove/callback, fail-fast, mask/native and capacity behavior; search only each occupied sorted lane.",
+            "Preserve bag duplicate occurrence counts, sliced prefix offsets, stable comparator ties, null keys, source identity and existing occurrence exception type and message.",
+            "Preserve bitmap repeated-prefix selection across empty words, source ordinals, strided paths, view windows, row identities and current rank bounds checks.",
+            "Keep existing public/protected signatures and module exports; the only added public methods are the three listed M3LongRangeSet operations. No class/package rename, owner move, JDK backend promotion or JNI ABI change.",
+            "Do not interpret the source census, historical tests or stock-host tests as installed M3JDK21, all-platform, whole-family or comparative performance qualification."
+          ],
+          "public_surface": [
+            "com.m3.collections.M3LongRangeSet union(com.m3.collections.M3LongRangeSet)",
+            "com.m3.collections.M3LongRangeSet intersection(com.m3.collections.M3LongRangeSet)",
+            "com.m3.collections.M3LongRangeSet difference(com.m3.collections.M3LongRangeSet)",
+            "M3BagRankIndex.occurrenceAt(long) and M3IndexPathRank.selectedSourceOrdinal(int) retain their existing public signatures."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing com.m3.collections owner module and current native availability/refusal contracts; Synexia supplies tooling only and creates no product runtime dependency."
+        },
+        "dependencies": [
+          {
+            "id": "com.m3.collections.M3LaneSearch",
+            "resolution": "resolved",
+            "reason": "Reuse unchanged m3/collections/src/main/java/com/m3/collections/M3LaneSearch.java at 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2; SHA-256 3aa83290ab10ded0b26d10051958a7895f4621033d6dc4bc23b1346c85f30158. Its exact source is retained as a pinned artifact above."
+          },
+          {
+            "id": "synexia.M3HashPinnedJavaSnapshotRecipe",
+            "resolution": "resolved",
+            "reason": "Use the canonical recipe owner in Synexia source checkout base deaad7ccf574a77bd98aaa61f305fc7d857d99b4 with the effective engine hashes in synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/range-rank-recovery-20261029/ENGINE_EFFECTIVE.tsv. Immutable historical engine origins remain separately recorded in ENGINE_SOURCES.tsv; the new dataset has no commit until publication."
+          }
+        ],
+        "materialization": {
+          "admission": "Exact current product preimages at 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2; existing normalized range endpoints, immutable bag prefix counts, and bitmap word prefixes.",
+          "joins": "Merge, intersect or subtract sorted interval streams; reuse lower/upper-bound kernels over existing primitive prefix lanes.",
+          "outputs": "Three detached range-algebra operations and unchanged occurrence/rank query results; existing payload owners and primitive lane representations remain canonical.",
+          "cached_facts": "Reuse existing sorted ends and prefix counts without additional cached state, boxing or retained per-entry allocations."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+          "version": "range-rank-recovery-20261029",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/range-rank-recovery-20261029/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-range-rank-recovery-20261029.yml",
+          "sha256": "9dde54712bcbd96a6f5ce8da47baa5342c2d8b114d61389fe7ac2bb51b379d33",
+          "preconditions": [
+            "Execute the sealed Synexia dataset against all eight exact current preimages or explicit ABSENT test paths at target base 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2.",
+            "Require exact replay, all-postimage fixed point, and refusal of foreign, missing and mixed input states before receiving; bind effective engine and manifest hashes in the receiving receipt.",
+            "Publish and bind the exact new Synexia dataset revision through m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json; candidate artifact commits remain null until an actual commit exists.",
+            "Receive this additive data-only authority update and its name-plan authority_blob through a separately sealed Synexia text dataset; preserve all existing naming records and four queued operations."
+          ],
+          "rollback": "Use a separately source-sealed restoration from exact received postimages; preserve unrelated current source changes and historical lineage, and do not erase recovered capabilities by reverting a broader tree."
+        },
+        "tests": [
+          {
+            "id": "synexia-range-rank-exact-replay-and-refusal",
+            "receipt": "m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "range-algebra-independent-boolean-span-oracle",
+            "receipt": "m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "range-add-boundary-and-callback-contract",
+            "receipt": "m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "bag-occurrence-slice-and-count-contract",
+            "receipt": "m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "bitmap-selection-prefix-and-window-contract",
+            "receipt": "m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "owning-module-and-checked-jni",
+            "receipt": "m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "name-contract-and-additive-public-surface",
+            "receipt": "m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "installed-m3jdk21-and-resource-admission",
+            "receipt": "m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Preserve M3LongRangeSet and unchanged M3LaneSearch Apache-2.0 OR EPL-2.0 headers; M3BagRankIndex, M3IndexPathRank and new tests retain their exact Apache-2.0 headers. Historical range-algebra source attribution is retained.",
+          "publication": "User-authorized source recovery and consolidation. Historical source is pinned to Synexia PR #12333 head c50cfa4d6362e6fd5c176b1acd1aff34be349e6a. Public target receives qualified output and passive receipts only; reusable recipes, correction memory and the detailed source inventory remain exclusively in Synexia.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Merge historical interval-algebra capability with the current target owner at 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2 rather than replacing the current file with a historical snapshot.",
+            "Consolidate only the three proven sorted-lane searches; retain existing shared search implementation, names, current native paths and previously implemented capabilities."
+          ],
+          "pending": [
+            "Bind the actual newly published source and receiving commits in m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json; do not substitute the source checkout base for the new dataset revision.",
+            "Keep installed M3JDK21 image, applicable JCK/full jtreg, API/binary/export, cross-platform JNI/GC/lifecycle and comparative CPU/allocation/heap/native-memory gates explicitly pending until their exact receipts exist.",
+            "Record bounded PASS, failure and NOT_RUN separately in the dated receipt; do not inherit qualification from historical donors or the inventory census.",
+            "No String -> arrays -> collections receiving-phase advancement and no whole collection-family completion claim."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "c50cfa4d6362e6fd5c176b1acd1aff34be349e6a",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/range-algebra-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-range-algebra-20261018/0001-M3LongRangeSet.java.txt",
+              "symbol": "com.m3.collections.M3LongRangeSet",
+              "signatures": [
+                "M3LongRangeSet union(M3LongRangeSet)",
+                "M3LongRangeSet intersection(M3LongRangeSet)",
+                "M3LongRangeSet difference(M3LongRangeSet)"
+              ],
+              "sha256": "fd7d8522b20958eaaf14b7062c2697cc9151907329449a54e84b3b81906e56b1",
+              "git_blob_sha1": "a47627be4def0547cce35a198b399f3fb176b227",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+              "module": "com.m3.collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+              "symbol": "com.m3.collections.M3LongRangeSet",
+              "signatures": [
+                "void add(long,long)"
+              ],
+              "sha256": "8aa30b4b23c638b53f5fe9e6f895bb3205a51af1df0bf2afdefb38d4c21ab090",
+              "git_blob_sha1": "327a56f12e09ae82ea0d0f10bdcf3a0628f1636f",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+              "module": "com.m3.collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java",
+              "symbol": "com.m3.collections.M3BagRankIndex",
+              "signatures": [
+                "E occurrenceAt(long)"
+              ],
+              "sha256": "a8686254c2439bcdd1472bdddbefd5bfa7c4b2efce24aa89b6c1453e208515a5",
+              "git_blob_sha1": "13c50466868ba40928465d44abb6f2f83f419ac6",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2",
+              "module": "com.m3.collections",
+              "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+              "symbol": "com.m3.collections.M3IndexPathRank",
+              "signatures": [
+                "int selectedSourceOrdinal(int)"
+              ],
+              "sha256": "3f617c00298195a9554a36a6a81d9c7253fb6e308ea99d7a291b1595db1ec87e",
+              "git_blob_sha1": "5fd1c4fd6dd12ea0acccee6dfade4c6aaf12d269",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Additive stable capability identity under the existing authority. This candidate records three materialized source implementations and pending installed qualification, while preserving all existing records, caller naming, package placement and queue scope. Current product preimages are pinned at 8c8dd70e659b99c23a2d0e7daeb2adadf95429c2; new source/target commit fields remain null until receipt binding."
       }
     ]
   },

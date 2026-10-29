@@ -75,8 +75,8 @@ public final class M3LongRangeSet {
     public void add(long fromInclusive, long toExclusive) {
         valid(fromInclusive, toExclusive);
         if (fromInclusive == toExclusive) return;
-        int first = 0;
-        while (first < size && ends[first] < fromInclusive) first++;
+        // End equality stays eligible so touching intervals still coalesce.
+        int first = M3LaneSearch.lowerBound(ends, 0, size, fromInclusive);
         int last = first;
         long start = fromInclusive;
         long end = toExclusive;
@@ -182,6 +182,104 @@ public final class M3LongRangeSet {
         System.arraycopy(ends, 0, copy.ends, 0, size);
         copy.size = size;
         return copy;
+    }
+
+    /**
+     * Detached mutable union, coalescing overlaps and touching intervals.
+     * Both inputs remain unchanged and must stay stable during this call.
+     * Runs in O(this.rangeCount() + other.rangeCount()) time, including amortized
+     * growth of the result's primitive lanes, with O(result.rangeCount()) storage.
+     *
+     * @throws NullPointerException if other is null
+     */
+    public M3LongRangeSet union(M3LongRangeSet other) {
+        Objects.requireNonNull(other, "other");
+        M3LongRangeSet result = new M3LongRangeSet();
+        int left = 0;
+        int right = 0;
+        while (left < size || right < other.size) {
+            // Merge the two sorted streams; only the last output can overlap.
+            if (right == other.size || (left < size && starts[left] <= other.starts[right])) {
+                result.appendSorted(starts[left], ends[left]);
+                left++;
+            } else {
+                result.appendSorted(other.starts[right], other.ends[right]);
+                right++;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Detached mutable intersection of two half-open range unions.
+     * Touching endpoints contribute no interval. Both inputs remain unchanged
+     * and must stay stable during this call. Runs in O(this.rangeCount() +
+     * other.rangeCount()) time with O(result.rangeCount()) primitive-lane storage.
+     *
+     * @throws NullPointerException if other is null
+     */
+    public M3LongRangeSet intersection(M3LongRangeSet other) {
+        Objects.requireNonNull(other, "other");
+        M3LongRangeSet result = new M3LongRangeSet();
+        int left = 0;
+        int right = 0;
+        while (left < size && right < other.size) {
+            long leftEnd = ends[left];
+            long rightEnd = other.ends[right];
+            long from = Math.max(starts[left], other.starts[right]);
+            long to = Math.min(leftEnd, rightEnd);
+            if (from < to) result.appendSorted(from, to);
+            // The earlier ending input cannot meet a later range of its peer.
+            if (leftEnd <= rightEnd) left++;
+            if (rightEnd <= leftEnd) right++;
+        }
+        return result;
+    }
+
+    /**
+     * Detached mutable difference: coordinates in this set but not in other.
+     * Both inputs remain unchanged and must stay stable during this call.
+     * Runs in O(this.rangeCount() + other.rangeCount()) time with
+     * O(result.rangeCount()) primitive-lane storage. Endpoint comparisons and
+     * clipping preserve Long.MIN_VALUE and Long.MAX_VALUE without arithmetic.
+     *
+     * @throws NullPointerException if other is null
+     */
+    public M3LongRangeSet difference(M3LongRangeSet other) {
+        Objects.requireNonNull(other, "other");
+        M3LongRangeSet result = new M3LongRangeSet();
+        int right = 0;
+        for (int left = 0; left < size; left++) {
+            long from = starts[left];
+            long to = ends[left];
+            while (right < other.size && other.ends[right] <= from) right++;
+            while (right < other.size && other.starts[right] < to) {
+                long cutStart = other.starts[right];
+                long cutEnd = other.ends[right];
+                if (from < cutStart) result.appendSorted(from, cutStart);
+                if (cutEnd >= to) {
+                    // Keep this cut: it may also cover the next source interval.
+                    from = to;
+                    break;
+                }
+                from = cutEnd;
+                right++;
+            }
+            if (from < to) result.appendSorted(from, to);
+        }
+        return result;
+    }
+
+    /** Appends a nonempty interval in start order using the existing growth policy. */
+    private void appendSorted(long from, long to) {
+        if (size != 0 && from <= ends[size - 1]) {
+            ends[size - 1] = Math.max(ends[size - 1], to);
+            return;
+        }
+        reserve(size + 1);
+        starts[size] = from;
+        ends[size] = to;
+        size++;
     }
 
     /**

@@ -132,13 +132,7 @@ public final class M3IndexPathRank {
     /** Zero-based selected rank to ordinal in the captured strided source path. */
     public int selectedSourceOrdinal(int rank) {
         Objects.checkIndex(rank, size());
-        int low = 0;
-        int high = selected.length;
-        while (low < high) {
-            int middle = low + ((high - low) >>> 1);
-            if (wordPrefix[middle + 1] <= rank) low = middle + 1;
-            else high = middle;
-        }
+        int low = M3LaneSearch.upperBound(wordPrefix, 1, wordPrefix.length, rank) - 1;
         long word = selected[low];
         int remainder = rank - wordPrefix[low];
         while (remainder-- > 0) word &= word - 1;

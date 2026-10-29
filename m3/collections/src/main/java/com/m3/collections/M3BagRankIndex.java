@@ -144,12 +144,7 @@ public final class M3BagRankIndex<E> extends AbstractCollection<E> {
         long size = exactSize();
         if (rank < 0 || rank >= size) throw new IndexOutOfBoundsException("occurrence " + rank);
         long ordinal = prefix[from] + rank;
-        int low = from, high = to;
-        while (low < high) {
-            int mid = low + ((high - low) >>> 1);
-            if (prefix[mid + 1] <= ordinal) low = mid + 1;
-            else high = mid;
-        }
+        int low = M3LaneSearch.upperBound(prefix, from + 1, to + 1, ordinal) - 1;
         return source.elementAt(physical[low]);
     }
 
