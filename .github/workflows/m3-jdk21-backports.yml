@@ -184,6 +184,7 @@ jobs:
             m3/backports/jep_residue.py \
             m3/backports/test_inventory.py \
             m3/backports/test_jep_residue.py \
+            m3/backports/test_m3_extension_residue.py \
             m3/backports/verify.py
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
@@ -198,7 +199,8 @@ jobs:
         run: |
           python3 -m unittest -v \
             m3/backports/test_inventory.py \
-            m3/backports/test_jep_residue.py
+            m3/backports/test_jep_residue.py \
+            m3/backports/test_m3_extension_residue.py
           python3 m3/backports/verify.py --root .
           mvn -B -f m3/backports/pom.xml test
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \

@@ -173,4 +173,3 @@ canonical Synexia recipes with provenance, licensing and target tests. Fix
 demonstrated defects in the existing owner/recipe first, retain regressions and
 previously proven capabilities, and never infer M3-extension rejection solely
 from stock-JDK inexpressibility or a Java 21 backport rejection.
-

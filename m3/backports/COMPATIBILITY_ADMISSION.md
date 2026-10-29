@@ -163,4 +163,3 @@ Completion requires:
 4. every accepted backport has provenance and verification evidence;
 5. the full M3JDK21 build/test gates are green;
 6. rerunning the inventory and admission process yields no unclassified compatible residue.
-
