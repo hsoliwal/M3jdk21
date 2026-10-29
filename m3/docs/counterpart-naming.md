@@ -4,6 +4,100 @@ This extends the retained authority in `name-mapping.json`. It follows the short
 rule in `atom-pattern-admission-and-tooling-boundary.md` and the source/target lineage rules in
 `migration-mapping-lifecycle.md`. It is not a replacement registry.
 
+
+## Every Java API can have an M3 companion (M3-API-COMPANION-1)
+
+Every Java API type in M3JDK21 is eligible for a canonical M3 companion class.
+This includes classes, interfaces, records, enums and annotation types in the
+SDK's public API surface. Methods and overloads belong to the companion of
+their owning type or an explicitly documented API family. Eligibility spans
+the SDK; implementation advances through the established receiving order.
+
+A companion is an explicit association with a Java API and a concrete capability.
+It may be an internal implementation helper, operations class, or separately
+admitted public extension. Preserve each existing JDK owner, interface, method
+descriptor and behavioral contract. Ordinary Java callers continue to use
+`String`, `ArrayList`, `HashMap`, `Pattern`, `Files` and other original APIs;
+qualified improvements to their existing operations are integrated inside those
+owners. A public M3 companion supplies additional, explicitly specified
+capabilities and shares the established implementation where contracts permit.
+
+### Names, visibility and module ownership
+
+Use the existing `name-mapping.json` authority and retain stable
+`migration.records[].id` values. Resolve the original module, package and binary
+type name before selecting a companion. Prefer the established `M3<Type>`
+spelling when available and appropriate; existing mapped names take precedence.
+Nested types and equal simple names in different packages require explicit
+mapping. For example, `java.util.Date` and `java.sql.Date` must retain separate
+identities and module ownership. A name proposal does not instantiate a class.
+
+| Java API | Companion relationship | Current status or admission rule |
+| --- | --- | --- |
+| `java.lang.String` | Existing `java.lang.M3String` and its registered internal owners | Package-private implementation; preserve current visibility |
+| `java.lang.Class` | Existing `jdk.internal.mindex.M3Class` | Internal indexed counterpart; preserve module encapsulation |
+| `java.util.Arrays` | An `M3Arrays` companion may group additional array/range/mask operations | Illustrative candidate name; resolve existing owners and collisions first |
+| `java.util.List` | An `M3List` companion may describe additional operations or an explicit capability contract | Illustrative candidate; association does not make every existing List an M3 subtype |
+| `java.nio.file.Files` | An `M3Files` companion may group additional file operations | Illustrative candidate; preserve provider and resource-lifetime contracts |
+
+These examples are not a complete inventory or new naming reservations.
+Keep companion relationships and qualification evidence in the existing map,
+using its admitted schema and capability records. Do not create another registry.
+
+Place a companion in its registered owning module and package, or an explicitly
+admitted M3JDK21 extension module when its dependency closure requires that owner.
+Keep `java.base` independent of compiler, desktop and optional higher-level modules.
+A public extension needs an explicit accessible package/export decision; a new
+subpackage does not inherit its parent's export. Preserve existing internal
+visibility and API-boundary tests. The package-private `java.lang.M3String` is
+not made public by this convention. Qualified public additions require their
+own contract and collision review, including implicit `java.lang` imports and
+source recompilation as well as binary linkage.
+
+### Shared implementation and contract boundaries
+
+Choose the companion's form from the capability. Static operations can accept
+an ordinary Java receiver; supported capability interfaces can expose additional
+operations; explicit stateful objects need documented ownership and lifecycle.
+Final and sealed types retain their existing inheritance rules. The companion
+relationship alone does not establish subclassing or substitutability.
+
+Reuse canonical storage, indexes, offsets, masks, generation tracking, locking
+and Java/JNI owners. Preserve null and exception behavior, equality/hash codes,
+encounter order, backed-view mutation, concurrency, serialization, reflection,
+Unicode and resource lifetimes where applicable. The association itself adds no
+mandatory per-object wrapper, copied payload, cache or native allocation.
+Runtime consumers acquire no third-party or Synexia donor dependency.
+
+Keep extended domains explicit. For example, `Collection.size()` remains
+`int` with its specified saturation behavior. A distinct exact-long cardinality
+operation is admissible only when the storage owner can supply that information;
+casting `size()` to `long` cannot recover a saturated count. A genuinely
+long-indexed API also needs a complete indexing, iteration, overflow and
+materialization contract. A companion's presence is not a performance result.
+
+### Recipe-driven admission
+
+For each proposed relationship, record the original API identity, existing M3
+owner, intended capability, target module/package/visibility, source and license
+lineage, recipe identity and exact qualification disposition in the existing
+mapping and receipt authorities. Reuse an existing helper before materializing
+an additional class. Materialize a class when its capability and contract are
+defined; record unresolved associations as pending.
+
+Synexia owns the Maven/OpenRewrite recipes, fixtures and their execution.
+M3JDK21 receives executed postimages, product tests and passive receipts.
+Preserve serial per-file replay, source-drift refusal and fixed point; qualify
+actual API/ABI/behavior, installed modules, JNI/GC and resource costs whenever
+the change affects them. Keep String -> arrays -> collections -> AST/compiler
+-> remaining families as the receiving order. This documentation change
+establishes companion eligibility; it adds no runtime type, export or completed
+all-API coverage claim.
+
+References: Java 21 [class and method rules](https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html),
+[package and module rules](https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html),
+and [Collection.size contract](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html#size()).
+
 ## Names and placement
 
 Use an established JDK or M3 owner first. Define an acronym once beside its contract, then use the
@@ -37,6 +131,35 @@ Do not shorten arbitrary words into unexplained initials.
 | `MIndexMappedStringBacking` | `jdk.internal.mindex.M3MappedStringBacking` | Internal mapped backing | Renamed target counterpart |
 
 
+
+### Optional public companions for standard Java APIs
+
+Every standard Java API may have an optional additive public M3 companion in an existing
+`com.m3.*` owner. Prefer useful static operations on original Java values or typed views
+sharing an admitted owner. This does not require subclassing, one class per Java API, a
+copy of every method or renamed `java.*` types. Standard implementations keep their original
+contracts; internal storage and `java.lang.M3String` remain internal.
+
+Use the optional `migration.records[].companion_of` relation in the same `name-mapping.json`
+and schema: `{java_api: {module, symbol, path}, target_symbol, form}`. `form` is
+`STATIC_OPERATIONS` or `TYPED_VIEW`, and `target_symbol` identifies a target artifact of that
+record. Preserve the stable capability ID, exact source/target lineage, status and evidence.
+An optional relation is not a new registry or a declaration of full API/runtime parity.
+
+The first source-inventoried example is `com.m3.arrays.M3Arrays`, module `com.m3.arrays`, in
+`m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java` with
+`m3/arrays/src/main/java/module-info.java`. Its static factory/composition operations may be
+related to `java.base` / `java.util.Arrays` /
+`src/java.base/share/classes/java/util/Arrays.java` as `STATIC_OPERATIONS`. Preserve explicit
+mutable-input snapshots and existing immutable owner-sharing slice/join semantics. Recording
+this example adds or qualifies no runtime source and does not claim all Arrays operations.
+
+Companion contracts must specify nulls, equality/hash, order, identity, mutation, backed views,
+concurrency and lifetime. Retain canonical payload owners and checked JNI selectors. Keep
+`java.base` independent of companion modules; shared base kernels stay in their existing base
+owner, and deliberate companion exports do not open implementation packages. String remains
+the active stage of **String -> arrays -> collections -> AST/compiler -> remaining families**.
+Native platform qualification and Java fallback or explicit-unavailable behavior stay separate.
 
 ### String/precompute naming invariant
 

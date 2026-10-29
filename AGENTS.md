@@ -159,3 +159,17 @@ internal M3 helpers retained wherever their contracts require them.
 
 Run `python3 m3/tooling/name-contract/check.py` before proposing changes.
 It is a candidate/queue gate, **not** installed-JDK runtime admission.
+
+
+## Directional JDK superset and cross-language expansion
+
+M3JDK21 is a one-way Java 21 compatibility superset: required Java 21 programs,
+APIs and runtime behavior must continue to work in M3JDK21, while M3-only
+extensions need not compile or run on stock JDK 21. Treat new language, compiler,
+VM and primitive/value features as separately specified, proof-gated M3 candidates,
+preserving Java 21 source/binary/runtime contracts and existing receiving gates.
+Borrow suitable cross-language ideas and lawfully reusable implementations through
+canonical Synexia recipes with provenance, licensing and target tests. Fix
+demonstrated defects in the existing owner/recipe first, retain regressions and
+previously proven capabilities, and never infer M3-extension rejection solely
+from stock-JDK inexpressibility or a Java 21 backport rejection.

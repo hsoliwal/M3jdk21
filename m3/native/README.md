@@ -65,3 +65,28 @@ Pending evidence: platform device builds (Android/iOS/HarmonyOS/Windows/macOS),
 installed matched source-built JDK/JNI and GC tests, broad jtreg and
 comparative CPU/retained-heap/native-memory measurements. The existing
 String → arrays → collections receiving gate is not advanced by host C11 tests.
+
+## Windows checkout repair and iOS source compilation
+
+**Observed error on 2026-10-29:** M3's common C11/JNI Windows CI checkout
+failed *before the compiler ran* with `Filename too long` on historical
+`m3/arrays/qualification/**/recipe-custody/**` source paths.
+The original Git blobs are not defective. The Windows CI now sets
+`git config --global core.longpaths true` **before** `actions/checkout`.
+Keep this gate ahead of every full checkout: a post-checkout Git setting
+cannot repair checkout failure. This fixes a path creation prerequisite;
+it does **not** certify MSVC/CMake, Java/JNI or Windows runtime behavior.
+
+An opt-in iPhoneOS ARM64 compile-only job now reuses the canonical
+`m3/native/CMakeLists.txt` OBJECT library and actual `m3/arrays` and
+`m3/collections` C owners with `CMAKE_SYSTEM_NAME=iOS`, the Xcode iPhoneOS
+SDK and the existing `M3_JNI_INCLUDE_DIRS` escape hatch. Its host JDK 21
+JNI declarations are only a compile-time input, **not** an iOS runtime.
+`BUILD_TESTING=OFF` prevents treating an iOS cross-binary as host runnable.
+
+The iOS job is not a claim of an iOS JVM, AOT integration, App Store
+eligibility, native loading, device JNI/GC tests or successful app signing.
+Actual Android/iOS product qualification requires a selected runtime
+(Android ART or an eligible iOS AOT/runtime), native library packaging,
+ABI/runtime parity, signed device execution and platform policy review.
+Native host/macOS and Android C11 jobs remain independently tracked.

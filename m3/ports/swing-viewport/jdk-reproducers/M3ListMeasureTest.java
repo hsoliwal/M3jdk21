@@ -8,7 +8,7 @@
  * @summary M3 swing-viewport leaf 4: JUnit suite of the JList measurement path (sun.swing.list):
  *          the piece table against a reference list, which rows a layout measures, the probe, the
  *          inputs that make every row measured again, the cases the path declines, untrackable
- *          events, the recorded event-less mutation divergence, plus the JList differential.
+ *          events, mutable-value measurement parity, plus the JList differential.
  * @modules java.desktop/sun.swing.list java.desktop/javax.swing.plaf.basic:open java.desktop/sun.swing.list:open
  * @build M3JListViewportDifferential
  * @run junit/othervm -Djava.awt.headless=true -Dm3.swing.viewport=true -XX:-OmitStackTraceInFastThrow M3ListMeasureTest
@@ -51,7 +51,7 @@ import sun.swing.list.M3RowPieces;
 
 public class M3ListMeasureTest {
 
-    /** A value whose text changes without a list data event (a ListModel contract violation). */
+    /** A value whose text can change independently of list data events. */
     static final class Mutable {
         String text;
 
@@ -407,13 +407,12 @@ public class M3ListMeasureTest {
     }
 
     /**
-     * The one known difference (DESIGN.md section 10): a value changed without a list data event.
-     * Stock measures every row on every layout, so it picks the change up at the next layout that
-     * any other event or property change causes; the M3 path keeps the row's recorded size until
-     * the row gets an event or every row is measured again (here a font change).
+     * Mutable value text is remeasured at the next layout, including layouts caused by another
+     * row's event. Preserve stock measurement even when the changed text did not replace the
+     * model value or publish an event for that row.
      */
     @Test
-    void eventlessMutationIsTheOneKnownDivergence() throws Exception {
+    void mutableValuesRetainStockRemeasurement() throws Exception {
         if (!M3ListRows.ENABLED) {
             return;
         }
@@ -432,7 +431,9 @@ public class M3ListMeasureTest {
         int stock = ((int[]) field(p.get(0), "cellHeights"))[3];
         int m3 = ((int[]) field(p.get(1), "cellHeights"))[3];
         assertNotEquals(before, stock, "stock re-measured the mutated row");
-        assertEquals(before, m3, "the M3 path kept its recorded size");
+        assertEquals(stock, m3, "the M3 path must remeasure mutable value text");
+        assertEquals(model.getSize(), measured(p), "mutable values require a full measure");
+        same(p);
         for (JList<Object> l : p) {
             l.setFont(l.getFont().deriveFont(l.getFont().getSize2D() + 1));
         }

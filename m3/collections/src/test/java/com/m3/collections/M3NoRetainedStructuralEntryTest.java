@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: align API projection identity checks with the existing bounded facade cache.
+// Modified 2026-10-29: restore caller-owned projection identity and owner-wide retention checks.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Array;
@@ -23,9 +23,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Mechanical LEAN guard: logical collection entries are not retained as structural objects.
  *
- * <p>Live Map.Entry projections may be reused by the bounded API facade cache. Canonical packed
- * storage must remain payload lanes plus primitive slot/index/topology state; navigation snapshots
- * remain fresh and detached.</p>
+ * <p>Map.Entry objects are fresh caller-owned projections. Neither the map nor canonical packed
+ * storage retains or pools them. Storage remains payload lanes plus primitive slot/index/topology
+ * state; navigation snapshots remain fresh and detached.</p>
  */
 final class M3NoRetainedStructuralEntryTest {
     private static final String PACKAGE = "com.m3.collections.";
@@ -61,13 +61,15 @@ final class M3NoRetainedStructuralEntryTest {
     }
 
     @Test
-    void liveEntriesAreReusedOutsideCanonicalStorageAndSnapshotsRemainFresh() {
+    void liveEntriesAreFreshOutsideCanonicalStorageAndSnapshotsRemainFresh() {
         var hash = new M3LinkedHashMap<Integer, Integer>();
         hash.put(1, 10);
         hash.put(2, 20);
         Map.Entry<Integer, Integer> hashEntry = hash.entrySet().iterator().next();
         Map.Entry<Integer, Integer> hashEntryAgain = hash.entrySet().iterator().next();
-        assertSame(hashEntry, hashEntryAgain, "hash live API projection is reused while cached");
+        assertNotSame(hashEntry, hashEntryAgain, "hash live API projections are caller-owned");
+        assertFalse(retainsIdentity(hash, hashEntry), "map retained caller entry");
+        assertFalse(retainsIdentity(hash, hashEntryAgain), "map retained repeated caller entry");
         Object hashStorage = canonicalStorage(hash, "table");
         assertFalse(
                 retainsIdentity(hashStorage, hashEntry),
@@ -81,7 +83,9 @@ final class M3NoRetainedStructuralEntryTest {
         tree.put(2, 20);
         Map.Entry<Integer, Integer> treeEntry = tree.entrySet().iterator().next();
         Map.Entry<Integer, Integer> treeEntryAgain = tree.entrySet().iterator().next();
-        assertSame(treeEntry, treeEntryAgain, "tree live API projection is reused while cached");
+        assertNotSame(treeEntry, treeEntryAgain, "tree live API projections are caller-owned");
+        assertFalse(retainsIdentity(tree, treeEntry), "map retained caller entry");
+        assertFalse(retainsIdentity(tree, treeEntryAgain), "map retained repeated caller entry");
         Object treeStorage = canonicalStorage(tree, "tree");
         assertFalse(
                 retainsIdentity(treeStorage, treeEntry),
@@ -94,13 +98,15 @@ final class M3NoRetainedStructuralEntryTest {
         treeEntry.setValue(11);
         assertEquals(11, hash.get(hashEntry.getKey()));
         assertEquals(11, tree.get(treeEntry.getKey()));
+        assertEquals(11, hashEntryAgain.getValue());
+        assertEquals(11, treeEntryAgain.getValue());
 
         assertFreshBurst(hash::firstEntry, "hash firstEntry");
         assertFreshBurst(tree::firstEntry, "tree firstEntry");
-        assertReusedBurst(
+        assertFreshBurst(
                 () -> hash.entrySet().iterator().next(),
                 "hash entrySet iterator projection");
-        assertReusedBurst(
+        assertFreshBurst(
                 () -> tree.entrySet().iterator().next(),
                 "tree entrySet iterator projection");
     }
@@ -117,14 +123,6 @@ final class M3NoRetainedStructuralEntryTest {
                         label + " reused/pool-cycled an Entry identity at " + iteration);
             }
             seen[iteration] = current;
-        }
-    }
-
-    private static void assertReusedBurst(
-            Supplier<? extends Map.Entry<?, ?>> supplier, String label) {
-        Map.Entry<?, ?> cached = supplier.get();
-        for (int iteration = 0; iteration < 1_024; iteration++) {
-            assertSame(cached, supplier.get(), label + " lost its cached identity at " + iteration);
         }
     }
 
@@ -219,18 +217,21 @@ final class M3NoRetainedStructuralEntryTest {
             return false;
         }
 
-        for (Field field : type.getDeclaredFields()) {
-            if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) {
-                continue;
-            }
-            assertTrue(field.trySetAccessible(), () -> "cannot inspect " + type.getName() + "." + field.getName());
-            try {
-                Object retained = field.get(value);
-                if (retained == target || retainsIdentity(retained, target, seen)) {
-                    return true;
+        for (Class<?> current = type; current != null && current.getName().startsWith(PACKAGE);
+                current = current.getSuperclass()) {
+            for (Field field : current.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) {
+                    continue;
                 }
-            } catch (IllegalAccessException impossible) {
-                throw new AssertionError(impossible);
+                assertTrue(field.trySetAccessible(), () -> "cannot inspect " + type.getName() + "." + field.getName());
+                try {
+                    Object retained = field.get(value);
+                    if (retained == target || retainsIdentity(retained, target, seen)) {
+                        return true;
+                    }
+                } catch (IllegalAccessException impossible) {
+                    throw new AssertionError(impossible);
+                }
             }
         }
         return false;

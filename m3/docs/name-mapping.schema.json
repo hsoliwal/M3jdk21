@@ -630,6 +630,9 @@
         "observation": {
           "type": "string",
           "minLength": 1
+        },
+        "companion_of": {
+          "$ref": "#/$defs/companion"
         }
       },
       "required": [
@@ -720,6 +723,51 @@
         "runs"
       ],
       "additionalProperties": true
+    },
+    "companion": {
+      "description": "Optional additive public M3 companion of a mapped exported Java API; not runtime admission.",
+      "type": "object",
+      "properties": {
+        "java_api": {
+          "type": "object",
+          "properties": {
+            "module": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9.]*$"
+            },
+            "symbol": {
+              "type": "string",
+              "minLength": 3
+            },
+            "path": {
+              "type": "string",
+              "pattern": "^src/[^/]+/share/classes/.+\\.java$"
+            }
+          },
+          "required": [
+            "module",
+            "symbol",
+            "path"
+          ],
+          "additionalProperties": false
+        },
+        "target_symbol": {
+          "type": "string",
+          "pattern": "^com\\.m3\\..+"
+        },
+        "form": {
+          "enum": [
+            "STATIC_OPERATIONS",
+            "TYPED_VIEW"
+          ]
+        }
+      },
+      "required": [
+        "java_api",
+        "target_symbol",
+        "form"
+      ],
+      "additionalProperties": false
     }
   }
 }

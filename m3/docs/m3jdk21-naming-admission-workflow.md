@@ -12,23 +12,27 @@ completed `java.base` rewrite.
 relation updates an existing `migration.records[]` entry in `name-mapping.json`, or adds a
 reviewed stable capability ID there. No parallel list is authoritative.
 
-## The public class stays the JDK class
+## Standard implementation and additive companion admission
 
 When a qualified M3 implementation is proven more efficient under all required contracts, it
-**becomes the internal body/atoms of the existing standard JDK class**, not a competing user-visible
-subclass, adapter or new `M3*` public class. For example:
+**becomes the internal body/atoms of the existing standard JDK class**. Separately, every standard
+Java API may have an optional additive public `com.m3.*` companion with useful static operations
+on original Java values or typed views sharing an admitted owner. The standard type and its
+compatibility contract remain authoritative. No one-class-per-API rule or subclass requirement
+follows; final and sealed Java types keep their existing restrictions. For implementation work:
 
 | Java SE contract owner (unchanged) | M3 implementation policy |
 | --- | --- |
 | `java.lang.String` | use existing canonical `java.lang.M3String*` and `jdk.internal.mindex` helpers; preserve every String, JVM, Unicode and JNI contract |
-| `java.util.ArrayList` | existing `ArrayList` class delegates to admitted array/offset/mask/length atoms; no parallel `M3ArrayList` Java SE surface |
+| `java.util.ArrayList` | existing `ArrayList` class delegates to admitted array/offset/mask/length atoms; an additive companion does not substitute for this Java SE owner |
 | `java.util.HashMap` / `TreeMap` | keep map class, Entry API projection semantics and all view/iteration/serialization contracts; no invented retained per-entry store |
 | `java.util.concurrent.*` | keep interfaces/type names and happens-before/linearizability; use private M3 kernels only after concurrency proof |
 | `java.util.regex.Pattern` / `Matcher` | preserve regex API, flags, captures and matcher state; prepared M3 internals are implementation details |
 | `java.lang.Class` / compiler APIs | keep established reflective/compiler signatures; specialized M3 class/AST facts belong in correct internal module |
 
-It is an *implementation switch*, not an API switch. Preserve old public/protected constructors
-and signatures, method descriptors, checked exceptions, reflection/serialization, class-file,
+For a standard backend, promotion changes the implementation while preserving the API.
+Companion admission adds its own separately contracted operations. Preserve old public/protected
+constructors and signatures, method descriptors, checked exceptions, reflection/serialization, class-file,
 module export and JNI ABI behaviors. Keep an original path/fallback where the candidate's
 admission boundary requires it. Never infer full behavior equivalence merely from a donor
 algorithm or a microbenchmark.
@@ -46,9 +50,14 @@ existing target owner first.
 - **Private M3 implementation:** prefer package-private classes or members within the existing
   owner, otherwise an established internal `jdk.internal.mindex.M3*`,
   `java.lang.M3*`, `java.util.M3*` or module-specific `com.sun.tools.javac.m3.M3*`
-  owner. No new export. Remove duplicate public helper facades only after dependency closure.
-- **Genuinely new capability:** use a separately admitted `com.m3.*` module/package, with
-  deliberate exports and full installed-image evidence; do not add it to `java.*`.
+  owner. Keep those implementation packages internal; reconcile duplicate helpers only after
+  dependency closure without deleting an admitted companion surface.
+- **Additive companion or other extension:** use an existing, separately admitted `com.m3.*`
+  module/package, with deliberate exports and full installed-image evidence; do not add the
+  companion to `java.*` or rename its standard API. Share admitted owners instead of creating
+  another payload store. `java.lang.M3String` and storage/precompute internals stay internal.
+  `java.base` cannot depend upward on a companion module; keep shared base kernels in their
+  existing lower owner and preserve package access and the reviewed module graph.
 - **Spelling:** class UpperCamelCase; constructor exactly the class's simple name; method and
   field lowerCamelCase; constants UPPER_SNAKE_CASE; stable existing Java naming and acronym
   spellings stay unchanged. Document short M3 abbreviations in Javadoc and the mapping contract.
@@ -73,6 +82,30 @@ left-behind helper.
 The source of truth for received names is `name-mapping.json`. Synexia's
 `CANONICAL_RECIPE_HOME.tsv` maps **recipe ownership**, not JDK public symbols.
 
+## Optional companion relation and first inventoried source
+
+Use the same map/schema and optional `migration.records[].companion_of` object:
+`{java_api: {module, symbol, path}, target_symbol, form}`. The allowed forms are
+`STATIC_OPERATIONS` and `TYPED_VIEW`; `target_symbol` refers to a target in that record.
+Keep its stable ID, exact target artifact, source lineage, status and existing receipts.
+A relation documents the intended additional surface and never grants method coverage,
+substitutability or runtime qualification. There is no companion registry beside this map.
+
+The first source-inventoried example is `com.m3.arrays.M3Arrays` in module `com.m3.arrays`,
+at `m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java`, with module descriptor
+`m3/arrays/src/main/java/module-info.java`. Its static factory/composition surface can be
+related to `java.base` / `java.util.Arrays` /
+`src/java.base/share/classes/java/util/Arrays.java` with `form: STATIC_OPERATIONS`.
+Preserve the existing explicit snapshot boundary for mutable inputs and shared immutable
+slice/join owners; do not imply that a snapshot aliases the caller's mutable payload.
+No runtime source is added or qualified by recording this policy example.
+
+Companion contract review includes nulls, exception order, equality/hash, encounter order,
+identity, mutations, backed views and concurrency. Typed views retain the appropriate owner
+and coordinates and disclose their own identity and lifetime; factory outputs and immutable
+snapshots retain their declared ownership. Reuse checked bulk-JNI selectors and record any
+materialization. Native platform availability is a distinct gate from Java API admission.
+
 ## Mandatory executable preflight (Synexia-owned)
 
 The canonical **Maven/OpenRewrite** preflight is
@@ -94,7 +127,7 @@ SOURCE: stable mapping ID -> donor/source/license/contract inventory
   -> matched M3JDK21 JDK image + jtreg/GC/JNI/VM/effect tests
   -> cold/warm benchmark and heap/native-process costs
   -> exact artifact/recipe/provenance receipt and review
-  -> **only then** promote implementation under original JDK class
+  -> **only then** promote the original JDK implementation or the separately mapped companion scope
 ```
 
 The Java preflight takes stable IDs selected from the **current pinned** target
@@ -122,8 +155,11 @@ file license/NOTICE and any re-contribution grant.
 
 Receiving phases remain **String -> arrays -> collections -> AST/compiler -> other**.
 Do not advance a phase because an unrelated collection prototype or test is green.
-An M3 helper stays internal unless an independently reviewed non-Java-SE extension API
-is the approved product.
+String qualification remains the active runtime stage. Public M3 companions may accompany
+standard Java APIs under the optional relation above; implementation helpers and canonical
+storage remain internal. Source inventory or a companion relation cannot advance a phase.
+Qualify the installed companion module and each native platform separately, preserving the
+specified Java fallback or explicit-unavailable contract and every pending gate.
 
 ## How to run and what is not yet proved
 

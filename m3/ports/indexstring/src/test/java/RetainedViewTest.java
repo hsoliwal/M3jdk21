@@ -1,11 +1,17 @@
 // SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package com.synexia.indexstring;
 
 import com.m3.text.compat.M3Text;
+import java.io.ByteArrayInputStream;
+import java.io.CharArrayReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.CharBuffer;
 import java.nio.ReadOnlyBufferException;
 import java.nio.channels.FileChannel;
 import java.nio.charset.CharacterCodingException;
@@ -88,6 +94,307 @@ public final class RetainedViewTest {
       }
     }
   }
+  // Reader cursors are local; the canonical backing payload remains shared.
+  private static void joinedStreamCursors() throws Exception {
+    positionedCharSegmentsResetToTheirVisibleStarts();
+    positionedByteSegmentsResetToTheirVisibleStarts();
+    characterMarksReplayAcrossNonzeroAndEmptyDescriptors();
+    byteMarksReplayAcrossNonzeroAndEmptyDescriptors();
+    characterReadersOwnIndependentDescriptorCursors();
+    byteReadersOwnIndependentDescriptorCursors();
+    scalarCharacterReadsHonorTheDeclaredLogicalPrefix();
+    scalarByteReadsHonorTheDeclaredLogicalPrefix();
+    invalidDescriptorCoverageIsRefusedAtAdmission();
+    characterResetSkipAndClosePreserveCallerMarkAndPeer();
+    byteResetSkipAndClosePreserveCallerMarkAndPeer();
+    existingZeroOriginAndClosedStreamContractsRemain();
+    randomizedCharacterDescriptorsMatchJdkReaderStateTransitions();
+    randomizedByteDescriptorsMatchJdkInputStreamStateTransitions();
+  }
+
+  private static void positionedCharSegmentsResetToTheirVisibleStarts() throws Exception {
+    CharBuffer[] spans = {chars("AB", false), chars("", false), chars("\ud800C\udfff", false)};
+    try (Reader input = MIndexJoinedStreams.chars(spans, 5)) {
+      check(("AB\ud800C\udfff").equals(allChars(input)));
+      input.reset();
+      check(("AB\ud800C\udfff").equals(allChars(input)));
+      input.reset();
+      check(("AB\ud800C\udfff").equals(allChars(input)));
+    }
+  }
+
+  private static void positionedByteSegmentsResetToTheirVisibleStarts() throws Exception {
+    ByteBuffer[] spans = {bytes(new byte[] {0, -1}, false), bytes(new byte[0], false),
+        bytes(new byte[] {9, -128, 7}, false)};
+    byte[] expected = {0, -1, 9, -128, 7};
+    try (InputStream input = MIndexJoinedStreams.bytes(spans, expected.length)) {
+      check(Arrays.equals(expected, input.readAllBytes()));
+      input.reset();
+      check(Arrays.equals(expected, input.readAllBytes()));
+    }
+  }
+
+  private static void characterMarksReplayAcrossNonzeroAndEmptyDescriptors() throws Exception {
+    CharBuffer[] spans = {chars("A\ud83d", true), chars("", true), chars("\ude00Z", true)};
+    try (Reader input = MIndexJoinedStreams.chars(spans, 4)) {
+      check('A' == input.read());
+      input.mark(0);
+      check(("\ud83d\ude00Z").equals(allChars(input)));
+      input.reset();
+      check(("\ud83d\ude00Z").equals(allChars(input)));
+      input.reset();
+      check(2 == input.skip(2));
+      input.mark(0);
+      check('Z' == input.read());
+      input.reset();
+      check('Z' == input.read());
+      check(-1 == input.read());
+      input.mark(0);
+      input.reset();
+      check(-1 == input.read());
+    }
+  }
+
+  private static void byteMarksReplayAcrossNonzeroAndEmptyDescriptors() throws Exception {
+    ByteBuffer[] spans = {bytes(new byte[] {1, 2}, true), bytes(new byte[0], true),
+        bytes(new byte[] {-1, 4}, true)};
+    try (InputStream input = MIndexJoinedStreams.bytes(spans, 4)) {
+      check(1 == input.read());
+      input.mark(0);
+      check(Arrays.equals(new byte[] {2, -1, 4}, input.readAllBytes()));
+      input.reset();
+      check(Arrays.equals(new byte[] {2, -1, 4}, input.readAllBytes()));
+    }
+  }
+
+  private static void characterReadersOwnIndependentDescriptorCursors() throws Exception {
+    CharBuffer first = chars("ab", false);
+    CharBuffer second = chars("cd", false);
+    CharBuffer[] spans = {first, second};
+    try (Reader one = MIndexJoinedStreams.chars(spans, 4);
+         Reader two = MIndexJoinedStreams.chars(spans, 4)) {
+      check('a' == one.read());
+      check('a' == two.read());
+      check(1 == first.position());
+      check(1 == second.position());
+      first.position(first.limit());
+      second.limit(1);
+      spans[0] = chars("XX", false);
+      check(("bcd").equals(allChars(one)));
+      check(("bcd").equals(allChars(two)));
+    }
+  }
+
+  private static void byteReadersOwnIndependentDescriptorCursors() throws Exception {
+    ByteBuffer first = bytes(new byte[] {1, 2}, false);
+    ByteBuffer second = bytes(new byte[] {3, 4}, false);
+    ByteBuffer[] spans = {first, second};
+    try (InputStream one = MIndexJoinedStreams.bytes(spans, 4);
+         InputStream two = MIndexJoinedStreams.bytes(spans, 4)) {
+      check(1 == one.read());
+      check(1 == two.read());
+      check(1 == first.position());
+      check(1 == second.position());
+      first.position(first.limit());
+      second.limit(1);
+      spans[0] = bytes(new byte[] {9, 9}, false);
+      check(Arrays.equals(new byte[] {2, 3, 4}, one.readAllBytes()));
+      check(Arrays.equals(new byte[] {2, 3, 4}, two.readAllBytes()));
+    }
+  }
+
+  private static void scalarCharacterReadsHonorTheDeclaredLogicalPrefix() throws Exception {
+    for (int length = 0; length <= 3; length++) {
+      try (Reader input = MIndexJoinedStreams.chars(new CharBuffer[] {chars("ABC", false)}, length)) {
+        check(("ABC".substring(0, length)).equals(allChars(input)));
+        check(-1 == input.read());
+        check(0 == input.read(new char[0], 0, 0));
+        check(0 == input.skip(Long.MAX_VALUE));
+        input.reset();
+        check(("ABC".substring(0, length)).equals(allChars(input)));
+      }
+    }
+  }
+
+  private static void scalarByteReadsHonorTheDeclaredLogicalPrefix() throws Exception {
+    for (int length = 0; length <= 3; length++) {
+      try (InputStream input = MIndexJoinedStreams.bytes(new ByteBuffer[] {bytes(new byte[] {1, 2, 3}, false)}, length)) {
+        for (int i = 0; i < length; i++) check(i + 1 == input.read());
+        check(-1 == input.read());
+        check(0 == input.available());
+        check(0 == input.read(new byte[0], 0, 0));
+        check(0 == input.skip(Long.MAX_VALUE));
+        input.reset();
+        check(Arrays.equals(Arrays.copyOf(new byte[] {1, 2, 3}, length), input.readAllBytes()));
+      }
+    }
+  }
+
+  private static void invalidDescriptorCoverageIsRefusedAtAdmission() throws Exception {
+    expect(IllegalArgumentException.class, () -> MIndexJoinedStreams.chars(new CharBuffer[0], -1));
+    expect(IllegalArgumentException.class, () -> MIndexJoinedStreams.bytes(new ByteBuffer[0], -1));
+    expect(IllegalStateException.class, () -> MIndexJoinedStreams.chars(new CharBuffer[] {chars("a", false)}, 2));
+    expect(IllegalStateException.class, () -> MIndexJoinedStreams.bytes(new ByteBuffer[] {bytes(new byte[] {1}, false)}, 2));
+    expect(NullPointerException.class, () -> MIndexJoinedStreams.chars(null, 0));
+    expect(NullPointerException.class, () -> MIndexJoinedStreams.bytes(null, 0));
+    expect(NullPointerException.class, () -> MIndexJoinedStreams.chars(new CharBuffer[] {null}, 0));
+    expect(NullPointerException.class, () -> MIndexJoinedStreams.bytes(new ByteBuffer[] {null}, 0));
+  }
+
+  private static void characterResetSkipAndClosePreserveCallerMarkAndPeer() throws Exception {
+    CharBuffer span = chars("abcd", false);
+    span.mark();
+    int limit = span.limit();
+    Reader one = MIndexJoinedStreams.chars(new CharBuffer[] {span}, 4);
+    try (Reader peer = MIndexJoinedStreams.chars(new CharBuffer[] {span}, 4)) {
+      check(2 == one.skip(2));
+      one.mark(0);
+      check('c' == one.read());
+      one.reset();
+      check('c' == one.read());
+      one.close();
+      check(("abcd").equals(allChars(peer)));
+    }
+    check(limit == span.limit());
+    span.reset();
+    check(1 == span.position());
+  }
+
+  private static void byteResetSkipAndClosePreserveCallerMarkAndPeer() throws Exception {
+    ByteBuffer span = bytes(new byte[] {1, 2, 3, 4}, true);
+    span.mark();
+    int limit = span.limit();
+    InputStream one = MIndexJoinedStreams.bytes(new ByteBuffer[] {span}, 4);
+    try (InputStream peer = MIndexJoinedStreams.bytes(new ByteBuffer[] {span}, 4)) {
+      check(2 == one.skip(2));
+      one.mark(0);
+      check(3 == one.read());
+      one.reset();
+      check(3 == one.read());
+      one.close();
+      check(Arrays.equals(new byte[] {1, 2, 3, 4}, peer.readAllBytes()));
+    }
+    check(limit == span.limit());
+    span.reset();
+    check(1 == span.position());
+  }
+
+  private static void existingZeroOriginAndClosedStreamContractsRemain() throws Exception {
+    InputStream bytes = MIndexJoinedStreams.bytes(new ByteBuffer[] {ByteBuffer.wrap(new byte[] {0, -1})}, 2);
+    check(bytes.markSupported());
+    check(0 == bytes.skip(-1));
+    check(0 == bytes.read());
+    bytes.mark(0);
+    check(255 == bytes.read());
+    bytes.reset();
+    check(255 == bytes.read());
+    check(-1 == bytes.read());
+    bytes.close(); bytes.close();
+    expect(IOException.class, bytes::read);
+    expect(IOException.class, bytes::reset);
+    expect(IOException.class, bytes::available);
+    Reader chars = MIndexJoinedStreams.chars(new CharBuffer[] {CharBuffer.wrap("ab")}, 2);
+    check(chars.markSupported());
+    check(chars.ready());
+    expect(IllegalArgumentException.class, () -> chars.skip(-1));
+    expect(IllegalArgumentException.class, () -> chars.mark(-1));
+    expect(IndexOutOfBoundsException.class, () -> chars.read(new char[1], 1, 1));
+    check('a' == chars.read());
+    chars.mark(0);
+    check('b' == chars.read());
+    chars.reset(); check('b' == chars.read());
+    chars.close(); chars.close();
+    expect(IOException.class, chars::read);
+    expect(IOException.class, chars::reset);
+    expect(IOException.class, chars::ready);
+  }
+
+  private static void randomizedCharacterDescriptorsMatchJdkReaderStateTransitions() throws Exception {
+    Random random = new Random(0x553136L);
+    for (int trial = 0; trial < 256; trial++) {
+      int size = random.nextInt(65);
+      char[] text = new char[size];
+      for (int i = 0; i < size; i++) text[i] = (char) random.nextInt(65536);
+      int split = random.nextInt(size + 1);
+      int length = random.nextInt(size + 1);
+      CharBuffer[] spans = {chars(new String(text, 0, split), (trial & 1) == 0), chars("", false),
+          chars(new String(text, split, size - split), (trial & 1) != 0)};
+      try (Reader actual = MIndexJoinedStreams.chars(spans, length);
+           Reader expected = new CharArrayReader(Arrays.copyOf(text, length))) {
+        for (int operation = 0; operation < 96; operation++) {
+          switch (random.nextInt(5)) {
+            case 0 -> check(expected.read() == actual.read());
+            case 1 -> {
+              int width = 1 + random.nextInt(7);
+              char[] left = new char[width + 2], right = new char[width + 2];
+              check(expected.read(left, 1, width) == actual.read(right, 1, width));
+              check(Arrays.equals(left, right));
+            }
+            case 2 -> { long skip = random.nextInt(9); check(expected.skip(skip) == actual.skip(skip)); }
+            case 3 -> { expected.mark(0); actual.mark(0); }
+            default -> { expected.reset(); actual.reset(); }
+          }
+        }
+      }
+      check(1 == spans[0].position());
+      check(1 == spans[2].position());
+    }
+  }
+
+  private static void randomizedByteDescriptorsMatchJdkInputStreamStateTransitions() throws Exception {
+    Random random = new Random(0x42595445L);
+    for (int trial = 0; trial < 256; trial++) {
+      int size = random.nextInt(65);
+      byte[] text = new byte[size]; random.nextBytes(text);
+      int split = random.nextInt(size + 1);
+      int length = random.nextInt(size + 1);
+      ByteBuffer[] spans = {bytes(Arrays.copyOfRange(text, 0, split), (trial & 1) == 0), bytes(new byte[0], false),
+          bytes(Arrays.copyOfRange(text, split, size), (trial & 1) != 0)};
+      try (InputStream actual = MIndexJoinedStreams.bytes(spans, length);
+           InputStream expected = new ByteArrayInputStream(Arrays.copyOf(text, length))) {
+        for (int operation = 0; operation < 96; operation++) {
+          switch (random.nextInt(5)) {
+            case 0 -> check(expected.read() == actual.read());
+            case 1 -> {
+              int width = 1 + random.nextInt(7);
+              byte[] left = new byte[width + 2], right = new byte[width + 2];
+              check(expected.read(left, 1, width) == actual.read(right, 1, width));
+              check(Arrays.equals(left, right));
+            }
+            case 2 -> { long skip = random.nextInt(9) - 2; check(expected.skip(skip) == actual.skip(skip)); }
+            case 3 -> { expected.mark(0); actual.mark(0); }
+            default -> { expected.reset(); actual.reset(); }
+          }
+          check(expected.available() == actual.available());
+        }
+      }
+      check(1 == spans[0].position());
+      check(1 == spans[2].position());
+    }
+  }
+
+  private static CharBuffer chars(String text, boolean direct) {
+    CharBuffer buffer = direct
+        ? ByteBuffer.allocateDirect((text.length() + 2) * Character.BYTES).order(ByteOrder.LITTLE_ENDIAN).asCharBuffer()
+        : CharBuffer.allocate(text.length() + 2);
+    buffer.put('#').put(text).put('!');
+    buffer.limit(1 + text.length()).position(1);
+    return buffer.asReadOnlyBuffer();
+  }
+
+  private static ByteBuffer bytes(byte[] text, boolean direct) {
+    ByteBuffer buffer = direct ? ByteBuffer.allocateDirect(text.length + 2) : ByteBuffer.allocate(text.length + 2);
+    buffer.put((byte) '#').put(text).put((byte) '!');
+    buffer.limit(1 + text.length).position(1);
+    return buffer.asReadOnlyBuffer();
+  }
+
+  private static String allChars(Reader reader) throws IOException {
+    StringBuilder value = new StringBuilder();
+    for (int c; (c = reader.read()) != -1;) value.append((char) c);
+    return value.toString();
+  }
+
   public static void main(String[] args) throws Exception {
     MIndexJoinedChars first = MIndexJoinedChars.of(atom("unique-A-\u1234\u4321"));
     MIndexJoinedChars second = MIndexJoinedChars.of(atom("unique-B-\u5763\u9876"));
@@ -237,6 +544,7 @@ public final class RetainedViewTest {
       for(var future:workers.invokeAll(List.of(task,task,task,task,task,task)))check(future.get());
     }
     check(canonical.length()==anchors[0].length()+anchors[1].length());
+    joinedStreamCursors();
     System.out.println("RETAINED_VIEW_PASS checks="+checks+" concurrency_iterations=30000");
   }
 }

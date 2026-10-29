@@ -7,6 +7,7 @@ on:
       - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
       - 'm3/backports/jep_residue.py'
       - 'm3/backports/test_jep_residue.py'
+      - 'm3/backports/test_m3_extension_residue.py'
       - 'm3/backports/recipes/jep-residue-proof-gate/**'
       - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java'
       - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java'
@@ -28,11 +29,11 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check
-          python3 -m py_compile m3/backports/jep_residue.py m3/backports/test_jep_residue.py
+          python3 -m py_compile m3/backports/jep_residue.py m3/backports/test_jep_residue.py m3/backports/test_m3_extension_residue.py
       - name: Released-JEP residue tests
         run: |
           set -euo pipefail
-          python3 -m unittest -v m3/backports/test_jep_residue.py
+          python3 -m unittest -v m3/backports/test_jep_residue.py m3/backports/test_m3_extension_residue.py
           python3 m3/backports/jep_residue.py --root . --out /tmp/m3-jep-residue.tsv
           cmp /tmp/m3-jep-residue.tsv m3/backports/JEP_RESIDUE_QUEUE.tsv
 

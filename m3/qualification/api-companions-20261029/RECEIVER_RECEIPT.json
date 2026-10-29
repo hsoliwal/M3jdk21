@@ -1,0 +1,100 @@
+{
+  "schema": "M3JDK21_API_COMPANIONS_RECEIVER_V1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_recipe_commit": "222d4213c99788330a7704e3ebd5842b302dd273",
+  "source_base": "3cda7fa7fb30c9d4d75089265e73bbef3417bba7",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "669a949d192345acefcfc5e9bb0b3724174d270c",
+  "recipe_identity": "com.synexia.m3.Jdk21ApiCompanionsTarget20261029",
+  "recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029",
+  "execution_lane": "MAVEN_OPENREWRITE_SDK",
+  "scope": "EXPLICIT_ADDITIVE_COMPANION_POLICY_AND_RECEIVER_VALIDATION",
+  "mapping_id": "m3.arrays.api-companion",
+  "mapping_status": "implemented-unverified",
+  "existing_java_api": "java.util.Arrays",
+  "existing_companion": "com.m3.arrays.M3Arrays",
+  "new_product_runtime_sources": 0,
+  "receiving_phase": "STRING_UNCHANGED",
+  "outputs": [
+    {
+      "path": ".github/workflows/m3jdk21-name-contract.yml",
+      "before_sha256": "08eb99efcc3c16e3538f7db8d125225ebe9919bba27d953eb825350a5a1fe7ee",
+      "after_sha256": "8851fea17f460c39da730b192feddf5523f2c4d6d03e9591174fc754ffbf09d8"
+    },
+    {
+      "path": "m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md",
+      "before_sha256": "2d08c97145334a3332f8c84e4d32fac71470d89da1170ee3e45955963a66732c",
+      "after_sha256": "1512d007ac4a18d6bca35d5a3bac66cf0ff57ea634c8ecdb1aa12a01968796d6"
+    },
+    {
+      "path": "m3/docs/counterpart-naming.md",
+      "before_sha256": "56626d53928e650c0b87e3505718bffd8e3db4c335eee087760fc4fd5d7618b9",
+      "after_sha256": "80b04019f75e98959fd4b0ef93ac2b897f06a7bd51133e5907589d082e31ac08"
+    },
+    {
+      "path": "m3/docs/m3jdk21-naming-admission-workflow.md",
+      "before_sha256": "ee13e0f45461a714828723454cf28e0f604e72a7cc1f1494f924706010dd6269",
+      "after_sha256": "5c924f5e6f00dffbf3719ea32381cbb85e7c81626cae8a2965fe042252a2a5a1"
+    },
+    {
+      "path": "m3/docs/m3jdk21-porting-invariant.md",
+      "before_sha256": "6cd1bd243f216a3210433525e3742c0fc1ab02cbf02bbc40225c40c5be80a01f",
+      "after_sha256": "d47bc0978d8e6d1fcab15d4c7709749337fd80c9c577f1a40dcbe7bd4c4f1c91"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "d88e04e6b55aa44deb2309f781296648f70fbc104bf3f985178c9c9bb9adafff",
+      "after_sha256": "145dec24eb11847b3915e6fb2e0e80fa4a773879833a3ac64e76101fab67500f"
+    },
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "before_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "after_sha256": "33a4a70132666ce7525025783c4c72c0030ce26b53774d2396a7d027f4d6aa73"
+    },
+    {
+      "path": "m3/docs/public-naming.md",
+      "before_sha256": "404670acbcfdd052a8402165d151b08e94f82bb84551af5001a4bd3ca6c419ab",
+      "after_sha256": "e0b49d327cf1ebf47b5582573c860f6c0241b9fc5dbb4f994e49a45d9c55e5be"
+    },
+    {
+      "path": "m3/tooling/name-contract/check.py",
+      "before_sha256": "3c02ea05c13d74097d26e18db0cabf6c8b169bf0ddc455d034b5e903d4d9f40b",
+      "after_sha256": "9eb56836840ba900d77d51b4bb31d9b7cdfc25ce7ce6ba4546570cc7b1efc3d6"
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "before_sha256": "2b9f076770ca5af818607a18698703951434bf0143ad7d96d39553e43b157979",
+      "after_sha256": "0bfb1c234cd9e8e65702a0797124619fc365d7842b7be74591fabd142dfb78b9"
+    },
+    {
+      "path": "m3/tooling/name-contract/test_audit.py",
+      "before_sha256": "5f25e5738f1c7bbf9fbfc8fcd5b03861f6e6a3cba4b11ae52858c37a53e31230",
+      "after_sha256": "5364b2e8934e841929c4b4b1d9d09e30ee19dde5ab4d0e2303df3642e1102aa7"
+    },
+    {
+      "path": "m3/tooling/name-contract/test_check.py",
+      "before_sha256": "d1fe3ffc7e3a5e59226732722f58d7656a30cb5015d2532c1357e95ae2ae75d2",
+      "after_sha256": "e92d17d314803077459a9b487d45952e9058b87c2a3bbec77bf89b002090e4ad"
+    }
+  ],
+  "gates": {
+    "canonical_java_policy_tests": "PASS_2_JUNIT_71_SMOKE_CHECKS",
+    "source_java_sdk_replay": "PASS_8_TESTS",
+    "target_text_sdk_replay": "PASS_8_TESTS",
+    "fixed_point_drift_missing_duplicate_and_order": "PASS",
+    "receiver_suite": "PASS_57_TESTS",
+    "actual_workflow_sparse_checkout_and_strict_census": "PASS",
+    "workflow_actionlint": "PASS",
+    "new_companion_json_schema": "PASS",
+    "preserved_historical_mapping_records": 67,
+    "full_mapping_json_schema": "15_PREEXISTING_FAILURES_UNCHANGED",
+    "full_canonical_reactor": "NOT_RUN",
+    "complete_historical_provenance_set": "NOT_RUN",
+    "installed_jdk_image_and_jtreg": "NOT_RUN",
+    "native_abi_jni_gc_and_platforms": "NOT_RUN",
+    "android_ios_runtime": "NOT_RUN",
+    "performance": "NOT_RUN"
+  },
+  "evidence": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/evidence",
+  "boundary": "Existing Java APIs and internal canonical payload owners retain their contracts. This inventory adds no runtime companion class, complete API coverage or platform-availability claim."
+}

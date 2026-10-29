@@ -120,3 +120,67 @@ See:
 - `verify_release_admission.py`
 - `../../M3-SYNEXIA-NOTICE.md`
 - `../../M3-SYNEXIA-RIGHTS.md`
+
+## Retained PR source and naming queues
+
+The first release workflow exports three **read-only review artifacts** alongside
+the release-admission receipt:
+
+- `target/m3-release-proof/name-census.tsv`: the canonical mapping declaration/path
+  census from existing `m3/tooling/name-contract/audit.py`; not rename authority.
+- `target/m3-release-proof/retained-source-queue.tsv`: preserved source from
+  `m3/qualification/master-landing-20261028/retained-variants/pr<N>/` compared
+  against its **original path in the checked-out Git HEAD tree**.
+  Each row has archived/active modes and Git blob OIDs.
+- `target/m3-release-proof/retained-source-summary.json`: pinned HEAD,
+  classification totals, SHA-256, and `merge_authorized: false`,
+  `rename_authorized: false`, `runtime_qualified: false`.
+
+Reproduce the queue on a full checkout without changing active source:
+
+```sh
+python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+python3 m3/tooling/name-contract/check.py
+python3 m3/tooling/name-contract/audit.py --strict
+python3 m3/release/retained_source_queue.py --root . \
+  --tsv-out target/m3-release-proof/retained-source-queue.tsv \
+  --summary-out target/m3-release-proof/retained-source-summary.json
+```
+
+The queue is deterministic for one Git HEAD. On `release/**` branches,
+the first-release workflow adds `--strict` and blocks release proof if any
+archived source path remains unresolved. Artifact upload uses `if: always()`
+so the queue remains available on failure. On ordinary PRs, unresolved rows
+are reported without assuming that archived candidates must be promoted.
+
+| Path classification | Interpretation / required next action |
+| --- | --- |
+| `EXACT_ACTIVE_PATH` | Same bytes and mode at the original path; **not** behavior proof |
+| `REVIEW_ABSENT_ACTIVE_PATH` | Investigate rename, replacement or intentional exclusion |
+| `REVIEW_DIVERGENT_ACTIVE_PATH` | Compare evolved contracts; never overwrite current code |
+| `REVIEW_MODE_DIFFERENCE` | Check file-mode change before any replay |
+| `HOLD_ARCHIVE_MODE` | Refuse promotion of unreviewed source type/mode |
+
+For example, [PR #2084](https://github.com/hsoliwal/M3jdk21/pull/2084)
+has archived native `wc` sources with no original live path under
+`m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/`.
+This is a **path-level observation** only; it is not proof that the
+functionality is entirely absent, nor permission to copy archived code.
+
+For each unresolved row, reuse the **private Synexia** Maven/Java
+`M3HistoricalCodeLossRecipe` to compare the exact merge base, donor parent,
+historical merge result, and current delivered Git blobs. Reuse existing
+`M3HunkResolver`, `ExactFileHunkReplay` and `m3-pr-stack-preservation`
+compiler/JUnit gates to prepare a bounded candidate. The public queue is
+a review input, **not** a competing source transformation implementation.
+GitHub's merge action handles mergeable history, but even a clean merge
+needs content no-loss review. Conflicts require an explicit reviewed patch
+and compiler, JUnit and (where applicable) matched-image JNI/jtreg gates.
+
+Public JDK class and method names stay those of Java 21. Internal class/method
+renames, package moves, documentation changes, service/reflection/JNI symbols
+and consumption must be registered under the stable capability ID in
+`m3/docs/name-mapping.json` and processed with the existing Synexia typed
+Maven/OpenRewrite recipe before target acceptance. Preserve ABI, serialization
+and native entry-point behavior. Recipes and execution memory live in Synexia;
+only qualified product results and evidence live in M3JDK21.
