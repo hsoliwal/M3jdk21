@@ -44,9 +44,10 @@ public final class TextTools {
         limits.check(input);
         Canonical.validUnicode(literal);
         int count = input.lines().size();
+        NativeUtf16Literal.Compiled compiled = NativeUtf16Literal.compile(literal);
         long[] selected = new long[(count + 63) >>> 6];
         for (int i = 0; i < count; i++) {
-            if (NativeUtf16Literal.contains(input.lines().get(i).content(), literal))
+            if (compiled.contains(input.lines().get(i).content()))
                 selected[i >>> 6] |= 1L << (i & 63);
         }
         FrameCollector output = new FrameCollector(limits);

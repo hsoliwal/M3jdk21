@@ -20,3 +20,19 @@ and nonflattenable CharSequence direct access.
 PENDING: exact Maven/OpenRewrite SDK run and fixed-point refusal, full text JMOD
 build and installed smoke, complete M3JDK21/jtreg, actual Unix4j 0.7 native
 command/option parity, cross-platform and benchmarks. DRAFT ONLY.
+
+## Second native refinement, 29 October 2026
+
+The same first-party KMP kernel now compiles the UTF-16 needle and its
+primitive int[] failure table **once per grepLiteral invocation**. An immutable
+Compiled plan is shared across all line probes, while scan state and bounded
+8192-unit page arrays stay invocation-local. The open donor Unix4j API and
+existing JNI C symbols are unchanged. This second source-sealed refinement
+lives only in Synexia and must pass its own fixed-point/replay gates.
+
+Independent Java 21/C17 -Xcheck:jni differential: 12,076 tests in each of
+Synexia Java, Synexia JNI, JDK text Java and JDK text JNI configurations.
+A test also reuses each compiled plan twice, including NUL, surrogate halves
+and multi-page UTF-16 text; the count is distinct inputs, not replays.
+Full Maven, product JMOD, jtreg, upstream command parity and benchmarks
+are still NOT_RUN. Keep draft.
