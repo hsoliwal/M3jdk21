@@ -149,8 +149,9 @@ public final class M3DesktopViewportAdapters {
      * <p>The column model owns order, widths and model identity. Measured widths
      * are accumulated with long arithmetic, using JTable's right edge for RTL.
      * No column state, renderer, listener or native resource is retained. This
-     * projection is independent of the row count so empty tables can still
-     * request visible column headers. Call on the EDT without reentrant model
+     * projection is independent of the row count and body height, so empty
+     * tables can still request visible column headers. Only a nonpositive
+     * horizontal clip width suppresses that geometry. Call on the EDT without reentrant model
      * mutation, as for the row projections.</p>
      */
     public static void fromTableColumns(JTable table, int overscan, int[] output, int offset) {
@@ -162,7 +163,7 @@ public final class M3DesktopViewportAdapters {
             return;
         }
         Rectangle clip = table.getVisibleRect();
-        if (clip.isEmpty()) {
+        if (clip.width <= 0) {
             M3ViewportIndexWindow.project(count, 0, 0, overscan, output, offset);
             return;
         }
