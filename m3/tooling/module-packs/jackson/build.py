@@ -10,6 +10,7 @@ offline by default; --resolve-build-tools permits initial build-plugin resolutio
 from __future__ import annotations
 
 import argparse
+import ast
 import csv
 import hashlib
 import json
@@ -37,7 +38,19 @@ TESTS = {
     "jdk.m3.jackson.JacksonContract": "JACKSON_CONTRACT_PASS checks=",
     "jdk.m3.jackson.M3FileContract": "M3_FILE_CONTRACT_PASS checks=",
     "jdk.m3.jackson.JacksonStreamingContract": "JACKSON_STREAMING_PASS checks=",
+    "jdk.m3.jackson.M3SourceFactsContract": "M3SourceFactsContract: PASS (",
+    "jdk.m3.jackson.M3ASTCoreReceiptContract": "M3 AST CORE PASS checks=",
+    "jdk.m3.jackson.M3ASTPatternCoreReceiptContract": "M3 AST PATTERN PASS checks=",
+    "jdk.m3.jackson.tests.M3JacksonContract": "M3_JACKSON_CONTRACT_PASS cases=",
+    "jdk.m3.jackson.tests.M3ASTBindingContract": "M3_AST_BINDING_PASS checks=",
+    "jdk.m3.jackson.tests.M3ASTTokenPatternContract": "M3_AST_TOKEN_REGEX_PASS checks=",
+    "jdk.m3.jackson.tests.M3TokenRegexContract": "M3_TOKEN_REGEX_CONTRACT_PASS checks=",
+    "jdk.m3.jackson.tests.M3JacksonCoexistenceContract": "M3_JACKSON_COEXISTENCE_PASS checks=",
 }
+# Management counters and retained-cursor reflection belong only to executable
+# contracts. The adapter descriptor and consumer runtime do not acquire them.
+CONTRACT_READS = ("--add-modules", "java.management", "--add-reads", MODULE + "=java.management")
+CONTRACT_OPENS = ("--add-opens", "com.fasterxml.jackson.core/com.fasterxml.jackson.core.base=" + MODULE)
 IGNORED = {"target", "dependency-reduced-pom.xml", "__pycache__", ".DS_Store"}
 
 
@@ -176,16 +189,23 @@ def test_runtime(java: Path, patch: Path, jars: list[Path], logs: Path,
                  label: str, vm_options: list[str] | None = None) -> dict:
     result = {}
     for test in TESTS:
-        args: list[object] = [java, *(vm_options or [])]
+        args: list[object] = [java, *(vm_options or []), *CONTRACT_READS, *CONTRACT_OPENS]
         if jars:
             args.extend(["--module-path", os.pathsep.join(str(jar) for jar in jars)])
         args.extend(["--patch-module", MODULE + "=" + str(patch),
                      "--add-opens", MODULE + "/jdk.m3.jackson=com.fasterxml.jackson.databind",
+                     "--add-opens", MODULE + "/jdk.m3.jackson.tests=com.fasterxml.jackson.databind",
                      "-m", MODULE + "/" + test])
+        if test.endswith(".M3JacksonContract"):
+            args.append(logs / (label + "-m3-jackson-fixtures"))
         text = command(args, logs / (label + "-" + test.rsplit(".", 1)[1] + ".log"))
         markers = [line for line in text.splitlines() if line.startswith(TESTS[test])]
-        match = (re.fullmatch(re.escape(TESTS[test]) + r"([1-9][0-9]*)(?:\s.*)?", markers[0])
-                 if len(markers) == 1 else None)
+        pattern = (r"M3_JACKSON_CONTRACT_PASS cases=[1-9][0-9]* checks=([1-9][0-9]*)"
+                   if test.endswith(".M3JacksonContract") else
+                   r"M3SourceFactsContract: PASS \(([1-9][0-9]*) assertions\)"
+                   if test.endswith(".M3SourceFactsContract") else
+                   re.escape(TESTS[test]) + r"([1-9][0-9]*)(?:\s.*)?")
+        match = re.fullmatch(pattern, markers[0]) if len(markers) == 1 else None
         if match is None:
             raise ValueError("One nonzero contract PASS marker is required: " + label + "/" + test)
         result[test] = {"status": "PASS", "checks": int(match.group(1)),
@@ -206,6 +226,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--source-root", type=Path, default=Path(__file__).resolve().parent)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--require-m3-runtime", action="store_true")
+    ap.add_argument("--stage", choices=("lint", "compile", "test", "runtime"), default="runtime",
+                    help="Stop after the selected ordered gate; default retains the full linked-image build")
     args = ap.parse_args(argv)
     jdk, repo, source, out = (path.resolve() for path in
                               (args.jdk_home, args.repo_root, args.source_root, args.out))
@@ -235,7 +257,15 @@ def main(argv: list[str] | None = None) -> int:
         raise FileNotFoundError("Generated named adapter-module sources are required")
     source_hashes = {str(path.relative_to(source)): digest(path)
                      for path in [*java_sources, *test_sources]}
+    # Parse build sources without running them; keep this gate ahead of compilation.
+    ast.parse(Path(__file__).read_text(encoding="utf-8"))
+    for pom in (source / "pom.xml", source / "source-build/pom.xml"):
+        if pom.exists(): ET.parse(pom)
     out.mkdir(parents=True)
+    if args.stage == "lint":
+        write_json(out / "RESULT.json", {"status": "PASS", "stage": "lint", "donors": receipts,
+                                        "source_inputs": source_hashes, "runtime": "NOT_RUN"})
+        return 0
     logs = out / "logs"
     logs.mkdir()
     jar_output = out / "jars"
@@ -295,9 +325,18 @@ def main(argv: list[str] | None = None) -> int:
     command([jdk / "bin/javac", "--release", "21", "-Xlint:all,-module", "-Werror",
              "-proc:none",
              "--module-path", os.pathsep.join(str(jar) for jar in jars),
+             *CONTRACT_READS,
              "--patch-module", MODULE + "=" + str(source / "src/test/java"),
              "-d", tests, *test_sources], logs / "contract-compile.log")
+    if args.stage == "compile":
+        write_json(out / "RESULT.json", {"status": "PASS", "stage": "compile", "runtime": "NOT_RUN",
+                                        "source_inputs": source_hashes})
+        return 0
     host = test_runtime(jdk / "bin/java", tests, jars, logs, "host")
+    if args.stage == "test":
+        write_json(out / "RESULT.json", {"status": "PASS", "stage": "test", "host_contracts": host,
+                                        "source_inputs": source_hashes, "linked_runtime": "NOT_RUN"})
+        return 0
     legal = copy_legal(repo, source, out)
     image_tsv = out / "JMOD_INPUT.tsv"
     with image_tsv.open("w", encoding="utf-8", newline="") as handle:

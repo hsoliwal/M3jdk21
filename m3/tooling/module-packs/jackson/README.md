@@ -172,3 +172,31 @@ python3 m3/m3jdk-jackson/compiler-build.py \
 For the standalone Maven entry point in the fork, pass
 `-Dm3.jackson.repo.root=/path/to/M3jdk21` and an absent `m3.jackson.out` directory.
 The source lock still verifies the M3JDK donor trees and existing assembler owners.
+
+## Recovered JSON M3AST and indexed-input coexistence
+
+The original PR #1289 JSON AST parser, datatype module and direct-token binding
+now share this pack with the current indexed M3File, prepared binding and stream
+APIs. Historical variants remain intact under qualification; those archived
+sources are not selected as a second implementation.
+
+`M3File.read(Path, Charset, int)` still counts decoded UTF-16 code units.
+Use the explicit `M3File.readBytes(Path, Charset, int)` factory for an encoded
+byte budget. `of(URI, CharSequence)` snapshots mutable input once; metadata and
+reader aliases use the same indexed owner. A slice keeps its source URI and
+computes its own UTF-16 hash, and does not assert a byte digest for an encoding
+it never read. `source()` is an explicit String export.
+
+`new M3ObjectMapper(null)` retains the existing JsonFactory constructor.
+Select limits with `M3ObjectMapper.withLimits(limits)` or the two-argument
+`M3ObjectMapper(JsonFactory, M3JsonLimits)` constructor. Existing protected copy
+constructors and the Path/M3File/sequence/prepared APIs remain present. The
+original Jackson datatype module is also discoverable through JPMS/services.
+
+The existing build command now executes both families of contracts. Its default
+still builds source donors, all four JMODs and the linked image. Optional
+`--stage lint|compile|test|runtime` stops at a specified ordered gate; the Maven
+property is `m3.jackson.stage`. No early stage claims linked-runtime acceptance.
+The predecessor source lock is retained with a review of the four opt-in POM
+profile additions and stricter packaging owner; all source/build/legal hash
+checks remain enforced against the qualified successor.

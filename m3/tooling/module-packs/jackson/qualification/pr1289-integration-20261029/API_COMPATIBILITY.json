@@ -1,0 +1,127 @@
+{
+  "baseline_commit": "649a735e23a79a4df46e6c61bfcd2fadf156d90d",
+  "baseline_source_hashes": {
+    "jdk/m3/jackson/M3AST.java": "875e08aecc924ce2e15537bc0cfb4425345263f2a5e2ec36ba61e557cfb6f763",
+    "jdk/m3/jackson/M3ASTAtom.java": "f8a16ec5d9712b20a936b20613469e071e70c1c0c14bdb39a388a149516bbbca",
+    "jdk/m3/jackson/M3ASTBuilder.java": "905f771f86aa632c73d6d1dac672b9fddca763a6c4885c663684ade36bc83265",
+    "jdk/m3/jackson/M3ASTPool.java": "6ab5528031f87004f8546525eddd7d566f3204b5334d956f4d2c134fa04f4ffe",
+    "jdk/m3/jackson/M3ASTTokenPattern.java": "b47b80a67e81771091dd3f9d11e4ebdba53c4aaf1d7a6aa2202381dbb14da706",
+    "jdk/m3/jackson/M3Binding.java": "94ba13f9e06dd72d1591b1501d173c4f944169d9cd0411500f1f16fe8c69f7e0",
+    "jdk/m3/jackson/M3File.java": "3535ee0bbbb75fdc08c26fd9cc8d81d5ec0f97462f0860f54b59510725fa5a68",
+    "jdk/m3/jackson/M3FileTokenStore.java": "7f9a52e51b7a45c458a40399f8316676431a84b717a7e7ea29b26140fe4c1151",
+    "jdk/m3/jackson/M3JsonLimits.java": "5c22e0e714a306c99de9a0720125b6576e2bfb53a63f8d9aefc4bff350fbf369",
+    "jdk/m3/jackson/M3ObjectMapper.java": "92f57394fa7120549a034d795a326a422db754ecba21d118161fede9338f5a2d",
+    "jdk/m3/jackson/M3SourceHash.java": "8033de0466c95fda8377f4152c2526e00885ff1aa5075ef3b650c61503bcf7ee",
+    "jdk/m3/jackson/M3TokenRegex.java": "418bae27b8f2b4e8d74ef60082d2a7d7bc70e6e344e03495f3c5212a79c4b315",
+    "module-info.java": "efa08a9867e87e1eb7eecba2665125dae5ac619950ca196effa27886b3d897a0"
+  },
+  "classes": [
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 19,
+      "class": "jdk.m3.jackson.M3AST",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 13,
+      "class": "jdk.m3.jackson.M3ASTAtom",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 7,
+      "class": "jdk.m3.jackson.M3ASTTokenPattern",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 18,
+      "class": "jdk.m3.jackson.M3Binding",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 16,
+      "class": "jdk.m3.jackson.M3File$Writer",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [
+        "public java.io.Reader openReader();",
+        "public java.lang.String byteSha256();",
+        "public java.lang.String source();",
+        "public java.lang.String sourceSha256();",
+        "public java.net.URI sourceUri();",
+        "public static jdk.m3.jackson.M3File of(java.net.URI, java.lang.CharSequence);",
+        "public static jdk.m3.jackson.M3File readBytes(java.nio.file.Path, java.nio.charset.Charset, int) throws java.io.IOException;"
+      ],
+      "baseline_public_or_protected_declarations": 24,
+      "class": "jdk.m3.jackson.M3File",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 10,
+      "class": "jdk.m3.jackson.M3FileTokenStore$ByteStore",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 10,
+      "class": "jdk.m3.jackson.M3FileTokenStore$IntStore",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 10,
+      "class": "jdk.m3.jackson.M3FileTokenStore$ShortStore",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 12,
+      "class": "jdk.m3.jackson.M3JsonLimits",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [
+        "public <T> T readTreeValue(jdk.m3.jackson.M3AST, com.fasterxml.jackson.core.type.TypeReference<T>) throws java.io.IOException;",
+        "public <T> T readTreeValue(jdk.m3.jackson.M3AST, com.fasterxml.jackson.databind.JavaType) throws java.io.IOException;",
+        "public <T> T readTreeValue(jdk.m3.jackson.M3AST, java.lang.Class<T>) throws java.io.IOException;",
+        "public <T> T readValue(java.lang.CharSequence, com.fasterxml.jackson.core.type.TypeReference<T>) throws java.io.IOException;",
+        "public <T> T readValue(java.lang.CharSequence, com.fasterxml.jackson.databind.JavaType) throws java.io.IOException;",
+        "public <T> T readValue(java.lang.CharSequence, java.lang.Class<T>) throws java.io.IOException;",
+        "public <T> T readValue(jdk.m3.jackson.M3AST, com.fasterxml.jackson.core.type.TypeReference<T>) throws java.io.IOException;",
+        "public <T> T readValue(jdk.m3.jackson.M3AST, com.fasterxml.jackson.databind.JavaType) throws java.io.IOException;",
+        "public <T> T readValue(jdk.m3.jackson.M3AST, java.lang.Class<T>) throws java.io.IOException;",
+        "public com.fasterxml.jackson.databind.JsonNode readTree(java.lang.CharSequence) throws java.io.IOException;",
+        "public jdk.m3.jackson.M3AST readAST(java.lang.CharSequence) throws java.io.IOException;",
+        "public jdk.m3.jackson.M3AST readAST(java.nio.file.Path, java.nio.charset.Charset, int) throws java.io.IOException;",
+        "public jdk.m3.jackson.M3AST readASTStreaming(java.nio.file.Path, java.nio.charset.Charset, long) throws java.io.IOException;",
+        "public jdk.m3.jackson.M3JsonLimits m3Limits();",
+        "public jdk.m3.jackson.M3ObjectMapper(com.fasterxml.jackson.core.JsonFactory, jdk.m3.jackson.M3JsonLimits);",
+        "public static jdk.m3.jackson.M3ObjectMapper withLimits(jdk.m3.jackson.M3JsonLimits);"
+      ],
+      "baseline_public_or_protected_declarations": 29,
+      "class": "jdk.m3.jackson.M3ObjectMapper",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 7,
+      "class": "jdk.m3.jackson.M3TokenRegex$Span",
+      "removed_declarations": []
+    },
+    {
+      "added_declarations": [],
+      "baseline_public_or_protected_declarations": 5,
+      "class": "jdk.m3.jackson.M3TokenRegex",
+      "removed_declarations": []
+    }
+  ],
+  "declarations_retained": 180,
+  "removed": [],
+  "scope": "All baseline public classes and their public/protected declarations, including nested classes, by JDK21 javap -protected after strict compilation of exact baseline source",
+  "status": "PASS"
+}
