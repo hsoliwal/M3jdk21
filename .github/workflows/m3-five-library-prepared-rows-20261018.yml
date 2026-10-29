@@ -8,6 +8,10 @@ on:
       - 'm3/collections/qualification/five-library-prepared-rows-20261018/**'
       - '.github/workflows/m3-five-library-prepared-rows-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   five-providers:
     runs-on: ubuntu-latest

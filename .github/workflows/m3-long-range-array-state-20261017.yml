@@ -11,6 +11,10 @@ on:
       - '.github/workflows/m3-long-range-array-state-20261017.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   real-m3-jni-and-array-contract:
     runs-on: ubuntu-24.04

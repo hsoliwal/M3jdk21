@@ -6,6 +6,10 @@ on:
       - 'test/jdk/java/util/regex/M3RegexWorkspaceContractTest.java'
       - 'm3/runtime-integration/REGEX_WORKSPACE_RECEIVER_20261014.md'
       - '.github/workflows/m3-regex-workspace-receiver-20261014.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   host-jdk-contract:
     runs-on: ubuntu-latest

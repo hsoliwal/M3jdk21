@@ -8,6 +8,10 @@ on:
     branches: ['m3/indexdb-build-state-20261020']
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java21-owner:
     runs-on: ubuntu-latest

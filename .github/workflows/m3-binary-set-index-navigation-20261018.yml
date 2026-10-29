@@ -9,6 +9,10 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java'
       - '.github/workflows/m3-binary-set-index-navigation-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-index-navigation:
     runs-on: ubuntu-latest

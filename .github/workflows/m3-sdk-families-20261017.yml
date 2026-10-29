@@ -8,6 +8,10 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3CollectionSdk*.java'
       - '.github/workflows/m3-sdk-families-20261017.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   sdk-catalog:
     runs-on: ubuntu-latest

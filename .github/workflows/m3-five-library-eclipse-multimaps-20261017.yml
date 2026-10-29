@@ -12,6 +12,10 @@ on:
     branches: [m3/five-library-eclipse-multimaps-receiver-20261017]
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   recipe-provider-and-native:
     runs-on: ubuntu-24.04

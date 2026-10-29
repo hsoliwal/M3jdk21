@@ -9,6 +9,10 @@ on:
       - 'm3/tooling/regex-relations-current-owner/**'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   regex-relations-current-owner:
     name: Regex recipe SDK and compile-only jtreg

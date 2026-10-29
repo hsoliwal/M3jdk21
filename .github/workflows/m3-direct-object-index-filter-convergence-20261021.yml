@@ -15,6 +15,10 @@ on:
       - 'test/jdk/jdk/internal/misc/M3ObjectMemoryTest.java'
       - '.github/workflows/m3-direct-object-index-filter-convergence-20261021.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java21-abi-jni-and-collection-contract:
     runs-on: ubuntu-24.04

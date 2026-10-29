@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
   issues: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   sdk:
     runs-on: ubuntu-24.04

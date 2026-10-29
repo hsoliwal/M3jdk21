@@ -10,6 +10,10 @@ on:
       - '.github/workflows/m3-regex-row-precompute-20261016.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-sealed-javabase:
     runs-on: ubuntu-latest

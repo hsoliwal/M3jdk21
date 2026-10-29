@@ -5,6 +5,10 @@ on:
       - 'm3/ports/precompute/**'
       - '.github/workflows/m3-derivative-regex-port.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   derivative-java-native:
     runs-on: ubuntu-latest

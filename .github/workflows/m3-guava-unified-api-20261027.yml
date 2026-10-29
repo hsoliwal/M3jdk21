@@ -9,6 +9,10 @@ on:
       - '.github/workflows/m3-guava-unified-api-20261027.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-built-java21-and-real-guava-regressions:
     runs-on: ubuntu-24.04

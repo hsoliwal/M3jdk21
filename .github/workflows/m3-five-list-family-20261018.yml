@@ -12,6 +12,10 @@ on:
       - '.github/workflows/m3-five-list-family-20261018.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   exact-real-provider:
     runs-on: ubuntu-24.04

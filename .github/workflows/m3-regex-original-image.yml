@@ -11,6 +11,10 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-built-image-regex:
     if: github.repository == 'hsoliwal/M3jdk21'

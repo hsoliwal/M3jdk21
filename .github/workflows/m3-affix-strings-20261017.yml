@@ -13,6 +13,10 @@ on:
       - ".github/workflows/m3-affix-strings-20261017.yml"
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-extracted-java21:
     runs-on: ubuntu-latest

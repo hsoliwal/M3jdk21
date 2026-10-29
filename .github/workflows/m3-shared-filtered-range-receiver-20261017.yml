@@ -8,6 +8,10 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetRange*'
       - 'm3/collections/algorithm-catalog/full-m3-family-inventory-20261017/**'
       - '.github/workflows/m3-shared-filtered-range-receiver-20261017.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   filtered-owner-and-catalogue:
     runs-on: ubuntu-latest

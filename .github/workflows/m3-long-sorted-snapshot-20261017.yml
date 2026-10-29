@@ -12,6 +12,10 @@ on:
       - '.github/workflows/m3-long-sorted-snapshot-20261017.yml'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   exact-source-and-java21:
     runs-on: ubuntu-latest
