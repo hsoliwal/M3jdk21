@@ -37,6 +37,9 @@ on:
       runs-on:
         required: true
         type: string
+      xcode-toolset-version:
+        required: false
+        type: string
 
 env:
   # These are needed to make the MSYS2 bash work properly
@@ -104,8 +107,16 @@ jobs:
             debug-suffix: -debug
 
     steps:
+      - name: 'Enable Git long paths before source checkout'
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          git config --global core.longpaths true
+          if ((git config --global --get core.longpaths).Trim() -ne 'true') {
+            throw 'Git long paths unavailable before JDK checkout'
+          }
       - name: 'Checkout the JDK source'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: 'Get MSYS2'
         uses: ./.github/actions/get-msys2
@@ -131,10 +142,13 @@ jobs:
       - name: 'Install dependencies'
         run: |
           # On macOS we need to install some dependencies for testing
+          set -euo pipefail
           brew install make
-          sudo xcode-select --switch /Applications/Xcode_11.7.app/Contents/Developer
-          # This will make GNU make available as 'make' and not only as 'gmake'
-          echo '/usr/local/opt/make/libexec/gnubin' >> $GITHUB_PATH
+          xcode_dir="/Applications/Xcode_${{ inputs.xcode-toolset-version }}.app/Contents/Developer"
+          test -d "$xcode_dir" || { echo "Missing requested Xcode toolchain: $xcode_dir" >&2; exit 1; }
+          sudo xcode-select --switch "$xcode_dir"
+          xcodebuild -version
+          echo "$(brew --prefix make)/libexec/gnubin" >> "$GITHUB_PATH"
         if: runner.os == 'macOS'
 
       - name: 'Set PATH'
