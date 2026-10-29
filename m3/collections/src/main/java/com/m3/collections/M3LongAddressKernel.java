@@ -43,9 +43,18 @@ public final class M3LongAddressKernel {
     /**
      * Detached gather of a half-open prepared address window.
      * JAVA is the default scalar loop; NATIVE_REQUIRED never falls back.
+     * Validate before allocating the result so invalid large requests cannot
+     * turn the intended input/native refusal into an OutOfMemoryError.
      */
     public static long[] gather(long[] payload, int[] addresses, int addressFrom, int length,
                                 M3IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(payload, "payload");
+        Objects.requireNonNull(addresses, "addresses");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(addressFrom, length, addresses.length);
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED && !NativeLibrary.AVAILABLE) {
+            throw new UnsatisfiedLinkError("m3 address gather JNI library unavailable");
+        }
         long[] result = new long[length];
         gatherInto(payload, addresses, addressFrom, length, result, 0, backend);
         return result;
