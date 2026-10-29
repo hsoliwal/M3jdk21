@@ -2,6 +2,42 @@
 
 Status: execution policy for the M3JDK21 downstream programme.
 
+## One-way Java 21 compatibility and M3 extensions
+
+M3JDK21 preserves required Java 21 source, binary, API and runtime behavior. M3-only
+capabilities need not compile or run on an unmodified stock JDK 21. New language,
+compiler, VM, primitive/value, module and API capabilities may be investigated as
+explicit M3 extensions, with their own contract and target proofs. This does not
+authorize changing Java 21 behavior, removing a required mode or platform, or
+silently freezing a preview contract.
+
+The compatibility and exclusion rules below classify the Java 21 compatible-backport
+lane. A `reject-language` record is a retained rejection of direct Java 21 language
+import; it is not a permanent rejection of a separately specified M3 extension.
+Keep the original catalogue and priority-ledger dispositions. Reuse the existing
+residue owner to expose the additional work:
+
+```sh
+python3 m3/backports/jep_residue.py --root . --include-m3-extensions
+```
+
+Without the flag, the existing queue and its TSV columns remain unchanged. With
+the flag, the projection appends the `compatibility_lane`, `m3_extension_state`
+and `m3_extension_required_proofs` columns and retains language-import rejections
+as `M3_EXTENSION` / `PENDING_EXTENSION_CONTRACT_PROOF` rows. They retain
+`default_java21=NO` and `promotion=NOT_AUTHORIZED_BY_QUEUE`, even when a historical
+packet receipt claims promotion. Evidence fields describe the recorded packet;
+they cannot satisfy or waive the new extension proofs.
+
+This projection is investigation work, not acceptance, implementation readiness
+or proof of a speedup. Preview, withdrawn and older language variants require
+explicit successor and stability review. `reject-compat` removals remain excluded.
+Admission requires a specified M3 extension mode, preservation of Java 21 source,
+binary and runtime contracts, donor rights/lineage, the executed canonical Synexia
+recipe, an actual M3 compiler/VM build, positive and negative extension tests,
+affected Java 21 jtreg/API/ABI/JNI regressions, fixed-point replay and target runtime
+readback. Existing receiving order and promotion authorities remain unchanged.
+
 ## Total donor universe
 
 M3JDK21 does not curate only headline features.
@@ -67,9 +103,9 @@ external contract. The gate includes, as applicable:
 A path name is only a review signal. Touching `javac`, the parser, attribution, HotSpot or a
 compatibility-sensitive subsystem does not itself prove incompatibility.
 
-## Exclusion rule
+## Java 21 compatible-backport exclusion rule
 
-A change is excluded only when evidence shows that the change fundamentally requires a post-21
+A change is excluded from this lane only when evidence shows that the change fundamentally requires a post-21
 contract that M3JDK21 has chosen to keep locked, for example:
 
 - new Java source syntax or language semantics that cannot be expressed as Java 21;
@@ -127,3 +163,4 @@ Completion requires:
 4. every accepted backport has provenance and verification evidence;
 5. the full M3JDK21 build/test gates are green;
 6. rerunning the inventory and admission process yields no unclassified compatible residue.
+
