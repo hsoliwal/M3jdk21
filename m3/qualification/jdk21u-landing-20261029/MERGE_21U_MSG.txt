@@ -1,0 +1,19 @@
+Merge openjdk/jdk21u-dev master 8b241db2b629 into M3jdk21 (all 21.0.x update fixes)
+
+M3jdk21 was jdk-21 GA (890adb6410d, 2023-08-09) without any update release. This merge brings the 3,463
+jdk21u-dev commits (the 21.0.1 .. 21.0.x update fixes, security fixes and backports) into the superset.
+
+29 paths conflicted; resolutions (RESOLUTIONS_21U.tsv), all as atoms with saved patterns:
+- 10 FILE_UPSTREAM_SUPERSEDES: the M3 file is an earlier upstream revision of the same file (ML-KEM, ML-DSA,
+  Named* keys, SHA3Parallel); taken from 21u.
+- 4 OURS_HUNK_CONTAINED_UPSTREAM (hunk_contained_upstream.py): os_bsd.cpp, os_linux.cpp (one hunk, the other
+  an insertion union), SunJCE.java, SunEntries.java; upstream already carries the M3 change.
+- 5 PQC/macOS upstream family: NamedKeyFactory, SHA3, KeyUtil, SignatureUtil (the 21u PQC backport replaces the
+  earlier mainline import) and CAccessibility (upstream 8329667 revised the 8317771 JTree code M3 carried).
+- 1 insertion union: java.security (M3 jdk.security.password.allowSystemIn + 21u AIA caIssuer filter).
+- 7 M3-owned: .github CI (GitHub-hosted builds) and README.md keep the M3 side.
+- 2 ports: String.java and AbstractStringBuilder.java. 8311906 (compress returns the result array, never
+  null; coderFromArrayLen gives the coder; UTF-8 decoding from a stable copy; newBytesFor size checks) ported
+  onto the M3Construction helper and the M3 admission paths; 8351000 snapshot reads placed ahead of the
+  R5-BUILDER lane paths; upstream len <= 0 rule ahead of the M3 regionMatches slice path. Every M3 caller of
+  StringUTF16.compress(...) that relied on a null result was converted (no caller is left with a null check).
