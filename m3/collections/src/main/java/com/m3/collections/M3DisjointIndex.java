@@ -71,7 +71,13 @@ public final class M3DisjointIndex {
 
     /** Finds the canonical component root; path compression is semantically invisible. */
     public int find(int index) {
-        int cursor = Objects.checkIndex(index, size);
+        return findValidated(Objects.checkIndex(index, size));
+    }
+
+    /** The caller has already validated every participating index, before mutation. */
+    //FLLDCIM: ALG - LC684 validated disjoint-set fast path
+    private int findValidated(int cursor) {
+        int index = cursor;
         while (parentOrSize[cursor] >= 0) cursor = parentOrSize[cursor];
         int root = cursor;
         cursor = index;
@@ -88,14 +94,14 @@ public final class M3DisjointIndex {
     public boolean connected(int left, int right) {
         Objects.checkIndex(left, size);
         Objects.checkIndex(right, size);
-        return find(left) == find(right);
+        return findValidated(left) == findValidated(right);
     }
 
     /** Validates both indices before any change. Only genuine merges advance revision. */
     public boolean union(int left, int right) {
         Objects.checkIndex(left, size);
         Objects.checkIndex(right, size);
-        int rootA = find(left), rootB = find(right);
+        int rootA = findValidated(left), rootB = findValidated(right);
         if (rootA == rootB) return false;
         int sizeA = -parentOrSize[rootA], sizeB = -parentOrSize[rootB];
         if (sizeA < sizeB || (sizeA == sizeB && rootB < rootA)) {
