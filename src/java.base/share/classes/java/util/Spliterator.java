@@ -664,6 +664,9 @@ public interface Spliterator<T> {
         /**
          * Primitive spliterator traversal, named distinctly from Iterator.
          * Credit follows each successfully completed tryAdvance invocation.
+         *
+         * @param action the action to perform for each remaining element
+         * @param monitor the borrowed progress and cancellation monitor
          */
         default void forEachRemainingSpliteratorIntMonitored(IntConsumer action, java.util.concurrent.ProgressMonitor monitor) {
             Objects.requireNonNull(action);
@@ -744,6 +747,9 @@ public interface Spliterator<T> {
         /**
          * Primitive spliterator traversal, named distinctly from Iterator.
          * Credit follows each successfully completed tryAdvance invocation.
+         *
+         * @param action the action to perform for each remaining element
+         * @param monitor the borrowed progress and cancellation monitor
          */
         default void forEachRemainingSpliteratorLongMonitored(LongConsumer action, java.util.concurrent.ProgressMonitor monitor) {
             Objects.requireNonNull(action);
@@ -824,6 +830,9 @@ public interface Spliterator<T> {
         /**
          * Primitive spliterator traversal, named distinctly from Iterator.
          * Credit follows each successfully completed tryAdvance invocation.
+         *
+         * @param action the action to perform for each remaining element
+         * @param monitor the borrowed progress and cancellation monitor
          */
         default void forEachRemainingSpliteratorDoubleMonitored(DoubleConsumer action, java.util.concurrent.ProgressMonitor monitor) {
             Objects.requireNonNull(action);
@@ -901,6 +910,9 @@ public interface Spliterator<T> {
      * never begun, finished or cancelled by this method. One unit is credited
      * after each successfully completed element/callback operation.
      * Cancellation is checked at delegate boundaries only.
+     *
+     * @param action the action to perform for each remaining element
+     * @param monitor the borrowed progress and cancellation monitor
      */
     default void forEachRemainingSpliteratorMonitored(Consumer<? super T> action, java.util.concurrent.ProgressMonitor monitor) {
         Objects.requireNonNull(action);

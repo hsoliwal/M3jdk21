@@ -106,6 +106,9 @@ public interface Iterable<T> {
      * never begun, finished or cancelled by this method. One unit is credited
      * after each successfully completed element/callback operation.
      * Cancellation is checked at delegate boundaries only.
+     *
+     * @param action the action to perform for each element
+     * @param monitor the borrowed progress and cancellation monitor
      */
     default void forEachMonitored(Consumer<? super T> action, java.util.concurrent.ProgressMonitor monitor) {
         Objects.requireNonNull(action);

@@ -1198,6 +1198,10 @@ public interface List<E> extends SequencedCollection<E> {
      * never begun, finished or cancelled by this method. One unit is credited
      * after each successfully completed element/callback operation.
      * Cancellation is checked at delegate boundaries only.
+     *
+     * @param target the element to find
+     * @param monitor the borrowed progress and cancellation monitor
+     * @return the first matching index, or -1 if no matching element exists
      */
     default int indexOfMonitored(Object target, java.util.concurrent.ProgressMonitor monitor) {
         Objects.requireNonNull(monitor);
@@ -1218,7 +1222,13 @@ public interface List<E> extends SequencedCollection<E> {
         return -1;
     }
 
-    /** Reverse-searches list indices without copying element storage. */
+    /**
+     * Reverse-searches list indices without copying element storage.
+     *
+     * @param target the element to find
+     * @param monitor the borrowed progress and cancellation monitor
+     * @return the last matching index, or -1 if no matching element exists
+     */
     default int lastIndexOfMonitored(Object target, java.util.concurrent.ProgressMonitor monitor) {
         Objects.requireNonNull(monitor);
         ListIterator<E> each = listIterator(size());

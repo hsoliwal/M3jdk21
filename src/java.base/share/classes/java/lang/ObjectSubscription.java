@@ -34,7 +34,11 @@ public final class ObjectSubscription implements AutoCloseable {
         this.index = index;
     }
 
-    /** Returns whether this subscription is closed or inactive. */
+    /**
+     * Returns whether this subscription is closed or inactive.
+     *
+     * @return whether this subscription is closed or inactive
+     */
     public boolean isClosed() {
         return state == null;
     }

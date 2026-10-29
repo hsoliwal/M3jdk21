@@ -282,20 +282,32 @@ public final class TokenPattern<T> {
                 source, build, minimum, maximum, quantifier));
     }
 
-    /** @return this pattern repeated zero or one times, greedily */
+    /**
+     * Returns a greedy optional repetition of this pattern.
+     *
+     * @return this pattern repeated zero or one times, greedily
+     */
     public TokenPattern<T> optional() { return optional(Quantifier.GREEDY); }
 
     /**
+     * Returns an optional repetition using the supplied repetition policy.
+     *
      * @param quantifier the repetition policy
      * @return this pattern repeated zero or one times
      * @throws NullPointerException if quantifier is null
      */
     public TokenPattern<T> optional(Quantifier quantifier) { return repeat(0, 1, quantifier); }
 
-    /** @return this pattern repeated zero or more times, greedily */
+    /**
+     * Returns a greedy repetition of zero or more occurrences of this pattern.
+     *
+     * @return this pattern repeated zero or more times, greedily
+     */
     public TokenPattern<T> zeroOrMore() { return zeroOrMore(Quantifier.GREEDY); }
 
     /**
+     * Returns a repetition of zero or more occurrences using the supplied policy.
+     *
      * @param quantifier the repetition policy
      * @return this pattern repeated zero or more times
      * @throws NullPointerException if quantifier is null
@@ -304,10 +316,16 @@ public final class TokenPattern<T> {
         return repeat(0, Integer.MAX_VALUE, quantifier);
     }
 
-    /** @return this pattern repeated one or more times, greedily */
+    /**
+     * Returns a greedy repetition of one or more occurrences of this pattern.
+     *
+     * @return this pattern repeated one or more times, greedily
+     */
     public TokenPattern<T> oneOrMore() { return oneOrMore(Quantifier.GREEDY); }
 
     /**
+     * Returns a repetition of one or more occurrences using the supplied policy.
+     *
      * @param quantifier the repetition policy
      * @return this pattern repeated one or more times
      * @throws NullPointerException if quantifier is null
@@ -362,10 +380,18 @@ public final class TokenPattern<T> {
         return new TokenMatcher<>(this, input);
     }
 
-    /** @return the number of capturing groups, excluding group zero */
+    /**
+     * Returns the number of capturing groups, excluding group zero.
+     *
+     * @return the number of capturing groups, excluding group zero
+     */
     public int groupCount() { return engine.capturingGroupCount - 1; }
 
-    /** @return an unmodifiable map from capture names to their group numbers */
+    /**
+     * Returns the map of capture names to their group numbers.
+     *
+     * @return an unmodifiable map from capture names to their group numbers
+     */
     public Map<String, Integer> namedGroups() { return names; }
 
     Matcher newMatcher(TokenMatcher.TokenInput<T> input) {

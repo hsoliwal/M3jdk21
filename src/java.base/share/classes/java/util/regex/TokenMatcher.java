@@ -64,19 +64,35 @@ public final class TokenMatcher<T> {
         engine = pattern.newMatcher(input);
     }
 
-    /** @return the immutable token pattern used by this matcher */
+    /**
+     * Returns the immutable token pattern used by this matcher.
+     *
+     * @return the immutable token pattern used by this matcher
+     */
     public TokenPattern<T> pattern() { return pattern; }
 
-    /** @return an unmodifiable view of the current defensive input snapshot */
+    /**
+     * Returns an unmodifiable view of the current defensive input snapshot.
+     *
+     * @return an unmodifiable view of the current defensive input snapshot
+     */
     public List<T> input() { return input.tokens; }
 
-    /** @return whether the entire region matches the pattern */
+    /**
+     * Attempts to match the entire region against the pattern.
+     *
+     * @return whether the entire region matches the pattern
+     */
     public boolean matches() {
         matched = false;
         return matched = engine.matches();
     }
 
-    /** @return whether a prefix of the region matches the pattern */
+    /**
+     * Attempts to match a prefix of the region against the pattern.
+     *
+     * @return whether a prefix of the region matches the pattern
+     */
     public boolean lookingAt() {
         matched = false;
         return matched = engine.lookingAt();
@@ -149,34 +165,64 @@ public final class TokenMatcher<T> {
         return this;
     }
 
-    /** @return the inclusive region start */
+    /**
+     * Returns the inclusive start of the matching region.
+     *
+     * @return the inclusive region start
+     */
     public int regionStart() { return engine.regionStart(); }
 
-    /** @return the exclusive region end */
+    /**
+     * Returns the exclusive end of the matching region.
+     *
+     * @return the exclusive region end
+     */
     public int regionEnd() { return engine.regionEnd(); }
 
-    /** @return whether the last matching operation succeeded */
+    /**
+     * Reports whether the last matching operation succeeded.
+     *
+     * @return whether the last matching operation succeeded
+     */
     public boolean hasMatch() { return matched; }
 
-    /** @return the number of capturing groups, excluding group zero */
+    /**
+     * Returns the number of capturing groups, excluding group zero.
+     *
+     * @return the number of capturing groups, excluding group zero
+     */
     public int groupCount() { return engine.groupCount(); }
 
-    /** @return the unmodifiable map of capture names to group numbers */
+    /**
+     * Returns the map of capture names to group numbers.
+     *
+     * @return the unmodifiable map of capture names to group numbers
+     */
     public Map<String, Integer> namedGroups() { return pattern.namedGroups(); }
 
-    /** @return the inclusive start of group zero */
+    /**
+     * Returns the inclusive start of group zero.
+     *
+     * @return the inclusive start of group zero
+     */
     public int start() {
         requireMatch();
         return engine.start();
     }
 
-    /** @return the exclusive end of group zero */
+    /**
+     * Returns the exclusive end of group zero.
+     *
+     * @return the exclusive end of group zero
+     */
     public int end() {
         requireMatch();
         return engine.end();
     }
 
     /**
+     * Returns the inclusive start of a numbered group.
+     *
      * @param group a group number, including zero
      * @return its inclusive start, or -1 if it did not participate
      */
@@ -186,6 +232,8 @@ public final class TokenMatcher<T> {
     }
 
     /**
+     * Returns the exclusive end of a numbered group.
+     *
      * @param group a group number, including zero
      * @return its exclusive end, or -1 if it did not participate
      */
@@ -195,6 +243,8 @@ public final class TokenMatcher<T> {
     }
 
     /**
+     * Returns the inclusive start of a named group.
+     *
      * @param name the capture name
      * @return its inclusive start, or -1 if it did not participate
      * @throws NullPointerException if name is null
@@ -206,6 +256,8 @@ public final class TokenMatcher<T> {
     }
 
     /**
+     * Returns the exclusive end of a named group.
+     *
      * @param name the capture name
      * @return its exclusive end, or -1 if it did not participate
      * @throws NullPointerException if name is null
@@ -216,10 +268,16 @@ public final class TokenMatcher<T> {
         return engine.end(name);
     }
 
-    /** @return an unmodifiable captured list for group zero */
+    /**
+     * Returns the captured tokens for group zero.
+     *
+     * @return an unmodifiable captured list for group zero
+     */
     public List<T> group() { return group(0); }
 
     /**
+     * Returns the captured tokens for a numbered group.
+     *
      * @param group a group number, including zero
      * @return an unmodifiable captured list, or null if the group did not participate
      */
@@ -229,6 +287,8 @@ public final class TokenMatcher<T> {
     }
 
     /**
+     * Returns the captured tokens for a named group.
+     *
      * @param name the capture name
      * @return an unmodifiable captured list, or null if the group did not participate
      * @throws NullPointerException if name is null
@@ -238,10 +298,16 @@ public final class TokenMatcher<T> {
         return start < 0 ? null : input.tokens.subList(start, end(name));
     }
 
-    /** @return an immutable span for group zero */
+    /**
+     * Returns the captured span for group zero.
+     *
+     * @return an immutable span for group zero
+     */
     public Span span() { return span(0); }
 
     /**
+     * Returns the captured span for a numbered group.
+     *
      * @param group a group number, including zero
      * @return an immutable span, or null if the group did not participate
      */
@@ -251,6 +317,8 @@ public final class TokenMatcher<T> {
     }
 
     /**
+     * Returns the captured span for a named group.
+     *
      * @param name the capture name
      * @return an immutable span, or null if the group did not participate
      * @throws NullPointerException if name is null
