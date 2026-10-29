@@ -62,6 +62,20 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
  * No JNI callbacks or Java object allocations in the search loop.
  * Moving-GC-safe Get/ReleaseArrayElements; inputs always JNI_ABORT.
  */
+/*
+ * The test-only legacy build deliberately omits new symbols while preserving
+ * the original lowerBounds0 export. It verifies safe Java fallback against
+ * already-installed older libm3rankbatch binaries, without a duplicate C owner.
+ */
+#if !defined(M3_RANK_LEGACY_ABI_TEST)
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_capabilities0(
+        JNIEnv *env, jclass ignored) {
+    (void) env;
+    (void) ignored;
+    return 1; /* Fused lower/upper-bound pairs supported. */
+}
+
 JNIEXPORT void JNICALL
 Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
@@ -120,3 +134,4 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0(
     (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
     (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
 }
+#endif /* !M3_RANK_LEGACY_ABI_TEST */
