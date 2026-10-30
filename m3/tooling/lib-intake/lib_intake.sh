@@ -61,7 +61,7 @@ done < <(cd "$SRC/src/main/java" && find . -name '*.java' | sed 's#^\./##')
 [ "$differ" -eq 0 ] && stage S1b_BCP PASS "byte_equal_after_name_map=$same differing=0" || stage S1b_BCP FAIL "differing=$differ (s1b-bcp.log)"
 
 # S2 RESIDUE --------------------------------------------------------------------------------------------------------
-mvnw "$W/proj/src" com.synexia.m3:m3-work-maven-plugin:0.1.0:relocation-scan "-Dm3.relocation.mappings=${MAPS//;/,}" \
+mvnw "$W/proj/src" com.synexia.m3:m3-work-maven-plugin:0.1.1:relocation-scan "-Dm3.relocation.mappings=${MAPS//;/,}" \
 	"-Dm3.relocation.out=$(cygpath -m "$REPO/$RUN/relocation" 2>/dev/null || echo "$REPO/$RUN/relocation")" > "$RUN/s2-scan.log" 2>&1
 syntax=$(awk -F'\t' 'NR > 1 && $4 == "JAVA_SYNTAX"' "$RUN/relocation/RELOCATION_SCAN.tsv" | wc -l)
 other=$(awk -F'\t' 'NR > 1 && $4 != "JAVA_SYNTAX"' "$RUN/relocation/RELOCATION_SCAN.tsv" | wc -l)
