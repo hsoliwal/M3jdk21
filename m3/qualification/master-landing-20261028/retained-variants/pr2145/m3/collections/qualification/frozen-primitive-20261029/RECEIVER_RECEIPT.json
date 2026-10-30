@@ -1,0 +1,89 @@
+{
+  "schema": "M3_COLLECTION_RESULT_RECEIPT_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "source_input_anchor": "5088091fbbe9c89210d53f309b95296e035d7705",
+  "target_repository": "hsoliwal/M3jdk21",
+  "source_recipe_identity": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "source_dataset": "m3jdk21-frozen-primitive-20261029",
+  "receipt_recipe_identity": "com.synexia.m3.FrozenPrimitiveReceipt20261029",
+  "execution_lane": "MAVEN_OPENREWRITE_SDK",
+  "receiving_status": "DRAFT_UNMERGED",
+  "release_ready": false,
+  "outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenIntList.java",
+      "before_sha256": "d2087220e85b57f671375c8529fefa1bccc87030c079fd98bf34274a4ff287e4",
+      "after_sha256": "f0f1f7cbafce51682c31125585afc85f104ac6af82a428c6a711f98708cec7ec",
+      "kind": "GENERATED_SOURCE"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongList.java",
+      "before_sha256": "fd94bab1614606e96562d1f48e126c72cd0f121d84aed36fb9a5bcac352a747f",
+      "after_sha256": "eca004a0b3c657f80a00449fa9bc256e8bbe4011fc0fd52555be9874e5e44633",
+      "kind": "GENERATED_SOURCE"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java",
+      "before_sha256": "4fc3c4898115c784d695bee275a1c9ae4e7d4ba7a5cd4b8968e8286747608715",
+      "after_sha256": "c2c1b55d7abcc11dcf7179357fceb7cc9f5bb285b3041f065847e19be7868e52",
+      "kind": "GENERATED_SOURCE"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FrozenPrimitiveContractTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "b7b464ea6188accb35e982c00f0fe1258c64aae8c33f66ff3a68e447056ee2a4",
+      "kind": "GENERATED_TEST"
+    }
+  ],
+  "qualification": {
+    "source_sdk_tests_passed": 3,
+    "target_junit_tests_passed": 5,
+    "public_protected_descriptors": "EQUAL",
+    "source_fixed_point": "PASS",
+    "source_drift_refusal": "PASS",
+    "scope": "bounded exact-owner qualification; counts are unique test methods, not repeated mode runs",
+    "component_evidence": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-frozen-primitive-20261029/qualification/RESULTS.json",
+      "sha256": "ddd0a072475ffa800c32307dc91f751756429b8c7c17b3c875216f8e0800a093"
+    },
+    "combined_receiver": {
+      "scope": "COMBINED independent range and frozen outputs; not a claim that either receiver alone ran the composed proof",
+      "evidence": "synexia-openrewrite-recipes/crates/m3jdk21-frozen-primitive-20261029/qualification/combined-receiver-20261029/EXACT_RESULTS.json",
+      "evidence_sha256": "a7e7bb2416efd82be83eb293ca83b5082af69c07fc0177a656fb98a0326179d5",
+      "target_base": "052ebcf7a26352c0285251eb671ee6c3640fd3ff",
+      "main_compilation_units": 319,
+      "unique_jupiter_tests": 15,
+      "modes": [
+        "normal",
+        "-Xint"
+      ],
+      "range_oracle_operations": 64000,
+      "range_oracle_assertions": 861432,
+      "post_run_main_source_identity_check": "317_PASS",
+      "main_compiler_flags": [
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all,-module",
+        "-Werror"
+      ],
+      "full_module_suite": "PENDING"
+    },
+    "seeded_differential_scenarios": {
+      "list": 192,
+      "sorted_set": 192
+    }
+  },
+  "naming": {
+    "public_names": "UNCHANGED",
+    "mapping_promotion": "DEFERRED",
+    "jdk_class_promotion": "NONE"
+  },
+  "remaining_gates": {
+    "full_sdk_and_jtreg": "PENDING",
+    "full_provenance_aggregate": "PENDING",
+    "native_platform_matrix": "PENDING",
+    "hosted_ci": "PENDING",
+    "representative_performance_acceptance": "HOLD"
+  }
+}
