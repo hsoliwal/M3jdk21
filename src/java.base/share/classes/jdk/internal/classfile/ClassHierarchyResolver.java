@@ -61,6 +61,7 @@ public interface ClassHierarchyResolver {
      * {@return the {@link ClassHierarchyInfo} for a given class name, or null
      * if the name is unknown to the resolver}
      * @param classDesc descriptor of the class
+     * @throws IllegalArgumentException if a class shouldn't be queried for hierarchy
      */
     ClassHierarchyInfo getClassInfo(ClassDesc classDesc);
 
@@ -196,7 +197,7 @@ public interface ClassHierarchyResolver {
             @Override
             public Class<?> apply(ClassDesc cd) {
                 try {
-                    return Class.forName(Util.toBinaryName(cd.descriptorString()), false, loader);
+                    return Class.forName(Util.toBinaryName(cd), false, loader);
                 } catch (ClassNotFoundException ex) {
                     return null;
                 }
