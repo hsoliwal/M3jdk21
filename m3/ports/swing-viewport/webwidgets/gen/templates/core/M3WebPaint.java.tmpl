@@ -1,0 +1,144 @@
+package @PKG@;
+
+/**
+ * Toolkit-neutral display list (pattern M3P-CORE-1). A model emits paint operations into packed
+ * int records {@code [op, x, y, w, h, rgb, arg, ref]}; the SWT side replays them through a GC and
+ * the Swing side through a Graphics2D, so both toolkits paint the same list. Polyline points live
+ * in one int pool and strings in one reusable table; nothing else is allocated per frame.
+ */
+//FLLDCIM: HPCPOP — paint path; arrays grow, never shrink, records are ints
+public final class M3WebPaint {
+	public static final int RECT = 1, ROUND = 2, ROUND_LINE = 3, OVAL = 4, OVAL_LINE = 5, LINE = 6, TEXT = 7, POLY = 8, GRADIENT = 9,
+			ARC = 10;
+	/** Text style bits in {@code arg} of a TEXT op (low 8 bits are the font pixel size). */
+	public static final int BOLD = 0x100, MONO = 0x200, CENTER = 0x400, RIGHT = 0x800, UNDERLINE = 0x1000, STRIKE = 0x2000;
+	public static final int F_OP = 0, F_X = 1, F_Y = 2, F_W = 3, F_H = 4, F_RGB = 5, F_ARG = 6, F_REF = 7, STRIDE = 8;
+	private int[] ops = new int[64 * STRIDE];
+	private int[] pts = new int[64];
+	private String[] texts = new String[16];
+	private int n, np, nt, tx, ty;
+
+	/** Forgets every record; arrays are kept for the next frame. */
+	public void reset() {
+		n = np = nt = tx = ty = 0;
+	}
+
+	/** Offset added to every following record: a plane's translation (pattern M3P-VIEWPORT-1). */
+	public void translate(int dx, int dy) {
+		tx = dx;
+		ty = dy;
+	}
+
+	public int count() {
+		return n;
+	}
+
+	public int get(int record, int field) {
+		return ops[record * STRIDE + field];
+	}
+
+	public String text(int ref) {
+		return texts[ref];
+	}
+
+	public int point(int index) {
+		return pts[index];
+	}
+
+	public void rect(int x, int y, int w, int h, int rgb) {
+		add(RECT, x, y, w, h, rgb, 0, 0);
+	}
+
+	public void round(int x, int y, int w, int h, int radius, int rgb) {
+		add(ROUND, x, y, w, h, rgb, radius, 0);
+	}
+
+	public void roundLine(int x, int y, int w, int h, int radius, int rgb) {
+		add(ROUND_LINE, x, y, w, h, rgb, radius, 0);
+	}
+
+	public void oval(int x, int y, int w, int h, int rgb) {
+		add(OVAL, x, y, w, h, rgb, 0, 0);
+	}
+
+	public void ovalLine(int x, int y, int w, int h, int rgb) {
+		add(OVAL_LINE, x, y, w, h, rgb, 0, 0);
+	}
+
+	/** A line from (x1, y1) to (x2, y2); stored as the bounding box plus a direction flag in arg. */
+	public void line(int x1, int y1, int x2, int y2, int rgb) {
+		int dir = (x2 < x1) != (y2 < y1) ? 1 : 0;
+		add(LINE, Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1), rgb, dir, 0);
+	}
+
+	/** Text clipped to the box; {@code style} = font pixels | style bits. */
+	public void text(int x, int y, int w, int h, int rgb, int style, String s) {
+		if (s == null || s.isEmpty()) {
+			return;
+		}
+		if (nt == texts.length) {
+			texts = java.util.Arrays.copyOf(texts, nt * 2);
+		}
+		texts[nt] = s;
+		add(TEXT, x, y, w, h, rgb, style, nt++);
+	}
+
+	/** A polyline over {@code count} points {@code xy[off..off+2*count)}. */
+	public void poly(int[] xy, int off, int count, int rgb) {
+		if (np + 2 * count > pts.length) {
+			pts = java.util.Arrays.copyOf(pts, Math.max(pts.length * 2, np + 2 * count));
+		}
+		System.arraycopy(xy, off, pts, np, 2 * count);
+		for (int i = 0; i < count; i++) {
+			pts[np + 2 * i] += tx;
+			pts[np + 2 * i + 1] += ty;
+		}
+		int x0 = Integer.MAX_VALUE, y0 = Integer.MAX_VALUE, x1 = Integer.MIN_VALUE, y1 = Integer.MIN_VALUE;
+		for (int i = 0; i < count; i++) {
+			x0 = Math.min(x0, xy[off + 2 * i]); x1 = Math.max(x1, xy[off + 2 * i]);
+			y0 = Math.min(y0, xy[off + 2 * i + 1]); y1 = Math.max(y1, xy[off + 2 * i + 1]);
+		}
+		add(POLY, x0, y0, x1 - x0, y1 - y0, rgb, count, np);
+		np += 2 * count;
+	}
+
+	/** Horizontal gradient from {@code rgb} at the left to {@code rgb2} at the right. */
+	public void gradient(int x, int y, int w, int h, int rgb, int rgb2) {
+		add(GRADIENT, x, y, w, h, rgb, rgb2, 0);
+	}
+
+	/** Arc outline in the box from {@code start} degrees over {@code extent} degrees (counter-clockwise). */
+	public void arc(int x, int y, int w, int h, int start, int extent, int rgb) {
+		add(ARC, x, y, w, h, rgb, start & 0xffff, extent);
+	}
+
+	/** True when the record's box intersects the clip; replay skips the rest (damage-only paint). */
+	public boolean intersects(int record, int cx, int cy, int cw, int ch) {
+		int b = record * STRIDE;
+		return ops[b + F_X] <= cx + cw && ops[b + F_X] + ops[b + F_W] >= cx && ops[b + F_Y] <= cy + ch && ops[b + F_Y] + ops[b + F_H] >= cy;
+	}
+
+	/** FNV-1a over records, points and strings: the differential compares this between toolkits. */
+	public int hash() {
+		int h = 0x811c9dc5;
+		for (int i = 0; i < n * STRIDE; i++) {
+			h = (h ^ ops[i]) * 0x01000193;
+		}
+		for (int i = 0; i < np; i++) {
+			h = (h ^ pts[i]) * 0x01000193;
+		}
+		for (int i = 0; i < nt; i++) {
+			h = (h ^ texts[i].hashCode()) * 0x01000193;
+		}
+		return h;
+	}
+
+	private void add(int op, int x, int y, int w, int h, int rgb, int arg, int ref) {
+		if ((n + 1) * STRIDE > ops.length) {
+			ops = java.util.Arrays.copyOf(ops, ops.length * 2);
+		}
+		int b = n++ * STRIDE;
+		ops[b] = op; ops[b + 1] = x + tx; ops[b + 2] = y + ty; ops[b + 3] = w;
+		ops[b + 4] = h; ops[b + 5] = rgb; ops[b + 6] = arg; ops[b + 7] = ref;
+	}
+}

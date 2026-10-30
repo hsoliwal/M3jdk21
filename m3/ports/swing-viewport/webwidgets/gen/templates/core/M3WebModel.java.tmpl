@@ -1,0 +1,388 @@
+package @PKG@;
+
+import static @PKG@.M3WebStates.*;
+
+/**
+ * Interaction, layout and paint skeleton of every M3 web widget model (pattern M3P-CORE-1).
+ * <p>
+ * A family lays items out left-to-right in {@link #doLayout()} (the base mirrors rects for RTL),
+ * emits display-list records in {@link #emit(M3WebPaint)}, and refines keys, activation and
+ * animation through the protected hooks. The model never touches a toolkit: SWT and Swing feed it
+ * neutral keys and pointer events and replay its display list.
+ * </p>
+ */
+public abstract class M3WebModel extends M3WebView {
+	private final String concept;
+	private final int role;
+	protected final int mode, shape;
+	protected int phase;
+	protected boolean animating;
+
+	protected M3WebModel(String concept, int role, int mode, int shape, int variant) {
+		this.concept = concept;
+		this.role = role;
+		this.mode = mode;
+		this.shape = shape;
+		this.variant = variant;
+	}
+
+	@Override
+	public String concept() {
+		return concept;
+	}
+
+	@Override
+	public int role() {
+		return role;
+	}
+
+	@Override
+	public String accessibleName(int item) {
+		return item < 0 ? (count > 0 ? text[0] : concept) : text(item);
+	}
+
+	@Override
+	public int variant() {
+		return variant;
+	}
+
+	@Override
+	public void setVariant(int v) {
+		variant = v;
+		relayout(-1, D_THEME);
+	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+
+	@Override
+	public void setSize(int s) {
+		size = Math.max(SIZE_XS, Math.min(SIZE_XL, s));
+		relayout(-1, D_LAYOUT);
+	}
+
+	@Override
+	public boolean isRtl() {
+		return rtl;
+	}
+
+	@Override
+	public void setRtl(boolean on) {
+		rtl = on;
+		relayout(-1, D_LAYOUT);
+	}
+
+	@Override
+	public boolean isDark() {
+		return theme.isDark();
+	}
+
+	@Override
+	public void setDark(boolean dark) {
+		theme.setDark(dark);
+		damageAll();
+		fire(-1, D_THEME);
+	}
+
+	/** The palette, for theme providers that override slots. */
+	public M3WebTheme theme() {
+		return theme;
+	}
+
+	@Override
+	public int focus() {
+		return focus;
+	}
+
+	@Override
+	public void setFocus(int item) {
+		int old = focus;
+		focus = item < 0 ? -1 : checked(item);
+		if (old >= 0 && old < count) {
+			damageItem(old);
+		}
+		if (focus >= 0) {
+			damageItem(focus);
+		}
+		fire(focus, D_STATE);
+	}
+
+	@Override
+	public void layout(int w, int h) {
+		width = Math.max(0, w);
+		height = Math.max(0, h);
+		project();
+		doLayout();
+		if (rtl) {
+			for (int i = 0; i < count; i++) {
+				rects[i * 4] = width - rects[i * 4] - rects[i * 4 + 2];
+			}
+		}
+		damageAll();
+	}
+
+	@Override
+	public int prefWidth() {
+		int w = 0;
+		for (int i = 0; i < count; i++) {
+			w = Math.max(w, rects[i * 4] + rects[i * 4 + 2]);
+		}
+		return Math.max(w + pad(), metric(size, 0));
+	}
+
+	@Override
+	public int prefHeight() {
+		int h = 0;
+		for (int i = 0; i < count; i++) {
+			h = Math.max(h, rects[i * 4 + 1] + rects[i * 4 + 3]);
+		}
+		return Math.max(h + gap(), metric(size, 0));
+	}
+
+	@Override
+	public int hitTest(int x, int y) {
+		for (int i = count - 1; i >= 0; i--) {
+			int b = i * 4;
+			if ((flags[i] & HIDDEN) == 0 && x >= rects[b] && y >= rects[b + 1] && x < rects[b] + rects[b + 2] && y < rects[b + 1] + rects[b + 3]) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public final void paint(M3WebPaint p) {
+		p.reset();
+		emit(p);
+		if (focus >= 0 && focus < count && (widgetFlags & FOCUS) != 0) {
+			int b = focus * 4;
+			p.roundLine(rects[b] - 2, rects[b + 1] - 2, rects[b + 2] + 4, rects[b + 3] + 4, radius() + 2, theme.slot(M3WebTheme.ACCENT));
+		}
+	}
+
+	@Override
+	public boolean key(int key, int ch, int mods) {
+		if ((widgetFlags & DISABLED) != 0) {
+			return false;
+		}
+		if (onKey(key, ch, mods)) {
+			return true;
+		}
+		int prev = vertical() ? KEY_UP : rtl ? KEY_RIGHT : KEY_LEFT;
+		int next = vertical() ? KEY_DOWN : rtl ? KEY_LEFT : KEY_RIGHT;
+		if (key == prev || key == next) {
+			return moveFocus(key == next ? 1 : -1);
+		}
+		return navKey(key);
+	}
+
+	private boolean navKey(int key) {
+		switch (key) {
+		case KEY_HOME: return focusTo(nextEnabled(-1, 1));
+		case KEY_END: return focusTo(nextEnabled(count, -1));
+		case KEY_ENTER:
+		case KEY_SPACE:
+			if (focus >= 0 && (flags[focus] & DISABLED) == 0) {
+				activate(focus);
+			}
+			return focus >= 0;
+		case KEY_ESCAPE: return onEscape();
+		default: return false;
+		}
+	}
+
+	protected boolean moveFocus(int dir) {
+		return focusTo(nextEnabled(focus < 0 ? (dir > 0 ? -1 : count) : focus, dir));
+	}
+
+	protected int nextEnabled(int from, int dir) {
+		for (int i = from + dir; i >= 0 && i < count; i += dir) {
+			if ((flags[i] & (DISABLED | HIDDEN)) == 0) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private boolean focusTo(int item) {
+		if (item < 0) {
+			return false;
+		}
+		setFocus(item);
+		return true;
+	}
+
+	@Override
+	public void pointer(int kind, int x, int y, int mods) {
+		if ((widgetFlags & DISABLED) != 0) {
+			return;
+		}
+		int hit = hitTest(x, y);
+		switch (kind) {
+		case P_MOVE: setHover(hit); break;
+		case P_DOWN: press(hit); break;
+		case P_UP: release(hit, x, y); break;
+		case P_EXIT: setHover(-1); break;
+		case P_WHEEL: onWheel(y); break;
+		default: onDrag(x, y);
+		}
+	}
+
+	private void press(int hit) {
+		pressed = hit;
+		if (hit >= 0) {
+			setState(hit, PRESSED, true);
+			setFocus(hit);
+		}
+	}
+
+	private void release(int hit, int x, int y) {
+		int was = pressed;
+		pressed = -1;
+		if (was >= 0) {
+			setState(was, PRESSED, false);
+		}
+		if (was >= 0 && was == hit && (flags[hit] & DISABLED) == 0) {
+			activateAt(hit, x - rects[hit * 4], y - rects[hit * 4 + 1]);
+		}
+	}
+
+	private void setHover(int hit) {
+		if (hit == hover) {
+			return;
+		}
+		if (hover >= 0 && hover < count) {
+			setState(hover, HOVER, false);
+		}
+		hover = hit;
+		if (hit >= 0) {
+			setState(hit, HOVER, true);
+		}
+	}
+
+	@Override
+	public boolean tick(int ms) {
+		if (!animating) {
+			return false;
+		}
+		animating = advance(ms);
+		damageAll();
+		fire(-1, D_ANIM);
+		return animating;
+	}
+
+	@Override
+	public boolean isAnimating() {
+		return animating;
+	}
+
+	/** Starts the animation clock; the toolkit side polls {@link #tick(int)} while visible. */
+	protected void animate() {
+		animating = true;
+		fire(-1, D_ANIM);
+	}
+
+	@Override
+	public int[] snapshot() {
+		return lanes(new int[] { count, width, height, variant, size, focus, hover, pressed, phase, (int) scroll, (int) (scroll >>> 32),
+				rtl ? 1 : 0, theme.isDark() ? 1 : 0, widgetFlags, mode, shape, role, aspects(), itemExtent, window[0], window[1], window[2],
+				window[3], planes[OVERLAY * 6 + 4], planes[OVERLAY * 6 + 5] });
+	}
+
+	/** Family layout in left-to-right coordinates. */
+	protected abstract void doLayout();
+
+	/** Family paint into the display list. */
+	protected abstract void emit(M3WebPaint p);
+
+	/** True when the family navigates with up/down instead of left/right. */
+	protected boolean vertical() {
+		return false;
+	}
+
+	/** Family key hook, called before the shared navigation keys. */
+	protected boolean onKey(int key, int ch, int mods) {
+		return false;
+	}
+
+	/** Activation by Enter, Space or click: fires an action delta by default. */
+	protected void activate(int item) {
+		fire(item, D_ACTION);
+	}
+
+	/** Click activation with the pointer position inside the item. */
+	protected void activateAt(int item, int x, int y) {
+		activate(item);
+	}
+
+	protected boolean onEscape() {
+		return false;
+	}
+
+	protected void onWheel(int delta) {
+		// no wheel behaviour unless the family scrolls
+	}
+
+	protected void onDrag(int x, int y) {
+		// no drag behaviour unless the family drags
+	}
+
+	/** Advances the animation by {@code ms}; returns whether it keeps running. Default: a 1 s loop. */
+	protected boolean advance(int ms) {
+		phase = (phase + ms) % 1000;
+		return true;
+	}
+
+	protected int pad() {
+		return metric(size, 1);
+	}
+
+	protected int gap() {
+		return metric(size, 3);
+	}
+
+	protected int rowHeight() {
+		return metric(size, 0);
+	}
+
+	protected int font() {
+		return metric(size, 2);
+	}
+
+	protected int radius() {
+		return shape == PILL || shape == CIRCLE ? rowHeight() / 2 : shape == ROUND ? Math.min(M3WebTheme.RADIUS, rowHeight() / 3) : 0;
+	}
+
+	/** Approximate advance of a string (0.55 em per char): deterministic on both toolkits. */
+	protected int textWidth(String s, int px) {
+		return s == null ? 0 : (s.length() * px * 55 + 99) / 100;
+	}
+
+	/** Paints an item's surface by shape, variant and state. */
+	protected void surface(M3WebPaint p, int item, int x, int y, int w, int h) {
+		int st = flags[item] | widgetFlags & DISABLED;
+		int fill = theme.fill(variant, st);
+		switch (shape) {
+		case CIRCLE: p.oval(x, y, w, h, fill); break;
+		case RECT: p.rect(x, y, w, h, fill); break;
+		case LINE: case NONE: break;
+		default:
+			p.round(x, y, w, h, radius(), fill);
+			p.roundLine(x, y, w, h, radius(), theme.line(variant, st));
+		}
+	}
+
+	/** Paints text in the item's ink colour; START alignment follows RTL. */
+	protected void label(M3WebPaint p, int item, String s, int x, int y, int w, int h, int style) {
+		int ink = theme.ink(variant, (item < 0 ? 0 : flags[item]) | widgetFlags & DISABLED);
+		int align = (style & (M3WebPaint.CENTER | M3WebPaint.RIGHT)) == 0 && rtl ? M3WebPaint.RIGHT : 0;
+		p.text(x, y, w, h, ink, (style & 0xff) == 0 ? style | font() | align : style | align, s);
+	}
+
+	/** Paints a muted secondary text. */
+	protected void muted(M3WebPaint p, String s, int x, int y, int w, int h, int style) {
+		p.text(x, y, w, h, theme.slot(M3WebTheme.MUTED), (style & 0xff) == 0 ? style | Math.max(9, font() - 1) : style, s);
+	}
+}

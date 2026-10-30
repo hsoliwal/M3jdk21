@@ -1,0 +1,87 @@
+package @WPKG@;
+
+import static @PKG@.M3WebChecks.check;
+
+import java.awt.event.FocusEvent;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+
+import javax.accessibility.AccessibleContext;
+
+import @PKG@.M3WebStates;
+
+/**
+ * Headless Swing component contract (pattern M3P-CORE-1): layout on resize, offscreen paint (a pixel
+ * probe of the largest painted surface), AWT key and mouse routing, focus, hierarchy (part visible)
+ * and accessibility, without a display.
+ */
+public final class M3WebComponentChecks {
+	private M3WebComponentChecks() {
+	}
+
+	public static void run(M3WebComponent<?> c) {
+		c.setSize(360, 240);
+		check(c.getPreferredSize().width > 0, "preferred size");
+		BufferedImage img = paint(c);
+		check(img.getRGB(0, 0) != 0 || c.getModel().count() == 0, "painted background");
+		events(c);
+		AccessibleContext ac = c.getAccessibleContext();
+		check(ac.getAccessibleRole() != null && ac.getAccessibleName() != null && ac == c.getAccessibleContext(), "accessible");
+		c.getModel().setDark(true);
+		paint(c);
+		damageOnly(c);
+	}
+
+	/** D on the Swing side: after a full paint, an item change re-renders exactly the model damage. */
+	static void damageOnly(M3WebComponent<?> c) {
+		c.setPartVisible(true);
+		c.getModel().layout(c.getWidth(), c.getHeight());
+		paint(c);
+		if (c.getModel().count() > 0 && c.getModel().itemRect(0, 2) > 0) {
+			c.getModel().setState(0, M3WebStates.SELECTED, true);
+			int x = Math.max(0, c.getModel().itemRect(0, 0) - 3), y = Math.max(0, c.getModel().itemRect(0, 1) - 3);
+			BufferedImage img = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_RGB);
+			java.awt.Graphics2D g = img.createGraphics();
+			c.paint(g);
+			g.dispose();
+			check(c.lastRendered().x == x && c.lastRendered().y == y, "re-rendered region equals the damage: " + c.lastRendered());
+		}
+		c.setPartVisible(false);
+		c.getModel().setState(-1, M3WebStates.ERROR, true);
+		c.setPartVisible(true);
+	}
+
+	/** Paints offscreen with a clip and without one. */
+	public static BufferedImage paint(M3WebComponent<?> c) {
+		BufferedImage img = new BufferedImage(Math.max(1, c.getWidth()), Math.max(1, c.getHeight()), BufferedImage.TYPE_INT_RGB);
+		java.awt.Graphics2D g = img.createGraphics();
+		c.paint(g);
+		g.setClip(0, 0, 10, 10);
+		c.paint(g);
+		g.dispose();
+		return img;
+	}
+
+	static void events(M3WebComponent<?> c) {
+		int x = c.getModel().count() > 0 ? c.getModel().itemRect(0, 0) + 2 : 5, y = c.getModel().count() > 0 ? c.getModel().itemRect(0, 1) + 2 : 5;
+		long t = 0;
+		c.dispatchEvent(new FocusEvent(c, FocusEvent.FOCUS_GAINED));
+		for (int id : new int[] { MouseEvent.MOUSE_MOVED, MouseEvent.MOUSE_PRESSED, MouseEvent.MOUSE_DRAGGED, MouseEvent.MOUSE_RELEASED,
+				MouseEvent.MOUSE_CLICKED, MouseEvent.MOUSE_EXITED }) {
+			c.dispatchEvent(new MouseEvent(c, id, t, java.awt.event.InputEvent.SHIFT_DOWN_MASK, x, y, 1, false, MouseEvent.BUTTON1));
+		}
+		c.dispatchEvent(new MouseWheelEvent(c, MouseEvent.MOUSE_WHEEL, t, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK, x, y, 0, false, MouseWheelEvent.WHEEL_UNIT_SCROLL, 1, 1));
+		for (int code : new int[] { KeyEvent.VK_HOME, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_ENTER, KeyEvent.VK_F1, KeyEvent.VK_ESCAPE }) {
+			c.dispatchEvent(new KeyEvent(c, KeyEvent.KEY_PRESSED, t, 0, code, KeyEvent.CHAR_UNDEFINED));
+		}
+		c.dispatchEvent(new KeyEvent(c, KeyEvent.KEY_TYPED, t, 0, KeyEvent.VK_UNDEFINED, '5'));
+		c.dispatchEvent(new KeyEvent(c, KeyEvent.KEY_TYPED, t, 0, KeyEvent.VK_UNDEFINED, (char) 1));
+		c.dispatchEvent(new FocusEvent(c, FocusEvent.FOCUS_LOST));
+		c.dispatchEvent(new HierarchyEvent(c, HierarchyEvent.HIERARCHY_CHANGED, c, null, HierarchyEvent.SHOWING_CHANGED));
+		c.dispatchEvent(new HierarchyEvent(c, HierarchyEvent.HIERARCHY_CHANGED, c, null, HierarchyEvent.PARENT_CHANGED));
+		check(!c.getModel().is(-1, M3WebStates.FOCUS), "focus lost");
+	}
+}

@@ -1,0 +1,21 @@
+package @WPKG@;
+
+import @PKG@.M3@C@Api;
+import @PKG@.M3@C@Model;
+import org.eclipse.swt.widgets.Composite;
+
+/**
+ * M3 @CONCEPT@ for Nebula: one drawn Canvas on the shared viewport core, family @FAM@
+ * (pattern @PATTERN@). Paints through the GC only, repaints only model damage, defers while the
+ * part is hidden. Behaviour is the {@link M3@C@Api} of {@link #api()}.
+ */
+public class M3@C@ extends M3WebCanvas<M3@C@Model> {
+	public M3@C@(Composite parent, int style) {
+		super(parent, style, new M3@C@Model());
+	}
+
+	/** The widget API (the lane model). */
+	public M3@C@Api api() {
+		return getModel();
+	}
+}

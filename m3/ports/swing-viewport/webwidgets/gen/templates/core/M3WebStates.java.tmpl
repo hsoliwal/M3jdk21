@@ -1,0 +1,60 @@
+package @PKG@;
+
+/**
+ * Packed constants shared by every M3 web widget model (pattern M3P-CORE-1): item state bits,
+ * variants, sizes, shapes, toolkit-neutral keys, pointer kinds and accessibility roles.
+ * <p>
+ * State bits live in one {@code int} per item (and one for the widget, item {@code -1}); no
+ * per-item objects exist. Keys and pointer kinds are mapped from SWT or AWT events by the
+ * toolkit side so the model answers identically on both toolkits.
+ * </p>
+ */
+//FLLDCIM: DOOP — state in packed int lanes; constants only
+public final class M3WebStates {
+	public static final int HOVER = 1, FOCUS = 1 << 1, PRESSED = 1 << 2, DISABLED = 1 << 3, SELECTED = 1 << 4, LOADING = 1 << 5,
+			ERROR = 1 << 6, OPEN = 1 << 7, CHECKED = 1 << 8, MIXED = 1 << 9, EXPANDED = 1 << 10, DRAGGING = 1 << 11, VISITED = 1 << 12,
+			HIDDEN = 1 << 13, DONE = 1 << 14, READONLY = 1 << 15;
+	public static final int V_DEFAULT = 0, V_PRIMARY = 1, V_SECONDARY = 2, V_OUTLINE = 3, V_GHOST = 4, V_DANGER = 5, V_SUCCESS = 6,
+			V_WARNING = 7, V_INFO = 8, V_SUBTLE = 9, VARIANTS = 10;
+	public static final int SIZE_XS = 0, SIZE_S = 1, SIZE_M = 2, SIZE_L = 3, SIZE_XL = 4;
+	public static final int RECT = 0, ROUND = 1, PILL = 2, CIRCLE = 3, LINE = 4, NONE = 5;
+	public static final int KEY_LEFT = 1, KEY_RIGHT = 2, KEY_UP = 3, KEY_DOWN = 4, KEY_HOME = 5, KEY_END = 6, KEY_PAGE_UP = 7,
+			KEY_PAGE_DOWN = 8, KEY_ENTER = 9, KEY_SPACE = 10, KEY_ESCAPE = 11, KEY_TAB = 12, KEY_DELETE = 13, KEY_BACKSPACE = 14,
+			KEY_CHAR = 15;
+	public static final int MOD_SHIFT = 1, MOD_CTRL = 2, MOD_ALT = 4;
+	public static final int P_MOVE = 1, P_DOWN = 2, P_UP = 3, P_EXIT = 4, P_WHEEL = 5, P_DRAG = 6;
+	static final int[] HEIGHT = { 20, 24, 32, 40, 48 }, PAD = { 6, 8, 12, 16, 20 }, FONT = { 10, 12, 13, 15, 18 }, GAP = { 4, 6, 8, 10, 12 };
+	private static final String[] ROLES = { "presentation", "button", "link", "checkbox", "radio", "switch", "slider", "tab", "tablist",
+			"progressbar", "dialog", "tooltip", "menu", "menuitem", "toolbar", "list", "listitem", "grid", "tree", "img", "status", "alert",
+			"region", "navigation", "textbox", "combobox", "group", "separator", "figure", "feed", "search", "application", "article", "mark",
+			"code", "log", "banner", "radiogroup", "meter", "document" };
+
+	private M3WebStates() {
+	}
+
+	/** Returns the role id of an ARIA role name, or 0 (presentation) when unknown. */
+	public static int role(String name) {
+		for (int i = 0; i < ROLES.length; i++) {
+			if (ROLES[i].equals(name)) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	/** Returns the ARIA role name of a role id. */
+	public static String roleName(int role) {
+		return role >= 0 && role < ROLES.length ? ROLES[role] : ROLES[0];
+	}
+
+	/** Returns the metric of a size: 0 height, 1 padding, 2 font pixels, 3 gap. */
+	public static int metric(int size, int which) {
+		int s = Math.max(SIZE_XS, Math.min(SIZE_XL, size));
+		switch (which) {
+		case 0: return HEIGHT[s];
+		case 1: return PAD[s];
+		case 2: return FONT[s];
+		default: return GAP[s];
+		}
+	}
+}

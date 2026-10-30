@@ -1,0 +1,105 @@
+concept	family	mode	role	shape	variant	sample	nebula_existing	swing_existing
+card	CONTAINER	CARD	region	ROUND	0	Quarterly revenue~Up 12% on last quarter		
+avatar	TOKEN	INITIALS	img	CIRCLE	1	Ada Lovelace		
+icon	TOKEN	ICON	img	NONE	0	search		
+skeleton	ANIMVALUE	SKELETON	progressbar	ROUND	0	title;line;line		
+drawer	OVERLAY	EDGE_START	dialog	RECT	0	Navigation~Inbox		
+autocomplete	INPUT	AUTOCOMPLETE	combobox	ROUND	0	Apple;Apricot;Banana;Blueberry;Cherry		
+kbd	TOKEN	KEYCAP	presentation	ROUND	0	Ctrl;K		
+kanban-board	COLLECTION	KANBAN	grid	ROUND	0	0~Write spec;1~Build;2~Ship		
+bottom-sheet	OVERLAY	EDGE_BOTTOM	dialog	ROUND	0	Share~Copy link		
+empty-state	CONTAINER	EMPTY	status	ROUND	0	No results~Try another search		
+affix	OVERLAY	STICKY	region	ROUND	0	Back to top		
+pull-to-refresh	COLLECTION	PULL	feed	RECT	0	Mail 1;Mail 2;Mail 3		
+swipe-actions	COLLECTION	SWIPE	list	RECT	0	Meeting notes;Invoice;Photos		
+highlight-mark	TOKEN	MARK	mark	RECT	7	highlighted text		
+fab	OVERLAY	CORNER_END	button	CIRCLE	1	Create		
+otp-input	INPUT	OTP	textbox	ROUND	0	6		
+tag-input	INPUT	TAGS	textbox	ROUND	0	java;swt;swing		
+stat-kpi	CONTAINER	STAT	figure	ROUND	0	Active users~1284~12		
+video-player	EMBED	VIDEO	application	RECT	0	intro.mp4~90		
+cascader	PICKER	CASCADER	combobox	ROUND	0	Asia/India/Pune;Asia/Japan/Tokyo;Europe/France/Paris		
+infinite-scroll	COLLECTION	INFINITE	feed	RECT	0	Item 1;Item 2;Item 3		
+hover-card	OVERLAY	TARGET	tooltip	ROUND	0	@synexia~Profile card		
+tour	OVERLAY	TOUR	dialog	ROUND	0	Welcome;Create a project;Invite your team		
+qr-code	PLOT	QR	img	RECT	0	https://example.org		
+markdown-render	EMBED	MARKDOWN	article	RECT	0	# Title;- one;- two;plain text		
+virtual-list	COLLECTION	INFINITE	list	RECT	0	Row	SWT org.eclipse.swt.widgets.VirtualListModel (fork)	M3port com.m3.swing.viewport.M3VirtualListModel
+date-range	PICKER	RANGE	grid	ROUND	0	20260101~20260110		
+sparkline	PLOT	SPARK	img	RECT	0	3;5;2;8;6;9;4		
+ribbon	COMMANDS	RIBBON	toolbar	ROUND	0	0~Paste~L;0~Cut;0~Copy;1~Bold;1~Italic;1~Underline		
+focus-trap	OVERLAY	CENTER	dialog	RECT	0	-	SWT org.eclipse.swt.widgets.Composite#setTabList	AWT java.awt.FocusTraversalPolicy
+backdrop	OVERLAY	BACKDROP	presentation	RECT	0	scrim		
+code-block	TOKEN	CODE	code	ROUND	0	int answer = 42;		
+captcha-security	TOKEN	CAPTCHA	img	ROUND	0	7KQ2P		
+search	INPUT	SEARCH	search	PILL	0	query	SWT org.eclipse.swt.widgets.Text (SWT.SEARCH)	
+context-menu	COMMANDS	SPLIT	menu	RECT	0	-	SWT org.eclipse.swt.widgets.Menu (SWT.POP_UP)	Swing javax.swing.JPopupMenu
+time-picker	PICKER	TIME	combobox	ROUND	0	570	SWT org.eclipse.swt.widgets.DateTime (SWT.TIME)	
+sheet-dialog	OVERLAY	EDGE_TOP	dialog	ROUND	0	Save changes?~Your edits will be lost	SWT org.eclipse.swt.widgets.Shell (SWT.SHEET)	
+button	COMMANDS	SPLIT	button	ROUND	1	-	SWT org.eclipse.swt.widgets.Button	Swing javax.swing.JButton
+select	PICKER	CASCADER	combobox	ROUND	0	-	SWT org.eclipse.swt.widgets.Combo	Swing javax.swing.JComboBox
+layout-primitive	CONTAINER	CARD	group	RECT	0	-	SWT org.eclipse.swt.layout.GridLayout	AWT java.awt.GridBagLayout
+text-input	INPUT	SEARCH	textbox	ROUND	0	-	SWT org.eclipse.swt.widgets.Text	Swing javax.swing.JTextField
+progress	ANIMVALUE	SPINNER	progressbar	ROUND	0	-	SWT org.eclipse.swt.widgets.ProgressBar	Swing javax.swing.JProgressBar
+panel	CONTAINER	CARD	group	ROUND	0	-	SWT org.eclipse.swt.widgets.Group	Swing javax.swing.JPanel
+slider	SEGMENTS	RATING	slider	ROUND	0	-	SWT org.eclipse.swt.widgets.Scale	Swing javax.swing.JSlider
+tabs	SEGMENTS	SEGMENTED	tablist	ROUND	0	-	SWT org.eclipse.swt.custom.CTabFolder	Swing javax.swing.JTabbedPane
+checkbox	TOKEN	SWITCH	checkbox	ROUND	0	-	SWT org.eclipse.swt.widgets.Button (SWT.CHECK)	Swing javax.swing.JCheckBox
+dialog	OVERLAY	CENTER	dialog	ROUND	0	-	SWT org.eclipse.swt.widgets.Dialog	Swing javax.swing.JDialog
+menu	COMMANDS	SPLIT	menu	RECT	0	-	SWT org.eclipse.swt.widgets.Menu	Swing javax.swing.JMenu
+list	COLLECTION	INFINITE	list	RECT	0	-	SWT org.eclipse.swt.widgets.List	Swing javax.swing.JList
+radio	TOKEN	SWITCH	radio	CIRCLE	0	-	SWT org.eclipse.swt.widgets.Button (SWT.RADIO)	Swing javax.swing.JRadioButton
+popover	OVERLAY	TARGET	dialog	ROUND	0	Filters~Status and owner		Swing javax.swing.JPopupMenu
+tooltip	OVERLAY	TARGET	tooltip	ROUND	0	-	SWT org.eclipse.swt.widgets.ToolTip	Swing javax.swing.JToolTip
+divider	TOKEN	TEXT	separator	LINE	0	-	SWT org.eclipse.swt.widgets.Label (SWT.SEPARATOR)	Swing javax.swing.JSeparator
+accordion	CONTAINER	ACCORDION	region	ROUND	0	Shipping~Ships in 2 days;Returns~30 day returns;Warranty~One year	SWT org.eclipse.swt.widgets.ExpandBar	
+table	COLLECTION	INFINITE	grid	RECT	0	-	SWT org.eclipse.swt.widgets.Table	Swing javax.swing.JTable
+switch	TOKEN	SWITCH	switch	PILL	1	Wi-Fi	Nebula org.eclipse.nebula.widgets.opal.switchbutton.SwitchButton	
+navigation	SEGMENTS	NAV	navigation	ROUND	0	Home;Projects;Settings		
+number-input	INPUT	SEARCH	textbox	ROUND	0	-	SWT org.eclipse.swt.widgets.Spinner	Swing javax.swing.JSpinner
+label	TOKEN	TEXT	presentation	NONE	0	-	SWT org.eclipse.swt.widgets.Label	Swing javax.swing.JLabel
+image	EMBED	MAP	img	RECT	0	-	Nebula org.eclipse.nebula.widgets.picture.PictureControl	Swing javax.swing.JLabel (Icon)
+text-area	INPUT	SEARCH	textbox	ROUND	0	-	SWT org.eclipse.swt.widgets.Text (SWT.MULTI)	Swing javax.swing.JTextArea
+toast	OVERLAY	TOAST	status	ROUND	0	Saved~All changes stored	Nebula org.eclipse.nebula.widgets.opal.notifier.Notifier	
+link	TOKEN	LINK	link	NONE	0	Read more	SWT org.eclipse.swt.widgets.Link	
+app-bar	COMMANDS	APPBAR	banner	RECT	0	0~Synexia~L;1~Search;1~Settings		
+tree	COLLECTION	INFINITE	tree	RECT	0	-	SWT org.eclipse.swt.widgets.Tree	Swing javax.swing.JTree
+badge	TOKEN	COUNT	status	PILL	5	7	Nebula org.eclipse.nebula.widgets.badgedlabel.BadgedLabel	
+alert-banner	CONTAINER	ALERT	alert	ROUND	8	Update available~Restart to apply		
+toggle-button	TOKEN	SWITCH	button	ROUND	0	-	SWT org.eclipse.swt.widgets.Button (SWT.TOGGLE)	Swing javax.swing.JToggleButton
+scroll	COLLECTION	INFINITE	region	RECT	0	-	SWT org.eclipse.swt.custom.ScrolledComposite	Swing javax.swing.JScrollPane
+chip	TOKEN	CHIP	button	PILL	0	Java;SWT;Swing	Nebula org.eclipse.nebula.widgets.chips.Chips	
+toolbar	COMMANDS	APPBAR	toolbar	RECT	0	-	SWT org.eclipse.swt.widgets.ToolBar	Swing javax.swing.JToolBar
+breadcrumb	SEGMENTS	BREADCRUMB	navigation	NONE	0	Home;Library;Data	Nebula org.eclipse.nebula.widgets.opal.breadcrumb.Breadcrumb	
+date-picker	PICKER	DATE	combobox	ROUND	0	20261030	SWT org.eclipse.swt.widgets.DateTime	
+pagination	SEGMENTS	PAGINATION	navigation	ROUND	0	20	Nebula org.eclipse.nebula.widgets.pagination.table.PageableTable	
+grid	COLLECTION	INFINITE	grid	RECT	0	-	Nebula org.eclipse.nebula.widgets.grid.Grid	Swing javax.swing.JTable
+heading	TOKEN	TEXT	presentation	NONE	0	-	SWT org.eclipse.swt.widgets.Label	Swing javax.swing.JLabel
+calendar	PICKER	CALENDAR	grid	ROUND	0	20261030	Nebula org.eclipse.nebula.widgets.datechooser.DateChooser	
+transition-anim	ANIMVALUE	TRANSITION	presentation	ROUND	0	fade	Nebula org.eclipse.nebula.cwt.animation.AnimationRunner	
+carousel	SEGMENTS	CAROUSEL	region	ROUND	0	Slide one;Slide two;Slide three	Nebula org.eclipse.nebula.widgets.carousel.Carousel	
+file-upload	EMBED	UPLOAD	region	ROUND	0	report.pdf~40;photo.png~100		
+chart	PLOT	BARS	img	RECT	0	4;7;3;9;5	Nebula org.eclipse.nebula.visualization.xygraph.figures.XYGraph	
+toggle-group	SEGMENTS	TOGGLE	radiogroup	ROUND	0	Day;Week;Month	Nebula org.eclipse.nebula.widgets.radiogroup.RadioGroup	
+stepper	SEGMENTS	STEPPER	list	CIRCLE	0	Cart;Shipping;Payment	Nebula org.eclipse.nebula.widgets.stepbar.Stepbar	
+splitter	CONTAINER	CARD	separator	RECT	0	-	SWT org.eclipse.swt.custom.SashForm	Swing javax.swing.JSplitPane
+color-picker	PICKER	TIME	dialog	ROUND	0	-	SWT org.eclipse.swt.widgets.ColorDialog	Swing javax.swing.JColorChooser
+spinner-loading	ANIMVALUE	SPINNER	progressbar	CIRCLE	0	Loading		
+rich-text-editor	INPUT	SEARCH	textbox	RECT	0	-	SWT org.eclipse.swt.custom.StyledText	Swing javax.swing.JEditorPane
+config-provider	CONTAINER	CARD	presentation	RECT	0	-	SWT org.eclipse.swt.widgets.Display (system colors) + M3WebTheme	Swing javax.swing.UIManager + M3WebTheme
+rating	SEGMENTS	RATING	slider	NONE	7	1;2;3;4;5	Nebula org.eclipse.nebula.widgets.opal.starrating.StarRating	
+message-list	COLLECTION	MESSAGES	log	ROUND	0	0~Hi there;1~Hello!;0~How are you?		
+timeline	SEGMENTS	TIMELINE	list	CIRCLE	0	Created;Reviewed;Merged	Nebula org.eclipse.nebula.widgets.timeline.TimelineComposite	
+led-gauge	TOKEN	LED	status	CIRCLE	6	ON	Nebula org.eclipse.nebula.widgets.led.LED	
+password	INPUT	SEARCH	textbox	ROUND	0	-	SWT org.eclipse.swt.widgets.Text (SWT.PASSWORD)	Swing javax.swing.JPasswordField
+web-view	EMBED	WEB	document	RECT	0	https://example.org	SWT org.eclipse.swt.browser.Browser	
+command-palette	COLLECTION	PALETTE	dialog	ROUND	0	Open file;Save all;Toggle theme;Go to line		
+tray-status	COMMANDS	APPBAR	status	RECT	0	-	SWT org.eclipse.swt.widgets.Tray	AWT java.awt.SystemTray
+reorder-drag	COLLECTION	REORDER	list	ROUND	0	First;Second;Third		
+split-button	COMMANDS	SPLIT	button	ROUND	1	0~Save;0~Save as;0~Export	Nebula org.eclipse.nebula.widgets.splitbutton.SplitButton	
+map	EMBED	MAP	application	RECT	0	18.52,73.85~12	Nebula org.eclipse.nebula.widgets.geomap.GeoMap	
+carousel-tiles	SEGMENTS	TILES	grid	ROUND	0	A;B;C;D;E;F	Nebula org.eclipse.nebula.widgets.tiles.Tiles	
+gallery	COLLECTION	GALLERY	grid	ROUND	0	img1;img2;img3;img4;img5;img6	Nebula org.eclipse.nebula.widgets.gallery.Gallery	
+treemap	PLOT	TREEMAP	img	RECT	0	40;25;20;15	Nebula org.eclipse.nebula.widgets.treemapper.TreeMapper	
+segmented-bar	SEGMENTS	SEGMENTED	radiogroup	ROUND	0	List;Board;Calendar	Nebula org.eclipse.nebula.widgets.segmentedbar.SegmentedBar	
+gantt	PLOT	GANTT	img	RECT	0	0~5;3~4;6~3	Nebula org.eclipse.nebula.widgets.ganttchart.GanttChart	
