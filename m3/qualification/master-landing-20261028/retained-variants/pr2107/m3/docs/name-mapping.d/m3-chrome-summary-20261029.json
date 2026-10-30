@@ -1,0 +1,299 @@
+{
+  "schema": 1,
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "2ab439480ecb0643615e85b42def954dbf3b5627",
+  "target_base": "4bd7f5b2b1414d1f607ceab28a498e3889020701",
+  "canonical_recipe": "com.synexia.m3jdk.ChromeSummary20261029",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029",
+  "canonical_commit_receipt": "m3/tooling/module-packs/chrome-llm/SOURCE_REF.json",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "receiving_sequence_advanced": false,
+  "runtime_dependency_on_synexia": false,
+  "module": "jdk.m3.llm",
+  "module_roots": [
+    "m3/tooling/module-packs/chrome-llm/src/main/java"
+  ],
+  "exported_packages": [
+    "jdk.m3.llm.chrome",
+    "jdk.m3.llm.summary",
+    "jdk.m3.llm.facets",
+    "jdk.m3.llm.document"
+  ],
+  "unexported_packages": [
+    "jdk.m3.llm.internal"
+  ],
+  "mapping_record_id": "synexia.chrome-summary.module",
+  "source_to_target": [
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/CheckpointRepository.java",
+      "git_blob_sha1": "aad4c5454946d2e31aa4fa82f744b34090ca7ab1",
+      "sha256": "cb80d52813ab810edc04f71a72c1673a7e87f59940c6790bbf116e368a3079d9",
+      "source_symbol": "com.synexia.cpullm.chrome.CheckpointRepository",
+      "target_symbol": "jdk.m3.llm.chrome.CheckpointRepository",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/ChromeProtocol.java",
+      "git_blob_sha1": "c2fe625a2a6db8aea93ee41b0c999a177104484f",
+      "sha256": "6d495e8120c174e5d0e61dd5528b83c4e0567d1a1ed4f865def16d36ceefd388",
+      "source_symbol": "com.synexia.cpullm.chrome.ChromeProtocol",
+      "target_symbol": "jdk.m3.llm.chrome.ChromeProtocol",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/ChromeSummarizerPort.java",
+      "git_blob_sha1": "813797a9d0fdd16247d2ba7d34814a8e130e9bd7",
+      "sha256": "b657806bad90df34a2c28a9979328502c9dd7d6c51ee1cf6c9c4a7d9e7ee4152",
+      "source_symbol": "com.synexia.cpullm.chrome.ChromeSummarizerPort",
+      "target_symbol": "jdk.m3.llm.chrome.ChromeSummarizerPort",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/DeterministicChromeSummarizerPort.java",
+      "git_blob_sha1": "e7eca5ebe370a07d18096c10dedb4041fc524057",
+      "sha256": "775c87831c9b1c3705a04979de4ddf011d63875ce6639d8ace34face56490539",
+      "source_symbol": "com.synexia.cpullm.chrome.DeterministicChromeSummarizerPort",
+      "target_symbol": "jdk.m3.llm.chrome.DeterministicChromeSummarizerPort",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/EntropyTrajectory.java",
+      "git_blob_sha1": "8dc95d3efb871563e0800bb9aa2232cde00e93ce",
+      "sha256": "b6cfaea9084ab3f6ff04846c67f4f7730740198acc670d745ab1852e4a744e41",
+      "source_symbol": "com.synexia.cpullm.chrome.EntropyTrajectory",
+      "target_symbol": "jdk.m3.llm.chrome.EntropyTrajectory",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/EvidencePattern.java",
+      "git_blob_sha1": "e94b7a3d5d188921f90c6ea51ebacdb8cc6d4c5c",
+      "sha256": "a19f3a55e2988a33540d5e8554aef7858e4d84551a1450b1d233c4d8287c19ac",
+      "source_symbol": "com.synexia.cpullm.chrome.EvidencePattern",
+      "target_symbol": "jdk.m3.llm.chrome.EvidencePattern",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/FileCheckpointRepository.java",
+      "git_blob_sha1": "d578d9338ae060f5241c9476d61ae52ed7c7fa6d",
+      "sha256": "731d50360b62b81d291a15ec1533d9d09f563116d1fcfb4b28b393992b4786f5",
+      "source_symbol": "com.synexia.cpullm.chrome.FileCheckpointRepository",
+      "target_symbol": "jdk.m3.llm.chrome.FileCheckpointRepository",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/Hashing.java",
+      "git_blob_sha1": "d7036f7a2e43b840f0947387c6c18f679ad35970",
+      "sha256": "8b30847dbf0cb24d95cdca5b4c39d0f5dd1d9e638b9870b3143a14fc770c39dc",
+      "source_symbol": "com.synexia.cpullm.chrome.Hashing",
+      "target_symbol": "jdk.m3.llm.chrome.Hashing",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/JavaChromeAiMechanicalPipeline.java",
+      "git_blob_sha1": "12c23ac3926a68fa689ec19e4b37237d7412c132",
+      "sha256": "a76528df6ed22eeb84b796a8bfc73711cb8e114e10b5c319e679bc843fbf4692",
+      "source_symbol": "com.synexia.cpullm.chrome.JavaChromeAiMechanicalPipeline",
+      "target_symbol": "jdk.m3.llm.chrome.JavaChromeAiMechanicalPipeline",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/MechanicalModel.java",
+      "git_blob_sha1": "d11f2ba0be17643fb38c321aeb7b9c82b5cbefa6",
+      "sha256": "8abb1a7ffb106383d6817329cd36483dbc6b545465d63d083d9aa4dcdaa01ecc",
+      "source_symbol": "com.synexia.cpullm.chrome.MechanicalModel",
+      "target_symbol": "jdk.m3.llm.chrome.MechanicalModel",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/MechanicalPatternCatalog.java",
+      "git_blob_sha1": "bb8f71a0332638d378e0e4edd14f89e15f6ecaad",
+      "sha256": "a82ab4ed25f77cf3e2bdc7021d69b7c1bc6ecf3e7cd0ec3d6af58fe94d55567d",
+      "source_symbol": "com.synexia.cpullm.chrome.MechanicalPatternCatalog",
+      "target_symbol": "jdk.m3.llm.chrome.MechanicalPatternCatalog",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/MechanicalSupersetConsolidator.java",
+      "git_blob_sha1": "82712e8bd4fcac8e3051520cbf537486b0235098",
+      "sha256": "b1ef3ce5edfec522d360315e40e2aaa82379d63aa88cf6712d00687a87a1c776",
+      "source_symbol": "com.synexia.cpullm.chrome.MechanicalSupersetConsolidator",
+      "target_symbol": "jdk.m3.llm.chrome.MechanicalSupersetConsolidator",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/OmissionRepair.java",
+      "git_blob_sha1": "c5c4bd1f838819c903c347672280198c3f324d22",
+      "sha256": "3ff44f6cdd3794fba629235aefa1f061a2e810f6e70560de2fdab6c2e31fefb2",
+      "source_symbol": "com.synexia.cpullm.chrome.OmissionRepair",
+      "target_symbol": "jdk.m3.llm.chrome.OmissionRepair",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/StructuredPromptPort.java",
+      "git_blob_sha1": "aafacb00bf31acb0e5236c57433f6c7f1cc6709a",
+      "sha256": "10c1a105e85dbd53c0d9952c704b6cecdc060d86b629f97ac7af16be771a93ef",
+      "source_symbol": "com.synexia.cpullm.chrome.StructuredPromptPort",
+      "target_symbol": "jdk.m3.llm.chrome.StructuredPromptPort",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/SummaryTreeExecutor.java",
+      "git_blob_sha1": "d44b90fe0c96e2c47a1920f727e362de01559e30",
+      "sha256": "bc50679d443f3f97fedccb66fb6f2980e3e915c7a1ba7bd679b723a30cf738bc",
+      "source_symbol": "com.synexia.cpullm.chrome.SummaryTreeExecutor",
+      "target_symbol": "jdk.m3.llm.chrome.SummaryTreeExecutor",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-opdag/java/chrome-ai-mechanical/src/main/java/com/synexia/cpullm/chrome/SummaryTreePlanner.java",
+      "git_blob_sha1": "414ec6a89b468ccdc02352432a6a521d4839d21b",
+      "sha256": "80a1269bfab8707e423936ea7b6aec01e01452bee2e0a8bc08a812969b78ddb5",
+      "source_symbol": "com.synexia.cpullm.chrome.SummaryTreePlanner",
+      "target_symbol": "jdk.m3.llm.chrome.SummaryTreePlanner",
+      "family": "chrome"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/app/Summary.java",
+      "git_blob_sha1": "725a4e5038a2336c3f40de6768939889b734939a",
+      "sha256": "56687f68c76d529112c6be91648cfe4ad6974ef6763977e5292bda4f27ab80eb",
+      "source_symbol": "com.synexia.cpullm.app.Summary",
+      "target_symbol": "jdk.m3.llm.summary.Summary",
+      "family": "summary"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/app/Data.java",
+      "git_blob_sha1": "a92aafbd083e16b86e07da78deb5d00de9e81996",
+      "sha256": "adcee648adca5dd67c808143e59dc718cce66cffabd4c49db3eab40258a92651",
+      "source_symbol": "com.synexia.cpullm.app.Data",
+      "target_symbol": "jdk.m3.llm.summary.Data",
+      "family": "summary"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/Json.java",
+      "git_blob_sha1": "0c7c20cd4f49a1f888d7b9b4079fddcbf97f91c6",
+      "sha256": "63aa217180ccff55522b174c3d038c9f9f155689024459ba4f17650c8ff0fa19",
+      "source_symbol": "com.synexia.cpullm.Json",
+      "target_symbol": "jdk.m3.llm.internal.Json",
+      "family": "internal"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/Py.java",
+      "git_blob_sha1": "801d39ef2fb57dc36339615719d81797a1dbddb3",
+      "sha256": "03894bc899cd09f23766d1a28dbb30b02e2fb3a7327ee4c86122b38107c4539e",
+      "source_symbol": "com.synexia.cpullm.Py",
+      "target_symbol": "jdk.m3.llm.internal.Py",
+      "family": "internal"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/StringOps.java",
+      "git_blob_sha1": "ed8440bc38043d54312236970e599a6ed7b25f3e",
+      "sha256": "c56e97bcd164334e0ae0c63272d0017b8b0b7572bd0a7681fb87884988fe874b",
+      "source_symbol": "com.synexia.cpullm.StringOps",
+      "target_symbol": "jdk.m3.llm.internal.StringOps",
+      "family": "internal"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetCorpus.java",
+      "git_blob_sha1": "1c4721e09065d2958204fa2f45f9a5aeaee5575c",
+      "sha256": "ca3a1d5030d122bf3fc7e56f4eea1131d0df99bd554afc34d0f35af858626d21",
+      "source_symbol": "com.synexia.cpullm.facets.FacetCorpus",
+      "target_symbol": "jdk.m3.llm.facets.FacetCorpus",
+      "family": "facets"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetNode.java",
+      "git_blob_sha1": "5cdb5d42ef4b59c6380821bfc0b281affa58e1f6",
+      "sha256": "4a0756dff77b5fd341f682412eb9376560a302f1c3ff60c61591903057deda10",
+      "source_symbol": "com.synexia.cpullm.facets.FacetNode",
+      "target_symbol": "jdk.m3.llm.facets.FacetNode",
+      "family": "facets"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetProjection.java",
+      "git_blob_sha1": "d76d9ee8818e76cb9a4b6f512e781bf8db33a5ff",
+      "sha256": "16baf9ad0d6d6baef2b9dc505810170d2ccf90d609ccec50403b754cecc517d4",
+      "source_symbol": "com.synexia.cpullm.facets.FacetProjection",
+      "target_symbol": "jdk.m3.llm.facets.FacetProjection",
+      "family": "facets"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetKernels.java",
+      "git_blob_sha1": "971045665295d25c84b2fcb7b371c56d58fa432a",
+      "sha256": "64fe257f8197e887a4bb62bfff0e8f5aaf3bc1e30244269a8bffb8930391f33d",
+      "source_symbol": "com.synexia.cpullm.facets.FacetKernels",
+      "target_symbol": "jdk.m3.llm.facets.FacetKernels",
+      "family": "facets"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/LegacySummaryFacets.java",
+      "git_blob_sha1": "74a2e48a3e5ee4ef054177223065feda598462f1",
+      "sha256": "3a80f98dbc01dc176a44b1311e9c6ecfcef50268a9a73cb2889df86489169802",
+      "source_symbol": "com.synexia.cpullm.facets.LegacySummaryFacets",
+      "target_symbol": "jdk.m3.llm.facets.LegacySummaryFacets",
+      "family": "facets"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetExactCoverage.java",
+      "git_blob_sha1": "0c4dc1e8d15e51e2debe47418b28d4769a1bccbd",
+      "sha256": "3dd7cdbd98f207ee3949b7dec60587dac1f3ad96034d2875309f28e23b42871b",
+      "source_symbol": "com.synexia.cpullm.facets.FacetExactCoverage",
+      "target_symbol": "jdk.m3.llm.facets.FacetExactCoverage",
+      "family": "facets"
+    },
+    {
+      "source_path": "cpullm-java/src/main/java/com/synexia/cpullm/facets/FacetSnapshot.java",
+      "git_blob_sha1": "39dfd31dbedf9352a60b76ff8cd3ac1976bee0b1",
+      "sha256": "32eb674dd9d0e6abd2a064b312416a0c82c5915bd3b296695a576bd829d63ba5",
+      "source_symbol": "com.synexia.cpullm.facets.FacetSnapshot",
+      "target_symbol": "jdk.m3.llm.facets.FacetSnapshot",
+      "family": "facets"
+    },
+    {
+      "source_path": "synexia-flldcim/tools/m3-text-pipeline/src/main/java/com/synexia/flldcim/tools/Desm.java",
+      "git_blob_sha1": "ddec00f5209451e7fd3669938e4855f43da56d47",
+      "sha256": "5f2b222b5083ecfb580281ff48552a328b3a2ec295fb3793599320de53f2cd8a",
+      "source_symbol": "com.synexia.flldcim.tools.Desm",
+      "target_symbol": "jdk.m3.llm.document.Desm",
+      "family": "document"
+    },
+    {
+      "source_path": "synexia-flldcim/tools/m3-text-pipeline/src/main/java/com/synexia/flldcim/tools/Lexical.java",
+      "git_blob_sha1": "cf2fc4834eb95f021eb3cae3af089a2fef8e0889",
+      "sha256": "3ee1fcd81511ea4ea2a928d7ada6a556ffc5ba487e7bd9909d1546e8ed8891e1",
+      "source_symbol": "com.synexia.flldcim.tools.Lexical",
+      "target_symbol": "jdk.m3.llm.document.Lexical",
+      "family": "document"
+    },
+    {
+      "source_path": "synexia-flldcim/tools/m3-text-pipeline/src/main/java/com/synexia/flldcim/tools/TreeNode.java",
+      "git_blob_sha1": "72e8cbc50303673dcc15c38c7bc92471c384f00c",
+      "sha256": "b3260d1987d791f6f45017bff258ed1a66c782394daeaa203771f9275d3c4c13",
+      "source_symbol": "com.synexia.flldcim.tools.TreeNode",
+      "target_symbol": "jdk.m3.llm.document.TreeNode",
+      "family": "document"
+    },
+    {
+      "source_path": "synexia-flldcim/tools/m3-text-pipeline/src/main/java/com/synexia/flldcim/tools/Hashes.java",
+      "git_blob_sha1": "2b947fb7c094767d4ba4346b38b6bf28ed268d92",
+      "sha256": "832f66c310bbd34a5403aaeb9690972cc858b4b35e9d1d98eb4a2dc0fe0a34e3",
+      "source_symbol": "com.synexia.flldcim.tools.Hashes",
+      "target_symbol": "jdk.m3.llm.document.Hashes",
+      "family": "document"
+    }
+  ],
+  "browser_assets": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser",
+  "verification_receipt": "m3/tooling/module-packs/chrome-llm/RECEIVER_RECEIPT.json",
+  "acceptance": "Candidate receiving mapping; target qualification, real Chrome inference and full product admission remain separately reported.",
+  "new_product_apis": [
+    {
+      "symbol": "jdk.m3.llm.summary.Summaries",
+      "source_authority": "com.synexia.m3jdk.ChromeSummary20261029",
+      "role": "Target-owned public SDK composition; no new source authority or Synexia runtime dependency"
+    },
+    {
+      "symbol": "jdk.m3.llm.chrome.ChromeBrowserPort",
+      "source_authority": "com.synexia.m3jdk.ChromeSummary20261029",
+      "role": "Target-owned public SDK composition; no new source authority or Synexia runtime dependency"
+    }
+  ]
+}

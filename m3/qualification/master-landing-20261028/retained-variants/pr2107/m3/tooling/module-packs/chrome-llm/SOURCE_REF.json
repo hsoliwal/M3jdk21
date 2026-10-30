@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "2ab439480ecb0643615e85b42def954dbf3b5627",
+  "historical_browser_revision": "c26433b5856192807616c9fb09741de0b1bdd93c",
+  "recipe_id": "com.synexia.m3jdk.ChromeSummary20261029",
+  "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029",
+  "dataset": "current",
+  "manifest_crate_name": "m3-chrome-summary-20261029-current",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_preimage_revision": "4bd7f5b2b1414d1f607ceab28a498e3889020701",
+  "recipe_revision": "b30eb72a8165f81a17c9d22e3711370d00d0f9aa",
+  "recipe_revision_status": "PUBLISHED_IN_SOURCE_DRAFT",
+  "recipe_execution_receipt": {
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/SDK_RESULTS.tsv",
+    "sha256": "421d2564576fcff4841c35b7f0b96fc85f9e225b0021c1bda77a871303b63a9c",
+    "files": 63,
+    "inputs_path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/SDK_INPUTS.tsv",
+    "inputs_sha256": "703ae259a33094f14583760e39e1b6688faa7a10a63e2082920d14637fa33f0b"
+  },
+  "target_qualification_receipt": "RECEIVER_RECEIPT.json",
+  "status": "SOURCE_RECIPE_PUBLISHED_TARGET_DRAFT_PENDING",
+  "full_product_acceptance": false,
+  "live_chrome_inference": "NOT_RUN",
+  "source_pull_request": "https://github.com/hsoliwal/com.synexia/pull/13968",
+  "source_merged_into_develop": false,
+  "target_publication_base": "669a949d192345acefcfc5e9bb0b3724174d270c"
+}
