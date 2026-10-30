@@ -75,8 +75,9 @@ public final class M3LongRangeSet {
     public void add(long fromInclusive, long toExclusive) {
         valid(fromInclusive, toExclusive);
         if (fromInclusive == toExclusive) return;
-        int first = 0;
-        while (first < size && ends[first] < fromInclusive) first++;
+        // Ends are sorted; lowerBound (not upperBound) retains touching-range merges.
+        int first = size == 0 || ends[0] >= fromInclusive
+                ? 0 : M3LaneSearch.lowerBound(ends, 1, size, fromInclusive);
         int last = first;
         long start = fromInclusive;
         long end = toExclusive;
