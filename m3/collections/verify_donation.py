@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Modified 2026 by Hitesh Soliwal and contributors: qualify concurrent EnumSet in a new exact inventory; preserve all acceptance guards and historical receipts.
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
+# Modified 2026 by Hitesh Soliwal and contributors: restore the Tools4j predecessor selector and seal the superset source set as an exact additive successor after the Tools4j refinement; historical receipts stay unchanged.
 """Verify the installed M3 collection donation with target-native Java/JNI checks.
 
 This host verifies product source. The canonical transformation and SDK replay remain
@@ -226,6 +227,65 @@ def include_tools4j_refinement_successor(previous_rows, receipt=_TOOLS4J_RECEIPT
     return result
 
 
+# Exact successor sealing the superset source set after the Tools4j refinement.
+_SUPERSET_RECEIPT = HERE / 'qualification/superset-source-successor-20261030.tsv'
+_SUPERSET_RECEIPT_SHA256 = '086b8000624fba0c38779a230dfd7fa41d79d3195a3d0bda67466cceb45bd116'
+_SUPERSET_PREDECESSOR_SHA256 = '6283ee8df10e7d2e4b2a0d47635ef57775fb476c1cae9545cfe1692fa59c176e'
+_SUPERSET_TRANSITIONS = 428
+_SUPERSET_RESULT_ROWS = 772
+_SUPERSET_RESULT_JAVA = 765
+
+
+def include_superset_source_successor(previous_rows, receipt=_SUPERSET_RECEIPT):
+    """Admit only the sealed (path, inherited, after) transitions over the Tools4j result.
+
+    The predecessor is the exact Tools4j result. ABSENT admits a new Java source under
+    the receiving roots; otherwise the inherited digest must match before the final
+    digest replaces it. Historical receipts remain unchanged.
+    """
+    prior = list(previous_rows)
+    predecessor = ''.join(path + '\t' + expected + '\n' for path, expected in prior)
+    if hashlib.sha256(predecessor.encode('utf-8')).hexdigest() != _SUPERSET_PREDECESSOR_SHA256:
+        raise SystemExit('Superset predecessor receipt chain drift')
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _SUPERSET_RECEIPT_SHA256:
+        raise SystemExit('Superset successor receipt missing, aliased or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != _SUPERSET_TRANSITIONS:
+        raise SystemExit('Superset successor must declare exactly ' + str(_SUPERSET_TRANSITIONS) + ' source transitions')
+    current = dict(prior)
+    extra = []
+    seen = set()
+    for cells in entries:
+        if len(cells) != 3:
+            raise SystemExit('Superset malformed source transition')
+        path, inherited, after = cells
+        relative = Path(path)
+        java_source = path.endswith('.java') and path.startswith((
+            'm3/collections/src/main/java/', 'm3/collections/src/test/java/'))
+        if (relative.is_absolute() or '..' in relative.parts or chr(92) in path or path in seen
+                or not (java_source or path in current)):
+            raise SystemExit('Superset duplicate or out-of-scope source: ' + path)
+        seen.add(path)
+        hashes = (after,) if inherited == 'ABSENT' else (inherited, after)
+        if any(len(value) != 64 or any(c not in '0123456789abcdef' for c in value) for value in hashes):
+            raise SystemExit('Superset invalid source hash: ' + path)
+        if inherited == after:
+            raise SystemExit('Superset unchanged source is not a transition: ' + path)
+        if inherited == 'ABSENT':
+            if path in current:
+                raise SystemExit('Superset occupied source admission: ' + path)
+            extra.append((path, after))
+        else:
+            if current.get(path) != inherited:
+                raise SystemExit('Superset inherited source preimage drift: ' + path)
+            current[path] = after
+    result = [(path, current[path]) for path, _ in prior] + extra
+    source_java = {path for path, _ in result if path.endswith('.java') and '/src/' in path}
+    if len(result) != _SUPERSET_RESULT_ROWS or len(source_java) != _SUPERSET_RESULT_JAVA:
+        raise SystemExit('Superset exact current source membership drift')
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -271,6 +331,7 @@ def main():
     rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
     rows = include_object_state_offset_successor(rows)
     rows = include_tools4j_refinement_successor(rows)
+    rows = include_superset_source_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
