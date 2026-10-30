@@ -1,0 +1,13 @@
+path	git_blob_sha1	disposition	canonical_synexia_owner	license
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDB.java	61e913815a3dc8d94280a765cc050f2e75c9c040	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbArtifact.java	7b152b2ed51a559c40b466cc7183e94c3b06a342	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java	da78ddcd3dbce6777a7434b7917434c4a2074cf6	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticEdge.java	81b2c71d69b99a081629b1c39db38664af1476e6	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticFingerprint.java	df44495f5e5b48ea1bf4a863df9ca188bd787948	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.mindex.db.M3IndexDbFingerprintV1	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticIndex.java	a7245a61c9ccf353be202790f8058f84a0016205	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticKind.java	d024ecc2a6c39ae8e232a02493995f505c9a82e3	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticNode.java	1c995542cd6d1a9c09126e9cadb4b2d6b2f11a7b	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/M3SemanticHasher.java	a87d5008085297628ed0e3cd18f0ace283641945	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.rewrite.semantic.M3SemanticHashRecipe	Apache-2.0
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/M3SemanticHashRecipe.java	daa47582dc3d2d80f25727df5d1cc9be417de6cb	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.rewrite.semantic.M3SemanticHashRecipe	Apache-2.0
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/M3SemanticHashTable.java	3c9c41e2827cf3ff0cbc4656c6bf3d21b0fce0f4	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.rewrite.semantic.M3SemanticHashRecipe	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3BuildState.java	fb0301af447739c362dc83fa4f5556d44f638e06	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
