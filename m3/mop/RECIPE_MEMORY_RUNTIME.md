@@ -88,16 +88,6 @@ The local self-test deliberately fabricates fixture receipts to test
 validation and refusal logic. Such synthetic receipts are **not
 production qualification evidence**.
 
-## Candidate rows from the MOP refactor gate
-
-The [MOP pillars](MOP_PILLARS.md) refactor gate records every refusal through the same writer,
-`M3RecipeMemory.appendCandidate` (package-private): the eight-column schema, intra-process and
-`FileChannel` locks, atomic rename and byte-prefix proof are shared with `append`, but the ledger
-file name must end in `_CANDIDATES.tsv` (default `RECIPE_MEMORY_CANDIDATES.tsv` in the run output),
-so a refusal can never enter the proven `RECIPE_MEMORY.tsv`. The correction marker is
-`REFUSED@<path>#<after-sha256>`; a rerun over the same refusal appends nothing. `verify.sh` now
-also runs the MOP pillar contracts, the javac Plugin dogfood and the mutation discriminators.
-
 ## Executed local qualification and remaining gates
 
 This candidate was compiled on Java 21.0.12.1 with all lint warnings

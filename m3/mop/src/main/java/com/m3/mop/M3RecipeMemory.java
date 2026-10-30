@@ -38,7 +38,6 @@ public final class M3RecipeMemory {
     public static final String HEADER =
             "utc\trecipe\ttrigger\tobserved\tcorrection\tcorrected_by\tguard\tlesson\n";
     private static final long MAX_BYTES = 4L << 20;
-    private static final String CANDIDATES = "_CANDIDATES.tsv";
     private static final Pattern RECIPE =
             Pattern.compile("[A-Za-z_$][\\w$]*(?:\\.[A-Za-z_$][\\w$]*)+");
     private static final Pattern HASH = Pattern.compile("[0-9a-f]{64}");
@@ -169,28 +168,15 @@ public final class M3RecipeMemory {
         if (!proof.equals(header + "compile\tPASS\ntest\tPASS\nfixed_point\tPASS\n")) {
             throw new IOException("recipe correction proof absent, stale or incomplete");
         }
-        install(ledger, improvement, false);
-    }
-
-    /**
-     * Append one unqualified candidate (a gate refusal) to a separate {@code *_CANDIDATES.tsv}
-     * ledger, never to the proven memory. Same schema, locks, atomic rename and byte-prefix proof
-     * as {@link #append}; an existing (recipe, correction) row is kept and nothing is written, so
-     * a rerun over the same refusal is a fixed point. Returns whether a row was appended.
-     */
-    //FLLDCIM: MOP — refusals are candidate memory, not proven improvements
-    static synchronized boolean appendCandidate(Path root, String ledgerRelative, Entry candidate)
-            throws IOException {
-        Objects.requireNonNull(candidate, "candidate");
-        Path ledger = destination(root, ledgerRelative);
-        if (!ledger.getFileName().toString().endsWith(CANDIDATES)) {
-            throw new IOException("candidate rows require a separate *" + CANDIDATES + " ledger");
+        // Admission must agree with read() before any filesystem publication.
+        if (improvement.utc().isBefore(Instant.EPOCH)) {
+            throw new IOException("correction timestamp predates recipe memory epoch");
         }
-        return install(ledger, candidate, true);
-    }
-
-    private static boolean install(Path ledger, Entry row, boolean keepDuplicate) throws IOException {
-        byte[] appended = encode(row);
+        // Record the exact lesson; never replace malformed UTF-16 with '?'.
+        ByteBuffer encoded = StandardCharsets.UTF_8.newEncoder()
+                .encode(CharBuffer.wrap(improvement.line()));
+        byte[] appended = new byte[encoded.remaining()];
+        encoded.get(appended);
         Files.createDirectories(ledger.getParent());
         Path lockPath = ledger.resolveSibling(ledger.getFileName() + ".lock");
         try (FileChannel lockChannel = FileChannel.open(lockPath,
@@ -198,60 +184,35 @@ public final class M3RecipeMemory {
              FileLock lock = lockChannel.lock()) {
             if (!lock.isValid()) throw new IOException("invalid recipe memory lock");
             byte[] before = Files.exists(ledger) ? Files.readAllBytes(ledger) : HEADER.getBytes(StandardCharsets.UTF_8);
-            if (!admissible(ledger, row, before.length + (long) appended.length, keepDuplicate)) return false;
-            publish(ledger, before, appended);
-            return true;
-        }
-    }
-
-    /** Record the exact lesson; never replace malformed UTF-16 with '?'. */
-    private static byte[] encode(Entry row) throws IOException {
-        // Admission must agree with read() before any filesystem publication.
-        if (row.utc().isBefore(Instant.EPOCH)) {
-            throw new IOException("correction timestamp predates recipe memory epoch");
-        }
-        ByteBuffer encoded = StandardCharsets.UTF_8.newEncoder().encode(CharBuffer.wrap(row.line()));
-        byte[] appended = new byte[encoded.remaining()];
-        encoded.get(appended);
-        return appended;
-    }
-
-    private static boolean admissible(Path ledger, Entry row, long bytes, boolean keepDuplicate)
-            throws IOException {
-        List<Entry> previous = Files.exists(ledger) ? read(ledger) : List.of();
-        if (!previous.isEmpty() && row.utc().isBefore(previous.getLast().utc())) {
-            throw new IOException("correction timestamp predates prior memory");
-        }
-        if (previous.stream().anyMatch(old -> old.recipe().equals(row.recipe())
-                && old.correction().equals(row.correction()))) {
-            if (keepDuplicate) return false;
-            throw new IOException("duplicate proven recipe correction");
-        }
-        if (bytes > MAX_BYTES) throw new IOException("recipe memory byte budget exceeded");
-        return true;
-    }
-
-    private static void publish(Path ledger, byte[] before, byte[] appended) throws IOException {
-        Path temp = Files.createTempFile(ledger.getParent(), ".m3-memory-", ".tsv");
-        boolean installed = false;
-        try {
-            write(temp, before, appended);
-            Files.move(temp, ledger, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
-            installed = true;
-        } finally {
-            if (!installed) Files.deleteIfExists(temp);
-        }
-        verifyAppendOnly(before, Files.readAllBytes(ledger));
-        read(ledger);
-    }
-
-    private static void write(Path temp, byte[] before, byte[] appended) throws IOException {
-        try (FileChannel output = FileChannel.open(temp, StandardOpenOption.WRITE)) {
-            ByteBuffer prefix = ByteBuffer.wrap(before);
-            ByteBuffer row = ByteBuffer.wrap(appended);
-            while (prefix.hasRemaining()) output.write(prefix);
-            while (row.hasRemaining()) output.write(row);
-            output.force(true);
+            List<Entry> previous = Files.exists(ledger) ? read(ledger) : List.of();
+            if (!previous.isEmpty() && improvement.utc().isBefore(previous.getLast().utc())) {
+                throw new IOException("correction timestamp predates prior memory");
+            }
+            if (previous.stream().anyMatch(row -> row.recipe().equals(improvement.recipe())
+                    && row.correction().equals(improvement.correction()))) {
+                throw new IOException("duplicate proven recipe correction");
+            }
+            if (before.length + (long) appended.length > MAX_BYTES) {
+                throw new IOException("recipe memory byte budget exceeded");
+            }
+            Path temp = Files.createTempFile(ledger.getParent(), ".m3-memory-", ".tsv");
+            boolean installed = false;
+            try {
+                try (FileChannel output = FileChannel.open(temp, StandardOpenOption.WRITE)) {
+                    ByteBuffer prefix = ByteBuffer.wrap(before);
+                    ByteBuffer row = ByteBuffer.wrap(appended);
+                    while (prefix.hasRemaining()) output.write(prefix);
+                    while (row.hasRemaining()) output.write(row);
+                    output.force(true);
+                }
+                Files.move(temp, ledger, StandardCopyOption.ATOMIC_MOVE,
+                        StandardCopyOption.REPLACE_EXISTING);
+                installed = true;
+            } finally {
+                if (!installed) Files.deleteIfExists(temp);
+            }
+            verifyAppendOnly(before, Files.readAllBytes(ledger));
+            read(ledger);
         }
     }
 

@@ -1,1 +1,0 @@
-{"schema":"M3-MOP-RECEIPT/1","goal":"cli","stage":"atomize","status":"PASS","files":13,"atoms":326,"KNOWN_PATTERN":2,"UNPROVEN_LEAF":105,"UNKNOWN_PATTERN":219,"METHOD_15":4,"LOOP":6,"CONST_HOIST":24,"registered":106,"manifestSha256":"b27373b2d7abb089abcfd1ce28ac8d6473e5416964d96bdecef631ad9e889dc5"}
