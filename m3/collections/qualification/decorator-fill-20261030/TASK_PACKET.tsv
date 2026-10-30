@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+# M3-SCALE section 4 task packet for this run.
+key	value
+task_packet	active
+source_doc	m3/collections/qualification/decorator-fill-20261030/README.md
+invariant_id	DECORATOR_FILL-v1.1
+run.mode	apply
+run.profile	full
+run.workers	1
+shard_count	1
+shard_index	0
+targets.modules	m3/collections/implementations/apache-* decorator scaffolds (57); written only when no MANUAL atom
+invariant_locks	PUBLIC_API: LOCKED (scaffold surface unchanged); DISABLED_PATHS: FORBIDDEN; EXCLUDED_PATHS: FORBIDDEN; BUILD_SCRIPTS: LOCKED (module pom.xml untouched)
+allowed_delta	scaffold bodies -> owned bodies; module README.md regenerated; ledgers in this directory
+forbidden	copying provider bodies; editing classes with MANUAL atoms; pom/build changes
+verify_order	diff -> javac -Xlint:all -Werror -> compile -> M3DecoratorDifferential -> runtime not requested
+output_contract	STATUS.tsv RUN_CONTEXT.tsv PROVENANCE.tsv VERIFY_CONTRACT.tsv OUTPUT_CONTRACT.tsv FINAL_REPORT.md
+stop_conditions	any generator exit other than 0 or 3; any javac warning; any differential mismatch
