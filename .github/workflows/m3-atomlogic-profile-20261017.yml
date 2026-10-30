@@ -14,6 +14,10 @@ on:
       - 'm3/pom.xml'
       - 'm3/tooling/atom-logic-receiver/**'
       - '.github/workflows/m3-atomlogic-profile-20261017.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   profile-custody:
     runs-on: ubuntu-24.04

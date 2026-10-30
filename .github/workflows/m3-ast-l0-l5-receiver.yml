@@ -7,6 +7,10 @@ on:
       - 'm3/ports/compiletime/qualification/ast-leaf-l0-l5-20261017/**'
       - '.github/workflows/m3-ast-l0-l5-receiver.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   selected-java21:
     runs-on: ubuntu-latest

@@ -63,6 +63,7 @@ runs:
         path: bundles
       if: steps.download-bundles.outcome == 'failure'
 
+
     - name: 'Unpack bundles'
       run: |
         if [[ -e bundles/jdk-${{ inputs.platform }}${{ inputs.debug-suffix }}.zip ]]; then

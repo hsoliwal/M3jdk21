@@ -9,6 +9,10 @@ on:
       - 'm3/collections/algorithm-catalog/strict-filtered-sequenced-20261018.tsv'
       - '.github/workflows/m3jdk-strict-filtered-sequenced-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   jdk21-contract:
     runs-on: ubuntu-latest

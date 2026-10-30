@@ -7,6 +7,10 @@ on:
       - 'm3/collections/qualification/filtered-list-history-restore-20261017/**'
       - '.github/workflows/m3-filtered-list-history-restore.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict-java-jni:
     runs-on: ubuntu-latest

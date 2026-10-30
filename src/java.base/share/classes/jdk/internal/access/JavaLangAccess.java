@@ -237,11 +237,6 @@ public interface JavaLangAccess {
     Package definePackage(ClassLoader cl, String name, Module module);
 
     /**
-     * Invokes Long.fastUUID
-     */
-    String fastUUID(long lsb, long msb);
-
-    /**
      * Record the non-exported packages of the modules in the given layer
      */
     void addNonExportedPackages(ModuleLayer layer);
@@ -700,4 +695,10 @@ public interface JavaLangAccess {
      * explicitly set otherwise <qualified-class-name> @<id>
      */
     String getLoaderNameID(ClassLoader loader);
+
+    /**
+     * Is a security manager already set or allowed to be set
+     * (using -Djava.security.manager=allow)?
+     */
+    boolean allowSecurityManager();
 }

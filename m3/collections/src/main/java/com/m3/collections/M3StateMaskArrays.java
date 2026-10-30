@@ -74,7 +74,14 @@ public final class M3StateMaskArrays {
         // Return the existing exclusive end without touching any array cell.
         if (requiredBits == 0 && forbiddenBits == 0) return to;
         int write = from;
-        for (int read = from; read < to; read++) {
+        // Do not rewrite prefix entries already occupying their final positions.
+        while (write < to && accepts(stateBits[write] & 0xff,
+                requiredBits, forbiddenBits)) {
+            write++;
+        }
+        if (write == to) return to;
+        // The first rejected pair creates a hole; subsequent survivors move left.
+        for (int read = write + 1; read < to; read++) {
             int state = stateBits[read] & 0xff;
             if (accepts(state, requiredBits, forbiddenBits)) {
                 rowSlots[write] = rowSlots[read];

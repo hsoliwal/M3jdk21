@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2022, 2023, Oracle and/or its affiliates. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 # Modifications Copyright (c) 2026 Hitesh Soliwal and contributors.
 # Modified 2026: update CI action runtimes and MSYS2 installation selection.
@@ -106,6 +106,6 @@ runs:
     - name: 'Export path to where BootJDK is installed'
       id: path-name
       run: |
-        # Export the path
-        echo 'path=bootjdk/jdk' >> $GITHUB_OUTPUT
+        # Export the absolute path
+        echo "path=`pwd`/bootjdk/jdk" >> $GITHUB_OUTPUT
       shell: bash

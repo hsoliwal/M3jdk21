@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-29",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "kind": "bounded_product_validation_snapshot",
+  "status": "HOLD",
+  "release_ready": false,
+  "source": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+    "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b",
+    "module_input_count": 796,
+    "module_input_drift": 0,
+    "module_input_manifest_sha256": "ddcae088deb330c8aec22a859bcd64c6e5806dfb2762bf4ee6ac201896a324ea"
+  },
+  "scope": [
+    "m3/arrays native Maven install and CTest",
+    "m3/collections default Maven test",
+    "Only the 24 failed collections classes rerun with existing array JNI"
+  ],
+  "limitations": [
+    "Not full-JDK release validation; no release admission gate is satisfied by this snapshot alone.",
+    "The exact pinned module inputs were unchanged during execution. Full working-tree cleanliness was not certified.",
+    "Focused rerun counts are not a replacement full-suite result.",
+    "No universal efficiency or performance claim is established."
+  ],
+  "runs": [
+    {
+      "id": "arrays-native-install",
+      "result": "PASS",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "native_required": true,
+      "jni_check": true,
+      "ctest": {
+        "tests": 1,
+        "failures": 0,
+        "differential_cases": 187008
+      }
+    },
+    {
+      "id": "collections-java-test",
+      "result": "FAIL",
+      "tests": 691,
+      "failures": 7,
+      "errors": 48,
+      "skipped": 2,
+      "error_classification": "All 48 errors were missing M3 array JNI library loading configuration."
+    },
+    {
+      "id": "collections-failed-classes-with-array-jni",
+      "result": "FAIL",
+      "selected_classes": 24,
+      "tests": 101,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 0,
+      "jni_check": true,
+      "configuration": "m3.arrays.native.path points to the existing arrays native build.",
+      "scope": "Only classes that failed the initial run; no source or oracle edits."
+    }
+  ],
+  "failure_catalogue": "collections-failures.tsv",
+  "failure_groups": [
+    {
+      "ids": [
+        "COLLECTIONS-01",
+        "COLLECTIONS-02",
+        "COLLECTIONS-03",
+        "COLLECTIONS-04",
+        "COLLECTIONS-05",
+        "COLLECTIONS-06"
+      ],
+      "status": "HOLD",
+      "owner_paths": [
+        "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+        "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java"
+      ],
+      "decision_needed": "Reconcile observed behavior and callback/trace contracts against canonical recipe history. Current failure messages do not by themselves establish the correct resolution."
+    },
+    {
+      "ids": [
+        "COLLECTIONS-07",
+        "COLLECTIONS-08"
+      ],
+      "status": "HOLD",
+      "owner_paths": [
+        "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+        "m3/collections/src/test/java/com/m3/collections/M3EntryFacadeCacheTest.java"
+      ],
+      "decision_needed": "Two tests demand cached entry identity; the current owner and passing EntryFacadeCache tests require fresh caller-owned projections. Do not restore caching or weaken tests without contract adjudication."
+    }
+  ],
+  "history_leads": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "pull_request": 2033,
+      "merge_commit": "b84c3da5b55313887fdb792f4a883a75d2ae55a2",
+      "subject": "Adapt filtered predicate plan to current master without losing newer collection atoms",
+      "status": "inspection lead only; not selected resolution"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "pull_request": 1869,
+      "merge_commit": "3145d002770f80286470b51b9f47930ce647f2cd",
+      "subject": "Comparator-safe filtered navigation and Java21 source-sealed test compile",
+      "status": "inspection lead only; not selected resolution"
+    }
+  ],
+  "canonical_evidence": {
+    "repository": "hsoliwal/com.synexia",
+    "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/index.json",
+    "sha256": "a07092aa4493e86a4114a3de3868c77ce9529b9a188f9bf24c20b7979d7efc49",
+    "role": "Logs, exact commands, failure traces and module input hashes belong to canonical task evidence; this product snapshot is data only."
+  },
+  "next_action": "Reconcile the listed contracts through a source-pinned canonical Maven/OpenRewrite recipe; rerun affected product gates and required release gates on the resulting revision. Keep release HOLD."
+}

@@ -270,7 +270,15 @@ public final class M3IntIntHashMap {
         modCount++;
         // Count only keys actually retained in the primitive probe lane.
         if (size - (hasZero ? 1 : 0) > threshold) {
-            rehash(keys.length << 1);
+            try {
+                rehash(keys.length << 1);
+            } catch (OutOfMemoryError | IllegalStateException failure) {
+                keys[pos] = 0;
+                values[pos] = 0;
+                size--;
+                modCount--;
+                throw failure;
+            }
         }
     }
 
@@ -314,21 +322,24 @@ public final class M3IntIntHashMap {
         }
         int[] oldKeys = keys;
         int[] oldValues = values;
-        keys = new int[newCapacity];
-        values = new int[newCapacity];
-        mask = newCapacity - 1;
-        threshold = thresholdFor(newCapacity);
+        int[] nextKeys = new int[newCapacity];
+        int[] nextValues = new int[newCapacity];
+        int nextMask = newCapacity - 1;
         for (int i = 0; i < oldKeys.length; i++) {
             int key = oldKeys[i];
             if (key != 0) {
-                int pos = mix(key) & mask;
-                while (keys[pos] != 0) {
-                    pos = (pos + 1) & mask;
+                int pos = mix(key) & nextMask;
+                while (nextKeys[pos] != 0) {
+                    pos = (pos + 1) & nextMask;
                 }
-                keys[pos] = key;
-                values[pos] = oldValues[i];
+                nextKeys[pos] = key;
+                nextValues[pos] = oldValues[i];
             }
         }
+        keys = nextKeys;
+        values = nextValues;
+        mask = nextMask;
+        threshold = thresholdFor(newCapacity);
     }
 
     private static int capacityFor(int expectedSize) {

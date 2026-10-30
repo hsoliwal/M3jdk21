@@ -7,6 +7,10 @@ on:
       - 'm3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/**'
       - '.github/workflows/m3-readonly-filtered-map-defaults-receiver-20261017.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-and-contract:
     runs-on: ubuntu-latest

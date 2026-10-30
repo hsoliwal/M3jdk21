@@ -8,6 +8,10 @@ on:
       - '.github/workflows/m3-cpu-byte-window-20261018.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   window-differential:
     runs-on: ubuntu-latest

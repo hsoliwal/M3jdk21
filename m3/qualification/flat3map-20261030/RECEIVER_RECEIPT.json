@@ -1,0 +1,122 @@
+{
+  "schema": "M3_COLLECTION_RESULT_RECEIPT_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "source_input_anchor": "106576afaaa23cc4a2e3a0ce770cd0d61b6fdabd",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_input_anchor": "5860598b515885ebc2275f6552d9a5a1348fdb15",
+  "source_recipe_identity": "com.synexia.rewrite.M3Flat3MapReceiveRecipe",
+  "source_dataset": "m3jdk21-flat3map-20261029",
+  "receipt_recipe_identity": "com.synexia.m3.Flat3MapReceipt20261030",
+  "execution_lane": "MAVEN_OPENREWRITE_SDK",
+  "source_qualification": {
+    "path": "synexia-openrewrite-recipes/crates/m3jdk21-flat3map-20261029/qualification/current-20261030/RESULTS.json",
+    "sha256": "d946679327281662a72cd140ab069e1febc6374b62cb2f23650fa1860f2ac033",
+    "git_blob": "ab87a243b54082bf87d0633308d4b8aaf3fcd8be"
+  },
+  "receiving_status": "DRAFT_UNMERGED",
+  "release_ready": false,
+  "outputs": [
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3Flat3MapProviderTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "508f91d8852c460c27cd4b81004496c58af08f5bab14432228fff2ebe33970ba",
+      "kind": "GENERATED_TEST"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Flat3Map.java",
+      "before_sha256": "27fb9ad7a874ada69c199d5f4f13044f9798091412a5bf2f414bdc5b8689d6ba",
+      "after_sha256": "28fb1d0ac39c3e1836750694c729349d01dd4477d4d3d711c82242055263710e",
+      "kind": "GENERATED_SOURCE"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3Flat3MapContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "7378bc357e20e8e3b5fb53167248ddc9748c9c004d2eaa50c376ac36bb15e2a4",
+      "kind": "GENERATED_TEST"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3Flat3MapTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "04f7b82e6a18c9870d87ab3370e5f2bd77d7191d36ff882d2b2ce9c79e12394a",
+      "kind": "GENERATED_TEST"
+    }
+  ],
+  "qualification": {
+    "source_sdk_tests_passed": 8,
+    "target_junit_tests_passed": 5,
+    "target_junit_count_basis": "One core contract method plus four unique provider methods; repeat runs are not additional unique tests.",
+    "public_protected_JVM_descriptors": "EXACT_EQUAL",
+    "strict_core_and_candidate_compilation": "PASS: --release 21 -proc:none -Xlint:all -Werror",
+    "source_fixed_point": "PASS",
+    "source_drift_and_collision_refusal": "PASS",
+    "original_oracle_assertions_per_execution": 1951504,
+    "original_oracle_modes": [
+      "Normal Java 21 through real Jupiter",
+      "Separate Java 21 -Xint execution"
+    ],
+    "provider_unique_methods": 4,
+    "provider_runs": [
+      {
+        "label": "account-source-normal",
+        "found": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "label": "account-source-Xint",
+        "found": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "label": "commons-4.5.0-normal",
+        "found": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      }
+    ],
+    "provider_seeded_operation_steps_each_run": 65536,
+    "provider_contract_scope": "put, get, remove, containsKey, containsValue, size, isEmpty and clear; nulls, stable lawful collisions, reference identity, growth, deletion, reuse and packed-word boundaries.",
+    "account_provider": {
+      "repository": "hsoliwal/commons-collections",
+      "commit": "7c1357f9dacb9b5c1eb2a6393a758beee8e67965",
+      "source_files": 159,
+      "strict_lint_compile": "FAIL: original donor warnings; javac reports 123 warnings before strict termination, first 100 diagnostics retained.",
+      "reference_compile": "PASS: 166 original warnings reported; first 100 diagnostics retained; donor sources unchanged."
+    },
+    "release_provider": {
+      "coordinates": "org.apache.commons:commons-collections4:4.5.0",
+      "jar_sha256": "00f93263c267be201b8ae521b44a7137271b16688435340bf629db1bac0a5845"
+    },
+    "callback_observation": "Three inserts: M3 invokes key.hashCode zero times, the Commons providers five times. Callback count/order parity is not asserted.",
+    "provider_exclusions": [
+      "Full java.util.Map interface, views and iterators",
+      "Clone and serialization",
+      "Reentrant or arbitrary throwing callbacks",
+      "Mutable-hash keys",
+      "Callback count/order parity",
+      "Whole donor project correctness",
+      "Performance claims"
+    ]
+  },
+  "naming": {
+    "public_names": "UNCHANGED",
+    "scope": "Existing product runtime name and API retained; added target-native test types are verification sources.",
+    "mapping_promotion": "DEFERRED",
+    "jdk_class_promotion": "NONE"
+  },
+  "remaining_gates": {
+    "full_sdk_and_jtreg": "PENDING",
+    "full_target_module_and_test_closure": "PENDING",
+    "full_provenance_aggregate": "PENDING",
+    "global_mapped_name_workflow": "PENDING",
+    "native_platform_matrix": "PENDING",
+    "JNI_GC_JMM_JIT_and_install_image": "PENDING",
+    "hosted_ci": "PENDING",
+    "representative_performance_acceptance": "HOLD",
+    "account_wide_per_file_consolidation": "PENDING"
+  }
+}

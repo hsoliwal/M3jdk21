@@ -1,0 +1,26 @@
+master vendor/asm PASS 0 errors 26 warnings
+master vendor/asm-tree PASS 0 errors 0 warnings
+master vendor/asm-analysis PASS 0 errors 1 warnings
+master m3/arrays PASS 0 errors 0 warnings
+master m3/collections PASS 0 errors 0 warnings
+master m3/mop PASS 0 errors 0 warnings
+master module-packs/jackson FAIL 330 errors 1 warnings
+master module-packs/kernel PASS 0 errors 0 warnings
+master module-packs/nlp-search FAIL 670 errors 1 warnings
+master module-packs/parser FAIL 24 errors 0 warnings
+master module-packs/parser-openrewrite FAIL 95 errors 0 warnings
+master module-packs/recipes FAIL 56 errors 0 warnings
+master ports/precompute PASS 0 errors 0 warnings
+master ports/parallel PASS 0 errors 0 warnings
+master ports/parallel-bulk FAIL 24 errors 0 warnings
+master ports/vcpu PASS 0 errors 0 warnings
+master ports/capability-runtime PASS 0 errors 0 warnings
+master ports/collections PASS 0 errors 0 warnings
+master ports/compiletime FAIL 151 errors 0 warnings
+master ports/file PASS 0 errors 0 warnings
+master ports/indexstring PASS 0 errors 0 warnings
+master ports/regex-cursor PASS 0 errors 0 warnings
+master ports/swing-viewport FAIL 0 errors 4 warnings
+master ports/jfx-viewport FAIL 20 errors 0 warnings
+master ports/tornadovm-bulk FAIL 63 errors 4 warnings
+exit 0

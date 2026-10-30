@@ -66,8 +66,8 @@ public final class M3ListDiff {
 	private static M3LongLongHashMap index (long [] keys, String side) {
 		M3LongLongHashMap map = new M3LongLongHashMap (keys.length);
 		for (int i = 0; i < keys.length; i++) {
-			if (map.containsKey (keys [i])) throw new IllegalArgumentException ("duplicate key in " + side + ": " + keys [i]);
-			map.put (keys [i], i);
+			if (!map.put (keys [i], i))
+				throw new IllegalArgumentException ("duplicate key in " + side + ": " + keys [i]);
 		}
 		return map;
 	}

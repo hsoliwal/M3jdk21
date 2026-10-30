@@ -11,6 +11,10 @@ on:
       - 'm3/collections/qualification/m3-counted-sdk-20261017/**'
       - '.github/workflows/m3-counted-sdk-20261017.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-sealed-recipe-and-sdk:
     runs-on: ubuntu-latest

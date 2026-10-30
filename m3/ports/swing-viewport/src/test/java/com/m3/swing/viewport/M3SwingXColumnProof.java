@@ -4,12 +4,16 @@
 package com.m3.swing.viewport;
 
 import java.util.Arrays;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
 
 /**
  * Strict optional runtime proof: run with swingx-all 1.6.5-1 on the class path.
@@ -27,6 +31,7 @@ public final class M3SwingXColumnProof {
         SwingUtilities.invokeAndWait(() -> {
             try {
                 exercise(type, treeType);
+                selectionContracts(type);
             } catch (ReflectiveOperationException failure) {
                 throw new AssertionError("Actual SwingX linkage failed", failure);
             }
@@ -81,6 +86,123 @@ public final class M3SwingXColumnProof {
             throw new AssertionError("Empty JXTreeTable mapping changed");
         }
         ++checks;
+    }
+
+    private static void selectionContracts(Class<?> type) throws ReflectiveOperationException {
+        DefaultTableModel model = selectionModel();
+        JTable actual = (JTable)type.getConstructor(TableModel.class).newInstance(model);
+        JTable reference = new JTable(selectionModel());
+        reference.setAutoCreateRowSorter(true);
+        for (JTable table : new JTable[]{actual, reference}) {
+            table.setCellSelectionEnabled(true);
+            table.changeSelection(1, 2, false, false);
+        }
+        selection(reference, actual);
+        for (JTable table : new JTable[]{actual, reference}) table.setCellSelectionEnabled(false);
+        // Swing/JXTable retains the row/column selection models while the flag is off.
+        // Nebula's public mode change clears cells; these contracts are intentionally distinct.
+        selection(reference, actual);
+        same(new int[]{1}, actual.getSelectedRows());
+        same(new int[]{2}, actual.getSelectedColumns());
+        if (actual.isCellSelected(1, 2)) throw new AssertionError("Disabled cell selection remained active");
+        ++checks;
+        for (JTable table : new JTable[]{actual, reference}) table.setCellSelectionEnabled(true);
+        selection(reference, actual);
+        if (!actual.isCellSelected(1, 2)) throw new AssertionError("JXTable lost its retained cell selection");
+        ++checks;
+        for (JTable table : new JTable[]{actual, reference}) table.moveColumn(2, 0);
+        selection(reference, actual);
+        same(new int[]{0}, actual.getSelectedColumns());
+        same(new int[]{2}, selectedModelColumns(actual));
+
+        TableColumn retained = reference.getColumn("two");
+        reference.removeColumn(retained);
+        visible(type, actual, 2, false);
+        selection(reference, actual);
+        same(new int[0], actual.getSelectedColumns());
+        reference.addColumn(retained);
+        reference.moveColumn(reference.getColumnCount() - 1, 0);
+        visible(type, actual, 2, true);
+        selection(reference, actual);
+        same(new int[0], actual.getSelectedColumns());
+
+        for (JTable table : new JTable[]{actual, reference}) table.changeSelection(1, 0, false, false);
+        RowFilter<TableModel, Integer> filter = new RowFilter<>() {
+            @Override public boolean include(Entry<? extends TableModel, ? extends Integer> entry) {
+                return !"D".equals(entry.getStringValue(0));
+            }
+        };
+        @SuppressWarnings("unchecked")
+        TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>)reference.getRowSorter();
+        sorter.setRowFilter(filter);
+        sorter.setSortKeys(List.of(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
+        type.getMethod("setRowFilter", RowFilter.class).invoke(actual, filter);
+        type.getMethod("setSortOrder", int.class, SortOrder.class)
+                .invoke(actual, actual.convertColumnIndexToView(0), SortOrder.ASCENDING);
+        selection(reference, actual);
+        same(new int[]{1}, selectedModelRows(actual));
+        same(new int[]{2}, selectedModelColumns(actual));
+        RowFilter<TableModel, Integer> hideSelected = new RowFilter<>() {
+            @Override public boolean include(Entry<? extends TableModel, ? extends Integer> entry) {
+                return !"B".equals(entry.getStringValue(0));
+            }
+        };
+        sorter.setRowFilter(hideSelected);
+        type.getMethod("setRowFilter", RowFilter.class).invoke(actual, hideSelected);
+        selection(reference, actual);
+        same(new int[0], actual.getSelectedRows());
+        sorter.setRowFilter(null);
+        type.getMethod("setRowFilter", RowFilter.class).invoke(actual, new Object[]{null});
+        selection(reference, actual);
+    }
+
+    private static DefaultTableModel selectionModel() {
+        return new DefaultTableModel(new Object[][]{
+                {"D", 1, 2, 3}, {"B", 4, 5, 6}, {"A", 7, 8, 9}, {"C", 10, 11, 12}},
+                new Object[]{"title", "one", "two", "three"});
+    }
+
+    private static void selection(JTable reference, JTable actual) {
+        same(reference.getSelectedRows(), actual.getSelectedRows());
+        same(reference.getSelectedColumns(), actual.getSelectedColumns());
+        int[] expectedRows = Arrays.stream(reference.getSelectedRows())
+                .map(reference::convertRowIndexToModel).toArray();
+        int[] expectedColumns = Arrays.stream(reference.getSelectedColumns())
+                .map(reference::convertColumnIndexToModel).toArray();
+        same(expectedRows, selectedModelRows(actual));
+        same(expectedColumns, selectedModelColumns(actual));
+        if (reference.getCellSelectionEnabled() != actual.getCellSelectionEnabled()
+                || reference.getRowSelectionAllowed() != actual.getRowSelectionAllowed()
+                || reference.getColumnSelectionAllowed() != actual.getColumnSelectionAllowed()) {
+            throw new AssertionError("SwingX changed the stock Swing selection-mode contract");
+        }
+        ++checks;
+    }
+
+    private static int[] selectedModelRows(JTable table) {
+        int[] selected = table.getSelectedRows();
+        int[] output = new int[selected.length];
+        for (int index = 0; index < selected.length; ++index) {
+            int view = selected[index];
+            if (M3DesktopViewportAdapters.copyTableModelRows(
+                    table, new int[]{view, view + 1, view, view + 1}, 0, output, index) != 1) {
+                throw new AssertionError("Selected row mapping changed");
+            }
+        }
+        return output;
+    }
+
+    private static int[] selectedModelColumns(JTable table) {
+        int[] selected = table.getSelectedColumns();
+        int[] output = new int[selected.length];
+        for (int index = 0; index < selected.length; ++index) {
+            int view = selected[index];
+            if (M3DesktopViewportAdapters.copyTableModelColumns(
+                    table, new int[]{view, view + 1, view, view + 1}, 0, output, index) != 1) {
+                throw new AssertionError("Selected column mapping changed");
+            }
+        }
+        return output;
     }
 
     private static void visible(Class<?> type, JTable table, int modelColumn, boolean visible)

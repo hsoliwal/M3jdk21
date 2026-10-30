@@ -14,6 +14,10 @@ on:
       - 'm3/compatibility/regex-relations-20261014/M3RelationPortProof.java'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   state-relation-current-c11:
     name: StateRelation source custody and real C11 JNI proof

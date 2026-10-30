@@ -10,6 +10,10 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java'
       - '.github/workflows/m3-strict-indexed-readonly-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict-immutable-contracts:
     runs-on: ubuntu-latest

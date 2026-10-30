@@ -1,0 +1,467 @@
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	﻿2026-10-29T17:44:55.4948356Z Current runner version: '2.338.0'
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4973351Z ##[group]Runner Image Provisioner
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4974521Z Hosted Compute Agent
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4975145Z Version: 20261021.618
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4975833Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4976603Z Build Date: 2026-10-21T00:45:21Z
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4977344Z Worker ID: {11891086-01ed-4f62-bc7c-3087d09760ac}
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4978195Z Region: westus2
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4978770Z Cloud: Azure
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4979693Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4981216Z ##[group]Operating System
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4981925Z Ubuntu
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4982532Z 24.04.5
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4983058Z LTS
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4983576Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4984592Z ##[group]Runner Image
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4985296Z Image: ubuntu-24.04
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4985914Z Version: 20261025.353.1
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4987255Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4989249Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4990396Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4991616Z ##[group]GITHUB_TOKEN Permissions
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4993730Z Contents: read
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4994477Z Metadata: read
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4995095Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4997324Z Secret source: Actions
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4998532Z Cache mode: write
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.4999626Z Prepare workflow directory
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.5338747Z Prepare all required actions
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.5387652Z Getting action download info
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.8885476Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:55.9995285Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.2101534Z Complete job name: genuine provider, recipe and unchanged original CLI
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3032113Z ##[group]Run set -euo pipefail
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3033241Z [36;1mset -euo pipefail[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3034121Z [36;1mpython3 -I -S -B - <<'PY'[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3035055Z [36;1mimport os,pathlib,re[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3035967Z [36;1mreserve,cap=8*1024**3,512*1024**2[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3037069Z [36;1mfor key in ("RUNNER_TEMP","GITHUB_WORKSPACE"):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3038207Z [36;1m    base=pathlib.Path(os.environ[key])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3040363Z [36;1m    if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise SystemExit("redirected/missing runner storage")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3042161Z [36;1m    st=os.statvfs(base)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3043552Z [36;1m    if st.f_bavail*st.f_frsize<reserve+cap:raise SystemExit("HOLD_STORAGE 8GiB after512MiB")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3045654Z [36;1mroot=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3047284Z [36;1mif root.exists() or source.exists():raise SystemExit("owned output paths must be fresh")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3048261Z [36;1mcache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3049203Z [36;1mjavas=[][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3049897Z [36;1mfor version in (cache/"Java_Temurin-Hotspot_jdk").glob("21.*"):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3050628Z [36;1m    home=version/"x64"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3051868Z [36;1m    if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",version.name) and (version/"x64.complete").is_file() and all(os.access(home/"bin"/name,os.X_OK) for name in ("java","javac")):javas.append(home)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3053114Z [36;1mpythons=[][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3053660Z [36;1mfor version in (cache/"Python").glob("3.12.*"):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3054381Z [36;1m    home=version/"x64";python=home/"bin/python3.12"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3056057Z [36;1m    if re.fullmatch(r"3\.12\.\d+",version.name) and (version/"x64.complete").is_file() and os.access(python,os.X_OK) and (home/"lib/python3.12/venv/__init__.py").is_file() and (home/"lib/python3.12/ensurepip/__init__.py").is_file():pythons.append(python)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3058463Z [36;1mif not javas or not pythons:raise SystemExit("HOLD_TOOLCHAIN preinstalled JDK21/CPython3.12 required; no setup/download fallback")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3059976Z [36;1mjava=sorted(javas)[-1].resolve();python=sorted(pythons)[-1].resolve()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3061171Z [36;1mfor directory in ("home/.m2","m2","tmp","cache","config","data","baseline"):(root/directory).mkdir(parents=True,exist_ok=False)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3062378Z [36;1msettings='<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>\n'[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3063542Z [36;1mfor name in ("settings.xml","global-settings.xml"):(root/"home/.m2"/name).write_text(settings,encoding="utf-8")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3064661Z [36;1mwith open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3065686Z [36;1m    f.write("java="+str(java)+"\npython="+str(python)+"\npython-bin="+str(python.parent)+"\n")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3066510Z [36;1m[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3066915Z [36;1mPY[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3091332Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3092440Z env:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3093192Z   M3_PROOF_ROOT: /home/runner/work/_temp/m3-original-provider-40917174727-1
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3094172Z   M3_SOURCE_ROOT: /home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3095121Z   TMPDIR: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3096013Z   TEMP: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3096877Z   TMP: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3097869Z   XDG_CACHE_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/cache
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3099129Z   XDG_CONFIG_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/config
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3100426Z   XDG_DATA_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/data
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3101252Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3807433Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3808194Z with:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3808627Z   path: m3-original-provider-source
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3809422Z   ref: 5860598b515885ebc2275f6552d9a5a1348fdb15
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3809995Z   fetch-depth: 1
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3810430Z   fetch-tags: false
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3810866Z   lfs: false
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3811275Z   submodules: false
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3811728Z   persist-credentials: false
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3812255Z   sparse-checkout-cone-mode: false
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3832654Z   sparse-checkout: /.gitattributes
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/.github/workflows/m3-original-mapping-provider-qualification.yml
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/original-provider-20261017/
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/algorithms/test/PrefixZContractTest.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/algorithms/test/ViewInteropContractTest.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/JoinedM3StringPiece.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/LocalM3Arena.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/LocalM3StringPiece.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/M3StringPiece.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/StorageIdentity.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/docs/name-mapping.json
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/docs/name-mapping.schema.json
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/evidence/local-20261002-final/prefix-z-normal.log
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/evidence/local-20261002-final/receipt.json
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/migration.py
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/pinned-dependencies.json
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/recipes/prefix-z-v1.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/requirements.txt
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/run-tests.py
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/src/com/m3/migration/ExactFileRecipe.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/test/RecipeContractTest.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/test/test_migration.py
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/java/util/regex/Matcher.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Address28.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Bits.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3CB.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3CI.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Class.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Field.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Member.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Method.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3PC.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Release.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3VI.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/native/libjava/M3BitLane28.c
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/native/libjava/M3StateRelation.c
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/native/libjava/m3_state_relation.h
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3853283Z   repository: hsoliwal/M3jdk21
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3857078Z   token: ***
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3857502Z   ssh-strict: true
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3857941Z   ssh-user: git
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3858362Z   clean: true
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3858785Z   show-progress: true
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3859381Z   set-safe-directory: true
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3859950Z   allow-unsafe-pr-checkout: false
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3860641Z env:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3861244Z   M3_PROOF_ROOT: /home/runner/work/_temp/m3-original-provider-40917174727-1
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3862187Z   M3_SOURCE_ROOT: /home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3863105Z   TMPDIR: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3863976Z   TEMP: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3864830Z   TMP: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3865752Z   XDG_CACHE_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/cache
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3866750Z   XDG_CONFIG_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/config
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3867726Z   XDG_DATA_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/data
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3868460Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7278217Z Syncing repository: hsoliwal/M3jdk21
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7281209Z ##[group]Getting Git version info
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7282565Z Working directory is '/home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source'
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7284415Z [command]/usr/bin/git version
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7414551Z git version 2.56.0
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7460050Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7468811Z Temporarily overriding HOME='/home/runner/work/_temp/21a68469-f36a-4825-9fdd-43960614bf44' before making global git config changes
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7473036Z Adding repository directory to the temporary git global config as a safe directory
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7476591Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7532269Z ##[group]Initializing the repository
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7537881Z [command]/usr/bin/git init /home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7662076Z hint: Using 'master' as the name for the initial branch. This default branch name
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7664324Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7665685Z hint: to use in all of your new repositories, which will suppress this warning,
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7666813Z hint: call:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7667807Z hint:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7668569Z hint: 	git config --global init.defaultBranch <name>
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7670345Z hint:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7671393Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7672869Z hint: 'development'. The just-created branch can be renamed via this command:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7674112Z hint:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7674743Z hint: 	git branch -m <name>
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7676054Z hint:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7676995Z hint: Disable this message with "git config set advice.defaultBranchName false"
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7679521Z Initialized empty Git repository in /home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source/.git/
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7705387Z [command]/usr/bin/git remote add origin https://github.com/hsoliwal/M3jdk21
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7746582Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7747974Z ##[group]Disabling automatic garbage collection
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7750341Z [command]/usr/bin/git config --local gc.auto 0
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7787315Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7788709Z ##[group]Setting up auth
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7795049Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.7848331Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.8285844Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.8332896Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.8581975Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.8629756Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.8878461Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.8931186Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.8932682Z ##[group]Fetching the repository
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.8947375Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --filter=blob:none --depth=1 origin 5860598b515885ebc2275f6552d9a5a1348fdb15
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8596886Z From https://github.com/hsoliwal/M3jdk21
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8598631Z  * branch              5860598b515885ebc2275f6552d9a5a1348fdb15 -> FETCH_HEAD
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8603256Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8604528Z ##[group]Determining the checkout info
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8606066Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8607210Z ##[group]Setting up sparse checkout
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8614152Z [command]/usr/bin/git config core.sparseCheckout true
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8661411Z [command]/usr/bin/git rev-parse --git-path info/sparse-checkout
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8701302Z .git/info/sparse-checkout
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8709734Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8710719Z ##[group]Checking out the ref
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:57.8714780Z [command]/usr/bin/git checkout --progress --force 5860598b515885ebc2275f6552d9a5a1348fdb15
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8122301Z Note: switching to '5860598b515885ebc2275f6552d9a5a1348fdb15'.
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8124195Z 
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8124720Z You are in 'detached HEAD' state. You can look around, make experimental
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8125765Z changes and commit them, and you can discard any commits you make in this
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8126929Z state without impacting any branches by switching back to a branch.
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8127500Z 
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8127946Z If you want to create a new branch to retain commits you create, you may
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8218348Z do so (now or later) by using -c with the switch command. Example:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8219276Z 
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8219591Z   git switch -c <new-branch-name>
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8220052Z 
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8220415Z Or undo this operation with:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8220669Z 
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8220849Z   git switch -
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8221123Z 
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8221483Z Turn off this advice by setting config variable advice.detachedHead to false
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8221935Z 
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8222207Z HEAD is now at 5860598b Merge packed integer and VInt SDK APIs
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8223975Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8240291Z [command]/usr/bin/git log -1 --format=%H
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8275864Z 5860598b515885ebc2275f6552d9a5a1348fdb15
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8285993Z ##[group]Removing auth
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8289963Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8331548Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8896999Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8937785Z http.https://github.com/.extraheader
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8947543Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.8991210Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.9544956Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:58.9593211Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0140265Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0299667Z ##[group]Run set -euo pipefail
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0300854Z [36;1mset -euo pipefail[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0301211Z [36;1mpython3 -I -S -B - <<'PY'[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0301719Z [36;1mimport hashlib,json,os,pathlib,re,shutil,signal,subprocess,time[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0302251Z [36;1mreserve,cap=8*1024**3,512*1024**2[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0302702Z [36;1mroot=pathlib.Path(os.environ["M3_PROOF_ROOT"])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0303186Z [36;1msource=pathlib.Path(os.environ["M3_SOURCE_ROOT"])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0303696Z [36;1msdk=source/"m3/migration/original-provider-20261017/sdk"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0304152Z [36;1mstart=time.monotonic()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0304666Z [36;1mdef traversal_error(error):raise RuntimeError("storage census failed") from error[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0305219Z [36;1mdef gate(limit=480*1024**2):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0305552Z [36;1m    used=0[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0305980Z [36;1m    for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),source):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0306650Z [36;1m        if not base.is_dir() or base.is_symlink():raise RuntimeError("missing/redirected storage")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0307416Z [36;1m        for folder,names,files in os.walk(base,followlinks=False,onerror=traversal_error):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0308002Z [36;1m            for name in names+files:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0308628Z [36;1m                try:info=os.lstat(pathlib.Path(folder)/name)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0309372Z [36;1m                except FileNotFoundError:continue[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0309792Z [36;1m                used+=max(info.st_size,info.st_blocks*512)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0310369Z [36;1m    if used>limit:raise RuntimeError("512MiB aggregate task limit (32MiB artifact reserve)")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0310902Z [36;1m    for base in (root,source):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0311227Z [36;1m        st=os.statvfs(base)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0311752Z [36;1m        if st.f_bavail*st.f_frsize<reserve+cap-used:raise RuntimeError("8GiB-after-output reserve")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0312281Z [36;1m    return used[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0312559Z [36;1mdef getgit(*args):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0313034Z [36;1m    return subprocess.check_output(["git",*args],cwd=source,text=True,timeout=15).strip()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0313528Z [36;1mgate()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0313812Z [36;1mhead=getgit("rev-parse","HEAD")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0314481Z [36;1mif head!=os.environ["EXPECTED_SOURCE_SHA"] or not re.fullmatch("[0-9a-f]{40}",head):raise RuntimeError("checkout is not exact candidate head")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0315555Z [36;1mbinding=json.loads((source/"m3/migration/original-provider-20261017/source-binding.json").read_bytes())[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0316622Z [36;1mif binding["repository"]!="hsoliwal/com.synexia" or binding["receiverCorePath"]!="m3/migration/original-provider-20261017/sdk":raise RuntimeError("canonical owner drift")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0317662Z [36;1mif not re.fullmatch("[0-9a-f]{40}",binding["sourceCommit"]):raise RuntimeError("missing canonical commit")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0318511Z [36;1mif binding["runtimeApplied"] is not False or binding["phaseAdvanced"] is not False:raise RuntimeError("scope drift")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0319428Z [36;1mtree=getgit("rev-parse","HEAD:"+binding["receiverCorePath"])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0319895Z [36;1mpins=(sdk/"pins.json").read_bytes()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0320437Z [36;1mworkflow=source/".github/workflows/m3-original-mapping-provider-qualification.yml"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0321626Z [36;1mif tree!=binding["moduleGitTree"] or hashlib.sha256(pins).hexdigest()!=binding["pinsSha256"] or hashlib.sha256(workflow.read_bytes()).hexdigest()!=binding["workflowSha256"]:raise RuntimeError("exact SDK/workflow binding drift")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0322626Z [36;1menv=os.environ.copy()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0322940Z [36;1mfor name in list(env):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0323825Z [36;1m    if name in ("GITHUB_TOKEN","GH_TOKEN") or name.startswith(("PIP_","PYTHON","MAVEN_","JAVA_TOOL_OPTIONS","JDK_JAVA_OPTIONS")):env.pop(name,None)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0326779Z [36;1menv.update(HOME=str(root/"home"),USERPROFILE=str(root/"home"),MAVEN_USER_HOME=str(root/"home/.m2"),TMPDIR=str(root/"tmp"),TEMP=str(root/"tmp"),TMP=str(root/"tmp"),JAVA_HOME=os.environ["M3_JAVA_HOME"],PATH=os.environ["M3_PYTHON_BIN"]+os.pathsep+os.environ["M3_JAVA_HOME"]+"/bin"+os.pathsep+env["PATH"],MAVEN_OPTS="-Xmx512m -Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home"),JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home")+" -XX:+PerfDisableSharedMem",PIP_CONFIG_FILE=os.devnull,PIP_DISABLE_PIP_VERSION_CHECK="1",PIP_NO_CACHE_DIR="1",PYTHONDONTWRITEBYTECODE="1",GIT_OPTIONAL_LOCKS="0",GIT_NO_LAZY_FETCH="1",GIT_TERMINAL_PROMPT="0")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0329759Z [36;1mrecords=[][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0330090Z [36;1mlog=root/"qualification.log"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0330424Z [36;1mdef cleanup(child):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0330893Z [36;1m    # Every descendant inherits this owned session; bootstrap creates no nested sessions.[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0331490Z [36;1m    for sig,seconds in ((signal.SIGTERM,2),(signal.SIGKILL,3)):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0331935Z [36;1m        try:os.killpg(child.pid,sig)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0332338Z [36;1m        except ProcessLookupError:pass[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0332874Z [36;1m        end=time.monotonic()+seconds[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0333220Z [36;1m        while time.monotonic()<end:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0333577Z [36;1m            try:os.killpg(child.pid,0)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0333961Z [36;1m            except ProcessLookupError:return[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0334314Z [36;1m            time.sleep(.05)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0334736Z [36;1m    raise RuntimeError("owned process group terminal state unproved")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0335199Z [36;1mdef run(name,command,deadline=300):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0335703Z [36;1m    if time.monotonic()-start>720:raise RuntimeError("global deadline before launch")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0336179Z [36;1m    gate()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0336440Z [36;1m    child=None;code=None[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0336767Z [36;1m    with log.open("ab") as out:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0337073Z [36;1m        try:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0337702Z [36;1m            child=subprocess.Popen(command,cwd=source,env=env,stdin=subprocess.DEVNULL,stdout=out,stderr=subprocess.STDOUT,start_new_session=True)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0338425Z [36;1m            command_start=time.monotonic()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0338790Z [36;1m            while child.poll() is None:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0339431Z [36;1m                gate()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0340022Z [36;1m                if time.monotonic()-command_start>deadline or time.monotonic()-start>720:raise RuntimeError("owned command deadline")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0340643Z [36;1m                time.sleep(.5)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0340966Z [36;1m            code=child.wait()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0341469Z [36;1m            if time.monotonic()-start>720:raise RuntimeError("global deadline after child exit")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0341979Z [36;1m        finally:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0342274Z [36;1m            if child is not None:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0342615Z [36;1m                if child.poll() is None:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0343013Z [36;1m                    try:os.killpg(child.pid,signal.SIGTERM)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0343430Z [36;1m                    except ProcessLookupError:pass[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0343810Z [36;1m                    try:child.wait(timeout=2)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0344189Z [36;1m                    except subprocess.TimeoutExpired:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0344604Z [36;1m                        try:os.killpg(child.pid,signal.SIGKILL)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0345025Z [36;1m                        except ProcessLookupError:pass[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0345564Z [36;1m                        child.wait(timeout=5)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0345914Z [36;1m                cleanup(child)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0346491Z [36;1m                records.append({"name":name,"returncode":child.returncode,"parentReaped":True,"ownedSessionAbsent":True})[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0347068Z [36;1m    gate()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0347405Z [36;1m    if code:raise RuntimeError(name+" failed with "+str(code))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0347851Z [36;1mpy=[os.environ["M3_PYTHON"],"-I","-S","-B"][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0348301Z [36;1mbuild=root/"target";overlay=root/"emitted";baseline=root/"baseline"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0349143Z [36;1mrunid=os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"]+"-"+head[:12][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0349807Z [36;1mbootstrap=overlay/"m3/migration/provider/python312-linux-x86_64/bootstrap.py"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0350304Z [36;1msettings=root/"home/.m2"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0350598Z [36;1mtry:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0351168Z [36;1m    run("closed-sdk-source-and-current-target-custody",py+[str(sdk/"verify.py"),"--self-test","--receiver",str(source)])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0352632Z [36;1m    run("actual-maven-openrewrite-sdk",["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-f",str(sdk/"pom.xml"),"-Dm3.build.root="+str(build),"-Dm3.output.root="+str(overlay),"-Dm3.baseline.root="+str(baseline),"verify"])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0354994Z [36;1m    run("named-sdk-and-exact-emission-receipt",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-execution.json"),"--run-id",runid])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0356797Z [36;1m    run("provider-stdlib-boundary-tests",py+[str(bootstrap),"--self-test","--output",str(root/"provider-boundaries"),"--lock",str(bootstrap.with_name("wheels.lock.json"))])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0357565Z [36;1m    try:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0358438Z [36;1m        run("genuine-provider-and-unchanged-original-cli",py+[str(bootstrap),"--root",str(overlay),"--baseline-root",str(baseline),"--output",str(root/"provider"),"--lock",str(bootstrap.with_name("wheels.lock.json"))],360)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0359508Z [36;1m    finally:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0360810Z [36;1m        run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0362307Z [36;1m    pre=json.loads((root/"recipe-execution.json").read_bytes())["frozenPreBaseline"][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0362988Z [36;1m    after=json.loads((root/"recipe-after-provider.json").read_bytes())["frozenPreBaseline"][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0364433Z [36;1m    if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0365852Z [36;1m    # Exact bootstrap receipt shape is checked below after provider implementation freezes.[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0366470Z [36;1m    provider_receipt_path=root/"provider"/"provider-receipt.json"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0366982Z [36;1m    provider=json.loads(provider_receipt_path.read_bytes())[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0368218Z [36;1m    if provider.get("schema")!="M3_ORIGINAL_MAPPING_PYTHON_PROVIDER_RECEIPT_V1" or provider.get("exitCode")!=0 or provider.get("providerQualified") is not True or provider.get("originalSyntheticTestsPassed") is not True:raise RuntimeError("genuine provider/original unit execution gate")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0370495Z [36;1m    if provider.get("baselineManifestValid") is not False or provider.get("currentManifestValid") is not True or provider.get("migrationComplete") is not False:raise RuntimeError("expected PRE invalid / POST valid but INCOMPLETE transition")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0372081Z [36;1m    if any(provider.get(k) is not False for k in ("runtimeQualified","jniQualified","jdkQualified","performanceQualified","phaseAdvanced")):raise RuntimeError("provider cannot advance runtime acceptance")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0373007Z [36;1m    units=provider.get("originalUnits",{})[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0374072Z [36;1m    if units.get("testsRun")!=26 or len(units.get("methods",[]))!=26 or len(set(units["methods"]))!=26 or any(units.get(k)!=0 for k in ("failures","errors","skipped","expectedFailures","unexpectedSuccesses")):raise RuntimeError("original 26 named methods missing/failing")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0375199Z [36;1m    bpath=root/"provider-boundaries/stdlib-boundary-tests.json"[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0375662Z [36;1m    boundary=json.loads(bpath.read_bytes())[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0376878Z [36;1m    if boundary.get("schema")!="M3_PYTHON_PROVIDER_STDLIB_BOUNDARY_TESTS_V1" or boundary.get("testsRun")!=38 or boundary.get("exitCode")!=0 or any(boundary.get(k)!=0 for k in ("failures","errors","skipped","expectedFailures","unexpectedSuccesses")):raise RuntimeError("38 stdlib boundary methods missing/failing")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0378228Z [36;1m    probes=provider.get("provider",{})[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0379971Z [36;1m    if probes.get("draft2020Discriminators")!={"prefixItems":True,"unevaluatedProperties":True,"invalidSchemaRefused":True,"localRef":True} or probes.get("hashTrieMapImmutableOperations") is not True or not probes.get("loadedNativePayloads") or len(probes.get("releasedPayloads",{}))!=6:raise RuntimeError("genuine Draft2020/native/installed-payload proof absent")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0381511Z [36;1m    records_by_label={r["label"]:r for r in provider["commands"]}[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0382365Z [36;1m    for label,expected in (("baseline-validate",1),("baseline-report",1),("baseline-complete",1),("current-validate",0),("current-report",0),("current-complete",2)):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0383117Z [36;1m        record=records_by_label[label][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0383767Z [36;1m        if record["returncode"]!=expected or record["termination"] is not None:raise RuntimeError("unchanged CLI result drift "+label)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0384430Z [36;1m        for stream in ("stdout","stderr"):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0384827Z [36;1m            path=root/"provider"/record[stream+"Path"][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0385385Z [36;1m            if path.is_symlink() or path.stat().st_size>2*1024**2:raise RuntimeError("CLI output fence")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0385920Z [36;1m            content=path.read_bytes()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0386642Z [36;1m            if len(content)!=record[stream+"Bytes"] or hashlib.sha256(content).hexdigest()!=record[stream+"Sha256"]:raise RuntimeError("CLI output receipt drift")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0387643Z [36;1m    baseline_error=(root/"provider"/records_by_label["baseline-validate"]["stderrPath"]).read_text(encoding="utf-8")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0389178Z [36;1m    if "target hash drift: src/java.base/share/classes/jdk/internal/mindex/M3TQ.java" not in baseline_error or "missing file: synexia-openrewrite-recipes/" not in baseline_error:raise RuntimeError("original baseline diagnostics absent")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0390483Z [36;1m    marker=(root/"provider"/records_by_label["current-validate"]["stdoutPath"]).read_text(encoding="utf-8")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0391357Z [36;1m    completion=(root/"provider"/records_by_label["current-complete"]["stderrPath"]).read_text(encoding="utf-8").splitlines()[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0392337Z [36;1m    if marker!="MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n" or len(completion)!=158:raise RuntimeError("unchanged completion boundaries lost")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0393409Z [36;1m    coverage=(root/"provider"/records_by_label["current-report"]["stdoutPath"]).read_text(encoding="utf-8")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0394243Z [36;1m    if "**INCOMPLETE**" not in coverage:raise RuntimeError("actual original coverage report not incomplete")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0397121Z [36;1m    final={"schema":"M3_ORIGINAL_MAPPING_PROVIDER_HOSTED_V1","runId":runid,"checkoutCommit":head,"canonicalSourceCommit":binding["sourceCommit"],"sdkTree":tree,"pinsSha256":hashlib.sha256(pins).hexdigest(),"commands":records,"providerReceiptSha256":hashlib.sha256(provider_receipt_path.read_bytes()).hexdigest(),"recipeReceiptSha256":hashlib.sha256((root/"recipe-execution.json").read_bytes()).hexdigest(),"baselineAfterProviderReceiptSha256":hashlib.sha256((root/"recipe-after-provider.json").read_bytes()).hexdigest(),"frozenPreBaseline":pre,"baselineVerifiedBeforeAndAfterProvider":True,"runtimeJniQualified":False,"matchedJdkQualified":False,"performanceRetentionQualified":False,"phaseAdvanced":False}[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0400232Z [36;1m    (root/"hosted-receipt.json").write_text(json.dumps(final,indent=2)+"\n",encoding="utf-8")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0400740Z [36;1mfinally:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0401166Z [36;1m    # Never write failure artifacts until fresh reserve and planned-copy gates pass.[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0401644Z [36;1m    tail=b""[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0401942Z [36;1m    if log.is_file() and not log.is_symlink():[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0402586Z [36;1m        with log.open("rb") as f:f.seek(max(0,log.stat().st_size-32768));tail=f.read(32768)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0403036Z [36;1m    try:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0403292Z [36;1m        before=gate(496*1024**2)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0404568Z [36;1m        selected=[root/"recipe-execution.json",root/"recipe-after-provider.json",root/"hosted-receipt.json",source/"m3/migration/original-provider-20261017/source-binding.json",sdk/"src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv"][0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0405954Z [36;1m        selected+=sorted(build.glob("surefire-reports/TEST-*.xml"))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0406435Z [36;1m        selected+=sorted((root/"provider").glob("*.json"))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0406914Z [36;1m        selected+=sorted((root/"provider-boundaries").glob("*.json"))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0407388Z [36;1m        selected+=sorted((root/"provider").glob("*.md"))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0408000Z [36;1m        selected+=sorted((root/"provider").glob("logs/*.stdout"))+sorted((root/"provider").glob("logs/*.stderr"))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0408656Z [36;1m        selected=sorted(set(p for p in selected if p.is_file()),key=str)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0409545Z [36;1m        if len(selected)>256 or any(any(x.is_symlink() for x in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0410287Z [36;1m        planned=sum(p.stat().st_size for p in selected)+len(tail)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0410911Z [36;1m        if planned>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("closed artifact budget")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0411451Z [36;1m    except BaseException:[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0411806Z [36;1m        print(tail.decode("utf-8",errors="replace"))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0412165Z [36;1m        raise[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0412496Z [36;1m    bundle=root/"artifacts";bundle.mkdir(exist_ok=False)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0412868Z [36;1m    inv={}[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0413152Z [36;1m    for n,path in enumerate(selected):[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0413483Z [36;1m        gate(496*1024**2)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0413895Z [36;1m        label=str(n).zfill(3)+"-"+path.name;shutil.copyfile(path,bundle/label)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0414842Z [36;1m        inv[label]={"bytes":path.stat().st_size,"sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"source":str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))}[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0415659Z [36;1m    gate(496*1024**2)[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0416237Z [36;1m    (bundle/"log-tail.txt").write_bytes(tail);print(tail.decode("utf-8",errors="replace"))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0416902Z [36;1m    (bundle/"inventory.json").write_text(json.dumps(inv,indent=2)+"\n",encoding="utf-8")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0417570Z [36;1m    (bundle/"commands.json").write_text(json.dumps(records,indent=2)+"\n",encoding="utf-8")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0418193Z [36;1m    print("Final aggregate bytes before artifact upload:",gate(496*1024**2))[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0418628Z [36;1m[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0418979Z [36;1mPY[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0439771Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0440163Z env:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0440525Z   M3_PROOF_ROOT: /home/runner/work/_temp/m3-original-provider-40917174727-1
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0441094Z   M3_SOURCE_ROOT: /home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0441648Z   TMPDIR: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0442170Z   TEMP: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0442673Z   TMP: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0443201Z   XDG_CACHE_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/cache
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0443802Z   XDG_CONFIG_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/config
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0444537Z   XDG_DATA_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/data
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0445015Z   M3_JAVA_HOME: /usr/lib/jvm/temurin-21-jdk-amd64
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0445431Z   M3_PYTHON: /opt/hostedtoolcache/Python/3.12.15/x64/bin/python3.12
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0445889Z   M3_PYTHON_BIN: /opt/hostedtoolcache/Python/3.12.15/x64/bin
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0446327Z   EXPECTED_SOURCE_SHA: 5860598b515885ebc2275f6552d9a5a1348fdb15
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0446705Z   GIT_OPTIONAL_LOCKS: 0
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0446967Z   GIT_NO_LAZY_FETCH: 1
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0447225Z   GIT_TERMINAL_PROMPT: 0
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0447504Z   GCM_INTERACTIVE: never
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0447766Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0917716Z Traceback (most recent call last):
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0918273Z   File "<stdin>", line 34, in <module>
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0918796Z RuntimeError: exact SDK/workflow binding drift
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0977965Z ##[error]Process completed with exit code 1.
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1072491Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1072983Z with:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1073264Z   name: m3-original-provider-40917174727-1
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1073737Z   path: /home/runner/work/_temp/m3-original-provider-40917174727-1/artifacts/
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1074190Z   include-hidden-files: true
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1074484Z   compression-level: 0
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1074750Z   retention-days: 90
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1075012Z   if-no-files-found: error
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1075286Z   overwrite: false
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1075524Z env:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1075874Z   M3_PROOF_ROOT: /home/runner/work/_temp/m3-original-provider-40917174727-1
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1076457Z   M3_SOURCE_ROOT: /home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1077027Z   TMPDIR: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1077596Z   TEMP: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1078110Z   TMP: /home/runner/work/_temp/m3-original-provider-40917174727-1/tmp
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1078671Z   XDG_CACHE_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/cache
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1079574Z   XDG_CONFIG_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/config
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1080174Z   XDG_DATA_HOME: /home/runner/work/_temp/m3-original-provider-40917174727-1/data
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.1080618Z ##[endgroup]
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.2870862Z (node:2667) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.2872541Z (Use `node --trace-deprecation ...` to show where the warning was created)
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.2902099Z ##[error]No files were found with the provided path: /home/runner/work/_temp/m3-original-provider-40917174727-1/artifacts/. No artifacts will be uploaded.
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.3157474Z Post job cleanup.
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.4153378Z [command]/usr/bin/git version
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.4201866Z git version 2.56.0
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.4289604Z Temporarily overriding HOME='/home/runner/work/_temp/72afbf8c-947d-43fd-a712-9117b0a9eb57' before making global git config changes
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.4291035Z Adding repository directory to the temporary git global config as a safe directory
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.4292241Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21/m3-original-provider-source
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.4355796Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.4384042Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.4980426Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.5033490Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.5622555Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.5670869Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.6456078Z Cleaning up orphan processes
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.6921287Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

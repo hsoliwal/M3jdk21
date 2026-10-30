@@ -21,8 +21,9 @@ public final class M3LongArena28 {
         if (size == M3Address28.MAX_SLOTS) {
             throw new IllegalStateException("segmented arena exhausted");
         }
-        int index = size++;
+        int index = size;
         values.set(index, value);
+        size = index + 1;
         return index;
     }
 
@@ -32,9 +33,10 @@ public final class M3LongArena28 {
         if ((long) size + source.length > M3Address28.MAX_SLOTS) {
             throw new IllegalStateException("segmented arena exhausted");
         }
-        for (long value : source) {
-            values.set(size++, value);
-        }
+        // Reuse the established 4,096-slot primitive block-copy owner:
+        // validated chunk copies, lazy zero pages and no per-item dispatch.
+        values.copyFrom(source, 0, start, source.length);
+        size = start + source.length;
         return start;
     }
 

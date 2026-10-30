@@ -276,8 +276,10 @@ public final class M3LongLongTreeMap implements M3LongLongSortedMap {
     public void trimToSize() {
         int capacity = Math.max(MIN_CAPACITY, size);
         if (capacity != keys.length) {
-            keys = Arrays.copyOf(keys, capacity);
-            values = Arrays.copyOf(values, capacity);
+            long[] nextKeys = Arrays.copyOf(keys, capacity);
+            long[] nextValues = Arrays.copyOf(values, capacity);
+            keys = nextKeys;
+            values = nextValues;
         }
     }
 
@@ -337,8 +339,10 @@ public final class M3LongLongTreeMap implements M3LongLongSortedMap {
             return;
         }
         int capacity = growCapacity(keys.length, minimumCapacity);
-        keys = Arrays.copyOf(keys, capacity);
-        values = Arrays.copyOf(values, capacity);
+        long[] nextKeys = Arrays.copyOf(keys, capacity);
+        long[] nextValues = Arrays.copyOf(values, capacity);
+        keys = nextKeys;
+        values = nextValues;
     }
 
     private static int growCapacity(int current, int minimum) {

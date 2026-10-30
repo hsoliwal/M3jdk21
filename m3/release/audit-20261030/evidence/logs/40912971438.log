@@ -1,0 +1,360 @@
+C11 JNI contract (windows-2022)	UNKNOWN STEP	﻿2026-10-29T16:53:47.9536221Z Current runner version: '2.338.0'
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9560103Z ##[group]Runner Image Provisioner
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9560810Z Hosted Compute Agent
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9561376Z Version: 20261021.618
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9561935Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9562654Z Build Date: 2026-10-21T00:45:21Z
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9563261Z Worker ID: {46911621-98c1-4b86-82fa-16cf7ff23dc3}
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9563899Z Region: northcentralus
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9564449Z Cloud: Azure
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9564936Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9566104Z ##[group]Operating System
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9567077Z Microsoft Windows Server 2022
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9567748Z 10.0.20348
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9568216Z Datacenter
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9568670Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9569182Z ##[group]Runner Image
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9569716Z Image: windows-2022
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9570207Z Version: 20261025.346.1
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9571650Z Included Software: https://github.com/actions/runner-images/blob/win22/20261025.346/images/windows/Windows2022-Readme.md
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9573099Z Image Release: https://github.com/actions/runner-images/releases/tag/win22%2F20261025.346
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9574007Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9574992Z ##[group]GITHUB_TOKEN Permissions
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9576860Z Contents: read
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9577359Z Metadata: read
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9577869Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9579805Z Secret source: Actions
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9580622Z Cache mode: write
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9581222Z Prepare workflow directory
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9909687Z Prepare all required actions
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:47.9956438Z Getting action download info
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:48.2280031Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:48.3450253Z Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:48.9115924Z Complete job name: C11 JNI contract (windows-2022)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.0633198Z ##[group]Run git config --global core.longpaths true
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.0634243Z [36;1mgit config --global core.longpaths true[0m
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.0635041Z [36;1mif ((git config --global --get core.longpaths).Trim() -ne 'true') {[0m
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.0635845Z [36;1m  throw 'Git long path support was not configured'[0m
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.0636446Z [36;1m}[0m
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.0716152Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.0717078Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9125221Z ##[group]Run actions/checkout@v4
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9126008Z with:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9126484Z   repository: hsoliwal/M3jdk21
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9133819Z   token: ***
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9134270Z   ssh-strict: true
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9134725Z   ssh-user: git
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9135198Z   persist-credentials: true
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9135754Z   clean: true
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9136287Z   sparse-checkout-cone-mode: true
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9136947Z   fetch-depth: 1
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9137383Z   fetch-tags: false
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9137863Z   show-progress: true
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9138346Z   lfs: false
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9138768Z   submodules: false
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9139257Z   set-safe-directory: true
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9139883Z   allow-unsafe-pr-checkout: false
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:49.9140499Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.0615165Z Syncing repository: hsoliwal/M3jdk21
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.0617135Z ##[group]Getting Git version info
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.0617961Z Working directory is 'D:\a\M3jdk21\M3jdk21'
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.1423540Z [command]"C:\Program Files\Git\bin\git.exe" version
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.1707545Z git version 2.56.0.windows.3
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.1742843Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.1755178Z Copying 'C:\Users\runneradmin\.gitconfig' to 'D:\a\_temp\0ccb19f7-8ac4-479b-81ab-1216ad1084f6\.gitconfig'
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.1774503Z Temporarily overriding HOME='D:\a\_temp\0ccb19f7-8ac4-479b-81ab-1216ad1084f6' before making global git config changes
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.1778868Z Adding repository directory to the temporary git global config as a safe directory
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.1785125Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\M3jdk21\M3jdk21
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.2072408Z Deleting the contents of 'D:\a\M3jdk21\M3jdk21'
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.2077323Z ##[group]Initializing the repository
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.2086071Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\M3jdk21\M3jdk21
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.2834634Z Initialized empty Git repository in D:/a/M3jdk21/M3jdk21/.git/
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.2873113Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/hsoliwal/M3jdk21
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.3476010Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.3476953Z ##[group]Disabling automatic garbage collection
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.3485426Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.3781006Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.3781843Z ##[group]Setting up auth
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.3793358Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:50.4089291Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:51.7884872Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:51.8174126Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:52.2491516Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:52.2799022Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:52.7341776Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:52.7627481Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:52.7638783Z ##[group]Fetching the repository
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:53:52.7641657Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1a369304850c60a43f6d15735aaf84bcb8aee2de:refs/remotes/pull/2150/merge
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.4412152Z From https://github.com/hsoliwal/M3jdk21
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.4412880Z  * [new ref]             1a369304850c60a43f6d15735aaf84bcb8aee2de -> pull/2150/merge
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.4447821Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.4448393Z ##[group]Determining the checkout info
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.4450596Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.4461632Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.4890115Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.5198525Z ##[group]Checking out the ref
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:29.5208280Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/2150/merge
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:31.0309277Z Updating files:   3% (4650/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:31.2994251Z Updating files:   4% (5633/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:31.6187367Z Updating files:   5% (7041/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:31.8015102Z Updating files:   6% (8449/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:31.9191045Z Updating files:   6% (9222/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:32.2547000Z Updating files:   7% (9857/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:32.6099900Z Updating files:   8% (11265/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:32.8038586Z Updating files:   9% (12673/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:32.9038536Z Updating files:   9% (13529/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:33.2150934Z Updating files:  10% (14081/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:33.5370895Z Updating files:  11% (15489/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:33.8046781Z Updating files:  12% (16897/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:33.8379135Z Updating files:  12% (18165/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:34.1154731Z Updating files:  13% (18305/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:34.3569498Z Updating files:  14% (19713/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:34.8076918Z Updating files:  15% (21121/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:34.8886072Z Updating files:  15% (22173/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:35.2786389Z Updating files:  16% (22529/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:35.5744268Z Updating files:  17% (23937/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:35.8138399Z Updating files:  18% (25345/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:35.9109842Z Updating files:  18% (26256/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:36.4449783Z Updating files:  19% (26753/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:36.7943728Z Updating files:  20% (28161/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:36.8156744Z Updating files:  21% (29570/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:37.1095772Z Updating files:  21% (29609/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:37.3695843Z Updating files:  22% (30978/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:37.7293091Z Updating files:  23% (32386/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:37.8121461Z Updating files:  24% (33794/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:38.1764348Z Updating files:  24% (34219/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:38.5674059Z Updating files:  25% (35202/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:38.8132469Z Updating files:  26% (36610/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:39.0385196Z Updating files:  26% (37074/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:39.5874024Z Updating files:  27% (38018/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:39.8472890Z Updating files:  28% (39426/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:39.9375735Z Updating files:  28% (40488/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:40.2467695Z Updating files:  29% (40834/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:40.5237656Z Updating files:  30% (42242/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:40.8146548Z Updating files:  31% (43650/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:40.9097475Z Updating files:  31% (44599/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:41.1616370Z Updating files:  32% (45058/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:41.4180318Z Updating files:  33% (46466/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:41.6861627Z Updating files:  34% (47874/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:41.8161455Z Updating files:  35% (49282/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:42.0302496Z Updating files:  35% (49963/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:42.4303268Z Updating files:  36% (50690/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:42.6160586Z Updating files:  37% (52098/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:42.8228159Z Updating files:  38% (53506/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:42.8916813Z Updating files:  38% (54533/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:43.1324136Z Updating files:  39% (54914/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:43.3224843Z Updating files:  40% (56322/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:43.7418550Z Updating files:  41% (57731/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:43.8232668Z Updating files:  42% (59139/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:44.0040852Z Updating files:  42% (59531/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:44.3334465Z Updating files:  43% (60547/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:44.6637665Z Updating files:  44% (61955/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:44.8248230Z Updating files:  45% (63363/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:45.0468672Z Updating files:  45% (64179/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:45.3158385Z Updating files:  46% (64771/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:45.5861951Z Updating files:  47% (66179/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:45.8258788Z Updating files:  48% (67587/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:45.8522849Z Updating files:  48% (68855/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:46.4904055Z Updating files:  49% (68995/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:46.8266036Z Updating files:  50% (70403/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:46.8495153Z Updating files:  50% (71688/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:47.1992107Z Updating files:  51% (71811/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:47.5499989Z Updating files:  52% (73219/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:47.8288069Z Updating files:  53% (74627/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:47.8853378Z Updating files:  53% (75772/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:48.1601187Z Updating files:  54% (76035/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:48.4617892Z Updating files:  55% (77443/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:48.7757239Z Updating files:  56% (78851/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:48.8297144Z Updating files:  57% (80259/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:49.2416293Z Updating files:  57% (80465/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:49.5666462Z Updating files:  58% (81667/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:49.8309223Z Updating files:  59% (83075/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:49.9164454Z Updating files:  59% (84080/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:50.2036549Z Updating files:  60% (84483/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:50.8325548Z Updating files:  61% (85892/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:50.8361226Z Updating files:  62% (87300/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:51.1388462Z Updating files:  62% (87319/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:51.4329470Z Updating files:  63% (88708/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:51.8546595Z Updating files:  64% (90116/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:52.0250007Z Updating files:  64% (91397/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:52.3395839Z Updating files:  65% (91524/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:52.5907100Z Updating files:  66% (92932/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:52.8381170Z Updating files:  67% (94340/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:52.9068739Z Updating files:  67% (95370/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:53.3969270Z Updating files:  68% (95748/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:53.6757768Z Updating files:  69% (97156/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:53.8382689Z Updating files:  70% (98564/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:53.9382039Z Updating files:  70% (99427/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:54.2145542Z Updating files:  71% (99972/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:54.4784738Z Updating files:  72% (101380/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:54.8396957Z Updating files:  73% (102788/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:54.9509714Z Updating files:  73% (103598/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:55.2349162Z Updating files:  74% (104196/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:55.5387374Z Updating files:  75% (105604/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:55.8058872Z Updating files:  76% (107012/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:55.9667715Z Updating files:  77% (108420/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:56.2342315Z Updating files:  77% (108452/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:56.4898100Z Updating files:  78% (109828/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:56.7627231Z Updating files:  79% (111236/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:56.8418193Z Updating files:  80% (112644/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:57.0006608Z Updating files:  80% (113138/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:57.3356241Z Updating files:  81% (114053/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:57.5993368Z Updating files:  82% (115461/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:57.8432394Z Updating files:  83% (116869/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:57.9128949Z Updating files:  83% (117920/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:58.1840305Z Updating files:  84% (118277/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:58.4397003Z Updating files:  85% (119685/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:58.8602908Z Updating files:  86% (121093/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:58.8971352Z Updating files:  86% (122293/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:59.1985672Z Updating files:  87% (122501/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:59.4481459Z Updating files:  88% (123909/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:59.7300961Z Updating files:  89% (125317/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:59.8457348Z Updating files:  90% (126725/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:54:59.9861522Z Updating files:  90% (127325/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:00.5816673Z Updating files:  91% (128133/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:00.8469027Z Updating files:  92% (129541/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:00.8589187Z Updating files:  92% (130884/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:01.1226677Z Updating files:  93% (130949/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:01.3754285Z Updating files:  94% (132357/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:01.8154313Z Updating files:  95% (133765/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:01.8485822Z Updating files:  96% (135173/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:02.0366511Z Updating files:  96% (135385/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:02.2415044Z Updating files:  97% (136581/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:02.4738686Z Updating files:  98% (137989/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:02.7505392Z Updating files:  99% (139397/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:02.7505934Z Updating files: 100% (140805/140805)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:02.7506296Z Updating files: 100% (140805/140805), done.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.0989665Z Note: switching to 'refs/remotes/pull/2150/merge'.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.0990293Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.0993260Z You are in 'detached HEAD' state. You can look around, make experimental
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.0997910Z changes and commit them, and you can discard any commits you make in this
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1002231Z state without impacting any branches by switching back to a branch.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1003321Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1004498Z If you want to create a new branch to retain commits you create, you may
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1005836Z do so (now or later) by using -c with the switch command. Example:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1006681Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1006913Z   git switch -c <new-branch-name>
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1007208Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1007362Z Or undo this operation with:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1007595Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1007721Z   git switch -
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1007897Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1008240Z Turn off this advice by setting config variable advice.detachedHead to false
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1008725Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1009316Z HEAD is now at 1a3693048 Merge 6ac06f20bcbdce518581b5c17c9e8b85c3752d96 into 0ab28ea86ccb2b7c1997e662d1555ece229c05de
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1605295Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.1921034Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2184970Z 1a369304850c60a43f6d15735aaf84bcb8aee2de
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2557591Z ##[group]Run actions/setup-java@v4
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2557925Z with:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2558130Z   distribution: temurin
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2558347Z   java-version: 21
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2558547Z   java-package: jdk
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2558751Z   check-latest: false
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2558952Z   server-id: github
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2559160Z   server-username: GITHUB_ACTOR
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2559424Z   server-password: GITHUB_TOKEN
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2559656Z   overwrite-settings: true
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2559870Z   job-status: success
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2562132Z   token: ***
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.2562339Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.4511802Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.4518330Z ##[group]Installed distributions
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.4870376Z Resolved Java 21.0.12+101.0 from tool-cache
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.4870858Z Setting Java 21.0.12+101.0 as the default
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.4888330Z (node:6456) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.4888994Z (Use `node --trace-deprecation ...` to show where the warning was created)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.4893083Z Creating toolchains.xml for JDK version 21 from temurin
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5001002Z Writing to C:\Users\runneradmin\.m2\toolchains.xml
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5005291Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5005644Z Java configuration:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5005981Z   Distribution: temurin
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5006301Z   Version: 21.0.12+101.0
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5006839Z   Path: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\21.0.12-101.0\x64
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5007331Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5007815Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5028825Z Creating settings.xml with server-id: github
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5029311Z Writing to C:\Users\runneradmin\.m2\settings.xml
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5268783Z ##[group]Run cmake -S m3/native -B m3/native/build -DCMAKE_BUILD_TYPE=Release
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5269370Z [36;1mcmake -S m3/native -B m3/native/build -DCMAKE_BUILD_TYPE=Release[0m
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5269859Z [36;1mcmake --build m3/native/build --config Release[0m
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5270302Z [36;1mctest --test-dir m3/native/build -C Release --output-on-failure[0m
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5821545Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5821917Z env:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5822243Z   JAVA_HOME: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\21.0.12-101.0\x64
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5822767Z   JAVA_HOME_21_X64: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\21.0.12-101.0\x64
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:03.5823159Z ##[endgroup]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:04.7191327Z -- Building for: Visual Studio 17 2022
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:04.9572373Z -- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.20348.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:20.7821764Z -- The C compiler identification is MSVC 19.44.35229.0
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:20.9349761Z -- Detecting C compiler ABI info
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:22.0826908Z -- Detecting C compiler ABI info - done
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:22.0970826Z -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:22.0981555Z -- Detecting C compile features
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:22.0991569Z -- Detecting C compile features - done
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.0550009Z -- Found JNI: C:/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/21.0.12-101.0/x64/include  found components: AWT JVM
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8435977Z -- Configuring done (23.1s)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8914392Z -- Generating done (0.0s)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8916091Z CMake Warning:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8916522Z   Manually-specified variables were not used by the project:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8916945Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8917064Z     CMAKE_BUILD_TYPE
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8917258Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8917287Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:27.8926591Z -- Build files have been written to: D:/a/M3jdk21/M3jdk21/m3/native/build
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:28.0090873Z MSBuild version 17.14.60+43b635718 for .NET Framework
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:28.0405303Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:28.5259737Z   1>Checking Build System
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:28.8688301Z   Building Custom Rule D:/a/M3jdk21/M3jdk21/m3/native/CMakeLists.txt
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:29.0805559Z   m3_arrays_jni.c
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:29.9385855Z   m3_index_path_masks.c
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:29.9633660Z   Generating Code...
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:31.0892699Z   m3_jni_existing_owners.vcxproj -> D:\a\M3jdk21\M3jdk21\m3\native\build\m3_jni_existing_owners.dir\Release\m3_jni_existing_owners.lib
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:31.1610832Z   Building Custom Rule D:/a/M3jdk21/M3jdk21/m3/native/CMakeLists.txt
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:31.2339266Z   m3_jni_core_contract.c
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:31.3064482Z D:\a\M3jdk21\M3jdk21\m3\native\tests\m3_jni_core_contract.c(51,5): error C2220: the following warning is treated as an error [D:\a\M3jdk21\M3jdk21\m3\native\build\m3_jni_core_contract.vcxproj]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:31.3086359Z D:\a\M3jdk21\M3jdk21\m3\native\tests\m3_jni_core_contract.c(51,5): warning C4310: cast truncates constant value [D:\a\M3jdk21\M3jdk21\m3\native\build\m3_jni_core_contract.vcxproj]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:31.3088303Z D:\a\M3jdk21\M3jdk21\m3\native\tests\m3_jni_core_contract.c(52,5): warning C4310: cast truncates constant value [D:\a\M3jdk21\M3jdk21\m3\native\build\m3_jni_core_contract.vcxproj]
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:31.9313760Z Internal ctest changing into directory: D:/a/M3jdk21/M3jdk21/m3/native/build
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.1881031Z Test project D:/a/M3jdk21/M3jdk21/m3/native/build
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2378199Z     Start 1: m3_jni_core_contract
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2380957Z Could not find executable D:/a/M3jdk21/M3jdk21/m3/native/build/Release/m3_jni_core_contract.exe
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2381925Z Unable to find executable: D:/a/M3jdk21/M3jdk21/m3/native/build/Release/m3_jni_core_contract.exe
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2384874Z Looked in the following places:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2385405Z D:/a/M3jdk21/M3jdk21/m3/native/build/Release/m3_jni_core_contract.exe
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2385891Z D:/a/M3jdk21/M3jdk21/m3/native/build/Release/m3_jni_core_contract.exe.exe
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2386384Z D:/a/M3jdk21/M3jdk21/m3/native/build/Release/Release/m3_jni_core_contract.exe
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2386904Z D:/a/M3jdk21/M3jdk21/m3/native/build/Release/Release/m3_jni_core_contract.exe.exe
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2387403Z Release/D:/a/M3jdk21/M3jdk21/m3/native/build/Release/m3_jni_core_contract.exe
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2387889Z Release/D:/a/M3jdk21/M3jdk21/m3/native/build/Release/m3_jni_core_contract.exe.exe
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2388328Z 1/1 Test #1: m3_jni_core_contract .............***Not Run   0.00 sec
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2439725Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2440150Z 0% tests passed, 1 tests failed out of 1
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2442267Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2442754Z Total Test time (real) =   0.06 sec
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2443076Z 
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2443249Z The following tests FAILED:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2444893Z 	  1 - m3_jni_core_contract (Not Run)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.2448328Z Errors while running CTest
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.3536137Z ##[error]Process completed with exit code 1.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.3737958Z Post job cleanup.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.5452869Z (node:4352) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.5453953Z (Use `node --trace-deprecation ...` to show where the warning was created)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.5784673Z Post job cleanup.
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.7837501Z [command]"C:\Program Files\Git\bin\git.exe" version
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.8177030Z git version 2.56.0.windows.3
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.8231075Z Copying 'C:\Users\runneradmin\.gitconfig' to 'D:\a\_temp\77bf38d9-6835-41b8-9803-125faaf1b107\.gitconfig'
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.8255977Z Temporarily overriding HOME='D:\a\_temp\77bf38d9-6835-41b8-9803-125faaf1b107' before making global git config changes
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.8257543Z Adding repository directory to the temporary git global config as a safe directory
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.8270340Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\M3jdk21\M3jdk21
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.8631508Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:32.8927406Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:33.3941739Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:33.4207755Z http.https://github.com/.extraheader
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:33.4247066Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:33.4555065Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:33.9717044Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:34.0016933Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:34.5185696Z Cleaning up orphan processes
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:34.5344222Z Terminate orphan process: pid (6128) (vctip)
+C11 JNI contract (windows-2022)	UNKNOWN STEP	2026-10-29T16:55:34.5894337Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

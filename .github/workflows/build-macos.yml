@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022, 2023, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2022, 2024, Oracle and/or its affiliates. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 # Modifications Copyright (c) 2026 Hitesh Soliwal and contributors.
 # Modified 2026: repair desktop runner, toolchain, and action runtime selection.
@@ -33,6 +33,9 @@ on:
       platform:
         required: true
         type: string
+      runs-on:
+        required: true
+        type: string
       extra-conf-options:
         required: false
         type: string
@@ -57,7 +60,7 @@ on:
 jobs:
   build-macos:
     name: build
-    runs-on: macos-15-intel
+    runs-on: ${{ inputs.runs-on }}
 
     strategy:
       fail-fast: false
@@ -76,7 +79,7 @@ jobs:
         id: bootjdk
         uses: ./.github/actions/get-bootjdk
         with:
-          platform: macos-x64
+          platform: ${{ inputs.platform }}
 
       - name: 'Get JTReg'
         id: jtreg

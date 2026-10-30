@@ -16,6 +16,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict-source-and-query-oracle:
     runs-on: ubuntu-latest

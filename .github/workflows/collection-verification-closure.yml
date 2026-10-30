@@ -9,6 +9,10 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java21-collection-closure:
     runs-on: ubuntu-24.04

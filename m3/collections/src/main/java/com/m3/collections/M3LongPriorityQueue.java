@@ -7,6 +7,7 @@ package com.m3.collections;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * Primitive-long natural-order binary min-heap analogous to {@link java.util.PriorityQueue}.
@@ -16,8 +17,6 @@ import java.util.NoSuchElementException;
  * priority order.</p>
  */
 public final class M3LongPriorityQueue implements M3LongCollection {
-    private static final int DEFAULT_CAPACITY = 11;
-    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private static final long[] EMPTY = new long[0];
 
     private long[] heap;
@@ -33,6 +32,20 @@ public final class M3LongPriorityQueue implements M3LongCollection {
             throw new IllegalArgumentException("negative initialCapacity");
         }
         heap = initialCapacity == 0 ? EMPTY : new long[initialCapacity];
+    }
+
+    /**
+     * Copies the caller's primitive lane and constructs a min-heap bottom-up in O(n).
+     * Input values are never retained or modified; duplicates and extremes are valid.
+     */
+    //FLLDCIM: ALG - LC215 bottom-up binary heap construction
+    public M3LongPriorityQueue(long[] values) {
+        Objects.requireNonNull(values, "values");
+        heap = Arrays.copyOf(values, values.length);
+        size = heap.length;
+        for (int parent = (size >>> 1) - 1; parent >= 0; parent--) {
+            siftDown(parent, heap[parent]);
+        }
     }
 
     public boolean offer(long value) {
@@ -193,26 +206,8 @@ public final class M3LongPriorityQueue implements M3LongCollection {
         if (minimumCapacity <= heap.length) {
             return;
         }
-        int oldCapacity = heap.length;
-        long grown;
-        if (oldCapacity == 0) {
-            grown = Math.max(DEFAULT_CAPACITY, minimumCapacity);
-        } else if (oldCapacity < 64) {
-            grown = (long) oldCapacity + oldCapacity + 2;
-        } else {
-            grown = (long) oldCapacity + (oldCapacity >> 1);
-        }
-        int newCapacity = grown > MAX_ARRAY_SIZE
-                ? hugeCapacity(minimumCapacity)
-                : (int) Math.max(grown, minimumCapacity);
-        heap = Arrays.copyOf(heap, newCapacity);
-    }
-
-    private static int hugeCapacity(int minimumCapacity) {
-        if (minimumCapacity < 0) {
-            throw new OutOfMemoryError("required array size too large");
-        }
-        return minimumCapacity > MAX_ARRAY_SIZE ? Integer.MAX_VALUE : MAX_ARRAY_SIZE;
+        heap = Arrays.copyOf(heap,
+                M3PriorityQueueGrowth.nextCapacity(heap.length, minimumCapacity));
     }
 
     private void checkForComodification(int expectedModCount) {

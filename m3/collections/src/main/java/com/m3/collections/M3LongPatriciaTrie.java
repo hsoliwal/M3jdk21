@@ -476,13 +476,20 @@ public final class M3LongPatriciaTrie {
 
     private void grow() {
         int capacity = keys.length >= (MAX_CAPACITY >>> 1) ? MAX_CAPACITY : keys.length << 1;
-        keys = Arrays.copyOf(keys, capacity);
-        values = Arrays.copyOf(values, capacity);
-        leafParent = Arrays.copyOf(leafParent, capacity);
-        critBit = Arrays.copyOf(critBit, capacity);
-        child0 = Arrays.copyOf(child0, capacity);
-        child1 = Arrays.copyOf(child1, capacity);
-        nodeParent = Arrays.copyOf(nodeParent, capacity);
+        long[] nextKeys = Arrays.copyOf(keys, capacity);
+        long[] nextValues = Arrays.copyOf(values, capacity);
+        int[] nextLeafParent = Arrays.copyOf(leafParent, capacity);
+        byte[] nextCritBit = Arrays.copyOf(critBit, capacity);
+        int[] nextChild0 = Arrays.copyOf(child0, capacity);
+        int[] nextChild1 = Arrays.copyOf(child1, capacity);
+        int[] nextNodeParent = Arrays.copyOf(nodeParent, capacity);
+        keys = nextKeys;
+        values = nextValues;
+        leafParent = nextLeafParent;
+        critBit = nextCritBit;
+        child0 = nextChild0;
+        child1 = nextChild1;
+        nodeParent = nextNodeParent;
     }
 
     private void allocate(int capacity) {

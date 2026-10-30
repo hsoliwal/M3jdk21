@@ -13,6 +13,10 @@ on:
       - '.github/workflows/m3fs-inline-primitives.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   original-m3fs-java21-native:
     runs-on: ubuntu-24.04

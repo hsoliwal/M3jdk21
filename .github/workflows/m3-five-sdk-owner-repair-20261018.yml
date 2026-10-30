@@ -11,6 +11,10 @@ on:
     branches: [m3/five-sdk-owner-repair-receiver-20261018]
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-java-jni:
     runs-on: ubuntu-24.04

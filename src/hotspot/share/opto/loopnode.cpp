@@ -493,19 +493,19 @@ PhiNode* PhaseIdealLoop::loop_iv_phi(Node* xphi, Node* phi_incr, Node* x, IdealL
   return phi;
 }
 
-static int check_stride_overflow(jlong stride_con, const TypeInteger* limit_t, BasicType bt) {
-  if (stride_con > 0) {
-    if (limit_t->lo_as_long() > (max_signed_integer(bt) - stride_con)) {
+static int check_stride_overflow(jlong final_correction, const TypeInteger* limit_t, BasicType bt) {
+  if (final_correction > 0) {
+    if (limit_t->lo_as_long() > (max_signed_integer(bt) - final_correction)) {
       return -1;
     }
-    if (limit_t->hi_as_long() > (max_signed_integer(bt) - stride_con)) {
+    if (limit_t->hi_as_long() > (max_signed_integer(bt) - final_correction)) {
       return 1;
     }
   } else {
-    if (limit_t->hi_as_long() < (min_signed_integer(bt) - stride_con)) {
+    if (limit_t->hi_as_long() < (min_signed_integer(bt) - final_correction)) {
       return -1;
     }
-    if (limit_t->lo_as_long() < (min_signed_integer(bt) - stride_con)) {
+    if (limit_t->lo_as_long() < (min_signed_integer(bt) - final_correction)) {
       return 1;
     }
   }
@@ -701,14 +701,24 @@ SafePointNode* PhaseIdealLoop::find_safepoint(Node* back_control, Node* x, Ideal
 
     // We can only use that safepoint if there's no side effect between the backedge and the safepoint.
 
-    // mm is used for book keeping
+    // mm is the memory state at the safepoint (when it's a MergeMem)
+    // no_side_effect_since_safepoint() goes over the memory state at the backedge. It resets the mm input for each
+    // component of the memory state it encounters so it points to the base memory. Once no_side_effect_since_safepoint()
+    // is done, if no side effect after the safepoint was found, mm should transform to the base memory: the states at
+    // the backedge and safepoint are the same so all components of the memory state at the safepoint should have been
+    // reset.
     MergeMemNode* mm = nullptr;
 #ifdef ASSERT
     if (mem->is_MergeMem()) {
       mm = mem->clone()->as_MergeMem();
       _igvn._worklist.push(mm);
       for (MergeMemStream mms(mem->as_MergeMem()); mms.next_non_empty(); ) {
-        if (mms.alias_idx() != Compile::AliasIdxBot && loop != get_loop(ctrl_or_self(mms.memory()))) {
+        // Loop invariant memory state won't be reset by no_side_effect_since_safepoint(). Do it here.
+        // Escape Analysis can add state to mm that it doesn't add to the backedge memory Phis, breaking verification
+        // code that relies on mm. Clear that extra state here.
+        if (mms.alias_idx() != Compile::AliasIdxBot &&
+            (loop != get_loop(ctrl_or_self(mms.memory())) ||
+             (mms.adr_type()->isa_oop_ptr() && mms.adr_type()->is_known_instance()))) {
           mm->set_memory_at(mms.alias_idx(), mem->as_MergeMem()->base_memory());
         }
       }
@@ -767,7 +777,7 @@ SafePointNode* PhaseIdealLoop::find_safepoint(Node* back_control, Node* x, Ideal
 //     // inner_incr := AddI(inner_phi, intcon(stride))
 //     inner_incr = inner_phi + stride;
 //     if (inner_incr < inner_iters_actual) {
-//       ... use phi=>(outer_phi+inner_phi) and incr=>(outer_phi+inner_incr) ...
+//       ... use phi=>(outer_phi+inner_phi) ...
 //       continue;
 //     }
 //     else break;
@@ -801,13 +811,14 @@ bool PhaseIdealLoop::create_loop_nest(IdealLoopTree* loop, Node_List &old_new) {
   }
 #endif
 
-  jlong stride_con = head->stride_con();
-  assert(stride_con != 0, "missed some peephole opt");
+  jlong stride_con_long = head->stride_con();
+  assert(stride_con_long != 0, "missed some peephole opt");
   // We can't iterate for more than max int at a time.
-  if (stride_con != (jint)stride_con) {
+  if (stride_con_long != (jint)stride_con_long || stride_con_long == min_jint) {
     assert(bt == T_LONG, "only for long loops");
     return false;
   }
+  jint stride_con = checked_cast<jint>(stride_con_long);
   // The number of iterations for the integer count loop: guarantee no
   // overflow: max_jint - stride_con max. -1 so there's no need for a
   // loop limit check if the exit test is <= or >=.
@@ -927,11 +938,19 @@ bool PhaseIdealLoop::create_loop_nest(IdealLoopTree* loop, Node_List &old_new) {
   // inner_iters_max may not fit in a signed integer (iterating from
   // Long.MIN_VALUE to Long.MAX_VALUE for instance). Use an unsigned
   // min.
-  Node* inner_iters_actual = MaxNode::unsigned_min(inner_iters_max, inner_iters_limit, TypeInteger::make(0, iters_limit, Type::WidenMin, bt), _igvn);
+  const TypeInteger* inner_iters_actual_range = TypeInteger::make(0, iters_limit, Type::WidenMin, bt);
+  Node* inner_iters_actual = MaxNode::unsigned_min(inner_iters_max, inner_iters_limit, inner_iters_actual_range, _igvn);
 
   Node* inner_iters_actual_int;
   if (bt == T_LONG) {
     inner_iters_actual_int = new ConvL2INode(inner_iters_actual);
+    _igvn.register_new_node_with_optimizer(inner_iters_actual_int);
+    // When the inner loop is transformed to a counted loop, a loop limit check is not expected to be needed because
+    // the loop limit is less or equal to max_jint - stride - 1 (if stride is positive but a similar argument exists for
+    // a negative stride). We add a CastII here to guarantee that, when the counted loop is created in a subsequent loop
+    // opts pass, an accurate range of values for the limits is found.
+    const TypeInt* inner_iters_actual_int_range = TypeInt::make(0, iters_limit, Type::WidenMin);
+    inner_iters_actual_int = new CastIINode(outer_head, inner_iters_actual_int, inner_iters_actual_int_range, ConstraintCastNode::UnconditionalDependency);
     _igvn.register_new_node_with_optimizer(inner_iters_actual_int);
   } else {
     inner_iters_actual_int = inner_iters_actual;
@@ -945,7 +964,7 @@ bool PhaseIdealLoop::create_loop_nest(IdealLoopTree* loop, Node_List &old_new) {
   }
 
   // Clone the iv data nodes as an integer iv
-  Node* int_stride = _igvn.intcon(checked_cast<int>(stride_con));
+  Node* int_stride = _igvn.intcon(stride_con);
   set_ctrl(int_stride, C->root());
   Node* inner_phi = new PhiNode(x->in(0), TypeInt::INT);
   Node* inner_incr = new AddINode(inner_phi, int_stride);
@@ -976,10 +995,6 @@ bool PhaseIdealLoop::create_loop_nest(IdealLoopTree* loop, Node_List &old_new) {
   // Replace inner loop long iv phi as inner loop int iv phi + outer
   // loop iv phi
   Node* iv_add = loop_nest_replace_iv(phi, inner_phi, outer_phi, head, bt);
-
-  // Replace inner loop long iv incr with inner loop int incr + outer
-  // loop iv phi
-  loop_nest_replace_iv(incr, inner_incr, outer_phi, head, bt);
 
   set_subtree_ctrl(inner_iters_actual_int, body_populated);
 
@@ -1029,7 +1044,7 @@ bool PhaseIdealLoop::create_loop_nest(IdealLoopTree* loop, Node_List &old_new) {
   //       back_control: fallthrough;
   //     else
   //       inner_exit_branch: break;  //exit_branch->clone()
-  //     ... use phi=>(outer_phi+inner_phi) and incr=>(outer_phi+inner_incr) ...
+  //     ... use phi=>(outer_phi+inner_phi) ...
   //     inner_phi = inner_phi + stride;  // inner_incr
   //   }
   //   outer_exit_test:  //exit_test->clone(), in(0):=inner_exit_branch
@@ -1044,7 +1059,7 @@ bool PhaseIdealLoop::create_loop_nest(IdealLoopTree* loop, Node_List &old_new) {
     register_new_node(outer_phi, outer_head);
   }
 
-  transform_long_range_checks(checked_cast<int>(stride_con), range_checks, outer_phi, inner_iters_actual_int,
+  transform_long_range_checks(stride_con, range_checks, outer_phi, inner_iters_actual_int,
                               inner_phi, iv_add, inner_head);
   // Peel one iteration of the loop and use the safepoint at the end
   // of the peeled iteration to insert Parse Predicates. If no well
@@ -1081,11 +1096,16 @@ bool PhaseIdealLoop::create_loop_nest(IdealLoopTree* loop, Node_List &old_new) {
   return true;
 }
 
-int PhaseIdealLoop::extract_long_range_checks(const IdealLoopTree* loop, jlong stride_con, int iters_limit, PhiNode* phi,
+// This method extracts long range checks and computes the reduced iteration count (reduced_iters_limit) such that all
+// extracted long range checks can be transformed. In particular, we check that
+// - reduced_iters_limit * ABS(scale) <= original_iters_limit < max_jint
+// - we have the proper form "scale*iv + offset <u R" of a range check
+// The returned reduced iteration count is used as the limit of the inner iv in PhaseIdealLoop::create_loop_nest().
+int PhaseIdealLoop::extract_long_range_checks(const IdealLoopTree* loop, jint stride_con, int iters_limit, PhiNode* phi,
                                               Node_List& range_checks) {
   const jlong min_iters = 2;
   jlong reduced_iters_limit = iters_limit;
-  jlong original_iters_limit = iters_limit;
+  const jlong original_iters_limit = iters_limit;
   for (uint i = 0; i < loop->_body.size(); i++) {
     Node* c = loop->_body.at(i);
     if (c->is_IfProj() && c->in(0)->is_RangeCheck()) {
@@ -1097,7 +1117,10 @@ int PhaseIdealLoop::extract_long_range_checks(const IdealLoopTree* loop, jlong s
         jlong scale = 0;
         if (loop->is_range_check_if(if_proj, this, T_LONG, phi, range, offset, scale) &&
             loop->is_invariant(range) && loop->is_invariant(offset) &&
-            original_iters_limit / ABS(scale * stride_con) >= min_iters) {
+            scale != min_jlong &&
+            original_iters_limit / ABS(scale) >= min_iters * ABS(stride_con)) {
+          assert(scale == (jint)scale, "scale should be an int");
+          // Ensure: reduced_iters_limit * ABS(scale) <= original_iters_limit < max_jint
           reduced_iters_limit = MIN2(reduced_iters_limit, original_iters_limit/ABS(scale));
           range_checks.push(c);
         }
@@ -1108,138 +1131,1056 @@ int PhaseIdealLoop::extract_long_range_checks(const IdealLoopTree* loop, jlong s
   return checked_cast<int>(reduced_iters_limit);
 }
 
-// One execution of the inner loop covers a sub-range of the entire iteration range of the loop: [A,Z), aka [A=init,
-// Z=limit). If the loop has at least one trip (which is the case here), the iteration variable i always takes A as its
-// first value, followed by A+S (S is the stride), next A+2S, etc. The limit is exclusive, so that the final value B of
-// i is never Z.  It will be B=Z-1 if S=1, or B=Z+1 if S=-1.
-
-// If |S|>1 the formula for the last value B would require a floor operation, specifically B=floor((Z-sgn(S)-A)/S)*S+A,
-// which is B=Z-sgn(S)U for some U in [1,|S|].  So when S>0, i ranges as i:[A,Z) or i:[A,B=Z-U], or else (in reverse)
-// as i:(Z,A] or i:[B=Z+U,A].  It will become important to reason about this inclusive range [A,B] or [B,A].
-
-// Within the loop there may be many range checks.  Each such range check (R.C.) is of the form 0 <= i*K+L < R, where K
-// is a scale factor applied to the loop iteration variable i, and L is some offset; K, L, and R are loop-invariant.
-// Because R is never negative (see below), this check can always be simplified to an unsigned check i*K+L <u R.
-
-// When a long loop over a 64-bit variable i (outer_iv) is decomposed into a series of shorter sub-loops over a 32-bit
-// variable j (inner_iv), j ranges over a shorter interval j:[0,B_2] or [0,Z_2) (assuming S > 0), where the limit is
-// chosen to prevent various cases of 32-bit overflow (including multiplications j*K below).  In the sub-loop the
-// logical value i is offset from j by a 64-bit constant C, so i ranges in i:C+[0,Z_2).
-
-// For S<0, j ranges (in reverse!) through j:[-|B_2|,0] or (-|Z_2|,0].  For either sign of S, we can say i=j+C and j
-// ranges through 32-bit ranges [A_2,B_2] or [B_2,A_2] (A_2=0 of course).
-
-// The disjoint union of all the C+[A_2,B_2] ranges from the sub-loops must be identical to the whole range [A,B].
-// Assuming S>0, the first C must be A itself, and the next C value is the previous C+B_2, plus S.  If |S|=1, the next
-// C value is also the previous C+Z_2.  In each sub-loop, j counts from j=A_2=0 and i counts from C+0 and exits at
-// j=B_2 (i=C+B_2), just before it gets to i=C+Z_2.  Both i and j count up (from C and 0) if S>0; otherwise they count
-// down (from C and 0 again).
-
-// Returning to range checks, we see that each i*K+L <u R expands to (C+j)*K+L <u R, or j*K+Q <u R, where Q=(C*K+L).
-// (Recall that K and L and R are loop-invariant scale, offset and range values for a particular R.C.)  This is still a
-// 64-bit comparison, so the range check elimination logic will not apply to it.  (The R.C.E. transforms operate only on
-// 32-bit indexes and comparisons, because they use 64-bit temporary values to avoid overflow; see
-// PhaseIdealLoop::add_constraint.)
-
-// We must transform this comparison so that it gets the same answer, but by means of a 32-bit R.C. (using j not i) of
-// the form j*K+L_2 <u32 R_2.  Note that L_2 and R_2 must be loop-invariant, but only with respect to the sub-loop.  Thus, the
-// problem reduces to computing values for L_2 and R_2 (for each R.C. in the loop) in the loop header for the sub-loop.
-// Then the standard R.C.E. transforms can take those as inputs and further compute the necessary minimum and maximum
-// values for the 32-bit counter j within which the range checks can be eliminated.
-
-// So, given j*K+Q <u R, we need to find some j*K+L_2 <u32 R_2, where L_2 and R_2 fit in 32 bits, and the 32-bit operations do
-// not overflow. We also need to cover the cases where i*K+L (= j*K+Q) overflows to a 64-bit negative, since that is
-// allowed as an input to the R.C., as long as the R.C. as a whole fails.
-
-// If 32-bit multiplication j*K might overflow, we adjust the sub-loop limit Z_2 closer to zero to reduce j's range.
-
-// For each R.C. j*K+Q <u32 R, the range of mathematical values of j*K+Q in the sub-loop is [Q_min, Q_max], where
-// Q_min=Q and Q_max=B_2*K+Q (if S>0 and K>0), Q_min=A_2*K+Q and Q_max=Q (if S<0 and K>0),
-// Q_min=B_2*K+Q and Q_max=Q if (S>0 and K<0), Q_min=Q and Q_max=A_2*K+Q (if S<0 and K<0)
-
-// Note that the first R.C. value is always Q=(S*K>0 ? Q_min : Q_max).  Also Q_{min,max} = Q + {min,max}(A_2*K,B_2*K).
-// If S*K>0 then, as the loop iterations progress, each R.C. value i*K+L = j*K+Q goes up from Q=Q_min towards Q_max.
-// If S*K<0 then j*K+Q starts at Q=Q_max and goes down towards Q_min.
-
-// Case A: Some Negatives (but no overflow).
-// Number line:
-// |s64_min   .    .    .    0    .    .    .   s64_max|
-// |    .  Q_min..Q_max .    0    .    .    .     .    |  s64 negative
-// |    .     .    .    .    R=0  R<   R<   R<    R<   |  (against R values)
-// |    .     .    .  Q_min..0..Q_max  .    .     .    |  small mixed
-// |    .     .    .    .    R    R    R<   R<    R<   |  (against R values)
+// We started from a long loop:
 //
-// R values which are out of range (>Q_max+1) are reduced to max(0,Q_max+1).  They are marked on the number line as R<.
+//     for (long i = outer_init; i < outer_limit; i += stride) {
+//         ...
+//         // One or more range checks of the form
+//         //     RangeCheck(i*K + L, R)
+//         // where
+//         //     i = iv
+//         //     K = scale,  loop-invariant
+//         //     L = offset, loop-invariant
+//         //     R = range,  loop-invariant and non-negative
+//         RangeCheck(i*scale1 + offset1, range1) = i*scale1 + offset1 <64u range1
+//         RangeCheck(i*scale2 + offset2, range2) = i*scale2 + offset2 <64u range2
+//         ...
+//     }
 //
-// So, if Q_min <s64 0, then use this test:
-// j*K + s32_trunc(Q_min) <u32 clamp(R, 0, Q_max+1) if S*K>0 (R.C.E. steps upward)
-// j*K + s32_trunc(Q_max) <u32 clamp(R, 0, Q_max+1) if S*K<0 (R.C.E. steps downward)
-// Both formulas reduce to adding j*K to the 32-bit truncated value of the first R.C. expression value, Q:
-// j*K + s32_trunc(Q) <u32 clamp(R, 0, Q_max+1) for all S,K
-
-// If the 32-bit truncation loses information, no harm is done, since certainly the clamp also will return R_2=zero.
-
-// Case B: No Negatives.
-// Number line:
-// |s64_min   .    .    .    0    .    .    .   s64_max|
-// |    .     .    .    .    0 Q_min..Q_max .     .    |  small positive
-// |    .     .    .    .    R>   R    R    R<    R<   |  (against R values)
-// |    .     .    .    .    0    . Q_min..Q_max  .    |  s64 positive
-// |    .     .    .    .    R>   R>   R    R     R<   |  (against R values)
+// which we transformed into a loop nest:
 //
-// R values which are out of range (<Q_min or >Q_max+1) are reduced as marked: R> up to Q_min, R< down to Q_max+1.
-// Then the whole comparison is shifted left by Q_min, so it can take place at zero, which is a nice 32-bit value.
+//     for (long i = outer_init; i < outer_limit; i += outer_stride) {
+//         for (int j = 0; j < limit; j += stride) {
+//             ...
+//             // One or more range checks of the form
+//             //     RangeCheck((i+j)*K + L, R)
+//             // where
+//             //     i = outer_iv, inner-loop-invariant
+//             //     j = inner_iv
+//             //     K = scale,  loop-invariant
+//             //     L = offset, loop-invariant
+//             //     R = range,  loop-invariant and non-negative
+//             // and when combining the inner-loop-invariant offsets i and L together, we get:
+//             //     RangeCheck(j*K + Q, R)
+//             // where
+//             //     Q = i*K + L, loop-invariant, scaled outer_iv + offset
+//             RangeCheck((i+j)*scale1 + offset1, range1) = (i+j)*scale1 + offset1 <64u range1
+//                                                        =    j *scale1 + Q1      <64u range1
+//             RangeCheck((i+j)*scale2 + offset2, range2) = (i+j)*scale2 + offset2 <64u range2
+//                                                        =    j *scale2 + Q2      <64u range2
+//             ...
+//         }
+//     }
 //
-// So, if both Q_min, Q_max+1 >=s64 0, then use this test:
-// j*K + 0         <u32 clamp(R, Q_min, Q_max+1) - Q_min if S*K>0
-// More generally:
-// j*K + Q - Q_min <u32 clamp(R, Q_min, Q_max+1) - Q_min for all S,K
-
-// Case C: Overflow in the 64-bit domain
-// Number line:
-// |..Q_max-2^64   .    .    0    .    .    .   Q_min..|  s64 overflow
-// |    .     .    .    .    R>   R>   R>   R>    R    |  (against R values)
+// Where the outer loop iv takes the values
+//     i = [outer_init, outer_limit) = [outer_init, outer_last], where outer_last = outer_limit - X, for some X
+// and the inner loop iv takes the values
+//     j = [0,          limit) =       [0,          last],       where last       = limit       - Y, for some Y.
 //
-// In this case, Q_min >s64 Q_max+1, even though the mathematical values of Q_min and Q_max+1 are correctly ordered.
-// The formulas from the previous case can be used, except that the bad upper bound Q_max is replaced by max_jlong.
-// (In fact, we could use any replacement bound from R to max_jlong inclusive, as the input to the clamp function.)
+// We could also have an initial int loop that contains long range checks involving the int iv. These long range checks
+// can also be transformed by converting the int loop into a loop nest.
 //
-// So if Q_min >=s64 0 but Q_max+1 <s64 0, use this test:
-// j*K + 0         <u32 clamp(R, Q_min, max_jlong) - Q_min if S*K>0
-// More generally:
-// j*K + Q - Q_min <u32 clamp(R, Q_min, max_jlong) - Q_min for all S,K
+// We notice that even though we have an int-counted inner loop, we still have long range checks (64-bit) for which
+// we cannot apply range check elimination because that only works for int range checks (32-bit).
+// The goal of PhaseIdealLoop::transform_long_range_checks() is therefore to transform these long range checks to
+// equivalent int range checks that can be eliminated by C2's regular int-based range check elimination:
 //
-// Dropping the bad bound means only Q_min is used to reduce the range of R:
-// j*K + Q - Q_min <u32 max(Q_min, R) - Q_min for all S,K
+//     Transform a long range check in the inner int loop
+//         (i * K) + L  <u64 R
+//     to an equivalent int range check of the form
+//         (j * K) + L2 <u32 R2
+//     Or more formally:
+//         (i * K) + L  <u64 R
+//         CmpUL(AddL(MulL(i, K), L),  R)
+//     is true iff
+//         (j * K) + L2 <u32 R2
+//         CmpU(AddI(MulI(j, K), L2), R2)
+//     for every j in the inner loop where the new L2 and R2 are inner-loop-invariant.
 //
-// Here the clamp function is a 64-bit min/max that reduces the dynamic range of its R operand to the required [L,H]:
-//     clamp(X, L, H) := max(L, min(X, H))
-// When degenerately L > H, it returns L not H.
 //
-// All of the formulas above can be merged into a single one:
-//     L_clamp = Q_min < 0 ? 0 : Q_min        --whether and how far to left-shift
-//     H_clamp = Q_max+1 < Q_min ? max_jlong : Q_max+1
-//             = Q_max+1 < 0 && Q_min >= 0 ? max_jlong : Q_max+1
-//     Q_first = Q = (S*K>0 ? Q_min : Q_max) = (C*K+L)
-//     R_clamp = clamp(R, L_clamp, H_clamp)   --reduced dynamic range
-//     replacement R.C.:
-//       j*K + Q_first - L_clamp <u32 R_clamp - L_clamp
-//     or equivalently:
-//       j*K + L_2 <u32 R_2
-//     where
-//       L_2 = Q_first - L_clamp
-//       R_2 = R_clamp - L_clamp
+// Various details of this transformation would break badly if R could be negative, so this transformation only operates
+// after obtaining hard evidence that R < 0 is impossible. For example, if R comes from a LoadRange node, we know R
+// cannot be negative.  For explicit checks (of both int and long) a proof is constructed in
+// inline_preconditions_checkIndex, which triggers an uncommon trap if R < 0, then wraps R in a ConstraintCastNode with
+// a non-negative type. Later on, when IdealLoopTree::is_range_check_if looks for an optimizable range check, it checks
+// that the type of that R node is non-negative. Any "wild" R node that could be negative is not treated as an
+// optimizable range check, but R values from a.length and inside checkIndex are good to go.
 //
-// Note on why R is never negative:
 //
-// Various details of this transformation would break badly if R could be negative, so this transformation only
-// operates after obtaining hard evidence that R<0 is impossible.  For example, if R comes from a LoadRange node, we
-// know R cannot be negative.  For explicit checks (of both int and long) a proof is constructed in
-// inline_preconditions_checkIndex, which triggers an uncommon trap if R<0, then wraps R in a ConstraintCastNode with a
-// non-negative type.  Later on, when IdealLoopTree::is_range_check_if looks for an optimizable R.C., it checks that
-// the type of that R node is non-negative.  Any "wild" R node that could be negative is not treated as an optimizable
-// R.C., but R values from a.length and inside checkIndex are good to go.
+// The remaining comment first establishes some pre-conditions under which the above transformation is correct and then
+// shows a formal proof of the correctness of the transformation.
 //
+// The conditions must already have been checked upon entering this method. We will refer to code where this happened.
+//
+// Before we start, we first need to introduce some notation rules (also used later for the transformation proof).
+//
+//
+// Notation
+// ========
+// In this section, the +/- symbol is only used for the addition/subtraction in the set of infinite-width integers.
+// The addition/subtraction in the set of 32/64-bit integers are AddI/SubI and AddL/SubL, respectively.
+//
+// On the other hand, comparison operators are used to denote the comparison operator in the set of infinite-width
+// integers, or the signed comparison in the set of fixed-width integers. Unsigned comparisons in the set of fixed-width
+// integers are prefixed with u.
+//
+// Denote SI/L(x), UI/L(x) being operators converting a fixed-width integral value to its infinite-width mathematical
+// signed value and unsigned value, respectively.
+// For example:
+// - SI(x) = UI(x) = 1, for x = int32_t(1)
+// - SI(x) = -1,        for x = int32_t(-1)
+// - UL(x) = 2^64 - 1,  for x = int64_t(-1)
+//
+// Denote TruncL(x) being a conversion from an infinite-width integer x to an int64_t
+// For example:
+// - TruncL(max_jlong)     = max_jlong
+// - TruncL(max_jlong + 1) = min_jlong
+//
+// Denote Cmp being the comparison operator in the set of infinite-width integers.
+// - Cmp(x, y)
+//
+// Now that we established some notation, we continue defining the conditions that are required for valid long range
+// check transformations.
+//
+//
+// Conditions
+// ==========
+//
+// Condition (KI)
+// --------------
+// In PhaseIdealLoop::extract_long_range_check(), we check the condition
+//     original_iters_limit / ABS(scale) >= min_iters * ABS(stride_con)    (KI-1)
+// where
+//     K = scale
+//     min_iters = 2
+//     0 < original_iters_limit < max_jint
+//     ABS(stride_con) > 0
+// From (KI-1)
+//     min_iters * ABS(stride_con) = 2 * ABS(stride_con) <= original_iters_limit / ABS(K)
+// then
+//    2 * ABS(stride_con) * ABS(K) <= original_iters_limit
+// and
+//    0 <= ABS(K) <= original_iters_limit < max_jint
+//
+// It follows that K is indeed an int32_t (KI).
+//
+// Condition (R0)
+// --------------
+// In PhaseIdealLoop::extract_long_range_check(), we check IdealLoopTree::is_range_check_if() which guarantees that
+//    R >= 0
+// because R is either a LoadRange or an integer that is non-negative (R0).
+//
+// Conditions (P-lo), (P-hi), (Q-lo), (Q-hi), and (Q-lo-hi)
+// --------------------------------------------------------
+// j is to be the induction variable of an int counted loop (i.e. the inner iv).
+// From PhaseIdealLoop::extract_long_range_check() and K = scale, we reduce the iterations so that:
+//     reduced_iters_limit * ABS(K) <= original_iters_limit < max_jint    (Q1)
+//
+// By the fundamentals of an int counted loop, we have:
+//     j_min, j_max being int32_t values
+// such that
+//     SI(j_min) <= SI(j) <= SI(j_max)    (Q2)
+//
+// Furthermore, due to how we construct the int counted loop, we also have
+//     0 <= SI(j_max) - SI(j_min) <= reduced_iters_limit    (Q3)
+//
+// This means that:
+//
+// For K > 0, we multiply K to (Q2)
+//     SI(j_min) * K <= SI(j) * K <= SI(j_max) * K
+// and to (Q3)
+//     0 <= SI(j_max) * K - SI(j_min) * K     <= reduced_iters_limit * K
+//                                            <  max_jint    (apply (Q1))
+// and we get
+//     0 <  SI(j_max) * K - SI(j_min) * K + 1 <= max_jint    (Q4)
+//
+// For K < 0, we multiply K to (Q2)
+//     SI(j_min) * K >= SI(j) * K >= SI(j_max) * K
+// and to (Q3)
+//     0 <= SI(j_min) * K - SI(j_max) * K     <= reduced_iters_limit * -K
+//                                            <  max_jint    (apply (Q1))
+// and we get
+//     0 <  SI(j_min) * K - SI(j_max) * K + 1 <= max_jint    (Q5)
+//
+// Since the multiplication of int32_t values must be an int64_t value, we can choose:
+//     (P-lo): P_lo such that SL(P_lo) is the smallest value of "SI(j) * K"
+//     (P-hi): P_hi such that SL(P_hi) is the largest  value of "SI(j) * K" plus 1.
+//
+// This means that:
+//
+// For K > 0, we have:
+//     SL(P_lo) = SI(j_min) * K
+//     SL(P_hi) = SI(j_max) * K + 1
+// which implies
+//     SL(P_lo) = SI(j_min) * K <= SI(j) * K <= SI(j_max) * K + 1 = SL(P_hi)
+// Starting from (Q4)
+//     0 < SI(j_max) * K - SI(j_min) * K + 1 <= max_jint
+// we get
+//     0 < SL(P_hi)      - SL(P_lo)          <= max_jint    (Q6)
+//
+// For K < 0, we have:
+//     SL(P_lo) = SI(j_max) * K
+//     SL(P_hi) = SI(j_min) * K + 1
+// which implies
+//     SL(P_lo) = SI(j_max) * K <= SI(j) * K <= SI(j_min) * K + 1 = SL(P_hi)
+// Starting from (Q5)
+//     0 < SI(j_min) * K - SI(j_max) * K + 1 <= max_jint
+// we get
+//     0 < SL(P_hi)      - SL(P_lo)          <= max_jint    (Q7)
+//
+// As a result, from (Q6) and (Q7), we see that
+//     0 < SL(P_hi) - SL(P_lo) <= max_jint    (Q8)
+//
+// From (P-lo)
+//    SL(P_lo) <= SI(j) * K
+// and (P-hi)
+//    SL(P_hi) >= SI(j) * K + 1
+// and (Q8) follows
+//     0 <= SI(j) * K - SL(P_lo)
+//       <  SL(P_hi)  - SL(P_lo)
+//       <= max_jint    (Q9)
+//
+// Since SI(j) and K are int32_t values, their multiplication
+//     SI(j) * K
+// cannot overflow the int64_t range and therefore
+//     SI(j) * K = SL(MulL(ConvI2L(j), K))    (Q10)
+//
+// Starting from (Q9)
+//     0 <= SI(j) * K               - SL(P_lo) < SL(P_hi) - SL(P_lo) <= max_jint
+// it follows with (Q10)
+//     0 <= SL(MulL(ConvI2L(j), K)) - SL(P_lo) < SL(P_hi) - SL(P_lo) <= max_jint    (Q11)
+//
+// From (Q9)
+//     0 <= SL(P_hi) - SL(P_lo) <= max_jint
+// it follows that SubL(P_hi, P_lo) does not overflow the signed long domain:
+//     SL(SubL(P_hi, P_lo)) = SL(P_hi) - SL(P_lo)    (Q12)
+// and from (Q11)
+//     SubL(MulL(ConvI2L(j), K), P_lo)
+// does not overflow the signed long domain:
+//     SL(SubL(MulL(ConvI2L(j), K), P_lo) = SL(MulL(ConvI2L(j), K)) - SL(P_lo)    (Q13)
+//
+// From (Q11)
+//     0 <= SL(MulL(ConvI2L(j), K)) - SL(P_lo)  < SL(P_hi) - SL(P_lo) <= max_jint
+// we apply (Q13)
+//     0 <= SL(SubL(MulL(ConvI2L(j), K), P_lo)) < SL(P_hi) - SL(P_lo) <= max_jint
+// and apply (Q12)
+//     0 <= SubL(MulL(ConvI2L(j), K), P_lo)     < SubL(P_hi, P_lo)    <= max_jint    (Q14)
+//
+// Note that we can do a simple reassociation of SubL if x, y, and z are int64_t:
+//     SubL(x, y) = SubL(AddL(x, z), AddL(y, z))    (Q15)
+// We apply (Q15) to both sides of (Q14)
+//     0 <= SubL(     MulL(ConvI2L(j), K),          P_lo))    < SubL(     P_hi,          P_lo)     <= max_jint
+// and get
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), AddL(P_lo, Q)) < SubL(AddL(P_hi, Q), AddL(P_lo, Q)) <= max_jint    (Q16)
+//
+// We can insert
+//     Q_lo = AddL(P_lo, Q)    (Q-lo)
+// and
+//     Q_hi = AddL(P_hi, Q)    (Q-hi)
+// in (Q16) and get (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo        ) < SubL(Q_hi,          Q_lo)           <= max_jint
+//
+// Condition (LHS)
+// ---------------
+// We ensure with
+//     PhaseIdealLoop::extract_long_range_check() -> PhaseIdealLoop::is_range_check_if()
+// that we indeed have the form
+//     AddL(MulL(ConvI2L(j), K), Q)    (done with PhaseIdealLoop::is_scaled_iv_plus_offset())
+// for the long range check with R (R0):
+//     LHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q), R)
+//
+//
+// We have our conditions
+//     (KI):      K is an int32_t constant
+//     (P-lo):    P_lo: The smallest value of "j * K" (i.e. the smallest value of the inner scaled iv),        an int64_t value
+//     (P-hi):    P_hi: The largest  value of "j * K" (i.e. the largest  value of the inner scaled iv) plus 1, an int64_t value
+//     (Q-lo):    Q_lo = AddL(P_lo, Q), an int64_t value
+//     (Q-hi):    Q_hi = AddL(P_hi, Q), an int64_t value
+//     (R0):      R is an int64_t value such that R >= 0
+//     (Q-lo-hi): 0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo) <= max_jint
+//     (LHS):     LHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q), R)
+// and define the additional variables
+//     (JI):      j is the inner iv, an int32_t value (actually further clamped by the possible values of the inner iv)
+//     (QL):      Q is an int64_t value
+//     (L-clamp): L_clamp = MaxL(Q_lo, 0)
+//     (H-clamp): H_clamp = Q_hi < Q_lo ? max_jlong : Q_hi
+//     (R-clamp): R_clamp = MaxL(MinL(R, H_clamp), L_clamp)
+// and our target int range check as
+//     RHS = CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, L_clamp))), ConvL2I(SubL(R_clamp, L_clamp)))
+//
+//
+// Now that we established our conditions and definitions, we prove that
+//     (LHS < 0) == (RHS < 0)
+// which means that we can safely replace the long range check (LHS) with the int range check (RHS).
+//
+//
+// Proof
+// =====
+// Before starting with the proof, we start with some definitions and lemmas relevant for the proof.
+//
+// Definitions
+// ===========
+// Given x, y being int64_t values, we have:
+// (CmpL-SL):  CmpL(x, y)  = Cmp(SL(x), SL(y))
+// (CmpUL-UL): CmpUL(x, y) = Cmp(UL(x), UL(y))
+//
+// Given x, y being int64_t values with x < 0 and y >= 0:
+// (CmpUL-gt): CmpUL(x, y) > 0
+//
+// Given x being an int32_t value:
+// (CmpU-gte-zero): CmpU(x, 0) >= 0
+//
+// When the following AddL/SubL do not overflow, then:
+// (AddL-SL-no-overflow): SL(AddL(x, y)) = SL(x) + SL(y)
+// (SubL-UL-no-overflow): UL(SubL(x, y)) = UL(x) - UL(y)
+//
+// When x, y < 0, then
+// (SubL-no-overflow): SubL(x, y) does not overflow the long signed domain
+//
+// No-Overflow-Lemmas
+// ==================
+// SubL-pos-no-overflow
+// --------------------
+// When x, y >= 0, both being int64_t values, then
+//     SubL(x, y)
+// does not overflow the long signed domain.
+//
+// Proof:
+// max_jlong >= SL(x) - 0
+//           >  SL(x) - 1
+//           >  ...
+//           >  SL(x) - max_jlong
+//           > min_jlong
+//
+// We refer to this lemma with (SubL-pos-no-overflow).
+//
+// AddL-no-overflow
+// ----------------
+// When x <= 0 and y >= 0, both being int64_t values, then
+//     AddL(x, y)
+// does not overflow the long signed domain.
+//
+// Proof:
+// min_jlong <= SL(x) + 0
+//           <  SL(x) + 1
+//           <  ...
+//           <  SL(x) + max_jlong
+//           <= max_jlong
+//
+// We refer to this lemma with (AddL-no-overflow).
+//
+// Lemma 1
+// =======
+// For x being an int64_t value such that min_jint <= x <= max_jint
+//     x = ConvI2L(ConvL2I(x))
+//
+// Proof:
+// If 0 <= x <= max_jint, the upper 33 bits of x are 0s.
+// ConvL2I(x) truncates 32 bits, leaving a value with the highest bit being 0.
+// ConvI2L(ConvL2I(x)) signed extends this value, filling the 32 upper bits of the result with 0.
+// As a result, x and ConvI2L(ConvL2I(x)) have the same 32 lower bits, and their 32 upper bits are all 0,
+// which means x == ConvI2L(ConvL2I(x)).
+//
+// Otherwise, min_jint <= x < 0, the upper 33 bits of x are 1s.
+// ConvL2I(x) truncates 32 bits, leaving a value with the highest bit being 1.
+// ConvI2L(ConvL2I(x)) signed extends this value, filling the 32 upper bits of the result with 1.
+// As a result, x and ConvI2L(ConvL2I(x)) have the same 32 lower bits, and their 32 upper bits are all 1, which means x == ConvI2L(ConvL2I(x))
+//
+// Lemma 2
+// =======
+// Fox x being an int32_t value
+//     x = ConvL2I(ConvI2L(x))
+//
+// Proof:
+// ConvL2I(ConvI2L(x)) extends x with 32 bits, then truncates those without touching the 32 lower bits. As a result, x == ConvL2I(ConvI2L(x))
+//
+// Lemma 3
+// =======
+// For x, y being int32_t values
+// CmpU(x, y) = CmpUL(ConvI2L(x), ConvI2L(y))
+//
+// Proof:
+// This is because
+//     UL(ConvI2L(0)) < UL(ConvI2L(1)) < UL(ConvI2L(2)) < ... < UL(ConvI2L(max_jint))
+//                    < UL(ConvI2L(min_jint)) < ... < UL(ConvI2L(-1))
+// is the same ordering as
+//     UI(0) < UI(1) < UI(2) < ... < UI(max_jint) < UI(min_jint) < ... < UI(-1)
+//
+// Lemma 4
+// =======
+// For x, y being int64_t values
+// ConvL2I(AddL/SubL/MulL(x, y)) == AddI/SubI/MulI(ConvL2I(x), ConvL2I(y))
+//
+// Proof:
+// UI(ConvL2I(AddL(x, y))) == UL(AddL(x, y)) mod 2^32                        (because UI(ConvL2I(v)) == UL(v) mod 2^32)
+//                         == ((UL(x) + UL(y)) mod 2^64) mod 2^32            (because UL(AddL(u, v)) == (UL(u) + UL(v)) mod 2^64)
+//                         == (UL(x) + UL(y)) mod 2^32                       (because (v mod 2^64) mod 2^32 == v mod 2^32)
+//                         == ((UL(x) mod 2^32) + (UL(y) mod 2^32)) mod 2^32 (because (u + v) mod 2^32 == ((u mod 2^32) + (v mod 2^32)) mod 2^32)
+//                         == (UI(ConvL2I(x)) + UI(ConvL2I(y))) mod 2^32     (because UI(ConvL2I(v)) == UL(v) mod 2^32)
+//                         == UI(AddI(ConvL2I(x), ConvL2I(y)))               (because UI(AddI(u, v)) == (UI(u) + UI(v)) mod 2^32)
+//
+// Which means ConvL2I(AddL(x, y)) == AddI(ConvL2I(x), ConvL2I(y)) (because UI(u) == UI(v) necessarily implies u == v)
+//
+// Lemma 5
+// =======
+// For x, y, z being int64_t values such that AddL(x, z) and AddL(y, z) do not under-/overflow the signed long domain.
+//     CmpL(x, y) == CmpL(AddL(x, z), AddL(y, z))
+//
+// Proof:
+// This means that:
+//     CmpL(AddL(x, z), AddL(y, z)) = Cmp(SL(AddL(x, z)), SL(AddL(y, z)) (apply (CmpL-SL))
+//                                  = Cmp(SL(x) + SL(z), SL(y) + SL(z))  (apply (AddL-SL-no-overflow)))
+//                                  = Cmp(S(x), S(y))                    (because Cmp(u + t, v + t) == Cmp(u, v))
+//                                  = CmpL(x, z)                         (apply (CmpL-SL))
+//
+// Lemma 6
+// =======
+// For x, y, z being int64_t values such that SubL(x, z) and SubL(y, z) do not under-/overflow the unsigned long domain
+//     CmpUL(x, y) == CmpUL(SubL(x, z), SubL(y, z))
+//
+// Proof:
+// This means that:
+//     CmpUL(SubL(x, z), SubL(y, z)) = Cmp(UL(SubL(x, z)), UL(SubL(y, z))) (apply (CmpL-SL))
+//                                   = Cmp(U(x) - U(z), U(y) - U(z))       (apply (SubL-UL-no-overflow))
+//                                   = Cmp(U(x), U(y))                     (because Cmp(u - t, v - t) == Cmp(u, v))
+//                                   = CmpUL(x, y)                         (apply (CmpL-SL))
+//
+// Lemma 7
+// =======
+// For x, y, z being int64_t values such that x < y, y >= 0, z >= 0
+//     CmpUL(x, z) = CmpUL(x, MinL(y, z))
+//
+// Proof:
+// If y > z (trivial):
+//     CmpUL(x, z) = CmpUL(x, MinL(y, z))
+//                 = CmpUL(x, z)
+//
+// If y <= z:
+//     CmpUL(x, z) = CmpUL(x, MinL(y, z))
+//                 = CmpUL(x, y)
+//
+// We now show that for all x, the above equation is true.
+//
+// Case x >= 0:
+// From all case assumptions, we have:
+//     0 <=  x <  y <=  z
+// We can directly convert to unsigned
+//     0 <=u x <u y <=u z
+// Therefore
+//     x <u z
+// and
+//     x <u y
+// and therefore the comparisons have the same results:
+//     CmpUL(x, z) = CmpUL(x, y)
+//
+// Case x < 0:
+// From all case assumptions, we have:
+//     x < 0 <= y <= z
+// We can convert to unsigned
+//     0 <=u y <=u z <u x
+// Therefore
+//     y <u x
+// and
+//     z <u x
+// and therefore the comparisons have the same results:
+//     CmpUL(x, z) = CmpUL(x, y)
+//
+//
+// Now that we have established some definitions and lemmas, we can prove that
+//     (LHS < 0) == (RHS < 0)
+// for given Q_lo and Q_hi int64_t values
+//
+//
+// Proof: (LHS < 0) == (RHS < 0)
+// =============================
+// From (Q-lo-hi)
+//     0 < SubL(Q_hi, Q_lo) <= max_jint
+// we have 4 cases for Q_hi and Q_lo
+// - 1. Q_lo, Q_hi <= 0
+// - 2. Q_lo < 0 < Q_hi
+// - 3. Q_lo, Q_hi >= 0
+// - 4. Q_hi < 0 < Q_lo
+// for which we all need to show that
+//     (LHS < 0) == (RHS < 0)
+//
+// Case 1 and 3 can actually be improved:
+//     Case 1: Q_lo, Q_hi <= 0  ->  Q_lo < Q_hi <= 0
+//     Case 3: Q_lo, Q_hi >= 0  ->  0 <= Q_lo < Q_hi
+//
+// Proof by Contradiction:
+// If Q_lo = Q_hi:
+//     SubL(Q_hi, Q_lo) = SubL(Q_hi, Q_hi) = 0
+// which violates (Q-lo-hi)
+//     0 < SubL(Q_hi, Q_lo) <= max_jint
+//
+// If Q_lo > Q_hi:
+//     Case 1: Q_hi < Q_lo <= 0
+//     Case 3: 0 <= Q_hi < Q_lo
+// then
+//     min_jlong <= SubL(Q_hi, Q_lo) < 0
+// in both cases which violates (Q-lo-hi)
+//
+//
+// We use the improved cases 1 and 3 in the following when proving
+//     (LHS < 0) == (RHS < 0)
+// for all 4 cases for Q_hi and Q_lo:
+//
+//
+// Case 1: Q_lo < Q_hi <= 0
+// ========================
+// We can simplify the given clamp values:
+// L_clamp = MaxL(Q_lo, 0)
+//         = 0
+// H_clamp = Q_hi < Q_lo ? max_jlong : Q_hi
+//         = Q_hi
+// R_clamp = MaxL(MinL(R, H_clamp), L_clamp)
+//         = MaxL(MinL(R, Q_hi   ), 0)
+//         = MaxL(Q_hi, 0) (because R >= 0, Q_hi < 0)
+//         = 0             (because Q_hi < 0)
+//
+//
+// From (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo)
+// together with Q_lo < 0 (Case 1), we see that
+//     AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo),    Q_lo)
+//          ---------------- >= 0 ------------------  --- < 0 ---
+// and
+//     AddL(SubL(Q_hi, Q_lo),    Q_lo)
+//          ----- > 0 -----   --- < 0 ---
+// both cannot not overflow the signed long domain (1-no-overflow) due to (AddL-no-overflow).
+//
+// The form (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo) <= max_jint
+// can also be written as
+//     CmpL(     SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo),             SubL(Q_hi, Q_lo))        < 0
+// with (1-no-overflow), we can apply Lemma 5 and add Q_lo to both sides
+//     CmpL(AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), Q_lo), AddL(SubL(Q_hi, Q_lo), Q_lo)) < 0
+// cancel out the Q_lo terms
+//     CmpL(          AddL(MulL(ConvI2L(j), K), Q),                         Q_hi)               < 0
+// and with (Case 1) see that
+//     AddL(MulL(ConvI2L(j), K), Q) < Q_hi <= 0    (1a)
+//
+// From (1a), we know that
+//     a = AddL(MulL(ConvI2L(j), K), Q) < 0
+// and from (R0) that
+//     b = R >= 0
+// which satisfies (CmpUL-gt) and we can conclude that
+//     LHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q),       R)     > 0
+//                 ----------- = a -----------    --- = b ---
+//
+// Inserting the simplified L_clamp and R_clamp from above, we get for RHS
+//     RHS == CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, L_clamp))), ConvL2I(SubL(R_clamp, L_clamp)))
+//         == CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, 0))),       ConvL2I(SubL(0, 0)))
+//         == CmpU(AddI(MulI(j, K), ConvL2I(     Q   )),        0)
+//         == CmpU(c                                   ,        0)
+//         >= 0     (apply (CmpU-gte-zero))
+//
+//
+// We showed that
+//     LHS > 0
+// and
+//     RHS >= 0
+// and therefore proved that
+//     (LHS < 0) == (RHS < 0) == false
+//
+//
+// Case 2: Q_lo < 0 < Q_hi
+// =======================
+// We can simplify the given clamp values:
+// L_clamp = MaxL(Q_lo, 0)
+//         = 0
+// H_clamp = Q_hi < Q_lo ? max_jlong : Q_hi
+//         = Q_hi
+// R_clamp = MaxL(MinL(R, H_clamp), L_clamp)
+//         = MaxL(MinL(R, Q_hi   ), 0)
+//         = MinL(R, Q_hi) (because R, Q_hi >= 0)
+//
+//
+// Looking at (Case 2):
+//     Q_hi > 0 > Q_lo
+// we have a constrained positive difference
+//     0 < SL(Q_hi) - SL(Q_lo)
+//       <= max_jlong + (-min_jlong)
+//       =  (2 * max_jlong) + 1
+//       =  2^64 - 1
+//
+// If
+//     0 < SL(Q_hi) - SL(Q_lo) <= max_jlong
+// then we don't have an overflow of SubL(Q_hi, Q_lo).
+//
+// If
+//     max_jlong < SL(Q_hi) - SL(Q_lo) <= 2^64 - 1
+// then SubL(Q_hi, Q_lo) leads to exactly one overflow. The result is always negative:
+//     SubL(Q_hi, Q_lo) = TruncL(SL(Q_hi) - SL(Q_lo)) = SL(Q_hi) - SL(Q_lo) - 2^64 < 0
+// This case is impossible as it violates (Q-lo-hi)
+//     0 < SubL(Q_hi, Q_lo)
+// We conclude that SubL(Q_hi, Q_lo) does not overflow the signed long domain (2a-no-overflow).
+//
+//
+// From (Q-lo-hi) and (2a-no-overflow), we get
+//     max_jint >=    SubL(Q_hi, Q_lo)
+//               = SL(SubL(Q_hi, Q_lo))
+//               = SL(Q_hi) - SL(Q_lo)    (2a)
+//
+// Moreover, from (Case 2), we get
+//        Q_hi  > 0
+//     SL(Q_hi) > 0    (2b)
+// and
+//        Q_lo  < 0
+//     SL(Q_lo) < 0    (2c)
+//
+// It follows for Q_lo
+//     SL(Q_lo) =  SL(Q_hi) - (SL(Q_hi) - SL(Q_lo))
+//              >  0        - (SL(Q_hi) - SL(Q_lo))    (apply (2b))
+//              >= 0        - max_jint                 (apply (2a))
+//              =            -max_jint
+// and as a result
+//     Q_lo > -max_jint    (2e)
+//
+// It follows for Q_hi
+//     SL(Q_hi) = (SL(Q_hi) - SL(Q_lo)) + SL(Q_lo)
+//              <= max_jint +             SL(Q_lo)     (apply (2a))
+//               < max_jint                            (apply (2c))
+// and as a result
+//     Q_hi < max_jint     (2f)
+//
+// With (2e) (2f), and (Case 2), we see that Q_lo and Q_hi fit into the 32-bit integer range:
+//     -max_jint < Q_lo < 0 < Q_hi < max_jint    (2g)
+//
+//
+// From (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo) <= max_jint
+// together with Q_lo < 0 (Case 2), we see that neither adding Q_lo to the left side
+//     AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo),    Q_lo)
+//          ---------------- >= 0 ------------------  --- < 0 ---
+// nor to the right side
+//     AddL(SubL(Q_hi, Q_lo),    Q_lo)
+//          ----- > 0 -----   --- < 0 ---
+// can overflow the signed long domain (2b-no-overflow).
+//
+//
+// The form (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo) <= max_jint
+// can also be written as
+//     CmpL(     SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo),             SubL(Q_hi, Q_lo))        < 0
+// with (2b-no-overflow), we can apply Lemma 5 to add Q_lo
+//     CmpL(AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), Q_lo), AddL(SubL(Q_hi, Q_lo), Q_lo)) < 0
+// cancel out the Q_lo terms
+//     CmpL(          AddL(MulL(ConvI2L(j), K), Q),                         Q_hi)               < 0
+// and with (Case 2) and (2f) see that
+//     AddL(MulL(ConvI2L(j), K), Q) < Q_hi < max_jint    (2h)
+//
+//
+// From (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo)
+// we see that neither adding Q_lo to the left side
+//     AddL(0, Q_lo) = Q_lo
+// nor to the right side (already shown with (2b-no-overflow))
+//     AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), Q_lo)
+// can overflow the signed long domain (2c-no-overflow).
+//
+//
+// The form (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo) <= max_jint
+// can also be written as
+//     CmpL(     0,             SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo))        <= 0
+// with (2c-no-overflow), we can apply Lemma 5 to add Q_lo
+//     CmpL(AddL(0, Q_lo), AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), Q_lo)) <= 0
+// cancel out the Q_lo terms and simplify
+//     CmpL(        Q_lo , AddL(          MulL(ConvI2L(j), K), Q))               <= 0
+// and with (Case 2) and (2e) see that
+//     AddL(MulL(ConvI2L(j), K), Q) >= Q_lo > -max_jint    (2i)
+//
+//
+// Putting (2h) and (2i) together, we see that the AddL actually fits into the 32-bit integer range
+//    -max_jint < Q_lo <= AddL(MulL(ConvI2L(j), K), Q) < Q_hi < max_jint    (2j)
+//
+// With (2j) and (R0), we also conclude
+//     -max_jint < MinL(Q_hi, R) < max_jint    (2k)
+//
+// We notice with
+//     (2h):     x = AddL(MulL(ConvI2L(j), K), Q) < Q_hi
+//     (Case 2): y = Q_hi > 0
+//     (R0):     z = R >= 0
+// that Lemma 7 can be applied
+//     LHS = CmpUL(                AddL(MulL(ConvI2L(j),  K),          Q),                                        R)
+//                                 ------------------ x -----------------                                      -- z --
+//         = CmpUL(                AddL(MulL(ConvI2L(j),  K),          Q),                        MinL(Q_hi,      R))
+//                                 ------------------ x -----------------                             -- y --  -- z --
+// apply Lemma 1 to add ConvI2L-ConvL2I to both sides of CmpUL because they both fit into an int32_t ((2j) and (2k))
+//     LHS = CmpUL(ConvI2L(ConvL2I(AddL(MulL(ConvI2L(j),  K),          Q))),      ConvI2L(ConvL2I(MinL(Q_hi, R))))
+// apply Lemma 3 to transform to CmpU because both sides of CmpUL are int32_t values
+//         = CmpU (        ConvL2I(AddL(MulL(ConvI2L(j),  K),          Q)) ,              ConvL2I(MinL(Q_hi, R))
+// apply Lemma 4 twice to move the ConvL2I inwards
+//         = CmpU (   AddI(ConvL2I(     MulL(ConvI2L(j),  K)),         ConvL2I(Q)),       ConvL2I(MinL(Q_hi, R)))
+//         = CmpU (   AddI(MulI(     ConvL2I(ConvI2L(j)), ConvL2I(K)), ConvL2I(Q)),       ConvL2I(MinL(Q_hi, R)))
+// apply Lemma 2 to remove the ConvL2I-ConvI2L due to (JI) and simplify K due to (KI)
+//         = CmpU (   AddI(MulI(     j,                   K),          ConvL2I(Q)),       ConvL2I(MinL(Q_hi, R)))
+// we now add a minus 0 on Q and MinL()
+//         = CmpU(    AddI(MulI(     j,                   K), ConvL2I(SubL(Q, 0))),       ConvL2I(SubL(MinL(Q_hi, R), 0)))
+// and eventually insert the simplified L_clamp and R_clamp values
+//         = CmpU(    AddI(MulI(     j,                   K), ConvL2I(SubL(Q, L_clamp))), ConvL2I(SubL(R_clamp,       L_clamp)))
+// which is equivalent to the definition of RHS
+//
+//
+// We proved that
+//     LHS = RHS
+// and thus
+//     (LHS < 0) == (RHS < 0)
+//
+//
+// Case 3: 0 <= Q_lo < Q_hi
+// ========================
+// We can simplify the given clamp values:
+// L_clamp = MaxL(Q_lo, 0)
+//         = Q_lo
+// H_clamp = Q_hi < Q_lo ? max_jlong : Q_hi
+//         = Q_hi
+// R_clamp = MaxL(MinL(R, H_clamp), L_clamp)
+//         = MaxL(MinL(R, Q_hi), Q_lo)
+//
+// RHS = CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, L_clamp))), ConvL2I(SubL(R_clamp,                   L_clamp)))
+//     = CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))),    ConvL2I(SubL(MaxL(MinL(R, Q_hi), Q_lo), Q_lo)))
+//
+// Let's first look at both SubL of (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo) <= max_jint
+//
+// We see with (SubL-pos-no-overflow) and (Case 3) that
+//     SubL(Q_hi, Q_lo)
+// does not overflow the signed long domain. Therefore, adding
+//     Q_lo >= 0    (from Case 3)
+// to the right side
+//     AddL(SubL(Q_hi, Q_lo), Q_lo) = Q_hi
+// does not overflow the signed long domain and therefore adding
+//     Q_lo >= 0    (from Case 3)
+// to the left side SubL
+//     AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) Q_lo) < AddL(SubL(Q_hi, Q_lo), Q_lo)
+// also does not overflow the signed long domain (3a-no-overflow).
+//
+//
+// The form (Q-lo-hi)
+//    0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo) <= max_jint
+// can also be written as
+//     CmpL(     SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo),             SubL(Q_hi, Q_lo))        < 0
+// with (3a-no-overflow), we can apply Lemma 5 and add Q_lo to both sides without overflow
+//     CmpL(AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), Q_lo), AddL(SubL(Q_hi, Q_lo), Q_lo)) < 0
+// cancel out the Q_lo terms
+//     CmpL(          AddL(MulL(ConvI2L(j), K), Q),                         Q_hi)               < 0
+// and see that
+//     AddL(MulL(ConvI2L(j), K), Q) < Q_hi    (3a)
+//
+//
+// From (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo)
+// we see that neither adding Q_lo to the left side
+//     AddL(0, Q_lo) = Q_lo
+// nor to the right side (3a-no-overflow)
+//     AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), Q_lo)
+// can overflow the signed long domain (3b-no-overflow).
+//
+//
+// The form (Q-lo-hi)
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) < SubL(Q_hi, Q_lo) <= max_jint
+// can also be written as
+//     CmpL(     0,             SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo))        <= 0
+// with (3b-no-overflow), we can apply Lemma 5 and add Q_lo to both sides without overflow
+//     CmpL(AddL(0, Q_lo), AddL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), Q_lo)) <= 0
+// cancel out the Q_lo terms and simplify
+//     CmpL(        Q_lo , AddL(          MulL(ConvI2L(j), K), Q))               <= 0
+// and seee that
+//     AddL(MulL(ConvI2L(j), K), Q) >= Q_lo    (3b)
+//
+//
+// Putting (3a) and (3b) together, we see that
+//     0 <= Q_lo <= AddL(MulL(ConvI2L(j), K), Q) < Q_hi    (3c)
+//
+// Looking at the definition of LHS
+//     LHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q), R)
+// we have 3 cases for R with respect to Q_lo and Q_hi:
+//     3-R1: 0 <= R <= Q_lo
+//     3-R2: 0 <= Q_lo < R < Q_hi
+//     3-R3: 0 <= Q_lo < Q_hi <= R
+//
+// We need to prove for all three cases that (LHS < 0) == (RHS < 0)
+//
+// 3-R1: 0 <= R <= Q_lo
+// --------------------
+// Combining (3-R1) and (3c), we have
+//     0 <= R <= Q_lo <= AddL(MulL(ConvI2L(j), K), Q) < Q_hi
+// and conclude
+//     LHS =  CmpUL(AddL(MulL(ConvI2L(j), K), Q), R)
+//         >= 0
+//
+// From the definition of RHS
+//     RHS =  CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(MaxL(MinL(R, Q_hi), Q_lo), Q_lo)))
+// we know from (3-R1) that R < Q_hi:
+//     RHS =  CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(MaxL(     R       , Q_lo), Q_lo)))
+// and R <= Q_lo:
+//     RHS =  CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(                    Q_lo , Q_lo)))
+//         =  CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), 0)
+//         =  CmpU(c                                       , 0)
+//         >= 0     (apply (CmpU-gte-zero))
+//
+//
+// We showed that
+//     LHS >= 0
+// and
+//     RHS >= 0
+// and therefore proved that
+//     (LHS < 0) == (RHS < 0) == false
+//
+//
+// 3-R2: 0 <= Q_lo < R < Q_hi
+// --------------------------
+// From (Q-lo-hi)
+//     0 <=                SubL(Q_hi, Q_lo) <= max_jint
+// and (3-R2), we see that subtracting Q_lo from R
+//     0 < SubL(R, Q_lo) < SubL(Q_hi, Q_lo) <= max_jint    (3d)
+// does not overflow the unsigned long domain (3-R2a-no-overflow).
+//
+// Further, we know from (3c)
+//     0 <= Q_lo <=                                     AddL(MulL(ConvI2L(j), K), Q)
+// that subtracting Q_lo
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) <= AddL(MulL(ConvI2L(j), K), Q)
+// does also not overflow the unsigned long domain (3-R2b-no-overflow).
+//
+// We can now apply several lemmas and transformations to show the equivalence of LHS and RHS
+//     LHS = CmpUL(                     AddL(MulL(ConvI2L(j),  K), Q),                                            R)
+// apply Lemma 6 to add SubL to both sides because both SubL do not overflow ((3-R2a-no-overflow) and (3-R2b-no-overflow))
+//     LHS = CmpUL(                SubL(AddL(MulL(ConvI2L(j),  K), Q), Q_lo),                                SubL(R, Q_lo))
+// apply Lemma 1 to add ConvI2L-ConvL2I because both sides of CmpUL are int32_t values ((Q-lo-hi) + (3d))
+//     LHS = CmpUL(ConvI2L(ConvL2I(SubL(AddL(MulL(ConvI2L(j),  K), Q), Q_lo)), ConvI2L(              ConvL2I(SubL(R, Q_lo)))))
+// apply Lemma 3 to transform to CmpU because both sides of CmpUL are int32_t values
+//     LHS = CmpU (ConvL2I(        SubL(AddL(MulL(ConvI2L(j),  K), Q), Q_lo)),                       ConvL2I(SubL(R, Q_lo)))
+// apply Lemma 4 twice to move the ConvL2I inwards
+//     LHS = CmpU (AddI(ConvL2I(             MulL(ConvI2L(j),  K        )), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(R, Q_lo)))
+//         = CmpU (AddI(MulI(ConvL2I(             ConvI2L(j)), ConvL2I(K)), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(R, Q_lo)))
+// apply Lemma 2 to remove the ConvL2I-ConvI2L due to (JI) and simplify K due to (KI)
+//     LHS = CmpU (AddI(MulI(                             j,   K),          ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(R, Q_lo)))
+// and space it differently
+//     LHS = CmpU (AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(          R              , Q_lo)))
+// apply R > Q_lo (3-R2) to add an equivalent MaxL for R
+//     LHS = CmpU (AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(MaxL(     R       , Q_lo), Q_lo)))
+// apply R < Q_hi (3-R2) to add an equivlanet MinL for R
+//     LHS = CmpU (AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(MaxL(MinL(R, Q_hi), Q_lo), Q_lo)))
+// which is equivalent to the definition of RHS
+//
+//
+// We proved that
+//     LHS = RHS
+// and thus
+//     (LHS < 0) == (RHS < 0)
+//
+//
+// 3-R3: 0 <= Q_lo < Q_hi <= R
+// --------------------------
+// From (3-R3) and (3c), we know that
+//     0 <= AddL(MulL(ConvI2L(j), K), Q) < Q_hi <= R
+//     0 <= AddL(MulL(ConvI2L(j), K), Q) <         R
+// and therefore
+//     LHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q), R)
+//         < 0
+//
+//
+// From the definition of
+//     RHS = CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(MaxL(MinL(R, Q_hi), Q_lo), Q_lo)))
+// we know from (3-R3) that R >= Q_hi:
+//     RHS = CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(MaxL(        Q_hi,  Q_lo), Q_lo)))
+// and Q_lo < Q_hi:
+//     RHS = CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(             Q_hi,         Q_lo)))
+// apply Lemma 2 to j due to (JI)
+//     RHS = CmpU(AddI(MulI(ConvL2I(ConvI2L(j)), K),        ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(Q_hi, Q_lo)))
+// apply Lemma 4 twice to move the ConvL2I outwards
+//     RHS = CmpU(AddI(ConvL2I(MulL(ConvI2L(j), K)),        ConvL2I(SubL(Q, Q_lo))), ConvL2I(SubL(Q_hi, Q_lo)))
+//           CmpU(ConvL2I(AddL(MulL(ConvI2L(j), K),             SubL(Q,     Q_lo))), ConvL2I(SubL(Q_hi, Q_lo)))
+//                             ------- x --------                 -- y --  -- z --
+// reassociated AddL/SubL
+//     AddL(x, SubL(y, z)) = SubL(AddL(x, y), z)
+// and space it differently as
+//     RHS = CmpU (ConvL2I(        SubL(AddL(MulL(ConvI2L(j), K),  Q),   Q_lo)),  ConvL2I(        SubL(Q_hi, Q_lo)))
+//                                           ------- x -------- -- y -- -- z --
+// apply Lemma 3 to transform to CmpUL form because both sides are int32_t values due to (Q-lo-hi)
+//     RHS = CmpUL(ConvI2L(ConvL2I(SubL(AddL(MulL(ConvI2L(j), K),  Q),   Q_lo))), ConvI2L(ConvL2I(SubL(Q_hi, Q_lo))))
+// apply Lemma 1 to remove both ConvI2L-ConvL2I because the inner values are int32_t due to (Q-lo-hi)
+//     RHS = CmpUL(                SubL(AddL(MulL(ConvI2L(j), K),  Q),   Q_lo),                   SubL(Q_hi, Q_lo))
+// and see with (Q-lo-hi) that
+//     RHS < 0
+//
+// We showed that
+//     LHS < 0
+// and
+//     RHS < 0
+// and therefore proved that
+//     (LHS < 0) == (RHS < 0) == true
+//
+//
+// Case 4: Q_hi < 0 < Q_lo
+// =======================
+// We can simplify the given clamp values:
+// L_clamp = MaxL(Q_lo, 0)
+//         = Q_lo
+// H_clamp = Q_hi < Q_lo ? max_jlong : Q_hi
+//         = max_jlong
+// R_clamp = MaxL(MinL(R, H_clamp),   L_clamp)
+//         = MaxL(MinL(R, max_jlong), Q_lo)
+//         = MaxL(R, Q_lo)    (because R <= max_jlong (R0))
+//
+// And insert them into the definition of
+//     RHS = CmpU(AddI(MulI(                j,   K), ConvL2I(SubL(Q, L_clamp))), ConvL2I(SubL(R_clamp,       L_clamp)))
+//         = CmpU(AddI(MulI(                j,   K), ConvL2I(SubL(Q, Q_lo)),     ConvL2I(SubL(MaxL(R, Q_lo), Q_lo))))
+// apply Lemma 2 to add ConvL2I-ConvI2L due to (JI)
+//     RHS = CmpU(AddI(MulI(ConvL2I(ConvI2L(j)), K), ConvL2I(SubL(Q, Q_lo)),     ConvL2I(SubL(MaxL(R, Q_lo), Q_lo)))
+// apply Lemma 4 twice to move the ConvL2I outwards:
+//     RHS = CmpU(AddI(ConvL2I(MulL(ConvI2L(j), K)), ConvL2I(SubL(Q, Q_lo)),     ConvL2I(SubL(MaxL(R, Q_lo), Q_lo)))
+//         = CmpU(ConvL2I(AddL(MulL(ConvI2L(j), K),      SubL(Q,     Q_lo))),    ConvL2I(SubL(MaxL(R, Q_lo), Q_lo)))
+//                             ------- x --------          -- y --  -- z --
+// reassociate AddL/SubL
+//     AddL(x, SubL(y, z)) = SubL(AddL(x, y), z)
+// and space it differently as
+//     RHS = CmpU(ConvL2I(         SubL(AddL(MulL(ConvI2L(j), K),     Q),    Q_lo)),  C onvL2I(SubL(MaxL(R, Q_lo), Q_lo)))
+//                                           ------- x --------    -- y --  -- z --
+// apply Lemma 3 to transform to CmpUL form because both sides are int32_t values with ConvL2I
+//     RHS = CmpUL(ConvI2L(ConvL2I(SubL(AddL(MulL(ConvI2L(j), K),     Q),    Q_lo))), ConvI2L(ConvL2I(SubL(MaxL(R, Q_lo), Q_lo))))
+// apply Lemma 1 to remove the left ConvI2L-ConvL2I because the inner value is int32_t due to (Q-lo-hi)
+//     RHS = CmpUL(                SubL(AddL(MulL(ConvI2L(j), K),     Q),    Q_lo),   ConvI2L(ConvL2I(SubL(MaxL(R, Q_lo), Q_lo))))
+//
+//
+// To remove the right-side ConvI2L-ConvL2I, we first need to show that
+//     SubL(MaxL(R, Q_lo), Q_lo)
+// is an int32_t value
+//
+// SubL is an int32_t
+// ------------------
+// (Case 4)
+//     Q_hi < 0 < Q_lo
+// is equivalent to
+//     0 <u Q_lo <=u max_jlong <u Q_hi    (4a)
+//
+// It follows that
+//     UL(Q_hi) - UL(Q_lo) >u 0
+// does not overflow the unsigned long domain and thus
+//     UL(Q_hi) - UL(Q_lo) = UL(SubL(Q_hi, Q_lo))    (4b)
+//
+// It also follows that
+//        Q_hi u> max_jlong
+//     UL(Q_hi) > max_jlong    (4c)
+//
+// From (R0)
+//     0 <= R    <= max_jlong
+// and (Case 4)
+//     0 <= Q_lo <= max_jlong
+// we see that
+//     0 <= MaxL(R, Q_lo) <= max_jlong    (4d)
+//
+// We notice that
+//     0 < Q_lo <= MaxL(R, Q_lo)
+// which means that
+//     0 <= SubL(MaxL(R, Q_lo), Q_lo)
+// does not overflow the unsigned long domain (4b-no-overflow)
+//
+//
+// With (4b-no-overflow), we get
+//     0 <= SubL(MaxL(R, Q_lo), Q_lo)
+//       =  UL(SubL(MaxL(R, Q_lo), Q_lo))
+//       =  UL(MaxL(R, Q_lo)) - UL(Q_lo)
+//       <= max_jlong - UL(Q_lo)   (apply (4d))
+//       <  UL(Q_hi)  - UL(Q_lo)   (apply (4c))
+//       =  UL(SubL(Q_hi, Q_lo))   (apply (4b))
+//       <= UL(max_jint)           (apply (Q-lo-hi))
+//       =     max_jint
+// and thus showed that
+//       0 <= SubL(MaxL(R, Q_lo), Q_lo) < max_jint    (4e)
+// indeed fits into an int32_t.
+//
+//
+// Thus, we can apply Lemma 1 to remove the second ConvI2L-ConvL2I as well
+//     RHS = CmpUL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), ConvI2L(ConvL2I(SubL(MaxL(R, Q_lo), Q_lo))))
+//     RHS = CmpUL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo),                 SubL(MaxL(R, Q_lo), Q_lo))
+//
+// We now want to remove the SubL on both sides with Lemma 6. We already showed with (4e) that the right SubL does
+// not overflow. Which leaves us by showing that the left SubL does not overflow.
+//
+//
+// No Overflow of Left SubL
+// ------------------------
+// Consider the subtraction
+//     UL(x - Q_lo)
+// which only overflows if
+//     x <u Q_lo
+// Assume such an overflow. We know from (4a)
+//     0 <u Q_lo <u= max_jlong
+// and thus
+//     0 <=u x <u Q_lo <=u max_jlong
+// which is the same as
+//     0 <=  x <  Q_lo <=  max_jlong
+// because both are in the non-negative signed long range. Therefore,
+//     SubL(x, Q_lo) < 0    (4f)
+//
+// From (Q-lo-hi), we know that
+//     0 <= SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo)
+// which is a contradiction to (4f) when setting
+//     x = AddL(MulL(ConvI2L(j), K), Q).
+//
+// By contraposition, we conclude that SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) cannot overflow (4c-no-overflow).
+//
+//
+// We showed that both SubL of the RHS expression
+//     RHS = CmpUL(SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo), SubL(MaxL(R, Q_lo), Q_lo))
+// do not overflow which allows us to remove the SubL with Lemma 6
+//     RHS = CmpUL(     AddL(MulL(ConvI2L(j), K), Q),             MaxL(R, Q_lo))    (4g)
+//
+// We have two cases for R with respect to Q_lo:
+//     4-R1: R >= Q_lo
+//     4-R2: R < Q_lo
+//
+// We need to prove for both cases that (LHS < 0) == (RHS < 0)
+//
+// 4-R1: R >= Q_lo
+// ---------------
+// Starting from (4g)
+//     RHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q), MaxL(R, Q_lo))
+//         = CmpUL(AddL(MulL(ConvI2L(j), K), Q), R)
+//         = LHS
+//
+// which implies (LHS < 0) == (RHS < 0)
+//
+// 4-R2: R < Q_lo
+// ---------------
+// Starting from (4g)
+//     RHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q), MaxL(R, Q_lo))
+//         = CmpUL(AddL(MulL(ConvI2L(j), K), Q), Q_lo)
+//
+// From (4c-no-overflow), we know, that
+//     SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo)
+// does not overflow and with (Q-lo-hi)
+//     0 <  SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) <  max_jint
+// it follows that
+//     0 <u SubL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) <u max_jint
+// which means that
+//     AddL(MulL(ConvI2L(j), K), Q) >=u Q_lo    (4h)
+// must hold and therefore
+//     RHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q), Q_lo) >= 0
+//
+// From (4-R2) and (R0) we know
+//     0 <= R < Q_lo
+// which is the same as
+//     R <u Q_lo
+//
+// Using (4h), we get
+//     R <u Q_lo <=u AddL(MulL(ConvI2L(j), K), Q)    (4i)
+//
+// and finally with (4i)
+//     LHS =  CmpUL(AddL(MulL(ConvI2L(j), K), Q), R)
+//         > 0
+//
+// We showed that
+//     LHS > 0
+// and
+//     RHS >= 0
+// and therefore proved that
+//     (LHS < 0) == (RHS < 0) == false
+//
+// We proved that the transformation is valid under the stated pre-conditions.
 void PhaseIdealLoop::transform_long_range_checks(int stride_con, const Node_List &range_checks, Node* outer_phi,
                                                  Node* inner_iters_actual_int, Node* inner_phi,
                                                  Node* iv_add, LoopNode* inner_head) {
@@ -1264,9 +2205,14 @@ void PhaseIdealLoop::transform_long_range_checks(int stride_con, const Node_List
       // could be shared and have already been taken care of
       continue;
     }
-    bool short_scale = false;
-    bool ok = is_scaled_iv_plus_offset(rc_cmp->in(1), iv_add, T_LONG, &scale, &offset, &short_scale);
+    bool ok = is_scaled_iv_plus_offset(rc_cmp->in(1), iv_add, T_LONG, &scale, &offset);
     assert(ok, "inconsistent: was tested before");
+    // Because is_scaled_iv_plus_offset is successful, we know that
+    // rc_cmp->in(1) is semantically equivalent to either:
+    //   AddL(MulL(iv_add,          scale), offset),     if iv_add is long; or
+    //   AddL(MulL(ConvI2L(iv_add), scale), offset),     if iv_add is int.
+    // See the equivalence proof in PhaseIdealLoop::is_scaled_iv_plus_offset and
+    // functions called therein.
     Node* range = rc_cmp->in(2);
     Node* c = rc->in(0);
     Node* entry_control = inner_head->in(LoopNode::EntryControl);
@@ -1274,144 +2220,183 @@ void PhaseIdealLoop::transform_long_range_checks(int stride_con, const Node_List
     Node* R = range;
     Node* K = _igvn.longcon(scale);
     set_ctrl(K, this->C->root());
-
     Node* L = offset;
-
-    if (short_scale) {
-      // This converts:
-      // (int)i*K + L <u64 R
-      // with K an int into:
-      // i*(long)K + L <u64 unsigned_min((long)max_jint + L + 1, R)
-      // to protect against an overflow of (int)i*K
-      //
-      // Because if (int)i*K overflows, there are K,L where:
-      // (int)i*K + L <u64 R is false because (int)i*K+L overflows to a negative which becomes a huge u64 value.
-      // But if i*(long)K + L is >u64 (long)max_jint and still is <u64 R, then
-      // i*(long)K + L <u64 R is true.
-      //
-      // As a consequence simply converting i*K + L <u64 R to i*(long)K + L <u64 R could cause incorrect execution.
-      //
-      // It's always true that:
-      // (int)i*K <u64 (long)max_jint + 1
-      // which implies (int)i*K + L <u64 (long)max_jint + 1 + L
-      // As a consequence:
-      // i*(long)K + L <u64 unsigned_min((long)max_jint + L + 1, R)
-      // is always false in case of overflow of i*K
-      //
-      // Note, there are also K,L where i*K overflows and
-      // i*K + L <u64 R is true, but
-      // i*(long)K + L <u64 unsigned_min((long)max_jint + L + 1, R) is false
-      // So this transformation could cause spurious deoptimizations and failed range check elimination
-      // (but not incorrect execution) for unlikely corner cases with overflow.
-      // If this causes problems in practice, we could maybe direct execution to a post-loop, instead of deoptimizing.
-      Node* max_jint_plus_one_long = _igvn.longcon((jlong)max_jint + 1);
-      set_ctrl(max_jint_plus_one_long, C->root());
-      Node* max_range = new AddLNode(max_jint_plus_one_long, L);
-      register_new_node(max_range, entry_control);
-      R = MaxNode::unsigned_min(R, max_range, TypeLong::POS, _igvn);
-      set_subtree_ctrl(R, true);
-    }
-
     Node* C = outer_phi;
 
-    // Start with 64-bit values:
-    //   i*K + L <u64 R
-    //   (C+j)*K + L <u64 R
-    //   j*K + Q <u64 R    where Q = Q_first = C*K+L
+
+    // We start from the long range check:
+    //     (i * K) + L <u64 R
+    // where
+    //     i = outer_phi + inner_phi =
+    //         C         + j
+    // and get
+    //     i       * K       + L <u64 R
+    //     (C + j) * K       + L <u64 R
+    //     (j * K) + (C * K) + L <u64 R
+    //               ==== Q ====
+    //     (j * K) + Q           <u64 R
+    // which matches our definition of (LHS):
+    //     LHS = CmpUL(AddL(MulL(ConvI2L(j), K), Q), R)
+    // with
+    //     Q = (C * K) + L
+    //
+    // We now define everything needed to get the proven equivalent int range check form (RHS):
+    //     RHS = CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, L_clamp))), ConvL2I(SubL(R_clamp, L_clamp)))
+    //
+    // We need to compute:
+    // - R_clamp = MaxL(MinL(R, H_clamp), L_clamp)
+    // - L_clamp = MaxL(Q_lo, 0)
+    // - H_clamp = Q_hi < Q_lo ? max_jlong : Q_hi
+    // - Q       = (C * K) + L
+    // - Q_lo    = P_lo + Q
+    // - Q_hi    = P_hi + Q
+    // - P_lo    = The smallest value of "j * K"
+    // - P_hi    = The largest  value of "j * K" plus 1
+
+    // Let's start with computing Q_lo and Q_hi from P_lo and P_hi.
+    //
+    // We first compute the endpoints Q_first and Q_last of the range of values "j * K + Q" that satisfy the long range check.
+    //
+    // First iteration, j = 0:
+    //     Q_first = (j * K) + Q
+    //             = (0 * K)   Q
+    //             = Q
+    //             = (C * K) + L    (def. of Q)
     Node* Q_first = new MulLNode(C, K);
     register_new_node(Q_first, entry_control);
     Q_first = new AddLNode(Q_first, L);
     register_new_node(Q_first, entry_control);
 
-    // Compute endpoints of the range of values j*K + Q.
-    //  Q_min = (j=0)*K + Q;  Q_max = (j=B_2)*K + Q
-    Node* Q_min = Q_first;
+    // Last iteration, j = last, where
+    //     last = ((iter_count - 1) * stride + init)
+    //          = ( iter_count      * stride + init)                      - stride
+    //          = LoopLimitNode(init, limit,                  stride    ) - stride
+    //          = LoopLimitNode(0,    inner_iters_actual_int, int_stride) - stride
+    // which is used to get
+    //     Q_last  = (j * K)    + Q
+    //             = (last * K) + Q
+    //             = (LoopLimitNode(0, inner_iters_actual_int, int_stride) - stride * K) + Q              (def. of last)
+    //             = (LoopLimitNode(0, inner_iters_actual_int, int_stride) - stride * K) + (C * K) + L    (def. of Q)
+    //             = (LoopLimitNode(0, inner_iters_actual_int, int_stride) - stride * K) + Q_first        (def. of Q_first)
+    Node* last = new LoopLimitNode(this->C, int_zero, inner_iters_actual_int, int_stride);
+    register_new_node(last, entry_control);
+    last = new SubINode(last, int_stride);
+    register_new_node(last, entry_control);
+    last = new ConvI2LNode(last);
+    register_new_node(last, entry_control);
 
-    // Compute the exact ending value B_2 (which is really A_2 if S < 0)
-    Node* B_2 = new LoopLimitNode(this->C, int_zero, inner_iters_actual_int, int_stride);
-    register_new_node(B_2, entry_control);
-    B_2 = new SubINode(B_2, int_stride);
-    register_new_node(B_2, entry_control);
-    B_2 = new ConvI2LNode(B_2);
-    register_new_node(B_2, entry_control);
+    Node* Q_last = new MulLNode(last, K);
+    register_new_node(Q_last, entry_control);
+    Q_last = new AddLNode(Q_last, Q_first);
+    register_new_node(Q_last, entry_control);
 
-    Node* Q_max = new MulLNode(B_2, K);
-    register_new_node(Q_max, entry_control);
-    Q_max = new AddLNode(Q_max, Q_first);
-    register_new_node(Q_max, entry_control);
-
+    // We define Q_lo and Q_hi now from Q_first, Q_last, P_lo, and P_hi:
+    //
+    // If Q_first < Q_last (which is the case if scale * stride_con > 0):
+    //     Q_lo = P_lo  + Q    (def. Q_lo)
+    //          = 0 * K + Q    (def. P_lo)
+    //          =         Q
+    //          = Q_first
+    // and
+    //     Q_hi = P_hi        + Q     (def. Q_hi)
+    //          = last * K + 1 + Q    (def. P_hi)
+    //          = last * K + Q + 1
+    //          = Q_last      + 1
+    // If Q_first > Q_last (which is the case if scale * stride_con < 0):
+    //     Q_lo = P_lo    + Q     (def. Q_lo)
+    //          = last * K + Q    (def. P_lo)
+    //          = Q_last
+    // and
+    //     Q_hi = P_hi      + Q    (def. Q_hi)
+    //          = 0 * K + 1 + Q    (def. P_hi)
+    //          = 0 * K + Q + 1
+    //          = Q_first   + 1
+    Node* Q_lo = Q_first;
+    Node* Q_hi = Q_last;
     if (scale * stride_con < 0) {
-      swap(Q_min, Q_max);
+      swap(Q_lo, Q_hi);
     }
-    // Now, mathematically, Q_max > Q_min, and they are close enough so that (Q_max-Q_min) fits in 32 bits.
 
-    // L_clamp = Q_min < 0 ? 0 : Q_min
-    Node* Q_min_cmp = new CmpLNode(Q_min, long_zero);
-    register_new_node(Q_min_cmp, entry_control);
-    Node* Q_min_bool = new BoolNode(Q_min_cmp, BoolTest::lt);
-    register_new_node(Q_min_bool, entry_control);
-    Node* L_clamp = new CMoveLNode(Q_min_bool, Q_min, long_zero, TypeLong::LONG);
+    // Q_lo is now correct. Add plus one to get the correct Q_hi value as defined above as well:
+    Q_hi = new AddLNode(Q_hi, long_one);
+    register_new_node(Q_hi, entry_control);
+
+    // Let's next define all clamp values:
+    //
+    // First, we compute
+    //    L_clamp = Q_lo < 0 ? 0 : Q_lo
+    Node* Q_lo_cmp = new CmpLNode(Q_lo, long_zero);
+    register_new_node(Q_lo_cmp, entry_control);
+    Node* Q_lo_bool = new BoolNode(Q_lo_cmp, BoolTest::lt);
+    register_new_node(Q_lo_bool, entry_control);
+    Node* L_clamp = new CMoveLNode(Q_lo_bool, Q_lo, long_zero, TypeLong::LONG);
     register_new_node(L_clamp, entry_control);
-    // (This could also be coded bitwise as L_clamp = Q_min & ~(Q_min>>63).)
+    // (This could also be coded bitwise as L_clamp = Q_lo & ~(Q_lo>>63).)
 
-    Node* Q_max_plus_one = new AddLNode(Q_max, long_one);
-    register_new_node(Q_max_plus_one, entry_control);
-
-    // H_clamp = Q_max+1 < Q_min ? max_jlong : Q_max+1
-    // (Because Q_min and Q_max are close, the overflow check could also be encoded as Q_max+1 < 0 & Q_min >= 0.)
+    // Next, we compute
+    //     H_clamp = Q_hi< Q_lo ? max_jlong : Q_hi
     Node* max_jlong_long = _igvn.longcon(max_jlong);
     set_ctrl(max_jlong_long, this->C->root());
-    Node* Q_max_cmp = new CmpLNode(Q_max_plus_one, Q_min);
-    register_new_node(Q_max_cmp, entry_control);
-    Node* Q_max_bool = new BoolNode(Q_max_cmp, BoolTest::lt);
-    register_new_node(Q_max_bool, entry_control);
-    Node* H_clamp = new CMoveLNode(Q_max_bool, Q_max_plus_one, max_jlong_long, TypeLong::LONG);
+    Node* Q_hi_cmp = new CmpLNode(Q_hi, Q_lo);
+    register_new_node(Q_hi_cmp, entry_control);
+    Node* Q_hi_bool = new BoolNode(Q_hi_cmp, BoolTest::lt);
+    register_new_node(Q_hi_bool, entry_control);
+    Node* H_clamp = new CMoveLNode(Q_hi_bool, Q_hi, max_jlong_long, TypeLong::LONG);
     register_new_node(H_clamp, entry_control);
-    // (This could also be coded bitwise as H_clamp = ((Q_max+1)<<1 | M)>>>1 where M = (Q_max+1)>>63 & ~Q_min>>63.)
+    // (This could also be coded bitwise as H_clamp = ((Q_hi)<<1 | M)>>>1 where M = (Q_hi)>>63 & ~Q_lo>>63.)
 
-    // R_2 = clamp(R, L_clamp, H_clamp) - L_clamp
-    // that is:  R_2 = clamp(R, L_clamp=0, H_clamp=Q_max)      if Q_min < 0
-    // or else:  R_2 = clamp(R, L_clamp,   H_clamp) - Q_min    if Q_min >= 0
-    // and also: R_2 = clamp(R, L_clamp,   Q_max+1) - L_clamp  if Q_min < Q_max+1 (no overflow)
-    // or else:  R_2 = clamp(R, L_clamp, *no limit*)- L_clamp  if Q_max+1 < Q_min (overflow)
-    Node* R_2 = clamp(R, L_clamp, H_clamp);
-    R_2 = new SubLNode(R_2, L_clamp);
-    register_new_node(R_2, entry_control);
-    R_2 = new ConvL2INode(R_2, TypeInt::POS);
-    register_new_node(R_2, entry_control);
+    // Finally, we compute
+    //     R_clamp = MaxL(MinL(R, H_clamp), L_clamp)
+    Node* R_clamp = clamp(R, L_clamp, H_clamp);
 
-    // L_2 = Q_first - L_clamp
-    // We are subtracting L_clamp from both sides of the <u32 comparison.
-    // If S*K>0, then Q_first == 0 and the R.C. expression at -L_clamp and steps upward to Q_max-L_clamp.
-    // If S*K<0, then Q_first != 0 and the R.C. expression starts high and steps downward to Q_min-L_clamp.
-    Node* L_2 = new SubLNode(Q_first, L_clamp);
-    register_new_node(L_2, entry_control);
-    L_2 = new ConvL2INode(L_2, TypeInt::INT);
-    register_new_node(L_2, entry_control);
+    // Now we have everything together to transform the long range check:
+    //     (i * K) + L           <u64 R
+    // which we rewrote above to (LHS)
+    //     (j * K) + Q           <u64 R
+    // to an int range check
+    //     (j * K) + L2          <u32 R2
+    // where we define L2 and R2 in such a way that
+    //     (j * K) + Q - L_clamp <u32 R_clamp - L_clamp
+    //               ---- L2 ---      ------- R2 ------
+    // which matches our definition of (RHS):
+    //     RHS = CmpU(AddI(MulI(j, K), ConvL2I(SubL(Q, L_clamp))), ConvL2I(SubL(R_clamp, L_clamp)))
 
-    // Transform the range check using the computed values L_2/R_2
-    // from:   i*K + L   <u64 R
-    // to:     j*K + L_2 <u32 R_2
-    // that is:
-    //   (j*K + Q_first) - L_clamp <u32 clamp(R, L_clamp, H_clamp) - L_clamp
+    // Let's start with
+    //     R2 = R_clamp                         - L_clamp
+    //        = MaxL(MinL(R, H_clamp), L_clamp) - L_clamp
+    Node* R2 = new SubLNode(R_clamp, L_clamp);
+    register_new_node(R2, entry_control);
+    R2 = new ConvL2INode(R2, TypeInt::POS);
+    register_new_node(R2, entry_control);
+
+    // Then
+    //     L2 = Q       - L_clamp
+    //        = Q_first - L_clamp
+    Node* L2 = new SubLNode(Q_first, L_clamp);
+    register_new_node(L2, entry_control);
+    L2 = new ConvL2INode(L2, TypeInt::INT);
+    register_new_node(L2, entry_control);
+
+    // And finally put the int range check together:
+    //     (j * K) + L2 <u32 R2
     K = _igvn.intcon(checked_cast<int>(scale));
     set_ctrl(K, this->C->root());
     Node* scaled_iv = new MulINode(inner_phi, K);
     register_new_node(scaled_iv, c);
-    Node* scaled_iv_plus_offset = new AddINode(scaled_iv, L_2);
+    Node* scaled_iv_plus_offset = new AddINode(scaled_iv, L2);
     register_new_node(scaled_iv_plus_offset, c);
 
-    Node* new_rc_cmp = new CmpUNode(scaled_iv_plus_offset, R_2);
+    Node* new_rc_cmp = new CmpUNode(scaled_iv_plus_offset, R2);
     register_new_node(new_rc_cmp, c);
 
     _igvn.replace_input_of(rc_bol, 1, new_rc_cmp);
   }
 }
 
-Node* PhaseIdealLoop::clamp(Node* R, Node* L, Node* H) {
-  Node* min = MaxNode::signed_min(R, H, TypeLong::LONG, _igvn);
+Node* PhaseIdealLoop::clamp(Node* R, Node* L_clamp, Node* H_clamp) {
+  Node* min = MaxNode::signed_min(R, H_clamp, TypeLong::LONG, _igvn);
   set_subtree_ctrl(min, true);
-  Node* max = MaxNode::signed_max(L, min, TypeLong::LONG, _igvn);
+  Node* max = MaxNode::signed_max(L_clamp, min, TypeLong::LONG, _igvn);
   set_subtree_ctrl(max, true);
   return max;
 }
@@ -1749,50 +2734,225 @@ bool PhaseIdealLoop::is_counted_loop(Node* x, IdealLoopTree*&loop, BasicType iv_
   C->print_method(PHASE_BEFORE_CLOOPS, 3);
 
   // ===================================================
-  // Generate loop limit check to avoid integer overflow
-  // in cases like next (cyclic loops):
+  // We can only convert this loop to a counted loop if we can guarantee that the iv phi will never overflow at runtime.
+  // This is an implicit assumption taken by some loop optimizations. We therefore must ensure this property at all cost.
+  // At this point, we've already excluded some trivial cases where an overflow could have been proven statically.
+  // But even though we cannot prove that an overflow will *not* happen, we still want to speculatively convert this loop
+  // to a counted loop. This can be achieved by adding additional iv phi overflow checks before the loop. If they fail,
+  // we trap and resume execution before the loop without having executed any iteration of the loop, yet.
   //
-  // for (i=0; i <= max_jint; i++) {}
-  // for (i=0; i <  max_jint; i+=2) {}
+  // These additional iv phi overflow checks can be inserted as Loop Limit Check Predicates above the Loop Limit Check
+  // Parse Predicate which captures a JVM state just before the entry of the loop. If there is no such Parse Predicate,
+  // we cannot generate a Loop Limit Check Predicate and thus cannot speculatively convert the loop to a counted loop.
+  //
+  // In the following, we only focus on int loops with stride > 0 to keep things simple. The argumentation and proof
+  // for stride < 0 is analogously. For long loops, we would replace max_int with max_long.
   //
   //
-  // Limit check predicate depends on the loop test:
+  // The loop to be converted does not always need to have the often used shape:
   //
-  // for(;i != limit; i++)       --> limit <= (max_jint)
-  // for(;i <  limit; i+=stride) --> limit <= (max_jint - stride + 1)
-  // for(;i <= limit; i+=stride) --> limit <= (max_jint - stride    )
+  //                                                 i = init
+  //     i = init                                loop:
+  //     do {                                        ...
+  //         // ...               equivalent         i+=stride
+  //         i+=stride               <==>            if (i < limit)
+  //     } while (i < limit);                          goto loop
+  //                                             exit:
+  //                                                 ...
   //
+  // where the loop exit check uses the post-incremented iv phi and a '<'-operator.
+  //
+  // We could also have '<='-operator (or '>='-operator for negative strides) or use the pre-incremented iv phi value
+  // in the loop exit check:
+  //
+  //         i = init
+  //     loop:
+  //         ...
+  //         if (i <= limit)
+  //             i+=stride
+  //             goto loop
+  //     exit:
+  //         ...
+  //
+  // Let's define the following terms:
+  // - iv_pre_i: The pre-incremented iv phi before the i-th iteration.
+  // - iv_post_i: The post-incremented iv phi after the i-th iteration.
+  //
+  // The iv_pre_i and iv_post_i have the following relation:
+  //      iv_pre_i + stride = iv_post_i
+  //
+  // When converting a loop to a counted loop, we want to have a canonicalized loop exit check of the form:
+  //     iv_post_i < adjusted_limit
+  //
+  // If that is not the case, we need to canonicalize the loop exit check by using different values for adjusted_limit:
+  // (LE1) iv_post_i < limit: Already canonicalized. We can directly use limit as adjusted_limit.
+  //           -> adjusted_limit = limit.
+  // (LE2) iv_post_i <= limit:
+  //           iv_post_i < limit + 1
+  //           -> adjusted limit = limit + 1
+  // (LE3) iv_pre_i < limit:
+  //           iv_pre_i + stride < limit + stride
+  //           iv_post_i < limit + stride
+  //           -> adjusted_limit = limit + stride
+  // (LE4) iv_pre_i <= limit:
+  //           iv_pre_i < limit + 1
+  //           iv_pre_i + stride < limit + stride + 1
+  //           iv_post_i < limit + stride + 1
+  //           -> adjusted_limit = limit + stride + 1
+  //
+  // Note that:
+  //     (AL) limit <= adjusted_limit.
+  //
+  // The following loop invariant has to hold for counted loops with n iterations (i.e. loop exit check true after n-th
+  // loop iteration) and a canonicalized loop exit check to guarantee that no iv_post_i over- or underflows:
+  // (INV) For i = 1..n, min_int <= iv_post_i <= max_int
+  //
+  // To prove (INV), we require the following two conditions/assumptions:
+  // (i): adjusted_limit - 1 + stride <= max_int
+  // (ii): init < limit
+  //
+  // If we can prove (INV), we know that there can be no over- or underflow of any iv phi value. We prove (INV) by
+  // induction by assuming (i) and (ii).
+  //
+  // Proof by Induction
+  // ------------------
+  // > Base case (i = 1): We show that (INV) holds after the first iteration:
+  //     min_int <= iv_post_1 = init + stride <= max_int
+  // Proof:
+  //     First, we note that (ii) implies
+  //         (iii) init <= limit - 1
+  //     max_int >= adjusted_limit - 1 + stride   [using (i)]
+  //             >= limit - 1 + stride            [using (AL)]
+  //             >= init + stride                 [using (iii)]
+  //             >= min_int                       [using stride > 0, no underflow]
+  // Thus, no overflow happens after the first iteration and (INV) holds for i = 1.
+  //
+  // Note that to prove the base case we need (i) and (ii).
+  //
+  // > Induction Hypothesis (i = j, j > 1): Assume that (INV) holds after the j-th iteration:
+  //     min_int <= iv_post_j <= max_int
+  // > Step case (i = j + 1): We show that (INV) also holds after the j+1-th iteration:
+  //     min_int <= iv_post_{j+1} = iv_post_j + stride <= max_int
+  // Proof:
+  // If iv_post_j >= adjusted_limit:
+  //     We exit the loop after the j-th iteration, and we don't execute the j+1-th iteration anymore. Thus, there is
+  //     also no iv_{j+1}. Since (INV) holds for iv_j, there is nothing left to prove.
+  // If iv_post_j < adjusted_limit:
+  //     First, we note that:
+  //         (iv) iv_post_j <= adjusted_limit - 1
+  //     max_int >= adjusted_limit - 1 + stride    [using (i)]
+  //             >= iv_post_j + stride             [using (iv)]
+  //             >= min_int                        [using stride > 0, no underflow]
+  //
+  // Note that to prove the step case we only need (i).
+  //
+  // Thus, by assuming (i) and (ii), we proved (INV).
+  //
+  //
+  // It is therefore enough to add the following two Loop Limit Check Predicates to check assumptions (i) and (ii):
+  //
+  // (1) Loop Limit Check Predicate for (i):
+  //     Using (i): adjusted_limit - 1 + stride <= max_int
+  //
+  //     This condition is now restated to use limit instead of adjusted_limit:
+  //
+  //     To prevent an overflow of adjusted_limit -1 + stride itself, we rewrite this check to
+  //         max_int - stride + 1 >= adjusted_limit
+  //     We can merge the two constants into
+  //         canonicalized_correction = stride - 1
+  //     which gives us
+  //        max_int - canonicalized_correction >= adjusted_limit
+  //
+  //     To directly use limit instead of adjusted_limit in the predicate condition, we split adjusted_limit into:
+  //         adjusted_limit = limit + limit_correction
+  //     Since stride > 0 and limit_correction <= stride + 1, we can restate this with no over- or underflow into:
+  //         max_int - canonicalized_correction - limit_correction >= limit
+  //     Since canonicalized_correction and limit_correction are both constants, we can replace them with a new constant:
+  //         (v) final_correction = canonicalized_correction + limit_correction
+  //
+  //     which gives us:
+  //
+  //     Final predicate condition:
+  //         max_int - final_correction >= limit
+  //
+  //     However, we need to be careful that (v) does not over- or underflow.
+  //     We know that:
+  //         canonicalized_correction = stride - 1
+  //     and
+  //         limit_correction <= stride + 1
+  //     and thus
+  //         canonicalized_correction + limit_correction <= 2 * stride
+  //     To prevent an over- or underflow of (v), we must ensure that
+  //         2 * stride <= max_int
+  //     which can safely be checked without over- or underflow with
+  //         (vi) stride != min_int AND abs(stride) <= max_int / 2
+  //
+  //     We could try to further optimize the cases where (vi) does not hold but given that such large strides are
+  //     very uncommon and the loop would only run for a very few iterations anyway, we simply bail out if (vi) fails.
+  //
+  // (2) Loop Limit Check Predicate for (ii):
+  //     Using (ii): init < limit
+  //
+  //     This Loop Limit Check Predicate is not required if we can prove at compile time that either:
+  //        (2.1) type(init) < type(limit)
+  //             In this case, we know:
+  //                 all possible values of init < all possible values of limit
+  //             and we can skip the predicate.
+  //
+  //        (2.2) init < limit is already checked before (i.e. found as a dominating check)
+  //            In this case, we do not need to re-check the condition and can skip the predicate.
+  //            This is often found for while- and for-loops which have the following shape:
+  //
+  //                if (init < limit) { // Dominating test. Do not need the Loop Limit Check Predicate below.
+  //                    i = init;
+  //                    if (init >= limit) { trap(); } // Here we would insert the Loop Limit Check Predicate
+  //                    do {
+  //                        i += stride;
+  //                    } while (i < limit);
+  //                }
+  //
+  //        (2.3) init + stride <= max_int
+  //            In this case, there is no overflow of the iv phi after the first loop iteration.
+  //            In the proof of the base case above we showed that init + stride <= max_int by using assumption (ii):
+  //                init < limit
+  //            In the proof of the step case above, we did not need (ii) anymore. Therefore, if we already know at
+  //            compile time that init + stride <= max_int then we have trivially proven the base case and that
+  //            there is no overflow of the iv phi after the first iteration. In this case, we don't need to check (ii)
+  //            again and can skip the predicate.
 
-  // Check if limit is excluded to do more precise int overflow check.
-  bool incl_limit = (bt == BoolTest::le || bt == BoolTest::ge);
-  jlong stride_m  = stride_con - (incl_limit ? 0 : (stride_con > 0 ? 1 : -1));
-
-  // If compare points directly to the phi we need to adjust
-  // the compare so that it points to the incr. Limit have
-  // to be adjusted to keep trip count the same and the
-  // adjusted limit should be checked for int overflow.
-  Node* adjusted_limit = limit;
-  if (phi_incr != nullptr) {
-    stride_m  += stride_con;
+  // Check (vi) and bail out if the stride is too big.
+  if (stride_con == min_signed_integer(iv_bt) || (ABS(stride_con) > max_signed_integer(iv_bt) / 2)) {
+    return false;
   }
 
-  Node *init_control = x->in(LoopNode::EntryControl);
+  // Accounting for (LE3) and (LE4) where we use pre-incremented phis in the loop exit check.
+  const jlong limit_correction_for_pre_iv_exit_check = (phi_incr != nullptr) ? stride_con : 0;
 
-  int sov = check_stride_overflow(stride_m, limit_t, iv_bt);
+  // Accounting for (LE2) and (LE4) where we use <= or >= in the loop exit check.
+  const bool includes_limit = (bt == BoolTest::le || bt == BoolTest::ge);
+  const jlong limit_correction_for_le_ge_exit_check = (includes_limit ? (stride_con > 0 ? 1 : -1) : 0);
+
+  const jlong limit_correction = limit_correction_for_pre_iv_exit_check + limit_correction_for_le_ge_exit_check;
+  const jlong canonicalized_correction = stride_con + (stride_con > 0 ? -1 : 1);
+  const jlong final_correction = canonicalized_correction + limit_correction;
+
+  int sov = check_stride_overflow(final_correction, limit_t, iv_bt);
+  Node* init_control = x->in(LoopNode::EntryControl);
+
   // If sov==0, limit's type always satisfies the condition, for
   // example, when it is an array length.
   if (sov != 0) {
     if (sov < 0) {
       return false;  // Bailout: integer overflow is certain.
     }
+    // (1) Loop Limit Check Predicate is required because we could not statically prove that
+    //     limit + final_correction = adjusted_limit - 1 + stride <= max_int
     assert(!x->as_Loop()->is_loop_nest_inner_loop(), "loop was transformed");
-    // Generate loop's limit check.
-    // Loop limit check predicate should be near the loop.
     if (!ParsePredicates::is_loop_limit_check_predicate_proj(init_control)) {
-      // The limit check predicate is not generated if this method trapped here before.
+      // The Loop Limit Check Parse Predicate is not generated if this method trapped here before.
 #ifdef ASSERT
       if (TraceLoopLimitCheck) {
-        tty->print("missing loop limit check:");
+        tty->print("Missing Loop Limit Check Parse Predicate:");
         loop->dump_head();
         x->dump(1);
       }
@@ -1811,65 +2971,79 @@ bool PhaseIdealLoop::is_counted_loop(Node* x, IdealLoopTree*&loop, BasicType iv_
     Node* bol;
 
     if (stride_con > 0) {
-      cmp_limit = CmpNode::make(limit, _igvn.integercon(max_signed_integer(iv_bt) - stride_m, iv_bt), iv_bt);
+      cmp_limit = CmpNode::make(limit, _igvn.integercon(max_signed_integer(iv_bt) - final_correction, iv_bt), iv_bt);
       bol = new BoolNode(cmp_limit, BoolTest::le);
     } else {
-      cmp_limit = CmpNode::make(limit, _igvn.integercon(min_signed_integer(iv_bt) - stride_m, iv_bt), iv_bt);
+      cmp_limit = CmpNode::make(limit, _igvn.integercon(min_signed_integer(iv_bt) - final_correction, iv_bt), iv_bt);
       bol = new BoolNode(cmp_limit, BoolTest::ge);
     }
 
     insert_loop_limit_check_predicate(loop_limit_check_parse_predicate_proj, cmp_limit, bol);
   }
 
-  // Now we need to canonicalize loop condition.
-  if (bt == BoolTest::ne) {
-    assert(stride_con == 1 || stride_con == -1, "simple increment only");
-    if (stride_con > 0 && init_t->hi_as_long() < limit_t->lo_as_long()) {
-      // 'ne' can be replaced with 'lt' only when init < limit.
-      bt = BoolTest::lt;
-    } else if (stride_con < 0 && init_t->lo_as_long() > limit_t->hi_as_long()) {
-      // 'ne' can be replaced with 'gt' only when init > limit.
-      bt = BoolTest::gt;
-    } else {
-      if (!ParsePredicates::is_loop_limit_check_predicate_proj(init_control)) {
-        // The limit check predicate is not generated if this method trapped here before.
+  // (2.3)
+  const bool init_plus_stride_could_overflow =
+          (stride_con > 0 && init_t->hi_as_long() > max_signed_integer(iv_bt) - stride_con) ||
+          (stride_con < 0 && init_t->lo_as_long() < min_signed_integer(iv_bt) - stride_con);
+  // (2.1)
+  const bool init_gte_limit = (stride_con > 0 && init_t->hi_as_long() >= limit_t->lo_as_long()) ||
+                              (stride_con < 0 && init_t->lo_as_long() <= limit_t->hi_as_long());
+
+  if (init_gte_limit && // (2.1)
+      ((bt == BoolTest::ne || init_plus_stride_could_overflow) && // (2.3)
+       !has_dominating_loop_limit_check(init_trip, limit, stride_con, iv_bt, init_control))) { // (2.2)
+    // (2) Iteration Loop Limit Check Predicate is required because neither (2.1), (2.2), nor (2.3) holds.
+    // We use the following condition:
+    // - stride > 0: init < limit
+    // - stride < 0: init > limit
+    //
+    // This predicate is always required if we have a non-equal-operator in the loop exit check (where stride = 1 is
+    // a requirement). We transform the loop exit check by using a less-than-operator. By doing so, we must always
+    // check that init < limit. Otherwise, we could have a different number of iterations at runtime.
+
+    if (!ParsePredicates::is_loop_limit_check_predicate_proj(init_control)) {
+      // The Loop Limit Check Parse Predicate is not generated if this method trapped here before.
 #ifdef ASSERT
-        if (TraceLoopLimitCheck) {
-          tty->print("missing loop limit check:");
-          loop->dump_head();
-          x->dump(1);
-        }
+      if (TraceLoopLimitCheck) {
+        tty->print("Missing Loop Limit Check Parse Predicate:");
+        loop->dump_head();
+        x->dump(1);
+      }
 #endif
-        return false;
-      }
-      ParsePredicateSuccessProj* loop_limit_check_parse_predicate_proj = init_control->as_IfTrue();
-      ParsePredicateNode* parse_predicate = init_control->in(0)->as_ParsePredicate();
+      return false;
+    }
+    ParsePredicateSuccessProj* loop_limit_check_parse_predicate_proj = init_control->as_IfTrue();
+    ParsePredicateNode* parse_predicate = init_control->in(0)->as_ParsePredicate();
 
-      if (!is_dominator(get_ctrl(limit), parse_predicate->in(0)) ||
-          !is_dominator(get_ctrl(init_trip), parse_predicate->in(0))) {
-        return false;
-      }
+    if (!is_dominator(get_ctrl(limit), parse_predicate->in(0)) ||
+        !is_dominator(get_ctrl(init_trip), parse_predicate->in(0))) {
+      return false;
+    }
 
-      Node* cmp_limit;
-      Node* bol;
+    Node* cmp_limit;
+    Node* bol;
 
-      if (stride_con > 0) {
-        cmp_limit = CmpNode::make(init_trip, limit, iv_bt);
-        bol = new BoolNode(cmp_limit, BoolTest::lt);
-      } else {
-        cmp_limit = CmpNode::make(init_trip, limit, iv_bt);
-        bol = new BoolNode(cmp_limit, BoolTest::gt);
-      }
+    if (stride_con > 0) {
+      cmp_limit = CmpNode::make(init_trip, limit, iv_bt);
+      bol = new BoolNode(cmp_limit, BoolTest::lt);
+    } else {
+      cmp_limit = CmpNode::make(init_trip, limit, iv_bt);
+      bol = new BoolNode(cmp_limit, BoolTest::gt);
+    }
 
-      insert_loop_limit_check_predicate(loop_limit_check_parse_predicate_proj, cmp_limit, bol);
+    insert_loop_limit_check_predicate(loop_limit_check_parse_predicate_proj, cmp_limit, bol);
+  }
 
-      if (stride_con > 0) {
-        // 'ne' can be replaced with 'lt' only when init < limit.
-        bt = BoolTest::lt;
-      } else if (stride_con < 0) {
-        // 'ne' can be replaced with 'gt' only when init > limit.
-        bt = BoolTest::gt;
-      }
+  if (bt == BoolTest::ne) {
+    // Now we need to canonicalize the loop condition if it is 'ne'.
+    assert(stride_con == 1 || stride_con == -1, "simple increment only - checked before");
+    if (stride_con > 0) {
+      // 'ne' can be replaced with 'lt' only when init < limit. This is ensured by the inserted predicate above.
+      bt = BoolTest::lt;
+    } else {
+      assert(stride_con < 0, "must be");
+      // 'ne' can be replaced with 'gt' only when init > limit. This is ensured by the inserted predicate above.
+      bt = BoolTest::gt;
     }
   }
 
@@ -1914,6 +3088,7 @@ bool PhaseIdealLoop::is_counted_loop(Node* x, IdealLoopTree*&loop, BasicType iv_
   }
 #endif
 
+  Node* adjusted_limit = limit;
   if (phi_incr != nullptr) {
     // If compare points directly to the phi we need to adjust
     // the compare so that it points to the incr. Limit have
@@ -1927,7 +3102,7 @@ bool PhaseIdealLoop::is_counted_loop(Node* x, IdealLoopTree*&loop, BasicType iv_
     adjusted_limit = gvn->transform(AddNode::make(limit, stride, iv_bt));
   }
 
-  if (incl_limit) {
+  if (includes_limit) {
     // The limit check guaranties that 'limit <= (max_jint - stride)' so
     // we can convert 'i <= limit' to 'i < limit+1' since stride != 0.
     //
@@ -2108,13 +3283,45 @@ bool PhaseIdealLoop::is_counted_loop(Node* x, IdealLoopTree*&loop, BasicType iv_
   return true;
 }
 
+// Check if there is a dominating loop limit check of the form 'init < limit' starting at the loop entry.
+// If there is one, then we do not need to create an additional Loop Limit Check Predicate.
+bool PhaseIdealLoop::has_dominating_loop_limit_check(Node* init_trip, Node* limit, const jlong stride_con,
+                                                     const BasicType iv_bt, Node* loop_entry) {
+  // Eagerly call transform() on the Cmp and Bool node to common them up if possible. This is required in order to
+  // successfully find a dominated test with the If node below.
+  Node* cmp_limit;
+  Node* bol;
+  if (stride_con > 0) {
+    cmp_limit = _igvn.transform(CmpNode::make(init_trip, limit, iv_bt));
+    bol = _igvn.transform(new BoolNode(cmp_limit, BoolTest::lt));
+  } else {
+    cmp_limit = _igvn.transform(CmpNode::make(init_trip, limit, iv_bt));
+    bol = _igvn.transform(new BoolNode(cmp_limit, BoolTest::gt));
+  }
+
+  // Check if there is already a dominating init < limit check. If so, we do not need a Loop Limit Check Predicate.
+  IfNode* iff = new IfNode(loop_entry, bol, PROB_MIN, COUNT_UNKNOWN);
+  // Also add fake IfProj nodes in order to call transform() on the newly created IfNode.
+  IfFalseNode* if_false = new IfFalseNode(iff);
+  IfTrueNode* if_true = new IfTrueNode(iff);
+  Node* dominated_iff = _igvn.transform(iff);
+  // ConI node? Found dominating test (IfNode::dominated_by() returns a ConI node).
+  const bool found_dominating_test = dominated_iff != nullptr && dominated_iff->is_ConI();
+
+  // Kill the If with its projections again in the next IGVN round by cutting it off from the graph.
+  _igvn.replace_input_of(iff, 0, C->top());
+  _igvn.replace_input_of(iff, 1, C->top());
+  return found_dominating_test;
+}
+
 //----------------------exact_limit-------------------------------------------
 Node* PhaseIdealLoop::exact_limit( IdealLoopTree *loop ) {
   assert(loop->_head->is_CountedLoop(), "");
   CountedLoopNode *cl = loop->_head->as_CountedLoop();
   assert(cl->is_valid_counted_loop(T_INT), "");
 
-  if (ABS(cl->stride_con()) == 1 ||
+  if (cl->stride_con() == 1 ||
+      cl->stride_con() == -1 ||
       cl->limit()->Opcode() == Op_LoopLimit) {
     // Old code has exact limit (it could be incorrect in case of int overflow).
     // Loop limit is exact with stride == 1. And loop may already have exact limit.
@@ -2332,7 +3539,7 @@ Node *LoopLimitNode::Ideal(PhaseGVN *phase, bool can_reshape) {
 
   const TypeInt* init_t  = phase->type(in(Init) )->is_int();
   const TypeInt* limit_t = phase->type(in(Limit))->is_int();
-  int stride_p;
+  jlong stride_p;
   jlong lim, ini;
   julong max;
   if (stride_con > 0) {
@@ -2341,10 +3548,10 @@ Node *LoopLimitNode::Ideal(PhaseGVN *phase, bool can_reshape) {
     ini = init_t->_lo;
     max = (julong)max_jint;
   } else {
-    stride_p = -stride_con;
+    stride_p = -(jlong)stride_con;
     lim = init_t->_hi;
     ini = limit_t->_lo;
-    max = (julong)min_jint;
+    max = (julong)(juint)min_jint; // double cast to get 0x0000000080000000, not 0xffffffff80000000
   }
   julong range = lim - ini + stride_p;
   if (range <= max) {
@@ -2751,14 +3958,22 @@ void OuterStripMinedLoopNode::adjust_strip_mined_loop(PhaseIterGVN* igvn) {
   CountedLoopEndNode* inner_cle = inner_cl->loopexit();
 
   int stride = inner_cl->stride_con();
-  jlong scaled_iters_long = ((jlong)LoopStripMiningIter) * ABS(stride);
+  // For a min int stride, LoopStripMiningIter * stride overflows the int range for all values of LoopStripMiningIter
+  // except 0 or 1. Those values are handled early on in this method and causes the method to return. So for a min int
+  // stride, the method is guaranteed to return at the next check below.
+  jlong scaled_iters_long = ((jlong)LoopStripMiningIter) * ABS((jlong)stride);
   int scaled_iters = (int)scaled_iters_long;
-  int short_scaled_iters = LoopStripMiningIterShortLoop* ABS(stride);
+  if ((jlong)scaled_iters != scaled_iters_long) {
+    // Remove outer loop and safepoint (too few iterations)
+    remove_outer_loop_and_safepoint(igvn);
+    return;
+  }
+  jlong short_scaled_iters = LoopStripMiningIterShortLoop * ABS(stride);
   const TypeInt* inner_iv_t = igvn->type(inner_iv_phi)->is_int();
   jlong iter_estimate = (jlong)inner_iv_t->_hi - (jlong)inner_iv_t->_lo;
   assert(iter_estimate > 0, "broken");
-  if ((jlong)scaled_iters != scaled_iters_long || iter_estimate <= short_scaled_iters) {
-    // Remove outer loop and safepoint (too few iterations)
+  if (iter_estimate <= short_scaled_iters) {
+    // Remove outer loop and safepoint: loop executes less than LoopStripMiningIterShortLoop
     remove_outer_loop_and_safepoint(igvn);
     return;
   }
@@ -4258,23 +5473,6 @@ bool PhaseIdealLoop::process_expensive_nodes() {
   return progress;
 }
 
-#ifdef ASSERT
-// Goes over all children of the root of the loop tree. Check if any of them have a path
-// down to Root, that does not go via a NeverBranch exit.
-bool PhaseIdealLoop::only_has_infinite_loops() {
-  ResourceMark rm;
-  Unique_Node_List worklist;
-  // start traversal at all loop heads of first-level loops
-  for (IdealLoopTree* l = _ltree_root->_child; l != nullptr; l = l->_next) {
-    Node* head = l->_head;
-    assert(head->is_Region(), "");
-    worklist.push(head);
-  }
-  return RegionNode::are_all_nodes_in_infinite_subgraph(worklist);
-}
-#endif
-
-
 //=============================================================================
 //----------------------------build_and_optimize-------------------------------
 // Create a PhaseLoop.  Build the ideal Loop tree.  Map each Ideal Node to
@@ -4333,13 +5531,9 @@ void PhaseIdealLoop::build_and_optimize() {
     return;
   }
 
-  // Verify that the has_loops() flag set at parse time is consistent
-  // with the just built loop tree. With infinite loops, it could be
-  // that one pass of loop opts only finds infinite loops, clears the
-  // has_loops() flag but adds NeverBranch nodes so the next loop opts
-  // verification pass finds a non empty loop tree. When the back edge
+  // Verify that the has_loops() flag set at parse time is consistent with the just built loop tree. When the back edge
   // is an exception edge, parsing doesn't set has_loops().
-  assert(_ltree_root->_child == nullptr || C->has_loops() || only_has_infinite_loops() || C->has_exception_backedge(), "parsing found no loops but there are some");
+  assert(_ltree_root->_child == nullptr || C->has_loops() || C->has_exception_backedge(), "parsing found no loops but there are some");
   // No loops after all
   if( !_ltree_root->_child && !_verify_only ) C->set_has_loops(false);
 
@@ -4448,6 +5642,7 @@ void PhaseIdealLoop::build_and_optimize() {
   NOT_PRODUCT( C->verify_graph_edges(); )
   worklist.push(C->top());
   build_loop_late( visited, worklist, nstack );
+  if (C->failing()) { return; }
 
   if (_verify_only) {
     C->restore_major_progress(old_progress);
@@ -4702,6 +5897,7 @@ void PhaseIdealLoop::verify() const {
   bool success = true;
 
   PhaseIdealLoop phase_verify(_igvn, this);
+  if (C->failing()) return;
 
   // Verify ctrl and idom of every node.
   success &= verify_idom_and_nodes(C->root(), &phase_verify);
@@ -5189,7 +6385,7 @@ void PhaseIdealLoop::build_loop_tree() {
       if ( bltstack.length() == stack_size ) {
         // There were no additional children, post visit node now
         (void)bltstack.pop(); // Remove node from stack
-        pre_order = build_loop_tree_impl( n, pre_order );
+        pre_order = build_loop_tree_impl(n, pre_order);
         // Check for bailout
         if (C->failing()) {
           return;
@@ -5207,7 +6403,7 @@ void PhaseIdealLoop::build_loop_tree() {
 }
 
 //------------------------------build_loop_tree_impl---------------------------
-int PhaseIdealLoop::build_loop_tree_impl( Node *n, int pre_order ) {
+int PhaseIdealLoop::build_loop_tree_impl(Node* n, int pre_order) {
   // ---- Post-pass Work ----
   // Pre-walked but not post-walked nodes need a pre_order number.
 
@@ -5218,56 +6414,51 @@ int PhaseIdealLoop::build_loop_tree_impl( Node *n, int pre_order ) {
   // for it.  Then find the tightest enclosing loop for the self Node.
   for (DUIterator_Fast imax, i = n->fast_outs(imax); i < imax; i++) {
     Node* m = n->fast_out(i);   // Child
-    if( n == m ) continue;      // Ignore control self-cycles
-    if( !m->is_CFG() ) continue;// Ignore non-CFG edges
+    if (n == m) continue;      // Ignore control self-cycles
+    if (!m->is_CFG()) continue;// Ignore non-CFG edges
 
     IdealLoopTree *l;           // Child's loop
-    if( !is_postvisited(m) ) {  // Child visited but not post-visited?
+    if (!is_postvisited(m)) {  // Child visited but not post-visited?
       // Found a backedge
-      assert( get_preorder(m) < pre_order, "should be backedge" );
+      assert(get_preorder(m) < pre_order, "should be backedge");
       // Check for the RootNode, which is already a LoopNode and is allowed
       // to have multiple "backedges".
-      if( m == C->root()) {     // Found the root?
+      if (m == C->root()) {     // Found the root?
         l = _ltree_root;        // Root is the outermost LoopNode
       } else {                  // Else found a nested loop
         // Insert a LoopNode to mark this loop.
         l = new IdealLoopTree(this, m, n);
       } // End of Else found a nested loop
-      if( !has_loop(m) )        // If 'm' does not already have a loop set
+      if (!has_loop(m)) {        // If 'm' does not already have a loop set
         set_loop(m, l);         // Set loop header to loop now
-
+      }
     } else {                    // Else not a nested loop
       if (!_loop_or_ctrl[m->_idx]) continue; // Dead code has no loop
-      l = get_loop(m);          // Get previously determined loop
+      IdealLoopTree* m_loop = get_loop(m);
+      l = m_loop;          // Get previously determined loop
       // If successor is header of a loop (nest), move up-loop till it
       // is a member of some outer enclosing loop.  Since there are no
       // shared headers (I've split them already) I only need to go up
       // at most 1 level.
-      while( l && l->_head == m ) // Successor heads loop?
+      while (l && l->_head == m) { // Successor heads loop?
         l = l->_parent;         // Move up 1 for me
+      }
       // If this loop is not properly parented, then this loop
       // has no exit path out, i.e. its an infinite loop.
-      if( !l ) {
+      if (!l) {
         // Make loop "reachable" from root so the CFG is reachable.  Basically
         // insert a bogus loop exit that is never taken.  'm', the loop head,
         // points to 'n', one (of possibly many) fall-in paths.  There may be
         // many backedges as well.
 
-        // Here I set the loop to be the root loop.  I could have, after
-        // inserting a bogus loop exit, restarted the recursion and found my
-        // new loop exit.  This would make the infinite loop a first-class
-        // loop and it would then get properly optimized.  What's the use of
-        // optimizing an infinite loop?
-        l = _ltree_root;        // Oops, found infinite loop
-
         if (!_verify_only) {
           // Insert the NeverBranch between 'm' and it's control user.
           NeverBranchNode *iff = new NeverBranchNode( m );
           _igvn.register_new_node_with_optimizer(iff);
-          set_loop(iff, l);
+          set_loop(iff, m_loop);
           Node *if_t = new CProjNode( iff, 0 );
           _igvn.register_new_node_with_optimizer(if_t);
-          set_loop(if_t, l);
+          set_loop(if_t, m_loop);
 
           Node* cfg = nullptr;       // Find the One True Control User of m
           for (DUIterator_Fast jmax, j = m->fast_outs(jmax); j < jmax; j++) {
@@ -5283,7 +6474,7 @@ int PhaseIdealLoop::build_loop_tree_impl( Node *n, int pre_order ) {
           // Now create the never-taken loop exit
           Node *if_f = new CProjNode( iff, 1 );
           _igvn.register_new_node_with_optimizer(if_f);
-          set_loop(if_f, l);
+          set_loop(if_f, _ltree_root);
           // Find frame ptr for Halt.  Relies on the optimizer
           // V-N'ing.  Easier and quicker than searching through
           // the program structure.
@@ -5292,10 +6483,27 @@ int PhaseIdealLoop::build_loop_tree_impl( Node *n, int pre_order ) {
           // Halt & Catch Fire
           Node* halt = new HaltNode(if_f, frame, "never-taken loop exit reached");
           _igvn.register_new_node_with_optimizer(halt);
-          set_loop(halt, l);
+          set_loop(halt, _ltree_root);
           _igvn.add_input_to(C->root(), halt);
         }
         set_loop(C->root(), _ltree_root);
+        // move to outer most loop with same header
+        l = m_loop;
+        while (true) {
+          IdealLoopTree* next = l->_parent;
+          if (next == nullptr || next->_head != m) {
+            break;
+          }
+          l = next;
+        }
+        // properly insert infinite loop in loop tree
+        sort(_ltree_root, l);
+        // fix child link from parent
+        IdealLoopTree* p = l->_parent;
+        l->_next = p->_child;
+        p->_child = l;
+        // code below needs enclosing loop
+        l = l->_parent;
       }
     }
     if (is_postvisited(l->_head)) {
@@ -5349,7 +6557,7 @@ int PhaseIdealLoop::build_loop_tree_impl( Node *n, int pre_order ) {
     assert( get_loop(n) == innermost, "" );
     IdealLoopTree *p = innermost->_parent;
     IdealLoopTree *l = innermost;
-    while( p && l->_head == n ) {
+    while (p && l->_head == n) {
       l->_next = p->_child;     // Put self on parents 'next child'
       p->_child = l;            // Make self as first child of parent
       l = p;                    // Now walk up the parent chain
@@ -5363,7 +6571,7 @@ int PhaseIdealLoop::build_loop_tree_impl( Node *n, int pre_order ) {
     // Record tightest enclosing loop for self.  Mark as post-visited.
     set_loop(n, innermost);
     // Also record has_call flag early on
-    if( innermost ) {
+    if (innermost) {
       if( n->is_Call() && !n->is_CallLeaf() && !n->is_macro() ) {
         // Do not count uncommon calls
         if( !n->is_CallStaticJava() || !n->as_CallStaticJava()->_name ) {
@@ -5954,6 +7162,7 @@ void PhaseIdealLoop::build_loop_late( VectorSet &visited, Node_List &worklist, N
       } else {
         // All of n's children have been processed, complete post-processing.
         build_loop_late_post(n);
+        if (C->failing()) { return; }
         if (nstack.is_empty()) {
           // Finished all nodes on stack.
           // Process next node on the worklist.
@@ -6100,13 +7309,15 @@ void PhaseIdealLoop::build_loop_late_post_work(Node *n, bool pinned) {
   Node *legal = LCA;            // Walk 'legal' up the IDOM chain
   Node *least = legal;          // Best legal position so far
   while( early != legal ) {     // While not at earliest legal
-#ifdef ASSERT
     if (legal->is_Start() && !early->is_Root()) {
+#ifdef ASSERT
       // Bad graph. Print idom path and fail.
       dump_bad_graph("Bad graph detected in build_loop_late", n, early, LCA);
       assert(false, "Bad graph detected in build_loop_late");
-    }
 #endif
+      C->record_method_not_compilable("Bad graph detected in build_loop_late");
+      return;
+    }
     // Find least loop nesting depth
     legal = idom(legal);        // Bump up the IDOM tree
     // Check for lower nesting depth

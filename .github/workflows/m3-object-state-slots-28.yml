@@ -9,6 +9,10 @@ on:
       - '.github/workflows/m3-object-state-slots-28.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   primitive-slots-and-native-peer:
     runs-on: ubuntu-24.04

@@ -10,6 +10,10 @@ on:
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-pathmask-classification-20261021.yml'
       - '.github/workflows/m3-index-pathmask-classification-20261021.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java21-c17-jni:
     runs-on: ubuntu-latest

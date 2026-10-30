@@ -13,6 +13,10 @@ on:
     branches: [m3/spring-case-indexed-receiver-20261018]
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict_java_real_spring_and_existing_native:
     runs-on: ubuntu-24.04

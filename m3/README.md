@@ -85,18 +85,21 @@ See docs/synexia-delivery.md.
 
 ## Third-party code and attribution
 
-The delivered owners (`m3/collections`, `m3/arrays`, `m3/ports/*`, `java.lang.M3*`,
-`jdk.internal.mindex.*`) import no third-party code; every donor is first-party Synexia source
-under Apache-2.0, attributed per leaf in `m3/compatibility/synexia-*-receipt.json`. Third-party
-material under `m3/` is build and test tooling only, plus one vendored license file:
+The October 8 import inventory is historical evidence. It does not describe the
+whole current tree: later work includes licensed third-party collection sources,
+Jackson module sources and TornadoVM sources. Renaming or inlining a donor does
+not remove its license, copyright, NOTICE or provenance obligations.
 
-| Artifact | License | Role |
-| --- | --- | --- |
-| OpenRewrite 8.17.1 (+ Jackson 2.16.1, JetBrains annotations 24.1.0 transitively) | Apache-2.0 | recipe engine for hash-pinned receivers and proofs |
-| SLF4J 1.7.36 / 2.0.9 API, 2.0.13 simple | MIT | logging facade and test-scope binding required by OpenRewrite; no `org.slf4j` import under `m3/` |
-| JUnit Jupiter 5.10.2, JUnit Platform Console 1.12.2 | EPL-2.0 | test harness and hosted runner |
-| Mapbox `jni/ownership.hpp` license (`m3/vendor/synexia/third-party/mapbox-jni-ownership/`) | ISC | referenced, not copied, by the mirrored `shared_arrays.cpp` |
+| Current source area | Reviewable attribution and qualification |
+| --- | --- |
+| Collection provider implementations | Per-owner LICENSE/NOTICE under `collections/implementations/` and the matching qualification receipts |
+| Jackson modules | [Jackson legal records](tooling/module-packs/jackson/legal/) and [upstream qualification](tooling/module-packs/jackson/UPSTREAM_QUALIFICATION.md) |
+| TornadoVM | [Pinned vendor sources and licenses](vendor/tornadovm/) and the optional-runtime gates in [release-contract.json](release/release-contract.json) |
+| Historical inventory | [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), explicitly scoped to its recorded revision |
 
-Eclipse Collections, RE2/J, commonmark-java, ASM, SWT and JMH are imported by Synexia donor
-modules but were never pulled into this tree; the full table with versions, upstream links,
-obligations and the inventory method is `m3/THIRD_PARTY_NOTICES.md`.
+A source directory is not proof that its code is included in a built JDK image.
+Release review must inspect the actual artifacts, module/package exports, native
+linkage and retained notices. The [visible release queue](release/queue/README.md)
+records outstanding qualification and recipe-custody work. Product tests and
+read-only receipt verifiers remain here; reusable transformation code stays in
+Synexia.

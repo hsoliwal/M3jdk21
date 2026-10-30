@@ -161,15 +161,17 @@ public final class M3ColumnarLanes {
 	public void insertRows (int index, int count) {
 		if (index < 0 || index > length || count < 0) throw new IndexOutOfBoundsException (index);
 		if (count == 0) return;
-		ensureCapacity (length + count);
+		if (count > Integer.MAX_VALUE - length) throw new OutOfMemoryError ("required array size too large");
+		int newLength = length + count;
+		ensureCapacity (newLength);
 		forEachLane (lane -> System.arraycopy (lane, index, lane, index + count, length - index), lane -> System.arraycopy (lane, index, lane, index + count, length - index));
-		length += count;
+		length = newLength;
 		fillDefaults (index, index + count);
 	}
 
 	/** Removes the rows <code>[index, index + count)</code>. */
 	public void removeRows (int index, int count) {
-		if (index < 0 || count < 0 || index + count > length) throw new IndexOutOfBoundsException (index);
+		if (index < 0 || count < 0 || index > length || count > length - index) throw new IndexOutOfBoundsException (index);
 		if (count == 0) return;
 		int tail = length - index - count;
 		forEachLane (lane -> System.arraycopy (lane, index + count, lane, index, tail), lane -> System.arraycopy (lane, index + count, lane, index, tail));
@@ -254,20 +256,40 @@ public final class M3ColumnarLanes {
 	private void ensureCapacity (int required) {
 		if (required <= capacity) return;
 		int newCapacity = M3LaneGrowth.capacity (capacity, required, 4);
-		for (Object [][] field : objects) {
+		// Stage only materialized fields; default-only rows need no replacement storage.
+		Object [][][] grownObjects = null;
+		for (int f = 0; f < objects.length; f++) {
+			Object [][] field = objects [f];
+			Object [][] grownField = null;
 			for (int c = 0; c < field.length; c++) {
-				if (field [c] != null) field [c] = Arrays.copyOf (field [c], newCapacity);
+				if (field [c] == null) continue;
+				if (grownField == null) grownField = field.clone ();
+				grownField [c] = Arrays.copyOf (field [c], newCapacity);
+			}
+			if (grownField != null) {
+				if (grownObjects == null) grownObjects = objects.clone ();
+				grownObjects [f] = grownField;
 			}
 		}
+		int [][][] grownInts = null;
 		for (int f = 0; f < ints.length; f++) {
+			int [][] grownField = null;
 			for (int c = 0; c < ints [f].length; c++) {
 				int [] lane = ints [f] [c];
 				if (lane == null) continue;
+				if (grownField == null) grownField = ints [f].clone ();
 				int [] grown = Arrays.copyOf (lane, newCapacity);
-				if (intDefaults [f] != 0) Arrays.fill (grown, lane.length, newCapacity, intDefaults [f]);
-				ints [f] [c] = grown;
+				if (intDefaults [f] != 0 && lane.length < newCapacity) Arrays.fill (grown, lane.length, newCapacity, intDefaults [f]);
+				grownField [c] = grown;
+			}
+			if (grownField != null) {
+				if (grownInts == null) grownInts = ints.clone ();
+				grownInts [f] = grownField;
 			}
 		}
+		// Publish aligned directories only after every allocation and copy succeeds.
+		if (grownObjects != null) objects = grownObjects;
+		if (grownInts != null) ints = grownInts;
 		capacity = newCapacity;
 	}
 

@@ -1,0 +1,107 @@
+{
+  "schema": "m3.independent-failure-repair.receipt.v1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "977cb34746e56e5c71128c41475425a28c932787",
+  "receiving_base_commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+  "receipt_kind": "PASSIVE_RESULT_ONLY; no recipes, runners, or private proof copies",
+  "recipes": [
+    {
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3-mutable-filtered-comparator-20261029",
+      "dataset": "oracle"
+    },
+    {
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3-entry-projection-tests-20261029",
+      "dataset": "entry"
+    },
+    {
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-oracle-repair-20261029",
+      "dataset": "filtered"
+    },
+    {
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3-gather-exception-oracle-20261029",
+      "dataset": "current"
+    },
+    {
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3-mask-region-oracle-20261029",
+      "dataset": "regions"
+    },
+    {
+      "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-array-bootstrap-20261029",
+      "dataset": "current"
+    }
+  ],
+  "outputs": {
+    "m3/arrays/pom.xml": "00799ab597b2e38c44f44622634f635d55da59be40df7ecf3f7b5a87d35c9c00",
+    "m3/collections/pom.xml": "bd6f9052f664e0b70e1c13c5217c131b315e76f7e21c7161a1075ae871cc8b4d",
+    "m3/collections/qualification/full-java-jni-20261018/verify.py": "52235e3b0fc8872dbf0e060e9ebfd1c594b98c02a5154c48baed88e854cec762",
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": "49dafe190c5803551a74b140afa64f84b5ede9936783761a8e7fea145a5d1641",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java": "1158c38cb694c1d48a90252e2ec92188e76a5cb088e6c289d1b2d85149d6a8b6",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java": "778352a88dc774b5db05b3ad986037de09ca58c9292817004ff773f13692982c",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredSortedEdgesContract.java": "c444f9d419cdca28ec7946b4d35531dec6c509fe61462a589f04343edd2296a8",
+    "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java": "fabb456bfb992d0f2dd90c2b34375c9dbded022c30e814116c613ae8a3acf5ac",
+    "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java": "7fbf50ca7dbcc5a449501c138a9f0216c077d6f518b774ca166691c3038aab7d",
+    "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java": "cfa83d7abb9dd397e91ce638bf84c53683860b0645d551f17a712094957b88b5",
+    "m3/collections/src/test/java/com/m3/collections/M3MutableComparatorFailureTest.java": "e72b0afd06457b71174f3d31776cfc224c3d6d5f49288d2650f2c02367835328",
+    "m3/collections/src/test/java/com/m3/collections/M3NetBeansGatherSpansTest.java": "1ca4d8d38dd3fd0eb348620b46260796ac3ca4d56f19c13500fec54ce9f0d800",
+    "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java": "286690c919a033b1b7058e7c1d6dadab07d06f63a7d7b3b84f11c41b3884f2c8",
+    "m3/collections/src/test/native/m3_gather_spans.c": "fc71fd2db0f7a5f0779d8816cf7e9e4017a466dd2df79ee00fcf3dbbbec15f99",
+    "m3/collections/src/test/native/m3_mask_window_regions.c": "8d508b86d29967cce5e6231c4518c63efecf9360f52e9f4f834bdab1f0a9f025"
+  },
+  "qualification": {
+    "available_dependency_actual_maven_modules": "PASS",
+    "dependency_scope": "ordinary cached JUnit5.10.2; not claimed as fresh source-JUnit qualification",
+    "arrays": {
+      "java": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "native": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "collections": {
+      "java": {
+        "tests": 696,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2
+      },
+      "native": {
+        "tests": 696,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "native_protocols": {
+      "spans": {
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "regions": {
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "gather-spans": {
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    },
+    "explicit_native_main_programs": 20,
+    "missing_collection_library_main_programs": 3,
+    "packaged_collection_classes": 599,
+    "runtime_modules": "com.m3.arrays,java.base",
+    "native_checks": "actual C17; fatal UBSan; checked JNI; existing array CMake owner",
+    "scope_equivalence": "The isolated3569 baseline plus complete source comparisons and8 exact669a source files matched the recorded current scope before qualified recipe outputs;802 source/input files audited",
+    "full_strict_source_prerequisite_gate": "BLOCKED",
+    "source_prerequisite_reason": "Exact Kotlin Maven plugin1.8.22 unavailable locally; Maven Central DNS resolution failed. Existing mandatory source-JUnit gate remains enforced.",
+    "full_strict_gate_pass_claimed": false
+  },
+  "canonical_proof_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-array-bootstrap-20261029/proof/RESULTS.json",
+  "review_state": "DRAFT_PENDING_FULL_STRICT_SOURCE_PREREQUISITE_GATE"
+}

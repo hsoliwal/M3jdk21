@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1994, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1994, 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -381,19 +381,16 @@ public final class String
             return;
         }
 
-        byte[] candidate = null;
-        byte candidateCoder = UTF16;
+        //FLLDCIM: MERGE-21U — 8311906: compress returns the result array (never null); its length gives the coder
         if (COMPACT_STRINGS) {
-            candidate = StringLatin1.toBytes(codePoints, offset, count);
-            if (candidate != null) {
-                candidateCoder = LATIN1;
-            }
+            byte[] val = StringUTF16.compress(codePoints, offset, count);
+            this.value = val;
+            this.coder = StringUTF16.coderFromArrayLen(val, count);
+            this.m3 = null;
+            return;
         }
-        if (candidate == null) {
-            candidate = StringUTF16.toBytes(codePoints, offset, count);
-        }
-        this.value = candidate;
-        this.coder = candidateCoder;
+        this.value = StringUTF16.toBytes(codePoints, offset, count);
+        this.coder = UTF16;
         this.m3 = null;
     }
 
@@ -642,6 +639,8 @@ public final class String
         if (direct != null) {
             return new M3Construction(direct);
         }
+        //FLLDCIM: MERGE-21U — 8311906/8321180 ported onto the M3Construction helper: decode from a stable copy,
+        //FLLDCIM: MERGE-21U — newBytesFor checks the UTF16 size, compress results carry their coder by length
         if (charset == UTF_8.INSTANCE) {
             if (COMPACT_STRINGS) {
                 int dp = StringCoding.countPositives(bytes, offset, length);
@@ -649,45 +648,43 @@ public final class String
                     return new M3Construction(
                             Arrays.copyOfRange(bytes, offset, offset + length), LATIN1);
                 }
-                int sl = offset + length;
-                byte[] dst = new byte[length];
-                if (dp > 0) {
-                    System.arraycopy(bytes, offset, dst, 0, dp);
-                    offset += dp;
-                }
-                while (offset < sl) {
-                    int b1 = bytes[offset++];
+                // Decode with a stable copy, to be the result if the decoded length is the same
+                byte[] latin1 = Arrays.copyOfRange(bytes, offset, offset + length);
+                int sp = dp;            // first dp bytes are already in the copy
+                while (sp < length) {
+                    int b1 = latin1[sp++];
                     if (b1 >= 0) {
-                        dst[dp++] = (byte)b1;
+                        latin1[dp++] = (byte)b1;
                         continue;
                     }
-                    if ((b1 & 0xfe) == 0xc2 && offset < sl) {
-                        int b2 = bytes[offset];
-                        if (b2 < -64) {
-                            dst[dp++] = (byte)decode2(b1, b2);
-                            offset++;
+                    if ((b1 & 0xfe) == 0xc2 && sp < length) { // b1 either 0xc2 or 0xc3
+                        int b2 = latin1[sp];
+                        if (b2 < -64) { // continuation bytes are always negative values in the range -128 to -65
+                            latin1[dp++] = (byte)decode2(b1, b2);
+                            sp++;
                             continue;
                         }
                     }
-                    offset--;
+                    // anything not a latin1, including the REPL
+                    // we have to go with the utf16
+                    sp--;
                     break;
                 }
-                if (offset == sl) {
-                    if (dp != dst.length) {
-                        dst = Arrays.copyOf(dst, dp);
+                if (sp == length) {
+                    if (dp != latin1.length) {
+                        latin1 = Arrays.copyOf(latin1, dp);
                     }
-                    return new M3Construction(dst, LATIN1);
+                    return new M3Construction(latin1, LATIN1);
                 }
-                byte[] buf = new byte[length << 1];
-                StringLatin1.inflate(dst, 0, buf, 0, dp);
-                dst = buf;
-                dp = decodeUTF8_UTF16(bytes, offset, sl, dst, dp, true);
+                byte[] utf16 = StringUTF16.newBytesFor(length);
+                StringLatin1.inflate(latin1, 0, utf16, 0, dp);
+                dp = decodeUTF8_UTF16(latin1, sp, length, utf16, dp, true);
                 if (dp != length) {
-                    dst = Arrays.copyOf(dst, dp << 1);
+                    utf16 = Arrays.copyOf(utf16, dp << 1);
                 }
-                return new M3Construction(dst, UTF16);
+                return new M3Construction(utf16, UTF16);
             }
-            byte[] dst = new byte[length << 1];
+            byte[] dst = StringUTF16.newBytesFor(length);
             int dp = decodeUTF8_UTF16(bytes, offset, offset + length, dst, 0, true);
             if (dp != length) {
                 dst = Arrays.copyOf(dst, dp << 1);
@@ -708,7 +705,7 @@ public final class String
                 return new M3Construction(
                         Arrays.copyOfRange(bytes, offset, offset + length), LATIN1);
             }
-            byte[] dst = new byte[length << 1];
+            byte[] dst = StringUTF16.newBytesFor(length);
             int dp = 0;
             while (dp < length) {
                 int b = bytes[offset++];
@@ -739,10 +736,8 @@ public final class String
             char[] ca = new char[en];
             int clen = ad.decode(bytes, offset, length, ca);
             if (COMPACT_STRINGS) {
-                byte[] bs = StringUTF16.compress(ca, 0, clen);
-                if (bs != null) {
-                    return new M3Construction(bs, LATIN1);
-                }
+                byte[] val = StringUTF16.compress(ca, 0, clen);
+                return new M3Construction(val, StringUTF16.coderFromArrayLen(val, clen));
             }
             return new M3Construction(StringUTF16.toBytes(ca, 0, clen), UTF16);
         }
@@ -764,10 +759,8 @@ public final class String
             throw new Error(failure);
         }
         if (COMPACT_STRINGS) {
-            byte[] bs = StringUTF16.compress(ca, 0, caLen);
-            if (bs != null) {
-                return new M3Construction(bs, LATIN1);
-            }
+            byte[] val = StringUTF16.compress(ca, 0, caLen);
+            return new M3Construction(val, StringUTF16.coderFromArrayLen(val, caLen));
         }
         return new M3Construction(StringUTF16.toBytes(ca, 0, caLen), UTF16);
     }
@@ -826,15 +819,15 @@ public final class String
                 return new String(dst, LATIN1);
             }
             if (dp == 0) {
-                dst = new byte[length << 1];
+                dst = StringUTF16.newBytesFor(length);
             } else {
-                byte[] buf = new byte[length << 1];
+                byte[] buf = StringUTF16.newBytesFor(length);
                 StringLatin1.inflate(dst, 0, buf, 0, dp);
                 dst = buf;
             }
             dp = decodeUTF8_UTF16(bytes, offset, sl, dst, dp, false);
         } else { // !COMPACT_STRINGS
-            dst = new byte[length << 1];
+            dst = StringUTF16.newBytesFor(length);
             dp = decodeUTF8_UTF16(bytes, offset, offset + length, dst, 0, false);
         }
         if (dp != length) {
@@ -903,10 +896,9 @@ public final class String
             throw new IllegalArgumentException(x);
         }
         if (COMPACT_STRINGS) {
-            byte[] bs = StringUTF16.compress(ca, 0, caLen);
-            if (bs != null) {
-                return new String(bs, LATIN1);
-            }
+            byte[] val = StringUTF16.compress(ca, 0, caLen);
+            byte coder = StringUTF16.coderFromArrayLen(val, caLen);
+            return new String(val, coder);
         }
         return new String(StringUTF16.toBytes(ca, 0, caLen), UTF16);
     }
@@ -1386,7 +1378,7 @@ public final class String
         }
 
         int dp = 0;
-        byte[] dst = new byte[val.length << 1];
+        byte[] dst = StringUTF16.newBytesFor(val.length);
         for (byte c : val) {
             if (c < 0) {
                 dst[dp++] = (byte) (0xc0 | ((c & 0xff) >> 6));
@@ -2383,6 +2375,10 @@ public final class String
              (toffset > (long)length() - len) ||
              (ooffset > (long)other.length() - len)) {
             return false;
+        }
+        // Any strings match if len <= 0
+        if (len <= 0) { //FLLDCIM: MERGE-21U — upstream len <= 0 rule ahead of the M3 slice path
+           return true;
         }
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
@@ -5391,15 +5387,18 @@ public final class String
     }
 
     /*
-     * Package private constructor. Trailing Void argument is there for
+     * Private constructor. Trailing Void argument is there for
      * disambiguating it against other (public) constructors.
      *
      * Stores the char[] value into a byte[] that each byte represents
      * the8 low-order bits of the corresponding character, if the char[]
      * contains only latin1 character. Or a byte[] that stores all
      * characters in their byte sequences defined by the {@code StringUTF16}.
+     *
+     * <p> The contents of the string are unspecified if the character array
+     * is modified during string construction.
      */
-    String(char[] value, int off, int len, Void sig) {
+    private String(char[] value, int off, int len, Void sig) {
         if (len == 0) {
             this.value = "".value;
             this.coder = "".coder;
@@ -5415,19 +5414,25 @@ public final class String
             return;
         }
 
-        byte[] candidate = COMPACT_STRINGS ? StringUTF16.compress(value, off, len) : null;
-        byte candidateCoder = candidate == null ? UTF16 : LATIN1;
-        if (candidate == null) {
-            candidate = StringUTF16.toBytes(value, off, len);
+        //FLLDCIM: MERGE-21U — 8311906: compress returns the result array (never null); its length gives the coder
+        if (COMPACT_STRINGS) {
+            byte[] val = StringUTF16.compress(value, off, len);
+            this.value = val;
+            this.coder = StringUTF16.coderFromArrayLen(val, len);
+            this.m3 = null;
+            return;
         }
-        this.value = candidate;
-        this.coder = candidateCoder;
+        this.value = StringUTF16.toBytes(value, off, len);
+        this.coder = UTF16;
         this.m3 = null;
     }
 
     /*
      * Package private constructor. Trailing Void argument is there for
      * disambiguating it against other (public) constructors.
+     *
+     * <p> The contents of the string are unspecified if the {@code StringBuilder}
+     * is modified during string construction.
      */
     String(AbstractStringBuilder asb, Void sig) {
         byte[] val = asb.getValue();
@@ -5452,11 +5457,11 @@ public final class String
             candidate = Arrays.copyOfRange(val, 0, length);
             candidateCoder = LATIN1;
         } else {
-            candidate = COMPACT_STRINGS && asb.maybeLatin1
-                    ? StringUTF16.compress(val, 0, length)
-                    : null;
-            if (candidate != null) {
-                candidateCoder = LATIN1;
+            // only try to compress val if some characters were deleted.
+            //FLLDCIM: MERGE-21U — 8311906: compress returns the result array (never null); its length gives the coder
+            if (COMPACT_STRINGS && asb.maybeLatin1) {
+                candidate = StringUTF16.compress(val, 0, length);
+                candidateCoder = StringUTF16.coderFromArrayLen(candidate, length);
             } else {
                 candidate = Arrays.copyOfRange(val, 0, length << 1);
                 candidateCoder = UTF16;

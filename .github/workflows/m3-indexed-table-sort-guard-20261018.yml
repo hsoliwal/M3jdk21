@@ -8,6 +8,10 @@ on:
       - 'm3/collections/qualification/m3jdk21-table-sort-guard-20261018/**'
       - '.github/workflows/m3-indexed-table-sort-guard-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   jdk21-owner:
     runs-on: ubuntu-latest

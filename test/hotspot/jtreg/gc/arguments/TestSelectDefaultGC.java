@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2025, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -44,12 +44,11 @@ public class TestSelectDefaultGC {
 
     public static void testDefaultGC(boolean actAsServer) throws Exception {
         // Start VM without specifying GC
-        ProcessBuilder pb = GCArguments.createJavaProcessBuilder(
+        OutputAnalyzer output = GCArguments.executeTestJava(
             "-XX:" + (actAsServer ? "+" : "-") + "AlwaysActAsServerClassMachine",
             "-XX:" + (actAsServer ? "-" : "+") + "NeverActAsServerClassMachine",
             "-XX:+PrintFlagsFinal",
             "-version");
-        OutputAnalyzer output = new OutputAnalyzer(pb.start());
         output.shouldHaveExitValue(0);
 
         // G1 is the default whenever it is included, independent of server-class ergonomics.

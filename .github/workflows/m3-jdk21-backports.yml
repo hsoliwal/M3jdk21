@@ -5,6 +5,7 @@ on:
     branches:
       - aix/jdk22-27-backports-20261002
     paths:
+      - "src/java.base/share/native/libzip/zlib/zutil.h"
       - "m3/backports/**"
       - "src/hotspot/os/aix/os_aix.cpp"
       - "src/hotspot/os/bsd/os_bsd.cpp"
@@ -56,6 +57,7 @@ on:
       - ".github/workflows/m3-jdk21-backports.yml"
   pull_request:
     paths:
+      - "src/java.base/share/native/libzip/zlib/zutil.h"
       - "m3/backports/**"
       - "src/hotspot/os/aix/os_aix.cpp"
       - "src/hotspot/os/bsd/os_bsd.cpp"
@@ -109,6 +111,10 @@ on:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   verify:

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -244,8 +244,10 @@ const int ObjectAlignmentInBytes = 8;
                                                                             \
   product(size_t, LargePageSizeInBytes, 0,                                  \
           "Maximum large page size used (0 will use the default large "     \
-          "page size for the environment as the maximum)")                  \
+          "page size for the environment as the maximum) "                  \
+          "(must be a power of 2)")                                         \
           range(0, max_uintx)                                               \
+          constraint(LargePageSizeInBytesConstraintFunc, AtParse)           \
                                                                             \
   product(size_t, LargePageHeapSizeThreshold, 128*M,                        \
           "Use large pages if maximum heap is at least this big")           \
@@ -295,6 +297,9 @@ const int ObjectAlignmentInBytes = 8;
   product(bool, UseInlineCaches, true,                                      \
           "Use Inline Caches for virtual calls ")                           \
                                                                             \
+  product(size_t, InlineCacheBufferSize, 10*K, EXPERIMENTAL,                \
+          "InlineCacheBuffer size")                                         \
+                                                                            \
   product(bool, InlineArrayCopy, true, DIAGNOSTIC,                          \
           "Inline arraycopy native that is known to be part of "            \
           "base library DLL")                                               \
@@ -326,6 +331,12 @@ const int ObjectAlignmentInBytes = 8;
                                                                             \
   product(bool, UseChaCha20Intrinsics, false, DIAGNOSTIC,                   \
           "Use intrinsics for the vectorized version of ChaCha20")          \
+                                                                            \
+  product(bool, UseKyberIntrinsics, false, DIAGNOSTIC,                      \
+          "Use intrinsics for the vectorized version of Kyber")             \
+                                                                            \
+  product(bool, UseDilithiumIntrinsics, false, DIAGNOSTIC,                  \
+          "Use intrinsics for the vectorized version of Dilithium")         \
                                                                             \
   product(bool, UseMD5Intrinsics, false, DIAGNOSTIC,                        \
           "Use intrinsics for MD5 crypto hash function")                    \
@@ -479,6 +490,9 @@ const int ObjectAlignmentInBytes = 8;
                                                                             \
   develop(bool, ZapFillerObjects, trueInDebug,                              \
           "Zap filler objects")                                             \
+                                                                            \
+  develop(bool, ZapTLAB, trueInDebug,                                       \
+          "Zap allocated TLABs")                                            \
                                                                             \
   product(bool, ExecutingUnitTests, false,                                  \
           "Whether the JVM is running unit tests or not")                   \
@@ -728,6 +742,10 @@ const int ObjectAlignmentInBytes = 8;
           "The maximum number of monitors to deflate, unlink and delete "   \
           "at one time (minimum is 1024).")                      \
           range(1024, max_jint)                                             \
+                                                                            \
+  product(intx, MonitorUnlinkBatch, 500, DIAGNOSTIC,                        \
+          "The maximum number of monitors to unlink in one batch. ")        \
+          range(1, max_jint)                                                \
                                                                             \
   product(intx, MonitorUsedDeflationThreshold, 90, DIAGNOSTIC,              \
           "Percentage of used monitors before triggering deflation (0 is "  \
@@ -1050,13 +1068,9 @@ const int ObjectAlignmentInBytes = 8;
   product(bool, ErrorFileToStdout, false,                                   \
           "If true, error data is printed to stdout instead of a file")     \
                                                                             \
-  develop(bool, UseHeavyMonitors, false,                                    \
-          "(Deprecated) Use heavyweight instead of lightweight Java "       \
-          "monitors")                                                       \
-                                                                            \
   develop(bool, VerifyHeavyMonitors, false,                                 \
           "Checks that no stack locking happens when using "                \
-          "+UseHeavyMonitors")                                              \
+          "-XX:LockingMode=0 (LM_MONITOR)")                                 \
                                                                             \
   product(bool, PrintStringTableStatistics, false,                          \
           "print statistics about the StringTable and SymbolTable")         \
@@ -1979,6 +1993,30 @@ const int ObjectAlignmentInBytes = 8;
           "1: monitors & legacy stack-locking (LM_LEGACY, default), "       \
           "2: monitors & new lightweight locking (LM_LIGHTWEIGHT)")         \
           range(0, 2)                                                       \
+                                                                            \
+  product(uint, TrimNativeHeapInterval, 0,                                  \
+          "Interval, in ms, at which the JVM will trim the native heap if " \
+          "the platform supports that. Lower values will reclaim memory "   \
+          "more eagerly at the cost of higher overhead. A value of 0 "      \
+          "(default) disables native heap trimming.")                       \
+          range(0, UINT_MAX)                                                \
+                                                                            \
+  product(bool, UseThreadsLockThrottleLock, true, DIAGNOSTIC,               \
+          "Use an extra lock during Thread start and exit to alleviate"     \
+          "contention on Threads_lock.")                                    \
+                                                                            \
+  product(bool, UseSecondarySupersCache, true, DIAGNOSTIC,                  \
+                "Use secondary supers cache during subtype checks.")        \
+                                                                            \
+  product(bool, UseSecondarySupersTable, false, DIAGNOSTIC,                 \
+                "Use hash table to lookup secondary supers.")               \
+                                                                            \
+  product(bool, VerifySecondarySupers, false, DIAGNOSTIC,                   \
+          "Check that linear and hashed secondary lookups return the same result.") \
+                                                                            \
+  product(bool, StressSecondarySupers, false, DIAGNOSTIC,                   \
+          "Use a terrible hash function in order to generate many collisions.") \
+                                                                            \
 
 // end of RUNTIME_FLAGS
 

@@ -1,0 +1,556 @@
+java-jni-parity	UNKNOWN STEP	﻿2026-10-24T19:45:27.0415977Z Current runner version: '2.338.0'
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0441607Z ##[group]Runner Image Provisioner
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0442559Z Hosted Compute Agent
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0443210Z Version: 20261012.601
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0443921Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0444790Z Build Date: 2026-10-12T17:48:21Z
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0445777Z Worker ID: {39f8d7dc-3333-444b-81d9-9798b48426ee}
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0446568Z Region: westcentralus
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0447194Z Cloud: Azure
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0447768Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0449208Z ##[group]Operating System
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0449851Z Ubuntu
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0450384Z 24.04.5
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0451016Z LTS
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0451578Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0452293Z ##[group]Runner Image
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0452927Z Image: ubuntu-24.04
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0453521Z Version: 20261012.334.1
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0454912Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0456981Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0457986Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0459243Z ##[group]GITHUB_TOKEN Permissions
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0461222Z Contents: read
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0461878Z Metadata: read
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0462574Z Packages: read
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0463162Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0465283Z Secret source: Actions
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0466506Z Cache mode: write
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0467261Z Prepare workflow directory
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0840098Z Prepare all required actions
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.0886973Z Getting action download info
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.3713573Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:27.4601666Z Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.4336119Z Complete job name: java-jni-parity
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5190704Z ##[group]Run actions/checkout@v4
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5191592Z with:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5192076Z   repository: hsoliwal/M3jdk21
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5196498Z   token: ***
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5196984Z   ssh-strict: true
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5197493Z   ssh-user: git
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5197987Z   persist-credentials: true
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5198525Z   clean: true
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5199020Z   sparse-checkout-cone-mode: true
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5199595Z   fetch-depth: 1
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5200069Z   fetch-tags: false
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5200562Z   show-progress: true
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5201065Z   lfs: false
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5201533Z   submodules: false
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5202036Z   set-safe-directory: true
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5202595Z   allow-unsafe-pr-checkout: false
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.5203505Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6224530Z Syncing repository: hsoliwal/M3jdk21
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6227846Z ##[group]Getting Git version info
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6229249Z Working directory is '/home/runner/work/M3jdk21/M3jdk21'
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6231001Z [command]/usr/bin/git version
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6288249Z git version 2.55.0
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6314850Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6322387Z Temporarily overriding HOME='/home/runner/work/_temp/6c78fd0d-2cda-49c2-8468-7d44bd2c1aeb' before making global git config changes
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6324456Z Adding repository directory to the temporary git global config as a safe directory
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6327676Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6382299Z Deleting the contents of '/home/runner/work/M3jdk21/M3jdk21'
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6391478Z ##[group]Initializing the repository
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6396858Z [command]/usr/bin/git init /home/runner/work/M3jdk21/M3jdk21
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6477603Z hint: Using 'master' as the name for the initial branch. This default branch name
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6479686Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6482124Z hint: to use in all of your new repositories, which will suppress this warning,
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6483623Z hint: call:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6484384Z hint:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6485285Z hint: 	git config --global init.defaultBranch <name>
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6486573Z hint:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6487598Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6489311Z hint: 'development'. The just-created branch can be renamed via this command:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6490633Z hint:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6491355Z hint: 	git branch -m <name>
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6492204Z hint:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6493319Z hint: Disable this message with "git config set advice.defaultBranchName false"
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6495099Z Initialized empty Git repository in /home/runner/work/M3jdk21/M3jdk21/.git/
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6497209Z [command]/usr/bin/git remote add origin https://github.com/hsoliwal/M3jdk21
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6536693Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6538043Z ##[group]Disabling automatic garbage collection
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6540051Z [command]/usr/bin/git config --local gc.auto 0
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6589388Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6590735Z ##[group]Setting up auth
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6596217Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.6631507Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.7018788Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.7080227Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.7330313Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.7368659Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.7610673Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.7654206Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.7655294Z ##[group]Fetching the repository
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:28.7663725Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b35759a36ecdfc299855a5e53b4d1a05f9f3884d:refs/remotes/origin/master
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0245811Z From https://github.com/hsoliwal/M3jdk21
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0246742Z  * [new ref]             b35759a36ecdfc299855a5e53b4d1a05f9f3884d -> origin/master
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0261590Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0262923Z ##[group]Determining the checkout info
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0264089Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0264813Z [command]/usr/bin/git sparse-checkout disable
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0320262Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0356008Z ##[group]Checking out the ref
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:58.0358977Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:59.2605117Z Updating files:  10% (12601/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:59.3512965Z Updating files:  11% (13781/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:59.4475268Z Updating files:  12% (15034/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:59.5927915Z Updating files:  13% (16287/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:59.6928524Z Updating files:  14% (17540/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:59.8385021Z Updating files:  15% (18792/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:45:59.9824909Z Updating files:  16% (20045/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.1821151Z Updating files:  17% (21298/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.2214541Z Updating files:  17% (22019/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.3217776Z Updating files:  18% (22551/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.4097206Z Updating files:  19% (23804/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.5331429Z Updating files:  20% (25056/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.6323865Z Updating files:  21% (26309/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.7144996Z Updating files:  22% (27562/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.7958582Z Updating files:  23% (28815/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.8785829Z Updating files:  24% (30067/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:00.9474179Z Updating files:  25% (31320/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.0233865Z Updating files:  26% (32573/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.1013691Z Updating files:  27% (33826/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.1641313Z Updating files:  28% (35079/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.1816557Z Updating files:  29% (36331/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.2232615Z Updating files:  29% (36676/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.2769544Z Updating files:  30% (37584/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.3468676Z Updating files:  31% (38837/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.3989623Z Updating files:  32% (40090/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.4588085Z Updating files:  33% (41343/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.5505444Z Updating files:  34% (42595/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.6211784Z Updating files:  35% (43848/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.8255086Z Updating files:  36% (45101/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.8917057Z Updating files:  37% (46354/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:01.9787077Z Updating files:  38% (47607/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:02.0632363Z Updating files:  39% (48859/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:02.1327386Z Updating files:  40% (50112/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:02.1817631Z Updating files:  41% (51365/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:02.2201049Z Updating files:  41% (52075/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:02.2961526Z Updating files:  42% (52618/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:02.6857464Z Updating files:  43% (53870/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:02.7927085Z Updating files:  44% (55123/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:02.9453524Z Updating files:  45% (56376/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.1216694Z Updating files:  46% (57629/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.1821826Z Updating files:  47% (58882/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.2324138Z Updating files:  47% (59652/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.3479583Z Updating files:  48% (60134/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.4267962Z Updating files:  49% (61387/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.5492235Z Updating files:  50% (62640/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.6795821Z Updating files:  51% (63893/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.7756609Z Updating files:  52% (65146/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:03.8986906Z Updating files:  53% (66398/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.0067284Z Updating files:  54% (67651/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.1013310Z Updating files:  55% (68904/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.1817570Z Updating files:  56% (70157/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.2139416Z Updating files:  56% (71045/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.3286284Z Updating files:  57% (71410/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.4298161Z Updating files:  58% (72662/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.5216740Z Updating files:  59% (73915/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.6215282Z Updating files:  60% (75168/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.7376093Z Updating files:  61% (76421/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.8290756Z Updating files:  62% (77673/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:04.9314644Z Updating files:  63% (78926/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.0170026Z Updating files:  64% (80179/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.1042910Z Updating files:  65% (81432/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.1817086Z Updating files:  66% (82685/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.1826789Z Updating files:  66% (83929/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.2576633Z Updating files:  67% (83937/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.3275960Z Updating files:  68% (85190/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.4020300Z Updating files:  69% (86443/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.4830812Z Updating files:  70% (87696/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.5837792Z Updating files:  71% (88949/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.6642774Z Updating files:  72% (90201/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.7418305Z Updating files:  73% (91454/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:05.8086611Z Updating files:  74% (92707/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.0312374Z Updating files:  75% (93960/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.1058833Z Updating files:  76% (95213/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.3078429Z Updating files:  77% (96465/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.3191056Z Updating files:  77% (97504/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.3956401Z Updating files:  78% (97718/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.4749146Z Updating files:  79% (98971/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.5489462Z Updating files:  80% (100224/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.6449313Z Updating files:  81% (101476/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.7314711Z Updating files:  82% (102729/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.8160101Z Updating files:  83% (103982/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.9008110Z Updating files:  84% (105235/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:06.9809687Z Updating files:  85% (106488/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.0632253Z Updating files:  86% (107740/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.1344985Z Updating files:  87% (108993/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.1817471Z Updating files:  88% (110246/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.2812391Z Updating files:  88% (110923/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.3676996Z Updating files:  89% (111499/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.5271962Z Updating files:  90% (112752/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.6301658Z Updating files:  91% (114004/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.7119683Z Updating files:  92% (115257/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.7810873Z Updating files:  93% (116510/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.8435350Z Updating files:  94% (117763/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.9055417Z Updating files:  95% (119016/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:07.9658194Z Updating files:  96% (120268/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.0253502Z Updating files:  97% (121521/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.0898204Z Updating files:  98% (122774/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.2026803Z Updating files:  99% (124027/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.2200558Z Updating files:  99% (124962/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.2201133Z Updating files: 100% (125279/125279)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.2201645Z Updating files: 100% (125279/125279), done.
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4075159Z Reset branch 'master'
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4076540Z branch 'master' set up to track 'origin/master'.
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4207495Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4256811Z [command]/usr/bin/git log -1 --format=%H
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4289016Z b35759a36ecdfc299855a5e53b4d1a05f9f3884d
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4675115Z ##[group]Run actions/setup-java@v4
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4675409Z with:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4675804Z   distribution: temurin
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4676037Z   java-version: 21
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4676253Z   java-package: jdk
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4676470Z   check-latest: false
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4676686Z   server-id: github
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4676902Z   server-username: GITHUB_ACTOR
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4677158Z   server-password: GITHUB_TOKEN
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4677407Z   overwrite-settings: true
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4677646Z   job-status: success
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4680058Z   token: ***
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.4680278Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6336190Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6344569Z ##[group]Installed distributions
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6417623Z Resolved Java 21.0.12+1 from tool-cache
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6418074Z Setting Java 21.0.12+1 as the default
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6428789Z (node:2419) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6429852Z (Use `node --trace-deprecation ...` to show where the warning was created)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6431661Z Creating toolchains.xml for JDK version 21 from temurin
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6501801Z Writing to /home/runner/.m2/toolchains.xml
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6502184Z 
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6502328Z Java configuration:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6502673Z   Distribution: temurin
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6503014Z   Version: 21.0.12+1
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6503499Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6503930Z 
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6504417Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6521990Z Creating settings.xml with server-id: github
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6570843Z Writing to /home/runner/.m2/settings.xml
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6764483Z ##[group]Run bash m3/collections/recipe/state-mask-histogram-20261017/verify.sh
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.6765310Z [36;1mbash m3/collections/recipe/state-mask-histogram-20261017/verify.sh[0m
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7043241Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7043635Z env:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7043975Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7044484Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7044863Z ##[endgroup]
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7461687Z generated output/source mirror SHA-256 drift: m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7526415Z ##[error]Process completed with exit code 1.
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7640632Z Post job cleanup.
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.9020374Z (node:2438) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.9021486Z (Use `node --trace-deprecation ...` to show where the warning was created)
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.9271994Z Post job cleanup.
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0172988Z [command]/usr/bin/git version
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0216200Z git version 2.55.0
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0252268Z Temporarily overriding HOME='/home/runner/work/_temp/8235614d-5601-43b1-be2c-940b9efbc93b' before making global git config changes
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0253623Z Adding repository directory to the temporary git global config as a safe directory
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0260109Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0302049Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0369108Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0786178Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0819236Z http.https://github.com/.extraheader
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0836028Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.0874944Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.1307028Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.1352861Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.1925834Z Cleaning up orphan processes
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:09.2313276Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+owning-module	UNKNOWN STEP	﻿2026-10-24T19:45:26.4870796Z Current runner version: '2.338.0'
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4907624Z ##[group]Runner Image Provisioner
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4909335Z Hosted Compute Agent
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4910387Z Version: 20261021.618
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4911645Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4912944Z Build Date: 2026-10-21T00:45:21Z
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4914290Z Worker ID: {30a09745-96df-4811-b5fa-0d5603be28fb}
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4915571Z Region: eastus2
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4916513Z Cloud: Azure
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4917698Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4920504Z ##[group]Operating System
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4921647Z Ubuntu
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4922504Z 24.04.5
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4923342Z LTS
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4924288Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4925314Z ##[group]Runner Image
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4926439Z Image: ubuntu-24.04
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4927405Z Version: 20261012.334.1
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4929781Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4932724Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4934608Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4936926Z ##[group]GITHUB_TOKEN Permissions
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4940522Z Contents: read
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4941641Z Metadata: read
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4942808Z Packages: read
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4943832Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4947106Z Secret source: Actions
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4949076Z Cache mode: write
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.4950477Z Prepare workflow directory
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.5450293Z Prepare all required actions
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.5523461Z Getting action download info
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.7276249Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+owning-module	UNKNOWN STEP	2026-10-24T19:45:26.8321981Z Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.2099273Z Complete job name: owning-module
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3027329Z ##[group]Run actions/checkout@v4
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3028498Z with:
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3028957Z   repository: hsoliwal/M3jdk21
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3032878Z   token: ***
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3033305Z   ssh-strict: true
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3033727Z   ssh-user: git
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3034155Z   persist-credentials: true
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3034633Z   clean: true
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3035070Z   sparse-checkout-cone-mode: true
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3035578Z   fetch-depth: 1
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3035993Z   fetch-tags: false
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3036425Z   show-progress: true
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3036860Z   lfs: false
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3037262Z   submodules: false
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3037717Z   set-safe-directory: true
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3038381Z   allow-unsafe-pr-checkout: false
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.3039161Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4060889Z Syncing repository: hsoliwal/M3jdk21
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4062728Z ##[group]Getting Git version info
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4063522Z Working directory is '/home/runner/work/M3jdk21/M3jdk21'
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4064516Z [command]/usr/bin/git version
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4144691Z git version 2.55.0
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4179836Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4186876Z Temporarily overriding HOME='/home/runner/work/_temp/4bd577f9-209d-42b9-a266-ae81459538e9' before making global git config changes
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4189440Z Adding repository directory to the temporary git global config as a safe directory
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4192478Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4247841Z Deleting the contents of '/home/runner/work/M3jdk21/M3jdk21'
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4252260Z ##[group]Initializing the repository
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4259145Z [command]/usr/bin/git init /home/runner/work/M3jdk21/M3jdk21
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4411813Z hint: Using 'master' as the name for the initial branch. This default branch name
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4414115Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4416672Z hint: to use in all of your new repositories, which will suppress this warning,
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4418828Z hint: call:
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4419881Z hint:
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4421119Z hint: 	git config --global init.defaultBranch <name>
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4422471Z hint:
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4423723Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4425550Z hint: 'development'. The just-created branch can be renamed via this command:
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4427214Z hint:
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4428430Z hint: 	git branch -m <name>
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4429498Z hint:
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4430714Z hint: Disable this message with "git config set advice.defaultBranchName false"
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4432649Z Initialized empty Git repository in /home/runner/work/M3jdk21/M3jdk21/.git/
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4436191Z [command]/usr/bin/git remote add origin https://github.com/hsoliwal/M3jdk21
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4524759Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4526069Z ##[group]Disabling automatic garbage collection
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4529825Z [command]/usr/bin/git config --local gc.auto 0
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4581495Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4583414Z ##[group]Setting up auth
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4585227Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.4622857Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.5034337Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.5079238Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.5343567Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.5388800Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.5650726Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.5692485Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.5693412Z ##[group]Fetching the repository
+owning-module	UNKNOWN STEP	2026-10-24T19:45:27.5704906Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b35759a36ecdfc299855a5e53b4d1a05f9f3884d:refs/remotes/origin/master
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9642798Z From https://github.com/hsoliwal/M3jdk21
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9644141Z  * [new ref]             b35759a36ecdfc299855a5e53b4d1a05f9f3884d -> origin/master
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9649176Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9650538Z ##[group]Determining the checkout info
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9657269Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9661331Z [command]/usr/bin/git sparse-checkout disable
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9717996Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9751506Z ##[group]Checking out the ref
+owning-module	UNKNOWN STEP	2026-10-24T19:45:57.9763993Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+owning-module	UNKNOWN STEP	2026-10-24T19:45:59.1876124Z Updating files:  10% (12646/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:45:59.2791342Z Updating files:  11% (13781/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:45:59.3764723Z Updating files:  12% (15034/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:45:59.5221657Z Updating files:  13% (16287/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:45:59.6239561Z Updating files:  14% (17540/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:45:59.7664012Z Updating files:  15% (18792/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:45:59.9062994Z Updating files:  16% (20045/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.1114862Z Updating files:  17% (21298/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.1382051Z Updating files:  17% (22202/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.2345202Z Updating files:  18% (22551/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.3233854Z Updating files:  19% (23804/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.4424260Z Updating files:  20% (25056/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.5402668Z Updating files:  21% (26309/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.6229807Z Updating files:  22% (27562/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.7045173Z Updating files:  23% (28815/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.7835542Z Updating files:  24% (30067/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.8544875Z Updating files:  25% (31320/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:00.9343561Z Updating files:  26% (32573/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.0139450Z Updating files:  27% (33826/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.0780593Z Updating files:  28% (35079/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.1112858Z Updating files:  29% (36331/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.1336520Z Updating files:  29% (36960/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.1916343Z Updating files:  30% (37584/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.2671612Z Updating files:  31% (38837/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.3209585Z Updating files:  32% (40090/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.3845478Z Updating files:  33% (41343/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.4768876Z Updating files:  34% (42595/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.5488342Z Updating files:  35% (43848/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.7683179Z Updating files:  36% (45101/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.8368185Z Updating files:  37% (46354/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:01.9254473Z Updating files:  38% (47607/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:02.0110026Z Updating files:  39% (48859/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:02.0820569Z Updating files:  40% (50112/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:02.1114025Z Updating files:  41% (51365/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:02.1687726Z Updating files:  41% (51800/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:02.2459110Z Updating files:  42% (52618/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:02.6035729Z Updating files:  43% (53870/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:02.7078627Z Updating files:  44% (55123/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:02.8546463Z Updating files:  45% (56376/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.0227284Z Updating files:  46% (57629/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.1119236Z Updating files:  47% (58882/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.1315217Z Updating files:  47% (59956/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.2419211Z Updating files:  48% (60134/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.3210310Z Updating files:  49% (61387/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.4413653Z Updating files:  50% (62640/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.5682963Z Updating files:  51% (63893/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.6636929Z Updating files:  52% (65146/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:03.7840946Z Updating files:  53% (66398/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.0002380Z Updating files:  54% (67651/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.0955537Z Updating files:  55% (68904/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.1112525Z Updating files:  56% (70157/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.2103656Z Updating files:  56% (70294/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.3235290Z Updating files:  57% (71410/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.4235470Z Updating files:  58% (72662/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.5155568Z Updating files:  59% (73915/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.6176698Z Updating files:  60% (75168/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.7316825Z Updating files:  61% (76421/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.8234760Z Updating files:  62% (77673/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:04.9258899Z Updating files:  63% (78926/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.0125137Z Updating files:  64% (80179/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.1011074Z Updating files:  65% (81432/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.1112263Z Updating files:  66% (82685/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.1791944Z Updating files:  66% (82878/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.2551057Z Updating files:  67% (83937/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.3266275Z Updating files:  68% (85190/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.4030791Z Updating files:  69% (86443/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.4891188Z Updating files:  70% (87696/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.5903836Z Updating files:  71% (88949/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.6963509Z Updating files:  72% (90201/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.8122551Z Updating files:  73% (91454/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.8962230Z Updating files:  74% (92707/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:05.9767306Z Updating files:  75% (93960/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.0553389Z Updating files:  76% (95213/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.1113969Z Updating files:  77% (96465/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.1261375Z Updating files:  77% (97464/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.2030348Z Updating files:  78% (97718/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.2851650Z Updating files:  79% (98971/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.3609584Z Updating files:  80% (100224/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.6125897Z Updating files:  81% (101476/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.7004088Z Updating files:  82% (102729/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.7811699Z Updating files:  83% (103982/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.8662886Z Updating files:  84% (105235/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:06.9478678Z Updating files:  85% (106488/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.0306144Z Updating files:  86% (107740/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.1039649Z Updating files:  87% (108993/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.1112158Z Updating files:  88% (110246/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.1933449Z Updating files:  88% (110359/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.2716695Z Updating files:  89% (111499/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.5359332Z Updating files:  90% (112752/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.6370598Z Updating files:  91% (114004/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.7210388Z Updating files:  92% (115257/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.7925175Z Updating files:  93% (116510/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.8567857Z Updating files:  94% (117763/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.9212009Z Updating files:  95% (119016/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:07.9851889Z Updating files:  96% (120268/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.0468541Z Updating files:  97% (121521/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.1113112Z Updating files:  98% (122774/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.1127299Z Updating files:  98% (124003/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.1853008Z Updating files:  99% (124027/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.1853630Z Updating files: 100% (125279/125279)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.1854291Z Updating files: 100% (125279/125279), done.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.3533621Z Reset branch 'master'
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.3599135Z branch 'master' set up to track 'origin/master'.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.3669174Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.3716335Z [command]/usr/bin/git log -1 --format=%H
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.3744795Z b35759a36ecdfc299855a5e53b4d1a05f9f3884d
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4036489Z ##[group]Run actions/setup-java@v4
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4036779Z with:
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4036987Z   distribution: temurin
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4037210Z   java-version: 21
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4037422Z   java-package: jdk
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4037634Z   check-latest: false
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4037853Z   server-id: github
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4038331Z   server-username: GITHUB_ACTOR
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4038608Z   server-password: GITHUB_TOKEN
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4038863Z   overwrite-settings: true
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4039097Z   job-status: success
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4041727Z   token: ***
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.4041942Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5686709Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5696413Z ##[group]Installed distributions
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5850311Z Resolved Java 21.0.12+1 from tool-cache
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5850863Z Setting Java 21.0.12+1 as the default
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5861875Z (node:2300) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5863151Z (Use `node --trace-deprecation ...` to show where the warning was created)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5866205Z Creating toolchains.xml for JDK version 21 from temurin
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5942358Z Writing to /home/runner/.m2/toolchains.xml
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5942779Z 
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5942952Z Java configuration:
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5943373Z   Distribution: temurin
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5943830Z   Version: 21.0.12+1
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5944411Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5944926Z 
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5945461Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5961091Z Creating settings.xml with server-id: github
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.5989986Z Writing to /home/runner/.m2/settings.xml
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.6171430Z ##[group]Run mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3StateMaskHistogramTest test
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.6172727Z [36;1mmvn -B -ntp -f m3/collections/pom.xml -Dtest=M3StateMaskHistogramTest test[0m
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.6578684Z shell: /usr/bin/bash -e {0}
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.6578987Z env:
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.6579344Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.6579911Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+owning-module	UNKNOWN STEP	2026-10-24T19:46:08.6580321Z ##[endgroup]
+owning-module	UNKNOWN STEP	2026-10-24T19:46:13.2736048Z [INFO] Scanning for projects...
+owning-module	UNKNOWN STEP	2026-10-24T19:46:13.3589460Z [INFO] 
+owning-module	UNKNOWN STEP	2026-10-24T19:46:13.3609071Z [INFO] -----------------------< com.m3:m3-collections >------------------------
+owning-module	UNKNOWN STEP	2026-10-24T19:46:13.3610033Z [INFO] Building M3 collection lanes 0.1.0-SNAPSHOT
+owning-module	UNKNOWN STEP	2026-10-24T19:46:13.3610730Z [INFO]   from pom.xml
+owning-module	UNKNOWN STEP	2026-10-24T19:46:13.3611589Z [INFO] --------------------------------[ jar ]---------------------------------
+owning-module	UNKNOWN STEP	2026-10-24T19:46:16.1697025Z [INFO] Loaded 24230 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:16.7412234Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.6469079Z [WARNING] The POM for com.m3:m3-arrays:jar:0.1.0-SNAPSHOT is missing, no dependency information available
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9771475Z [INFO] ------------------------------------------------------------------------
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9772167Z [ERROR] BUILD FAILURE
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9779068Z [INFO] ------------------------------------------------------------------------
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9779690Z [INFO] Total time:  4.790 s
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9780047Z [INFO] Finished at: 2026-10-24T19:46:17Z
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9780583Z [INFO] ------------------------------------------------------------------------
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9793407Z [ERROR] Failed to execute goal on project m3-collections: Could not resolve dependencies for project com.m3:m3-collections:jar:0.1.0-SNAPSHOT
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9807206Z [ERROR] dependency: com.m3:m3-arrays:jar:0.1.0-SNAPSHOT (compile)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9808590Z [ERROR] 	Could not find artifact com.m3:m3-arrays:jar:0.1.0-SNAPSHOT
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9809086Z [ERROR] -> [Help 1]
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9809309Z [ERROR] 
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9809673Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9810188Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9810548Z [ERROR] 
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9810965Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+owning-module	UNKNOWN STEP	2026-10-24T19:46:17.9811844Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.0037104Z ##[error]Process completed with exit code 1.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.0177431Z Post job cleanup.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.1494874Z (node:2402) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.1495776Z (Use `node --trace-deprecation ...` to show where the warning was created)
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.1705041Z Post job cleanup.
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.2577648Z [command]/usr/bin/git version
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.2622191Z git version 2.55.0
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.2664524Z Temporarily overriding HOME='/home/runner/work/_temp/7e4c68d6-1843-4c30-8932-bc518f5d8b7a' before making global git config changes
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.2666069Z Adding repository directory to the temporary git global config as a safe directory
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.2670940Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.2710957Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.2766856Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.3219526Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.3254114Z http.https://github.com/.extraheader
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.3270791Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.3320052Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.3765972Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.3808531Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.4318537Z Cleaning up orphan processes
+owning-module	UNKNOWN STEP	2026-10-24T19:46:18.4749469Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

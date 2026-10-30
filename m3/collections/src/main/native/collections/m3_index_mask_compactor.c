@@ -1,4 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+/* Modified 2026-10-29: trim two-mask payload regions to admitted ordinals. */
 /* JNI boundary: no callbacks, no pointer retention, no Java object graph walking.
  * Read fixed-size primitive chunks with Region API (no long-lived critical pins).
  * Two passes count then emit; input arrays are never mutated.
@@ -484,15 +485,33 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
     for (jint position = 0; position < length;) {
         jint remaining = length - position;
         jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
-        (*env)->GetByteArrayRegion(env, states,
-                state_offset + position, chunk, marks);
+        jsize begin = 0;
+        jsize end = chunk;
+        if ((required | excluded) != 0) {
+            (*env)->GetByteArrayRegion(env, states,
+                    state_offset + position, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            while (begin < chunk
+                    && !m3_window_accepts_masks(marks[begin], required, excluded)) begin++;
+            if (begin == chunk) {
+                /* Preserve the state scan/drift check without copying rejected payload. */
+                position += chunk;
+                continue;
+            }
+            while (!m3_window_accepts_masks(marks[end - 1], required, excluded)) end--;
+        }
+        /* Reuse the bounded mask-window envelope: only admitted endpoint spans cross JNI. */
+        (*env)->GetIntArrayRegion(env, rows,
+                row_offset + position + begin, end - begin, values);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
-        if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize accepted = 0;
-        for (jsize i = 0; i < chunk; i++) {
-            if (m3_window_accepts_masks(marks[i], required, excluded)) {
-                values[accepted++] = values[i];
+        jsize accepted = end - begin;
+        if ((required | excluded) != 0) {
+            accepted = 0;
+            for (jsize i = begin; i < end; i++) {
+                if (m3_window_accepts_masks(marks[i], required, excluded)) {
+                    /* accepted <= i - begin, so compaction cannot overwrite unread payload. */
+                    values[accepted++] = values[i - begin];
+                }
             }
         }
         if (accepted > kept - written) {
@@ -532,15 +551,33 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
     for (jint position = 0; position < length;) {
         jint remaining = length - position;
         jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
-        (*env)->GetByteArrayRegion(env, states,
-                state_offset + position, chunk, marks);
+        jsize begin = 0;
+        jsize end = chunk;
+        if ((required | excluded) != 0) {
+            (*env)->GetByteArrayRegion(env, states,
+                    state_offset + position, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            while (begin < chunk
+                    && !m3_window_accepts_masks(marks[begin], required, excluded)) begin++;
+            if (begin == chunk) {
+                /* Preserve the state scan/drift check without copying rejected payload. */
+                position += chunk;
+                continue;
+            }
+            while (!m3_window_accepts_masks(marks[end - 1], required, excluded)) end--;
+        }
+        /* Reuse the bounded mask-window envelope: only admitted endpoint spans cross JNI. */
+        (*env)->GetLongArrayRegion(env, rows,
+                row_offset + position + begin, end - begin, values);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);
-        if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize accepted = 0;
-        for (jsize i = 0; i < chunk; i++) {
-            if (m3_window_accepts_masks(marks[i], required, excluded)) {
-                values[accepted++] = values[i];
+        jsize accepted = end - begin;
+        if ((required | excluded) != 0) {
+            accepted = 0;
+            for (jsize i = begin; i < end; i++) {
+                if (m3_window_accepts_masks(marks[i], required, excluded)) {
+                    /* accepted <= i - begin, so compaction cannot overwrite unread payload. */
+                    values[accepted++] = values[i - begin];
+                }
             }
         }
         if (accepted > kept - written) {

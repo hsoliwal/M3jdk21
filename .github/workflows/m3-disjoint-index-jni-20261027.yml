@@ -9,6 +9,10 @@ on:
       - 'm3/collections/qualification/disjoint-index-20261027.sha256'
       - '.github/workflows/m3-disjoint-index-jni-20261027.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   primitive-arrays-jni:
     runs-on: ubuntu-24.04

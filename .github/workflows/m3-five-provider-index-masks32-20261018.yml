@@ -10,6 +10,10 @@ on:
       - '.github/workflows/m3-five-provider-index-masks32-20261018.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   actual-five-provider-jdk21:
     runs-on: ubuntu-24.04

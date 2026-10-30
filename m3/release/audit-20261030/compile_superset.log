@@ -1,0 +1,32 @@
+ce9d68bcfc38a2f5d5f5f0fb19e6656ee77e71dc
+dev exit 0
+rel exit 1
+FAILED m3/release/test_release_admission.py::ReleaseEvidenceGitTest::test_untracked_source_is_refused
+1 failed, 27 passed, 25 subtests passed in 87.21s (0:01:27)
+56 K:/codex-work/agent-temp/claude/e--ws2-com-synexia/a6de83fe-6489-4056-8689-f1217602e9cc/scratchpad/audit/contract_diff_superset.patch
+m3/superset-landing-20261030 vendor/asm PASS 0 errors 26 warnings
+m3/superset-landing-20261030 vendor/asm-tree PASS 0 errors 0 warnings
+m3/superset-landing-20261030 vendor/asm-analysis PASS 0 errors 1 warnings
+m3/superset-landing-20261030 m3/arrays PASS 0 errors 0 warnings
+m3/superset-landing-20261030 m3/collections PASS 0 errors 0 warnings
+m3/superset-landing-20261030 m3/mop PASS 0 errors 0 warnings
+m3/superset-landing-20261030 module-packs/jackson FAIL 330 errors 1 warnings
+m3/superset-landing-20261030 module-packs/kernel PASS 0 errors 0 warnings
+m3/superset-landing-20261030 module-packs/nlp-search FAIL 670 errors 1 warnings
+m3/superset-landing-20261030 module-packs/parser FAIL 24 errors 0 warnings
+m3/superset-landing-20261030 module-packs/parser-openrewrite FAIL 95 errors 0 warnings
+m3/superset-landing-20261030 module-packs/recipes FAIL 56 errors 0 warnings
+m3/superset-landing-20261030 ports/precompute PASS 0 errors 0 warnings
+m3/superset-landing-20261030 ports/parallel PASS 0 errors 0 warnings
+m3/superset-landing-20261030 ports/parallel-bulk FAIL 24 errors 0 warnings
+m3/superset-landing-20261030 ports/vcpu PASS 0 errors 0 warnings
+m3/superset-landing-20261030 ports/capability-runtime PASS 0 errors 0 warnings
+m3/superset-landing-20261030 ports/collections PASS 0 errors 0 warnings
+m3/superset-landing-20261030 ports/compiletime FAIL 151 errors 0 warnings
+m3/superset-landing-20261030 ports/file PASS 0 errors 0 warnings
+m3/superset-landing-20261030 ports/indexstring PASS 0 errors 0 warnings
+m3/superset-landing-20261030 ports/regex-cursor PASS 0 errors 0 warnings
+m3/superset-landing-20261030 ports/swing-viewport FAIL 0 errors 4 warnings
+m3/superset-landing-20261030 ports/jfx-viewport FAIL 20 errors 0 warnings
+m3/superset-landing-20261030 ports/tornadovm-bulk FAIL 63 errors 4 warnings
+compile exit 0

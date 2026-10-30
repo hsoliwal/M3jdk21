@@ -113,5 +113,51 @@
       "receiving_sequence_advanced": false,
       "performance_superiority": "NOT_CLAIMED"
     }
+  },
+  "execution_evidence": {
+    "schema": "M3_RELEASE_EVIDENCE_V1",
+    "default_manifest": "m3/release/queue/current/evidence.json",
+    "require_exact_commit_and_tree": true,
+    "require_clean_source": true,
+    "artifact_paths_relative_to": "manifest_directory",
+    "legacy_recipe_sources_block_release": true,
+    "gate_owners": {
+      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/com.synexia"
+    },
+    "maven_gate_scope": "Preserve this existing gate ID. Its equivalent canonical Maven/OpenRewrite recipe execution is owned and executed only by hsoliwal/com.synexia. The historical target m3/pom.xml reactor and target-local recipes remain migration holds; running them in M3JDK21 does not satisfy this gate.",
+    "required_manifest_fields": [
+      "schema",
+      "source_commit",
+      "source_tree",
+      "gates"
+    ],
+    "required_gate_fields": [
+      "id",
+      "owner_repository",
+      "status",
+      "exit_code",
+      "command",
+      "environment",
+      "artifacts"
+    ],
+    "required_environment_fields": [
+      "os",
+      "architecture",
+      "toolchain"
+    ],
+    "required_artifact_fields": [
+      "path",
+      "sha256"
+    ],
+    "canonical_recipe_gate_fields": [
+      "repository",
+      "commit",
+      "recipe_id"
+    ],
+    "policy_valid_is_release_ready": false,
+    "evidence_scope": "The verifier checks receipt structure, current source identity and artifact bytes. Actual contract coverage and execution provenance still require review.",
+    "visible_queue_source": "m3/tooling/name-contract/name-plan.json",
+    "visible_queue_authority": "m3/docs/name-mapping.json",
+    "queue_output_command": "python3 m3/release/verify_release_admission.py --queue-out m3/release/queue/current/README.md --json-out m3/release/queue/current/admission.json"
   }
 }

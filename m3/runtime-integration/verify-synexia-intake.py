@@ -56,7 +56,8 @@ def verify(root: Path) -> None:
     policy_rows = rows(root / POLICY)
     require(policy_rows, "empty Synexia intake policy")
     require(
-        set(row["mode"] for row in policy_rows) == REQUIRED_MODES,
+        len(policy_rows) == len(REQUIRED_MODES)
+        and set(row["mode"] for row in policy_rows) == REQUIRED_MODES,
         "Synexia intake mode set drift",
     )
     policy = {row["mode"]: row for row in policy_rows}
@@ -67,6 +68,14 @@ def verify(root: Path) -> None:
     require(
         policy["EXTERNAL_RECIPE_TOOL"]["runtime_dependency"] == "NO",
         "OpenRewrite recipe tooling must not become a JDK runtime dependency",
+    )
+    require(
+        policy["EXTERNAL_RECIPE_TOOL"]["target_scope"] == "hsoliwal/com.synexia only",
+        "recipe authoring and execution must remain exclusively in Synexia",
+    )
+    require(
+        policy["EXTERNAL_RECIPE_TOOL"]["source_copy"] == "POSTIMAGES_AND_PASSIVE_RECEIPTS_ONLY",
+        "public targets may receive executed postimages and passive receipts only",
     )
     require(
         policy["EXPLICIT_RELICENSE_PORT"]["disposition"] == "REVIEW_REQUIRED",

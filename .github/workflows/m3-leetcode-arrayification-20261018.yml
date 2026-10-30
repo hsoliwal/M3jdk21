@@ -10,6 +10,10 @@ on:
       - 'm3/collections/qualification/m3-arrayification-20261018/**'
       - '.github/workflows/m3-leetcode-arrayification-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   m3-arrayification:
     runs-on: ubuntu-latest

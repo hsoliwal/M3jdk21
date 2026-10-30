@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_API_COMPANION_SCHEMA_REPAIR_RECEIVER_V1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_recipe_commit": "7a241222dae00e14e1f19dc3037b1b9b3ac6f60f",
+  "source_base": "4ab38a5875aef832175900133b5e55380325d507",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "6579622b3156ccd2cd61fbe3b2b701486b886c6c",
+  "recipe_identity": "com.synexia.m3.Jdk21ApiCompanionsSchemaCompat20261029",
+  "recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029",
+  "execution_lane": "MAVEN_OPENREWRITE_SDK",
+  "scope": "COMPANION_MAPPING_SCHEMA_COMPATIBILITY",
+  "previous_receipt": "m3/qualification/api-companions-20261029/RECEIVER_RECEIPT.json",
+  "previous_receipt_disposition": "RETAINED_IMMUTABLE_HISTORICAL_QUALIFICATION",
+  "new_product_runtime_sources": 0,
+  "mapping_records": 68,
+  "record_ids_and_statuses": "UNCHANGED",
+  "receiving_phase": "STRING_UNCHANGED",
+  "normalized_record_ids": [
+    "m3.code-text-signal-batch",
+    "m3.arrays.api-companion"
+  ],
+  "outputs": [
+    {
+      "path": ".github/workflows/m3jdk21-name-contract.yml",
+      "before_sha256": "8851fea17f460c39da730b192feddf5523f2c4d6d03e9591174fc754ffbf09d8",
+      "after_sha256": "434a85b8f651470711bd03948b9901bab53961440ee3ff1dd8b6797348d97c16"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "145dec24eb11847b3915e6fb2e0e80fa4a773879833a3ac64e76101fab67500f",
+      "after_sha256": "32c22cc1b11aa305f90fafac4bc66ca5670776b8844a3389406b7fba065b651a"
+    },
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "before_sha256": "33a4a70132666ce7525025783c4c72c0030ce26b53774d2396a7d027f4d6aa73",
+      "after_sha256": "cb22482ccd7887fcd3632cb636b63e3f4c4e71bc523472c3424a4888a72f2349"
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "before_sha256": "0bfb1c234cd9e8e65702a0797124619fc365d7842b7be74591fabd142dfb78b9",
+      "after_sha256": "5d10e9bc22fee7f45783ae5a1a2f887d5a9acf93e6169055e9edc55c9887382b"
+    },
+    {
+      "path": "m3/tooling/name-contract/test_audit.py",
+      "before_sha256": "5364b2e8934e841929c4b4b1d9d09e30ee19dde5ab4d0e2303df3642e1102aa7",
+      "after_sha256": "eb63e3ada22cd8835331bac41e80309aa6d6ec813877a70d310720704c104b44"
+    },
+    {
+      "path": "m3/tooling/name-contract/test_schema.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "8443b26ce2aee69db5cb2d3fb7ece8fdd8947870dd38a188ba073fd0fad4afb6"
+    }
+  ],
+  "gates": {
+    "original_sdk_lane_replay": "PASS_32_TESTS",
+    "schema_compat_sdk_replay": "PASS_8_TESTS",
+    "schema_metadata_sdk_replay": "PASS_8_TESTS",
+    "fixed_point_drift_missing_duplicate_and_order": "PASS",
+    "full_mapping_json_schema": "PASS_68_RECORDS",
+    "schema_validator": "jsonschema4.26.0_FROM_EXISTING_REQUIREMENTS",
+    "schema_errors_before": 15,
+    "schema_errors_after": 0,
+    "schema_regression_tests": "PASS_22_TESTS",
+    "complete_receiver_suite": "PASS_79_TESTS",
+    "actual_workflow_sparse_checkout_and_strict_census": "PASS",
+    "workflow_actionlint": "PASS",
+    "primary_source_remote_binding": "PASS_50_EXACT_GIT_BLOBS",
+    "full_canonical_reactor": "NOT_RUN",
+    "complete_historical_provenance_set": "NOT_RUN",
+    "full_migration_semantic_receipt_acceptance": "NOT_RUN_HISTORICAL_RECEIPTS_UNRESOLVED",
+    "installed_jdk_image_and_jtreg": "NOT_RUN",
+    "native_abi_jni_gc_and_platforms": "NOT_RUN",
+    "performance": "NOT_RUN"
+  },
+  "evidence": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/evidence/schema-compat",
+  "boundary": "Schema conformance and receiver tests do not establish historical executed-receipt validity, new runtime companions, full API coverage or platform availability."
+}

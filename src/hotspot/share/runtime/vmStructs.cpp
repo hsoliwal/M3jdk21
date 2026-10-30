@@ -239,6 +239,7 @@
   nonstatic_field(InstanceKlass,               _nonstatic_oop_map_size,                       int)                                   \
   volatile_nonstatic_field(InstanceKlass,      _init_state,                                   InstanceKlass::ClassState)             \
   volatile_nonstatic_field(InstanceKlass,      _init_thread,                                  JavaThread*)                           \
+  nonstatic_field(InstanceKlass,               _is_marked_dependent,                          bool)                                  \
   nonstatic_field(InstanceKlass,               _itable_len,                                   int)                                   \
   nonstatic_field(InstanceKlass,               _reference_type,                               u1)                                    \
   volatile_nonstatic_field(InstanceKlass,      _oop_map_cache,                                OopMapCache*)                          \
@@ -539,6 +540,18 @@
      static_field(StubRoutines,                _galoisCounterMode_AESCrypt,                   address)                               \
      static_field(StubRoutines,                _ghash_processBlocks,                          address)                               \
      static_field(StubRoutines,                _chacha20Block,                                address)                               \
+     static_field(StubRoutines,                _kyberNtt,                                     address)                               \
+     static_field(StubRoutines,                _kyberInverseNtt,                              address)                               \
+     static_field(StubRoutines,                _kyberNttMult,                                 address)                               \
+     static_field(StubRoutines,                _kyberAddPoly_2,                               address)                               \
+     static_field(StubRoutines,                _kyberAddPoly_3,                               address)                               \
+     static_field(StubRoutines,                _kyber12To16,                                  address)                               \
+     static_field(StubRoutines,                _kyberBarrettReduce,                           address)                               \
+     static_field(StubRoutines,                _dilithiumAlmostNtt,                           address)                               \
+     static_field(StubRoutines,                _dilithiumAlmostInverseNtt,                    address)                               \
+     static_field(StubRoutines,                _dilithiumNttMult,                             address)                               \
+     static_field(StubRoutines,                _dilithiumMontMulByConstant,                   address)                               \
+     static_field(StubRoutines,                _dilithiumDecomposePoly,                       address)                               \
      static_field(StubRoutines,                _base64_encodeBlock,                           address)                               \
      static_field(StubRoutines,                _base64_decodeBlock,                           address)                               \
      static_field(StubRoutines,                _poly1305_processBlocks,                       address)                               \
@@ -547,6 +560,7 @@
      static_field(StubRoutines,                _crc32c_table_addr,                            address)                               \
      static_field(StubRoutines,                _updateBytesCRC32C,                            address)                               \
      static_field(StubRoutines,                _updateBytesAdler32,                           address)                               \
+     static_field(StubRoutines,                _double_keccak,                                address)                               \
      static_field(StubRoutines,                _multiplyToLen,                                address)                               \
      static_field(StubRoutines,                _squareToLen,                                  address)                               \
      static_field(StubRoutines,                _bigIntegerRightShiftWorker,                   address)                               \
@@ -556,6 +570,7 @@
      static_field(StubRoutines,                _dlog,                                         address)                               \
      static_field(StubRoutines,                _dlog10,                                       address)                               \
      static_field(StubRoutines,                _dpow,                                         address)                               \
+     static_field(StubRoutines,                _fmod,                                         address)                               \
      static_field(StubRoutines,                _dsin,                                         address)                               \
      static_field(StubRoutines,                _dcos,                                         address)                               \
      static_field(StubRoutines,                _dtan,                                         address)                               \
@@ -785,7 +800,6 @@
   /************/                                                                                                                     \
                                                                                                                                      \
   nonstatic_field(ciEnv,                       _compiler_data,                                void*)                                 \
-  nonstatic_field(ciEnv,                       _failure_reason,                               const char*)                           \
   nonstatic_field(ciEnv,                       _factory,                                      ciObjectFactory*)                      \
   nonstatic_field(ciEnv,                       _dependencies,                                 Dependencies*)                         \
   nonstatic_field(ciEnv,                       _task,                                         CompileTask*)                          \
@@ -2234,7 +2248,6 @@
                                                                           \
   declare_constant(InstanceKlass::allocated)                              \
   declare_constant(InstanceKlass::loaded)                                 \
-  declare_constant(InstanceKlass::being_linked)                           \
   declare_constant(InstanceKlass::linked)                                 \
   declare_constant(InstanceKlass::being_initialized)                      \
   declare_constant(InstanceKlass::fully_initialized)                      \

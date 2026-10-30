@@ -1,0 +1,408 @@
+{
+  "schema": "M3_RELEASE_QUEUE_V1",
+  "release_ready": false,
+  "observed_source": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+    "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+  },
+  "naming_authority": "m3/docs/name-mapping.json",
+  "naming_authority_blob": "770f5695a39e03512afa78c55b4e2cf781d1f6a5",
+  "naming_plan": "m3/tooling/name-contract/name-plan.json",
+  "run_root": "m3/release/queue/runs",
+  "historical_receipts": "PRESERVED_IN_PLACE",
+  "items": [
+    {
+      "id": "ATOMIZER_PATTERNIZER_CONVERGENCE",
+      "status": "PENDING",
+      "area": "recipes",
+      "evidence": [
+        "https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes"
+      ],
+      "next_action": "Extend canonical Synexia atomizer/patternizer fixtures with bounded permutations, code-looking strings/regex, compiler/JUnit oracles and permanent counterexamples.",
+      "detail": "Recipe fixed points and finite fixture passes qualify only their measured source scope; broader compiler/semantic mastery remains explicit.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "COLLECTION_DONOR_PERFORMANCE",
+      "status": "PENDING",
+      "area": "collections",
+      "evidence": [
+        "m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
+        "m3/docs/name-mapping.json"
+      ],
+      "next_action": "Compare incumbent and licensed GitHub donor atoms by challenge category, then prove public contracts and measure cold/warm CPU, allocation, retained heap and native/process memory.",
+      "detail": "No universal collection speedup, complete donor intake or runtime family promotion is claimed.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "CURRENT_NAME_CENSUS",
+      "status": "SCOPED_PASS",
+      "area": "naming",
+      "evidence": [
+        "m3/docs/name-mapping.json",
+        "m3/tooling/name-contract/check.py",
+        "m3/tooling/name-contract/audit.py"
+      ],
+      "next_action": "Retain the exact canonical map; perform typed, closed-scope recipe and ABI/JNI validation for any proposed rename.",
+      "detail": "At the observed source: 67 mapping records, 55 concrete target rows, 51 distinct target paths, zero census attention findings; four queued operations and zero promoted names. This is a naming census, not ABI/runtime proof.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "CUSTODY_CONTROL_REACTOR",
+      "status": "BLOCKED",
+      "area": "recipe-residue",
+      "evidence": [
+        "m3/pom.xml"
+      ],
+      "next_action": "Reconcile pure-int custody, migration-recipes, synexia-jdk-a3-recipes and recipe-agent-api module wiring into qualified Synexia execution, preserving product postimages and callers.",
+      "detail": "No recipe directory/module is deleted. Preflight detects actual POM wiring before Maven legacy execution.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "CUSTODY_FOUNDATION",
+      "status": "BLOCKED",
+      "area": "recipe-residue",
+      "evidence": [
+        "m3/recipes",
+        "m3/runtime-integration/char-array-copy/recipe",
+        "m3/runtime-integration/recipe",
+        ".github/workflows/m3-first-release-admission.yml"
+      ],
+      "next_action": "Seal the exact recipe files and callers in Synexia and replace the release job with target-only acceptance after qualified source execution.",
+      "detail": "Active workflow custody preflight reports actual residue paths and fails before target-local recipe execution.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "CUSTODY_PRECOMPUTE",
+      "status": "BLOCKED",
+      "area": "recipe-residue",
+      "evidence": [
+        "m3/runtime-integration/utf8-cursor-20261014/recipe",
+        ".github/workflows/m3-first-release-admission.yml"
+      ],
+      "next_action": "Move canonical execution to Synexia, retain target Java/JNI parity gates and receive exact result evidence.",
+      "detail": "The historical public recipe/core custody invocation remains preserved; execution is blocked by active preflight.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:M3_FOUNDATION_TESTS",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:M3_MAVEN_CONTROL_REACTOR",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:OPENJDK_SANITY_MATRIX",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:PRECOMPUTE_JAVA_DIFFERENTIAL",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:PRECOMPUTE_JNI_NATIVE_PARITY",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:PROOF_PACK_SHA256",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:RELEASE_CLAIMS_VALIDATION",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:RIGHTS_AND_LICENSE_BOUNDARY",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:SOURCE_TREE_AND_UPSTREAM_BASELINE",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "GATE:STRING_UTF16_CONTRACT",
+      "status": "NOT_RUN",
+      "area": "release-proof",
+      "evidence": [
+        "m3/release/release-contract.json"
+      ],
+      "next_action": "Attach an exact-source completed receipt, raw artifacts and qualified producer verification for this release candidate.",
+      "detail": "No current-candidate qualified receipt for this gate is supplied by this release-admission repair; historical results retain their original scope.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "HISTORY_BRANCH_CONTENT_RECONCILIATION",
+      "status": "PENDING",
+      "area": "history",
+      "evidence": [
+        "https://github.com/hsoliwal/M3jdk21/pull/1927",
+        "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+        "https://github.com/hsoliwal/M3jdk21/pull/2071",
+        "https://github.com/hsoliwal/M3jdk21/pull/2072",
+        "https://github.com/hsoliwal/M3jdk21/pull/2073"
+      ],
+      "next_action": "Run the existing canonical Synexia history/no-loss recipe against pinned relevant branch heads, reconcile current atoms and test each resolution.",
+      "detail": "PRs #2071\u2013#2073 are merged. #1927 merge a9d25c6f69e36aae210a9df0d0b71821e9ca8617 is an ancestor of observed master; current viewport source has evolved. Missing historical receipt paths alone do not justify restoring an old source file.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "INSTALLED_JDK_JNI_PLATFORM_MATRIX",
+      "status": "PENDING",
+      "area": "runtime",
+      "evidence": [
+        "m3/release/release-contract.json",
+        "m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md"
+      ],
+      "next_action": "Build exact matched Java/HotSpot/JNI images and run required jtreg, ABI, Unicode, GC/JMM and supported-platform gates with per-platform receipts.",
+      "detail": "This admission repair executes no installed-JDK, native-runtime or cross-platform qualification.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "METHOD_AND_JNI_RENAME_CLOSURE",
+      "status": "PENDING",
+      "area": "naming",
+      "evidence": [
+        "m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md"
+      ],
+      "next_action": "For each proposed internal method rename, bind the stable capability ID and inventory descriptors, overrides, callers, reflection, serialization, module and JNI consumers before typed Synexia replay.",
+      "detail": "No public JDK type, constructor, method or native symbol is renamed by this release preparation.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "NAME:m3.collections.evicting-queue.owner-naming",
+      "status": "QUEUED",
+      "area": "naming",
+      "mapping_id": "m3.collections.evicting-queue.owner-naming",
+      "kind": "INTERNAL_MOVE",
+      "before_type": "com.m3.collections.guava.M3EvictingQueue",
+      "after_type": "com.m3.collections.queue.M3EvictingQueue",
+      "evidence": [
+        "m3/docs/name-mapping.json",
+        "m3/tooling/name-contract/name-plan.json"
+      ],
+      "next_action": "Use the existing mapping and canonical Synexia typed recipe; resolve every listed dependency and target gate before mutation.",
+      "detail": "Review-only semantic package name for a real owned queue, not a generated scaffold. Existing class is public final and Serializable; callers, binary compatibility, serialized class descriptor, plugin/service/reflection consumers, canonical destination owner, complete Synexia recipe execution and installed JDK21 ABI/JNI/jtreg/performance gates are unproven. Collections phase must not advance before String/arrays.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "NAME:m3.prefix-z",
+      "status": "QUEUED",
+      "area": "naming",
+      "mapping_id": "m3.prefix-z",
+      "kind": "INTERNAL_MOVE",
+      "before_type": "com.m3.algorithm.M3PrefixZ",
+      "after_type": "com.m3.algorithms.M3PrefixZ",
+      "evidence": [
+        "m3/docs/name-mapping.json",
+        "m3/tooling/name-contract/name-plan.json"
+      ],
+      "next_action": "Use the existing mapping and canonical Synexia typed recipe; resolve every listed dependency and target gate before mutation.",
+      "detail": "Potential package consolidation for algorithm-only candidate; do not relocate until the canonical name map adds an approved destination symbol, all users/imports/service/reflection/serialization are inventoried and a proven Synexia typed recipe is replayed.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "NAME:synexia.collections.SegmentedAddress28",
+      "status": "QUEUED",
+      "area": "naming",
+      "mapping_id": "synexia.collections.SegmentedAddress28",
+      "kind": "FORMAT_ONLY",
+      "before_type": "jdk.internal.mindex.M3Address28",
+      "after_type": "jdk.internal.mindex.M3Address28",
+      "evidence": [
+        "m3/docs/name-mapping.json",
+        "m3/tooling/name-contract/name-plan.json"
+      ],
+      "next_action": "Use the existing mapping and canonical Synexia typed recipe; resolve every listed dependency and target gate before mutation.",
+      "detail": "Format only an exact reviewed Java staging projection while retaining M3Address28 as internal; formatting cannot change behavior, make it a public JDK class, or imply collection replacement.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "NAME:synexia.counterpart.MIndexClass",
+      "status": "QUEUED",
+      "area": "naming",
+      "mapping_id": "synexia.counterpart.MIndexClass",
+      "kind": "JDK_BACKEND",
+      "before_type": "jdk.internal.mindex.M3Class",
+      "after_type": "java.lang.Class",
+      "evidence": [
+        "m3/docs/name-mapping.json",
+        "m3/tooling/name-contract/name-plan.json"
+      ],
+      "next_action": "Use the existing mapping and canonical Synexia typed recipe; resolve every listed dependency and target gate before mutation.",
+      "detail": "M3Class is an internal indexed Class view, not a verified replacement for java.lang.Class. Do not promote without pinned source, full Class public/protected ABI and reflection/loader/serialization differential tests, image/jtreg/JNI-GC/runtime and CPU/heap/native-memory evidence.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    },
+    {
+      "id": "RELEASE_PRODUCER_QUALIFICATION",
+      "status": "BLOCKED",
+      "area": "release",
+      "evidence": [
+        "m3/release/release-contract.json#trusted_gate_producers"
+      ],
+      "next_action": "Independently qualify each mandatory gate workflow, exact workflow source blob and actual job/step producers; retain fresh official API readback.",
+      "detail": "Raw receipt checksums establish integrity only; no trusted gate producer is currently admitted.",
+      "observed_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+        "tree": "e7a32c2c567c8cb88908fde74532550f99f2006b"
+      }
+    }
+  ]
+}

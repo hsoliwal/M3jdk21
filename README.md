@@ -1,6 +1,6 @@
 <div align="center">
 
-# M³ JDK 21
+# M3JDK21
 
 ### Share structure. Reuse computation. Prove the result.
 
@@ -28,18 +28,19 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 
 | Follow the engineering | Open the source or evidence |
 | --- | --- |
-| **M3 String** — canonical text, views and compositions; String/JNI integration target | [M3 String migration and lineage](m3/docs/m3string-synexia-lineage.md) · [String porting invariant](m3/docs/M3JDK21_PORTING_INVARIANT.md) |
+| **M3 String** — canonical text, views and compositions; String/JNI integration target | [M3 String migration and lineage](m3/docs/m3string-synexia-lineage.md) · [String porting invariant](m3/docs/m3jdk21-porting-invariant.md) |
 | **Regex and precompute** — planned reusable indexes, caches and bounded metadata | [Regex and text contracts](m3/docs/string-text-replacement-spec.md) · [Compatibility/benchmark spec](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md) |
 | **Collections and arrays** — lean storage, indexed signals and mechanical improvement | [Collections workstream](m3/collections/) · [Array workstream](m3/arrays/) |
-| **Recipes and convergence** — reusable transformations, source mapping and acceptance gates | [Recipes](m3/recipes/) · [Synexia model](m3/docs/SYNEXIA_CONVERGENCE_MODEL.md) |
+| **Recipes and convergence** — transformations executed in Synexia; exact results received here | [Canonical Synexia recipes](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes) · [Receiving policy](AGENTS.md) |
 | **The actual runtime** — OpenJDK-derived Java 21 sources and M3 integration areas | [JDK sources](src/) · [M3 runtime integration](m3/runtime-integration/) |
-| **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](m3/release/README.md) · [Machine-readable contract](m3/release/release-contract.json) |
+| **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](m3/release/README.md) · [Visible release queue](m3/release/queue/README.md) · [Machine-readable contract](m3/release/release-contract.json) |
 
 <!-- fork-homepage-guide:begin -->
 ## A first experiment: learn the representation before the runtime
 
 This fork starts from [OpenJDK 21](https://github.com/openjdk/jdk21), then adds
-M3-specific libraries, runtime candidates, recipes and evidence. The independent
+M3JDK21-owned libraries, runtime candidates, product tests and receipt references.
+Reusable recipes are authored and executed in Synexia. The independent
 text module is the smallest entry point: you can inspect its ownership model
 without installing a replacement JDK or changing your system Java.
 
@@ -100,8 +101,9 @@ The comments are source-derived expectations, not captured output from this docu
 | Question | Command or route | What to read in the result |
 | --- | --- | --- |
 | Which checkout is this? | `git rev-parse HEAD` | Record the exact revision with every result |
-| Does the foundation manifest match? | `python3 m3/recipes/apply.py --check` | Investigate refusals; do not weaken hash guards |
-| Does the control-plane reactor verify? | `mvn -B -ntp -f m3/pom.xml clean verify` | Recipe/admission evidence, with Maven and its pinned dependencies |
+| Are package/class names mapped correctly? | `python3 m3/tooling/name-contract/check.py` | The canonical map and queued proposals; this does not approve a rename |
+| What is blocking release? | `python3 m3/release/verify_release_admission.py --root . --json-out m3/release/queue/current/admission.json --queue-out m3/release/queue/current/README.md` | Exact inspected revision, missing receipts, naming candidates and custody blockers |
+| Where are recipe proofs run? | [Synexia owner-naming crate](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming) | Maven/OpenRewrite execution, refusal and fixed-point proofs remain in Synexia |
 | How do I build the runtime? | [Native build guide](m3/docs/native-build.md) | Host prerequisites, boot JDK and matched-image output |
 | What has actually been admitted? | [Release contract](m3/release/release-contract.json) and [current String phase](m3/synexia-import/current-full-borrow/STRING_PHASE.md) | Exact scope and still-open gates |
 
@@ -109,8 +111,10 @@ At the reviewed baseline, the release contract records the immutable text
 foundation as implemented with a repository test surface. It explicitly does
 not claim full String replacement, full regex precompute, full jtreg compatibility,
 qualified arrays/collections/Eclipse integration, or performance superiority.
-Candidate source can exist without those gates being complete. This homepage
-update runs no product build and upgrades none of those claims.
+Candidate source can exist without those gates being complete. Read the exact
+commit-bound receipts in the release queue; this guide grants no claim upgrade.
+The historical `m3/recipes/` scripts and recipe-bearing `m3/pom.xml` are
+inventoried migration residue, not supported product transformation commands.
 
 <!-- fork-homepage-guide:end -->
 

@@ -10,6 +10,10 @@ on:
       - "m3/collections/src/main/native/collections/m3_residency_state_mask.c"
       - "m3/collections/qualification/residency-state-mask-20261017/**"
       - ".github/workflows/m3-residency-state-mask-20261017.yml"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict-source-and-real-jdk-jni:
     runs-on: ubuntu-latest

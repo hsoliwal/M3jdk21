@@ -42,6 +42,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   dependency-gate:
     if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep496-proofed]') }}

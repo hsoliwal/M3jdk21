@@ -13,6 +13,10 @@ on:
     branches: [m3/range-array-mask-receiver-20261017]
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   real-java21-recipe-and-native:
     runs-on: ubuntu-24.04

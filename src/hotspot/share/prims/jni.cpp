@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2025, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012 Red Hat, Inc.
  * Copyright (c) 2021, Azul Systems, Inc. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -928,6 +928,11 @@ static void jni_invoke_nonstatic(JNIEnv *env, JavaValue* result, jobject receive
       Klass* k = h_recv->klass();
       selected_method = InstanceKlass::cast(k)->method_at_itable(holder, itbl_index, CHECK);
     }
+  }
+
+  if (selected_method->is_abstract()) {
+    ResourceMark rm(THREAD);
+    THROW_MSG(vmSymbols::java_lang_AbstractMethodError(), selected_method->name()->as_C_string());
   }
 
   methodHandle method(THREAD, selected_method);
@@ -2883,7 +2888,7 @@ JNI_ENTRY(jweak, jni_NewWeakGlobalRef(JNIEnv *env, jobject ref))
   HOTSPOT_JNI_NEWWEAKGLOBALREF_ENTRY(env, ref);
   Handle ref_handle(thread, JNIHandles::resolve(ref));
   jweak ret = JNIHandles::make_weak_global(ref_handle, AllocFailStrategy::RETURN_NULL);
-  if (ret == nullptr) {
+  if (ret == nullptr && ref_handle.not_null()) {
     THROW_OOP_(Universe::out_of_memory_error_c_heap(), nullptr);
   }
   HOTSPOT_JNI_NEWWEAKGLOBALREF_RETURN(ret);
@@ -3790,6 +3795,7 @@ static jint attach_current_thread(JavaVM *vm, void **penv, void *_args, bool dae
   MACOS_AARCH64_ONLY(thread->init_wx());
 
   if (!os::create_attached_thread(thread)) {
+    thread->unregister_thread_stack_with_NMT();
     thread->smr_delete();
     return JNI_ERR;
   }
@@ -3834,6 +3840,8 @@ static jint attach_current_thread(JavaVM *vm, void **penv, void *_args, bool dae
   if (attach_failed) {
     // Added missing cleanup
     thread->cleanup_failed_attach_current_thread(daemon);
+    thread->unregister_thread_stack_with_NMT();
+    thread->smr_delete();
     return JNI_ERR;
   }
 
@@ -3929,6 +3937,7 @@ jint JNICALL jni_DetachCurrentThread(JavaVM *vm)  {
   // (platform-dependent) methods where we do alternate stack
   // maintenance work?)
   thread->exit(false, JavaThread::jni_detach);
+  thread->unregister_thread_stack_with_NMT();
   thread->smr_delete();
 
   // Go to the execute mode, the initial state of the thread on creation.

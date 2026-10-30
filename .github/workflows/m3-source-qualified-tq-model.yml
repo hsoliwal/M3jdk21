@@ -11,6 +11,10 @@ on:
       - 'm3/tooling/tq-sync/source-reactor/**'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-qualified-tq-model:
     name: Offline Maven selection and refusal contract

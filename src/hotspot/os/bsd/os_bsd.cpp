@@ -77,6 +77,7 @@
 # include <dlfcn.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <fenv.h>
 # include <inttypes.h>
 # include <mach/mach.h>
 # include <poll.h>
@@ -121,7 +122,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // global variables
-julong os::Bsd::_physical_memory = 0;
+physical_memory_size_type os::Bsd::_physical_memory = 0;
 
 #ifdef __APPLE__
 mach_timebase_info_data_t os::Bsd::_timebase_info = {0, 0};
@@ -140,17 +141,17 @@ static volatile int processor_id_next = 0;
 ////////////////////////////////////////////////////////////////////////////////
 // utility functions
 
-julong os::available_memory() {
-  return Bsd::available_memory();
+bool os::available_memory(physical_memory_size_type& value) {
+  return Bsd::available_memory(value);
 }
 
-julong os::free_memory() {
-  return Bsd::available_memory();
+bool os::free_memory(physical_memory_size_type& value) {
+  return Bsd::available_memory(value);
 }
 
 // available here means free
-julong os::Bsd::available_memory() {
-  uint64_t available = physical_memory() >> 2;
+bool os::Bsd::available_memory(physical_memory_size_type& value) {
+  physical_memory_size_type available = physical_memory() >> 2;
 #ifdef __APPLE__
   mach_msg_type_number_t count = HOST_VM_INFO64_COUNT;
   vm_statistics64_data_t vmstat;
@@ -160,9 +161,12 @@ julong os::Bsd::available_memory() {
          "host_statistics64 failed - check mach_host_self() and count");
   if (kerr == KERN_SUCCESS) {
     available = vmstat.free_count * os::vm_page_size();
+  } else {
+    return false;
   }
 #endif
-  return available;
+  value = available;
+  return true;
 }
 
 // for more info see :
@@ -181,7 +185,7 @@ void os::Bsd::print_uptime_info(outputStream* st) {
   }
 }
 
-julong os::physical_memory() {
+physical_memory_size_type os::physical_memory() {
   return Bsd::physical_memory();
 }
 
@@ -204,11 +208,13 @@ static char cpu_arch[] = "ppc";
   #error Add appropriate cpu_arch setting
 #endif
 
-// Compiler variant
-#ifdef COMPILER2
-  #define COMPILER_VARIANT "server"
+// JVM variant
+#if   defined(ZERO)
+  #define JVM_VARIANT "zero"
+#elif defined(COMPILER2)
+  #define JVM_VARIANT "server"
 #else
-  #define COMPILER_VARIANT "client"
+  #define JVM_VARIANT "client"
 #endif
 
 
@@ -253,7 +259,7 @@ void os::Bsd::initialize_system_info() {
   len = sizeof(mem_val);
   if (sysctl(mib, 2, &mem_val, &len, nullptr, 0) != -1) {
     assert(len == sizeof(mem_val), "unexpected data size");
-    _physical_memory = mem_val;
+    _physical_memory = static_cast<physical_memory_size_type>(mem_val);
   } else {
     _physical_memory = 256 * 1024 * 1024;       // fallback (XXXBSD?)
   }
@@ -264,7 +270,7 @@ void os::Bsd::initialize_system_info() {
     // datasize rlimit restricts us anyway.
     struct rlimit limits;
     getrlimit(RLIMIT_DATA, &limits);
-    _physical_memory = MIN2(_physical_memory, (julong)limits.rlim_cur);
+    _physical_memory = MIN2(_physical_memory, static_cast<physical_memory_size_type>(limits.rlim_cur));
   }
 #endif
 }
@@ -506,17 +512,6 @@ void os::init_system_properties_values() {
 
 #undef SYS_EXT_DIR
 #undef EXTENSIONS_DIR
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// breakpoint support
-
-void os::breakpoint() {
-  BREAKPOINT;
-}
-
-extern "C" void breakpoint() {
-  // use debugger to set breakpoint here
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -893,6 +888,9 @@ bool os::address_is_in_vm(address addr) {
   return false;
 }
 
+void os::prepare_native_symbols() {
+}
+
 bool os::dll_address_to_function_name(address addr, char *buf,
                                       int buflen, int *offset,
                                       bool demangle) {
@@ -974,6 +972,43 @@ bool os::dll_address_to_library_name(address addr, char* buf,
 // in case of error it checks if .dll/.so was built for the
 // same architecture as Hotspot is running on
 
+void *os::Bsd::dlopen_helper(const char *filename, int mode) {
+#ifndef IA32
+  // Save and restore the floating-point environment around dlopen().
+  // There are known cases where global library initialization sets
+  // FPU flags that affect computation accuracy, for example, enabling
+  // Flush-To-Zero and Denormals-Are-Zero. Do not let those libraries
+  // break Java arithmetic. Unfortunately, this might affect libraries
+  // that might depend on these FPU features for performance and/or
+  // numerical "accuracy", but we need to protect Java semantics first
+  // and foremost. See JDK-8295159.
+
+  // This workaround is ineffective on IA32 systems because the MXCSR
+  // register (which controls flush-to-zero mode) is not stored in the
+  // legacy fenv.
+
+  fenv_t default_fenv;
+  int rtn = fegetenv(&default_fenv);
+  assert(rtn == 0, "fegetenv must succeed");
+#endif // IA32
+
+  Events::log_dll_message(nullptr, "Attempting to load shared library %s", filename);
+
+  void * result= ::dlopen(filename, RTLD_LAZY);
+
+#ifndef IA32
+  if (result  != nullptr && ! IEEE_subnormal_handling_OK()) {
+    // We just dlopen()ed a library that mangled the floating-point
+    // flags. Silently fix things now.
+    int rtn = fesetenv(&default_fenv);
+    assert(rtn == 0, "fesetenv must succeed");
+    assert(IEEE_subnormal_handling_OK(), "fsetenv didn't work");
+  }
+#endif // IA32
+
+  return result;
+}
+
 #ifdef __APPLE__
 void * os::dll_load(const char *filename, char *ebuf, int ebuflen) {
 #ifdef STATIC_BUILD
@@ -981,7 +1016,7 @@ void * os::dll_load(const char *filename, char *ebuf, int ebuflen) {
 #else
   log_info(os)("attempting shared library load of %s", filename);
 
-  void * result= ::dlopen(filename, RTLD_LAZY);
+  void * result = os::Bsd::dlopen_helper(filename, RTLD_LAZY);
   if (result != nullptr) {
     Events::log_dll_message(nullptr, "Loaded shared library %s", filename);
     // Successful loading
@@ -1010,7 +1045,7 @@ void * os::dll_load(const char *filename, char *ebuf, int ebuflen) {
   return os::get_default_process_handle();
 #else
   log_info(os)("attempting shared library load of %s", filename);
-  void * result= ::dlopen(filename, RTLD_LAZY);
+  void * result = os::Bsd::dlopen_helper(filename, RTLD_LAZY);
   if (result != nullptr) {
     Events::log_dll_message(nullptr, "Loaded shared library %s", filename);
     // Successful loading
@@ -1383,10 +1418,13 @@ void os::print_memory_info(outputStream* st) {
   st->print("Memory:");
   st->print(" " SIZE_FORMAT "k page", os::vm_page_size()>>10);
 
-  st->print(", physical " UINT64_FORMAT "k",
-            os::physical_memory() >> 10);
-  st->print("(" UINT64_FORMAT "k free)",
-            os::available_memory() >> 10);
+  physical_memory_size_type phys_mem = os::physical_memory();
+  st->print(", physical " PHYS_MEM_TYPE_FORMAT "k",
+            phys_mem >> 10);
+  physical_memory_size_type avail_mem = 0;
+  (void)os::available_memory(avail_mem);
+  st->print("(" PHYS_MEM_TYPE_FORMAT "k free)",
+            avail_mem >> 10);
 
   if((sysctlbyname("vm.swapusage", &swap_usage, &size, nullptr, 0) == 0) || (errno == ENOMEM)) {
     if (size >= offset_of(xsw_usage, xsu_used)) {
@@ -1473,10 +1511,10 @@ void os::jvm_path(char *buf, jint buflen) {
           snprintf(jrelib_p, buflen-len, "/lib");
         }
 
-        // Add the appropriate client or server subdir
+        // Add the appropriate JVM variant subdir
         len = strlen(buf);
         jrelib_p = buf + len;
-        snprintf(jrelib_p, buflen-len, "/%s", COMPILER_VARIANT);
+        snprintf(jrelib_p, buflen-len, "/%s", JVM_VARIANT);
         if (0 != access(buf, F_OK)) {
           snprintf(jrelib_p, buflen-len, "%s", "");
         }
@@ -1521,7 +1559,7 @@ bool os::pd_commit_memory(char* addr, size_t size, bool exec) {
   int prot = exec ? PROT_READ|PROT_WRITE|PROT_EXEC : PROT_READ|PROT_WRITE;
 #if defined(__OpenBSD__)
   // XXX: Work-around mmap/MAP_FIXED bug temporarily on OpenBSD
-  Events::log(nullptr, "Protecting memory [" INTPTR_FORMAT "," INTPTR_FORMAT "] with protection modes %x", p2i(addr), p2i(addr+size), prot);
+  Events::log_memprotect(nullptr, "Protecting memory [" INTPTR_FORMAT "," INTPTR_FORMAT "] with protection modes %x", p2i(addr), p2i(addr+size), prot);
   if (::mprotect(addr, size, prot) == 0) {
     return true;
   }
@@ -1583,6 +1621,10 @@ void os::pd_free_memory(char *addr, size_t bytes, size_t alignment_hint) {
   ::madvise(addr, bytes, MADV_DONTNEED);
 }
 
+size_t os::pd_pretouch_memory(void* first, void* last, size_t page_size) {
+  return page_size;
+}
+
 void os::numa_make_global(char *addr, size_t bytes) {
 }
 
@@ -1623,7 +1665,7 @@ char *os::scan_pages(char *start, char* end, page_info* page_expected, page_info
 bool os::pd_uncommit_memory(char* addr, size_t size, bool exec) {
 #if defined(__OpenBSD__)
   // XXX: Work-around mmap/MAP_FIXED bug temporarily on OpenBSD
-  Events::log(nullptr, "Protecting memory [" INTPTR_FORMAT "," INTPTR_FORMAT "] with PROT_NONE", p2i(addr), p2i(addr+size));
+  Events::log_memprotect(nullptr, "Protecting memory [" INTPTR_FORMAT "," INTPTR_FORMAT "] with PROT_NONE", p2i(addr), p2i(addr+size));
   return ::mprotect(addr, size, PROT_NONE) == 0;
 #elif defined(__APPLE__)
   if (exec) {
@@ -1693,7 +1735,7 @@ static bool bsd_mprotect(char* addr, size_t size, int prot) {
   assert(addr == bottom, "sanity check");
 
   size = align_up(pointer_delta(addr, bottom, 1) + size, os::vm_page_size());
-  Events::log(nullptr, "Protecting memory [" INTPTR_FORMAT "," INTPTR_FORMAT "] with protection modes %x", p2i(bottom), p2i(bottom+size), prot);
+  Events::log_memprotect(nullptr, "Protecting memory [" INTPTR_FORMAT "," INTPTR_FORMAT "] with protection modes %x", p2i(bottom), p2i(bottom+size), prot);
   return ::mprotect(bottom, size, prot) == 0;
 }
 
@@ -1792,15 +1834,6 @@ char* os::pd_attempt_reserve_memory_at(char* requested_addr, size_t bytes, bool 
   }
 
   return nullptr;
-}
-
-// Used to convert frequent JVM_Yield() to nops
-bool os::dont_yield() {
-  return DontYieldALot;
-}
-
-void os::naked_yield() {
-  sched_yield();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1998,16 +2031,24 @@ jint os::init_2(void) {
     if (status != 0) {
       log_info(os)("os::init_2 getrlimit failed: %s", os::strerror(errno));
     } else {
-      nbr_files.rlim_cur = nbr_files.rlim_max;
+      rlim_t rlim_original = nbr_files.rlim_cur;
 
-#ifdef __APPLE__
-      // Darwin returns RLIM_INFINITY for rlim_max, but fails with EINVAL if
-      // you attempt to use RLIM_INFINITY. As per setrlimit(2), OPEN_MAX must
-      // be used instead
-      nbr_files.rlim_cur = MIN(OPEN_MAX, nbr_files.rlim_cur);
-#endif
+      // On macOS according to setrlimit(2), OPEN_MAX must be used instead
+      // of RLIM_INFINITY, but testing on macOS >= 10.6, reveals that
+      // we can, in fact, use even RLIM_INFINITY.
+      // However, we need to limit the value to 0x100000 (which is the max value
+      // allowed on Linux) so that any existing code that iterates over all allowed
+      // file descriptors, finishes in a reasonable time, without appearing
+      // to hang.
+      nbr_files.rlim_cur = MIN(0x100000, nbr_files.rlim_max);
 
       status = setrlimit(RLIMIT_NOFILE, &nbr_files);
+      if (status != 0) {
+        // If that fails then try lowering the limit to either OPEN_MAX
+        // (which is safe) or the original limit, whichever was greater.
+        nbr_files.rlim_cur = MAX(OPEN_MAX, rlim_original);
+        status = setrlimit(RLIMIT_NOFILE, &nbr_files);
+      }
       if (status != 0) {
         log_info(os)("os::init_2 setrlimit failed: %s", os::strerror(errno));
       }
@@ -2472,7 +2513,9 @@ void os::jfr_report_memory_info() {
     // Send the RSS JFR event
     EventResidentSetSize event;
     event.set_size(info.resident_size);
-    event.set_peak(info.resident_size_max);
+    // We've seen that resident_size_max sometimes trails resident_size with one page.
+    // Make sure we always report size <= peak
+    event.set_peak(MAX2(info.resident_size_max, info.resident_size));
     event.commit();
   } else {
     // Log a warning
@@ -2487,6 +2530,28 @@ void os::jfr_report_memory_info() {
 }
 
 #endif // INCLUDE_JFR
+
+bool os::pd_dll_unload(void* libhandle, char* ebuf, int ebuflen) {
+
+  if (ebuf && ebuflen > 0) {
+    ebuf[0] = '\0';
+    ebuf[ebuflen - 1] = '\0';
+  }
+
+  bool res = (0 == ::dlclose(libhandle));
+  if (!res) {
+    // error analysis when dlopen fails
+    const char* error_report = ::dlerror();
+    if (error_report == nullptr) {
+      error_report = "dlerror returned no error description";
+    }
+    if (ebuf != nullptr && ebuflen > 0) {
+      snprintf(ebuf, ebuflen - 1, "%s", error_report);
+    }
+  }
+
+  return res;
+} // end: os::pd_dll_unload()
 
 void os::print_open_file_descriptors(outputStream* st) {
 #ifdef __APPLE__

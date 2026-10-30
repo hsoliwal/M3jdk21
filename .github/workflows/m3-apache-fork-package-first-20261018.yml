@@ -6,6 +6,10 @@ on:
       - 'm3/collections/qualification/apache-fork-package-first-20261018/**'
       - '.github/workflows/m3-apache-fork-package-first-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   verify-existing-m3-owner-against-fork:
     runs-on: ubuntu-latest

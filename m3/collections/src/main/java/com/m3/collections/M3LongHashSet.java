@@ -188,35 +188,38 @@ public final class M3LongHashSet implements M3LongCollection {
         }
     }
 
+    //FLLDCIM: ALG - LC705 staged primitive open-addressing rehash
     private void rehash(int requestedCapacity) {
         int capacity = tableSizeFor(Math.max(MIN_CAPACITY, requestedCapacity));
+        // Allocate and populate both aligned lanes before publishing either.
+        // Failed allocation leaves the original directory readable and usable.
+        long[] replacementKeys = new long[capacity];
+        byte[] replacementStates = new byte[capacity];
         long[] oldKeys = keys;
         byte[] oldStates = states;
-        keys = new long[capacity];
-        states = new byte[capacity];
-        int previousSize = size;
-        size = 0;
-        occupied = 0;
+        int rebuilt = 0;
         for (int i = 0; i < oldStates.length; i++) {
             if (oldStates[i] == USED) {
-                insertRehashed(oldKeys[i]);
+                insertRehashed(oldKeys[i], replacementKeys, replacementStates);
+                rebuilt++;
             }
         }
-        if (size != previousSize) {
+        if (rebuilt != size) {
             throw new IllegalStateException("rehash lost set entries");
         }
+        keys = replacementKeys;
+        states = replacementStates;
+        occupied = rebuilt;
     }
 
-    private void insertRehashed(long key) {
-        int mask = keys.length - 1;
+    private static void insertRehashed(long key, long[] targetKeys, byte[] targetStates) {
+        int mask = targetKeys.length - 1;
         int index = mix(key) & mask;
-        while (states[index] == USED) {
+        while (targetStates[index] == USED) {
             index = (index + 1) & mask;
         }
-        keys[index] = key;
-        states[index] = USED;
-        size++;
-        occupied++;
+        targetKeys[index] = key;
+        targetStates[index] = USED;
     }
 
     private static int capacityFor(int expectedSize) {
