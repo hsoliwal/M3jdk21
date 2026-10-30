@@ -1,0 +1,22 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3jdk21.collections.FilteredSortedIntake20261029
+displayName: Discover filtered/sorted receiver uses before source-changing recipes
+description: >-
+  Inventory-only recipe for the existing M3JDK21 filtered, sorted and navigable
+  collection owners. Marker output is candidate evidence, never replacement,
+  JNI promotion, or contract-equivalence authority.
+tags:
+  - m3jdk21
+  - collection-contract
+  - inventory-first
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.m3.collections.M3FilteredViews
+      checkAssignability: false
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: java.util.NavigableSet
+      checkAssignability: false
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: java.util.NavigableMap
+      checkAssignability: false
