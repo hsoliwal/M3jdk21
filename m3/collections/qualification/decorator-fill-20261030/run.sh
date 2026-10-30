@@ -43,7 +43,7 @@ while IFS=$'\t' read -r mod fqn m3; do
 	[ "$rc" -eq 0 ] && cp "$WORK/out/${m3##*.}.java" "$f" && echo "$f" >> "$WORK/filled.txt" && readme "$mod" "$fqn" "$m3"
 	[ "$rc" -eq 0 ] || [ "$rc" -eq 3 ] || { echo "M3_DECORATOR_FILL_FAIL $m3 exit=$rc"; exit 2; }
 done
-tr -d "" < "$WORK/atoms.tsv" | LC_ALL=C sort >> "$Q/METHOD_ATOMS.tsv"
+tr -d '\r' < "$WORK/atoms.tsv" | LC_ALL=C sort >> "$Q/METHOD_ATOMS.tsv"
 "$BIN/javac" -Xlint:all -Werror -proc:none -cp "$JAR" -d "$WORK/cls" $(cat "$WORK/filled.txt")
 "$BIN/javac" -proc:none -cp "$JAR$SEP$WORK/cls" -d "$WORK/hcls" "$Q/M3DecoratorDifferential.java"
 printf 'm3_class\toracle\tbacking\tresult\n' > "$Q/DIFFERENTIAL.tsv"; : > "$WORK/mismatch.tsv"; fail=0
@@ -53,6 +53,6 @@ while IFS=$'\t' read -r m3 oracle backing; do
 	printf '%s\t%s\t%s\t%s\n' "$m3" "$oracle" "$backing" "${line#M3_DECORATOR_DIFF }" >> "$Q/DIFFERENTIAL.tsv"
 	[ "$rc" -eq 0 ] || fail=1
 done < "$Q/TARGETS.tsv"
-tr -d "" < "$WORK/mismatch.tsv" > "$Q/MISMATCHES.tsv"
+tr -d '\r' < "$WORK/mismatch.tsv" > "$Q/MISMATCHES.tsv"
 echo "M3_DECORATOR_FILL filled=$(wc -l < "$WORK/filled.txt") atoms=$(($(wc -l < "$Q/METHOD_ATOMS.tsv") - 1)) manual=$(grep -c $'\tMANUAL\t' "$Q/METHOD_ATOMS.tsv" || true) targets=$(($(wc -l < "$Q/DIFFERENTIAL.tsv") - 1)) mismatches=$(wc -l < "$Q/MISMATCHES.tsv")"
 exit "$fail"
