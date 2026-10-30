@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+pattern	version	category	atom_shape	emitted	state
+DECORATOR_FILL	1.1	OBJECT	declaring class is java.lang.Object	method dropped; inherited	ADMITTED
+DECORATOR_FILL	1.1	DEFAULT	declaring class is an interface	Iface.super.m(args) on the most specific direct superinterface	ADMITTED
+DECORATOR_FILL	1.1	THROW	throw new UnsupportedOperationException();	same	ADMITTED
+DECORATOR_FILL	1.1	DELEGATE	[return] decorated().m(params);	[return] backing.m(args);	ADMITTED
+DECORATOR_FILL	1.1	EQUALS	o == this || decorated().equals(o) (two shapes)	return arg0 == this || backing.equals(arg0);	ADMITTED
+DECORATOR_FILL	1.1	WRAP	return W.f(decorated().m(params)) (locals inlined, witnesses stripped)	JDK java.util.Collections unmodifiable owner, own factory or own constructor	ADMITTED
+DECORATOR_FILL	1.1	FACTORY	static: instanceof Unmodifiable -> same; else new Self<>(p)	same over the M3 class	ADMITTED
+DECORATOR_FILL	1.1	CONSTRUCTOR	scaffold no-arg constructor	private M3X(P arg0): backing = requireNonNull(arg0, "collection")	ADMITTED
+DECORATOR_FILL	next	SYNC_DELEGATE	synchronized (lock) { [return] decorated().m(params); }	lock lane + delegate (Synchronized* family)	CANDIDATE
+DECORATOR_FILL	next	FACTORY_2ARG	return new Self<>(p, policy) (+ validation of existing elements)	policy lane (predicate/transformer) + factory	CANDIDATE
+DECORATOR_FILL	next	TRANSFORM	decorated().m(transform(p))	transformer lane applied at the boundary	CANDIDATE
+DECORATOR_FILL	next	MAP_VIEW	super.keySet/values/entrySet, MapIterator wrappers	M3 unmodifiable map-iterator and entry-set owners	CANDIDATE
+DECORATOR_DIFFERENTIAL	1	PROOF	seeded reflective differential vs Commons 4.5.0	DIFFERENTIAL.tsv, MISMATCHES.tsv	ADMITTED
