@@ -53,6 +53,22 @@ for n in sorted(os.listdir(wf)):
             out.append(f"{n}: no 'on:' trigger")
     except Exception as e:
         out.append(f"{n}: YAML error: {str(e).splitlines()[0]}")
+CALL_KEYS = {"name", "uses", "with", "secrets", "needs", "if", "permissions", "strategy", "concurrency"}
+JOB_KEYS = {"name", "needs", "permissions", "runs-on", "environment", "concurrency", "outputs", "env", "defaults", "if",
+            "steps", "timeout-minutes", "strategy", "continue-on-error", "container", "services", "snapshot"}
+for n, d in docs.items():   # job graph (pattern WORKFLOW_JOB_GRAPH_CHECK, 2026-10-30: needs on removed jobs = 0 jobs)
+    if not isinstance(d, dict):
+        continue
+    jobs = d.get("jobs") or {}
+    for jid, job in jobs.items():
+        job = job or {}
+        for k in job:
+            if k not in (CALL_KEYS if "uses" in job else JOB_KEYS):
+                out.append(f"{n}: job {jid} has key '{k}' that GitHub does not allow on this kind of job")
+        nd = job.get("needs"); nd = nd if isinstance(nd, list) else ([nd] if nd else [])
+        out += [f"{n}: job {jid} needs unknown job '{x}'" for x in nd if x not in jobs]
+        if "uses" not in job and "runs-on" not in job:
+            out.append(f"{n}: job {jid} has neither uses nor runs-on")
 for n, d in docs.items():
     if not isinstance(d, dict):
         continue

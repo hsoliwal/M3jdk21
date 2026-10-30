@@ -346,7 +346,7 @@ jobs:
       actions: write
     needs:
       - build-linux-x64
-      - build-linux-x86
+      - build-linux-x86-hs
       - build-linux-x64-hs-nopch
       - build-linux-x64-hs-zero
       - build-linux-x64-hs-minimal
@@ -356,9 +356,9 @@ jobs:
       - build-macos-aarch64
       - build-windows-x64
       - build-windows-aarch64
+      - build-docs
       - test-linux-x64
-      - test-linux-x86
-      - test-macos-x64
+      - test-macos-aarch64
       - test-windows-x64
 
     steps:

@@ -8,6 +8,9 @@
 # at build time come from the running JDK). Error keys are "<file>|<message>" without line numbers; the verdict is
 # PASS when the candidate has no key beyond the baseline. Takes the shared mkdir lock K:/m3-work/tmp/jvm.lock when it
 # frees within 120 s, else runs anyway (a few-file compile), printing a heartbeat every 30 s while waiting.
+# DEPS="<module> ..." (environment, optional): modules whose share/classes of the SAME commit are patched in as well, for
+# sources that use an API the range adds to another module (2026-10-30: jdk.crypto.ec needs java.base SHA3.SHAKE256,
+# jdk.javadoc needs jdk.compiler InheritDocTree.getSupertype; without DEPS they fail against the stock JDK 21 modules).
 # Usage: jdk_module_gate.sh <clone> <candidate> <baseline> <module> <out dir> <file>...
 set -uo pipefail
 C="$1"; CAND="$2"; BASE="$3"; MOD="$4"; OUT="$5"; shift 5; JAVAC="C:/Program Files/Java/jdk-21/bin/javac"; LOCK=K:/m3-work/tmp/jvm.lock
@@ -16,8 +19,8 @@ tree_for() { # tree_for <commit> <dir>
 	local h="$1" d="$2"
 	[ -e "$d/.git" ] || git -C "$C" worktree add --no-checkout --detach "$d" "$h" > /dev/null 2>&1 || return 1
 	git -C "$d" config core.autocrlf false; git -C "$d" sparse-checkout init --no-cone > /dev/null 2>&1
-	git -C "$d" sparse-checkout set "src/$MOD/share/classes/" > /dev/null 2>&1
-	git -C "$C" ls-tree -r "$h" -- "src/$MOD/share/classes/" | awk '{ print $3 }' |
+	git -C "$d" sparse-checkout set $(for m in $MOD ${DEPS:-}; do printf 'src/%s/share/classes/ ' "$m"; done) > /dev/null 2>&1
+	git -C "$C" ls-tree -r "$h" -- $(for m in $MOD ${DEPS:-}; do printf 'src/%s/share/classes/ ' "$m"; done) | awk '{ print $3 }' |
 		GIT_NO_LAZY_FETCH=1 git -C "$C" cat-file --batch-check 2>/dev/null | awk '$2 == "missing" { print $1 }' > "$d.missing"
 	[ -s "$d.missing" ] && git -C "$C" -c fetch.negotiationAlgorithm=noop fetch -q origin --no-tags --no-write-fetch-head --recurse-submodules=no --filter=blob:none --stdin < "$d.missing"
 	git -C "$d" checkout -q --detach "$h" 2>&1 | tail -2; }
@@ -30,7 +33,7 @@ for side in cand base; do
 	tree_for "$h" "$d" || { echo "GATE_FAIL worktree $side"; exit 2; }
 	rm -rf "$d/.jb"; mkdir -p "$d/.jb"
 	timeout 1800 "$JAVAC" -J-Xmx3g -encoding UTF-8 -proc:none -nowarn -implicit:none -Xmaxerrs 100000 -XDshould-stop.ifError=FLOW \
-		--patch-module "$MOD=$d/src/$MOD/share/classes" -d "$d/.jb" $(for f in "$@"; do printf '%s ' "$d/$f"; done) > "$OUT/javac-$side.log" 2>&1
+		$(for m in $MOD ${DEPS:-}; do printf -- '--patch-module %s=%s ' "$m" "$d/src/$m/share/classes"; done) -d "$d/.jb" $(for f in "$@"; do printf '%s ' "$d/$f"; done) > "$OUT/javac-$side.log" 2>&1
 	echo "$side javac exit $? errors $(grep -c ': error: ' "$OUT/javac-$side.log")"
 	keys "$OUT/javac-$side.log" > "$OUT/keys-$side.txt"
 done
