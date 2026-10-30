@@ -12,8 +12,8 @@
   "source_pins_sha256": "856e0b3e0efd47c88bfedfd6ac47291078ba6207e58178baaaac30017ade081f",
   "name_map_sha256": "e976621377edae456e5c69308208b9a193d81c2d221cd137afefcd2d07e67b94",
   "applied_java_manifest_sha256": "31ef71b432356b141588bbc1352638890f1abeae81acb89d97a497f8e0eda513",
-  "installed_source_manifest": "qualification/installed-source-successor-20261018.tsv",
-  "installed_source_manifest_sha256": "37b4cd36e8a5be3af6eb92549c2b68bff23fd1cb141e6829ab3a6125ed642228",
+  "installed_source_manifest": "qualification/installed-source-enum-set-20261014.tsv",
+  "installed_source_manifest_sha256": "046e3aa7f4d9523a72657942fac62bcb7d7bb6eaafb928dbe1c1d87afed1252c",
   "qualification_receipt": "qualification/receiving-enum-set-20261008.json",
   "application_receipt": "qualification/synexia-receiving-application-20261008.json",
   "first_party_license": "Apache-2.0",
@@ -1128,7 +1128,7 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "source_set_successor_20261018",
+  "source_set_successor_current": "superset_source_successor_20261030",
   "tools4j_unix_refinement_20261019": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
@@ -1162,5 +1162,28 @@
     "historical_hash_rule": "Original donor and target hash records retain their recorded receiving revisions. Current listed source hashes are the final_received_sha256 column of this exact successor; historical files and receipts are not rewritten.",
     "review_scope": "Inventory reconciliation is not algorithm review of all503 Java files. Source refinements and their individual canonical recipes/gates remain separately recorded in the target handoff.",
     "phase_advance": false
+  },
+  "superset_source_successor_20261030": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
+    "successor_receipt": "qualification/superset-source-successor-20261030.tsv",
+    "successor_receipt_sha256": "0304f7526f64d542c576af90047af6825860df96f86cff58c13b2fa237a17c40",
+    "receipt_columns": [
+      "path",
+      "inherited_sha256",
+      "final_received_sha256"
+    ],
+    "inherited_composed_manifest_sha256": "6283ee8df10e7d2e4b2a0d47635ef57775fb476c1cae9545cfe1692fa59c176e",
+    "inherited_rows": 510,
+    "successor_rows": 429,
+    "refined_rows": 167,
+    "added_rows": 262,
+    "resulting_rows": 772,
+    "exact_java_source_membership": 765,
+    "predecessor_successor": "tools4j_unix_refinement_20261019",
+    "superseded_sibling_successor": "source_set_successor_20261018 (historical; its five sources not in the Tools4j receipt are re-admitted here)",
+    "origin": "superset merge b251188755a9faf8718811f16eea5eaef98bd1fe of hsoliwal/M3jdk21#1482 kept the sibling selector of com.synexia#12414",
+    "recipe": "com.synexia .m3/task-crates/release-blocker8-tools4j-rows-20261030/tools/fix_donation_ledger.py",
+    "phase_advance": false,
+    "sealed_tree_head": "7a84680b311648d10857c6a715e8fe2dc8ba2c79"
   }
 }
