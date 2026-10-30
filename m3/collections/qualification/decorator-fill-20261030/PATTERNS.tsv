@@ -13,3 +13,9 @@ DECORATOR_FILL	next	FACTORY_2ARG	return new Self<>(p, policy) (+ validation of e
 DECORATOR_FILL	next	TRANSFORM	decorated().m(transform(p))	transformer lane applied at the boundary	CANDIDATE
 DECORATOR_FILL	next	MAP_VIEW	super.keySet/values/entrySet, MapIterator wrappers	M3 unmodifiable map-iterator and entry-set owners	CANDIDATE
 DECORATOR_DIFFERENTIAL	1	PROOF	seeded reflective differential vs Commons 4.5.0	DIFFERENTIAL.tsv, MISMATCHES.tsv	ADMITTED
+M3IFY	1	ATOMIZE	donor or scaffold source -> one atom per method (signature, owner, kind)	METHOD_ATOMS.tsv row	ADMITTED
+M3IFY	1	RESOLVE	atom -> donor member by reflection on the donor jar (declaring class, interface default or body)	category input	ADMITTED
+M3IFY	1	CLASSIFY	donor body shape -> closed category vocabulary; anything else is typed residue (MANUAL), never guessed	category	ADMITTED
+M3IFY	1	EMIT	category -> template over M3 lanes; no donor body copied	owned source	ADMITTED
+M3IFY	1	PROVE	seeded reflective differential vs the donor (oracle only) + -Xlint:all -Werror + planted-defect control	DIFFERENTIAL.tsv	ADMITTED
+M3IFY	1	GROW	repeated residue shape -> new category; every generator correction -> RECIPE_MEMORY.tsv row	PATTERNS.tsv / RECIPE_MEMORY.tsv	ADMITTED

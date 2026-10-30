@@ -54,5 +54,19 @@ while IFS=$'\t' read -r m3 oracle backing; do
 	[ "$rc" -eq 0 ] || fail=1
 done < "$Q/TARGETS.tsv"
 tr -d '\r' < "$WORK/mismatch.tsv" > "$Q/MISMATCHES.tsv"
-echo "M3_DECORATOR_FILL filled=$(wc -l < "$WORK/filled.txt") atoms=$(($(wc -l < "$Q/METHOD_ATOMS.tsv") - 1)) manual=$(grep -c $'\tMANUAL\t' "$Q/METHOD_ATOMS.tsv" || true) targets=$(($(wc -l < "$Q/DIFFERENTIAL.tsv") - 1)) mismatches=$(wc -l < "$Q/MISMATCHES.tsv")"
+filled=$(wc -l < "$WORK/filled.txt"); atoms=$(($(wc -l < "$Q/METHOD_ATOMS.tsv") - 1)); manual=$(grep -c $'\tMANUAL\t' "$Q/METHOD_ATOMS.tsv" || true)
+targets=$(($(wc -l < "$Q/DIFFERENTIAL.tsv") - 1)); mism=$(wc -l < "$Q/MISMATCHES.tsv"); verdict=$([ "$fail" -eq 0 ] && echo PASS || echo FAIL)
+# M3-SCALE section 5 output contract: STATUS, RUN_CONTEXT, PROVENANCE, VERIFY_CONTRACT, OUTPUT_CONTRACT, FINAL_REPORT.
+sha() { sha256sum "$1" | cut -c1-64; }
+printf 'stage\tstatus\tevidence\nfill\tDONE\tfilled=%s atoms=%s manual=%s\ncompile\tDONE\tjavac -Xlint:all -Werror over %s classes\ndifferential\t%s\ttargets=%s mismatches=%s\n' \
+	"$filled" "$atoms" "$manual" "$filled" "$verdict" "$targets" "$mism" > "$Q/STATUS.tsv"
+printf 'key\tvalue\nscaffold_rev\t%s\njava\t%s\nrun_mode\tapply\nshards\t1\n' "$SCAFFOLD_REV" "$("$BIN/java" -version 2>&1 | head -1 | tr -d '\r"')" > "$Q/RUN_CONTEXT.tsv"
+printf 'input\tsha256\nM3DecoratorFill.java\t%s\nM3DecoratorDifferential.java\t%s\ncommons-collections4-4.5.0.jar\t%s\nTARGETS.tsv\t%s\n' \
+	"$(sha "$Q/M3DecoratorFill.java")" "$(sha "$Q/M3DecoratorDifferential.java")" "$(sha "$JAR")" "$(sha "$Q/TARGETS.tsv")" > "$Q/PROVENANCE.tsv"
+printf 'order\tgate\tresult\n1\tdiff (git diff --check, run by the committer)\tEXTERNAL\n2\tlinter (javac -Xlint:all -Werror)\tPASS\n3\tcompile\tPASS\n4\ttests (M3DecoratorDifferential)\t%s\n5\truntime\tNOT_REQUESTED\n' "$verdict" > "$Q/VERIFY_CONTRACT.tsv"
+printf '# Final report: decorator fill\n\n- Files changed: %s owned decorator classes and their README files (listed in OUTPUT_CONTRACT.tsv).\n- Delta: %s method atoms classified, %s left as MANUAL residue; scaffold bodies replaced only in classes with no MANUAL atom.\n- Verification: javac -Xlint:all -Werror passed; differential %s, %s targets, %s mismatches.\n- Blockers: the %s MANUAL atoms in METHOD_ATOMS.tsv (next families in PATTERNS.tsv).\n' \
+	"$filled" "$atoms" "$manual" "$verdict" "$targets" "$mism" "$manual" > "$Q/FINAL_REPORT.md"
+{ printf 'artifact\tsha256\n'; for f in $(cat "$WORK/filled.txt") STATUS.tsv RUN_CONTEXT.tsv PROVENANCE.tsv VERIFY_CONTRACT.tsv FINAL_REPORT.md METHOD_ATOMS.tsv DIFFERENTIAL.tsv MISMATCHES.tsv; do
+	p="$f"; [ -f "$p" ] || p="$Q/$f"; printf '%s\t%s\n' "$f" "$(sha "$p")"; done; } > "$Q/OUTPUT_CONTRACT.tsv"
+echo "M3_DECORATOR_FILL filled=$filled atoms=$atoms manual=$manual targets=$targets mismatches=$mism verdict=$verdict"
 exit "$fail"

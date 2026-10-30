@@ -63,6 +63,23 @@ Results:
 `CONVERGE_LEDGER.tsv` lists every fork class, using the columns agreed between the convergence lanes: fork, fork_rev,
 fork_class, m3_owner, absorb_state. The counts are 16 ABSORBED and 331 GAP.
 
+## M3IFY primitives
+
+The decorator family is one instance of a general sequence, recorded as the `M3IFY` rows of `PATTERNS.tsv`:
+
+1. ATOMIZE: one atom per method.
+2. RESOLVE: find the donor member by reflection.
+3. CLASSIFY: map it into a closed category vocabulary, with MANUAL as the typed residue.
+4. EMIT: generate the body from a template over M3 lanes.
+5. PROVE: run a seeded differential against the donor, which serves only as the oracle.
+6. GROW: a repeated residue shape becomes a new category, and every correction becomes a RECIPE_MEMORY row.
+
+Any donor class library can be converged into M3JDK with the same six steps. Only the category vocabulary and the
+templates change from one donor to another.
+
+`TASK_PACKET.tsv` declares the M3-SCALE task packet for this run. `run.sh` writes the output contract:
+`STATUS.tsv`, `RUN_CONTEXT.tsv`, `PROVENANCE.tsv`, `VERIFY_CONTRACT.tsv`, `OUTPUT_CONTRACT.tsv` and `FINAL_REPORT.md`.
+
 ## Rerun
 
 From the repository root, with `JAVA_HOME` set to a JDK 21:
