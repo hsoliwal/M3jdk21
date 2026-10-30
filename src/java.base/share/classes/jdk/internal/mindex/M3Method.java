@@ -40,9 +40,12 @@ public final class M3Method {
     public long structuralHash64() { return owner.memberStructuralHash64(row); }
 
     public Optional<Method> tryMethod() {
-        return owner.resolveReflectiveElement(row)
-                .filter(Method.class::isInstance)
-                .map(Method.class::cast);
+        Optional<?> element = owner.resolveReflectiveElement(row)
+                .filter(Method.class::isInstance);
+        // The filter proves the payload type; the Optional cannot replace that payload.
+        @SuppressWarnings("unchecked")
+        Optional<Method> typed = (Optional<Method>) element;
+        return typed;
     }
 
     public Method toMethod() {
@@ -51,6 +54,6 @@ public final class M3Method {
     }
 
     @Override public String toString() {
-        return getDeclaringClass().getName() + "#" + getName() + descriptor();
+        return owner.binaryName(owner.memberDeclaringClassRow(row)) + "#" + getName() + descriptor();
     }
 }
