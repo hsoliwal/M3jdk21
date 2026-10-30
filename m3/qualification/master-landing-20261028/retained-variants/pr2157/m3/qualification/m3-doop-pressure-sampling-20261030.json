@@ -1,0 +1,43 @@
+{
+  "schema": "M3_DOOP_PRESSURE_SAMPLING_PASSIVE_RECEIPT_V1",
+  "canonical_repository": "https://github.com/hsoliwal/com.synexia",
+  "canonical_revision": "00bdbea3ee2fe0a7fc8a991f39e5dad2a0e8d604",
+  "canonical_path_root": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/enhancement/",
+  "reference_rule": "All evidence/recipe paths are relative to canonical_path_root at canonical_revision; target paths are repository-relative.",
+  "target_repository": "hsoliwal/M3jdk21",
+  "receipt_role": "PASSIVE_COMPONENT_EVIDENCE_ONLY",
+  "maven": {"path": "pom.xml", "sha256": "040f46d34212513d7d9e48e4ce327652bc8e0ad4f799e11c0e5f6f3de2452346"},
+  "descriptor": {"path": "src/main/resources/META-INF/rewrite/m3-doop-enhancement-20261030.yml", "sha256": "b6d34997a38f1e328b19cce4f9e9a8b816b261ce8cebcdc6ba7b0422fb8026a2"},
+  "sdk_execution": {"qualification": {"path": "evidence/qualification-summary.json", "sha256": "0b097ab9d3b0cad5790b8ec177a254a54e376ed3e0a956922186e2176e2e327d"}, "maven_log": {"path": "evidence/registration-sdk.log", "sha256": "3e9351684e3b903e12f7e3b035aa146e0591167577f8617368727a1754e6dd61"}, "scope": "Actual Java/Text SDK emissions, fixed points and missing/drift/occupied/duplicate refusals; receipt metadata execution is separate."},
+  "target_preimage_revision": "7efa3fdcef80bce1f82be8a3f8925ff2cb452d71",
+  "manifests": [
+    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-doop-pressure-sampling-20261030/manifest.tsv", "sha256": "10e3f5f2b67f68d8c93b7dd13f4fcd9cd1e00ce0d5b9b89f0fb82487c591bedc", "recipe": "com.synexia.m3.DoopPressureSampling20261030"}
+  ],
+  "source_transitions": [
+    {"path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java", "before": {"sha256": "71cac88509429c9fa8f6465bc1e6acc33cafb60232be245c93fd3679c9851cc6", "git_blob_sha1": "e7f690493e34dbb1b1041d8af924ab6a8c02f527"}, "after": {"sha256": "b96dab2d42101105c1cdbff31a0d68303340eed439c4972d109075cc99818284", "git_blob_sha1": "e8347cd7780dbeb5a95759ef734a6dbf942d9edd"}},
+    {"path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyReuseTest.java", "before": {"sha256": "ab959aa0192e0a45ec2a43e3813ac1ccaaf0da9ad36015b218c5c752b1dcf366", "git_blob_sha1": "2e045d4354fa884067bbd42606ca1e257fa60706"}, "after": {"sha256": "a7c88a45f4b88789b17ad08844fe048c2a92db2cf55b7437f5605e79c7959287", "git_blob_sha1": "5b075d5de8320099b734e6cd0a8e6294d79491fd"}}
+  ],
+  "canonical_rebind_chain": {"path": "evidence/canonical-rebind-to-pressure-chain.json", "sha256": "78c8bf3c68174ed878464db25a6a83696d7b23d8878e5300ace06b1715df317a"},
+  "canonical_rebind_maven_log": {"path": "evidence/canonical-rebind-final.log", "sha256": "6aadebb95156b214d4df1759b8a6fd0367768ccda19bc7cb1deb32caf5edcbad"},
+  "runtime_evidence": [
+    {"path": "evidence/runtime/pressure/qualification.json", "sha256": "c82dd2eaecc85163deb81c60451e4f52adce21fd9970e2e586811005129e21b6"},
+    {"path": "evidence/runtime/pressure-original/qualification.json", "sha256": "010dbd53e727dab147431900eed319d344f2d8bb2fef06978a27a98880fa00b6"}
+  ],
+  "qualification": {"status": "PASS_COMPONENT_OUTPUTS", "change": "Four budget call sites share the existing helper; heap snapshots are sampled only with PRESSURE_AWARE.", "executions": ["baseline/normal", "baseline/-Xint", "sdk-output/normal", "sdk-output/-Xint"], "reuse_junit_per_execution": 19, "original_junit_per_execution": 16, "junit_total_per_owner_profile": 35, "owner_closures": {"reuse": 5, "original_regressions": 6}, "java21_strict_compile": "PASS", "public_owner_and_nested_types_unchanged": 10, "snapshot_call_sites_before_after": [4, 1], "local_junit": "Platform 1.10.2 / Jupiter 5.10.2; target console 1.12.2 workflow remains separate."},
+  "allocation": {"scope": "Observed thread allocated bytes in bounded interpreter loops.", "toolchain": "Temurin 21.0.13+9", "jvm_flags": ["-Xint", "-Xms128m", "-Xmx128m"], "samples": 3, "calls_per_sample": 100000, "bytes_per_call_before_after": {"fixed_budget_signalMemoryPressure": [48, 0], "pressure_enabled_signalMemoryPressure": [48, 48], "fixed_budget_resident_use": [0, 0], "pressure_enabled_resident_use": [48, 48]}, "not_claimed": ["throughput", "latency", "RSS", "JNI", "application-wide or universal JIT improvement"]},
+  "preserved_ownership": [
+    "Existing source accounting during reset, post-reset budget check and tainted-shell discard remain authoritative.",
+    "Rebind is explicit; no automatic reuse consumer, GC scavenger or duplicate ownership registry.",
+    "Cooperative zero and STRICT_NO_ESCAPE alone do not prove alias closure, reset completeness, compatible shape or absent asynchronous/identity observers."
+  ],
+  "remaining_gates": [
+    "SOURCE_BUILT_M3JDK21_IMAGE_JTREG_NOT_RUN",
+    "FULL_JMM_JNI_HOTSPOT_COLLECTOR_QUALIFICATION_OPEN",
+    "COMPILER_LIFETIME_AND_NONESCAPE_PROOF_OPEN",
+    "REPRESENTATIVE_APPLICATION_MEMORY_LATENCY_THROUGHPUT_OPEN",
+    "FULL_INHERITED_PROVENANCE_LEDGER_UNAVAILABLE",
+    "REMOTE_CI_AND_TARGET_RELEASE_ACCEPTANCE_SEPARATE"
+  ],
+  "native_scope": "No C/JNI ABI change; parent lease/JNI evidence is separate and does not prove projection alias closure.",
+  "promotion": false
+}
