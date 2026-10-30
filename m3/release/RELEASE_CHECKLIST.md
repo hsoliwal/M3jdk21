@@ -19,7 +19,7 @@ in the 2026-10-30 shaping pass).
 | 9 | Blocker 8: `verify_donation.py` Tools4j predecessor rows (collection contracts streak 105) | PENDING | collections lane; no patch delivered on 2026-10-30 |
 | 10 | Blocker 11: `m3-jni-common` windows-2022 C4310 cast in `m3_jni_core_contract.c:51` | PENDING | native lane (PRECOMPUTE_JNI_NATIVE_PARITY) |
 | 11 | Blocker 12: `m3/ports/swing-viewport` `-Xlint:all -Werror` (this-escape, serial) | PENDING | viewport lane |
-| 12 | Blocker 13: generated-mirror / frozen-recipe drift (`M3StateMaskHistogram`, `M3SemanticHasher`, `M3StreamProgress`) | PENDING | collections / recipes / file lanes; no patch delivered on 2026-10-30 |
+| 12 | Blocker 13: generated-mirror / frozen-recipe drift (`M3StateMaskHistogram`, `M3SemanticHasher`; `M3StreamProgress` already resolved on master `dbf2bbd3d52`) | PATCH_READY | same PR, commits "blocker 13 part a/b": successor recipe `state-mask-histogram-20261030` + 5 regenerated mirrors + workflow, `m3/compatibility` ledger re-pins + checker state |
 | 13 | Blocker 14: Android and iOS JDK build lanes | PENDING | platforms lane; next release (`MOBILE_DONORS.tsv`) |
 | 14 | Release workflow `.github/workflows/m3-release.yml`: tag `m3jdk-*` -> linux-x64, macos-x64, macos-aarch64, windows-x64 bundles, jmods zips, SHA256SUMS, rights files, draft GitHub Release | PATCH_READY | PR `m3/release-workflow-20261030`; checked with actionlint + `reusable_call_check.py`; never executed |
 | 15 | OpenJDK product build + tier1 at the tag commit (OPENJDK_SANITY_MATRIX) | NOT_RUN | no local toolchain; CI evidence = `main.yml` on the push + `m3-release.yml` on the tag |
