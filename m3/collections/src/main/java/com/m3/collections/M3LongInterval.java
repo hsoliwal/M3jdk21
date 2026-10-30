@@ -1,103 +1,139 @@
-/*
- * Copyright 2026 Hitesh Soliwal and contributors
+/* Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.m3.collections;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.function.LongConsumer;
+
 /**
- * M3 five-library superset scaffold {@code M3LongInterval}: API group {@code LONG_INTERVAL} over arrays and state masks.
+ * Immutable, inclusive arithmetic progression of primitive long values.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-synexia-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>ECLIPSE Interval/IntInterval/LongInterval: arithmetic progression as immutable list; O(1) storage [license EPL-2.0|EDL-1.0; NEW_OWNER (LS7; trivial owner, pure offset arithmetic) (adjacent #1171/#1184 = long interval SETS, not EC arithmetic Interval); priority P2; matrix owner PROPOSED:M3LongInterval (from,to,step closed form)]</li>
- * </ul>
+ * <p>Inspired by the Eclipse Collections LongInterval positional contract;
+ * no Eclipse source or storage implementation is copied. Only scalar facts
+ * are retained; no value array, boxed element or per-position state object.
+ * The signed-long domain is checked with unsigned-distance arithmetic, so
+ * ranges crossing zero and even steps of Long.MIN_VALUE do not overflow the
+ * element count or accidentally wrap. The existing int-sized API refuses
+ * progressions longer than Integer.MAX_VALUE instead of truncating them.</p>
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long from;long to;long step}; offset scheme no lanes: index -&gt; from + index*step; state-mask bits FROZEN; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: NO lanes: from/step/count scalars; index-&gt;value arithmetic / FROZEN inherent.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Reverse returns a new immutable progression. It never changes this
+ * instance, including any original iterator/consumer observations.</p>
  */
 public final class M3LongInterval {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
 
-    /** Storage lane {@code from}: scalar lane. */
-    private long from;
-    /** Storage lane {@code to}: scalar lane. */
-    private long to;
-    /** Storage lane {@code step}: scalar lane. */
-    private long step;
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final long from;
+    private final long to;
+    private final long step;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates an empty immutable sequence. */
     public M3LongInterval() {
+        this(0, 0, 1, 0);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private M3LongInterval(long from, long to, long step, int size) {
+        this.from = from;
+        this.to = to;
+        this.step = step;
+        this.size = size;
+    }
+
+    /** Preserves the original public inventory descriptor. */
     public static String scaffoldDescriptor() {
         return "M3LongInterval|LONG_INTERVAL|LONG|FROZEN|long from;long to;long step";
     }
 
-    /** LongInterval.fromTo (scaffold: not yet received). */
+    /** Inclusive ascending or descending unit-step progression. */
     public static M3LongInterval fromTo(long from, long to) {
-        throw new M3NotYetReceived("M3LongInterval.fromTo");
+        return fromToBy(from, to, from <= to ? 1 : -1);
     }
 
-    /** LongInterval.fromToBy (scaffold: not yet received). */
+    /**
+     * Inclusive progression. Step must be nonzero and point towards the bound.
+     * A singleton accepts either sign. Large intervals are refused because
+     * size(), get(int) and indexOf(long) use signed 32-bit positions.
+     */
     public static M3LongInterval fromToBy(long from, long to, long step) {
-        throw new M3NotYetReceived("M3LongInterval.fromToBy");
+        if (step == 0 || from < to && step < 0 || from > to && step > 0) {
+            throw new IllegalArgumentException("step must be nonzero and point towards the bound");
+        }
+        long distance = from <= to ? to - from : from - to; // unsigned distance
+        long magnitude = step >= 0 ? step : -step; // MIN_VALUE is unsigned 2^63
+        long steps = Long.divideUnsigned(distance, magnitude);
+        if (Long.compareUnsigned(steps, (long) Integer.MAX_VALUE - 1L) > 0) {
+            throw new IllegalArgumentException("interval exceeds int-indexed capacity");
+        }
+        return new M3LongInterval(from, to, step, (int) steps + 1);
     }
 
-    /** LongInterval.zeroTo (scaffold: not yet received). */
+    /** Inclusive progression from zero, decreasing for negative bounds. */
     public static M3LongInterval zeroTo(long to) {
-        throw new M3NotYetReceived("M3LongInterval.zeroTo");
+        return fromTo(0, to);
     }
 
-    /** LongInterval.getFirst (scaffold: not yet received). */
+    /** First value or NoSuchElementException for an empty sequence. */
     public long getFirst() {
-        throw new M3NotYetReceived("M3LongInterval.getFirst");
+        if (size == 0) throw new NoSuchElementException();
+        return from;
     }
 
-    /** LongInterval.getLast (scaffold: not yet received). */
+    /** Last actual element; the supplied upper bound need not be reached. */
     public long getLast() {
-        throw new M3NotYetReceived("M3LongInterval.getLast");
+        if (size == 0) throw new NoSuchElementException();
+        return valueAt(size - 1);
     }
 
-    /** LongInterval.get (scaffold: not yet received). */
+    /** O(1) lookup without materializing an array. */
     public long get(int index) {
-        throw new M3NotYetReceived("M3LongInterval.get");
+        Objects.checkIndex(index, size);
+        return valueAt(index);
     }
 
-    /** LongInterval.size (scaffold: not yet received). */
-    public int size() {
-        throw new M3NotYetReceived("M3LongInterval.size");
+    private long valueAt(int index) {
+        // Java's modulo-2^64 intermediate arithmetic yields the exact final
+        // signed long for every in-range progression element.
+        return from + (long) index * step;
     }
 
-    /** LongInterval.contains (scaffold: not yet received). */
-    public boolean contains(long value) {
-        throw new M3NotYetReceived("M3LongInterval.contains");
-    }
+    public int size() { return size; }
 
-    /** LongInterval.indexOf (scaffold: not yet received). */
+    /** Constant-time arithmetic membership, including both signed extremes. */
+    public boolean contains(long value) { return indexOf(value) >= 0; }
+
+    /** First logical position or -1; uses unsigned arithmetic to avoid overflow. */
     public int indexOf(long value) {
-        throw new M3NotYetReceived("M3LongInterval.indexOf");
+        if (size == 0) return -1;
+        long last = getLast();
+        boolean ascending = from <= last;
+        if (ascending ? (value < from || value > last) : (value > from || value < last)) {
+            return -1;
+        }
+        long distance = ascending ? value - from : from - value;
+        long magnitude = step >= 0 ? step : -step;
+        if (Long.remainderUnsigned(distance, magnitude) != 0) return -1;
+        long index = Long.divideUnsigned(distance, magnitude);
+        return Long.compareUnsigned(index, size) < 0 ? (int) index : -1;
     }
 
-    /** LongInterval.reverseThis (scaffold: not yet received). */
+    /** Reversed immutable view with the same values, also for MIN_VALUE steps. */
     public M3LongInterval reverseThis() {
-        throw new M3NotYetReceived("M3LongInterval.reverseThis");
+        if (size < 2) return this;
+        return new M3LongInterval(getLast(), from, -step, size);
     }
 
-    /** LongInterval.toArray (scaffold: not yet received). */
+    /** Explicit detached array materialization; may fail under memory pressure. */
     public long[] toArray() {
-        throw new M3NotYetReceived("M3LongInterval.toArray");
+        long[] copy = new long[size];
+        for (int i = 0; i < size; i++) copy[i] = valueAt(i);
+        return copy;
     }
 
-    /** LongInterval.forEach (scaffold: not yet received). */
-    public void forEach(java.util.function.LongConsumer action) {
-        throw new M3NotYetReceived("M3LongInterval.forEach");
+    /** Native primitive callback iteration, without intermediate objects. */
+    public void forEach(LongConsumer action) {
+        Objects.requireNonNull(action, "action");
+        for (int i = 0; i < size; i++) action.accept(valueAt(i));
     }
 }
