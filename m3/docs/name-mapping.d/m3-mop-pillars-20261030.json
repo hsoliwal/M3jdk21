@@ -1,0 +1,27 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf (MOP pillars: atomize, patternize, refactor as a javac Plugin + CLI in m3/mop).",
+  "mappings": [
+    {
+      "source": "com.synexia.ai.m3scale.M3AtomTyping + M3AtomFacts + M3FileAtomizer + M3FileAtomContract + M3FileAtom (synexia-maven-plugin, Synexia #13966)",
+      "source_commit": "37519d1f6bfb59f779f1cf36cfe7877091479b8a",
+      "target": "com.m3.mop.M3Atom + M3AtomTyping + M3AtomFacts + M3Atomizer (m3/mop)",
+      "status": "ported; javac --release 21 -Xlint:all -Werror PASS; M3AtomizeContract PASS (default VM and -Xint); javac Plugin and CLI outputs byte-identical over m3/mop",
+      "target_rule": "one javac AST: atoms projected from com.sun.source trees at PARSE finish (Plugin) or parse-only JavacTask (CLI); contracts from exact subtree spans, shape from tree kinds; the Synexia logicTokens lexer is not ported"
+    },
+    {
+      "source": "com.synexia.ai.m3scale.M3AtomPatternIndex + M3PatternPlan + M3AtomBaseline.verify (Synexia #13966)",
+      "source_commit": "37519d1f6bfb59f779f1cf36cfe7877091479b8a",
+      "target": "com.m3.mop.M3PatternRegistry + M3PatternPlan + M3AtomizeRun.verifyManifest (m3/mop) and m3/mop/PATTERN_REGISTRY.tsv",
+      "status": "ported; persisted append-only versioned registry added (closes Synexia MOP_GAPS G2 for M3JDK21); M3PatternContract PASS",
+      "target_rule": "schema M3-PATTERN/1 and ids M3P1-<16 hex> kept; KNOWN_PATTERN / UNPROVEN_LEAF / UNKNOWN_PATTERN kept; registry rows only appended, prefix proven with M3RecipeMemory.verifyAppendOnly"
+    },
+    {
+      "source": "com.synexia.ai.m3scale.M3RefactorGate + M3RefactorStage + M3MopReceipt, com.synexia.ai.mojo.M3MopChainMojo (Synexia #13966); ABI semantics of open drafts #14042 #14066 #14069 #14084 #14100",
+      "source_commit": "37519d1f6bfb59f779f1cf36cfe7877091479b8a; fae7418b8d81118e6a80d03a8f960c4724eeea96; 5361ab5f16b32b67e0f173887d633f181aa628be",
+      "target": "com.m3.mop.M3RefactorGate + M3MopChain + M3MopReceipt + M3MopPlugin + M3Mop (m3/mop)",
+      "status": "ported without Maven/JDT; M3RefactorGateContract and M3MopChainContract PASS; 7/7 discriminator mutants killed; JDK image build and jtreg NOT_RUN (tool is not part of a jmod yet)",
+      "target_rule": "refusals append M3RecipeMemory candidate rows (*_CANDIDATES.tsv) through the existing M3RecipeMemory writer, never RECIPE_MEMORY.tsv; HOLD instead of ADMITTED without a fixed-point witness; per-kind limit ratchet"
+    }
+  ]
+}

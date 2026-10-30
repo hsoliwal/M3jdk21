@@ -1,0 +1,31 @@
+PASS javac --release 21 -Xlint:all -Werror (main+test)
+PASS M3RecipeMemoryContract (default VM)
+PASS M3RecipeMemoryContract (-Xint)
+PASS M3RecipeMemoryAdmissionContract (default VM)
+PASS M3RecipeMemoryAdmissionContract (-Xint)
+PASS M3AtomizeContract (default VM)
+PASS M3AtomizeContract (-Xint)
+PASS M3PatternContract (default VM)
+PASS M3PatternContract (-Xint)
+PASS M3RefactorGateContract (default VM)
+PASS M3RefactorGateContract (-Xint)
+PASS M3MopChainContract (default VM)
+PASS M3MopChainContract (-Xint)
+PASS dogfood javac -Xplugin:M3Mop over m3/mop main sources
+PASS dogfood CLI atomize over m3/mop main sources
+PASS dogfood plugin output == CLI output (byte-identical)
+INFO plugin M3_MOP_ATOMIZE files=13 atoms=326 KNOWN_PATTERN=107 UNPROVEN_LEAF=0 UNKNOWN_PATTERN=219 METHOD_15=4 LOOP=6 CONST_HOIST=24 registered=0
+PASS pattern registry schema M3-PATTERN/1
+PASS pattern registry at fixed point for m3/mop sources (register appends 0)
+PASS pattern plan over dogfood atomize
+INFO plan rows=239
+PASS dogfood chain (dry, no proposals) over m3/mop
+PASS discriminator mutants killed
+  PASS discriminator analyze-time-projection: M3AtomizeContract killed (plugin and CLI byte-identical ATOMS.tsv)
+  PASS discriminator donor-13966-api-rule: M3RefactorGateContract killed (exposed contract drift refused: [    protected int f(int x) { return x + 1; }])
+  PASS discriminator total-count-ratchet: M3RefactorGateContract killed (per-kind ratchet refuses METHOD_15 growth: METHOD_15=0->1,LOOP=1->0,CONST_HOIST=0->0 fixedPoint=PASS)
+  PASS discriminator hold-admitted: M3RefactorGateContract killed (no second application -> HOLD, never ADMITTED)
+  PASS discriminator candidate-into-proven-memory: M3RefactorGateContract killed (candidate row reached the proven memory)
+  PASS discriminator no-registry-persistence: M3PatternContract killed (registered shape persists across runs)
+  PASS discriminator partial-promotion: M3MopChainContract killed (a refusal blocks all writes)
+M3_MOP_VERIFY PASS

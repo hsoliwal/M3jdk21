@@ -1,0 +1,11 @@
+command	javac --release 21 -proc:none -d <tmp> <origin/master 669a949d192 m3/mop/src/main/java/com/m3/mop/M3RecipeMemory.java blob 49315ca98323dab451b52c7c486ec3e2417bbef7> m3/mop/src/test/java/com/m3/mop/*.java
+exit	1
+errors	100
+error_kind	80	cannot find symbol
+error_kind	8	package M3MopChain does not exist
+error_kind	3	package com.m3.mop.M3RefactorGate does not exist
+error_kind	3	package M3AtomizeRun does not exist
+error_kind	2	package com.m3.mop.M3PatternRegistry does not exist
+error_kind	2	package M3Atomizer does not exist
+error_kind	1	package M3RefactorGate does not exist
+error_kind	1	package M3PatternPlan does not exist
