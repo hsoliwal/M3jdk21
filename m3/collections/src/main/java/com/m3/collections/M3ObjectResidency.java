@@ -37,6 +37,11 @@ public final class M3ObjectResidency<T> {
     public enum State { ABSENT, CREATING, RESIDENT, SWAPPING, SWAPPED, RESTORING }
 
     @FunctionalInterface public interface Factory<T> { T create(int slot) throws Exception; }
+    /** Fully reset a private projection shell using the canonical destination-slot state. */
+    @FunctionalInterface public interface Reinitializer<T> {
+        void reinitialize(T value, int destinationSlot) throws Exception;
+    }
+
     public interface Codec<T> {
         byte[] encode(T value) throws IOException;
         T decode(int slot, byte[] bytes) throws IOException;
@@ -292,6 +297,82 @@ public final class M3ObjectResidency<T> {
         }
         evict(slot);
         return stateAt(slot) == State.ABSENT;
+    }
+
+
+    /**
+     * Rebind a still-owned idle shell before retirement would make it GC-eligible.
+     * No GC-owned object is recovered or resurrected. The caller must independently
+     * prove no Java/JNI/monitor/reflection/async alias can observe its physical identity.
+     * A reset must discard all former per-slot mutable data. False has no side effects.
+     */
+    public synchronized boolean rebindUnborrowedProjection(int from, int to, long estimatedBytes,
+            Reinitializer<? super T> reset) {
+        checkSlot(from);
+        checkSlot(to);
+        Objects.requireNonNull(reset, "reset");
+        if (estimatedBytes < 0) throw new IllegalArgumentException("negative estimatedBytes");
+        if (from == to
+                || (flags & (LAZY_CREATE | RECREATE | STRICT_NO_ESCAPE))
+                        != (LAZY_CREATE | RECREATE | STRICT_NO_ESCAPE)
+                || (flags & (SWAP_SECONDARY | OBSERVE_ONLY)) != 0
+                || stateAt(from) != State.RESIDENT || stateAt(to) != State.ABSENT
+                || callerInstalled[from] || callerInstalled[to]
+                || (states[from] & SLOT_PINNED) != 0 || (states[to] & SLOT_PINNED) != 0
+                || active[from] != 0 || borrowers[from] != 0
+                || active[to] != 0 || borrowers[to] != 0) return false;
+
+        long oldBytes = weights[from];
+        long others = residentBytes - oldBytes;
+        long budget = targetBudget(HeapSnapshot.current());
+        if (estimatedBytes > budget || others > budget - estimatedBytes) return false;
+
+        @SuppressWarnings("unchecked") T projection = (T) resident[from];
+        active[from] = 1;
+        setState(from, State.CREATING);
+        setState(to, State.CREATING);
+        try {
+            reset.reinitialize(projection, to);
+            // The callback may reenter unrelated slots or change memory pressure.
+            others = residentBytes - oldBytes;
+            budget = targetBudget(HeapSnapshot.current());
+            if (estimatedBytes > budget || others > budget - estimatedBytes) {
+                throw new BudgetExceededException(estimatedBytes, others, budget);
+            }
+        } catch (Exception failure) {
+            discardFailedRebind(from, to);
+            if (failure instanceof RuntimeException runtime) throw runtime;
+            throw new ResidencyException("projection reset failed for slot " + to, failure);
+        } catch (Error failure) {
+            discardFailedRebind(from, to);
+            throw failure;
+        }
+
+        active[from] = 0;
+        resident[from] = null;
+        unlinkLru(from);
+        residentBytes -= oldBytes;
+        weights[from] = 0L;
+        setState(from, State.ABSENT);
+        resident[to] = projection;
+        weights[to] = estimatedBytes;
+        residentBytes += estimatedBytes;
+        setState(to, State.RESIDENT);
+        touch(to);
+        decision(to, State.ABSENT, State.RESIDENT, "rebound factory-owned projection before GC");
+        return true;
+    }
+
+    /** Reset may have partially mutated its input: discard rather than expose it. */
+    private void discardFailedRebind(int from, int to) {
+        active[from] = 0;
+        resident[from] = null;
+        unlinkLru(from);
+        residentBytes -= weights[from];
+        weights[from] = 0L;
+        setState(from, State.ABSENT);
+        setState(to, State.ABSENT);
+        decision(from, State.RESIDENT, State.ABSENT, "failed reset, discard tainted shell");
     }
 
     /** Pin a pre-existing value supplied by the parent; no lazy factory is invoked. */
