@@ -133,6 +133,17 @@ public final class M3BuildImpactPlan {
     public int size() { return impactedSlots.length; }
     public boolean isEmpty() { return impactedSlots.length == 0; }
     public boolean requiresConservativeBuild() { return fullRebuild; }
+    /**
+     * Fail closed when a consumer attempts to pair a build plan with another
+     * ledger generation. Equal slot dimensions and change masks do not prove
+     * that two snapshots contain the same input bytes or dependency context.
+     * A caller must recompute this plan for the exact admitted snapshot.
+     */
+    void requireSnapshot(M3FileDeltaLedger.Snapshot snapshot) {
+        if (snapshot != sourceSnapshot) {
+            throw new IllegalArgumentException("file impact plan belongs to different snapshot instance");
+        }
+    }
     public int reasonAt(int physicalSlot) {
         return Byte.toUnsignedInt(reasons[Objects.checkIndex(physicalSlot, reasons.length)]);
     }
