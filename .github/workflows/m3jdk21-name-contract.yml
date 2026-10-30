@@ -8,6 +8,7 @@ on:
       - 'm3/docs/name-mapping.schema.json'
       - 'm3/compatibility/check_public_names.py'
       - 'm3/arrays/src/main/java/**'
+      - 'm3/arrays/src/main/native/**'
       - 'src/java.base/share/classes/java/util/Arrays.java'
       - 'src/java.base/share/classes/module-info.java'
       - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
@@ -35,8 +36,7 @@ jobs:
             m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
             m3/tooling/name-contract/**
             m3/compatibility/check_public_names.py
-            m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java
-            m3/arrays/src/main/java/module-info.java
+            m3/arrays/src/main/**
             src/java.base/share/classes/java/util/Arrays.java
             src/java.base/share/classes/module-info.java
             src/java.base/share/classes/java/lang/Class.java
