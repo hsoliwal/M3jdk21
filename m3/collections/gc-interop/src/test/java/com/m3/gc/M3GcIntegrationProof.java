@@ -30,6 +30,7 @@ public final class M3GcIntegrationProof {
 
     public static void main(String[] args) throws Exception {
         compilerAdmission();
+        compilerLifetimeCandidates();
         notificationAndSafePoint();
         reentrancyAndFailure();
         parallelPoll();
@@ -52,6 +53,43 @@ public final class M3GcIntegrationProof {
                 == M3GcUsePlan.Mode.COOPERATIVE_LEASE, "shared owner uses existing lease");
         check(M3GcUsePlan.classify(new M3GcUsePlan.Facts(true, true, false, false, false, false))
                 == M3GcUsePlan.Mode.PRESERVE_JVM_REACHABILITY, "unreconstructible owner refuses");
+    }
+
+
+    private static void compilerLifetimeCandidates() {
+        int all = M3GcUsePlan.ALL_LIFETIME_FACTS;
+        int direct = all & ~M3GcUsePlan.ELISION_EFFECTS_PRESERVED;
+        check(M3GcUsePlan.lifetimeCandidate(all, all)
+                == M3GcUsePlan.LifetimeCandidate.SCALAR_REPLACEMENT_CANDIDATE,
+                "if proven, avoid allocation before considering object reuse");
+        check(M3GcUsePlan.lifetimeCandidate(all, direct)
+                == M3GcUsePlan.LifetimeCandidate.DIRECT_PARENT_REBIND_CANDIDATE,
+                "fully proved direct handoff is a candidate only");
+        for (int bit = 1; bit <= M3GcUsePlan.BASE_LIFETIME_PROOF; bit <<= 1) {
+            check(M3GcUsePlan.lifetimeCandidate(all, direct & ~bit)
+                    == M3GcUsePlan.LifetimeCandidate.PRESERVE_JVM_REACHABILITY,
+                    "missing CFG/source/escape/identity proof refuses: " + bit);
+        }
+        for (int bit = M3GcUsePlan.EXCLUSIVE_OWNER;
+                bit <= M3GcUsePlan.COMPATIBLE_PROJECTION; bit <<= 1) {
+            check(M3GcUsePlan.lifetimeCandidate(all, direct & ~bit)
+                    == M3GcUsePlan.LifetimeCandidate.PRESERVE_JVM_REACHABILITY,
+                    "missing ownership/reset/type proof refuses: " + bit);
+        }
+        check(M3GcUsePlan.lifetimeCandidate(0, 0)
+                == M3GcUsePlan.LifetimeCandidate.PRESERVE_JVM_REACHABILITY,
+                "unobserved allocation retains ordinary GC");
+        check(M3GcUsePlan.lifetimeCandidate(direct, direct)
+                == M3GcUsePlan.LifetimeCandidate.DIRECT_PARENT_REBIND_CANDIDATE,
+                "unused optional facts do not invalidate exact direct handoff");
+        boolean refused = false;
+        try { M3GcUsePlan.lifetimeCandidate(0, direct); }
+        catch (IllegalArgumentException expected) { refused = true; }
+        check(refused, "a proved bit without a valid source observation is malformed");
+        refused = false;
+        try { M3GcUsePlan.lifetimeCandidate(1 << 25, 0); }
+        catch (IllegalArgumentException expected) { refused = true; }
+        check(refused, "foreign signal coordinates cannot enter a compiler plan");
     }
 
     private static void event(String type) {
