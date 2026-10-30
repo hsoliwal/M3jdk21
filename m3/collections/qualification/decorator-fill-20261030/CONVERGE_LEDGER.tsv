@@ -66,8 +66,8 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.Synchron
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.TransformedBag	com.m3.collections.apache.M3TransformedBag	GAP	org.apache.commons.collections4.bag.TransformedBag	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.TransformedSortedBag	com.m3.collections.apache.M3TransformedSortedBag	GAP	org.apache.commons.collections4.bag.TransformedSortedBag	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.TreeBag	com.m3.collections.apache.M3TreeBag	GAP	org.apache.commons.collections4.bag.TreeBag	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.UnmodifiableBag	com.m3.collections.apache.M3UnmodifiableBag	ABSORBED	org.apache.commons.collections4.bag.UnmodifiableBag	DONE decorator-fill-20261030
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.UnmodifiableSortedBag	com.m3.collections.apache.M3UnmodifiableSortedBag	ABSORBED	org.apache.commons.collections4.bag.UnmodifiableSortedBag	DONE decorator-fill-20261030
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.UnmodifiableBag	com.m3.collections.apache.M3UnmodifiableBag	ABSORBED	org.apache.commons.collections4.bag.UnmodifiableBag	DONE #2169
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.UnmodifiableSortedBag	com.m3.collections.apache.M3UnmodifiableSortedBag	ABSORBED	org.apache.commons.collections4.bag.UnmodifiableSortedBag	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bidimap.AbstractBidiMapDecorator	-	GAP	org.apache.commons.collections4.bidimap.AbstractBidiMapDecorator	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bidimap.AbstractDualBidiMap	-	GAP	org.apache.commons.collections4.bidimap.AbstractDualBidiMap	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bidimap.AbstractOrderedBidiMapDecorator	-	GAP	org.apache.commons.collections4.bidimap.AbstractOrderedBidiMapDecorator	NO_ROW
@@ -108,7 +108,7 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.P
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.SynchronizedCollection	com.m3.collections.apache.M3SynchronizedCollection	GAP	org.apache.commons.collections4.collection.SynchronizedCollection	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.TransformedCollection	com.m3.collections.apache.M3TransformedCollection	GAP	org.apache.commons.collections4.collection.TransformedCollection	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.UnmodifiableBoundedCollection	com.m3.collections.apache.M3UnmodifiableBoundedCollection	GAP	org.apache.commons.collections4.collection.UnmodifiableBoundedCollection	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.UnmodifiableCollection	com.m3.collections.apache.M3UnmodifiableCollection	ABSORBED	org.apache.commons.collections4.collection.UnmodifiableCollection	DONE decorator-fill-20261030
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.UnmodifiableCollection	com.m3.collections.apache.M3UnmodifiableCollection	ABSORBED	org.apache.commons.collections4.collection.UnmodifiableCollection	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.comparators.BooleanComparator	-	GAP	org.apache.commons.collections4.comparators.BooleanComparator	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.comparators.ComparableComparator	-	GAP	org.apache.commons.collections4.comparators.ComparableComparator	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.comparators.ComparatorChain	-	GAP	org.apache.commons.collections4.comparators.ComparatorChain	NO_ROW
@@ -239,7 +239,7 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.list.Predica
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.list.SetUniqueList	com.m3.collections.apache.M3SetUniqueList	GAP	org.apache.commons.collections4.list.SetUniqueList	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.list.TransformedList	com.m3.collections.apache.M3TransformedList	GAP	org.apache.commons.collections4.list.TransformedList	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.list.TreeList	com.m3.collections.apache.M3TreeList	GAP	org.apache.commons.collections4.list.TreeList	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.list.UnmodifiableList	com.m3.collections.apache.M3UnmodifiableList	ABSORBED	org.apache.commons.collections4.list.UnmodifiableList	DONE decorator-fill-20261030
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.list.UnmodifiableList	com.m3.collections.apache.M3UnmodifiableList	ABSORBED	org.apache.commons.collections4.list.UnmodifiableList	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.map.AbstractHashedMap	com.m3.collections.apache.M3AbstractHashedMap	GAP	org.apache.commons.collections4.map.AbstractHashedMap	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.map.AbstractInputCheckedMapDecorator	-	GAP	org.apache.commons.collections4.map.AbstractInputCheckedMapDecorator	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.map.AbstractIterableMap	-	GAP	org.apache.commons.collections4.map.AbstractIterableMap	NO_ROW
@@ -312,7 +312,7 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.Circul
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.PredicatedQueue	com.m3.collections.apache.M3PredicatedQueue	GAP	org.apache.commons.collections4.queue.PredicatedQueue	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.SynchronizedQueue	com.m3.collections.apache.M3SynchronizedQueue	GAP	org.apache.commons.collections4.queue.SynchronizedQueue	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.TransformedQueue	com.m3.collections.apache.M3TransformedQueue	GAP	org.apache.commons.collections4.queue.TransformedQueue	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.UnmodifiableQueue	com.m3.collections.apache.M3UnmodifiableQueue	ABSORBED	org.apache.commons.collections4.queue.UnmodifiableQueue	DONE decorator-fill-20261030
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.UnmodifiableQueue	com.m3.collections.apache.M3UnmodifiableQueue	ABSORBED	org.apache.commons.collections4.queue.UnmodifiableQueue	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.sequence.CommandVisitor	-	GAP	org.apache.commons.collections4.sequence.CommandVisitor	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.sequence.DeleteCommand	-	GAP	org.apache.commons.collections4.sequence.DeleteCommand	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.sequence.EditCommand	-	GAP	org.apache.commons.collections4.sequence.EditCommand	NO_ROW
@@ -335,9 +335,9 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.Predicat
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.TransformedNavigableSet	com.m3.collections.apache.M3TransformedNavigableSet	GAP	org.apache.commons.collections4.set.TransformedNavigableSet	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.TransformedSet	com.m3.collections.apache.M3TransformedSet	GAP	org.apache.commons.collections4.set.TransformedSet	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.TransformedSortedSet	com.m3.collections.apache.M3TransformedSortedSet	GAP	org.apache.commons.collections4.set.TransformedSortedSet	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.UnmodifiableNavigableSet	com.m3.collections.apache.M3UnmodifiableNavigableSet	ABSORBED	org.apache.commons.collections4.set.UnmodifiableNavigableSet	DONE decorator-fill-20261030
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.UnmodifiableNavigableSet	com.m3.collections.apache.M3UnmodifiableNavigableSet	ABSORBED	org.apache.commons.collections4.set.UnmodifiableNavigableSet	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.UnmodifiableSet	com.m3.collections.apache.M3ApacheUnmodifiableSet	ABSORBED	org.apache.commons.collections4.set.UnmodifiableSet	DONE master
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.UnmodifiableSortedSet	com.m3.collections.apache.M3UnmodifiableSortedSet	ABSORBED	org.apache.commons.collections4.set.UnmodifiableSortedSet	DONE decorator-fill-20261030
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.set.UnmodifiableSortedSet	com.m3.collections.apache.M3UnmodifiableSortedSet	ABSORBED	org.apache.commons.collections4.set.UnmodifiableSortedSet	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.splitmap.AbstractIterableGetMapDecorator	-	GAP	org.apache.commons.collections4.splitmap.AbstractIterableGetMapDecorator	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.splitmap.TransformedSplitMap	-	GAP	org.apache.commons.collections4.splitmap.TransformedSplitMap	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.trie.AbstractBitwiseTrie	-	GAP	org.apache.commons.collections4.trie.AbstractBitwiseTrie	NO_ROW
