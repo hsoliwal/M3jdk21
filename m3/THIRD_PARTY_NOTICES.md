@@ -72,3 +72,16 @@ and `org.jetbrains:annotations` coordinates live only in sealed task packets who
 content-addressed receipts; they are left untouched and recorded here instead. New task crates
 should declare only `rewrite-*`, `junit-jupiter` and, when a logger binding is needed for a proof,
 `slf4j-simple` in test scope.
+
+## 5. Version-duplicate vendored donors (sanitize leaf 2, 2026-10-30, master `1a02ed1ff46c`)
+
+Ten artifacts are vendored in two or three versions under `m3/vendor/third_party` (asm 9.6/9.10.1, commons-io
+2.15.1/2.18.0, commons-lang3 3.14.0/3.17.0, jackson-annotations 2.15.3/2.16.1/2.19.2, jspecify 0.3.0/1.0.1,
+junit-jupiter-api and -params 5.10.2/5.11.4, junit-platform-engine and -launcher 1.10.2/1.11.4, slf4j-api
+1.7.36/2.0.9/2.0.12). The collapse to one version each is recorded in
+`m3/qualification/sanitize-20261030/VERSION_DUPLICATES.tsv` (proposed KEEP/DROP per version, every reference found)
+and `REPOINT_WORKLIST.tsv` (the pom, workflow and manifest lines that must move to the kept version first).
+All twelve drop candidates are HELD: each is pinned by at least one sibling vendored module pom
+(`<version>x.y.z-m3-source-1</version>`), an owner pom, a workflow or a JMOD manifest. No directory was removed and
+no notice row changes in this leaf; every version keeps its own LICENSE/NOTICE under its directory until the repoint
+worklist has been applied and gated.
