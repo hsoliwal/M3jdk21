@@ -410,19 +410,29 @@ public final class M3ObjectResidency<T> {
         if ((flags & LAZY_CREATE) == 0 && before == State.ABSENT) {
             throw new IllegalStateException("lazy creation is disabled for absent slot " + slot);
         }
-        admit(estimatedBytes, slot);
+        long target = admit(estimatedBytes, slot);
         try {
             T value;
-            if (before == State.SWAPPED) {
-                setState(slot, State.RESTORING);
-                byte[] bytes = spill.read(slot);
-                value = codec.decode(slot, bytes);
-                Objects.requireNonNull(value, "decoded projection");
-                spill.delete(slot);
-            } else {
-                if (factory == null) throw new IllegalStateException("no factory for absent slot");
-                setState(slot, State.CREATING);
-                value = Objects.requireNonNull(factory.create(slot), "created projection");
+            try {
+                if (before == State.SWAPPED) {
+                    setState(slot, State.RESTORING);
+                    byte[] bytes = spill.read(slot);
+                    value = codec.decode(slot, bytes);
+                    Objects.requireNonNull(value, "decoded projection");
+                } else {
+                    if (factory == null) throw new IllegalStateException("no factory for absent slot");
+                    setState(slot, State.CREATING);
+                    value = Objects.requireNonNull(factory.create(slot), "created projection");
+                }
+                // Factory/read/decode callbacks may consume the originally admitted capacity.
+                if ((flags & OBSERVE_ONLY) == 0 && wouldExceed(estimatedBytes, target)) {
+                    throw new BudgetExceededException(estimatedBytes, residentBytes, target);
+                }
+                if (before == State.SWAPPED) spill.delete(slot);
+            } catch (Error failure) {
+                // Callbacks have not published a resident value or changed its accounting.
+                setState(slot, before);
+                throw failure;
             }
             resident[slot] = value;
             weights[slot] = estimatedBytes;
@@ -443,18 +453,27 @@ public final class M3ObjectResidency<T> {
         }
     }
 
-    private void admit(long incomingBytes, int requestedSlot) {
-        long target = targetBudget();
-        while (wouldExceed(incomingBytes, target)) {
-            if ((flags & OBSERVE_ONLY) != 0) break;
-            int victim = leastRecentlyUsed(requestedSlot);
-            if (victim < 0) {
+    private long admit(long incomingBytes, int requestedSlot) {
+        // Eviction invokes caller codecs/stores. Claim this request before their callbacks.
+        State before = stateAt(requestedSlot);
+        setState(requestedSlot, before == State.SWAPPED ? State.RESTORING : State.CREATING);
+        try {
+            long target = targetBudget();
+            while (wouldExceed(incomingBytes, target)) {
+                if ((flags & OBSERVE_ONLY) != 0) break;
+                int victim = leastRecentlyUsed(requestedSlot);
+                if (victim < 0) {
+                    throw new BudgetExceededException(incomingBytes, residentBytes, target);
+                }
+                evict(victim);
+            }
+            if (wouldExceed(incomingBytes, target) && (flags & OBSERVE_ONLY) == 0) {
                 throw new BudgetExceededException(incomingBytes, residentBytes, target);
             }
-            evict(victim);
-        }
-        if (wouldExceed(incomingBytes, target) && (flags & OBSERVE_ONLY) == 0) {
-            throw new BudgetExceededException(incomingBytes, residentBytes, target);
+            return target;
+        } finally {
+            // Publication remains with the caller; admission restores even on Error.
+            setState(requestedSlot, before);
         }
     }
 
@@ -527,7 +546,8 @@ public final class M3ObjectResidency<T> {
         for (int encoded = lruFirstEncoded; encoded != 0; encoded = lruNextEncoded[encoded - 1]) {
             int slot = encoded - 1;
             if (slot != excluded && resident[slot] != null && active[slot] == 0 && borrowers[slot] == 0
-                    && (Byte.toUnsignedInt(states[slot]) & SLOT_PINNED) == 0) return slot;
+                    && (Byte.toUnsignedInt(states[slot]) & SLOT_PINNED) == 0
+                    && stateAt(slot) == State.RESIDENT) return slot;
         }
         return -1;
     }
@@ -538,7 +558,8 @@ public final class M3ObjectResidency<T> {
         long oldest = Long.MAX_VALUE;
         for (int i = 0; i < resident.length; i++) {
             if (i == excluded || resident[i] == null || active[i] != 0 || borrowers[i] != 0
-                    || (Byte.toUnsignedInt(states[i]) & SLOT_PINNED) != 0) continue;
+                    || (Byte.toUnsignedInt(states[i]) & SLOT_PINNED) != 0
+                    || stateAt(i) != State.RESIDENT) continue;
             if ((flags & (SWAP_SECONDARY | RECREATE)) == 0) continue;
             if (touched[i] < oldest) { oldest = touched[i]; victim = i; }
         }
@@ -553,8 +574,14 @@ public final class M3ObjectResidency<T> {
             setState(slot, State.SWAPPING);
             try {
                 @SuppressWarnings("unchecked") T typed = (T) value;
-                byte[] snapshot = Objects.requireNonNull(codec.encode(typed), "encoded snapshot");
-                spill.write(slot, snapshot);
+                try {
+                    byte[] snapshot = Objects.requireNonNull(codec.encode(typed), "encoded snapshot");
+                    spill.write(slot, snapshot);
+                } catch (Error failure) {
+                    // Encode/write failed before detachment: retain the original resident.
+                    setState(slot, before);
+                    throw failure;
+                }
                 resident[slot] = null;
                 unlinkLru(slot);
                 residentBytes -= weights[slot];
