@@ -1,0 +1,6 @@
+path	git_blob	status	pr	note
+m3/ports/swing-viewport/qualification/column-header-20261029.json	0f1a5b8e36a80983b7b1ab3027f124a4a869ab60	added	2131	PR version, not live; the git blob id is its content address
+m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3DesktopViewportAdapters.java	40f491af6f3a37dfda6d10b22cbddfe357cb156c	modified	2131	PR version, not live; the git blob id is its content address
+m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportColumnsTest.java	5f17541aba80e35e56aca02090888870c98720e7	modified	2131	PR version, not live; the git blob id is its content address
+m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportHeaderTest.java	95e259a48078a7cfeae3123b8ae7f63a91138c10	added	2131	PR version, not live; the git blob id is its content address
+m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3SwingXHeaderProof.java	1fe7fe5b908d4f35ff85a4acfabb54a11872a9fc	added	2131	PR version, not live; the git blob id is its content address
