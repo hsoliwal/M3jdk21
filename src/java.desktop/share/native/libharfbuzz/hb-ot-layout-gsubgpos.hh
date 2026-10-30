@@ -143,9 +143,12 @@ struct hb_closure_context_t :
     return active_glyphs_stack.tail ();
   }
 
-  hb_set_t& push_cur_active_glyphs ()
+  hb_set_t* push_cur_active_glyphs ()
   {
-    return *active_glyphs_stack.push ();
+    hb_set_t *s = active_glyphs_stack.push ();
+    if (unlikely (active_glyphs_stack.in_error ()))
+      return nullptr;
+    return s;
   }
 
   bool pop_cur_done_glyphs ()
@@ -394,290 +397,311 @@ struct hb_collect_coverage_context_t :
   set_t *set;
 };
 
+struct matcher_t
+{
+  typedef bool (*match_func_t) (hb_glyph_info_t &info, unsigned value, const void *data);
+
+  template <typename context_t>
+  void init (const context_t *c, bool context_match = false)
+  {
+    set_match_func (nullptr, nullptr);
+    lookup_props = c->lookup_props;
+    /* Ignore ZWNJ if we are matching GPOS, or matching GSUB context and asked to. */
+    ignore_zwnj = c->table_index == 1 || (context_match && c->auto_zwnj);
+    /* Ignore ZWJ if we are matching context, or asked to. */
+    ignore_zwj = context_match || c->auto_zwj;
+    /* Ignore hidden glyphs (like CGJ) during GPOS. */
+    ignore_hidden = c->table_index == 1;
+    mask = context_match ? -1 : c->lookup_mask;
+    /* Per syllable matching is only for GSUB. */
+    per_syllable = c->table_index == 0 && c->per_syllable;
+    syllable = 0;
+  }
+
+  void set_match_func (match_func_t match_func_,
+                       const void *match_data_)
+  { match_func = match_func_; match_data = match_data_; }
+
+  enum may_match_t {
+    MATCH_NO,
+    MATCH_YES,
+    MATCH_MAYBE
+  };
+
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  may_match_t may_match (hb_glyph_info_t &info,
+                         hb_codepoint_t glyph_data) const
+  {
+    if (!(info.mask & mask) ||
+        (per_syllable && syllable && syllable != info.syllable ()))
+      return MATCH_NO;
+
+    if (match_func)
+      return match_func (info, glyph_data, match_data) ? MATCH_YES : MATCH_NO;
+
+    return MATCH_MAYBE;
+  }
+
+  enum may_skip_t {
+    SKIP_NO,
+    SKIP_YES,
+    SKIP_MAYBE
+  };
+
+  template <typename context_t>
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  may_skip_t may_skip (const context_t *c,
+                       const hb_glyph_info_t &info) const
+  {
+    if (!c->check_glyph_property (&info, lookup_props))
+      return SKIP_YES;
+
+    if (unlikely (_hb_glyph_info_is_default_ignorable (&info) &&
+                  (ignore_zwnj || !_hb_glyph_info_is_zwnj (&info)) &&
+                  (ignore_zwj || !_hb_glyph_info_is_zwj (&info)) &&
+                  (ignore_hidden || !_hb_glyph_info_is_hidden (&info))))
+      return SKIP_MAYBE;
+
+    return SKIP_NO;
+  }
+
+  public:
+  unsigned int lookup_props = 0;
+  hb_mask_t mask = -1;
+  bool ignore_zwnj = false;
+  bool ignore_zwj = false;
+  bool ignore_hidden = false;
+  bool per_syllable = false;
+  uint8_t syllable = 0;
+  match_func_t match_func = nullptr;
+  const void *match_data = nullptr;
+};
+
+template <typename context_t>
+struct skipping_iterator_t
+{
+  void init (context_t *c_, bool context_match = false)
+  {
+    c = c_;
+    end = c->buffer->len;
+    match_glyph_data16 = nullptr;
+#ifndef HB_NO_BEYOND_64K
+    match_glyph_data24 = nullptr;
+#endif
+    matcher.init (c, context_match);
+  }
+  void set_lookup_props (unsigned int lookup_props)
+  {
+    matcher.lookup_props = lookup_props;
+  }
+  void set_match_func (matcher_t::match_func_t match_func_,
+                       const void *match_data_)
+  {
+    matcher.set_match_func (match_func_, match_data_);
+  }
+  void set_glyph_data (const HBUINT16 glyph_data[])
+  {
+    match_glyph_data16 = glyph_data;
+#ifndef HB_NO_BEYOND_64K
+    match_glyph_data24 = nullptr;
+#endif
+  }
+#ifndef HB_NO_BEYOND_64K
+  void set_glyph_data (const HBUINT24 glyph_data[])
+  {
+    match_glyph_data16 = nullptr;
+    match_glyph_data24 = glyph_data;
+  }
+#endif
+
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  void reset (unsigned int start_index_)
+  {
+    // For GSUB forward iterator
+    idx = start_index_;
+    end = c->buffer->len;
+    matcher.syllable = c->buffer->cur().syllable();
+  }
+  void reset_back (unsigned int start_index_, bool from_out_buffer = false)
+  {
+    // For GSUB backward iterator
+    idx = start_index_;
+    matcher.syllable = c->buffer->cur().syllable();
+  }
+
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  void reset_fast (unsigned int start_index_)
+  {
+    // Doesn't set end or syllable. Used by GPOS which doesn't care / change.
+    idx = start_index_;
+  }
+
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  matcher_t::may_skip_t may_skip (const hb_glyph_info_t &info) const
+  { return matcher.may_skip (c, info); }
+
+  enum match_t {
+    MATCH,
+    NOT_MATCH,
+    SKIP
+  };
+
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  match_t match (hb_glyph_info_t &info)
+  {
+    matcher_t::may_skip_t skip = matcher.may_skip (c, info);
+    if (unlikely (skip == matcher_t::SKIP_YES))
+      return SKIP;
+
+    matcher_t::may_match_t match = matcher.may_match (info, get_glyph_data ());
+    if (match == matcher_t::MATCH_YES ||
+        (match == matcher_t::MATCH_MAYBE &&
+         skip == matcher_t::SKIP_NO))
+      return MATCH;
+
+    if (skip == matcher_t::SKIP_NO)
+      return NOT_MATCH;
+
+    return SKIP;
+  }
+
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  bool next (unsigned *unsafe_to = nullptr)
+  {
+    auto *info = c->buffer->info;
+    const signed stop = (signed) end - 1;
+    while ((signed) idx < stop)
+    {
+      idx++;
+      switch (match (info[idx]))
+      {
+        case MATCH:
+        {
+          advance_glyph_data ();
+          return true;
+        }
+        case NOT_MATCH:
+        {
+          if (unsafe_to)
+            *unsafe_to = idx + 1;
+          return false;
+        }
+        case SKIP:
+          continue;
+      }
+    }
+    if (unsafe_to)
+      *unsafe_to = end;
+    return false;
+  }
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  bool prev (unsigned *unsafe_from = nullptr)
+  {
+    auto *out_info = c->buffer->out_info;
+    const unsigned stop = 0;
+    while (idx > stop)
+    {
+      idx--;
+      switch (match (out_info[idx]))
+      {
+        case MATCH:
+        {
+          advance_glyph_data ();
+          return true;
+        }
+        case NOT_MATCH:
+        {
+          if (unsafe_from)
+            *unsafe_from = hb_max (1u, idx) - 1u;
+          return false;
+        }
+        case SKIP:
+          continue;
+      }
+    }
+    if (unsafe_from)
+      *unsafe_from = 0;
+    return false;
+  }
+
+  HB_ALWAYS_INLINE
+  hb_codepoint_t
+  get_glyph_data ()
+  {
+    if (match_glyph_data16) return *match_glyph_data16;
+#ifndef HB_NO_BEYOND_64K
+    else
+    if (match_glyph_data24) return *match_glyph_data24;
+#endif
+    return 0;
+  }
+  HB_ALWAYS_INLINE
+  void
+  advance_glyph_data ()
+  {
+    if (match_glyph_data16) match_glyph_data16++;
+#ifndef HB_NO_BEYOND_64K
+    else
+    if (match_glyph_data24) match_glyph_data24++;
+#endif
+  }
+
+  unsigned int idx;
+  protected:
+  context_t *c;
+  matcher_t matcher;
+  const HBUINT16 *match_glyph_data16;
+#ifndef HB_NO_BEYOND_64K
+  const HBUINT24 *match_glyph_data24;
+#endif
+
+  unsigned int end;
+};
+
 struct hb_ot_apply_context_t :
        hb_dispatch_context_t<hb_ot_apply_context_t, bool, HB_DEBUG_APPLY>
 {
-  struct matcher_t
-  {
-    matcher_t () :
-             lookup_props (0),
-             mask (-1),
-             ignore_zwnj (false),
-             ignore_zwj (false),
-             per_syllable (false),
-             syllable {0},
-             match_func (nullptr),
-             match_data (nullptr) {}
-
-    typedef bool (*match_func_t) (hb_glyph_info_t &info, unsigned value, const void *data);
-
-    void set_ignore_zwnj (bool ignore_zwnj_) { ignore_zwnj = ignore_zwnj_; }
-    void set_ignore_zwj (bool ignore_zwj_) { ignore_zwj = ignore_zwj_; }
-    void set_lookup_props (unsigned int lookup_props_) { lookup_props = lookup_props_; }
-    void set_mask (hb_mask_t mask_) { mask = mask_; }
-    void set_per_syllable (bool per_syllable_) { per_syllable = per_syllable_; }
-    void set_syllable (uint8_t syllable_)  { syllable = per_syllable ? syllable_ : 0; }
-    void set_match_func (match_func_t match_func_,
-                         const void *match_data_)
-    { match_func = match_func_; match_data = match_data_; }
-
-    enum may_match_t {
-      MATCH_NO,
-      MATCH_YES,
-      MATCH_MAYBE
-    };
-
-    may_match_t may_match (hb_glyph_info_t &info,
-                           hb_codepoint_t glyph_data) const
-    {
-      if (!(info.mask & mask) ||
-          (syllable && syllable != info.syllable ()))
-        return MATCH_NO;
-
-      if (match_func)
-        return match_func (info, glyph_data, match_data) ? MATCH_YES : MATCH_NO;
-
-      return MATCH_MAYBE;
-    }
-
-    enum may_skip_t {
-      SKIP_NO,
-      SKIP_YES,
-      SKIP_MAYBE
-    };
-
-    may_skip_t may_skip (const hb_ot_apply_context_t *c,
-                         const hb_glyph_info_t       &info) const
-    {
-      if (!c->check_glyph_property (&info, lookup_props))
-        return SKIP_YES;
-
-      if (unlikely (_hb_glyph_info_is_default_ignorable_and_not_hidden (&info) &&
-                    (ignore_zwnj || !_hb_glyph_info_is_zwnj (&info)) &&
-                    (ignore_zwj || !_hb_glyph_info_is_zwj (&info))))
-        return SKIP_MAYBE;
-
-      return SKIP_NO;
-    }
-
-    protected:
-    unsigned int lookup_props;
-    hb_mask_t mask;
-    bool ignore_zwnj;
-    bool ignore_zwj;
-    bool per_syllable;
-    uint8_t syllable;
-    match_func_t match_func;
-    const void *match_data;
-  };
-
-  struct skipping_iterator_t
-  {
-    void init (hb_ot_apply_context_t *c_, bool context_match = false)
-    {
-      c = c_;
-      match_glyph_data16 = nullptr;
-#ifndef HB_NO_BEYOND_64K
-      match_glyph_data24 = nullptr;
-#endif
-      matcher.set_match_func (nullptr, nullptr);
-      matcher.set_lookup_props (c->lookup_props);
-      /* Ignore ZWNJ if we are matching GPOS, or matching GSUB context and asked to. */
-      matcher.set_ignore_zwnj (c->table_index == 1 || (context_match && c->auto_zwnj));
-      /* Ignore ZWJ if we are matching context, or asked to. */
-      matcher.set_ignore_zwj  (context_match || c->auto_zwj);
-      matcher.set_mask (context_match ? -1 : c->lookup_mask);
-      /* Per syllable matching is only for GSUB. */
-      matcher.set_per_syllable (c->table_index == 0 && c->per_syllable);
-    }
-    void set_lookup_props (unsigned int lookup_props)
-    {
-      matcher.set_lookup_props (lookup_props);
-    }
-    void set_match_func (matcher_t::match_func_t match_func_,
-                         const void *match_data_)
-    {
-      matcher.set_match_func (match_func_, match_data_);
-    }
-    void set_glyph_data (const HBUINT16 glyph_data[])
-    {
-      match_glyph_data16 = glyph_data;
-#ifndef HB_NO_BEYOND_64K
-      match_glyph_data24 = nullptr;
-#endif
-    }
-#ifndef HB_NO_BEYOND_64K
-    void set_glyph_data (const HBUINT24 glyph_data[])
-    {
-      match_glyph_data16 = nullptr;
-      match_glyph_data24 = glyph_data;
-    }
-#endif
-
-    void reset (unsigned int start_index_,
-                unsigned int num_items_)
-    {
-      idx = start_index_;
-      num_items = num_items_;
-      end = c->buffer->len;
-      matcher.set_syllable (start_index_ == c->buffer->idx ? c->buffer->cur().syllable () : 0);
-    }
-
-    void reject ()
-    {
-      num_items++;
-      backup_glyph_data ();
-    }
-
-    matcher_t::may_skip_t
-    may_skip (const hb_glyph_info_t &info) const
-    { return matcher.may_skip (c, info); }
-
-    enum match_t {
-      MATCH,
-      NOT_MATCH,
-      SKIP
-    };
-
-    match_t match (hb_glyph_info_t &info)
-    {
-      matcher_t::may_skip_t skip = matcher.may_skip (c, info);
-      if (unlikely (skip == matcher_t::SKIP_YES))
-        return SKIP;
-
-      matcher_t::may_match_t match = matcher.may_match (info, get_glyph_data ());
-      if (match == matcher_t::MATCH_YES ||
-          (match == matcher_t::MATCH_MAYBE &&
-           skip == matcher_t::SKIP_NO))
-        return MATCH;
-
-      if (skip == matcher_t::SKIP_NO)
-        return NOT_MATCH;
-
-      return SKIP;
-  }
-
-    bool next (unsigned *unsafe_to = nullptr)
-    {
-      assert (num_items > 0);
-      /* The alternate condition below is faster at string boundaries,
-       * but produces subpar "unsafe-to-concat" values. */
-      signed stop = (signed) end - (signed) num_items;
-      if (c->buffer->flags & HB_BUFFER_FLAG_PRODUCE_UNSAFE_TO_CONCAT)
-        stop = (signed) end - 1;
-      while ((signed) idx < stop)
-      {
-        idx++;
-        switch (match (c->buffer->info[idx]))
-        {
-          case MATCH:
-          {
-            num_items--;
-            advance_glyph_data ();
-            return true;
-          }
-          case NOT_MATCH:
-          {
-            if (unsafe_to)
-              *unsafe_to = idx + 1;
-            return false;
-          }
-          case SKIP:
-            continue;
-        }
-      }
-      if (unsafe_to)
-        *unsafe_to = end;
-      return false;
-    }
-    bool prev (unsigned *unsafe_from = nullptr)
-    {
-      assert (num_items > 0);
-      /* The alternate condition below is faster at string boundaries,
-       * but produces subpar "unsafe-to-concat" values. */
-      unsigned stop = num_items - 1;
-      if (c->buffer->flags & HB_BUFFER_FLAG_PRODUCE_UNSAFE_TO_CONCAT)
-        stop = 1 - 1;
-      while (idx > stop)
-      {
-        idx--;
-        switch (match (c->buffer->out_info[idx]))
-        {
-          case MATCH:
-          {
-            num_items--;
-            advance_glyph_data ();
-            return true;
-          }
-          case NOT_MATCH:
-          {
-            if (unsafe_from)
-              *unsafe_from = hb_max (1u, idx) - 1u;
-            return false;
-          }
-          case SKIP:
-            continue;
-        }
-      }
-      if (unsafe_from)
-        *unsafe_from = 0;
-      return false;
-    }
-
-    hb_codepoint_t
-    get_glyph_data ()
-    {
-      if (match_glyph_data16) return *match_glyph_data16;
-#ifndef HB_NO_BEYOND_64K
-      else
-      if (match_glyph_data24) return *match_glyph_data24;
-#endif
-      return 0;
-    }
-    void
-    advance_glyph_data ()
-    {
-      if (match_glyph_data16) match_glyph_data16++;
-#ifndef HB_NO_BEYOND_64K
-      else
-      if (match_glyph_data24) match_glyph_data24++;
-#endif
-    }
-    void
-    backup_glyph_data ()
-    {
-      if (match_glyph_data16) match_glyph_data16--;
-#ifndef HB_NO_BEYOND_64K
-      else
-      if (match_glyph_data24) match_glyph_data24--;
-#endif
-    }
-
-    unsigned int idx;
-    protected:
-    hb_ot_apply_context_t *c;
-    matcher_t matcher;
-    const HBUINT16 *match_glyph_data16;
-#ifndef HB_NO_BEYOND_64K
-    const HBUINT24 *match_glyph_data24;
-#endif
-
-    unsigned int num_items;
-    unsigned int end;
-  };
-
-
   const char *get_name () { return "APPLY"; }
   typedef return_t (*recurse_func_t) (hb_ot_apply_context_t *c, unsigned int lookup_index);
+
   template <typename T>
-  return_t dispatch (const T &obj) { return obj.apply (this); }
+  static inline auto apply_ (const T &obj, hb_ot_apply_context_t *c, hb_priority<1>) HB_RETURN (return_t, obj.apply (c, nullptr) )
+  template <typename T>
+  static inline auto apply_ (const T &obj, hb_ot_apply_context_t *c, hb_priority<0>) HB_RETURN (return_t, obj.apply (c) )
+  template <typename T>
+  return_t dispatch (const T &obj) { return apply_(obj, this, hb_prioritize); }
+
   static return_t default_return_value () { return false; }
   bool stop_sublookup_iteration (return_t r) const { return r; }
   return_t recurse (unsigned int sub_lookup_index)
   {
-    if (unlikely (nesting_level_left == 0 || !recurse_func || buffer->max_ops-- <= 0))
+    assert (recurse_func);
+    if (unlikely (nesting_level_left == 0))
     {
-      buffer->shaping_failed = true;
+      buffer->successful = false;
+      return default_return_value ();
+    }
+
+    buffer->max_ops--;
+    if (unlikely (buffer->max_ops < 0))
+    {
+      buffer->successful = false;
       return default_return_value ();
     }
 
@@ -687,17 +711,19 @@ struct hb_ot_apply_context_t :
     return ret;
   }
 
-  skipping_iterator_t iter_input, iter_context;
+  skipping_iterator_t<hb_ot_apply_context_t> iter_input, iter_context;
 
   unsigned int table_index; /* GSUB/GPOS */
   hb_font_t *font;
   hb_face_t *face;
   hb_buffer_t *buffer;
+  hb_sanitize_context_t sanitizer;
   recurse_func_t recurse_func = nullptr;
   const GDEF &gdef;
-  const VariationStore &var_store;
-  VariationStore::cache_t *var_store_cache;
-  hb_set_digest_t digest;
+  const GDEF::accelerator_t &gdef_accel;
+  const hb_ot_layout_lookup_accelerator_t *lookup_accel = nullptr;
+  const ItemVariationStore &var_store;
+  hb_scalar_cache_t *var_store_cache;
 
   hb_direction_t direction;
   hb_mask_t lookup_mask = 1;
@@ -710,17 +736,26 @@ struct hb_ot_apply_context_t :
   bool auto_zwj = true;
   bool per_syllable = false;
   bool random = false;
-  uint32_t random_state = 1;
   unsigned new_syllables = (unsigned) -1;
 
   signed last_base = -1; // GPOS uses
   unsigned last_base_until = 0; // GPOS uses
 
+  hb_vector_t<uint32_t> match_positions;
+  uint32_t stack_match_positions[8];
+#ifndef HB_NO_BUFFER_MESSAGE
+  hb_buffer_t::changed_func_t orig_changed_func = nullptr;
+  void *orig_changed_data = nullptr;
+#endif
+
   hb_ot_apply_context_t (unsigned int table_index_,
                          hb_font_t *font_,
-                         hb_buffer_t *buffer_) :
+                         hb_buffer_t *buffer_,
+                         hb_blob_t *table_blob_,
+                         hb_scalar_cache_t *var_store_cache_ = nullptr) :
                         table_index (table_index_),
                         font (font_), face (font->face), buffer (buffer_),
+                        sanitizer (table_blob_),
                         gdef (
 #ifndef HB_NO_OT_LAYOUT
                               *face->table.GDEF->table
@@ -728,23 +763,43 @@ struct hb_ot_apply_context_t :
                               Null (GDEF)
 #endif
                              ),
-                        var_store (gdef.get_var_store ()),
-                        var_store_cache (
-#ifndef HB_NO_VAR
-                                         table_index == 1 && font->num_coords ? var_store.create_cache () : nullptr
+                        gdef_accel (
+#ifndef HB_NO_OT_LAYOUT
+                              *face->table.GDEF
 #else
-                                         nullptr
+                              Null (GDEF::accelerator_t)
 #endif
-                                        ),
-                        digest (buffer_->digest ()),
+                             ),
+                        var_store (gdef.get_var_store ()),
+                        var_store_cache (var_store_cache_),
                         direction (buffer_->props.direction),
                         has_glyph_classes (gdef.has_glyph_classes ())
-  { init_iters (); }
+  {
+    init_iters ();
+    match_positions.set_storage (stack_match_positions);
 
+#ifndef HB_NO_BUFFER_MESSAGE
+    if (buffer->messaging ())
+    {
+      assert (buffer->changed_func == nullptr ||
+              buffer->changed_func == buffer_changed_trampoline);
+      orig_changed_func = buffer->changed_func;
+      orig_changed_data = buffer->changed_data;
+      buffer->changed_func = buffer_changed_trampoline;
+      buffer->changed_data = this;
+    }
+#endif
+  }
   ~hb_ot_apply_context_t ()
   {
-#ifndef HB_NO_VAR
-    VariationStore::destroy_cache (var_store_cache);
+#ifndef HB_NO_BUFFER_MESSAGE
+    if (buffer->messaging ())
+    {
+      assert (buffer->changed_func == buffer_changed_trampoline);
+      assert (buffer->changed_data == this);
+      buffer->changed_func = orig_changed_func;
+      buffer->changed_data = orig_changed_data;
+    }
 #endif
   }
 
@@ -754,23 +809,41 @@ struct hb_ot_apply_context_t :
     iter_context.init (this, true);
   }
 
-  void set_lookup_mask (hb_mask_t mask) { lookup_mask = mask; last_base = -1; last_base_until = 0; init_iters (); }
-  void set_auto_zwj (bool auto_zwj_) { auto_zwj = auto_zwj_; init_iters (); }
-  void set_auto_zwnj (bool auto_zwnj_) { auto_zwnj = auto_zwnj_; init_iters (); }
-  void set_per_syllable (bool per_syllable_) { per_syllable = per_syllable_; init_iters (); }
+  void set_lookup_mask (hb_mask_t mask, bool init = true) { lookup_mask = mask; last_base = -1; last_base_until = 0; if (init) init_iters (); }
+  void set_auto_zwj (bool auto_zwj_, bool init = true) { auto_zwj = auto_zwj_; if (init) init_iters (); }
+  void set_auto_zwnj (bool auto_zwnj_, bool init = true) { auto_zwnj = auto_zwnj_; if (init) init_iters (); }
+  void set_per_syllable (bool per_syllable_, bool init = true) { per_syllable = per_syllable_; if (init) init_iters (); }
   void set_random (bool random_) { random = random_; }
   void set_recurse_func (recurse_func_t func) { recurse_func = func; }
   void set_lookup_index (unsigned int lookup_index_) { lookup_index = lookup_index_; }
-  void set_lookup_props (unsigned int lookup_props_) { lookup_props = lookup_props_; init_iters (); }
+  void set_lookup_props (unsigned int lookup_props_)
+  {
+    lookup_props = gdef_accel.sanitize_lookup_props (lookup_props_);
+    init_iters ();
+  }
 
   uint32_t random_number ()
   {
     /* http://www.cplusplus.com/reference/random/minstd_rand/ */
-    random_state = random_state * 48271 % 2147483647;
-    return random_state;
+    buffer->random_state = buffer->random_state * 48271 % 2147483647;
+    return buffer->random_state;
   }
 
-  bool match_properties_mark (hb_codepoint_t  glyph,
+  static void buffer_changed_trampoline (hb_buffer_t *buffer HB_UNUSED, void *user_data)
+  {
+    ((hb_ot_apply_context_t *) user_data)->buffer_changed ();
+  }
+  void buffer_changed ()
+  {
+    buffer->update_digest ();
+    if (likely (has_glyph_classes))
+      for (unsigned i = 0; i < buffer->len; i++)
+        _set_glyph_class_props (buffer->info[i]);
+  }
+
+  HB_ALWAYS_INLINE
+  HB_HOT
+  bool match_properties_mark (const hb_glyph_info_t *info,
                               unsigned int    glyph_props,
                               unsigned int    match_props) const
   {
@@ -778,7 +851,7 @@ struct hb_ot_apply_context_t :
      * match_props has the set index.
      */
     if (match_props & LookupFlag::UseMarkFilteringSet)
-      return gdef.mark_set_covers (match_props >> 16, glyph);
+      return gdef_accel.mark_set_covers (match_props >> 16, info->codepoint);
 
     /* The second byte of match_props has the meaning
      * "ignore marks of attachment type different than
@@ -790,10 +863,12 @@ struct hb_ot_apply_context_t :
     return true;
   }
 
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
   bool check_glyph_property (const hb_glyph_info_t *info,
-                             unsigned int  match_props) const
+                             unsigned match_props) const
   {
-    hb_codepoint_t glyph = info->codepoint;
     unsigned int glyph_props = _hb_glyph_info_get_glyph_props (info);
 
     /* Not covered, if, for example, glyph class is ligature and
@@ -802,8 +877,8 @@ struct hb_ot_apply_context_t :
     if (glyph_props & match_props & LookupFlag::IgnoreFlags)
       return false;
 
-    if (unlikely (glyph_props & HB_OT_LAYOUT_GLYPH_PROPS_MARK))
-      return match_properties_mark (glyph, glyph_props, match_props);
+    if (glyph_props & HB_OT_LAYOUT_GLYPH_PROPS_MARK)
+      return match_properties_mark (info, glyph_props, match_props);
 
     return true;
   }
@@ -813,7 +888,7 @@ struct hb_ot_apply_context_t :
                           bool ligature = false,
                           bool component = false)
   {
-    digest.add (glyph_index);
+    buffer->digest.add (glyph_index);
 
     if (new_syllables != (unsigned) -1)
       buffer->cur().syllable() = new_syllables;
@@ -835,8 +910,7 @@ struct hb_ot_apply_context_t :
       props |= HB_OT_LAYOUT_GLYPH_PROPS_MULTIPLIED;
     if (likely (has_glyph_classes))
     {
-      props &= HB_OT_LAYOUT_GLYPH_PROPS_PRESERVE;
-      _hb_glyph_info_set_glyph_props (&buffer->cur(), props | gdef.get_glyph_props (glyph_index));
+      _set_glyph_class_props (buffer->cur(), props, glyph_index);
     }
     else if (class_guess)
     {
@@ -845,6 +919,19 @@ struct hb_ot_apply_context_t :
     }
     else
       _hb_glyph_info_set_glyph_props (&buffer->cur(), props);
+  }
+  void _set_glyph_class_props (hb_glyph_info_t &info,
+                               unsigned int props,
+                               hb_codepoint_t glyph_index)
+  {
+    props &= HB_OT_LAYOUT_GLYPH_PROPS_PRESERVE;
+    _hb_glyph_info_set_glyph_props (&info, props | gdef_accel.get_glyph_props (glyph_index));
+  }
+  void _set_glyph_class_props (hb_glyph_info_t &info)
+  {
+    _set_glyph_class_props (info,
+                            _hb_glyph_info_get_glyph_props (&info),
+                            info.codepoint);
   }
 
   void replace_glyph (hb_codepoint_t glyph_index)
@@ -871,43 +958,58 @@ struct hb_ot_apply_context_t :
   }
 };
 
+enum class hb_ot_subtable_cache_op_t
+{
+  ENTER,
+  LEAVE,
+};
 
 struct hb_accelerate_subtables_context_t :
        hb_dispatch_context_t<hb_accelerate_subtables_context_t>
 {
-  template <typename Type>
-  static inline bool apply_to (const void *obj, hb_ot_apply_context_t *c)
+  template <typename T>
+  static inline auto apply_ (const T *obj, hb_ot_apply_context_t *c, void *external_cache, hb_priority<1>) HB_RETURN (bool, obj->apply (c, external_cache) )
+  template <typename T>
+  static inline auto apply_ (const T *obj, hb_ot_apply_context_t *c, void *external_cache, hb_priority<0>) HB_RETURN (bool, obj->apply (c) )
+  template <typename T>
+  static inline bool apply_to (const void *obj, hb_ot_apply_context_t *c, void *external_cache)
   {
-    const Type *typed_obj = (const Type *) obj;
-    return typed_obj->apply (c);
+    const T *typed_obj = (const T *) obj;
+    return apply_ (typed_obj, c, external_cache, hb_prioritize);
   }
 
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
   template <typename T>
-  static inline auto apply_cached_ (const T *obj, hb_ot_apply_context_t *c, hb_priority<1>) HB_RETURN (bool, obj->apply (c, true) )
+  static inline auto apply_cached_ (const T *obj, hb_ot_apply_context_t *c, void *external_cache, hb_priority<2>) HB_RETURN (bool, obj->apply_cached (c, external_cache) )
   template <typename T>
-  static inline auto apply_cached_ (const T *obj, hb_ot_apply_context_t *c, hb_priority<0>) HB_RETURN (bool, obj->apply (c) )
-  template <typename Type>
-  static inline bool apply_cached_to (const void *obj, hb_ot_apply_context_t *c)
+  static inline auto apply_cached_ (const T *obj, hb_ot_apply_context_t *c, void *external_cache, hb_priority<1>) HB_RETURN (bool, obj->apply (c, external_cache) )
+  template <typename T>
+  static inline auto apply_cached_ (const T *obj, hb_ot_apply_context_t *c, void *external_cache, hb_priority<0>) HB_RETURN (bool, obj->apply (c) )
+  template <typename T>
+  static inline bool apply_cached_to (const void *obj, hb_ot_apply_context_t *c, void *external_cache)
   {
-    const Type *typed_obj = (const Type *) obj;
-    return apply_cached_ (typed_obj, c, hb_prioritize);
+    const T *typed_obj = (const T *) obj;
+    return apply_cached_ (typed_obj, c, external_cache, hb_prioritize);
   }
 
   template <typename T>
-  static inline auto cache_func_ (const T *obj, hb_ot_apply_context_t *c, bool enter, hb_priority<1>) HB_RETURN (bool, obj->cache_func (c, enter) )
-  template <typename T>
-  static inline bool cache_func_ (const T *obj, hb_ot_apply_context_t *c, bool enter, hb_priority<0>) { return false; }
+  static inline auto cache_func_ (hb_ot_apply_context_t *c,
+                                  hb_ot_subtable_cache_op_t op,
+                                  hb_priority<1>) HB_RETURN (bool, T::cache_func (c, op) )
+  template <typename T=void>
+  static inline bool cache_func_ (hb_ot_apply_context_t *c,
+                                  hb_ot_subtable_cache_op_t op HB_UNUSED,
+                                  hb_priority<0>) { return false; }
   template <typename Type>
-  static inline bool cache_func_to (const void *obj, hb_ot_apply_context_t *c, bool enter)
+  static inline bool cache_func_to (hb_ot_apply_context_t *c,
+                                    hb_ot_subtable_cache_op_t op)
   {
-    const Type *typed_obj = (const Type *) obj;
-    return cache_func_ (typed_obj, c, enter, hb_prioritize);
+    return cache_func_<Type> (c, op, hb_prioritize);
   }
 #endif
 
-  typedef bool (*hb_apply_func_t) (const void *obj, hb_ot_apply_context_t *c);
-  typedef bool (*hb_cache_func_t) (const void *obj, hb_ot_apply_context_t *c, bool enter);
+  typedef bool (*hb_apply_func_t) (const void *obj, hb_ot_apply_context_t *c, void *external_cache);
+  typedef bool (*hb_cache_func_t) (hb_ot_apply_context_t *c, hb_ot_subtable_cache_op_t op);
 
   struct hb_applicable_t
   {
@@ -920,6 +1022,7 @@ struct hb_accelerate_subtables_context_t :
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
                , hb_apply_func_t apply_cached_func_
                , hb_cache_func_t cache_func_
+               , void *external_cache_
 #endif
                 )
     {
@@ -928,27 +1031,34 @@ struct hb_accelerate_subtables_context_t :
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
       apply_cached_func = apply_cached_func_;
       cache_func = cache_func_;
+      external_cache = external_cache_;
 #endif
       digest.init ();
       obj_.get_coverage ().collect_coverage (&digest);
     }
 
+#ifdef HB_NO_OT_LAYOUT_LOOKUP_CACHE
     bool apply (hb_ot_apply_context_t *c) const
     {
-      return digest.may_have (c->buffer->cur().codepoint) && apply_func (obj, c);
+      return digest.may_have (c->buffer->cur().codepoint) && apply_func (obj, c, nullptr);
     }
-#ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
+#else
+    bool apply (hb_ot_apply_context_t *c) const
+    {
+      return digest.may_have (c->buffer->cur().codepoint) && apply_func (obj, c, external_cache);
+    }
     bool apply_cached (hb_ot_apply_context_t *c) const
     {
-      return digest.may_have (c->buffer->cur().codepoint) &&  apply_cached_func (obj, c);
+      return digest.may_have (c->buffer->cur().codepoint) &&  apply_cached_func (obj, c, external_cache);
     }
+
     bool cache_enter (hb_ot_apply_context_t *c) const
     {
-      return cache_func (obj, c, true);
+      return cache_func (c, hb_ot_subtable_cache_op_t::ENTER);
     }
     void cache_leave (hb_ot_apply_context_t *c) const
     {
-      cache_func (obj, c, false);
+      cache_func (c, hb_ot_subtable_cache_op_t::LEAVE);
     }
 #endif
 
@@ -958,6 +1068,7 @@ struct hb_accelerate_subtables_context_t :
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
     hb_apply_func_t apply_cached_func;
     hb_cache_func_t cache_func;
+    void *external_cache;
 #endif
     hb_set_digest_t digest;
   };
@@ -967,12 +1078,23 @@ struct hb_accelerate_subtables_context_t :
   auto cache_cost (const T &obj, hb_priority<1>) HB_AUTO_RETURN ( obj.cache_cost () )
   template <typename T>
   auto cache_cost (const T &obj, hb_priority<0>) HB_AUTO_RETURN ( 0u )
+
+  template <typename T>
+  auto external_cache_create (const T &obj, hb_priority<1>) HB_AUTO_RETURN ( obj.external_cache_create () )
+  template <typename T>
+  auto external_cache_create (const T &obj, hb_priority<0>) HB_AUTO_RETURN ( nullptr )
 #endif
 
   /* Dispatch interface. */
   template <typename T>
   return_t dispatch (const T &obj)
   {
+#ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
+    void *external_cache = nullptr;
+    if (i < 8)
+      external_cache = external_cache_create (obj, hb_prioritize);
+#endif
+
     hb_applicable_t *entry = &array[i++];
 
     entry->init (obj,
@@ -980,6 +1102,7 @@ struct hb_accelerate_subtables_context_t :
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
                  , apply_cached_to<T>
                  , cache_func_to<T>
+                 , external_cache
 #endif
                  );
 
@@ -993,10 +1116,10 @@ struct hb_accelerate_subtables_context_t :
      * and we allocate the cache opportunity to the costliest subtable.
      */
     unsigned cost = cache_cost (obj, hb_prioritize);
-    if (cost > cache_user_cost)
+    if (cost > subtable_cache_user_cost)
     {
-      cache_user_idx = i - 1;
-      cache_user_cost = cost;
+      subtable_cache_user_idx = i - 1;
+      subtable_cache_user_cost = cost;
     }
 #endif
 
@@ -1011,8 +1134,8 @@ struct hb_accelerate_subtables_context_t :
   unsigned i = 0;
 
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
-  unsigned cache_user_idx = (unsigned) -1;
-  unsigned cache_user_cost = 0;
+  unsigned subtable_cache_user_idx = (unsigned) -1;
+  unsigned subtable_cache_user_cost = 0;
 #endif
 };
 
@@ -1148,6 +1271,10 @@ static inline void collect_array (hb_collect_glyphs_context_t *c HB_UNUSED,
 }
 
 
+static inline bool match_always (hb_glyph_info_t &info HB_UNUSED, unsigned value HB_UNUSED, const void *data HB_UNUSED)
+{
+  return true;
+}
 static inline bool match_glyph (hb_glyph_info_t &info, unsigned value, const void *data HB_UNUSED)
 {
   return info.codepoint == value;
@@ -1157,16 +1284,50 @@ static inline bool match_class (hb_glyph_info_t &info, unsigned value, const voi
   const ClassDef &class_def = *reinterpret_cast<const ClassDef *>(data);
   return class_def.get_class (info.codepoint) == value;
 }
-static inline bool match_class_cached (hb_glyph_info_t &info, unsigned value, const void *data)
+static inline unsigned get_class_cached (const ClassDef &class_def, hb_glyph_info_t &info)
 {
   unsigned klass = info.syllable();
   if (klass < 255)
-    return klass == value;
-  const ClassDef &class_def = *reinterpret_cast<const ClassDef *>(data);
+    return klass;
   klass = class_def.get_class (info.codepoint);
   if (likely (klass < 255))
     info.syllable() = klass;
-  return klass == value;
+  return klass;
+}
+static inline bool match_class_cached (hb_glyph_info_t &info, unsigned value, const void *data)
+{
+  const ClassDef &class_def = *reinterpret_cast<const ClassDef *>(data);
+  return get_class_cached (class_def, info) == value;
+}
+static inline unsigned get_class_cached1 (const ClassDef &class_def, hb_glyph_info_t &info)
+{
+  unsigned klass = info.syllable() & 0x0F;
+  if (klass < 15)
+    return klass;
+  klass = class_def.get_class (info.codepoint);
+  if (likely (klass < 15))
+    info.syllable() = (info.syllable() & 0xF0) | klass;
+  return klass;
+}
+static inline bool match_class_cached1 (hb_glyph_info_t &info, unsigned value, const void *data)
+{
+  const ClassDef &class_def = *reinterpret_cast<const ClassDef *>(data);
+  return get_class_cached1 (class_def, info) == value;
+}
+static inline unsigned get_class_cached2 (const ClassDef &class_def, hb_glyph_info_t &info)
+{
+  unsigned klass = (info.syllable() & 0xF0) >> 4;
+  if (klass < 15)
+    return klass;
+  klass = class_def.get_class (info.codepoint);
+  if (likely (klass < 15))
+    info.syllable() = (info.syllable() & 0x0F) | (klass << 4);
+  return klass;
+}
+static inline bool match_class_cached2 (hb_glyph_info_t &info, unsigned value, const void *data)
+{
+  const ClassDef &class_def = *reinterpret_cast<const ClassDef *>(data);
+  return get_class_cached2 (class_def, info) == value;
 }
 static inline bool match_coverage (hb_glyph_info_t &info, unsigned value, const void *data)
 {
@@ -1196,23 +1357,34 @@ static inline bool would_match_input (hb_would_apply_context_t *c,
   return true;
 }
 template <typename HBUINT>
-static inline bool match_input (hb_ot_apply_context_t *c,
-                                unsigned int count, /* Including the first glyph (not matched) */
-                                const HBUINT input[], /* Array of input values--start with second glyph */
-                                match_func_t match_func,
-                                const void *match_data,
-                                unsigned int *end_position,
-                                unsigned int match_positions[HB_MAX_CONTEXT_LENGTH],
-                                unsigned int *p_total_component_count = nullptr)
+#ifndef HB_OPTIMIZE_SIZE
+HB_ALWAYS_INLINE
+#endif
+static bool match_input (hb_ot_apply_context_t *c,
+                         unsigned int count, /* Including the first glyph (not matched) */
+                         const HBUINT input[], /* Array of input values--start with second glyph */
+                         match_func_t match_func,
+                         const void *match_data,
+                         unsigned int *end_position,
+                         unsigned int *p_total_component_count = nullptr)
 {
   TRACE_APPLY (nullptr);
 
-  if (unlikely (count > HB_MAX_CONTEXT_LENGTH)) return_trace (false);
-
   hb_buffer_t *buffer = c->buffer;
 
-  hb_ot_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_input;
-  skippy_iter.reset (buffer->idx, count - 1);
+  if (count == 1)
+  {
+    *end_position = buffer->idx + 1;
+    c->match_positions[0] = buffer->idx;
+    if (p_total_component_count)
+      *p_total_component_count = _hb_glyph_info_get_lig_num_comps (&buffer->cur());
+    return_trace (true);
+  }
+
+  if (unlikely (count > HB_MAX_CONTEXT_LENGTH)) return_trace (false);
+
+  auto &skippy_iter = c->iter_input;
+  skippy_iter.reset (buffer->idx);
   skippy_iter.set_match_func (match_func, match_data);
   skippy_iter.set_glyph_data (input);
 
@@ -1241,7 +1413,6 @@ static inline bool match_input (hb_ot_apply_context_t *c,
    */
 
   unsigned int total_component_count = 0;
-  total_component_count += _hb_glyph_info_get_lig_num_comps (&buffer->cur());
 
   unsigned int first_lig_id = _hb_glyph_info_get_lig_id (&buffer->cur());
   unsigned int first_lig_comp = _hb_glyph_info_get_lig_comp (&buffer->cur());
@@ -1252,7 +1423,6 @@ static inline bool match_input (hb_ot_apply_context_t *c,
     LIGBASE_MAY_SKIP
   } ligbase = LIGBASE_NOT_CHECKED;
 
-  match_positions[0] = buffer->idx;
   for (unsigned int i = 1; i < count; i++)
   {
     unsigned unsafe_to;
@@ -1262,7 +1432,10 @@ static inline bool match_input (hb_ot_apply_context_t *c,
       return_trace (false);
     }
 
-    match_positions[i] = skippy_iter.idx;
+    if (unlikely (i + 1 > c->match_positions.length &&
+                  !c->match_positions.resize_dirty  (i + 1)))
+      return_trace (false);
+    c->match_positions.arrayZ[i] = skippy_iter.idx;
 
     unsigned int this_lig_id = _hb_glyph_info_get_lig_id (&buffer->info[skippy_iter.idx]);
     unsigned int this_lig_comp = _hb_glyph_info_get_lig_comp (&buffer->info[skippy_iter.idx]);
@@ -1292,7 +1465,7 @@ static inline bool match_input (hb_ot_apply_context_t *c,
             j--;
           }
 
-          if (found && skippy_iter.may_skip (out[j]) == hb_ot_apply_context_t::matcher_t::SKIP_YES)
+          if (found && skippy_iter.may_skip (out[j]) == matcher_t::SKIP_YES)
             ligbase = LIGBASE_MAY_SKIP;
           else
             ligbase = LIGBASE_MAY_NOT_SKIP;
@@ -1317,13 +1490,17 @@ static inline bool match_input (hb_ot_apply_context_t *c,
   *end_position = skippy_iter.idx + 1;
 
   if (p_total_component_count)
+  {
+    total_component_count += _hb_glyph_info_get_lig_num_comps (&buffer->cur());
     *p_total_component_count = total_component_count;
+  }
+
+  c->match_positions.arrayZ[0] = buffer->idx;
 
   return_trace (true);
 }
 static inline bool ligate_input (hb_ot_apply_context_t *c,
                                  unsigned int count, /* Including the first glyph */
-                                 const unsigned int match_positions[HB_MAX_CONTEXT_LENGTH], /* Including the first glyph */
                                  unsigned int match_end,
                                  hb_codepoint_t lig_glyph,
                                  unsigned int total_component_count)
@@ -1366,10 +1543,10 @@ static inline bool ligate_input (hb_ot_apply_context_t *c,
    *   https://bugzilla.gnome.org/show_bug.cgi?id=437633
    */
 
-  bool is_base_ligature = _hb_glyph_info_is_base_glyph (&buffer->info[match_positions[0]]);
-  bool is_mark_ligature = _hb_glyph_info_is_mark (&buffer->info[match_positions[0]]);
+  bool is_base_ligature = _hb_glyph_info_is_base_glyph (&buffer->info[c->match_positions.arrayZ[0]]);
+  bool is_mark_ligature = _hb_glyph_info_is_mark (&buffer->info[c->match_positions.arrayZ[0]]);
   for (unsigned int i = 1; i < count; i++)
-    if (!_hb_glyph_info_is_mark (&buffer->info[match_positions[i]]))
+    if (!_hb_glyph_info_is_mark (&buffer->info[c->match_positions.arrayZ[i]]))
     {
       is_base_ligature = false;
       is_mark_ligature = false;
@@ -1395,13 +1572,14 @@ static inline bool ligate_input (hb_ot_apply_context_t *c,
 
   for (unsigned int i = 1; i < count; i++)
   {
-    while (buffer->idx < match_positions[i] && buffer->successful)
+    while (buffer->idx < c->match_positions.arrayZ[i] && buffer->successful)
     {
       if (is_ligature)
       {
         unsigned int this_comp = _hb_glyph_info_get_lig_comp (&buffer->cur());
         if (this_comp == 0)
           this_comp = last_num_components;
+        assert (components_so_far >= last_num_components);
         unsigned int new_lig_comp = components_so_far - last_num_components +
                                     hb_min (this_comp, last_num_components);
           _hb_glyph_info_set_lig_props_for_mark (&buffer->cur(), lig_id, new_lig_comp);
@@ -1427,6 +1605,7 @@ static inline bool ligate_input (hb_ot_apply_context_t *c,
       unsigned this_comp = _hb_glyph_info_get_lig_comp (&buffer->info[i]);
       if (!this_comp) break;
 
+      assert (components_so_far >= last_num_components);
       unsigned new_lig_comp = components_so_far - last_num_components +
                               hb_min (this_comp, last_num_components);
       _hb_glyph_info_set_lig_props_for_mark (&buffer->info[i], lig_id, new_lig_comp);
@@ -1436,17 +1615,26 @@ static inline bool ligate_input (hb_ot_apply_context_t *c,
 }
 
 template <typename HBUINT>
-static inline bool match_backtrack (hb_ot_apply_context_t *c,
-                                    unsigned int count,
-                                    const HBUINT backtrack[],
-                                    match_func_t match_func,
-                                    const void *match_data,
-                                    unsigned int *match_start)
+#ifndef HB_OPTIMIZE_SIZE
+HB_ALWAYS_INLINE
+#endif
+static bool match_backtrack (hb_ot_apply_context_t *c,
+                             unsigned int count,
+                             const HBUINT backtrack[],
+                             match_func_t match_func,
+                             const void *match_data,
+                             unsigned int *match_start)
 {
   TRACE_APPLY (nullptr);
 
-  hb_ot_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_context;
-  skippy_iter.reset (c->buffer->backtrack_len (), count);
+  if (!count)
+  {
+    *match_start = c->buffer->backtrack_len ();
+    return_trace (true);
+  }
+
+  auto &skippy_iter = c->iter_context;
+  skippy_iter.reset_back (c->buffer->backtrack_len ());
   skippy_iter.set_match_func (match_func, match_data);
   skippy_iter.set_glyph_data (backtrack);
 
@@ -1465,18 +1653,28 @@ static inline bool match_backtrack (hb_ot_apply_context_t *c,
 }
 
 template <typename HBUINT>
-static inline bool match_lookahead (hb_ot_apply_context_t *c,
-                                    unsigned int count,
-                                    const HBUINT lookahead[],
-                                    match_func_t match_func,
-                                    const void *match_data,
-                                    unsigned int start_index,
-                                    unsigned int *end_index)
+#ifndef HB_OPTIMIZE_SIZE
+HB_ALWAYS_INLINE
+#endif
+static bool match_lookahead (hb_ot_apply_context_t *c,
+                             unsigned int count,
+                             const HBUINT lookahead[],
+                             match_func_t match_func,
+                             const void *match_data,
+                             unsigned int start_index,
+                             unsigned int *end_index)
 {
   TRACE_APPLY (nullptr);
 
-  hb_ot_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_context;
-  skippy_iter.reset (start_index - 1, count);
+  if (!count)
+  {
+    *end_index = start_index;
+    return_trace (true);
+  }
+
+  auto &skippy_iter = c->iter_context;
+  assert (start_index >= 1);
+  skippy_iter.reset (start_index - 1);
   skippy_iter.set_match_func (match_func, match_data);
   skippy_iter.set_glyph_data (lookahead);
 
@@ -1595,10 +1793,13 @@ static void context_closure_recurse_lookups (hb_closure_context_t *c,
     }
 
     covered_seq_indicies.add (seqIndex);
+    hb_set_t *cur_active_glyphs = c->push_cur_active_glyphs ();
+    if (unlikely (!cur_active_glyphs))
+      return;
     if (has_pos_glyphs) {
-      c->push_cur_active_glyphs () = std::move (pos_glyphs);
+      *cur_active_glyphs = std::move (pos_glyphs);
     } else {
-      c->push_cur_active_glyphs ().set (*c->glyphs);
+      *cur_active_glyphs = *c->glyphs;
     }
 
     unsigned endIndex = inputCount;
@@ -1622,7 +1823,6 @@ static inline void recurse_lookups (context_t *c,
 
 static inline void apply_lookup (hb_ot_apply_context_t *c,
                                  unsigned int count, /* Including the first glyph */
-                                 unsigned int match_positions[HB_MAX_CONTEXT_LENGTH], /* Including the first glyph */
                                  unsigned int lookupCount,
                                  const LookupRecord lookupRecord[], /* Array of LookupRecords--in design order */
                                  unsigned int match_end)
@@ -1639,7 +1839,7 @@ static inline void apply_lookup (hb_ot_apply_context_t *c,
     int delta = bl - buffer->idx;
     /* Convert positions to new indexing. */
     for (unsigned int j = 0; j < count; j++)
-      match_positions[j] += delta;
+      c->match_positions.arrayZ[j] += delta;
   }
 
   for (unsigned int i = 0; i < lookupCount && buffer->successful; i++)
@@ -1651,10 +1851,10 @@ static inline void apply_lookup (hb_ot_apply_context_t *c,
     unsigned int orig_len = buffer->backtrack_len () + buffer->lookahead_len ();
 
     /* This can happen if earlier recursed lookups deleted many entries. */
-    if (unlikely (match_positions[idx] >= orig_len))
+    if (unlikely (c->match_positions.arrayZ[idx] >= orig_len))
       continue;
 
-    if (unlikely (!buffer->move_to (match_positions[idx])))
+    if (unlikely (!buffer->move_to (c->match_positions.arrayZ[idx])))
       break;
 
     if (unlikely (buffer->max_ops <= 0))
@@ -1665,22 +1865,24 @@ static inline void apply_lookup (hb_ot_apply_context_t *c,
       if (buffer->have_output)
         c->buffer->sync_so_far ();
       c->buffer->message (c->font,
-                          "recursing to lookup %u at %u",
+                          "start recursing to lookup %u at %u",
                           (unsigned) lookupRecord[i].lookupListIndex,
                           buffer->idx);
     }
 
-    if (!c->recurse (lookupRecord[i].lookupListIndex))
-      continue;
+    bool ret = c->recurse (lookupRecord[i].lookupListIndex);
 
     if (HB_BUFFER_MESSAGE_MORE && c->buffer->messaging ())
     {
       if (buffer->have_output)
         c->buffer->sync_so_far ();
       c->buffer->message (c->font,
-                          "recursed to lookup %u",
+                          "end recursing to lookup %u",
                           (unsigned) lookupRecord[i].lookupListIndex);
     }
+
+    if (!ret)
+      continue;
 
     unsigned int new_len = buffer->backtrack_len () + buffer->lookahead_len ();
     int delta = new_len - orig_len;
@@ -1713,9 +1915,9 @@ static inline void apply_lookup (hb_ot_apply_context_t *c,
      */
 
     end += delta;
-    if (end < int (match_positions[idx]))
+    if (end < int (c->match_positions.arrayZ[idx]))
     {
-      /* End might end up being smaller than match_positions[idx] if the recursed
+      /* End might end up being smaller than match_positions.arrayZ[idx] if the recursed
        * lookup ended up removing many items.
        * Just never rewind end beyond start of current position, since that is
        * not possible in the recursed lookup.  Also adjust delta as such.
@@ -1723,8 +1925,8 @@ static inline void apply_lookup (hb_ot_apply_context_t *c,
        * https://bugs.chromium.org/p/chromium/issues/detail?id=659496
        * https://github.com/harfbuzz/harfbuzz/issues/1611
        */
-      delta += match_positions[idx] - end;
-      end = match_positions[idx];
+      delta += c->match_positions.arrayZ[idx] - end;
+      end = c->match_positions.arrayZ[idx];
     }
 
     unsigned int next = idx + 1; /* next now is the position after the recursed lookup. */
@@ -1733,6 +1935,9 @@ static inline void apply_lookup (hb_ot_apply_context_t *c,
     {
       if (unlikely (delta + count > HB_MAX_CONTEXT_LENGTH))
         break;
+      if (unlikely (count + delta > c->match_positions.length &&
+                    !c->match_positions.resize_dirty  (count + delta)))
+        return;
     }
     else
     {
@@ -1742,20 +1947,21 @@ static inline void apply_lookup (hb_ot_apply_context_t *c,
     }
 
     /* Shift! */
-    memmove (match_positions + next + delta, match_positions + next,
-             (count - next) * sizeof (match_positions[0]));
+    memmove (c->match_positions + next + delta, c->match_positions + next,
+             (count - next) * sizeof (c->match_positions.arrayZ[0]));
     next += delta;
     count += delta;
 
     /* Fill in new entries. */
     for (unsigned int j = idx + 1; j < next; j++)
-      match_positions[j] = match_positions[j - 1] + 1;
+      c->match_positions.arrayZ[j] = c->match_positions.arrayZ[j - 1] + 1;
 
     /* And fixup the rest. */
     for (; next < count; next++)
-      match_positions[next] += delta;
+      c->match_positions.arrayZ[next] += delta;
   }
 
+  assert (end >= 0);
   (void) buffer->move_to (end);
 }
 
@@ -1855,30 +2061,62 @@ static inline bool context_apply_lookup (hb_ot_apply_context_t *c,
                                          const LookupRecord lookupRecord[],
                                          const ContextApplyLookupContext &lookup_context)
 {
+  if (unlikely (inputCount > HB_MAX_CONTEXT_LENGTH)) return false;
+
   unsigned match_end = 0;
-  unsigned match_positions[HB_MAX_CONTEXT_LENGTH];
+  bool ret = false;
   if (match_input (c,
                    inputCount, input,
                    lookup_context.funcs.match, lookup_context.match_data,
-                   &match_end, match_positions))
+                   &match_end))
   {
     c->buffer->unsafe_to_break (c->buffer->idx, match_end);
     apply_lookup (c,
-                  inputCount, match_positions,
+                  inputCount,
                   lookupCount, lookupRecord,
                   match_end);
-    return true;
+    ret = true;
   }
   else
   {
     c->buffer->unsafe_to_concat (c->buffer->idx, match_end);
-    return false;
+    ret = false;
   }
+
+  return ret;
+}
+
+static inline bool context_cache_func (hb_ot_apply_context_t *c, hb_ot_subtable_cache_op_t op)
+{
+  switch (op)
+  {
+    case hb_ot_subtable_cache_op_t::ENTER:
+    {
+      if (!HB_BUFFER_TRY_ALLOCATE_VAR (c->buffer, syllable))
+        return false;
+      auto &info = c->buffer->info;
+      unsigned count = c->buffer->len;
+      for (unsigned i = 0; i < count; i++)
+        info[i].syllable() = 255;
+      c->new_syllables = 255;
+      return true;
+    }
+    case hb_ot_subtable_cache_op_t::LEAVE:
+    {
+      c->new_syllables = (unsigned) -1;
+      HB_BUFFER_DEALLOCATE_VAR (c->buffer, syllable);
+      break;
+    }
+  }
+  return false;
 }
 
 template <typename Types>
 struct Rule
 {
+  template <typename T>
+  friend struct RuleSet;
+
   bool intersects (const hb_set_t *glyphs, ContextClosureLookupContext &lookup_context) const
   {
     return context_intersects (glyphs,
@@ -1981,8 +2219,8 @@ struct Rule
   bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return_trace (inputCount.sanitize (c) &&
-                  lookupCount.sanitize (c) &&
+    return_trace (c->check_struct (this) &&
+                  hb_barrier () &&
                   c->check_range (inputZ.arrayZ,
                                   inputZ.item_size * (inputCount ? inputCount - 1 : 0) +
                                   LookupRecord::static_size * lookupCount));
@@ -2066,13 +2304,126 @@ struct RuleSet
               const ContextApplyLookupContext &lookup_context) const
   {
     TRACE_APPLY (this);
-    return_trace (
-    + hb_iter (rule)
-    | hb_map (hb_add (this))
-    | hb_map ([&] (const Rule &_) { return _.apply (c, lookup_context); })
-    | hb_any
-    )
-    ;
+
+    unsigned num_rules = rule.len;
+
+#ifndef HB_NO_OT_RULESETS_FAST_PATH
+    if (HB_OPTIMIZE_SIZE_VAL || num_rules <= 4)
+#endif
+    {
+    slow:
+      return_trace (
+      + hb_iter (rule)
+      | hb_map (hb_add (this))
+      | hb_map ([&] (const Rule &_) { return _.apply (c, lookup_context); })
+      | hb_any
+      )
+      ;
+    }
+
+    /* This version is optimized for speed by matching the first & second
+     * components of the rule here, instead of calling into the matching code.
+     *
+     * Replicated from LigatureSet::apply(). */
+
+    /* We use the iter_context instead of iter_input, to avoid skipping
+     * default-ignorables and such.
+     *
+     * Related: https://github.com/harfbuzz/harfbuzz/issues/4813
+     */
+    auto &skippy_iter = c->iter_context;
+    skippy_iter.reset (c->buffer->idx);
+    skippy_iter.set_match_func (match_always, nullptr);
+    skippy_iter.set_glyph_data ((HBUINT16 *) nullptr);
+    unsigned unsafe_to = (unsigned) -1, unsafe_to1, unsafe_to2 = 0;
+    hb_glyph_info_t *first = nullptr, *second = nullptr;
+    bool matched = skippy_iter.next ();
+    if (likely (matched))
+    {
+      if (skippy_iter.may_skip (c->buffer->info[skippy_iter.idx]))
+      {
+        /* Can't use the fast path if eg. the next char is a default-ignorable
+         * or other skippable. */
+        goto slow;
+      }
+
+      first = &c->buffer->info[skippy_iter.idx];
+      unsafe_to1 = skippy_iter.idx + 1;
+    }
+    else
+    {
+      /* Failed to match a next glyph. Only try applying rules that have
+       * no further input. */
+      return_trace (
+      + hb_iter (rule)
+      | hb_map (hb_add (this))
+      | hb_filter ([&] (const Rule &_) { return _.inputCount <= 1; })
+      | hb_map ([&] (const Rule &_) { return _.apply (c, lookup_context); })
+      | hb_any
+      )
+      ;
+    }
+    matched = skippy_iter.next ();
+    if (likely (matched))
+    {
+      if (skippy_iter.may_skip (c->buffer->info[skippy_iter.idx]))
+      {
+        /* Can't use the fast path if eg. the next char is a default-ignorable
+         * or other skippable. */
+        goto slow;
+      }
+
+      second = &c->buffer->info[skippy_iter.idx];
+      unsafe_to2 = skippy_iter.idx + 1;
+    }
+
+    auto match_input = lookup_context.funcs.match;
+    auto *input_data = lookup_context.match_data;
+    for (unsigned int i = 0; i < num_rules; i++)
+    {
+      const auto &r = this+rule.arrayZ[i];
+
+      const auto &input = r.inputZ;
+
+      if (r.inputCount <= 1 ||
+          (!match_input ||
+           match_input (*first, input.arrayZ[0], input_data)))
+      {
+        if (!second ||
+            (r.inputCount <= 2 ||
+             (!match_input ||
+              match_input (*second, input.arrayZ[1], input_data)))
+           )
+        {
+          if (r.apply (c, lookup_context))
+          {
+            if (unsafe_to != (unsigned) -1)
+              c->buffer->unsafe_to_concat (c->buffer->idx, unsafe_to);
+            return_trace (true);
+          }
+        }
+        else
+          unsafe_to = unsafe_to2;
+      }
+      else
+      {
+        if (unsafe_to == (unsigned) -1)
+          unsafe_to = unsafe_to1;
+
+        // Skip ahead to next possible first glyph match.
+        for (; i + 1 < num_rules; i++)
+        {
+          const auto &r2 = this+rule.arrayZ[i + 1];
+          const auto &input2 = r2.inputZ;
+          if (r2.inputCount <= 1 || input2.arrayZ[0] != input.arrayZ[0])
+            break;
+        }
+      }
+    }
+    if (likely (unsafe_to != (unsigned) -1))
+      c->buffer->unsafe_to_concat (c->buffer->idx, unsafe_to);
+
+    return_trace (false);
   }
 
   bool subset (hb_subset_context_t *c,
@@ -2148,8 +2499,9 @@ struct ContextFormat1_4
 
   void closure (hb_closure_context_t *c) const
   {
-    hb_set_t& cur_active_glyphs = c->push_cur_active_glyphs ();
-    get_coverage ().intersect_set (c->previous_parent_active_glyphs (), cur_active_glyphs);
+    hb_set_t* cur_active_glyphs = c->push_cur_active_glyphs ();
+    if (unlikely (!cur_active_glyphs)) return;
+    get_coverage ().intersect_set (c->previous_parent_active_glyphs (), *cur_active_glyphs);
 
     struct ContextClosureLookupContext lookup_context = {
       {intersects_glyph, intersected_glyph},
@@ -2318,9 +2670,10 @@ struct ContextFormat2_5
     if (!(this+coverage).intersects (c->glyphs))
       return;
 
-    hb_set_t& cur_active_glyphs = c->push_cur_active_glyphs ();
+    hb_set_t* cur_active_glyphs = c->push_cur_active_glyphs ();
+    if (unlikely (!cur_active_glyphs)) return;
     get_coverage ().intersect_set (c->previous_parent_active_glyphs (),
-                                                 cur_active_glyphs);
+                                   *cur_active_glyphs);
 
     const ClassDef &class_def = this+classDef;
 
@@ -2407,35 +2760,38 @@ struct ContextFormat2_5
 
   unsigned cache_cost () const
   {
-    unsigned c = (this+classDef).cost () * ruleSet.len;
-    return c >= 4 ? c : 0;
+    return (this+classDef).cost ();
   }
-  bool cache_func (hb_ot_apply_context_t *c, bool enter) const
+  static bool cache_func (hb_ot_apply_context_t *c, hb_ot_subtable_cache_op_t op)
   {
-    if (enter)
-    {
-      if (!HB_BUFFER_TRY_ALLOCATE_VAR (c->buffer, syllable))
-        return false;
-      auto &info = c->buffer->info;
-      unsigned count = c->buffer->len;
-      for (unsigned i = 0; i < count; i++)
-        info[i].syllable() = 255;
-      c->new_syllables = 255;
-      return true;
-    }
-    else
-    {
-      c->new_syllables = (unsigned) -1;
-      HB_BUFFER_DEALLOCATE_VAR (c->buffer, syllable);
-      return true;
-    }
+    return context_cache_func (c, op);
   }
 
-  bool apply (hb_ot_apply_context_t *c, bool cached = false) const
+  struct external_cache_t
+  {
+    hb_ot_layout_binary_cache_t coverage;
+  };
+  void *external_cache_create () const
+  {
+    external_cache_t *cache = (external_cache_t *) hb_malloc (sizeof (external_cache_t));
+    if (likely (cache))
+    {
+      cache->coverage.clear ();
+    }
+    return cache;
+  }
+  bool apply_cached (hb_ot_apply_context_t *c, void *external_cache) const { return _apply (c, true, external_cache); }
+  bool apply (hb_ot_apply_context_t *c, void *external_cache) const { return _apply (c, false, external_cache); }
+  bool _apply (hb_ot_apply_context_t *c, bool cached, void *external_cache) const
   {
     TRACE_APPLY (this);
+#ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
+    external_cache_t *cache = (external_cache_t *) external_cache;
+    unsigned int index = (this+coverage).get_coverage_binary (c->buffer->cur().codepoint, cache ? &cache->coverage : nullptr);
+#else
     unsigned int index = (this+coverage).get_coverage (c->buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return_trace (false);
+#endif
+    if (index == NOT_COVERED) return_trace (false);
 
     const ClassDef &class_def = this+classDef;
 
@@ -2444,14 +2800,7 @@ struct ContextFormat2_5
       &class_def
     };
 
-    if (cached && c->buffer->cur().syllable() < 255)
-      index = c->buffer->cur().syllable ();
-    else
-    {
-      index = class_def.get_class (c->buffer->cur().codepoint);
-      if (cached && index < 255)
-        c->buffer->cur().syllable() = index;
-    }
+    index = cached ? get_class_cached (class_def, c->buffer->cur()) : class_def.get_class (c->buffer->cur().codepoint);
     const RuleSet &rule_set = this+ruleSet[index];
     return_trace (rule_set.apply (c, lookup_context));
   }
@@ -2561,10 +2910,10 @@ struct ContextFormat3
     if (!(this+coverageZ[0]).intersects (c->glyphs))
       return;
 
-    hb_set_t& cur_active_glyphs = c->push_cur_active_glyphs ();
+    hb_set_t* cur_active_glyphs = c->push_cur_active_glyphs ();
+    if (unlikely (!cur_active_glyphs)) return;
     get_coverage ().intersect_set (c->previous_parent_active_glyphs (),
-                                                 cur_active_glyphs);
-
+                                   *cur_active_glyphs);
 
     const LookupRecord *lookupRecord = &StructAfter<LookupRecord> (coverageZ.as_array (glyphCount));
     struct ContextClosureLookupContext lookup_context = {
@@ -2625,7 +2974,7 @@ struct ContextFormat3
   {
     TRACE_APPLY (this);
     unsigned int index = (this+coverageZ[0]).get_coverage (c->buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return_trace (false);
+    if (index == NOT_COVERED) return_trace (false);
 
     const LookupRecord *lookupRecord = &StructAfter<LookupRecord> (coverageZ.as_array (glyphCount));
     struct ContextApplyLookupContext lookup_context = {
@@ -2665,14 +3014,15 @@ struct ContextFormat3
   bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    if (!c->check_struct (this)) return_trace (false);
+    if (unlikely (!c->check_struct (this))) return_trace (false);
+    hb_barrier ();
     unsigned int count = glyphCount;
-    if (!count) return_trace (false); /* We want to access coverageZ[0] freely. */
-    if (!c->check_array (coverageZ.arrayZ, count)) return_trace (false);
+    if (unlikely (!count)) return_trace (false); /* We want to access coverageZ[0] freely. */
+    if (unlikely (!c->check_array (coverageZ.arrayZ, count))) return_trace (false);
     for (unsigned int i = 0; i < count; i++)
-      if (!coverageZ[i].sanitize (c, this)) return_trace (false);
+      if (unlikely (!coverageZ[i].sanitize (c, this))) return_trace (false);
     const LookupRecord *lookupRecord = &StructAfter<LookupRecord> (coverageZ.as_array (glyphCount));
-    return_trace (c->check_array (lookupRecord, lookupCount));
+    return_trace (likely (c->check_array (lookupRecord, lookupCount)));
   }
 
   protected:
@@ -2695,15 +3045,15 @@ struct Context
   template <typename context_t, typename ...Ts>
   typename context_t::return_t dispatch (context_t *c, Ts&&... ds) const
   {
-    if (unlikely (!c->may_dispatch (this, &u.format))) return c->no_dispatch_return_value ();
-    TRACE_DISPATCH (this, u.format);
-    switch (u.format) {
-    case 1: return_trace (c->dispatch (u.format1, std::forward<Ts> (ds)...));
-    case 2: return_trace (c->dispatch (u.format2, std::forward<Ts> (ds)...));
-    case 3: return_trace (c->dispatch (u.format3, std::forward<Ts> (ds)...));
+    if (unlikely (!c->may_dispatch (this, &u.format.v))) return c->no_dispatch_return_value ();
+    TRACE_DISPATCH (this, u.format.v);
+    switch (u.format.v) {
+    case 1: hb_barrier (); return_trace (c->dispatch (u.format1, std::forward<Ts> (ds)...));
+    case 2: hb_barrier (); return_trace (c->dispatch (u.format2, std::forward<Ts> (ds)...));
+    case 3: hb_barrier (); return_trace (c->dispatch (u.format3, std::forward<Ts> (ds)...));
 #ifndef HB_NO_BEYOND_64K
-    case 4: return_trace (c->dispatch (u.format4, std::forward<Ts> (ds)...));
-    case 5: return_trace (c->dispatch (u.format5, std::forward<Ts> (ds)...));
+    case 4: hb_barrier (); return_trace (c->dispatch (u.format4, std::forward<Ts> (ds)...));
+    case 5: hb_barrier (); return_trace (c->dispatch (u.format5, std::forward<Ts> (ds)...));
 #endif
     default:return_trace (c->default_return_value ());
     }
@@ -2711,7 +3061,7 @@ struct Context
 
   protected:
   union {
-  HBUINT16                      format;         /* Format identifier */
+  struct { HBUINT16 v; }        format;         /* Format identifier */
   ContextFormat1_4<SmallTypes>  format1;
   ContextFormat2_5<SmallTypes>  format2;
   ContextFormat3                format3;
@@ -2856,13 +3206,16 @@ static inline bool chain_context_apply_lookup (hb_ot_apply_context_t *c,
                                                const LookupRecord lookupRecord[],
                                                const ChainContextApplyLookupContext &lookup_context)
 {
+  if (unlikely (inputCount > HB_MAX_CONTEXT_LENGTH)) return false;
+
+  unsigned start_index = c->buffer->out_len;
   unsigned end_index = c->buffer->idx;
   unsigned match_end = 0;
-  unsigned match_positions[HB_MAX_CONTEXT_LENGTH];
+  bool ret = true;
   if (!(match_input (c,
                      inputCount, input,
                      lookup_context.funcs.match[1], lookup_context.match_data[1],
-                     &match_end, match_positions) && (end_index = match_end)
+                     &match_end) && (end_index = match_end)
        && match_lookahead (c,
                            lookaheadCount, lookahead,
                            lookup_context.funcs.match[2], lookup_context.match_data[2],
@@ -2872,7 +3225,6 @@ static inline bool chain_context_apply_lookup (hb_ot_apply_context_t *c,
     return false;
   }
 
-  unsigned start_index = c->buffer->out_len;
   if (!match_backtrack (c,
                         backtrackCount, backtrack,
                         lookup_context.funcs.match[0], lookup_context.match_data[0],
@@ -2884,15 +3236,19 @@ static inline bool chain_context_apply_lookup (hb_ot_apply_context_t *c,
 
   c->buffer->unsafe_to_break_from_outbuffer (start_index, end_index);
   apply_lookup (c,
-                inputCount, match_positions,
+                inputCount,
                 lookupCount, lookupRecord,
                 match_end);
-  return true;
+
+  return ret;
 }
 
 template <typename Types>
 struct ChainRule
 {
+  template <typename T>
+  friend struct ChainRuleSet;
+
   bool intersects (const hb_set_t *glyphs, ChainContextClosureLookupContext &lookup_context) const
   {
     const auto &input = StructAfter<decltype (inputX)> (backtrack);
@@ -2992,8 +3348,6 @@ struct ChainRule
                   const hb_map_t *lookahead_map = nullptr) const
   {
     TRACE_SERIALIZE (this);
-    auto *out = c->start_embed (this);
-    if (unlikely (!out)) return_trace (false);
 
     const hb_map_t *mapping = backtrack_map;
     serialize_array (c, backtrack.len, + backtrack.iter ()
@@ -3055,13 +3409,17 @@ struct ChainRule
   bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    if (!backtrack.sanitize (c)) return_trace (false);
+    /* Hyper-optimized sanitized because this is really hot. */
+    if (unlikely (!backtrack.len.sanitize (c))) return_trace (false);
+    hb_barrier ();
     const auto &input = StructAfter<decltype (inputX)> (backtrack);
-    if (!input.sanitize (c)) return_trace (false);
+    if (unlikely (!input.lenP1.sanitize (c))) return_trace (false);
+    hb_barrier ();
     const auto &lookahead = StructAfter<decltype (lookaheadX)> (input);
-    if (!lookahead.sanitize (c)) return_trace (false);
+    if (unlikely (!lookahead.len.sanitize (c))) return_trace (false);
+    hb_barrier ();
     const auto &lookup = StructAfter<decltype (lookupX)> (lookahead);
-    return_trace (lookup.sanitize (c));
+    return_trace (likely (lookup.sanitize (c)));
   }
 
   protected:
@@ -3069,7 +3427,7 @@ struct ChainRule
                 backtrack;              /* Array of backtracking values
                                          * (to be matched before the input
                                          * sequence) */
-  HeadlessArrayOf<typename Types::HBUINT>
+  HeadlessArray16Of<typename Types::HBUINT>
                 inputX;                 /* Array of input values (start with
                                          * second glyph) */
   Array16Of<typename Types::HBUINT>
@@ -3142,13 +3500,144 @@ struct ChainRuleSet
               const ChainContextApplyLookupContext &lookup_context) const
   {
     TRACE_APPLY (this);
-    return_trace (
-    + hb_iter (rule)
-    | hb_map (hb_add (this))
-    | hb_map ([&] (const ChainRule &_) { return _.apply (c, lookup_context); })
-    | hb_any
-    )
-    ;
+
+    unsigned num_rules = rule.len;
+
+#ifndef HB_NO_OT_RULESETS_FAST_PATH
+    if (HB_OPTIMIZE_SIZE_VAL || num_rules <= 4)
+#endif
+    {
+    slow:
+      return_trace (
+      + hb_iter (rule)
+      | hb_map (hb_add (this))
+      | hb_map ([&] (const ChainRule &_) { return _.apply (c, lookup_context); })
+      | hb_any
+      )
+      ;
+    }
+
+    /* This version is optimized for speed by matching the first & second
+     * components of the rule here, instead of calling into the matching code.
+     *
+     * Replicated from LigatureSet::apply(). */
+
+    /* We use the iter_context instead of iter_input, to avoid skipping
+     * default-ignorables and such.
+     *
+     * Related: https://github.com/harfbuzz/harfbuzz/issues/4813
+     */
+    auto &skippy_iter = c->iter_context;
+    skippy_iter.reset (c->buffer->idx);
+    skippy_iter.set_match_func (match_always, nullptr);
+    skippy_iter.set_glyph_data ((HBUINT16 *) nullptr);
+    unsigned unsafe_to = (unsigned) -1, unsafe_to1, unsafe_to2 = 0;
+    hb_glyph_info_t *first = nullptr, *second = nullptr;
+    bool matched = skippy_iter.next ();
+    if (likely (matched))
+    {
+      if (skippy_iter.may_skip (c->buffer->info[skippy_iter.idx]))
+      {
+        /* Can't use the fast path if eg. the next char is a default-ignorable
+         * or other skippable. */
+        goto slow;
+      }
+
+      first = &c->buffer->info[skippy_iter.idx];
+      unsafe_to1 = skippy_iter.idx + 1;
+    }
+    else
+    {
+      /* Failed to match a next glyph. Only try applying rules that have
+       * no further input and lookahead. */
+      return_trace (
+      + hb_iter (rule)
+      | hb_map (hb_add (this))
+      | hb_filter ([&] (const ChainRule &_)
+                   {
+                     const auto &input = StructAfter<decltype (_.inputX)> (_.backtrack);
+                     const auto &lookahead = StructAfter<decltype (_.lookaheadX)> (input);
+                     return input.lenP1 <= 1 && lookahead.len == 0;
+                   })
+      | hb_map ([&] (const ChainRule &_) { return _.apply (c, lookup_context); })
+      | hb_any
+      )
+      ;
+    }
+    matched = skippy_iter.next ();
+    if (likely (matched))
+    {
+      if (skippy_iter.may_skip (c->buffer->info[skippy_iter.idx]))
+      {
+        /* Can't use the fast path if eg. the next char is a default-ignorable
+         * or other skippable. */
+        goto slow;
+      }
+
+      second = &c->buffer->info[skippy_iter.idx];
+      unsafe_to2 = skippy_iter.idx + 1;
+    }
+
+    auto match_input = lookup_context.funcs.match[1];
+    auto match_lookahead = lookup_context.funcs.match[2];
+    auto *input_data = lookup_context.match_data[1];
+    auto *lookahead_data = lookup_context.match_data[2];
+    for (unsigned int i = 0; i < num_rules; i++)
+    {
+      const auto &r = this+rule.arrayZ[i];
+
+      const auto &input = StructAfter<decltype (r.inputX)> (r.backtrack);
+      const auto &lookahead = StructAfter<decltype (r.lookaheadX)> (input);
+
+      unsigned lenP1 = input.lenP1;
+      if (lenP1 > 1 ?
+           (!match_input ||
+            match_input (*first, input.arrayZ[0], input_data))
+          :
+           (!lookahead.len || !match_lookahead ||
+            match_lookahead (*first, lookahead.arrayZ[0], lookahead_data)))
+      {
+        lenP1 = hb_max (lenP1, 1u);
+        if (!second ||
+            (lenP1 > 2 ?
+             (!match_input ||
+              match_input (*second, input.arrayZ[1], input_data))
+             :
+             (lookahead.len <= 2 - lenP1 || !match_lookahead ||
+              match_lookahead (*second, lookahead.arrayZ[2 - lenP1], lookahead_data))))
+        {
+          if (r.apply (c, lookup_context))
+          {
+            if (unsafe_to != (unsigned) -1)
+              c->buffer->unsafe_to_concat (c->buffer->idx, unsafe_to);
+            return_trace (true);
+          }
+        }
+        else
+          unsafe_to = unsafe_to2;
+      }
+      else
+      {
+        if (unsafe_to == (unsigned) -1)
+          unsafe_to = unsafe_to1;
+
+        if (lenP1 > 1)
+        {
+          // Skip ahead to next possible first glyph match.
+          for (; i + 1 < num_rules; i++)
+          {
+            const auto &r2 = this+rule.arrayZ[i + 1];
+            const auto &input2 = StructAfter<decltype (r2.inputX)> (r2.backtrack);
+            if (input2.lenP1 <= 1 || input2.arrayZ[0] != input.arrayZ[0])
+              break;
+          }
+        }
+      }
+    }
+    if (likely (unsafe_to != (unsigned) -1))
+      c->buffer->unsafe_to_concat (c->buffer->idx, unsafe_to);
+
+    return_trace (false);
   }
 
   bool subset (hb_subset_context_t *c,
@@ -3229,9 +3718,10 @@ struct ChainContextFormat1_4
 
   void closure (hb_closure_context_t *c) const
   {
-    hb_set_t& cur_active_glyphs = c->push_cur_active_glyphs ();
+    hb_set_t* cur_active_glyphs = c->push_cur_active_glyphs ();
+    if (unlikely (!cur_active_glyphs)) return;
     get_coverage ().intersect_set (c->previous_parent_active_glyphs (),
-                                                 cur_active_glyphs);
+                                   *cur_active_glyphs);
 
     struct ChainContextClosureLookupContext lookup_context = {
       {intersects_glyph, intersected_glyph},
@@ -3299,7 +3789,7 @@ struct ChainContextFormat1_4
   {
     TRACE_APPLY (this);
     unsigned int index = (this+coverage).get_coverage (c->buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return_trace (false);
+    if (index == NOT_COVERED) return_trace (false);
 
     const ChainRuleSet &rule_set = this+ruleSet[index];
     struct ChainContextApplyLookupContext lookup_context = {
@@ -3401,10 +3891,10 @@ struct ChainContextFormat2_5
     if (!(this+coverage).intersects (c->glyphs))
       return;
 
-    hb_set_t& cur_active_glyphs = c->push_cur_active_glyphs ();
+    hb_set_t* cur_active_glyphs = c->push_cur_active_glyphs ();
+    if (unlikely (!cur_active_glyphs)) return;
     get_coverage ().intersect_set (c->previous_parent_active_glyphs (),
-                                                 cur_active_glyphs);
-
+                                   *cur_active_glyphs);
 
     const ClassDef &backtrack_class_def = this+backtrackClassDef;
     const ClassDef &input_class_def = this+inputClassDef;
@@ -3510,60 +4000,57 @@ struct ChainContextFormat2_5
 
   unsigned cache_cost () const
   {
-    unsigned c = (this+lookaheadClassDef).cost () * ruleSet.len;
-    return c >= 4 ? c : 0;
+    return (this+inputClassDef).cost () + (this+lookaheadClassDef).cost ();
   }
-  bool cache_func (hb_ot_apply_context_t *c, bool enter) const
+  static bool cache_func (hb_ot_apply_context_t *c, hb_ot_subtable_cache_op_t op)
   {
-    if (enter)
-    {
-      if (!HB_BUFFER_TRY_ALLOCATE_VAR (c->buffer, syllable))
-        return false;
-      auto &info = c->buffer->info;
-      unsigned count = c->buffer->len;
-      for (unsigned i = 0; i < count; i++)
-        info[i].syllable() = 255;
-      c->new_syllables = 255;
-      return true;
-    }
-    else
-    {
-      c->new_syllables = (unsigned) -1;
-      HB_BUFFER_DEALLOCATE_VAR (c->buffer, syllable);
-      return true;
-    }
+    return context_cache_func (c, op);
   }
 
-  bool apply (hb_ot_apply_context_t *c, bool cached = false) const
+  struct external_cache_t
+  {
+    hb_ot_layout_binary_cache_t coverage;
+  };
+  void *external_cache_create () const
+  {
+    external_cache_t *cache = (external_cache_t *) hb_malloc (sizeof (external_cache_t));
+    if (likely (cache))
+    {
+      cache->coverage.clear ();
+    }
+    return cache;
+  }
+  bool apply_cached (hb_ot_apply_context_t *c, void *external_cache) const { return _apply (c, true, external_cache); }
+  bool apply (hb_ot_apply_context_t *c, void *external_cache) const { return _apply (c, false, external_cache); }
+  bool _apply (hb_ot_apply_context_t *c, bool cached, void *external_cache) const
   {
     TRACE_APPLY (this);
+#ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
+    external_cache_t *cache = (external_cache_t *) external_cache;
+    unsigned int index = (this+coverage).get_coverage_binary (c->buffer->cur().codepoint, cache ? &cache->coverage : nullptr);
+#else
     unsigned int index = (this+coverage).get_coverage (c->buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return_trace (false);
+#endif
+    if (index == NOT_COVERED) return_trace (false);
 
     const ClassDef &backtrack_class_def = this+backtrackClassDef;
     const ClassDef &input_class_def = this+inputClassDef;
     const ClassDef &lookahead_class_def = this+lookaheadClassDef;
 
-    /* For ChainContextFormat2_5 we cache the LookaheadClassDef instead of InputClassDef.
-     * The reason is that most heavy fonts want to identify a glyph in context and apply
-     * a lookup to it. In this scenario, the length of the input sequence is one, whereas
-     * the lookahead / backtrack are typically longer.  The one glyph in input sequence is
-     * looked-up below and no input glyph is looked up in individual rules, whereas the
-     * lookahead and backtrack glyphs are tried.  Since we match lookahead before backtrack,
-     * we should cache lookahead.  This decisions showed a 20% improvement in shaping of
-     * the Gulzar font.
-     */
-
+    /* match_class_caches1 is slightly faster. Use it for lookahead,
+     * which is typically longer. */
     struct ChainContextApplyLookupContext lookup_context = {
-      {{cached && &backtrack_class_def == &lookahead_class_def ? match_class_cached : match_class,
-        cached && &input_class_def == &lookahead_class_def ? match_class_cached : match_class,
-        cached ? match_class_cached : match_class}},
+      {{cached && &backtrack_class_def == &lookahead_class_def ? match_class_cached1 : match_class,
+        cached ? match_class_cached2 : match_class,
+        cached ? match_class_cached1 : match_class}},
       {&backtrack_class_def,
        &input_class_def,
        &lookahead_class_def}
     };
 
-    index = input_class_def.get_class (c->buffer->cur().codepoint);
+    index = cached
+         ? get_class_cached2 (input_class_def, c->buffer->cur())
+          : input_class_def.get_class (c->buffer->cur().codepoint);
     const ChainRuleSet &rule_set = this+ruleSet[index];
     return_trace (rule_set.apply (c, lookup_context));
   }
@@ -3703,10 +4190,11 @@ struct ChainContextFormat3
     if (!(this+input[0]).intersects (c->glyphs))
       return;
 
-    hb_set_t& cur_active_glyphs = c->push_cur_active_glyphs ();
+    hb_set_t* cur_active_glyphs = c->push_cur_active_glyphs ();
+    if (unlikely (!cur_active_glyphs))
+      return;
     get_coverage ().intersect_set (c->previous_parent_active_glyphs (),
-                                                 cur_active_glyphs);
-
+                                   *cur_active_glyphs);
 
     const auto &lookahead = StructAfter<decltype (lookaheadX)> (input);
     const auto &lookup = StructAfter<decltype (lookupX)> (lookahead);
@@ -3787,7 +4275,7 @@ struct ChainContextFormat3
     const auto &input = StructAfter<decltype (inputX)> (backtrack);
 
     unsigned int index = (this+input[0]).get_coverage (c->buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return_trace (false);
+    if (index == NOT_COVERED) return_trace (false);
 
     const auto &lookahead = StructAfter<decltype (lookaheadX)> (input);
     const auto &lookup = StructAfter<decltype (lookupX)> (lookahead);
@@ -3825,8 +4313,6 @@ struct ChainContextFormat3
   {
     TRACE_SUBSET (this);
 
-    auto *out = c->serializer->start_embed (this);
-    if (unlikely (!out)) return_trace (false);
     if (unlikely (!c->serializer->embed (this->format))) return_trace (false);
 
     if (!serialize_coverage_offsets (c, backtrack.iter (), this))
@@ -3853,14 +4339,17 @@ struct ChainContextFormat3
   bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    if (!backtrack.sanitize (c, this)) return_trace (false);
+    if (unlikely (!backtrack.sanitize (c, this))) return_trace (false);
+    hb_barrier ();
     const auto &input = StructAfter<decltype (inputX)> (backtrack);
-    if (!input.sanitize (c, this)) return_trace (false);
-    if (!input.len) return_trace (false); /* To be consistent with Context. */
+    if (unlikely (!input.sanitize (c, this))) return_trace (false);
+    hb_barrier ();
+    if (unlikely (!input.len)) return_trace (false); /* To be consistent with Context. */
     const auto &lookahead = StructAfter<decltype (lookaheadX)> (input);
-    if (!lookahead.sanitize (c, this)) return_trace (false);
+    if (unlikely (!lookahead.sanitize (c, this))) return_trace (false);
+    hb_barrier ();
     const auto &lookup = StructAfter<decltype (lookupX)> (lookahead);
-    return_trace (lookup.sanitize (c));
+    return_trace (likely (lookup.sanitize (c)));
   }
 
   protected:
@@ -3889,15 +4378,15 @@ struct ChainContext
   template <typename context_t, typename ...Ts>
   typename context_t::return_t dispatch (context_t *c, Ts&&... ds) const
   {
-    if (unlikely (!c->may_dispatch (this, &u.format))) return c->no_dispatch_return_value ();
-    TRACE_DISPATCH (this, u.format);
-    switch (u.format) {
-    case 1: return_trace (c->dispatch (u.format1, std::forward<Ts> (ds)...));
-    case 2: return_trace (c->dispatch (u.format2, std::forward<Ts> (ds)...));
-    case 3: return_trace (c->dispatch (u.format3, std::forward<Ts> (ds)...));
+    if (unlikely (!c->may_dispatch (this, &u.format.v))) return c->no_dispatch_return_value ();
+    TRACE_DISPATCH (this, u.format.v);
+    switch (u.format.v) {
+    case 1: hb_barrier (); return_trace (c->dispatch (u.format1, std::forward<Ts> (ds)...));
+    case 2: hb_barrier (); return_trace (c->dispatch (u.format2, std::forward<Ts> (ds)...));
+    case 3: hb_barrier (); return_trace (c->dispatch (u.format3, std::forward<Ts> (ds)...));
 #ifndef HB_NO_BEYOND_64K
-    case 4: return_trace (c->dispatch (u.format4, std::forward<Ts> (ds)...));
-    case 5: return_trace (c->dispatch (u.format5, std::forward<Ts> (ds)...));
+    case 4: hb_barrier (); return_trace (c->dispatch (u.format4, std::forward<Ts> (ds)...));
+    case 5: hb_barrier (); return_trace (c->dispatch (u.format5, std::forward<Ts> (ds)...));
 #endif
     default:return_trace (c->default_return_value ());
     }
@@ -3905,7 +4394,7 @@ struct ChainContext
 
   protected:
   union {
-  HBUINT16                              format; /* Format identifier */
+  struct { HBUINT16 v; }                format; /* Format identifier */
   ChainContextFormat1_4<SmallTypes>     format1;
   ChainContextFormat2_5<SmallTypes>     format2;
   ChainContextFormat3                   format3;
@@ -3942,6 +4431,7 @@ struct ExtensionFormat1
   {
     TRACE_SANITIZE (this);
     return_trace (c->check_struct (this) &&
+                  hb_barrier () &&
                   extensionLookupType != T::SubTable::Extension);
   }
 
@@ -3950,7 +4440,7 @@ struct ExtensionFormat1
     TRACE_SUBSET (this);
 
     auto *out = c->serializer->start_embed (this);
-    if (unlikely (!out || !c->serializer->extend_min (out))) return_trace (false);
+    if (unlikely (!c->serializer->extend_min (out))) return_trace (false);
 
     out->format = format;
     out->extensionLookupType = extensionLookupType;
@@ -3979,16 +4469,16 @@ struct Extension
 {
   unsigned int get_type () const
   {
-    switch (u.format) {
-    case 1: return u.format1.get_type ();
+    switch (u.format.v) {
+    case 1: hb_barrier (); return u.format1.get_type ();
     default:return 0;
     }
   }
   template <typename X>
   const X& get_subtable () const
   {
-    switch (u.format) {
-    case 1: return u.format1.template get_subtable<typename T::SubTable> ();
+    switch (u.format.v) {
+    case 1: hb_barrier (); return u.format1.template get_subtable<typename T::SubTable> ();
     default:return Null (typename T::SubTable);
     }
   }
@@ -3999,8 +4489,8 @@ struct Extension
   template <typename ...Ts>
   typename hb_subset_context_t::return_t dispatch (hb_subset_context_t *c, Ts&&... ds) const
   {
-    switch (u.format) {
-    case 1: return u.format1.subset (c);
+    switch (u.format.v) {
+    case 1: hb_barrier (); return u.format1.subset (c);
     default: return c->default_return_value ();
     }
   }
@@ -4008,17 +4498,17 @@ struct Extension
   template <typename context_t, typename ...Ts>
   typename context_t::return_t dispatch (context_t *c, Ts&&... ds) const
   {
-    if (unlikely (!c->may_dispatch (this, &u.format))) return c->no_dispatch_return_value ();
-    TRACE_DISPATCH (this, u.format);
-    switch (u.format) {
-    case 1: return_trace (u.format1.dispatch (c, std::forward<Ts> (ds)...));
+    if (unlikely (!c->may_dispatch (this, &u.format.v))) return c->no_dispatch_return_value ();
+    TRACE_DISPATCH (this, u.format.v);
+    switch (u.format.v) {
+    case 1: hb_barrier (); return_trace (u.format1.dispatch (c, std::forward<Ts> (ds)...));
     default:return_trace (c->default_return_value ());
     }
   }
 
   protected:
   union {
-  HBUINT16              format;         /* Format identifier */
+  struct { HBUINT16 v; }        format;         /* Format identifier */
   ExtensionFormat1<T>   format1;
   } u;
 };
@@ -4053,28 +4543,43 @@ struct hb_ot_layout_lookup_accelerator_t
 
     thiz->digest.init ();
     for (auto& subtable : hb_iter (thiz->subtables, count))
-      thiz->digest.add (subtable.digest);
+      thiz->digest.union_ (subtable.digest);
+
+    thiz->count = count;
 
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
-    thiz->cache_user_idx = c_accelerate_subtables.cache_user_idx;
+    thiz->subtable_cache_user_idx = c_accelerate_subtables.subtable_cache_user_idx;
+
     for (unsigned i = 0; i < count; i++)
-      if (i != thiz->cache_user_idx)
-        thiz->subtables[i].apply_cached_func = thiz->subtables[i].apply_func;
+      if (i != thiz->subtable_cache_user_idx)
+       thiz->subtables[i].apply_cached_func = thiz->subtables[i].apply_func;
 #endif
 
     return thiz;
   }
 
+  void fini ()
+  {
+#ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
+    for (unsigned i = 0; i < count; i++)
+      hb_free (subtables[i].external_cache);
+#endif
+  }
+
   bool may_have (hb_codepoint_t g) const
   { return digest.may_have (g); }
 
-  bool apply (hb_ot_apply_context_t *c, unsigned subtables_count, bool use_cache) const
+#ifndef HB_OPTIMIZE_SIZE
+  HB_ALWAYS_INLINE
+#endif
+  bool apply (hb_ot_apply_context_t *c, bool use_cache) const
   {
+    c->lookup_accel = this;
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
     if (use_cache)
     {
       return
-      + hb_iter (hb_iter (subtables, subtables_count))
+      + hb_iter (hb_iter (subtables, count))
       | hb_map ([&c] (const hb_accelerate_subtables_context_t::hb_applicable_t &_) { return _.apply_cached (c); })
       | hb_any
       ;
@@ -4083,7 +4588,7 @@ struct hb_ot_layout_lookup_accelerator_t
 #endif
     {
       return
-      + hb_iter (hb_iter (subtables, subtables_count))
+      + hb_iter (hb_iter (subtables, count))
       | hb_map ([&c] (const hb_accelerate_subtables_context_t::hb_applicable_t &_) { return _.apply (c); })
       | hb_any
       ;
@@ -4094,8 +4599,8 @@ struct hb_ot_layout_lookup_accelerator_t
   bool cache_enter (hb_ot_apply_context_t *c) const
   {
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
-    return cache_user_idx != (unsigned) -1 &&
-           subtables[cache_user_idx].cache_enter (c);
+    return subtable_cache_user_idx != (unsigned) -1 &&
+           subtables[subtable_cache_user_idx].cache_enter (c);
 #else
     return false;
 #endif
@@ -4103,15 +4608,16 @@ struct hb_ot_layout_lookup_accelerator_t
   void cache_leave (hb_ot_apply_context_t *c) const
   {
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
-    subtables[cache_user_idx].cache_leave (c);
+    subtables[subtable_cache_user_idx].cache_leave (c);
 #endif
   }
 
 
   hb_set_digest_t digest;
   private:
+  unsigned count = 0; /* Number of subtables in the array. */
 #ifndef HB_NO_OT_LAYOUT_LOOKUP_CACHE
-  unsigned cache_user_idx = (unsigned) -1;
+  unsigned subtable_cache_user_idx = (unsigned) -1;
 #endif
   hb_accelerate_subtables_context_t::hb_applicable_t subtables[HB_VAR_ARRAY];
 };
@@ -4138,7 +4644,7 @@ struct GSUBGPOSVersion1_2
   public:
   DEFINE_SIZE_MIN (4 + 3 * Types::size);
 
-  unsigned int get_size () const
+  size_t get_size () const
   {
     return min_size +
            (version.to_int () >= 0x00010001u ? featureVars.static_size : 0);
@@ -4202,13 +4708,6 @@ struct GSUBGPOSVersion1_2
       if (!c->subset_context->serializer->extend_min (&out->featureVars))
         return_trace (false);
 
-      // TODO(qxliu76): the current implementation doesn't correctly handle feature variations
-      //                that are dropped by instancing when the associated conditions don't trigger.
-      //                Since partial instancing isn't yet supported this isn't an issue yet but will
-      //                need to be fixed for partial instancing.
-
-
-
       // if all axes are pinned all feature vars are dropped.
       bool ret = !c->subset_context->plan->all_axes_pinned
                  && out->featureVars.serialize_subset (c->subset_context, featureVars, this, c);
@@ -4227,12 +4726,12 @@ struct GSUBGPOSVersion1_2
 
 struct GSUBGPOS
 {
-  unsigned int get_size () const
+  size_t get_size () const
   {
     switch (u.version.major) {
-    case 1: return u.version1.get_size ();
+    case 1: hb_barrier (); return u.version1.get_size ();
 #ifndef HB_NO_BEYOND_64K
-    case 2: return u.version2.get_size ();
+    case 2: hb_barrier (); return u.version2.get_size ();
 #endif
     default: return u.version.static_size;
     }
@@ -4243,10 +4742,11 @@ struct GSUBGPOS
   {
     TRACE_SANITIZE (this);
     if (unlikely (!u.version.sanitize (c))) return_trace (false);
+    hb_barrier ();
     switch (u.version.major) {
-    case 1: return_trace (u.version1.sanitize<TLookup> (c));
+    case 1: hb_barrier (); return_trace (u.version1.sanitize<TLookup> (c));
 #ifndef HB_NO_BEYOND_64K
-    case 2: return_trace (u.version2.sanitize<TLookup> (c));
+    case 2: hb_barrier (); return_trace (u.version2.sanitize<TLookup> (c));
 #endif
     default: return_trace (true);
     }
@@ -4256,9 +4756,9 @@ struct GSUBGPOS
   bool subset (hb_subset_layout_context_t *c) const
   {
     switch (u.version.major) {
-    case 1: return u.version1.subset<TLookup> (c);
+    case 1: hb_barrier (); return u.version1.subset<TLookup> (c);
 #ifndef HB_NO_BEYOND_64K
-    case 2: return u.version2.subset<TLookup> (c);
+    case 2: hb_barrier (); return u.version2.subset<TLookup> (c);
 #endif
     default: return false;
     }
@@ -4267,9 +4767,9 @@ struct GSUBGPOS
   const ScriptList &get_script_list () const
   {
     switch (u.version.major) {
-    case 1: return this+u.version1.scriptList;
+    case 1: hb_barrier (); return this+u.version1.scriptList;
 #ifndef HB_NO_BEYOND_64K
-    case 2: return this+u.version2.scriptList;
+    case 2: hb_barrier (); return this+u.version2.scriptList;
 #endif
     default: return Null (ScriptList);
     }
@@ -4277,9 +4777,9 @@ struct GSUBGPOS
   const FeatureList &get_feature_list () const
   {
     switch (u.version.major) {
-    case 1: return this+u.version1.featureList;
+    case 1: hb_barrier (); return this+u.version1.featureList;
 #ifndef HB_NO_BEYOND_64K
-    case 2: return this+u.version2.featureList;
+    case 2: hb_barrier (); return this+u.version2.featureList;
 #endif
     default: return Null (FeatureList);
     }
@@ -4287,9 +4787,9 @@ struct GSUBGPOS
   unsigned int get_lookup_count () const
   {
     switch (u.version.major) {
-    case 1: return (this+u.version1.lookupList).len;
+    case 1: hb_barrier (); return (this+u.version1.lookupList).len;
 #ifndef HB_NO_BEYOND_64K
-    case 2: return (this+u.version2.lookupList).len;
+    case 2: hb_barrier (); return (this+u.version2.lookupList).len;
 #endif
     default: return 0;
     }
@@ -4297,9 +4797,9 @@ struct GSUBGPOS
   const Lookup& get_lookup (unsigned int i) const
   {
     switch (u.version.major) {
-    case 1: return (this+u.version1.lookupList)[i];
+    case 1: hb_barrier (); return (this+u.version1.lookupList)[i];
 #ifndef HB_NO_BEYOND_64K
-    case 2: return (this+u.version2.lookupList)[i];
+    case 2: hb_barrier (); return (this+u.version2.lookupList)[i];
 #endif
     default: return Null (Lookup);
     }
@@ -4307,9 +4807,9 @@ struct GSUBGPOS
   const FeatureVariations &get_feature_variations () const
   {
     switch (u.version.major) {
-    case 1: return (u.version.to_int () >= 0x00010001u ? this+u.version1.featureVars : Null (FeatureVariations));
+    case 1: hb_barrier (); return (u.version.to_int () >= 0x00010001u && hb_barrier () ? this+u.version1.featureVars : Null (FeatureVariations));
 #ifndef HB_NO_BEYOND_64K
-    case 2: return this+u.version2.featureVars;
+    case 2: hb_barrier (); return this+u.version2.featureVars;
 #endif
     default: return Null (FeatureVariations);
     }
@@ -4343,13 +4843,14 @@ struct GSUBGPOS
   { return get_feature_list ().find_index (tag, index); }
 
   bool find_variations_index (const int *coords, unsigned int num_coords,
-                              unsigned int *index) const
+                              unsigned int *index,
+                              ItemVarStoreInstancer *instancer) const
   {
 #ifdef HB_NO_VAR
     *index = FeatureVariations::NOT_FOUND_INDEX;
     return false;
 #endif
-    return get_feature_variations ().find_index (coords, num_coords, index);
+    return get_feature_variations ().find_index (coords, num_coords, index, instancer);
   }
   const Feature& get_feature_variation (unsigned int feature_index,
                                         unsigned int variations_index) const
@@ -4368,11 +4869,11 @@ struct GSUBGPOS
   }
 
   void feature_variation_collect_lookups (const hb_set_t *feature_indexes,
-                                          const hb_hashmap_t<unsigned, const Feature*> *feature_substitutes_map,
+                                          const hb_hashmap_t<unsigned, hb::shared_ptr<hb_set_t>> *feature_record_cond_idx_map,
                                           hb_set_t       *lookup_indexes /* OUT */) const
   {
 #ifndef HB_NO_VAR
-    get_feature_variations ().collect_lookups (feature_indexes, feature_substitutes_map, lookup_indexes);
+    get_feature_variations ().collect_lookups (feature_indexes, feature_record_cond_idx_map, lookup_indexes);
 #endif
   }
 
@@ -4479,7 +4980,10 @@ struct GSUBGPOS
   {
     accelerator_t (hb_face_t *face)
     {
-      this->table = hb_sanitize_context_t ().reference_table<T> (face);
+      hb_sanitize_context_t sc;
+      sc.lazy_some_gpos = true;
+      this->table = sc.reference_table<T> (face);
+
       if (unlikely (this->table->is_blocklisted (this->table.get_blob (), face)))
       {
         hb_blob_destroy (this->table.get_blob ());
@@ -4488,7 +4992,7 @@ struct GSUBGPOS
 
       this->lookup_count = table->get_lookup_count ();
 
-      this->accels = (hb_atomic_ptr_t<hb_ot_layout_lookup_accelerator_t> *) hb_calloc (this->lookup_count, sizeof (*accels));
+      this->accels = (hb_atomic_t<hb_ot_layout_lookup_accelerator_t *> *) hb_calloc (this->lookup_count, sizeof (*accels));
       if (unlikely (!this->accels))
       {
         this->lookup_count = 0;
@@ -4499,10 +5003,17 @@ struct GSUBGPOS
     ~accelerator_t ()
     {
       for (unsigned int i = 0; i < this->lookup_count; i++)
-        hb_free (this->accels[i]);
+      {
+        auto *accel = this->accels[i].get_relaxed ();
+        if (accel)
+          accel->fini ();
+        hb_free (accel);
+      }
       hb_free (this->accels);
       this->table.destroy ();
     }
+
+    hb_blob_t *get_blob () const { return table.get_blob (); }
 
     hb_ot_layout_lookup_accelerator_t *get_accel (unsigned lookup_index) const
     {
@@ -4518,6 +5029,7 @@ struct GSUBGPOS
 
         if (unlikely (!accels[lookup_index].cmpexch (nullptr, accel)))
         {
+          accel->fini ();
           hb_free (accel);
           goto retry;
         }
@@ -4528,7 +5040,7 @@ struct GSUBGPOS
 
     hb_blob_ptr_t<T> table;
     unsigned int lookup_count;
-    hb_atomic_ptr_t<hb_ot_layout_lookup_accelerator_t> *accels;
+    hb_atomic_t<hb_ot_layout_lookup_accelerator_t *> *accels;
   };
 
   protected:

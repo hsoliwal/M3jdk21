@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2022 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2022, Tencent. All rights reserved.
+ * Copyright (c) 2025, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -32,6 +33,7 @@ import jdk.internal.platform.Metrics;
  * @test
  * @key cgroups
  * @requires os.family == "linux"
+ * @requires !vm.asan
  * @modules java.base/jdk.internal.platform
  * @library /test/lib
  * @build jdk.test.whitebox.WhiteBox PrintContainerInfo CheckOperatingSystemMXBean
@@ -50,10 +52,8 @@ public class TestMemoryWithCgroupV1 {
             return;
         }
         if ("cgroupv1".equals(metrics.getProvider())) {
-            if (!DockerTestUtils.canTestDocker()) {
-                return;
-            }
-
+            DockerTestUtils.checkCanTestDocker();
+            DockerTestUtils.checkCanUseResourceLimits();
             Common.prepareWhiteBox();
             DockerTestUtils.buildJdkContainerImage(imageName);
 
@@ -77,6 +77,7 @@ public class TestMemoryWithCgroupV1 {
         Common.logNewTestCase("Test print_container_info()");
 
         DockerRunOptions opts = Common.newOpts(imageName, "PrintContainerInfo").addJavaOpts("-XshowSettings:system");
+        opts.addDockerOpts("--cpus", "4"); // Avoid OOM kill on many-core systems
         opts.addDockerOpts("--memory", dockerMemLimit, "--memory-swappiness", "0", "--memory-swap", dockerSwapMemLimit);
         Common.addWhiteBoxOpts(opts);
 
@@ -104,6 +105,7 @@ public class TestMemoryWithCgroupV1 {
             String swappiness, String expectedSwap) throws Exception {
         Common.logNewTestCase("Check OperatingSystemMXBean");
         DockerRunOptions opts = Common.newOpts(imageName, "CheckOperatingSystemMXBean")
+                .addDockerOpts("--cpus", "4") // Avoid OOM kill on many-core systems
                 .addDockerOpts(
                         "--memory", memoryAllocation,
                         "--memory-swappiness", swappiness,

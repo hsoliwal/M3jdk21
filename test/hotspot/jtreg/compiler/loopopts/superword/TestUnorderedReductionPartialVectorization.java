@@ -26,7 +26,6 @@
  * @bug JDK-8310130
  * @summary Special test cases for PhaseIdealLoop::move_unordered_reduction_out_of_loop
  *          Here a case with partial vectorization of the reduction.
- * @requires vm.bits == "64"
  * @library /test/lib /
  * @run driver compiler.loopopts.superword.TestUnorderedReductionPartialVectorization
  */
@@ -59,8 +58,10 @@ public class TestUnorderedReductionPartialVectorization {
     }
 
     @Test
-    @IR(counts = {IRNode.LOAD_VECTOR, "> 0",
-                  IRNode.OR_REDUCTION_V, "> 0",},
+    @IR(counts = {IRNode.LOAD_VECTOR_I,   IRNode.VECTOR_SIZE + "min(max_int, max_long)", "> 0",
+                  IRNode.VECTOR_CAST_I2L, IRNode.VECTOR_SIZE + "min(max_int, max_long)", "> 0",
+                  IRNode.OR_REDUCTION_V,                                                 "> 0",},
+        applyIfPlatform = {"64-bit", "true"},
         applyIfCPUFeatureOr = {"avx2", "true"})
     static long test1(int[] data, long sum) {
         for (int i = 0; i < data.length; i++) {
@@ -75,7 +76,7 @@ public class TestUnorderedReductionPartialVectorization {
             // PhaseIdealLoop::move_unordered_reduction_out_of_loop
             int v = data[i]; // int read
             data[0] = 0;     // ruin the first pack
-            sum |= v;        // long reduction
+            sum |= v;        // long reduction (and implicit cast from int to long)
         }
         return sum;
     }

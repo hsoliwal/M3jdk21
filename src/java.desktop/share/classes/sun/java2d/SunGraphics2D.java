@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1996, 2025, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -1902,9 +1902,9 @@ public final class SunGraphics2D
         if (usrClip == null) {
             clipState = CLIP_DEVICE;
             clipRegion = devClip;
-        } else if (usrClip instanceof Rectangle2D) {
+        } else if (usrClip instanceof Rectangle2D clip) {
             clipState = CLIP_RECTANGULAR;
-            clipRegion = devClip.getIntersection((Rectangle2D) usrClip);
+            clipRegion = devClip.getIntersection(clip);
         } else {
             PathIterator cpi = usrClip.getPathIterator(null);
             int[] box = new int[4];
@@ -2150,27 +2150,33 @@ public final class SunGraphics2D
         }
 
         Blit ob = lastCAblit;
-        if (dy == 0 && dx > 0 && dx < w) {
-            while (w > 0) {
-                int partW = Math.min(w, dx);
-                w -= partW;
-                int sx = x + w;
-                ob.Blit(theData, theData, comp, clip,
-                        sx, y, sx+dx, y+dy, partW, h);
+        try {
+            if (dy == 0 && dx > 0 && dx < w) {
+                while (w > 0) {
+                    int partW = Math.min(w, dx);
+                    w -= partW;
+                    int sx = Math.addExact(x, w);
+                    ob.Blit(theData, theData, comp, clip,
+                            sx, y, sx+dx, y+dy, partW, h);
+                }
+                return;
             }
+            if (dy > 0 && dy < h && dx > -w && dx < w) {
+                while (h > 0) {
+                    int partH = Math.min(h, dy);
+                    h -= partH;
+                    int sy = Math.addExact(y, h);
+                    ob.Blit(theData, theData, comp, clip,
+                            x, sy, Math.addExact(x, dx), sy+dy, w, partH);
+                }
+                return;
+            }
+            ob.Blit(theData, theData, comp, clip, x, y,
+                Math.addExact(x, dx), Math.addExact(y, dy), w, h);
+        } catch (ArithmeticException ex) {
+            // We are hitting integer overflow in Math.addExact()
             return;
         }
-        if (dy > 0 && dy < h && dx > -w && dx < w) {
-            while (h > 0) {
-                int partH = Math.min(h, dy);
-                h -= partH;
-                int sy = y + h;
-                ob.Blit(theData, theData, comp, clip,
-                        x, sy, x+dx, sy+dy, w, partH);
-            }
-            return;
-        }
-            ob.Blit(theData, theData, comp, clip, x, y, x+dx, y+dy, w, h);
     }
 
     /*

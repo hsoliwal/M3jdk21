@@ -134,12 +134,13 @@ int ArrayCopyNode::get_count(PhaseGVN *phase) const {
       assert (ary_src != nullptr, "not an array or instance?");
       // clone passes a length as a rounded number of longs. If we're
       // cloning an array we'll do it element by element. If the
-      // length input to ArrayCopyNode is constant, length of input
-      // array must be too.
-
-      assert((get_length_if_constant(phase) == -1) != ary_src->size()->is_con() ||
+      // length of the input array is constant, ArrayCopyNode::Length
+      // must be too. Note that the opposite does not need to hold,
+      // because different input array lengths (e.g. int arrays with
+      // 3 or 4 elements) might lead to the same length input
+      // (e.g. 2 double-words).
+      assert(!ary_src->size()->is_con() || (get_length_if_constant(phase) >= 0) ||
              phase->is_IterGVN() || phase->C->inlining_incrementally() || StressReflectiveCode, "inconsistent");
-
       if (ary_src->size()->is_con()) {
         return ary_src->size()->get_con();
       }
@@ -151,7 +152,10 @@ int ArrayCopyNode::get_count(PhaseGVN *phase) const {
 }
 
 Node* ArrayCopyNode::load(BarrierSetC2* bs, PhaseGVN *phase, Node*& ctl, MergeMemNode* mem, Node* adr, const TypePtr* adr_type, const Type *type, BasicType bt) {
-  DecoratorSet decorators = C2_READ_ACCESS | C2_CONTROL_DEPENDENT_LOAD | IN_HEAP | C2_ARRAY_COPY;
+  // Pin the load: if this is an array load, it's going to be dependent on a condition that's not a range check for that
+  // access. If that condition is replaced by an identical dominating one, then an unpinned load would risk floating
+  // above runtime checks that guarantee it is within bounds.
+  DecoratorSet decorators = C2_READ_ACCESS | C2_CONTROL_DEPENDENT_LOAD | IN_HEAP | C2_ARRAY_COPY | C2_UNKNOWN_CONTROL_LOAD;
   C2AccessValuePtr addr(adr, adr_type);
   C2OptAccess access(*phase, ctl, mem, decorators, bt, adr->in(AddPNode::Base), addr);
   Node* res = bs->load_at(access, type);
@@ -205,6 +209,15 @@ Node* ArrayCopyNode::try_clone_instance(PhaseGVN *phase, bool can_reshape, int c
     } else {
       phase->C->dependencies()->assert_leaf_type(ik);
     }
+  }
+
+  const TypeInstPtr* dest_type = phase->type(base_dest)->is_instptr();
+  if (dest_type->instance_klass() != ik) {
+    // At parse time, the exact type of the object to clone was not known. That inexact type was captured by the CheckCastPP
+    // of the newly allocated cloned object (in dest). The exact type is now known (in src), but the type for the cloned object
+    // (dest) was not updated. When copying the fields below, Store nodes may write to offsets for fields that don't exist in
+    // the inexact class. The stores would then be assigned an incorrect slice.
+    return NodeSentinel;
   }
 
   assert(ik->nof_nonstatic_fields() <= ArrayCopyLoadStoreMaxElem, "too many fields");

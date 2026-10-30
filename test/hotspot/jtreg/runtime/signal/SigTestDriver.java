@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007, 2020, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2023, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -53,15 +53,9 @@ public class SigTestDriver {
         switch (signame) {
             case "SIGWAITING":
             case "SIGKILL":
-            case "SIGSTOP": {
-                throw new SkippedException("signals SIGWAITING, SIGKILL and SIGSTOP can't be tested");
-            }
+            case "SIGSTOP":
             case "SIGUSR2": {
-                if (Platform.isLinux()) {
-                    throw new SkippedException("SIGUSR2 can't be tested on Linux");
-                } else if (Platform.isOSX()) {
-                    throw new SkippedException("SIGUSR2 can't be tested on OS X");
-                }
+                throw new SkippedException("signals SIGWAITING, SIGKILL, SIGSTOP and SIGUSR2 can't be tested");
             }
         }
 
@@ -144,7 +138,6 @@ public class SigTestDriver {
     }
 
     private static Path libjsig() {
-        return Platform.jvmLibDir().resolve((Platform.isWindows() ? "" : "lib")
-                + "jsig." + Platform.sharedLibraryExt());
+        return Platform.jvmLibDir().resolve(Platform.buildSharedLibraryName("jsig"));
     }
 }

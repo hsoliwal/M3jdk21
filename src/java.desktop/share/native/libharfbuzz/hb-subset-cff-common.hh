@@ -115,7 +115,7 @@ struct str_encoder_t
       encode_byte (OpCode_BCD);
 
       // Based on:
-      // https://github.com/fonttools/fonttools/blob/97ed3a61cde03e17b8be36f866192fbd56f1d1a7/Lib/fontTools/misc/psCharStrings.py#L265-L294
+      // https://github.com/fonttools/fonttools/blob/0738c41dfbcbc213ab9263f486ef0cccc6eb5ce5/Lib/fontTools/misc/psCharStrings.py#L267-L316
 
       char buf[16];
       /* FontTools has the following comment:
@@ -133,12 +133,55 @@ struct str_encoder_t
       (void) hb_uselocale (((void) freelocale (clocale), oldlocale));
 
       char *s = buf;
+      size_t len;
+      char *comma = strchr (s, ',');
+      if (comma) // Comma for some European locales in case no uselocale available.
+        *comma = '.';
       if (s[0] == '0' && s[1] == '.')
         s++;
       else if (s[0] == '-' && s[1] == '0' && s[2] == '.')
       {
         s[1] = '-';
         s++;
+      }
+      else if ((len = strlen (s)) > 3 && !strcmp (s + len - 3, "000"))
+      {
+        unsigned exponent = len - 3;
+        char *s2 = s + exponent - 1;
+        while (*s2 == '0' && exponent > 1)
+        {
+          s2--;
+          exponent++;
+        }
+        snprintf (s2 + 1, sizeof (buf) - (s2 + 1 - buf), "E%u", exponent);
+      }
+      else
+      {
+        char *dot = strchr (s, '.');
+        char *e = strchr (s, 'E');
+        if (dot && e)
+        {
+          memmove (dot, dot + 1, e - (dot + 1));
+          int exponent = atoi (e + 1);
+          int new_exponent = exponent - (e - (dot + 1));
+          if (new_exponent == 1)
+          {
+            e[-1] = '0';
+            e[0] = '\0';
+          }
+          else
+            snprintf (e - 1, sizeof (buf) - (e - 1 - buf), "E%d", new_exponent);
+        }
+      }
+      if ((s[0] == '.' && s[1] == '0') || (s[0] == '-' && s[1] == '.' && s[2] == '0'))
+      {
+        int sign = s[0] == '-';
+        char *s2 = s + sign + 1;
+        while (*s2 == '0')
+          s2++;
+        len = strlen (s2);
+        memmove (s + sign, s2, len);
+        snprintf (s + sign + len, sizeof (buf) - (s + sign + len - buf), "E-%u", (unsigned) (strlen (s + sign) - 1));
       }
       hb_vector_t<char> nibbles;
       while (*s)
@@ -155,20 +198,22 @@ struct str_encoder_t
             {
               s++;
               nibbles.push (0x0C); // E-
-              continue;
+            } else {
+              if (c2 == '+')
+                s++;
+              nibbles.push (0x0B); // E
             }
-            if (c2 == '+')
+            if (*s == '0')
               s++;
-            nibbles.push (0x0B); // E
             continue;
           }
 
-          case '.': case ',': // Comma for some European locales in case no uselocale available.
+          case '.':
             nibbles.push (0x0A); // .
             continue;
 
           case '-':
-            nibbles.push (0x0E); // .
+            nibbles.push (0x0E); // -
             continue;
         }
 
@@ -276,11 +321,31 @@ struct cff_font_dict_op_serializer_t : op_serializer_t
   }
 };
 
+/* CharString command for specialization */
+struct cs_command_t
+{
+  hb_vector_t<number_t> args;
+  hb_vector_t<unsigned char> mask_bytes; /* For hintmask/cntrmask payload bytes. */
+  op_code_t op;
+
+  cs_command_t () : op (OpCode_Invalid) {}
+  cs_command_t (op_code_t op_) : op (op_) {}
+};
+
+typedef hb_vector_t<cs_command_t> *cs_command_vec_t;
+
 struct flatten_param_t
 {
+  flatten_param_t (str_buff_t &flatStr_,
+                   bool drop_hints_,
+                   const hb_subset_plan_t *plan_,
+                   cs_command_vec_t commands_ = nullptr)
+    : flatStr (flatStr_), drop_hints (drop_hints_), plan (plan_), commands (commands_) {}
+
   str_buff_t     &flatStr;
   bool  drop_hints;
   const hb_subset_plan_t *plan;
+  cs_command_vec_t commands; /* Optional: capture parsed commands for specialization */
 };
 
 template <typename ACC, typename ENV, typename OPSET, op_code_t endchar_op=OpCode_Invalid>
@@ -290,7 +355,8 @@ struct subr_flattener_t
                     const hb_subset_plan_t *plan_)
                    : acc (acc_), plan (plan_) {}
 
-  bool flatten (str_buff_vec_t &flat_charstrings)
+  bool flatten (str_buff_vec_t &flat_charstrings,
+                hb_vector_t<hb_vector_t<cs_command_t>> *command_capture = nullptr)
   {
     unsigned count = plan->num_output_glyphs ();
     if (!flat_charstrings.resize_exact (count))
@@ -316,7 +382,8 @@ struct subr_flattener_t
       flatten_param_t  param = {
         flat_charstrings.arrayZ[i],
         (bool) (plan->flags & HB_SUBSET_FLAGS_NO_HINTING),
-        plan
+        plan,
+        command_capture ? &(*command_capture)[i] : nullptr
       };
       if (unlikely (!interp.interpret (param)))
         return false;
@@ -480,6 +547,7 @@ struct cff_subset_accelerator_t
       const hb_vector_t<parsed_cs_str_vec_t>& parsed_local_subrs) {
     cff_subset_accelerator_t* accel =
         (cff_subset_accelerator_t*) hb_malloc (sizeof(cff_subset_accelerator_t));
+    if (unlikely (!accel)) return nullptr;
     new (accel) cff_subset_accelerator_t (original_blob,
                                           parsed_charstrings,
                                           parsed_global_subrs,
@@ -510,15 +578,21 @@ struct cff_subset_accelerator_t
     original_blob = hb_blob_reference (original_blob_);
   }
 
-  ~cff_subset_accelerator_t() {
+  ~cff_subset_accelerator_t()
+  {
     hb_blob_destroy (original_blob);
-    hb_map_destroy (glyph_to_sid_map.get_relaxed ());
+    auto *mapping = glyph_to_sid_map.get_relaxed ();
+    if (mapping)
+    {
+      mapping->~glyph_to_sid_map_t ();
+      hb_free (mapping);
+    }
   }
 
   parsed_cs_str_vec_t parsed_charstrings;
   parsed_cs_str_vec_t parsed_global_subrs;
   hb_vector_t<parsed_cs_str_vec_t> parsed_local_subrs;
-  mutable hb_atomic_ptr_t<hb_map_t> glyph_to_sid_map = nullptr;
+  mutable hb_atomic_t<glyph_to_sid_map_t *> glyph_to_sid_map;
 
  private:
   hb_blob_t* original_blob;
@@ -600,9 +674,8 @@ struct subr_remap_t : hb_inc_bimap_t
      * no optimization based on usage counts. fonttools doesn't appear doing that either.
      */
 
-    resize (closure->get_population ());
-    hb_codepoint_t old_num = HB_SET_VALUE_INVALID;
-    while (hb_set_next (closure, &old_num))
+    alloc (closure->get_population ());
+    for (auto old_num : *closure)
       add (old_num);
 
     if (get_population () < 1240)
@@ -672,8 +745,8 @@ struct subr_subsetter_t
   {
     unsigned fd_count = acc.fdCount;
     const cff_subset_accelerator_t* cff_accelerator = nullptr;
-    if (plan->accelerator && plan->accelerator->cff_accelerator) {
-      cff_accelerator = plan->accelerator->cff_accelerator;
+    if (acc.cff_accelerator) {
+      cff_accelerator = acc.cff_accelerator;
       fd_count = cff_accelerator->parsed_local_subrs.length;
     }
 
@@ -709,14 +782,13 @@ struct subr_subsetter_t
     }
 
     /* phase 1 & 2 */
-    for (unsigned int i = 0; i < plan->num_output_glyphs (); i++)
+    for (auto _ : plan->new_to_old_gid_list)
     {
-      hb_codepoint_t  glyph;
-      if (!plan->old_gid_for_new_gid (i, &glyph))
-        continue;
+      hb_codepoint_t new_glyph = _.first;
+      hb_codepoint_t old_glyph = _.second;
 
-      const hb_ubytes_t str = (*acc.charStrings)[glyph];
-      unsigned int fd = acc.fdSelect->get_fd (glyph);
+      const hb_ubytes_t str = (*acc.charStrings)[old_glyph];
+      unsigned int fd = acc.fdSelect->get_fd (old_glyph);
       if (unlikely (fd >= acc.fdCount))
         return false;
 
@@ -725,9 +797,9 @@ struct subr_subsetter_t
         // parsed string already exists in accelerator, copy it and move
         // on.
         if (cached_charstrings)
-          cached_charstrings[i] = &cff_accelerator->parsed_charstrings[glyph];
+          cached_charstrings[new_glyph] = &cff_accelerator->parsed_charstrings[old_glyph];
         else
-          parsed_charstrings[i] = cff_accelerator->parsed_charstrings[glyph];
+          parsed_charstrings[new_glyph] = cff_accelerator->parsed_charstrings[old_glyph];
 
         continue;
       }
@@ -735,8 +807,8 @@ struct subr_subsetter_t
       ENV env (str, acc, fd);
       cs_interpreter_t<ENV, OPSET, subr_subset_param_t> interp (env);
 
-      parsed_charstrings[i].alloc (str.length);
-      subr_subset_param_t  param (&parsed_charstrings[i],
+      parsed_charstrings[new_glyph].alloc (str.length);
+      subr_subset_param_t  param (&parsed_charstrings[new_glyph],
                                   &parsed_global_subrs_storage,
                                   &parsed_local_subrs_storage[fd],
                                   &closures.global_closure,
@@ -747,12 +819,12 @@ struct subr_subsetter_t
         return false;
 
       /* complete parsed string esp. copy CFF1 width or CFF2 vsindex to the parsed charstring for encoding */
-      SUBSETTER::complete_parsed_str (interp.env, param, parsed_charstrings[i]);
+      SUBSETTER::complete_parsed_str (interp.env, param, parsed_charstrings[new_glyph]);
 
       /* mark hint ops and arguments for drop */
       if ((plan->flags & HB_SUBSET_FLAGS_NO_HINTING) || plan->inprogress_accelerator)
       {
-        subr_subset_param_t  param (&parsed_charstrings[i],
+        subr_subset_param_t  param (&parsed_charstrings[new_glyph],
                                     &parsed_global_subrs_storage,
                                     &parsed_local_subrs_storage[fd],
                                     &closures.global_closure,
@@ -760,21 +832,21 @@ struct subr_subsetter_t
                                     plan->flags & HB_SUBSET_FLAGS_NO_HINTING);
 
         drop_hints_param_t  drop;
-        if (drop_hints_in_str (parsed_charstrings[i], param, drop))
+        if (drop_hints_in_str (parsed_charstrings[new_glyph], param, drop))
         {
-          parsed_charstrings[i].set_hint_dropped ();
+          parsed_charstrings[new_glyph].set_hint_dropped ();
           if (drop.vsindex_dropped)
-            parsed_charstrings[i].set_vsindex_dropped ();
+            parsed_charstrings[new_glyph].set_vsindex_dropped ();
         }
       }
 
-      /* Doing this here one by one instead of compacting all at the en
+      /* Doing this here one by one instead of compacting all at the end
        * has massive peak-memory saving.
        *
        * The compacting both saves memory and makes further operations
        * faster.
        */
-      parsed_charstrings[i].compact ();
+      parsed_charstrings[new_glyph].compact ();
     }
 
     /* Since parsed strings were loaded from accelerator, we still need
@@ -797,23 +869,38 @@ struct subr_subsetter_t
 
   bool encode_charstrings (str_buff_vec_t &buffArray, bool encode_prefix = true) const
   {
-    if (unlikely (!buffArray.resize_exact (plan->num_output_glyphs ())))
+    unsigned num_glyphs = plan->num_output_glyphs ();
+    if (unlikely (!buffArray.resize_exact (num_glyphs)))
       return false;
-    for (unsigned int i = 0; i < plan->num_output_glyphs (); i++)
+    hb_codepoint_t last = 0;
+    for (auto _ : plan->new_to_old_gid_list)
     {
-      hb_codepoint_t  glyph;
-      if (!plan->old_gid_for_new_gid (i, &glyph))
-      {
-        /* add an endchar only charstring for a missing glyph if CFF1 */
-        if (endchar_op != OpCode_Invalid) buffArray.arrayZ[i].push (endchar_op);
-        continue;
-      }
-      unsigned int  fd = acc.fdSelect->get_fd (glyph);
+      hb_codepoint_t gid = _.first;
+      hb_codepoint_t old_glyph = _.second;
+
+      if (endchar_op != OpCode_Invalid)
+        for (; last < gid; last++)
+        {
+          // Hack to point vector to static string.
+          auto &b = buffArray.arrayZ[last];
+          b.set_storage (const_cast<unsigned char *>(endchar_str), 1);
+        }
+
+      last++; // Skip over gid
+      unsigned int  fd = acc.fdSelect->get_fd (old_glyph);
       if (unlikely (fd >= acc.fdCount))
         return false;
-      if (unlikely (!encode_str (get_parsed_charstring (i), fd, buffArray.arrayZ[i], encode_prefix)))
+      if (unlikely (!encode_str (get_parsed_charstring (gid), fd, buffArray.arrayZ[gid], encode_prefix)))
         return false;
     }
+    if (endchar_op != OpCode_Invalid)
+      for (; last < num_glyphs; last++)
+      {
+        // Hack to point vector to static string.
+        auto &b = buffArray.arrayZ[last];
+        b.set_storage (const_cast<unsigned char *>(endchar_str), 1);
+      }
+
     return true;
   }
 
@@ -980,24 +1067,23 @@ struct subr_subsetter_t
                             const hb_vector_t<parsed_cs_str_vec_t>& local_subrs)
   {
     closures.reset ();
-    for (unsigned int i = 0; i < plan->num_output_glyphs (); i++)
+    for (auto _ : plan->new_to_old_gid_list)
     {
-      hb_codepoint_t  glyph;
-      if (!plan->old_gid_for_new_gid (i, &glyph))
-        continue;
-      unsigned int fd = acc.fdSelect->get_fd (glyph);
+      hb_codepoint_t new_glyph = _.first;
+      hb_codepoint_t old_glyph = _.second;
+      unsigned int fd = acc.fdSelect->get_fd (old_glyph);
       if (unlikely (fd >= acc.fdCount))
         return false;
 
       // Note: const cast is safe here because the collect_subr_refs_in_str only performs a
       //       closure and does not modify any of the charstrings.
-      subr_subset_param_t  param (const_cast<parsed_cs_str_t*> (&get_parsed_charstring (i)),
+      subr_subset_param_t  param (const_cast<parsed_cs_str_t*> (&get_parsed_charstring (new_glyph)),
                                   const_cast<parsed_cs_str_vec_t*> (&global_subrs),
                                   const_cast<parsed_cs_str_vec_t*> (&local_subrs[fd]),
                                   &closures.global_closure,
                                   &closures.local_closures[fd],
                                   plan->flags & HB_SUBSET_FLAGS_NO_HINTING);
-      collect_subr_refs_in_str (get_parsed_charstring (i), param);
+      collect_subr_refs_in_str (get_parsed_charstring (new_glyph), param);
     }
 
     return true;
@@ -1062,7 +1148,7 @@ struct subr_subsetter_t
       if (opstr.op == OpCode_callsubr || opstr.op == OpCode_callgsubr)
         size += 3;
     }
-    if (!buff.alloc (buff.length + size, true))
+    if (!buff.alloc_exact (buff.length + size))
       return false;
 
     for (auto &opstr : str.values)
@@ -1105,14 +1191,11 @@ struct subr_subsetter_t
 
     compact_parsed_subrs ();
 
-    plan->inprogress_accelerator->cff_accelerator =
+    acc.cff_accelerator =
         cff_subset_accelerator_t::create(acc.blob,
                                          parsed_charstrings,
                                          parsed_global_subrs_storage,
                                          parsed_local_subrs_storage);
-    plan->inprogress_accelerator->destroy_cff_accelerator =
-        cff_subset_accelerator_t::destroy;
-
   }
 
   const parsed_cs_str_t& get_parsed_charstring (unsigned i) const

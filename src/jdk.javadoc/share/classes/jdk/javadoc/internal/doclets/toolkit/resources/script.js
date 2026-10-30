@@ -157,7 +157,7 @@ function show(tableId, selected, columns) {
 }
 
 function updateTabs(tableId, selected) {
-    document.querySelector('div#' + tableId +' .summary-table')
+    document.getElementById(tableId + '.tabpanel')
         .setAttribute('aria-labelledby', selected);
     document.querySelectorAll('button[id^="' + tableId + '"]')
         .forEach(function(tab, index) {
@@ -216,13 +216,13 @@ function copyToClipboard(content) {
 function switchCopyLabel(button, span) {
     var copied = span.getAttribute("data-copied");
     button.classList.add("visible");
-    var initialLabel = span.innerHTML;
-    span.innerHTML = copied;
+    var initialLabel = span.textContent;
+    span.textContent = copied;
     setTimeout(function() {
         button.classList.remove("visible");
         setTimeout(function() {
             if (initialLabel !== copied) {
-                span.innerHTML = initialLabel;
+                span.textContent = initialLabel;
             }
         }, 100);
     }, 1900);

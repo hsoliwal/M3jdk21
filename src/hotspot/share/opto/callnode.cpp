@@ -263,7 +263,8 @@ uint TailJumpNode::match_edge(uint idx) const {
 
 //=============================================================================
 JVMState::JVMState(ciMethod* method, JVMState* caller) :
-  _method(method) {
+  _method(method),
+  _receiver_info(nullptr) {
   assert(method != nullptr, "must be valid call site");
   _bci = InvocationEntryBci;
   _reexecute = Reexecute_Undefined;
@@ -279,7 +280,8 @@ JVMState::JVMState(ciMethod* method, JVMState* caller) :
   _sp = 0;
 }
 JVMState::JVMState(int stack_size) :
-  _method(nullptr) {
+  _method(nullptr),
+  _receiver_info(nullptr) {
   _bci = InvocationEntryBci;
   _reexecute = Reexecute_Undefined;
   debug_only(_map = (SafePointNode*)-1);
@@ -614,6 +616,7 @@ JVMState* JVMState::clone_shallow(Compile* C) const {
   n->set_endoff(_endoff);
   n->set_sp(_sp);
   n->set_map(_map);
+  n->set_receiver_info(_receiver_info);
   return n;
 }
 
@@ -686,6 +689,20 @@ int JVMState::interpreter_frame_size() const {
     jvms = jvms->caller();
   }
   return size + Deoptimization::last_frame_adjust(0, callee_locals) * BytesPerWord;
+}
+
+// Compute receiver info for a compiled lambda form at call site.
+ciInstance* JVMState::compute_receiver_info(ciMethod* callee) const {
+  assert(callee != nullptr && callee->is_compiled_lambda_form(), "");
+  if (has_method() && method()->is_compiled_lambda_form()) { // callee is not a MH invoker
+    Node* recv = map()->argument(this, 0);
+    assert(recv != nullptr, "");
+    const TypeOopPtr* recv_toop = recv->bottom_type()->isa_oopptr();
+    if (recv_toop != nullptr && recv_toop->const_oop() != nullptr) {
+      return recv_toop->const_oop()->as_instance();
+    }
+  }
+  return nullptr;
 }
 
 //=============================================================================
@@ -1262,7 +1279,7 @@ void CallLeafNode::dump_spec(outputStream *st) const {
 
 //=============================================================================
 
-void SafePointNode::set_local(JVMState* jvms, uint idx, Node *c) {
+void SafePointNode::set_local(const JVMState* jvms, uint idx, Node *c) {
   assert(verify_jvms(jvms), "jvms must match");
   int loc = jvms->locoff() + idx;
   if (in(loc)->is_top() && idx > 0 && !c->is_top() ) {
@@ -1465,9 +1482,11 @@ SafePointScalarObjectNode::SafePointScalarObjectNode(const TypeOopPtr* tp,
                                                      Node* alloc,
 #endif
                                                      uint first_index,
+                                                     uint depth,
                                                      uint n_fields) :
   TypeNode(tp, 1), // 1 control input -- seems required.  Get from root.
   _first_index(first_index),
+  _depth(depth),
   _n_fields(n_fields)
 #ifdef ASSERT
   , _alloc(alloc)
@@ -1907,6 +1926,22 @@ bool AbstractLockNode::find_unlocks_for_region(const RegionNode* region, LockNod
 
 }
 
+// Check that all locks/unlocks associated with object come from balanced regions.
+bool AbstractLockNode::is_balanced() {
+  Node* obj = obj_node();
+  for (uint j = 0; j < obj->outcnt(); j++) {
+    Node* n = obj->raw_out(j);
+    if (n->is_AbstractLock() &&
+        n->as_AbstractLock()->obj_node()->eqv_uncast(obj)) {
+      BoxLockNode* n_box = n->as_AbstractLock()->box_node()->as_BoxLock();
+      if (n_box->is_unbalanced()) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 const char* AbstractLockNode::_kind_names[] = {"Regular", "NonEscObj", "Coarsened", "Nested"};
 
 const char * AbstractLockNode::kind_as_string() const {
@@ -1959,7 +1994,7 @@ Node *LockNode::Ideal(PhaseGVN *phase, bool can_reshape) {
     // If we are locking an non-escaped object, the lock/unlock is unnecessary
     //
     ConnectionGraph *cgr = phase->C->congraph();
-    if (cgr != nullptr && cgr->not_global_escape(obj_node())) {
+    if (cgr != nullptr && cgr->can_eliminate_lock(this)) {
       assert(!is_eliminated() || is_coarsened(), "sanity");
       // The lock could be marked eliminated by lock coarsening
       // code during first IGVN before EA. Replace coarsened flag
@@ -2013,6 +2048,8 @@ Node *LockNode::Ideal(PhaseGVN *phase, bool can_reshape) {
           int unlocks = 0;
           if (Verbose) {
             tty->print_cr("=== Locks coarsening ===");
+            tty->print("Obj: ");
+            obj_node()->dump();
           }
           for (int i = 0; i < lock_ops.length(); i++) {
             AbstractLockNode* lock = lock_ops.at(i);
@@ -2021,6 +2058,8 @@ Node *LockNode::Ideal(PhaseGVN *phase, bool can_reshape) {
             else
               unlocks++;
             if (Verbose) {
+              tty->print("Box %d: ", i);
+              box_node()->dump();
               tty->print(" %d: ", i);
               lock->dump();
             }
@@ -2122,6 +2161,7 @@ bool LockNode::is_nested_lock_region(Compile * c) {
       obj_node = bs->step_over_gc_barrier(obj_node);
       BoxLockNode* box_node = sfn->monitor_box(jvms, idx)->as_BoxLock();
       if ((box_node->stack_slot() < stk_slot) && obj_node->eqv_uncast(obj)) {
+        box->set_nested();
         return true;
       }
     }
@@ -2155,7 +2195,7 @@ Node *UnlockNode::Ideal(PhaseGVN *phase, bool can_reshape) {
     // If we are unlocking an non-escaped object, the lock/unlock is unnecessary.
     //
     ConnectionGraph *cgr = phase->C->congraph();
-    if (cgr != nullptr && cgr->not_global_escape(obj_node())) {
+    if (cgr != nullptr && cgr->can_eliminate_lock(this)) {
       assert(!is_eliminated() || is_coarsened(), "sanity");
       // The lock could be marked eliminated by lock coarsening
       // code during first IGVN before EA. Replace coarsened flag

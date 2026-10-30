@@ -31,6 +31,7 @@ import java.util.Random;
 /*
  * @test
  * @bug 8294816
+ * @key randomness
  * @summary Test Math.min/max vectorization miscompilation for integer subwords
  * @library /test/lib /
  * @requires vm.compiler2.enabled
@@ -61,7 +62,7 @@ public class TestMinMaxSubword {
     // as Java APIs for Math.min/max do not support integer subword types and superword
     // should not generate vectorized Min/Max nodes for them.
     @Test
-    @IR(failOn = {IRNode.MIN_V})
+    @IR(failOn = {IRNode.MIN_VI, IRNode.MIN_VF, IRNode.MIN_VD})
     public static void testMinShort() {
         for (int i = 0; i < LENGTH; i++) {
            sb[i] = (short) Math.min(sa[i], val);
@@ -77,7 +78,7 @@ public class TestMinMaxSubword {
     }
 
     @Test
-    @IR(failOn = {IRNode.MAX_V})
+    @IR(failOn = {IRNode.MAX_VI, IRNode.MAX_VF, IRNode.MAX_VD})
     public static void testMaxShort() {
         for (int i = 0; i < LENGTH; i++) {
             sb[i] = (short) Math.max(sa[i], val);
@@ -92,7 +93,7 @@ public class TestMinMaxSubword {
     }
 
     @Test
-    @IR(failOn = {IRNode.MIN_V})
+    @IR(failOn = {IRNode.MIN_VI, IRNode.MIN_VF, IRNode.MIN_VD})
     public static void testMinByte() {
         for (int i = 0; i < LENGTH; i++) {
            bb[i] = (byte) Math.min(ba[i], val);
@@ -108,7 +109,7 @@ public class TestMinMaxSubword {
     }
 
     @Test
-    @IR(failOn = {IRNode.MAX_V})
+    @IR(failOn = {IRNode.MAX_VI, IRNode.MAX_VF, IRNode.MAX_VD})
     public static void testMaxByte() {
         for (int i = 0; i < LENGTH; i++) {
             bb[i] = (byte) Math.max(ba[i], val);
