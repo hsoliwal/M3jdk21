@@ -10,7 +10,12 @@ on:
       - 'm3/**'
       - '.github/workflows/m3-first-release-admission.yml'
   push:
+    # master: development-mode receipt per landed commit
+    # (release-contract.json execution_evidence.require_exact_commit_and_tree).
+    # release/**: --release mode at the single fork commit.
+    # main.yml keeps branches-ignore: master; this is the release gate, not the build.
     branches:
+      - 'master'
       - 'release/**'
   workflow_dispatch:
 
@@ -18,7 +23,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: m3-first-release-admission-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
