@@ -105,7 +105,13 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
     borrowed_states = {
         "BORROWED_CANONICAL_WITH_FROZEN_LEGACY",
         "BORROWED_CANONICAL_LEGACY_RETIRED",
+        "BORROWED_CANONICAL_TARGET_ADAPTER",
     }
+    # Receiver facades registered on 2026-10-13 (71da947eb1f): the legacy path is a live
+    # target adapter (policy RECEIVER_ADAPTER_ONLY), not a frozen blob; its canonical mirror is.
+    adapter_state = "BORROWED_CANONICAL_TARGET_ADAPTER"
+    adapter_marker = "TARGET_ADAPTER"
+    adapter_root = "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/"
     pending_states = {
         "SYNEXIA_CANONICAL_PENDING_MERGE_TARGET_ADAPTER_RETAINED",
         "SYNEXIA_CANONICAL_PENDING_MERGE_TARGET_OVERLAY_RETAINED",
@@ -123,10 +129,18 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
         if not HEX40.fullmatch(row["synexia_revision"]):
             raise ValueError(f"invalid Synexia revision at row {physical}")
         revisions.add(row["synexia_revision"])
+        adapter = state == adapter_state
         for field in ("legacy_git_blob", "synexia_git_blob"):
+            if adapter and field == "legacy_git_blob":
+                if row[field] != adapter_marker:
+                    raise ValueError(f"target adapter row must carry {adapter_marker} at row {physical}")
+                continue
             if not HEX40.fullmatch(row[field]):
                 raise ValueError(f"invalid Git blob {field} at row {physical}")
-        if not row["legacy_path"].startswith(legacy_roots):
+        if adapter:
+            if not row["legacy_path"].startswith(adapter_root):
+                raise ValueError(f"target adapter escaped receiver namespace at row {physical}")
+        elif not row["legacy_path"].startswith(legacy_roots):
             raise ValueError(f"legacy recipe escaped frozen namespace at row {physical}")
         pending = state in pending_states
         if pending:
@@ -145,6 +159,9 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
         }:
             if not legacy.is_file() or git_blob(legacy) != row["legacy_git_blob"]:
                 raise ValueError(f"retained target adapter drift: {row['legacy_path']}")
+        elif adapter:
+            if not legacy.is_file():
+                raise ValueError(f"receiver target adapter missing: {row['legacy_path']}")
         else:
             if legacy.exists():
                 raise ValueError(f"retired legacy recipe reintroduced: {row['legacy_path']}")
@@ -162,17 +179,11 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
 
 def reusable_residue_paths() -> set[str]:
     result: set[str] = set()
-    for exact in (
-        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java",
-        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
-    ):
-        if (ROOT / exact).is_file():
-            result.add(exact)
-
+    # Java21 convergence and A3 surfaces are RECEIVER_ADAPTER_ONLY in synexia-recipe-home-policy.tsv
+    # (2026-10-13, 670ee45ed25/71da947eb1f); they are custody rows, not frozen residue.
     for directory in (
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
-        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
         "m3/indexdb/src/main/java/com/m3",
     ):
         start = ROOT / directory
