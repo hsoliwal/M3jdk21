@@ -163,7 +163,7 @@ static void prepare(const case_spec *spec, lane_kind width, injected_change chan
     for (jint i = 0; i < CAPACITY; i++) {
         frame.ints[i] = INT32_C(1515870810);
         frame.longs[i] = INT64_C(6510615555426900570);
-        frame.states[i] = (jbyte)0xa5;
+        frame.states[i] = (jbyte)-91;
     }
     uint32_t random = spec->seed;
     for (jint i = 0; i < spec->length; i++) {
