@@ -38,9 +38,12 @@ public final class M3Constructor {
     public long structuralHash64() { return owner.memberStructuralHash64(row); }
 
     public Optional<Constructor<?>> tryConstructor() {
-        return owner.resolveReflectiveElement(row)
-                .filter(Constructor.class::isInstance)
-                .map(element -> (Constructor<?>) element);
+        Optional<?> element = owner.resolveReflectiveElement(row)
+                .filter(Constructor.class::isInstance);
+        // The filter proves the payload type; the Optional cannot replace that payload.
+        @SuppressWarnings("unchecked")
+        Optional<Constructor<?>> typed = (Optional<Constructor<?>>) element;
+        return typed;
     }
 
     public Constructor<?> toConstructor() {

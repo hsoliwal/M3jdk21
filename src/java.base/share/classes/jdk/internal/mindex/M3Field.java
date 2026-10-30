@@ -34,9 +34,12 @@ public final class M3Field {
     public long structuralHash64() { return owner.memberStructuralHash64(row); }
 
     public Optional<Field> tryField() {
-        return owner.resolveReflectiveElement(row)
-                .filter(Field.class::isInstance)
-                .map(Field.class::cast);
+        Optional<?> element = owner.resolveReflectiveElement(row)
+                .filter(Field.class::isInstance);
+        // The filter proves the payload type; the Optional cannot replace that payload.
+        @SuppressWarnings("unchecked")
+        Optional<Field> typed = (Optional<Field>) element;
+        return typed;
     }
 
     public Field toField() {

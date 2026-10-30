@@ -1,0 +1,43 @@
+{
+  "schema": "M3_MINDEX_OPTIONAL_REUSE_PASSIVE_RECEIPT_V1",
+  "canonical_repository": "https://github.com/hsoliwal/com.synexia",
+  "canonical_revision": "00bdbea3ee2fe0a7fc8a991f39e5dad2a0e8d604",
+  "canonical_path_root": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/enhancement/",
+  "reference_rule": "All evidence/recipe paths are relative to canonical_path_root at canonical_revision; target paths are repository-relative.",
+  "target_repository": "hsoliwal/M3jdk21",
+  "receipt_role": "PASSIVE_COMPONENT_EVIDENCE_ONLY",
+  "maven": {"path": "pom.xml", "sha256": "040f46d34212513d7d9e48e4ce327652bc8e0ad4f799e11c0e5f6f3de2452346"},
+  "descriptor": {"path": "src/main/resources/META-INF/rewrite/m3-doop-enhancement-20261030.yml", "sha256": "b6d34997a38f1e328b19cce4f9e9a8b816b261ce8cebcdc6ba7b0422fb8026a2"},
+  "sdk_execution": {"qualification": {"path": "evidence/qualification-summary.json", "sha256": "0b097ab9d3b0cad5790b8ec177a254a54e376ed3e0a956922186e2176e2e327d"}, "maven_log": {"path": "evidence/registration-sdk.log", "sha256": "3e9351684e3b903e12f7e3b035aa146e0591167577f8617368727a1754e6dd61"}, "scope": "Actual Java/Text SDK emissions, fixed points and missing/drift/occupied/duplicate refusals; receipt metadata execution is separate."},
+  "target_preimage_revision": "95d6da5145203ee0e1abac8caa0e3287bc4da33d",
+  "manifests": [
+    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-field-optional-20261030/manifest.tsv", "sha256": "8e8f761b891803a23e0391efc47fbee07c32a7b74d6d36dfc7f675ccce0d02a1", "recipe": "com.synexia.m3.M3FieldOptionalReuse20261030"},
+    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-method-optional-20261030/manifest.tsv", "sha256": "d016694ff7283acc030c72091e31cf9efdfb008f0019b53516ea1b108fcb1738", "recipe": "com.synexia.m3.M3MethodOptionalReuse20261030"},
+    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-constructor-optional-20261030/manifest.tsv", "sha256": "6a349ef6a61b3b844372a64f3ea00f6bb2dcb6be94c893b07b0daba6b13c9ddd", "recipe": "com.synexia.m3.M3ConstructorOptionalReuse20261030"},
+    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-recordcomponent-optional-20261030/manifest.tsv", "sha256": "4b40ef2d71614f758f3252a2c8d87e002516c9d4a0dd99e99c37c0f3a75c9508", "recipe": "com.synexia.m3.M3RecordComponentOptionalReuse20261030"},
+    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-optional-oracle-20261030/manifest.tsv", "sha256": "4da12f8cbeb3c6cf5187de7bb9e85b5f18087b85900256c86d7f9e54eb5087bd", "recipe": "com.synexia.m3.M3ReflectiveOptionalOracle20261030"},
+    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mindex-optional-naming-20261030/manifest.tsv", "sha256": "81fe8e923472daa4177a903669ce19dcf9a8df530ad2214451557c376da6df1e", "engine": "M3HashPinnedTextSnapshotRecipe", "crate": "m3-mindex-optional-naming-20261030"}
+  ],
+  "source_transitions": [
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java", "before": {"sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481", "git_blob_sha1": "fad031da70ce813f52e5fc06479542a224bcd81a"}, "after": {"sha256": "2751a887889e4ce360f0e85403ec06edf43185857e70d1a168daf5cb67eaa3be", "git_blob_sha1": "33f48e3452cdb5e677ab6f3c3f949153f56b5c82"}},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java", "before": {"sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58", "git_blob_sha1": "6bc2fe9176bdd9c95d732ecad105f03b62f4385e"}, "after": {"sha256": "83aa169fe7381960551fc769bb6df7557e898017038f92773722fed4c7ac9f87", "git_blob_sha1": "80702dce8f4816f99f0aa6d7c723e3743d06c4b5"}},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java", "before": {"sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923", "git_blob_sha1": "4d708115e139a4ab938a4f9abd856f7fc98c5c00"}, "after": {"sha256": "a24c031c5bdc31bf4c6e10c9e3125683fb2ce57adb7f1dbda0c19193c775e28a", "git_blob_sha1": "7cf8102819c395a4fd70050061bce8c6cb17a742"}},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java", "before": {"sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd", "git_blob_sha1": "55f82a8486055d50e24d1a9b12b0636f9db876ed"}, "after": {"sha256": "1721413bfd8e2fa981dea761d1b0c5e3c5c2ea4999738d887348c724d902c043", "git_blob_sha1": "54854ea713d0f52f710b2f3bab8ec12980750c73"}},
+    {"path": "test/jdk/java/lang/Class/M3ReflectiveOptionalReuseTest.java", "before": {"sha256": "ABSENT", "git_blob_sha1": null}, "after": {"sha256": "3383a05a013aaf86029bd9ecfc0e0357d66ec6eac49126ad71193a2b00b565ad", "git_blob_sha1": "fcadf88e7b53cb4a7cc4ca42b5a5b669b9f5c1aa"}},
+    {"path": "m3/docs/name-mapping.json", "before": {"sha256": "dbbf8c9a9bcea01ea071e513877c01a6ab8925160ad0a58426b9d2a36dedf02e", "git_blob_sha1": "af30f7075fffd8e074fc02dee287fb622c119a6b"}, "after": {"sha256": "71930eadce7bd6889525a360f35328dad0535ff5a32d2e646a9f9345455f0bee", "git_blob_sha1": "e65bff35122d02dfa6be4662ceeab65cc6f96a62"}},
+    {"path": "m3/tooling/name-contract/name-plan.json", "before": {"sha256": "47b30ec215f6173c2599534861a6d3a5bce53d32c5b072830ae116968976a668", "git_blob_sha1": "e1a0a1083610ade4cc939b39856959c99e71b532"}, "after": {"sha256": "d2cb06d0106b964e51108a95dbc0026312f30ebf8b6703b5d468005463187def", "git_blob_sha1": "e4320d6941d2a409d8cc79c48bccf7a4f6b463d3"}}
+  ],
+  "runtime_evidence": {"path": "evidence/runtime/mindex/qualification.json", "sha256": "8aea6d9a19c663189a8ed0836d34b94cb96400601c0717022dad81f2448c41d1"},
+  "qualification": {"status": "PASS_COMPONENT_OUTPUTS", "mode": "Real Java21 owner closure patched into java.base; not a source-built JDK.", "owners": 13, "cumulative_compile_states": 5, "executions": ["baseline/normal", "baseline/-Xint", "sdk-final/normal", "sdk-final/-Xint"], "standalone_checks_per_execution": 6069, "junit_atoms_per_execution": 4, "api": "Public descriptors unchanged.", "bytecode": "Each accessor retains one resolver and filter call; map calls change from one to zero.", "naming": "Stable IDs, implemented-unverified/experimental status, source/recipe lineage and four QUEUED operations preserved; prior targets appended.", "jni": "UNCHANGED_NOT_EXERCISED", "allocation_and_throughput": "NOT_MEASURED"},
+  "remaining_gates": [
+    "SOURCE_BUILT_M3JDK21_IMAGE_JTREG_NOT_RUN",
+    "CLASS_UNLOADING_NOT_TESTED",
+    "FULL_JVM_CLASSLOADER_MODULE_AGENT_CDS_JNI_JIT_ADMISSION_OPEN",
+    "FULL_FAMILY_AST_COMPILER_AND_REPRESENTATIVE_PERFORMANCE_OPEN",
+    "M3CLASS_AND_FOUR_MEMBER_DIRECT_COPY_LEDGER_REVIEW_REQUIRED",
+    "INHERITED_ARRAYS_COMPANION_HASH_MISMATCH_NAME_GATE_HOLD",
+    "FULL_INHERITED_PROVENANCE_LEDGER_UNAVAILABLE",
+    "REMOTE_CI_AND_TARGET_RELEASE_ACCEPTANCE_SEPARATE"
+  ],
+  "promotion": false
+}
