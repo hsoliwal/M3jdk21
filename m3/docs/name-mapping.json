@@ -4460,8 +4460,8 @@
             "signatures": [
               "jdk.internal.mindex.M3Member"
             ],
-            "sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
-            "git_blob_sha1": null,
+            "sha256": "e5e53a14c357b1342bebc91235ad8a7ed856ace514ce55cf613440fb285b5028",
+            "git_blob_sha1": "3350f025b0f3e7e521f5a08f3524651dffb8c3d6",
             "fingerprint": null,
             "revision_role": "candidate",
             "tracking_ref": null
@@ -4555,11 +4555,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
+              "symbol": "jdk.internal.mindex.M3Member",
+              "signatures": [
+                "jdk.internal.mindex.M3Member"
+              ],
+              "sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "candidate",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. 2026-10-30 DOOP string projection refinement: toString reads the declaring name directly from existing M3CI lanes; target hashes bind the emitted SDK output. This updates component source identity only; existing rights, naming, provenance and JVM/JNI/JIT/performance acceptance gates remain open."
       },
       {
         "id": "synexia.counterpart.MIndexMemberKind",
@@ -4992,8 +5008,8 @@
             "signatures": [
               "jdk.internal.mindex.M3Field"
             ],
-            "sha256": "2751a887889e4ce360f0e85403ec06edf43185857e70d1a168daf5cb67eaa3be",
-            "git_blob_sha1": "33f48e3452cdb5e677ab6f3c3f949153f56b5c82",
+            "sha256": "11eb5c21fa87bdb8a7e15468582d1a47a708be0e2f4710dd6e0b4208f97338cf",
+            "git_blob_sha1": "b26fa6a55f39c3ff4d3a5ad0312bf8a94b4eaab3",
             "fingerprint": null,
             "revision_role": "candidate",
             "tracking_ref": null
@@ -5102,12 +5118,27 @@
               "fingerprint": null,
               "revision_role": "candidate",
               "tracking_ref": null
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
+              "symbol": "jdk.internal.mindex.M3Field",
+              "signatures": [
+                "jdk.internal.mindex.M3Field"
+              ],
+              "sha256": "2751a887889e4ce360f0e85403ec06edf43185857e70d1a168daf5cb67eaa3be",
+              "git_blob_sha1": "33f48e3452cdb5e677ab6f3c3f949153f56b5c82",
+              "fingerprint": null,
+              "revision_role": "candidate",
+              "tracking_ref": null
             }
           ],
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. 2026-10-30 DOOP component refinement: one of four type-checked immutable Optional map elisions, bound to exact SDK output. This is component evidence only; no JDK promotion. Existing JVM/JNI/JIT/performance gates and the inherited direct-copy REVIEW_REQUIRED disposition remain open."
+        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. 2026-10-30 DOOP component refinement: one of four type-checked immutable Optional map elisions, bound to exact SDK output. This is component evidence only; no JDK promotion. Existing JVM/JNI/JIT/performance gates and the inherited direct-copy REVIEW_REQUIRED disposition remain open. 2026-10-30 DOOP string projection refinement: toString reads the declaring name directly from existing M3CI lanes; target hashes bind the emitted SDK output. This updates component source identity only; existing rights, naming, provenance and JVM/JNI/JIT/performance acceptance gates remain open."
       },
       {
         "id": "synexia.counterpart.MIndexMethod",
@@ -5141,8 +5172,8 @@
             "signatures": [
               "jdk.internal.mindex.M3Method"
             ],
-            "sha256": "83aa169fe7381960551fc769bb6df7557e898017038f92773722fed4c7ac9f87",
-            "git_blob_sha1": "80702dce8f4816f99f0aa6d7c723e3743d06c4b5",
+            "sha256": "ebf05465215de2b2f01367f44c15a1b50d32f7432c51c10befe0044dcc7e89d7",
+            "git_blob_sha1": "f77b055a8e9f80f72d97baa3824252f685bf3efc",
             "fingerprint": null,
             "revision_role": "candidate",
             "tracking_ref": null
@@ -5251,12 +5282,27 @@
               "fingerprint": null,
               "revision_role": "candidate",
               "tracking_ref": null
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+              "symbol": "jdk.internal.mindex.M3Method",
+              "signatures": [
+                "jdk.internal.mindex.M3Method"
+              ],
+              "sha256": "83aa169fe7381960551fc769bb6df7557e898017038f92773722fed4c7ac9f87",
+              "git_blob_sha1": "80702dce8f4816f99f0aa6d7c723e3743d06c4b5",
+              "fingerprint": null,
+              "revision_role": "candidate",
+              "tracking_ref": null
             }
           ],
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. 2026-10-30 DOOP component refinement: one of four type-checked immutable Optional map elisions, bound to exact SDK output. This is component evidence only; no JDK promotion. Existing JVM/JNI/JIT/performance gates and the inherited direct-copy REVIEW_REQUIRED disposition remain open."
+        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. 2026-10-30 DOOP component refinement: one of four type-checked immutable Optional map elisions, bound to exact SDK output. This is component evidence only; no JDK promotion. Existing JVM/JNI/JIT/performance gates and the inherited direct-copy REVIEW_REQUIRED disposition remain open. 2026-10-30 DOOP string projection refinement: toString reads the declaring name directly from existing M3CI lanes; target hashes bind the emitted SDK output. This updates component source identity only; existing rights, naming, provenance and JVM/JNI/JIT/performance acceptance gates remain open."
       },
       {
         "id": "synexia.counterpart.MIndexConstructor",
@@ -5439,8 +5485,8 @@
             "signatures": [
               "jdk.internal.mindex.M3RecordComponent"
             ],
-            "sha256": "1721413bfd8e2fa981dea761d1b0c5e3c5c2ea4999738d887348c724d902c043",
-            "git_blob_sha1": "54854ea713d0f52f710b2f3bab8ec12980750c73",
+            "sha256": "39ae8ff0e9932cd452bd184ca0f5c89e744d54fb0d482cca7373c22abd53227b",
+            "git_blob_sha1": "78b1554e440a91d228ac42dcd8aafc35444a53f2",
             "fingerprint": null,
             "revision_role": "candidate",
             "tracking_ref": null
@@ -5549,12 +5595,27 @@
               "fingerprint": null,
               "revision_role": "candidate",
               "tracking_ref": null
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+              "symbol": "jdk.internal.mindex.M3RecordComponent",
+              "signatures": [
+                "jdk.internal.mindex.M3RecordComponent"
+              ],
+              "sha256": "1721413bfd8e2fa981dea761d1b0c5e3c5c2ea4999738d887348c724d902c043",
+              "git_blob_sha1": "54854ea713d0f52f710b2f3bab8ec12980750c73",
+              "fingerprint": null,
+              "revision_role": "candidate",
+              "tracking_ref": null
             }
           ],
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. 2026-10-30 DOOP component refinement: one of four type-checked immutable Optional map elisions, bound to exact SDK output. This is component evidence only; no JDK promotion. Existing JVM/JNI/JIT/performance gates and the inherited direct-copy REVIEW_REQUIRED disposition remain open."
+        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. 2026-10-30 DOOP component refinement: one of four type-checked immutable Optional map elisions, bound to exact SDK output. This is component evidence only; no JDK promotion. Existing JVM/JNI/JIT/performance gates and the inherited direct-copy REVIEW_REQUIRED disposition remain open. 2026-10-30 DOOP string projection refinement: toString reads the declaring name directly from existing M3CI lanes; target hashes bind the emitted SDK output. This updates component source identity only; existing rights, naming, provenance and JVM/JNI/JIT/performance acceptance gates remain open."
       },
       {
         "id": "synexia.jcc-recipe-laboratory",

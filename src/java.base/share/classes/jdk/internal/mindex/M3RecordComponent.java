@@ -45,5 +45,5 @@ public final class M3RecordComponent {
                         "JVM RecordComponent boundary is not live for row " + row));
     }
 
-    @Override public String toString() { return getDeclaringRecord().getName() + "#" + getName(); }
+    @Override public String toString() { return owner.binaryName(owner.memberDeclaringClassRow(row)) + "#" + getName(); }
 }

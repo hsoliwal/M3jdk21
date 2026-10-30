@@ -54,6 +54,6 @@ public final class M3Method {
     }
 
     @Override public String toString() {
-        return getDeclaringClass().getName() + "#" + getName() + descriptor();
+        return owner.binaryName(owner.memberDeclaringClassRow(row)) + "#" + getName() + descriptor();
     }
 }

@@ -83,7 +83,7 @@ public final class M3Member {
 
     @Override
     public String toString() {
-        return declaringClass().name() + "#" + name() + descriptor();
+        return owner.binaryName(owner.memberDeclaringClassRow(row)) + "#" + name() + descriptor();
     }
 
     @Override
