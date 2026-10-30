@@ -71,10 +71,21 @@ public final class M3DecoratorFill {
     private final List<String> directInterfaces;
     private final List<String> ledger = new ArrayList<>();
     private String factoryParamType;
+    /** SYNC lane: monitor expression; "this" for the owned class (Commons lock == this), "lock" inside the view helper. */
+    private final String lockExpr;
+    /** VIEW: the Commons lock-sharing Set view class (SynchronizedBag$SynchronizedBagSet, SynchronizedMultiSet$SynchronizedSet). */
+    private Class<?> syncView;
+    private final java.util.Set<String> accessors = new java.util.HashSet<>();
 
-    private M3DecoratorFill(Path sources, Class<?> commons, String scaffold) {
+    private M3DecoratorFill(Path sources, Class<?> commons, String scaffold) throws IOException {
+        this(sources, commons, scaffold, "this");
+    }
+
+    private M3DecoratorFill(Path sources, Class<?> commons, String scaffold, String lockExpr) throws IOException {
+        this.lockExpr = lockExpr;
         this.sources = sources;
         this.commons = commons;
+        accessors();
         this.m3Simple = find(scaffold, "public final class (\\w+)").orElseThrow();
         this.directInterfaces = Arrays.stream(find(scaffold, "(?s)implements(.+?)\\{").orElseThrow().split(",\\s*(?![^<]*>)"))
                 .map(s -> s.trim().replaceAll("<.*", "")).filter(s -> !s.isEmpty()).toList();
@@ -109,7 +120,40 @@ public final class M3DecoratorFill {
             m.appendReplacement(out, Matcher.quoteReplacement(e.category.equals("OBJECT") ? "" : render(a, e)));
         }
         m.appendTail(out);
-        return ledger.stream().anyMatch(r -> r.contains("\tMANUAL\t")) ? out.toString() : header(out.toString());
+        String text = syncView == null ? out.toString() : out.toString().replaceFirst("}\\s*$", Matcher.quoteReplacement(helper() + "}\n"));
+        return ledger.stream().anyMatch(r -> r.contains("\tMANUAL\t")) ? text : header(text);
+    }
+
+    /**
+     * VIEW helper: a lock-sharing Set view. No JDK owner fits (java.util.Collections.synchronizedSet(Set, Object) is
+     * package-private, and the public one locks on itself and synchronizes forEach), so a private static nested class is
+     * emitted. Its atoms are the public methods declared by the Commons lock owner (SynchronizedCollection), synthesized
+     * into a scaffold and filled by this same generator with the lock lane explicit; defaults stay inherited.
+     */
+    private String helper() throws IOException {
+        StringBuilder s = new StringBuilder("public final class SyncSet<E>\n        implements java.util.Set<E>, java.io.Serializable {\n"
+                + "    @java.io.Serial\n    private static final long serialVersionUID = 0L;\n\n"
+                + "    // Planned lanes (decorator)\n    private transient Object backing;\n    private transient int state;\n\n"
+                + "    private SyncSet() {\n        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);\n    }\n");
+        Arrays.stream(syncView.getSuperclass().getDeclaredMethods())
+                .filter(x -> java.lang.reflect.Modifier.isPublic(x.getModifiers()) && !java.lang.reflect.Modifier.isStatic(x.getModifiers()))
+                .filter(x -> !x.isSynthetic() && !x.isBridge()).sorted(java.util.Comparator.comparing(Method::toGenericString))
+                .forEach(x -> s.append("\n    public ").append(signature(x)).append(" {\n        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);\n    }\n"));
+        String scaffold = s.append("}\n").toString();
+        M3DecoratorFill view = new M3DecoratorFill(sources, syncView, scaffold, "lock");
+        view.factoryParamType = "java.util.Set<E>";
+        String text = view.fill(scaffold).replace("public final class SyncSet<E>", "private static final class SyncSet<E>");
+        view.ledger.forEach(r -> ledger.add(m3Simple + "$" + r));
+        return "\n    /** Lock-sharing Set view (VIEW helper): no JDK owner shares the caller's lock; see DECORATOR_FILL SYNC. */\n"
+                + text.lines().map(l -> l.isEmpty() ? l : "    " + l).collect(Collectors.joining("\n")) + "\n";
+    }
+
+    private static String signature(Method x) {
+        String typeParams = x.getTypeParameters().length == 0 ? ""
+                : Arrays.stream(x.getTypeParameters()).map(java.lang.reflect.TypeVariable::getName).collect(Collectors.joining(", ", "<", "> "));
+        java.lang.reflect.Type[] ps = x.getGenericParameterTypes();
+        return typeParams + x.getGenericReturnType().getTypeName() + " " + x.getName() + "(" + java.util.stream.IntStream.range(0, ps.length)
+                .mapToObj(i -> ps[i].getTypeName() + " arg" + i).collect(Collectors.joining(", ")) + ")";
     }
 
     private static Atom atom(String visibility, String signature) {
@@ -238,12 +282,61 @@ public final class M3DecoratorFill {
         return "";
     }
 
+    /**
+     * ACCESSOR rule: a no-argument, non-public method of the Commons class chain whose normalized body is
+     * {@code return [(T) ][super.]decorated();} or {@code return collection;} only re-types the decorated owner
+     * (getBag, getSortedBag, decorated overrides). Calls to it are rewritten to {@code decorated()} before shape matching.
+     */
+    private void accessors() throws IOException {
+        for (Class<?> c = commons; c != null && c != Object.class; c = c.getSuperclass()) {
+            for (Method m : c.getDeclaredMethods()) {
+                if (m.getParameterCount() == 0 && !java.lang.reflect.Modifier.isPublic(m.getModifiers())) {
+                    Atom probe = new Atom("protected", m.getName() + "()", m.getName(), List.of(), false, "");
+                    Optional<String> b = body(probe, c).map(s -> s.substring(0, s.indexOf('\u0000')));
+                    if (b.filter(s -> s.matches("return (\\([\\w.<>, ?]+\\) )?(super\\.)?(decorated\\(\\)|collection);")).isPresent()) {
+                        accessors.add(m.getName());
+                    }
+                }
+            }
+        }
+    }
+
     private Emit shape(Atom a, String bodyAndNames) {
         String body = bodyAndNames.substring(0, bodyAndNames.indexOf('\u0000')).replaceAll("\\.<[\\w, ]+>(\\w+)\\(", ".$1(");
+        for (String accessor : accessors) {
+            body = body.replaceAll("\\b" + accessor + "\\(\\)", "decorated()");
+        }
         List<String> names = bodyAndNames.endsWith("\u0000") ? List.of()
                 : List.of(bodyAndNames.substring(bodyAndNames.indexOf('\u0000') + 1).split(","));
+        return shape(a, body, names);
+    }
+
+    private Emit shape(Atom a, String body, List<String> names) {
         String call = String.join(", ", names);
         String self = commons.getSimpleName();
+        if (a.isStatic && names.size() == 1 && body.equals("return new " + self + "<>(" + call + ");")) {
+            return new Emit("FACTORY_NEW", "return new " + m3Simple + "<>(arg0);");
+        }
+        Matcher guard = Pattern.compile("^if \\((\\w+) == this\\) \\{ return true; \\} (.+)$").matcher(body);
+        if (guard.matches() && names.contains(guard.group(1)) && !isEqualsShape(body, names)) {
+            Emit rest = shape(a, guard.group(2), names);
+            return rest.category.equals("MANUAL") ? new Emit("MANUAL", body)
+                    : new Emit("GUARD+" + rest.category, "if (arg" + names.indexOf(guard.group(1)) + " == this) {\n            return true;\n"
+                            + "        }\n        " + rest.body);
+        }
+        Matcher sync = Pattern.compile("^synchronized \\(lock\\) \\{ (.+) \\}$").matcher(body);
+        if (sync.matches()) {
+            Emit inner = shape(a, sync.group(1), names);
+            return inner.category.equals("MANUAL") ? new Emit("MANUAL", body)
+                    : new Emit("SYNC(" + inner.category + ")", "synchronized (" + lockExpr + ") {\n            "
+                            + inner.body.replace("\n", "\n    ") + "\n        }");
+        }
+        Matcher view = Pattern.compile("^final [\\w.]+(<.*>)? (\\w+) = decorated\\(\\)\\.(\\w+)\\(\\); return new (\\w+)(<>)?\\(\\2, lock\\);$")
+                .matcher(body);
+        if (view.matches() && names.isEmpty() && syncView(view.group(4)).isPresent()) {
+            syncView = syncView(view.group(4)).get();
+            return new Emit("VIEW", "return new SyncSet<>(backing." + view.group(3) + "(), " + lockExpr + ");");
+        }
         if (body.equals("throw new UnsupportedOperationException();")) {
             return new Emit("THROW", "throw new UnsupportedOperationException();");
         }
@@ -259,6 +352,31 @@ public final class M3DecoratorFill {
             return factory(a);
         }
         return wrap(a, body, names);
+    }
+
+    private static boolean isEqualsShape(String body, List<String> names) {
+        String n0 = names.isEmpty() ? "" : names.get(0);
+        return names.size() == 1 && body.equals("if (" + n0 + " == this) { return true; } return decorated().equals(" + n0 + ");");
+    }
+
+    /**
+     * VIEW rule guard: the named Commons member class must implement Set, extend the class that declares the lock lane
+     * and declare no method of its own, so its behaviour is exactly the synchronized-collection atoms over (set, lock).
+     */
+    private Optional<Class<?>> syncView(String simple) {
+        for (Class<?> c = commons; c != null && c != Object.class; c = c.getSuperclass()) {
+            for (Class<?> member : c.getDeclaredClasses()) {
+                if (member.getSimpleName().equals(simple) && java.util.Set.class.isAssignableFrom(member)
+                        && declaresLock(member.getSuperclass()) && member.getDeclaredMethods().length == 0) {
+                    return Optional.of(member);
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+    private static boolean declaresLock(Class<?> c) {
+        return c != null && Arrays.stream(c.getDeclaredFields()).anyMatch(f -> f.getName().equals("lock") && f.getType() == Object.class);
     }
 
     private Emit wrap(Atom a, String body, List<String> names) {
@@ -295,6 +413,10 @@ public final class M3DecoratorFill {
     }
 
     private Emit constructor() {
+        if (lockExpr.equals("lock")) {
+            return new Emit("CONSTRUCTOR_LOCK", "this.backing = java.util.Objects.requireNonNull(arg0, \"collection\");\n"
+                    + "        this.lock = java.util.Objects.requireNonNull(arg1, \"lock\");\u0000" + factoryParamType);
+        }
         if (factoryParamType == null) {
             return new Emit("MANUAL", "no single-argument static factory: constructor shape outside DECORATOR_FILL v1");
         }
@@ -311,15 +433,18 @@ public final class M3DecoratorFill {
     }
 
     private String render(Atom a, Emit e) {
-        if (e.category.equals("CONSTRUCTOR")) {
+        if (e.category.startsWith("CONSTRUCTOR")) {
             String[] bp = e.body.split("\u0000");
             String suppress = bp[0].contains(") java.util") ? "    @SuppressWarnings(\"unchecked\")\n" : "";
-            return suppress + "    private " + m3Simple + "(final " + bp[1] + " arg0) {\n        " + bp[0] + "\n    }\n";
+            String lockParam = e.category.equals("CONSTRUCTOR_LOCK") ? ", final Object arg1" : "";
+            return suppress + "    private " + m3Simple + "(final " + bp[1] + " arg0" + lockParam + ") {\n        " + bp[0] + "\n    }\n";
         }
         boolean override = !a.isStatic && overrides(a);
         boolean unchecked = e.category.equals("FACTORY") && e.body.contains("return (");
+        // MODIFIER rule: the Commons method's ACC_SYNCHRONIZED flag (SynchronizedSortedBag comparator/first/last) is carried over.
+        boolean monitor = !a.isStatic && resolve(a).filter(m -> java.lang.reflect.Modifier.isSynchronized(m.getModifiers())).isPresent();
         return (override ? "    @Override\n" : "") + (unchecked ? "    @SuppressWarnings(\"unchecked\")\n" : "") + "    " + a.visibility + " "
-                + a.signature + " {\n        " + e.body + "\n    }\n";
+                + (monitor ? "synchronized " : "") + a.signature + " {\n        " + e.body + "\n    }\n";
     }
 
     private boolean overrides(Atom a) {
@@ -340,7 +465,8 @@ public final class M3DecoratorFill {
         String generated = "/*\n * GENERATED by " + GENERATOR + " (pattern DECORATOR_FILL v1) from the five-provider scaffold;\n"
                 + " * regenerate, do not hand-edit. Behaviour mirrors " + commons.getName() + "\n"
                 + " * from Apache Commons Collections 4.5.0 (Apache-2.0): each method atom is classified as THROW, DELEGATE, EQUALS,\n"
-                + " * WRAP, DEFAULT or FACTORY and emitted from a template; no provider implementation code is copied.\n */";
+                + " * WRAP, DEFAULT, FACTORY, FACTORY_NEW, SYNC, GUARD or VIEW and emitted from a template; no provider implementation\n"
+                + " * code is copied.\n */";
         return text.replaceFirst("(?s)/\\*\n \\* GENERATED by .*? \\*/", Matcher.quoteReplacement(generated))
                 .replaceFirst("(?s) \\* SCAFFOLD, not an owned implementation: declares the public surface of\n \\* (\\{@code [^}]+})"
                         + " and every body throws \\{@link UnsupportedOperationException}\\.",
@@ -349,7 +475,9 @@ public final class M3DecoratorFill {
                 .replaceFirst("    private static final String M3_SCAFFOLD_MESSAGE = .*\\R", "")
                 .replaceFirst("(?s)    // Planned lanes \\(decorator\\).*?private transient int state;\\R",
                         Matcher.quoteReplacement("    /** The decorated owner: one reference, elements are never copied. */\n"
-                                + "    @SuppressWarnings(\"serial\")\n    private final " + backingType() + " backing;\n"))
+                                + "    @SuppressWarnings(\"serial\")\n    private final " + backingType() + " backing;\n"
+                                + (lockExpr.equals("lock") ? "    /** The monitor shared with the owning decorator. */\n"
+                                        + "    @SuppressWarnings(\"serial\")\n    private final Object lock;\n" : "")))
                 .replaceAll("\n{3,}", "\n\n");
     }
 

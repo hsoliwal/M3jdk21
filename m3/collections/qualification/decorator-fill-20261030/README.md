@@ -22,16 +22,33 @@ constructor. `PATTERNS.tsv` lists the categories and the next candidate categori
 
 ## Result
 
-| | Count |
-|---|---|
-| Method atoms classified (57 decorators) | 1,938 |
-| MANUAL atoms (next leaves) | 521 |
-| Classes with no MANUAL atom, now owned | 7 |
+| | v1.1 | v1.2 (SYNC family) |
+|---|---|---|
+| Method atoms classified (57 decorators) | 1,938 | 1,992 (with the view-helper atoms) |
+| MANUAL atoms (next leaves) | 521 | 387 |
+| Classes with no MANUAL atom, now owned | 7 | 12 |
 
-The seven owned classes are `M3UnmodifiableCollection`, `M3UnmodifiableList`, `M3UnmodifiableQueue`,
-`M3UnmodifiableSortedSet`, `M3UnmodifiableNavigableSet`, `M3UnmodifiableBag` and `M3UnmodifiableSortedBag`.
+The v1.1 classes are `M3UnmodifiableCollection`, `M3UnmodifiableList`, `M3UnmodifiableQueue`, `M3UnmodifiableSortedSet`,
+`M3UnmodifiableNavigableSet`, `M3UnmodifiableBag` and `M3UnmodifiableSortedBag`.
 
-The MANUAL atoms group into the next families:
+v1.2 adds the Synchronized family: `M3SynchronizedCollection`, `M3SynchronizedBag`, `M3SynchronizedMultiSet`,
+`M3SynchronizedQueue` and `M3SynchronizedSortedBag`. The categories are ACCESSOR, SYNC, GUARD, VIEW, FACTORY_NEW and
+MODIFIER; their rows are in `PATTERNS.tsv`.
+
+The categories came from an analyst-and-skeptic workflow per family. The skeptic confirmed every SYNC category and refuted
+only the proof, which could not see lock scope or the true path of `equals`. Both gaps are closed in v1.2:
+- `M3SyncProbe` reports BLOCKS or FREE for every method and view, for `equals(self)`, and for the monitor of a deserialized copy.
+- `M3LockTraceProbe` records `Thread.holdsLock` at every backing call.
+- `equals` now also receives an equal, non-identical copy of the backing.
+
+Results are in `PROBES.tsv`: 5 classes × 2 probes, 0 mismatches. In a negative control, a planted unsynchronized `peek` is
+caught by both probes.
+
+The Predicated, Transformed and Unmodifiable-map families have proposals with skeptic refutations; they are the next
+leaves. The refutations are classifier side conditions, the LinkedMap/LinkedHashMap order, serialization field order and
+harness blind spots.
+
+The v1.1 MANUAL atoms grouped into these families:
 
 | Family | Atoms |
 |---|---|

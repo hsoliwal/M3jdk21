@@ -24,7 +24,7 @@ M3CollectionBag	java.util.Set<E> uniqueSet()	DELEGATE	return backing.uniqueSet()
 M3CollectionBag	java.util.Spliterator<E> spliterator()	DEFAULT	return org.apache.commons.collections4.Bag.super.spliterator();
 M3CollectionBag	java.util.stream.Stream<E> parallelStream()	DEFAULT	return org.apache.commons.collections4.Bag.super.parallelStream();
 M3CollectionBag	java.util.stream.Stream<E> stream()	DEFAULT	return org.apache.commons.collections4.Bag.super.stream();
-M3CollectionBag	static <E> org.apache.commons.collections4.Bag<E> collectionBag(org.apache.commons.collections4.Bag<E> arg0)	MANUAL	return new CollectionBag<>(bag);
+M3CollectionBag	static <E> org.apache.commons.collections4.Bag<E> collectionBag(org.apache.commons.collections4.Bag<E> arg0)	FACTORY_NEW	return new M3CollectionBag<>(arg0);
 M3CollectionBag	void clear()	DELEGATE	backing.clear();
 M3CollectionBag	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	org.apache.commons.collections4.Bag.super.forEach(arg0);
 M3CollectionSortedBag	<T> T[] toArray(T[] arg0)	DELEGATE	return backing.toArray(arg0);
@@ -55,7 +55,7 @@ M3CollectionSortedBag	java.util.Set<E> uniqueSet()	DELEGATE	return backing.uniqu
 M3CollectionSortedBag	java.util.Spliterator<E> spliterator()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.spliterator();
 M3CollectionSortedBag	java.util.stream.Stream<E> parallelStream()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.parallelStream();
 M3CollectionSortedBag	java.util.stream.Stream<E> stream()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.stream();
-M3CollectionSortedBag	static <E> org.apache.commons.collections4.SortedBag<E> collectionSortedBag(org.apache.commons.collections4.SortedBag<E> arg0)	MANUAL	return new CollectionSortedBag<>(bag);
+M3CollectionSortedBag	static <E> org.apache.commons.collections4.SortedBag<E> collectionSortedBag(org.apache.commons.collections4.SortedBag<E> arg0)	FACTORY_NEW	return new M3CollectionSortedBag<>(arg0);
 M3CollectionSortedBag	void clear()	DELEGATE	backing.clear();
 M3CollectionSortedBag	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	org.apache.commons.collections4.SortedBag.super.forEach(arg0);
 M3CompositeCollection	<T> T[] toArray(T[] arg0)	MANUAL	final int size = size(); Object[] result = null; if (array.length >= size) { result = array; } else { result = (Object[]) Array.newInstance(array.getClass().getComponentType(), size); } int offset = 0; for (final Collection<E> item : all) { for (final E e : item) { result[offset++] = e; } } if (result.length > size) { result[size] = null; } return (T[]) result;
@@ -222,7 +222,7 @@ M3FixedSizeList	java.util.ListIterator<E> listIterator(int arg0)	MANUAL	return n
 M3FixedSizeList	java.util.Spliterator<E> spliterator()	DEFAULT	return java.util.List.super.spliterator();
 M3FixedSizeList	java.util.stream.Stream<E> parallelStream()	DEFAULT	return java.util.List.super.parallelStream();
 M3FixedSizeList	java.util.stream.Stream<E> stream()	DEFAULT	return java.util.List.super.stream();
-M3FixedSizeList	static <E> M3FixedSizeList<E> fixedSizeList(java.util.List<E> arg0)	MANUAL	return new FixedSizeList<>(list);
+M3FixedSizeList	static <E> M3FixedSizeList<E> fixedSizeList(java.util.List<E> arg0)	FACTORY_NEW	return new M3FixedSizeList<>(arg0);
 M3FixedSizeList	void add(int arg0, E arg1)	MANUAL	throw unsupportedOperationException();
 M3FixedSizeList	void addFirst(E arg0)	DEFAULT	java.util.List.super.addFirst(arg0);
 M3FixedSizeList	void addLast(E arg0)	DEFAULT	java.util.List.super.addLast(arg0);
@@ -256,7 +256,7 @@ M3FixedSizeMap	java.util.Collection<V> values()	MANUAL	final Collection<V> coll 
 M3FixedSizeMap	java.util.Set<K> keySet()	MANUAL	final Set<K> set = map.keySet(); return UnmodifiableSet.unmodifiableSet(set);
 M3FixedSizeMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	final Set<Map.Entry<K, V>> set = map.entrySet(); return UnmodifiableSet.unmodifiableSet(set);
 M3FixedSizeMap	org.apache.commons.collections4.MapIterator<K, V> mapIterator()	MANUAL	return new EntrySetToMapIteratorAdapter<>(entrySet());
-M3FixedSizeMap	static <K, V> M3FixedSizeMap<K, V> fixedSizeMap(java.util.Map<K, V> arg0)	MANUAL	return new FixedSizeMap<>(map);
+M3FixedSizeMap	static <K, V> M3FixedSizeMap<K, V> fixedSizeMap(java.util.Map<K, V> arg0)	FACTORY_NEW	return new M3FixedSizeMap<>(arg0);
 M3FixedSizeMap	void clear()	MANUAL	throw new UnsupportedOperationException("Map is fixed size");
 M3FixedSizeMap	void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0)	DEFAULT	org.apache.commons.collections4.BoundedMap.super.forEach(arg0);
 M3FixedSizeMap	void putAll(java.util.Map<? extends K, ? extends V> arg0)	MANUAL	for (final K key : mapToCopy.keySet()) { if (!containsKey(key)) { throw new IllegalArgumentException("Cannot put new key/value pair - Map is fixed size"); } } map.putAll(mapToCopy);
@@ -305,7 +305,7 @@ M3FixedSizeSortedMap	java.util.SortedMap<K, V> reversed()	DEFAULT	return org.apa
 M3FixedSizeSortedMap	java.util.SortedMap<K, V> subMap(K arg0, K arg1)	MANUAL	return new FixedSizeSortedMap<>(getSortedMap().subMap(fromKey, toKey));
 M3FixedSizeSortedMap	java.util.SortedMap<K, V> tailMap(K arg0)	MANUAL	return new FixedSizeSortedMap<>(getSortedMap().tailMap(fromKey));
 M3FixedSizeSortedMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	MANUAL	return new SortedMapIterator<>(entrySet());
-M3FixedSizeSortedMap	static <K, V> M3FixedSizeSortedMap<K, V> fixedSizeSortedMap(java.util.SortedMap<K, V> arg0)	MANUAL	return new FixedSizeSortedMap<>(map);
+M3FixedSizeSortedMap	static <K, V> M3FixedSizeSortedMap<K, V> fixedSizeSortedMap(java.util.SortedMap<K, V> arg0)	FACTORY_NEW	return new M3FixedSizeSortedMap<>(arg0);
 M3FixedSizeSortedMap	void clear()	MANUAL	throw new UnsupportedOperationException("Map is fixed size");
 M3FixedSizeSortedMap	void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0)	DEFAULT	org.apache.commons.collections4.IterableSortedMap.super.forEach(arg0);
 M3FixedSizeSortedMap	void putAll(java.util.Map<? extends K, ? extends V> arg0)	MANUAL	if (CollectionUtils.isSubCollection(mapToCopy.keySet(), keySet())) { throw new IllegalArgumentException("Cannot put new key/value pair - Map is fixed size"); } map.putAll(mapToCopy);
@@ -346,7 +346,7 @@ M3GrowthList	java.util.ListIterator<E> listIterator(int arg0)	DELEGATE	return ba
 M3GrowthList	java.util.Spliterator<E> spliterator()	DEFAULT	return java.util.List.super.spliterator();
 M3GrowthList	java.util.stream.Stream<E> parallelStream()	DEFAULT	return java.util.List.super.parallelStream();
 M3GrowthList	java.util.stream.Stream<E> stream()	DEFAULT	return java.util.List.super.stream();
-M3GrowthList	static <E> M3GrowthList<E> growthList(java.util.List<E> arg0)	MANUAL	return new GrowthList<>(list);
+M3GrowthList	static <E> M3GrowthList<E> growthList(java.util.List<E> arg0)	FACTORY_NEW	return new M3GrowthList<>(arg0);
 M3GrowthList	void add(int arg0, E arg1)	MANUAL	final int size = decorated().size(); if (index > size) { decorated().addAll(Collections.nCopies(index - size, null)); } decorated().add(index, element);
 M3GrowthList	void addFirst(E arg0)	DEFAULT	java.util.List.super.addFirst(arg0);
 M3GrowthList	void addLast(E arg0)	DEFAULT	java.util.List.super.addLast(arg0);
@@ -840,170 +840,224 @@ M3PredicatedSortedSet	void addFirst(E arg0)	DEFAULT	java.util.SortedSet.super.ad
 M3PredicatedSortedSet	void addLast(E arg0)	DEFAULT	java.util.SortedSet.super.addLast(arg0);
 M3PredicatedSortedSet	void clear()	DELEGATE	backing.clear();
 M3PredicatedSortedSet	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.SortedSet.super.forEach(arg0);
-M3SynchronizedBag	<T> T[] toArray(T[] arg0)	MANUAL	synchronized (lock) { return decorated().toArray(object); }
+M3SynchronizedBag	<T> T[] toArray(T[] arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray(arg0);         }
 M3SynchronizedBag	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return org.apache.commons.collections4.Bag.super.toArray(arg0);
 M3SynchronizedBag	M3SynchronizedBag()	CONSTRUCTOR	this.backing = java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.Bag<E>
-M3SynchronizedBag	Object[] toArray()	MANUAL	synchronized (lock) { return decorated().toArray(); }
-M3SynchronizedBag	String toString()	MANUAL	synchronized (lock) { return decorated().toString(); }
-M3SynchronizedBag	boolean add(E arg0)	MANUAL	synchronized (lock) { return decorated().add(object); }
-M3SynchronizedBag	boolean add(E arg0, int arg1)	MANUAL	synchronized (lock) { return getBag().add(object, count); }
-M3SynchronizedBag	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL	synchronized (lock) { return decorated().addAll(coll); }
-M3SynchronizedBag	boolean contains(Object arg0)	MANUAL	synchronized (lock) { return decorated().contains(object); }
-M3SynchronizedBag	boolean containsAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().containsAll(coll); }
-M3SynchronizedBag	boolean equals(Object arg0)	MANUAL	if (object == this) { return true; } synchronized (lock) { return getBag().equals(object); }
-M3SynchronizedBag	boolean isEmpty()	MANUAL	synchronized (lock) { return decorated().isEmpty(); }
-M3SynchronizedBag	boolean remove(Object arg0)	MANUAL	synchronized (lock) { return decorated().remove(object); }
-M3SynchronizedBag	boolean remove(Object arg0, int arg1)	MANUAL	synchronized (lock) { return getBag().remove(object, count); }
-M3SynchronizedBag	boolean removeAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().removeAll(coll); }
-M3SynchronizedBag	boolean removeIf(java.util.function.Predicate<? super E> arg0)	MANUAL	synchronized (lock) { return decorated().removeIf(filter); }
-M3SynchronizedBag	boolean retainAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().retainAll(coll); }
-M3SynchronizedBag	int getCount(Object arg0)	MANUAL	synchronized (lock) { return getBag().getCount(object); }
-M3SynchronizedBag	int hashCode()	MANUAL	synchronized (lock) { return getBag().hashCode(); }
-M3SynchronizedBag	int size()	MANUAL	synchronized (lock) { return decorated().size(); }
+M3SynchronizedBag	Object[] toArray()	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray();         }
+M3SynchronizedBag	String toString()	SYNC(DELEGATE)	synchronized (this) {             return backing.toString();         }
+M3SynchronizedBag	boolean add(E arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.add(arg0);         }
+M3SynchronizedBag	boolean add(E arg0, int arg1)	SYNC(DELEGATE)	synchronized (this) {             return backing.add(arg0, arg1);         }
+M3SynchronizedBag	boolean addAll(java.util.Collection<? extends E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.addAll(arg0);         }
+M3SynchronizedBag	boolean contains(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.contains(arg0);         }
+M3SynchronizedBag	boolean containsAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.containsAll(arg0);         }
+M3SynchronizedBag	boolean equals(Object arg0)	GUARD+SYNC(DELEGATE)	if (arg0 == this) {             return true;         }         synchronized (this) {             return backing.equals(arg0);         }
+M3SynchronizedBag	boolean isEmpty()	SYNC(DELEGATE)	synchronized (this) {             return backing.isEmpty();         }
+M3SynchronizedBag	boolean remove(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.remove(arg0);         }
+M3SynchronizedBag	boolean remove(Object arg0, int arg1)	SYNC(DELEGATE)	synchronized (this) {             return backing.remove(arg0, arg1);         }
+M3SynchronizedBag	boolean removeAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeAll(arg0);         }
+M3SynchronizedBag	boolean removeIf(java.util.function.Predicate<? super E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeIf(arg0);         }
+M3SynchronizedBag	boolean retainAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.retainAll(arg0);         }
+M3SynchronizedBag	int getCount(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.getCount(arg0);         }
+M3SynchronizedBag	int hashCode()	SYNC(DELEGATE)	synchronized (this) {             return backing.hashCode();         }
+M3SynchronizedBag	int size()	SYNC(DELEGATE)	synchronized (this) {             return backing.size();         }
 M3SynchronizedBag	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
-M3SynchronizedBag	java.util.Set<E> uniqueSet()	MANUAL	synchronized (lock) { final Set<E> set = getBag().uniqueSet(); return new SynchronizedBagSet(set, lock); }
+M3SynchronizedBag	java.util.Set<E> uniqueSet()	SYNC(VIEW)	synchronized (this) {             return new SyncSet<>(backing.uniqueSet(), this);         }
 M3SynchronizedBag	java.util.Spliterator<E> spliterator()	DEFAULT	return org.apache.commons.collections4.Bag.super.spliterator();
 M3SynchronizedBag	java.util.stream.Stream<E> parallelStream()	DEFAULT	return org.apache.commons.collections4.Bag.super.parallelStream();
 M3SynchronizedBag	java.util.stream.Stream<E> stream()	DEFAULT	return org.apache.commons.collections4.Bag.super.stream();
-M3SynchronizedBag	static <E> M3SynchronizedBag<E> synchronizedBag(org.apache.commons.collections4.Bag<E> arg0)	MANUAL	return new SynchronizedBag<>(bag);
-M3SynchronizedBag	void clear()	MANUAL	synchronized (lock) { decorated().clear(); }
+M3SynchronizedBag	static <E> M3SynchronizedBag<E> synchronizedBag(org.apache.commons.collections4.Bag<E> arg0)	FACTORY_NEW	return new M3SynchronizedBag<>(arg0);
+M3SynchronizedBag	void clear()	SYNC(DELEGATE)	synchronized (this) {             backing.clear();         }
 M3SynchronizedBag	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	org.apache.commons.collections4.Bag.super.forEach(arg0);
-M3SynchronizedCollection	<T> T[] toArray(T[] arg0)	MANUAL	synchronized (lock) { return decorated().toArray(object); }
+M3SynchronizedBag$SyncSet	<T> T[] toArray(T[] arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.toArray(arg0);         }
+M3SynchronizedBag$SyncSet	SyncSet()	CONSTRUCTOR_LOCK	this.backing = java.util.Objects.requireNonNull(arg0, "collection");         this.lock = java.util.Objects.requireNonNull(arg1, "lock"); java.util.Set<E>
+M3SynchronizedBag$SyncSet	boolean add(E arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.add(arg0);         }
+M3SynchronizedBag$SyncSet	boolean addAll(java.util.Collection<? extends E> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.addAll(arg0);         }
+M3SynchronizedBag$SyncSet	boolean contains(java.lang.Object arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.contains(arg0);         }
+M3SynchronizedBag$SyncSet	boolean containsAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.containsAll(arg0);         }
+M3SynchronizedBag$SyncSet	boolean equals(java.lang.Object arg0)	SYNC(GUARD+EQUALS)	synchronized (lock) {             if (arg0 == this) {                 return true;             }             return arg0 == this || backing.equals(arg0);         }
+M3SynchronizedBag$SyncSet	boolean isEmpty()	SYNC(DELEGATE)	synchronized (lock) {             return backing.isEmpty();         }
+M3SynchronizedBag$SyncSet	boolean remove(java.lang.Object arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.remove(arg0);         }
+M3SynchronizedBag$SyncSet	boolean removeAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.removeAll(arg0);         }
+M3SynchronizedBag$SyncSet	boolean removeIf(java.util.function.Predicate<? super E> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.removeIf(arg0);         }
+M3SynchronizedBag$SyncSet	boolean retainAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.retainAll(arg0);         }
+M3SynchronizedBag$SyncSet	int hashCode()	SYNC(DELEGATE)	synchronized (lock) {             return backing.hashCode();         }
+M3SynchronizedBag$SyncSet	int size()	SYNC(DELEGATE)	synchronized (lock) {             return backing.size();         }
+M3SynchronizedBag$SyncSet	java.lang.Object[] toArray()	SYNC(DELEGATE)	synchronized (lock) {             return backing.toArray();         }
+M3SynchronizedBag$SyncSet	java.lang.String toString()	SYNC(DELEGATE)	synchronized (lock) {             return backing.toString();         }
+M3SynchronizedBag$SyncSet	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
+M3SynchronizedBag$SyncSet	void clear()	SYNC(DELEGATE)	synchronized (lock) {             backing.clear();         }
+M3SynchronizedCollection	<T> T[] toArray(T[] arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray(arg0);         }
 M3SynchronizedCollection	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return java.util.Collection.super.toArray(arg0);
 M3SynchronizedCollection	M3SynchronizedCollection()	CONSTRUCTOR	this.backing = java.util.Objects.requireNonNull(arg0, "collection"); java.util.Collection<E>
-M3SynchronizedCollection	Object[] toArray()	MANUAL	synchronized (lock) { return decorated().toArray(); }
-M3SynchronizedCollection	String toString()	MANUAL	synchronized (lock) { return decorated().toString(); }
-M3SynchronizedCollection	boolean add(E arg0)	MANUAL	synchronized (lock) { return decorated().add(object); }
-M3SynchronizedCollection	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL	synchronized (lock) { return decorated().addAll(coll); }
-M3SynchronizedCollection	boolean contains(Object arg0)	MANUAL	synchronized (lock) { return decorated().contains(object); }
-M3SynchronizedCollection	boolean containsAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().containsAll(coll); }
-M3SynchronizedCollection	boolean equals(Object arg0)	MANUAL	synchronized (lock) { if (object == this) { return true; } return object == this || decorated().equals(object); }
-M3SynchronizedCollection	boolean isEmpty()	MANUAL	synchronized (lock) { return decorated().isEmpty(); }
-M3SynchronizedCollection	boolean remove(Object arg0)	MANUAL	synchronized (lock) { return decorated().remove(object); }
-M3SynchronizedCollection	boolean removeAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().removeAll(coll); }
-M3SynchronizedCollection	boolean removeIf(java.util.function.Predicate<? super E> arg0)	MANUAL	synchronized (lock) { return decorated().removeIf(filter); }
-M3SynchronizedCollection	boolean retainAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().retainAll(coll); }
-M3SynchronizedCollection	int hashCode()	MANUAL	synchronized (lock) { return decorated().hashCode(); }
-M3SynchronizedCollection	int size()	MANUAL	synchronized (lock) { return decorated().size(); }
+M3SynchronizedCollection	Object[] toArray()	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray();         }
+M3SynchronizedCollection	String toString()	SYNC(DELEGATE)	synchronized (this) {             return backing.toString();         }
+M3SynchronizedCollection	boolean add(E arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.add(arg0);         }
+M3SynchronizedCollection	boolean addAll(java.util.Collection<? extends E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.addAll(arg0);         }
+M3SynchronizedCollection	boolean contains(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.contains(arg0);         }
+M3SynchronizedCollection	boolean containsAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.containsAll(arg0);         }
+M3SynchronizedCollection	boolean equals(Object arg0)	SYNC(GUARD+EQUALS)	synchronized (this) {             if (arg0 == this) {                 return true;             }             return arg0 == this || backing.equals(arg0);         }
+M3SynchronizedCollection	boolean isEmpty()	SYNC(DELEGATE)	synchronized (this) {             return backing.isEmpty();         }
+M3SynchronizedCollection	boolean remove(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.remove(arg0);         }
+M3SynchronizedCollection	boolean removeAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeAll(arg0);         }
+M3SynchronizedCollection	boolean removeIf(java.util.function.Predicate<? super E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeIf(arg0);         }
+M3SynchronizedCollection	boolean retainAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.retainAll(arg0);         }
+M3SynchronizedCollection	int hashCode()	SYNC(DELEGATE)	synchronized (this) {             return backing.hashCode();         }
+M3SynchronizedCollection	int size()	SYNC(DELEGATE)	synchronized (this) {             return backing.size();         }
 M3SynchronizedCollection	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
 M3SynchronizedCollection	java.util.Spliterator<E> spliterator()	DEFAULT	return java.util.Collection.super.spliterator();
 M3SynchronizedCollection	java.util.stream.Stream<E> parallelStream()	DEFAULT	return java.util.Collection.super.parallelStream();
 M3SynchronizedCollection	java.util.stream.Stream<E> stream()	DEFAULT	return java.util.Collection.super.stream();
-M3SynchronizedCollection	static <T> M3SynchronizedCollection<T> synchronizedCollection(java.util.Collection<T> arg0)	MANUAL	return new SynchronizedCollection<>(coll);
-M3SynchronizedCollection	void clear()	MANUAL	synchronized (lock) { decorated().clear(); }
+M3SynchronizedCollection	static <T> M3SynchronizedCollection<T> synchronizedCollection(java.util.Collection<T> arg0)	FACTORY_NEW	return new M3SynchronizedCollection<>(arg0);
+M3SynchronizedCollection	void clear()	SYNC(DELEGATE)	synchronized (this) {             backing.clear();         }
 M3SynchronizedCollection	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.Collection.super.forEach(arg0);
-M3SynchronizedMultiSet	<T> T[] toArray(T[] arg0)	MANUAL	synchronized (lock) { return decorated().toArray(object); }
+M3SynchronizedMultiSet	<T> T[] toArray(T[] arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray(arg0);         }
 M3SynchronizedMultiSet	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return org.apache.commons.collections4.MultiSet.super.toArray(arg0);
 M3SynchronizedMultiSet	M3SynchronizedMultiSet()	CONSTRUCTOR	this.backing = java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.MultiSet<E>
-M3SynchronizedMultiSet	Object[] toArray()	MANUAL	synchronized (lock) { return decorated().toArray(); }
-M3SynchronizedMultiSet	String toString()	MANUAL	synchronized (lock) { return decorated().toString(); }
-M3SynchronizedMultiSet	boolean add(E arg0)	MANUAL	synchronized (lock) { return decorated().add(object); }
-M3SynchronizedMultiSet	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL	synchronized (lock) { return decorated().addAll(coll); }
-M3SynchronizedMultiSet	boolean contains(Object arg0)	MANUAL	synchronized (lock) { return decorated().contains(object); }
-M3SynchronizedMultiSet	boolean containsAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().containsAll(coll); }
-M3SynchronizedMultiSet	boolean equals(Object arg0)	MANUAL	if (object == this) { return true; } synchronized (lock) { return decorated().equals(object); }
-M3SynchronizedMultiSet	boolean isEmpty()	MANUAL	synchronized (lock) { return decorated().isEmpty(); }
-M3SynchronizedMultiSet	boolean remove(Object arg0)	MANUAL	synchronized (lock) { return decorated().remove(object); }
-M3SynchronizedMultiSet	boolean removeAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().removeAll(coll); }
-M3SynchronizedMultiSet	boolean removeIf(java.util.function.Predicate<? super E> arg0)	MANUAL	synchronized (lock) { return decorated().removeIf(filter); }
-M3SynchronizedMultiSet	boolean retainAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().retainAll(coll); }
-M3SynchronizedMultiSet	int add(E arg0, int arg1)	MANUAL	synchronized (lock) { return decorated().add(object, count); }
-M3SynchronizedMultiSet	int getCount(Object arg0)	MANUAL	synchronized (lock) { return decorated().getCount(object); }
-M3SynchronizedMultiSet	int hashCode()	MANUAL	synchronized (lock) { return decorated().hashCode(); }
-M3SynchronizedMultiSet	int remove(Object arg0, int arg1)	MANUAL	synchronized (lock) { return decorated().remove(object, count); }
-M3SynchronizedMultiSet	int setCount(E arg0, int arg1)	MANUAL	synchronized (lock) { return decorated().setCount(object, count); }
-M3SynchronizedMultiSet	int size()	MANUAL	synchronized (lock) { return decorated().size(); }
+M3SynchronizedMultiSet	Object[] toArray()	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray();         }
+M3SynchronizedMultiSet	String toString()	SYNC(DELEGATE)	synchronized (this) {             return backing.toString();         }
+M3SynchronizedMultiSet	boolean add(E arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.add(arg0);         }
+M3SynchronizedMultiSet	boolean addAll(java.util.Collection<? extends E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.addAll(arg0);         }
+M3SynchronizedMultiSet	boolean contains(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.contains(arg0);         }
+M3SynchronizedMultiSet	boolean containsAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.containsAll(arg0);         }
+M3SynchronizedMultiSet	boolean equals(Object arg0)	GUARD+SYNC(DELEGATE)	if (arg0 == this) {             return true;         }         synchronized (this) {             return backing.equals(arg0);         }
+M3SynchronizedMultiSet	boolean isEmpty()	SYNC(DELEGATE)	synchronized (this) {             return backing.isEmpty();         }
+M3SynchronizedMultiSet	boolean remove(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.remove(arg0);         }
+M3SynchronizedMultiSet	boolean removeAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeAll(arg0);         }
+M3SynchronizedMultiSet	boolean removeIf(java.util.function.Predicate<? super E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeIf(arg0);         }
+M3SynchronizedMultiSet	boolean retainAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.retainAll(arg0);         }
+M3SynchronizedMultiSet	int add(E arg0, int arg1)	SYNC(DELEGATE)	synchronized (this) {             return backing.add(arg0, arg1);         }
+M3SynchronizedMultiSet	int getCount(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.getCount(arg0);         }
+M3SynchronizedMultiSet	int hashCode()	SYNC(DELEGATE)	synchronized (this) {             return backing.hashCode();         }
+M3SynchronizedMultiSet	int remove(Object arg0, int arg1)	SYNC(DELEGATE)	synchronized (this) {             return backing.remove(arg0, arg1);         }
+M3SynchronizedMultiSet	int setCount(E arg0, int arg1)	SYNC(DELEGATE)	synchronized (this) {             return backing.setCount(arg0, arg1);         }
+M3SynchronizedMultiSet	int size()	SYNC(DELEGATE)	synchronized (this) {             return backing.size();         }
 M3SynchronizedMultiSet	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
-M3SynchronizedMultiSet	java.util.Set<E> uniqueSet()	MANUAL	synchronized (lock) { final Set<E> set = decorated().uniqueSet(); return new SynchronizedSet<>(set, lock); }
-M3SynchronizedMultiSet	java.util.Set<org.apache.commons.collections4.MultiSet.Entry<E>> entrySet()	MANUAL	synchronized (lock) { final Set<MultiSet.Entry<E>> set = decorated().entrySet(); return new SynchronizedSet<>(set, lock); }
+M3SynchronizedMultiSet	java.util.Set<E> uniqueSet()	SYNC(VIEW)	synchronized (this) {             return new SyncSet<>(backing.uniqueSet(), this);         }
+M3SynchronizedMultiSet	java.util.Set<org.apache.commons.collections4.MultiSet.Entry<E>> entrySet()	SYNC(VIEW)	synchronized (this) {             return new SyncSet<>(backing.entrySet(), this);         }
 M3SynchronizedMultiSet	java.util.Spliterator<E> spliterator()	DEFAULT	return org.apache.commons.collections4.MultiSet.super.spliterator();
 M3SynchronizedMultiSet	java.util.stream.Stream<E> parallelStream()	DEFAULT	return org.apache.commons.collections4.MultiSet.super.parallelStream();
 M3SynchronizedMultiSet	java.util.stream.Stream<E> stream()	DEFAULT	return org.apache.commons.collections4.MultiSet.super.stream();
-M3SynchronizedMultiSet	static <E> M3SynchronizedMultiSet<E> synchronizedMultiSet(org.apache.commons.collections4.MultiSet<E> arg0)	MANUAL	return new SynchronizedMultiSet<>(multiset);
-M3SynchronizedMultiSet	void clear()	MANUAL	synchronized (lock) { decorated().clear(); }
+M3SynchronizedMultiSet	static <E> M3SynchronizedMultiSet<E> synchronizedMultiSet(org.apache.commons.collections4.MultiSet<E> arg0)	FACTORY_NEW	return new M3SynchronizedMultiSet<>(arg0);
+M3SynchronizedMultiSet	void clear()	SYNC(DELEGATE)	synchronized (this) {             backing.clear();         }
 M3SynchronizedMultiSet	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	org.apache.commons.collections4.MultiSet.super.forEach(arg0);
-M3SynchronizedQueue	<T> T[] toArray(T[] arg0)	MANUAL	synchronized (lock) { return decorated().toArray(object); }
+M3SynchronizedMultiSet$SyncSet	<T> T[] toArray(T[] arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.toArray(arg0);         }
+M3SynchronizedMultiSet$SyncSet	SyncSet()	CONSTRUCTOR_LOCK	this.backing = java.util.Objects.requireNonNull(arg0, "collection");         this.lock = java.util.Objects.requireNonNull(arg1, "lock"); java.util.Set<E>
+M3SynchronizedMultiSet$SyncSet	boolean add(E arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.add(arg0);         }
+M3SynchronizedMultiSet$SyncSet	boolean addAll(java.util.Collection<? extends E> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.addAll(arg0);         }
+M3SynchronizedMultiSet$SyncSet	boolean contains(java.lang.Object arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.contains(arg0);         }
+M3SynchronizedMultiSet$SyncSet	boolean containsAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.containsAll(arg0);         }
+M3SynchronizedMultiSet$SyncSet	boolean equals(java.lang.Object arg0)	SYNC(GUARD+EQUALS)	synchronized (lock) {             if (arg0 == this) {                 return true;             }             return arg0 == this || backing.equals(arg0);         }
+M3SynchronizedMultiSet$SyncSet	boolean isEmpty()	SYNC(DELEGATE)	synchronized (lock) {             return backing.isEmpty();         }
+M3SynchronizedMultiSet$SyncSet	boolean remove(java.lang.Object arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.remove(arg0);         }
+M3SynchronizedMultiSet$SyncSet	boolean removeAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.removeAll(arg0);         }
+M3SynchronizedMultiSet$SyncSet	boolean removeIf(java.util.function.Predicate<? super E> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.removeIf(arg0);         }
+M3SynchronizedMultiSet$SyncSet	boolean retainAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.retainAll(arg0);         }
+M3SynchronizedMultiSet$SyncSet	int hashCode()	SYNC(DELEGATE)	synchronized (lock) {             return backing.hashCode();         }
+M3SynchronizedMultiSet$SyncSet	int size()	SYNC(DELEGATE)	synchronized (lock) {             return backing.size();         }
+M3SynchronizedMultiSet$SyncSet	java.lang.Object[] toArray()	SYNC(DELEGATE)	synchronized (lock) {             return backing.toArray();         }
+M3SynchronizedMultiSet$SyncSet	java.lang.String toString()	SYNC(DELEGATE)	synchronized (lock) {             return backing.toString();         }
+M3SynchronizedMultiSet$SyncSet	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
+M3SynchronizedMultiSet$SyncSet	void clear()	SYNC(DELEGATE)	synchronized (lock) {             backing.clear();         }
+M3SynchronizedQueue	<T> T[] toArray(T[] arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray(arg0);         }
 M3SynchronizedQueue	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return java.util.Queue.super.toArray(arg0);
-M3SynchronizedQueue	E element()	MANUAL	synchronized (lock) { return decorated().element(); }
-M3SynchronizedQueue	E peek()	MANUAL	synchronized (lock) { return decorated().peek(); }
-M3SynchronizedQueue	E poll()	MANUAL	synchronized (lock) { return decorated().poll(); }
-M3SynchronizedQueue	E remove()	MANUAL	synchronized (lock) { return decorated().remove(); }
+M3SynchronizedQueue	E element()	SYNC(DELEGATE)	synchronized (this) {             return backing.element();         }
+M3SynchronizedQueue	E peek()	SYNC(DELEGATE)	synchronized (this) {             return backing.peek();         }
+M3SynchronizedQueue	E poll()	SYNC(DELEGATE)	synchronized (this) {             return backing.poll();         }
+M3SynchronizedQueue	E remove()	SYNC(DELEGATE)	synchronized (this) {             return backing.remove();         }
 M3SynchronizedQueue	M3SynchronizedQueue()	CONSTRUCTOR	this.backing = java.util.Objects.requireNonNull(arg0, "collection"); java.util.Queue<E>
-M3SynchronizedQueue	Object[] toArray()	MANUAL	synchronized (lock) { return decorated().toArray(); }
-M3SynchronizedQueue	String toString()	MANUAL	synchronized (lock) { return decorated().toString(); }
-M3SynchronizedQueue	boolean add(E arg0)	MANUAL	synchronized (lock) { return decorated().add(object); }
-M3SynchronizedQueue	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL	synchronized (lock) { return decorated().addAll(coll); }
-M3SynchronizedQueue	boolean contains(Object arg0)	MANUAL	synchronized (lock) { return decorated().contains(object); }
-M3SynchronizedQueue	boolean containsAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().containsAll(coll); }
-M3SynchronizedQueue	boolean equals(Object arg0)	MANUAL	if (object == this) { return true; } synchronized (lock) { return decorated().equals(object); }
-M3SynchronizedQueue	boolean isEmpty()	MANUAL	synchronized (lock) { return decorated().isEmpty(); }
-M3SynchronizedQueue	boolean offer(E arg0)	MANUAL	synchronized (lock) { return decorated().offer(e); }
-M3SynchronizedQueue	boolean remove(Object arg0)	MANUAL	synchronized (lock) { return decorated().remove(object); }
-M3SynchronizedQueue	boolean removeAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().removeAll(coll); }
-M3SynchronizedQueue	boolean removeIf(java.util.function.Predicate<? super E> arg0)	MANUAL	synchronized (lock) { return decorated().removeIf(filter); }
-M3SynchronizedQueue	boolean retainAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().retainAll(coll); }
-M3SynchronizedQueue	int hashCode()	MANUAL	synchronized (lock) { return decorated().hashCode(); }
-M3SynchronizedQueue	int size()	MANUAL	synchronized (lock) { return decorated().size(); }
+M3SynchronizedQueue	Object[] toArray()	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray();         }
+M3SynchronizedQueue	String toString()	SYNC(DELEGATE)	synchronized (this) {             return backing.toString();         }
+M3SynchronizedQueue	boolean add(E arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.add(arg0);         }
+M3SynchronizedQueue	boolean addAll(java.util.Collection<? extends E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.addAll(arg0);         }
+M3SynchronizedQueue	boolean contains(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.contains(arg0);         }
+M3SynchronizedQueue	boolean containsAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.containsAll(arg0);         }
+M3SynchronizedQueue	boolean equals(Object arg0)	GUARD+SYNC(DELEGATE)	if (arg0 == this) {             return true;         }         synchronized (this) {             return backing.equals(arg0);         }
+M3SynchronizedQueue	boolean isEmpty()	SYNC(DELEGATE)	synchronized (this) {             return backing.isEmpty();         }
+M3SynchronizedQueue	boolean offer(E arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.offer(arg0);         }
+M3SynchronizedQueue	boolean remove(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.remove(arg0);         }
+M3SynchronizedQueue	boolean removeAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeAll(arg0);         }
+M3SynchronizedQueue	boolean removeIf(java.util.function.Predicate<? super E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeIf(arg0);         }
+M3SynchronizedQueue	boolean retainAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.retainAll(arg0);         }
+M3SynchronizedQueue	int hashCode()	SYNC(DELEGATE)	synchronized (this) {             return backing.hashCode();         }
+M3SynchronizedQueue	int size()	SYNC(DELEGATE)	synchronized (this) {             return backing.size();         }
 M3SynchronizedQueue	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
 M3SynchronizedQueue	java.util.Spliterator<E> spliterator()	DEFAULT	return java.util.Queue.super.spliterator();
 M3SynchronizedQueue	java.util.stream.Stream<E> parallelStream()	DEFAULT	return java.util.Queue.super.parallelStream();
 M3SynchronizedQueue	java.util.stream.Stream<E> stream()	DEFAULT	return java.util.Queue.super.stream();
-M3SynchronizedQueue	static <E> M3SynchronizedQueue<E> synchronizedQueue(java.util.Queue<E> arg0)	MANUAL	return new SynchronizedQueue<>(queue);
-M3SynchronizedQueue	void clear()	MANUAL	synchronized (lock) { decorated().clear(); }
+M3SynchronizedQueue	static <E> M3SynchronizedQueue<E> synchronizedQueue(java.util.Queue<E> arg0)	FACTORY_NEW	return new M3SynchronizedQueue<>(arg0);
+M3SynchronizedQueue	void clear()	SYNC(DELEGATE)	synchronized (this) {             backing.clear();         }
 M3SynchronizedQueue	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.Queue.super.forEach(arg0);
-M3SynchronizedSortedBag	<T> T[] toArray(T[] arg0)	MANUAL	synchronized (lock) { return decorated().toArray(object); }
+M3SynchronizedSortedBag	<T> T[] toArray(T[] arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray(arg0);         }
 M3SynchronizedSortedBag	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return org.apache.commons.collections4.SortedBag.super.toArray(arg0);
-M3SynchronizedSortedBag	E first()	MANUAL	synchronized (lock) { return getSortedBag().first(); }
-M3SynchronizedSortedBag	E last()	MANUAL	synchronized (lock) { return getSortedBag().last(); }
+M3SynchronizedSortedBag	E first()	SYNC(DELEGATE)	synchronized (this) {             return backing.first();         }
+M3SynchronizedSortedBag	E last()	SYNC(DELEGATE)	synchronized (this) {             return backing.last();         }
 M3SynchronizedSortedBag	M3SynchronizedSortedBag()	CONSTRUCTOR	this.backing = java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.SortedBag<E>
-M3SynchronizedSortedBag	Object[] toArray()	MANUAL	synchronized (lock) { return decorated().toArray(); }
-M3SynchronizedSortedBag	String toString()	MANUAL	synchronized (lock) { return decorated().toString(); }
-M3SynchronizedSortedBag	boolean add(E arg0)	MANUAL	synchronized (lock) { return decorated().add(object); }
-M3SynchronizedSortedBag	boolean add(E arg0, int arg1)	MANUAL	synchronized (lock) { return getBag().add(object, count); }
-M3SynchronizedSortedBag	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL	synchronized (lock) { return decorated().addAll(coll); }
-M3SynchronizedSortedBag	boolean contains(Object arg0)	MANUAL	synchronized (lock) { return decorated().contains(object); }
-M3SynchronizedSortedBag	boolean containsAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().containsAll(coll); }
-M3SynchronizedSortedBag	boolean equals(Object arg0)	MANUAL	if (object == this) { return true; } synchronized (lock) { return getBag().equals(object); }
-M3SynchronizedSortedBag	boolean isEmpty()	MANUAL	synchronized (lock) { return decorated().isEmpty(); }
-M3SynchronizedSortedBag	boolean remove(Object arg0)	MANUAL	synchronized (lock) { return decorated().remove(object); }
-M3SynchronizedSortedBag	boolean remove(Object arg0, int arg1)	MANUAL	synchronized (lock) { return getBag().remove(object, count); }
-M3SynchronizedSortedBag	boolean removeAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().removeAll(coll); }
-M3SynchronizedSortedBag	boolean removeIf(java.util.function.Predicate<? super E> arg0)	MANUAL	synchronized (lock) { return decorated().removeIf(filter); }
-M3SynchronizedSortedBag	boolean retainAll(java.util.Collection<?> arg0)	MANUAL	synchronized (lock) { return decorated().retainAll(coll); }
-M3SynchronizedSortedBag	int getCount(Object arg0)	MANUAL	synchronized (lock) { return getBag().getCount(object); }
-M3SynchronizedSortedBag	int hashCode()	MANUAL	synchronized (lock) { return getBag().hashCode(); }
-M3SynchronizedSortedBag	int size()	MANUAL	synchronized (lock) { return decorated().size(); }
-M3SynchronizedSortedBag	java.util.Comparator<? super E> comparator()	MANUAL	synchronized (lock) { return getSortedBag().comparator(); }
+M3SynchronizedSortedBag	Object[] toArray()	SYNC(DELEGATE)	synchronized (this) {             return backing.toArray();         }
+M3SynchronizedSortedBag	String toString()	SYNC(DELEGATE)	synchronized (this) {             return backing.toString();         }
+M3SynchronizedSortedBag	boolean add(E arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.add(arg0);         }
+M3SynchronizedSortedBag	boolean add(E arg0, int arg1)	SYNC(DELEGATE)	synchronized (this) {             return backing.add(arg0, arg1);         }
+M3SynchronizedSortedBag	boolean addAll(java.util.Collection<? extends E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.addAll(arg0);         }
+M3SynchronizedSortedBag	boolean contains(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.contains(arg0);         }
+M3SynchronizedSortedBag	boolean containsAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.containsAll(arg0);         }
+M3SynchronizedSortedBag	boolean equals(Object arg0)	GUARD+SYNC(DELEGATE)	if (arg0 == this) {             return true;         }         synchronized (this) {             return backing.equals(arg0);         }
+M3SynchronizedSortedBag	boolean isEmpty()	SYNC(DELEGATE)	synchronized (this) {             return backing.isEmpty();         }
+M3SynchronizedSortedBag	boolean remove(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.remove(arg0);         }
+M3SynchronizedSortedBag	boolean remove(Object arg0, int arg1)	SYNC(DELEGATE)	synchronized (this) {             return backing.remove(arg0, arg1);         }
+M3SynchronizedSortedBag	boolean removeAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeAll(arg0);         }
+M3SynchronizedSortedBag	boolean removeIf(java.util.function.Predicate<? super E> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.removeIf(arg0);         }
+M3SynchronizedSortedBag	boolean retainAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.retainAll(arg0);         }
+M3SynchronizedSortedBag	int getCount(Object arg0)	SYNC(DELEGATE)	synchronized (this) {             return backing.getCount(arg0);         }
+M3SynchronizedSortedBag	int hashCode()	SYNC(DELEGATE)	synchronized (this) {             return backing.hashCode();         }
+M3SynchronizedSortedBag	int size()	SYNC(DELEGATE)	synchronized (this) {             return backing.size();         }
+M3SynchronizedSortedBag	java.util.Comparator<? super E> comparator()	SYNC(DELEGATE)	synchronized (this) {             return backing.comparator();         }
 M3SynchronizedSortedBag	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
-M3SynchronizedSortedBag	java.util.Set<E> uniqueSet()	MANUAL	synchronized (lock) { final Set<E> set = getBag().uniqueSet(); return new SynchronizedBagSet(set, lock); }
+M3SynchronizedSortedBag	java.util.Set<E> uniqueSet()	SYNC(VIEW)	synchronized (this) {             return new SyncSet<>(backing.uniqueSet(), this);         }
 M3SynchronizedSortedBag	java.util.Spliterator<E> spliterator()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.spliterator();
 M3SynchronizedSortedBag	java.util.stream.Stream<E> parallelStream()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.parallelStream();
 M3SynchronizedSortedBag	java.util.stream.Stream<E> stream()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.stream();
-M3SynchronizedSortedBag	static <E> M3SynchronizedSortedBag<E> synchronizedSortedBag(org.apache.commons.collections4.SortedBag<E> arg0)	MANUAL	return new SynchronizedSortedBag<>(bag);
-M3SynchronizedSortedBag	void clear()	MANUAL	synchronized (lock) { decorated().clear(); }
+M3SynchronizedSortedBag	static <E> M3SynchronizedSortedBag<E> synchronizedSortedBag(org.apache.commons.collections4.SortedBag<E> arg0)	FACTORY_NEW	return new M3SynchronizedSortedBag<>(arg0);
+M3SynchronizedSortedBag	void clear()	SYNC(DELEGATE)	synchronized (this) {             backing.clear();         }
 M3SynchronizedSortedBag	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	org.apache.commons.collections4.SortedBag.super.forEach(arg0);
+M3SynchronizedSortedBag$SyncSet	<T> T[] toArray(T[] arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.toArray(arg0);         }
+M3SynchronizedSortedBag$SyncSet	SyncSet()	CONSTRUCTOR_LOCK	this.backing = java.util.Objects.requireNonNull(arg0, "collection");         this.lock = java.util.Objects.requireNonNull(arg1, "lock"); java.util.Set<E>
+M3SynchronizedSortedBag$SyncSet	boolean add(E arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.add(arg0);         }
+M3SynchronizedSortedBag$SyncSet	boolean addAll(java.util.Collection<? extends E> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.addAll(arg0);         }
+M3SynchronizedSortedBag$SyncSet	boolean contains(java.lang.Object arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.contains(arg0);         }
+M3SynchronizedSortedBag$SyncSet	boolean containsAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.containsAll(arg0);         }
+M3SynchronizedSortedBag$SyncSet	boolean equals(java.lang.Object arg0)	SYNC(GUARD+EQUALS)	synchronized (lock) {             if (arg0 == this) {                 return true;             }             return arg0 == this || backing.equals(arg0);         }
+M3SynchronizedSortedBag$SyncSet	boolean isEmpty()	SYNC(DELEGATE)	synchronized (lock) {             return backing.isEmpty();         }
+M3SynchronizedSortedBag$SyncSet	boolean remove(java.lang.Object arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.remove(arg0);         }
+M3SynchronizedSortedBag$SyncSet	boolean removeAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.removeAll(arg0);         }
+M3SynchronizedSortedBag$SyncSet	boolean removeIf(java.util.function.Predicate<? super E> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.removeIf(arg0);         }
+M3SynchronizedSortedBag$SyncSet	boolean retainAll(java.util.Collection<?> arg0)	SYNC(DELEGATE)	synchronized (lock) {             return backing.retainAll(arg0);         }
+M3SynchronizedSortedBag$SyncSet	int hashCode()	SYNC(DELEGATE)	synchronized (lock) {             return backing.hashCode();         }
+M3SynchronizedSortedBag$SyncSet	int size()	SYNC(DELEGATE)	synchronized (lock) {             return backing.size();         }
+M3SynchronizedSortedBag$SyncSet	java.lang.Object[] toArray()	SYNC(DELEGATE)	synchronized (lock) {             return backing.toArray();         }
+M3SynchronizedSortedBag$SyncSet	java.lang.String toString()	SYNC(DELEGATE)	synchronized (lock) {             return backing.toString();         }
+M3SynchronizedSortedBag$SyncSet	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
+M3SynchronizedSortedBag$SyncSet	void clear()	SYNC(DELEGATE)	synchronized (lock) {             backing.clear();         }
 M3TransformedBag	<T> T[] toArray(T[] arg0)	DELEGATE	return backing.toArray(arg0);
 M3TransformedBag	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return org.apache.commons.collections4.Bag.super.toArray(arg0);
 M3TransformedBag	M3TransformedBag()	MANUAL	no single-argument static factory: constructor shape outside DECORATOR_FILL v1
 M3TransformedBag	Object[] toArray()	DELEGATE	return backing.toArray();
 M3TransformedBag	String toString()	DELEGATE	return backing.toString();
 M3TransformedBag	boolean add(E arg0)	MANUAL	return decorated().add(transform(object));
-M3TransformedBag	boolean add(E arg0, int arg1)	MANUAL	return getBag().add(transform(object), nCopies);
+M3TransformedBag	boolean add(E arg0, int arg1)	MANUAL	return decorated().add(transform(object), nCopies);
 M3TransformedBag	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL	return decorated().addAll(transform(coll));
 M3TransformedBag	boolean contains(Object arg0)	DELEGATE	return backing.contains(arg0);
 M3TransformedBag	boolean containsAll(java.util.Collection<?> arg0)	DELEGATE	return backing.containsAll(arg0);
 M3TransformedBag	boolean equals(Object arg0)	EQUALS	return arg0 == this || backing.equals(arg0);
 M3TransformedBag	boolean isEmpty()	DELEGATE	return backing.isEmpty();
 M3TransformedBag	boolean remove(Object arg0)	DELEGATE	return backing.remove(arg0);
-M3TransformedBag	boolean remove(Object arg0, int arg1)	MANUAL	return getBag().remove(object, nCopies);
+M3TransformedBag	boolean remove(Object arg0, int arg1)	DELEGATE	return backing.remove(arg0, arg1);
 M3TransformedBag	boolean removeAll(java.util.Collection<?> arg0)	DELEGATE	return backing.removeAll(arg0);
 M3TransformedBag	boolean removeIf(java.util.function.Predicate<? super E> arg0)	DELEGATE	return backing.removeIf(arg0);
 M3TransformedBag	boolean retainAll(java.util.Collection<?> arg0)	DELEGATE	return backing.retainAll(arg0);
-M3TransformedBag	int getCount(Object arg0)	MANUAL	return getBag().getCount(object);
+M3TransformedBag	int getCount(Object arg0)	DELEGATE	return backing.getCount(arg0);
 M3TransformedBag	int hashCode()	DELEGATE	return backing.hashCode();
 M3TransformedBag	int size()	DELEGATE	return backing.size();
 M3TransformedBag	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
-M3TransformedBag	java.util.Set<E> uniqueSet()	MANUAL	final Set<E> set = getBag().uniqueSet(); return TransformedSet.transformingSet(set, transformer);
+M3TransformedBag	java.util.Set<E> uniqueSet()	MANUAL	final Set<E> set = decorated().uniqueSet(); return TransformedSet.transformingSet(set, transformer);
 M3TransformedBag	java.util.Spliterator<E> spliterator()	DEFAULT	return org.apache.commons.collections4.Bag.super.spliterator();
 M3TransformedBag	java.util.stream.Stream<E> parallelStream()	DEFAULT	return org.apache.commons.collections4.Bag.super.parallelStream();
 M3TransformedBag	java.util.stream.Stream<E> stream()	DEFAULT	return org.apache.commons.collections4.Bag.super.stream();
@@ -1036,18 +1090,18 @@ M3TransformedCollection	void clear()	DELEGATE	backing.clear();
 M3TransformedCollection	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.Collection.super.forEach(arg0);
 M3TransformedList	<T> T[] toArray(T[] arg0)	DELEGATE	return backing.toArray(arg0);
 M3TransformedList	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return java.util.List.super.toArray(arg0);
-M3TransformedList	E get(int arg0)	MANUAL	return getList().get(index);
+M3TransformedList	E get(int arg0)	DELEGATE	return backing.get(arg0);
 M3TransformedList	E getFirst()	DEFAULT	return java.util.List.super.getFirst();
 M3TransformedList	E getLast()	DEFAULT	return java.util.List.super.getLast();
-M3TransformedList	E remove(int arg0)	MANUAL	return getList().remove(index);
+M3TransformedList	E remove(int arg0)	DELEGATE	return backing.remove(arg0);
 M3TransformedList	E removeFirst()	DEFAULT	return java.util.List.super.removeFirst();
 M3TransformedList	E removeLast()	DEFAULT	return java.util.List.super.removeLast();
-M3TransformedList	E set(int arg0, E arg1)	MANUAL	object = transform(object); return getList().set(index, object);
+M3TransformedList	E set(int arg0, E arg1)	MANUAL	object = transform(object); return decorated().set(index, object);
 M3TransformedList	M3TransformedList()	MANUAL	no single-argument static factory: constructor shape outside DECORATOR_FILL v1
 M3TransformedList	Object[] toArray()	DELEGATE	return backing.toArray();
 M3TransformedList	String toString()	DELEGATE	return backing.toString();
 M3TransformedList	boolean add(E arg0)	MANUAL	return decorated().add(transform(object));
-M3TransformedList	boolean addAll(int arg0, java.util.Collection<? extends E> arg1)	MANUAL	coll = transform(coll); return getList().addAll(index, coll);
+M3TransformedList	boolean addAll(int arg0, java.util.Collection<? extends E> arg1)	MANUAL	coll = transform(coll); return decorated().addAll(index, coll);
 M3TransformedList	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL	return decorated().addAll(transform(coll));
 M3TransformedList	boolean contains(Object arg0)	DELEGATE	return backing.contains(arg0);
 M3TransformedList	boolean containsAll(java.util.Collection<?> arg0)	DELEGATE	return backing.containsAll(arg0);
@@ -1058,20 +1112,20 @@ M3TransformedList	boolean removeAll(java.util.Collection<?> arg0)	DELEGATE	retur
 M3TransformedList	boolean removeIf(java.util.function.Predicate<? super E> arg0)	DELEGATE	return backing.removeIf(arg0);
 M3TransformedList	boolean retainAll(java.util.Collection<?> arg0)	DELEGATE	return backing.retainAll(arg0);
 M3TransformedList	int hashCode()	DELEGATE	return backing.hashCode();
-M3TransformedList	int indexOf(Object arg0)	MANUAL	return getList().indexOf(object);
-M3TransformedList	int lastIndexOf(Object arg0)	MANUAL	return getList().lastIndexOf(object);
+M3TransformedList	int indexOf(Object arg0)	DELEGATE	return backing.indexOf(arg0);
+M3TransformedList	int lastIndexOf(Object arg0)	DELEGATE	return backing.lastIndexOf(arg0);
 M3TransformedList	int size()	DELEGATE	return backing.size();
 M3TransformedList	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
 M3TransformedList	java.util.List<E> reversed()	DEFAULT	return java.util.List.super.reversed();
-M3TransformedList	java.util.List<E> subList(int arg0, int arg1)	MANUAL	final List<E> sub = getList().subList(fromIndex, toIndex); return new TransformedList<>(sub, transformer);
+M3TransformedList	java.util.List<E> subList(int arg0, int arg1)	MANUAL	final List<E> sub = decorated().subList(fromIndex, toIndex); return new TransformedList<>(sub, transformer);
 M3TransformedList	java.util.ListIterator<E> listIterator()	MANUAL	return listIterator(0);
-M3TransformedList	java.util.ListIterator<E> listIterator(int arg0)	MANUAL	return new TransformedListIterator(getList().listIterator(i));
+M3TransformedList	java.util.ListIterator<E> listIterator(int arg0)	MANUAL	return new TransformedListIterator(decorated().listIterator(i));
 M3TransformedList	java.util.Spliterator<E> spliterator()	DEFAULT	return java.util.List.super.spliterator();
 M3TransformedList	java.util.stream.Stream<E> parallelStream()	DEFAULT	return java.util.List.super.parallelStream();
 M3TransformedList	java.util.stream.Stream<E> stream()	DEFAULT	return java.util.List.super.stream();
 M3TransformedList	static <E> M3TransformedList<E> transformedList(java.util.List<E> arg0, org.apache.commons.collections4.Transformer<? super E, ? extends E> arg1)	MANUAL	final TransformedList<E> decorated = new TransformedList<>(list, transformer); if (!list.isEmpty()) { @SuppressWarnings("unchecked") final E[] values = (E[]) list.toArray(); list.clear(); for (final E value : values) { decorated.decorated().add(transformer.apply(value)); } } return decorated;
 M3TransformedList	static <E> M3TransformedList<E> transformingList(java.util.List<E> arg0, org.apache.commons.collections4.Transformer<? super E, ? extends E> arg1)	MANUAL	return new TransformedList<>(list, transformer);
-M3TransformedList	void add(int arg0, E arg1)	MANUAL	object = transform(object); getList().add(index, object);
+M3TransformedList	void add(int arg0, E arg1)	MANUAL	object = transform(object); decorated().add(index, object);
 M3TransformedList	void addFirst(E arg0)	DEFAULT	java.util.List.super.addFirst(arg0);
 M3TransformedList	void addLast(E arg0)	DEFAULT	java.util.List.super.addLast(arg0);
 M3TransformedList	void clear()	DELEGATE	backing.clear();
@@ -1136,12 +1190,12 @@ M3TransformedMultiValuedMap	void clear()	DELEGATE	backing.clear();
 M3TransformedNavigableSet	<T> T[] toArray(T[] arg0)	DELEGATE	return backing.toArray(arg0);
 M3TransformedNavigableSet	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return java.util.NavigableSet.super.toArray(arg0);
 M3TransformedNavigableSet	E ceiling(E arg0)	DELEGATE	return backing.ceiling(arg0);
-M3TransformedNavigableSet	E first()	MANUAL	return getSortedSet().first();
+M3TransformedNavigableSet	E first()	DELEGATE	return backing.first();
 M3TransformedNavigableSet	E floor(E arg0)	DELEGATE	return backing.floor(arg0);
 M3TransformedNavigableSet	E getFirst()	DEFAULT	return java.util.NavigableSet.super.getFirst();
 M3TransformedNavigableSet	E getLast()	DEFAULT	return java.util.NavigableSet.super.getLast();
 M3TransformedNavigableSet	E higher(E arg0)	DELEGATE	return backing.higher(arg0);
-M3TransformedNavigableSet	E last()	MANUAL	return getSortedSet().last();
+M3TransformedNavigableSet	E last()	DELEGATE	return backing.last();
 M3TransformedNavigableSet	E lower(E arg0)	DELEGATE	return backing.lower(arg0);
 M3TransformedNavigableSet	E pollFirst()	DELEGATE	return backing.pollFirst();
 M3TransformedNavigableSet	E pollLast()	DELEGATE	return backing.pollLast();
@@ -1162,7 +1216,7 @@ M3TransformedNavigableSet	boolean removeIf(java.util.function.Predicate<? super 
 M3TransformedNavigableSet	boolean retainAll(java.util.Collection<?> arg0)	DELEGATE	return backing.retainAll(arg0);
 M3TransformedNavigableSet	int hashCode()	DELEGATE	return backing.hashCode();
 M3TransformedNavigableSet	int size()	DELEGATE	return backing.size();
-M3TransformedNavigableSet	java.util.Comparator<? super E> comparator()	MANUAL	return getSortedSet().comparator();
+M3TransformedNavigableSet	java.util.Comparator<? super E> comparator()	DELEGATE	return backing.comparator();
 M3TransformedNavigableSet	java.util.Iterator<E> descendingIterator()	DELEGATE	return backing.descendingIterator();
 M3TransformedNavigableSet	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
 M3TransformedNavigableSet	java.util.NavigableSet<E> descendingSet()	MANUAL	return transformingNavigableSet(decorated().descendingSet(), transformer);
@@ -1170,9 +1224,9 @@ M3TransformedNavigableSet	java.util.NavigableSet<E> headSet(E arg0, boolean arg1
 M3TransformedNavigableSet	java.util.NavigableSet<E> reversed()	DEFAULT	return java.util.NavigableSet.super.reversed();
 M3TransformedNavigableSet	java.util.NavigableSet<E> subSet(E arg0, boolean arg1, E arg2, boolean arg3)	MANUAL	final NavigableSet<E> sub = decorated().subSet(fromElement, fromInclusive, toElement, toInclusive); return transformingNavigableSet(sub, transformer);
 M3TransformedNavigableSet	java.util.NavigableSet<E> tailSet(E arg0, boolean arg1)	MANUAL	final NavigableSet<E> tail = decorated().tailSet(fromElement, inclusive); return transformingNavigableSet(tail, transformer);
-M3TransformedNavigableSet	java.util.SortedSet<E> headSet(E arg0)	MANUAL	final SortedSet<E> set = getSortedSet().headSet(toElement); return new TransformedSortedSet<>(set, transformer);
-M3TransformedNavigableSet	java.util.SortedSet<E> subSet(E arg0, E arg1)	MANUAL	final SortedSet<E> set = getSortedSet().subSet(fromElement, toElement); return new TransformedSortedSet<>(set, transformer);
-M3TransformedNavigableSet	java.util.SortedSet<E> tailSet(E arg0)	MANUAL	final SortedSet<E> set = getSortedSet().tailSet(fromElement); return new TransformedSortedSet<>(set, transformer);
+M3TransformedNavigableSet	java.util.SortedSet<E> headSet(E arg0)	MANUAL	final SortedSet<E> set = decorated().headSet(toElement); return new TransformedSortedSet<>(set, transformer);
+M3TransformedNavigableSet	java.util.SortedSet<E> subSet(E arg0, E arg1)	MANUAL	final SortedSet<E> set = decorated().subSet(fromElement, toElement); return new TransformedSortedSet<>(set, transformer);
+M3TransformedNavigableSet	java.util.SortedSet<E> tailSet(E arg0)	MANUAL	final SortedSet<E> set = decorated().tailSet(fromElement); return new TransformedSortedSet<>(set, transformer);
 M3TransformedNavigableSet	java.util.Spliterator<E> spliterator()	DEFAULT	return java.util.NavigableSet.super.spliterator();
 M3TransformedNavigableSet	java.util.stream.Stream<E> parallelStream()	DEFAULT	return java.util.NavigableSet.super.parallelStream();
 M3TransformedNavigableSet	java.util.stream.Stream<E> stream()	DEFAULT	return java.util.NavigableSet.super.stream();
@@ -1184,10 +1238,10 @@ M3TransformedNavigableSet	void clear()	DELEGATE	backing.clear();
 M3TransformedNavigableSet	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.NavigableSet.super.forEach(arg0);
 M3TransformedQueue	<T> T[] toArray(T[] arg0)	DELEGATE	return backing.toArray(arg0);
 M3TransformedQueue	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return java.util.Queue.super.toArray(arg0);
-M3TransformedQueue	E element()	MANUAL	return getQueue().element();
-M3TransformedQueue	E peek()	MANUAL	return getQueue().peek();
-M3TransformedQueue	E poll()	MANUAL	return getQueue().poll();
-M3TransformedQueue	E remove()	MANUAL	return getQueue().remove();
+M3TransformedQueue	E element()	DELEGATE	return backing.element();
+M3TransformedQueue	E peek()	DELEGATE	return backing.peek();
+M3TransformedQueue	E poll()	DELEGATE	return backing.poll();
+M3TransformedQueue	E remove()	DELEGATE	return backing.remove();
 M3TransformedQueue	M3TransformedQueue()	MANUAL	no single-argument static factory: constructor shape outside DECORATOR_FILL v1
 M3TransformedQueue	Object[] toArray()	DELEGATE	return backing.toArray();
 M3TransformedQueue	String toString()	DELEGATE	return backing.toString();
@@ -1196,7 +1250,7 @@ M3TransformedQueue	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL
 M3TransformedQueue	boolean contains(Object arg0)	DELEGATE	return backing.contains(arg0);
 M3TransformedQueue	boolean containsAll(java.util.Collection<?> arg0)	DELEGATE	return backing.containsAll(arg0);
 M3TransformedQueue	boolean isEmpty()	DELEGATE	return backing.isEmpty();
-M3TransformedQueue	boolean offer(E arg0)	MANUAL	return getQueue().offer(transform(obj));
+M3TransformedQueue	boolean offer(E arg0)	MANUAL	return decorated().offer(transform(obj));
 M3TransformedQueue	boolean remove(Object arg0)	DELEGATE	return backing.remove(arg0);
 M3TransformedQueue	boolean removeAll(java.util.Collection<?> arg0)	DELEGATE	return backing.removeAll(arg0);
 M3TransformedQueue	boolean removeIf(java.util.function.Predicate<? super E> arg0)	DELEGATE	return backing.removeIf(arg0);
@@ -1237,29 +1291,29 @@ M3TransformedSet	void clear()	DELEGATE	backing.clear();
 M3TransformedSet	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.Set.super.forEach(arg0);
 M3TransformedSortedBag	<T> T[] toArray(T[] arg0)	DELEGATE	return backing.toArray(arg0);
 M3TransformedSortedBag	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return org.apache.commons.collections4.SortedBag.super.toArray(arg0);
-M3TransformedSortedBag	E first()	MANUAL	return getSortedBag().first();
-M3TransformedSortedBag	E last()	MANUAL	return getSortedBag().last();
+M3TransformedSortedBag	E first()	DELEGATE	return backing.first();
+M3TransformedSortedBag	E last()	DELEGATE	return backing.last();
 M3TransformedSortedBag	M3TransformedSortedBag()	MANUAL	no single-argument static factory: constructor shape outside DECORATOR_FILL v1
 M3TransformedSortedBag	Object[] toArray()	DELEGATE	return backing.toArray();
 M3TransformedSortedBag	String toString()	DELEGATE	return backing.toString();
 M3TransformedSortedBag	boolean add(E arg0)	MANUAL	return decorated().add(transform(object));
-M3TransformedSortedBag	boolean add(E arg0, int arg1)	MANUAL	return getBag().add(transform(object), nCopies);
+M3TransformedSortedBag	boolean add(E arg0, int arg1)	MANUAL	return decorated().add(transform(object), nCopies);
 M3TransformedSortedBag	boolean addAll(java.util.Collection<? extends E> arg0)	MANUAL	return decorated().addAll(transform(coll));
 M3TransformedSortedBag	boolean contains(Object arg0)	DELEGATE	return backing.contains(arg0);
 M3TransformedSortedBag	boolean containsAll(java.util.Collection<?> arg0)	DELEGATE	return backing.containsAll(arg0);
 M3TransformedSortedBag	boolean equals(Object arg0)	EQUALS	return arg0 == this || backing.equals(arg0);
 M3TransformedSortedBag	boolean isEmpty()	DELEGATE	return backing.isEmpty();
 M3TransformedSortedBag	boolean remove(Object arg0)	DELEGATE	return backing.remove(arg0);
-M3TransformedSortedBag	boolean remove(Object arg0, int arg1)	MANUAL	return getBag().remove(object, nCopies);
+M3TransformedSortedBag	boolean remove(Object arg0, int arg1)	DELEGATE	return backing.remove(arg0, arg1);
 M3TransformedSortedBag	boolean removeAll(java.util.Collection<?> arg0)	DELEGATE	return backing.removeAll(arg0);
 M3TransformedSortedBag	boolean removeIf(java.util.function.Predicate<? super E> arg0)	DELEGATE	return backing.removeIf(arg0);
 M3TransformedSortedBag	boolean retainAll(java.util.Collection<?> arg0)	DELEGATE	return backing.retainAll(arg0);
-M3TransformedSortedBag	int getCount(Object arg0)	MANUAL	return getBag().getCount(object);
+M3TransformedSortedBag	int getCount(Object arg0)	DELEGATE	return backing.getCount(arg0);
 M3TransformedSortedBag	int hashCode()	DELEGATE	return backing.hashCode();
 M3TransformedSortedBag	int size()	DELEGATE	return backing.size();
-M3TransformedSortedBag	java.util.Comparator<? super E> comparator()	MANUAL	return getSortedBag().comparator();
+M3TransformedSortedBag	java.util.Comparator<? super E> comparator()	DELEGATE	return backing.comparator();
 M3TransformedSortedBag	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
-M3TransformedSortedBag	java.util.Set<E> uniqueSet()	MANUAL	final Set<E> set = getBag().uniqueSet(); return TransformedSet.transformingSet(set, transformer);
+M3TransformedSortedBag	java.util.Set<E> uniqueSet()	MANUAL	final Set<E> set = decorated().uniqueSet(); return TransformedSet.transformingSet(set, transformer);
 M3TransformedSortedBag	java.util.Spliterator<E> spliterator()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.spliterator();
 M3TransformedSortedBag	java.util.stream.Stream<E> parallelStream()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.parallelStream();
 M3TransformedSortedBag	java.util.stream.Stream<E> stream()	DEFAULT	return org.apache.commons.collections4.SortedBag.super.stream();
@@ -1315,10 +1369,10 @@ M3TransformedSortedMap	void putAll(java.util.Map<? extends K, ? extends V> arg0)
 M3TransformedSortedMap	void replaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V> arg0)	DEFAULT	java.util.SortedMap.super.replaceAll(arg0);
 M3TransformedSortedSet	<T> T[] toArray(T[] arg0)	DELEGATE	return backing.toArray(arg0);
 M3TransformedSortedSet	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return java.util.SortedSet.super.toArray(arg0);
-M3TransformedSortedSet	E first()	MANUAL	return getSortedSet().first();
+M3TransformedSortedSet	E first()	DELEGATE	return backing.first();
 M3TransformedSortedSet	E getFirst()	DEFAULT	return java.util.SortedSet.super.getFirst();
 M3TransformedSortedSet	E getLast()	DEFAULT	return java.util.SortedSet.super.getLast();
-M3TransformedSortedSet	E last()	MANUAL	return getSortedSet().last();
+M3TransformedSortedSet	E last()	DELEGATE	return backing.last();
 M3TransformedSortedSet	E removeFirst()	DEFAULT	return java.util.SortedSet.super.removeFirst();
 M3TransformedSortedSet	E removeLast()	DEFAULT	return java.util.SortedSet.super.removeLast();
 M3TransformedSortedSet	M3TransformedSortedSet()	MANUAL	no single-argument static factory: constructor shape outside DECORATOR_FILL v1
@@ -1336,12 +1390,12 @@ M3TransformedSortedSet	boolean removeIf(java.util.function.Predicate<? super E> 
 M3TransformedSortedSet	boolean retainAll(java.util.Collection<?> arg0)	DELEGATE	return backing.retainAll(arg0);
 M3TransformedSortedSet	int hashCode()	DELEGATE	return backing.hashCode();
 M3TransformedSortedSet	int size()	DELEGATE	return backing.size();
-M3TransformedSortedSet	java.util.Comparator<? super E> comparator()	MANUAL	return getSortedSet().comparator();
+M3TransformedSortedSet	java.util.Comparator<? super E> comparator()	DELEGATE	return backing.comparator();
 M3TransformedSortedSet	java.util.Iterator<E> iterator()	DELEGATE	return backing.iterator();
-M3TransformedSortedSet	java.util.SortedSet<E> headSet(E arg0)	MANUAL	final SortedSet<E> set = getSortedSet().headSet(toElement); return new TransformedSortedSet<>(set, transformer);
+M3TransformedSortedSet	java.util.SortedSet<E> headSet(E arg0)	MANUAL	final SortedSet<E> set = decorated().headSet(toElement); return new TransformedSortedSet<>(set, transformer);
 M3TransformedSortedSet	java.util.SortedSet<E> reversed()	DEFAULT	return java.util.SortedSet.super.reversed();
-M3TransformedSortedSet	java.util.SortedSet<E> subSet(E arg0, E arg1)	MANUAL	final SortedSet<E> set = getSortedSet().subSet(fromElement, toElement); return new TransformedSortedSet<>(set, transformer);
-M3TransformedSortedSet	java.util.SortedSet<E> tailSet(E arg0)	MANUAL	final SortedSet<E> set = getSortedSet().tailSet(fromElement); return new TransformedSortedSet<>(set, transformer);
+M3TransformedSortedSet	java.util.SortedSet<E> subSet(E arg0, E arg1)	MANUAL	final SortedSet<E> set = decorated().subSet(fromElement, toElement); return new TransformedSortedSet<>(set, transformer);
+M3TransformedSortedSet	java.util.SortedSet<E> tailSet(E arg0)	MANUAL	final SortedSet<E> set = decorated().tailSet(fromElement); return new TransformedSortedSet<>(set, transformer);
 M3TransformedSortedSet	java.util.Spliterator<E> spliterator()	DEFAULT	return java.util.SortedSet.super.spliterator();
 M3TransformedSortedSet	java.util.stream.Stream<E> parallelStream()	DEFAULT	return java.util.SortedSet.super.parallelStream();
 M3TransformedSortedSet	java.util.stream.Stream<E> stream()	DEFAULT	return java.util.SortedSet.super.stream();

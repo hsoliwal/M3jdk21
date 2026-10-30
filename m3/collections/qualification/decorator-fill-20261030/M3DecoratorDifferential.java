@@ -187,10 +187,43 @@ public final class M3DecoratorDifferential {
         } else {
             Method m = methods.get(r.nextInt(methods.size()));
             long argSeed = r.nextLong();
-            compare(where + " " + m.getName() + Arrays.toString(m.getParameterTypes()), invokeOracle(o, m, argSeed),
-                    norm(call(m, x, args(m.getParameterTypes(), new Random(argSeed)))));
+            if (isEquals(m) && r.nextInt(3) == 0) {
+                // equal but not identical argument: the true path of equals, which identity and Integer arguments never reach
+                compare(where + " equals(copy of backing)", norm(callOracle(o, m, copy(b1))), norm(call(m, x, new Object[] {copy(b2)})));
+            } else {
+                compare(where + " " + m.getName() + Arrays.toString(m.getParameterTypes()), invokeOracle(o, m, argSeed),
+                        norm(call(m, x, args(m.getParameterTypes(), new Random(argSeed)))));
+            }
         }
         compare(where + " backing state", b1.toString(), b2.toString());
+    }
+
+    private static boolean isEquals(Method m) {
+        return m.getName().equals("equals") && m.getParameterCount() == 1 && m.getParameterTypes()[0] == Object.class;
+    }
+
+    private static Object callOracle(Object o, Method m, Object arg) {
+        try {
+            Method om = o.getClass().getMethod(m.getName(), m.getParameterTypes());
+            om.setAccessible(true);
+            return call(om, o, new Object[] {arg});
+        } catch (NoSuchMethodException e) {
+            return "NO_ORACLE_METHOD";
+        }
+    }
+
+    /** A fresh backing of the same kind with the same content: equal, never identical. */
+    @SuppressWarnings("unchecked")
+    private Object copy(Object owner) {
+        Object c = BACKINGS.get(kind).get();
+        if (c instanceof MultiValuedMap<?, ?> mv) {
+            ((MultiValuedMap<Object, Object>) mv).putAll((MultiValuedMap<Object, Object>) owner);
+        } else if (c instanceof Map<?, ?> map) {
+            ((Map<Object, Object>) map).putAll((Map<Object, Object>) owner);
+        } else {
+            ((Collection<Object>) c).addAll((Collection<Object>) owner);
+        }
+        return kind.equals("entryset") ? ((Map<?, ?>) c).entrySet() : c;
     }
 
     private Object invokeOracle(Object o, Method m, long argSeed) {

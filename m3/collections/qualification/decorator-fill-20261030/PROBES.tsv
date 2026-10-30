@@ -1,0 +1,11 @@
+m3_class	probe	result
+com.m3.collections.apache.M3SynchronizedCollection	M3SyncProbe	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedCollection methods=22 checks=27 mismatches=0
+com.m3.collections.apache.M3SynchronizedCollection	M3LockTraceProbe	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedCollection methods=22 checks=22 mismatches=0
+com.m3.collections.apache.M3SynchronizedBag	M3SyncProbe	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedBag methods=26 checks=55 mismatches=0
+com.m3.collections.apache.M3SynchronizedBag	M3LockTraceProbe	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedBag methods=26 checks=47 mismatches=0
+com.m3.collections.apache.M3SynchronizedMultiSet	M3SyncProbe	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedMultiSet methods=28 checks=80 mismatches=0
+com.m3.collections.apache.M3SynchronizedMultiSet	M3LockTraceProbe	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedMultiSet methods=28 checks=70 mismatches=0
+com.m3.collections.apache.M3SynchronizedQueue	M3SyncProbe	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedQueue methods=27 checks=33 mismatches=0
+com.m3.collections.apache.M3SynchronizedQueue	M3LockTraceProbe	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedQueue methods=27 checks=27 mismatches=0
+com.m3.collections.apache.M3SynchronizedSortedBag	M3SyncProbe	exit=0 INFO: M3_SYNC_PROBE class=com.m3.collections.apache.M3SynchronizedSortedBag methods=29 checks=58 mismatches=0
+com.m3.collections.apache.M3SynchronizedSortedBag	M3LockTraceProbe	exit=0 INFO: M3_LOCK_TRACE class=com.m3.collections.apache.M3SynchronizedSortedBag methods=29 checks=50 mismatches=0

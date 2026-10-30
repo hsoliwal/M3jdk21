@@ -61,8 +61,8 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.Collecti
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.HashBag	com.m3.collections.apache.M3HashBag	ABSORBED	org.apache.commons.collections4.bag.HashBag	DONE #1421
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.PredicatedBag	com.m3.collections.apache.M3PredicatedBag	GAP	org.apache.commons.collections4.bag.PredicatedBag	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.PredicatedSortedBag	com.m3.collections.apache.M3PredicatedSortedBag	GAP	org.apache.commons.collections4.bag.PredicatedSortedBag	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.SynchronizedBag	com.m3.collections.apache.M3SynchronizedBag	GAP	org.apache.commons.collections4.bag.SynchronizedBag	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.SynchronizedSortedBag	com.m3.collections.apache.M3SynchronizedSortedBag	GAP	org.apache.commons.collections4.bag.SynchronizedSortedBag	SCAFFOLD
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.SynchronizedBag	com.m3.collections.apache.M3SynchronizedBag	ABSORBED	org.apache.commons.collections4.bag.SynchronizedBag	DONE #2169
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.SynchronizedSortedBag	com.m3.collections.apache.M3SynchronizedSortedBag	ABSORBED	org.apache.commons.collections4.bag.SynchronizedSortedBag	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.TransformedBag	com.m3.collections.apache.M3TransformedBag	GAP	org.apache.commons.collections4.bag.TransformedBag	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.TransformedSortedBag	com.m3.collections.apache.M3TransformedSortedBag	GAP	org.apache.commons.collections4.bag.TransformedSortedBag	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.bag.TreeBag	com.m3.collections.apache.M3TreeBag	GAP	org.apache.commons.collections4.bag.TreeBag	SCAFFOLD
@@ -105,7 +105,7 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.A
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.CompositeCollection	com.m3.collections.apache.M3CompositeCollection	GAP	org.apache.commons.collections4.collection.CompositeCollection	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.IndexedCollection	com.m3.collections.apache.M3IndexedCollection	GAP	org.apache.commons.collections4.collection.IndexedCollection	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.PredicatedCollection	com.m3.collections.apache.M3PredicatedCollection	GAP	org.apache.commons.collections4.collection.PredicatedCollection	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.SynchronizedCollection	com.m3.collections.apache.M3SynchronizedCollection	GAP	org.apache.commons.collections4.collection.SynchronizedCollection	SCAFFOLD
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.SynchronizedCollection	com.m3.collections.apache.M3SynchronizedCollection	ABSORBED	org.apache.commons.collections4.collection.SynchronizedCollection	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.TransformedCollection	com.m3.collections.apache.M3TransformedCollection	GAP	org.apache.commons.collections4.collection.TransformedCollection	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.UnmodifiableBoundedCollection	com.m3.collections.apache.M3UnmodifiableBoundedCollection	GAP	org.apache.commons.collections4.collection.UnmodifiableBoundedCollection	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.collection.UnmodifiableCollection	com.m3.collections.apache.M3UnmodifiableCollection	ABSORBED	org.apache.commons.collections4.collection.UnmodifiableCollection	DONE #2169
@@ -294,7 +294,7 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.Abs
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.HashMultiSet	com.m3.collections.apache.M3HashMultiSet	GAP	org.apache.commons.collections4.multiset.HashMultiSet	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.PredicatedMultiSet	com.m3.collections.apache.M3PredicatedMultiSet	GAP	org.apache.commons.collections4.multiset.PredicatedMultiSet	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.PredicatedSortedMultiSet	-	GAP	org.apache.commons.collections4.multiset.PredicatedSortedMultiSet	NO_ROW
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.SynchronizedMultiSet	com.m3.collections.apache.M3SynchronizedMultiSet	GAP	org.apache.commons.collections4.multiset.SynchronizedMultiSet	SCAFFOLD
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.SynchronizedMultiSet	com.m3.collections.apache.M3SynchronizedMultiSet	ABSORBED	org.apache.commons.collections4.multiset.SynchronizedMultiSet	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.SynchronizedSortedMultiSet	-	GAP	org.apache.commons.collections4.multiset.SynchronizedSortedMultiSet	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.TransformedMultiSet	-	GAP	org.apache.commons.collections4.multiset.TransformedMultiSet	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.multiset.TransformedSortedMultiSet	-	GAP	org.apache.commons.collections4.multiset.TransformedSortedMultiSet	NO_ROW
@@ -310,7 +310,7 @@ hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.properties.S
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.AbstractQueueDecorator	-	GAP	org.apache.commons.collections4.queue.AbstractQueueDecorator	NO_ROW
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.CircularFifoQueue	com.m3.collections.apache.M3CircularFifoQueue	ABSORBED	org.apache.commons.collections4.queue.CircularFifoQueue	DONE master
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.PredicatedQueue	com.m3.collections.apache.M3PredicatedQueue	GAP	org.apache.commons.collections4.queue.PredicatedQueue	SCAFFOLD
-hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.SynchronizedQueue	com.m3.collections.apache.M3SynchronizedQueue	GAP	org.apache.commons.collections4.queue.SynchronizedQueue	SCAFFOLD
+hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.SynchronizedQueue	com.m3.collections.apache.M3SynchronizedQueue	ABSORBED	org.apache.commons.collections4.queue.SynchronizedQueue	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.TransformedQueue	com.m3.collections.apache.M3TransformedQueue	GAP	org.apache.commons.collections4.queue.TransformedQueue	SCAFFOLD
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.queue.UnmodifiableQueue	com.m3.collections.apache.M3UnmodifiableQueue	ABSORBED	org.apache.commons.collections4.queue.UnmodifiableQueue	DONE #2169
 hsoliwal/commons-collections	7c1357f9dacb	com.m3.collections.apache.sequence.CommandVisitor	-	GAP	org.apache.commons.collections4.sequence.CommandVisitor	NO_ROW
