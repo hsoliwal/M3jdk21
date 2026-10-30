@@ -8,7 +8,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.ScanningRecipe;
 import org.openrewrite.SourceFile;
@@ -45,23 +47,21 @@ public final class M3HierarchicalDocumentationRecipe
     public static final class State {
         private final SortedMap<String, M3HierarchicalDocumentation.Source> originals = new TreeMap<>();
         private final SortedMap<String, String> existing = new TreeMap<>();
+        //FLLDCIM: BOP — scan violations are deferred to plan(); OpenRewrite routes scanner exceptions to
+        // ExecutionContext.onError and continues, so only generate()/plan() can refuse the run fail-closed.
+        private final SortedSet<String> violations = new TreeSet<>();
         private SortedMap<String, String> planned;
         synchronized void record(SourceFile file, ExecutionContext ctx) {
             String path = file.getSourcePath().normalize().toString().replace('\\', '/');
             if (path.startsWith(M3HierarchicalDocumentation.OUTPUT)) {
-                if (existing.putIfAbsent(path, file.printAll()) != null) {
-                    throw new IllegalStateException("duplicate generated document: " + path);
-                }
-                if (!(file instanceof PlainText)
-                        || !file.printAll().startsWith(M3HierarchicalDocumentation.MARKER)) {
-                    throw new IllegalStateException("unowned generated document: " + path);
-                }
+                recordGenerated(path, file);
                 return;
             }
             // OpenRewrite controls the parser; a binary file cannot be represented as a text SourceFile.
             String printed = file.printAll();
             if (printed.indexOf('\0') >= 0) {
-                throw new IllegalStateException("binary/NUL input cannot be documented as text: " + path);
+                violations.add("binary/NUL input cannot be documented as text: " + path);
+                return;
             }
             String packageName = "";
             List<String> symbols = List.of();
@@ -86,10 +86,24 @@ public final class M3HierarchicalDocumentationRecipe
             var fact = new M3HierarchicalDocumentation.Source(path, M3HierarchicalDocumentation.sha256(printed),
                     printed.getBytes(StandardCharsets.UTF_8).length, kind, packageName, symbols);
             if (originals.putIfAbsent(path, fact) != null) {
-                throw new IllegalStateException("duplicate SourceFile path: " + path);
+                violations.add("duplicate SourceFile path: " + path);
             }
         }
+        private void recordGenerated(String path, SourceFile file) {
+            if (existing.putIfAbsent(path, file.printAll()) != null) {
+                violations.add("duplicate generated document: " + path);
+                return;
+            }
+            if (!(file instanceof PlainText)
+                    || !file.printAll().startsWith(M3HierarchicalDocumentation.MARKER)) {
+                violations.add("unowned generated document: " + path);
+            }
+        }
+        /** Fails closed: any scan violation refuses the whole run before a single document is generated. */
         synchronized SortedMap<String, String> plan(String projectName, String repositoryName) {
+            if (!violations.isEmpty()) {
+                throw new IllegalStateException("documentation run refused: " + String.join("; ", violations));
+            }
             if (planned == null) {
                 planned = M3HierarchicalDocumentation.render(originals.values(), projectName, repositoryName);
                 for (Map.Entry<String, String> old : existing.entrySet()) {
