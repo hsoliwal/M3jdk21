@@ -1,0 +1,45 @@
+{
+  "schema": "M3_SOURCE_BUILT_INTAKE_WORKFLOW_RECEIVER_V1",
+  "status": "DRAFT_HOSTED_AND_FULL_REACTOR_PENDING",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_base_commit": "cda404e4a4539d8f4e5cf1a92f20859a522a56b7",
+  "original_workflow": {
+    "path": ".github/workflows/m3-synexia-intake-policy.yml",
+    "git_blob": "5be2e74f3d68a95c981d703e4b8d337cc5c1a15d"
+  },
+  "received_workflow_git_blob": "6440a2b6a51c17983ee082cccfed4dc99dd9446f",
+  "source_owner": {
+    "repository": "hsoliwal/com.synexia",
+    "pull_request": 14220,
+    "qualified_commit": "667101a9ac1805829ceb157bb45a473dd3c70997",
+    "patch_git_blob": "ed0354321b61f7ccce09dd931626973dff909b8e",
+    "crate": ".m3/task-crates/release-blocker6-rewrite-java-m3-source-20261030"
+  },
+  "failure": {
+    "workflow_run": 40917174857,
+    "job": 123600398539,
+    "step": "Prove exact OpenRewrite crate",
+    "cause": "Unpublished source-qualified org.openrewrite rewrite-java/rewrite-java-21/rewrite-test 8.17.1-m3-source-1 and JUnit 5.10.2-m3-source-1 and Synexia custody jar were requested from Central before installation"
+  },
+  "bounded_private_evidence": {
+    "vendor_closure": "Maven 56-module source build and custody install passed; 14 custody tests passed",
+    "offline_dependency_resolution": "all four source-qualified coordinates resolved in a fresh local Maven repository; consumer dependency:resolve passed",
+    "original_owning_ci_test": "SynexiaIntakePolicyRecipeTest: 4 tests passed against source-matched receiving files",
+    "first_party_source_unchanged": true
+  },
+  "fresh_receiver_projection": {
+    "original_source_blob_verified": true,
+    "private_patch_applied_with_exact_three_hunks": true,
+    "additions": 12,
+    "deletions": 0,
+    "second_application_refused": true,
+    "install_step_order": "Prepare pinned JDK 21 -> install source-built closure -> original named test",
+    "product_code_writes": 0
+  },
+  "pending": [
+    "Hosted current-head installation and original JUnit acceptance",
+    "Full target provenance and reactor acceptance",
+    "Entire M3JDK21/jtreg/JNI/platform qualification"
+  ],
+  "notes": "Passive evidence only; no Maven/OpenRewrite recipe, executable producer script, vendored dependency, JDK runtime source or Maven coordinate is copied to this public receiver. No green status inferred from queued Actions."
+}
