@@ -53,7 +53,10 @@ public abstract class M3WebModel extends M3WebView {
 
 	@Override
 	public String accessibleName(int item) {
-		return item < 0 ? (count > 0 ? text[0] : concept) : text(item);
+		if (item < 0) {
+			return count > 0 && text[0] != null ? text[0] : concept;
+		}
+		return text(item) != null ? text[item] : Integer.toString(item + 1);
 	}
 
 	@Override
@@ -128,6 +131,12 @@ public abstract class M3WebModel extends M3WebView {
 	public void layout(int w, int h) {
 		width = Math.max(0, w);
 		height = Math.max(0, h);
+		arrange();
+		damageAll();
+	}
+
+	@Override
+	protected void arrange() {
 		project();
 		doLayout();
 		if (rtl) {
@@ -135,7 +144,6 @@ public abstract class M3WebModel extends M3WebView {
 				rects[i * 4] = width - rects[i * 4] - rects[i * 4 + 2];
 			}
 		}
-		damageAll();
 	}
 
 	@Override

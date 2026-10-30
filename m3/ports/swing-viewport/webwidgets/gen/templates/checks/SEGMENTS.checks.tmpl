@@ -1,0 +1,55 @@
+package @PKG@;
+
+import static @PKG@.M3WebChecks.check;
+import static @PKG@.M3WebStates.*;
+
+/** Family contract of the ordered segments (pattern M3P-SEGMENTS-1). */
+public final class M3SegmentsChecks {
+	private M3SegmentsChecks() {
+	}
+
+	public static void run(M3SegmentsModel m) {
+		m.layout(360, 240);
+		M3WebPaint p = new M3WebPaint();
+		check(m.count() > 0, "segments");
+		m.select(m.count() - 1);
+		check(m.current() == m.count() - 1 && m.is(m.current(), SELECTED), "select");
+		check(m.mode != M3SegmentsModel.STEPPER || m.is(0, DONE), "earlier steps done");
+		check(m.labelOf(0) != null, "label");
+		m.paint(p);
+		m.setRtl(true);
+		m.paint(p);
+		m.setRtl(false);
+		keys(m, p);
+		pages(m, p);
+	}
+
+	private static void keys(M3SegmentsModel m, M3WebPaint p) {
+		m.setFocus(0);
+		m.key(m.isRtl() ? KEY_LEFT : KEY_RIGHT, 0, 0);
+		m.key(KEY_DOWN, 0, 0);
+		m.key(KEY_ENTER, 0, 0);
+		m.key(KEY_ENTER, 0, 0);
+		m.key(KEY_PAGE_DOWN, 0, 0);
+		m.key(KEY_PAGE_UP, 0, 0);
+		m.pointer(P_MOVE, m.itemRect(0, 0) + 2, m.itemRect(0, 1) + 2, 0);
+		m.paint(p);
+		m.pointer(P_WHEEL, 0, 1, 0);
+		m.pointer(P_WHEEL, 0, -1, 0);
+		m.select(-1);
+		check(m.current() == -1, "no selection");
+		m.paint(p);
+	}
+
+	/** R at family level: a long run of text-less segments shows 1-based numbers and only a resident window. */
+	private static void pages(M3SegmentsModel m, M3WebPaint p) {
+		m.load("50");
+		m.layout(360, 240);
+		check(m.mode != M3SegmentsModel.PAGINATION || (m.count() == 50 && "50".equals(m.labelOf(49))), "pages");
+		m.select(m.count() - 1);
+		check(m.window(1) >= m.count() || m.window(1) > m.current(), "selection revealed");
+		m.paint(p);
+		m.reveal(0);
+		check(m.scrollOffset() == 0, "reveal first");
+	}
+}

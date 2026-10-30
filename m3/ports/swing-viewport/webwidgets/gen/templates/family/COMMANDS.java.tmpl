@@ -1,0 +1,214 @@
+package @PKG@;
+
+import static @PKG@.M3WebStates.*;
+
+/**
+ * Grouped command buttons (pattern M3P-COMMANDS-1, aspects D+P): ribbon groups of large and small
+ * buttons with a caption strip on the HEADER plane, an app bar (title at the start, actions at the
+ * end) and a split button whose menu opens on the OVERLAY plane. Kinds per item: push, toggle,
+ * split, drop-down. Members: ribbon, app-bar, split-button.
+ */
+public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
+	public static final int RIBBON = 0, APPBAR = 1, SPLIT = 2;
+	public static final int PUSH = 0, TOGGLE = 1, SPLIT_KIND = 2, DROPDOWN = 3;
+	private String[] captions = new String[0];
+
+	public M3CommandsModel(String concept, int role, int mode, int shape, int variant) {
+		super(concept, role, mode, shape, variant);
+	}
+
+	@Override
+	public int aspects() {
+		return A_D | A_P;
+	}
+
+	@Override
+	public void load(String sample) {
+		clear();
+		for (String s : sample.split(";")) {
+			String[] f = s.split("~", -1);
+			int i = add(f.length > 1 ? f[1] : f[0]);
+			setGroup(i, f.length > 1 ? M3WebStates.parse(f[0]) : 0);
+			setAux(i, f.length > 2 && f[2].equals("L") ? 1 : 0);
+		}
+		if (mode == SPLIT && count > 0) {
+			setValue(0, SPLIT_KIND);
+		}
+	}
+
+	@Override
+	public void setCaptions(String... names) {
+		captions = names.clone();
+		relayout(-1, D_TEXT);
+	}
+
+	@Override
+	public void setKind(int item, int kind) {
+		setValue(item, kind);
+	}
+
+	@Override
+	public boolean isMenuOpen() {
+		return is(-1, OPEN);
+	}
+
+	@Override
+	public void setMenuOpen(boolean open) {
+		setState(-1, OPEN, open);
+		relayout(-1, D_LAYOUT);
+	}
+
+	@Override
+	protected void doLayout() {
+		switch (mode) {
+		case RIBBON: ribbon(); break;
+		case APPBAR: appbar(); break;
+		default: split();
+		}
+	}
+
+	private void ribbon() {
+		int r = rowHeight(), x = 0, g = count > 0 ? group[0] : 0, row = 0;
+		for (int i = 0; i < count; i++) {
+			if (group[i] != g) {
+				x += (row > 0 ? r * 4 : 0) + 2 * gap();
+				g = group[i];
+				row = 0;
+			}
+			boolean large = aux[i] == 1;
+			int w = large ? Math.max(2 * r, textWidth(text[i], font()) + pad()) : r * 4;
+			setRect(i, x, large ? 0 : row * r, w, large ? 3 * r : r);
+			x += large ? w + gap() : 0;
+			row = large ? 0 : (row + 1) % 3;
+			x += !large && row == 0 ? r * 4 + gap() : 0;
+		}
+		setPlane(HEADER, 0, 3 * r, width, r);
+	}
+
+	private void appbar() {
+		int r = rowHeight() + pad(), end = width;
+		for (int i = count - 1; i >= 0; i--) {
+			if (aux[i] == 1) {
+				setRect(i, 0, 0, Math.max(r, Math.min(end, textWidth(text[i], font() + 2) + 2 * pad())), r);
+			} else {
+				end -= r;
+				setRect(i, end, 0, r, r);
+			}
+		}
+	}
+
+	private void split() {
+		int r = rowHeight(), w = count > 0 ? textWidth(text[0], font()) + 2 * pad() + r : r;
+		for (int i = 0; i < count; i++) {
+			boolean shown = i == 0 || is(-1, OPEN);
+			setRect(i, 0, i == 0 ? 0 : r + 4 + (i - 1) * r, shown ? Math.max(w, 120) : 0, shown ? r : 0);
+		}
+		setPlane(OVERLAY, 0, r + 4, Math.max(w, 120), Math.max(0, count - 1) * r);
+	}
+
+	@Override
+	protected void emit(M3WebPaint p) {
+		if (mode == APPBAR) {
+			p.rect(0, 0, width, rowHeight() + pad(), theme.slot(M3WebTheme.SURFACE));
+			p.line(0, rowHeight() + pad(), width, rowHeight() + pad(), theme.slot(M3WebTheme.BORDER));
+		}
+		if (mode == SPLIT && is(-1, OPEN) && count > 1) {
+			p.round(plane(OVERLAY, 0) + 2, plane(OVERLAY, 1) + 3, plane(OVERLAY, 2), plane(OVERLAY, 3), 6, theme.shadow());
+			p.rect(plane(OVERLAY, 0), plane(OVERLAY, 1), plane(OVERLAY, 2), plane(OVERLAY, 3), theme.slot(M3WebTheme.SURFACE));
+		}
+		for (int i = 0; i < count; i++) {
+			int b = i * 4;
+			if (rects[b + 2] > 0) {
+				button(p, i, rects[b], rects[b + 1], rects[b + 2], rects[b + 3]);
+			}
+		}
+		if (mode == RIBBON) {
+			captions(p);
+		}
+	}
+
+	private void button(M3WebPaint p, int i, int x, int y, int w, int h) {
+		int st = flags[i] | (value[i] == TOGGLE && (flags[i] & CHECKED) != 0 ? SELECTED : 0);
+		boolean title = mode == APPBAR && aux[i] == 1, item = mode == SPLIT && i > 0;
+		if (!title && (i == 0 && mode == SPLIT || (st & (HOVER | PRESSED | SELECTED)) != 0)) {
+			int v = mode == SPLIT && i == 0 ? variant : V_DEFAULT;
+			p.round(x, y, w, h, item ? 0 : radius(), theme.fill(v, st));
+		}
+		int ink = mode == SPLIT && i == 0 ? theme.ink(variant, st) : theme.slot(M3WebTheme.FG);
+		if (mode == RIBBON && aux[i] == 1) {
+			M3WebGlyphs.glyph(p, M3WebGlyphs.I_PLUS, x + (w - h / 2) / 2, y + 2, h / 2, ink);
+			p.text(x, y + h / 2, w, h / 2, ink, font() | M3WebPaint.CENTER, text[i]);
+		} else if (mode == APPBAR && !title) {
+			M3WebGlyphs.glyph(p, M3WebGlyphs.iconId(text[i].toLowerCase(java.util.Locale.ROOT)), x + h / 4, y + h / 4, h / 2, ink);
+		} else {
+			p.text(x + pad(), y, w - 2 * pad() - (value[i] == SPLIT_KIND ? h : 0), h, ink, font() | (title ? M3WebPaint.BOLD : 0) | (rtl ? M3WebPaint.RIGHT : 0), text[i]);
+		}
+		if (value[i] == SPLIT_KIND || value[i] == DROPDOWN) {
+			int ax = rtl ? x : x + w - h;
+			p.line(rtl ? x + h : ax, y + 4, rtl ? x + h : ax, y + h - 4, M3WebTheme.mix(ink, theme.fill(variant, st), 40));
+			M3WebGlyphs.glyph(p, M3WebGlyphs.I_DOWN, ax, y, h, ink);
+		}
+	}
+
+	private void captions(M3WebPaint p) {
+		int y = plane(HEADER, 1), h = plane(HEADER, 3);
+		for (int g = 0; g < captions.length; g++) {
+			int x0 = Integer.MAX_VALUE, x1 = Integer.MIN_VALUE;
+			for (int i = 0; i < count; i++) {
+				if (group[i] == g) {
+					x0 = Math.min(x0, rects[i * 4]);
+					x1 = Math.max(x1, rects[i * 4] + rects[i * 4 + 2]);
+				}
+			}
+			if (x1 > x0) {
+				muted(p, captions[g], x0, y, x1 - x0, h, M3WebPaint.CENTER);
+				p.line(x1 + gap(), 0, x1 + gap(), y + h, theme.slot(M3WebTheme.BORDER));
+			}
+		}
+	}
+
+	@Override
+	protected void activateAt(int item, int x, int y) {
+		int w = rects[item * 4 + 2], h = rects[item * 4 + 3];
+		int zone = Math.min(h, w / 3);
+		boolean arrow = value[item] == SPLIT_KIND && (rtl ? x < zone : x >= w - zone);
+		if (arrow || value[item] == DROPDOWN) {
+			setMenuOpen(!isMenuOpen());
+		} else {
+			activate(item);
+		}
+	}
+
+	@Override
+	protected void activate(int item) {
+		if (value[item] == TOGGLE) {
+			setState(item, CHECKED, !is(item, CHECKED));
+		}
+		if (mode == SPLIT && item > 0) {
+			setMenuOpen(false);
+		}
+		fire(item, D_ACTION);
+	}
+
+	@Override
+	protected boolean onKey(int key, int ch, int mods) {
+		if (key == KEY_DOWN && mode == SPLIT && !isMenuOpen()) {
+			setMenuOpen(true);
+			setFocus(count > 1 ? 1 : 0);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	protected boolean vertical() {
+		return mode == SPLIT && isMenuOpen();
+	}
+
+	@Override
+	protected boolean onEscape() {
+		boolean was = isMenuOpen();
+		setMenuOpen(false);
+		return was;
+	}
+}

@@ -42,6 +42,9 @@ public abstract class M3WebView extends M3WebLanes {
 	protected final int[] planes = new int[PLANES * 6];
 	protected final int[] window = new int[4];
 
+	/** Recomputes the window and the resident rects at the current scroll offset, without damage. */
+	protected abstract void arrange();
+
 	/** Viewport aspects this family implements (A_R | A_G | A_D | A_P). */
 	public abstract int aspects();
 
@@ -80,6 +83,11 @@ public abstract class M3WebView extends M3WebLanes {
 		return height;
 	}
 
+	/** True when the scroll axis is horizontal (blits move pixels along x). */
+	public boolean scrollsHorizontally() {
+		return false;
+	}
+
 	/** Scrolls to a logical offset; a short move is a blit plus the exposed strip. */
 	public void scrollTo(long offset) {
 		long max = Math.max(0, logicalExtent() - viewLength());
@@ -89,10 +97,15 @@ public abstract class M3WebView extends M3WebLanes {
 			return;
 		}
 		scroll = to;
-		project();
+		arrange();
 		if (Math.abs(dy) < viewLength() && (aspects() & A_D) != 0) {
 			blit += (int) dy;
-			damage(0, dy > 0 ? 0 : viewLength() + (int) dy, width, (int) Math.abs(dy));
+			int at = dy > 0 ? 0 : viewLength() + (int) dy, len = (int) Math.abs(dy);
+			if (scrollsHorizontally()) {
+				damage(at, 0, len, height);
+			} else {
+				damage(0, at, width, len);
+			}
 		} else {
 			damageAll();
 		}

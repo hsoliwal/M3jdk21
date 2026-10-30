@@ -106,7 +106,8 @@ public final class M3WebChecks {
 		m.takeDamage(d);
 		m.scrollTo(1005);
 		check(m.takeBlit() == -5, "short scroll is a blit");
-		check(m.takeDamage(d) && d[1] == m.height - 5 && d[3] == 5, "exposed strip only");
+		boolean h = m.scrollsHorizontally();
+		check(m.takeDamage(d) && (h ? d[0] == m.width - 5 && d[2] == 5 : d[1] == m.height - 5 && d[3] == 5), "exposed strip only");
 		m.scrollTo(1000);
 		check(m.takeBlit() == 5, "blit back");
 		m.scrollTo(900_000);
@@ -179,12 +180,14 @@ public final class M3WebChecks {
 		if (m.count() == 0) {
 			return;
 		}
+		m.scrollTo(0);
 		int x = m.itemRect(0, 0), w = m.itemRect(0, 2);
 		m.setRtl(true);
 		check(m.isRtl() && m.itemRect(0, 0) == m.prefWidth() * 0 + rtlX(m, x, w), "RTL mirrors item 0");
 		paints(m);
 		keys(m);
 		m.setRtl(false);
+		m.scrollTo(0);
 		check(m.itemRect(0, 0) == x, "LTR restored");
 	}
 

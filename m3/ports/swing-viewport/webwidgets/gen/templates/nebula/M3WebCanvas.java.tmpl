@@ -150,7 +150,8 @@ public class M3WebCanvas<M extends M3WebModel> extends Canvas {
 		int dy = model.takeBlit();
 		if (dy != 0) {
 			Point size = getSize();
-			scroll(0, dy, 0, 0, size.x, size.y, false);
+			boolean h = model.scrollsHorizontally();
+			scroll(h ? dy : 0, h ? 0 : dy, 0, 0, size.x, size.y, false);
 		}
 		if (model.takeDamage(damage)) {
 			redraw(damage[0], damage[1], damage[2], damage[3], false);
