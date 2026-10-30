@@ -13,6 +13,8 @@ on:
       - "m3/docs/synexia-direct-copy-review.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
       - "m3/runtime-integration/verify-synexia-intake.py"
+      - "m3/synexia-import/pure-int-recipe-custody/**"
+      - "m3/vendor/third_party/rewrite-*/pom.xml"
       - "m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-synexia-intake-policy.yml"
   pull_request:
@@ -24,6 +26,8 @@ on:
       - "m3/docs/synexia-direct-copy-review.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
       - "m3/runtime-integration/verify-synexia-intake.py"
+      - "m3/synexia-import/pure-int-recipe-custody/**"
+      - "m3/vendor/third_party/rewrite-*/pom.xml"
       - "m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-synexia-intake-policy.yml"
   workflow_dispatch:
@@ -66,6 +70,14 @@ jobs:
           tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+
+      - name: Install source-built OpenRewrite closure and Synexia custody artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          # org.openrewrite:*:8.17.1-m3-source-1 and com.synexia:synexia-openrewrite-recipes:1.0.0-SNAPSHOT
+          # are built from the vendored source reactor (m3/vendor/third_party/pom.xml); no registry publishes them.
+          bash "$REPO/m3/synexia-import/pure-int-recipe-custody/install.sh" "$REPO"
 
       - name: Prove exact OpenRewrite crate
         shell: bash

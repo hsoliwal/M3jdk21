@@ -48,8 +48,8 @@ static void check_unsigned_masks(void) {
             }
         }
     }
-    CHECK(!m3_jni_matches_u8((jbyte)255, 256, 0));
-    CHECK(!m3_jni_matches_u8((jbyte)255, 0, -1));
+    CHECK(!m3_jni_matches_u8((jbyte)-1, 256, 0));
+    CHECK(!m3_jni_matches_u8((jbyte)-1, 0, -1));
 }
 
 static void check_full_width_masks(void) {

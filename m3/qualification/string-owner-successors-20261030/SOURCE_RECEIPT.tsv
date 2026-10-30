@@ -1,0 +1,25 @@
+field	value
+schema	M3_STRING_OWNER_SUCCESSORS_DELIVERY_V1
+status	SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED
+source_base	5860598b515885ebc2275f6552d9a5a1348fdb15
+blocker	M3jdk21 release blocker 10 (C): M3JDK String owner-coordinate runtime run 40452112040 at 05e947be: test_string_phase_successors.py:54 '35ed9985...' != '8a57ca4f...' (M3String.java); at 5860598b the same assertion drifts to '8a57ca4f...' != '8ddd767e...' (M3String.java) and '0d47d7e9...' != '5c569617...' (M3StringPool.java)
+canonical_repository	hsoliwal/com.synexia
+canonical_recipe	com.synexia.rewrite.M3Jdk21StringOwnerSuccessors20261030 (crate m3jdk21-string-owner-successors-20261030 via M3HashPinnedTextSnapshotRecipe)
+canonical_branch	m3/release-blocker10-synexia-pins-20261030 (develop PR; successor of PR 13719 crate m3jdk21-string-merged-source-observation-20261027)
+predecessor_receipt	m3/qualification/string-merged-source-observation-20261027/SOURCE_RECEIPT.tsv (immutable)
+observed_M3String_git	8ddd767e9198f5716ebde4aada80b91591125d9d
+M3String_successor	second merged-source observation: FIRST_PARENT 29fd692ad3dbbbd4816f456ac18a02eeb3ebca3d:8a57ca4f (previous MERGED_RESULT), SECOND_PARENT 9f0ee2fb57699e1d94b7133691664be7bf5eeb8c:e53f62018eaf8e5dbf9cc85969bf3828e6950712 (Synexia PR 12532 head 9a3221f9 postimage hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/005-M3String.java.txt sha256 7d3afcfb6565325e822acdf70532817526e95641be89ad192711570549535580), MERGED_RESULT 9237d21cccc0d700555ccc4eab3b87edb2833af3:8ddd767e (M3JDK21 PR #1371 "Superset: merge", landed through PR #2070 on 2026-10-28); NOT_RECONSTRUCTED; NOT_CLAIMED
+observed_M3StringPool_git	5c56961717958f97e7bd62c5630c09877a25e599
+M3StringPool_successor	pool DAG row CANONICAL_RECIPE_POSTIMAGE_SUCCESSOR: product commits 2c1052d0f2bc35aa535e830695004b381c7a2647 (intermediate blob d798881d, sha256 3965f2474537452e72f2b503822bb64c8b7710bb4c7be99c4b8c1480338f8a9c) and cdb839f863b49e4d93564267de0dfb9c2afed76e (final, landed through PR #2070); final source == Synexia PR 13693 head ab538f9e034e1d09e299618e3dc0fe25235cc2be hash-pinned-java/m3jdk21-frozen-lexicon-direct-address-20261027/M3StringPool.java.txt (pre 0d47d7e9 sha256 6d5840c1... -> post 5c569617 sha256 43221ecd0107fa55423dbcc615bf7a3e8007b4d117c9626468f64b894ef796e7, 77439 bytes); producer com.synexia.rewrite.M3Jdk21FrozenLexiconDirectAddress20261027 (yml blob efabf0c2a96aa3d1719770e6db89336c688c90b4, engine M3HashPinnedJavaSnapshotRecipe blob ef56d2e7bf7dbe6503740c606c0d53e877ebd2ab at ab538f9e); PARTIAL canonical history; NOT_ACCEPTED
+historical_V1_chain_git_unchanged	75d949e5aa2c8ff4e5c70d648e81fc0d37b68651
+first_observation_rows_unchanged	rows 1-4 of string-target-merged-source-observation.tsv and rows 1-8 of string-pool-source-observation.tsv are byte-identical to the 2026-10-27 receipts
+outputs	check_string_phase.py (3 merged rows + continuity guard, 1 pool row), string-target-merged-source-observation.tsv (+3 rows), string-pool-source-observation.tsv (+1 row), test_string_phase_successors.py (7-role/9-role expectations, continuity assertions, 7 added refusal mutations)
+actual_unittest	python3 -B -m unittest test_string_phase_successors at 5860598b sparse worktree: before = FAILED (M3String 8a57ca4f != 8ddd767e; M3StringPool 0d47d7e9 != 5c569617); after = Ran 26 tests OK (skipped=1)
+actual_checker_main	check_string_phase.py main at 5860598b sparse worktree (owner sources from string-source-target-map.tsv present): M3JDK21_STRING_PHASE_PIN_PASS rows=14 source_revision=296323958b1019edd59b60b9c05cb148d024cfe5 successors=4 promotion=false public_api=java.lang.String; exit 0
+actual_Java_SDK_JUnit	NOT_RUN_PENDING (M3Jdk21StringOwnerSuccessors20261030RecipeTest added in com.synexia; reactor not built here)
+merged_source_semantic_recipe_reconstruction	OPEN_NOT_ESTABLISHED
+runtime_JNI_GC_JIT_image_acceptance	NOT_CLAIMED
+performance	NOT_MEASURED
+product_Java_C_native_changes	NONE
+tooling_custody	Executable Maven/OpenRewrite recipes remain canonical in com.synexia; receiver contains generated outputs + this passive receipt only.
+promotion	NONE

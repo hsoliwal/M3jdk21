@@ -13,6 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+// Modified 2026 by Hitesh Soliwal and contributors: propagate mutable navigation comparator failures.
 package com.m3.collections;
 
 import java.util.AbstractMap;
@@ -220,21 +221,46 @@ public final class M3MutableFilteredViews {
             return firstMatch(sourceCursor, predicate);
         }
 
-        /** One-seek normal path; recover only invalid bounded-range construction. */
+        /** One-seek owned path; external navigation never catches user comparator failures. */
         private E bounded(E query, boolean forward, boolean inclusive) {
             NavigableSet<E> range;
             if (source instanceof M3TreeSet<E> owner) {
                 range = owner.rangeOrNull(query, forward, inclusive);
                 if (range == null) return boundedFallback(query, forward, inclusive);
             } else {
-                try {
-                    range = forward ? source.tailSet(query, inclusive) : source.headSet(query, inclusive);
-                } catch (IllegalArgumentException outOfRange) {
-                    return boundedFallback(query, forward, inclusive);
-                }
+                // Near-element queries accept keys outside bounded JDK views. Their
+                // comparator failures are real failures, not range-rejection signals.
+                E nearest = forward
+                        ? (inclusive ? source.ceiling(query) : source.higher(query))
+                        : (inclusive ? source.floor(query) : source.lower(query));
+                if (nearest == null) return nullCandidate(query, forward, inclusive);
+                if (predicate.test(nearest)) return nearest;
+                // A returned representative lies inside the source range, so this
+                // strict suffix/prefix is valid without catching arbitrary exceptions.
+                range = forward ? source.tailSet(nearest, false) : source.headSet(nearest, false);
             }
             Iterator<E> cursor = forward ? range.iterator() : range.descendingIterator();
             return seek(cursor);
+        }
+
+        /** Distinguish an absent result from an actual null member without probing contains(null). */
+        private E nullCandidate(E query, boolean forward, boolean inclusive) {
+            // Reuse the original read-only view's null-disambiguation atom. Natural
+            // order, including its reverse, cannot contain a null representative.
+            if (source.comparator() == null) return null;
+            NavigableSet<E> reverse = source.descendingSet();
+            if (reverse.comparator() == null) return null;
+            NavigableSet<E> ordered = forward ? source : reverse;
+            Iterator<E> cursor = ordered.iterator();
+            if (!cursor.hasNext()) return null;
+            Comparator<? super E> order = ordered.comparator();
+            int fromFirst = compareStored(query, cursor.next(), order);
+            if (fromFirst < 0 || (fromFirst == 0 && inclusive)) {
+                return seek(ordered.iterator());
+            }
+            int fromLast = compareStored(query, ordered.last(), order);
+            if (fromLast > 0 || (fromLast == 0 && !inclusive)) return null;
+            return seek(ordered.tailSet(query, inclusive).iterator());
         }
 
         private E boundedFallback(E query, boolean forward, boolean inclusive) {

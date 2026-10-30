@@ -1,0 +1,62 @@
+{
+  "schema": "M3CLASS_OPTIONAL_ELISION_PASSIVE_RECEIPT_V1",
+  "canonical_recipe_repository": "https://github.com/hsoliwal/com.synexia",
+  "canonical_recipe": {
+    "name": "com.synexia.m3.M3ClassOptionalElision20261030",
+    "metadata_name": "com.synexia.m3.M3ClassOptionalMetadata20261030",
+    "engine_revision": "9c953e5d954a5ec038f6c894e6449a2108d8d0ca",
+    "task_path": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030",
+    "descriptor_git_blob": "b2abdf0a3b9a44008ca71dbbaf196b2b29e294a2",
+    "java_manifest_sha256": "21a698ad84fd4edfe97f2e98a9ab3efe6a13770c196158f8819225d6171818d9"
+  },
+  "target_preimage_revision": "cda404e4a4539d8f4e5cf1a92f20859a522a56b7",
+  "product_source_transitions": [
+    {
+      "crate": "m3class-optional-elision-20261030",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "before": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "after": "e2c0731e03fbbfefde6098bab89a77fd8a54df2edde28cf6e206c93aec00e9c0",
+      "bytes": 17197
+    },
+    {
+      "crate": "m3class-optional-elision-20261030",
+      "path": "test/jdk/java/lang/Class/M3ClassOptionalTest.java",
+      "before": "ABSENT",
+      "after": "73236a5a705c292e2ce63e9c6e37fcc863daa59938da31a364f1c8f973a04659",
+      "bytes": 10525
+    }
+  ],
+  "naming": {
+    "stable_id": "synexia.counterpart.MIndexClass",
+    "status": "implemented-unverified",
+    "promotion": false,
+    "mapping_sha256": "dbbf8c9a9bcea01ea071e513877c01a6ab8925160ad0a58426b9d2a36dedf02e",
+    "name_plan_sha256": "47b30ec215f6173c2599534861a6d3a5bce53d32c5b072830ae116968976a668",
+    "change": "Preserve owner and status; append prior target source seal to existing lineage; update authority blob; all four operations remain QUEUED"
+  },
+  "qualification": {
+    "mode": "Java21 component sources patched into java.base; not a source-built JDK",
+    "checks_per_execution": 18714,
+    "rows_per_snapshot": 71,
+    "snapshots": [
+      "standard",
+      "compact"
+    ],
+    "profiles": [
+      "normal",
+      "-Xint"
+    ],
+    "baseline_behavior_oracle": "PASS",
+    "public_descriptors": "UNCHANGED",
+    "bytecode": "Five direct relationship getters contain no Optional call; canonical-name getter contains no Optional.map",
+    "runtime_receipt_sha256": "b09fa1840095163f41a4dbd0c30134d6d7e08a489d25efb19d160c5ac672b75c"
+  },
+  "remaining_gates": [
+    "FULL_SOURCE_BUILT_M3JDK21_IMAGE_JTREG_NOT_RUN",
+    "REPRESENTATIVE_ALLOCATION_THROUGHPUT_GC_PRESSURE_NOT_MEASURED",
+    "INHERITED_M3CLASS_DIRECT_COPY_RIGHTS_REVIEW_REQUIRED",
+    "FULL_FAMILY_AND_REPOSITORY_ACCEPTANCE_SEPARATE"
+  ],
+  "disposition": "DRAFT_COMPONENT_CANDIDATE; no merge or release promotion",
+  "license": "Preserve existing source headers; M3Class remains recorded REVIEW_REQUIRED in the existing direct-copy ledger."
+}

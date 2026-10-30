@@ -36,13 +36,17 @@ class M3HierarchicalDocumentationRecipeTest {
                 text("feature/pom.xml", "<project/>"),
                 java("package p; class C { int m() { return 1; } }"));
     }
+    /** Portable map key: Path.toString() is '\\'-separated on Windows; the recipe keys by '/'. */
+    private static String key(SourceFile source) {
+        return source.getSourcePath().toString().replace('\\', '/');
+    }
     private static Map<String, SourceFile> accumulate(List<SourceFile> start,
                                                        M3HierarchicalDocumentationRecipe recipe) {
         var result = recipe.run(new InMemoryLargeSourceSet(start), context());
         Map<String, SourceFile> all = new TreeMap<>();
-        for (SourceFile source : start) all.put(source.getSourcePath().toString(), source);
+        for (SourceFile source : start) all.put(key(source), source);
         result.getChangeset().getAllResults().forEach(change -> {
-            if (change.getAfter() != null) all.put(change.getAfter().getSourcePath().toString(), change.getAfter());
+            if (change.getAfter() != null) all.put(key(change.getAfter()), change.getAfter());
         });
         return all;
     }
@@ -52,7 +56,7 @@ class M3HierarchicalDocumentationRecipeTest {
         var all = accumulate(before, recipe);
         assertEquals(16, all.size()); // 3 sources, 13 generated L0–L5 documents.
         for (SourceFile original : before) {
-            assertEquals(original.printAll(), all.get(original.getSourcePath().toString()).printAll());
+            assertEquals(original.printAll(), all.get(key(original)).printAll());
         }
         assertTrue(all.containsKey(".m3/generated-docs/L0/feature/src/main/java/p/C.java.md"));
         assertTrue(all.containsKey(".m3/generated-docs/L1/feature/production/java/p.md"));

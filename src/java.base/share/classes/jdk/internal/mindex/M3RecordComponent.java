@@ -31,9 +31,12 @@ public final class M3RecordComponent {
     public long structuralHash64() { return owner.memberStructuralHash64(row); }
 
     public Optional<RecordComponent> tryRecordComponent() {
-        return owner.resolveReflectiveElement(row)
-                .filter(RecordComponent.class::isInstance)
-                .map(RecordComponent.class::cast);
+        Optional<?> element = owner.resolveReflectiveElement(row)
+                .filter(RecordComponent.class::isInstance);
+        // The filter proves the payload type; the Optional cannot replace that payload.
+        @SuppressWarnings("unchecked")
+        Optional<RecordComponent> typed = (Optional<RecordComponent>) element;
+        return typed;
     }
 
     public RecordComponent toRecordComponent() {
@@ -42,5 +45,5 @@ public final class M3RecordComponent {
                         "JVM RecordComponent boundary is not live for row " + row));
     }
 
-    @Override public String toString() { return getDeclaringRecord().getName() + "#" + getName(); }
+    @Override public String toString() { return owner.binaryName(owner.memberDeclaringClassRow(row)) + "#" + getName(); }
 }

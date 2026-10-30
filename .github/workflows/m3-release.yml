@@ -1,0 +1,389 @@
+#
+# Copyright (c) 2026 Hitesh Soliwal and contributors to the Synexia Project.
+# SPDX-License-Identifier: Apache-2.0
+#
+# M3JDK21 release build (pattern RELEASE_TAG_BUILD, 2026-10-30).
+#
+# One push of a tag named m3jdk-* builds the product bundles for linux-x64,
+# macos-x64, macos-aarch64 and windows-x64 through the existing OpenJDK build
+# lanes (build-linux.yml, build-macos.yml, build-windows.yml; the same
+# `with:` values main.yml passes, release debug level only), then packages
+#   <tag>_<platform>_bin.{tar.gz,zip}   JDK image bundle (jmods included)
+#   <tag>_<platform>_bin-symbols.tar.gz debug symbols when the lane produced them
+#   <tag>_<platform>_jmods.zip          the image's jmods directory
+#   LICENSE, ADDITIONAL_LICENSE_INFO, ASSEMBLY_EXCEPTION, LICENSE-M3-APACHE-2.0.txt,
+#   M3-SYNEXIA-NOTICE.md (the repository NOTICE), M3-SYNEXIA-RIGHTS.md,
+#   M3-SYNEXIA-AUTHORS.md, release-contract.json, admission*.json, RELEASE_NOTES.md
+#   SHA256SUMS                          over every file above
+# and opens a DRAFT GitHub Release on the tag. Publishing the draft is a
+# person's click; this workflow never publishes.
+#
+# Claims: m3/release/release-contract.json is the only claim authority. The
+# admission verifier runs in development mode and its JSON is attached as
+# evidence; release mode (--release) is recorded but not required, because
+# the P0 technical preview tag sits on the integration history (ahead of the
+# upstream baseline by thousands of commits) and no execution-evidence manifest
+# exists yet, so git.single_release_commit and evidence.manifest block it.
+# This workflow upgrades no claim.
+#
+# Startup contract (run on CPU before pushing a change to this file):
+#   python3 m3/tools/ci/reusable_call_check.py .
+#   actionlint .github/workflows/m3-release.yml
+#
+name: 'M3JDK21 release build'
+
+on:
+  push:
+    tags:
+      - 'm3jdk-*'
+  workflow_dispatch:
+    inputs:
+      platforms:
+        description: 'Platform(s) to build (comma separated: linux-x64, macos-x64, macos-aarch64, windows-x64)'
+        required: true
+        default: 'linux-x64, macos-x64, macos-aarch64, windows-x64'
+      configure-arguments:
+        description: 'Additional configure arguments'
+        required: false
+      make-arguments:
+        description: 'Additional make arguments'
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  ###
+  ### Validate the tag, build JTReg for the lanes, decide the platforms
+  ###
+
+  prepare:
+    name: 'Prepare the release run'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+      release: ${{ steps.tag.outputs.release }}
+      configure-arguments: ${{ steps.tag.outputs.configure-arguments }}
+      linux-x64: ${{ steps.include.outputs.linux-x64 }}
+      macos-x64: ${{ steps.include.outputs.macos-x64 }}
+      macos-aarch64: ${{ steps.include.outputs.macos-aarch64 }}
+      windows-x64: ${{ steps.include.outputs.windows-x64 }}
+
+    steps:
+      - name: 'Checkout the scripts and the version configuration'
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github
+            make/conf
+
+      - name: 'Validate the tag against make/conf/version-numbers.conf'
+        id: tag
+        env:
+          INPUT_CONFIGURE_ARGUMENTS: ${{ github.event.inputs.configure-arguments }}
+        run: |
+          set -euo pipefail
+          tag=''
+          release='false'
+          configure_arguments="${INPUT_CONFIGURE_ARGUMENTS}"
+          if [[ "${GITHUB_REF_TYPE}" == 'tag' ]]; then
+            tag="${GITHUB_REF_NAME}"
+            if [[ ! "${tag}" =~ ^m3jdk-[0-9]+(\.[0-9]+)*-m3\.[0-9]+(-[a-z0-9.]+)?$ ]]; then
+              echo "::error::tag '${tag}' is not m3jdk-<java version>-m3.<n>[-<qualifier>]"
+              exit 1
+            fi
+            java_version="${tag#m3jdk-}"
+            java_version="${java_version%%-m3.*}"
+            version_opt="m3.${tag##*-m3.}"
+            # shellcheck disable=SC1091
+            . make/conf/version-numbers.conf
+            conf_version="${DEFAULT_VERSION_FEATURE}.${DEFAULT_VERSION_INTERIM}.${DEFAULT_VERSION_UPDATE}"
+            if [[ "${DEFAULT_VERSION_PATCH:-0}" != '0' ]]; then
+              conf_version="${conf_version}.${DEFAULT_VERSION_PATCH}"
+            fi
+            if [[ "${java_version}" != "${conf_version}" ]]; then
+              echo "::error::tag version ${java_version} != make/conf/version-numbers.conf ${conf_version}"
+              exit 1
+            fi
+            configure_arguments="--with-version-opt=${version_opt}"
+            release='true'
+          fi
+          {
+            echo "tag=${tag}"
+            echo "release=${release}"
+            echo "configure-arguments=${configure_arguments}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: 'Build JTReg'
+        id: jtreg
+        uses: ./.github/actions/build-jtreg
+
+      - name: 'Check what jobs to run'
+        id: include
+        env:
+          INPUT_PLATFORMS: ${{ github.event.inputs.platforms }}
+        run: |
+          set -euo pipefail
+          # Same contract as main.yml: an empty list (tag push) means every platform.
+          function check_platform() {
+            if [[ -z "${INPUT_PLATFORMS}" ]]; then
+              echo 'true'
+              return
+            fi
+            input="$(echo "${INPUT_PLATFORMS}" | tr '[:upper:]' '[:lower:]' | tr -d ' ')"
+            for p in "$@"; do
+              if [[ ",${input}," == *",${p},"* ]]; then
+                echo 'true'
+                return
+              fi
+            done
+            echo 'false'
+          }
+          {
+            echo "linux-x64=$(check_platform linux-x64 linux)"
+            echo "macos-x64=$(check_platform macos-x64 macos)"
+            echo "macos-aarch64=$(check_platform macos-aarch64 macos)"
+            echo "windows-x64=$(check_platform windows-x64 windows)"
+          } >> "$GITHUB_OUTPUT"
+
+  ###
+  ### Build jobs: the existing lanes, release level, product bundles only
+  ###
+
+  build-linux-x64:
+    name: linux-x64
+    needs: prepare
+    uses: ./.github/workflows/build-linux.yml
+    with:
+      platform: linux-x64
+      gcc-major-version: '10'
+      make-target: 'product-bundles'
+      debug-levels: '[ "release" ]'
+      configure-arguments: ${{ needs.prepare.outputs.configure-arguments }}
+      make-arguments: ${{ github.event.inputs.make-arguments }}
+    if: needs.prepare.outputs.linux-x64 == 'true'
+
+  build-macos-x64:
+    name: macos-x64
+    needs: prepare
+    uses: ./.github/workflows/build-macos.yml
+    with:
+      platform: macos-x64
+      runs-on: 'macos-15-intel'
+      xcode-toolset-version: '16.4'
+      make-target: 'product-bundles'
+      debug-levels: '[ "release" ]'
+      configure-arguments: ${{ needs.prepare.outputs.configure-arguments }}
+      make-arguments: ${{ github.event.inputs.make-arguments }}
+    if: needs.prepare.outputs.macos-x64 == 'true'
+
+  build-macos-aarch64:
+    name: macos-aarch64
+    needs: prepare
+    uses: ./.github/workflows/build-macos.yml
+    with:
+      platform: macos-aarch64
+      runs-on: 'macos-15'
+      xcode-toolset-version: '16.4'
+      make-target: 'product-bundles'
+      debug-levels: '[ "release" ]'
+      configure-arguments: ${{ needs.prepare.outputs.configure-arguments }}
+      make-arguments: ${{ github.event.inputs.make-arguments }}
+    if: needs.prepare.outputs.macos-aarch64 == 'true'
+
+  build-windows-x64:
+    name: windows-x64
+    needs: prepare
+    uses: ./.github/workflows/build-windows.yml
+    with:
+      platform: windows-x64
+      runs-on: windows-2022
+      msvc-toolset-version: '14.44'
+      msvc-toolset-architecture: 'x86.x64'
+      make-target: 'product-bundles'
+      debug-levels: '[ "release" ]'
+      configure-arguments: ${{ needs.prepare.outputs.configure-arguments }}
+      make-arguments: ${{ github.event.inputs.make-arguments }}
+    if: needs.prepare.outputs.windows-x64 == 'true'
+
+  ###
+  ### Package, verify, draft
+  ###
+
+  release:
+    name: 'Package and draft the GitHub Release'
+    needs:
+      - prepare
+      - build-linux-x64
+      - build-macos-x64
+      - build-macos-aarch64
+      - build-windows-x64
+    # A deselected platform is skipped, a failed build blocks the release.
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && !contains(needs.*.result, 'failure') }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      TAG: ${{ needs.prepare.outputs.tag }}
+      RELEASE: ${{ needs.prepare.outputs.release }}
+
+    steps:
+      - name: 'Prepare the output directories outside the source tree'
+        run: |
+          set -euo pipefail
+          mkdir -p "${RUNNER_TEMP}/m3-release/release" "${RUNNER_TEMP}/m3-release/artifacts"
+          {
+            echo "OUT=${RUNNER_TEMP}/m3-release/release"
+            echo "ART=${RUNNER_TEMP}/m3-release/artifacts"
+          } >> "$GITHUB_ENV"
+
+      - name: 'Checkout the full source with history (the verifier needs the upstream baseline)'
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 'Record the release admission (development mode; release mode recorded, not required)'
+        run: |
+          set -euo pipefail
+          mkdir -p "${OUT}"
+          python3 m3/release/verify_release_admission.py --root . \
+            --json-out "${OUT}/admission.json" \
+            --queue-out "${OUT}/admission-queue.md" \
+            --sha256-out "${OUT}/contract-SHA256SUMS"
+          if python3 m3/release/verify_release_admission.py --root . --release \
+               --json-out "${OUT}/admission-release-mode.json" > /dev/null; then
+            echo 'release-mode admission: release_ready=true'
+          else
+            echo '::notice::release-mode admission is not ready (expected for a P0 technical preview); see admission-release-mode.json'
+          fi
+
+      - name: 'Download the bundle artifacts of this run'
+        uses: actions/download-artifact@v8
+        with:
+          pattern: bundles-*
+          path: ${{ env.ART }}
+          merge-multiple: false
+
+      - name: 'Name the bundles, extract jmods, copy the rights files'
+        run: |
+          set -euo pipefail
+          ver="${TAG:-m3jdk-${GITHUB_SHA::12}}"
+          found=0
+          for platform in linux-x64 macos-x64 macos-aarch64 windows-x64; do
+            dir="${ART}/bundles-${platform}"
+            if [[ ! -d "${dir}" ]]; then
+              echo "::notice::${platform}: no bundles (platform deselected or nothing uploaded)"
+              continue
+            fi
+            found=$((found + 1))
+            jdk=''
+            if [[ -e "${dir}/jdk-${platform}.tar.gz" ]]; then
+              jdk="${dir}/jdk-${platform}.tar.gz"
+              cp "${jdk}" "${OUT}/${ver}_${platform}_bin.tar.gz"
+            elif [[ -e "${dir}/jdk-${platform}.zip" ]]; then
+              jdk="${dir}/jdk-${platform}.zip"
+              cp "${jdk}" "${OUT}/${ver}_${platform}_bin.zip"
+            else
+              echo "::error::${platform}: no jdk bundle in ${dir}"
+              exit 1
+            fi
+            if [[ -e "${dir}/symbols-${platform}.tar.gz" ]]; then
+              cp "${dir}/symbols-${platform}.tar.gz" "${OUT}/${ver}_${platform}_bin-symbols.tar.gz"
+            fi
+            image="${RUNNER_TEMP}/m3-release/image-${platform}"
+            rm -rf "${image}"
+            mkdir -p "${image}"
+            case "${jdk}" in
+              *.tar.gz) tar -xzf "${jdk}" -C "${image}" ;;
+              *.zip) unzip -q "${jdk}" -d "${image}" ;;
+            esac
+            jmods="$(find "${image}" -type d -name jmods -print -quit)"
+            if [[ -z "${jmods}" ]]; then
+              echo "::error::${platform}: the JDK image has no jmods directory"
+              exit 1
+            fi
+            (cd "$(dirname "${jmods}")" && zip -q -r "${OUT}/${ver}_${platform}_jmods.zip" jmods)
+          done
+          if [[ "${found}" -eq 0 ]]; then
+            echo '::error::no platform produced bundles'
+            exit 1
+          fi
+          for f in LICENSE ADDITIONAL_LICENSE_INFO ASSEMBLY_EXCEPTION LICENSE-M3-APACHE-2.0.txt \
+                   M3-SYNEXIA-NOTICE.md M3-SYNEXIA-RIGHTS.md M3-SYNEXIA-AUTHORS.md \
+                   m3/release/release-contract.json; do
+            if [[ ! -f "${f}" ]]; then
+              echo "::error::required rights or contract file missing: ${f}"
+              exit 1
+            fi
+            cp "${f}" "${OUT}/"
+          done
+
+      - name: 'Write RELEASE_NOTES.md from the contract and the admission result'
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          out = Path(os.environ['OUT'])
+          tag = os.environ.get('TAG') or ('(untagged run of ' + os.environ['GITHUB_SHA'][:12] + ')')
+          contract = json.loads(Path('m3/release/release-contract.json').read_text(encoding='utf-8'))
+          dev = json.loads((out / 'admission.json').read_text(encoding='utf-8'))
+          rel_path = out / 'admission-release-mode.json'
+          rel = json.loads(rel_path.read_text(encoding='utf-8')) if rel_path.is_file() else {}
+          lines = ['# M3JDK21 ' + tag + ' (' + contract['release']['tier'] + ')', '',
+                   'Source commit: `' + dev['source_commit'] + '`  ',
+                   'Source tree: `' + dev['source_tree'] + '`  ',
+                   'Upstream baseline: `' + contract['release']['upstream_baseline'] + '` (' + contract['release']['upstream_repository'] + ')', '',
+                   'Platforms: ' + ', '.join(sorted({p.name.split('_')[1] for p in out.glob('*_bin.*')})), '',
+                   '## Claims (m3/release/release-contract.json, unchanged by this build)', '',
+                   '| Claim | State |', '| --- | --- |']
+          lines += ['| ' + k + ' | ' + v + ' |' for k, v in contract['current_claims'].items()]
+          lines += ['', '## Admission', '',
+                    '* development mode: release_ready=' + str(dev['release_ready']).lower()
+                    + ', blockers=' + str(len(dev.get('blockers', []))),
+                    '* release mode: release_ready=' + str(rel.get('release_ready', False)).lower()
+                    + '; blockers: ' + ('; '.join(b['name'] + ' (' + b['detail'] + ')' for b in rel.get('blockers', [])) or 'none'),
+                    '', 'This is a technical preview of the integration history. No statement in this release goes beyond the claims table; '
+                    'the admission JSON files and SHA256SUMS are attached.', '']
+          (out / 'RELEASE_NOTES.md').write_text('\n'.join(lines), encoding='utf-8')
+          print('\n'.join(lines))
+          PY
+
+      - name: 'SHA256SUMS'
+        run: |
+          set -euo pipefail
+          cd "${OUT}"
+          find . -maxdepth 1 -type f ! -name SHA256SUMS -printf '%f\n' | LC_ALL=C sort | xargs sha256sum > SHA256SUMS
+          cat SHA256SUMS
+
+      - name: 'Upload the release directory as a workflow artifact'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-release-${{ github.sha }}
+          path: ${{ env.OUT }}
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: 'Create the DRAFT GitHub Release on the tag'
+        if: needs.prepare.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "${TAG}" --repo "${GITHUB_REPOSITORY}" --draft --verify-tag \
+            --title "M3JDK21 ${TAG} (P0 technical preview)" \
+            --notes-file "${OUT}/RELEASE_NOTES.md" \
+            "${OUT}"/*
+          echo "::notice::draft release ${TAG} created; a person reviews SHA256SUMS and RELEASE_NOTES.md and publishes it"

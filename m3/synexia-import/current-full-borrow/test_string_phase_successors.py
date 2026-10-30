@@ -125,17 +125,25 @@ class StringTargetSuccessorTest(unittest.TestCase):
         expected = phase.current_successor_blobs(self.mapping())
         self.assertEqual("35ed998540e044eed8cb7596e2e2c019ae369bd3",
                          phase.EXPECTED_STRING_CHAIN[-1][1])
-        self.assertEqual("8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
+        self.assertEqual("8ddd767e9198f5716ebde4aada80b91591125d9d",
                          expected[phase.M3_STRING_PATH])
         observed = self.read_merged_rows()
-        self.assertEqual(["V1_TIP", "FIRST_PARENT", "SECOND_PARENT", "MERGED_RESULT"],
+        self.assertEqual(["V1_TIP", "FIRST_PARENT", "SECOND_PARENT", "MERGED_RESULT",
+                          "FIRST_PARENT", "SECOND_PARENT", "MERGED_RESULT"],
                          [row["role"] for row in observed])
         self.assertEqual([
             "35ed998540e044eed8cb7596e2e2c019ae369bd3",
             "1c9574a31bc50013d6d0827f740b4d6fa32d636e",
             "1aea17959495c7fee359d7c13ea4b876f4fb8b31",
-            "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e"],
+            "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
+            "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
+            "e53f62018eaf8e5dbf9cc85969bf3828e6950712",
+            "8ddd767e9198f5716ebde4aada80b91591125d9d"],
             [row["git_blob"] for row in observed])
+        # The second merge continues exactly from the first observed merged result.
+        self.assertEqual(observed[3]["git_blob"], observed[4]["git_blob"])
+        self.assertEqual(observed[4]["source_commit"], observed[6]["first_parent_commit"])
+        self.assertEqual(observed[5]["source_commit"], observed[6]["second_parent_commit"])
         self.assertEqual("OBSERVED_MERGED_SOURCE_NOT_RECIPE_RECONSTRUCTED",
                          observed[-1]["state"])
         self.assertTrue(all(row["runtime_acceptance"] == "NOT_CLAIMED"
@@ -162,9 +170,13 @@ class StringTargetSuccessorTest(unittest.TestCase):
             "HISTORICAL_TIP", "COMMON_BASE", "CANONICAL_LEAF_POSTIMAGE",
             "CANONICAL_NATIVE_FORK", "OBSERVED_COMPONENT_INTEGRATION",
             "ALTERNATIVE_PREDECESSOR", "TARGET_SPECIFIC_RECIPE_POSTIMAGE",
-            "CURRENT_COMMENT_SUCCESSOR"], [row["role"] for row in pool])
-        self.assertEqual("0d47d7e969086262705460c153583f659237c894",
+            "CURRENT_COMMENT_SUCCESSOR", "CANONICAL_RECIPE_POSTIMAGE_SUCCESSOR"],
+            [row["role"] for row in pool])
+        self.assertEqual("5c56961717958f97e7bd62c5630c09877a25e599",
                          expected[phase.M3_STRING_POOL_PATH])
+        # The canonical recipe postimage successor starts from the observed comment successor.
+        self.assertEqual("0d47d7e969086262705460c153583f659237c894", pool[-2]["git_blob"])
+        self.assertEqual("ab538f9e034e1d09e299618e3dc0fe25235cc2be", pool[-1]["artifact_ref"])
         self.assertTrue(all(row["canonical_history"] == "PARTIAL"
                             and row["history_gap"] == "HISTORICAL_514_TO_COMMON_BASE_E5AB_UNRESOLVED"
                             and row["runtime_acceptance"] == "NOT_ACCEPTED"
@@ -217,6 +229,13 @@ class StringTargetSuccessorTest(unittest.TestCase):
             (3, "git_blob", "4676ab8cf780d92b0cdac2145e12f09c265492a8"),
             (3, "runtime_acceptance", "ACCEPTED"),
             (3, "state", "RUNTIME_ACCEPTED"),
+            (4, "git_blob", "35ed998540e044eed8cb7596e2e2c019ae369bd3"),
+            (5, "canonical_resource_git_blob", "f" * 40),
+            (5, "canonical_resource_sha256", "f" * 64),
+            (6, "first_parent_commit", good[-1]["second_parent_commit"]),
+            (6, "git_blob", "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e"),
+            (6, "runtime_acceptance", "ACCEPTED"),
+            (6, "state", "RUNTIME_ACCEPTED"),
         ]:
             mutated = [row.copy() for row in good]
             mutated[row_index][field] = replacement

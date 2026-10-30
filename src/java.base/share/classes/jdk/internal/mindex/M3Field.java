@@ -34,9 +34,12 @@ public final class M3Field {
     public long structuralHash64() { return owner.memberStructuralHash64(row); }
 
     public Optional<Field> tryField() {
-        return owner.resolveReflectiveElement(row)
-                .filter(Field.class::isInstance)
-                .map(Field.class::cast);
+        Optional<?> element = owner.resolveReflectiveElement(row)
+                .filter(Field.class::isInstance);
+        // The filter proves the payload type; the Optional cannot replace that payload.
+        @SuppressWarnings("unchecked")
+        Optional<Field> typed = (Optional<Field>) element;
+        return typed;
     }
 
     public Field toField() {
@@ -44,5 +47,5 @@ public final class M3Field {
                 () -> new IllegalStateException("JVM Field boundary is not live for row " + row));
     }
 
-    @Override public String toString() { return getDeclaringClass().getName() + "#" + getName(); }
+    @Override public String toString() { return owner.binaryName(owner.memberDeclaringClassRow(row)) + "#" + getName(); }
 }

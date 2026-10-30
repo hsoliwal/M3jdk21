@@ -37,6 +37,10 @@ public final class M3ObjectResidency<T> {
     public enum State { ABSENT, CREATING, RESIDENT, SWAPPING, SWAPPED, RESTORING }
 
     @FunctionalInterface public interface Factory<T> { T create(int slot) throws Exception; }
+    /** Rebinds an exclusively owned projection from its canonical parent state. */
+    @FunctionalInterface public interface Reinitializer<T> {
+        void reinitialize(T projection, int destinationSlot) throws Exception;
+    }
     public interface Codec<T> {
         byte[] encode(T value) throws IOException;
         T decode(int slot, byte[] bytes) throws IOException;
@@ -292,6 +296,73 @@ public final class M3ObjectResidency<T> {
         }
         evict(slot);
         return stateAt(slot) == State.ABSENT;
+    }
+
+    /**
+     * Transfer an otherwise disposable projection directly into another logical slot.
+     *
+     * <p>This avoids a GC-bound allocation/recreation cycle. It is only legal for a
+     * compiler-verified, nonescaping, parent-reconstructible, exclusively owned projection.
+     * STRICT_NO_ESCAPE alone cannot prove the absence of indirect or JNI aliases.
+     * No reclaimed/unreachable Java object is resurrected and no Java identity is reused
+     * while a caller can still observe it. The resetter must fully reconstruct the new
+     * projection from the target slot's canonical parent state.
+     *
+     * <p>On reset failure, both slots become absent. The possibly mutated instance is
+     * dropped for ordinary GC rather than returned to the original owner.
+     *
+     * @return true if a resident instance was moved without a new allocation
+     */
+    public synchronized boolean reuseUnborrowedProjection(int source, int target,
+            long estimatedBytes, Reinitializer<? super T> reset) {
+        checkSlot(source);
+        checkSlot(target);
+        Objects.requireNonNull(reset, "reset");
+        if (estimatedBytes < 0) {
+            throw new IllegalArgumentException("estimatedBytes must be non-negative");
+        }
+        if (source == target
+                || (flags & (RECREATE | STRICT_NO_ESCAPE)) != (RECREATE | STRICT_NO_ESCAPE)
+                || (flags & SWAP_SECONDARY) != 0
+                || callerInstalled[source] || callerInstalled[target]
+                || active[source] != 0 || borrowers[source] != 0
+                || (states[source] & SLOT_PINNED) != 0
+                || stateAt(source) != State.RESIDENT || stateAt(target) != State.ABSENT) {
+            return false;
+        }
+        long targetBudget = targetBudget(HeapSnapshot.current());
+        long bytesWithoutSource = residentBytes - weights[source];
+        if (estimatedBytes > targetBudget
+                || bytesWithoutSource > targetBudget - estimatedBytes) {
+            return false;
+        }
+        @SuppressWarnings("unchecked") T projection = (T) resident[source];
+        if (projection == null) return false;
+        resident[source] = null;
+        unlinkLru(source);
+        residentBytes = bytesWithoutSource;
+        weights[source] = 0L;
+        setState(source, State.SWAPPING);
+        setState(target, State.CREATING);
+        try {
+            reset.reinitialize(projection, target);
+            resident[target] = projection;
+            weights[target] = estimatedBytes;
+            residentBytes = Math.addExact(residentBytes, estimatedBytes);
+            setState(target, State.RESIDENT);
+            touch(target);
+            decision(target, State.ABSENT, State.RESIDENT, "reused unborrowed projection");
+            return true;
+        } catch (Exception failure) {
+            throw new ResidencyException("projection reset failed for target slot " + target, failure);
+        } finally {
+            setState(source, State.ABSENT);
+            if (stateAt(target) != State.RESIDENT) {
+                resident[target] = null;
+                weights[target] = 0L;
+                setState(target, State.ABSENT);
+            }
+        }
     }
 
     /** Pin a pre-existing value supplied by the parent; no lazy factory is invoked. */
