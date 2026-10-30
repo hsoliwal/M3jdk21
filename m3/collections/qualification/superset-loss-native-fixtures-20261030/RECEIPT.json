@@ -1,0 +1,48 @@
+{
+  "schema": "m3.collections.jni-protocol-superset-loss-receipt.v1",
+  "status": "REVIEW_ONLY_FRESH_TARGET_GATES_PENDING",
+  "receiving": {
+    "repository": "hsoliwal/M3jdk21",
+    "master": "cda404e4a4539d8f4e5cf1a92f20859a522a56b7",
+    "prior_accepted_pr": 2115,
+    "prior_accepted_merge": "816953bec63f5e7dcea96596ce8637514f93b2b5",
+    "superset_merge_pr": 2151
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "977cb34746e56e5c71128c41475425a28c932787",
+    "crates": [
+      "synexia-openrewrite-recipes/recipe-crates/m3-gather-exception-oracle-20261029",
+      "synexia-openrewrite-recipes/recipe-crates/m3-mask-region-oracle-20261029"
+    ]
+  },
+  "paths": [
+    {
+      "path": "m3/collections/src/test/native/m3_gather_spans.c",
+      "before_git_blob": "8bc50f0947bfe3fa50527583e917836647fc51f7",
+      "after_git_blob": "8ec47e6a4a1a9943c8c0a10f09f2ec3c7200c527",
+      "after_sha256": "fc71fd2db0f7a5f0779d8816cf7e9e4017a466dd2df79ee00fcf3dbbbec15f99"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+      "before_git_blob": "0af0179adf84c52faa760336045f53ef0f4faeca",
+      "after_git_blob": "aa01be5d40ab3dd416d765ec4adbf0239b185ede",
+      "after_sha256": "8d508b86d29967cce5e6231c4518c63efecf9360f52e9f4f834bdab1f0a9f025"
+    }
+  ],
+  "source_evidence": "Both current-master preimages exactly equal the original accepted 669a949d recipe inputs, with two accepted postimage Git objects retained from PR2115. No source rewriting occurs in this receiver.",
+  "prior_executed_evidence": "The original Synexia source-bound replay and PR2115 qualification passed all 3 strict C17/fatal UBSan protocol fixtures, 20 direct native mains and 3 missing-library mains on the original admitted scope. These counts are historical and not repeated here.",
+  "pending": [
+    "Fresh compile/CTest/UBSan on this current-master branch",
+    "Fresh Java21 native/JNI and collections JUnit",
+    "Strict source-JUnit dependency closure",
+    "Full JDK/jtreg/platform and hosted Actions",
+    "Canonical combined provenance admission"
+  ],
+  "unchanged": [
+    "Java production sources and public API",
+    "JNI implementation and exported JNI symbols",
+    "All current tests and workflow owner pins outside the two exact restored fixtures",
+    "Protected/default branches"
+  ]
+}
