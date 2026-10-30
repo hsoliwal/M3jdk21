@@ -7,6 +7,10 @@ on:
     paths:
       - "m3/collections/gc-interop/**"
       - "m3/docs/M3_GC_COMPILER_RUNTIME_20261017.md"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   compiler-runtime-gc:
     runs-on: ubuntu-latest

@@ -7,6 +7,10 @@ on:
       - 'm3/ast/recipe-custody/hierarchy-encoding-20261018/**'
       - '.github/workflows/m3-ast-general-source-facts.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java21-and-openrewrite:
     runs-on: ubuntu-latest

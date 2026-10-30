@@ -10,6 +10,10 @@ on:
       - '.github/workflows/native-five-family-contract.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   native-core:
     runs-on: ubuntu-24.04

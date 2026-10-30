@@ -9,6 +9,10 @@ on:
       - 'm3/tooling/regex-ascii-lexical-receiver/**'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   regex-ascii-lexical-receiver:
     name: ASCII lexical recipe and authentic receiver differential

@@ -9,6 +9,10 @@ on:
       - '.github/workflows/m3-eclipse-functional-inline-20261027.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict-standalone-eclipse-api:
     runs-on: ubuntu-24.04

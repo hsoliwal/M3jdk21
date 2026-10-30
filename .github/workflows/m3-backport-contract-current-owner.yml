@@ -17,6 +17,10 @@ on:
       - 'm3/backports/BACKPORT_EXECUTION_WAVES.md'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   backport-contract-current-owner:
     name: Backport recipe and complete owning Python contracts

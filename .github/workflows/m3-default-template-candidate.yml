@@ -11,6 +11,10 @@ on:
       - 'm3/compatibility/*default*template*'
       - 'm3/compatibility/M3_DEFAULT_TEMPLATE_RECEIVER_20261017.md'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java21-standalone-subset:
     runs-on: ubuntu-latest

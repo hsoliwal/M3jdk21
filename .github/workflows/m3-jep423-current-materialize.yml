@@ -20,6 +20,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   materialize-and-prove:
     if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep423-materialized]') }}

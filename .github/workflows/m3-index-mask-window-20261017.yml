@@ -14,6 +14,10 @@ on:
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-mask-window-20261017/**'
       - '.github/workflows/m3-index-mask-window-20261017.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java21-jni-contract:
     runs-on: ubuntu-latest

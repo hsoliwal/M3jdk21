@@ -31,6 +31,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   recipe-dag-proof:
     if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}

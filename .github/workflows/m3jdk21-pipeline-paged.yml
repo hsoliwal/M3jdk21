@@ -7,6 +7,10 @@ on:
       - 'test/jdk/jdk/internal/util/M3Pipeline*Test.java'
       - 'm3/tooling/pipeline-paged-20261019/**'
       - '.github/workflows/m3jdk21-pipeline-paged.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   patch-module-contract:
     runs-on: ubuntu-latest

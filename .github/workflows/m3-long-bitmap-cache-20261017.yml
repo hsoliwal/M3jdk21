@@ -8,6 +8,10 @@ on:
       - 'm3/collections/qualification/m3-long-bitmap-cache-20261017/**'
       - '.github/workflows/m3-long-bitmap-cache-20261017.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   bitmap-filter:
     runs-on: ubuntu-latest

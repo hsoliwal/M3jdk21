@@ -6,6 +6,10 @@ on:
       - 'tools/m3scale/**'
       - '.github/workflows/m3jdk-all-files-m3scale-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   full-git-tree-inventory:
     runs-on: ubuntu-latest

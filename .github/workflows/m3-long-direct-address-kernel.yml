@@ -8,6 +8,10 @@ on:
       - '.github/workflows/m3-long-direct-address-kernel.yml'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java-jni:
     runs-on: ubuntu-latest

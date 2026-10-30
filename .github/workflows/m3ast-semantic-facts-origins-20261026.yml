@@ -10,6 +10,10 @@ on:
       - 'm3/tooling/module-packs/parser/build.py'
       - '.github/workflows/m3ast-semantic-facts-origins-20261026.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict-original-java21:
     runs-on: ubuntu-latest

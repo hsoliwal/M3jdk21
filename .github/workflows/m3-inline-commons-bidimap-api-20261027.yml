@@ -8,6 +8,10 @@ on:
       - '.github/workflows/m3-inline-commons-bidimap-api-20261027.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict-commons-bidimap-no-jar:
     runs-on: ubuntu-24.04

@@ -125,6 +125,10 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   original-mapping-provider:
     name: genuine provider, recipe and unchanged original CLI

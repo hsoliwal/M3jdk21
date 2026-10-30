@@ -16,6 +16,10 @@ on:
       - 'm3/lexicon/synexia-word-source-revisions.tsv'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   joined-range-directory:
     name: Reversible range atom and matched complete core build

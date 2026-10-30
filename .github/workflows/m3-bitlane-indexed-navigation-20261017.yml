@@ -18,6 +18,10 @@ on:
       - 'm3/collections/src/test/native/m3_bitlane_jump_jni.c'
       - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
       - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   exact-product-java-jni:
     runs-on: ubuntu-24.04

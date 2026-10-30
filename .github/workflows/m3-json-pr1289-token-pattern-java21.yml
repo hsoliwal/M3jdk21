@@ -7,6 +7,10 @@ on:
       - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTPatternCoreReceiptContract.java'
       - '.github/workflows/m3-json-pr1289-token-pattern-java21.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   strict-java21-patterns:
     runs-on: ubuntu-latest

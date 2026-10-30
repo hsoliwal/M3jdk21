@@ -10,6 +10,10 @@ on:
       - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JniTest.java'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   product:
     if: github.repository == 'hsoliwal/M3jdk21' && github.ref == 'refs/heads/m3/jdk-proof-20261004'

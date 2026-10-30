@@ -12,6 +12,10 @@ on:
       - 'm3/compatibility/M3ObjectProgressStandaloneProbe.java'
       - '.github/workflows/m3-object-progress-candidate.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   bounded-progress-subset:
     runs-on: ubuntu-latest

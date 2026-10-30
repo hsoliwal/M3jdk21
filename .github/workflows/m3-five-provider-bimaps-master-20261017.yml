@@ -10,6 +10,10 @@ on:
       - 'm3/collections/qualification/m3-five-provider-bimaps-master-20261017/**'
       - '.github/workflows/m3-five-provider-bimaps-master-20261017.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-sealed-recipe:
     runs-on: ubuntu-latest

@@ -13,6 +13,10 @@ on:
       - '.github/workflows/m3-db-parse.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   proof:
     strategy:
