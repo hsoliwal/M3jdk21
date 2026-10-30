@@ -48,10 +48,8 @@ public final class M3ReactorImpactPlan {
             boolean verified, int[] dependentOffsets, int[] dependentTargets) {
         Objects.requireNonNull(snapshot, "snapshot");
         Objects.requireNonNull(fileImpact, "fileImpact");
-        // A changed-slot bitmask is not a generation identifier: two different
-        // snapshots may have identical direct-delta masks and physical slots.
-        fileImpact.requireSnapshot(snapshot);
         Objects.requireNonNull(fileProject, "fileProject");
+        fileImpact.requireSnapshot(snapshot);
         if (projects < 0 || projects > 1_000_000 || fileProject.length != snapshot.slots()) {
             throw new IllegalArgumentException("incomplete M3 physical file/project coordinates");
         }
