@@ -1,0 +1,6 @@
+order	gate	result
+1	diff (git diff --check, run by the committer)	EXTERNAL
+2	linter (javac -Xlint:all -Werror)	PASS
+3	compile	PASS
+4	tests (M3DecoratorDifferential)	PASS
+5	runtime	NOT_REQUESTED
