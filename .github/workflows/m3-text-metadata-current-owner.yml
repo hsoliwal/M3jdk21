@@ -9,6 +9,10 @@ on:
       - 'm3/tooling/text-metadata-current-owner/**'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   text-metadata-current-owner:
     name: Metadata recipe SDK and focused C11 JNI

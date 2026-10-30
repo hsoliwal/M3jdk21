@@ -10,6 +10,10 @@ on:
       - 'm3/collections/algorithm-catalog/filtered-isempty-20261021/**'
       - '.github/workflows/m3-filtered-isempty-direct-20261021.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   original-owner-java21:
     runs-on: ubuntu-24.04

@@ -16,6 +16,10 @@ on:
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   hash-pinned-target-paths:
     name: Canonical targetPaths recipe source qualification

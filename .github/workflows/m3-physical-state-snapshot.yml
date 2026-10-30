@@ -7,6 +7,10 @@ on:
       - "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshot*.java"
       - ".github/workflows/m3-physical-state-snapshot.yml"
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   java-jni-parity:
     runs-on: ubuntu-latest

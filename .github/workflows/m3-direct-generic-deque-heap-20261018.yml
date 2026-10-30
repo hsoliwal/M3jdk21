@@ -13,6 +13,10 @@ on:
     branches: [m3/direct-generic-array-deque-heap-receiver-20261018]
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   actual-core-recipe-and-native:
     runs-on: ubuntu-24.04

@@ -37,6 +37,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   a3-proof:
     runs-on: ubuntu-22.04

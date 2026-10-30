@@ -11,6 +11,10 @@ on:
       - 'm3/docs/M3JDK21-INTEGRATED-JAVA-JNI-RECIPE-CATALOGUE-20261021.md'
       - '.github/workflows/m3-long-index-natural-run-20261021.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   real-source-baseline-candidate-java21:
     runs-on: ubuntu-24.04

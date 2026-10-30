@@ -9,6 +9,10 @@ on:
       - 'm3/compatibility/swt-scrollbar-full-range-20261020/**'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   pinned-recipe-arithmetic-not-native-ui:
     runs-on: ubuntu-24.04

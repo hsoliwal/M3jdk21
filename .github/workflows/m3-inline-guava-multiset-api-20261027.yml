@@ -8,6 +8,10 @@ on:
       - '.github/workflows/m3-inline-guava-multiset-api-20261027.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   no-guava-runtime-oracle:
     runs-on: ubuntu-24.04

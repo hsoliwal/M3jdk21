@@ -9,6 +9,10 @@ on:
       - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-state-masked-views-20261019/**'
       - '.github/workflows/m3-state-masked-indexed-views-20261019.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   exact-product-recipe:
     runs-on: ubuntu-latest

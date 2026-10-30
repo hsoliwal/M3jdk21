@@ -8,6 +8,10 @@ on:
     paths:
       - 'm3/file/**'
       - '.github/workflows/m3-file-build-impact-20261020.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   array-graph-contract:
     runs-on: ubuntu-latest

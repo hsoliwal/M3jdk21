@@ -11,6 +11,10 @@ on:
       - 'm3/docs/name-mapping.d/m3-sdk-provider-names-20261017.json'
       - '.github/workflows/m3-sdk-provider-names-20261017.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   m3-sdk-provider-qualification:
     runs-on: ubuntu-latest

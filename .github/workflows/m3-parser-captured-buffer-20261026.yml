@@ -9,6 +9,10 @@ on:
       - 'm3/tooling/module-packs/parser/build.py'
       - '.github/workflows/m3-parser-captured-buffer-20261026.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   original-java21:
     runs-on: ubuntu-latest

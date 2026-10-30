@@ -10,6 +10,10 @@ on:
       - m3/collections/qualification/m3-five-library-occurrences-20261018/**
       - .github/workflows/m3-five-library-occurrences-20261018.yml
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   integrated-array-owner:
     runs-on: ubuntu-latest

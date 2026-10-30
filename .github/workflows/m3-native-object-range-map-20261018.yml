@@ -7,6 +7,10 @@ on:
       - 'm3/collections/qualification/m3-native-object-range-map-20261018/**'
       - '.github/workflows/m3-native-object-range-map-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   real-object-m3-java-jni:
     runs-on: ubuntu-latest

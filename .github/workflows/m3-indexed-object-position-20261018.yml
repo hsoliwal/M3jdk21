@@ -9,6 +9,10 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotPositionTest.java'
       - '.github/workflows/m3-indexed-object-position-20261018.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   primitive-position-parity:
     runs-on: ubuntu-latest

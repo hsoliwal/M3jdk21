@@ -11,6 +11,10 @@ on:
       - '.github/workflows/m3-five-provider-grouped-count-masks-20261018.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   actual-m3-and-five-provider:
     runs-on: ubuntu-24.04

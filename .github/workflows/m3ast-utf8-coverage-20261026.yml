@@ -10,6 +10,10 @@ on:
       - 'm3/tooling/module-packs/parser/build.py'
       - '.github/workflows/m3ast-utf8-coverage-20261026.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   real-java21-source:
     runs-on: ubuntu-latest

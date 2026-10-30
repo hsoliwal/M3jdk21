@@ -6,6 +6,10 @@ on:
       - 'm3/collections/relocation/five-provider-20261018/**'
       - '.github/workflows/m3-five-provider-fork-relocation.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test-recipes:
     runs-on: ubuntu-latest

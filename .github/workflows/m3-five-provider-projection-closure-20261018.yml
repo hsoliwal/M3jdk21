@@ -10,6 +10,10 @@ on:
       - '.github/workflows/m3-five-provider-projection-closure-20261018.yml'
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   real-provider-jdk21:
     runs-on: ubuntu-24.04
