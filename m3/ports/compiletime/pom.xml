@@ -19,6 +19,10 @@
     <junit.artifact.version>5.10.2-m3-source-1</junit.artifact.version>
     <!-- The harvester reads the stock JDK node tree; only build-time tools and tests open it. -->
     <m3.opens>--add-opens java.base/java.util.regex=ALL-UNNAMED</m3.opens>
+    <!-- com.m3.compiletime.ast compiles against the exact synexia-mindex closure that
+         jdk.m3.compiletime packages (m3/tooling/module-packs/nlp-search/current-source-lock.json).
+         A checkout that keeps m3/vendor elsewhere may pass -Dm3.vendor.synexia=<dir>. -->
+    <m3.vendor.synexia>${project.basedir}/../../vendor/synexia</m3.vendor.synexia>
   </properties>
   <dependencies>
     <dependency>
@@ -50,6 +54,27 @@
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <id>synexia-mindex-closure</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${m3.vendor.synexia}/synexia-mindex/runtime/src/main/java</source>
+                <source>${m3.vendor.synexia}/synexia-mindex/compiler/src/main/java</source>
+                <source>${m3.vendor.synexia}/synexia-native-interop/src/main/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

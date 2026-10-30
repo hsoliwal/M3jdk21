@@ -35,6 +35,7 @@ public class M3PackedCellRenderer extends JComponent implements TableCellRendere
 	private transient Font metricsFont;
 	private transient FontMetrics metrics;
 
+	@SuppressWarnings ("this-escape") // Swing construction protocol: overridable setters run before subclass init
 	public M3PackedCellRenderer () {
 		setOpaque (true);
 	}

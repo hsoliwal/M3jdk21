@@ -22,6 +22,7 @@ public class M3PackedTable extends JTable {
 	private final M3PackedCellRenderer packed = new M3PackedCellRenderer ();
 	private long packedCells;
 
+	@SuppressWarnings ("this-escape") // Swing construction protocol: overridable setters run before subclass init
 	public M3PackedTable (TableModel model) {
 		super (model);
 		for (Class<?> c : new Class<?> [] {Object.class, String.class, Number.class, Integer.class, Long.class, Double.class, Boolean.class}) {

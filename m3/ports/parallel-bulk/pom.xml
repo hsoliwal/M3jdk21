@@ -73,8 +73,7 @@
           <proc>none</proc>
           <fork>true</fork>
           <compilerArgs>
-            <arg>--patch-module</arg>
-            <arg>java.base=${project.build.directory}/bulk-patch-classes</arg>
+            <arg>--patch-module=java.base=${project.build.directory}/bulk-patch-classes</arg>
             <arg>--add-exports</arg>
             <arg>java.base/jdk.internal.vm.parallel=ALL-UNNAMED</arg>
             <arg>-Xlint:all,-module</arg>

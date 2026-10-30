@@ -37,6 +37,7 @@ public class M3TreeRows extends AbstractLayoutCache {
 	private final int [] pathKey = new int [CACHE];
 	private long pathsCreated;
 
+	@SuppressWarnings ("this-escape") // Swing construction protocol: overridable setters run before subclass init
 	public M3TreeRows (M3VirtualTreeModel model) {
 		this.model = model;
 		super.setModel (model);

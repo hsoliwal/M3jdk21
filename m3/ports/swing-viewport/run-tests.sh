@@ -17,7 +17,7 @@ win() { if command -v cygpath >/dev/null 2>&1; then cygpath -m "$1"; else printf
 compile() {
   rm -rf "$out"; mkdir -p "$out/main" "$out/test"
   find "$here/src/main/java" -name '*.java' | while read -r f; do win "$f"; echo; done > "$out/main.txt"
-  "$jdk/bin/javac" -J-Xmx512m --release 21 -Xlint:all,-serial,-this-escape -Werror -d "$(win "$out/main")" @"$(win "$out/main.txt")"
+  "$jdk/bin/javac" -J-Xmx512m --release 21 -Xlint:all -Werror -d "$(win "$out/main")" @"$(win "$out/main.txt")"
   if [ -d "$here/src/test/java" ]; then
     find "$here/src/test/java" -name '*.java' | while read -r f; do win "$f"; echo; done > "$out/test.txt"
     "$jdk/bin/javac" -J-Xmx512m --release 21 -Xlint:all,-serial,-try,-this-escape -d "$(win "$out/test")" \

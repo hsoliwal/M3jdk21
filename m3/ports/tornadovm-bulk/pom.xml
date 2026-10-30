@@ -94,8 +94,7 @@
           <fork>true</fork>
           <enablePreview>true</enablePreview>
           <compilerArgs>
-            <arg>--patch-module</arg>
-            <arg>java.base=${project.build.directory}/bulk-patch-classes</arg>
+            <arg>--patch-module=java.base=${project.build.directory}/bulk-patch-classes</arg>
             <arg>--add-exports</arg>
             <arg>java.base/jdk.internal.vm.parallel=jdk.m3.tornado,ALL-UNNAMED</arg>
             <arg>-Xlint:all,-preview,-module,-exports,-missing-explicit-ctor</arg>

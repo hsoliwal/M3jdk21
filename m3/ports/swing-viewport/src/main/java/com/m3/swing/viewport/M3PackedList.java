@@ -21,6 +21,7 @@ public class M3PackedList<E> extends JList<E> {
 
 	private final M3PackedCellRenderer packed;
 
+	@SuppressWarnings ("this-escape") // Swing construction protocol: overridable setters run before subclass init
 	public M3PackedList (ListModel<E> model) {
 		super (model);
 		packed = new M3PackedCellRenderer ();

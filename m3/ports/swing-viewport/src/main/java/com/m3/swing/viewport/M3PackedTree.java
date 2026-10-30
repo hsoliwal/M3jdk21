@@ -21,6 +21,7 @@ import javax.swing.tree.TreePath;
 public class M3PackedTree extends JTree {
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings ("this-escape") // Swing construction protocol: overridable setters run before subclass init
 	public M3PackedTree (M3VirtualTreeModel model) {
 		super (model);
 		setRootVisible (false);

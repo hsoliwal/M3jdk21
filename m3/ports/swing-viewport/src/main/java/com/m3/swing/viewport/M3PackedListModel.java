@@ -31,6 +31,7 @@ public class M3PackedListModel<E> extends AbstractListModel<E> implements M3Pack
 	private static final long serialVersionUID = 1L;
 	private static final int NONE = -1;
 
+	@SuppressWarnings ("serial") // Not statically typed as Serializable
 	private Object [] items = new Object [0];
 	private int size;
 	private int batchDepth, pendingType = NONE, pending0, pending1;

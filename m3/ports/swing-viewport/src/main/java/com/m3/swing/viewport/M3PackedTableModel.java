@@ -32,7 +32,9 @@ public class M3PackedTableModel extends AbstractTableModel implements M3PackedCe
 	private static final int NONE = Integer.MIN_VALUE;
 
 	private final int flags;
+	@SuppressWarnings ("serial") // Not statically typed as Serializable
 	private M3PackedColumn [] columns = new M3PackedColumn [0];
+	@SuppressWarnings ("serial") // Not statically typed as Serializable
 	private Object [] identifiers = new Object [0];
 	private int columnCount, rowCount;
 	private int batchDepth, pendingType = NONE, pendingFirst, pendingLast, pendingColumn;
