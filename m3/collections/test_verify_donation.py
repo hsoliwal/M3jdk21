@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 # Modified 2026 by Hitesh Soliwal and contributors: select the current exact additive successor inventory named by source_set_successor_current.
+# Modified 2026 by Hitesh Soliwal and contributors: accept the sealed transition-receipt successor shape next to the additive-manifest shape.
 """Prove current collections manifest custody and reject ambiguous donation JSON."""
 import importlib.util
 import json
@@ -19,7 +20,7 @@ class DonationPacketTest(unittest.TestCase):
     def test_current_packet_selects_a_sha256_sealed_manifest(self):
         packet = VERIFIER.read_donation_packet()
         self.assertEqual(
-            "qualification/installed-source-successor-20261018.tsv",
+            "qualification/installed-source-enum-set-20261014.tsv",
             packet["installed_source_manifest"])
         self.assertEqual(
             "qualification/installed-source-enum-set-20261008.tsv",
@@ -34,6 +35,9 @@ class DonationPacketTest(unittest.TestCase):
     def test_current_successor_is_exact_additive(self):
         packet = VERIFIER.read_donation_packet()
         record = packet[packet["source_set_successor_current"]]
+        if "successor_receipt" in record:
+            self.assert_transition_receipt_successor(record)
+            return
         self.assertEqual(record["installed_manifest"], packet["installed_source_manifest"])
         old_path = HERE / record["predecessor_manifest"]
         self.assertEqual(record["predecessor_manifest_sha256"], VERIFIER.digest(old_path))
@@ -74,6 +78,22 @@ class DonationPacketTest(unittest.TestCase):
                                         "Duplicate donation metadata key"):
                 VERIFIER.read_donation_packet(source)
             self.assertEqual(broken, source.read_text())
+
+    def assert_transition_receipt_successor(self, record):
+        receipt = HERE / record["successor_receipt"]
+        self.assertEqual(record["successor_receipt_sha256"], VERIFIER.digest(receipt))
+        self.assertEqual(record["successor_receipt_sha256"], VERIFIER._SUPERSET_RECEIPT_SHA256)
+        self.assertEqual(record["inherited_composed_manifest_sha256"],
+                         VERIFIER._SUPERSET_PREDECESSOR_SHA256)
+        self.assertEqual(record["resulting_rows"], VERIFIER._SUPERSET_RESULT_ROWS)
+        self.assertEqual(record["exact_java_source_membership"], VERIFIER._SUPERSET_RESULT_JAVA)
+        rows = [line.split(chr(9)) for line in receipt.read_text(encoding="utf-8").splitlines()]
+        self.assertEqual(record["successor_rows"], len(rows))
+        self.assertEqual(record["successor_rows"], VERIFIER._SUPERSET_TRANSITIONS)
+        for path, inherited, after in rows:
+            self.assertTrue(path.startswith("m3/collections/"))
+            self.assertEqual(64, len(after))
+            self.assertTrue(inherited == "ABSENT" or len(inherited) == 64)
 
 
 if __name__ == "__main__":
