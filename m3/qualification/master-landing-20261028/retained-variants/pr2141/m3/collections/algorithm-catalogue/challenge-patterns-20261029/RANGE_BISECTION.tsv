@@ -1,0 +1,2 @@
+# source-file	category	algorithm	baseline	candidate	challenge concepts	donor code	rename	status
+m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java	sorted disjoint interval union	boundary bisection + O(1) merge extrema	O(r) boundary scan	O(log r) boundary discovery; O(moved) array edit	LeetCode 34; LeetCode 35	none; reuse M3LaneSearch	no: published class/descriptor preserved	draft; exact-source Maven/JUnit/JDK image gates pending
