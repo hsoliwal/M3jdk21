@@ -61,6 +61,24 @@ jobs:
           git rev-parse 'HEAD^{tree}' | tee m3/release/queue/current/TREE
           git status --porcelain=v1 --untracked-files=no | tee m3/release/queue/current/WORKTREE
           test ! -s m3/release/queue/current/WORKTREE
+      - name: Record contract gate receipts
+        if: always()
+        shell: bash
+        run: |
+          for gate in RIGHTS_AND_LICENSE_BOUNDARY SOURCE_TREE_AND_UPSTREAM_BASELINE \
+                      RELEASE_CLAIMS_VALIDATION PROOF_PACK_SHA256; do
+            python3 m3/release/collect_release_evidence.py run --gate "$gate" \
+              --toolchain "python $(python3 --version | cut -d' ' -f2); ubuntu-22.04" \
+              --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" || true
+          done
+      - name: Upload contract gate receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-gate-receipt-contract-${{ github.sha }}
+          path: m3/release/queue/current/receipts
+          retention-days: 90
+          if-no-files-found: error
       - name: Export canonical naming and retained source queues
         if: always()
         shell: bash
@@ -139,7 +157,18 @@ jobs:
           echo "JAVA_HOME=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
       - name: Build and test P0 immutable text foundation
-        run: bash ./m3/build.sh
+        run: >
+          python3 m3/release/collect_release_evidence.py run --gate M3_FOUNDATION_TESTS
+          --toolchain "temurin jdk-21+35 x64 linux sha256 82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6; ubuntu-22.04"
+          --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      - name: Upload foundation gate receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-gate-receipt-foundation-${{ github.sha }}
+          path: m3/release/queue/current/receipts
+          retention-days: 90
+          if-no-files-found: error
       - name: Verify Synexia compatibility and shared mapping
         run: |
           python3 m3/compatibility/check-synexia.py
@@ -159,9 +188,23 @@ jobs:
           java-version: '21'
           cache: maven
       - name: Java differential proof
-        run: mvn -B -ntp -f m3/ports/precompute/pom.xml test
+        run: >
+          python3 m3/release/collect_release_evidence.py run --gate PRECOMPUTE_JAVA_DIFFERENTIAL
+          --toolchain "temurin 21 (actions/setup-java); $(mvn -v | head -1); ubuntu-24.04"
+          --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
       - name: JNI/native parity proof
-        run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
+        run: >
+          python3 m3/release/collect_release_evidence.py run --gate PRECOMPUTE_JNI_NATIVE_PARITY
+          --toolchain "temurin 21 (actions/setup-java); $(mvn -v | head -1); $(cc --version | head -1); ubuntu-24.04"
+          --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      - name: Upload precompute gate receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-gate-receipt-precompute-${{ github.sha }}
+          path: m3/release/queue/current/receipts
+          retention-days: 90
+          if-no-files-found: error
 
   control-reactor:
     name: canonical Synexia Maven evidence
@@ -175,6 +218,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Import Synexia-owned receipts
+        shell: bash
+        run: |
+          status=0
+          python3 m3/release/collect_release_evidence.py assemble \
+            --receipts m3/release/queue/synexia || status=$?
+          test "$status" -eq 0 || test "$status" -eq 3
       - name: Require executed Synexia recipe evidence
         shell: bash
         run: |
@@ -205,6 +255,69 @@ jobs:
             python3 -m unittest -v m3/compatibility/test_synexia_full_family.py
           fi
 
+  evidence:
+    name: release evidence manifest
+    needs:
+      - contract
+      - foundation
+      - precompute
+      - control-reactor
+    if: always()
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download gate receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: m3-gate-receipt-*-${{ github.sha }}
+          path: m3/release/queue/current/downloads
+      - name: Assemble the M3_RELEASE_EVIDENCE_V1 manifest
+        shell: bash
+        run: |
+          set -uo pipefail
+          status=0
+          python3 m3/release/collect_release_evidence.py assemble \
+            --receipts m3/release/queue/current/downloads \
+            --receipts m3/release/queue/synexia || status=$?
+          test "$status" -eq 0 || test "$status" -eq 3
+          mode=()
+          if [[ "${GITHUB_REF}" == refs/heads/release/* ]]; then
+            mode=(--release)
+          fi
+          python3 m3/release/verify_release_admission.py --root . "${mode[@]}" \
+            --evidence m3/release/queue/current/evidence.json \
+            --json-out m3/release/queue/current/admission.json \
+            --queue-out m3/release/queue/current/README.md
+      - name: Expose pending gates and the release queue
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## M3JDK21 execution evidence'
+            echo
+            echo '```'
+            cat m3/release/queue/current/pending.tsv 2>/dev/null || echo 'pending.tsv missing'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if test -f m3/release/queue/current/README.md; then
+            cat m3/release/queue/current/README.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload release evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-release-evidence-${{ github.sha }}
+          path: m3/release/queue/current
+          retention-days: 90
+          if-no-files-found: error
+
   release-proof-summary:
     name: proof summary
     needs:
@@ -212,6 +325,7 @@ jobs:
       - foundation
       - precompute
       - control-reactor
+      - evidence
     if: always()
     runs-on: ubuntu-22.04
     steps:
@@ -227,6 +341,7 @@ jobs:
             echo "| immutable text foundation | ${{ needs.foundation.result }} |"
             echo "| Java + JNI precompute parity | ${{ needs.precompute.result }} |"
             echo "| canonical Synexia Maven evidence | ${{ needs.control-reactor.result }} |"
+            echo "| execution evidence manifest | ${{ needs.evidence.result }} |"
             echo
             echo 'The existing OpenJDK GHA sanity workflow remains the product-build/platform matrix.'
             echo 'A passing proof summary does not upgrade any claim marked NOT_CLAIMED in release-contract.json.'
@@ -237,5 +352,6 @@ jobs:
           needs.contract.result != 'success' ||
           needs.foundation.result != 'success' ||
           needs.precompute.result != 'success' ||
-          needs.control-reactor.result != 'success'
+          needs.control-reactor.result != 'success' ||
+          needs.evidence.result != 'success'
         run: exit 1
