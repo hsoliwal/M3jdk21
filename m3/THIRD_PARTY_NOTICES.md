@@ -1,6 +1,19 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Third-party code and attribution under `m3/`
 
+## Scope correction — 2026-10-29
+
+The inventory below records `c9b07049c5` on October 8. Its absence statements
+are historical, not current release assertions. At inspected commit
+`669a949d192345acefcfc5e9bb0b3724174d270c`, the tree includes third-party
+collection implementations, Jackson sources and TornadoVM sources. Consult
+[the current source-area index](README.md#third-party-code-and-attribution),
+per-file notices and the [release queue](release/queue/README.md).
+No package rename or recipe execution relicenses donor source. A complete
+artifact-level notice/closure review remains a release gate.
+
+## Historical inventory (retained verbatim below)
+
 Inventory date: 2026-10-08 (master `c9b07049c5`). Method (CPU only, reproducible):
 `git grep -hE '^import' -- 'm3/**/*.java' src/java.base/share/classes/java/lang/M3*.java src/java.base/share/classes/jdk/internal/mindex/*.java`
 filtered to packages outside `java.*`, `javax.*`, `jdk.*`, `sun.*`, `com.m3.*`; every `pom.xml` under

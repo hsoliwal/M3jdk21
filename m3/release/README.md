@@ -1,5 +1,7 @@
 # M3JDK21 evidence-first release pack
 
+[Visible release queue](queue/README.md) · [Release contract](release-contract.json)
+
 The first public M3JDK21 release is admitted by evidence, not by repository size, PR count, donor
 catalogue size, or marketing language.
 
@@ -41,8 +43,9 @@ The current public P0 foundation is intentionally narrower than the full M3 prog
 - an OpenJDK 21-derived M3JDK21 product/research runtime target exists;
 - an independently authored immutable-text/precompute foundation exists under the explicit
   first-party licensing boundary;
-- source-bound transformation recipes, verification machinery, Java precompute differential tests,
-  and JNI/native parity tests exist in the repository;
+- product verification machinery, Java precompute differential tests and JNI/native
+  parity tests exist here; canonical transformation recipes and their mastery
+  evidence are authored and executed in Synexia;
 - the project has a deterministic release contract, rights/provenance record, and proof-pack
   checksum process.
 
@@ -56,7 +59,7 @@ The current public P0 foundation is intentionally narrower than the full M3 prog
 - completed array/collection/SWT/Eclipse migration;
 - production readiness.
 
-This boundary is a strength. It makes every future upgrade measurable.
+Current implementations and pending claims are evaluated independently.
 
 ## Mandatory proof pack
 
@@ -68,7 +71,8 @@ A release candidate must preserve:
 - foundation build/test logs;
 - Java precompute differential results;
 - JNI/native parity results where JNI/native is used;
-- Maven control-reactor verification;
+- canonical Synexia Maven recipe/control-reactor execution and replay receipts;
+- product compilation and applicable installed-image/module tests;
 - release-contract validation;
 - generated SHA-256 manifest;
 - raw benchmark data before any performance claim.
@@ -121,18 +125,61 @@ See:
 - `../../M3-SYNEXIA-NOTICE.md`
 - `../../M3-SYNEXIA-RIGHTS.md`
 
+## Inspect readiness and publish the work queue
+
+`policy_valid` reports static release-policy checks. `release_ready` requires
+all mandatory execution evidence, a clean inspected source revision and no
+blocking custody/qualification items. A development policy pass is insufficient
+for release. The historical single-commit publication requirement remains
+explicit; this preparation does not rewrite or consolidate repository history.
+
+```sh
+python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+python3 m3/release/verify_release_admission.py --root . \
+  --json-out m3/release/queue/current/admission.json \
+  --queue-out m3/release/queue/current/README.md \
+  --sha256-out m3/release/queue/current/SHA256SUMS
+
+# A real candidate requires an independently produced evidence manifest:
+python3 m3/release/verify_release_admission.py --root . --release \
+  --evidence /absolute/path/to/release-evidence.json \
+  --json-out m3/release/queue/current/admission.json \
+  --queue-out m3/release/queue/current/README.md
+```
+
+The `M3_RELEASE_EVIDENCE_V1` manifest binds the inspected commit and tree to
+one receipt for every `mandatory_release_gates` entry. Each passing receipt
+records the executed command, zero exit status, toolchain/platform, a safe
+relative artifact path and the artifact's SHA-256. Missing, duplicate, stale,
+failed or malformed evidence is refused. Artifact integrity is a review aid;
+the reviewer must still establish that the command and evidence prove the
+claimed gate. Synthetic verifier fixtures are never release receipts.
+
+Historical recipe-bearing target POMs and scripts are custody debt. Do not run
+them as new transformation entrypoints. Keep product tests and raw evidence
+available, recover the canonical recipe and callers in Synexia, then perform
+an executed, source-preserving cleanup. Moving those recipes to another folder
+inside M3JDK21 does not satisfy this boundary.
+
+Receipt field details: artifact paths resolve relative to the manifest directory.
+Every gate includes `owner_repository` and an `environment` object with `os`,
+`architecture` and `toolchain`. `M3_MAVEN_CONTROL_REACTOR` also requires
+`canonical_recipe` with `repository`, `commit` and `recipe_id`; its repository
+is `hsoliwal/com.synexia`. The product verifier consumes these records as data
+and never executes command text supplied by a receipt.
+
 ## Retained PR source and naming queues
 
 The first release workflow exports three **read-only review artifacts** alongside
 the release-admission receipt:
 
-- `target/m3-release-proof/name-census.tsv`: the canonical mapping declaration/path
+- `m3/release/queue/current/name-census.tsv`: the canonical mapping declaration/path
   census from existing `m3/tooling/name-contract/audit.py`; not rename authority.
-- `target/m3-release-proof/retained-source-queue.tsv`: preserved source from
+- `m3/release/queue/current/retained-source-queue.tsv`: preserved source from
   `m3/qualification/master-landing-20261028/retained-variants/pr<N>/` compared
   against its **original path in the checked-out Git HEAD tree**.
   Each row has archived/active modes and Git blob OIDs.
-- `target/m3-release-proof/retained-source-summary.json`: pinned HEAD,
+- `m3/release/queue/current/retained-source-summary.json`: pinned HEAD,
   classification totals, SHA-256, and `merge_authorized: false`,
   `rename_authorized: false`, `runtime_qualified: false`.
 
@@ -143,8 +190,8 @@ python3 -m unittest discover -s m3/release -p 'test_*.py' -v
 python3 m3/tooling/name-contract/check.py
 python3 m3/tooling/name-contract/audit.py --strict
 python3 m3/release/retained_source_queue.py --root . \
-  --tsv-out target/m3-release-proof/retained-source-queue.tsv \
-  --summary-out target/m3-release-proof/retained-source-summary.json
+  --tsv-out m3/release/queue/current/retained-source-queue.tsv \
+  --summary-out m3/release/queue/current/retained-source-summary.json
 ```
 
 The queue is deterministic for one Git HEAD. On `release/**` branches,
@@ -184,3 +231,21 @@ and consumption must be registered under the stable capability ID in
 Maven/OpenRewrite recipe before target acceptance. Preserve ABI, serialization
 and native entry-point behavior. Recipes and execution memory live in Synexia;
 only qualified product results and evidence live in M3JDK21.
+
+## Canonical recipe execution and migration HOLD
+
+The release workflow consumes the mandatory `M3_MAVEN_CONTROL_REACTOR` receipt
+from source-bound work executed in `hsoliwal/com.synexia`. Its control job
+requires both `policy_valid` and an exact passing canonical Maven gate; absent,
+stale, malformed or failed evidence keeps the job and release summary on HOLD.
+Historical target-local recipe scripts and the target recipe reactor are no
+longer execution entrypoints in this workflow. Their retained sources remain
+visible custody migration debt and are preserved for a separately qualified
+Synexia cleanup.
+
+Foundation, precompute Java/JNI and full-family product checks remain active,
+along with naming and retained-source queues. The dated
+[validation snapshot](queue/2026-10-29/validation-summary.json) and
+[collections failure catalogue](queue/2026-10-29/collections-failures.tsv) retain
+the bounded runs and outstanding contract questions. These observations keep
+their original tested source pins; they do not satisfy all current release gates.
