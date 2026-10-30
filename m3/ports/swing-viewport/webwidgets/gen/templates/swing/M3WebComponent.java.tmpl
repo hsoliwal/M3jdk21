@@ -181,10 +181,13 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 		int dy = model.takeBlit();
 		if (dy != 0 && body != null && !dirtyAll) {
 			Graphics2D g = body.createGraphics();
+			int o = model.viewOrigin(), len = model.viewLength();
 			if (model.scrollsHorizontally()) {
-				g.copyArea(Math.max(0, -dy), 0, getWidth() - Math.abs(dy), getHeight(), dy, 0);
+				g.setClip(o, 0, len, getHeight());
+				g.copyArea(o + Math.max(0, -dy), 0, len - Math.abs(dy), getHeight(), dy, 0);
 			} else {
-				g.copyArea(0, Math.max(0, -dy), getWidth(), getHeight() - Math.abs(dy), 0, dy);
+				g.setClip(0, o, getWidth(), len);
+				g.copyArea(0, o + Math.max(0, -dy), getWidth(), len - Math.abs(dy), 0, dy);
 			}
 			g.dispose();
 		}

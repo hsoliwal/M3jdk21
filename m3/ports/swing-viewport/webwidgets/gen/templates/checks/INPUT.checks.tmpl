@@ -1,0 +1,102 @@
+package @PKG@;
+
+import static @PKG@.M3WebChecks.check;
+import static @PKG@.M3WebStates.*;
+
+/** Family contract of the text entries (pattern M3P-INPUT-1). */
+public final class M3InputChecks {
+	private M3InputChecks() {
+	}
+
+	public static void run(M3InputModel m) {
+		m.layout(360, 260);
+		M3WebPaint p = new M3WebPaint();
+		m.setState(-1, FOCUS, true);
+		m.setPlaceholder("Search");
+		m.setPlaceholder(null);
+		typing(m, p);
+		m.setMasked(true);
+		m.paint(p);
+		m.setMasked(false);
+		m.setRtl(true);
+		m.paint(p);
+		m.setRtl(false);
+		if (m.mode == M3InputModel.OTP) {
+			otp(m);
+		} else if (m.mode == M3InputModel.AUTOCOMPLETE) {
+			suggest(m, p);
+		} else if (m.mode == M3InputModel.TAGS) {
+			tags(m);
+		}
+	}
+
+	private static void typing(M3InputModel m, M3WebPaint p) {
+		m.setFocus(m.count() > 0 ? 0 : -1);
+		for (char c : "a1b".toCharArray()) {
+			m.key(KEY_CHAR, c, 0);
+		}
+		m.paint(p);
+		for (int k : new int[] { KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_BACKSPACE, KEY_DELETE, KEY_HOME, KEY_DELETE }) {
+			m.key(k, 0, 0);
+		}
+		m.setCaret(99);
+		check(m.caret() >= 0, "caret clamps");
+		m.setValueText(null);
+		check(m.valueText().isEmpty() || m.mode == M3InputModel.OTP, "cleared");
+		m.setValueText("a long value that grows the char lane beyond its first capacity");
+		m.insert('x');
+		m.paint(p);
+		m.setValueText("");
+	}
+
+	private static void otp(M3InputModel m) {
+		m.setFocus(0);
+		m.insert('4');
+		m.insert('x');
+		m.insert('2');
+		check(m.valueText().startsWith("42"), "otp digits: " + m.valueText());
+		m.backspace();
+		m.backspace();
+		m.backspace();
+		m.deleteForward();
+		check(m.valueText().isEmpty(), "otp cleared");
+	}
+
+	private static void suggest(M3InputModel m, M3WebPaint p) {
+		m.load("Apple;Apricot;Banana");
+		m.setValueText("ap");
+		check(m.is(-1, OPEN) && m.logicalCount() == 2, "filtered candidates");
+		m.key(KEY_DOWN, 0, 0);
+		m.key(KEY_DOWN, 0, 0);
+		m.key(KEY_UP, 0, 0);
+		m.paint(p);
+		m.pointer(P_MOVE, 4, m.itemRect(0, 1) + 2, 0);
+		m.key(KEY_ENTER, 0, 0);
+		check("Apple".equals(m.valueText()) && !m.is(-1, OPEN), "accepted: " + m.valueText());
+		m.setValueText("zz");
+		check(m.key(KEY_DOWN, 0, 0) && !m.key(KEY_ESCAPE, 0, 0), "no candidates");
+		m.setValueText("b");
+		m.pointer(P_DOWN, 4, m.itemRect(2, 1) + 2, 0);
+		m.pointer(P_UP, 4, m.itemRect(2, 1) + 2, 0);
+		check("Banana".equals(m.valueText()), "clicked candidate");
+		m.setValueText("a");
+		check(m.key(KEY_ESCAPE, 0, 0), "escape closes the list");
+		m.pointer(P_WHEEL, 4, 1, 0);
+	}
+
+	private static void tags(M3InputModel m) {
+		int n = m.count();
+		m.setValueText("new");
+		m.commit();
+		check(m.count() == n + 1, "tag committed");
+		m.setValueText("  ");
+		m.commit();
+		m.setValueText("");
+		m.backspace();
+		check(m.count() == n, "backspace on empty removes the last tag");
+		m.layout(360, 260);
+		m.pointer(P_DOWN, m.itemRect(0, 0) + 2, m.itemRect(0, 1) + 2, 0);
+		m.pointer(P_UP, m.itemRect(0, 0) + 2, m.itemRect(0, 1) + 2, 0);
+		check(m.count() == n - 1, "click removes a tag");
+	}
+}

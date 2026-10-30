@@ -69,7 +69,7 @@ public class M3SegmentsModel extends M3WebModel implements M3SegmentsApi {
 	}
 
 	@Override
-	protected int viewLength() {
+	public int viewLength() {
 		return vertical() ? height : width;
 	}
 

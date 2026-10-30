@@ -1,0 +1,337 @@
+package @PKG@;
+
+import static @PKG@.M3WebStates.*;
+
+import java.util.Arrays;
+
+/**
+ * Text entry over a char lane (pattern M3P-INPUT-1, aspects R+G+D+P): one {@code char[]} with a caret,
+ * single-character cells (OTP), committed tags, and a filtered candidate list on the OVERLAY plane whose
+ * rows are a resident window over the matches. Members: search, otp-input, tag-input, autocomplete.
+ */
+public class M3InputModel extends M3WebModel implements M3InputApi {
+	public static final int SEARCH = 0, OTP = 1, TAGS = 2, AUTOCOMPLETE = 3;
+	private char[] buf = new char[16];
+	private int len, caret;
+	private boolean masked;
+	private String placeholder = "";
+
+	public M3InputModel(String concept, int role, int mode, int shape, int variant) {
+		super(concept, role, mode, shape, variant);
+	}
+
+	@Override
+	public int aspects() {
+		return A_R | A_G | A_D | A_P;
+	}
+
+	@Override
+	public void load(String sample) {
+		clear();
+		if (mode == OTP) {
+			setLogicalCount(Math.max(1, M3WebStates.parse(sample)));
+		} else if (mode == SEARCH) {
+			setValueText(sample);
+		} else {
+			for (String s : sample.split(";")) {
+				add(s);
+			}
+		}
+	}
+
+	@Override
+	public String valueText() {
+		if (mode != OTP) {
+			return String.valueOf(buf, 0, len);
+		}
+		StringBuilder b = new StringBuilder(count);
+		for (int i = 0; i < count; i++) {
+			b.append(value[i] == 0 ? ' ' : (char) value[i]);
+		}
+		return b.toString().trim();
+	}
+
+	@Override
+	public void setValueText(String s) {
+		String v = s == null ? "" : s;
+		if (v.length() > buf.length) {
+			buf = Arrays.copyOf(buf, v.length() * 2);
+		}
+		v.getChars(0, v.length(), buf, 0);
+		len = caret = v.length();
+		changedText();
+	}
+
+	@Override
+	public int caret() {
+		return caret;
+	}
+
+	@Override
+	public void setCaret(int at) {
+		caret = Math.max(0, Math.min(len, at));
+		damageAll();
+		fire(-1, D_VALUE);
+	}
+
+	@Override
+	public void setMasked(boolean on) {
+		masked = on;
+		relayout(-1, D_TEXT);
+	}
+
+	@Override
+	public void setPlaceholder(String text) {
+		placeholder = text == null ? "" : text;
+		relayout(-1, D_TEXT);
+	}
+
+	private void changedText() {
+		if (mode == AUTOCOMPLETE) {
+			setFilter(String.valueOf(buf, 0, len));
+			setState(-1, OPEN, len > 0 && logicalCount() > 0);
+		}
+		relayout(-1, D_VALUE);
+	}
+
+	@Override
+	public void insert(char c) {
+		if (mode == OTP) {
+			int cell = Math.max(0, focus);
+			if (Character.isDigit(c) && cell < count) {
+				setValue(cell, c);
+				setFocus(Math.min(count - 1, cell + 1));
+			}
+			return;
+		}
+		if (len == buf.length) {
+			buf = Arrays.copyOf(buf, len * 2);
+		}
+		System.arraycopy(buf, caret, buf, caret + 1, len - caret);
+		buf[caret++] = c;
+		len++;
+		changedText();
+	}
+
+	@Override
+	public void backspace() {
+		if (mode == OTP) {
+			int cell = Math.max(0, focus);
+			if (value[cell] == 0 && cell > 0) {
+				cell--;
+			}
+			setValue(cell, 0);
+			setFocus(cell);
+		} else if (caret > 0) {
+			System.arraycopy(buf, caret, buf, caret - 1, len - caret);
+			caret--;
+			len--;
+			changedText();
+		} else if (mode == TAGS && len == 0 && count > 0) {
+			remove(count - 1);
+		}
+	}
+
+	@Override
+	public void deleteForward() {
+		if (mode != OTP && caret < len) {
+			caret++;
+			backspace();
+		}
+	}
+
+	@Override
+	public void commit() {
+		String v = valueText().trim();
+		if (mode == TAGS && !v.isEmpty()) {
+			add(v);
+			setValueText("");
+		} else if (mode == AUTOCOMPLETE && focus >= 0 && text[focus] != null) {
+			String pick = text[focus];
+			setFilter("");
+			setValueText(pick);
+			setState(-1, OPEN, false);
+		}
+		fire(-1, D_ACTION);
+	}
+
+	/** Height of the entry field. */
+	protected int field() {
+		return rowHeight() + pad();
+	}
+
+	@Override
+	public int viewLength() {
+		return mode == AUTOCOMPLETE ? Math.max(0, height - field()) : height;
+	}
+
+	@Override
+	public int viewOrigin() {
+		return mode == AUTOCOMPLETE ? field() : 0;
+	}
+
+	@Override
+	protected void doLayout() {
+		int r = rowHeight();
+		for (int i = 0; i < count; i++) {
+			setRect(i, 0, 0, 0, 0);
+		}
+		if (mode == OTP) {
+			for (int i = 0; i < count && i < 64; i++) {
+				setRect(i, i * (r + gap()), 0, r, field());
+			}
+		} else if (mode == TAGS) {
+			int x = pad();
+			for (int i = 0; i < count; i++) {
+				int w = textWidth(text[i], font()) + 2 * pad();
+				setRect(i, x, pad() / 2, w, r);
+				x += w + gap();
+			}
+		} else if (mode == AUTOCOMPLETE && is(-1, OPEN)) {
+			dropdown();
+		}
+		setPlane(OVERLAY, 0, field(), width, viewLength());
+	}
+
+	private void dropdown() {
+		for (int k = window[2]; k < window[3]; k++) {
+			setRect(itemAt(k), 0, field() + (int) ((long) k * itemExtent - scroll), width, itemExtent);
+		}
+	}
+
+	@Override
+	protected void emit(M3WebPaint p) {
+		if (mode == OTP) {
+			cells(p);
+			return;
+		}
+		int st = widgetFlags & (FOCUS | ERROR | DISABLED);
+		p.round(0, 0, width, field(), radius(), theme.slot(M3WebTheme.SURFACE));
+		p.roundLine(0, 0, width, field(), radius(), theme.line(V_DEFAULT, st));
+		int x0 = mode == TAGS ? tagsEnd() : mode == SEARCH ? field() : pad();
+		if (mode == SEARCH) {
+			M3WebGlyphs.glyph(p, M3WebGlyphs.I_SEARCH, rtl ? width - field() : 0, 0, field(), theme.slot(M3WebTheme.MUTED));
+		}
+		if (mode == TAGS) {
+			tags(p);
+		}
+		entry(p, x0);
+		if (mode == AUTOCOMPLETE && is(-1, OPEN)) {
+			list(p);
+		}
+	}
+
+	private int tagsEnd() {
+		return count == 0 ? pad() : Math.min(width - pad(), rects[(count - 1) * 4] + rects[(count - 1) * 4 + 2] + gap());
+	}
+
+	private void entry(M3WebPaint p, int x0) {
+		String shown = masked ? "\u2022".repeat(len) : String.valueOf(buf, 0, len);
+		int w = Math.max(0, width - x0 - pad());
+		if (len == 0) {
+			muted(p, placeholder, rtl ? pad() : x0, 0, w, field(), 0);
+		} else {
+			p.text(rtl ? pad() : x0, 0, w, field(), theme.slot(M3WebTheme.FG), font() | (rtl ? M3WebPaint.RIGHT : 0), shown);
+		}
+		if ((widgetFlags & FOCUS) != 0 && phase < 500) {
+			int cx = Math.min(width - pad(), x0 + textWidth(shown.substring(0, Math.min(caret, shown.length())), font()));
+			cx = rtl ? width - cx : cx;
+			p.line(cx, pad() / 2, cx, field() - pad() / 2, theme.slot(M3WebTheme.ACCENT));
+		}
+	}
+
+	private void cells(M3WebPaint p) {
+		for (int i = 0; i < count && i < 64; i++) {
+			int b = i * 4;
+			int st = flags[i] | (i == focus && (widgetFlags & FOCUS) != 0 ? FOCUS : 0) | widgetFlags & ERROR;
+			p.round(rects[b], rects[b + 1], rects[b + 2], rects[b + 3], radius(), theme.slot(M3WebTheme.SURFACE));
+			p.roundLine(rects[b], rects[b + 1], rects[b + 2], rects[b + 3], radius(), theme.line(V_DEFAULT, st));
+			String ch = value[i] == 0 ? "" : masked ? "\u2022" : String.valueOf((char) value[i]);
+			p.text(rects[b], rects[b + 1], rects[b + 2], rects[b + 3], theme.slot(M3WebTheme.FG), font() + 4 | M3WebPaint.CENTER | M3WebPaint.BOLD, ch);
+		}
+	}
+
+	private void tags(M3WebPaint p) {
+		for (int i = 0; i < count; i++) {
+			int b = i * 4;
+			p.round(rects[b], rects[b + 1], rects[b + 2], rects[b + 3], rects[b + 3] / 2, theme.fill(V_SUBTLE, flags[i]));
+			p.text(rects[b], rects[b + 1], rects[b + 2], rects[b + 3], theme.ink(V_SUBTLE, flags[i]), font() | M3WebPaint.CENTER, text[i]);
+		}
+	}
+
+	private void list(M3WebPaint p) {
+		p.translate(plane(OVERLAY, 4), plane(OVERLAY, 5));
+		int y = plane(OVERLAY, 1), h = (int) Math.min(plane(OVERLAY, 3), logicalExtent());
+		p.round(2, y + 4, width, h, 8, theme.shadow());
+		p.round(0, y + 2, width, h, 8, theme.slot(M3WebTheme.SURFACE));
+		for (int k = window[2]; k < window[3]; k++) {
+			int i = itemAt(k), b = i * 4;
+			if (i == focus || (flags[i] & HOVER) != 0) {
+				p.rect(rects[b], rects[b + 1], rects[b + 2], rects[b + 3], theme.fill(V_SUBTLE, 0));
+			}
+			label(p, i, text[i] == null ? Integer.toString(i + 1) : text[i], rects[b] + pad(), rects[b + 1], rects[b + 2] - 2 * pad(), rects[b + 3], 0);
+		}
+		p.translate(0, 0);
+	}
+
+	@Override
+	protected boolean onKey(int key, int ch, int mods) {
+		switch (key) {
+		case KEY_CHAR: insert((char) ch); return true;
+		case KEY_BACKSPACE: backspace(); return true;
+		case KEY_DELETE: deleteForward(); return true;
+		case KEY_ENTER: commit(); return true;
+		case KEY_UP: case KEY_DOWN: return mode == AUTOCOMPLETE && highlight(key == KEY_DOWN ? 1 : -1);
+		case KEY_LEFT: case KEY_RIGHT: return mode != OTP && caretKey((key == KEY_RIGHT) != rtl ? 1 : -1);
+		case KEY_HOME: case KEY_END: return mode != OTP && caretKey(key == KEY_END ? len : -len);
+		default: return false;
+		}
+	}
+
+	private boolean caretKey(int delta) {
+		setCaret(caret + delta);
+		return true;
+	}
+
+	private boolean highlight(int dir) {
+		int n = logicalCount();
+		if (n == 0) {
+			return true;
+		}
+		setState(-1, OPEN, true);
+		int at = 0;
+		for (int k = 0; k < n; k++) {
+			at = itemAt(k) == focus ? k : at;
+		}
+		int next = focus < 0 ? 0 : Math.max(0, Math.min(n - 1, at + dir));
+		setFocus(itemAt(next));
+		long top = (long) next * itemExtent;
+		scrollTo(top < scroll ? top : top + itemExtent > scroll + viewLength() ? top + itemExtent - viewLength() : scroll);
+		relayout(-1, D_STATE);
+		return true;
+	}
+
+	@Override
+	protected void activate(int item) {
+		if (mode == AUTOCOMPLETE) {
+			setFocus(item);
+			commit();
+		} else if (mode == TAGS) {
+			remove(item);
+		}
+		fire(item, D_ACTION);
+	}
+
+	@Override
+	protected boolean onEscape() {
+		boolean was = is(-1, OPEN);
+		setState(-1, OPEN, false);
+		relayout(-1, D_STATE);
+		return was;
+	}
+
+	@Override
+	protected void onWheel(int delta) {
+		scrollTo(scroll + (long) delta * itemExtent);
+	}
+}

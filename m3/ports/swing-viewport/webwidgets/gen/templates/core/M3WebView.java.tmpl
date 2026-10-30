@@ -26,6 +26,9 @@ public abstract class M3WebView extends M3WebLanes {
 	protected long scroll;
 	protected final int[] planes = new int[PLANES * 6];
 	protected final int[] window = new int[4];
+	private int[] matches = new int[8];
+	private int nm = -1;
+	private String filter = "";
 
 	/** Recomputes the window and the resident rects at the current scroll offset, without damage. */
 	protected abstract void arrange();
@@ -41,6 +44,8 @@ public abstract class M3WebView extends M3WebLanes {
 		Arrays.fill(text, count, n, null);
 		Arrays.fill(detail, count, n, null);
 		count = n;
+		nm = -1;
+		filter = "";
 		relayout(-1, D_ITEMS);
 	}
 
@@ -54,9 +59,53 @@ public abstract class M3WebView extends M3WebLanes {
 		return itemExtent;
 	}
 
-	/** Logical extent of all items: may exceed the int range. */
+	/** Logical extent of all (filtered) items: may exceed the int range. */
 	public long logicalExtent() {
-		return (long) count * itemExtent;
+		return (long) logicalCount() * itemExtent;
+	}
+
+	/** Number of positions along the scroll axis: the filter's matches, or every item. */
+	public int logicalCount() {
+		return nm < 0 ? count : nm;
+	}
+
+	/** Item at a scroll position (identity without a filter). */
+	public int itemAt(int position) {
+		return nm < 0 ? position : matches[position];
+	}
+
+	/** Case-insensitive substring filter over item texts; empty clears it. Positions compact to the matches. */
+	public void setFilter(String query) {
+		filter = query == null ? "" : query.toLowerCase(java.util.Locale.ROOT);
+		nm = filter.isEmpty() ? -1 : 0;
+		for (int i = 0; nm >= 0 && i < count; i++) {
+			if (text[i] != null && text[i].toLowerCase(java.util.Locale.ROOT).contains(filter)) {
+				if (nm == matches.length) {
+					matches = Arrays.copyOf(matches, nm * 2);
+				}
+				matches[nm++] = i;
+			}
+		}
+		scroll = 0;
+		relayout(-1, D_ITEMS);
+	}
+
+	public String filter() {
+		return filter;
+	}
+
+	@Override
+	public void clear() {
+		nm = -1;
+		filter = "";
+		super.clear();
+	}
+
+	@Override
+	public void remove(int item) {
+		nm = -1;
+		filter = "";
+		super.remove(item);
 	}
 
 	public long scrollOffset() {
@@ -64,8 +113,13 @@ public abstract class M3WebView extends M3WebLanes {
 	}
 
 	/** Viewport length along the scroll axis. */
-	protected int viewLength() {
+	public int viewLength() {
 		return height;
+	}
+
+	/** Start of the scrolled viewport along the scroll axis (a field or header above it stays put). */
+	public int viewOrigin() {
+		return 0;
 	}
 
 	/** True when the scroll axis is horizontal (blits move pixels along x). */
@@ -85,7 +139,7 @@ public abstract class M3WebView extends M3WebLanes {
 		arrange();
 		if (Math.abs(dy) < viewLength() && (aspects() & A_D) != 0) {
 			blit += (int) dy;
-			int at = dy > 0 ? 0 : viewLength() + (int) dy, len = (int) Math.abs(dy);
+			int at = viewOrigin() + (dy > 0 ? 0 : viewLength() + (int) dy), len = (int) Math.abs(dy);
 			if (scrollsHorizontally()) {
 				damage(at, 0, len, height);
 			} else {
@@ -106,14 +160,15 @@ public abstract class M3WebView extends M3WebLanes {
 
 	/** Recomputes the visible and resident window from the scroll offset. */
 	protected void project() {
-		int first = (int) Math.min(count, scroll / itemExtent);
-		int visible = viewLength() <= 0 ? 0 : (int) Math.min(count, (scroll % itemExtent + viewLength() + itemExtent - 1) / itemExtent);
-		int start = Math.min(first, count);
-		int end = visible == 0 ? start : (int) Math.min((long) count, (long) start + visible);
+		int n = logicalCount();
+		int first = (int) Math.min(n, scroll / itemExtent);
+		int visible = viewLength() <= 0 ? 0 : (int) Math.min(n, (scroll % itemExtent + viewLength() + itemExtent - 1) / itemExtent);
+		int start = Math.min(first, n);
+		int end = visible == 0 ? start : (int) Math.min((long) n, (long) start + visible);
 		window[0] = start;
 		window[1] = end;
 		window[2] = visible == 0 || start == end ? start : Math.max(0, start - overscan);
-		window[3] = visible == 0 || start == end ? end : (int) Math.min((long) count, (long) end + overscan);
+		window[3] = visible == 0 || start == end ? end : (int) Math.min((long) n, (long) end + overscan);
 	}
 
 	/** {@code k}: 0 first visible, 1 end visible, 2 first resident, 3 end resident. */
