@@ -33,7 +33,7 @@
   "source_evidence": "Both current-master preimages exactly equal the original accepted 669a949d recipe inputs, with two accepted postimage Git objects retained from PR2115. No source rewriting occurs in this receiver.",
   "prior_executed_evidence": "The original Synexia source-bound replay and PR2115 qualification passed all 3 strict C17/fatal UBSan protocol fixtures, 20 direct native mains and 3 missing-library mains on the original admitted scope. These counts are historical and not repeated here.",
   "pending": [
-    "Fresh compile/CTest/UBSan on this current-master branch",
+    "Full current-master CTest/UBSan for both native fixtures (only gather standalone C17/fatal-UBSan scoped PASS)",
     "Fresh Java21 native/JNI and collections JUnit",
     "Strict source-JUnit dependency closure",
     "Full JDK/jtreg/platform and hosted Actions",
@@ -42,7 +42,37 @@
   "unchanged": [
     "Java production sources and public API",
     "JNI implementation and exported JNI symbols",
-    "All current tests and workflow owner pins outside the two exact restored fixtures",
+    "Other current tests and workflow owner pins outside the three exact restored fixture/test files",
     "Protected/default branches"
-  ]
+  ],
+  "gather_java_oracle_recovery": {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3NetBeansGatherSpansTest.java",
+    "current_master_preimage_blob": "b3fa33be7f74ae31a17d39b86713607a335f3211",
+    "exact_canonical_postimage_blob": "f3e630a49726118cfb220ab3dbc3b89bca2c32a6",
+    "recipe": "hsoliwal/com.synexia@977cb34746e56e5c71128c41475425a28c932787 / m3-gather-exception-oracle-20261029",
+    "source_proof": "canonical pre/post .template Git blobs are byte-identical to current master and PR2115 outputs",
+    "unchanged_owners": {
+      "M3LongAddressKernel.java": "79d261d7bf7edde29e7502852eceb8d16be6cdde",
+      "M3IndexMaskCompactor.java": "9060424b921bac10dc382ba277a3aa840ea59529",
+      "M3LongAddressBoundedSelfTest.java": "1470a9ac73857ddb6bfc43db94d5dc7d9e3f8465",
+      "m3_long_address_kernel.c": "58853890a9043f8f4284544a8f7caca9ce8218cb"
+    },
+    "historic_executed_oracle": "Synexia candidate Java-only 4/4, real-JNI 4/4, interpreter JNI 2/2, negative controls; originally scoped to prior verified sources",
+    "current_branch_java_junit": "PENDING: current exact-base JUnit, full JNI and installed JDK not executed"
+  },
+  "fresh_gather_protocol_20261030": {
+    "output": "M3_GATHER_SPANS_PASS checks=11050374 two_spans=0 scratch_bytes=3072",
+    "scope": "fresh C17 executable with actual JNI-table fixture and unchanged native source; not real JVM/JUnit",
+    "compiler": "gcc 14.2.0 -std=c17 -O1 -g -Wall -Wextra -Werror -Wpedantic -fsanitize=undefined -fno-sanitize-recover=all",
+    "sanitizer": "UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1",
+    "candidate_fixtures": [
+      "8ec47e6a4a1a9943c8c0a10f09f2ec3c7200c527",
+      "58853890a9043f8f4284544a8f7caca9ce8218cb"
+    ],
+    "success_exit_code": 0,
+    "negative_baseline_fixture": "8bc50f0947bfe3fa50527583e917836647fc51f7",
+    "negative_exit_code": 1,
+    "negative_failure": "failed line 81: strcmp(error_kind,\"java/lang/IndexOutOfBoundsException\")==0",
+    "other_native_fixture_and_current_java": "NOT RUN"
+  }
 }
