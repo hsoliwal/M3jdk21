@@ -71,11 +71,12 @@ public final class M3WebChecks {
 		m.layout(360, 260);
 		m.takeDamage(d);
 		int w = m.plane(M3WebView.OVERLAY, 2), h = m.plane(M3WebView.OVERLAY, 3);
-		m.movePlane(M3WebView.OVERLAY, 7, 5);
+		int ox = m.plane(M3WebView.OVERLAY, 4), oy = m.plane(M3WebView.OVERLAY, 5);
+		m.movePlane(M3WebView.OVERLAY, ox + 7, oy + 5);
 		boolean dirty = m.takeDamage(d);
 		check(!dirty || (d[2] <= w + 7 && d[3] <= h + 5), "plane move damages only the plane");
-		check(m.plane(M3WebView.OVERLAY, 4) == 7 && m.plane(M3WebView.OVERLAY, 5) == 5, "plane offset");
-		m.movePlane(M3WebView.OVERLAY, 0, 0);
+		check(m.plane(M3WebView.OVERLAY, 4) == ox + 7 && m.plane(M3WebView.OVERLAY, 5) == oy + 5, "plane offset");
+		m.movePlane(M3WebView.OVERLAY, ox, oy);
 		m.takeDamage(d);
 	}
 
@@ -160,13 +161,16 @@ public final class M3WebChecks {
 
 	private static void states(M3WebModel m, M3WebPaint p) {
 		int[] bits = { HOVER, PRESSED, DISABLED, SELECTED, ERROR, FOCUS, CHECKED, OPEN };
+		int n = Math.min(2, m.count());
+		boolean[] was = new boolean[n + 1];
 		for (int bit : bits) {
-			for (int i = -1; i < Math.min(2, m.count()); i++) {
-				m.setState(i, bit, true);
+			for (int i = -1; i < n; i++) {
+				was[i + 1] = m.is(i, bit);
+				m.setState(i, bit, !was[i + 1]);
 			}
 			m.paint(p);
-			for (int i = -1; i < Math.min(2, m.count()); i++) {
-				m.setState(i, bit, false);
+			for (int i = -1; i < n; i++) {
+				m.setState(i, bit, was[i + 1]);
 			}
 		}
 	}

@@ -185,7 +185,12 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 			g.dispose();
 		}
 		if (model.takeDamage(damage)) {
-			dirty.add(new Rectangle(damage[0], damage[1], damage[2], damage[3]));
+			Rectangle r = new Rectangle(damage[0], damage[1], damage[2], damage[3]);
+			if (dirty.isEmpty()) {
+				dirty.setBounds(r);
+			} else {
+				dirty.add(r);
+			}
 			repaint(dy != 0 ? new Rectangle(0, 0, getWidth(), getHeight()) : new Rectangle(damage[0], damage[1], damage[2], damage[3]));
 		}
 		if (model.isAnimating() && !timer.isRunning()) {

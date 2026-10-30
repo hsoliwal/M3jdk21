@@ -1,0 +1,60 @@
+package @PKG@;
+
+import static @PKG@.M3WebChecks.check;
+import static @PKG@.M3WebStates.*;
+
+/** Family contract of the containers (pattern M3P-CONTAINER-1). */
+public final class M3ContainerChecks {
+	private M3ContainerChecks() {
+	}
+
+	public static void run(M3ContainerModel m) {
+		m.layout(360, 400);
+		check(m.count() > 0 && m.plane(M3WebView.HEADER, 3) > 0, "sections and header plane");
+		M3WebPaint p = new M3WebPaint();
+		int n = m.count();
+		m.add("Extra", "a long body text that wraps over more than one line in a narrow container of the family");
+		m.setOpen(n, true);
+		check(m.isOpen(n) && m.itemRect(n, 3) > m.itemRect(0, 3) - 1000, "open section has a body");
+		m.setExclusive(true);
+		check(m.isExclusive(), "exclusive");
+		m.setOpen(0, true);
+		check(!m.isOpen(n) || m.mode != M3ContainerModel.ACCORDION, "exclusive closes the others");
+		m.setExclusive(false);
+		m.setRtl(true);
+		m.paint(p);
+		m.setRtl(false);
+		keys(m, p);
+		dismiss(m);
+	}
+
+	private static void keys(M3ContainerModel m, M3WebPaint p) {
+		m.setFocus(0);
+		boolean before = m.isOpen(0);
+		m.key(KEY_ENTER, 0, 0);
+		check(m.mode != M3ContainerModel.ACCORDION || m.isOpen(0) != before, "enter toggles a section");
+		m.key(KEY_DOWN, 0, 0);
+		check(m.focus() == 1, "down moves to the next section");
+		m.setValue(0, 42);
+		m.setAux(0, -3);
+		m.paint(p);
+		m.setAux(0, 5);
+		m.paint(p);
+	}
+
+	private static void dismiss(M3ContainerModel m) {
+		m.layout(360, 400);
+		int x = m.itemRect(0, 0) + m.itemRect(0, 2) - 4, y = m.itemRect(0, 1) + 4;
+		m.pointer(P_DOWN, x, y, 0);
+		m.pointer(P_UP, x, y, 0);
+		check(m.mode != M3ContainerModel.ALERT || m.is(0, HIDDEN), "close glyph dismisses an alert");
+		m.setRtl(true);
+		m.pointer(P_DOWN, 2, m.itemRect(1, 1) + 4, 0);
+		m.pointer(P_UP, 2, m.itemRect(1, 1) + 4, 0);
+		m.setRtl(false);
+		m.setFocus(1);
+		check(m.key(KEY_ESCAPE, 0, 0) == (m.mode == M3ContainerModel.ALERT), "escape dismisses alerts only");
+		m.dismiss(1);
+		check(m.is(1, HIDDEN) && m.itemRect(1, 3) == 0, "dismissed section has no height");
+	}
+}

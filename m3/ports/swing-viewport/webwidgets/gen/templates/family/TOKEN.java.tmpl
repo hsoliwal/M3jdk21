@@ -12,9 +12,6 @@ import static @PKG@.M3WebStates.*;
 public class M3TokenModel extends M3WebModel implements M3TokenApi {
 	public static final int TEXT = 0, INITIALS = 1, COUNT = 2, ICON = 3, CHIP = 4, KEYCAP = 5, MARK = 6, CODE = 7, CAPTCHA = 8, LED = 9,
 			LINK = 10, SWITCH = 11;
-	/** Icon ids of the built-in glyphs; names resolve through {@link #iconId(String)}. */
-	public static final int I_DOT = 0, I_SEARCH = 1, I_PLUS = 2, I_CLOSE = 3, I_CHECK = 4, I_CHEVRON = 5, I_STAR = 6, I_MENU = 7;
-	private static final String[] ICONS = { "dot", "search", "plus", "close", "check", "chevron", "star", "menu" };
 	private int max = 99;
 	private boolean removable;
 
@@ -35,17 +32,13 @@ public class M3TokenModel extends M3WebModel implements M3TokenApi {
 			if (mode == COUNT) {
 				setValue(i, parse(s));
 			} else if (mode == ICON) {
-				setAux(i, iconId(s));
+				setAux(i, M3WebGlyphs.iconId(s));
 			}
 		}
 	}
 
 	static int parse(String s) {
-		try {
-			return Integer.parseInt(s.trim());
-		} catch (NumberFormatException e) {
-			return 0;
-		}
+		return M3WebStates.parse(s);
 	}
 
 	@Override
@@ -63,16 +56,6 @@ public class M3TokenModel extends M3WebModel implements M3TokenApi {
 	@Override
 	public boolean isRemovable() {
 		return removable;
-	}
-
-	/** Icon id of a glyph name, {@link #I_DOT} when unknown. */
-	public static int iconId(String name) {
-		for (int i = 0; i < ICONS.length; i++) {
-			if (ICONS[i].equals(name)) {
-				return i;
-			}
-		}
-		return I_DOT;
 	}
 
 	@Override
@@ -133,7 +116,7 @@ public class M3TokenModel extends M3WebModel implements M3TokenApi {
 		switch (mode) {
 		case SWITCH: emitSwitch(p, i, x, y, h); break;
 		case LED: emitLed(p, i, x, y, h); break;
-		case ICON: glyph(p, aux[i], x, y, h, theme.ink(variant, flags[i])); break;
+		case ICON: M3WebGlyphs.glyph(p, aux[i], x, y, h, theme.ink(variant, flags[i])); break;
 		case KEYCAP: emitKeycap(p, i, x, y, w, h); break;
 		case MARK: p.rect(x, y + 2, w, h - 4, M3WebTheme.mix(theme.slot(M3WebTheme.WARNING), theme.slot(M3WebTheme.SURFACE), 35));
 			p.text(x, y, w, h, theme.slot(M3WebTheme.FG), font() | M3WebPaint.CENTER, text[i]); break;
@@ -155,7 +138,7 @@ public class M3TokenModel extends M3WebModel implements M3TokenApi {
 		int tw = removable && mode == CHIP ? w - h / 2 : w;
 		label(p, i, display(i), x, y, tw, h, M3WebPaint.CENTER | (mode == INITIALS ? M3WebPaint.BOLD : 0));
 		if (removable && mode == CHIP) {
-			glyph(p, I_CLOSE, x + w - h * 3 / 4, y + h / 4, h / 2, theme.ink(variant, flags[i]));
+			M3WebGlyphs.glyph(p, M3WebGlyphs.I_CLOSE, x + w - h * 3 / 4, y + h / 4, h / 2, theme.ink(variant, flags[i]));
 		}
 	}
 
@@ -196,21 +179,6 @@ public class M3TokenModel extends M3WebModel implements M3TokenApi {
 			p.line(x, y + Math.floorMod(seed >> 8, h), x + w, y + Math.floorMod(seed >> 16, h), theme.slot(M3WebTheme.MUTED));
 		}
 		label(p, i, text[i], x, y, w, h, M3WebPaint.CENTER | M3WebPaint.BOLD | M3WebPaint.MONO);
-	}
-
-	/** Paints a built-in glyph in an {@code s}-square at (x, y). TODO M3P-TOKEN-1: the 360 lucide paths. */
-	protected static void glyph(M3WebPaint p, int id, int x, int y, int s, int rgb) {
-		int m = s / 4, c = s / 2;
-		switch (id) {
-		case I_SEARCH: p.ovalLine(x + m, y + m, c, c, rgb); p.line(x + c + m / 2, y + c + m / 2, x + s - m, y + s - m, rgb); break;
-		case I_PLUS: p.line(x + c, y + m, x + c, y + s - m, rgb); p.line(x + m, y + c, x + s - m, y + c, rgb); break;
-		case I_CLOSE: p.line(x + m, y + m, x + s - m, y + s - m, rgb); p.line(x + s - m, y + m, x + m, y + s - m, rgb); break;
-		case I_CHECK: p.poly(new int[] { x + m, y + c, x + c - m / 2, y + s - m, x + s - m, y + m }, 0, 3, rgb); break;
-		case I_CHEVRON: p.poly(new int[] { x + m, y + m + m / 2, x + c, y + s - m - m / 2, x + s - m, y + m + m / 2 }, 0, 3, rgb); break;
-		case I_STAR: p.poly(new int[] { x + c, y + m / 2, x + s - m, y + s - m, x + m / 2, y + c - m / 2, x + s - m / 2, y + c - m / 2, x + m, y + s - m, x + c, y + m / 2 }, 0, 6, rgb); break;
-		case I_MENU: p.line(x + m, y + m, x + s - m, y + m, rgb); p.line(x + m, y + c, x + s - m, y + c, rgb); p.line(x + m, y + s - m, x + s - m, y + s - m, rgb); break;
-		default: p.oval(x + c - m / 2, y + c - m / 2, m, m, rgb);
-		}
 	}
 
 	@Override

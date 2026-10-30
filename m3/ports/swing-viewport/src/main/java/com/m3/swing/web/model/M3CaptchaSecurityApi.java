@@ -18,7 +18,7 @@ package com.m3.swing.web.model;
 /**
  * API of the M3 captcha-security widget (concept {@code captcha-security}, family TOKEN, pattern M3P-TOKEN-1).
  * <p>
- * Viewport form: 
+ * Viewport form: the family pattern (see CONCEPTS.tsv)
  * </p>
  * TODO M3P-TOKEN-1: concept-specific operations beyond the family API.
  */

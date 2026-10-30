@@ -62,6 +62,15 @@ public final class M3WebStates {
 		return role >= 0 && role < ROLES.length ? ROLES[role] : ROLES[0];
 	}
 
+	/** Parses a decimal int, 0 when the text is not a number. */
+	public static int parse(String s) {
+		try {
+			return Integer.parseInt(s.trim());
+		} catch (NumberFormatException e) {
+			return 0;
+		}
+	}
+
 	/** Returns the metric of a size: 0 height, 1 padding, 2 font pixels, 3 gap. */
 	public static int metric(int size, int which) {
 		int s = Math.max(SIZE_XS, Math.min(SIZE_XL, size));
