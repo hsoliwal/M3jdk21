@@ -67,6 +67,12 @@ public final class M3ReactorImpactPlanContract {
             var clean = M3ReactorImpactPlan.compute(steady, cleanFiles,
                     projectForFile, 4, true, reactorOffsets, reactorTargets);
             check(clean.size() == 0 && !clean.requiresConservativeReactor(), "no file delta");
+            // Two clean observations of the same bytes are still distinct
+            // generations. A plan cannot silently authorize another snapshot.
+            var parallelSteady = M3FileDeltaLedger.scan(root, first, names);
+            reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                    parallelSteady, cleanFiles, projectForFile, 4, true,
+                    reactorOffsets, reactorTargets));
             Files.writeString(root.resolve("api/A.java"), "changed API");
             var changed = M3FileDeltaLedger.scan(root, steady, names);
             var impacted = M3BuildImpactPlan.compute(changed, true,
@@ -74,6 +80,16 @@ public final class M3ReactorImpactPlanContract {
             var reactor = M3ReactorImpactPlan.compute(changed, impacted,
                     projectForFile, 4, true, reactorOffsets, reactorTargets);
             same(new int[] {0,1,2}, reactor, "dependency closure");
+            // Identical slot dimensions, direct-change masks and even file bytes
+            // cannot substitute for the exact plan/snapshot admission identity.
+            var parallelChanged = M3FileDeltaLedger.scan(root, steady, names);
+            var parallelImpact = M3BuildImpactPlan.compute(parallelChanged, true,
+                    noDeps, new int[0], unsafe);
+            check(Arrays.equals(impacted.impactedSlots(), parallelImpact.impactedSlots()),
+                    "parallel generation uses identical changed-slot masks");
+            reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                    changed, parallelImpact, projectForFile, 4, true,
+                    reactorOffsets, reactorTargets));
             check(reactor.reasonAt(0) == M3ReactorImpactPlan.FILE_IMPACT, "direct project");
             check((reactor.reasonAt(2) & M3ReactorImpactPlan.DEPENDENT_PROJECT) != 0,
                     "transitive dependent");
