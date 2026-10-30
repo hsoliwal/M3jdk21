@@ -46,11 +46,11 @@ done
 tr -d '\r' < "$WORK/atoms.tsv" | LC_ALL=C sort >> "$Q/METHOD_ATOMS.tsv"
 "$BIN/javac" -Xlint:all -Werror -proc:none -cp "$JAR" -d "$WORK/cls" $(cat "$WORK/filled.txt")
 "$BIN/javac" -proc:none -cp "$JAR$SEP$WORK/cls" -d "$WORK/hcls" "$Q/M3DecoratorDifferential.java"
-printf 'm3_class\toracle\tbacking\tresult\n' > "$Q/DIFFERENTIAL.tsv"; : > "$WORK/mismatch.tsv"; fail=0
-while IFS=$'\t' read -r m3 oracle backing; do
+printf 'm3_class\toracle\tbacking\tfactory\tresult\n' > "$Q/DIFFERENTIAL.tsv"; : > "$WORK/mismatch.tsv"; fail=0
+while IFS=$'\t' read -r m3 oracle backing factory; do
 	[ "$m3" = m3_class ] && continue
-	rc=0; line=$("$BIN/java" -cp "$JAR$SEP$WORK/cls$SEP$WORK/hcls" M3DecoratorDifferential "$m3" "$oracle" "$backing" "$WORK/mismatch.tsv" 2>&1 | grep -o 'M3_DECORATOR_DIFF.*') || rc=$?
-	printf '%s\t%s\t%s\t%s\n' "$m3" "$oracle" "$backing" "${line#M3_DECORATOR_DIFF }" >> "$Q/DIFFERENTIAL.tsv"
+	rc=0; line=$("$BIN/java" -cp "$JAR$SEP$WORK/cls$SEP$WORK/hcls" M3DecoratorDifferential "$m3" "$oracle" "$backing" "$factory" "$WORK/mismatch.tsv" 2>&1 | grep -o 'M3_DECORATOR_DIFF.*') || rc=$?
+	printf '%s\t%s\t%s\t%s\t%s\n' "$m3" "$oracle" "$backing" "$factory" "${line#M3_DECORATOR_DIFF }" >> "$Q/DIFFERENTIAL.tsv"
 	[ "$rc" -eq 0 ] || fail=1
 done < "$Q/TARGETS.tsv"
 tr -d '\r' < "$WORK/mismatch.tsv" > "$Q/MISMATCHES.tsv"

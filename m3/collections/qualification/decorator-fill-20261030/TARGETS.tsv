@@ -1,8 +1,8 @@
-m3_class	oracle	backing
-com.m3.collections.apache.M3UnmodifiableCollection	org.apache.commons.collections4.collection.UnmodifiableCollection	list
-com.m3.collections.apache.M3UnmodifiableList	org.apache.commons.collections4.list.UnmodifiableList	list
-com.m3.collections.apache.M3UnmodifiableQueue	org.apache.commons.collections4.queue.UnmodifiableQueue	deque
-com.m3.collections.apache.M3UnmodifiableSortedSet	org.apache.commons.collections4.set.UnmodifiableSortedSet	treeset
-com.m3.collections.apache.M3UnmodifiableNavigableSet	org.apache.commons.collections4.set.UnmodifiableNavigableSet	treeset
-com.m3.collections.apache.M3UnmodifiableBag	org.apache.commons.collections4.bag.UnmodifiableBag	hashbag
-com.m3.collections.apache.M3UnmodifiableSortedBag	org.apache.commons.collections4.bag.UnmodifiableSortedBag	treebag
+m3_class	oracle	backing	factory
+com.m3.collections.apache.M3UnmodifiableCollection	org.apache.commons.collections4.collection.UnmodifiableCollection	list	unmodifiableCollection
+com.m3.collections.apache.M3UnmodifiableList	org.apache.commons.collections4.list.UnmodifiableList	list	unmodifiableList
+com.m3.collections.apache.M3UnmodifiableQueue	org.apache.commons.collections4.queue.UnmodifiableQueue	deque	unmodifiableQueue
+com.m3.collections.apache.M3UnmodifiableSortedSet	org.apache.commons.collections4.set.UnmodifiableSortedSet	treeset	unmodifiableSortedSet
+com.m3.collections.apache.M3UnmodifiableNavigableSet	org.apache.commons.collections4.set.UnmodifiableNavigableSet	treeset	unmodifiableNavigableSet
+com.m3.collections.apache.M3UnmodifiableBag	org.apache.commons.collections4.bag.UnmodifiableBag	hashbag	unmodifiableBag
+com.m3.collections.apache.M3UnmodifiableSortedBag	org.apache.commons.collections4.bag.UnmodifiableSortedBag	treebag	unmodifiableSortedBag
