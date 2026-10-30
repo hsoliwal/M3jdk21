@@ -248,26 +248,27 @@ public final class M3LongLongHashMap {
 
     private void rehash(int requestedCapacity) {
         int capacity = tableSizeFor(Math.max(MIN_CAPACITY, requestedCapacity));
-        long[] oldKeys = keys;
-        long[] oldValues = values;
-        byte[] oldStates = states;
-        keys = new long[capacity];
-        values = new long[capacity];
-        states = new byte[capacity];
-        int previousSize = size;
-        size = 0;
-        occupied = 0;
-        for (int i = 0; i < oldStates.length; i++) {
-            if (oldStates[i] == USED) {
-                insertRehashed(oldKeys[i], oldValues[i]);
+        long[] nextKeys = new long[capacity];
+        long[] nextValues = new long[capacity];
+        byte[] nextStates = new byte[capacity];
+        int copied = 0;
+        for (int i = 0; i < states.length; i++) {
+            if (states[i] == USED) {
+                insertRehashed(keys[i], values[i], nextKeys, nextValues, nextStates);
+                copied++;
             }
         }
-        if (size != previousSize) {
+        if (copied != size) {
             throw new IllegalStateException("rehash lost map entries");
         }
+        keys = nextKeys;
+        values = nextValues;
+        states = nextStates;
+        occupied = copied;
     }
 
-    private void insertRehashed(long key, long value) {
+    private static void insertRehashed(long key, long value,
+            long[] keys, long[] values, byte[] states) {
         int mask = keys.length - 1;
         int index = mix(key) & mask;
         while (states[index] == USED) {
@@ -276,8 +277,6 @@ public final class M3LongLongHashMap {
         keys[index] = key;
         values[index] = value;
         states[index] = USED;
-        size++;
-        occupied++;
     }
 
     private static int capacityFor(int expectedSize) {

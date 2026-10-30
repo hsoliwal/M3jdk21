@@ -286,15 +286,19 @@ public final class M3LongTreeSet implements M3LongSortedSet {
     public void trimToSize() {
         int pages = Math.max(1, pageCount);
         long[] packed = new long[pages * pageCapacity];
+        long[] nextMaxima = Arrays.copyOf(pageMaxima, pages);
+        int[] nextCounts = Arrays.copyOf(pageCounts, pages);
+        int[] nextSlots = Arrays.copyOf(pageSlot, pages);
+        int[] nextFree = new int[pages];
         for (int page = 0; page < pageCount; page++) {
             System.arraycopy(values, pageOffset(page), packed, page * pageCapacity, pageCounts[page]);
-            pageSlot[page] = page;
+            nextSlots[page] = page;
         }
         values = packed;
-        pageMaxima = Arrays.copyOf(pageMaxima, pages);
-        pageCounts = Arrays.copyOf(pageCounts, pages);
-        pageSlot = Arrays.copyOf(pageSlot, pages);
-        freeSlots = new int[pages];
+        pageMaxima = nextMaxima;
+        pageCounts = nextCounts;
+        pageSlot = nextSlots;
+        freeSlots = nextFree;
         slotsUsed = pageCount;
         freeCount = 0;
     }
@@ -515,10 +519,15 @@ public final class M3LongTreeSet implements M3LongSortedSet {
             throw new IllegalStateException("maximum page-lane capacity reached");
         }
         int grown = (int) Math.min(limit, Math.max(minimumPages, current + ((long) current >> 1)));
-        values = Arrays.copyOf(values, grown * pageCapacity);
-        pageMaxima = Arrays.copyOf(pageMaxima, grown);
-        pageCounts = Arrays.copyOf(pageCounts, grown);
-        pageSlot = Arrays.copyOf(pageSlot, grown);
-        freeSlots = Arrays.copyOf(freeSlots, grown);
+        long[] nextValues = Arrays.copyOf(values, grown * pageCapacity);
+        long[] nextPageMaxima = Arrays.copyOf(pageMaxima, grown);
+        int[] nextPageCounts = Arrays.copyOf(pageCounts, grown);
+        int[] nextPageSlot = Arrays.copyOf(pageSlot, grown);
+        int[] nextFreeSlots = Arrays.copyOf(freeSlots, grown);
+        values = nextValues;
+        pageMaxima = nextPageMaxima;
+        pageCounts = nextPageCounts;
+        pageSlot = nextPageSlot;
+        freeSlots = nextFreeSlots;
     }
 }
