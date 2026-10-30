@@ -19,7 +19,7 @@
 
 ## Evidence and gate
 
-- Local stock Java 21: exact source compiled with `-Xlint:all -Werror --release 21` against matching minimal interface signatures; no full JDK module build.
+- Local stock Java 21: exact source compiled with `--release 21 -Xlint:all -Werror` against byte-for-byte target M3LongIterator, M3LongCollection and M3LongQueue sources (Git blobs `44778a63`, `d0b38968`, `8fcb61bd`); still not a full JDK module build. Canonical Synexia packet now contains `verify_java21_source.sh`, which rejects changed input blobs and reproduces the 99,000-transition proof.
 - Independently authored ArrayDeque<Long> oracle (test-only boxing): 99,000 seeded state transitions / 3,483,902 checked assertions **PASS**. JUnit 5 method content compiled/executed against an annotation stub; actual project JUnit **NOT RUN**.
 - This draft contains **authored source templates**, not recorded SDK-emitted output. Canonical Maven/OpenRewrite 5 SDK cases, actual receiver fixed-point/refusal, source-built M3JDK21 Maven reactor/JUnit, relevant jtreg/JNI, multi-platform and JMH gates **NOT RUN**.
 - Keep **draft** until the full recipe, name-contract policy and product gates pass. No default branch writes, no rebase, no forced update, no phase-promotion claim.
