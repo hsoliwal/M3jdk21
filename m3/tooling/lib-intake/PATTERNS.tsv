@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+pattern	version	stage	atom	owner	state
+LIB_INTAKE_TO_JMOD	1	S1	package relocation: one non-recursive ChangePackage per package, longest old name first	OpenRewrite ChangePackage (#12340 boundary-checked form)	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S1b	BCP gate: byte-equal after textual name map	lib_intake.sh	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S2	residue discovery with owner per hit	m3work:relocation-scan (#14520)	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S3	atomize + pattern plan	M3Mop	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S4	consolidation queue = OWNER_CONTRACT atoms	absorb_plan.py	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S5	refactor ratchet baseline	M3Mop counters	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S6	module-info exporting every relocated package	javac --release 21	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S7	jmod create + jlink + validate + smoke	JDK jmod/jlink	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S8	M3 refactor layer, upstream untouched	lib_intake.sh	ADMITTED

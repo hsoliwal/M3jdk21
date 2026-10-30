@@ -1,0 +1,2 @@
+lib	source_dir	mappings	module	version	layer_dir	mop_classes	owner_atoms
+JavaEWAH	m3/vendor/third_party/JavaEWAH	com.googlecode.javaewah=com.m3.collections.ewah;com.googlecode.javaewah32=com.m3.collections.ewah32	jdk.m3.ewah	1.1.13-m3-source-1	m3/vendor/third_party-m3/relocated/JavaEWAH	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv

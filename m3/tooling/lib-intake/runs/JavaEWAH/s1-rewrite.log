@@ -1,0 +1,236 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< m3.intake:JavaEWAH >-------------------------
+[INFO] Building JavaEWAH 1.1.13-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ JavaEWAH ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [JavaEWAH] Resolving Poms...
+[INFO] Project [JavaEWAH] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\BitCounter.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BitCounter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\BitmapStorage.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BitmapStorage.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\Buffer.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\Buffer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\BufferedIterator.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BufferedIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\BufferedRunningLengthWord.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BufferedRunningLengthWord.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\ChunkIterator.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\ChunkIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\ChunkIteratorImpl.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\ChunkIteratorImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\ClearIntIterator.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\ClearIntIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\CloneableIterator.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\CloneableIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\datastructure\BitSet.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.datastructure, newPackageName=com.m3.collections.ewah.datastructure, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\datastructure\ImmutableBitSet.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\ImmutableBitSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.datastructure, newPackageName=com.m3.collections.ewah.datastructure, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\datastructure\PriorityQ.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\PriorityQ.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.datastructure, newPackageName=com.m3.collections.ewah.datastructure, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\datastructure\WordArray.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\WordArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.datastructure, newPackageName=com.m3.collections.ewah.datastructure, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\EWAHCompressedBitmap.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.symmetric, newPackageName=com.m3.collections.ewah.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\EWAHIterator.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\FastAggregation.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\FastAggregation.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\IntIterator.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IntIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\IntIteratorImpl.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IntIteratorImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\IntIteratorOverIteratingRLW.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IntIteratorOverIteratingRLW.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\IteratingBufferedRunningLengthWord.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratingBufferedRunningLengthWord.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\IteratingRLW.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratingRLW.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\IteratorAggregation.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratorAggregation.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\IteratorUtil.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratorUtil.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\LogicalElement.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\LogicalElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\LongArray.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\LongArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\LongBufferWrapper.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\LongBufferWrapper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\NonEmptyVirtualStorage.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\NonEmptyVirtualStorage.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\ReverseEWAHIterator.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\ReverseEWAHIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\ReverseIntIterator.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\ReverseIntIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\RunningLengthWord.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\RunningLengthWord.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\symmetric\BitmapSymmetricAlgorithm.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\symmetric\BitmapSymmetricAlgorithm.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.symmetric, newPackageName=com.m3.collections.ewah.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\symmetric\EWAHPointer.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\symmetric\EWAHPointer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.symmetric, newPackageName=com.m3.collections.ewah.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\symmetric\RunningBitmapMerge.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\symmetric\RunningBitmapMerge.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.datastructure, newPackageName=com.m3.collections.ewah.datastructure, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.symmetric, newPackageName=com.m3.collections.ewah.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\symmetric\ThresholdFuncBitmap.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\symmetric\ThresholdFuncBitmap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.symmetric, newPackageName=com.m3.collections.ewah.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah\symmetric\UpdateableBitmapFunction.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\symmetric\UpdateableBitmapFunction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.datastructure, newPackageName=com.m3.collections.ewah.datastructure, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.symmetric, newPackageName=com.m3.collections.ewah.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\BitCounter32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BitCounter32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\BitmapStorage32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BitmapStorage32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\Buffer32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\Buffer32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\BufferedIterator32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BufferedIterator32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\BufferedRunningLengthWord32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BufferedRunningLengthWord32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\ChunkIteratorImpl32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\ChunkIteratorImpl32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\ClearIntIterator32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\ClearIntIterator32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\EWAHCompressedBitmap32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32.symmetric, newPackageName=com.m3.collections.ewah32.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\EWAHIterator32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\EWAHIterator32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\FastAggregation32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\FastAggregation32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\IntArray.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IntArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\IntBufferWrapper.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IntBufferWrapper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\IntIteratorImpl32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IntIteratorImpl32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\IntIteratorOverIteratingRLW32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IntIteratorOverIteratingRLW32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\IteratingBufferedRunningLengthWord32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IteratingBufferedRunningLengthWord32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\IteratingRLW32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IteratingRLW32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\IteratorAggregation32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IteratorAggregation32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\IteratorUtil32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IteratorUtil32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\NonEmptyVirtualStorage32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\NonEmptyVirtualStorage32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\ReverseEWAHIterator32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\ReverseEWAHIterator32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\ReverseIntIterator32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\ReverseIntIterator32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah, newPackageName=com.m3.collections.ewah, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\RunningLengthWord32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\RunningLengthWord32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\symmetric\BitmapSymmetricAlgorithm32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\symmetric\BitmapSymmetricAlgorithm32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32.symmetric, newPackageName=com.m3.collections.ewah32.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\symmetric\EWAHPointer32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\symmetric\EWAHPointer32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32.symmetric, newPackageName=com.m3.collections.ewah32.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\symmetric\RunningBitmapMerge32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\symmetric\RunningBitmapMerge32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.datastructure, newPackageName=com.m3.collections.ewah.datastructure, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32.symmetric, newPackageName=com.m3.collections.ewah32.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\symmetric\ThresholdFuncBitmap32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\symmetric\ThresholdFuncBitmap32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32.symmetric, newPackageName=com.m3.collections.ewah32.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\work\proj\src\main\java\com\googlecode\javaewah32\symmetric\UpdateableBitmapFunction32.java to m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\symmetric\UpdateableBitmapFunction32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah.datastructure, newPackageName=com.m3.collections.ewah.datastructure, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32.symmetric, newPackageName=com.m3.collections.ewah32.symmetric, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.googlecode.javaewah32, newPackageName=com.m3.collections.ewah32, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.938 s
+[INFO] Finished at: 2026-10-30T18:49:13+05:30
+[INFO] ------------------------------------------------------------------------

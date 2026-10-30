@@ -1,0 +1,10 @@
+stage	status	evidence
+S1_RELOCATE	PASS	packages_moved=5 old_package_dirs_left=0 recipe=rewrite.yml
+S1b_BCP	PASS	byte_equal_after_name_map=62 differing=0
+S2_RESIDUE	PASS	java_syntax_residue=0 other_residue=0 (manifests per owner in relocation/)
+S3_ATOMIZE	PASS	atoms=1176 KNOWN_PATTERN=392 UNPROVEN_LEAF=622 UNKNOWN_PATTERN=162
+S4_CONSOLIDATE	PASS	owner_contract_atoms=119 (proposal queue; GAP/OWNER_SHAPE in ABSORB_SUMMARY.tsv)
+S5_REFACTOR_BASELINE	PASS	METHOD_15=141 LOOP=211 CONST_HOIST=33 (ratchet: MOP passes may only lower these)
+S6_MODULE	PASS	module=jdk.m3.ewah exports=5 javac_warnings=55
+S7_JMOD_IMAGE	PASS	jmod=156666B image_modules=6 smoke=3
+S8_LAYER	PASS	files=67 layer=m3/vendor/third_party-m3/relocated/JavaEWAH

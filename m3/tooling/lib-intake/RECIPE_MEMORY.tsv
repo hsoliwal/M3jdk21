@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+utc	recipe	trigger	observed	correction	corrected_by	guard	lesson
+2026-10-30T14:20:00Z	lib_intake.sh	first draft review	jmod --legal-notices pointed at the whole source directory	a legal directory holding only LICENSE/NOTICE files	Claude (com-synexia-16)	jmod describe lists only the notices	legal-notices takes notices, never the source tree
+2026-10-30T14:20:00Z	lib_intake.sh	first draft review	the smoke test uses the source launcher, which needs jdk.compiler in the image	jlink adds jdk.compiler	Claude (com-synexia-16)	smoke prints 3 in the image	a smoke step's own runtime needs belong in the image
+2026-10-30T14:25:00Z	INTAKE.tsv	pom check	version 1.2.3 assumed; the vendored pom says 1.1.13-m3-source-1	version taken from the vendored pom	Claude (com-synexia-16)	image lists jdk.m3.ewah@1.1.13-m3-source-1	module versions come from provenance, never memory
+2026-10-30T14:35:00Z	lib_intake.sh	manual byte comparison after the first run	behaviour preservation was proven by hand	S1b_BCP gate in the recipe (byte-equal after name map)	Claude (com-synexia-16)	62/62 on rerun	every manual proof becomes a recipe gate
