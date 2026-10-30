@@ -3569,7 +3569,7 @@
             "signatures": [
               "jdk.internal.mindex.M3Class"
             ],
-            "sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+            "sha256": "e2c0731e03fbbfefde6098bab89a77fd8a54df2edde28cf6e206c93aec00e9c0",
             "git_blob_sha1": null,
             "fingerprint": null,
             "revision_role": "candidate",
@@ -3691,6 +3691,21 @@
                 "jdk.internal.mindex.M3Class"
               ],
               "sha256": null,
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "candidate",
+              "tracking_ref": null
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+              "symbol": "jdk.internal.mindex.M3Class",
+              "signatures": [
+                "jdk.internal.mindex.M3Class"
+              ],
+              "sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
               "git_blob_sha1": null,
               "fingerprint": null,
               "revision_role": "candidate",

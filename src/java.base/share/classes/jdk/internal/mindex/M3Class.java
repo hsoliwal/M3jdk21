@@ -56,7 +56,7 @@ public final class M3Class {
     }
 
     public String getCanonicalName() {
-        return canonicalName().map(Object::toString).orElse(null);
+        return canonicalName().orElse(null);
     }
 
     public String packageName() {
@@ -114,7 +114,8 @@ public final class M3Class {
     }
 
     public M3Class getSuperclass() {
-        return superclass().orElse(null);
+        int superRow = owner.superclassRow(row);
+        return superRow < 0 ? null : owner.classAt(superRow);
     }
 
     public Optional<M3Class> componentType() {
@@ -123,7 +124,8 @@ public final class M3Class {
     }
 
     public M3Class getComponentType() {
-        return componentType().orElse(null);
+        int componentRow = owner.componentTypeRow(row);
+        return componentRow < 0 ? null : owner.classAt(componentRow);
     }
 
     public Optional<M3Class> nestHost() {
@@ -132,7 +134,8 @@ public final class M3Class {
     }
 
     public M3Class getNestHost() {
-        return nestHost().orElse(this);
+        int hostRow = owner.nestHostRow(row);
+        return hostRow < 0 ? this : owner.classAt(hostRow);
     }
 
     public Optional<M3Class> declaringClass() {
@@ -141,7 +144,8 @@ public final class M3Class {
     }
 
     public M3Class getDeclaringClass() {
-        return declaringClass().orElse(null);
+        int declaringRow = owner.declaringClassRow(row);
+        return declaringRow < 0 ? null : owner.classAt(declaringRow);
     }
 
     public Optional<M3Class> enclosingClass() {
@@ -150,7 +154,8 @@ public final class M3Class {
     }
 
     public M3Class getEnclosingClass() {
-        return enclosingClass().orElse(null);
+        int enclosingRow = owner.enclosingClassRow(row);
+        return enclosingRow < 0 ? null : owner.classAt(enclosingRow);
     }
 
     public int interfaceCount() {
