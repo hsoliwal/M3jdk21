@@ -5,6 +5,7 @@ on:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3ObjectResidencyBorrowTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectResidencyReuseTest.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3IntLane28.java'
       - '.github/workflows/m3-doop-borrow-contract.yml'
@@ -58,7 +59,8 @@ jobs:
             -cp "$OUT/main:$RUNNER_TEMP/m3-junit-console.jar" \
             -d "$OUT/test" \
             "$TEST/M3ObjectResidencyTest.java" \
-            "$TEST/M3ObjectResidencyBorrowTest.java"
+            "$TEST/M3ObjectResidencyBorrowTest.java" \
+            "$TEST/M3ObjectResidencyReuseTest.java"
       - name: Execute unchanged and new contract under small heap
         shell: bash
         run: |
@@ -68,4 +70,5 @@ jobs:
             execute --disable-banner --fail-if-no-tests \
             --class-path "$OUT/main:$OUT/test" \
             --select-class com.m3.collections.M3ObjectResidencyTest \
-            --select-class com.m3.collections.M3ObjectResidencyBorrowTest
+            --select-class com.m3.collections.M3ObjectResidencyBorrowTest \
+            --select-class com.m3.collections.M3ObjectResidencyReuseTest
