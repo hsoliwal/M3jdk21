@@ -168,6 +168,44 @@ Every gate includes `owner_repository` and an `environment` object with `os`,
 is `hsoliwal/com.synexia`. The product verifier consumes these records as data
 and never executes command text supplied by a receipt.
 
+## Collect execution receipts into the manifest
+
+`collect_release_evidence.py` is the data-only receipt collector behind the
+manifest. It records the product gate commands that the release workflow
+already runs and binds existing receipts to the inspected HEAD; it never
+executes a Synexia recipe.
+
+| Gate | Producer | Receipt source |
+| --- | --- | --- |
+| `RIGHTS_AND_LICENSE_BOUNDARY` | `contract` job | `run --gate` (verifier checks `file:*`, `rights.*`) |
+| `SOURCE_TREE_AND_UPSTREAM_BASELINE` | `contract` job | `run --gate` (`--release` checks `git.upstream_baseline`, `git.merge_base`, `git.clean_source`, `git.single_release_commit`) |
+| `OPENJDK_SANITY_MATRIX` | `main.yml` | `assemble --gh` imports the run record of the newest successful run at HEAD |
+| `M3_FOUNDATION_TESTS` | `foundation` job | `run --gate` (`bash ./m3/build.sh`) |
+| `PRECOMPUTE_JAVA_DIFFERENTIAL` | `precompute` job | `run --gate` (`mvn -f m3/ports/precompute/pom.xml test`) |
+| `PRECOMPUTE_JNI_NATIVE_PARITY` | `precompute` job | `run --gate` (`-Pnative test`) |
+| `M3_MAVEN_CONTROL_REACTOR` | `hsoliwal/com.synexia` | imported from `queue/synexia/` (data-only receipt directory) |
+| `STRING_UTF16_CONTRACT` | unbound | PENDING until the contract names a producer |
+| `RELEASE_CLAIMS_VALIDATION` | `contract` job | `run --gate` (verifier, development mode) |
+| `PROOF_PACK_SHA256` | `contract` job | `run --gate` (verifier `--sha256-out`) |
+
+```sh
+python3 m3/release/collect_release_evidence.py gates
+python3 m3/release/collect_release_evidence.py run --gate M3_FOUNDATION_TESTS --toolchain "<exact JDK>"
+python3 m3/release/collect_release_evidence.py assemble          # queue/current/receipts + queue/synexia
+python3 m3/release/collect_release_evidence.py assemble --gh     # plus CI receipt artifacts at HEAD
+python3 m3/release/verify_release_admission.py --root . --release
+```
+
+`assemble` writes `queue/current/evidence.json` and `queue/current/pending.tsv`,
+copies every artifact under `queue/current/<GATE>/` after re-verifying its
+SHA-256, and exits 3 while any mandatory gate lacks a current `PASS` receipt.
+Receipts carry `source_commit`; a receipt for another commit is pending, not
+imported. A second run over unchanged receipts writes byte-identical files.
+Each workflow job uploads its receipts as `m3-gate-receipt-<job>-<sha>`; the
+`evidence` job assembles them, runs the verifier and uploads
+`m3-release-evidence-<sha>`. A collected manifest proves bytes and exit
+status only; reviewers still establish that each command covers its gate.
+
 ## Retained PR source and naming queues
 
 The first release workflow exports three **read-only review artifacts** alongside
