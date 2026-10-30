@@ -1,0 +1,367 @@
+package @PKG@;
+
+import static @PKG@.M3WebStates.*;
+
+/**
+ * Virtual collections (pattern M3P-COLLECTION-1, aspects R+G+D+P): rows or tiles over a long logical
+ * extent; only the resident window has rects. Per-row swipe offset (aux lane), board columns (group
+ * lane), overscroll pull with a refresh indicator on the OVERLAY plane, a load threshold, keyboard and
+ * drag reorder, message bubbles, a filtered command palette and a tile grid. Members: kanban-board,
+ * swipe-actions, pull-to-refresh, infinite-scroll, reorder-drag, message-list, command-palette, gallery.
+ */
+public class M3CollectionModel extends M3WebModel implements M3CollectionApi {
+	public static final int KANBAN = 0, SWIPE = 1, PULL = 2, INFINITE = 3, REORDER = 4, MESSAGES = 5, PALETTE = 6, GALLERY = 7;
+	private int pull, loadedAt = -1, threshold = 5, columns = 1, dragFrom = -1, dragX, dragY;
+
+	public M3CollectionModel(String concept, int role, int mode, int shape, int variant) {
+		super(concept, role, mode, shape, variant);
+		itemExtent = mode == MESSAGES ? 56 : mode == GALLERY ? 112 : 40;
+	}
+
+	@Override
+	public int aspects() {
+		return A_R | A_G | A_D | A_P;
+	}
+
+	@Override
+	public void load(String sample) {
+		clear();
+		for (String s : sample.split(";")) {
+			String[] f = s.split("~", -1);
+			boolean grouped = (mode == KANBAN || mode == MESSAGES) && f.length > 1;
+			int i = add(grouped ? f[1] : f[0]);
+			setGroup(i, grouped ? M3WebStates.parse(f[0]) : 0);
+		}
+	}
+
+	/** Positions per row: tile columns for the gallery, else 1. */
+	protected int perRow() {
+		return mode == GALLERY ? Math.max(1, width / itemExtent) : 1;
+	}
+
+	@Override
+	public long logicalExtent() {
+		return mode == KANBAN ? (long) columnDepth() * itemExtent : (long) ((logicalCount() + perRow() - 1) / perRow()) * itemExtent;
+	}
+
+	@Override
+	protected void project() {
+		super.project();
+		if (mode == GALLERY) {
+			int n = logicalCount(), per = perRow();
+			window[0] *= per; window[1] = Math.min(n, window[1] * per);
+			window[2] *= per; window[3] = Math.min(n, window[3] * per);
+		}
+	}
+
+	private int columnDepth() {
+		int[] depth = new int[Math.max(1, columns)];
+		int max = 0;
+		for (int i = 0; i < count; i++) {
+			max = Math.max(max, ++depth[Math.max(0, Math.min(depth.length - 1, group[i]))]);
+		}
+		return max;
+	}
+
+	@Override
+	protected void doLayout() {
+		columns = 1;
+		for (int i = 0; i < count; i++) {
+			setRect(i, 0, 0, 0, 0);
+			columns = mode == KANBAN ? Math.max(columns, group[i] + 1) : 1;
+		}
+		if (mode == KANBAN) {
+			board();
+		} else {
+			rows();
+		}
+		setPlane(OVERLAY, 0, 0, width, rowHeight() + pad());
+	}
+
+	private void rows() {
+		int per = perRow(), tile = width / per;
+		for (int k = window[2]; k < window[3]; k++) {
+			int i = itemAt(k), row = k / per, col = k % per;
+			int y = (int) ((long) row * itemExtent - scroll) + pull;
+			int x = mode == MESSAGES ? (group[i] == 1 ? width / 4 : 0) : col * tile;
+			int w = mode == MESSAGES ? width * 3 / 4 : mode == GALLERY ? tile : width;
+			setRect(i, x + (mode == SWIPE ? aux[i] : 0), y, w, itemExtent - (mode == GALLERY || mode == MESSAGES ? gap() : 1));
+		}
+	}
+
+	private void board() {
+		int colW = width / Math.max(1, columns);
+		int[] depth = new int[Math.max(1, columns)];
+		for (int i = 0; i < count; i++) {
+			int c = Math.max(0, Math.min(columns - 1, group[i]));
+			int y = rowHeight() + (int) ((long) depth[c]++ * itemExtent - scroll);
+			if (y + itemExtent > rowHeight() && y < height) {
+				setRect(i, c * colW + gap(), y, colW - 2 * gap(), itemExtent - gap());
+			}
+		}
+	}
+
+	@Override
+	protected void emit(M3WebPaint p) {
+		if (mode == KANBAN) {
+			headers(p);
+		}
+		if (mode == PULL && pull > 0) {
+			indicator(p);
+		}
+		for (int i = 0; i < count; i++) {
+			int b = i * 4;
+			if (rects[b + 2] > 0) {
+				cell(p, i, rects[b], rects[b + 1], rects[b + 2], rects[b + 3]);
+			}
+		}
+	}
+
+	private void headers(M3WebPaint p) {
+		int colW = width / Math.max(1, columns);
+		for (int c = 0; c < columns; c++) {
+			p.round(c * colW + 2, 0, colW - 4, height, radius(), M3WebTheme.mix(theme.slot(M3WebTheme.FG), theme.slot(M3WebTheme.BG), 4));
+			muted(p, "#" + (c + 1), c * colW + gap(), 0, colW - 2 * gap(), rowHeight(), M3WebPaint.BOLD);
+		}
+	}
+
+	private void indicator(M3WebPaint p) {
+		int r = rowHeight(), x = width / 2 - r / 2;
+		p.translate(plane(OVERLAY, 4), plane(OVERLAY, 5));
+		p.oval(x, Math.max(0, pull - r) / 2, r, r, theme.slot(M3WebTheme.SURFACE));
+		p.arc(x + 4, Math.max(0, pull - r) / 2 + 4, r - 8, r - 8, phase * 360 / 1000, Math.min(300, pull * 3), theme.slot(M3WebTheme.ACCENT));
+		p.translate(0, 0);
+	}
+
+	private void cell(M3WebPaint p, int i, int x, int y, int w, int h) {
+		if (mode == SWIPE && aux[i] < 0) {
+			p.rect(x + w + aux[i], y, -aux[i], h, theme.slot(M3WebTheme.DANGER));
+			p.text(x + w + aux[i], y, -aux[i], h, 0xffffff, font() | M3WebPaint.CENTER, "Delete");
+		}
+		boolean bubble = mode == MESSAGES || mode == KANBAN || mode == GALLERY;
+		int st = flags[i] | (i == focus ? SELECTED : 0);
+		if (bubble) {
+			p.round(x, y, w, h, radius(), mode == MESSAGES && group[i] == 1 ? theme.fill(V_PRIMARY, flags[i]) : theme.fill(V_DEFAULT, st));
+			p.roundLine(x, y, w, h, radius(), theme.line(V_DEFAULT, st));
+		} else {
+			p.rect(x, y, w, h, theme.fill(V_DEFAULT, st));
+			p.line(x, y + h, x + w, y + h, theme.slot(M3WebTheme.BORDER));
+		}
+		int ink = mode == MESSAGES && group[i] == 1 ? 0xffffff : theme.ink(V_DEFAULT, st);
+		String s = text[i] == null ? Integer.toString(i + 1) : text[i];
+		p.text(x + pad(), y, w - 2 * pad(), h, ink, font() | (mode == GALLERY ? M3WebPaint.CENTER : rtl ? M3WebPaint.RIGHT : 0), s);
+		if ((flags[i] & DRAGGING) != 0) {
+			p.roundLine(x + 1, y + 1, w - 2, h - 2, radius(), theme.slot(M3WebTheme.ACCENT));
+		}
+	}
+
+	@Override
+	protected boolean vertical() {
+		return mode != GALLERY;
+	}
+
+	@Override
+	public void scrollTo(long offset) {
+		super.scrollTo(offset);
+		if (mode == INFINITE && window[1] >= logicalCount() - threshold && loadedAt != count) {
+			loadedAt = count;
+			fire(-1, D_LOAD);
+		}
+	}
+
+	@Override
+	public void setThreshold(int items) {
+		threshold = Math.max(0, items);
+	}
+
+	@Override
+	public boolean needsMore() {
+		return mode == INFINITE && loadedAt == count;
+	}
+
+	@Override
+	public int pull() {
+		return pull;
+	}
+
+	@Override
+	public void endRefresh() {
+		setState(-1, LOADING, false);
+		pull = 0;
+		animating = false;
+		relayout(-1, D_LOAD);
+	}
+
+	@Override
+	public void move(int from, int to) {
+		check(from);
+		check(to);
+		String t = text[from], d = detail[from];
+		int f = flags[from], v = value[from], a = aux[from], g = group[from];
+		remove(from);
+		insertAt(to, t, d, f, v, a, g);
+		setFocus(to);
+	}
+
+	private void insertAt(int to, String t, String d, int f, int v, int a, int g) {
+		add(t, d);
+		for (int i = count - 1; i > to; i--) {
+			text[i] = text[i - 1]; detail[i] = detail[i - 1]; flags[i] = flags[i - 1];
+			value[i] = value[i - 1]; aux[i] = aux[i - 1]; group[i] = group[i - 1];
+		}
+		text[to] = t; detail[to] = d; flags[to] = f; value[to] = v; aux[to] = a; group[to] = g;
+		relayout(to, D_ITEMS);
+	}
+
+	@Override
+	public void moveToColumn(int item, int column) {
+		setGroup(item, Math.max(0, column));
+	}
+
+	@Override
+	public void swipe(int item, int offset) {
+		setAux(item, Math.max(-actionWidth(), Math.min(0, offset)));
+	}
+
+	/** Width of the revealed swipe action. */
+	protected int actionWidth() {
+		return rowHeight() * 3;
+	}
+
+	@Override
+	protected boolean onKey(int key, int ch, int mods) {
+		if (focus < 0) {
+			return false;
+		}
+		if ((mods & MOD_ALT) != 0 && (key == KEY_UP || key == KEY_DOWN) && mode != GALLERY) {
+			int to = focus + (key == KEY_DOWN ? 1 : -1);
+			if (to >= 0 && to < count) {
+				move(focus, to);
+			}
+			return true;
+		}
+		if (mode == KANBAN && (mods & MOD_CTRL) != 0 && (key == KEY_LEFT || key == KEY_RIGHT)) {
+			moveToColumn(focus, group[focus] + ((key == KEY_RIGHT) != rtl ? 1 : -1));
+			return true;
+		}
+		return listKey(key);
+	}
+
+	private boolean listKey(int key) {
+		switch (key) {
+		case KEY_DELETE:
+			if (mode == SWIPE) {
+				swipe(focus, aux[focus] < 0 ? 0 : -actionWidth());
+			}
+			return mode == SWIPE;
+		case KEY_PAGE_DOWN: case KEY_PAGE_UP:
+			int n = Math.max(1, viewLength() / itemExtent) * (key == KEY_PAGE_DOWN ? 1 : -1);
+			setFocus(Math.max(0, Math.min(count - 1, focus + n)));
+			reveal(focus);
+			return true;
+		default: return false;
+		}
+	}
+
+	@Override
+	public void setFocus(int item) {
+		super.setFocus(item);
+		if (item >= 0) {
+			reveal(item);
+		}
+	}
+
+	/** Scrolls the minimum so the item's row is inside the viewport. */
+	public void reveal(int item) {
+		int pos = item;
+		for (int k = 0; k < logicalCount(); k++) {
+			pos = itemAt(k) == item ? k : pos;
+		}
+		long top = (long) (pos / perRow()) * itemExtent;
+		if (mode != KANBAN && (top < scroll || top + itemExtent > scroll + viewLength())) {
+			scrollTo(top < scroll ? top : top + itemExtent - viewLength());
+		}
+	}
+
+	@Override
+	protected void activate(int item) {
+		if (mode == SWIPE && aux[item] < 0) {
+			remove(item);
+			fire(-1, D_ACTION);
+			return;
+		}
+		fire(item, D_ACTION);
+	}
+
+	@Override
+	protected void onWheel(int delta) {
+		if (mode == PULL && scroll == 0 && delta < 0) {
+			overscroll(-delta * 16);
+		} else {
+			scrollTo(scroll + (long) delta * itemExtent);
+		}
+	}
+
+	private void overscroll(int px) {
+		pull = Math.min(rowHeight() * 3, pull + px);
+		if (pull >= rowHeight() * 2 && !is(-1, LOADING)) {
+			setState(-1, LOADING, true);
+			animate();
+			fire(-1, D_LOAD);
+		}
+		movePlane(OVERLAY, 0, pull - rowHeight());
+		relayout(-1, D_SCROLL);
+	}
+
+	@Override
+	public void pointer(int kind, int x, int y, int mods) {
+		if (kind == P_DOWN) {
+			dragFrom = hitTest(x, y);
+			dragX = x;
+			dragY = y;
+		}
+		if (kind == P_UP && dragFrom >= 0) {
+			drop(x, y);
+		}
+		super.pointer(kind, x, y, mods);
+	}
+
+	@Override
+	protected void onDrag(int x, int y) {
+		if (dragFrom < 0 || dragFrom >= count) {
+			return;
+		}
+		if (mode == SWIPE) {
+			swipe(dragFrom, x - dragX);
+		} else if (mode == PULL && scroll == 0 && y > dragY) {
+			overscroll(Math.max(0, (y - dragY) / 2 - pull));
+		} else {
+			setState(dragFrom, DRAGGING, true);
+		}
+	}
+
+	private void drop(int x, int y) {
+		int from = dragFrom;
+		dragFrom = -1;
+		if (from >= count) {
+			return;
+		}
+		if (mode == SWIPE) {
+			swipe(from, aux[from] < -actionWidth() / 2 ? -actionWidth() : 0);
+		} else if (is(from, DRAGGING)) {
+			setState(from, DRAGGING, false);
+			int to = hitTest(x, y);
+			if (mode == KANBAN) {
+				moveToColumn(from, x * Math.max(1, columns) / Math.max(1, width));
+			} else if (to >= 0 && to != from) {
+				move(from, to);
+			}
+		}
+	}
+
+	@Override
+	protected boolean advance(int ms) {
+		phase = (phase + ms) % 1000;
+		return is(-1, LOADING);
+	}
+}
