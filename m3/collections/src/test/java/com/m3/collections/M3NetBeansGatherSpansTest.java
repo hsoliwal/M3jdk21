@@ -12,6 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
+// Modified 2026 by Hitesh Soliwal and contributors: qualify exact current Java/JNI physical-bounds failures.
 package com.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,12 +51,19 @@ final class M3NetBeansGatherSpansTest {
                             var fixture = new Fixture(length, shape);
                             long[] expected = fixture.expected(at);
                             fixture.ids[3 + at] = bad;
-                            Class<? extends IndexOutOfBoundsException> type =
-                                    backend == M3IndexMaskCompactor.Backend.JAVA
-                                            ? ArrayIndexOutOfBoundsException.class : IndexOutOfBoundsException.class;
-                            assertThrowsExactly(type, () -> M3LongAddressKernel.gatherInto(
-                                    fixture.payload, fixture.ids, 3, length, fixture.output, 5, backend));
+                            long[] oldPayload = fixture.payload.clone();
+                            int[] oldIds = fixture.ids.clone();
+                            ArrayIndexOutOfBoundsException failure = assertThrowsExactly(
+                                    ArrayIndexOutOfBoundsException.class,
+                                    () -> M3LongAddressKernel.gatherInto(fixture.payload, fixture.ids,
+                                            3, length, fixture.output, 5, backend));
+                            if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+                                assertEquals("Index " + bad + " out of bounds for length "
+                                        + fixture.payload.length, failure.getMessage());
+                            }
                             assertArrayEquals(expected, fixture.output);
+                            assertArrayEquals(oldPayload, fixture.payload);
+                            assertArrayEquals(oldIds, fixture.ids);
                         }
                     }
                 }
