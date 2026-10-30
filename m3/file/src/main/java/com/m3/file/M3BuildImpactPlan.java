@@ -128,6 +128,16 @@ public final class M3BuildImpactPlan {
         this.fullRebuild = fullRebuild;
     }
 
+    /**
+     * Require the exact M3File snapshot instance that produced these impact facts.
+     * Equal changed-slot masks do not establish identical source generations.
+     */
+    void requireSnapshot(M3FileDeltaLedger.Snapshot snapshot) {
+        if (snapshot != sourceSnapshot) {
+            throw new IllegalArgumentException("file impact belongs to a different M3File generation");
+        }
+    }
+
     /** Original physical file slot indexes in ascending order, never logical ordinals. */
     public int[] impactedSlots() { return impactedSlots.clone(); }
     public int size() { return impactedSlots.length; }
