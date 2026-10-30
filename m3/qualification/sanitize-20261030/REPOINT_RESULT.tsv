@@ -1,0 +1,2 @@
+consumer	before	after	gate	javac_errors	javac_warnings	module_gate	files_dropped	bytes_dropped	proof_mentions	proof_blocking	verdict
+m3/vendor/third_party/jsoup-1.17.2	jspecify-0.3.0 (0.3.0-m3-source-1)	jspecify-1.0.1 (1.0.1-m3-source-1)	javac --release 21 -Xlint:all: jspecify-1.0.1 then jsoup-1.17.2 src/main/java + versions overlays on its classes	0	177	PASS	17	66488	13	0	PASS
