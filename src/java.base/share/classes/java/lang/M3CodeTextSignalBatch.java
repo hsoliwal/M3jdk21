@@ -37,8 +37,20 @@ final class M3CodeTextSignalBatch {
             Limits limits) {
         validate(units, offsets, lengths, limits);
         long[] result = new long[offsets.length];
+        // Inputs are unchanged during this call. Reuse only the adjacent exact row;
+        // these scalar locals do not retain text or results between invocations.
+        int previousOffset = -1;
+        int previousLength = -1;
+        long previousValue = 0;
         for (int row = 0; row < result.length; row++) {
-            result[row] = pack(units, offsets[row], lengths[row]);
+            int offset = offsets[row];
+            int length = lengths[row];
+            if (offset != previousOffset || length != previousLength) {
+                previousValue = pack(units, offset, length);
+                previousOffset = offset;
+                previousLength = length;
+            }
+            result[row] = previousValue;
         }
         return result;
     }

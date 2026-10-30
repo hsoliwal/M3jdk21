@@ -230,6 +230,10 @@ Java_java_lang_M3CodeTextSignalBatch_analyzeNative(
     jint row_offsets[M3_CODE_ROWS];
     jint row_lengths[M3_CODE_ROWS];
     jlong values[M3_CODE_ROWS];
+    /* Invocation-local exact-row reuse also spans the bounded transfer chunks. */
+    jint previous_offset = -1;
+    jint previous_length = -1;
+    jlong previous_value = 0;
     for (jsize first = 0; first < row_count;) {
         jsize take = row_count - first;
         if (take > M3_CODE_ROWS) take = M3_CODE_ROWS;
@@ -243,9 +247,14 @@ Java_java_lang_M3CodeTextSignalBatch_analyzeNative(
                 m3_code_throw(env, "java/lang/IllegalArgumentException", "code-text row outside packed image");
                 return NULL;
             }
-            if (!m3_code_pack(env, units, row_offsets[row], row_lengths[row], &values[row])) {
-                return NULL;
+            if (row_offsets[row] != previous_offset || row_lengths[row] != previous_length) {
+                if (!m3_code_pack(env, units, row_offsets[row], row_lengths[row], &previous_value)) {
+                    return NULL;
+                }
+                previous_offset = row_offsets[row];
+                previous_length = row_lengths[row];
             }
+            values[row] = previous_value;
         }
         (*env)->SetLongArrayRegion(env, result, first, take, values);
         if ((*env)->ExceptionCheck(env)) return NULL;
