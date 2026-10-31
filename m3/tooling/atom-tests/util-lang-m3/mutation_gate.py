@@ -42,9 +42,12 @@ def main():
             continue
         with open(target, "w", encoding="utf-8", newline="\n") as w:
             w.write(text.replace(original, mutated))
-        compiled = run([JDK + "/bin/javac", "-d", os.path.join(work, "classes"), "--patch-module",
-                        "java.base=" + src_root + os.pathsep + stage, "-implicit:none", "-XDignore.symbol.file",
-                        "-nowarn", target])
+        for others in (classes, stage):  # compiled siblings first; staged M3 core API sources as fallback
+            compiled = run([JDK + "/bin/javac", "-d", os.path.join(work, "classes"), "--patch-module",
+                            "java.base=" + src_root + os.pathsep + others, "-implicit:none",
+                            "-XDignore.symbol.file", "-nowarn", target])
+            if compiled.returncode == 0:
+                break
         if compiled.returncode != 0:
             results.append((mid, path, test_class, test_method, "INVALID", "mutant does not compile"))
             continue

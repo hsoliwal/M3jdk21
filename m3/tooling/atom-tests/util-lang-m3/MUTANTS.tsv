@@ -11,3 +11,9 @@ M09	java/lang/M3StringCodePointPrecompute.java	                if ((long) paired
 M10	java/lang/M3StringBuilderLane.java	                ? (char) (flat[index] & 0xff)	                ? (char) flat[index]	M3StringBuilderLaneAtomsTest	flatCharAt
 M11	java/lang/M3StringLeafCursor.java	            if (rawOwner == owner && start + length == rawStart) {	            if (rawOwner == owner) {	M3StringLeafCursorAtomsTest	next
 M12	java/util/M3ComparisonSorts.java	        return order < 0 || (order == 0 && left < right) ? left : right;	        return order < 0 || (order == 0 && left > right) ? left : right;	M3ComparisonSortsAtomsTest	tournamentWinner
+M13	java/lang/M3ObjectRuntime.java	                return left == right;	                return left.equals(right);	M3ObjectRuntimeAtomsTest	plan_same
+M14	java/lang/M3ObjectRuntime.java	            return subscriberCount != 0 || parentCount != 0;	            return subscriberCount != 0;	M3ObjectRuntimeAtomsTest	state_interested
+M15	jdk/internal/m3/M3IndexedArray.java	return ((long) generation << 32) | Integer.toUnsignedLong(slot);	return ((long) generation << 32) | slot;	M3IndexedArrayAtomsTest	pack
+M16	jdk/internal/m3/M3IntAlgorithms.java	&& (value == Integer.MIN_VALUE	&& (false	M3IntAlgorithmsAtomsTest	lonelySparse
+M17	jdk/internal/util/M3PipelinePlan.java	if (filter) nextFilterMask[pageIndex] |= 1L << lane;	if (!filter) nextFilterMask[pageIndex] |= 1L << lane;	M3PipelinePlanAtomsTest	append
+M18	java/lang/M3ObjectRuntime.java	int accepted = state.requested[i] & mask;	int accepted = mask;	M3ObjectRuntimeAtomsTest	captureLocked

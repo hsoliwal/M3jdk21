@@ -11,3 +11,9 @@ M09	java/lang/M3StringCodePointPrecompute.java	M3StringCodePointPrecomputeAtomsT
 M10	java/lang/M3StringBuilderLane.java	M3StringBuilderLaneAtomsTest	flatCharAt	KILLED	exit=1
 M11	java/lang/M3StringLeafCursor.java	M3StringLeafCursorAtomsTest	next	KILLED	exit=1
 M12	java/util/M3ComparisonSorts.java	M3ComparisonSortsAtomsTest	tournamentWinner	KILLED	exit=1
+M13	java/lang/M3ObjectRuntime.java	M3ObjectRuntimeAtomsTest	plan_same	KILLED	exit=1
+M14	java/lang/M3ObjectRuntime.java	M3ObjectRuntimeAtomsTest	state_interested	KILLED	exit=1
+M15	jdk/internal/m3/M3IndexedArray.java	M3IndexedArrayAtomsTest	pack	KILLED	exit=1
+M16	jdk/internal/m3/M3IntAlgorithms.java	M3IntAlgorithmsAtomsTest	lonelySparse	KILLED	exit=1
+M17	jdk/internal/util/M3PipelinePlan.java	M3PipelinePlanAtomsTest	append	KILLED	exit=1
+M18	java/lang/M3ObjectRuntime.java	M3ObjectRuntimeAtomsTest	captureLocked	KILLED	exit=1

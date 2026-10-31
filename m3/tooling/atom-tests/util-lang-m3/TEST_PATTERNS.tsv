@@ -1,4 +1,17 @@
 owner	atom	pattern	test	oracle
+jdk.internal.m3.M3IntAlgorithms	M3IntAlgorithms	PRIVATE_THROWING_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::M3IntAlgorithms	AssertionError from the private constructor
+jdk.internal.m3.M3IntAlgorithms	lonelyDense	INT_LONELY	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::lonelyDense	HashMap-count lonely-number oracle in input order
+jdk.internal.m3.M3IntAlgorithms	lonelySparse	INT_LONELY	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::lonelySparse	HashMap-count lonely-number oracle in input order
+jdk.internal.m3.M3IntAlgorithms	hasBit	BIT_TEST	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::hasBit	java.util.BitSet.valueOf(words).get(index)
+jdk.internal.m3.M3IntAlgorithms	tableCapacity	INT_TABLE_CAPACITY	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::tableCapacity	smallest power of two >= 2 * length; OOME past the cap
+jdk.internal.m3.M3IntAlgorithms	findSlot	INT_HASH_SLOT	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::findSlot	java.util.HashSet membership over an open-addressing table
+jdk.internal.m3.M3IntAlgorithms	contains	INT_HASH_SLOT	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::contains	java.util.HashSet membership over an open-addressing table
+jdk.internal.m3.io.M3IO	M3IO	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IOAtomsTest.java::M3IO	reflection: one private constructor, no state
+jdk.internal.m3.io.M3IO	active	BIT_TEST	test/jdk/jdk/internal/m3/atoms/M3IOAtomsTest.java::active	java.util.BitSet.valueOf(words).get(index)
+jdk.internal.util.M3PipelinePlan	M3PipelinePlan	PIPE_CONSTRUCTOR	test/jdk/jdk/internal/util/M3Atoms/M3PipelinePlanAtomsTest.java::M3PipelinePlan	empty plan is the identity pipeline
+jdk.internal.util.M3PipelinePlan	append	PIPE_APPEND	test/jdk/jdk/internal/util/M3Atoms/M3PipelinePlanAtomsTest.java::append	java.util.stream filter/map pipeline; persistence across appends
+jdk.internal.util.M3PipelinePlan	traverse	PIPE_TRAVERSE	test/jdk/jdk/internal/util/M3Atoms/M3PipelinePlanAtomsTest.java::traverse	java.util.stream order of surviving values
+jdk.internal.util.M3PipelinePlan	accept	PIPE_SINK_ACCEPT	test/jdk/jdk/internal/util/M3Atoms/M3PipelinePlanAtomsTest.java::accept	one accept call per surviving value
 java.lang.M3ObjectRuntime	M3ObjectRuntime	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::M3ObjectRuntime	reflection: one private constructor, no state
 java.lang.M3ObjectRuntime	enabled	OBJ_ENABLED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::enabled	startup property jdk.m3.objectEvents.enabled=true
 java.lang.M3ObjectRuntime	of	OBJ_OF	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::of	identity-bound capability, same as M3Object.of

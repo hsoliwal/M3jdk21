@@ -1,12 +1,12 @@
 row	package	before_UNTESTED	before_CLASS_ONLY	before_TESTED	before_PRESENT	after_UNTESTED	after_CLASS_ONLY	after_TESTED	after_PRESENT
 PACKAGE	java.util	90	220	45	264	0	220	135	279
-PACKAGE	java.lang	65	340	236	260	31	336	274	264
-PACKAGE	jdk.internal.m3	46	46	54	28	0	44	102	33
-PACKAGE	jdk.internal.m3.io	0	2	5	0	0	2	5	0
-PACKAGE	jdk.internal.util	0	18	20	0	0	18	20	0
+PACKAGE	java.lang	65	340	236	260	0	325	316	297
+PACKAGE	jdk.internal.m3	46	46	54	28	0	26	120	15
+PACKAGE	jdk.internal.m3.io	0	2	5	0	0	0	7	0
+PACKAGE	jdk.internal.util	0	18	20	0	0	14	24	0
 PACKAGE	jdk.internal.misc	0	6	6	0	0	6	6	0
 PACKAGE	java.util.regex	0	12	5	0	0	12	5	0
-TOTAL	TOTAL	662	1265	920	647	492	1258	1097	674
+TOTAL	TOTAL	662	1265	920	647	461	1222	1164	690
 SIDE_EFFECT	java.lang	M3String	activate	CLASS_ONLY->TESTED
 SIDE_EFFECT	java.lang	M3String	encode	CLASS_ONLY->TESTED
 SIDE_EFFECT	java.lang	M3String	span	CLASS_ONLY->TESTED
@@ -17,3 +17,4 @@ SIDE_EFFECT	java.lang	M3StringSearchPrecompute.Entry	Entry	CLASS_ONLY->TESTED
 SIDE_EFFECT	jdk.internal.m3	M3IndexedArray	viewValue	CLASS_ONLY->TESTED
 SIDE_EFFECT	jdk.internal.m3	M3IndexedArray	viewValue	CLASS_ONLY->TESTED
 SIDE_EFFECT	jdk.internal.mindex	M3DotStarRelations.Access	coordinate	CLASS_ONLY->TESTED
+SIDE_EFFECT	jdk.internal.mindex	M3DotStarRelations.Access	first	CLASS_ONLY->TESTED
