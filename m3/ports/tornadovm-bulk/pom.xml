@@ -11,7 +11,7 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>5.11.4</junit.version>
+    <junit.version>5.10.2</junit.version>
     <tornadovm.version>7.2.0</tornadovm.version>
     <m3.gpu>false</m3.gpu>
   </properties>
