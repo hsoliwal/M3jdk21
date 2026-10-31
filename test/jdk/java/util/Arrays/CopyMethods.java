@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -302,7 +303,51 @@ public class CopyMethods {
         return x;
     }
 
+    /** Frozen pre-update exception types, including subtraction-overflow and null precedence. */
+    static void rangeBoundaryFailures() {
+        int[][] bounds = {
+            {Integer.MAX_VALUE, Integer.MIN_VALUE}, {1, Integer.MIN_VALUE},
+            {Integer.MIN_VALUE, Integer.MAX_VALUE}, {Integer.MIN_VALUE, Integer.MIN_VALUE},
+            {Integer.MAX_VALUE, Integer.MAX_VALUE}, {-2, 1}, {2, 1}, {0, -1}
+        };
+        Class<?>[] nonnull = {IllegalArgumentException.class, IllegalArgumentException.class,
+            NegativeArraySizeException.class, ArrayIndexOutOfBoundsException.class,
+            ArrayIndexOutOfBoundsException.class, ArrayIndexOutOfBoundsException.class,
+            IllegalArgumentException.class, IllegalArgumentException.class};
+        Class<?>[] nullable = {IllegalArgumentException.class, IllegalArgumentException.class,
+            NegativeArraySizeException.class, NullPointerException.class,
+            NullPointerException.class, NullPointerException.class,
+            IllegalArgumentException.class, NullPointerException.class};
+        int checks = 0;
+        for (Class<?> type : allTypes) {
+            if (!type.isPrimitive()) continue;
+            for (int length : new int[] {-1, 0, 2}) {
+                Object owner = length < 0 ? null : Array.newInstance(type, length);
+                for (int index = 0; index < bounds.length; index++) {
+                    int from = bounds[index][0], to = bounds[index][1];
+                    Class<?> expected = (length < 0 ? nullable : nonnull)[index];
+                    try {
+                        cloneRangers.get(type).invoke(null, owner, from, to);
+                        throw new AssertionError("range must fail: " + type + ":" + from + ":" + to);
+                    } catch (InvocationTargetException failure) {
+                        if (failure.getCause().getClass() != expected) {
+                            throw new AssertionError(type + " length=" + length + " from=" + from
+                                    + " to=" + to + " expected=" + expected.getSimpleName()
+                                    + " actual=" + failure.getCause().getClass().getSimpleName(), failure.getCause());
+                        }
+                    } catch (IllegalAccessException failure) {
+                        throw new AssertionError(failure);
+                    }
+                    checks++;
+                }
+            }
+        }
+        if (checks != 192) throw new AssertionError("incomplete boundary matrix: " + checks);
+        System.out.println("COPY_RANGE_BOUNDARY_PASS checks=" + checks);
+    }
+
     public static void main(String[] av) {
+        rangeBoundaryFailures();
         boolean verbose = (av.length != 0);
         muzzle = (verbose? 0: 1);
         if (muzzle == 0)
