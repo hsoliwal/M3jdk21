@@ -1,0 +1,96 @@
+{
+  "schema": "M3_STRING_SOURCE_BUILD_REPAIR_RECEIPT_V1",
+  "date": "2026-10-31",
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and contributors",
+  "status": "STRICT_IMAGE_AND_SCOPED_JNI_PASS; FULL_PROGRAMME_HOLD",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "bb85915e36dce8bb0bf00d759eb66d880cf16fb5",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/14732",
+  "canonical_base": "c3655189fe32412bce1d6e034178e3d596d26494",
+  "recipe_id": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "task_id": "m3-string-source-encoding-20261031",
+  "execution_plane": "OPENREWRITE_SDK_EXECUTION",
+  "manifest_sha256": "93458648c8d1b518c701007a1a5df5f16b34de935b675025081e7ecefe292ca4",
+  "target_base": "c387710a3febc651f914750e3171e867f1574753",
+  "outputs": [
+    {
+      "path": "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+      "before_sha256": "ccff8a845ecb7624c1c00d6b7f12024205a8cf2eef68946b5227e09259e3e3d8",
+      "after_sha256": "56937de3babd2ce97123152f7dbcf65c0a2552d9aa676c852c9ad7fdc39e7371",
+      "before_git_blob": "d61b6318f4b5412399ac22d1c2c47fbdb1dc62ba",
+      "after_git_blob": "7b98437128ebdadafa276f459366b44136e8784e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before_sha256": "e58572f899f63d73c868c6a627b75843d8d3534e51ca61673f0c31ef3fe0cdeb",
+      "after_sha256": "2ce9765f3f259df3bea52e42e17c9b27b2a2133085a43671325a2fca704e2a29",
+      "before_git_blob": "751d4530ca0cb63255bdb11ee891c7a0353a6613",
+      "after_git_blob": "e9ff3fa108a38d0fbcbfd14ab18897502f0400d2"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/events/EventConfigurations.java",
+      "before_sha256": "64afcbb79fbb4d2a0815206faae901e68dae220498da45fada6d18074778d7e6",
+      "after_sha256": "e8e0baa316cdb048a85a5c52d9e06389a00b44de5d4e4bd87aaf2134b7de3b99",
+      "before_git_blob": "066d61473c1d442f8c5d6f301fc65cffdd197ab8",
+      "after_git_blob": "b4c143da655fa6da871c6fdaf3567759bcb05d3e"
+    }
+  ],
+  "changes": {
+    "string_comment_characters": 8,
+    "jfr_receiver_identifiers": 7,
+    "java_files": 3,
+    "native_source_files": 0,
+    "new_string_owners": 0
+  },
+  "verification": {
+    "sdk_tests": 8,
+    "sdk_failures": 0,
+    "sdk_errors": 0,
+    "sdk_skipped": 0,
+    "all_mixed_states": 8,
+    "input_orders_per_state": 2,
+    "structural_target_tests": 36,
+    "strict_java_base_source_files": 3626,
+    "strict_jfr_source_files": 313,
+    "full_images_exit": 0,
+    "cds_archives": [
+      "classes.jsa",
+      "classes_nocoops.jsa"
+    ],
+    "warnings_as_errors": true,
+    "packaged_image_jni_projection_modes": [
+      "default",
+      "no-compact",
+      "interpreted",
+      "c1"
+    ],
+    "jni_checks_per_mode": 370,
+    "xcheck_jni": true,
+    "packaged_image_jfr_startup_exit": 0,
+    "jfr_recording_bytes": 226452,
+    "sdk_product_postimages_exact": true,
+    "independent_review": "No product defects; provenance-origin and registry-classification findings corrected with observed red tests and final green suite"
+  },
+  "environment_recovery": [
+    "Existing source-owned Java21 parser rebuilt without source changes",
+    "Direct javac used after stale javac-server socket",
+    "Six interrupted zero-byte object outputs rebuilt; all 1233 HotSpot objects verified by nm",
+    "Checksum-pinned CUPS image development package extracted to local sysroot",
+    "Existing ALSA_LIBS variable points to actual multiarch library directory"
+  ],
+  "qualification_holds": {
+    "full_string_invariants": "Eleven later predicates remain for current-semantic qualification",
+    "tuple_history_recovery": "Current-image correctness and performance evaluation still required",
+    "arrays_naming": "Source hash drift and existing candidate PR reconciliation remain",
+    "overflow_oracle": "Import owner and three pinned source drifts remain",
+    "full_borrow": "Depth-1 ancestry prerequisite unqualified",
+    "canonical_provenance": "Candidate shard validates; full ledger hydration/registration pending",
+    "source_only_reactor": "Focused SDK includes existing binary transitives; full source-only reactor not qualified",
+    "runtime": "One existing JNI projection test matrix and JFR startup only; full jtreg/JCK/GC/JNI/performance not qualified",
+    "broader_programme": "Collections, streams/shadows, file deltas and complete history audit remain open"
+  },
+  "public_contract_changed": false,
+  "receiving_sequence_advanced": false,
+  "automatic_merge": false
+}

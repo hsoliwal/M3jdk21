@@ -381,7 +381,7 @@ public final class String
             return;
         }
 
-        //FLLDCIM: MERGE-21U — 8311906: compress returns the result array (never null); its length gives the coder
+        //FLLDCIM: MERGE-21U - 8311906: compress returns the result array (never null); its length gives the coder
         if (COMPACT_STRINGS) {
             byte[] val = StringUTF16.compress(codePoints, offset, count);
             this.value = val;
@@ -639,8 +639,8 @@ public final class String
         if (direct != null) {
             return new M3Construction(direct);
         }
-        //FLLDCIM: MERGE-21U — 8311906/8321180 ported onto the M3Construction helper: decode from a stable copy,
-        //FLLDCIM: MERGE-21U — newBytesFor checks the UTF16 size, compress results carry their coder by length
+        //FLLDCIM: MERGE-21U - 8311906/8321180 ported onto the M3Construction helper: decode from a stable copy,
+        //FLLDCIM: MERGE-21U - newBytesFor checks the UTF16 size, compress results carry their coder by length
         if (charset == UTF_8.INSTANCE) {
             if (COMPACT_STRINGS) {
                 int dp = StringCoding.countPositives(bytes, offset, length);
@@ -2377,7 +2377,7 @@ public final class String
             return false;
         }
         // Any strings match if len <= 0
-        if (len <= 0) { //FLLDCIM: MERGE-21U — upstream len <= 0 rule ahead of the M3 slice path
+        if (len <= 0) { //FLLDCIM: MERGE-21U - upstream len <= 0 rule ahead of the M3 slice path
            return true;
         }
         M3String leftM3 = m3();
@@ -5414,7 +5414,7 @@ public final class String
             return;
         }
 
-        //FLLDCIM: MERGE-21U — 8311906: compress returns the result array (never null); its length gives the coder
+        //FLLDCIM: MERGE-21U - 8311906: compress returns the result array (never null); its length gives the coder
         if (COMPACT_STRINGS) {
             byte[] val = StringUTF16.compress(value, off, len);
             this.value = val;
@@ -5458,7 +5458,7 @@ public final class String
             candidateCoder = LATIN1;
         } else {
             // only try to compress val if some characters were deleted.
-            //FLLDCIM: MERGE-21U — 8311906: compress returns the result array (never null); its length gives the coder
+            //FLLDCIM: MERGE-21U - 8311906: compress returns the result array (never null); its length gives the coder
             if (COMPACT_STRINGS && asb.maybeLatin1) {
                 candidate = StringUTF16.compress(val, 0, length);
                 candidateCoder = StringUTF16.coderFromArrayLen(candidate, length);
