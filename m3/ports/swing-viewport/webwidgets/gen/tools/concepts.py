@@ -32,7 +32,10 @@ direction orientation alignment configuration config context scope source templa
 accessibility device system responsive relative position size font check edit gesture touchable recognizer click brush shadow border gradient
 visual app locale version environment client only no ssr init script provider portal key keys of for with on is in at by""".split())
 FAMILY_ORDER = ["TOKEN", "CONTAINER", "OVERLAY", "ANIMVALUE", "SEGMENTS", "COMMANDS", "INPUT", "PICKER", "COLLECTION", "PLOT", "EMBED"]
-STATUS_RANK = {"gap": 0, "primitive": 1, "rare": 2, "style-bit": 3}
+STATUS_RANK = {"gap": 0, "new": 1, "primitive": 2, "rare": 3, "style-bit": 4}
+NEW_FORMS = {"emoji-picker": "a two-level cascade (category, emoji) on the picker pop-up plane; emoji glyphs as text runs",
+             "signature-pad": "a drawing surface: stroke points in a packed int lane painted as polylines (TODO M3P-EMBED-1 stroke capture)",
+             "splash-screen": "a centred modal overlay plane with title, message and a progress phase"}
 
 
 def load_matcher(path):
@@ -63,6 +66,99 @@ def best_concept(name, aliases, tokens):
     return ([], "T3_NON_WIDGET") if words & NON_WIDGET else ([], "UNMAPPED")
 
 
+# Tier 6 (2026-10-31): clusters of the remaining names, from a CPU token census of the UNMAPPED rows.
+# Words match exactly; in all-lowercase concatenations (GTK, wx) they also match as substrings.
+CLUSTER = {"backdrop": "watermark blockui", "drawer": "offcanvas", "menu": "megamenu tieredmenu overflow", "panel": "dock frame",
+           "table": "dataview descriptions", "code-block": "terminal", "navigation": "navigator burger", "layout-primitive": "region scaffold layout",
+           "image": "logo figure magnifier thumb illustration texture foldercover", "transition-anim": "lottie circularreveal", "icon": "svg octicon",
+           "select": "roller tumbler", "label": "span", "card": "hero elevation", "chart": "legend viz curves", "infinite-scroll": "deferredcontent",
+           "gallery": "galleria", "text-input": "iconfield inplace autofill", "reorder-drag": "orderlist", "list": "picklist repeater",
+           "affix": "scrolltop backtop", "fab": "speeddial", "tabs": "tabmenu", "tree": "treenode", "virtual-list": "virtualscroller",
+           "stepper": "steplist", "tooltip": "tip", "stat-kpi": "countdown timer digits", "avatar": "persona", "accordion": "expandable expansible",
+           "qr-code": "barcode", "video-player": "camera media", "toggle-button": "toggler toggleable", "chip": "tags", "slider": "adjuster adjustment",
+           "dialog": "dlg window about login", "tray-status": "statusbr", "scroll": "scrolwin viewport", "time-picker": "clock",
+           "button": "btn pressable copy", "toast": "feedback note", "progress": "circle arc"}
+NON_WIDGET_SUB = ("private", "impl", "builder", "buildable", "constraint", "css", "accessible", "action", "bitmask", "bitset", "utils",
+                  "factory", "model", "filter", "sorter", "expression", "parser", "solver", "types", "context", "boundary", "error",
+                  "dictionary", "flags", "constants", "properties", "setter", "dependency", "exception", "hooks", "internal", "debug", "class")
+
+
+# Tier 7 (2026-10-31): every remaining name, by hand-checked cluster (exact words; substrings in lowercase concatenations).
+FINAL = {"card": "cards coupon", "avatar": "facepile", "badge": "chiclet", "kbd": "keytip qkeysequenceedit hotkeys shortcuts gtkshortcut accel",
+         "tooltip": "toggletip whisper", "app-bar": "masthead", "tabs": "pivot qtabwidget tabg tabstrip", "link": "skiplinks jumplinks",
+         "skeleton": "shimmer", "backdrop": "dimmer", "popover": "flyout", "tour": "beacon", "stat-kpi": "stopwatch count-down qlcdnumber",
+         "led-gauge": "qdial statuslight lights lightup compass", "progress": "gtklevelbar", "toast": "notifmsg notify announced",
+         "dialog": "msgbox choicdgg help helpext welcome", "spinner-loading": "busyinfo preloader", "infinite-scroll": "lazyload feed",
+         "transition-anim": "gtkrevealer reveal animateonscroll animate tweener fx effectwidget", "chart": "diagram scatter",
+         "grid": "tileview gtkflowbox gtkgrid gridctrl gridsel", "list": "listctrl gtklistbase gtklistitem listitem lists gtkstringlist gtkdirectorylist gtkenumlist gtkbookmarklist collections",
+         "tree": "treectlg dirctrlg", "splitter": "gtkpaned sashwin laywin qsizegrip resizegripper qrubberband", "panel": "qmdiarea screenmanager mdig",
+         "accordion": "qtoolbox collpaneg", "menu": "qmenu menus slidemenu", "text-area": "gtktext gtktextbuffer gtktextchild gtktextiter gtktextmark gtktexttag caret multiline_output",
+         "message-list": "rich_log log logg comment barrage", "search": "srchctlg", "number-input": "spinctlg", "date-picker": "datectrl",
+         "time-picker": "timectrl", "calendar": "calctrlg", "file-upload": "filectrlg file filetrigger drop gtkdroptarget gtkdroptargetasync",
+         "reorder-drag": "draganddrop gtkdragsource gtkdragicon dragimgg", "image": "statbmpg bitmap pixmap gif imaglist interactive_viewer mascot brand branding advertisement cover",
+         "icon": "iconbase gtkicontheme flag", "label": "stattextg statline static strong em rst formattedstring textrotate ellipsis gtkinscription timestamp quote",
+         "layout-primitive": "gtkfixed gtkbox composite positioner fluid reflow auto_sizer well block sibling orphan inset viewbox stretch ratio boundingdimensions",
+         "virtual-list": "gtkscrollinfo virtualizer virtualizationcachelength", "rich-text-editor": "documentviewer flowdocumentreader monaco",
+         "code-block": "jsonformatter", "video-player": "ffmpeg gstreamer", "web-view": "embed sandbox", "slider": "valuator tracker",
+         "emoji-picker": "gtkemojichooser emoji", "signature-pad": "signature", "splash-screen": "splash qsplashscreen"}
+SUPPORT = set("""accountconnection adaptivetrigger afterinitialmount application cairo castingenumerator charactercasing common commonmanaged commonstyles
+connected controls decorator depdendenthandle design distribution dllhost effects export fabric free generated grommet lockingsemaphore materials
+object observablewrapper output pack performance plugin preferences printer profiler promptarguments rect registrar routing samples scheme screens
+setinterval site spellingreform streamwrapper tabularshaping targetidiom telemetry adapter ai ai-components api as_ref async aura automatic_keep_alive
+basic behavior binder borders clear colors colour componentbase compose-refs confirmationeventbus confirmationoptions confirmationservice core crud
+ctrlsub cursor custombgwin dcpsg delay_hide description diff dll drawable dvrenderer dvrenderers facet fill focusable functions fswatcher gesturesurface
+gtkapplication gtkborder gtkdrawingarea gtkgesture gtkgestureclick gtkgesturedrag gtkgesturelongpress gtkgesturepan gtkgesturerotate gtkgesturesingle
+gtkgesturestylus gtkgesturezoom gtkglarea gtkimmodule gtkmain gtkmountoperation gtknative gtkrecentmanager gtkroot gtksettings gtkshortcutmanager
+gtkshortcuttrigger gtksizerequest gtksnapshot gtkunixprint gtkurilauncher gtkwidget gtkfilelauncher gtkenums health id ime inc include index
+interface_level intersection keyed lib licensing localizations material material_localizations math merge-props mergeable_material mockup mod
+nine_patch_rect objx_templ pages paletteg passthrough polyfills pretty printps reference_rect reset resize-sensor resources restoration role root
+routes sensor settings shader shadows shape stateful stencilview stepitem swap themer touch transformation umd undo_history useconfirm userevents
+usestyle utilities validator win bmpcbox""".split())
+
+
+def final(name, tokens):
+    words, joined = tokens(name)
+    low = name.lower()
+    concat = name.islower() and "_" not in name and "-" not in name
+    hits = sorted({c for c, al in FINAL.items() for a in al.split() if a and (a in words or low == a or (concat and a in joined))})
+    if hits:
+        return hits, "T7_FINAL"
+    if low in SUPPORT or words & SUPPORT:
+        return [], "T3_NON_WIDGET"
+    return [], "UNMAPPED"
+
+
+def cluster(name, path, tokens):
+    words, joined = tokens(name)
+    concat = name.islower() and "_" not in name and "-" not in name
+    hits = sorted({c for c, al in CLUSTER.items() for a in al.split() if a in words or (concat and a in joined)})
+    if hits:
+        return hits, "T6_CLUSTER"
+    if any(n in joined for n in NON_WIDGET_SUB):
+        return [], "T3_NON_WIDGET"
+    return final(name, tokens)
+
+
+PREFIXES = ("Gtk", "Gdk", "Wx", "wx", "Fl_", "lv_", "Ion", "Mud", "Kendo", "Md", "Mat", "El", "Ant", "Rad", "Sf", "Dx", "Ui", "UI", "V", "Q", "N", "T", "Ons", "F7")
+
+
+def best_with_fallbacks(name, path, aliases, tokens):
+    cs, tier = best_concept(name, aliases, tokens)
+    if cs or tier == "T3_NON_WIDGET":
+        return cs, tier
+    for pre in PREFIXES:
+        rest = name[len(pre):]
+        if name.startswith(pre) and rest and (rest[0].isupper() or pre.endswith("_")):
+            cs2, t2 = best_concept(rest, aliases, tokens)
+            if cs2:
+                return cs2, "T4_PREFIX"
+    for seg in reversed(path.split("/")[:-1]):
+        cs3, t3 = best_concept(seg, aliases, tokens)
+        if cs3 and t3 in ("T1_ALIAS", "T2_WORD"):
+            return cs3, "T5_PATH"
+    return cluster(name, path, tokens)
+
+
 def verify(existing, nebula, swt, jdk, m3port=frozenset()):
     if not existing or existing == "-":
         return ""
@@ -85,6 +181,8 @@ def main():
     aliases, tokens = load_matcher(os.path.join(inp, "universe_concepts.py"))
     uni = {r["concept"]: r for r in tsv(os.path.join(inp, "UNIVERSE_CONCEPTS.tsv"))}
     smap = {r["concept"]: r for r in tsv(os.path.join(inp, "SUPERSET_WIDGET_MAP.tsv"))}
+    for c, form in NEW_FORMS.items():
+        smap.setdefault(c, {"concept": c, "home": "new", "kits": "0", "swt_class": "", "nebula_class": "", "needs_input_events": "", "superset_form": form})
     members = {r["concept"]: r for r in tsv(members_path)}
     nebula = {l.strip().split("/src/", 1)[-1] for l in open(os.path.join(inp, "NEBULA_TREE.txt")) if "/src/" in l}
     swt = {l.strip() for l in open(os.path.join(inp, "SWT_JAR.txt"))}
@@ -92,16 +190,21 @@ def main():
     m3port = {l.strip() for l in open(os.path.join(inp, "M3PORT.txt"))}
     swingx = sorted(set(open(os.path.join(inp, "SWINGX.txt")).read().split()))
     comps = tsv(os.path.join(inp, "UNIVERSE_COMPONENTS.tsv"))
+    add = os.path.join(inp, "HARVEST_ADDENDUM.tsv")
+    harvested = len(comps)
+    if os.path.exists(add):
+        comps += tsv(add)
     per = collections.Counter()
     with open(os.path.join(out, "COMPONENT_CONCEPTS.tsv"), "w", encoding="utf-8", newline="\n") as w:
         w.write("repo\tcomponent\tpath\tconcept\tfamily\tall_concepts\n")
         for r in comps:
-            cs, tier = best_concept(r["component"], aliases, tokens)
+            cs, tier = best_with_fallbacks(r["component"], r["path"], aliases, tokens)
             c = cs[0] if cs else ("NON_WIDGET" if tier == "T3_NON_WIDGET" else "UNMAPPED")
+            per_kit_new = c in NEW_FORMS
             per[c] += 1
             fam = members[c]["family"] if c in members else ""
             w.write("\t".join([r["repo"], r["component"], r["path"], c, fam, tier, ";".join(dict.fromkeys(cs))]) + "\n")
-    order = sorted(members, key=lambda c: (STATUS_RANK.get(smap[c]["home"], 4), -int(smap[c]["kits"] or 0), c))
+    order = sorted(members, key=lambda c: (STATUS_RANK.get(smap[c]["home"], 5), -int(smap[c]["kits"] or 0), c))
     cols = ["rank", "concept", "home", "kits", "component_names", "family", "pattern", "mode", "role", "nebula_existing", "nebula_verified",
             "nebula_decision", "swing_existing", "swing_verified", "swing_decision", "swingx_pattern", "m3_class", "jdk_swing_names",
             "swt_names", "nebula_names", "needs_input_events", "viewport_form"]
@@ -109,7 +212,7 @@ def main():
         w.write("\t".join(cols) + "\n")
         for i, c in enumerate(order, 1):
             m, s, u = members[c], smap[c], uni.get(c, {})
-            sx = [x for x in swingx if any(a in tokens(x)[0] or (len(a) >= 5 and a in tokens(x)[1]) for a in aliases[c].split())]
+            sx = [x for x in swingx if any(a in tokens(x)[0] or (len(a) >= 5 and a in tokens(x)[1]) for a in aliases.get(c, "").split())]
             ne, se = m["nebula_existing"], m["swing_existing"]
             row = [str(i), c, s["home"], s["kits"], str(per[c]), m["family"], "M3P-%s-1" % m["family"], m["mode"], m["role"],
                    ne, verify(ne, nebula, swt, jdk), "SKIP_EXISTING" if ne else "GENERATE", se, verify(se, nebula, swt, jdk, m3port),
@@ -118,6 +221,7 @@ def main():
                    s["needs_input_events"], s["superset_form"]]
             w.write("\t".join(row) + "\n")
     mapped = sum(v for k, v in per.items() if k != "UNMAPPED")
+    print("harvest", harvested, "addendum", len(comps) - harvested)
     print("concepts", len(order), "components", len(comps), "mapped", mapped - per["NON_WIDGET"], "non_widget", per["NON_WIDGET"], "unmapped", per["UNMAPPED"])
     print("families", dict(collections.Counter(members[c]["family"] for c in order)))
     print("nebula GENERATE", sum(1 for c in order if not members[c]["nebula_existing"]), "swing GENERATE",

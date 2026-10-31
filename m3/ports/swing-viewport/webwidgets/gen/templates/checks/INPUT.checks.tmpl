@@ -9,6 +9,11 @@ public final class M3InputChecks {
 	}
 
 	public static void run(M3InputModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3InputModel m) {
 		m.layout(360, 260);
 		M3WebPaint p = new M3WebPaint();
 		m.setState(-1, FOCUS, true);
@@ -50,6 +55,7 @@ public final class M3InputChecks {
 	}
 
 	private static void otp(M3InputModel m) {
+		m.load("6");
 		m.setFocus(0);
 		m.insert('4');
 		m.insert('x');
@@ -98,5 +104,41 @@ public final class M3InputChecks {
 		m.pointer(P_DOWN, m.itemRect(0, 0) + 2, m.itemRect(0, 1) + 2, 0);
 		m.pointer(P_UP, m.itemRect(0, 0) + 2, m.itemRect(0, 1) + 2, 0);
 		check(m.count() == n - 1, "click removes a tag");
+	}
+
+	/** Edges: commits of text-less and unfocused candidates, caret blink frames, hovered and text-less list rows, reveal both ways, empty tags. */
+	private static void edges(M3InputModel m) {
+		M3WebPaint p = new M3WebPaint();
+		m.load("Apple;Apricot;Banana;Blueberry;Cherry;Date;Elder;Fig;Grape");
+		m.layout(360, 160);
+		m.add(null);
+		m.setFocus(m.count() - 1);
+		m.commit();
+		m.setFocus(-1);
+		m.commit();
+		m.setState(-1, FOCUS, true);
+		for (int i = 0; i < 40; i++) {
+			m.tick(32);
+			m.paint(p);
+		}
+		m.setState(-1, OPEN, true);
+		m.setText(0, null);
+		m.layout(360, 160);
+		m.pointer(P_MOVE, 4, m.itemRect(Math.min(1, m.count() - 1), 1) + 2, 0);
+		m.paint(p);
+		for (int i = 0; i < 24; i++) {
+			m.key(i < 12 ? KEY_DOWN : KEY_UP, 0, 0);
+		}
+		m.clear();
+		m.setValueText("");
+		m.backspace();
+		m.setValueText("ab");
+		m.setCaret(0);
+		m.backspace();
+		m.load("java;swt");
+		m.setValueText("");
+		m.backspace();
+		check(m.count() == 1 || m.mode != M3InputModel.TAGS, "backspace on an empty tag field removes the last tag");
+		m.paint(p);
 	}
 }

@@ -12,6 +12,8 @@ import static @PKG@.M3WebStates.*;
 public class M3OverlayModel extends M3WebModel implements M3OverlayApi {
 	public static final int EDGE_START = 0, EDGE_END = 1, EDGE_TOP = 2, EDGE_BOTTOM = 3, CORNER_END = 4, TARGET = 5, TOUR = 6,
 			BACKDROP = 7, STICKY = 8, TOAST = 9, CENTER = 10;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 11;
 	private final int[] target = { 40, 40, 80, 24 };
 	private int extent = 280, step;
 	private boolean trap = true;
@@ -224,7 +226,10 @@ public class M3OverlayModel extends M3WebModel implements M3OverlayApi {
 	@Override
 	protected boolean onKey(int key, int ch, int mods) {
 		if (key == KEY_TAB && trap && modal() && isOpen()) {
-			return moveFocus((mods & MOD_SHIFT) != 0 ? -1 : 1) || focusFirst();
+			if (!moveFocus((mods & MOD_SHIFT) != 0 ? -1 : 1)) {
+				focusFirst();
+			}
+			return true;
 		}
 		if (mode == TOUR && (key == KEY_LEFT || key == KEY_RIGHT)) {
 			setStep(step + ((key == KEY_RIGHT) != rtl ? 1 : -1));
@@ -233,12 +238,12 @@ public class M3OverlayModel extends M3WebModel implements M3OverlayApi {
 		return false;
 	}
 
-	private boolean focusFirst() {
+	/** A trapped Tab past either end wraps to the first enabled item (none enabled: focus stays). */
+	private void focusFirst() {
 		int first = nextEnabled(-1, 1);
 		if (first >= 0) {
 			setFocus(first);
 		}
-		return true;
 	}
 
 	@Override

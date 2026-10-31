@@ -25,6 +25,8 @@ import static com.m3.swing.web.model.M3WebStates.*;
  */
 public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
 	public static final int RIBBON = 0, APPBAR = 1, SPLIT = 2;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 3;
 	public static final int PUSH = 0, TOGGLE = 1, SPLIT_KIND = 2, DROPDOWN = 3;
 	private String[] captions = new String[0];
 
@@ -46,7 +48,7 @@ public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
 			setGroup(i, f.length > 1 ? M3WebStates.parse(f[0]) : 0);
 			setAux(i, f.length > 2 && f[2].equals("L") ? 1 : 0);
 		}
-		if (mode == SPLIT && count > 0) {
+		if (mode == SPLIT) { // load adds at least one item
 			setValue(0, SPLIT_KIND);
 		}
 	}
@@ -154,7 +156,7 @@ public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
 			M3WebGlyphs.glyph(p, M3WebGlyphs.I_PLUS, x + (w - h / 2) / 2, y + 2, h / 2, ink);
 			p.text(x, y + h / 2, w, h / 2, ink, font() | M3WebPaint.CENTER, text[i]);
 		} else if (mode == APPBAR && !title) {
-			M3WebGlyphs.glyph(p, M3WebGlyphs.iconId(text[i].toLowerCase(java.util.Locale.ROOT)), x + h / 4, y + h / 4, h / 2, ink);
+			M3WebGlyphs.glyph(p, M3WebGlyphs.iconId(text[i] == null ? "" : text[i].toLowerCase(java.util.Locale.ROOT)), x + h / 4, y + h / 4, h / 2, ink);
 		} else {
 			p.text(x + pad(), y, w - 2 * pad() - (value[i] == SPLIT_KIND ? h : 0), h, ink, font() | (title ? M3WebPaint.BOLD : 0) | (rtl ? M3WebPaint.RIGHT : 0), text[i]);
 		}
@@ -209,7 +211,7 @@ public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
 	protected boolean onKey(int key, int ch, int mods) {
 		if (key == KEY_DOWN && mode == SPLIT && !isMenuOpen()) {
 			setMenuOpen(true);
-			setFocus(count > 1 ? 1 : 0);
+			setFocus(Math.min(1, count - 1));
 			return true;
 		}
 		return false;

@@ -24,6 +24,11 @@ public final class M3OverlayChecks {
 	}
 
 	public static void run(M3OverlayModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3OverlayModel m) {
 		m.layout(400, 300);
 		M3WebPaint p = new M3WebPaint();
 		m.setTarget(30, 30, 60, 20);
@@ -66,6 +71,8 @@ public final class M3OverlayChecks {
 	private static void keys(M3OverlayModel m) {
 		m.setTrap(true);
 		m.key(KEY_TAB, 0, 0);
+		m.setFocus(0);
+		m.key(KEY_TAB, 0, 0);
 		m.key(KEY_TAB, 0, MOD_SHIFT);
 		m.setStep(0);
 		m.key(KEY_RIGHT, 0, 0);
@@ -91,5 +98,24 @@ public final class M3OverlayChecks {
 		m.open();
 		m.close();
 		m.close();
+	}
+
+	/** Edges: a trapped Tab past the last item wraps to the first enabled one; with every item disabled it stays put. */
+	private static void edges(M3OverlayModel m) {
+		m.load("a~b;c;d");
+		m.layout(360, 260);
+		m.setTrap(true);
+		m.open();
+		m.setFocus(0);
+		m.key(KEY_TAB, 0, 0);
+		m.setFocus(m.count() - 1);
+		m.key(KEY_TAB, 0, 0);
+		for (int i = 0; i < m.count(); i++) {
+			m.setState(i, DISABLED, true);
+		}
+		m.key(KEY_TAB, 0, MOD_SHIFT);
+		m.key(KEY_TAB, 0, 0);
+		m.close();
+		m.setTrap(false);
 	}
 }

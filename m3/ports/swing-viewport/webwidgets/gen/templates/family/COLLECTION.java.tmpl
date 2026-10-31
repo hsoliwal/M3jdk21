@@ -11,6 +11,8 @@ import static @PKG@.M3WebStates.*;
  */
 public class M3CollectionModel extends M3WebModel implements M3CollectionApi {
 	public static final int KANBAN = 0, SWIPE = 1, PULL = 2, INFINITE = 3, REORDER = 4, MESSAGES = 5, PALETTE = 6, GALLERY = 7;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 8;
 	private int pull, loadedAt = -1, threshold = 5, columns = 1, dragFrom = -1, dragX, dragY;
 
 	public M3CollectionModel(String concept, int role, int mode, int shape, int variant) {

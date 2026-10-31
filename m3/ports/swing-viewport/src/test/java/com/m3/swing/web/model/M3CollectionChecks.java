@@ -24,6 +24,11 @@ public final class M3CollectionChecks {
 	}
 
 	public static void run(M3CollectionModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3CollectionModel m) {
 		m.layout(360, 240);
 		M3WebPaint p = new M3WebPaint();
 		for (int i = 0; i < 40; i++) {
@@ -119,5 +124,35 @@ public final class M3CollectionChecks {
 		m.pointer(P_UP, 20, y + 200, 0);
 		m.endRefresh();
 		m.setDelta(null);
+	}
+
+	/** Edges: ungrouped rows in grouped modes, swipe by Delete both ways, pull by wheel and drag, drags of removed rows. */
+	private static void edges(M3CollectionModel m) {
+		m.load("plain;1~grouped;2~third;4~a;5~b;6~c;7~d;8~e;9~f;10~g;11~h;12~i;13~j;14~k");
+		m.layout(360, 260);
+		check(m.needsMore() == m.needsMore(), "load threshold query");
+		m.setFocus(0);
+		m.key(KEY_DELETE, 0, 0);
+		m.key(KEY_DELETE, 0, 0);
+		m.pointer(P_WHEEL, 5, -1, 0);
+		m.pointer(P_WHEEL, 5, 3, 0);
+		m.pointer(P_WHEEL, 5, -1, 0);
+		m.pointer(P_DOWN, 10, 40, 0);
+		m.pointer(P_DRAG, 10, 90, 0);
+		m.pointer(P_UP, 10, 90, 0);
+		m.pointer(P_WHEEL, 5, 1, 0);
+		m.scrollTo(0);
+		int x = m.itemRect(0, 0) + 4, y = m.itemRect(0, 1) + 4;
+		m.pointer(P_DOWN, x, y, 0);
+		m.pointer(P_DRAG, x, y + 60, 0);
+		m.pointer(P_DRAG, x, y - 2, 0);
+		m.pointer(P_UP, x, y, 0);
+		m.pointer(P_DRAG, x, y, 0);
+		int last = m.count() - 1, lx = m.itemRect(last, 0) + 4, ly = m.itemRect(last, 1) + 4;
+		m.pointer(P_DOWN, lx, ly, 0);
+		m.remove(last);
+		m.pointer(P_DRAG, lx, ly + 8, 0);
+		m.pointer(P_UP, lx, ly, 0);
+		m.endRefresh();
 	}
 }

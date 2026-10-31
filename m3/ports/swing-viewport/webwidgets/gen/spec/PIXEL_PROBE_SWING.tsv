@@ -1,0 +1,83 @@
+concept	x	y	expected	plane	result
+card	-	-	-	-	NO_PROBE
+avatar	8	8	6366f1	6366f1	PASS
+icon	14	14	0f172a	0f172a	PASS
+skeleton	46	52	eaeef4	eaeef4	PASS
+drawer	143	18	ffffff	ffffff	PASS
+autocomplete	57	11	ffffff	ffffff	PASS
+kbd	8	8	ffffff	ffffff	PASS
+kanban-board	172	75	edeff2	edeff2	PASS
+bottom-sheet	115	37	ffffff	ffffff	PASS
+empty-state	115	22	e7e8fc	e7e8fc	PASS
+affix	182	102	ffffff	ffffff	PASS
+pull-to-refresh	86	84	ffffff	ffffff	PASS
+swipe-actions	86	84	ffffff	ffffff	PASS
+highlight-mark	-	-	-	-	NO_PROBE
+fab	182	102	6366f1	6366f1	PASS
+otp-input	208	11	ffffff	ffffff	PASS
+tag-input	-	-	-	-	NO_PROBE
+stat-kpi	143	24	ffffff	ffffff	PASS
+video-player	28	111	3f3f3f	3f3f3f	PASS
+cascader	57	11	ffffff	ffffff	PASS
+infinite-scroll	86	84	ffffff	ffffff	PASS
+hover-card	155	96	ffffff	ffffff	PASS
+tour	155	96	ffffff	ffffff	PASS
+qr-code	55	18	ffffff	ffffff	PASS
+markdown-render	-	-	-	-	NO_PROBE
+date-range	-	-	-	-	NO_PROBE
+sparkline	-	-	-	-	NO_PROBE
+ribbon	-	-	-	-	NO_PROBE
+backdrop	28	18	a5a9b1	a5a9b1	PASS
+code-block	8	8	eeeef0	eeeef0	PASS
+captcha-security	-	-	-	-	NO_PROBE
+search	115	11	ffffff	ffffff	PASS
+time-picker	86	11	ffffff	ffffff	PASS
+sheet-dialog	57	75	ffffff	ffffff	PASS
+accordion	115	115	ffffff	ffffff	PASS
+switch	6	11	ffffff	ffffff	PASS
+navigation	86	11	e9e9fd	e9e9fd	PASS
+toast	74	90	ffffff	ffffff	PASS
+link	-	-	-	-	NO_PROBE
+app-bar	28	5	ffffff	ffffff	PASS
+badge	-	-	-	-	NO_PROBE
+alert-banner	-	-	-	-	NO_PROBE
+chip	12	12	ffffff	ffffff	PASS
+breadcrumb	-	-	-	-	NO_PROBE
+date-picker	143	11	ffffff	ffffff	PASS
+pagination	-	-	-	-	NO_PROBE
+calendar	-	-	-	-	NO_PROBE
+transition-anim	16	16	d9daf9	d9daf9	PASS
+carousel	125	132	e2e8f0	e2e8f0	PASS
+file-upload	57	24	f7f7fe	f7f7fe	PASS
+chart	117	89	6366f1	6366f1	PASS
+toggle-group	57	8	f0f1f2	f0f1f2	PASS
+stepper	-	-	-	-	NO_PROBE
+spinner-loading	47	47	7f81f3	7f81f3	PASS
+rating	-	-	-	-	NO_PROBE
+message-list	143	68	6366f1	6366f1	PASS
+timeline	2	101	64748b	64748b	PASS
+led-gauge	12	12	64748b	64748b	PASS
+web-view	-	-	-	-	NO_PROBE
+command-palette	143	124	ffffff	ffffff	PASS
+reorder-drag	86	84	ffffff	ffffff	PASS
+split-button	75	8	6366f1	6366f1	PASS
+map	112	72	dc2626	dc2626	PASS
+carousel-tiles	142	28	ffffff	ffffff	PASS
+gallery	143	138	ffffff	ffffff	PASS
+treemap	185	84	f9f9fc	f9f9fc	PASS
+segmented-bar	-	-	-	-	NO_PROBE
+gantt	78	10	6366f1	6366f1	PASS
+emoji-picker	57	11	ffffff	ffffff	PASS
+signature-pad	140	13	f7f8fb	f7f8fb	PASS
+splash-screen	115	51	ffffff	ffffff	PASS
+FAMILY	CONTAINER	PASS
+FAMILY	TOKEN	PASS
+FAMILY	ANIMVALUE	PASS
+FAMILY	OVERLAY	PASS
+FAMILY	INPUT	PASS
+FAMILY	COLLECTION	PASS
+FAMILY	EMBED	PASS
+FAMILY	PICKER	PASS
+FAMILY	PLOT	PASS
+FAMILY	COMMANDS	PASS
+FAMILY	SEGMENTS	PASS

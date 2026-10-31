@@ -26,6 +26,8 @@ import java.util.Arrays;
  */
 public class M3InputModel extends M3WebModel implements M3InputApi {
 	public static final int SEARCH = 0, OTP = 1, TAGS = 2, AUTOCOMPLETE = 3;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 4;
 	private char[] buf = new char[16];
 	private int len, caret;
 	private boolean masked;
@@ -131,12 +133,7 @@ public class M3InputModel extends M3WebModel implements M3InputApi {
 	@Override
 	public void backspace() {
 		if (mode == OTP) {
-			int cell = Math.max(0, focus);
-			if (value[cell] == 0 && cell > 0) {
-				cell--;
-			}
-			setValue(cell, 0);
-			setFocus(cell);
+			clearCell();
 		} else if (caret > 0) {
 			System.arraycopy(buf, caret, buf, caret - 1, len - caret);
 			caret--;
@@ -145,6 +142,19 @@ public class M3InputModel extends M3WebModel implements M3InputApi {
 		} else if (mode == TAGS && len == 0 && count > 0) {
 			remove(count - 1);
 		}
+	}
+
+	/** OTP backspace: clears the focused cell, or the previous one when the focused cell is empty (no cells: no-op). */
+	private void clearCell() {
+		if (count == 0) {
+			return;
+		}
+		int cell = Math.max(0, focus);
+		if (value[cell] == 0 && cell > 0) {
+			cell--;
+		}
+		setValue(cell, 0);
+		setFocus(cell);
 	}
 
 	@Override
@@ -296,34 +306,56 @@ public class M3InputModel extends M3WebModel implements M3InputApi {
 		case KEY_BACKSPACE: backspace(); return true;
 		case KEY_DELETE: deleteForward(); return true;
 		case KEY_ENTER: commit(); return true;
-		case KEY_UP: case KEY_DOWN: return mode == AUTOCOMPLETE && highlight(key == KEY_DOWN ? 1 : -1);
-		case KEY_LEFT: case KEY_RIGHT: return mode != OTP && caretKey((key == KEY_RIGHT) != rtl ? 1 : -1);
-		case KEY_HOME: case KEY_END: return mode != OTP && caretKey(key == KEY_END ? len : -len);
+		case KEY_UP: case KEY_DOWN: return highlight(key == KEY_DOWN ? 1 : -1);
+		case KEY_LEFT: case KEY_RIGHT: return caretKey((key == KEY_RIGHT) != rtl ? 1 : -1);
+		case KEY_HOME: case KEY_END: return caretKey(key == KEY_END ? len : -len);
 		default: return false;
 		}
 	}
 
+	/** Caret keys move the caret in every mode but OTP (cells move with focus instead). */
 	private boolean caretKey(int delta) {
+		if (mode == OTP) {
+			return false;
+		}
 		setCaret(caret + delta);
 		return true;
 	}
 
+	/** Up/Down move the highlighted candidate of an autocomplete list (opening it); other modes leave them unused. */
 	private boolean highlight(int dir) {
+		if (mode != AUTOCOMPLETE) {
+			return false;
+		}
 		int n = logicalCount();
 		if (n == 0) {
 			return true;
 		}
 		setState(-1, OPEN, true);
-		int at = 0;
-		for (int k = 0; k < n; k++) {
-			at = itemAt(k) == focus ? k : at;
-		}
-		int next = focus < 0 ? 0 : Math.max(0, Math.min(n - 1, at + dir));
+		int next = focus < 0 ? 0 : Math.max(0, Math.min(n - 1, position(focus) + dir));
 		setFocus(itemAt(next));
-		long top = (long) next * itemExtent;
-		scrollTo(top < scroll ? top : top + itemExtent > scroll + viewLength() ? top + itemExtent - viewLength() : scroll);
-		relayout(-1, D_STATE);
+		revealPosition(next);
 		return true;
+	}
+
+	/** Filtered position of an item (0 when the filter hides it). */
+	private int position(int item) {
+		int at = 0;
+		for (int k = 0; k < logicalCount(); k++) {
+			at = itemAt(k) == item ? k : at;
+		}
+		return at;
+	}
+
+	/** Scrolls the candidate list so the position is fully visible. */
+	private void revealPosition(int position) {
+		long top = (long) position * itemExtent;
+		if (top < scroll) {
+			scrollTo(top);
+		} else if (top + itemExtent > scroll + viewLength()) {
+			scrollTo(top + itemExtent - viewLength());
+		}
+		relayout(-1, D_STATE);
 	}
 
 	@Override

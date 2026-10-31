@@ -33,7 +33,9 @@ public abstract class M3WebLanes implements M3WebApi {
 	protected String[] text = new String[8], detail = new String[8];
 	protected boolean rtl;
 	private String[] keys;
-	private int dx0 = Integer.MAX_VALUE, dy0 = Integer.MAX_VALUE, dx1 = Integer.MIN_VALUE, dy1 = Integer.MIN_VALUE, generation;
+	/** The toolkit's viewport core (SWT public M3 facades or the M3JDK Swing port), generated per side. */
+	final M3WebViewportCore core = new M3WebViewportCore();
+	private int generation;
 	private M3WebDelta delta;
 
 	@Override
@@ -47,6 +49,9 @@ public abstract class M3WebLanes implements M3WebApi {
 			grow(count * 2);
 		}
 		text[count] = label;
+		if (keys != null) {
+			keys[count] = label;
+		}
 		detail[count] = det;
 		flags[count] = value[count] = aux[count] = group[count] = 0;
 		count++;
@@ -70,15 +75,33 @@ public abstract class M3WebLanes implements M3WebApi {
 		}
 		System.arraycopy(text, item + 1, text, item, tail);
 		System.arraycopy(detail, item + 1, detail, item, tail);
+		if (keys != null) {
+			System.arraycopy(keys, item + 1, keys, item, tail);
+		}
 		count--;
-		focus = Math.min(focus, count - 1);
+		focus = focus > item ? focus - 1 : Math.min(focus, count - 1);
+		hover = hover == item ? -1 : hover > item ? hover - 1 : hover;
+		pressed = pressed == item ? -1 : pressed > item ? pressed - 1 : pressed;
 		relayout(item, D_ITEMS);
+	}
+
+	/** Empties the lanes of ids {@code [from, to)}: new logical items carry no state, value, text or key. */
+	protected void blank(int from, int to) {
+		for (int[] lane : new int[][] { flags, value, aux, group }) {
+			Arrays.fill(lane, from, to, 0);
+		}
+		Arrays.fill(text, from, to, null);
+		Arrays.fill(detail, from, to, null);
+		if (keys != null) {
+			Arrays.fill(keys, from, to, null);
+		}
 	}
 
 	@Override
 	public void clear() {
 		count = 0;
 		focus = hover = pressed = -1;
+		keys = null;
 		relayout(-1, D_ITEMS);
 	}
 
@@ -97,6 +120,9 @@ public abstract class M3WebLanes implements M3WebApi {
 	public void setText(int item, String s) {
 		check(item);
 		text[item] = s;
+		if (keys != null) {
+			keys[item] = s;
+		}
 		relayout(item, D_TEXT);
 	}
 
@@ -215,8 +241,7 @@ public abstract class M3WebLanes implements M3WebApi {
 	}
 
 	protected void damage(int x, int y, int w, int h) {
-		dx0 = Math.min(dx0, x); dy0 = Math.min(dy0, y);
-		dx1 = Math.max(dx1, x + w); dy1 = Math.max(dy1, y + h);
+		core.damage(x, y, w, h);
 	}
 
 	protected void damageItem(int item) {
@@ -230,12 +255,12 @@ public abstract class M3WebLanes implements M3WebApi {
 
 	@Override
 	public boolean takeDamage(int[] out) {
-		if (dx0 > dx1 || dy0 > dy1) {
+		if (!core.take(out)) {
 			return false;
 		}
-		out[0] = Math.max(0, dx0); out[1] = Math.max(0, dy0);
-		out[2] = Math.min(width, dx1) - out[0]; out[3] = Math.min(height, dy1) - out[1];
-		dx0 = dy0 = Integer.MAX_VALUE; dx1 = dy1 = Integer.MIN_VALUE;
+		int x1 = Math.min(width, out[0] + out[2]), y1 = Math.min(height, out[1] + out[3]);
+		out[0] = Math.max(0, out[0]); out[1] = Math.max(0, out[1]);
+		out[2] = Math.max(0, x1 - out[0]); out[3] = Math.max(0, y1 - out[1]);
 		return true;
 	}
 

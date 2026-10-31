@@ -9,6 +9,11 @@ public final class M3ContainerChecks {
 	}
 
 	public static void run(M3ContainerModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3ContainerModel m) {
 		m.layout(360, 400);
 		check(m.count() > 0 && m.plane(M3WebView.HEADER, 3) > 0, "sections and header plane");
 		M3WebPaint p = new M3WebPaint();
@@ -56,5 +61,16 @@ public final class M3ContainerChecks {
 		check(m.key(KEY_ESCAPE, 0, 0) == (m.mode == M3ContainerModel.ALERT), "escape dismisses alerts only");
 		m.dismiss(1);
 		check(m.is(1, HIDDEN) && m.itemRect(1, 3) == 0, "dismissed section has no height");
+	}
+
+	/** Edges: a press in the close column below the header activates; the RTL close zone sits at the start. */
+	private static void edges(M3ContainerModel m) {
+		m.load("Title~Body text that wraps;Second~More");
+		m.layout(360, 260);
+		int x = m.itemRect(0, 0), y = m.itemRect(0, 1), w = m.itemRect(0, 2), h = m.itemRect(0, 3);
+		M3WebChecks.click(m, x + w - 4, y + Math.max(1, h - 2));
+		m.setRtl(true);
+		M3WebChecks.click(m, m.itemRect(0, 0) + 4, m.itemRect(0, 1) + 4);
+		m.setRtl(false);
 	}
 }
