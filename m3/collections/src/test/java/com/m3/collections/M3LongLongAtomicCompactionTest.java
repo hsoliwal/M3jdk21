@@ -9,6 +9,10 @@ final class M3LongLongAtomicCompactionTest {
         M3AtomicDeleteFailureOracle.main(new String[0]);
     }
 
+    @Test void forcedTombstoneCompactionRetainsExactPhysicalState() throws Exception {
+        M3LongMapCompactionSuccessOracle.main(new String[0]);
+    }
+
     @Test void seededOperationsRetainExactIncumbentPhysicalState() throws Exception {
         M3LongLongSharedTrace.main(new String[0]);
     }
