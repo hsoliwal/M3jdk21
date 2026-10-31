@@ -136,7 +136,21 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
     public List<Relation> findBySource(String sourceId) {
         ensureOpen();
         Objects.requireNonNull(sourceId);
-        return relations.stream().filter(relation -> relation.sourceId().equals(sourceId)).toList();
+        int low = 0;
+        int high = relations.size();
+        while (low < high) {
+            int middle = (low + high) >>> 1;
+            if (relations.get(middle).sourceId().compareTo(sourceId) < 0) low = middle + 1;
+            else high = middle;
+        }
+        int first = low;
+        high = relations.size();
+        while (low < high) {
+            int middle = (low + high) >>> 1;
+            if (relations.get(middle).sourceId().compareTo(sourceId) <= 0) low = middle + 1;
+            else high = middle;
+        }
+        return List.copyOf(relations.subList(first, low));
     }
 
     @Override
