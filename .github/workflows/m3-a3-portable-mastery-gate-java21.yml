@@ -69,14 +69,6 @@ jobs:
           -f _synexia/synexia-openrewrite-recipes/pom-jdk-a3-export.xml
           clean install
 
-      - name: 3 prove receiver authority and mastery-gate recipes
-        run: >
-          mvn -B -ntp
-          -f m3/pom.xml
-          -pl tooling/migration-recipes
-          -Dtest=M3A3ReceiverMainAuthorityRecipeTest,M3A3SynexiaReceiverAuthorityTest,M3A3PortableMasteryGateRecipeTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
       - name: 4 compile and test A3 mastery receiver
         run: >

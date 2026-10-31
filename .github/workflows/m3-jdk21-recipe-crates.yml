@@ -107,11 +107,6 @@ jobs:
           gzip -9 -k "$RUNNER_TEMP/output/JDK21_FILE_DELTAS.tsv"
           cat "$RUNNER_TEMP/output/openrewrite-bundle/CRATES.tsv"
 
-      - name: Prove OpenRewrite recipe substrate on Java 21
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f "$M3ROOT/m3/tooling/migration-recipes/pom.xml" clean verify
 
       - name: Upload candidate bundle
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

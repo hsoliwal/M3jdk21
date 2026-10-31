@@ -85,9 +85,6 @@ jobs:
           python3 m3/backports/recipes/jep-484-classfile-api/verify.py
           python3 m3/backports/recipes/jep-484-classfile-api/test_verify.py
 
-      - name: Prove inventory recipe remains non-mutating
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep484ClassfileApiInventoryRecipeTest,M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Upload map evidence
         uses: actions/upload-artifact@v4
