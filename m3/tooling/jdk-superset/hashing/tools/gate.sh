@@ -7,7 +7,10 @@
 # install; not JAVA_HOME, which may name another release) with java.base patched, no JDK
 # build needed. Windows paths (C:/...) are expected, since the class paths below use ';'.
 #   oracle      the vendored donor compiled unchanged (+ JetBrains annotations, JSR-305 sources)
+#   recipe      run_absorb.sh into <out>/absorb must reproduce the 16 committed sources byte for byte
 #   patch       the 16 jdk.internal.m3.hash sources with java.base's build flags (-Xlint:all -Werror)
+#   identity    bytecode_identity.py: the recipe output before LITERAL_CONSTANTS vs the committed sources, compiled
+#               alike: every method instruction-identical, only private static final constants added
 #   junit       M3HashAtomsTest, oracle prebuilt, then compiled at run time from test.src (the jtreg path)
 #   surface     api_surface.py: vendored vs absorbed public/protected members
 #   mutants     mutation_gate.py: every recipe-slip mutant must fail the test
@@ -22,14 +25,21 @@ lane=$repo/m3/tooling/jdk-superset/hashing
 vendor=$repo/m3/vendor/third_party
 tests=$repo/test/jdk/jdk/internal/m3/hash
 src=$repo/src/java.base/share/classes/jdk/internal/m3/hash
-mkdir -p "$out/oracle" "$out/psrc/jdk/internal/m3/hash" "$out/patch" "$out/testc" "$out/perfc" "$out/mutants" "$out/tmp"
+mkdir -p "$out/oracle" "$out/psrc/jdk/internal/m3/hash" "$out/patch" "$out/prehoist" "$out/testc" "$out/perfc" \
+    "$out/mutants" "$out/tmp"
 "$jbin/javac" -proc:none -nowarn -XDsuppressNotes --add-exports java.base/sun.nio.ch=ALL-UNNAMED \
     -sourcepath "$vendor/annotations/src/main/java;$vendor/jsr305/src/main/java" -d "$out/oracle" \
     $(find "$vendor/zero-allocation-hashing/src/main/java" -name '*.java')
+sh "$lane/tools/run_absorb.sh" "$repo" "$out/absorb" "$out/absorb/dst" > /dev/null
+diff -r "$out/absorb/dst" "$src" > /dev/null
+echo "recipe: reproduces the $(ls "$src" | wc -l) committed sources"
 cp "$src"/*.java "$out/psrc/jdk/internal/m3/hash/"
-"$jbin/javac" -g -Xlint:all -Werror -Xlint:-this-escape -XDstringConcat=inline --patch-module "java.base=$out/psrc" \
-    -d "$out/patch" $(find "$out/psrc" -name '*.java')
+flags="-g -Xlint:all -Werror -Xlint:-this-escape -XDstringConcat=inline"
+"$jbin/javac" $flags --patch-module "java.base=$out/psrc" -d "$out/patch" $(find "$out/psrc" -name '*.java')
 echo "patch: $(find "$out/patch" -name '*.class' | wc -l) classes"
+"$jbin/javac" $flags --patch-module "java.base=$out/absorb/renamed" -d "$out/prehoist" \
+    $(find "$out/absorb/renamed" -name '*.java')
+python "$lane/tools/bytecode_identity.py" "$jbin/javap" "$out/prehoist" "$out/patch" "$out/BYTECODE_IDENTITY.tsv"
 "$jbin/javac" -g -Xlint:all -Xlint:-serial --patch-module "java.base=$out/patch" \
     --add-exports java.base/jdk.internal.m3.hash=ALL-UNNAMED -cp "$junit" -d "$out/testc" \
     "$tests/M3HashOracle.java" "$tests/M3HashAtomsTest.java"

@@ -57,6 +57,14 @@ import static jdk.internal.m3.hash.M3Util.*;
  * @see LongHashFunction LongHashFunction
  */
 public abstract class M3LongTupleHashFunction implements Serializable {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Rounds a bit length up to whole longs. */
+    private static final int LONG_ROUND_UP = 63;
+    /** Bits of a long. */
+    private static final int LONG_BITS = 64;
+    /** Bytes of a char: char offsets and lengths in bytes. */
+    private static final long CHAR_BYTES = 2L;
+
     private static final long serialVersionUID = 0L;
 
     // Implementations
@@ -133,7 +141,7 @@ public abstract class M3LongTupleHashFunction implements Serializable {
      * round-up the length to a multiple of 64 for allocating the {@code long} array.
      */
     public long[] newResultArray() {
-        return new long[(bitsLength() + 63) / 64];
+        return new long[(bitsLength() + LONG_ROUND_UP) / LONG_BITS];
     }
 
     /**
@@ -610,6 +618,6 @@ public abstract class M3LongTupleHashFunction implements Serializable {
 
     static void hashNativeChars(final M3LongTupleHashFunction f, final CharSequence input,
                                 final int off, final int len, final long[] result) {
-        f.hash(input, CHAR_SEQ_ACCESS, off * 2L, len * 2L, result);
+        f.hash(input, CHAR_SEQ_ACCESS, off * CHAR_BYTES, len * CHAR_BYTES, result);
     }
 }

@@ -8,6 +8,10 @@ package jdk.internal.m3.hash;
 // An internal helper class for casting LongTupleHashFunction as LongHashFunction
 
 abstract class M3DualHashFunction extends M3LongTupleHashFunction {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Message: the result array is shorter than newResultArray(). */
+    private static final String RESULT_TOO_SHORT = "The input result array has not enough space!";
+
     private static final long serialVersionUID = 0L;
 
     private transient final int resultLength = newResultArray().length;
@@ -16,7 +20,7 @@ abstract class M3DualHashFunction extends M3LongTupleHashFunction {
             throw new NullPointerException();
         }
         if (result.length < resultLength) {
-            throw new IllegalArgumentException("The input result array has not enough space!");
+            throw new IllegalArgumentException(RESULT_TOO_SHORT);
         }
     }
 

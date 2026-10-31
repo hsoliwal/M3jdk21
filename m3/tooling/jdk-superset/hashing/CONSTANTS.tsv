@@ -1,0 +1,1106 @@
+file	line	col	class	member	literal	type	name	state	role
+M3Access.java	138	84	M3Access	getLong#1	4L	long	INT_BYTES	DECLARED	Bytes of an int: offset of the second int of a long.
+M3Access.java	138	91	M3Access	getLong#1	32	int	INT_BITS	DECLARED	Bits of an int: shift of the second int of a long.
+M3Access.java	140	51	M3Access	getLong#2	4L	long	INT_BYTES	DECLARED	Bytes of an int: offset of the second int of a long.
+M3Access.java	140	91	M3Access	getLong#2	32	int	INT_BITS	DECLARED	Bits of an int: shift of the second int of a long.
+M3Access.java	155	49	M3Access	getUnsignedInt#1	0xFFFFFFFFL	long	UNSIGNED_INT_MASK	DECLARED	The low 32 bits: an int read as unsigned.
+M3Access.java	170	88	M3Access	getInt#1	2L	long	SHORT_BYTES	DECLARED	Bytes of a short: offset of the second short of an int.
+M3Access.java	170	95	M3Access	getInt#1	16	int	SHORT_BITS	DECLARED	Bits of a short: shift of the second short of an int.
+M3Access.java	172	53	M3Access	getInt#2	2L	long	SHORT_BYTES	DECLARED	Bytes of a short: offset of the second short of an int.
+M3Access.java	172	95	M3Access	getInt#2	16	int	SHORT_BITS	DECLARED	Bits of a short: shift of the second short of an int.
+M3Access.java	188	93	M3Access	getUnsignedShort#1	8	int	BYTE_BITS	DECLARED	Bits of a byte: shift of the second byte of a short.
+M3Access.java	190	93	M3Access	getUnsignedShort#2	8	int	BYTE_BITS	DECLARED	Bits of a byte: shift of the second byte of a short.
+M3Access.java	217	41	M3Access	getUnsignedByte#1	0xFF	int	UNSIGNED_BYTE_MASK	DECLARED	The low 8 bits: a byte read as unsigned.
+M3Access.java	291	80	ReverseAccess	getUnsignedInt#1	32	int	INT_BITS	DECLARED	Bits of an int: a reversed unsigned int lies in the high half of the long.
+M3Access.java	299	85	ReverseAccess	getUnsignedShort#1	16	int	SHORT_BITS	DECLARED	Bits of a short: a reversed short lies in the high half of the int.
+M3Access.java	303	76	ReverseAccess	getShort#1	16	int	SHORT_BITS	DECLARED	Bits of a short: a reversed short lies in the high half of the int.
+M3CharSequenceAccess.java	53	38	M3CharSequenceAccess	getLong#1	16	int	CHAR_1_SHIFT	DECLARED	Bit position of the second char of a read at an even offset.
+M3CharSequenceAccess.java	53	54	M3CharSequenceAccess	getLong#1	32	int	CHAR_2_SHIFT	DECLARED	Bit position of the third char of a read at an even offset.
+M3CharSequenceAccess.java	53	70	M3CharSequenceAccess	getLong#1	48	int	CHAR_3_SHIFT	DECLARED	Bit position of the fourth char of a read at an even offset.
+M3CharSequenceAccess.java	55	74	M3CharSequenceAccess	getLong#1	8	int	BYTE_BITS	DECLARED	Bits of a byte: a read at an odd offset starts at the high byte of a char, which moves down by a byte; the next char moves up by one.
+M3CharSequenceAccess.java	60	38	M3CharSequenceAccess	getLong#2	8	int	BYTE_BITS	DECLARED	Bits of a byte: a read at an odd offset starts at the high byte of a char, which moves down by a byte; the next char moves up by one.
+M3CharSequenceAccess.java	60	53	M3CharSequenceAccess	getLong#1	24	int	ODD_CHAR_2_SHIFT	DECLARED	Bit position of the third char of a read at an odd offset.
+M3CharSequenceAccess.java	60	69	M3CharSequenceAccess	getLong#1	40	int	ODD_CHAR_3_SHIFT	DECLARED	Bit position of the fourth char of a read at an odd offset.
+M3CharSequenceAccess.java	60	85	M3CharSequenceAccess	getLong#1	56	int	ODD_CHAR_4_SHIFT	DECLARED	Bit position of the fifth char (its low byte) of a read at an odd offset.
+M3CharSequenceAccess.java	70	38	M3CharSequenceAccess	getUnsignedInt#1	16	int	CHAR_1_SHIFT	DECLARED	Bit position of the second char of a read at an even offset.
+M3CharSequenceAccess.java	72	74	M3CharSequenceAccess	getUnsignedInt#1	8	int	BYTE_BITS	DECLARED	Bits of a byte: a read at an odd offset starts at the high byte of a char, which moves down by a byte; the next char moves up by one.
+M3CharSequenceAccess.java	75	38	M3CharSequenceAccess	getUnsignedInt#2	8	int	BYTE_BITS	DECLARED	Bits of a byte: a read at an odd offset starts at the high byte of a char, which moves down by a byte; the next char moves up by one.
+M3CharSequenceAccess.java	75	53	M3CharSequenceAccess	getUnsignedInt#1	24	int	ODD_CHAR_2_SHIFT	DECLARED	Bit position of the third char of a read at an odd offset.
+M3CharSequenceAccess.java	85	62	M3CharSequenceAccess	getUnsignedShort#1	8	int	BYTE_BITS	DECLARED	Bits of a byte: a read at an odd offset starts at the high byte of a char, which moves down by a byte; the next char moves up by one.
+M3CharSequenceAccess.java	87	45	M3CharSequenceAccess	getUnsignedShort#2	8	int	BYTE_BITS	DECLARED	Bits of a byte: a read at an odd offset starts at the high byte of a char, which moves down by a byte; the next char moves up by one.
+M3CharSequenceAccess.java	120	49	LittleEndianCharSequenceAccess	getLong#1	2	int	CHAR_2_INDEX	DECLARED	Index of the third char of a little-endian read.
+M3CharSequenceAccess.java	120	52	LittleEndianCharSequenceAccess	getLong#1	3	int	CHAR_3_INDEX	DECLARED	Index of the fourth char of a little-endian read.
+M3CharSequenceAccess.java	120	55	LittleEndianCharSequenceAccess	getLong#1	4	int	CHAR_4_INDEX	DECLARED	Index of the fifth char of a little-endian read at an odd offset.
+M3CharSequenceAccess.java	125	56	LittleEndianCharSequenceAccess	getUnsignedInt#1	2	int	CHAR_2_INDEX	DECLARED	Index of the third char of a little-endian read.
+M3CharSequenceAccess.java	135	73	LittleEndianCharSequenceAccess	getUnsignedByte#1	3	int	BYTE_BITS_LOG2	DECLARED	log2 of the bits of a byte: (offset & 1) << 3 is the bit position of the addressed byte in its char.
+M3CharSequenceAccess.java	157	43	BigEndianCharSequenceAccess	getLong#1	3	int	CHAR_0_INDEX	DECLARED	Index of the char that holds the lowest bytes of a big-endian read.
+M3CharSequenceAccess.java	157	46	BigEndianCharSequenceAccess	getLong#1	2	int	CHAR_1_INDEX	DECLARED	Index of the char that holds the next bytes of a big-endian read.
+M3CharSequenceAccess.java	172	79	BigEndianCharSequenceAccess	getUnsignedByte#1	3	int	BYTE_BITS_LOG2	DECLARED	log2 of the bits of a byte: (offset & 1) << 3 is the bit position of the addressed byte in its char.
+M3CityAndFarmHash_1_1.java	38	31	M3CityAndFarmHash_1_1	shiftMix#1	47	int	SHIFT_MIX_SHIFT	DECLARED	Shift of shiftMix.
+M3CityAndFarmHash_1_1.java	57	47	M3CityAndFarmHash_1_1	hash1To3Bytes#1	8	int	BYTE_BITS	DECLARED	Bits of a byte: the middle or last byte moves up by one.
+M3CityAndFarmHash_1_1.java	58	36	M3CityAndFarmHash_1_1	hash1To3Bytes#1	2	int	LAST_BYTE_SHIFT	DECLARED	z = length + (last byte << 2).
+M3CityAndFarmHash_1_1.java	64	48	M3CityAndFarmHash_1_1	hash4To7Bytes#1	3	int	FIRST_INT_SHIFT	DECLARED	length + (first four bytes << 3).
+M3CityAndFarmHash_1_1.java	70	42	M3CityAndFarmHash_1_1	hash8To16Bytes#1	37	int	LEN8_ROTATION_1	DECLARED	First rotation of the 8..16-byte path.
+M3CityAndFarmHash_1_1.java	71	34	M3CityAndFarmHash_1_1	hash8To16Bytes#1	25	int	LEN8_ROTATION_2	DECLARED	Second rotation of the 8..16-byte path.
+M3CityAndFarmHash_1_1.java	76	20	M3CityAndFarmHash_1_1	hashLen0To16#1	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	78	49	M3CityAndFarmHash_1_1	hashLen0To16#2	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	80	27	M3CityAndFarmHash_1_1	hashLen0To16#1	4L	long	INT_BYTES_L	DECLARED	Bytes of an int: the 4..7-byte path and its last int.
+M3CityAndFarmHash_1_1.java	82	49	M3CityAndFarmHash_1_1	hashLen0To16#2	4L	long	INT_BYTES_L	DECLARED	Bytes of an int: the 4..7-byte path and its last int.
+M3CityAndFarmHash_1_1.java	96	39	M3CityAndFarmHash_1_1	hashLen17To32#1	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	97	45	M3CityAndFarmHash_1_1	hashLen17To32#2	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	98	45	M3CityAndFarmHash_1_1	hashLen17To32#1	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	99	45	M3CityAndFarmHash_1_1	hashLen17To32#1	43	int	LEN17_ROTATION_1	DECLARED	Rotation of a + b in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	99	66	M3CityAndFarmHash_1_1	hashLen17To32#1	30	int	LEN17_ROTATION_2	DECLARED	Rotation of c in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	100	41	M3CityAndFarmHash_1_1	hashLen17To32#1	18	int	LEN17_ROTATION_3	DECLARED	Rotation of b + k2 in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	106	39	M3CityAndFarmHash_1_1	cityHashLen33To64#1	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	107	45	M3CityAndFarmHash_1_1	cityHashLen33To64#1	24L	long	WORDS_3_BYTES_L	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	108	45	M3CityAndFarmHash_1_1	cityHashLen33To64#1	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	109	39	M3CityAndFarmHash_1_1	cityHashLen33To64#1	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	110	39	M3CityAndFarmHash_1_1	cityHashLen33To64#2	24L	long	WORDS_3_BYTES_L	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	110	46	M3CityAndFarmHash_1_1	cityHashLen33To64#1	9L	long	LEN33_MULTIPLIER	DECLARED	Multiplier of CityHash's 33..64-byte path.
+M3CityAndFarmHash_1_1.java	111	45	M3CityAndFarmHash_1_1	cityHashLen33To64#2	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	112	45	M3CityAndFarmHash_1_1	cityHashLen33To64#2	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	113	37	M3CityAndFarmHash_1_1	cityHashLen33To64#1	43	int	LEN17_ROTATION_1	DECLARED	Rotation of a + b in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	113	59	M3CityAndFarmHash_1_1	cityHashLen33To64#1	30	int	LEN17_ROTATION_2	DECLARED	Rotation of c in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	113	70	M3CityAndFarmHash_1_1	cityHashLen33To64#2	9L	long	LEN33_MULTIPLIER	DECLARED	Multiplier of CityHash's 33..64-byte path.
+M3CityAndFarmHash_1_1.java	116	37	M3CityAndFarmHash_1_1	cityHashLen33To64#1	42	int	LEN33_ROTATION	DECLARED	Rotation of e + f in CityHash's 33..64-byte path.
+M3CityAndFarmHash_1_1.java	125	20	M3CityAndFarmHash_1_1	cityHash64#1	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	126	24	M3CityAndFarmHash_1_1	cityHash64#1	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	131	27	M3CityAndFarmHash_1_1	cityHash64#1	64L	long	WORDS_8_BYTES_L	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	135	45	M3CityAndFarmHash_1_1	cityHash64#1	40L	long	WORDS_5_BYTES_L	DECLARED	Bytes of 5 64-bit words.
+M3CityAndFarmHash_1_1.java	136	45	M3CityAndFarmHash_1_1	cityHash64#2	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	136	79	M3CityAndFarmHash_1_1	cityHash64#1	56L	long	WORDS_7_BYTES_L	DECLARED	Bytes of 7 64-bit words.
+M3CityAndFarmHash_1_1.java	137	55	M3CityAndFarmHash_1_1	cityHash64#1	48L	long	WORDS_6_BYTES_L	DECLARED	Bytes of 6 64-bit words.
+M3CityAndFarmHash_1_1.java	138	44	M3CityAndFarmHash_1_1	cityHash64#1	24L	long	WORDS_3_BYTES_L	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	147	46	M3CityAndFarmHash_1_1	cityHash64#2	64L	long	WORDS_8_BYTES_L	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	148	46	M3CityAndFarmHash_1_1	cityHash64#3	64L	long	WORDS_8_BYTES_L	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	148	52	M3CityAndFarmHash_1_1	cityHash64#1	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	149	46	M3CityAndFarmHash_1_1	cityHash64#4	64L	long	WORDS_8_BYTES_L	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	149	52	M3CityAndFarmHash_1_1	cityHash64#3	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	150	46	M3CityAndFarmHash_1_1	cityHash64#5	64L	long	WORDS_8_BYTES_L	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	150	52	M3CityAndFarmHash_1_1	cityHash64#2	24L	long	WORDS_3_BYTES_L	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	152	40	M3CityAndFarmHash_1_1	cityHash64#1	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	155	31	M3CityAndFarmHash_1_1	cityHash64#1	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	162	46	M3CityAndFarmHash_1_1	cityHash64#2	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	163	46	M3CityAndFarmHash_1_1	cityHash64#3	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	163	52	M3CityAndFarmHash_1_1	cityHash64#2	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	164	46	M3CityAndFarmHash_1_1	cityHash64#4	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	164	52	M3CityAndFarmHash_1_1	cityHash64#4	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	165	46	M3CityAndFarmHash_1_1	cityHash64#5	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	165	52	M3CityAndFarmHash_1_1	cityHash64#3	24L	long	WORDS_3_BYTES_L	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	167	40	M3CityAndFarmHash_1_1	cityHash64#2	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	170	31	M3CityAndFarmHash_1_1	cityHash64#2	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	176	30	M3CityAndFarmHash_1_1	cityHash64#1	63L	long	BLOCK_MASK_L	DECLARED	64-byte block size minus one: rounds a length down to whole blocks.
+M3CityAndFarmHash_1_1.java	178	67	M3CityAndFarmHash_1_1	cityHash64#3	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	178	72	M3CityAndFarmHash_1_1	cityHash64#1	37	int	LOOP_ROTATION_X	DECLARED	Rotation of x in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	179	64	M3CityAndFarmHash_1_1	cityHash64#2	48L	long	WORDS_6_BYTES_L	DECLARED	Bytes of 6 64-bit words.
+M3CityAndFarmHash_1_1.java	179	70	M3CityAndFarmHash_1_1	cityHash64#1	42	int	LOOP_ROTATION_Y	DECLARED	Rotation of y in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	181	48	M3CityAndFarmHash_1_1	cityHash64#2	40L	long	WORDS_5_BYTES_L	DECLARED	Bytes of 5 64-bit words.
+M3CityAndFarmHash_1_1.java	182	41	M3CityAndFarmHash_1_1	cityHash64#1	33	int	LOOP_ROTATION_Z	DECLARED	Rotation of z in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	188	44	M3CityAndFarmHash_1_1	cityHash64#4	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	189	44	M3CityAndFarmHash_1_1	cityHash64#5	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	190	44	M3CityAndFarmHash_1_1	cityHash64#4	24L	long	WORDS_3_BYTES_L	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	192	44	M3CityAndFarmHash_1_1	cityHash64#3	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	195	35	M3CityAndFarmHash_1_1	cityHash64#3	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	201	47	M3CityAndFarmHash_1_1	cityHash64#6	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	202	44	M3CityAndFarmHash_1_1	cityHash64#6	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	203	44	M3CityAndFarmHash_1_1	cityHash64#7	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	203	50	M3CityAndFarmHash_1_1	cityHash64#5	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	204	44	M3CityAndFarmHash_1_1	cityHash64#8	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	204	50	M3CityAndFarmHash_1_1	cityHash64#7	16L	long	WORDS_2_BYTES_L	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	205	44	M3CityAndFarmHash_1_1	cityHash64#9	32L	long	WORDS_4_BYTES_L	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	205	50	M3CityAndFarmHash_1_1	cityHash64#5	24L	long	WORDS_3_BYTES_L	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	207	41	M3CityAndFarmHash_1_1	cityHash64#4	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	210	33	M3CityAndFarmHash_1_1	cityHash64#4	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	218	20	M3CityAndFarmHash_1_1	cityHash64#6	64L	long	WORDS_8_BYTES_L	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	219	20	M3CityAndFarmHash_1_1	cityHash64#7	64L	long	WORDS_8_BYTES_L	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	236	40	AsLongHashFunction	hashLong#1	8L	long	LONG_LENGTH	DECLARED	Byte length of a hashed long.
+M3CityAndFarmHash_1_1.java	244	39	AsLongHashFunction	hashInt#1	4L	long	INT_LENGTH	DECLARED	Byte length of a hashed int.
+M3CityAndFarmHash_1_1.java	264	39	AsLongHashFunction	hashChar#1	2	int	CHAR_LENGTH	DECLARED	Byte length of a hashed char.
+M3CityAndFarmHash_1_1.java	333	39	M3CityAndFarmHash_1_1	naHashLen33To64#1	8L	long	WORD_BYTES_L	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	334	45	M3CityAndFarmHash_1_1	naHashLen33To64#1	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	335	45	M3CityAndFarmHash_1_1	naHashLen33To64#1	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	336	37	M3CityAndFarmHash_1_1	naHashLen33To64#1	43	int	LEN17_ROTATION_1	DECLARED	Rotation of a + b in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	336	58	M3CityAndFarmHash_1_1	naHashLen33To64#1	30	int	LEN17_ROTATION_2	DECLARED	Rotation of c in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	337	55	M3CityAndFarmHash_1_1	naHashLen33To64#1	18	int	LEN17_ROTATION_3	DECLARED	Rotation of b + k2 in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	338	39	M3CityAndFarmHash_1_1	naHashLen33To64#2	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	339	39	M3CityAndFarmHash_1_1	naHashLen33To64#1	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	340	50	M3CityAndFarmHash_1_1	naHashLen33To64#1	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	341	50	M3CityAndFarmHash_1_1	naHashLen33To64#2	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	342	45	M3CityAndFarmHash_1_1	naHashLen33To64#2	43	int	LEN17_ROTATION_1	DECLARED	Rotation of a + b in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	342	66	M3CityAndFarmHash_1_1	naHashLen33To64#2	30	int	LEN17_ROTATION_2	DECLARED	Rotation of c in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	343	40	M3CityAndFarmHash_1_1	naHashLen33To64#2	18	int	LEN17_ROTATION_3	DECLARED	Rotation of b + k2 in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1.java	347	27	M3CityAndFarmHash_1_1	naHash64#1	81	int	FARM_SEED	DECLARED	Default seed of FarmHash na and uo.
+M3CityAndFarmHash_1_1.java	348	20	M3CityAndFarmHash_1_1	naHash64#1	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	349	24	M3CityAndFarmHash_1_1	naHash64#1	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	354	27	M3CityAndFarmHash_1_1	naHash64#1	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	364	30	M3CityAndFarmHash_1_1	naHash64#1	113	int	SEED_ADDEND	DECLARED	Addend of the seed mix: seed * k + 113.
+M3CityAndFarmHash_1_1.java	365	36	M3CityAndFarmHash_1_1	naHash64#2	113	int	SEED_ADDEND	DECLARED	Addend of the seed mix: seed * k + 113.
+M3CityAndFarmHash_1_1.java	371	40	M3CityAndFarmHash_1_1	naHash64#1	6	int	BLOCK_SHIFT	DECLARED	log2 of the 64-byte block.
+M3CityAndFarmHash_1_1.java	371	45	M3CityAndFarmHash_1_1	naHash64#2	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	372	42	M3CityAndFarmHash_1_1	naHash64#1	63	int	BLOCK_MASK	DECLARED	64-byte block size minus one: masks an index to its block and backs up from a block's last byte to its first.
+M3CityAndFarmHash_1_1.java	372	48	M3CityAndFarmHash_1_1	naHash64#2	63	int	BLOCK_MASK	DECLARED	64-byte block size minus one: masks an index to its block and backs up from a block's last byte to its first.
+M3CityAndFarmHash_1_1.java	375	63	M3CityAndFarmHash_1_1	naHash64#1	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	375	67	M3CityAndFarmHash_1_1	naHash64#1	37	int	LOOP_ROTATION_X	DECLARED	Rotation of x in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	376	59	M3CityAndFarmHash_1_1	naHash64#1	48	int	WORDS_6_BYTES	DECLARED	Bytes of 6 64-bit words.
+M3CityAndFarmHash_1_1.java	376	64	M3CityAndFarmHash_1_1	naHash64#1	42	int	LOOP_ROTATION_Y	DECLARED	Rotation of y in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	378	44	M3CityAndFarmHash_1_1	naHash64#1	40	int	WORDS_5_BYTES	DECLARED	Bytes of 5 64-bit words.
+M3CityAndFarmHash_1_1.java	379	37	M3CityAndFarmHash_1_1	naHash64#1	33	int	LOOP_ROTATION_Z	DECLARED	Rotation of z in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	382	44	M3CityAndFarmHash_1_1	naHash64#1	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	384	41	M3CityAndFarmHash_1_1	naHash64#1	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	386	39	M3CityAndFarmHash_1_1	naHash64#2	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	387	39	M3CityAndFarmHash_1_1	naHash64#2	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	388	33	M3CityAndFarmHash_1_1	naHash64#1	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	392	48	M3CityAndFarmHash_1_1	naHash64#3	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	393	44	M3CityAndFarmHash_1_1	naHash64#2	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	393	49	M3CityAndFarmHash_1_1	naHash64#2	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	394	40	M3CityAndFarmHash_1_1	naHash64#3	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	395	44	M3CityAndFarmHash_1_1	naHash64#2	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	397	40	M3CityAndFarmHash_1_1	naHash64#4	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	397	45	M3CityAndFarmHash_1_1	naHash64#3	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	398	40	M3CityAndFarmHash_1_1	naHash64#5	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	398	45	M3CityAndFarmHash_1_1	naHash64#4	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	399	35	M3CityAndFarmHash_1_1	naHash64#2	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	405	26	M3CityAndFarmHash_1_1	naHash64#3	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	409	31	M3CityAndFarmHash_1_1	naHash64#1	0xff	int	MUL_BYTE_MASK	DECLARED	The low byte of z in the multiplier of the last block: mul = k1 + ((z & 0xff) << 1).
+M3CityAndFarmHash_1_1.java	412	27	M3CityAndFarmHash_1_1	naHash64#3	63	int	BLOCK_MASK	DECLARED	64-byte block size minus one: masks an index to its block and backs up from a block's last byte to its first.
+M3CityAndFarmHash_1_1.java	415	59	M3CityAndFarmHash_1_1	naHash64#4	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	415	63	M3CityAndFarmHash_1_1	naHash64#2	37	int	LOOP_ROTATION_X	DECLARED	Rotation of x in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	416	55	M3CityAndFarmHash_1_1	naHash64#2	48	int	WORDS_6_BYTES	DECLARED	Bytes of 6 64-bit words.
+M3CityAndFarmHash_1_1.java	416	60	M3CityAndFarmHash_1_1	naHash64#2	42	int	LOOP_ROTATION_Y	DECLARED	Rotation of y in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	417	19	M3CityAndFarmHash_1_1	naHash64#1	9	int	ROUND_MULTIPLIER	DECLARED	Multiplier 9 of the FarmHash rounds.
+M3CityAndFarmHash_1_1.java	418	19	M3CityAndFarmHash_1_1	naHash64#2	9	int	ROUND_MULTIPLIER	DECLARED	Multiplier 9 of the FarmHash rounds.
+M3CityAndFarmHash_1_1.java	418	44	M3CityAndFarmHash_1_1	naHash64#2	40	int	WORDS_5_BYTES	DECLARED	Bytes of 5 64-bit words.
+M3CityAndFarmHash_1_1.java	419	33	M3CityAndFarmHash_1_1	naHash64#2	33	int	LOOP_ROTATION_Z	DECLARED	Rotation of z in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	422	40	M3CityAndFarmHash_1_1	naHash64#3	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	424	37	M3CityAndFarmHash_1_1	naHash64#3	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	426	35	M3CityAndFarmHash_1_1	naHash64#5	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	427	35	M3CityAndFarmHash_1_1	naHash64#5	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	428	29	M3CityAndFarmHash_1_1	naHash64#3	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	432	44	M3CityAndFarmHash_1_1	naHash64#6	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	433	40	M3CityAndFarmHash_1_1	naHash64#6	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	433	45	M3CityAndFarmHash_1_1	naHash64#4	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	434	36	M3CityAndFarmHash_1_1	naHash64#7	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	435	40	M3CityAndFarmHash_1_1	naHash64#4	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	437	36	M3CityAndFarmHash_1_1	naHash64#8	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	437	41	M3CityAndFarmHash_1_1	naHash64#6	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	438	36	M3CityAndFarmHash_1_1	naHash64#9	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	438	41	M3CityAndFarmHash_1_1	naHash64#7	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	439	31	M3CityAndFarmHash_1_1	naHash64#4	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	462	20	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	467	31	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	113	int	SEED_ADDEND	DECLARED	Addend of the seed mix: seed * k + 113.
+M3CityAndFarmHash_1_1.java	475	30	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	0x82	int	MUL_BIT_MASK	DECLARED	mul = k2 + (u & 0x82): two bits of u.
+M3CityAndFarmHash_1_1.java	477	40	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	6	int	BLOCK_SHIFT	DECLARED	log2 of the 64-byte block.
+M3CityAndFarmHash_1_1.java	477	45	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	478	42	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	63	int	BLOCK_MASK	DECLARED	64-byte block size minus one: masks an index to its block and backs up from a block's last byte to its first.
+M3CityAndFarmHash_1_1.java	478	48	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	63	int	BLOCK_MASK	DECLARED	64-byte block size minus one: masks an index to its block and backs up from a block's last byte to its first.
+M3CityAndFarmHash_1_1.java	482	44	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	483	44	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	484	44	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	485	44	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	486	44	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	40	int	WORDS_5_BYTES	DECLARED	Bytes of 5 64-bit words.
+M3CityAndFarmHash_1_1.java	487	44	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	48	int	WORDS_6_BYTES	DECLARED	Bytes of 6 64-bit words.
+M3CityAndFarmHash_1_1.java	488	44	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	56	int	WORDS_7_BYTES	DECLARED	Bytes of 7 64-bit words.
+M3CityAndFarmHash_1_1.java	497	32	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	26	int	UO_ROTATION_X	DECLARED	Rotation of x in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1.java	498	18	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	9	int	ROUND_MULTIPLIER	DECLARED	Multiplier 9 of the FarmHash rounds.
+M3CityAndFarmHash_1_1.java	499	32	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	29	int	UO_ROTATION_Y	DECLARED	Rotation of y in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1.java	501	34	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	33	int	UO_ROTATION_V0	DECLARED	Rotation of v0 in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1.java	502	34	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	30	int	UO_ROTATION_V1	DECLARED	Rotation of v1 in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1.java	504	19	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	9	int	ROUND_MULTIPLIER	DECLARED	Multiplier 9 of the FarmHash rounds.
+M3CityAndFarmHash_1_1.java	505	32	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	32	int	UO_ROTATION_Z	DECLARED	Rotation of z in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1.java	508	18	M3CityAndFarmHash_1_1	uoHash64WithSeeds#3	9	int	ROUND_MULTIPLIER	DECLARED	Multiplier 9 of the FarmHash rounds.
+M3CityAndFarmHash_1_1.java	528	34	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	34	int	UO_ROTATION_W1	DECLARED	Rotation of w1 in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1.java	534	26	M3CityAndFarmHash_1_1	uoHash64WithSeeds#3	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	538	14	M3CityAndFarmHash_1_1	uoHash64WithSeeds#4	9	int	ROUND_MULTIPLIER	DECLARED	Multiplier 9 of the FarmHash rounds.
+M3CityAndFarmHash_1_1.java	539	30	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	28	int	UO_ROTATION_V1_LAST	DECLARED	Rotation of v1 before the last block of FarmHash uo.
+M3CityAndFarmHash_1_1.java	540	30	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	20	int	UO_ROTATION_V0_LAST	DECLARED	Rotation of v0 before the last block of FarmHash uo.
+M3CityAndFarmHash_1_1.java	541	27	M3CityAndFarmHash_1_1	uoHash64WithSeeds#3	63	int	BLOCK_MASK	DECLARED	64-byte block size minus one: masks an index to its block and backs up from a block's last byte to its first.
+M3CityAndFarmHash_1_1.java	544	59	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	544	63	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	37	int	LOOP_ROTATION_X	DECLARED	Rotation of x in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	545	55	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	48	int	WORDS_6_BYTES	DECLARED	Bytes of 6 64-bit words.
+M3CityAndFarmHash_1_1.java	545	60	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	42	int	LOOP_ROTATION_Y	DECLARED	Rotation of y in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	546	19	M3CityAndFarmHash_1_1	uoHash64WithSeeds#5	9	int	ROUND_MULTIPLIER	DECLARED	Multiplier 9 of the FarmHash rounds.
+M3CityAndFarmHash_1_1.java	547	40	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	40	int	WORDS_5_BYTES	DECLARED	Bytes of 5 64-bit words.
+M3CityAndFarmHash_1_1.java	548	33	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	33	int	LOOP_ROTATION_Z	DECLARED	Rotation of z in the 64-byte loop.
+M3CityAndFarmHash_1_1.java	552	40	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	554	37	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	556	35	M3CityAndFarmHash_1_1	uoHash64WithSeeds#3	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	557	35	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	558	29	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	563	44	M3CityAndFarmHash_1_1	uoHash64WithSeeds#3	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	564	40	M3CityAndFarmHash_1_1	uoHash64WithSeeds#3	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	564	45	M3CityAndFarmHash_1_1	uoHash64WithSeeds#3	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1.java	565	36	M3CityAndFarmHash_1_1	uoHash64WithSeeds#4	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	566	40	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	21	int	WEAK_ROTATION_1	DECLARED	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	568	36	M3CityAndFarmHash_1_1	uoHash64WithSeeds#5	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	568	41	M3CityAndFarmHash_1_1	uoHash64WithSeeds#4	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1.java	569	36	M3CityAndFarmHash_1_1	uoHash64WithSeeds#6	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1.java	569	41	M3CityAndFarmHash_1_1	uoHash64WithSeeds#4	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1.java	570	31	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	44	int	WEAK_ROTATION_2	DECLARED	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1.java	574	41	M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	30	int	UO_H_ROTATION_INNER	DECLARED	Rotation of the inner uoH of the result.
+M3CityAndFarmHash_1_1.java	576	17	M3CityAndFarmHash_1_1	uoHash64WithSeeds#1	31	int	UO_H_ROTATION_OUTER	DECLARED	Rotation of the outer uoH of the result.
+M3CityAndFarmHash_1_1.java	640	24	Uo	hash#1	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.java	643	117	Uo	hash#1	81	int	FARM_SEED	DECLARED	Default seed of FarmHash na and uo.
+M3CityAndFarmHash_1_1.java	660	24	UoWithOneSeed	hash#1	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3DualHashFunction.java	19	48	M3DualHashFunction	checkResult#1	"The input result array has not enough space!"	String	RESULT_TOO_SHORT	DECLARED	Message: the result array is shorter than newResultArray().
+M3LongHashFunction.java	572	62	M3LongHashFunction	hashNativeChars#1	2L	long	CHAR_BYTES	DECLARED	Bytes of a char: char offsets and lengths in bytes.
+M3LongHashFunction.java	572	72	M3LongHashFunction	hashNativeChars#2	2L	long	CHAR_BYTES	DECLARED	Bytes of a char: char offsets and lengths in bytes.
+M3LongTupleHashFunction.java	136	41	M3LongTupleHashFunction	newResultArray#1	63	int	LONG_ROUND_UP	DECLARED	Rounds a bit length up to whole longs.
+M3LongTupleHashFunction.java	136	47	M3LongTupleHashFunction	newResultArray#1	64	int	LONG_BITS	DECLARED	Bits of a long.
+M3LongTupleHashFunction.java	613	46	M3LongTupleHashFunction	hashNativeChars#1	2L	long	CHAR_BYTES	DECLARED	Bytes of a char: char offsets and lengths in bytes.
+M3LongTupleHashFunction.java	613	56	M3LongTupleHashFunction	hashNativeChars#2	2L	long	CHAR_BYTES	DECLARED	Bytes of a char: char offsets and lengths in bytes.
+M3Maths.java	31	34	M3Maths	unsignedLongMulXorFoldImp#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3Maths.java	32	36	M3Maths	unsignedLongMulXorFoldImp#1	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	33	34	M3Maths	unsignedLongMulXorFoldImp#2	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3Maths.java	34	36	M3Maths	unsignedLongMulXorFoldImp#2	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	41	39	M3Maths	unsignedLongMulXorFoldImp#3	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	41	54	M3Maths	unsignedLongMulXorFoldImp#3	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3Maths.java	42	39	M3Maths	unsignedLongMulXorFoldImp#4	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	42	56	M3Maths	unsignedLongMulXorFoldImp#5	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	43	38	M3Maths	unsignedLongMulXorFoldImp#6	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	43	53	M3Maths	unsignedLongMulXorFoldImp#4	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3Maths.java	50	34	M3Maths	unsignedLongMulHighImp#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3Maths.java	51	36	M3Maths	unsignedLongMulHighImp#1	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	52	34	M3Maths	unsignedLongMulHighImp#2	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3Maths.java	53	36	M3Maths	unsignedLongMulHighImp#2	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	60	39	M3Maths	unsignedLongMulHighImp#3	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	60	54	M3Maths	unsignedLongMulHighImp#3	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3Maths.java	61	39	M3Maths	unsignedLongMulHighImp#4	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	61	56	M3Maths	unsignedLongMulHighImp#5	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3Maths.java	71	67	M3MathsJDK9	unsignedLongMulXorFoldImp#1	63	int	SIGN_SHIFT	DECLARED	x >> 63 is all ones for a negative x: the correction from the signed to the unsigned high product.
+M3Maths.java	71	89	M3MathsJDK9	unsignedLongMulXorFoldImp#2	63	int	SIGN_SHIFT	DECLARED	x >> 63 is all ones for a negative x: the correction from the signed to the unsigned high product.
+M3Maths.java	77	55	M3MathsJDK9	unsignedLongMulHighImp#1	63	int	SIGN_SHIFT	DECLARED	x >> 63 is all ones for a negative x: the correction from the signed to the unsigned high product.
+M3Maths.java	77	77	M3MathsJDK9	unsignedLongMulHighImp#2	63	int	SIGN_SHIFT	DECLARED	x >> 63 is all ones for a negative x: the correction from the signed to the unsigned high product.
+M3MetroHash.java	21	23	M3MetroHash	metroHash64#1	32	int	STRIPE_BYTES	DECLARED	Bytes of one stripe: four 64-bit lanes.
+M3MetroHash.java	29	43	M3MetroHash	metroHash64#1	29	int	LANE_ROTATION	DECLARED	Rotation of each lane of the 32-byte stripe.
+M3MetroHash.java	30	47	M3MetroHash	metroHash64#1	8	int	LANE_2_OFFSET	DECLARED	Offset of the second 64-bit word of a stripe or block.
+M3MetroHash.java	31	43	M3MetroHash	metroHash64#2	29	int	LANE_ROTATION	DECLARED	Rotation of each lane of the 32-byte stripe.
+M3MetroHash.java	32	47	M3MetroHash	metroHash64#1	16	int	LANE_3_OFFSET	DECLARED	Offset of the third 64-bit word of a stripe.
+M3MetroHash.java	33	43	M3MetroHash	metroHash64#3	29	int	LANE_ROTATION	DECLARED	Rotation of each lane of the 32-byte stripe.
+M3MetroHash.java	34	47	M3MetroHash	metroHash64#1	24	int	LANE_4_OFFSET	DECLARED	Offset of the fourth 64-bit word of a stripe.
+M3MetroHash.java	35	43	M3MetroHash	metroHash64#4	29	int	LANE_ROTATION	DECLARED	Rotation of each lane of the 32-byte stripe.
+M3MetroHash.java	37	24	M3MetroHash	metroHash64#2	32	int	STRIPE_BYTES	DECLARED	Bytes of one stripe: four 64-bit lanes.
+M3MetroHash.java	38	30	M3MetroHash	metroHash64#3	32	int	STRIPE_BYTES	DECLARED	Bytes of one stripe: four 64-bit lanes.
+M3MetroHash.java	39	35	M3MetroHash	metroHash64#4	32	int	STRIPE_BYTES	DECLARED	Bytes of one stripe: four 64-bit lanes.
+M3MetroHash.java	41	59	M3MetroHash	metroHash64#1	37	int	MERGE_ROTATION	DECLARED	Rotation when the four lanes merge.
+M3MetroHash.java	42	59	M3MetroHash	metroHash64#2	37	int	MERGE_ROTATION	DECLARED	Rotation when the four lanes merge.
+M3MetroHash.java	43	59	M3MetroHash	metroHash64#3	37	int	MERGE_ROTATION	DECLARED	Rotation when the four lanes merge.
+M3MetroHash.java	44	59	M3MetroHash	metroHash64#4	37	int	MERGE_ROTATION	DECLARED	Rotation when the four lanes merge.
+M3MetroHash.java	49	26	M3MetroHash	metroHash64#2	16	int	PAIR_BYTES	DECLARED	Bytes of the 16-byte block: two 64-bit words.
+M3MetroHash.java	51	39	M3MetroHash	metroHash64#5	29	int	PAIR_ROTATION	DECLARED	Rotation of each lane of the 16-byte block.
+M3MetroHash.java	52	52	M3MetroHash	metroHash64#2	8	int	LANE_2_OFFSET	DECLARED	Offset of the second 64-bit word of a stripe or block.
+M3MetroHash.java	53	39	M3MetroHash	metroHash64#6	29	int	PAIR_ROTATION	DECLARED	Rotation of each lane of the 16-byte block.
+M3MetroHash.java	54	45	M3MetroHash	metroHash64#1	21	int	PAIR_MIX_ROTATION	DECLARED	Rotation of the cross mix of the 16-byte block.
+M3MetroHash.java	55	45	M3MetroHash	metroHash64#2	21	int	PAIR_MIX_ROTATION	DECLARED	Rotation of the cross mix of the 16-byte block.
+M3MetroHash.java	58	20	M3MetroHash	metroHash64#3	16	int	PAIR_BYTES	DECLARED	Bytes of the 16-byte block: two 64-bit words.
+M3MetroHash.java	59	26	M3MetroHash	metroHash64#4	16	int	PAIR_BYTES	DECLARED	Bytes of the 16-byte block: two 64-bit words.
+M3MetroHash.java	62	26	M3MetroHash	metroHash64#3	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word: the step of the 8-byte tail.
+M3MetroHash.java	64	38	M3MetroHash	metroHash64#1	55	int	WORD_ROTATION	DECLARED	Rotation after a 64-bit tail word.
+M3MetroHash.java	66	20	M3MetroHash	metroHash64#4	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word: the step of the 8-byte tail.
+M3MetroHash.java	67	26	M3MetroHash	metroHash64#5	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word: the step of the 8-byte tail.
+M3MetroHash.java	70	26	M3MetroHash	metroHash64#1	4	int	INT_BYTES	DECLARED	Bytes of an int: the step of the 4-byte tail.
+M3MetroHash.java	72	38	M3MetroHash	metroHash64#1	26	int	INT_ROTATION	DECLARED	Rotation after a 32-bit tail int.
+M3MetroHash.java	74	20	M3MetroHash	metroHash64#2	4	int	INT_BYTES	DECLARED	Bytes of an int: the step of the 4-byte tail.
+M3MetroHash.java	75	26	M3MetroHash	metroHash64#3	4	int	INT_BYTES	DECLARED	Bytes of an int: the step of the 4-byte tail.
+M3MetroHash.java	78	26	M3MetroHash	metroHash64#1	2	int	SHORT_BYTES	DECLARED	Bytes of a short: the step of the 2-byte tail.
+M3MetroHash.java	80	38	M3MetroHash	metroHash64#1	48	int	SHORT_ROTATION	DECLARED	Rotation after a 16-bit tail short.
+M3MetroHash.java	82	20	M3MetroHash	metroHash64#2	2	int	SHORT_BYTES	DECLARED	Bytes of a short: the step of the 2-byte tail.
+M3MetroHash.java	83	26	M3MetroHash	metroHash64#3	2	int	SHORT_BYTES	DECLARED	Bytes of a short: the step of the 2-byte tail.
+M3MetroHash.java	88	38	M3MetroHash	metroHash64#5	37	int	BYTE_ROTATION	DECLARED	Rotation after a tail byte.
+M3MetroHash.java	95	34	M3MetroHash	finalize#1	28	int	FINAL_ROTATION_1	DECLARED	First rotation of the finalizer.
+M3MetroHash.java	97	34	M3MetroHash	finalize#1	29	int	FINAL_ROTATION_2	DECLARED	Second rotation of the finalizer.
+M3MetroHash.java	119	38	AsLongHashFunction	hashLong#1	55	int	WORD_ROTATION	DECLARED	Rotation after a 64-bit tail word.
+M3MetroHash.java	129	38	AsLongHashFunction	hashInt#1	26	int	INT_ROTATION	DECLARED	Rotation after a 32-bit tail int.
+M3MetroHash.java	139	38	AsLongHashFunction	hashShort#1	48	int	SHORT_ROTATION	DECLARED	Rotation after a 16-bit tail short.
+M3MetroHash.java	153	38	AsLongHashFunction	hashByte#1	37	int	BYTE_ROTATION	DECLARED	Rotation after a tail byte.
+M3MurmurHash_3.java	41	29	M3MurmurHash_3	hash#1	16L	long	BLOCK_BYTES	DECLARED	Bytes of one 128-bit block.
+M3MurmurHash_3.java	43	50	M3MurmurHash_3	hash#1	8L	long	HALF_BLOCK_OFFSET	DECLARED	Offset of the second 64-bit half of a block.
+M3MurmurHash_3.java	44	23	M3MurmurHash_3	hash#2	16L	long	BLOCK_BYTES	DECLARED	Bytes of one 128-bit block.
+M3MurmurHash_3.java	45	26	M3MurmurHash_3	hash#3	16L	long	BLOCK_BYTES	DECLARED	Bytes of one 128-bit block.
+M3MurmurHash_3.java	48	38	M3MurmurHash_3	hash#1	27	int	H1_ROTATION	DECLARED	Rotation of h1 after each block.
+M3MurmurHash_3.java	50	23	M3MurmurHash_3	hash#1	5L	long	MIX_MULTIPLIER	DECLARED	h = h * 5 + c after each block.
+M3MurmurHash_3.java	50	28	M3MurmurHash_3	hash#1	0x52dce729L	long	H1_ADDEND	DECLARED	Addend of h1 after each block.
+M3MurmurHash_3.java	54	38	M3MurmurHash_3	hash#1	31	int	H2_ROTATION	DECLARED	Rotation of h2 after each block.
+M3MurmurHash_3.java	56	23	M3MurmurHash_3	hash#2	5L	long	MIX_MULTIPLIER	DECLARED	h = h * 5 + c after each block.
+M3MurmurHash_3.java	56	28	M3MurmurHash_3	hash#1	0x38495ab5L	long	H2_ADDEND	DECLARED	Addend of h2 after each block.
+M3MurmurHash_3.java	63	22	M3MurmurHash_3	hash#1	15	int	TAIL_15	DECLARED	A tail of 15 bytes.
+M3MurmurHash_3.java	64	61	M3MurmurHash_3	hash#1	14L	long	TAIL_BYTE_14	DECLARED	Offset of byte 14 of the tail.
+M3MurmurHash_3.java	64	70	M3MurmurHash_3	hash#1	48	int	BYTE_6_SHIFT	DECLARED	Bit position of the seventh byte of a little-endian word.
+M3MurmurHash_3.java	65	22	M3MurmurHash_3	hash#1	14	int	TAIL_14	DECLARED	A tail of 14 bytes.
+M3MurmurHash_3.java	66	61	M3MurmurHash_3	hash#1	13L	long	TAIL_BYTE_13	DECLARED	Offset of byte 13 of the tail.
+M3MurmurHash_3.java	66	70	M3MurmurHash_3	hash#1	40	int	BYTE_5_SHIFT	DECLARED	Bit position of the sixth byte of a little-endian word.
+M3MurmurHash_3.java	67	22	M3MurmurHash_3	hash#1	13	int	TAIL_13	DECLARED	A tail of 13 bytes.
+M3MurmurHash_3.java	68	61	M3MurmurHash_3	hash#1	12L	long	TAIL_BYTE_12	DECLARED	Offset of byte 12 of the tail.
+M3MurmurHash_3.java	68	70	M3MurmurHash_3	hash#1	32	int	BYTE_4_SHIFT	DECLARED	Bit position of the fifth byte of a little-endian word.
+M3MurmurHash_3.java	69	22	M3MurmurHash_3	hash#1	12	int	TAIL_12	DECLARED	A tail of 12 bytes.
+M3MurmurHash_3.java	70	61	M3MurmurHash_3	hash#1	11L	long	TAIL_BYTE_11	DECLARED	Offset of byte 11 of the tail.
+M3MurmurHash_3.java	70	70	M3MurmurHash_3	hash#1	24	int	BYTE_3_SHIFT	DECLARED	Bit position of the fourth byte of a little-endian word.
+M3MurmurHash_3.java	71	22	M3MurmurHash_3	hash#1	11	int	TAIL_11	DECLARED	A tail of 11 bytes.
+M3MurmurHash_3.java	72	61	M3MurmurHash_3	hash#1	10L	long	TAIL_BYTE_10	DECLARED	Offset of byte 10 of the tail.
+M3MurmurHash_3.java	72	70	M3MurmurHash_3	hash#1	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte of a little-endian word.
+M3MurmurHash_3.java	73	22	M3MurmurHash_3	hash#1	10	int	TAIL_10	DECLARED	A tail of 10 bytes.
+M3MurmurHash_3.java	74	61	M3MurmurHash_3	hash#1	9L	long	TAIL_BYTE_9	DECLARED	Offset of byte 9 of the tail.
+M3MurmurHash_3.java	74	69	M3MurmurHash_3	hash#1	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3MurmurHash_3.java	75	22	M3MurmurHash_3	hash#1	9	int	TAIL_9	DECLARED	A tail of 9 bytes.
+M3MurmurHash_3.java	76	61	M3MurmurHash_3	hash#2	8L	long	TAIL_BYTE_8	DECLARED	Offset of byte 8 of the tail.
+M3MurmurHash_3.java	77	22	M3MurmurHash_3	hash#2	8	int	TAIL_8	DECLARED	A tail of 8 bytes.
+M3MurmurHash_3.java	80	22	M3MurmurHash_3	hash#1	7	int	TAIL_7	DECLARED	A tail of 7 bytes.
+M3MurmurHash_3.java	81	61	M3MurmurHash_3	hash#1	6L	long	TAIL_BYTE_6	DECLARED	Offset of byte 6 of the tail.
+M3MurmurHash_3.java	81	69	M3MurmurHash_3	hash#2	48	int	BYTE_6_SHIFT	DECLARED	Bit position of the seventh byte of a little-endian word.
+M3MurmurHash_3.java	82	22	M3MurmurHash_3	hash#1	6	int	TAIL_6	DECLARED	A tail of 6 bytes.
+M3MurmurHash_3.java	83	61	M3MurmurHash_3	hash#3	5L	long	TAIL_BYTE_5	DECLARED	Offset of byte 5 of the tail.
+M3MurmurHash_3.java	83	69	M3MurmurHash_3	hash#2	40	int	BYTE_5_SHIFT	DECLARED	Bit position of the sixth byte of a little-endian word.
+M3MurmurHash_3.java	84	22	M3MurmurHash_3	hash#1	5	int	TAIL_5	DECLARED	A tail of 5 bytes.
+M3MurmurHash_3.java	85	61	M3MurmurHash_3	hash#1	4L	long	TAIL_BYTE_4	DECLARED	Offset of byte 4 of the tail.
+M3MurmurHash_3.java	85	69	M3MurmurHash_3	hash#2	32	int	BYTE_4_SHIFT	DECLARED	Bit position of the fifth byte of a little-endian word.
+M3MurmurHash_3.java	86	22	M3MurmurHash_3	hash#1	4	int	TAIL_4	DECLARED	A tail of 4 bytes.
+M3MurmurHash_3.java	89	22	M3MurmurHash_3	hash#1	3	int	TAIL_3	DECLARED	A tail of 3 bytes.
+M3MurmurHash_3.java	90	61	M3MurmurHash_3	hash#1	2L	long	TAIL_BYTE_2	DECLARED	Offset of byte 2 of the tail.
+M3MurmurHash_3.java	90	69	M3MurmurHash_3	hash#2	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte of a little-endian word.
+M3MurmurHash_3.java	91	22	M3MurmurHash_3	hash#1	2	int	TAIL_2	DECLARED	A tail of 2 bytes.
+M3MurmurHash_3.java	92	69	M3MurmurHash_3	hash#3	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3MurmurHash_3.java	98	46	M3MurmurHash_3	hash#1	"Should never get here."	String	UNREACHABLE	DECLARED	Message: the tail switch covers every remainder.
+M3MurmurHash_3.java	198	20	M3MurmurHash_3	fmix64#1	33	int	FMIX_SHIFT	DECLARED	Shift of the fmix64 finalizer.
+M3MurmurHash_3.java	199	14	M3MurmurHash_3	fmix64#1	0xff51afd7ed558ccdL	long	FMIX_MULTIPLIER_1	DECLARED	First multiplier of the fmix64 finalizer.
+M3MurmurHash_3.java	200	20	M3MurmurHash_3	fmix64#2	33	int	FMIX_SHIFT	DECLARED	Shift of the fmix64 finalizer.
+M3MurmurHash_3.java	201	14	M3MurmurHash_3	fmix64#1	0xc4ceb9fe1a85ec53L	long	FMIX_MULTIPLIER_2	DECLARED	Second multiplier of the fmix64 finalizer.
+M3MurmurHash_3.java	202	20	M3MurmurHash_3	fmix64#3	33	int	FMIX_SHIFT	DECLARED	Shift of the fmix64 finalizer.
+M3MurmurHash_3.java	208	34	M3MurmurHash_3	mixK1#1	31	int	K1_ROTATION	DECLARED	Rotation of k1.
+M3MurmurHash_3.java	215	34	M3MurmurHash_3	mixK2#1	33	int	K2_ROTATION	DECLARED	Rotation of k2.
+M3MurmurHash_3.java	231	20	AsLongTupleHashFunction	bitsLength#1	128	int	RESULT_BITS	DECLARED	Bits of the 128-bit result.
+M3MurmurHash_3.java	235	29	AsLongTupleHashFunction	newResultArray#1	2	int	RESULT_LONGS	DECLARED	Longs of the 128-bit result.
+M3MurmurHash_3.java	250	77	AsLongTupleHashFunction	dualHashLong#1	8L	long	LONG_LENGTH	DECLARED	Byte length of a hashed long.
+M3MurmurHash_3.java	255	90	AsLongTupleHashFunction	dualHashInt#1	4L	long	INT_LENGTH	DECLARED	Byte length of a hashed int.
+M3MurmurHash_3.java	260	92	AsLongTupleHashFunction	dualHashShort#1	2L	long	SHORT_LENGTH	DECLARED	Byte length of a hashed short or char.
+M3MurmurHash_3.java	265	92	AsLongTupleHashFunction	dualHashChar#1	2L	long	SHORT_LENGTH	DECLARED	Byte length of a hashed short or char.
+M3Primitives.java	33	20	M3Primitives	unsignedInt#1	0xFFFFFFFFL	long	UNSIGNED_INT_MASK	DECLARED	The low 32 bits: an int as an unsigned value.
+M3Primitives.java	37	20	M3Primitives	unsignedShort#1	0xFFFF	int	UNSIGNED_SHORT_MASK	DECLARED	The low 16 bits: a short as an unsigned value.
+M3Primitives.java	41	20	M3Primitives	unsignedByte#1	0xFF	int	UNSIGNED_BYTE_MASK	DECLARED	The low 8 bits: a byte as an unsigned value.
+M3WyHash.java	30	48	M3WyHash	_wyr3#1	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the first byte in the 3-byte read.
+M3WyHash.java	31	60	M3WyHash	_wyr3#1	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the middle byte in the 3-byte read.
+M3WyHash.java	36	42	M3WyHash	u64Rorate32#1	32	int	HALF_SHIFT	DECLARED	Distance between the two 32-bit halves of a long.
+M3WyHash.java	36	71	M3WyHash	u64Rorate32#1	4	int	INT_BYTES	DECLARED	Bytes of an int: offset of the second half.
+M3WyHash.java	52	24	M3WyHash	wyHash64#1	4	int	INT_BYTES	DECLARED	Bytes of an int: inputs shorter than this take the 3-byte read.
+M3WyHash.java	55	25	M3WyHash	wyHash64#1	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	57	67	M3WyHash	wyHash64#2	4	int	INT_BYTES	DECLARED	Bytes of an int: inputs shorter than this take the 3-byte read.
+M3WyHash.java	59	25	M3WyHash	wyHash64#1	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3WyHash.java	61	71	M3WyHash	wyHash64#2	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	63	25	M3WyHash	wyHash64#1	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3WyHash.java	65	64	M3WyHash	wyHash64#3	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	66	71	M3WyHash	wyHash64#4	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	68	25	M3WyHash	wyHash64#1	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3WyHash.java	70	64	M3WyHash	wyHash64#5	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	71	65	M3WyHash	wyHash64#2	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3WyHash.java	72	72	M3WyHash	wyHash64#6	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	74	16	M3WyHash	wyHash64#1	256	int	BLOCK_BYTES	DECLARED	Bytes of one round of the long loop: 32 64-bit words.
+M3WyHash.java	74	23	M3WyHash	wyHash64#2	256	int	BLOCK_BYTES	DECLARED	Bytes of one round of the long loop: 32 64-bit words.
+M3WyHash.java	74	30	M3WyHash	wyHash64#3	256	int	BLOCK_BYTES	DECLARED	Bytes of one round of the long loop: 32 64-bit words.
+M3WyHash.java	76	49	M3WyHash	wyHash64#7	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	77	49	M3WyHash	wyHash64#3	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3WyHash.java	78	49	M3WyHash	wyHash64#2	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3WyHash.java	79	49	M3WyHash	wyHash64#2	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3WyHash.java	80	49	M3WyHash	wyHash64#1	40	int	WORDS_5_BYTES	DECLARED	Bytes of 5 64-bit words.
+M3WyHash.java	81	49	M3WyHash	wyHash64#1	48	int	WORDS_6_BYTES	DECLARED	Bytes of 6 64-bit words.
+M3WyHash.java	82	49	M3WyHash	wyHash64#1	56	int	WORDS_7_BYTES	DECLARED	Bytes of 7 64-bit words.
+M3WyHash.java	83	49	M3WyHash	wyHash64#1	64	int	WORDS_8_BYTES	DECLARED	Bytes of 8 64-bit words.
+M3WyHash.java	84	49	M3WyHash	wyHash64#1	72	int	WORDS_9_BYTES	DECLARED	Bytes of 9 64-bit words.
+M3WyHash.java	85	49	M3WyHash	wyHash64#1	80	int	WORDS_10_BYTES	DECLARED	Bytes of 10 64-bit words.
+M3WyHash.java	86	49	M3WyHash	wyHash64#1	88	int	WORDS_11_BYTES	DECLARED	Bytes of 11 64-bit words.
+M3WyHash.java	87	49	M3WyHash	wyHash64#1	96	int	WORDS_12_BYTES	DECLARED	Bytes of 12 64-bit words.
+M3WyHash.java	88	49	M3WyHash	wyHash64#1	104	int	WORDS_13_BYTES	DECLARED	Bytes of 13 64-bit words.
+M3WyHash.java	89	49	M3WyHash	wyHash64#1	112	int	WORDS_14_BYTES	DECLARED	Bytes of 14 64-bit words.
+M3WyHash.java	90	49	M3WyHash	wyHash64#1	120	int	WORDS_15_BYTES	DECLARED	Bytes of 15 64-bit words.
+M3WyHash.java	91	49	M3WyHash	wyHash64#1	128	int	WORDS_16_BYTES	DECLARED	Bytes of 16 64-bit words.
+M3WyHash.java	92	49	M3WyHash	wyHash64#1	136	int	WORDS_17_BYTES	DECLARED	Bytes of 17 64-bit words.
+M3WyHash.java	93	49	M3WyHash	wyHash64#1	144	int	WORDS_18_BYTES	DECLARED	Bytes of 18 64-bit words.
+M3WyHash.java	94	49	M3WyHash	wyHash64#1	152	int	WORDS_19_BYTES	DECLARED	Bytes of 19 64-bit words.
+M3WyHash.java	95	49	M3WyHash	wyHash64#1	160	int	WORDS_20_BYTES	DECLARED	Bytes of 20 64-bit words.
+M3WyHash.java	96	49	M3WyHash	wyHash64#1	168	int	WORDS_21_BYTES	DECLARED	Bytes of 21 64-bit words.
+M3WyHash.java	97	49	M3WyHash	wyHash64#1	176	int	WORDS_22_BYTES	DECLARED	Bytes of 22 64-bit words.
+M3WyHash.java	98	49	M3WyHash	wyHash64#1	184	int	WORDS_23_BYTES	DECLARED	Bytes of 23 64-bit words.
+M3WyHash.java	99	49	M3WyHash	wyHash64#1	192	int	WORDS_24_BYTES	DECLARED	Bytes of 24 64-bit words.
+M3WyHash.java	100	49	M3WyHash	wyHash64#1	200	int	WORDS_25_BYTES	DECLARED	Bytes of 25 64-bit words.
+M3WyHash.java	101	49	M3WyHash	wyHash64#1	208	int	WORDS_26_BYTES	DECLARED	Bytes of 26 64-bit words.
+M3WyHash.java	102	49	M3WyHash	wyHash64#1	216	int	WORDS_27_BYTES	DECLARED	Bytes of 27 64-bit words.
+M3WyHash.java	103	49	M3WyHash	wyHash64#1	224	int	WORDS_28_BYTES	DECLARED	Bytes of 28 64-bit words.
+M3WyHash.java	104	49	M3WyHash	wyHash64#1	232	int	WORDS_29_BYTES	DECLARED	Bytes of 29 64-bit words.
+M3WyHash.java	105	49	M3WyHash	wyHash64#1	240	int	WORDS_30_BYTES	DECLARED	Bytes of 30 64-bit words.
+M3WyHash.java	106	49	M3WyHash	wyHash64#1	248	int	WORDS_31_BYTES	DECLARED	Bytes of 31 64-bit words.
+M3WyHash.java	108	20	M3WyHash	wyHash64#3	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3WyHash.java	108	29	M3WyHash	wyHash64#4	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3WyHash.java	108	38	M3WyHash	wyHash64#5	32	int	WORDS_4_BYTES	DECLARED	Bytes of 4 64-bit words.
+M3WyHash.java	110	49	M3WyHash	wyHash64#8	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	111	49	M3WyHash	wyHash64#4	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3WyHash.java	112	49	M3WyHash	wyHash64#3	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3WyHash.java	114	17	M3WyHash	wyHash64#3	4	int	INT_BYTES	DECLARED	Bytes of an int: inputs shorter than this take the 3-byte read.
+M3WyHash.java	116	25	M3WyHash	wyHash64#9	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	118	53	M3WyHash	wyHash64#4	4	int	INT_BYTES	DECLARED	Bytes of an int: inputs shorter than this take the 3-byte read.
+M3WyHash.java	119	25	M3WyHash	wyHash64#5	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3WyHash.java	121	62	M3WyHash	wyHash64#10	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	122	25	M3WyHash	wyHash64#4	24	int	WORDS_3_BYTES	DECLARED	Bytes of 3 64-bit words.
+M3WyHash.java	124	58	M3WyHash	wyHash64#11	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	125	62	M3WyHash	wyHash64#12	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	128	58	M3WyHash	wyHash64#13	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	129	58	M3WyHash	wyHash64#6	16	int	WORDS_2_BYTES	DECLARED	Bytes of 2 64-bit words.
+M3WyHash.java	130	62	M3WyHash	wyHash64#14	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word.
+M3WyHash.java	154	31	AsLongHashFunction	hashLong#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3WyHash.java	155	34	AsLongHashFunction	hashLong#1	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3WyHash.java	155	40	AsLongHashFunction	hashLong#2	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3WyHash.java	158	30	AsLongHashFunction	hashLong#1	8	int	LONG_LENGTH	DECLARED	Byte length of a hashed long.
+M3WyHash.java	164	39	AsLongHashFunction	hashInt#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3WyHash.java	167	37	AsLongHashFunction	hashInt#1	4	int	INT_LENGTH	DECLARED	Byte length of a hashed int.
+M3WyHash.java	173	34	AsLongHashFunction	hashShort#1	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte.
+M3WyHash.java	173	39	AsLongHashFunction	hashShort#1	0xFFL	long	BYTE_MASK	DECLARED	The low byte.
+M3WyHash.java	174	36	AsLongHashFunction	hashShort#2	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte.
+M3WyHash.java	174	49	AsLongHashFunction	hashShort#2	0xFFL	long	BYTE_MASK	DECLARED	The low byte.
+M3WyHash.java	174	59	AsLongHashFunction	hashShort#1	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte.
+M3WyHash.java	176	60	AsLongHashFunction	hashShort#1	2	int	SHORT_LENGTH	DECLARED	Byte length of a hashed short or char.
+M3WyHash.java	186	31	AsLongHashFunction	hashByte#1	0xFFL	long	BYTE_MASK	DECLARED	The low byte.
+M3WyHash.java	187	36	AsLongHashFunction	hashByte#1	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte.
+M3WyHash.java	187	46	AsLongHashFunction	hashByte#1	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte.
+M3XXH3.java	68	24	M3XXH3	XXH64_avalanche#1	33	int	XXH64_AVALANCHE_SHIFT_1	DECLARED	Shift of the XXH64 avalanche.
+M3XXH3.java	70	24	M3XXH3	XXH64_avalanche#1	29	int	XXH64_AVALANCHE_SHIFT_2	DECLARED	Shift of the XXH64 avalanche.
+M3XXH3.java	72	31	M3XXH3	XXH64_avalanche#1	32	int	XXH64_AVALANCHE_SHIFT_3	DECLARED	Shift of the XXH64 avalanche.
+M3XXH3.java	75	24	M3XXH3	XXH3_avalanche#1	37	int	AVALANCHE_SHIFT	DECLARED	Shift of the XXH3 avalanche.
+M3XXH3.java	76	16	M3XXH3	XXH3_avalanche#1	0x165667919E3779F9L	long	PRIME_MX1	DECLARED	Multiplier of the XXH3 avalanche (PRIME_MX1).
+M3XXH3.java	77	31	M3XXH3	XXH3_avalanche#1	32	int	AVALANCHE_FOLD_SHIFT	DECLARED	The XXH3 avalanche ends with h ^ (h >>> 32).
+M3XXH3.java	80	37	M3XXH3	XXH3_rrmxmx#1	49	int	RRMXMX_ROTATION_1	DECLARED	First rotation of rrmxmx.
+M3XXH3.java	80	64	M3XXH3	XXH3_rrmxmx#1	24	int	RRMXMX_ROTATION_2	DECLARED	Second rotation of rrmxmx.
+M3XXH3.java	81	16	M3XXH3	XXH3_rrmxmx#1	0x9FB21C651E98DF25L	long	PRIME_MX2	DECLARED	Multiplier of rrmxmx (PRIME_MX2).
+M3XXH3.java	82	25	M3XXH3	XXH3_rrmxmx#1	35	int	RRMXMX_SHIFT_1	DECLARED	First shift of rrmxmx.
+M3XXH3.java	83	16	M3XXH3	XXH3_rrmxmx#2	0x9FB21C651E98DF25L	long	PRIME_MX2	DECLARED	Multiplier of rrmxmx (PRIME_MX2).
+M3XXH3.java	84	31	M3XXH3	XXH3_rrmxmx#1	28	int	RRMXMX_SHIFT_2	DECLARED	Second shift of rrmxmx.
+M3XXH3.java	89	57	M3XXH3	XXH3_mix16B#1	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	92	59	M3XXH3	XXH3_mix16B#2	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	102	59	M3XXH3	XXH128_mix32B_once#1	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	109	50	M3XXH3	XXH3_mix2Accs#1	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	113	23	M3XXH3	XXH3_64bits_internal#1	16	int	SHORT_INPUT_MAX	DECLARED	Longest input of the 0..16-byte path.
+M3XXH3.java	115	26	M3XXH3	XXH3_64bits_internal#1	8	int	LEN_4TO8_MAX	DECLARED	Longest input of the 4..8-byte path.
+M3XXH3.java	117	67	M3XXH3	XXH3_64bits_internal#1	24	int	SECRET_24	DECLARED	Offset 24 of the default secret.
+M3XXH3.java	117	110	M3XXH3	XXH3_64bits_internal#1	32	int	SECRET_32	DECLARED	Offset 32 of the default secret.
+M3XXH3.java	118	67	M3XXH3	XXH3_64bits_internal#1	40	int	SECRET_40	DECLARED	Offset 40 of the default secret.
+M3XXH3.java	118	110	M3XXH3	XXH3_64bits_internal#1	48	int	SECRET_48	DECLARED	Offset 48 of the default secret.
+M3XXH3.java	120	72	M3XXH3	XXH3_64bits_internal#2	8	int	LAST_8	DECLARED	Distance of the last 8 input bytes from the end.
+M3XXH3.java	124	27	M3XXH3	XXH3_64bits_internal#1	4	int	LEN_4TO8_MIN	DECLARED	Shortest input of the 4..8-byte path.
+M3XXH3.java	126	58	M3XXH3	XXH3_64bits_internal#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	128	70	M3XXH3	XXH3_64bits_internal#2	4	int	LAST_4	DECLARED	Distance of the last 4 input bytes from the end.
+M3XXH3.java	129	66	M3XXH3	XXH3_64bits_internal#3	8	int	SECRET_8	DECLARED	Offset 8 of the default secret.
+M3XXH3.java	129	108	M3XXH3	XXH3_64bits_internal#2	16	int	SECRET_16	DECLARED	Offset 16 of the default secret.
+M3XXH3.java	130	57	M3XXH3	XXH3_64bits_internal#2	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	138	71	M3XXH3	XXH3_64bits_internal#3	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte of a little-endian word.
+M3XXH3.java	138	85	M3XXH3	XXH3_64bits_internal#2	24	int	BYTE_3_SHIFT	DECLARED	Bit position of the fourth byte of a little-endian word.
+M3XXH3.java	138	112	M3XXH3	XXH3_64bits_internal#4	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3XXH3.java	139	130	M3XXH3	XXH3_64bits_internal#3	4	int	SECRET_4	DECLARED	Offset 4 of the default secret.
+M3XXH3.java	142	70	M3XXH3	XXH3_64bits_internal#1	56	int	SECRET_56	DECLARED	Offset 56 of the default secret.
+M3XXH3.java	142	113	M3XXH3	XXH3_64bits_internal#1	64	int	SECRET_64	DECLARED	Offset 64 of the default secret.
+M3XXH3.java	144	23	M3XXH3	XXH3_64bits_internal#1	128	int	LEN_17TO128_MAX	DECLARED	Longest input of the 17..128-byte path.
+M3XXH3.java	148	26	M3XXH3	XXH3_64bits_internal#3	32	int	LEN_17TO128_PAIR_2	DECLARED	Longer inputs of the 17..128-byte path add a second pair of mixes.
+M3XXH3.java	149	30	M3XXH3	XXH3_64bits_internal#2	64	int	LEN_17TO128_PAIR_3	DECLARED	Longer inputs of the 17..128-byte path add a third pair of mixes.
+M3XXH3.java	150	34	M3XXH3	XXH3_64bits_internal#1	96	int	LEN_17TO128_PAIR_4	DECLARED	Longer inputs of the 17..128-byte path add a fourth pair of mixes.
+M3XXH3.java	151	71	M3XXH3	XXH3_64bits_internal#2	48	int	INPUT_48	DECLARED	Input offset 48.
+M3XXH3.java	151	87	M3XXH3	XXH3_64bits_internal#2	96	int	SECRET_96	DECLARED	Offset 96 of the default secret.
+M3XXH3.java	152	80	M3XXH3	XXH3_64bits_internal#3	64	int	LAST_64	DECLARED	Distance of the last 64 input bytes from the end.
+M3XXH3.java	152	96	M3XXH3	XXH3_64bits_internal#1	112	int	SECRET_112	DECLARED	Offset 112 of the default secret.
+M3XXH3.java	154	67	M3XXH3	XXH3_64bits_internal#4	32	int	INPUT_32	DECLARED	Input offset 32.
+M3XXH3.java	154	83	M3XXH3	XXH3_64bits_internal#4	64	int	SECRET_64	DECLARED	Offset 64 of the default secret.
+M3XXH3.java	155	76	M3XXH3	XXH3_64bits_internal#3	48	int	LAST_48	DECLARED	Distance of the last 48 input bytes from the end.
+M3XXH3.java	155	92	M3XXH3	XXH3_64bits_internal#1	80	int	SECRET_80	DECLARED	Offset 80 of the default secret.
+M3XXH3.java	157	63	M3XXH3	XXH3_64bits_internal#4	16	int	INPUT_16	DECLARED	Input offset 16.
+M3XXH3.java	157	79	M3XXH3	XXH3_64bits_internal#5	32	int	SECRET_32	DECLARED	Offset 32 of the default secret.
+M3XXH3.java	158	72	M3XXH3	XXH3_64bits_internal#6	32	int	LAST_32	DECLARED	Distance of the last 32 input bytes from the end.
+M3XXH3.java	158	88	M3XXH3	XXH3_64bits_internal#4	48	int	SECRET_48	DECLARED	Offset 48 of the default secret.
+M3XXH3.java	161	68	M3XXH3	XXH3_64bits_internal#5	16	int	LAST_16	DECLARED	Distance of the last 16 input bytes from the end.
+M3XXH3.java	161	84	M3XXH3	XXH3_64bits_internal#6	16	int	SECRET_16	DECLARED	Offset 16 of the default secret.
+M3XXH3.java	165	23	M3XXH3	XXH3_64bits_internal#1	240	int	MIDSIZE_MAX	DECLARED	Longest input of the 129..240-byte path.
+M3XXH3.java	168	48	M3XXH3	XXH3_64bits_internal#7	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	170	24	M3XXH3	XXH3_64bits_internal#5	8	int	MIDSIZE_FIRST_ROUNDS	DECLARED	Rounds of the 129..240-byte path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3.java	171	63	M3XXH3	XXH3_64bits_internal#8	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	171	81	M3XXH3	XXH3_64bits_internal#9	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	176	63	M3XXH3	XXH3_64bits_internal#10	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	176	81	M3XXH3	XXH3_64bits_internal#11	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	176	87	M3XXH3	XXH3_64bits_internal#6	8	int	MIDSIZE_FIRST_ROUNDS	DECLARED	Rounds of the 129..240-byte path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3.java	176	92	M3XXH3	XXH3_64bits_internal#1	3	int	MIDSIZE_START_OFFSET	DECLARED	Secret offset of the rounds after the first ones (129..240 bytes).
+M3XXH3.java	180	68	M3XXH3	XXH3_64bits_internal#12	16	int	LAST_16	DECLARED	Distance of the last 16 input bytes from the end.
+M3XXH3.java	180	84	M3XXH3	XXH3_64bits_internal#1	136	int	SECRET_SIZE_MIN	DECLARED	Smallest secret size.
+M3XXH3.java	180	90	M3XXH3	XXH3_64bits_internal#1	17	int	MIDSIZE_LAST_OFFSET	DECLARED	Distance of the last secret of the 129..240-byte path from SECRET_SIZE_MIN.
+M3XXH3.java	201	55	M3XXH3	XXH3_64bits_internal#5	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	202	41	M3XXH3	XXH3_64bits_internal#7	8	int	SECRET_CONSUME_RATE	DECLARED	Secret bytes consumed per stripe.
+M3XXH3.java	204	75	M3XXH3	XXH3_64bits_internal#8	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	205	75	M3XXH3	XXH3_64bits_internal#9	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	206	100	M3XXH3	XXH3_64bits_internal#10	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	207	100	M3XXH3	XXH3_64bits_internal#11	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	209	44	M3XXH3	XXH3_64bits_internal#2	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	209	88	M3XXH3	XXH3_64bits_internal#7	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	210	44	M3XXH3	XXH3_64bits_internal#3	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	210	88	M3XXH3	XXH3_64bits_internal#8	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	213	75	M3XXH3	XXH3_64bits_internal#12	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	213	77	M3XXH3	XXH3_64bits_internal#1	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	214	75	M3XXH3	XXH3_64bits_internal#13	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	214	77	M3XXH3	XXH3_64bits_internal#2	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	215	100	M3XXH3	XXH3_64bits_internal#14	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	215	102	M3XXH3	XXH3_64bits_internal#2	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	216	100	M3XXH3	XXH3_64bits_internal#15	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	216	102	M3XXH3	XXH3_64bits_internal#3	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	218	44	M3XXH3	XXH3_64bits_internal#4	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	218	88	M3XXH3	XXH3_64bits_internal#9	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	219	44	M3XXH3	XXH3_64bits_internal#5	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	219	88	M3XXH3	XXH3_64bits_internal#10	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	222	75	M3XXH3	XXH3_64bits_internal#16	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	222	77	M3XXH3	XXH3_64bits_internal#4	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	223	75	M3XXH3	XXH3_64bits_internal#17	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	223	77	M3XXH3	XXH3_64bits_internal#1	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	224	100	M3XXH3	XXH3_64bits_internal#18	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	224	102	M3XXH3	XXH3_64bits_internal#5	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	225	100	M3XXH3	XXH3_64bits_internal#19	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	225	102	M3XXH3	XXH3_64bits_internal#2	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	227	44	M3XXH3	XXH3_64bits_internal#6	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	227	88	M3XXH3	XXH3_64bits_internal#11	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	228	44	M3XXH3	XXH3_64bits_internal#7	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	228	88	M3XXH3	XXH3_64bits_internal#12	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	231	75	M3XXH3	XXH3_64bits_internal#20	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	231	77	M3XXH3	XXH3_64bits_internal#1	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	232	75	M3XXH3	XXH3_64bits_internal#21	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	232	77	M3XXH3	XXH3_64bits_internal#1	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	233	100	M3XXH3	XXH3_64bits_internal#22	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	233	102	M3XXH3	XXH3_64bits_internal#2	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	234	100	M3XXH3	XXH3_64bits_internal#23	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	234	102	M3XXH3	XXH3_64bits_internal#2	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	236	44	M3XXH3	XXH3_64bits_internal#8	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	236	88	M3XXH3	XXH3_64bits_internal#13	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	237	44	M3XXH3	XXH3_64bits_internal#9	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	237	88	M3XXH3	XXH3_64bits_internal#14	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	242	45	M3XXH3	XXH3_64bits_internal#1	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	242	51	M3XXH3	XXH3_64bits_internal#6	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	243	41	M3XXH3	XXH3_64bits_internal#1	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	243	77	M3XXH3	XXH3_64bits_internal#24	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	244	41	M3XXH3	XXH3_64bits_internal#2	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	244	77	M3XXH3	XXH3_64bits_internal#25	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	245	41	M3XXH3	XXH3_64bits_internal#3	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	245	77	M3XXH3	XXH3_64bits_internal#26	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	245	79	M3XXH3	XXH3_64bits_internal#3	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	246	41	M3XXH3	XXH3_64bits_internal#4	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	246	77	M3XXH3	XXH3_64bits_internal#27	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	246	79	M3XXH3	XXH3_64bits_internal#4	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	247	41	M3XXH3	XXH3_64bits_internal#5	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	247	77	M3XXH3	XXH3_64bits_internal#28	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	247	79	M3XXH3	XXH3_64bits_internal#6	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	248	41	M3XXH3	XXH3_64bits_internal#6	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	248	77	M3XXH3	XXH3_64bits_internal#29	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	248	79	M3XXH3	XXH3_64bits_internal#3	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	249	41	M3XXH3	XXH3_64bits_internal#7	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	249	77	M3XXH3	XXH3_64bits_internal#30	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	249	79	M3XXH3	XXH3_64bits_internal#3	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	250	41	M3XXH3	XXH3_64bits_internal#8	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	250	77	M3XXH3	XXH3_64bits_internal#31	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	250	79	M3XXH3	XXH3_64bits_internal#3	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	254	75	M3XXH3	XXH3_64bits_internal#7	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	258	51	M3XXH3	XXH3_64bits_internal#8	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	259	37	M3XXH3	XXH3_64bits_internal#32	8	int	SECRET_CONSUME_RATE	DECLARED	Secret bytes consumed per stripe.
+M3XXH3.java	261	71	M3XXH3	XXH3_64bits_internal#33	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	262	71	M3XXH3	XXH3_64bits_internal#34	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	263	96	M3XXH3	XXH3_64bits_internal#35	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	264	96	M3XXH3	XXH3_64bits_internal#36	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	266	40	M3XXH3	XXH3_64bits_internal#10	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	266	84	M3XXH3	XXH3_64bits_internal#15	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	267	40	M3XXH3	XXH3_64bits_internal#11	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	267	84	M3XXH3	XXH3_64bits_internal#16	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	270	71	M3XXH3	XXH3_64bits_internal#37	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	270	73	M3XXH3	XXH3_64bits_internal#4	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	271	71	M3XXH3	XXH3_64bits_internal#38	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	271	73	M3XXH3	XXH3_64bits_internal#5	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	272	96	M3XXH3	XXH3_64bits_internal#39	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	272	98	M3XXH3	XXH3_64bits_internal#5	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	273	96	M3XXH3	XXH3_64bits_internal#40	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	273	98	M3XXH3	XXH3_64bits_internal#6	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	275	40	M3XXH3	XXH3_64bits_internal#12	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	275	84	M3XXH3	XXH3_64bits_internal#17	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	276	40	M3XXH3	XXH3_64bits_internal#13	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	276	84	M3XXH3	XXH3_64bits_internal#18	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	279	71	M3XXH3	XXH3_64bits_internal#41	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	279	73	M3XXH3	XXH3_64bits_internal#7	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	280	71	M3XXH3	XXH3_64bits_internal#42	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	280	73	M3XXH3	XXH3_64bits_internal#4	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	281	96	M3XXH3	XXH3_64bits_internal#43	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	281	98	M3XXH3	XXH3_64bits_internal#8	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	282	96	M3XXH3	XXH3_64bits_internal#44	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	282	98	M3XXH3	XXH3_64bits_internal#5	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	284	40	M3XXH3	XXH3_64bits_internal#14	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	284	84	M3XXH3	XXH3_64bits_internal#19	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	285	40	M3XXH3	XXH3_64bits_internal#15	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	285	84	M3XXH3	XXH3_64bits_internal#20	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	288	71	M3XXH3	XXH3_64bits_internal#45	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	288	73	M3XXH3	XXH3_64bits_internal#4	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	289	71	M3XXH3	XXH3_64bits_internal#46	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	289	73	M3XXH3	XXH3_64bits_internal#4	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	290	96	M3XXH3	XXH3_64bits_internal#47	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	290	98	M3XXH3	XXH3_64bits_internal#5	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	291	96	M3XXH3	XXH3_64bits_internal#48	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	291	98	M3XXH3	XXH3_64bits_internal#5	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	293	40	M3XXH3	XXH3_64bits_internal#16	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	293	84	M3XXH3	XXH3_64bits_internal#21	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	294	40	M3XXH3	XXH3_64bits_internal#17	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	294	84	M3XXH3	XXH3_64bits_internal#22	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	300	47	M3XXH3	XXH3_64bits_internal#9	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	301	29	M3XXH3	XXH3_64bits_internal#2	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	301	35	M3XXH3	XXH3_64bits_internal#10	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	301	40	M3XXH3	XXH3_64bits_internal#6	7	int	SECRET_LASTACC_START	DECLARED	Distance of the last stripe's secret from the end of the stripes' secret.
+M3XXH3.java	303	67	M3XXH3	XXH3_64bits_internal#49	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	304	67	M3XXH3	XXH3_64bits_internal#50	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	305	92	M3XXH3	XXH3_64bits_internal#51	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	306	92	M3XXH3	XXH3_64bits_internal#52	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	308	36	M3XXH3	XXH3_64bits_internal#18	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	308	80	M3XXH3	XXH3_64bits_internal#23	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	309	36	M3XXH3	XXH3_64bits_internal#19	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	309	80	M3XXH3	XXH3_64bits_internal#24	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	312	67	M3XXH3	XXH3_64bits_internal#53	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	312	69	M3XXH3	XXH3_64bits_internal#6	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	313	67	M3XXH3	XXH3_64bits_internal#54	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	313	69	M3XXH3	XXH3_64bits_internal#7	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	314	92	M3XXH3	XXH3_64bits_internal#55	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	314	94	M3XXH3	XXH3_64bits_internal#7	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	315	92	M3XXH3	XXH3_64bits_internal#56	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	315	94	M3XXH3	XXH3_64bits_internal#8	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	317	36	M3XXH3	XXH3_64bits_internal#20	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	317	80	M3XXH3	XXH3_64bits_internal#25	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	318	36	M3XXH3	XXH3_64bits_internal#21	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	318	80	M3XXH3	XXH3_64bits_internal#26	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	321	67	M3XXH3	XXH3_64bits_internal#57	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	321	69	M3XXH3	XXH3_64bits_internal#9	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	322	67	M3XXH3	XXH3_64bits_internal#58	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	322	69	M3XXH3	XXH3_64bits_internal#6	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	323	92	M3XXH3	XXH3_64bits_internal#59	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	323	94	M3XXH3	XXH3_64bits_internal#10	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	324	92	M3XXH3	XXH3_64bits_internal#60	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	324	94	M3XXH3	XXH3_64bits_internal#7	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	326	36	M3XXH3	XXH3_64bits_internal#22	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	326	80	M3XXH3	XXH3_64bits_internal#27	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	327	36	M3XXH3	XXH3_64bits_internal#23	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	327	80	M3XXH3	XXH3_64bits_internal#28	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	330	67	M3XXH3	XXH3_64bits_internal#61	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	330	69	M3XXH3	XXH3_64bits_internal#6	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	331	67	M3XXH3	XXH3_64bits_internal#62	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	331	69	M3XXH3	XXH3_64bits_internal#7	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	332	92	M3XXH3	XXH3_64bits_internal#63	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	332	94	M3XXH3	XXH3_64bits_internal#7	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	333	92	M3XXH3	XXH3_64bits_internal#64	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	333	94	M3XXH3	XXH3_64bits_internal#8	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	335	36	M3XXH3	XXH3_64bits_internal#24	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	335	80	M3XXH3	XXH3_64bits_internal#29	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	336	36	M3XXH3	XXH3_64bits_internal#25	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	336	80	M3XXH3	XXH3_64bits_internal#30	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	341	67	M3XXH3	XXH3_64bits_internal#1	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	342	67	M3XXH3	XXH3_64bits_internal#2	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	342	72	M3XXH3	XXH3_64bits_internal#13	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	343	67	M3XXH3	XXH3_64bits_internal#3	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	343	72	M3XXH3	XXH3_64bits_internal#14	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	343	77	M3XXH3	XXH3_64bits_internal#8	2	int	ACC_PAIR_2	DECLARED	Accumulator pair 2 of the merge.
+M3XXH3.java	344	67	M3XXH3	XXH3_64bits_internal#4	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	344	72	M3XXH3	XXH3_64bits_internal#15	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	344	77	M3XXH3	XXH3_64bits_internal#9	3	int	ACC_PAIR_3	DECLARED	Accumulator pair 3 of the merge.
+M3XXH3.java	350	23	M3XXH3	XXH3_128bits_internal#1	16	int	SHORT_INPUT_MAX	DECLARED	Longest input of the 0..16-byte path.
+M3XXH3.java	352	26	M3XXH3	XXH3_128bits_internal#1	8	int	LEN_4TO8_MAX	DECLARED	Longest input of the 4..8-byte path.
+M3XXH3.java	354	67	M3XXH3	XXH3_128bits_internal#1	32	int	SECRET_32	DECLARED	Offset 32 of the default secret.
+M3XXH3.java	354	110	M3XXH3	XXH3_128bits_internal#1	40	int	SECRET_40	DECLARED	Offset 40 of the default secret.
+M3XXH3.java	355	67	M3XXH3	XXH3_128bits_internal#1	48	int	SECRET_48	DECLARED	Offset 48 of the default secret.
+M3XXH3.java	355	110	M3XXH3	XXH3_128bits_internal#1	56	int	SECRET_56	DECLARED	Offset 56 of the default secret.
+M3XXH3.java	356	66	M3XXH3	XXH3_128bits_internal#2	8	int	LAST_8	DECLARED	Distance of the last 8 input bytes from the end.
+M3XXH3.java	360	44	M3XXH3	XXH3_128bits_internal#1	54	int	LENGTH_MIX_SHIFT	DECLARED	(length - 1) << 54 in the 9..16-byte 128-bit path.
+M3XXH3.java	372	27	M3XXH3	XXH3_128bits_internal#1	4	int	LEN_4TO8_MIN	DECLARED	Shortest input of the 4..8-byte path.
+M3XXH3.java	374	58	M3XXH3	XXH3_128bits_internal#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	376	78	M3XXH3	XXH3_128bits_internal#2	4	int	LAST_4	DECLARED	Distance of the last 4 input bytes from the end.
+M3XXH3.java	378	66	M3XXH3	XXH3_128bits_internal#2	16	int	SECRET_16	DECLARED	Offset 16 of the default secret.
+M3XXH3.java	378	109	M3XXH3	XXH3_128bits_internal#1	24	int	SECRET_24	DECLARED	Offset 24 of the default secret.
+M3XXH3.java	379	61	M3XXH3	XXH3_128bits_internal#2	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	380	60	M3XXH3	XXH3_128bits_internal#1	2	int	LENGTH_MULT_SHIFT	DECLARED	PRIME64_1 + (length << 2) in the 4..8-byte 128-bit path.
+M3XXH3.java	384	41	M3XXH3	XXH3_128bits_internal#1	3	int	HIGH_FOLD_SHIFT	DECLARED	m128_lo ^= m128_hi >>> 3.
+M3XXH3.java	386	40	M3XXH3	XXH3_128bits_internal#1	35	int	RRMXMX_SHIFT_1	DECLARED	First shift of rrmxmx.
+M3XXH3.java	387	28	M3XXH3	XXH3_128bits_internal#1	0x9FB21C651E98DF25L	long	PRIME_MX2	DECLARED	Multiplier of rrmxmx (PRIME_MX2).
+M3XXH3.java	388	40	M3XXH3	XXH3_128bits_internal#1	28	int	RRMXMX_SHIFT_2	DECLARED	Second shift of rrmxmx.
+M3XXH3.java	401	46	M3XXH3	XXH3_128bits_internal#3	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte of a little-endian word.
+M3XXH3.java	401	60	M3XXH3	XXH3_128bits_internal#2	24	int	BYTE_3_SHIFT	DECLARED	Bit position of the fourth byte of a little-endian word.
+M3XXH3.java	401	87	M3XXH3	XXH3_128bits_internal#3	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3XXH3.java	402	91	M3XXH3	XXH3_128bits_internal#1	13	int	COMBINED_ROTATION	DECLARED	rotl32(swap32(combinedl), 13) gives combinedh.
+M3XXH3.java	403	141	M3XXH3	XXH3_128bits_internal#3	4	int	SECRET_4	DECLARED	Offset 4 of the default secret.
+M3XXH3.java	404	101	M3XXH3	XXH3_128bits_internal#4	8	int	SECRET_8	DECLARED	Offset 8 of the default secret.
+M3XXH3.java	404	143	M3XXH3	XXH3_128bits_internal#1	12	int	SECRET_12	DECLARED	Offset 12 of the default secret.
+M3XXH3.java	413	90	M3XXH3	XXH3_128bits_internal#1	64	int	SECRET_64	DECLARED	Offset 64 of the default secret.
+M3XXH3.java	413	133	M3XXH3	XXH3_128bits_internal#1	72	int	SECRET_72	DECLARED	Offset 72 of the default secret.
+M3XXH3.java	416	89	M3XXH3	XXH3_128bits_internal#1	80	int	SECRET_80	DECLARED	Offset 80 of the default secret.
+M3XXH3.java	416	132	M3XXH3	XXH3_128bits_internal#1	88	int	SECRET_88	DECLARED	Offset 88 of the default secret.
+M3XXH3.java	420	23	M3XXH3	XXH3_128bits_internal#1	128	int	LEN_17TO128_MAX	DECLARED	Longest input of the 17..128-byte path.
+M3XXH3.java	424	26	M3XXH3	XXH3_128bits_internal#3	32	int	LEN_17TO128_PAIR_2	DECLARED	Longer inputs of the 17..128-byte path add a second pair of mixes.
+M3XXH3.java	425	30	M3XXH3	XXH3_128bits_internal#2	64	int	LEN_17TO128_PAIR_3	DECLARED	Longer inputs of the 17..128-byte path add a third pair of mixes.
+M3XXH3.java	426	34	M3XXH3	XXH3_128bits_internal#1	96	int	LEN_17TO128_PAIR_4	DECLARED	Longer inputs of the 17..128-byte path add a fourth pair of mixes.
+M3XXH3.java	427	69	M3XXH3	XXH3_128bits_internal#2	48	int	INPUT_48	DECLARED	Input offset 48.
+M3XXH3.java	428	69	M3XXH3	XXH3_128bits_internal#3	48	int	INPUT_48	DECLARED	Input offset 48.
+M3XXH3.java	428	74	M3XXH3	XXH3_128bits_internal#5	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	429	78	M3XXH3	XXH3_128bits_internal#3	64	int	LAST_64	DECLARED	Distance of the last 64 input bytes from the end.
+M3XXH3.java	430	78	M3XXH3	XXH3_128bits_internal#4	64	int	LAST_64	DECLARED	Distance of the last 64 input bytes from the end.
+M3XXH3.java	430	83	M3XXH3	XXH3_128bits_internal#6	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	431	69	M3XXH3	XXH3_128bits_internal#2	96	int	SECRET_96	DECLARED	Offset 96 of the default secret.
+M3XXH3.java	432	69	M3XXH3	XXH3_128bits_internal#3	96	int	SECRET_96	DECLARED	Offset 96 of the default secret.
+M3XXH3.java	432	74	M3XXH3	XXH3_128bits_internal#4	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	434	65	M3XXH3	XXH3_128bits_internal#4	32	int	INPUT_32	DECLARED	Input offset 32.
+M3XXH3.java	435	65	M3XXH3	XXH3_128bits_internal#5	32	int	INPUT_32	DECLARED	Input offset 32.
+M3XXH3.java	435	70	M3XXH3	XXH3_128bits_internal#7	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	436	74	M3XXH3	XXH3_128bits_internal#4	48	int	LAST_48	DECLARED	Distance of the last 48 input bytes from the end.
+M3XXH3.java	437	74	M3XXH3	XXH3_128bits_internal#5	48	int	LAST_48	DECLARED	Distance of the last 48 input bytes from the end.
+M3XXH3.java	437	79	M3XXH3	XXH3_128bits_internal#8	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	438	65	M3XXH3	XXH3_128bits_internal#5	64	int	SECRET_64	DECLARED	Offset 64 of the default secret.
+M3XXH3.java	439	65	M3XXH3	XXH3_128bits_internal#6	64	int	SECRET_64	DECLARED	Offset 64 of the default secret.
+M3XXH3.java	439	70	M3XXH3	XXH3_128bits_internal#5	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	441	61	M3XXH3	XXH3_128bits_internal#6	16	int	INPUT_16	DECLARED	Input offset 16.
+M3XXH3.java	442	61	M3XXH3	XXH3_128bits_internal#7	16	int	INPUT_16	DECLARED	Input offset 16.
+M3XXH3.java	442	66	M3XXH3	XXH3_128bits_internal#9	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	443	70	M3XXH3	XXH3_128bits_internal#6	32	int	LAST_32	DECLARED	Distance of the last 32 input bytes from the end.
+M3XXH3.java	444	70	M3XXH3	XXH3_128bits_internal#7	32	int	LAST_32	DECLARED	Distance of the last 32 input bytes from the end.
+M3XXH3.java	444	75	M3XXH3	XXH3_128bits_internal#10	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	445	61	M3XXH3	XXH3_128bits_internal#8	32	int	SECRET_32	DECLARED	Offset 32 of the default secret.
+M3XXH3.java	446	61	M3XXH3	XXH3_128bits_internal#9	32	int	SECRET_32	DECLARED	Offset 32 of the default secret.
+M3XXH3.java	446	66	M3XXH3	XXH3_128bits_internal#8	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	449	61	M3XXH3	XXH3_128bits_internal#11	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	450	66	M3XXH3	XXH3_128bits_internal#9	16	int	LAST_16	DECLARED	Distance of the last 16 input bytes from the end.
+M3XXH3.java	451	66	M3XXH3	XXH3_128bits_internal#10	16	int	LAST_16	DECLARED	Distance of the last 16 input bytes from the end.
+M3XXH3.java	451	71	M3XXH3	XXH3_128bits_internal#12	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	453	57	M3XXH3	XXH3_128bits_internal#11	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	463	23	M3XXH3	XXH3_128bits_internal#1	240	int	MIDSIZE_MAX	DECLARED	Longest input of the 129..240-byte path.
+M3XXH3.java	465	48	M3XXH3	XXH3_128bits_internal#10	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	469	24	M3XXH3	XXH3_128bits_internal#4	4	int	MIDSIZE_FIRST_ROUNDS_128	DECLARED	Rounds of the 129..240-byte 128-bit path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3.java	470	61	M3XXH3	XXH3_128bits_internal#11	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	471	61	M3XXH3	XXH3_128bits_internal#12	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	471	68	M3XXH3	XXH3_128bits_internal#13	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	472	61	M3XXH3	XXH3_128bits_internal#13	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	472	68	M3XXH3	XXH3_128bits_internal#12	16	int	WORD_2_OFFSET	DECLARED	Offset of the third 64-bit word of a 32-byte mix.
+M3XXH3.java	473	61	M3XXH3	XXH3_128bits_internal#14	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	473	68	M3XXH3	XXH3_128bits_internal#3	24	int	WORD_3_OFFSET	DECLARED	Offset of the fourth 64-bit word of a 32-byte mix.
+M3XXH3.java	474	61	M3XXH3	XXH3_128bits_internal#15	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	475	61	M3XXH3	XXH3_128bits_internal#16	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	475	68	M3XXH3	XXH3_128bits_internal#13	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	481	61	M3XXH3	XXH3_128bits_internal#17	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	482	61	M3XXH3	XXH3_128bits_internal#18	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	482	68	M3XXH3	XXH3_128bits_internal#14	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	483	61	M3XXH3	XXH3_128bits_internal#19	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	483	68	M3XXH3	XXH3_128bits_internal#14	16	int	WORD_2_OFFSET	DECLARED	Offset of the third 64-bit word of a 32-byte mix.
+M3XXH3.java	484	61	M3XXH3	XXH3_128bits_internal#20	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	484	68	M3XXH3	XXH3_128bits_internal#4	24	int	WORD_3_OFFSET	DECLARED	Offset of the fourth 64-bit word of a 32-byte mix.
+M3XXH3.java	485	61	M3XXH3	XXH3_128bits_internal#2	3	int	MIDSIZE_START_OFFSET	DECLARED	Secret offset of the rounds after the first ones (129..240 bytes).
+M3XXH3.java	485	65	M3XXH3	XXH3_128bits_internal#21	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	485	71	M3XXH3	XXH3_128bits_internal#5	4	int	MIDSIZE_FIRST_ROUNDS_128	DECLARED	Rounds of the 129..240-byte 128-bit path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3.java	486	61	M3XXH3	XXH3_128bits_internal#3	3	int	MIDSIZE_START_OFFSET	DECLARED	Secret offset of the rounds after the first ones (129..240 bytes).
+M3XXH3.java	486	65	M3XXH3	XXH3_128bits_internal#22	32	int	MIX32_BYTES	DECLARED	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3.java	486	71	M3XXH3	XXH3_128bits_internal#6	4	int	MIDSIZE_FIRST_ROUNDS_128	DECLARED	Rounds of the 129..240-byte 128-bit path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3.java	486	76	M3XXH3	XXH3_128bits_internal#15	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	490	66	M3XXH3	XXH3_128bits_internal#16	16	int	LAST_16	DECLARED	Distance of the last 16 input bytes from the end.
+M3XXH3.java	491	66	M3XXH3	XXH3_128bits_internal#17	16	int	LAST_16	DECLARED	Distance of the last 16 input bytes from the end.
+M3XXH3.java	491	71	M3XXH3	XXH3_128bits_internal#15	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	492	66	M3XXH3	XXH3_128bits_internal#23	32	int	LAST_32	DECLARED	Distance of the last 32 input bytes from the end.
+M3XXH3.java	493	66	M3XXH3	XXH3_128bits_internal#24	32	int	LAST_32	DECLARED	Distance of the last 32 input bytes from the end.
+M3XXH3.java	493	71	M3XXH3	XXH3_128bits_internal#16	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	494	58	M3XXH3	XXH3_128bits_internal#1	136	int	SECRET_SIZE_MIN	DECLARED	Smallest secret size.
+M3XXH3.java	494	64	M3XXH3	XXH3_128bits_internal#1	17	int	MIDSIZE_LAST_OFFSET	DECLARED	Distance of the last secret of the 129..240-byte path from SECRET_SIZE_MIN.
+M3XXH3.java	494	69	M3XXH3	XXH3_128bits_internal#18	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	495	58	M3XXH3	XXH3_128bits_internal#2	136	int	SECRET_SIZE_MIN	DECLARED	Smallest secret size.
+M3XXH3.java	495	64	M3XXH3	XXH3_128bits_internal#2	17	int	MIDSIZE_LAST_OFFSET	DECLARED	Distance of the last secret of the 129..240-byte path from SECRET_SIZE_MIN.
+M3XXH3.java	522	55	M3XXH3	XXH3_128bits_internal#7	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	523	41	M3XXH3	XXH3_128bits_internal#17	8	int	SECRET_CONSUME_RATE	DECLARED	Secret bytes consumed per stripe.
+M3XXH3.java	525	75	M3XXH3	XXH3_128bits_internal#18	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	526	75	M3XXH3	XXH3_128bits_internal#19	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	527	100	M3XXH3	XXH3_128bits_internal#20	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	528	100	M3XXH3	XXH3_128bits_internal#21	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	530	44	M3XXH3	XXH3_128bits_internal#2	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	530	88	M3XXH3	XXH3_128bits_internal#25	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	531	44	M3XXH3	XXH3_128bits_internal#3	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	531	88	M3XXH3	XXH3_128bits_internal#26	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	534	75	M3XXH3	XXH3_128bits_internal#22	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	534	77	M3XXH3	XXH3_128bits_internal#2	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	535	75	M3XXH3	XXH3_128bits_internal#23	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	535	77	M3XXH3	XXH3_128bits_internal#4	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	536	100	M3XXH3	XXH3_128bits_internal#24	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	536	102	M3XXH3	XXH3_128bits_internal#3	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	537	100	M3XXH3	XXH3_128bits_internal#25	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	537	102	M3XXH3	XXH3_128bits_internal#5	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	539	44	M3XXH3	XXH3_128bits_internal#4	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	539	88	M3XXH3	XXH3_128bits_internal#27	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	540	44	M3XXH3	XXH3_128bits_internal#5	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	540	88	M3XXH3	XXH3_128bits_internal#28	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	543	75	M3XXH3	XXH3_128bits_internal#26	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	543	77	M3XXH3	XXH3_128bits_internal#7	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	544	75	M3XXH3	XXH3_128bits_internal#27	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	544	77	M3XXH3	XXH3_128bits_internal#1	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	545	100	M3XXH3	XXH3_128bits_internal#28	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	545	102	M3XXH3	XXH3_128bits_internal#8	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	546	100	M3XXH3	XXH3_128bits_internal#29	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	546	102	M3XXH3	XXH3_128bits_internal#2	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	548	44	M3XXH3	XXH3_128bits_internal#6	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	548	88	M3XXH3	XXH3_128bits_internal#29	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	549	44	M3XXH3	XXH3_128bits_internal#7	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	549	88	M3XXH3	XXH3_128bits_internal#30	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	552	75	M3XXH3	XXH3_128bits_internal#30	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	552	77	M3XXH3	XXH3_128bits_internal#1	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	553	75	M3XXH3	XXH3_128bits_internal#31	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	553	77	M3XXH3	XXH3_128bits_internal#1	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	554	100	M3XXH3	XXH3_128bits_internal#32	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	554	102	M3XXH3	XXH3_128bits_internal#2	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	555	100	M3XXH3	XXH3_128bits_internal#33	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	555	102	M3XXH3	XXH3_128bits_internal#2	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	557	44	M3XXH3	XXH3_128bits_internal#8	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	557	88	M3XXH3	XXH3_128bits_internal#31	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	558	44	M3XXH3	XXH3_128bits_internal#9	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	558	88	M3XXH3	XXH3_128bits_internal#32	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	563	45	M3XXH3	XXH3_128bits_internal#1	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	563	51	M3XXH3	XXH3_128bits_internal#8	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	564	41	M3XXH3	XXH3_128bits_internal#1	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	564	77	M3XXH3	XXH3_128bits_internal#34	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	565	41	M3XXH3	XXH3_128bits_internal#2	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	565	77	M3XXH3	XXH3_128bits_internal#35	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	566	41	M3XXH3	XXH3_128bits_internal#3	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	566	77	M3XXH3	XXH3_128bits_internal#36	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	566	79	M3XXH3	XXH3_128bits_internal#4	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	567	41	M3XXH3	XXH3_128bits_internal#4	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	567	77	M3XXH3	XXH3_128bits_internal#37	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	567	79	M3XXH3	XXH3_128bits_internal#6	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	568	41	M3XXH3	XXH3_128bits_internal#5	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	568	77	M3XXH3	XXH3_128bits_internal#38	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	568	79	M3XXH3	XXH3_128bits_internal#9	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	569	41	M3XXH3	XXH3_128bits_internal#6	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	569	77	M3XXH3	XXH3_128bits_internal#39	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	569	79	M3XXH3	XXH3_128bits_internal#3	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	570	41	M3XXH3	XXH3_128bits_internal#7	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	570	77	M3XXH3	XXH3_128bits_internal#40	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	570	79	M3XXH3	XXH3_128bits_internal#3	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	571	41	M3XXH3	XXH3_128bits_internal#8	47	int	SCRAMBLE_SHIFT	DECLARED	Shift of the accumulator scramble.
+M3XXH3.java	571	77	M3XXH3	XXH3_128bits_internal#41	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	571	79	M3XXH3	XXH3_128bits_internal#3	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	575	75	M3XXH3	XXH3_128bits_internal#9	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	579	51	M3XXH3	XXH3_128bits_internal#10	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	580	37	M3XXH3	XXH3_128bits_internal#42	8	int	SECRET_CONSUME_RATE	DECLARED	Secret bytes consumed per stripe.
+M3XXH3.java	582	71	M3XXH3	XXH3_128bits_internal#43	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	583	71	M3XXH3	XXH3_128bits_internal#44	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	584	96	M3XXH3	XXH3_128bits_internal#45	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	585	96	M3XXH3	XXH3_128bits_internal#46	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	587	40	M3XXH3	XXH3_128bits_internal#10	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	587	84	M3XXH3	XXH3_128bits_internal#33	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	588	40	M3XXH3	XXH3_128bits_internal#11	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	588	84	M3XXH3	XXH3_128bits_internal#34	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	591	71	M3XXH3	XXH3_128bits_internal#47	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	591	73	M3XXH3	XXH3_128bits_internal#5	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	592	71	M3XXH3	XXH3_128bits_internal#48	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	592	73	M3XXH3	XXH3_128bits_internal#7	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	593	96	M3XXH3	XXH3_128bits_internal#49	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	593	98	M3XXH3	XXH3_128bits_internal#6	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	594	96	M3XXH3	XXH3_128bits_internal#50	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	594	98	M3XXH3	XXH3_128bits_internal#8	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	596	40	M3XXH3	XXH3_128bits_internal#12	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	596	84	M3XXH3	XXH3_128bits_internal#35	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	597	40	M3XXH3	XXH3_128bits_internal#13	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	597	84	M3XXH3	XXH3_128bits_internal#36	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	600	71	M3XXH3	XXH3_128bits_internal#51	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	600	73	M3XXH3	XXH3_128bits_internal#10	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	601	71	M3XXH3	XXH3_128bits_internal#52	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	601	73	M3XXH3	XXH3_128bits_internal#4	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	602	96	M3XXH3	XXH3_128bits_internal#53	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	602	98	M3XXH3	XXH3_128bits_internal#11	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	603	96	M3XXH3	XXH3_128bits_internal#54	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	603	98	M3XXH3	XXH3_128bits_internal#5	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	605	40	M3XXH3	XXH3_128bits_internal#14	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	605	84	M3XXH3	XXH3_128bits_internal#37	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	606	40	M3XXH3	XXH3_128bits_internal#15	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	606	84	M3XXH3	XXH3_128bits_internal#38	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	609	71	M3XXH3	XXH3_128bits_internal#55	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	609	73	M3XXH3	XXH3_128bits_internal#4	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	610	71	M3XXH3	XXH3_128bits_internal#56	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	610	73	M3XXH3	XXH3_128bits_internal#4	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	611	96	M3XXH3	XXH3_128bits_internal#57	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	611	98	M3XXH3	XXH3_128bits_internal#5	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	612	96	M3XXH3	XXH3_128bits_internal#58	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	612	98	M3XXH3	XXH3_128bits_internal#5	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	614	40	M3XXH3	XXH3_128bits_internal#16	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	614	84	M3XXH3	XXH3_128bits_internal#39	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	615	40	M3XXH3	XXH3_128bits_internal#17	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	615	84	M3XXH3	XXH3_128bits_internal#40	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	621	47	M3XXH3	XXH3_128bits_internal#11	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	622	29	M3XXH3	XXH3_128bits_internal#2	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	622	35	M3XXH3	XXH3_128bits_internal#12	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	622	40	M3XXH3	XXH3_128bits_internal#6	7	int	SECRET_LASTACC_START	DECLARED	Distance of the last stripe's secret from the end of the stripes' secret.
+M3XXH3.java	624	67	M3XXH3	XXH3_128bits_internal#59	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	625	67	M3XXH3	XXH3_128bits_internal#60	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	626	92	M3XXH3	XXH3_128bits_internal#61	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	627	92	M3XXH3	XXH3_128bits_internal#62	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	629	36	M3XXH3	XXH3_128bits_internal#18	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	629	80	M3XXH3	XXH3_128bits_internal#41	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	630	36	M3XXH3	XXH3_128bits_internal#19	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	630	80	M3XXH3	XXH3_128bits_internal#42	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	633	67	M3XXH3	XXH3_128bits_internal#63	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	633	69	M3XXH3	XXH3_128bits_internal#7	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	634	67	M3XXH3	XXH3_128bits_internal#64	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	634	69	M3XXH3	XXH3_128bits_internal#9	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	635	92	M3XXH3	XXH3_128bits_internal#65	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	635	94	M3XXH3	XXH3_128bits_internal#8	2	int	LANE_2	DECLARED	Accumulator lane 2.
+M3XXH3.java	636	92	M3XXH3	XXH3_128bits_internal#66	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	636	94	M3XXH3	XXH3_128bits_internal#10	3	int	LANE_3	DECLARED	Accumulator lane 3.
+M3XXH3.java	638	36	M3XXH3	XXH3_128bits_internal#20	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	638	80	M3XXH3	XXH3_128bits_internal#43	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	639	36	M3XXH3	XXH3_128bits_internal#21	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	639	80	M3XXH3	XXH3_128bits_internal#44	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	642	67	M3XXH3	XXH3_128bits_internal#67	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	642	69	M3XXH3	XXH3_128bits_internal#12	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	643	67	M3XXH3	XXH3_128bits_internal#68	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	643	69	M3XXH3	XXH3_128bits_internal#6	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	644	92	M3XXH3	XXH3_128bits_internal#69	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	644	94	M3XXH3	XXH3_128bits_internal#13	4	int	LANE_4	DECLARED	Accumulator lane 4.
+M3XXH3.java	645	92	M3XXH3	XXH3_128bits_internal#70	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	645	94	M3XXH3	XXH3_128bits_internal#7	5	int	LANE_5	DECLARED	Accumulator lane 5.
+M3XXH3.java	647	36	M3XXH3	XXH3_128bits_internal#22	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	647	80	M3XXH3	XXH3_128bits_internal#45	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	648	36	M3XXH3	XXH3_128bits_internal#23	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	648	80	M3XXH3	XXH3_128bits_internal#46	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	651	67	M3XXH3	XXH3_128bits_internal#71	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	651	69	M3XXH3	XXH3_128bits_internal#6	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	652	67	M3XXH3	XXH3_128bits_internal#72	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	652	69	M3XXH3	XXH3_128bits_internal#7	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	653	92	M3XXH3	XXH3_128bits_internal#73	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	653	94	M3XXH3	XXH3_128bits_internal#7	6	int	LANE_6	DECLARED	Accumulator lane 6.
+M3XXH3.java	654	92	M3XXH3	XXH3_128bits_internal#74	8	int	LANE_BYTES	DECLARED	Bytes of one accumulator lane.
+M3XXH3.java	654	94	M3XXH3	XXH3_128bits_internal#8	7	int	LANE_7	DECLARED	Accumulator lane 7.
+M3XXH3.java	656	36	M3XXH3	XXH3_128bits_internal#24	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	656	80	M3XXH3	XXH3_128bits_internal#47	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	657	36	M3XXH3	XXH3_128bits_internal#25	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	657	80	M3XXH3	XXH3_128bits_internal#48	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	662	67	M3XXH3	XXH3_128bits_internal#1	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	663	67	M3XXH3	XXH3_128bits_internal#2	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	663	72	M3XXH3	XXH3_128bits_internal#19	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	664	67	M3XXH3	XXH3_128bits_internal#3	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	664	72	M3XXH3	XXH3_128bits_internal#20	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	664	77	M3XXH3	XXH3_128bits_internal#9	2	int	ACC_PAIR_2	DECLARED	Accumulator pair 2 of the merge.
+M3XXH3.java	665	67	M3XXH3	XXH3_128bits_internal#4	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	665	72	M3XXH3	XXH3_128bits_internal#21	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	665	77	M3XXH3	XXH3_128bits_internal#11	3	int	ACC_PAIR_3	DECLARED	Accumulator pair 3 of the merge.
+M3XXH3.java	669	71	M3XXH3	XXH3_128bits_internal#3	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	669	77	M3XXH3	XXH3_128bits_internal#13	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	669	82	M3XXH3	XXH3_128bits_internal#5	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	670	71	M3XXH3	XXH3_128bits_internal#4	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	670	77	M3XXH3	XXH3_128bits_internal#14	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	670	82	M3XXH3	XXH3_128bits_internal#6	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	670	87	M3XXH3	XXH3_128bits_internal#22	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	671	71	M3XXH3	XXH3_128bits_internal#5	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	671	77	M3XXH3	XXH3_128bits_internal#15	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	671	82	M3XXH3	XXH3_128bits_internal#7	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	671	87	M3XXH3	XXH3_128bits_internal#23	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	671	92	M3XXH3	XXH3_128bits_internal#10	2	int	ACC_PAIR_2	DECLARED	Accumulator pair 2 of the merge.
+M3XXH3.java	672	71	M3XXH3	XXH3_128bits_internal#6	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	672	77	M3XXH3	XXH3_128bits_internal#16	64	int	STRIPE_LEN	DECLARED	Bytes of one stripe: eight accumulator lanes.
+M3XXH3.java	672	82	M3XXH3	XXH3_128bits_internal#8	11	int	SECRET_MERGEACCS_START	DECLARED	Secret offset of the accumulator merge.
+M3XXH3.java	672	87	M3XXH3	XXH3_128bits_internal#24	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	672	92	M3XXH3	XXH3_128bits_internal#12	3	int	ACC_PAIR_3	DECLARED	Accumulator pair 3 of the merge.
+M3XXH3.java	678	30	M3XXH3	XXH3_initCustomSecret#1	192	int	SECRET_SIZE	DECLARED	Bytes of the default secret.
+M3XXH3.java	678	36	M3XXH3	XXH3_initCustomSecret#1	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	681	68	M3XXH3	XXH3_initCustomSecret#2	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	682	68	M3XXH3	XXH3_initCustomSecret#3	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	682	75	M3XXH3	XXH3_initCustomSecret#1	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	683	24	M3XXH3	XXH3_initCustomSecret#4	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	684	24	M3XXH3	XXH3_initCustomSecret#5	16	int	MIX_BYTES	DECLARED	Bytes of one 16-byte mix.
+M3XXH3.java	684	33	M3XXH3	XXH3_initCustomSecret#2	8	int	WORD_1_OFFSET	DECLARED	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3.java	703	64	AsLongHashFunction	hashLong#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	704	69	AsLongHashFunction	hashLong#1	8	int	SECRET_8	DECLARED	Offset 8 of the default secret.
+M3XXH3.java	704	118	AsLongHashFunction	hashLong#1	16	int	SECRET_16	DECLARED	Offset 16 of the default secret.
+M3XXH3.java	705	55	AsLongHashFunction	hashLong#1	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	706	39	AsLongHashFunction	hashLong#2	8	int	LONG_LENGTH	DECLARED	Byte length of a hashed long.
+M3XXH3.java	712	58	AsLongHashFunction	hashInt#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	713	69	AsLongHashFunction	hashInt#1	8	int	SECRET_8	DECLARED	Offset 8 of the default secret.
+M3XXH3.java	713	118	AsLongHashFunction	hashInt#1	16	int	SECRET_16	DECLARED	Offset 16 of the default secret.
+M3XXH3.java	714	85	AsLongHashFunction	hashInt#1	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	715	39	AsLongHashFunction	hashInt#1	4	int	INT_LENGTH	DECLARED	Byte length of a hashed int.
+M3XXH3.java	722	66	AsLongHashFunction	hashShort#1	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3XXH3.java	724	67	AsLongHashFunction	hashShort#1	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte of a little-endian word.
+M3XXH3.java	724	80	AsLongHashFunction	hashShort#1	24	int	BYTE_3_SHIFT	DECLARED	Bit position of the fourth byte of a little-endian word.
+M3XXH3.java	724	92	AsLongHashFunction	hashShort#1	2	int	SHORT_LENGTH	DECLARED	Byte length of a hashed short or char.
+M3XXH3.java	724	97	AsLongHashFunction	hashShort#2	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3XXH3.java	725	116	AsLongHashFunction	hashShort#1	4	int	SECRET_4	DECLARED	Offset 4 of the default secret.
+M3XXH3.java	739	67	AsLongHashFunction	hashByte#1	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte of a little-endian word.
+M3XXH3.java	739	80	AsLongHashFunction	hashByte#1	24	int	BYTE_3_SHIFT	DECLARED	Bit position of the fourth byte of a little-endian word.
+M3XXH3.java	739	97	AsLongHashFunction	hashByte#1	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3XXH3.java	740	116	AsLongHashFunction	hashByte#1	4	int	SECRET_4	DECLARED	Offset 4 of the default secret.
+M3XXH3.java	746	79	AsLongHashFunction	hashVoid#1	56	int	SECRET_56	DECLARED	Offset 56 of the default secret.
+M3XXH3.java	746	129	AsLongHashFunction	hashVoid#1	64	int	SECRET_64	DECLARED	Offset 64 of the default secret.
+M3XXH3.java	798	20	AsLongTupleHashFunction	bitsLength#1	128	int	RESULT_BITS	DECLARED	Bits of the 128-bit result.
+M3XXH3.java	803	29	AsLongTupleHashFunction	newResultArray#1	2	int	RESULT_LONGS	DECLARED	Longs of the 128-bit result.
+M3XXH3.java	809	58	AsLongTupleHashFunction	dualHashLong#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	810	62	AsLongTupleHashFunction	dualHashLong#1	16	int	SECRET_16	DECLARED	Offset 16 of the default secret.
+M3XXH3.java	810	105	AsLongTupleHashFunction	dualHashLong#1	24	int	SECRET_24	DECLARED	Offset 24 of the default secret.
+M3XXH3.java	812	46	AsLongTupleHashFunction	dualHashLong#1	8	int	LONG_LENGTH	DECLARED	Byte length of a hashed long.
+M3XXH3.java	812	51	AsLongTupleHashFunction	dualHashLong#1	2	int	LENGTH_MULT_SHIFT	DECLARED	PRIME64_1 + (length << 2) in the 4..8-byte 128-bit path.
+M3XXH3.java	816	37	AsLongTupleHashFunction	dualHashLong#1	3	int	HIGH_FOLD_SHIFT	DECLARED	m128_lo ^= m128_hi >>> 3.
+M3XXH3.java	818	36	AsLongTupleHashFunction	dualHashLong#1	35	int	RRMXMX_SHIFT_1	DECLARED	First shift of rrmxmx.
+M3XXH3.java	819	24	AsLongTupleHashFunction	dualHashLong#1	0x9FB21C651E98DF25L	long	PRIME_MX2	DECLARED	Multiplier of rrmxmx (PRIME_MX2).
+M3XXH3.java	820	36	AsLongTupleHashFunction	dualHashLong#1	28	int	RRMXMX_SHIFT_2	DECLARED	Second shift of rrmxmx.
+M3XXH3.java	832	58	AsLongTupleHashFunction	dualHashInt#1	0xFFFFFFFFL	long	LOW_32_MASK	DECLARED	The low 32-bit half of a long.
+M3XXH3.java	833	62	AsLongTupleHashFunction	dualHashInt#1	16	int	SECRET_16	DECLARED	Offset 16 of the default secret.
+M3XXH3.java	833	105	AsLongTupleHashFunction	dualHashInt#1	24	int	SECRET_24	DECLARED	Offset 24 of the default secret.
+M3XXH3.java	834	53	AsLongTupleHashFunction	dualHashInt#1	32	int	HALF_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3XXH3.java	835	46	AsLongTupleHashFunction	dualHashInt#1	4	int	INT_LENGTH	DECLARED	Byte length of a hashed int.
+M3XXH3.java	835	51	AsLongTupleHashFunction	dualHashInt#1	2	int	LENGTH_MULT_SHIFT	DECLARED	PRIME64_1 + (length << 2) in the 4..8-byte 128-bit path.
+M3XXH3.java	840	37	AsLongTupleHashFunction	dualHashInt#1	3	int	HIGH_FOLD_SHIFT	DECLARED	m128_lo ^= m128_hi >>> 3.
+M3XXH3.java	842	36	AsLongTupleHashFunction	dualHashInt#1	35	int	RRMXMX_SHIFT_1	DECLARED	First shift of rrmxmx.
+M3XXH3.java	843	24	AsLongTupleHashFunction	dualHashInt#1	0x9FB21C651E98DF25L	long	PRIME_MX2	DECLARED	Multiplier of rrmxmx (PRIME_MX2).
+M3XXH3.java	844	36	AsLongTupleHashFunction	dualHashInt#1	28	int	RRMXMX_SHIFT_2	DECLARED	Second shift of rrmxmx.
+M3XXH3.java	857	66	AsLongTupleHashFunction	dualHashShort#1	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3XXH3.java	859	42	AsLongTupleHashFunction	dualHashShort#1	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte of a little-endian word.
+M3XXH3.java	859	56	AsLongTupleHashFunction	dualHashShort#1	24	int	BYTE_3_SHIFT	DECLARED	Bit position of the fourth byte of a little-endian word.
+M3XXH3.java	859	68	AsLongTupleHashFunction	dualHashShort#1	2	int	SHORT_LENGTH	DECLARED	Byte length of a hashed short or char.
+M3XXH3.java	859	73	AsLongTupleHashFunction	dualHashShort#2	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3XXH3.java	860	87	AsLongTupleHashFunction	dualHashShort#1	13	int	COMBINED_ROTATION	DECLARED	rotl32(swap32(combinedl), 13) gives combinedh.
+M3XXH3.java	861	137	AsLongTupleHashFunction	dualHashShort#1	4	int	SECRET_4	DECLARED	Offset 4 of the default secret.
+M3XXH3.java	862	97	AsLongTupleHashFunction	dualHashShort#3	8	int	SECRET_8	DECLARED	Offset 8 of the default secret.
+M3XXH3.java	862	139	AsLongTupleHashFunction	dualHashShort#1	12	int	SECRET_12	DECLARED	Offset 12 of the default secret.
+M3XXH3.java	883	42	AsLongTupleHashFunction	dualHashByte#1	16	int	BYTE_2_SHIFT	DECLARED	Bit position of the third byte of a little-endian word.
+M3XXH3.java	883	56	AsLongTupleHashFunction	dualHashByte#1	24	int	BYTE_3_SHIFT	DECLARED	Bit position of the fourth byte of a little-endian word.
+M3XXH3.java	883	73	AsLongTupleHashFunction	dualHashByte#1	8	int	BYTE_1_SHIFT	DECLARED	Bit position of the second byte of a little-endian word.
+M3XXH3.java	884	87	AsLongTupleHashFunction	dualHashByte#1	13	int	COMBINED_ROTATION	DECLARED	rotl32(swap32(combinedl), 13) gives combinedh.
+M3XXH3.java	885	137	AsLongTupleHashFunction	dualHashByte#1	4	int	SECRET_4	DECLARED	Offset 4 of the default secret.
+M3XXH3.java	886	97	AsLongTupleHashFunction	dualHashByte#2	8	int	SECRET_8	DECLARED	Offset 8 of the default secret.
+M3XXH3.java	886	139	AsLongTupleHashFunction	dualHashByte#1	12	int	SECRET_12	DECLARED	Offset 12 of the default secret.
+M3XXH3.java	898	92	AsLongTupleHashFunction	dualHashVoid#1	64	int	SECRET_64	DECLARED	Offset 64 of the default secret.
+M3XXH3.java	898	135	AsLongTupleHashFunction	dualHashVoid#1	72	int	SECRET_72	DECLARED	Offset 72 of the default secret.
+M3XXH3.java	901	91	AsLongTupleHashFunction	dualHashVoid#1	80	int	SECRET_80	DECLARED	Offset 80 of the default secret.
+M3XXH3.java	901	134	AsLongTupleHashFunction	dualHashVoid#1	88	int	SECRET_88	DECLARED	Offset 88 of the default secret.
+M3XxHash.java	41	26	M3XxHash	xxHash64#1	32	int	STRIPE_BYTES	DECLARED	Bytes of one stripe: four 64-bit lanes.
+M3XxHash.java	49	42	M3XxHash	xxHash64#1	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	52	47	M3XxHash	xxHash64#1	8	int	LANE_2_OFFSET	DECLARED	Offset of the second lane in a stripe.
+M3XxHash.java	53	42	M3XxHash	xxHash64#2	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	56	47	M3XxHash	xxHash64#1	16	int	LANE_3_OFFSET	DECLARED	Offset of the third lane in a stripe.
+M3XxHash.java	57	42	M3XxHash	xxHash64#3	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	60	47	M3XxHash	xxHash64#1	24	int	LANE_4_OFFSET	DECLARED	Offset of the fourth lane in a stripe.
+M3XxHash.java	61	42	M3XxHash	xxHash64#4	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	64	24	M3XxHash	xxHash64#2	32	int	STRIPE_BYTES	DECLARED	Bytes of one stripe: four 64-bit lanes.
+M3XxHash.java	65	30	M3XxHash	xxHash64#3	32	int	STRIPE_BYTES	DECLARED	Bytes of one stripe: four 64-bit lanes.
+M3XxHash.java	66	35	M3XxHash	xxHash64#4	32	int	STRIPE_BYTES	DECLARED	Bytes of one stripe: four 64-bit lanes.
+M3XxHash.java	69	39	M3XxHash	xxHash64#1	7	int	MERGE_ROTATION_2	DECLARED	Rotation of the second lane when the lanes merge.
+M3XxHash.java	70	39	M3XxHash	xxHash64#1	12	int	MERGE_ROTATION_3	DECLARED	Rotation of the third lane when the lanes merge.
+M3XxHash.java	71	39	M3XxHash	xxHash64#1	18	int	MERGE_ROTATION_4	DECLARED	Rotation of the fourth lane when the lanes merge.
+M3XxHash.java	74	38	M3XxHash	xxHash64#5	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	80	38	M3XxHash	xxHash64#6	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	86	38	M3XxHash	xxHash64#7	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	92	38	M3XxHash	xxHash64#8	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	102	29	M3XxHash	xxHash64#2	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word: the step of the 8-byte tail.
+M3XxHash.java	105	38	M3XxHash	xxHash64#9	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	108	42	M3XxHash	xxHash64#1	27	int	WORD_ROTATION	DECLARED	Rotation after a 64-bit tail word.
+M3XxHash.java	109	20	M3XxHash	xxHash64#3	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word: the step of the 8-byte tail.
+M3XxHash.java	110	26	M3XxHash	xxHash64#4	8	int	WORD_BYTES	DECLARED	Bytes of a 64-bit word: the step of the 8-byte tail.
+M3XxHash.java	113	26	M3XxHash	xxHash64#1	4	int	INT_BYTES	DECLARED	Bytes of an int: the step of the 4-byte tail.
+M3XxHash.java	115	42	M3XxHash	xxHash64#1	23	int	INT_ROTATION	DECLARED	Rotation after a 32-bit tail int.
+M3XxHash.java	116	20	M3XxHash	xxHash64#2	4	int	INT_BYTES	DECLARED	Bytes of an int: the step of the 4-byte tail.
+M3XxHash.java	117	26	M3XxHash	xxHash64#3	4	int	INT_BYTES	DECLARED	Bytes of an int: the step of the 4-byte tail.
+M3XxHash.java	122	42	M3XxHash	xxHash64#1	11	int	BYTE_ROTATION	DECLARED	Rotation after a tail byte.
+M3XxHash.java	131	26	M3XxHash	finalize#1	33	int	AVALANCHE_SHIFT_1	DECLARED	First shift of the avalanche.
+M3XxHash.java	133	26	M3XxHash	finalize#1	29	int	AVALANCHE_SHIFT_2	DECLARED	Second shift of the avalanche.
+M3XxHash.java	135	26	M3XxHash	finalize#1	32	int	AVALANCHE_SHIFT_3	DECLARED	Third shift of the avalanche.
+M3XxHash.java	159	39	AsLongHashFunction	hashLong#1	8	int	LONG_LENGTH	DECLARED	Byte length of a hashed long.
+M3XxHash.java	161	44	AsLongHashFunction	hashLong#1	31	int	ROUND_ROTATION	DECLARED	Rotation of the round function.
+M3XxHash.java	164	42	AsLongHashFunction	hashLong#1	27	int	WORD_ROTATION	DECLARED	Rotation after a 64-bit tail word.
+M3XxHash.java	171	39	AsLongHashFunction	hashInt#1	4	int	INT_LENGTH	DECLARED	Byte length of a hashed int.
+M3XxHash.java	173	42	AsLongHashFunction	hashInt#1	23	int	INT_ROTATION	DECLARED	Rotation after a 32-bit tail int.
+M3XxHash.java	180	39	AsLongHashFunction	hashShort#1	2	int	SHORT_LENGTH	DECLARED	Byte length of a hashed short or char.
+M3XxHash.java	182	42	AsLongHashFunction	hashShort#1	11	int	BYTE_ROTATION	DECLARED	Rotation after a tail byte.
+M3XxHash.java	183	56	AsLongHashFunction	hashShort#1	8	int	BYTE_BITS	DECLARED	Bits of a byte: the second byte of a short.
+M3XxHash.java	184	42	AsLongHashFunction	hashShort#2	11	int	BYTE_ROTATION	DECLARED	Rotation after a tail byte.
+M3XxHash.java	197	42	AsLongHashFunction	hashByte#1	11	int	BYTE_ROTATION	DECLARED	Rotation after a tail byte.
