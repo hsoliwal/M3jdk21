@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+name: M3 array map fill
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/array-map-fill-20261031/**'
+      - 'm3/collections/implementations/apache-hashed-map/**'
+      - 'm3/collections/implementations/apache-linked-map/**'
+      - 'm3/collections/implementations/apache-lru-map/**'
+      - '.github/workflows/m3-array-map-fill.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  differential:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Member modules compile under their own poms (-Xlint:all -Werror)
+        run: |
+          for m in apache-hashed-map apache-linked-map apache-lru-map; do
+            mvn -B -ntp -f m3/collections/implementations/$m/pom.xml compile
+          done
+      - name: Differential against Commons Collections 4.5.0 and the fixed point
+        run: mvn -B -ntp -f m3/collections/qualification/array-map-fill-20261031/pom.xml -DexcludedGroups=performance test
+      - name: Performance report (not a gate on shared runners)
+        continue-on-error: true
+        run: mvn -B -ntp -f m3/collections/qualification/array-map-fill-20261031/pom.xml -Dgroups=performance test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: array-map-perf
+          path: m3/collections/qualification/array-map-fill-20261031/target/perf/
