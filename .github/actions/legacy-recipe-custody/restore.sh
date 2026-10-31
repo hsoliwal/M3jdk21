@@ -21,9 +21,12 @@ receipt=$root/$RECEIPT
 # A row is missing when it is neither on disk nor tracked (a sparse checkout tracks paths it does not materialise).
 # Rows use the unit separator, not tab: bash collapses runs of IFS whitespace and class (c) rows carry empty columns.
 missing_rows() {
+  # git ls-files has no --pathspec-from-file: pass the receipt paths as literal pathspecs through xargs instead.
   declare -A tracked=()
-  while IFS= read -r path; do [ -n "$path" ] && tracked[$path]=1; done < <(awk -F '\t' 'NR > 1 {print $2}' "$receipt" |
-    git --literal-pathspecs -C "$root" ls-files --pathspec-from-file=- 2>/dev/null || true)
+  if git -C "$root" rev-parse --git-dir > /dev/null 2>&1; then
+    while IFS= read -r -d '' path; do tracked[$path]=1; done < <(awk -F '\t' 'NR > 1 {print $2}' "$receipt" |
+      tr '\n' '\0' | xargs -0 -r git --literal-pathspecs -C "$root" ls-files -z --)
+  fi
   awk -F '\t' -v OFS="$US" 'NR > 1 {print $2, $5, $7, $8, $9, $10}' "$receipt" |
   while IFS="$US" read -r path class spath sblob scommit part; do
     [ -e "$root/$path" ] || [ -n "${tracked[$path]:-}" ] && continue
@@ -49,9 +52,13 @@ if [ "$mode" = plan ]; then
     echo "LEGACY_CUSTODY_RESTORE 0 (every receipt path is present)" >&2
     exit 0
   fi
-  { echo "needed=true"; echo "paths<<LEGACY_CUSTODY_PATHS"
-    printf '%s\n' "$rows" | cut -d "$US" -f 2 | sed 's#^#/#'; echo "LEGACY_CUSTODY_PATHS"; } >> "$out"
-  echo "LEGACY_CUSTODY_PLAN $(printf '%s\n' "$rows" | grep -c .) seal=$SEAL" >&2
+  # One pattern per distinct seal path: actions/checkout receives them as one environment variable, which Linux caps at
+  # 131072 bytes (MAX_ARG_STRLEN); several receipt rows share a seal path. Refuse plainly before the runner fails with E2BIG.
+  patterns=$(printf '%s\n' "$rows" | cut -d "$US" -f 2 | LC_ALL=C sort -u | sed 's#^#/#')
+  bytes=$(printf '%s\n' "$patterns" | wc -c | tr -d ' ')
+  [ "$bytes" -lt 130000 ] || { echo "LEGACY_CUSTODY_REFUSED sparse patterns are $bytes bytes, over the checkout input limit" >&2; exit 1; }
+  { echo "needed=true"; echo "paths<<LEGACY_CUSTODY_PATHS"; printf '%s\n' "$patterns"; echo "LEGACY_CUSTODY_PATHS"; } >> "$out"
+  echo "LEGACY_CUSTODY_PLAN $(printf '%s\n' "$rows" | grep -c .) patterns=$(printf '%s\n' "$patterns" | grep -c .) bytes=$bytes seal=$SEAL" >&2
   exit 0
 fi
 
