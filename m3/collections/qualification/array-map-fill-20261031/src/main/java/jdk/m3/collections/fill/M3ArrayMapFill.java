@@ -20,15 +20,19 @@ import java.util.regex.Pattern;
 /**
  * Template-first fill of the node-based scaffold families (recipe ARRAY_MAP_FILL): one template per family,
  * {@code //#if FLAG}, {@code //#else} and {@code //#end} line markers select sections per member, {@code ${NAME}}
- * placeholders take the member's columns from MEMBERS.tsv. The output replaces the scaffold source of each member
- * module; a second run over its own output is byte-identical (fixed point).
+ * placeholders take the member's columns from the member table, and an {@code //#include FILE} line is replaced by
+ * that file of the template's directory (the families share their atoms that way). The output replaces the source
+ * of each member module, in the package of its PACKAGE column (default {@value #DEFAULT_PACKAGE}); a second run over
+ * its own output is byte-identical (fixed point).
  *
- * <p>CLI: {@code java jdk.m3.collections.fill.M3ArrayMapFill <template> <MEMBERS.tsv> <implementations-dir>}
+ * <p>CLI: {@code java jdk.m3.collections.fill.M3ArrayMapFill <template> <member table> <implementations-dir>}
  */
 public final class M3ArrayMapFill {
 
+    static final String DEFAULT_PACKAGE = "jdk.m3.collections.apache";
     private static final Pattern PLACEHOLDER = Pattern.compile("\\$\\{([A-Z_]+)}");
-    private static final String SOURCE = "src/main/java/jdk/m3/collections/apache/";
+    private static final String INCLUDE = "//#include ";
+    private static final String SOURCE_ROOT = "src/main/java/";
 
     private M3ArrayMapFill() {
     }
@@ -37,9 +41,9 @@ public final class M3ArrayMapFill {
         if (args.length != 3) {
             throw new IllegalArgumentException("usage: <template> <MEMBERS.tsv> <implementations-dir>");
         }
-        String template = Files.readString(Path.of(args[0]), StandardCharsets.UTF_8);
+        String template = expand(Path.of(args[0]));
         for (Map<String, String> member : members(Path.of(args[1]))) {
-            Path target = Path.of(args[2], member.get("module"), SOURCE + member.get("CLASS") + ".java");
+            Path target = Path.of(args[2], member.get("module")).resolve(source(member));
             String text = render(template, member);
             boolean same = Files.isRegularFile(target) && Files.readString(target, StandardCharsets.UTF_8).equals(text);
             Files.writeString(target, text, StandardCharsets.UTF_8);
@@ -47,8 +51,30 @@ public final class M3ArrayMapFill {
         }
     }
 
+    /** The source file of MEMBER inside its module: the PACKAGE column (or the default package) and the CLASS. */
+    public static String source(Map<String, String> member) {
+        String pkg = member.getOrDefault("PACKAGE", "");
+        return SOURCE_ROOT + (pkg.isEmpty() ? DEFAULT_PACKAGE : pkg).replace('.', '/') + "/" + member.get("CLASS")
+                + ".java";
+    }
+
+    /** The template text with each {@code //#include FILE} line replaced by that file of the template's directory. */
+    public static String expand(Path template) throws IOException {
+        StringBuilder out = new StringBuilder();
+        String[] lines = Files.readString(template, StandardCharsets.UTF_8).split("\n", -1);
+        for (int i = 0; i < lines.length; i++) {
+            String marker = lines[i].strip();
+            String line = marker.startsWith(INCLUDE)
+                    ? Files.readString(template.resolveSibling(marker.substring(INCLUDE.length()).strip()),
+                            StandardCharsets.UTF_8).stripTrailing()
+                    : lines[i];
+            out.append(line).append(i + 1 < lines.length ? "\n" : "");
+        }
+        return out.toString();
+    }
+
     /** The rows of the member table as column -> value maps. */
-    static List<Map<String, String>> members(Path tsv) throws IOException {
+    public static List<Map<String, String>> members(Path tsv) throws IOException {
         List<String> lines = Files.readAllLines(tsv, StandardCharsets.UTF_8);
         String[] header = lines.get(0).split("\t", -1);
         List<Map<String, String>> rows = new ArrayList<>();

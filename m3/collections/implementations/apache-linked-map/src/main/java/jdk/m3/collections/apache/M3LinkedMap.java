@@ -1146,7 +1146,8 @@ public final class M3LinkedMap<K, V> implements Cloneable, java.io.Serializable,
     }
 
     /**
-     * The pure kernels of the ARRAY_MAP template (recipe ARRAY_MAP_FILL): arrays in, values out, no instance state.
+     * The pure kernels of the ARRAY_MAP and ID_MAP templates (recipe ARRAY_MAP_FILL): arrays in, values out, no
+     * instance state; both templates include this class, so every member carries the same atoms.
      * Every atom states its contract in its Javadoc (Requires, Ensures, Effects, Cost), word for word its row of
      * ATOMS.tsv. M3ArrayMapAtomContractTest fails when an atom lacks the contract, the row, its own JUnit test
      * (M3ArrayMapAtomsTest) or its own performance row (M3ArrayMapAtomsPerformanceTest).
@@ -1363,6 +1364,62 @@ public final class M3LinkedMap<K, V> implements Cloneable, java.io.Serializable,
                     toKeys[write] = keys[read];
                     toValues[write] = values[read];
                     toHashes[write] = hashes[read];
+                    toLive[write >>> WORD_SHIFT] |= 1L << write;
+                    write++;
+                }
+            }
+            return write;
+        }
+
+        /**
+         * The hash code of an M3 id (an M3String canonical id, an M3AST node id, any M3 key id).
+         * Requires: nothing.
+         * Ensures: Long.hashCode(ID), so equal ids fold equally.
+         * Effects: none.
+         * Cost: O(1).
+         */
+        static int foldId(long id) {
+            return Long.hashCode(id);
+        }
+
+        /**
+         * Linear probe for an M3 id: one id lane read per occupied entry, no hash lane and no equals call.
+         * Requires: INDEX.length is a power of two and INDEX holds an empty (0) entry; each positive entry e names slot
+         * e - 1, filled in IDS; H is foldId(ID).
+         * Ensures: the slot holding ID, or -1; tombstones (-1) are passed and the first empty entry ends the probe.
+         * Effects: none; reads only.
+         * Cost: expected O(1) at a load of at most one half.
+         */
+        static int findId(int[] index, long[] ids, long id, int h) {
+            int mask = index.length - 1;
+            for (int i = mix(h) & mask; ; i = i + 1 & mask) {
+                int e = index[i];
+                if (e == 0) {
+                    return -1;
+                }
+                if (e > 0 && ids[e - 1] == id) {
+                    return e - 1;
+                }
+            }
+        }
+
+        /**
+         * Stable two-pointer compaction of the id lanes.
+         * Requires: TO_LIVE is all zero and, like TO_IDS and TO_VALUES, has room for every live slot; LIVE has no set
+         * bit at or above USED.
+         * Ensures: the live slots, in ascending order, are copied to destination slots 0 to n - 1 with their bits set
+         * in TO_LIVE; returns n.
+         * Effects: writes the destination lanes only; the source lanes and LIVE are unchanged.
+         * Cost: one step per word of LIVE below USED plus one per live slot.
+         */
+        static int compactIds(long[] ids, Object[] values, long[] live, int used, long[] toIds, Object[] toValues,
+                long[] toLive) {
+            int write = 0;
+            for (int w = 0, words = used + WORD_MASK >>> WORD_SHIFT; w < words; w++) {
+                for (long word = live[w]; word != 0; word &= word - 1) {
+                    int read = (w << WORD_SHIFT) + Long.numberOfTrailingZeros(word);
+                    toIds[write] = ids[read];
+                    toValues[write] = values[read];
                     toLive[write >>> WORD_SHIFT] |= 1L << write;
                     write++;
                 }

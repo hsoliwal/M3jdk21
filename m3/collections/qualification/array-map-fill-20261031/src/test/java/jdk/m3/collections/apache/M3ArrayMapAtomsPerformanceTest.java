@@ -189,6 +189,44 @@ class M3ArrayMapAtomsPerformanceTest {
     }
 
     @Test
+    void idAtomsAgainstABoxedHashMap() {
+        int n = 50_000;
+        int[] index = new int[M3LinkedMap.Atoms.tableSize(n)];
+        long[] ids = new Random(5).longs(n).toArray();
+        Map<Long, Integer> reference = new HashMap<>();
+        for (int slot = 0; slot < n; slot++) {
+            M3LinkedMap.Atoms.insert(index, slot, M3LinkedMap.Atoms.foldId(ids[slot]));
+            reference.put(ids[slot], slot);
+        }
+        int[] probes = new Random(6).ints(OPS, 0, n).toArray();
+        row("foldId", i -> M3LinkedMap.Atoms.foldId(ids[probes[i]]), i -> Long.valueOf(ids[probes[i]]).hashCode());
+        row("findId(hit)", i -> M3LinkedMap.Atoms.findId(index, ids, ids[probes[i]],
+                M3LinkedMap.Atoms.foldId(ids[probes[i]])), i -> reference.get(ids[probes[i]]));
+        int used = 4096;
+        Random random = new Random(8);
+        boolean[] bits = new boolean[used];
+        for (int i = 0; i < used; i++) {
+            bits[i] = random.nextBoolean();
+        }
+        long[] live = pack(bits);
+        Object[] values = new Object[used];
+        long[] toIds = new long[used];
+        Object[] toValues = new Object[used];
+        long[] toLive = new long[live.length];
+        row("compactIds(4096 slots)", i -> M3LinkedMap.Atoms.compactIds(ids, values, live, used, toIds, toValues,
+                toLive), i -> {
+                    List<Long> kept = new ArrayList<>();
+                    for (int s = 0; s < used; s++) {
+                        if (bits[s]) {
+                            kept.add(ids[s]);
+                        }
+                    }
+                    return kept.size();
+                });
+        assertTrue(sink != Long.MIN_VALUE);
+    }
+
+    @Test
     void compactAgainstAListFilter() {
         Random random = new Random(3);
         int used = 4096;

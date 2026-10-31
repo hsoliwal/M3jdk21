@@ -415,13 +415,15 @@ class M3ArrayMapDifferentialTest {
     @Test
     void theFillIsAFixedPoint() throws Exception {
         Path base = Path.of(System.getProperty("user.dir"));
-        String template = Files.readString(base.resolve("templates/ARRAY_MAP.java.tmpl"), StandardCharsets.UTF_8);
         Path implementations = base.resolve("../../implementations");
-        for (Map<String, String> member : M3ArrayMapFill.members(base.resolve("MEMBERS.tsv"))) {
-            Path source = implementations.resolve(member.get("module"))
-                    .resolve("src/main/java/jdk/m3/collections/apache/" + member.get("CLASS") + ".java");
-            assertEquals(Files.readString(source, StandardCharsets.UTF_8), M3ArrayMapFill.render(template, member),
-                    member.get("CLASS") + " is not the template's output: regenerate, do not hand-edit");
+        for (String[] family : new String[][] {{"templates/ARRAY_MAP.java.tmpl", "MEMBERS.tsv"},
+                {"templates/ID_MAP.java.tmpl", "ID_MEMBERS.tsv"}}) {
+            String template = M3ArrayMapFill.expand(base.resolve(family[0]));
+            for (Map<String, String> member : M3ArrayMapFill.members(base.resolve(family[1]))) {
+                Path source = implementations.resolve(member.get("module")).resolve(M3ArrayMapFill.source(member));
+                assertEquals(Files.readString(source, StandardCharsets.UTF_8), M3ArrayMapFill.render(template, member),
+                        member.get("CLASS") + " is not the template's output: regenerate, do not hand-edit");
+            }
         }
     }
 }

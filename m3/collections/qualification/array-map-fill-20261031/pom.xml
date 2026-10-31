@@ -45,6 +45,7 @@
                 <source>${m3.implementations}/apache-hashed-map/src/main/java</source>
                 <source>${m3.implementations}/apache-linked-map/src/main/java</source>
                 <source>${m3.implementations}/apache-lru-map/src/main/java</source>
+                <source>${m3.implementations}/m3-long-object-linked-hash-map/src/main/java</source>
               </sources>
             </configuration>
           </execution>
