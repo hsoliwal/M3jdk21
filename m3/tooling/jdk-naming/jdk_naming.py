@@ -33,6 +33,13 @@ TEXT_RULES = (
     ("CONST", re.compile(r"\bSYNEXIA_(?=[A-Z0-9])"), "M3_"),
     ("KEBAB", re.compile(r"\bsynexia-(?=[a-z0-9])"), "m3-"),
     ("SNAKE", re.compile(r"\bsynexia_(?=[a-z0-9])"), "m3_"),
+    # second pass (user, 2026-10-31, the rule restated after the first rename): the rest of the Synexia names and
+    # the M3 packages to JDK naming
+    ("CONST_KEBAB", re.compile(r"\bSYNEXIA-(?=[A-Z0-9])"), "M3-"),
+    ("SEGMENT", re.compile(r"(?<=/)synexia(?=/)"), "m3"),
+    ("WORD", re.compile(r"\bSynexia\b"), "M3"),
+    ("PKG_COM_M3", re.compile(r"\bcom\.m3\.(?=[a-z])"), "jdk.m3."),
+    ("PKG_PATH_COM_M3", re.compile(r"\bcom/m3/(?=[a-z])"), "jdk/m3/"),
 )
 PATH_RULES = (
     (re.compile(r"(^|/)com/synexia/m3/"), r"\1jdk/internal/m3/"),
@@ -41,16 +48,24 @@ PATH_RULES = (
     (re.compile(r"Synexia(?=[A-Z0-9_])"), "M3"),
     (re.compile(r"(^|[/_.-])synexia-"), r"\1m3-"),
     (re.compile(r"(^|[/_.-])synexia_"), r"\1m3_"),
+    (re.compile(r"(^|/)synexia(?=/)"), r"\1m3"),
+    (re.compile(r"(^|[/_.-])SYNEXIA_(?=[A-Z0-9])"), r"\1M3_"),
+    (re.compile(r"(^|[/_.-])SYNEXIA-(?=[A-Z0-9])"), r"\1M3-"),
+    (re.compile(r"(^|/)com/m3/"), r"\1jdk/m3/"),
 )
 # copyright and SPDX lines are kept whole; dependencies are kept as spans and the rest of their line is renamed
 # (renaming a dependency would hide it from the standalone check): links to the Synexia repository, SYNEXIA_* secrets,
 # and Maven groupIds (mapped in a later phase, not as Java packages). A whole kept line left a one-line
 # <dependency><groupId>com.synexia</groupId><artifactId>synexia-x</artifactId> pointing at a renamed module.
 KEEP_LINE = re.compile(r"Copyright|SPDX-")
-KEEP_SPAN = re.compile(r"<groupId>\s*com\.synexia[\w.]*\s*</groupId>|secrets\.SYNEXIA_\w+"
+# also kept as spans: Maven groupIds under com.m3 (coordinates, not packages) and the attribution file names
+KEEP_SPAN = re.compile(r"<groupId>\s*com\.(?:synexia|m3)[\w.]*\s*</groupId>|secrets\.SYNEXIA_\w+"
+                       r"|\bSynexia-(?:NOTICE|LICENSE|RIGHTS|AUTHORS)\b|M3-SYNEXIA-[A-Z]+(?:\.md)?"
                        r"|(?:https?://)?(?:www\.)?(?:github\.com|raw\.githubusercontent\.com|api\.github\.com/repos)"
                        r"/hsoliwal/com\.synexia[\w./#?=&%~:+-]*|hsoliwal/com\.synexia\b")
 SPAN_TOKEN = re.compile("\x00(\\d+)\x00")
+# legal and attribution files keep their names (M3-SYNEXIA-NOTICE.md is a required release-boundary file)
+KEEP_PATH = re.compile(r"(?i)synexia-(?:notice|license|rights|authors)")
 TEXT_SUFFIXES = {".java", ".yml", ".yaml", ".xml", ".sh", ".py", ".mjs", ".js", ".properties", ".gradle", ".toml",
                  ".cfg", ".ini", ".c", ".h", ".cpp", ".json", ".txt"}
 DOC_SUFFIXES = {".md", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch"}
@@ -69,7 +84,8 @@ def tracked(root: Path) -> list[str]:
 def is_lineage(path: str) -> bool:
     p = Path(path)
     return (p.suffix.lower() in DOC_SUFFIXES or p.name in DOC_NAMES or path.startswith(("m3/docs/", "m3/release/audit-"))
-            or "/evidence/" in path or "/receipts/" in path
+            or "/evidence/" in path or "/receipts/" in path or "/surefire-reports/" in path
+            or p.name.startswith("TEST-") and p.suffix.lower() == ".xml"
             or p.suffix.lower() == ".json" and any(h.lower() in path.lower() for h in LINEAGE_HINTS))
 
 
@@ -117,7 +133,7 @@ def plan(root: Path, only: tuple[str, ...] = ()) -> dict:
     moves, refusals, rewrites, absent = [], [], [], []
     targets: dict = {}
     for path in paths:
-        if path in SELF or only and not path.startswith(only):
+        if path in SELF or only and not path.startswith(only) or KEEP_PATH.search(path):
             continue
         new = renamed_path(path)
         if new != path:
