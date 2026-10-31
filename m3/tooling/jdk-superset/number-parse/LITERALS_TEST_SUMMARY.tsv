@@ -1,0 +1,36 @@
+file	origin	kind	disposition	count
+M3NumberParseAtomsPerf.java	base #2215 (43396c7c54, 5181bbe411)	char	HOIST	4
+M3NumberParseAtomsPerf.java	base #2215 (43396c7c54, 5181bbe411)	number	CONSTANT_DEF	2
+M3NumberParseAtomsPerf.java	base #2215 (43396c7c54, 5181bbe411)	number	EXEMPT_UNIT	51
+M3NumberParseAtomsPerf.java	base #2215 (43396c7c54, 5181bbe411)	number	HOIST	27
+M3NumberParseAtomsPerf.java	base #2215 (43396c7c54, 5181bbe411)	string	HOIST	53
+M3NumberParseAtomsTest.java	base #2215 (43396c7c54, 5181bbe411)	char	HOIST	3
+M3NumberParseAtomsTest.java	base #2215 (43396c7c54, 5181bbe411)	number	CONSTANT_DEF	1
+M3NumberParseAtomsTest.java	base #2215 (43396c7c54, 5181bbe411)	number	EXEMPT_UNIT	28
+M3NumberParseAtomsTest.java	base #2215 (43396c7c54, 5181bbe411)	number	HOIST	41
+M3NumberParseAtomsTest.java	base #2215 (43396c7c54, 5181bbe411)	string	CONSTANT_DEF	1
+M3NumberParseAtomsTest.java	base #2215 (43396c7c54, 5181bbe411)	string	HOIST	78
+M3NumberParseEveryAtomTest.java	this leaf	char	HOIST	33
+M3NumberParseEveryAtomTest.java	this leaf	number	CONSTANT_DEF	7
+M3NumberParseEveryAtomTest.java	this leaf	number	EXEMPT_UNIT	474
+M3NumberParseEveryAtomTest.java	this leaf	number	HOIST	516
+M3NumberParseEveryAtomTest.java	this leaf	number	TABLE_DATA	1
+M3NumberParseEveryAtomTest.java	this leaf	string	CONSTANT_DEF	24
+M3NumberParseEveryAtomTest.java	this leaf	string	HOIST	614
+M3NumberParseJitPerf.java	this leaf	char	HOIST	4
+M3NumberParseJitPerf.java	this leaf	number	CONSTANT_DEF	14
+M3NumberParseJitPerf.java	this leaf	number	EXEMPT_UNIT	15
+M3NumberParseJitPerf.java	this leaf	number	HOIST	5
+M3NumberParseJitPerf.java	this leaf	string	HOIST	20
+M3NumberParseJitPerf.java	this leaf	string	TABLE_DATA	1
+gate/M3ParseDifferential.java	this leaf + base	char	HOIST	5
+gate/M3ParseDifferential.java	this leaf + base	number	EXEMPT_UNIT	31
+gate/M3ParseDifferential.java	this leaf + base	number	HOIST	46
+gate/M3ParseDifferential.java	this leaf + base	string	CONSTANT_DEF	1
+gate/M3ParseDifferential.java	this leaf + base	string	HOIST	52
+gate/M3ParseDifferential.java	this leaf + base	string	TABLE_DATA	1
+gate/M3ParseDifferential.java@bf16b78663	base #2215	char	HOIST	5
+gate/M3ParseDifferential.java@bf16b78663	base #2215	number	EXEMPT_UNIT	14
+gate/M3ParseDifferential.java@bf16b78663	base #2215	number	HOIST	16
+gate/M3ParseDifferential.java@bf16b78663	base #2215	string	HOIST	10
+gate/M3ParseDifferential.java@bf16b78663	base #2215	string	TABLE_DATA	1

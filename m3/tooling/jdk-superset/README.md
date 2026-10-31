@@ -62,11 +62,13 @@ User order: atomize first, then JUnit for every atom and the JIT, then the patte
 `number-parse/` (GATES.tsv rows `jit_*`, `hex_*`, `swar_*`, `pattern_*`).
 
 1. ATOMIZE: tree-sitter L-Hash atomization of the 13 M3 types and `FloatingDecimal` (atomize_patternize.py:
-   14 files, 249 leaves before, 270 after), and every method sized by `tools/jit_size.py`: the javap length must equal
-   the class-file code_length (JIT_SIZE.tsv, JIT_SIZE_PRE.tsv). HotSpot 21 limits: MaxInlineSize 35, FreqInlineSize
-   325, HugeMethodLimit 8000. The hot parse methods were too big: `parseDecFloatLiteral` 466 bytes and
-   `parseHexFloatLiteral` 515 bytes ("hot method too big" into `parseFloatingPointLiteral`, 81 C2 failures in 3 probe
-   runs). Split in the same files into private atoms (JIT_ATOMIZE v1, `//FLLDCIM: HPCPOP` anchors):
+   14 files, 249 leaves before, 270 after; the same counts with ATOMIZE v1, the first run, and v1.1, which replaced the
+   shared tool afterwards; GATES.tsv `jit_atomize` names both hashes), and every method sized by `tools/jit_size.py`:
+   the javap length must equal the class-file code_length (JIT_SIZE.tsv, JIT_SIZE_PRE.tsv). HotSpot 21 limits:
+   MaxInlineSize 35, FreqInlineSize 325, HugeMethodLimit 8000. The hot parse methods were too big:
+   `parseDecFloatLiteral` 466 bytes and `parseHexFloatLiteral` 515 bytes ("hot method too big" into
+   `parseFloatingPointLiteral`, 81-82 C2 failures per batch of 3 probe runs). Split in the same files into private
+   atoms (JIT_ATOMIZE v1, `//FLLDCIM: HPCPOP` anchors):
    - `parseExponentNumber` and `parseLiteralTail` return one packed long (exponent number, end index, illegal bit);
      `packedIndex` decodes it (one owner in `M3AbstractFloatValueParser` for both templates);
    - `valueOfTruncatedDecFloatLiteral` / `valueOfTruncatedHexLiteral` (instance atoms: they end in the abstract
@@ -78,14 +80,20 @@ User order: atomize first, then JUnit for every atom and the JIT, then the patte
    table initializer) and the FFT `fft`, `ifft`, `multiplyFft`.
 2. JUNIT: `M3NumberParseEveryAtomTest`, one dynamic test per method and constructor of the 13 types plus the two
    wiring entries (197), each differential against FloatingDecimal.readJavaFormatString, a JDK kernel or an
-   independent model; `everyAtomHasATest()` fails when an atom has no test (198/198). The existing gates stay: differential sha256 233e0f59...,
-   M3NumberParseAtomsTest 11/11.
+   independent model; `everyAtomHasATest()` fails when an atom has no test (198/198; with the same class the JIT
+   split scores 173/198 and the pre-image 157/198, the defects below). The existing gates stay: differential sha256
+   233e0f59..., M3NumberParseAtomsTest 11/11, and the JDK's `FloatingDecimal` tests pass on the patched java.base
+   (TestFloatingDecimal 8/8, TestFDBigInteger, ToString).
 3. JIT: `tools/jit_probe.sh` runs `M3NumberParseJitPerf` (decimal, hex, short, long and subnormal literals) with
    PrintCompilation + PrintInlining into a VM log; `tools/jit_inline.py` de-interleaves it per compiler thread and
-   writes JIT.tsv (tier and C2 inlining failures per atom, before / after). C2 failures with the gated reasons:
-   98 before (81 hot method too big), 58 after (0 hot method too big; 41 "already compiled into a big method": the
-   loop holder `parseDecFloatLiteral` is compiled first and its code exceeds InlineSmallCode 2500, also
-   `FloatingDecimal.parseDouble` at the API boundary; 17 at cold call sites). Perf: PERF_JIT.tsv, 16 interleaved
+   writes JIT.tsv (tier and C2 inlining failures per atom, before / after, one batch of 3 runs). The stable result:
+   no "hot method too big" after the split (81-82 per batch before, 0 after, in every batch). The total of C2
+   failures with the gated reasons is a sample, so `tools/jit_batches.sh` reports its spread (JIT_BATCHES.tsv):
+   under background compilation 92-109 before and 42-58 after; with -Xbatch (synchronous compiles) it is reproducible
+   and grows after the split, 132 -> 168. In both regimes the call `parseFloatingPointLiteral` ->
+   `parseDecFloatLiteral` / `parseHexFloatLiteral` stays a call: the loop holder is compiled first and its code
+   exceeds InlineSmallCode 2500 ("already compiled into a big method"), as `FloatingDecimal.parseDouble` at the API
+   boundary. The split moved the reason from bytecode size to compiled size. Perf: PERF_JIT.tsv, 16 interleaved
    rounds of post / split / pre-image / stock at High priority, system CPU load per row: decimal literals 0.876
    (double) and 0.913 (float) of the pre-image's time, 9 of 10 rows within 1.05 (float long 1.054).
 4. PATTERNIZE: PATTERNS.tsv, NUMBER-PARSE-PATTERN v1 at atom level (`tools/atom_patterns.py`): 197 atoms in 30
@@ -103,6 +111,16 @@ equals stock):
   200000`: 76582 lines differ before, 0 after.
 Latent FFT defects (no caller reaches them; recorded as FFT_LATENT v1 in RECIPE_MEMORY.tsv for the BigDecimal leaf):
 length-12 mixed radix, multiplyFft / squareFft for small operands, pointwise operations on vector views.
+
+Review fixes (after merging the moved base a5d6cc2a79; RECIPE_MEMORY.tsv rows 20-29):
+- Custody: `fastdoubleparser.md` names JIT_ATOMIZE v1, HEX_ROUNDING v1, SWAR_HEX_BORROW v1, NUMBER-PARSE-PATTERN v1
+  and CNPCDA v1. `tools/custody_names_check.py` (CUSTODY_NAMES v1) checks that the record names the recipe of every
+  commit that changes absorbed files: `custody_check.py` passes on a merge commit alone, because a merge's
+  first-parent diff repeats the base's record change.
+- Anchors: the four `//FLLDCIM` anchors removed with the `packedIndex` move are back, each with an anchor naming the
+  owner (CNPCDA anchors are append-only); `tools/anchor_check.py` checks that no anchor leaves a file.
+- Literals: 0 HOIST holds for the production code. The leaf's test and gate code are not hoisted yet
+  (LITERALS_TEST_SUMMARY.tsv; OPEN).
 
 Next:
 - Remove the last call boundary of the decimal path: the scanner hands its state (significand and packed index) to
