@@ -46,11 +46,15 @@ as `jdk.internal.math.M3*` (#2215). This lane makes the vendored FastDoubleParse
 | `tools/verify_rounding.py` | An exact-arithmetic referee (`fractions.Fraction`, round-half-even) for raw-bits differences. |
 | `tools/M3JacksonFastDoubleDifferential.java` | Gate (c). Jackson runs with `USE_FAST_DOUBLE_PARSER` on and off, through char, byte and async parsers. |
 | `tools/custody_gate.py` | Gate (d). It runs `verify_source.py`, the recipe fixed point, the pack lock check and the central crate rule, plus 7 tamper probes. |
+| `tools/class_load_trace.py` | Gate (c) evidence. It lists the FastDoubleParser classes each build loads while Jackson parses. |
+| `tools/gates_tsv.py` | Builds `GATES.tsv` from one run's `RESULT.jsonl`, `custody.json` and `classload.txt`. |
 
 ```text
 python -I m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py --check
 python -I m3/tooling/fdp-delegate/tools/run_gates.py --jdk <jdk21> --out <dir> --m3-src <M3JDK tree>
-python -I m3/tooling/fdp-delegate/tools/custody_gate.py --out <dir>
+python -I m3/tooling/fdp-delegate/tools/custody_gate.py --out <dir>/custody
+python -I m3/tooling/fdp-delegate/tools/class_load_trace.py --jdk <jdk21> --run <dir>
+python -I m3/tooling/fdp-delegate/tools/gates_tsv.py <dir> <dir>/classload.txt "<public-names result>"
 ```
 
 Results are in `GATES.tsv`. Corrections are in `RECIPE_MEMORY.tsv`.
