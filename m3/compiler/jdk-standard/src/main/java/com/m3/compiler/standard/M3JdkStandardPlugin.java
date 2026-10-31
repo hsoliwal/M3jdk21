@@ -127,6 +127,10 @@ public final class M3JdkStandardPlugin implements Plugin {
         }
     }
 
+    List<String> findings() {
+        return List.copyOf(rows);
+    }
+
     /** One compilation unit: its text, its line map and the first tree that starts on each line. */
     private final class Unit extends TreePathScanner<Void, Void> {
         private final CompilationUnitTree root;

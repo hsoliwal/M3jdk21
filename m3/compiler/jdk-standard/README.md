@@ -39,3 +39,31 @@ versions, dates, repeated words and excessive names fail without confusing `Hype
 for policy terms. The opt-in scheme fixture adds exactly three `NAME_SCHEME` findings for legacy
 Synexia ownership and none for valid M3 names. Maven runs the same test through
 `M3JdkStandardPluginJUnitTest`.
+
+## Repository integration
+
+The module has three independent entry points:
+
+```text
+bash verify.sh
+bash check-changed.sh <base-sha> <head-sha> [report.tsv]
+bash census.sh [report.tsv] [--scheme=m3]
+```
+
+`verify.sh` compiles every main owner and standalone self-test under Java 21 with warnings as
+errors, recompiles them under `M3JdkStandard` and protected doclint, then runs the compiler,
+parse-only census and changed-line discriminators.
+
+`check-changed.sh` is the pull-request ratchet. It accepts only full 40-character Git commit IDs,
+uses a zero-context Git diff, parses the changed M3-owned Java files without resolving external
+types, and fails only for findings on added lines. This preserves existing compatibility-locked
+names while refusing newly introduced naming debt.
+
+`census.sh` writes a complete warning report for M3-owned Java sources. Vendored, generated,
+qualification, retained-variant and archived sources are excluded. The optional `--scheme=m3`
+flag additionally inventories namespace migration residue; it is not enabled by the changed-line
+ratchet until the corresponding package migration is admitted.
+
+The module remains an opt-in, parentless compiler tool, so the existing Maven control reactor is
+unchanged. The GitHub workflow builds its POM directly, runs the standalone proof and changed-line
+ratchet on pull requests, and produces the repository-wide census on manual dispatch.
