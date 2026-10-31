@@ -47,7 +47,7 @@ jobs:
   historical-lane-recipe:
     name: Historical lane recipe with real SDK
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -60,6 +60,13 @@ jobs:
           tar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+      - name: Install the source-built OpenRewrite closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          # org.openrewrite:rewrite-java-21:8.17.1-m3-source-1 is built from the vendored source
+          # reactor (m3/vendor/third_party/pom.xml); no registry publishes it.
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
       - name: Verify frozen lane recipe and fixed point
         run: mvn --batch-mode --no-transfer-progress --file m3/collections/recipe/pom.xml verify
       - name: Retain historical recipe reports
