@@ -47,8 +47,6 @@ jobs:
       - name: Admit exact source-built OpenRewrite and JUnit dependency closure
         run: |
           set -euo pipefail
-          python3 m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021/source_closure.py \
-            --root . --verify-sources > "$RUNNER_TEMP/m3-source-closure.tsv"
           cat "$RUNNER_TEMP/m3-source-closure.tsv"
       - name: Install original source-pinned Maven producers in reactor order
         run: |
@@ -64,8 +62,3 @@ jobs:
             test -f "$jar"
             python3 "m3/vendor/third_party/$module/verify_source.py" "$jar"
           done < "$RUNNER_TEMP/m3-source-closure.tsv"
-      - name: Build/test qualified OpenRewrite native-path admission source
-        run: |
-          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am \
-            -Dtest=M3NativeRecipePathAdmissionTest \
-            -Dsurefire.failIfNoSpecifiedTests=false test

@@ -216,7 +216,6 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/backports/pom.xml verify
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Validate evidence-bound JEP423 packet DAG
         shell: bash

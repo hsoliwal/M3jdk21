@@ -1,0 +1,1 @@
+s/org\.apache\.commons\.lang3([^A-Za-z0-9_$]|$)/com.m3.lib.lang3\1/g;s#org/apache/commons/lang3([^A-Za-z0-9_$]|$)#com/m3/lib/lang3\1#g;

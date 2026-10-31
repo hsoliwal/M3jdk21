@@ -1,0 +1,4 @@
+jdk.m3.re2j@1.8-m3-source-1
+exports com.m3.lib.re2j
+requires java.base mandated
+

@@ -21,7 +21,7 @@
     <dependency>
       <groupId>org.ow2.asm</groupId>
       <artifactId>asm</artifactId>
-      <version>9.10.1-m3-source-1</version>
+      <version>9.6-m3-source-1</version>
       <!-- source module -->
     </dependency>
     <dependency>

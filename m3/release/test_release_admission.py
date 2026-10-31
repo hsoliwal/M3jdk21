@@ -66,6 +66,8 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         upstream = self.git("rev-parse", "HEAD")
         self.contract = json.loads(Path(__file__).with_name("release-contract.json").read_text())
         self.contract["release"]["upstream_baseline"] = upstream
+        # these fixtures test receipt integrity; the standalone rule has its own fixture below
+        self.contract.setdefault("standalone", {})["required_for_release"] = False
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
         self.write(".gitignore", "/target/\n")
         self.write("m3/release/queue/.gitignore", "/current/\n")
@@ -102,14 +104,14 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
             artifact.write_text("SYNTHETIC VALIDATOR FIXTURE ONLY " + ident + "\n")
             gate = {
                 "id": ident, "status": "PASS", "exit_code": 0,
-                "owner_repository": "hsoliwal/com.synexia" if ident == "M3_MAVEN_CONTROL_REACTOR" else "hsoliwal/M3jdk21",
+                "owner_repository": release.PRODUCT_REPOSITORY,
                 "command": ["synthetic-fixture", ident],
                 "environment": {"os": "fixture-os", "architecture": "fixture-arch", "toolchain": "fixture-toolchain"},
                 "artifacts": [{"path": artifact.name, "sha256": release.sha256(artifact)}],
             }
             if ident == "M3_MAVEN_CONTROL_REACTOR":
                 gate["canonical_recipe"] = {
-                    "repository": "hsoliwal/com.synexia", "commit": "1" * 40,
+                    "repository": release.PRODUCT_REPOSITORY, "commit": "1" * 40,
                     "recipe_id": "synthetic.fixture.only",
                 }
             self.evidence["gates"].append(gate)
@@ -277,13 +279,22 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
         self.assert_blocked(self.result(), "contract.mandatory_gates")
 
-    def test_synexia_recipe_owner_and_identity_are_required(self):
-        entry = next(g for g in self.evidence["gates"] if g["id"] == "M3_MAVEN_CONTROL_REACTOR")
-        entry["owner_repository"] = "hsoliwal/M3jdk21"
-        self.assert_blocked(self.result(), "gate:M3_MAVEN_CONTROL_REACTOR")
-        entry["owner_repository"] = "hsoliwal/com.synexia"
+    def test_maven_gate_owner_and_recipe_identity_are_required(self):
+        # standalone (2026-10-31): another repository can neither own the gate nor supply its recipe
+        other = "example/another-repository"
+        entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+        entry["owner_repository"] = other
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+        entry["owner_repository"] = release.PRODUCT_REPOSITORY
+        entry["canonical_recipe"]["repository"] = other
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
         del entry["canonical_recipe"]
-        self.assert_blocked(self.result(), "gate:M3_MAVEN_CONTROL_REACTOR")
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_contract_naming_another_maven_gate_owner_is_refused(self):
+        self.contract["execution_evidence"]["gate_owners"][release.MAVEN_GATE] = "example/another-repository"
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.assert_blocked(self.result(), "contract.recipe_owner")
 
     def test_retained_legacy_recipe_sources_remain_visible_holds(self):
         self.write("m3/recipes/apply.py", "# synthetic legacy recipe fixture\n")
@@ -317,6 +328,19 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         for mode in (False, True):
             with self.subTest(release=mode):
                 self.assert_blocked(self.result(mode), "git.single_release_commit")
+
+    def test_standalone_rule_refuses_release_while_the_contract_needs_another_repository(self):
+        # the contract still names another repository as the M3_MAVEN_CONTROL_REACTOR owner: not standalone
+        self.contract["standalone"]["required_for_release"] = True
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.repin_queue()
+        self.commit("enforce the standalone rule")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        result = self.result(True)
+        self.assert_blocked(result, "standalone.no_external_repo_dependency")
+        detail = next(b["detail"] for b in result["blockers"] if b["name"] == "standalone.no_external_repo_dependency")
+        self.assertIn("D_REPO_REF=", detail)
 
     def test_cli_distinguishes_policy_pass_from_release_acceptance_and_writes_queue(self):
         report = Path(self.tmp.name) / "reports" / "admission.json"

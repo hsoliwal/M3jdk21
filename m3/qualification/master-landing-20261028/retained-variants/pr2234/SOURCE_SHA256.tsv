@@ -1,0 +1,10 @@
+path	git_blob	status	pr	note
+make/conf/module-loader-map.conf	4182f2c46cb8feeeec100e8fbedd8b200e60a7d9	modified	2234	PR version, not live; the git blob id is its content address
+make/modules/jdk.m3.logging/Java.gmk	649aa9048f59e48fccd21ca124b582498103fcfe	added	2234	PR version, not live; the git blob id is its content address
+src/jdk.m3.logging/share/classes/jdk/m3/logging/M3StructuredFormatter.java	1b5819b08b4f22d65c2a42aa7d3ca8bc33f3a7b3	added	2234	PR version, not live; the git blob id is its content address
+src/jdk.m3.logging/share/classes/jdk/m3/logging/package-info.java	281a3402baded3a9aa9b7ac9824bc05a3dfa541a	added	2234	PR version, not live; the git blob id is its content address
+src/jdk.m3.logging/share/classes/module-info.java	712a724624079e0ddd663093ee24fc8a319a2bf1	added	2234	PR version, not live; the git blob id is its content address
+test/jdk/jdk/m3/logging/M3StructuredFormatterJitDriver.java	1c7b1cd8822c80ba53a793e09fe039833c3856fc	added	2234	PR version, not live; the git blob id is its content address
+test/jdk/jdk/m3/logging/M3StructuredFormatterPassesTest.java	1373e81cd991c0936a182eabc9663ae30712a9ac	added	2234	PR version, not live; the git blob id is its content address
+test/jdk/jdk/m3/logging/M3StructuredFormatterPerformanceTest.java	6903514c07302a42acd7d2069e44240ec943d026	added	2234	PR version, not live; the git blob id is its content address
+test/jdk/jdk/m3/logging/M3StructuredFormatterTest.java	edd8d2eabb54e69fb0551d24f8d7eca553e40949	added	2234	PR version, not live; the git blob id is its content address

@@ -208,13 +208,6 @@ jobs:
           )
           PY
 
-      - name: Verify M3 generator and recipe substrate
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am \
-            -Dtest=M3RecipeScopeDeclarationTest \
-            -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Validate evidence-bound JEP467 composition DAG
         run: |

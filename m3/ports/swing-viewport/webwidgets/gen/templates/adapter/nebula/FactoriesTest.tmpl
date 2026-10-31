@@ -1,0 +1,33 @@
+package @WPKG@.adapter;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.Shell;
+import org.junit.Test;
+
+/**
+ * Factory bindings of the adapters whose widget lives in another Nebula bundle, on stand-in hosts (a scrolling
+ * canvas, a composite with children, a plain canvas: the three AUTO resolutions). This proves the binding and the
+ * kind, not the widget: each widget's own proof is its M3&lt;Concept&gt;Viewport_Test (NOT_RUN while the bundle is absent).
+ */
+public class M3ViewportFactories_Test {
+	@Test
+	public void standIns() {
+		Shell shell = M3ViewportAdapterChecks.shell();
+		try {
+@CALLS@		} finally {
+			shell.dispose();
+		}
+	}
+
+	/** Stand-in host number k: 0 a scrolling canvas, 1 a composite with children, 2 a plain canvas. */
+	static Canvas standIn(Shell shell, int k) {
+		Canvas c = new Canvas(M3ViewportAdapterChecks.panel(shell), k == 0 ? SWT.V_SCROLL : SWT.NONE);
+		if (k == 0) {
+			c.getVerticalBar().setValues(10, 0, 500, 40, 1, 40);
+		} else if (k == 1) {
+			M3ViewportFills.fill(c, "children");
+		}
+		return c;
+	}
+}

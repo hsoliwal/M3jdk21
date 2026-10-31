@@ -1,0 +1,231 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+"""Build CONCEPTS.tsv (104 web widget concepts x Nebula/SWT/Swing/SwingX/M3 port) and COMPONENT_CONCEPTS.tsv
+(every harvested kit component name -> concept) from the pinned 69-kit harvest. CPU only, deterministic.
+
+usage: concepts.py INPUTS_DIR MEMBERS.tsv OUT_DIR
+INPUTS_DIR holds (from com.synexia d278d4c1c02 docs/M3-SCALE/runs/20261013-all-widget-viewport):
+  universe_concepts.py, UNIVERSE_CONCEPTS.tsv, SUPERSET_WIDGET_MAP.tsv, UNIVERSE_COMPONENTS.tsv
+plus CPU name lists: NEBULA_TREE.txt (git ls-tree of hsoliwal/nebula master widgets/), SWT_JAR.txt (unzip -Z1 of the
+SWT jar), JDK_SWING.txt (javax.swing J* + AWT names from jdk-21 src.zip), SWINGX.txt (swingx-all 94f86aab class names).
+The alias table and matcher are reused verbatim from universe_concepts.py (exec of the text before main()).
+"""
+import collections, os, sys
+
+# Tier 2 (2026-10-30): exact-word aliases for names the verbatim table leaves unmatched; widget words only.
+EXTRA = {"label": "text truncate display", "toolbar": "strip actions bar tool", "layout-primitive": "form forms layout view page content footer area canvas element control shell wrap hidden slot primitive main bleed",
+         "text-input": "field validation mask", "list": "item items collection transfer iterator listy", "scroll": "scroll", 
+         "web-view": "html", "color-picker": "color", "config-provider": "theme style css baseline global", "focus-trap": "focus away",
+         "toggle-button": "toggle", "progress": "indicator", "skeleton": "placeholder", "code-block": "code", "stepper": "step",
+         "time-picker": "time", "date-picker": "date", "virtual-list": "virtual sliver", "affix": "top", "rating": "rate",
+         "alert-banner": "info", "popover": "floating popconfirm arrow", "table": "cell descriptions", "divider": "line", "empty-state": "result",
+         "segmented-bar": "segment", "search": "filters filter", "splitter": "grip split", "message-list": "bubble chat", "spinner-loading": "loader spin",
+         "number-input": "number", "select": "options option", "navigation": "route router", "panel": "section", "gallery": "masonry",
+         "autocomplete": "mentions mention", "markdown-render": "blockquote", "file-upload": "download", "card": "paper surface",
+         "transition-anim": "grow slide zoom fade ripple ink effect parallax presence show beam", "kbd": "hotkey shortcut",
+         "carousel": "marquee", "accordion": "spoiler", "badge": "counter status", "toast": "announce sonner flash", "hover-card": "hover",
+         "infinite-scroll": "lazy", "fab": "float", "map": "marker", "icon": "octicon", "dialog": "window interstitial confirm", "reorder-drag": "drag", "image": "icons thumbnail", "file-upload": "download attachment", "empty-state": "result blankslate", "splitter": "grip split resizer", "scroll": "scroll scroller", "popover": "floating popconfirm arrow dismissable layer", "heading": "pagehead"}
+# Tier 3: infrastructure words; a name made of these is a non-widget support type (events, bindings, converters, ...).
+NON_WIDGET = set("""event events args handler converter controller binding bindable manager utils util helper helpers service observer listener model
+presenter builder definition attribute property extensions extension platform native type data state changed changing base to use mode value
+direction orientation alignment configuration config context scope source template component widget renderer render format name ui jx i v
+accessibility device system responsive relative position size font check edit gesture touchable recognizer click brush shadow border gradient
+visual app locale version environment client only no ssr init script provider portal key keys of for with on is in at by""".split())
+FAMILY_ORDER = ["TOKEN", "CONTAINER", "OVERLAY", "ANIMVALUE", "SEGMENTS", "COMMANDS", "INPUT", "PICKER", "COLLECTION", "PLOT", "EMBED"]
+STATUS_RANK = {"gap": 0, "new": 1, "primitive": 2, "rare": 3, "style-bit": 4}
+NEW_FORMS = {"emoji-picker": "a two-level cascade (category, emoji) on the picker pop-up plane; emoji glyphs as text runs",
+             "signature-pad": "a drawing surface: stroke points in a packed int lane painted as polylines (TODO M3P-EMBED-1 stroke capture)",
+             "splash-screen": "a centred modal overlay plane with title, message and a progress phase"}
+
+
+def load_matcher(path):
+    src = open(path, encoding="utf-8").read()
+    ns = {}
+    exec(compile(src[:src.index("def main():")], path, "exec"), ns)
+    return ns["CONCEPTS"], ns["tokens"]
+
+
+def tsv(path):
+    rows = [l.rstrip("\n").split("\t") for l in open(path, encoding="utf-8")]
+    return [dict(zip(rows[0], r + [""] * (len(rows[0]) - len(r)))) for r in rows[1:]]
+
+
+def best_concept(name, aliases, tokens):
+    words, joined = tokens(name)
+    hits = []
+    for c, al in aliases.items():
+        for a in al.split():
+            if a in words or (len(a) >= 5 and a in joined):
+                hits.append((len(a), c))
+    hits.sort(key=lambda h: (-h[0], h[1]))
+    if hits:
+        return [c for _, c in hits], "T1_ALIAS"
+    tier2 = sorted({c for c, al in EXTRA.items() for a in al.split() if a in words})
+    if tier2:
+        return tier2, "T2_WORD"
+    return ([], "T3_NON_WIDGET") if words & NON_WIDGET else ([], "UNMAPPED")
+
+
+# Tier 6 (2026-10-31): clusters of the remaining names, from a CPU token census of the UNMAPPED rows.
+# Words match exactly; in all-lowercase concatenations (GTK, wx) they also match as substrings.
+CLUSTER = {"backdrop": "watermark blockui", "drawer": "offcanvas", "menu": "megamenu tieredmenu overflow", "panel": "dock frame",
+           "table": "dataview descriptions", "code-block": "terminal", "navigation": "navigator burger", "layout-primitive": "region scaffold layout",
+           "image": "logo figure magnifier thumb illustration texture foldercover", "transition-anim": "lottie circularreveal", "icon": "svg octicon",
+           "select": "roller tumbler", "label": "span", "card": "hero elevation", "chart": "legend viz curves", "infinite-scroll": "deferredcontent",
+           "gallery": "galleria", "text-input": "iconfield inplace autofill", "reorder-drag": "orderlist", "list": "picklist repeater",
+           "affix": "scrolltop backtop", "fab": "speeddial", "tabs": "tabmenu", "tree": "treenode", "virtual-list": "virtualscroller",
+           "stepper": "steplist", "tooltip": "tip", "stat-kpi": "countdown timer digits", "avatar": "persona", "accordion": "expandable expansible",
+           "qr-code": "barcode", "video-player": "camera media", "toggle-button": "toggler toggleable", "chip": "tags", "slider": "adjuster adjustment",
+           "dialog": "dlg window about login", "tray-status": "statusbr", "scroll": "scrolwin viewport", "time-picker": "clock",
+           "button": "btn pressable copy", "toast": "feedback note", "progress": "circle arc"}
+NON_WIDGET_SUB = ("private", "impl", "builder", "buildable", "constraint", "css", "accessible", "action", "bitmask", "bitset", "utils",
+                  "factory", "model", "filter", "sorter", "expression", "parser", "solver", "types", "context", "boundary", "error",
+                  "dictionary", "flags", "constants", "properties", "setter", "dependency", "exception", "hooks", "internal", "debug", "class")
+
+
+# Tier 7 (2026-10-31): every remaining name, by hand-checked cluster (exact words; substrings in lowercase concatenations).
+FINAL = {"card": "cards coupon", "avatar": "facepile", "badge": "chiclet", "kbd": "keytip qkeysequenceedit hotkeys shortcuts gtkshortcut accel",
+         "tooltip": "toggletip whisper", "app-bar": "masthead", "tabs": "pivot qtabwidget tabg tabstrip", "link": "skiplinks jumplinks",
+         "skeleton": "shimmer", "backdrop": "dimmer", "popover": "flyout", "tour": "beacon", "stat-kpi": "stopwatch count-down qlcdnumber",
+         "led-gauge": "qdial statuslight lights lightup compass", "progress": "gtklevelbar", "toast": "notifmsg notify announced",
+         "dialog": "msgbox choicdgg help helpext welcome", "spinner-loading": "busyinfo preloader", "infinite-scroll": "lazyload feed",
+         "transition-anim": "gtkrevealer reveal animateonscroll animate tweener fx effectwidget", "chart": "diagram scatter",
+         "grid": "tileview gtkflowbox gtkgrid gridctrl gridsel", "list": "listctrl gtklistbase gtklistitem listitem lists gtkstringlist gtkdirectorylist gtkenumlist gtkbookmarklist collections",
+         "tree": "treectlg dirctrlg", "splitter": "gtkpaned sashwin laywin qsizegrip resizegripper qrubberband", "panel": "qmdiarea screenmanager mdig",
+         "accordion": "qtoolbox collpaneg", "menu": "qmenu menus slidemenu", "text-area": "gtktext gtktextbuffer gtktextchild gtktextiter gtktextmark gtktexttag caret multiline_output",
+         "message-list": "rich_log log logg comment barrage", "search": "srchctlg", "number-input": "spinctlg", "date-picker": "datectrl",
+         "time-picker": "timectrl", "calendar": "calctrlg", "file-upload": "filectrlg file filetrigger drop gtkdroptarget gtkdroptargetasync",
+         "reorder-drag": "draganddrop gtkdragsource gtkdragicon dragimgg", "image": "statbmpg bitmap pixmap gif imaglist interactive_viewer mascot brand branding advertisement cover",
+         "icon": "iconbase gtkicontheme flag", "label": "stattextg statline static strong em rst formattedstring textrotate ellipsis gtkinscription timestamp quote",
+         "layout-primitive": "gtkfixed gtkbox composite positioner fluid reflow auto_sizer well block sibling orphan inset viewbox stretch ratio boundingdimensions",
+         "virtual-list": "gtkscrollinfo virtualizer virtualizationcachelength", "rich-text-editor": "documentviewer flowdocumentreader monaco",
+         "code-block": "jsonformatter", "video-player": "ffmpeg gstreamer", "web-view": "embed sandbox", "slider": "valuator tracker",
+         "emoji-picker": "gtkemojichooser emoji", "signature-pad": "signature", "splash-screen": "splash qsplashscreen"}
+SUPPORT = set("""accountconnection adaptivetrigger afterinitialmount application cairo castingenumerator charactercasing common commonmanaged commonstyles
+connected controls decorator depdendenthandle design distribution dllhost effects export fabric free generated grommet lockingsemaphore materials
+object observablewrapper output pack performance plugin preferences printer profiler promptarguments rect registrar routing samples scheme screens
+setinterval site spellingreform streamwrapper tabularshaping targetidiom telemetry adapter ai ai-components api as_ref async aura automatic_keep_alive
+basic behavior binder borders clear colors colour componentbase compose-refs confirmationeventbus confirmationoptions confirmationservice core crud
+ctrlsub cursor custombgwin dcpsg delay_hide description diff dll drawable dvrenderer dvrenderers facet fill focusable functions fswatcher gesturesurface
+gtkapplication gtkborder gtkdrawingarea gtkgesture gtkgestureclick gtkgesturedrag gtkgesturelongpress gtkgesturepan gtkgesturerotate gtkgesturesingle
+gtkgesturestylus gtkgesturezoom gtkglarea gtkimmodule gtkmain gtkmountoperation gtknative gtkrecentmanager gtkroot gtksettings gtkshortcutmanager
+gtkshortcuttrigger gtksizerequest gtksnapshot gtkunixprint gtkurilauncher gtkwidget gtkfilelauncher gtkenums health id ime inc include index
+interface_level intersection keyed lib licensing localizations material material_localizations math merge-props mergeable_material mockup mod
+nine_patch_rect objx_templ pages paletteg passthrough polyfills pretty printps reference_rect reset resize-sensor resources restoration role root
+routes sensor settings shader shadows shape stateful stencilview stepitem swap themer touch transformation umd undo_history useconfirm userevents
+usestyle utilities validator win bmpcbox""".split())
+
+
+def final(name, tokens):
+    words, joined = tokens(name)
+    low = name.lower()
+    concat = name.islower() and "_" not in name and "-" not in name
+    hits = sorted({c for c, al in FINAL.items() for a in al.split() if a and (a in words or low == a or (concat and a in joined))})
+    if hits:
+        return hits, "T7_FINAL"
+    if low in SUPPORT or words & SUPPORT:
+        return [], "T3_NON_WIDGET"
+    return [], "UNMAPPED"
+
+
+def cluster(name, path, tokens):
+    words, joined = tokens(name)
+    concat = name.islower() and "_" not in name and "-" not in name
+    hits = sorted({c for c, al in CLUSTER.items() for a in al.split() if a in words or (concat and a in joined)})
+    if hits:
+        return hits, "T6_CLUSTER"
+    if any(n in joined for n in NON_WIDGET_SUB):
+        return [], "T3_NON_WIDGET"
+    return final(name, tokens)
+
+
+PREFIXES = ("Gtk", "Gdk", "Wx", "wx", "Fl_", "lv_", "Ion", "Mud", "Kendo", "Md", "Mat", "El", "Ant", "Rad", "Sf", "Dx", "Ui", "UI", "V", "Q", "N", "T", "Ons", "F7")
+
+
+def best_with_fallbacks(name, path, aliases, tokens):
+    cs, tier = best_concept(name, aliases, tokens)
+    if cs or tier == "T3_NON_WIDGET":
+        return cs, tier
+    for pre in PREFIXES:
+        rest = name[len(pre):]
+        if name.startswith(pre) and rest and (rest[0].isupper() or pre.endswith("_")):
+            cs2, t2 = best_concept(rest, aliases, tokens)
+            if cs2:
+                return cs2, "T4_PREFIX"
+    for seg in reversed(path.split("/")[:-1]):
+        cs3, t3 = best_concept(seg, aliases, tokens)
+        if cs3 and t3 in ("T1_ALIAS", "T2_WORD"):
+            return cs3, "T5_PATH"
+    return cluster(name, path, tokens)
+
+
+def verify(existing, nebula, swt, jdk, m3port=frozenset()):
+    if not existing or existing == "-":
+        return ""
+    parts = existing.split()
+    kit, fq = parts[0], parts[1].split("#")[0]
+    simple = fq.split(".")[-1]
+    if kit == "SWT":
+        return "OK" if fq.replace(".", "/") + ".class" in swt else "MISSING"
+    if kit == "Nebula":
+        return "OK" if fq.replace(".", "/") + ".java" in nebula else "MISSING"
+    if kit == "M3port":
+        return "OK" if fq in m3port else "MISSING"
+    if kit in ("Swing", "AWT"):
+        return "OK" if simple in jdk else "MISSING"
+    return "UNCHECKED"
+
+
+def main():
+    inp, members_path, out = sys.argv[1:4]
+    aliases, tokens = load_matcher(os.path.join(inp, "universe_concepts.py"))
+    uni = {r["concept"]: r for r in tsv(os.path.join(inp, "UNIVERSE_CONCEPTS.tsv"))}
+    smap = {r["concept"]: r for r in tsv(os.path.join(inp, "SUPERSET_WIDGET_MAP.tsv"))}
+    for c, form in NEW_FORMS.items():
+        smap.setdefault(c, {"concept": c, "home": "new", "kits": "0", "swt_class": "", "nebula_class": "", "needs_input_events": "", "superset_form": form})
+    members = {r["concept"]: r for r in tsv(members_path)}
+    nebula = {l.strip().split("/src/", 1)[-1] for l in open(os.path.join(inp, "NEBULA_TREE.txt")) if "/src/" in l}
+    swt = {l.strip() for l in open(os.path.join(inp, "SWT_JAR.txt"))}
+    jdk = set(open(os.path.join(inp, "JDK_SWING.txt")).read().split())
+    m3port = {l.strip() for l in open(os.path.join(inp, "M3PORT.txt"))}
+    swingx = sorted(set(open(os.path.join(inp, "SWINGX.txt")).read().split()))
+    comps = tsv(os.path.join(inp, "UNIVERSE_COMPONENTS.tsv"))
+    add = os.path.join(inp, "HARVEST_ADDENDUM.tsv")
+    harvested = len(comps)
+    if os.path.exists(add):
+        comps += tsv(add)
+    per = collections.Counter()
+    with open(os.path.join(out, "COMPONENT_CONCEPTS.tsv"), "w", encoding="utf-8", newline="\n") as w:
+        w.write("repo\tcomponent\tpath\tconcept\tfamily\tall_concepts\n")
+        for r in comps:
+            cs, tier = best_with_fallbacks(r["component"], r["path"], aliases, tokens)
+            c = cs[0] if cs else ("NON_WIDGET" if tier == "T3_NON_WIDGET" else "UNMAPPED")
+            per_kit_new = c in NEW_FORMS
+            per[c] += 1
+            fam = members[c]["family"] if c in members else ""
+            w.write("\t".join([r["repo"], r["component"], r["path"], c, fam, tier, ";".join(dict.fromkeys(cs))]) + "\n")
+    order = sorted(members, key=lambda c: (STATUS_RANK.get(smap[c]["home"], 5), -int(smap[c]["kits"] or 0), c))
+    cols = ["rank", "concept", "home", "kits", "component_names", "family", "pattern", "mode", "role", "nebula_existing", "nebula_verified",
+            "nebula_decision", "swing_existing", "swing_verified", "swing_decision", "swingx_pattern", "m3_class", "jdk_swing_names",
+            "swt_names", "nebula_names", "needs_input_events", "viewport_form"]
+    with open(os.path.join(out, "CONCEPTS.tsv"), "w", encoding="utf-8", newline="\n") as w:
+        w.write("\t".join(cols) + "\n")
+        for i, c in enumerate(order, 1):
+            m, s, u = members[c], smap[c], uni.get(c, {})
+            sx = [x for x in swingx if any(a in tokens(x)[0] or (len(a) >= 5 and a in tokens(x)[1]) for a in aliases.get(c, "").split())]
+            ne, se = m["nebula_existing"], m["swing_existing"]
+            row = [str(i), c, s["home"], s["kits"], str(per[c]), m["family"], "M3P-%s-1" % m["family"], m["mode"], m["role"],
+                   ne, verify(ne, nebula, swt, jdk), "SKIP_EXISTING" if ne else "GENERATE", se, verify(se, nebula, swt, jdk, m3port),
+                   "SKIP_EXISTING" if se else "GENERATE", ";".join(sx[:4]),
+                   "M3" + "".join(p.capitalize() for p in c.split("-")), u.get("swing", ""), s["swt_class"][:80], s["nebula_class"][:80],
+                   s["needs_input_events"], s["superset_form"]]
+            w.write("\t".join(row) + "\n")
+    mapped = sum(v for k, v in per.items() if k != "UNMAPPED")
+    print("harvest", harvested, "addendum", len(comps) - harvested)
+    print("concepts", len(order), "components", len(comps), "mapped", mapped - per["NON_WIDGET"], "non_widget", per["NON_WIDGET"], "unmapped", per["UNMAPPED"])
+    print("families", dict(collections.Counter(members[c]["family"] for c in order)))
+    print("nebula GENERATE", sum(1 for c in order if not members[c]["nebula_existing"]), "swing GENERATE",
+          sum(1 for c in order if not members[c]["swing_existing"]))
+
+
+main()

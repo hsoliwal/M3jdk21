@@ -18,7 +18,8 @@ import javax.swing.tree.TreePath;
  * and {@code expandsSelectedPaths} defaults to false (it walks every selected path).</p>
  */
 //FLLDCIM: L4 — expansion as shape rule plus exceptions, not TreePath hashes (OH13, OH14)
-public class M3PackedTree extends JTree {
+//FLLDCIM: MRL — final: no subclass can override a method the constructor calls (this-escape)
+public final class M3PackedTree extends JTree {
 	private static final long serialVersionUID = 1L;
 
 	public M3PackedTree (M3VirtualTreeModel model) {

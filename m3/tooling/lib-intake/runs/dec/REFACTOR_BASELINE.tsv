@@ -1,0 +1,4 @@
+metric	baseline
+METHOD_15	17
+LOOP	21
+CONST_HOIST	28

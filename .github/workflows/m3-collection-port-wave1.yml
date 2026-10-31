@@ -6,6 +6,7 @@ on:
     paths:
       - 'm3/ports/collections/**'
       - '.github/workflows/m3-collection-port-wave1.yml'
+      - 'm3/tooling/standalone/LINEAGE_SOURCES.tsv'
   workflow_dispatch:
 
 permissions:
@@ -30,5 +31,10 @@ jobs:
         run: git diff --check
       - name: Provenance and isolation gate
         run: python3 m3/ports/collections/verify_collection_port_wave1.py
+      - name: Install the vendored JUnit 5.10.2 family the port tests use
+        run: >
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
+          -am -DskipTests install
       - name: Java 21 compile and contract tests
         run: mvn -B -ntp -f m3/ports/collections/pom.xml clean test

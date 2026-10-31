@@ -1,0 +1,134 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (vendored source); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.net",
+  "target_path": "m3/vendor/third_party-m3/relocated/commons-net",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/commons-net",
+  "source_coordinate": "commons-net:commons-net:3.11.1-m3-source-1",
+  "source_version": "3.11.1-m3-source-1",
+  "source_license_origin": "",
+  "source_packages": [
+    "org.apache.commons.net"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.net"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/commons-net/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/commons-net/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/commons-net",
+  "mappings": [
+    {
+      "source": "org.apache.commons.net and subpackages",
+      "target": "com.m3.lib.net and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.net JMOD; type names retained"
+    },
+    {
+      "source": "org.apache.commons.net.ftp.parser",
+      "target": "com.m3.lib.net.ftp.parser",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.chargen",
+      "target": "com.m3.lib.net.chargen",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.daytime",
+      "target": "com.m3.lib.net.daytime",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.discard",
+      "target": "com.m3.lib.net.discard",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.finger",
+      "target": "com.m3.lib.net.finger",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.telnet",
+      "target": "com.m3.lib.net.telnet",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.whois",
+      "target": "com.m3.lib.net.whois",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.echo",
+      "target": "com.m3.lib.net.echo",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.imap",
+      "target": "com.m3.lib.net.imap",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.nntp",
+      "target": "com.m3.lib.net.nntp",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.pop3",
+      "target": "com.m3.lib.net.pop3",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.smtp",
+      "target": "com.m3.lib.net.smtp",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.tftp",
+      "target": "com.m3.lib.net.tftp",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.time",
+      "target": "com.m3.lib.net.time",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.util",
+      "target": "com.m3.lib.net.util",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.bsd",
+      "target": "com.m3.lib.net.bsd",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.ftp",
+      "target": "com.m3.lib.net.ftp",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.ntp",
+      "target": "com.m3.lib.net.ntp",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net.io",
+      "target": "com.m3.lib.net.io",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.net",
+      "target": "com.m3.lib.net",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

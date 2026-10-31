@@ -52,6 +52,32 @@ public final class M3LongLongHashMap {
             values[existing] = value;
             return false;
         }
+        insertAbsent(key, value);
+        return true;
+    }
+
+    /**
+     * Adds {@code delta} to the mapping, treating an absent key as zero, and returns the new
+     * value. Addition uses ordinary Java {@code long} wraparound. A zero delta inserts an
+     * absent key; updating a present key preserves capacity and iterator validity.
+     *
+     * <p>The existing primitive occupancy lanes own every key, including zero. Present keys
+     * reuse one lookup; absent keys share the same insertion, tombstone and growth rules as
+     * {@link #put(long, long)}.</p>
+     */
+    public long addTo(long key, long delta) {
+        int existing = findIndex(key);
+        if (existing >= 0) {
+            long next = values[existing] + delta;
+            values[existing] = next;
+            return next;
+        }
+        insertAbsent(key, delta);
+        return delta;
+    }
+
+    /** Inserts a key already proved absent, preserving the owner's physical-slot policy. */
+    private void insertAbsent(long key, long value) {
         if (needsGrowth(occupied + 1, keys.length)) {
             // The lookup above proved this key absent. A tombstone reached
             // before the first EMPTY slot is a legal insertion coordinate.
@@ -65,7 +91,7 @@ public final class M3LongLongHashMap {
                     states[probe] = USED;
                     size++;
                     modCount++;
-                    return true;
+                    return;
                 }
                 probe = (probe + 1) & mask;
             }
@@ -89,7 +115,7 @@ public final class M3LongLongHashMap {
                 states[target] = USED;
                 size++;
                 modCount++;
-                return true;
+                return;
             }
             if (state == DELETED && firstDeleted < 0) {
                 firstDeleted = index;
@@ -217,18 +243,51 @@ public final class M3LongLongHashMap {
         return result;
     }
 
+    /**
+     * A deletion triggering tombstone compaction stages all replacement lanes before changing
+     * the live owner. Allocation or rehash failure leaves values, indices and iterator epoch
+     * untouched; the successful table is identical to deleting first and rehashing afterwards.
+     */
     private void deleteAt(int index) {
+        int nextSize = size - 1;
+        if (nextSize > 0 && keys.length > MIN_CAPACITY
+                && (long) occupied > (long) nextSize * 2) {
+            compactWithout(index, nextSize);
+            return;
+        }
         states[index] = DELETED;
         keys[index] = 0L;
         values[index] = 0L;
-        size--;
+        size = nextSize;
         modCount++;
-        if (size == 0) {
+        if (nextSize == 0) {
             Arrays.fill(states, EMPTY);
             occupied = 0;
-        } else if ((long) occupied > (long) size * 2 && keys.length > MIN_CAPACITY) {
-            rehash(keys.length);
         }
+    }
+
+    /** Commit all three primitive lanes and the cardinality only after full validation. */
+    private void compactWithout(int removedIndex, int expectedSize) {
+        int capacity = keys.length;
+        long[] nextKeys = new long[capacity];
+        long[] nextValues = new long[capacity];
+        byte[] nextStates = new byte[capacity];
+        int copied = 0;
+        for (int i = 0; i < states.length; i++) {
+            if (i != removedIndex && states[i] == USED) {
+                insertRehashed(keys[i], values[i], nextKeys, nextValues, nextStates);
+                copied++;
+            }
+        }
+        if (copied != expectedSize) {
+            throw new IllegalStateException("rehash lost map entries");
+        }
+        keys = nextKeys;
+        values = nextValues;
+        states = nextStates;
+        size = expectedSize;
+        occupied = copied;
+        modCount++;
     }
 
     private int findIndex(long key) {

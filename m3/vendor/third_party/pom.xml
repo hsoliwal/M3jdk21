@@ -15,7 +15,6 @@
     <module>antlr4-runtime-4.11.1</module>
     <module>antlr4-runtime-4.13.2</module>
     <module>apiguardian-api</module>
-    <module>asm-9.10.1</module>
     <module>asm-9.6</module>
     <module>asm-analysis</module>
     <module>asm-tree</module>
@@ -33,10 +32,8 @@
     <module>commons-compress-1.26.0</module>
     <module>commons-compress-1.27.1</module>
     <module>commons-csv</module>
-    <module>commons-io-2.15.1</module>
     <module>commons-io-2.18.0</module>
     <module>commons-jexl3</module>
-    <module>commons-lang3-3.14.0</module>
     <module>commons-lang3-3.17.0</module>
     <module>commons-logging</module>
     <module>commons-net</module>
@@ -55,7 +52,6 @@
     <module>guava</module>
     <module>j2objc-annotations</module>
     <module>jackson-annotations-2.15.3</module>
-    <module>jackson-annotations-2.16.1</module>
     <module>jackson-annotations-2.19.2</module>
     <module>jackson-core-2.15.3</module>
     <module>jackson-core-2.16.1</module>
@@ -76,23 +72,15 @@
     <module>jna-platform</module>
     <module>jsoup-1.17.2</module>
     <module>jsoup-1.23.2</module>
-    <module>jspecify-0.3.0</module>
     <module>jspecify-1.0.1</module>
     <module>jsr305</module>
     <module>junit-jupiter-5.10.2</module>
-    <module>junit-jupiter-5.11.4</module>
     <module>junit-jupiter-api-5.10.2</module>
-    <module>junit-jupiter-api-5.11.4</module>
     <module>junit-jupiter-engine-5.10.2</module>
-    <module>junit-jupiter-engine-5.11.4</module>
     <module>junit-jupiter-params-5.10.2</module>
-    <module>junit-jupiter-params-5.11.4</module>
     <module>junit-platform-commons-1.10.2</module>
-    <module>junit-platform-commons-1.11.4</module>
     <module>junit-platform-engine-1.10.2</module>
-    <module>junit-platform-engine-1.11.4</module>
     <module>junit-platform-launcher-1.10.2</module>
-    <module>junit-platform-launcher-1.11.4</module>
     <module>lucene-analysis-common</module>
     <module>lucene-core</module>
     <module>lucene-queries</module>
@@ -111,9 +99,7 @@
     <module>rewrite-test</module>
     <module>rewrite-xml</module>
     <module>rewrite-yaml</module>
-    <module>slf4j-api-1.7.36</module>
     <module>slf4j-api-2.0.12</module>
-    <module>slf4j-api-2.0.9</module>
     <module>slf4j-simple</module>
     <module>snakeyaml-2.1</module>
     <module>snakeyaml-2.2</module>

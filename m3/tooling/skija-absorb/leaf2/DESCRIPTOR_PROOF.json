@@ -1,0 +1,240 @@
+{
+  "schema": "m3.skija-native-descriptor-intake.v2",
+  "receiver_base": "da6112257f9bb7e54a53694608b1402062140475",
+  "donor": {
+    "repository": "HumbleUI/Skija",
+    "commit": "44c99d7a92fe68a29b3233f8ca55b0d29d8f6f68",
+    "version": "0.143.18",
+    "license": "Apache-2.0"
+  },
+  "maintenance_scope": "Existing Python inventory and rename recipes only; no graphics product implementation or interface generated; zero model calls.",
+  "patterns": [
+    {
+      "id": "SKIJA_CC_LITERAL_INVENTORY",
+      "version": 2,
+      "input": "C++ quoted Java class/field/method descriptor literal",
+      "output": "complete unchanged literal with source file/line",
+      "owner": "tools/skija_patterns.py",
+      "before_sha256": "b8148adb9691db62758be07df6ffb0ae31f45588e238a57552ddb765cb53bd15",
+      "after_sha256": "94170fe4278a603dab3698f5cb5c150e62660d126638a617ad04a40f98e439b7"
+    },
+    {
+      "id": "SKIJA_CC_LITERAL_RENAME",
+      "version": 2,
+      "input": "complete literal plus existing 224-entry type map",
+      "output": "literal with each known object-type name replaced; UNMAPPED if any referenced HumbleUI type is unknown",
+      "owner": "tools/gen_rename.py",
+      "before_sha256": "d32f9d1ba80096a7a92b5fa19563b044a336f01a917fa0d257bf3d29c9b59318",
+      "after_sha256": "2a798ab55643afadac423f39fa0782f1e8cc83cf31b9a48656eaba078407de31"
+    }
+  ],
+  "source_join": {
+    "files": 83,
+    "utf8_bytes": 493104,
+    "jni_definition_shaped_headers_covered": 966,
+    "missing": 0,
+    "injective_new_symbols": 966,
+    "class_literals_old_ledger": 51,
+    "unaccounted_descriptors_before": 17,
+    "manifest_sha256": "8f70c574dc1db3fe801d312a3e77d25991cb8f61fbe52acbbd3deb7bf01d1a30",
+    "manifest_rule": "SHA256(UTF8(\"M3SkijaNativeSourceManifest/v1\\n\"+JSON.stringify(path-sorted objects with keys path,git_blob,sha256,utf8_bytes)))",
+    "limits": "Lexical source join only. Both conditional CoreText definition branches were retained; preprocessor selection not evaluated."
+  },
+  "real_descriptor_rows": [
+    [
+      "platform/cc/interop.cc",
+      "153",
+      "(IIZIZIILio/github/humbleui/types/IRect;)V"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "207",
+      "()Lio/github/humbleui/types/Rect;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "241",
+      "[Lio/github/humbleui/skija/FontVariation;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "243",
+      "[Lio/github/humbleui/skija/FontPaletteOverride;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "499",
+      "(Lio/github/humbleui/skija/Image;Lio/github/humbleui/types/IRect;Lio/github/humbleui/types/IPoint;)V"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "832",
+      "(IIII)Lio/github/humbleui/types/IRect;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "909",
+      "(FFFF)Lio/github/humbleui/types/Rect;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "961",
+      "(FFFFF)Lio/github/humbleui/types/RRect;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "962",
+      "(FFFFFF)Lio/github/humbleui/types/RRect;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "963",
+      "(FFFFFFFF)Lio/github/humbleui/types/RRect;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "964",
+      "(FFFFFFFF)Lio/github/humbleui/types/RRect;"
+    ],
+    [
+      "platform/cc/interop.cc",
+      "965",
+      "(FFFF[F)Lio/github/humbleui/types/RRect;"
+    ],
+    [
+      "platform/cc/shaper/interop.cc",
+      "96",
+      "(Lio/github/humbleui/skija/shaper/RunInfo;)V"
+    ],
+    [
+      "platform/cc/shaper/interop.cc",
+      "98",
+      "(Lio/github/humbleui/skija/shaper/RunInfo;)Lio/github/humbleui/types/Point;"
+    ],
+    [
+      "platform/cc/shaper/interop.cc",
+      "99",
+      "(Lio/github/humbleui/skija/shaper/RunInfo;[S[Lio/github/humbleui/types/Point;[I)V"
+    ],
+    [
+      "platform/cc/shaper/interop.cc",
+      "166",
+      "[Lio/github/humbleui/skija/FontFeature;"
+    ],
+    [
+      "platform/cc/skottie/interop.cc",
+      "13",
+      "(Lio/github/humbleui/skija/skottie/LogLevel;Ljava/lang/String;Ljava/lang/String;)V"
+    ]
+  ],
+  "inventory_proof": {
+    "status": "PASS",
+    "tool_chunk": "887304",
+    "assertions": 73,
+    "preserved_original_literals": 51,
+    "new_descriptors": 17,
+    "total": 68,
+    "full_changed_source_syntax": "PASS",
+    "after_git_blob": "6e094312a8772281b4197f1e28d1f52848a8c1e8",
+    "CC_CLASSREFS_sha256": "17230b4ed8a20a33727eaf6607f410abc439ee06d493a3fcb1ab46381f5419a3"
+  },
+  "rename_proof": {
+    "status": "PASS",
+    "session": 80073,
+    "terminal_chunk": "acec4b",
+    "assertions": 220,
+    "old_generator_unmapped_real_descriptors": 17,
+    "new_generator_unmapped_real_descriptors": 0,
+    "preserved_original_rows": 51,
+    "total": 68,
+    "deterministic_replay": true,
+    "unchanged_outputs": [
+      "TYPE_RENAME.tsv",
+      "JNI_RENAME.tsv",
+      "M3SkijaToGraphics.yml"
+    ],
+    "edge_outcomes": [
+      "UNMAPPED",
+      "UNMAPPED",
+      "(Ljdk/m3/graphics/M3Image;Ljdk/m3/graphics/M3ImageFilter;)V",
+      "Ljdk/m3/graphics/M3FontMgr$Nested;",
+      "UNMAPPED"
+    ],
+    "after_git_blob": "da0f0588dfeda41416264d370938b3d6b1583f0d",
+    "CC_STRING_RENAME_sha256": "64e59e019334e2a6ccc0015f0b66005afb63f81b3299e279d803e8b16c2e356e",
+    "input_sha256": {
+      "OWNER_MAP.tsv": "18d6868a3077d5984371832395c18667218c49525c40bef938551b6ce65631ec",
+      "JNI_BINDINGS.tsv": "e731bd3e72052811af36cf8d75a4eee99e7bc9e6380cd67e077296e27584490b",
+      "CC_CLASSREFS.tsv": "381e48597f2d19b5ffba973a10088e8ba3a023682e7e1d7ffcf5a20e77f247df"
+    },
+    "receipt_sha256": "6c0a959d4e83c50ec4babb7d1c07fa90432c1c72a32fda7c703e29fe207bf5fd",
+    "transport": "Original long CMD was refused before execution. One isolated no-site/no-bytecode Python session executed the proof in RAM; existing results were serialized in bounded frames after terminal wrapping. No proof rerun for transport recovery."
+  },
+  "classfile_join": {
+    "scope": "Existing local jar only; no proof it was freshly rebuilt from remote leaf1 source",
+    "artifact": "jdk.m3.graphics.jar",
+    "sha256": "18e6d3f16ddf2d1e46928944ed252f98298460b3cc6f94c1154f4b630ce04d57",
+    "bytes": 371231,
+    "classes": 276,
+    "class_major": 65,
+    "methods": 3835,
+    "native_declarations": 971,
+    "ledger_matches": 966,
+    "expected_undefined": 5,
+    "unexpected_missing": 0,
+    "extra": 0,
+    "ambiguous": 0,
+    "tool_chunk": "fa0ba9",
+    "exit": 0
+  },
+  "mechanical_review": {
+    "status": "PASS",
+    "engine": "CPU",
+    "model_review": "DISABLED",
+    "network_review": "DISABLED",
+    "patch_bytes": 2511,
+    "patch_sha256": "5d75e91a5e8d2e5e9c6906ec3250cd6206992d243b5dcbfc4a97654ff0e6dfa2",
+    "findings": [],
+    "partial_patch_syntax": "NOT_EVALUATED by checker",
+    "separate_full_changed_Python_syntax": "PASS",
+    "runtime_semantics": "NOT_EVALUATED"
+  },
+  "readiness": {
+    "windows_sdk": "10.0.26100.0 headers/x64 libraries observed",
+    "msvc": "H:/BuildTools/VS2022/VC/Tools/MSVC/14.44.35207: cl.exe, link.exe, vector, vcruntime.h, libcmt.lib observed",
+    "clang_cl": "C:/Program Files/LLVM/bin/clang-cl.exe observed",
+    "skia_release": "m143-da51f0d60e-5",
+    "windows_release_x64_archive": {
+      "name": "Skia-m143-da51f0d60e-5-windows-Release-x64.zip",
+      "advertised_bytes": 51009973,
+      "advertised_sha256": "0c08565758ef682434ad08fd733a4ea0675f0f980cc91bec5538ee5fc148f9dc",
+      "download": "NOT_RUN",
+      "expanded_size": "UNKNOWN"
+    },
+    "disk_output": "H/K/S below required 8GiB reserve; no native build/download/source scratch permitted",
+    "native_loader": "M3Library still loads donor skija library; no loader/native integration claimed"
+  },
+  "unchanged": [
+    "224-entry TYPE_RENAME.tsv",
+    "966-entry JNI_RENAME.tsv",
+    "M3SkijaToGraphics.yml",
+    "src/jdk.m3.graphics Java/native implementation",
+    "existing donor/API/lifetime/GC/native ownership controls"
+  ],
+  "not_run": [
+    "native C++ compilation/link",
+    "compiled native export verification",
+    "M3Library integration and native loading",
+    "JNI lifetime/GC behavior",
+    "rendering/pixel/performance/SWT consumer migration",
+    "full JDK build",
+    "canonical Maven/OpenRewrite runtime"
+  ],
+  "storage": {
+    "shell": "CMD login=false; explicit TEMP/TMP K:/codex-work/agent-temp; native GetTempPathW verified",
+    "python": "3.12.6 -I -S -B",
+    "test_source_build_cache_files_written": 0,
+    "small_agent_memory_checkpoint_allowed": true,
+    "protection": "ACTIVE"
+  }
+}

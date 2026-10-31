@@ -1,0 +1,74 @@
+{
+  "format": "M3_SCHEMA_LIVE_RECOVERY_RECEIPT_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_commit": "1ce42fabc4e8c331f59c55029b21d020858538c1",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029",
+  "recipe": "com.synexia.m3.Jdk21SchemaRecovery20261030",
+  "target_repository": "hsoliwal/M3JDK21",
+  "target_preimage_commit": "5f1ac46f5a66f1d6ed2a5d4e4dbcc27dade07235",
+  "evidence": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/evidence/schema-recovery-20261030",
+  "source_binding_sha256": "5883e2bd076cf37837ff58ee4639b9c8d1253498ad146ceb866220da771d16e3",
+  "sdk_results_sha256": "c8690928bf860f18bbb82ee1b08b96ae0cc14d4541a6be8b76f37af8e8ec3404",
+  "executed_outputs": [
+    {
+      "path": ".github/workflows/m3jdk21-name-contract.yml",
+      "before_sha256": "c49d838646f1fd5f04ded21121154de5eb3520549f33e6e52e3226140318f774",
+      "after_sha256": "8228c8dc7422b94f6d2f3d99d841749dd7176091075c376e1ab5698901da44b1"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "0551c4d6f78269484247d2a434ff8e7b70b5f432a51bea494e6d8f9d3bf54c9d",
+      "after_sha256": "689249563245a8743c3575de4da657106d48dc879effe960c1811bd7bffb3f5f"
+    },
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "before_sha256": "33a4a70132666ce7525025783c4c72c0030ce26b53774d2396a7d027f4d6aa73",
+      "after_sha256": "cb22482ccd7887fcd3632cb636b63e3f4c4e71bc523472c3424a4888a72f2349"
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "before_sha256": "c5c4176275518116061cfc26fc29be4d48cca57613badf9792e1555efd39b05b",
+      "after_sha256": "86466213e8c30560e6edb07f10b2f6aff0e4d6d6f8b5e88ba581ac8a4add2e1d"
+    },
+    {
+      "path": "m3/tooling/name-contract/test_audit.py",
+      "before_sha256": "5364b2e8934e841929c4b4b1d9d09e30ee19dde5ab4d0e2303df3642e1102aa7",
+      "after_sha256": "0e9207bfe8a600106da0839ad48e4801bf513aec711c2703d4cceb53be81f2cd"
+    },
+    {
+      "path": "m3/tooling/name-contract/test_schema.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "caedb397b0bbfb962a5fa3dd5c84dbedb88942870b44551acc2ddd77960e10b8"
+    }
+  ],
+  "qualification": {
+    "status": "SCOPED_PASS",
+    "actual_sdk_tests": 8,
+    "historical_schema_sdk_tests": 8,
+    "full_schema_errors": 0,
+    "former_schema_errors": 15,
+    "live_naming_tests": 80,
+    "actual_git_sparse_naming_tests": 80,
+    "retained_only_suite_negative_control": "REFUSED",
+    "record_ids_and_statuses_preserved": 71,
+    "runtime_source_edits": 0
+  },
+  "history": {
+    "retained_pr": 2137,
+    "retained_head": "ce2819af0ec11f6c24d51602c9f6b98bd734a3f1",
+    "retain_only_merge": "f55d5678e50530a736abfcd5b6804bb5344425f6",
+    "interpretation": "Retained variants were preserved, but not integrated into the live tree. This receipt covers the forward-composed live repair."
+  },
+  "runtime_sha256_unchanged": {
+    "src/java.base/share/classes/java/util/Arrays.java": "89368f91b141eb32d85122057d1944ab15a4275335649e142d56d8ef3eda7666",
+    "test/jdk/java/util/Arrays/CopyMethods.java": "f40247fe33dec111eec280884935a0ee8943dac6a3ed4766e1c5461e3d74ca87",
+    "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d"
+  },
+  "limits": [
+    "No additional Java/JNI runtime capability or speedup claim",
+    "Full canonical reactor and historical provenance set NOT_RUN",
+    "Source-built JDK image, jtreg, JNI/GC/ABI integration NOT_RUN",
+    "Platform and performance gates NOT_RUN"
+  ],
+  "custody": "Passive target receipt only. Reusable authoring recipes and correction memory remain in Synexia."
+}

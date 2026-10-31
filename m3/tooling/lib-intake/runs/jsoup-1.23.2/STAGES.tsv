@@ -1,0 +1,11 @@
+stage	status	evidence
+S0_VIEW	PASS	java=93 packages=7 resources=2 overlays=11, upstream_descriptor=yes
+S1_RELOCATE	PASS	map=org.jsoup=com.m3.lib.jsoup packages_moved=7 old_dirs_left=0 text_completed_files=6 parse_fallback_files=0 resources_moved=0 meta_mapped=1
+S1b_BCP	PASS	java_equal_after_name_map=93 resources_byte_equal=1 differing=0
+S2_RESIDUE	PASS	residue=0 (every kind) slash_form_files=0
+S3_ATOMIZE	PASS	atoms=3056 KNOWN_PATTERN=90 UNPROVEN_LEAF=1593 UNKNOWN_PATTERN=1373
+S4_CONSOLIDATE	PASS	owner_contract_atoms=215 (proposal queue)
+S5_REFACTOR_BASELINE	PASS	METHOD_15=141 LOOP=258 CONST_HOIST=79 (ratchet: MOP passes may only lower these)
+S6_MODULE	PASS	module=jdk.m3.jsoup requires=java.base,java.net.http,java.xml exports=7 javac_warnings=100
+S7_JMOD_IMAGE	PASS	jmod=491510B image_modules=9 smoke='loaded=309 failed=0'
+S8_LAYER	PASS	files=100 layer=m3/vendor/third_party-m3/relocated/jsoup-1.23.2

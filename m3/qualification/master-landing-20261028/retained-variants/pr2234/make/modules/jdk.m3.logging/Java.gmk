@@ -1,0 +1,11 @@
+#
+# Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
+# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+#
+# GPLv2 with the Classpath exception.
+#
+
+# jdk.m3.logging: M3JDK additions to the Java Logging API (M3StructuredFormatter). javac -Xlint:all on the module
+# reports only the "m3" component of the module name.
+
+DISABLED_WARNINGS_java += module

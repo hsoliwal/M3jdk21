@@ -1,0 +1,10 @@
+jdk.m3.codec@1.22.1-m3-source-1
+exports com.m3.lib.codec
+exports com.m3.lib.codec.binary
+exports com.m3.lib.codec.cli
+exports com.m3.lib.codec.digest
+exports com.m3.lib.codec.language
+exports com.m3.lib.codec.language.bm
+exports com.m3.lib.codec.net
+requires java.base mandated
+
