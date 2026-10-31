@@ -87,7 +87,7 @@
       "group": "org.slf4j",
       "optional": false,
       "scope": "compile",
-      "version": "1.7.36-m3-source-1"
+      "version": "2.0.12-m3-source-1"
     }
   ],
   "donor": "rewrite-test-8.17.1",
