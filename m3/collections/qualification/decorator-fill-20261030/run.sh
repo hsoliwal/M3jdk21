@@ -86,8 +86,25 @@ echo "M3_DECORATOR_FILL stage=compile classes=$(wc -l < "$WORK/filled.txt")"
 "$BIN/javac" -Xlint:all -Werror -proc:none -cp "$JAR" -d "$WORK/cls" $(cat "$WORK/filled.txt")
 "$BIN/javac" -proc:none -cp "$JAR$SEP$WORK/cls" -d "$WORK/hcls" "$Q/M3DecoratorDifferential.java" "$Q/M3SyncProbe.java" "$Q/M3LockTraceProbe.java" \
 	"$Q/M3PredicatedProbe.java" "$Q/M3Mutant.java" 2>&1 | grep -v -e '^Note:' -e 'deprecat' || true
-printf 'm3_class\toracle\tbacking\tfactory\tpolicy\tresult\n' > "$Q/DIFFERENTIAL.tsv"; : > "$WORK/mismatch.tsv"; fail=0
-[ "$rules" -eq 0 ] || fail=1
+fail=0; [ "$rules" -eq 0 ] || fail=1
+# Order: ATOMIZE (the fill stage above: one METHOD_ATOMS row per scaffold method), then JIT (this stage), then the
+# PATTERNIZER passes (differential, probes, negative controls, JUnit, perf). JIT: a child JVM runs the warmed harness
+# under -XX:+PrintCompilation; every method atom must be JIT-compiled and fit FreqInlineSize (M3DecoratorJitTest; tiers
+# in $WORK/JIT.tsv). JUNIT_CONSOLE = a junit-platform-console-standalone jar; unset = NOT_RUN.
+jit=NOT_RUN; jittests=0; jitfailed=0
+if [ -n "${JUNIT_CONSOLE:-}" ]; then
+	JCP="$JAR$SEP$WORK/gen$SEP$WORK/cls$SEP$WORK/hcls"
+	"$BIN/javac" -proc:none -Xlint:all -Werror -cp "$JCP$SEP$JUNIT_CONSOLE" -d "$WORK/test" \
+		"$Q/M3DecoratorAtomTest.java" "$Q/M3DecoratorJitTest.java"
+	jrc=0; "$BIN/java" -Dm3.jit.out="$WORK/JIT.tsv" -cp "$JUNIT_CONSOLE$SEP$JCP$SEP$WORK/test" \
+		org.junit.platform.console.ConsoleLauncher execute --disable-banner --details=summary \
+		--select-class M3DecoratorJitTest > "$WORK/jit.log" 2>&1 || jrc=$?
+	jittests=$(grep -oE '[0-9]+ tests found' "$WORK/jit.log" | grep -oE '^[0-9]+' || echo 0)
+	jitfailed=$(grep -oE '[0-9]+ tests failed' "$WORK/jit.log" | grep -oE '^[0-9]+' || echo 0)
+	jit=$([ "$jrc" -eq 0 ] && echo PASS || echo FAIL); [ "$jrc" -eq 0 ] || fail=1
+fi
+echo "M3_DECORATOR_FILL stage=jit $jit tests=$jittests failed=$jitfailed"
+printf 'm3_class\toracle\tbacking\tfactory\tpolicy\tresult\n' > "$Q/DIFFERENTIAL.tsv"; : > "$WORK/mismatch.tsv"
 printf 'm3_class\tprobe\tbacking\tpolicy\tresult\n' > "$Q/PROBES.tsv"
 CP="$JAR$SEP$WORK/cls$SEP$WORK/hcls"
 while IFS=$'\t' read -r m3 oracle backing factory probe policy; do
@@ -165,8 +182,8 @@ probes=$(($(wc -l < "$Q/PROBES.tsv") - 1)); ncs=$(($(wc -l < "$Q/NEGATIVE_CONTRO
 rulechecks=$(grep -c $'\t\(PASS\|FAIL\)$' "$Q/RULE_CHECKS.tsv" || true); rulefail=$(grep -c $'\tFAIL$' "$Q/RULE_CHECKS.tsv" || true)
 # M3-SCALE section 5 output contract: STATUS, RUN_CONTEXT, PROVENANCE, VERIFY_CONTRACT, OUTPUT_CONTRACT, FINAL_REPORT.
 sha() { sha256sum "$1" | cut -c1-64; }
-printf 'stage\tstatus\tevidence\nrule_check\t%s\tchecks=%s fail=%s\nfill\tDONE\tfilled=%s atoms=%s manual=%s\ncompile\tDONE\tjavac -Xlint:all -Werror over %s classes\ndifferential\t%s\ttargets=%s probes=%s mismatches=%s\nnegative_controls\t%s\tcontrols=%s caught=%s\njunit\t%s\ttests=%s failed=%s\n' \
-	"$([ "$rulefail" -eq 0 ] && echo PASS || echo FAIL)" "$rulechecks" "$rulefail" "$filled" "$atoms" "$manual" "$filled" "$verdict" "$targets" "$probes" "$mism" \
+printf 'stage\tstatus\tevidence\nrule_check\t%s\tchecks=%s fail=%s\nfill\tDONE\tfilled=%s atoms=%s manual=%s\ncompile\tDONE\tjavac -Xlint:all -Werror over %s classes\njit\t%s\ttests=%s failed=%s\ndifferential\t%s\ttargets=%s probes=%s mismatches=%s\nnegative_controls\t%s\tcontrols=%s caught=%s\njunit\t%s\ttests=%s failed=%s\n' \
+	"$([ "$rulefail" -eq 0 ] && echo PASS || echo FAIL)" "$rulechecks" "$rulefail" "$filled" "$atoms" "$manual" "$filled" "$jit" "$jittests" "$jitfailed" "$verdict" "$targets" "$probes" "$mism" \
 	"$([ "$caught" -eq "$ncs" ] && echo PASS || echo FAIL)" "$ncs" "$caught" "$junit" "$jtests" "$jfailed" > "$Q/STATUS.tsv"
 printf 'key\tvalue\nscaffold_rev\t%s\njava\t%s\nrun_mode\tapply\nshards\t1\n' "$SCAFFOLD_REV" "$("$BIN/java" -version 2>&1 | head -1 | tr -d '\r"')" > "$Q/RUN_CONTEXT.tsv"
 printf 'input\tsha256\nM3DecoratorFill.java\t%s\nM3DecoratorTemplates.java\t%s\nM3DecoratorJdkStandard.java\t%s\nM3DecoratorRuleCheck.java\t%s\nM3DecoratorPatterns.java\t%s\nM3DecoratorDifferential.java\t%s\nM3PredicatedProbe.java\t%s\nNEGATIVE_CONTROLS_SPEC.tsv\t%s\ncommons-collections4-4.5.0.jar\t%s\nTARGETS.tsv\t%s\n' \
