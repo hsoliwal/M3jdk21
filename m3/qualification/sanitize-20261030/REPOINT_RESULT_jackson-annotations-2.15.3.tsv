@@ -1,0 +1,4 @@
+consumer	before	after	gate	classes_new	errors_vs_old	errors_vs_new	added_by_repoint	verdict
+jackson-databind-2.15.3	jackson-annotations-2.15.3	jackson-annotations-2.19.2	PLAIN	755	-	0	0	PASS
+jackson-datatype-jsr310-2.15.3	jackson-annotations-2.15.3	jackson-annotations-2.19.2	PLAIN	58	-	0	0	PASS
+DROP	jackson-annotations-2.15.3	-	files=59	-	-	-	proof_mentions=8 proof_blocking=0	PASS
