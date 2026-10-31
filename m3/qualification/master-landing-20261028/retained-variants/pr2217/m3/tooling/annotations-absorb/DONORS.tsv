@@ -1,0 +1,7 @@
+donor	version	license	java_files	annotation_types
+annotations	24.1.0	The Apache Software License, Version 2.0	30	53
+checker-qual-3.55.1	3.55.1	The MIT License	363	378
+error_prone_annotations	2.21.1	Apache 2.0	27	26
+j2objc-annotations	2.8	Apache License, Version 2.0	11	11
+jspecify-1.0.1	1.0.1	The Apache License, Version 2.0	5	4
+jsr305	3.0.2	The Apache Software License, Version 2.0	31	29
