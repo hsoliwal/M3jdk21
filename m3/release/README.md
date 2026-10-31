@@ -44,8 +44,9 @@ The current public P0 foundation is intentionally narrower than the full M3 prog
 - an independently authored immutable-text/precompute foundation exists under the explicit
   first-party licensing boundary;
 - product verification machinery, Java precompute differential tests and JNI/native
-  parity tests exist here; canonical transformation recipes and their mastery
-  evidence are authored and executed in Synexia;
+  parity tests exist here; under the standalone rule (2026-10-31) the transformation
+  recipes this repository carries and their control-reactor evidence are executed here
+  as well, with donor lineage kept in ledgers (`m3/tooling/standalone/`);
 - the project has a deterministic release contract, rights/provenance record, and proof-pack
   checksum process.
 
@@ -71,7 +72,7 @@ A release candidate must preserve:
 - foundation build/test logs;
 - Java precompute differential results;
 - JNI/native parity results where JNI/native is used;
-- canonical Synexia Maven recipe/control-reactor execution and replay receipts;
+- Maven/OpenRewrite control-reactor execution and replay receipts produced in this repository;
 - product compilation and applicable installed-image/module tests;
 - release-contract validation;
 - generated SHA-256 manifest;
@@ -157,15 +158,18 @@ claimed gate. Synthetic verifier fixtures are never release receipts.
 
 Historical recipe-bearing target POMs and scripts are custody debt. Do not run
 them as new transformation entrypoints. Keep product tests and raw evidence
-available, recover the canonical recipe and callers in Synexia, then perform
-an executed, source-preserving cleanup. Moving those recipes to another folder
-inside M3JDK21 does not satisfy this boundary.
+available, recover each canonical recipe and its callers as a deterministic,
+re-runnable tool in this repository (`m3/tooling/<lane>/tools/`), then perform
+an executed, source-preserving cleanup. Moving a recipe to another folder
+without that recovery and an executed proof does not satisfy this boundary.
+Standalone rule (2026-10-31): no other repository owns or executes a recipe
+that a release needs (`release-contract.json`, `maven_gate_scope`).
 
 Receipt field details: artifact paths resolve relative to the manifest directory.
 Every gate includes `owner_repository` and an `environment` object with `os`,
 `architecture` and `toolchain`. `M3_MAVEN_CONTROL_REACTOR` also requires
 `canonical_recipe` with `repository`, `commit` and `recipe_id`; its repository
-is `hsoliwal/com.synexia`. The product verifier consumes these records as data
+is `hsoliwal/M3jdk21` (standalone rule, 2026-10-31). The product verifier consumes these records as data
 and never executes command text supplied by a receipt.
 
 ## Retained PR source and naming queues
@@ -214,11 +218,14 @@ has archived native `wc` sources with no original live path under
 This is a **path-level observation** only; it is not proof that the
 functionality is entirely absent, nor permission to copy archived code.
 
-For each unresolved row, reuse the **private Synexia** Maven/Java
-`M3HistoricalCodeLossRecipe` to compare the exact merge base, donor parent,
-historical merge result, and current delivered Git blobs. Reuse existing
-`M3HunkResolver`, `ExactFileHunkReplay` and `m3-pr-stack-preservation`
-compiler/JUnit gates to prepare a bounded candidate. The public queue is
+For each unresolved row, compare the exact merge base, donor parent,
+historical merge result and current delivered Git blobs with a deterministic
+tool carried in this repository (`m3/tooling/<lane>/tools/`), then prepare a
+bounded candidate behind compiler/JUnit gates. The donor-side
+`M3HistoricalCodeLossRecipe`, `M3HunkResolver`, `ExactFileHunkReplay` and
+`m3-pr-stack-preservation` gates are lineage only: none of them is in this tree,
+so absorb the logic as such a tool before relying on it (standalone rule,
+2026-10-31; `m3/tooling/standalone/SYNEXIA_REFS.md`). The public queue is
 a review input, **not** a competing source transformation implementation.
 GitHub's merge action handles mergeable history, but even a clean merge
 needs content no-loss review. Conflicts require an explicit reviewed patch
@@ -227,21 +234,27 @@ and compiler, JUnit and (where applicable) matched-image JNI/jtreg gates.
 Public JDK class and method names stay those of Java 21. Internal class/method
 renames, package moves, documentation changes, service/reflection/JNI symbols
 and consumption must be registered under the stable capability ID in
-`m3/docs/name-mapping.json` and processed with the existing Synexia typed
-Maven/OpenRewrite recipe before target acceptance. Preserve ABI, serialization
-and native entry-point behavior. Recipes and execution memory live in Synexia;
-only qualified product results and evidence live in M3JDK21.
+`m3/docs/name-mapping.json` and processed with a typed, deterministic recipe
+carried in this repository (name contract: `m3/tooling/name-contract/`) before
+target acceptance. Preserve ABI, serialization and native entry-point behavior.
+Standalone rule (2026-10-31): recipes, their execution memory
+(`RECIPE_MEMORY.tsv`, `GATES.tsv`) and the qualified product results and
+evidence all live in M3JDK21; donor lineage stays in ledgers
+(`m3/tooling/standalone/`).
 
 ## Canonical recipe execution and migration HOLD
 
 The release workflow consumes the mandatory `M3_MAVEN_CONTROL_REACTOR` receipt
-from source-bound work executed in `hsoliwal/com.synexia`. Its control job
+from source-bound work executed in this repository (`hsoliwal/M3jdk21`). Standalone
+rule (2026-10-31): no other repository is needed to build, test, gate or release;
+donor lineage stays in `m3/tooling/standalone/` (`SYNEXIA_REFS.tsv`,
+`LINEAGE_SOURCES.tsv`). Its control job
 requires both `policy_valid` and an exact passing canonical Maven gate; absent,
 stale, malformed or failed evidence keeps the job and release summary on HOLD.
 Historical target-local recipe scripts and the target recipe reactor are no
 longer execution entrypoints in this workflow. Their retained sources remain
-visible custody migration debt and are preserved for a separately qualified
-Synexia cleanup.
+visible custody migration debt (`legacy_recipe_custody` HOLD) and are preserved
+for a separately qualified cleanup.
 
 Foundation, precompute Java/JNI and full-family product checks remain active,
 along with naming and retained-source queues. The dated

@@ -102,14 +102,14 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
             artifact.write_text("SYNTHETIC VALIDATOR FIXTURE ONLY " + ident + "\n")
             gate = {
                 "id": ident, "status": "PASS", "exit_code": 0,
-                "owner_repository": "hsoliwal/com.synexia" if ident == "M3_MAVEN_CONTROL_REACTOR" else "hsoliwal/M3jdk21",
+                "owner_repository": release.PRODUCT_REPOSITORY,
                 "command": ["synthetic-fixture", ident],
                 "environment": {"os": "fixture-os", "architecture": "fixture-arch", "toolchain": "fixture-toolchain"},
                 "artifacts": [{"path": artifact.name, "sha256": release.sha256(artifact)}],
             }
             if ident == "M3_MAVEN_CONTROL_REACTOR":
                 gate["canonical_recipe"] = {
-                    "repository": "hsoliwal/com.synexia", "commit": "1" * 40,
+                    "repository": release.PRODUCT_REPOSITORY, "commit": "1" * 40,
                     "recipe_id": "synthetic.fixture.only",
                 }
             self.evidence["gates"].append(gate)
@@ -277,13 +277,43 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
         self.assert_blocked(self.result(), "contract.mandatory_gates")
 
-    def test_synexia_recipe_owner_and_identity_are_required(self):
-        entry = next(g for g in self.evidence["gates"] if g["id"] == "M3_MAVEN_CONTROL_REACTOR")
-        entry["owner_repository"] = "hsoliwal/M3jdk21"
-        self.assert_blocked(self.result(), "gate:M3_MAVEN_CONTROL_REACTOR")
-        entry["owner_repository"] = "hsoliwal/com.synexia"
+    def test_maven_gate_owner_and_recipe_identity_are_required(self):
+        # standalone (2026-10-31): another repository can neither own the gate nor supply its recipe
+        other = "example/another-repository"
+        entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+        entry["owner_repository"] = other
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+        entry["owner_repository"] = release.PRODUCT_REPOSITORY
+        entry["canonical_recipe"]["repository"] = other
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
         del entry["canonical_recipe"]
-        self.assert_blocked(self.result(), "gate:M3_MAVEN_CONTROL_REACTOR")
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_contract_naming_another_maven_gate_owner_is_refused(self):
+        self.contract["execution_evidence"]["gate_owners"][release.MAVEN_GATE] = "example/another-repository"
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.assert_blocked(self.result(), "contract.recipe_owner")
+
+    def test_contract_delegating_any_other_gate_to_another_repository_is_refused(self):
+        # review of #2236: the owner rule covers every gate, not only the Maven gate; the delegating contract is
+        # amended into the single release commit and the evidence re-pinned, so the delegation is the only change
+        other = "example/another-repository"
+        ident = next(g for g in self.contract["mandatory_release_gates"] if g != release.MAVEN_GATE)
+        self.contract["execution_evidence"]["gate_owners"][ident] = other
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic release tree delegating " + ident)
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        entry = next(g for g in self.evidence["gates"] if g["id"] == ident)
+        for owner, expected in ((other, {"contract.recipe_owner", "gate:" + ident}),
+                                (release.PRODUCT_REPOSITORY, {"contract.recipe_owner"})):
+            entry["owner_repository"] = owner
+            with self.subTest(evidence_owner=owner):
+                result = self.result()
+                self.assertFalse(result["policy_valid"], result)
+                self.assertFalse(result["release_ready"], result)
+                self.assertEqual(expected, {b["name"] for b in result["blockers"]}, result)
 
     def test_retained_legacy_recipe_sources_remain_visible_holds(self):
         self.write("m3/recipes/apply.py", "# synthetic legacy recipe fixture\n")

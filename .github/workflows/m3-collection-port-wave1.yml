@@ -6,6 +6,7 @@ on:
     paths:
       - 'm3/ports/collections/**'
       - '.github/workflows/m3-collection-port-wave1.yml'
+      - 'm3/tooling/standalone/LINEAGE_SOURCES.tsv'
   workflow_dispatch:
 
 permissions:

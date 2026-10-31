@@ -56,6 +56,10 @@ NAME_MAP = "m3/docs/name-mapping.json"
 NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
 DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
+# Standalone rule (user, 2026-10-31): every release gate, the Maven/OpenRewrite control reactor included,
+# is owned and executed by this repository; donor lineage stays in ledgers (m3/tooling/standalone/).
+PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
+MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
 SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 GATE_ID = re.compile(r"[A-Z][A-Z0-9_]*\Z")
@@ -227,10 +231,12 @@ def validate(root: Path, release_mode: bool = False,
     else:
         passed("contract.execution_evidence")
     gate_owners = evidence_policy.get("gate_owners", {})
+    foreign_owners = sorted(str(gate) for gate, owner in gate_owners.items()
+                            if owner != PRODUCT_REPOSITORY) if isinstance(gate_owners, dict) else []
     if (not isinstance(gate_owners, dict)
-            or gate_owners.get("M3_MAVEN_CONTROL_REACTOR") != "hsoliwal/com.synexia"):
-        block("contract.recipe_owner", "Maven/OpenRewrite execution must be Synexia-owned")
-        gate_owners = {"M3_MAVEN_CONTROL_REACTOR": "hsoliwal/com.synexia"}
+            or gate_owners.get(MAVEN_GATE) != PRODUCT_REPOSITORY or foreign_owners):
+        block("contract.recipe_owner", "every release gate, " + MAVEN_GATE + " included, must be owned by "
+              + PRODUCT_REPOSITORY + "; owned elsewhere: " + (", ".join(foreign_owners) or "-"))
 
     notice = read_text("M3-SYNEXIA-NOTICE.md")
     rights = read_text("M3-SYNEXIA-RIGHTS.md")
@@ -386,9 +392,8 @@ def validate(root: Path, release_mode: bool = False,
         try:
             if entry.get("status") != "PASS" or type(entry.get("exit_code")) is not int or entry["exit_code"] != 0:
                 raise ValueError("gate did not record PASS with integer exit_code=0")
-            expected_owner = gate_owners.get(ident, "hsoliwal/M3jdk21")
-            if entry.get("owner_repository") != expected_owner:
-                raise ValueError("wrong gate owner; expected " + str(expected_owner))
+            if entry.get("owner_repository") != PRODUCT_REPOSITORY:
+                raise ValueError("wrong gate owner; expected " + PRODUCT_REPOSITORY)
             command = entry.get("command")
             if (not isinstance(command, list) or not command
                     or any(not isinstance(x, str) or not x.strip() for x in command)):
@@ -398,15 +403,15 @@ def validate(root: Path, release_mode: bool = False,
                     not isinstance(environment.get(key), str) or not environment[key].strip()
                     for key in ("os", "architecture", "toolchain"))):
                 raise ValueError("OS, architecture and toolchain identity missing")
-            if ident == "M3_MAVEN_CONTROL_REACTOR":
+            if ident == MAVEN_GATE:
                 canonical = entry.get("canonical_recipe")
                 if (not isinstance(canonical, dict)
-                        or canonical.get("repository") != "hsoliwal/com.synexia"
+                        or canonical.get("repository") != PRODUCT_REPOSITORY
                         or not isinstance(canonical.get("commit"), str)
                         or not SHA1.fullmatch(canonical["commit"])
                         or not isinstance(canonical.get("recipe_id"), str)
                         or not canonical["recipe_id"].strip()):
-                    raise ValueError("exact Synexia recipe revision and identity missing")
+                    raise ValueError("exact recipe repository, revision and identity missing")
             artifacts = entry.get("artifacts")
             if not isinstance(artifacts, list) or not artifacts:
                 raise ValueError("raw execution artifacts missing")

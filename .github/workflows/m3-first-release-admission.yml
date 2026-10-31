@@ -159,7 +159,7 @@ jobs:
         run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
 
   control-reactor:
-    name: canonical Synexia Maven evidence
+    name: Maven control-reactor evidence (this repository)
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
@@ -170,7 +170,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Require executed Synexia recipe evidence
+      - name: Require executed control-reactor recipe evidence
         shell: bash
         run: |
           set -euo pipefail
@@ -190,7 +190,7 @@ jobs:
           print(json.dumps({'source_commit': result['source_commit'],
                             'canonical_maven_gate': checks}, sort_keys=True))
           if not result['policy_valid'] or len(checks) != 1 or checks[0]['status'] != 'PASS':
-              raise SystemExit('HOLD: execute and qualify source-bound recipes in hsoliwal/com.synexia; attach the exact command, source pins and raw artifact hashes.')
+              raise SystemExit('HOLD: execute and qualify the source-bound Maven/OpenRewrite control reactor in this repository; attach the exact command, source pins and raw artifact hashes.')
           PYCODE
       - name: Full-family and receiving-policy verification
         if: always()
@@ -221,7 +221,7 @@ jobs:
             echo "| contract/provenance | ${{ needs.contract.result }} |"
             echo "| immutable text foundation | ${{ needs.foundation.result }} |"
             echo "| Java + JNI precompute parity | ${{ needs.precompute.result }} |"
-            echo "| canonical Synexia Maven evidence | ${{ needs.control-reactor.result }} |"
+            echo "| Maven control-reactor evidence (this repository) | ${{ needs.control-reactor.result }} |"
             echo
             echo 'The existing OpenJDK GHA sanity workflow remains the product-build/platform matrix.'
             echo 'A passing proof summary does not upgrade any claim marked NOT_CLAIMED in release-contract.json.'
