@@ -64,6 +64,20 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
     private static final int MAXIMUM_CAPACITY = 1 << 30;
     private static final int MIN_SLOTS = 4;
+    /** Bits per word of the live mask, as a shift and a mask (a word holds 1 << WORD_SHIFT slots). */
+    private static final int WORD_SHIFT = 6;
+    private static final int WORD_MASK = (1 << WORD_SHIFT) - 1;
+    /** 2^32 divided by the golden ratio: Fibonacci hashing (Knuth); FOLD_SHIFT folds the high half down. */
+    private static final int GOLDEN_RATIO_32 = 0x9E3779B9;
+    private static final int FOLD_SHIFT = 16;
+    /** The provider's toString capacity hint per entry. */
+    private static final int TO_STRING_CHARS_PER_ENTRY = 32;
+    private static final String THIS_MAP = "(this Map)";
+    private static final String EMPTY_MAP = "{}";
+    private static final String KEY_VALUE_SEPARATOR = "=";
+    private static final String ITERATOR_OPEN = "Iterator[";
+    private static final String ITERATOR_CLOSE = "]";
+    private static final String ITERATOR_EMPTY = ITERATOR_OPEN + ITERATOR_CLOSE;
 
     private transient Object[] keys;
     private transient Object[] values;
@@ -119,8 +133,8 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
         keys = new Object[slots];
         values = new Object[slots];
         hashes = new int[slots];
-        liveMask = new long[(slots + 63) >>> 6];
-        index = new int[tableSize(slots)];
+        liveMask = new long[(slots + WORD_MASK) >>> WORD_SHIFT];
+        index = new int[Atoms.tableSize(slots)];
         used = 0;
         tombstones = 0;
         before = new int[slots];
@@ -128,23 +142,6 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
         head = -1;
         tail = -1;
         free = -1;
-    }
-
-    private static int tableSize(int slots) {
-        return Integer.highestOneBit(Math.max(2 * slots, MIN_SLOTS) - 1) << 1;
-    }
-
-    private static int hash(Object key) {
-        return key == null ? 0 : key.hashCode();
-    }
-
-    private static int mix(int h) {
-        int m = h * 0x9E3779B9;
-        return m ^ m >>> 16;
-    }
-
-    private static boolean sameKey(Object key, Object stored) {
-        return key == stored || key != null && key.equals(stored);
     }
 
     @SuppressWarnings("unchecked")
@@ -159,40 +156,17 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
 
     /** The slot holding KEY, or -1. */
     private int find(Object key) {
-        int h = hash(key);
-        int mask = index.length - 1;
-        for (int i = mix(h) & mask; ; i = i + 1 & mask) {
-            int e = index[i];
-            if (e == 0) {
-                return -1;
-            }
-            if (e > 0 && hashes[e - 1] == h && sameKey(key, keys[e - 1])) {
-                return e - 1;
-            }
-        }
+        return Atoms.find(index, hashes, keys, key, Atoms.hash(key));
     }
 
     /** The index position that points at SLOT. */
     private int positionOf(int slot) {
-        int mask = index.length - 1;
-        for (int i = mix(hashes[slot]) & mask; ; i = i + 1 & mask) {
-            if (index[i] == slot + 1) {
-                return i;
-            }
-        }
+        return Atoms.positionOf(index, hashes[slot], slot);
     }
 
     private void link(int slot, int h) {
-        int mask = index.length - 1;
-        for (int i = mix(h) & mask; ; i = i + 1 & mask) {
-            int e = index[i];
-            if (e <= 0) {
-                if (e < 0) {
-                    tombstones--;
-                }
-                index[i] = slot + 1;
-                return;
-            }
+        if (Atoms.insert(index, slot, h)) {
+            tombstones--;
         }
     }
 
@@ -226,10 +200,10 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
         keys = Arrays.copyOf(keys, slots);
         values = Arrays.copyOf(values, slots);
         hashes = Arrays.copyOf(hashes, slots);
-        liveMask = Arrays.copyOf(liveMask, (slots + 63) >>> 6);
+        liveMask = Arrays.copyOf(liveMask, (slots + WORD_MASK) >>> WORD_SHIFT);
         before = Arrays.copyOf(before, slots);
         after = Arrays.copyOf(after, slots);
-        reindex(tableSize(slots));
+        reindex(Atoms.tableSize(slots));
     }
 
     /** A fresh open-addressed index of LENGTH over the live slots (drops the tombstones). */
@@ -289,7 +263,7 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
         keys[slot] = key;
         values[slot] = value;
         hashes[slot] = h;
-        liveMask[slot >>> 6] |= 1L << slot;
+        liveMask[slot >>> WORD_SHIFT] |= 1L << slot;
         link(slot, h);
         append(slot);
         size++;
@@ -301,7 +275,7 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
         V old = valueAt(slot);
         index[positionOf(slot)] = -1;
         tombstones++;
-        liveMask[slot >>> 6] &= ~(1L << slot);
+        liveMask[slot >>> WORD_SHIFT] &= ~(1L << slot);
         keys[slot] = null;
         values[slot] = null;
         unlink(slot);
@@ -314,38 +288,12 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
 
     /** First live slot at or after FROM, or -1. */
     private int nextLive(int from) {
-        if (from >= used) {
-            return -1;
-        }
-        int w = from >>> 6;
-        long word = liveMask[w] & -1L << from;
-        for (int words = used + 63 >>> 6; ; ) {
-            if (word != 0) {
-                return (w << 6) + Long.numberOfTrailingZeros(word);
-            }
-            if (++w >= words) {
-                return -1;
-            }
-            word = liveMask[w];
-        }
+        return Atoms.nextLive(liveMask, from, used);
     }
 
     /** Last live slot at or before FROM, or -1. */
     private int prevLive(int from) {
-        if (from < 0) {
-            return -1;
-        }
-        int w = from >>> 6;
-        long word = liveMask[w] & -1L >>> 63 - (from & 63);
-        while (true) {
-            if (word != 0) {
-                return (w << 6) + 63 - Long.numberOfLeadingZeros(word);
-            }
-            if (--w < 0) {
-                return -1;
-            }
-            word = liveMask[w];
-        }
+        return Atoms.prevLive(liveMask, from);
     }
 
 
@@ -386,7 +334,7 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
 
     @Override
     public V put(K key, V value) {
-        int h = hash(key);
+        int h = Atoms.hash(key);
         int slot = find(key);
         if (slot >= 0) {
             V old = valueAt(slot);
@@ -638,13 +586,13 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
     @Override
     public String toString() {
         if (size == 0) {
-            return "{}";
+            return EMPTY_MAP;
         }
-        StringBuilder buf = new StringBuilder(32 * size).append('{');
+        StringBuilder buf = new StringBuilder(TO_STRING_CHARS_PER_ENTRY * size).append('{');
         for (int slot = first(); slot >= 0; ) {
             Object key = keys[slot];
             Object value = values[slot];
-            buf.append(key == this ? "(this Map)" : key).append('=').append(value == this ? "(this Map)" : value);
+            buf.append(key == this ? THIS_MAP : key).append(KEY_VALUE_SEPARATOR).append(value == this ? THIS_MAP : value);
             slot = following(slot);
             if (slot >= 0) {
                 buf.append(',').append(' ');
@@ -671,7 +619,7 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
         allocate(Math.max(MIN_SLOTS, in.readInt()));
         for (int i = 0, n = in.readInt(); i < n; i++) {
             K key = (K) in.readObject();
-            add(key, (V) in.readObject(), hash(key));
+            add(key, (V) in.readObject(), Atoms.hash(key));
         }
         modCount = 0;
     }
@@ -831,7 +779,8 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
 
         @Override
         public String toString() {
-            return last >= 0 ? "Iterator[" + keys[last] + "=" + values[last] + "]" : "Iterator[]";
+            return last >= 0 ? ITERATOR_OPEN + keys[last] + KEY_VALUE_SEPARATOR + values[last] + ITERATOR_CLOSE
+                    : ITERATOR_EMPTY;
         }
     }
 
@@ -879,7 +828,7 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
 
         @Override
         public String toString() {
-            return getKey() + "=" + getValue();
+            return getKey() + KEY_VALUE_SEPARATOR + getValue();
         }
     }
 
@@ -996,6 +945,232 @@ public final class M3HashedMap<K, V> implements Cloneable, java.io.Serializable,
         @Override
         public Iterator<V> iterator() {
             return new ViewIterator<>(SlotIterator.VALUES);
+        }
+    }
+
+    /**
+     * The pure kernels of the ARRAY_MAP template (recipe ARRAY_MAP_FILL): arrays in, values out, no instance state.
+     * Every atom states its contract in its Javadoc (Requires, Ensures, Effects, Cost), word for word its row of
+     * ATOMS.tsv. M3ArrayMapAtomContractTest fails when an atom lacks the contract, the row, its own JUnit test
+     * (M3ArrayMapAtomsTest) or its own performance row (M3ArrayMapAtomsPerformanceTest).
+     */
+    static final class Atoms {
+        private Atoms() {
+        }
+
+        /**
+         * Index table length for SLOTS entries.
+         * Requires: SLOTS is between 0 and 2^29 inclusive.
+         * Ensures: the smallest power of two that is at least max(2 * SLOTS, MIN_SLOTS), so the load stays at or below
+         * one half.
+         * Effects: none.
+         * Cost: O(1).
+         */
+        static int tableSize(int slots) {
+            return Integer.highestOneBit(Math.max(2 * slots, MIN_SLOTS) - 1) << 1;
+        }
+
+        /**
+         * The hash code of a key as java.util.Map defines it.
+         * Requires: nothing; KEY may be null.
+         * Ensures: 0 for a null KEY, KEY.hashCode() otherwise.
+         * Effects: calls KEY.hashCode() once when KEY is not null.
+         * Cost: O(1) plus the hashCode call.
+         */
+        static int hash(Object key) {
+            return key == null ? 0 : key.hashCode();
+        }
+
+        /**
+         * Spreads a hash code over the index bits: Fibonacci hashing with the high half folded down.
+         * Requires: nothing.
+         * Ensures: a bijection on int, so distinct codes stay distinct, and sequential codes spread over the low bits.
+         * Effects: none.
+         * Cost: O(1).
+         */
+        static int mix(int h) {
+            int m = h * GOLDEN_RATIO_32;
+            return m ^ m >>> FOLD_SHIFT;
+        }
+
+        /**
+         * Key equality as java.util.Map defines it, with an identity short cut.
+         * Requires: nothing; either argument may be null.
+         * Ensures: true when KEY and STORED are the same reference, false when exactly one is null, KEY.equals(STORED)
+         * otherwise.
+         * Effects: calls KEY.equals(STORED) at most once, never STORED.equals(KEY), and not at all for the same
+         * reference.
+         * Cost: O(1) plus the equals call.
+         */
+        static boolean sameKey(Object key, Object stored) {
+            return key == stored || key != null && key.equals(stored);
+        }
+
+        /**
+         * Linear probe for KEY.
+         * Requires: INDEX.length is a power of two and INDEX holds an empty (0) entry; each positive entry e names slot
+         * e - 1, filled in HASHES and KEYS; H is hash(KEY).
+         * Ensures: the slot of a key with hash H that sameKey accepts, or -1; tombstones (-1) are passed and the first
+         * empty entry ends the probe.
+         * Effects: none; reads only.
+         * Cost: expected O(1) at a load of at most one half.
+         */
+        static int find(int[] index, int[] hashes, Object[] keys, Object key, int h) {
+            int mask = index.length - 1;
+            for (int i = mix(h) & mask; ; i = i + 1 & mask) {
+                int e = index[i];
+                if (e == 0) {
+                    return -1;
+                }
+                if (e > 0 && hashes[e - 1] == h && sameKey(key, keys[e - 1])) {
+                    return e - 1;
+                }
+            }
+        }
+
+        /**
+         * The index position of an indexed slot.
+         * Requires: SLOT + 1 is stored on the probe of H, that is, the slot is indexed under H.
+         * Ensures: the position i on the probe of H with INDEX[i] == SLOT + 1.
+         * Effects: none; reads only, and does not return when the requirement is broken.
+         * Cost: expected O(1) at a load of at most one half.
+         */
+        static int positionOf(int[] index, int h, int slot) {
+            int mask = index.length - 1;
+            for (int i = mix(h) & mask; ; i = i + 1 & mask) {
+                if (index[i] == slot + 1) {
+                    return i;
+                }
+            }
+        }
+
+        /**
+         * Indexes SLOT under H.
+         * Requires: the probe of H holds an empty (0) or tombstone (-1) entry, and SLOT is not indexed yet.
+         * Ensures: SLOT + 1 is stored at the first empty or tombstone entry of the probe of H; returns true when that
+         * entry was a tombstone.
+         * Effects: writes exactly one INDEX entry.
+         * Cost: expected O(1) at a load of at most one half.
+         */
+        static boolean insert(int[] index, int slot, int h) {
+            int mask = index.length - 1;
+            for (int i = mix(h) & mask; ; i = i + 1 & mask) {
+                int e = index[i];
+                if (e <= 0) {
+                    index[i] = slot + 1;
+                    return e < 0;
+                }
+            }
+        }
+
+        /**
+         * Forward scan of the live mask.
+         * Requires: FROM is not negative; MASK holds at least (USED + 63) / 64 words and no set bit at or above USED.
+         * Ensures: the first set bit at or after FROM and below USED, or -1.
+         * Effects: none; reads only.
+         * Cost: O(1) plus one step per word skipped.
+         */
+        static int nextLive(long[] mask, int from, int used) {
+            if (from >= used) {
+                return -1;
+            }
+            int w = from >>> WORD_SHIFT;
+            long word = mask[w] & -1L << from;
+            for (int words = used + WORD_MASK >>> WORD_SHIFT; ; ) {
+                if (word != 0) {
+                    return (w << WORD_SHIFT) + Long.numberOfTrailingZeros(word);
+                }
+                if (++w >= words) {
+                    return -1;
+                }
+                word = mask[w];
+            }
+        }
+
+        /**
+         * Backward scan of the live mask.
+         * Requires: FROM is below 64 * MASK.length.
+         * Ensures: the last set bit at or before FROM, or -1, which is also the answer for a negative FROM.
+         * Effects: none; reads only.
+         * Cost: O(1) plus one step per word skipped.
+         */
+        static int prevLive(long[] mask, int from) {
+            if (from < 0) {
+                return -1;
+            }
+            int w = from >>> WORD_SHIFT;
+            long word = mask[w] & -1L >>> WORD_MASK - (from & WORD_MASK);
+            while (true) {
+                if (word != 0) {
+                    return (w << WORD_SHIFT) + WORD_MASK - Long.numberOfLeadingZeros(word);
+                }
+                if (--w < 0) {
+                    return -1;
+                }
+                word = mask[w];
+            }
+        }
+
+        /**
+         * The live slot of a given rank.
+         * Requires: RANK is not negative and is below the number of set bits of MASK.
+         * Ensures: the set bit with exactly RANK set bits below it.
+         * Effects: none; reads only.
+         * Cost: one popcount per word before the answer, plus at most 63 bit clears in its word.
+         */
+        static int select(long[] mask, int rank) {
+            for (int w = 0; ; w++) {
+                long word = mask[w];
+                int count = Long.bitCount(word);
+                if (rank < count) {
+                    for (; rank > 0; rank--) {
+                        word &= word - 1;
+                    }
+                    return (w << WORD_SHIFT) + Long.numberOfTrailingZeros(word);
+                }
+                rank -= count;
+            }
+        }
+
+        /**
+         * The rank of a slot.
+         * Requires: SLOT is not negative and is below 64 * MASK.length.
+         * Ensures: the number of set bits of MASK below SLOT.
+         * Effects: none; reads only.
+         * Cost: one popcount per word up to SLOT.
+         */
+        static int rank(long[] mask, int slot) {
+            int rank = 0;
+            int w = slot >>> WORD_SHIFT;
+            for (int i = 0; i < w; i++) {
+                rank += Long.bitCount(mask[i]);
+            }
+            return rank + Long.bitCount(mask[w] & (1L << slot) - 1);
+        }
+
+        /**
+         * Stable two-pointer compaction of the slot lanes.
+         * Requires: TO_LIVE is all zero and, like the destination lanes, has room for every live slot; LIVE has no set
+         * bit at or above USED.
+         * Ensures: the live slots, in ascending order, are copied to destination slots 0 to n - 1 with their bits set
+         * in TO_LIVE; returns n.
+         * Effects: writes the destination lanes only; the source lanes and LIVE are unchanged.
+         * Cost: one step per word of LIVE below USED plus one per live slot.
+         */
+        static int compact(Object[] keys, Object[] values, int[] hashes, long[] live, int used, Object[] toKeys,
+                Object[] toValues, int[] toHashes, long[] toLive) {
+            int write = 0;
+            for (int w = 0, words = used + WORD_MASK >>> WORD_SHIFT; w < words; w++) {
+                for (long word = live[w]; word != 0; word &= word - 1) {
+                    int read = (w << WORD_SHIFT) + Long.numberOfTrailingZeros(word);
+                    toKeys[write] = keys[read];
+                    toValues[write] = values[read];
+                    toHashes[write] = hashes[read];
+                    toLive[write >>> WORD_SHIFT] |= 1L << write;
+                    write++;
+                }
+            }
+            return write;
         }
     }
 }
