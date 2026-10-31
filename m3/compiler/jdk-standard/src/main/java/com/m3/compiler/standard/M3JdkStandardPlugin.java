@@ -40,21 +40,23 @@ import javax.tools.Diagnostic;
  * Opt-in javac plugin that holds M3-owned Java to the source standard of the JDK itself.
  *
  * <p>The checks run once per compilation unit on the parse tree javac has already built: Java
- * naming conventions (including no reflection parameter names such as {@code arg0}), explicit
- * imports, the 100-column limit and the jcheck whitespace rules. Doc comments are left to javac's
- * own {@code -Xdoclint:all/protected}, which is how the JDK build checks them. Each finding is a
- * compiler diagnostic tagged {@code [M3JdkStandard RULE]}; the option {@code report=<path>} also
- * writes every finding as a TSV row (file, line, column, rule, message) and {@code mode=warning}
- * lowers the diagnostics from errors to warnings. The option {@code scheme=m3} adds the M3JDK21
- * naming scheme: packages {@code jdk.m3.<area>} or {@code jdk.internal.m3.<area>}, and no name
- * carried over from Synexia ({@code Synexia*}, {@code SYNEXIA_*} become {@code M3*}, {@code M3_*}).
+ * naming conventions, deterministic type/method quality checks (including no reflection parameter
+ * names such as {@code arg0}), explicit imports, the 100-column limit and the jcheck whitespace
+ * rules. Doc comments are left to javac's own {@code -Xdoclint:all/protected}, which is how the JDK
+ * build checks them. Each finding is a compiler diagnostic tagged
+ * {@code [M3JdkStandard RULE]}; the option {@code report=<path>} also writes every finding as a TSV
+ * row (file, line, column, rule, message), and {@code mode=warning} lowers diagnostics from errors
+ * to warnings. The option {@code scheme=m3} adds the M3JDK21 naming scheme: packages
+ * {@code jdk.m3.<area>} or {@code jdk.internal.m3.<area>}, and no name carried over from Synexia
+ * ({@code Synexia*}, {@code SYNEXIA_*} become {@code M3*}, {@code M3_*}).
  */
 public final class M3JdkStandardPlugin implements Plugin {
 
     /** The checked rules; every diagnostic names exactly one. */
     enum Rule {
         WHITESPACE, LINE_LENGTH, WILDCARD_IMPORT, PACKAGE_NAME, TYPE_NAME, METHOD_NAME,
-        CONSTANT_NAME, FIELD_NAME, PARAMETER_NAME, LOCAL_NAME, TYPE_PARAMETER_NAME, NAME_SCHEME
+        NAME_QUALITY, CONSTANT_NAME, FIELD_NAME, PARAMETER_NAME, LOCAL_NAME,
+        TYPE_PARAMETER_NAME, NAME_SCHEME
     }
 
     private static final int MAX_COLUMNS = 100;
@@ -175,6 +177,9 @@ public final class M3JdkStandardPlugin implements Plugin {
             String name = tree.getSimpleName().toString();
             if (!name.isEmpty()) {
                 name(Rule.TYPE_NAME, TYPE, name, tree);
+                if (TYPE.matcher(name).matches()) {
+                    checkNameQuality("type", name, tree, M3NameQuality.typeIssue(name));
+                }
             }
             tree.getTypeParameters().forEach(this::typeParameter);
             return super.visitClass(tree, unused);
@@ -185,6 +190,9 @@ public final class M3JdkStandardPlugin implements Plugin {
             String name = tree.getName().toString();
             if (!name.equals("<init>")) {
                 name(Rule.METHOD_NAME, MEMBER, name, tree);
+                if (MEMBER.matcher(name).matches() && !overrides(tree)) {
+                    checkNameQuality("method", name, tree, M3NameQuality.methodIssue(name));
+                }
             }
             tree.getTypeParameters().forEach(this::typeParameter);
             return super.visitMethod(tree, unused);
@@ -227,6 +235,19 @@ public final class M3JdkStandardPlugin implements Plugin {
 
         private void typeParameter(TypeParameterTree tree) {
             name(Rule.TYPE_PARAMETER_NAME, TYPE_PARAMETER, tree.getName().toString(), tree);
+        }
+
+        private boolean overrides(MethodTree tree) {
+            return tree.getModifiers().getAnnotations().stream()
+                    .map(annotation -> annotation.getAnnotationType().toString())
+                    .anyMatch(annotation -> annotation.equals("Override")
+                            || annotation.equals("java.lang.Override"));
+        }
+
+        private void checkNameQuality(String category, String name, Tree tree,
+                Optional<String> issue) {
+            issue.ifPresent(reason -> flag(Rule.NAME_QUALITY, tree,
+                    category + " " + name + ": " + reason));
         }
 
         private void name(Rule rule, Pattern pattern, String name, Tree tree) {

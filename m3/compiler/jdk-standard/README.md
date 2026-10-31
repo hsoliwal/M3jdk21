@@ -8,7 +8,7 @@ module holds M3-owned Java to that standard inside the compile that already runs
 | Concern | Owner | Rule |
 |---|---|---|
 | Doc comments | `javac -Xdoclint:all/protected` (the JDK's own) | public and protected API documented; tags complete and well formed |
-| Naming | `M3JdkStandard` | packages lowercase; types UpperCamel; methods, fields, parameters and locals lowerCamel; constants (static final, interface fields, enum constants) UPPER_SNAKE; type parameters one capital letter and an optional digit; no reflection parameter names (`arg0`, `arg1`, ...) |
+| Naming | `M3JdkStandard` | conventional casing plus the deterministic type/method quality rules in [MEANINGFUL_NAMES.md](MEANINGFUL_NAMES.md); no reflection parameter names (`arg0`, `arg1`, ...) |
 | Imports | `M3JdkStandard` | every type imported by name, no `*` |
 | Layout | `M3JdkStandard` | 100 columns (package/import lines and URLs exempt) |
 | Whitespace | `M3JdkStandard`, same rules as `.jcheck/conf` | no tab, no trailing whitespace, no carriage return |
@@ -31,8 +31,11 @@ Findings are compiler errors tagged `[M3JdkStandard RULE] line L:C message` (or 
 
 `verify.sh` builds the plugin with plain javac (`-Xlint:all -Werror`), compiles the plugin's own
 sources again with the plugin and `-Xdoclint:all/protected` (it meets the standard it enforces),
-and runs `M3JdkStandardPluginSelfTest`. The self-test compiles a clean fixture, which must have no
-finding, and a dirty fixture, which must break each of the 11 rules exactly as expected (13
-findings). As a discriminator, the parameters `arg` and `argument` must pass while `arg0` is
-refused. Error mode must fail only the dirty compile. The Maven build runs the same self-test
-through `M3JdkStandardPluginJUnitTest`.
+and runs `M3JdkStandardPluginSelfTest`. The clean fixture must have no finding. Independent
+convention and semantic-quality fixtures must break all 12 rules exactly as expected (25 findings).
+Discriminators prove that `arg` and `argument` pass while `arg0` is refused, inherited overrides
+retain their contract, and concise domain names pass while placeholders, promotional terms,
+versions, dates, repeated words and excessive names fail without confusing `Hyperlink` or `IPv6`
+for policy terms. The opt-in scheme fixture adds exactly three `NAME_SCHEME` findings for legacy
+Synexia ownership and none for valid M3 names. Maven runs the same test through
+`M3JdkStandardPluginJUnitTest`.
