@@ -1,0 +1,24 @@
+LOAD	start	28.7	0.5	32
+LOAD	warm	43.6	-100.0	32
+PERF	M3PrefixRowOffsets#startOf(int)	row start (getCellBounds)	direct	0.509	0.474	0.592	1048576	7
+PERF	ref:BasicListUI#getCellBounds	stock row start loop (JDK reference)	reference	18443.311	17101.904	19941.895	2048	7
+PERF	M3PrefixRowOffsets#firstEndingAfter(long)	row holding an offset	direct	114.383	101.113	123.464	1048576	7
+PERF	M3PrefixRowOffsets#rowCount()	rows indexed	direct	0.012	0.012	0.021	1048576	7
+PERF	M3PrefixRowOffsets#monotone()	monotone flag	direct	0.011	0.009	0.089	1048576	7
+PERF	M3PrefixRowOffsets#M3PrefixRowOffsets(int[])	lane build over 8192 heights (per layout)	direct	4997.803	4614.453	7233.105	2048	7
+PERF	M3ListRows#startOf(int)	row start through the UI state	direct	0.507	0.490	0.543	1048576	7
+PERF	M3ListRows#rowAt(int,int,int,boolean)	location to row (locationToIndex)	direct	107.857	98.982	116.935	1048576	7
+PERF	ref:BasicListUI#convertLocationToRow	stock location to row loop (JDK reference)	reference	18538.916	17944.824	20439.014	2048	7
+PERF	M3ListRows#indexes(Object,int[])	gate with the same heights array	direct	0.539	0.515	0.954	1048576	7
+PERF	M3RowPieces#start(int)	piece start	direct	0.345	0.318	0.692	1048576	7
+PERF	M3RowPieces#length(int)	piece length	direct	0.334	0.321	0.463	1048576	7
+PERF	M3RowPieces#count()	piece count	direct	0.011	0.010	0.012	1048576	7
+PERF	M3RowPieces#size()	row count	direct	0.010	0.010	0.011	1048576	7
+PERF	M3RowPieces#reset(int)	forget the edits	direct	0.324	0.309	0.332	1048576	7
+PERF	M3RowPieces#insert(int,int)	insert one row after reset(n)	after reset(n)	18.639	17.755	23.553	65536	7
+PERF	M3RowPieces#remove(int,int)	remove one row after reset(n)	after reset(n)	25.966	24.835	31.580	65536	7
+PERF	M3RowPieces#change(int,int)	change one row after reset(n)	after reset(n)	45.027	42.363	58.324	65536	7
+PERF	M3RowPieces#split(int)	split a piece after reset(n)	after reset(n)	2.127	1.973	3.403	65536	7
+PERF	M3ListMeasure#measure(Object,JList<Object>,CellRendererPane)	delta layout of 10^4 rows after one change	after DefaultListModel.set	16867.822	13524.219	18637.354	2048	7
+LOAD	end	38.6	2.6	32
+SINK	39435107394864
