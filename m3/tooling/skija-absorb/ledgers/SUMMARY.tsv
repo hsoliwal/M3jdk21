@@ -13,5 +13,5 @@ binding	defined/exported	965
 binding	defined/not_exported	3
 binding	undefined/not_exported	5
 dll_exports_without_java_native	-	65
-cc_class_strings	-	51
+cc_class_strings	-	68
 cc_jni_definitions	-	1031
