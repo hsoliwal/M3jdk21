@@ -113,7 +113,6 @@
     <module>rewrite-yaml</module>
     <module>slf4j-api-1.7.36</module>
     <module>slf4j-api-2.0.12</module>
-    <module>slf4j-api-2.0.9</module>
     <module>slf4j-simple</module>
     <module>snakeyaml-2.1</module>
     <module>snakeyaml-2.2</module>
