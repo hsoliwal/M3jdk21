@@ -76,7 +76,6 @@
     <module>jna-platform</module>
     <module>jsoup-1.17.2</module>
     <module>jsoup-1.23.2</module>
-    <module>jspecify-0.3.0</module>
     <module>jspecify-1.0.1</module>
     <module>jsr305</module>
     <module>junit-jupiter-5.10.2</module>
