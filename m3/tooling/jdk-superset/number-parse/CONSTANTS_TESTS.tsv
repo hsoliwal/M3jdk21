@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+file	line	col	class	member	literal	type	name	state	role
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	167	74	M3NumberParseHexAtomsTest	affected#1	2	int	AFFECTED_STOCK_FIELD	DECLARED	Column of M3NumberParseHexAffected.tsv that holds the stock raw bits.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	168	67	M3NumberParseHexAtomsTest	affected#1	4	int	AFFECTED_DEFECT_FIELD	DECLARED	Column of M3NumberParseHexAffected.tsv that names the defect.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	186	22	M3NumberParseHexAtomsTest	generated#1	2	int	SHAPE_FLOAT_TIE	DECLARED	Case of Shape.FLOAT_TIE in the round robin over the shapes.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	187	22	M3NumberParseHexAtomsTest	generated#1	3	int	SHAPE_DOUBLE_BIT63	DECLARED	Case of Shape.DOUBLE_BIT63 in the round robin over the shapes.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	188	22	M3NumberParseHexAtomsTest	generated#1	4	int	SHAPE_FLOAT_BIT63	DECLARED	Case of Shape.FLOAT_BIT63 in the round robin over the shapes.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	189	22	M3NumberParseHexAtomsTest	generated#1	5	int	SHAPE_TRUNCATED_STICKY	DECLARED	Case of Shape.TRUNCATED_STICKY in the round robin over the shapes.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	245	18	M3NumberParseHexAtomsTest	halfway#1	2	int	TIE_VARIANT_BELOW	DECLARED	Variant BELOW_TIE: one below the halfway pattern.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	256	51	M3NumberParseHexAtomsTest	target#1	2	int	EDGE_WINDOW_SIDES	DECLARED	An edge window spans precision bits on both sides of the format's exponent limit.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	257	55	M3NumberParseHexAtomsTest	target#2	2	int	EDGE_WINDOW_SIDES	DECLARED	An edge window spans precision bits on both sides of the format's exponent limit.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	271	56	M3NumberParseHexAtomsTest	render#1	3	int	SIGN_KINDS	DECLARED	Sign spellings: none, plus, minus.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	271	68	M3NumberParseHexAtomsTest	render#1	'0'	char	HEX_PREFIX_ZERO	DECLARED	The 0 of the 0x prefix.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	271	98	M3NumberParseHexAtomsTest	render#1	'x'	char	HEX_INDICATOR_LOWER	DECLARED	Hex prefix letter, lower case.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	271	104	M3NumberParseHexAtomsTest	render#1	'X'	char	HEX_INDICATOR_UPPER	DECLARED	Hex prefix letter, upper case.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	274	22	M3NumberParseHexAtomsTest	render#1	'.'	char	HEX_POINT	DECLARED	The point of a hex significand.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	276	36	M3NumberParseHexAtomsTest	render#1	'p'	char	BINARY_EXPONENT_LOWER	DECLARED	Binary exponent indicator, lower case.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	276	42	M3NumberParseHexAtomsTest	render#1	'P'	char	BINARY_EXPONENT_UPPER	DECLARED	Binary exponent indicator, upper case.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	310	79	M3NumberParseHexAtomsTest	tie#1	2	int	TIE_EXTRA_DIGITS	DECLARED	Hex digits beyond the precision, so the halfway bits and a tail exist.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	344	111	M3NumberParseHexAtomsTest	truncatedSticky#1	'0'	char	TAIL_ZERO_DIGIT	DECLARED	A zero digit of the dropped tail.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	359	58	M3NumberParseHexAtomsTest	donorClamp#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; c - DIGIT_ZERO is the digit value.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	372	33	M3NumberParseHexAtomsTest	clamped#1	2	int	LANDING_SIDES	DECLARED	The landing power is drawn on both sides of zero.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	448	97	M3NumberParseHexAtomsTest	agree#1	5	int	MAX_REPORTED	DECLARED	Differences quoted in an assertion message.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	473	74	M3NumberParseHexAtomsTest	kernel#1	2	int	FLOAT_SEED_OFFSET	DECLARED	Seed offset of the float kernel test (the double kernel test uses 1).
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	479	70	M3NumberParseHexAtomsTest	kernel#2	2	int	SHIFT_RANGE_DIVISOR	DECLARED	Random significands are shifted right by up to WORD_BITS / SHIFT_RANGE_DIVISOR bits.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	480	98	M3NumberParseHexAtomsTest	kernel#1	-2	int	KERNEL_EXPONENT_LOW_FACTOR	DECLARED	Kernel powers start at KERNEL_EXPONENT_LOW_FACTOR times the format's MAX_EXPONENT.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	480	110	M3NumberParseHexAtomsTest	kernel#3	2	int	KERNEL_EXPONENT_HIGH_FACTOR	DECLARED	Kernel powers stay below KERNEL_EXPONENT_HIGH_FACTOR times the format's MAX_EXPONENT.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	501	106	M3NumberParseHexAtomsTest	kernel#1	5	int	MAX_REPORTED	DECLARED	Differences quoted in an assertion message.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	554	33	M3NumberParseHexAtomsTest	referee#1	2	int	HEX_GROUP_INTEGER	DECLARED	Group of the integer hex digits in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	554	47	M3NumberParseHexAtomsTest	referee#1	3	int	HEX_GROUP_FRACTION	DECLARED	Group of the fraction hex digits in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	554	73	M3NumberParseHexAtomsTest	referee#2	3	int	HEX_GROUP_FRACTION	DECLARED	Group of the fraction hex digits in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	556	51	M3NumberParseHexAtomsTest	referee#1	4	int	HEX_GROUP_EXPONENT	DECLARED	Group of the binary exponent in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	557	73	M3NumberParseHexAtomsTest	referee#3	3	int	HEX_GROUP_FRACTION	DECLARED	Group of the fraction hex digits in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	557	98	M3NumberParseHexAtomsTest	referee#4	3	int	HEX_GROUP_FRACTION	DECLARED	Group of the fraction hex digits in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	561	100	M3NumberParseHexAtomsTest	referee#2	2	int	REFEREE_CLAMP_FACTOR	DECLARED	The referee clamps the power at REFEREE_CLAMP_FACTOR times REFEREE_EXPONENT_LIMIT before the lead exponent.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	562	66	M3NumberParseHexAtomsTest	referee#3	2	int	REFEREE_CLAMP_FACTOR	DECLARED	The referee clamps the power at REFEREE_CLAMP_FACTOR times REFEREE_EXPONENT_LIMIT before the lead exponent.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	596	110	M3NumberParseHexAtomsTest	<init>#1	5	int	MAX_REPORTED	DECLARED	Differences quoted in an assertion message.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	609	43	M3NumberParseHexAtomsTest	<init>#1	2	int	HEX_GROUP_INTEGER	DECLARED	Group of the integer hex digits in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	609	57	M3NumberParseHexAtomsTest	<init>#1	3	int	HEX_GROUP_FRACTION	DECLARED	Group of the fraction hex digits in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	609	83	M3NumberParseHexAtomsTest	<init>#2	3	int	HEX_GROUP_FRACTION	DECLARED	Group of the fraction hex digits in HEX.
+test/jdk/jdk/internal/math/M3NumberParseHexAtomsTest.java	622	69	M3NumberParseHexAtomsTest	<init>#2	2	int	COVERAGE_SHARE_DIVISOR	DECLARED	Each shape family holds more than perShape / (COVERAGE_SHARE_DIVISOR * TIE_VARIANTS) cases.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	79	67	M3HexParseDifferential	main#1	48	int	OUTPUT_CHARS_PER_LINE	DECLARED	Initial capacity per output line of the diff mode.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	82	38	M3HexParseDifferential	main#1	'\t'	char	FIELD_SEPARATOR	DECLARED	Separates the fields of an output line.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	82	64	M3HexParseDifferential	main#2	'\t'	char	FIELD_SEPARATOR	DECLARED	Separates the fields of an output line.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	82	90	M3HexParseDifferential	main#1	'\n'	char	LINE_END	DECLARED	Ends an output line.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	87	44	M3HexParseDifferential	main#1	2	int	BENCH_ROUNDS_ARGUMENT	DECLARED	Argument index of the bench rounds.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	153	41	M3HexParseDifferential	toHexStrings#1	2	int	TO_HEX_CATEGORIES	DECLARED	Categories 0 and 1 of literal(): Double.toHexString and Float.toHexString.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	171	18	M3HexParseDifferential	literal#1	2	int	CATEGORY_RANDOM_A	DECLARED	First category of random significands (1 to MAX_DIGITS digits).
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	171	21	M3HexParseDifferential	literal#1	3	int	CATEGORY_RANDOM_B	DECLARED	Second category of random significands (1 to MAX_DIGITS digits).
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	172	18	M3HexParseDifferential	literal#1	4	int	CATEGORY_LONG	DECLARED	Category of long significands (MAX_DIGITS / 2 to MAX_DIGITS - 1 digits).
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	172	61	M3HexParseDifferential	literal#2	2	int	MAX_DIGITS_DIVISOR	DECLARED	MAX_DIGITS / MAX_DIGITS_DIVISOR: lower bound and span of the long category, digit bound of the last one.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	172	88	M3HexParseDifferential	literal#3	2	int	MAX_DIGITS_DIVISOR	DECLARED	MAX_DIGITS / MAX_DIGITS_DIVISOR: lower bound and span of the long category, digit bound of the last one.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	173	18	M3HexParseDifferential	literal#1	5	int	CATEGORY_CLAMPED	DECLARED	Category of exponent numbers that the donor clamps.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	174	18	M3HexParseDifferential	literal#1	6	int	CATEGORY_NEAR_MISS	DECLARED	Category of near misses.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	175	68	M3HexParseDifferential	literal#4	2	int	MAX_DIGITS_DIVISOR	DECLARED	MAX_DIGITS / MAX_DIGITS_DIVISOR: lower bound and span of the long category, digit bound of the last one.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	181	54	M3HexParseDifferential	sign#1	3	int	SIGN_KINDS	DECLARED	Sign spellings: none, plus, minus.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	205	75	M3HexParseDifferential	hex#1	'x'	char	HEX_INDICATOR_LOWER	DECLARED	Hex prefix letter, lower case.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	205	81	M3HexParseDifferential	hex#1	'X'	char	HEX_INDICATOR_UPPER	DECLARED	Hex prefix letter, upper case.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	211	40	M3HexParseDifferential	hex#1	2	int	POINT_SLOTS_EXTRA	DECLARED	r.nextInt(digits + POINT_SLOTS_EXTRA): 0..digits places the point, digits + 1 leaves it out.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	213	29	M3HexParseDifferential	hex#1	'.'	char	HEX_POINT	DECLARED	The point of a hex significand.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	227	59	M3HexParseDifferential	donorClamp#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	237	33	M3HexParseDifferential	clamped#1	2	int	LANDING_SIDES	DECLARED	The landing power is drawn on both sides of zero.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	249	89	M3HexParseDifferential	nearMiss#1	2	int	MAX_DIGITS_DIVISOR	DECLARED	MAX_DIGITS / MAX_DIGITS_DIVISOR: lower bound and span of the long category, digit bound of the last one.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	250	40	M3HexParseDifferential	nearMiss#1	3	int	MAX_EDITS	DECLARED	Up to this many random edits per near miss.
+m3/tooling/jdk-superset/number-parse/gate/M3HexParseDifferential.java	253	31	M3HexParseDifferential	nearMiss#2	3	int	EDIT_KINDS	DECLARED	Edit kinds: insert, delete, replace.

@@ -20,6 +20,27 @@ import statistics
 import sys
 
 WIRING = "(wiring)"
+# The output is a TSV (redirected stdout); it starts with the Synexia SPDX header ('#' lines).
+TSV_HEADER = ("# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n"
+              "# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others\n")
+# perf_ab rows: round variant atom ns_per_op_atom ns_per_op_reference speedup ('#' lines have fewer fields)
+AB_FIELDS = 6
+AB_ROUND = 0
+AB_VARIANT = 1
+AB_ATOM = 2
+AB_NS = 3
+AB_REF = 4
+# PERF.tsv rows: atom ns_per_op_atom ns_per_op_reference speedup
+PERF_FIELDS = 4
+PERF_ATOM = 0
+PERF_NS = 1
+PERF_REF = 2
+# argv: program, PERF.tsv, before_label, after_label, slack, then the perf_ab files
+ARG_PERF = 1
+ARG_BEFORE = 2
+ARG_AFTER = 3
+ARG_SLACK = 4
+ARG_FIRST_AB = 5
 
 
 def load(paths):
@@ -28,21 +49,25 @@ def load(paths):
     for n, path in enumerate(paths):
         for ln in open(path, encoding="utf-8"):
             f = ln.rstrip("\n").split("\t")
-            if len(f) == 6 and WIRING in f[2] and f[3]:
-                data.setdefault(f[2], {}).setdefault((n, f[0]), {})[f[1]] = (float(f[3]), float(f[4]))
+            if len(f) == AB_FIELDS and WIRING in f[AB_ATOM] and f[AB_NS]:
+                data.setdefault(f[AB_ATOM], {}).setdefault((n, f[AB_ROUND]), {})[f[AB_VARIANT]] = (
+                    float(f[AB_NS]), float(f[AB_REF]))
     return data
 
 
 def main(argv):
-    perf, before, after, slack, paths = argv[1], argv[2], argv[3], float(argv[4]), argv[5:]
+    sys.stdout.reconfigure(newline="\n")  # the redirected TSV keeps LF line ends on Windows too
+    perf, before, after = argv[ARG_PERF], argv[ARG_BEFORE], argv[ARG_AFTER]
+    slack, paths = float(argv[ARG_SLACK]), argv[ARG_FIRST_AB:]
     recorded = {}
     for ln in open(perf, encoding="utf-8"):
         f = ln.rstrip("\n").split("\t")
-        if len(f) == 4 and WIRING in f[0]:
-            recorded[f[0]] = (float(f[1]), float(f[2]))
+        if len(f) == PERF_FIELDS and WIRING in f[PERF_ATOM]:
+            recorded[f[PERF_ATOM]] = (float(f[PERF_NS]), float(f[PERF_REF]))
     data = load(paths)
     cols = ("atom", "recorded", "before_best", "after_best", "vs_recorded", "ref_drift", "best_ratio", "mean_ratio",
             "paired_median", "pairs", "verdict_recorded", "verdict_same_host")
+    sys.stdout.write(TSV_HEADER)
     sys.stdout.write("\t".join(cols) + "\n")
     ok = True
     for atom in sorted(recorded):

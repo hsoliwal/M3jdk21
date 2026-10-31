@@ -13,3 +13,15 @@ M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.10	Infinity
 M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	3.49	85.03	24.39
 M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.10	50.74	12.36
 M3FftMultiplier.multiply (400k-bit operands)	2277200.00	4487400.00	1.97
+# hex route leaf (m3/jdk-number-parse-hex-exact-20261031, HEX_ROUTE v1), same host under load (i9-14900HX, 24 cores / 32 threads;
+# CPU load mean 79.5% / median 82% over 24 samples during the A/B). Decimal paths: PERF_AB v1, 32 ABBA rounds, pre-image bf16b786637
+# vs post-image at High priority (PERF_AB_HEX.tsv); PERF_WIRING v1, slack 1.05 (PERF_GATE_HEX.tsv): paired median post/pre
+# Double.parseDouble 0.988, Float.parseFloat 0.995: PASS (the decimal path is instruction-identical: BYTECODE_METHOD_DELTA.tsv);
+# against the rows above: NOT_COMPARABLE (the pre-image itself measures 43.46/84.21 ns, 1.34x/1.25x the recorded values).
+# Hex rows: gate/M3HexParseDifferential bench 200000 5 (best of 5 rounds per JVM, median of 3 interleaved JVMs; HEX_BENCH.tsv),
+# reference = stock JDK 21.0.9 on the same literals. The pre-image's M3 hex path (it misrounds) measured 53.60 ns on the
+# toHexString doubles: the upside of a later HEX_EXACT_M3 leaf (PATTERN_ROUTES.tsv). Load during the bench: mean 72.2%.
+Double.parseDouble hex, toHexString literals (JDK route)	355.27	285.07	0.80
+Float.parseFloat hex, toHexString literals (JDK route)	352.66	290.26	0.82
+Double.parseDouble hex, mixed hex corpus (JDK route)	1285.52	962.57	0.75
+Float.parseFloat hex, mixed hex corpus (JDK route)	1328.47	923.22	0.69
