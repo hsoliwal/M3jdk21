@@ -1,0 +1,15 @@
+family	donor	licence	why (speed)	jdk_target	state
+json	google/gson	Apache-2.0	small, reflection-light tree and streaming JSON; widely used	jdk.m3.json facade (superset with Jackson); streaming core inline	CANDIDATE (user named it 2026-10-31)
+json	ngs-doo/dsl-json	BSD-3-Clause	compile-time codecs, among the fastest JVM JSON	jdk.m3.json codec path	CANDIDATE
+json	simdjson/simdjson-java	Apache-2.0	SIMD JSON parsing via the Vector API	jdk.m3.json parse kernel (Vector API in M3jdk)	CANDIDATE
+compression	airlift/aircompressor	Apache-2.0	pure-Java LZ4, Snappy, Zstd, LZO, Deflate; no JNI	java.util.zip superset (replaces JNI parts of lz4-java/snappy-java)	CANDIDATE (strong)
+hashing	OpenHFT/zero-allocation-hashing	Apache-2.0	xxHash, wyhash, Murmur3, City/Farm, Metro without allocation	jdk.m3.hash + jdk.internal.m3 kernels	VENDORED
+collections	vigna/fastutil	Apache-2.0	type-specific primitive maps, sets, lists, big arrays	jdk.m3 collections (peer lane)	CANDIDATE
+collections	carrotsearch/hppc	Apache-2.0	primitive collections, open addressing	jdk.m3 collections	CANDIDATE
+collections	RoaringBitmap/RoaringBitmap	Apache-2.0	compressed bitmaps, fast set algebra	jdk.m3 bitsets (DOOP lanes)	CANDIDATE
+concurrency	JCTools/JCTools	Apache-2.0	lock-free SPSC/MPSC queues	java.util.concurrent superset	CANDIDATE
+concurrency	LMAX-Exchange/disruptor	Apache-2.0	ring-buffer event pipeline	java.util.concurrent superset	CANDIDATE
+regex	cs-au-dk/dk.brics.automaton	BSD-2-Clause	DFA regex, linear time	java.util.regex superset (with re2j)	CANDIDATE
+text	google/re2j	BSD-3-Clause	linear-time regex	java.util.regex superset	VENDORED
+math	Hipparchus-Math/hipparchus	Apache-2.0	numerics, FFT, statistics	jdk.m3.math	CANDIDATE
+utf8	simdutf (Java ports)	Apache-2.0 / MIT	SIMD UTF-8 validation and transcoding	String coding in java.base (Vector API)	CANDIDATE (needs port survey)
