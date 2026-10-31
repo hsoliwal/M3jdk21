@@ -6,3 +6,6 @@ date	tool	symptom	correction
 2026-10-31	gen_rename.py owner	SWT uses impl.Native/impl.Library; jdk.internal.m3.graphics would be an unqualified jdk.internal export	impl -> jdk.m3.graphics.impl; ledgers and recipe regenerated
 2026-10-31	tool authoring	Bash tool collapsed \b to a backspace byte inside a generated regex	write regex-bearing tools with the Write tool; fix_bs pass replaced 5 bytes
 2026-10-31	module sources	217 donor files had CRLF	normalize_lf.py before commit
+2026-10-31	consumer_rename.py	SWT M3Library.java names Skija impl.Library fully qualified; a naive "M3Library is taken" check flagged it	qualified uses never collide; COLLISION_QUALIFY applies only to unqualified tokens, at the rename site
+2026-10-31	consumer_rename.py	io.github.humbleui.skija.* and io.github.humbleui.types.* both became import jdk.m3.graphics.* (M3Target.java); ecj warns	IMPORT_DEDUPE v1 keeps the first identical import line
+2026-10-31	consumer_rename.py	.superset/conflicts archives matched humbleui but are records, not live code (not on disk in a sparse worktree)	consumer list = bundles/, tests/, examples/, docs/m3/*/tools/ Java; archives and ledgers excluded and listed
