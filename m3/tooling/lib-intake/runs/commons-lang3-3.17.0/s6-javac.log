@@ -1,0 +1,371 @@
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\Streams.java:34: warning: [deprecation] Functions in com.m3.lib.lang3 has been deprecated
+import com.m3.lib.lang3.Functions.FailableConsumer;
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\Streams.java:35: warning: [deprecation] Functions in com.m3.lib.lang3 has been deprecated
+import com.m3.lib.lang3.Functions.FailableFunction;
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\Streams.java:36: warning: [deprecation] Functions in com.m3.lib.lang3 has been deprecated
+import com.m3.lib.lang3.Functions.FailablePredicate;
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\Functions.java:35: warning: [deprecation] Streams in com.m3.lib.lang3 has been deprecated
+import com.m3.lib.lang3.Streams.FailableStream;
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\module-info.java:3: warning: [module] module name component lang3 should avoid terminal digits
+module jdk.m3.lang3 {
+             ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.lang3 {
+          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\AppendableJoiner.java:180: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter elements
+        return joinArray(appendable, prefix, suffix, delimiter, appender, elements);
+                                                                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\AppendableJoiner.java:232: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter elements
+            return joinArray(stringBuilder, prefix, suffix, delimiter, appender, elements);
+                                                                                 ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\AppendableJoiner.java:283: warning: [unchecked] Possible heap pollution from parameterized vararg type T
+    public StringBuilder join(final StringBuilder stringBuilder, @SuppressWarnings("unchecked") final T... elements) {
+                                                  ^
+  where T is a type-variable:
+    T extends Object declared in class AppendableJoiner
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\AppendableJoiner.java:309: warning: [unchecked] Possible heap pollution from parameterized vararg type T
+    public <A extends Appendable> A joinA(final A appendable, @SuppressWarnings("unchecked") final T... elements) throws IOException {
+                                                  ^
+  where T is a type-variable:
+    T extends Object declared in class AppendableJoiner
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ArrayUtils.java:778: warning: [unchecked] unchecked cast
+        return (T[]) add(array, index, element, clazz);
+                        ^
+  required: T[]
+  found:    Object
+  where T is a type-variable:
+    T extends Object declared in method <T>add(T[],int,T)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ArrayUtils.java:1109: warning: [unchecked] Possible heap pollution from parameterized vararg type T
+    public static <T> T[] addAll(final T[] array1, @SuppressWarnings("unchecked") final T... array2) {
+                                           ^
+  where T is a type-variable:
+    T extends Object declared in method <T>addAll(T[],T...)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ArrayUtils.java:3095: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        if (isEmpty(values)) {
+                    ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ArrayUtils.java:3104: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        System.arraycopy(values, 0, result, index, values.length);
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ArrayUtils.java:5553: warning: [unchecked] unchecked cast
+        return (T[]) removeAll((Object) array, indexesOf(array, element));
+                              ^
+  required: T[]
+  found:    Object
+  where T is a type-variable:
+    T extends Object declared in method <T>removeAllOccurences(T[],T)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ArrayUtils.java:5716: warning: [unchecked] unchecked cast
+        return (T[]) removeAll((Object) array, indexesOf(array, element));
+                              ^
+  required: T[]
+  found:    Object
+  where T is a type-variable:
+    T extends Object declared in method <T>removeAllOccurrences(T[],T)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ArrayUtils.java:6460: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        if (isEmpty(array) || isEmpty(values)) {
+                                      ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ArrayUtils.java:8729: warning: [unchecked] Possible heap pollution from parameterized vararg type T
+    public static <T> T[] toArray(@SuppressWarnings("unchecked") final T... items) {
+                                                                            ^
+  where T is a type-variable:
+    T extends Object declared in method <T>toArray(T...)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\CharSet.java:166: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Set<CharRange> set = Collections.synchronizedSet(new HashSet<>());
+                                 ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\CharSet.java:176: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        Stream.of(set).forEach(this::add);
+                               ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ClassUtils.java:1472: warning: [rawtypes] found raw type: Class
+        final Class<?>[] convertedClasses = new Class[classes.length];
+                                                ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ClassUtils.java:1543: warning: [rawtypes] found raw type: Class
+        final Class<?>[] classes = new Class[array.length];
+                                       ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ClassUtils.java:1595: warning: [rawtypes] found raw type: Class
+        final Class<?>[] convertedClasses = new Class[classes.length];
+                                                ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\Range.java:189: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Comparator<T> comparator;
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\Range.java:199: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final T maximum;
+                    ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\Range.java:204: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final T minimum;
+                    ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\EnumUtils.java:95: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        Validate.noNullElements(values);
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\EnumUtils.java:96: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        return generateBitVector(enumClass, Arrays.asList(values));
+                                                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\EnumUtils.java:147: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        Validate.noNullElements(values);
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\EnumUtils.java:149: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        Collections.addAll(condensed, values);
+                                      ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\Functions.java:630: warning: [rawtypes] found raw type: FailableRunnable
+        final com.m3.lib.lang3.function.FailableRunnable<?>[] fr = new com.m3.lib.lang3.function.FailableRunnable[resources.length];
+                                                                                                ^
+  missing type arguments for generic class FailableRunnable<E>
+  where E is a type-variable:
+    E extends Throwable declared in interface FailableRunnable
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\LocaleUtils.java:239: warning: [deprecation] Locale(String,String) in Locale has been deprecated
+                list.add(new Locale(locale.getLanguage(), locale.getCountry()));
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\LocaleUtils.java:242: warning: [deprecation] Locale(String,String) in Locale has been deprecated
+                list.add(new Locale(locale.getLanguage(), StringUtils.EMPTY));
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\LocaleUtils.java:264: warning: [deprecation] Locale(String) in Locale has been deprecated
+            return new Locale(str);
+                   ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\LocaleUtils.java:273: warning: [deprecation] Locale(String,String) in Locale has been deprecated
+                return new Locale(language, country);
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\LocaleUtils.java:281: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+                return new Locale(language, country, variant);
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\LocaleUtils.java:335: warning: [deprecation] Locale(String,String) in Locale has been deprecated
+            return new Locale(StringUtils.EMPTY, StringUtils.EMPTY);
+                   ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\LocaleUtils.java:355: warning: [deprecation] Locale(String,String) in Locale has been deprecated
+                return new Locale(StringUtils.EMPTY, str.substring(1, 3));
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\LocaleUtils.java:363: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+            return new Locale(StringUtils.EMPTY, str.substring(1, 3), str.substring(4));
+                   ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:255: warning: [unchecked] unchecked cast
+            return (T) result;
+                       ^
+  required: T
+  found:    Object
+  where T is a type-variable:
+    T extends Object declared in method <T>clone(T)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:640: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        return Streams.of(values).filter(Objects::nonNull).findFirst().orElse(null);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:682: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter suppliers
+        return Streams.of(suppliers).filter(Objects::nonNull).map(Supplier::get).filter(Objects::nonNull).findFirst().orElse(null);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1095: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter items
+        Validate.notEmpty(items, "null/empty items");
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1096: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter items
+        Validate.noNullElements(items);
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1099: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter items
+        Collections.addAll(treeSet, items);
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1100: warning: [unchecked] unchecked cast
+        return (T) treeSet.toArray()[(treeSet.size() - 1) / 2];
+                                    ^
+  required: T
+  found:    Object
+  where T is a type-variable:
+    T extends Object declared in method <T>median(Comparator<T>,T...)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1115: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter items
+        Validate.notEmpty(items);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1116: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter items
+        Validate.noNullElements(items);
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1118: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter items
+        Collections.addAll(sort, items);
+                                 ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1119: warning: [unchecked] unchecked cast
+        return (T) sort.toArray()[(sort.size() - 1) / 2];
+                                 ^
+  required: T
+  found:    Object
+  where T is a type-variable:
+    T extends Comparable<? super T> declared in method <T>median(T...)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ObjectUtils.java:1159: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter items
+        if (ArrayUtils.isNotEmpty(items)) {
+                                  ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\text\StrBuilder.java:816: warning: [unchecked] Possible heap pollution from parameterized vararg type T
+    public <T> StrBuilder appendAll(@SuppressWarnings("unchecked") final T... array) {
+                                                                              ^
+  where T is a type-variable:
+    T extends Object declared in method <T>appendAll(T...)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\text\StrBuilder.java:313: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            append(str);
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\text\StrTokenizer.java:270: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDelimiterChar(delim);
+                        ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\text\StrTokenizer.java:294: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDelimiterString(delim);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\text\StrTokenizer.java:305: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDelimiterMatcher(delim);
+                           ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\text\StrTokenizer.java:343: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDelimiterChar(delim);
+                        ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\text\StrTokenizer.java:367: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDelimiterString(delim);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\text\StrTokenizer.java:378: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDelimiterMatcher(delim);
+                           ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\StringUtils.java:4824: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter elements
+        return join(elements, null);
+                    ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ThreadUtils.java:320: warning: [overloads] findThreadGroups(ThreadGroupPredicate) in ThreadUtils is potentially ambiguous with findThreadGroups(Predicate<ThreadGroup>) in ThreadUtils
+    public static Collection<ThreadGroup> findThreadGroups(final ThreadGroupPredicate predicate) {
+                                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ThreadUtils.java:303: warning: [overloads] findThreadGroups(ThreadGroup,boolean,ThreadGroupPredicate) in ThreadUtils is potentially ambiguous with findThreadGroups(ThreadGroup,boolean,Predicate<ThreadGroup>) in ThreadUtils
+    public static Collection<ThreadGroup> findThreadGroups(final ThreadGroup threadGroup, final boolean recurse, final ThreadGroupPredicate predicate) {
+                                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ThreadUtils.java:413: warning: [overloads] findThreads(ThreadPredicate) in ThreadUtils is potentially ambiguous with findThreads(Predicate<Thread>) in ThreadUtils
+    public static Collection<Thread> findThreads(final ThreadPredicate predicate) {
+                                     ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ThreadUtils.java:395: warning: [overloads] findThreads(ThreadGroup,boolean,ThreadPredicate) in ThreadUtils is potentially ambiguous with findThreads(ThreadGroup,boolean,Predicate<Thread>) in ThreadUtils
+    public static Collection<Thread> findThreads(final ThreadGroup threadGroup, final boolean recurse, final ThreadPredicate predicate) {
+                                     ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ThreadUtils.java:196: warning: [deprecation] getId() in Thread has been deprecated
+        final Collection<Thread> result = findThreads((Predicate<Thread>) t -> t != null && t.getId() == threadId);
+                                                                                             ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\ThreadUtils.java:171: warning: [exports] class AlwaysTruePredicate in module jdk.m3.lang3 is not accessible to clients that require this module
+    public static final AlwaysTruePredicate ALWAYS_TRUE_PREDICATE = new AlwaysTruePredicate();
+                        ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\builder\Diff.java:46: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Type type;
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\builder\MultilineRecursiveToStringStyle.java:83: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        resetIndent();
+                   ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\builder\MultilineRecursiveToStringStyle.java:195: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        setArrayStart("{" + System.lineSeparator() + spacer(spaces));
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\builder\ReflectionToStringBuilder.java:554: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this.setUpToClass(reflectUpToClass);
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\builder\ReflectionToStringBuilder.java:585: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this.setUpToClass(reflectUpToClass);
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\AbstractCircuitBreaker.java:106: warning: [exports] interface PropertyChangeListener in module java.desktop is not indirectly exported using 'requires transitive'
+    public void addChangeListener(final PropertyChangeListener listener) {
+                                        ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\AbstractCircuitBreaker.java:171: warning: [exports] interface PropertyChangeListener in module java.desktop is not indirectly exported using 'requires transitive'
+    public void removeChangeListener(final PropertyChangeListener listener) {
+                                           ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\AbstractCircuitBreaker.java:96: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        changeSupport = new PropertyChangeSupport(this);
+                                                  ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\AtomicInitializer.java:89: warning: [rawtypes] found raw type: AtomicInitializer
+            return (I) new AtomicInitializer(getInitializer(), getCloser());
+                           ^
+  missing type arguments for generic class AtomicInitializer<T>
+  where T is a type-variable:
+    T extends Object declared in class AtomicInitializer
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\AtomicSafeInitializer.java:78: warning: [rawtypes] found raw type: AtomicSafeInitializer
+            return (I) new AtomicSafeInitializer(getInitializer(), getCloser());
+                           ^
+  missing type arguments for generic class AtomicSafeInitializer<T>
+  where T is a type-variable:
+    T extends Object declared in class AtomicSafeInitializer
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\BackgroundInitializer.java:114: warning: [rawtypes] found raw type: BackgroundInitializer
+            return (I) new BackgroundInitializer(getInitializer(), getCloser(), externalExecutor);
+                           ^
+  missing type arguments for generic class BackgroundInitializer<T>
+  where T is a type-variable:
+    T extends Object declared in class BackgroundInitializer
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\BackgroundInitializer.java:203: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setExternalExecutor(exec);
+                           ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\BackgroundInitializer.java:382: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        if (isStarted()) {
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\concurrent\LazyInitializer.java:93: warning: [rawtypes] found raw type: LazyInitializer
+            return (I) new LazyInitializer(getInitializer(), getCloser());
+                           ^
+  missing type arguments for generic class LazyInitializer<T>
+  where T is a type-variable:
+    T extends Object declared in class LazyInitializer
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\event\EventListenerSupport.java:270: warning: [rawtypes] found raw type: Class
+                new Class[] { listenerInterface }, createInvocationHandler()));
+                    ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\event\EventListenerSupport.java:125: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+            for (final L listener : listeners) {
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\event\EventListenerSupport.java:219: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        initializeTransientFields(listenerInterface, classLoader);
+                                 ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\event\EventListenerSupport.java:313: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        createProxy(listenerInterface, classLoader);
+                   ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\event\EventListenerSupport.java:270: warning: [this-escape] previous possible 'this' escape happens here via invocation
+                new Class[] { listenerInterface }, createInvocationHandler()));
+                                                                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\event\EventUtils.java:119: warning: [rawtypes] found raw type: Class
+                new Class[] { listenerType }, new EventBindingInvocationHandler(target, methodName, eventTypes)));
+                    ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\exception\ContextedException.java:91: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final ExceptionContext exceptionContext;
+                                   ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\exception\ContextedRuntimeException.java:91: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final ExceptionContext exceptionContext;
+                                   ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\exception\DefaultExceptionContext.java:48: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<Pair<String, Object>> contextValues = new ArrayList<>();
+                                             ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\stream\Streams.java:591: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        return failableStream(of(values));
+                                 ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\stream\Streams.java:652: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter array
+        return nonNull(of(array));
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\stream\Streams.java:737: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        return values == null ? Stream.empty() : Stream.of(values);
+                                                           ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\function\Failable.java:130: warning: [overloads] <E#1>accept(FailableLongConsumer<E#1>,long) in Failable is potentially ambiguous with <E#2>accept(FailableIntConsumer<E#2>,int) in Failable
+    public static <E extends Throwable> void accept(final FailableLongConsumer<E> consumer, final long value) {
+                                             ^
+  where E#1,E#2 are type-variables:
+    E#1 extends Throwable declared in method <E#1>accept(FailableLongConsumer<E#1>,long)
+    E#2 extends Throwable declared in method <E#2>accept(FailableIntConsumer<E#2>,int)
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\function\Failable.java:521: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter resources
+        Streams.of(resources).forEach(r -> Objects.requireNonNull(r, "runnable"));
+                   ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\math\NumberUtils.java:427: warning: [fallthrough] possible fall-through into case
+                case 'd' :
+                ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\math\NumberUtils.java:443: warning: [fallthrough] possible fall-through into case
+                default :
+                ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\mutable\MutableObject.java:39: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private T value;
+              ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\reflect\FieldUtils.java:380: warning: [deprecation] isAccessible() in AccessibleObject has been deprecated
+        if (forceAccess && !field.isAccessible()) {
+                                 ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\reflect\FieldUtils.java:719: warning: [deprecation] isAccessible() in AccessibleObject has been deprecated
+        if (forceAccess && !field.isAccessible()) {
+                                 ^
+H:\m3-scratch\lib-intake\batch\commons-lang3-3.17.0\proj\src\main\java\com\m3\lib\lang3\reflect\MemberUtils.java:327: warning: [deprecation] isAccessible() in AccessibleObject has been deprecated
+        if (obj == null || obj.isAccessible()) {
+                              ^
+Note: Some input files additionally use or override a deprecated API.
+Note: Some input files additionally use unchecked or unsafe operations.
+100 warnings
+only showing the first 100 warnings, of 131 total; use -Xmaxwarns if you would like to see more

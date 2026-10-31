@@ -5,5 +5,6 @@ mappings	com.google.re2j=com.m3.lib.re2j
 module	jdk.m3.re2j
 version	1.8-m3-source-1
 layer	m3/vendor/third_party-m3/relocated/re2j
+intake_deps	-
 java	java version 21.0.9 2025-10-21 LTS
 rewrite	rewrite-maven-plugin 5.23.1 / rewrite 8.17.1
