@@ -51,11 +51,46 @@ import org.apache.commons.collections4.MultiValuedMap;
  * equal arguments. Return values, exception classes, drained iterators, map iterators, entries and views (with
  * non-destructive mutation probes) and the backing state are compared after every step; factory null rejection, factory
  * identity on its own result and a serialization round trip are checked once.
- * Usage: {@code java -cp commons.jar;classes M3DecoratorDifferential.java <m3 fqn> <commons fqn> <backing> <factory> <out.tsv>}.
- * Exit 0 = no mismatch, 4 = mismatches appended to out.tsv.
+ * <p>v3 PREDICATED mode (the factory takes Commons Predicate lanes): each lane gets its own serializable counting
+ * {@link Pol} per side (policy both, keynull, valuenull or rejectnull from TARGETS.tsv), backings hold accepted elements
+ * only, the per-lane predicate call counts are compared after every step, exception messages of
+ * IllegalArgumentException and of non-helpful NullPointerException are compared, every factory argument null combination
+ * is compared once with its message (R3: null-check order), and returned views get rejected-element probes and an
+ * interface-shape bitmap. Targets without Predicate lanes run exactly as in v2.1.
+ * Usage: {@code java -cp commons.jar;classes M3DecoratorDifferential.java <m3 fqn> <commons fqn> <backing> <factory> <out.tsv>
+ * [policy]}. Exit 0 = no mismatch, 4 = mismatches appended to out.tsv.
  */
 public final class M3DecoratorDifferential {
     private static final Logger LOG = Logger.getLogger(M3DecoratorDifferential.class.getName());
+    /** v3: PREDICATED mode and its rejected element (every Pol rejects hashCode % 5 == 4; 9 is the other rejected key in 0..9). */
+    private static boolean pred;
+    private static boolean rejectNull;
+    private static final Integer REJECTED = 4;
+
+    /** v3: serializable counting predicate with a stable toString, one instance per side and lane. */
+    static final class Pol implements org.apache.commons.collections4.Predicate<Object>, java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private int calls;
+
+        @Override
+        public boolean evaluate(final Object v) {
+            calls++;
+            return !rejects(v);
+        }
+
+        @Override
+        public String toString() {
+            return "Pol";
+        }
+    }
+
+    static boolean rejects(final Object v) {
+        return v == null ? rejectNull : v.hashCode() % 5 == 4;
+    }
+
+    private String policy = "both";
+    private final List<Pol> pols = new ArrayList<>();
+    private int[] sides = {0, 0, 0};
     private static final long[] SEEDS = {2L, 11L, 42L, 1_009L, 20_261_030L, 0xFEEDL, -5L, 555_555_555L};
     private static final int STEPS = 4_000;
     private static final Object ABSENT = "absent-key";
@@ -93,7 +128,13 @@ public final class M3DecoratorDifferential {
 
     public static void main(String[] args) throws Exception {
         M3DecoratorDifferential run = new M3DecoratorDifferential(Class.forName(args[0]), Class.forName(args[1]), args[2], args[3]);
+        pred = Arrays.asList(run.oracleFactory.getParameterTypes()).contains(org.apache.commons.collections4.Predicate.class);
+        run.policy = args.length > 5 && !args[5].equals("-") ? args[5] : "both";
+        rejectNull = run.policy.equals("rejectnull");
         run.once();
+        if (pred) {
+            run.predicatedOnce();
+        }
         Arrays.stream(SEEDS).forEach(run::seed);
         Files.write(Path.of(args[4]), run.mismatches.stream().map(r -> args[0] + "\t" + r).toList(), StandardCharsets.UTF_8,
                 StandardOpenOption.CREATE, StandardOpenOption.APPEND);
@@ -115,9 +156,54 @@ public final class M3DecoratorDifferential {
         Random r = new Random(99);
         args[0] = owner == null || factory.getParameterTypes()[0].isInstance(owner) ? owner : target(owner);
         for (int i = 1; i < args.length; i++) {
-            args[i] = arg(factory.getParameterTypes()[i], r);
+            args[i] = pred ? lane(i) : arg(factory.getParameterTypes()[i], r);
         }
         return call(factory, null, args);
+    }
+
+    /** v3: a fresh Pol for lane i (registered for call counting); null when the policy switches that map lane off. */
+    private Object lane(int i) {
+        Pol p = new Pol();
+        pols.add(p);
+        boolean off = policy.equals("keynull") && i == 1 || policy.equals("valuenull") && i == 2;
+        return off ? null : p;
+    }
+
+    /**
+     * v3 once-only checks: factory over a backing that already holds a rejected element, and every combination of null
+     * factory arguments (R3: which argument is checked first and with which message, e.g. NPE "collection" before
+     * "predicate", or "map" with null map lanes accepted).
+     */
+    @SuppressWarnings("unchecked")
+    private void predicatedOnce() {
+        Object bad1 = filled(new Random(7));
+        Object bad2 = filled(new Random(7));
+        for (Object bad : List.of(bad1, bad2)) {
+            if (bad instanceof Map<?, ?> m) {
+                ((Map<Object, Object>) m).put(1, REJECTED);
+            } else {
+                ((Collection<Object>) bad).add(REJECTED);
+            }
+        }
+        compare("factory(rejected element)", norm(build(oracleFactory, bad1)), norm(build(m3Factory, bad2)));
+        int n = oracleFactory.getParameterCount();
+        for (int mask = 1; mask < 1 << n; mask++) {
+            compare("factory(null mask " + Integer.toBinaryString(mask) + ")", norm(nulls(oracleFactory, mask)), norm(nulls(m3Factory, mask)));
+        }
+    }
+
+    private Object nulls(Method factory, int mask) {
+        Object[] args = new Object[factory.getParameterCount()];
+        args[0] = (mask & 1) != 0 ? null : target(filled(new Random(7)));
+        for (int i = 1; i < args.length; i++) {
+            Object lane = lane(i);
+            args[i] = (mask & 1 << i) != 0 ? null : lane;
+        }
+        return call(factory, null, args);
+    }
+
+    private List<Integer> laneCalls(int from, int to) {
+        return pols.subList(from, to).stream().map(p -> p.calls).toList();
     }
 
     private Object target(Object owner) {
@@ -143,6 +229,11 @@ public final class M3DecoratorDifferential {
         for (int i = r.nextInt(12); i > 0; i--) {
             mutate(owner, r, true);
         }
+        if (pred && owner instanceof Map<?, ?> m) {
+            m.entrySet().removeIf(e -> rejects(e.getKey()) || rejects(e.getValue()));
+        } else if (pred) {
+            ((Collection<?>) owner).removeIf(M3DecoratorDifferential::rejects);
+        }
         return owner;
     }
 
@@ -167,8 +258,11 @@ public final class M3DecoratorDifferential {
         Random r = new Random(seed);
         Object b1 = filled(new Random(seed));
         Object b2 = filled(new Random(seed));
+        int p0 = pols.size();
         Object o = build(oracleFactory, b1);
+        int p1 = pols.size();
         Object x = build(m3Factory, b2);
+        sides = new int[] {p0, p1, pols.size()};
         if (o instanceof Throwable || x instanceof Throwable) {
             compare("seed " + seed + " factory", norm(o), norm(x));
             return;
@@ -196,6 +290,9 @@ public final class M3DecoratorDifferential {
             }
         }
         compare(where + " backing state", b1.toString(), b2.toString());
+        if (pred) {
+            compare(where + " predicate calls per lane", laneCalls(sides[0], sides[1]), laneCalls(sides[1], sides[2]));
+        }
     }
 
     private static boolean isEquals(Method m) {
@@ -313,17 +410,35 @@ public final class M3DecoratorDifferential {
     }
 
     private static Object norm(Object v) {
+        if (!pred) {
+            return norm0(v);
+        }
+        try {
+            return norm0(v);
+        } catch (RuntimeException e) {
+            // v3: a predicated sub-view revalidates on construction, so rendering a view can throw on both sides
+            return "NORM_EX:" + e.getClass().getName() + message(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Object norm0(Object v) {
         if (v == null || v instanceof Number || v instanceof String || v instanceof Boolean) {
             return String.valueOf(v);
         }
         if (v instanceof Throwable t) {
-            return "EX:" + t.getClass().getName();
+            return "EX:" + t.getClass().getName() + (pred ? message(t) : "");
         }
         if (v instanceof Object[] a) {
             return "A" + Arrays.stream(a).map(M3DecoratorDifferential::norm).toList();
         }
         if (v instanceof MapIterator<?, ?> mi) {
             return "MI" + drainMap(mi) + attempt(mi::remove);
+        }
+        if (v instanceof ListIterator<?> li && pred) {
+            ListIterator<Object> lo = (ListIterator<Object>) li;
+            return "LI" + drain(li) + attempt(() -> lo.set(REJECTED)) + attempt(() -> lo.add(REJECTED)) + attempt(() -> li.add(null))
+                    + attempt(() -> li.set(null)) + attempt(li::remove);
         }
         if (v instanceof ListIterator<?> li) {
             return "LI" + drain(li) + attempt(() -> li.add(null)) + attempt(() -> li.set(null)) + attempt(li::remove);
@@ -344,11 +459,25 @@ public final class M3DecoratorDifferential {
         if (v instanceof Stream<?> s) {
             return "T" + s.toList();
         }
+        if (v instanceof Map.Entry<?, ?> e && pred) {
+            return "E" + e.getKey() + "=" + e.getValue() + attempt(() -> ((Map.Entry<Object, Object>) e).setValue(REJECTED))
+                    + attempt(() -> ((Map.Entry<Object, Object>) e).setValue(e.getValue()));
+        }
         if (v instanceof Map.Entry<?, ?> e) {
             return "E" + e.getKey() + "=" + e.getValue() + attempt(() -> ((Map.Entry<Object, Object>) e).setValue(e.getValue()));
         }
+        if (v instanceof Collection<?> c && pred) {
+            return "C" + shape(c) + c.size() + c + "|" + norm(c.toArray()) + "|" + norm(c.toArray(new Object[c.size() + 2]))
+                    + attempt(() -> ((Collection<Object>) c).add(REJECTED)) + attempt(() -> c.add(null))
+                    + attempt(() -> c.removeIf(e -> false)) + attempt(() -> c.iterator().remove());
+        }
         if (v instanceof Collection<?> c) {
             return "C" + c.size() + c + attempt(() -> c.add(null)) + attempt(() -> c.removeIf(e -> false)) + attempt(() -> c.iterator().remove());
+        }
+        if (v instanceof Map<?, ?> m && pred) {
+            return "M" + shape(m) + m.size() + m + attempt(() -> ((Map<Object, Object>) m).put(1, REJECTED))
+                    + attempt(() -> ((Map<Object, Object>) m).put(REJECTED, 1))
+                    + attempt(() -> ((Map<Object, Object>) m).putAll(Map.of())) + attempt(() -> m.remove(ABSENT));
         }
         if (v instanceof Map<?, ?> m) {
             return "M" + m.size() + m + attempt(() -> ((Map<Object, Object>) m).putAll(Map.of())) + attempt(() -> m.remove(ABSENT));
@@ -376,7 +505,8 @@ public final class M3DecoratorDifferential {
         List<Object> out = new ArrayList<>();
         for (int i = 0; i < 64 && mi.hasNext(); i++) {
             Object k = mi.next();
-            out.add(k + "=" + mi.getValue() + attempt(() -> ((MapIterator<Object, Object>) mi).setValue(mi.getValue())));
+            out.add(k + "=" + mi.getValue() + (pred ? attempt(() -> ((MapIterator<Object, Object>) mi).setValue(REJECTED)) : "")
+                    + attempt(() -> ((MapIterator<Object, Object>) mi).setValue(mi.getValue())));
         }
         return out;
     }
@@ -386,8 +516,29 @@ public final class M3DecoratorDifferential {
             r.run();
             return "/ok";
         } catch (RuntimeException e) {
-            return "/" + e.getClass().getSimpleName();
+            return "/" + e.getClass().getSimpleName() + (pred ? message(e) : "");
         }
+    }
+
+    /** v3: interface shape of a returned view (a SortedSet view must not become a NavigableSet, ...). */
+    private static final List<Class<?>> SHAPES = List.of(java.util.List.class, java.util.Set.class, java.util.SortedSet.class,
+            java.util.NavigableSet.class, java.util.Queue.class, java.util.Deque.class, java.util.RandomAccess.class,
+            java.io.Serializable.class, org.apache.commons.collections4.Bag.class, org.apache.commons.collections4.SortedBag.class,
+            org.apache.commons.collections4.MultiSet.class, java.util.SortedMap.class, java.util.NavigableMap.class,
+            org.apache.commons.collections4.IterableMap.class, org.apache.commons.collections4.OrderedMap.class,
+            org.apache.commons.collections4.BidiMap.class);
+
+    private static String shape(Object v) {
+        StringBuilder bits = new StringBuilder("<");
+        SHAPES.forEach(c -> bits.append(c.isInstance(v) ? '1' : '0'));
+        return bits.append('>').toString();
+    }
+
+    /** v3: messages of IAE and of non-helpful NPEs (requireNonNull names) are contract; helpful NPE text depends on local names. */
+    static String message(Throwable t) {
+        boolean keep = t instanceof IllegalArgumentException || t instanceof NullPointerException
+                && t.getMessage() != null && !t.getMessage().contains("because");
+        return keep ? ":" + t.getMessage() : "";
     }
 
     private void compare(String where, Object oracle, Object m3) {

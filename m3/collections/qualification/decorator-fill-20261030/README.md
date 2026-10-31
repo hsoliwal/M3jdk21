@@ -22,11 +22,11 @@ constructor. `PATTERNS.tsv` lists the categories and the next candidate categori
 
 ## Result
 
-| | v1.1 | v1.2 (SYNC family) |
-|---|---|---|
-| Method atoms classified (57 decorators) | 1,938 | 1,992 (with the view-helper atoms) |
-| MANUAL atoms (next leaves) | 521 | 387 |
-| Classes with no MANUAL atom, now owned | 7 | 12 |
+| | v1.1 | v1.2 (SYNC family) | v1.3 (PREDICATED family) |
+|---|---|---|---|
+| Method atoms classified (57 decorators) | 1,938 | 1,992 (with the view-helper atoms) | 2,098 (with helper and lane-member rows) |
+| MANUAL atoms (next leaves) | 521 | 387 | 264 |
+| Classes with no MANUAL atom, now owned | 7 | 12 | 22 |
 
 The v1.1 classes are `M3UnmodifiableCollection`, `M3UnmodifiableList`, `M3UnmodifiableQueue`, `M3UnmodifiableSortedSet`,
 `M3UnmodifiableNavigableSet`, `M3UnmodifiableBag` and `M3UnmodifiableSortedBag`.
@@ -44,9 +44,61 @@ only the proof, which could not see lock scope or the true path of `equals`. Bot
 Results are in `PROBES.tsv`: 5 classes × 2 probes, 0 mismatches. In a negative control, a planted unsynchronized `peek` is
 caught by both probes.
 
-The Predicated, Transformed and Unmodifiable-map families have proposals with skeptic refutations; they are the next
-leaves. The refutations are classifier side conditions, the LinkedMap/LinkedHashMap order, serialization field order and
-harness blind spots.
+The Transformed and Unmodifiable-map families have proposals with skeptic refutations; they are the next leaves. The
+Predicated family is done in v1.3 (below).
+
+## v1.3: PREDICATED family
+
+v1.3 owns 10 Predicated decorators: `M3PredicatedBag`, `M3PredicatedList`, `M3PredicatedMap`, `M3PredicatedMultiSet`,
+`M3PredicatedNavigableSet`, `M3PredicatedQueue`, `M3PredicatedSet`, `M3PredicatedSortedBag`, `M3PredicatedSortedMap` and
+`M3PredicatedSortedSet`. `M3PredicatedCollection` keeps its scaffold: its 2 MANUAL atoms are `builder(Predicate)` and
+`notNullBuilder()`, which return the Commons implementation class `PredicatedCollection.Builder` (RESIDUE_COMMONS_BUILDER,
+waiting for a surface decision). Predicated MANUAL atoms went from 76 (plus 1 mis-derived constructor) to 2.
+
+The categories, each with a template and a `PATTERNS.tsv` row:
+
+| Category | Shape | Emitted |
+|---|---|---|
+| LANES_CONSTRUCTOR | flattened Commons constructor; statements s1-s4 only, every value a constructor parameter | same statements over `backing` + policy lanes, Commons null-check order |
+| FACTORY_NEW (n-ary) | `return new Self<>(p0, p1[, p2]);`, only with a valid LANES_CONSTRUCTOR | `return new M3Self<>(arg0, ..);` |
+| VALIDATE, CHECK_SET_VALUE | lane members made of `if ([L != null && ]!L.test(p)) { throw new IAE(MSG); }` [+ `return p;`] | private members; MSG literals extracted as data |
+| GUARD_DELEGATE | elem / entry / each / each-entry guard + DELEGATE (or `super.m` whose body is DELEGATE) | guard + `backing.m(..)` |
+| LANE_VIEW | `return W(decorated().m(..), lanes)`, lanes in constructor order | self: `new M3Self<>(..)`; sibling superclass: generated nested helper |
+| SELF_CALL | `[return ]m(params, int literals)` on the class surface | same call |
+| INNER_VIEW | `return new N(decorated().m(..))`, N a Commons inner class | generated inner helper (PredicatedListIterator) |
+| MAP_ITERATOR_ADAPTER | `return new EntrySetToMapIteratorAdapter<>(entrySet());` | H2 template `EntrySetMapIterator` |
+| CHECKED_ENTRY_SET | `if (isSetValueChecking()) {..EntrySet..}` with `return L != null;` and a validating checkSetValue | H3 template `CheckedEntrySet` |
+| SERIAL_HOOK | transient Commons backing + `defaultWriteObject(); writeObject(map)` hooks | transient `backing` + the same hooks |
+
+Normalizations: SCOPE (depth-1 member lookup, so `PredicatedCollection.Builder` no longer shadows `add`/`addAll`),
+RESOLVE_BRIDGE (`entrySet` behind a visibility bridge), ALIAS (backing fields `map`, `collection`, `iterator` and their
+accessors, unless shadowed) and DEPRECATED_LANE_TYPE (Commons `Predicate` lanes are typed `java.util.function.Predicate`).
+The two generated helpers (`PredicatedSortedSetView` in `M3PredicatedNavigableSet`, `PredicatedListIterator` in
+`M3PredicatedList`) are filled by the same generator from the Commons class; only H2 and H3 are fixed templates, each
+guarded by a contract check on the Commons classes. The 12 classes owned before v1.3 regenerate byte-identical.
+
+The skeptic verdict on the analyst prototype was FLAWED. Each refutation now has a check and a planted-defect control that
+the check catches (`NEGATIVE_CONTROLS.tsv`, 16 of 16 caught):
+
+| Refutation | Check | Control |
+|---|---|---|
+| R1 a wrong sibling helper passes | `M3PredicatedProbe` VIEW_SWEEP: every method of every view within two hops | NC01 helper addAll without validation, NC02 helper headSet raw |
+| R2 MapIterator state machine unchecked | MAP_ITERATOR script (before next, after remove, after reset) | NC03 remove keeps entry, NC04 reset clears entry |
+| R3 null-check order untested | differential: every null combination of factory arguments, with messages | NC05 requireNonNull order swapped |
+| R4 CHECKED_ENTRY_SET side conditions | rule checks R4_* (TransformedMap stays MANUAL) + view sweep | NC06 checkSetValue guard removed, NC07 lane swapped |
+| R5 `this.F = X` accepted `this.lock = this` | rule checks R5_* | NC08 parameter guard removed |
+| R6 super, alias, sibling and lane-order guards | rule checks R6_* | NC09, NC10, NC11, NC12 (one per guard) |
+| R7 serialization field order | probe SERIAL: NotSerializableException culprit with non-serializable lanes and/or proxy backing | NC13 default field order |
+
+The skeptic's missed semantics are covered too: per-lane predicate counts (NC14, value lane checked before key lane),
+ListIterator backward navigation (NC15) and a null-rejecting policy (NC16). Helpful-NPE text stays excluded because it
+names local variables.
+
+Shared rules also reclassified atoms in families that are still scaffolds (for example LANES_CONSTRUCTOR and FACTORY_NEW
+in Transformed*, SELF_CALL in CollectionBag, MAP_ITERATOR_ADAPTER in FixedSizeMap, LazyMap and TransformedMap). MANUAL
+atoms by family, v1.2 to v1.3: Predicated 76 to 2, Transformed 88 to 59, Composite 74 to 73, Unmodifiable (map family) 65
+to 65, FixedSize 39 to 30, Lazy 21 to 16, CollectionBag 14 to 10, Defaulted 7 to 6, other 3 to 3. None of those classes is
+written until it has no MANUAL atom and its own differential target.
 
 The v1.1 MANUAL atoms grouped into these families:
 
@@ -72,13 +124,18 @@ which is used as a test oracle only:
 
 Results:
 
-- `DIFFERENTIAL.tsv`: 7 classes, 64,003 checks each, 0 mismatches.
+- `DIFFERENTIAL.tsv`: 30 targets, 0 mismatches. The 12 v1.1/v1.2 targets run 64,003 checks each, unchanged by the v3
+  harness. The 18 Predicated targets (backings and the policies both, keynull, valuenull and rejectnull) run 96,007 or
+  96,011 checks each: 1,728,154 in total.
+- `PROBES.tsv`: 28 probe runs, 0 mismatches (10 lock probes; 18 `M3PredicatedProbe` runs with 124,879 checks).
+- `RULE_CHECKS.tsv`: 12 classifier side-condition checks, all PASS.
+- `NEGATIVE_CONTROLS.tsv`: 16 planted defects from `NEGATIVE_CONTROLS_SPEC.tsv`, applied by `M3Mutant.java`, all CAUGHT.
 - `MISMATCHES.tsv`: empty.
-- All generated classes compile with `-Xlint:all -Werror`.
-- Negative control: a planted defect (`removeIf` delegating instead of throwing) gives 50 mismatches.
+- All 22 generated classes compile with `-Xlint:all -Werror`.
+- Earlier negative control: a planted defect (`removeIf` delegating instead of throwing) gives 50 mismatches.
 
 `CONVERGE_LEDGER.tsv` lists every fork class, using the columns agreed between the convergence lanes: fork, fork_rev,
-fork_class, m3_owner, absorb_state. The counts are 16 ABSORBED and 331 GAP.
+fork_class, m3_owner, absorb_state. After v1.3 the counts are 31 ABSORBED and 316 GAP (v1.1: 16 and 331).
 
 ## M3IFY primitives
 
@@ -103,8 +160,10 @@ From the repository root, with `JAVA_HOME` set to a JDK 21:
 
 ```bash
 bash m3/collections/qualification/decorator-fill-20261030/run.sh \
-  ~/.m2/repository/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar <unpacked 4.5.0 sources dir>
+  ~/.m2/repository/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar <unpacked 4.5.0 sources dir> [work dir]
 ```
 
-The driver reads the scaffolds from the pinned `SCAFFOLD_REV`, so reruns are idempotent. Generator corrections are
-appended to `RECIPE_MEMORY.tsv` in the same commit as the fix.
+On Git Bash for Windows, export `MSYS_NO_PATHCONV=1` and pass Windows-style (`H:/...`) paths. The driver reads the
+scaffolds from the pinned `SCAFFOLD_REV`, so reruns are idempotent. It exits 0 only when every rule check passes, every
+target and probe shows no mismatch, and every negative control is caught. Generator corrections are appended to
+`RECIPE_MEMORY.tsv` in the same commit as the fix.

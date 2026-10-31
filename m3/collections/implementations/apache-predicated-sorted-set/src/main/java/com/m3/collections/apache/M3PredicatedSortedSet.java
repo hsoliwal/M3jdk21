@@ -8,12 +8,11 @@
 package com.m3.collections.apache;
 
 /**
- * SCAFFOLD, not an owned implementation: declares the public surface of
- * {@code org.apache.commons.collections4.set.PredicatedSortedSet} and every body throws {@link UnsupportedOperationException}.
+ * Owned decorator with the public contract of {@code org.apache.commons.collections4.set.PredicatedSortedSet}.
  *
  * <p>Storage plan (decorator): decorator over one backing owner reference plus int state bits; elements are never copied; predicate/transformer/lock policy applies at the API boundary.
  *
- * <p>Lanes: {@code Object backing}, {@code int state}. No Entry or Node object is stored per element; any
+ * <p>Lanes: {@code backing}, {@code predicate}. No Entry or Node object is stored per element; any
  * Entry-shaped value the provider API demands is a boundary flyweight created only at that call.
  *
  * <p>The class is final and has no provider implementation superclass or delegate; provider
@@ -27,160 +26,211 @@ public final class M3PredicatedSortedSet<E>
                 java.util.SequencedSet<E>,
                 java.util.Set<E>,
                 java.util.SortedSet<E> {
-    private static final String M3_SCAFFOLD_MESSAGE = "M3 scaffold: org.apache.commons.collections4.set.PredicatedSortedSet not yet owned";
     @java.io.Serial
     private static final long serialVersionUID = 0L;
 
-    // Planned lanes (decorator): arrays, offsets and bit-mask state; no Entry/Node objects.
-    private transient Object backing;
-    private transient int state;
+    /** The decorated owner: one reference, elements are never copied. */
+    @SuppressWarnings("serial")
+    private final java.util.SortedSet<E> backing;
+    /** Policy lane {@code predicate} (Commons field of the same name). */
+    @SuppressWarnings("serial")
+    private final java.util.function.Predicate<? super E> predicate;
 
-    private M3PredicatedSortedSet() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+    private M3PredicatedSortedSet(final java.util.SortedSet<E> arg0, final java.util.function.Predicate<? super E> arg1) {
+        this.backing = java.util.Objects.requireNonNull(arg0, "collection");
+        this.predicate = java.util.Objects.requireNonNull(arg1, "predicate");
+        for (final E item : arg0) {
+            validate(item);
+        }
     }
 
     @SuppressWarnings({"deprecation"})
     public static <E> M3PredicatedSortedSet<E> predicatedSortedSet(java.util.SortedSet<E> arg0, org.apache.commons.collections4.Predicate<? super E> arg1) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return new M3PredicatedSortedSet<>(arg0, arg1);
     }
 
+    @Override
     public boolean add(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        validate(arg0);
+        return backing.add(arg0);
     }
 
+    @Override
     public boolean addAll(java.util.Collection<? extends E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        for (final E item : arg0) {
+            validate(item);
+        }
+        return backing.addAll(arg0);
     }
 
+    @Override
     public void addFirst(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        java.util.SortedSet.super.addFirst(arg0);
     }
 
+    @Override
     public void addLast(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        java.util.SortedSet.super.addLast(arg0);
     }
 
+    @Override
     public void clear() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        backing.clear();
     }
 
+    @Override
     public java.util.Comparator<? super E> comparator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.comparator();
     }
 
+    @Override
     public boolean contains(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.contains(arg0);
     }
 
+    @Override
     public boolean containsAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.containsAll(arg0);
     }
 
+    @Override
     public boolean equals(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return arg0 == this || backing.equals(arg0);
     }
 
+    @Override
     public E first() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.first();
     }
 
+    @Override
     public void forEach(java.util.function.Consumer<? super E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        java.util.SortedSet.super.forEach(arg0);
     }
 
+    @Override
     public E getFirst() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.getFirst();
     }
 
+    @Override
     public E getLast() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.getLast();
     }
 
+    @Override
     public int hashCode() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.hashCode();
     }
 
+    @Override
     public java.util.SortedSet<E> headSet(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return new M3PredicatedSortedSet<>(backing.headSet(arg0), predicate);
     }
 
+    @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.isEmpty();
     }
 
+    @Override
     public java.util.Iterator<E> iterator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.iterator();
     }
 
+    @Override
     public E last() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.last();
     }
 
+    @Override
     public java.util.stream.Stream<E> parallelStream() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.parallelStream();
     }
 
+    @Override
     public boolean remove(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.remove(arg0);
     }
 
+    @Override
     public boolean removeAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.removeAll(arg0);
     }
 
+    @Override
     public E removeFirst() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.removeFirst();
     }
 
+    @Override
     public boolean removeIf(java.util.function.Predicate<? super E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.removeIf(arg0);
     }
 
+    @Override
     public E removeLast() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.removeLast();
     }
 
+    @Override
     public boolean retainAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.retainAll(arg0);
     }
 
+    @Override
     public java.util.SortedSet<E> reversed() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.reversed();
     }
 
+    @Override
     public int size() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.size();
     }
 
+    @Override
     public java.util.Spliterator<E> spliterator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.spliterator();
     }
 
+    @Override
     public java.util.stream.Stream<E> stream() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.stream();
     }
 
+    @Override
     public java.util.SortedSet<E> subSet(E arg0, E arg1) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return new M3PredicatedSortedSet<>(backing.subSet(arg0, arg1), predicate);
     }
 
+    @Override
     public java.util.SortedSet<E> tailSet(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return new M3PredicatedSortedSet<>(backing.tailSet(arg0), predicate);
     }
 
+    @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.toArray();
     }
 
+    @Override
     public <T> T[] toArray(T[] arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.toArray(arg0);
     }
 
+    @Override
     public <T> T[] toArray(java.util.function.IntFunction<T[]> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.SortedSet.super.toArray(arg0);
     }
 
+    @Override
     public String toString() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.toString();
+    }
+
+    private void validate(final E arg0) {
+        if (!predicate.test(arg0)) {
+            throw new IllegalArgumentException("Cannot add Object '" + arg0 + "' - Predicate '" + predicate + "' rejected it");
+        }
     }
 }
