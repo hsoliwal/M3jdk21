@@ -55,7 +55,6 @@
     <module>guava</module>
     <module>j2objc-annotations</module>
     <module>jackson-annotations-2.15.3</module>
-    <module>jackson-annotations-2.16.1</module>
     <module>jackson-annotations-2.19.2</module>
     <module>jackson-core-2.15.3</module>
     <module>jackson-core-2.16.1</module>
