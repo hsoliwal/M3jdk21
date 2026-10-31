@@ -1,0 +1,11 @@
+package @PKG@;
+
+/**
+ * Receives model deltas (pattern M3P-CORE-1): {@code item} is the changed item or {@code -1} for the
+ * widget, {@code mask} is a set of {@link M3WebModel} D_* bits. The toolkit side turns a delta into a
+ * damage-only repaint, or only records it while the part is hidden.
+ */
+@FunctionalInterface
+public interface M3WebDelta {
+	void changed(int item, int mask);
+}

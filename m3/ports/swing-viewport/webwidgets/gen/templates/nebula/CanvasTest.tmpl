@@ -1,0 +1,18 @@
+package @WPKG@;
+
+import static @PKG@.M3WebChecks.check;
+
+import @PKG@.M3@C@Api;
+import org.eclipse.swt.SWT;
+import org.junit.Test;
+
+/** Desktop contract of the M3 @CONCEPT@ canvas (family @FAM@, pattern @PATTERN@), run on the hidden test desktop. */
+public class M3@C@_Test {
+	@Test
+	public void canvasContract() {
+		M3@C@ c = new M3@C@(M3WebCanvasChecks.shell(), SWT.NONE);
+		check(c.api() == c.getModel(), "the API is the lane model");
+		c.api().load(M3@C@Api.SAMPLE);
+		M3WebCanvasChecks.run(c);
+	}
+}

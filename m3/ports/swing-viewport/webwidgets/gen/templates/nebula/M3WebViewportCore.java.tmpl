@@ -1,0 +1,47 @@
+package @PKG@;
+
+import org.eclipse.swt.widgets.M3DamageTracker;
+import org.eclipse.swt.widgets.M3LogicalExtent;
+import org.eclipse.swt.widgets.M3Planes;
+import org.eclipse.swt.widgets.M3ResidentWindow;
+
+/**
+ * SWT binding of the web widgets' viewport aspects (pattern M3P-VIEWPORT-1): every answer comes from the
+ * one SWT viewport core through its public M3 facades (hsoliwal/eclipse.platform.swt PR #295): the resident
+ * window from {@link M3ResidentWindow} (VirtualViewportPlanner), extents and the scroll bar from
+ * {@link M3LogicalExtent} (VirtualScrollMetrics), dirty planes from {@link M3Planes} (ViewportLayerState),
+ * damage from {@link M3DamageTracker} (ViewportDamageRegion). No window logic lives in the widgets.
+ */
+final class M3WebViewportCore {
+	static final int BODY = M3Planes.BODY, HEADER = M3Planes.HEADER, SCROLLBAR = M3Planes.SCROLLBAR;
+	private final M3ResidentWindow window = new M3ResidentWindow();
+	private final M3LogicalExtent extent = new M3LogicalExtent();
+	private final M3Planes planes = new M3Planes();
+	private final M3DamageTracker damage = new M3DamageTracker();
+
+	void project(int count, int first, int visible, int overscan, int[] out) {
+		window.project(count, first, visible, overscan, out, 0);
+	}
+
+	long extent(long count, int itemExtent) {
+		extent.configure(count, itemExtent, 0);
+		return extent.contentExtent();
+	}
+
+	void thumb(long count, int itemExtent, int view, long scroll, int track, int[] out) {
+		extent.configure(count, itemExtent, Math.max(0, view));
+		extent.thumb(scroll / Math.max(1, itemExtent), track, out);
+	}
+
+	int scrolled(long x, long y) {
+		return planes.scrollTo(x, y);
+	}
+
+	void damage(int x, int y, int w, int h) {
+		damage.add(x, y, w, h);
+	}
+
+	boolean take(int[] out) {
+		return damage.take(out);
+	}
+}

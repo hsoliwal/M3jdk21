@@ -1,0 +1,19 @@
+package @PKG@;
+
+/**
+ * Lane model of the M3 @CONCEPT@ widget: family @FAM@ (pattern @PATTERN@) in mode
+ * {@code @MODE@}, role {@code @ROLE@}, shape {@code @SHAPE@}. Generated from the family template;
+ * every behaviour lives in {@link M3@FAMILY@Model}.
+ */
+public class M3@C@Model extends M3@FAMILY@Model implements M3@C@Api {
+	public M3@C@Model() {
+		super(CONCEPT, M3WebStates.role("@ROLE@"), M3@FAMILY@Model.@MODE@, M3WebStates.@SHAPE@, @VARIANT@);
+	}
+
+	/** A model filled with {@link #SAMPLE}. */
+	public static M3@C@Model sample() {
+		M3@C@Model m = new M3@C@Model();
+		m.load(SAMPLE);
+		return m;
+	}
+}
